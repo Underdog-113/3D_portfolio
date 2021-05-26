@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{2e2272e7-60a5-4c36-adc2-8142c3f7423d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.MainApp">
+      <UniqueIdentifier>{3e7dbc9b-69a3-4014-a846-dbbceb7d70df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Include">
+      <UniqueIdentifier>{f2001eae-e2d3-4e20-90c3-b74150ed8f0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene">
+      <UniqueIdentifier>{fb3559bc-5e87-4c5b-b57e-9625bdbbf03c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects">
+      <UniqueIdentifier>{50f5935f-2a42-4e51-81e7-19417db711ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\99.Loading">
+      <UniqueIdentifier>{ea353fc7-3e80-41cf-9933-6e363a009886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component">
+      <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.PrivateScene">
+      <UniqueIdentifier>{ba34bee0-78ed-48de-a03c-9bd7db564c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.PrivateScene\00.Changmo">
+      <UniqueIdentifier>{b5ddb26e-4a5e-42e9-a402-6ccf5eefef78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.PrivateScene\00.YongScene">
+      <UniqueIdentifier>{4f6ac84a-8dc7-4b08-ae1e-c09ed668fb00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.PrivateScene\00.WooScene">
+      <UniqueIdentifier>{5000a794-c7a6-4be8-baac-f35b87564dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.PrivateScene\00.DongScene">
+      <UniqueIdentifier>{5be9e514-de30-44ea-8fd3-412b167faada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.PrivateScene\00.JongScene">
+      <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MainApp.h">
+      <Filter>00.MainApp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ChangmoScene.h">
+      <Filter>01.Scene\00.PrivateScene\00.Changmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientEnum.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientMacro.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientStructure.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientTypedef.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientDefine.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Loading.h">
+      <Filter>01.Scene\99.Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\YongScene.h">
+      <Filter>01.Scene\00.PrivateScene\00.YongScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WooScene.h">
+      <Filter>01.Scene\00.PrivateScene\00.WooScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DongScene.h">
+      <Filter>01.Scene\00.PrivateScene\00.DongScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\JongScene.h">
+      <Filter>01.Scene\00.PrivateScene\00.JongScene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MainApp.cpp">
+      <Filter>00.MainApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ChangmoScene.cpp">
+      <Filter>01.Scene\00.PrivateScene\00.Changmo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Loading.cpp">
+      <Filter>01.Scene\99.Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\YongScene.cpp">
+      <Filter>01.Scene\00.PrivateScene\00.YongScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WooScene.cpp">
+      <Filter>01.Scene\00.PrivateScene\00.WooScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DongScene.cpp">
+      <Filter>01.Scene\00.PrivateScene\00.DongScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\JongScene.cpp">
+      <Filter>01.Scene\00.PrivateScene\00.JongScene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="SR_BaseEngine.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SR_BaseEngine.rc">
+      <Filter>99.Default</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
