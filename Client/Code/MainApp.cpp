@@ -15,7 +15,7 @@
 
 
 #pragma region IncludeScenes
-#include "ChangmoScene.h"
+#include "CJongScene.h"
 #pragma endregion
 
 #pragma region Prototypes
@@ -57,7 +57,7 @@ void CMainApp::Start(void)
 
 	Engine::CInputManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->Start();
-	Engine::CSceneManager::GetInstance()->SceneChange(CChangmoScene::Create());
+	Engine::CSceneManager::GetInstance()->SceneChange(CJongScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CObjectFactory::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
