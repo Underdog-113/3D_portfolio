@@ -24,8 +24,7 @@
 #include "SphereCollider.h"
 #include "AabbCollider.h"
 #include "ObbCollider.h"
-// Camera-------------------------------------------
-#include "CameraC.h"
+
 
 
 #endif

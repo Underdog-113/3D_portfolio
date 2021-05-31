@@ -19,7 +19,7 @@
 #pragma endregion
 
 #pragma region Prototypes
-
+#include "Camera.h"
 #pragma endregion
 
 CMainApp::CMainApp(void)
@@ -58,7 +58,7 @@ void CMainApp::Start(void)
 	Engine::CInputManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->SceneChange(CChangmoScene::Create());
-	Engine::CCameraManager::GetInstance()->Start((_int)EColliderID::CameraRay);
+	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CObjectFactory::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CShaderManager::GetInstance()->Start();
@@ -169,4 +169,5 @@ void CMainApp::OnDisable(void)
 
 void CMainApp::InitStaticPrototype(void)
 {
+	
 }

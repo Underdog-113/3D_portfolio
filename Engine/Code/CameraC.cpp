@@ -157,17 +157,17 @@ void CCameraC::Translation(void)
 	if (m_moveable)
 	{
 		if (IMKEY_PRESS(KEY_D))
-			m_spTransform->MoveRight(20 * GET_DT);
+			m_spTransform->MoveRight(m_moveSpeed * GET_DT);
 		if (IMKEY_PRESS(KEY_A))
-			m_spTransform->MoveLeft(20 * GET_DT);
+			m_spTransform->MoveLeft(m_moveSpeed * GET_DT);
 		if (IMKEY_PRESS(KEY_W))
-			m_spTransform->MoveForward(20 * GET_DT);
+			m_spTransform->MoveForward(m_moveSpeed * GET_DT);
 		if (IMKEY_PRESS(KEY_S))
-			m_spTransform->MoveBackward(20 * GET_DT);
+			m_spTransform->MoveBackward(m_moveSpeed * GET_DT);
 		if (IMKEY_PRESS(KEY_SPACE))
-			m_spTransform->MoveUp(20 * GET_DT);
+			m_spTransform->MoveUp(m_moveSpeed * GET_DT);
 		if (IMKEY_PRESS(KEY_CONTROL))
-			m_spTransform->MoveDown(20 * GET_DT);
+			m_spTransform->MoveDown(m_moveSpeed * GET_DT);
 	}
 }
 
@@ -185,7 +185,7 @@ void CCameraC::Rotation(void)
 
 		_float3 goalPos;
 		goalPos.x = playerX;
-		goalPos.y = -0.42;
+		goalPos.y = -0.42f;
 		goalPos.z = 60.74f;
 
 		m_spTransform->SetGoalPosition(goalPos);

@@ -29,8 +29,6 @@ protected:
 	GETTOR_SETTOR	(_float3,			m_direction,		ZERO_VECTOR,		Direction)
 	GETTOR_SETTOR	(_float,			m_length,			0,					Length)
 	GETTOR_SETTOR	(ERayType,			m_rayType,			ERayType::LIMITED,	RayType)
-
-	GETTOR_SETTOR	(CObject*,			m_pTarget,			nullptr,			Target)
 };
 END
 #endif

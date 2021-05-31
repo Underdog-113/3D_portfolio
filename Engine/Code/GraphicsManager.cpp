@@ -5,7 +5,6 @@
 #include "DeviceManager.h"
 #include "Object.h"
 #include "CameraManager.h"
-#include "CameraC.h"
 #include "Frustum.h"
 #include "ShaderManager.h"
 #include "Shader.h"

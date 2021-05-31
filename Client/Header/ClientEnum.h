@@ -16,13 +16,7 @@ enum class EComponentID
 
 enum class EColliderID
 {
-	PlayerRay			= 0,
-	Map					= 1,
-	CameraRay			= 2,
-	Enemy				= 3,
-	Player				= 4,
-	PlayerAttack		= 5,
-	NumOfColliderID		= 6
+	NumOfColliderID		= 0 + (_uint)Engine::EColliderID::NumOfColliderID
 };
 
 enum class EDataID

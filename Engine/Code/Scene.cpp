@@ -9,6 +9,8 @@
 #include "MeshStore.h"
 #include "TextureStore.h"
 
+#include "ObjectFactory.h"
+#include "CameraManager.h"
 
 USING(Engine)
 CScene::CScene(void)
@@ -33,7 +35,11 @@ void CScene::Awake(_int numOfLayers)
 
 void CScene::Start(void)
 {
-	
+	SP(CCamera) spCameraObject =
+		std::dynamic_pointer_cast<CCamera>(ADD_CLONE(L"Camera", this, true));
+
+	CCameraManager::GetInstance()->AddCamera(L"BasicCamera", spCameraObject);
+	CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
 }
 
 void CScene::FixedUpdate(void)

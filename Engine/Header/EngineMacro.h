@@ -159,17 +159,17 @@ CDataStore::GetInstance()->GetValue(isStatic, dataID, objectKey, varKey, result)
 #define ADD_CLONE1(objectKey)														\
 CObjectFactory::GetInstance()->AddClone(objectKey)
 
-#define ADD_CLONE2(objectKey, pClone)												\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone)
+#define ADD_CLONE2(objectKey, pScene)												\
+CObjectFactory::GetInstance()->AddClone(objectKey, pScene)
 
-#define ADD_CLONE3(objectKey, pClone, isStatic)										\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone, isStatic)
+#define ADD_CLONE3(objectKey, pScene, isStatic)										\
+CObjectFactory::GetInstance()->AddClone(objectKey, pScene, isStatic)
 
-#define ADD_CLONE4(objectKey, pClone, isStatic, name)								\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone, isStatic, name)
+#define ADD_CLONE4(objectKey, pScene, isStatic, name)								\
+CObjectFactory::GetInstance()->AddClone(objectKey, pScene, isStatic, name)
 
-#define ADD_CLONE5(objectKey, pClone, isStatic, name, layerTag)						\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone, isStatic, name, layerTag)
+#define ADD_CLONE5(objectKey, pScene, isStatic, name, layerTag)						\
+CObjectFactory::GetInstance()->AddClone(objectKey, pScene, isStatic, name, layerTag)
 
 #define GET_6TH_ARG(arg1, arg2, arg3, arg4, arg5, arg6, ...) arg6
 

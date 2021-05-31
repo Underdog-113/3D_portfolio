@@ -1,11 +1,14 @@
 #include "EngineStdafx.h"
 #include "CameraManager.h"
-#include "CameraC.h"
+#include "Camera.h"
+
 #include "ObjectFactory.h"
 #include "Object.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "WndApp.h"
+
+
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CCameraManager)
@@ -15,17 +18,8 @@ void CCameraManager::Awake(void)
 	__super::Awake();
 }
 
-void CCameraManager::Start(_int collisionID)
+void CCameraManager::Start(void)
 {
-	m_camColliderID = collisionID;
-	//if (m_spMainCamera == nullptr)
-	//{
-	//	SP(CObject) spCameraObject = ADD_CLONE(L"Camera", true, L"BasicCamera", (_int)ELayerID::Camera);
-	//	m_spMainCamera = spCameraObject->GetComponent<CCameraC>();
-	//
-	//	AddCamera(L"FreeCamera", m_spMainCamera);
-	//	m_spMainCamera->SetTarget(GET_CUR_SCENE->FindObjectWithKey(L"Player"));
-	//}
 }
 
 void CCameraManager::Update(void)
@@ -37,7 +31,7 @@ void CCameraManager::LateUpdate(void)
 {
 	for (auto& iter = m_mCameras.begin(); iter != m_mCameras.end();)
 	{
-		if (iter->second->GetOwner() == nullptr)
+		if (iter->second->GetDeleteThis())
 		{
 			iter->second.reset();
 			iter = m_mCameras.erase(iter);
@@ -65,14 +59,14 @@ void CCameraManager::OnDisable(void)
 {
 }
 
-SP(CCameraC) CCameraManager::AddCamera(const std::wstring & cameraKey, SP(CCameraC) spCamera)
+SP(CCamera) CCameraManager::AddCamera(const std::wstring & cameraKey, SP(CCamera) spCamera)
 {
 	m_mCameras.emplace(cameraKey, spCamera);
 
 	return spCamera;
 }
 
-SP(CCameraC) CCameraManager::GetCamera(const std::wstring & cameraKey)
+SP(CCamera) CCameraManager::GetCamera(const std::wstring & cameraKey)
 {
 	return m_mCameras[cameraKey];
 }
@@ -98,34 +92,59 @@ void CCameraManager::DeleteMainCam(void)
 
 void CCameraManager::SetMainCameraMode(void)
 {
-	if (IMKEY_DOWN(KEY_F1))
+	if (IMKEY_DOWN(KEY_1))		
+		ChangeCameraMode(ECameraMode::Fixed);
+	else if (IMKEY_DOWN(KEY_2))
+		ChangeCameraMode(ECameraMode::Free);
+	else if (IMKEY_DOWN(KEY_3))
+		ChangeCameraMode(ECameraMode::Edit);
+	else if (IMKEY_DOWN(KEY_4))
+		ChangeCameraMode(ECameraMode::FPS);
+	else if (IMKEY_DOWN(KEY_5))
+		ChangeCameraMode(ECameraMode::TPS);
+}
+
+void CCameraManager::ChangeCameraMode(ECameraMode newCameraMode)
+{
+	switch (newCameraMode)
 	{
+	case ECameraMode::Fixed:
+		ShowCursor(true);
+		m_spMainCamera->GetTransform()->SetPosition(m_spMainCamera->GetFixedPos());
+		m_spMainCamera->GetTransform()->SetForward(m_spMainCamera->GetFixedDir());
 		m_spMainCamera->SetMode(ECameraMode::Fixed);
-		m_spMainCamera->GetTransform()->SetPosition(-7.75f, 0.67f, 56.1f);
-		m_spMainCamera->GetTransform()->SetRotation(0, 0, 0);
-		m_spMainCamera->SetMoveable(false);
-		m_spMainCamera->SetRotatable(false);
+		break;
+
+	case ECameraMode::Free:
+		ShowCursor(false);
+		m_spMainCamera->SetMode(ECameraMode::Free);
+		break;
+
+	case ECameraMode::Edit:
 		ShowCursor(true);
-	}
-	else if (IMKEY_DOWN(KEY_F2))
-	{
 		m_spMainCamera->SetMode(ECameraMode::Edit);
-		m_spMainCamera->SetMoveable(true);
-		m_spMainCamera->SetRotatable(false);
-		ShowCursor(true);
-	}
-	else if (IMKEY_DOWN(KEY_F3))
-	{
+		break;
+
+	case ECameraMode::FPS:
+		if (m_spMainCamera->GetTarget() == nullptr)
+		{
+			ChangeCameraMode(ECameraMode::Free);
+			break;
+		}
+
+		ShowCursor(false);
 		m_spMainCamera->SetMode(ECameraMode::FPS);
-		m_spMainCamera->SetMoveable(true);
-		m_spMainCamera->SetRotatable(false);
+		break;
+
+	case ECameraMode::TPS:
+		if (m_spMainCamera->GetTarget() == nullptr)
+		{
+			ChangeCameraMode(ECameraMode::Free);
+			break;
+		}
+
 		ShowCursor(false);
-	}
-	else if (IMKEY_DOWN(KEY_F4))
-	{
-		m_spMainCamera->SetMode(ECameraMode::Follower);
-		m_spMainCamera->SetMoveable(false);
-		m_spMainCamera->SetRotatable(false);
-		ShowCursor(false);
+		m_spMainCamera->SetMode(ECameraMode::TPS);
+		break;
 	}
 }

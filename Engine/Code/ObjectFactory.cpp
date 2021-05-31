@@ -7,6 +7,7 @@
 
 #pragma region EnginePrototypeHeaders
 #include "EmptyObject.h"
+#include "Camera.h"
 #include "BoundingVolume.h"
 #include "DebugCollider.h"
 #include "Grid.h"
@@ -147,12 +148,15 @@ void CObjectFactory::InitPrototypes(void)
 	SP(CObject) spEmptyObjectPrototype(CEmptyObject::Create(true));
 	ADD_PROTOTYPE(spEmptyObjectPrototype);
 
-	SP(CObject) spBoundingVolumePrototype(CBoundingVolume::Create(true));
-	ADD_PROTOTYPE(spBoundingVolumePrototype);
+	SP(CCamera) spCameraPrototype(CCamera::Create());
+	Engine::ADD_PROTOTYPE(spCameraPrototype);
 
-	SP(CObject) spDebugColliderPrototype(CDebugCollider::Create(true));
-	ADD_PROTOTYPE(spDebugColliderPrototype);
-
-	SP(CObject) spGridPrototype(CGrid::Create(true));
-	ADD_PROTOTYPE(spGridPrototype);
+	//SP(CObject) spBoundingVolumePrototype(CBoundingVolume::Create(true));
+	//ADD_PROTOTYPE(spBoundingVolumePrototype);
+	//
+	//SP(CObject) spDebugColliderPrototype(CDebugCollider::Create(true));
+	//ADD_PROTOTYPE(spDebugColliderPrototype);
+	//
+	//SP(CObject) spGridPrototype(CGrid::Create(true));
+	//ADD_PROTOTYPE(spGridPrototype);
 }

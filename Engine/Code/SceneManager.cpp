@@ -86,9 +86,6 @@ void CSceneManager::SceneChange(CScene* pScene, _bool alreadyStarted, _bool dele
 
 	m_sScene.push(pScene);
 	m_pCurScene = pScene;
-
-	if (m_pCurScene->GetSceneCamera() != nullptr)
-		CCameraManager::GetInstance()->SetMainCamera(m_pCurScene->GetSceneCamera());
 	
 	if(alreadyStarted == false)
 		m_pCurScene->Start();

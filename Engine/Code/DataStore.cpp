@@ -48,8 +48,7 @@ void CDataStore::InitDataMap(_uint numOfDataID)
 	//엔진 쪽의 데이터 섹션
 	AddDataSection(L"Engine", (_uint)EDataID::Engine);
 	AddDataSection(L"Component", (_uint)EDataID::Component);
-	AddDataSection(L"DebugObject", (_uint)EDataID::DebugObject);
-	AddDataSection(L"Grid", (_uint)EDataID::Grid);
+	AddDataSection(L"Object", (_uint)EDataID::Object);
 }
 
 void CDataStore::AddDataSection(std::wstring sectionKey, _uint ID)

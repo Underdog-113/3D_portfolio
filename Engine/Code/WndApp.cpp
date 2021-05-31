@@ -17,12 +17,17 @@ void CWndApp::Start(HINSTANCE hInstance, _int nCmdShow)
 	m_windowName	= L"A HAT IN TIME";
 	m_wndWidth		= 800;
 	m_wndHeight		= 600;
-	m_showCursor	= false;
+	m_showCursor	= true;
 	
 	
 	ShowCursor(m_showCursor);
 	RegisterWndClass(hInstance);
 	CreateWndHandle(hInstance, nCmdShow);
+
+
+	POINT m_centerPt = { m_wndWidth >> 1, m_wndHeight >> 1 };
+	ClientToScreen(m_hWnd, &m_centerPt);
+	SetCursorPos(m_centerPt.x, m_centerPt.y);
 }
 
 void CWndApp::OnDestroy(void)

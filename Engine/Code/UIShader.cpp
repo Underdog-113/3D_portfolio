@@ -2,7 +2,6 @@
 #include "UIShader.h"
 #include "DeviceManager.h"
 #include "CameraManager.h"
-#include "CameraC.h"
 #include "Object.h"
 
 USING(Engine)

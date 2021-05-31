@@ -55,3 +55,14 @@ void CComponent::OnDisable(void)
 {
 	m_isEnabled = false;
 }
+
+void CComponent::SetIsEnabled(_bool var)
+{
+	if (m_isEnabled == var)
+		return;
+
+	if (var == true)
+		OnEnable();
+	else
+		OnDisable();
+}

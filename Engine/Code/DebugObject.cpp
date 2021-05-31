@@ -15,7 +15,7 @@ CDebugObject::~CDebugObject()
 void CDebugObject::Awake(void)
 {
 	__super::Awake();
-	m_dataID = (_int)EDataID::DebugObject;
+	m_dataID = (_int)EDataID::Object;
 
 	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();

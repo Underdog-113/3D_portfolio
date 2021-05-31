@@ -45,8 +45,6 @@ protected:
 	GETTOR			(_bool,						m_isStarted,		false,			IsStarted)
 	GETTOR_SETTOR	(_bool,						m_enable,			true,			Enable)
 	GETTOR_SETTOR	(_bool,						m_SceneEvent,		false,			SceneEvent)
-
-	GETTOR_SETTOR	(SP(CCameraC),				m_spSceneCam,		nullptr,		SceneCamera)
 };
 END
 

@@ -41,10 +41,11 @@
 #define KEY_2       1 << 20
 #define KEY_3		1 << 21
 #define KEY_4		1 << 22
-#define KEY_TAB		1 << 23
-#define KEY_SHIFT	1 << 24
-#define KEY_Z		1 << 25
-#define KEY_X		1 << 26
+#define KEY_5		1 << 23
+#define KEY_TAB		1 << 24
+#define KEY_SHIFT	1 << 25
+#define KEY_Z		1 << 26
+#define KEY_X		1 << 27
 
 #define _CRTDBG_MAP_ALLOC
 #ifdef _DEBUG

@@ -27,12 +27,11 @@ namespace Engine
 	enum class ECameraMode
 	{
 		Fixed			= 0,
-		Edit			= 1,
-		FPS				= 2,
-		Follower		= 3,
-		Movie			= 4,
-		Nothing			= 5,
-		NumOfCameraMode	= 6
+		Free			= 1,
+		Edit			= 2,
+		FPS				= 3,
+		TPS				= 4,
+		NumOfCameraMode	= 5
 	};
 
 	//MeshType
@@ -88,6 +87,12 @@ namespace Engine
 		ALL_INF
 	};
 
+	enum class EColliderID
+	{
+		CameraRay			= 0,
+		NumOfColliderID		= 1
+	};
+
 	enum class EConstraint
 	{
 		None				= 1 << 0,
@@ -132,10 +137,9 @@ namespace Engine
 	enum class EDataID
 	{
 		Engine				= 0,
-		Component			= 1,
-		DebugObject			= 2,
-		Grid				= 3,
-		NumOfEngineDataID
+		Object				= 1,
+		Component			= 2,
+		NumOfEngineDataID	= 3
 	};
 
 	enum class ELayerID

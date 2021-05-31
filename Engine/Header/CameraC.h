@@ -45,9 +45,6 @@ public:
 private:
 	GETTOR			(CFrustum*,			m_pFrustum,				nullptr,				Frustum)
 
-	GETTOR_SETTOR	(_bool,				m_enable,				true,					Enable)
-	GETTOR_SETTOR	(_bool,				m_deleteThis,			false,					DeleteThis)
-
 	GETTOR_SETTOR	(ECameraMode,		m_mode,					ECameraMode::Follower,	Mode)
 	GETTOR_SETTOR	(_bool,				m_moveable,				false,					Moveable)
 	GETTOR_SETTOR	(_bool,				m_rotatable,			false,					Rotatable)
@@ -58,9 +55,10 @@ private:
 
 	GETTOR			(_float,			m_near,					0.1f,					Near)
 	GETTOR			(_float,			m_far,					1000.f,					Far)
-	GETTOR			(_float,			m_FOV,					PI / 3,					FOV)
+	GETTOR			(_float,			m_FOV,					PI / 4,					FOV)
 
 	GETTOR_SETTOR	(_float,			m_zoomSpeed,			300.f,					ZoomSpeed)
+	GETTOR_SETTOR	(_float,			m_moveSpeed,			100.f,					MoveSpeed)
 
 	//For TPS Camera
 	GETTOR			(_float3,			m_targetOffset,			_float3(0, 0.5f, 0),	TargetOffset)

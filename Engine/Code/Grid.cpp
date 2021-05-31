@@ -38,7 +38,7 @@ void CGrid::Awake(void)
 	__super::Awake();
 
 	m_layerID	= (_int)ELayerID::Grid;
-	m_dataID	= (_int)EDataID::Grid;
+	m_dataID	= (_int)EDataID::Object;
 
 	m_spMesh		= AddComponent<CMeshC>();
 	m_spGraphics	= AddComponent<CGraphicsC>();

@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
+#include "TextureStore.h"
 
 
 USING(Engine)
@@ -114,16 +115,34 @@ void CTextureShader::RenderStaticMesh(CGraphicsC * pGC, _int index)
 {
 	CStaticMesh* pSM = dynamic_cast<CStaticMesh*>(pGC->GetMesh()->GetMeshDatas()[index]);
 
-	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
+	if (pSM->GetTexList().size() != 0)
 	{
-		_TexData* pTexData = pGC->GetTexture()->GetTexData()[index][i];
+		for (_long i = pSM->GetSubsetCount() - 1; i >= 0; --i)
+		{
+			
+			_TexData* pTexData = CTextureStore::GetInstance()->GetTextureData(RemoveExtension(pSM->GetTexList()[i]));
 
-		if (pTexData != nullptr)
-			GET_DEVICE->SetTexture(0, pGC->GetTexture()->GetTexData()[index][i]->pTexture);
-		else
-			GET_DEVICE->SetTexture(0, nullptr);
-		
-		pSM->GetMesh()->DrawSubset(i);
+			if (pTexData != nullptr)
+				GET_DEVICE->SetTexture(0, pTexData->pTexture);
+			else
+				GET_DEVICE->SetTexture(0, nullptr);
+
+			pSM->GetMesh()->DrawSubset(i);
+		}
+	}
+	else
+	{
+		for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
+		{
+			_TexData* pTexData = pGC->GetTexture()->GetTexData()[index][i];
+
+			if (pTexData != nullptr)
+				GET_DEVICE->SetTexture(0, pTexData->pTexture);
+			else
+				GET_DEVICE->SetTexture(0, nullptr);
+
+			pSM->GetMesh()->DrawSubset(i);
+		}
 	}
 }
 
