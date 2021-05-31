@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "JongScene.h"
+#include "EmptyObject.h"
+#include "ObjectFactory.h"
 
 
 CJongScene::CJongScene()
@@ -34,6 +36,14 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
+	{
+		SP(Engine::CObject) spEmptyObject
+			= Engine::ADD_CLONE(L"EmptyObject", this, true, L"Kiana", (_int)ELayerID::Player);
+
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"1to2");
+		spEmptyObject->AddComponent<Engine::CTextureC>();
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+	}
 }
 
 void CJongScene::FixedUpdate(void)

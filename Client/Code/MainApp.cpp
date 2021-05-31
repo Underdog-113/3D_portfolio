@@ -15,7 +15,7 @@
 
 
 #pragma region IncludeScenes
-#include "CJongScene.h"
+#include "JongScene.h"
 #pragma endregion
 
 #pragma region Prototypes
