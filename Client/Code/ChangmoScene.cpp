@@ -47,11 +47,11 @@ void CChangmoScene::Start(void)
 	}
 	{
 		SP(Engine::CObject) spEmptyObject
-			= Engine::ADD_CLONE(L"EmptyObject", this, true, L"Cube", (_int)ELayerID::Player);
+			= Engine::ADD_CLONE(L"EmptyObject", this, true, L"Character", (_int)ELayerID::Player);
 
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"sibal");
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Theresa_C5");
 		spEmptyObject->AddComponent<Engine::CTextureC>();
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
 
 		spEmptyObject->GetTransform()->SetSize(100, 100, 100);

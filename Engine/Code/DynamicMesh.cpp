@@ -51,12 +51,12 @@ void CDynamicMesh::Awake(std::wstring const& filePath, std::wstring const& fileN
 	LPD3DXANIMATIONCONTROLLER pAniCtrl = nullptr;
 
 	if (FAILED(D3DXLoadMeshHierarchyFromX((filePath + fileName).c_str(),
-		D3DXMESH_MANAGED,
-		GET_DEVICE,
-		m_pHierarchyLoader,
-		NULL,
-		&m_pRootFrame,
-		&pAniCtrl)))
+			   D3DXMESH_MANAGED,
+			   GET_DEVICE,
+			   m_pHierarchyLoader,
+			   NULL,
+			   &m_pRootFrame,
+			   &pAniCtrl)))
 	{
 		MSG_BOX(__FILE__, L"Load Mesh Hierarchy failed in ParsingMesh");
 		ABORT;
