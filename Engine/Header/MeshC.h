@@ -38,6 +38,7 @@ private:
 	GETTOR			(_float3,	m_meshSize,		ZERO_VECTOR,	MeshSize)
 	GETTOR			(_float3,	m_minVertex,	MAX_VECTOR,		MinVertex)
 	GETTOR			(_float3,	m_maxVertex,	-MAX_VECTOR,	MaxVertex)
+	GETTOR_SETTOR	(_bool,		m_initTex,		false,			InitTex)
 };
 END
 #endif // !MESH_H

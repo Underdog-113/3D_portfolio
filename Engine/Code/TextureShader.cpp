@@ -117,7 +117,7 @@ void CTextureShader::RenderStaticMesh(CGraphicsC * pGC, _int index)
 
 	if (pSM->GetTexList().size() != 0)
 	{
-		for (_long i = pSM->GetSubsetCount() - 1; i >= 0; --i)
+		for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 		{
 			
 			_TexData* pTexData = CTextureStore::GetInstance()->GetTextureData(RemoveExtension(pSM->GetTexList()[i]));
@@ -153,12 +153,14 @@ void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
 	pDM->UpdateFrame();
 
+	
+	
 	for (auto& meshContainer : pDM->GetMeshContainers())
 	{
 		for (_ulong i = 0; i < meshContainer->numBones; ++i)
 		{
-			meshContainer->pRenderingMatrix[i] = meshContainer->pFrameOffsetMatrix[i] *
-												 (*meshContainer->ppCombinedTransformMatrix[i]);
+			meshContainer->pRenderingMatrix[i] =
+				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
 		}
 
 		void* pSrcVertex = nullptr;
@@ -167,21 +169,33 @@ void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 		meshContainer->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
 		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
 
-		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL,
-													pSrcVertex, pDestVertex);
+		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
 		meshContainer->pOriMesh->UnlockVertexBuffer();
 
-		const std::vector<std::vector<_TexData*>>& pTexData = pGC->GetTexture()->GetTexData();
-		for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
+		if (pDM->GetTexList().size() != 0)
 		{
-			if (pTexData[index][i] != nullptr)
-				GET_DEVICE->SetTexture(0, pTexData[index][i]->pTexture);
-			else
-				GET_DEVICE->SetTexture(0, nullptr);
+			for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
+			{
+				_TexData* pTexData = CTextureStore::GetInstance()->GetTextureData(RemoveExtension(pDM->GetTexList()[meshContainer->texIndexStart + i]));
+				GET_DEVICE->SetTexture(0, pTexData->pTexture);
 
-			meshContainer->MeshData.pMesh->DrawSubset(i);
+				meshContainer->MeshData.pMesh->DrawSubset(i);
+			}
+		}
+		else
+		{
+			const std::vector<std::vector<_TexData*>>& pTexData = pGC->GetTexture()->GetTexData();
+			for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
+			{
+				if (pTexData[index][i] != nullptr)
+					GET_DEVICE->SetTexture(0, pTexData[index][i]->pTexture);
+				else
+					GET_DEVICE->SetTexture(0, nullptr);
+
+				meshContainer->MeshData.pMesh->DrawSubset(i);
+			}
 		}
 	}
 }

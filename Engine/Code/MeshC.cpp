@@ -60,8 +60,18 @@ void CMeshC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
-	for (auto& meshData : m_vMeshDatas)
-		meshData->Start();
+	for (_int i = 0; i < m_vMeshDatas.size(); ++i)
+	{
+		m_vMeshDatas[i]->Start();
+		if (m_initTex)
+		{
+			SP(CTextureC) spOwnerTexC = m_pOwner->GetComponent<CTextureC>();
+			for (auto& texName : m_vMeshDatas[i]->GetTexList())
+			{
+				spOwnerTexC->AddTexture(RemoveExtension(texName), i);
+			}
+		}
+	}
 }
 
 void CMeshC::FixedUpdate(SP(CComponent) spThis)
