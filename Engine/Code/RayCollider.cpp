@@ -2,7 +2,7 @@
 #include "RayCollider.h"
 #include "InputManager.h"
 #include "Scene.h"
-#include "SceneManager.h"
+ 
 #include "Object.h"
 
 USING(Engine)

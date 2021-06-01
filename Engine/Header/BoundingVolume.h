@@ -12,7 +12,7 @@ protected:
 									   ~CBoundingVolume		(void);
 
 public:
-	static		SP(CBoundingVolume)		Create				(_bool isStatic);
+	static		SP(CBoundingVolume)		Create				(_bool isStatic, CScene* pScene);
 				SP(Engine::CObject)		MakeClone			(void) override;
 		
 				void					Awake				(void) override;

@@ -14,7 +14,7 @@ private:
 										   ~CCamera				(void);
 
 public:
-	static		SP(CCamera)					Create				(void);
+	static		SP(CCamera)					Create				(_bool isStatic, CScene* pScene);
 				SP(CObject)					MakeClone			(void) override;
 		
 				void						Awake				(void) override;
@@ -55,6 +55,7 @@ private:
 				void						LateUpdateTPS		(void);
 
 				void						UpdateProjMat		(void);
+				void						UpdateOrthoMat		(void);
 
 				void						CameraRotate		(void);
 				void						CameraMove			(void);

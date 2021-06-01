@@ -24,7 +24,7 @@ public:
 					void				OnEnable			(void) override;	 
 					void				OnDisable			(void) override;
 
-private:
+public:
 					void				InitPrototypes		(void) override;
 };
 

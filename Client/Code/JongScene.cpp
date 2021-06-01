@@ -33,6 +33,7 @@ void CJongScene::Awake(_int numOfLayers)
 
 void CJongScene::Start(void)
 {
+	__super::Start();
 }
 
 void CJongScene::FixedUpdate(void)

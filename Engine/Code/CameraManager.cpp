@@ -5,7 +5,7 @@
 #include "ObjectFactory.h"
 #include "Object.h"
 #include "InputManager.h"
-#include "SceneManager.h"
+ 
 #include "WndApp.h"
 
 
@@ -31,7 +31,11 @@ void CCameraManager::LateUpdate(void)
 {
 	for (auto& iter = m_mCameras.begin(); iter != m_mCameras.end();)
 	{
-		if (iter->second->GetDeleteThis())
+		if (iter->second == nullptr)
+		{
+			iter = m_mCameras.erase(iter);
+		}
+		else if (iter->second->GetDeleteThis())
 		{
 			iter->second.reset();
 			iter = m_mCameras.erase(iter);

@@ -2,7 +2,7 @@
 #include "InputManager.h"
 #include "WndApp.h"
 #include "Object.h"
-#include "SceneManager.h"
+ 
 #include "Layer.h"
 #include "CameraManager.h"
 #include "TextManager.h"

@@ -3,7 +3,7 @@
 #include "GraphicsManager.h"
 #include "ShaderManager.h"
 #include "Shader.h"
-#include "SceneManager.h"
+ 
 #include "Scene.h"
 #include "WndApp.h"
 #include "DataStore.h"
@@ -38,8 +38,9 @@ void CGraphicsC::Awake(void)
 		_bool isStatic			= m_pOwner->GetIsStatic();
 		_int dataID				= m_pOwner->GetDataID();
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
+		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
-		GET_VALUE(isStatic, dataID, objectKey, L"renderID", m_renderID);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"renderID", m_renderID);
 	}
 }
 

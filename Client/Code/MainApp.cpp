@@ -7,7 +7,7 @@
 #include "InputManager.h"
 #include "ShaderManager.h"
 #include "SoundManager.h"
-#include "SceneManager.h"
+ 
 #include "TextManager.h"
 #include "ObjectFactory.h"
 #include "Object.h"
@@ -15,7 +15,7 @@
 
 
 #pragma region IncludeScenes
-#include "ChangmoScene.h"
+#include "InitScene.h"
 #pragma endregion
 
 #pragma region Prototypes
@@ -44,7 +44,6 @@ void CMainApp::Awake(void)
 	Engine::CSoundManager::GetInstance()->Awake();
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
-	Engine::CObjectFactory::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
@@ -57,9 +56,8 @@ void CMainApp::Start(void)
 
 	Engine::CInputManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->Start();
-	Engine::CSceneManager::GetInstance()->SceneChange(CChangmoScene::Create());
+	Engine::CSceneManager::GetInstance()->SceneChange(CInitScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
-	Engine::CObjectFactory::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CShaderManager::GetInstance()->Start();
 	
@@ -109,7 +107,8 @@ void CMainApp::LateUpdate(void)
 
 void CMainApp::PreRender(void)
 {
-	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
+	_bool sceneChanged;
+	if (sceneChanged = Engine::CSceneManager::GetInstance()->GetSceneChanged())
 		return;
 
 	Engine::TIME_MEASURE_START;
@@ -122,7 +121,8 @@ void CMainApp::PreRender(void)
 
 void CMainApp::Render(void)
 {
-	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
+	_bool sceneChanged;
+	if (sceneChanged = Engine::CSceneManager::GetInstance()->GetSceneChanged())
 		return;
 
 	Engine::TIME_MEASURE_START;
@@ -151,7 +151,6 @@ void CMainApp::OnDestroy(void)
 	Engine::CGraphicsManager::GetInstance()->DestroyInstance();
 	Engine::CInputManager::GetInstance()->DestroyInstance();
 	Engine::CSceneManager::GetInstance()->DestroyInstance();
-	Engine::CObjectFactory::GetInstance()->DestroyInstance();
 	Engine::CCollisionManager::GetInstance()->DestroyInstance();
 	Engine::CSoundManager::GetInstance()->DestroyInstance();
 	Engine::CCameraManager::GetInstance()->DestroyInstance();

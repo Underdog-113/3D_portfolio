@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "GraphicsManager.h"
-#include "SceneManager.h"
+ 
 #include "Scene.h"
 #include "DeviceManager.h"
 #include "Object.h"
@@ -32,16 +32,6 @@ void CGraphicsManager::Start(void)
 	pDevice->SetLight(0, &light);
 	pDevice->LightEnable(0, TRUE);
 
-	//D3DMATERIAL9				tMtrlInfo;
-	//ZeroMemory(&tMtrlInfo, sizeof(D3DMATERIAL9));
-	//
-	//tMtrlInfo.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	//tMtrlInfo.Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
-	//tMtrlInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	//tMtrlInfo.Emissive = D3DXCOLOR(0.f, 0.f, 0.f, 1.f);
-	//tMtrlInfo.Power = 0.f;
-	//
-	//pDevice->SetMaterial(&tMtrlInfo);
 
 
 	//Get the alpha from the texture

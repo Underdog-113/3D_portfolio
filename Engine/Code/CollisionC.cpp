@@ -41,8 +41,9 @@ void CCollisionC::Awake(void)
 		_bool isStatic			= m_pOwner->GetIsStatic();
 		_int dataID				= m_pOwner->GetDataID();
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
+		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
-		GET_VALUE(isStatic, dataID, objectKey, L"collisionID", m_collisionID);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"collisionID", m_collisionID);
 		AddColliderFromFile();
 	}
 }
@@ -122,6 +123,7 @@ void CCollisionC::AddColliderFromFile(void)
 	_bool			isStatic	= m_pOwner->GetIsStatic();
 	_int			dataID		= m_pOwner->GetDataID();
 	std::wstring	objectKey	= m_pOwner->GetObjectKey();
+	CScene*			pOwnerScene	= m_pOwner->GetScene();
 	std::wstring	varKey;
 
 
@@ -129,7 +131,7 @@ void CCollisionC::AddColliderFromFile(void)
 	{
 		_int numOfCollider;
 		varKey = L"numOf_Type" + std::to_wstring(i) + L"_Collider";
-		GET_VALUE(isStatic, dataID, objectKey, varKey, numOfCollider);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, varKey, numOfCollider);
 
 		CCollider* pCollider;
 		_float3 offset;
@@ -140,7 +142,7 @@ void CCollisionC::AddColliderFromFile(void)
 			{
 			case (_int)EColliderType::Point:
 			{
-				GET_VALUE(isStatic, dataID, objectKey, L"pointCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"pointCollider_" + index + L"_offset", offset);
 				pCollider = CPointCollider::Create(offset);
 				break;
 			}
@@ -148,17 +150,17 @@ void CCollisionC::AddColliderFromFile(void)
 			{
 				_float3 dir;
 				_float len;
-				GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_offset", offset);
-				GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_dir", dir);
-				GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_len", len);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_dir", dir);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_len", len);
 				pCollider = CRayCollider::Create(offset, dir, len);
 				break;
 			}
 			case (_int)EColliderType::Sphere:
 			{
 				_float radius;
-				GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_radius", radius);
-				GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_radius", radius);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_offset", offset);
 
 				pCollider = CSphereCollider::Create(radius, offset);
 				break;
@@ -166,8 +168,8 @@ void CCollisionC::AddColliderFromFile(void)
 			case (_int)EColliderType::AABB:
 			{
 				_float3 size;
-				GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_size", size);
-				GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_size", size);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_offset", offset);
 
 				pCollider = CAabbCollider::Create(size, offset);
 				break;
@@ -175,11 +177,11 @@ void CCollisionC::AddColliderFromFile(void)
 			case (_int)EColliderType::OBB:
 			{
 				_float3 size, right, up, forward;
-				GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_size", size);
-				GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_offset", offset);
-				GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_right", right);
-				GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_up", up);
-				GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_forward", forward);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_size", size);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_right", right);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_up", up);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_forward", forward);
 
 
 				pCollider = CObbCollider::Create(size, offset, right, up, forward);
