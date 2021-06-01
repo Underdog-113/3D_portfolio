@@ -36,8 +36,11 @@ void CTransformC::Awake(void)
 void CTransformC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+	UpdateWorldMatrix();
 
-	
+	m_lastRotMatrix			= m_rotMatrix;
+	m_lastWorldMat			= m_worldMat;
+	m_lastWorldMatNoScale	= m_worldMatNoScale;
 }
 
 void CTransformC::FixedUpdate(SP(CComponent) spThis)
@@ -46,6 +49,16 @@ void CTransformC::FixedUpdate(SP(CComponent) spThis)
 
 void CTransformC::Update(SP(CComponent) spThis)
 {
+	if (m_spParent && m_spParent->GetOwner() == nullptr)
+	{
+		m_lastWorldMatNoScale *= m_spParent->GetLastWorldMatrixNoScale();
+
+		//m_position += m_spParent->GetPosition();
+		//SetRotation(GetRotation() + m_spParent->GetRotation());
+		m_position = _float3(m_worldMatNoScale._41, m_worldMatNoScale._42, m_worldMatNoScale._43);
+		SetForward(_float3(m_worldMatNoScale._31, m_worldMatNoScale._32, m_worldMatNoScale._33));
+		m_spParent.reset();
+	}
 	Lerp();
 	SlerpXZ();
 }
@@ -157,14 +170,14 @@ void CTransformC::SetSizeZ(_float sizeZ)
 	m_size.z = sizeZ;
 }
 
-void CTransformC::SetForward(_float3 lookAt)
+void CTransformC::SetForward(_float3 forward)
 {
-	D3DXVec3Normalize(&lookAt, &lookAt);
+	D3DXVec3Normalize(&forward, &forward);
 
-	if (lookAt == m_forward)
+	if (forward == m_forward)
 		return;
 
-	m_forward = lookAt;
+	m_forward = forward;
 	UpdateRotation();
 }
 
@@ -233,7 +246,7 @@ void CTransformC::AddSizeZ(_float adder)
 }
 #pragma endregion
 
-#pragma region Move
+#pragma region Interface
 void CTransformC::Lerp(void)
 {
 	if (m_lerpOn)
@@ -402,6 +415,10 @@ void CTransformC::UpdateRotation(void)
 
 void CTransformC::UpdateWorldMatrix(void)
 {
+	m_lastRotMatrix			= m_rotMatrix;
+	m_lastWorldMat			= m_worldMat;
+	m_lastWorldMatNoScale	= m_worldMatNoScale;
+
 	_mat rotateX, rotateY, rotateZ, size, translation, result;
 
 	D3DXMatrixRotationX(&rotateX, m_rotation.x);
@@ -419,6 +436,12 @@ void CTransformC::UpdateWorldMatrix(void)
 	m_rotMatrix			= rotateX * rotateY * rotateZ;
 	m_worldMat			= size * rotateX * rotateY * rotateZ * translation;
 	m_worldMatNoScale	= rotateX * rotateY * rotateZ * translation;
+
+	if(m_spParent)
+	{
+		m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
+		m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
+	}
 }
 
 void CTransformC::UpdateParentMatrix(const _mat * pMat)

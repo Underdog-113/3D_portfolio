@@ -60,7 +60,7 @@ public:
 					void				AddSizeY				(_float adder);
 					void				AddSizeZ				(_float adder);
 
-					void				SetForward				(_float3 lookAt);
+					void				SetForward				(_float3 forward);
 
 #pragma endregion
 //Interface
@@ -91,29 +91,32 @@ public:
 	static const	EComponentID		m_s_componentID = EComponentID::Transform;
 
 protected:
-	GETTOR			(_mat,			m_rotMatrix,				{},					RotMatrix)
-	GETTOR			(_mat,			m_worldMat,					{},					WorldMatrix)
-	GETTOR			(_mat,			m_worldMatNoScale,			{},					WorldMatrixNoScale)
-	GETTOR			(_mat,			m_lastWorldMat,					{},				LastWorldMatrix)
-	GETTOR			(_mat,			m_lastWorldMatNoScale,			{},				LastWorldMatrixNoScale)
+	GETTOR_SETTOR	(SP(CTransformC),	m_spParent,					nullptr,			Parent)
+
+	GETTOR			(_mat,				m_rotMatrix,				{},					RotMatrix)
+	GETTOR			(_mat,				m_lastRotMatrix,			{},					LastRotMatrix)
+	GETTOR			(_mat,				m_worldMat,					{},					WorldMatrix)
+	GETTOR			(_mat,				m_worldMatNoScale,			{},					WorldMatrixNoScale)
+	GETTOR			(_mat,				m_lastWorldMat,				{},					LastWorldMatrix)
+	GETTOR			(_mat,				m_lastWorldMatNoScale,		{},					LastWorldMatrixNoScale)
 
 	//Mine
-	GETTOR			(_float3,		m_forward,					FORWARD_VECTOR,		Forward)
-	GETTOR			(_float3,		m_up,						UP_VECTOR,			Up)
-	GETTOR			(_float3,		m_right,					RIGHT_VECTOR,		Right)
+	GETTOR			(_float3,			m_forward,					FORWARD_VECTOR,		Forward)
+	GETTOR			(_float3,			m_up,						UP_VECTOR,			Up)
+	GETTOR			(_float3,			m_right,					RIGHT_VECTOR,		Right)
 
-	GETTOR_SETTOR	(_bool,			m_slerpOn,					false,				SlerpOn)
-	GETTOR_SETTOR	(_float3,		m_goalForward,				ZERO_VECTOR,		GoalForward)
-	GETTOR			(_float,		m_slerpSpeed,				PI / 0.5f,			SlerpSpeed)
+	GETTOR_SETTOR	(_bool,				m_slerpOn,					false,				SlerpOn)
+	GETTOR_SETTOR	(_float3,			m_goalForward,				ZERO_VECTOR,		GoalForward)
+	GETTOR			(_float,			m_slerpSpeed,				PI / 0.5f,			SlerpSpeed)
 
-	GETTOR_SETTOR	(_bool,			m_lerpOn,					false,				LerpOn)
-	GETTOR_SETTOR	(_float3,		m_goalPosition,				ZERO_VECTOR,		GoalPosition)
-	GETTOR_SETTOR	(_float,		m_lerpSpeed,				5.f,				LerpSpeed)
-	GETTOR			(_float,		m_lerpProportion,			0.15f,				LerpProportion)
+	GETTOR_SETTOR	(_bool,				m_lerpOn,					false,				LerpOn)
+	GETTOR_SETTOR	(_float3,			m_goalPosition,				ZERO_VECTOR,		GoalPosition)
+	GETTOR_SETTOR	(_float,			m_lerpSpeed,				5.f,				LerpSpeed)
+	GETTOR			(_float,			m_lerpProportion,			0.15f,				LerpProportion)
 
-	GETTOR			(_float3,		m_position,					ZERO_VECTOR,		Position)
-	GETTOR			(_float3,		m_rotation,					ZERO_VECTOR,		Rotation)
-	GETTOR			(_float3,		m_size,						ONE_VECTOR,			Size)
+	GETTOR			(_float3,			m_position,					ZERO_VECTOR,		Position)
+	GETTOR			(_float3,			m_rotation,					ZERO_VECTOR,		Rotation)
+	GETTOR			(_float3,			m_size,						ONE_VECTOR,			Size)
 
 };
 END
