@@ -12,7 +12,7 @@ private:
 			   ~CEmptyObject		(void);
 
 public:
-	static		SP(CEmptyObject)			Create			(_bool isStatic);
+	static		SP(CEmptyObject)			Create			(_bool isStatic, CScene* pScene);
 
 				SP(Engine::CObject)			MakeClone		(void) override;
 		

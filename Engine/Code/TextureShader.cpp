@@ -1,10 +1,11 @@
 #include "EngineStdafx.h"
 #include "TextureShader.h"
 #include "DeviceManager.h"
-#include "SceneManager.h"
+ 
 #include "Scene.h"
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
+#include "TextureStore.h"
 
 
 USING(Engine)
@@ -114,17 +115,19 @@ void CTextureShader::RenderStaticMesh(CGraphicsC * pGC, _int index)
 {
 	CStaticMesh* pSM = dynamic_cast<CStaticMesh*>(pGC->GetMesh()->GetMeshDatas()[index]);
 
+
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
 		_TexData* pTexData = pGC->GetTexture()->GetTexData()[index][i];
 
 		if (pTexData != nullptr)
-			GET_DEVICE->SetTexture(0, pGC->GetTexture()->GetTexData()[index][i]->pTexture);
+			GET_DEVICE->SetTexture(0, pTexData->pTexture);
 		else
 			GET_DEVICE->SetTexture(0, nullptr);
-		
+
 		pSM->GetMesh()->DrawSubset(i);
 	}
+
 }
 
 void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
@@ -134,12 +137,14 @@ void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
 	pDM->UpdateFrame();
 
+	
+	
 	for (auto& meshContainer : pDM->GetMeshContainers())
 	{
 		for (_ulong i = 0; i < meshContainer->numBones; ++i)
 		{
-			meshContainer->pRenderingMatrix[i] = meshContainer->pFrameOffsetMatrix[i] *
-												 (*meshContainer->ppCombinedTransformMatrix[i]);
+			meshContainer->pRenderingMatrix[i] =
+				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
 		}
 
 		void* pSrcVertex = nullptr;
@@ -148,11 +153,11 @@ void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 		meshContainer->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
 		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
 
-		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL,
-													pSrcVertex, pDestVertex);
+		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
 		meshContainer->pOriMesh->UnlockVertexBuffer();
+
 
 		const std::vector<std::vector<_TexData*>>& pTexData = pGC->GetTexture()->GetTexData();
 		for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
@@ -164,5 +169,6 @@ void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 
 			meshContainer->MeshData.pMesh->DrawSubset(i);
 		}
+
 	}
 }

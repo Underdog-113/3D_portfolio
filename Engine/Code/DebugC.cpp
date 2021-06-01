@@ -5,7 +5,7 @@
 
 #include "BoundingVolume.h"
 #include "DebugCollider.h"
-#include "SceneManager.h"
+ 
 
 USING(Engine)
 CDebugC::CDebugC(void)
@@ -48,7 +48,7 @@ void CDebugC::Start(SP(CComponent) spThis)
 		for (_size i = 0; i < m_vDebugCollider.size(); ++i)
 		{
 			m_vDebugCollider[i] = 
-				std::dynamic_pointer_cast<CDebugCollider>(ADD_CLONE(L"DebugCollider", GET_CUR_SCENE, true));
+				std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
 			m_vDebugCollider[i]->SetOwner(m_pOwner);
 			m_vDebugCollider[i]->SetCollider(vOwnerColliders[i]);
 		}
@@ -97,7 +97,7 @@ void CDebugC::OnDisable(void)
 void CDebugC::AddDebugCollider(CCollider* pCollider)
 {
 	SP(CDebugCollider) spDC 
-		= std::dynamic_pointer_cast<CDebugCollider>(ADD_CLONE(L"DebugCollider", GET_CUR_SCENE, true));
+		= std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
 	spDC->SetOwner(m_pOwner);
 	spDC->SetCollider(pCollider);
 	m_vDebugCollider.emplace_back(spDC);

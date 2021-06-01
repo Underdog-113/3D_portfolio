@@ -256,21 +256,7 @@ void CTransformC::Lerp(void)
 		m_position += (dir * moveAmount * GET_DT);
 	}
 }
-//Vector3 SlerpVectors(const Vector3& from, const Vector3& to, float interval) 
-//{    // Get the axis of rotation between from and to    
-//	Vector3 axis = to.Cross(from);    
-//	axis.Normalise();    
-//	// Get the angle to rotate around the axis     
-//	// NOTE: from and to must be of unit length!!!   
-//	float angleRads = acosf(from.Dot(to));    
-//	// Build a quaternion to rotate between 'from' and 'to'    
-//	// NOTE: interval must be between 0 and 1!!    
-//	Quaternion rot;    
-//	rot.FromAxisAngle(axis, angleRads * interval);    
-//	Vector3 result = rot.MultiplyVector(from);    
-//
-//	return result;
-//}
+
 void CTransformC::SlerpXZ(void)
 {
 	if (m_slerpOn)
@@ -412,24 +398,6 @@ void CTransformC::UpdateRotation(void)
 		else
 			m_rotation = _float3(D3DXToRadian(-90), 0, 0);
 	}
-
-	//D3DXVec3Cross(&m_right, &m_up, &m_forward);
-	//D3DXVec3Normalize(&m_right, &m_right);
-	//
-	//D3DXVec3Cross(&m_up, &m_forward, &m_right);
-	//D3DXVec3Normalize(&m_up, &m_up);
-	//
-	//_mat rotMatrix(m_right.x,		m_right.y,		m_right.z,		0.f,
-	//			   m_up.x,			m_up.y,			m_up.z,			0.f,
-	//			   m_forward.x,		m_forward.y,	m_forward.z,	0.f,
-	//			   0.f,				0.f,			0.f,			1.f);
-	//
-	//_quat rotQuat;
-	//D3DXQuaternionRotationMatrix(&rotQuat, &rotMatrix);
-	//D3DXQuaternionNormalize(&rotQuat, &rotQuat);
-	//
-	//
-	//m_rotation = GET_MATH->QuatToRad(rotQuat);
 }
 
 void CTransformC::UpdateWorldMatrix(void)

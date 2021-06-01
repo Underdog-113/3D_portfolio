@@ -82,12 +82,33 @@ void CObject::OnDestroy(void)
 void CObject::OnEnable(void)
 {
 	m_isEnabled = true;
+	for (auto& component : m_mComponents)
+	{
+		if(component.second->GetIsEnabled() == false)
+			component.second->OnEnable();
+	}
 }
 
 
 void CObject::OnDisable(void)
 {
 	m_isEnabled = false;
+	for (auto& component : m_mComponents)
+	{
+		if(component.second->GetIsEnabled() == true)
+			component.second->OnDisable();
+	}
+}
+
+void CObject::SetIsEnabled(_bool var)
+{
+	if (m_isEnabled == var)
+		return;
+
+	if (var == true)
+		OnEnable();
+	else
+		OnDisable();
 }
 
 void CObject::InitClone(SP(CObject) spClone)
@@ -101,6 +122,7 @@ void CObject::InitClone(SP(CObject) spClone)
 	spClone->SetDataID(m_dataID);
 	spClone->SetLayerID(m_layerID);
 	spClone->SetIsEnabled(m_isEnabled);
+	spClone->SetScene(m_pScene);
 	
 	for (auto& component : m_mComponents)
 	{

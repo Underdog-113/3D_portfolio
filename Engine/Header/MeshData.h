@@ -43,7 +43,6 @@ protected:
 	GETTOR			(_float3,		m_maxVertex,		-MAX_VECTOR,	MaxVertex)
 
 	GETTOR			(_float3,		m_offset,			ZERO_VECTOR,	Offset)
-
 };
 END
 #endif // !MESH_H

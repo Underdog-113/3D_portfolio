@@ -15,10 +15,11 @@ CBoundingVolume::~CBoundingVolume()
 {
 }
 
-SP(CBoundingVolume) CBoundingVolume::Create(_bool isStatic)
+SP(CBoundingVolume) CBoundingVolume::Create(_bool isStatic, CScene* pScene)
 {
 	SP(CBoundingVolume) spInstance(new CBoundingVolume, Engine::SmartDeleter<CBoundingVolume>);
 	spInstance->SetIsStatic(true);
+	spInstance->SetScene(pScene);
 	spInstance->Awake();
 
 	return spInstance;

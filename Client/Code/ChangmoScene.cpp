@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "ChangmoScene.h"
+#include "EmptyObject.h"
+#include "ObjectFactory.h"
+#include "CameraManager.h"
+ 
 
 CChangmoScene::CChangmoScene()
 {
@@ -27,11 +31,35 @@ void CChangmoScene::Free(void)
 void CChangmoScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	InitPrototypes();
 }
 
 void CChangmoScene::Start(void)
 {
+	__super::Start();
+	{
+		SP(Engine::CObject) spEmptyObject
+			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube");
+	
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Katana_M13_78_4");
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	}
+	{
+		SP(Engine::CObject) spEmptyObject
+			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Character");
+	
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Theresa_C5");
+		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		spEmptyObject->AddComponent<Engine::CTextureC>();
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	
+	
+		spEmptyObject->GetTransform()->SetSize(1, 1, 1);
+		//spEmptyObject->GetTransform()->SetRotationX(-PI / 2.f);
+	}
+	
+	
+
 }
 
 void CChangmoScene::FixedUpdate(void)

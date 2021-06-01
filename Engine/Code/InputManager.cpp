@@ -2,10 +2,9 @@
 #include "InputManager.h"
 #include "WndApp.h"
 #include "Object.h"
-#include "SceneManager.h"
+ 
 #include "Layer.h"
 #include "CameraManager.h"
-#include "CameraC.h"
 #include "TextManager.h"
 #include "DataStore.h"
 
@@ -120,6 +119,8 @@ void CInputManager::KeyUpdate(void)
 		m_key |= KEY_3;
 	if (GetAsyncKeyState('4') & 0x8000)
 		m_key |= KEY_4;
+	if (GetAsyncKeyState('5') & 0x8000)
+		m_key |= KEY_5;
 	if (GetAsyncKeyState(VK_TAB) & 0x8000)
 		m_key |= KEY_TAB;
 	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)

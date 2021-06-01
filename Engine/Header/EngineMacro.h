@@ -47,7 +47,7 @@ template<typename T> friend void Engine::SmartDeleter(T* something);
 protected:																			\
 	varType varName = varInitValue; 												\
 public: 																			\
-	virtual inline varType const& Get##funcName(void) const { return varName; }			\
+	virtual inline varType const& Get##funcName(void) const { return varName; }		\
 	virtual inline void Set##funcName(varType var){ varName = var; }    
 
 #define GETTOR(varType, varName, varInitValue, funcName)							\
@@ -152,34 +152,31 @@ CGraphicsManager::GetInstance()->AddToRenderList(renderID, spGraphicsC)
 
 //DataStore Macro
 #define GET_VALUE(isStatic, dataID, objectKey, varKey, result)						\
-CDataStore::GetInstance()->GetValue(isStatic, dataID, objectKey, varKey, result)
+GetDataStore()->GetValue(isStatic, dataID, objectKey, varKey, result)
 
 
 //ObjectFactory Macro
 #define ADD_CLONE1(objectKey)														\
-CObjectFactory::GetInstance()->AddClone(objectKey)
+GetObjectFactory()->AddClone(objectKey)
 
-#define ADD_CLONE2(objectKey, pClone)												\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone)
+#define ADD_CLONE2(objectKey, isStatic)												\
+GetObjectFactory()->AddClone(objectKey, isStatic)
 
-#define ADD_CLONE3(objectKey, pClone, isStatic)										\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone, isStatic)
+#define ADD_CLONE3(objectKey, isStatic, layerTag)									\
+GetObjectFactory()->AddClone(objectKey, isStatic, layerTag)
 
-#define ADD_CLONE4(objectKey, pClone, isStatic, name)								\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone, isStatic, name)
+#define ADD_CLONE4(objectKey, isStatic, layerTag, name)								\
+GetObjectFactory()->AddClone(objectKey, isStatic, layerTag, name)
 
-#define ADD_CLONE5(objectKey, pClone, isStatic, name, layerTag)						\
-CObjectFactory::GetInstance()->AddClone(objectKey, pClone, isStatic, name, layerTag)
-
-#define GET_6TH_ARG(arg1, arg2, arg3, arg4, arg5, arg6, ...) arg6
+#define GET_5TH_ARG(arg1, arg2, arg3, arg4, arg5, ...) arg5
 
 #define ADD_CLONE_MACRO_CHOOSER(...)												\
-GET_6TH_ARG(__VA_ARGS__, ADD_CLONE5, ADD_CLONE4, ADD_CLONE3, ADD_CLONE2, ADD_CLONE1, )
+GET_5TH_ARG(__VA_ARGS__, ADD_CLONE4, ADD_CLONE3, ADD_CLONE2, ADD_CLONE1, )
 
 #define ADD_CLONE(...) ADD_CLONE_MACRO_CHOOSER(__VA_ARGS__)(__VA_ARGS__)
 
 #define ADD_PROTOTYPE(spPrototype)													\
-CObjectFactory::GetInstance()->AddPrototype(spPrototype)
+GetObjectFactory()->AddPrototype(spPrototype)
 
 //FontManager Macro
 #define ADD_TEXT(key, text, position, color)										\

@@ -1,7 +1,7 @@
 #ifndef COLLISIONHELPER_H
 #define COLLISIONHELPER_H
 
-#include "SceneManager.h"
+ 
 #include "Layer.h"
 #include "Object.h"
 #include "TextManager.h"

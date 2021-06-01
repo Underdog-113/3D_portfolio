@@ -94,6 +94,8 @@ protected:
 	GETTOR			(_mat,			m_rotMatrix,				{},					RotMatrix)
 	GETTOR			(_mat,			m_worldMat,					{},					WorldMatrix)
 	GETTOR			(_mat,			m_worldMatNoScale,			{},					WorldMatrixNoScale)
+	GETTOR			(_mat,			m_lastWorldMat,					{},				LastWorldMatrix)
+	GETTOR			(_mat,			m_lastWorldMatNoScale,			{},				LastWorldMatrixNoScale)
 
 	//Mine
 	GETTOR			(_float3,		m_forward,					FORWARD_VECTOR,		Forward)
@@ -113,8 +115,6 @@ protected:
 	GETTOR			(_float3,		m_rotation,					ZERO_VECTOR,		Rotation)
 	GETTOR			(_float3,		m_size,						ONE_VECTOR,			Size)
 
-	//My size * mesh size
-	GETTOR			(_float3,		m_finalSize,				ONE_VECTOR,			FinalSize)
 };
 END
 #endif

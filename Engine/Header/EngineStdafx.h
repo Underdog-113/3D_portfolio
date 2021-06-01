@@ -62,7 +62,10 @@
 #include "EngineComponents.h"
 
 #include "MathHelper.h"
+#include "SceneManager.h"
 //
+
+
 
 // »ç¿îµå
 #include <io.h>

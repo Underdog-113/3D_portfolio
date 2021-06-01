@@ -38,14 +38,15 @@ public:
 
 public:
 	virtual			void			SetBasicName		(void) PURE;
+					void			SetIsEnabled		(_bool var);
 
 protected:
 					void			InitClone			(SP(CObject) spClone);
 
 protected:
 	typedef std::unordered_map<_uint, SP(CComponent)> _COMPONENTS;
-
 	GETTOR			(_COMPONENTS,				m_mComponents,	{},			Components)
+	GETTOR_SETTOR	(CScene*,					m_pScene,		nullptr,	Scene)
 
 	GETTOR_SETTOR	(_bool,						m_isClone,		false,		IsClone)
 	GETTOR_SETTOR	(_bool,						m_addExtra,		false,		AddExtra)
@@ -54,7 +55,7 @@ protected:
 	GETTOR_SETTOR	(_bool,						m_isAwaked,		false,		IsAwaked)
 	GETTOR_SETTOR	(_bool,						m_isStarted,	false,		IsStarted)
 
-	GETTOR_SETTOR	(_bool,						m_isEnabled,	true,		IsEnabled)
+	GETTOR			(_bool,						m_isEnabled,	true,		IsEnabled)
 	GETTOR_SETTOR	(_bool,						m_deleteThis,	false,		DeleteThis)
 
 	GETTOR_SETTOR	(_int,						m_dataID,		UNDEFINED,	DataID)						

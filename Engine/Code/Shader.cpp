@@ -4,7 +4,6 @@
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
 #include "CameraManager.h"
-#include "CameraC.h"
 
 USING(Engine)
 CShader::CShader()

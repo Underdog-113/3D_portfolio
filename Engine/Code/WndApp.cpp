@@ -14,15 +14,20 @@ void CWndApp::Awake(void)
 void CWndApp::Start(HINSTANCE hInstance, _int nCmdShow)
 {
 	m_className		= L"3D_Engine";
-	m_windowName	= L"A HAT IN TIME";
+	m_windowName	= L"ºØ±«3rd";
 	m_wndWidth		= 800;
 	m_wndHeight		= 600;
-	m_showCursor	= false;
+	m_showCursor	= true;
 	
 	
 	ShowCursor(m_showCursor);
 	RegisterWndClass(hInstance);
 	CreateWndHandle(hInstance, nCmdShow);
+
+
+	POINT m_centerPt = { m_wndWidth >> 1, m_wndHeight >> 1 };
+	ClientToScreen(m_hWnd, &m_centerPt);
+	SetCursorPos(m_centerPt.x, m_centerPt.y);
 }
 
 void CWndApp::OnDestroy(void)
@@ -84,8 +89,6 @@ bool CWndApp::CreateWndHandle(HINSTANCE hInstance, _int nCmdShow)
 	if (!m_hWnd)
 		return false;
 
-
-	
 	ShowWindow(m_hWnd, nCmdShow);
 	UpdateWindow(m_hWnd);
 

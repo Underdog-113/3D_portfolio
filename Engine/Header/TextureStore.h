@@ -7,8 +7,13 @@
 BEGIN(Engine)
 class ENGINE_DLL CTextureStore final : public CResourceStore
 {
-	DECLARE_SINGLETON(CTextureStore)
+private:
+	explicit					CTextureStore			(void);
+	virtual					   ~CTextureStore			(void);
 public:
+	static	CTextureStore*		Create					(void);
+			void				Free					(void);
+
 			void				Awake					(void) override;
 			void				Start					(void) override;
 			void				OnDestroy				(void) override;
@@ -16,7 +21,7 @@ public:
 			void				ClearCurResource		(void) override;
 
 			_TexData*			GetTextureData			(std::wstring textureKey);
-			void				InitTextureForScene		(std::wstring curScene);
+			void				InitTextureForScene		(std::wstring curScene, _bool isStatic = false);
 
 private:
 			void				InitResource			(std::wstring sourcePath) override;
@@ -26,7 +31,9 @@ private:
 private:
 	typedef std::unordered_map<std::wstring, _TexData*>	_TexDataMap;
 			_TexDataMap			m_mCurSceneTextureData;
-			_TexDataMap			m_mStaticTextureData;
+	static	_TexDataMap			m_s_mStaticTextureData;
+	
+	static	_uint				m_s_usage;
 };
 END
 

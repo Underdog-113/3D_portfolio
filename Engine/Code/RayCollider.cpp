@@ -2,7 +2,7 @@
 #include "RayCollider.h"
 #include "InputManager.h"
 #include "Scene.h"
-#include "SceneManager.h"
+ 
 #include "Object.h"
 
 USING(Engine)
@@ -67,13 +67,8 @@ void CRayCollider::OnDisable(void)
 void CRayCollider::UpdatePosition(void)
 {
 	__super::UpdatePosition();
-	if(m_pTarget == nullptr)
-		D3DXVec3TransformNormal(&m_direction, &m_directionOrigin, &m_pOwner->GetTransform()->GetRotMatrix());
-	else
-	{
-		m_direction = m_pTarget->GetTransform()->GetPosition() + _float3(0, 0.5f, 0) - (m_pOwner->GetTransform()->GetPosition() + m_offset);
-		D3DXVec3Normalize(&m_direction, &m_direction);
-	}
+
+	D3DXVec3TransformNormal(&m_direction, &m_directionOrigin, &m_pOwner->GetTransform()->GetRotMatrix());
 }
 
 void CRayCollider::MakeBS(void)

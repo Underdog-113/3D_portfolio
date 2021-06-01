@@ -13,13 +13,14 @@ CEmptyObject::~CEmptyObject()
 {
 }
 
-SP(CEmptyObject) CEmptyObject::Create(_bool isStatic)
+SP(CEmptyObject) CEmptyObject::Create(_bool isStatic, CScene* pScene)
 {
-	SP(CEmptyObject) spBasicObject(new CEmptyObject, SmartDeleter<CEmptyObject>);
-	spBasicObject->SetIsStatic(isStatic);
-	spBasicObject->Awake();
+	SP(CEmptyObject) spInstance(new CEmptyObject, SmartDeleter<CEmptyObject>);
+	spInstance->SetIsStatic(isStatic);
+	spInstance->SetScene(pScene);
+	spInstance->Awake();
 
-	return spBasicObject;
+	return spInstance;
 }
 
 SP(Engine::CObject) CEmptyObject::MakeClone(void)
