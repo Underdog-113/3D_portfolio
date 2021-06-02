@@ -1,65 +1,65 @@
 #include "stdafx.h"
-#include "CanvaseComponent.h"
+#include "CanvasComponent.h"
 #include "Layer.h"
 #include "Object.h"
 
-CCanvaseComponent::CCanvaseComponent()
+CCanvasComponent::CCanvasComponent()
 {
 }
 
 
-CCanvaseComponent::~CCanvaseComponent()
+CCanvasComponent::~CCanvasComponent()
 {
 }
 
-SP(Engine::CComponent) CCanvaseComponent::MakeClone(Engine::CObject *pObject)
+SP(Engine::CComponent) CCanvasComponent::MakeClone(Engine::CObject *pObject)
 {
-	SP(CCanvaseComponent) spClone(new CCanvaseComponent);
+	SP(CCanvasComponent) spClone(new CCanvasComponent);
 	__super::InitClone(spClone, pObject);
 
 	return spClone;
 }
 
-void CCanvaseComponent::Awake()
+void CCanvasComponent::Awake()
 {
 	__super::Awake();
 	m_componentID = 0;
 }
 
-void CCanvaseComponent::Start(SP(Engine::CComponent) spThis)
+void CCanvasComponent::Start(SP(Engine::CComponent) spThis)
 {
 	__super::Start(spThis);
 	FindUi();
 }
 
-void CCanvaseComponent::FixedUpdate(SP(Engine::CComponent) spThis)
+void CCanvasComponent::FixedUpdate(SP(Engine::CComponent) spThis)
 {
 }
 
-void CCanvaseComponent::Update(SP(Engine::CComponent) spThis)
+void CCanvasComponent::Update(SP(Engine::CComponent) spThis)
 {
 }
 
-void CCanvaseComponent::LateUpdate(SP(Engine::CComponent) spThis)
+void CCanvasComponent::LateUpdate(SP(Engine::CComponent) spThis)
 {
 }
 
-void CCanvaseComponent::OnDestroy()
+void CCanvasComponent::OnDestroy()
 {
 }
 
-void CCanvaseComponent::OnEnable()
+void CCanvasComponent::OnEnable()
 {
 	__super::OnEnable();
 
 }
 
-void CCanvaseComponent::OnDisable()
+void CCanvasComponent::OnDisable()
 {
 	__super::OnDisable();
 }
 
-void CCanvaseComponent::FindUi()
+void CCanvasComponent::FindUi()
 {
 	std::vector<SP(Engine::CObject)> objectlist =  Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[0]->GetGameObjects();
 	std::wstring curName = GetOwner()->GetName();

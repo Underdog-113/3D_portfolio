@@ -181,7 +181,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\ButtonComponent.h" />
-    <ClInclude Include="..\Header\CanvaseComponent.h" />
+    <ClInclude Include="..\Header\CanvasComponent.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -196,6 +196,7 @@
     <ClInclude Include="..\Header\UiManager.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\UserInterface.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="Resource.h" />
@@ -205,7 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\ButtonComponent.cpp" />
-    <ClCompile Include="..\Code\CanvaseComponent.cpp" />
+    <ClCompile Include="..\Code\CanvasComponent.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
     <ClCompile Include="..\Code\ImageComponent.cpp" />
@@ -215,6 +216,7 @@
     <ClCompile Include="..\Code\UiManager.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\UserInterface.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />

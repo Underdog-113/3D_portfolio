@@ -38,7 +38,7 @@ void CTextComponent::FixedUpdate(SP(Engine::CComponent) spThis)
 
 void CTextComponent::Update(SP(Engine::CComponent) spThis)
 {
-	
+	Engine::CTextManager::GetInstance()->
 }
 
 void CTextComponent::LateUpdate(SP(Engine::CComponent) spThis)

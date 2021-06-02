@@ -1,13 +1,13 @@
 #ifndef CANVASECOMPONENT_H
 #define CANVASECOMPONENT_H
 
-class CCanvaseComponent final : public Engine::CComponent
+class CCanvasComponent final : public Engine::CComponent
 {
 private:
 	std::list<SP(Engine::CObject)> m_objectList;
 public:
-	explicit CCanvaseComponent();
-	~CCanvaseComponent();
+	explicit CCanvasComponent();
+	~CCanvasComponent();
 
 	// CComponent을(를) 통해 상속됨
 	virtual SP(Engine::CComponent) MakeClone(Engine::CObject *pObject);

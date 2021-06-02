@@ -49,9 +49,6 @@
     <Filter Include="03.Component\00.UI">
       <UniqueIdentifier>{ba5082f1-baa9-404b-aafd-553107bb6756}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Component\00.UI\00.CanvaseComponent">
-      <UniqueIdentifier>{d574028e-5253-4689-9795-3ed01e4bd0ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI\01.ImageComponent">
       <UniqueIdentifier>{8a018347-859c-4211-8217-eb5f76d08cf6}</UniqueIdentifier>
     </Filter>
@@ -73,6 +70,12 @@
     <Filter Include="04.Manager\00.UiManager">
       <UniqueIdentifier>{424a3973-598c-43e7-90fc-65e320250d35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\00.UI">
+      <UniqueIdentifier>{439d6628-5b50-4d2f-8aa6-4fffb163e874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\00.CanvasComponent">
+      <UniqueIdentifier>{d574028e-5253-4689-9795-3ed01e4bd0ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -86,9 +89,6 @@
     </ClInclude>
     <ClInclude Include="Client.h">
       <Filter>99.Default</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MainApp.h">
-      <Filter>00.MainApp</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ChangmoScene.h">
       <Filter>01.Scene\02.PrivateScene\00.Changmo</Filter>
@@ -117,20 +117,11 @@
     <ClInclude Include="..\Header\DongScene.h">
       <Filter>01.Scene\02.PrivateScene\00.DongScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\JongScene.h">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Loading.h">
-      <Filter>01.Scene\99.Loading</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\StaticScene.h">
       <Filter>01.Scene\01.StaticScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CanvaseComponent.h">
-      <Filter>03.Component\00.UI\00.CanvaseComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ImageComponent.h">
       <Filter>03.Component\00.UI\01.ImageComponent</Filter>
@@ -150,6 +141,12 @@
     <ClInclude Include="..\Header\UiManager.h">
       <Filter>04.Manager\00.UiManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\UserInterface.h">
+      <Filter>02.Objects\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CanvasComponent.h">
+      <Filter>03.Component\00.UI\00.CanvasComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -157,9 +154,6 @@
     </ClCompile>
     <ClCompile Include="Client.cpp">
       <Filter>99.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MainApp.cpp">
-      <Filter>00.MainApp</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ChangmoScene.cpp">
       <Filter>01.Scene\02.PrivateScene\00.Changmo</Filter>
@@ -173,20 +167,11 @@
     <ClCompile Include="..\Code\DongScene.cpp">
       <Filter>01.Scene\02.PrivateScene\00.DongScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\JongScene.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Loading.cpp">
-      <Filter>01.Scene\99.Loading</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\StaticScene.cpp">
       <Filter>01.Scene\01.StaticScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CanvaseComponent.cpp">
-      <Filter>03.Component\00.UI\00.CanvaseComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ImageComponent.cpp">
       <Filter>03.Component\00.UI\01.ImageComponent</Filter>
@@ -205,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\UiManager.cpp">
       <Filter>04.Manager\00.UiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UserInterface.cpp">
+      <Filter>02.Objects\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CanvasComponent.cpp">
+      <Filter>03.Component\00.UI\00.CanvasComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
