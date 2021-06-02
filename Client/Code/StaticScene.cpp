@@ -7,10 +7,10 @@
 #pragma endregion
 
 #pragma region Static setting
-#include "CollisionManager.h"
+ 
 #pragma endregion
 
-#include "ObjectFactory.h"
+ 
 #include "DataStore.h"
 #include "MeshStore.h"
 #include "TextureStore.h"

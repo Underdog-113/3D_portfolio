@@ -19,13 +19,13 @@
 #include "TextureStore.h"
 
 #include "WndApp.h"
-#include "FRC.h"
+ 
 
-#include "TextManager.h"
+ 
 #pragma endregion
 
 #include "MainApp.h"
-#include "InputManager.h"
+ 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,

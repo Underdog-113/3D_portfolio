@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "WndApp.h"
 #include "DataStore.h"
-#include "CameraManager.h"
+ 
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CWndApp)

@@ -1,5 +1,5 @@
 #include "EngineStdafx.h"
-#include "GraphicsManager.h"
+ 
 #include "MeshStore.h"
 #include "DataStore.h"
 #include "Object.h"

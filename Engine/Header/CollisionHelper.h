@@ -4,8 +4,8 @@
  
 #include "Layer.h"
 #include "Object.h"
-#include "TextManager.h"
-#include "CameraManager.h"
+ 
+ 
 
 BEGIN(Engine)
 BEGIN(CollisionHelper)

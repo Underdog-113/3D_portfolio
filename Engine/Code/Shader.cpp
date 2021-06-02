@@ -3,7 +3,7 @@
 #include "DeviceManager.h"
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
-#include "CameraManager.h"
+ 
 
 USING(Engine)
 CShader::CShader()

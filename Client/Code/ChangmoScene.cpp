@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "ChangmoScene.h"
 #include "EmptyObject.h"
-#include "ObjectFactory.h"
-#include "CameraManager.h"
-#include "InputManager.h"
+ 
+ 
+ 
  
 
 CChangmoScene::CChangmoScene()

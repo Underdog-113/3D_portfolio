@@ -2,7 +2,7 @@
 #include "Object.h"
 #include "TextureStore.h"
 #include "DataStore.h"
-#include "FRC.h"
+ 
 USING(Engine)
 CTextureC::CTextureC()  
 {

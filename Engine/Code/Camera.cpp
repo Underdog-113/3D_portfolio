@@ -3,12 +3,12 @@
 
 #include "Frustum.h"
 
-#include "InputManager.h"
+ 
 #include "WndApp.h"
 
-#include "FRC.h"
+ 
 #include "DebugCollider.h"
-#include "TextManager.h"
+ 
 
 
 USING(Engine)

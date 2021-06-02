@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "Object.h"
-#include "CollisionManager.h"
-#include "FRC.h"
+ 
+ 
 
 USING(Engine)
 CRigidBodyC::CRigidBodyC(void)

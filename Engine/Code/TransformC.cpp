@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
 #include "Object.h"
 #include "DataStore.h"
-#include "FRC.h"
-#include "TextManager.h"
+ 
+ 
 
 USING(Engine)
 CTransformC::CTransformC(void)  

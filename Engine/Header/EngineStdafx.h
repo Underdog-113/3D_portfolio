@@ -50,6 +50,10 @@
 #include "d3dx9.h"
 #pragma comment(lib, "d3dx9.lib")
 
+//For Sound
+#include <io.h>
+#include "fmod.h"
+#pragma comment (lib, "fmodex64_vc.lib")
 
 //프로젝트 내의 참조문서
 #include "EngineTypedef.h"
@@ -61,15 +65,25 @@
 #include "EngineStructure.h"
 #include "EngineComponents.h"
 
-#include "MathHelper.h"
+
+
+//Managers
 #include "SceneManager.h"
-//
+#include "CameraManager.h"
+#include "CollisionManager.h"
+#include "DeviceManager.h"
+#include "GraphicsManager.h"
+#include "InputManager.h"
+#include "ShaderManager.h"
+#include "SoundManager.h"
+#include "TextManager.h"
+
+
+//ETC
+#include "MathHelper.h"
+#include "FRC.h"
 
 
 
-// 사운드
-#include <io.h>
-#include "fmod.h"
-#pragma comment (lib, "fmodex64_vc.lib")
 
 #endif

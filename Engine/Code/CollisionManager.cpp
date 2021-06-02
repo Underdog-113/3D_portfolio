@@ -1,11 +1,11 @@
 #include "EngineStdafx.h"
-#include "CollisionManager.h"
+ 
 #include "SphereCollider.h"
 #include "Object.h"
 #include "CollisionHelper.h"
 #include "DataStore.h"
-#include "FRC.h"
-#include "TextManager.h"
+ 
+ 
 
 
 USING(Engine)
