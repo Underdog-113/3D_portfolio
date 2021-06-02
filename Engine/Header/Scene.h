@@ -1,13 +1,15 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "ObjectFactory.h"
+#include "DataStore.h"
+#include "MeshStore.h"
+#include "TextureStore.h"
+
+
 BEGIN(Engine)
 class CLayer;
 class CObject;
-class CObjectFactory;
-class CDataStore;
-class CTextureStore;
-class CMeshStore;
 class ENGINE_DLL CScene abstract  
 {
 protected:

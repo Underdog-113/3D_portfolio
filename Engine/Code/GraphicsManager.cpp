@@ -1,12 +1,12 @@
 #include "EngineStdafx.h"
-#include "GraphicsManager.h"
+ 
  
 #include "Scene.h"
 #include "DeviceManager.h"
 #include "Object.h"
-#include "CameraManager.h"
+ 
 #include "Frustum.h"
-#include "ShaderManager.h"
+ 
 #include "Shader.h"
 
 USING(Engine)

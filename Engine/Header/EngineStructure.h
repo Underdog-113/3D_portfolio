@@ -97,7 +97,8 @@ namespace Engine
 	struct _Text
 	{
 		std::wstring	m_message;
-		D3DXVECTOR3		m_position;
+		_float3			m_position;
+		_float3			m_size;
 		D3DXCOLOR		m_color;
 		_bool			m_isVisible;
 	};

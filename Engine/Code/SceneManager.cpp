@@ -1,14 +1,14 @@
 #include "EngineStdafx.h"
 #include "SceneManager.h"
 #include "Scene.h"
-#include "ObjectFactory.h"
+ 
 #include "MeshStore.h"
 #include "TextureStore.h"
 #include "DataStore.h"
 #include "Object.h"
 #include "WndApp.h"
-#include "FRC.h"
-#include "CameraManager.h"
+ 
+ 
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CSceneManager)

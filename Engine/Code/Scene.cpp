@@ -2,15 +2,6 @@
 #include "Scene.h"
 #include "Layer.h"
 #include "Object.h"
- 
-#include "FRC.h"
-
-#include "DataStore.h"
-#include "MeshStore.h"
-#include "TextureStore.h"
-
-#include "ObjectFactory.h"
-#include "CameraManager.h"
 #include "WndApp.h"
 
 USING(Engine)

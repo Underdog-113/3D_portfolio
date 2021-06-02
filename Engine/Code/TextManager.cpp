@@ -1,5 +1,5 @@
 #include "EngineStdafx.h"
-#include "TextManager.h"
+ 
 #include "DeviceManager.h"
 
 USING(Engine)
@@ -54,17 +54,34 @@ void CTextManager::AddText(std::wstring textKey, std::wstring msg, D3DXVECTOR3 p
 {
 	_Text* pNewText = new _Text;
 
-	pNewText->m_message = msg;
-	pNewText->m_isVisible = true;
-	pNewText->m_position = position;
-	pNewText->m_color = color;
+	pNewText->m_message		= msg;
+	pNewText->m_isVisible	= true;
+	pNewText->m_position	= position;
+	pNewText->m_color		= color;
 
 	m_mTexts[textKey] = pNewText;
+}
+
+void CTextManager::ResetText(std::wstring textKey, std::wstring msg, _float3 position, D3DXCOLOR color)
+{
+	m_mTexts[textKey]->m_message	= msg;
+	m_mTexts[textKey]->m_position	= position;
+	m_mTexts[textKey]->m_color		= color;
 }
 
 void CTextManager::RewriteText(std::wstring textKey, std::wstring msg)
 {
 	m_mTexts[textKey]->m_message = msg;
+}
+
+void CTextManager::MoveText(std::wstring textKey, _float3 position)
+{
+	m_mTexts[textKey]->m_position = position;
+}
+
+void CTextManager::ChangeColorText(std::wstring textKey, D3DXCOLOR color)
+{
+	m_mTexts[textKey]->m_color = color;
 }
 
 void CTextManager::DeleteText(std::wstring textKey)
@@ -84,6 +101,8 @@ void CTextManager::DrawMyText(_Text* pText)
 
 	std::basic_string<WCHAR> msg = pText->m_message.c_str();
 
-	RECT rect = { int(pText->m_position.x), int(pText->m_position.y), int(pText->m_position.x + 150), int(pText->m_position.y + 150) };
+	RECT rect = { _int(pText->m_position.x), _int(pText->m_position.y), 
+				  _int(pText->m_position.x + pText->m_size.x), _int(pText->m_position.y + pText->m_size.y) };
+
 	m_pFont->DrawText(NULL, msg.c_str(), -1, &rect, format, pText->m_color);
 }

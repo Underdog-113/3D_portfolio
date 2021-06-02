@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "MainApp.h"
 
-#include "CameraManager.h"
-#include "CollisionManager.h"
-#include "GraphicsManager.h"
-#include "InputManager.h"
-#include "ShaderManager.h"
-#include "SoundManager.h"
  
-#include "TextManager.h"
-#include "ObjectFactory.h"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
 #include "Object.h"
-#include "FRC.h"
+ 
 
 
 #pragma region IncludeScenes

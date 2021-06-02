@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "UIShader.h"
 #include "DeviceManager.h"
-#include "CameraManager.h"
+ 
 #include "Object.h"
 
 USING(Engine)

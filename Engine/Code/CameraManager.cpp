@@ -1,10 +1,10 @@
 #include "EngineStdafx.h"
-#include "CameraManager.h"
+ 
 #include "Camera.h"
 
-#include "ObjectFactory.h"
+ 
 #include "Object.h"
-#include "InputManager.h"
+ 
  
 #include "WndApp.h"
 

@@ -4,9 +4,9 @@
 #include "Loading.h"
 
  
-#include "CameraManager.h"
-#include "ObjectFactory.h"
-#include "InputManager.h"
+ 
+ 
+ 
 
 #include "EmptyObject.h"
 

@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
 #include "Object.h"
 #include "DataStore.h"
-#include "FRC.h"
-#include "TextManager.h"
+ 
+ 
 
 USING(Engine)
 CTransformC::CTransformC(void)  
@@ -36,8 +36,11 @@ void CTransformC::Awake(void)
 void CTransformC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+	UpdateWorldMatrix();
 
-	
+	m_lastRotMatrix			= m_rotMatrix;
+	m_lastWorldMat			= m_worldMat;
+	m_lastWorldMatNoScale	= m_worldMatNoScale;
 }
 
 void CTransformC::FixedUpdate(SP(CComponent) spThis)
@@ -46,6 +49,28 @@ void CTransformC::FixedUpdate(SP(CComponent) spThis)
 
 void CTransformC::Update(SP(CComponent) spThis)
 {
+	if (m_spParent && m_spParent->GetOwner() == nullptr)
+	{
+		m_lastRotMatrix			*= m_spParent->GetLastRotMatrix();
+		m_lastWorldMatNoScale	*= m_spParent->GetLastWorldMatrixNoScale();
+		m_lastWorldMat			*= m_spParent->GetLastWorldMatrixNoScale();
+
+		_quat rotQuat;
+		D3DXQuaternionRotationMatrix(&rotQuat, &m_lastRotMatrix);
+		D3DXQuaternionNormalize(&rotQuat, &rotQuat);
+
+		_float3 finalRotation = GET_MATH->QuatToRad(rotQuat);
+		if (abs(finalRotation.x) < EPSILON)
+			finalRotation.x = 0;
+		if (abs(finalRotation.z) < EPSILON)
+			finalRotation.z = 0;
+
+		//m_position += m_spParent->GetPosition();
+		//SetRotation(GetRotation() + m_spParent->GetRotation());
+		m_position = _float3(m_worldMatNoScale._41, m_worldMatNoScale._42, m_worldMatNoScale._43);
+		SetRotation(finalRotation);
+		m_spParent.reset();
+	}
 	Lerp();
 	SlerpXZ();
 }
@@ -157,15 +182,27 @@ void CTransformC::SetSizeZ(_float sizeZ)
 	m_size.z = sizeZ;
 }
 
-void CTransformC::SetForward(_float3 lookAt)
+void CTransformC::SetForward(_float3 forward)
 {
-	D3DXVec3Normalize(&lookAt, &lookAt);
+	D3DXVec3Normalize(&forward, &forward);
 
-	if (lookAt == m_forward)
+	if (forward == m_forward)
 		return;
 
-	m_forward = lookAt;
+	m_forward = forward;
 	UpdateRotation();
+}
+
+void CTransformC::SetForwardUp(_float3 forward, _float3 up)
+{
+	D3DXVec3Normalize(&forward, &forward);
+	D3DXVec3Normalize(&up, &up);
+
+	if (forward == m_forward && up == m_up)
+		return;
+
+	m_forward	= forward;
+	m_up		= up;
 }
 
 void CTransformC::AddPosition(_float3 position)
@@ -233,7 +270,7 @@ void CTransformC::AddSizeZ(_float adder)
 }
 #pragma endregion
 
-#pragma region Move
+#pragma region Interface
 void CTransformC::Lerp(void)
 {
 	if (m_lerpOn)
@@ -400,8 +437,16 @@ void CTransformC::UpdateRotation(void)
 	}
 }
 
+void CTransformC::UpdateRotationWithUp(void)
+{
+}
+
 void CTransformC::UpdateWorldMatrix(void)
 {
+	m_lastRotMatrix			= m_rotMatrix;
+	m_lastWorldMat			= m_worldMat;
+	m_lastWorldMatNoScale	= m_worldMatNoScale;
+
 	_mat rotateX, rotateY, rotateZ, size, translation, result;
 
 	D3DXMatrixRotationX(&rotateX, m_rotation.x);
@@ -419,6 +464,12 @@ void CTransformC::UpdateWorldMatrix(void)
 	m_rotMatrix			= rotateX * rotateY * rotateZ;
 	m_worldMat			= size * rotateX * rotateY * rotateZ * translation;
 	m_worldMatNoScale	= rotateX * rotateY * rotateZ * translation;
+
+	if(m_spParent)
+	{
+		m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
+		m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
+	}
 }
 
 void CTransformC::UpdateParentMatrix(const _mat * pMat)

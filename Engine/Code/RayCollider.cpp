@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "RayCollider.h"
-#include "InputManager.h"
+ 
 #include "Scene.h"
  
 #include "Object.h"

@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "DeviceManager.h"
-#include "GraphicsManager.h"
-#include "ShaderManager.h"
+ 
+ 
 #include "Shader.h"
  
 #include "Scene.h"

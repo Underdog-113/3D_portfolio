@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "Object.h"
 #include "Layer.h"
-#include "ObjectFactory.h"
+ 
 USING(Engine)
 
 CObject::CObject(void)
