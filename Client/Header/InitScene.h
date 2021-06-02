@@ -2,7 +2,6 @@
 #define INITSCENE_H
 
 #include "Scene.h"
-
 class CLoading;
 class CInitScene final : public Engine::CScene
 {

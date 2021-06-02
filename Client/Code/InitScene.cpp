@@ -2,6 +2,12 @@
 #include "InitScene.h"
 
 #include "Loading.h"
+
+ 
+ 
+ 
+ 
+
 #include "EmptyObject.h"
 
 #include "DataStore.h"
@@ -16,8 +22,6 @@
 #include "YongScene.h"
 #include "DongScene.h"
 #pragma endregion
-
-
 
 CInitScene::CInitScene()
 {

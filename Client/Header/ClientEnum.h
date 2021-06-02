@@ -10,12 +10,7 @@ enum class ESceneID
 
 enum class EComponentID
 {
-	Default				= 0 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	Text = 1 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	Image = 2 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	Button = 3 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	Slider = 4 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	ScrollView = 5 + (_uint)Engine::EComponentID::NumOfEngineComponentID
+	Default				= 0 + (_uint)Engine::EComponentID::NumOfEngineComponentID
 };
 
 

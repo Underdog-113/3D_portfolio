@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DongScene.h"
-#include "TextComponent.h"
+
 
 CDongScene::CDongScene()
 {
@@ -33,15 +33,6 @@ void CDongScene::Awake(_int numOfLayers)
 
 void CDongScene::Start(void)
 {
-	__super::Start();
-	{
-		SP(Engine::CObject) spEmptyObject
-			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-		
-		spEmptyObject->AddComponent<CTextComponent>()->SetText(L"Test");
-
-	}
-
 }
 
 void CDongScene::FixedUpdate(void)

@@ -13,7 +13,15 @@
 
 #pragma region SubEngineIncludes
 #include "DeviceManager.h"
+
+#include "DataStore.h"
+#include "MeshStore.h"
+#include "TextureStore.h"
+
 #include "WndApp.h"
+ 
+
+ 
 #pragma endregion
 
 #include "MainApp.h"
