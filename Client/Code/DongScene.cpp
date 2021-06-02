@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DongScene.h"
-
+#include "TextComponent.h"
 
 CDongScene::CDongScene()
 {
@@ -11,7 +11,7 @@ CDongScene::~CDongScene()
 {
 }
 
-Engine::CScene * CDongScene::Create(void)
+Engine::CScene* CDongScene::Create(void)
 {
 	CDongScene* pInstance = new CDongScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -33,6 +33,12 @@ void CDongScene::Awake(_int numOfLayers)
 
 void CDongScene::Start(void)
 {
+	__super::Start();
+
+	SP(Engine::CObject) spEmptyObject
+		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::UI, L"Text0");
+	spEmptyObject->AddComponent<CTextComponent>()->AddFontData(L"ABS", 5,5, 10, D3DXCOLOR(1, 1, 1, 1));
+
 }
 
 void CDongScene::FixedUpdate(void)

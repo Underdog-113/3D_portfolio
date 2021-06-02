@@ -17,12 +17,12 @@ public:
 
 	void		OnDestroy			(void);
 
-	void		AddText				(std::wstring textKey, std::wstring msg, 
-									 D3DXVECTOR3 position, D3DXCOLOR color);
+	_Text*		AddText				(std::wstring textKey, std::wstring msg,
+									 _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color);
 
-	void		ResetText			(std::wstring textKey, std::wstring msg, _float3 position, D3DXCOLOR color);
+	void		ResetText			(std::wstring textKey, std::wstring msg, _float2 position, D3DXCOLOR color);
 	void		RewriteText			(std::wstring textKey, std::wstring msg);
-	void		MoveText			(std::wstring textKey, _float3 position);
+	void		MoveText			(std::wstring textKey, _float2 position);
 	void		ChangeColorText		(std::wstring textKey, D3DXCOLOR color);
 	void		DeleteText			(std::wstring textKey);
 

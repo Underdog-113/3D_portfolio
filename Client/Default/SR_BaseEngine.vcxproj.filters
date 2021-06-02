@@ -46,6 +46,21 @@
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
       <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI">
+      <UniqueIdentifier>{37feef76-1b1c-47f2-8dab-d7a1ae89ab14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\00.Text">
+      <UniqueIdentifier>{c30df8a1-6449-462e-8a57-4af7daa24c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\01.DebugText">
+      <UniqueIdentifier>{80481ede-5365-4e05-8262-139141abbdc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI">
+      <UniqueIdentifier>{89f0f156-f731-4fbc-ac36-6c85f0e7980d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\00.TextObject">
+      <UniqueIdentifier>{998ab66f-d8f4-4bc5-bd11-a278adc11acc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -102,6 +117,15 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\TextComponent.h">
+      <Filter>03.Component\00.UI\00.Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DebugTextComponent.h">
+      <Filter>03.Component\00.UI\01.DebugText</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TextObject.h">
+      <Filter>02.Objects\00.UI\00.TextObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -136,6 +160,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TextComponent.cpp">
+      <Filter>03.Component\00.UI\00.Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DebugTextComponent.cpp">
+      <Filter>03.Component\00.UI\01.DebugText</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TextObject.cpp">
+      <Filter>02.Objects\00.UI\00.TextObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

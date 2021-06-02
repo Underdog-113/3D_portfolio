@@ -4,6 +4,7 @@
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "Camera.h"
+#include "TextObject.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -90,9 +91,12 @@ void CStaticScene::InitSettings(void)
 
 void CStaticScene::InitPrototypes(void)
 {
-	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
+	SP(Engine::CEmptyObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spEmptyObjectPrototype);
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
+
+	SP(CTextObject) spTextObject(CTextObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTextObject);
 }

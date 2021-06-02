@@ -10,7 +10,9 @@ enum class ESceneID
 
 enum class EComponentID
 {
-	Default				= 0 + (_uint)Engine::EComponentID::NumOfEngineComponentID
+	Default				= 0 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
+	DebugText			= 1 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
+	Text				= 2 + (_uint)Engine::EComponentID::NumOfEngineComponentID
 };
 
 
