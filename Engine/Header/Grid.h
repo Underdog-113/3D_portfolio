@@ -12,7 +12,7 @@ private:
 								   ~CGrid				(void);
 
 public:
-	static		SP(CGrid)			Create				(_bool isStatic);
+	static		SP(CGrid)			Create				(_bool isStatic, CScene* pScene);
 
 				SP(CObject)			MakeClone			(void) override;
 		

@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "Object.h"
 #include "Layer.h"
-#include "ObjectFactory.h"
+ 
 USING(Engine)
 
 CObject::CObject(void)
@@ -122,6 +122,7 @@ void CObject::InitClone(SP(CObject) spClone)
 	spClone->SetDataID(m_dataID);
 	spClone->SetLayerID(m_layerID);
 	spClone->SetIsEnabled(m_isEnabled);
+	spClone->SetScene(m_pScene);
 	
 	for (auto& component : m_mComponents)
 	{

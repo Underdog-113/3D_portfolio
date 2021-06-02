@@ -6,15 +6,20 @@
 BEGIN(Engine)
 class ENGINE_DLL CDataStore final : public CResourceStore
 {
-	DECLARE_SINGLETON(CDataStore)
+private:
+	explicit							CDataStore			(void);
+	virtual							   ~CDataStore			(void);
 public:
+	static		CDataStore*				Create				(void);
+				void					Free				(void);
+
 				void					Awake				(void) override;
 				void					Start				(void) override;
 				void					OnDestroy			(void) override;
 
 				void					ClearCurResource	(void) override;
 
-				void					InitDataForScene	(std::wstring curScene);
+				void					InitDataForScene	(std::wstring curScene, _bool isStatic = false);
 				void					InitDataMap			(_uint numOfDataID);
 
 				void					AddDataSection		(std::wstring sectionKey, _uint ID);
@@ -32,14 +37,12 @@ private:
 	friend		std::wstringstream&		operator >>			(std::wstringstream& in, _float2& float3);
 
 private:
-	//VariableKey, KeyValue
 	typedef std::unordered_map<std::wstring, std::wstring>	_VarKeyMap;
-	//FileNameKey
 	typedef std::unordered_map<std::wstring, _VarKeyMap>	_FileKeyMap;
-	//DataKey
-	_FileKeyMap*	m_mpCurDataMap;
-	_FileKeyMap*	m_mpStaticDataMap;
-	_uint			m_numOfSection;
+				_FileKeyMap*	m_mpCurDataMap;
+	static		_FileKeyMap*	m_s_mpStaticDataMap;
+				_uint			m_numOfSection;
+	static		_uint			m_s_usage;
 
 	std::vector<std::wstring> m_vHashKey;
 	
@@ -51,7 +54,7 @@ public:
 	{
 		_FileKeyMap** ppDataMap = nullptr;
 		if (isStatic)
-			ppDataMap = &m_mpStaticDataMap;
+			ppDataMap = &m_s_mpStaticDataMap;
 		else
 			ppDataMap = &m_mpCurDataMap;
 

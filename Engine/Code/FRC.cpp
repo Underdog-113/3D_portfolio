@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
-#include "FRC.h"
-#include "TextManager.h"
+ 
+ 
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CFRC)

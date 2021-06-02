@@ -12,10 +12,11 @@ CGrid::~CGrid()
 {
 }
 
-SP(CGrid) CGrid::Create(_bool isStatic)
+SP(CGrid) CGrid::Create(_bool isStatic, CScene* pScene)
 {
 	SP(CGrid) spInstance(new CGrid, SmartDeleter<CGrid>);
 	spInstance->SetIsStatic(isStatic);
+	spInstance->SetScene(pScene);
 	spInstance->Awake();
 
 	return spInstance;

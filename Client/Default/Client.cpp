@@ -19,13 +19,13 @@
 #include "TextureStore.h"
 
 #include "WndApp.h"
-#include "FRC.h"
+ 
 
-#include "TextManager.h"
+ 
 #pragma endregion
 
 #include "MainApp.h"
-#include "InputManager.h"
+ 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -36,24 +36,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(7946);
 	
 #pragma region SubEnginesAwake
-	Engine::CDataStore::GetInstance()->Awake();
-	Engine::CDataStore::GetInstance()->InitDataMap((_uint)EDataID::NumOfDataID);
-	Engine::CDataStore::GetInstance()->AddDataSection(L"BasicObject", (_uint)EDataID::BasicObject);
-	Engine::CDataStore::GetInstance()->AddDataSection(L"Player", (_uint)EDataID::Player);
-	Engine::CDataStore::GetInstance()->AddDataSection(L"Scene", (_uint)EDataID::Scene);
-	Engine::CDataStore::GetInstance()->AddDataSection(L"Camera", (_uint)EDataID::Camera);
-	Engine::CDataStore::GetInstance()->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
-	Engine::CDataStore::GetInstance()->AddDataSection(L"UI", (_uint)EDataID::UI);
-
 	Engine::CFRC::GetInstance()->Awake();
 	Engine::CWndApp::GetInstance()->Awake();
 	Engine::CDeviceManager::GetInstance()->Awake();
-	Engine::CTextureStore::GetInstance()->Awake();
-	Engine::CMeshStore::GetInstance()->Awake();
-	CMath::CMathHelper::GetInstance();
 	Engine::CTextManager::GetInstance()->Awake();
+
+	CMath::CMathHelper::GetInstance();
 #pragma endregion
 
 #pragma region SubEnginesStart
@@ -61,9 +52,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Engine::CWndApp::GetInstance()->Start(hInstance, nCmdShow);
 	Engine::CDeviceManager::GetInstance()->Start();
 	Engine::CFRC::GetInstance()->Start();
-	Engine::CTextureStore::GetInstance()->Start();
-	Engine::CDataStore::GetInstance()->Start();
-	Engine::CMeshStore::GetInstance()->Start();
 	Engine::CTextManager::GetInstance()->Start();
 #pragma endregion
 
@@ -140,12 +128,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 #pragma region SubengineDestroy
-	Engine::CTextureStore::GetInstance()->DestroyInstance();
-	Engine::CMeshStore::GetInstance()->DestroyInstance();
 	Engine::CDeviceManager::GetInstance()->DestroyInstance();
 	Engine::CWndApp::GetInstance()->DestroyInstance();
 	Engine::CFRC::GetInstance()->DestroyInstance();
-	Engine::CDataStore::GetInstance()->DestroyInstance();
 	CMath::CMathHelper::GetInstance()->DestroyInstance();
 	Engine::CTextManager::GetInstance()->DestroyInstance();
 #pragma endregion

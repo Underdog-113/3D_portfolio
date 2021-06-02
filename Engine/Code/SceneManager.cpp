@@ -1,14 +1,14 @@
 #include "EngineStdafx.h"
 #include "SceneManager.h"
 #include "Scene.h"
-#include "ObjectFactory.h"
+ 
 #include "MeshStore.h"
 #include "TextureStore.h"
 #include "DataStore.h"
 #include "Object.h"
 #include "WndApp.h"
-#include "FRC.h"
-#include "CameraManager.h"
+ 
+ 
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CSceneManager)
@@ -23,7 +23,7 @@ void CSceneManager::Start(void)
 
 void CSceneManager::FixedUpdate(void)
 {
-	if (m_pCurScene != nullptr && m_pCurScene->GetEnable())
+	if (m_pCurScene != nullptr && m_pCurScene->GetIsEnabled())
 	{
 		m_pCurScene->FixedUpdate();
 	}
@@ -32,7 +32,7 @@ void CSceneManager::FixedUpdate(void)
 void CSceneManager::Update(void)
 {
 	m_sceneChanged = false;
-	if (m_pCurScene != nullptr && m_pCurScene->GetEnable())
+	if (m_pCurScene != nullptr && m_pCurScene->GetIsEnabled())
 	{
 		m_pCurScene->Update();
 	}
@@ -40,7 +40,7 @@ void CSceneManager::Update(void)
 
 void CSceneManager::LateUpdate(void)
 {
-	if (m_pCurScene != nullptr && m_pCurScene->GetEnable())
+	if (m_pCurScene != nullptr && m_pCurScene->GetIsEnabled())
 	{
 		m_pCurScene->LateUpdate();
 	}
@@ -50,11 +50,7 @@ void CSceneManager::LateUpdate(void)
 
 void CSceneManager::OnDestroy(void)
 {
-	while (m_sScene.size() != 0)
-	{
-		m_sScene.top()->Free();
-		m_sScene.pop();
-	}
+	m_pCurScene->Free();
 }
 
 void CSceneManager::OnEnable(void)
@@ -66,32 +62,21 @@ void CSceneManager::OnDisable(void)
 }
 
 
-void CSceneManager::SceneChange(CScene* pScene, _bool alreadyStarted, _bool deleteCurScene/* = true */)
+void CSceneManager::SceneChange(CScene* pScene)
 {
 	CFRC::GetInstance()->OnDisable();
-	if (m_pCurScene && deleteCurScene)
-	{
-		m_sScene.top()->Free();
-		//CObjectFactory::GetInstance()->ClearCurPrototype();
-		//CMeshStore::GetInstance()->ClearCurResource();
-		//CTextureStore::GetInstance()->ClearCurResource();
-		//CDataStore::GetInstance()->ClearCurResource();
-		m_sScene.pop();
-	}
-	else if (m_pCurScene)
-	{
-		m_pCurScene->SetEnable(false);
-		m_pPrevScene = m_pCurScene;
-	}
+	if (m_pCurScene)
+		m_pCurScene->Free();
 
-	m_sScene.push(pScene);
 	m_pCurScene = pScene;
-	
-	if(alreadyStarted == false)
+
+	if(m_pCurScene->GetIsStarted() == false)
 		m_pCurScene->Start();
 
 	CFRC::GetInstance()->OnEnable();
+	CCameraManager::GetInstance()->SetMainCamera(CCameraManager::GetInstance()->GetCamera(m_pCurScene->GetObjectKey() + L"BasicCamera"));
 	m_sceneChanged = true;
+
 }
 
 void CSceneManager::OrganizeScene(_bool deleteCurScene)

@@ -1,11 +1,11 @@
 #include "EngineStdafx.h"
-#include "CollisionManager.h"
+ 
 #include "SphereCollider.h"
 #include "Object.h"
 #include "CollisionHelper.h"
 #include "DataStore.h"
-#include "FRC.h"
-#include "TextManager.h"
+ 
+ 
 
 
 USING(Engine)
@@ -28,8 +28,6 @@ void CCollisionManager::Start(_int numOfColliderID)
 		std::vector<_int> collisionMap;
 		m_vCollisionMap.emplace_back(collisionMap);
 	}
-
-	InitCollisionMap();
 }
 
 void CCollisionManager::FixedUpdate(void)
@@ -218,13 +216,13 @@ void CCollisionManager::InitCollisionMap(void)
 	{
 		_int numOfLayerToCheck = 0;
 		std::wstring varKey = L"numOfLayerToCheck" + std::to_wstring(i);
-		GET_VALUE(true, m_dataID, m_objectKey, varKey, numOfLayerToCheck);
+		GET_CUR_SCENE->GET_VALUE(true, m_dataID, m_objectKey, varKey, numOfLayerToCheck);
 
 		for (_int j = 0; j < numOfLayerToCheck; ++j)
 		{
 			_int checkLayer = -1;
 			varKey = L"Layer" + std::to_wstring(i) + L"_Check" + std::to_wstring(j);
-			GET_VALUE(true, m_dataID, m_objectKey, varKey, checkLayer);
+			GET_CUR_SCENE->GET_VALUE(true, m_dataID, m_objectKey, varKey, checkLayer);
 
 			m_vCollisionMap[i].push_back(checkLayer);
 		}

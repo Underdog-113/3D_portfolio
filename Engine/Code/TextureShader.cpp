@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "TextureShader.h"
 #include "DeviceManager.h"
-#include "SceneManager.h"
+ 
 #include "Scene.h"
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
@@ -115,35 +115,19 @@ void CTextureShader::RenderStaticMesh(CGraphicsC * pGC, _int index)
 {
 	CStaticMesh* pSM = dynamic_cast<CStaticMesh*>(pGC->GetMesh()->GetMeshDatas()[index]);
 
-	if (pSM->GetTexList().size() != 0)
+
+	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
-		for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
-		{
-			
-			_TexData* pTexData = CTextureStore::GetInstance()->GetTextureData(RemoveExtension(pSM->GetTexList()[i]));
+		_TexData* pTexData = pGC->GetTexture()->GetTexData()[index][i];
 
-			if (pTexData != nullptr)
-				GET_DEVICE->SetTexture(0, pTexData->pTexture);
-			else
-				GET_DEVICE->SetTexture(0, nullptr);
+		if (pTexData != nullptr)
+			GET_DEVICE->SetTexture(0, pTexData->pTexture);
+		else
+			GET_DEVICE->SetTexture(0, nullptr);
 
-			pSM->GetMesh()->DrawSubset(i);
-		}
+		pSM->GetMesh()->DrawSubset(i);
 	}
-	else
-	{
-		for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
-		{
-			_TexData* pTexData = pGC->GetTexture()->GetTexData()[index][i];
 
-			if (pTexData != nullptr)
-				GET_DEVICE->SetTexture(0, pTexData->pTexture);
-			else
-				GET_DEVICE->SetTexture(0, nullptr);
-
-			pSM->GetMesh()->DrawSubset(i);
-		}
-	}
 }
 
 void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
@@ -174,28 +158,17 @@ void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
 		meshContainer->pOriMesh->UnlockVertexBuffer();
 
-		if (pDM->GetTexList().size() != 0)
-		{
-			for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
-			{
-				_TexData* pTexData = CTextureStore::GetInstance()->GetTextureData(RemoveExtension(pDM->GetTexList()[meshContainer->texIndexStart + i]));
-				GET_DEVICE->SetTexture(0, pTexData->pTexture);
 
-				meshContainer->MeshData.pMesh->DrawSubset(i);
-			}
-		}
-		else
+		const std::vector<std::vector<_TexData*>>& pTexData = pGC->GetTexture()->GetTexData();
+		for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
 		{
-			const std::vector<std::vector<_TexData*>>& pTexData = pGC->GetTexture()->GetTexData();
-			for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
-			{
-				if (pTexData[index][i] != nullptr)
-					GET_DEVICE->SetTexture(0, pTexData[index][i]->pTexture);
-				else
-					GET_DEVICE->SetTexture(0, nullptr);
+			if (pTexData[index][i] != nullptr)
+				GET_DEVICE->SetTexture(0, pTexData[index][i]->pTexture);
+			else
+				GET_DEVICE->SetTexture(0, nullptr);
 
-				meshContainer->MeshData.pMesh->DrawSubset(i);
-			}
+			meshContainer->MeshData.pMesh->DrawSubset(i);
 		}
+
 	}
 }

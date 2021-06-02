@@ -69,7 +69,7 @@ private:
 	GETTOR_SETTOR   (HWND,				m_hWnd,				NULL,					HWnd)
 
 	GETTOR			(std::wstring,		m_className,		L"",					ClassName)
-	GETTOR			(std::wstring,		m_windowName,		L"",					WindowName)
+	GETTOR_SETTOR	(std::wstring,		m_windowName,		L"",					WindowName)
 
 	GETTOR			(_int,				m_wndWidth,			0,						WndWidth)
 	GETTOR			(_int,				m_wndHeight,		0,						WndHeight)

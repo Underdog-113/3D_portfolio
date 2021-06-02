@@ -2,7 +2,7 @@
 #include "Layer.h"
 #include "Object.h"
 #include "Scene.h"
-#include "SceneManager.h"
+ 
 
 USING(Engine)
 CLayer::CLayer(void)

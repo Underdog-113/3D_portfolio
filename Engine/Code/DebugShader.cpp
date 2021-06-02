@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "DebugShader.h"
-#include "CameraManager.h"
+ 
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
 

@@ -3,7 +3,7 @@
 #include "DeviceManager.h"
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
-#include "CameraManager.h"
+ 
 
 USING(Engine)
 CShader::CShader()
@@ -26,7 +26,7 @@ void CShader::PreRender(CGraphicsC * pGC)
 	//m_pShader->SetMatrix("ViewMatrix", &GET_MAIN_CAM->GetViewMatrix());
 	//m_pShader->SetMatrix("ProjMatrix", &GET_MAIN_CAM->GetProjMatrix());
 
-	GET_DEVICE->SetTransform(D3DTS_WORLD, &pGC->GetTransform()->GetWorldMatrix());
+	GET_DEVICE->SetTransform(D3DTS_WORLD, &pGC->GetTransform()->GetLastWorldMatrix());
 	GET_DEVICE->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
 	GET_DEVICE->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
 }

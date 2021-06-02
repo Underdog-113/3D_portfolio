@@ -1,5 +1,5 @@
 #include "EngineStdafx.h"
-#include "GraphicsManager.h"
+ 
 #include "MeshStore.h"
 #include "DataStore.h"
 #include "Object.h"
@@ -41,15 +41,16 @@ void CMeshC::Awake(void)
 		_bool isStatic			= m_pOwner->GetIsStatic();
 		_int dataID				= m_pOwner->GetDataID();
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
+		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
 		_int numOfMeshData;
-		GET_VALUE(isStatic, dataID, objectKey, L"numOfMeshData", numOfMeshData);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfMeshData", numOfMeshData);
 
 		std::wstring meshKey;
 		for (_int i = 0; i < numOfMeshData; ++i)
 		{
-			GET_VALUE(isStatic, dataID, objectKey, L"meshKey" + std::to_wstring(i), meshKey);
-			m_vMeshDatas.emplace_back(CMeshStore::GetInstance()->GetMeshData(meshKey));
+			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"meshKey" + std::to_wstring(i), meshKey);
+			m_vMeshDatas.emplace_back(pOwnerScene->GetMeshStore()->GetMeshData(meshKey));
 		}
 
 		GenMinMaxVtx();
@@ -67,9 +68,7 @@ void CMeshC::Start(SP(CComponent) spThis)
 		{
 			SP(CTextureC) spOwnerTexC = m_pOwner->GetComponent<CTextureC>();
 			for (auto& texName : m_vMeshDatas[i]->GetTexList())
-			{
 				spOwnerTexC->AddTexture(RemoveExtension(texName), i);
-			}
 		}
 	}
 }
@@ -109,7 +108,7 @@ void CMeshC::AddMeshData(CMeshData * pMeshData)
 
 void CMeshC::AddMeshData(std::wstring meshKey)
 {
-	m_vMeshDatas.emplace_back(CMeshStore::GetInstance()->GetMeshData(meshKey));
+	m_vMeshDatas.emplace_back(m_pOwner->GetScene()->GetMeshStore()->GetMeshData(meshKey));
 }
 
 

@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
-#include "ObjectFactory.h"
+ 
 #include "Object.h"
-#include "SceneManager.h"
+ 
 #include "Scene.h"
 #include "Layer.h"
 
@@ -14,13 +14,39 @@
 #pragma endregion
 
 USING(Engine)
-IMPLEMENT_SINGLETON(CObjectFactory)
+
+CObjectFactory::_PROTOTYPES CObjectFactory::m_s_mStaticPrototypes = {};
+_uint CObjectFactory::m_s_usage = 0;
+
+CObjectFactory::CObjectFactory(void)
+{
+}
+
+CObjectFactory::~CObjectFactory(void)
+{
+}
+
+CObjectFactory * CObjectFactory::Create(CScene* pOwnerScene)
+{
+	CObjectFactory* pInstance = new CObjectFactory;
+	pInstance->m_pOwnerScene = pOwnerScene;
+	pInstance->Awake();
+
+	++m_s_usage;
+
+	return pInstance;
+}
+
+void CObjectFactory::Free(void)
+{
+	--m_s_usage;
+	OnDestroy();
+	delete this;
+}
 
 void CObjectFactory::Awake(void)
 {
 	__super::Awake();
-
-	InitPrototypes();
 }
 
 void CObjectFactory::Start(void)
@@ -29,13 +55,17 @@ void CObjectFactory::Start(void)
 
 void CObjectFactory::OnDestroy(void)
 {
-	for (auto& object : m_mCurPrototypes)
-		object.second.reset();
+	for (auto& prototype : m_mCurPrototypes)
+		prototype.second.reset();
+	
 	m_mCurPrototypes.clear();
 
-	for (auto& object : m_mStaticPrototypes)
-		object.second.reset();
-	m_mStaticPrototypes.clear();
+	if (m_s_usage == 0)
+	{
+		for (auto& prototype : m_s_mStaticPrototypes)
+			prototype.second.reset();
+		m_s_mStaticPrototypes.clear();
+	}
 }
 
 void CObjectFactory::OnEnable(void)
@@ -54,7 +84,7 @@ HRESULT CObjectFactory::AddPrototype(SP(CObject) pPrototype)
 	_PROTOTYPES* pCurPrototypes = nullptr;
 
 	if (pPrototype->GetIsStatic())
-		pCurPrototypes = &m_mStaticPrototypes;
+		pCurPrototypes = &m_s_mStaticPrototypes;
 	else
 		pCurPrototypes = &m_mCurPrototypes;
 
@@ -73,15 +103,14 @@ HRESULT CObjectFactory::AddPrototype(SP(CObject) pPrototype)
 }
 
 SP(CObject) CObjectFactory::AddClone(const std::wstring & protoObjectKey,
-									 CScene* pScene,
 									 _bool isStatic,
-									 const std::wstring & name,
-									 _int layerTag)
+									 _int layerTag,
+									 const std::wstring & name)
 {
 	_PROTOTYPES* pCurPrototypes = nullptr;
 
 	if (isStatic)
-		pCurPrototypes = &m_mStaticPrototypes;
+		pCurPrototypes = &m_s_mStaticPrototypes;
 	else
 		pCurPrototypes = &m_mCurPrototypes;
 
@@ -104,13 +133,14 @@ SP(CObject) CObjectFactory::AddClone(const std::wstring & protoObjectKey,
 	if (layerID == UNDEFINED)
 		layerID = layerTag;
 
-	std::vector<CLayer*> const* pLayers = &pScene->GetLayers();
+	std::vector<CLayer*> const* pLayers = &m_pOwnerScene->GetLayers();
 	if (layerID < 0 || (_uint)layerID >= pLayers->size())
 	{
 		MSG_BOX(__FILE__, std::wstring(L"LayerID is out of range").c_str());
 		ABORT;
 	}
 	(*pLayers)[layerID]->AddGameObject(spClone);
+	spClone->SetScene(m_pOwnerScene);
 
 	if (name == L"")
 		spClone->SetBasicName();
@@ -143,20 +173,13 @@ void CObjectFactory::ClearCurPrototype(void)
 	m_mCurPrototypes.clear();
 }
 
-void CObjectFactory::InitPrototypes(void)
+
+CObjectFactory::_PROTOTYPES & CObjectFactory::GetCurPrototype(void)
 {
-	SP(CObject) spEmptyObjectPrototype(CEmptyObject::Create(true));
-	ADD_PROTOTYPE(spEmptyObjectPrototype);
+	return m_mCurPrototypes;
+}
 
-	SP(CCamera) spCameraPrototype(CCamera::Create());
-	Engine::ADD_PROTOTYPE(spCameraPrototype);
-
-	//SP(CObject) spBoundingVolumePrototype(CBoundingVolume::Create(true));
-	//ADD_PROTOTYPE(spBoundingVolumePrototype);
-	//
-	//SP(CObject) spDebugColliderPrototype(CDebugCollider::Create(true));
-	//ADD_PROTOTYPE(spDebugColliderPrototype);
-	//
-	//SP(CObject) spGridPrototype(CGrid::Create(true));
-	//ADD_PROTOTYPE(spGridPrototype);
+CObjectFactory::_PROTOTYPES & CObjectFactory::GetStaticPrototypes(void)
+{
+	return m_s_mStaticPrototypes;
 }

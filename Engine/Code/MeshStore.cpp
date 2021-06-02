@@ -10,7 +10,34 @@
 #include <filesystem>
 
 USING(Engine)
-IMPLEMENT_SINGLETON(CMeshStore)
+
+CMeshStore::_MeshMap CMeshStore::m_s_mStaticMeshData = {};
+_uint CMeshStore::m_s_usage = 0;
+
+CMeshStore::CMeshStore(void)
+{
+}
+
+CMeshStore::~CMeshStore(void)
+{
+}
+
+CMeshStore * CMeshStore::Create(void)
+{
+	CMeshStore* pInstance = new CMeshStore;
+	pInstance->Awake();
+
+	++m_s_usage;
+
+	return pInstance;
+}
+
+void CMeshStore::Free(void)
+{
+	--m_s_usage;
+	OnDestroy();
+	delete this;
+}
 
 void CMeshStore::Awake(void)
 {
@@ -26,13 +53,16 @@ void CMeshStore::Start(void)
 
 void CMeshStore::OnDestroy(void)
 {
-	for (auto& mesh : m_mStaticMeshData)
-		mesh.second->Free();
-	m_mStaticMeshData.clear();
-
 	for (auto& mesh : m_mCurSceneMeshData)
 		mesh.second->Free();
 	m_mCurSceneMeshData.clear();
+	
+	if (m_s_usage == 0)
+	{
+		for (auto& mesh : m_s_mStaticMeshData)
+			mesh.second->Free();
+		m_s_mStaticMeshData.clear();
+	}
 }
 
 void CMeshStore::ClearCurResource(void)
@@ -44,8 +74,8 @@ void CMeshStore::ClearCurResource(void)
 
 CMeshData* CMeshStore::GetMeshData(std::wstring meshKey)
 {
-	auto iter_find_static = m_mStaticMeshData.find(meshKey);
-	if (iter_find_static != m_mStaticMeshData.end())
+	auto iter_find_static = m_s_mStaticMeshData.find(meshKey);
+	if (iter_find_static != m_s_mStaticMeshData.end())
 		return iter_find_static->second->MakeClone();
 
 	auto iter_find_cur = m_mCurSceneMeshData.find(meshKey);
@@ -58,8 +88,9 @@ CMeshData* CMeshStore::GetMeshData(std::wstring meshKey)
 	return nullptr;
 }
 
-void CMeshStore::InitMeshForScene(std::wstring curScene)
+void CMeshStore::InitMeshForScene(std::wstring curScene, _bool isStatic)
 {
+	m_isStatic = isStatic;
 	InitResource(m_resourcePath + L"\\" + curScene);
 }
 
@@ -76,7 +107,7 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	{	
 		CStaticMesh* pNewStaticMesh = CStaticMesh::Create(filePath, fileName);
 		if (m_isStatic)
-			m_mStaticMeshData[pNewStaticMesh->GetMeshKey()] = pNewStaticMesh;
+			m_s_mStaticMeshData[pNewStaticMesh->GetMeshKey()] = pNewStaticMesh;
 		else
 			m_mCurSceneMeshData[pNewStaticMesh->GetMeshKey()] = pNewStaticMesh;
 	}
@@ -84,7 +115,7 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	{
 		CDynamicMesh* pNewDynamicMesh = CDynamicMesh::Create(filePath, fileName);
 		if (m_isStatic)
-			m_mStaticMeshData[pNewDynamicMesh->GetMeshKey()] = pNewDynamicMesh;
+			m_s_mStaticMeshData[pNewDynamicMesh->GetMeshKey()] = pNewDynamicMesh;
 		else
 			m_mCurSceneMeshData[pNewDynamicMesh->GetMeshKey()] = pNewDynamicMesh;
 	}

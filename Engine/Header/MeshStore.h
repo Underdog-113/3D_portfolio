@@ -7,16 +7,21 @@ BEGIN(Engine)
 class CMeshData;
 class ENGINE_DLL CMeshStore final : public CResourceStore
 {
-	DECLARE_SINGLETON(CMeshStore)
+private:
+	explicit					CMeshStore			(void);
+	virtual					   ~CMeshStore			(void);
 public:
+	static	CMeshStore*			Create				(void);
+			void				Free				(void);
+
 			void				Awake				(void) override;
 			void				Start				(void) override;
 			void				OnDestroy			(void) override;
 
 			void				ClearCurResource	(void) override;
 
-			CMeshData*				GetMeshData			(std::wstring meshKey);
-			void				InitMeshForScene	(std::wstring curScene);
+			CMeshData*			GetMeshData			(std::wstring meshKey);
+			void				InitMeshForScene	(std::wstring curScene, _bool isStatic = false);
 private:
 			void				InitResource		(std::wstring sourcePath) override;
 			void				ParsingMesh			(std::wstring filePath, 
@@ -25,9 +30,10 @@ private:
 
 private:
 	typedef std::unordered_map<std::wstring, CMeshData*> _MeshMap;
+				_MeshMap	m_mCurSceneMeshData;
+	static		_MeshMap	m_s_mStaticMeshData;
 	
-	GETTOR(_MeshMap,	m_mCurSceneMeshData,	{},		CurSceneMeshData)
-	GETTOR(_MeshMap,	m_mStaticMeshData,		{},		StaticMeshData)
+	static		_uint		m_s_usage;
 };
 END
 #endif // !MESHSTORE_H

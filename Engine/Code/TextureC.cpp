@@ -2,7 +2,7 @@
 #include "Object.h"
 #include "TextureStore.h"
 #include "DataStore.h"
-#include "FRC.h"
+ 
 USING(Engine)
 CTextureC::CTextureC()  
 {
@@ -36,21 +36,22 @@ void CTextureC::Awake(void)
 		_bool isStatic			= m_pOwner->GetIsStatic();
 		_int dataID				= m_pOwner->GetDataID();
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
+		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
 		_int numOfTexSet;
-		GET_VALUE(isStatic, dataID, objectKey, L"numOfMeshData", numOfTexSet);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfMeshData", numOfTexSet);
 
 		m_vTexData.resize(numOfTexSet);
 		for (_int i = 0; i < numOfTexSet; ++i)
 		{
 			_int numOfTex;
-			GET_VALUE(isStatic, dataID, objectKey, L"numOfTex_Set" + std::to_wstring(i), numOfTex);
+			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfTex_Set" + std::to_wstring(i), numOfTex);
 			m_numOfTex += numOfTex;
 			for (_int j = 0; j < numOfTex; ++j)
 			{
 				std::wstring texKey = L"textureKey" + std::to_wstring(i) + L'_' + std::to_wstring(j);
-				GET_VALUE(isStatic, dataID, objectKey, texKey, texKey);
-				m_vTexData[i].emplace_back(CTextureStore::GetInstance()->GetTextureData(texKey));
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, texKey, texKey);
+				m_vTexData[i].emplace_back(pOwnerScene->GetTextureStore()->GetTextureData(texKey));
 			}
 		}
 	}
@@ -113,16 +114,26 @@ void CTextureC::AddAlpha(_float alpha)
 
 void CTextureC::AddTexture(std::wstring const & textureKey, _int index)
 {
-	_size numOfMesh = m_pOwner->GetComponent<CMeshC>()->GetMeshDatas().size();
-	if(m_vTexData.size() != numOfMesh)
-		m_vTexData.resize(numOfMesh);
-
-
-	if(index < 0 || index >= numOfMesh)
+	SP(CMeshC) spOwnerMeshC;
+	if ((spOwnerMeshC = m_pOwner->GetComponent<CMeshC>()) != nullptr)
 	{
-		MSG_BOX(__FILE__, L"index is broken in AddTexture");
-		ABORT;
-	}
+		_size numOfMesh = spOwnerMeshC->GetMeshDatas().size();
+		if (m_vTexData.size() != numOfMesh)
+			m_vTexData.resize(numOfMesh);
 
-	m_vTexData[index].emplace_back(CTextureStore::GetInstance()->GetTextureData(textureKey));
+
+		if (index < 0 || index >= numOfMesh)
+		{
+			MSG_BOX(__FILE__, L"index is broken in AddTexture");
+			ABORT;
+		}
+	}
+	else
+	{
+		if (m_vTexData.size() == 0)
+			m_vTexData.resize(1);
+	}
+	
+
+	m_vTexData[index].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
 }

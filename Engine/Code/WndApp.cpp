@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "WndApp.h"
 #include "DataStore.h"
-#include "CameraManager.h"
+ 
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CWndApp)
@@ -14,7 +14,7 @@ void CWndApp::Awake(void)
 void CWndApp::Start(HINSTANCE hInstance, _int nCmdShow)
 {
 	m_className		= L"3D_Engine";
-	m_windowName	= L"A HAT IN TIME";
+	m_windowName	= L"ºØ±«3rd";
 	m_wndWidth		= 800;
 	m_wndHeight		= 600;
 	m_showCursor	= true;
@@ -89,8 +89,6 @@ bool CWndApp::CreateWndHandle(HINSTANCE hInstance, _int nCmdShow)
 	if (!m_hWnd)
 		return false;
 
-
-	
 	ShowWindow(m_hWnd, nCmdShow);
 	UpdateWindow(m_hWnd);
 

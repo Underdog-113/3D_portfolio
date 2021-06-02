@@ -4,7 +4,34 @@
 #include <fstream>
 
 USING(Engine)
-IMPLEMENT_SINGLETON(CDataStore);
+
+CDataStore::_FileKeyMap* CDataStore::m_s_mpStaticDataMap = nullptr;
+_uint CDataStore::m_s_usage = 0;
+
+CDataStore::CDataStore(void)
+{
+}
+
+CDataStore::~CDataStore(void)
+{
+}
+
+CDataStore * CDataStore::Create(void)
+{
+	CDataStore* pInstance = new CDataStore;
+	pInstance->Awake();
+
+	++m_s_usage;
+
+	return pInstance;
+}
+
+void CDataStore::Free(void)
+{
+	--m_s_usage;
+	OnDestroy();
+	delete this;
+}
 
 void CDataStore::Awake(void)
 {
@@ -21,7 +48,8 @@ void CDataStore::Start(void)
 void CDataStore::OnDestroy(void)
 {
 	delete[] m_mpCurDataMap;
-	delete[] m_mpStaticDataMap;
+	if (m_s_usage == 0)
+		delete[] m_s_mpStaticDataMap;
 }
 
 void CDataStore::ClearCurResource(void)
@@ -30,8 +58,9 @@ void CDataStore::ClearCurResource(void)
 		m_mpCurDataMap[i].clear();
 }
 
-void CDataStore::InitDataForScene(std::wstring curScene)
+void CDataStore::InitDataForScene(std::wstring curScene, _bool isStatic)
 {
+	m_isStatic = isStatic;
 	InitResource(m_resourcePath + L"\\" + curScene);
 }
 
@@ -40,15 +69,17 @@ void CDataStore::InitDataMap(_uint numOfDataID)
 	m_numOfSection		= numOfDataID;
 
 	m_mpCurDataMap		= new _FileKeyMap[numOfDataID];
-	m_mpStaticDataMap	= new _FileKeyMap[numOfDataID];
+
+	if(m_s_mpStaticDataMap == nullptr)
+		m_s_mpStaticDataMap	= new _FileKeyMap[numOfDataID];
 
 	m_vHashKey.resize(numOfDataID);
 
 
 	//엔진 쪽의 데이터 섹션
 	AddDataSection(L"Engine", (_uint)EDataID::Engine);
-	AddDataSection(L"Component", (_uint)EDataID::Component);
 	AddDataSection(L"Object", (_uint)EDataID::Object);
+	AddDataSection(L"Component", (_uint)EDataID::Component);
 }
 
 void CDataStore::AddDataSection(std::wstring sectionKey, _uint ID)
@@ -86,7 +117,7 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 				keyValue = GetKeyValue(line, symbolPos);
 
 				if (m_isStatic)
-					m_mpStaticDataMap[GetIndex(sectionKey)][objectKey][variableKey] = keyValue;
+					m_s_mpStaticDataMap[GetIndex(sectionKey)][objectKey][variableKey] = keyValue;
 				else
 					m_mpCurDataMap[GetIndex(sectionKey)][objectKey][variableKey] = keyValue;
 			}

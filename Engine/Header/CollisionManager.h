@@ -29,12 +29,10 @@ public:
 	_bool				CheckCollisionInstant	(CCollider* pCollider, _int checkingLayer);
 	std::vector<_int>&	GetLayersToCheck		(_int colliderID);
 	
-
-private:
-	
-	void				InitCollisionChecker	(void);
 	void				InitCollisionMap		(void);
 
+private:
+	void				InitCollisionChecker	(void);
 	void				CheckCollision			(CCollisionC* pCC);
 	
 private:
