@@ -54,17 +54,34 @@ void CTextManager::AddText(std::wstring textKey, std::wstring msg, D3DXVECTOR3 p
 {
 	_Text* pNewText = new _Text;
 
-	pNewText->m_message = msg;
-	pNewText->m_isVisible = true;
-	pNewText->m_position = position;
-	pNewText->m_color = color;
+	pNewText->m_message		= msg;
+	pNewText->m_isVisible	= true;
+	pNewText->m_position	= position;
+	pNewText->m_color		= color;
 
 	m_mTexts[textKey] = pNewText;
+}
+
+void CTextManager::ResetText(std::wstring textKey, std::wstring msg, _float3 position, D3DXCOLOR color)
+{
+	m_mTexts[textKey]->m_message	= msg;
+	m_mTexts[textKey]->m_position	= position;
+	m_mTexts[textKey]->m_color		= color;
 }
 
 void CTextManager::RewriteText(std::wstring textKey, std::wstring msg)
 {
 	m_mTexts[textKey]->m_message = msg;
+}
+
+void CTextManager::MoveText(std::wstring textKey, _float3 position)
+{
+	m_mTexts[textKey]->m_position = position;
+}
+
+void CTextManager::ChangeColorText(std::wstring textKey, D3DXCOLOR color)
+{
+	m_mTexts[textKey]->m_color = color;
 }
 
 void CTextManager::DeleteText(std::wstring textKey)
