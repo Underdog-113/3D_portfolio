@@ -1,5 +1,5 @@
-#ifndef YONGSCENE_H
-#define YONGSCENE_H
+#ifndef WOOSCENE_H
+#define WOOSCENE_H
 
 #include "Scene.h"
 class CWooScene final : public Engine::CScene

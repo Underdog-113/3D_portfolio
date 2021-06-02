@@ -197,6 +197,11 @@
     <ClInclude Include="..\Header\SliderComponent.h" />
     <ClInclude Include="..\Header\TextComponent.h" />
     <ClInclude Include="..\Header\UiManager.h" />
+    <ClInclude Include="..\Header\InitScene.h" />
+    <ClInclude Include="..\Header\JongScene.h" />
+    <ClInclude Include="..\Header\Loading.h" />
+    <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="Resource.h" />
@@ -217,6 +222,11 @@
     <ClCompile Include="..\Code\SliderComponent.cpp" />
     <ClCompile Include="..\Code\TextComponent.cpp" />
     <ClCompile Include="..\Code\UiManager.cpp" />
+    <ClCompile Include="..\Code\InitScene.cpp" />
+    <ClCompile Include="..\Code\JongScene.cpp" />
+    <ClCompile Include="..\Code\Loading.cpp" />
+    <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />

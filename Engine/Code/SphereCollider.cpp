@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "SphereCollider.h"
-#include "CollisionManager.h"
+ 
 #include "Object.h"
 
 USING(Engine)

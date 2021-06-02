@@ -2,15 +2,7 @@
 #include "Scene.h"
 #include "Layer.h"
 #include "Object.h"
-#include "SceneManager.h"
-#include "FRC.h"
-
-#include "DataStore.h"
-#include "MeshStore.h"
-#include "TextureStore.h"
-
-#include "ObjectFactory.h"
-#include "CameraManager.h"
+#include "WndApp.h"
 
 USING(Engine)
 CScene::CScene(void)
@@ -26,20 +18,25 @@ void CScene::Awake(_int numOfLayers)
 
 	InitLayers(numOfLayers);
 
-	std::wstring className = GetCurClassName(this);
 
-	CDataStore::GetInstance()->InitDataForScene(className);
-	CMeshStore::GetInstance()->InitMeshForScene(className);
-	CTextureStore::GetInstance()->InitTextureForScene(className);
+	m_objectKey			= GetCurClassName(this);
+	m_pObjectFactory	= CObjectFactory::Create(this);
+
+	m_pDataStore		= CDataStore::Create();
+	m_pMeshStore		= CMeshStore::Create();
+	m_pTextureStore		= CTextureStore::Create();
+	
+	SetWindowTextA(Engine::GET_HANDLE, WStrToStr(m_objectKey).c_str());
 }
 
 void CScene::Start(void)
 {
-	SP(CCamera) spCameraObject =
-		std::dynamic_pointer_cast<CCamera>(ADD_CLONE(L"Camera", this, true));
+	m_isStarted = true;
 
-	CCameraManager::GetInstance()->AddCamera(L"BasicCamera", spCameraObject);
-	CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
+	SP(CCamera) spCameraObject =
+		std::dynamic_pointer_cast<CCamera>(m_pObjectFactory->AddClone(L"Camera", true));
+
+	CCameraManager::GetInstance()->AddCamera(m_objectKey + L"BasicCamera", spCameraObject);
 }
 
 void CScene::FixedUpdate(void)
@@ -73,14 +70,34 @@ void CScene::OnDestroy(void)
 {
 	for (auto& layer : m_vLayers)
 		layer->Free();
+
+	if (m_isStarted)
+	{
+		CCameraManager::GetInstance()->DeleteCamera(m_objectKey + L"BasicCamera");
+		CCameraManager::GetInstance()->SetMainCamera(nullptr);
+	}
+
+	m_pObjectFactory->Free();
+	m_pObjectFactory = nullptr;
+
+	m_pDataStore->Free();
+	m_pDataStore = nullptr;
+
+	m_pMeshStore->Free();
+	m_pMeshStore = nullptr;
+
+	m_pTextureStore->Free();
+	m_pTextureStore = nullptr;
 }
 
 void CScene::OnEnable(void)
 {
+	m_isEnabled = true;
 }
 
 void CScene::OnDisable(void)
 {
+	m_isEnabled = false;
 }
 
 SP(CObject) CScene::FindObjectByName(std::wstring name)
@@ -120,6 +137,17 @@ _uint CScene::FindObjectsWithKey(std::wstring objectKey, std::vector<SP(CObject)
 		}
 	}
 	return (_uint)gameObjects.size();
+}
+
+void CScene::SetIsEnabled(_bool isEnabled)
+{
+	if (m_isEnabled == isEnabled)
+		return;
+
+	if (isEnabled == true)
+		OnEnable();
+	else
+		OnDisable();
 }
 
 void CScene::InitLayers(_int numOfLayers)

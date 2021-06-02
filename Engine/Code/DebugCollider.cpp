@@ -16,10 +16,11 @@ CDebugCollider::~CDebugCollider()
 {
 }
 
-SP(CDebugCollider) CDebugCollider::Create(_bool isStatic)
+SP(CDebugCollider) CDebugCollider::Create(_bool isStatic, CScene* pScene)
 {
 	SP(CDebugCollider) spInstance(new CDebugCollider, Engine::SmartDeleter<CDebugCollider>);
 	spInstance->SetIsStatic(true);
+	spInstance->SetScene(pScene);
 	spInstance->Awake();
 
 	return spInstance;

@@ -3,12 +3,12 @@
 
 #include "Frustum.h"
 
-#include "InputManager.h"
+ 
 #include "WndApp.h"
 
-#include "FRC.h"
+ 
 #include "DebugCollider.h"
-#include "TextManager.h"
+ 
 
 
 USING(Engine)
@@ -24,10 +24,11 @@ CCamera::~CCamera()
 	OnDestroy();
 }
 
-SP(CCamera) CCamera::Create(void)
+SP(CCamera) CCamera::Create(_bool isStatic, CScene* pScene)
 {
 	SP(CCamera) spInstance(new CCamera, SmartDeleter<CCamera>);
-	spInstance->SetIsStatic(true);
+	spInstance->SetIsStatic(isStatic);
+	spInstance->SetScene(pScene);
 	spInstance->Awake();
 
 	return spInstance;
@@ -134,14 +135,14 @@ void CCamera::LateUpdate(void)
 	}
 
 	UpdateProjMat();
-
-	
+	UpdateOrthoMat();
 }
 
 void CCamera::OnDestroy(void)
 {
 	__super::OnDestroy();
 	
+	m_pFrustum->Free();
 }
 
 void CCamera::OnEnable(void)
@@ -332,6 +333,11 @@ void CCamera::UpdateProjMat(void)
 
 		m_projHasChanged = false;
 	}
+}
+
+void CCamera::UpdateOrthoMat(void)
+{
+	D3DXMatrixOrthoLH(&m_orthoMat, _float(GET_WND_WIDTH), _float(GET_WND_HEIGHT), 0.f, 1.f);
 }
 
 void CCamera::CameraRotate(void)

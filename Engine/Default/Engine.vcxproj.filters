@@ -145,36 +145,6 @@
     <Filter Include="03.Components">
       <UniqueIdentifier>{0950a984-14a0-4620-8b54-76f9cf28443e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\01.GraphicsComponent">
-      <UniqueIdentifier>{aae8af78-9aba-43e0-912e-5e8c59a48eb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\01.GraphicsComponent\00.Mesh">
-      <UniqueIdentifier>{20bbbff3-bb4c-4660-aed0-5af5927b31d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\01.GraphicsComponent\01.Texture">
-      <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\01.GraphicsComponent\02.Bitmap">
-      <UniqueIdentifier>{7157f715-fca2-4c5e-bcc4-6b6ff0b96dd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.Transform">
-      <UniqueIdentifier>{b8a70213-5be9-4c86-88ce-81f9e0dba806}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\02.PhysicsComponent">
-      <UniqueIdentifier>{8471112c-b5b5-499a-be5c-825cfbca38f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\02.PhysicsComponent\00.RigidBody">
-      <UniqueIdentifier>{94baa3bc-ecc9-4403-9159-d7d86111f867}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\02.PhysicsComponent\01.Collision">
-      <UniqueIdentifier>{445b6595-61a6-4d9f-bb3d-b331677c55b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\03.Camera">
-      <UniqueIdentifier>{00053be2-546b-4e96-b604-c531175c0889}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\04.Debug">
-      <UniqueIdentifier>{6c7de482-7414-4dad-b41e-2e0db8310d9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.DebugObject">
       <UniqueIdentifier>{e5f6a46e-0d11-412a-a026-2f9c4dd35f70}</UniqueIdentifier>
     </Filter>
@@ -193,11 +163,44 @@
     <Filter Include="00.Engine\01.Graphics\02.Shader\01.Shaders\UIShader">
       <UniqueIdentifier>{3ae9e793-84be-4eff-8295-e81743d27d1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\05.FadeInOut">
-      <UniqueIdentifier>{ddde980e-02dd-4d21-9898-c6eac442ec6f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Camera">
       <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System">
+      <UniqueIdentifier>{90022eaf-071b-41de-997d-8072e059f8bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\01.Effect">
+      <UniqueIdentifier>{ff0785b7-2eb6-45db-b700-6eadef6552e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\00.Transform">
+      <UniqueIdentifier>{b8a70213-5be9-4c86-88ce-81f9e0dba806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent">
+      <UniqueIdentifier>{aae8af78-9aba-43e0-912e-5e8c59a48eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.Mesh">
+      <UniqueIdentifier>{20bbbff3-bb4c-4660-aed0-5af5927b31d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\01.Texture">
+      <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Bitmap">
+      <UniqueIdentifier>{7157f715-fca2-4c5e-bcc4-6b6ff0b96dd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\02.PhysicsComponent">
+      <UniqueIdentifier>{8471112c-b5b5-499a-be5c-825cfbca38f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\02.PhysicsComponent\00.RigidBody">
+      <UniqueIdentifier>{94baa3bc-ecc9-4403-9159-d7d86111f867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\02.PhysicsComponent\01.Collision">
+      <UniqueIdentifier>{445b6595-61a6-4d9f-bb3d-b331677c55b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\03.Debug">
+      <UniqueIdentifier>{6c7de482-7414-4dad-b41e-2e0db8310d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\01.Effect\00.FadeInOut">
+      <UniqueIdentifier>{ddde980e-02dd-4d21-9898-c6eac442ec6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -301,22 +304,22 @@
       <Filter>00.Engine\01.Graphics\03.Camera\01.Frustum</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TransformC.cpp">
-      <Filter>03.Components\00.Transform</Filter>
+      <Filter>03.Components\00.System\00.Transform</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshC.cpp">
-      <Filter>03.Components\01.GraphicsComponent\00.Mesh</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.Mesh</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextureC.cpp">
-      <Filter>03.Components\01.GraphicsComponent\01.Texture</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\01.Texture</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\GraphicsC.cpp">
-      <Filter>03.Components\01.GraphicsComponent</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RigidBodyC.cpp">
-      <Filter>03.Components\02.PhysicsComponent\00.RigidBody</Filter>
+      <Filter>03.Components\00.System\02.PhysicsComponent\00.RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CollisionC.cpp">
-      <Filter>03.Components\02.PhysicsComponent\01.Collision</Filter>
+      <Filter>03.Components\00.System\02.PhysicsComponent\01.Collision</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MathHelper.cpp">
       <Filter>00.Engine\11.Math\00.Helper</Filter>
@@ -349,7 +352,7 @@
       <Filter>02.Objects\01.DebugObject\00.BV</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DebugC.cpp">
-      <Filter>03.Components\04.Debug</Filter>
+      <Filter>03.Components\00.System\03.Debug</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshData.cpp">
       <Filter>00.Engine\01.Graphics\04.Mesh</Filter>
@@ -364,13 +367,13 @@
       <Filter>02.Objects\02.Grid</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BitmapC.cpp">
-      <Filter>03.Components\01.GraphicsComponent\02.Bitmap</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\02.Bitmap</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\UIShader.cpp">
       <Filter>00.Engine\01.Graphics\02.Shader\01.Shaders\UIShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FadeInOutC.cpp">
-      <Filter>03.Components\05.FadeInOut</Filter>
+      <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Camera.cpp">
       <Filter>02.Objects\03.Camera</Filter>
@@ -501,22 +504,22 @@
       <Filter>00.Engine\01.Graphics\03.Camera\01.Frustum</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TransformC.h">
-      <Filter>03.Components\00.Transform</Filter>
+      <Filter>03.Components\00.System\00.Transform</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshC.h">
-      <Filter>03.Components\01.GraphicsComponent\00.Mesh</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.Mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextureC.h">
-      <Filter>03.Components\01.GraphicsComponent\01.Texture</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\01.Texture</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\GraphicsC.h">
-      <Filter>03.Components\01.GraphicsComponent</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RigidBodyC.h">
-      <Filter>03.Components\02.PhysicsComponent\00.RigidBody</Filter>
+      <Filter>03.Components\00.System\02.PhysicsComponent\00.RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CollisionC.h">
-      <Filter>03.Components\02.PhysicsComponent\01.Collision</Filter>
+      <Filter>03.Components\00.System\02.PhysicsComponent\01.Collision</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MathHelper.h">
       <Filter>00.Engine\11.Math\00.Helper</Filter>
@@ -549,7 +552,7 @@
       <Filter>02.Objects\01.DebugObject\00.BV</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DebugC.h">
-      <Filter>03.Components\04.Debug</Filter>
+      <Filter>03.Components\00.System\03.Debug</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshData.h">
       <Filter>00.Engine\01.Graphics\04.Mesh</Filter>
@@ -564,13 +567,13 @@
       <Filter>02.Objects\02.Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\BitmapC.h">
-      <Filter>03.Components\01.GraphicsComponent\02.Bitmap</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\02.Bitmap</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\UIShader.h">
       <Filter>00.Engine\01.Graphics\02.Shader\01.Shaders\UIShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FadeInOutC.h">
-      <Filter>03.Components\05.FadeInOut</Filter>
+      <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Camera.h">
       <Filter>02.Objects\03.Camera</Filter>

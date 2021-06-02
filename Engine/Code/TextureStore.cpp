@@ -4,7 +4,33 @@
 
 
 USING(Engine)
-IMPLEMENT_SINGLETON(CTextureStore)
+CTextureStore::_TexDataMap CTextureStore::m_s_mStaticTextureData = {};
+_uint CTextureStore::m_s_usage = 0;
+
+CTextureStore::CTextureStore(void)
+{
+}
+
+CTextureStore::~CTextureStore(void)
+{
+}
+
+CTextureStore * CTextureStore::Create(void)
+{
+	CTextureStore* pInstance = new CTextureStore;
+	pInstance->Awake();
+
+	++m_s_usage;
+
+	return pInstance;
+}
+
+void CTextureStore::Free(void)
+{
+	--m_s_usage;
+	OnDestroy();
+	delete this;
+}
 
 void CTextureStore::Awake(void)
 {
@@ -12,7 +38,7 @@ void CTextureStore::Awake(void)
 	m_fpResourceHandler = std::bind(&CTextureStore::ParsingTexture, this, std::placeholders::_1, std::placeholders::_2);
 	m_resourcePath = L"..\\..\\Resource\\Texture";
 
-	m_mStaticTextureData[L"NoTexture"] = nullptr;
+	m_s_mStaticTextureData[L"NoTexture"] = nullptr;
 }
 
 void CTextureStore::Start(void)
@@ -32,7 +58,7 @@ void CTextureStore::OnDestroy(void)
 	}
 	m_mCurSceneTextureData.clear();
 
-	for(auto& texture : m_mStaticTextureData)
+	for(auto& texture : m_s_mStaticTextureData)
 	{
 		if (texture.second != nullptr)
 		{
@@ -40,7 +66,7 @@ void CTextureStore::OnDestroy(void)
 			delete texture.second;
 		}
 	}
-	m_mStaticTextureData.clear();
+	m_s_mStaticTextureData.clear();
 }
 
 void CTextureStore::ClearCurResource(void)
@@ -53,8 +79,8 @@ _TexData* CTextureStore::GetTextureData(std::wstring textureKey)
 	if (textureKey == L"NoTex")
 		return nullptr;
 
-	auto iter_find_static = m_mStaticTextureData.find(textureKey);
-	if (iter_find_static != m_mStaticTextureData.end())
+	auto iter_find_static = m_s_mStaticTextureData.find(textureKey);
+	if (iter_find_static != m_s_mStaticTextureData.end())
 		return iter_find_static->second;
 		
 	auto iter_find_cur = m_mCurSceneTextureData.find(textureKey);
@@ -65,8 +91,9 @@ _TexData* CTextureStore::GetTextureData(std::wstring textureKey)
 	ABORT;
 }
 
-void CTextureStore::InitTextureForScene(std::wstring curScene)
+void CTextureStore::InitTextureForScene(std::wstring curScene, _bool isStatic)
 {
+	m_isStatic = isStatic;
 	InitResource(m_resourcePath + L"\\" + curScene);
 }
 
@@ -83,7 +110,7 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 
 	_TexDataMap* pCurMap = nullptr;
 	if (m_isStatic)
-		pCurMap = &m_mStaticTextureData;
+		pCurMap = &m_s_mStaticTextureData;
 	else
 		pCurMap = &m_mCurSceneTextureData;
 

@@ -13,7 +13,7 @@ protected:
 										   ~CDebugCollider		(void);
 
 public:
-	static			SP(CDebugCollider)		Create				(_bool isStatic);
+	static			SP(CDebugCollider)		Create				(_bool isStatic, CScene* pScene);
 					SP(Engine::CObject)		MakeClone			(void) override;
 		
 					void					Awake				(void) override;
