@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CanvaseComponent.h"
-#include "SceneManager.h"
 #include "Layer.h"
 #include "Object.h"
 
@@ -24,7 +23,7 @@ SP(Engine::CComponent) CCanvaseComponent::MakeClone(Engine::CObject *pObject)
 void CCanvaseComponent::Awake()
 {
 	__super::Awake();
-	//m_componentID = (_int)m_s_componentID;
+	m_componentID = 0;
 }
 
 void CCanvaseComponent::Start(SP(Engine::CComponent) spThis)

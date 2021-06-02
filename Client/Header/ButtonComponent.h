@@ -4,6 +4,10 @@
 class CButtonComponent final : public Engine::CComponent
 {
 public:
+	static const	EComponentID	m_s_componentID = EComponentID::Image;
+private:
+
+public:
 	explicit CButtonComponent();
 	~CButtonComponent();
 

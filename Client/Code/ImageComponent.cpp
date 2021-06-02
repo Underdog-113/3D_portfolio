@@ -22,7 +22,7 @@ SP(Engine::CComponent) CImageComponent::MakeClone(Engine::CObject *pObject)
 void CImageComponent::Awake()
 {
 	__super::Awake();
-	//m_componentID = (_int)m_s_componentID;
+	m_componentID = (_int)m_s_componentID;;
 }
 
 void CImageComponent::Start(SP(Engine::CComponent) spThis)

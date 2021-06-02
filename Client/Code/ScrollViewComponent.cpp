@@ -22,7 +22,7 @@ SP(Engine::CComponent) CScrollViewComponent::MakeClone(Engine::CObject *pObject)
 void CScrollViewComponent::Awake()
 {
 	__super::Awake();
-	//m_componentID = (_int)m_s_componentID;
+	m_componentID = (_int)m_s_componentID;;
 }
 
 void CScrollViewComponent::Start(SP(Engine::CComponent) spThis)

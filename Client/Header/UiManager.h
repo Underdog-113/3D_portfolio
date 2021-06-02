@@ -7,9 +7,6 @@ class CUiManager
 private:
 
 public:
-	CUiManager();
-	~CUiManager();
-
 	void OnDestroy();
 };
 

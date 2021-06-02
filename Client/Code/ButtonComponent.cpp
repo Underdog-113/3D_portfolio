@@ -22,7 +22,7 @@ SP(Engine::CComponent) CButtonComponent::MakeClone(Engine::CObject *pObject)
 void CButtonComponent::Awake()
 {
 	__super::Awake();
-	//m_componentID = (_int)m_s_componentID;
+	m_componentID = (_int)m_s_componentID;;
 }
 
 void CButtonComponent::Start(SP(Engine::CComponent) spThis)

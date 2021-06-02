@@ -4,6 +4,14 @@
 class CTextComponent final : public Engine::CComponent
 {
 public:
+	static const	EComponentID	m_s_componentID = EComponentID::Image;
+private:
+	GETTOR_SETTOR(std::wstring, m_text, {}, Text);
+	GETTOR_SETTOR(std::wstring, m_font, {}, Font);
+	GETTOR_SETTOR(DWORD, m_alignment, {}, Alignment);
+	GETTOR_SETTOR(D3DXCOLOR, m_color, D3DXCOLOR(255,255,255,255), Color);
+
+public:
 	explicit CTextComponent();
 	~CTextComponent();
 
