@@ -40,9 +40,11 @@ void CJongScene::Start(void)
 		SP(Engine::CObject) spEmptyObject
 			= Engine::ADD_CLONE(L"EmptyObject", this, true, L"Kiana", (_int)ELayerID::Player);
 
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"1to2");
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Robot_Attack_1_Left");
 		spEmptyObject->AddComponent<Engine::CTextureC>();
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+
+		spEmptyObject->GetTransform()->SetSize(100, 100, 100);
 	}
 }
 
