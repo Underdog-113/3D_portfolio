@@ -180,6 +180,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\ButtonComponent.h" />
+    <ClInclude Include="..\Header\CanvaseComponent.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -187,9 +189,14 @@
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
     <ClInclude Include="..\Header\DongScene.h" />
+    <ClInclude Include="..\Header\ImageComponent.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\ScrollViewComponent.h" />
+    <ClInclude Include="..\Header\SliderComponent.h" />
+    <ClInclude Include="..\Header\TextComponent.h" />
+    <ClInclude Include="..\Header\UiManager.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="Resource.h" />
@@ -198,11 +205,18 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\ButtonComponent.cpp" />
+    <ClCompile Include="..\Code\CanvaseComponent.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
+    <ClCompile Include="..\Code\ImageComponent.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\ScrollViewComponent.cpp" />
+    <ClCompile Include="..\Code\SliderComponent.cpp" />
+    <ClCompile Include="..\Code\TextComponent.cpp" />
+    <ClCompile Include="..\Code\UiManager.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />
