@@ -61,6 +61,7 @@ public:
 					void				AddSizeZ				(_float adder);
 
 					void				SetForward				(_float3 forward);
+					void				SetForwardUp			(_float3 forward, _float3 up);
 
 #pragma endregion
 //Interface
@@ -80,6 +81,7 @@ public:
 public:
 					void				UpdateForward			(void);
 					void				UpdateRotation			(void);
+					void				UpdateRotationWithUp	(void);
 					void				UpdateWorldMatrix		(void);
 
 					void				UpdateParentMatrix		(const _mat* pMat);
