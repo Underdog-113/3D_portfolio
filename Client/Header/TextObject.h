@@ -1,8 +1,10 @@
 #pragma once
 class CTextObject final : public Engine::CObject
 {
-	SP(Engine::CTextureC) spTexture;
-	SP(Engine::CBitmapC) spBitmap;
+private:
+	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics);
+	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture);
+	GETTOR(SP(Engine::CBitmapC), m_spBitmap, {}, Bitmap);
 public:
 	CTextObject();
 	~CTextObject();

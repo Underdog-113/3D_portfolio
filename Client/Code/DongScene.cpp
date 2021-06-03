@@ -37,7 +37,7 @@ void CDongScene::Start(void)
 
 	SP(Engine::CObject) spEmptyObject
 		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::UI, L"Text0");
-	spEmptyObject->AddComponent<CTextComponent>()->AddFontData(L"ABS", 5,5, 10, D3DXCOLOR(1, 1, 1, 1));
+	spEmptyObject->AddComponent<CTextComponent>()->AddFontData(L"ABC", 5,5, 10, D3DXCOLOR(1, 1, 1, 1));
 
 }
 

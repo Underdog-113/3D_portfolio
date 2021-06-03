@@ -38,6 +38,7 @@ void CTextComponent::Update(SP(Engine::CComponent) spThis)
 {
 	_float3 pos = GetOwner()->GetTransform()->GetPosition();
 	_int value = 0;
+
 	for (auto object : m_textObject)
 	{
 		wchar_t textKey = m_text[value++];
@@ -115,7 +116,7 @@ void CTextComponent::TextImageInput()
 	int value = 0;
 	for (auto object : m_textObject)
 	{
-		wchar_t textKey = m_text[value++];
-		//object->GetComponent<Engine::CTextureC>()->AddTexture((std::wstring)&textKey, m_sortLayer);
+		std::wstring textKey = m_text.substr(value++, 1);
+		object->GetComponent<Engine::CTextureC>()->AddTexture(textKey, m_sortLayer);
 	}
 }

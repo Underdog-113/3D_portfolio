@@ -23,8 +23,12 @@ SP(CTextObject) CTextObject::Create(_bool isStatic, Engine::CScene * pScene)
 SP(Engine::CObject) CTextObject::MakeClone(void)
 {
 	SP(CTextObject) spClone(new CTextObject);
-	spClone->AddComponent<Engine::CGraphicsC>();
-	spClone->AddComponent<Engine::CBitmapC>();
+	__super::InitClone(spClone);
+
+	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spGraphics = spClone->AddComponent<Engine::CGraphicsC>();
+	spClone->m_spTexture = spClone->AddComponent<Engine::CTextureC>();
+	spClone->m_spBitmap = spClone->AddComponent<Engine::CBitmapC>();
 
 	return spClone;
 	return SP(CObject)();
@@ -32,11 +36,13 @@ SP(Engine::CObject) CTextObject::MakeClone(void)
 
 void CTextObject::Awake(void)
 {
+	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;
 }
 
 void CTextObject::Start(void)
 {
+	__super::Start();
 }
 
 void CTextObject::FixedUpdate(void)
