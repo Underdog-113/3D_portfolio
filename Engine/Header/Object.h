@@ -21,6 +21,10 @@ public:
 	virtual			void			FixedUpdate			(void) PURE;
 	virtual			void			Update				(void) PURE;
 	virtual			void			LateUpdate			(void) PURE;
+
+	virtual			void			PreRender			(void) {}
+	virtual			void			Render				(void) {}
+	virtual			void			PostRender			(void) {}
 	
 	virtual			void			OnDestroy			(void) PURE;
 	

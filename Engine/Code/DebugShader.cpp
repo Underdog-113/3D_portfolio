@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
 #include "DebugShader.h"
  
-#include "StaticMesh.h"
-#include "DynamicMesh.h"
+#include "StaticMeshData.h"
+#include "DynamicMeshData.h"
 
 USING(Engine)
 CDebugShader::CDebugShader()
@@ -58,7 +58,7 @@ void CDebugShader::Render(CGraphicsC * pGC)
 
 			for (_int i = 0; i < (_int)vMeshData.size(); ++i)
 			{
-				CStaticMesh* pSM = dynamic_cast<CStaticMesh*>(vMeshData[i]);
+				CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(vMeshData[i]);
 				for (_ulong j = 0; j < pSM->GetSubsetCount(); ++j)
 					pSM->GetMesh()->DrawSubset(j);
 
