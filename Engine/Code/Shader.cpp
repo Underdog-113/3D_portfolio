@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
 #include "Shader.h"
 #include "DeviceManager.h"
-#include "StaticMesh.h"
-#include "DynamicMesh.h"
+#include "StaticMeshData.h"
+#include "DynamicMeshData.h"
  
 
 USING(Engine)

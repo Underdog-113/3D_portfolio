@@ -30,22 +30,6 @@ void CComponent::Start(SP(CComponent) spThis)
 	m_isStarted = true;
 }
 
-void CComponent::FixedUpdate(SP(CComponent) spThis)
-{
-}
-
-void CComponent::Update(SP(CComponent) spThis)
-{
-}
-
-void CComponent::LateUpdate(SP(CComponent) spThis)
-{
-}
-
-void CComponent::OnDestroy(void)
-{
-}
-
 void CComponent::OnEnable(void)
 {
 	m_isEnabled = true;

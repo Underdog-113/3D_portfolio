@@ -81,7 +81,6 @@ public:
 public:
 					void				UpdateForward			(void);
 					void				UpdateRotation			(void);
-					void				UpdateRotationWithUp	(void);
 					void				UpdateWorldMatrix		(void);
 
 					void				UpdateParentMatrix		(const _mat* pMat);

@@ -24,10 +24,9 @@ enum class EDataID
 	BasicObject			= 0 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Player				= 1 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Scene				= 2 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	Camera				= 3 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	Enemy				= 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	UI					= 5 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	NumOfDataID			= 6 + (_uint)Engine::EDataID::NumOfEngineDataID
+	Enemy				= 3 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	UI					= 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	NumOfDataID			= 5 + (_uint)Engine::EDataID::NumOfEngineDataID
 };
 
 

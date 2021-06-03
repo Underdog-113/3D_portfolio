@@ -32,7 +32,6 @@ _uint CLoading::ThreadMain(void * pArg)
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"BasicObject", (_uint)EDataID::BasicObject);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Player", (_uint)EDataID::Player);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Scene", (_uint)EDataID::Scene);
-	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Camera", (_uint)EDataID::Camera);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"UI", (_uint)EDataID::UI);
 

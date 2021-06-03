@@ -15,6 +15,7 @@ public:
 
 	virtual		void			Awake				(std::wstring const& filePath, 
 													 std::wstring const& fileName);
+
 	virtual		void			Start				(void) PURE;
 	virtual		void			Update				(void) PURE;
 
@@ -37,6 +38,7 @@ protected:
 	GETTOR			(std::wstring,	m_meshKey,			L"",			MeshKey)
 
 	GETTOR			(_int,			m_meshType,			UNDEFINED,		MeshType) //Static or Dynamic
+	GETTOR_SETTOR	(_int,			m_meshIndex,		UNDEFINED,		MeshIndex)
 	GETTOR			(_float3,		m_meshSize,			ZERO_VECTOR,	MeshSize)
 
 	GETTOR			(_float3,		m_minVertex,		MAX_VECTOR,		MinVertex)

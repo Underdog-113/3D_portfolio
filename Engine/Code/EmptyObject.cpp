@@ -41,6 +41,8 @@ void CEmptyObject::Awake(void)
 void CEmptyObject::Start(void)
 {
 	__super::Start();
+
+	PickComponentToRender();
 }
 
 void CEmptyObject::FixedUpdate(void)
@@ -56,6 +58,21 @@ void CEmptyObject::Update(void)
 void CEmptyObject::LateUpdate(void)
 {
 	__super::LateUpdate();
+}
+
+void CEmptyObject::PreRender(void)
+{
+	m_spComponentToRender->PreRender(GetComponent<CGraphicsC>());
+}
+
+void CEmptyObject::Render(void)
+{
+	m_spComponentToRender->Render(GetComponent<CGraphicsC>());
+}
+
+void CEmptyObject::PostRender(void)
+{
+	m_spComponentToRender->PostRender(GetComponent<CGraphicsC>());
 }
 
 void CEmptyObject::OnDestroy(void)
@@ -92,4 +109,21 @@ void CEmptyObject::OnCollisionStay(Engine::_CollisionInfo ci)
 
 void CEmptyObject::OnCollisionExit(Engine::_CollisionInfo ci)
 {
+}
+
+void CEmptyObject::PickComponentToRender(void)
+{
+	SP(CMeshC)		spMesh = GetComponent<CMeshC>();
+	SP(CRectTexC)	spRectTex = GetComponent<CRectTexC>();
+
+	if (spMesh != nullptr)
+	{
+		m_spComponentToRender = spMesh;
+		return;
+	}
+	else if (spRectTex != nullptr)
+	{
+		m_spComponentToRender = spRectTex;
+		return;
+	}
 }
