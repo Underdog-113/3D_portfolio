@@ -1,16 +1,14 @@
 #pragma once
-class CTextObject final : public Engine::CObject
+class CButtonObject final : public Engine::CObject
 {
 private:
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics);
-	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture);
-	GETTOR(SP(Engine::CBitmapC), m_spBitmap, {}, Bitmap);
+
 public:
-	CTextObject();
-	~CTextObject();
+	CButtonObject();
+	~CButtonObject();
 
 	// CObject을(를) 통해 상속됨
-	static	SP(CTextObject) Create(_bool isStatic, Engine::CScene* pScene);
+	static	SP(CButtonObject) Create(_bool isStatic, Engine::CScene* pScene);
 	virtual SP(Engine::CObject) MakeClone(void) override;
 	virtual void Awake(void) override;
 	virtual void Start(void) override;

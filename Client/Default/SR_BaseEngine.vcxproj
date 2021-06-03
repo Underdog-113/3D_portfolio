@@ -180,6 +180,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\ButtonObject.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -187,14 +188,15 @@
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
     <ClInclude Include="..\Header\DebugTextComponent.h" />
+    <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
+    <ClInclude Include="..\Header\ImageObject.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\TextComponent.h" />
-    <ClInclude Include="..\Header\TextObject.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="Resource.h" />
@@ -203,16 +205,18 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\ButtonObject.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\DebugTextComponent.cpp" />
+    <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
+    <ClCompile Include="..\Code\ImageObject.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\TextComponent.cpp" />
-    <ClCompile Include="..\Code\TextObject.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />

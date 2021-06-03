@@ -58,8 +58,14 @@
     <Filter Include="02.Objects\00.UI">
       <UniqueIdentifier>{89f0f156-f731-4fbc-ac36-6c85f0e7980d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\00.UI\00.TextObject">
+    <Filter Include="02.Objects\00.UI\00.ImageObject">
       <UniqueIdentifier>{998ab66f-d8f4-4bc5-bd11-a278adc11acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.DeleGate">
+      <UniqueIdentifier>{2821b14c-a627-498a-9039-b7a36de7a16a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\01.ButtonObject">
+      <UniqueIdentifier>{f6e246d8-0610-4fe0-af36-8d3347ce7be3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,8 +129,14 @@
     <ClInclude Include="..\Header\DebugTextComponent.h">
       <Filter>03.Component\00.UI\01.DebugText</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\TextObject.h">
-      <Filter>02.Objects\00.UI\00.TextObject</Filter>
+    <ClInclude Include="..\Header\ImageObject.h">
+      <Filter>02.Objects\00.UI\00.ImageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DeleGate.h">
+      <Filter>04.DeleGate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ButtonObject.h">
+      <Filter>02.Objects\00.UI\01.ButtonObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,8 +179,14 @@
     <ClCompile Include="..\Code\DebugTextComponent.cpp">
       <Filter>03.Component\00.UI\01.DebugText</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\TextObject.cpp">
-      <Filter>02.Objects\00.UI\00.TextObject</Filter>
+    <ClCompile Include="..\Code\ImageObject.cpp">
+      <Filter>02.Objects\00.UI\00.ImageObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DeleGate.cpp">
+      <Filter>04.DeleGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ButtonObject.cpp">
+      <Filter>02.Objects\00.UI\01.ButtonObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TextComponent.h"
+#include "ImageObject.h"
 
 CTextComponent::CTextComponent()
 {
@@ -39,8 +40,10 @@ void CTextComponent::Update(SP(Engine::CComponent) spThis)
 	_float3 pos = GetOwner()->GetTransform()->GetPosition();
 	_int value = 0;
 
-	for (auto object : m_textObject)
+	for (auto object : m_imageObject)
 	{
+		object->GetTransform()->SetPosition(pos);
+
 		wchar_t textKey = m_text[value++];
 		pos.x += m_interval;
 
@@ -49,7 +52,6 @@ void CTextComponent::Update(SP(Engine::CComponent) spThis)
 			pos.y += m_kerning;
 		}
 
-		object->GetTransform()->SetPosition(pos);
 	}
 }
 
@@ -81,9 +83,9 @@ void CTextComponent::SetText(std::wstring text)
 	{
 		for (int i = 0; i < m_textSize - m_text.size(); i++)
 		{
-			SP(Engine::CObject) object = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TextObject", true);
-			object->GetTransform()->SetSize(_float3(m_fontSize, m_fontSize, 1));
-			m_textObject.emplace_back(object);
+			SP(CImageObject) object = std::dynamic_pointer_cast<CImageObject>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true));
+			object->GetTransform()->SetSize(_float3(m_fontSize, m_fontSize, 0));
+			m_imageObject.emplace_back(object);
 		}
 	}
 
@@ -103,9 +105,9 @@ void CTextComponent::AddFontData(std::wstring text, _float interval, _float kern
 
 	for (int i = 0; i < m_textSize; i++)
 	{
-		SP(Engine::CObject) object = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TextObject", true);
-		object->GetTransform()->SetSize(_float3(m_fontSize, m_fontSize, 1));
-		m_textObject.emplace_back(object);
+		SP(CImageObject) object = std::dynamic_pointer_cast<CImageObject>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true));
+		object->GetTransform()->SetSize(_float3(m_fontSize, m_fontSize, 0));
+		m_imageObject.emplace_back(object);
 	}
 
 	TextImageInput();
@@ -114,9 +116,9 @@ void CTextComponent::AddFontData(std::wstring text, _float interval, _float kern
 void CTextComponent::TextImageInput()
 {
 	int value = 0;
-	for (auto object : m_textObject)
+	for (auto object : m_imageObject)
 	{
 		std::wstring textKey = m_text.substr(value++, 1);
-		object->GetComponent<Engine::CTextureC>()->AddTexture(textKey, m_sortLayer);
+		object->GetTexture()->AddTexture(textKey, m_sortLayer);
 	}
 }

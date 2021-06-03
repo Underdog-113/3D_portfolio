@@ -1,7 +1,7 @@
 #ifndef TEXTCOMPONENT_H
 #define TEXTCOMPONENT_H
 
-class CTextObject;
+class CImageObject;
 class CTextComponent final : public Engine::CComponent
 {
 public:
@@ -14,7 +14,7 @@ private:
 	GETTOR_SETTOR(D3DXCOLOR, m_color, D3DXCOLOR(1, 1, 1, 1), Color);
 
 	GETTOR_SETTOR(_int, m_sortLayer, 0, SortLayer);
-	GETTOR_SETTOR(std::list<SP(Engine::CObject)>, m_textObject, {}, TextObject);
+	GETTOR_SETTOR(std::list<SP(CImageObject)>, m_imageObject, {}, ImageObject);
 	_int m_textSize;
 public:
 	explicit CTextComponent();
