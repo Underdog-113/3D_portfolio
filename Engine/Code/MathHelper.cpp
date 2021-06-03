@@ -66,28 +66,26 @@ void CMathHelper::MatrixForFromTo(_mat * pOut, const _float3 * fromDir, const _f
 
 _float3 CMathHelper::QuatToRad(_quat & Q)
 {
-	_float heading, attitude, bank;
-	_float test = Q.x*Q.y + Q.z*Q.w;
-	if (test > 0.499) { // singularity at north pole
-		heading = 2 * atan2(Q.x, Q.w);
-		attitude = PI / 2;
-		bank = 0;
-		return _float3(bank, heading, attitude);
-	}
-	if (test < -0.499) { // singularity at south pole
-		heading = -2 * atan2(Q.x, Q.w);
-		attitude = -PI / 2;
-		bank = 0;
-		return _float3(bank, heading, attitude);
-	}
-	_float sqx = Q.x*Q.x;
-	_float sqy = Q.y*Q.y;
-	_float sqz = Q.z*Q.z;
-	heading = atan2(2 * Q.y*Q.w - 2 * Q.x*Q.z, 1 - 2 * sqy - 2 * sqz);
-	attitude = asin(2 * test);
-	bank = atan2(2 * Q.x*Q.w - 2 * Q.y*Q.z, 1 - 2 * sqx - 2 * sqz);
+	double roll, pitch, yaw;
 
-	return _float3(bank, heading, attitude);
+	// roll (x-axis rotation)
+	double sinR_cosP = 2 * (Q.w * Q.x + Q.y * Q.z);
+	double cosR_cosP = 1 - 2 * (Q.x * Q.x + Q.y * Q.y);
+	roll = atan2(sinR_cosP, cosR_cosP);
+
+	// pitch (y-axis rotation)
+	double sinP = 2 * (Q.w * Q.y - Q.z * Q.x);
+	if (std::abs(sinP) >= 1)
+		pitch = copysign(D3DX_PI * 0.5f, sinP);    // use 90 degrees if out of range
+	else
+		pitch = asin(sinP);
+
+	// yaw (z-axis rotation)
+	double sinY_cosP = 2 * (Q.w * Q.z + Q.x * Q.y);
+	double cosY_cosP = 1 - 2 * (Q.y * Q.y + Q.z * Q.z);
+	yaw = atan2(sinY_cosP, cosY_cosP);
+
+	return _float3((FLOAT)roll, (FLOAT)pitch, (FLOAT)yaw);
 }
 
 _float3 CMathHelper::QuatToDegree(_quat & Q)

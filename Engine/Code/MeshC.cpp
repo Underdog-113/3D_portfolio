@@ -95,10 +95,14 @@ void CMeshC::OnDestroy(void)
 
 void CMeshC::OnEnable(void)
 {
+	__super::OnEnable();
+	
 }
 
 void CMeshC::OnDisable(void)
 {
+	__super::OnDisable();
+	
 }
 
 void CMeshC::AddMeshData(CMeshData * pMeshData)

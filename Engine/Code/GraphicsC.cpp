@@ -88,6 +88,12 @@ void CGraphicsC::OnEnable(void)
 	__super::OnEnable();
 }
 
+void CGraphicsC::OnDisable(void)
+{
+	__super::OnDisable();
+
+}
+
 void CGraphicsC::GenerateBV(void)
 {
 	_float3 meshSize	= m_spMesh->GetMeshSize();
@@ -102,6 +108,3 @@ void CGraphicsC::GenerateBV(void)
 }
 
 
-void CGraphicsC::OnDisable(void)
-{
-}

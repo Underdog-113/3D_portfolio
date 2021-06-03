@@ -51,22 +51,11 @@ void CTransformC::Update(SP(CComponent) spThis)
 {
 	if (m_spParent && m_spParent->GetOwner() == nullptr)
 	{
-		m_lastRotMatrix			*= m_spParent->GetLastRotMatrix();
-		m_lastWorldMatNoScale	*= m_spParent->GetLastWorldMatrixNoScale();
-		m_lastWorldMat			*= m_spParent->GetLastWorldMatrixNoScale();
-
 		_quat rotQuat;
 		D3DXQuaternionRotationMatrix(&rotQuat, &m_lastRotMatrix);
 		D3DXQuaternionNormalize(&rotQuat, &rotQuat);
 
 		_float3 finalRotation = GET_MATH->QuatToRad(rotQuat);
-		if (abs(finalRotation.x) < EPSILON)
-			finalRotation.x = 0;
-		if (abs(finalRotation.z) < EPSILON)
-			finalRotation.z = 0;
-
-		//m_position += m_spParent->GetPosition();
-		//SetRotation(GetRotation() + m_spParent->GetRotation());
 		m_position = _float3(m_worldMatNoScale._41, m_worldMatNoScale._42, m_worldMatNoScale._43);
 		SetRotation(finalRotation);
 		m_spParent.reset();
@@ -437,9 +426,6 @@ void CTransformC::UpdateRotation(void)
 	}
 }
 
-void CTransformC::UpdateRotationWithUp(void)
-{
-}
 
 void CTransformC::UpdateWorldMatrix(void)
 {
@@ -467,6 +453,7 @@ void CTransformC::UpdateWorldMatrix(void)
 
 	if(m_spParent)
 	{
+		m_rotMatrix			*= m_spParent->GetRotMatrix();
 		m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
 		m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
 	}

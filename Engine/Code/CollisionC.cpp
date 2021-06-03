@@ -84,10 +84,14 @@ void CCollisionC::OnDestroy(void)
 
 void CCollisionC::OnEnable(void)
 {
+	__super::OnEnable();
+	
 }
 
 void CCollisionC::OnDisable(void)
 {
+	__super::OnDisable();
+	
 }
 
 void CCollisionC::AddCollider(CCollider* pCollider)

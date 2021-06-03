@@ -202,6 +202,9 @@
     <Filter Include="03.Components\01.Effect\00.FadeInOut">
       <UniqueIdentifier>{ddde980e-02dd-4d21-9898-c6eac442ec6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\03.Shader">
+      <UniqueIdentifier>{279918f3-50a6-4547-8f3e-cd69539ed9b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -377,6 +380,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Camera.cpp">
       <Filter>02.Objects\03.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ShaderC.cpp">
+      <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -577,6 +583,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Camera.h">
       <Filter>02.Objects\03.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ShaderC.h">
+      <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

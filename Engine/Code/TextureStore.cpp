@@ -58,15 +58,18 @@ void CTextureStore::OnDestroy(void)
 	}
 	m_mCurSceneTextureData.clear();
 
-	for(auto& texture : m_s_mStaticTextureData)
+	if (m_s_usage == 0)
 	{
-		if (texture.second != nullptr)
+		for (auto& texture : m_s_mStaticTextureData)
 		{
-			texture.second->pTexture->Release();
-			delete texture.second;
+			if (texture.second != nullptr)
+			{
+				texture.second->pTexture->Release();
+				delete texture.second;
+			}
 		}
+		m_s_mStaticTextureData.clear();
 	}
-	m_s_mStaticTextureData.clear();
 }
 
 void CTextureStore::ClearCurResource(void)

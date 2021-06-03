@@ -109,7 +109,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->SetColor(D3DXCOLOR(1, 1, 1, 0.0f));
+			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"BG");
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();
