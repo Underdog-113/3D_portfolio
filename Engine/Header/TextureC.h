@@ -27,6 +27,7 @@ public:
 				void			AddAlpha			(_float alpha);
 public:
 				void			AddTexture			(std::wstring const& textureKey, _int index = 0);
+				void			ChangeTexture		(std::wstring const& textureKey, _int meshIndex = 0, _int texIndex = 0);
 
 
 public:

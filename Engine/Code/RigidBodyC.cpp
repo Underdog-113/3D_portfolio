@@ -61,10 +61,14 @@ void CRigidBodyC::OnDestroy(void)
 
 void CRigidBodyC::OnEnable(void)
 {
+	__super::OnEnable();
+	
 }
 
 void CRigidBodyC::OnDisable(void)
 {
+	__super::OnDisable();
+	
 }
 
 #pragma region SettorAdder

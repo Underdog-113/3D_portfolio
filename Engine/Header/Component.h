@@ -13,8 +13,8 @@ public:
 	virtual		SP(CComponent)	MakeClone		(CObject* pObject) PURE;
 				void			InitClone		(SP(CComponent) spClone, CObject* pOwner);
 
-	virtual		void			Awake			(void) PURE;
-	virtual		void			Start			(SP(CComponent) spThis) PURE;
+	virtual		void			Awake			(void);
+	virtual		void			Start			(SP(CComponent) spThis);
 																	    
 	virtual		void			FixedUpdate		(SP(CComponent) spThis) PURE;
 	virtual		void			Update			(SP(CComponent) spThis) PURE;
@@ -22,8 +22,8 @@ public:
 
 	virtual		void			OnDestroy		(void) PURE;
 													   
-	virtual		void			OnEnable		(void) PURE;
-	virtual		void			OnDisable		(void) PURE;
+	virtual		void			OnEnable		(void);
+	virtual		void			OnDisable		(void);
 
 public:
 				void			SetIsEnabled	(_bool var);

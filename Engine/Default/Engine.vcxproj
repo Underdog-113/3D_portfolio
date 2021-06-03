@@ -48,6 +48,7 @@
     <ClInclude Include="..\Header\HierarchyLoader.h" />
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
+    <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\StaticMesh.h" />
     <ClInclude Include="..\Header\TextManager.h" />
     <ClInclude Include="..\Header\FRC.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
+    <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\StaticMesh.cpp" />
     <ClCompile Include="..\Code\TextManager.cpp" />
     <ClCompile Include="..\Code\FRC.cpp" />

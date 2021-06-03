@@ -120,7 +120,8 @@ namespace Engine
 		Debug					= 7,
 		Bitmap					= 8,
 		FadeInOut				= 9,
-		NumOfEngineComponentID	= 10
+		Shader					= 10,
+		NumOfEngineComponentID	= 11
 	};
 
 	enum class EChannelID

@@ -95,10 +95,14 @@ void CTextureC::OnDestroy(void)
 
 void CTextureC::OnEnable(void)
 {
+	__super::OnEnable();
+	
 }
 
 void CTextureC::OnDisable(void)
 {
+	__super::OnDisable();
+	
 }
 
 void CTextureC::SetAlpha(_float alpha)
@@ -136,4 +140,9 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int index)
 	
 
 	m_vTexData[index].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
+}
+
+void CTextureC::ChangeTexture(std::wstring const & textureKey, _int meshIndex, _int texIndex)
+{
+	m_vTexData[meshIndex][texIndex] = m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey);
 }

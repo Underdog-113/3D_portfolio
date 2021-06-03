@@ -257,10 +257,13 @@ void CGraphicsManager::RenderAlphaBlend(void)
 	{
 		if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
 		{
+			//그래픽 컴포넌트를 주면
+			//메쉬 컴포넌트가 가진 민맥스 버텍스 * 트랜스폼의 사이즈 + 포지션으로 컬링
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(spGC->GetTransform()->GetPosition(),
 						  spGC->GetTransform()->GetSize() / 2.f))
 			{
+				//
 				pShader->PreRender(spGC.get());
 				pShader->Render(spGC.get());
 				pShader->PostRender(spGC.get());

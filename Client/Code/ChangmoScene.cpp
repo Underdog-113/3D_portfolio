@@ -44,7 +44,7 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
 		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-
+		spEmptyObject->GetTransform()->SetRotationX(PI/2.f);
 
 		SP(Engine::CObject) spEmptyObject1
 			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
@@ -55,6 +55,8 @@ void CChangmoScene::Start(void)
 		spEmptyObject1->GetTransform()->SetParent(spEmptyObject->GetTransform());
 		spEmptyObject1->GetTransform()->SetPosition(1, 0, 0);
 	}
+
+	
 }
 
 void CChangmoScene::FixedUpdate(void)
