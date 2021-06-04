@@ -14,7 +14,6 @@ public:
 				void					Free				(void);
 
 				void					Awake				(void) override;
-				void					Start				(void) override;
 				void					OnDestroy			(void) override;
 
 				void					ClearCurResource	(void) override;
@@ -24,7 +23,6 @@ public:
 
 				void					AddDataSection		(std::wstring sectionKey, _uint ID);
 private:
-				void					InitResource		(std::wstring sourcePath) override;
 				void					ParsingData			(std::wstring filePath, 
 															 std::wstring fileName);
 

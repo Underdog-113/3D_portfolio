@@ -50,7 +50,12 @@
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\RectTexC.h" />
     <ClInclude Include="..\Header\RenderComponent.h" />
+    <ClInclude Include="..\Header\RenderTarget.h" />
+    <ClInclude Include="..\Header\RenderTargetManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\Header\ShaderC.h" />
+    <ClInclude Include="..\Header\ShaderStore.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\TextManager.h" />
@@ -121,7 +126,12 @@
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\RectTexC.cpp" />
     <ClCompile Include="..\Code\RenderComponent.cpp" />
+    <ClCompile Include="..\Code\RenderTarget.cpp" />
+    <ClCompile Include="..\Code\RenderTargetManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\Code\ShaderC.cpp" />
+    <ClCompile Include="..\Code\ShaderStore.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\TextManager.cpp" />
@@ -159,14 +169,9 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\DebugShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\TextureShader.fx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)Resource\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">2.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\UIShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\00DebugShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\01TextureShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\02UIShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>

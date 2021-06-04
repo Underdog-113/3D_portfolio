@@ -100,9 +100,9 @@ void CMainApp::PreRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->PreRender();
 	Engine::CTextManager::GetInstance()->PreRender();
+	Engine::CGraphicsManager::GetInstance()->PreRender();
+	
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }

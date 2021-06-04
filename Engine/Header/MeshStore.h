@@ -15,7 +15,6 @@ public:
 			void				Free				(void);
 
 			void				Awake				(void) override;
-			void				Start				(void) override;
 			void				OnDestroy			(void) override;
 
 			void				ClearCurResource	(void) override;
@@ -23,7 +22,6 @@ public:
 			CMeshData*			GetMeshData			(std::wstring meshKey);
 			void				InitMeshForScene	(std::wstring curScene, _bool isStatic = false);
 private:
-			void				InitResource		(std::wstring sourcePath) override;
 			void				ParsingMesh			(std::wstring filePath, 
 													 std::wstring fileName);
 

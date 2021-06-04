@@ -12,12 +12,11 @@ public:
 
 public:
 	virtual			void				Awake					(void) PURE;
-	virtual			void				Start					(void) PURE;
 	virtual			void				OnDestroy				(void) PURE;
 					
 	virtual			void				ClearCurResource		(void) PURE;
 protected:
-	virtual			void				InitResource			(std::wstring sourcePath) PURE;
+					void				InitResource			(std::wstring sourcePath);
 	
 					std::wstring		GetLastDirName			(std::wstring const& fullPath);
 					std::wstring		GetFileName				(std::wstring const& fullPath);
