@@ -1,4 +1,4 @@
-2#include "stdafx.h"
+#include "stdafx.h"
 #include "MainApp.h"
 #include "Object.h"
 

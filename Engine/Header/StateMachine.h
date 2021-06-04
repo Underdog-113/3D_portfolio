@@ -9,12 +9,12 @@ void StateName_Update(float deltaTime);
 void StateName_End(void);
 */
 
-#define CreateState(pState, className, stateName)								\
-pState = new Engine::CState;													\
-pState->SetInitailize(std::bind(&##className::##stateName_Init, this));			\
-pState->SetEnter(std::bind(&##className::##stateName_Enter, this));				\
-pState->SetUpdate(std::bind(&##className::##stateName_Update, this, GET_DT));	\
-pState->SetExit(std::bind(&##className::##stateName_End, this));				
+#define CreateState(className, pState, stateName)									\
+pState = new Engine::CState;														\
+pState->SetInitailize(std::bind(&##className##::##stateName##_Init, this));			\
+pState->SetEnter(std::bind(&##className##::##stateName##_Enter, this));				\
+pState->SetUpdate(std::bind(&##className##::##stateName##_Update, this, GET_DT));	\
+pState->SetExit(std::bind(&##className##::##stateName##_End, this));				
 
 
 BEGIN(Engine)

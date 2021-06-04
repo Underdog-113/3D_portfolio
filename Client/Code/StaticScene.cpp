@@ -10,10 +10,7 @@
  
 #pragma endregion
 
- 
-#include "DataStore.h"
-#include "MeshStore.h"
-#include "TextureStore.h"
+
 
 CStaticScene::CStaticScene()
 {
