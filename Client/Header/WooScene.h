@@ -26,6 +26,9 @@ public:
 
 private:
 					void				InitPrototypes		(void) override;
+
+					SP(Engine::CObject) m_spSakura = nullptr;
+					_uint m_iIndex = 0;
 };
 
 #endif
