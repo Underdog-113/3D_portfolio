@@ -1,18 +1,6 @@
-#include "stdafx.h"
+2#include "stdafx.h"
 #include "MainApp.h"
-
-
-
-
- 
-
-
-
-
-
 #include "Object.h"
-
-
 
 #pragma region IncludeScenes
 #include "InitScene.h"
@@ -112,9 +100,9 @@ void CMainApp::PreRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->PreRender();
 	Engine::CTextManager::GetInstance()->PreRender();
+	Engine::CGraphicsManager::GetInstance()->PreRender();
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -126,9 +114,9 @@ void CMainApp::Render(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->Render();
 	Engine::CTextManager::GetInstance()->Render();
+	Engine::CGraphicsManager::GetInstance()->Render();
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -139,9 +127,9 @@ void CMainApp::PostRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->PostRender();
 	Engine::CTextManager::GetInstance()->PostRender();
+	Engine::CGraphicsManager::GetInstance()->PostRender();
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }

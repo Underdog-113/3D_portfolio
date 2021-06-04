@@ -29,7 +29,7 @@ CTextureShader * CTextureShader::Create(void)
 void CTextureShader::Awake(void)
 {
 	__super::Awake();
-	m_filePath = L"..\\..\\Resource\\Shader\\TextureShader.fx";
+	m_filePath = L"..\\..\\Resource\\Shader\\01TextureShader.fx";
 	m_shaderType = (_int)EShaderType::Texture;
 }
 

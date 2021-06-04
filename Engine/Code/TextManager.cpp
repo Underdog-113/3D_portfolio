@@ -102,7 +102,7 @@ void CTextManager::DrawMyText(_Text* pText)
 	std::basic_string<WCHAR> msg = pText->m_message.c_str();
 
 	RECT rect = { _int(pText->m_position.x), _int(pText->m_position.y), 
-				  _int(pText->m_position.x + pText->m_size.x), _int(pText->m_position.y + pText->m_size.y) };
+				  _int(pText->m_position.x + 150), _int(pText->m_position.y + 150) };
 
 	m_pFont->DrawText(NULL, msg.c_str(), -1, &rect, format, pText->m_color);
 }
