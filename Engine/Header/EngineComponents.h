@@ -6,12 +6,15 @@
 #include "TransformC.h"
 
 // Graphics-----------------------------------------
+#include "RenderComponent.h"
 #include "TextureC.h"
-#include "MeshC.h"
 #include "DebugC.h"
 #include "BitmapC.h"
+#include "RectTexC.h"
+#include "MeshC.h"
 #include "GraphicsC.h"
-#include "FadeInOutC.h"
+
+
 
 
 // Physics------------------------------------------
@@ -26,5 +29,5 @@
 #include "ObbCollider.h"
 
 
-
+#include "FadeInOutC.h"
 #endif

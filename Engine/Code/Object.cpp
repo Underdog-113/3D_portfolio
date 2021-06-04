@@ -67,7 +67,6 @@ void CObject::LateUpdate(void)
 	}
 }
 
-
 void CObject::OnDestroy(void)
 {
 	for (auto& component : m_mComponents)

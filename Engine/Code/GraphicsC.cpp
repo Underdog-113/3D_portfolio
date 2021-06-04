@@ -76,7 +76,7 @@ void CGraphicsC::LateUpdate(SP(CComponent) spThis)
 {
 	SP(CGraphicsC) spGraphicC = std::dynamic_pointer_cast<CGraphicsC>(spThis);
 
-	ADD_TO_RENDER_LIST(m_renderID, spGraphicC);
+	ADD_TO_RENDER_LIST(m_renderID, m_pOwner);
 }
 
 void CGraphicsC::OnDestroy(void)

@@ -40,6 +40,21 @@ namespace Engine
 	}CUSTOM_VERTEX2D;
 	const _uint customFVF2D = (D3DFVF_XYZ | D3DFVF_TEX1);
 
+	typedef struct _VertexNormalTex
+	{
+		_float3	position;
+		_float3	normal;
+		_float2 texUV;
+	}VERTEX_VNT;
+	const _uint FVF_VNT = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
+
+	typedef struct _Index32
+	{
+		_ulong		_0;
+		_ulong		_1;
+		_ulong		_2;
+	}INDEX32;
+
 	typedef struct _TexData
 	{
 		LPDIRECT3DTEXTURE9 pTexture;

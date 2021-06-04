@@ -2,7 +2,7 @@
 #include "HierarchyLoader.h"
 #include "DeviceManager.h"
 #include "TextureStore.h"
-#include "DynamicMesh.h"
+#include "DynamicMeshData.h"
 
 USING(Engine)
 CHierarchyLoader::CHierarchyLoader(const std::wstring path)
@@ -92,8 +92,11 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 
 		for (_size i = 0; i < pDerivedMeshContainer->NumMaterials; ++i)
 		{
-			if(pDerivedMeshContainer->pMaterials[i].pTextureFilename != nullptr)
+			if (pDerivedMeshContainer->pMaterials[i].pTextureFilename != nullptr)
+			{
 				m_pOwner->AddTexNameToList(StrToWStr(pDerivedMeshContainer->pMaterials[i].pTextureFilename));
+				//pDerivedMeshContainer->ppTexture = m_pOwner->m_pOwner->
+			}
 			else
 				m_pOwner->AddTexNameToList(L"NoTexture");
 		}
@@ -181,7 +184,7 @@ STDMETHODIMP CHierarchyLoader::DestroyMeshContainer(LPD3DXMESHCONTAINER pMeshCon
 	return S_OK;
 }
 
-CHierarchyLoader * CHierarchyLoader::Create(const std::wstring path, CDynamicMesh* pOwner)
+CHierarchyLoader * CHierarchyLoader::Create(const std::wstring path, CDynamicMeshData* pOwner)
 {
 	CHierarchyLoader* pHL = new CHierarchyLoader(path);
 	pHL->m_pOwner = pOwner;

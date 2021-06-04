@@ -56,6 +56,11 @@ protected: 																			\
 public: 																			\
 	virtual inline varType const& Get##funcName(void) const { return varName; }
 
+#define GETTOR_REF(varType, varName, varInitValue, funcName)						\
+protected: 																			\
+	varType varName = varInitValue; 												\
+public: 																			\
+	virtual inline varType& Get##funcName(void) { return varName; }
 
 
 

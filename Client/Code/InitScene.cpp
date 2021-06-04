@@ -1,18 +1,7 @@
 #include "stdafx.h"
 #include "InitScene.h"
-
 #include "Loading.h"
-
- 
- 
- 
- 
-
 #include "EmptyObject.h"
-
-#include "DataStore.h"
-#include "MeshStore.h"
-#include "TextureStore.h"
 
 #pragma region PrivateScenes
 #include "StaticScene.h"
@@ -79,17 +68,19 @@ void CInitScene::Start(void)
 	
 	m_pBackground->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_pBackground->GetTransform()->SetSize(10, 10, 10);
+	m_pBackground->GetTransform()->AddPositionZ(30);
 
 
 	m_pBackground =
-		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background");
+		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
 
-	m_pBackground->AddComponent<Engine::CBitmapC>();
+	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-	m_pBackground->GetTransform()->SetSize(800, 600, 0);
+	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_pBackground->GetTransform()->SetSize(800, 600, 1);
+	
 }
 
 void CInitScene::FixedUpdate(void)

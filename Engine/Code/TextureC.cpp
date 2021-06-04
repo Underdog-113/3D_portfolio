@@ -116,7 +116,7 @@ void CTextureC::AddAlpha(_float alpha)
 }
 
 
-void CTextureC::AddTexture(std::wstring const & textureKey, _int index)
+void CTextureC::AddTexture(std::wstring const & textureKey, _int meshIndex)
 {
 	SP(CMeshC) spOwnerMeshC;
 	if ((spOwnerMeshC = m_pOwner->GetComponent<CMeshC>()) != nullptr)
@@ -126,7 +126,7 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int index)
 			m_vTexData.resize(numOfMesh);
 
 
-		if (index < 0 || index >= numOfMesh)
+		if (meshIndex < 0 || meshIndex >= numOfMesh)
 		{
 			MSG_BOX(__FILE__, L"index is broken in AddTexture");
 			ABORT;
@@ -139,7 +139,7 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int index)
 	}
 	
 
-	m_vTexData[index].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
+	m_vTexData[meshIndex].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
 }
 
 void CTextureC::ChangeTexture(std::wstring const & textureKey, _int meshIndex, _int texIndex)

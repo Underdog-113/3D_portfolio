@@ -118,10 +118,11 @@ namespace Engine
 		Collision				= 5,
 		Camera					= 6,
 		Debug					= 7,
-		Bitmap					= 8,
-		FadeInOut				= 9,
-		Shader					= 10,
-		NumOfEngineComponentID	= 11
+		RectTex					= 8,
+		Bitmap					= 9,
+		FadeInOut				= 10,
+		Shader					= 11,
+		NumOfEngineComponentID	= 12
 	};
 
 	enum class EChannelID

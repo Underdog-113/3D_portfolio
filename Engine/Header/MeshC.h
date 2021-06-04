@@ -2,9 +2,12 @@
 #define MESHC_H
 
 #include "MeshData.h"
+#include "RenderComponent.h"
 
 BEGIN(Engine)
-class ENGINE_DLL CMeshC final : public CComponent
+class CMeshData;
+class CGraphicsC;
+class ENGINE_DLL CMeshC final : public CRenderComponent
 {
 public:
 	explicit					CMeshC			(void);
@@ -19,6 +22,10 @@ public:
 			void				Update			(SP(CComponent) spThis) override;
 			void				LateUpdate		(SP(CComponent) spThis) override;
 
+			void				PreRender		(SP(CGraphicsC) spGC);
+			void				Render			(SP(CGraphicsC) spGC);
+			void				PostRender		(SP(CGraphicsC) spGC);
+
 			void				OnDestroy		(void) override;
 
 			void				OnEnable		(void) override;
@@ -27,6 +34,10 @@ public:
 			void				AddMeshData		(CMeshData* pMeshData);
 			void				AddMeshData		(std::wstring meshKey);
 			void				GenMinMaxVtx	(void);
+
+private:
+			void				RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
+			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Mesh;

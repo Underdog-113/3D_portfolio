@@ -2,7 +2,7 @@
 #define HIERARCHYLOADER_H
 
 BEGIN(Engine)
-class CDynamicMesh;
+class CDynamicMeshData;
 class ENGINE_DLL CHierarchyLoader final : public ID3DXAllocateHierarchy
 {
 private:
@@ -26,7 +26,7 @@ public:
 				STDMETHOD			(DestroyMeshContainer)	(THIS_ LPD3DXMESHCONTAINER pMeshContainerToFree);
 
 public:
-	static		CHierarchyLoader*	Create					(const std::wstring path, CDynamicMesh* pOwner);
+	static		CHierarchyLoader*	Create					(const std::wstring path, CDynamicMeshData* pOwner);
 				void				Free					(void);
 
 
@@ -34,7 +34,7 @@ private:
 				void				AllocateName			(char** ppName, const char* pFrameName);
 private:
 				std::wstring		m_path				= L"";
-				CDynamicMesh*		m_pOwner			= nullptr;
+				CDynamicMeshData*	m_pOwner			= nullptr;
 				_int				m_curTexLastIndex	= 0;
 };
 END

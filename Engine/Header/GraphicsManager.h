@@ -27,7 +27,7 @@ public:
 
 public:
 			void					AddToRenderList		(_int renderID, 
-														 SP(CGraphicsC) pGC);
+														 CObject* spObject);
 
 			void					ClearRenderList		(void);
 
@@ -42,8 +42,8 @@ private:
 
 
 private:
-	typedef std::vector<SP(CGraphicsC)> _GRAPHICSCOMPONENTS;
-			_GRAPHICSCOMPONENTS		m_vRenderList[(_uint)ERenderID::NumOfRenderID];
+	typedef std::vector<CObject*> _RENDER_LIST;
+			_RENDER_LIST		m_vRenderList[(_uint)ERenderID::NumOfRenderID];
 };
 END
 #endif

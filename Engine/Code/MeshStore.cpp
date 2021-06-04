@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
 #include "MeshStore.h"
 #include "DeviceManager.h"
-#include "StaticMesh.h"
-#include "DynamicMesh.h"
+#include "StaticMeshData.h"
+#include "DynamicMeshData.h"
 
 
 #include <fstream>
@@ -105,7 +105,7 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	
 	if (filePath.find(L"\\Static\\") != std::wstring::npos)
 	{	
-		CStaticMesh* pNewStaticMesh = CStaticMesh::Create(filePath, fileName);
+		CStaticMeshData* pNewStaticMesh = CStaticMeshData::Create(filePath, fileName);
 		if (m_isStatic)
 			m_s_mStaticMeshData[pNewStaticMesh->GetMeshKey()] = pNewStaticMesh;
 		else
@@ -113,7 +113,7 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	}
 	else// if (GetLastDirName(fullFilePath) == L"Dynamic")//Dynamic Mesh
 	{
-		CDynamicMesh* pNewDynamicMesh = CDynamicMesh::Create(filePath, fileName);
+		CDynamicMeshData* pNewDynamicMesh = CDynamicMeshData::Create(filePath, fileName);
 		if (m_isStatic)
 			m_s_mStaticMeshData[pNewDynamicMesh->GetMeshKey()] = pNewDynamicMesh;
 		else

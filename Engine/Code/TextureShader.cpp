@@ -3,8 +3,8 @@
 #include "DeviceManager.h"
  
 #include "Scene.h"
-#include "StaticMesh.h"
-#include "DynamicMesh.h"
+#include "StaticMeshData.h"
+#include "DynamicMeshData.h"
 #include "TextureStore.h"
 
 
@@ -113,8 +113,7 @@ void CTextureShader::LoadShader(void)
 
 void CTextureShader::RenderStaticMesh(CGraphicsC * pGC, _int index)
 {
-	CStaticMesh* pSM = dynamic_cast<CStaticMesh*>(pGC->GetMesh()->GetMeshDatas()[index]);
-
+	CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(pGC->GetMesh()->GetMeshDatas()[index]);
 
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
@@ -127,12 +126,11 @@ void CTextureShader::RenderStaticMesh(CGraphicsC * pGC, _int index)
 
 		pSM->GetMesh()->DrawSubset(i);
 	}
-
 }
 
 void CTextureShader::RenderDynamicMesh(CGraphicsC * pGC, _int index)
 {
-	CDynamicMesh* pDM = dynamic_cast<CDynamicMesh*>(pGC->GetMesh()->GetMeshDatas()[index]);
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pGC->GetMesh()->GetMeshDatas()[index]);
 
 	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
 	pDM->UpdateFrame();
