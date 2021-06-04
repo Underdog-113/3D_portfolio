@@ -5,8 +5,9 @@
 #include <list>
 #include <functional>
 
+BEGIN(Engine)
 template <class... ARGS>
-class Delegate
+class ENGINE_DLL Delegate
 {
 public:
 	typedef typename std::list<std::function<void(ARGS...)>>::iterator iterator;
@@ -84,5 +85,5 @@ public:
 private:
 	std::list<std::function<void(ARGS...)>> functions;
 };
-
+END
 #endif

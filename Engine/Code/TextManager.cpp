@@ -100,12 +100,12 @@ void CTextManager::DeleteText(std::wstring textKey)
 
 void CTextManager::DrawMyText(_Text* pText) // 여기서 텍스쳐와 글을써주면되는데 어떻게 써주지?
 {
-	if (FAILED(D3DXCreateFont(GET_DEVICE, pText->m_fontSize * -1, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+	/*if (FAILED(D3DXCreateFont(GET_DEVICE, pText->m_fontSize * -1, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
 		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &m_pFont)))
 	{
 		MSG_BOX(__FILE__, L"TextManager.cpp / 106");
 		m_pFont = nullptr;
-	}
+	}*/
 
 	if (!m_pFont)
 

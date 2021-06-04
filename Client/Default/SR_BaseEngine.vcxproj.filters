@@ -46,27 +46,6 @@
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
       <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Component\00.UI">
-      <UniqueIdentifier>{37feef76-1b1c-47f2-8dab-d7a1ae89ab14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.UI">
-      <UniqueIdentifier>{89f0f156-f731-4fbc-ac36-6c85f0e7980d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.DeleGate">
-      <UniqueIdentifier>{2821b14c-a627-498a-9039-b7a36de7a16a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.UI\00.ButtonObject">
-      <UniqueIdentifier>{f6e246d8-0610-4fe0-af36-8d3347ce7be3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.UI\01.ImageObject">
-      <UniqueIdentifier>{662c0c11-26b4-45d2-8390-8427d96eefcc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.UI\02.FontObject">
-      <UniqueIdentifier>{f6754f3f-727d-48ee-bf5e-6b0d640ce3c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.UI\03.FontImageObject">
-      <UniqueIdentifier>{8e46fdad-1754-484a-a754-8c4fd7f85ada}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -123,21 +102,6 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\DeleGate.h">
-      <Filter>04.DeleGate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ButtonObject.h">
-      <Filter>02.Objects\00.UI\00.ButtonObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ImageObject.h">
-      <Filter>02.Objects\00.UI\01.ImageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FontObject.h">
-      <Filter>02.Objects\00.UI\02.FontObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ImageFontObject.h">
-      <Filter>02.Objects\00.UI\03.FontImageObject</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -172,21 +136,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DeleGate.cpp">
-      <Filter>04.DeleGate</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ButtonObject.cpp">
-      <Filter>02.Objects\00.UI\00.ButtonObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ImageObject.cpp">
-      <Filter>02.Objects\00.UI\01.ImageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FontObject.cpp">
-      <Filter>02.Objects\00.UI\02.FontObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ImageFontObject.cpp">
-      <Filter>02.Objects\00.UI\03.FontImageObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -122,7 +122,8 @@ namespace Engine
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
-		NumOfEngineComponentID	= 12
+		Text					= 12,
+		NumOfEngineComponentID	= 13
 	};
 
 	enum class EChannelID
@@ -151,6 +152,7 @@ namespace Engine
 		DebugArrow			= 2,
 		DebugCollision		= 3,
 		Grid				= 4,
+		UI					= 5,
 		NumOfEngineLayerID	
 	};
 }

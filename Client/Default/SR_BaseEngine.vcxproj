@@ -180,18 +180,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Header\ButtonObject.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
     <ClInclude Include="..\Header\ClientMacro.h" />
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
-    <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
-    <ClInclude Include="..\Header\FontObject.h" />
-    <ClInclude Include="..\Header\ImageFontObject.h" />
-    <ClInclude Include="..\Header\ImageObject.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
@@ -205,13 +200,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Code\ButtonObject.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
-    <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
-    <ClCompile Include="..\Code\FontObject.cpp" />
-    <ClCompile Include="..\Code\ImageFontObject.cpp" />
-    <ClCompile Include="..\Code\ImageObject.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />

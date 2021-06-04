@@ -217,6 +217,27 @@
     <Filter Include="01.Structure\04.Component\00.RenderComponent">
       <UniqueIdentifier>{b2366ca8-632f-44c1-aba9-56a757b34e24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\05.UI">
+      <UniqueIdentifier>{0f38352d-9f32-4adf-a471-6895b8ae33a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\02.UI">
+      <UniqueIdentifier>{cb367a18-43f7-4600-8991-b87f36e4f5b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\02.UI\00.Text">
+      <UniqueIdentifier>{76b611b4-7578-4f62-9514-6317f100aeb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.UI\00.Image">
+      <UniqueIdentifier>{6c82b18c-66b1-4fc7-8a2e-1986f9dfd438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.UI\01.Button">
+      <UniqueIdentifier>{365e85d3-ca69-4df8-8bd0-bab3595f723d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.UI\02.Text">
+      <UniqueIdentifier>{dcd8d9dd-05ba-4691-8532-82e4483d65a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.DeleGate">
+      <UniqueIdentifier>{9ff9e0ce-3329-418f-86a8-d64c21d8b7fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -407,6 +428,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Image.cpp">
+      <Filter>02.Objects\05.UI\00.Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Button.cpp">
+      <Filter>02.Objects\05.UI\01.Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TextC.cpp">
+      <Filter>03.Components\02.UI\00.Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DeleGate.cpp">
+      <Filter>04.DeleGate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +655,18 @@
     </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Button.h">
+      <Filter>02.Objects\05.UI\01.Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Image.h">
+      <Filter>02.Objects\05.UI\00.Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TextC.h">
+      <Filter>03.Components\02.UI\00.Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DeleGate.h">
+      <Filter>04.DeleGate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
