@@ -30,6 +30,10 @@ private:
 
 private:
 	Engine::CObject* m_obj;
+	Engine::CObject* m_obj1;
+	Engine::CObject* m_obj2;
+	Engine::CObject* m_obj3;
+	Engine::CObject* m_obj4;
 	int num = 0;
 };
 

@@ -217,6 +217,15 @@
     <Filter Include="01.Structure\04.Component\00.RenderComponent">
       <UniqueIdentifier>{b2366ca8-632f-44c1-aba9-56a757b34e24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Components\99. Develop">
+      <UniqueIdentifier>{7ac32553-81d0-41c4-812a-a88127e4c6cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\00. StateMachine">
+      <UniqueIdentifier>{531c0850-6080-4c46-8ecc-fc072a47f044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\00. StateMachine\State">
+      <UniqueIdentifier>{4088c399-0caa-472d-9e82-e8e1895e06b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -407,6 +416,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\State.cpp">
+      <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StateMachine.cpp">
+      <Filter>03.Components\99. Develop\00. StateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +637,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\State.h">
+      <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StateMachine.h">
+      <Filter>03.Components\99. Develop\00. StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

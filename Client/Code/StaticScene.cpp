@@ -95,4 +95,7 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
+
+	//SP(키아나) sp키아나(키아나::Create(true, this));
+	//GetObjectFactory()->AddPrototype(sp키아나);
 }

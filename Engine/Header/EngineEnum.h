@@ -122,6 +122,7 @@ namespace Engine
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
+		StateMachine			= 99,
 		NumOfEngineComponentID	= 12
 	};
 

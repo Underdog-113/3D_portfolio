@@ -52,6 +52,8 @@
     <ClInclude Include="..\Header\RenderComponent.h" />
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
+    <ClInclude Include="..\Header\State.h" />
+    <ClInclude Include="..\Header\StateMachine.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\TextManager.h" />
     <ClInclude Include="..\Header\FRC.h" />
@@ -123,6 +125,8 @@
     <ClCompile Include="..\Code\RenderComponent.cpp" />
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
+    <ClCompile Include="..\Code\State.cpp" />
+    <ClCompile Include="..\Code\StateMachine.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\TextManager.cpp" />
     <ClCompile Include="..\Code\FRC.cpp" />
