@@ -2,7 +2,8 @@
 #include "DongScene.h"
 #include "Image.h"
 #include "Button.h"
-#include "TextC.h"
+#include "Text.h"
+
 CDongScene::CDongScene()
 {
 }
@@ -41,7 +42,7 @@ void CDongScene::Start(void)
 	{
 		SP(Engine::CImage) image =
 			std::dynamic_pointer_cast<Engine::CImage>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
-		image->GetTransform()->SetPositionZ(0.f);
+		image->GetTransform()->SetPositionZ(0.0f);
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 		image->GetTexture()->AddTexture(L"SealPatten3 #16871", 0);
 		image->AddComponent<Engine::CTextC>()->AddFontData(L"¹Ù´Ù", _float2(200, 200), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1));
@@ -54,6 +55,13 @@ void CDongScene::Start(void)
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 		image->GetTexture()->AddTexture(L"Stage_Image", 0);
 		image->AddComponent<Engine::CTextC>()->AddFontData(L"ÇÏ´Ã", _float2(400, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1));
+	}
+
+	{
+		SP(Engine::CText) image =
+			std::dynamic_pointer_cast<Engine::CText>(ADD_CLONE(L"Text", true, (_int)ELayerID::UI, L"sdfsdf"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetText()->AddFontData(L"¶¥", _float2(100, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1));
 	}
 
 	/*{

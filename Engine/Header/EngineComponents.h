@@ -15,7 +15,7 @@
 #include "GraphicsC.h"
 
 // UI------------------------------------------------
-//#include "TextC.h"
+#include "TextC.h"
 
 // Physics------------------------------------------
 #include "RigidBodyC.h"

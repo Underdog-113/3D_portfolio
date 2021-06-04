@@ -238,6 +238,15 @@
     <Filter Include="04.DeleGate">
       <UniqueIdentifier>{9ff9e0ce-3329-418f-86a8-d64c21d8b7fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\09.ResourceStore\03.ShaderStore">
+      <UniqueIdentifier>{c0c3b78b-7277-42ee-b38b-1eba818fdec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\05.RenderTarget">
+      <UniqueIdentifier>{9b5e6c65-0f37-432c-aa1d-1056a9140548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\05.RenderTarget\00.RenderTargetManager">
+      <UniqueIdentifier>{033ec85a-980d-4336-b19b-bb3cf75e46b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -440,6 +449,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>04.DeleGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ShaderStore.cpp">
+      <Filter>00.Engine\09.ResourceStore\03.ShaderStore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RenderTarget.cpp">
+      <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RenderTargetManager.cpp">
+      <Filter>00.Engine\01.Graphics\05.RenderTarget\00.RenderTargetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Text.cpp">
+      <Filter>02.Objects\05.UI\02.Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -668,15 +689,27 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>04.DeleGate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ShaderStore.h">
+      <Filter>00.Engine\09.ResourceStore\03.ShaderStore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RenderTarget.h">
+      <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RenderTargetManager.h">
+      <Filter>00.Engine\01.Graphics\05.RenderTarget\00.RenderTargetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Text.h">
+      <Filter>02.Objects\05.UI\02.Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\TextureShader.fx">
-      <Filter>00.Engine\01.Graphics\02.Shader\01.Shaders\TextureShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DebugShader.fx">
+    <FxCompile Include="..\..\Resource\Shader\00DebugShader.fx">
       <Filter>00.Engine\01.Graphics\02.Shader\01.Shaders\DebugShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\UIShader.fx">
+    <FxCompile Include="..\..\Resource\Shader\01TextureShader.fx">
+      <Filter>00.Engine\01.Graphics\02.Shader\01.Shaders\TextureShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\02UIShader.fx">
       <Filter>00.Engine\01.Graphics\02.Shader\01.Shaders\UIShader</Filter>
     </FxCompile>
   </ItemGroup>

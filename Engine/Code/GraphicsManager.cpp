@@ -257,6 +257,7 @@ void CGraphicsManager::RenderUI(void)
 {
 	CShader* pShader = GET_SHADER((_int)EShaderType::UI);
 
+	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, FALSE);
 	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(), 
 			[](CObject* pObj1, CObject* pObj2)
 			{
@@ -278,5 +279,6 @@ void CGraphicsManager::RenderUI(void)
 			}
 		}
 	}
+	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }

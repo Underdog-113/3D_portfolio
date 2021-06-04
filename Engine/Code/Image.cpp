@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "Image.h"
-#include "TextC.h"
+
 USING(Engine)
 _uint CImage::m_s_uniqueID = 0;
 CImage::CImage()
@@ -11,9 +11,9 @@ CImage::~CImage()
 {
 }
 
-SP(CImage) CImage::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CImage) CImage::Create(_bool isStatic, CScene * pScene)
 {
-	SP(CImage) spInstance(new CImage, Engine::SmartDeleter<CImage>);
+	SP(CImage) spInstance(new CImage, SmartDeleter<CImage>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -26,10 +26,10 @@ SP(Engine::CObject) CImage::MakeClone(void)
 	SP(CImage) spClone(new CImage);
 	__super::InitClone(spClone);
 
-	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
+	spClone->m_spTransform = spClone->GetComponent<CTransformC>();
+	spClone->m_spGraphics = spClone->GetComponent<CGraphicsC>();
+	spClone->m_spTexture = spClone->GetComponent<CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<CRectTexC>();
 
 	return spClone;
 	return SP(CObject)();
@@ -41,9 +41,9 @@ void CImage::Awake(void)
 	m_layerID = (_int)ELayerID::UI;	
 	m_addExtra = true;
 	
-	AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
-	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-	AddComponent<Engine::CTextureC>();
+	AddComponent<CRectTexC>()->SetIsOrtho(true);
+	AddComponent<CGraphicsC>()->SetRenderID((_int)ERenderID::UI);
+	AddComponent<CTextureC>();
 }
 
 void CImage::Start(void)

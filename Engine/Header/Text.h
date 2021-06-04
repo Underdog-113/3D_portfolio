@@ -1,18 +1,18 @@
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef TEXT_H
+#define TEXT_H
 
 #include "Object.h"
 
 BEGIN(Engine)
-class ENGINE_DLL CImage final : public CObject
+class ENGINE_DLL CText final : public CObject
 {
 	SMART_DELETER_REGISTER
 public:
-	CImage();
-	~CImage();
+	CText();
+	~CText();
 
 	// CObject을(를) 통해 상속됨
-	static	SP(CImage) Create(_bool isStatic, CScene* pScene);
+	static	SP(CText) Create(_bool isStatic, CScene* pScene);
 	SP(Engine::CObject) MakeClone(void) override;
 	void Awake(void) override;
 	void Start(void) override;
@@ -32,9 +32,7 @@ private:
 private:
 	static _uint m_s_uniqueID;
 
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
-	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
-	GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
+	GETTOR(SP(Engine::CTextC), m_spText, {}, Text)
 };
 END
 #endif

@@ -63,7 +63,7 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Body");
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
 		spEmptyObject->GetTransform()->SetSize(800, 600, 0);
-		spEmptyObject->GetTransform()->AddPositionZ(0.3);
+		spEmptyObject->GetTransform()->AddPositionZ(0.f);
 
 		spEmptyObject =
 			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
@@ -72,7 +72,7 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
 		spEmptyObject->GetTransform()->SetSize(800, 600, 0);
-		spEmptyObject->GetTransform()->AddPositionZ(0.2);
+		spEmptyObject->GetTransform()->AddPositionZ(0.3f);
 	}
 
 	

@@ -1,12 +1,10 @@
 #ifndef TEXTCOMPONENT_H
 #define TEXTCOMPONENT_H
 
-#include "Object.h"
-
 BEGIN(Engine)
+class CObject;
 class ENGINE_DLL CTextC  final : public CComponent
 {
-	SMART_DELETER_REGISTER
 public:
 	explicit CTextC();
 	~CTextC();
@@ -30,7 +28,7 @@ private:
 	LPD3DXFONT	m_pFont;
 	_Text m_textData;
 
-	GETTOR_SETTOR(_float2, m_offset, _float2(0, 0), OffSet);
+	GETTOR_SETTOR(_float2, m_offset, _float2(0, 0), OffSet)
 };
 END
 #endif
