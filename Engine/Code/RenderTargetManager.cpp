@@ -2,12 +2,17 @@
 #include "RenderTargetManager.h"
 
 
-//USING(Engine)
-//CRenderTargetManager::CRenderTargetManager()
-//{
-//}
-//
-//
-//CRenderTargetManager::~CRenderTargetManager()
-//{
-//}
+USING(Engine)
+IMPLEMENT_SINGLETON(CRenderTargetManager)
+
+void CRenderTargetManager::Awake(void)
+{
+}
+
+void CRenderTargetManager::Start(void)
+{
+}
+
+void CRenderTargetManager::OnDestroy(void)
+{
+}
