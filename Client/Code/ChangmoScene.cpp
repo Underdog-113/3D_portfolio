@@ -37,6 +37,8 @@ void CChangmoScene::Awake(_int numOfLayers)
 void CChangmoScene::Start(void)
 {
 	__super::Start();
+	Engine::ADD_TEXT(L"WOW1", L"asdfasdfasdfasdf", _float3(100, 100, -1), D3DXCOLOR(0, 0, 0, 1));
+
 	{
 		SP(Engine::CObject) spEmptyObject
 			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
@@ -55,6 +57,24 @@ void CChangmoScene::Start(void)
 		spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 		spEmptyObject1->GetTransform()->SetParent(spEmptyObject->GetTransform());
 		spEmptyObject1->GetTransform()->SetPosition(1, 0, 0);*/
+
+		spEmptyObject =
+			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
+
+		spEmptyObject->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Body");
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
+		spEmptyObject->GetTransform()->SetSize(800, 600, 0);
+		spEmptyObject->GetTransform()->AddPositionZ(0.3);
+
+		spEmptyObject =
+			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
+
+		spEmptyObject->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
+		spEmptyObject->GetTransform()->SetSize(800, 600, 0);
+		spEmptyObject->GetTransform()->AddPositionZ(0.2);
 	}
 
 	

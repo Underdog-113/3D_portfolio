@@ -91,11 +91,12 @@ void CMeshC::LateUpdate(SP(CComponent) spThis)
 
 void CMeshC::PreRender(SP(CGraphicsC) spGC)
 {
-	GET_DEVICE->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
-	GET_DEVICE->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
-	GET_DEVICE->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-	GET_DEVICE->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
-	GET_DEVICE->SetMaterial(&spGC->m_mtrl);
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
+	pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
+	pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
+	pDevice->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
+	pDevice->SetMaterial(&spGC->m_mtrl);
 }
 
 void CMeshC::Render(SP(CGraphicsC) spGC)
