@@ -5,8 +5,8 @@ BEGIN(Engine)
 class ENGINE_DLL CGraphicsC final : public CComponent
 {
 public:
-	explicit	CGraphicsC	(void);
-			   ~CGraphicsC	(void);
+	explicit							CGraphicsC		(void);
+									   ~CGraphicsC		(void);
 public:
 					SP(CComponent)		MakeClone		(CObject* pObject)	override;
 
@@ -38,9 +38,6 @@ private:
 	GETTOR			(_float3,			m_offsetBV,		ZERO_VECTOR,	OffsetBV)
 	GETTOR			(_float3,			m_sizeBV,		ONE_VECTOR,		SizeBV)
 	GETTOR_SETTOR	(_int,				m_renderID,		UNDEFINED,		RenderID)
-
-
-
 };
 END
 #endif // !GRAPHICSCOMPONENT_H

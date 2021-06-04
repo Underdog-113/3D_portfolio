@@ -54,11 +54,8 @@ void CGraphicsManager::LateUpdate(void)
 	{
 		for (auto& it = m_vRenderList[i].begin(); it != m_vRenderList[i].end();)
 		{
-			if ((*it)->GetOwner() == nullptr)
-			{
-				(*it).reset();
+			if ((*it)->GetDeleteThis() == true)
 				it = m_vRenderList[i].erase(it);
-			}
 			else
 				++it;
 		}
@@ -97,9 +94,6 @@ void CGraphicsManager::OnDestroy(void)
 {
 	for (_uint i = 0; i < (_uint)ERenderID::NumOfRenderID; ++i)
 	{
-		for (auto& pGC : m_vRenderList[i])
-			pGC.reset();
-
 		m_vRenderList[i].clear();
 	}
 }
@@ -112,11 +106,11 @@ void CGraphicsManager::OnDisable(void)
 {
 }
 
-void CGraphicsManager::AddToRenderList(_int renderID, SP(CGraphicsC) pGC)
+void CGraphicsManager::AddToRenderList(_int renderID, CObject* pObject)
 {
-	if (pGC == nullptr)
+	if (pObject == nullptr)
 	{
-		MSG_BOX(__FILE__, L"GraphicComponent is null in AddToRenderList");
+		MSG_BOX(__FILE__, L"Object is null in AddToRenderList");
 		ABORT;
 	}
 
@@ -126,7 +120,7 @@ void CGraphicsManager::AddToRenderList(_int renderID, SP(CGraphicsC) pGC)
 		ABORT;
 	}
 
-	m_vRenderList[(_uint)renderID].push_back(pGC);
+	m_vRenderList[(_uint)renderID].push_back(pObject);
 }
 
 void CGraphicsManager::ClearRenderList(void)
@@ -142,21 +136,19 @@ void CGraphicsManager::RenderBase(void)
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 
 	CShader* pShader = GET_SHADER((_int)EShaderType::Texture);
-	for (auto& spGC : m_vRenderList[(_int)ERenderID::Base])
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::Base])
 	{
-		if (spGC->GetOwner() != nullptr && spGC->GetOwner()->GetIsEnabled())
+		if (pObject->GetIsEnabled())
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(spGC->GetTransform()->GetPosition(),
-					spGC->GetTransform()->GetSize() / 2.f))
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				pShader->PreRender(spGC.get());
-				pShader->Render(spGC.get());
-				pShader->PostRender(spGC.get());
+				pObject->PreRender();
+				pObject->Render();
+				pObject->PostRender();
 			}
 		}
-
-		spGC.reset();
 	}
 
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
@@ -166,20 +158,19 @@ void CGraphicsManager::RenderBase(void)
 void CGraphicsManager::RenderNonAlpha(void)
 {
 	CShader* pShader = GET_SHADER((_int)EShaderType::Texture);
-	for (auto& spGC : m_vRenderList[(_int)ERenderID::NonAlpha])
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::NonAlpha])
 	{
-		if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
+		if (pObject->GetIsEnabled())
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(spGC->GetTransform()->GetPosition(),
-					spGC->GetTransform()->GetSize() / 2.f))
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				pShader->PreRender(spGC.get());
-				pShader->Render(spGC.get());
-				pShader->PostRender(spGC.get());
+				pObject->PreRender();
+				pObject->Render();
+				pObject->PostRender();
 			}
 		}
-		spGC.reset();
 	}
 }
 
@@ -190,20 +181,19 @@ void CGraphicsManager::RenderWire(void)
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	CShader* pShader = GET_SHADER((_int)EShaderType::Debug);
-	for (auto& spGC : m_vRenderList[(_int)ERenderID::WireFrame])
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::WireFrame])
 	{
-		if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
+		if (pObject->GetIsEnabled())
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(spGC->GetTransform()->GetPosition(),
-					spGC->GetTransform()->GetSize() / 2.f))
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+					      pObject->GetTransform()->GetSize() / 2.f))
 			{
-				pShader->PreRender(spGC.get());
-				pShader->Render(spGC.get());
-				pShader->PostRender(spGC.get());
+				pObject->PreRender();
+				pObject->Render();
+				pObject->PostRender();
 			}
 		}
-		spGC.reset();
 	}
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
@@ -221,24 +211,20 @@ void CGraphicsManager::RenderAlphaTest(void)
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER); // 알파 테스팅 수행
 
 	CShader* pShader = GET_SHADER((_int)EShaderType::Texture);
-	for (auto& spGC : m_vRenderList[(_int)ERenderID::AlphaTest])
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaTest])
 	{
-		if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
+		if (pObject->GetIsEnabled())
 		{
-			if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
+			if (GET_MAIN_CAM->GetFrustum()->
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				if (GET_MAIN_CAM->GetFrustum()->
-					CheckAabb(spGC->GetTransform()->GetPosition(),
-							  spGC->GetTransform()->GetSize() / 2.f))
-				{
-					pShader->PreRender(spGC.get());
-					pShader->Render(spGC.get());
-					pShader->PostRender(spGC.get());
-				}
+				pObject->PreRender();
+				pObject->Render();
+				pObject->PostRender();
 			}
 		}
 
-		spGC.reset();
 	}
 
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
@@ -253,40 +239,41 @@ void CGraphicsManager::RenderAlphaBlend(void)
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
 	CShader* pShader = GET_SHADER((_int)EShaderType::Texture);
-	for (auto& spGC : m_vRenderList[(_int)ERenderID::AlphaBlend])
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaBlend])
 	{
-		if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
+		if (pObject->GetIsEnabled())
 		{
+			//그래픽 컴포넌트를 주면
+			//메쉬 컴포넌트가 가진 민맥스 버텍스 * 트랜스폼의 사이즈 + 포지션으로 컬링
 			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(spGC->GetTransform()->GetPosition(),
-						  spGC->GetTransform()->GetSize() / 2.f))
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				pShader->PreRender(spGC.get());
-				pShader->Render(spGC.get());
-				pShader->PostRender(spGC.get());
+				//
+				pObject->PreRender();
+				pObject->Render();
+				pObject->PostRender();
 			}
 		}
-		spGC.reset();
 	}
 }
 
 void CGraphicsManager::RenderUI(void)
 {
 	CShader* pShader = GET_SHADER((_int)EShaderType::UI);
-	for (auto& spGC : m_vRenderList[(_int)ERenderID::UI])
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::UI])
 	{
-		if (spGC->GetOwner() != nullptr && spGC->GetIsEnabled())
+		if (pObject->GetIsEnabled())
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(spGC->GetTransform()->GetPosition(),
-					spGC->GetTransform()->GetSize() / 2.f))
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				pShader->PreRender(spGC.get());
-				pShader->Render(spGC.get());
-				pShader->PostRender(spGC.get());
+				pObject->PreRender();
+				pObject->Render();
+				pObject->PostRender();
 			}
 		}
-		spGC.reset();
 	}
 	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }

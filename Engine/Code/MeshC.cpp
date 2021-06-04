@@ -3,7 +3,9 @@
 #include "MeshStore.h"
 #include "DataStore.h"
 #include "Object.h"
-#include "MeshData.h"
+
+#include "StaticMeshData.h"
+#include "DynamicMeshData.h"
 
 USING(Engine)
 CMeshC::CMeshC(void)
@@ -67,8 +69,8 @@ void CMeshC::Start(SP(CComponent) spThis)
 		if (m_initTex)
 		{
 			SP(CTextureC) spOwnerTexC = m_pOwner->GetComponent<CTextureC>();
-			for (auto& texName : m_vMeshDatas[i]->GetTexList())
-				spOwnerTexC->AddTexture(RemoveExtension(texName), i);
+			for (_int j = 0; j < m_vMeshDatas[i]->GetTexList().size(); ++j)
+				spOwnerTexC->AddTexture(RemoveExtension(m_vMeshDatas[i]->GetTexList()[j]), i);
 		}
 	}
 }
@@ -87,6 +89,30 @@ void CMeshC::LateUpdate(SP(CComponent) spThis)
 {
 }
 
+void CMeshC::PreRender(SP(CGraphicsC) spGC)
+{
+	GET_DEVICE->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
+	GET_DEVICE->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
+	GET_DEVICE->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
+	GET_DEVICE->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
+	GET_DEVICE->SetMaterial(&spGC->m_mtrl);
+}
+
+void CMeshC::Render(SP(CGraphicsC) spGC)
+{
+	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
+	{
+		if (m_vMeshDatas[i]->GetMeshType() == (_int)EMeshType::Static)
+			RenderStatic(spGC, m_vMeshDatas[i], (_int)i);
+		else
+			RenderDynamic(spGC, m_vMeshDatas[i], (_int)i);
+	}
+}
+
+void CMeshC::PostRender(SP(CGraphicsC) spGC)
+{
+}
+
 void CMeshC::OnDestroy(void)
 {
 	for (auto& meshData : m_vMeshDatas)
@@ -95,10 +121,14 @@ void CMeshC::OnDestroy(void)
 
 void CMeshC::OnEnable(void)
 {
+	__super::OnEnable();
+	
 }
 
 void CMeshC::OnDisable(void)
 {
+	__super::OnDisable();
+	
 }
 
 void CMeshC::AddMeshData(CMeshData * pMeshData)
@@ -139,4 +169,61 @@ void CMeshC::GenMinMaxVtx(void)
 
 	if(m_vMeshDatas.size() != 0)
 		m_meshSize = m_maxVertex - m_minVertex;
+}
+
+void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex)
+{
+	CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(pMeshData);
+
+	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
+	{
+		_TexData* pTexData = spGC->GetTexture()->GetTexData()[meshIndex][i];
+
+		if (pTexData != nullptr)
+			GET_DEVICE->SetTexture(0, pTexData->pTexture);
+		else
+			GET_DEVICE->SetTexture(0, nullptr);
+
+		pSM->GetMesh()->DrawSubset(i);
+	}
+}
+
+void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex)
+{
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
+
+	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
+	pDM->UpdateFrame();
+
+	for (auto& meshContainer : pDM->GetMeshContainers())
+	{
+		for (_ulong i = 0; i < meshContainer->numBones; ++i)
+		{
+			meshContainer->pRenderingMatrix[i] =
+				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
+		}
+
+		void* pSrcVertex = nullptr;
+		void* pDestVertex = nullptr;
+
+		meshContainer->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
+		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
+
+		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
+
+		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
+		meshContainer->pOriMesh->UnlockVertexBuffer();
+
+
+		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
+		for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
+		{
+			if (pTexData[meshIndex][i] != nullptr)
+				GET_DEVICE->SetTexture(0, pTexData[meshIndex][meshContainer->texIndexStart + i]->pTexture);
+			else
+				GET_DEVICE->SetTexture(0, nullptr);
+
+			meshContainer->MeshData.pMesh->DrawSubset(i);
+		}
+	}
 }

@@ -76,7 +76,7 @@ void CGraphicsC::LateUpdate(SP(CComponent) spThis)
 {
 	SP(CGraphicsC) spGraphicC = std::dynamic_pointer_cast<CGraphicsC>(spThis);
 
-	ADD_TO_RENDER_LIST(m_renderID, spGraphicC);
+	ADD_TO_RENDER_LIST(m_renderID, m_pOwner);
 }
 
 void CGraphicsC::OnDestroy(void)
@@ -86,6 +86,12 @@ void CGraphicsC::OnDestroy(void)
 void CGraphicsC::OnEnable(void)
 {
 	__super::OnEnable();
+}
+
+void CGraphicsC::OnDisable(void)
+{
+	__super::OnDisable();
+
 }
 
 void CGraphicsC::GenerateBV(void)
@@ -102,6 +108,3 @@ void CGraphicsC::GenerateBV(void)
 }
 
 
-void CGraphicsC::OnDisable(void)
-{
-}

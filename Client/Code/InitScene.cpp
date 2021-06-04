@@ -1,18 +1,7 @@
 #include "stdafx.h"
 #include "InitScene.h"
-
 #include "Loading.h"
-
- 
- 
- 
- 
-
 #include "EmptyObject.h"
-
-#include "DataStore.h"
-#include "MeshStore.h"
-#include "TextureStore.h"
 
 #pragma region PrivateScenes
 #include "StaticScene.h"
@@ -79,14 +68,14 @@ void CInitScene::Start(void)
 	
 	m_pBackground->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_pBackground->GetTransform()->SetSize(10, 10, 10);
 
 
 	m_pBackground =
-		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background");
+		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
 
-	m_pBackground->AddComponent<Engine::CBitmapC>();
+	m_pBackground->AddComponent<Engine::CRectTexC>();
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
 	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
 	m_pBackground->GetTransform()->SetSize(800, 600, 0);
@@ -109,7 +98,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->SetColor(D3DXCOLOR(1, 1, 1, 0.0f));
+			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"BG");
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();

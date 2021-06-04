@@ -1,6 +1,5 @@
 #include "EngineStdafx.h"
 #include "BitmapC.h"
-#include "DeviceManager.h"
 
 USING(Engine)
 LPDIRECT3DVERTEXBUFFER9 CBitmapC::m_s_pVertexBuffer = nullptr;
@@ -17,17 +16,16 @@ CBitmapC::~CBitmapC()
 
 SP(CComponent) CBitmapC::MakeClone(CObject * pObject)
 {
-	SP(CBitmapC) pClone(new CBitmapC);
-	pClone->SetOwner(pObject);
-	pClone->SetName(m_name);
+	SP(CBitmapC) spClone(new CBitmapC);
+	__super::InitClone(spClone, pObject);
 
-	return pClone;
+	return spClone;
 }
 
 void CBitmapC::Awake(void)
 {
 	__super::Awake();
-	m_componentID = (_int)(_int)m_s_componentID;;
+	m_componentID = (_int)m_s_componentID;;
 	if (m_s_pVertexBuffer == nullptr)
 		InitVertexBuffer();
 	if (m_s_pIndexBuffer == nullptr)
@@ -60,10 +58,14 @@ void CBitmapC::OnDestroy(void)
 
 void CBitmapC::OnEnable(void)
 {
+	__super::OnEnable();
+	
 }
 
 void CBitmapC::OnDisable(void)
 {
+	__super::OnDisable();
+	
 }
 
 LPDIRECT3DVERTEXBUFFER9 CBitmapC::GetVertexBuffer(void)

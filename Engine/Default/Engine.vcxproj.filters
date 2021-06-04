@@ -178,12 +178,6 @@
     <Filter Include="03.Components\00.System\01.GraphicsComponent">
       <UniqueIdentifier>{aae8af78-9aba-43e0-912e-5e8c59a48eb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.Mesh">
-      <UniqueIdentifier>{20bbbff3-bb4c-4660-aed0-5af5927b31d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\01.Texture">
-      <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Bitmap">
       <UniqueIdentifier>{7157f715-fca2-4c5e-bcc4-6b6ff0b96dd8}</UniqueIdentifier>
     </Filter>
@@ -201,6 +195,27 @@
     </Filter>
     <Filter Include="03.Components\01.Effect\00.FadeInOut">
       <UniqueIdentifier>{ddde980e-02dd-4d21-9898-c6eac442ec6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\03.Shader">
+      <UniqueIdentifier>{279918f3-50a6-4547-8f3e-cd69539ed9b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\04.SkyBox">
+      <UniqueIdentifier>{b0358244-f1dc-45a3-83ba-e7623ab3a89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer">
+      <UniqueIdentifier>{bff4821e-494a-40fe-83e0-1f608076580b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\01.Mesh">
+      <UniqueIdentifier>{20bbbff3-bb4c-4660-aed0-5af5927b31d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Texture">
+      <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect">
+      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Structure\04.Component\00.RenderComponent">
+      <UniqueIdentifier>{b2366ca8-632f-44c1-aba9-56a757b34e24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -307,10 +322,10 @@
       <Filter>03.Components\00.System\00.Transform</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshC.cpp">
-      <Filter>03.Components\00.System\01.GraphicsComponent\00.Mesh</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\01.Mesh</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextureC.cpp">
-      <Filter>03.Components\00.System\01.GraphicsComponent\01.Texture</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\02.Texture</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\GraphicsC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent</Filter>
@@ -329,12 +344,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\Object.cpp">
       <Filter>01.Structure\03.Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StaticMesh.cpp">
-      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DynamicMesh.cpp">
-      <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HierarchyLoader.cpp">
       <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh\00.HierarchyLoader</Filter>
@@ -377,6 +386,27 @@
     </ClCompile>
     <ClCompile Include="..\Code\Camera.cpp">
       <Filter>02.Objects\03.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ShaderC.cpp">
+      <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkyBox.cpp">
+      <Filter>02.Objects\04.SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VIBufferC.cpp">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RectTexC.cpp">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RenderComponent.cpp">
+      <Filter>01.Structure\04.Component\00.RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DynamicMeshData.cpp">
+      <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp">
+      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -507,10 +537,10 @@
       <Filter>03.Components\00.System\00.Transform</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshC.h">
-      <Filter>03.Components\00.System\01.GraphicsComponent\00.Mesh</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\01.Mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextureC.h">
-      <Filter>03.Components\00.System\01.GraphicsComponent\01.Texture</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\02.Texture</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\GraphicsC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent</Filter>
@@ -529,12 +559,6 @@
     </ClInclude>
     <ClInclude Include="..\Header\Object.h">
       <Filter>01.Structure\03.Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StaticMesh.h">
-      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DynamicMesh.h">
-      <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\HierarchyLoader.h">
       <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh\00.HierarchyLoader</Filter>
@@ -577,6 +601,27 @@
     </ClInclude>
     <ClInclude Include="..\Header\Camera.h">
       <Filter>02.Objects\03.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ShaderC.h">
+      <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SkyBox.h">
+      <Filter>02.Objects\04.SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\VIBufferC.h">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RectTexC.h">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RenderComponent.h">
+      <Filter>01.Structure\04.Component\00.RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DynamicMeshData.h">
+      <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h">
+      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
