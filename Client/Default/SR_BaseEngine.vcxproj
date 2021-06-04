@@ -180,6 +180,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AirPlane.h" />
+    <ClInclude Include="..\Header\Blade.h" />
+    <ClInclude Include="..\Header\Bronya.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -187,11 +190,17 @@
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
     <ClInclude Include="..\Header\DongScene.h" />
+    <ClInclude Include="..\Header\Ganesha.h" />
+    <ClInclude Include="..\Header\Halberd.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\Mecca.h" />
+    <ClInclude Include="..\Header\MineMonster.h" />
+    <ClInclude Include="..\Header\Monster.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\Uhlan.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="Resource.h" />
@@ -200,13 +209,22 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AirPlane.cpp" />
+    <ClCompile Include="..\Code\Blade.cpp" />
+    <ClCompile Include="..\Code\Bronya.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
+    <ClCompile Include="..\Code\Ganesha.cpp" />
+    <ClCompile Include="..\Code\Halberd.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\Mecca.cpp" />
+    <ClCompile Include="..\Code\MineMonster.cpp" />
+    <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\Uhlan.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />

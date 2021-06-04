@@ -46,6 +46,33 @@
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
       <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\Monster">
+      <UniqueIdentifier>{211598c1-eb0b-4768-907e-f8852aceae34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Mine">
+      <UniqueIdentifier>{c018753b-4459-4729-9aa1-f124989a2513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\AirPlane">
+      <UniqueIdentifier>{974ca1cf-b207-48aa-8298-c5b132ab2142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Uhlan">
+      <UniqueIdentifier>{bb69a5fb-20de-4a03-ab41-683c5fd6e336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Blade">
+      <UniqueIdentifier>{253154c8-bf6c-479a-8074-94a34e30d62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Mecca">
+      <UniqueIdentifier>{ba62fde9-0141-45f2-af69-39aa74f7a62f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Ganesha">
+      <UniqueIdentifier>{2fa8eab6-5f66-4214-95e7-63aa87abeea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Bronya">
+      <UniqueIdentifier>{199e26cf-2e27-428b-aeee-038a13fbf1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\Monster\Halberd">
+      <UniqueIdentifier>{0799b1ba-0a55-4c92-a407-982145d97033}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -102,6 +129,33 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Monster.h">
+      <Filter>02.Objects\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MineMonster.h">
+      <Filter>02.Objects\Monster\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Halberd.h">
+      <Filter>02.Objects\Monster\Halberd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AirPlane.h">
+      <Filter>02.Objects\Monster\AirPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha.h">
+      <Filter>02.Objects\Monster\Ganesha</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya.h">
+      <Filter>02.Objects\Monster\Bronya</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Uhlan.h">
+      <Filter>02.Objects\Monster\Uhlan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Mecca.h">
+      <Filter>02.Objects\Monster\Mecca</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Blade.h">
+      <Filter>02.Objects\Monster\Blade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -136,6 +190,33 @@
     </ClCompile>
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Monster.cpp">
+      <Filter>02.Objects\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MineMonster.cpp">
+      <Filter>02.Objects\Monster\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Halberd.cpp">
+      <Filter>02.Objects\Monster\Halberd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AirPlane.cpp">
+      <Filter>02.Objects\Monster\AirPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha.cpp">
+      <Filter>02.Objects\Monster\Ganesha</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya.cpp">
+      <Filter>02.Objects\Monster\Bronya</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Uhlan.cpp">
+      <Filter>02.Objects\Monster\Uhlan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Mecca.cpp">
+      <Filter>02.Objects\Monster\Mecca</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Blade.cpp">
+      <Filter>02.Objects\Monster\Blade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
