@@ -6,3 +6,6 @@ ipch/
 *.db
 *.dummy
 SR_BaseEngine.VC.VC.opendb
+3DEditor/Default/Debug/3DEditor.pch
+3DEditor/Default/Release/3DEditor.pch
+3DEditor/Default/x64/Debug/3DEditor.pch
