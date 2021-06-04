@@ -33,6 +33,8 @@ private:
 					void					InitIndexBuffer		(void);
 public:
 	static const	EComponentID			m_s_componentID = EComponentID::RectTex;
+private:
+	GETTOR_SETTOR	(_bool,					m_isOrtho,			false,			IsOrtho)
 };
 END
 

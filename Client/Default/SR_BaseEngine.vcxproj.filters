@@ -46,6 +46,7 @@
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
       <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="02.Objects\Monster">
       <UniqueIdentifier>{211598c1-eb0b-4768-907e-f8852aceae34}</UniqueIdentifier>
     </Filter>
@@ -72,6 +73,22 @@
     </Filter>
     <Filter Include="02.Objects\Monster\Halberd">
       <UniqueIdentifier>{0799b1ba-0a55-4c92-a407-982145d97033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana">
+      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.Player">
+      <UniqueIdentifier>{aae8ad2c-f49d-44a2-967c-9c648d86446d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.Player\00.Kiana">
+      <UniqueIdentifier>{5ffef45e-d9f4-4bc7-9dbe-4f404826fa7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.Player\01.Theresa">
+      <UniqueIdentifier>{1d28f112-4fdb-4a50-86f6-3ade36b9e334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.Player\02.Sakura">
+      <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +146,7 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
+
     <ClInclude Include="..\Header\Monster.h">
       <Filter>02.Objects\Monster</Filter>
     </ClInclude>
@@ -155,6 +173,11 @@
     </ClInclude>
     <ClInclude Include="..\Header\Blade.h">
       <Filter>02.Objects\Monster\Blade</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM_KianaC.h" />
+    <ClInclude Include="FSM_Kiana_Define.h">
+      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +214,7 @@
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClCompile>
+
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02.Objects\Monster</Filter>
     </ClCompile>
@@ -218,6 +242,9 @@
     <ClCompile Include="..\Code\Blade.cpp">
       <Filter>02.Objects\Monster\Blade</Filter>
     </ClCompile>
+
+    <ClCompile Include="FSM_KianaC.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

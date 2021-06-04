@@ -66,6 +66,12 @@ namespace Engine
 		UI				= 2,
 		NumOfShdaerType	= 3
 	};
+
+	enum class EShaderID
+	{
+		Basic			= 0,
+		NumOfShaderID	= 1
+	};
 #pragma endregion
 
 #pragma region PhysicsEnum
@@ -122,6 +128,7 @@ namespace Engine
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
+		StateMachine			= 99,
 		NumOfEngineComponentID	= 12
 	};
 

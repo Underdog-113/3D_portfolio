@@ -1,18 +1,6 @@
 #include "stdafx.h"
 #include "MainApp.h"
-
- 
- 
- 
- 
- 
- 
- 
- 
-
 #include "Object.h"
- 
-
 
 #pragma region IncludeScenes
 #include "InitScene.h"
@@ -60,7 +48,7 @@ void CMainApp::Start(void)
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CShaderManager::GetInstance()->Start();
-	
+
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
 }
 
@@ -80,13 +68,13 @@ void CMainApp::Update(void)
 	Engine::TIME_MEASURE_START;
 
 	Engine::CInputManager::GetInstance()->Update();
-	
+
 	Engine::CSceneManager::GetInstance()->Update();
 	Engine::CCollisionManager::GetInstance()->Update();
 
 	Engine::CCameraManager::GetInstance()->Update();
 	Engine::CGraphicsManager::GetInstance()->Update();
-	
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -98,9 +86,9 @@ void CMainApp::LateUpdate(void)
 	Engine::CInputManager::GetInstance()->LateUpdate();
 	Engine::CCollisionManager::GetInstance()->LateUpdate();
 	Engine::CSceneManager::GetInstance()->LateUpdate();
-	
+
 	Engine::CCameraManager::GetInstance()->LateUpdate();
-	Engine::CGraphicsManager::GetInstance()->LateUpdate();	
+	Engine::CGraphicsManager::GetInstance()->LateUpdate();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -112,9 +100,9 @@ void CMainApp::PreRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->PreRender();
 	Engine::CTextManager::GetInstance()->PreRender();
+	Engine::CGraphicsManager::GetInstance()->PreRender();
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -126,9 +114,9 @@ void CMainApp::Render(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->Render();
 	Engine::CTextManager::GetInstance()->Render();
+	Engine::CGraphicsManager::GetInstance()->Render();
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -139,9 +127,9 @@ void CMainApp::PostRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-
-	Engine::CGraphicsManager::GetInstance()->PostRender();
 	Engine::CTextManager::GetInstance()->PostRender();
+	Engine::CGraphicsManager::GetInstance()->PostRender();
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -168,5 +156,5 @@ void CMainApp::OnDisable(void)
 
 void CMainApp::InitStaticPrototype(void)
 {
-	
+
 }

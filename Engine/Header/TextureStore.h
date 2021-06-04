@@ -15,7 +15,6 @@ public:
 			void				Free					(void);
 
 			void				Awake					(void) override;
-			void				Start					(void) override;
 			void				OnDestroy				(void) override;
 
 			void				ClearCurResource		(void) override;
@@ -24,7 +23,6 @@ public:
 			void				InitTextureForScene		(std::wstring curScene, _bool isStatic = false);
 
 private:
-			void				InitResource			(std::wstring sourcePath) override;
 			void				ParsingTexture			(std::wstring filePath, 
 														 std::wstring fileName);
 

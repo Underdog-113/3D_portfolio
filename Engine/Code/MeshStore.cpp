@@ -46,10 +46,6 @@ void CMeshStore::Awake(void)
 	m_resourcePath = L"..\\..\\Resource\\Mesh";
 }
 
-void CMeshStore::Start(void)
-{
-	__super::Start();
-}
 
 void CMeshStore::OnDestroy(void)
 {
@@ -91,13 +87,9 @@ CMeshData* CMeshStore::GetMeshData(std::wstring meshKey)
 void CMeshStore::InitMeshForScene(std::wstring curScene, _bool isStatic)
 {
 	m_isStatic = isStatic;
-	InitResource(m_resourcePath + L"\\" + curScene);
+	__super::InitResource(m_resourcePath + L"\\" + curScene);
 }
 
-void CMeshStore::InitResource(std::wstring sourcePath)
-{
-	__super::InitResource(sourcePath);
-}
 
 void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 {

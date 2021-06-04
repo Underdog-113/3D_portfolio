@@ -17,7 +17,7 @@ SP(CComponent) CShaderC::MakeClone(CObject * pObject)
 	SP(CShaderC) spClone(new CShaderC);
 	__super::InitClone(spClone, pObject);
 
-	spClone->m_vEffects = m_vEffects;
+	spClone->m_pEffects = m_pEffects;
 
 	return spClone;
 }
@@ -29,7 +29,15 @@ void CShaderC::Awake(void)
 
 	if (m_pOwner->GetAddExtra() == false)
 	{
+		_bool isStatic			= m_pOwner->GetIsStatic();
+		_int dataID				= m_pOwner->GetDataID();
+		std::wstring objectKey	= m_pOwner->GetObjectKey();
+		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
+		std::wstring shaderName;
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ShaderName", shaderName);
+
+		m_pEffects = CShaderStore::GetInstance()->GetShader(GetShaderID(shaderName));
 	}
 }
 
@@ -66,7 +74,13 @@ void CShaderC::OnDisable(void)
 	
 }
 
-void CShaderC::AddEffect(LPD3DXEFFECT pEffect)
+_int CShaderC::GetShaderID(std::wstring shaderName)
 {
-	m_vEffects.emplace_back(pEffect);
+	if (shaderName == L"Basic")
+		return (_int)EShaderID::Basic;
+	else
+	{
+		MSG_BOX(__FILE__, L"Wrong shdaer name in GetShaderID");
+		ABORT;
+	}
 }

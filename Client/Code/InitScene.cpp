@@ -45,6 +45,8 @@ void CInitScene::Start(void)
 {
 	m_isStarted = true;
 
+	Engine::ADD_TEXT(L"WOW", L"asdfasdfasdfasdf", _float3(100, 100, -1), D3DXCOLOR(0, 0, 0, 1));
+
 	//DataStore Init
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);
 	m_pDataStore->InitDataForScene(m_objectKey);
@@ -70,15 +72,17 @@ void CInitScene::Start(void)
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
 	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_pBackground->GetTransform()->SetSize(10, 10, 10);
+	m_pBackground->GetTransform()->AddPositionZ(30);
 
 
 	m_pBackground =
 		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
 
-	m_pBackground->AddComponent<Engine::CRectTexC>();
+	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-	m_pBackground->GetTransform()->SetSize(800, 600, 0);
+	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_pBackground->GetTransform()->SetSize(800, 600, 1);
+	
 }
 
 void CInitScene::FixedUpdate(void)

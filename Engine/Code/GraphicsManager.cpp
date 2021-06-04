@@ -1,12 +1,7 @@
 #include "EngineStdafx.h"
- 
- 
 #include "Scene.h"
-#include "DeviceManager.h"
 #include "Object.h"
- 
 #include "Frustum.h"
- 
 #include "Shader.h"
 
 USING(Engine)
@@ -261,6 +256,15 @@ void CGraphicsManager::RenderAlphaBlend(void)
 void CGraphicsManager::RenderUI(void)
 {
 	CShader* pShader = GET_SHADER((_int)EShaderType::UI);
+
+	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, FALSE);
+	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(), 
+			[](CObject* pObj1, CObject* pObj2)
+			{
+				return pObj1->GetTransform()->GetPosition().z > pObj2->GetTransform()->GetPosition().z;								
+			});
+
+	
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::UI])
 	{
 		if (pObject->GetIsEnabled())
@@ -275,5 +279,6 @@ void CGraphicsManager::RenderUI(void)
 			}
 		}
 	}
+	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }

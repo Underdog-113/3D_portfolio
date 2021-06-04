@@ -41,11 +41,6 @@ void CTextureStore::Awake(void)
 	m_s_mStaticTextureData[L"NoTexture"] = nullptr;
 }
 
-void CTextureStore::Start(void)
-{
-	__super::Start();
-}
-
 void CTextureStore::OnDestroy(void)
 {
 	for (auto& texture : m_mCurSceneTextureData)
@@ -97,12 +92,7 @@ _TexData* CTextureStore::GetTextureData(std::wstring textureKey)
 void CTextureStore::InitTextureForScene(std::wstring curScene, _bool isStatic)
 {
 	m_isStatic = isStatic;
-	InitResource(m_resourcePath + L"\\" + curScene);
-}
-
-void CTextureStore::InitResource(std::wstring sourcePath)
-{
-	__super::InitResource(sourcePath);
+	__super::InitResource(m_resourcePath + L"\\" + curScene);
 }
 
 void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
