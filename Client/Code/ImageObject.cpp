@@ -5,7 +5,6 @@ CImageObject::CImageObject()
 {
 }
 
-
 CImageObject::~CImageObject()
 {
 }
@@ -26,9 +25,6 @@ SP(Engine::CObject) CImageObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spBitmap = spClone->GetComponent<Engine::CBitmapC>();
-	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
 	return spClone;
 	return SP(CObject)();
@@ -39,17 +35,15 @@ void CImageObject::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;	
 	m_addExtra = true;
-
-	m_spBitmap = AddComponent<Engine::CBitmapC>();
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
+	
+	AddComponent<Engine::CBitmapC>();
+	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
+	AddComponent<Engine::CTextureC>();
 }
 
 void CImageObject::Start(void)
 {
 	__super::Start();
-
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::UI);
 }
 
 void CImageObject::FixedUpdate(void)

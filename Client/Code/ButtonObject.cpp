@@ -5,7 +5,6 @@ CButtonObject::CButtonObject()
 {
 }
 
-
 CButtonObject::~CButtonObject()
 {
 }
@@ -42,7 +41,6 @@ void CButtonObject::Awake(void)
 void CButtonObject::Start(void)
 {
 	__super::Start();
-
 }
 
 void CButtonObject::FixedUpdate(void)
@@ -76,5 +74,9 @@ void CButtonObject::OnDisable(void)
 }
 
 void CButtonObject::SetBasicName(void)
+{
+}
+
+void CButtonObject::aa()
 {
 }

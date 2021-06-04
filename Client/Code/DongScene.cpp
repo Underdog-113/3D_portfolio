@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "DongScene.h"
-#include "TextComponent.h"
-#include "DebugTextComponent.h"
+#include "TextC.h"
 #include "TextObject.h"
+#include "ImageObject.h"
 CDongScene::CDongScene()
 {
 }
@@ -38,25 +38,26 @@ void CDongScene::Start(void)
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
-	/*spEmpty->AddComponent<Engine::CBitmapC>();
-	spEmpty->AddComponent<Engine::CTextureC>()->AddTexture(L"A");
-	spEmpty->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-	spEmpty->GetTransform()->SetSize(800, 600, 0);*/
-
-	/*
-	SP(CTextObject) object = std::dynamic_pointer_cast<CTextObject>(m_pObjectFactory->AddClone(L"TextObject", true));
-	object->GetTransform()->SetSize(800, 600, 0);
-	//*/
-
 	//*
-	SP(Engine::CObject) spEmptyObject
-		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::UI, L"Text0");
-	spEmptyObject->AddComponent<CTextComponent>()->AddFontData(L"A", 20,5, 400, D3DXCOLOR(1, 1, 1, 1));
+	{
+		SP(CImageObject) spEmptyObject
+			= std::dynamic_pointer_cast<CImageObject>(m_pObjectFactory->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"Text0"));
+		spEmptyObject->GetTransform()->SetSize(_float3(300, 500, 0));
+		spEmptyObject->GetTexture()->AddTexture(L"Stage_Image", 0);
+	}
+
+	{
+		SP(CImageObject) spEmptyObject
+			= std::dynamic_pointer_cast<CImageObject>(m_pObjectFactory->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"Text0"));
+		spEmptyObject->GetTransform()->SetSize(_float3(300, 500, 0));
+		spEmptyObject->GetTexture()->AddTexture(L"SealPatten3 #16871", 0);
+	}
 	//*/
 
 	SP(Engine::CObject) ss
 		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::UI, L"Text0");
-	ss->AddComponent<CDebugTextComponent>()->AddFontData(L"sdfes", _float2(800, 800), 500, DT_RIGHT, D3DXCOLOR(0, 0, 0, 1));
+	ss->GetTransform()->SetPosition(_float3(-260, 470, 0));
+	ss->AddComponent<CDebugTextC>()->AddFontData(L"¹àÀº Àººû ¹Ì¼Ò", _float2(800, 800), 50, DT_RIGHT, D3DXCOLOR(0, 0, 0, 1));
 }
 
 void CDongScene::FixedUpdate(void)
