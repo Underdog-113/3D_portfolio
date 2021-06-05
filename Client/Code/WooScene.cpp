@@ -41,9 +41,10 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 	{
-		m_spSakura = Engine::ADD_CLONE(L"EmptyObject", this, true, L"Character", (_int)ELayerID::Player);
+		m_spSakura = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Character");
 
 		m_spSakura->AddComponent<Engine::CMeshC>()->AddMeshData(L"Yae_Sakura");
+		m_spSakura->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 		m_spSakura->AddComponent<Engine::CTextureC>();
 		m_spSakura->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
@@ -60,21 +61,21 @@ void CWooScene::Update(void)
 {
 	__super::Update();
 
-	Engine::CDynamicMesh* pDM = 
-		static_cast<Engine::CDynamicMesh*>(m_spSakura->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	//Engine::CDynamicMesh* pDM = 
+	//	static_cast<Engine::CDynamicMesh*>(m_spSakura->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
 
-	if (Engine::IMKEY_DOWN(KEY_RIGHT))
-	{
-		if (59 <= m_iIndex)
-			m_iIndex = 0;
-		else
-			++m_iIndex;
+	//if (Engine::IMKEY_DOWN(KEY_RIGHT))
+	//{
+	//	if (59 <= m_iIndex)
+	//		m_iIndex = 0;
+	//	else
+	//		++m_iIndex;
 
-		pDM->ChangeAniSet(m_iIndex);
+	//	pDM->ChangeAniSet(m_iIndex);
 
-		std::cout << "index: " << m_iIndex << std::endl;
-		std::cout << "================================" << std::endl;
-	}
+	//	std::cout << "index: " << m_iIndex << std::endl;
+	//	std::cout << "================================" << std::endl;
+	//}
 }
 
 void CWooScene::LateUpdate(void)
