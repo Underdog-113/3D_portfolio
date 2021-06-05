@@ -45,7 +45,7 @@ void CInitScene::Start(void)
 {
 	m_isStarted = true;
 
-	Engine::ADD_TEXT(L"WOW", L"asdfasdfasdfasdf", _float3(100, 100, -1), D3DXCOLOR(0, 0, 0, 1));
+	//Engine::ADD_TEXT(L"WOW", L"asdfasdfasdfasdf", _float3(100, 100, -1), D3DXCOLOR(0, 0, 0, 1));
 
 	//DataStore Init
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);

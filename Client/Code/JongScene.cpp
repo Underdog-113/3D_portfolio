@@ -5,6 +5,7 @@
 
 #include "DynamicMeshData.h"
 #include "FSM_KianaC.h"
+#include "FSM_SpiderC.h"
 
 CJongScene::CJongScene()
 {
@@ -38,7 +39,20 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
-	{
+	{ 
+		{
+			SP(Engine::CObject) spEmptyObject1
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+
+			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
+			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			spEmptyObject1->AddComponent<Engine::CTextureC>();
+			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject1->GetTransform()->SetSize(10, 10, 10);
+
+			m_pivot = spEmptyObject1.get();
+		}
+
 		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"122");
@@ -47,9 +61,9 @@ void CJongScene::Start(void)
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
+			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
 
-			spEmptyObject->AddComponent<CFSM_KianaC>();
+			spEmptyObject->AddComponent<FSM_SpiderC>();
 
 
 			m_obj = spEmptyObject.get();
@@ -137,6 +151,8 @@ void CJongScene::Update(void)
 //		pDM->ChangeAniSet(num);*/
 //
 //	}
+	//_mat mmmat = dynamic_pointer_cast<Engine::CDynamicMeshData*>(m_obj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->GetRootFrame()->TransformationMatrix();
+	//m_pivot->GetTransform()->SetPosition()
 }
 
 void CJongScene::LateUpdate(void)

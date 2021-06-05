@@ -19,7 +19,11 @@ SP(CComponent) CStateMachineC::MakeClone(CObject * pObject)
 {
 	SP(CStateMachineC) spClone(new CStateMachineC);
 	__super::InitClone(spClone, pObject);
-
+	
+	for (auto pState : pObject->GetComponent<CStateMachineC>()->GetStateList())
+	{
+		m_stateList.emplace(pState);
+	}
 
 	return spClone;
 }

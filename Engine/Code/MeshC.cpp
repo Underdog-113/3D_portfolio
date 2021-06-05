@@ -210,7 +210,59 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		meshContainer->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
 		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
 
-		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
+		// root motion
+		//pDM->GetRootFrame()->TransformationMatrix;
+		_mat*	pRootMotionMatrix = new _mat[meshContainer->numBones];
+		_mat r_mat, inv, realMat;
+		D3DXMatrixIdentity(&r_mat);
+		//r_mat = meshContainer->pRenderingMatrix[0];
+		r_mat._41 = meshContainer->pRenderingMatrix[0]._41;
+		r_mat._42 = meshContainer->pRenderingMatrix[0]._42;
+		r_mat._43 = meshContainer->pRenderingMatrix[0]._43;
+		//D3DXMatrixInverse(&inv, NULL, &r_mat);
+
+		_mat rootFrameBonePosMat;
+		D3DXMatrixIdentity(&rootFrameBonePosMat);
+		//rootFrameBonePosMat._41 = meshContainer->pFrameOffsetMatrix[0]._41;
+		//rootFrameBonePosMat._42 = meshContainer->pFrameOffsetMatrix[0]._42;
+		//rootFrameBonePosMat._43 = meshContainer->pFrameOffsetMatrix[0]._43;
+		
+		_mat rootFrameCombinedMat;
+		D3DXMatrixIdentity(&rootFrameCombinedMat);
+		//rootFrameCombinedMat._41 = (*meshContainer->ppCombinedTransformMatrix[0])._41;
+		//rootFrameCombinedMat._42 = (*meshContainer->ppCombinedTransformMatrix[0])._42;
+		//rootFrameCombinedMat._43 = (*meshContainer->ppCombinedTransformMatrix[0])._43;
+		//D3DXMatrixInverse(&inv, NULL, &rootFrameCombinedMat);
+
+		//inv = inv * rootFrameBonePosMat * rootFrameCombinedMat;
+		
+		for (_ulong i = 0; i < meshContainer->numBones; ++i)
+		{	
+			//_mat inv1, inv2;
+			//rootFrameBonePosMat = meshContainer->pFrameOffsetMatrix[i];
+			//D3DXMatrixInverse(&inv1, NULL, &rootFrameBonePosMat);
+
+			//rootFrameCombinedMat = (*meshContainer->ppCombinedTransformMatrix[i]);
+			//D3DXMatrixInverse(&inv2, NULL, &rootFrameCombinedMat);
+
+			//_float3 originPos;
+			//originPos.x = meshContainer->pOriginCombinedTransformMatrix[i]._41;
+			//originPos.y = meshContainer->pOriginCombinedTransformMatrix[i]._42;
+			//originPos.z = meshContainer->pOriginCombinedTransformMatrix[i]._43;
+
+			_mat rootmat;
+			D3DXMatrixIdentity(&rootmat);
+			rootmat._41 = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix._41;
+			rootmat._42 = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix._42;
+			rootmat._43 = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix._43;
+			
+			_mat invmat;
+			D3DXMatrixInverse(&invmat, NULL, &rootmat);
+			
+			pRootMotionMatrix[i] =	meshContainer->pRenderingMatrix[i] * invmat;
+		}
+
+		meshContainer->pSkinInfo->UpdateSkinnedMesh(pRootMotionMatrix, NULL, pSrcVertex, pDestVertex);
 
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
 		meshContainer->pOriMesh->UnlockVertexBuffer();

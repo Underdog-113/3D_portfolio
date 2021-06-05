@@ -29,6 +29,8 @@ private:
 					void				InitPrototypes		(void) override;
 
 private:
+	Engine::CObject* m_pivot;
+
 	Engine::CObject* m_obj;
 	Engine::CObject* m_obj1;
 	Engine::CObject* m_obj2;

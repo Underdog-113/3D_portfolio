@@ -63,7 +63,7 @@ public:
 // Get Set
 protected:
 	typedef std::map<std::wstring, Engine::CState*> _STATELIST;
-	GETTOR			(_STATELIST,			m_stateList,	{},			StateList)
+	GETTOR_SETTOR	(_STATELIST,			m_stateList,	{},			StateList)
 	GETTOR_SETTOR	(Engine::CState*,		m_curState,		nullptr,	CurrentState)
 
 };

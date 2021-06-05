@@ -117,10 +117,13 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_KianaC.h" />
     <ClInclude Include="FSM_Kiana_Define.h">
       <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
     </ClInclude>
+    <ClInclude Include="FSM_KianaC.h">
+      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_SpiderC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -156,7 +159,10 @@
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClCompile>
-    <ClCompile Include="FSM_KianaC.cpp" />
+    <ClCompile Include="FSM_KianaC.cpp">
+      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

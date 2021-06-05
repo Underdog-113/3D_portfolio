@@ -187,6 +187,7 @@
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
     <ClInclude Include="..\Header\DongScene.h" />
+    <ClInclude Include="..\Header\FSM_SpiderC.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
@@ -204,6 +205,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
+    <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
