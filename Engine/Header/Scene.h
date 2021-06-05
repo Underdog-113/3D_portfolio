@@ -38,6 +38,7 @@ public:
 public:
 				void					SetIsEnabled		(_bool isEnabled);
 	virtual		void					InitPrototypes		(void) PURE;
+	virtual		void					InitLights			(void);
 protected:												   
 				void					InitLayers			(_int numOfLayers);
 

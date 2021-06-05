@@ -33,7 +33,7 @@ private:
 	GETTOR			(SP(CMeshC),		m_spMesh,		nullptr,		Mesh)
 	GETTOR			(SP(CTextureC),		m_spTexture,	nullptr,		Texture)
 	GETTOR			(SP(CTransformC),	m_spTransform,	nullptr,		Transform)
-	GETTOR			(SP(CBitmapC),		m_spBitmap,		nullptr,		Bitmap)
+	GETTOR			(SP(CRectTexC),		m_spRectTex,	nullptr,		RectTex)
 
 	GETTOR			(_float3,			m_offsetBV,		ZERO_VECTOR,	OffsetBV)
 	GETTOR			(_float3,			m_sizeBV,		ONE_VECTOR,		SizeBV)

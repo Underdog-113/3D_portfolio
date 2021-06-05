@@ -134,7 +134,8 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 			MSG_BOX(__FILE__, (L"TexKey : [" + texKey + L"] create texture failed in ParsingTexture").c_str());
 			ABORT;
 		}
-
+		//Alpha포함 텍스쳐
+		pNewTex->includeAlpha = (filePath.find(L"\\Alpha\\") != std::wstring::npos);
 		(*pCurMap)[texKey] = pNewTex;
 	}
 	else

@@ -32,8 +32,15 @@ public:
 			void					ClearRenderList		(void);
 
 private:	
+			void					InitDeferredBuffer	(void);
+
 			void					RenderBase			(void);
+
+			void					RenderDeferred		(void);
 			void					RenderNonAlpha		(void);
+			void					RenderLights		(void);
+			void					RenderDeferBlend	(void);
+			
 			void					RenderWire			(void);
 			void					RenderAlphaTest		(void);
 			void					RenderAlphaBlend	(void);
@@ -44,6 +51,12 @@ private:
 private:
 	typedef std::vector<CObject*> _RENDER_LIST;
 			_RENDER_LIST		m_vRenderList[(_uint)ERenderID::NumOfRenderID];
+
+	typedef LPDIRECT3DVERTEXBUFFER9 _VERTEX_BUFFER;
+	typedef LPDIRECT3DINDEXBUFFER9  _INDEX_BUFFER;
+
+	GETTOR_REF		(_VERTEX_BUFFER,		m_pVertexBuffer,	nullptr,		VertexBuffer)
+	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,		nullptr,		IndexBuffer)
 };
 END
 #endif

@@ -23,8 +23,13 @@ public:
 			void				LateUpdate		(SP(CComponent) spThis) override;
 
 			void				PreRender		(SP(CGraphicsC) spGC);
+			void				PreRender		(SP(CGraphicsC) spGC, LPD3DXEFFECT& pEffect);
+
 			void				Render			(SP(CGraphicsC) spGC);
+			void				Render			(SP(CGraphicsC) spGC, LPD3DXEFFECT& pEffect);
+
 			void				PostRender		(SP(CGraphicsC) spGC);
+			void				PostRender		(SP(CGraphicsC) spGC, LPD3DXEFFECT& pEffect);
 
 			void				OnDestroy		(void) override;
 
@@ -37,7 +42,10 @@ public:
 
 private:
 			void				RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
+			void				RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex, LPD3DXEFFECT pEffect);
+
 			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
+			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex, LPD3DXEFFECT pEffect);
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Mesh;

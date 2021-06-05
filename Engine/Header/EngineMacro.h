@@ -143,6 +143,14 @@ void ClassName::DestroyInstance(void)												\
 #define ADD_TO_RENDER_LIST(renderID, spGraphicsC)									\
 CGraphicsManager::GetInstance()->AddToRenderList(renderID, spGraphicsC)
 
+
+//RenderTargetManager Macro
+#define BEGIN_MRT(mrtName)															\
+CRenderTargetManager::GetInstance()->BeginMRT(mrtName)
+#define END_MRT(mrtName)															\
+CRenderTargetManager::GetInstance()->EndMRT(mrtName)
+
+
 //DeviceManager Macro
 #define GET_DEVICE CDeviceManager::GetInstance()->GetDevice()
 
@@ -197,8 +205,7 @@ CTextManager::GetInstance()->AddText(key, text, position, color)
 #define GET_MATH CMath::CMathHelper::GetInstance()
 
 //ShaderManager Macro
-#define GET_SHADER(shaderKey) CShaderManager::GetInstance()->GetShader(shaderKey)
-#define GET_SHADERKEY(renderID) CShaderManager::GetInstance()->GetShaderKeyByRenderID(renderID)
+#define GET_SHADER(shaderID) CShaderManager::GetInstance()->GetShader(shaderID)
 
 //SoundManager Macro
 #define SOUND CSoundManager::GetInstance()

@@ -22,9 +22,17 @@ public:
 	virtual		void			Update					(SP(CComponent) spThis) PURE;
 	virtual		void			LateUpdate				(SP(CComponent) spThis) PURE;
 
-	virtual		void			PreRender				(SP(CGraphicsC) spGC) PURE;
-	virtual		void			Render					(SP(CGraphicsC) spGC) PURE;
-	virtual		void			PostRender				(SP(CGraphicsC) spGC) PURE;
+	virtual		void			PreRender				(void) {}
+	virtual		void			PreRender				(SP(CGraphicsC) spGC) {}
+	virtual		void			PreRender				(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
+
+	virtual		void			Render					(void) {}
+	virtual		void			Render					(SP(CGraphicsC) spGC) {}
+	virtual		void			Render					(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
+
+	virtual		void			PostRender				(void) {}
+	virtual		void			PostRender				(SP(CGraphicsC) spGC) {}
+	virtual		void			PostRender				(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
 
 	virtual		void			OnDestroy				(void) PURE;
 															   

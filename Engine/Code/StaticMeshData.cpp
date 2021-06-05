@@ -109,10 +109,6 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 	}
 }
 
-void CStaticMeshData::Start(void)
-{
-}
-
 void CStaticMeshData::Update(void)
 {
 }

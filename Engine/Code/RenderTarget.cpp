@@ -26,11 +26,12 @@ CRenderTarget * CRenderTarget::Create(_uint const & width, _uint const & height,
 
 void CRenderTarget::Free(void)
 {
-	m_pVertexBuffer->Release();
-	m_pIndexBuffer->Release();
+	SafeRelease(m_pVertexBuffer);
+	SafeRelease(m_pIndexBuffer);
+	SafeRelease(m_pOldSurface);
+	SafeRelease(m_pCurSurface);
 
-	m_pOldSurface->Release();
-	m_pCurSurface->Release();
+	delete this;
 }
 
 void CRenderTarget::Awake(void)
@@ -64,7 +65,7 @@ void CRenderTarget::SetUpOnDevice(const _uint & index)
 void CRenderTarget::ReleaseOnDevice(const _uint & index)
 {
 	GET_DEVICE->SetRenderTarget(index, m_pOldSurface);
-	m_pOldSurface->Release();
+	SafeRelease(m_pOldSurface);
 }
 
 void CRenderTarget::ClearRenderTarget(void)
@@ -76,7 +77,7 @@ void CRenderTarget::ClearRenderTarget(void)
 	pDevice->Clear(0, NULL, D3DCLEAR_TARGET, m_clearColor, 0.f, 1);
 
 	pDevice->SetRenderTarget(0, m_pOldSurface);
-	m_pOldSurface->Release();
+	SafeRelease(m_pOldSurface);	
 }
 
 void CRenderTarget::SetRenderTargetTexture(LPD3DXEFFECT & pEffect, std::string constantTableName)
