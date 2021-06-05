@@ -4,6 +4,15 @@
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "Camera.h"
+#include "MO_Scout.h"
+#include "MO_Ninza.h"
+#include "MO_Axe.h"
+#include "MO_Robot.h"
+#include "MO_Spider.h"
+#include "MO_Lancer.h"
+#include "MB_Ganesha.h"
+#include "MB_Bronya.h"
+#include "Monster.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -93,6 +102,27 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
 
-	//SP(키아나) sp키아나(키아나::Create(true, this));
-	//GetObjectFactory()->AddPrototype(sp키아나);
+	SP(CMonster) spMO_Spider(CMO_Spider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Spider);
+
+	SP(CMonster) spMO_Ninza(CMO_Ninza::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Ninza);
+
+	SP(CMonster) spMO_Axe(CMO_Axe::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Axe);
+
+	SP(CMonster) spMO_Scout(CMO_Scout::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Scout);
+
+	SP(CMonster) spMO_Robot(CMO_Robot::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Robot);
+
+	SP(CMonster) spMO_Lancer(CMO_Lancer::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Lancer);
+
+	SP(CMonster) spMB_Ganesha(CMB_Ganesha::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMB_Ganesha);
+
+	SP(CMonster) spMB_Bronya(CMB_Bronya::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMB_Bronya);
 }

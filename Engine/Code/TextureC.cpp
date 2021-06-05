@@ -39,13 +39,13 @@ void CTextureC::Awake(void)
 		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
 		_int numOfTexSet;
-		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfMeshData", numOfTexSet);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfTexSet", numOfTexSet);
 
 		m_vTexData.resize(numOfTexSet);
 		for (_int i = 0; i < numOfTexSet; ++i)
 		{
 			_int numOfTex;
-			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfTex_Set" + std::to_wstring(i), numOfTex);
+			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfTex_" + std::to_wstring(i), numOfTex);
 			m_numOfTex += numOfTex;
 			for (_int j = 0; j < numOfTex; ++j)
 			{

@@ -192,10 +192,18 @@
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\MB_Bronya.h" />
+    <ClInclude Include="..\Header\MB_Ganesha.h" />
+    <ClInclude Include="..\Header\Monster.h" />
+    <ClInclude Include="..\Header\MO_Axe.h" />
+    <ClInclude Include="..\Header\MO_Lancer.h" />
+    <ClInclude Include="..\Header\MO_Ninza.h" />
+    <ClInclude Include="..\Header\MO_Robot.h" />
+    <ClInclude Include="..\Header\MO_Scout.h" />
+    <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
-    <ClInclude Include="FSM_KianaC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
@@ -210,11 +218,19 @@
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\MB_Bronya.cpp" />
+    <ClCompile Include="..\Code\MB_Ganesha.cpp" />
+    <ClCompile Include="..\Code\Monster.cpp" />
+    <ClCompile Include="..\Code\MO_Axe.cpp" />
+    <ClCompile Include="..\Code\MO_Lancer.cpp" />
+    <ClCompile Include="..\Code\MO_Ninza.cpp" />
+    <ClCompile Include="..\Code\MO_Robot.cpp" />
+    <ClCompile Include="..\Code\MO_Scout.cpp" />
+    <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="FSM_KianaC.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

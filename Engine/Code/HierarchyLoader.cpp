@@ -22,7 +22,7 @@ STDMETHODIMP CHierarchyLoader::CreateFrame(THIS_ LPCSTR Name, LPD3DXFRAME * ppNe
 
 	//Name을 pDerivedFrame->Name에 할당.
 	AllocateName(&pDerivedFrame->Name, Name);
-
+	
 	D3DXMatrixIdentity(&pDerivedFrame->TransformationMatrix);
 	D3DXMatrixIdentity(&pDerivedFrame->CombinedTransformMatrix);
 

@@ -20,7 +20,7 @@ pState->SetExit(std::bind(&##className##::##stateName##_End, this));
 BEGIN(Engine)
 
 class CState;
-class ENGINE_DLL CStateMachineC : public CComponent
+class ENGINE_DLL CStateMachineC abstract : public CComponent
 {
 public:
 	explicit	CStateMachineC	(void);
@@ -28,19 +28,19 @@ public:
 
 //Override functions									   
 public:
-	SP(CComponent)		MakeClone		(CObject* pObject) override;
+	virtual SP(CComponent)		MakeClone		(CObject* pObject) PURE;
 
 	virtual void		Awake			(void);
-	void				Start			(SP(CComponent) spThis) override;
+	virtual void		Start			(SP(CComponent) spThis);
 
-	void				FixedUpdate		(SP(CComponent) spThis) override;
-	void				Update			(SP(CComponent) spThis) override;
-	void				LateUpdate		(SP(CComponent) spThis) override;
+			void		FixedUpdate		(SP(CComponent) spThis);
+			void		Update			(SP(CComponent) spThis);
+			void		LateUpdate		(SP(CComponent) spThis);
 
-	void				OnDestroy		(void) override;
+			 void		OnDestroy		(void);
 
-	void				OnEnable		(void) override;
-	void				OnDisable		(void) override;
+			 void		OnEnable		(void);
+			 void		OnDisable		(void);
 
 public:
 

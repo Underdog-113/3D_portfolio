@@ -15,19 +15,6 @@ CStateMachineC::~CStateMachineC()
 	OnDestroy();
 }
 
-SP(CComponent) CStateMachineC::MakeClone(CObject * pObject)
-{
-	SP(CStateMachineC) spClone(new CStateMachineC);
-	__super::InitClone(spClone, pObject);
-	
-	for (auto pState : pObject->GetComponent<CStateMachineC>()->GetStateList())
-	{
-		m_stateList.emplace(pState);
-	}
-
-	return spClone;
-}
-
 void CStateMachineC::Awake(void)
 {
 	__super::Awake();
@@ -37,6 +24,7 @@ void CStateMachineC::Awake(void)
 	{
 		state.second->DoInit();
 	}
+
 }
 
 void CStateMachineC::Start(SP(CComponent) spThis)

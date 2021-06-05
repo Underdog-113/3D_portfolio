@@ -1,15 +1,19 @@
 #pragma once
 #include "StateMachine.h"
 
-class FSM_SpiderC : public Engine::CStateMachineC
+
+
+
+class FSM_SpiderC final : public Engine::CStateMachineC
 {
 public:
 	FSM_SpiderC();
-	virtual ~FSM_SpiderC() = default;
+	~FSM_SpiderC() = default;
 
 public:
-	virtual void Awake(void) override;
-	virtual void Start(SP(CComponent) spThis) override;
+	SP(Engine::CComponent)		MakeClone		(Engine::CObject* pOwner) override;
+	void Awake(void) override;
+	void Start(SP(CComponent) spThis) override;
 
 public:
 	// <Animation List>
@@ -20,5 +24,5 @@ public:
 	void ATTACK_1_End(void);
 
 	//// ATTACK_2
-	//void 
+	//void
 };

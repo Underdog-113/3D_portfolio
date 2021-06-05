@@ -39,7 +39,7 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
-	{ 
+	{
 		{
 			SP(Engine::CObject) spEmptyObject1
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");

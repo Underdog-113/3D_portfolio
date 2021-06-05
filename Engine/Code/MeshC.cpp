@@ -26,9 +26,10 @@ SP(CComponent) CMeshC::MakeClone(CObject* pObject)
 	for (auto& meshData : m_vMeshDatas)
 		spClone->AddMeshData(meshData->MakeClone());
 
-	spClone->m_minVertex = m_minVertex;
-	spClone->m_maxVertex = m_maxVertex;
-	spClone->m_meshSize  = m_meshSize;
+	spClone->m_minVertex	= m_minVertex;
+	spClone->m_maxVertex	= m_maxVertex;
+	spClone->m_meshSize		= m_meshSize;
+	spClone->m_initTex		= m_initTex;
 
 	return spClone;
 }

@@ -7,12 +7,25 @@ FSM_SpiderC::FSM_SpiderC()
 {
 }
 
+SP(Engine::CComponent) FSM_SpiderC::MakeClone(Engine::CObject * pObject)
+{
+	SP(FSM_SpiderC) spClone(new FSM_SpiderC);
+
+	__super::InitClone(spClone, pObject);
+
+	for (auto pState : m_stateList)
+	{
+		spClone->m_stateList.emplace(pState);
+	}
+
+	return spClone;
+}
 void FSM_SpiderC::Awake(void)
 {
 	Engine::CState* pState;
 
 	CreateState(FSM_SpiderC, pState, ATTACK_1)
-		AddState(pState, L"ATTACK_1");
+	AddState(pState, L"ATTACK_1");
 
 	__super::Awake();
 }
