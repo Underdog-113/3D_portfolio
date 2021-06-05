@@ -50,6 +50,9 @@ private:
 	GETTOR			(_float3,	m_minVertex,	MAX_VECTOR,		MinVertex)
 	GETTOR			(_float3,	m_maxVertex,	-MAX_VECTOR,	MaxVertex)
 	GETTOR_SETTOR	(_bool,		m_initTex,		false,			InitTex)
+
+		double m_prevTimeLine = 0;
+		_float3 m_prevRootMotionPos = _float3(0.f,0.f,0.f);
 };
 END
 #endif // !MESH_H

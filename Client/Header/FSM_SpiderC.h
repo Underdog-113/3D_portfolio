@@ -24,5 +24,10 @@ public:
 	void ATTACK_1_End(void);
 
 	//// ATTACK_2
+
+	void ATTACK_2_Init(void);
+	void ATTACK_2_Enter(void);
+	void ATTACK_2_Update(float deltaTime);
+	void ATTACK_2_End(void);
 	//void
 };

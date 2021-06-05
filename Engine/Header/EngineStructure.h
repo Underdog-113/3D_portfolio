@@ -76,6 +76,7 @@ namespace Engine
 	typedef struct _DerivedD3DXFRAME : public D3DXFRAME
 	{
 		_mat		CombinedTransformMatrix;
+		_DerivedD3DXFRAME* pParentFrame;
 	}D3DXFRAME_DERIVED;
 
 	typedef struct _DerivedD3DXMESHCONTAINER : public D3DXMESHCONTAINER
@@ -89,9 +90,6 @@ namespace Engine
 
 		_mat*					pRenderingMatrix;	// 최종적으로 변환이 끝나서 그리기를 수행하기 위한 행렬 정보
 													// pFrameOffsetMatrix * (*ppCombinedTransformMatrix)
-
-		// origin matrix add
-		_mat*					pRootBone_CombinedTransformMatrix = nullptr;
 
 		_int					texIndexStart;
 	}D3DXMESHCONTAINER_DERIVED;

@@ -59,8 +59,7 @@ private:
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)
 	GETTOR_SETTOR(_bool,				m_playAnimation,		true,		PlayAnimation)
 
-	GETTOR_SETTOR(_mat*,				m_pRootCombinedTransformMatrix,	nullptr,	RootCombinedMatrix)
-
+		
 };
 END
 #endif

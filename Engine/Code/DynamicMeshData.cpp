@@ -82,11 +82,10 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 		m_vAniList.push_front(StrToWStr(pAS->GetName()));
 	}
 
+	((_DerivedD3DXFRAME*)m_pRootFrame)->pParentFrame = nullptr;
 	UpdateFrame();
 	SetFrameMatPointer((_DerivedD3DXFRAME*)m_pRootFrame);
 
-	//
-	m_pRootCombinedTransformMatrix = &((_DerivedD3DXFRAME*)m_pRootFrame)->CombinedTransformMatrix;
 }
 
 void CDynamicMeshData::Start(void)
@@ -169,10 +168,18 @@ void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pPar
 	pFrame->CombinedTransformMatrix = pFrame->TransformationMatrix * (*pParentMat);
 	
 	if (pFrame->pFrameSibling != nullptr)
+	{
 		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameSibling, pParentMat);
+		((D3DXFRAME_DERIVED*)pFrame->pFrameSibling)->pParentFrame = pFrame->pParentFrame;
+	}
+
 
 	if (pFrame->pFrameFirstChild != nullptr)
+	{
 		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild, &pFrame->CombinedTransformMatrix);
+		((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild)->pParentFrame = pFrame;
+	}
+		
 
 }
 
@@ -187,6 +194,7 @@ void CDynamicMeshData::SetFrameMatPointer(_DerivedD3DXFRAME * pFrame)
 			std::string			pBoneName = pDerivedMeshContainer->pSkinInfo->GetBoneName(i);
 			_DerivedD3DXFRAME* pFindFrame = (_DerivedD3DXFRAME*)D3DXFrameFind(m_pRootFrame, pBoneName.c_str());
 			pDerivedMeshContainer->ppCombinedTransformMatrix[i] = &pFindFrame->CombinedTransformMatrix;
+
 
 			pDerivedMeshContainer->pOriMesh;
 		}

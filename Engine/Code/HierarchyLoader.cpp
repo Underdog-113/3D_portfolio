@@ -131,7 +131,7 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 
 	pDerivedMeshContainer->ppCombinedTransformMatrix = new _mat*[pDerivedMeshContainer->numBones];
 	ZeroMemory(pDerivedMeshContainer->ppCombinedTransformMatrix, sizeof(_mat*) * pDerivedMeshContainer->numBones);
-
+	
 	pDerivedMeshContainer->pRenderingMatrix = new _mat[pDerivedMeshContainer->numBones];
 	ZeroMemory(pDerivedMeshContainer->pRenderingMatrix, sizeof(_mat) * pDerivedMeshContainer->numBones);
 	
