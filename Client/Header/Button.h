@@ -3,11 +3,9 @@
 
 #include "Object.h"
 #include "DeleGate.h"
-#include "EngineStdafx.h"
 
-BEGIN(Engine)
-template<typename T>
-class ENGINE_DLL CButton final : public CObject
+template <typename T = float>
+class CButton final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 public:
@@ -15,19 +13,22 @@ public:
 public:
 	explicit CButton() {};
 	~CButton() {};
+private:
 
 private:
 	static _uint m_s_uniqueID;
-
-	GETTOR_SETTOR(T, m_functionData, {}, FunctionData);
-	Delegate<const int*> m_functionGate;
-
-	GETTOR_SETTOR(EButton_Type, m_buttonType, EButton_Type::UP, ButtonType)
+	GETTOR_SETTOR(EButton_Type, m_buttonType, EButton_Type::UP, ButtonType);
 
 public:
-	static SP(CButton<T>) Create(_bool isStatic, CScene* pScene)
+	Delegate<> m_functionGateVoid;
+	Delegate<const T&> m_functionGate;
+	GETTOR_SETTOR(T, m_functionDate, {}, FunctionDate);
+
+public:
+	// CObject을(를) 통해 상속됨
+	static	SP(CButton<T>) Create(_bool isStatic, Engine::CScene* pScene)
 	{
-		SP(CButton<T>) spInstance(new CButton, SmartDeleter<CButton<T>>);
+		SP(CButton<T>) spInstance(new CButton<T>, Engine::SmartDeleter<CButton<>>);
 		spInstance->SetIsStatic(isStatic);
 		spInstance->SetScene(pScene);
 		spInstance->Awake();
@@ -35,17 +36,17 @@ public:
 		return spInstance;
 	}
 
-	SP(CObject) MakeClone(void) override
+	SP(Engine::CObject) MakeClone(void) override
 	{
-		SP(CButton) spClone(new CButton);
+		SP(CButton<T>) spClone(new CButton<T>);
 		__super::InitClone(spClone);
 
-		spClone->m_spTransform = spClone->GetComponent<CTransformC>();
+		spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
 
 		return spClone;
 		return SP(CObject)();
 	}
-
+	 
 	void Awake(void) override
 	{
 		__super::Awake();
@@ -56,10 +57,7 @@ public:
 	void Start(void) override
 	{
 		__super::Start();
-
-		//CButtonManager::GetInstance()->AddButtonList(this);
 	}
-
 	void FixedUpdate(void) override
 	{
 		__super::FixedUpdate();
@@ -68,13 +66,13 @@ public:
 	void Update(void) override
 	{
 		__super::Update();
-
-		FunceActivation();
 	}
 
 	void LateUpdate(void) override
 	{
 		__super::LateUpdate();
+
+		Function();
 	}
 
 	void OnDestroy(void) override
@@ -97,10 +95,27 @@ public:
 
 	}
 
-	void FunceActivation()
+	void Function()
 	{
-	//	m_functionGate(m_functionData);
+		if (m_functionDate)
+			m_functionGateVoid();
+		else
+			m_functionGate(m_functionDate);
+	}
+
+	void FuncitionInit(T funcition)
+	{
+
+	}
+
+	void FuncitionInit()
+	{
+
 	}
 };
-END
 #endif
+
+/*
+m_functionGate 외부에서 델리게이트 다시정의해서 넣어준다.
+m_functionData 외부에서 델리게이트의 맞는 값을 넣어준다. 잘못넣어주면 주옥된다.
+*/

@@ -1,17 +1,16 @@
-#include "EngineStdafx.h"
+#include "Stdafx.h"
 #include "ButtonManager.h"
 #include "Button.h"
-USING(Engine)
-//IMPLEMENT_SINGLETON(CSoundManager)
 
-void CButtonManager::Awake(void)
+//IMPLEMENT_SINGLETON(CButtonManager)
+/*void CButtonManager::Awake(void)
 {
 
 }
 
 void CButtonManager::Update(void)
 {
-	/*if (Engine::IMKEY_DOWN(MOUSE_LEFT))
+	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
 		DownButtonActivation();
 	}
@@ -22,14 +21,14 @@ void CButtonManager::Update(void)
 	else if (Engine::IMKEY_PRESS(MOUSE_LEFT))
 	{
 		PressButtonActivation();
-	}*/
+	}
 }
 
 void CButtonManager::OnDestroy(void)
 {
 
 }
-/*
+
 void CButtonManager::AddButtonList(CButton* buttonObject)
 {
 	switch (buttonObject->GetButtonType())
@@ -72,8 +71,7 @@ void CButtonManager::UpButtonActivation()
 
 	for (auto& button : m_UpButtonList)
 	{
-		// 충돌체크
-		button->FunceActivation();
+		
 	}
 }
 

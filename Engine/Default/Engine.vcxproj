@@ -23,8 +23,6 @@
     <ClInclude Include="..\Header\AniCtrl.h" />
     <ClInclude Include="..\Header\BitmapC.h" />
     <ClInclude Include="..\Header\BoundingVolume.h" />
-    <ClInclude Include="..\Header\Button.h" />
-    <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
     <ClInclude Include="..\Header\DebugCollider.h" />
@@ -108,8 +106,6 @@
     <ClCompile Include="..\code\AniCtrl.cpp" />
     <ClCompile Include="..\Code\BitmapC.cpp" />
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
-    <ClCompile Include="..\Code\Button.cpp" />
-    <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
     <ClCompile Include="..\Code\DebugCollider.cpp" />

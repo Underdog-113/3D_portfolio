@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DongScene.h"
 #include "Image.h"
-//#include "Button.h"
+#include "Button.h"
 #include "Text.h"
 
 CDongScene::CDongScene()
@@ -31,6 +31,11 @@ void CDongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	InitPrototypes();
+}
+
+void SS(_float ss)
+{
+	_float s = ss;
 }
 
 void CDongScene::Start(void)
@@ -71,12 +76,14 @@ void CDongScene::Start(void)
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 	}*/
 
-	/*{
-		SP(Engine::CButton<int>) image =
-			std::dynamic_pointer_cast<Engine::CButton<int>>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"sdfsdf"));
+	{
+		/*SP(CButton<_float>) image =
+			std::dynamic_pointer_cast<CButton<_float>>(ADD_CLONE(L"Button<float>", true, (_int)ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.0f);
-		image->SetFunctionData(10);
-	}*/
+		image->SetButtonType(CButton<_float>::EButton_Type::UP);
+		image->SetFunctionDate(12.5f);
+		image->m_functionGate += SS;*/
+	}
 }
 
 void CDongScene::FixedUpdate(void)
@@ -87,7 +94,6 @@ void CDongScene::FixedUpdate(void)
 void CDongScene::Update(void)
 {
 	__super::Update();
-
 }
 
 void CDongScene::LateUpdate(void)

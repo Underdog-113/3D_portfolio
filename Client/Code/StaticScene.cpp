@@ -102,8 +102,11 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CImage) spImageObject(Engine::CImage::Create(true, this));
 	GetObjectFactory()->AddPrototype(spImageObject);
 
-	SP(Engine::CButton<int>) spButtonObject(Engine::CButton<int>::Create(true, this));
-	GetObjectFactory()->AddPrototype(spButtonObject);
+	SP(CButton<_int>) spIButtonObject(CButton<_int>::Create(true, this));
+	GetObjectFactory()->AddPrototype(spIButtonObject);
+
+	SP(CButton<float>) spFButtonObject(CButton<float>::Create(true, this));
+	GetObjectFactory()->AddPrototype(spFButtonObject);
 
 	SP(Engine::CText) spTextObject(Engine::CText::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTextObject);
