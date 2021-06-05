@@ -4,7 +4,6 @@
 #include "ObjectFactory.h"
 
 #include "DynamicMeshData.h"
-#include "FSM_KianaC.h"
 
 CJongScene::CJongScene()
 {
@@ -48,8 +47,6 @@ void CJongScene::Start(void)
 			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
 			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
-
-			spEmptyObject->AddComponent<CFSM_KianaC>();
 
 
 			m_obj = spEmptyObject.get();

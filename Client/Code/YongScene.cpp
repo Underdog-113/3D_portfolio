@@ -38,21 +38,23 @@ void CYongScene::Start(void)
 {
 	__super::Start();
 	{
-		SP(Engine::CObject) spEmptyObject
-			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Parent");
+		//SP(Engine::CObject) spEmptyObject
+		//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Parent");
 
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Bronya");
-		spEmptyObject->AddComponent<Engine::CTextureC>();
-		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Bronya");
+		//spEmptyObject->AddComponent<Engine::CTextureC>();
+		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//
+
+		//spEmptyObject = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Weapon");
+
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Weapon");
+		//spEmptyObject->AddComponent<Engine::CTextureC>();
+		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 		
-
-		spEmptyObject = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Weapon");
-
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Weapon");
-		spEmptyObject->AddComponent<Engine::CTextureC>();
-		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");
 		
 	}
 }
@@ -66,7 +68,7 @@ void CYongScene::Update(void)
 {
 	__super::Update();
 	
-	EquipWeapon();
+	//EquipWeapon();
 	
 }
 
@@ -125,6 +127,7 @@ HRESULT CYongScene::Movement(_float DeltaTime)
 	
 	return S_OK;
 }
+
 
 void CYongScene::EquipWeapon()
 {
