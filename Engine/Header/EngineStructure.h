@@ -5,11 +5,6 @@
 namespace Engine
 {
 #pragma region GraphicsStructure
-	typedef struct _tagIndex16
-	{
-		WORD _0, _1, _2;
-	}INDEX16;
-
 	typedef struct _CustomVertex
 	{
 		_float3	position;
@@ -48,11 +43,21 @@ namespace Engine
 	}VERTEX_VNT;
 	const _uint FVF_VNT = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
 
+	typedef struct _VertexScreen
+	{
+		_float4 position;
+		_float2 texUV;
+	}VERTEX_SCR;
+	const _uint FVF_SCR = D3DFVF_XYZRHW | D3DFVF_TEX1;
+
+	typedef struct _Index16
+	{
+		_ushort _0, _1, _2;
+	}INDEX16;
+
 	typedef struct _Index32
 	{
-		_ulong		_0;
-		_ulong		_1;
-		_ulong		_2;
+		_ulong _0, _1, _2;
 	}INDEX32;
 
 	typedef struct _TexData

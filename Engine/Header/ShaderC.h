@@ -21,16 +21,14 @@ public:
 
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
-private:
-					void					AddEffect			(LPD3DXEFFECT pEffect);
 
+public:
+					_int					GetShaderID			(std::wstring shaderName);
 public:
 	static const	EComponentID			m_s_componentID = EComponentID::Shader;
 
 protected:
-	typedef std::vector<LPD3DXEFFECT> _EFFECTS;
-	GETTOR			(_EFFECTS,				m_vEffects,			{},				Effect)
-	GETTOR			(LPD3DXBUFFER,			m_pErrMsg,			nullptr,		ErrMsg)
+	GETTOR_SETTOR	(LPD3DXEFFECT,			m_pEffects,			nullptr,		Effect)
 };
 END
 

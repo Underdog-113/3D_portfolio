@@ -40,11 +40,6 @@ void CDataStore::Awake(void)
 	m_resourcePath = L"..\\..\\Resource\\Data";
 }
 
-void CDataStore::Start(void)
-{
-	__super::Start();
-}
-
 void CDataStore::OnDestroy(void)
 {
 	delete[] m_mpCurDataMap;
@@ -61,7 +56,7 @@ void CDataStore::ClearCurResource(void)
 void CDataStore::InitDataForScene(std::wstring curScene, _bool isStatic)
 {
 	m_isStatic = isStatic;
-	InitResource(m_resourcePath + L"\\" + curScene);
+	__super::InitResource(m_resourcePath + L"\\" + curScene);
 }
 
 void CDataStore::InitDataMap(_uint numOfDataID)
@@ -87,10 +82,6 @@ void CDataStore::AddDataSection(std::wstring sectionKey, _uint ID)
 	m_vHashKey[ID] = sectionKey;
 }
 
-void CDataStore::InitResource(std::wstring sourcePath)
-{
-	__super::InitResource(sourcePath);
-}
 
 void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 {

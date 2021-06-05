@@ -26,7 +26,7 @@ CDebugShader * CDebugShader::Create(void)
 void CDebugShader::Awake(void)
 {
 	__super::Awake();
-	m_filePath		= L"..\\..\\Resource\\Shader\\DebugShader.fx";
+	m_filePath		= L"..\\..\\Resource\\Shader\\00DebugShader.fx";
 	m_shaderType	= (_int)EShaderType::Debug;
 }
 

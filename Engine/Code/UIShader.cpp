@@ -26,7 +26,7 @@ CUIShader * CUIShader::Create(void)
 void CUIShader::Awake(void)
 {
 	__super::Awake();
-	m_filePath = L"..\\..\\Resource\\Shader\\UIShader.fx";
+	m_filePath = L"..\\..\\Resource\\Shader\\02UIShader.fx";
 	m_shaderType = (_int)EShaderType::UI;
 }
 

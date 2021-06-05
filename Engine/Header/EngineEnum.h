@@ -66,6 +66,12 @@ namespace Engine
 		UI				= 2,
 		NumOfShdaerType	= 3
 	};
+
+	enum class EShaderID
+	{
+		Basic			= 0,
+		NumOfShaderID	= 1
+	};
 #pragma endregion
 
 #pragma region PhysicsEnum
