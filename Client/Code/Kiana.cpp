@@ -15,12 +15,6 @@ SP(Engine::CObject) Kiana::MakeClone(void)
 {
 	SP(Kiana) spClone(new Kiana, Engine::SmartDeleter<Kiana>);
 
-	__super::InitClone(spClone);
-
-	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
-	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spFSM = spClone->GetComponent<FSM_SpiderC>();
 	return spClone;;
 }
 

@@ -4,7 +4,6 @@
 #include "ObjectFactory.h"
 
 #include "DynamicMeshData.h"
-#include "FSM_KianaC.h"
 #include "FSM_SpiderC.h"
 
 CJongScene::CJongScene()

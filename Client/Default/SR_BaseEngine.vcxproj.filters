@@ -46,9 +46,6 @@
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
       <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\Monster">
-      <UniqueIdentifier>{211598c1-eb0b-4768-907e-f8852aceae34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana">
       <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
     </Filter>
@@ -63,54 +60,6 @@
     </Filter>
     <Filter Include="02.Objects\00.Player\02.Sakura">
       <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Spider">
-      <UniqueIdentifier>{c018753b-4459-4729-9aa1-f124989a2513}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Spider\FSM">
-      <UniqueIdentifier>{7522bdb1-bd70-4493-a8f5-8c6c3a6056e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Lancer">
-      <UniqueIdentifier>{bb69a5fb-20de-4a03-ab41-683c5fd6e336}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Lancer\FSM">
-      <UniqueIdentifier>{4e0ba9d9-963e-475a-8210-13967c4f6c64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Robot">
-      <UniqueIdentifier>{ba62fde9-0141-45f2-af69-39aa74f7a62f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Robot\FSM">
-      <UniqueIdentifier>{3b0a3ddb-d67a-4b37-990b-dc1a93a8327e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Axe">
-      <UniqueIdentifier>{0799b1ba-0a55-4c92-a407-982145d97033}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Axe\FSM">
-      <UniqueIdentifier>{3eaf9202-679f-4a20-be62-eb8cb514651f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MB_Ganesha">
-      <UniqueIdentifier>{2fa8eab6-5f66-4214-95e7-63aa87abeea0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MB_Ganesha\FSM">
-      <UniqueIdentifier>{bff33868-824f-4a3e-b8ff-9da142bd33df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MB_Bronya">
-      <UniqueIdentifier>{199e26cf-2e27-428b-aeee-038a13fbf1b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MB_Bronya\FSM">
-      <UniqueIdentifier>{a2a6ee26-793f-4a1d-a827-953fe02c31ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Ninza">
-      <UniqueIdentifier>{253154c8-bf6c-479a-8074-94a34e30d62b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Ninza\FSM">
-      <UniqueIdentifier>{786bfeb7-e733-441b-8308-4c6105746e6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Scout">
-      <UniqueIdentifier>{974ca1cf-b207-48aa-8298-c5b132ab2142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\Monster\MO_Scout\FSM">
-      <UniqueIdentifier>{d43ade6f-b909-4463-82fd-080a74f138fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,41 +117,12 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Monster.h">
-      <Filter>02.Objects\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="FSM_Kiana_Define.h">
       <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_KianaC.h">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_SpiderC.h">
-      <Filter>02.Objects\Monster\MO_Spider\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Spider.h">
-      <Filter>02.Objects\Monster\MO_Spider</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Robot.h">
-      <Filter>02.Objects\Monster\MO_Robot</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Axe.h">
-      <Filter>02.Objects\Monster\MO_Axe</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MB_Ganesha.h">
-      <Filter>02.Objects\Monster\MB_Ganesha</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MB_Bronya.h">
-      <Filter>02.Objects\Monster\MB_Bronya</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Ninza.h">
-      <Filter>02.Objects\Monster\MO_Ninza</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Scout.h">
-      <Filter>02.Objects\Monster\MO_Scout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Lancer.h">
-      <Filter>02.Objects\Monster\MO_Lancer\FSM</Filter>
+    <ClInclude Include="..\Header\FSM_SpiderC.h" />
+    <ClInclude Include="..\Header\Kiana.h">
+      <Filter>02.Objects\00.Player\00.Kiana</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,38 +159,9 @@
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClCompile>
-    <ClCompile Include="FSM_KianaC.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Monster.cpp">
-      <Filter>02.Objects\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_SpiderC.cpp">
-      <Filter>02.Objects\Monster\MO_Spider\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Spider.cpp">
-      <Filter>02.Objects\Monster\MO_Spider</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Robot.cpp">
-      <Filter>02.Objects\Monster\MO_Robot</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Axe.cpp">
-      <Filter>02.Objects\Monster\MO_Axe</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MB_Ganesha.cpp">
-      <Filter>02.Objects\Monster\MB_Ganesha</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MB_Bronya.cpp">
-      <Filter>02.Objects\Monster\MB_Bronya</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Ninza.cpp">
-      <Filter>02.Objects\Monster\MO_Ninza</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Scout.cpp">
-      <Filter>02.Objects\Monster\MO_Scout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Lancer.cpp">
-      <Filter>02.Objects\Monster\MO_Lancer\FSM</Filter>
+    <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
+    <ClCompile Include="..\Code\Kiana.cpp">
+      <Filter>02.Objects\00.Player\00.Kiana</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
