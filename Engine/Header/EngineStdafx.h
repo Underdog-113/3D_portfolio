@@ -78,6 +78,7 @@
 #include "SoundManager.h"
 #include "TextManager.h"
 #include "ShaderStore.h"
+#include "ButtonManager.h"
 
 //ETC
 #include "MathHelper.h"

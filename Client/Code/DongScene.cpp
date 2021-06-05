@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DongScene.h"
 #include "Image.h"
-#include "Button.h"
+//#include "Button.h"
 #include "Text.h"
 
 CDongScene::CDongScene()
@@ -69,6 +69,13 @@ void CDongScene::Start(void)
 			std::dynamic_pointer_cast<Engine::CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.2f);
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
+	}*/
+
+	/*{
+		SP(Engine::CButton<int>) image =
+			std::dynamic_pointer_cast<Engine::CButton<int>>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"sdfsdf"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->SetFunctionData(10);
 	}*/
 }
 
