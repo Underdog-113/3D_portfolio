@@ -39,8 +39,8 @@ void CDongScene::Start(void)
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");*/
 	
 	/*{
-		SP(Engine::CImage) image =
-			std::dynamic_pointer_cast<Engine::CImage>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.0f);
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 		image->GetTexture()->AddTexture(L"SealPatten3 #16871", 0);
@@ -48,8 +48,8 @@ void CDongScene::Start(void)
 	}
 
 	{
-		SP(Engine::CImage) image =
-			std::dynamic_pointer_cast<Engine::CImage>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.2f);
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 		image->GetTexture()->AddTexture(L"Stage_Image", 0);

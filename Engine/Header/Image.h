@@ -4,16 +4,16 @@
 #include "Object.h"
 
 BEGIN(Engine)
-class ENGINE_DLL CImage final : public CObject
+class ENGINE_DLL CImageObject final : public CObject
 {
 	SMART_DELETER_REGISTER
 private:
-	CImage();
-	~CImage();
+	CImageObject();
+	~CImageObject();
 
 public:
 	// CObject을(를) 통해 상속됨
-	static	SP(CImage) Create(_bool isStatic, CScene* pScene);
+	static	SP(CImageObject) Create(_bool isStatic, CScene* pScene);
 	SP(Engine::CObject) MakeClone(void) override;
 
 	void Awake(void) override;
@@ -32,16 +32,16 @@ public:
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 
-	void SetBasicName(void) override;
+	
 
 private:
-
+	void SetBasicName(void) override;
 private:
 	static _uint m_s_uniqueID;
 
-	GETTOR(SP(CGraphicsC), m_spGraphics, {}, Graphics)
-	GETTOR(SP(CTextureC), m_spTexture, {}, Texture)
-	GETTOR(SP(CRectTexC), m_spRectTex, {}, RectTex)
+	GETTOR(SP(CGraphicsC), m_spGraphics, nullptr, Graphics)
+	GETTOR(SP(CTextureC), m_spTexture, nullptr, Texture)
+	GETTOR(SP(CRectTexC), m_spRectTex, nullptr, RectTex)
 };
 END
 #endif

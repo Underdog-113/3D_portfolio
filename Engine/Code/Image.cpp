@@ -2,18 +2,18 @@
 #include "Image.h"
 
 USING(Engine)
-_uint CImage::m_s_uniqueID = 0;
-CImage::CImage()
+_uint CImageObject::m_s_uniqueID = 0;
+CImageObject::CImageObject()
 {
 }
 
-CImage::~CImage()
+CImageObject::~CImageObject()
 {
 }
 
-SP(CImage) CImage::Create(_bool isStatic, CScene * pScene)
+SP(CImageObject) CImageObject::Create(_bool isStatic, CScene * pScene)
 {
-	SP(CImage) spInstance(new CImage, SmartDeleter<CImage>);
+	SP(CImageObject) spInstance(new CImageObject, SmartDeleter<CImageObject>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -21,9 +21,9 @@ SP(CImage) CImage::Create(_bool isStatic, CScene * pScene)
 	return spInstance;
 }
 
-SP(Engine::CObject) CImage::MakeClone(void)
+SP(Engine::CObject) CImageObject::MakeClone(void)
 {
-	SP(CImage) spClone(new CImage);
+	SP(CImageObject) spClone(new CImageObject, SmartDeleter<CImageObject>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<CTransformC>();
@@ -32,10 +32,9 @@ SP(Engine::CObject) CImage::MakeClone(void)
 	spClone->m_spRectTex = spClone->GetComponent<CRectTexC>();
 
 	return spClone;
-	return SP(CObject)();
 }
 
-void CImage::Awake(void)
+void CImageObject::Awake(void)
 {
 	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;	
@@ -46,32 +45,32 @@ void CImage::Awake(void)
 	m_spTexture = AddComponent<CTextureC>();
 }	
 
-void CImage::Start(void)
+void CImageObject::Start(void)
 {
 	__super::Start();
 }
 
-void CImage::FixedUpdate(void)
+void CImageObject::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 }
 
-void CImage::Update(void)
+void CImageObject::Update(void)
 {
 	__super::Update();
 }
 
-void CImage::LateUpdate(void)
+void CImageObject::LateUpdate(void)
 {
 	__super::LateUpdate();
 }
 
-void CImage::PreRender(void)
+void CImageObject::PreRender(void)
 {
 	m_spRectTex->PreRender(m_spGraphics);
 }
 
-void CImage::Render(void)
+void CImageObject::Render(void)
 {
 	m_spRectTex->Render(m_spGraphics);
 
@@ -84,27 +83,27 @@ void CImage::Render(void)
 	}
 }
 
-void CImage::PostRender(void)
+void CImageObject::PostRender(void)
 {
 	m_spRectTex->PostRender(m_spGraphics);
 }
 
-void CImage::OnDestroy(void)
+void CImageObject::OnDestroy(void)
 {
 	__super::OnDestroy();
 }
 
-void CImage::OnEnable(void)
+void CImageObject::OnEnable(void)
 {
 	__super::OnEnable();
 }
 
-void CImage::OnDisable(void)
+void CImageObject::OnDisable(void)
 {
 	__super::OnDisable();
 }
 
-void CImage::SetBasicName(void)
+void CImageObject::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
