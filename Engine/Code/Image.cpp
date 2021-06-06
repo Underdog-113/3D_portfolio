@@ -41,10 +41,10 @@ void CImage::Awake(void)
 	m_layerID = (_int)ELayerID::UI;	
 	m_addExtra = true;
 	
-	AddComponent<CRectTexC>()->SetIsOrtho(true);
-	AddComponent<CGraphicsC>()->SetRenderID((_int)ERenderID::UI);
-	AddComponent<CTextureC>();
-}
+	(m_spRectTex = AddComponent<CRectTexC>())->SetIsOrtho(true);
+	(m_spGraphics = AddComponent<CGraphicsC>())->SetRenderID((_int)ERenderID::UI);
+	m_spTexture = AddComponent<CTextureC>();
+}	
 
 void CImage::Start(void)
 {
@@ -75,12 +75,13 @@ void CImage::Render(void)
 {
 	m_spRectTex->Render(m_spGraphics);
 
-	SP(CTextC) text = GetComponent<CTextC>();
-	if (text)
-	{
-		text->RenderText();
-	}
+	// 텍스처 불러서
+	SP(CTextC) textC = GetComponent<CTextC>();
 
+	if (textC)
+	{
+		textC->Render(m_spGraphics);
+	}
 }
 
 void CImage::PostRender(void)

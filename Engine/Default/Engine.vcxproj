@@ -35,7 +35,6 @@
     <ClInclude Include="..\Header\DebugC.h" />
     <ClInclude Include="..\Header\DebugObject.h" />
     <ClInclude Include="..\Header\DebugShader.h" />
-    <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
     <ClInclude Include="..\Header\DynamicMeshData.h" />
     <ClInclude Include="..\Header\EmptyObject.h" />
@@ -60,7 +59,6 @@
     <ClInclude Include="..\Header\ShaderStore.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
-    <ClInclude Include="..\Header\Text.h" />
     <ClInclude Include="..\Header\TextC.h" />
     <ClInclude Include="..\Header\TextManager.h" />
     <ClInclude Include="..\Header\FRC.h" />
@@ -118,7 +116,6 @@
     <ClCompile Include="..\Code\DebugC.cpp" />
     <ClCompile Include="..\Code\DebugObject.cpp" />
     <ClCompile Include="..\Code\DebugShader.cpp" />
-    <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
     <ClCompile Include="..\Code\DynamicMeshData.cpp" />
     <ClCompile Include="..\Code\EmptyObject.cpp" />
@@ -140,7 +137,6 @@
     <ClCompile Include="..\Code\ShaderStore.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
-    <ClCompile Include="..\Code\Text.cpp" />
     <ClCompile Include="..\Code\TextC.cpp" />
     <ClCompile Include="..\Code\TextManager.cpp" />
     <ClCompile Include="..\Code\FRC.cpp" />

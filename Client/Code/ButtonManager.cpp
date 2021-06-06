@@ -2,15 +2,15 @@
 #include "ButtonManager.h"
 #include "Button.h"
 
-//IMPLEMENT_SINGLETON(CButtonManager)
-/*void CButtonManager::Awake(void)
+IMPLEMENT_SINGLETON(CButtonManager)
+void CButtonManager::Awake(void)
 {
 
 }
 
 void CButtonManager::Update(void)
 {
-	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
+/*	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
 		DownButtonActivation();
 	}
@@ -20,8 +20,9 @@ void CButtonManager::Update(void)
 	}
 	else if (Engine::IMKEY_PRESS(MOUSE_LEFT))
 	{
+		// 클릭된 버튼 색깔 변경
 		PressButtonActivation();
-	}
+	}*/
 }
 
 void CButtonManager::OnDestroy(void)
@@ -31,7 +32,7 @@ void CButtonManager::OnDestroy(void)
 
 void CButtonManager::AddButtonList(CButton* buttonObject)
 {
-	switch (buttonObject->GetButtonType())
+	/*switch (buttonObject->GetButtonType())
 	{
 	case CButton::EButton_Type::UP:
 		m_UpButtonList.emplace_back(buttonObject);
@@ -60,30 +61,29 @@ void CButtonManager::AddButtonList(CButton* buttonObject)
 			return pObj1->GetTransform()->GetPosition().z > pObj2->GetTransform()->GetPosition().z;
 		});
 		break;
-	}
+	}*/
 
 
 }
 
 void CButtonManager::UpButtonActivation()
 {
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	/*_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 	for (auto& button : m_UpButtonList)
 	{
 		
-	}
+	}*/
 }
 
 void CButtonManager::DownButtonActivation()
 {
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	//_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 }
 
 void CButtonManager::PressButtonActivation()
 {
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	//_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 }
-*/

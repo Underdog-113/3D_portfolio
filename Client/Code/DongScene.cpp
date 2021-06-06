@@ -43,14 +43,14 @@ void CDongScene::Start(void)
 	__super::Start();
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
-
+	
 	{
 		SP(Engine::CImage) image =
 			std::dynamic_pointer_cast<Engine::CImage>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.0f);
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 		image->GetTexture()->AddTexture(L"SealPatten3 #16871", 0);
-		image->AddComponent<Engine::CTextC>()->AddFontData(L"πŸ¥Ÿ", _float2(200, 200), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"πŸ¥Ÿ", _float2(200, 200), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
 	}
 
 	{
@@ -59,14 +59,15 @@ void CDongScene::Start(void)
 		image->GetTransform()->SetPositionZ(0.2f);
 		image->GetTransform()->SetSize(_float3(800, 500, 0));
 		image->GetTexture()->AddTexture(L"Stage_Image", 0);
-		image->AddComponent<Engine::CTextC>()->AddFontData(L"«œ¥√", _float2(400, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"«œ¥√", _float2(300, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
 	}
 
 	{
-		SP(Engine::CText) image =
-			std::dynamic_pointer_cast<Engine::CText>(ADD_CLONE(L"Text", true, (_int)ELayerID::UI, L"sdfsdf"));
+		SP(Engine::CObject) image =
+			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 		image->GetTransform()->SetPositionZ(0.0f);
-		image->GetText()->AddFontData(L"∂•", _float2(100, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"Ω…«ÿ", _float2(400, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
+		image->GetComponent<Engine::CTextC>()->AddFontData(L"2", L"√ Ω…«ÿ", _float2(500, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
 	}
 
 	/*{

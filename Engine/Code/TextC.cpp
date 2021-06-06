@@ -31,12 +31,6 @@ void CTextC::Awake()
 void CTextC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
-
-	if (FAILED(D3DXCreateFont(GET_DEVICE, 0, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &m_pFont)))
-	{
-		MSG_BOX(__FILE__, L"CFontObject.cpp / 45");
-	}
 }
 
 void CTextC::FixedUpdate(SP(CComponent) spThis)
@@ -53,6 +47,19 @@ void CTextC::LateUpdate(SP(CComponent) spThis)
 
 }
 
+void CTextC::PreRender(SP(CGraphicsC) spGC)
+{
+}
+
+void CTextC::Render(SP(CGraphicsC) spGC)
+{
+	RenderText();
+}
+
+void CTextC::PostRender(SP(CGraphicsC) spGC)
+{
+}
+
 void CTextC::OnDestroy()
 {
 }
@@ -67,29 +74,34 @@ void CTextC::OnDisable()
 	__super::OnDisable();
 }
 
-void CTextC::AddFontData(std::wstring text, _float2 offset, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color)
+void CTextC::AddFontData(std::wstring keyValue, std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible)
 {
-	m_offset = offset;
+	_TextCom t(message, position, boxSize, fontSize, alignment, color, isVisible);
 
-	m_textData.m_message = text;
-	m_textData.m_boxSize = boxSize;
-	m_textData.m_fontSize = fontSize;
-	m_textData.m_alignment = alignment;
-	m_textData.m_color = color;
+	if (FAILED(D3DXCreateFont(GET_DEVICE, fontSize, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &t.m_pFont)))
+	{
+		MSG_BOX(__FILE__, L"CTextC.cpp / AddFontData");
+	}
+
+	m_textData.emplace(keyValue, t);
 }
 
 void CTextC::RenderText()
 {
-	if (!m_pFont)
-		return;
+	for (auto& iter = m_textData.begin(); iter != m_textData.end(); ++iter)
+	{
+		std::basic_string<WCHAR> msg = iter->second.m_text.m_message.c_str();
 
-	std::basic_string<WCHAR> msg = m_textData.m_message.c_str();
+		_float2 pos = GetOwner()->GetTransform()->GetPosition();
+		pos += iter->second.m_text.m_position;
 
-	_float2 pos = GetOwner()->GetTransform()->GetPosition();
-	pos += m_offset;
+		_float2 boxSize = iter->second.m_text.m_boxSize;
+		RECT rect = { _int(pos.x), _int(pos.y),
+			_int(pos.x + boxSize.x), _int(pos.y + boxSize.y) };
 
-	RECT rect = { _int(pos.x), _int(pos.y),
-		_int(pos.x + m_textData.m_boxSize.x), _int(pos.y + m_textData.m_boxSize.y) };
+		iter->second.m_pFont->DrawText(NULL, msg.c_str(), -1, &rect, iter->second.m_text.m_alignment, iter->second.m_text.m_color);
+	}
 
-	m_pFont->DrawText(NULL, msg.c_str(), -1, &rect, m_textData.m_alignment, m_textData.m_color);
+	
 }

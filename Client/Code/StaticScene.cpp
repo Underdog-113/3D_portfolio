@@ -5,8 +5,6 @@
 #include "EmptyObject.h"
 #include "Camera.h"
 #include "Image.h"
-#include "Button.h"
-#include "Text.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -101,13 +99,4 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(Engine::CImage) spImageObject(Engine::CImage::Create(true, this));
 	GetObjectFactory()->AddPrototype(spImageObject);
-
-	SP(CButton<_int>) spIButtonObject(CButton<_int>::Create(true, this));
-	GetObjectFactory()->AddPrototype(spIButtonObject);
-
-	SP(CButton<float>) spFButtonObject(CButton<float>::Create(true, this));
-	GetObjectFactory()->AddPrototype(spFButtonObject);
-
-	SP(Engine::CText) spTextObject(Engine::CText::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTextObject);
 }

@@ -115,7 +115,9 @@ void CEmptyObject::PickComponentToRender(void)
 {
 	SP(CMeshC)		spMesh = GetComponent<CMeshC>();
 	SP(CRectTexC)	spRectTex = GetComponent<CRectTexC>();
+	SP(CTextC)		spText = GetComponent<CTextC>();
 
+	
 	if (spMesh != nullptr)
 	{
 		m_spComponentToRender = spMesh;
@@ -125,5 +127,14 @@ void CEmptyObject::PickComponentToRender(void)
 	{
 		m_spComponentToRender = spRectTex;
 		return;
+	}
+	else if (spText != nullptr)
+	{
+		if (GetComponent<CGraphicsC>() == nullptr)
+		{
+			AddComponent<CGraphicsC>()->SetRenderID((_int)ERenderID::UI);
+		}
+
+		m_spComponentToRender = spText;
 	}
 }

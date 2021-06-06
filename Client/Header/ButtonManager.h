@@ -1,21 +1,20 @@
-
 #include "Button.h"
-class ENGINE_DLL CButtonManager final
+class CButtonManager final
 {
 public:
-	//DECLARE_SINGLETON(CButtonManager)
-/*public:
-	void Awake(void) override;
+	DECLARE_SINGLETON(CButtonManager)
+public:
+	void Awake(void);
 	void Update(void);
 	void OnDestroy(void);
 
-	void AddButtonList(CButton<>* buttonObject);
+	void AddButtonList(CButton* buttonObject);
 private:
 	void UpButtonActivation();
 	void DownButtonActivation();
 	void PressButtonActivation();
 private:
-	std::list<CButton<>*> m_UpButtonList;
-	std::list<CButton<>*> m_DownButtonList;
-	std::list<CButton<>*> m_PressButtonList;*/
+	std::list<CButton*> m_UpButtonList;
+	std::list<CButton*> m_DownButtonList;
+	std::list<CButton*> m_PressButtonList;
 };
