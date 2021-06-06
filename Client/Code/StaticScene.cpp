@@ -98,7 +98,7 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
 
-	SP(Engine::CImage) spImageObject(Engine::CImage::Create(true, this));
+	SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spImageObject);
 
 	SP(CButton) spButtonObject(CButton::Create(true, this));

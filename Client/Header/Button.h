@@ -5,6 +5,7 @@
 #include "DeleGate.h"
 class CButton final : public Engine::CObject
 {
+	SMART_DELETER_REGISTER
 public:
 	enum EButton_Type { UP, Down, Press };
 private:

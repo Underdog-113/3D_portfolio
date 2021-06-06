@@ -1,3 +1,6 @@
+#ifndef BUTTONMANAGER_H
+#define BUTTONMANAGER_H
+
 #include "Button.h"
 class CButtonManager final
 {
@@ -20,3 +23,6 @@ private:
 	std::list<CButton*> m_DownButtonList;
 	std::list<CButton*> m_PressButtonList;
 };
+
+
+#endif

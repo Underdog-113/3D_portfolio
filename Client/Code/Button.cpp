@@ -23,7 +23,7 @@ SP(CButton) CButton::Create(_bool isStatic, Engine::CScene * pScene)
 
 SP(Engine::CObject) CButton::MakeClone(void)
 {
-	SP(CButton) spClone(new CButton);
+	SP(CButton) spClone(new CButton, Engine::SmartDeleter<CButton>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
