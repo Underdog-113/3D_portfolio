@@ -49,16 +49,47 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(10, 10, 10);
 
-		SP(Engine::CObject) spEmptyObject1
-			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+		spEmptyObject
+			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
 
-		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
-		spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spEmptyObject1->AddComponent<Engine::CTextureC>();
-		spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spEmptyObject1->GetTransform()->SetPosition(0, 0, 3);
-		spEmptyObject1->GetTransform()->SetSize(3, 3, 3);
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube1");
+		//
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		//spEmptyObject->GetTransform()->SetPosition(6, 0, 0);
+		//
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube2");
+		//
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		//spEmptyObject->GetTransform()->SetPosition(9, 0, 0);
+		
+
+		//SP(Engine::CObject) spEmptyObject1
+		//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+		//
+		//spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
+		//spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//spEmptyObject1->AddComponent<Engine::CTextureC>();
+		//spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject1->GetTransform()->SetPosition(0, 0, 3);
+		//spEmptyObject1->GetTransform()->SetSize(3, 3, 3);
 
 		//spEmptyObject =
 		//	ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
@@ -92,36 +123,16 @@ void CChangmoScene::FixedUpdate(void)
 void CChangmoScene::Update(void)
 {
 	__super::Update();
-	SP(Engine::CObject) momBox = FindObjectByName(L"Cube0");
-	if (Engine::IMKEY_PRESS(KEY_UP))
-	{
-		momBox->GetTransform()->MoveForward(0.05f);
-	}
-	if (Engine::IMKEY_PRESS(KEY_LEFT))
-	{
-		momBox->GetTransform()->AddRotationY(-0.05f);
-	}
-	if (Engine::IMKEY_PRESS(KEY_RIGHT))
-	{
-		momBox->GetTransform()->AddRotationY(0.05f);
-	}
-	if (Engine::IMKEY_PRESS(KEY_DOWN))
-	{
-		momBox->GetTransform()->AddRotationX(0.05f);
-	}
-	if (Engine::IMKEY_PRESS(KEY_E))
-	{
-		momBox->GetTransform()->AddRotationZ(0.05f);
-	}
-	if (Engine::IMKEY_DOWN(KEY_Q))
-	{
-		momBox->SetDeleteThis(true);
-	}
 }
 
 void CChangmoScene::LateUpdate(void)
 {
 	__super::LateUpdate();
+	_float3 intersection;
+	if (Engine::IMKEY_DOWN(MOUSE_LEFT) && Engine::CInputManager::GetInstance()->MousePickingLocal((_int)ELayerID::Player, intersection))
+	{
+		int a = 5;
+	}
 }
 
 void CChangmoScene::OnDestroy(void)
