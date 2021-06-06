@@ -32,7 +32,6 @@ SP(Engine::CObject) CButton::MakeClone(void)
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
-	return SP(CObject)();
 }
 
 void CButton::Awake(void)
@@ -83,11 +82,11 @@ void CButton::Render(void)
 		m_spRectTex->Render(m_spGraphics);
 	}
 
-	SP(Engine::CTextC) textC = GetComponent<Engine::CTextC>();
+	SP(Engine::CTextC) spTextC = GetComponent<Engine::CTextC>();
 
-	if (textC)
+	if (spTextC)
 	{
-		textC->Render(m_spGraphics);
+		spTextC->Render(m_spGraphics);
 	}
 }
 
@@ -116,9 +115,10 @@ void CButton::OnDisable(void)
 
 void CButton::SetBasicName(void)
 {
+	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
-void CButton::FunceActivation()
+void CButton::FuncActivation()
 {
 	m_functionGate();
 }

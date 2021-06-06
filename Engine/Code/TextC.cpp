@@ -31,6 +31,10 @@ void CTextC::Awake()
 void CTextC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+
+	if (m_pOwner->GetComponent<CGraphicsC>() == nullptr)
+		m_pOwner->AddComponent<CGraphicsC>()->SetRenderID((_int)ERenderID::UI);
+
 }
 
 void CTextC::FixedUpdate(SP(CComponent) spThis)

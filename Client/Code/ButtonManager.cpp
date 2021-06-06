@@ -33,49 +33,27 @@ void CButtonManager::OnDestroy(void)
 
 }
 
-bool sort(const CButton* button1, const CButton* button2)
-{
-	return button1->GetTransform()->GetPosition().z < button2->GetTransform()->GetPosition().z;
-}
-
 void CButtonManager::AddButtonList(CButton* buttonObject)
 {
 	switch (buttonObject->GetButtonType())
 	{
 	case CButton::EButton_Type::UP:
 		m_UpButtonList.emplace_back(buttonObject);
-		m_UpButtonList.sort(sort);
 		break;
 	case CButton::EButton_Type::Down:
 		m_DownButtonList.emplace_back(buttonObject);
-		m_DownButtonList.sort(sort);
 		break;
 	case CButton::EButton_Type::Press:
 		m_PressButtonList.emplace_back(buttonObject);
-		m_PressButtonList.sort((sort));
 		break;
 	}
 
-
-}
-
-bool CrushCheck(_float3 pos, _float3 scale, _float2 point)
-{
-	_float2 boxDis;
-	boxDis.x = pos.x - scale.x;
-	boxDis.y = pos.y - scale.y;
-
-	_float2 pointDis;
-	pointDis.x = pos.x - point.x;
-	pointDis.y = pos.y - point.y;
-
-	if (boxDis.x >= pointDis.x && boxDis.y >= pointDis.y)
+	m_UpButtonList.sort([](CButton* pButton1, CButton* pButton2)
 	{
-		return true;
-	}
-
-	return false;
+		return pButton1->GetTransform()->GetPosition().z < pButton2->GetTransform()->GetPosition().z;
+	});
 }
+
 
 void CButtonManager::UpButtonActivation()
 {
@@ -84,9 +62,9 @@ void CButtonManager::UpButtonActivation()
 	for (auto& button : m_UpButtonList)
 	{
 		// 위치 스케일 좌표를넣어주면 true false를반환 하는 함수
-		if (CrushCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
+		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FunceActivation();
+			button->FuncActivation();
 		}
 	}
 }
@@ -101,4 +79,22 @@ void CButtonManager::PressButtonActivation()
 {
 	//_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
+}
+
+_bool CButtonManager::ButtonCollisionCheck(_float3 buttonPos, _float3 buttonScale, _float2 mousePos)
+{
+	_float2 boxDis;
+	boxDis.x = buttonPos.x - buttonScale.x;
+	boxDis.y = buttonPos.y - buttonScale.y;
+
+	_float2 pointDis;
+	pointDis.x = buttonPos.x - mousePos.x;
+	pointDis.y = buttonPos.y - mousePos.y;
+
+	if (boxDis.x >= pointDis.x && boxDis.y >= pointDis.y)
+	{
+		return true;
+	}
+
+	return false;
 }
