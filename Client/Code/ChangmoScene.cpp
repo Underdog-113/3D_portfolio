@@ -47,35 +47,38 @@ void CChangmoScene::Start(void)
 		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 		spEmptyObject->AddComponent<Engine::CTextureC>();
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(10, 10, 10);
 
-		/*SP(Engine::CObject) spEmptyObject1
+		SP(Engine::CObject) spEmptyObject1
 			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
 
-		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-		spEmptyObject1->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
+		spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		spEmptyObject1->AddComponent<Engine::CTextureC>();
 		spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject1->GetTransform()->SetParent(spEmptyObject->GetTransform());
-		spEmptyObject1->GetTransform()->SetPosition(1, 0, 0);*/
+		spEmptyObject1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spEmptyObject1->GetTransform()->SetPosition(0, 0, 3);
+		spEmptyObject1->GetTransform()->SetSize(3, 3, 3);
 
-		spEmptyObject =
-			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
-
-		spEmptyObject->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
-		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Body");
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
-		spEmptyObject->GetTransform()->SetSize(800, 600, 0);
-		spEmptyObject->GetTransform()->AddPositionZ(0.f);
-
-		spEmptyObject =
-			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
-
-		spEmptyObject->AddComponent<Engine::CRectTexC>();// ->SetIsOrtho(true);
-		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-		spEmptyObject->GetTransform()->SetSize(800, 600, 0);
-		spEmptyObject->GetTransform()->AddPositionZ(0.5f);
+		//spEmptyObject =
+		//	ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
+		//
+		//spEmptyObject->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Body");
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		//spEmptyObject->GetTransform()->SetSize(800, 600, 0);
+		//spEmptyObject->GetTransform()->AddPositionZ(0.f);
+		//
+		//spEmptyObject =
+		//	ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
+		//
+		//spEmptyObject->AddComponent<Engine::CRectTexC>();// ->SetIsOrtho(true);
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
+		//spEmptyObject->GetTransform()->SetSize(800, 600, 0);
+		//spEmptyObject->GetTransform()->AddPositionZ(0.5f);
 	}
 
 	

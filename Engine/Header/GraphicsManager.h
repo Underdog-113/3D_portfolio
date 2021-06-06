@@ -55,8 +55,10 @@ private:
 	typedef LPDIRECT3DVERTEXBUFFER9 _VERTEX_BUFFER;
 	typedef LPDIRECT3DINDEXBUFFER9  _INDEX_BUFFER;
 
-	GETTOR_REF		(_VERTEX_BUFFER,		m_pVertexBuffer,	nullptr,		VertexBuffer)
-	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,		nullptr,		IndexBuffer)
+	GETTOR_REF		(_VERTEX_BUFFER,		m_pVertexBuffer,		nullptr,		VertexBuffer)
+	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,			nullptr,		IndexBuffer)
+
+	GETTOR_SETTOR	(_bool,					m_rtDebugOn,			false,			RtDebugOn)
 };
 END
 #endif

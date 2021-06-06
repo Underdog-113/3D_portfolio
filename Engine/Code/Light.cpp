@@ -12,7 +12,7 @@ CLight::~CLight()
 {
 }
 
-CLight * CLight::Create(const D3DLIGHT9 * pLightInfo, const _int & index)
+CLight * CLight::Create(D3DLIGHT9 * pLightInfo, const _int & index)
 {
 	CLight* pInstance = new CLight;
 	pInstance->InitLight(pLightInfo, index);
@@ -24,14 +24,16 @@ void CLight::Free(void)
 {
 	m_pVertexBuffer->Release();
 	m_pIndexBuffer->Release();
+	delete m_pLightInfo;
 
 	delete this;
 }
 
-void CLight::InitLight(const D3DLIGHT9 * pLightInfo, const _int & index)
+void CLight::InitLight(D3DLIGHT9 * pLightInfo, const _int & index)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	m_index = index;
+	m_pLightInfo = pLightInfo;
 
 	if (FAILED(pDevice->CreateVertexBuffer(sizeof(_VertexScreen) * 4,
 										   0,// 정적 버퍼를 사용(d3dusage_dynamic 사용 시 동적 버퍼)
@@ -92,30 +94,30 @@ void CLight::InitLight(const D3DLIGHT9 * pLightInfo, const _int & index)
 	m_pIndexBuffer->Unlock();
 }
 
-void CLight::RenderLight(LPD3DXEFFECT & pEffect)
+void CLight::RenderLight(LPD3DXEFFECT pEffect)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	_uint iPass = 0;
 
-	if (D3DLIGHT_DIRECTIONAL == m_lightInfo.Type)
+	if (D3DLIGHT_DIRECTIONAL == m_pLightInfo->Type)
 	{
-		pEffect->SetVector("g_vLightDir", &_float4(m_lightInfo.Direction, 0.f));
+		pEffect->SetVector("g_vLightDir", &_float4(m_pLightInfo->Direction, 0.f));
 		iPass = 0;
 	}
 
-	else if (D3DLIGHT_POINT == m_lightInfo.Type)
+	else if (D3DLIGHT_POINT == m_pLightInfo->Type)
 	{
-		pEffect->SetVector("g_vLightPos", &_float4(m_lightInfo.Position, 1.f));
-		pEffect->SetFloat("g_fRange", m_lightInfo.Range);
+		pEffect->SetVector("g_vLightPos", &_float4(m_pLightInfo->Position, 1.f));
+		pEffect->SetFloat("g_fRange", m_pLightInfo->Range);
 		iPass = 1;
 	}
 
-	pEffect->SetVector("g_vLightDiffuse", (_float4*)&m_lightInfo.Diffuse);
-	pEffect->SetVector("g_vLightAmbient", (_float4*)&m_lightInfo.Ambient);
+	pEffect->SetVector("g_vLightDiffuse", (_float4*)&m_pLightInfo->Diffuse);
+	pEffect->SetVector("g_vLightAmbient", (_float4*)&m_pLightInfo->Ambient);
 
 	_mat viewMat, projMat;
-	pDevice->GetTransform(D3DTS_VIEW, &viewMat);
-	pDevice->GetTransform(D3DTS_PROJECTION, &projMat);
+	viewMat = GET_MAIN_CAM->GetViewMatrix();
+	projMat = GET_MAIN_CAM->GetProjMatrix();
 	D3DXMatrixInverse(&viewMat, NULL, &viewMat);
 	D3DXMatrixInverse(&projMat, NULL, &projMat);
 

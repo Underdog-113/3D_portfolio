@@ -5,6 +5,7 @@
 #include "DataStore.h"
 #include "MeshStore.h"
 #include "TextureStore.h"
+#include "LightManager.h"
 
 
 BEGIN(Engine)
@@ -50,6 +51,7 @@ protected:
 	GETTOR			(CDataStore*,				m_pDataStore,		nullptr,		DataStore)
 	GETTOR			(CMeshStore*,				m_pMeshStore,		nullptr,		MeshStore)
 	GETTOR			(CTextureStore*,			m_pTextureStore,	nullptr,		TextureStore)
+	GETTOR			(CLightManager*,			m_pLightManager,	nullptr,		LightManager)
 
 	GETTOR			(std::wstring,				m_objectKey,		L"",			ObjectKey)
 	GETTOR			(_int,						m_sceneID,			-1,				SceneID)

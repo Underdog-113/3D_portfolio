@@ -98,7 +98,7 @@ void CMeshC::PreRender(SP(CGraphicsC) spGC)
 	pDevice->SetMaterial(&spGC->m_mtrl);
 }
 
-void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT & pEffect)
+void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 }
 
@@ -113,7 +113,7 @@ void CMeshC::Render(SP(CGraphicsC) spGC)
 	}
 }
 
-void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT & pEffect)
+void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
 	{
@@ -128,7 +128,7 @@ void CMeshC::PostRender(SP(CGraphicsC) spGC)
 {
 }
 
-void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT & pEffect)
+void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 }
 

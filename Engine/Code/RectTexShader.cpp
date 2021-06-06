@@ -43,8 +43,8 @@ void CRectTexShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	}
 	else
 	{
-		pDevice->GetTransform(D3DTS_VIEW, &viewMat);
-		pDevice->GetTransform(D3DTS_PROJECTION, &projMat);	
+		viewMat = GET_MAIN_CAM->GetViewMatrix();
+		projMat = GET_MAIN_CAM->GetProjMatrix();
 	}
 	m_pEffect->SetMatrix("g_matWorld", &worldMat);
 	m_pEffect->SetMatrix("g_matView", &viewMat);

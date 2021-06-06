@@ -16,9 +16,9 @@ void CGraphicsManager::Awake(void)
 
 void CGraphicsManager::Start(void)
 {
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	D3DLIGHT9 light;
-	ZeroMemory(&light, sizeof(D3DLIGHT9));
+	//LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	//D3DLIGHT9 light;
+	//ZeroMemory(&light, sizeof(D3DLIGHT9));
 
 	//light.Type = D3DLIGHT_DIRECTIONAL;
 	//light.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
@@ -27,7 +27,7 @@ void CGraphicsManager::Start(void)
 	//light.Direction = _float3(1.f, -1.f, 1.f);
 	//
 	//pDevice->SetLight(0, &light);
-	pDevice->LightEnable(0, TRUE);
+	//pDevice->LightEnable(0, TRUE);
 
 
 
@@ -46,6 +46,10 @@ void CGraphicsManager::FixedUpdate(void)
 
 void CGraphicsManager::Update(void)
 {
+	if (IMKEY_DOWN(KEY_Z))
+	{
+		m_rtDebugOn = (m_rtDebugOn ? false : true);
+	}
 }
 
 void CGraphicsManager::LateUpdate(void)
@@ -75,6 +79,7 @@ void CGraphicsManager::PreRender(void)
 void CGraphicsManager::Render(void)
 {
 	RenderBase();
+
 	RenderDeferred();
 	RenderLights();
 	RenderDeferBlend();
@@ -84,8 +89,11 @@ void CGraphicsManager::Render(void)
 	RenderAlphaBlend();
 	RenderUI();
 
-	CRenderTargetManager::GetInstance()->RenderDebugBufferMRT(L"MRT_Deferred");
-	CRenderTargetManager::GetInstance()->RenderDebugBufferMRT(L"MRT_LightAcc");
+	if (m_rtDebugOn == true)
+	{
+		CRenderTargetManager::GetInstance()->RenderDebugBufferMRT(L"MRT_Deferred");
+		CRenderTargetManager::GetInstance()->RenderDebugBufferMRT(L"MRT_LightAcc");
+	}
 
 	ClearRenderList();
 }
@@ -199,8 +207,8 @@ void CGraphicsManager::InitDeferredBuffer(void)
 void CGraphicsManager::RenderBase(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	//pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::Base])
 	{
@@ -216,9 +224,8 @@ void CGraphicsManager::RenderBase(void)
 			}
 		}
 	}
-
-	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -238,9 +245,30 @@ void CGraphicsManager::RenderNonAlpha(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				pObject->PreRender();
-				pObject->Render();
-				pObject->PostRender();
+				SP(CComponent) spShader;
+				if (spShader = pObject->GetComponent<CShaderC>())
+				{
+					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+
+					for (_size i = 0; i < vShader.size(); ++i)
+					{
+						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+						pEffect->End();
+					}
+				}
+				else
+				{
+					pObject->PreRender();
+					pObject->Render();
+					pObject->PostRender();
+				}
 			}
 		}
 	}
@@ -255,7 +283,7 @@ void CGraphicsManager::RenderLights(void)
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
 
 	pEffect->Begin(NULL, 0);
-	CLightManager::GetInstance()->RenderLights(pEffect);
+	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);
 	pEffect->End();
 	
 	END_MRT(L"MRT_LightAcc");
@@ -308,7 +336,7 @@ void CGraphicsManager::RenderWire(void)
 void CGraphicsManager::RenderAlphaTest(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	// 햇키드 얼굴 랜더링 할때 알파테스팅 해줘야됨
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
@@ -333,13 +361,11 @@ void CGraphicsManager::RenderAlphaTest(void)
 	}
 
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 }
 
 void CGraphicsManager::RenderAlphaBlend(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 

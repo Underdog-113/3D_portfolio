@@ -9,11 +9,11 @@ private:
 										   ~CLight				(void);
 
 public:
-	static			CLight*					Create				(const D3DLIGHT9* pLightInfo, const _int& index);
+	static			CLight*					Create				(D3DLIGHT9* pLightInfo, const _int& index);
 					void					Free				(void);
 
-					void					InitLight			(const D3DLIGHT9* pLightInfo, const _int& index);
-					void					RenderLight			(LPD3DXEFFECT& pEffect);
+					void					InitLight			(D3DLIGHT9* pLightInfo, const _int& index);
+					void					RenderLight			(LPD3DXEFFECT pEffect);
 	
 private:
 	typedef LPDIRECT3DVERTEXBUFFER9 _VERTEX_BUFFER;
@@ -21,7 +21,7 @@ private:
 
 	GETTOR_REF		(_VERTEX_BUFFER,		m_pVertexBuffer,	nullptr,		VertexBuffer)
 	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,		nullptr,		IndexBuffer)
-	GETTOR			(D3DLIGHT9,				m_lightInfo,		{},				LightInfo)
+	GETTOR			(D3DLIGHT9*,			m_pLightInfo,		{},				LightInfo)
 	GETTOR			(_int,					m_index,			UNDEFINED,		Index)
 
 };

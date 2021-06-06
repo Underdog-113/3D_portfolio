@@ -163,7 +163,10 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>

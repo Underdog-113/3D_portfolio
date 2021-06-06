@@ -4,7 +4,28 @@
 
 
 USING(Engine)
-IMPLEMENT_SINGLETON(CLightManager)
+
+CLightManager::CLightManager(void)
+{
+}
+
+CLightManager::~CLightManager(void)
+{
+}
+
+CLightManager * CLightManager::Create(void)
+{
+	CLightManager* pInstance = new CLightManager;
+	pInstance->Awake();
+
+	return pInstance;
+}
+
+void CLightManager::Free(void)
+{
+	OnDestroy();
+	delete this;
+}
 
 void CLightManager::Awake(void)
 {
@@ -16,21 +37,26 @@ void CLightManager::Start(void)
 
 void CLightManager::OnDestroy(void)
 {
-	for (auto& light : m_vLights)
-		light->Free();
-
-	m_vLights.clear();
+	ClearLights();
 }
 
-void CLightManager::AddLight(const D3DLIGHT9 * pLightInfo)
+void CLightManager::AddLight(D3DLIGHT9 * pLightInfo)
 {
 	CLight* pLight = CLight::Create(pLightInfo, (_int)m_vLights.size());
 
 	m_vLights.push_back(pLight);
 }
 
-void CLightManager::RenderLights(LPD3DXEFFECT & pEffect)
+void CLightManager::RenderLights(LPD3DXEFFECT pEffect)
 {
 	for (auto& light : m_vLights)
 		light->RenderLight(pEffect);
+}
+
+void CLightManager::ClearLights(void)
+{
+	for (auto& light : m_vLights)
+		light->Free();
+
+	m_vLights.clear();
 }

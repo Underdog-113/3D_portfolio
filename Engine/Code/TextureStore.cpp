@@ -129,7 +129,7 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 											  0,
 											  nullptr,
 											  nullptr,
-											  &pNewTex->pTexture)))
+											  (LPDIRECT3DTEXTURE9*)&pNewTex->pTexture)))
 		{
 			MSG_BOX(__FILE__, (L"TexKey : [" + texKey + L"] create texture failed in ParsingTexture").c_str());
 			ABORT;
