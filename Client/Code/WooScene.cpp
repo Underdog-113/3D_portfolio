@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "WooScene.h"
+#include "EmptyObject.h"
+#include "ObjectFactory.h"
+#include "CameraManager.h"
 
+#include "InputManager.h"
+#include "DynamicMesh.h"
+#include "MeshData.h"
 
 CWooScene::CWooScene()
 {
@@ -33,6 +39,17 @@ void CWooScene::Awake(_int numOfLayers)
 
 void CWooScene::Start(void)
 {
+	__super::Start();
+	{
+		m_spSakura = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Character");
+
+		m_spSakura->AddComponent<Engine::CMeshC>()->AddMeshData(L"Yae_Sakura");
+		m_spSakura->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		m_spSakura->AddComponent<Engine::CTextureC>();
+		m_spSakura->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+
+		m_spSakura->GetTransform()->SetSize(30, 30, 30);
+	}
 }
 
 void CWooScene::FixedUpdate(void)
@@ -44,6 +61,21 @@ void CWooScene::Update(void)
 {
 	__super::Update();
 
+	//Engine::CDynamicMesh* pDM = 
+	//	static_cast<Engine::CDynamicMesh*>(m_spSakura->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+
+	//if (Engine::IMKEY_DOWN(KEY_RIGHT))
+	//{
+	//	if (59 <= m_iIndex)
+	//		m_iIndex = 0;
+	//	else
+	//		++m_iIndex;
+
+	//	pDM->ChangeAniSet(m_iIndex);
+
+	//	std::cout << "index: " << m_iIndex << std::endl;
+	//	std::cout << "================================" << std::endl;
+	//}
 }
 
 void CWooScene::LateUpdate(void)
