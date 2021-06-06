@@ -10,9 +10,7 @@
 #include "Camera.h"
 #pragma endregion
 
-#pragma region Manager
-#include "ButtonManager.h"
-#pragma endregion
+
 
 CMainApp::CMainApp(void)
 {

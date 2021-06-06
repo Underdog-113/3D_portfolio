@@ -13,6 +13,8 @@ private:
 	void UpButtonActivation();
 	void DownButtonActivation();
 	void PressButtonActivation();
+
+	_bool ButtonCollisionCheck(_float3 buttonPos, _float3 buttonScale, _float2 mousePos);
 private:
 	std::list<CButton*> m_UpButtonList;
 	std::list<CButton*> m_DownButtonList;

@@ -134,22 +134,9 @@ void CEmptyObject::PickComponentToRender(void)
 
 	
 	if (spMesh != nullptr)
-	{
 		m_spComponentToRender = spMesh;
-		return;
-	}
 	else if (spRectTex != nullptr)
-	{
 		m_spComponentToRender = spRectTex;
-		return;
-	}
 	else if (spText != nullptr)
-	{
-		if (GetComponent<CGraphicsC>() == nullptr)
-		{
-			AddComponent<CGraphicsC>()->SetRenderID((_int)ERenderID::UI);
-		}
-
 		m_spComponentToRender = spText;
-	}
 }
