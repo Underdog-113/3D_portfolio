@@ -49,8 +49,7 @@ void CInitScene::Start(void)
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);
 	m_pDataStore->InitDataForScene(m_objectKey);
 	m_pMeshStore->InitMeshForScene(m_objectKey);
-
-	Engine::GET_CUR_SCENE->GetTextureStore()->InitTextureForScene(m_objectKey);
+	m_pTextureStore->InitTextureForScene(m_objectKey);
 
 	InitPrototypes();
 	
