@@ -121,10 +121,10 @@
       <AdditionalIncludeDirectories>$(ProjectDir);../Code;../Header;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
       <AdditionalDependencies>Engine.lib;fmodex64_vc.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

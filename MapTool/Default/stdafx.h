@@ -62,3 +62,9 @@
 #endif
 
 
+// 콘솔창 띄우기
+#ifdef _DEBUG
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#endif
+
+//#include <iostream>
