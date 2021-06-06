@@ -198,8 +198,29 @@
     <ClInclude Include="..\Header\MO_Scout.h">
       <Filter>02.Objects\Monster\MO_Scout</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FSM_ScoutC.h">
+      <Filter>02.Objects\Monster\MO_Scout\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_RobotC.h">
+      <Filter>02.Objects\Monster\MO_Robot\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_NinzaC.h">
+      <Filter>02.Objects\Monster\MO_Ninza\FSM</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\MO_Lancer.h">
+      <Filter>02.Objects\Monster\MO_Lancer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_LancerC.h">
       <Filter>02.Objects\Monster\MO_Lancer\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_AxeC.h">
+      <Filter>02.Objects\Monster\MO_Axe\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_GaneshaC.h">
+      <Filter>02.Objects\Monster\MB_Ganesha\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_BronyaC.h">
+      <Filter>02.Objects\Monster\MB_Bronya\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,8 +284,29 @@
     <ClCompile Include="..\Code\MO_Scout.cpp">
       <Filter>02.Objects\Monster\MO_Scout</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\FSM_ScoutC.cpp">
+      <Filter>02.Objects\Monster\MO_Scout\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_RobotC.cpp">
+      <Filter>02.Objects\Monster\MO_Robot\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_NinzaC.cpp">
+      <Filter>02.Objects\Monster\MO_Ninza\FSM</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\MO_Lancer.cpp">
+      <Filter>02.Objects\Monster\MO_Lancer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_LancerC.cpp">
       <Filter>02.Objects\Monster\MO_Lancer\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_AxeC.cpp">
+      <Filter>02.Objects\Monster\MO_Axe\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_GaneshaC.cpp">
+      <Filter>02.Objects\Monster\MB_Ganesha\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_BronyaC.cpp">
+      <Filter>02.Objects\Monster\MB_Bronya\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
