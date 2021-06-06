@@ -83,16 +83,30 @@ void CRectTexC::PreRender(SP(CGraphicsC) spGC)
 		SetTexture(0, spTexture->GetTexData()[spTexture->GetMeshIndex()][spTexture->GetTexIndex()]->pTexture);
 }
 
+void CRectTexC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
+{
+	__super::PreRender();
+}
+
 void CRectTexC::Render(SP(CGraphicsC) spGC)
 {
 	__super::Render();
-	GET_DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+}
+
+void CRectTexC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
+{
+	__super::Render();
 }
 
 void CRectTexC::PostRender(SP(CGraphicsC) spGC)
 {
 	__super::PostRender();
 	GET_DEVICE->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
+}
+
+void CRectTexC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
+{
+	__super::PostRender();
 }
 
 void CRectTexC::OnDestroy(void)

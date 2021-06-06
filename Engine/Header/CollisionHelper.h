@@ -86,6 +86,11 @@ static _bool CheckCollisionComponentColliderBS(CCollisionC const* pCC, CCollider
 	return CheckBS(ccPos, colliderPos, radiusOne, radiusTwo);
 }
 
+static _bool PointRect(CCollider* pC1, CCollider* pC2, _bool instant)
+{
+
+}
+
 
 
 static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)

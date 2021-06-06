@@ -23,8 +23,13 @@ public:
 	virtual			void			LateUpdate			(void) PURE;
 
 	virtual			void			PreRender			(void) {}
+	virtual			void			PreRender			(LPD3DXEFFECT pEffect) {}
+
 	virtual			void			Render				(void) {}
+	virtual			void			Render				(LPD3DXEFFECT pEffect) {}
+
 	virtual			void			PostRender			(void) {}
+	virtual			void			PostRender			(LPD3DXEFFECT pEffect) {}
 	
 	virtual			void			OnDestroy			(void) PURE;
 	

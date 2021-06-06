@@ -27,7 +27,9 @@ namespace Engine
 	{
 		if (ptr)
 		{
-			ptr->Release();
+			DWORD refCnt = ptr->Release();
+			if (refCnt == 0)
+				ptr = NULL;
 		}
 	}
 
