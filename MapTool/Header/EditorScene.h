@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class Engine::CCamera;
+class Engine::CObject;
 
 class CEditorScene final : public Engine::CScene
 {
@@ -34,13 +35,14 @@ private:
 	_float Distance(_float3 & thisPosition, _float3 targetPosition);
 
 private:
-	_bool m_pickingMode = false;
+	_bool m_pickingMode = true;
 	_bool m_createMode = false;
-	class Engine::CObject* m_pCurSelectedObject = nullptr;
 
 	class CMainFrame* m_pMain;
 	class CMapToolView* m_pMainView;
 	class CToolMenuView* m_pMenuView;
+
+	GETTOR_SETTOR(Engine::CObject*, m_pCurSelectedObject, nullptr, CurSelObj);
 
 	//_bool m_bPickingMode = false;
 	//_bool m_bClick = true;

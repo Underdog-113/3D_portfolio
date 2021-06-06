@@ -68,41 +68,60 @@ void CEditorScene::Awake(_int numOfLayers)
 	InitPrototypes();
 
 	//m_pMain = dynamic_cast<CMainFrame*>(::AfxGetApp()->GetMainWnd());
-	//m_pEditorView = dynamic_cast<CMy3DEditorView*>(m_pMain->m_mainSplitter.GetPane(0, 0));
-	//m_pInspectorView = dynamic_cast<CInspectorView*>(m_pMain->m_mainSplitter.GetPane(0, 1));
+	//m_pMenuView = dynamic_cast<CToolMenuView*>(m_pMain->GetMainSplitter().GetPane(0, 1));
 }
 
 void CEditorScene::Start(void)
 {
 	__super::Start();
 
-	SP(Engine::CObject) spEmptyObject
-		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
+	//SP(Engine::CObject) spEmptyObject
+	//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
 
-	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
-	spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spEmptyObject->AddComponent<Engine::CTextureC>();
-	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	spEmptyObject->GetTransform()->SetSize(10, 10, 10);
+	//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	//spEmptyObject->AddComponent<Engine::CTextureC>();
+	//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	//spEmptyObject->GetTransform()->SetSize(10, 10, 10);
 	//spEmptyObject->GetTransform()->SetPosition(0.f, 0.f, 0.f);
 
-	//SP(Engine::CObject) spCube
-	//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube");
+	SP(Engine::CObject) spCube
+		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
-	//spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-	//spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	//spCube->AddComponent<Engine::CTextureC>();
-	//spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//spCube->GetTransform()->SetSize(1, 1, 1);
-	//spCube->GetTransform()->SetPosition(10.f, -1.f, 10.f);
+	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spCube->AddComponent<Engine::CTextureC>();
+	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	spCube->GetTransform()->SetSize(1, 1, 1);
+	spCube->GetTransform()->SetPosition(0.f, 0.f, 0.f);
 
-	SP(Engine::CObject) spMap
-		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"S02");
+	spCube = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
 
-	spMap->AddComponent<Engine::CMeshC>()->AddMeshData(L"S02_del");
-	spMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spMap->AddComponent<Engine::CTextureC>();
-	spMap->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spCube->AddComponent<Engine::CTextureC>();
+	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	spCube->GetTransform()->SetSize(1, 1, 1);
+	spCube->GetTransform()->SetPosition(3.f, 0.f, 0.f);
+
+	spCube = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube2");
+
+	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spCube->AddComponent<Engine::CTextureC>();
+	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	spCube->GetTransform()->SetSize(1, 1, 1);
+	spCube->GetTransform()->SetPosition(6.f, 0.f, 0.f);
+
+	m_pCurSelectedObject = spCube.get();
+
+	//SP(Engine::CObject) spMap
+	//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"S02");
+
+	//spMap->AddComponent<Engine::CMeshC>()->AddMeshData(L"S02_del");
+	//spMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	//spMap->AddComponent<Engine::CTextureC>();
+	//spMap->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 }
 
 void CEditorScene::FixedUpdate(void)
@@ -191,48 +210,48 @@ void CEditorScene::Picking()
 void CEditorScene::InputSetting()
 {
 	// picking
-	if (Engine::IMKEY_DOWN(KEY_Z))
-	{
-		m_pickingMode = !m_pickingMode;
+	//if (Engine::IMKEY_DOWN(KEY_Z))
+	//{
+	//	m_pickingMode = !m_pickingMode;
 
-		if (m_pickingMode)
-			std::cout << "picking on" << std::endl;
-		else
-			std::cout << "picking off" << std::endl;
-	}
+	//	if (m_pickingMode)
+	//		std::cout << "picking on" << std::endl;
+	//	else
+	//		std::cout << "picking off" << std::endl;
+	//}
 
 	if (false == m_pCurSelectedObject)
 		return;
 
 	// delete
-	if (Engine::IMKEY_DOWN(KEY_X))
-	{
-		m_pCurSelectedObject->SetDeleteThis(true);
-		std::cout << "del" << std::endl;
-		m_pCurSelectedObject = nullptr;
-	}
+	//if (Engine::IMKEY_DOWN(KEY_X))
+	//{
+	//	m_pCurSelectedObject->SetDeleteThis(true);
+	//	std::cout << "del" << std::endl;
+	//	m_pCurSelectedObject = nullptr;
+	//}
 
 	// create
-	if (Engine::IMKEY_DOWN(KEY_F3))
-	{
-		if (false == m_createMode)
-		{
-			m_createMode = true;
-			std::cout << "Create Mode On" << std::endl;
-		}
-		else if (true == m_createMode)
-		{
-			m_createMode = false;
-			std::cout << "Create Mode Off" << std::endl;
-		}
-	}
+	//if (Engine::IMKEY_DOWN(KEY_F3))
+	//{
+	//	if (false == m_createMode)
+	//	{
+	//		m_createMode = true;
+	//		std::cout << "Create Mode On" << std::endl;
+	//	}
+	//	else if (true == m_createMode)
+	//	{
+	//		m_createMode = false;
+	//		std::cout << "Create Mode Off" << std::endl;
+	//	}
+	//}
 
 	// pos
-	if (Engine::IMKEY_DOWN(KEY_F5))
-	{
-		_float3 objPos = m_pCurSelectedObject->GetTransform()->GetPosition();
-		m_pCurSelectedObject->GetTransform()->SetSize(objPos.x + 0.1f, objPos.y + 0.1f, objPos.z + 0.1f);
-	}
+	//if (Engine::IMKEY_DOWN(KEY_F5))
+	//{
+	//	_float3 objPos = m_pCurSelectedObject->GetTransform()->GetPosition();
+	//	m_pCurSelectedObject->GetTransform()->SetSize(objPos.x + 0.1f, objPos.y + 0.1f, objPos.z + 0.1f);
+	//}
 	//else if (Engine::IMKEY_DOWN(KEY_F2))
 	//{
 	//	_float3 objPos = m_pCurSelectedObject->GetTransform()->GetPosition();
@@ -240,28 +259,28 @@ void CEditorScene::InputSetting()
 	//}
 
 	// size
-	if (Engine::IMKEY_DOWN(KEY_F1))
-	{
-		_float3 objSize = m_pCurSelectedObject->GetTransform()->GetSize();
-		m_pCurSelectedObject->GetTransform()->SetSize(objSize.x + 0.1f, objSize.y + 0.1f, objSize.z + 0.1f);
-	}
-	else if (Engine::IMKEY_DOWN(KEY_F2))
-	{
-		_float3 objSize = m_pCurSelectedObject->GetTransform()->GetSize();
-		m_pCurSelectedObject->GetTransform()->SetSize(objSize.x - 0.1f, objSize.y - 0.1f, objSize.z - 0.1f);
-	}
+	//if (Engine::IMKEY_DOWN(KEY_F1))
+	//{
+	//	_float3 objSize = m_pCurSelectedObject->GetTransform()->GetSize();
+	//	m_pCurSelectedObject->GetTransform()->SetSize(objSize.x + 0.1f, objSize.y + 0.1f, objSize.z + 0.1f);
+	//}
+	//else if (Engine::IMKEY_DOWN(KEY_F2))
+	//{
+	//	_float3 objSize = m_pCurSelectedObject->GetTransform()->GetSize();
+	//	m_pCurSelectedObject->GetTransform()->SetSize(objSize.x - 0.1f, objSize.y - 0.1f, objSize.z - 0.1f);
+	//}
 
 	// rot
-	if (Engine::IMKEY_DOWN(KEY_F3))
-	{
-		_float3 objRot = m_pCurSelectedObject->GetTransform()->GetRotation();
-		m_pCurSelectedObject->GetTransform()->SetSize(objRot.x + 0.1f, objRot.y + 0.1f, objRot.z + 0.1f);
-	}
-	else if (Engine::IMKEY_DOWN(KEY_F4))
-	{
-		_float3 objRot = m_pCurSelectedObject->GetTransform()->GetRotation();
-		m_pCurSelectedObject->GetTransform()->SetSize(objRot.x - 0.1f, objRot.y - 0.1f, objRot.z - 0.1f);
-	}
+	//if (Engine::IMKEY_DOWN(KEY_F3))
+	//{
+	//	_float3 objRot = m_pCurSelectedObject->GetTransform()->GetRotation();
+	//	m_pCurSelectedObject->GetTransform()->SetSize(objRot.x + 0.1f, objRot.y + 0.1f, objRot.z + 0.1f);
+	//}
+	//else if (Engine::IMKEY_DOWN(KEY_F4))
+	//{
+	//	_float3 objRot = m_pCurSelectedObject->GetTransform()->GetRotation();
+	//	m_pCurSelectedObject->GetTransform()->SetSize(objRot.x - 0.1f, objRot.y - 0.1f, objRot.z - 0.1f);
+	//}
 }
 
 Engine::CObject * CEditorScene::RayCast(_float3 origin, _float maxDistance, _float3 & intersection)
@@ -385,7 +404,7 @@ _float3 CEditorScene::GetPickingDirection(_float3 & origin, const _mat * pMatWor
 	/* 투영스페이스 -> 월드스페이스 */
 	_mat matInvView;
 	D3DXMatrixInverse(&matInvView, 0, &Engine::GET_MAIN_CAM->GetViewMatrix());
-	//D3DXVec3TransformCoord(&origin, &origin, &matInvView);
+	D3DXVec3TransformCoord(&origin, &origin, &matInvView);
 	D3DXVec3TransformNormal(&rayDir, &rayDir, &matInvView);
 	D3DXVec3Normalize(&rayDir, &rayDir);
 	

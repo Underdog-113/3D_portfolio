@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 
@@ -40,24 +41,30 @@ public:
 
 // add valuable
 protected:
-	CEdit m_fPosX;
-	CEdit m_fPosY;
-	CEdit m_fPosZ;
-	CEdit m_fRotX;
-	CEdit m_fRotY;
-	CEdit m_fRotZ;
-	CEdit m_fScaleX;
-	CEdit m_fScaleY;
-	CEdit m_fScaleZ;
-	CSpinButtonCtrl m_btnPosX;
-	CSpinButtonCtrl m_btnPosY;
-	CSpinButtonCtrl m_btnPosZ;
-	CSpinButtonCtrl m_btnRotX;
-	CSpinButtonCtrl m_btnRotY;
-	CSpinButtonCtrl m_btnRotZ;
-	CSpinButtonCtrl m_btnScaleX;
-	CSpinButtonCtrl m_btnScaleY;
-	CSpinButtonCtrl m_btnScaleZ;
+	CEdit m_posX;
+	CEdit m_posY;
+	CEdit m_posZ;
+
+	CEdit m_rotX;
+	CEdit m_rotY;
+	CEdit m_rotZ;
+
+	CEdit m_scaleX;
+	CEdit m_scaleY;
+	CEdit m_scaleZ;
+
+	CSpinButtonCtrl m_spinPosX;
+	CSpinButtonCtrl m_spinPosY;
+	CSpinButtonCtrl m_spinPosZ;
+
+	CSpinButtonCtrl m_spinRotX;
+	CSpinButtonCtrl m_spinRotY;
+	CSpinButtonCtrl m_spinRotZ;
+
+	CSpinButtonCtrl m_spinScaleX;
+	CSpinButtonCtrl m_spinScaleY;
+	CSpinButtonCtrl m_spinScaleZ;
+
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosZ(NMHDR *pNMHDR, LRESULT *pResult);
@@ -68,12 +75,19 @@ protected:
 	afx_msg void OnScaleY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
 
-	_float m_fPosMin = 0.f;
-	_float m_fPosMax = 0.f;
-	_float m_fRotMin = 0.f;
-	_float m_fRotMax = 0.f;
-	_float m_fScaleMin = 0.f;
-	_float m_fScaleMax = 0.f;
+	_float m_posMin = 0.f;
+	_float m_posMax = 0.f;
+	_float m_rotMin = 0.f;
+	_float m_rotMax = 0.f;
+	_float m_scaleMin = 0.f;
+	_float m_scaleMax = 0.f;
+
+	CString m_curTreeItem; // 트리에서 클릭한 아이템
+	CListBox m_TreeList;
+	CTreeCtrl m_Tree;
+	CString m_curSelPath; // 리스트에서 선택한 메쉬의 경로
+	CString m_curSelFileName;
+	CString m_curObj;
 
 
 //public:
@@ -96,6 +110,8 @@ protected:
 //	void Set_List_Path(TCHAR * path, _bool bCheck = FALSE);
 //	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
 //	afx_msg void OnLbnSelchangeMeshList();
+public:
+	
 };
 
 

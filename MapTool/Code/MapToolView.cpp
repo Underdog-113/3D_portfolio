@@ -180,21 +180,21 @@ void CMapToolView::OnInitialUpdate()
 	m_spMainMapTool->Awake();
 	m_spMainMapTool->Start();
 
-	CMainFrame* pMain = dynamic_cast<CMainFrame*>(::AfxGetApp()->GetMainWnd());
+	//CMainFrame* pMain = dynamic_cast<CMainFrame*>(::AfxGetApp()->GetMainWnd());
 
-	RECT rcMainRect = {};
-	pMain->GetWindowRect(&rcMainRect);
+	//RECT rcMainRect = {};
+	//pMain->GetWindowRect(&rcMainRect);
 
-	::SetRect(&rcMainRect, 0, 0, rcMainRect.right - rcMainRect.left, rcMainRect.bottom - rcMainRect.top);
+	//::SetRect(&rcMainRect, 0, 0, rcMainRect.right - rcMainRect.left, rcMainRect.bottom - rcMainRect.top);
 
-	RECT rcView = {};
-	GetClientRect(&rcView);
-	int iGapX = rcMainRect.right - rcView.right;
-	int iGapY = rcMainRect.bottom - rcView.bottom;
+	//RECT rcView = {};
+	//GetClientRect(&rcView);
+	//int iGapX = rcMainRect.right - rcView.right;
+	//int iGapY = rcMainRect.bottom - rcView.bottom;
 
-	pMain->SetWindowPos(nullptr, 0, 0, VIEWCX + 400 + iGapX, VIEWCY + iGapY, SWP_NOZORDER | SWP_NOMOVE);
+	//pMain->SetWindowPos(nullptr, 0, 0, VIEWCX + 400 + iGapX, VIEWCY + iGapY, SWP_NOZORDER | SWP_NOMOVE);
 
 	SetTimer(0, 0, nullptr);
 
-	m_pMenuView = dynamic_cast<CToolMenuView*>(pMain->GetMainSplitter().GetPane(0, 1));
+	//m_pMenuView = dynamic_cast<CToolMenuView*>(pMain->GetMainSplitter().GetPane(0, 1));
 }
