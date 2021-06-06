@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="..\Header\AabbCollider.h" />
     <ClInclude Include="..\Header\AniCtrl.h" />
-    <ClInclude Include="..\Header\BitmapC.h" />
     <ClInclude Include="..\Header\BoundingVolume.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
@@ -34,7 +33,8 @@
     <ClInclude Include="..\Header\DataStore.h" />
     <ClInclude Include="..\Header\DebugC.h" />
     <ClInclude Include="..\Header\DebugObject.h" />
-    <ClInclude Include="..\Header\DebugShader.h" />
+    <ClInclude Include="..\Header\DeferredBlendShader.h" />
+    <ClInclude Include="..\Header\DeferredLightShader.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
     <ClInclude Include="..\Header\DynamicMeshData.h" />
     <ClInclude Include="..\Header\EmptyObject.h" />
@@ -46,16 +46,21 @@
     <ClInclude Include="..\Header\Frustum.h" />
     <ClInclude Include="..\Header\Grid.h" />
     <ClInclude Include="..\Header\HierarchyLoader.h" />
+    <ClInclude Include="..\Header\Light.h" />
+    <ClInclude Include="..\Header\LightManager.h" />
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
+    <ClInclude Include="..\Header\MeshShader.h" />
     <ClInclude Include="..\Header\RectTexC.h" />
+    <ClInclude Include="..\Header\RectTexShader.h" />
     <ClInclude Include="..\Header\RenderComponent.h" />
     <ClInclude Include="..\Header\RenderTarget.h" />
     <ClInclude Include="..\Header\RenderTargetManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\ShaderC.h" />
-    <ClInclude Include="..\Header\ShaderStore.h" />
+    <ClInclude Include="..\Header\ShaderManager.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\TextManager.h" />
@@ -81,26 +86,17 @@
     <ClInclude Include="..\Header\ResourceStore.h" />
     <ClInclude Include="..\Header\Scene.h" />
     <ClInclude Include="..\Header\SceneManager.h" />
-    <ClInclude Include="..\Header\Shader.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\Header\ShaderManager.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="..\Header\SoundManager.h" />
     <ClInclude Include="..\Header\SphereCollider.h" />
     <ClInclude Include="..\Header\TextureC.h" />
-    <ClInclude Include="..\Header\TextureShader.h" />
     <ClInclude Include="..\Header\TextureStore.h" />
     <ClInclude Include="..\Header\TransformC.h" />
-    <ClInclude Include="..\Header\UIShader.h" />
     <ClInclude Include="..\Header\VIBufferC.h" />
     <ClInclude Include="..\Header\WndApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AabbCollider.cpp" />
     <ClCompile Include="..\code\AniCtrl.cpp" />
-    <ClCompile Include="..\Code\BitmapC.cpp" />
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
@@ -113,7 +109,8 @@
     <ClCompile Include="..\Code\DataStore.cpp" />
     <ClCompile Include="..\Code\DebugC.cpp" />
     <ClCompile Include="..\Code\DebugObject.cpp" />
-    <ClCompile Include="..\Code\DebugShader.cpp" />
+    <ClCompile Include="..\Code\DeferredBlendShader.cpp" />
+    <ClCompile Include="..\Code\DeferredLightShader.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
     <ClCompile Include="..\Code\DynamicMeshData.cpp" />
     <ClCompile Include="..\Code\EmptyObject.cpp" />
@@ -122,16 +119,21 @@
     <ClCompile Include="..\Code\Frustum.cpp" />
     <ClCompile Include="..\Code\Grid.cpp" />
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
+    <ClCompile Include="..\Code\Light.cpp" />
+    <ClCompile Include="..\Code\LightManager.cpp" />
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
+    <ClCompile Include="..\Code\MeshShader.cpp" />
     <ClCompile Include="..\Code\RectTexC.cpp" />
+    <ClCompile Include="..\Code\RectTexShader.cpp" />
     <ClCompile Include="..\Code\RenderComponent.cpp" />
     <ClCompile Include="..\Code\RenderTarget.cpp" />
     <ClCompile Include="..\Code\RenderTargetManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\Code\Shader.cpp" />
     <ClCompile Include="..\Code\ShaderC.cpp" />
-    <ClCompile Include="..\Code\ShaderStore.cpp" />
+    <ClCompile Include="..\Code\ShaderManager.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\TextManager.cpp" />
@@ -152,26 +154,19 @@
     <ClCompile Include="..\Code\ResourceStore.cpp" />
     <ClCompile Include="..\Code\Scene.cpp" />
     <ClCompile Include="..\Code\SceneManager.cpp" />
-    <ClCompile Include="..\Code\Shader.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\Code\ShaderManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\Code\SoundManager.cpp" />
     <ClCompile Include="..\Code\SphereCollider.cpp" />
     <ClCompile Include="..\Code\TextureC.cpp" />
-    <ClCompile Include="..\Code\TextureShader.cpp" />
     <ClCompile Include="..\Code\TextureStore.cpp" />
     <ClCompile Include="..\Code\TransformC.cpp" />
-    <ClCompile Include="..\Code\UIShader.cpp" />
     <ClCompile Include="..\Code\VIBufferC.cpp" />
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\00DebugShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\01TextureShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\02UIShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>
@@ -355,7 +350,7 @@ copy /Y "$(SolutionDir)Bin\Engine\Release\x86\Engine.lib" "$(SolutionDir)Referen
     </Link>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
-      <ShaderModel>2.0</ShaderModel>
+      <ShaderModel>3.0</ShaderModel>
     </FxCompile>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)Bin\Engine\Debug\x64\Engine.dll" "$(SolutionDir)Reference\Library\Debug\";

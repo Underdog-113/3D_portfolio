@@ -86,11 +86,6 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 	SetFrameMatPointer((_DerivedD3DXFRAME*)m_pRootFrame);
 }
 
-void CDynamicMeshData::Start(void)
-{
-
-}
-
 void CDynamicMeshData::Update(void)
 {
 	if(m_playAnimation)
