@@ -1,9 +1,4 @@
 #include "EngineStdafx.h"
-#include "DeviceManager.h"
- 
- 
-#include "Shader.h"
- 
 #include "Scene.h"
 #include "WndApp.h"
 #include "DataStore.h"
@@ -50,7 +45,7 @@ void CGraphicsC::Start(SP(CComponent) spThis)
 	m_spMesh		= m_pOwner->GetComponent<CMeshC>();
 	m_spTexture		= m_pOwner->GetComponent<CTextureC>();
 	m_spTransform	= m_pOwner->GetComponent<CTransformC>();
-	m_spBitmap		= m_pOwner->GetComponent<CBitmapC>();
+	m_spRectTex		= m_pOwner->GetComponent<CRectTexC>();
 
 	if(m_spMesh != nullptr)
 		GenerateBV();

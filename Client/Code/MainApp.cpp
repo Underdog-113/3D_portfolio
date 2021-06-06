@@ -33,9 +33,9 @@ void CMainApp::Awake(void)
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
-	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
-
+	Engine::CRenderTargetManager::GetInstance()->Awake();
+	Engine::CShaderManager::GetInstance()->Awake();
 }
 
 void CMainApp::Start(void)
@@ -47,9 +47,9 @@ void CMainApp::Start(void)
 	Engine::CSceneManager::GetInstance()->SceneChange(CInitScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
-	Engine::CShaderManager::GetInstance()->Start();
-
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CRenderTargetManager::GetInstance()->Start();
+	Engine::CShaderManager::GetInstance()->Start();
 }
 
 void CMainApp::FixedUpdate(void)
@@ -142,6 +142,7 @@ void CMainApp::OnDestroy(void)
 	Engine::CCollisionManager::GetInstance()->DestroyInstance();
 	Engine::CSoundManager::GetInstance()->DestroyInstance();
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
+	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
 }
 

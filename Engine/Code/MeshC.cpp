@@ -66,7 +66,6 @@ void CMeshC::Start(SP(CComponent) spThis)
 
 	for (_int i = 0; i < m_vMeshDatas.size(); ++i)
 	{
-		m_vMeshDatas[i]->Start();
 		if (m_initTex)
 		{
 			SP(CTextureC) spOwnerTexC = m_pOwner->GetComponent<CTextureC>();
@@ -100,6 +99,10 @@ void CMeshC::PreRender(SP(CGraphicsC) spGC)
 	pDevice->SetMaterial(&spGC->m_mtrl);
 }
 
+void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
+{
+}
+
 void CMeshC::Render(SP(CGraphicsC) spGC)
 {
 	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
@@ -111,7 +114,22 @@ void CMeshC::Render(SP(CGraphicsC) spGC)
 	}
 }
 
+void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
+{
+	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
+	{
+		if (m_vMeshDatas[i]->GetMeshType() == (_int)EMeshType::Static)
+			RenderStatic(spGC, m_vMeshDatas[i], (_int)i, pEffect);
+		else
+			RenderDynamic(spGC, m_vMeshDatas[i], (_int)i, pEffect);
+	}
+}
+
 void CMeshC::PostRender(SP(CGraphicsC) spGC)
+{
+}
+
+void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 }
 
@@ -190,6 +208,29 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshI
 	}
 }
 
+void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex, LPD3DXEFFECT pEffect)
+{
+	CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(pMeshData);
+	_uint pass = 0;
+
+	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
+	{
+		_TexData* pTexData = spGC->GetTexture()->GetTexData()[meshIndex][i];
+
+		if (pTexData->includeAlpha)
+			pass = 1;
+		else
+			pass = 0;
+
+		pEffect->SetTexture("g_BaseTexture", pTexData->pTexture);
+		pEffect->CommitChanges();
+
+		pEffect->BeginPass(pass);
+		pSM->GetMesh()->DrawSubset(i);
+		pEffect->EndPass();
+	}
+}
+
 void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex)
 {
 	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
@@ -213,8 +254,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 
 		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
-		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
-		meshContainer->pOriMesh->UnlockVertexBuffer();
+		
 
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
@@ -227,5 +267,61 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 
 			meshContainer->MeshData.pMesh->DrawSubset(i);
 		}
+
+		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
+		meshContainer->pOriMesh->UnlockVertexBuffer();
+	}
+}
+
+void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex, LPD3DXEFFECT pEffect)
+{
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
+
+	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
+	pDM->UpdateFrame();
+
+	for (auto& meshContainer : pDM->GetMeshContainers())
+	{
+		for (_ulong i = 0; i < meshContainer->numBones; ++i)
+		{
+			meshContainer->pRenderingMatrix[i] =
+				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
+		}
+
+		void* pSrcVertex = nullptr;
+		void* pDestVertex = nullptr;
+
+		meshContainer->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
+		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
+
+		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
+
+		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
+		_uint pass = 0;
+		for (_ulong i = 0; i < meshContainer->NumMaterials; ++i)
+		{
+			if (pTexData[meshIndex][i] != nullptr)
+			{
+				if (pTexData[meshIndex][i]->includeAlpha)
+					pass = 1;
+				else
+					pass = 0;
+
+				pEffect->SetTexture("g_BaseTexture", pTexData[meshIndex][meshContainer->texIndexStart + i]->pTexture);
+				
+			}
+			else
+			{
+				pEffect->SetTexture("g_BaseTexture", nullptr);
+			}
+			pEffect->CommitChanges();
+
+			pEffect->BeginPass(pass);
+			meshContainer->MeshData.pMesh->DrawSubset(i);
+			pEffect->EndPass();
+		}
+
+		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
+		meshContainer->pOriMesh->UnlockVertexBuffer();
 	}
 }

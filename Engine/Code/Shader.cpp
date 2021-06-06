@@ -1,44 +1,42 @@
 #include "EngineStdafx.h"
 #include "Shader.h"
-#include "DeviceManager.h"
-#include "StaticMeshData.h"
-#include "DynamicMeshData.h"
- 
+
 
 USING(Engine)
-CShader::CShader()
+
+CShader::CShader(void)
 {
 }
 
-
-CShader::~CShader()
+CShader::~CShader(void)
 {
+}
+
+void CShader::Free(void)
+{
+	m_pEffect->Release();
+	delete this;
 }
 
 void CShader::Awake(void)
 {
 	__super::Awake();
-}
-
-void CShader::PreRender(CGraphicsC * pGC)
-{
-	//m_pShader->SetMatrix("WorldMatrix", &pGC->GetTransform()->GetWorldMatrix());
-	//m_pShader->SetMatrix("ViewMatrix", &GET_MAIN_CAM->GetViewMatrix());
-	//m_pShader->SetMatrix("ProjMatrix", &GET_MAIN_CAM->GetProjMatrix());
-
-	GET_DEVICE->SetTransform(D3DTS_WORLD, &pGC->GetTransform()->GetLastWorldMatrix());
-	GET_DEVICE->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
-	GET_DEVICE->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-}
-
-void CShader::LoadShader(void)
-{
-	D3DXCreateEffectFromFile(GET_DEVICE, m_filePath.c_str(),
-		nullptr, nullptr, 0, nullptr, &m_pShader, nullptr);
-
-	if (m_pShader == nullptr)
+	std::wstring shaderPath = L"..\\..\\Resource\\Shader\\" + m_objectKey + L".fx";
+	if (FAILED(D3DXCreateEffectFromFile(GET_DEVICE, 
+										shaderPath.c_str(), 
+										NULL,
+										NULL, 
+										D3DXSHADER_DEBUG, 
+										NULL,
+										&m_pEffect,
+										&m_pErrMsg)))
 	{
-		MSG_BOX(__FILE__, L"Create Effect failed in LoadShader");
+		MSG_BOX(__FILE__, L"Failed creating EffectFromFile in CMeshShader::Awake()");
+		ABORT;
+	}
+	else if (nullptr != m_pErrMsg)
+	{
+		MSG_BOX(__FILE__, L"CreateEffectFromFile warning in CMeshShader::Awake()");
 		ABORT;
 	}
 }

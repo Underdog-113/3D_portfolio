@@ -6,6 +6,7 @@ namespace Engine
 	typedef bool			_bool;
 
 	typedef char			_byte;
+	typedef	char			_char;
 	typedef unsigned char	_ubyte;
 
 	typedef wchar_t			_tchar;
