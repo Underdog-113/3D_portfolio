@@ -51,6 +51,7 @@ void CChangmoScene::Start(void)
 
 		SP(Engine::CObject) spEmptyObject1
 			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+
 		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
 		spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 		spEmptyObject1->AddComponent<Engine::CTextureC>();

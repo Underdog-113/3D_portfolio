@@ -36,9 +36,11 @@ void CMainApp::Awake(void)
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
-	CButtonManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
+
+	//Client Manager
+	CButtonManager::GetInstance()->Awake();
 }
 
 void CMainApp::Start(void)
