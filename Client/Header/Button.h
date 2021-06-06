@@ -19,20 +19,33 @@ public:
 	void FixedUpdate(void) override;
 	void Update(void) override;
 	void LateUpdate(void) override;
+	void PreRender(void) override;
+	void Render(void) override;
+	void PostRender(void) override;
 	void OnDestroy(void) override;
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 	void SetBasicName(void) override;
 
 	void FunceActivation();
-private:
 
+	template<typename Function, typename Object>
+	void AddFunceData(Function function, Object object)
+	{
+		m_functionGate += std::bind(function, object);
+	}
+
+private:
+	void aa();
 private:
 	static _uint m_s_uniqueID;
-	GETTOR_SETTOR(EButton_Type, m_buttonType, EButton_Type::UP, ButtonType);
+	GETTOR_SETTOR(EButton_Type, m_buttonType, EButton_Type::UP, ButtonType)
+
+	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
+	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
+	GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
 
 	Delegate<> m_functionGate;
-
 };
 #endif
 

@@ -27,6 +27,9 @@ SP(Engine::CObject) CButton::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
 	return SP(CObject)();
@@ -38,6 +41,9 @@ void CButton::Awake(void)
 	m_layerID = (_int)ELayerID::UI;
 	m_addExtra = true;
 
+	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
+	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
+	m_spTexture = AddComponent<Engine::CTextureC>();
 }
 
 void CButton::Start(void)
@@ -47,7 +53,6 @@ void CButton::Start(void)
 	CButtonManager::GetInstance()->AddButtonList(this);
 }
 
-
 void CButton::FixedUpdate(void)
 {
 	__super::FixedUpdate();
@@ -56,10 +61,6 @@ void CButton::FixedUpdate(void)
 void CButton::Update(void)
 {
 	__super::Update();
-
-	// 키가눌렸는지 체크
-	// 자기 타입에 맞게 키가눌리면 실행
-	// 한번 
 }
 
 void CButton::LateUpdate(void)
@@ -67,6 +68,36 @@ void CButton::LateUpdate(void)
 	__super::LateUpdate();
 }
 
+void CButton::PreRender(void)
+{
+	if (!m_spTexture->GetTexData().empty())
+	{
+		m_spRectTex->PreRender(m_spGraphics);
+	}
+}
+
+void CButton::Render(void)
+{
+	if (!m_spTexture->GetTexData().empty())
+	{
+		m_spRectTex->Render(m_spGraphics);
+	}
+
+	SP(Engine::CTextC) textC = GetComponent<Engine::CTextC>();
+
+	if (textC)
+	{
+		textC->Render(m_spGraphics);
+	}
+}
+
+void CButton::PostRender(void)
+{
+	if (!m_spTexture->GetTexData().empty())
+	{
+		m_spRectTex->PostRender(m_spGraphics);
+	}
+}
 
 void CButton::OnDestroy(void)
 {
@@ -92,15 +123,6 @@ void CButton::FunceActivation()
 	m_functionGate();
 }
 
-/*
-Delegate<> m_functionGatee;
-
-m_functionGatee += std::bind(&CButton::aa, &CButton());
-m_functionGatee += ss;
-
-m_functionGatee();
-
-m_functionGatee -= ss;
-
-m_functionGatee();
-*/
+void CButton::aa()
+{
+}

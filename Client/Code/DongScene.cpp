@@ -2,7 +2,6 @@
 #include "DongScene.h"
 #include "Image.h"
 #include "Button.h"
-#include "Text.h"
 
 CDongScene::CDongScene()
 {
@@ -33,18 +32,13 @@ void CDongScene::Awake(_int numOfLayers)
 	InitPrototypes();
 }
 
-void SS(_float ss)
-{
-	_float s = ss;
-}
-
 void CDongScene::Start(void)
 {
 	__super::Start();
-	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+	/*SP(Engine::CObject) spEmpty =
+		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");*/
 	
-	{
+	/*{
 		SP(Engine::CImage) image =
 			std::dynamic_pointer_cast<Engine::CImage>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.0f);
@@ -68,22 +62,42 @@ void CDongScene::Start(void)
 		image->GetTransform()->SetPositionZ(0.0f);
 		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(400, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
 		image->GetComponent<Engine::CTextC>()->AddFontData(L"2", L"초심해", _float2(500, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
-	}
-
-	/*{
-		SP(Engine::CButton) image =
-			std::dynamic_pointer_cast<Engine::CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"sdfsdf"));
-		image->GetTransform()->SetPositionZ(0.2f);
-		image->GetTransform()->SetSize(_float3(800, 500, 0));
 	}*/
 
 	{
-		/*SP(CButton<_float>) image =
-			std::dynamic_pointer_cast<CButton<_float>>(ADD_CLONE(L"Button<float>", true, (_int)ELayerID::UI, L"sdfsdf"));
-		image->GetTransform()->SetPositionZ(0.0f);
-		image->SetButtonType(CButton<_float>::EButton_Type::UP);
-		image->SetFunctionDate(12.5f);
-		image->m_functionGate += SS;*/
+		SP(CButton) image =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"0"));
+		image->GetTransform()->SetPosition(_float3(100,100, 0.0f));
+		image->GetTransform()->SetSize(_float3(100, 100, 0.0f));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(0, 0), _float2(200, 200), 10, 0, D3DXCOLOR(1, 0, 0, 1), true);
+
+		CDongScene* aa = new CDongScene();
+		aa->a = 10;
+		image->AddFunceData<void(CDongScene::*)(), CDongScene*>(&CDongScene::ObjectActivation, aa);
+	}
+
+	{
+		SP(CButton) image =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"2"));
+		image->GetTransform()->SetPosition(_float3(200, 100, 0.2f));
+		image->GetTransform()->SetSize(_float3(100, 100, 0.0f));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(0, 0), _float2(200, 200), 10, 0, D3DXCOLOR(1, 0, 0, 1), true);
+
+		CDongScene* aa = new CDongScene();
+		aa->a = 20;
+		image->AddFunceData<void(CDongScene::*)(), CDongScene*>(&CDongScene::ObjectActivation, aa);
+	}
+
+	{
+		SP(CButton) image =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"1"));
+		image->GetTransform()->SetPosition(_float3(300, 100, 0.1f));
+		image->GetTransform()->SetSize(_float3(100, 100, 0.0f));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(0, 0), _float2(200, 200), 10, 0, D3DXCOLOR(1, 0, 0, 1), true);
+
+		CDongScene* aa = new CDongScene();
+		aa->a = 30;
+		image->AddFunceData<void(CDongScene::*)(), CDongScene*>(&CDongScene::ObjectActivation, aa);
 	}
 }
 
@@ -124,3 +138,21 @@ void CDongScene::OnDisable(void)
 void CDongScene::InitPrototypes(void)
 {
 }
+
+void CDongScene::ObjectActivation(void)
+{
+	std::cout << a << std::endl;
+}
+
+/*
+Delegate<> m_functionGatee;
+
+m_functionGatee += std::bind(&CButton::aa, &CButton());
+m_functionGatee += ss;
+
+m_functionGatee();
+
+m_functionGatee -= ss;
+
+m_functionGatee();
+*/

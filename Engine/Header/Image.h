@@ -32,9 +32,9 @@ private:
 private:
 	static _uint m_s_uniqueID;
 
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
-	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
-	GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
+	GETTOR(SP(CGraphicsC), m_spGraphics, {}, Graphics)
+	GETTOR(SP(CTextureC), m_spTexture, {}, Texture)
+	GETTOR(SP(CRectTexC), m_spRectTex, {}, RectTex)
 };
 END
 #endif

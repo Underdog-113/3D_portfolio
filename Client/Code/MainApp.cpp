@@ -10,6 +10,10 @@
 #include "Camera.h"
 #pragma endregion
 
+#pragma region Manager
+#include "ButtonManager.h"
+#pragma endregion
+
 CMainApp::CMainApp(void)
 {
 }
@@ -35,7 +39,7 @@ void CMainApp::Awake(void)
 	Engine::CGraphicsManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
-
+	CButtonManager::GetInstance()->Awake();
 }
 
 void CMainApp::Start(void)
@@ -70,6 +74,7 @@ void CMainApp::Update(void)
 	Engine::CInputManager::GetInstance()->Update();
 	
 	Engine::CSceneManager::GetInstance()->Update();
+	CButtonManager::GetInstance()->Update();
 	Engine::CCollisionManager::GetInstance()->Update();
 
 	Engine::CCameraManager::GetInstance()->Update();
@@ -143,6 +148,7 @@ void CMainApp::OnDestroy(void)
 	Engine::CSoundManager::GetInstance()->DestroyInstance();
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
+	CButtonManager::GetInstance()->OnDestroy();
 }
 
 void CMainApp::OnEnable(void)
