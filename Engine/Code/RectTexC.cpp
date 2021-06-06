@@ -17,6 +17,7 @@ SP(CComponent) CRectTexC::MakeClone(CObject * pObject)
 {
 	SP(CRectTexC) spClone(new CRectTexC);
 	__super::InitVIBufferClone(spClone, pObject);
+	spClone->m_isOrtho = m_isOrtho;
 
 	return spClone;
 }

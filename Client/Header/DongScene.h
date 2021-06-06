@@ -26,6 +26,8 @@ public:
 
 private:
 					void				InitPrototypes		(void) override;
+					void				ObjectActivation	(void);
+					_int a = 10;
 };
 
 #endif

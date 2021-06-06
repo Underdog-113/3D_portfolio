@@ -129,9 +129,11 @@ namespace Engine
 		Camera					= 6,
 		Debug					= 7,
 		RectTex					= 8,
-		FadeInOut				= 9,
-		Shader					= 10,
-		NumOfEngineComponentID	= 11
+		Bitmap					= 9,
+		FadeInOut				= 10,
+		Shader					= 11,
+		Text					= 12,
+		NumOfEngineComponentID	= 13
 	};
 
 	enum class EChannelID
@@ -160,6 +162,7 @@ namespace Engine
 		DebugArrow			= 2,
 		DebugCollision		= 3,
 		Grid				= 4,
+		UI					= 5,
 		NumOfEngineLayerID	
 	};
 }
