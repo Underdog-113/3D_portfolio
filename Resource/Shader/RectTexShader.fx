@@ -1,16 +1,16 @@
-matrix		WorldMatrix;			// ìƒìˆ˜ í…Œì´ë¸”
-matrix		ViewMatrix;
-matrix		ProjMatrix;
+matrix		g_matWorld;			// »ó¼ö Å×ÀÌºí
+matrix		g_matView;
+matrix		g_matProj;
 
 
-texture		BaseTexture;
+texture		g_BaseTexture;
 
 float		g_fPower = 0.f;
 
-// ìƒ˜í”ŒëŸ¬ : í…ìŠ¤ì²˜ì˜ í’ˆì§ˆ ë° ì¶œë ¥ ì˜µì…˜ì„ ê²°ì •í•˜ëŠ” êµ¬ì¡°ì²´
+// »ùÇÃ·¯ : ÅØ½ºÃ³ÀÇ Ç°Áú ¹× Ãâ·Â ¿É¼ÇÀ» °áÁ¤ÇÏ´Â ±¸Á¶Ã¼
 sampler BaseSampler = sampler_state
 {
-	texture = BaseTexture;
+	texture = g_BaseTexture;
 
 	minfilter = linear;
 	magfilter = linear;
@@ -26,7 +26,7 @@ sampler DepthSampler =  sampler_state
 
 struct VS_IN
 {
-	vector		vPosition   : POSITION;		// ì‹œë§Œí‹± : ì†ì„± ì§€ì‹œì
+	vector		vPosition   : POSITION;		// ½Ã¸¸Æ½ : ¼Ó¼º Áö½ÃÀÚ
 	float2		vTexUV		: TEXCOORD0;
 };
 
@@ -37,7 +37,7 @@ struct VS_OUT
 	vector		vProjPos : TEXCOORD1;
 };
 
-// ë²„í…ìŠ¤ì‰ì´ë”
+// ¹öÅØ½º½¦ÀÌ´õ
 
 VS_OUT		VS_MAIN(VS_IN In)
 {
@@ -45,8 +45,8 @@ VS_OUT		VS_MAIN(VS_IN In)
 
 	matrix			matWV, matWVP;
 
-	matWV  = mul(WorldMatrix, ViewMatrix);
-	matWVP = mul(matWV, ProjMatrix);
+	matWV  = mul(g_matWorld, g_matView);
+	matWVP = mul(matWV, g_matProj);
 
 	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
 	Out.vTexUV = In.vTexUV;
@@ -68,14 +68,14 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 };
 
-// í”½ì…€ ì‰ì´ë”
+// ÇÈ¼¿ ½¦ÀÌ´õ
 
 PS_OUT		PS_MAIN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 
-	Out.vColor = tex2D(BaseSampler, In.vTexUV);		// 2ì°¨ì› í…ìŠ¤ì²˜ë¡œë¶€í„° UV ê°’ì— í•´ë‹¹í•˜ëŠ” í”½ì…€ì˜ ìƒ‰ìƒì„ ì¶”ì¶œí•˜ëŠ” í•¨ìˆ˜, ë°˜í™˜íƒ€ì…ì€ VECTOR íƒ€ì…
-	//Out.vColor.a = 1.f;
+	Out.vColor = tex2D(BaseSampler, In.vTexUV);		// 2Â÷¿ø ÅØ½ºÃ³·ÎºÎÅÍ UV °ª¿¡ ÇØ´çÇÏ´Â ÇÈ¼¿ÀÇ »ö»óÀ» ÃßÃâÇÏ´Â ÇÔ¼ö, ¹İÈ¯Å¸ÀÔÀº VECTOR Å¸ÀÔ
+	Out.vColor.a = 1.f;
 
 	return Out;
 }
@@ -84,16 +84,16 @@ PS_OUT		PS_EFFECT(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 	
-	Out.vColor = tex2D(BaseSampler, In.vTexUV);		// 2ì°¨ì› í…ìŠ¤ì²˜ë¡œë¶€í„° UV ê°’ì— í•´ë‹¹í•˜ëŠ” í”½ì…€ì˜ ìƒ‰ìƒì„ ì¶”ì¶œí•˜ëŠ” í•¨ìˆ˜, ë°˜í™˜íƒ€ì…ì€ VECTOR íƒ€ì…
+	Out.vColor = tex2D(BaseSampler, In.vTexUV);		// 2Â÷¿ø ÅØ½ºÃ³·ÎºÎÅÍ UV °ª¿¡ ÇØ´çÇÏ´Â ÇÈ¼¿ÀÇ »ö»óÀ» ÃßÃâÇÏ´Â ÇÔ¼ö, ¹İÈ¯Å¸ÀÔÀº VECTOR Å¸ÀÔ
 	
 	float2		vDetphUV = (float2)0.f;
 
-	// zë‚˜ëˆ„ê¸°ê°€ ëë‚œ íˆ¬ì˜ ì˜ì—­ì˜ xê°’(-1~1)ì„ í…ìŠ¤ì²˜ uê°’(0~1)ìœ¼ë¡œ ë³€í™˜
+	// z³ª´©±â°¡ ³¡³­ Åõ¿µ ¿µ¿ªÀÇ x°ª(-1~1)À» ÅØ½ºÃ³ u°ª(0~1)À¸·Î º¯È¯
 	vDetphUV.x = (In.vProjPos.x / In.vProjPos.w) * 0.5f + 0.5f;
-	// zë‚˜ëˆ„ê¸°ê°€ ëë‚œ íˆ¬ì˜ ì˜ì—­ì˜ yê°’(1~-1)ì„ í…ìŠ¤ì²˜ uê°’(0~1)ìœ¼ë¡œ ë³€í™˜
+	// z³ª´©±â°¡ ³¡³­ Åõ¿µ ¿µ¿ªÀÇ y°ª(1~-1)À» ÅØ½ºÃ³ u°ª(0~1)À¸·Î º¯È¯
 	vDetphUV.y = (In.vProjPos.y / In.vProjPos.w) * -0.5f + 0.5f;
 
-	// í…ìŠ¤ì²˜ ë‚´ì˜ í”½ì…€ì˜ ë·°ìŠ¤í˜ì´ìŠ¤ ìƒì˜ zë¥¼ ì¶”ì¶œ
+	// ÅØ½ºÃ³ ³»ÀÇ ÇÈ¼¿ÀÇ ºä½ºÆäÀÌ½º »óÀÇ z¸¦ ÃßÃâ
 	float fViewZ = tex2D(DepthSampler, vDetphUV).y * 1000.f;
 
 	Out.vColor.a = Out.vColor.a * max((fViewZ - In.vProjPos.w), 0.f);
@@ -103,13 +103,13 @@ PS_OUT		PS_EFFECT(PS_IN In)
 
 technique Default_Device
 {
-	pass	// ê¸°ëŠ¥ì˜ ìº¡ìŠí™”, PASSëŠ” ì´ë¦„ê³¼ ìƒê´€ì—†ì´ ì„ ì–¸ëœ ìˆœì„œëŒ€ë¡œ ìœ„ë¶€í„° ì¸ë±ìŠ¤ ê°’ì´ 0ì´ ì§€ì •ë˜ê³  ìë™ì ìœ¼ë¡œ í•˜ë‚˜ì”© ì¦ê°€í•¨
+	pass	// ±â´ÉÀÇ Ä¸½¶È­, PASS´Â ÀÌ¸§°ú »ó°ü¾øÀÌ ¼±¾ğµÈ ¼ø¼­´ë·Î À§ºÎÅÍ ÀÎµ¦½º °ªÀÌ 0ÀÌ ÁöÁ¤µÇ°í ÀÚµ¿ÀûÀ¸·Î ÇÏ³ª¾¿ Áõ°¡ÇÔ
 	{
 		alphablendenable = true;
 		srcblend = srcalpha;
 		destblend = invsrcalpha;
 
-		vertexshader = compile vs_3_0 VS_MAIN();	// ì§„ì…ì  í•¨ìˆ˜ ëª…ì‹œ
+		vertexshader = compile vs_3_0 VS_MAIN();	// ÁøÀÔÁ¡ ÇÔ¼ö ¸í½Ã
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}
 
@@ -119,7 +119,7 @@ technique Default_Device
 		srcblend = srcalpha;
 		destblend = invsrcalpha;
 
-		vertexshader = compile vs_3_0 VS_MAIN();	// ì§„ì…ì  í•¨ìˆ˜ ëª…ì‹œ
+		vertexshader = compile vs_3_0 VS_MAIN();	// ÁøÀÔÁ¡ ÇÔ¼ö ¸í½Ã
 		pixelshader = compile ps_3_0 PS_EFFECT();
 	}
 

@@ -17,7 +17,6 @@ public:
 
 				void				Awake				(std::wstring const& filePath, 
 														 std::wstring const& fileName) override;
-				void				Start				(void) override;
 				void				Update				(void) override;
 
 				void				OnDestory			(void) override;

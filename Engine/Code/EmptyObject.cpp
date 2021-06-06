@@ -65,14 +65,29 @@ void CEmptyObject::PreRender(void)
 	m_spComponentToRender->PreRender(GetComponent<CGraphicsC>());
 }
 
+void CEmptyObject::PreRender(LPD3DXEFFECT pEffect)
+{
+	m_spComponentToRender->PreRender(GetComponent<CGraphicsC>(), pEffect);
+}
+
 void CEmptyObject::Render(void)
 {
 	m_spComponentToRender->Render(GetComponent<CGraphicsC>());
 }
 
+void CEmptyObject::Render(LPD3DXEFFECT pEffect)
+{
+	m_spComponentToRender->Render(GetComponent<CGraphicsC>(), pEffect);
+}
+
 void CEmptyObject::PostRender(void)
 {
 	m_spComponentToRender->PostRender(GetComponent<CGraphicsC>());
+}
+
+void CEmptyObject::PostRender(LPD3DXEFFECT pEffect)
+{
+	m_spComponentToRender->PostRender(GetComponent<CGraphicsC>(), pEffect);
 }
 
 void CEmptyObject::OnDestroy(void)

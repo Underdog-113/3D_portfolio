@@ -37,9 +37,9 @@ private:
 	GETTOR_SETTOR	(D3DXCOLOR,		m_color,			_float4(1, 1, 1, 1),	Color)
 	GETTOR_SETTOR	(_int,			m_numOfTex,			0,						NumOfTex)	
 	
-	GETTOR_SETTOR	(_bool,			m_changeTex,		false,					ChangeTex)
-	GETTOR_SETTOR	(_float,		m_changeTimer,		0.f,					ChangeTimer)
-	GETTOR_SETTOR	(_float,		m_changeDuration,	0.032f,					ChangeDuration)
+	//GETTOR_SETTOR	(_bool,			m_changeTex,		false,					ChangeTex)
+	//GETTOR_SETTOR	(_float,		m_changeTimer,		0.f,					ChangeTimer)
+	//GETTOR_SETTOR	(_float,		m_changeDuration,	0.032f,					ChangeDuration)
 
 	GETTOR_SETTOR	(_int,			m_meshIndex,		0,						MeshIndex)
 	GETTOR_SETTOR	(_int,			m_texIndex,			0,						TexIndex)

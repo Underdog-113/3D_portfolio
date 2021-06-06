@@ -16,8 +16,6 @@ void CScene::Awake(_int numOfLayers)
 {
 	m_isAwaked = true;
 
-	InitLayers(numOfLayers);
-
 
 	m_objectKey			= GetCurClassName(this);
 	m_pObjectFactory	= CObjectFactory::Create(this);
@@ -25,8 +23,12 @@ void CScene::Awake(_int numOfLayers)
 	m_pDataStore		= CDataStore::Create();
 	m_pMeshStore		= CMeshStore::Create();
 	m_pTextureStore		= CTextureStore::Create();
+	m_pLightManager		= CLightManager::Create();
 	
 	SetWindowTextA(Engine::GET_HANDLE, WStrToStr(m_objectKey).c_str());
+
+	InitLights();
+	InitLayers(numOfLayers);
 }
 
 void CScene::Start(void)
@@ -88,6 +90,9 @@ void CScene::OnDestroy(void)
 
 	m_pTextureStore->Free();
 	m_pTextureStore = nullptr;
+
+	m_pLightManager->Free();
+	m_pLightManager = nullptr;
 }
 
 void CScene::OnEnable(void)
@@ -148,6 +153,40 @@ void CScene::SetIsEnabled(_bool isEnabled)
 		OnEnable();
 	else
 		OnDisable();
+}
+
+void CScene::InitLights(void)
+{
+	D3DLIGHT9* pLightInfo = new D3DLIGHT9;
+
+	pLightInfo->Type = D3DLIGHT_DIRECTIONAL;
+	pLightInfo->Direction = _float3(1.f, -1.f, 1.f);
+	pLightInfo->Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
+	pLightInfo->Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+
+	m_pLightManager->AddLight(pLightInfo);
+
+	pLightInfo = new D3DLIGHT9;
+	pLightInfo->Type = D3DLIGHT_POINT;
+	pLightInfo->Position = _float3(10.f, 5.f, 10.f);
+	pLightInfo->Diffuse = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.f, 0.f, 1.f);
+	pLightInfo->Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	pLightInfo->Range = 10.f;
+
+	m_pLightManager->AddLight(pLightInfo);
+
+
+	pLightInfo = new D3DLIGHT9;
+	pLightInfo->Type = D3DLIGHT_POINT;
+	pLightInfo->Position = _float3(15.f, 5.f, 15.f);
+	pLightInfo->Diffuse = D3DXCOLOR(0.f, 0.f, 1.f, 1.f);
+	pLightInfo->Ambient = D3DXCOLOR(0.f, 0.f, 0.2f, 1.f);
+	pLightInfo->Specular = D3DXCOLOR(0.f, 0.f, 1.f, 1.f);
+	pLightInfo->Range = 10.f;
+
+	m_pLightManager->AddLight(pLightInfo);
 }
 
 void CScene::InitLayers(_int numOfLayers)

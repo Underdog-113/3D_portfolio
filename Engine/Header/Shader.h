@@ -6,31 +6,20 @@
 BEGIN(Engine)
 class ENGINE_DLL CShader abstract : public CEngine
 {
-public:	
-	explicit			CShader				(void);
-	virtual			   ~CShader				(void);
+protected:
+	explicit							CShader					(void);
+	virtual							   ~CShader					(void);
 
 public:
-	virtual		void	Awake				(void) PURE;
-	virtual		void	Start				(void) PURE;
-
-	virtual		void	PreRender			(CGraphicsC* pGC) PURE;
-	virtual		void	Render				(CGraphicsC* pGC) PURE;
-	virtual		void	PostRender			(CGraphicsC* pGC) PURE;
-
-	virtual		void	OnDestroy			(void) PURE;
-
-	virtual		void	OnEnable			(void) PURE;
-	virtual		void	OnDisable			(void) PURE;
-
-	
-protected:
-	virtual		void	LoadShader			(void) PURE;
+	virtual			void				Free					(void);
+	virtual			void				Awake					(void);
+public:
+	virtual			void				SetUpConstantTable		(SP(CGraphicsC) spGC) PURE;
 
 protected:
-	GETTOR		(std::wstring,		m_filePath,		L"",			FilePath)
-	GETTOR		(LPD3DXEFFECT,		m_pShader,		nullptr,		Shader)
-	GETTOR		(_int,				m_shaderType,	UNDEFINED,		ShaderType)
+	GETTOR			(LPD3DXEFFECT,		m_pEffect,				nullptr,		Effect)
+	GETTOR			(LPD3DXBUFFER,		m_pErrMsg,				nullptr,		ErrMsg)
 };
 END
-#endif // !SHADER_H
+
+#endif

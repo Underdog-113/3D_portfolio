@@ -62,8 +62,9 @@ namespace Engine
 
 	typedef struct _TexData
 	{
-		LPDIRECT3DTEXTURE9 pTexture;
+		IDirect3DBaseTexture9* pTexture;
 		D3DXIMAGE_INFO imageInfo;
+		_bool includeAlpha;
 	}TEXTURE_DATA;
 
 	typedef struct _Face
