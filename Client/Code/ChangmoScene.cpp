@@ -37,11 +37,10 @@ void CChangmoScene::Awake(_int numOfLayers)
 void CChangmoScene::Start(void)
 {
 	__super::Start();
-	Engine::ADD_TEXT(L"WOW1", L"asdfasdfasdfasdf", _float3(100, 100, -1), D3DXCOLOR(0, 0, 0, 1));
 
 	{
 		SP(Engine::CObject) spEmptyObject
-			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 	
 		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
 		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);

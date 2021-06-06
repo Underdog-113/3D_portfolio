@@ -5,7 +5,7 @@
 #include "CameraManager.h"
 
 #include "InputManager.h"
-#include "DynamicMesh.h"
+#include "DynamicMeshData.h"
 #include "MeshData.h"
 
 CWooScene::CWooScene()

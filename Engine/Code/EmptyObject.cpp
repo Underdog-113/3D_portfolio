@@ -130,15 +130,13 @@ void CEmptyObject::PickComponentToRender(void)
 {
 	SP(CMeshC)		spMesh = GetComponent<CMeshC>();
 	SP(CRectTexC)	spRectTex = GetComponent<CRectTexC>();
+	SP(CTextC)		spText = GetComponent<CTextC>();
 
+	
 	if (spMesh != nullptr)
-	{
 		m_spComponentToRender = spMesh;
-		return;
-	}
 	else if (spRectTex != nullptr)
-	{
 		m_spComponentToRender = spRectTex;
-		return;
-	}
+	else if (spText != nullptr)
+		m_spComponentToRender = spText;
 }
