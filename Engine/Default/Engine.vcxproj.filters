@@ -411,17 +411,11 @@
     <ClCompile Include="..\Code\DynamicMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp">
-      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\State.cpp">
       <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StateMachine.cpp">
       <Filter>03.Components\99. Develop\00. StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ShaderStore.cpp">
-      <Filter>00.Engine\09.ResourceStore\03.ShaderStore</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RenderTarget.cpp">
       <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
@@ -463,6 +457,7 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\WndApp.h">
@@ -651,17 +646,11 @@
     <ClInclude Include="..\Header\DynamicMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h">
-      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\State.h">
       <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StateMachine.h">
       <Filter>03.Components\99. Develop\00. StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ShaderStore.h">
-      <Filter>00.Engine\09.ResourceStore\03.ShaderStore</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RenderTarget.h">
       <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
@@ -703,6 +692,7 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
