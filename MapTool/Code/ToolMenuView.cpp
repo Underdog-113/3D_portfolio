@@ -120,29 +120,29 @@ void CToolMenuView::OnInitialUpdate()
 	m_scaleY.SetWindowTextW(_T("0.00"));
 	m_scaleZ.SetWindowTextW(_T("0.00"));
 
-	m_posMin = m_rotMin = m_scaleMin = -9999.f;
-	m_posMax = m_rotMax = m_scaleMax = 9999.f;
+	m_valueMin = -9999;
+	m_valueMax = 9999;
 
-	m_spinPosX.SetRange(m_posMin, m_posMax);
-	m_spinPosX.SetPos(0.f);
-	m_spinPosY.SetRange(m_posMin, m_posMax);
-	m_spinPosY.SetPos(0.f);
-	m_spinPosZ.SetRange(m_posMin, m_posMax);
-	m_spinPosZ.SetPos(0.f);
+	m_spinPosX.SetRange(m_valueMin, m_valueMax);
+	m_spinPosX.SetPos(0);
+	m_spinPosY.SetRange(m_valueMin, m_valueMax);
+	m_spinPosY.SetPos(0);
+	m_spinPosZ.SetRange(m_valueMin, m_valueMax);
+	m_spinPosZ.SetPos(0);
 
-	m_spinRotX.SetRange(m_posMin, m_posMax);
-	m_spinRotX.SetPos(0.f);
-	m_spinRotY.SetRange(m_posMin, m_posMax);
-	m_spinRotY.SetPos(0.f);
-	m_spinRotZ.SetRange(m_posMin, m_posMax);
-	m_spinRotZ.SetPos(0.f);
+	m_spinRotX.SetRange(m_valueMin, m_valueMax);
+	m_spinRotX.SetPos(0);
+	m_spinRotY.SetRange(m_valueMin, m_valueMax);
+	m_spinRotY.SetPos(0);
+	m_spinRotZ.SetRange(m_valueMin, m_valueMax);
+	m_spinRotZ.SetPos(0);
 
-	m_spinScaleX.SetRange(m_posMin, m_posMax);
-	m_spinScaleX.SetPos(0.f);
-	m_spinScaleY.SetRange(m_posMin, m_posMax);
-	m_spinScaleY.SetPos(0.f);
-	m_spinScaleZ.SetRange(m_posMin, m_posMax);
-	m_spinScaleZ.SetPos(0.f);
+	m_spinScaleX.SetRange(m_valueMin, m_valueMax);
+	m_spinScaleX.SetPos(0);
+	m_spinScaleY.SetRange(m_valueMin, m_valueMax);
+	m_spinScaleY.SetPos(0);
+	m_spinScaleZ.SetRange(m_valueMin, m_valueMax);
+	m_spinScaleZ.SetPos(0);
 }
 
 void CToolMenuView::Update(void)
@@ -153,12 +153,8 @@ void CToolMenuView::OnPosX(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_posX.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_posX, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPositionX(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetPositionX(GetEditControlData(&m_posX, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -168,12 +164,8 @@ void CToolMenuView::OnPosY(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_posY.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_posY, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPositionY(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetPositionY(GetEditControlData(&m_posY, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -183,12 +175,8 @@ void CToolMenuView::OnPosZ(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_posZ.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_posZ, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPositionZ(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetPositionZ(GetEditControlData(&m_posZ, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -198,12 +186,8 @@ void CToolMenuView::OnRotX(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_rotX.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_rotX, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetRotationX(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetRotationX(GetEditControlData(&m_rotX, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -213,12 +197,8 @@ void CToolMenuView::OnRotY(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_rotY.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_rotY, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetRotationY(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetRotationY(GetEditControlData(&m_rotY, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -228,12 +208,8 @@ void CToolMenuView::OnRotZ(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_rotZ.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_rotZ, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetRotationZ(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetRotationZ(GetEditControlData(&m_rotZ, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -243,12 +219,8 @@ void CToolMenuView::OnScaleX(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_scaleX.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_scaleX, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetSizeX(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetSizeX(GetEditControlData(&m_scaleX, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -258,12 +230,8 @@ void CToolMenuView::OnScaleY(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_scaleY.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_scaleY, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetSizeY(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetSizeY(GetEditControlData(&m_scaleY, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -273,22 +241,18 @@ void CToolMenuView::OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cstrValue;
-	m_scaleZ.GetWindowTextW(cstrValue);
-	SpinBtn(pNMUpDown, &m_scaleZ, _tstof(cstrValue));
-
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetSizeZ(_tstof(cstrValue));
+	pCurObj->GetTransform()->SetSizeZ(GetEditControlData(&m_scaleZ, pNMUpDown));
 
 	*pResult = 0;
 }
 
-void CToolMenuView::SpinBtn(LPNMUPDOWN pNMUpDown, CEdit* pBtn, Engine::_float fVal)
+void CToolMenuView::SpinBtn(LPNMUPDOWN pNMUpDown, CEdit* pBtn, _float fVal)
 {
 	// 값 = 현재값 + 증/감
 	_float nValue = fVal + (float)((pNMUpDown->iDelta) / 10.f);
 
-	if ((m_posMin <= nValue) && (m_posMax >= nValue))
+	if ((m_valueMin <= nValue) && (m_valueMax >= nValue))
 	{
 		CString cstrValue;
 		cstrValue.Format(_T("%.8f"), nValue);
@@ -296,55 +260,60 @@ void CToolMenuView::SpinBtn(LPNMUPDOWN pNMUpDown, CEdit* pBtn, Engine::_float fV
 	}
 }
 
-void CToolMenuView::SetPosition(Engine::_float3 vPos)
+_float CToolMenuView::GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown)
 {
-	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPosition(vPos);
+	CString cstrValue;
+	pEdit->GetWindowTextW(cstrValue);
 
-	//std::cout << vPos.x << ", " << vPos.y << ", " << vPos.z << std::endl;
+	_float value = (_float)_tstof(cstrValue);
+	SpinBtn(pNMUpDown, pEdit, value);
 
-	//CString cstrValue;
-	//cstrValue.Format(_T("%.8f"), vPos.x);
-	//m_posX.SetWindowTextW(cstrValue);
-	//
-
-	//cstrValue.Format(_T("%.8f"), vPos.y);
-	//m_posY.SetWindowTextW(cstrValue);
-	//m_spinPosY.SetPos(vPos.y);
-
-	//cstrValue.Format(_T("%.8f"), vPos.z);
-	//m_posZ.SetWindowTextW(cstrValue);
-	//m_spinPosZ.SetPos(vPos.z);
+	return value;
 }
 
-void CToolMenuView::SetRotation(Engine::_float3 vRot)
+void CToolMenuView::SetPosition(_float3 vPos)
+{
+	CString cstrValue;
+	cstrValue.Format(_T("%.8f"), vPos.x);
+	m_posX.SetWindowTextW(cstrValue);
+
+	cstrValue.Format(_T("%.8f"), vPos.y);
+	m_posY.SetWindowTextW(cstrValue);
+	m_spinPosY.SetPos((_int)vPos.y);
+
+	cstrValue.Format(_T("%.8f"), vPos.z);
+	m_posZ.SetWindowTextW(cstrValue);
+	m_spinPosZ.SetPos((_int)vPos.z);
+}
+
+void CToolMenuView::SetRotation(_float3 vRot)
 {
 	CString cstrValue;
 	cstrValue.Format(_T("%.8f"), vRot.x);
 	m_rotX.SetWindowTextW(cstrValue);
-	m_spinRotX.SetPos(vRot.x);
+	m_spinRotX.SetPos((_int)vRot.x);
 
 	cstrValue.Format(_T("%.8f"), vRot.y);
 	m_rotY.SetWindowTextW(cstrValue);
-	m_spinRotY.SetPos(vRot.y);
+	m_spinRotY.SetPos((_int)vRot.y);
 
 	cstrValue.Format(_T("%.8f"), vRot.z);
 	m_rotZ.SetWindowTextW(cstrValue);
-	m_spinRotZ.SetPos(vRot.z);
+	m_spinRotZ.SetPos((_int)vRot.z);
 }
 
-void CToolMenuView::SetScale(Engine::_float3 vScale)
+void CToolMenuView::SetScale(_float3 vScale)
 {
 	CString cstrValue;
 	cstrValue.Format(_T("%.8f"), vScale.x);
 	m_scaleX.SetWindowTextW(cstrValue);
-	m_spinScaleX.SetPos(vScale.x);
+	m_spinScaleX.SetPos((_int)vScale.x);
 
 	cstrValue.Format(_T("%.8f"), vScale.y);
 	m_scaleY.SetWindowTextW(cstrValue);
-	m_spinScaleY.SetPos(vScale.y);
+	m_spinScaleY.SetPos((_int)vScale.y);
 
 	cstrValue.Format(_T("%.8f"), vScale.z);
 	m_scaleZ.SetWindowTextW(cstrValue);
-	m_spinScaleZ.SetPos(vScale.z);
+	m_spinScaleZ.SetPos((_int)vScale.z);
 }

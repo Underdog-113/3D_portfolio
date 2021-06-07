@@ -49,13 +49,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	ModifyStyleEx(0, WS_EX_APPWINDOW);
-	ModifyStyle(WS_CAPTION | WS_THICKFRAME, WS_POPUP);
+	//ModifyStyleEx(0, WS_EX_APPWINDOW);
+	//ModifyStyle(WS_CAPTION | WS_THICKFRAME, WS_POPUP);
 
-	_uint nX = WINDOWCX;
-	_uint nY = WINDOWCY;
+	//_uint nX = WINDOWCX;
+	//_uint nY = WINDOWCY;
 
-	::SetWindowPos(this->m_hWnd, HWND_NOTOPMOST, 0, 0, nX, nY, SWP_FRAMECHANGED);
+	//::SetWindowPos(this->m_hWnd, HWND_NOTOPMOST, 0, 0, nX, nY, SWP_FRAMECHANGED);
 
 	return 0;
 }
@@ -94,34 +94,34 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 {
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
-	//CRect rect;
-	//CPoint pos;
+	CRect rect;
+	CPoint pos;
 
-	//GetClientRect(&rect);
-	////pos.x = (LONG)(GetSystemMetrics(SM_CXSCREEN) / 2.0f - rect.Width() / 2.0f);
-	////pos.y = (LONG)(GetSystemMetrics(SM_CYSCREEN) / 2.0f - rect.Height() / 2.0f);
+	GetClientRect(&rect);
+	//pos.x = (LONG)(GetSystemMetrics(SM_CXSCREEN) / 2.0f - rect.Width() / 2.0f);
+	//pos.y = (LONG)(GetSystemMetrics(SM_CYSCREEN) / 2.0f - rect.Height() / 2.0f);
 
-	////SetWindowPos(NULL, 50, 50, 0, 0, SWP_NOSIZE);
+	//SetWindowPos(NULL, 50, 50, 0, 0, SWP_NOSIZE);
 
-	//m_mainSplitter.CreateStatic(this, 1, 2);
-	//m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize(VIEWCX, VIEWCY), pContext);
-	//m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CToolMenuView), CSize(VIEWCX, VIEWCY), pContext);
+	m_mainSplitter.CreateStatic(this, 1, 2);
+	m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize(VIEWCX, VIEWCY), pContext);
+	m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CToolMenuView), CSize(VIEWCX, VIEWCY), pContext);
 
 	/////////////
 
-	_uint winCX = WINDOWCX;
-	_uint winCY = WINDOWCY;
+	//_uint winCX = WINDOWCX;
+	//_uint winCY = WINDOWCY;
 
-	_uint firstCX = winCX * 0.81f;
-	_uint menuCX = winCX * 0.81f;
+	//_uint firstCX = winCX * 0.81f;
+	//_uint menuCX = winCX * 0.81f;
 
-	// 툴을 세로로 2등분 나눔
-	m_mainSplitter.CreateStatic(this, 1, 2);
-	m_mainSplitter.SetColumnInfo(0, 100, 10);
+	//// 툴을 세로로 2등분 나눔
+	//m_mainSplitter.CreateStatic(this, 1, 2);
+	//m_mainSplitter.SetColumnInfo(0, 100, 10);
 
-	// left
-	m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize(firstCX, winCY), pContext);
-	m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CToolMenuView), CSize(menuCX, winCY), pContext);
+	//// left
+	//m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize(firstCX, winCY), pContext);
+	//m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CToolMenuView), CSize(menuCX, winCY), pContext);
 
 	return TRUE;
 }

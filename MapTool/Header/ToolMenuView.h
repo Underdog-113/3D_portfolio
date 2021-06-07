@@ -39,6 +39,9 @@ public:
 	void SetScale(Engine::_float3 vScale);
 	void SpinBtn(LPNMUPDOWN ppNMUpDown, CEdit* pBtn, Engine::_float fVal);
 
+private:
+	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
+
 // add valuable
 protected:
 	CEdit m_posX;
@@ -75,12 +78,8 @@ protected:
 	afx_msg void OnScaleY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
 
-	_float m_posMin = 0.f;
-	_float m_posMax = 0.f;
-	_float m_rotMin = 0.f;
-	_float m_rotMax = 0.f;
-	_float m_scaleMin = 0.f;
-	_float m_scaleMax = 0.f;
+	short m_valueMin = 0;
+	short m_valueMax = 0;
 
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
 	CListBox m_TreeList;

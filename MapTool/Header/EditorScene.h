@@ -28,11 +28,7 @@ public:
 
 private:
 	void InitPrototypes(void) override;
-	void Picking();
 	void InputSetting();
-	class Engine::CObject* RayCast(_float3 origin, _float maxDistance, _float3& intersection);
-	_float3 GetPickingDirection(_float3& origin, const _mat* pMatWorld);
-	_float Distance(_float3 & thisPosition, _float3 targetPosition);
 
 private:
 	_bool m_pickingMode = true;
