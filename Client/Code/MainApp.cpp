@@ -105,8 +105,9 @@ void CMainApp::PreRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	Engine::CTextManager::GetInstance()->PreRender();
+	
 	Engine::CGraphicsManager::GetInstance()->PreRender();
+	Engine::CTextManager::GetInstance()->PreRender();
 	
 
 	_float time = Engine::GET_ELAPSED_TIME;
@@ -119,8 +120,9 @@ void CMainApp::Render(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	Engine::CTextManager::GetInstance()->Render();
+	
 	Engine::CGraphicsManager::GetInstance()->Render();
+	Engine::CTextManager::GetInstance()->Render();
 	
 
 	_float time = Engine::GET_ELAPSED_TIME;
@@ -132,8 +134,9 @@ void CMainApp::PostRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	Engine::CTextManager::GetInstance()->PostRender();
+	
 	Engine::CGraphicsManager::GetInstance()->PostRender();
+	Engine::CTextManager::GetInstance()->PostRender();
 	
 
 	_float time = Engine::GET_ELAPSED_TIME;
@@ -149,7 +152,9 @@ void CMainApp::OnDestroy(void)
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
-	CButtonManager::GetInstance()->OnDestroy();
+
+	//Client Manager
+	CButtonManager::GetInstance()->DestroyInstance();
 }
 
 void CMainApp::OnEnable(void)

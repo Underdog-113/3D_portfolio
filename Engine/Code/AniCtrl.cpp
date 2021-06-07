@@ -39,11 +39,14 @@ CAniCtrl* CAniCtrl::MakeClone(void)
 										 m_pAniCtrl->GetMaxNumEvents(),
 										 &pClone->m_pAniCtrl);
 
+	pClone->m_period = m_period;
 	return pClone;
 }
 
 void CAniCtrl::Awake(void)
 {
+	CTextManager::GetInstance()->AddText(L"ANI", L"WOW", _float2(100, 100), _float2(100, 100), 10, 0, D3DXCOLOR(1, 1, 1, 1));
+	//ADD_TEXT(L"ANI", L"WOW", _float2(100, 100), D3DXCOLOR(1, 1, 1, 1));
 }
 
 void CAniCtrl::OnDestroy(void)
@@ -74,7 +77,7 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	LPD3DXANIMATIONSET pAS = NULL;
 
 	m_pAniCtrl->GetAnimationSet(index, &pAS);
-	m_period = pAS->GetPeriod();
+	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->SetTrackAnimationSet(newTrack, pAS);
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
@@ -114,7 +117,7 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	m_pAniCtrl->GetAnimationSetByName(name.c_str(), &pAS);
 
 	m_curIndex = FindIndexByName(name, pAS);
-	m_period = pAS->GetPeriod();
+	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->SetTrackAnimationSet(newTrack, pAS);
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
@@ -143,15 +146,32 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 
 void CAniCtrl::Play(void)
 {
-	_float deltaTime = GET_DT;
-	m_timer += deltaTime * m_speed;
-	if (m_replay == false && m_timer > m_period)
-	{
-		m_timer = (_float)m_period;
-		return;
-	}
+	if (IMKEY_DOWN(KEY_X))
+		m_speed = 1.f;
+	if (IMKEY_DOWN(KEY_SHIFT))
+		m_replay = m_replay ? false : true;
 
-	m_pAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
+	_float deltaTime = GET_DT;
+	_float adder = deltaTime * m_speed;	
+
+	if (m_timer + adder > m_period)
+	{
+		adder = m_period - m_timer;
+		m_timer = -adder;
+
+		if (m_replay == false)
+			m_speed = 0.f;
+	}
+	
+	
+	
+	m_timer += adder;
+	m_pAniCtrl->AdvanceTime(adder, NULL);
+	
+	
+	
+
+	//REWRITE_TEXT(L"ANI", std::to_wstring(m_pAniCtrl->GetTime()));
 }
 
 _bool CAniCtrl::IsItEnd(void)
