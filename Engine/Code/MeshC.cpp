@@ -130,6 +130,10 @@ void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 	}
 }
 
+void CMeshC::PostRender(SP(CGraphicsC) spGC)
+{
+}
+
 void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 }

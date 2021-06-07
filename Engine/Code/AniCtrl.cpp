@@ -164,7 +164,7 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	LPD3DXANIMATIONSET pAS = NULL;
 
 	m_pAniCtrl->GetAnimationSet(index, &pAS);
-	m_period = pAS->GetPeriod();
+	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->SetTrackAnimationSet(newTrack, pAS);
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
@@ -206,7 +206,7 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	m_pAniCtrl->GetAnimationSetByName(name.c_str(), &pAS);
 
 	m_curIndex = FindIndexByName(name, pAS);
-	m_period = pAS->GetPeriod();
+	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->SetTrackAnimationSet(newTrack, pAS);
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
