@@ -14,7 +14,7 @@ pState = new Engine::CState;														\
 pState->SetInitailize(std::bind(&##className##::##stateName##_Init, this));			\
 pState->SetEnter(std::bind(&##className##::##stateName##_Enter, this));				\
 pState->SetUpdate(std::bind(&##className##::##stateName##_Update, this, GET_DT));	\
-pState->SetExit(std::bind(&##className##::##stateName##_End, this));				
+pState->SetExit(std::bind(&##className##::##stateName##_End, this));
 
 
 BEGIN(Engine)
@@ -26,7 +26,7 @@ public:
 	explicit	CStateMachineC	(void);
 	virtual		~CStateMachineC	(void);
 
-//Override functions									   
+//Override functions
 public:
 	virtual SP(CComponent)		MakeClone		(CObject* pObject) PURE;
 
@@ -71,7 +71,7 @@ public:
 	void			SetStartState		(std::wstring _stateName);
 	void			ChangeState			(const std::wstring& _stateName);
 	bool			CompareState		(std::wstring _stateName);
-	
+
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::StateMachine;
 

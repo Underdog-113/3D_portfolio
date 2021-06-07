@@ -38,24 +38,21 @@ void CInitScene::Free(void)
 void CInitScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	
+
 }
 
 void CInitScene::Start(void)
 {
 	m_isStarted = true;
 
-	//Engine::ADD_TEXT(L"WOW", L"asdfasdfasdfasdf", _float3(100, 100, -1), D3DXCOLOR(0, 0, 0, 1));
-
 	//DataStore Init
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);
 	m_pDataStore->InitDataForScene(m_objectKey);
 	m_pMeshStore->InitMeshForScene(m_objectKey);
-
-	Engine::GET_CUR_SCENE->GetTextureStore()->InitTextureForScene(m_objectKey);
+	m_pTextureStore->InitTextureForScene(m_objectKey);
 
 	InitPrototypes();
-	
+
 	m_pLoading = CLoading::Create(CStaticScene::Create(), true);
 
 	SP(Engine::CCamera) spCameraObject =
@@ -63,26 +60,15 @@ void CInitScene::Start(void)
 
 	Engine::CCameraManager::GetInstance()->AddCamera(L"InitSceneBasicCamera", spCameraObject);
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
-	
-
-	m_pBackground =
-		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background");
-	
-	m_pBackground->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	m_pBackground->GetTransform()->SetSize(10, 10, 10);
-	m_pBackground->GetTransform()->AddPositionZ(30);
-
 
 	m_pBackground =
 		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
 
 	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
+	m_pBackground->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
 	m_pBackground->GetTransform()->SetSize(800, 600, 1);
-	
 }
 
 void CInitScene::FixedUpdate(void)
@@ -102,7 +88,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"BG");
+			//m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"BG");
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();

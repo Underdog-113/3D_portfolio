@@ -10,6 +10,7 @@ CShaderC::CShaderC()
 
 CShaderC::~CShaderC()
 {
+	OnDestroy();
 }
 
 SP(CComponent) CShaderC::MakeClone(CObject * pObject)
@@ -17,7 +18,7 @@ SP(CComponent) CShaderC::MakeClone(CObject * pObject)
 	SP(CShaderC) spClone(new CShaderC);
 	__super::InitClone(spClone, pObject);
 
-	spClone->m_pEffects = m_pEffects;
+	spClone->m_vShaders = m_vShaders;
 
 	return spClone;
 }
@@ -34,10 +35,16 @@ void CShaderC::Awake(void)
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
 		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
-		std::wstring shaderName;
-		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ShaderName", shaderName);
+		_int numOfEffects;
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfShaders", numOfEffects);
 
-		m_pEffects = CShaderStore::GetInstance()->GetShader(GetShaderID(shaderName));
+		for (_int i = 0; i < numOfEffects; ++i)
+		{
+			std::wstring shaderKey;
+			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"shaderKey" + std::to_wstring(i), shaderKey);
+			_int shaderID = CShaderManager::GetInstance()->GetShaderID(shaderKey);
+			m_vShaders.emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
+		}
 	}
 }
 
@@ -60,6 +67,7 @@ void CShaderC::LateUpdate(SP(CComponent) spThis)
 
 void CShaderC::OnDestroy(void)
 {
+	m_vShaders.clear();
 }
 
 void CShaderC::OnEnable(void)
@@ -71,16 +79,9 @@ void CShaderC::OnEnable(void)
 void CShaderC::OnDisable(void)
 {
 	__super::OnDisable();
-	
 }
 
-_int CShaderC::GetShaderID(std::wstring shaderName)
+void CShaderC::AddShader(_int shaderID)
 {
-	if (shaderName == L"Basic")
-		return (_int)EShaderID::Basic;
-	else
-	{
-		MSG_BOX(__FILE__, L"Wrong shdaer name in GetShaderID");
-		ABORT;
-	}
+	m_vShaders.emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
 }

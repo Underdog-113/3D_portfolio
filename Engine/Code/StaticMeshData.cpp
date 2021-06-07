@@ -95,7 +95,7 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 		if (curPoint.z < m_minVertex.z)
 			m_minVertex.z = curPoint.z;
 	}
-
+	m_pMesh->UnlockVertexBuffer();
 	m_meshSize = m_maxVertex - m_minVertex;
 
 	m_pMtrl = (D3DXMATERIAL*)m_pSubset->GetBufferPointer();
@@ -107,10 +107,6 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 		else
 			AddTexNameToList(L"NoTexture");
 	}
-}
-
-void CStaticMeshData::Start(void)
-{
 }
 
 void CStaticMeshData::Update(void)

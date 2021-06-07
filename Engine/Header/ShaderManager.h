@@ -1,28 +1,25 @@
-#ifndef SHADERMANAGER_H
-#define SHADERMANAGER_H
+#ifndef SHADERSTORE_H
+#define SHADERSTORE_H
 
-#include "Engine.h"
+#include "ResourceStore.h"
+#include "Shader.h"
 
 BEGIN(Engine)
-class CShader;
-class ENGINE_DLL CShaderManager final : public CEngine
+class ENGINE_DLL CShaderManager final
 {
 	DECLARE_SINGLETON(CShaderManager)
 public:
-			void		Awake					(void) override;
-			void		Start					(void);
-			void		OnDestroy				(void);
-			void		OnEnable				(void);
-			void		OnDisable				(void);
+			void				Awake				(void);
+			void				OnDestroy			(void);
 
-			CShader*	GetShader				(_int shaderKey);
-			_int		GetShaderKeyByRenderID	(_int renderID);
-private:
-			HRESULT		AddShader				(CShader* pShader);
+public:
+			CShader*			GetShader			(_int shaderID);
+			_int				GetShaderID			(std::wstring shaderName);
+
 
 private:
-	std::unordered_map<_int, CShader*> m_mShaders;
+	typedef std::vector<CShader*> _Shaders;
+			_Shaders	m_vShaders;
 };
 END
-
-#endif
+#endif // !MESHSTORE_H

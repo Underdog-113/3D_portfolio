@@ -15,6 +15,7 @@ CStateMachineC::~CStateMachineC()
 	OnDestroy();
 }
 
+
 void CStateMachineC::Awake(void)
 {
 	__super::Awake();

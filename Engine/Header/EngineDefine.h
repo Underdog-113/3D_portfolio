@@ -46,6 +46,7 @@
 #define KEY_SHIFT	1 << 25
 #define KEY_Z		1 << 26
 #define KEY_X		1 << 27
+#define KEY_DELETE	1 << 28
 
 #define _CRTDBG_MAP_ALLOC
 #ifdef _DEBUG

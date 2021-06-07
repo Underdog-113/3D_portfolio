@@ -34,6 +34,14 @@ public:
 
 	virtual void SetBasicName(void) override;
 
+private:
+	void   EquipWeapon();
+
+private:
+	const _mat*  m_pParentBoneMat = nullptr;
+	const _mat*  m_pParentWorldMat = nullptr;
+	_float3		 m_vDir;
+
 public:
 	static		SP(CMB_Bronya)			Create(_bool isStatic, Engine::CScene* pScene);
 };

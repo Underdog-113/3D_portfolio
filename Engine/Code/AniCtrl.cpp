@@ -291,7 +291,6 @@ void CAniCtrl::PlayFake()
 		m_pFakeAniCtrl->AdvanceTime(remainTime * m_speed, NULL);
 
 		m_fakeTimer = 0;
-		//ChangeFakeAniSet();
 		return;
 	}
 

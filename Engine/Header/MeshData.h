@@ -16,7 +16,6 @@ public:
 	virtual		void			Awake				(std::wstring const& filePath, 
 													 std::wstring const& fileName);
 
-	virtual		void			Start				(void) PURE;
 	virtual		void			Update				(void) PURE;
 
 	virtual		void			OnDestory			(void) PURE;

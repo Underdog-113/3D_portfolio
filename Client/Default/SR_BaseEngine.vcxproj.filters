@@ -112,6 +112,24 @@
     <Filter Include="02.Objects\Monster\MB_Bronya\FSM">
       <UniqueIdentifier>{d67d77a4-462f-450c-b881-69409e60013a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\00.UI">
+      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI">
+      <UniqueIdentifier>{9a4dd51e-b568-43cb-8f9b-1e664f217001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\Button">
+      <UniqueIdentifier>{9f32d851-446a-495c-8aa2-112bc9cd81a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{826ecd7e-57f6-478d-b0d2-2d647b0cb897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.DeleGate">
+      <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\00.ButtonManager">
+      <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -202,6 +220,39 @@
     <ClInclude Include="..\Header\Monster.h">
       <Filter>02.Objects\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FSM_ScoutC.h">
+      <Filter>02.Objects\Monster\MO_Scout\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_RobotC.h">
+      <Filter>02.Objects\Monster\MO_Robot\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_NinzaC.h">
+      <Filter>02.Objects\Monster\MO_Ninza\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MO_Lancer.h">
+      <Filter>02.Objects\Monster\MO_Lancer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_LancerC.h">
+      <Filter>02.Objects\Monster\MO_Lancer\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_AxeC.h">
+      <Filter>02.Objects\Monster\MO_Axe\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_GaneshaC.h">
+      <Filter>02.Objects\Monster\MB_Ganesha\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_BronyaC.h">
+      <Filter>02.Objects\Monster\MB_Bronya\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Button.h">
+      <Filter>02.Objects\00.UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ButtonManager.h">
+      <Filter>04.Manager\00.ButtonManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DeleGate.h">
+      <Filter>05.DeleGate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -267,6 +318,39 @@
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02.Objects\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_ScoutC.cpp">
+      <Filter>02.Objects\Monster\MO_Scout\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_RobotC.cpp">
+      <Filter>02.Objects\Monster\MO_Robot\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_NinzaC.cpp">
+      <Filter>02.Objects\Monster\MO_Ninza\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MO_Lancer.cpp">
+      <Filter>02.Objects\Monster\MO_Lancer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_LancerC.cpp">
+      <Filter>02.Objects\Monster\MO_Lancer\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_AxeC.cpp">
+      <Filter>02.Objects\Monster\MO_Axe\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_GaneshaC.cpp">
+      <Filter>02.Objects\Monster\MB_Ganesha\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_BronyaC.cpp">
+      <Filter>02.Objects\Monster\MB_Bronya\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Button.cpp">
+      <Filter>02.Objects\00.UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ButtonManager.cpp">
+      <Filter>04.Manager\00.ButtonManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DeleGate.cpp">
+      <Filter>05.DeleGate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

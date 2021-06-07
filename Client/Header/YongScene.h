@@ -28,15 +28,6 @@ public:
 private:
 					void				InitPrototypes		(void) override;
 
-private:
-	HRESULT Movement(_float DeltaTime = 0.f);
-
-	void   EquipWeapon();
-		
-private:
-	const _mat*  m_pParentBoneMat = nullptr;
-	const _mat*  m_pParentWorldMat = nullptr;
-	_float3		 m_vDir;	
 };
 
 #endif

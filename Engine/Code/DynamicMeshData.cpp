@@ -88,11 +88,6 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 
 }
 
-void CDynamicMeshData::Start(void)
-{
-
-}
-
 void CDynamicMeshData::Update(void)
 {
 	if(m_playAnimation)

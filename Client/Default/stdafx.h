@@ -32,12 +32,16 @@
 //Engine's stdafx.h
 #include "EngineStdafx.h"
 
-//Engine's includes
+//Client's includes
 #include "ClientTypedef.h"
 #include "ClientDefine.h"
 #include "ClientEnum.h"
 #include "ClientMacro.h"
 #include "ClientStructure.h"
+
+
+//Client Managers
+#include "ButtonManager.h"
 
 // »ç¿îµå
 #include <io.h>
