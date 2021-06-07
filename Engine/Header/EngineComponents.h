@@ -34,4 +34,5 @@
 // 3rd Party----------------------------------------
 #include "State.h"
 #include "StateMachine.h"
+#include "RootMotion.h"
 #endif

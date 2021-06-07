@@ -11,7 +11,9 @@ class ENGINE_DLL CState
 public:
 	explicit	CState		(void);
 				~CState		(void);
-				
+
+	CState*		MakeClone();
+
 public:
 	void DoInit();
 	void DoEnter();

@@ -6,10 +6,12 @@
 
 #include "StaticMeshData.h"
 #include "DynamicMeshData.h"
+#include "RootMotion.h"
 
 USING(Engine)
 CMeshC::CMeshC(void)
 {
+
 }
 
 
@@ -30,7 +32,7 @@ SP(CComponent) CMeshC::MakeClone(CObject* pObject)
 	spClone->m_maxVertex	= m_maxVertex;
 	spClone->m_meshSize		= m_meshSize;
 	spClone->m_initTex		= m_initTex;
-
+	spClone->m_RootMotion	= new CRootMotion;
 	return spClone;
 }
 
@@ -58,6 +60,8 @@ void CMeshC::Awake(void)
 
 		GenMinMaxVtx();
 	}
+
+	m_RootMotion = new CRootMotion;
 }
 
 void CMeshC::Start(SP(CComponent) spThis)
@@ -74,6 +78,7 @@ void CMeshC::Start(SP(CComponent) spThis)
 				spOwnerTexC->AddTexture(RemoveExtension(m_vMeshDatas[i]->GetTexList()[j]), i);
 		}
 	}
+
 }
 
 void CMeshC::FixedUpdate(SP(CComponent) spThis)
@@ -119,6 +124,8 @@ void CMeshC::OnDestroy(void)
 {
 	for (auto& meshData : m_vMeshDatas)
 		meshData->FreeClone();
+
+	delete m_RootMotion;
 }
 
 void CMeshC::OnEnable(void)
@@ -194,17 +201,35 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 {
 	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
 
+	// root motion
+	
+	_float3 rootMotionPos = ZERO_VECTOR;
+	if (m_RootMotion->GetIsRootMotion())
+	{
+		pDM->GetAniCtrl()->GetFakeAniCtrl()->AdvanceTime(0, NULL);
+		pDM->UpdateFrame();
+		_mat makeMeshLookAtMe;
+		D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+		_mat rootComb = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+		_mat rootChildComb = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootComb;
+
+		rootMotionPos = _float3(rootChildComb._41, rootChildComb._42, rootChildComb._43);
+		m_RootMotion->SetRootMotionPos(rootMotionPos);
+
+
+		m_RootMotion->RootMotionMove(m_pOwner, pDM->GetAniCtrl());
+	}
+	// root motion
+
 	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
 	pDM->UpdateFrame();
-	
-	// root motion
+
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
 	_mat rootComb = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
 	_mat rootChildComb = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootComb;
 
-	_float3 rootMotionPos = _float3(rootChildComb._41, rootChildComb._42, rootChildComb._43);
-	// root motion
+	rootMotionPos = _float3(rootChildComb._41, rootChildComb._42, rootChildComb._43);
 
 	for (auto& meshContainer : pDM->GetMeshContainers())
 	{
@@ -212,6 +237,12 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		{
 			meshContainer->pRenderingMatrix[i] =
 				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
+
+			// root motion
+			meshContainer->pRenderingMatrix[i]._41 -= rootMotionPos.x;
+			meshContainer->pRenderingMatrix[i]._42 -= rootMotionPos.y;
+			meshContainer->pRenderingMatrix[i]._43 -= rootMotionPos.z;
+			// root motion
 		}
 
 		void* pSrcVertex = nullptr;
@@ -219,16 +250,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 
 		meshContainer->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
 		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
-		
-		// root motion
-		for (_ulong i = 0; i < meshContainer->numBones; ++i)
-		{
-			meshContainer->pRenderingMatrix[i]._41 -= rootMotionPos.x;
-			meshContainer->pRenderingMatrix[i]._42 -= rootMotionPos.y;
-			meshContainer->pRenderingMatrix[i]._43 -= rootMotionPos.z;
-		}
-		// root motion
-
+				
 		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 		
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
@@ -247,25 +269,4 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		}
 	}
 
-	// root motion
-	D3DXTRACK_DESC trackDesc;
-	ZeroMemory(&trackDesc, sizeof(D3DXTRACK_DESC));
-	pDM->GetAniCtrl()->GetAniCtrl()->GetTrackDesc(pDM->GetAniCtrl()->GetCurTrack(), &trackDesc);
-	double timeline = trackDesc.Position / pDM->GetAniCtrl()->GetPeriod();
-	int repeatCount = (int)timeline;
-	timeline -= repeatCount;
-
-	if (timeline < m_prevTimeLine)
-	{
-		m_prevRootMotionPos = _float3(0.f, 0.f, 0.f);
-		m_prevTimeLine = 0.f;
-	}
-
-	_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
-
-	m_pOwner->GetTransform()->AddPosition(moveAmount);
-	//m_pOwner->GetTransform()->SetPosition(rootMotionPos);
-	m_prevRootMotionPos = rootMotionPos;
-	m_prevTimeLine = timeline;
-	// root motion
 }

@@ -41,7 +41,7 @@ void CJongScene::Start(void)
 	{
 		{
 			SP(Engine::CObject) spEmptyObject1
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
 
 			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
 			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
@@ -64,8 +64,22 @@ void CJongScene::Start(void)
 
 			spEmptyObject->AddComponent<FSM_SpiderC>();
 
+			spEmptyObject->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsRootMotion(true);
 
 			m_obj = spEmptyObject.get();
+
+			m_pivot->GetTransform()->SetParent(m_obj->GetTransform());
+		}
+
+		{
+			SP(Engine::CObject) spEmptyObject
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
+
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+			spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
+
 		}
 /*
 		{

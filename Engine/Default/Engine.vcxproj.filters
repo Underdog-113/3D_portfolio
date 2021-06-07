@@ -235,6 +235,9 @@
     <Filter Include="03.Components\99. Develop\00. StateMachine\State">
       <UniqueIdentifier>{4088c399-0caa-472d-9e82-e8e1895e06b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\04.Mesh\01.DynamicMesh\02.RootMotion">
+      <UniqueIdentifier>{782955f9-8ad4-4e98-b29e-6025a1f8aff7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -440,6 +443,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\RenderTargetManager.cpp">
       <Filter>00.Engine\01.Graphics\05.RenderTarget\00.RenderTargetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RootMotion.cpp">
+      <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -670,6 +676,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\RenderTargetManager.h">
       <Filter>00.Engine\01.Graphics\05.RenderTarget\00.RenderTargetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RootMotion.h">
+      <Filter>00.Engine\01.Graphics\04.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

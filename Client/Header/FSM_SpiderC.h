@@ -30,4 +30,17 @@ public:
 	void ATTACK_2_Update(float deltaTime);
 	void ATTACK_2_End(void);
 	//void
+
+
+public:
+	void RUN_Init(void);
+	void RUN_Enter(void);
+	void RUN_Update(float deltaTime);
+	void RUN_End(void);
+
+public:
+	void StandBy_Init(void);
+	void StandBy_Enter(void);
+	void StandBy_Update(float deltaTime);
+	void StandBy_End(void);
 };
