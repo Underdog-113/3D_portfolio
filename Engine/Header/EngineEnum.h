@@ -4,7 +4,7 @@
 namespace Engine
 {
 #pragma region GraphicsEnum
-	//À©µµ¿ì µð½ºÇÃ·¹ÀÌ ¸ðµå
+	// ChangMode
 	enum class EDisplayMdoe
 	{
 		FullMode,
@@ -135,7 +135,8 @@ namespace Engine
 		Shader					= 11,
         Text					= 12,
 		StateMachine			= 13,
-		NumOfEngineComponentID	= 14
+		ParticleSystem			= 14,
+		NumOfEngineComponentID	= 15
 	};
 
 	enum class EChannelID

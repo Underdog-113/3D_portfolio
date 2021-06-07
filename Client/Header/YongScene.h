@@ -1,11 +1,6 @@
 #ifndef YONGSCENE_H
 #define YONGSCENE_H
 
-BEGIN(Engine)
-class CParticle;
-END
-class CTestParticle;
-
 #include "Scene.h"
 
 class CYongScene final : public Engine::CScene
@@ -33,9 +28,7 @@ public:
 private:
 					void				InitPrototypes		(void) override;
 
-private:
-	Engine::CParticle* m_pTestParticle = nullptr;
-
+					
 };
 
 #endif

@@ -178,6 +178,15 @@
     <Filter Include="00.Engine\01.Graphics\05.RenderTarget\00.RenderTargetManager">
       <UniqueIdentifier>{033ec85a-980d-4336-b19b-bb3cf75e46b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Components\99. Develop">
+      <UniqueIdentifier>{7ac32553-81d0-41c4-812a-a88127e4c6cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\00. StateMachine">
+      <UniqueIdentifier>{531c0850-6080-4c46-8ecc-fc072a47f044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\00. StateMachine\State">
+      <UniqueIdentifier>{4088c399-0caa-472d-9e82-e8e1895e06b3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="00.Engine\01.Graphics\02.Camera">
       <UniqueIdentifier>{e333171a-547e-45c0-8e24-64c9d5bf6d1f}</UniqueIdentifier>
     </Filter>
@@ -232,16 +241,20 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\04.SkyBoxShader">
       <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
-    <Filter Include="00.Engine\01.Graphics\07.Particle">
-      <UniqueIdentifier>{e1899063-2ddb-403a-b3f9-391bef1d1a88}</UniqueIdentifier>
-=======
     <Filter Include="02.Objects\05.ImageObject">
       <UniqueIdentifier>{b387efc0-22ae-425d-8839-3ed29247f37c}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
       <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
->>>>>>> 158beff6d4db7276f42dd216286f2f16c62a751f
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem">
+      <UniqueIdentifier>{fe05836d-e826-479d-823e-4bdcf9f40930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\Manager">
+      <UniqueIdentifier>{6b9e5eed-4c53-4b50-9faa-ead44afe6b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\ParticleComponent">
+      <UniqueIdentifier>{f8723815-601e-49ed-a044-d619184070a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -407,21 +420,11 @@
     <ClCompile Include="..\Code\DynamicMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp">
-<<<<<<< HEAD
-      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
-=======
-      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\State.cpp">
       <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StateMachine.cpp">
       <Filter>03.Components\99. Develop\00. StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ShaderStore.cpp">
-      <Filter>00.Engine\09.ResourceStore\03.ShaderStore</Filter>
->>>>>>> 158beff6d4db7276f42dd216286f2f16c62a751f
     </ClCompile>
     <ClCompile Include="..\Code\RenderTarget.cpp">
       <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
@@ -454,13 +457,6 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\03.DeferredLightShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ShaderManager.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="..\Code\ShaderManager.cpp" />
-    <ClCompile Include="..\Code\State.cpp" />
-    <ClCompile Include="..\Code\StateMachine.cpp" />
-    <ClCompile Include="..\Code\Particle.cpp">
-      <Filter>00.Engine\01.Graphics\07.Particle</Filter>
-=======
     <ClCompile Include="..\Code\ShaderManager.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClCompile>
@@ -469,7 +465,16 @@
     </ClCompile>
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
->>>>>>> 158beff6d4db7276f42dd216286f2f16c62a751f
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp" />
+    <ClCompile Include="..\Code\PSC_Manager.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ParticleSystemC.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -659,21 +664,11 @@
     <ClInclude Include="..\Header\DynamicMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h">
-<<<<<<< HEAD
-      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
-=======
-      <Filter>00.Engine\01.Graphics\04.Mesh\00.StaticMesh</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\State.h">
       <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StateMachine.h">
       <Filter>03.Components\99. Develop\00. StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ShaderStore.h">
-      <Filter>00.Engine\09.ResourceStore\03.ShaderStore</Filter>
->>>>>>> 158beff6d4db7276f42dd216286f2f16c62a751f
     </ClInclude>
     <ClInclude Include="..\Header\RenderTarget.h">
       <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
@@ -706,13 +701,6 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\03.DeferredLightShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ShaderManager.h" />
-<<<<<<< HEAD
-    <ClInclude Include="..\Header\ShaderManager.h" />
-    <ClInclude Include="..\Header\State.h" />
-    <ClInclude Include="..\Header\StateMachine.h" />
-    <ClInclude Include="..\Header\Particle.h">
-      <Filter>00.Engine\01.Graphics\07.Particle</Filter>
-=======
     <ClInclude Include="..\Header\ShaderManager.h">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClInclude>
@@ -721,7 +709,16 @@
     </ClInclude>
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
->>>>>>> 158beff6d4db7276f42dd216286f2f16c62a751f
+    </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h" />
+    <ClInclude Include="..\Header\PSC_Manager.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ParticleSystemC.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Particle.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

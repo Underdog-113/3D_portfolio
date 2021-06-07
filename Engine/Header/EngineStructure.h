@@ -147,9 +147,9 @@ namespace Engine
 			_isAlive = true;
 		}
 
-		_float3  _position;	    // 월드 스페이스 내의 파티클 위치
-		_float3  _velocity;	    // 파티클의 속도
-		_float3  _acceleration; // 파티클의 가속
+		_float3      _position;	    // 월드 스페이스 내의 파티클 위치
+		_float3      _velocity;	    // 파티클의 속도
+		_float3      _acceleration; // 파티클의 가속
 		_float       _lifeTime;     // 파티클 유지 시간
 		_float       _age;          // 파티클의 나이
 		D3DXCOLOR    _color;        // 파티클의 컬러

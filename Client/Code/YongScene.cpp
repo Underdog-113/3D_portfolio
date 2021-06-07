@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "YongScene.h"
 #include "FRC.h"
-#include "TestParticle.h"
 
 CYongScene::CYongScene()
 {
@@ -31,11 +30,12 @@ void CYongScene::Free(void)
 void CYongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	srand((unsigned int)time(0));
-	Engine::BoundingBox boundingBox;
-	boundingBox._min = _float3(-10.f, -10.f, -10.f);
-	boundingBox._max = _float3(10.f, 10.f, 10.f);
-	m_pTestParticle = new CTestParticle(&boundingBox, 3000);
+
+	SP(Engine::CObject) spEmptyObject
+		= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
+	spEmptyObject->AddComponent<Engine::CParticleSystemC>();
+	spEmptyObject->GetTransform()->SetSize(10, 10, 10);
 
 	InitPrototypes();
 }
@@ -56,22 +56,17 @@ void CYongScene::FixedUpdate(void)
 void CYongScene::Update(void)
 {
 	__super::Update();
-	m_pTestParticle->Update();
 }
 
 void CYongScene::LateUpdate(void)
 {
 	__super::LateUpdate();
-	m_pTestParticle->Render();
 
 }
 
 void CYongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	
-	m_pTestParticle->Release();
-	SAFE_DELETE(m_pTestParticle);
 }
 
 void CYongScene::OnEnable(void)
