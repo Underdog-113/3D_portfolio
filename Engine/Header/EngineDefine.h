@@ -17,6 +17,8 @@
 //NewLine
 #define NEW_LINE L'\n'
 
+//UnusedParam
+#define UNUSED(x) (void)(x)
 
 #define KEY_LEFT	1 << 0
 #define KEY_RIGHT	1 << 1
@@ -46,6 +48,7 @@
 #define KEY_SHIFT	1 << 25
 #define KEY_Z		1 << 26
 #define KEY_X		1 << 27
+#define KEY_DELETE	1 << 28
 
 #define _CRTDBG_MAP_ALLOC
 #ifdef _DEBUG

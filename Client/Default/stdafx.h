@@ -8,26 +8,14 @@
 
 #include "targetver.h"
 
-#define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
-// Windows 헤더 파일:
-#include <windows.h>
-
-// C 런타임 헤더 파일입니다.
-#include <stdlib.h>
-#include <malloc.h>
-#include <memory.h>
-#include <tchar.h>
-#include <fstream>
-#include <sstream>
-#include <string>
 #include <process.h>
 
 //For Grapchis
-#include "d3d9.h"
-#pragma comment(lib, "d3d9.lib")
-
-#include "d3dx9.h"
-#pragma comment(lib, "d3dx9.lib")
+//#include "d3d9.h"
+//#pragma comment(lib, "d3d9.lib")
+//
+//#include "d3dx9.h"
+//#pragma comment(lib, "d3dx9.lib")
 
 //Engine's stdafx.h
 #include "EngineStdafx.h"
@@ -44,8 +32,8 @@
 #include "ButtonManager.h"
 
 // 사운드
-#include <io.h>
-#include "fmod.h"
-#pragma comment (lib, "fmodex64_vc.lib")
+//#include <io.h>
+//#include "fmod.h"
+//#pragma comment (lib, "fmodex64_vc.lib")
 
 #endif
