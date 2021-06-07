@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MainApp.h"
 #include "Object.h"
- 
+
 #pragma region IncludeScenes
 #include "InitScene.h"
 #pragma endregion
@@ -52,6 +52,9 @@ void CMainApp::Start(void)
 	Engine::CSceneManager::GetInstance()->SceneChange(CInitScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
+	Engine::CShaderManager::GetInstance()->Start();
+
+
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
 	Engine::CRenderTargetManager::GetInstance()->Start();
 }
@@ -72,14 +75,14 @@ void CMainApp::Update(void)
 	Engine::TIME_MEASURE_START;
 
 	Engine::CInputManager::GetInstance()->Update();
-	
+
 	Engine::CSceneManager::GetInstance()->Update();
 	CButtonManager::GetInstance()->Update();
 	Engine::CCollisionManager::GetInstance()->Update();
 
 	Engine::CCameraManager::GetInstance()->Update();
 	Engine::CGraphicsManager::GetInstance()->Update();
-	
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -91,9 +94,9 @@ void CMainApp::LateUpdate(void)
 	Engine::CInputManager::GetInstance()->LateUpdate();
 	Engine::CCollisionManager::GetInstance()->LateUpdate();
 	Engine::CSceneManager::GetInstance()->LateUpdate();
-	
+
 	Engine::CCameraManager::GetInstance()->LateUpdate();
-	Engine::CGraphicsManager::GetInstance()->LateUpdate();	
+	Engine::CGraphicsManager::GetInstance()->LateUpdate();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -123,7 +126,7 @@ void CMainApp::Render(void)
 	
 	Engine::CGraphicsManager::GetInstance()->Render();
 	Engine::CTextManager::GetInstance()->Render();
-	
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -137,7 +140,6 @@ void CMainApp::PostRender(void)
 	
 	Engine::CGraphicsManager::GetInstance()->PostRender();
 	Engine::CTextManager::GetInstance()->PostRender();
-	
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -168,5 +170,5 @@ void CMainApp::OnDisable(void)
 
 void CMainApp::InitStaticPrototype(void)
 {
-	
+
 }
