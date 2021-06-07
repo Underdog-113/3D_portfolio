@@ -48,7 +48,7 @@
     <ClInclude Include="..\Header\HierarchyLoader.h" />
     <ClInclude Include="..\Header\Light.h" />
     <ClInclude Include="..\Header\LightManager.h" />
-    <ClInclude Include="..\Header\Image.h" />
+    <ClInclude Include="..\Header\ImageObject.h" />
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
@@ -127,7 +127,7 @@
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
     <ClCompile Include="..\Code\Light.cpp" />
     <ClCompile Include="..\Code\LightManager.cpp" />
-    <ClCompile Include="..\Code\Image.cpp" />
+    <ClCompile Include="..\Code\ImageObject.cpp" />
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />

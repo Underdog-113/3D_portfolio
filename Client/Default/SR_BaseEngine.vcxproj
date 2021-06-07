@@ -198,6 +198,7 @@
     <ClInclude Include="..\Header\FSM_RobotC.h" />
     <ClInclude Include="..\Header\FSM_ScoutC.h" />
     <ClInclude Include="..\Header\FSM_SpiderC.h" />
+    <ClInclude Include="..\Header\Function.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Loading.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="..\Code\FSM_RobotC.cpp" />
     <ClCompile Include="..\Code\FSM_ScoutC.cpp" />
     <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
+    <ClCompile Include="..\Code\Function.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />

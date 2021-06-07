@@ -130,6 +130,9 @@
     <Filter Include="04.Manager\00.ButtonManager">
       <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Function">
+      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -249,6 +252,9 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Function.h">
+      <Filter>06.Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -343,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Function.cpp">
+      <Filter>06.Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

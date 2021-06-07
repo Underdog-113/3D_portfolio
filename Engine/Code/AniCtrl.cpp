@@ -45,7 +45,7 @@ CAniCtrl* CAniCtrl::MakeClone(void)
 
 void CAniCtrl::Awake(void)
 {
-	CTextManager::GetInstance()->AddText(L"ANI", L"WOW", _float2(100, 100), _float2(100, 100), 10, 0, D3DXCOLOR(1, 1, 1, 1));
+	//CTextManager::GetInstance()->AddText(L"ANI", L"WOW", _float2(100, 100), _float2(100, 100), 10, 0, D3DXCOLOR(1, 1, 1, 1));
 	//ADD_TEXT(L"ANI", L"WOW", _float2(100, 100), D3DXCOLOR(1, 1, 1, 1));
 }
 

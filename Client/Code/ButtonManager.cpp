@@ -61,8 +61,6 @@ void CButtonManager::AddButtonList(CButton* buttonObject)
 void CButtonManager::UpButtonActivation()
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
-	mousePos.x += Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
-	mousePos.y = abs(mousePos.y - Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f);
 
 	for (auto& button : m_UpButtonList)
 	{
@@ -76,8 +74,6 @@ void CButtonManager::UpButtonActivation()
 void CButtonManager::DownButtonActivation()
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
-	mousePos.x += Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
-	mousePos.y = abs(mousePos.y - Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f);
 
 	for (auto& button : m_DownButtonList)
 	{
@@ -91,8 +87,6 @@ void CButtonManager::DownButtonActivation()
 void CButtonManager::PressButtonActivation()
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
-	mousePos.x += Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
-	mousePos.y = abs(mousePos.y - Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f);
 
 	for (auto& button : m_PressButtonList)
 	{

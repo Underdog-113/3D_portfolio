@@ -6,6 +6,8 @@
 BEGIN(Engine)
 class ENGINE_DLL CSlider final : public CObject
 {
+public:
+	enum ESliderDirection { LeftToRight, RightToLeft, BottomToTop, TopToBottom };
 	SMART_DELETER_REGISTER
 private:
 	CSlider();
@@ -38,11 +40,11 @@ private:
 private:
 	static _uint m_s_uniqueID;
 
-	GETTOR_SETTOR(_float, m_value, 1, Value);
-	GETTOR_SETTOR(_float, m_MaxValue, 1, MaxValue);
-	GETTOR_SETTOR(SP(CObject), m_spBackGround, nullptr, BackGround);
-	GETTOR_SETTOR(SP(CObject), m_spFill, nullptr, Fill);
-
+	GETTOR_SETTOR(_float, m_value, 1, Value)
+	GETTOR_SETTOR(_float, m_MaxValue, 1, MaxValue)
+	GETTOR_SETTOR(SP(CObject), m_spBackGround, nullptr, BackGround)
+	GETTOR_SETTOR(SP(CObject), m_spFill, nullptr, Fill)
+	GETTOR_SETTOR(ESliderDirection, m_direction, ESliderDirection::LeftToRight, Direction)
 };
 END
 #endif

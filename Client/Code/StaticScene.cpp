@@ -4,7 +4,7 @@
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "Camera.h"
-#include "Image.h"
+#include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
 

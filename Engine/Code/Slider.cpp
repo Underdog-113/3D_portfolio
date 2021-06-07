@@ -1,5 +1,7 @@
 #include "EngineStdafx.h"
 #include "Slider.h"
+#include "ImageObject.h"
+#include "Scene.h"
 
 USING(Engine)
 _uint CSlider::m_s_uniqueID = 0;

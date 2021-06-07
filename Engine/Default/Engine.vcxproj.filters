@@ -463,9 +463,6 @@
     <ClCompile Include="..\Code\ShaderManager.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Image.cpp">
-      <Filter>02.Objects\05.ImageObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
@@ -475,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\SliderShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ImageObject.cpp">
+      <Filter>02.Objects\05.ImageObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -704,9 +704,6 @@
     <ClInclude Include="..\Header\ShaderManager.h">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Image.h">
-      <Filter>02.Objects\05.ImageObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
@@ -716,6 +713,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\SliderShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ImageObject.h">
+      <Filter>02.Objects\05.ImageObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

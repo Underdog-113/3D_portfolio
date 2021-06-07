@@ -24,8 +24,13 @@ public:
 	void LateUpdate(void) override;
 
 	void PreRender(void) override;
+	void PreRender(LPD3DXEFFECT pEffect) override;
+
 	void Render(void) override;
+	void Render(LPD3DXEFFECT pEffect) override;
+
 	void PostRender(void) override;
+	void PostRender(LPD3DXEFFECT pEffect) override;
 
 	void OnDestroy(void) override;
 
