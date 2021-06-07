@@ -22,7 +22,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl)
 
 	_float3 sizedPos = _float3(ownerSize.x * m_rootMotionPos.x, ownerSize.y * m_rootMotionPos.y, ownerSize.z * m_rootMotionPos.z);
 
-	double timeline = pAniCtrl->GetTimer() / pAniCtrl->GetPeriod();
+	double timeline = pAniCtrl->GetFakeTimer() / pAniCtrl->GetFakePeriod();
 	int timeRepeat = (int)timeline;
 	timeline -= (double)timeRepeat;
 
