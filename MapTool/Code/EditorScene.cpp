@@ -56,7 +56,9 @@ void CEditorScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"BasicObject", (_uint)EDataID::BasicObject);
 	m_pDataStore->AddDataSection(L"Player", (_uint)EDataID::Player);
 	m_pDataStore->AddDataSection(L"Scene", (_uint)EDataID::Scene);
-	
+	m_pDataStore->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
+	m_pDataStore->AddDataSection(L"UI", (_uint)EDataID::UI);
+
 	m_pDataStore->InitDataForScene(L"StaticScene", true);
 	m_pMeshStore->InitMeshForScene(L"StaticScene", true);
 	m_pTextureStore->InitTextureForScene(L"StaticScene", true);
@@ -187,20 +189,22 @@ void CEditorScene::InputSetting()
 	{
 		Engine::CObject* pTarget = Engine::CInputManager::GetInstance()->MousePicking((_int)ELayerID::Player, intersection);
 
-		if (true == m_createMode)
+		if (true == m_createMode) // 클릭시 오브젝트 생성
 		{
-			SP(Engine::CObject) spCube
+			std::wstring fileName(m_pMenuView->GetCurSelFileName());
+
+			SP(Engine::CObject) spObj
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
-			spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-			spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spCube->AddComponent<Engine::CTextureC>();
-			spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spCube->GetTransform()->SetSize(1, 1, 1);
-			spCube->GetTransform()->SetPosition(intersection);
+			spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
+			spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			spObj->AddComponent<Engine::CTextureC>();
+			spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spObj->GetTransform()->SetSize(1, 1, 1);
+			spObj->GetTransform()->SetPosition(intersection);
 
 			std::cout << "create" << std::endl;
-			m_pCurSelectedObject = spCube.get();
+			m_pCurSelectedObject = spObj.get();
 		}
 		else if (nullptr != pTarget)
 		{

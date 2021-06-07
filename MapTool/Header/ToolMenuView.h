@@ -38,6 +38,19 @@ public:
 	void SetRotation(Engine::_float3 vRot);
 	void SetScale(Engine::_float3 vScale);
 	void SpinBtn(LPNMUPDOWN ppNMUpDown, CEdit* pBtn, Engine::_float fVal);
+	void SetChangeList(std::wstring sectionKey);
+
+	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnPosZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnRotX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnRotY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnRotZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnScaleX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnScaleY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnSelchangedMeshTree(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLbnSelchangeMeshList();
 
 private:
 	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
@@ -68,30 +81,20 @@ protected:
 	CSpinButtonCtrl m_spinScaleY;
 	CSpinButtonCtrl m_spinScaleZ;
 
-	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnPosZ(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnRotX(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnRotY(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnRotZ(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnScaleX(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnScaleY(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
-
 	short m_valueMin = 0;
 	short m_valueMax = 0;
 
+	CTreeCtrl m_meshTree;
+	CListBox m_meshTreeList;
+
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
-	CListBox m_TreeList;
-	CTreeCtrl m_Tree;
+	
 	CString m_curSelPath; // 리스트에서 선택한 메쉬의 경로
-	CString m_curSelFileName;
 	CString m_curObj;
 
+	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
 
-//public:
-//	//CButton m_arrCreateWay[2];
-//	//CButton m_arrObject[3];
+public:
 //	afx_msg void OnBnClickedObjectRadio();
 //	afx_msg void OnBnClickedBlock();
 //	afx_msg void OnBnClickedNavi();

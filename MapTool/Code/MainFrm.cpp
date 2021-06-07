@@ -104,8 +104,8 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	//SetWindowPos(NULL, 50, 50, 0, 0, SWP_NOSIZE);
 
 	m_mainSplitter.CreateStatic(this, 1, 2);
-	m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize(VIEWCX, VIEWCY), pContext);
-	m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CToolMenuView), CSize(VIEWCX, VIEWCY), pContext);
+	m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize((_int)VIEWCX, (_int)VIEWCY), pContext);
+	m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CToolMenuView), CSize((_int)VIEWCX, (_int)VIEWCY), pContext);
 
 	/////////////
 

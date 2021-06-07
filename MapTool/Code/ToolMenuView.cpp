@@ -51,8 +51,8 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SPIN6, m_spinScaleY);
 	DDX_Control(pDX, IDC_SPIN9, m_spinScaleZ);
 
-	//DDX_Control(pDX, IDC_TREE1, m_Tree);
-	//DDX_Control(pDX, IDC_LIST2, m_TreeList);
+	DDX_Control(pDX, IDC_TREE3, m_meshTree);
+	DDX_Control(pDX, IDC_LIST2, m_meshTreeList);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -67,6 +67,9 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN3, &CToolMenuView::OnScaleX)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN6, &CToolMenuView::OnScaleY)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN9, &CToolMenuView::OnScaleZ)
+
+	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE3, &CToolMenuView::OnTvnSelchangedMeshTree)
+	ON_LBN_SELCHANGE(IDC_LIST2, &CToolMenuView::OnLbnSelchangeMeshList)
 END_MESSAGE_MAP()
 
 
@@ -94,18 +97,17 @@ void CToolMenuView::OnInitialUpdate()
 	CFormView::OnInitialUpdate();
 
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-	//HTREEITEM hRoot[2];
-	//HTREEITEM hDynamicMeshChild[4];
-	//HTREEITEM hStaticMeshChild[1];
+	HTREEITEM root[2];
+	HTREEITEM dynamicMeshChild[3];
+	HTREEITEM staticMeshChild[1];
 
-	//hRoot[0] = m_Tree.InsertItem(L"DynamicMesh", 0, 1, TVI_ROOT, TVI_FIRST);
-	//hDynamicMeshChild[0] = m_Tree.InsertItem(L"Player", 1, 1, hRoot[0], TVI_FIRST);
-	//hDynamicMeshChild[1] = m_Tree.InsertItem(L"Boss", 1, 1, hRoot[0], TVI_LAST);
-	//hDynamicMeshChild[2] = m_Tree.InsertItem(L"Monster", 1, 1, hRoot[0], TVI_LAST);
-	//hDynamicMeshChild[3] = m_Tree.InsertItem(L"DynamicObject", 1, 1, hRoot[0], TVI_LAST);
+	root[0] = m_meshTree.InsertItem(L"Dynamic", 0, 1, TVI_ROOT, TVI_FIRST);
+	dynamicMeshChild[0] = m_meshTree.InsertItem(L"Player", 1, 1, root[0], TVI_FIRST);
+	dynamicMeshChild[1] = m_meshTree.InsertItem(L"Monster", 1, 1, root[0], TVI_LAST);
+	dynamicMeshChild[2] = m_meshTree.InsertItem(L"Object", 1, 1, root[0], TVI_LAST);
 
-	//hRoot[1] = m_Tree.InsertItem(L"StaticMesh", 0, 1, TVI_ROOT, TVI_LAST);
-	//hStaticMeshChild[0] = m_Tree.InsertItem(L"StaticObject", 1, 1, hRoot[1], TVI_FIRST);
+	root[1] = m_meshTree.InsertItem(L"Static", 0, 1, TVI_ROOT, TVI_LAST);
+	staticMeshChild[0] = m_meshTree.InsertItem(L"Object", 1, 1, root[1], TVI_FIRST);
 
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	m_posX.SetWindowTextW(_T("0.00"));
@@ -247,6 +249,30 @@ void CToolMenuView::OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult)
 	*pResult = 0;
 }
 
+void CToolMenuView::OnTvnSelchangedMeshTree(NMHDR * pNMHDR, LRESULT * pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	*pResult = 0;
+
+	HTREEITEM hItemCur;
+
+	hItemCur = pNMTreeView->itemNew.hItem;
+	m_curTreeItem = m_meshTree.GetItemText(hItemCur);
+	m_meshTreeList.ResetContent(); // 리스트박스 모든 내용 삭제
+
+	SetChangeList(L"Player");
+	SetChangeList(L"Monster");
+	SetChangeList(L"DynamicObject");
+	SetChangeList(L"StaticObject");
+}
+
+void CToolMenuView::OnLbnSelchangeMeshList()
+{
+	m_meshTreeList.GetText(m_meshTreeList.GetCurSel(), m_curSelFileName);
+	std::wcout << m_curSelFileName.GetString() << std::endl;
+}
+
 void CToolMenuView::SpinBtn(LPNMUPDOWN pNMUpDown, CEdit* pBtn, _float fVal)
 {
 	// 값 = 현재값 + 증/감
@@ -257,6 +283,19 @@ void CToolMenuView::SpinBtn(LPNMUPDOWN pNMUpDown, CEdit* pBtn, _float fVal)
 		CString cstrValue;
 		cstrValue.Format(_T("%.8f"), nValue);
 		pBtn->SetWindowTextW(cstrValue);
+	}
+}
+
+void CToolMenuView::SetChangeList(std::wstring sectionKey)
+{
+	std::vector<std::wstring> vMeshListWithSectionKey;
+
+	if (sectionKey.c_str() == m_curTreeItem)
+	{
+		Engine::GET_CUR_SCENE->GetMeshStore()->FindMeshesInSection(sectionKey, vMeshListWithSectionKey);
+
+		for (auto& meshKey : vMeshListWithSectionKey)
+			m_meshTreeList.AddString(meshKey.c_str());
 	}
 }
 

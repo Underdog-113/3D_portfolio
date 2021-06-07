@@ -52,7 +52,6 @@ void CMainApp::Start(void)
 	Engine::CSceneManager::GetInstance()->SceneChange(CInitScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
-	Engine::CShaderManager::GetInstance()->Start();
 
 
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
