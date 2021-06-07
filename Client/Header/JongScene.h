@@ -2,6 +2,7 @@
 #define JONGSCENE_H
 
 #include "Scene.h"
+class Engine::CObject;
 class CJongScene final : public Engine::CScene
 {
 private:
@@ -26,6 +27,14 @@ public:
 
 private:
 					void				InitPrototypes		(void) override;
+
+private:
+	Engine::CObject* m_obj;
+	Engine::CObject* m_obj1;
+	Engine::CObject* m_obj2;
+	Engine::CObject* m_obj3;
+	Engine::CObject* m_obj4;
+	int num = 0;
 };
 
 #endif

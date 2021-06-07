@@ -49,15 +49,15 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(10, 10, 10);
 
-		spEmptyObject
-			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
-
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
+		//
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		//spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
 
 		//spEmptyObject
 		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube1");

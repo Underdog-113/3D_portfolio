@@ -2,6 +2,7 @@
 #define CHANGMOSCENE_H
 
 #include "Scene.h"
+
 class CChangmoScene final : public Engine::CScene
 {
 private:

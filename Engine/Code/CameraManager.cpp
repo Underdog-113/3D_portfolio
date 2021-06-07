@@ -96,15 +96,15 @@ void CCameraManager::DeleteMainCam(void)
 
 void CCameraManager::SetMainCameraMode(void)
 {
-	if (IMKEY_DOWN(KEY_F1))		
+	if (IMKEY_PRESS(KEY_SHIFT) && IMKEY_DOWN(KEY_1))		
 		ChangeCameraMode(ECameraMode::Fixed);
-	else if (IMKEY_DOWN(KEY_F2))
+	else if (IMKEY_PRESS(KEY_SHIFT) && IMKEY_DOWN(KEY_2))
 		ChangeCameraMode(ECameraMode::Free);
-	else if (IMKEY_DOWN(KEY_F3))
+	else if (IMKEY_PRESS(KEY_SHIFT) && IMKEY_DOWN(KEY_3))
 		ChangeCameraMode(ECameraMode::Edit);
-	else if (IMKEY_DOWN(KEY_F4))
+	else if (IMKEY_PRESS(KEY_SHIFT) && IMKEY_DOWN(KEY_4))
 		ChangeCameraMode(ECameraMode::FPS);
-	else if (IMKEY_DOWN(KEY_F5))
+	else if (IMKEY_PRESS(KEY_SHIFT) && IMKEY_DOWN(KEY_5))
 		ChangeCameraMode(ECameraMode::TPS);
 }
 

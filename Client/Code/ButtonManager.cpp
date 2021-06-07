@@ -30,7 +30,7 @@ void CButtonManager::Update(void)
 
 void CButtonManager::OnDestroy(void)
 {
-
+	
 }
 
 void CButtonManager::AddButtonList(CButton* buttonObject)

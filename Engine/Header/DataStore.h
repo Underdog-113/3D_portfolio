@@ -14,6 +14,7 @@ public:
 				void					Free				(void);
 
 				void					Awake				(void) override;
+
 				void					OnDestroy			(void) override;
 
 				void					ClearCurResource	(void) override;

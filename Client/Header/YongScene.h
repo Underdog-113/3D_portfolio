@@ -2,6 +2,7 @@
 #define YONGSCENE_H
 
 #include "Scene.h"
+
 class CYongScene final : public Engine::CScene
 {
 private:
@@ -26,6 +27,7 @@ public:
 
 private:
 					void				InitPrototypes		(void) override;
+
 };
 
 #endif

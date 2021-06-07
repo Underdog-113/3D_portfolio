@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "YongScene.h"
+#include "FRC.h"
 
 
 CYongScene::CYongScene()
@@ -33,6 +34,10 @@ void CYongScene::Awake(_int numOfLayers)
 
 void CYongScene::Start(void)
 {
+	__super::Start();
+	{
+		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");
+	}
 }
 
 void CYongScene::FixedUpdate(void)
