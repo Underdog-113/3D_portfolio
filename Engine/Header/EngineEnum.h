@@ -4,7 +4,7 @@
 namespace Engine
 {
 #pragma region GraphicsEnum
-	//À©µµ¿ì µð½ºÇÃ·¹ÀÌ ¸ðµå
+	//Ã€Â©ÂµÂµÂ¿Ã¬ ÂµÃ°Â½ÂºÃ‡ÃƒÂ·Â¹Ã€ÃŒ Â¸Ã°ÂµÃ¥
 	enum class EDisplayMdoe
 	{
 		FullMode,
@@ -122,7 +122,7 @@ namespace Engine
 	enum class EComponentID
 	{
 		Transform				= 0,
-		Mesh					= 1,
+		Mesh					  = 1,
 		Texture					= 2,
 		Graphics				= 3,
 		RigidBody				= 4,
@@ -133,8 +133,9 @@ namespace Engine
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
-		StateMachine			= 99,
-		NumOfEngineComponentID	= 12
+        Text					= 12,
+		StateMachine			= 13,
+		NumOfEngineComponentID	= 14
 	};
 
 	enum class EChannelID
@@ -163,6 +164,7 @@ namespace Engine
 		DebugArrow			= 2,
 		DebugCollision		= 3,
 		Grid				= 4,
+		UI					= 5,
 		NumOfEngineLayerID	
 	};
 }

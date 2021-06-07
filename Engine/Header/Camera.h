@@ -78,7 +78,7 @@ private:
 	GETTOR_SETTOR	(_mat,					m_projMat,			{},						ProjMatrix)
 	GETTOR_SETTOR	(_mat,					m_orthoMat,			{},						OrthoMatrix)
 
-	GETTOR			(_float,				m_near,				0.1f,					Near)
+	GETTOR			(_float,				m_near,				1.f,					Near)
 	GETTOR			(_float,				m_far,				1000.f,					Far)
 	GETTOR			(_float,				m_FOV,				PI / 4,					FOV)
 

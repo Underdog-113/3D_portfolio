@@ -112,8 +112,23 @@
     <Filter Include="02.Objects\01.Monster\MO_Scout\FSM">
       <UniqueIdentifier>{d43ade6f-b909-4463-82fd-080a74f138fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\02.Particle">
-      <UniqueIdentifier>{34b4e680-7bcd-4e59-8771-a3dee0374401}</UniqueIdentifier>
+    <Filter Include="02.Objects\00.UI">
+      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI">
+      <UniqueIdentifier>{9a4dd51e-b568-43cb-8f9b-1e664f217001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\Button">
+      <UniqueIdentifier>{9f32d851-446a-495c-8aa2-112bc9cd81a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{826ecd7e-57f6-478d-b0d2-2d647b0cb897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.DeleGate">
+      <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\00.ButtonManager">
+      <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +243,15 @@
     <ClInclude Include="..\Header\TestParticle.h">
       <Filter>02.Objects\02.Particle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Button.h">
+      <Filter>02.Objects\00.UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ButtonManager.h">
+      <Filter>04.Manager\00.ButtonManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DeleGate.h">
+      <Filter>05.DeleGate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -316,6 +340,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\TestParticle.cpp">
       <Filter>02.Objects\02.Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Button.cpp">
+      <Filter>02.Objects\00.UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ButtonManager.cpp">
+      <Filter>04.Manager\00.ButtonManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DeleGate.cpp">
+      <Filter>05.DeleGate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

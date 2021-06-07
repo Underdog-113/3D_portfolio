@@ -4,6 +4,9 @@
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "Camera.h"
+#include "Image.h"
+#include "Button.h"
+
 #include "MO_Scout.h"
 #include "MO_Ninza.h"
 #include "MO_Axe.h"
@@ -13,6 +16,7 @@
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
 #include "Monster.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -96,11 +100,17 @@ void CStaticScene::InitSettings(void)
 
 void CStaticScene::InitPrototypes(void)
 {
-	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
+	SP(Engine::CEmptyObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spEmptyObjectPrototype);
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
+
+  SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spImageObject);
+
+	SP(CButton) spButtonObject(CButton::Create(true, this));
+	GetObjectFactory()->AddPrototype(spButtonObject);
 
 	SP(CMonster) spMO_Spider(CMO_Spider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Spider);
@@ -125,4 +135,5 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMonster) spMB_Bronya(CMB_Bronya::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMB_Bronya);
+
 }

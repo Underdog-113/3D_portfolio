@@ -118,8 +118,10 @@ namespace Engine
 	struct _Text
 	{
 		std::wstring	m_message;
-		_float3			m_position;
-		_float3			m_size;
+		_float2			m_position;
+		_float2			m_boxSize;
+		_int			m_fontSize;
+		DWORD			m_alignment;
 		D3DXCOLOR		m_color;
 		_bool			m_isVisible;
 	};
@@ -165,7 +167,22 @@ namespace Engine
 	const _float _INFINITY = FLT_MAX;
 
 #pragma endregion
+	struct _TextCom
+	{
+		_TextCom(std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible)
+		{
+			m_text.m_message = message;
+			m_text.m_position = position;
+			m_text.m_boxSize = boxSize;
+			m_text.m_fontSize = fontSize;
+			m_text.m_alignment = alignment;
+			m_text.m_color = color;
+			m_text.m_isVisible = isVisible;
+		}
 
+		LPD3DXFONT	m_pFont;
+		_Text m_text;
+	};
 }
 #endif // !ENGINESTRUCTURE_H            `
 

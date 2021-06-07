@@ -27,6 +27,7 @@ public:
 
 					void					MoveMouseToCenter		(void);
 					CObject*				MousePicking			(_int layerID, _float3& intersection);
+					CObject*				MousePickingLocal		(_int layerID, _float3& intersection);
 
 					_float3					GetMousePosDelta		(void);
 					void					ResetMousePosDelta		(void);
