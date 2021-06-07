@@ -193,6 +193,7 @@
     <ClInclude Include="..\Header\FSM_AxeC.h" />
     <ClInclude Include="..\Header\FSM_BronyaC.h" />
     <ClInclude Include="..\Header\FSM_GaneshaC.h" />
+    <ClInclude Include="..\Header\FSM_KianaC.h" />
     <ClInclude Include="..\Header\FSM_LancerC.h" />
     <ClInclude Include="..\Header\FSM_NinzaC.h" />
     <ClInclude Include="..\Header\FSM_RobotC.h" />
@@ -219,7 +220,6 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="FSM_Kiana_Define.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Button.cpp" />
@@ -230,6 +230,7 @@
     <ClCompile Include="..\Code\FSM_AxeC.cpp" />
     <ClCompile Include="..\Code\FSM_BronyaC.cpp" />
     <ClCompile Include="..\Code\FSM_GaneshaC.cpp" />
+    <ClCompile Include="..\Code\FSM_KianaC.cpp" />
     <ClCompile Include="..\Code\FSM_LancerC.cpp" />
     <ClCompile Include="..\Code\FSM_NinzaC.cpp" />
     <ClCompile Include="..\Code\FSM_RobotC.cpp" />

@@ -5,6 +5,7 @@
 
 #include "DynamicMeshData.h"
 #include "FSM_SpiderC.h"
+#include "FSM_KianaC.h"
 
 CJongScene::CJongScene()
 {
@@ -62,7 +63,7 @@ void CJongScene::Start(void)
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
 			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
 
-			spEmptyObject->AddComponent<FSM_SpiderC>();
+			spEmptyObject->AddComponent<CFSM_KianaC>();
 
 			spEmptyObject->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsRootMotion(true);
 

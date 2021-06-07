@@ -186,9 +186,6 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_Kiana_Define.h">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\FSM_SpiderC.h" />
     <ClInclude Include="..\Header\Kiana.h">
       <Filter>02.Objects\00.Player\00.Kiana</Filter>
@@ -253,6 +250,7 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FSM_KianaC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -352,6 +350,7 @@
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\FSM_KianaC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
