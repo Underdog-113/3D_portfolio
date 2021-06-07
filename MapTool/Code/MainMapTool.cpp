@@ -51,7 +51,6 @@ void CMainMapTool::Start(void)
 	InitStaticPrototype();
 
 	Engine::CGraphicsManager::GetInstance()->Start();
-	Engine::CShaderManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->SceneChange(CEditorScene::Create());
 	Engine::CGraphicsManager::GetInstance()->Start();
