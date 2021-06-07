@@ -44,6 +44,7 @@ void CParticleSystemC::Update(SP(CComponent) spThis)
 		boundingBox._max = _float3(10.f, 10.f, 10.f);
 		
 		CParticle* pt = new CParticle(&boundingBox, 300);
+		pt->Awake();
 		m_vParticles.emplace_back(pt);
 
 		InitParticleSetting(GET_DEVICE, L"star");
