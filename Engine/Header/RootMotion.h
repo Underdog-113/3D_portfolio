@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef ROOTMOTION_H
 #define ROOTMOTION_H
 
@@ -21,11 +23,12 @@ private:
 	GETTOR			(_bool*,	m_pIsFixRootMotionOffsets,	nullptr,		IsFixRootMotionOffsets)
 	GETTOR_SETTOR	(_bool,		m_isRootMotion,				false,			IsRootMotion)
 		
-	GETTOR			(_float3,	m_rootMotionOffset,			ZERO_VECTOR,	RootMotionOffset)
+	GETTOR_SETTOR	(_float3,	m_rootMotionOffset,			ZERO_VECTOR,	RootMotionOffset)
 	GETTOR_SETTOR	(_float3,	m_rootMotionPos,			ZERO_VECTOR,	RootMotionPos)
 
 	_float3 m_animStartPos = ZERO_VECTOR;
 	_float3 m_animEndPos = ZERO_VECTOR;
+	_float3 m_animEndPosLastFrame = ZERO_VECTOR;
 	double m_prevTimeLine = 0;
 	_uint m_prevFakeIndex = 0;
 };

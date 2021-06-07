@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef STATEMACHINECOMPONENT_H
 #define STATEMACHINECOMPONENT_H
 

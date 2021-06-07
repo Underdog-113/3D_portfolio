@@ -286,13 +286,14 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ENGINE_MODE;EXPORTS_ENGINE;_DEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
+      <AdditionalOptions>/Zm130 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

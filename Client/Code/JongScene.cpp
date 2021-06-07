@@ -66,6 +66,8 @@ void CJongScene::Start(void)
 			spEmptyObject->AddComponent<CFSM_KianaC>();
 
 			spEmptyObject->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsRootMotion(true);
+			Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(spEmptyObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+			pDM->GetAniCtrl()->SetReplay(true);
 
 			m_obj = spEmptyObject.get();
 

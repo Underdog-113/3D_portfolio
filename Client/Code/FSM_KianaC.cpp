@@ -42,7 +42,7 @@ void CFSM_KianaC::ATTACK_1_Enter(void)
 }
 
 void CFSM_KianaC::ATTACK_1_Update(float deltaTime)
-{
+{ 
 	if (Engine::IMKEY_DOWN(KEY_TAB))
 	{
 		ChangeState(L"RUN");
@@ -154,7 +154,7 @@ HRESULT CFSM_KianaC::Init_FSM_Setting()
 	CreateState(CFSM_KianaC, pState, ATTACK_2)
 		AddState(pState, L"ATTACK_2");
 
-	CreateState(CFSM_KianaC, pState, ATTACK_2)
+	CreateState(CFSM_KianaC, pState, RUN)
 		AddState(pState, L"RUN");
 	
 	CreateState(CFSM_KianaC, pState, StandBy)

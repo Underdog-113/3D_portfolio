@@ -31,12 +31,13 @@ public:
 													 _double smoothTime = 0.25,
 													 _float changeWeight = 0.9f);
 
+					void		ChangeFakeAniSet	(void);
+
 					void		Play				(void);
+					void		PlayFake			(void);
 					_bool		IsItEnd				(void);
 
-					void PlayFake();
 
-					void ChangeFakeAniSet();
 
 private:
 					_uint		FindIndexByName		(std::string const& name, LPD3DXANIMATIONSET pAS);
@@ -59,6 +60,8 @@ private:
 	GETTOR			(_float,						m_fakeTimerLastFrame,	0.f,		FakeTimerLastFrame)
 	GETTOR			(_double,						m_fakePeriod,	0,			FakePeriod)
 	GETTOR_SETTOR	(_bool,							m_isBlending,	false,		IsBlending)
+	GETTOR			(double,						m_savedDT,	0.f,			SavedDeltaTime)
+	GETTOR			(_bool,							m_isFakeAniStart,	false,	IsFakeAniStart)
 };
 END
 
