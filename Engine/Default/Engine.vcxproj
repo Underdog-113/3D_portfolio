@@ -65,6 +65,8 @@
     <ClInclude Include="..\Header\SkyBox.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
+    <ClInclude Include="..\Header\State.h" />
+    <ClInclude Include="..\Header\StateMachine.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\TextC.h" />
     <ClInclude Include="..\Header\TextManager.h" />
@@ -142,6 +144,8 @@
     <ClCompile Include="..\Code\SkyBox.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
+    <ClCompile Include="..\Code\State.cpp" />
+    <ClCompile Include="..\Code\StateMachine.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\TextC.cpp" />
     <ClCompile Include="..\Code\TextManager.cpp" />
