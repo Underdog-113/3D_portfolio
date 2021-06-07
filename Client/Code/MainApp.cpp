@@ -49,7 +49,6 @@ void CMainApp::Start(void)
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
 	Engine::CRenderTargetManager::GetInstance()->Start();
-	Engine::CShaderManager::GetInstance()->Start();
 }
 
 void CMainApp::FixedUpdate(void)

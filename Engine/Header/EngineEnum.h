@@ -19,8 +19,9 @@ namespace Engine
 		WireFrame		= 2,
 		AlphaTest		= 3,
 		AlphaBlend		= 4,
-		UI				= 5,
-		NumOfRenderID	= 6
+		Particle		= 5,
+		UI				= 6,
+		NumOfRenderID	= 7
 	};
 
 	//Camera Mdoe

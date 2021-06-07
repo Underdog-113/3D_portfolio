@@ -209,6 +209,7 @@
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\TestParticle.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="Resource.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\TestParticle.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />

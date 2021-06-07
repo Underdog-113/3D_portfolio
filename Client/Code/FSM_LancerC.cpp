@@ -15,8 +15,6 @@ SP(Engine::CComponent) FSM_LancerC::MakeClone(Engine::CObject * pObject)
 
 void FSM_LancerC::Awake(void)
 {
-	Engine::CState* pState;
-
 	if (FAILED(Init_FSM_Setting()))
 	{
 		MSG_BOX(__FILE__, L"FSM_LancerC Init_FSM_Setting Failed");

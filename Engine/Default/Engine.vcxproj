@@ -51,6 +51,7 @@
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
+    <ClInclude Include="..\Header\Particle.h" />
     <ClInclude Include="..\Header\RectTexC.h" />
     <ClInclude Include="..\Header\RectTexShader.h" />
     <ClInclude Include="..\Header\RenderComponent.h" />
@@ -126,6 +127,7 @@
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
+    <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\RectTexC.cpp" />
     <ClCompile Include="..\Code\RectTexShader.cpp" />
     <ClCompile Include="..\Code\RenderComponent.cpp" />
