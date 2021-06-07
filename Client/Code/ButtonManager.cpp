@@ -1,6 +1,8 @@
 #include "Stdafx.h"
 #include "ButtonManager.h"
 #include "Button.h"
+#include "InputManager.h"
+#include "WndApp.h"
 
 IMPLEMENT_SINGLETON(CButtonManager)
 void CButtonManager::Awake(void)
@@ -23,14 +25,15 @@ void CButtonManager::Update(void)
 	}
 	else if (Engine::IMKEY_PRESS(MOUSE_LEFT))
 	{
-		// 클릭된 버튼 색깔 변경
 		PressButtonActivation();
 	}
 }
 
 void CButtonManager::OnDestroy(void)
 {
-
+	m_UpButtonList.clear();
+	m_DownButtonList.clear();
+	m_PressButtonList.clear();
 }
 
 void CButtonManager::AddButtonList(CButton* buttonObject)
@@ -58,10 +61,11 @@ void CButtonManager::AddButtonList(CButton* buttonObject)
 void CButtonManager::UpButtonActivation()
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	mousePos.x += Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
+	mousePos.y = abs(mousePos.y - Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f);
 
 	for (auto& button : m_UpButtonList)
 	{
-		// 위치 스케일 좌표를넣어주면 true false를반환 하는 함수
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
 			button->FuncActivation();
@@ -71,27 +75,41 @@ void CButtonManager::UpButtonActivation()
 
 void CButtonManager::DownButtonActivation()
 {
-	//_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	mousePos.x += Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
+	mousePos.y = abs(mousePos.y - Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f);
 
+	for (auto& button : m_DownButtonList)
+	{
+		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
+		{
+			button->FuncActivation();
+		}
+	}
 }
 
 void CButtonManager::PressButtonActivation()
 {
-	//_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	mousePos.x += Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
+	mousePos.y = abs(mousePos.y - Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f);
 
+	for (auto& button : m_PressButtonList)
+	{
+		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
+		{
+			button->FuncActivation();
+		}
+	}
 }
 
 _bool CButtonManager::ButtonCollisionCheck(_float3 buttonPos, _float3 buttonScale, _float2 mousePos)
 {
-	_float2 boxDis;
-	boxDis.x = buttonPos.x - buttonScale.x;
-	boxDis.y = buttonPos.y - buttonScale.y;
-
 	_float2 pointDis;
-	pointDis.x = buttonPos.x - mousePos.x;
-	pointDis.y = buttonPos.y - mousePos.y;
+	pointDis.x = abs(buttonPos.x - mousePos.x);
+	pointDis.y = abs(buttonPos.y - mousePos.y);
 
-	if (boxDis.x >= pointDis.x && boxDis.y >= pointDis.y)
+	if (buttonScale.x >= pointDis.x && buttonScale.y >= pointDis.y)
 	{
 		return true;
 	}

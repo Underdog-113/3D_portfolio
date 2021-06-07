@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Image.h"
 #include "Button.h"
+#include "Slider.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -103,4 +104,7 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CButton) spButtonObject(CButton::Create(true, this));
 	GetObjectFactory()->AddPrototype(spButtonObject);
+
+	SP(Engine::CSlider) spSliderObject(Engine::CSlider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSliderObject);
 }

@@ -43,8 +43,6 @@ public:
 	}
 
 private:
-	void aa();
-
 
 private:
 	static		_uint				m_s_uniqueID;
