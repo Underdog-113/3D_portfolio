@@ -12,7 +12,7 @@
 /////////////////////////////////////
 
 #pragma region SubEngineIncludes
-#include "ShaderStore.h"
+#include "ShaderManager.h"
 #include "WndApp.h"
 #pragma endregion
 
@@ -35,7 +35,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Engine::CWndApp::GetInstance()->Awake();
 	Engine::CDeviceManager::GetInstance()->Awake();
 	Engine::CTextManager::GetInstance()->Awake();
-	Engine::CShaderStore::GetInstance()->Awake();
 	CMath::CMathHelper::GetInstance();
 #pragma endregion
 
@@ -45,7 +44,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Engine::CDeviceManager::GetInstance()->Start();
 	Engine::CFRC::GetInstance()->Start();
 	Engine::CTextManager::GetInstance()->Start();
-	Engine::CShaderStore::GetInstance()->Start();
 #pragma endregion
 
 	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
@@ -126,7 +124,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Engine::CFRC::GetInstance()->DestroyInstance();
 	CMath::CMathHelper::GetInstance()->DestroyInstance();
 	Engine::CTextManager::GetInstance()->DestroyInstance();
-	Engine::CShaderManager::GetInstance()->DestroyInstance();
 #pragma endregion
 	return (int)msg.wParam;
 }

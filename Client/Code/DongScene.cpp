@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DongScene.h"
-
+#include "Image.h"
+#include "Button.h"
 
 CDongScene::CDongScene()
 {
@@ -11,7 +12,7 @@ CDongScene::~CDongScene()
 {
 }
 
-Engine::CScene * CDongScene::Create(void)
+Engine::CScene* CDongScene::Create(void)
 {
 	CDongScene* pInstance = new CDongScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -33,6 +34,71 @@ void CDongScene::Awake(_int numOfLayers)
 
 void CDongScene::Start(void)
 {
+	__super::Start();
+	/*SP(Engine::CObject) spEmpty =
+		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");*/
+	
+	/*{
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetTransform()->SetSize(_float3(800, 500, 0));
+		image->GetTexture()->AddTexture(L"SealPatten3 #16871", 0);
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"바다", _float2(200, 200), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
+	}
+
+	{
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"Image", true, (_int)ELayerID::UI, L"sdfsdf"));
+		image->GetTransform()->SetPositionZ(0.2f);
+		image->GetTransform()->SetSize(_float3(800, 500, 0));
+		image->GetTexture()->AddTexture(L"Stage_Image", 0);
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"하늘", _float2(300, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
+	}
+
+	{
+		SP(Engine::CObject) image =
+			ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(400, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
+		image->GetComponent<Engine::CTextC>()->AddFontData(L"2", L"초심해", _float2(500, 300), _float2(200, 200), 50, 0, D3DXCOLOR(1, 0, 0, 1), true);
+	}*/
+
+	{
+		SP(CButton) image =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"0"));
+		image->GetTransform()->SetPosition(_float3(100,100, 0.0f));
+		image->GetTransform()->SetSize(_float3(100, 100, 0.0f));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(0, 0), _float2(200, 200), 10, 0, D3DXCOLOR(1, 0, 0, 1), true);
+
+		CDongScene* aa = new CDongScene();
+		aa->a = 10;
+		image->AddFunceData<void(CDongScene::*)(), CDongScene*>(&CDongScene::ObjectActivation, aa);
+	}
+
+	{
+		SP(CButton) image =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"2"));
+		image->GetTransform()->SetPosition(_float3(200, 100, 0.2f));
+		image->GetTransform()->SetSize(_float3(100, 100, 0.0f));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(0, 0), _float2(200, 200), 10, 0, D3DXCOLOR(1, 0, 0, 1), true);
+
+		CDongScene* aa = new CDongScene();
+		aa->a = 20;
+		image->AddFunceData<void(CDongScene::*)(), CDongScene*>(&CDongScene::ObjectActivation, aa);
+	}
+
+	{
+		SP(CButton) image =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"1"));
+		image->GetTransform()->SetPosition(_float3(300, 100, 0.1f));
+		image->GetTransform()->SetSize(_float3(100, 100, 0.0f));
+		image->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"심해", _float2(0, 0), _float2(200, 200), 10, 0, D3DXCOLOR(1, 0, 0, 1), true);
+
+		CDongScene* aa = new CDongScene();
+		aa->a = 30;
+		image->AddFunceData<void(CDongScene::*)(), CDongScene*>(&CDongScene::ObjectActivation, aa);
+	}
 }
 
 void CDongScene::FixedUpdate(void)
@@ -43,7 +109,6 @@ void CDongScene::FixedUpdate(void)
 void CDongScene::Update(void)
 {
 	__super::Update();
-
 }
 
 void CDongScene::LateUpdate(void)
@@ -73,3 +138,21 @@ void CDongScene::OnDisable(void)
 void CDongScene::InitPrototypes(void)
 {
 }
+
+void CDongScene::ObjectActivation(void)
+{
+	std::cout << a << std::endl;
+}
+
+/*
+Delegate<> m_functionGatee;
+
+m_functionGatee += std::bind(&CButton::aa, &CButton());
+m_functionGatee += ss;
+
+m_functionGatee();
+
+m_functionGatee -= ss;
+
+m_functionGatee();
+*/

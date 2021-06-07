@@ -180,12 +180,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\Button.h" />
+    <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
     <ClInclude Include="..\Header\ClientMacro.h" />
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
+    <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
     <ClInclude Include="..\Header\FSM_AxeC.h" />
     <ClInclude Include="..\Header\FSM_BronyaC.h" />
@@ -218,7 +221,10 @@
     <ClInclude Include="FSM_Kiana_Define.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\Button.cpp" />
+    <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
+    <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
     <ClCompile Include="..\Code\FSM_AxeC.cpp" />
     <ClCompile Include="..\Code\FSM_BronyaC.cpp" />

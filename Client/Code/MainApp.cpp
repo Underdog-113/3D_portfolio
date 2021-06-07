@@ -10,6 +10,8 @@
 #include "Camera.h"
 #pragma endregion
 
+
+
 CMainApp::CMainApp(void)
 {
 }
@@ -33,9 +35,12 @@ void CMainApp::Awake(void)
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
-	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
+	Engine::CRenderTargetManager::GetInstance()->Awake();
+	Engine::CShaderManager::GetInstance()->Awake();
 
+	//Client Manager
+	CButtonManager::GetInstance()->Awake();
 }
 
 void CMainApp::Start(void)
@@ -49,7 +54,9 @@ void CMainApp::Start(void)
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CShaderManager::GetInstance()->Start();
 
+
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CRenderTargetManager::GetInstance()->Start();
 }
 
 void CMainApp::FixedUpdate(void)
@@ -70,6 +77,7 @@ void CMainApp::Update(void)
 	Engine::CInputManager::GetInstance()->Update();
 
 	Engine::CSceneManager::GetInstance()->Update();
+	CButtonManager::GetInstance()->Update();
 	Engine::CCollisionManager::GetInstance()->Update();
 
 	Engine::CCameraManager::GetInstance()->Update();
@@ -100,9 +108,10 @@ void CMainApp::PreRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	Engine::CTextManager::GetInstance()->PreRender();
+	
 	Engine::CGraphicsManager::GetInstance()->PreRender();
-
+	Engine::CTextManager::GetInstance()->PreRender();
+	
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -114,8 +123,9 @@ void CMainApp::Render(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	Engine::CTextManager::GetInstance()->Render();
+	
 	Engine::CGraphicsManager::GetInstance()->Render();
+	Engine::CTextManager::GetInstance()->Render();
 
 
 	_float time = Engine::GET_ELAPSED_TIME;
@@ -127,9 +137,9 @@ void CMainApp::PostRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	Engine::CTextManager::GetInstance()->PostRender();
+	
 	Engine::CGraphicsManager::GetInstance()->PostRender();
-
+	Engine::CTextManager::GetInstance()->PostRender();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -142,7 +152,11 @@ void CMainApp::OnDestroy(void)
 	Engine::CCollisionManager::GetInstance()->DestroyInstance();
 	Engine::CSoundManager::GetInstance()->DestroyInstance();
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
+	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
+
+	//Client Manager
+	CButtonManager::GetInstance()->DestroyInstance();
 }
 
 void CMainApp::OnEnable(void)

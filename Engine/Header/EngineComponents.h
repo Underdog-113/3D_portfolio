@@ -9,13 +9,13 @@
 #include "RenderComponent.h"
 #include "TextureC.h"
 #include "DebugC.h"
-#include "BitmapC.h"
 #include "RectTexC.h"
 #include "MeshC.h"
+#include "ShaderC.h"
 #include "GraphicsC.h"
 
-
-
+// UI------------------------------------------------
+#include "TextC.h"
 
 // Physics------------------------------------------
 #include "RigidBodyC.h"

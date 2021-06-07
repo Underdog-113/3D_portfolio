@@ -74,10 +74,11 @@
 #include "DeviceManager.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
-#include "ShaderManager.h"
 #include "SoundManager.h"
 #include "TextManager.h"
-#include "ShaderStore.h"
+#include "ShaderManager.h"
+#include "LightManager.h"
+#include "RenderTargetManager.h"
 
 //ETC
 #include "MathHelper.h"

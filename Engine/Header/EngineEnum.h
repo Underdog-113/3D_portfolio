@@ -4,7 +4,7 @@
 namespace Engine
 {
 #pragma region GraphicsEnum
-	//À©µµ¿ì µð½ºÇÃ·¹ÀÌ ¸ðµå
+	//Ã€Â©ÂµÂµÂ¿Ã¬ ÂµÃ°Â½ÂºÃ‡ÃƒÂ·Â¹Ã€ÃŒ Â¸Ã°ÂµÃ¥
 	enum class EDisplayMdoe
 	{
 		FullMode,
@@ -59,18 +59,20 @@ namespace Engine
 		NumOfDebugMT	= 5
 	};
 
-	enum class EShaderType
-	{
-		Debug			= 0,
-		Texture			= 1,
-		UI				= 2,
-		NumOfShdaerType	= 3
-	};
-
 	enum class EShaderID
 	{
-		Basic			= 0,
-		NumOfShaderID	= 1
+		MeshShader				= 0,
+		RectTexShader			= 1,
+		DeferredBlendShader		= 2,
+		DeferredLightShader		= 3,
+		SkyBoxShader			= 4,
+		/*Shader_Sample	= 0,
+		Shader_Terrain	= 1,
+		Shader_Mesh		= 2,
+		Shader_Shade	= 3,
+		Shader_Blend	= 4,
+		Shader_Skybox	= 5,*/
+		NumOfShaderID	= 5
 	};
 #pragma endregion
 
@@ -96,7 +98,9 @@ namespace Engine
 	enum class EColliderID
 	{
 		CameraRay			= 0,
-		NumOfColliderID		= 1
+		Button				= 1,
+		Mouse				= 2,
+		NumOfColliderID		= 3
 	};
 
 	enum class EConstraint
@@ -117,19 +121,20 @@ namespace Engine
 	enum class EComponentID
 	{
 		Transform				= 0,
-		Mesh					= 1,
+		Mesh					  = 1,
 		Texture					= 2,
 		Graphics				= 3,
 		RigidBody				= 4,
 		Collision				= 5,
 		Camera					= 6,
-		Debug					= 7,
+		Debug					  = 7,
 		RectTex					= 8,
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
-		StateMachine			= 99,
-		NumOfEngineComponentID	= 12
+    Text					  = 12,
+		StateMachine			= 13,
+		NumOfEngineComponentID	= 14
 	};
 
 	enum class EChannelID
@@ -158,6 +163,7 @@ namespace Engine
 		DebugArrow			= 2,
 		DebugCollision		= 3,
 		Grid				= 4,
+		UI					= 5,
 		NumOfEngineLayerID	
 	};
 }

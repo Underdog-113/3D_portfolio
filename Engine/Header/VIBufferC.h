@@ -22,20 +22,29 @@ public:
 	virtual			void					LateUpdate			(SP(CComponent) spThis) PURE;
 
 	virtual			void					PreRender			(void);
+	//virtual			void					PreRender			(SP(CGraphicsC) spGC) {}
+	//virtual			void					PreRender			(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
+
 	virtual			void					Render				(void);
+	//virtual			void					Render				(SP(CGraphicsC) spGC) {}
+	//virtual			void					Render				(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
+
 	virtual			void					PostRender			(void);
+	//virtual			void					PostRender			(SP(CGraphicsC) spGC) {}
+	//virtual			void					PostRender			(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
 
 	virtual			void					OnDestroy			(void);
 
 	virtual			void					OnEnable			(void);
 	virtual			void					OnDisable			(void);
 
+
 protected:
 	typedef LPDIRECT3DVERTEXBUFFER9 _VERTEX_BUFFER;
 	typedef LPDIRECT3DINDEXBUFFER9  _INDEX_BUFFER;
 
 	GETTOR_REF		(_VERTEX_BUFFER,		m_pVertexBuffer,	nullptr,		VertexBuffer)
-	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,		nullptr,		Index)
+	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,		nullptr,		IndexBuffer)
 
 	GETTOR			(_ulong,				m_vtxSize,			UNDEFINED,		VertexSize)
 	GETTOR			(_ulong,				m_vtxCount,			UNDEFINED,		VertexCount)
