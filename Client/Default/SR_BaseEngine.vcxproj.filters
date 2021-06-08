@@ -46,9 +46,6 @@
     <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
       <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana">
-      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\00.Player">
       <UniqueIdentifier>{aae8ad2c-f49d-44a2-967c-9c648d86446d}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     </Filter>
     <Filter Include="04.Manager\00.ButtonManager">
       <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.Player\00.Kiana\FSM_Kiana">
+      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +251,9 @@
       <Filter>05.DeleGate</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_KianaC.h" />
+    <ClInclude Include="FSMDefine_Kiana.h">
+      <Filter>02.Objects\00.Player\00.Kiana\FSM_Kiana</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -19,6 +19,8 @@ public:
 	void		OnFixRootMotionOffset(_uint index);
 	void		OffFixRootMotionOffset(_uint index);
 
+	void		CreateFixOffsetArray(_uint size);
+
 private:
 	GETTOR			(_bool*,	m_pIsFixRootMotionOffsets,	nullptr,		IsFixRootMotionOffsets)
 	GETTOR_SETTOR	(_bool,		m_isRootMotion,				false,			IsRootMotion)

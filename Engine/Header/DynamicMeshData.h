@@ -41,6 +41,7 @@ public:
 															 _double smoothTime = 0.25,
 															 _float changeWeight = 0.9f);
 				void				PlayAnimation			(void);
+				double				GetAniTimeline			();
 
 				_DerivedD3DXFRAME*	GetFrameByName			(std::string name);
 				_bool				IsAnimationEnd			(void);

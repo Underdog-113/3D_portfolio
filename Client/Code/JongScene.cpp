@@ -48,7 +48,7 @@ void CJongScene::Start(void)
 			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject1->AddComponent<Engine::CTextureC>();
 			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject1->GetTransform()->SetSize(10, 10, 10);
+			spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
 
 			m_pivot = spEmptyObject1.get();
 		}
@@ -61,7 +61,7 @@ void CJongScene::Start(void)
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
+			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
 
 			spEmptyObject->AddComponent<CFSM_KianaC>();
 
@@ -71,17 +71,22 @@ void CJongScene::Start(void)
 			m_obj = spEmptyObject.get();
 
 			m_pivot->GetTransform()->SetParent(m_obj->GetTransform());
+
+			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject)
+				;
 		}
 
 		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
 
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-			spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"S02");
+			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
-
+			//spEmptyObject->GetTransform()->SetSize(100, 1, 10);
+			//spEmptyObject->GetTransform()->SetRotationY(D3DXToRadian(-90));
+			//spEmptyObject->GetTransform()->SetPositionY(-0.5);
 		}
 /*
 		{

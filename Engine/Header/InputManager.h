@@ -35,6 +35,7 @@ private:
 					void					KeyUpdate				(void);
 					void					MouseUpdate				(void);
 
+					void					KeyUpdate_Extend		(void);
 
 					_float3					GetPickingDirection		(void);
 					_bool					RayIntersectCheck		(_float rayAxisDir, _float rayAxisStart,
@@ -43,6 +44,9 @@ private:
 private:
 					DWORD					m_key			= 0;
 					DWORD					m_lastFrameKey	= 0;
+
+					DWORD					m_key_extend			= 0;
+					DWORD					m_lastFrameKey_extend	= 0;
 
 	
 	GETTOR			(_float3,				m_mousePos,				ZERO_VECTOR,		MousePos)
