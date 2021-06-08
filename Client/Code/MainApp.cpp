@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MainApp.h"
 #include "Object.h"
-
+#include "WndApp.h"
 #pragma region IncludeScenes
 #include "InitScene.h"
 #pragma endregion
@@ -52,8 +52,6 @@ void CMainApp::Start(void)
 	Engine::CSceneManager::GetInstance()->SceneChange(CInitScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
-
-
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
 	Engine::CRenderTargetManager::GetInstance()->Start();
 }
@@ -88,6 +86,14 @@ void CMainApp::Update(void)
 
 void CMainApp::LateUpdate(void)
 {
+	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
+	{
+		_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+
+		std::cout << mousePos.x << std::endl;
+		std::cout << mousePos.y << std::endl;
+	}
+
 	Engine::TIME_MEASURE_START;
 
 	Engine::CInputManager::GetInstance()->LateUpdate();

@@ -37,14 +37,12 @@ public:
 	void FuncActivation();
 
 	template<typename Function, typename Object>
-	void AddFunceData(Function function, Object object)
+	void AddFuncData(Function function, Object object)
 	{
 		m_functionGate += std::bind(function, object);
 	}
 
 private:
-	void aa();
-
 
 private:
 	static		_uint				m_s_uniqueID;

@@ -24,7 +24,7 @@ public:
 					void				OnDisable			(void) override;
 
 public:
-					void				AddShader			(_int shaderID);
+					CShader*			AddShader			(_int shaderID);
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Shader;
 

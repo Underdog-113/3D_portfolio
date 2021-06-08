@@ -192,8 +192,8 @@ GET_5TH_ARG(__VA_ARGS__, ADD_CLONE4, ADD_CLONE3, ADD_CLONE2, ADD_CLONE1, )
 GetObjectFactory()->AddPrototype(spPrototype)
 
 //FontManager Macro
-#define ADD_TEXT(key, text, position, color)										\
-CTextManager::GetInstance()->AddText(key, text, position, color)
+#define ADD_TEXT(key, text, position, boxsize, fontsize, alignment, color)										\
+CTextManager::GetInstance()->AddText(key, text, position, boxsize, fontsize, alignment, color)
 
 #define REWRITE_TEXT(key, text) CTextManager::GetInstance()->RewriteText(key, text)
 #define DELETE_TEXT(key) CTextManager::GetInstance()->DeleteText(key)

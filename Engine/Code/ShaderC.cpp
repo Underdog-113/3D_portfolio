@@ -81,7 +81,10 @@ void CShaderC::OnDisable(void)
 	__super::OnDisable();
 }
 
-void CShaderC::AddShader(_int shaderID)
+CShader* CShaderC::AddShader(_int shaderID)
 {
-	m_vShaders.emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
+	CShader* pShader = CShaderManager::GetInstance()->GetShader(shaderID);
+	m_vShaders.emplace_back(pShader);
+
+	return pShader;
 }
