@@ -75,5 +75,4 @@ void CDeviceManager::InitDevice(void)
 	}
 	m_pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-	m_pDevice->SetRenderState(D3DRS_STENCILENABLE, TRUE);
 }

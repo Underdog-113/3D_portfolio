@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "ScrollViewObject.h"
-
+#include "DeviceManager.h"
 USING(Engine)
 _uint CScrollViewObject::m_s_uniqueID = 0;
 CScrollViewObject::CScrollViewObject()
@@ -62,6 +62,7 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(void)
 {
+
 }
 
 void CScrollViewObject::Render(void)
