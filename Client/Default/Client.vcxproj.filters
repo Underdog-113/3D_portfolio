@@ -261,12 +261,14 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\FSM_KianaC.h" />
     <ClInclude Include="FSMDefine_Kiana.h">
       <Filter>02.Objects\00.Player\00.Kiana\FSM_Kiana</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Function.h">
       <Filter>06.Function</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_KianaC.h">
+      <Filter>02.Objects\00.Player\00.Kiana\00.FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_KianaC.h">
       <Filter>02.Objects\00.Player\00.Kiana\00.FSM</Filter>
@@ -383,13 +385,9 @@
     <Image Include="small.ico">
       <Filter>99.Default</Filter>
     </Image>
-    <Image Include="SR_BaseEngine.ico">
-      <Filter>99.Default</Filter>
-    </Image>
+    <Image Include="Client.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SR_BaseEngine.rc">
-      <Filter>99.Default</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="Client.rc" />
   </ItemGroup>
 </Project>
