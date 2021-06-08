@@ -259,9 +259,6 @@
     <Filter Include="02.Objects\07.Slider">
       <UniqueIdentifier>{cb9532cb-c7c5-45e5-ac6d-50a236eb5fd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\06.ScrollView">
-      <UniqueIdentifier>{127b4517-aa04-4705-b379-4d0e13285e3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader">
       <UniqueIdentifier>{f2ded281-a3b6-4d41-85a6-c0d3aaa3d2ca}</UniqueIdentifier>
     </Filter>
@@ -484,9 +481,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\ImageObject.cpp">
       <Filter>02.Objects\05.ImageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScrollViewObject.cpp">
-      <Filter>02.Objects\06.ScrollView</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Slider.cpp">
       <Filter>02.Objects\07.Slider</Filter>
@@ -737,9 +731,6 @@
     </ClInclude>
     <ClInclude Include="..\Header\ImageObject.h">
       <Filter>02.Objects\05.ImageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScrollViewObject.h">
-      <Filter>02.Objects\06.ScrollView</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Slider.h">
       <Filter>02.Objects\07.Slider</Filter>

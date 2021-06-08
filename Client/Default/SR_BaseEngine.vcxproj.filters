@@ -118,9 +118,6 @@
     <Filter Include="03.Component\00.UI">
       <UniqueIdentifier>{9a4dd51e-b568-43cb-8f9b-1e664f217001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\00.UI\Button">
-      <UniqueIdentifier>{9f32d851-446a-495c-8aa2-112bc9cd81a0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Manager">
       <UniqueIdentifier>{826ecd7e-57f6-478d-b0d2-2d647b0cb897}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,12 @@
     </Filter>
     <Filter Include="06.Function">
       <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\00.Button">
+      <UniqueIdentifier>{9f32d851-446a-495c-8aa2-112bc9cd81a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\01.ScrollView">
+      <UniqueIdentifier>{3ffe2031-0a43-4c55-8d8b-6a26eb2e63c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +250,7 @@
       <Filter>02.Objects\01.Monster\MB_Bronya\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Button.h">
-      <Filter>02.Objects\00.UI\Button</Filter>
+      <Filter>02.Objects\00.UI\00.Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonManager.h">
       <Filter>04.Manager\00.ButtonManager</Filter>
@@ -257,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Function.h">
       <Filter>06.Function</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScrollViewObject.h">
+      <Filter>02.Objects\00.UI\01.ScrollView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -345,7 +351,7 @@
       <Filter>02.Objects\01.Monster\MB_Bronya\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Button.cpp">
-      <Filter>02.Objects\00.UI\Button</Filter>
+      <Filter>02.Objects\00.UI\00.Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonManager.cpp">
       <Filter>04.Manager\00.ButtonManager</Filter>
@@ -355,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Function.cpp">
       <Filter>06.Function</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScrollViewObject.cpp">
+      <Filter>02.Objects\00.UI\01.ScrollView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
