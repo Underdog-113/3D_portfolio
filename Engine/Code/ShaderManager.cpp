@@ -9,6 +9,7 @@
 #include "DeferredBlendShader.h"
 #include "DeferredLightShader.h"
 #include "WaterShader.h"
+#include "SliderShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -21,6 +22,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CDeferredBlendShader::Create());
 	m_vShaders.emplace_back(CDeferredLightShader::Create());
 	m_vShaders.emplace_back(CWaterShader::Create());
+	m_vShaders.emplace_back(CSliderShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -58,6 +60,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::SkyBoxShader;
 	else if (shaderName == L"WaterShader")
 		return (_int)EShaderID::WaterShader;
+	else if (shaderName == L"SliderShader")
+		return (_int)EShaderID::SliderShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");

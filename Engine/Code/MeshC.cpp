@@ -1,15 +1,15 @@
 #include "EngineStdafx.h"
- 
-#include "MeshStore.h"
-#include "DataStore.h"
+#include "MeshC.h"
 #include "Object.h"
-
 #include "StaticMeshData.h"
 #include "DynamicMeshData.h"
+#include "RootMotion.h"
+#include "AniCtrl.h"
 
 USING(Engine)
 CMeshC::CMeshC(void)
 {
+
 }
 
 
@@ -31,6 +31,7 @@ SP(CComponent) CMeshC::MakeClone(CObject* pObject)
 	spClone->m_meshSize		= m_meshSize;
 	spClone->m_initTex		= m_initTex;
 
+	spClone->m_pRootMotion	= new CRootMotion;
 	return spClone;
 }
 
@@ -58,6 +59,8 @@ void CMeshC::Awake(void)
 
 		GenMinMaxVtx();
 	}
+
+	m_pRootMotion = new CRootMotion;
 }
 
 void CMeshC::Start(SP(CComponent) spThis)
@@ -73,6 +76,7 @@ void CMeshC::Start(SP(CComponent) spThis)
 				spOwnerTexC->AddTexture(RemoveExtension(m_vMeshDatas[i]->GetTexList()[j]), i);
 		}
 	}
+
 }
 
 void CMeshC::FixedUpdate(SP(CComponent) spThis)
@@ -135,20 +139,22 @@ void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 
 void CMeshC::OnDestroy(void)
 {
+	SAFE_DELETE(m_pRootMotion);
+
 	for (auto& meshData : m_vMeshDatas)
-		meshData->FreeClone();
+		meshData->FreeClone();	
 }
 
 void CMeshC::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
 void CMeshC::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
 void CMeshC::AddMeshData(CMeshData * pMeshData)
@@ -190,6 +196,46 @@ void CMeshC::GenMinMaxVtx(void)
 	if(m_vMeshDatas.size() != 0)
 		m_meshSize = m_maxVertex - m_minVertex;
 }
+
+void CMeshC::OnRootMotion(void)
+{
+	m_pRootMotion->SetIsRootMotion(true);
+}
+
+void CMeshC::OffRootMotion(void)
+{
+	m_pRootMotion->SetIsRootMotion(false);
+}
+
+void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM, _float3 * rootMotionMoveAmount)
+{
+	if (m_pRootMotion->GetIsRootMotion())
+	{
+		CAniCtrl* aniCtrl = pDM->GetAniCtrl();
+
+		aniCtrl->GetFakeAniCtrl()->AdvanceTime(0, NULL);
+		pDM->UpdateFrame();
+
+		// Get First Bone("Bip001"?) TransformCombinedMatrix
+		_mat makeMeshLookAtMe;
+		D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+		_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+		_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+		*rootMotionMoveAmount = _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
+
+		// Set RootMotion Move Amount
+		m_pRootMotion->SetRootMotionPos(*rootMotionMoveAmount);
+
+		// Set Start Offset for Loop Animation
+		if (aniCtrl->GetIsFakeAniEnd())
+			m_pRootMotion->SetRootMotionOffset(*rootMotionMoveAmount);
+
+		// Apply Root Motion 
+		m_pRootMotion->RootMotionMove(m_pOwner, aniCtrl);
+	}
+}
+
 
 void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex)
 {
@@ -235,8 +281,19 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 {
 	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
 
+	// root motion
+	_float3 rootMotionMoveAmount = ZERO_VECTOR;
+	ApplyRootMotion(pDM, &rootMotionMoveAmount);
+
 	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
 	pDM->UpdateFrame();
+
+	_mat makeMeshLookAtMe;
+	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+	_mat rootCombMat		= pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+	_mat rootChildCombMat	= pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+	rootMotionMoveAmount	= _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
 
 	for (auto& meshContainer : pDM->GetMeshContainers())
 	{
@@ -244,6 +301,10 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		{
 			meshContainer->pRenderingMatrix[i] =
 				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
+
+			meshContainer->pRenderingMatrix[i]._41 -= rootMotionMoveAmount.x;
+			meshContainer->pRenderingMatrix[i]._42 -= rootMotionMoveAmount.y;
+			meshContainer->pRenderingMatrix[i]._43 -= rootMotionMoveAmount.z;
 		}
 
 		void* pSrcVertex = nullptr;
@@ -253,8 +314,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		meshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
 
 		meshContainer->pSkinInfo->UpdateSkinnedMesh(meshContainer->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
-
-		
 
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
@@ -308,7 +367,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 					pass = 0;
 
 				pEffect->SetTexture("g_BaseTexture", pTexData[meshIndex][meshContainer->texIndexStart + i]->pTexture);
-				
+
 			}
 			else
 			{
@@ -324,4 +383,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
 		meshContainer->pOriMesh->UnlockVertexBuffer();
 	}
+
 }
+

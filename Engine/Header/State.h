@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef STATE_H
 #define STATE_H
 
@@ -11,7 +13,9 @@ class ENGINE_DLL CState
 public:
 	explicit	CState		(void);
 				~CState		(void);
-    CState*        MakeClone();
+
+	CState*		MakeClone();
+
 public:
 	void DoInit();
 	void DoEnter();

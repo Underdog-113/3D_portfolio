@@ -13,6 +13,7 @@ SP(Engine::CComponent) FSM_SpiderC::MakeClone(Engine::CObject * pObject)
 
 	return spClone;
 }
+
 void FSM_SpiderC::Awake(void)
 {
 	if (FAILED(Init_FSM_Setting()))
@@ -25,9 +26,9 @@ void FSM_SpiderC::Awake(void)
 }
 
 void FSM_SpiderC::Start(SP(CComponent) spThis)
-{	
+{
 	SetStartState(L"StandBy");
-	__super::Start(spThis);	
+	__super::Start(spThis);
 }
 
 void FSM_SpiderC::ATTACK_1_Init(void)
@@ -381,7 +382,7 @@ void FSM_SpiderC::StandBy_Init(void)
 
 void FSM_SpiderC::StandBy_Enter(void)
 {
-	
+
 }
 
 void FSM_SpiderC::StandBy_Update(float deltaTime)
@@ -580,4 +581,84 @@ HRESULT FSM_SpiderC::Init_FSM_Setting()
 
 	return S_OK;
 }
-
+//
+//void FSM_SpiderC::ATTACK_2_Init(void)
+//{
+//}
+//
+//void FSM_SpiderC::ATTACK_2_Enter(void)
+//{
+//	Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+//	pDM->ChangeAniSet(2);
+//}
+//
+//void FSM_SpiderC::ATTACK_2_Update(float deltaTime)
+//{
+//	if (Engine::IMKEY_DOWN(KEY_TAB))
+//	{
+//		ChangeState(L"RUN");
+//		return;
+//	}
+//
+//	if (Engine::IMKEY_DOWN(KEY_Z))
+//	{
+//		ChangeState(L"ATTACK_1");
+//		return;
+//	}
+//}
+//
+//void FSM_SpiderC::ATTACK_2_End(void)
+//{
+//}
+//
+//void FSM_SpiderC::RUN_Init(void)
+//{
+//}
+//
+//void FSM_SpiderC::RUN_Enter(void)
+//{
+//	Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+//	pDM->ChangeAniSet(40);
+//}
+//
+//void FSM_SpiderC::RUN_Update(float deltaTime)
+//{
+//	if (Engine::IMKEY_DOWN(KEY_TAB))
+//	{
+//		ChangeState(L"StandBy");
+//		return;
+//	}
+//	if (Engine::IMKEY_DOWN(KEY_Z))
+//	{
+//		ChangeState(L"ATTACK_1");
+//		return;
+//	}
+//
+//}
+//
+//void FSM_SpiderC::RUN_End(void)
+//{
+//}
+//
+//void FSM_SpiderC::StandBy_Init(void)
+//{
+//}
+//
+//void FSM_SpiderC::StandBy_Enter(void)
+//{
+//	Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+//	pDM->ChangeAniSet(47);
+//}
+//
+//void FSM_SpiderC::StandBy_Update(float deltaTime)
+//{
+//	if (Engine::IMKEY_DOWN(KEY_TAB))
+//	{
+//		ChangeState(L"RUN");
+//		return;
+//	}
+//}
+//
+//void FSM_SpiderC::StandBy_End(void)
+//{
+//}

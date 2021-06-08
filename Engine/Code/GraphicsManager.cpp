@@ -35,9 +35,6 @@ void CGraphicsManager::Start(void)
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CONSTANT);
-
-
-
 }
 
 void CGraphicsManager::FixedUpdate(void)

@@ -38,7 +38,7 @@ void CInitScene::Free(void)
 void CInitScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	
+
 }
 
 void CInitScene::Start(void)
@@ -52,7 +52,7 @@ void CInitScene::Start(void)
 	m_pTextureStore->InitTextureForScene(m_objectKey);
 
 	InitPrototypes();
-	
+
 	m_pLoading = CLoading::Create(CStaticScene::Create(), true);
 
 	SP(Engine::CCamera) spCameraObject =
@@ -60,7 +60,7 @@ void CInitScene::Start(void)
 
 	Engine::CCameraManager::GetInstance()->AddCamera(L"InitSceneBasicCamera", spCameraObject);
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
-	
+
 	m_pBackground =
 		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
 
