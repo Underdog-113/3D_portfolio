@@ -44,7 +44,7 @@ CAniCtrl* CAniCtrl::MakeClone(void)
 										 m_pAniCtrl->GetMaxNumTracks(),
 										 m_pAniCtrl->GetMaxNumEvents(),
 										 &pClone->m_pFakeAniCtrl);
-
+	m_replay = true;
 	return pClone;
 }
 
@@ -227,32 +227,30 @@ void CAniCtrl::PlayFake()
 		if (remainTime < 0)
 			remainTime = 0;
 
-		if (m_isBlending)
-		{
-			ChangeFakeAniSet();
-			m_isBlending = false;
-		}
+		//if (m_isBlending)
+		//{
+		//	ChangeFakeAniSet();
+		//	m_isBlending = false;
+		//}
 
-		m_pFakeAniCtrl->AdvanceTime(0, NULL);
-		m_savedDT = remainTime;
+		m_pFakeAniCtrl->AdvanceTime(remainTime, NULL);
+		//m_savedDT = remainTime;
 		m_fakeTimer = (_float)remainTime;
 
-		m_isFakeAniStart = true;
+		m_isFakeAniEnd = true;
 		return;
 	}
-	else
-	{
-		m_isFakeAniStart = false;
-	}
 
-	if (m_savedDT > 0)
-	{
-		m_pFakeAniCtrl->AdvanceTime((m_savedDT + deltaTime) * m_speed, NULL);
-		m_savedDT = 0;
-	}		
-	else
-		m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
+	//if (m_savedDT > 0)
+	//{
+	//	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
+	//	//m_savedDT = 0;
+	//	m_isFakeAniEnd = false;
+	//}		
+	//else
+	//	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
 
+	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
 	m_fakeTimerLastFrame = m_fakeTimer;
 
 }

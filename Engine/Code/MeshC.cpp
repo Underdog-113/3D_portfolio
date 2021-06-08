@@ -10,6 +10,7 @@
 #include "StaticMeshData.h"
 #include "DynamicMeshData.h"
 #include "RootMotion.h"
+#include "AniCtrl.h"
 
 USING(Engine)
 CMeshC::CMeshC(void)
@@ -35,7 +36,8 @@ SP(CComponent) CMeshC::MakeClone(CObject* pObject)
 	spClone->m_maxVertex	= m_maxVertex;
 	spClone->m_meshSize		= m_meshSize;
 	spClone->m_initTex		= m_initTex;
-	spClone->m_RootMotion	= new CRootMotion;
+
+	spClone->m_pRootMotion	= new CRootMotion;
 	return spClone;
 }
 
@@ -64,7 +66,7 @@ void CMeshC::Awake(void)
 		GenMinMaxVtx();
 	}
 
-	m_RootMotion = new CRootMotion;
+	m_pRootMotion = new CRootMotion;
 }
 
 void CMeshC::Start(SP(CComponent) spThis)
@@ -143,10 +145,10 @@ void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 
 void CMeshC::OnDestroy(void)
 {
-	for (auto& meshData : m_vMeshDatas)
-		meshData->FreeClone();
+	SAFE_DELETE(m_pRootMotion);
 
-	delete m_RootMotion;
+	for (auto& meshData : m_vMeshDatas)
+		meshData->FreeClone();	
 }
 
 void CMeshC::OnEnable(void)
@@ -200,6 +202,46 @@ void CMeshC::GenMinMaxVtx(void)
 	if(m_vMeshDatas.size() != 0)
 		m_meshSize = m_maxVertex - m_minVertex;
 }
+
+void CMeshC::OnRootMotion(void)
+{
+	m_pRootMotion->SetIsRootMotion(true);
+}
+
+void CMeshC::OffRootMotion(void)
+{
+	m_pRootMotion->SetIsRootMotion(false);
+}
+
+void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM, _float3 * rootMotionMoveAmount)
+{
+	if (m_pRootMotion->GetIsRootMotion())
+	{
+		CAniCtrl* aniCtrl = pDM->GetAniCtrl();
+
+		aniCtrl->GetFakeAniCtrl()->AdvanceTime(0, NULL);
+		pDM->UpdateFrame();
+
+		// Get First Bone("Bip001"?) TransformCombinedMatrix
+		_mat makeMeshLookAtMe;
+		D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+		_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+		_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+		*rootMotionMoveAmount = _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
+
+		// Set RootMotion Move Amount
+		m_pRootMotion->SetRootMotionPos(*rootMotionMoveAmount);
+
+		// Set Start Offset for Loop Animation
+		if (aniCtrl->GetIsFakeAniEnd())
+			m_pRootMotion->SetRootMotionOffset(*rootMotionMoveAmount);
+
+		// Apply Root Motion 
+		m_pRootMotion->RootMotionMove(m_pOwner, aniCtrl);
+	}
+}
+
 
 void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex)
 {
@@ -350,31 +392,3 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 
 }
 
-void CMeshC::ApplyRootMotion(CDynamicMeshData* pDynamicMeshDate, _float3 * rootMotionMoveAmount)
-{
-	if (m_RootMotion->GetIsRootMotion())
-	{
-		pDynamicMeshDate->GetAniCtrl()->GetFakeAniCtrl()->AdvanceTime(0, NULL);
-		pDynamicMeshDate->UpdateFrame();
-
-		// Get First Bone("Bip001"?) TransformCombinedMatrix
-		_mat makeMeshLookAtMe;
-		D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
-		_mat rootCombMat		= pDynamicMeshDate->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
-		_mat rootChildCombMat	= pDynamicMeshDate->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
-
-		*rootMotionMoveAmount = _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
-
-		// Set RootMotion Move Amount
-		m_RootMotion->SetRootMotionPos(*rootMotionMoveAmount);
-
-		// Set Start Offset for Loop Animation
-		if (pDynamicMeshDate->GetAniCtrl()->GetIsFakeAniStart())
-			m_RootMotion->SetRootMotionOffset(*rootMotionMoveAmount);
-
-		// Apply Root Motion 
-		m_RootMotion->RootMotionMove(m_pOwner, pDynamicMeshDate->GetAniCtrl());
-	}
-
-
-}

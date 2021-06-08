@@ -65,9 +65,8 @@ void CJongScene::Start(void)
 
 			spEmptyObject->AddComponent<CFSM_KianaC>();
 
-			spEmptyObject->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsRootMotion(true);
-			Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(spEmptyObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-			pDM->GetAniCtrl()->SetReplay(true);
+			spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
+
 
 			m_obj = spEmptyObject.get();
 
@@ -147,7 +146,7 @@ void CJongScene::FixedUpdate(void)
 
 void CJongScene::Update(void)
 {
-	__super::Update();
+	__super::Update();          
 //	if (Engine::IMKEY_DOWN(KEY_TAB))
 //	{
 //		++num;

@@ -7,8 +7,8 @@ BEGIN(Engine)
 
 class CMeshData;
 class CGraphicsC;
-class CRootMotion;
 class CDynamicMeshData;
+class CRootMotion;
 class ENGINE_DLL CMeshC final : public CRenderComponent
 {
 public:
@@ -41,6 +41,10 @@ public:
 			void				AddMeshData		(CMeshData* pMeshData);
 			void				AddMeshData		(std::wstring meshKey);
 			void				GenMinMaxVtx	(void);
+			
+			void				OnRootMotion	(void);
+			void				OffRootMotion	(void);
+			void				ApplyRootMotion (CDynamicMeshData* pDM, _float3* rootMotionMoveAmount);
 
 private:
 			void				RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
@@ -48,8 +52,6 @@ private:
 
 			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
 			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex, LPD3DXEFFECT pEffect);
-
-			void				ApplyRootMotion	(CDynamicMeshData* pDynamicMeshDate, _float3* rootMotionMoveAmount);
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Mesh;
@@ -61,11 +63,9 @@ private:
 	GETTOR			(_float3,	m_meshSize,		ZERO_VECTOR,	MeshSize)
 	GETTOR			(_float3,	m_minVertex,	MAX_VECTOR,		MinVertex)
 	GETTOR			(_float3,	m_maxVertex,	-MAX_VECTOR,	MaxVertex)
-	GETTOR_SETTOR	(_bool,		m_initTex,		false,			InitTex)
-
+	GETTOR_SETTOR	(_bool,		m_initTex,		false,			InitTex)	
+	GETTOR			(CRootMotion*,			m_pRootMotion,			nullptr,	RootMotion);
 		
-	GETTOR			(CRootMotion*, m_RootMotion,	nullptr,	RootMotion);
-		
-};
+	};
 END
 #endif // !MESH_H

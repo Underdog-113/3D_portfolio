@@ -2,6 +2,8 @@
 #include "DynamicMeshData.h"
 #include "StaticMeshData.h"
 #include "DeviceManager.h"
+#include "RootMotion.h"
+#include "AniCtrl.h"
 
 USING(Engine)
 CDynamicMeshData::CDynamicMeshData()
@@ -102,6 +104,7 @@ void CDynamicMeshData::Update(void)
 
 void CDynamicMeshData::OnDestory(void)
 {
+
 	m_pAniCtrl->Free();
 	delete this;
 }
@@ -160,6 +163,7 @@ void CDynamicMeshData::SetAniFixTillEnd(_bool isItFixed)
 {
 	m_pAniCtrl->SetFixTillEnd(isItFixed);
 }
+
 
 void CDynamicMeshData::SetupFrameMatrices(_DerivedD3DXFRAME * pFrame, _mat * pParentMat)
 {

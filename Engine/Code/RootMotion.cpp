@@ -12,7 +12,8 @@ CRootMotion::CRootMotion()
 
 CRootMotion::~CRootMotion()
 {
-	delete[] m_pIsFixRootMotionOffsets;
+	//if(m_pIsFixRootMotionOffsets)
+	//	delete m_pIsFixRootMotionOffsets;
 }
 
 void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl)
@@ -38,13 +39,15 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl)
 		return;
 	}
 
-	if (timeline < m_prevTimeLine)
+	if (pAniCtrl->GetIsFakeAniEnd())
 	{
 		// loop
-		m_animEndPos = m_animStartPos + sizedPos;
-		m_animStartPos = _float3(m_animEndPos.x - sizedOffset.x, 0.f, m_animEndPos.z - sizedOffset.z);
 		pOwner->GetTransform()->AddPosition(m_animEndPos);
+		m_animStartPos = _float3(m_animEndPos.x - sizedOffset.x, 0.f, m_animEndPos.z - sizedOffset.z);
+		m_animEndPos = m_animStartPos + sizedPos;
+		pOwner->GetTransform()->SetPosition(m_animEndPos);
 		m_prevTimeLine = 0;
+		pAniCtrl->SetIsFakeAniEnd(false);
 	}
 	else
 	{
@@ -52,16 +55,15 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl)
 		pOwner->GetTransform()->SetPosition(m_animEndPos);
 
 		m_prevTimeLine = timeline;
-		m_animEndPosLastFrame = m_animEndPos;
 	}
 }
 
 void CRootMotion::OnFixRootMotionOffset(_uint index)
 {
-	m_pIsFixRootMotionOffsets[index] = true;
+	//m_pIsFixRootMotionOffsets[index] = true;
 }
 
 void CRootMotion::OffFixRootMotionOffset(_uint index)
 {
-	m_pIsFixRootMotionOffsets[index] = false;
+	//m_pIsFixRootMotionOffsets[index] = false;
 }

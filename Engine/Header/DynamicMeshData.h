@@ -3,9 +3,10 @@
 
 #include "MeshData.h"
 #include "HierarchyLoader.h"
-#include "AniCtrl.h"
 
 BEGIN(Engine)
+class CObject;
+class CAniCtrl;
 class ENGINE_DLL CDynamicMeshData final : public CMeshData
 {
 	friend class CMeshStore;
@@ -52,6 +53,7 @@ private:
 				void				SetFrameMatPointer		(_DerivedD3DXFRAME* pFrame);
 				_uint				FindFirstAniIndex		(std::wstring const& fileName);
 
+
 private:
 	typedef std::vector<_DerivedD3DXMESHCONTAINER*> _MESHCONTAINERS;
 	GETTOR		(_MESHCONTAINERS,		m_vMeshContainers,		{},			MeshContainers)
@@ -59,8 +61,6 @@ private:
 	GETTOR		(CHierarchyLoader*,		m_pHierarchyLoader,		nullptr,	HierarchyLoader)
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)
 	GETTOR_SETTOR(_bool,				m_playAnimation,		true,		PlayAnimation)
-
-		
 };
 END
 #endif
