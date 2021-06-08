@@ -62,7 +62,9 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(void)
 {
-
+	GET_DEVICE->SetRenderState(D3DRS_STENCILENABLE, TRUE);
+	GET_DEVICE->SetRenderState(D3DRS_STENCILREF, 0x1);
+	GET_DEVICE->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
 }
 
 void CScrollViewObject::Render(void)
@@ -72,6 +74,7 @@ void CScrollViewObject::Render(void)
 
 void CScrollViewObject::PostRender(void)
 {
+	GET_DEVICE->SetRenderState(D3DRS_STENCILENABLE, FALSE);
 }
 
 void CScrollViewObject::OnDestroy(void)

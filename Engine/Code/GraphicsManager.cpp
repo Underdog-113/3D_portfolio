@@ -402,11 +402,6 @@ void CGraphicsManager::RenderUI(void)
 	{
 		if (pObject->GetIsEnabled())
 		{
-		
-			GET_DEVICE->SetRenderState(D3DRS_STENCILENABLE, TRUE);
-			GET_DEVICE->SetRenderState(D3DRS_STENCILREF, 0x1);
-			GET_DEVICE->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
-
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
@@ -442,8 +437,6 @@ void CGraphicsManager::RenderUI(void)
 			}
 		}
 	}
-
-	GET_DEVICE->SetRenderState(D3DRS_STENCILENABLE, FALSE);
 
 	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
