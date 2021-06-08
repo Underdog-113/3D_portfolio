@@ -22,7 +22,7 @@ SP(CComponent) CParticleSystemC::MakeClone(CObject * pObject)
 void CParticleSystemC::Awake(void)
 {
 	__super::Awake();
-	m_vParticles.reserve(100);
+	m_vParticles.reserve(5000);
 }
 
 void CParticleSystemC::Start(SP(CComponent) spThis)

@@ -19,7 +19,6 @@ CParticle::CParticle(BoundingBox* boundingBox, _uint numParticles)
 
 CParticle::~CParticle()
 {
-	Release();
 }
 
 
@@ -166,14 +165,18 @@ void CParticle::PostRender(SP(CGraphicsC) spGC)
 
 void CParticle::Release()
 {
-	std::list<ATTRIBUTE>::iterator iter;
-	for (iter = m_AttributeList.begin(); iter != m_AttributeList.end();)
+	if (!m_AttributeList.empty())
 	{
-		iter = m_AttributeList.erase(iter);
+		std::list<ATTRIBUTE>::iterator iter;
+		for (iter = m_AttributeList.begin(); iter != m_AttributeList.end();)
+		{
+			iter = m_AttributeList.erase(iter);
+		}
+		m_AttributeList.clear();
 	}
-	m_AttributeList.clear();
 
 	SafeRelease(m_pGraphicDevice);
+
 }
 
 void CParticle::reset()
