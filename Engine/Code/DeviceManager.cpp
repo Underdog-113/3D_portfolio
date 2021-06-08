@@ -75,7 +75,4 @@ void CDeviceManager::InitDevice(void)
 	}
 	m_pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-	GET_DEVICE->Clear(0, 0,
-		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
-		0xff0000000, 1.0f, 0);
 }
