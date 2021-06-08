@@ -4,6 +4,7 @@
 namespace Engine
 {
 #pragma region GraphicsEnum
+	// ChangMode
 	enum class EDisplayMdoe
 	{
 		FullMode,
@@ -18,8 +19,9 @@ namespace Engine
 		WireFrame		= 2,
 		AlphaTest		= 3,
 		AlphaBlend		= 4,
-		UI				= 5,
-		NumOfRenderID	= 6
+		Particle		= 5,
+		UI				= 6,
+		NumOfRenderID	= 7
 	};
 
 	//Camera Mdoe
@@ -127,14 +129,15 @@ namespace Engine
 		RigidBody				= 4,
 		Collision				= 5,
 		Camera					= 6,
-		Debug					  = 7,
+		Debug					= 7,
 		RectTex					= 8,
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
-    Text					  = 12,
+        Text					= 12,
 		StateMachine			= 13,
-		NumOfEngineComponentID	= 14
+		ParticleSystem			= 14,
+		NumOfEngineComponentID	= 15
 	};
 
 	enum class EChannelID

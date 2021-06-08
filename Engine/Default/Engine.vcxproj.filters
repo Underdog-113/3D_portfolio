@@ -247,6 +247,15 @@
     <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
       <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem">
+      <UniqueIdentifier>{fe05836d-e826-479d-823e-4bdcf9f40930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\Manager">
+      <UniqueIdentifier>{6b9e5eed-4c53-4b50-9faa-ead44afe6b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\ParticleComponent">
+      <UniqueIdentifier>{f8723815-601e-49ed-a044-d619184070a9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Components\02.UI">
       <UniqueIdentifier>{c3763dc3-657d-413f-9626-6daeb5fa1eee}</UniqueIdentifier>
     </Filter>
@@ -467,6 +476,15 @@
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
+    <ClCompile Include="..\Code\PSC_Manager.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ParticleSystemC.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Slider.cpp">
       <Filter>02.Objects\06.Slider</Filter>
     </ClCompile>
@@ -708,6 +726,15 @@
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h" />
+    <ClInclude Include="..\Header\PSC_Manager.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ParticleSystemC.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Particle.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
+    </ClCompile>
     <ClInclude Include="..\Header\Slider.h">
       <Filter>02.Objects\06.Slider</Filter>
     </ClInclude>

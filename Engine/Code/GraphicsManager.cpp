@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Frustum.h"
-
+#include "PSC_Manager.h"
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CGraphicsManager)
@@ -83,10 +83,11 @@ void CGraphicsManager::Render(void)
 	RenderDeferred();
 	RenderLights();
 	RenderDeferBlend();
-
+	
 	RenderWire();
 	RenderAlphaTest();
 	RenderAlphaBlend();
+	RenderParticle();
 	RenderUI();
 
 	if (m_rtDebugOn == true)
@@ -386,6 +387,18 @@ void CGraphicsManager::RenderAlphaBlend(void)
 			}
 		}
 	}
+}
+
+void CGraphicsManager::RenderParticle(void)
+{ 
+	CPSC_Manager::GetInstance()->PreRender(->GetComponent<CGraphicsC>());
+	CPSC_Manager::GetInstance()->Render(GetComponent<CGraphicsC>());
+	CPSC_Manager::GetInstance()->PostRender(GetComponent<CGraphicsC>());
+}
+
+void CGraphicsManager::RenderEffect(void)
+{
+
 }
 
 void CGraphicsManager::RenderUI(void)

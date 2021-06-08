@@ -70,6 +70,12 @@ namespace Engine
 		return className;
 	}
 
+	// DWORD 반환 함수
+	inline DWORD FtoDW(_float f)
+	{
+		return *((DWORD*)&f);
+	}
+
 	//String 변환 함수
 	inline std::wstring StrToWStr(const std::string& str)
 	{
@@ -151,6 +157,7 @@ namespace Engine
 
 		return in;
 	}
+
 
 
 	template<class T> inline T	operator	~	(T a)		{ return (T)~(int)a; }
