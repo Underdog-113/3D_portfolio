@@ -44,6 +44,8 @@ private:
 			void					RenderWire			(void);
 			void					RenderAlphaTest		(void);
 			void					RenderAlphaBlend	(void);
+			void                    RenderParticle		(void);
+			void                    RenderEffect		(void);
 			void					RenderUI			(void);
 			
 

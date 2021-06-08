@@ -1,7 +1,6 @@
 #include "EngineStdafx.h"
- 
-#include "MeshStore.h"
-#include "DataStore.h"
+#include "MeshC.h"
+
 #include "Object.h"
 
 #include "StaticMeshData.h"

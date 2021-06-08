@@ -247,20 +247,23 @@
     <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
       <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\02.UI">
-      <UniqueIdentifier>{c3763dc3-657d-413f-9626-6daeb5fa1eee}</UniqueIdentifier>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem">
+      <UniqueIdentifier>{fe05836d-e826-479d-823e-4bdcf9f40930}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\02.UI\00.Slider">
-      <UniqueIdentifier>{3d634609-b231-4f27-a0a7-4581765223fe}</UniqueIdentifier>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\Manager">
+      <UniqueIdentifier>{6b9e5eed-4c53-4b50-9faa-ead44afe6b65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\06.Slider">
-      <UniqueIdentifier>{df0b8cfd-09b9-4901-aa7a-8fccb3dc9c15}</UniqueIdentifier>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\ParticleComponent">
+      <UniqueIdentifier>{f8723815-601e-49ed-a044-d619184070a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\07.Slider">
+      <UniqueIdentifier>{cb9532cb-c7c5-45e5-ac6d-50a236eb5fd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\06.ScrollView">
+      <UniqueIdentifier>{127b4517-aa04-4705-b379-4d0e13285e3d}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader">
-      <UniqueIdentifier>{cbec6636-0703-4420-bac9-68ed1178cf35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\07.ScrollView">
-      <UniqueIdentifier>{771ad6a2-730b-48b0-96e4-6e7e7d05491b}</UniqueIdentifier>
+      <UniqueIdentifier>{f2ded281-a3b6-4d41-85a6-c0d3aaa3d2ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -469,19 +472,28 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Slider.cpp">
-      <Filter>02.Objects\06.Slider</Filter>
+    <ClCompile Include="..\Code\StaticMeshData.cpp" />
+    <ClCompile Include="..\Code\PSC_Manager.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\SliderShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
+    <ClCompile Include="..\Code\ParticleSystemC.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ImageObject.cpp">
       <Filter>02.Objects\05.ImageObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ScrollViewObject.cpp">
-      <Filter>02.Objects\07.ScrollView</Filter>
+      <Filter>02.Objects\06.ScrollView</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp" />
+    <ClCompile Include="..\Code\Slider.cpp">
+      <Filter>02.Objects\07.Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SliderShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\WndApp.h">
@@ -713,18 +725,27 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Slider.h">
-      <Filter>02.Objects\06.Slider</Filter>
+    <ClInclude Include="..\Header\StaticMeshData.h" />
+    <ClInclude Include="..\Header\PSC_Manager.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\SliderShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
+    <ClInclude Include="..\Header\ParticleSystemC.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Particle.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ImageObject.h">
       <Filter>02.Objects\05.ImageObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h">
-      <Filter>02.Objects\07.ScrollView</Filter>
+      <Filter>02.Objects\06.ScrollView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Slider.h">
+      <Filter>02.Objects\07.Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SliderShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

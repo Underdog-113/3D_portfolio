@@ -1,7 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-
 BEGIN(Engine)
 class ENGINE_DLL CObject abstract  
 {

@@ -126,6 +126,47 @@ namespace Engine
 		_bool			m_isVisible;
 	};
 
+#pragma region Particle
+
+
+	// Particle
+	typedef struct tagParticle
+	{
+		_float3	  _pos;
+		D3DXCOLOR _color;
+		_float    _size;
+	}PARTICLE_DESC;
+	const DWORD FVF_Particle = D3DFVF_XYZ | D3DFVF_DIFFUSE;
+
+	typedef struct tagAttribute
+	{
+		tagAttribute()
+		{
+			_lifeTime = 0.0f;
+			_age = 0.0f;
+			_isAlive = true;
+		}
+
+		_float3      _position;	    // 월드 스페이스 내의 파티클 위치
+		_float3      _velocity;	    // 파티클의 속도
+		_float3      _acceleration; // 파티클의 가속
+		_float       _lifeTime;     // 파티클 유지 시간
+		_float       _age;          // 파티클의 나이
+		D3DXCOLOR    _color;        // 파티클의 컬러
+		D3DXCOLOR    _colorFade;    // 파티클의 컬러가 시간의 흐름에 따라 퇴색할건지
+		_bool        _isAlive;      // 파티클이 생존한 경우 True, 소멸한 경우 false
+	}ATTRIBUTE;
+
+	typedef struct tagBoundingBox
+	{
+		tagBoundingBox() {};
+
+		_float3 _min;
+		_float3 _max;
+	}BoundingBox;
+	const _float _INFINITY = FLT_MAX;
+
+#pragma endregion
 	struct _TextCom
 	{
 		_TextCom(std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible)

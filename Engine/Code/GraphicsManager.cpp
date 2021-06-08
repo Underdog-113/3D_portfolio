@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Frustum.h"
-
+#include "PSC_Manager.h"
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CGraphicsManager)
@@ -35,9 +35,6 @@ void CGraphicsManager::Start(void)
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CONSTANT);
-
-
-
 }
 
 void CGraphicsManager::FixedUpdate(void)
@@ -83,10 +80,11 @@ void CGraphicsManager::Render(void)
 	RenderDeferred();
 	RenderLights();
 	RenderDeferBlend();
-
+	
 	RenderWire();
 	RenderAlphaTest();
 	RenderAlphaBlend();
+	RenderParticle();
 	RenderUI();
 
 	if (m_rtDebugOn == true)
@@ -386,6 +384,18 @@ void CGraphicsManager::RenderAlphaBlend(void)
 			}
 		}
 	}
+}
+
+void CGraphicsManager::RenderParticle(void)
+{ 
+	CPSC_Manager::GetInstance()->PreRender();
+	CPSC_Manager::GetInstance()->Render();
+	CPSC_Manager::GetInstance()->PostRender();
+}
+
+void CGraphicsManager::RenderEffect(void)
+{
+
 }
 
 void CGraphicsManager::RenderUI(void)
