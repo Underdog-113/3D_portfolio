@@ -133,6 +133,9 @@
     <Filter Include="02.Objects\02.Particle">
       <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Function">
+      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -252,6 +255,9 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Function.h">
+      <Filter>06.Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Function.cpp">
+      <Filter>06.Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

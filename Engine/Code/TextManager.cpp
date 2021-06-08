@@ -49,6 +49,7 @@ void CTextManager::OnDestroy(void)
 	for (auto& text : m_mTexts)
 	{
 		delete text.second;
+		text.second = nullptr;
 	}
 
 	m_mTexts.clear();
@@ -57,7 +58,7 @@ void CTextManager::OnDestroy(void)
 _Text* CTextManager::AddText(std::wstring textKey, std::wstring msg, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color)
 {
 	_Text* pNewText = new _Text;
-
+	
 	pNewText->m_message		= msg;
 	pNewText->m_position	= position;
 	pNewText->m_boxSize		= boxSize;
@@ -66,6 +67,7 @@ _Text* CTextManager::AddText(std::wstring textKey, std::wstring msg, _float2 pos
 	pNewText->m_color		= color;
 	pNewText->m_isVisible	= true;
 	m_mTexts[textKey] = pNewText;
+
 	return pNewText;
 }
 

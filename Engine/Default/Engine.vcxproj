@@ -48,7 +48,7 @@
     <ClInclude Include="..\Header\HierarchyLoader.h" />
     <ClInclude Include="..\Header\Light.h" />
     <ClInclude Include="..\Header\LightManager.h" />
-    <ClInclude Include="..\Header\Image.h" />
+    <ClInclude Include="..\Header\ImageObject.h" />
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
@@ -66,6 +66,8 @@
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\ShaderManager.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
+    <ClInclude Include="..\Header\Slider.h" />
+    <ClInclude Include="..\Header\SliderShader.h" />
     <ClInclude Include="..\Header\State.h" />
     <ClInclude Include="..\Header\StateMachine.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
@@ -128,7 +130,7 @@
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
     <ClCompile Include="..\Code\Light.cpp" />
     <ClCompile Include="..\Code\LightManager.cpp" />
-    <ClCompile Include="..\Code\Image.cpp" />
+    <ClCompile Include="..\Code\ImageObject.cpp" />
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
@@ -146,6 +148,8 @@
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
+    <ClCompile Include="..\Code\Slider.cpp" />
+    <ClCompile Include="..\Code\SliderShader.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
     <ClCompile Include="..\Code\StateMachine.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
@@ -184,6 +188,7 @@
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>
