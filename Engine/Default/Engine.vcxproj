@@ -299,6 +299,7 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
