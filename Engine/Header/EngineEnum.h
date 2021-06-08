@@ -67,13 +67,14 @@ namespace Engine
 		DeferredBlendShader		= 2,
 		DeferredLightShader		= 3,
 		SkyBoxShader			= 4,
+		WaterShader				= 5,
 		/*Shader_Sample	= 0,
 		Shader_Terrain	= 1,
 		Shader_Mesh		= 2,
 		Shader_Shade	= 3,
 		Shader_Blend	= 4,
 		Shader_Skybox	= 5,*/
-		NumOfShaderID	= 5
+		NumOfShaderID	= 6
 	};
 #pragma endregion
 

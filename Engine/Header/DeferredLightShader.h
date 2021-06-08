@@ -18,6 +18,8 @@ public:
 
 public:
 					void				SetUpConstantTable		(SP(CGraphicsC) spGC) override;
+
+					
 };
 END
 

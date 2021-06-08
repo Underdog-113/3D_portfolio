@@ -28,7 +28,7 @@ void CMO_Spider::Awake(void)
 	m_layerID = (_int)ELayerID::Enemy;
 	m_dataID =  (_int)EDataID::Enemy;
 
-	m_spMesh = AddComponent<Engine::CMeshC>();	
+	m_spMesh	 = AddComponent<Engine::CMeshC>();	
 	m_spMesh->SetInitTex(true);
 	m_spTexture  = AddComponent<Engine::CTextureC>();
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();

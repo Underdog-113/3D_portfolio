@@ -391,9 +391,9 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 void CGraphicsManager::RenderParticle(void)
 { 
-	CPSC_Manager::GetInstance()->PreRender(->GetComponent<CGraphicsC>());
-	CPSC_Manager::GetInstance()->Render(GetComponent<CGraphicsC>());
-	CPSC_Manager::GetInstance()->PostRender(GetComponent<CGraphicsC>());
+	CPSC_Manager::GetInstance()->PreRender();
+	CPSC_Manager::GetInstance()->Render();
+	CPSC_Manager::GetInstance()->PostRender();
 }
 
 void CGraphicsManager::RenderEffect(void)

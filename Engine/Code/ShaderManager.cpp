@@ -8,6 +8,7 @@
 #include "RectTexShader.h"
 #include "DeferredBlendShader.h"
 #include "DeferredLightShader.h"
+#include "WaterShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -19,6 +20,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CRectTexShader::Create());
 	m_vShaders.emplace_back(CDeferredBlendShader::Create());
 	m_vShaders.emplace_back(CDeferredLightShader::Create());
+	m_vShaders.emplace_back(CWaterShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -54,6 +56,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::DeferredLightShader;
 	else if (shaderName == L"SkyBoxShader")
 		return (_int)EShaderID::SkyBoxShader;
+	else if (shaderName == L"WaterShader")
+		return (_int)EShaderID::WaterShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");

@@ -99,6 +99,7 @@
     <ClInclude Include="..\Header\TextureStore.h" />
     <ClInclude Include="..\Header\TransformC.h" />
     <ClInclude Include="..\Header\VIBufferC.h" />
+    <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WndApp.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClCompile Include="..\Code\TextureStore.cpp" />
     <ClCompile Include="..\Code\TransformC.cpp" />
     <ClCompile Include="..\Code\VIBufferC.cpp" />
+    <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
