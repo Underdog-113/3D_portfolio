@@ -9,6 +9,7 @@ CButton::CButton()
 
 CButton::~CButton()
 {
+	OnDestroy();
 }
 
 SP(CButton) CButton::Create(_bool isStatic, Engine::CScene * pScene)
@@ -101,6 +102,7 @@ void CButton::PostRender(void)
 void CButton::OnDestroy(void)
 {
 	__super::OnDestroy();
+	m_functionGate.clear();
 }
 
 void CButton::OnEnable(void)
@@ -121,8 +123,4 @@ void CButton::SetBasicName(void)
 void CButton::FuncActivation()
 {
 	m_functionGate();
-}
-
-void CButton::aa()
-{
 }

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MainApp.h"
 #include "Object.h"
-
+#include "WndApp.h"
 #pragma region IncludeScenes
 #include "InitScene.h"
 #pragma endregion
@@ -9,7 +9,6 @@
 #pragma region Prototypes
 #include "Camera.h"
 #pragma endregion
-
 
 
 CMainApp::CMainApp(void)
@@ -35,6 +34,7 @@ void CMainApp::Awake(void)
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
+	Engine::CPSC_Manager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
@@ -52,8 +52,7 @@ void CMainApp::Start(void)
 	Engine::CSceneManager::GetInstance()->SceneChange(CInitScene::Create());
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
-
-
+	Engine::CPSC_Manager::GetInstance()->Start();
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
 	Engine::CRenderTargetManager::GetInstance()->Start();
 }
@@ -88,6 +87,14 @@ void CMainApp::Update(void)
 
 void CMainApp::LateUpdate(void)
 {
+	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
+	{
+		_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+
+		std::cout << mousePos.x << std::endl;
+		std::cout << mousePos.y << std::endl;
+	}
+
 	Engine::TIME_MEASURE_START;
 
 	Engine::CInputManager::GetInstance()->LateUpdate();
@@ -96,7 +103,7 @@ void CMainApp::LateUpdate(void)
 
 	Engine::CCameraManager::GetInstance()->LateUpdate();
 	Engine::CGraphicsManager::GetInstance()->LateUpdate();
-
+	Engine::CPSC_Manager::GetInstance()->LateUpdate();
 	_float time = Engine::GET_ELAPSED_TIME;
 }
 
@@ -153,7 +160,9 @@ void CMainApp::OnDestroy(void)
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
+	Engine::CPSC_Manager::GetInstance()->DestroyInstance();
 
+	
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
 }

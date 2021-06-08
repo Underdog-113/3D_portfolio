@@ -4,6 +4,10 @@
 
 #pragma warning(disable : 4251)
 #pragma warning(disable : 4503)
+#pragma warning(disable : 4717)
+
+// 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
+#define WIN64_LEAN_AND_MEAN
 
 //프로젝트 외부 참조문서
 //For C, window 
@@ -26,9 +30,6 @@
 
 //For FileStream
 #include <fstream>
-#include <sstream>
-#include <string>
-
 
 //For strings
 #include <sstream>
@@ -75,6 +76,7 @@
 #include "DeviceManager.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
+#include "PSC_Manager.h"
 #include "SoundManager.h"
 #include "TextManager.h"
 #include "ShaderManager.h"

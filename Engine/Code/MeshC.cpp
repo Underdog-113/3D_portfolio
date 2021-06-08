@@ -1,12 +1,6 @@
 #include "EngineStdafx.h"
-
 #include "MeshC.h"
-
-#include "MeshStore.h"
-#include "DataStore.h"
 #include "Object.h"
-
-#include "MeshData.h"
 #include "StaticMeshData.h"
 #include "DynamicMeshData.h"
 #include "RootMotion.h"

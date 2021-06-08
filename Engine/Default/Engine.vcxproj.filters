@@ -118,9 +118,6 @@
     <Filter Include="02.Objects\00.EmptyObject">
       <UniqueIdentifier>{cbd23a30-c754-4009-8851-6a2b11c6a611}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\02.Grid">
-      <UniqueIdentifier>{e904f496-668c-40a2-acb2-3cb40d1225f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Camera">
       <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
     </Filter>
@@ -238,14 +235,38 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\03.DeferredLightShader">
       <UniqueIdentifier>{fbefd66d-fb54-40ac-883a-f79af4ceac61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\04.SkyBoxShader">
-      <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\05.ImageObject">
-      <UniqueIdentifier>{b387efc0-22ae-425d-8839-3ed29247f37c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
       <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem">
+      <UniqueIdentifier>{fe05836d-e826-479d-823e-4bdcf9f40930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\Manager">
+      <UniqueIdentifier>{6b9e5eed-4c53-4b50-9faa-ead44afe6b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\ParticleComponent">
+      <UniqueIdentifier>{f8723815-601e-49ed-a044-d619184070a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader">
+      <UniqueIdentifier>{a0cbd6f2-8c7a-41e1-84b9-bf3c6e83ad29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.Grid">
+      <UniqueIdentifier>{e904f496-668c-40a2-acb2-3cb40d1225f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.ImageObject">
+      <UniqueIdentifier>{b387efc0-22ae-425d-8839-3ed29247f37c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader">
+      <UniqueIdentifier>{e0a4cbc0-854b-497c-8a96-a265f9a9d3bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader">
+      <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\06.Slider">
+      <UniqueIdentifier>{10562c83-8778-4b99-9d76-55d4a9df9c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
+      <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -385,7 +406,7 @@
       <Filter>02.Objects\00.EmptyObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Grid.cpp">
-      <Filter>02.Objects\02.Grid</Filter>
+      <Filter>02.Objects\05.Grid</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FadeInOutC.cpp">
       <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
@@ -447,14 +468,36 @@
     <ClCompile Include="..\Code\ShaderManager.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Image.cpp">
-      <Filter>02.Objects\05.ImageObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\RootMotion.cpp" />
-    <ClCompile Include="..\Code\StaticMeshData.cpp" />
+    <ClCompile Include="..\Code\PSC_Manager.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ParticleSystemC.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WaterShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ImageObject.cpp">
+      <Filter>02.Objects\02.ImageObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SliderShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Slider.cpp">
+      <Filter>02.Objects\06.Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RootMotion.cpp">
+      <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\WndApp.h">
@@ -617,7 +660,7 @@
       <Filter>02.Objects\00.EmptyObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Grid.h">
-      <Filter>02.Objects\02.Grid</Filter>
+      <Filter>02.Objects\05.Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FadeInOutC.h">
       <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
@@ -679,14 +722,36 @@
     <ClInclude Include="..\Header\ShaderManager.h">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Image.h">
-      <Filter>02.Objects\05.ImageObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\RootMotion.h" />
-    <ClInclude Include="..\Header\StaticMeshData.h" />
+    <ClInclude Include="..\Header\PSC_Manager.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ParticleSystemC.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Particle.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WaterShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ImageObject.h">
+      <Filter>02.Objects\02.ImageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SliderShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Slider.h">
+      <Filter>02.Objects\06.Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RootMotion.h">
+      <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -700,6 +765,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\02.DeferredBlendShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
