@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "TextC.h"
-
+#include "WndApp.h"
 USING(Engine)
 CTextC::CTextC()
 {
@@ -80,7 +80,8 @@ void CTextC::OnDisable()
 
 void CTextC::AddFontData(std::wstring keyValue, std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible)
 {
-	_TextCom t(message, position, boxSize, fontSize, alignment, color, isVisible);
+	_float2 correction = _float2(CWndApp::GetInstance()->GetWndWidth() * 0.5f, CWndApp::GetInstance()->GetWndHeight() * 0.5f);
+	_TextCom t(message, position + correction, boxSize, fontSize, alignment, color, isVisible);
 
 	if (FAILED(D3DXCreateFont(GET_DEVICE, fontSize, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
 		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &t.m_pFont)))
@@ -98,6 +99,7 @@ void CTextC::RenderText()
 		std::basic_string<WCHAR> msg = iter->second.m_text.m_message.c_str();
 
 		_float2 pos = GetOwner()->GetTransform()->GetPosition();
+		pos.y *= -1;
 		pos += iter->second.m_text.m_position;
 
 		_float2 boxSize = iter->second.m_text.m_boxSize;

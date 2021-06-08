@@ -259,6 +259,9 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader">
       <UniqueIdentifier>{cbec6636-0703-4420-bac9-68ed1178cf35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\07.ScrollView">
+      <UniqueIdentifier>{771ad6a2-730b-48b0-96e4-6e7e7d05491b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -466,7 +469,6 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\Slider.cpp">
       <Filter>02.Objects\06.Slider</Filter>
     </ClCompile>
@@ -476,6 +478,10 @@
     <ClCompile Include="..\Code\ImageObject.cpp">
       <Filter>02.Objects\05.ImageObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\ScrollViewObject.cpp">
+      <Filter>02.Objects\07.ScrollView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\WndApp.h">
@@ -707,7 +713,6 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\Slider.h">
       <Filter>02.Objects\06.Slider</Filter>
     </ClInclude>
@@ -716,6 +721,10 @@
     </ClInclude>
     <ClInclude Include="..\Header\ImageObject.h">
       <Filter>02.Objects\05.ImageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h" />
+    <ClInclude Include="..\Header\ScrollViewObject.h">
+      <Filter>02.Objects\07.ScrollView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

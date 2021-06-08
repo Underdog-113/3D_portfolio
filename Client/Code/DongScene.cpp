@@ -51,15 +51,14 @@ void CDongScene::Start(void)
 	{
 		SP(CButton) button =
 			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"0"));
-		button->GetTransform()->SetPosition(_float3(300, 109, 0.0f));
+		button->GetTransform()->SetPosition(_float3(300, 0, 0.0f));
 		button->GetTransform()->SetSize(_float3(141, 152, 0.1f));
 		button->SetButtonType(CButton::UP);
 		button->GetTexture()->AddTexture(L"BtnAttack1", 0);
 		button->AddFuncData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction());
-		button->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"출격", _float2(400, 300), _float2(0,0), 50, DT_LEFT + DT_NOCLIP, D3DXCOLOR(1, 0, 0, 1), true);
+		button->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"출격", _float2(0, 0), _float2(0,0), 50, DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 0, 0, 1), true);
 	}
 	
-
 	{
 		SP(Engine::CSlider) slider =
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
