@@ -86,14 +86,14 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	//ÇöÀç Æ®·¢À» ²ö´Ù.
+	//í˜„ìž¬ íŠ¸ëž™ì„ ëˆë‹¤.
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + smoothTime);
-	//²¨Áö´Â µ¿¾È Å° ¼Óµµ ¼¼ÆÃ
+	//êº¼ì§€ëŠ” ë™ì•ˆ í‚¤ ì†ë„ ì„¸íŒ…
 	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
-	//²¨Áö´Â µ¿¾È °¡ÁßÄ¡
+	//êº¼ì§€ëŠ” ë™ì•ˆ ê°€ì¤‘ì¹˜
 	m_pAniCtrl->KeyTrackWeight(m_curTrack, 1 - changeWeight, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 
-	//»õ Æ®·¢ È°¼ºÈ­
+	//ìƒˆ íŠ¸ëž™ í™œì„±í™”
 	m_pAniCtrl->SetTrackEnable(newTrack, TRUE);
 	m_pAniCtrl->KeyTrackSpeed(newTrack, 1.f, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 	m_pAniCtrl->KeyTrackWeight(newTrack, changeWeight, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
@@ -119,7 +119,7 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	if (pAS->GetName() == name)
 		return;
 
-	//ÀÌ°ÅÇÏ´øÁß
+	//ì´ê±°í•˜ë˜ì¤‘
 	m_pAniCtrl->GetAnimationSetByName(name.c_str(), &pAS);
 
 	m_curIndex = FindIndexByName(name, pAS);
@@ -129,14 +129,14 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	//ÇöÀç Æ®·¢À» ²ö´Ù.
+	//í˜„ìž¬ íŠ¸ëž™ì„ ëˆë‹¤.
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + 0.25);
-	//²¨Áö´Â µ¿¾È Å° ¼Óµµ ¼¼ÆÃ
+	//êº¼ì§€ëŠ” ë™ì•ˆ í‚¤ ì†ë„ ì„¸íŒ…
 	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
-	//²¨Áö´Â µ¿¾È °¡ÁßÄ¡
+	//êº¼ì§€ëŠ” ë™ì•ˆ ê°€ì¤‘ì¹˜
 	m_pAniCtrl->KeyTrackWeight(m_curTrack, 0.01f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
 
-	//»õ Æ®·¢ È°¼ºÈ­
+	//ìƒˆ íŠ¸ëž™ í™œì„±í™”
 	m_pAniCtrl->SetTrackEnable(newTrack, TRUE);
 	m_pAniCtrl->KeyTrackSpeed(newTrack, 1.f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
 	m_pAniCtrl->KeyTrackWeight(newTrack, 0.99f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
@@ -172,19 +172,19 @@ void CAniCtrl::ChangeFakeAniSet()
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(m_fakeTrack);
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	//ÇöÀç Æ®·¢À» ²ö´Ù.
+	//í˜„ìž¬ íŠ¸ëž™ì„ ëˆë‹¤.
 	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + 0.001);
 
-	//²¨Áö´Â µ¿¾È Å° ¼Óµµ ¼¼ÆÃ
+	//êº¼ì§€ëŠ” ë™ì•ˆ í‚¤ ì†ë„ ì„¸íŒ…
 	m_pFakeAniCtrl->KeyTrackSpeed(m_fakeTrack, 1.f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
-	//²¨Áö´Â µ¿¾È °¡ÁßÄ¡
+	//êº¼ì§€ëŠ” ë™ì•ˆ ê°€ì¤‘ì¹˜
 	m_pFakeAniCtrl->KeyTrackWeight(m_fakeTrack, 0.0f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
 
 	m_pFakeAniCtrl->SetTrackEnable(newTrack, TRUE);
 
-	//²¨Áö´Â µ¿¾È Å° ¼Óµµ ¼¼ÆÃ
+	//êº¼ì§€ëŠ” ë™ì•ˆ í‚¤ ì†ë„ ì„¸íŒ…
 	m_pFakeAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
-	//²¨Áö´Â µ¿¾È °¡ÁßÄ¡
+	//êº¼ì§€ëŠ” ë™ì•ˆ ê°€ì¤‘ì¹˜
 	m_pFakeAniCtrl->KeyTrackWeight(m_curTrack, 1.f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
 
 	m_pFakeAniCtrl->ResetTime();

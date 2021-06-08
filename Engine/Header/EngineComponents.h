@@ -13,6 +13,8 @@
 #include "MeshC.h"
 #include "ShaderC.h"
 #include "GraphicsC.h"
+#include "ParticleSystemC.h"
+#include "Particle.h"
 
 // UI------------------------------------------------
 #include "TextC.h"

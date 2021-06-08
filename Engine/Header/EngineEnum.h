@@ -18,8 +18,9 @@ namespace Engine
 		WireFrame		= 2,
 		AlphaTest		= 3,
 		AlphaBlend		= 4,
-		UI				= 5,
-		NumOfRenderID	= 6
+		Particle		= 5,
+		UI				= 6,
+		NumOfRenderID	= 7
 	};
 
 	//Camera Mdoe
@@ -64,14 +65,15 @@ namespace Engine
 		RectTexShader			= 1,
 		DeferredBlendShader		= 2,
 		DeferredLightShader		= 3,
-		SkyBoxShader			= 4,
+		SliderShader			= 4,
+		SkyBoxShader			= 5,
 		/*Shader_Sample	= 0,
 		Shader_Terrain	= 1,
 		Shader_Mesh		= 2,
 		Shader_Shade	= 3,
 		Shader_Blend	= 4,
 		Shader_Skybox	= 5,*/
-		NumOfShaderID	= 5
+		NumOfShaderID	= 6
 	};
 #pragma endregion
 
@@ -126,14 +128,15 @@ namespace Engine
 		RigidBody				= 4,
 		Collision				= 5,
 		Camera					= 6,
-		Debug					  = 7,
+		Debug					= 7,
 		RectTex					= 8,
 		Bitmap					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
-    Text					  = 12,
+        Text					= 12,
 		StateMachine			= 13,
-		NumOfEngineComponentID	= 14
+		ParticleSystem			= 14,
+		NumOfEngineComponentID	= 15
 	};
 
 	enum class EChannelID
@@ -165,5 +168,6 @@ namespace Engine
 		UI					= 5,
 		NumOfEngineLayerID	
 	};
+
 }
 #endif // !ENGINEENUM_H

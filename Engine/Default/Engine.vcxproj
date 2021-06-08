@@ -48,10 +48,13 @@
     <ClInclude Include="..\Header\HierarchyLoader.h" />
     <ClInclude Include="..\Header\Light.h" />
     <ClInclude Include="..\Header\LightManager.h" />
-    <ClInclude Include="..\Header\Image.h" />
+    <ClInclude Include="..\Header\ImageObject.h" />
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
+    <ClInclude Include="..\Header\Particle.h" />
+    <ClInclude Include="..\Header\ParticleSystemC.h" />
+    <ClInclude Include="..\Header\PSC_Manager.h" />
     <ClInclude Include="..\Header\RectTexC.h" />
     <ClInclude Include="..\Header\RectTexShader.h" />
     <ClInclude Include="..\Header\RenderComponent.h" />
@@ -64,6 +67,8 @@
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\ShaderManager.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
+    <ClInclude Include="..\Header\Slider.h" />
+    <ClInclude Include="..\Header\SliderShader.h" />
     <ClInclude Include="..\Header\State.h" />
     <ClInclude Include="..\Header\StateMachine.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
@@ -126,10 +131,13 @@
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
     <ClCompile Include="..\Code\Light.cpp" />
     <ClCompile Include="..\Code\LightManager.cpp" />
-    <ClCompile Include="..\Code\Image.cpp" />
+    <ClCompile Include="..\Code\ImageObject.cpp" />
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
+    <ClCompile Include="..\Code\Particle.cpp" />
+    <ClCompile Include="..\Code\ParticleSystemC.cpp" />
+    <ClCompile Include="..\Code\PSC_Manager.cpp" />
     <ClCompile Include="..\Code\RectTexC.cpp" />
     <ClCompile Include="..\Code\RectTexShader.cpp" />
     <ClCompile Include="..\Code\RenderComponent.cpp" />
@@ -142,6 +150,8 @@
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
+    <ClCompile Include="..\Code\Slider.cpp" />
+    <ClCompile Include="..\Code\SliderShader.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
     <ClCompile Include="..\Code\StateMachine.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
@@ -153,6 +163,7 @@
     <ClCompile Include="..\Code\GraphicsManager.cpp" />
     <ClCompile Include="..\Code\EngineStdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\Code\InputManager.cpp" />
     <ClCompile Include="..\Code\Layer.cpp" />
@@ -179,6 +190,7 @@
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>
@@ -295,7 +307,7 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
-      <AdditionalOptions>/Zm130 %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -344,7 +356,7 @@ copy /Y "$(SolutionDir)Bin\Engine\Release\x86\Engine.lib" "$(SolutionDir)Referen
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

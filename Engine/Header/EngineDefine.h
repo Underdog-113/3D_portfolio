@@ -17,6 +17,8 @@
 //NewLine
 #define NEW_LINE L'\n'
 
+//UnusedParam
+#define UNUSED(x) (void)(x)
 
 #define KEY_LEFT	1 << 0
 #define KEY_RIGHT	1 << 1
