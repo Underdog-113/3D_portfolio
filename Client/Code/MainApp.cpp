@@ -160,6 +160,7 @@ void CMainApp::OnDestroy(void)
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
 
+	
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
 }
