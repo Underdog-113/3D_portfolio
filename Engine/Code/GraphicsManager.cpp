@@ -390,16 +390,10 @@ void CGraphicsManager::RenderAlphaBlend(void)
 }
 
 void CGraphicsManager::RenderParticle(void)
-{
-	for (auto& pObject : m_vRenderList[(_int)ERenderID::Particle])
-	{
-		if (pObject->GetIsEnabled())
-		{
-			CPSC_Manager::GetInstance()->PreRender(pObject->GetComponent<CGraphicsC>());
-			CPSC_Manager::GetInstance()->Render(pObject->GetComponent<CGraphicsC>());
-			CPSC_Manager::GetInstance()->PostRender(pObject->GetComponent<CGraphicsC>());
-		}
-	}
+{ 
+	CPSC_Manager::GetInstance()->PreRender(->GetComponent<CGraphicsC>());
+	CPSC_Manager::GetInstance()->Render(GetComponent<CGraphicsC>());
+	CPSC_Manager::GetInstance()->PostRender(GetComponent<CGraphicsC>());
 }
 
 void CGraphicsManager::RenderEffect(void)

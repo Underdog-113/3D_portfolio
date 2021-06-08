@@ -14,9 +14,9 @@ public:
 	void Update();
 	void LateUpdate();
 
-	void PreRender(SP(CGraphicsC) spGC);
-	void Render(SP(CGraphicsC) spGC);
-	void PostRender(SP(CGraphicsC) spGC);
+	void PreRender();
+	void Render();
+	void PostRender();
 
 	void OnDestroy();
 	void OnEnable();

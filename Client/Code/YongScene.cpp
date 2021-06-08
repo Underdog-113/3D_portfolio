@@ -33,8 +33,14 @@ void CYongScene::Awake(_int numOfLayers)
 
 	SP(Engine::CObject) spEmptyObject
 		= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
-	spEmptyObject->AddComponent<Engine::CParticleSystemC>();
+	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"waterplane");
+	spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spEmptyObject->AddComponent<Engine::CTextureC>();
+	/*spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);*/
+	/*spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
+	spEmptyObject->AddComponent<Engine::CParticleSystemC>();*/
+
 	spEmptyObject->GetTransform()->SetSize(10, 10, 10);
 
 	InitPrototypes();

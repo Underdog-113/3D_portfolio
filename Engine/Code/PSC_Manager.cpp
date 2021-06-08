@@ -27,37 +27,37 @@ void CPSC_Manager::LateUpdate()
 {
 }
 
-void CPSC_Manager::PreRender(SP(CGraphicsC) spGC)
+void CPSC_Manager::PreRender()
 {
 	if (m_vParticleCom.empty())
 		return;
 
 	for (auto& iter : m_vParticleCom)
 	{
-		iter->PreRender(spGC);
+		iter->PreRender(iter->GetOwner()->GetComponent<CGraphicsC>());
 	}
 	
 }
 
-void CPSC_Manager::Render(SP(CGraphicsC) spGC)
+void CPSC_Manager::Render()
 {
 	if (m_vParticleCom.empty())
 		return;
 
 	for (auto& iter : m_vParticleCom)
 	{
-		iter->Render(spGC);
+		iter->Render(iter->GetOwner()->GetComponent<CGraphicsC>());
 	}
 }
 
-void CPSC_Manager::PostRender(SP(CGraphicsC) spGC)
+void CPSC_Manager::PostRender()
 {
 	if (m_vParticleCom.empty())
 		return;
 
 	for (auto& iter : m_vParticleCom)
 	{
-		iter->PostRender(spGC);
+		iter->PostRender(iter->GetOwner()->GetComponent<CGraphicsC>());
 	}
 }
 
