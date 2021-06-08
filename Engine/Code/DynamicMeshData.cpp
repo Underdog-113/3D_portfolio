@@ -149,6 +149,11 @@ void CDynamicMeshData::PlayAnimation(void)
 	UpdateFrame();
 }
 
+double CDynamicMeshData::GetAniTimeline()
+{
+	return m_pAniCtrl->GetTimeline();
+}
+
 _DerivedD3DXFRAME * CDynamicMeshData::GetFrameByName(std::string name)
 {
 	return (_DerivedD3DXFRAME*)D3DXFrameFind(m_pRootFrame, name.c_str());

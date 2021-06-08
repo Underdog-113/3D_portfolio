@@ -166,8 +166,12 @@ namespace Engine
 		DebugCollision		= 3,
 		Grid				= 4,
 		UI					= 5,
-		NumOfEngineLayerID	
+		NumOfEngineLayerID
 	};
 
 }
+
+
+
+
 #endif // !ENGINEENUM_H

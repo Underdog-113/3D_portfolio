@@ -27,6 +27,7 @@ void CInputManager::FixedUpdate(void)
 void CInputManager::Update(void)
 {
 	KeyUpdate();
+	KeyUpdate_Extend();
 	MouseUpdate();
 }
 
@@ -49,6 +50,8 @@ bool CInputManager::KeyUp(DWORD key)
 {
 	if ((m_lastFrameKey & key) && !(m_key & key))
 		return true;
+	if ((m_lastFrameKey_extend & key) && !(m_key_extend & key))
+		return true;
 
 	return false;
 }
@@ -57,6 +60,8 @@ bool CInputManager::KeyDown(DWORD key)
 {
 	if (!(m_lastFrameKey & key) && (m_key & key))
 		return true;
+	if (!(m_lastFrameKey_extend & key) && (m_key_extend & key))
+		return true;
 
 	return false;
 }
@@ -64,6 +69,8 @@ bool CInputManager::KeyDown(DWORD key)
 bool CInputManager::KeyPress(DWORD key)
 {
 	if (m_key & key)
+		return true;
+	if (m_key_extend & key)
 		return true;
 
 	return false;
@@ -148,6 +155,37 @@ void CInputManager::MouseUpdate(void)
 		m_key |= MOUSE_LEFT;
 	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
 		m_key |= MOUSE_RIGHT;
+	if (GetAsyncKeyState(VK_MBUTTON) & 0x8000)
+		m_key |= MOUSE_WHEEL;
+}
+
+void CInputManager::KeyUpdate_Extend(void)
+{
+	m_lastFrameKey_extend = m_key_extend;
+	m_key_extend = 0;
+
+	if (GetAsyncKeyState('6') & 0x8000)
+		m_key_extend |= KEY_6;
+	if (GetAsyncKeyState('7') & 0x8000)
+		m_key_extend |= KEY_7;
+	if (GetAsyncKeyState('8') & 0x8000)
+		m_key_extend |= KEY_8;
+	if (GetAsyncKeyState(VK_F6) & 0x8000)
+		m_key_extend |= KEY_F6;
+	if (GetAsyncKeyState(VK_F7) & 0x8000)
+		m_key_extend |= KEY_F7;
+	if (GetAsyncKeyState(VK_F8) & 0x8000)
+		m_key_extend |= KEY_F8;
+	if (GetAsyncKeyState('F') & 0x8000)
+		m_key_extend |= KEY_F;
+	if (GetAsyncKeyState('U') & 0x8000)
+		m_key_extend |= KEY_U;
+	if (GetAsyncKeyState('I') & 0x8000)
+		m_key_extend |= KEY_I;
+	if (GetAsyncKeyState('J') & 0x8000)
+		m_key_extend |= KEY_J;
+	if (GetAsyncKeyState('K') & 0x8000)
+		m_key_extend |= KEY_K;
 }
 
 void CInputManager::MoveMouseToCenter(void)

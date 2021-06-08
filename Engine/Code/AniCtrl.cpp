@@ -269,6 +269,12 @@ _bool CAniCtrl::IsItEnd(void)
 
 	return false;
 }
+
+double CAniCtrl::GetTimeline()
+{
+	return (double)m_fakeTimer / m_fakePeriod;
+}
+
 _uint CAniCtrl::FindIndexByName(std::string const & name, LPD3DXANIMATIONSET pAS)
 {
 	for (_uint i = 0; i < m_pAniCtrl->GetNumAnimationSets(); ++i)

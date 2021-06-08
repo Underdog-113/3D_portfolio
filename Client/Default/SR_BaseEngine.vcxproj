@@ -218,6 +218,7 @@
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
+    <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
