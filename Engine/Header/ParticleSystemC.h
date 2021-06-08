@@ -9,7 +9,7 @@ class ENGINE_DLL CParticleSystemC final : public CRenderComponent
 {
 public:
 	CParticleSystemC(void);
-	~CParticleSystemC(void) = default;
+	~CParticleSystemC(void);
 
 public:
 	SP(CComponent) MakeClone(CObject* pObject) override;
@@ -43,16 +43,13 @@ private:
 	_float                  m_emitRate     = 0.f;    // 초당 파티클의 수
 	_int                    m_maxParticles = 0;      // 최대 파티클의 개수
 	_float                  m_size		   = 0.7f;    // 모든 파티클의 크기
-	DWORD m_dwvbSize					   = 2048;		 // 버텍스 버퍼가 보관할 수 있는 파티클의 수
-	DWORD m_dwvbOffset					   = 0;      // offset in vb to lock   
-	DWORD m_dwvbBatchSize				   = 512;      // number of vertices to lock starting at _vbOffsetbool isDead();
 	LPDIRECT3DDEVICE9       m_pGraphicDevice;
-	IDirect3DVertexBuffer9* m_pVIBuffer;
+	IDirect3DVertexBuffer9* m_pVertexBuffer;
 	IDirect3DBaseTexture9*  m_pTexture;
 
 private:
 	_float m_LifeTime = 0.f;
-	GETTOR_REF(std::vector<CParticle*>, m_vParticles, {}, vParticles);
+	GETTOR(std::vector<SP(CParticle)>, m_vParticles, {}, vParticles);
 
 };
 END

@@ -127,14 +127,17 @@
     <Filter Include="04.Manager\00.ButtonManager">
       <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\00.Player\00.Kiana\FSM_Kiana">
+      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\02.Particle">
       <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="06.Function">
       <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\00.Player\00.Kiana\FSM_Kiana">
-      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
+    <Filter Include="02.Objects\00.Player\00.Kiana\00.FSM">
+      <UniqueIdentifier>{18b5228e-4a17-4c51-8803-8fe7bf27bec3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,9 +201,6 @@
     <ClInclude Include="..\Header\Monster.h">
       <Filter>02.Objects\01.Monster</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_Kiana_Define.h">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene\FSM_Kiana</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\FSM_SpiderC.h">
       <Filter>02.Objects\01.Monster\MO_Spider\FSM</Filter>
     </ClInclude>
@@ -222,11 +222,9 @@
     <ClInclude Include="..\Header\MO_Ninza.h">
       <Filter>02.Objects\01.Monster\MO_Ninza</Filter>
     </ClInclude>
-
     <ClInclude Include="..\Header\MO_Scout.h">
       <Filter>02.Objects\01.Monster\MO_Scout</Filter>
     </ClInclude>
-
     <ClInclude Include="..\Header\Monster.h">
       <Filter>02.Objects\Monster</Filter>
     </ClInclude>
@@ -263,12 +261,14 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\FSM_KianaC.h" />
+    <ClInclude Include="FSMDefine_Kiana.h">
+      <Filter>02.Objects\00.Player\00.Kiana\FSM_Kiana</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Function.h">
       <Filter>06.Function</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h">
-      <Filter>02.Objects\00.Player\00.Kiana\FSM_Kiana</Filter>
+    <ClInclude Include="..\Header\FSM_KianaC.h">
+      <Filter>02.Objects\00.Player\00.Kiana\00.FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -334,7 +334,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\MO_Scout.cpp">
       <Filter>02.Objects\01.Monster\MO_Scout</Filter>
-    </ClCompile>   
+    </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02.Objects\Monster</Filter>
     </ClCompile>
@@ -371,22 +371,20 @@
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\FSM_KianaC.cpp" />
     <ClCompile Include="..\Code\Function.cpp">
       <Filter>06.Function</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_KianaC.cpp">
+      <Filter>02.Objects\00.Player\00.Kiana\00.FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
       <Filter>99.Default</Filter>
     </Image>
-    <Image Include="SR_BaseEngine.ico">
-      <Filter>99.Default</Filter>
-    </Image>
+    <Image Include="Client.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SR_BaseEngine.rc">
-      <Filter>99.Default</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="Client.rc" />
   </ItemGroup>
 </Project>

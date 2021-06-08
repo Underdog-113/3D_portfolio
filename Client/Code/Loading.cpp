@@ -1,15 +1,6 @@
 #include "stdafx.h"
 #include "Loading.h"
 
-#include "DataStore.h"
-#include "MeshStore.h"
-#include "TextureStore.h"
- 
- 
-
-
-
-
 
 CLoading::CLoading()
 {

@@ -1,4 +1,4 @@
-#include "EngineStdafx.h"
+﻿#include "EngineStdafx.h"
 #include "AniCtrl.h"
  
 
@@ -86,14 +86,10 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	//현재 트랙을 끈다.
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + smoothTime);
-	//꺼지는 동안 키 속도 세팅
 	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
-	//꺼지는 동안 가중치
 	m_pAniCtrl->KeyTrackWeight(m_curTrack, 1 - changeWeight, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 
-	//새 트랙 활성화
 	m_pAniCtrl->SetTrackEnable(newTrack, TRUE);
 	m_pAniCtrl->KeyTrackSpeed(newTrack, 1.f, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 	m_pAniCtrl->KeyTrackWeight(newTrack, changeWeight, m_timer, smoothTime, D3DXTRANSITION_LINEAR);

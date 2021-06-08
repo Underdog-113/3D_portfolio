@@ -76,6 +76,7 @@
 #include "DeviceManager.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
+#include "PSC_Manager.h"
 #include "SoundManager.h"
 #include "TextManager.h"
 #include "ShaderManager.h"
