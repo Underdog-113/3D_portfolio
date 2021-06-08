@@ -19,6 +19,7 @@ CParticle::CParticle(BoundingBox* boundingBox, _uint numParticles)
 
 CParticle::~CParticle()
 {
+	OnDestroy();
 }
 
 
@@ -29,6 +30,7 @@ CParticle* CParticle::MakeClone()
 
 void CParticle::Awake()
 {
+
 	m_pGraphicDevice = GET_DEVICE;
 }
 
@@ -163,7 +165,7 @@ void CParticle::PostRender(SP(CGraphicsC) spGC)
 	m_pGraphicDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
 
-void CParticle::Release()
+void CParticle::OnDestroy()
 {
 	if (!m_AttributeList.empty())
 	{
@@ -175,7 +177,7 @@ void CParticle::Release()
 		m_AttributeList.clear();
 	}
 
-	SafeRelease(m_pGraphicDevice);
+	m_pGraphicDevice = nullptr;
 
 }
 

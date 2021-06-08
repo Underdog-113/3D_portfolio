@@ -103,7 +103,7 @@ void CMainApp::LateUpdate(void)
 
 	Engine::CCameraManager::GetInstance()->LateUpdate();
 	Engine::CGraphicsManager::GetInstance()->LateUpdate();
-
+	Engine::CPSC_Manager::GetInstance()->LateUpdate();
 	_float time = Engine::GET_ELAPSED_TIME;
 }
 

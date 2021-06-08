@@ -7,6 +7,7 @@ class ENGINE_DLL CParticle
 public:
 	CParticle(BoundingBox* boundingBox, _uint numParticles);
 	~CParticle();
+
 	CParticle* MakeClone();
 
 public:
@@ -17,7 +18,7 @@ public:
 	void Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer);
 	void PostRender(SP(CGraphicsC) spGC);
 
-	void Release();
+	void OnDestroy();
 
 public:
 	void reset();

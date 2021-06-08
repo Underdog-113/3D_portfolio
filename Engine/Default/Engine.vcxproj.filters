@@ -769,5 +769,8 @@
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

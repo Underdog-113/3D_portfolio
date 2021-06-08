@@ -17,8 +17,8 @@ sampler DecaleSamp = sampler_state
 	MagFilter = LINEAR;
 	MipFilter = NONE;
 
-	AddressU = Clamp;
-	AddressV = Clamp;
+	//AddressU = Clamp;
+	//AddressV = Clamp;
 };
 // -------------------------------------------------------------
 // 법선맵
@@ -30,8 +30,8 @@ sampler NormalSamp = sampler_state
 	MagFilter = LINEAR;
 	MipFilter = NONE;
 
-	AddressU = Wrap;
-	AddressV = Wrap;
+	/*AddressU = Wrap;
+	AddressV = Wrap;*/
 };
 
 // -------------------------------------------------------------
@@ -50,8 +50,8 @@ struct VS_OUTPUT
 // -------------------------------------------------------------
 VS_OUTPUT VS(
 	float4 Pos      : POSITION,          // 로컬위치좌표
-	float3 Normal : NORMAL,            // 법선벡터
-	float3 Tangent : TANGENT0,          // 접선벡터
+	float3 Normal	: NORMAL,            // 법선벡터
+	float3 Tangent	: TANGENT0,          // 접선벡터
 	float2 Texcoord : TEXCOORD0          // 텍스처좌표
 ) {
 	VS_OUTPUT Out = (VS_OUTPUT)0;        // 출력데이터
@@ -60,7 +60,7 @@ VS_OUTPUT VS(
 	Out.Pos = mul(Pos, g_mWVP);
 
 	// 메시 색
-	Out.Color = g_vColor;
+	Out.Color = 1.f;
 
 	// 디컬용 텍스처좌표
 	Out.Tex = Texcoord;
@@ -86,14 +86,14 @@ VS_OUTPUT VS(
 // -------------------------------------------------------------
 float4 PS(VS_OUTPUT In) : COLOR
 {
-	float3 N = 2.0f*tex2D(NormalSamp, In.Tex).xyz - 1.0;// 법선맵으로부터 법선
-	float3 L = normalize(In.L);						// 광원벡터
-	float3 R = reflect(-normalize(In.E), N);		// 반사벡터
-	float amb = -g_vLightDir.w;						// 환경광의 강도
+	float3 N = 2.0f * tex2D(NormalSamp, In.Tex).xyz - 1.0;// 법선맵으로부터 법선
+	float3 L = normalize(In.L);						    // 광원벡터
+	float3 R = reflect(-normalize(In.E), N);			// 반사벡터
+	float amb = -g_vLightDir.w;							// 환경광의 강도
 
 	return In.Color * tex2D(DecaleSamp, In.Tex)	// 확산광과 환경광에
 		* (max(0, dot(N, L)) + amb)			// 정점색과 텍스처색을 합성한다
-		+ 0.3f * pow(max(0,dot(R, L)), 8);		// Phong반영반사광
+		+ 0.7f * pow(max(0,dot(R, L)), 8);		// Phong반영반사광
 }
 
 // -------------------------------------------------------------
@@ -103,7 +103,7 @@ technique TShader
 {
 	pass P0
 	{
-		VertexShader = compile vs_1_1 VS();
-		PixelShader = compile ps_2_0 PS();
+		VertexShader = compile vs_3_0 VS();
+		PixelShader = compile ps_3_0 PS();
 	}
 }

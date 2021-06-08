@@ -76,7 +76,6 @@ void CSceneManager::SceneChange(CScene* pScene)
 	CFRC::GetInstance()->OnEnable();
 	CCameraManager::GetInstance()->SetMainCamera(CCameraManager::GetInstance()->GetCamera(m_pCurScene->GetObjectKey() + L"BasicCamera"));
 	m_sceneChanged = true;
-
 }
 
 void CSceneManager::OrganizeScene(_bool deleteCurScene)

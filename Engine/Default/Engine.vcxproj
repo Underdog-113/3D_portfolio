@@ -193,6 +193,7 @@
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>
