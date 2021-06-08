@@ -46,6 +46,8 @@ public:
 				void				SetAniFixTillEnd		(_bool isItFixed);
 
 private:
+	
+				void				SetupFrameMatrices		(_DerivedD3DXFRAME* pFrame, _mat* pParentMat);
 				void				UpdateFrameMatrices		(_DerivedD3DXFRAME* pFrame, _mat* pParentMat);
 				void				SetFrameMatPointer		(_DerivedD3DXFRAME* pFrame);
 				_uint				FindFirstAniIndex		(std::wstring const& fileName);

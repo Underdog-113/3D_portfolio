@@ -83,15 +83,21 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 	}
 
 	((_DerivedD3DXFRAME*)m_pRootFrame)->pParentFrame = nullptr;
-	UpdateFrame();
+
+	_mat makeMeshLookAtMe;
+	SetupFrameMatrices((_DerivedD3DXFRAME*)m_pRootFrame, D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f)));
+
 	SetFrameMatPointer((_DerivedD3DXFRAME*)m_pRootFrame);
 
 }
 
 void CDynamicMeshData::Update(void)
 {
-	if(m_playAnimation)
+	if (m_playAnimation)
+	{
 		m_pAniCtrl->Play();
+		m_pAniCtrl->PlayFake();
+	}
 }
 
 void CDynamicMeshData::OnDestory(void)
@@ -155,13 +161,13 @@ void CDynamicMeshData::SetAniFixTillEnd(_bool isItFixed)
 	m_pAniCtrl->SetFixTillEnd(isItFixed);
 }
 
-void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pParentMat)
+void CDynamicMeshData::SetupFrameMatrices(_DerivedD3DXFRAME * pFrame, _mat * pParentMat)
 {
 	if (pFrame == nullptr)
 		return;
 
 	pFrame->CombinedTransformMatrix = pFrame->TransformationMatrix * (*pParentMat);
-	
+
 	if (pFrame->pFrameSibling != nullptr)
 	{
 		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameSibling, pParentMat);
@@ -174,8 +180,20 @@ void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pPar
 		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild, &pFrame->CombinedTransformMatrix);
 		((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild)->pParentFrame = pFrame;
 	}
-		
 
+}
+
+void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pParentMat)
+{
+	if (pFrame == nullptr)
+		return;
+
+	pFrame->CombinedTransformMatrix = pFrame->TransformationMatrix * (*pParentMat);
+	
+	if (pFrame->pFrameSibling != nullptr)
+		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameSibling, pParentMat);
+	if (pFrame->pFrameFirstChild != nullptr)
+		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild, &pFrame->CombinedTransformMatrix);
 }
 
 void CDynamicMeshData::SetFrameMatPointer(_DerivedD3DXFRAME * pFrame)

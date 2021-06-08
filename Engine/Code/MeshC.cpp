@@ -1,9 +1,12 @@
 #include "EngineStdafx.h"
 
+#include "MeshC.h"
+
 #include "MeshStore.h"
 #include "DataStore.h"
 #include "Object.h"
 
+#include "MeshData.h"
 #include "StaticMeshData.h"
 #include "DynamicMeshData.h"
 #include "RootMotion.h"
@@ -243,45 +246,18 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
 
 	// root motion
-
-	_float3 rootMotionPos = ZERO_VECTOR;
-	if (m_RootMotion->GetIsRootMotion())
-	{
-		pDM->GetAniCtrl()->GetFakeAniCtrl()->AdvanceTime(0, NULL);
-		pDM->UpdateFrame();
-		_mat makeMeshLookAtMe;
-		D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
-		_mat rootComb = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
-		_mat rootChildComb = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootComb;
-		_mat frameOffset = *pDM->GetMeshContainers()[0]->pSkinInfo->GetBoneOffsetMatrix(1);
-		
-		//_float3 ownerSize = m_pOwner->GetTransform()->GetSize();
-		//_float3 sizedOffset = _float3(ownerSize.x * frameOffset._41, ownerSize.y * frameOffset._42, ownerSize.z * frameOffset._43);
-
-		rootMotionPos = _float3(rootChildComb._41, rootChildComb._42, rootChildComb._43);
-		//rootMotionPos -= sizedOffset;
-		m_RootMotion->SetRootMotionPos(rootMotionPos);
-		if (pDM->GetAniCtrl()->GetIsFakeAniStart())
-			m_RootMotion->SetRootMotionOffset(rootMotionPos);
-
-		m_RootMotion->RootMotionMove(m_pOwner, pDM->GetAniCtrl());
-	}
-	// root motion
+	_float3 rootMotionMoveAmount = ZERO_VECTOR;
+	ApplyRootMotion(pDM, &rootMotionMoveAmount);
 
 	pDM->GetAniCtrl()->GetAniCtrl()->AdvanceTime(0, NULL);
 	pDM->UpdateFrame();
 
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
-	_mat rootComb = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
-	_mat rootChildComb = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootComb;
-	_mat frameOffset = *pDM->GetMeshContainers()[0]->pSkinInfo->GetBoneOffsetMatrix(1);
+	_mat rootCombMat		= pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+	_mat rootChildCombMat	= pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
 
-	//_float3 ownerSize = m_pOwner->GetTransform()->GetSize();
-	//_float3 sizedOffset = _float3(ownerSize.x * frameOffset._41, ownerSize.y * frameOffset._42, ownerSize.z * frameOffset._43);
-
-	rootMotionPos = _float3(rootChildComb._41, rootChildComb._42, rootChildComb._43);
-	//rootMotionPos -= sizedOffset;
+	rootMotionMoveAmount	= _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
 
 	for (auto& meshContainer : pDM->GetMeshContainers())
 	{
@@ -290,11 +266,9 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			meshContainer->pRenderingMatrix[i] =
 				meshContainer->pFrameOffsetMatrix[i] * (*meshContainer->ppCombinedTransformMatrix[i]);
 
-			// root motion
-			meshContainer->pRenderingMatrix[i]._41 -= rootMotionPos.x;
-			meshContainer->pRenderingMatrix[i]._42 -= rootMotionPos.y;
-			meshContainer->pRenderingMatrix[i]._43 -= rootMotionPos.z;
-			// root motion
+			meshContainer->pRenderingMatrix[i]._41 -= rootMotionMoveAmount.x;
+			meshContainer->pRenderingMatrix[i]._42 -= rootMotionMoveAmount.y;
+			meshContainer->pRenderingMatrix[i]._43 -= rootMotionMoveAmount.z;
 		}
 
 		void* pSrcVertex = nullptr;
@@ -373,5 +347,34 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 		meshContainer->MeshData.pMesh->UnlockVertexBuffer();
 		meshContainer->pOriMesh->UnlockVertexBuffer();
 	}
+
+}
+
+void CMeshC::ApplyRootMotion(CDynamicMeshData* pDynamicMeshDate, _float3 * rootMotionMoveAmount)
+{
+	if (m_RootMotion->GetIsRootMotion())
+	{
+		pDynamicMeshDate->GetAniCtrl()->GetFakeAniCtrl()->AdvanceTime(0, NULL);
+		pDynamicMeshDate->UpdateFrame();
+
+		// Get First Bone("Bip001"?) TransformCombinedMatrix
+		_mat makeMeshLookAtMe;
+		D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+		_mat rootCombMat		= pDynamicMeshDate->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+		_mat rootChildCombMat	= pDynamicMeshDate->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+		*rootMotionMoveAmount = _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
+
+		// Set RootMotion Move Amount
+		m_RootMotion->SetRootMotionPos(*rootMotionMoveAmount);
+
+		// Set Start Offset for Loop Animation
+		if (pDynamicMeshDate->GetAniCtrl()->GetIsFakeAniStart())
+			m_RootMotion->SetRootMotionOffset(*rootMotionMoveAmount);
+
+		// Apply Root Motion 
+		m_RootMotion->RootMotionMove(m_pOwner, pDynamicMeshDate->GetAniCtrl());
+	}
+
 
 }

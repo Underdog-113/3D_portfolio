@@ -1,7 +1,6 @@
 #ifndef MESHC_H
 #define MESHC_H
 
-#include "MeshData.h"
 #include "RenderComponent.h"
 
 BEGIN(Engine)
@@ -9,6 +8,7 @@ BEGIN(Engine)
 class CMeshData;
 class CGraphicsC;
 class CRootMotion;
+class CDynamicMeshData;
 class ENGINE_DLL CMeshC final : public CRenderComponent
 {
 public:
@@ -48,6 +48,8 @@ private:
 
 			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
 			void				RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex, LPD3DXEFFECT pEffect);
+
+			void				ApplyRootMotion	(CDynamicMeshData* pDynamicMeshDate, _float3* rootMotionMoveAmount);
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Mesh;

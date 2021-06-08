@@ -208,8 +208,6 @@ void CAniCtrl::Play(void)
 	}
 
 	m_pAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
-
-	PlayFake();
 }
 
 
@@ -223,7 +221,7 @@ void CAniCtrl::PlayFake()
 		if (remainTime < 0)
 			remainTime = 0;
 
-		m_pFakeAniCtrl->AdvanceTime(remainTime * m_speed, NULL);
+		m_pFakeAniCtrl->AdvanceTime(remainTime, NULL);
 
 		remainTime = (double)m_fakeTimer - (double)m_fakePeriod;
 		if (remainTime < 0)
