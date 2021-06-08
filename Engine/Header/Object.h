@@ -1,7 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-
 BEGIN(Engine)
 class ENGINE_DLL CObject abstract  
 {
@@ -56,6 +55,7 @@ protected:
 	typedef std::unordered_map<_uint, SP(CComponent)> _COMPONENTS;
 	GETTOR			(_COMPONENTS,				m_mComponents,	{},			Components)
 	GETTOR_SETTOR	(CScene*,					m_pScene,		nullptr,	Scene)
+	GETTOR_SETTOR	(CObject*,					m_pParent,		nullptr,	Parent)
 
 	GETTOR_SETTOR	(_bool,						m_isClone,		false,		IsClone)
 	GETTOR_SETTOR	(_bool,						m_addExtra,		false,		AddExtra)

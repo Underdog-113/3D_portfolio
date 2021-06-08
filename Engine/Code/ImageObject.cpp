@@ -1,5 +1,5 @@
 #include "EngineStdafx.h"
-#include "Image.h"
+#include "ImageObject.h"
 
 USING(Engine)
 _uint CImageObject::m_s_uniqueID = 0;
@@ -70,11 +70,27 @@ void CImageObject::PreRender(void)
 	m_spRectTex->PreRender(m_spGraphics);
 }
 
+void CImageObject::PreRender(LPD3DXEFFECT pEffect)
+{
+	m_spRectTex->PreRender(GetComponent<CGraphicsC>(), pEffect);
+}
+
 void CImageObject::Render(void)
 {
 	m_spRectTex->Render(m_spGraphics);
 
-	// 텍스처 불러서
+	SP(CTextC) textC = GetComponent<CTextC>();
+
+	if (textC)
+	{
+		textC->Render(m_spGraphics);
+	}
+}
+
+void CImageObject::Render(LPD3DXEFFECT pEffect)
+{
+	m_spRectTex->Render(GetComponent<CGraphicsC>(), pEffect);
+
 	SP(CTextC) textC = GetComponent<CTextC>();
 
 	if (textC)
@@ -86,6 +102,11 @@ void CImageObject::Render(void)
 void CImageObject::PostRender(void)
 {
 	m_spRectTex->PostRender(m_spGraphics);
+}
+
+void CImageObject::PostRender(LPD3DXEFFECT pEffect)
+{
+	m_spRectTex->PostRender(GetComponent<CGraphicsC>(), pEffect);
 }
 
 void CImageObject::OnDestroy(void)
