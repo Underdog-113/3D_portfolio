@@ -256,18 +256,6 @@
     <Filter Include="03.Components\99. Develop\01. ParticleSystem\ParticleComponent">
       <UniqueIdentifier>{f8723815-601e-49ed-a044-d619184070a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\02.UI">
-      <UniqueIdentifier>{c3763dc3-657d-413f-9626-6daeb5fa1eee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\02.UI\00.Slider">
-      <UniqueIdentifier>{3d634609-b231-4f27-a0a7-4581765223fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\06.Slider">
-      <UniqueIdentifier>{df0b8cfd-09b9-4901-aa7a-8fccb3dc9c15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader">
-      <UniqueIdentifier>{cbec6636-0703-4420-bac9-68ed1178cf35}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -475,7 +463,6 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClCompile>
@@ -485,14 +472,11 @@
     <ClCompile Include="..\Code\Particle.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Slider.cpp">
-      <Filter>02.Objects\06.Slider</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SliderShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ImageObject.cpp">
-      <Filter>02.Objects\05.ImageObject</Filter>
+    <ClCompile Include="..\Code\ImageObject.cpp" />
+    <ClCompile Include="..\Code\Slider.cpp" />
+    <ClCompile Include="..\Code\SliderShader.cpp" />
+    <ClCompile Include="..\Code\StaticMeshData.cpp">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -725,7 +709,6 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\PSC_Manager.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClInclude>
@@ -734,15 +717,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\Particle.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
-    </ClCompile>
-    <ClInclude Include="..\Header\Slider.h">
-      <Filter>02.Objects\06.Slider</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\SliderShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ImageObject.h">
-      <Filter>02.Objects\05.ImageObject</Filter>
+    <ClInclude Include="..\Header\ImageObject.h" />
+    <ClInclude Include="..\Header\Slider.h" />
+    <ClInclude Include="..\Header\SliderShader.h" />
+    <ClInclude Include="..\Header\StaticMeshData.h">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -758,8 +738,6 @@
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\02.DeferredBlendShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.SliderShader</Filter>
-    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
   </ItemGroup>
 </Project>
