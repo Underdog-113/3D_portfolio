@@ -441,9 +441,6 @@
     <ClCompile Include="..\Code\Shader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ShaderManager.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\MeshShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\00.MeshShader</Filter>
     </ClCompile>
@@ -456,13 +453,14 @@
     <ClCompile Include="..\Code\DeferredLightShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\03.DeferredLightShader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ShaderManager.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\RootMotion.cpp" />
+    <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClCompile>
@@ -687,9 +685,6 @@
     <ClInclude Include="..\Header\Shader.h">
       <Filter>00.Engine\01.Graphics\06.Shader</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ShaderManager.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\MeshShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\00.MeshShader</Filter>
     </ClInclude>
@@ -702,13 +697,14 @@
     <ClInclude Include="..\Header\DeferredLightShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\03.DeferredLightShader</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ShaderManager.h" />
     <ClInclude Include="..\Header\ShaderManager.h">
       <Filter>00.Engine\01.Graphics\06.Shader\00.Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\RootMotion.h" />
+    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\PSC_Manager.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClInclude>

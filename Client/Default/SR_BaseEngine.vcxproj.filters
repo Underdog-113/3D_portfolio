@@ -192,6 +192,9 @@
     <ClInclude Include="..\Header\InitScene.h">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana.h">
+      <Filter>02.Objects\00.Player\00.Kiana</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Monster.h">
       <Filter>02.Objects\01.Monster</Filter>
     </ClInclude>
@@ -219,8 +222,13 @@
     <ClInclude Include="..\Header\MO_Ninza.h">
       <Filter>02.Objects\01.Monster\MO_Ninza</Filter>
     </ClInclude>
+    
     <ClInclude Include="..\Header\MO_Scout.h">
       <Filter>02.Objects\01.Monster\MO_Scout</Filter>
+    </ClInclude>
+    
+    <ClInclude Include="..\Header\Monster.h">
+      <Filter>02.Objects\Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_ScoutC.h">
       <Filter>02.Objects\01.Monster\MO_Scout\FSM</Filter>
@@ -255,6 +263,7 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FSM_KianaC.h" />
     <ClInclude Include="..\Header\Function.h">
       <Filter>06.Function</Filter>
     </ClInclude>
@@ -293,6 +302,9 @@
     <ClCompile Include="..\Code\InitScene.cpp">
       <Filter>01.Scene\00.InitScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Kiana.cpp">
+      <Filter>02.Objects\00.Player\00.Kiana</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02.Objects\01.Monster</Filter>
     </ClCompile>
@@ -317,8 +329,13 @@
     <ClCompile Include="..\Code\MO_Ninza.cpp">
       <Filter>02.Objects\01.Monster\MO_Ninza</Filter>
     </ClCompile>
+    
     <ClCompile Include="..\Code\MO_Scout.cpp">
       <Filter>02.Objects\01.Monster\MO_Scout</Filter>
+    </ClCompile>
+   
+    <ClCompile Include="..\Code\Monster.cpp">
+      <Filter>02.Objects\Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_ScoutC.cpp">
       <Filter>02.Objects\01.Monster\MO_Scout\FSM</Filter>
@@ -353,6 +370,7 @@
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\FSM_KianaC.cpp" />
     <ClCompile Include="..\Code\Function.cpp">
       <Filter>06.Function</Filter>
     </ClCompile>

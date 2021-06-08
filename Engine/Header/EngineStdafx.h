@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ENGINESTDAFX_H
 #define ENGINESTDAFX_H
 

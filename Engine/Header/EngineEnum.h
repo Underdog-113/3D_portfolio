@@ -4,7 +4,6 @@
 namespace Engine
 {
 #pragma region GraphicsEnum
-	// ChangMode
 	enum class EDisplayMdoe
 	{
 		FullMode,
