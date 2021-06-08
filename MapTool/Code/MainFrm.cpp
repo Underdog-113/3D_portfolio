@@ -101,7 +101,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	//pos.x = (LONG)(GetSystemMetrics(SM_CXSCREEN) / 2.0f - rect.Width() / 2.0f);
 	//pos.y = (LONG)(GetSystemMetrics(SM_CYSCREEN) / 2.0f - rect.Height() / 2.0f);
 
-	//SetWindowPos(NULL, 50, 50, 0, 0, SWP_NOSIZE);
+	SetWindowPos(NULL, 20, 20, 0, 0, SWP_NOSIZE);
 
 	m_mainSplitter.CreateStatic(this, 1, 2);
 	m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMapToolView), CSize((_int)VIEWCX, (_int)VIEWCY), pContext);

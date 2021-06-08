@@ -77,16 +77,6 @@ void CEditorScene::Start(void)
 {
 	__super::Start();
 
-	//SP(Engine::CObject) spEmptyObject
-	//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
-
-	//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
-	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	//spEmptyObject->AddComponent<Engine::CTextureC>();
-	//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//spEmptyObject->GetTransform()->SetSize(10, 10, 10);
-	//spEmptyObject->GetTransform()->SetPosition(0.f, 0.f, 0.f);
-
 	SP(Engine::CObject) spCube
 		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
@@ -95,37 +85,8 @@ void CEditorScene::Start(void)
 	spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	spCube->GetTransform()->SetSize(1, 1, 1);
+	spCube->GetTransform()->SetSize(300, 1, 300);
 	spCube->GetTransform()->SetPosition(0.f, 0.f, 0.f);
-
-	spCube = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
-
-	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	spCube->GetTransform()->SetSize(1, 1, 1);
-	spCube->GetTransform()->SetPosition(3.f, 0.f, 0.f);
-
-	spCube = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube2");
-
-	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	spCube->GetTransform()->SetSize(1, 1, 1);
-	spCube->GetTransform()->SetPosition(6.f, 0.f, 0.f);
-
-	//SP(Engine::CObject) spMap
-	//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"S02");
-
-	//spMap->AddComponent<Engine::CMeshC>()->AddMeshData(L"S02_del");
-	//spMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	//spMap->AddComponent<Engine::CTextureC>();
-	//spMap->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//spMap->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 }
 
 void CEditorScene::FixedUpdate(void)
@@ -199,16 +160,21 @@ void CEditorScene::InputSetting()
 			spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
 			spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spObj->AddComponent<Engine::CTextureC>();
-			spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
 			spObj->GetTransform()->SetSize(1, 1, 1);
 			spObj->GetTransform()->SetPosition(intersection);
 
 			std::cout << "create" << std::endl;
 			m_pCurSelectedObject = spObj.get();
+			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 		}
 		else if (nullptr != pTarget)
 		{
+			if (L"Cube0" == pTarget->GetName())
+				return;
+
 			m_pCurSelectedObject = pTarget;
+			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 			std::wcout << pTarget->GetName() << std::endl;
 
 			m_pMenuView->SetPosition(m_pCurSelectedObject->GetTransform()->GetPosition());
@@ -234,50 +200,11 @@ void CEditorScene::InputSetting()
 		}
 	}
 
-	if (false == m_pCurSelectedObject)
-		return;
-
 	// delete
-	if (Engine::IMKEY_DOWN(KEY_Q))
+	if (nullptr != m_pCurSelectedObject && Engine::IMKEY_DOWN(KEY_DELETE))
 	{
 		m_pCurSelectedObject->SetDeleteThis(true);
 		std::cout << "del" << std::endl;
 		m_pCurSelectedObject = nullptr;
 	}
-
-	// pos
-	//if (Engine::IMKEY_DOWN(KEY_F5))
-	//{
-	//	_float3 objPos = m_pCurSelectedObject->GetTransform()->GetPosition();
-	//	m_pCurSelectedObject->GetTransform()->SetSize(objPos.x + 0.1f, objPos.y + 0.1f, objPos.z + 0.1f);
-	//}
-	//else if (Engine::IMKEY_DOWN(KEY_F2))
-	//{
-	//	_float3 objPos = m_pCurSelectedObject->GetTransform()->GetPosition();
-	//	m_pCurSelectedObject->GetTransform()->SetSize(objPos.x - 0.1f, objPos.y - 0.1f, objPos.z - 0.1f);
-	//}
-
-	// size
-	//if (Engine::IMKEY_DOWN(KEY_F1))
-	//{
-	//	_float3 objSize = m_pCurSelectedObject->GetTransform()->GetSize();
-	//	m_pCurSelectedObject->GetTransform()->SetSize(objSize.x + 0.1f, objSize.y + 0.1f, objSize.z + 0.1f);
-	//}
-	//else if (Engine::IMKEY_DOWN(KEY_F2))
-	//{
-	//	_float3 objSize = m_pCurSelectedObject->GetTransform()->GetSize();
-	//	m_pCurSelectedObject->GetTransform()->SetSize(objSize.x - 0.1f, objSize.y - 0.1f, objSize.z - 0.1f);
-	//}
-
-	// rot
-	//if (Engine::IMKEY_DOWN(KEY_F3))
-	//{
-	//	_float3 objRot = m_pCurSelectedObject->GetTransform()->GetRotation();
-	//	m_pCurSelectedObject->GetTransform()->SetSize(objRot.x + 0.1f, objRot.y + 0.1f, objRot.z + 0.1f);
-	//}
-	//else if (Engine::IMKEY_DOWN(KEY_F4))
-	//{
-	//	_float3 objRot = m_pCurSelectedObject->GetTransform()->GetRotation();
-	//	m_pCurSelectedObject->GetTransform()->SetSize(objRot.x - 0.1f, objRot.y - 0.1f, objRot.z - 0.1f);
-	//}
 }

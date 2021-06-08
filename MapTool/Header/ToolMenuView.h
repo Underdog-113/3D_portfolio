@@ -38,7 +38,8 @@ public:
 	void SetRotation(Engine::_float3 vRot);
 	void SetScale(Engine::_float3 vScale);
 	void SpinBtn(LPNMUPDOWN ppNMUpDown, CEdit* pBtn, Engine::_float fVal);
-	void SetChangeList(std::wstring sectionKey);
+	void SetChangeMeshList(std::wstring sectionKey);
+	void SetChangeTextureList(std::wstring sectionKey);
 
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
@@ -49,11 +50,16 @@ public:
 	afx_msg void OnScaleX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnScaleY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnTvnSelchangedMeshTree(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLbnSelchangeMeshList();
+	afx_msg void OnBnClickedPositionBtn();
 
 private:
 	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
+	std::vector<std::string> split(std::string input, char delimiter);
+	_bool WstrToBool(std::wstring wstr);
+	_int WstrToInt(std::wstring wstr);
+	_float StrToFloat(std::string str);
 
 // add valuable
 protected:
@@ -84,36 +90,18 @@ protected:
 	short m_valueMin = 0;
 	short m_valueMax = 0;
 
-	CTreeCtrl m_meshTree;
+	CTreeCtrl m_tree;
 	CListBox m_meshTreeList;
+	CListBox m_textureTreeList;
 
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
-	
-	CString m_curSelPath; // 리스트에서 선택한 메쉬의 경로
-	CString m_curObj;
 
 	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
-
 public:
-//	afx_msg void OnBnClickedObjectRadio();
-//	afx_msg void OnBnClickedBlock();
-//	afx_msg void OnBnClickedNavi();
-//	afx_msg void OnBnClickedSaveBtn();
-//	afx_msg void OnBnClickedLoadBtn();
-//
-//public:
-//	//CListBox m_TreeList;
-//	//CTreeCtrl m_Tree;
-//	//CString m_curTreeItem; // 트리에서 클릭한 아이템
-//	//CString m_curSelPath; // 리스트에서 선택한 메쉬의 경로
-//	//CString m_curSelFileName;
-//	//CString m_curObj;
-//
-//	void Set_List_Path(TCHAR * path, _bool bCheck = FALSE);
-//	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
-//	afx_msg void OnLbnSelchangeMeshList();
-public:
-	
+	afx_msg void OnBnClickedRotationBtn();
+	afx_msg void OnBnClickedScaleBtn();
+	CEdit m_curObjName;
+	afx_msg void OnBnClickedSaveBtn();
+	CEdit m_saveFileName;
+	afx_msg void OnBnClickedLoadBtn();
 };
-
-

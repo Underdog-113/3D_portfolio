@@ -22,6 +22,8 @@ public:
 			_TexData*			GetTextureData			(std::wstring textureKey);
 			void				InitTextureForScene		(std::wstring curScene, _bool isStatic = false);
 
+			void				FindTexturesInSection	(std::wstring sectionKey, std::vector<std::wstring>& vTexturekeys);
+
 private:
 			void				ParsingTexture			(std::wstring filePath, 
 														 std::wstring fileName);
