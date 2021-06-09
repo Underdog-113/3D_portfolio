@@ -4,7 +4,6 @@
 namespace Engine
 {
 #pragma region GraphicsEnum
-	// ChangMode
 	enum class EDisplayMdoe
 	{
 		FullMode,
@@ -66,8 +65,9 @@ namespace Engine
 		RectTexShader			= 1,
 		DeferredBlendShader		= 2,
 		DeferredLightShader		= 3,
+		//SkyBoxShader			= 4,
 		SliderShader			= 4,
-		SkyBoxShader			= 5,
+		WaterShader				= 5,
 		/*Shader_Sample	= 0,
 		Shader_Terrain	= 1,
 		Shader_Mesh		= 2,
@@ -167,7 +167,7 @@ namespace Engine
 		DebugCollision		= 3,
 		Grid				= 4,
 		UI					= 5,
-		NumOfEngineLayerID	
+		NumOfEngineLayerID
 	};
 
 }

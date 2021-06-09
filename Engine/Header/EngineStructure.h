@@ -77,6 +77,7 @@ namespace Engine
 	typedef struct _DerivedD3DXFRAME : public D3DXFRAME
 	{
 		_mat		CombinedTransformMatrix;
+		_DerivedD3DXFRAME* pParentFrame;
 	}D3DXFRAME_DERIVED;
 
 	typedef struct _DerivedD3DXMESHCONTAINER : public D3DXMESHCONTAINER

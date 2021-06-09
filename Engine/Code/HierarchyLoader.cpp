@@ -131,9 +131,10 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 
 	pDerivedMeshContainer->ppCombinedTransformMatrix = new _mat*[pDerivedMeshContainer->numBones];
 	ZeroMemory(pDerivedMeshContainer->ppCombinedTransformMatrix, sizeof(_mat*) * pDerivedMeshContainer->numBones);
-
+	
 	pDerivedMeshContainer->pRenderingMatrix = new _mat[pDerivedMeshContainer->numBones];
 	ZeroMemory(pDerivedMeshContainer->pRenderingMatrix, sizeof(_mat) * pDerivedMeshContainer->numBones);
+	
 
 	//각 프레임의 OffsetMatrix에 skinInfo가 갖고있는 BoneOffsetMatrix를 넣어줌.
 	for (_ulong i = 0; i < pDerivedMeshContainer->numBones; ++i)

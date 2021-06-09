@@ -3,9 +3,10 @@
 
 #include "MeshData.h"
 #include "HierarchyLoader.h"
-#include "AniCtrl.h"
 
 BEGIN(Engine)
+class CObject;
+class CAniCtrl;
 class ENGINE_DLL CDynamicMeshData final : public CMeshData
 {
 	friend class CMeshStore;
@@ -46,9 +47,12 @@ public:
 				void				SetAniFixTillEnd		(_bool isItFixed);
 
 private:
+	
+				void				SetupFrameMatrices		(_DerivedD3DXFRAME* pFrame, _mat* pParentMat);
 				void				UpdateFrameMatrices		(_DerivedD3DXFRAME* pFrame, _mat* pParentMat);
 				void				SetFrameMatPointer		(_DerivedD3DXFRAME* pFrame);
 				_uint				FindFirstAniIndex		(std::wstring const& fileName);
+
 
 private:
 	typedef std::vector<_DerivedD3DXMESHCONTAINER*> _MESHCONTAINERS;
