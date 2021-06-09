@@ -46,7 +46,10 @@ void CDongScene::Start(void)
 
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
 	Load->Load(this);
+	//Load->DelegatePush(&CDataLoad::)
+	delete(Load);
 }
 
 void CDongScene::FixedUpdate(void)

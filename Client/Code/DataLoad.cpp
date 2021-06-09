@@ -12,16 +12,25 @@
 
 CDataLoad::CDataLoad()
 {
-	m_loadDeleGate += std::bind(&CDataLoad::ImageLoad, &CDataLoad());
-	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad());
-	m_loadDeleGate += std::bind(&CDataLoad::ButtonLoad, &CDataLoad());
-	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad());
-	m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad());
+	
 }
 
 CDataLoad::~CDataLoad()
 {
 
+}
+
+void CDataLoad::Setting()
+{
+	m_loadDeleGate += std::bind(&CDataLoad::ImageLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::ButtonLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad(), std::placeholders::_1);
+}
+
+void CDataLoad::DelegatePush(void(CDataLoad::* function)(Engine::CScene *), CDataLoad * dataload)
+{
 }
 
 void CDataLoad::Load(Engine::CScene * pScene)
