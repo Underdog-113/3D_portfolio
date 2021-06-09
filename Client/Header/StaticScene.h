@@ -28,7 +28,8 @@ public:
 public:
 					void				InitSettings			(void);
 					void				InitPrototypes			(void) override;
-
+private:
+					void				InitUiPrototypes(void);
 	GETTOR			(CLoading*,			m_pLoading,				nullptr,		Loading)
 };
 

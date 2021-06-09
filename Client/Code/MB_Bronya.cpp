@@ -6,6 +6,11 @@ CMB_Bronya::CMB_Bronya()
 {
 }
 
+CMB_Bronya::~CMB_Bronya()
+{
+	OnDestroy();
+}
+
 SP(Engine::CObject) CMB_Bronya::MakeClone(void)
 {
 	SP(CMB_Bronya) spClone(new CMB_Bronya, Engine::SmartDeleter<CMB_Bronya>);

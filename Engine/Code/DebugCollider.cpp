@@ -14,6 +14,7 @@ CDebugCollider::CDebugCollider()
 
 CDebugCollider::~CDebugCollider()
 {
+	OnDestroy();
 }
 
 SP(CDebugCollider) CDebugCollider::Create(_bool isStatic, CScene* pScene)
