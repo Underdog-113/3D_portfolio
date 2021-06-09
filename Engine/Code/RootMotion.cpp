@@ -21,49 +21,73 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl)
 	// root motion
 	_float3 ownerSize = pOwner->GetTransform()->GetSize();
 
-	_float3 forward = pOwner->GetTransform()->GetForward();
-	_float3 sizedPos = 
-		_float3(ownerSize.x * m_rootMotionPos.x * forward.x,
-			ownerSize.y * m_rootMotionPos.y * forward.y,
-			ownerSize.z * m_rootMotionPos.z * forward.z);
-	_float3 sizedOffset = _float3(ownerSize.x * m_rootMotionOffset.x, ownerSize.y * m_rootMotionOffset.y, ownerSize.z * m_rootMotionOffset.z);
+	_float3 ownerForward = pOwner->GetTransform()->GetForward();
+	ownerForward.y = 0.f;
+	D3DXVec3Normalize(&ownerForward, &ownerForward);
 
-	double timeline = pAniCtrl->GetFakeTimer() / pAniCtrl->GetFakePeriod();
-	int timeRepeat = (int)timeline;
-	timeline -= (double)timeRepeat;
+	_float3 sizedRootMotionPos = 
+		_float3(
+			m_rootMotionPos.x * ownerSize.x,
+			m_rootMotionPos.y * ownerSize.y,
+			m_rootMotionPos.z * ownerSize.z);
 	
+
+	_float3 sizedLocalStartOffset =
+		_float3(
+			m_rootMotionOffset.x * ownerSize.x,
+			m_rootMotionOffset.y * ownerSize.y,
+			m_rootMotionOffset.z * ownerSize.z);
 
 	// change anim
 	if (m_prevFakeIndex != pAniCtrl->GetFakeIndex())
 	{
 		if (!m_pIsFixRootMotionOffsets[pAniCtrl->GetFakeIndex()])
 		{
-			m_animStartPos = _float3(m_animEndPos.x - sizedOffset.x, 0.f, m_animEndPos.z - sizedOffset.z);
+			m_prevSizedRootMotionPos = ZERO_VECTOR;
+
+			_float3 worldOffset = ownerForward * D3DXVec3Length(&sizedLocalStartOffset);
+			m_animStartWorldPos = _float3(m_animEndWorldPos.x, 0.f, m_animEndWorldPos.z) - worldOffset;
+			m_animEndWorldPos = m_animStartWorldPos;
 		}
 		m_prevFakeIndex = pAniCtrl->GetFakeIndex();
-		m_prevTimeLine = 0;
 		return;
 	}
 
 	if (pAniCtrl->GetIsFakeAniEnd())
 	{
-		// loop
+		/*
 		pOwner->GetTransform()->AddPosition(m_animEndPos);
 		m_animStartPos = _float3(m_animEndPos.x - sizedOffset.x, 0.f, m_animEndPos.z - sizedOffset.z);
 		m_animEndPos = m_animStartPos + sizedPos;
-		
+
 		pOwner->GetTransform()->SetPosition(m_animEndPos);
-		
+
 		m_prevTimeLine = 0;
+		pAniCtrl->SetIsFakeAniEnd(false);
+		*/
+
+		// loop
+		m_animStartWorldPos = m_animEndWorldPos;
+
+		_float3 worldOffset = ownerForward * D3DXVec3Length(&sizedLocalStartOffset);
+		m_animStartWorldPos = _float3(m_animEndWorldPos.x, 0.f, m_animEndWorldPos.z) - worldOffset;
+
+		_float3 forwardMoveAmount = ownerForward * D3DXVec3Length(&sizedRootMotionPos);
+		m_animEndWorldPos = m_animStartWorldPos + forwardMoveAmount;
+
+		pOwner->GetTransform()->SetPosition(m_animEndWorldPos);
+				
 		pAniCtrl->SetIsFakeAniEnd(false);
 	}
 	else
 	{
-		m_animEndPos = m_animStartPos + sizedPos;
-		pOwner->GetTransform()->SetPosition(m_animEndPos);
-
-		m_prevTimeLine = timeline;
+		_float3 moveAmount = sizedRootMotionPos - m_prevSizedRootMotionPos;
+		_float3 forwardMoveAmount = ownerForward * D3DXVec3Length(&moveAmount);
+		m_animEndWorldPos += forwardMoveAmount;
+		pOwner->GetTransform()->SetPosition(m_animEndWorldPos);
 	}
+
+	m_prevSizedRootMotionPos = sizedRootMotionPos;
 }
 
 void CRootMotion::OnFixRootMotionOffset(_uint index)

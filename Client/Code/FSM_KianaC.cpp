@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Header\FSM_KianaC.h"
+#include "FSM_KianaC.h"
 #include "State.h"
 #include "DynamicMeshData.h"
 
@@ -20,6 +20,9 @@ SP(Engine::CComponent) CFSM_KianaC::MakeClone(Engine::CObject * pObject)
 void CFSM_KianaC::Awake(void)
 {
 	Engine::CState* pState;
+
+	CreateState(CFSM_KianaC, pState, Appear)
+		AddState(pState, Name_Appear);
 
 	CreateState(CFSM_KianaC, pState, Attack_1)
 		AddState(pState, Name_Attack_1);
@@ -112,13 +115,24 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 {
 	if (m_pDM->GetAniCtrl()->IsItEnd())
 	{
-		ChangeState(Name_StandBy);
+		switch (m_appearOption)
+		{
+		case CFSM_KianaC::None:
+			ChangeState(Name_StandBy);
+			break;
+		case CFSM_KianaC::QTE:
+			ChangeState(Name_Attack_QTE);
+			break;
+		default:
+			break;
+		}
 		return;
 	}
 }
 
 void CFSM_KianaC::Appear_End(void)
 {
+	m_appearOption = None;
 }
 
 void CFSM_KianaC::Attack_1_Init(void)
@@ -331,14 +345,21 @@ void CFSM_KianaC::Attack_5_End(void)
 
 void CFSM_KianaC::Attack_QTE_Init(void)
 {
+	m_pOwner->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(Index_Attack_QTE);
 }
 
 void CFSM_KianaC::Attack_QTE_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Attack_QTE);
 }
 
 void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 {
+	if (m_pDM->GetAniCtrl()->IsItEnd())
+	{
+		ChangeState(Name_StandBy);
+		return;
+	}
 }
 
 void CFSM_KianaC::Attack_QTE_End(void)
@@ -351,6 +372,7 @@ void CFSM_KianaC::Die_Init(void)
 
 void CFSM_KianaC::Die_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Die);
 }
 
 void CFSM_KianaC::Die_Update(float deltaTime)
@@ -367,6 +389,7 @@ void CFSM_KianaC::EvadeBackward_Init(void)
 
 void CFSM_KianaC::EvadeBackward_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_EvadeBackward);
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
@@ -383,6 +406,7 @@ void CFSM_KianaC::EvadeForward_Init(void)
 
 void CFSM_KianaC::EvadeForward_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_EvadeForward);
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
@@ -399,6 +423,7 @@ void CFSM_KianaC::Hit_H_Init(void)
 
 void CFSM_KianaC::Hit_H_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Hit_H);
 }
 
 void CFSM_KianaC::Hit_H_Update(float deltaTime)
@@ -415,6 +440,7 @@ void CFSM_KianaC::Hit_L_Init(void)
 
 void CFSM_KianaC::Hit_L_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Hit_L);
 }
 
 void CFSM_KianaC::Hit_L_Update(float deltaTime)
@@ -431,6 +457,7 @@ void CFSM_KianaC::Idle_01_Init(void)
 
 void CFSM_KianaC::Idle_01_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_01);
 }
 
 void CFSM_KianaC::Idle_01_Update(float deltaTime)
@@ -447,6 +474,7 @@ void CFSM_KianaC::Idle_1to2_Init(void)
 
 void CFSM_KianaC::Idle_1to2_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_1to2);
 }
 
 void CFSM_KianaC::Idle_1to2_Update(float deltaTime)
@@ -463,6 +491,7 @@ void CFSM_KianaC::Idle_02_Init(void)
 
 void CFSM_KianaC::Idle_02_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_02);
 }
 
 void CFSM_KianaC::Idle_02_Update(float deltaTime)
@@ -479,6 +508,7 @@ void CFSM_KianaC::Idle_2to3_Init(void)
 
 void CFSM_KianaC::Idle_2to3_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_2to3);
 }
 
 void CFSM_KianaC::Idle_2to3_Update(float deltaTime)
@@ -495,6 +525,7 @@ void CFSM_KianaC::Idle_03_Init(void)
 
 void CFSM_KianaC::Idle_03_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_03);
 }
 
 void CFSM_KianaC::Idle_03_Update(float deltaTime)
@@ -511,6 +542,7 @@ void CFSM_KianaC::Idle_3to4_Init(void)
 
 void CFSM_KianaC::Idle_3to4_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_3to4);
 }
 
 void CFSM_KianaC::Idle_3to4_Update(float deltaTime)
@@ -527,6 +559,7 @@ void CFSM_KianaC::Idle_4to5_Init(void)
 
 void CFSM_KianaC::Idle_4to5_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Idle_4to5);
 }
 
 void CFSM_KianaC::Idle_4to5_Update(float deltaTime)
@@ -543,12 +576,15 @@ void CFSM_KianaC::Run_Init(void)
 
 void CFSM_KianaC::Run_Enter(void)
 {
-	m_pDM->ChangeAniSet(40);
+	m_pDM->ChangeAniSet(Index_Run);
 }
 
 void CFSM_KianaC::Run_Update(float deltaTime)
 {
-	if (Engine::IMKEY_UP(KEY_W))
+	if (!Engine::IMKEY_PRESS(KEY_W) &&
+		!Engine::IMKEY_PRESS(KEY_A) &&
+		!Engine::IMKEY_PRESS(KEY_S) &&
+		!Engine::IMKEY_PRESS(KEY_D))
 	{
 		ChangeState(Name_StandBy);
 		return;
@@ -571,17 +607,26 @@ void CFSM_KianaC::StandBy_Init(void)
 
 void CFSM_KianaC::StandBy_Enter(void)
 {
-	m_pDM->ChangeAniSet(47);
+	m_pDM->ChangeAniSet(Index_StandBy);
 }
 
 void CFSM_KianaC::StandBy_Update(float deltaTime)
 {
-	if (Engine::IMKEY_DOWN(KEY_W))
+	if (Engine::IMKEY_DOWN(KEY_W) || 
+		Engine::IMKEY_DOWN(KEY_A) || 
+		Engine::IMKEY_DOWN(KEY_S) || 
+		Engine::IMKEY_DOWN(KEY_D))
 	{
 		ChangeState(Name_Run);
 		return;
 	}
 
+	if (Engine::IMKEY_DOWN(KEY_U))
+	{
+		ChangeState(Name_Appear);
+		m_appearOption = QTE;
+		return;
+	}
 
 	if (Engine::IMKEY_DOWN(KEY_J))
 	{
@@ -600,6 +645,7 @@ void CFSM_KianaC::Stun_Init(void)
 
 void CFSM_KianaC::Stun_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Stun);
 }
 
 void CFSM_KianaC::Stun_Update(float deltaTime)
@@ -616,6 +662,7 @@ void CFSM_KianaC::SwitchIn_Init(void)
 
 void CFSM_KianaC::SwitchIn_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_SwitchIn);
 }
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
@@ -632,6 +679,7 @@ void CFSM_KianaC::SwitchOut_Init(void)
 
 void CFSM_KianaC::SwitchOut_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_SwitchOut);
 }
 
 void CFSM_KianaC::SwitchOut_Update(float deltaTime)
