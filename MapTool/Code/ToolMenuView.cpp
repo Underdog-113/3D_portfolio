@@ -62,6 +62,7 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST4, m_textureTreeList);
 	DDX_Control(pDX, IDC_EDIT11, m_curObjName);
 	DDX_Control(pDX, IDC_EDIT10, m_saveFileName);
+	DDX_Control(pDX, IDC_CHECK5, m_initTexture);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -430,12 +431,7 @@ std::vector<std::string> CToolMenuView::split(std::string input, char delimiter)
 
 _bool CToolMenuView::WstrToBool(std::wstring wstr)
 {
-	std::string str = Engine::WStrToStr(wstr);
-
-	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-	std::istringstream is(str);
-	_bool b;
-	is >> std::boolalpha >> b;
+	_bool b = WstrToInt(wstr) == 1 ? true : false;
 
 	return b;
 }
@@ -543,37 +539,38 @@ void CToolMenuView::OnBnClickedSaveBtn()
 	std::string filePath = "../../Data/EditorScene/save.txt";
 	std::wofstream ofsSave(filePath.data());
 
-	_uint objCnt = 0;
-
 	if (ofsSave.is_open())
 	{
 		auto& layer = Engine::GET_CUR_SCENE->GetLayers().begin();
 
 		for (; layer != Engine::GET_CUR_SCENE->GetLayers().end(); ++layer)
 		{
+			if ((*layer)->GetGameObjects().empty())
+				continue;
+
 			auto& obj = (*layer)->GetGameObjects().begin();
+
+			if (L"Camera0" != (*obj)->GetName())
+				ofsSave << "numOf" << (*obj)->GetObjectKey() << "=" << (*layer)->GetGameObjects().size() - 1 << "\n\n";
 
 			for (; obj != (*layer)->GetGameObjects().end(); ++obj)
 			{
 				if (L"Camera0" == (*obj)->GetName() || L"Cube0" == (*obj)->GetName())
 					continue;
+				
+				std::wstring name = (*obj)->GetName();
 
-				ofsSave << "protoObjectKey=" << (*obj)->GetObjectKey() << '\n';
-				ofsSave << "static=" << (*obj)->GetIsStatic() << "\n";
-				ofsSave << "layerID=" << (*obj)->GetLayerID() << "\n";
-				//ofsSave << "name=" << (*obj)->GetName() << '\n';
-				ofsSave << "meshKey=" << (*obj)->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
-				ofsSave << "initTex=" << (*obj)->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
-				ofsSave << "renderID=" << (*obj)->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
-				ofsSave << "scale=" << (*obj)->GetTransform()->GetSize().x << "/" << (*obj)->GetTransform()->GetSize().y << "/" << (*obj)->GetTransform()->GetSize().z << '\n';
-				ofsSave << "rotation=" << (*obj)->GetTransform()->GetRotation().x << "/" << (*obj)->GetTransform()->GetRotation().y << "/" << (*obj)->GetTransform()->GetRotation().z << '\n';
-				ofsSave << "position=" << (*obj)->GetTransform()->GetPosition().x << "/" << (*obj)->GetTransform()->GetPosition().y << "/" << (*obj)->GetTransform()->GetPosition().z << '\n';
+				ofsSave << name << "_static=" << (*obj)->GetIsStatic() << "\n";
+				ofsSave << name << "_layerID=" << (*obj)->GetLayerID() << "\n";
+				ofsSave << name << "_meshKey=" << (*obj)->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
+				ofsSave << name << "_initTex=" << (*obj)->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
+				ofsSave << name << "_renderID=" << (*obj)->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
+				ofsSave << name << "_scale=" << (*obj)->GetTransform()->GetSize().x << ',' << (*obj)->GetTransform()->GetSize().y << ',' << (*obj)->GetTransform()->GetSize().z << '\n';
+				ofsSave << name << "_rotation=" << (*obj)->GetTransform()->GetRotation().x << ',' << (*obj)->GetTransform()->GetRotation().y << ',' << (*obj)->GetTransform()->GetRotation().z << '\n';
+				ofsSave << name << "_position=" << (*obj)->GetTransform()->GetPosition().x << ',' << (*obj)->GetTransform()->GetPosition().y << ',' << (*obj)->GetTransform()->GetPosition().z << '\n';
 				//ofsSave << "collisionID=" << '\n';
-
-				++objCnt;
 			}
 		}
-		ofsSave << "objCount=" << objCnt << '\n';
 
 		AfxMessageBox(L"Save Success | ObjectListView.cpp");
 	}
@@ -634,19 +631,27 @@ void CToolMenuView::OnBnClickedLoadBtn()
 
 		if (!dataValue && !dataTag)
 		{
-			std::wstring wstr = Engine::StrToWStr(vStr[0]);
-			dataTag = _wcsdup(wstr.c_str());
+			//std::wstring wstr = Engine::StrToWStr(vStr[0]);
+			//dataTag = _wcsdup(wstr.c_str());
 
-			wstr = Engine::StrToWStr(vStr[1]);
+			std::wstring wstr = Engine::StrToWStr(vStr[1]);
 			dataValue = _wcsdup(wstr.c_str());
 		}
 
-		if (!wcscmp(L"protoObjectKey", dataTag))
-		{
-			protoObjectKey = dataValue;
+		if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
 			continue;
-		}
-		else if (!wcscmp(L"static", dataTag))
+
+		std::vector<std::string> vStrTag = split(vStr[0], '_');
+
+		std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
+		dataTag = _wcsdup(wstr.c_str());
+
+		//if (!wcscmp(L"protoObjectKey", dataTag))
+		//{
+		//	protoObjectKey = dataValue;
+		//	continue;
+		//}
+		if (!wcscmp(L"static", dataTag))
 		{
 			isStatic = WstrToBool(dataValue);
 			continue;
@@ -679,29 +684,29 @@ void CToolMenuView::OnBnClickedLoadBtn()
 		}
 		else if (!wcscmp(L"scale", dataTag))
 		{
-			vStr = split(vStr[1], '/');
+			vStr = split(vStr[1], ',');
 			scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
 			continue;
 		}
 		else if (!wcscmp(L"rotation", dataTag))
 		{
-			vStr = split(vStr[1], '/');
+			vStr = split(vStr[1], ',');
 			rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
 			continue;
 		}
 		else if (!wcscmp(L"position", dataTag))
 		{
-			vStr = split(vStr[1], '/');
+			vStr = split(vStr[1], ',');
 			position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			continue;
 		}
 
 		SP(Engine::CObject) spObject
-			= objectFactory->AddClone(protoObjectKey, isStatic, layerID, name);
+			= objectFactory->AddClone(L"EmptyObject", isStatic, layerID, name);
 
 		spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
 		spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
 		spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
+		spObject->AddComponent<Engine::CTextureC>();
 		spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spObject->GetTransform()->SetSize(scale);
 		spObject->GetTransform()->SetPosition(position);
@@ -710,3 +715,19 @@ void CToolMenuView::OnBnClickedLoadBtn()
 
 	AfxMessageBox(L"Load Success | ObjectListView.cpp");
 }
+
+//{
+//int numOfEmptyObject;
+//GET_VALUE(static, ID, key, L"numOfEmptyObject", numOfEmptyObject);
+//
+//for (int i = 0; i < numOfEmptyObject; ++i)
+//{
+//	_bool isStatic;
+//	GET_VALUE(staic, ID, KEY, EmptyObject + std::to_wstring(i) + L"_static", isStatic);
+//
+//	SP(EmptyObject) spEmptyObject =
+//		ADD_CLONE(al; skdfjal; dkf);
+//
+//
+//}
+//}

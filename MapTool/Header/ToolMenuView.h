@@ -53,6 +53,10 @@ public:
 	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLbnSelchangeMeshList();
 	afx_msg void OnBnClickedPositionBtn();
+	afx_msg void OnBnClickedRotationBtn();
+	afx_msg void OnBnClickedScaleBtn();
+	afx_msg void OnBnClickedSaveBtn();
+	afx_msg void OnBnClickedLoadBtn();
 
 private:
 	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
@@ -62,6 +66,10 @@ private:
 	_float StrToFloat(std::string str);
 
 // add valuable
+public:
+	CButton m_initTexture;
+	CEdit m_curObjName;
+
 protected:
 	CEdit m_posX;
 	CEdit m_posY;
@@ -93,15 +101,8 @@ protected:
 	CTreeCtrl m_tree;
 	CListBox m_meshTreeList;
 	CListBox m_textureTreeList;
-
+	CEdit m_saveFileName;
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
 
 	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
-public:
-	afx_msg void OnBnClickedRotationBtn();
-	afx_msg void OnBnClickedScaleBtn();
-	CEdit m_curObjName;
-	afx_msg void OnBnClickedSaveBtn();
-	CEdit m_saveFileName;
-	afx_msg void OnBnClickedLoadBtn();
 };

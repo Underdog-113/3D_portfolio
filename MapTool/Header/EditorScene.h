@@ -25,6 +25,12 @@ public:
 		 
 	void OnEnable(void) override;
 	void OnDisable(void) override;
+	
+private:
+	bool IsObjectPicked(Engine::CObject* _pObject, _float3* _pOutPickPoint);
+	bool IsMeshPicked(Engine::CObject * _pObject, _float3 * _pOutPickPoint);
+	bool CheckIntersect(LPD3DXMESH _mesh, _float3 _rayPos, _float3 _rayDir, _float3* _pOutPickPoint);
+	void GetMouseRay(_mat _targetWorldMatrix, _float3 * _pOutRayPos, _float3 * _pOutRayDir);
 
 private:
 	void InitPrototypes(void) override;
@@ -39,7 +45,8 @@ private:
 	class CToolMenuView* m_pMenuView;
 
 	GETTOR_SETTOR(Engine::CObject*, m_pCurSelectedObject, nullptr, CurSelObj);
-
+	
+	float m_pickRadius = 7.f;
 	//_bool m_bPickingMode = false;
 	//_bool m_bClick = true;
 	//_bool m_bShownCurObjInfo = true; // true∏È ∫∏ø©¡·¿Ω. false∏È ∫∏ø©¡‡æﬂµ .
