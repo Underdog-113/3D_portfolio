@@ -130,9 +130,6 @@
     <Filter Include="02.Objects\02.Particle">
       <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Function">
-      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\00.Player\00.Kiana\00.FSM">
       <UniqueIdentifier>{18b5228e-4a17-4c51-8803-8fe7bf27bec3}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="02.Objects\00.UI\01.ScrollView">
       <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\00.Button\00.Function">
+      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -261,9 +261,6 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Function.h">
-      <Filter>06.Function</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\FSM_KianaC.h">
       <Filter>02.Objects\00.Player\00.Kiana\00.FSM</Filter>
     </ClInclude>
@@ -272,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\ScrollViewObject.h">
       <Filter>02.Objects\00.UI\01.ScrollView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ButtonFunction.h">
+      <Filter>02.Objects\00.UI\00.Button\00.Function</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -371,9 +371,6 @@
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Function.cpp">
-      <Filter>06.Function</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\FSM_KianaC.cpp">
       <Filter>02.Objects\00.Player\00.Kiana\00.FSM</Filter>
     </ClCompile>
@@ -382,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ScrollViewObject.cpp">
       <Filter>02.Objects\00.UI\01.ScrollView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ButtonFunction.cpp">
+      <Filter>02.Objects\00.UI\00.Button\00.Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

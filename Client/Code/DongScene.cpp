@@ -3,8 +3,9 @@
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
-#include "Function.h"
+#include "ButtonFunction.h"
 #include "ScrollViewObject.h"
+#include "Canvas.h"
 
 CDongScene::CDongScene()
 {
@@ -41,23 +42,34 @@ void CDongScene::Start(void)
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
-	SP(CScrollViewObject) spScrollView =
-		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)ELayerID::UI, L"View"));
-	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
-	spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
-	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
+	{
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image1"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetTransform()->SetSize(_float3(800, 600, 0));
+		image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
+	}
 
-	spScrollView->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1");
+	{
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image2"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetTransform()->SetSize(_float3(800, 600, 0));
+		image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
+	}
 
-	spScrollView->
-		AddImageObjectData(0, L"10101", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"10201", _float3(123, 112, 0), _float2(-40, -30))->
-		AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
-		AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
+	{
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image3"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetTransform()->SetSize(_float3(800, 600, 0));
+		image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
+	}
+
+	{
+		SP(Engine::CCanvas) canvas =
+			std::dynamic_pointer_cast<Engine::CCanvas>(ADD_CLONE(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
+	}
 
 }
 
@@ -116,7 +128,7 @@ button->GetTransform()->SetPosition(_float3(300, 0, 0.0f));
 button->GetTransform()->SetSize(_float3(141, 152, 0.1f));
 button->SetButtonType(CButton::UP);
 button->GetTexture()->AddTexture(L"BtnAttack1", 0);
-button->AddFuncData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction());
+button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction());
 button->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"출격", _float2(0, 0), _float2(0,0), 50, DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 0, 0, 1), true);
 }
 
@@ -172,23 +184,53 @@ slider->AddSliderData(100, 100, background, fill);
 
 // (미완성)스크롤 뷰 예제
 /*
+SP(CScrollViewObject) spScrollView =
+std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)ELayerID::UI, L"View"));
+spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
+spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
+spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
+
+spScrollView->
+AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction(), L"BtnAttack1")->
+AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction(), L"BtnAttack1")->
+AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction(), L"BtnAttack1")->
+AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction(), L"BtnAttack1")->
+AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction(), L"BtnAttack1");
+
+spScrollView->
+AddImageObjectData(0, L"10101", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"10201", _float3(123, 112, 0), _float2(-40, -30))->
+AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
+AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
+*/
+
+// 캔버스 예제 (앞에 이름을 캔버스 이름으로하면 캔버스가 알아서 자기 캔버스에 등록함)
+/*
 {
-	SP(CScrollViewObject) spScrollView =
-		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)ELayerID::UI, L"View"));
-	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
-	spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
-	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
+	SP(Engine::CImageObject) image =
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image1"));
+	image->GetTransform()->SetPositionZ(0.0f);
+	image->GetTransform()->SetSize(_float3(800, 600, 0));
+	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
+}
 
-	spScrollView->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
-		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1");
+{
+	SP(Engine::CImageObject) image =
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image2"));
+	image->GetTransform()->SetPositionZ(0.0f);
+	image->GetTransform()->SetSize(_float3(800, 600, 0));
+	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
+}
 
-	spScrollView->
-		AddImageObjectData(0, L"10101", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"10201", _float3(123, 112, 0), _float2(-40, -30))->
-		AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
-		AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
+{
+	SP(Engine::CImageObject) image =
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image3"));
+	image->GetTransform()->SetPositionZ(0.0f);
+	image->GetTransform()->SetSize(_float3(800, 600, 0));
+	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
+}
+
+{
+	SP(Engine::CCanvas) canvas =
+		std::dynamic_pointer_cast<Engine::CCanvas>(ADD_CLONE(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
 }
 */

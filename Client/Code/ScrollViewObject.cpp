@@ -2,7 +2,7 @@
 #include "ScrollViewObject.h"
 #include "Scene.h"
 #include "Object.h"
-#include "Function.h"
+#include "ButtonFunction.h"
 
 _uint CScrollViewObject::m_s_uniqueID = 0;
 CScrollViewObject::CScrollViewObject()
@@ -82,11 +82,37 @@ void CScrollViewObject::OnDestroy(void)
 void CScrollViewObject::OnEnable(void)
 {
 	__super::OnEnable();
+
+	_int count = 0;
+	for (auto& buttonObject : m_vButtonObject)
+	{
+		count++;
+
+		buttonObject->SetIsEnabled(true);
+
+		for (auto& imageObject : m_vImageObject[count - 1])
+		{
+			imageObject.m_image->SetIsEnabled(true);
+		}
+	}
 }
 
 void CScrollViewObject::OnDisable(void)
 {
 	__super::OnDisable();
+
+	_int count = 0;
+	for (auto& buttonObject : m_vButtonObject)
+	{
+		count++;
+
+		buttonObject->SetIsEnabled(false);
+
+		for (auto& imageObject : m_vImageObject[count - 1])
+		{
+			imageObject.m_image->SetIsEnabled(false);
+		}
+	}
 }
 
 void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet)

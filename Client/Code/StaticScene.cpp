@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Slider.h"
 #include "ScrollViewObject.h"
+#include "Canvas.h"
 
 #include "MO_Scout.h"
 #include "MO_Ninza.h"
@@ -137,6 +138,9 @@ void CStaticScene::InitPrototypes(void)
 
 void CStaticScene::InitUiPrototypes(void)
 {
+	SP(Engine::CCanvas) spCanvasViewObject(Engine::CCanvas::Create(true, this));
+	GetObjectFactory()->AddPrototype(spCanvasViewObject);
+
 	SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spImageObject);
 
