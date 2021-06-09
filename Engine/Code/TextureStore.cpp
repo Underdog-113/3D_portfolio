@@ -95,11 +95,31 @@ void CTextureStore::InitTextureForScene(std::wstring curScene, _bool isStatic)
 	__super::InitResource(m_resourcePath + L"\\" + curScene);
 }
 
+void CTextureStore::FindTexturesInSection(std::wstring sectionKey, std::vector<std::wstring>& vTexturekeys)
+{
+	for (auto& tex : m_mCurSceneTextureData)
+	{
+		if (tex.second->sectionKey == sectionKey)
+		{
+			vTexturekeys.emplace_back(tex.first);
+		}
+	}
+
+	for (auto& tex : m_s_mStaticTextureData)
+	{
+		if (nullptr != tex.second && tex.second->sectionKey == sectionKey)
+		{
+			vTexturekeys.emplace_back(tex.first);
+		}
+	}
+}
+
 void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 {
 	_TexData* pNewTex = new _TexData;
 	std::wstring texKey = RemoveExtension(fileName);
 	std::wstring fullPath = filePath + fileName;
+	std::wstring sectionKey = GetLastDirName(filePath);
 
 	_TexDataMap* pCurMap = nullptr;
 	if (m_isStatic)
@@ -134,6 +154,9 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 			MSG_BOX(__FILE__, (L"TexKey : [" + texKey + L"] create texture failed in ParsingTexture").c_str());
 			ABORT;
 		}
+
+		pNewTex->sectionKey = sectionKey;
+
 		//Alpha포함 텍스쳐
 		pNewTex->includeAlpha = (filePath.find(L"\\Alpha\\") != std::wstring::npos);
 		(*pCurMap)[texKey] = pNewTex;

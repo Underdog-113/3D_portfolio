@@ -35,6 +35,7 @@ protected:
 	GETTOR			(_ANI_LIST,		m_vAniList,			{},				AniList)
 
 	GETTOR			(std::wstring,	m_meshKey,			L"",			MeshKey)
+	GETTOR_SETTOR	(std::wstring,	m_sectionKey,		L"",			SectionKey)
 
 	GETTOR			(_int,			m_meshType,			UNDEFINED,		MeshType) //Static or Dynamic
 	GETTOR_SETTOR	(_int,			m_meshIndex,		UNDEFINED,		MeshIndex)
