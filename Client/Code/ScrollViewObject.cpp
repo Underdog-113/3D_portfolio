@@ -2,6 +2,7 @@
 #include "ScrollViewObject.h"
 #include "Scene.h"
 #include "Object.h"
+#include "Function.h"
 
 _uint CScrollViewObject::m_s_uniqueID = 0;
 CScrollViewObject::CScrollViewObject()
@@ -29,9 +30,6 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
 }
@@ -41,11 +39,6 @@ void CScrollViewObject::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;
 	m_addExtra = true;
-
-	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
-	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
-	m_spTexture = AddComponent<Engine::CTextureC>();
-
 }
 
 void CScrollViewObject::Start(void)
@@ -71,17 +64,14 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(void)
 {
-	m_spRectTex->PreRender(m_spGraphics);
 }
 
 void CScrollViewObject::Render(void)
 {
-	m_spRectTex->Render(m_spGraphics);
 }
 
 void CScrollViewObject::PostRender(void)
 {
-	m_spRectTex->PostRender(m_spGraphics);
 }
 
 void CScrollViewObject::OnDestroy(void)
@@ -99,22 +89,25 @@ void CScrollViewObject::OnDisable(void)
 	__super::OnDisable();
 }
 
-void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet, std::wstring texture)
+void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet)
 {
 	m_column = column;
 	m_distanceXY = distanceXY;
 	m_offSet = offSet;
-	m_spTexture->AddTexture(texture);
 }
 
-CScrollViewObject * CScrollViewObject::AddImageObjectData(std::wstring texture, _float3 size)
+CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset)
 {
 	SP(Engine::CImageObject) image =
 		std::dynamic_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"ScrollViewImageObject"));
 	image->GetTransform()->SetSize(size);
 	image->GetTexture()->AddTexture(texture, 0);
 
-	m_vImageObject.emplace_back(image);
+	ImageInfo info;
+	info.m_image = image;
+	info.m_offset = offset;
+
+	m_vImageObject[number].emplace_back(info);
 
 	return this;
 }
@@ -129,12 +122,18 @@ void CScrollViewObject::ImageObjectSort()
 	_int count = 0;
 	_float3 pos = GetTransform()->GetPosition() + _float3(m_offSet.x, m_offSet.y, 0);
 	pos.z += 0.01f;
-	for (auto& object : m_vImageObject)
+	for (auto& buttonObject : m_vButtonObject)
 	{
-		m_vImageObject[count]->GetTransform()->SetPosition(pos);
+		count++;
+
+		buttonObject->GetTransform()->SetPosition(pos);
 		pos.x += m_distanceXY.x;
 
-		count++;
+		for (auto& imageObject : m_vImageObject[count-1])
+		{
+			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, 0);
+			imageObject.m_image->GetTransform()->SetPosition(pos + T);
+		}
 
 		if (count % m_column == 0)
 		{

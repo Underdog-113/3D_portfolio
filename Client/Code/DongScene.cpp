@@ -40,15 +40,25 @@ void CDongScene::Start(void)
 	__super::Start();
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
-	
+
 	SP(CScrollViewObject) spScrollView =
 		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)ELayerID::UI, L"View"));
 	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
 	spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
-	spScrollView->AddScrollViewData(4, _float2(123,112), _float2(100,100), L"SealPatten3 #16871");
-	spScrollView->AddImageObjectData(L"10101", _float3(123, 112, 0))->AddImageObjectData(L"10201", _float3(123, 112, 0))->
-		AddImageObjectData(L"10301", _float3(123, 112, 0))->AddImageObjectData(L"10402", _float3(123, 112, 0))->
-		AddImageObjectData(L"10501", _float3(123, 112, 0));
+	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
+
+	spScrollView->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1");
+
+	spScrollView->
+		AddImageObjectData(0, L"10101", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"10201", _float3(123, 112, 0), _float2(-40, -30))->
+		AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
+		AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
+
 }
 
 void CDongScene::FixedUpdate(void)
@@ -159,3 +169,26 @@ AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")))
 
 slider->AddSliderData(100, 100, background, fill);
 }*/
+
+// (미완성)스크롤 뷰 예제
+/*
+{
+	SP(CScrollViewObject) spScrollView =
+		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)ELayerID::UI, L"View"));
+	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
+	spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
+	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
+
+	spScrollView->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1")->
+		AddButtonObjectData<void(CFunction::*)(), CFunction*>(&CFunction::ChangeJongScene, &CFunction(), L"BtnAttack1");
+
+	spScrollView->
+		AddImageObjectData(0, L"10101", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"10201", _float3(123, 112, 0), _float2(-40, -30))->
+		AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
+		AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
+}
+*/
