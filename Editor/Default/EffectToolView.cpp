@@ -11,6 +11,24 @@
 
 #include "EffectToolDoc.h"
 #include "EffectToolView.h"
+#include "Inspector.h"
+#include "DeviceManager.h"
+
+#include "DataStore.h"
+#include "MeshStore.h"
+#include "TextureStore.h"
+#include "MathHelper.h"
+
+#include "WndApp.h"
+#include "FRC.h"
+#include "MainFrm.h"
+#include "ObjectFactory.h"
+#include "Object.h"
+#include "Layer.h"
+#include "SceneManager.h"
+#include "Scene.h"
+#include "InputManager.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -38,6 +56,10 @@ CEffectToolView::CEffectToolView()
 
 CEffectToolView::~CEffectToolView()
 {
+	Engine::CWndApp::GetInstance()->DestroyInstance();
+	Engine::CFRC::GetInstance()->DestroyInstance();
+	Engine::CDeviceManager::GetInstance()->DestroyInstance();
+	GET_MATH->DestroyInstance();
 }
 
 BOOL CEffectToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -47,7 +69,6 @@ BOOL CEffectToolView::PreCreateWindow(CREATESTRUCT& cs)
 
 	return CView::PreCreateWindow(cs);
 }
-
 // CEffectToolView 그리기
 
 void CEffectToolView::OnDraw(CDC* /*pDC*/)
@@ -58,6 +79,16 @@ void CEffectToolView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
+	if (Engine::CFRC::GetInstance()->FrameLock())
+	{
+		m_spMainEffectTool->FixedUpdate();
+		m_spMainEffectTool->Update();
+		m_spMainEffectTool->LateUpdate();
+
+		m_spMainEffectTool->PreRender();
+		m_spMainEffectTool->Render();
+		m_spMainEffectTool->PostRender();
+	}
 }
 
 
@@ -102,3 +133,45 @@ CEffectToolDoc* CEffectToolView::GetDocument() const // 디버그되지 않은 버전은 �
 
 
 // CEffectToolView 메시지 처리기
+
+
+void CEffectToolView::OnInitialUpdate()
+{
+	CView::OnInitialUpdate();
+#pragma region SubEnginesAwake
+	Engine::CFRC::GetInstance()->Awake();
+	Engine::CWndApp::GetInstance()->Awake();
+	Engine::CDeviceManager::GetInstance()->Awake();
+#pragma endregion
+
+#pragma region SubEnginesStart
+	Engine::CWndApp::GetInstance()->SetHWnd(m_hWnd);
+	Engine::CWndApp::GetInstance()->SetWndWidth(VIEWCX);
+	Engine::CWndApp::GetInstance()->SetWndHeight(VIEWCY);
+	Engine::CDeviceManager::GetInstance()->Start();
+	Engine::CFRC::GetInstance()->Start();
+#pragma endregion
+
+	m_spMainEffectTool = CMainEditor::Create();
+
+	m_spMainEffectTool->Awake();
+	m_spMainEffectTool->Start();
+
+	CMainFrame* pMain = dynamic_cast<CMainFrame*>(::AfxGetApp()->GetMainWnd());
+
+	RECT rcMainRect = {};
+	pMain->GetWindowRect(&rcMainRect);
+
+	::SetRect(&rcMainRect, 0, 0, rcMainRect.right - rcMainRect.left, rcMainRect.bottom - rcMainRect.top);
+
+	RECT rcView = {};
+	GetClientRect(&rcView);
+	int iGapX = rcMainRect.right - rcView.right;
+	int iGapY = rcMainRect.bottom - rcView.bottom;
+
+	pMain->SetWindowPos(nullptr, 0, 0, VIEWCX + 400 + iGapX, VIEWCY + iGapY, SWP_NOZORDER | SWP_NOMOVE);
+
+	SetTimer(0, 0, nullptr);
+
+	m_pInspectorView = dynamic_cast<CInspector*>(pMain->GetMainSplitter().GetPane(0, 1));
+}

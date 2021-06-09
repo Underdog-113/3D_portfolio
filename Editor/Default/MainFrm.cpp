@@ -6,6 +6,8 @@
 #include "EffectTool.h"
 
 #include "MainFrm.h"
+#include "EffectToolView.h"
+#include "Inspector.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -47,27 +49,34 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
-	{
-		TRACE0("도구 모음을 만들지 못했습니다.\n");
-		return -1;      // 만들지 못했습니다.
-	}
-
-	if (!m_wndStatusBar.Create(this))
-	{
-		TRACE0("상태 표시줄을 만들지 못했습니다.\n");
-		return -1;      // 만들지 못했습니다.
-	}
-	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
-
-	// TODO: 도구 모음을 도킹할 수 없게 하려면 이 세 줄을 삭제하십시오.
-	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
-	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndToolBar);
-
-
 	return 0;
+}
+
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext * pContext)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+
+	CRect rect;
+	CPoint pos;
+
+	GetClientRect(&rect);
+	pos.x = (LONG)(GetSystemMetrics(SM_CXSCREEN) / 2.0f - rect.Width() / 2.0f);
+	pos.y = (LONG)(GetSystemMetrics(SM_CYSCREEN) / 2.0f - rect.Height() / 2.0f);
+
+	SetWindowPos(NULL, 50, 50, 0, 0, SWP_NOSIZE);
+
+	/*
+
+	0, 0 | 0, 1
+	1, 0 | 1, 1
+
+	*/
+
+	m_mainSplitter.CreateStatic(this, 1, 2);
+	m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(CEffectToolView), CSize(VIEWCX, VIEWCY), pContext);
+	m_mainSplitter.CreateView(0, 1, RUNTIME_CLASS(CInspector), CSize(VIEWCX, VIEWCY), pContext);
+
+	return TRUE;
 }
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)

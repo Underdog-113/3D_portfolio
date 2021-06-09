@@ -3,7 +3,8 @@
 //
 
 #pragma once
-
+class CInspector;
+class EffectToolView;
 class CMainFrame : public CFrameWnd
 {
 	
@@ -13,7 +14,7 @@ protected: // serialization에서만 만들어집니다.
 
 // 특성입니다.
 public:
-
+	
 // 작업입니다.
 public:
 
@@ -37,6 +38,15 @@ protected:  // 컨트롤 모음이 포함된 멤버입니다.
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
+
+public:
+	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
+
+protected:
+	GETTOR(CSplitterWnd, m_mainSplitter, {}, MainSplitter)
+
+
+	
 
 };
 

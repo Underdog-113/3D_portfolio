@@ -51,6 +51,7 @@ void CEditorScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"Player", (_uint)EDataID::Player);
 	m_pDataStore->AddDataSection(L"Scene", (_uint)EDataID::Scene);
 	
+	
 	m_pDataStore->InitDataForScene(L"StaticScene", true);
 	m_pMeshStore->InitMeshForScene(L"StaticScene", true);
 	m_pTextureStore->InitTextureForScene(L"StaticScene", true);

@@ -379,13 +379,9 @@
     <Image Include="small.ico">
       <Filter>99.Default</Filter>
     </Image>
-    <Image Include="SR_BaseEngine.ico">
-      <Filter>99.Default</Filter>
-    </Image>
+    <Image Include="Client.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SR_BaseEngine.rc">
-      <Filter>99.Default</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="Client.rc" />
   </ItemGroup>
 </Project>

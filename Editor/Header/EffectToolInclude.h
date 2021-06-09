@@ -1,5 +1,6 @@
 #pragma once
+#include "EngineStdafx.h"
 
-#include "EffectToolEnum.h"
 #include "EffectToolTypedef.h"
+#include "EffectToolEnum.h"
 #include "EffectToolDefine.h"
