@@ -19,11 +19,74 @@ SP(Engine::CComponent) CFSM_KianaC::MakeClone(Engine::CObject * pObject)
 
 void CFSM_KianaC::Awake(void)
 {
-	if (FAILED(Init_FSM_Setting()))
-	{
-		MSG_BOX(__FILE__, L"CFSM_KianaC Init_FSM_Setting Failed");
-		ABORT;
-	}
+	Engine::CState* pState;
+
+	CreateState(CFSM_KianaC, pState, Attack_1)
+		AddState(pState, Name_Attack_1);
+
+	CreateState(CFSM_KianaC, pState, Attack_2)
+		AddState(pState, Name_Attack_2);
+
+	CreateState(CFSM_KianaC, pState, Attack_3)
+		AddState(pState, Name_Attack_3);
+
+	CreateState(CFSM_KianaC, pState, Attack_3_Branch)
+		AddState(pState, Name_Attack_3_Branch);
+
+	CreateState(CFSM_KianaC, pState, Attack_4)
+		AddState(pState, Name_Attack_4);
+
+	CreateState(CFSM_KianaC, pState, Attack_4_Branch)
+		AddState(pState, Name_Attack_4_Branch);
+
+	CreateState(CFSM_KianaC, pState, Attack_5)
+		AddState(pState, Name_Attack_5);
+
+	CreateState(CFSM_KianaC, pState, Attack_QTE)
+		AddState(pState, Name_Attack_QTE);
+
+	CreateState(CFSM_KianaC, pState, Die)
+		AddState(pState, Name_Die);
+
+	CreateState(CFSM_KianaC, pState, EvadeBackward)
+		AddState(pState, Name_EvadeBackward);
+
+	CreateState(CFSM_KianaC, pState, EvadeForward)
+		AddState(pState, Name_EvadeForward);
+
+	CreateState(CFSM_KianaC, pState, Hit_H)
+		AddState(pState, Name_Hit_H);
+
+	CreateState(CFSM_KianaC, pState, Hit_L)
+		AddState(pState, Name_Hit_L);
+
+	CreateState(CFSM_KianaC, pState, Idle_01)
+		AddState(pState, Name_Idle_01);
+
+	CreateState(CFSM_KianaC, pState, Idle_1to2)
+		AddState(pState, Name_Idle_1to2);
+
+	CreateState(CFSM_KianaC, pState, Idle_02)
+		AddState(pState, Name_Idle_02);
+
+	CreateState(CFSM_KianaC, pState, Idle_2to3)
+		AddState(pState, Name_Idle_2to3);
+
+	CreateState(CFSM_KianaC, pState, Idle_03)
+		AddState(pState, Name_Idle_03);
+
+	CreateState(CFSM_KianaC, pState, Idle_3to4)
+		AddState(pState, Name_Idle_3to4);
+
+	CreateState(CFSM_KianaC, pState, Idle_4to5)
+		AddState(pState, Name_Idle_4to5);
+
+	CreateState(CFSM_KianaC, pState, Run)
+		AddState(pState, Name_Run);
+
+	CreateState(CFSM_KianaC, pState, StandBy)
+		AddState(pState, Name_StandBy);
+
 
 	__super::Awake();
 }
@@ -47,6 +110,11 @@ void CFSM_KianaC::Appear_Enter(void)
 
 void CFSM_KianaC::Appear_Update(float deltaTime)
 {
+	if (m_pDM->GetAniCtrl()->IsItEnd())
+	{
+		ChangeState(Name_StandBy);
+		return;
+	}
 }
 
 void CFSM_KianaC::Appear_End(void)
@@ -97,26 +165,24 @@ void CFSM_KianaC::Attack_2_Enter(void)
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
 {
-	// Branch Attack
-	if (m_pDM->GetAniTimeline() > m_branchAttackDelay)
+
+	if (Engine::IMKEY_DOWN(KEY_J))
 	{
-		if (Engine::IMKEY_DOWN(KEY_J))
+		// Branch Attack
+		if (m_pDM->GetAniTimeline() > m_branchAttackDelay)
 		{
 			ChangeState(Name_Attack_3_Branch);
 			return;
 		}
-	}
 
-	// Normal Attack
-	if (m_pDM->GetAniTimeline() > m_attackDelay)
-	{
-		if (Engine::IMKEY_DOWN(KEY_J))
+		// Normal Attack
+		if (m_pDM->GetAniTimeline() > m_attackDelay)
 		{
 			ChangeState(Name_Attack_3);
 			return;
 		}
 	}
-	
+
 	if (m_pDM->GetAniCtrl()->IsItEnd())
 	{
 		ChangeState(Name_StandBy);
@@ -142,18 +208,9 @@ void CFSM_KianaC::Attack_3_Enter(void)
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
 {
 	// Branch Attack
-	if (m_pDM->GetAniTimeline() > m_branchAttackDelay)
+	if (Engine::IMKEY_DOWN(KEY_J))
 	{
-		if (Engine::IMKEY_DOWN(KEY_J))
-		{
-			ChangeState(Name_Attack_3_Branch);
-			return;
-		}
-	}
-
-	if (m_pDM->GetAniTimeline() > m_attackDelay)
-	{
-		if (Engine::IMKEY_DOWN(KEY_J))
+		if (m_pDM->GetAniTimeline() > m_attackDelay)
 		{
 			ChangeState(Name_Attack_4);
 			return;
@@ -183,7 +240,7 @@ void CFSM_KianaC::Attack_3_Branch_Enter(void)
 
 void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 {
-	if (m_pDM->GetAniCtrl()->IsItEnd())
+	if (m_pDM->GetAniTimeline() > m_branchAttack3to4)
 	{
 		ChangeState(Name_Attack_4_Branch);
 		return;
@@ -228,14 +285,21 @@ void CFSM_KianaC::Attack_4_End(void)
 
 void CFSM_KianaC::Attack_4_Branch_Init(void)
 {
+	m_pOwner->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(Index_Attack_4_Branch);
 }
 
 void CFSM_KianaC::Attack_4_Branch_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Attack_4_Branch);
 }
 
 void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 {
+	if (m_pDM->GetAniCtrl()->IsItEnd())
+	{
+		ChangeState(Name_StandBy);
+		return;
+	}
 }
 
 void CFSM_KianaC::Attack_4_Branch_End(void)
@@ -578,84 +642,6 @@ void CFSM_KianaC::SwitchOut_End(void)
 {
 }
 
-HRESULT CFSM_KianaC::Init_FSM_Setting()
-{
-	Engine::CState* pState;
-
-	CreateState(CFSM_KianaC, pState, Attack_1)
-		AddState(pState, L"Attack_1");
-
-	CreateState(CFSM_KianaC, pState, Attack_2)
-		AddState(pState, L"Attack_2");
-	
-	CreateState(CFSM_KianaC, pState, Attack_3)
-		AddState(pState, L"Attack_3");
-
-	CreateState(CFSM_KianaC, pState, Attack_3_Branch)
-		AddState(pState, L"Attack_3_Branch");
-
-	CreateState(CFSM_KianaC, pState, Attack_4)
-		AddState(pState, L"Attack_4");
-
-	CreateState(CFSM_KianaC, pState, Attack_4_Branch)
-		AddState(pState, L"Attack_4_Branch");
-
-	CreateState(CFSM_KianaC, pState, Attack_5)
-		AddState(pState, L"Attack_5");
-
-	CreateState(CFSM_KianaC, pState, Attack_QTE)
-		AddState(pState, L"Attack_QTE");
-
-	CreateState(CFSM_KianaC, pState, Die)
-		AddState(pState, L"Die");
-
-	CreateState(CFSM_KianaC, pState, EvadeBackward)
-		AddState(pState, L"EvadeBackward");
-	
-	CreateState(CFSM_KianaC, pState, EvadeForward)
-		AddState(pState, L"EvadeForward");
-
-	CreateState(CFSM_KianaC, pState, Hit_H)
-		AddState(pState, L"Hit_H");
-
-	CreateState(CFSM_KianaC, pState, Hit_L)
-		AddState(pState, L"Hit_L");
-
-	CreateState(CFSM_KianaC, pState, Idle_01)
-		AddState(pState, L"Idle_01");
-
-	CreateState(CFSM_KianaC, pState, Idle_1to2)
-		AddState(pState, L"Idle_1to2");
-
-	CreateState(CFSM_KianaC, pState, Idle_02)
-		AddState(pState, L"Idle_02");
-
-	CreateState(CFSM_KianaC, pState, Idle_2to3)
-		AddState(pState, L"Idle_2to3");
-
-	CreateState(CFSM_KianaC, pState, Idle_03)
-		AddState(pState, L"Idle_03");
-
-	CreateState(CFSM_KianaC, pState, Idle_3to4)
-		AddState(pState, L"Idle_3to4");
-
-	CreateState(CFSM_KianaC, pState, Idle_4to5)
-		AddState(pState, L"Idle_4to5");
-
-	CreateState(CFSM_KianaC, pState, Run)
-		AddState(pState, L"Run");
-	
-	CreateState(CFSM_KianaC, pState, StandBy)
-		AddState(pState, L"StandBy");
-	
-
-	if (pState == nullptr)
-	{
-		return E_FAIL;
-	}
-
-	return S_OK;
-}
 //
 //void CFSM_KianaC::Attack_2_Init(void)
 //{

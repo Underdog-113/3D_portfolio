@@ -72,8 +72,7 @@ void CJongScene::Start(void)
 
 			m_pivot->GetTransform()->SetParent(m_obj->GetTransform());
 
-			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject)
-				;
+			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject);
 		}
 
 		{

@@ -249,6 +249,7 @@ private:
 	HRESULT Init_FSM_Setting();
 	Engine::CDynamicMeshData* m_pDM;
 
-	float m_attackDelay = 0.3f;
-	float m_branchAttackDelay = 0.6f;
+	float m_attackDelay = 0.2f;
+	float m_branchAttackDelay = 0.35f;
+	float m_branchAttack3to4 = 0.4f;
 };
