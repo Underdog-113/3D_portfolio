@@ -2,7 +2,6 @@
 #include "StateMachine.h"
 #include "State.h"
 
-
 USING(Engine)
 
 CStateMachineC::CStateMachineC()

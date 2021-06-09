@@ -5,10 +5,10 @@
 USING(Engine)
 IMPLEMENT_SINGLETON(CPSC_Manager)
 
-
 void CPSC_Manager::Awake()
 {
 	__super::Awake();
+	
 }
 
 void CPSC_Manager::Start()
@@ -25,6 +25,19 @@ void CPSC_Manager::Update()
 
 void CPSC_Manager::LateUpdate()
 {
+	if (m_vParticleCom.empty())
+		return;
+
+	for (auto& iter = m_vParticleCom.begin(); iter != m_vParticleCom.end();)
+	{
+		if ((*iter)->GetOwner() == nullptr)
+		{
+			(*iter).reset();
+			iter = m_vParticleCom.erase(iter);
+		}
+		else
+			++iter;
+	}
 }
 
 void CPSC_Manager::PreRender()
@@ -34,7 +47,10 @@ void CPSC_Manager::PreRender()
 
 	for (auto& iter : m_vParticleCom)
 	{
-		iter->PreRender(iter->GetOwner()->GetComponent<CGraphicsC>());
+		if (iter->GetOwner() != nullptr)
+		{
+			iter->PreRender(iter->GetOwner()->GetComponent<CGraphicsC>());
+		}
 	}
 	
 }
@@ -46,7 +62,11 @@ void CPSC_Manager::Render()
 
 	for (auto& iter : m_vParticleCom)
 	{
-		iter->Render(iter->GetOwner()->GetComponent<CGraphicsC>());
+		if (iter->GetOwner() != nullptr)
+		{
+		  iter->Render(iter->GetOwner()->GetComponent<CGraphicsC>());
+		}
+
 	}
 }
 
@@ -57,15 +77,19 @@ void CPSC_Manager::PostRender()
 
 	for (auto& iter : m_vParticleCom)
 	{
-		iter->PostRender(iter->GetOwner()->GetComponent<CGraphicsC>());
+		if (iter->GetOwner() != nullptr)
+		{
+			iter->PostRender(iter->GetOwner()->GetComponent<CGraphicsC>());
+		}
 	}
 }
 
 void CPSC_Manager::OnDestroy()
-{
-	
+{	
+	for (auto& particleSystemC : m_vParticleCom)
+		particleSystemC.reset();
 
-	
+	m_vParticleCom.clear();
 }
 
 void CPSC_Manager::OnEnable()
@@ -74,6 +98,11 @@ void CPSC_Manager::OnEnable()
 
 void CPSC_Manager::OnDisable()
 {
+}
+
+void CPSC_Manager::AddPSC(SP(CParticleSystemC) spPSC)
+{
+	m_vParticleCom.emplace_back(spPSC);
 }
 
 _float CPSC_Manager::GetRandomFloat(_float _lowBound, _float _highBound)

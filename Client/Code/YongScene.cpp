@@ -31,17 +31,7 @@ void CYongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	SP(Engine::CObject) spEmptyObject
-		= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"waterplane");
-	spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spEmptyObject->AddComponent<Engine::CTextureC>();
-	/*spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);*/
-	/*spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
-	spEmptyObject->AddComponent<Engine::CParticleSystemC>();*/
-
-	spEmptyObject->GetTransform()->SetSize(10, 10, 10);
+	
 
 	InitPrototypes();
 }
@@ -50,6 +40,22 @@ void CYongScene::Start(void)
 {
 	__super::Start();
 	{
+		SP(Engine::CObject) spEmptyObject = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
+
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"waterplane");
+		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"water", 0);
+		spEmptyObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap", 0);
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::WaterShader);
+
+		spEmptyObject = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Enemy, L"Cube0");
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
+		spEmptyObject->AddComponent<Engine::CParticleSystemC>();
+
+		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+
 		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");
 	}	
 }

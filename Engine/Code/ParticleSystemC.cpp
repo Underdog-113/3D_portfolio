@@ -6,9 +6,14 @@
 USING(Engine)
 CParticleSystemC::CParticleSystemC() :
 	m_LifeTime(0.f),
-	m_pVIBuffer(nullptr),
+	m_pVertexBuffer(nullptr),
 	m_pGraphicDevice(nullptr)
 {
+}
+
+CParticleSystemC::~CParticleSystemC(void)
+{
+	OnDestroy();
 }
 
 SP(CComponent) CParticleSystemC::MakeClone(CObject * pObject)
@@ -23,11 +28,17 @@ void CParticleSystemC::Awake(void)
 {
 	__super::Awake();
 	m_vParticles.reserve(5000);
+
+	
+
 }
 
 void CParticleSystemC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+
+
+	CPSC_Manager::GetInstance()->AddPSC(std::dynamic_pointer_cast<CParticleSystemC>(spThis));
 }
 
 void CParticleSystemC::FixedUpdate(SP(CComponent) spThis)
@@ -44,23 +55,27 @@ void CParticleSystemC::Update(SP(CComponent) spThis)
 		boundingBox._max = _float3(10.f, 10.f, 10.f);
 		
 		CParticle* pt = new CParticle(&boundingBox, 300);
+
 		pt->Awake();
+
 		m_vParticles.emplace_back(pt);
 
 		InitParticleSetting(GET_DEVICE, L"star");
-		CPSC_Manager::GetInstance()->GetvParticleCom().emplace_back(this);
 	}
 }
 
 void CParticleSystemC::LateUpdate(SP(CComponent) spThis)
 {
+	
+
 }
 
 void CParticleSystemC::PreRender(SP(CGraphicsC) spGC)
 {	
 	for (auto& iter : m_vParticles)
 	{
-		iter->PreRender(spGC, m_pVIBuffer, m_pTexture);
+		if (this->GetOwner() != nullptr)
+			iter->PreRender(spGC, m_pVertexBuffer, m_pTexture);
 	}
 }
 
@@ -73,7 +88,8 @@ void CParticleSystemC::Render(SP(CGraphicsC) spGC)
 {
 	for (auto& iter : m_vParticles)
 	{
-		iter->Render(spGC, m_pVIBuffer);
+		if(this->GetOwner() != nullptr)
+			iter->Render(spGC, m_pVertexBuffer);
 	}
 }
 
@@ -85,7 +101,8 @@ void CParticleSystemC::PostRender(SP(CGraphicsC) spGC)
 {
 	for (auto& iter : m_vParticles)
 	{
-		iter->PostRender(spGC);
+		if (this->GetOwner() != nullptr)
+			iter->PostRender(spGC);
 	}
 }
 
@@ -95,11 +112,15 @@ void CParticleSystemC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 
 void CParticleSystemC::OnDestroy()
 {
-	for (auto iter = m_vParticles.begin(); iter != m_vParticles.end();)
-	{
-		iter = m_vParticles.erase(iter);
-	}
+	for (auto& particle : m_vParticles)
+		particle.reset();
+
 	m_vParticles.clear();
+
+	m_pVertexBuffer->Release();
+	m_pVertexBuffer	 = nullptr;
+	m_pTexture		 = nullptr;
+	m_pGraphicDevice = nullptr;
 }
 
 void CParticleSystemC::OnEnable()
@@ -115,15 +136,15 @@ void CParticleSystemC::OnDisable()
 HRESULT CParticleSystemC::InitParticleSetting(LPDIRECT3DDEVICE9 _Device, std::wstring _texFIleName)
 {
 	m_pGraphicDevice = _Device;
-	m_dwvbSize = 2048;
+	DWORD _dwvbSize = 2048;
 	HRESULT hr = 0;
 
 	hr = m_pGraphicDevice->CreateVertexBuffer(
-		m_dwvbSize * sizeof(PARTICLE_DESC),
+		_dwvbSize * sizeof(PARTICLE_DESC),
 		D3DUSAGE_DYNAMIC | D3DUSAGE_POINTS | D3DUSAGE_WRITEONLY,
 		FVF_Particle,
 		D3DPOOL_DEFAULT, // D3DPOOL_MANAGED 와 D3DUSAGE_DYNAMIC는 함께 사용불가.
-		&m_pVIBuffer,
+		&m_pVertexBuffer,
 		0);
 
 	if (FAILED(hr))
@@ -140,6 +161,7 @@ HRESULT CParticleSystemC::InitParticleSetting(LPDIRECT3DDEVICE9 _Device, std::ws
 		ABORT;
 		return E_FAIL;
 	}
+
 
 	return S_OK;
 }

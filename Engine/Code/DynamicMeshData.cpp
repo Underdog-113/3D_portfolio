@@ -2,6 +2,8 @@
 #include "DynamicMeshData.h"
 #include "StaticMeshData.h"
 #include "DeviceManager.h"
+#include "RootMotion.h"
+#include "AniCtrl.h"
 
 USING(Engine)
 CDynamicMeshData::CDynamicMeshData()
@@ -70,7 +72,7 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 
 
 
-	m_pAniCtrl = CAniCtrl::Create(pAniCtrl);
+	m_pAniCtrl = CAniCtrl::Create(pAniCtrl); 
 	m_pAniCtrl->ChangeAniSet(FindFirstAniIndex(fileName));
 
 	LPD3DXANIMATIONCONTROLLER aniCtrl = m_pAniCtrl->GetAniCtrl();
@@ -82,18 +84,27 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 		m_vAniList.push_front(StrToWStr(pAS->GetName()));
 	}
 
-	UpdateFrame();
+	((_DerivedD3DXFRAME*)m_pRootFrame)->pParentFrame = nullptr;
+
+	_mat makeMeshLookAtMe;
+	SetupFrameMatrices((_DerivedD3DXFRAME*)m_pRootFrame, D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f)));
+
 	SetFrameMatPointer((_DerivedD3DXFRAME*)m_pRootFrame);
+
 }
 
 void CDynamicMeshData::Update(void)
 {
-	if(m_playAnimation)
+	if (m_playAnimation)
+	{
 		m_pAniCtrl->Play();
+		m_pAniCtrl->PlayFake();
+	}
 }
 
 void CDynamicMeshData::OnDestory(void)
 {
+
 	m_pAniCtrl->Free();
 	delete this;
 }
@@ -153,7 +164,8 @@ void CDynamicMeshData::SetAniFixTillEnd(_bool isItFixed)
 	m_pAniCtrl->SetFixTillEnd(isItFixed);
 }
 
-void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pParentMat)
+
+void CDynamicMeshData::SetupFrameMatrices(_DerivedD3DXFRAME * pFrame, _mat * pParentMat)
 {
 	if (pFrame == nullptr)
 		return;
@@ -161,16 +173,35 @@ void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pPar
 	pFrame->CombinedTransformMatrix = pFrame->TransformationMatrix * (*pParentMat);
 
 	if (pFrame->pFrameSibling != nullptr)
+	{
 		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameSibling, pParentMat);
+		((D3DXFRAME_DERIVED*)pFrame->pFrameSibling)->pParentFrame = pFrame->pParentFrame;
+	}
+
 
 	if (pFrame->pFrameFirstChild != nullptr)
+	{
 		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild, &pFrame->CombinedTransformMatrix);
+		((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild)->pParentFrame = pFrame;
+	}
 
+}
+
+void CDynamicMeshData::UpdateFrameMatrices(_DerivedD3DXFRAME* pFrame, _mat* pParentMat)
+{
+	if (pFrame == nullptr)
+		return;
+
+	pFrame->CombinedTransformMatrix = pFrame->TransformationMatrix * (*pParentMat);
+	
+	if (pFrame->pFrameSibling != nullptr)
+		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameSibling, pParentMat);
+	if (pFrame->pFrameFirstChild != nullptr)
+		UpdateFrameMatrices((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild, &pFrame->CombinedTransformMatrix);
 }
 
 void CDynamicMeshData::SetFrameMatPointer(_DerivedD3DXFRAME * pFrame)
 {
-
 	if (pFrame->pMeshContainer != nullptr)
 	{
 		_DerivedD3DXMESHCONTAINER*	pDerivedMeshContainer = (_DerivedD3DXMESHCONTAINER*)pFrame->pMeshContainer;
@@ -181,11 +212,13 @@ void CDynamicMeshData::SetFrameMatPointer(_DerivedD3DXFRAME * pFrame)
 			_DerivedD3DXFRAME* pFindFrame = (_DerivedD3DXFRAME*)D3DXFrameFind(m_pRootFrame, pBoneName.c_str());
 			pDerivedMeshContainer->ppCombinedTransformMatrix[i] = &pFindFrame->CombinedTransformMatrix;
 
+
 			pDerivedMeshContainer->pOriMesh;
 		}
 
 		m_vMeshContainers.push_back(pDerivedMeshContainer);
 	}
+
 
 	if (nullptr != pFrame->pFrameSibling)
 		SetFrameMatPointer((D3DXFRAME_DERIVED*)pFrame->pFrameSibling);

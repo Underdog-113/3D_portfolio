@@ -4,6 +4,8 @@
 #include "ObjectFactory.h"
 
 #include "DynamicMeshData.h"
+#include "FSM_SpiderC.h"
+#include "FSM_KianaC.h"
 
 CJongScene::CJongScene()
 {
@@ -39,6 +41,19 @@ void CJongScene::Start(void)
 	__super::Start();
 	{
 		{
+			SP(Engine::CObject) spEmptyObject1
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
+
+			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
+			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			spEmptyObject1->AddComponent<Engine::CTextureC>();
+			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject1->GetTransform()->SetSize(10, 10, 10);
+
+			m_pivot = spEmptyObject1.get();
+		}
+
+		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"122");
 
@@ -46,10 +61,27 @@ void CJongScene::Start(void)
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
+			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
+
+			spEmptyObject->AddComponent<CFSM_KianaC>();
+
+			spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
 
 
 			m_obj = spEmptyObject.get();
+
+			m_pivot->GetTransform()->SetParent(m_obj->GetTransform());
+		}
+
+		{
+			SP(Engine::CObject) spEmptyObject
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
+
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+			spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject->GetTransform()->SetSize(5, 5, 5);
+
 		}
 /*
 		{
@@ -114,7 +146,7 @@ void CJongScene::FixedUpdate(void)
 
 void CJongScene::Update(void)
 {
-	__super::Update();
+	__super::Update();          
 //	if (Engine::IMKEY_DOWN(KEY_TAB))
 //	{
 //		++num;
@@ -134,6 +166,8 @@ void CJongScene::Update(void)
 //		pDM->ChangeAniSet(num);*/
 //
 //	}
+	//_mat mmmat = dynamic_pointer_cast<Engine::CDynamicMeshData*>(m_obj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->GetRootFrame()->TransformationMatrix();
+	//m_pivot->GetTransform()->SetPosition()
 }
 
 void CJongScene::LateUpdate(void)
