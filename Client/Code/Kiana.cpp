@@ -9,6 +9,7 @@ Kiana::Kiana()
 
 Kiana::~Kiana()
 {
+	OnDestroy();
 }
 
 SP(Engine::CObject) Kiana::MakeClone(void)

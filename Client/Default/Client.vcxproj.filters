@@ -115,17 +115,8 @@
     <Filter Include="02.Objects\00.UI">
       <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Component\00.UI">
-      <UniqueIdentifier>{9a4dd51e-b568-43cb-8f9b-1e664f217001}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Manager">
-      <UniqueIdentifier>{826ecd7e-57f6-478d-b0d2-2d647b0cb897}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.DeleGate">
       <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Manager\00.ButtonManager">
-      <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\02.Particle">
       <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
@@ -141,6 +132,9 @@
     </Filter>
     <Filter Include="02.Objects\00.UI\01.ScrollView">
       <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.UI\00.Button\00.Manager">
+      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +249,6 @@
     <ClInclude Include="..\Header\FSM_BronyaC.h">
       <Filter>02.Objects\01.Monster\MB_Bronya\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ButtonManager.h">
-      <Filter>04.Manager\00.ButtonManager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
@@ -272,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\ScrollViewObject.h">
       <Filter>02.Objects\00.UI\01.ScrollView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ButtonManager.h">
+      <Filter>02.Objects\00.UI\00.Button\00.Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,9 +359,6 @@
     <ClCompile Include="..\Code\FSM_BronyaC.cpp">
       <Filter>02.Objects\01.Monster\MB_Bronya\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ButtonManager.cpp">
-      <Filter>04.Manager\00.ButtonManager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
     </ClCompile>
@@ -382,6 +373,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ScrollViewObject.cpp">
       <Filter>02.Objects\00.UI\01.ScrollView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ButtonManager.cpp">
+      <Filter>02.Objects\00.UI\00.Button\00.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
