@@ -310,6 +310,9 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 
 	rootMotionMoveAmount	= _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
 
+	
+	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
+
 	for (auto& meshContainer : pDM->GetMeshContainers())
 	{
 		for (_ulong i = 0; i < meshContainer->numBones; ++i)

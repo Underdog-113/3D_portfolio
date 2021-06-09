@@ -38,6 +38,7 @@ void CMainMapTool::Awake(void)
 	srand((_uint)time(NULL));
 
 	Engine::CGraphicsManager::GetInstance()->Awake();
+	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CInputManager::GetInstance()->Awake();
 	Engine::CSceneManager::GetInstance()->Awake();
@@ -58,6 +59,7 @@ void CMainMapTool::Start(void)
 	Engine::CTextManager::GetInstance()->Start();
 
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CRenderTargetManager::GetInstance()->Start();
 }
 
 void CMainMapTool::FixedUpdate(void)
@@ -89,22 +91,22 @@ void CMainMapTool::PreRender(void)
 {
 	Engine::TIME_MEASURE_START;
 
+	Engine::CTextManager::GetInstance()->PreRender();
 	Engine::CGraphicsManager::GetInstance()->PreRender();
-	Engine::CTextManager::GetInstance()->Render();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
 
 void CMainMapTool::Render(void)
 {
-	Engine::CGraphicsManager::GetInstance()->Render();
 	Engine::CTextManager::GetInstance()->Render();
+	Engine::CGraphicsManager::GetInstance()->Render();
 }
 
 void CMainMapTool::PostRender(void)
 {
+	Engine::CTextManager::GetInstance()->PostRender();
 	Engine::CGraphicsManager::GetInstance()->PostRender();
-	Engine::CTextManager::GetInstance()->Render();
 }
 
 void CMainMapTool::OnDestroy(void)
@@ -116,6 +118,7 @@ void CMainMapTool::OnDestroy(void)
 	Engine::CCollisionManager::GetInstance()->DestroyInstance();
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
 	Engine::CTextManager::GetInstance()->DestroyInstance();
+	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 }
 
 void CMainMapTool::OnEnable(void)

@@ -21,6 +21,8 @@ public:
 
 			CMeshData*			GetMeshData			(std::wstring meshKey);
 			void				InitMeshForScene	(std::wstring curScene, _bool isStatic = false);
+
+			void				FindMeshesInSection	(std::wstring sectionKey, std::vector<std::wstring>& vMeshkeys);
 private:
 			void				ParsingMesh			(std::wstring filePath, 
 													 std::wstring fileName);
