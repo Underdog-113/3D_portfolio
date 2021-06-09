@@ -162,6 +162,7 @@ void CMainApp::OnDestroy(void)
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
 	Engine::CPSC_Manager::GetInstance()->DestroyInstance();
 
+	
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
 }
