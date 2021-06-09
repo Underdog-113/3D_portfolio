@@ -46,7 +46,7 @@ private:
 
 	GETTOR_SETTOR(Engine::CObject*, m_pCurSelectedObject, nullptr, CurSelObj);
 	
-	float m_pickRadius = 7.f;
+	_float m_pickRadius = 4.f;
 	//_bool m_bPickingMode = false;
 	//_bool m_bClick = true;
 	//_bool m_bShownCurObjInfo = true; // true∏È ∫∏ø©¡·¿Ω. false∏È ∫∏ø©¡‡æﬂµ .

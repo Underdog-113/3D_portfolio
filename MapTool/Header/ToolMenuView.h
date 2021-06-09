@@ -40,6 +40,7 @@ public:
 	void SpinBtn(LPNMUPDOWN ppNMUpDown, CEdit* pBtn, Engine::_float fVal);
 	void SetChangeMeshList(std::wstring sectionKey);
 	void SetChangeTextureList(std::wstring sectionKey);
+	void ReadFile(ELayerID layerID, std::wofstream* ofsSave);
 
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);

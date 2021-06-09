@@ -66,6 +66,7 @@ private:
 	GETTOR_SETTOR	(_bool,		m_initTex,		false,			InitTex)	
 	GETTOR			(CRootMotion*,			m_pRootMotion,			nullptr,	RootMotion);
 		
+	GETTOR			(_float,	m_halfYOffset,	0.f, HalfYOffset)
 	};
 END
 #endif // !MESH_H

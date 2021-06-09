@@ -134,7 +134,11 @@ bool CEditorScene::IsObjectPicked(Engine::CObject * _pObject, _float3 * _pOutPic
 	D3DXVec3TransformNormal(&rayDir, &rayDir, &_pObject->GetTransform()->GetWorldMatrix());
 
 	D3DXVec3Normalize(&rayDir, &rayDir);
-	_float3 objCenterRay = _pObject->GetTransform()->GetPosition() - rayPos;
+
+	_float3 modifyPos = _pObject->GetTransform()->GetPosition();
+	modifyPos.y += _pObject->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+
+	_float3 objCenterRay = (modifyPos) - rayPos;
 	D3DXVec3Normalize(&objCenterRay, &objCenterRay);
 	_float cosValue = D3DXVec3Dot(&objCenterRay, &rayDir);
 	_float radian = acosf(cosValue);
@@ -264,8 +268,6 @@ void CEditorScene::InputSetting()
 		else
 			std::cout << "disabled" << std::endl;
 	}
-		
-
 
 	if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	{
@@ -298,13 +300,9 @@ void CEditorScene::InputSetting()
 			}
 
 			std::wstring fileName(m_pMenuView->GetCurSelFileName());
-
 			SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"hi");
 
 			spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
-
-			
-
 			spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spObj->AddComponent<Engine::CTextureC>();
 			spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);

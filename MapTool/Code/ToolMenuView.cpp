@@ -10,11 +10,7 @@
 #include "EditorScene.h"
 #include "Object.h"
 #include "Layer.h"
-#include "EmptyObject.h"
-
-//#include <sstream>
-//#include <algorithm>
-//#include <string>
+#include "MeshData.h"
 
 // CToolMenuView
 
@@ -406,6 +402,38 @@ void CToolMenuView::SetChangeTextureList(std::wstring sectionKey)
 	}
 }
 
+void CToolMenuView::ReadFile(ELayerID layerID, std::wofstream* ofsSave)
+{
+	Engine::CLayer* layer = Engine::GET_CUR_SCENE->GetLayers()[(_int)layerID];
+	auto& playerObjs = layer->GetGameObjects();
+
+	if (playerObjs.empty())
+		return;
+
+	for (_int i = 0; i < playerObjs.size(); ++i)
+	{
+		if ((layerID == ELayerID::Map) && (L"Cube0" == playerObjs[i]->GetName()))
+			continue;
+
+		if (0 == i)
+			(*ofsSave) << "numOf" << playerObjs[0]->GetObjectKey() << '=' << playerObjs.size() << "\n\n";
+
+		std::wstring name = playerObjs[i]->GetName();
+
+		(*ofsSave) << name << "_static=" << playerObjs[i]->GetIsStatic() << "\n";
+		(*ofsSave) << name << "_layerID=" << playerObjs[i]->GetLayerID() << "\n";
+		(*ofsSave) << name << "_meshKey=" << playerObjs[i]->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
+		(*ofsSave) << name << "_initTex=" << playerObjs[i]->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
+		(*ofsSave) << name << "_renderID=" << playerObjs[i]->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
+		(*ofsSave) << name << "_scale=" << playerObjs[i]->GetTransform()->GetSize().x << ',' << playerObjs[i]->GetTransform()->GetSize().y << ',' << playerObjs[i]->GetTransform()->GetSize().z << '\n';
+		(*ofsSave) << name << "_rotation=" << playerObjs[i]->GetTransform()->GetRotation().x << ',' << playerObjs[i]->GetTransform()->GetRotation().y << ',' << playerObjs[i]->GetTransform()->GetRotation().z << '\n';
+		(*ofsSave) << name << "_position=" << playerObjs[i]->GetTransform()->GetPosition().x << ',' << playerObjs[i]->GetTransform()->GetPosition().y << ',' << playerObjs[i]->GetTransform()->GetPosition().z << '\n';
+		//ofsSave << "collisionID=" << '\n';
+	}
+
+	(*ofsSave) << '\n';
+}
+
 _float CToolMenuView::GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown)
 {
 	CString cstrValue;
@@ -541,36 +569,40 @@ void CToolMenuView::OnBnClickedSaveBtn()
 
 	if (ofsSave.is_open())
 	{
-		auto& layer = Engine::GET_CUR_SCENE->GetLayers().begin();
+		ReadFile(ELayerID::Player, &ofsSave);
+		ReadFile(ELayerID::Enemy, &ofsSave);
+		ReadFile(ELayerID::Map, &ofsSave);
 
-		for (; layer != Engine::GET_CUR_SCENE->GetLayers().end(); ++layer)
-		{
-			if ((*layer)->GetGameObjects().empty())
-				continue;
+		//auto& layer = Engine::GET_CUR_SCENE->GetLayers().begin();
 
-			auto& obj = (*layer)->GetGameObjects().begin();
+		//for (; layer != Engine::GET_CUR_SCENE->GetLayers().end(); ++layer)
+		//{
+		//	if ((*layer)->GetGameObjects().empty())
+		//		continue;
 
-			if (L"Camera0" != (*obj)->GetName())
-				ofsSave << "numOf" << (*obj)->GetObjectKey() << "=" << (*layer)->GetGameObjects().size() - 1 << "\n\n";
+		//	auto& obj = (*layer)->GetGameObjects().begin();
 
-			for (; obj != (*layer)->GetGameObjects().end(); ++obj)
-			{
-				if (L"Camera0" == (*obj)->GetName() || L"Cube0" == (*obj)->GetName())
-					continue;
-				
-				std::wstring name = (*obj)->GetName();
+		//	if (L"Camera0" != (*obj)->GetName())
+		//		ofsSave << "numOf" << (*obj)->GetObjectKey() << "=" << (*layer)->GetGameObjects().size() - 1 << "\n\n";
 
-				ofsSave << name << "_static=" << (*obj)->GetIsStatic() << "\n";
-				ofsSave << name << "_layerID=" << (*obj)->GetLayerID() << "\n";
-				ofsSave << name << "_meshKey=" << (*obj)->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
-				ofsSave << name << "_initTex=" << (*obj)->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
-				ofsSave << name << "_renderID=" << (*obj)->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
-				ofsSave << name << "_scale=" << (*obj)->GetTransform()->GetSize().x << ',' << (*obj)->GetTransform()->GetSize().y << ',' << (*obj)->GetTransform()->GetSize().z << '\n';
-				ofsSave << name << "_rotation=" << (*obj)->GetTransform()->GetRotation().x << ',' << (*obj)->GetTransform()->GetRotation().y << ',' << (*obj)->GetTransform()->GetRotation().z << '\n';
-				ofsSave << name << "_position=" << (*obj)->GetTransform()->GetPosition().x << ',' << (*obj)->GetTransform()->GetPosition().y << ',' << (*obj)->GetTransform()->GetPosition().z << '\n';
-				//ofsSave << "collisionID=" << '\n';
-			}
-		}
+		//	for (; obj != (*layer)->GetGameObjects().end(); ++obj)
+		//	{
+		//		if (L"Camera0" == (*obj)->GetName() || L"Cube0" == (*obj)->GetName())
+		//			continue;
+		//		
+		//		std::wstring name = (*obj)->GetName();
+
+		//		ofsSave << name << "_static=" << (*obj)->GetIsStatic() << "\n";
+		//		ofsSave << name << "_layerID=" << (*obj)->GetLayerID() << "\n";
+		//		ofsSave << name << "_meshKey=" << (*obj)->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
+		//		ofsSave << name << "_initTex=" << (*obj)->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
+		//		ofsSave << name << "_renderID=" << (*obj)->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
+		//		ofsSave << name << "_scale=" << (*obj)->GetTransform()->GetSize().x << ',' << (*obj)->GetTransform()->GetSize().y << ',' << (*obj)->GetTransform()->GetSize().z << '\n';
+		//		ofsSave << name << "_rotation=" << (*obj)->GetTransform()->GetRotation().x << ',' << (*obj)->GetTransform()->GetRotation().y << ',' << (*obj)->GetTransform()->GetRotation().z << '\n';
+		//		ofsSave << name << "_position=" << (*obj)->GetTransform()->GetPosition().x << ',' << (*obj)->GetTransform()->GetPosition().y << ',' << (*obj)->GetTransform()->GetPosition().z << '\n';
+		//		//ofsSave << "collisionID=" << '\n';
+		//	}
+		//}
 
 		AfxMessageBox(L"Save Success | ObjectListView.cpp");
 	}
