@@ -31,8 +31,9 @@ public:
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 
-	void AddScrollViewData(_int column, _float2 distanceXY, std::wstring texture);
-	CScrollViewObject* AddImageObjectData(std::wstring texture);
+	void AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet, std::wstring texture);
+	CScrollViewObject* AddImageObjectData(std::wstring texture, _float3 size);
+
 private:
 	void SetBasicName(void) override;
 	void ImageObjectSort();
@@ -40,8 +41,12 @@ private:
 	static _uint m_s_uniqueID;
 
 	GETTOR_SETTOR(_int, m_column, 1, Column); // 열
+	GETTOR_SETTOR(_float2, m_offSet, _float2(0, 0), OffSet); // 이미지 사이의 거리
 	GETTOR_SETTOR(_float2, m_distanceXY, _float2(1,1), DistanceXY); // 이미지 사이의 거리
-	GETTOR_SETTOR(std::vector<Engine::CImageObject>, m_vImageObject, {}, ImageObject); // 그려야될 오브젝트의 그룹
+	GETTOR_SETTOR(std::vector<SP(Engine::CImageObject)>, m_vImageObject, {}, ImageObject); // 그려야될 오브젝트의 그룹
+
+	// 부가적인 이미지 요소
+	// 이미지가 아니라 버튼이 들어갈수도있음
 
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
 	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)

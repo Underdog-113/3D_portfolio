@@ -2,6 +2,7 @@
 #include "ScrollViewObject.h"
 #include "Scene.h"
 #include "Object.h"
+
 _uint CScrollViewObject::m_s_uniqueID = 0;
 CScrollViewObject::CScrollViewObject()
 {
@@ -28,6 +29,9 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
 }
@@ -37,6 +41,10 @@ void CScrollViewObject::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;
 	m_addExtra = true;
+
+	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
+	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
+	m_spTexture = AddComponent<Engine::CTextureC>();
 
 }
 
@@ -91,20 +99,22 @@ void CScrollViewObject::OnDisable(void)
 	__super::OnDisable();
 }
 
-void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, std::wstring texture)
+void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet, std::wstring texture)
 {
 	m_column = column;
 	m_distanceXY = distanceXY;
+	m_offSet = offSet;
 	m_spTexture->AddTexture(texture);
 }
 
-CScrollViewObject * CScrollViewObject::AddImageObjectData(std::wstring texture)
+CScrollViewObject * CScrollViewObject::AddImageObjectData(std::wstring texture, _float3 size)
 {
-	/*SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"ScrollViewImageObject"));
-	image->GetTransform()->SetPositionZ(0.0f);
-	image->GetTransform()->SetSize(_float3(800, 600, 0));
-	image->GetTexture()->AddTexture(texture, 0);*/
+	SP(Engine::CImageObject) image =
+		std::dynamic_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"ScrollViewImageObject"));
+	image->GetTransform()->SetSize(size);
+	image->GetTexture()->AddTexture(texture, 0);
+
+	m_vImageObject.emplace_back(image);
 
 	return this;
 }
@@ -116,20 +126,22 @@ void CScrollViewObject::SetBasicName(void)
 
 void CScrollViewObject::ImageObjectSort()
 {
-/*	_int count = 0;
-	_float3 pos = GetTransform()->GetPosition();
+	_int count = 0;
+	_float3 pos = GetTransform()->GetPosition() + _float3(m_offSet.x, m_offSet.y, 0);
+	pos.z += 0.01f;
 	for (auto& object : m_vImageObject)
 	{
 		m_vImageObject[count]->GetTransform()->SetPosition(pos);
 		pos.x += m_distanceXY.x;
-		if (count % m_column == 0)
-		{
-			pos.x += GetTransform()->GetPosition().x;
-			pos.y += m_distanceXY.y;
-		}
 
 		count++;
-	}*/
+
+		if (count % m_column == 0)
+		{
+			pos.x = GetTransform()->GetPosition().x + m_offSet.x;
+			pos.y -= m_distanceXY.y;
+		}
+	}
 }
 
 // 처음 지정위치에서 시작해서 간격만큼 이미지추가
