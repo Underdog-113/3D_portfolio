@@ -189,6 +189,7 @@
     <ClInclude Include="..\Header\ClientMacro.h" />
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
+    <ClInclude Include="..\Header\DataLoad.h" />
     <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
     <ClInclude Include="..\Header\FSM_AxeC.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
+    <ClCompile Include="..\Code\DataLoad.cpp" />
     <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
     <ClCompile Include="..\Code\FSM_AxeC.cpp" />

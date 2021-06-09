@@ -7,6 +7,8 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 
+#include "TextManager.h"
+#include "DataLoad.h"
 CDongScene::CDongScene()
 {
 }
@@ -42,35 +44,9 @@ void CDongScene::Start(void)
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
-	{
-		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image1"));
-		image->GetTransform()->SetPositionZ(0.0f);
-		image->GetTransform()->SetSize(_float3(800, 600, 0));
-		image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
-	}
-
-	{
-		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image2"));
-		image->GetTransform()->SetPositionZ(0.0f);
-		image->GetTransform()->SetSize(_float3(800, 600, 0));
-		image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
-	}
-
-	{
-		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image3"));
-		image->GetTransform()->SetPositionZ(0.0f);
-		image->GetTransform()->SetSize(_float3(800, 600, 0));
-		image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
-	}
-
-	{
-		SP(Engine::CCanvas) canvas =
-			std::dynamic_pointer_cast<Engine::CCanvas>(ADD_CLONE(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
-	}
-
+	// ·Îµå
+	CDataLoad* Load = new CDataLoad();
+	Load->Load(this);
 }
 
 void CDongScene::FixedUpdate(void)

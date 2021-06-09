@@ -142,6 +142,9 @@
     <Filter Include="02.Objects\00.UI\00.Button\00.Function">
       <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.DataLoad">
+      <UniqueIdentifier>{be5cce4b-5ba6-4b8e-a513-0ab42ac2caba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -273,6 +276,9 @@
     <ClInclude Include="..\Header\ButtonFunction.h">
       <Filter>02.Objects\00.UI\00.Button\00.Function</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DataLoad.h">
+      <Filter>06.DataLoad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -382,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ButtonFunction.cpp">
       <Filter>02.Objects\00.UI\00.Button\00.Function</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DataLoad.cpp">
+      <Filter>06.DataLoad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
