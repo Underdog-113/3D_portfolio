@@ -243,7 +243,7 @@ void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM, _float3 * rootMotionMoveAmou
 		m_pRootMotion->SetRootMotionPos(*rootMotionMoveAmount);
 
 		// Set Start Offset for Loop Animation
-		if (aniCtrl->GetIsFakeAniEnd())
+		if (aniCtrl->GetIsFakeAniStart())
 			m_pRootMotion->SetRootMotionOffset(*rootMotionMoveAmount);
 
 		// Apply Root Motion 

@@ -1,6 +1,15 @@
 #pragma once
 #include "StateMachine.h"
+#define Cool_Attack				0.2f
+#define Cool_BranchAttack		0.35f
+#define Cool_BranchAttack3to4	0.4f
+#define Cool_Evade				0.2f
+#define Cool_End				0.75f
 
+#define Cool_Emotion			0.75f
+
+#define Cool_HitPenalty			0.5f
+#define Cool_RunOnAttack		0.5f
 
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
@@ -15,14 +24,36 @@ public:
 	void Start(SP(CComponent) spThis) override;
 
 private:
-	Engine::CDynamicMeshData* m_pDM;
+	void FixRootMotionOffset(_uint index);
 
-	float m_attackDelay = 0.2f;
-	float m_branchAttackDelay = 0.35f;
-	float m_branchAttack3to4 = 0.4f;
+private: /* Normal Actions */
+	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
+	bool CheckAction_Evade_OnAction(float coolTime = Cool_Evade);
+	bool CheckAction_EvadeForward(float coolTime = Cool_Evade);
+	bool CheckAction_EvadeBackward(float coolTime = Cool_Evade);
+	bool CheckAction_Idle(float coolTime = Cool_End);
+	bool CheckAction_Run();
+	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
+	bool CheckAction_StandBy();
+
+	bool CheckAction_Emotion(const std::wstring& switchStateName, float coolTime = Cool_Emotion);
+
+private: /* Special Actions */
+	bool CheckAction_BranchAttack();
+
+
+private:
+	Engine::CDynamicMeshData* m_pDM;
+	
 	Appear_Option m_appearOption = None;
 
 public:
+	// StandBy  
+	void StandBy_Init(void);
+	void StandBy_Enter(void);
+	void StandBy_Update(float deltaTime);
+	void StandBy_End(void);
+
 	// Appear
 	void Appear_Init(void);
 	void Appear_Enter(void);
@@ -227,11 +258,6 @@ public:
 	//void Jump_00_End(void);
 
 public:
-	//StandBy  
-	void StandBy_Init(void);
-	void StandBy_Enter(void);
-	void StandBy_Update(float deltaTime);
-	void StandBy_End(void);
 	//Stun
 	void Stun_Init(void);
 	void Stun_Enter(void);

@@ -126,16 +126,16 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
 	//현재 트랙을 끈다.
-	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + 0.25);
+	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + smoothTime);
 	//꺼지는 동안 키 속도 세팅
-	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
+	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 	//꺼지는 동안 가중치
-	m_pAniCtrl->KeyTrackWeight(m_curTrack, 0.01f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
+	m_pAniCtrl->KeyTrackWeight(m_curTrack, changeWeight, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 
 	//새 트랙 활성화
 	m_pAniCtrl->SetTrackEnable(newTrack, TRUE);
-	m_pAniCtrl->KeyTrackSpeed(newTrack, 1.f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
-	m_pAniCtrl->KeyTrackWeight(newTrack, 0.99f, m_timer, 0.25, D3DXTRANSITION_LINEAR);
+	m_pAniCtrl->KeyTrackSpeed(newTrack, 1.f, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
+	m_pAniCtrl->KeyTrackWeight(newTrack, 1 - changeWeight, m_timer, smoothTime, D3DXTRANSITION_LINEAR);
 
 	m_pAniCtrl->ResetTime();
 	m_timer = 0.f;
@@ -217,38 +217,33 @@ void CAniCtrl::PlayFake()
 		if (remainTime < 0)
 			remainTime = 0;
 
-		m_pFakeAniCtrl->AdvanceTime(remainTime, NULL);
+		m_pFakeAniCtrl->AdvanceTime(remainTime - 0.001, NULL);
+
+		m_isFakeAniEnd = true;
 
 		remainTime = (double)m_fakeTimer - (double)m_fakePeriod;
 		if (remainTime < 0)
 			remainTime = 0;
 
-		//if (m_isBlending)
-		//{
-		//	ChangeFakeAniSet();
-		//	m_isBlending = false;
-		//}
+		m_savedFakeAniTime = remainTime + 0.001;
 
-		m_pFakeAniCtrl->AdvanceTime(remainTime, NULL);
-		//m_savedDT = remainTime;
-		m_fakeTimer = (_float)remainTime;
-
-		m_isFakeAniEnd = true;
 		return;
 	}
-
-	//if (m_savedDT > 0)
-	//{
-	//	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
-	//	//m_savedDT = 0;
-	//	m_isFakeAniEnd = false;
-	//}		
-	//else
-	//	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
 
 	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
 	m_fakeTimerLastFrame = m_fakeTimer;
 
+}
+
+void CAniCtrl::PlayFake_SavedTime(void)
+{
+	m_isFakeAniEnd = false;
+
+	m_pFakeAniCtrl->AdvanceTime(m_savedFakeAniTime, NULL);
+	m_fakeTimer = (_float)m_savedFakeAniTime;
+	m_savedFakeAniTime = 0.f;
+
+	m_isFakeAniStart = true;
 }
 
 _bool CAniCtrl::IsItEnd(void)

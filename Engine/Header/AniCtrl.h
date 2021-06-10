@@ -24,17 +24,18 @@ public:
 public:
 					void		ChangeAniSet		(_uint index, 
 													 _bool fixTillEnd = false, 
-													 _double smoothTime = 0.25,
+													 _double smoothTime = 0.2,
 													 _float changeWeight = 0.9f);
 					void		ChangeAniSet		(std::string name, 
 													 _bool fixTillEnd = false, 
-													 _double smoothTime = 0.25,
+													 _double smoothTime = 0.2,
 													 _float changeWeight = 0.9f);
 
 					void		ChangeFakeAniSet	(void);
 
 					void		Play				(void);
 					void		PlayFake			(void);
+					void		PlayFake_SavedTime	(void);
 					_bool		IsItEnd				(void);
 
 					double		GetTimeline			();
@@ -54,16 +55,16 @@ private:
 	GETTOR_SETTOR	(_bool,							m_fixTillEnd,	false,		FixTillEnd)
 	
 private:	
-	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,	nullptr,	FakeAniCtrl)
-	GETTOR			(_uint,							m_fakeTrack,	0,			FakeOldTrack)
-	GETTOR			(_uint,							m_fakeIndex,	0,			FakeIndex)
-	GETTOR			(_float,						m_fakeTimer,	0.f,		FakeTimer)
+	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)
+	GETTOR			(_uint,							m_fakeTrack,			0,			FakeOldTrack)
+	GETTOR			(_uint,							m_fakeIndex,			0,			FakeIndex)
+	GETTOR			(_float,						m_fakeTimer,			0.f,		FakeTimer)
 	GETTOR			(_float,						m_fakeTimerLastFrame,	0.f,		FakeTimerLastFrame)
-	GETTOR			(_double,						m_fakePeriod,	0,			FakePeriod)
-	GETTOR_SETTOR	(_bool,							m_isBlending,	false,		IsBlending)
-	GETTOR			(double,						m_savedDT,	0.f,			SavedDeltaTime)
-	GETTOR_SETTOR	(_bool,							m_isFakeAniEnd,	false,		IsFakeAniEnd)
-	//GETTOR_SETTOR	(_bool,							m_isFakeAniStart,	false,		IsFakeAniStart)
+	GETTOR			(_double,						m_fakePeriod,			0,			FakePeriod)
+	GETTOR_SETTOR	(_bool,							m_isBlending,			false,		IsBlending)
+	GETTOR			(double,						m_savedFakeAniTime,		0.f,		SavedDeltaTime)
+	GETTOR_SETTOR	(_bool,							m_isFakeAniEnd,			false,		IsFakeAniEnd)
+	GETTOR_SETTOR	(_bool,							m_isFakeAniStart,		false,		IsFakeAniStart)
 };
 END
 

@@ -54,41 +54,41 @@ bool CStageController::CheckMoveOrder()
 	bool isMove = false;
 
 	// up
-	if (m_pInput->KeyUp(Key_Move_Left))
+	if (m_pInput->KeyUp(StageKey_Move_Left))
 	{
 		m_moveFlag &= ~MoveFlag_Left;
 	}
-	if (m_pInput->KeyUp(Key_Move_Right))
+	if (m_pInput->KeyUp(StageKey_Move_Right))
 	{
 		m_moveFlag &= ~MoveFlag_Right;
 	}
-	if (m_pInput->KeyUp(Key_Move_Forward))
+	if (m_pInput->KeyUp(StageKey_Move_Forward))
 	{
 		m_moveFlag &= ~MoveFlag_Forward;
 	}
-	if (m_pInput->KeyUp(Key_Move_Back))
+	if (m_pInput->KeyUp(StageKey_Move_Back))
 	{
 		m_moveFlag &= ~MoveFlag_Back;
 	}
 
 	// down
-	if (m_pInput->KeyDown(Key_Move_Left))
+	if (m_pInput->KeyDown(StageKey_Move_Left))
 	{
 		m_moveFlag &= ~MoveFlag_Right;
 		m_moveFlag |= MoveFlag_Left;
 	}
-	if (m_pInput->KeyDown(Key_Move_Right))
+	if (m_pInput->KeyDown(StageKey_Move_Right))
 	{
 		m_moveFlag |= MoveFlag_Right;
 		m_moveFlag &= ~MoveFlag_Left;
 	}
 
-	if (m_pInput->KeyDown(Key_Move_Forward))
+	if (m_pInput->KeyDown(StageKey_Move_Forward))
 	{
 		m_moveFlag |= MoveFlag_Forward;
 		m_moveFlag &= ~MoveFlag_Back;
 	}
-	if (m_pInput->KeyDown(Key_Move_Back))
+	if (m_pInput->KeyDown(StageKey_Move_Back))
 	{
 		m_moveFlag &= ~MoveFlag_Forward;
 		m_moveFlag |= MoveFlag_Back;
