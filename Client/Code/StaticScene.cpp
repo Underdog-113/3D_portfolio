@@ -3,8 +3,11 @@
 
 #pragma region Prototype Headers
 #include "EmptyObject.h"
-#include "Camera.h"
 #include "ImageObject.h"
+
+#include "DebugCollider.h"
+#include "Camera.h"
+
 #include "Button.h"
 #include "Slider.h"
 #include "ScrollViewObject.h"
@@ -148,4 +151,7 @@ void CStaticScene::InitUiPrototypes(void)
 
 	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spScrollViewObject);
+
+	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDebugCOllider);
 }
