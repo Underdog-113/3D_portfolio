@@ -48,7 +48,7 @@
 #include "EditorEnum.h"
 #include "EditorMacro.h"
 #include "EditorStructure.h"
-
+#include "EditorFunction.h"
 
 
 

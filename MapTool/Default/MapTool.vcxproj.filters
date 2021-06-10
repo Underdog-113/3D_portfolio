@@ -87,6 +87,9 @@
     <ClInclude Include="..\Header\ToolMenuView.h">
       <Filter>01.View\01.MenuView</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\EditorFunction.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapTool.cpp">

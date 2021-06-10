@@ -18,6 +18,8 @@ IMPLEMENT_DYNCREATE(CToolMenuView, CFormView)
 
 CToolMenuView::CToolMenuView()
 	: CFormView(IDD_TOOLMENUVIEW)
+	, m_aabbRadio(0)
+	, m_rayRadio(0)
 {
 
 }
@@ -59,6 +61,9 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT11, m_curObjName);
 	DDX_Control(pDX, IDC_EDIT10, m_saveFileName);
 	DDX_Control(pDX, IDC_CHECK5, m_initTexture);
+	DDX_Control(pDX, IDC_COMBO4, m_layerID);
+	DDX_Control(pDX, IDC_EDIT12, m_aabbColID);
+	DDX_Control(pDX, IDC_CHECK1, m_showCol);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -81,6 +86,11 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON7, &CToolMenuView::OnBnClickedScaleBtn)
 	ON_BN_CLICKED(IDC_BUTTON1, &CToolMenuView::OnBnClickedSaveBtn)
 	ON_BN_CLICKED(IDC_BUTTON2, &CToolMenuView::OnBnClickedLoadBtn)
+	ON_LBN_SELCHANGE(IDC_LIST4, &CToolMenuView::OnLbnSelchangeTextureList)
+	ON_CBN_SELCHANGE(IDC_COMBO4, &CToolMenuView::OnCbnSelchangeCombo4)
+	ON_BN_CLICKED(IDC_BUTTON3, &CToolMenuView::OnBnClickedCreatePrefBtn)
+	ON_BN_CLICKED(IDC_BUTTON4, &CToolMenuView::OnBnClickedCreateAABBColliderBtn)
+	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
 END_MESSAGE_MAP()
 
 
@@ -192,6 +202,15 @@ void CToolMenuView::OnInitialUpdate()
 	m_spinScaleY.SetPos(0);
 	m_spinScaleZ.SetRange(m_valueMin, m_valueMax);
 	m_spinScaleZ.SetPos(0);
+
+	m_initTexture.EnableWindow(false);
+	m_showCol.EnableWindow(false);
+
+	m_layerID.AddString(_T("Player"));
+	m_layerID.AddString(_T("Enemy"));
+	m_layerID.AddString(_T("Map"));
+
+
 }
 
 void CToolMenuView::Update(void)
@@ -309,7 +328,6 @@ void CToolMenuView::OnTvnSelchangedTree(NMHDR * pNMHDR, LRESULT * pResult)
 	curItemParentName = m_tree.GetItemText(m_tree.GetParentItem(hItemCur));
 	m_curTreeItem = m_tree.GetItemText(hItemCur);
 
-
 	if (L"Dynamic" == curItemParentName)
 	{
 		SetChangeMeshList(L"Player");
@@ -356,7 +374,22 @@ void CToolMenuView::OnTvnSelchangedTree(NMHDR * pNMHDR, LRESULT * pResult)
 void CToolMenuView::OnLbnSelchangeMeshList()
 {
 	m_meshTreeList.GetText(m_meshTreeList.GetCurSel(), m_curSelFileName);
+	m_initTexture.SetCheck(1); // inittexture 체크 박스 체크
+
 	std::wcout << m_curSelFileName.GetString() << std::endl;
+	
+	Engine::CMeshData* pMD = Engine::GET_CUR_SCENE->GetMeshStore()->GetMeshData(m_curSelFileName.GetString());
+
+	if (pMD->GetTexList().size() != 0)
+		m_initTexture.EnableWindow(0);
+	else
+		m_initTexture.EnableWindow(1);
+}
+
+void CToolMenuView::OnLbnSelchangeTextureList()
+{
+	m_initTexture.SetCheck(0);
+	m_textureTreeList.GetText(m_textureTreeList.GetCurSel(), m_curSelTextureFileName);
 }
 
 void CToolMenuView::SpinBtn(LPNMUPDOWN pNMUpDown, CEdit* pBtn, _float fVal)
@@ -443,35 +476,6 @@ _float CToolMenuView::GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown)
 	SpinBtn(pNMUpDown, pEdit, value);
 
 	return value;
-}
-
-std::vector<std::string> CToolMenuView::split(std::string input, char delimiter)
-{
-	std::vector<std::string> answer;
-	std::stringstream ss(input);
-	std::string temp;
-
-	while (getline(ss, temp, delimiter))
-		answer.push_back(temp);
-
-	return answer;
-}
-
-_bool CToolMenuView::WstrToBool(std::wstring wstr)
-{
-	_bool b = WstrToInt(wstr) == 1 ? true : false;
-
-	return b;
-}
-
-_int CToolMenuView::WstrToInt(std::wstring wstr)
-{
-	return std::stoi(wstr);
-}
-
-_float CToolMenuView::StrToFloat(std::string str)
-{
-	return std::stof(str);
 }
 
 void CToolMenuView::SetPosition(_float3 vPos)
@@ -746,6 +750,55 @@ void CToolMenuView::OnBnClickedLoadBtn()
 	}
 
 	AfxMessageBox(L"Load Success | ObjectListView.cpp");
+}
+
+void CToolMenuView::OnCbnSelchangeCombo4()
+{
+	//m_culSelLayerID = (_int)m_layerID.GetCurSel();
+}
+
+void CToolMenuView::OnBnClickedCreatePrefBtn()
+{
+
+}
+
+void CToolMenuView::OnBnClickedCreateAABBColliderBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+
+	//switch (curObjColliderType)
+	//{
+	//case 0:
+	//	_float3 사이즈;
+	//	curObj->GetComponent<Engine::CCollisionC>()->
+	//		AddCollider(Engine::CAabbCollider::Create(_float3(1, 1, 1), ZERO_VECTOR));
+	//	break;
+
+	//}
+
+	//curObj->GetComponent<Engine::CCollisionC>()->SetIsEnabled(false);
+}
+
+void CToolMenuView::OnBnClickedAddCollisionCBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	//콜리션 컴포넌트를 붙일때
+	CString cstrVal;
+	m_aabbColID.GetWindowTextW(cstrVal);
+	_int colID = WstrToInt(Engine::StrToWStr(CStrToStr(cstrVal)));
+
+	curObj->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
+	curObj->AddComponent<Engine::CDebugC>();
+
+	m_showCol.EnableWindow(true);
 }
 
 //{

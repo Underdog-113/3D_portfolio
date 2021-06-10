@@ -53,23 +53,26 @@ public:
 	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLbnSelchangeMeshList();
+	afx_msg void OnLbnSelchangeTextureList();
 	afx_msg void OnBnClickedPositionBtn();
 	afx_msg void OnBnClickedRotationBtn();
 	afx_msg void OnBnClickedScaleBtn();
 	afx_msg void OnBnClickedSaveBtn();
 	afx_msg void OnBnClickedLoadBtn();
+	afx_msg void OnCbnSelchangeCombo4();
+	afx_msg void OnBnClickedCreatePrefBtn();
+	afx_msg void OnBnClickedCreateAABBColliderBtn();
+	afx_msg void OnBnClickedAddCollisionCBtn();
 
 private:
 	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
-	std::vector<std::string> split(std::string input, char delimiter);
-	_bool WstrToBool(std::wstring wstr);
-	_int WstrToInt(std::wstring wstr);
-	_float StrToFloat(std::string str);
 
 // add valuable
 public:
 	CButton m_initTexture;
 	CEdit m_curObjName;
+	CComboBox m_layerID;
+	_int m_culSelLayerID;
 
 protected:
 	CEdit m_posX;
@@ -104,6 +107,15 @@ protected:
 	CListBox m_textureTreeList;
 	CEdit m_saveFileName;
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
+	
+	// col
+	CEdit m_aabbColID;
+	CButton m_showCol;
+	_int m_aabbRadio;
+	_int m_rayRadio;
 
 	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
+	GETTOR(CString, m_curSelTextureFileName, L"", CurSelTextureFileName);
+public:
+	
 };

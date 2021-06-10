@@ -83,12 +83,13 @@ void CEditorScene::Start(void)
 	SP(Engine::CObject) spCube
 		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
 
-	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
+	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"tes3t");
 	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+	spCube->AddComponent<Engine::CTextureC>()/*->AddTexture(L"Castle_wall", 0)*/;
 	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	spCube->GetTransform()->SetSize(300, 1, 300);
+	//spCube->GetTransform()->SetSize(300, 1, 300);
+	spCube->GetTransform()->SetSize(5, 5, 5);
 	spCube->GetTransform()->SetPosition(0.f, -1.f, 0.f);
 }
 
@@ -130,6 +131,8 @@ bool CEditorScene::IsObjectPicked(Engine::CObject * _pObject, _float3 * _pOutPic
 	_float3 rayPos, rayDir;
 	GetMouseRay(_pObject->GetTransform()->GetWorldMatrix(), &rayPos, &rayDir);
 
+	m_rayDir = rayDir;
+
 	D3DXVec3TransformCoord(&rayPos, &rayPos, &_pObject->GetTransform()->GetWorldMatrix());
 	D3DXVec3TransformNormal(&rayDir, &rayDir, &_pObject->GetTransform()->GetWorldMatrix());
 
@@ -147,6 +150,7 @@ bool CEditorScene::IsObjectPicked(Engine::CObject * _pObject, _float3 * _pOutPic
 	_float len = D3DXVec3Length(&objCenterRay);
 	_float dist = len * sinf(radian);
 
+
 	if (dist < m_pickRadius)
 		return true;
 	else
@@ -157,6 +161,8 @@ bool CEditorScene::IsMeshPicked(Engine::CObject * _pObject, _float3 * _pOutPickP
 {
 	_float3 rayPos, rayDir;
 	GetMouseRay(_pObject->GetTransform()->GetWorldMatrix(), &rayPos, &rayDir);
+
+	m_rayDir = rayDir;
 
 	Engine::CStaticMeshData* pStaticMesh = (Engine::CStaticMeshData*)_pObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0];
 
@@ -172,6 +178,7 @@ bool CEditorScene::CheckIntersect(LPD3DXMESH _mesh, _float3 _rayPos, _float3 _ra
 	Engine::VERTEX_VNT* pVertices;
 
 	_float u, v, distance;
+	_float minDistance = FLT_MAX;
 
 	_mesh->GetVertexBuffer(&pVertexBuffer);
 	_mesh->GetIndexBuffer(&pIndexBuffer);
@@ -191,12 +198,18 @@ bool CEditorScene::CheckIntersect(LPD3DXMESH _mesh, _float3 _rayPos, _float3 _ra
 			&p2,
 			&_rayPos, &_rayDir, &u, &v, &distance))
 		{
-			*_pOutPickPoint = p0 + u*(p1 - p0) + v*(p2 - p0);
-			return true;
+			if (distance < minDistance)
+			{
+				minDistance = distance;
+				*_pOutPickPoint = p0 + u*(p1 - p0) + v*(p2 - p0);
+			}
 		}
 	}
 
-	return false;
+	if (minDistance == FLT_MAX)
+		return false;
+	else
+		return true;
 }
 void CEditorScene::GetMouseRay(_mat _targetWorldMatrix, _float3 * _pOutRayPos, _float3 * _pOutRayDir)
 {
@@ -227,27 +240,63 @@ void CEditorScene::GetMouseRay(_mat _targetWorldMatrix, _float3 * _pOutRayPos, _
 	mousePos.z = 0.f;
 
 	// projection -> view
-	_mat projMat;
-	Engine::GET_DEVICE->GetTransform(D3DTS_PROJECTION, &projMat);
+	_mat projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 	D3DXMatrixInverse(&projMat, NULL, &projMat);
 	D3DXVec3TransformCoord(&mousePos, &mousePos, &projMat);
 
 	// view -> world
 	*_pOutRayPos = _float3(0.f, 0.f, 0.f);
 	*_pOutRayDir = mousePos - *_pOutRayPos;
+	D3DXVec3Normalize(_pOutRayDir, _pOutRayDir);
 
-	_mat viewMat;
-	Engine::GET_DEVICE->GetTransform(D3DTS_VIEW, &viewMat);
+	_mat viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
 	D3DXMatrixInverse(&viewMat, NULL, &viewMat);
 
 	D3DXVec3TransformCoord(_pOutRayPos, _pOutRayPos, &viewMat);
 	D3DXVec3TransformNormal(_pOutRayDir, _pOutRayDir, &viewMat);
+	D3DXVec3Normalize(_pOutRayDir, _pOutRayDir);
 
 	// world -> local
 	D3DXMatrixInverse(&_targetWorldMatrix, NULL, &_targetWorldMatrix);
 
 	D3DXVec3TransformCoord(_pOutRayPos, _pOutRayPos, &_targetWorldMatrix);
 	D3DXVec3TransformNormal(_pOutRayDir, _pOutRayDir, &_targetWorldMatrix);
+	D3DXVec3Normalize(_pOutRayDir, _pOutRayDir);
+}
+
+void CEditorScene::SetInitAnimation(SP(Engine::CObject) spObj)
+{
+	std::wstring meshKey = spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey();
+
+	if (L"Kiana" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("StandBy");
+
+	else if (L"Theresa" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("IDLE");
+
+	else if (L"Sakura" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("ui_standby");
+
+	else if (L"MB_Ganesha" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("StandBy");
+
+	else if (L"MB_Bronya" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("IDLE");
+
+	else if (L"MO_Ninza" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("standy");
+
+	else if (L"MO_Robot" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("StandBy");
+
+	else if (L"MO_Scout" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("IDLE");
+
+	else if (L"MO_Spider" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("StandBy");
+
+	else if (L"MO_Lancer" == meshKey)
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("STAND");
 }
 
 void CEditorScene::InitPrototypes(void)
@@ -263,10 +312,16 @@ void CEditorScene::InputSetting()
 {
 	if (Engine::IMKEY_DOWN(KEY_Q))
 	{
-		if (m_pMenuView->m_initTexture.IsWindowEnabled() == 1)
-			std::cout << "not disabled" << std::endl;
-		else
-			std::cout << "disabled" << std::endl;
+		if (false == m_pickingMode)
+		{
+			m_pickingMode = true;
+			std::cout << "Create Mode On" << std::endl;
+		}
+		else if (true == m_pickingMode)
+		{
+			m_pickingMode = false;
+			std::cout << "Create Mode Off" << std::endl;
+		}
 	}
 
 	if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
@@ -295,28 +350,46 @@ void CEditorScene::InputSetting()
 						pTarget = pObject.get();
 						shortLen = len;
 						intersection = correctPoint;
+						m_intersect = intersection;
 					}
 				}
 			}
 
 			std::wstring fileName(m_pMenuView->GetCurSelFileName());
-			SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"hi");
 
+			CString cstr;
+			ELayerID curLayerID = ELayerID::NumOfLayerID;
+			m_pMenuView->m_layerID.GetLBText(m_pMenuView->m_layerID.GetCurSel(), cstr);
+
+			if (L"Player" == cstr)
+				curLayerID = ELayerID::Player;
+			else if (L"Enemy" == cstr)
+				curLayerID = ELayerID::Enemy;
+			else if (L"Map" == cstr)
+				curLayerID = ELayerID::Map;
+
+			SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"hi");
 			spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
-			spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spObj->AddComponent<Engine::CTextureC>();
+
+			if (1 == m_pMenuView->m_initTexture.GetCheck())
+			{
+				spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+				spObj->AddComponent<Engine::CTextureC>();
+			}
+			else if (0 == m_pMenuView->m_initTexture.GetCheck())
+			{
+				spObj->GetComponent<Engine::CMeshC>()->SetInitTex(false);
+				spObj->AddComponent<Engine::CTextureC>()->AddTexture(Engine::StrToWStr(CStrToStr(m_pMenuView->GetCurSelTextureFileName())), 0);
+			}
+
 			spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			spObj->GetTransform()->SetSize(10, 10, 10);
 			spObj->GetTransform()->SetPosition(intersection);
-			if (0.f > intersection.y)
-				spObj->GetTransform()->SetPositionY(0.f);
 
-			static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("Idle");
+			SetInitAnimation(spObj);
 
 			m_pCurSelectedObject = spObj.get();
 			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
-
-			std::cout << "create" << std::endl;
 		}
 	}
 
@@ -374,13 +447,11 @@ void CEditorScene::InputSetting()
 		if (false == m_createMode)
 		{
 			m_createMode = true;
-			m_pMenuView->m_initTexture.EnableWindow(true);
 			std::cout << "Create mode on" << std::endl;
 		}
 		else
 		{
 			m_createMode = false;
-			m_pMenuView->m_initTexture.EnableWindow(false);
 			std::cout << "Create mode off" << std::endl;
 		}
 	}

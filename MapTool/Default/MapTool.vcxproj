@@ -197,6 +197,7 @@
     <ClInclude Include="..\Header\EditorDefine.h" />
     <ClInclude Include="..\Header\EditorEnum.h" />
     <ClInclude Include="..\Header\EditorExtern.h" />
+    <ClInclude Include="..\Header\EditorFunction.h" />
     <ClInclude Include="..\Header\EditorMacro.h" />
     <ClInclude Include="..\Header\EditorScene.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
