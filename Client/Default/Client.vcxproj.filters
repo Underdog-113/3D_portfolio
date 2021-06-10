@@ -398,8 +398,13 @@
   <ItemGroup>
     <Image Include="small.ico">
       <Filter>99.Default</Filter>
+    </Image>    
+    <Image Include="Client.ico">
+      <Filter>99.Default</Filter>
     </Image>
-    <Image Include="Client.ico" />
+    <Image Include="Honkai.ico">
+      <Filter>99.Default</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
