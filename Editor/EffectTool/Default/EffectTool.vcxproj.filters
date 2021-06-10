@@ -28,6 +28,15 @@
     <Filter Include="97.Bitmap">
       <UniqueIdentifier>{aeb39c05-dc6a-457a-893c-c31c07c86b49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object">
+      <UniqueIdentifier>{e38c0a56-103f-44b2-abc9-57f858a1f33c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\00.EffectMesh">
+      <UniqueIdentifier>{f7260254-c1c9-4d69-915d-57ccb0f765e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\01.SoftEffect">
+      <UniqueIdentifier>{90f243c2-8c3b-40ce-8289-511eed1f4fbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -72,6 +81,9 @@
     <ClInclude Include="..\Header\MainEditor.h">
       <Filter>04.MainEditor</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\EffectMesh.h">
+      <Filter>05.Object\00.EffectMesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -97,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MainEditor.cpp">
       <Filter>04.MainEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectMesh.cpp">
+      <Filter>05.Object\00.EffectMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

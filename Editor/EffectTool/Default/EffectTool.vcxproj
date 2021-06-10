@@ -193,6 +193,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\EffectMesh.h" />
     <ClInclude Include="..\Header\EffectToolDefine.h" />
     <ClInclude Include="..\Header\EffectToolEnum.h" />
     <ClInclude Include="..\Header\EffectToolInclude.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\EffectMesh.cpp" />
     <ClCompile Include="..\Code\EffectToolScene.cpp" />
     <ClCompile Include="..\Code\Inspector.cpp" />
     <ClCompile Include="..\Code\MainEditor.cpp" />

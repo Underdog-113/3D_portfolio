@@ -42,4 +42,17 @@ enum class ELayerID
 	Camera = 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	NumOfLayerID = 4 + (_int)Engine::ELayerID::NumOfEngineLayerID
 };
+
+//GraphicsComponent RenderID
+enum class ERenderID
+{
+	Base = 0,
+	NonAlpha = 1,
+	WireFrame = 2,
+	AlphaTest = 3,
+	AlphaBlend = 4,
+	Particle = 5,
+	UI = 6,
+	NumOfRenderID = 7
+};
 #endif // EFFECTTOOLENUM_H

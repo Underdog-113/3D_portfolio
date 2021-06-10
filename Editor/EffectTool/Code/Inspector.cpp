@@ -328,19 +328,21 @@ void CInspector::OnBnClickedDeleteEffectList()
 {
 	m_TreeCtrl.DeleteAllItems();
 	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
-
 }
 
 
 void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
-	CString strInitPath = _T("..\\");
-	
-	
-	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+	CString strInitPath = _T(_SOLUTIONDIR "\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect");
 
-	dlg.m_ofn.lpstrInitialDir = strInitPath;
+	LPWSTR lpwstr = strInitPath.GetBuffer();
+
+	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
+
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
+
+	//PathStripPath(lpwstr);
 
 	// IDOK = OK button is pressed in the dialog
 	if (dlg.DoModal() == IDOK)
@@ -362,8 +364,15 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
+	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
+	CString strPathName = strInitPath;
+	LPWSTR lpwstr = strInitPath.GetBuffer();
+
+	//PathStripPath(lpwstr);
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -383,8 +392,15 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
+	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
+	
+	LPWSTR lpwstr = strInitPath.GetBuffer();
+
+	PathStripPath(lpwstr);
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -403,8 +419,15 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
+	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
+	
+	LPWSTR lpwstr = strInitPath.GetBuffer();
+
+	PathStripPath(lpwstr);
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -421,6 +444,13 @@ void CInspector::OnBnClickedAlphaMask()
 
 void CInspector::Add_EffectMesh(CString ObjectName)
 {
+	SP(Engine::CObject) spEmptyObject
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", false, (_int)Engine::ELayerID::NumOfEngineLayerID, L"Effect0");
+	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex();
+	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)ERenderID::NonAlpha);
+	spEmptyObject->AddComponent<Engine::CTextureC>();
+	spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)

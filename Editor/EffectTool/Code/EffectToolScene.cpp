@@ -75,7 +75,7 @@ void CEffectToolScene::OnDisable(void)
 Engine::CScene * CEffectToolScene::Create()
 {
 	Engine::CScene* pEditorScene = new CEffectToolScene;
-	pEditorScene->Awake((_int)ESceneID::NumOfSceneID);
+	pEditorScene->Awake((_int)ELayerID::NumOfLayerID);
 
 	return pEditorScene;
 }
