@@ -90,6 +90,25 @@ void CMeshStore::InitMeshForScene(std::wstring curScene, _bool isStatic)
 	__super::InitResource(m_resourcePath + L"\\" + curScene);
 }
 
+void CMeshStore::FindMeshesInSection(std::wstring sectionKey, std::vector<std::wstring>& vMeshkeys)
+{
+	for (auto& mesh : m_mCurSceneMeshData)
+	{
+		if (mesh.second->GetSectionKey() == sectionKey)
+		{
+			vMeshkeys.emplace_back(mesh.first);
+		}
+	}
+
+	for (auto& mesh : m_s_mStaticMeshData)
+	{
+		if (mesh.second->GetSectionKey() == sectionKey)
+		{
+			vMeshkeys.emplace_back(mesh.first);
+		}
+	}
+}
+
 
 void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 {
@@ -98,6 +117,7 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	if (filePath.find(L"\\Static\\") != std::wstring::npos)
 	{	
 		CStaticMeshData* pNewStaticMesh = CStaticMeshData::Create(filePath, fileName);
+		pNewStaticMesh->SetSectionKey(GetLastDirName(filePath));
 		if (m_isStatic)
 			m_s_mStaticMeshData[pNewStaticMesh->GetMeshKey()] = pNewStaticMesh;
 		else
@@ -106,6 +126,7 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	else// if (GetLastDirName(fullFilePath) == L"Dynamic")//Dynamic Mesh
 	{
 		CDynamicMeshData* pNewDynamicMesh = CDynamicMeshData::Create(filePath, fileName);
+		pNewDynamicMesh->SetSectionKey(GetLastDirName(filePath));
 		if (m_isStatic)
 			m_s_mStaticMeshData[pNewDynamicMesh->GetMeshKey()] = pNewDynamicMesh;
 		else

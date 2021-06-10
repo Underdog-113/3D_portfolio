@@ -108,6 +108,7 @@ void CButton::OnDestroy(void)
 void CButton::OnEnable(void)
 {
 	__super::OnEnable();
+
 }
 
 void CButton::OnDisable(void)

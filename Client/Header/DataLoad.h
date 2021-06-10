@@ -13,7 +13,7 @@ public:
 	void Setting();
 	//void(CButtonFunction::*)(), CButtonFunction*
 	void DelegatePush(void(CDataLoad::* function)(Engine::CScene*) , CDataLoad* dataload);
-	void DeleGatePop();
+	void DeleGatePop(void(CDataLoad::* function)(Engine::CScene*), CDataLoad* dataload);
 	void Load(Engine::CScene* pScene);
 
 private:
@@ -29,7 +29,13 @@ private:
 	// 스크롤뷰 로드
 	void ScrollViewLoad(Engine::CScene* pScene);
 
+	void CanvasLoad(Engine::CScene* pScene);
+
 	// 툴 로드
 	void ToolLoad(Engine::CScene* pScene);
+	
+	void EffectLoad(Engine::CScene* pScene);
+
+	void ButtonFunction(SP(CButton) button, std::wstring function);
 };
 

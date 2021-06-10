@@ -100,12 +100,50 @@ namespace Engine
 		return fileName.substr(0, lastindex);
 	}
 
-
+	inline constexpr unsigned int HashCode(const char* str)
+	{
+		return str[0] ? static_cast<unsigned int>(str[0]) + 0xEDB8832Full * HashCode(str + 1) : 8603;
+		/*
+		문자열 데이터를 정수형 데이터로 매핑하는 해시 함수
+		constexpr : 변수 또는 함수의 값을 컴파일 시점에 도출하여 상수화 시켜주는 기능
+		*/
+	}
 
 	//현재 파일 이름 따오는 함수
 	inline std::wstring GetCurFileName(const std::string& str)
 	{
 		return StrToWStr(str.substr(str.find_last_of('\\') + 1));
+	}
+
+	inline std::wstringstream& operator >> (std::wstringstream& in, _float4 & float4)
+	{
+		std::wstring vecStr;
+		std::wstring vecStrX, vecStrY, vecStrZ, vecStrW;
+
+		in >> vecStr;
+
+		_size xEndPos, yEndPos, zEndPos;
+
+		xEndPos = vecStr.find_first_of(L',');
+		yEndPos = vecStr.find_first_of(L',', xEndPos + 1);
+		zEndPos = vecStr.find_last_of(L',');
+
+		vecStrX = vecStr.substr(0, xEndPos);
+		vecStrY = vecStr.substr(++xEndPos, yEndPos - xEndPos);
+		vecStrZ = vecStr.substr(++yEndPos, zEndPos - yEndPos);
+		vecStrW = vecStr.substr(++zEndPos);
+
+		std::wstringstream ssX(vecStrX);
+		std::wstringstream ssY(vecStrY);
+		std::wstringstream ssZ(vecStrZ);
+		std::wstringstream ssW(vecStrW);
+
+		ssX >> float4.x;
+		ssY >> float4.y;
+		ssZ >> float4.z;
+		ssW >> float4.w;
+
+		return in;
 	}
 
 	inline std::wstringstream& operator >> (std::wstringstream& in, _float3 & float3)
@@ -157,8 +195,6 @@ namespace Engine
 
 		return in;
 	}
-
-
 
 	template<class T> inline T	operator	~	(T a)		{ return (T)~(int)a; }
 	template<class T> inline T	operator	|	(T a, T b)	{ return (T)((int)a | (int)b); }

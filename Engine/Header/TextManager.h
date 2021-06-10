@@ -16,7 +16,9 @@ public:
 	void		PostRender			(void);
 
 	void		OnDestroy			(void);
+	void		ClearForScene		(void);
 
+public:
 	_Text*		AddText				(std::wstring textKey, std::wstring msg,
 									 _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color);
 

@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "DongScene.h"
+
+#include "Loading.h"
+
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -41,6 +44,9 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
+
+	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
@@ -48,8 +54,10 @@ void CDongScene::Start(void)
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
 	Load->Load(this);
-	//Load->DelegatePush(&CDataLoad::)
 	delete(Load);
+
+	// (미완성)스크롤 뷰 예제
+
 }
 
 void CDongScene::FixedUpdate(void)
@@ -60,6 +68,10 @@ void CDongScene::FixedUpdate(void)
 void CDongScene::Update(void)
 {
 	__super::Update();
+	if (m_pLoading && m_pLoading->GetFinish())
+	{
+		Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());
+	}
 }
 
 void CDongScene::LateUpdate(void)
@@ -84,6 +96,11 @@ void CDongScene::OnDisable(void)
 {
 	__super::OnDisable();
 
+}
+
+void CDongScene::ChangeScene(Engine::CScene * pScene)
+{
+	m_pLoading = CLoading::Create(pScene, false);
 }
 
 void CDongScene::InitPrototypes(void)

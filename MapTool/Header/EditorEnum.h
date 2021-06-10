@@ -27,7 +27,9 @@ enum class EDataID
 	BasicObject			= 0 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Player				= 1 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Scene				= 2 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	NumOfDataID			= 3 + (_uint)Engine::EDataID::NumOfEngineDataID
+	Enemy				= 3 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	UI					= 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	NumOfDataID			= 5 + (_uint)Engine::EDataID::NumOfEngineDataID
 };
 
 
@@ -37,6 +39,7 @@ enum class ELayerID
 	Map				= 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Enemy			= 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Camera			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID	= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID
+	UI				= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	NumOfLayerID	= 5 + (_int)Engine::ELayerID::NumOfEngineLayerID
 };
 #endif // CLIENTENUM_H

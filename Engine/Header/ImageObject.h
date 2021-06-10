@@ -7,7 +7,7 @@ BEGIN(Engine)
 class ENGINE_DLL CImageObject final : public CObject
 {
 	SMART_DELETER_REGISTER
-public:
+private:
 	CImageObject();
 	~CImageObject();
 

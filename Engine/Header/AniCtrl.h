@@ -37,6 +37,7 @@ public:
 					void		PlayFake			(void);
 					_bool		IsItEnd				(void);
 
+					double		GetTimeline			();
 
 
 private:

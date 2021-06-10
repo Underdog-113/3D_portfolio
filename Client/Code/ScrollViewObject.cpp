@@ -30,6 +30,9 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
 }
@@ -39,6 +42,10 @@ void CScrollViewObject::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;
 	m_addExtra = true;
+
+	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
+	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
+	m_spTexture = AddComponent<Engine::CTextureC>();
 }
 
 void CScrollViewObject::Start(void)
@@ -64,14 +71,17 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(void)
 {
+	m_spRectTex->PreRender(m_spGraphics);
 }
 
 void CScrollViewObject::Render(void)
 {
+	m_spRectTex->Render(m_spGraphics);
 }
 
 void CScrollViewObject::PostRender(void)
 {
+	m_spRectTex->PostRender(m_spGraphics);
 }
 
 void CScrollViewObject::OnDestroy(void)

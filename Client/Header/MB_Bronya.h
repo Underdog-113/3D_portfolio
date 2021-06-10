@@ -1,38 +1,38 @@
 #pragma once
 #include "Monster.h"
 
-class CMB_Bronya : public CMonster
+class CMB_Bronya final : public CMonster
 {
 	SMART_DELETER_REGISTER
 
 private:
 	CMB_Bronya();
-	virtual ~CMB_Bronya() = default;
+	~CMB_Bronya();
 
 public:
-	virtual SP(CObject) MakeClone(void) override;
+			SP(CObject) MakeClone(void) override;
 
-	virtual void Awake(void) override;
+			void Awake(void) override;
 
-	virtual void Start(void) override;
+			void Start(void) override;
 
-	virtual void FixedUpdate(void) override;
+			void FixedUpdate(void) override;
 
-	virtual void Update(void) override;
+			void Update(void) override;
 
-	virtual void LateUpdate(void) override;
+			void LateUpdate(void) override;
 
-	virtual void PreRender(void) override;
-	virtual void Render(void) override;
-	virtual void PostRender(void) override;
+			void PreRender(void) override;
+			void Render(void) override;
+			void PostRender(void) override;
 
-	virtual void OnDestroy(void) override;
+			void OnDestroy(void) override;
 
-	virtual void OnEnable(void) override;
+			void OnEnable(void) override;
 
-	virtual void OnDisable(void) override;
+			void OnDisable(void) override;
 
-	virtual void SetBasicName(void) override;
+			void SetBasicName(void) override;
 
 private:
 	void   EquipWeapon();

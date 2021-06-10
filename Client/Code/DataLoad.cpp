@@ -26,11 +26,19 @@ void CDataLoad::Setting()
 	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ButtonLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::EffectLoad, &CDataLoad(), std::placeholders::_1);
 }
 
-void CDataLoad::DelegatePush(void(CDataLoad::* function)(Engine::CScene *), CDataLoad * dataload)
+void CDataLoad::DelegatePush(void(CDataLoad::* function)(Engine::CScene *), CDataLoad* dataload)
 {
+	m_loadDeleGate += std::bind(function, dataload, std::placeholders::_1);
+}
+
+void CDataLoad::DeleGatePop(void(CDataLoad::* function)(Engine::CScene *), CDataLoad* dataload)
+{
+	m_loadDeleGate -= std::bind(function, dataload, std::placeholders::_1);
 }
 
 void CDataLoad::Load(Engine::CScene * pScene)
@@ -40,7 +48,7 @@ void CDataLoad::Load(Engine::CScene * pScene)
 
 void CDataLoad::ImageLoad(Engine::CScene* pScene)
 {
-	Engine::CDataStore* dataStore = pScene->GetDataStore(); //Engine::GET_CUR_SCENE->GetDataStore();
+	Engine::CDataStore* dataStore = pScene->GetDataStore();
 
 	_int numOfImageObject;
 	_int dataID = (_int)EDataID::UI;
@@ -80,6 +88,12 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		D3DXCOLOR color = D3DXCOLOR(1,1,1,1);
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
+
+		if (name == L"Not")
+		{
+			continue;
+		}
+
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
@@ -91,16 +105,220 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 
 void CDataLoad::SliderLoad(Engine::CScene* pScene)
 {
+	Engine::CDataStore* dataStore = pScene->GetDataStore();
+
+	_int numOfSliderObject;
+	_int dataID = (_int)EDataID::UI;
+	std::wstring objectKey = L"SliderDataFile";
+	dataStore->GetValue(false, dataID, objectKey, L"numOfSliderObject", numOfSliderObject);
+
+	for (_int i = 0; i < numOfSliderObject; ++i)
+	{
+		std::wstring key = L"SliderObject" + std::to_wstring(i) + L"_";
+
+		std::wstring name;
+		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
+
+		SP(Engine::CSlider) slider =
+			std::dynamic_pointer_cast<Engine::CSlider>(pScene->GetObjectFactory()->AddClone(L"Slider", true, (_int)ELayerID::UI, name));
+
+		_float3 pos;
+		dataStore->GetValue(false, dataID, objectKey, key + L"position", pos);
+		slider->GetTransform()->SetPosition(pos);
+
+		_int dir;
+		dataStore->GetValue(false, dataID, objectKey, key + L"direction", dir);
+		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
+
+		SP(Engine::CImageObject) imageObj[2];
+		for (int j = 0; j < 2; j++)
+		{
+			imageObj[j] =
+				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"Image" + name));
+
+			_float3 pos;
+			dataStore->GetValue(false, dataID, objectKey, key + L"imagePosition" + std::to_wstring(j), pos);
+			imageObj[j]->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + pos);
+
+			_float3 size;
+			dataStore->GetValue(false, dataID, objectKey, key + L"imageSize" + std::to_wstring(j), size);
+			size.z = 0;
+			imageObj[j]->GetTransform()->SetSize(size);
+
+			_float sort;
+			dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
+			imageObj[j]->GetTransform()->SetPositionZ(sort);
+
+
+			std::wstring textureKey;
+			dataStore->GetValue(false, dataID, objectKey, key + L"imageTextureKey" + std::to_wstring(j), textureKey);
+			imageObj[j]->GetTexture()->AddTexture(textureKey, 0);
+		}
+
+		imageObj[1]->SetParent(slider.get());
+		imageObj[1]->AddComponent<Engine::CShaderC>()->
+			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+
+		_float value, maxValue;
+		dataStore->GetValue(false, dataID, objectKey, key + L"value", value);
+		dataStore->GetValue(false, dataID, objectKey, key + L"maxValue", maxValue);
+
+		slider->AddSliderData(value, maxValue, imageObj[0], imageObj[1]);
+	}
 }
 
 void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 {
+	Engine::CDataStore* dataStore = pScene->GetDataStore();
+
+	_int numOfButtonObject;
+	_int dataID = (_int)EDataID::UI;
+	std::wstring objectKey = L"ButtonDataFile";
+	dataStore->GetValue(false, dataID, objectKey, L"numOfbuttonObject", numOfButtonObject);
+
+	for (_int i = 0; i < numOfButtonObject; ++i)
+	{
+		std::wstring key = L"buttonObject" + std::to_wstring(i) + L"_";
+
+		std::wstring name;
+		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
+
+		SP(CButton) button =
+			std::dynamic_pointer_cast<CButton>(pScene->GetObjectFactory()->AddClone(L"Button", true, (_int)ELayerID::UI, name));
+		_float3 position;
+		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
+		button->GetTransform()->SetPosition(position);
+
+		_float3 size;
+		dataStore->GetValue(false, dataID, objectKey, key + L"size", size);
+		size.z = 0;
+		button->GetTransform()->SetSize(size);
+
+		_float sort;
+		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
+		button->GetTransform()->SetPositionZ(sort);
+
+		std::wstring textureKey;
+		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
+		button->GetTexture()->AddTexture(textureKey, 0);
+
+		std::wstring buttonfunction;
+		dataStore->GetValue(false, dataID, objectKey, key + L"buttonFunction", buttonfunction);
+		ButtonFunction(button, buttonfunction);
+
+		_int buttonType;
+		dataStore->GetValue(false, dataID, objectKey, key + L"buttonType", buttonType);
+		button->SetButtonType((CButton::EButton_Type)buttonType);
+
+		std::wstring message;
+		_float2 fontPosition;
+		_int fontSize;
+		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
+
+		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
+
+		if (name == L"Not")
+		{
+			continue;
+		}
+
+		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
+		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
+		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
+		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", color);
+
+		button->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+	}	
 }
 
 void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
 {
+	Engine::CDataStore* dataStore = pScene->GetDataStore();
+
+	_int numOfScrollViewObject;
+	_int dataID = (_int)EDataID::UI;
+	std::wstring objectKey = L"ScrollViewDataFile";
+	dataStore->GetValue(false, dataID, objectKey, L"numOfScrollViewObject", numOfScrollViewObject);
+
+	for (_int i = 0; i < numOfScrollViewObject; ++i)
+	{
+		std::wstring key = L"ScrollObject" + std::to_wstring(i) + L"_";
+
+		std::wstring name;
+		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
+
+
+		SP(CScrollViewObject) spScrollView =
+			std::dynamic_pointer_cast<CScrollViewObject>(pScene->GetObjectFactory()->AddClone(L"ScrollViewObject", true, (_int)ELayerID::UI, name));
+
+		_float3 pos;
+		dataStore->GetValue(false, dataID, objectKey, key + L"position", pos);
+
+		_float3 size;
+		dataStore->GetValue(false, dataID, objectKey, key + L"size", size);
+
+		_float sortLayer;
+		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sortLayer);
+
+		std::wstring textureKey;
+		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
+
+		_int column;
+		dataStore->GetValue(false, dataID, objectKey, key + L"column", column);
+
+		_float2 distanceXY;
+		dataStore->GetValue(false, dataID, objectKey, key + L"distanceXY", distanceXY);
+
+		_float2 offSet;
+		dataStore->GetValue(false, dataID, objectKey, key + L"offSet", offSet);
+
+		spScrollView->GetTransform()->SetPosition(pos);
+		spScrollView->GetTransform()->SetPositionZ(sortLayer);
+		spScrollView->GetTransform()->SetSize(size);
+		spScrollView->GetTexture()->AddTexture(textureKey, 0);
+		spScrollView->AddScrollViewData(column, distanceXY, offSet);
+	}
+}
+
+void CDataLoad::CanvasLoad(Engine::CScene * pScene)
+{
+	Engine::CDataStore* dataStore = pScene->GetDataStore();
+
+	_int numOfCanvasObject;
+	_int dataID = (_int)EDataID::UI;
+	std::wstring objectKey = L"CanvasDataFile";
+	dataStore->GetValue(false, dataID, objectKey, L"numOfCanvasObject", numOfCanvasObject);
+
+	for (_int i = 0; i < numOfCanvasObject; ++i)
+	{
+		std::wstring key = L"CanvasObject" + std::to_wstring(i) + L"_";
+
+		std::wstring name;
+		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
+
+		SP(Engine::CCanvas) canvas =
+			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
+	}
 }
 
 void CDataLoad::ToolLoad(Engine::CScene* pScene)
 {
+}
+
+void CDataLoad::EffectLoad(Engine::CScene * pScene)
+{
+}
+
+void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
+{
+	/*switch (Engine::HashCode(Engine::WStrToStr(function)))
+	{
+	default:
+		break;
+	}*/
+
+	if (function == L"ChangeJongScene")
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction());
+	}
 }
