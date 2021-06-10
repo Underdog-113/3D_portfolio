@@ -8,6 +8,7 @@
 #define ENGINE_DLL _declspec(dllimport)
 #endif
 
+#define _SOLUTIONDIR R"($(SolutionDir))"
 
 //안전하게 포인터를 지우세요
 #define SAFE_DELETE(something)														\
@@ -24,14 +25,10 @@ if((something) != nullptr)															\
 #define ABORT 0
 #endif
 
-
-
-
 //namespace setting
 #define BEGIN(Name) namespace Name {
 #define END }
 #define USING(Name) using namespace Name;
-
 
 //SmartPointers
 #define SP(typeName) std::shared_ptr<typeName>
