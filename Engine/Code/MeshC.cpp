@@ -30,8 +30,7 @@ SP(CComponent) CMeshC::MakeClone(CObject* pObject)
 	spClone->m_maxVertex	= m_maxVertex;
 	spClone->m_meshSize		= m_meshSize;
 	spClone->m_initTex		= m_initTex;
-
-	spClone->m_pRootMotion	= new CRootMotion;
+	
 	return spClone;
 }
 
@@ -58,9 +57,9 @@ void CMeshC::Awake(void)
 		}
 
 		GenMinMaxVtx();
-	}
 
-	m_pRootMotion = new CRootMotion;
+	}
+	
 }
 
 void CMeshC::Start(SP(CComponent) spThis)
@@ -160,11 +159,27 @@ void CMeshC::OnDisable(void)
 void CMeshC::AddMeshData(CMeshData * pMeshData)
 {
 	m_vMeshDatas.emplace_back(pMeshData);
+	
+	if (!m_vMeshDatas.empty() && m_vMeshDatas[0]->GetMeshType() == (_int)EMeshType::Dynamic)
+	{
+		m_pRootMotion = new CRootMotion;
+
+		CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_vMeshDatas[0]);
+		m_pRootMotion->CreateFixOffsetArray(pDM->GetAniCtrl()->GetAniCtrl()->GetNumAnimationSets());
+	}
 }
 
 void CMeshC::AddMeshData(std::wstring meshKey)
 {
 	m_vMeshDatas.emplace_back(m_pOwner->GetScene()->GetMeshStore()->GetMeshData(meshKey));
+
+	if (!m_vMeshDatas.empty() && m_vMeshDatas[0]->GetMeshType() == (_int)EMeshType::Dynamic)
+	{
+		m_pRootMotion = new CRootMotion;
+
+		CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_vMeshDatas[0]);
+		m_pRootMotion->CreateFixOffsetArray(pDM->GetAniCtrl()->GetAniCtrl()->GetNumAnimationSets());
+	}
 }
 
 

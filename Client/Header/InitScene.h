@@ -29,9 +29,7 @@ public:
 					void					InitPrototypes			(void) override;
 
 	GETTOR			(CLoading*,				m_pLoading,				nullptr,		Loading)
-
 	GETTOR			(_bool,					m_selectNextScene,		false,			SelectNextScene)
-
 	GETTOR			(SP(Engine::CObject),	m_pBackground,			nullptr,		Background)
 };
 

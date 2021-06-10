@@ -93,6 +93,8 @@ void CScene::OnDestroy(void)
 
 	m_pLightManager->Free();
 	m_pLightManager = nullptr;
+
+	CTextManager::GetInstance()->ClearForScene();
 }
 
 void CScene::OnEnable(void)

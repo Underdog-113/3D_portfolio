@@ -21,9 +21,9 @@ public:
 					void					OnEnable				(void);
 					void					OnDisable				(void);
 
-					_bool					KeyUp					(DWORD key);
-					_bool					KeyDown					(DWORD key);
-					_bool					KeyPress				(DWORD key);
+					_bool					KeyUp					(uint64_t key);
+					_bool					KeyDown					(uint64_t key);
+					_bool					KeyPress				(uint64_t key);
 
 					void					MoveMouseToCenter		(void);
 					CObject*				MousePicking			(_int layerID, _float3& intersection);
@@ -35,14 +35,13 @@ private:
 					void					KeyUpdate				(void);
 					void					MouseUpdate				(void);
 
-
 					_float3					GetPickingDirection		(void);
 					_bool					RayIntersectCheck		(_float rayAxisDir, _float rayAxisStart,
 																	 _float aabbAxisMin, _float aabbAxisMax,
 																	 _float& tMin, _float& tMax);
 private:
-					DWORD					m_key			= 0;
-					DWORD					m_lastFrameKey	= 0;
+					uint64_t				m_key					= 0;
+					uint64_t				m_lastFrameKey			= 0;
 
 	
 	GETTOR			(_float3,				m_mousePos,				ZERO_VECTOR,		MousePos)

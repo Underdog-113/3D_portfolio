@@ -404,7 +404,7 @@ void CGraphicsManager::RenderUI(void)
 	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(), 
 			[](CObject* pObj1, CObject* pObj2)
 			{
-				return pObj1->GetTransform()->GetPosition().z > pObj2->GetTransform()->GetPosition().z;								
+				return pObj1->GetTransform()->GetPosition().z < pObj2->GetTransform()->GetPosition().z;								
 			});
 
 	
@@ -447,6 +447,7 @@ void CGraphicsManager::RenderUI(void)
 			}
 		}
 	}
+
 	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }

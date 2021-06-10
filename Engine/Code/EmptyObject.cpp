@@ -11,6 +11,7 @@ CEmptyObject::CEmptyObject()
 
 CEmptyObject::~CEmptyObject()
 {
+	OnDestroy();
 }
 
 SP(CEmptyObject) CEmptyObject::Create(_bool isStatic, CScene* pScene)

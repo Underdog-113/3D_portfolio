@@ -11,6 +11,7 @@ CSkyBox::CSkyBox()
 
 CSkyBox::~CSkyBox()
 {
+	OnDestroy();
 }
 
 SP(CSkyBox) CSkyBox::Create(_bool isStatic, CScene * pScene)

@@ -11,6 +11,7 @@ CSlider::CSlider()
 
 CSlider::~CSlider()
 {
+	OnDestroy();
 }
 
 SP(CSlider) CSlider::Create(_bool isStatic, CScene * pScene)
