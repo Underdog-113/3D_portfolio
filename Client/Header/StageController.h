@@ -32,16 +32,20 @@
 
 class CStageController
 {
+	DECLARE_SINGLETON(CStageController)
+
 public:
 	enum Squad_Role { Actor, Wait_1, Wait_2};
 
 public:
-	CStageController();
-	~CStageController();
+	//CStageController();
+	//~CStageController();
 
 	void Awake(void);
 	void Start(void);
 	void Update(void);
+
+	void OnDestroy();
 
 public:
 	void AddSquadMember(SP(Engine::CObject) pCharacter);
@@ -49,10 +53,15 @@ public:
 private:	/* Actor Move */
 	void MoveControl();
 	bool CheckMoveOrder();
+	void ReserveMoveOrder();
 	void RotateCurrentActor();
+
 
 private:	/* Change Actor */
 	//void ChangeActor();
+
+public:
+	void SetInputLock_ByAni(bool value);
 
 private:
 	typedef std::vector<SP(Engine::CObject)> _Squad;
@@ -60,13 +69,24 @@ private:
 	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCurMainCam,		nullptr,	CurrentMainCam)
 	GETTOR_SETTOR	(SP(Engine::CObject),	m_spCurActor,		nullptr,	CurrentActor)
 	
+	GETTOR			(bool,					m_inputLock_ByAni,  false,		InputLock_ByAni)
+
 private:
 	Engine::CInputManager*		m_pInput	= nullptr;
 	float						m_rotSpeed	= 10.f;
 	float						m_rotSpeedHighRate = 0.8f;
 	float						m_rotSpeedLowRate = 0.5f;
-	_ubyte						m_moveFlag	= 0;
-	_float3						m_moveOrderDir	= ZERO_VECTOR;
+
+	_ubyte						m_moveFlag = 0;
+	_ubyte						m_prevMoveFlag = 0;
+	_float3						m_moveOrderDir = ZERO_VECTOR;
+
+	_ubyte						m_reserveMoveFlag = 0;
+	_float3						m_reserveMoveOrderDir = ZERO_VECTOR;
+
+
+
+	bool						m_rotateLock = false;
 };
 
 #endif

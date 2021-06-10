@@ -11,6 +11,7 @@
 #define Cool_HitPenalty			0.5f
 #define Cool_RunOnAttack		0.5f
 
+class CStageController;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
 	enum Appear_Option { None, QTE };
@@ -43,7 +44,8 @@ private: /* Special Actions */
 
 
 private:
-	Engine::CDynamicMeshData* m_pDM;
+	Engine::CDynamicMeshData* m_pDM = nullptr;
+	CStageController* m_pStageController = nullptr;
 	
 	Appear_Option m_appearOption = None;
 

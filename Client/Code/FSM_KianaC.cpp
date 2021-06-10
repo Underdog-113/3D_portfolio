@@ -98,6 +98,7 @@ void CFSM_KianaC::Awake(void)
 void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pStageController = CStageController::GetInstance();
 
 	SetStartState(L"StandBy");
 	__super::Start(spThis);
@@ -341,6 +342,7 @@ void CFSM_KianaC::Attack_1_Init(void)
 void CFSM_KianaC::Attack_1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_1);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -357,7 +359,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_1_End(void)
 {
-
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_2_Init(void)
@@ -368,6 +370,7 @@ void CFSM_KianaC::Attack_2_Init(void)
 void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -384,7 +387,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_2_End(void)
 {
-
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_3_Init(void)
@@ -395,6 +398,7 @@ void CFSM_KianaC::Attack_3_Init(void)
 void CFSM_KianaC::Attack_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -411,6 +415,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_3_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_3_Branch_Init(void)
@@ -421,6 +426,7 @@ void CFSM_KianaC::Attack_3_Branch_Init(void)
 void CFSM_KianaC::Attack_3_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3_Branch);
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
@@ -438,6 +444,7 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_3_Branch_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_4_Init(void)
@@ -448,6 +455,7 @@ void CFSM_KianaC::Attack_4_Init(void)
 void CFSM_KianaC::Attack_4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -465,6 +473,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_4_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_4_Branch_Init(void)
@@ -475,6 +484,7 @@ void CFSM_KianaC::Attack_4_Branch_Init(void)
 void CFSM_KianaC::Attack_4_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4_Branch);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
@@ -490,6 +500,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_4_Branch_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_5_Init(void)
@@ -500,6 +511,7 @@ void CFSM_KianaC::Attack_5_Init(void)
 void CFSM_KianaC::Attack_5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_5);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
@@ -515,6 +527,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_5_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Attack_QTE_Init(void)
@@ -525,6 +538,7 @@ void CFSM_KianaC::Attack_QTE_Init(void)
 void CFSM_KianaC::Attack_QTE_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_QTE);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
@@ -540,6 +554,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_QTE_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Die_Init(void)
@@ -566,6 +581,7 @@ void CFSM_KianaC::EvadeBackward_Init(void)
 void CFSM_KianaC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
@@ -578,6 +594,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 
 void CFSM_KianaC::EvadeBackward_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::EvadeForward_Init(void)
@@ -587,6 +604,7 @@ void CFSM_KianaC::EvadeForward_Init(void)
 void CFSM_KianaC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
+	m_pStageController->SetInputLock_ByAni(true);
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
@@ -599,6 +617,7 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 
 void CFSM_KianaC::EvadeForward_End(void)
 {
+	m_pStageController->SetInputLock_ByAni(false);
 }
 
 void CFSM_KianaC::Hit_H_Init(void)
