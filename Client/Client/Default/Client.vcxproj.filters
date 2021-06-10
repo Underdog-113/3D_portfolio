@@ -103,9 +103,6 @@
     <Filter Include="05.DeleGate">
       <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Manager\00.ButtonManager">
-      <UniqueIdentifier>{1d6d714b-d7a2-4adc-bd48-45f389aacb9b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\02.Particle">
       <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
     </Filter>
@@ -399,9 +396,21 @@
     <Image Include="small.ico">
       <Filter>99.Default</Filter>
     </Image>
-    <Image Include="Client.ico" />
+    <Image Include="Client.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="Honkai.ico">
+      <Filter>99.Default</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Client.rc" />
+    <None Include="Client.aps">
+      <Filter>99.Default</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>99.Default</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -265,6 +265,8 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_BN_CLICKED(IDC_MFCBUTTON1, &CInspector::OnBnClickedDeleteEffectList)
 	ON_BN_CLICKED(IDC_MFCBUTTON2, &CInspector::OnBnClickedMeshEffect)
 	ON_BN_CLICKED(IDC_MFCBUTTON3, &CInspector::OnBnClickedSoftEffect)
+	ON_BN_CLICKED(IDC_MFCBUTTON4, &CInspector::OnBnClickedTexture)
+	ON_BN_CLICKED(IDC_MFCBUTTON5, &CInspector::OnBnClickedAlphaMask)
 END_MESSAGE_MAP()
 
 
@@ -324,6 +326,8 @@ void CInspector::OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult)
 
 void CInspector::OnBnClickedDeleteEffectList()
 {
+	m_TreeCtrl.DeleteAllItems();
+	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
 
 }
 
@@ -338,6 +342,7 @@ void CInspector::OnBnClickedMeshEffect()
 
 	dlg.m_ofn.lpstrInitialDir = strInitPath;
 
+	// IDOK = OK button is pressed in the dialog
 	if (dlg.DoModal() == IDOK)
 	{
 		CString strFilePath = dlg.GetPathName();
@@ -345,6 +350,8 @@ void CInspector::OnBnClickedMeshEffect()
 		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
 
 		m_hMeshEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
+
+		Add_EffectMesh(strFilePath);
 
 		InvalidateRect(false);
 
@@ -367,7 +374,64 @@ void CInspector::OnBnClickedSoftEffect()
 
 		m_hSoftEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
 		
+		Add_SoftEffect(strFilePath);
+
 		InvalidateRect(false);
 	}
+}
+
+void CInspector::OnBnClickedTexture()
+{
+	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
+
+	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	if (dlg.DoModal() == IDOK)
+	{
+
+		CString strFilePath = dlg.GetPathName();
+
+		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
+
+		Add_Texture(strFilePath);
+
+		InvalidateRect(false);
+	}
+}
+
+
+void CInspector::OnBnClickedAlphaMask()
+{
+	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
+
+	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	if (dlg.DoModal() == IDOK)
+	{
+
+		CString strFilePath = dlg.GetPathName();
+
+		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
+
+		Add_AlphaMask(strFilePath);
+
+		InvalidateRect(false);
+	}
+}
+
+void CInspector::Add_EffectMesh(CString ObjectName)
+{
+}
+
+void CInspector::Add_SoftEffect(CString ObjectName)
+{
+}
+
+void CInspector::Add_Texture(CString ObjectName)
+{
+}
+
+void CInspector::Add_AlphaMask(CString ObjectName)
+{
 }
 
