@@ -108,6 +108,37 @@ namespace Engine
 		return StrToWStr(str.substr(str.find_last_of('\\') + 1));
 	}
 
+	inline std::wstringstream& operator >> (std::wstringstream& in, _float4 & float4)
+	{
+		std::wstring vecStr;
+		std::wstring vecStrX, vecStrY, vecStrZ, vecStrW;
+
+		in >> vecStr;
+
+		_size xEndPos, yEndPos, zEndPos;
+
+		xEndPos = vecStr.find_first_of(L',');
+		yEndPos = vecStr.find_first_of(L',', xEndPos + 1);
+		zEndPos = vecStr.find_last_of(L',');
+
+		vecStrX = vecStr.substr(0, xEndPos);
+		vecStrY = vecStr.substr(++xEndPos, yEndPos - xEndPos);
+		vecStrZ = vecStr.substr(++yEndPos, zEndPos - yEndPos);
+		vecStrW = vecStr.substr(++zEndPos);
+
+		std::wstringstream ssX(vecStrX);
+		std::wstringstream ssY(vecStrY);
+		std::wstringstream ssZ(vecStrZ);
+		std::wstringstream ssW(vecStrW);
+
+		ssX >> float4.x;
+		ssY >> float4.y;
+		ssZ >> float4.z;
+		ssW >> float4.w;
+
+		return in;
+	}
+
 	inline std::wstringstream& operator >> (std::wstringstream& in, _float3 & float3)
 	{
 		std::wstring vecStr;

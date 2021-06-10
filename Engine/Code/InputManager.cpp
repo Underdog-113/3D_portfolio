@@ -45,15 +45,16 @@ void CInputManager::OnEnable(void)
 void CInputManager::OnDisable(void)
 {
 }
-bool CInputManager::KeyUp(DWORD key)
+bool CInputManager::KeyUp(uint64_t key)
 {
 	if ((m_lastFrameKey & key) && !(m_key & key))
 		return true;
 
+
 	return false;
 }
 
-bool CInputManager::KeyDown(DWORD key)
+bool CInputManager::KeyDown(uint64_t key)
 {
 	if (!(m_lastFrameKey & key) && (m_key & key))
 		return true;
@@ -61,8 +62,10 @@ bool CInputManager::KeyDown(DWORD key)
 	return false;
 }
 
-bool CInputManager::KeyPress(DWORD key)
+bool CInputManager::KeyPress(uint64_t key)
 {
+	if (m_key & key)
+		return true;
 	if (m_key & key)
 		return true;
 
@@ -74,7 +77,7 @@ void CInputManager::KeyUpdate(void)
 {
 	m_lastFrameKey = m_key;
 	m_key = 0;
-
+	
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		m_key |= KEY_LEFT;
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
@@ -83,32 +86,20 @@ void CInputManager::KeyUpdate(void)
 		m_key |= KEY_UP;
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 		m_key |= KEY_DOWN;
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-		m_key |= KEY_SPACE;
+	if (GetAsyncKeyState('`') & 0x8000)
+		m_key |= KEY_WAVE;
+	if (GetAsyncKeyState(VK_TAB) & 0x8000)
+		m_key |= KEY_TAB;
+	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		m_key |= KEY_SHIFT;
 	if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
 		m_key |= KEY_CONTROL;
-	if (GetAsyncKeyState(VK_F1) & 0x8000)
-		m_key |= KEY_F1;
-	if (GetAsyncKeyState(VK_F2) & 0x8000)
-		m_key |= KEY_F2;
-	if (GetAsyncKeyState(VK_F3) & 0x8000)
-		m_key |= KEY_F3;
-	if (GetAsyncKeyState(VK_F4) & 0x8000)
-		m_key |= KEY_F4;
-	if (GetAsyncKeyState(VK_F5) & 0x8000)
-		m_key |= KEY_F5;
-	if (GetAsyncKeyState(0x57) & 0x8000)
-		m_key |= KEY_W;
-	if (GetAsyncKeyState(0x41) & 0x8000)
-		m_key |= KEY_A;
-	if (GetAsyncKeyState(0x53) & 0x8000)
-		m_key |= KEY_S;
-	if (GetAsyncKeyState(0x44) & 0x8000)
-		m_key |= KEY_D;
-	if (GetAsyncKeyState('E') & 0x8000)
-		m_key |= KEY_E;
-	if (GetAsyncKeyState('Q') & 0x8000)
-		m_key |= KEY_Q;
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		m_key |= KEY_SPACE;
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+		m_key |= KEY_RETURN;
+	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+		m_key |= KEY_ESC;
 	if (GetAsyncKeyState('1') & 0x8000)
 		m_key |= KEY_1;
 	if (GetAsyncKeyState('2') & 0x8000)
@@ -119,16 +110,48 @@ void CInputManager::KeyUpdate(void)
 		m_key |= KEY_4;
 	if (GetAsyncKeyState('5') & 0x8000)
 		m_key |= KEY_5;
-	if (GetAsyncKeyState(VK_TAB) & 0x8000)
-		m_key |= KEY_TAB;
-	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-		m_key |= KEY_SHIFT;
+	if (GetAsyncKeyState(VK_F1) & 0x8000)
+		m_key |= KEY_F1;
+	if (GetAsyncKeyState(VK_F2) & 0x8000)
+		m_key |= KEY_F2;
+	if (GetAsyncKeyState(VK_F3) & 0x8000)
+		m_key |= KEY_F3;
+	if (GetAsyncKeyState(VK_F4) & 0x8000)
+		m_key |= KEY_F4;
+	if (GetAsyncKeyState(VK_F5) & 0x8000)
+		m_key |= KEY_F5;
+	if (GetAsyncKeyState('Q') & 0x8000)
+		m_key |= KEY_Q;
+	if (GetAsyncKeyState('W') & 0x8000)
+		m_key |= KEY_W;
+	if (GetAsyncKeyState('E') & 0x8000)
+		m_key |= KEY_E;
+	if (GetAsyncKeyState('R') & 0x8000)
+		m_key |= KEY_R;
+	if (GetAsyncKeyState('A') & 0x8000)
+		m_key |= KEY_A;
+	if (GetAsyncKeyState('S') & 0x8000)
+		m_key |= KEY_S;
+	if (GetAsyncKeyState('D') & 0x8000)
+		m_key |= KEY_D;
+	if (GetAsyncKeyState('F') & 0x8000)
+		m_key |= KEY_F;
 	if (GetAsyncKeyState('Z') & 0x8000)
 		m_key |= KEY_Z;
 	if (GetAsyncKeyState('X') & 0x8000)
 		m_key |= KEY_X;
-	if (GetAsyncKeyState(VK_DELETE) & 0x8000)
-		m_key |= KEY_DELETE;
+	if (GetAsyncKeyState('C') & 0x8000)
+		m_key |= KEY_C;
+	if (GetAsyncKeyState('V') & 0x8000)
+		m_key |= KEY_V;
+	if (GetAsyncKeyState('U') & 0x8000)
+		m_key |= KEY_U;
+	if (GetAsyncKeyState('I') & 0x8000)
+		m_key |= KEY_I;
+	if (GetAsyncKeyState('J') & 0x8000)
+		m_key |= KEY_J;
+	if (GetAsyncKeyState('K') & 0x8000)
+		m_key |= KEY_K;	
 }
 
 void CInputManager::MouseUpdate(void)
@@ -148,6 +171,8 @@ void CInputManager::MouseUpdate(void)
 		m_key |= MOUSE_LEFT;
 	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
 		m_key |= MOUSE_RIGHT;
+	if (GetAsyncKeyState(VK_MBUTTON) & 0x8000)
+		m_key |= MOUSE_WHEEL;
 }
 
 void CInputManager::MoveMouseToCenter(void)

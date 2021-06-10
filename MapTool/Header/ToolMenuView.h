@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 
@@ -37,27 +38,10 @@ public:
 	void SetRotation(Engine::_float3 vRot);
 	void SetScale(Engine::_float3 vScale);
 	void SpinBtn(LPNMUPDOWN ppNMUpDown, CEdit* pBtn, Engine::_float fVal);
+	void SetChangeMeshList(std::wstring sectionKey);
+	void SetChangeTextureList(std::wstring sectionKey);
+	void ReadFile(ELayerID layerID, std::wofstream* ofsSave);
 
-// add valuable
-protected:
-	CEdit m_fPosX;
-	CEdit m_fPosY;
-	CEdit m_fPosZ;
-	CEdit m_fRotX;
-	CEdit m_fRotY;
-	CEdit m_fRotZ;
-	CEdit m_fScaleX;
-	CEdit m_fScaleY;
-	CEdit m_fScaleZ;
-	CSpinButtonCtrl m_btnPosX;
-	CSpinButtonCtrl m_btnPosY;
-	CSpinButtonCtrl m_btnPosZ;
-	CSpinButtonCtrl m_btnRotX;
-	CSpinButtonCtrl m_btnRotY;
-	CSpinButtonCtrl m_btnRotZ;
-	CSpinButtonCtrl m_btnScaleX;
-	CSpinButtonCtrl m_btnScaleY;
-	CSpinButtonCtrl m_btnScaleZ;
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosZ(NMHDR *pNMHDR, LRESULT *pResult);
@@ -67,35 +51,59 @@ protected:
 	afx_msg void OnScaleX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnScaleY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLbnSelchangeMeshList();
+	afx_msg void OnBnClickedPositionBtn();
+	afx_msg void OnBnClickedRotationBtn();
+	afx_msg void OnBnClickedScaleBtn();
+	afx_msg void OnBnClickedSaveBtn();
+	afx_msg void OnBnClickedLoadBtn();
 
-	_float m_fPosMin = 0.f;
-	_float m_fPosMax = 0.f;
-	_float m_fRotMin = 0.f;
-	_float m_fRotMax = 0.f;
-	_float m_fScaleMin = 0.f;
-	_float m_fScaleMax = 0.f;
+private:
+	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
+	std::vector<std::string> split(std::string input, char delimiter);
+	_bool WstrToBool(std::wstring wstr);
+	_int WstrToInt(std::wstring wstr);
+	_float StrToFloat(std::string str);
 
+// add valuable
+public:
+	CButton m_initTexture;
+	CEdit m_curObjName;
 
-//public:
-//	//CButton m_arrCreateWay[2];
-//	//CButton m_arrObject[3];
-//	afx_msg void OnBnClickedObjectRadio();
-//	afx_msg void OnBnClickedBlock();
-//	afx_msg void OnBnClickedNavi();
-//	afx_msg void OnBnClickedSaveBtn();
-//	afx_msg void OnBnClickedLoadBtn();
-//
-//public:
-//	//CListBox m_TreeList;
-//	//CTreeCtrl m_Tree;
-//	//CString m_curTreeItem; // 트리에서 클릭한 아이템
-//	//CString m_curSelPath; // 리스트에서 선택한 메쉬의 경로
-//	//CString m_curSelFileName;
-//	//CString m_curObj;
-//
-//	void Set_List_Path(TCHAR * path, _bool bCheck = FALSE);
-//	afx_msg void OnTvnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);
-//	afx_msg void OnLbnSelchangeMeshList();
+protected:
+	CEdit m_posX;
+	CEdit m_posY;
+	CEdit m_posZ;
+
+	CEdit m_rotX;
+	CEdit m_rotY;
+	CEdit m_rotZ;
+
+	CEdit m_scaleX;
+	CEdit m_scaleY;
+	CEdit m_scaleZ;
+
+	CSpinButtonCtrl m_spinPosX;
+	CSpinButtonCtrl m_spinPosY;
+	CSpinButtonCtrl m_spinPosZ;
+
+	CSpinButtonCtrl m_spinRotX;
+	CSpinButtonCtrl m_spinRotY;
+	CSpinButtonCtrl m_spinRotZ;
+
+	CSpinButtonCtrl m_spinScaleX;
+	CSpinButtonCtrl m_spinScaleY;
+	CSpinButtonCtrl m_spinScaleZ;
+
+	short m_valueMin = 0;
+	short m_valueMax = 0;
+
+	CTreeCtrl m_tree;
+	CListBox m_meshTreeList;
+	CListBox m_textureTreeList;
+	CEdit m_saveFileName;
+	CString m_curTreeItem; // 트리에서 클릭한 아이템
+
+	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
 };
-
-

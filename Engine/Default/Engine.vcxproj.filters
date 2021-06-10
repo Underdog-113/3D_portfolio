@@ -471,6 +471,7 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClCompile>
@@ -725,6 +726,7 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\PSC_Manager.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClInclude>

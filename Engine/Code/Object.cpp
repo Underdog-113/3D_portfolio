@@ -14,7 +14,6 @@ CObject::CObject(const CObject & other)
 
 CObject::~CObject(void)
 {
-	OnDestroy();
 }
 
 void CObject::Awake(void)
