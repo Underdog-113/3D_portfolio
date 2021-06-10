@@ -73,6 +73,8 @@ public:
 	CEdit m_curObjName;
 	CComboBox m_layerID;
 	_int m_culSelLayerID;
+	CComboBox m_colliderID;
+	CButton m_addCollisionC;
 
 protected:
 	CEdit m_posX;
@@ -105,14 +107,13 @@ protected:
 	CTreeCtrl m_tree;
 	CListBox m_meshTreeList;
 	CListBox m_textureTreeList;
+
 	CEdit m_saveFileName;
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
 	
 	// col
-	CEdit m_aabbColID;
 	CButton m_showCol;
-	_int m_aabbRadio;
-	_int m_rayRadio;
+	CButton m_colType[2];
 
 	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
 	GETTOR(CString, m_curSelTextureFileName, L"", CurSelTextureFileName);

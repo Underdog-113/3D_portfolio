@@ -45,7 +45,7 @@ private:
 	class CToolMenuView* m_pMenuView;
 
 	GETTOR_SETTOR(Engine::CObject*, m_pCurSelectedObject, nullptr, CurSelObj);
-	GETTOR_SETTOR(_bool, m_createMode, false, CreateMode);
+	//GETTOR_SETTOR(_bool, m_createMode, false, CreateMode);
 	
 	_float m_pickRadius = 4.f;
 

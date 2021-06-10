@@ -20,6 +20,7 @@
 #include "WndApp.h"
 
 #include "DynamicMeshData.h"
+#include "DebugCollider.h"
 
 #pragma region Prototypes
 #include "EmptyObject.h"
@@ -304,6 +305,9 @@ void CEditorScene::InitPrototypes(void)
 	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
 	ADD_PROTOTYPE(spEmptyObjectPrototype);
 
+	SP(Engine::CDebugCollider) spDebugColliderPrototype(Engine::CDebugCollider::Create(true, this));
+	ADD_PROTOTYPE(spDebugColliderPrototype);
+
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	ADD_PROTOTYPE(spCameraPrototype);
 }
@@ -326,8 +330,8 @@ void CEditorScene::InputSetting()
 
 	if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	{
-		if (true == m_createMode) // 클릭시 오브젝트 생성
-		{
+		//if (true == m_createMode) // 클릭시 오브젝트 생성
+		//{
 			_float3 intersection;
 			_float shortLen = 1000.f;
 
@@ -368,7 +372,7 @@ void CEditorScene::InputSetting()
 			else if (L"Map" == cstr)
 				curLayerID = ELayerID::Map;
 
-			SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"hi");
+			SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)curLayerID, L"hi");
 			spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
 
 			if (1 == m_pMenuView->m_initTexture.GetCheck())
@@ -390,14 +394,21 @@ void CEditorScene::InputSetting()
 
 			m_pCurSelectedObject = spObj.get();
 			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
-		}
+
+			// add collider
+			CString cstrVal;
+			m_pMenuView->m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
+
+			std::string str = CStrToStr(cstrVal);
+			std::wstring wstr = Engine::StrToWStr(str);
 	}
+//}
 
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
 		Engine::CObject* pTarget = nullptr;
-
 		_float shortLen = 1000.f;
+
 		for (auto& pLayer : m_vLayers)
 		{
 			for (auto pObject : pLayer->GetGameObjects())
@@ -436,28 +447,33 @@ void CEditorScene::InputSetting()
 			m_pMenuView->SetPosition(m_pCurSelectedObject->GetTransform()->GetPosition());
 			m_pMenuView->SetRotation(m_pCurSelectedObject->GetTransform()->GetRotation());
 			m_pMenuView->SetScale(m_pCurSelectedObject->GetTransform()->GetSize());
+
+			if (nullptr == m_pCurSelectedObject->GetComponent<Engine::CCollisionC>())
+				m_pMenuView->m_addCollisionC.EnableWindow(true);
+			else
+				m_pMenuView->m_addCollisionC.EnableWindow(false);
 		}
-		else
-			std::wcout << "target not found" << std::endl;
+		//else
+		//	std::wcout << "target not found" << std::endl;
 	}
 
 	// create
-	if (Engine::IMKEY_DOWN(KEY_E))
-	{
-		if (false == m_createMode)
-		{
-			m_createMode = true;
-			std::cout << "Create mode on" << std::endl;
-		}
-		else
-		{
-			m_createMode = false;
-			std::cout << "Create mode off" << std::endl;
-		}
-	}
+	//if (Engine::IMKEY_DOWN(KEY_E))
+	//{
+	//	if (false == m_createMode)
+	//	{
+	//		m_createMode = true;
+	//		std::cout << "Create mode on" << std::endl;
+	//	}
+	//	else
+	//	{
+	//		m_createMode = false;
+	//		std::cout << "Create mode off" << std::endl;
+	//	}
+	//}
 
 	// delete
-	if (nullptr != m_pCurSelectedObject && Engine::IMKEY_DOWN(KEY_DELETE))
+	if (nullptr != m_pCurSelectedObject && Engine::IMKEY_DOWN(KEY_R))
 	{
 		m_pCurSelectedObject->SetDeleteThis(true);
 		std::cout << "del" << std::endl;
