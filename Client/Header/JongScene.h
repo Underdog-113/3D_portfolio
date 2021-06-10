@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 class Engine::CObject;
+class CStageController;
 class CJongScene final : public Engine::CScene
 {
 private:
@@ -29,6 +30,7 @@ private:
 					void				InitPrototypes		(void) override;
 
 private:
+	SP(Engine::CObject) m_pKiana;
 	Engine::CObject* m_pivot;
 
 	Engine::CObject* m_obj;
@@ -37,6 +39,9 @@ private:
 	Engine::CObject* m_obj3;
 	Engine::CObject* m_obj4;
 	int num = 0;
+
+private:
+	CStageController* m_pController = nullptr;
 };
 
 #endif

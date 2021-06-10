@@ -4,6 +4,8 @@
 #include "ObjectFactory.h"
 
 #include "DynamicMeshData.h"
+
+#include "StageController.h"
 #include "FSM_SpiderC.h"
 #include "FSM_KianaC.h"
 
@@ -14,6 +16,7 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
+	delete m_pController;
 }
 
 Engine::CScene * CJongScene::Create(void)
@@ -34,10 +37,15 @@ void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	InitPrototypes();
+
+
+	m_pController = new CStageController;
+	m_pController->Awake();
 }
 
 void CJongScene::Start(void)
 {
+		Engine::CCameraManager::GetInstance()->GetMainCamera();
 	__super::Start();
 	{
 		{
@@ -55,7 +63,7 @@ void CJongScene::Start(void)
 
 		{
 			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"122");
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
 
 			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
@@ -67,12 +75,12 @@ void CJongScene::Start(void)
 
 			spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
 
+			m_pKiana = spEmptyObject;
 
-			m_obj = spEmptyObject.get();
-
-			m_pivot->GetTransform()->SetParent(m_obj->GetTransform());
+			m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
 
 			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject);
+			m_pController->AddSquadMember(m_pKiana);
 		}
 
 		{
@@ -87,59 +95,8 @@ void CJongScene::Start(void)
 			//spEmptyObject->GetTransform()->SetRotationY(D3DXToRadian(-90));
 			//spEmptyObject->GetTransform()->SetPositionY(-0.5);
 		}
-/*
-		{
-			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"2");
 
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"MB_Bronya_arsenal_end");
-			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject->GetTransform()->SetSize(50, 50, 50);
-			spEmptyObject->GetTransform()->SetPosition(50, 0, 0);
-			m_obj1 = spEmptyObject.get();
-		}
-
-		{
-			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"3");
-
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"MB_Bronya_arsenal_loop");
-			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject->GetTransform()->SetSize(50, 50, 50);
-			spEmptyObject->GetTransform()->SetPosition(100, 0, 0);
-			m_obj2 = spEmptyObject.get();
-		}
-
-		{
-			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"4");
-
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"MB_Bronya_Anim201");
-			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject->GetTransform()->SetSize(50, 50, 50);
-			spEmptyObject->GetTransform()->SetPosition(150, 0, 0);
-			m_obj3 = spEmptyObject.get();
-		}
-
-		{
-			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"5");
-
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"MB_Bronya_Anim201_bs");
-			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject->GetTransform()->SetSize(50, 50, 50);
-			spEmptyObject->GetTransform()->SetPosition(200, 0, 0);
-			m_obj4 = spEmptyObject.get();
-		}*/
-
+		m_pController->Start();
 	}
 }
 
@@ -150,34 +107,13 @@ void CJongScene::FixedUpdate(void)
 
 void CJongScene::Update(void)
 {
-	__super::Update();          
-//	if (Engine::IMKEY_DOWN(KEY_TAB))
-//	{
-//		++num;
-//		Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(m_obj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-//		pDM->ChangeAniSet(num);
-///*
-//		pDM = static_cast<Engine::CDynamicMeshData*>(m_obj1->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-//		pDM->ChangeAniSet(num);
-//
-//		pDM = static_cast<Engine::CDynamicMeshData*>(m_obj2->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-//		pDM->ChangeAniSet(num);
-//
-//		pDM = static_cast<Engine::CDynamicMeshData*>(m_obj3->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-//		pDM->ChangeAniSet(num);
-//
-//		pDM = static_cast<Engine::CDynamicMeshData*>(m_obj4->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-//		pDM->ChangeAniSet(num);*/
-//
-//	}
-	//_mat mmmat = dynamic_pointer_cast<Engine::CDynamicMeshData*>(m_obj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->GetRootFrame()->TransformationMatrix();
-	//m_pivot->GetTransform()->SetPosition()
+	__super::Update();  
+	m_pController->Update();
 }
 
 void CJongScene::LateUpdate(void)
 {
 	__super::LateUpdate();
-
 }
 
 void CJongScene::OnDestroy(void)
