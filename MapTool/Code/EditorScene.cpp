@@ -385,11 +385,4 @@ void CEditorScene::InputSetting()
 		}
 	}
 
-	// delete
-	if (nullptr != m_pCurSelectedObject && Engine::IMKEY_DOWN(KEY_DELETE))
-	{
-		m_pCurSelectedObject->SetDeleteThis(true);
-		std::cout << "del" << std::endl;
-		m_pCurSelectedObject = nullptr;
-	}
 }

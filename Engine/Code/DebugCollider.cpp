@@ -128,6 +128,21 @@ void CDebugCollider::LateUpdate(void)
 	__super::LateUpdate();
 }
 
+void CDebugCollider::PreRender(void)
+{
+	m_spMesh->PreRenderWire(m_spGraphics);
+}
+
+void CDebugCollider::Render(void)
+{
+	m_spMesh->RenderWire(m_spGraphics);
+}
+
+void CDebugCollider::PostRender(void)
+{
+	m_spMesh->PostRenderWire(m_spGraphics);
+}
+
 void CDebugCollider::OnDestroy(void)
 {
 	__super::OnDestroy();
