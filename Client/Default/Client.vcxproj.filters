@@ -388,13 +388,9 @@
     <Image Include="small.ico">
       <Filter>99.Default</Filter>
     </Image>
-    <Image Include="Client.ico">
-      <Filter>99.Default</Filter>
-    </Image>
+    <Image Include="Client.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Client.rc">
-      <Filter>99.Default</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="Client.rc" />
   </ItemGroup>
 </Project>
