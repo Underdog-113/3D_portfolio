@@ -71,7 +71,7 @@ void CDebugCollider::Start(void)
 	case (_int)EColliderType::AABB:
 	{
 		m_spMesh->AddMeshData(L"Cube");
-		m_spTransform->SetSize(dynamic_cast<CAabbCollider*>(m_pCollider)->GetSize() * 20);
+		m_spTransform->SetSize(dynamic_cast<CAabbCollider*>(m_pCollider)->GetSize());
 		break;
 	}
 
