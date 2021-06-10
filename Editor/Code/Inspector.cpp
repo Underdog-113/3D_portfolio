@@ -331,8 +331,12 @@ void CInspector::OnBnClickedDeleteEffectList()
 void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
+	CString strInitPath = _T("..\\");
+	
 	
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	dlg.m_ofn.lpstrInitialDir = strInitPath;
 
 	if (dlg.DoModal() == IDOK)
 	{
