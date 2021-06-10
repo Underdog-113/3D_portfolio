@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Default\Cl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Default\Engine.vcxproj", "{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapTool", "Editor\MapTool\Default\MapTool.vcxproj", "{D8BE8650-1ADB-47FD-94F2-6948ECD0873C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapTool", "MapTool\Default\MapTool.vcxproj", "{D8BE8650-1ADB-47FD-94F2-6948ECD0873C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectTool", "Editor\EffectTool\Default\EffectTool.vcxproj", "{A7A165C9-C2BE-4621-A515-9CE58EECD768}"
 EndProject
