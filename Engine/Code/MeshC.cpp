@@ -92,6 +92,16 @@ void CMeshC::LateUpdate(SP(CComponent) spThis)
 {
 }
 
+void CMeshC::PreRenderWire(SP(CGraphicsC) spGC)
+{
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
+	pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
+	pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
+	
+	pDevice->SetMaterial(&spGC->m_mtrl);
+}
+
 void CMeshC::PreRender(SP(CGraphicsC) spGC)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
@@ -104,6 +114,18 @@ void CMeshC::PreRender(SP(CGraphicsC) spGC)
 
 void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
+}
+
+void CMeshC::RenderWire(SP(CGraphicsC) spGC)
+{
+	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
+	{
+		CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(m_vMeshDatas[i]);
+		for (_ulong j = 0; j < pSM->GetSubsetCount(); ++j)
+		{
+			pSM->GetMesh()->DrawSubset(j);
+		}
+	}
 }
 
 void CMeshC::Render(SP(CGraphicsC) spGC)
@@ -126,6 +148,10 @@ void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 		else
 			RenderDynamic(spGC, m_vMeshDatas[i], (_int)i, pEffect);
 	}
+}
+
+void CMeshC::PostRenderWire(SP(CGraphicsC) spGC)
+{
 }
 
 void CMeshC::PostRender(SP(CGraphicsC) spGC)

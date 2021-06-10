@@ -396,11 +396,11 @@ void CEditorScene::InputSetting()
 			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 
 			// add collider
-			CString cstrVal;
-			m_pMenuView->m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
+			//CString cstrVal;
+			//m_pMenuView->m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
 
-			std::string str = CStrToStr(cstrVal);
-			std::wstring wstr = Engine::StrToWStr(str);
+			//std::string str = CStrToStr(cstrVal);
+			//std::wstring wstr = Engine::StrToWStr(str);
 	}
 //}
 
@@ -453,24 +453,7 @@ void CEditorScene::InputSetting()
 			else
 				m_pMenuView->m_addCollisionC.EnableWindow(false);
 		}
-		//else
-		//	std::wcout << "target not found" << std::endl;
 	}
-
-	// create
-	//if (Engine::IMKEY_DOWN(KEY_E))
-	//{
-	//	if (false == m_createMode)
-	//	{
-	//		m_createMode = true;
-	//		std::cout << "Create mode on" << std::endl;
-	//	}
-	//	else
-	//	{
-	//		m_createMode = false;
-	//		std::cout << "Create mode off" << std::endl;
-	//	}
-	//}
 
 	// delete
 	if (nullptr != m_pCurSelectedObject && Engine::IMKEY_DOWN(KEY_R))
