@@ -45,7 +45,6 @@
 #define IDB_BITMAP_Z                    349
 #define IDB_BITMAP_WIDTH                350
 #define IDB_BITMAP_HEIGHT               351
-#define IDI_ICON1                       354
 #define IDC_MFCBUTTON1                  1001
 #define IDC_TREE1                       1002
 #define IDC_MFCBUTTON2                  1004

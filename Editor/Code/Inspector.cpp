@@ -80,6 +80,7 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON40, m_btnScaleZ);
 	DDX_Control(pDX, IDC_BUTTON42, m_btnAlphaWidth);
 	DDX_Control(pDX, IDC_BUTTON43, m_btnAlphaHeight);
+	DDX_Control(pDX, IDC_TREE1, m_TreeCtrl);
 }
 
 void CInspector::EditButtonStyle()
@@ -260,6 +261,10 @@ void CInspector::EditButtonStyle()
 BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_WM_PAINT()
 	ON_WM_PAINT()
+	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CInspector::OnTvnSelchangedEffectList)
+	ON_BN_CLICKED(IDC_MFCBUTTON1, &CInspector::OnBnClickedDeleteEffectList)
+	ON_BN_CLICKED(IDC_MFCBUTTON2, &CInspector::OnBnClickedMeshEffect)
+	ON_BN_CLICKED(IDC_MFCBUTTON3, &CInspector::OnBnClickedSoftEffect)
 END_MESSAGE_MAP()
 
 
@@ -286,11 +291,12 @@ void CInspector::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 
-	//// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	m_hBitmap = LoadBitmap(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MAIN_BG));
 	GetObject(m_hBitmap, sizeof(BITMAP), &m_bitmap);
-
 	EditButtonStyle();	
+	///////////////////////////////////////////////////
+	
+	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
 }
 
 void CInspector::OnPaint()
@@ -309,4 +315,55 @@ void CInspector::OnPaint()
 
 }
 
+void CInspector::OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	*pResult = 0;
+}
+
+
+void CInspector::OnBnClickedDeleteEffectList()
+{
+
+}
+
+
+void CInspector::OnBnClickedMeshEffect()
+{
+	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
+	
+	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	if (dlg.DoModal() == IDOK)
+	{
+		CString strFilePath = dlg.GetPathName();
+
+		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
+
+		m_hMeshEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
+
+		InvalidateRect(false);
+
+	}
+}
+
+
+void CInspector::OnBnClickedSoftEffect()
+{
+	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
+
+	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	if (dlg.DoModal() == IDOK)
+	{
+
+		CString strFilePath = dlg.GetPathName();
+
+		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
+
+		m_hSoftEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
+		
+		InvalidateRect(false);
+	}
+}
 

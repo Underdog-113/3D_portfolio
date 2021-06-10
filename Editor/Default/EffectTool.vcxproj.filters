@@ -226,8 +226,9 @@
     <Image Include="res\Z.bmp">
       <Filter>97.Bitmap</Filter>
     </Image>
-    <Image Include="res\icon1.ico" />
-    <Image Include="res\Honkai.ico" />
+    <Image Include="res\Honkai.ico">
+      <Filter>99.Default</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">

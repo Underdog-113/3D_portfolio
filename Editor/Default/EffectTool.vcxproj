@@ -247,7 +247,6 @@
     <Image Include="res\FadeOut.bmp" />
     <Image Include="res\Function.bmp" />
     <Image Include="res\Honkai.ico" />
-    <Image Include="res\icon1.ico" />
     <Image Include="res\Load.bmp" />
     <Image Include="res\Loop.bmp" />
     <Image Include="res\main_bg.bmp" />

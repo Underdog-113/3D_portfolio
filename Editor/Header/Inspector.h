@@ -1,6 +1,7 @@
 #pragma once
 #include "afxwin.h"
 #include "afxbutton.h"
+#include "afxcmn.h"
 
 
 
@@ -36,6 +37,9 @@ private:
 private:
 	HBITMAP m_hBitmap;
 	BITMAP  m_bitmap;
+	HTREEITEM m_hSoftEffectItem;
+	HTREEITEM m_hMeshEffectItem;
+	HTREEITEM m_hEffect;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnPaint();
@@ -105,10 +109,14 @@ public:
 	CMFCButton m_btnListDelete;
 
 #pragma endregion
-
 	
 	
 
+	afx_msg void OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedDeleteEffectList();
+	CTreeCtrl m_TreeCtrl;
+	afx_msg void OnBnClickedMeshEffect();
+	afx_msg void OnBnClickedSoftEffect();
 };
 
 
