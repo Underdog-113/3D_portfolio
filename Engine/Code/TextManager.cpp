@@ -55,6 +55,16 @@ void CTextManager::OnDestroy(void)
 	m_mTexts.clear();
 }
 
+void CTextManager::ClearForScene(void)
+{
+	for (auto& text : m_mTexts)
+	{
+		delete text.second;
+	}
+
+	m_mTexts.clear();
+}
+
 _Text* CTextManager::AddText(std::wstring textKey, std::wstring msg, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color)
 {
 	_Text* pNewText = new _Text;

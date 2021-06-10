@@ -16,7 +16,7 @@ private:
 public:
 	// CObject을(를) 통해 상속됨
 	static	SP(CSlider) Create(_bool isStatic, CScene* pScene);
-	SP(Engine::CObject) MakeClone(void) override;
+	SP(CObject) MakeClone(void) override;
 
 	void Awake(void) override;
 	void Start(void) override;

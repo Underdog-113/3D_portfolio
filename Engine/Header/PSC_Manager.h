@@ -30,7 +30,6 @@ public:
 
 private:
 	std::vector<SP(CParticleSystemC)> m_vParticleCom;
-	//GETTOR_REF(std::vector<SP(CParticleSystemC)>, m_vParticleCom, {}, vParticleCom);
 
 };
 END

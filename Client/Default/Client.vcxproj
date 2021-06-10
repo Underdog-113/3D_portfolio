@@ -215,6 +215,7 @@
     <ClInclude Include="..\Header\MO_Robot.h" />
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageController.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="..\Code\MO_Robot.cpp" />
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageController.cpp" />
@@ -273,8 +275,8 @@
     <ResourceCompile Include="Client.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico" />
     <Image Include="Client.ico" />
+    <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

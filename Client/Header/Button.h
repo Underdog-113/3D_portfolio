@@ -42,10 +42,15 @@ public:
 		m_functionGate += std::bind(function, object);
 	}
 
+	void AddFuncData(Delegate<> delegate)
+	{
+		m_functionGate += delegate;
+	}
+
 private:
 
 private:
-	static		_uint				m_s_uniqueID;
+	static _uint m_s_uniqueID;
 
 	GETTOR_SETTOR(EButton_Type, m_buttonType, EButton_Type::UP, ButtonType)
 

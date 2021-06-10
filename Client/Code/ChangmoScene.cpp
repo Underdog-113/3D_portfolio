@@ -42,22 +42,25 @@ void CChangmoScene::Start(void)
 		SP(Engine::CObject) spEmptyObject
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 	
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
-		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spEmptyObject->AddComponent<Engine::CTextureC>();
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spEmptyObject->GetTransform()->SetSize(10, 10, 10);
-
-		spEmptyObject
-			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
+		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//spEmptyObject->AddComponent<Engine::CTextureC>();
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->GetTransform()->SetSize(10, 10, 10);
+		//
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
 		
-		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Cube");
-		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Base);
-		////spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		//spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(2);
+		spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(_float3(2, 2, 2)));
+		spEmptyObject->AddComponent<Engine::CDebugC>();
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
 
 		//spEmptyObject
 		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube1");
@@ -69,16 +72,16 @@ void CChangmoScene::Start(void)
 		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
 		//spEmptyObject->GetTransform()->SetPosition(6, 0, 0);
 		//
-		spEmptyObject
-			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube2");
-		
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
-		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spEmptyObject->AddComponent<Engine::CTextureC>();
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject->GetTransform()->SetPosition(9, 0, 0);
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube2");
+		//
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
+		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//spEmptyObject->AddComponent<Engine::CTextureC>();
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		////spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		//spEmptyObject->GetTransform()->SetPosition(9, 0, 0);
 		
 
 		//SP(Engine::CObject) spEmptyObject1
