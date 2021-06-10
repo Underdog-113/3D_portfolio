@@ -136,6 +136,7 @@ SP(CObject) CObjectFactory::AddClone(const std::wstring & protoObjectKey,
 	std::vector<CLayer*> const* pLayers = &m_pOwnerScene->GetLayers();
 	if (layerID < 0 || (_uint)layerID >= pLayers->size())
 	{
+
 		MSG_BOX(__FILE__, std::wstring(L"LayerID is out of range").c_str());
 		ABORT;
 	}
