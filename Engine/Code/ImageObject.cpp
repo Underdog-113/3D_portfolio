@@ -9,6 +9,7 @@ CImageObject::CImageObject()
 
 CImageObject::~CImageObject()
 {
+	OnDestroy();
 }
 
 SP(CImageObject) CImageObject::Create(_bool isStatic, CScene * pScene)

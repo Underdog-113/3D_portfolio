@@ -13,6 +13,7 @@ CBoundingVolume::CBoundingVolume()
 
 CBoundingVolume::~CBoundingVolume()
 {
+	OnDestroy();
 }
 
 SP(CBoundingVolume) CBoundingVolume::Create(_bool isStatic, CScene* pScene)

@@ -10,6 +10,7 @@ CGrid::CGrid()
 
 CGrid::~CGrid()
 {
+	OnDestroy();
 }
 
 SP(CGrid) CGrid::Create(_bool isStatic, CScene* pScene)
