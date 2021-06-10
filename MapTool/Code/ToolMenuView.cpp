@@ -66,6 +66,7 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO2, m_colType[1]);
 	DDX_Control(pDX, IDC_COMBO5, m_colliderID);
 	DDX_Control(pDX, IDC_BUTTON11, m_addCollisionC);
+	DDX_Control(pDX, IDC_EDIT14, m_aabbSize);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -92,7 +93,6 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_CBN_SELCHANGE(IDC_COMBO4, &CToolMenuView::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_BUTTON3, &CToolMenuView::OnBnClickedCreatePrefBtn)
 	ON_BN_CLICKED(IDC_BUTTON4, &CToolMenuView::OnBnClickedCreateAABBColliderBtn)
-	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
 END_MESSAGE_MAP()
 
 
@@ -771,20 +771,7 @@ void CToolMenuView::OnBnClickedCreatePrefBtn()
 
 void CToolMenuView::OnBnClickedCreateAABBColliderBtn()
 {
-	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-
-	if (nullptr == curObj && (0 == m_colType[0] && 0 == m_colType[1]))
-		return;
-
-	if (1 == m_colType[0].GetCheck())
-	{
-		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(_float3(1, 1, 1), ZERO_VECTOR));
-		std::cout << "add aabb collider" << std::endl;
-	}
-	else if (1 == m_colType[1].GetCheck())
-	{
-
-	}
+	
 
 
 	//switch (curObjColliderType)
@@ -798,42 +785,6 @@ void CToolMenuView::OnBnClickedCreateAABBColliderBtn()
 	//}
 
 	//curObj->GetComponent<Engine::CCollisionC>()->SetIsEnabled(false);
-}
-
-void CToolMenuView::OnBnClickedAddCollisionCBtn()
-{
-	//콜리션 컴포넌트를 붙일때
-
-	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-
-	if (nullptr == curObj)
-		return;
-	
-	CString cstrVal;
-	m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
-
-	std::string str = CStrToStr(cstrVal);
-	std::wstring wstr = Engine::StrToWStr(str);
-	_int colID = 0;
-
-	if (L"" == wstr)
-		return;
-	else if (L"Player" == wstr)
-		colID = (_int)EColliderID::Player;
-	else if (L"Enemy" == wstr)
-		colID = (_int)EColliderID::Enemy;
-	else if (L"Object" == wstr)
-		colID = (_int)EColliderID::Object;
-	else if (L"Map" == wstr)
-		colID = (_int)EColliderID::Map;
-
-	curObj->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
-	curObj->AddComponent<Engine::CDebugC>();
-
-	m_showCol.EnableWindow(true);
-	m_colType[0].EnableWindow(true);
-	m_colType[1].EnableWindow(true);
-	m_addCollisionC.EnableWindow(false);
 }
 
 //{

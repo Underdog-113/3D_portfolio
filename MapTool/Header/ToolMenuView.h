@@ -62,7 +62,6 @@ public:
 	afx_msg void OnCbnSelchangeCombo4();
 	afx_msg void OnBnClickedCreatePrefBtn();
 	afx_msg void OnBnClickedCreateAABBColliderBtn();
-	afx_msg void OnBnClickedAddCollisionCBtn();
 
 private:
 	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
@@ -75,6 +74,9 @@ public:
 	_int m_culSelLayerID;
 	CComboBox m_colliderID;
 	CButton m_addCollisionC;
+	CButton m_showCol;
+	CButton m_colType[2];
+	CEdit m_aabbSize;
 
 protected:
 	CEdit m_posX;
@@ -111,12 +113,6 @@ protected:
 	CEdit m_saveFileName;
 	CString m_curTreeItem; // 트리에서 클릭한 아이템
 	
-	// col
-	CButton m_showCol;
-	CButton m_colType[2];
-
 	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
 	GETTOR(CString, m_curSelTextureFileName, L"", CurSelTextureFileName);
-public:
-	
 };

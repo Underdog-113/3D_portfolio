@@ -396,13 +396,46 @@ void CEditorScene::InputSetting()
 			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 
 			// add collider
-			//CString cstrVal;
-			//m_pMenuView->m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
+			CString cstrVal;
+			m_pMenuView->m_colliderID.GetLBText(m_pMenuView->m_colliderID.GetCurSel(), cstrVal);
 
-			//std::string str = CStrToStr(cstrVal);
-			//std::wstring wstr = Engine::StrToWStr(str);
+			std::string str = CStrToStr(cstrVal);
+			std::wstring wstr = Engine::StrToWStr(str);
+			_int colID = 0;
+
+			if (L"" == wstr)
+				return;
+			else if (L"Player" == wstr)
+				colID = (_int)EColliderID::Player;
+			else if (L"Enemy" == wstr)
+				colID = (_int)EColliderID::Enemy;
+			else if (L"Object" == wstr)
+				colID = (_int)EColliderID::Object;
+			else if (L"Map" == wstr)
+				colID = (_int)EColliderID::Map;
+
+			m_pCurSelectedObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
+			m_pCurSelectedObject->AddComponent<Engine::CDebugC>();
+
+			m_pMenuView->m_showCol.EnableWindow(true);
+			m_pMenuView->m_colType[0].EnableWindow(true);
+			m_pMenuView->m_colType[1].EnableWindow(true);
+
+			//
+			_float3 size = _float3(1, 1, 1);
+			_float3 offset = ZERO_VECTOR;
+
+			if (1 == m_pMenuView->m_colType[0].GetCheck())
+			{
+				m_pCurSelectedObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(size, offset));
+				std::cout << "add aabb collider" << std::endl;
+			}
+			else if (1 == m_pMenuView->m_colType[1].GetCheck())
+			{
+
+			}
+		//}
 	}
-//}
 
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
