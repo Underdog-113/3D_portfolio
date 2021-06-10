@@ -23,6 +23,11 @@ template Material {
  [...]
 }
 
+template TextureFilename {
+ <a42790e1-7810-11cf-8f52-0040333594a3>
+ STRING filename;
+}
+
 template Frame {
  <3d82ab46-62da-11cf-ab39-0020af71e433>
  [...]
@@ -85,11 +90,15 @@ template DeclData {
 }
 
 
-Material _Effect_Kiana_CatPaw_SphereAdefault {
+Material Material__25 {
  0.588000;0.588000;0.588000;1.000000;;
  10.000000;
  0.000000;0.000000;0.000000;;
  0.000000;0.000000;0.000000;;
+
+ TextureFilename {
+  "DefaultMeshTex.png";
+ }
 }
 
 Frame Effect_Kiana_CatPaw_SphereA_0 {
@@ -827,7 +836,7 @@ Frame Effect_Kiana_CatPaw_SphereA_0 {
    0,
    0,
    0;
-   { _Effect_Kiana_CatPaw_SphereAdefault }
+   { Material__25 }
   }
 
   DeclData {

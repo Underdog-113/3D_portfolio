@@ -119,7 +119,7 @@ public:
 	afx_msg void OnBnClickedAlphaMask();
 
 private:
-	void Add_EffectMesh(CString ObjectName);
+	void Add_MeshEffect(CString ObjectName);
 	void Add_SoftEffect(CString ObjectName);
 	void Add_Texture(CString ObjectName);
 	void Add_AlphaMask(CString ObjectName);

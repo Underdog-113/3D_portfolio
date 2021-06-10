@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "EffectTool.h"
 #include "../Header/Inspector.h"
+#include "MeshEffect.h"
 
 
 // CInspector`
@@ -353,7 +354,7 @@ void CInspector::OnBnClickedMeshEffect()
 
 		m_hMeshEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
 
-		Add_EffectMesh(strFilePath);
+		Add_MeshEffect(strFilePath);
 
 		InvalidateRect(false);
 
@@ -442,15 +443,14 @@ void CInspector::OnBnClickedAlphaMask()
 	}
 }
 
-void CInspector::Add_EffectMesh(CString ObjectName)
+void CInspector::Add_MeshEffect(CString ObjectName)
 {
-	SP(Engine::CObject) spEmptyObject
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", false, (_int)Engine::ELayerID::NumOfEngineLayerID, L"Effect0");
-	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
-	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex();
-	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)ERenderID::NonAlpha);
-	spEmptyObject->AddComponent<Engine::CTextureC>();
-	spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	SP(Engine::CObject) spMeshEffect
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MeshEffect", false, (_int)Engine::ELayerID::NumOfEngineLayerID, L"Effect0");
+	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)

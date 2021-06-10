@@ -1,14 +1,14 @@
 #pragma once
-class CEffectMesh final: public Engine::CObject
+class CMeshEffect final: public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
-public:
-	CEffectMesh();
-	~CEffectMesh();
+private:
+	CMeshEffect();
+	~CMeshEffect();
 
 public:
-	static		SP(CEffectMesh)			Create(_bool isStatic, Engine::CScene* pScene);
+	static		SP(CMeshEffect)			Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(CObject) MakeClone() override;
 
@@ -31,15 +31,12 @@ public:
 	void OnDisable() override;
 
 	void SetBasicName()override;
-		
-private:
-	void	PickComponentToRender(void);
 
-protected:
-	static		_uint						m_s_uniqueID;
-	GETTOR(SP(Engine::CRenderComponent), m_spComponentToRender, nullptr, ComponentToRender)
+private:
+	static		_uint m_s_uniqueID;
 	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
 	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 };
 

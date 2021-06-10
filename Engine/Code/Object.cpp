@@ -127,5 +127,5 @@ void CObject::InitClone(SP(CObject) spClone)
 		spClone->CopyComponentToClone(component.second);
 	}
 
-	spClone->SetAddExtra(true);
+	spClone->SetAddExtra(m_addExtra);
 }
