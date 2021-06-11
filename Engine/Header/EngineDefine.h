@@ -21,6 +21,9 @@
 #define UNUSED(x) (void)(x)
 
 
+#define _SOLUTIONDIR LR"($(SolutionDir))"
+#define _SOLUTIONDIR_STR R"($(SolutionDir))"
+
 #define KEY_LEFT	1ULL << 0 
 #define KEY_RIGHT	1ULL << 1
 #define KEY_UP		1ULL << 2

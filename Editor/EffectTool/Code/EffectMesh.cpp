@@ -2,6 +2,7 @@
 #include "..\Header\EffectMesh.h"
 
 
+_uint CEffectMesh::m_s_uniqueID = 0;
 CEffectMesh::CEffectMesh()
 {
 }

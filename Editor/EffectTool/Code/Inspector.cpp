@@ -334,9 +334,8 @@ void CInspector::OnBnClickedDeleteEffectList()
 void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect");
 
-	LPWSTR lpwstr = strInitPath.GetBuffer();
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -364,9 +363,7 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
-	CString strPathName = strInitPath;
-	LPWSTR lpwstr = strInitPath.GetBuffer();
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
 
 	//PathStripPath(lpwstr);
 
@@ -392,9 +389,8 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
-	
-	LPWSTR lpwstr = strInitPath.GetBuffer();
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+
 
 	PathStripPath(lpwstr);
 
@@ -419,9 +415,9 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
 	
-	LPWSTR lpwstr = strInitPath.GetBuffer();
+	
 
 	PathStripPath(lpwstr);
 

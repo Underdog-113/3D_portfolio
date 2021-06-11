@@ -402,6 +402,9 @@
     <Image Include="Honkai.ico">
       <Filter>99.Default</Filter>
     </Image>
+    <Image Include="Honkai.ico" />
+    <Image Include="Honkai.ico" />
+    <Image Include="Honkai.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Client.aps">

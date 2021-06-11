@@ -37,7 +37,7 @@ void CDataStore::Awake(void)
 {
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CDataStore::ParsingData, this, std::placeholders::_1, std::placeholders::_2);
-	m_resourcePath = L"..\\..\\..\\Resource\\Data";
+	m_resourcePath = _SOLUTIONDIR L"\\Resource\\Data";
 }
 
 void CDataStore::OnDestroy(void)

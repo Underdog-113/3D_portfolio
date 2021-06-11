@@ -7,7 +7,7 @@ IMPLEMENT_SINGLETON(CTextManager)
 void CTextManager::Awake(void)
 {
 	__super::Awake();
-	AddFontResourceEx(L"..\\..\\..\\Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
+	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
 }
 
 void CTextManager::Start(void)
