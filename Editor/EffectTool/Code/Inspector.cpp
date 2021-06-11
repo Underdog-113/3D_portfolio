@@ -340,7 +340,7 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
 
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -366,7 +366,7 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -389,9 +389,7 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
-
-	PathStripPath(lpwstr);
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -413,7 +411,7 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -438,7 +436,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::WaterShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
@@ -449,7 +447,8 @@ void CInspector::Add_Texture(CString TextureKey)
 {
 	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
 	{
-		obj->GetComponent<Engine::CTextureC>()->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 0);
+		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
+		obj->GetComponent<Engine::CShader>()->GetEffect()->SetTexture("g_NormalMap", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
 	}
 
 }
