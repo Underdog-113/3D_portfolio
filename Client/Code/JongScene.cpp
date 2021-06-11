@@ -16,7 +16,8 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
-	delete m_pController;
+	//delete m_pController;
+	m_pController->DestroyInstance();
 }
 
 Engine::CScene * CJongScene::Create(void)
@@ -39,7 +40,8 @@ void CJongScene::Awake(_int numOfLayers)
 	InitPrototypes();
 
 
-	m_pController = new CStageController;
+	//m_pController = new CStageController;
+	m_pController = CStageController::GetInstance();
 	m_pController->Awake();
 }
 

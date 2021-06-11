@@ -10,6 +10,7 @@
 
 #define _SOLUTIONDIR R"($(SolutionDir))"
 
+
 //안전하게 포인터를 지우세요
 #define SAFE_DELETE(something)														\
 if((something) != nullptr)															\

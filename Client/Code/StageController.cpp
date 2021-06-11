@@ -1,24 +1,25 @@
 #include "stdafx.h"
 #include "StageController.h"
 
+IMPLEMENT_SINGLETON(CStageController)
 
-CStageController::CStageController()
-{
-}
-
-
-CStageController::~CStageController()
-{
-}
+//CStageController::CStageController()
+//{
+//}
+//
+//
+//CStageController::~CStageController()
+//{
+//}
 
 void CStageController::Awake(void)
 {
 	m_pInput = Engine::CInputManager::GetInstance();
-	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetMainCamera();
 }
 
 void CStageController::Start(void)
 {
+	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
 	m_spCurActor = m_vSquad[Actor];
 }
 
@@ -26,6 +27,10 @@ void CStageController::Start(void)
 void CStageController::Update(void)
 {
 	MoveControl();
+}
+
+void CStageController::OnDestroy()
+{
 }
 
 void CStageController::AddSquadMember(SP(Engine::CObject) pCharacter)
@@ -42,11 +47,20 @@ void CStageController::AddSquadMember(SP(Engine::CObject) pCharacter)
 
 void CStageController::MoveControl()
 {
-	// stand
-	if (!CheckMoveOrder())
-		return;
+	if (m_inputLock_ByAni)
+	{
+		ReserveMoveOrder();
+	}
+	else
+	{
+		if (!CheckMoveOrder())
+			return;
+	}
 
-	RotateCurrentActor();
+	if (!m_rotateLock)
+	{
+		RotateCurrentActor();
+	}
 }
 
 bool CStageController::CheckMoveOrder()
@@ -54,44 +68,52 @@ bool CStageController::CheckMoveOrder()
 	bool isMove = false;
 
 	// up
-	if (m_pInput->KeyUp(Key_Move_Left))
+	if (m_pInput->KeyUp(StageKey_Move_Left))
 	{
 		m_moveFlag &= ~MoveFlag_Left;
+		
 	}
-	if (m_pInput->KeyUp(Key_Move_Right))
+	if (m_pInput->KeyUp(StageKey_Move_Right))
 	{
 		m_moveFlag &= ~MoveFlag_Right;
+		
 	}
-	if (m_pInput->KeyUp(Key_Move_Forward))
+	if (m_pInput->KeyUp(StageKey_Move_Forward))
 	{
 		m_moveFlag &= ~MoveFlag_Forward;
+		
 	}
-	if (m_pInput->KeyUp(Key_Move_Back))
+	if (m_pInput->KeyUp(StageKey_Move_Back))
 	{
 		m_moveFlag &= ~MoveFlag_Back;
+		
 	}
 
 	// down
-	if (m_pInput->KeyDown(Key_Move_Left))
+	if (m_pInput->KeyPress(StageKey_Move_Left))
 	{
 		m_moveFlag &= ~MoveFlag_Right;
 		m_moveFlag |= MoveFlag_Left;
+		
 	}
-	if (m_pInput->KeyDown(Key_Move_Right))
+	if (m_pInput->KeyPress(StageKey_Move_Right))
 	{
 		m_moveFlag |= MoveFlag_Right;
 		m_moveFlag &= ~MoveFlag_Left;
+		
 	}
 
-	if (m_pInput->KeyDown(Key_Move_Forward))
+	if (m_pInput->KeyPress(StageKey_Move_Forward))
 	{
 		m_moveFlag |= MoveFlag_Forward;
 		m_moveFlag &= ~MoveFlag_Back;
+		
 	}
-	if (m_pInput->KeyDown(Key_Move_Back))
+	if (m_pInput->KeyPress(StageKey_Move_Back))
 	{
 		m_moveFlag &= ~MoveFlag_Forward;
 		m_moveFlag |= MoveFlag_Back;
+		
 	}
 
 	if (!m_moveFlag)
@@ -135,7 +157,99 @@ bool CStageController::CheckMoveOrder()
 	m_moveOrderDir.y = 0.f;
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
+	if (m_prevMoveFlag != m_moveFlag)
+		m_rotateLock = false;
+
+	m_prevMoveFlag = m_moveFlag;
 	return true;
+}
+
+void CStageController::ReserveMoveOrder()
+{
+	bool isMove = false;
+
+	// up
+	if (m_pInput->KeyUp(StageKey_Move_Left))
+	{
+		m_reserveMoveFlag &= ~MoveFlag_Left;		
+	}
+	if (m_pInput->KeyUp(StageKey_Move_Right))
+	{
+		m_reserveMoveFlag &= ~MoveFlag_Right;		
+	}
+	if (m_pInput->KeyUp(StageKey_Move_Forward))
+	{
+		m_reserveMoveFlag &= ~MoveFlag_Forward;		
+	}
+	if (m_pInput->KeyUp(StageKey_Move_Back))
+	{
+		m_reserveMoveFlag &= ~MoveFlag_Back;
+	}
+
+	// down
+	if (m_pInput->KeyPress(StageKey_Move_Left))
+	{
+		m_reserveMoveFlag &= ~MoveFlag_Right;
+		m_reserveMoveFlag |= MoveFlag_Left;		
+	}
+	if (m_pInput->KeyPress(StageKey_Move_Right))
+	{
+		m_reserveMoveFlag |= MoveFlag_Right;
+		m_reserveMoveFlag &= ~MoveFlag_Left;		
+	}
+
+	if (m_pInput->KeyPress(StageKey_Move_Forward))
+	{
+		m_reserveMoveFlag |= MoveFlag_Forward;
+		m_reserveMoveFlag &= ~MoveFlag_Back;		
+	}
+	if (m_pInput->KeyPress(StageKey_Move_Back))
+	{
+		m_reserveMoveFlag &= ~MoveFlag_Forward;
+		m_reserveMoveFlag |= MoveFlag_Back;		
+	}
+
+	if (!m_reserveMoveFlag)
+		return;
+
+	m_reserveMoveOrderDir = ZERO_VECTOR;
+
+	if (m_reserveMoveFlag & MoveFlag_Left)
+	{
+		_float3 right = m_spCurMainCam->GetTransform()->GetRight();
+		right = _float3(right.x, 0.f, right.z);
+		D3DXVec3Normalize(&right, &right);
+		m_reserveMoveOrderDir -= right;
+	}
+
+	if (m_reserveMoveFlag & MoveFlag_Right)
+	{
+		_float3 right = m_spCurMainCam->GetTransform()->GetRight();
+		right = _float3(right.x, 0.f, right.z);
+		D3DXVec3Normalize(&right, &right);
+		m_reserveMoveOrderDir += right;
+	}
+
+	if (m_reserveMoveFlag & MoveFlag_Forward)
+	{
+		_float3 forward = m_spCurMainCam->GetTransform()->GetForward();
+		forward = _float3(forward.x, 0.f, forward.z);
+		D3DXVec3Normalize(&forward, &forward);
+		m_reserveMoveOrderDir += forward;
+	}
+
+	if (m_reserveMoveFlag & MoveFlag_Back)
+	{
+		_float3 forward = m_spCurMainCam->GetTransform()->GetForward();
+		forward = _float3(forward.x, 0.f, forward.z);
+		D3DXVec3Normalize(&forward, &forward);
+		m_reserveMoveOrderDir -= forward;
+
+	}
+
+	m_reserveMoveOrderDir.y = 0.f;
+	D3DXVec3Normalize(&m_reserveMoveOrderDir, &m_reserveMoveOrderDir);
+
 }
 
 void CStageController::RotateCurrentActor()
@@ -148,8 +262,6 @@ void CStageController::RotateCurrentActor()
 	actorForward = _float3(actorForward.x, 0.f, actorForward.z);
 	float angleSynchroRate = D3DXVec3Dot(&m_moveOrderDir, &actorForward);
 
-	if (angleSynchroRate > 0.99f)
-		return;
 	if (angleSynchroRate > 0.95f)
 		rotSpeedRate = m_rotSpeedLowRate;
 
@@ -162,4 +274,37 @@ void CStageController::RotateCurrentActor()
 	else
 		m_spCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
 
+
+	if (angleSynchroRate > 0.99f)
+	{
+		if (rotAxis.y > 0.f)
+			m_spCurActor->GetTransform()->AddRotationY(D3DXToRadian(0.9f));
+		else
+			m_spCurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
+
+		m_rotateLock = true;
+	}
+
 }
+
+void CStageController::SetInputLock_ByAni(bool lock)
+{
+	m_inputLock_ByAni = lock;
+	
+	if (!lock)
+	{
+		m_prevMoveFlag = m_moveFlag;
+		m_moveFlag = m_reserveMoveFlag;
+
+
+		m_moveOrderDir = m_reserveMoveOrderDir;
+		if (m_prevMoveFlag != m_moveFlag)
+			m_rotateLock = false;
+
+		m_prevMoveFlag = m_moveFlag;
+	}
+}
+
+// 1. 새로운 애니 시작할 때 방향 고정
+// 2. 회전 끝나면 회전 고정
+// 3. 새 키 들어오는지 확인해야함
