@@ -126,7 +126,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_SOLUTIONDIR = LR"($(SolutionDir))"</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)../Code/;$(ProjectDir)../Header/;$(SolutionDir)Reference/Header/;$(ProjectDir)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
@@ -169,7 +169,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_SOLUTIONDIR = LR"($(SolutionDir))"</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;$(SolutionDir)Reference/Header/</AdditionalIncludeDirectories>
     </ClCompile>
@@ -277,15 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico" />
-    <Image Include="Honkai.ico" />
     <Image Include="small.ico" />
-    <Image Include="Honkai.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Client.aps" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Client.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

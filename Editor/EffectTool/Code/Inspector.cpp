@@ -335,7 +335,7 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x ���� ǥ��
 
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -363,7 +363,7 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ���� ǥ��
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
 
 	//PathStripPath(lpwstr);
 
@@ -389,7 +389,7 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ���� ǥ��
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
 
 
 	PathStripPath(lpwstr);
@@ -415,7 +415,7 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ���� ǥ��
-	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
 
 
 

@@ -158,7 +158,7 @@ void CSoundManager::VolumeIncrease(_uint ID, float fVolume)
 void CSoundManager::LoadSoundFile()
 {
 	WIN32_FIND_DATA fd;
-	std::wstring curDir = _SOLUTIONDIR L"\\Resource\\Sound";
+	std::wstring curDir = _SOLUTIONDIR L"Resource\\Sound";
 	std::wstring fullFilePath, curFile;
 
 	HANDLE handle = FindFirstFile((curDir + L"\\*").c_str(), &fd);
