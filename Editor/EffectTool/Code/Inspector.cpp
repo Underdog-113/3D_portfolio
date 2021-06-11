@@ -1,6 +1,3 @@
-// ../Code/Inspector.cpp : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-//
-
 #include "stdafx.h"
 #include "EffectTool.h"
 #include "../Header/Inspector.h"
@@ -365,8 +362,16 @@ void CInspector::OnBnClickedMeshEffect()
 
 void CInspector::OnBnClickedSoftEffect()
 {
+<<<<<<< HEAD
 	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect\\";
+=======
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+
+	//PathStripPath(lpwstr);
+
+>>>>>>> badaa93bd1daa23b7e7ce4827050ec0fd6f53e18
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -388,8 +393,17 @@ void CInspector::OnBnClickedSoftEffect()
 
 void CInspector::OnBnClickedTexture()
 {
+<<<<<<< HEAD
 	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\";
+=======
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+
+
+	PathStripPath(lpwstr);
+
+>>>>>>> badaa93bd1daa23b7e7ce4827050ec0fd6f53e18
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -410,8 +424,17 @@ void CInspector::OnBnClickedTexture()
 
 void CInspector::OnBnClickedAlphaMask()
 {
+<<<<<<< HEAD
 	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\";
+=======
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+
+
+
+	PathStripPath(lpwstr);
+>>>>>>> badaa93bd1daa23b7e7ce4827050ec0fd6f53e18
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 

@@ -21,7 +21,7 @@ void CShader::Free(void)
 void CShader::Awake(void)
 {
 	__super::Awake();
-	std::wstring shaderPath = _SOLUTIONDIR L"\\Resource\\Shader\\" + m_objectKey + L".fx";
+	std::wstring shaderPath = _SOLUTIONDIR L"Resource\\Shader\\" + m_objectKey + L".fx";
 	if (FAILED(D3DXCreateEffectFromFile(GET_DEVICE,
 										shaderPath.c_str(),
 										NULL,

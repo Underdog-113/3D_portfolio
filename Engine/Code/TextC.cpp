@@ -25,7 +25,7 @@ void CTextC::Awake()
 
 	m_componentID = (_int)m_s_componentID;
 
-	AddFontResourceEx(_SOLUTIONDIR L"\\Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
+	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
 }
 
 void CTextC::Start(SP(CComponent) spThis)

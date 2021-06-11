@@ -477,7 +477,6 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClCompile>
@@ -507,6 +506,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\EffectShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -735,7 +737,6 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\PSC_Manager.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClInclude>
@@ -765,6 +766,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\EffectShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

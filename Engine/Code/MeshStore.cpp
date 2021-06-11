@@ -43,7 +43,7 @@ void CMeshStore::Awake(void)
 {
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CMeshStore::ParsingMesh, this, std::placeholders::_1, std::placeholders::_2);
-	m_resourcePath = _SOLUTIONDIR L"\\Resource\\Mesh";
+	m_resourcePath = _SOLUTIONDIR L"Resource\\Mesh";
 }
 
 

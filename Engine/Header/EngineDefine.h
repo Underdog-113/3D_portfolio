@@ -21,8 +21,7 @@
 #define UNUSED(x) (void)(x)
 
 
-
-#define KEY_LEFT	1ULL << 0 
+#define KEY_LEFT	1ULL << 0
 #define KEY_RIGHT	1ULL << 1
 #define KEY_UP		1ULL << 2
 #define KEY_DOWN	1ULL << 3
