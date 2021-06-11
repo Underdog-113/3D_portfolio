@@ -399,14 +399,6 @@
     <Image Include="Client.ico">
       <Filter>99.Default</Filter>
     </Image>
-    <Image Include="Honkai.ico">
-      <Filter>99.Default</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Client.aps">
-      <Filter>99.Default</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">

@@ -1,6 +1,3 @@
-// ../Code/Inspector.cpp : ���� �����Դϴ�.
-//
-
 #include "stdafx.h"
 #include "EffectTool.h"
 #include "../Header/Inspector.h"
