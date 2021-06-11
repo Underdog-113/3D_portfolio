@@ -257,8 +257,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>../../Bin/Engine/Debug/x64/</OutDir>
-    <IntDir>../../Log/Engine/Debug/x64/</IntDir>
+    <OutDir>$(SolutionDir)Bin/Engine/Debug/x64/</OutDir>
+    <IntDir>$(SolutionDir)Log/Engine/Debug/x64/</IntDir>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -271,8 +271,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>../../Bin/Engine/Release/x64/</OutDir>
-    <IntDir>../../Log/Engine/Release/x64/</IntDir>
+    <OutDir>$(SolutionDir)Bin/Engine/Release/x64/</OutDir>
+    <IntDir>$(SolutionDir)Log/Engine/Release/x64/</IntDir>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -308,11 +308,12 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>ENGINE_MODE;EXPORTS_ENGINE;_DEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENGINE_MODE;EXPORTS_ENGINE;_DEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;_SOLUTIONDIR=LR"($(SolutionDir))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalOptions>-Zm120 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -365,7 +366,7 @@ copy /Y "$(SolutionDir)Bin\Engine\Release\x86\Engine.lib" "$(SolutionDir)Referen
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;ENGINE_MODE;EXPORTS_ENGINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;ENGINE_MODE;EXPORTS_ENGINE;_SOLUTIONDIR = LR"($(SolutionDir))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>

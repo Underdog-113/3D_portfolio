@@ -1,8 +1,7 @@
 #include "EngineStdafx.h"
+#include "CollisionC.h"
 #include "Collider.h"
- 
 #include "Object.h"
-#include "DataStore.h"
 
 USING(Engine)
 CCollisionC::CCollisionC(void)
@@ -146,7 +145,7 @@ void CCollisionC::AddColliderFromFile(void)
 			{
 			case (_int)EColliderType::Point:
 			{
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"pointCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"PointCollider_" + index + L"_offset", offset);
 				pCollider = CPointCollider::Create(offset);
 				break;
 			}
@@ -225,7 +224,6 @@ void CCollisionC::MergingBS(CCollider* pCollider)
 		if (dist > EPSILON)
 			m_offsetBS += ((m_radiusBS - curRadius) / dist) * delta;
 	}
-
 }
 
 void CCollisionC::ProcessCollisions(void)

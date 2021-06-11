@@ -68,7 +68,7 @@ void CInitScene::Start(void)
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
 	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
 	m_pBackground->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
-	m_pBackground->GetTransform()->SetSize(800, 600, 1);
+	m_pBackground->GetTransform()->SetSize(1440, 810, 1);
 }
 
 void CInitScene::FixedUpdate(void)

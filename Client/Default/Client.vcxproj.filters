@@ -106,9 +106,6 @@
     <Filter Include="02.Objects\02.Particle">
       <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Function">
-      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\00.Valkyrie">
       <UniqueIdentifier>{aae8ad2c-f49d-44a2-967c-9c648d86446d}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,18 @@
     </Filter>
     <Filter Include="06.DataLoad">
       <UniqueIdentifier>{e9158b22-d787-4359-9b1d-a6f7d90d4e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\03.MainRoomScene">
+      <UniqueIdentifier>{b51eb0a9-2534-482d-8c33-c367c3882fe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\04.StageSelectionScene">
+      <UniqueIdentifier>{381e6829-ac7f-4b35-aa6c-506d0171270e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\05.ReadyToSortieScene">
+      <UniqueIdentifier>{5f27c27e-6e51-4148-9833-46c805916374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\06.PartySettingScene">
+      <UniqueIdentifier>{868615bc-53cb-4320-9b02-5f1e19d8b082}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +295,18 @@
     <ClInclude Include="..\Header\DataLoad.h">
       <Filter>06.DataLoad</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MainRoomScene.h">
+      <Filter>01.Scene\03.MainRoomScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageSelectionScene.h">
+      <Filter>01.Scene\04.StageSelectionScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ReadyToSortieScene.h">
+      <Filter>01.Scene\05.ReadyToSortieScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PartySettingScene.h">
+      <Filter>01.Scene\06.PartySettingScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -402,6 +423,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\DataLoad.cpp">
       <Filter>06.DataLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MainRoomScene.cpp">
+      <Filter>01.Scene\03.MainRoomScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageSlectionScene.cpp">
+      <Filter>01.Scene\04.StageSelectionScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
+      <Filter>01.Scene\05.ReadyToSortieScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PartySettingScene.cpp">
+      <Filter>01.Scene\06.PartySettingScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BUTTONFUNCTION_H
+#define BUTTONFUNCTION_H
+
 class CButtonFunction
 {
 public:
@@ -7,5 +9,10 @@ public:
 
 public:
 	void ChangeJongScene();
+	void MainRoomScene();
+	void StageSelectionScene();
+	void ReadyToSortieScene();
+	void PartySettingScene();
 };
 
+#endif

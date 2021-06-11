@@ -25,7 +25,7 @@ void CDataLoad::Setting()
 	m_loadDeleGate += std::bind(&CDataLoad::ButtonLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ImageLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad(), std::placeholders::_1);
-	//m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::EffectLoad, &CDataLoad(), std::placeholders::_1);
@@ -144,6 +144,10 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"imageSize" + std::to_wstring(j), size);
 			size.z = 0;
 			imageObj[j]->GetTransform()->SetSize(size);
+
+			_float rotationZ;
+			dataStore->GetValue(false, dataID, objectKey, key + L"imageRotationZ" + std::to_wstring(j), rotationZ);
+			imageObj[j]->GetTransform()->SetRotationZ(rotationZ);
 
 			_float sort;
 			dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
@@ -312,13 +316,7 @@ void CDataLoad::EffectLoad(Engine::CScene * pScene)
 
 void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 {
-	/*switch (Engine::HashCode(Engine::WStrToStr(function)))
-	{
-	default:
-		break;
-	}*/
-
-	if (function == L"ChangeJongScene")
+	if (0 == function.compare(L"ChangeJongScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction());
 	}

@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{e3dab39f-fa58-47be-9aaf-5885caeceb6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.ToolView">
+      <UniqueIdentifier>{af815a2a-46a5-4334-b635-ab66be36a0ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.MainFrm">
+      <UniqueIdentifier>{28408ec6-ed10-4e0b-80eb-7ad325436cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Doc">
+      <UniqueIdentifier>{5f7ed6c5-e879-4dd1-ab78-74bd26ecbbb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Include">
+      <UniqueIdentifier>{41545f05-f437-4150-b0dc-5253a8c64dc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03 EditorScene">
+      <UniqueIdentifier>{741b87ec-e18e-4640-987a-efa6440177e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.ToolView\00.Inspector">
+      <UniqueIdentifier>{9245f9af-f2c5-48b4-9ada-815be7ece154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.MainEditor">
+      <UniqueIdentifier>{7ff52d60-1309-45c8-a108-d38644b86721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Bitmap">
+      <UniqueIdentifier>{aeb39c05-dc6a-457a-893c-c31c07c86b49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object">
+      <UniqueIdentifier>{e38c0a56-103f-44b2-abc9-57f858a1f33c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\00.EffectMesh">
+      <UniqueIdentifier>{f7260254-c1c9-4d69-915d-57ccb0f765e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\01.SoftEffect">
+      <UniqueIdentifier>{90f243c2-8c3b-40ce-8289-511eed1f4fbc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EffectTool.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectToolDoc.h">
+      <Filter>01.Doc</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>00.MainFrm</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectToolView.h">
+      <Filter>02.ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectToolScene.h">
+      <Filter>03 EditorScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectToolInclude.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectToolEnum.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectToolTypedef.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectToolDefine.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Inspector.h">
+      <Filter>02.ToolView\00.Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MainEditor.h">
+      <Filter>04.MainEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectMesh.h">
+      <Filter>05.Object\00.EffectMesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EffectTool.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectToolDoc.cpp">
+      <Filter>01.Doc</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>00.MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectToolView.cpp">
+      <Filter>02.ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectToolScene.cpp">
+      <Filter>03 EditorScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Inspector.cpp">
+      <Filter>02.ToolView\00.Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MainEditor.cpp">
+      <Filter>04.MainEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectMesh.cpp">
+      <Filter>05.Object\00.EffectMesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\EffectTool.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="res\EffectToolDoc.ico">
+      <Filter>01.Doc</Filter>
+    </Image>
+    <Image Include="res\Action.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\AlphaHeight.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\AlphaMask.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\AlphaWidth.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Billboard.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Delete.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Edit.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Effect_Setting.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\EffectList.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\EffectType.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\EndTime.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\FadeIn.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\FadeOut.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Function.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Load.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Loop.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\main_bg.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\MeshEffect.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Option.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Pause.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Position.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Repeat.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Rotation.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Save.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Scale.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\SelectMode.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\SoftEffect.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Start.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\StartTime.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Stop.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Texture.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\TextureType.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Transform.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\UVAnimation.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\UVSprite.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\X.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Y.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Z.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Honkai.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EffectTool.rc">
+      <Filter>99.Default</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\EffectTool.rc2">
+      <Filter>99.Default</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>99.Default</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

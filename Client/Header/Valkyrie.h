@@ -40,14 +40,11 @@ public:
 	virtual		void						OnCollisionExit(Engine::_CollisionInfo ci) {};
 
 protected:
-	static		_uint						m_s_uniqueID;
-	GETTOR		(SP(Engine::CMeshC),		m_spMesh,		nullptr, Mesh)
-	GETTOR		(SP(Engine::CGraphicsC),	m_spGraphics,	nullptr, Graphics)
-	GETTOR		(SP(Engine::CShaderC),		m_spShader,		nullptr, Shader)
-	GETTOR		(SP(Engine::CTextureC),		m_spTexture,	nullptr, Texture)
-
-
-protected:
-
+	static			_uint						m_s_uniqueID;
+	GETTOR			(SP(Engine::CMeshC),		m_spMesh,		nullptr, Mesh)
+	GETTOR			(SP(Engine::CGraphicsC),	m_spGraphics,	nullptr, Graphics)
+	GETTOR			(SP(Engine::CShaderC),		m_spShader,		nullptr, Shader)
+	GETTOR			(SP(Engine::CTextureC),		m_spTexture,	nullptr, Texture)
+		
 };
 

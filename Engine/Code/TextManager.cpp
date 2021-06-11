@@ -1,13 +1,13 @@
 #include "EngineStdafx.h"
- 
-#include "DeviceManager.h"
+#include "TextManager.h"
+
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CTextManager)
 void CTextManager::Awake(void)
 {
 	__super::Awake();
-	AddFontResourceEx(L"..\\..\\Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
+	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
 }
 
 void CTextManager::Start(void)
@@ -68,7 +68,7 @@ void CTextManager::ClearForScene(void)
 _Text* CTextManager::AddText(std::wstring textKey, std::wstring msg, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color)
 {
 	_Text* pNewText = new _Text;
-	
+
 	pNewText->m_message		= msg;
 	pNewText->m_position	= position;
 	pNewText->m_boxSize		= boxSize;
@@ -110,7 +110,7 @@ void CTextManager::DeleteText(std::wstring textKey)
 	m_mTexts.erase(it);
 }
 
-void CTextManager::DrawMyText(_Text* pText) // ¿©±â¼­ ÅØ½ºÃÄ¿Í ±ÛÀ»½áÁÖ¸éµÇ´Âµ¥ ¾î¶»°Ô ½áÁÖÁö?
+void CTextManager::DrawMyText(_Text* pText) // ï¿½ï¿½ï¿½â¼­ ï¿½Ø½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ç´Âµï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
 {
 	/*if (FAILED(D3DXCreateFont(GET_DEVICE, pText->m_fontSize * -1, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
 		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &m_pFont)))
@@ -125,7 +125,7 @@ void CTextManager::DrawMyText(_Text* pText) // ¿©±â¼­ ÅØ½ºÃÄ¿Í ±ÛÀ»½áÁÖ¸éµÇ´Âµ¥ 
 
 	std::basic_string<WCHAR> msg = pText->m_message.c_str();
 
-	RECT rect = { _int(pText->m_position.x), _int(pText->m_position.y), 
+	RECT rect = { _int(pText->m_position.x), _int(pText->m_position.y),
 				  _int(pText->m_position.x + pText->m_boxSize.x), _int(pText->m_position.y + pText->m_boxSize.y) };
 
 	m_pFont->DrawText(NULL, msg.c_str(), -1, &rect, pText->m_alignment, pText->m_color);

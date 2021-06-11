@@ -1,4 +1,3 @@
-#pragma once
 #include "DeleGate.h"
 
 class CScene;

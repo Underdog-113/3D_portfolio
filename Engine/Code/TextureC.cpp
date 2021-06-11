@@ -1,7 +1,6 @@
 #include "EngineStdafx.h"
+#include "TextureC.h"
 #include "Object.h"
-#include "TextureStore.h"
-#include "DataStore.h"
  
 USING(Engine)
 CTextureC::CTextureC()  

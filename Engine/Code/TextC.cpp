@@ -25,7 +25,7 @@ void CTextC::Awake()
 
 	m_componentID = (_int)m_s_componentID;
 
-	AddFontResourceEx(L"..\\..\\Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
+	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
 }
 
 void CTextC::Start(SP(CComponent) spThis)
@@ -39,7 +39,7 @@ void CTextC::Start(SP(CComponent) spThis)
 
 void CTextC::FixedUpdate(SP(CComponent) spThis)
 {
-	
+
 }
 
 void CTextC::Update(SP(CComponent) spThis)
@@ -109,5 +109,5 @@ void CTextC::RenderText()
 		iter->second.m_pFont->DrawText(NULL, msg.c_str(), -1, &rect, iter->second.m_text.m_alignment, iter->second.m_text.m_color);
 	}
 
-	
+
 }

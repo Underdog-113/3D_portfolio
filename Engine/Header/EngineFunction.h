@@ -100,13 +100,14 @@ namespace Engine
 		return fileName.substr(0, lastindex);
 	}
 
-	inline constexpr unsigned int HashCode(const char* str)
+	inline char* _wstringTOpchar(std::wstring wstr)
 	{
-		return str[0] ? static_cast<unsigned int>(str[0]) + 0xEDB8832Full * HashCode(str + 1) : 8603;
-		/*
-		문자열 데이터를 정수형 데이터로 매핑하는 해시 함수
-		constexpr : 변수 또는 함수의 값을 컴파일 시점에 도출하여 상수화 시켜주는 기능
-		*/
+		size_t getVal = 0;
+		size_t len = wcslen((wchar_t*)wstr.c_str());
+		char* name = new char[2 * len + 1];
+		wcstombs_s(&getVal, name, 2 * len + 1, wstr.c_str(), _TRUNCATE);
+
+		return name;
 	}
 
 	//현재 파일 이름 따오는 함수

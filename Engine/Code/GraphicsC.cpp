@@ -1,4 +1,5 @@
 #include "EngineStdafx.h"
+#include "GraphicsC.h"
 #include "Scene.h"
 #include "WndApp.h"
 #include "DataStore.h"

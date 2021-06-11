@@ -1,8 +1,6 @@
 #include "EngineStdafx.h"
 #include "DataStore.h"
 
-#include <fstream>
-
 USING(Engine)
 
 CDataStore::_FileKeyMap* CDataStore::m_s_mpStaticDataMap = nullptr;
@@ -37,7 +35,7 @@ void CDataStore::Awake(void)
 {
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CDataStore::ParsingData, this, std::placeholders::_1, std::placeholders::_2);
-	m_resourcePath = L"..\\..\\Resource\\Data";
+	m_resourcePath = _SOLUTIONDIR L"Resource\\Data";
 }
 
 void CDataStore::OnDestroy(void)
@@ -71,7 +69,7 @@ void CDataStore::InitDataMap(_uint numOfDataID)
 	m_vHashKey.resize(numOfDataID);
 
 
-	//¿£Áø ÂÊÀÇ µ¥ÀÌÅÍ ¼½¼Ç
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	AddDataSection(L"Engine", (_uint)EDataID::Engine);
 	AddDataSection(L"Object", (_uint)EDataID::Object);
 	AddDataSection(L"Component", (_uint)EDataID::Component);
@@ -135,4 +133,3 @@ std::wstring CDataStore::GetKeyValue(const std::wstring & lineFromFile, _size sy
 {
 	return lineFromFile.substr(++symbolPos);
 }
-

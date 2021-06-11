@@ -1,10 +1,5 @@
 #include "EngineStdafx.h"
-#include "SceneManager.h"
-#include "Scene.h"
- 
-#include "MeshStore.h"
-#include "TextureStore.h"
-#include "DataStore.h"
+#include "SceneManager.h" 
 #include "Object.h"
 #include "WndApp.h"
  
