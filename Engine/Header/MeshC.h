@@ -48,7 +48,7 @@ public:
 			
 			void						OnRootMotion	(void);
 			void						OffRootMotion	(void);
-			void						ApplyRootMotion (CDynamicMeshData* pDM, _float3* rootMotionMoveAmount);
+			void						ApplyRootMotion (CDynamicMeshData* pDM);
 
 private:
 			void						RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);

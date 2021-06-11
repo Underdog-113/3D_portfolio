@@ -61,16 +61,18 @@ void CJongScene::Start(void)
 			spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
 
 			m_pivot = spEmptyObject1.get();
+
+			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
 		}
 
 		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
 
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_decl");
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
 
 			spEmptyObject->AddComponent<CFSM_KianaC>();
@@ -79,10 +81,9 @@ void CJongScene::Start(void)
 
 			m_pKiana = spEmptyObject;
 
-			m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
-
-			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject);
+			//m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
 			m_pController->AddSquadMember(m_pKiana);
+
 		}
 
 		{
@@ -111,6 +112,8 @@ void CJongScene::Update(void)
 {
 	__super::Update();  
 	m_pController->Update();
+	m_pivot->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	m_pivot->GetTransform()->SetPositionY(0.f);
 }
 
 void CJongScene::LateUpdate(void)

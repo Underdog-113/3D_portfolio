@@ -35,7 +35,7 @@ public:
 
 					void		Play				(void);
 					void		PlayFake			(void);
-					void		PlayFake_SavedTime	(void);
+					void		ChangeFakeAnimState_EndToStart(void);
 					_bool		IsItEnd				(void);
 
 					double		GetTimeline			();
@@ -58,13 +58,12 @@ private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)
 	GETTOR			(_uint,							m_fakeTrack,			0,			FakeOldTrack)
 	GETTOR			(_uint,							m_fakeIndex,			0,			FakeIndex)
-	GETTOR			(_float,						m_fakeTimer,			0.f,		FakeTimer)
-	GETTOR			(_float,						m_fakeTimerLastFrame,	0.f,		FakeTimerLastFrame)
+	GETTOR			(double,						m_fakeTimer,			0.f,		FakeTimer)
 	GETTOR			(_double,						m_fakePeriod,			0,			FakePeriod)
-	GETTOR_SETTOR	(_bool,							m_isBlending,			false,		IsBlending)
 	GETTOR			(double,						m_savedFakeAniTime,		0.f,		SavedDeltaTime)
 	GETTOR_SETTOR	(_bool,							m_isFakeAniEnd,			false,		IsFakeAniEnd)
-	GETTOR_SETTOR	(_bool,							m_isFakeAniStart,		false,		IsFakeAniStart)
+	//GETTOR_SETTOR	(_bool,							m_isFakeAniStart,		false,		IsFakeAniStart)
+	GETTOR_SETTOR	(_bool,							m_isFakeAniChange,		false,		IsFakeAniChange)
 };
 END
 

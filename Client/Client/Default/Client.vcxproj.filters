@@ -19,9 +19,6 @@
     <Filter Include="01.Scene\99.Loading">
       <UniqueIdentifier>{ea353fc7-3e80-41cf-9933-6e363a009886}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Component">
-      <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene\00.InitScene">
       <UniqueIdentifier>{d20a2dfd-4f11-4780-a070-1c3d0d6fb340}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,9 @@
     </Filter>
     <Filter Include="02.Objects\00.UI\00.Button\00.Manager">
       <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component">
+      <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +402,7 @@
     <Image Include="Honkai.ico">
       <Filter>99.Default</Filter>
     </Image>
+    <Image Include="Honkai.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Client.aps">
