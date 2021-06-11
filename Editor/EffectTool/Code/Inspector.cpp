@@ -1,4 +1,4 @@
-// ../Code/Inspector.cpp : ±¸Çö ÆÄÀÏÀÔ´Ï´Ù.
+// ../Code/Inspector.cpp : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 //
 
 #include "stdafx.h"
@@ -104,7 +104,7 @@ void CInspector::EditButtonStyle()
 
 	m_btn_SelectMode.LoadBitmaps(IDB_BITMAP_SELECTMODE);
 	m_btn_SelectMode.SizeToContent();
-	
+
 	m_btnOption.LoadBitmaps(IDB_BITMAP_OPTION);
 	m_btnOption.SizeToContent();
 
@@ -272,7 +272,7 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 END_MESSAGE_MAP()
 
 
-// CInspector Áø´ÜÀÔ´Ï´Ù.
+// CInspector ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
 #ifdef _DEBUG
 void CInspector::AssertValid() const
@@ -289,7 +289,7 @@ void CInspector::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// CInspector ¸Þ½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
+// CInspector ï¿½Þ½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
 void CInspector::OnInitialUpdate()
 {
@@ -297,24 +297,24 @@ void CInspector::OnInitialUpdate()
 
 	m_hBitmap = LoadBitmap(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MAIN_BG));
 	GetObject(m_hBitmap, sizeof(BITMAP), &m_bitmap);
-	EditButtonStyle();	
+	EditButtonStyle();
 	///////////////////////////////////////////////////
-	
+
 	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
 }
 
 void CInspector::OnPaint()
 {
 		CPaintDC dc(this); // device context for painting
-						   // TODO: ¿©±â¿¡ ¸Þ½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
-						   // ±×¸®±â ¸Þ½ÃÁö¿¡ ´ëÇØ¼­´Â CFormView::OnPaint()À»(¸¦) È£ÃâÇÏÁö ¸¶½Ê½Ã¿À.
+						   // TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½Þ½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
+						   // ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ CFormView::OnPaint()ï¿½ï¿½(ï¿½ï¿½) È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê½Ã¿ï¿½.
 
 		CRect rect;
-		GetWindowRect(&rect); // ½ºÅ©¸°°ú È£È¯µÇ´Â DC»ý¼º. 
-		HDC hMemDC = CreateCompatibleDC(dc); SetStretchBltMode(hMemDC, HALFTONE); // È£È¯DC¿¡ ºñÆ®¸ÊÀ» ¼±Á¤.
-		SelectObject(hMemDC, m_hBitmap); // ¸Þ¸ð¸® DC¿¡¼­ ½ºÅ©¸° DC·Î ÀÌ¹ÌÁö º¹»ç 
+		GetWindowRect(&rect); // ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ È£È¯ï¿½Ç´ï¿½ DCï¿½ï¿½ï¿½ï¿½.
+		HDC hMemDC = CreateCompatibleDC(dc); SetStretchBltMode(hMemDC, HALFTONE); // È£È¯DCï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		SelectObject(hMemDC, m_hBitmap); // ï¿½Þ¸ï¿½ï¿½ï¿½ DCï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ DCï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		StretchBlt(dc, 0, 0, rect.Width(), rect.Height(), hMemDC, 0, 0, m_bitmap.bmWidth, m_bitmap.bmHeight, SRCCOPY);
-		// ¸Þ¸ð¸® DC»èÁ¦
+		// ï¿½Þ¸ï¿½ï¿½ï¿½ DCï¿½ï¿½ï¿½ï¿½
 		DeleteDC(hMemDC);
 
 }
@@ -340,11 +340,11 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x ÆÄÀÏ Ç¥½Ã
 
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
+
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
-	str = InitFilePath(L"\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect");
-
-	dlg.m_ofn.lpstrInitialDir = str;
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	// IDOK = OK button is pressed in the dialog
 	if (dlg.DoModal() == IDOK)
@@ -366,11 +366,10 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
-	str = InitFilePath(L"\\Resource\\Texture\\EffectToolScene\\Static\\");
-
-	dlg.m_ofn.lpstrInitialDir = str;
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -380,7 +379,7 @@ void CInspector::OnBnClickedSoftEffect()
 		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
 
 		m_hSoftEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
-		
+
 		Add_SoftEffect(strFilePath);
 
 		InvalidateRect(false);
@@ -390,11 +389,12 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+
+	PathStripPath(lpwstr);
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
-	str = InitFilePath(L"\\Resource\\Texture\\EffectToolScene\\Static\\");
-
-	dlg.m_ofn.lpstrInitialDir = str;
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -413,15 +413,14 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	LPWSTR lpwstr = _SOLUTIONDIR L"\\Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
+
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
-	str = InitFilePath(L"\\Resource\\Texture\\EffectToolScene\\Static\\");
-
-	dlg.m_ofn.lpstrInitialDir = str;
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
 
 	if (dlg.DoModal() == IDOK)
 	{
-
 		CString strFilePath = dlg.GetPathName();
 
 		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
@@ -471,4 +470,3 @@ CString CInspector::InitFilePath(CString _filePath)
 
 	return PathName;
 }
-

@@ -1,5 +1,5 @@
 #include "EngineStdafx.h"
- 
+
 #include "DeviceManager.h"
 
 USING(Engine)
@@ -9,7 +9,6 @@ void CSoundManager::Awake(void)
 {
 	FMOD_System_Create(&m_pSystem);
 
-	// 1. 시스템 포인터, 2. 사용할 가상채널 수 , 초기화 방식) 
 	FMOD_System_Init(m_pSystem, 32, FMOD_INIT_NORMAL, NULL);
 
 	LoadSoundFile();
@@ -70,7 +69,7 @@ void CSoundManager::StartSound(TCHAR * pSoundKey, _uint ID, _float3 thisPosition
 		FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[ID]);
 		m_fVolume[ID] = 1.f;
 	}
-	// 볼륨조절
+
 	SetVolume(ID, thisPosition, otherPosition);
 }
 
@@ -159,7 +158,7 @@ void CSoundManager::VolumeIncrease(_uint ID, float fVolume)
 void CSoundManager::LoadSoundFile()
 {
 	WIN32_FIND_DATA fd;
-	std::wstring curDir = L"..\\..\\..\\Resource\\Sound";
+	std::wstring curDir = _SOLUTIONDIR L"\\Resource\\Sound";
 	std::wstring fullFilePath, curFile;
 
 	HANDLE handle = FindFirstFile((curDir + L"\\*").c_str(), &fd);
@@ -192,5 +191,3 @@ void CSoundManager::LoadSoundFile()
 
 	FMOD_System_Update(m_pSystem);
 }
-
-
