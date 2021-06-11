@@ -89,6 +89,12 @@ namespace Engine
 		NumOfCT
 	};
 
+	enum class EActorType
+	{
+		Static		= 0,
+		Dynamic		= 1
+	};
+
 	enum class ERayType
 	{
 		LIMITED,
