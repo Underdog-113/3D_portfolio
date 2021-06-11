@@ -121,8 +121,11 @@ public:
 private:
 	void Add_MeshEffect(CString ObjectName);
 	void Add_SoftEffect(CString ObjectName);
-	void Add_Texture(CString ObjectName);
-	void Add_AlphaMask(CString ObjectName);
+	void Add_Texture(CString TextureKey);
+	void Add_AlphaMask(CString TextureKey);
+
+private:
+	CString InitFilePath(CString _filePath);
 
 };
 

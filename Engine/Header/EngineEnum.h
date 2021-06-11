@@ -166,8 +166,9 @@ namespace Engine
 		DebugArrow			= 2,
 		DebugCollision		= 3,
 		Grid				= 4,
-		UI					= 5,
-		NumOfEngineLayerID  = 6
+		Effect				= 5,
+		UI					= 6,
+		NumOfEngineLayerID  = 7
 	};
 
 }

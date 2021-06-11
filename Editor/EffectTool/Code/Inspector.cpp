@@ -5,7 +5,8 @@
 #include "EffectTool.h"
 #include "../Header/Inspector.h"
 #include "MeshEffect.h"
-
+#include "Object.h"
+#include "Layer.h"
 
 // CInspector`
 
@@ -328,6 +329,9 @@ void CInspector::OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult)
 void CInspector::OnBnClickedDeleteEffectList()
 {
 	m_TreeCtrl.DeleteAllItems();
+	
+	Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->ClearLayer();
+
 	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
 }
 
@@ -335,15 +339,12 @@ void CInspector::OnBnClickedDeleteEffectList()
 void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect");
-
-	LPWSTR lpwstr = strInitPath.GetBuffer();
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
-	dlg.m_ofn.lpstrInitialDir = lpwstr;
+	str = InitFilePath(L"\\Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect");
 
-	//PathStripPath(lpwstr);
+	dlg.m_ofn.lpstrInitialDir = str;
 
 	// IDOK = OK button is pressed in the dialog
 	if (dlg.DoModal() == IDOK)
@@ -365,15 +366,11 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
-	CString strPathName = strInitPath;
-	LPWSTR lpwstr = strInitPath.GetBuffer();
-
-	//PathStripPath(lpwstr);
-
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
-	dlg.m_ofn.lpstrInitialDir = lpwstr;
+	str = InitFilePath(L"\\Resource\\Texture\\EffectToolScene\\Static\\");
+
+	dlg.m_ofn.lpstrInitialDir = str;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -393,15 +390,11 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
-	
-	LPWSTR lpwstr = strInitPath.GetBuffer();
-
-	PathStripPath(lpwstr);
-
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
-	dlg.m_ofn.lpstrInitialDir = lpwstr;
+	str = InitFilePath(L"\\Resource\\Texture\\EffectToolScene\\Static\\");
+
+	dlg.m_ofn.lpstrInitialDir = str;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -420,15 +413,11 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	CString strInitPath = _T(_SOLUTIONDIR "Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect");
-	
-	LPWSTR lpwstr = strInitPath.GetBuffer();
-
-	PathStripPath(lpwstr);
-
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
-	dlg.m_ofn.lpstrInitialDir = lpwstr;
+	str = InitFilePath(L"\\Resource\\Texture\\EffectToolScene\\Static\\");
+
+	dlg.m_ofn.lpstrInitialDir = str;
 
 	if (dlg.DoModal() == IDOK)
 	{
@@ -446,7 +435,7 @@ void CInspector::OnBnClickedAlphaMask()
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
 	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MeshEffect", false, (_int)Engine::ELayerID::NumOfEngineLayerID, L"Effect0");
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MeshEffect", false, (_int)Engine::ELayerID::Effect, L"Effect0");
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
@@ -457,11 +446,29 @@ void CInspector::Add_SoftEffect(CString ObjectName)
 {
 }
 
-void CInspector::Add_Texture(CString ObjectName)
+void CInspector::Add_Texture(CString TextureKey)
+{
+	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	{
+		obj->GetComponent<Engine::CTextureC>()->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 0);
+	}
+
+}
+
+void CInspector::Add_AlphaMask(CString TextureKey)
 {
 }
 
-void CInspector::Add_AlphaMask(CString ObjectName)
+CString CInspector::InitFilePath(CString _filePath)
 {
+	_TCHAR PathName[MAX_PATH] = L"";
+
+	GetCurrentDirectory(MAX_PATH, PathName);
+	PathRemoveFileSpec(PathName);
+	PathRemoveFileSpec(PathName);
+	PathRemoveFileSpec(PathName);
+	lstrcat(PathName, _filePath);
+
+	return PathName;
 }
 
