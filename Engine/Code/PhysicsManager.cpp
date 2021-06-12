@@ -1,8 +1,12 @@
 #include "EngineStdafx.h"
 #include "PhysicsManager.h"
-//
-//USING(Engine)
+
+USING(Engine)
 //IMPLEMENT_SINGLETON(CPhysicsManager)
+//
+//PxFilterFlags CollisionFilterShader(PxFilterObjectAttributes attributes0, PxFilterData filterData0, 
+//									PxFilterObjectAttributes attributes1, PxFilterData filterData1, 
+//									PxPairFlags & pairFlags, const void * constantBlock, PxU32 constantBlockSize);
 //
 //PxDefaultAllocator CPhysicsManager::m_s_pxAllocatorCallback = {};
 //PxDefaultErrorCallback CPhysicsManager::m_s_pxErrorCallback = {};
@@ -80,12 +84,15 @@
 //{
 //	PxRigidStatic* pStatic = PxCreateStatic(*m_pPhysics, transform, geometry, *m_pMaterial);
 //	m_pScene->addActor(*pStatic);
+//	return nullptr;
 //}
 //
 //PxRigidDynamic * CPhysicsManager::CreateDynamic(PxTransform & transform, PxGeometry & geometry, PxReal density)
 //{
 //	PxRigidDynamic* pStatic = PxCreateDynamic(*m_pPhysics, transform, geometry, *m_pMaterial, density);
 //	m_pScene->addActor(*pStatic);
+//
+//	return nullptr;
 //}
 //
 //
@@ -97,7 +104,9 @@
 //	filterData.word1 = filterMask;
 //
 //	const PxU32 numShapes = pActor->getNbShapes();
-//	PxShape** shapes = new (PxShape**)[numShapes];
+//	PxShape** shapes = new PxShape* [numShapes];
+//
+//	
 //	
 //	pActor->getShapes(shapes, numShapes);
 //	for (PxU32 i = 0; i < numShapes; ++i)

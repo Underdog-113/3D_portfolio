@@ -3,7 +3,7 @@
 
 #include "Engine.h"
 
-//BEGIN(Engine)
+BEGIN(Engine)
 //class ENGINE_DLL CPhysicsManager final : public CEngine
 //{
 //	DECLARE_SINGLETON(CPhysicsManager)
@@ -48,5 +48,5 @@
 //
 //				PxDefaultCpuDispatcher*		m_pDispatcher;
 //};
-//END
+END
 #endif
