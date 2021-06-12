@@ -234,17 +234,6 @@ void CAniCtrl::ChangeFakeAnimState_EndToStart(void)
 	m_pFakeAniCtrl->AdvanceTime(0, NULL);
 }
 
-void CAniCtrl::PlayFake_SavedTime(void)
-{
-	m_isFakeAniEnd = false;
-
-	m_pFakeAniCtrl->AdvanceTime(m_savedFakeAniTime, NULL);
-	m_fakeTimer = (_float)m_savedFakeAniTime;
-	m_savedFakeAniTime = 0.f;
-
-	m_isFakeAniStart = true;
-}
-
 _bool CAniCtrl::IsItEnd(void)
 {
 	D3DXTRACK_DESC	TrackInfo;
