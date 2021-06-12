@@ -247,6 +247,7 @@
     <Image Include="res\Speed.bmp">
       <Filter>97.Bitmap</Filter>
     </Image>
+    <Image Include="res\AnimSpeed.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">

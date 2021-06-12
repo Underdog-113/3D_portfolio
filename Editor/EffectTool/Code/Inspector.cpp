@@ -19,6 +19,7 @@ CInspector::CInspector()
 	m_ObjectTag = L"";
 	m_iSelectObjectNum = -1;
 	m_fSpeed = 0.1f;
+	m_fAnimSpeed = 1.f;
 	m_iRepeatCnt = 0;
 	m_isPlayAnim = false;
 	m_vSavePos.z = 2.f;
@@ -131,6 +132,7 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SPIN6, m_spinScaleY);
 	DDX_Control(pDX, IDC_SPIN9, m_spinScaleZ);
 	DDX_Control(pDX, IDC_BUTTON44, m_bmp_Speed);
+	DDX_Control(pDX, IDC_BUTTON45, m_bmpAnimSpeed);
 }
 
 void CInspector::EditButtonStyle()
@@ -268,6 +270,9 @@ void CInspector::EditButtonStyle()
 	m_bmp_Speed.LoadBitmaps(IDB_BITMAP_SPEED);
 	m_bmp_Speed.SizeToContent();
 
+	m_bmpAnimSpeed.LoadBitmaps(IDB_BITMAP_ANIMSPEED);
+	m_bmpAnimSpeed.SizeToContent();
+
 	// Event Button
 
 	m_btnStart.EnableWindowsTheming(FALSE);
@@ -355,6 +360,7 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN10, &CInspector::OnDeltaposSpinAlphaWidth)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN11, &CInspector::OnDeltaposSpinAlphaHeight)
 	ON_EN_CHANGE(IDC_EDIT15, &CInspector::OnEnChangeEditSpeed)
+	ON_EN_CHANGE(IDC_EDIT16, &CInspector::OnEnChangeEditAnimSpeed)
 END_MESSAGE_MAP()
 
 
@@ -828,7 +834,7 @@ void CInspector::ActionUpdate()
 	switch (m_eActionState)
 	{
 	case CInspector::PLAY:
-		if (m_iRepeatCnt < m_iRepeat)
+		if (m_iRepeatCnt < m_iRepeat || m_btnLoop.GetCheck())
 		{
 			if (!m_isPlayAnim)
 			{
@@ -889,39 +895,39 @@ void CInspector::AnimTransformUpdate(SP(Engine::CObject) spObject)
 
 	if (spObject->GetComponent<Engine::CTransformC>()->GetPosition().x <= m_vSavePos.x)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddPositionX(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddPositionX(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetPosition().y <= m_vSavePos.y)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddPositionY(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddPositionY(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetPosition().z <= m_vSavePos.z)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddPositionZ(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddPositionZ(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().x <= m_vSaveRot.x)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().y <= m_vSaveRot.y)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().z <= m_vSaveRot.z)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().x <= m_vSaveScale.x)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddSizeX(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddSizeX(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().y <= m_vSaveScale.y)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddSizeY(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddSizeY(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().z <= m_vSaveScale.z)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddSizeZ(m_fSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddSizeZ(m_fAnimSpeed * GET_DT);
 	}
 }
 
@@ -1474,4 +1480,14 @@ void CInspector::OnEnChangeEditSpeed()
 	fResizeValue = (_float)_wtof(strResizeValue.GetString());
 
 	m_fSpeed = fResizeValue;
+}
+
+void CInspector::OnEnChangeEditAnimSpeed()
+{
+	CString strResizeValue;
+	GetDlgItemText(IDC_EDIT16, strResizeValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(strResizeValue.GetString());
+
+	m_fAnimSpeed = fResizeValue;
 }

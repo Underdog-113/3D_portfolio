@@ -46,6 +46,7 @@
 #define IDB_BITMAP_WIDTH                350
 #define IDB_BITMAP_HEIGHT               351
 #define IDB_BITMAP_SPEED                355
+#define IDB_BITMAP_ANIMSPEED            356
 #define IDC_MFCBUTTON1                  1001
 #define IDC_TREE1                       1002
 #define IDC_MFCBUTTON2                  1004
@@ -131,6 +132,7 @@
 #define IDC_EDIT9                       1084
 #define IDC_SPIN2                       1085
 #define IDC_SPIN3                       1086
+#define IDC_BUTTON45                    1087
 #define IDC_SPIN4                       1088
 #define IDC_SPIN5                       1089
 #define IDC_SPIN6                       1090
@@ -148,12 +150,13 @@
 #define IDC_EDIT14                      1102
 #define IDC_SPIN14                      1103
 #define IDC_EDIT15                      1104
+#define IDC_EDIT16                      1105
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        356
+#define _APS_NEXT_RESOURCE_VALUE        357
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1088
 #define _APS_NEXT_SYMED_VALUE           311

@@ -93,6 +93,8 @@ public:
 	CBitmapButton m_bmp_AlphaWidth;
 	CBitmapButton m_bmp_AlphaHeight;
 	CBitmapButton m_bmp_Speed;
+	CBitmapButton m_bmpAnimSpeed;
+
 #pragma endregion
 
 #pragma region EventButtonName
@@ -170,6 +172,8 @@ private:
 	afx_msg void OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnEnChangeEditSpeed();
+	afx_msg void OnEnChangeEditAnimSpeed();
+
 #pragma endregion
 
 #pragma region EventVariable	
@@ -208,6 +212,7 @@ private:
 	CButton m_btnModeFadeOut;
 	CButton m_btnModeUVSprite;
 	CButton m_btnModeUVAnim;
+
 #pragma endregion
 
 #pragma region SpinCtrl
@@ -235,6 +240,7 @@ private:
 	_int m_iRepeatCnt;
 
 	_float m_fSpeed;
+	_float m_fAnimSpeed;
 	_float m_fStartTime;
 	_float m_fEndTime;
 	_float m_fAlphaWidth;
@@ -246,7 +252,6 @@ private:
 	_float3 m_vSaveRot;
 	_float3 m_vSaveScale;
 	ACTION_STATE m_eActionState;
-
 };
 
 

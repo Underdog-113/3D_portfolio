@@ -236,6 +236,7 @@
     <Image Include="res\AlphaHeight.bmp" />
     <Image Include="res\AlphaMask.bmp" />
     <Image Include="res\AlphaWidth.bmp" />
+    <Image Include="res\AnimSpeed.bmp" />
     <Image Include="res\Billboard.bmp" />
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\Delete.bmp" />
