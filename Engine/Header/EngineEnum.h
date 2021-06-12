@@ -168,12 +168,9 @@ namespace Engine
 	enum class ELayerID
 	{
 		Camera				= 0,
-		BV					= 1,
-		DebugArrow			= 2,
-		DebugCollision		= 3,
-		Grid				= 4,
-		UI					= 5,
-		NumOfEngineLayerID  = 6
+		Debug				= 1,
+		Decoration			= 2,
+		NumOfEngineLayerID  = 3
 	};
 
 }

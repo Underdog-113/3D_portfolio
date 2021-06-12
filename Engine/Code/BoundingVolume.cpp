@@ -38,7 +38,7 @@ SP(Engine::CObject) CBoundingVolume::MakeClone(void)
 void CBoundingVolume::Awake(void)
 {
 	__super::Awake();
-	m_layerID	= (_int)ELayerID::BV;
+	m_layerID	= (_int)ELayerID::Debug;
 }
 
 void CBoundingVolume::Start(void)

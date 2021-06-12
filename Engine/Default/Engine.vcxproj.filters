@@ -118,9 +118,6 @@
     <Filter Include="02.Objects\00.EmptyObject">
       <UniqueIdentifier>{cbd23a30-c754-4009-8851-6a2b11c6a611}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Camera">
-      <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Components\00.System">
       <UniqueIdentifier>{90022eaf-071b-41de-997d-8072e059f8bd}</UniqueIdentifier>
     </Filter>
@@ -150,9 +147,6 @@
     </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\03.Shader">
       <UniqueIdentifier>{279918f3-50a6-4547-8f3e-cd69539ed9b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.SkyBox">
-      <UniqueIdentifier>{b0358244-f1dc-45a3-83ba-e7623ab3a89e}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer">
       <UniqueIdentifier>{bff4821e-494a-40fe-83e0-1f608076580b}</UniqueIdentifier>
@@ -250,9 +244,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader">
       <UniqueIdentifier>{a0cbd6f2-8c7a-41e1-84b9-bf3c6e83ad29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\05.Grid">
-      <UniqueIdentifier>{e904f496-668c-40a2-acb2-3cb40d1225f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\02.ImageObject">
       <UniqueIdentifier>{b387efc0-22ae-425d-8839-3ed29247f37c}</UniqueIdentifier>
     </Filter>
@@ -262,14 +253,32 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader">
       <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\06.Slider">
-      <UniqueIdentifier>{10562c83-8778-4b99-9d76-55d4a9df9c37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
       <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX">
       <UniqueIdentifier>{18eeae3a-7185-4613-9c3b-65d04367f50b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Physics\00.PhysX\00.Manager">
+      <UniqueIdentifier>{6bfdfff4-fd1a-4e55-a118-fc63a21a7f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Physics\00.PhysX\01.Helper">
+      <UniqueIdentifier>{7fcc7115-91b0-4570-8a60-ab4c3cc27eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.DecoObject">
+      <UniqueIdentifier>{1b02dc11-2315-4209-8153-e83cb6df50b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\04.Camera">
+      <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.SkyBox">
+      <UniqueIdentifier>{b0358244-f1dc-45a3-83ba-e7623ab3a89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\06.Grid">
+      <UniqueIdentifier>{e904f496-668c-40a2-acb2-3cb40d1225f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\07.Slider">
+      <UniqueIdentifier>{10562c83-8778-4b99-9d76-55d4a9df9c37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -409,19 +418,19 @@
       <Filter>02.Objects\00.EmptyObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Grid.cpp">
-      <Filter>02.Objects\05.Grid</Filter>
+      <Filter>02.Objects\06.Grid</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FadeInOutC.cpp">
       <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Camera.cpp">
-      <Filter>02.Objects\03.Camera</Filter>
+      <Filter>02.Objects\04.Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ShaderC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SkyBox.cpp">
-      <Filter>02.Objects\04.SkyBox</Filter>
+      <Filter>02.Objects\05.SkyBox</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\VIBufferC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
@@ -496,13 +505,20 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Slider.cpp">
-      <Filter>02.Objects\06.Slider</Filter>
+      <Filter>02.Objects\07.Slider</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RootMotion.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PhysicsManager.cpp">
+      <Filter>00.Engine\02.Physics\00.PhysX\00.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PhysicsHelper.cpp" />
+    <ClCompile Include="..\Code\DecoObject.cpp">
+      <Filter>02.Objects\03.DecoObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -666,19 +682,19 @@
       <Filter>02.Objects\00.EmptyObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Grid.h">
-      <Filter>02.Objects\05.Grid</Filter>
+      <Filter>02.Objects\06.Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FadeInOutC.h">
       <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Camera.h">
-      <Filter>02.Objects\03.Camera</Filter>
+      <Filter>02.Objects\04.Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ShaderC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SkyBox.h">
-      <Filter>02.Objects\04.SkyBox</Filter>
+      <Filter>02.Objects\05.SkyBox</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\VIBufferC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
@@ -753,13 +769,20 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Slider.h">
-      <Filter>02.Objects\06.Slider</Filter>
+      <Filter>02.Objects\07.Slider</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RootMotion.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PhysicsManager.h">
+      <Filter>00.Engine\02.Physics\00.PhysX\00.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PhysicsHelper.h" />
+    <ClInclude Include="..\Header\DecoObject.h">
+      <Filter>02.Objects\03.DecoObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
