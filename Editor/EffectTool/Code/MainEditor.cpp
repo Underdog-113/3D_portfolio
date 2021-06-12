@@ -108,6 +108,7 @@ void CMainEditor::OnDestroy(void)
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
 	Engine::CPSC_Manager::GetInstance()->DestroyInstance();
+	Engine::CTextManager::GetInstance()->DestroyInstance();
 	Engine::CGraphicsManager::GetInstance()->DestroyInstance();
 }
 

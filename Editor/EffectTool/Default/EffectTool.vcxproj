@@ -263,6 +263,7 @@
     <Image Include="res\Scale.bmp" />
     <Image Include="res\SelectMode.bmp" />
     <Image Include="res\SoftEffect.bmp" />
+    <Image Include="res\Speed.bmp" />
     <Image Include="res\Start.bmp" />
     <Image Include="res\StartTime.bmp" />
     <Image Include="res\Stop.bmp" />

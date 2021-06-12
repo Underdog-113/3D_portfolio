@@ -244,6 +244,9 @@
     <Image Include="res\Honkai.ico">
       <Filter>99.Default</Filter>
     </Image>
+    <Image Include="res\Speed.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">

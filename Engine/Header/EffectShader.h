@@ -1,8 +1,23 @@
 #pragma once
-class CEffectShader
+#include "Shader.h"
+
+BEGIN(Engine)
+class CEffectShader final : public CShader
 {
-public:
+private:
 	CEffectShader();
 	~CEffectShader();
-};
 
+public:
+	static CShader* Create();
+	void Free();
+	void Awake() override;
+
+public:
+	void SetUpConstantTable(SP(CGraphicsC) spGC) override;
+
+private:
+	_float4 m_vColor;
+
+};
+END
