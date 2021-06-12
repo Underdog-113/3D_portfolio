@@ -40,7 +40,7 @@ CStaticScene::~CStaticScene()
 {
 }
 
-Engine::CScene * CStaticScene::Create(void)
+CClientScene* CStaticScene::Create(void)
 {
 	CStaticScene* pInstance = new CStaticScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);

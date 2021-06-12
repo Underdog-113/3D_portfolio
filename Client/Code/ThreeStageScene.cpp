@@ -21,7 +21,7 @@ CThreeStageScene::~CThreeStageScene()
 {
 }
 
-Engine::CScene* CThreeStageScene::Create(void)
+CClientScene* CThreeStageScene::Create(void)
 {
 	CThreeStageScene* pInstance = new CThreeStageScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -98,7 +98,7 @@ void CThreeStageScene::OnDisable(void)
 
 }
 
-void CThreeStageScene::ChangeScene(Engine::CScene * pScene)
+void CThreeStageScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

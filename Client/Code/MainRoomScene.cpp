@@ -22,7 +22,7 @@ CMainRoomScene::~CMainRoomScene()
 {
 }
 
-Engine::CScene* CMainRoomScene::Create(void)
+CClientScene* CMainRoomScene::Create(void)
 {
 	CMainRoomScene* pInstance = new CMainRoomScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -99,7 +99,7 @@ void CMainRoomScene::OnDisable(void)
 
 }
 
-void CMainRoomScene::ChangeScene(Engine::CScene * pScene)
+void CMainRoomScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

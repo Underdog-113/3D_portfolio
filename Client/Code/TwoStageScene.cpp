@@ -21,7 +21,7 @@ CTwoStageScene::~CTwoStageScene()
 {
 }
 
-Engine::CScene* CTwoStageScene::Create(void)
+CClientScene* CTwoStageScene::Create(void)
 {
 	CTwoStageScene* pInstance = new CTwoStageScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -98,7 +98,7 @@ void CTwoStageScene::OnDisable(void)
 
 }
 
-void CTwoStageScene::ChangeScene(Engine::CScene * pScene)
+void CTwoStageScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

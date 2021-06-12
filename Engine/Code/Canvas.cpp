@@ -35,7 +35,7 @@ SP(Engine::CObject) CCanvas::MakeClone(void)
 void CCanvas::Awake(void)
 {
 	__super::Awake();
-	m_layerID = (_int)ELayerID::UI;
+	m_layerID = (_int)ELayerID::Decoration;
 	m_addExtra = true;
 }
 

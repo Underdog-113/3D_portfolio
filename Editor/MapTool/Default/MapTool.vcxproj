@@ -79,8 +79,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin/Editor/MapTool/Debug/x64/</OutDir>
-    <IncludePath>$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Reference\Library\Debug\;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(SolutionDir)ExternalLibrary\PhysX\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Reference\Library\Debug\;$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)Log/Editor/MapTool/Debug/x64/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

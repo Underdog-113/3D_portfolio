@@ -37,7 +37,7 @@ SP(Engine::CObject) CSlider::MakeClone(void)
 void CSlider::Awake(void)
 {
 	__super::Awake();
-	m_layerID = (_int)ELayerID::UI;	
+	m_layerID = (_int)ELayerID::Decoration;	
 	m_addExtra = true;
 
 }	

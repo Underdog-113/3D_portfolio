@@ -1,16 +1,16 @@
 #ifndef TWOSTAGESCENE_H
 #define TWOSTAGESCENE_H
 
-#include "Scene.h"
+#include "ClientScene.h"
 class CLoading;
-class CTwoStageScene final : public Engine::CScene
+class CTwoStageScene final :public CClientScene
 {
 private:
 	explicit							CTwoStageScene(void);
 	~CTwoStageScene(void);
 
 public:
-	static			Engine::CScene*		Create(void);
+	static			CClientScene*		Create(void);
 	void				Free(void) override;
 
 	void				Awake(_int numOfLayers) override;
@@ -26,7 +26,7 @@ public:
 	void				OnDisable(void) override;
 
 public:
-	void				ChangeScene(Engine::CScene* pScene);
+	void				ChangeScene(CClientScene* pScene);
 
 private:
 	void				InitPrototypes(void) override;

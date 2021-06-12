@@ -20,7 +20,7 @@ CJongScene::~CJongScene()
 	m_pController->DestroyInstance();
 }
 
-Engine::CScene * CJongScene::Create(void)
+CClientScene* CJongScene::Create(void)
 {
 	CJongScene* pInstance = new CJongScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);

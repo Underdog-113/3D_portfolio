@@ -32,8 +32,8 @@ void CButtonFunction::MainRoomScene()
 
 void CButtonFunction::StageSelectionScene()
 {
-	CLoading::Create(CStageSelectionScene::Create(), false);
-
+	//CLoading::Create(CStageSelectionScene::Create(), false);
+	GET_CUR_CLIENT_SCENE->ChangeScene(CStageSelectionScene::Create());
 	//Engine::CSceneManager::GetInstance()->SceneChange(CStageSelectionScene::Create());
 }
 

@@ -21,7 +21,7 @@ CReadyToSortieScene::~CReadyToSortieScene()
 {
 }
 
-Engine::CScene* CReadyToSortieScene::Create(void)
+CClientScene* CReadyToSortieScene::Create(void)
 {
 	CReadyToSortieScene* pInstance = new CReadyToSortieScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -103,7 +103,7 @@ void CReadyToSortieScene::OnDisable(void)
 
 }
 
-void CReadyToSortieScene::ChangeScene(Engine::CScene * pScene)
+void CReadyToSortieScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

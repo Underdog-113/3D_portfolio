@@ -21,7 +21,7 @@ COneStageScene::~COneStageScene()
 {
 }
 
-Engine::CScene* COneStageScene::Create(void)
+CClientScene* COneStageScene::Create(void)
 {
 	COneStageScene* pInstance = new COneStageScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -98,7 +98,7 @@ void COneStageScene::OnDisable(void)
 
 }
 
-void COneStageScene::ChangeScene(Engine::CScene * pScene)
+void COneStageScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

@@ -1,17 +1,17 @@
 #ifndef JONGSCENE_H
 #define JONGSCENE_H
 
-#include "Scene.h"
+#include "ClientScene.h"
 class Engine::CObject;
 class CStageController;
-class CJongScene final : public Engine::CScene
+class CJongScene final :public CClientScene
 {
 private:
 	explicit							CJongScene			(void);
 									   ~CJongScene			(void);
 
 public:
-	static			Engine::CScene*		Create				(void);
+	static			CClientScene*		Create				(void);
 					void				Free				(void) override;
 
 					void				Awake				(_int numOfLayers) override;

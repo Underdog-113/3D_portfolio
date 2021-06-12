@@ -21,7 +21,7 @@ CPartySettingScene::~CPartySettingScene()
 {
 }
 
-Engine::CScene* CPartySettingScene::Create(void)
+CClientScene* CPartySettingScene::Create(void)
 {
 	CPartySettingScene* pInstance = new CPartySettingScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -98,7 +98,7 @@ void CPartySettingScene::OnDisable(void)
 
 }
 
-void CPartySettingScene::ChangeScene(Engine::CScene * pScene)
+void CPartySettingScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

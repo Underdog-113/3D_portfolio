@@ -23,7 +23,7 @@ CInitScene::~CInitScene()
 {
 }
 
-Engine::CScene * CInitScene::Create(void)
+CClientScene* CInitScene::Create(void)
 {
 	CInitScene* pInstance = new CInitScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);

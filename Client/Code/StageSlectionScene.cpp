@@ -21,7 +21,7 @@ CStageSelectionScene::~CStageSelectionScene()
 {
 }
 
-Engine::CScene* CStageSelectionScene::Create(void)
+CClientScene* CStageSelectionScene::Create(void)
 {
 	CStageSelectionScene* pInstance = new CStageSelectionScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -102,7 +102,7 @@ void CStageSelectionScene::OnDisable(void)
 
 }
 
-void CStageSelectionScene::ChangeScene(Engine::CScene * pScene)
+void CStageSelectionScene::ChangeScene(CClientScene* pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }

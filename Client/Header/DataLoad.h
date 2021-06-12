@@ -10,7 +10,6 @@ public:
 
 public:
 	void Setting();
-	//void(CButtonFunction::*)(), CButtonFunction*
 	void DelegatePush(void(CDataLoad::* function)(Engine::CScene*) , CDataLoad* dataload);
 	void DeleGatePop(void(CDataLoad::* function)(Engine::CScene*), CDataLoad* dataload);
 	void Load(Engine::CScene* pScene);
