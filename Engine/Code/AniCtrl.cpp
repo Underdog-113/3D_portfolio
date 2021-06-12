@@ -1,6 +1,6 @@
 ﻿#include "EngineStdafx.h"
 #include "AniCtrl.h"
- 
+
 
 
 USING(Engine)
@@ -18,7 +18,7 @@ CAniCtrl * CAniCtrl::Create(LPD3DXANIMATIONCONTROLLER pAniCtrl)
 {
 	CAniCtrl* pInstance = new CAniCtrl(pAniCtrl);
 	pInstance->Awake();
-	
+
 	return pInstance;
 }
 
@@ -69,7 +69,7 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 {
 	if (index > m_pAniCtrl->GetMaxNumAnimationSets() - 1)
 		index = 0;
-	
+
 	//if (m_curIndex == index)
 	//	return;
 
@@ -77,7 +77,7 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 		return;
 
 	_int newTrack = m_curTrack == 0 ? 1 : 0;
-	
+
 	LPD3DXANIMATIONSET pAS = NULL;
 
 	m_pAniCtrl->GetAnimationSet(index, &pAS);
@@ -111,7 +111,7 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	_int newTrack = m_curTrack == 0 ? 1 : 0;
 	LPD3DXANIMATIONSET pAS = NULL;
 	m_pAniCtrl->GetAnimationSet(m_curIndex, &pAS);
-	
+
 	if (pAS->GetName() == name)
 		return;
 
@@ -160,7 +160,7 @@ void CAniCtrl::ChangeFakeAniSet()
 	m_fakePeriod = pAnimationSet->GetPeriod();
 
 	_int newTrack = m_fakeTrack == 0 ? 1 : 0;
-	
+
 	m_pFakeAniCtrl->SetTrackAnimationSet(newTrack, pAnimationSet);
 
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(m_fakeTrack);
@@ -186,7 +186,7 @@ void CAniCtrl::ChangeFakeAniSet()
 	m_fakeTimer = 0.f;
 
 	m_pFakeAniCtrl->SetTrackPosition(newTrack, 0.0);
-	
+
 	m_fakeIndex = m_curIndex;
 	m_fakeTrack = newTrack;
 
@@ -214,7 +214,7 @@ void CAniCtrl::PlayFake()
 	_float deltaTime = GET_DT;
 	m_fakeTimer += deltaTime * m_speed;
 	if (m_fakeTimer / m_fakePeriod >= 0.99)
-	{		
+	{
 		m_isFakeAniEnd = true;
 
 		m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod * 0.99);
@@ -231,7 +231,18 @@ void CAniCtrl::ChangeFakeAnimState_EndToStart(void)
 
 	m_fakeTimer = m_fakePeriod * 0.01;
 	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakeTimer);
-	m_pFakeAniCtrl->AdvanceTime(0, NULL);	
+	m_pFakeAniCtrl->AdvanceTime(0, NULL);
+}
+
+void CAniCtrl::PlayFake_SavedTime(void)
+{
+	m_isFakeAniEnd = false;
+
+	m_pFakeAniCtrl->AdvanceTime(m_savedFakeAniTime, NULL);
+	m_fakeTimer = (_float)m_savedFakeAniTime;
+	m_savedFakeAniTime = 0.f;
+
+	m_isFakeAniStart = true;
 }
 
 _bool CAniCtrl::IsItEnd(void)

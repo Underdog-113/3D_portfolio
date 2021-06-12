@@ -44,7 +44,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		// change end -> start
 		pAniCtrl->ChangeFakeAnimState_EndToStart();
 		m_prevRootMotionPos = m_animStartOffset;
-		
+
 		// 1% ?
 		{
 			pDM->UpdateFrame();
@@ -66,7 +66,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 
 			m_prevRootMotionPos = rootMotionPos;
 		}
-		
+
 	}
 	else
 	{
@@ -158,7 +158,7 @@ _float3 CRootMotion::GetRootMotionLocalPos(CDynamicMeshData* pDM)
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
 	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
 	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
-	
+
 	return _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
 }
 

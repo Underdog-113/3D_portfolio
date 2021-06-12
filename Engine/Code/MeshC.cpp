@@ -30,7 +30,7 @@ SP(CComponent) CMeshC::MakeClone(CObject* pObject)
 	spClone->m_maxVertex	= m_maxVertex;
 	spClone->m_meshSize		= m_meshSize;
 	spClone->m_initTex		= m_initTex;
-	
+
 	return spClone;
 }
 
@@ -59,7 +59,7 @@ void CMeshC::Awake(void)
 		GenMinMaxVtx();
 
 	}
-	
+
 }
 
 void CMeshC::Start(SP(CComponent) spThis)
@@ -98,7 +98,7 @@ void CMeshC::PreRenderWire(SP(CGraphicsC) spGC)
 	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
 	pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
 	pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-	
+
 	pDevice->SetMaterial(&spGC->m_mtrl);
 }
 
@@ -167,7 +167,7 @@ void CMeshC::OnDestroy(void)
 	SAFE_DELETE(m_pRootMotion);
 
 	for (auto& meshData : m_vMeshDatas)
-		meshData->FreeClone();	
+		meshData->FreeClone();
 }
 
 void CMeshC::OnEnable(void)
@@ -185,7 +185,7 @@ void CMeshC::OnDisable(void)
 void CMeshC::AddMeshData(CMeshData * pMeshData)
 {
 	m_vMeshDatas.emplace_back(pMeshData);
-	
+
 	if (!m_vMeshDatas.empty() && m_vMeshDatas[0]->GetMeshType() == (_int)EMeshType::Dynamic)
 	{
 		m_pRootMotion = new CRootMotion;
@@ -253,14 +253,14 @@ void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM)
 	if (m_pRootMotion->GetIsRootMotion())
 	{
 		CAniCtrl* aniCtrl = pDM->GetAniCtrl();
-		
+
 		if (aniCtrl->GetIsFakeAniChange())
 		{
 			m_pRootMotion->RootMotionMove_WhileChange(m_pOwner, aniCtrl, pDM);
 		}
 		else
 		{
-			// Apply Root Motion 
+			// Apply Root Motion
 			m_pRootMotion->RootMotionMove(m_pOwner, aniCtrl, pDM);
 		}
 	}
@@ -324,7 +324,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 
 	_float3 rootMotionMoveAmount	= _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
 
-	
+
 	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
 
 	for (auto& meshContainer : pDM->GetMeshContainers())
@@ -417,4 +417,3 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	}
 
 }
-

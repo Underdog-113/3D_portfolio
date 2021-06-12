@@ -268,6 +268,9 @@
     <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
       <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\02.Physics\00.PhysX">
+      <UniqueIdentifier>{18eeae3a-7185-4613-9c3b-65d04367f50b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -471,7 +474,6 @@
     <ClCompile Include="..\Code\TextC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StaticMeshData.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClCompile>
@@ -498,6 +500,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\RootMotion.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMeshData.cpp">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -726,7 +731,6 @@
     <ClInclude Include="..\Header\TextC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\04.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StaticMeshData.h" />
     <ClInclude Include="..\Header\PSC_Manager.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Manager</Filter>
     </ClInclude>
@@ -753,6 +757,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\RootMotion.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StaticMeshData.h">
+      <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

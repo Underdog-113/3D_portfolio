@@ -43,7 +43,7 @@ void CMeshStore::Awake(void)
 {
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CMeshStore::ParsingMesh, this, std::placeholders::_1, std::placeholders::_2);
-	m_resourcePath = L"..\\..\\..\\Resource\\Mesh";
+	m_resourcePath = _SOLUTIONDIR L"Resource\\Mesh";
 }
 
 
@@ -52,7 +52,7 @@ void CMeshStore::OnDestroy(void)
 	for (auto& mesh : m_mCurSceneMeshData)
 		mesh.second->Free();
 	m_mCurSceneMeshData.clear();
-	
+
 	if (m_s_usage == 0)
 	{
 		for (auto& mesh : m_s_mStaticMeshData)
@@ -113,9 +113,9 @@ void CMeshStore::FindMeshesInSection(std::wstring sectionKey, std::vector<std::w
 void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 {
 	std::wstring fullFilePath = filePath + fileName;
-	
+
 	if (filePath.find(L"\\Static\\") != std::wstring::npos)
-	{	
+	{
 		CStaticMeshData* pNewStaticMesh = CStaticMeshData::Create(filePath, fileName);
 		pNewStaticMesh->SetSectionKey(GetLastDirName(filePath));
 		if (m_isStatic)
@@ -134,5 +134,3 @@ void CMeshStore::ParsingMesh(std::wstring filePath, std::wstring fileName)
 	}
 
 }
-
-
