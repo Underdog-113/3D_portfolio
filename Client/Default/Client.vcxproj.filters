@@ -283,6 +283,9 @@
     <ClInclude Include="..\Header\ButtonManager.h">
       <Filter>02.Objects\04.UI\00.Button\00.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ClientScene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -396,6 +399,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ButtonManager.cpp">
       <Filter>02.Objects\04.UI\00.Button\00.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ClientScene.cpp">
+      <Filter>01.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

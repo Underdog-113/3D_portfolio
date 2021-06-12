@@ -4,6 +4,8 @@ matrix		g_matProj;
 
 texture		g_BaseTexture;
 
+float4		g_addColor;
+
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
@@ -81,6 +83,8 @@ PS_OUT		PS_MAIN(PS_IN In)
 		0.f,
 		0.f);
 
+	Out.vColor += g_addColor;
+
 	return Out;
 }
 
@@ -89,7 +93,8 @@ PS_OUT		PS_ALPHA(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	Out.vColor = tex2D(BaseSampler, In.vTexUV);
-		 
+	Out.vColor += g_addColor;
+
 	return Out;
 }
 
