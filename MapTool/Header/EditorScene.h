@@ -33,6 +33,9 @@ private:
 	void GetMouseRay(_mat _targetWorldMatrix, _float3 * _pOutRayPos, _float3 * _pOutRayDir);
 	void SetInitAnimation(SP(Engine::CObject) spObj);
 
+public:
+	void CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size = { 1.f, 1.f, 1.f }, _float3 intersection = { 0.f, 0.f, 0.f });
+
 private:
 	void InitPrototypes(void) override;
 	void InputSetting();

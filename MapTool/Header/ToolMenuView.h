@@ -40,7 +40,7 @@ public:
 	void SpinBtn(LPNMUPDOWN ppNMUpDown, CEdit* pBtn, Engine::_float fVal);
 	void SetChangeMeshList(std::wstring sectionKey);
 	void SetChangeTextureList(std::wstring sectionKey);
-	void ReadFile(ELayerID layerID, std::wofstream* ofsSave);
+	void DataParsing(ELayerID layerID, std::wofstream* ofsSave);
 
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
@@ -62,21 +62,44 @@ public:
 	afx_msg void OnCbnSelchangeCombo4();
 	afx_msg void OnBnClickedCreatePrefBtn();
 	afx_msg void OnBnClickedCreateAABBColliderBtn();
+	afx_msg void OnBnClickedAddCollisionCBtn();
+	afx_msg void OnBnClickedDelAABBColliderBtn();
+	afx_msg void OnCbnSelchangeAABBList();
+	afx_msg void OnBnClickedSelectedAABBCol();
+	afx_msg void OnBnClickedModifyAABBColBtn();
+	afx_msg void OnBnClickedCreateRayColliderBtn();
+	afx_msg void OnBnClickedDelRayColliderBtn();
+	afx_msg void OnCbnSelchangeRayList();
+	afx_msg void OnBnClickedSelectedRayCol();
+	afx_msg void OnBnClickedModifyRayColBtn();
 
 private:
 	_float GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown);
 
 // add valuable
 public:
-	CButton m_initTexture;
-	CEdit m_curObjName;
-	CComboBox m_layerID;
-	_int m_culSelLayerID;
-	CComboBox m_colliderID;
-	CButton m_addCollisionC;
-	CButton m_showCol;
-	CButton m_colType[2];
-	CEdit m_aabbSize;
+	CButton m_initTexture; // inittexture checkbox
+	CButton m_showAllCol; // show All Collision
+	CButton m_colType[2]; // 0: aabb, 1: ray
+	CButton m_addColC; // 콜리전 컴포넌트 추가
+	CButton m_selectedAABBCol; // check cur selected aabb col
+	CButton m_selectedRayCol; // check cur selected ray col
+
+	CEdit m_curObjName; // cur selected object name
+	CEdit m_aabbSize; // aabb collider size
+	CEdit m_aabbOffset; // aabb collider offset
+	CEdit m_rayOffSet;
+	CEdit m_rayDir;
+	CEdit m_rayLen;
+	
+	CComboBox m_rayType; // ray col type
+	CComboBox m_layerID; // mesh layer id
+	CComboBox m_colliderID; // collider id
+	CComboBox m_aabbCnt; // cur aabb collision cnt
+	CComboBox m_rayCnt; // cur ray collision cnt
+	CButton m_renderAlpha; // alpha rendering on/off
+	
+	_int m_curSelLayerID; // cur selected layer id
 
 protected:
 	CEdit m_posX;
@@ -115,4 +138,6 @@ protected:
 	
 	GETTOR(CString, m_curSelFileName, L"", CurSelFileName);
 	GETTOR(CString, m_curSelTextureFileName, L"", CurSelTextureFileName);
+public:
+	afx_msg void OnBnClickedCreateMesh();
 };

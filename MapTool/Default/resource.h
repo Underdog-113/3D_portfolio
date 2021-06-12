@@ -28,6 +28,7 @@
 #define IDC_SPIN8                       1020
 #define IDC_SPIN9                       1021
 #define IDC_TREE1                       1022
+#define IDC_CHECK3                      1022
 #define IDC_TREE2                       1023
 #define IDC_TREE3                       1024
 #define IDC_BUTTON1                     1025
@@ -40,7 +41,6 @@
 #define IDC_CHECK1                      1033
 #define IDC_EDIT10                      1034
 #define IDC_BUTTON4                     1035
-#define IDC_CHECK3                      1036
 #define IDC_COMBO1                      1037
 #define IDC_COMBO2                      1038
 #define IDC_BUTTON5                     1039
@@ -53,17 +53,27 @@
 #define IDC_BUTTON8                     1046
 #define IDC_BUTTON9                     1047
 #define IDC_CHECK5                      1048
-#define IDC_BUTTON11                    1049
+#define IDC_BUTTON12                    1049
 #define IDC_COMBO4                      1050
 #define IDC_LIST1                       1051
-#define IDC_BUTTON12                    1052
-#define IDC_BUTTON13                    1053
+#define IDC_BUTTON13                    1052
+#define IDC_BUTTON14                    1053
 #define IDC_RADIO1                      1055
 #define IDC_RADIO2                      1056
 #define IDC_EDIT14                      1057
 #define IDC_EDIT15                      1058
 #define IDC_COMBO5                      1059
 #define IDC_COMBO6                      1060
+#define IDC_BUTTON11                    1061
+#define IDC_CHECK6                      1062
+#define IDC_CHECK7                      1063
+#define IDC_COMBO7                      1064
+#define IDC_EDIT16                      1065
+#define IDC_EDIT17                      1066
+#define IDC_BUTTON15                    1067
+#define IDC_COMBO8                      1068
+#define IDC_BUTTON16                    1069
+#define IDC_EDIT18                      1076
 
 // Next default values for new objects
 // 
@@ -71,7 +81,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        315
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1061
+#define _APS_NEXT_CONTROL_VALUE         1070
 #define _APS_NEXT_SYMED_VALUE           311
 #endif
 #endif

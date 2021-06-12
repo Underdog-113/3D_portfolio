@@ -21,6 +21,7 @@
 
 #include "DynamicMeshData.h"
 #include "DebugCollider.h"
+#include "StageController_Editor.h"
 
 #pragma region Prototypes
 #include "EmptyObject.h"
@@ -70,6 +71,7 @@ void CEditorScene::Awake(_int numOfLayers)
 	m_pMeshStore->InitMeshForScene(m_objectKey);
 	m_pTextureStore->InitTextureForScene(m_objectKey);
 
+	
 	InitPrototypes();
 
 	m_pMain = dynamic_cast<CMainFrame*>(::AfxGetApp()->GetMainWnd());
@@ -81,17 +83,15 @@ void CEditorScene::Start(void)
 {
 	__super::Start();
 
-	SP(Engine::CObject) spCube
-		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
+	SP(Engine::CObject) spBaseMap
+		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"BaseMap");
 
-	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"tes3t");
-	spCube->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spCube->AddComponent<Engine::CTextureC>()/*->AddTexture(L"Castle_wall", 0)*/;
-	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	spBaseMap->AddComponent<Engine::CMeshC>()->AddMeshData(L"Stage02_NonAlpha_Road_03_2");
+	spBaseMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spBaseMap->AddComponent<Engine::CTextureC>()/*->AddTexture(L"Castle_wall", 0)*/;
+	spBaseMap->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	spBaseMap->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	//spCube->GetTransform()->SetSize(300, 1, 300);
-	spCube->GetTransform()->SetSize(5, 5, 5);
-	spCube->GetTransform()->SetPosition(0.f, -1.f, 0.f);
 }
 
 void CEditorScene::FixedUpdate(void)
@@ -105,6 +105,7 @@ void CEditorScene::Update(void)
 	m_pMenuView->Update();
 
 	InputSetting();
+	CStageController_Editor::GetInstance()->Update();
 }
 
 void CEditorScene::LateUpdate(void)
@@ -300,6 +301,46 @@ void CEditorScene::SetInitAnimation(SP(Engine::CObject) spObj)
 		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("STAND");
 }
 
+void CEditorScene::CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size, _float3 intersection)
+{
+	std::wstring fileName(m_pMenuView->GetCurSelFileName());
+
+	SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", isStatic, (_int)layerID, objName);
+	spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
+
+	if (1 == m_pMenuView->m_initTexture.GetCheck())
+	{
+		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		spObj->AddComponent<Engine::CTextureC>();
+	}
+	else if (0 == m_pMenuView->m_initTexture.GetCheck())
+	{
+		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(false);
+		spObj->AddComponent<Engine::CTextureC>()->AddTexture(Engine::StrToWStr(CStrToStr(m_pMenuView->GetCurSelTextureFileName())), 0);
+	}
+
+	switch (m_pMenuView->m_renderAlpha.GetCheck())
+	{
+	case 0:
+		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		break;
+	case 1:
+		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+		break;
+	}
+
+	spObj->GetTransform()->SetSize(size);
+	spObj->GetTransform()->SetPosition(intersection);
+
+	SetInitAnimation(spObj);
+
+	m_pCurSelectedObject = spObj.get();
+	m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
+
+	m_pMenuView->m_renderAlpha.SetCheck(0);
+	std::cout << "Create!" << std::endl;
+}
+
 void CEditorScene::InitPrototypes(void)
 {
 	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
@@ -319,12 +360,12 @@ void CEditorScene::InputSetting()
 		if (false == m_pickingMode)
 		{
 			m_pickingMode = true;
-			std::cout << "Create Mode On" << std::endl;
+			std::cout << "Picking Mode On" << std::endl;
 		}
 		else if (true == m_pickingMode)
 		{
 			m_pickingMode = false;
-			std::cout << "Create Mode Off" << std::endl;
+			std::cout << "Picking Mode Off" << std::endl;
 		}
 	}
 
@@ -359,8 +400,6 @@ void CEditorScene::InputSetting()
 				}
 			}
 
-			std::wstring fileName(m_pMenuView->GetCurSelFileName());
-
 			CString cstr;
 			ELayerID curLayerID = ELayerID::NumOfLayerID;
 			m_pMenuView->m_layerID.GetLBText(m_pMenuView->m_layerID.GetCurSel(), cstr);
@@ -372,73 +411,15 @@ void CEditorScene::InputSetting()
 			else if (L"Map" == cstr)
 				curLayerID = ELayerID::Map;
 
-			SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)curLayerID, L"hi");
-			spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
-
-			if (1 == m_pMenuView->m_initTexture.GetCheck())
-			{
-				spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-				spObj->AddComponent<Engine::CTextureC>();
-			}
-			else if (0 == m_pMenuView->m_initTexture.GetCheck())
-			{
-				spObj->GetComponent<Engine::CMeshC>()->SetInitTex(false);
-				spObj->AddComponent<Engine::CTextureC>()->AddTexture(Engine::StrToWStr(CStrToStr(m_pMenuView->GetCurSelTextureFileName())), 0);
-			}
-
-			spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spObj->GetTransform()->SetSize(10, 10, 10);
-			spObj->GetTransform()->SetPosition(intersection);
-
-			SetInitAnimation(spObj);
-
-			m_pCurSelectedObject = spObj.get();
-			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
-
-			// add collider
-			CString cstrVal;
-			m_pMenuView->m_colliderID.GetLBText(m_pMenuView->m_colliderID.GetCurSel(), cstrVal);
-
-			std::string str = CStrToStr(cstrVal);
-			std::wstring wstr = Engine::StrToWStr(str);
-			_int colID = 0;
-
-			if (L"" == wstr)
-				return;
-			else if (L"Player" == wstr)
-				colID = (_int)EColliderID::Player;
-			else if (L"Enemy" == wstr)
-				colID = (_int)EColliderID::Enemy;
-			else if (L"Object" == wstr)
-				colID = (_int)EColliderID::Object;
-			else if (L"Map" == wstr)
-				colID = (_int)EColliderID::Map;
-
-			m_pCurSelectedObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
-			m_pCurSelectedObject->AddComponent<Engine::CDebugC>();
-
-			m_pMenuView->m_showCol.EnableWindow(true);
-			m_pMenuView->m_colType[0].EnableWindow(true);
-			m_pMenuView->m_colType[1].EnableWindow(true);
-
-			//
-			_float3 size = _float3(1, 1, 1);
-			_float3 offset = ZERO_VECTOR;
-
-			if (1 == m_pMenuView->m_colType[0].GetCheck())
-			{
-				m_pCurSelectedObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(size, offset));
-				std::cout << "add aabb collider" << std::endl;
-			}
-			else if (1 == m_pMenuView->m_colType[1].GetCheck())
-			{
-
-			}
+			CreateObject(true, curLayerID, L"hi", _float3(1.f, 1.f, 1.f), intersection);
 		//}
 	}
 
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
+		if (false == m_pickingMode)
+			return;
+
 		Engine::CObject* pTarget = nullptr;
 		_float shortLen = 1000.f;
 
@@ -447,6 +428,9 @@ void CEditorScene::InputSetting()
 			for (auto pObject : pLayer->GetGameObjects())
 			{
 				if (pObject->GetLayerID() == (_int)Engine::ELayerID::Camera)
+					continue;
+
+				if (L"DebugCollider" == pObject->GetObjectKey())
 					continue;
 
 				_float3 pickPoint = ZERO_VECTOR;
@@ -470,7 +454,7 @@ void CEditorScene::InputSetting()
 
 		if (nullptr != pTarget)
 		{
-			if (L"Cube0" == pTarget->GetName())
+			if (L"BaseMap" == pTarget->GetName())
 				return;
 
 			m_pCurSelectedObject = pTarget;
@@ -481,10 +465,42 @@ void CEditorScene::InputSetting()
 			m_pMenuView->SetRotation(m_pCurSelectedObject->GetTransform()->GetRotation());
 			m_pMenuView->SetScale(m_pCurSelectedObject->GetTransform()->GetSize());
 
-			if (nullptr == m_pCurSelectedObject->GetComponent<Engine::CCollisionC>())
-				m_pMenuView->m_addCollisionC.EnableWindow(true);
+			if (nullptr != m_pCurSelectedObject->GetComponent<Engine::CCollisionC>())
+			{
+				m_pMenuView->m_addColC.EnableWindow(false);
+				m_pMenuView->m_colType[0].EnableWindow(true);
+				m_pMenuView->m_colType[1].EnableWindow(true);
+			}
 			else
-				m_pMenuView->m_addCollisionC.EnableWindow(false);
+			{
+				m_pMenuView->m_addColC.EnableWindow(true);
+				m_pMenuView->m_colType[0].EnableWindow(false);
+				m_pMenuView->m_colType[1].EnableWindow(false);
+				m_pMenuView->m_showAllCol.EnableWindow(false);
+			}
+
+			CStageController_Editor::GetInstance()->SetCurrentActor(m_pCurSelectedObject);
+
+			m_pMenuView->m_aabbCnt.ResetContent();
+
+			// collision cnt reset
+			if (nullptr != m_pCurSelectedObject->GetComponent<Engine::CCollisionC>())
+			{
+				_int idx = 0;
+
+				auto& vCol = m_pCurSelectedObject->GetComponent<Engine::CCollisionC>()->GetColliders();
+				auto& col = vCol.begin();
+
+				for (; col != vCol.end(); ++col)
+				{
+					if (3 == (*col)->GetColliderType())
+					{
+						m_pMenuView->m_aabbCnt.AddString(IntToCStr(idx));
+					}
+					++idx;
+				}
+			}
+			m_pickingMode = false;
 		}
 	}
 
@@ -494,5 +510,12 @@ void CEditorScene::InputSetting()
 		m_pCurSelectedObject->SetDeleteThis(true);
 		std::cout << "del" << std::endl;
 		m_pCurSelectedObject = nullptr;
+	}
+
+	// delete last created object
+	if (Engine::IMKEY_DOWN(KEY_CONTROL) && Engine::IMKEY_DOWN(KEY_Z))
+	{
+		m_vLayers[(_int)ELayerID::Map]->GetGameObjects().back()->GetDeleteThis();
+		std::cout << "delete last object" << std::endl;
 	}
 }
