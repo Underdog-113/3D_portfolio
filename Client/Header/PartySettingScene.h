@@ -1,5 +1,5 @@
-#ifndef DONGSCENE_H
-#define DONGSCENE_H
+#ifndef PARTYSETTINGSCENE_H
+#define PARTYSETTINGSCENE_H
 
 #include "Scene.h"
 class CLoading;

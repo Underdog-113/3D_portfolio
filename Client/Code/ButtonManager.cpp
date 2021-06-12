@@ -7,25 +7,26 @@
 IMPLEMENT_SINGLETON(CButtonManager)
 void CButtonManager::Awake(void)
 {
-
+	m_clickButton = nullptr;
+	m_funcActivation = nullptr;
 }
 
 void CButtonManager::Update(void)
 {
-	// 버튼 누르면 색변경
-	// 버튼 때면 색변경
-
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
-		DownButtonActivation();
+		ButtonActivation(m_DownButtonList);
 	}
-	else if (Engine::IMKEY_UP(MOUSE_LEFT))
+	if (Engine::IMKEY_UP(MOUSE_LEFT))
 	{
-		UpButtonActivation();
+		ButtonActivation(m_UpButtonList);
 	}
-	else if (Engine::IMKEY_PRESS(MOUSE_LEFT))
+	if (Engine::IMKEY_PRESS(MOUSE_LEFT))
 	{
-		PressButtonActivation();
+		// 여기서 체크되는놈은 버튼의 색깔을 변경
+		// 안되는놈은 버튼의 색깔을 정상으로 변경
+
+		ButtonActivation(m_PressButtonList);
 	}
 }
 
@@ -57,8 +58,33 @@ void CButtonManager::AddButtonList(CButton* buttonObject)
 	});
 }
 
+void CButtonManager::ButtonActivation(std::list<CButton*> buttonList)
+{
+	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
-void CButtonManager::UpButtonActivation()
+	for (auto& button : buttonList)
+	{
+		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
+		{
+			if (m_funcActivation == nullptr)
+			{
+				m_funcActivation = button;
+			}
+			else if (m_funcActivation && m_funcActivation->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_funcActivation = button;
+			}
+		}
+	}
+
+	if (m_funcActivation)
+	{
+		m_funcActivation->FuncActivation();
+		m_funcActivation = nullptr;
+	}
+}
+
+void CButtonManager::ButtonDown()
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
@@ -66,34 +92,37 @@ void CButtonManager::UpButtonActivation()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FuncActivation();
+			m_clickButton = button;
 		}
 	}
-}
-
-void CButtonManager::DownButtonActivation()
-{
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 	for (auto& button : m_DownButtonList)
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FuncActivation();
+			m_clickButton = button;
 		}
 	}
-}
-
-void CButtonManager::PressButtonActivation()
-{
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 	for (auto& button : m_PressButtonList)
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FuncActivation();
+			m_clickButton = button;
 		}
+	}
+
+	if (m_clickButton)
+	{
+		// 버튼의 색깔변경
+	}
+}
+
+void CButtonManager::ButtonUp()
+{
+	if (m_clickButton)
+	{
+
 	}
 }
 

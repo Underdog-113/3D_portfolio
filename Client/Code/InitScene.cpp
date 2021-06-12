@@ -10,6 +10,8 @@
 #include "WooScene.h"
 #include "YongScene.h"
 #include "DongScene.h"
+#include "MainRoomScene.h"
+#include "OneStageScene.h"
 #pragma endregion
 
 CInitScene::CInitScene()
@@ -114,7 +116,7 @@ void CInitScene::Update(void)
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(CDongScene::Create(), false);
+				m_pLoading = CLoading::Create(CMainRoomScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))

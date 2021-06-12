@@ -55,9 +55,6 @@ void CStageSelectionScene::Start(void)
 	Load->Setting();
 	Load->Load(this);
 	delete(Load);
-
-	// (미완성)스크롤 뷰 예제
-
 }
 
 void CStageSelectionScene::FixedUpdate(void)
@@ -68,6 +65,9 @@ void CStageSelectionScene::FixedUpdate(void)
 void CStageSelectionScene::Update(void)
 {
 	__super::Update();
+
+
+
 	if (m_pLoading && m_pLoading->GetFinish())
 	{
 		Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());

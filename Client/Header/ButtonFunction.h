@@ -13,6 +13,7 @@ public:
 	void StageSelectionScene();
 	void ReadyToSortieScene();
 	void PartySettingScene();
+	void Sally();
 };
 
 #endif

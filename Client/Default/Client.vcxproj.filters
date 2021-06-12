@@ -151,6 +151,9 @@
     <Filter Include="01.Scene\06.PartySettingScene">
       <UniqueIdentifier>{868615bc-53cb-4320-9b02-5f1e19d8b082}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\07.OneScene">
+      <UniqueIdentifier>{0e8a97b7-be77-4967-b835-bcfd4312cb00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -307,6 +310,9 @@
     <ClInclude Include="..\Header\PartySettingScene.h">
       <Filter>01.Scene\06.PartySettingScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\OneStageScene.h">
+      <Filter>01.Scene\07.OneScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -435,6 +441,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PartySettingScene.cpp">
       <Filter>01.Scene\06.PartySettingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OneStageScene.cpp">
+      <Filter>01.Scene\07.OneScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

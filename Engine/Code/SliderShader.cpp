@@ -38,13 +38,6 @@ void CSliderShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	_float value = m_spSlider->GetValue();
 	_float maxValue = m_spSlider->GetMaxValue();
 
-	if (value <= 0)
-	{
-		m_spSlider->SetValue(100);
-	}
-
-	m_spSlider->SetValue(m_spSlider->GetValue() - 0.2f);
-
 	// 비율구하기
 	_float ratio = value / maxValue;
 	m_pEffect->SetFloat("g_ratio", ratio);

@@ -320,4 +320,24 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction());
 	}
+	else if (0 == function.compare(L"MainRoomScene")) // 메인씬
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"StageSelectionScene")) // 스테이지 고르는씬
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::StageSelectionScene, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"ReadyToSortieScene")) // 케릭터 프리셋
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ReadyToSortieScene, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"PartySettingScene")) //  케릭터 파티
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::PartySettingScene, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"Sally")) // 1스테이지
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
+	}
 }
