@@ -38,7 +38,8 @@ SP(Engine::CObject) CImageObject::MakeClone(void)
 void CImageObject::Awake(void)
 {
 	__super::Awake();
-	m_layerID = (_int)ELayerID::UI;	
+	m_layerID = (_int)ELayerID::Decoration;	
+	m_dataID = UNDEFINED;
 	m_addExtra = true;
 	
 	(m_spRectTex = AddComponent<CRectTexC>())->SetIsOrtho(true);

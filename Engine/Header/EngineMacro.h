@@ -24,14 +24,10 @@ if((something) != nullptr)															\
 #define ABORT 0
 #endif
 
-
-
-
 //namespace setting
 #define BEGIN(Name) namespace Name {
 #define END }
 #define USING(Name) using namespace Name;
-
 
 //SmartPointers
 #define SP(typeName) std::shared_ptr<typeName>

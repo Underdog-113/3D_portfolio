@@ -44,6 +44,7 @@ BEGIN_MESSAGE_MAP(CEffectToolView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 // CEffectToolView »ý¼º/¼Ò¸ê
@@ -174,4 +175,13 @@ void CEffectToolView::OnInitialUpdate()
 	SetTimer(0, 0, nullptr);
 
 	m_pInspectorView = dynamic_cast<CInspector*>(pMain->GetMainSplitter().GetPane(0, 1));
+
+}
+
+
+void CEffectToolView::OnTimer(UINT_PTR nIDEvent)
+{
+	InvalidateRect(nullptr, FALSE);
+
+	CView::OnTimer(nIDEvent);
 }

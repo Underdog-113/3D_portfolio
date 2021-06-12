@@ -89,6 +89,12 @@ namespace Engine
 		NumOfCT
 	};
 
+	enum class EActorType
+	{
+		Static		= 0,
+		Dynamic		= 1
+	};
+
 	enum class ERayType
 	{
 		LIMITED,
@@ -162,12 +168,9 @@ namespace Engine
 	enum class ELayerID
 	{
 		Camera				= 0,
-		BV					= 1,
-		DebugArrow			= 2,
-		DebugCollision		= 3,
-		Grid				= 4,
-		UI					= 5,
-		NumOfEngineLayerID
+		Debug				= 1,
+		Decoration			= 2,
+		NumOfEngineLayerID  = 3
 	};
 
 }

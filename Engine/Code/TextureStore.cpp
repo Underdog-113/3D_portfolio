@@ -36,7 +36,7 @@ void CTextureStore::Awake(void)
 {
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CTextureStore::ParsingTexture, this, std::placeholders::_1, std::placeholders::_2);
-	m_resourcePath = L"..\\..\\Resource\\Texture";
+	m_resourcePath = _SOLUTIONDIR L"Resource\\Texture";
 
 	m_s_mStaticTextureData[L"NoTexture"] = nullptr;
 }
@@ -80,7 +80,7 @@ _TexData* CTextureStore::GetTextureData(std::wstring textureKey)
 	auto iter_find_static = m_s_mStaticTextureData.find(textureKey);
 	if (iter_find_static != m_s_mStaticTextureData.end())
 		return iter_find_static->second;
-		
+
 	auto iter_find_cur = m_mCurSceneTextureData.find(textureKey);
 	if (iter_find_cur != m_mCurSceneTextureData.end())
 		return iter_find_cur->second;
@@ -157,7 +157,7 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 
 		pNewTex->sectionKey = sectionKey;
 
-		//AlphaÆ÷ÇÔ ÅØ½ºÃÄ
+		//Alphaï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
 		pNewTex->includeAlpha = (filePath.find(L"\\Alpha\\") != std::wstring::npos);
 		(*pCurMap)[texKey] = pNewTex;
 	}

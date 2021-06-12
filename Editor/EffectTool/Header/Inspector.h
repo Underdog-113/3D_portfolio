@@ -109,14 +109,21 @@ public:
 	CMFCButton m_btnListDelete;
 
 #pragma endregion
+	CTreeCtrl m_TreeCtrl;
 	
-	
-
 	afx_msg void OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedDeleteEffectList();
-	CTreeCtrl m_TreeCtrl;
 	afx_msg void OnBnClickedMeshEffect();
 	afx_msg void OnBnClickedSoftEffect();
+	afx_msg void OnBnClickedTexture();
+	afx_msg void OnBnClickedAlphaMask();
+
+private:
+	void Add_EffectMesh(CString ObjectName);
+	void Add_SoftEffect(CString ObjectName);
+	void Add_Texture(CString ObjectName);
+	void Add_AlphaMask(CString ObjectName);
+
 };
 
 

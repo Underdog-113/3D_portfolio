@@ -57,6 +57,12 @@
 #include "fmod.h"
 #pragma comment (lib, "fmodex64_vc.lib")
 
+#include "PxPhysicsAPI.h"
+#pragma comment(lib, "PhysX3Common_x64.lib")
+#pragma comment(lib, "PxFoundation_x64.lib")
+#pragma comment(lib, "PhysX3_x64.lib")
+using namespace physx;
+
 //프로젝트 내의 참조문서
 #include "EngineTypedef.h"
 #include "EngineDefine.h"
