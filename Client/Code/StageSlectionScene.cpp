@@ -51,31 +51,22 @@ void CStageSelectionScene::Start(void)
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
 	// 로드
+
+	// 똑같이 여기서 터짐
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->Load(this);
+	delete(Load);
 }
 
 void CStageSelectionScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-
-	if (Engine::IMKEY_DOWN(KEY_F4))
-	{
-		CDataLoad* Load = new CDataLoad();
-		Load->Setting();
-		Load->Load(this);
-		delete(Load);
-	}
 }
 
 void CStageSelectionScene::Update(void)
 {
 	__super::Update();
-
-
-
-	if (m_pLoading && m_pLoading->GetFinish())
-	{
-		Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());
-	}
 }
 
 void CStageSelectionScene::LateUpdate(void)

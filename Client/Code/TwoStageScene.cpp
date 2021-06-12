@@ -68,10 +68,7 @@ void CTwoStageScene::FixedUpdate(void)
 void CTwoStageScene::Update(void)
 {
 	__super::Update();
-	if (m_pLoading && m_pLoading->GetFinish())
-	{
-		Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());
-	}
+
 }
 
 void CTwoStageScene::LateUpdate(void)

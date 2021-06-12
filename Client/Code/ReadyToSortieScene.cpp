@@ -52,13 +52,11 @@ void CReadyToSortieScene::Start(void)
 
 	// 로드
 
-	if (Engine::IMKEY_DOWN(KEY_F4))
-	{
 		CDataLoad* Load = new CDataLoad();
 		Load->Setting();
 		Load->Load(this);
 		delete(Load);
-	}
+
 
 	// (미완성)스크롤 뷰 예제
 
@@ -73,10 +71,6 @@ void CReadyToSortieScene::FixedUpdate(void)
 void CReadyToSortieScene::Update(void)
 {
 	__super::Update();
-	if (m_pLoading && m_pLoading->GetFinish())
-	{
-		Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());
-	}
 }
 
 void CReadyToSortieScene::LateUpdate(void)
