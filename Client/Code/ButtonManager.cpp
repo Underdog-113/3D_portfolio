@@ -15,17 +15,16 @@ void CButtonManager::Update(void)
 {
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
+		ButtonDown();
 		ButtonActivation(m_DownButtonList);
 	}
 	if (Engine::IMKEY_UP(MOUSE_LEFT))
 	{
+		ButtonUp();
 		ButtonActivation(m_UpButtonList);
 	}
 	if (Engine::IMKEY_PRESS(MOUSE_LEFT))
 	{
-		// 여기서 체크되는놈은 버튼의 색깔을 변경
-		// 안되는놈은 버튼의 색깔을 정상으로 변경
-
 		ButtonActivation(m_PressButtonList);
 	}
 }
@@ -92,7 +91,14 @@ void CButtonManager::ButtonDown()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			m_clickButton = button;
+			if (m_clickButton == nullptr)
+			{
+				m_clickButton = button;
+			}
+			else if (m_clickButton && m_clickButton->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_clickButton = button;
+			}
 		}
 	}
 
@@ -100,7 +106,14 @@ void CButtonManager::ButtonDown()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			m_clickButton = button;
+			if (m_clickButton == nullptr)
+			{
+				m_clickButton = button;
+			}
+			else if (m_clickButton && m_clickButton->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_clickButton = button;
+			}
 		}
 	}
 
@@ -108,13 +121,20 @@ void CButtonManager::ButtonDown()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			m_clickButton = button;
+			if (m_clickButton == nullptr)
+			{
+				m_clickButton = button;
+			}
+			else if (m_clickButton && m_clickButton->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_clickButton = button;
+			}
 		}
 	}
 
 	if (m_clickButton)
 	{
-		// 버튼의 색깔변경
+		m_clickButton->ButtonPressed();
 	}
 }
 
@@ -122,7 +142,8 @@ void CButtonManager::ButtonUp()
 {
 	if (m_clickButton)
 	{
-
+		m_clickButton->ButtonNormal();
+		m_clickButton = nullptr;
 	}
 }
 

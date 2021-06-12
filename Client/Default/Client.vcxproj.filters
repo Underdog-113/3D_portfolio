@@ -154,6 +154,18 @@
     <Filter Include="01.Scene\07.OneScene">
       <UniqueIdentifier>{0e8a97b7-be77-4967-b835-bcfd4312cb00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI">
+      <UniqueIdentifier>{74c69358-8003-42b4-a2dc-a91c3f202cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\00.UIAnim">
+      <UniqueIdentifier>{ea37f30c-07d1-458c-a0a4-1f95b3d7a338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\08.TwoScene">
+      <UniqueIdentifier>{a116fce7-6e13-4e41-8062-5ed5451f91d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\10.ThreeScene">
+      <UniqueIdentifier>{d67c2f1d-fb09-4f2f-9502-c67a4d39baff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -313,6 +325,15 @@
     <ClInclude Include="..\Header\OneStageScene.h">
       <Filter>01.Scene\07.OneScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\UiAnimCtrC.h">
+      <Filter>03.Component\00.UI\00.UIAnim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStageScene.h">
+      <Filter>01.Scene\08.TwoScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ThreeStageScene.h">
+      <Filter>01.Scene\10.ThreeScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -444,6 +465,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\OneStageScene.cpp">
       <Filter>01.Scene\07.OneScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UiAnimCtrC.cpp">
+      <Filter>03.Component\00.UI\00.UIAnim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStageScene.cpp">
+      <Filter>01.Scene\08.TwoScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ThreeStageScene.cpp">
+      <Filter>01.Scene\10.ThreeScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

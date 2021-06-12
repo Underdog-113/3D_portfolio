@@ -1,8 +1,7 @@
 #include "stdafx.h"
-#include "MainRoomScene.h"
+#include "ThreeStageScene.h"
 
 #include "Loading.h"
-#include "StageSelectionScene.h"
 
 #include "ImageObject.h"
 #include "Button.h"
@@ -13,36 +12,36 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
-CMainRoomScene::CMainRoomScene()
+CThreeStageScene::CThreeStageScene()
 {
 }
 
 
-CMainRoomScene::~CMainRoomScene()
+CThreeStageScene::~CThreeStageScene()
 {
 }
 
-Engine::CScene* CMainRoomScene::Create(void)
+Engine::CScene* CThreeStageScene::Create(void)
 {
-	CMainRoomScene* pInstance = new CMainRoomScene;
+	CThreeStageScene* pInstance = new CThreeStageScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
 
 	return pInstance;
 }
 
-void CMainRoomScene::Free(void)
+void CThreeStageScene::Free(void)
 {
 	OnDestroy();
 	delete this;
 }
 
-void CMainRoomScene::Awake(_int numOfLayers)
+void CThreeStageScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	InitPrototypes();
 }
 
-void CMainRoomScene::Start(void)
+void CThreeStageScene::Start(void)
 {
 	__super::Start();
 
@@ -61,12 +60,12 @@ void CMainRoomScene::Start(void)
 
 }
 
-void CMainRoomScene::FixedUpdate(void)
+void CThreeStageScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 }
 
-void CMainRoomScene::Update(void)
+void CThreeStageScene::Update(void)
 {
 	__super::Update();
 	if (m_pLoading && m_pLoading->GetFinish())
@@ -75,35 +74,35 @@ void CMainRoomScene::Update(void)
 	}
 }
 
-void CMainRoomScene::LateUpdate(void)
+void CThreeStageScene::LateUpdate(void)
 {
 	__super::LateUpdate();
 
 }
 
-void CMainRoomScene::OnDestroy(void)
+void CThreeStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
 }
 
-void CMainRoomScene::OnEnable(void)
+void CThreeStageScene::OnEnable(void)
 {
 	__super::OnEnable();
 
 }
 
-void CMainRoomScene::OnDisable(void)
+void CThreeStageScene::OnDisable(void)
 {
 	__super::OnDisable();
 
 }
 
-void CMainRoomScene::ChangeScene(Engine::CScene * pScene)
+void CThreeStageScene::ChangeScene(Engine::CScene * pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }
 
-void CMainRoomScene::InitPrototypes(void)
+void CThreeStageScene::InitPrototypes(void)
 {
 }

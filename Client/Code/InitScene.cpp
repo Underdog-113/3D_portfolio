@@ -11,7 +11,7 @@
 #include "YongScene.h"
 #include "DongScene.h"
 #include "MainRoomScene.h"
-#include "OneStageScene.h"
+#include "StageSelectionScene.h"
 #pragma endregion
 
 CInitScene::CInitScene()

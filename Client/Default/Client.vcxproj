@@ -224,6 +224,9 @@
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\ThreeStageScene.h" />
+    <ClInclude Include="..\Header\TwoStageScene.h" />
+    <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
@@ -272,6 +275,9 @@
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\ThreeStageScene.cpp" />
+    <ClCompile Include="..\Code\TwoStageScene.cpp" />
+    <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageController.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />

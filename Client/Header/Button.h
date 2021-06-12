@@ -35,6 +35,8 @@ public:
 	void SetBasicName(void) override;
 
 	void FuncActivation();
+	void ButtonPressed();
+	void ButtonNormal();
 
 	template<typename Function, typename Object>
 	void AddFuncData(Function function, Object object)

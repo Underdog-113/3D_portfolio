@@ -125,3 +125,13 @@ void CButton::FuncActivation()
 {
 	m_functionGate();
 }
+
+void CButton::ButtonPressed()
+{
+	m_spTexture->SetTexIndex(1);
+}
+
+void CButton::ButtonNormal()
+{
+	m_spTexture->SetTexIndex(0);
+}

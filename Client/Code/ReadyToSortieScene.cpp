@@ -51,10 +51,14 @@ void CReadyToSortieScene::Start(void)
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
 	// 로드
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->Load(this);
-	delete(Load);
+
+	if (Engine::IMKEY_DOWN(KEY_F4))
+	{
+		CDataLoad* Load = new CDataLoad();
+		Load->Setting();
+		Load->Load(this);
+		delete(Load);
+	}
 
 	// (미완성)스크롤 뷰 예제
 
@@ -63,6 +67,7 @@ void CReadyToSortieScene::Start(void)
 void CReadyToSortieScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+
 }
 
 void CReadyToSortieScene::Update(void)

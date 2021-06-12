@@ -51,15 +51,19 @@ void CStageSelectionScene::Start(void)
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
 	// ·Îµå
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->Load(this);
-	delete(Load);
 }
 
 void CStageSelectionScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+
+	if (Engine::IMKEY_DOWN(KEY_F4))
+	{
+		CDataLoad* Load = new CDataLoad();
+		Load->Setting();
+		Load->Load(this);
+		delete(Load);
+	}
 }
 
 void CStageSelectionScene::Update(void)

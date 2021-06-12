@@ -1,8 +1,7 @@
 #include "stdafx.h"
-#include "MainRoomScene.h"
+#include "TwoStageScene.h"
 
 #include "Loading.h"
-#include "StageSelectionScene.h"
 
 #include "ImageObject.h"
 #include "Button.h"
@@ -13,36 +12,36 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
-CMainRoomScene::CMainRoomScene()
+CTwoStageScene::CTwoStageScene()
 {
 }
 
 
-CMainRoomScene::~CMainRoomScene()
+CTwoStageScene::~CTwoStageScene()
 {
 }
 
-Engine::CScene* CMainRoomScene::Create(void)
+Engine::CScene* CTwoStageScene::Create(void)
 {
-	CMainRoomScene* pInstance = new CMainRoomScene;
+	CTwoStageScene* pInstance = new CTwoStageScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
 
 	return pInstance;
 }
 
-void CMainRoomScene::Free(void)
+void CTwoStageScene::Free(void)
 {
 	OnDestroy();
 	delete this;
 }
 
-void CMainRoomScene::Awake(_int numOfLayers)
+void CTwoStageScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	InitPrototypes();
 }
 
-void CMainRoomScene::Start(void)
+void CTwoStageScene::Start(void)
 {
 	__super::Start();
 
@@ -61,12 +60,12 @@ void CMainRoomScene::Start(void)
 
 }
 
-void CMainRoomScene::FixedUpdate(void)
+void CTwoStageScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 }
 
-void CMainRoomScene::Update(void)
+void CTwoStageScene::Update(void)
 {
 	__super::Update();
 	if (m_pLoading && m_pLoading->GetFinish())
@@ -75,35 +74,35 @@ void CMainRoomScene::Update(void)
 	}
 }
 
-void CMainRoomScene::LateUpdate(void)
+void CTwoStageScene::LateUpdate(void)
 {
 	__super::LateUpdate();
 
 }
 
-void CMainRoomScene::OnDestroy(void)
+void CTwoStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
 }
 
-void CMainRoomScene::OnEnable(void)
+void CTwoStageScene::OnEnable(void)
 {
 	__super::OnEnable();
 
 }
 
-void CMainRoomScene::OnDisable(void)
+void CTwoStageScene::OnDisable(void)
 {
 	__super::OnDisable();
 
 }
 
-void CMainRoomScene::ChangeScene(Engine::CScene * pScene)
+void CTwoStageScene::ChangeScene(Engine::CScene * pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);
 }
 
-void CMainRoomScene::InitPrototypes(void)
+void CTwoStageScene::InitPrototypes(void)
 {
 }

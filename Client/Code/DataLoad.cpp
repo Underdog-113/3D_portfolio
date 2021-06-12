@@ -2,6 +2,8 @@
 #include "DataLoad.h"
 #include "DataStore.h"
 
+#include "UiAnimCtrC.h"
+
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -89,17 +91,34 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
 
-		if (name == L"Not")
+		if (name != L"Not")
 		{
-			continue;
+			dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
+			dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
+			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
+			//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", color);
+			fontPosition.y *= -1;
+			image->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 		}
 
-		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
-		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
-		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", color);
-		fontPosition.y *= -1;
-		image->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0,0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+		_int animCount;
+		dataStore->GetValue(false, dataID, objectKey, key + L"AnimCount", animCount);
+
+		if (animCount > 0)
+		{
+			image->AddComponent<CUiAnimCtrC>()->SetAnimCount(animCount);
+
+			_float animSpeed;
+			dataStore->GetValue(false, dataID, objectKey, key + L"AnimSpeed", animSpeed);
+			image->GetComponent<CUiAnimCtrC>()->SetAnimSpeed(animSpeed);
+			for (int j = 0; j < animCount; j++)
+			{
+				dataStore->GetValue(false, dataID, objectKey, key + L"AnimName" + std::to_wstring(j), textureKey);
+
+				image->GetTexture()->AddTexture(textureKey, 0);
+			}
+		}
+
 	}
 }
 
@@ -205,6 +224,10 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		std::wstring textureKey;
 		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
 		button->GetTexture()->AddTexture(textureKey, 0);
+
+		std::wstring pressedTextureKey;
+		dataStore->GetValue(false, dataID, objectKey, key + L"pressedTextureKey", pressedTextureKey);
+		button->GetTexture()->AddTexture(pressedTextureKey, 0);
 
 		std::wstring buttonfunction;
 		dataStore->GetValue(false, dataID, objectKey, key + L"buttonFunction", buttonfunction);
