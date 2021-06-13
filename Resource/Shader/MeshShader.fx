@@ -31,7 +31,6 @@ struct VS_OUT
 };
 
 // 버텍스쉐이더
-
 VS_OUT		VS_MAIN(VS_IN In)
 {
 	VS_OUT		Out = (VS_OUT)0;

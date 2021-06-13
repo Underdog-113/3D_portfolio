@@ -90,6 +90,7 @@ using namespace physx;
 #include "ShaderManager.h"
 #include "LightManager.h"
 #include "RenderTargetManager.h"
+#include "PhysicsManager.h"
 
 //ETC
 #include "MathHelper.h"

@@ -1,9 +1,10 @@
 #ifndef PHYSICSMANAGER_H
 #define PHYSICSMANAGER_H
 
-#include "Engine.h"
-
-BEGIN(Engine)
+//#include "Engine.h"
+//
+//BEGIN(Engine)
+//class CSimulationEventCallback;
 //class ENGINE_DLL CPhysicsManager final : public CEngine
 //{
 //	DECLARE_SINGLETON(CPhysicsManager)
@@ -13,8 +14,6 @@ BEGIN(Engine)
 //				void						Start				(void);
 //
 //				void						FixedUpdate			(void);
-//				void						Update				(void);
-//				void						LateUpdate			(void);	
 //
 //				void						OnDestroy			(void);
 //
@@ -23,19 +22,16 @@ BEGIN(Engine)
 //
 //
 //public:
-//				PxRigidStatic*				CreateStatic		(PxTransform& transform, PxGeometry& geometry, PxReal density);
-//				PxRigidDynamic*				CreateDynamic		(PxTransform& transform, PxGeometry& geometry, PxReal density);
-//
-//
+//				void						AddActor			(PxActor* pActor);
+//				void						RemoveActor			(PxActor* pActor);
 //
 //private:
-//				//PxFilterFlags				CollisionFilterShader		(PxFilterObjectAttributes attributes0, PxFilterData filterData0,
-//				//														 PxFilterObjectAttributes attributes1, PxFilterData filterData1,
-//				//														 PxPairFlags& pairFlags, const void* constantBlock, PxU32 constantBlockSize);
-//
 //				void						SetupFiltering				(PxRigidActor* pActor, PxU32 filterGroup, PxU32 filterMask);
 //
 //private:
+//	typedef		std::vector<PxActor*> _ACTORS;
+//				_ACTORS						m_vActors;
+//
 //	static		PxDefaultAllocator			m_s_pxAllocatorCallback;
 //	static		PxDefaultErrorCallback		m_s_pxErrorCallback;
 //
@@ -46,7 +42,9 @@ BEGIN(Engine)
 //				PxScene*					m_pScene;
 //				PxMaterial*					m_pMaterial;
 //
+//				CSimulationEventCallback*	m_pSimulationEventCallback;
+//
 //				PxDefaultCpuDispatcher*		m_pDispatcher;
 //};
-END
+//END
 #endif

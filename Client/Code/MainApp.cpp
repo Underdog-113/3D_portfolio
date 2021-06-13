@@ -53,7 +53,7 @@ void CMainApp::Start(void)
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CPSC_Manager::GetInstance()->Start();
-	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CCollisionManager::GetInstance()->Start((_int)ECollisionID::NumOfColliderID);
 	Engine::CRenderTargetManager::GetInstance()->Start();
 }
 

@@ -1,15 +1,18 @@
 #include "EngineStdafx.h"
 #include "PhysicsManager.h"
-
-USING(Engine)
+#include "SimulationEventCallback.h"
+//
+//USING(Engine)
 //IMPLEMENT_SINGLETON(CPhysicsManager)
 //
-//PxFilterFlags CollisionFilterShader(PxFilterObjectAttributes attributes0, PxFilterData filterData0, 
-//									PxFilterObjectAttributes attributes1, PxFilterData filterData1, 
+//PxFilterFlags CollisionFilterShader(PxFilterObjectAttributes attributes0, PxFilterData filterData0,
+//									PxFilterObjectAttributes attributes1, PxFilterData filterData1,
 //									PxPairFlags & pairFlags, const void * constantBlock, PxU32 constantBlockSize);
 //
-//PxDefaultAllocator CPhysicsManager::m_s_pxAllocatorCallback = {};
-//PxDefaultErrorCallback CPhysicsManager::m_s_pxErrorCallback = {};
+//PxDefaultAllocator		CPhysicsManager::m_s_pxAllocatorCallback	= {};
+//PxDefaultErrorCallback	CPhysicsManager::m_s_pxErrorCallback		= {};
+//
+//
 //void CPhysicsManager::Awake(void)
 //{
 //	m_pFoundation = PxCreateFoundation(PX_FOUNDATION_VERSION, m_s_pxAllocatorCallback, m_s_pxErrorCallback);
@@ -41,15 +44,20 @@ USING(Engine)
 //		ABORT;
 //	}
 //
+//	m_pSimulationEventCallback = new CSimulationEventCallback;
+//
 //	m_pDispatcher = PxDefaultCpuDispatcherCreate(2);
 //
 //	PxSceneDesc sceneDesc(m_pPhysics->getTolerancesScale());
 //	sceneDesc.gravity = PxVec3(0, -9.81f, 0);
 //	sceneDesc.cpuDispatcher = m_pDispatcher;
 //	sceneDesc.filterShader = CollisionFilterShader;
+//	sceneDesc.simulationEventCallback = m_pSimulationEventCallback;
+//	sceneDesc.flags |= PxSceneFlag::eENABLE_CCD;
 //	m_pScene = m_pPhysics->createScene(sceneDesc);
+//
+//
 //	m_pMaterial = m_pPhysics->createMaterial(0.5f, 0.5f, 0.6f);
-//	
 //}
 //
 //void CPhysicsManager::Start(void)
@@ -58,18 +66,13 @@ USING(Engine)
 //
 //void CPhysicsManager::FixedUpdate(void)
 //{
-//}
-//
-//void CPhysicsManager::Update(void)
-//{
-//}
-//
-//void CPhysicsManager::LateUpdate(void)
-//{
+//	m_pScene->simulate(GET_DT);
 //}
 //
 //void CPhysicsManager::OnDestroy(void)
 //{
+//	m_pPhysics->release();
+//	m_pFoundation->release();
 //}
 //
 //void CPhysicsManager::OnEnable(void)
@@ -80,19 +83,26 @@ USING(Engine)
 //{
 //}
 //
-//PxRigidStatic * CPhysicsManager::CreateStatic(PxTransform & transform, PxGeometry & geometry, PxReal density)
+//void CPhysicsManager::AddActor(PxActor * pActor)
 //{
-//	PxRigidStatic* pStatic = PxCreateStatic(*m_pPhysics, transform, geometry, *m_pMaterial);
-//	m_pScene->addActor(*pStatic);
-//	return nullptr;
+//	m_vActors.emplace_back(pActor);
+//	m_pScene->addActor(*pActor);
 //}
 //
-//PxRigidDynamic * CPhysicsManager::CreateDynamic(PxTransform & transform, PxGeometry & geometry, PxReal density)
+//void CPhysicsManager::RemoveActor(PxActor * pActor)
 //{
-//	PxRigidDynamic* pStatic = PxCreateDynamic(*m_pPhysics, transform, geometry, *m_pMaterial, density);
-//	m_pScene->addActor(*pStatic);
+//	for (auto& iter = m_vActors.begin(); iter != m_vActors.end(); ++iter)
+//	{
+//		if ((*iter) == pActor)
+//		{
+//			m_vActors.erase(iter);
+//			break;
+//		}
+//	}
 //
-//	return nullptr;
+//	m_pScene->removeActor(*pActor);
+//
+//	
 //}
 //
 //
@@ -104,10 +114,10 @@ USING(Engine)
 //	filterData.word1 = filterMask;
 //
 //	const PxU32 numShapes = pActor->getNbShapes();
-//	PxShape** shapes = new PxShape* [numShapes];
+//	PxShape** shapes = new PxShape*[numShapes];
 //
-//	
-//	
+//
+//
 //	pActor->getShapes(shapes, numShapes);
 //	for (PxU32 i = 0; i < numShapes; ++i)
 //	{
@@ -115,24 +125,36 @@ USING(Engine)
 //		shape->setSimulationFilterData(filterData);
 //	}
 //
-//	delete [] shapes;
+//	delete[] shapes;
 //}
 //
 //
-//PxFilterFlags CollisionFilterShader(PxFilterObjectAttributes attributes0, PxFilterData filterData0, 
-//									PxFilterObjectAttributes attributes1, PxFilterData filterData1, 
+//PxFilterFlags CollisionFilterShader(PxFilterObjectAttributes attributes0, PxFilterData filterData0,
+//									PxFilterObjectAttributes attributes1, PxFilterData filterData1,
 //									PxPairFlags & pairFlags, const void * constantBlock, PxU32 constantBlockSize)
 //{
+//	if (!(filterData0.word0 & filterData1.word1) || !(filterData0.word1 & filterData1.word0))
+//		return PxFilterFlag::eKILL;
+//
 //	if (PxFilterObjectIsTrigger(attributes0) || PxFilterObjectIsTrigger(attributes1))
 //	{
-//		pairFlags = PxPairFlag::eTRIGGER_DEFAULT;
+//		pairFlags	= PxPairFlag::eNOTIFY_TOUCH_FOUND
+//					| PxPairFlag::eNOTIFY_TOUCH_LOST
+//					| PxPairFlag::eDETECT_DISCRETE_CONTACT
+//					| PxPairFlag::eNOTIFY_CONTACT_POINTS;
+//					
 //		return PxFilterFlag::eDEFAULT;
 //	}
+//	else
+//	{
+//		pairFlags	= PxPairFlag::eSOLVE_CONTACT
+//					| PxPairFlag::eNOTIFY_TOUCH_FOUND
+//					| PxPairFlag::eNOTIFY_TOUCH_LOST
+//					| PxPairFlag::eDETECT_DISCRETE_CONTACT
+//					| PxPairFlag::eNOTIFY_CONTACT_POINTS
+//					| PxPairFlag::ePOST_SOLVER_VELOCITY;
 //
-//	pairFlags = PxPairFlag::eCONTACT_DEFAULT;
-//
-//	if ((filterData0.word0 & filterData1.word1) && (filterData0.word1 & filterData1.word0))
-//		pairFlags |= PxPairFlag::eNOTIFY_TOUCH_FOUND;
-//
-//	return PxFilterFlag::eDEFAULT;
+//		return PxFilterFlag::eDEFAULT;
+//	}
 //}
+//
