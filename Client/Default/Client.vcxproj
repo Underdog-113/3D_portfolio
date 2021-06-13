@@ -191,6 +191,8 @@
     <ClInclude Include="..\Header\ClientScene.h" />
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
+    <ClInclude Include="..\Header\DamageFontC.h" />
+    <ClInclude Include="..\Header\DamageObjectPool.h" />
     <ClInclude Include="..\Header\DataLoad.h" />
     <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
@@ -243,6 +245,8 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
+    <ClCompile Include="..\Code\DamageFontC.cpp" />
+    <ClCompile Include="..\Code\DamageObjectPool.cpp" />
     <ClCompile Include="..\Code\DataLoad.cpp" />
     <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />

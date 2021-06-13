@@ -39,19 +39,23 @@ void CUiAnimCtrC::FixedUpdate(SP(CComponent) spThis)
 
 void CUiAnimCtrC::Update(SP(CComponent) spThis)
 {
-	m_time -= GET_DT;
-
-	if (m_time <= 0)
+	if (m_play)
 	{
-		m_curAnimValue++;
-		GetOwner()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_curAnimValue);
+		m_time -= GET_DT;
 
-		if (m_curAnimValue == m_animCount)
+		if (m_time <= 0)
 		{
-			m_curAnimValue = 0;
-		}
+			if (m_curAnimValue == m_animCount)
+			{
+				m_curAnimValue = 0;
+				m_play = m_repeat;
+			}
 
-		m_time = m_animSpeed;
+			m_curAnimValue++;
+			GetOwner()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_curAnimValue);
+
+			m_time = m_animSpeed;
+		}
 	}
 }
 
@@ -72,4 +76,9 @@ void CUiAnimCtrC::OnEnable()
 void CUiAnimCtrC::OnDisable()
 {
 	__super::OnDisable();
+}
+
+void CUiAnimCtrC::Play()
+{
+	m_play = true;
 }

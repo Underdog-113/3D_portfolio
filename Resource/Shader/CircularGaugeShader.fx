@@ -66,21 +66,20 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	Out.vColor = tex2D(BaseSampler, In.vTexUV);
 
-	if (g_direction == 0)
+
+/*
+	float2 d = 2.0 * In.vTexUV - float2(1.0, 1.0); // 중앙을 0,0으로 만든다음에 자신의 픽셀과 거리를 구한다.
+	float r = length(d); // 백터의길이
+	if (r <= 0.75) // 자신의 길이가 중심보다 0.75이상이라면 그리지않게 하기 위해서
 	{
-		if (In.vTexUV.x >= g_ratio)
+		highp float a = atan2(d.x, -d.y); // 여기부터 다시 이해해보자
+		if (angleBase <= a && a <= angle) 
 		{
-			Out.vColor.a = 0;
+			highp float p = (a - angleBase) / (angle - angleBase);
+			gl_FragColor = vec4(0.0, 0.0, p, p) * qt_Opacity;
 		}
 	}
-	else if (g_direction == 1) 
-	{
-		float value = 1 - In.vTexUV.x;
-		if (value >= g_ratio)
-		{
-			Out.vColor.a = 0;
-		}
-	}
+	*/
 
 	return Out;
 }

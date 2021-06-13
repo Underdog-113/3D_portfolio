@@ -1,5 +1,4 @@
-float		g_ratio;
-int			g_direction;
+float		g_alphaValue;
 
 matrix		g_matWorld;			// 상수 테이블
 matrix		g_matView;
@@ -65,22 +64,7 @@ PS_OUT PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	Out.vColor = tex2D(BaseSampler, In.vTexUV);
-
-	if (g_direction == 0)
-	{
-		if (In.vTexUV.x >= g_ratio)
-		{
-			Out.vColor.a = 0;
-		}
-	}
-	else if (g_direction == 1) 
-	{
-		float value = 1 - In.vTexUV.x;
-		if (value >= g_ratio)
-		{
-			Out.vColor.a = 0;
-		}
-	}
+	Out.vColor.a = g_alphaValue;
 
 	return Out;
 }

@@ -12,6 +12,8 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+
+#include  "DamageObjectPool.h"
 CDongScene::CDongScene()
 {
 }
@@ -45,19 +47,56 @@ void CDongScene::Start(void)
 {
 	__super::Start();
 
-	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+	{
+		SP(Engine::CSlider) slider =
+			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
+		slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
+		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
 
-	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+		SP(Engine::CImageObject) background =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
+		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		background->GetTransform()->SetSize(_float3(104, 104, 0));
+		background->GetTexture()->AddTexture(L"AvatarButtonFrame", 0);
 
-	// 로드
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->Load(this);
-	delete(Load);
+		SP(Engine::CImageObject) fill =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
+		fill->SetParent(slider.get());
+		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + _float3(3.2f, -0.28f, -0.9f));
+		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
+		fill->GetTransform()->SetSize(_float3(106, 98, 0));
+		fill->GetTransform()->SetRotationZ(-43.186f);
+		fill->GetTexture()->AddTexture(L"AvatarButtonHP_Bar", 0);
+		fill->AddComponent<Engine::CShaderC>()->
+			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
 
-	// (미완성)스크롤 뷰 예제
+		slider->AddSliderData(100, 100, background, fill);
+	}
 
+	{
+		SP(Engine::CSlider) slider =
+			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
+		slider->GetTransform()->SetPosition(_float3(-150, 100, 0.0f));
+		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
+
+		SP(Engine::CImageObject) background =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
+		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		background->GetTransform()->SetSize(_float3(132, 13, 0));
+		background->GetTexture()->AddTexture(L"BarHp", 0);
+
+		SP(Engine::CImageObject) fill =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
+		fill->SetParent(slider.get());
+		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
+		fill->GetTransform()->SetSize(_float3(128, 9, 0));
+		fill->GetTexture()->AddTexture(L"BarHpFill", 0);
+		fill->AddComponent<Engine::CShaderC>()->
+			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+
+		slider->AddSliderData(100, 100, background, fill);
+	}
 }
 
 void CDongScene::FixedUpdate(void)
@@ -219,5 +258,23 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 {
 	SP(Engine::CCanvas) canvas =
 		std::dynamic_pointer_cast<Engine::CCanvas>(ADD_CLONE(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
+}
+*/
+
+
+// 데미지 폰트 띄우기
+/*
+void CDongScene::Start(void)
+{
+__super::Start();
+//ObjectPool
+CDamageObjectPool::GetInstance()->Start(this);
+
+Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+
+SP(Engine::CObject) spEmpty =
+ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+
+CDamageObjectPool::GetInstance()->AddDamage(_float3(0, 0, 0), _float3(36, 51, 0), 36, 80.0f, 1, 123456789, L"Blue");
 }
 */

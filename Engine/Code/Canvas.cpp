@@ -10,6 +10,7 @@ CCanvas::CCanvas()
 
 CCanvas::~CCanvas()
 {
+	OnDestroy();
 }
 
 SP(CCanvas) CCanvas::Create(_bool isStatic, CScene * pScene)
@@ -81,6 +82,8 @@ void CCanvas::PostRender(void)
 void CCanvas::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	m_spObjectList.clear();
 }
 
 void CCanvas::OnEnable(void)
@@ -122,7 +125,7 @@ void CCanvas::AddObjectFind()
 			std::wstring name = object->GetName().substr(0, strSize);
 			if (m_name == name)
 			{
-				m_spObjectList.emplace_back(object);
+				m_spObjectList.emplace_back(object.get());
 			}
 		}
 	}

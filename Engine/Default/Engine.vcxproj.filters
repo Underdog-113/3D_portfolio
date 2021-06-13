@@ -250,9 +250,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader">
       <UniqueIdentifier>{e0a4cbc0-854b-497c-8a96-a265f9a9d3bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader">
-      <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
       <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
     </Filter>
@@ -282,6 +279,15 @@
     </Filter>
     <Filter Include="02.Objects\08.Canvas">
       <UniqueIdentifier>{1f60c323-b978-4fff-8b21-93c40dc736d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader">
+      <UniqueIdentifier>{dce0bdcb-930f-4ac9-ad24-e314c663d1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.ClicularGaugeShader">
+      <UniqueIdentifier>{e2f325c3-162e-4767-b024-f5942030016b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\99.SkyBoxShader">
+      <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -525,6 +531,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Canvas.cpp">
       <Filter>02.Objects\08.Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DamageFontShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ClicularGaugeShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.ClicularGaugeShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -793,6 +805,12 @@
     <ClInclude Include="..\Header\Canvas.h">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DamageFontShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClicularGaugeShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.ClicularGaugeShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -812,6 +830,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.ClicularGaugeShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

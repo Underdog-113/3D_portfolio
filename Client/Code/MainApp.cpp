@@ -6,6 +6,10 @@
 #include "InitScene.h"
 #pragma endregion
 
+#pragma region objectpool
+#include "DamageObjectPool.h"
+#pragma endregion
+
 #pragma region Prototypes
 #include "Camera.h"
 #pragma endregion
@@ -81,6 +85,7 @@ void CMainApp::Update(void)
 	Engine::CCameraManager::GetInstance()->Update();
 	Engine::CGraphicsManager::GetInstance()->Update();
 
+	CDamageObjectPool::GetInstance()->Update();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -90,9 +95,6 @@ void CMainApp::LateUpdate(void)
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
 		_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
-
-		std::cout << mousePos.x << std::endl;
-		std::cout << mousePos.y << std::endl;
 	}
 
 	Engine::TIME_MEASURE_START;
@@ -165,6 +167,9 @@ void CMainApp::OnDestroy(void)
 	
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
+
+	//Object Pool
+	CDamageObjectPool::GetInstance()->DestroyInstance();
 }
 
 void CMainApp::OnEnable(void)

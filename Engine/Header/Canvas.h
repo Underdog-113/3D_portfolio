@@ -39,7 +39,7 @@ private:
 private:
 	static _uint m_s_uniqueID;
 
-	std::list<SP(CObject)> m_spObjectList;
+	std::list<CObject*> m_spObjectList;
 };
 END
 #endif

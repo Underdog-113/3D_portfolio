@@ -103,6 +103,7 @@ void CButton::OnDestroy(void)
 {
 	__super::OnDestroy();
 	m_functionGate.clear();
+	//delete(&m_functionGate);
 }
 
 void CButton::OnEnable(void)

@@ -74,7 +74,10 @@ namespace Engine
 		Shader_Shade	= 3,
 		Shader_Blend	= 4,
 		Shader_Skybox	= 5,*/
-		NumOfShaderID	= 6
+		DamageFont				= 6,
+		ClicularGaugeShader     = 7,
+		NumOfShaderID	= 8
+
 	};
 #pragma endregion
 

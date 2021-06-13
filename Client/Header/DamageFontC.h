@@ -1,12 +1,12 @@
-#ifndef UIANIMCTRCOMPONENT_H
-#define UIANIMCTRCOMPONENT_H
+#ifndef DAMAGEFONTCOMPONENT_H
+#define DAMAGEFONTCOMPONENT_H
 
 #include "Component.h"
-class CUiAnimCtrC  final : public Engine::CComponent
+class CDamageFontC  final : public Engine::CComponent
 {
 public:
-	explicit CUiAnimCtrC();
-	~CUiAnimCtrC();
+	explicit CDamageFontC();
+	~CDamageFontC();
 
 	// CComponent을(를) 통해 상속됨
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
@@ -19,17 +19,14 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
-	void Play();
+	void AddDamageFontInit(_float upSpped, _float enableTime, _int damage, std::wstring color);
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	GETTOR_SETTOR(_int, m_animCount, 0, AnimCount);
-	GETTOR_SETTOR(_bool, m_repeat, true, Repeat);
-	_bool m_play;
-	_int m_curAnimValue;
-	GETTOR_SETTOR(std::list<_float3>, m_position, {}, Position)
-	GETTOR_SETTOR(_float, m_animSpeed, 0, AnimSpeed);
-	_float m_time;
+	_int m_damage;
+	_float m_upSpeed;
+	_float m_enableTime;
+	_float m_oldEnableTime;
 };
 #endif
 

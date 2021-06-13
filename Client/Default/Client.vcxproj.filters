@@ -49,9 +49,6 @@
     <Filter Include="05.DeleGate">
       <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Function">
-      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.MapObject">
       <UniqueIdentifier>{1aed8968-743a-41bb-bd4b-c90e7b4a9d44}</UniqueIdentifier>
     </Filter>
@@ -174,6 +171,12 @@
     </Filter>
     <Filter Include="02.Objects\04.UI\00.Button\01.ButtonFunction">
       <UniqueIdentifier>{464f8c91-9342-46e2-9ebe-0835071d6f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\01.DamageFont">
+      <UniqueIdentifier>{a40c77e0-746c-40d5-9c6b-b0345658c678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07.ObjectPool">
+      <UniqueIdentifier>{f7a06db0-e904-473b-8888-0d563d3e7216}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +349,12 @@
     <ClInclude Include="..\Header\ButtonFunction.h">
       <Filter>02.Objects\04.UI\00.Button\01.ButtonFunction</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DamageFontC.h">
+      <Filter>03.Component\00.UI\01.DamageFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DamageObjectPool.h">
+      <Filter>07.ObjectPool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -489,6 +498,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\DataLoad.cpp">
       <Filter>06.DataLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DamageFontC.cpp">
+      <Filter>03.Component\00.UI\01.DamageFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DamageObjectPool.cpp">
+      <Filter>07.ObjectPool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
