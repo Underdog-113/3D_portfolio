@@ -61,6 +61,8 @@
 #pragma comment(lib, "PhysX3Common_x64.lib")
 #pragma comment(lib, "PxFoundation_x64.lib")
 #pragma comment(lib, "PhysX3_x64.lib")
+#pragma comment(lib, "PhysX3Extensions.lib")
+#pragma comment(lib, "PhysX3CharacterKinematic_x64.lib")
 using namespace physx;
 
 //프로젝트 내의 참조문서
@@ -88,6 +90,7 @@ using namespace physx;
 #include "ShaderManager.h"
 #include "LightManager.h"
 #include "RenderTargetManager.h"
+#include "PhysicsManager.h"
 
 //ETC
 #include "MathHelper.h"

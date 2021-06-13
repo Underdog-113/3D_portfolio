@@ -75,10 +75,6 @@ void CDongScene::FixedUpdate(void)
 void CDongScene::Update(void)
 {
 	__super::Update();
-	if (m_pLoading && m_pLoading->GetFinish())
-	{
-		Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());
-	}
 }
 
 void CDongScene::LateUpdate(void)
@@ -103,11 +99,6 @@ void CDongScene::OnDisable(void)
 {
 	__super::OnDisable();
 
-}
-
-void CDongScene::ChangeScene(Engine::CScene * pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
 }
 
 void CDongScene::InitPrototypes(void)

@@ -16,7 +16,7 @@
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerEnvironment>PATH=$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)Reference\Library\Release\;%PATH% $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH=$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(SolutionDir)Reference\Library\Release\;%PATH% $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

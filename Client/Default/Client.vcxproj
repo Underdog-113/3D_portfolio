@@ -169,7 +169,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_SOLUTIONDIR = LR"($(SolutionDir))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_SOLUTIONDIR=LR"($(SolutionDir))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Code/;../Header/;$(SolutionDir)Reference/Header/</AdditionalIncludeDirectories>
     </ClCompile>
@@ -189,6 +189,7 @@
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
     <ClInclude Include="..\Header\ClientMacro.h" />
+    <ClInclude Include="..\Header\ClientScene.h" />
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
     <ClInclude Include="..\Header\DeleGate.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
+    <ClCompile Include="..\Code\ClientScene.cpp" />
     <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
     <ClCompile Include="..\Code\FSM_AxeC.cpp" />
