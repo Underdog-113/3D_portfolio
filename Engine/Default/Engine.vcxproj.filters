@@ -259,6 +259,9 @@
     <Filter Include="00.Engine\02.Physics\00.PhysX">
       <UniqueIdentifier>{18eeae3a-7185-4613-9c3b-65d04367f50b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
+      <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
+        </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX\00.Manager">
       <UniqueIdentifier>{6bfdfff4-fd1a-4e55-a118-fc63a21a7f7c}</UniqueIdentifier>
     </Filter>
@@ -512,6 +515,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\RootMotion.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
@@ -781,6 +787,9 @@
     <ClInclude Include="..\Header\RootMotion.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\EffectShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
@@ -814,6 +823,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
