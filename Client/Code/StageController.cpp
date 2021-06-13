@@ -20,7 +20,6 @@ void CStageController::Awake(void)
 void CStageController::Start(void)
 {
 	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
-	m_spCurActor = m_vSquad[Actor];
 }
 
 
@@ -42,6 +41,8 @@ void CStageController::AddSquadMember(SP(Engine::CObject) pCharacter)
 	}
 
 	m_vSquad.emplace_back(pCharacter);
+
+	m_spCurActor = m_vSquad[Actor];
 }
 
 

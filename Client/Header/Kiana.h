@@ -1,37 +1,48 @@
 #pragma once
-#include "Object.h"
-class Kiana final : public Engine::CObject
+#ifndef KIANA_H
+#define KIANA_H
+
+#include "Valkyrie.h"
+
+class CFSM_KianaC;
+class CKiana final : public CValkyrie
 {
 	SMART_DELETER_REGISTER
 
-public:
-	Kiana();
-	~Kiana();
+private:
+	CKiana();
+	~CKiana();
 
 public:
-	virtual			SP(CObject)		MakeClone			(void) override;
+	static			SP(CKiana)				Create(_bool isStatic, Engine::CScene* pScene);
+
+public:
+					SP(Engine::CObject)		MakeClone			(void) override;
 		
-	virtual			void			Awake				(void) override;
-	virtual			void			Start				(void) override;
-	
-	virtual			void			FixedUpdate			(void) override;
-	virtual			void			Update				(void) override;
-	virtual			void			LateUpdate			(void) override;
+					void					Awake				(void) override;
+					void					Start				(void) override;
+		
+					void					FixedUpdate			(void) override;
+					void					Update				(void) override;
+					void					LateUpdate			(void) override;
 
-	virtual			void			PreRender			(void) {}
-	virtual			void			PreRender			(LPD3DXEFFECT pEffect) {}
+					void					PreRender			(void) override;
+					void					PreRender			(LPD3DXEFFECT pEffect) override;
 
-	virtual			void			Render				(void) {}
-	virtual			void			Render				(LPD3DXEFFECT pEffect) {}
+					void					Render				(void) override;
+					void					Render				(LPD3DXEFFECT pEffect) override;
 
-	virtual			void			PostRender			(void) {}
-	virtual			void			PostRender			(LPD3DXEFFECT pEffect) {}
-	
-	virtual			void			OnDestroy			(void) override;
-	
-	virtual			void			OnEnable			(void) override;
-	virtual			void			OnDisable			(void) override;
+					void					PostRender			(void) override;
+					void					PostRender			(LPD3DXEFFECT pEffect) override;
+		
+					void					OnDestroy			(void) override;
+		
+					void					OnEnable			(void) override;
+					void					OnDisable			(void) override;
 
 public:
-	virtual			void			SetBasicName		(void) override;
+					void					SetBasicName		(void) override;
+
 };
+
+#endif

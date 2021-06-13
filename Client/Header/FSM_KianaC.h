@@ -2,7 +2,7 @@
 #include "StateMachine.h"
 #define Cool_Attack				0.2f
 #define Cool_BranchAttack		0.35f
-#define Cool_BranchAttack3to4	0.4f
+#define Cool_BranchAttack3to4	0.3f
 #define Cool_Evade				0.2f
 #define Cool_End				0.75f
 
@@ -25,6 +25,7 @@ public:
 	void Start(SP(CComponent) spThis) override;
 
 private:
+	void RegisterAllState();
 	void FixRootMotionOffset(_uint index);
 
 private: /* Normal Actions */
@@ -41,6 +42,7 @@ private: /* Normal Actions */
 
 private: /* Special Actions */
 	bool CheckAction_BranchAttack();
+	bool CheckAction_RunBS_To_Run();
 
 
 private:
@@ -227,11 +229,11 @@ public:
 	void Run_Enter(void);
 	void Run_Update(float deltaTime);
 	void Run_End(void);
-	////RunBS  
-	//void Jump_00_Init(void);
-	//void Jump_00_Enter(void);
-	//void Jump_00_Update(float deltaTime);
-	//void Jump_00_End(void);
+	//RunBS  
+	void RunBS_Init(void);
+	void RunBS_Enter(void);
+	void RunBS_Update(float deltaTime);
+	void RunBS_End(void);
 	////RunStopLeft  
 	void RunStopLeft_Init(void);
 	void RunStopLeft_Enter(void);

@@ -13,12 +13,39 @@ CFSM_KianaC::CFSM_KianaC()
 
 SP(Engine::CComponent) CFSM_KianaC::MakeClone(Engine::CObject * pObject)
 {
-	SP(CStateMachineC) spClone = MakeStateMachineClone<CFSM_KianaC>(pObject);
+	//SP(CFSM_KianaC) spClone = MakeStateMachineClone<CFSM_KianaC>(pObject);
+
+	SP(CFSM_KianaC) spClone(new CFSM_KianaC);
+
+	__super::InitClone(spClone, pObject);
+
+	for (auto pState : m_stateList)
+	{
+		spClone->m_stateList.emplace(pState.first, pState.second->MakeClone(spClone.get()));
+	}
 
 	return spClone;
 }
 
 void CFSM_KianaC::Awake(void)
+{
+	__super::Awake();	
+}
+
+void CFSM_KianaC::Start(SP(CComponent) spThis)
+{
+	RegisterAllState();
+
+	__super::Start(spThis);
+
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pStageController = CStageController::GetInstance();
+
+	SetStartState(L"StandBy");
+	m_curState->DoEnter();
+}
+
+void CFSM_KianaC::RegisterAllState()
 {
 	Engine::CState* pState;
 
@@ -88,20 +115,17 @@ void CFSM_KianaC::Awake(void)
 	CreateState(CFSM_KianaC, pState, Run)
 		AddState(pState, Name_Run);
 
+	CreateState(CFSM_KianaC, pState, RunBS)
+		AddState(pState, Name_RunBS);
+
+	CreateState(CFSM_KianaC, pState, RunStopLeft)
+		AddState(pState, Name_RunStopLeft);
+
+	CreateState(CFSM_KianaC, pState, RunStopRight)
+		AddState(pState, Name_RunStopRight);
+	
 	CreateState(CFSM_KianaC, pState, StandBy)
 		AddState(pState, Name_StandBy);
-
-
-	__super::Awake();
-}
-
-void CFSM_KianaC::Start(SP(CComponent) spThis)
-{
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-	m_pStageController = CStageController::GetInstance();
-
-	SetStartState(L"StandBy");
-	__super::Start(spThis);
 }
 
 void CFSM_KianaC::FixRootMotionOffset(_uint index)
@@ -182,7 +206,7 @@ bool CFSM_KianaC::CheckAction_Run()
 		Engine::IMKEY_PRESS(StageKey_Move_Back) ||
 		Engine::IMKEY_PRESS(StageKey_Move_Right))
 	{
-		ChangeState(Name_Run);
+		ChangeState(Name_RunBS);
 		return true;
 	}
 
@@ -245,6 +269,16 @@ bool CFSM_KianaC::CheckAction_BranchAttack()
 			return true;
 	}
 
+	return false;
+}
+
+bool CFSM_KianaC::CheckAction_RunBS_To_Run()
+{
+	if (m_pDM->GetAniTimeline() > Cool_End)
+	{
+		ChangeState(Name_Run);
+		return true;
+	}
 	return false;
 }
 
@@ -819,7 +853,6 @@ void CFSM_KianaC::Run_Update(float deltaTime)
 {
 	if (CheckAction_StandBy())
 		return;
-
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
 		return;
 	if (CheckAction_EvadeForward())
@@ -827,6 +860,64 @@ void CFSM_KianaC::Run_Update(float deltaTime)
 }
 
 void CFSM_KianaC::Run_End(void)
+{
+}
+
+void CFSM_KianaC::RunBS_Init(void)
+{
+}
+
+void CFSM_KianaC::RunBS_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_RunBS);
+}
+
+void CFSM_KianaC::RunBS_Update(float deltaTime)
+{
+	if (CheckAction_StandBy())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_EvadeForward())
+		return;
+}
+
+void CFSM_KianaC::RunBS_End(void)
+{
+}
+
+void CFSM_KianaC::RunStopLeft_Init(void)
+{
+}
+
+void CFSM_KianaC::RunStopLeft_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_RunStopLeft);
+}
+
+void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
+{
+	if (CheckAction_StandBy())
+		return;
+}
+
+void CFSM_KianaC::RunStopLeft_End(void)
+{
+}
+
+void CFSM_KianaC::RunStopRight_Init(void)
+{
+}
+
+void CFSM_KianaC::RunStopRight_Enter(void)
+{
+}
+
+void CFSM_KianaC::RunStopRight_Update(float deltaTime)
+{
+}
+
+void CFSM_KianaC::RunStopRight_End(void)
 {
 }
 
@@ -871,6 +962,15 @@ void CFSM_KianaC::SwitchOut_Enter(void)
 
 void CFSM_KianaC::SwitchOut_Update(float deltaTime)
 {
+	if (CheckAction_RunBS_To_Run())
+		return;
+
+	if (CheckAction_StandBy())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_EvadeForward())
+		return;
 }
 
 void CFSM_KianaC::SwitchOut_End(void)

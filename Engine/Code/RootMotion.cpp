@@ -2,6 +2,7 @@
 #include "RootMotion.h"
 
 #include "AniCtrl.h"
+#include "DynamicMeshData.h"
 
 USING(Engine)
 
@@ -16,104 +17,127 @@ CRootMotion::~CRootMotion()
 		delete[] m_pIsFixRootMotionOffsets;
 }
 
-void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl)
+CRootMotion * CRootMotion::MakeClone(void)
 {
-	// root motion
-	_float3 ownerSize = pOwner->GetTransform()->GetSize();
+	CRootMotion* pClone = new CRootMotion;
 
-	_float3 ownerForward = pOwner->GetTransform()->GetForward();
-	ownerForward.y = 0.f;
-	D3DXVec3Normalize(&ownerForward, &ownerForward);
+	pClone->m_pIsFixRootMotionOffsets = m_pIsFixRootMotionOffsets;
+	return pClone;
+}
 
-	_float3 sizedRootMotionPos = 
-		_float3(
-			m_rootMotionPos.x * ownerSize.x,
-			0.f,//m_rootMotionPos.y * ownerSize.y,
-			m_rootMotionPos.z * ownerSize.z);
-	
-
-	_float3 sizedLocalStartOffset =
-		_float3(
-			m_rootMotionOffset.x * ownerSize.x,
-			0.f,//m_rootMotionOffset.y * ownerSize.y,
-			m_rootMotionOffset.z * ownerSize.z);
-
-	float moveDir = (sizedRootMotionPos.z - m_prevSizedRootMotionPos.z) > 0.f ? 1.f : -1.f;
-	ownerForward *= moveDir;
-
-	// change anim
-	if (m_prevFakeIndex != pAniCtrl->GetFakeIndex())
-	{
-		if (!m_pIsFixRootMotionOffsets[pAniCtrl->GetFakeIndex()])
-		{
-			m_prevSizedRootMotionPos = ZERO_VECTOR;
-		}
-
-
-		m_prevFakeIndex = pAniCtrl->GetFakeIndex();
-		return;
-	}
-
-	//if (pAniCtrl->GetIsFakeAniEnd())
-	//{
-	//	/*
-	//	pOwner->GetTransform()->AddPosition(m_animEndPos);
-	//	m_animStartPos = _float3(m_animEndPos.x - sizedOffset.x, 0.f, m_animEndPos.z - sizedOffset.z);
-	//	m_animEndPos = m_animStartPos + sizedPos;
-
-	//	pOwner->GetTransform()->SetPosition(m_animEndPos);
-
-	//	m_prevTimeLine = 0;
-	//	pAniCtrl->SetIsFakeAniEnd(false);
-	//	*/
-
-	//	// loop
-	//	_float3 curOwnerPos = pOwner->GetTransform()->GetPosition();
-	//	curOwnerPos.y = 0.f;
-
-	//	_float3 moveAmount = sizedRootMotionPos - m_prevSizedRootMotionPos;
-	//	_float3 forwardMoveAmount = ownerForward * D3DXVec3Length(&moveAmount);
-	//	_float3 worldOffset = ownerForward * D3DXVec3Length(&sizedLocalStartOffset);
-
-	//	pOwner->GetTransform()->SetPosition(curOwnerPos + forwardMoveAmount - worldOffset);
-	//			
-	//	pAniCtrl->SetIsFakeAniEnd(false);
-	//	pAniCtrl->PlayFake_SavedTime();
-	//}
-	//else
-	//{
-	//	_float3 moveAmount = sizedRootMotionPos - m_prevSizedRootMotionPos;
-	//	_float3 forwardMoveAmount = ownerForward * D3DXVec3Length(&moveAmount);
-	//	pOwner->GetTransform()->AddPosition(forwardMoveAmount);
-	//}
-
-	if (pAniCtrl->GetIsFakeAniStart())
-	{
-		// loop
-		_float3 curOwnerPos = pOwner->GetTransform()->GetPosition();
-		curOwnerPos.y = 0.f;
-
-		_float3 worldOffset = ownerForward * D3DXVec3Length(&sizedLocalStartOffset);
-		pOwner->GetTransform()->SetPosition(curOwnerPos - worldOffset);
-		m_startWorldOffset = worldOffset;
-				
-		pAniCtrl->SetIsFakeAniStart(false);
-	}
-
-	_float3 moveAmount = sizedRootMotionPos - m_prevSizedRootMotionPos;
-	_float3 forwardMoveAmount = ownerForward * D3DXVec3Length(&moveAmount);
-	pOwner->GetTransform()->AddPosition(forwardMoveAmount);
-
-	m_prevSizedRootMotionPos = sizedRootMotionPos;
+void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamicMeshData* pDM)
+{
+	pAniCtrl->PlayFake();
 
 	if (pAniCtrl->GetIsFakeAniEnd())
 	{
-		_float3 worldOffset = ownerForward * D3DXVec3Length(&sizedLocalStartOffset);
-		m_endWorldOffset = worldOffset;
+		// 99% ?
+		{
+			pDM->UpdateFrame();
+			_float3 rootMotionPos = GetRootMotionLocalPos(pDM);
+			rootMotionPos = GetOwnerSizedPos(pOwner, rootMotionPos);
 
-		m_prevSizedRootMotionPos = ZERO_VECTOR;
-		pAniCtrl->PlayFake_SavedTime();
+			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
+			moveAmount.y = 0.f;
+			_float3 moveForward = pOwner->GetTransform()->GetForward();
+			moveForward.y = 0.f;
+			D3DXVec3Normalize(&moveForward, &moveForward);
+
+			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
+			forwardMove = GetOwnerSizedPos(pOwner, forwardMove);
+			pOwner->GetTransform()->AddPosition(forwardMove);
+			pOwner->GetTransform()->SetPositionY(rootMotionPos.y);
+
+		}
+		// change end -> start
+		pAniCtrl->ChangeFakeAnimState_EndToStart();
+		m_prevRootMotionPos = m_animStartOffset;
+
+		// 1% ?
+		{
+			pDM->UpdateFrame();
+
+			_float3 rootMotionPos = GetRootMotionLocalPos(pDM);
+			rootMotionPos = GetOwnerSizedPos(pOwner, rootMotionPos);
+
+			float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
+			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
+			moveAmount.y = 0.f;
+			_float3 moveForward = pOwner->GetTransform()->GetForward();
+			moveForward.y = 0.f;
+			D3DXVec3Normalize(&moveForward, &moveForward);
+
+			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
+			forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
+			pOwner->GetTransform()->AddPosition(forwardMove);
+			pOwner->GetTransform()->SetPositionY(rootMotionPos.y);
+
+			m_prevRootMotionPos = rootMotionPos;
+		}
+
 	}
+	else
+	{
+		// Loop
+
+		pDM->UpdateFrame();
+
+		_float3 rootMotionPos = GetRootMotionLocalPos(pDM);
+
+		float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
+		_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
+		moveAmount.y = 0.f;
+		_float3 moveForward = pOwner->GetTransform()->GetForward();
+		moveForward.y = 0.f;
+		D3DXVec3Normalize(&moveForward, &moveForward);
+
+		_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
+		forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
+		pOwner->GetTransform()->AddPosition(forwardMove);
+		pOwner->GetTransform()->SetPositionY(rootMotionPos.y);
+
+		m_prevRootMotionPos = rootMotionPos;
+	}
+
+}
+
+void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamicMeshData * pDM)
+{
+	// change
+
+	if (!m_pIsFixRootMotionOffsets[pAniCtrl->GetFakeIndex()])
+	{
+		// none fix
+		pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod() * 0.01, NULL);
+		//pAniCtrl->GetFakeAniCtrl()->AdvanceTime(0, NULL);
+		pDM->UpdateFrame();
+		_float3 rootMotionPos = GetRootMotionLocalPos(pDM);
+		m_animStartOffset = rootMotionPos;
+		m_prevRootMotionPos = m_animStartOffset;
+	}
+
+	// update frame
+
+	pAniCtrl->PlayFake();
+	pDM->UpdateFrame();
+	_float3 rootMotionPos = GetRootMotionLocalPos(pDM);
+
+	float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
+	_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
+	moveAmount.y = 0.f;
+	_float3 moveForward = pOwner->GetTransform()->GetForward();
+	moveForward.y = 0.f;
+	D3DXVec3Normalize(&moveForward, &moveForward);
+
+	_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
+	forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
+	pOwner->GetTransform()->AddPosition(forwardMove);
+	pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+
+	m_prevRootMotionPos = rootMotionPos;
+
+
+	pAniCtrl->SetIsFakeAniChange(false);
 }
 
 void CRootMotion::OnFixRootMotionOffset(_uint index)
@@ -134,4 +158,23 @@ void CRootMotion::CreateFixOffsetArray(_uint size)
 	{
 		m_pIsFixRootMotionOffsets[i] = false;
 	}
+}
+
+_float3 CRootMotion::GetRootMotionLocalPos(CDynamicMeshData* pDM)
+{
+	_mat makeMeshLookAtMe;
+	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+	return _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
+}
+
+_float3 CRootMotion::GetOwnerSizedPos(CObject * pOwner, _float3 pos)
+{
+	_float3 size = pOwner->GetTransform()->GetSize();
+	return _float3(
+		pos.x * size.x,
+		pos.y * size.y,
+		pos.z * size.z);
 }

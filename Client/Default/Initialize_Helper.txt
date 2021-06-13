@@ -1,0 +1,36 @@
+=====================================================
+★ 미래의 또 까먹을 나를 위한 ini 파일 생성 도우미 ★
+=====================================================	
+
+기본적인 작성 형식은
+	Data이름=Value
+띄어쓰기 하면 안될듯
+
+---------- Object 관련 ------------
+- MeshC
+	numOfMeshData	: mesh의 개수
+	meshKey0		: 각 mesh의 x파일 이름	-> meshKey0, 1, 2, ...
+
+- GraphicsC
+	renderID		: 그리려고 하는 render mode
+
+	####################################
+	#	enum class ERenderID
+	#	{
+	#		Base			= 0,
+	#		NonAlpha		= 1,
+	#		WireFrame		= 2,
+	#		AlphaTest		= 3,
+	#		AlphaBlend		= 4,
+	#		Particle		= 5,
+	#		UI				= 6,
+	#		NumOfRenderID	= 7
+	#	};
+	#####################################
+
+- TextureC
+	numOfTexSet		: 텍스처의 개수, 메쉬는 InitTex 사용한다면 0으로 넣습니다
+
+- CShaderC
+	numOfShaders	: 적용 쉐이더의 개수
+	shaderKey0		: 쉐이더 fx파일의 이름 -> shaderKey0, 1, 2, ...
