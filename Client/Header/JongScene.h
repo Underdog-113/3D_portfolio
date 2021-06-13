@@ -30,7 +30,7 @@ private:
 					void				InitPrototypes		(void) override;
 
 private:
-	SP(Engine::CObject) m_pKiana;
+	SP(Engine::CObject) m_spKiana;
 	Engine::CObject* m_pivot;
 
 	Engine::CObject* m_obj;

@@ -14,6 +14,8 @@ public:
 			   ~CRootMotion();
 
 public:
+	CRootMotion*	MakeClone	(void);
+
 	void		RootMotionMove(CObject* pOwner, CAniCtrl* pAniCtrl, CDynamicMeshData* pDM);
 	void		RootMotionMove_WhileChange(CObject* pOwner, CAniCtrl* pAniCtrl, CDynamicMeshData* pDM);
 

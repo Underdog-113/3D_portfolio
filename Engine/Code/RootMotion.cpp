@@ -17,6 +17,14 @@ CRootMotion::~CRootMotion()
 		delete[] m_pIsFixRootMotionOffsets;
 }
 
+CRootMotion * CRootMotion::MakeClone(void)
+{
+	CRootMotion* pClone = new CRootMotion;
+
+	pClone->m_pIsFixRootMotionOffsets = m_pIsFixRootMotionOffsets;
+	return pClone;
+}
+
 void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamicMeshData* pDM)
 {
 	pAniCtrl->PlayFake();

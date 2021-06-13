@@ -257,8 +257,8 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin/Engine/Debug/x64/</OutDir>
     <IntDir>$(SolutionDir)Log/Engine/Debug/x64/</IntDir>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)ExternalLibrary\PhysX\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
