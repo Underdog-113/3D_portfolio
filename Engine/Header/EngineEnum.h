@@ -82,6 +82,13 @@ namespace Engine
 #pragma endregion
 
 #pragma region PhysicsEnum
+	enum class ECollisionType
+	{
+		Trigger				= 0,
+		Collide				= 1,
+		NumOfCollisionType	= 2
+	};
+
 	enum class EColliderType
 	{
 		Point		= 0,
@@ -106,7 +113,7 @@ namespace Engine
 		ALL_INF
 	};
 
-	enum class EColliderID
+	enum class ECollisionID
 	{
 		CameraRay			= 0,
 		Button				= 1,
@@ -132,7 +139,7 @@ namespace Engine
 	enum class EComponentID
 	{
 		Transform				= 0,
-		Mesh					  = 1,
+		Mesh					= 1,
 		Texture					= 2,
 		Graphics				= 3,
 		RigidBody				= 4,
@@ -140,7 +147,7 @@ namespace Engine
 		Camera					= 6,
 		Debug					= 7,
 		RectTex					= 8,
-		Bitmap					= 9,
+		Physics					= 9,
 		FadeInOut				= 10,
 		Shader					= 11,
         Text					= 12,

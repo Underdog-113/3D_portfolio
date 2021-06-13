@@ -14,7 +14,7 @@ public:
 	explicit	CState		(void);
 				~CState		(void);
 
-	CState*		MakeClone();
+	CState*		MakeClone(CStateMachineC* pMachine);
 
 public:
 	void DoInit();

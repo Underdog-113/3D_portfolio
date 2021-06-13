@@ -406,13 +406,13 @@ void CEditorScene::InputSetting()
 			if (L"" == wstr)
 				return;
 			else if (L"Player" == wstr)
-				colID = (_int)EColliderID::Player;
+				colID = (_int)ECollisionID::Player;
 			else if (L"Enemy" == wstr)
-				colID = (_int)EColliderID::Enemy;
+				colID = (_int)ECollisionID::Enemy;
 			else if (L"Object" == wstr)
-				colID = (_int)EColliderID::Object;
+				colID = (_int)ECollisionID::Object;
 			else if (L"Map" == wstr)
-				colID = (_int)EColliderID::Map;
+				colID = (_int)ECollisionID::Map;
 
 			m_pCurSelectedObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
 			m_pCurSelectedObject->AddComponent<Engine::CDebugC>();
