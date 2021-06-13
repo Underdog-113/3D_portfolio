@@ -36,13 +36,13 @@ void CWaterShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	viewMat = GET_MAIN_CAM->GetViewMatrix();
 	projMat = GET_MAIN_CAM->GetProjMatrix();
 
-	_m = worldMat * viewMat * projMat;
-	m_pEffect->SetMatrix("g_mWVP", &_m);
+	m_mFinalMat = worldMat * viewMat * projMat;
+	m_pEffect->SetMatrix("g_mWVP", &m_mFinalMat);
 
 	// 광원의 방향
-	_Light_Pos = D3DXVECTOR4(-0.577f, -0.577f, -0.577f, 0.f);
-	D3DXMatrixInverse(&_m, NULL, &worldMat);
-	D3DXVec4Transform(&m_vColor, &_Light_Pos, &_m);
+	m_Light_Pos = D3DXVECTOR4(-0.577f, -0.577f, -0.577f, 0.f);
+	D3DXMatrixInverse(&m_mFinalMat, NULL, &worldMat);
+	D3DXVec4Transform(&m_vColor, &m_Light_Pos, &m_mFinalMat);
 	D3DXVec3Normalize((D3DXVECTOR3 *)&m_vColor, (D3DXVECTOR3 *)&m_vColor);
 	m_vColor.w = -1.f;		// 환경광 강도
 

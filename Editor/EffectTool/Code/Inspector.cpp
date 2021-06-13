@@ -406,29 +406,32 @@ void CInspector::OnPaint()
 void CInspector::OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-
-	_int index = 0; HTREEITEM hItem = m_TreeCtrl.GetSelectedItem();
+		
+	int index = 0;
+	HTREEITEM hItem = m_TreeCtrl.GetSelectedItem();
 	HTREEITEM hChild = m_TreeCtrl.GetChildItem(NULL);
 	while (hChild)
 	{
 		if (hChild == hItem) break;
-
 		hChild = m_TreeCtrl.GetNextItem(hChild, TVGN_NEXT);
 		++index;
 	}
-
+		
 	m_iSelectObjectNum = index - 1;
+
 	*pResult = 0;
 }
 
 
 void CInspector::OnBnClickedDeleteEffectList()
 {
-	m_TreeCtrl.DeleteAllItems();
-	
-	Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->ClearLayer();
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+	spObject->SetDeleteThis(true);
+	spObject.reset();	
 
-	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
+	m_TreeCtrl.DeleteItem(m_TreeCtrl.GetSelectedItem());
+	m_btnModeTransform.SetCheck(false);
+	m_btnModeEdit.SetCheck(false);
 }
 
 
@@ -534,7 +537,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::WaterShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::EffectShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)

@@ -390,7 +390,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 						_uint maxPass = 0;
 						pEffect->Begin(&maxPass, 0);
-						pEffect->BeginPass(1);
+						pEffect->BeginPass(0);
 
 						pObject->PreRender(pEffect);
 						pObject->Render(pEffect);
