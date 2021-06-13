@@ -86,12 +86,25 @@ void CJongScene::Start(void)
 
 		}
 
+		// Kiana Body
 		{
 			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
 
 			m_spKiana = spKianaClone;
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
+		}
+
+		// Catpaw ATK01
+		{
+			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
+
+			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
+			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			m_spCatPaw->AddComponent<Engine::CTextureC>();
+			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
+			m_spCatPaw->GetTransform()->AddPositionY(1.f);
 		}
 
 		{

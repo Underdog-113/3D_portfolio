@@ -31,6 +31,7 @@ private:
 
 private:
 	SP(Engine::CObject) m_spKiana;
+	SP(Engine::CObject) m_spCatPaw;
 	Engine::CObject* m_pivot;
 
 	Engine::CObject* m_obj;

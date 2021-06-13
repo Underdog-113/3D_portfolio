@@ -7,6 +7,7 @@ BEGIN(Engine)
 
 class CMeshData;
 class CGraphicsC;
+class CStaticMeshData;
 class CDynamicMeshData;
 class CRootMotion;
 class ENGINE_DLL CMeshC final : public CRenderComponent
@@ -49,6 +50,9 @@ public:
 			void						OnRootMotion	(void);
 			void						OffRootMotion	(void);
 			void						ApplyRootMotion (CDynamicMeshData* pDM);
+
+			CStaticMeshData*			GetFirstMeshData_Static(void);
+			CDynamicMeshData*			GetFirstMeshData_Dynamic(void);
 
 private:
 			void						RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);

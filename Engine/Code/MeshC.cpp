@@ -274,6 +274,15 @@ void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM)
 	}
 }
 
+CStaticMeshData* CMeshC::GetFirstMeshData_Static(void)
+{
+	return static_cast<Engine::CStaticMeshData*>(m_vMeshDatas[0]);
+}
+
+CDynamicMeshData* CMeshC::GetFirstMeshData_Dynamic(void)
+{
+	return static_cast<Engine::CDynamicMeshData*>(m_vMeshDatas[0]);
+}
 
 void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshIndex)
 {

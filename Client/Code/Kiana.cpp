@@ -55,6 +55,9 @@ void CKiana::Start(void)
 	//m_spTransform->SetSize(10, 10, 10);
 	
 	m_spMesh->OnRootMotion();
+
+	// ultra pos test
+	//const Engine::D3DXFRAME_DERIVED* pFrm = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip002_L_Forearm");
 }
 
 void CKiana::FixedUpdate(void)
