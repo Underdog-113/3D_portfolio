@@ -46,8 +46,8 @@ public:
 	CObject* m_pObject;
 protected:
 	typedef std::vector<_CollisionInfo> _COLLISIONS;
-	typedef	std::vector<CCollisionC*> _TRIGGERS;
-	typedef std::vector<CCollider*> _COLLIDERS;
+	typedef	std::vector<CCollisionC*>	_TRIGGERS;
+	typedef std::vector<CCollider*>		_COLLIDERS;
 	GETTOR			(_COLLISIONS,		m_vCurCollisions,	{},				CurCollisions)
 	GETTOR			(_COLLISIONS,		m_vPreCollisions,	{},				PreCollisions)
 
@@ -55,6 +55,9 @@ protected:
 	GETTOR			(_TRIGGERS,			m_vPreTriggers,		{},				PreTriggers)
 
 	GETTOR			(_COLLIDERS,		m_vColliders,		{},				Colliders)
+
+	GETTOR			(_int,				m_collisionType,	UNDEFINED,		CollisionType)
+
 	GETTOR_SETTOR	(_int,				m_collisionID,		UNDEFINED,		CollisionID)
 
 	GETTOR_SETTOR	(_bool,				m_isTrigger,		false,			IsTrigger)

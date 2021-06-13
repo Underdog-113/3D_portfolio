@@ -19,19 +19,16 @@ void CStateMachineC::Awake(void)
 {
 	__super::Awake();
 	m_componentID = (_int)m_s_componentID;
-
-	for (auto state : m_stateList)
-	{
-		state.second->DoInit();
-	}
-
 }
 
 void CStateMachineC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
-	m_curState->DoEnter();
+	for (auto state : m_stateList)
+	{
+		state.second->DoInit();
+	}
 }
 
 void CStateMachineC::FixedUpdate(SP(CComponent) spThis)

@@ -39,7 +39,7 @@ SP(Engine::CObject) CDebugCollider::MakeClone(void)
 void CDebugCollider::Awake(void)
 {
 	__super::Awake();
-	m_layerID = (_int)ELayerID::DebugCollision;
+	m_layerID = (_int)ELayerID::Debug;
 }
 
 void CDebugCollider::Start(void)

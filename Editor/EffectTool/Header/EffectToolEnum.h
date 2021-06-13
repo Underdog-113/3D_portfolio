@@ -14,7 +14,7 @@ enum class EComponentID
 };
 
 
-enum class EColliderID
+enum class ECollisionID
 {
 	Player = 0,
 	Map = 1,

@@ -1,6 +1,6 @@
 ﻿#include "EngineStdafx.h"
 #include "AniCtrl.h"
- 
+
 
 
 USING(Engine)
@@ -18,7 +18,7 @@ CAniCtrl * CAniCtrl::Create(LPD3DXANIMATIONCONTROLLER pAniCtrl)
 {
 	CAniCtrl* pInstance = new CAniCtrl(pAniCtrl);
 	pInstance->Awake();
-	
+
 	return pInstance;
 }
 
@@ -69,14 +69,15 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 {
 	if (index > m_pAniCtrl->GetMaxNumAnimationSets() - 1)
 		index = 0;
-	if (m_curIndex == index)
-		return;
+
+	//if (m_curIndex == index)
+	//	return;
 
 	if (m_fixTillEnd && !IsItEnd())
 		return;
 
 	_int newTrack = m_curTrack == 0 ? 1 : 0;
-	
+
 	LPD3DXANIMATIONSET pAS = NULL;
 
 	m_pAniCtrl->GetAnimationSet(index, &pAS);
@@ -101,7 +102,6 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	m_curIndex = index;
 	m_curTrack = newTrack;
 	m_fixTillEnd = fixTillEnd;
-	m_isBlending = true;
 
 	ChangeFakeAniSet();
 }
@@ -111,7 +111,7 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	_int newTrack = m_curTrack == 0 ? 1 : 0;
 	LPD3DXANIMATIONSET pAS = NULL;
 	m_pAniCtrl->GetAnimationSet(m_curIndex, &pAS);
-	
+
 	if (pAS->GetName() == name)
 		return;
 
@@ -144,52 +144,54 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 
 	m_curTrack = newTrack;
 	m_fixTillEnd = fixTillEnd;
-	m_isBlending = true;
 
 	ChangeFakeAniSet();
 }
 
 void CAniCtrl::ChangeFakeAniSet()
 {
+	if (m_fakeIndex == m_curIndex)
+		return;
+
 	LPD3DXANIMATIONSET	pAnimationSet = nullptr;
 
 	m_pFakeAniCtrl->GetAnimationSet(m_curIndex, &pAnimationSet);
 
 	m_fakePeriod = pAnimationSet->GetPeriod();
 
-	if (m_fakeIndex == m_curIndex)
-		return;
-
 	_int newTrack = m_fakeTrack == 0 ? 1 : 0;
-
 
 	m_pFakeAniCtrl->SetTrackAnimationSet(newTrack, pAnimationSet);
 
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(m_fakeTrack);
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	//현재 트랙을 끈다.
-	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + 0.001);
+	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + m_fakePeriod * 0.005);
+	//m_pFakeAniCtrl->SetTrackEnable(m_fakeTrack, FALSE);
+	//m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod);
 
-	//꺼지는 동안 키 속도 세팅
-	m_pFakeAniCtrl->KeyTrackSpeed(m_fakeTrack, 1.f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
-	//꺼지는 동안 가중치
-	m_pFakeAniCtrl->KeyTrackWeight(m_fakeTrack, 0.0f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
+	////꺼지는 동안 키 속도 세팅
+	m_pFakeAniCtrl->KeyTrackSpeed(m_fakeTrack, 1.f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
+	////꺼지는 동안 가중치
+	m_pFakeAniCtrl->KeyTrackWeight(m_fakeTrack, 0.0f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
 
 	m_pFakeAniCtrl->SetTrackEnable(newTrack, TRUE);
 
-	//꺼지는 동안 키 속도 세팅
-	m_pFakeAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
-	//꺼지는 동안 가중치
-	m_pFakeAniCtrl->KeyTrackWeight(m_curTrack, 1.f, m_fakeTimer, 0.001, D3DXTRANSITION_LINEAR);
+	////꺼지는 동안 키 속도 세팅
+	m_pFakeAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
+	////꺼지는 동안 가중치
+	m_pFakeAniCtrl->KeyTrackWeight(m_curTrack, 1.f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
 
 	m_pFakeAniCtrl->ResetTime();
 	m_fakeTimer = 0.f;
 
 	m_pFakeAniCtrl->SetTrackPosition(newTrack, 0.0);
+
 	m_fakeIndex = m_curIndex;
 	m_fakeTrack = newTrack;
 
+
+	m_isFakeAniChange = true;
 }
 
 
@@ -211,39 +213,25 @@ void CAniCtrl::PlayFake()
 {
 	_float deltaTime = GET_DT;
 	m_fakeTimer += deltaTime * m_speed;
-	if (m_fakeTimer > m_fakePeriod)
+	if (m_fakeTimer / m_fakePeriod >= 0.99)
 	{
-		double remainTime = (double)m_fakePeriod - (double)m_fakeTimerLastFrame;
-		if (remainTime < 0)
-			remainTime = 0;
-
-		m_pFakeAniCtrl->AdvanceTime(remainTime - 0.001, NULL);
-
 		m_isFakeAniEnd = true;
 
-		remainTime = (double)m_fakeTimer - (double)m_fakePeriod;
-		if (remainTime < 0)
-			remainTime = 0;
-
-		m_savedFakeAniTime = remainTime + 0.001;
-
+		m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod * 0.99);
+		m_pFakeAniCtrl->AdvanceTime(0, NULL);
 		return;
 	}
 
 	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
-	m_fakeTimerLastFrame = m_fakeTimer;
-
 }
 
-void CAniCtrl::PlayFake_SavedTime(void)
+void CAniCtrl::ChangeFakeAnimState_EndToStart(void)
 {
 	m_isFakeAniEnd = false;
 
-	m_pFakeAniCtrl->AdvanceTime(m_savedFakeAniTime, NULL);
-	m_fakeTimer = (_float)m_savedFakeAniTime;
-	m_savedFakeAniTime = 0.f;
-
-	m_isFakeAniStart = true;
+	m_fakeTimer = m_fakePeriod * 0.01;
+	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakeTimer);
+	m_pFakeAniCtrl->AdvanceTime(0, NULL);
 }
 
 _bool CAniCtrl::IsItEnd(void)

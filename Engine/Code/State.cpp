@@ -13,11 +13,11 @@ CState::~CState()
 {
 }
 
-CState* CState::MakeClone()
+CState* CState::MakeClone(CStateMachineC* pMachine)
 {
 	CState* spClone = new CState;
 
-	spClone->m_pMachine = m_pMachine;
+	spClone->m_pMachine = pMachine;
 	spClone->m_init = m_init;
 	spClone->m_enter = m_enter;
 	spClone->m_update = m_update;

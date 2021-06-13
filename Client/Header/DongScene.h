@@ -25,13 +25,8 @@ public:
 					void				OnEnable			(void) override;	 
 					void				OnDisable			(void) override;
 
-public:
-					void				ChangeScene			(Engine::CScene* pScene);
-
 private:
 					void				InitPrototypes		(void) override;
-
-	GETTOR			(CLoading*,			m_pLoading,				nullptr,		Loading)
 };
 
 #endif

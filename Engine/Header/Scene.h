@@ -39,14 +39,14 @@ public:
 public:
 				void					SetIsEnabled		(_bool isEnabled);
 	virtual		void					InitPrototypes		(void) PURE;
-	virtual		void					InitLights			(void);
-protected:												   
+	virtual		void					InitLights			(void);						   
 				void					InitLayers			(_int numOfLayers);
 
 	
 protected:
 	typedef std::vector<CLayer*> _LAYERS;
 	GETTOR			(_LAYERS,					m_vLayers,			{},				Layers)
+
 	GETTOR			(CObjectFactory*,			m_pObjectFactory,	nullptr,		ObjectFactory)
 	GETTOR			(CDataStore*,				m_pDataStore,		nullptr,		DataStore)
 	GETTOR			(CMeshStore*,				m_pMeshStore,		nullptr,		MeshStore)
