@@ -43,6 +43,9 @@ public:
 public:
 					void					SetBasicName		(void) override;
 
+private:
+	GETTOR			(SP(Engine::CObject),	m_CatPaw_Atk01,		nullptr, CatPaw_Atk01)
+
 };
 
 #endif

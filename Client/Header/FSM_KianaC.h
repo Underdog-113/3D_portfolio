@@ -50,6 +50,7 @@ private:
 	CStageController* m_pStageController = nullptr;
 	
 	Appear_Option m_appearOption = None;
+	bool m_isUltraMode = false;
 
 public:
 	// StandBy  
