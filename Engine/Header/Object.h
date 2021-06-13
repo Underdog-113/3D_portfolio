@@ -14,12 +14,12 @@ protected:
 public:
 	virtual			SP(CObject)		MakeClone			(void) PURE;
 		
-	virtual			void			Awake				(void) PURE;
-	virtual			void			Start				(void) PURE;
+	virtual			void			Awake				(void);
+	virtual			void			Start				(void);
 	
-	virtual			void			FixedUpdate			(void) PURE;
-	virtual			void			Update				(void) PURE;
-	virtual			void			LateUpdate			(void) PURE;
+	virtual			void			FixedUpdate			(void);
+	virtual			void			Update				(void);
+	virtual			void			LateUpdate			(void);
 
 	virtual			void			PreRender			(void) {}
 	virtual			void			PreRender			(LPD3DXEFFECT pEffect) {}
@@ -30,10 +30,10 @@ public:
 	virtual			void			PostRender			(void) {}
 	virtual			void			PostRender			(LPD3DXEFFECT pEffect) {}
 	
-	virtual			void			OnDestroy			(void) PURE;
+	virtual			void			OnDestroy			(void);
 	
-	virtual			void			OnEnable			(void) PURE;
-	virtual			void			OnDisable			(void) PURE;
+	virtual			void			OnEnable			(void);
+	virtual			void			OnDisable			(void);
 
 public:
 	virtual			void			OnCollisionEnter	(_CollisionInfo ci) {}

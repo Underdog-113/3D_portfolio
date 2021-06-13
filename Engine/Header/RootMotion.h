@@ -14,26 +14,28 @@ public:
 			   ~CRootMotion();
 
 public:
-	void		RootMotionMove(CObject* pOwner, CAniCtrl* pAniCtrl);
+	CRootMotion*	MakeClone	(void);
+
+	void		RootMotionMove(CObject* pOwner, CAniCtrl* pAniCtrl, CDynamicMeshData* pDM);
+	void		RootMotionMove_WhileChange(CObject* pOwner, CAniCtrl* pAniCtrl, CDynamicMeshData* pDM);
 
 	void		OnFixRootMotionOffset(_uint index);
 	void		OffFixRootMotionOffset(_uint index);
 
 	void		CreateFixOffsetArray(_uint size);
 
+	_float3		GetRootMotionLocalPos(CDynamicMeshData* pDM);
+	_float3		GetOwnerSizedPos(CObject * pOwner, _float3 pos);
 private:
 	GETTOR			(_bool*,	m_pIsFixRootMotionOffsets,	nullptr,		IsFixRootMotionOffsets)
 	GETTOR_SETTOR	(_bool,		m_isRootMotion,				false,			IsRootMotion)
-		
+
 	GETTOR_SETTOR	(_float3,	m_rootMotionOffset,			ZERO_VECTOR,	RootMotionOffset)
 	GETTOR_SETTOR	(_float3,	m_rootMotionPos,			ZERO_VECTOR,	RootMotionPos)
 
-	_float3 m_animStartWorldPos = ZERO_VECTOR;
-	_uint m_prevFakeIndex = 0;
-	_float3 m_startWorldOffset = ZERO_VECTOR;
-	_float3 m_endWorldOffset = ZERO_VECTOR;
+	_float3 m_animStartOffset = ZERO_VECTOR;
 
-	_float3 m_prevSizedRootMotionPos = ZERO_VECTOR;
+	_float3 m_prevRootMotionPos = ZERO_VECTOR;
 };
 
 END

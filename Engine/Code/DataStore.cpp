@@ -71,7 +71,6 @@ void CDataStore::InitDataMap(_uint numOfDataID)
 	m_vHashKey.resize(numOfDataID);
 
 
-	//���� ���� ������ ����
 	AddDataSection(L"Engine", (_uint)EDataID::Engine);
 	AddDataSection(L"Object", (_uint)EDataID::Object);
 	AddDataSection(L"Component", (_uint)EDataID::Component);
