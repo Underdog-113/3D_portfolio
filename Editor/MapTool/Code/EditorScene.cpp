@@ -83,14 +83,15 @@ void CEditorScene::Start(void)
 {
 	__super::Start();
 
-	SP(Engine::CObject) spBaseMap
-		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"BaseMap");
+	//SP(Engine::CObject) spBaseMap
+	//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"BaseMap");
 
-	spBaseMap->AddComponent<Engine::CMeshC>()->AddMeshData(L"Stage02_NonAlpha_Road_03_2");
-	spBaseMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spBaseMap->AddComponent<Engine::CTextureC>()/*->AddTexture(L"Castle_wall", 0)*/;
-	spBaseMap->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	spBaseMap->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	//spBaseMap->AddComponent<Engine::CMeshC>()->AddMeshData(L"Stage02_NonAlpha_Deco");
+	//spBaseMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	//spBaseMap->AddComponent<Engine::CTextureC>()/*->AddTexture(L"Castle_wall", 0)*/;
+	//spBaseMap->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	//spBaseMap->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+	//spBaseMap->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	//spCube->GetTransform()->SetSize(300, 1, 300);
 }
 
@@ -152,6 +153,7 @@ bool CEditorScene::IsObjectPicked(Engine::CObject * _pObject, _float3 * _pOutPic
 	_float len = D3DXVec3Length(&objCenterRay);
 	_float dist = len * sinf(radian);
 
+	m_pickRadius = _pObject->GetTransform()->GetSize().x * 0.3f;
 
 	if (dist < m_pickRadius)
 		return true;
@@ -301,59 +303,7 @@ void CEditorScene::SetInitAnimation(SP(Engine::CObject) spObj)
 		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0])->ChangeAniSet("STAND");
 }
 
-void CEditorScene::CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size, _float3 intersection)
-{
-	std::wstring fileName(m_pMenuView->GetCurSelFileName());
-
-	SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", isStatic, (_int)layerID, objName);
-	spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
-
-	if (1 == m_pMenuView->m_initTexture.GetCheck())
-	{
-		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spObj->AddComponent<Engine::CTextureC>();
-	}
-	else if (0 == m_pMenuView->m_initTexture.GetCheck())
-	{
-		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(false);
-		spObj->AddComponent<Engine::CTextureC>()->AddTexture(Engine::StrToWStr(CStrToStr(m_pMenuView->GetCurSelTextureFileName())), 0);
-	}
-
-	switch (m_pMenuView->m_renderAlpha.GetCheck())
-	{
-	case 0:
-		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		break;
-	case 1:
-		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-		break;
-	}
-
-	spObj->GetTransform()->SetSize(size);
-	spObj->GetTransform()->SetPosition(intersection);
-
-	SetInitAnimation(spObj);
-
-	m_pCurSelectedObject = spObj.get();
-	m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
-
-	m_pMenuView->m_renderAlpha.SetCheck(0);
-	std::cout << "Create!" << std::endl;
-}
-
-void CEditorScene::InitPrototypes(void)
-{
-	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
-	ADD_PROTOTYPE(spEmptyObjectPrototype);
-
-	SP(Engine::CDebugCollider) spDebugColliderPrototype(Engine::CDebugCollider::Create(true, this));
-	ADD_PROTOTYPE(spDebugColliderPrototype);
-
-	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
-	ADD_PROTOTYPE(spCameraPrototype);
-}
-
-void CEditorScene::InputSetting()
+void CEditorScene::SetPickingMode()
 {
 	if (Engine::IMKEY_DOWN(KEY_Q))
 	{
@@ -368,53 +318,59 @@ void CEditorScene::InputSetting()
 			std::cout << "Picking Mode Off" << std::endl;
 		}
 	}
+}
 
+void CEditorScene::SetCreateObject()
+{
 	if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	{
-		//if (true == m_createMode) // 클릭시 오브젝트 생성
-		//{
-			_float3 intersection;
-			_float shortLen = 1000.f;
+		_float3 intersection;
+		_float shortLen = 1000.f;
 
-			Engine::CObject* pTarget = nullptr;
+		Engine::CObject* pTarget = nullptr;
 
-			for (auto& pObject : m_vLayers[(_int)ELayerID::Map]->GetGameObjects())
+		for (auto& pObject : m_vLayers[(_int)ELayerID::Map]->GetGameObjects())
+		{
+			_float3 pickPoint = ZERO_VECTOR;
+
+			if (IsMeshPicked(pObject.get(), &pickPoint))
 			{
-				_float3 pickPoint = ZERO_VECTOR;
+				_float3 correctPoint = ZERO_VECTOR;
+				D3DXVec3TransformCoord(&correctPoint, &pickPoint, &pObject.get()->GetTransform()->GetWorldMatrix());
 
-				if (IsMeshPicked(pObject.get(), &pickPoint))
+				_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
+				_float len = D3DXVec3Length(&_float3(correctPoint - camPos));
+
+				if (len < shortLen)
 				{
-					_float3 correctPoint = ZERO_VECTOR;
-					D3DXVec3TransformCoord(&correctPoint, &pickPoint, &pObject.get()->GetTransform()->GetWorldMatrix());
-					
-					_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
-					_float len = D3DXVec3Length(&_float3(correctPoint - camPos));
-
-					if (len < shortLen)
-					{
-						pTarget = pObject.get();
-						shortLen = len;
-						intersection = correctPoint;
-						m_intersect = intersection;
-					}
+					pTarget = pObject.get();
+					shortLen = len;
+					intersection = correctPoint;
+					m_intersect = intersection;
 				}
 			}
+		}
 
-			CString cstr;
-			ELayerID curLayerID = ELayerID::NumOfLayerID;
-			m_pMenuView->m_layerID.GetLBText(m_pMenuView->m_layerID.GetCurSel(), cstr);
+		CString cstrLayerID;
+		CString cstrName;
+		
+		ELayerID curLayerID = ELayerID::NumOfLayerID;
+		m_pMenuView->m_layerID.GetLBText(m_pMenuView->m_layerID.GetCurSel(), cstrLayerID);
+		m_pMenuView->m_curObjName.GetWindowTextW(cstrName);
 
-			if (L"Player" == cstr)
-				curLayerID = ELayerID::Player;
-			else if (L"Enemy" == cstr)
-				curLayerID = ELayerID::Enemy;
-			else if (L"Map" == cstr)
-				curLayerID = ELayerID::Map;
+		if (L"Player" == cstrLayerID)
+			curLayerID = ELayerID::Player;
+		else if (L"Enemy" == cstrLayerID)
+			curLayerID = ELayerID::Enemy;
+		else if (L"Map" == cstrLayerID)
+			curLayerID = ELayerID::Map;
 
-			CreateObject(true, curLayerID, L"hi", _float3(1.f, 1.f, 1.f), intersection);
-		//}
+		CreateObject(true, curLayerID, CStrToWStr(cstrName), _float3(1.f, 1.f, 1.f), intersection);
 	}
+}
 
+void CEditorScene::SetPickObject()
+{
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
 		if (false == m_pickingMode)
@@ -457,25 +413,52 @@ void CEditorScene::InputSetting()
 			if (L"BaseMap" == pTarget->GetName())
 				return;
 
+			if (nullptr != m_pCurSelectedObject)
+				m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
 			m_pCurSelectedObject = pTarget;
+			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
 			m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
+			m_pMenuView->m_curObjNameChk.SetCheck(1);
+
+			CString str;
+			std::wstring wstr;
+
+			_int total = m_pMenuView->m_objList.GetCount();
+
+			for (_int i = 0; i < total; ++i)
+			{
+				m_pMenuView->m_objList.GetText(i, str);
+				wstr = CStrToWStr(str);
+
+				if (wstr == m_pCurSelectedObject->GetName())
+					m_pMenuView->m_objList.SetCurSel(i);
+			}
+
 			std::wcout << pTarget->GetName() << std::endl;
 
 			m_pMenuView->SetPosition(m_pCurSelectedObject->GetTransform()->GetPosition());
 			m_pMenuView->SetRotation(m_pCurSelectedObject->GetTransform()->GetRotation());
 			m_pMenuView->SetScale(m_pCurSelectedObject->GetTransform()->GetSize());
 
+			if (false == m_pCurSelectedObject->GetIsEnabled())
+				m_pMenuView->m_showObjectChk.SetCheck(0);
+			else if (true == m_pCurSelectedObject->GetIsEnabled())
+				m_pMenuView->m_showObjectChk.SetCheck(1);
+
 			if (nullptr != m_pCurSelectedObject->GetComponent<Engine::CCollisionC>())
 			{
 				m_pMenuView->m_addColC.EnableWindow(false);
 				m_pMenuView->m_colType[0].EnableWindow(true);
 				m_pMenuView->m_colType[1].EnableWindow(true);
+				m_pMenuView->m_colType[2].EnableWindow(true);
 			}
 			else
 			{
 				m_pMenuView->m_addColC.EnableWindow(true);
 				m_pMenuView->m_colType[0].EnableWindow(false);
 				m_pMenuView->m_colType[1].EnableWindow(false);
+				m_pMenuView->m_colType[2].EnableWindow(false);
 				m_pMenuView->m_showAllCol.EnableWindow(false);
 			}
 
@@ -500,22 +483,117 @@ void CEditorScene::InputSetting()
 					++idx;
 				}
 			}
-			m_pickingMode = false;
 		}
 	}
+}
 
-	// delete
+void CEditorScene::SetDeleteObject()
+{
 	if (nullptr != m_pCurSelectedObject && Engine::IMKEY_DOWN(KEY_R))
 	{
-		m_pCurSelectedObject->SetDeleteThis(true);
-		std::cout << "del" << std::endl;
-		m_pCurSelectedObject = nullptr;
-	}
+		m_pMenuView->OnBnClickedDelObjectWithObjList();
 
+		//m_pCurSelectedObject->SetDeleteThis(true);
+		//std::cout << "del" << std::endl;
+		//m_pCurSelectedObject = nullptr;
+	}
+}
+
+void CEditorScene::SetLastDeleteObject()
+{
 	// delete last created object
-	if (Engine::IMKEY_DOWN(KEY_CONTROL) && Engine::IMKEY_DOWN(KEY_Z))
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
 	{
 		m_vLayers[(_int)ELayerID::Map]->GetGameObjects().back()->GetDeleteThis();
 		std::cout << "delete last object" << std::endl;
 	}
+}
+
+void CEditorScene::CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size, _float3 intersection)
+{
+	std::wstring fileName(m_pMenuView->GetCurSelFileName());
+
+	SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", isStatic, (_int)layerID, objName);
+
+	spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
+
+	if (1 == m_pMenuView->m_initTexture.GetCheck())
+	{
+		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+
+		if (Engine::RemoveExtension(fileName) != L"Cube")
+			spObj->AddComponent<Engine::CTextureC>();
+		else
+			spObj->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+	}
+	else if (0 == m_pMenuView->m_initTexture.GetCheck())
+	{
+		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(false);
+		spObj->AddComponent<Engine::CTextureC>()->AddTexture(Engine::StrToWStr(CStrToStr(m_pMenuView->GetCurSelTextureFileName())), 0);
+	}
+
+	switch (m_pMenuView->m_renderAlpha.GetCheck())
+	{
+	case 0:
+		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		break;
+	case 1:
+		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+		break;
+	}
+
+	spObj->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+	spObj->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	spObj->GetTransform()->SetSize(size);
+	spObj->GetTransform()->SetPosition(intersection);
+
+	SetInitAnimation(spObj);
+
+	if (nullptr != m_pCurSelectedObject)
+		m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+	m_pCurSelectedObject = spObj.get();
+	m_pCurSelectedObject->SetLayerID((_int)layerID);
+	m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
+
+	m_pMenuView->m_renderAlpha.SetCheck(0);
+	std::cout << "Create!" << std::endl;
+
+	// add to obj in list
+	m_pMenuView->m_objList.AddString(m_pCurSelectedObject->GetName().c_str());
+}
+
+void CEditorScene::InitPrototypes(void)
+{
+	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
+	ADD_PROTOTYPE(spEmptyObjectPrototype);
+
+	SP(Engine::CDebugCollider) spDebugColliderPrototype(Engine::CDebugCollider::Create(true, this));
+	ADD_PROTOTYPE(spDebugColliderPrototype);
+
+	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
+	ADD_PROTOTYPE(spCameraPrototype);
+}
+
+void CEditorScene::InputSetting()
+{
+	if (Engine::IMKEY_DOWN(KEY_F5))
+	{
+		if (true == m_stopAllKey)
+		{
+			m_stopAllKey = false;
+			std::cout << "InputSetting off" << std::endl;
+		}
+		else if (false == m_stopAllKey)
+		{
+			m_stopAllKey = true;
+			std::cout << "InputSetting on" << std::endl;
+		}
+	}
+
+	SetPickingMode(); // key q
+	SetCreateObject(); // mouse r
+	SetPickObject(); // mouse l
+	SetDeleteObject(); // key r
+	SetLastDeleteObject(); // mouse wheel
 }

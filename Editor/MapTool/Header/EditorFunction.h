@@ -54,9 +54,19 @@ inline _float StrToFloat(std::string str)
 	return std::stof(str);
 }
 
+inline _int StrToInt(std::string str)
+{
+	return std::stoi(str);
+}
+
 inline std::string CStrToStr(CString cstr)
 {
 	return std::string(CT2CA(cstr));
+}
+
+inline std::wstring CStrToWStr(CString cstr)
+{
+	return std::wstring(cstr);
 }
 
 inline std::wstring FloatToWStr(_float num)
