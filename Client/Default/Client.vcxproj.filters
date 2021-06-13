@@ -112,9 +112,6 @@
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana">
       <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\00.Valkyrie\01.Theresa">
-      <UniqueIdentifier>{1d28f112-4fdb-4a50-86f6-3ade36b9e334}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\02.Valkyrie\02.Sakura">
       <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
     </Filter>
@@ -139,20 +136,17 @@
     <Filter Include="03.Component">
       <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\01.Monster\MO_Lancer">
-      <UniqueIdentifier>{bb69a5fb-20de-4a03-ab41-683c5fd6e336}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.Monster\MO_Lancer\FSM">
       <UniqueIdentifier>{4e0ba9d9-963e-475a-8210-13967c4f6c64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.Valkyrie\00.Kiana\CatPaw">
-      <UniqueIdentifier>{fd69c38d-e436-44c3-be98-688e47c36ced}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\00.Valkyrie\00.Kiana\CatPaw\NewFilter1">
       <UniqueIdentifier>{a8284bb2-6c37-4128-bd2e-4372d6e89646}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\00.Valkyrie\00.Kiana\CatPaw\Claw">
       <UniqueIdentifier>{f9b9c2b9-930d-480a-888a-43abbc77fe6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop">
+      <UniqueIdentifier>{6be55b51-6ada-4c3b-80eb-2996112febd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,13 +270,9 @@
     <ClInclude Include="..\Header\Function.h">
       <Filter>06.Function</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\FSM_KianaC.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\00.FSM</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Valkyrie.h">
       <Filter>02.Objects\02.Valkyrie</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\Button.h">
       <Filter>02.Objects\04.UI\00.Button</Filter>
     </ClInclude>
@@ -303,6 +293,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\CatPaw_Claw.h">
       <Filter>02.Objects\00.Valkyrie\00.Kiana\CatPaw\Claw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_KianaC.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageController.h">
+      <Filter>97.TempClass_ForDevelop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -402,13 +398,9 @@
     <ClCompile Include="..\Code\Function.cpp">
       <Filter>06.Function</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\FSM_KianaC.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\00.FSM</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Valkyrie.cpp">
       <Filter>02.Objects\02.Valkyrie</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageController.cpp" />
     <ClCompile Include="..\Code\Button.cpp">
       <Filter>02.Objects\04.UI\00.Button</Filter>
     </ClCompile>
@@ -423,6 +415,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\CatPaw_Claw.cpp">
       <Filter>02.Objects\00.Valkyrie\00.Kiana\CatPaw\Claw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_KianaC.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageController.cpp">
+      <Filter>97.TempClass_ForDevelop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
