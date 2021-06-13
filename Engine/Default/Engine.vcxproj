@@ -321,6 +321,7 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
