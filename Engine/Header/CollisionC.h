@@ -29,6 +29,7 @@ public:
 //interface			
 public:
 					void			AddCollider			(CCollider* pCollider);
+					void			AddCollider			(PxShape* pShape, _int collisionType, _int physicsBodyType);
 
 					void			AddCollisionInfo	(_CollisionInfo collisionInfo);
 
@@ -45,6 +46,9 @@ public:
 
 	CObject* m_pObject;
 protected:
+	typedef std::vector<PxActor*> _ACTORS;
+	GETTOR			(_ACTORS,			m_vActor,			{},				Actors)
+
 	typedef std::vector<_CollisionInfo> _COLLISIONS;
 	typedef	std::vector<CCollisionC*>	_TRIGGERS;
 	typedef std::vector<CCollider*>		_COLLIDERS;
@@ -56,7 +60,8 @@ protected:
 
 	GETTOR			(_COLLIDERS,		m_vColliders,		{},				Colliders)
 
-	GETTOR			(_int,				m_collisionType,	UNDEFINED,		CollisionType)
+	
+	GETTOR			(_int,				m_physicsBodyType,	UNDEFINED,		PhysicsBodyType)
 
 	GETTOR_SETTOR	(_int,				m_collisionID,		UNDEFINED,		CollisionID)
 

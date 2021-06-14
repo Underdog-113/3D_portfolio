@@ -57,6 +57,8 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 		spEmptyObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(2);
 		spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(_float3(2, 2, 2)));
+		//PxShape* pSphereShape = Engine::GET_PHYSICS->createShape(PxSphereGeometry(2), *Engine::GET_PxMATERIAL);
+		//spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(pSphereShape, (_int)Engine::ECollisionType::Collide, (_int)Engine::EPhysicsBodyType::Kinematic);
 		spEmptyObject->AddComponent<Engine::CDebugC>();
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(2, 2, 2);

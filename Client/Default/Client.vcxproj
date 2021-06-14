@@ -286,7 +286,9 @@
     <Image Include="Honkai.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Initialize_Helper.txt" />
+    <Text Include="Initialize_Helper.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
