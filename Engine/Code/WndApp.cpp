@@ -15,8 +15,8 @@ void CWndApp::Start(HINSTANCE hInstance, _int nCmdShow)
 {
 	m_className		= L"3D_Engine";
 	m_windowName	= L"ºØ±«3rd";
-	m_wndWidth		= 1600;
-	m_wndHeight		= 900;
+	m_wndWidth		= 1440;
+	m_wndHeight		= 810;
 	m_showCursor	= true;
 	
 	ShowCursor(m_showCursor);

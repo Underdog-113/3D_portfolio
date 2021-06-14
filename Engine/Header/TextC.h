@@ -28,12 +28,8 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	// 맵으로 만들자 29 30 32 스트럭처로 만들어라
+	GETTOR_SETTOR(std::wstring, m_font, L"돋음", Font);
 	std::unordered_map<std::wstring, _TextCom> m_textData;
 };
 END
 #endif
-
-// 텍스트 추가
-// 내가 원하는 텍스트의 오프셋을변경
-// 문자열비교

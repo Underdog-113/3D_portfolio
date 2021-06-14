@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	//smart pointer¶û private Destructor»çÀÌÀÇ ¹®Á¦ ÇØ°á
+	//smart pointerï¿½ï¿½ private Destructorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø°ï¿½
 	template <typename T>
 	void SmartDeleter(T* something)
 	{
@@ -43,7 +43,7 @@ namespace Engine
 		}
 	}
 
-	//ClassName µû¿À´Â ÇÔ¼ö
+	//ClassName ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	template <typename T>
 	std::wstring GetCurClassName(void)
 	{
@@ -70,13 +70,13 @@ namespace Engine
 		return className;
 	}
 
-	// DWORD ¹ÝÈ¯ ÇÔ¼ö
+	// DWORD ï¿½ï¿½È¯ ï¿½Ô¼ï¿½
 	inline DWORD FtoDW(_float f)
 	{
 		return *((DWORD*)&f);
 	}
 
-	//String º¯È¯ ÇÔ¼ö
+	//String ï¿½ï¿½È¯ ï¿½Ô¼ï¿½
 	inline std::wstring StrToWStr(const std::string& str)
 	{
 		using convert_typeX = std::codecvt_utf8<wchar_t>;
@@ -93,16 +93,24 @@ namespace Engine
 		return converterX.to_bytes(wstr);
 	}
 
-	//FileName string¿¡¼­ È®ÀåÀÚ¸í ¶¼´Â ÇÔ¼ö
+	//FileName stringï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	inline std::wstring RemoveExtension(const std::wstring& fileName)
 	{
 		_size lastindex = fileName.find_first_of('.');
 		return fileName.substr(0, lastindex);
 	}
 
+	inline char* _wstringTOpchar(std::wstring wstr)
+	{
+		size_t getVal = 0;
+		size_t len = wcslen((wchar_t*)wstr.c_str());
+		char* name = new char[2 * len + 1];
+		wcstombs_s(&getVal, name, 2 * len + 1, wstr.c_str(), _TRUNCATE);
 
+		return name;
+	}
 
-	//ÇöÀç ÆÄÀÏ ÀÌ¸§ µû¿À´Â ÇÔ¼ö
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	inline std::wstring GetCurFileName(const std::string& str)
 	{
 		return StrToWStr(str.substr(str.find_last_of('\\') + 1));
@@ -189,6 +197,11 @@ namespace Engine
 		return in;
 	}
 
+	inline PxVec3 ToPxVec3(_float3 float3)
+	{
+		return PxVec3(float3.x, float3.y, float3.z);
+	}
+
 
 
 	template<class T> inline T	operator	~	(T a)		{ return (T)~(int)a; }
@@ -203,8 +216,3 @@ namespace Engine
 
 
 #endif // !ENGINEFUNCTION_H
-
-
-
-
-

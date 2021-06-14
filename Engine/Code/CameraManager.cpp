@@ -1,11 +1,7 @@
 #include "EngineStdafx.h"
- 
+#include "CameraManager.h"
 #include "Camera.h"
-
- 
 #include "Object.h"
- 
- 
 #include "WndApp.h"
 
 

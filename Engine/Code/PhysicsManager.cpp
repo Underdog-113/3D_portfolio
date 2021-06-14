@@ -44,13 +44,30 @@ void CPhysicsManager::Start(void)
 
 void CPhysicsManager::FixedUpdate(void)
 {
+	
+}
+
+void CPhysicsManager::Update(void)
+{
 	m_pScene->simulate(GET_DT);
+	
+	for (auto& actor : m_vActor)
+	{
+		if(actor->getType() == PxActorType::eRIGID_DYNAMIC)
+			static_cast<CCollisionC*>(actor->userData)->GetTransform()->SetPxTransform(actor->is<PxRigidDynamic>()->getGlobalPose());
+	}
+}
+
+void CPhysicsManager::LateUpdate(void)
+{
 }
 
 void CPhysicsManager::OnDestroy(void)
 {
 	m_pPhysics->release();
 	m_pFoundation->release();
+
+	delete m_pSimulationEventCallback;
 }
 
 void CPhysicsManager::OnEnable(void)
@@ -61,26 +78,34 @@ void CPhysicsManager::OnDisable(void)
 {
 }
 
+PxPhysics * CPhysicsManager::GetPxPhysics(void)
+{
+	return m_pPhysics;
+}
+
+PxMaterial * CPhysicsManager::GetPxMaterial(void)
+{
+	return m_pMaterial;
+}
+
 void CPhysicsManager::AddActor(PxActor * pActor)
 {
-	m_vActors.emplace_back(pActor);
+	m_vActor.emplace_back(pActor);
 	m_pScene->addActor(*pActor);
 }
 
 void CPhysicsManager::RemoveActor(PxActor * pActor)
 {
-	for (auto& iter = m_vActors.begin(); iter != m_vActors.end(); ++iter)
+	for (auto& iter = m_vActor.begin(); iter != m_vActor.end(); ++iter)
 	{
 		if ((*iter) == pActor)
 		{
-			m_vActors.erase(iter);
+			m_vActor.erase(iter);
 			break;
 		}
 	}
 
 	m_pScene->removeActor(*pActor);
-
-	
 }
 
 

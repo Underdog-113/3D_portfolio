@@ -17,7 +17,7 @@ CWooScene::~CWooScene()
 {
 }
 
-Engine::CScene * CWooScene::Create(void)
+CClientScene* CWooScene::Create(void)
 {
 	CWooScene* pInstance = new CWooScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);

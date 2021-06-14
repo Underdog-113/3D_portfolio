@@ -14,14 +14,19 @@ public:
 				void						Start				(void);
 
 				void						FixedUpdate			(void);
+				void						Update				(void);
+				void						LateUpdate			(void);
 
 				void						OnDestroy			(void);
-
+				
 				void						OnEnable			(void);
 				void						OnDisable			(void);
 
 
 public:
+				PxPhysics*					GetPxPhysics		(void);
+				PxMaterial*					GetPxMaterial		(void);
+
 				void						AddActor			(PxActor* pActor);
 				void						RemoveActor			(PxActor* pActor);
 
@@ -30,7 +35,7 @@ private:
 
 private:
 	typedef		std::vector<PxActor*> _ACTORS;
-				_ACTORS						m_vActors;
+				_ACTORS						m_vActor;
 
 	static		PxDefaultAllocator			m_s_pxAllocatorCallback;
 	static		PxDefaultErrorCallback		m_s_pxErrorCallback;

@@ -90,6 +90,9 @@
     <ClInclude Include="..\Header\EditorFunction.h">
       <Filter>98.Include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\StageController_Editor.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapTool.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ToolMenuView.cpp">
       <Filter>01.View\01.MenuView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageController_Editor.cpp">
+      <Filter>98.Include</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

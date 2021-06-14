@@ -12,6 +12,9 @@
 #include "Layer.h"
 #include "MeshData.h"
 
+#include "AabbCollider.h"
+#include "RayCollider.h"
+
 // CToolMenuView
 
 IMPLEMENT_DYNCREATE(CToolMenuView, CFormView)
@@ -60,13 +63,34 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT10, m_saveFileName);
 	DDX_Control(pDX, IDC_CHECK5, m_initTexture);
 	DDX_Control(pDX, IDC_COMBO4, m_layerID);
-	DDX_Control(pDX, IDC_CHECK1, m_showCol);
+	DDX_Control(pDX, IDC_CHECK1, m_showAllCol);
 
 	DDX_Control(pDX, IDC_RADIO1, m_colType[0]);
 	DDX_Control(pDX, IDC_RADIO2, m_colType[1]);
+	DDX_Control(pDX, IDC_RADIO3, m_colType[2]);
 	DDX_Control(pDX, IDC_COMBO5, m_colliderID);
-	DDX_Control(pDX, IDC_BUTTON11, m_addCollisionC);
 	DDX_Control(pDX, IDC_EDIT14, m_aabbSize);
+	DDX_Control(pDX, IDC_EDIT15, m_aabbOffset);
+	DDX_Control(pDX, IDC_BUTTON11, m_addColC);
+	DDX_Control(pDX, IDC_COMBO6, m_aabbCnt);
+	DDX_Control(pDX, IDC_CHECK6, m_selectedAABBCol);
+	DDX_Control(pDX, IDC_EDIT17, m_rayOffSet);
+	DDX_Control(pDX, IDC_EDIT16, m_rayDir);
+	DDX_Control(pDX, IDC_EDIT18, m_rayLen);
+	DDX_Control(pDX, IDC_COMBO8, m_rayType);
+	DDX_Control(pDX, IDC_COMBO7, m_rayCnt);
+	DDX_Control(pDX, IDC_CHECK7, m_selectedRayCol);
+	DDX_Control(pDX, IDC_CHECK3, m_renderAlpha);
+	DDX_Control(pDX, IDC_LIST1, m_objList);
+	DDX_Control(pDX, IDC_CHECK9, m_curObjNameChk);
+	DDX_Control(pDX, IDC_EDIT19, m_obbOffset);
+	DDX_Control(pDX, IDC_EDIT20, m_obbSize);
+	DDX_Control(pDX, IDC_EDIT21, m_obbRight);
+	DDX_Control(pDX, IDC_EDIT22, m_obbUp);
+	DDX_Control(pDX, IDC_EDIT23, m_obbForward);
+	DDX_Control(pDX, IDC_COMBO9, m_obbCnt);
+	DDX_Control(pDX, IDC_CHECK8, m_selectedObbCol);
+	DDX_Control(pDX, IDC_CHECK2, m_showObjectChk);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -93,6 +117,33 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_CBN_SELCHANGE(IDC_COMBO4, &CToolMenuView::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_BUTTON3, &CToolMenuView::OnBnClickedCreatePrefBtn)
 	ON_BN_CLICKED(IDC_BUTTON4, &CToolMenuView::OnBnClickedCreateAABBColliderBtn)
+	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
+	
+	ON_BN_CLICKED(IDC_CHECK6, &CToolMenuView::OnBnClickedSelectedAABBCol)
+	ON_BN_CLICKED(IDC_BUTTON12, &CToolMenuView::OnBnClickedModifyAABBColBtn)
+	ON_BN_CLICKED(IDC_BUTTON13, &CToolMenuView::OnBnClickedCreateRayColliderBtn)
+	ON_BN_CLICKED(IDC_BUTTON14, &CToolMenuView::OnBnClickedDelRayColliderBtn)
+	ON_CBN_SELCHANGE(IDC_COMBO7, &CToolMenuView::OnCbnSelchangeRayList)
+	ON_BN_CLICKED(IDC_CHECK7, &CToolMenuView::OnBnClickedSelectedRayCol)
+	ON_BN_CLICKED(IDC_BUTTON15, &CToolMenuView::OnBnClickedModifyRayColBtn)
+	ON_BN_CLICKED(IDC_BUTTON16, &CToolMenuView::OnBnClickedCreateMesh)
+	ON_LBN_SELCHANGE(IDC_LIST1, &CToolMenuView::OnLbnSelchangeObjectList)
+	ON_BN_CLICKED(IDC_CHECK9, &CToolMenuView::OnBnClickedCurObjectNameChk)
+	
+
+	/* aabb */
+	ON_BN_CLICKED(IDC_BUTTON10, &CToolMenuView::OnBnClickedDelAABBColliderBtn)
+	ON_CBN_SELCHANGE(IDC_COMBO6, &CToolMenuView::OnCbnSelchangeAABBList)
+
+	/* obb */
+	ON_BN_CLICKED(IDC_CHECK8, &CToolMenuView::OnBnClickedSelectedObbCol)
+	ON_CBN_SELCHANGE(IDC_COMBO9, &CToolMenuView::OnCbnSelchangeObbList)
+	ON_BN_CLICKED(IDC_BUTTON17, &CToolMenuView::OnBnClickedCreateObbColliderBtn)
+	ON_BN_CLICKED(IDC_BUTTON19, &CToolMenuView::OnBnClickedModifyObbColBtn)
+	ON_BN_CLICKED(IDC_BUTTON18, &CToolMenuView::OnBnClickedDelObbColliderBtn)
+
+	ON_BN_CLICKED(IDC_BUTTON20, &CToolMenuView::OnBnClickedDelObjectWithObjList)
+	ON_BN_CLICKED(IDC_CHECK2, &CToolMenuView::OnBnClickedShowObjectChk)
 END_MESSAGE_MAP()
 
 
@@ -206,9 +257,13 @@ void CToolMenuView::OnInitialUpdate()
 	m_spinScaleZ.SetPos(0);
 
 	m_initTexture.EnableWindow(false);
-	m_showCol.EnableWindow(false);
+	m_showAllCol.EnableWindow(false);
 	m_colType[0].EnableWindow(false);
 	m_colType[1].EnableWindow(false);
+	m_colType[2].EnableWindow(false);
+	m_selectedAABBCol.EnableWindow(false);
+	m_selectedRayCol.EnableWindow(false);
+	m_selectedObbCol.EnableWindow(false);
 
 	m_layerID.AddString(L"Player");
 	m_layerID.AddString(L"Enemy");
@@ -218,6 +273,16 @@ void CToolMenuView::OnInitialUpdate()
 	m_colliderID.AddString(L"Enemy");
 	m_colliderID.AddString(L"Object");
 	m_colliderID.AddString(L"Map");
+
+	m_rayType.AddString(L"ALL_INF"); // 앞뒤로 무한하게 쏨 (직선)
+	m_rayType.AddString(L"LIMITED"); // 선분
+	m_rayType.AddString(L"NEGATIVE_INF"); // 레이 반대방향으로만 무한
+	m_rayType.AddString(L"POSITIVE_INF"); // 시작지점부터 레이 방향으로만 무한
+
+	m_renderAlpha.SetCheck(0);
+
+	//std::wstring wstr = (*Engine::GET_CUR_SCENE->GetLayers()[(_int)ELayerID::Map]->GetGameObjects().begin())->GetName();
+	//m_objList.AddString(wstr.c_str());
 }
 
 void CToolMenuView::Update(void)
@@ -442,33 +507,82 @@ void CToolMenuView::SetChangeTextureList(std::wstring sectionKey)
 	}
 }
 
-void CToolMenuView::ReadFile(ELayerID layerID, std::wofstream* ofsSave)
+void CToolMenuView::DataParsing(ELayerID layerID, std::wofstream* ofsSave)
 {
 	Engine::CLayer* layer = Engine::GET_CUR_SCENE->GetLayers()[(_int)layerID];
-	auto& playerObjs = layer->GetGameObjects();
+	auto& vObjs = layer->GetGameObjects();
 
-	if (playerObjs.empty())
+	if (vObjs.empty())
 		return;
 
-	for (_int i = 0; i < playerObjs.size(); ++i)
+	for (_int i = 0; i < vObjs.size(); ++i)
 	{
-		if ((layerID == ELayerID::Map) && (L"Cube0" == playerObjs[i]->GetName()))
+		if ((layerID == ELayerID::Map) && (L"Cube0" == vObjs[i]->GetName()))
 			continue;
 
 		if (0 == i)
-			(*ofsSave) << "numOf" << playerObjs[0]->GetObjectKey() << '=' << playerObjs.size() << "\n\n";
+			(*ofsSave) << "numOf" << vObjs[0]->GetObjectKey() << '=' << vObjs.size() << "\n\n";
 
-		std::wstring name = playerObjs[i]->GetName();
+		std::wstring name = vObjs[i]->GetName();
 
-		(*ofsSave) << name << "_static=" << playerObjs[i]->GetIsStatic() << "\n";
-		(*ofsSave) << name << "_layerID=" << playerObjs[i]->GetLayerID() << "\n";
-		(*ofsSave) << name << "_meshKey=" << playerObjs[i]->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
-		(*ofsSave) << name << "_initTex=" << playerObjs[i]->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
-		(*ofsSave) << name << "_renderID=" << playerObjs[i]->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
-		(*ofsSave) << name << "_scale=" << playerObjs[i]->GetTransform()->GetSize().x << ',' << playerObjs[i]->GetTransform()->GetSize().y << ',' << playerObjs[i]->GetTransform()->GetSize().z << '\n';
-		(*ofsSave) << name << "_rotation=" << playerObjs[i]->GetTransform()->GetRotation().x << ',' << playerObjs[i]->GetTransform()->GetRotation().y << ',' << playerObjs[i]->GetTransform()->GetRotation().z << '\n';
-		(*ofsSave) << name << "_position=" << playerObjs[i]->GetTransform()->GetPosition().x << ',' << playerObjs[i]->GetTransform()->GetPosition().y << ',' << playerObjs[i]->GetTransform()->GetPosition().z << '\n';
-		//ofsSave << "collisionID=" << '\n';
+		(*ofsSave) << name << "_static=" << vObjs[i]->GetIsStatic() << "\n";
+		(*ofsSave) << name << "_layerID=" << vObjs[i]->GetLayerID() << "\n";
+		(*ofsSave) << name << "_meshKey=" << vObjs[i]->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
+		(*ofsSave) << name << "_initTex=" << vObjs[i]->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
+		(*ofsSave) << name << "_renderID=" << vObjs[i]->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
+		(*ofsSave) << name << "_scale=" << vObjs[i]->GetTransform()->GetSize().x << ',' << vObjs[i]->GetTransform()->GetSize().y << ',' << vObjs[i]->GetTransform()->GetSize().z << '\n';
+		(*ofsSave) << name << "_rotation=" << vObjs[i]->GetTransform()->GetRotation().x << ',' << vObjs[i]->GetTransform()->GetRotation().y << ',' << vObjs[i]->GetTransform()->GetRotation().z << '\n';
+		(*ofsSave) << name << "_position=" << vObjs[i]->GetTransform()->GetPosition().x << ',' << vObjs[i]->GetTransform()->GetPosition().y << ',' << vObjs[i]->GetTransform()->GetPosition().z << '\n';
+
+		if (nullptr == vObjs[i]->GetComponent<Engine::CCollisionC>())
+			continue;
+
+		(*ofsSave) << name << "_colliderID=" << vObjs[i]->GetComponent<Engine::CCollisionC>()->GetCollisionID() << '\n';
+		auto& vCols = vObjs[i]->GetComponent<Engine::CCollisionC>()->GetColliders();
+		auto& col = vCols.begin();
+
+		_int index = 0;
+		for (; col != vCols.end(); ++col)
+		{
+			_float len = {};
+			_float3 dir = {};
+			_float3 size = {};
+			_float3 right = {};
+			_float3 up = {};
+			_float3 forward = {};
+
+			(*ofsSave) << name << "_collider_" << index << "_type=" << (*col)->GetColliderType() << '\n';
+			(*ofsSave) << name << "_collider_" << index << "_offset=" << (*col)->GetOffset().x << ',' << (*col)->GetOffset().y << ',' << (*col)->GetOffset().z << '\n';
+
+			switch ((*col)->GetColliderType())
+			{
+			case 1: // ray
+				dir = static_cast<Engine::CRayCollider*>(*col)->GetDirection();
+				(*ofsSave) << name << "_collider_" << index << "_direction=" << dir.x << ',' << dir.y << ',' << dir.z << '\n';
+
+				len = static_cast<Engine::CRayCollider*>(*col)->GetLength();
+				(*ofsSave) << name << "_collider_" << index << "_length=" << len << '\n';
+				break;
+			case 3: // aabb
+				size = static_cast<Engine::CAabbCollider*>(*col)->GetSize();
+				(*ofsSave) << name << "_collider_" << index << "_size=" << size.x << ',' << size.y << ',' << size.z << '\n';
+				break;
+			case 4: // obb
+				size = static_cast<Engine::CObbCollider*>(*col)->GetSize();
+				(*ofsSave) << name << "_collider_" << index << "_size=" << size.x << ',' << size.y << ',' << size.z << '\n';
+
+				right = static_cast<Engine::CObbCollider*>(*col)->GetRight();
+				(*ofsSave) << name << "_collider_" << index << "_right=" << right.x << ',' << right.y << ',' << right.z << '\n';
+
+				up = static_cast<Engine::CObbCollider*>(*col)->GetUp();
+				(*ofsSave) << name << "_collider_" << index << "_up=" << up.x << ',' << up.y << ',' << up.z << '\n';
+
+				forward = static_cast<Engine::CObbCollider*>(*col)->GetForward();
+				(*ofsSave) << name << "_collider_" << index << "_forward=" << forward.x << ',' << forward.y << ',' << forward.z << '\n';
+				break;
+			}
+			++index;
+		}
 	}
 
 	(*ofsSave) << '\n';
@@ -573,47 +687,14 @@ void CToolMenuView::OnBnClickedScaleBtn()
 
 void CToolMenuView::OnBnClickedSaveBtn()
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//std::string filePath = "../../Resource/Data/EditorScene/save.txt";
-	std::string filePath = "../../Data/EditorScene/save.txt";
+	std::string filePath = "../../../Data/EditorScene/save.txt";
 	std::wofstream ofsSave(filePath.data());
 
 	if (ofsSave.is_open())
 	{
-		ReadFile(ELayerID::Player, &ofsSave);
-		ReadFile(ELayerID::Enemy, &ofsSave);
-		ReadFile(ELayerID::Map, &ofsSave);
-
-		//auto& layer = Engine::GET_CUR_SCENE->GetLayers().begin();
-
-		//for (; layer != Engine::GET_CUR_SCENE->GetLayers().end(); ++layer)
-		//{
-		//	if ((*layer)->GetGameObjects().empty())
-		//		continue;
-
-		//	auto& obj = (*layer)->GetGameObjects().begin();
-
-		//	if (L"Camera0" != (*obj)->GetName())
-		//		ofsSave << "numOf" << (*obj)->GetObjectKey() << "=" << (*layer)->GetGameObjects().size() - 1 << "\n\n";
-
-		//	for (; obj != (*layer)->GetGameObjects().end(); ++obj)
-		//	{
-		//		if (L"Camera0" == (*obj)->GetName() || L"Cube0" == (*obj)->GetName())
-		//			continue;
-		//		
-		//		std::wstring name = (*obj)->GetName();
-
-		//		ofsSave << name << "_static=" << (*obj)->GetIsStatic() << "\n";
-		//		ofsSave << name << "_layerID=" << (*obj)->GetLayerID() << "\n";
-		//		ofsSave << name << "_meshKey=" << (*obj)->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
-		//		ofsSave << name << "_initTex=" << (*obj)->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
-		//		ofsSave << name << "_renderID=" << (*obj)->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
-		//		ofsSave << name << "_scale=" << (*obj)->GetTransform()->GetSize().x << ',' << (*obj)->GetTransform()->GetSize().y << ',' << (*obj)->GetTransform()->GetSize().z << '\n';
-		//		ofsSave << name << "_rotation=" << (*obj)->GetTransform()->GetRotation().x << ',' << (*obj)->GetTransform()->GetRotation().y << ',' << (*obj)->GetTransform()->GetRotation().z << '\n';
-		//		ofsSave << name << "_position=" << (*obj)->GetTransform()->GetPosition().x << ',' << (*obj)->GetTransform()->GetPosition().y << ',' << (*obj)->GetTransform()->GetPosition().z << '\n';
-		//		//ofsSave << "collisionID=" << '\n';
-		//	}
-		//}
+		DataParsing(ELayerID::Player, &ofsSave);
+		DataParsing(ELayerID::Enemy, &ofsSave);
+		DataParsing(ELayerID::Map, &ofsSave);
 
 		AfxMessageBox(L"Save Success | ObjectListView.cpp");
 	}
@@ -634,7 +715,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 
 		for (; obj != (*layer)->GetGameObjects().end(); ++obj)
 		{
-			if (L"Camera0" == (*obj)->GetName() || L"Cube0" == (*obj)->GetName())
+			if (L"Camera0" == (*obj)->GetName())
 				continue;
 
 			(*obj)->SetDeleteThis(true);
@@ -643,7 +724,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 
 	// 데이터 파일 불러오기
 	std::string strLine = "";
-	std::string filePath = "../../Data/EditorScene/Save.txt";
+	std::string filePath = "../../../Data/EditorScene/Save.txt";
 	std::ifstream ifsLoad(filePath.data());
 	
 	_float vPos = 0.f;
@@ -652,13 +733,17 @@ void CToolMenuView::OnBnClickedLoadBtn()
 	std::wstring protoObjectKey;
 	_bool isStatic;
 	_int layerID;
-	std::wstring name;
 	std::wstring meshKey;
 	_bool initTex;
 	_int renderID;
 	_float3 position;
 	_float3 scale;
 	_float3 rotation;
+	_int colID; // collider
+	_float3 offset; // collider
+	_float3 size; // collider
+
+	SP(Engine::CObject) spObject = nullptr;
 
 	while (!ifsLoad.eof())
 	{
@@ -674,9 +759,6 @@ void CToolMenuView::OnBnClickedLoadBtn()
 
 		if (!dataValue && !dataTag)
 		{
-			//std::wstring wstr = Engine::StrToWStr(vStr[0]);
-			//dataTag = _wcsdup(wstr.c_str());
-
 			std::wstring wstr = Engine::StrToWStr(vStr[1]);
 			dataValue = _wcsdup(wstr.c_str());
 		}
@@ -689,71 +771,111 @@ void CToolMenuView::OnBnClickedLoadBtn()
 		std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
 		dataTag = _wcsdup(wstr.c_str());
 
-		//if (!wcscmp(L"protoObjectKey", dataTag))
-		//{
-		//	protoObjectKey = dataValue;
-		//	continue;
-		//}
 		if (!wcscmp(L"static", dataTag))
 		{
 			isStatic = WstrToBool(dataValue);
 			continue;
 		}
 		else if (!wcscmp(L"layerID", dataTag))
-		{
+		{ 
 			layerID = WstrToInt(dataValue);
+			spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
+			spObject->SetLayerID(layerID);
+			m_objList.AddString(spObject->GetName().c_str());
 			continue;
 		}
-		//else if (!wcscmp(L"name", dataTag))
-		//{
-		//	// todo: 지정안했을 때 자동 지정 되는 이름은 저장하면 안됨
-		//	name = dataValue;
-		//	continue;
-		//}
 		else if (!wcscmp(L"meshKey", dataTag))
 		{
 			meshKey = dataValue;
+			spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
 			continue;
 		}
 		else if (!wcscmp(L"initTex", dataTag))
 		{
 			initTex =  WstrToBool(dataValue);
+			spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
+			
+
+			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+				spObject->AddComponent<Engine::CTextureC>();
+			else
+				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+
+			spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 			continue;
 		}
 		else if (!wcscmp(L"renderID", dataTag))
 		{
 			renderID = WstrToInt(dataValue);
+			spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
+			spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
 			continue;
 		}
 		else if (!wcscmp(L"scale", dataTag))
 		{
 			vStr = split(vStr[1], ',');
 			scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			spObject->GetTransform()->SetSize(scale);
 			continue;
 		}
 		else if (!wcscmp(L"rotation", dataTag))
 		{
 			vStr = split(vStr[1], ',');
 			rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			spObject->GetTransform()->SetRotation(rotation);
 			continue;
 		}
 		else if (!wcscmp(L"position", dataTag))
 		{
 			vStr = split(vStr[1], ',');
 			position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			spObject->GetTransform()->SetPosition(position);
+			continue;
 		}
+		else if (!wcscmp(L"colliderID", dataTag))
+		{
+			colID = StrToInt(vStr[1]);
+			spObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
+			spObject->AddComponent<Engine::CDebugC>();
+			continue;
+		}
+		else if (!wcscmp(L"collider", dataTag))
+		{
+			std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
+			CString type = _wcsdup(wstr.c_str());
 
-		SP(Engine::CObject) spObject
-			= objectFactory->AddClone(L"EmptyObject", isStatic, layerID, name);
+			_int index = StrToInt(vStr[1]);
 
-		spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
-		spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
-		spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
-		spObject->AddComponent<Engine::CTextureC>();
-		spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spObject->GetTransform()->SetSize(scale);
-		spObject->GetTransform()->SetPosition(position);
-		spObject->GetTransform()->SetRotation(rotation);
+			if (!wcscmp(L"type", type))
+			{
+				switch (index)
+				{
+				case 1: // ray
+					break;
+				case 3: // aabb
+				{
+					/* offset */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					/* size */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(size, offset));
+					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+					m_aabbCnt.AddString(SizeToCStr(colIdx));
+				}
+					break;
+				case 4: // obb
+					break;
+				}
+			}
+		}
 	}
 
 	AfxMessageBox(L"Load Success | ObjectListView.cpp");
@@ -771,20 +893,778 @@ void CToolMenuView::OnBnClickedCreatePrefBtn()
 
 void CToolMenuView::OnBnClickedCreateAABBColliderBtn()
 {
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	if (1 == m_colType[0].GetCheck())
+	{
+		CString cstrSize, cstrOffset;
+		m_aabbSize.GetWindowTextW(cstrSize);
+		m_aabbOffset.GetWindowTextW(cstrOffset);
+
+		std::string str = CStrToStr(cstrSize);
+		std::vector<std::string> vStrSize = split(str, ',');
+
+		_float3 size = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrSize[0])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[1])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
+		);
+
+		str = CStrToStr(cstrOffset);
+		std::vector<std::string> vStrOffset = split(str, ',');
+
+		_float3 offset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
+		);
+
+		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(size, offset));
+
+		size_t idx = curObj->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+
+		m_aabbCnt.AddString(SizeToCStr(idx));
+
+		std::cout << "add aabb collider" << std::endl;
+	}
+}
+
+void CToolMenuView::OnBnClickedCreateObbColliderBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	if (1 != m_colType[2].GetCheck())
+	{
+		CString cstrOffset, cstrSize, cstrRight, cstrUp, cstrForward;
+		m_obbOffset.GetWindowTextW(cstrOffset);
+		m_obbSize.GetWindowTextW(cstrSize);
+		m_obbRight.GetWindowTextW(cstrRight);
+		m_obbUp.GetWindowTextW(cstrUp);
+		m_obbForward.GetWindowTextW(cstrForward);
+
+		/* offset */
+		std::string str = CStrToStr(cstrOffset);
+		std::vector<std::string> vStrOffset = split(str, ',');
+
+		_float3 offset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
+		);
+
+		/* size */
+		str = CStrToStr(cstrSize);
+		std::vector<std::string> vStrSize = split(str, ',');
+
+		_float3 size = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrSize[0])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[1])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
+		);
+
+		/* right */
+		str = CStrToStr(cstrRight);
+		std::vector<std::string> vStrRight = split(str, ',');
+
+		_float3 right = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrRight[0])),
+			WstrToFloat(Engine::StrToWStr(vStrRight[1])),
+			WstrToFloat(Engine::StrToWStr(vStrRight[2]))
+		);
+
+		/* up */
+		str = CStrToStr(cstrUp);
+		std::vector<std::string> vStrUp = split(str, ',');
+
+		_float3 up = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrUp[0])),
+			WstrToFloat(Engine::StrToWStr(vStrUp[1])),
+			WstrToFloat(Engine::StrToWStr(vStrUp[2]))
+		);
+
+		/* forward */
+		str = CStrToStr(cstrForward);
+		std::vector<std::string> vStrForward = split(str, ',');
+
+		_float3 forward = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrForward[0])),
+			WstrToFloat(Engine::StrToWStr(vStrForward[1])),
+			WstrToFloat(Engine::StrToWStr(vStrForward[2]))
+		);
+
+		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(size, offset, right, up, forward));
+
+		size_t idx = curObj->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+
+		m_obbCnt.AddString(SizeToCStr(idx));
+
+		std::cout << "add obb collider" << std::endl;
+	}
+}
+
+void CToolMenuView::OnBnClickedCreateRayColliderBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	if (1 == m_colType[1].GetCheck())
+	{
+		CString cstrOffset, cstrDir, cstrLen;
+		m_rayOffSet.GetWindowTextW(cstrOffset);
+		m_rayDir.GetWindowTextW(cstrDir);
+		m_rayLen.GetWindowTextW(cstrLen);
+
+		std::string str = CStrToStr(cstrOffset);
+		std::vector<std::string> vStrSize = split(str, ',');
+
+		_float3 offset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrSize[0])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[1])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
+		);
+
+		str = CStrToStr(cstrDir);
+		vStrSize = split(str, ',');
+
+		_float3 dir = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrSize[0])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[1])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
+		);
+
+		str = CStrToStr(cstrLen);
+		_float len = StrToFloat(str);
+
+		Engine::ERayType rayType;
+		CString cstrVal;
+		m_rayType.GetLBText(m_rayType.GetCurSel(), cstrVal);
+		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+
+		if (L"ALL_INF" == wstr)
+			rayType = Engine::ERayType::ALL_INF;
+		else if (L"LIMITED" == wstr)
+			rayType = Engine::ERayType::LIMITED;
+		else if (L"NEGATIVE_INF" == wstr)
+			rayType = Engine::ERayType::NEGATIVE_INF;
+		else if (L"POSITIVE_INF" == wstr)
+			rayType = Engine::ERayType::POSITIVE_INF;
+
+		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CRayCollider::Create(offset, dir, len, rayType));
+
+		size_t idx = curObj->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+
+		m_rayCnt.AddString(SizeToCStr(idx));
+
+		std::cout << "add ray collider" << std::endl;
+	}
+}
+
+
+void CToolMenuView::OnBnClickedAddCollisionCBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	CString cstrVal;
+	m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int colID = 0;
+
+	if (L"" == wstr)
+		return;
+	else if (L"Player" == wstr)
+		colID = (_int)EColliderID::Player;
+	else if (L"Enemy" == wstr)
+		colID = (_int)EColliderID::Enemy;
+	else if (L"Object" == wstr)
+		colID = (_int)EColliderID::Object;
+	else if (L"Map" == wstr)
+		colID = (_int)EColliderID::Map;
+
+	curObj->AddComponent<Engine::CCollisionC>()->SetCollisionID((_int)colID);
+	curObj->AddComponent<Engine::CDebugC>();
+
+	m_colType[0].EnableWindow(true);
+	m_colType[1].EnableWindow(true);
+	m_colType[2].EnableWindow(true);
+	m_showAllCol.EnableWindow(true);
+	m_addColC.EnableWindow(false);
+}
+
+void CToolMenuView::OnBnClickedDelAABBColliderBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	CString cstrVal;
+	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
 	
+	curObj->GetComponent<Engine::CCollisionC>()->DeleteCollider(idx);
 
+	m_selectedAABBCol.EnableWindow(false);
+	m_selectedAABBCol.SetCheck(0);
 
-	//switch (curObjColliderType)
-	//{
-	//case 0:
-	//	_float3 사이즈;
-	//	curObj->GetComponent<Engine::CCollisionC>()->
-	//		AddCollider(Engine::CAabbCollider::Create(_float3(1, 1, 1), ZERO_VECTOR));
-	//	break;
+	// reset data in combobox
+	m_aabbCnt.ResetContent();
 
-	//}
+	_int index = 0;
 
-	//curObj->GetComponent<Engine::CCollisionC>()->SetIsEnabled(false);
+	auto& vCol = curObj->GetComponent<Engine::CCollisionC>()->GetColliders();
+	auto& col = vCol.begin();
+
+	for (; col != vCol.end(); ++col)
+	{
+		if (3 == (*col)->GetColliderType())
+			m_aabbCnt.AddString(IntToCStr(index));
+		++index;
+	}
+}
+
+void CToolMenuView::OnBnClickedDelRayColliderBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	CString cstrVal;
+	m_rayCnt.GetLBText(m_rayCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	curObj->GetComponent<Engine::CCollisionC>()->DeleteCollider(idx);
+
+	m_selectedRayCol.EnableWindow(false);
+	m_selectedRayCol.SetCheck(0);
+
+	// reset data in combobox
+	m_rayCnt.ResetContent();
+
+	_int index = 0;
+
+	auto& vCol = curObj->GetComponent<Engine::CCollisionC>()->GetColliders();
+	auto& col = vCol.begin();
+
+	for (; col != vCol.end(); ++col)
+	{
+		if (1 == (*col)->GetColliderType())
+			m_rayCnt.AddString(IntToCStr(index));
+		++index;
+	}
+}
+
+void CToolMenuView::OnBnClickedDelObbColliderBtn()
+{
+	Engine::CObject* curObj = static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == curObj)
+		return;
+
+	CString cstrVal;
+	m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	curObj->GetComponent<Engine::CCollisionC>()->DeleteCollider(idx);
+
+	m_selectedObbCol.EnableWindow(false);
+	m_selectedObbCol.SetCheck(0);
+
+	// reset data in combobox
+	m_obbCnt.ResetContent();
+
+	_int index = 0;
+
+	auto& vCol = curObj->GetComponent<Engine::CCollisionC>()->GetColliders();
+	auto& col = vCol.begin();
+
+	for (; col != vCol.end(); ++col)
+	{
+		if (1 == (*col)->GetColliderType())
+			m_obbCnt.AddString(IntToCStr(index));
+		++index;
+	}
+}
+
+void CToolMenuView::OnCbnSelchangeAABBList()
+{
+	std::cout << m_aabbCnt.GetCurSel() << std::endl;
+	m_selectedAABBCol.EnableWindow(true);
+	m_selectedAABBCol.SetCheck(1);
+
+	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == pCurObj)
+		return;
+
+	CString cstrVal;
+	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	_float3 size = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetSize();
+	_float3 offset = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetOffset();
+
+	std::wstring wstrSize = DeleteCharInWstr(FloatToWStr(size.x), '0') + L"," + 
+							DeleteCharInWstr(FloatToWStr(size.y), '0') + L"," + 
+							DeleteCharInWstr(FloatToWStr(size.z), '0');
+
+	std::wstring wstrOffset = DeleteCharInWstr(FloatToWStr(offset.x), '0') + L"," +
+							  DeleteCharInWstr(FloatToWStr(offset.y), '0') + L"," +
+							  DeleteCharInWstr(FloatToWStr(offset.z), '0');
+
+	m_aabbSize.SetWindowTextW(wstrSize.c_str());
+	m_aabbOffset.SetWindowTextW(wstrOffset.c_str());
+}
+
+void CToolMenuView::OnCbnSelchangeRayList()
+{
+	std::cout << m_rayCnt.GetCurSel() << std::endl;
+	m_selectedRayCol.EnableWindow(true);
+	m_selectedRayCol.SetCheck(1);
+
+	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == pCurObj)
+		return;
+
+	CString cstrVal;
+	m_rayCnt.GetLBText(m_rayCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	_float3 offset = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetOffset();
+	_float3 dir = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetDirection();
+	_float len = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetLength();
+	Engine::ERayType type = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetRayType();
+
+	std::wstring wstrOffset = DeleteCharInWstr(FloatToWStr(offset.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(offset.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(offset.z), '0');
+
+	std::wstring wstrDir = DeleteCharInWstr(FloatToWStr(dir.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(dir.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(dir.z), '0');
+
+	std::wstring wstrLen = DeleteCharInWstr(FloatToWStr(len), '0');
+
+	m_rayOffSet.SetWindowTextW(wstrOffset.c_str());
+	m_rayDir.SetWindowTextW(wstrDir.c_str());
+	m_rayLen.SetWindowTextW(wstrLen.c_str());
+	m_rayType.SetCurSel((_int)type);
+}
+
+void CToolMenuView::OnCbnSelchangeObbList()
+{
+	std::cout << m_obbCnt.GetCurSel() << std::endl;
+	m_selectedObbCol.EnableWindow(true);
+	m_selectedObbCol.SetCheck(1);
+
+	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (nullptr == pCurObj)
+		return;
+
+	CString cstrVal;
+	m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	_float3 offset = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetOffset();
+	_float3 size = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetSize();
+	_float3 right = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetRight();
+	_float3 up = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetUp();
+	_float3 forward = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->GetForward();
+
+	std::wstring wstrOffset = DeleteCharInWstr(FloatToWStr(offset.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(offset.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(offset.z), '0');
+
+	std::wstring wstrSize = DeleteCharInWstr(FloatToWStr(size.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(size.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(size.z), '0');
+
+	std::wstring wstrRight = DeleteCharInWstr(FloatToWStr(right.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(right.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(right.z), '0');
+
+	std::wstring wstrUp = DeleteCharInWstr(FloatToWStr(up.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(up.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(up.z), '0');
+
+	std::wstring wstrForward = DeleteCharInWstr(FloatToWStr(forward.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(forward.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(forward.z), '0');
+
+	m_obbOffset.SetWindowTextW(wstrOffset.c_str());
+	m_obbSize.SetWindowTextW(wstrSize.c_str());
+	m_obbRight.SetWindowTextW(wstrRight.c_str());
+	m_obbUp.SetWindowTextW(wstrUp.c_str());
+	m_obbForward.SetWindowTextW(wstrForward.c_str());
+}
+
+void CToolMenuView::OnBnClickedSelectedAABBCol()
+{
+	m_aabbCnt.SetCurSel(-1);
+	m_selectedAABBCol.SetCheck(0);
+	m_selectedAABBCol.EnableWindow(false);
+}
+
+void CToolMenuView::OnBnClickedSelectedRayCol()
+{
+	m_rayCnt.SetCurSel(-1);
+	m_selectedRayCol.SetCheck(0);
+	m_selectedRayCol.EnableWindow(false);
+}
+
+void CToolMenuView::OnBnClickedSelectedObbCol()
+{
+	m_obbCnt.SetCurSel(-1);
+	m_selectedRayCol.SetCheck(0);
+	m_selectedRayCol.EnableWindow(false);
+}
+
+void CToolMenuView::OnBnClickedModifyAABBColBtn()
+{
+	CString cstrVal;
+	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (1 == m_colType[0].GetCheck())
+	{
+		CString cstrSize, cstrOffset;
+		m_aabbSize.GetWindowTextW(cstrSize);
+		m_aabbOffset.GetWindowTextW(cstrOffset);
+
+		std::string str = CStrToStr(cstrSize);
+		std::vector<std::string> vStrSize = split(str, ',');
+
+		_float3 size = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrSize[0])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[1])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
+		);
+
+		str = CStrToStr(cstrOffset);
+		std::vector<std::string> vStrOffset = split(str, ',');
+
+		_float3 offset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
+		);
+
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetOffsetOrigin(offset);
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetOffset(offset);
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetSize(size);
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetHalfSize(size * 0.5f);
+
+		std::cout << "modify aabb collider" << std::endl;
+	}
+}
+
+void CToolMenuView::OnBnClickedModifyObbColBtn()
+{
+	CString cstrVal;
+	m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (1 == m_colType[2].GetCheck())
+	{
+		CString cstrOffset, cstrSize, cstrRight, cstrUp, cstrForward;
+		m_obbOffset.GetWindowTextW(cstrOffset);
+		m_obbSize.GetWindowTextW(cstrSize);
+		m_obbRight.GetWindowTextW(cstrRight);
+		m_obbUp.GetWindowTextW(cstrUp);
+		m_obbForward.GetWindowTextW(cstrForward);
+
+		/* offset */
+		std::string str = CStrToStr(cstrOffset);
+		std::vector<std::string> vStrOffset = split(str, ',');
+
+		_float3 offset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
+		);
+
+		/* size */
+		str = CStrToStr(cstrSize);
+		std::vector<std::string> vStrSize = split(str, ',');
+
+		_float3 size = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrSize[0])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[1])),
+			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
+		);
+
+		/* right */
+		str = CStrToStr(cstrRight);
+		std::vector<std::string> vStrRight = split(str, ',');
+
+		_float3 right = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrRight[0])),
+			WstrToFloat(Engine::StrToWStr(vStrRight[1])),
+			WstrToFloat(Engine::StrToWStr(vStrRight[2]))
+		);
+
+		/* up */
+		str = CStrToStr(cstrUp);
+		std::vector<std::string> vStrUp = split(str, ',');
+
+		_float3 up = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrUp[0])),
+			WstrToFloat(Engine::StrToWStr(vStrUp[1])),
+			WstrToFloat(Engine::StrToWStr(vStrUp[2]))
+		);
+
+		/* forward */
+		str = CStrToStr(cstrForward);
+		std::vector<std::string> vStrForward = split(str, ',');
+
+		_float3 forward = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrForward[0])),
+			WstrToFloat(Engine::StrToWStr(vStrForward[1])),
+			WstrToFloat(Engine::StrToWStr(vStrForward[2]))
+		);
+
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetOffsetOrigin(offset);
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetOffset(offset);
+
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetSize(size);
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetHalfSize(size * 0.5f);
+
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetRight(right);
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetUp(up);
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetForward(forward);
+
+		std::cout << "modify obb collider" << std::endl;
+	}
+}
+
+void CToolMenuView::OnBnClickedModifyRayColBtn()
+{
+	CString cstrVal;
+	m_rayCnt.GetLBText(m_rayCnt.GetCurSel(), cstrVal);
+	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	_int idx = WstrToInt(wstr);
+
+	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
+
+	if (1 == m_colType[1].GetCheck())
+	{
+		CString cstrOffset, cstrDir, cstrLen, cstrType;
+		m_rayOffSet.GetWindowTextW(cstrOffset);
+		m_rayDir.GetWindowTextW(cstrDir);
+		m_rayLen.GetWindowTextW(cstrLen);
+		m_rayType.GetWindowTextW(cstrType);
+
+		/* offset */
+		std::string str = CStrToStr(cstrOffset);
+		std::vector<std::string> vStrOffset = split(str, ',');
+
+		_float3 offset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
+		);
+
+		/* dir */
+		str = CStrToStr(cstrDir);
+		std::vector<std::string> vStrDir = split(str, ',');
+
+		_float3 dir = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrDir[0])),
+			WstrToFloat(Engine::StrToWStr(vStrDir[1])),
+			WstrToFloat(Engine::StrToWStr(vStrDir[2]))
+		);
+
+		/* len */
+		str = CStrToStr(cstrLen);
+		_float length = WstrToFloat(Engine::StrToWStr(str));
+
+		/* type */
+		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrType));
+		Engine::ERayType rayType;
+
+		if (L"ALL_INF" == wstr)
+			rayType = Engine::ERayType::ALL_INF;
+		else if (L"LIMITED" == wstr)
+			rayType = Engine::ERayType::LIMITED;
+		else if (L"NEGATIVE_INF" == wstr)
+			rayType = Engine::ERayType::NEGATIVE_INF;
+		else if (L"POSITIVE_INF" == wstr)
+			rayType = Engine::ERayType::POSITIVE_INF;
+
+		static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetOffsetOrigin(offset);
+		static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetOffset(offset);
+
+		static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetDirectionOrigin(dir);
+		static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetDirection(dir);
+
+		static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetLength(length);
+		static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx])->SetRayType(rayType);
+
+		std::cout << "modify ray collider" << std::endl;
+	}
+}
+
+void CToolMenuView::OnBnClickedCreateMesh()
+{
+	CString cstr;
+	std::wstring wstr;
+	ELayerID curLayerID = ELayerID::NumOfLayerID;
+	m_layerID.GetLBText(m_layerID.GetCurSel(), cstr);
+
+	if ("Player" == cstr)
+		curLayerID = ELayerID::Player;
+	else if ("Enemy" == cstr)
+		curLayerID = ELayerID::Enemy;
+	else if ("Map" == cstr)
+		curLayerID = ELayerID::Map;
+
+	m_curObjName.GetWindowTextW(cstr);
+	wstr = CStrToWStr(cstr);
+
+	static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->CreateObject(true, curLayerID, wstr);
+}
+
+void CToolMenuView::OnLbnSelchangeObjectList()
+{
+	_int index = m_objList.GetCurSel(); // 리스트에서 선택한 오브젝트의 리스트에서의 인덱스 번호
+	CString str;
+	std::wstring wstr;
+
+	for (_int i = (_int)ELayerID::Player; i < (_int)ELayerID::Camera; ++i) // player, enemy search
+	{
+		auto& vObjs = Engine::GET_CUR_SCENE->GetLayers()[i]->GetGameObjects();
+		auto& obj = vObjs.begin();
+
+		for (; obj != vObjs.end(); ++obj)
+		{
+			m_objList.GetText(index, str);
+			wstr = Engine::StrToWStr(CStrToStr(str));
+			if (wstr == (*obj)->GetName())
+			{
+				if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj())
+					static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(obj->get());
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+				m_curObjNameChk.SetCheck(1);
+				m_curObjName.SetWindowTextW((*obj)->GetName().c_str());
+				std::cout << "Target Found in Object List" << std::endl;
+
+				if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CCollisionC>())
+				{
+					m_colType[0].EnableWindow(true);
+					m_colType[1].EnableWindow(true);
+					m_colType[2].EnableWindow(true);
+					m_showAllCol.EnableWindow(true);
+					m_addColC.EnableWindow(false);
+				}
+				else
+				{
+					m_colType[0].EnableWindow(false);
+					m_colType[1].EnableWindow(false);
+					m_colType[2].EnableWindow(false);
+					m_showAllCol.EnableWindow(false);
+					m_addColC.EnableWindow(true);
+				}
+
+				// collision cnt reset
+				m_aabbCnt.ResetContent();
+				if (nullptr != (*obj)->GetComponent<Engine::CCollisionC>())
+				{
+					_int idx = 0;
+
+					auto& vCol = (*obj)->GetComponent<Engine::CCollisionC>()->GetColliders();
+					auto& col = vCol.begin();
+
+					for (; col != vCol.end(); ++col)
+					{
+						if (3 == (*col)->GetColliderType())
+						{
+							m_aabbCnt.AddString(IntToCStr(idx));
+						}
+						++idx;
+					}
+				}
+				return;
+			}
+		}
+	}
+	std::cout << "Target not found in Object List" << std::endl;
+}
+
+void CToolMenuView::OnBnClickedCurObjectNameChk()
+{
+	switch (m_curObjNameChk.GetCheck())
+	{
+	case 0:
+		static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+		static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
+		m_curObjName.SetWindowTextW(L"");
+		break;
+	case 1:
+		break;
+	}
+}
+
+void CToolMenuView::OnBnClickedDelObjectWithObjList()
+{
+	_int index = m_objList.GetCurSel();
+	CString str;
+	std::wstring wstr;
+
+	for (_int i = (_int)ELayerID::Player; i < (_int)ELayerID::Camera; ++i) // player, enemy search
+	{
+		auto& vObjs = Engine::GET_CUR_SCENE->GetLayers()[i]->GetGameObjects();
+		auto& obj = vObjs.begin();
+
+		for (; obj != vObjs.end(); ++obj)
+		{
+			m_objList.GetText(index, str);
+			wstr = Engine::StrToWStr(CStrToStr(str));
+			if (wstr == (*obj)->GetName())
+			{
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
+				m_curObjNameChk.SetCheck(0);
+				m_curObjName.SetWindowTextW(L"");
+				(*obj)->SetDeleteThis(true);
+
+				std::cout << "Target delete" << std::endl;
+				m_objList.DeleteString(index);
+				return;
+			}
+		}
+	}
+}
+
+void CToolMenuView::OnBnClickedShowObjectChk()
+{
+	
 }
 
 //{

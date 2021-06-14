@@ -1,4 +1,5 @@
 #include "EngineStdafx.h"
+#include "GraphicsManager.h"
 #include "Scene.h"
 #include "Object.h"
 #include "Frustum.h"

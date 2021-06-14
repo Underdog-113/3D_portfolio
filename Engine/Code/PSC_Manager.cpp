@@ -1,5 +1,5 @@
 #include "EngineStdafx.h"
-#include "..\Header\PSC_Manager.h"
+#include "PSC_Manager.h"
 #include "ParticleSystemC.h"
 
 USING(Engine)

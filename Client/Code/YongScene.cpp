@@ -11,7 +11,7 @@ CYongScene::~CYongScene()
 {
 }
 
-Engine::CScene * CYongScene::Create(void)
+CClientScene * CYongScene::Create(void)
 {
 	CYongScene* pInstance = new CYongScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);

@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
+#include "SoundManager.h"
 
-#include "DeviceManager.h"
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CSoundManager)

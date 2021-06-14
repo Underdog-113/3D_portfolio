@@ -32,6 +32,14 @@ private:
 	bool CheckIntersect(LPD3DXMESH _mesh, _float3 _rayPos, _float3 _rayDir, _float3* _pOutPickPoint);
 	void GetMouseRay(_mat _targetWorldMatrix, _float3 * _pOutRayPos, _float3 * _pOutRayDir);
 	void SetInitAnimation(SP(Engine::CObject) spObj);
+	void SetPickingMode();
+	void SetCreateObject();
+	void SetDeleteObject();
+	void SetLastDeleteObject();
+
+public:
+	void CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size = { 1.f, 1.f, 1.f }, _float3 intersection = { 0.f, 0.f, 0.f });
+	void SetPickObject();
 
 private:
 	void InitPrototypes(void) override;
@@ -39,6 +47,7 @@ private:
 
 private:
 	_bool m_pickingMode = false;
+	_bool m_stopAllKey = false;
 
 	class CMainFrame* m_pMain;
 	class CMapToolView* m_pMainView;

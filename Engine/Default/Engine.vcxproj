@@ -24,6 +24,9 @@
     <ClInclude Include="..\Header\BoundingVolume.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
+    <ClInclude Include="..\Header\Canvas.h" />
+    <ClInclude Include="..\Header\ClicularGaugeShader.h" />
+    <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DebugCollider.h" />
     <ClInclude Include="..\Header\Collider.h" />
     <ClInclude Include="..\Header\CollisionC.h" />
@@ -117,6 +120,9 @@
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
+    <ClCompile Include="..\Code\Canvas.cpp" />
+    <ClCompile Include="..\Code\ClicularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DebugCollider.cpp" />
     <ClCompile Include="..\Code\Collider.cpp" />
     <ClCompile Include="..\Code\CollisionC.cpp" />
@@ -200,6 +206,8 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx" />
@@ -324,6 +332,7 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalOptions>-Zm120 %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
