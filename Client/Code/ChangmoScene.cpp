@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "ChangmoScene.h"
 #include "EmptyObject.h"
- 
- 
- 
- 
+
+
+
+
 
 CChangmoScene::CChangmoScene()
 {
@@ -41,29 +41,32 @@ void CChangmoScene::Start(void)
 	{
 		SP(Engine::CObject) spEmptyObject
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-	
-		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana");
-		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		//spEmptyObject->AddComponent<Engine::CTextureC>();
-		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		//spEmptyObject->GetTransform()->SetSize(10, 10, 10);
-		//
-		//spEmptyObject
-		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
-		
+
 		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
 		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 		spEmptyObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(2);
-		spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(_float3(2, 2, 2)));
-		//PxShape* pSphereShape = Engine::GET_PHYSICS->createShape(PxSphereGeometry(2), *Engine::GET_PxMATERIAL);
-		//spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(pSphereShape, (_int)Engine::ECollisionType::Collide, (_int)Engine::EPhysicsBodyType::Kinematic);
+		spEmptyObject->GetComponent<Engine::CCollisionC>()->SetIsTrigger(true);
+		spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(_float3(2, 2, 2), _float3(0, 0, 0), _float3(0, PI / 4.f, 0)));
 		spEmptyObject->AddComponent<Engine::CDebugC>();
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
 		spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
+		spEmptyObject->GetTransform()->AddRotationY(PI / 4);
 
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+		//
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//spEmptyObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(1);
+		//spEmptyObject->GetComponent<Engine::CCollisionC>()->SetIsTrigger(true);
+		//spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(_float3(2, 2, 2)));
+		//spEmptyObject->AddComponent<Engine::CDebugC>();
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		//spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
 		//spEmptyObject
 		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube1");
 		//
@@ -84,7 +87,7 @@ void CChangmoScene::Start(void)
 		////spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
 		//spEmptyObject->GetTransform()->SetPosition(9, 0, 0);
-		
+
 
 		//SP(Engine::CObject) spEmptyObject1
 		//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
@@ -117,7 +120,7 @@ void CChangmoScene::Start(void)
 		//spEmptyObject->GetTransform()->AddPositionZ(0.5f);
 	}
 
-	
+
 }
 
 void CChangmoScene::FixedUpdate(void)
@@ -129,16 +132,22 @@ void CChangmoScene::FixedUpdate(void)
 void CChangmoScene::Update(void)
 {
 	__super::Update();
+
+	SP(Engine::CObject) spObject = FindObjectByName(L"Cube0");
+
+	if (Engine::IMKEY_PRESS(KEY_UP))
+	{
+		spObject->GetTransform()->MoveForward(3 * GET_DT);
+	}
+	if (Engine::IMKEY_PRESS(KEY_Q))
+	{
+		spObject->GetTransform()->AddRotationY(PI / 90);
+	}
 }
 
 void CChangmoScene::LateUpdate(void)
 {
 	__super::LateUpdate();
-	_float3 intersection;
-	if (Engine::IMKEY_DOWN(MOUSE_LEFT) && Engine::CInputManager::GetInstance()->MousePickingLocal((_int)ELayerID::Player, intersection))
-	{
-		int a = 5;
-	}
 }
 
 void CChangmoScene::OnDestroy(void)

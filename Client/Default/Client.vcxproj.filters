@@ -321,6 +321,7 @@
     <ClInclude Include="..\Header\StageController.h">
       <Filter>97.TempClass_ForDevelop</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Header\UiAnimCtrC.h">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClInclude>
@@ -363,6 +364,10 @@
     <ClInclude Include="..\Header\Kiana_CatPaw.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="..\Header\CatPaw_Claw.h" />
+    <ClInclude Include="..\Header\FSM_KianaC.h" />
+>>>>>>> Changmo
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -479,6 +484,7 @@
     <ClCompile Include="..\Code\StageController.cpp">
       <Filter>97.TempClass_ForDevelop</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Code\UiAnimCtrC.cpp">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClCompile>
@@ -518,6 +524,9 @@
     <ClCompile Include="..\Code\Kiana_CatPaw.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
+>>>>>>> Changmo
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

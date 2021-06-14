@@ -86,13 +86,6 @@ static _bool CheckCollisionComponentColliderBS(CCollisionC const* pCC, CCollider
 	return CheckBS(ccPos, colliderPos, radiusOne, radiusTwo);
 }
 
-static _bool PointRect(CCollider* pC1, CCollider* pC2, _bool instant)
-{
-
-}
-
-
-
 static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 {
 	SP(CTransformC) spTransform1 = pC1->GetOwner()->GetTransform();
@@ -166,8 +159,8 @@ static _bool PointRay(CCollider* pC1, CCollider* pC2, _bool instant)
 			}
 			else
 			{
-				pPC->GetOwner()->AddCollisionInfo(_CollisionInfo(pPC, pRC, pointPos, ZERO_VECTOR, 0));
-				pRC->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC, pPC, pointPos, ZERO_VECTOR, 0));
+				pPC->GetOwner()->AddCollisionInfo(_CollisionInfo(pPC, pRC, pointPos, -rayDir, 0));
+				pRC->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC, pPC, pointPos, rayDir, 0));
 			}
 		}
 		return true;
@@ -328,11 +321,14 @@ static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	_float3 ray2StartToRay1Start = ray1Start - ray2Start;
 
-	_float a = D3DXVec3Dot(&pRC1->GetDirection(), &pRC1->GetDirection());
-	_float b = D3DXVec3Dot(&pRC1->GetDirection(), &pRC2->GetDirection());
-	_float c = D3DXVec3Dot(&pRC1->GetDirection(), &ray2StartToRay1Start);
-	_float d = D3DXVec3Dot(&pRC2->GetDirection(), &pRC2->GetDirection());
-	_float e = D3DXVec3Dot(&pRC2->GetDirection(), &ray2StartToRay1Start);
+	_float3 ray1Dir = pRC1->GetDirection();
+	_float3 ray2Dir = pRC2->GetDirection();
+
+	_float a = D3DXVec3Dot(&ray1Dir, &ray1Dir);
+	_float b = D3DXVec3Dot(&ray1Dir, &ray2Dir);
+	_float c = D3DXVec3Dot(&ray1Dir, &ray2StartToRay1Start);
+	_float d = D3DXVec3Dot(&ray2Dir, &ray2Dir);
+	_float e = D3DXVec3Dot(&ray2Dir, &ray2StartToRay1Start);
 
 	_float discriminant = (a * d) - (b * b);
 	if (abs(discriminant) < EPSILON)
@@ -341,8 +337,8 @@ static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
 	_float s = ((b * e) - (c * d)) / discriminant;
 	_float t = ((a * e) - (b * c)) / discriminant;
 
-	_float3 closestOnRay1 = ray1Start + pRC1->GetDirection() * s;
-	_float3 closestOnRay2 = ray2Start + pRC2->GetDirection() * t;
+	_float3 closestOnRay1 = ray1Start + ray1Dir * s;
+	_float3 closestOnRay2 = ray2Start + ray2Dir * t;
 
 	if (closestOnRay1 == closestOnRay2)
 	{
@@ -358,14 +354,14 @@ static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
 			}
 			else
 			{
-				pRC1->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC1, pRC2, closestOnRay1, ZERO_VECTOR, 0));
-				pRC2->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC2, pRC1, closestOnRay1, ZERO_VECTOR, 0));
+				pRC1->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC1, pRC2, closestOnRay1, ray1Dir, 0));
+				pRC2->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC2, pRC1, closestOnRay1, ray2Dir, 0));
 			}
 		}
 		return true;
 	}
 
-	return false; 
+	return false;
 }
 static _bool RaySphere(CCollider* pC1, CCollider* pC2, _bool instant)
 { 
