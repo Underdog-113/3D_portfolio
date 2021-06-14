@@ -212,3 +212,5 @@ void CCollisionManager::InitCollisionMap(void)
 	}
 	return;
 }
+
+
