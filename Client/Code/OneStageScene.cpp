@@ -48,7 +48,7 @@ void COneStageScene::Start(void)
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();

@@ -13,26 +13,26 @@ CPointCollider::~CPointCollider()
 	OnDestroy();
 }
 
-SP(CPointCollider) CPointCollider::Create(_float3 offset)
+SP(CPointCollider) CPointCollider::Create(_int collisionID, _float3 offset)
 {
 	SP(CPointCollider) spInstance(new CPointCollider, SmartDeleter<CPointCollider>);
+	spInstance->SetCollisionID(collisionID);
 	spInstance->SetOffsetOrigin(offset);
 	spInstance->Awake();
 
 	return spInstance;
 }
 
-CCollider * CPointCollider::MakeClone(CCollisionC * pCC)
+SP(CCollider) CPointCollider::MakeClone(CCollisionC * pCC)
 {
-	CPointCollider* pPointClone = new CPointCollider;
-	pPointClone->SetOffsetOrigin(m_offsetOrigin);
-	pPointClone->SetRadiusBS(m_radiusBS);
-	pPointClone->SetColliderType(m_colliderType);
-	
+	SP(CPointCollider) spClone(new CPointCollider, SmartDeleter<CPointCollider>);
+	spClone->SetOffsetOrigin(m_offsetOrigin);
+	spClone->SetRadiusBS(m_radiusBS);
+	spClone->SetColliderType(m_colliderType);
+	spClone->SetCollisionID(m_collisionID);
+	spClone->SetOwner(pCC);
 
-	pPointClone->SetOwner(pCC);
-
-	return pPointClone;
+	return spClone;
 }
 
 void CPointCollider::Awake(void)
@@ -42,9 +42,7 @@ void CPointCollider::Awake(void)
 }
 
 void CPointCollider::OnDestroy(void)
-{
-	__super::OnDestroy();
-	
+{	
 }
 
 void CPointCollider::OnEnable(void)

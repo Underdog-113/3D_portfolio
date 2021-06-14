@@ -12,8 +12,8 @@ private:
 	virtual						   ~CPointCollider		(void);
 
 public:
-	static		SP(CPointCollider)	Create			(_float3 offset);
-				CCollider*			MakeClone		(CCollisionC* pCC) override;
+	static		SP(CPointCollider)	Create			(_int collisionID, _float3 offset);
+				SP(CCollider)		MakeClone		(CCollisionC* pCC) override;
 
 				void				Awake			(void) override;
 				void				OnDestroy		(void) override;

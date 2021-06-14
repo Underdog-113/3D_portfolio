@@ -45,28 +45,25 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
 		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(2);
-		spEmptyObject->GetComponent<Engine::CCollisionC>()->SetIsTrigger(true);
-		spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(_float3(2, 2, 2), _float3(0, 0, 0), _float3(0, PI / 4.f, 0)));
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(2, _float3(2, 2, 2)));
 		spEmptyObject->AddComponent<Engine::CDebugC>();
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
 		spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
 		spEmptyObject->GetTransform()->AddRotationY(PI / 4);
 
-		//spEmptyObject
-		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
-		//
-		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
-		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		//spEmptyObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(1);
-		//spEmptyObject->GetComponent<Engine::CCollisionC>()->SetIsTrigger(true);
-		//spEmptyObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(_float3(2, 2, 2)));
-		//spEmptyObject->AddComponent<Engine::CDebugC>();
-		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		//spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
+		spEmptyObject
+			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
+
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(1, _float3(2, 2, 2)));
+		spEmptyObject->AddComponent<Engine::CDebugC>();
+		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+
 		//spEmptyObject
 		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube1");
 		//
@@ -101,7 +98,7 @@ void CChangmoScene::Start(void)
 		//spEmptyObject1->GetTransform()->SetSize(3, 3, 3);
 
 		//spEmptyObject =
-		//	ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
+		//	ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background1");
 		//
 		//spEmptyObject->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
 		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Body");
@@ -111,7 +108,7 @@ void CChangmoScene::Start(void)
 		//spEmptyObject->GetTransform()->AddPositionZ(0.f);
 		//
 		//spEmptyObject =
-		//	ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background1");
+		//	ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background1");
 		//
 		//spEmptyObject->AddComponent<Engine::CRectTexC>();// ->SetIsOrtho(true);
 		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");

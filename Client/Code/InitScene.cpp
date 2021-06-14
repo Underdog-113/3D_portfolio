@@ -64,7 +64,7 @@ void CInitScene::Start(void)
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
 
 	m_pBackground =
-		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
+		ADD_CLONE(L"EmptyObject", false, (_int)Engine::ELayerID::UI, L"Background1");
 
 	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");

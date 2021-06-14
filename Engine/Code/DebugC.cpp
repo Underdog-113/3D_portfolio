@@ -41,13 +41,13 @@ void CDebugC::Start(SP(CComponent) spThis)
 	if (spOwnerCC != nullptr)
 	{
 		m_vDebugCollider.resize(spOwnerCC->GetColliders().size());
-		const std::vector<CCollider*>& vOwnerColliders = spOwnerCC->GetColliders();
+		const std::vector<SP(CCollider)>& vOwnerColliders = spOwnerCC->GetColliders();
 		for (_size i = 0; i < m_vDebugCollider.size(); ++i)
 		{
 			m_vDebugCollider[i] = 
 				std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
 			m_vDebugCollider[i]->SetOwner(m_pOwner);
-			m_vDebugCollider[i]->SetCollider(vOwnerColliders[i]);
+			m_vDebugCollider[i]->SetCollider(vOwnerColliders[i].get());
 		}
 	}
 }

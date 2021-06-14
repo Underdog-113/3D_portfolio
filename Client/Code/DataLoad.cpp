@@ -65,7 +65,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, name));
 
 		_float3 position;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
@@ -139,7 +139,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(pScene->GetObjectFactory()->AddClone(L"Slider", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<Engine::CSlider>(pScene->GetObjectFactory()->AddClone(L"Slider", true, (_int)Engine::ELayerID::UI, name));
 
 		_float3 pos;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", pos);
@@ -153,7 +153,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		for (int j = 0; j < 2; j++)
 		{
 			imageObj[j] =
-				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"Image" + name));
+				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Image" + name));
 
 			_float3 pos;
 			dataStore->GetValue(false, dataID, objectKey, key + L"imagePosition" + std::to_wstring(j), pos);
@@ -215,7 +215,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(CButton) button =
-			std::dynamic_pointer_cast<CButton>(pScene->GetObjectFactory()->AddClone(L"Button", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<CButton>(pScene->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
 		_float3 position;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
 		button->GetTransform()->SetPosition(position);
@@ -285,7 +285,7 @@ void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
 
 
 		SP(CScrollViewObject) spScrollView =
-			std::dynamic_pointer_cast<CScrollViewObject>(pScene->GetObjectFactory()->AddClone(L"ScrollViewObject", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<CScrollViewObject>(pScene->GetObjectFactory()->AddClone(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, name));
 
 		_float3 pos;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", pos);
@@ -333,7 +333,7 @@ void CDataLoad::CanvasLoad(Engine::CScene * pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CCanvas) canvas =
-			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
+			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)Engine::ELayerID::UI, L"MainCanvas"));
 	}
 }
 

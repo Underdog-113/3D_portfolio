@@ -44,21 +44,7 @@ static _bool CheckBS(_float3 const& pos1, _float3 const& pos2,
 		return true;
 }
 
-static _bool CheckCollisionComponentBS(CCollisionC const* pCC1, CCollisionC const* pCC2)
-{
-	_float3 objOnePos = pCC1->GetTransform()->GetPosition();
-	_float3 objTwoPos = pCC2->GetTransform()->GetPosition();
-
-	_float3 ccOnePos = objOnePos + pCC1->GetOffsetBS();
-	_float3 ccTwoPos = objTwoPos + pCC2->GetOffsetBS();
-
-	_float radiusOne = pCC1->GetRadiusBS();
-	_float radiusTwo = pCC2->GetRadiusBS();
-
-	return CheckBS(ccOnePos, ccTwoPos, radiusOne, radiusTwo);
-}
-
-static _bool CheckColliderBS(CCollider const* pCollider1, CCollider const* pCollider2)
+static _bool CheckColliderBS(SP(CCollider) pCollider1, SP(CCollider) pCollider2)
 {
 	_float3 objOnePos = pCollider1->GetOwner()->GetTransform()->GetPosition();
 	_float3 objTwoPos = pCollider2->GetOwner()->GetTransform()->GetPosition();
@@ -72,19 +58,6 @@ static _bool CheckColliderBS(CCollider const* pCollider1, CCollider const* pColl
 	return CheckBS(colliderOnePos, colliderTwoPos, radiusOne, radiusTwo);
 }
 
-static _bool CheckCollisionComponentColliderBS(CCollisionC const* pCC, CCollider const* pCollider)
-{
-	_float3 objOnePos = pCC->GetTransform()->GetPosition();
-	_float3 objTwoPos = pCollider->GetOwner()->GetTransform()->GetPosition();
-
-	_float3 ccPos		= objOnePos + pCC->GetOffsetBS();
-	_float3 colliderPos = objTwoPos + pCollider->GetOffset();
-
-	_float radiusOne = pCC->GetRadiusBS();
-	_float radiusTwo = pCollider->GetRadiusBS();
-
-	return CheckBS(ccPos, colliderPos, radiusOne, radiusTwo);
-}
 
 static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 {
@@ -1174,9 +1147,6 @@ static _bool ObbObb(CCollider* pC1, CCollider* pC2, _bool instant)
 		{
 			_float3 closestFromObb1 = pOC1->ClosestFromPoint(obb2Center);
 			_float3 closestFromObb2 = pOC2->ClosestFromPoint(obb1Center);
-
-			GET_CUR_SCENE->GetLayers()[8]->GetGameObjects()[0]->GetTransform()->SetPosition(closestFromObb1);
-			GET_CUR_SCENE->GetLayers()[8]->GetGameObjects()[1]->GetTransform()->SetPosition(closestFromObb2);
 
 			_float3 normal = obb2Center - obb1Center;
 			_float3 obb1HitPoint = pOC1->SurfacePoint(normal);

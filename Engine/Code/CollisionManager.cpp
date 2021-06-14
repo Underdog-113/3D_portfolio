@@ -22,8 +22,8 @@ void CCollisionManager::Start(_int numOfColliderID)
 	m_numOfColliderID = numOfColliderID;
 	for (int i = 0; i < m_numOfColliderID; ++i)
 	{
-		std::vector<SP(CCollisionC)> colliders;
-		m_vCollisionComponents.emplace_back(colliders);
+		std::vector<SP(CCollider)> colliders;
+		m_vColliders.emplace_back(colliders);
 
 		std::vector<_int> collisionMap;
 		m_vCollisionMap.emplace_back(collisionMap);
@@ -38,36 +38,44 @@ void CCollisionManager::Update(void)
 {
 	for (_int i = 0; i < m_numOfColliderID; ++i)
 	{
-		for (auto& spCC : m_vCollisionComponents[i])
+		for (auto& spCollider : m_vColliders[i])
 		{
 			//모든 CollisionComponent가 CheckCollision을 한다면,
 			//하나의 충돌에 대해서 양쪽 CollisionComponent가 CollisionInfo를 쏠 거야.
 			//ANS: Layer1이 Layer2를 체크해야할 레이어로 놓는다면
 			//Layer2는 Layer1을 체크해야할 레이어에 놓지 않으면 됨.
-			if (spCC->GetOwner() != nullptr && spCC->GetOwner()->GetIsEnabled())
+			if (spCollider->GetOwner() != nullptr && spCollider->GetOwner()->GetIsEnabled())
 			{
-				if (i == 5)
-					int a = 5;
-				CheckCollision(spCC.get());
+				CheckCollision(spCollider);
 			}
 		}
 	}
 
-	for (_int i = 0; i < m_numOfColliderID; ++i)
+
+	for (auto& spCollision : m_vCollisions)
 	{
-		for (auto& spCC : m_vCollisionComponents[i])
+		if (spCollision->GetOwner() != nullptr && spCollision->GetOwner()->GetIsEnabled())
 		{
-			if (spCC->GetOwner() != nullptr && spCC->GetOwner()->GetIsEnabled())
-			{
-				spCC->ProcessCollisions();
-				spCC->ProcessTriggers();
-			}
+			spCollision->ProcessCollisions();
+			spCollision->ProcessTriggers();
 		}
 	}
+
 }
 
 void CCollisionManager::LateUpdate(void)
 {
+	for (auto& it = m_vCollisions.begin(); it != m_vCollisions.end();)
+	{
+		if ((*it)->GetOwner() == nullptr)
+		{
+			(*it).reset();
+			it = m_vCollisions.erase(it);
+		}
+		else
+			++it;
+	}
+	
 	for (int i = 0; i < m_numOfColliderID; ++i)
 	{
 		for (auto& it = m_vColliders[i].begin(); it != m_vColliders[i].end();)
@@ -75,7 +83,7 @@ void CCollisionManager::LateUpdate(void)
 			if ((*it)->GetOwner() == nullptr)
 			{
 				(*it).reset();
-				it = m_vCollisionComponents[i].erase(it);
+				it = m_vColliders[i].erase(it);
 			}
 			else
 				++it;
@@ -86,7 +94,7 @@ void CCollisionManager::LateUpdate(void)
 
 void CCollisionManager::OnDestroy(void)
 {
-	m_vCollisionComponents.clear();
+	m_vColliders.clear();
 }
 
 void CCollisionManager::OnEnable(void)
@@ -96,77 +104,51 @@ void CCollisionManager::OnEnable(void)
 void CCollisionManager::OnDisable(void)
 {
 }
-void CCollisionManager::CheckCollision(CCollisionC* pCC)
+void CCollisionManager::CheckCollision(SP(CCollider) spCollider)
 {
-	if (pCC == nullptr)
-		return;
-
-	if (pCC->GetTransform() == nullptr)
-	{
-		MSG_BOX(__FILE__, L"콜라이더 컴포넌트에 트랜스폼이 없다.");
-		ABORT;
-	}
-
-	std::vector<_int>& checkingLayer = GetLayersToCheck(pCC->GetCollisionID());
+	std::vector<_int>& checkingLayer = GetLayersToCheck(spCollider->GetCollisionID());
 	_bool isItCollided;
 
-
-	for (auto& ccIt : m_vCollisionComponents[layerID])
+	for (auto& layerID : checkingLayer)
 	{
-		for (auto& layerID : checkingLayer)
+		for (auto& checkCollider : m_vColliders[layerID])
 		{
-			if (ccIt.get() == pCC)
+			if (checkCollider == spCollider)
 				continue;
 
-			//콜리션 컴포넌트 간의 BS 체크
-			if (CollisionHelper::CheckCollisionComponentBS(pCC, ccIt.get()) == false)
-				continue;
-
-			isItCollided = false;
-			for (auto& checkCollider : ccIt->GetColliders())
+			if (CollisionHelper::CheckColliderBS(spCollider, checkCollider) == true)
 			{
-				for (auto& itMyCC = pCC->GetColliders().begin(); itMyCC != pCC->GetColliders().end(); ++itMyCC)
-				{
-					//콜라이더 간의 BS 체크
-					if (CollisionHelper::CheckColliderBS(*itMyCC, checkCollider) == false)
-						continue;
-
-					_int myCType = (*itMyCC)->GetColliderType();
-					_int checkCType = checkCollider->GetColliderType();
-					isItCollided = (m_fpCollisionChecker[myCType][checkCType])(*itMyCC, checkCollider, false);
-				}
+				_int myCType = spCollider->GetColliderType();
+				_int checkCType = checkCollider->GetColliderType();
+				isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider.get(), checkCollider.get(), false);
 			}
 		}
 	}
 }
 
-void CCollisionManager::AddCollisionToManager(SP(CCollisionC) colliderComponent)
+void CCollisionManager::AddCollisionToManager(SP(CCollisionC) spCC)
 {
-	if (colliderComponent == nullptr)
-		return;
-
-	m_vCollisionComponents[colliderComponent->GetCollisionID()].emplace_back(colliderComponent);
+	m_vCollisions.emplace_back(spCC);
 }
 
-_bool CCollisionManager::CheckCollisionInstant(CCollider * pCollider, _int checkingLayer)
+void CCollisionManager::AddColliderToManager(SP(CCollider) spCollider)
+{
+	m_vColliders[spCollider->GetCollisionID()].emplace_back(spCollider);
+}
+
+_bool CCollisionManager::CheckCollisionInstant(SP(CCollider) spCollider, _int checkingLayer)
 {
 	_bool isItCollided = false;
-	for (auto& ccIt : m_vCollisionComponents[checkingLayer])
+	for (auto& checkCollider : m_vColliders[checkingLayer])
 	{
-		//콜리션 컴포넌트 간의 BS 체크
-		if (CollisionHelper::CheckCollisionComponentColliderBS(ccIt.get(), pCollider) == false)
-			continue;
-
 		isItCollided = false;
-		for (auto& checkCollider : ccIt->GetColliders())
-		{
-			//콜라이더 간의 BS 체크
-			if (CollisionHelper::CheckColliderBS(pCollider, checkCollider) == false)
-				continue;
 
-			_int myCType = pCollider->GetColliderType();
+		//콜라이더 간의 BS 체크
+		if (CollisionHelper::CheckColliderBS(spCollider, checkCollider) == true)
+		{
+			_int myCType = spCollider->GetColliderType();
 			_int checkCType = checkCollider->GetColliderType();
-			isItCollided = (m_fpCollisionChecker[myCType][checkCType])(pCollider, checkCollider, true);
+			isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider.get(), checkCollider.get(), true);
 		}
 	}
 

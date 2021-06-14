@@ -18,7 +18,7 @@ enum class EComponentID
 
 enum class ECollisionID
 {
-	Map					= (1 << (0 + (_uint)Engine::ECollisionID::NumOfColliderID)),
+	Map					= 0 + (_uint)Engine::ECollisionID::NumOfColliderID,
 	NumOfColliderID		= 1 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
@@ -38,9 +38,7 @@ enum class ELayerID
 	Player			= 0 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Map				= 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Enemy			= 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Camera			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	UI				= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID	= 5 + (_int)Engine::ELayerID::NumOfEngineLayerID
+	NumOfLayerID	= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID
 };
 
 enum class ELoadingID

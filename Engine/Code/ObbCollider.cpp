@@ -10,40 +10,42 @@ CObbCollider::CObbCollider()
 
 CObbCollider::~CObbCollider()
 {
+	OnDestroy();
 }
 
-CObbCollider * CObbCollider::Create(_float3 size, _float3 offset, _float3 rotOffset)
+SP(CObbCollider) CObbCollider::Create(_int collisionID, _float3 size, _float3 offset, _float3 rotOffset)
 {
-	CObbCollider* pObb = new CObbCollider;
-	pObb->SetOffsetOrigin(offset);
-	pObb->SetSize(size);
-	pObb->SetHalfSize(size / 2.f);
-	pObb->SetRotOffset(rotOffset);
-	
+	SP(CObbCollider) spInstance(new CObbCollider, SmartDeleter<CObbCollider>);
+	spInstance->SetCollisionID(collisionID);
+	spInstance->SetSize(size);
+	spInstance->SetHalfSize(size / 2.f);
+	spInstance->SetOffsetOrigin(offset);
+	spInstance->SetRotOffset(rotOffset);
 
-	pObb->Awake();
+	spInstance->Awake();
 
-	return pObb;
+	return spInstance;
 }
 
-CCollider * CObbCollider::MakeClone(CCollisionC * pCC)
+SP(CCollider) CObbCollider::MakeClone(CCollisionC * pCC)
 {
-	CObbCollider* pObbClone = new CObbCollider;
+	SP(CObbCollider) spClone(new CObbCollider, SmartDeleter<CObbCollider>);
 	
 	//Create 
-	pObbClone->SetOffsetOrigin(m_offsetOrigin);
-	pObbClone->SetSize(m_size);
-	pObbClone->SetHalfSize(m_halfSize);
-	pObbClone->SetRotOffset(m_rotOffset);
+	spClone->SetCollisionID(m_collisionID);
+	spClone->SetOffsetOrigin(m_offsetOrigin);
+	spClone->SetSize(m_size);
+	spClone->SetHalfSize(m_halfSize);
+	spClone->SetRotOffset(m_rotOffset);
 
 	//Awake
-	pObbClone->SetRadiusBS(m_radiusBS);
-	pObbClone->SetColliderType(m_colliderType);
+	spClone->SetRadiusBS(m_radiusBS);
+	spClone->SetColliderType(m_colliderType);
 
 	//MakeClone
-	pObbClone->SetOwner(pCC);
+	spClone->SetOwner(pCC);
 
-	return pObbClone;
+	return spClone;
 }
 
 void CObbCollider::Awake(void)

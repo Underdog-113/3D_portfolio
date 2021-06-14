@@ -49,18 +49,18 @@ void CDongScene::Start(void)
 
 	{
 		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
+			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 		slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
 		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
 
 		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
 		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 		background->GetTransform()->SetSize(_float3(104, 104, 0));
 		background->GetTexture()->AddTexture(L"AvatarButtonFrame", 0);
 
 		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
 		fill->SetParent(slider.get());
 		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + _float3(3.2f, -0.28f, -0.9f));
 		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
@@ -75,18 +75,18 @@ void CDongScene::Start(void)
 
 	{
 		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
+			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 		slider->GetTransform()->SetPosition(_float3(-150, 100, 0.0f));
 		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
 
 		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
 		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 		background->GetTransform()->SetSize(_float3(132, 13, 0));
 		background->GetTexture()->AddTexture(L"BarHp", 0);
 
 		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
 		fill->SetParent(slider.get());
 		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
@@ -141,7 +141,7 @@ void CDongScene::InitPrototypes(void)
 // 이미지 버튼 슬라이더 예제
 /*{
 SP(Engine::CImageObject) image =
-std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"sdfsdf"));
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"sdfsdf"));
 image->GetTransform()->SetPositionZ(0.0f);
 image->GetTransform()->SetSize(_float3(800, 600, 0));
 image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
@@ -149,7 +149,7 @@ image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
 
 {
 SP(CButton) button =
-std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)ELayerID::UI, L"0"));
+std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)Engine::ELayerID::UI, L"0"));
 button->GetTransform()->SetPosition(_float3(300, 0, 0.0f));
 button->GetTransform()->SetSize(_float3(141, 152, 0.1f));
 button->SetButtonType(CButton::UP);
@@ -160,18 +160,18 @@ button->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"출격", _float2(0, 0)
 
 {
 SP(Engine::CSlider) slider =
-std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
+std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
 slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
 
 SP(Engine::CImageObject) background =
-std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
 background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 background->GetTransform()->SetSize(_float3(104, 104, 0));
 background->GetTexture()->AddTexture(L"AvatarButtonFrame", 0);
 
 SP(Engine::CImageObject) fill =
-std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
 fill->SetParent(slider.get());
 fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + _float3(3.2f, -0.28f, -0.9f));
 fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
@@ -185,18 +185,18 @@ slider->AddSliderData(100, 100, background, fill);
 
 {
 SP(Engine::CSlider) slider =
-std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
+std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 slider->GetTransform()->SetPosition(_float3(-150, 100, 0.0f));
 slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
 
 SP(Engine::CImageObject) background =
-std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
 background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 background->GetTransform()->SetSize(_float3(132, 13, 0));
 background->GetTexture()->AddTexture(L"BarHp", 0);
 
 SP(Engine::CImageObject) fill =
-std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
 fill->SetParent(slider.get());
 fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
@@ -211,7 +211,7 @@ slider->AddSliderData(100, 100, background, fill);
 // (미완성)스크롤 뷰 예제
 /*
 SP(CScrollViewObject) spScrollView =
-std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)ELayerID::UI, L"View"));
+std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
 spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
 spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
 spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
@@ -233,7 +233,7 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 /*
 {
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image1"));
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_image1"));
 	image->GetTransform()->SetPositionZ(0.0f);
 	image->GetTransform()->SetSize(_float3(800, 600, 0));
 	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
@@ -241,7 +241,7 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 
 {
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image2"));
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_image2"));
 	image->GetTransform()->SetPositionZ(0.0f);
 	image->GetTransform()->SetSize(_float3(800, 600, 0));
 	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
@@ -249,7 +249,7 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 
 {
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"MainCanvas_image3"));
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_image3"));
 	image->GetTransform()->SetPositionZ(0.0f);
 	image->GetTransform()->SetSize(_float3(800, 600, 0));
 	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
@@ -257,7 +257,7 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 
 {
 	SP(Engine::CCanvas) canvas =
-		std::dynamic_pointer_cast<Engine::CCanvas>(ADD_CLONE(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
+		std::dynamic_pointer_cast<Engine::CCanvas>(ADD_CLONE(L"Canvas", true, (_int)Engine::ELayerID::UI, L"MainCanvas"));
 }
 */
 
@@ -273,7 +273,7 @@ CDamageObjectPool::GetInstance()->Start(this);
 Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 SP(Engine::CObject) spEmpty =
-ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
 CDamageObjectPool::GetInstance()->AddDamage(_float3(0, 0, 0), _float3(36, 51, 0), 36, 80.0f, 1, 123456789, L"Blue");
 }

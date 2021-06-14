@@ -7,38 +7,38 @@ BEGIN(Engine)
 class ENGINE_DLL CCollider abstract
 {
 protected:
-	explicit						CCollider			(void);
-	virtual						   ~CCollider			(void);
+	explicit								CCollider			(void);
+	virtual								   ~CCollider			(void);
 
 public:
-	virtual			CCollider*		MakeClone			(CCollisionC* pCC) PURE;
+	virtual			SP(CCollider)			MakeClone			(CCollisionC* pCC) PURE;
 
-	virtual			void			Awake				(void) PURE;
-	virtual			void			OnDestroy			(void) PURE;
+	virtual			void					Awake				(void) PURE;
+	virtual			void					OnDestroy			(void) PURE;
 
-	virtual			void			OnEnable			(void) PURE;
-	virtual			void			OnDisable			(void) PURE;
+	virtual			void					OnEnable			(void) PURE;
+	virtual			void					OnDisable			(void) PURE;
 
 //Interface
 public:
-	virtual			void			UpdatePosition		(void) PURE;
+	virtual			void					UpdatePosition		(void) PURE;
 
 protected:
-	virtual			void			MakeBS				(void) PURE;
+	virtual			void					MakeBS				(void) PURE;
 protected:
-	GETTOR_SETTOR	(CCollisionC*,	m_pOwner,			nullptr,		Owner)
+	GETTOR_SETTOR	(CCollisionC*,			m_pOwner,			nullptr,		Owner)
 
-	GETTOR_SETTOR	(_int,			m_collisionID,		UNDEFINED,		CollisionID)
-	GETTOR_SETTOR	(_int,			m_colliderType,		UNDEFINED,		ColliderType)
+	GETTOR_SETTOR	(_int,					m_collisionID,		UNDEFINED,		CollisionID)
+	GETTOR_SETTOR	(_int,					m_colliderType,		UNDEFINED,		ColliderType)
 
-	GETTOR_SETTOR	(_bool,			m_isTrigger,		false,			IsTrigger)
+	GETTOR_SETTOR	(_bool,					m_isTrigger,		false,			IsTrigger)
 
 	//부모 상대좌표
-	GETTOR_SETTOR	(_float3,		m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
+	GETTOR_SETTOR	(_float3,				m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
 	//실제 좌표
-	GETTOR_SETTOR	(_float3,		m_offset,			ZERO_VECTOR,	Offset)
+	GETTOR_SETTOR	(_float3,				m_offset,			ZERO_VECTOR,	Offset)
 	//BoundingSphere의 반지름.
-	GETTOR_SETTOR	(_float,		m_radiusBS,			0,				RadiusBS)	
+	GETTOR_SETTOR	(_float,				m_radiusBS,			0,				RadiusBS)	
 };
 
 END
