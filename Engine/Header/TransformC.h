@@ -62,9 +62,6 @@ public:
 
 					void				SetForward				(_float3 forward);
 					void				SetForwardUp			(_float3 forward, _float3 up);
-
-					PxTransform			ToPxTrasnform			(void);
-					void				SetPxTransform			(PxTransform pxTransform);
 #pragma endregion
 //Interface
 public:

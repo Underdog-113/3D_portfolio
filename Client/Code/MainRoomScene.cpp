@@ -57,8 +57,6 @@ void CMainRoomScene::Start(void)
 	Load->Load(this);
 	delete(Load);
 
-	// (미완성)스크롤 뷰 예제
-
 }
 
 void CMainRoomScene::FixedUpdate(void)
@@ -69,7 +67,6 @@ void CMainRoomScene::FixedUpdate(void)
 void CMainRoomScene::Update(void)
 {
 	__super::Update();
-
 }
 
 void CMainRoomScene::LateUpdate(void)

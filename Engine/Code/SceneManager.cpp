@@ -2,8 +2,6 @@
 #include "SceneManager.h" 
 #include "Object.h"
 #include "WndApp.h"
- 
- 
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CSceneManager)

@@ -38,7 +38,6 @@ void CPointCollider::Awake(void)
 {
 	__super::Awake();
 	m_colliderType = (_uint)EColliderType::Point;
-	m_pShape = GET_PHYSICS->createShape(PxSphereGeometry(0), *GET_PxMATERIAL);
 }
 
 void CPointCollider::OnDestroy(void)

@@ -51,8 +51,6 @@ void CStageSelectionScene::Start(void)
 		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
 
 	// 로드
-
-	// 똑같이 여기서 터짐
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
 	Load->Load(this);
@@ -67,6 +65,7 @@ void CStageSelectionScene::FixedUpdate(void)
 void CStageSelectionScene::Update(void)
 {
 	__super::Update();
+
 }
 
 void CStageSelectionScene::LateUpdate(void)
