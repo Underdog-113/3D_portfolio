@@ -47,7 +47,7 @@ void CDongScene::Start(void)
 {
 	__super::Start();
 
-	{
+	/*{
 		SP(Engine::CSlider) slider =
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 		slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
@@ -96,7 +96,7 @@ void CDongScene::Start(void)
 			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
 
 		slider->AddSliderData(100, 100, background, fill);
-	}
+	}*/
 }
 
 void CDongScene::FixedUpdate(void)
