@@ -1,7 +1,5 @@
 #include "EngineStdafx.h"
 #include "TextureStore.h"
-#include "DeviceManager.h"
-
 
 USING(Engine)
 CTextureStore::_TexDataMap CTextureStore::m_s_mStaticTextureData = {};

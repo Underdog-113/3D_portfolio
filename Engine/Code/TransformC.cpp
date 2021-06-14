@@ -1,11 +1,11 @@
 #include "EngineStdafx.h"
+#include "TransformC.h"
 #include "Object.h"
-#include "DataStore.h"
- 
- 
+
+
 
 USING(Engine)
-CTransformC::CTransformC(void)  
+CTransformC::CTransformC(void)
 {
 }
 
@@ -194,6 +194,20 @@ void CTransformC::SetForwardUp(_float3 forward, _float3 up)
 	m_up		= up;
 }
 
+PxTransform CTransformC::ToPxTrasnform(void)
+{
+
+	return PxTransform(ToPxVec3(m_position), PxQuat(PxIdentity));
+}
+
+void CTransformC::SetPxTransform(PxTransform pxTransform)
+{
+	m_position = _float3(pxTransform.p.x, pxTransform.p.y, pxTransform.p.z);
+
+	_quat q(pxTransform.q.x, pxTransform.q.y, pxTransform.q.z, pxTransform.q.w);
+	SetRotation(GET_MATH->QuatToRad(q));
+}
+
 void CTransformC::AddPosition(_float3 position)
 {
 	m_position += position;
@@ -289,9 +303,9 @@ void CTransformC::SlerpXZ(void)
 	{
 		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_forward);
 		GET_MATH->RoundOffRange(dotTwoForward, 1);
-	
+
 		_float includedAngle = acos(dotTwoForward);
-	
+
 		if (abs(includedAngle) < m_slerpSpeed * GET_DT)
 		{
 			SetForward(m_goalForward);
@@ -299,10 +313,10 @@ void CTransformC::SlerpXZ(void)
 			m_slerpOn		= false;
 			return;
 		}
-	
+
 		_float3 determinant;
 		D3DXVec3Cross(&determinant, &m_forward, &m_goalForward);
-		
+
 		if (determinant.y < 0)
 			AddRotationY(-m_slerpSpeed * GET_DT);
 		else
@@ -387,30 +401,30 @@ void CTransformC::UpdateRotation(void)
 		withoutY = _float3(m_forward.x, 0.f, m_forward.z);
 		D3DXVec3Normalize(&withoutY, &withoutY);
 		_float yRotAngle = acosf(D3DXVec3Dot(&withoutY, &FORWARD_VECTOR));
-	
+
 		_float3 crossResult;
 		D3DXVec3Cross(&crossResult, &FORWARD_VECTOR, &withoutY);
-	
+
 		if (crossResult.y < 0)
 			yRotAngle *= -1;
-	
+
 		D3DXMatrixRotationAxis(&yRot, &UP_VECTOR, yRotAngle);
-	
+
 		D3DXVec3Cross(&m_right, &UP_VECTOR, &m_forward);
 		_float rightRotAngle = acosf(D3DXVec3Dot(&withoutY, &m_forward));
 		if (m_forward.y >= 0)
 			rightRotAngle *= -1;
-	
+
 		_mat rightRot;
 		D3DXMatrixRotationAxis(&rightRot, &m_right, rightRotAngle);
-	
+
 		_mat rotMatrix = yRot * rightRot;
-	
+
 		_quat rotQuat;
 		D3DXQuaternionRotationMatrix(&rotQuat, &rotMatrix);
 		D3DXQuaternionNormalize(&rotQuat, &rotQuat);
-	
-	
+
+
 		m_rotation = GET_MATH->QuatToRad(rotQuat);
 		if (abs(m_rotation.x) < EPSILON)
 			m_rotation.x = 0;
@@ -438,12 +452,12 @@ void CTransformC::UpdateWorldMatrix(void)
 	D3DXMatrixRotationX(&rotateX, m_rotation.x);
 	D3DXMatrixRotationY(&rotateY, m_rotation.y);
 	D3DXMatrixRotationZ(&rotateZ, m_rotation.z);
-    
-    D3DXMatrixScaling(&size, m_size.x, 
+
+    D3DXMatrixScaling(&size, m_size.x,
                              m_size.y,
                              m_size.z);
-    
-    D3DXMatrixTranslation(&translation, m_position.x, 
+
+    D3DXMatrixTranslation(&translation, m_position.x,
                                         m_position.y,
                                         m_position.z);
 

@@ -8,9 +8,7 @@
 #include "StageController.h"
 #include "FSM_KianaC.h"
 #include "Kiana.h"
-
-#include "FSM_SpiderC.h"
-#include "MO_Spider.h"
+#include "AniCtrl.h"
 
 CJongScene::CJongScene()
 {
@@ -19,11 +17,11 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
-	//delete m_pController;
+	delete m_pController;
 	m_pController->DestroyInstance();
 }
 
-Engine::CScene * CJongScene::Create(void)
+CClientScene* CJongScene::Create(void)
 {
 	CJongScene* pInstance = new CJongScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -41,9 +39,9 @@ void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	
-	//m_pController = new CStageController;
-	//m_pController = CStageController::GetInstance();
-	//m_pController->Awake();	
+	m_pController = new CStageController;
+	m_pController = CStageController::GetInstance();
+	m_pController->Awake();	
 }
 
 void CJongScene::Start(void)
@@ -68,66 +66,80 @@ void CJongScene::Start(void)
 		}
 
 		{
-			//SP(Engine::CObject) spEmptyObject
-			//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
+			SP(Engine::CObject) spEmptyObject
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
 
-			//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_decl");
-			//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			//spEmptyObject->AddComponent<Engine::CTextureC>();
-			//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			//spEmptyObject->GetTransform()->SetSize(1, 1, 1);
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_decl");
+			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			spEmptyObject->AddComponent<Engine::CTextureC>();
+			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
 
-			//spEmptyObject->AddComponent<CFSM_KianaC>();
+			spEmptyObject->AddComponent<CFSM_KianaC>();
 
-			//spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
+			spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
 
-			//m_pKiana = spEmptyObject;
+			m_pKiana = spEmptyObject;
 
-			////m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
-			//m_pController->AddSquadMember(m_pKiana);
+			//m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
+			m_pController->AddSquadMember(m_pKiana);
 
 		}
 
 		// Kiana Body
-		//{
-		//	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+		{
+			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
 
-		//	m_spKiana = spKianaClone;
-		//	m_pController->AddSquadMember(m_spKiana);
-		//	m_pController->Start();
-		//}
+			m_spKiana = spKianaClone;
+			m_pController->AddSquadMember(m_spKiana);
+			m_pController->Start();
+		}
 
-		//// Catpaw ATK01
-		//{
-		//	m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
+		// Catpaw ATK01
+		{
+			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
 
-		//	m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
-		//	m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		//	m_spCatPaw->AddComponent<Engine::CTextureC>();
-		//	m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		//	m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
-		//	m_spCatPaw->GetTransform()->AddPositionY(1.f);
-		//}
+			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
+			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			m_spCatPaw->AddComponent<Engine::CTextureC>();
+			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
+			m_spCatPaw->GetTransform()->AddPositionY(1.f);
+		}
+
+		{
+			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+
+			m_spKiana = spKianaClone;
+			m_pController->AddSquadMember(m_spKiana);
+			m_pController->Start();
+		}
+
+		// Catpaw ATK01
+		{
+			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"testcatpaw");
+
+			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"CatPaw_Atk03");
+			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			m_spCatPaw->AddComponent<Engine::CTextureC>();
+			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
+			m_spCatPaw->GetTransform()->AddPositionY(1.f);
+			m_spCatPaw->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetReplay(true);
+		}
+
 
 		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
 
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"S02");
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			//spEmptyObject->GetTransform()->SetSize(100, 1, 10);
 			//spEmptyObject->GetTransform()->SetRotationY(D3DXToRadian(-90));
 			//spEmptyObject->GetTransform()->SetPositionY(-0.5);
-		}
-
-		// Spider
-		{
-			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			m_spSpider = spSpiderClone;
-			//m_pController->Start();
 		}
 	}
 }
@@ -140,10 +152,9 @@ void CJongScene::FixedUpdate(void)
 void CJongScene::Update(void)
 {
 	__super::Update();  
-	//m_pController->Update();
-	//m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
-	//m_pivot->GetTransform()->SetPosition(m_spSpider->GetTransform()->GetPosition());
-	//m_pivot->GetTransform()->SetPositionY(0.f);
+	m_pController->Update();
+	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
+	m_pivot->GetTransform()->SetPositionY(0.f);
 }
 
 void CJongScene::LateUpdate(void)

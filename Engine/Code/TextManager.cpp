@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
+#include "TextManager.h"
 
-#include "DeviceManager.h"
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CTextManager)

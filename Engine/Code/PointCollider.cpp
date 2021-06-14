@@ -27,6 +27,7 @@ CCollider * CPointCollider::MakeClone(CCollisionC * pCC)
 	pPointClone->SetOffsetOrigin(m_offsetOrigin);
 	pPointClone->SetRadiusBS(m_radiusBS);
 	pPointClone->SetColliderType(m_colliderType);
+	
 
 	pPointClone->SetOwner(pCC);
 
@@ -37,6 +38,7 @@ void CPointCollider::Awake(void)
 {
 	__super::Awake();
 	m_colliderType = (_uint)EColliderType::Point;
+	m_pShape = GET_PHYSICS->createShape(PxSphereGeometry(0), *GET_PxMATERIAL);
 }
 
 void CPointCollider::OnDestroy(void)

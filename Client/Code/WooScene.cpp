@@ -4,9 +4,11 @@
 #include "ObjectFactory.h"
 #include "CameraManager.h"
 
-#include "InputManager.h"
 #include "DynamicMeshData.h"
-#include "MeshData.h"
+#include "AniCtrl.h"
+
+#include "FSM_SpiderC.h"
+#include "MO_Spider.h"
 
 CWooScene::CWooScene()
 {
@@ -17,7 +19,7 @@ CWooScene::~CWooScene()
 {
 }
 
-Engine::CScene * CWooScene::Create(void)
+CClientScene* CWooScene::Create(void)
 {
 	CWooScene* pInstance = new CWooScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -34,21 +36,33 @@ void CWooScene::Free(void)
 void CWooScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	InitPrototypes();
 }
 
 void CWooScene::Start(void)
 {
 	__super::Start();
 	{
-		m_spSakura = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Character");
+		// 쓰지 마세요오오옹
+		{
+			SP(Engine::CObject) spEmptyObject1
+				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
 
-		m_spSakura->AddComponent<Engine::CMeshC>()->AddMeshData(L"Yae_Sakura");
-		m_spSakura->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		m_spSakura->AddComponent<Engine::CTextureC>();
-		m_spSakura->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
+			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			spEmptyObject1->AddComponent<Engine::CTextureC>();
+			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
 
-		m_spSakura->GetTransform()->SetSize(30, 30, 30);
+			m_pivot = spEmptyObject1.get();
+
+			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
+		}
+
+		{
+			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			m_spSpider = spSpiderClone;
+		}
 	}
 }
 
@@ -60,46 +74,26 @@ void CWooScene::FixedUpdate(void)
 void CWooScene::Update(void)
 {
 	__super::Update();
-
-	//Engine::CDynamicMesh* pDM = 
-	//	static_cast<Engine::CDynamicMesh*>(m_spSakura->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-
-	//if (Engine::IMKEY_DOWN(KEY_RIGHT))
-	//{
-	//	if (59 <= m_iIndex)
-	//		m_iIndex = 0;
-	//	else
-	//		++m_iIndex;
-
-	//	pDM->ChangeAniSet(m_iIndex);
-
-	//	std::cout << "index: " << m_iIndex << std::endl;
-	//	std::cout << "================================" << std::endl;
-	//}
 }
 
 void CWooScene::LateUpdate(void)
 {
 	__super::LateUpdate();
-
 }
 
 void CWooScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void CWooScene::OnEnable(void)
 {
 	__super::OnEnable();
-
 }
 
 void CWooScene::OnDisable(void)
 {
 	__super::OnDisable();
-
 }
 
 void CWooScene::InitPrototypes(void)

@@ -3,7 +3,7 @@
 
 #include "Scene.h"
 class CLoading;
-class CClientScene abstract : Engine::CScene
+class CClientScene abstract : public Engine::CScene
 {
 protected:
 	explicit							CClientScene		(void);
@@ -20,8 +20,8 @@ public:
 																  
 	virtual		void					OnDestroy			(void) override;
 																   
-	virtual		void					OnEnable			(void) PURE;
-	virtual		void					OnDisable			(void) PURE;
+	virtual		void					OnEnable			(void) override;
+	virtual		void					OnDisable			(void) override;
 
 public:
 				void					ChangeScene			(CScene* pScene);

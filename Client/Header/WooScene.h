@@ -1,15 +1,18 @@
 #ifndef WOOSCENE_H
 #define WOOSCENE_H
 
-#include "Scene.h"
-class CWooScene final : public Engine::CScene
+#include "ClientScene.h"
+
+class CStageController;
+
+class CWooScene final :public CClientScene
 {
 private:
 	explicit							CWooScene			(void);
 									   ~CWooScene			(void);
 
 public:
-	static			Engine::CScene*		Create				(void);
+	static			CClientScene*		Create				(void);
 					void				Free				(void) override;
 
 					void				Awake				(_int numOfLayers) override;
@@ -27,8 +30,12 @@ public:
 private:
 					void				InitPrototypes		(void) override;
 
-					SP(Engine::CObject) m_spSakura = nullptr;
+					Engine::CObject* m_pivot;
+					SP(Engine::CObject) m_spSpider;
+
 					_uint m_iIndex = 0;
+
+					CStageController* m_pController = nullptr;
 };
 
 #endif
