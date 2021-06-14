@@ -115,3 +115,14 @@ void CLayer::AddGameObject(SP(CObject) spGameObject)
 {
 	m_vGameObjects.emplace_back(spGameObject);
 }
+
+void CLayer::ClearLayer(void)
+{
+	for (auto& object : m_vGameObjects)
+	{
+		object->SetDeleteThis(true);
+		object.reset();
+	}
+
+	m_vGameObjects.clear();
+}

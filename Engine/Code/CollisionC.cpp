@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
+#include "CollisionC.h"
 #include "Collider.h"
- 
 #include "Object.h"
-#include "DataStore.h"
+#include "DebugCollider.h"
 
 USING(Engine)
 CCollisionC::CCollisionC(void)
@@ -160,6 +160,20 @@ void CCollisionC::AddCollisionInfo(_CollisionInfo collisionInfo)
 void CCollisionC::AddTriggeredCC(CCollisionC* pCC)
 {
 	m_vCurTriggers.emplace_back(pCC);
+}
+
+void CCollisionC::DeleteCollider(_int index)
+{
+	auto& iter = m_vColliders.begin();
+	m_vColliders[index]->Free();
+	m_vColliders.erase(iter + index);
+
+	SP(CDebugC) spDebug;
+	if (spDebug = m_pOwner->GetComponent<CDebugC>())
+	{
+		spDebug->GetDebugCollider()[index]->SetDeleteThis(true);
+		spDebug->DeleteDebugCollider(index);
+	}
 }
 
 void CCollisionC::AddColliderFromFile(void)

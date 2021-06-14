@@ -7,7 +7,7 @@ class CButton final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 public:
-	enum EButton_Type { UP, Down, Press };
+	enum EButton_Type { UP = 0, Down = 1, Press = 2 };
 private:
 	explicit CButton();
 	~CButton();
@@ -35,6 +35,8 @@ public:
 	void SetBasicName(void) override;
 
 	void FuncActivation();
+	void ButtonPressed();
+	void ButtonNormal();
 
 	template<typename Function, typename Object>
 	void AddFuncData(Function function, Object object)

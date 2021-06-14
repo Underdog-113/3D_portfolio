@@ -83,11 +83,15 @@ void CSlider::OnDestroy(void)
 void CSlider::OnEnable(void)
 {
 	__super::OnEnable();
+	m_spBackGround->SetIsEnabled(true);
+	m_spFill->SetIsEnabled(true);
 }
 
 void CSlider::OnDisable(void)
 {
 	__super::OnDisable();
+	m_spBackGround->SetIsEnabled(false);
+	m_spFill->SetIsEnabled(false);
 }
 
 void CSlider::AddSliderData(_float value, _float maxValue, SP(CObject) spBackGround, SP(CObject) spFill)

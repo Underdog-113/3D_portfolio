@@ -1,15 +1,15 @@
 #ifndef WOOSCENE_H
 #define WOOSCENE_H
 
-#include "Scene.h"
-class CWooScene final : public Engine::CScene
+#include "ClientScene.h"
+class CWooScene final :public CClientScene
 {
 private:
 	explicit							CWooScene			(void);
 									   ~CWooScene			(void);
 
 public:
-	static			Engine::CScene*		Create				(void);
+	static			CClientScene*		Create				(void);
 					void				Free				(void) override;
 
 					void				Awake				(_int numOfLayers) override;

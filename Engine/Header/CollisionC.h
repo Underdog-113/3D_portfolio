@@ -34,6 +34,8 @@ public:
 					void			AddCollisionInfo	(_CollisionInfo collisionInfo);
 
 					void			AddTriggeredCC		(CCollisionC* pCC);
+
+					void			DeleteCollider		(_int index);
 private:
 					void			AddColliderFromFile	(void);
 					void			MergingBS			(CCollider* pCollider);

@@ -26,6 +26,8 @@ public:
 			
 public:
 			void					AddDebugCollider	(CCollider* pCollider);
+			void					DeleteDebugCollider	(_int index);
+
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Debug;
 

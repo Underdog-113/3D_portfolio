@@ -11,6 +11,7 @@
 #include "Button.h"
 #include "Slider.h"
 #include "ScrollViewObject.h"
+#include "Canvas.h"
 
 #include "MO_Scout.h"
 #include "MO_Ninza.h"
@@ -39,7 +40,7 @@ CStaticScene::~CStaticScene()
 {
 }
 
-Engine::CScene * CStaticScene::Create(void)
+CClientScene* CStaticScene::Create(void)
 {
 	CStaticScene* pInstance = new CStaticScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
@@ -140,6 +141,9 @@ void CStaticScene::InitPrototypes(void)
 
 void CStaticScene::InitUiPrototypes(void)
 {
+	SP(Engine::CCanvas) spCanvasViewObject(Engine::CCanvas::Create(true, this));
+	GetObjectFactory()->AddPrototype(spCanvasViewObject);
+
 	SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spImageObject);
 

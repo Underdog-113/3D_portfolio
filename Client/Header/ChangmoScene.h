@@ -1,16 +1,16 @@
 #ifndef CHANGMOSCENE_H
 #define CHANGMOSCENE_H
 
-#include "Scene.h"
+#include "ClientScene.h"
 
-class CChangmoScene final : public Engine::CScene
+class CChangmoScene final : public CClientScene
 {
 private:
 	explicit							CChangmoScene		(void);
 									   ~CChangmoScene		(void);
 
 public:
-	static			Engine::CScene*		Create				(void);
+	static			CClientScene*		Create				(void);
 					void				Free				(void) override;
 
 					void				Awake				(_int numOfLayers) override;

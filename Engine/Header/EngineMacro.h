@@ -1,21 +1,20 @@
 #ifndef MACRO_H
 #define MACRO_H
 
-//¶óÀÌºê·¯¸®¸¦ Engine¿¡¼± exportÇÏ°í Client¿¡¼± ImportÇÏ°Ô ÇÑ´Ù.
+//ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ Engineï¿½ï¿½ï¿½ï¿½ exportï¿½Ï°ï¿½ Clientï¿½ï¿½ï¿½ï¿½ Importï¿½Ï°ï¿½ ï¿½Ñ´ï¿½.
 #ifdef EXPORTS_ENGINE
 #define ENGINE_DLL _declspec(dllexport)
 #else
 #define ENGINE_DLL _declspec(dllimport)
 #endif
 
-
-//¾ÈÀüÇÏ°Ô Æ÷ÀÎÅÍ¸¦ Áö¿ì¼¼¿ä
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ì¼¼ï¿½ï¿½
 #define SAFE_DELETE(something)														\
 if((something) != nullptr)															\
 	delete (something);																\
 (something) = nullptr;
 
-//MessageBox °£ÆíÈ­
+//MessageBox ï¿½ï¿½ï¿½ï¿½È­
 #ifdef _DEBUG_MSG
 #define MSG_BOX(file, message) MessageBox(0, message, Engine::GetCurFileName(file).c_str(), MB_OK)
 #define ABORT abort()
@@ -44,7 +43,7 @@ protected:																			\
 	varType varName = varInitValue; 												\
 public: 																			\
 	virtual inline varType const& Get##funcName(void) const { return varName; }		\
-	virtual inline void Set##funcName(varType var){ varName = var; }    
+	virtual inline void Set##funcName(varType var){ varName = var; }
 
 #define GETTOR(varType, varName, varInitValue, funcName)							\
 protected: 																			\
@@ -62,29 +61,29 @@ public: 																			\
 
 
 //Singleton Macro
-//Ä«ÇÇ »ý¼ºÀÚ¸¦ ¸·¾Æ¿ë
+//Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½
 #define NO_COPY(ClassName)															\
 private:																			\
-	ClassName(const ClassName&)	= delete;		
+	ClassName(const ClassName&)	= delete;
 
-//Assign operatorµµ ¸·¾Æ¿ë
+//Assign operatorï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½
 #define NO_ASSIGN_OPERATOR(ClassName)												\
 private:																			\
-	ClassName& operator=(const ClassName&) = delete;					
-							
+	ClassName& operator=(const ClassName&) = delete;
 
-//Default Destructor ¸ÅÅ©·Î
+
+//Default Destructor ï¿½ï¿½Å©ï¿½ï¿½
 #define DEFAULT_DESTRUCTOR(ClassName)												\
-	virtual ~ClassName(void) DEFAULT;									
+	virtual ~ClassName(void) DEFAULT;
 
-//Default Constructor ¸ÅÅ©·Î
+//Default Constructor ï¿½ï¿½Å©ï¿½ï¿½
 #define DEFAULT_CONSTRUCTOR(ClassName)												\
-	explicit ClassName(void) NONE;										
+	explicit ClassName(void) NONE;
 
 #define DEFAULT_COPY_CONSTRUCTOR(ClassName)											\
 	explicit ClassName(const ClassName& other) NONE;
 
-//½Ì±ÛÅÏ ¼±¾ð ¸ÅÅ©·Î
+//ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½
 #define DECLARE_SINGLETON(ClassName)												\
 		NO_COPY(ClassName)															\
 		NO_ASSIGN_OPERATOR(ClassName)												\
@@ -98,7 +97,7 @@ private:																			\
 	static ClassName*	m_s_pInstance;
 
 
-//½Ì±ÛÅÏ Á¤ÀÇ ¸ÅÅ©·Î
+//ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½
 #define IMPLEMENT_SINGLETON(ClassName)												\
 ClassName* ClassName::m_s_pInstance = nullptr;										\
 ClassName* ClassName::GetInstance(void)												\
@@ -212,4 +211,4 @@ CTextManager::GetInstance()->AddText(key, text, position, boxsize, fontsize, ali
 #define GET_PxMATERIAL CPhysicsManager::GetInstance()->GetPxMaterial()
 
 
-#endif // ! MACRO_H	
+#endif // ! MACRO_H

@@ -67,16 +67,15 @@ private:
 private:
 	static _uint m_s_uniqueID;
 
+	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
+	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+	GETTOR(SP(Engine::CRectTexC), m_spRectTex, nullptr, RectTex)
+
 	GETTOR_SETTOR(_int, m_column, 1, Column) // 열의 갯수
 	GETTOR_SETTOR(_float2, m_offSet, _float2(0, 0), OffSet) // 이미지 시작 위치
 	GETTOR_SETTOR(_float2, m_distanceXY, _float2(1,1), DistanceXY) // 이미지 사이의 거리
 
 	GETTOR_SETTOR(std::vector<SP(CButton)>, m_vButtonObject, {}, ButtonObject) // 그려야될 버튼오브젝트의 그룹 (이놈은 무조건 한개임
 	GETTOR_SETTOR(std::vector<std::vector<ImageInfo>>, m_vImageObject, {}, ImageObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
-
-	// 부가적인 이미지 요소
-	// 이미지가 아니라 버튼이 들어갈수도있음
-
-	// 스크롤뷰는 버튼과 이미지의 집합
 };
 #endif

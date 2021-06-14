@@ -90,6 +90,16 @@ void CEffectToolView::OnDraw(CDC* /*pDC*/)
 		m_spMainEffectTool->Render();
 		m_spMainEffectTool->PostRender();
 	}
+
+	CMainFrame* pMain = dynamic_cast<CMainFrame*>(::AfxGetApp()->GetMainWnd());
+	m_pInspectorView = dynamic_cast<CInspector*>(pMain->GetMainSplitter().GetPane(0, 1));
+	m_pInspectorView->FunctionUpdate();
+	m_pInspectorView->OptionUpdate();
+	m_pInspectorView->ModeUpdate();
+	m_pInspectorView->SettingUpdate();
+	m_pInspectorView->ActionUpdate();
+
+
 }
 
 

@@ -97,7 +97,7 @@
     <OutDir>$(SolutionDir)Bin/Client/Release/x64/</OutDir>
     <IntDir>$(SolutionDir)Log/Client/Release/x64/</IntDir>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Reference/Library/Release/;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Reference/Library/Release/;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -193,6 +193,9 @@
     <ClInclude Include="..\Header\ClientScene.h" />
     <ClInclude Include="..\Header\ClientStructure.h" />
     <ClInclude Include="..\Header\ClientTypedef.h" />
+    <ClInclude Include="..\Header\DamageFontC.h" />
+    <ClInclude Include="..\Header\DamageObjectPool.h" />
+    <ClInclude Include="..\Header\DataLoad.h" />
     <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
     <ClInclude Include="..\Header\FSM_AxeC.h" />
@@ -204,12 +207,13 @@
     <ClInclude Include="..\Header\FSM_RobotC.h" />
     <ClInclude Include="..\Header\FSM_ScoutC.h" />
     <ClInclude Include="..\Header\FSM_SpiderC.h" />
-    <ClInclude Include="..\Header\Function.h" />
+    <ClInclude Include="..\Header\ButtonFunction.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\MainRoomScene.h" />
     <ClInclude Include="..\Header\MB_Bronya.h" />
     <ClInclude Include="..\Header\MB_Ganesha.h" />
     <ClInclude Include="..\Header\Monster.h" />
@@ -219,8 +223,15 @@
     <ClInclude Include="..\Header\MO_Robot.h" />
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\PartySettingScene.h" />
+    <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
+    <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\ThreeStageScene.h" />
+    <ClInclude Include="..\Header\TwoStageScene.h" />
+    <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
@@ -237,6 +248,9 @@
     <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
+    <ClCompile Include="..\Code\DamageFontC.cpp" />
+    <ClCompile Include="..\Code\DamageObjectPool.cpp" />
+    <ClCompile Include="..\Code\DataLoad.cpp" />
     <ClCompile Include="..\Code\DeleGate.cpp" />
     <ClCompile Include="..\Code\DongScene.cpp" />
     <ClCompile Include="..\Code\FSM_AxeC.cpp" />
@@ -248,12 +262,13 @@
     <ClCompile Include="..\Code\FSM_RobotC.cpp" />
     <ClCompile Include="..\Code\FSM_ScoutC.cpp" />
     <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
-    <ClCompile Include="..\Code\Function.cpp" />
+    <ClCompile Include="..\Code\ButtonFunction.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\MainRoomScene.cpp" />
     <ClCompile Include="..\Code\MB_Bronya.cpp" />
     <ClCompile Include="..\Code\MB_Ganesha.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
@@ -263,8 +278,15 @@
     <ClCompile Include="..\Code\MO_Robot.cpp" />
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\PartySettingScene.cpp" />
+    <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
+    <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\ThreeStageScene.cpp" />
+    <ClCompile Include="..\Code\TwoStageScene.cpp" />
+    <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageController.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />

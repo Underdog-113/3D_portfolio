@@ -250,15 +250,15 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader">
       <UniqueIdentifier>{e0a4cbc0-854b-497c-8a96-a265f9a9d3bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader">
-      <UniqueIdentifier>{1e314eb4-e1f0-44c1-9ee4-e6e1f906aeda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
       <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX">
       <UniqueIdentifier>{18eeae3a-7185-4613-9c3b-65d04367f50b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
+      <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
+        </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX\00.Manager">
       <UniqueIdentifier>{6bfdfff4-fd1a-4e55-a118-fc63a21a7f7c}</UniqueIdentifier>
     </Filter>
@@ -282,6 +282,15 @@
     </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX\01.EventCallback">
       <UniqueIdentifier>{7544be39-25d1-4aa1-9a4c-f5c1ba9753f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\08.Canvas">
+      <UniqueIdentifier>{9aace7d5-1390-46ac-a5be-fa2cce8643f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader">
+      <UniqueIdentifier>{16e92165-0119-4c23-a4fc-a9f9ceba2d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader">
+      <UniqueIdentifier>{695e9423-cbcc-4a72-94a5-8375b5aa1dd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -513,6 +522,9 @@
     <ClCompile Include="..\Code\RootMotion.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\EffectShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
@@ -526,6 +538,15 @@
     <ClCompile Include="..\Code\PhysicsC.cpp" />
     <ClCompile Include="..\Code\SimulationEventCallback.cpp">
       <Filter>00.Engine\02.Physics\00.PhysX\01.EventCallback</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Canvas.cpp">
+      <Filter>02.Objects\08.Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ClicularGaugeShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DamageFontShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -781,6 +802,9 @@
     <ClInclude Include="..\Header\RootMotion.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\EffectShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
@@ -794,6 +818,15 @@
     <ClInclude Include="..\Header\PhysicsC.h" />
     <ClInclude Include="..\Header\SimulationEventCallback.h">
       <Filter>00.Engine\02.Physics\00.PhysX\01.EventCallback</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Canvas.h">
+      <Filter>02.Objects\08.Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClicularGaugeShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DamageFontShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -814,6 +847,15 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

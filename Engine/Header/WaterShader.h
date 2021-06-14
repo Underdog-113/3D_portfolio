@@ -17,8 +17,8 @@ public:
 public:
 	void SetUpConstantTable(SP(CGraphicsC) spGC) override;
 	
-	_float4 _v;
-	_float4 _Light_Pos;
-	_mat    _m;
+	_float4 m_vColor;
+	_float4 m_Light_Pos;
+	_mat    m_mFinalMat;
 };
 END

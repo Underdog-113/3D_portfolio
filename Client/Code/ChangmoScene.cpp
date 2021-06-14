@@ -15,7 +15,7 @@ CChangmoScene::~CChangmoScene()
 {
 }
 
-Engine::CScene* CChangmoScene::Create(void)
+CClientScene* CChangmoScene::Create(void)
 {
 	CChangmoScene* pInstance = new CChangmoScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);

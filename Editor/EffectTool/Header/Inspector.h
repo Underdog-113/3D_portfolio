@@ -4,7 +4,6 @@
 #include "afxcmn.h"
 
 
-
 // CInspector Æû ºäÀÔ´Ï´Ù.
 
 class CInspector : public CFormView
@@ -44,55 +43,58 @@ public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnPaint();
 #pragma region EditButtonName
-	CBitmapButton m_btnEffectList;
-	CBitmapButton m_btnEffectType;
-	CBitmapButton m_btnTextureType;
-	CBitmapButton m_btnFunction;
-	CBitmapButton m_btnEffectSetting;
-	CBitmapButton m_btn_SelectMode;
-	CBitmapButton m_btnOption;
-	CBitmapButton m_btn_Position;
-	CBitmapButton m_btn_Rotation;
-	CBitmapButton m_btn_Scale;
-	CBitmapButton m_btnStartTime;
-	CBitmapButton m_btnEndTime;
-	CBitmapButton m_btn_Repeat;
-	CBitmapButton m_btnLoop;
-	CBitmapButton m_btnBillboard;
+	CBitmapButton m_bmp_EffectList;
+	CBitmapButton m_bmp_EffectType;
+	CBitmapButton m_bmp_TextureType;
+	CBitmapButton m_bmp_Function;
+	CBitmapButton m_bmp_EffectSetting;
+	CBitmapButton m_bmp_SelectMode;
+	CBitmapButton m_bmp_Option;
+	CBitmapButton m_bmp_Position;
+	CBitmapButton m_bmp_Rotation;
+	CBitmapButton m_bmp_Scale;
+	CBitmapButton m_bmp_StartTime;
+	CBitmapButton m_bmp_EndTime;
+	CBitmapButton m_bmp_Repeat;
+	CBitmapButton m_bmp_Loop;
+	CBitmapButton m_bmp_Billboard;
 
 	// Mode
-	CBitmapButton m_btnModePos;
-	CBitmapButton m_btnModeRot;
-	CBitmapButton m_btnModeScale;
-	CBitmapButton m_btnTransform;
-	CBitmapButton m_btnEdit;
-	CBitmapButton m_btnFadeIn;
-	CBitmapButton m_btnFadeOut;
-	CBitmapButton m_btnUVSprite;
-	CBitmapButton m_btnUVAnimation;
+	CBitmapButton m_bmp_ModePos;
+	CBitmapButton m_bmp_ModeRot;
+	CBitmapButton m_bmp_ModeScale;
+	CBitmapButton m_bmp_Transform;
+	CBitmapButton m_bmp_Edit;
+	CBitmapButton m_bmp_FadeIn;
+	CBitmapButton m_bmp_FadeOut;
+	CBitmapButton m_bmp_UVSprite;
+	CBitmapButton m_bmp_UVAnimation;
 
 	// Option
-	CBitmapButton m_btnOptionPos;
-	CBitmapButton m_btnOptionRot;
-	CBitmapButton m_btnOptionScale;
-	CBitmapButton m_btnOptionFadeIn;
-	CBitmapButton m_btnOptionFadeOut;
-	CBitmapButton m_btnOptionUVSp;
-	CBitmapButton m_btnOptionUVAnim;
-	CBitmapButton m_btnAction;
+	CBitmapButton m_bmp_OptionPos;
+	CBitmapButton m_bmp_OptionRot;
+	CBitmapButton m_bmp_OptionScale;
+	CBitmapButton m_bmp_OptionFadeIn;
+	CBitmapButton m_bmp_OptionFadeOut;
+	CBitmapButton m_bmp_OptionUVSp;
+	CBitmapButton m_bmp_OptionUVAnim;
+	CBitmapButton m_bmp_Action;
 
 	// Setting
-	CBitmapButton m_btnPosX;
-	CBitmapButton m_btnPosY;
-	CBitmapButton m_btnPosZ;
-	CBitmapButton m_btnRotX;
-	CBitmapButton m_btnRotY;
-	CBitmapButton m_btnRotZ;
-	CBitmapButton m_btnScaleX;
-	CBitmapButton m_btnScaleY;
-	CBitmapButton m_btnScaleZ;
-	CBitmapButton m_btnAlphaWidth;
-	CBitmapButton m_btnAlphaHeight;
+	CBitmapButton m_bmp_PosX;
+	CBitmapButton m_bmp_PosY;
+	CBitmapButton m_bmp_PosZ;
+	CBitmapButton m_bmp_RotX;
+	CBitmapButton m_bmp_RotY;
+	CBitmapButton m_bmp_RotZ;
+	CBitmapButton m_bmp_ScaleX;
+	CBitmapButton m_bmp_ScaleY;
+	CBitmapButton m_bmp_ScaleZ;
+	CBitmapButton m_bmp_AlphaWidth;
+	CBitmapButton m_bmp_AlphaHeight;
+	CBitmapButton m_bmp_Speed;
+	CBitmapButton m_bmpAnimSpeed;
+
 #pragma endregion
 
 #pragma region EventButtonName
@@ -119,11 +121,137 @@ public:
 	afx_msg void OnBnClickedAlphaMask();
 
 private:
-	void Add_EffectMesh(CString ObjectName);
+	void Add_MeshEffect(CString ObjectName);
 	void Add_SoftEffect(CString ObjectName);
-	void Add_Texture(CString ObjectName);
-	void Add_AlphaMask(CString ObjectName);
+	void Add_Texture(CString TextureKey);
+	void Add_AlphaMask(CString TextureKey);
 
+public:
+	void FunctionUpdate();
+	void OptionUpdate();
+	void ModeUpdate();
+	void SettingUpdate();
+	void ActionUpdate();
+
+private:
+	void AnimTransformUpdate(SP(Engine::CObject) spObject);
+
+private:
+#pragma region EventFunc
+	afx_msg void OnBnClickedAnimPlay();
+	afx_msg void OnBnClickedAnimPause();
+	afx_msg void OnBnClickedAnimStop();
+	afx_msg void OnBnClickedSave();
+	afx_msg void OnBnClickedLoad();
+	afx_msg void OnEnChangeEditPosX();
+	afx_msg void OnEnChangeEditPosY();
+	afx_msg void OnEnChangeEditPosZ();
+	afx_msg void OnEnChangeEditRotX();
+	afx_msg void OnEnChangeEditRotY();
+	afx_msg void OnEnChangeEditRotZ();
+	afx_msg void OnEnChangeEditScaleX();
+	afx_msg void OnEnChangeEditScaleY();
+	afx_msg void OnEnChangeEditScaleZ();
+	afx_msg void OnEnChangeEditStartTime();
+	afx_msg void OnEnChangeEditEndTime();
+	afx_msg void OnEnChangeEditRepeat();
+	afx_msg void OnEnChangeEditAlphaWidth();
+	afx_msg void OnEnChangeEditAlphaHeight();
+	afx_msg void OnDeltaposSpinPosX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinPosY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinPosZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinRotX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinRotY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinRotZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinScaleX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinScaleY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinStartTime(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinEndTime(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinRepeat(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnEnChangeEditSpeed();
+	afx_msg void OnEnChangeEditAnimSpeed();
+
+#pragma endregion
+
+#pragma region EventVariable	
+	CEdit m_edPosX;
+	CEdit m_edPosY;
+	CEdit m_edPosZ;
+	CEdit m_edRotX;
+	CEdit m_edRotY;
+	CEdit m_edRotZ;
+	CEdit m_edScaleX;
+	CEdit m_edScaleY;
+	CEdit m_edScaleZ;
+	CEdit m_edStartTime;
+	CEdit m_edEndTIme;
+	CEdit m_edRepeat;
+	CEdit m_edAlphaWidth;
+	CEdit m_edAlphaHeight;
+#pragma endregion
+
+#pragma  region EventButton
+	CButton m_btnLoop;
+	CButton m_btnBillboard;
+	CButton m_btnOptionPos;
+	CButton m_btnOptionRot;
+	CButton m_btnOptionScale;
+	CButton m_btnOptionFadeIn;
+	CButton m_btnOptionFadeOut;
+	CButton m_btnOptionUVSprite;
+	CButton m_btnOptionUVAnim;
+	CButton m_btnModeTransform;
+	CButton m_btnModeEdit;
+	CButton m_btnModePosition;
+	CButton m_btnModeRotation;
+	CButton m_btnModeScale;
+	CButton m_btnModeFadeIn;
+	CButton m_btnModeFadeOut;
+	CButton m_btnModeUVSprite;
+	CButton m_btnModeUVAnim;
+
+#pragma endregion
+
+#pragma region SpinCtrl
+public:
+	CSpinButtonCtrl m_spinPosX;
+	CSpinButtonCtrl m_spinPosY;
+	CSpinButtonCtrl m_spinPosZ;
+	CSpinButtonCtrl m_spinRotX;
+	CSpinButtonCtrl m_spinRotY;
+	CSpinButtonCtrl m_spinRotZ;
+	CSpinButtonCtrl m_spinAlphaWidth;
+	CSpinButtonCtrl m_spinAlphaHeigth;
+	CSpinButtonCtrl m_spinScaleX;
+	CSpinButtonCtrl m_spinScaleY;
+	CSpinButtonCtrl m_spinScaleZ;
+#pragma endregion
+
+private:
+	enum ACTION_STATE { PLAY, PAUSE, STOP, STATE_END };
+	
+private:
+	CString m_ObjectTag;
+	_int m_iSelectObjectNum;
+	_int m_iRepeat;
+	_int m_iRepeatCnt;
+
+	_float m_fSpeed;
+	_float m_fAnimSpeed;
+	_float m_fStartTime;
+	_float m_fEndTime;
+	_float m_fAlphaWidth;
+	_float m_fAlphaHeight;
+
+	_bool m_isPlayAnim;
+
+	_float3 m_vSavePos;
+	_float3 m_vSaveRot;
+	_float3 m_vSaveScale;
+	ACTION_STATE m_eActionState;
 };
 
 

@@ -1,12 +1,7 @@
 #include "EngineStdafx.h"
 #include "Camera.h"
-
 #include "Frustum.h"
-
- 
 #include "WndApp.h"
-
- 
 #include "DebugCollider.h"
  
 
