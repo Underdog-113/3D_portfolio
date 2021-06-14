@@ -178,6 +178,9 @@
     <Filter Include="08.ObjectPool\DamageObjectPool">
       <UniqueIdentifier>{d1895693-21fc-4367-bb77-affbec198982}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\CatPaw">
+      <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -294,9 +297,6 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Valkyrie.h">
       <Filter>02.Objects\02.Valkyrie</Filter>
     </ClInclude>
@@ -357,8 +357,12 @@
     <ClInclude Include="..\Header\DamageObjectPool.h">
       <Filter>08.ObjectPool\DamageObjectPool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CatPaw_Claw.h" />
-    <ClInclude Include="..\Header\Kiana_CatPaw.h" />
+    <ClInclude Include="..\Header\FSMDefine_Kiana.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -511,8 +515,9 @@
     <ClCompile Include="..\Code\DataLoad.cpp">
       <Filter>06.DataLoad</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
-    <ClCompile Include="..\Code\Kiana_CatPaw.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

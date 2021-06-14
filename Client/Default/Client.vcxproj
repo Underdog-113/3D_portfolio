@@ -185,7 +185,7 @@
   <ItemGroup>
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
-    <ClInclude Include="..\Header\CatPaw_Claw.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -198,6 +198,7 @@
     <ClInclude Include="..\Header\DataLoad.h" />
     <ClInclude Include="..\Header\DeleGate.h" />
     <ClInclude Include="..\Header\DongScene.h" />
+    <ClInclude Include="..\Header\FSMDefine_Kiana.h" />
     <ClInclude Include="..\Header\FSM_AxeC.h" />
     <ClInclude Include="..\Header\FSM_BronyaC.h" />
     <ClInclude Include="..\Header\FSM_GaneshaC.h" />
@@ -211,7 +212,6 @@
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
-    <ClInclude Include="..\Header\Kiana_CatPaw.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
@@ -237,7 +237,6 @@
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
-    <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
@@ -246,7 +245,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
-    <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
     <ClCompile Include="..\Code\DamageFontC.cpp" />
@@ -267,7 +266,6 @@
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
-    <ClCompile Include="..\Code\Kiana_CatPaw.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />
