@@ -115,6 +115,13 @@ void CDebugCollider::LateUpdate(void)
 		break;
 	}
 
+	case (_int)EColliderType::AABB:
+	{
+		CAabbCollider* pAabb = static_cast<CAabbCollider*>(m_pCollider);
+		m_spTransform->SetSize(pAabb->GetSize());
+		break;
+	}
+
 	case (_int)EColliderType::OBB:
 	{
 		m_spTransform->SetForward(static_cast<CObbCollider*>(m_pCollider)->GetForward());

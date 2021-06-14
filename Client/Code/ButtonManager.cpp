@@ -7,25 +7,25 @@
 IMPLEMENT_SINGLETON(CButtonManager)
 void CButtonManager::Awake(void)
 {
-
+	m_clickButton = nullptr;
+	m_funcActivation = nullptr;
 }
 
 void CButtonManager::Update(void)
 {
-	// 버튼 누르면 색변경
-	// 버튼 때면 색변경
-
 	if (Engine::IMKEY_DOWN(MOUSE_LEFT))
 	{
-		DownButtonActivation();
+		ButtonDown();
+		ButtonActivation(m_DownButtonList);
 	}
-	else if (Engine::IMKEY_UP(MOUSE_LEFT))
+	if (Engine::IMKEY_UP(MOUSE_LEFT))
 	{
-		UpButtonActivation();
+		ButtonUp();
+		ButtonActivation(m_UpButtonList);
 	}
-	else if (Engine::IMKEY_PRESS(MOUSE_LEFT))
+	if (Engine::IMKEY_PRESS(MOUSE_LEFT))
 	{
-		PressButtonActivation();
+		ButtonActivation(m_PressButtonList);
 	}
 }
 
@@ -57,8 +57,33 @@ void CButtonManager::AddButtonList(CButton* buttonObject)
 	});
 }
 
+void CButtonManager::ButtonActivation(std::list<CButton*> buttonList)
+{
+	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
-void CButtonManager::UpButtonActivation()
+	for (auto& button : buttonList)
+	{
+		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
+		{
+			if (m_funcActivation == nullptr)
+			{
+				m_funcActivation = button;
+			}
+			else if (m_funcActivation && m_funcActivation->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_funcActivation = button;
+			}
+		}
+	}
+
+	if (m_funcActivation)
+	{
+		m_funcActivation->FuncActivation();
+		m_funcActivation = nullptr;
+	}
+}
+
+void CButtonManager::ButtonDown()
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
@@ -66,34 +91,59 @@ void CButtonManager::UpButtonActivation()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FuncActivation();
+			if (m_clickButton == nullptr)
+			{
+				m_clickButton = button;
+			}
+			else if (m_clickButton && m_clickButton->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_clickButton = button;
+			}
 		}
 	}
-}
-
-void CButtonManager::DownButtonActivation()
-{
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 	for (auto& button : m_DownButtonList)
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FuncActivation();
+			if (m_clickButton == nullptr)
+			{
+				m_clickButton = button;
+			}
+			else if (m_clickButton && m_clickButton->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_clickButton = button;
+			}
 		}
 	}
-}
-
-void CButtonManager::PressButtonActivation()
-{
-	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 
 	for (auto& button : m_PressButtonList)
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			button->FuncActivation();
+			if (m_clickButton == nullptr)
+			{
+				m_clickButton = button;
+			}
+			else if (m_clickButton && m_clickButton->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			{
+				m_clickButton = button;
+			}
 		}
+	}
+
+	if (m_clickButton)
+	{
+		m_clickButton->ButtonPressed();
+	}
+}
+
+void CButtonManager::ButtonUp()
+{
+	if (m_clickButton)
+	{
+		m_clickButton->ButtonNormal();
+		m_clickButton = nullptr;
 	}
 }
 

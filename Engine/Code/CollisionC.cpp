@@ -1,8 +1,8 @@
 #include "EngineStdafx.h"
+#include "CollisionC.h"
 #include "Collider.h"
- 
 #include "Object.h"
-#include "DataStore.h"
+#include "DebugCollider.h"
 
 USING(Engine)
 CCollisionC::CCollisionC(void)
@@ -65,7 +65,10 @@ void CCollisionC::FixedUpdate(SP(CComponent) spThis)
 
 void CCollisionC::Update(SP(CComponent) spThis)
 {
-	
+	for (auto& actor : m_vActor)
+	{
+		actor->is<PxRigidDynamic>()->setGlobalPose(m_spTransform->ToPxTrasnform());
+	}
 }
 
 void CCollisionC::LateUpdate(SP(CComponent) spSelf)
@@ -99,6 +102,7 @@ void CCollisionC::AddCollider(CCollider* pCollider)
 	pCollider->SetOwner(this);
 	m_vColliders.emplace_back(pCollider);
 
+
 	if (m_radiusBS == UNDEFINED)
 	{
 		m_offsetBS = pCollider->GetOffsetOrigin();
@@ -112,6 +116,42 @@ void CCollisionC::AddCollider(CCollider* pCollider)
 		spDebugC->AddDebugCollider(pCollider);
 }
 
+void CCollisionC::AddCollider(PxShape * pShape, _int collisionType, _int physicsBodyType)
+{
+	PxTransform actorTransform(m_spTransform->ToPxTrasnform());
+	
+	if (collisionType == (_int)ECollisionType::Collide)
+	{
+		pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, true);
+		pShape->setFlag(PxShapeFlag::eSCENE_QUERY_SHAPE, true);
+	}
+	else
+	{
+		pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
+		pShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
+	}
+
+	if (physicsBodyType == (_int)EPhysicsBodyType::Static)
+	{
+		PxRigidStatic* pRigidStatic = PxCreateStatic(*GET_PHYSICS, actorTransform, *pShape);
+		pRigidStatic->userData = this;
+		GET_PxSDK->AddActor(pRigidStatic);
+		m_vActor.emplace_back(pRigidStatic);
+	}
+	else if (physicsBodyType == (_int)EPhysicsBodyType::Dynamic)
+	{
+		PxRigidDynamic* pRigidDynamic = PxCreateDynamic(*GET_PHYSICS, actorTransform, *pShape, 10);
+		pRigidDynamic->userData = this;
+		m_vActor.emplace_back(pRigidDynamic);
+	}
+	else
+	{
+		PxRigidDynamic* pRigidKinematic = PxCreateKinematic(*GET_PHYSICS, actorTransform, *pShape, 10);
+		pRigidKinematic->userData = this;
+		m_vActor.emplace_back(pRigidKinematic);
+	}
+}
+
 void CCollisionC::AddCollisionInfo(_CollisionInfo collisionInfo)
 {
 	m_vCurCollisions.emplace_back(collisionInfo);
@@ -120,6 +160,20 @@ void CCollisionC::AddCollisionInfo(_CollisionInfo collisionInfo)
 void CCollisionC::AddTriggeredCC(CCollisionC* pCC)
 {
 	m_vCurTriggers.emplace_back(pCC);
+}
+
+void CCollisionC::DeleteCollider(_int index)
+{
+	auto& iter = m_vColliders.begin();
+	m_vColliders[index]->Free();
+	m_vColliders.erase(iter + index);
+
+	SP(CDebugC) spDebug;
+	if (spDebug = m_pOwner->GetComponent<CDebugC>())
+	{
+		spDebug->GetDebugCollider()[index]->SetDeleteThis(true);
+		spDebug->DeleteDebugCollider(index);
+	}
 }
 
 void CCollisionC::AddColliderFromFile(void)

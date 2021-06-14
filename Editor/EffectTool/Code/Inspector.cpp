@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "EffectTool.h"
 #include "../Header/Inspector.h"
+#include "MeshEffect.h"
+#include "Object.h"
+#include "Layer.h"
 
-
-// CInspector`
+// CInspector
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -14,7 +16,14 @@ IMPLEMENT_DYNCREATE(CInspector, CFormView)
 CInspector::CInspector()
 	: CFormView(IDD_INSPECTOR)
 {
-
+	m_ObjectTag = L"";
+	m_iSelectObjectNum = -1;
+	m_fSpeed = 0.1f;
+	m_fAnimSpeed = 1.f;
+	m_iRepeatCnt = 0;
+	m_isPlayAnim = false;
+	m_vSavePos.z = 2.f;
+	m_eActionState = STATE_END;
 }
 
 CInspector::~CInspector()
@@ -24,36 +33,36 @@ CInspector::~CInspector()
 void CInspector::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_BUTTON1, m_btnEffectList);
-	DDX_Control(pDX, IDC_BUTTON2, m_btnEffectType);
-	DDX_Control(pDX, IDC_BUTTON3, m_btnTextureType);
-	DDX_Control(pDX, IDC_BUTTON4, m_btnFunction);
-	DDX_Control(pDX, IDC_BUTTON5, m_btnEffectSetting);
-	DDX_Control(pDX, IDC_BUTTON6, m_btn_SelectMode);
-	DDX_Control(pDX, IDC_BUTTON7, m_btnOption);
-	DDX_Control(pDX, IDC_BUTTON8, m_btn_Position);
-	DDX_Control(pDX, IDC_BUTTON9, m_btn_Rotation);
-	DDX_Control(pDX, IDC_BUTTON10, m_btn_Scale);
-	DDX_Control(pDX, IDC_BUTTON11, m_btnStartTime);
-	DDX_Control(pDX, IDC_BUTTON12, m_btnEndTime);
-	DDX_Control(pDX, IDC_BUTTON13, m_btn_Repeat);
-	DDX_Control(pDX, IDC_BUTTON14, m_btnModePos);
-	DDX_Control(pDX, IDC_BUTTON15, m_btnModeRot);
-	DDX_Control(pDX, IDC_BUTTON16, m_btnModeScale);
-	DDX_Control(pDX, IDC_BUTTON17, m_btnTransform);
-	DDX_Control(pDX, IDC_BUTTON18, m_btnEdit);
-	DDX_Control(pDX, IDC_BUTTON19, m_btnFadeIn);
-	DDX_Control(pDX, IDC_BUTTON20, m_btnFadeOut);
-	DDX_Control(pDX, IDC_BUTTON21, m_btnUVSprite);
-	DDX_Control(pDX, IDC_BUTTON22, m_btnUVAnimation);
-	DDX_Control(pDX, IDC_BUTTON23, m_btnOptionPos);
-	DDX_Control(pDX, IDC_BUTTON24, m_btnOptionRot);
-	DDX_Control(pDX, IDC_BUTTON25, m_btnOptionScale);
-	DDX_Control(pDX, IDC_BUTTON26, m_btnOptionFadeIn);
-	DDX_Control(pDX, IDC_BUTTON27, m_btnOptionFadeOut);
-	DDX_Control(pDX, IDC_BUTTON28, m_btnOptionUVSp);
-	DDX_Control(pDX, IDC_BUTTON29, m_btnOptionUVAnim);
-	DDX_Control(pDX, IDC_BUTTON30, m_btnAction);
+	DDX_Control(pDX, IDC_BUTTON1, m_bmp_EffectList);
+	DDX_Control(pDX, IDC_BUTTON2, m_bmp_EffectType);
+	DDX_Control(pDX, IDC_BUTTON3, m_bmp_TextureType);
+	DDX_Control(pDX, IDC_BUTTON4, m_bmp_Function);
+	DDX_Control(pDX, IDC_BUTTON5, m_bmp_EffectSetting);
+	DDX_Control(pDX, IDC_BUTTON6, m_bmp_SelectMode);
+	DDX_Control(pDX, IDC_BUTTON7, m_bmp_Option);
+	DDX_Control(pDX, IDC_BUTTON8, m_bmp_Position);
+	DDX_Control(pDX, IDC_BUTTON9, m_bmp_Rotation);
+	DDX_Control(pDX, IDC_BUTTON10, m_bmp_Scale);
+	DDX_Control(pDX, IDC_BUTTON11, m_bmp_StartTime);
+	DDX_Control(pDX, IDC_BUTTON12, m_bmp_EndTime);
+	DDX_Control(pDX, IDC_BUTTON13, m_bmp_Repeat);
+	DDX_Control(pDX, IDC_BUTTON14, m_bmp_ModePos);
+	DDX_Control(pDX, IDC_BUTTON15, m_bmp_ModeRot);
+	DDX_Control(pDX, IDC_BUTTON16, m_bmp_ModeScale);
+	DDX_Control(pDX, IDC_BUTTON17, m_bmp_Transform);
+	DDX_Control(pDX, IDC_BUTTON18, m_bmp_Edit);
+	DDX_Control(pDX, IDC_BUTTON19, m_bmp_FadeIn);
+	DDX_Control(pDX, IDC_BUTTON20, m_bmp_FadeOut);
+	DDX_Control(pDX, IDC_BUTTON21, m_bmp_UVSprite);
+	DDX_Control(pDX, IDC_BUTTON22, m_bmp_UVAnimation);
+	DDX_Control(pDX, IDC_BUTTON23, m_bmp_OptionPos);
+	DDX_Control(pDX, IDC_BUTTON24, m_bmp_OptionRot);
+	DDX_Control(pDX, IDC_BUTTON25, m_bmp_OptionScale);
+	DDX_Control(pDX, IDC_BUTTON26, m_bmp_OptionFadeIn);
+	DDX_Control(pDX, IDC_BUTTON27, m_bmp_OptionFadeOut);
+	DDX_Control(pDX, IDC_BUTTON28, m_bmp_OptionUVSp);
+	DDX_Control(pDX, IDC_BUTTON29, m_bmp_OptionUVAnim);
+	DDX_Control(pDX, IDC_BUTTON30, m_bmp_Action);
 	DDX_Control(pDX, IDC_MFCBUTTON6, m_btnStart);
 	DDX_Control(pDX, IDC_MFCBUTTON7, m_btnPause);
 	DDX_Control(pDX, IDC_MFCBUTTON8, m_btnStop);
@@ -63,154 +72,206 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MFCBUTTON5, m_btnAlphaMask);
 	DDX_Control(pDX, IDC_MFCBUTTON3, m_btnSoftEffect);
 	DDX_Control(pDX, IDC_MFCBUTTON2, m_btnMeshEffect);
-	DDX_Control(pDX, IDC_BUTTON31, m_btnLoop);
-	DDX_Control(pDX, IDC_BUTTON32, m_btnBillboard);
+	DDX_Control(pDX, IDC_BUTTON31, m_bmp_Loop);
+	DDX_Control(pDX, IDC_BUTTON32, m_bmp_Billboard);
 	DDX_Control(pDX, IDC_MFCBUTTON1, m_btnListDelete);
-	DDX_Control(pDX, IDC_BUTTON33, m_btnPosX);
-	DDX_Control(pDX, IDC_BUTTON34, m_btnPosY);
-	DDX_Control(pDX, IDC_BUTTON35, m_btnPosZ);
-	DDX_Control(pDX, IDC_BUTTON36, m_btnRotX);
-	DDX_Control(pDX, IDC_BUTTON38, m_btnRotY);
-	DDX_Control(pDX, IDC_BUTTON37, m_btnRotZ);
-	DDX_Control(pDX, IDC_BUTTON39, m_btnScaleX);
-	DDX_Control(pDX, IDC_BUTTON41, m_btnScaleY);
-	DDX_Control(pDX, IDC_BUTTON40, m_btnScaleZ);
-	DDX_Control(pDX, IDC_BUTTON42, m_btnAlphaWidth);
-	DDX_Control(pDX, IDC_BUTTON43, m_btnAlphaHeight);
+	DDX_Control(pDX, IDC_BUTTON33, m_bmp_PosX);
+	DDX_Control(pDX, IDC_BUTTON34, m_bmp_PosY);
+	DDX_Control(pDX, IDC_BUTTON35, m_bmp_PosZ);
+	DDX_Control(pDX, IDC_BUTTON36, m_bmp_RotX);
+	DDX_Control(pDX, IDC_BUTTON38, m_bmp_RotY);
+	DDX_Control(pDX, IDC_BUTTON37, m_bmp_RotZ);
+	DDX_Control(pDX, IDC_BUTTON39, m_bmp_ScaleX);
+	DDX_Control(pDX, IDC_BUTTON41, m_bmp_ScaleY);
+	DDX_Control(pDX, IDC_BUTTON40, m_bmp_ScaleZ);
+	DDX_Control(pDX, IDC_BUTTON42, m_bmp_AlphaWidth);
+	DDX_Control(pDX, IDC_BUTTON43, m_bmp_AlphaHeight);
 	DDX_Control(pDX, IDC_TREE1, m_TreeCtrl);
+	DDX_Control(pDX, IDC_EDIT1, m_edPosX);
+	DDX_Control(pDX, IDC_EDIT4, m_edPosY);
+	DDX_Control(pDX, IDC_EDIT7, m_edPosZ);
+	DDX_Control(pDX, IDC_EDIT2, m_edRotX);
+	DDX_Control(pDX, IDC_EDIT5, m_edRotY);
+	DDX_Control(pDX, IDC_EDIT8, m_edRotZ);
+	DDX_Control(pDX, IDC_EDIT3, m_edScaleX);
+	DDX_Control(pDX, IDC_EDIT6, m_edScaleY);
+	DDX_Control(pDX, IDC_EDIT9, m_edScaleZ);
+	DDX_Control(pDX, IDC_EDIT12, m_edStartTime);
+	DDX_Control(pDX, IDC_EDIT13, m_edEndTIme);
+	DDX_Control(pDX, IDC_EDIT14, m_edRepeat);
+	DDX_Control(pDX, IDC_EDIT10, m_edAlphaWidth);
+	DDX_Control(pDX, IDC_EDIT11, m_edAlphaHeight);
+	DDX_Control(pDX, IDC_CHECK1, m_btnLoop);
+	DDX_Control(pDX, IDC_CHECK2, m_btnBillboard);
+	DDX_Control(pDX, IDC_CHECK5, m_btnOptionPos);
+	DDX_Control(pDX, IDC_CHECK4, m_btnOptionRot);
+	DDX_Control(pDX, IDC_CHECK3, m_btnOptionScale);
+	DDX_Control(pDX, IDC_CHECK7, m_btnOptionFadeIn);
+	DDX_Control(pDX, IDC_CHECK6, m_btnOptionFadeOut);
+	DDX_Control(pDX, IDC_CHECK9, m_btnOptionUVSprite);
+	DDX_Control(pDX, IDC_CHECK8, m_btnOptionUVAnim);
+	DDX_Control(pDX, IDC_RADIO1, m_btnModeTransform);
+	DDX_Control(pDX, IDC_RADIO2, m_btnModeEdit);
+	DDX_Control(pDX, IDC_RADIO3, m_btnModePosition);
+	DDX_Control(pDX, IDC_RADIO4, m_btnModeRotation);
+	DDX_Control(pDX, IDC_RADIO5, m_btnModeFadeIn);
+	DDX_Control(pDX, IDC_RADIO6, m_btnModeFadeOut);
+	DDX_Control(pDX, IDC_RADIO7, m_btnModeUVSprite);
+	DDX_Control(pDX, IDC_RADIO8, m_btnModeUVAnim);
+	DDX_Control(pDX, IDC_RADIO9, m_btnModeScale);
+
+	DDX_Control(pDX, IDC_SPIN1, m_spinPosX);
+	DDX_Control(pDX, IDC_SPIN4, m_spinPosY);
+	DDX_Control(pDX, IDC_SPIN7, m_spinPosZ);
+	DDX_Control(pDX, IDC_SPIN2, m_spinRotX);
+	DDX_Control(pDX, IDC_SPIN5, m_spinRotY);
+	DDX_Control(pDX, IDC_SPIN8, m_spinRotZ);
+	DDX_Control(pDX, IDC_SPIN10, m_spinAlphaWidth);
+	DDX_Control(pDX, IDC_SPIN11, m_spinAlphaHeigth);
+	DDX_Control(pDX, IDC_SPIN3, m_spinScaleX);
+	DDX_Control(pDX, IDC_SPIN6, m_spinScaleY);
+	DDX_Control(pDX, IDC_SPIN9, m_spinScaleZ);
+	DDX_Control(pDX, IDC_BUTTON44, m_bmp_Speed);
+	DDX_Control(pDX, IDC_BUTTON45, m_bmpAnimSpeed);
 }
 
 void CInspector::EditButtonStyle()
 {
-	m_btnEffectList.LoadBitmaps(IDB_BITMAP_EFFECTLIST);
-	m_btnEffectList.SizeToContent();
+	m_bmp_EffectList.LoadBitmaps(IDB_BITMAP_EFFECTLIST);
+	m_bmp_EffectList.SizeToContent();
 
-	m_btnEffectType.LoadBitmaps(IDB_BITMAP_EFFECTTYPE);
-	m_btnEffectType.SizeToContent();
+	m_bmp_EffectType.LoadBitmaps(IDB_BITMAP_EFFECTTYPE);
+	m_bmp_EffectType.SizeToContent();
 
-	m_btnTextureType.LoadBitmaps(IDB_BITMAP_TEXTRUETYPE);
-	m_btnTextureType.SizeToContent();
+	m_bmp_TextureType.LoadBitmaps(IDB_BITMAP_TEXTRUETYPE);
+	m_bmp_TextureType.SizeToContent();
 
-	m_btnFunction.LoadBitmaps(IDB_BITMAP_FUNCTION);
-	m_btnFunction.SizeToContent();
+	m_bmp_Function.LoadBitmaps(IDB_BITMAP_FUNCTION);
+	m_bmp_Function.SizeToContent();
 
-	m_btnEffectSetting.LoadBitmaps(IDB_BITMAP_EFFECTSETTING);
-	m_btnEffectSetting.SizeToContent();
+	m_bmp_EffectSetting.LoadBitmaps(IDB_BITMAP_EFFECTSETTING);
+	m_bmp_EffectSetting.SizeToContent();
 
-	m_btn_SelectMode.LoadBitmaps(IDB_BITMAP_SELECTMODE);
-	m_btn_SelectMode.SizeToContent();
+	m_bmp_SelectMode.LoadBitmaps(IDB_BITMAP_SELECTMODE);
+	m_bmp_SelectMode.SizeToContent();
 
-	m_btnOption.LoadBitmaps(IDB_BITMAP_OPTION);
-	m_btnOption.SizeToContent();
+	m_bmp_Option.LoadBitmaps(IDB_BITMAP_OPTION);
+	m_bmp_Option.SizeToContent();
 
-	m_btn_Position.LoadBitmaps(IDB_BITMAP_POSITION);
-	m_btn_Position.SizeToContent();
+	m_bmp_Position.LoadBitmaps(IDB_BITMAP_POSITION);
+	m_bmp_Position.SizeToContent();
 
-	m_btn_Rotation.LoadBitmaps(IDB_BITMAP_ROTATION);
-	m_btn_Rotation.SizeToContent();
+	m_bmp_Rotation.LoadBitmaps(IDB_BITMAP_ROTATION);
+	m_bmp_Rotation.SizeToContent();
 
-	m_btn_Scale.LoadBitmaps(IDB_BITMAP_SCALE);
-	m_btn_Scale.SizeToContent();
+	m_bmp_Scale.LoadBitmaps(IDB_BITMAP_SCALE);
+	m_bmp_Scale.SizeToContent();
 
-	m_btnStartTime.LoadBitmaps(IDB_BITMAP_STARTTIME);
-	m_btnStartTime.SizeToContent();
+	m_bmp_StartTime.LoadBitmaps(IDB_BITMAP_STARTTIME);
+	m_bmp_StartTime.SizeToContent();
 
-	m_btnEndTime.LoadBitmaps(IDB_BITMAP_ENDTIME);
-	m_btnEndTime.SizeToContent();
+	m_bmp_EndTime.LoadBitmaps(IDB_BITMAP_ENDTIME);
+	m_bmp_EndTime.SizeToContent();
 
-	m_btn_Repeat.LoadBitmaps(IDB_BITMAP_REPEAT);
-	m_btn_Repeat.SizeToContent();
+	m_bmp_Repeat.LoadBitmaps(IDB_BITMAP_REPEAT);
+	m_bmp_Repeat.SizeToContent();
 
-	m_btnModePos.LoadBitmaps(IDB_BITMAP_POSITION);
-	m_btnModePos.SizeToContent();
+	m_bmp_ModePos.LoadBitmaps(IDB_BITMAP_POSITION);
+	m_bmp_ModePos.SizeToContent();
 
-	m_btnModeRot.LoadBitmaps(IDB_BITMAP_ROTATION);
-	m_btnModeRot.SizeToContent();
+	m_bmp_ModeRot.LoadBitmaps(IDB_BITMAP_ROTATION);
+	m_bmp_ModeRot.SizeToContent();
 
-	m_btnModeScale.LoadBitmaps(IDB_BITMAP_SCALE);
-	m_btnModeScale.SizeToContent();
+	m_bmp_ModeScale.LoadBitmaps(IDB_BITMAP_SCALE);
+	m_bmp_ModeScale.SizeToContent();
 
-	m_btnTransform.LoadBitmaps(IDB_BITMAP_TRANSFORM);
-	m_btnTransform.SizeToContent();
+	m_bmp_Transform.LoadBitmaps(IDB_BITMAP_TRANSFORM);
+	m_bmp_Transform.SizeToContent();
 
-	m_btnEdit.LoadBitmaps(IDB_BITMAP_EDIT);
-	m_btnEdit.SizeToContent();
+	m_bmp_Edit.LoadBitmaps(IDB_BITMAP_EDIT);
+	m_bmp_Edit.SizeToContent();
 
-	m_btnFadeIn.LoadBitmaps(IDB_BITMAP_FADEIN);
-	m_btnFadeIn.SizeToContent();
+	m_bmp_FadeIn.LoadBitmaps(IDB_BITMAP_FADEIN);
+	m_bmp_FadeIn.SizeToContent();
 
-	m_btnFadeOut.LoadBitmaps(IDB_BITMAP_FADEOUT);
-	m_btnFadeOut.SizeToContent();
+	m_bmp_FadeOut.LoadBitmaps(IDB_BITMAP_FADEOUT);
+	m_bmp_FadeOut.SizeToContent();
 
-	m_btnUVSprite.LoadBitmaps(IDB_BITMAP_UVSPRITE);
-	m_btnUVSprite.SizeToContent();
+	m_bmp_UVSprite.LoadBitmaps(IDB_BITMAP_UVSPRITE);
+	m_bmp_UVSprite.SizeToContent();
 
-	m_btnUVAnimation.LoadBitmaps(IDB_BITMAP_UVANIMATION);
-	m_btnUVAnimation.SizeToContent();
+	m_bmp_UVAnimation.LoadBitmaps(IDB_BITMAP_UVANIMATION);
+	m_bmp_UVAnimation.SizeToContent();
 
-	m_btnOptionPos.LoadBitmaps(IDB_BITMAP_POSITION);
-	m_btnOptionPos.SizeToContent();
+	m_bmp_OptionPos.LoadBitmaps(IDB_BITMAP_POSITION);
+	m_bmp_OptionPos.SizeToContent();
 
-	m_btnOptionRot.LoadBitmaps(IDB_BITMAP_ROTATION);
-	m_btnOptionRot.SizeToContent();
+	m_bmp_OptionRot.LoadBitmaps(IDB_BITMAP_ROTATION);
+	m_bmp_OptionRot.SizeToContent();
 
-	m_btnOptionScale.LoadBitmaps(IDB_BITMAP_SCALE);
-	m_btnOptionScale.SizeToContent();
+	m_bmp_OptionScale.LoadBitmaps(IDB_BITMAP_SCALE);
+	m_bmp_OptionScale.SizeToContent();
 
-	m_btnOptionFadeIn.LoadBitmaps(IDB_BITMAP_FADEIN);
-	m_btnOptionFadeIn.SizeToContent();
+	m_bmp_OptionFadeIn.LoadBitmaps(IDB_BITMAP_FADEIN);
+	m_bmp_OptionFadeIn.SizeToContent();
 
-	m_btnOptionFadeOut.LoadBitmaps(IDB_BITMAP_FADEOUT);
-	m_btnOptionFadeOut.SizeToContent();
+	m_bmp_OptionFadeOut.LoadBitmaps(IDB_BITMAP_FADEOUT);
+	m_bmp_OptionFadeOut.SizeToContent();
 
-	m_btnOptionUVSp.LoadBitmaps(IDB_BITMAP_UVSPRITE);
-	m_btnOptionUVSp.SizeToContent();
+	m_bmp_OptionUVSp.LoadBitmaps(IDB_BITMAP_UVSPRITE);
+	m_bmp_OptionUVSp.SizeToContent();
 
-	m_btnOptionUVAnim.LoadBitmaps(IDB_BITMAP_UVANIMATION);
-	m_btnOptionUVAnim.SizeToContent();
+	m_bmp_OptionUVAnim.LoadBitmaps(IDB_BITMAP_UVANIMATION);
+	m_bmp_OptionUVAnim.SizeToContent();
 
-	m_btnAction.LoadBitmaps(IDB_BITMAP_ACTION);
-	m_btnAction.SizeToContent();
+	m_bmp_Action.LoadBitmaps(IDB_BITMAP_ACTION);
+	m_bmp_Action.SizeToContent();
 
-	m_btnLoop.LoadBitmaps(IDB_BITMAP_LOOP);
-	m_btnLoop.SizeToContent();
+	m_bmp_Loop.LoadBitmaps(IDB_BITMAP_LOOP);
+	m_bmp_Loop.SizeToContent();
 
-	m_btnBillboard.LoadBitmaps(IDB_BITMAP_BILLBOARD);
-	m_btnBillboard.SizeToContent();
+	m_bmp_Billboard.LoadBitmaps(IDB_BITMAP_BILLBOARD);
+	m_bmp_Billboard.SizeToContent();
 
 	// Setting
-	m_btnPosX.LoadBitmaps(IDB_BITMAP_X);
-	m_btnPosX.SizeToContent();
+	m_bmp_PosX.LoadBitmaps(IDB_BITMAP_X);
+	m_bmp_PosX.SizeToContent();
 
-	m_btnPosY.LoadBitmaps(IDB_BITMAP_Y);
-	m_btnPosY.SizeToContent();
+	m_bmp_PosY.LoadBitmaps(IDB_BITMAP_Y);
+	m_bmp_PosY.SizeToContent();
 
-	m_btnPosZ.LoadBitmaps(IDB_BITMAP_Z);
-	m_btnPosZ.SizeToContent();
+	m_bmp_PosZ.LoadBitmaps(IDB_BITMAP_Z);
+	m_bmp_PosZ.SizeToContent();
 
-	m_btnRotX.LoadBitmaps(IDB_BITMAP_X);
-	m_btnRotX.SizeToContent();
+	m_bmp_RotX.LoadBitmaps(IDB_BITMAP_X);
+	m_bmp_RotX.SizeToContent();
 
-	m_btnRotY.LoadBitmaps(IDB_BITMAP_Y);
-	m_btnRotY.SizeToContent();
+	m_bmp_RotY.LoadBitmaps(IDB_BITMAP_Y);
+	m_bmp_RotY.SizeToContent();
 
-	m_btnRotZ.LoadBitmaps(IDB_BITMAP_Z);
-	m_btnRotZ.SizeToContent();
+	m_bmp_RotZ.LoadBitmaps(IDB_BITMAP_Z);
+	m_bmp_RotZ.SizeToContent();
 
-	m_btnScaleX.LoadBitmaps(IDB_BITMAP_X);
-	m_btnScaleX.SizeToContent();
+	m_bmp_ScaleX.LoadBitmaps(IDB_BITMAP_X);
+	m_bmp_ScaleX.SizeToContent();
 
-	m_btnScaleY.LoadBitmaps(IDB_BITMAP_Y);
-	m_btnScaleY.SizeToContent();
+	m_bmp_ScaleY.LoadBitmaps(IDB_BITMAP_Y);
+	m_bmp_ScaleY.SizeToContent();
 
-	m_btnScaleZ.LoadBitmaps(IDB_BITMAP_Z);
-	m_btnScaleZ.SizeToContent();
+	m_bmp_ScaleZ.LoadBitmaps(IDB_BITMAP_Z);
+	m_bmp_ScaleZ.SizeToContent();
 
-	m_btnAlphaWidth.LoadBitmaps(IDB_BITMAP_WIDTH);
-	m_btnAlphaWidth.SizeToContent();
+	m_bmp_AlphaWidth.LoadBitmaps(IDB_BITMAP_WIDTH);
+	m_bmp_AlphaWidth.SizeToContent();
 
-	m_btnAlphaHeight.LoadBitmaps(IDB_BITMAP_HEIGHT);
-	m_btnAlphaHeight.SizeToContent();
+	m_bmp_AlphaHeight.LoadBitmaps(IDB_BITMAP_HEIGHT);
+	m_bmp_AlphaHeight.SizeToContent();
+
+	m_bmp_Speed.LoadBitmaps(IDB_BITMAP_SPEED);
+	m_bmp_Speed.SizeToContent();
+
+	m_bmpAnimSpeed.LoadBitmaps(IDB_BITMAP_ANIMSPEED);
+	m_bmpAnimSpeed.SizeToContent();
 
 	// Event Button
 
@@ -264,10 +325,44 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_BN_CLICKED(IDC_MFCBUTTON3, &CInspector::OnBnClickedSoftEffect)
 	ON_BN_CLICKED(IDC_MFCBUTTON4, &CInspector::OnBnClickedTexture)
 	ON_BN_CLICKED(IDC_MFCBUTTON5, &CInspector::OnBnClickedAlphaMask)
+	ON_BN_CLICKED(IDC_MFCBUTTON6, &CInspector::OnBnClickedAnimPlay)
+	ON_BN_CLICKED(IDC_MFCBUTTON7, &CInspector::OnBnClickedAnimPause)
+	ON_BN_CLICKED(IDC_MFCBUTTON8, &CInspector::OnBnClickedAnimStop)
+	ON_BN_CLICKED(IDC_MFCBUTTON9, &CInspector::OnBnClickedSave)
+	ON_BN_CLICKED(IDC_MFCBUTTON10, &CInspector::OnBnClickedLoad)
+	ON_EN_CHANGE(IDC_EDIT1, &CInspector::OnEnChangeEditPosX)
+	ON_EN_CHANGE(IDC_EDIT4, &CInspector::OnEnChangeEditPosY)
+	ON_EN_CHANGE(IDC_EDIT7, &CInspector::OnEnChangeEditPosZ)
+	ON_EN_CHANGE(IDC_EDIT2, &CInspector::OnEnChangeEditRotX)
+	ON_EN_CHANGE(IDC_EDIT5, &CInspector::OnEnChangeEditRotY)
+	ON_EN_CHANGE(IDC_EDIT8, &CInspector::OnEnChangeEditRotZ)
+	ON_EN_CHANGE(IDC_EDIT3, &CInspector::OnEnChangeEditScaleX)
+	ON_EN_CHANGE(IDC_EDIT6, &CInspector::OnEnChangeEditScaleY)
+	ON_EN_CHANGE(IDC_EDIT9, &CInspector::OnEnChangeEditScaleZ)
+	ON_EN_CHANGE(IDC_EDIT12, &CInspector::OnEnChangeEditStartTime)
+	ON_EN_CHANGE(IDC_EDIT13, &CInspector::OnEnChangeEditEndTime)
+	ON_EN_CHANGE(IDC_EDIT14, &CInspector::OnEnChangeEditRepeat)
+	ON_EN_CHANGE(IDC_EDIT10, &CInspector::OnEnChangeEditAlphaWidth)
+	ON_EN_CHANGE(IDC_EDIT11, &CInspector::OnEnChangeEditAlphaHeight)
+	ON_WM_TIMER()
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN1, &CInspector::OnDeltaposSpinPosX)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN4, &CInspector::OnDeltaposSpinPosY)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN7, &CInspector::OnDeltaposSpinPosZ)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN2, &CInspector::OnDeltaposSpinRotX)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN5, &CInspector::OnDeltaposSpinRotY)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN8, &CInspector::OnDeltaposSpinRotZ)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN3, &CInspector::OnDeltaposSpinScaleX)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN6, &CInspector::OnDeltaposSpinScaleY)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN9, &CInspector::OnDeltaposSpinScaleZ)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN12, &CInspector::OnDeltaposSpinStartTime)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN13, &CInspector::OnDeltaposSpinEndTime)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN14, &CInspector::OnDeltaposSpinRepeat)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN10, &CInspector::OnDeltaposSpinAlphaWidth)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN11, &CInspector::OnDeltaposSpinAlphaHeight)
+	ON_EN_CHANGE(IDC_EDIT15, &CInspector::OnEnChangeEditSpeed)
+	ON_EN_CHANGE(IDC_EDIT16, &CInspector::OnEnChangeEditAnimSpeed)
 END_MESSAGE_MAP()
 
-
-// CInspector ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
 #ifdef _DEBUG
 void CInspector::AssertValid() const
@@ -283,9 +378,6 @@ void CInspector::Dump(CDumpContext& dc) const
 #endif
 #endif //_DEBUG
 
-
-// CInspector ï¿½Þ½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-
 void CInspector::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
@@ -296,20 +388,17 @@ void CInspector::OnInitialUpdate()
 	///////////////////////////////////////////////////
 
 	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
+
 }
 
 void CInspector::OnPaint()
 {
 		CPaintDC dc(this); // device context for painting
-						   // TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½Þ½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
-						   // ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ CFormView::OnPaint()ï¿½ï¿½(ï¿½ï¿½) È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê½Ã¿ï¿½.
-
 		CRect rect;
-		GetWindowRect(&rect); // ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ È£È¯ï¿½Ç´ï¿½ DCï¿½ï¿½ï¿½ï¿½.
-		HDC hMemDC = CreateCompatibleDC(dc); SetStretchBltMode(hMemDC, HALFTONE); // È£È¯DCï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
-		SelectObject(hMemDC, m_hBitmap); // ï¿½Þ¸ï¿½ï¿½ï¿½ DCï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ DCï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		GetWindowRect(&rect);
+		HDC hMemDC = CreateCompatibleDC(dc); SetStretchBltMode(hMemDC, HALFTONE);
+		SelectObject(hMemDC, m_hBitmap);
 		StretchBlt(dc, 0, 0, rect.Width(), rect.Height(), hMemDC, 0, 0, m_bitmap.bmWidth, m_bitmap.bmHeight, SRCCOPY);
-		// ï¿½Þ¸ï¿½ï¿½ï¿½ DCï¿½ï¿½ï¿½ï¿½
 		DeleteDC(hMemDC);
 
 }
@@ -317,28 +406,44 @@ void CInspector::OnPaint()
 void CInspector::OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+		
+	int index = 0;
+	HTREEITEM hItem = m_TreeCtrl.GetSelectedItem();
+	HTREEITEM hChild = m_TreeCtrl.GetChildItem(NULL);
+	while (hChild)
+	{
+		if (hChild == hItem) break;
+		hChild = m_TreeCtrl.GetNextItem(hChild, TVGN_NEXT);
+		++index;
+	}
+		
+	m_iSelectObjectNum = index - 1;
+
 	*pResult = 0;
 }
 
 
 void CInspector::OnBnClickedDeleteEffectList()
 {
-	m_TreeCtrl.DeleteAllItems();
-	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+	spObject->SetDeleteThis(true);
+	spObject.reset();	
+
+	m_TreeCtrl.DeleteItem(m_TreeCtrl.GetSelectedItem());
+	m_btnModeTransform.SetCheck(false);
+	m_btnModeEdit.SetCheck(false);
 }
 
 
 void CInspector::OnBnClickedMeshEffect()
 {
-	CString str = _T("X Files(*.x) |*.x|"); // x ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+	CString str = _T("X Files(*.x) |*.x|"); // x ÆÄÀÏ Ç¥½Ã
 
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
-
-	//PathStripPath(lpwstr);
 
 	// IDOK = OK button is pressed in the dialog
 	if (dlg.DoModal() == IDOK)
@@ -349,7 +454,7 @@ void CInspector::OnBnClickedMeshEffect()
 
 		m_hMeshEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
 
-		Add_EffectMesh(strFilePath);
+		Add_MeshEffect(strFilePath);
 
 		InvalidateRect(false);
 
@@ -359,11 +464,8 @@ void CInspector::OnBnClickedMeshEffect()
 
 void CInspector::OnBnClickedSoftEffect()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
-
-	//PathStripPath(lpwstr);
-
+	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -385,11 +487,8 @@ void CInspector::OnBnClickedSoftEffect()
 
 void CInspector::OnBnClickedTexture()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
-
-
-	PathStripPath(lpwstr);
+	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -411,12 +510,8 @@ void CInspector::OnBnClickedTexture()
 
 void CInspector::OnBnClickedAlphaMask()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\SoftEffect";
-
-
-
-	PathStripPath(lpwstr);
+	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -424,7 +519,6 @@ void CInspector::OnBnClickedAlphaMask()
 
 	if (dlg.DoModal() == IDOK)
 	{
-
 		CString strFilePath = dlg.GetPathName();
 
 		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
@@ -435,25 +529,968 @@ void CInspector::OnBnClickedAlphaMask()
 	}
 }
 
-void CInspector::Add_EffectMesh(CString ObjectName)
+void CInspector::Add_MeshEffect(CString ObjectName)
 {
-	SP(Engine::CObject) spEmptyObject
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", false, (_int)Engine::ELayerID::NumOfEngineLayerID, L"Effect0");
-	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
-	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex();
-	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)ERenderID::NonAlpha);
-	spEmptyObject->AddComponent<Engine::CTextureC>();
-	spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	SP(Engine::CObject) spMeshEffect
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MeshEffect", false, (_int)Engine::ELayerID::Effect, L"Effect0");
+	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::EffectShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
 {
 }
 
-void CInspector::Add_Texture(CString ObjectName)
+void CInspector::Add_Texture(CString TextureKey)
+{
+	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	{
+		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
+		spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0,0);
+	}
+}
+
+void CInspector::Add_AlphaMask(CString TextureKey)
+{
+	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	{
+		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
+		spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 1);
+	}
+}
+
+void CInspector::FunctionUpdate()
+{
+
+}
+
+void CInspector::OptionUpdate()
+{
+	if(m_iSelectObjectNum < 0)
+	{
+		m_btnOptionPos.EnableWindow(false);
+		m_btnOptionRot.EnableWindow(false);
+		m_btnOptionScale.EnableWindow(false);
+		m_btnOptionFadeIn.EnableWindow(false);
+		m_btnOptionFadeOut.EnableWindow(false);
+		m_btnOptionUVSprite.EnableWindow(false);
+		m_btnOptionUVAnim.EnableWindow(false);
+	}
+	else
+	{
+		m_btnOptionPos.EnableWindow(true);
+		m_btnOptionRot.EnableWindow(true);
+		m_btnOptionScale.EnableWindow(true);
+		m_btnOptionFadeIn.EnableWindow(true);
+		m_btnOptionFadeOut.EnableWindow(true);
+		m_btnOptionUVSprite.EnableWindow(true);
+		m_btnOptionUVAnim.EnableWindow(true);
+	}
+
+}
+
+void CInspector::ModeUpdate()
+{
+	if (m_btnOptionPos.GetCheck())
+	{
+		m_btnModePosition.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModePosition.SetCheck(false);
+		m_btnModePosition.EnableWindow(false);
+	}
+
+	if (m_btnOptionRot.GetCheck())
+	{
+		m_btnModeRotation.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeRotation.SetCheck(false);
+		m_btnModeRotation.EnableWindow(false);
+	}
+
+	if (m_btnOptionScale.GetCheck())
+	{
+		m_btnModeScale.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeScale.SetCheck(false);
+		m_btnModeScale.EnableWindow(false);
+	}
+
+	if (m_btnOptionFadeIn.GetCheck())
+	{
+		m_btnModeFadeIn.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeFadeIn.SetCheck(false);
+		m_btnModeFadeIn.EnableWindow(false);
+	}
+
+	if (m_btnOptionFadeOut.GetCheck())
+	{
+		m_btnModeFadeOut.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeFadeOut.SetCheck(false);
+		m_btnModeFadeOut.EnableWindow(false);
+	}
+
+	if (m_btnOptionUVSprite.GetCheck())
+	{
+		m_btnModeUVSprite.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeUVSprite.SetCheck(false);
+		m_btnModeUVSprite.EnableWindow(false);
+	}
+
+	if (m_btnOptionUVAnim.GetCheck())
+	{
+		m_btnModeUVAnim.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeUVAnim.SetCheck(false);
+		m_btnModeUVAnim.EnableWindow(false);
+	}
+	if (m_iSelectObjectNum < 0)
+	{
+		m_btnModeTransform.EnableWindow(false);
+		m_btnModeEdit.EnableWindow(false);
+	}
+	else
+	{
+		m_btnModeTransform.EnableWindow(true);
+		m_btnModeEdit.EnableWindow(true);
+	}	
+}
+
+void CInspector::SettingUpdate()
+{
+#pragma region Setting
+	if (m_btnModePosition.GetCheck())
+	{
+		m_edPosX.ShowWindow(true);
+		m_spinPosX.ShowWindow(true);
+
+		m_edPosY.ShowWindow(true);
+		m_spinPosY.ShowWindow(true);
+
+		m_edPosZ.ShowWindow(true);
+		m_spinPosZ.ShowWindow(true);
+
+		m_edRotX.ShowWindow(false);
+		m_spinRotX.ShowWindow(false);
+
+		m_edRotY.ShowWindow(false);
+		m_spinRotY.ShowWindow(false);
+
+		m_edRotZ.ShowWindow(false);
+		m_spinRotZ.ShowWindow(false);
+
+		m_edScaleX.ShowWindow(false);
+		m_spinScaleX.ShowWindow(false);
+
+		m_edScaleY.ShowWindow(false);
+		m_spinScaleY.ShowWindow(false);
+
+		m_edScaleZ.ShowWindow(false);
+		m_spinScaleZ.ShowWindow(false);
+	}
+	else if (m_btnModeRotation.GetCheck())
+	{
+		m_edPosX.ShowWindow(false);
+		m_spinPosX.ShowWindow(false);
+
+		m_edPosY.ShowWindow(false);
+		m_spinPosY.ShowWindow(false);
+
+		m_edPosZ.ShowWindow(false);
+		m_spinPosZ.ShowWindow(false);
+
+		m_edRotX.ShowWindow(true);
+		m_spinRotX.ShowWindow(true);
+
+		m_edRotY.ShowWindow(true);
+		m_spinRotY.ShowWindow(true);
+
+		m_edRotZ.ShowWindow(true);
+		m_spinRotZ.ShowWindow(true);
+
+		m_edScaleX.ShowWindow(false);
+		m_spinScaleX.ShowWindow(false);
+
+		m_edScaleY.ShowWindow(false);
+		m_spinScaleY.ShowWindow(false);
+
+		m_edScaleZ.ShowWindow(false);
+		m_spinScaleZ.ShowWindow(false);
+	}
+	else if (m_btnModeScale.GetCheck())
+	{
+		m_edPosX.ShowWindow(false);
+		m_spinPosX.ShowWindow(false);
+
+		m_edPosY.ShowWindow(false);
+		m_spinPosY.ShowWindow(false);
+
+		m_edPosZ.ShowWindow(false);
+		m_spinPosZ.ShowWindow(false);
+
+		m_edRotX.ShowWindow(false);
+		m_spinRotX.ShowWindow(false);
+
+		m_edRotY.ShowWindow(false);
+		m_spinRotY.ShowWindow(false);
+
+		m_edRotZ.ShowWindow(false);
+		m_spinRotZ.ShowWindow(false);
+
+		m_edScaleX.ShowWindow(true);
+		m_spinScaleX.ShowWindow(true);
+
+		m_edScaleY.ShowWindow(true);
+		m_spinScaleY.ShowWindow(true);
+
+		m_edScaleZ.ShowWindow(true);
+		m_spinScaleZ.ShowWindow(true);
+	}
+	else if (m_btnModeTransform.GetCheck() || m_btnModeEdit.GetCheck())
+	{
+		m_edPosX.ShowWindow(true);
+		m_spinPosX.ShowWindow(true);
+
+		m_edPosY.ShowWindow(true);
+		m_spinPosY.ShowWindow(true);
+
+		m_edPosZ.ShowWindow(true);
+		m_spinPosZ.ShowWindow(true);
+
+		m_edRotX.ShowWindow(true);
+		m_spinRotX.ShowWindow(true);
+
+		m_edRotY.ShowWindow(true);
+		m_spinRotY.ShowWindow(true);
+
+		m_edRotZ.ShowWindow(true);
+		m_spinRotZ.ShowWindow(true);
+
+		m_edScaleX.ShowWindow(true);
+		m_spinScaleX.ShowWindow(true);
+
+		m_edScaleY.ShowWindow(true);
+		m_spinScaleY.ShowWindow(true);
+
+		m_edScaleZ.ShowWindow(true);
+		m_spinScaleZ.ShowWindow(true);
+	}
+	else
+	{
+		m_edPosX.ShowWindow(false);
+		m_spinPosX.ShowWindow(false);
+
+		m_edPosY.ShowWindow(false);
+		m_spinPosY.ShowWindow(false);
+
+		m_edPosZ.ShowWindow(false);
+		m_spinPosZ.ShowWindow(false);
+
+		m_edRotX.ShowWindow(false);
+		m_spinRotX.ShowWindow(false);
+
+		m_edRotY.ShowWindow(false);
+		m_spinRotY.ShowWindow(false);
+
+		m_edRotZ.ShowWindow(false);
+		m_spinRotZ.ShowWindow(false);
+
+		m_edScaleX.ShowWindow(false);
+		m_spinScaleX.ShowWindow(false);
+
+		m_edScaleY.ShowWindow(false);
+		m_spinScaleY.ShowWindow(false);
+
+		m_edScaleZ.ShowWindow(false);
+		m_spinScaleZ.ShowWindow(false);
+	}
+#pragma endregion
+
+}
+
+void CInspector::ActionUpdate()
+{
+	if (m_eActionState == STATE_END)
+		return;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	switch (m_eActionState)
+	{
+	case CInspector::PLAY:
+		if (m_iRepeatCnt < m_iRepeat || m_btnLoop.GetCheck())
+		{
+			if (!m_isPlayAnim)
+			{
+				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
+				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
+				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+
+				m_isPlayAnim = true;
+			}
+			m_fStartTime += GET_DT;
+			
+			AnimTransformUpdate(spObject);
+
+			if (m_fStartTime >= m_fEndTime)
+			{				
+				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
+				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
+				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+				m_fStartTime = 0.f;
+				m_isPlayAnim = false;
+				m_iRepeatCnt++;
+			}
+		}
+		else if (m_iRepeatCnt >= m_iRepeat)
+		{
+			m_eActionState = STOP;
+		}
+		break;
+	case CInspector::PAUSE:
+		break;
+	case CInspector::STOP:
+		if (spObject == nullptr)
+		{
+			return;
+		}
+		if (m_isPlayAnim)
+		{
+			spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
+			spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
+			spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+		}
+		m_fStartTime = 0.f;
+		m_iRepeatCnt = 0;
+		m_isPlayAnim = false;
+		break;
+	default:
+		break;
+	}
+}
+
+void CInspector::AnimTransformUpdate(SP(Engine::CObject) spObject)
+{
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	if (spObject->GetComponent<Engine::CTransformC>()->GetPosition().x <= m_vSavePos.x)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddPositionX(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetPosition().y <= m_vSavePos.y)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddPositionY(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetPosition().z <= m_vSavePos.z)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddPositionZ(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().x <= m_vSaveRot.x)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().y <= m_vSaveRot.y)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().z <= m_vSaveRot.z)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().x <= m_vSaveScale.x)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddSizeX(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().y <= m_vSaveScale.y)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddSizeY(m_fAnimSpeed * GET_DT);
+	}
+	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().z <= m_vSaveScale.z)
+	{
+		spObject->GetComponent<Engine::CTransformC>()->AddSizeZ(m_fAnimSpeed * GET_DT);
+	}
+}
+
+void CInspector::OnBnClickedAnimPlay()
+{
+	m_eActionState = PLAY;
+}
+
+void CInspector::OnBnClickedAnimPause()
+{
+	m_eActionState = PAUSE;
+}
+
+void CInspector::OnBnClickedAnimStop()
+{
+	m_eActionState = STOP;
+}
+
+void CInspector::OnBnClickedSave()
 {
 }
 
-void CInspector::Add_AlphaMask(CString ObjectName)
+void CInspector::OnBnClickedLoad()
 {
+}
+
+
+
+void CInspector::OnEnChangeEditPosX()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT1, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetPositionX(fResizeValue);
+	m_vSavePos.x = fResizeValue;
+
+}
+
+
+void CInspector::OnEnChangeEditPosY()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT4, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetPositionY(fResizeValue);
+	m_vSavePos.y = fResizeValue;
+
+}
+
+
+void CInspector::OnEnChangeEditPosZ()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT7, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetPositionZ(fResizeValue);
+	m_vSavePos.z = fResizeValue;
+
+}
+
+
+void CInspector::OnEnChangeEditRotX()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT2, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationX(fResizeValue);
+	m_vSaveRot.x = fResizeValue;
+
+}
+
+
+void CInspector::OnEnChangeEditRotY()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT5, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationY(fResizeValue);
+	m_vSaveRot.y = fResizeValue;
+
+}
+
+
+void CInspector::OnEnChangeEditRotZ()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT8, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationZ(fResizeValue);
+	m_vSaveRot.z = fResizeValue;
+
+}
+
+
+void CInspector::OnEnChangeEditScaleX()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT3, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetSizeX(fResizeValue);
+	m_vSaveScale.x = fResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditScaleY()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT6, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetSizeY(fResizeValue);
+	m_vSaveScale.y = fResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditScaleZ()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT9, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+
+	spObject->GetComponent<Engine::CTransformC>()->SetSizeZ(fResizeValue);
+	m_vSaveScale.z = fResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditStartTime()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT12, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	m_fStartTime = fResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditEndTime()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT13, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	m_fEndTime = fResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditRepeat()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT14, _strValue);
+	_int iResizeValue = 0;
+	iResizeValue = (_int)_wtoi(_strValue.GetString());
+
+	m_iRepeat = iResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditAlphaWidth()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT10, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	m_fAlphaWidth = fResizeValue;
+}
+
+
+void CInspector::OnEnChangeEditAlphaHeight()
+{
+	CString _strValue;
+	GetDlgItemText(IDC_EDIT11, _strValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(_strValue.GetString());
+
+	m_fAlphaHeight = fResizeValue;
+}
+
+void CInspector::OnDeltaposSpinPosX(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddPositionX(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fX = spObject->GetComponent<Engine::CTransformC>()->GetPosition().x;
+	str.Format(L"%f", fX);
+	m_edPosX.SetWindowTextW(str.GetString());
+
+	m_vSavePos.x = fX;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinPosY(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddPositionY(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fY = spObject->GetComponent<Engine::CTransformC>()->GetPosition().y;
+	str.Format(L"%f", fY);
+	m_edPosY.SetWindowTextW(str.GetString());
+
+	m_vSavePos.y = fY;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinPosZ(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddPositionZ(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fZ = spObject->GetComponent<Engine::CTransformC>()->GetPosition().z;
+	str.Format(L"%f", fZ);
+	m_edPosZ.SetWindowTextW(str.GetString());
+
+	m_vSavePos.z = fZ;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinRotX(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddRotationX(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fX= spObject->GetComponent<Engine::CTransformC>()->GetRotation().x;
+	str.Format(L"%f", fX);
+	m_edRotX.SetWindowTextW(str.GetString());
+
+	m_vSaveRot.x = fX;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinRotY(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddRotationY(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
+	str.Format(L"%f", fY);
+	m_edRotY.SetWindowTextW(str.GetString());
+
+	m_vSaveRot.y = fY;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinRotZ(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fZ = spObject->GetComponent<Engine::CTransformC>()->GetRotation().z;
+	str.Format(L"%f", fZ);
+	m_edRotZ.SetWindowTextW(str.GetString());
+
+	m_vSaveRot.z = fZ;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinScaleX(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddSizeX(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fX = spObject->GetComponent<Engine::CTransformC>()->GetSize().x;
+	str.Format(L"%f", fX);
+	m_edScaleX.SetWindowTextW(str.GetString());
+
+	m_vSaveScale.x = fX;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinScaleY(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddSizeY(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fY = spObject->GetComponent<Engine::CTransformC>()->GetSize().y;
+	str.Format(L"%f", fY);
+	m_edScaleY.SetWindowTextW(str.GetString());
+
+	m_vSaveScale.y = fY;
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinScaleZ(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+	{
+		MessageBox(L"spObject is Not Found / CInspector", NULL);
+		ABORT;
+	}
+	spObject->GetComponent<Engine::CTransformC>()->AddSizeZ(pNMUpDown->iDelta * -m_fSpeed);
+
+	UpdateData(true);
+	CString str;
+	_float fZ = spObject->GetComponent<Engine::CTransformC>()->GetSize().z;
+	str.Format(L"%f", fZ);
+	m_edScaleZ.SetWindowTextW(str.GetString());
+
+	m_vSaveScale.z = fZ;
+
+	UpdateData(false);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinStartTime(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinEndTime(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinRepeat(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	*pResult = 0;
+}
+
+void CInspector::OnEnChangeEditSpeed()
+{
+	CString strResizeValue;
+	GetDlgItemText(IDC_EDIT15, strResizeValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(strResizeValue.GetString());
+
+	m_fSpeed = fResizeValue;
+}
+
+void CInspector::OnEnChangeEditAnimSpeed()
+{
+	CString strResizeValue;
+	GetDlgItemText(IDC_EDIT16, strResizeValue);
+	_float fResizeValue = 0.f;
+	fResizeValue = (_float)_wtof(strResizeValue.GetString());
+
+	m_fAnimSpeed = fResizeValue;
 }

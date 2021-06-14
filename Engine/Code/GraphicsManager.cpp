@@ -1,4 +1,5 @@
 #include "EngineStdafx.h"
+#include "GraphicsManager.h"
 #include "Scene.h"
 #include "Object.h"
 #include "Frustum.h"
@@ -377,10 +378,35 @@ void CGraphicsManager::RenderAlphaBlend(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				//
-				pObject->PreRender();
-				pObject->Render();
-				pObject->PostRender();
+				
+				SP(CComponent) pShader;
+				if (pShader = pObject->GetComponent<CShaderC>())
+				{
+					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
+
+					for (_size i = 0; i < vShader.size(); ++i)
+					{
+						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+						pEffect->BeginPass(0);
+
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+
+						pEffect->EndPass();
+						pEffect->End();
+					}
+				}
+				else
+				{
+					pObject->PreRender();
+					pObject->Render();
+					pObject->PostRender();
+				}
 			}
 		}
 	}

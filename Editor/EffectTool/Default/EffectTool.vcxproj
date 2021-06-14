@@ -80,8 +80,8 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin/Editor/EffectTool/Debug/x64/</OutDir>
     <IntDir>$(SolutionDir)Log/Editor/EffectTool/Debug/x64/</IntDir>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Reference\Library\Debug\;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Reference\Library\Debug\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)ExternalLibrary\PhysX\Include\;$(IncludePath)</IncludePath>
     <TargetName>HonkaiImpact</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -193,7 +193,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Header\EffectMesh.h" />
     <ClInclude Include="..\Header\EffectToolDefine.h" />
     <ClInclude Include="..\Header\EffectToolEnum.h" />
     <ClInclude Include="..\Header\EffectToolInclude.h" />
@@ -201,6 +200,7 @@
     <ClInclude Include="..\Header\EffectToolTypedef.h" />
     <ClInclude Include="..\Header\Inspector.h" />
     <ClInclude Include="..\Header\MainEditor.h" />
+    <ClInclude Include="..\Header\MeshEffect.h" />
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
@@ -210,10 +210,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Code\EffectMesh.cpp" />
     <ClCompile Include="..\Code\EffectToolScene.cpp" />
     <ClCompile Include="..\Code\Inspector.cpp" />
     <ClCompile Include="..\Code\MainEditor.cpp" />
+    <ClCompile Include="..\Code\MeshEffect.cpp" />
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
@@ -236,6 +236,7 @@
     <Image Include="res\AlphaHeight.bmp" />
     <Image Include="res\AlphaMask.bmp" />
     <Image Include="res\AlphaWidth.bmp" />
+    <Image Include="res\AnimSpeed.bmp" />
     <Image Include="res\Billboard.bmp" />
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\Delete.bmp" />
@@ -263,6 +264,7 @@
     <Image Include="res\Scale.bmp" />
     <Image Include="res\SelectMode.bmp" />
     <Image Include="res\SoftEffect.bmp" />
+    <Image Include="res\Speed.bmp" />
     <Image Include="res\Start.bmp" />
     <Image Include="res\StartTime.bmp" />
     <Image Include="res\Stop.bmp" />

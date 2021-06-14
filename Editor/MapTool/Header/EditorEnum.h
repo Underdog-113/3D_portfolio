@@ -14,7 +14,7 @@ enum class EComponentID
 };
 
 
-enum class ECollisionID
+enum class EColliderID
 {
 	Player				= 0 + (_uint)Engine::ECollisionID::NumOfColliderID,
 	Enemy				= 1 + (_uint)Engine::ECollisionID::NumOfColliderID,

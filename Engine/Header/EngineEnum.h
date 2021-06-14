@@ -68,13 +68,16 @@ namespace Engine
 		//SkyBoxShader			= 4,
 		SliderShader			= 4,
 		WaterShader				= 5,
+		EffectShader			= 6,
 		/*Shader_Sample	= 0,
 		Shader_Terrain	= 1,
 		Shader_Mesh		= 2,
 		Shader_Shade	= 3,
 		Shader_Blend	= 4,
 		Shader_Skybox	= 5,*/
-		NumOfShaderID	= 6
+		DamageFont				= 6,
+		NumOfShaderID			= 7
+
 	};
 #pragma endregion
 
@@ -84,6 +87,14 @@ namespace Engine
 		Trigger				= 0,
 		Collide				= 1,
 		NumOfCollisionType	= 2
+	};
+
+	enum class EPhysicsBodyType
+	{
+		Static					= 0,
+		Dynamic					= 1,
+		Kinematic				= 2,
+		NumOfPhysicsBodyType	= 3
 	};
 
 	enum class EColliderType
@@ -112,9 +123,9 @@ namespace Engine
 
 	enum class ECollisionID
 	{
-		CameraRay			= 0,
-		Button				= 1,
-		Mouse				= 2,
+		CameraRay			= (1 << 0),
+		Button				= (1 << 1),
+		Mouse				= (1 << 2),
 		NumOfColliderID		= 3
 	};
 
@@ -174,12 +185,13 @@ namespace Engine
 
 	enum class ELayerID
 	{
-		Camera				= 0,
-		Debug				= 1,
-		Decoration			= 2,
-		NumOfEngineLayerID  = 3
+		Camera							= 0,
+		Debug								= 1,
+		Decoration					= 2,
+		Effect							= 3,
+		UI									= 4,
+		NumOfEngineLayerID  = 5
 	};
-
 }
 
 

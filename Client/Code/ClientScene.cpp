@@ -50,6 +50,18 @@ void CClientScene::OnDestroy(void)
 	
 }
 
+void CClientScene::OnEnable(void)
+{
+	__super::OnEnable();
+	
+}
+
+void CClientScene::OnDisable(void)
+{
+	__super::OnDisable();
+	
+}
+
 void CClientScene::ChangeScene(CScene * pScene)
 {
 	m_pLoading = CLoading::Create(pScene, false);

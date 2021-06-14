@@ -1,7 +1,6 @@
 #include "EngineStdafx.h"
+#include "TextureC.h"
 #include "Object.h"
-#include "TextureStore.h"
-#include "DataStore.h"
  
 USING(Engine)
 CTextureC::CTextureC()  
@@ -133,4 +132,10 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int meshIndex)
 void CTextureC::ChangeTexture(std::wstring const & textureKey, _int meshIndex, _int texIndex)
 {
 	m_vTexData[meshIndex][texIndex] = m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey);
+}
+
+void CTextureC::DeleteTexture(_int meshIndex, _int texIndex)
+{
+	auto& iter_find = m_vTexData[meshIndex].begin();
+	m_vTexData[meshIndex].erase(iter_find + texIndex);
 }

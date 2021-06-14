@@ -17,6 +17,8 @@
 #include "EditorScene.h"
 #pragma endregion
 
+#include "StageController_Editor.h"
+
 CMainMapTool::CMainMapTool()
 {
 }
@@ -45,6 +47,7 @@ void CMainMapTool::Awake(void)
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CTextManager::GetInstance()->Awake();
+	CStageController_Editor::GetInstance()->Awake();
 }
 
 void CMainMapTool::Start(void)
@@ -58,8 +61,16 @@ void CMainMapTool::Start(void)
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CTextManager::GetInstance()->Start();
 
-	Engine::CCollisionManager::GetInstance()->Start((_int)ECollisionID::NumOfColliderID);
+//<<<<<<< HEAD
+	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CCollisionManager::GetInstance()->InitCollisionMap();
+//=======
+	//Engine::CCollisionManager::GetInstance()->Start((_int)ECollisionID::NumOfColliderID);
+//>>>>>>> 0be8f21ad0ba9e8d3eae8a19b9ea9d71b985be08
 	Engine::CRenderTargetManager::GetInstance()->Start();
+
+	// temp controller
+	CStageController_Editor::GetInstance()->Start();
 }
 
 void CMainMapTool::FixedUpdate(void)
@@ -119,6 +130,9 @@ void CMainMapTool::OnDestroy(void)
 	Engine::CCameraManager::GetInstance()->DestroyInstance();
 	Engine::CTextManager::GetInstance()->DestroyInstance();
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
+
+	// temp controller
+	CStageController_Editor::DestroyInstance();
 }
 
 void CMainMapTool::OnEnable(void)

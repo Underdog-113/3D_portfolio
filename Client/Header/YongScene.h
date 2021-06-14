@@ -1,16 +1,16 @@
 #ifndef YONGSCENE_H
 #define YONGSCENE_H
 
-#include "Scene.h"
+#include "ClientScene.h"
 
-class CYongScene final : public Engine::CScene
+class CYongScene final :public CClientScene
 {
 private:
 	explicit							CYongScene			(void);
 									   ~CYongScene			(void);
 
 public:
-	static			Engine::CScene*		Create				(void);
+	static			CClientScene*		Create				(void);
 					void				Free				(void) override;
 
 					void				Awake				(_int numOfLayers) override;

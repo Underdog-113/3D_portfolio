@@ -1,16 +1,16 @@
 #ifndef INITSCENE_H
 #define INITSCENE_H
 
-#include "Scene.h"
+#include "ClientScene.h"
 class CLoading;
-class CInitScene final : public Engine::CScene
+class CInitScene final : public CClientScene
 {
 private:
 	explicit								CInitScene				(void);
 										   ~CInitScene				(void);
 
 public:
-	static			Engine::CScene*			Create					(void);
+	static			CClientScene*			Create					(void);
 					void					Free					(void) override;
 
 					void					Awake					(_int numOfLayers) override;

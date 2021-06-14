@@ -30,6 +30,7 @@ public:
 //Interface
 public:
 				void			AddGameObject	(SP(CObject) spGameObject);
+				void			ClearLayer		(void);
 protected:
 	typedef std::vector<SP(CObject)> _GAMEOBJECTS;
 	GETTOR			(_GAMEOBJECTS,	m_vGameObjects,		{},			GameObjects)

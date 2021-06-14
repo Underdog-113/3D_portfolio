@@ -2,7 +2,7 @@
 #include "ScrollViewObject.h"
 #include "Scene.h"
 #include "Object.h"
-#include "Function.h"
+#include "ButtonFunction.h"
 
 _uint CScrollViewObject::m_s_uniqueID = 0;
 CScrollViewObject::CScrollViewObject()
@@ -30,6 +30,9 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
 }
@@ -39,6 +42,10 @@ void CScrollViewObject::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)ELayerID::UI;
 	m_addExtra = true;
+
+	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
+	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
+	m_spTexture = AddComponent<Engine::CTextureC>();
 }
 
 void CScrollViewObject::Start(void)
@@ -64,14 +71,17 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(void)
 {
+	m_spRectTex->PreRender(m_spGraphics);
 }
 
 void CScrollViewObject::Render(void)
 {
+	m_spRectTex->Render(m_spGraphics);
 }
 
 void CScrollViewObject::PostRender(void)
 {
+	m_spRectTex->PostRender(m_spGraphics);
 }
 
 void CScrollViewObject::OnDestroy(void)
@@ -82,11 +92,37 @@ void CScrollViewObject::OnDestroy(void)
 void CScrollViewObject::OnEnable(void)
 {
 	__super::OnEnable();
+
+	_int count = 0;
+	for (auto& buttonObject : m_vButtonObject)
+	{
+		count++;
+
+		buttonObject->SetIsEnabled(true);
+
+		for (auto& imageObject : m_vImageObject[count - 1])
+		{
+			imageObject.m_image->SetIsEnabled(true);
+		}
+	}
 }
 
 void CScrollViewObject::OnDisable(void)
 {
 	__super::OnDisable();
+
+	_int count = 0;
+	for (auto& buttonObject : m_vButtonObject)
+	{
+		count++;
+
+		buttonObject->SetIsEnabled(false);
+
+		for (auto& imageObject : m_vImageObject[count - 1])
+		{
+			imageObject.m_image->SetIsEnabled(false);
+		}
+	}
 }
 
 void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet)

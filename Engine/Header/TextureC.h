@@ -28,6 +28,7 @@ public:
 public:
 				void			AddTexture			(std::wstring const& textureKey, _int meshIndex = 0);
 				void			ChangeTexture		(std::wstring const& textureKey, _int meshIndex = 0, _int texIndex = 0);
+				void			DeleteTexture		(_int meshIndex, _int texIndex);
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Texture;

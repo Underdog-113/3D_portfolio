@@ -1,8 +1,6 @@
 #include "EngineStdafx.h"
 #include "DataStore.h"
 
-#include <fstream>
-
 USING(Engine)
 
 CDataStore::_FileKeyMap* CDataStore::m_s_mpStaticDataMap = nullptr;
@@ -87,7 +85,6 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 	std::wifstream readFile;
 	std::wstring fullPath = filePath + fileName;
 	readFile.open(fullPath.c_str());
-
 
 	if (readFile.is_open())
 	{

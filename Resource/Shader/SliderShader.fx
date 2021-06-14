@@ -81,23 +81,6 @@ PS_OUT PS_MAIN(PS_IN In)
 			Out.vColor.a = 0;
 		}
 	}
-	else if (g_direction == 2)
-	{
-		float value = 1 - In.vTexUV.y;
-		if (value >= g_ratio)
-		{
-			Out.vColor.a = 0;
-		}
-	}
-	else if (g_direction == 3)
-	{
-		if (In.vTexUV.y >= g_ratio)
-		{
-			Out.vColor.a = 0;
-		}
-	}
-
-
 
 	return Out;
 }

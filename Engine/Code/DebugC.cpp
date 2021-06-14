@@ -1,8 +1,5 @@
 #include "EngineStdafx.h"
 #include "DebugC.h"
-#include "DataStore.h"
- 
-
 #include "BoundingVolume.h"
 #include "DebugCollider.h"
  
@@ -109,4 +106,11 @@ void CDebugC::AddDebugCollider(CCollider* pCollider)
 	spDC->SetOwner(m_pOwner);
 	spDC->SetCollider(pCollider);
 	m_vDebugCollider.emplace_back(spDC);
+}
+
+void CDebugC::DeleteDebugCollider(_int index)
+{
+	auto& iter = m_vDebugCollider.begin();
+	m_vDebugCollider[index].reset();
+	m_vDebugCollider.erase(iter + index);
 }
