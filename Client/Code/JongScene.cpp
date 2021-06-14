@@ -17,7 +17,7 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
-	delete m_pController;
+	//delete m_pController;
 	m_pController->DestroyInstance();
 }
 
@@ -39,7 +39,7 @@ void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	
-	m_pController = new CStageController;
+	//m_pController = new CStageController;
 	m_pController = CStageController::GetInstance();
 	m_pController->Awake();	
 }
@@ -79,10 +79,10 @@ void CJongScene::Start(void)
 
 			spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
 
-			m_pKiana = spEmptyObject;
+			m_spKiana = spEmptyObject;
 
 			//m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
-			m_pController->AddSquadMember(m_pKiana);
+			m_pController->AddSquadMember(m_spKiana);
 
 		}
 

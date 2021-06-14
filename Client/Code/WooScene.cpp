@@ -2,7 +2,6 @@
 #include "WooScene.h"
 #include "EmptyObject.h"
 #include "ObjectFactory.h"
-#include "CameraManager.h"
 
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
@@ -42,24 +41,9 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 	{
-		// 쓰지 마세요오오옹
-		{
-			SP(Engine::CObject) spEmptyObject1
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
-
-			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
-			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject1->AddComponent<Engine::CTextureC>();
-			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
-
-			m_pivot = spEmptyObject1.get();
-
-			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
-		}
-
 		{
 			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+			spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
 			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			m_spSpider = spSpiderClone;
 		}

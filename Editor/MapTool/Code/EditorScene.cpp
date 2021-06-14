@@ -93,6 +93,9 @@ void CEditorScene::Start(void)
 	//spBaseMap->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
 	//spBaseMap->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	//spCube->GetTransform()->SetSize(300, 1, 300);
+
+	//spBase->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(size, offset));
+	//spBase->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create())
 }
 
 void CEditorScene::FixedUpdate(void)

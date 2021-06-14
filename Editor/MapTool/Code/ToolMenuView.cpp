@@ -117,34 +117,38 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_LBN_SELCHANGE(IDC_LIST4, &CToolMenuView::OnLbnSelchangeTextureList)
 	ON_CBN_SELCHANGE(IDC_COMBO4, &CToolMenuView::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_BUTTON3, &CToolMenuView::OnBnClickedCreatePrefBtn)
-	ON_BN_CLICKED(IDC_BUTTON4, &CToolMenuView::OnBnClickedCreateAABBColliderBtn)
 	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
-	
-	ON_BN_CLICKED(IDC_CHECK6, &CToolMenuView::OnBnClickedSelectedAABBCol)
-	ON_BN_CLICKED(IDC_BUTTON12, &CToolMenuView::OnBnClickedModifyAABBColBtn)
-	ON_BN_CLICKED(IDC_BUTTON13, &CToolMenuView::OnBnClickedCreateRayColliderBtn)
-	ON_BN_CLICKED(IDC_BUTTON14, &CToolMenuView::OnBnClickedDelRayColliderBtn)
-	ON_CBN_SELCHANGE(IDC_COMBO7, &CToolMenuView::OnCbnSelchangeRayList)
-	ON_BN_CLICKED(IDC_CHECK7, &CToolMenuView::OnBnClickedSelectedRayCol)
-	ON_BN_CLICKED(IDC_BUTTON15, &CToolMenuView::OnBnClickedModifyRayColBtn)
 	ON_BN_CLICKED(IDC_BUTTON16, &CToolMenuView::OnBnClickedCreateMesh)
-	ON_LBN_SELCHANGE(IDC_LIST1, &CToolMenuView::OnLbnSelchangeObjectList)
 	ON_BN_CLICKED(IDC_CHECK9, &CToolMenuView::OnBnClickedCurObjectNameChk)
-	
+	ON_BN_CLICKED(IDC_CHECK2, &CToolMenuView::OnBnClickedShowObjectChk)
+
+	/* ray */
+	ON_BN_CLICKED(IDC_BUTTON13, &CToolMenuView::OnBnClickedCreateRayColliderBtn)
+	ON_BN_CLICKED(IDC_BUTTON15, &CToolMenuView::OnBnClickedModifyRayColBtn)
+	ON_BN_CLICKED(IDC_BUTTON14, &CToolMenuView::OnBnClickedDelRayColliderBtn)
+	ON_BN_CLICKED(IDC_CHECK7, &CToolMenuView::OnBnClickedSelectedRayCol)
+	ON_CBN_SELCHANGE(IDC_COMBO7, &CToolMenuView::OnCbnSelchangeRayList)
 
 	/* aabb */
+	ON_BN_CLICKED(IDC_BUTTON4, &CToolMenuView::OnBnClickedCreateAABBColliderBtn)
+	ON_BN_CLICKED(IDC_BUTTON12, &CToolMenuView::OnBnClickedModifyAABBColBtn)
 	ON_BN_CLICKED(IDC_BUTTON10, &CToolMenuView::OnBnClickedDelAABBColliderBtn)
+	ON_BN_CLICKED(IDC_CHECK6, &CToolMenuView::OnBnClickedSelectedAABBCol)
 	ON_CBN_SELCHANGE(IDC_COMBO6, &CToolMenuView::OnCbnSelchangeAABBList)
 
 	/* obb */
-	ON_BN_CLICKED(IDC_CHECK8, &CToolMenuView::OnBnClickedSelectedObbCol)
-	ON_CBN_SELCHANGE(IDC_COMBO9, &CToolMenuView::OnCbnSelchangeObbList)
 	ON_BN_CLICKED(IDC_BUTTON17, &CToolMenuView::OnBnClickedCreateObbColliderBtn)
 	ON_BN_CLICKED(IDC_BUTTON19, &CToolMenuView::OnBnClickedModifyObbColBtn)
 	ON_BN_CLICKED(IDC_BUTTON18, &CToolMenuView::OnBnClickedDelObbColliderBtn)
+	ON_BN_CLICKED(IDC_CHECK8, &CToolMenuView::OnBnClickedSelectedObbCol)
+	ON_CBN_SELCHANGE(IDC_COMBO9, &CToolMenuView::OnCbnSelchangeObbList)
 
+	/* obj list */
 	ON_BN_CLICKED(IDC_BUTTON20, &CToolMenuView::OnBnClickedDelObjectWithObjList)
-	ON_BN_CLICKED(IDC_CHECK2, &CToolMenuView::OnBnClickedShowObjectChk)
+	ON_LBN_SELCHANGE(IDC_LIST1, &CToolMenuView::OnLbnSelchangeObjectList)
+
+	/* .. */
+
 END_MESSAGE_MAP()
 
 
@@ -732,7 +736,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 	std::string strLine = "";
 	CString fileName;
 	m_loadFileName.GetWindowTextW(fileName);
-	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName);
+	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName) + ".ini";
 	std::ifstream ifsLoad(filePath.data());
 	
 	_float vPos = 0.f;

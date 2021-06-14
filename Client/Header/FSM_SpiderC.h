@@ -24,6 +24,7 @@ private: /* Normal Actions */
 	_bool CheckAction_Run();
 
 private:
+	_float m_accTime = 0.f;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
 	CStageController* m_pStageController = nullptr; // test
 

@@ -32,7 +32,7 @@ void CFSM_SpiderC::Start(SP(CComponent) spThis)
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
 	m_pStageController = CStageController::GetInstance();
 
-	SetStartState(Name_StandBy);
+	SetStartState(Name_Born);
 	m_curState->DoEnter();
 }
 
@@ -305,6 +305,11 @@ void CFSM_SpiderC::BORN_Enter(void)
 
 void CFSM_SpiderC::BORN_Update(float deltaTime)
 {
+	if (true == m_pDM->GetAniCtrl()->IsItEnd())
+	{
+		ChangeState(Name_StandBy);
+		return;
+	}
 }
 
 void CFSM_SpiderC::BORN_End(void)
@@ -497,6 +502,15 @@ void CFSM_SpiderC::StandBy_Enter(void)
 
 void CFSM_SpiderC::StandBy_Update(float deltaTime)
 {
+	if (m_accTime >= 3.f)
+	{
+		ChangeState(Name_Walk_Forward);
+		m_accTime = 0.f;
+		return;
+	}
+	else
+		m_accTime += deltaTime;
+
 	if (Engine::IMKEY_DOWN(KEY_UP))
 	{
 		ChangeState(Name_Walk_Forward);
@@ -582,6 +596,14 @@ void CFSM_SpiderC::Walk_Forward_Enter(void)
 
 void CFSM_SpiderC::Walk_Forward_Update(float deltaTime)
 {
+	if (3.f <= m_accTime)
+	{
+		ChangeState(Name_Attack_1);
+		m_accTime = 0.f;
+		return;
+	}
+	else
+		m_accTime += deltaTime;
 }
 
 void CFSM_SpiderC::Walk_Forward_End(void)
