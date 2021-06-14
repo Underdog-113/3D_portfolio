@@ -811,9 +811,11 @@
     <ClInclude Include="..\Header\PhysicsManager.h">
       <Filter>00.Engine\02.Physics\00.PhysX\00.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\PhysicsHelper.h" />
     <ClInclude Include="..\Header\DecoObject.h">
       <Filter>02.Objects\03.DecoObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\PhysicsC.h" />
     <ClInclude Include="..\Header\SimulationEventCallback.h">
       <Filter>00.Engine\02.Physics\00.PhysX\01.EventCallback</Filter>
     </ClInclude>
@@ -851,6 +853,7 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
     </FxCompile>
