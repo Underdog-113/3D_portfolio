@@ -51,15 +51,10 @@ void CReadyToSortieScene::Start(void)
 		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
 	// 로드
-
-		CDataLoad* Load = new CDataLoad();
-		Load->Setting();
-		Load->Load(this);
-		delete(Load);
-
-
-	// (미완성)스크롤 뷰 예제
-
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->Load(this);
+	delete(Load);
 }
 
 void CReadyToSortieScene::FixedUpdate(void)

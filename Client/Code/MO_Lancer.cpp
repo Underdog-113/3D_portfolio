@@ -44,17 +44,17 @@ void CMO_Lancer::LateUpdate(void)
 
 void CMO_Lancer::PreRender(void)
 {
-	m_spComponentToRender->PreRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Lancer::Render(void)
 {
-	m_spComponentToRender->Render(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Lancer::PostRender(void)
 {
-	m_spComponentToRender->PostRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Lancer::OnDestroy(void)

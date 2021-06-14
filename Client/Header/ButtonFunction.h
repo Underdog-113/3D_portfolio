@@ -8,7 +8,6 @@ public:
 	~CButtonFunction();
 
 public:
-	void ChangeJongScene();
 	void MainRoomScene();
 	void StageSelectionScene();
 	void ReadyToSortieScene();

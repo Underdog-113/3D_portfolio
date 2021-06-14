@@ -26,7 +26,7 @@ public:
 					void			OnEnable			(void) override;
 					void			OnDisable			(void) override;
 
-//interface			
+//interface
 public:
 					void			AddCollider			(SP(CCollider) spCollider);
 
@@ -58,7 +58,7 @@ protected:
 
 	GETTOR			(SP(CTransformC),	m_spTransform,		nullptr,		Transform)
 	GETTOR			(SP(CRigidBodyC),	m_spRigidbody,		nullptr,		Rigidbody)
-	
+
 	GETTOR_SETTOR	(_bool,				m_resolveIn,		true,			ResolveIn)
 };
 END

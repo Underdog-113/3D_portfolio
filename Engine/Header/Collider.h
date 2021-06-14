@@ -33,12 +33,12 @@ protected:
 
 	GETTOR_SETTOR	(_bool,					m_isTrigger,		false,			IsTrigger)
 
-	//ºÎ¸ð »ó´ëÁÂÇ¥
+	//ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥
 	GETTOR_SETTOR	(_float3,				m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
-	//½ÇÁ¦ ÁÂÇ¥
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
 	GETTOR_SETTOR	(_float3,				m_offset,			ZERO_VECTOR,	Offset)
-	//BoundingSphereÀÇ ¹ÝÁö¸§.
-	GETTOR_SETTOR	(_float,				m_radiusBS,			0,				RadiusBS)	
+	//BoundingSphereï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	GETTOR_SETTOR	(_float,				m_radiusBS,			0,				RadiusBS)
 };
 
 END

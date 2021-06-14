@@ -69,8 +69,9 @@ namespace Engine
 		SliderShader			= 4,
 		WaterShader				= 5,
 		EffectShader			= 6,
-		DamageFont				= 6,
-		NumOfShaderID			= 7
+		DamageFont				= 7,
+		CircularGauge			= 8,
+		NumOfShaderID			= 9
 
 	};
 #pragma endregion

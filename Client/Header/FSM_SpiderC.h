@@ -1,19 +1,32 @@
 #pragma once
 #include "StateMachine.h"
+#define Cool_End		0.75f
 
 
-
-
-class FSM_SpiderC final : public Engine::CStateMachineC
+class CStageController;
+class CFSM_SpiderC final : public Engine::CStateMachineC
 {
 public:
-	FSM_SpiderC();
-	~FSM_SpiderC() = default;
+	CFSM_SpiderC();
+	~CFSM_SpiderC() = default;
 
 public:
 	SP(Engine::CComponent)		MakeClone		(Engine::CObject* pOwner) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+
+private:
+	void RegisterAllState();
+	void FixRootMotionOffset(_uint index);
+
+private: /* Normal Actions */
+	_bool CheckAction_Idle(_float coolTime = Cool_End);
+	_bool CheckAction_Run();
+
+private:
+	_float m_accTime = 0.f;
+	Engine::CDynamicMeshData* m_pDM = nullptr;
+	CStageController* m_pStageController = nullptr; // test
 
 public:
 	// <Animation List>
@@ -88,12 +101,6 @@ public:
 	void Bury_Loop_Enter(void);
 	void Bury_Loop_Update(float deltaTime);
 	void Bury_Loop_End(void);
-
-	// Attack_Die
-	void Attack_Die_Init(void);
-	void Attack_Die_Enter(void);
-	void Attack_Die_Update(float deltaTime);
-	void Attack_Die_End(void);
 
 	// Hit_H
 	void Hit_H_Init(void);
@@ -178,8 +185,4 @@ public:
 	void Walk_Right_Enter(void);
 	void Walk_Right_Update(float deltaTime);
 	void Walk_Right_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
-
 };

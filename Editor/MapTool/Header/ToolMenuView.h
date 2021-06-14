@@ -167,4 +167,5 @@ public:
 	afx_msg void OnBnClickedDelObjectWithObjList();
 	CButton m_showObjectChk;
 	afx_msg void OnBnClickedShowObjectChk();
+	CComboBox m_loadFileName;
 };

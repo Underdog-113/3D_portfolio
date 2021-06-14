@@ -8,7 +8,7 @@ public:
 	explicit							CTransformC				(void);
 									   ~CTransformC				(void);
 
-//Override functions									   
+//Override functions
 public:
 					SP(CComponent)		MakeClone				(CObject* pObject) override;
 
@@ -62,7 +62,6 @@ public:
 
 					void				SetForward				(_float3 forward);
 					void				SetForwardUp			(_float3 forward, _float3 up);
-
 #pragma endregion
 //Interface
 public:
@@ -76,7 +75,7 @@ public:
 					void				MoveDown				(_float magnitude);
 
 					void				CopyTransform			(CTransformC const& transform);
-	
+
 					void				operator =				(CTransformC const& rhs);
 public:
 					void				UpdateForward			(void);
@@ -85,8 +84,8 @@ public:
 
 					void				UpdateParentMatrix		(const _mat* pMat);
 
-					
-					
+
+
 
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Transform;

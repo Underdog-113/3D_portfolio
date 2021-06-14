@@ -138,7 +138,7 @@ void CDongScene::InitPrototypes(void)
 }
 
 
-// ÀÌ¹ÌÁö ¹öÆ° ½½¶óÀÌ´õ ¿¹Á¦
+// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½
 /*{
 SP(Engine::CImageObject) image =
 std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"sdfsdf"));
@@ -155,7 +155,7 @@ button->GetTransform()->SetSize(_float3(141, 152, 0.1f));
 button->SetButtonType(CButton::UP);
 button->GetTexture()->AddTexture(L"BtnAttack1", 0);
 button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction());
-button->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"Ãâ°Ý", _float2(0, 0), _float2(0,0), 50, DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 0, 0, 1), true);
+button->AddComponent<Engine::CTextC>()->AddFontData(L"1", L"ï¿½ï¿½ï¿½ï¿½", _float2(0, 0), _float2(0,0), 50, DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 0, 0, 1), true);
 }
 
 {
@@ -208,7 +208,7 @@ AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")))
 slider->AddSliderData(100, 100, background, fill);
 }*/
 
-// (¹Ì¿Ï¼º)½ºÅ©·Ñ ºä ¿¹Á¦
+// (ï¿½Ì¿Ï¼ï¿½)ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 /*
 SP(CScrollViewObject) spScrollView =
 std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
@@ -229,7 +229,7 @@ AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddIma
 AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 */
 
-// Äµ¹ö½º ¿¹Á¦ (¾Õ¿¡ ÀÌ¸§À» Äµ¹ö½º ÀÌ¸§À¸·ÎÇÏ¸é Äµ¹ö½º°¡ ¾Ë¾Æ¼­ ÀÚ±â Äµ¹ö½º¿¡ µî·ÏÇÔ)
+// Äµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Õ¿ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ Äµï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½Ú±ï¿½ Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 /*
 {
 	SP(Engine::CImageObject) image =
@@ -262,7 +262,7 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 */
 
 
-// µ¥¹ÌÁö ÆùÆ® ¶ç¿ì±â
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /*
 void CDongScene::Start(void)
 {

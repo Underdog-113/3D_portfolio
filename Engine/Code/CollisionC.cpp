@@ -23,7 +23,7 @@ SP(CComponent) CCollisionC::MakeClone(CObject* pObject)
 		spClone->m_vColliders.emplace_back(collider->MakeClone(spClone.get()));
 
 	spClone->m_resolveIn	= m_resolveIn;
-	
+
 	return spClone;
 }
 
@@ -83,13 +83,13 @@ void CCollisionC::OnDestroy(void)
 void CCollisionC::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
 void CCollisionC::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
 void CCollisionC::AddCollider(SP(CCollider) spCollider)
@@ -278,4 +278,3 @@ void CCollisionC::ProcessTriggers(void)
 	m_vPreTriggers = m_vCurTriggers;
 	m_vCurTriggers.clear();
 }
-
