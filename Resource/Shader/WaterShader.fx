@@ -1,109 +1,124 @@
+matrix g_WorldMat;
+matrix g_ViewMat;
+matrix g_ProjMat;
 
-float4x4 g_mWVP;		// 좌표변환 행렬
+float4 g_WorldLightPos;
+float4 g_WorldCameraPos;
 
-float4 g_vLightDir;		// 광원방향
-float4 g_vColor;		// 광원*메시 색
-float3 g_vEyePos;		// 카메라위치(로컬좌표계)
+float g_fTime;
+float g_fUVSpeed;
 
-					// -------------------------------------------------------------
-					// 텍스처
-					// -------------------------------------------------------------
-					// 디컬 텍스처
-texture g_DecaleTex;
-sampler DecaleSamp = sampler_state
+float g_WaveHeight = 3;
+float g_WaveFrequency = 10;
+float g_Speed = 2;
+
+texture g_DiffuseTex;
+sampler Diffuse = sampler_state
 {
-	Texture = <g_DecaleTex>;
+	Texture = <g_DiffuseTex>;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = NONE;
-
-	//AddressU = Clamp;
-	//AddressV = Clamp;
 };
-// -------------------------------------------------------------
-// 법선맵
-texture g_NormalMap;
-sampler NormalSamp = sampler_state
+
+texture g_SpecularTex;
+sampler Specular = sampler_state
 {
-	Texture = <g_NormalMap>;
+	Texture = <g_SpecularTex>;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = NONE;
+};
+float3 g_LightColor;
 
-	/*AddressU = Wrap;
-	AddressV = Wrap;*/
+struct VS_INPUT
+{
+	float4 mPosition   : POSITION;
+	float3 mNormal     : NORMAL;
+	float2 mUV		   : TEXCOORD0;
 };
 
-// -------------------------------------------------------------
-// 정점셰이더에서 픽셀셰이더로 넘기는 데이터
-// -------------------------------------------------------------
 struct VS_OUTPUT
 {
-	float4 Pos			: POSITION;
-	float4 Color		: COLOR0;		// 정점색
-	float2 Tex			: TEXCOORD0;	// 디컬텍스처 좌표
-	float3 L			: TEXCOORD1;	// 광원벡터
-	float3 E			: TEXCOORD2;	// 법선벡터
+	float4 mPosition   : POSITION;
+	float2 mUV		   : TEXCOORD0;
+	float3 mDiffuse    : TEXCOORD1;
+	float3 mViewDir    : TEXCOORD2;
+	float3 mReflection : TEXCOORD3;
 };
-// -------------------------------------------------------------
-// 장면렌더
-// -------------------------------------------------------------
-VS_OUTPUT VS(
-	float4 Pos      : POSITION,          // 로컬위치좌표
-	float3 Normal	: NORMAL,            // 법선벡터
-	float3 Tangent	: TANGENT0,          // 접선벡터
-	float2 Texcoord : TEXCOORD0          // 텍스처좌표
-) {
-	VS_OUTPUT Out = (VS_OUTPUT)0;        // 출력데이터
 
-										 // 좌표변환
-	Out.Pos = mul(Pos, g_mWVP);
+VS_OUTPUT VS_MAIN(VS_INPUT Input)
+{
+	VS_OUTPUT Out;
 
-	// 메시 색
-	Out.Color = 1.f;
+	g_WaveHeight;
+	g_WaveFrequency;
+	g_Speed;
 
-	// 디컬용 텍스처좌표
-	Out.Tex = Texcoord;
+	float cosTime = g_WaveHeight * cos(g_fTime * g_Speed + Input.mUV.x * g_WaveFrequency);
 
-	// 좌표계변환 기저
-	float3 N = Normal;
-	float3 T = Tangent;
-	float3 B = cross(N, T);
+	Input.mPosition.y += cosTime;
 
-	// 반영반사용 벡터
-	float3 E = g_vEyePos - Pos.xyz;	// 시선벡터
-	Out.E.x = dot(E, T);
-	Out.E.y = dot(E, B);
-	Out.E.z = dot(E, N);
+	Out.mPosition = mul(Input.mPosition, g_WorldMat);
 
-	float3 L = -g_vLightDir.xyz;		// 광원벡터
-	Out.L.x = dot(L, T);
-	Out.L.y = dot(L, B);
-	Out.L.z = dot(L, N);
+	float3 lightDir = Out.mPosition.xyz - g_WorldLightPos.xyz;
+	lightDir = normalize(lightDir);
+
+	float3 viewDir = normalize(Out.mPosition.xyz - g_WorldCameraPos.xyz);
+	Out.mViewDir = viewDir;
+
+	Out.mPosition = mul(Out.mPosition, g_ViewMat);
+	Out.mPosition = mul(Out.mPosition, g_ProjMat);
+
+	float3 worldNormal = mul(Input.mNormal, (float3x3)g_WorldMat);
+	worldNormal = normalize(worldNormal);
+
+	Out.mDiffuse = dot(-lightDir, worldNormal);
+	Out.mReflection = reflect(lightDir, worldNormal);
+	Out.mUV = Input.mUV + float2(g_fTime * g_fUVSpeed, 0);
 
 	return Out;
 }
-// -------------------------------------------------------------
-float4 PS(VS_OUTPUT In) : COLOR
-{
-	float3 N = 2.0f * tex2D(NormalSamp, In.Tex).xyz - 1.0;// 법선맵으로부터 법선
-	float3 L = normalize(In.L);						    // 광원벡터
-	float3 R = reflect(-normalize(In.E), N);			// 반사벡터
-	float amb = -g_vLightDir.w;							// 환경광의 강도
 
-	return In.Color * tex2D(DecaleSamp, In.Tex)	// 확산광과 환경광에
-		* (max(0, dot(N, L)) + amb)			// 정점색과 텍스처색을 합성한다
-		+ 0.7f * pow(max(0,dot(R, L)), 8);		// Phong반영반사광
+struct PS_INPUT
+{
+	float2 mUV : TEXCOORD0;
+	float3 mDiffuse : TEXCOORD1;
+	float3 mViewDir : TEXCOORD2;
+	float3 mReflection : TEXCOORD3;
+};
+
+
+
+float4 PS_MAIN(PS_INPUT Input) : COLOR
+{
+	float4 albedo = tex2D(Diffuse, Input.mUV);
+	float3 diffuse = g_LightColor * albedo.rgb * saturate(Input.mDiffuse);
+
+	float3 reflection = normalize(Input.mReflection);
+	float3 viewDir = normalize(Input.mViewDir);
+	float3 specular = 0;
+
+	if (diffuse.x > 0)
+	{
+		specular = saturate(dot(reflection, -viewDir));
+		specular = pow(specular, 20.f);
+
+		float4 specularIntensity = tex2D(Specular, Input.mUV);
+		specular *= specularIntensity.rgb * g_LightColor;
+	}
+
+	float3 ambient = float3(0.1f, 0.1f, 0.1f) * albedo;
+
+	return float4(ambient + diffuse + specular, 1);
 }
 
-// -------------------------------------------------------------
-// 테크닉
-// -------------------------------------------------------------
+
 technique TShader
 {
-	pass P0
+	pass UVAnim
 	{
-		VertexShader = compile vs_3_0 VS();
-		PixelShader = compile ps_3_0 PS();
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN();
 	}
-}
+};

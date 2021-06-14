@@ -432,15 +432,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 				else
 					pass = 0;
 
-				switch (spGC->GetShader)
-				{
-					spGC->get
-				default:
-					break;
-				}
-
-				pEffect->SetTexture("g_BaseTexture", pTexData[meshIndex][meshContainer->texIndexStart + i]->pTexture);
-
+				if(!m_isEffectMesh)
+					pEffect->SetTexture("g_BaseTexture", pTexData[meshIndex][meshContainer->texIndexStart + i]->pTexture);
 			}
 			else
 			{

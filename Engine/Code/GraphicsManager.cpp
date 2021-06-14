@@ -390,15 +390,19 @@ void CGraphicsManager::RenderAlphaBlend(void)
 						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
 						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						pEffect->BeginPass(0);
+						for (_int j = 0; j < 2; ++j)
+						{
 
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
+						pEffect->Begin(&maxPass, 0);
+						pEffect->BeginPass(j);
+
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
 
 						pEffect->EndPass();
 						pEffect->End();
+						}
 					}
 				}
 				else

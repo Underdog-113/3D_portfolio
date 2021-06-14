@@ -69,14 +69,9 @@ namespace Engine
 		SliderShader			= 4,
 		WaterShader				= 5,
 		EffectShader			= 6,
-		/*Shader_Sample	= 0,
-		Shader_Terrain	= 1,
-		Shader_Mesh		= 2,
-		Shader_Shade	= 3,
-		Shader_Blend	= 4,
-		Shader_Skybox	= 5,*/
-		DamageFont				= 6,
-		NumOfShaderID			= 7
+		DamageFont				= 7,
+		CatPawShader            = 8,
+		NumOfShaderID			= 9
 
 	};
 #pragma endregion

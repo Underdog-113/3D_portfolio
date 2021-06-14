@@ -258,7 +258,7 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
       <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX\00.Manager">
       <UniqueIdentifier>{6bfdfff4-fd1a-4e55-a118-fc63a21a7f7c}</UniqueIdentifier>
     </Filter>
@@ -291,6 +291,12 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader">
       <UniqueIdentifier>{695e9423-cbcc-4a72-94a5-8375b5aa1dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader">
+      <UniqueIdentifier>{3811655b-405c-460f-a9dd-7226bf6ed2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
+      <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -547,6 +553,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DamageFontShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CatPawShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -828,6 +837,9 @@
     <ClInclude Include="..\Header\DamageFontShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CatPawShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -856,6 +868,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

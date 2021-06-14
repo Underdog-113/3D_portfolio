@@ -25,6 +25,7 @@
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
     <ClInclude Include="..\Header\Canvas.h" />
+    <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\ClicularGaugeShader.h" />
     <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DebugCollider.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
     <ClCompile Include="..\Code\Canvas.cpp" />
+    <ClCompile Include="..\Code\CatPawShader.cpp" />
     <ClCompile Include="..\Code\ClicularGaugeShader.cpp" />
     <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DebugCollider.cpp" />
@@ -206,6 +208,7 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
