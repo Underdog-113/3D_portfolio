@@ -16,11 +16,11 @@ enum class EComponentID
 
 enum class EColliderID
 {
-	Player				= 0 + (_uint)Engine::EColliderID::NumOfColliderID,
-	Enemy				= 1 + (_uint)Engine::EColliderID::NumOfColliderID,
-	Object				= 2 + (_uint)Engine::EColliderID::NumOfColliderID,
-	Map					= 3 + (_uint)Engine::EColliderID::NumOfColliderID,
-	NumOfColliderID		= 4 + (_uint)Engine::EColliderID::NumOfColliderID
+	Player				= 0 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Enemy				= 1 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Object				= 2 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Map					= 3 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	NumOfColliderID		= 4 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
 enum class EDataID

@@ -44,7 +44,7 @@ private:
 	static		_uint			m_s_usage;
 
 	std::vector<std::wstring> m_vHashKey;
-	
+
 
 public:
 	template <typename T>

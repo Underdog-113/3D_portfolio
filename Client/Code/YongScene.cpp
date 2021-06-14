@@ -57,7 +57,27 @@ void CYongScene::Start(void)
 		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
 
 		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");
-	}	
+
+		//	// Save & Load Ex
+		//	_int numOfMeshEffect;
+		//	GET_VALUE(false, (_int)EDataID::EFFECT, m_objectKey + L"_EffectData", L"numOfMeshEffect", numOfMeshEffect);
+
+		//	for (_int i = 0; I < numO!fMeshEffect; ++i)
+		//	{
+		//		SP(CMeshEffect) spMeshEffect = ADD_CLONE(L"MeshEffect", true, (_int)ELayerID::Effect);
+
+		//		_int numOfTexture;
+		//		GET_VALUE(false, (_int)EDataID::EFFECT, m_objectKey + L"_EffectData", L"numOfTexture" + std::to_wstring(i), numOfTexture);
+		//		for (_int j = 0; j < numOfTexture; ++j)
+		//		{
+		//			std::wstring curTexKey;
+		//			GET_VALUE(false, (_int)EDataID::EFFECT, m_objectKey + L"_EffectData", L"set" + std::to_wstring(i)
+		//				+ L"_texkey" + std::to_wstring(j), curTexKey);
+		//			spMeshEffect->GetTexture()->AddTexture(curTexKey);
+		//		}
+
+		//	}
+		}		
 }
 
 void CYongScene::FixedUpdate(void)

@@ -65,6 +65,7 @@ void CDongScene::Start(void)
 		AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
 		AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 
+	
 }
 
 void CDongScene::FixedUpdate(void)

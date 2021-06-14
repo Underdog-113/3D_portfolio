@@ -38,6 +38,7 @@
     <ClInclude Include="..\Header\DeferredLightShader.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
     <ClInclude Include="..\Header\DynamicMeshData.h" />
+    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\EmptyObject.h" />
     <ClInclude Include="..\Header\Engine.h" />
     <ClInclude Include="..\Header\EngineComponents.h" />
@@ -55,6 +56,7 @@
     <ClInclude Include="..\Header\MeshShader.h" />
     <ClInclude Include="..\Header\Particle.h" />
     <ClInclude Include="..\Header\ParticleSystemC.h" />
+    <ClInclude Include="..\Header\PhysicsC.h" />
     <ClInclude Include="..\Header\PhysicsHelper.h" />
     <ClInclude Include="..\Header\PhysicsManager.h" />
     <ClInclude Include="..\Header\PSC_Manager.h" />
@@ -69,6 +71,7 @@
     <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\ShaderManager.h" />
+    <ClInclude Include="..\Header\SimulationEventCallback.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
@@ -128,6 +131,7 @@
     <ClCompile Include="..\Code\DeferredLightShader.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
     <ClCompile Include="..\Code\DynamicMeshData.cpp" />
+    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\EmptyObject.cpp" />
     <ClCompile Include="..\Code\Engine.cpp" />
     <ClCompile Include="..\Code\FadeInOutC.cpp" />
@@ -142,6 +146,7 @@
     <ClCompile Include="..\Code\MeshShader.cpp" />
     <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\ParticleSystemC.cpp" />
+    <ClCompile Include="..\Code\PhysicsC.cpp" />
     <ClCompile Include="..\Code\PhysicsHelper.cpp" />
     <ClCompile Include="..\Code\PhysicsManager.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp" />
@@ -156,6 +161,7 @@
     <ClCompile Include="..\Code\Shader.cpp" />
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp" />
+    <ClCompile Include="..\Code\SimulationEventCallback.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
@@ -196,6 +202,7 @@
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
@@ -317,6 +324,7 @@ copy /Y "$(ProjectDir)..\Header\*.h" "$(SolutionDir)Reference\Header\";
       <AdditionalIncludeDirectories>../Code/;../Header/;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>EngineStdafx.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

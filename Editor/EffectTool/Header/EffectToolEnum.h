@@ -14,7 +14,7 @@ enum class EComponentID
 };
 
 
-enum class EColliderID
+enum class ECollisionID
 {
 	Player = 0,
 	Map = 1,
@@ -44,15 +44,16 @@ enum class ELayerID
 };
 
 //GraphicsComponent RenderID
-enum class ERenderID
-{
-	Base = 0,
-	NonAlpha = 1,
-	WireFrame = 2,
-	AlphaTest = 3,
-	AlphaBlend = 4,
-	Particle = 5,
-	UI = 6,
-	NumOfRenderID = 7
-};
+//enum ERenderID
+//{
+//	Base = 0,
+//	NonAlpha = 1,
+//	WireFrame = 2,
+//	AlphaTest = 3,
+//	AlphaBlend = 4,
+//	Particle = 5,
+//	UI = 6,
+//	NumOfRenderID = 7
+//};
+
 #endif // EFFECTTOOLENUM_H

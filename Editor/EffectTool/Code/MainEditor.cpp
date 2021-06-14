@@ -48,7 +48,7 @@ void CMainEditor::Start()
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->Start();
 	Engine::CSceneManager::GetInstance()->SceneChange(CEffectToolScene::Create());
-	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CCollisionManager::GetInstance()->Start((_int)ECollisionID::NumOfColliderID);
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CRenderTargetManager::GetInstance()->Start();
 	Engine::CTextManager::GetInstance()->Start();
@@ -108,6 +108,7 @@ void CMainEditor::OnDestroy(void)
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
 	Engine::CPSC_Manager::GetInstance()->DestroyInstance();
+	Engine::CTextManager::GetInstance()->DestroyInstance();
 	Engine::CGraphicsManager::GetInstance()->DestroyInstance();
 }
 

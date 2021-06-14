@@ -97,8 +97,8 @@ void CDynamicMeshData::Update(void)
 {
 	if (m_playAnimation)
 	{
-		m_pAniCtrl->Play();
-		m_pAniCtrl->PlayFake();
+		//m_pAniCtrl->Play();
+		//m_pAniCtrl->PlayFake();
 	}
 }
 

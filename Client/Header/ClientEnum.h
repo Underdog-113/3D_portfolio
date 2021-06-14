@@ -16,9 +16,9 @@ enum class EComponentID
 };
 
 
-enum class EColliderID
+enum class ECollisionID
 {
-	NumOfColliderID		= 0 + (_uint)Engine::EColliderID::NumOfColliderID
+	NumOfColliderID		= 0 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
 enum class EDataID

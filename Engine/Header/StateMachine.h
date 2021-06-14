@@ -46,15 +46,15 @@ public:
 
 public:
 	template<typename T>
-	SP(CStateMachineC)		MakeStateMachineClone(CObject* pObject)
+	SP(T)		MakeStateMachineClone(CObject* pObject)
 	{
-		SP(CStateMachineC) spClone(new T);
+		SP(T) spClone(new T);
 
 		__super::InitClone(spClone, pObject);
 
 		for (auto pState : m_stateList)
 		{
-			spClone->m_stateList.emplace(pState.first, pState.second->MakeClone());
+			spClone->m_stateList.emplace(pState.first, pState.second->MakeClone(spClone.get()));
 		}
 
 		return spClone;
