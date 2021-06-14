@@ -49,15 +49,13 @@ void CMainRoomScene::Start(void)
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::UI, L"Background");
+		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
 	// 로드
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
 	Load->Load(this);
 	delete(Load);
-
-	// (미완성)스크롤 뷰 예제
 
 }
 
@@ -69,7 +67,6 @@ void CMainRoomScene::FixedUpdate(void)
 void CMainRoomScene::Update(void)
 {
 	__super::Update();
-
 }
 
 void CMainRoomScene::LateUpdate(void)

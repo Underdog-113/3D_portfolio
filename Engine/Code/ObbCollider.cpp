@@ -10,41 +10,42 @@ CObbCollider::CObbCollider()
 
 CObbCollider::~CObbCollider()
 {
+	OnDestroy();
 }
 
-CObbCollider * CObbCollider::Create(_float3 size, _float3 offset,
-									_float3 right, _float3 up, _float3 forward)
+SP(CObbCollider) CObbCollider::Create(_int collisionID, _float3 size, _float3 offset, _float3 rotOffset)
 {
-	CObbCollider* pObb = new CObbCollider;
-	pObb->SetOffsetOrigin(offset);
-	pObb->SetSize(size);
-	pObb->SetHalfSize(size / 2.f);
-	pObb->SetRight(right);
-	pObb->SetUp(up);
-	pObb->SetForward(forward);
+	SP(CObbCollider) spInstance(new CObbCollider, SmartDeleter<CObbCollider>);
+	spInstance->SetCollisionID(collisionID);
+	spInstance->SetSize(size);
+	spInstance->SetHalfSize(size / 2.f);
+	spInstance->SetOffsetOrigin(offset);
+	spInstance->SetRotOffset(rotOffset);
 
-	pObb->Awake();
+	spInstance->Awake();
 
-	return pObb;
+	return spInstance;
 }
 
-CCollider * CObbCollider::MakeClone(CCollisionC * pCC)
+SP(CCollider) CObbCollider::MakeClone(CCollisionC * pCC)
 {
-	CObbCollider* pObbClone = new CObbCollider;
+	SP(CObbCollider) spClone(new CObbCollider, SmartDeleter<CObbCollider>);
 	
 	//Create 
-	pObbClone->SetOffsetOrigin(m_offsetOrigin);
-	pObbClone->SetSize(m_size);
-	pObbClone->SetHalfSize(m_halfSize);
+	spClone->SetCollisionID(m_collisionID);
+	spClone->SetOffsetOrigin(m_offsetOrigin);
+	spClone->SetSize(m_size);
+	spClone->SetHalfSize(m_halfSize);
+	spClone->SetRotOffset(m_rotOffset);
 
 	//Awake
-	pObbClone->SetRadiusBS(m_radiusBS);
-	pObbClone->SetColliderType(m_colliderType);
+	spClone->SetRadiusBS(m_radiusBS);
+	spClone->SetColliderType(m_colliderType);
 
 	//MakeClone
-	pObbClone->SetOwner(pCC);
+	spClone->SetOwner(pCC);
 
-	return pObbClone;
+	return spClone;
 }
 
 void CObbCollider::Awake(void)
@@ -71,14 +72,17 @@ void CObbCollider::UpdatePosition(void)
 	
 	SP(CTransformC) spOwnerTransform = m_pOwner->GetTransform();
 
-	D3DXVec3TransformNormal(&m_right, &RIGHT_VECTOR, &m_pOwner->GetTransform()->GetRotMatrix());
-	D3DXVec3TransformNormal(&m_up, &UP_VECTOR, &m_pOwner->GetTransform()->GetRotMatrix());
-	D3DXVec3TransformNormal(&m_forward, &FORWARD_VECTOR, &m_pOwner->GetTransform()->GetRotMatrix());
+	_mat rotateX, rotateY, rotateZ, result;
 
-	
-	//m_right		= spOwnerTransform->GetRight();
-	//m_up		= spOwnerTransform->GetUp();
-	//m_forward	= spOwnerTransform->GetForward();
+	D3DXMatrixRotationX(&rotateX, m_pOwner->GetTransform()->GetRotation().x + m_rotOffset.x);
+	D3DXMatrixRotationY(&rotateY, m_pOwner->GetTransform()->GetRotation().y + m_rotOffset.y);
+	D3DXMatrixRotationZ(&rotateZ, m_pOwner->GetTransform()->GetRotation().z + m_rotOffset.z);
+
+	result = rotateX * rotateY * rotateZ;
+
+	D3DXVec3TransformNormal(&m_right,	&RIGHT_VECTOR,		&result);
+	D3DXVec3TransformNormal(&m_up,		&UP_VECTOR,			&result);
+	D3DXVec3TransformNormal(&m_forward, &FORWARD_VECTOR,	&result);
 }
 
 _float CObbCollider::SqDistFromPoint(_float3 const& point)
@@ -98,15 +102,11 @@ _float3 CObbCollider::ClosestFromPoint(_float3 const& point)
 	_mat worldMat = m_pOwner->GetTransform()->GetWorldMatrix();
 
 	_float3 orientedAxis[3] = {m_right, m_up, m_forward};
-	//D3DXVec3TransformNormal(&orientedAxis[0], &m_right, &worldMat);
-	//D3DXVec3TransformNormal(&orientedAxis[1], &m_up, &worldMat);
-	//D3DXVec3TransformNormal(&orientedAxis[2], &m_forward, &worldMat);
-	
 
-	for (int i = 0; i < 3; ++i)
+	for (_int i = 0; i < 3; ++i)
 	{
 		D3DXVec3Normalize(&orientedAxis[i], &orientedAxis[i]);
-		float dist = D3DXVec3Dot(&dir, &orientedAxis[i]);
+		_float dist = D3DXVec3Dot(&dir, &orientedAxis[i]);
 
 		if (dist > m_halfSize[i]) dist = m_halfSize[i];
 		if (dist < -m_halfSize[i]) dist = -m_halfSize[i];

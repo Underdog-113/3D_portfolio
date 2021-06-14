@@ -44,17 +44,17 @@ void CMO_Ninza::LateUpdate(void)
 
 void CMO_Ninza::PreRender(void)
 {
-	m_spComponentToRender->PreRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Ninza::Render(void)
 {
-	m_spComponentToRender->Render(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Ninza::PostRender(void)
 {
-	m_spComponentToRender->PostRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Ninza::OnDestroy(void)

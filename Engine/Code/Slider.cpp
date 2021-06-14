@@ -55,6 +55,16 @@ void CSlider::FixedUpdate(void)
 void CSlider::Update(void)
 {
 	__super::Update();
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_1))
+	{
+		m_value -= 1.0f;
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_2))
+	{
+		m_value += 1.0f;
+	}
 }
 
 void CSlider::LateUpdate(void)
@@ -94,10 +104,11 @@ void CSlider::OnDisable(void)
 	m_spFill->SetIsEnabled(false);
 }
 
-void CSlider::AddSliderData(_float value, _float maxValue, SP(CObject) spBackGround, SP(CObject) spFill)
+void CSlider::AddSliderData(_float value, _float maxValue, _float minValue, SP(CObject) spBackGround, SP(CObject) spFill)
 {
 	m_value = value;
 	m_MaxValue = maxValue;
+	m_MinValue = minValue;
 	m_spBackGround = spBackGround;
 	m_spFill = spFill;
 }

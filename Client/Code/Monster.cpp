@@ -14,12 +14,21 @@ SP(Engine::CObject) CMonster::MakeClone(void)
 void CMonster::Awake(void)
 {
 	__super::Awake();
+
+	m_dataID = (_int)EDataID::Enemy;
+	m_layerID = (_int)ELayerID::Enemy;
+
+	m_spMesh = AddComponent<Engine::CMeshC>();
+	m_spMesh->SetInitTex(true);
+
+	m_spGraphics = AddComponent<Engine::CGraphicsC>();
+	m_spShader = AddComponent<Engine::CShaderC>();
+	m_spTexture = AddComponent<Engine::CTextureC>();
 }
 
 void CMonster::Start(void)
 {
 	__super::Start();
-	PickComponentToRender();
 }
 
 void CMonster::FixedUpdate(void)
@@ -54,21 +63,4 @@ void CMonster::OnDisable(void)
 
 void CMonster::SetBasicName(void)
 {
-}
-
-void CMonster::PickComponentToRender(void)
-{
-	SP(Engine::CMeshC)		spMesh = GetComponent<Engine::CMeshC>();
-	SP(Engine::CRectTexC)	spRectTex = GetComponent<Engine::CRectTexC>();
-
-	if (spMesh != nullptr)
-	{
-		m_spComponentToRender = spMesh;
-		return;
-	}
-	else if (spRectTex != nullptr)
-	{
-		m_spComponentToRender = spRectTex;
-		return;
-	}
 }

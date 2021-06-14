@@ -12,7 +12,7 @@
 #include "SliderShader.h"
 
 #include "DamageFontShader.h"
-#include "ClicularGaugeShader.h"
+#include "CircularGaugeShader.h"
 
 #include "EffectShader.h"
 #include "CatPawShader.h"
@@ -32,6 +32,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CEffectShader::Create());
 	m_vShaders.emplace_back(CDamageFontShader::Create());
 	m_vShaders.emplace_back(CCatPawShader::Create());
+	m_vShaders.emplace_back(CCircularGaugeShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -77,6 +78,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::EffectShader;
 	else if (shaderName == L"CatPawShader")
 		return (_int)EShaderID::CatPawShader;
+	else if (shaderName == L"CircularGaugeShader")
+		return (_int)EShaderID::CircularGauge;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");

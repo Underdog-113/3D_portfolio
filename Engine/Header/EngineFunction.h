@@ -197,13 +197,6 @@ namespace Engine
 		return in;
 	}
 
-	inline PxVec3 ToPxVec3(_float3 float3)
-	{
-		return PxVec3(float3.x, float3.y, float3.z);
-	}
-
-
-
 	template<class T> inline T	operator	~	(T a)		{ return (T)~(int)a; }
 	template<class T> inline T	operator	|	(T a, T b)	{ return (T)((int)a | (int)b); }
 	template<class T> inline T	operator	&	(T a, T b)	{ return (T)((int)a & (int)b); }

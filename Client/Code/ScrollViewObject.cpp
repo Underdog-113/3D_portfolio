@@ -40,7 +40,7 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 void CScrollViewObject::Awake(void)
 {
 	__super::Awake();
-	m_layerID = (_int)ELayerID::UI;
+	m_layerID = (_int)Engine::ELayerID::UI;
 	m_addExtra = true;
 
 	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
@@ -135,7 +135,7 @@ void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _floa
 CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset)
 {
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"ScrollViewImageObject"));
+		std::dynamic_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
 	image->GetTransform()->SetSize(size);
 	image->GetTexture()->AddTexture(texture, 0);
 

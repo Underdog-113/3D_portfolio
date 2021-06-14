@@ -38,7 +38,7 @@ SP(Engine::CObject) CButton::MakeClone(void)
 void CButton::Awake(void)
 {
 	__super::Awake();
-	m_layerID = (_int)ELayerID::UI;
+	m_layerID = (_int)Engine::ELayerID::UI;
 	m_addExtra = true;
 
 	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);

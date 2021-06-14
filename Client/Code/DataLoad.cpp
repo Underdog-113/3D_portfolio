@@ -28,7 +28,7 @@ void CDataLoad::Setting()
 	m_loadDeleGate += std::bind(&CDataLoad::ImageLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
-	m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
+	//m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::EffectLoad, &CDataLoad(), std::placeholders::_1);
 }
@@ -65,7 +65,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, name));
 
 		_float3 position;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
@@ -96,7 +96,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-			dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+			//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
 			fontPosition.y *= -1;
 			image->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 		}
@@ -139,7 +139,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(pScene->GetObjectFactory()->AddClone(L"Slider", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<Engine::CSlider>(pScene->GetObjectFactory()->AddClone(L"Slider", true, (_int)Engine::ELayerID::UI, name));
 
 		_float3 pos;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", pos);
@@ -149,14 +149,22 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"direction", dir);
 		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
 
+		_int imageType;
+		dataStore->GetValue(false, dataID, objectKey, key + L"imageType", imageType);
+		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
+
+		_float sort;
+		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
+
 		SP(Engine::CImageObject) imageObj[2];
 		for (int j = 0; j < 2; j++)
 		{
 			imageObj[j] =
-				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"Image" + name));
+				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Image" + name));
 
 			_float3 pos;
 			dataStore->GetValue(false, dataID, objectKey, key + L"imagePosition" + std::to_wstring(j), pos);
+			pos.x *= -1;
 			imageObj[j]->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + pos);
 
 			_float3 size;
@@ -166,12 +174,10 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 
 			_float rotationZ;
 			dataStore->GetValue(false, dataID, objectKey, key + L"imageRotationZ" + std::to_wstring(j), rotationZ);
-			imageObj[j]->GetTransform()->SetRotationZ(rotationZ);
+			imageObj[j]->GetTransform()->SetRotationZ(D3DXToRadian(rotationZ));
 
-			_float sort;
-			dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
 			imageObj[j]->GetTransform()->SetPositionZ(sort);
-
+			sort += 0.1f;
 
 			std::wstring textureKey;
 			dataStore->GetValue(false, dataID, objectKey, key + L"imageTextureKey" + std::to_wstring(j), textureKey);
@@ -179,22 +185,23 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		}
 
 		imageObj[1]->SetParent(slider.get());
-		if (dir == Engine::CSlider::ESliderDirection::LeftToRight || dir == Engine::CSlider::ESliderDirection::RightToLeft)
+		if (imageType == 0)
 		{
 			imageObj[1]->AddComponent<Engine::CShaderC>()->
 				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
 		}
-		else
+		else if(imageType == 1)
 		{
 			imageObj[1]->AddComponent<Engine::CShaderC>()->
-				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"ClicularGaugeShader")));
+				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"CircularGaugeShader")));
 		}
 
-		_float value, maxValue;
+		_float value, maxValue, minValue;
 		dataStore->GetValue(false, dataID, objectKey, key + L"value", value);
 		dataStore->GetValue(false, dataID, objectKey, key + L"maxValue", maxValue);
+		dataStore->GetValue(false, dataID, objectKey, key + L"minValue", minValue);
 
-		slider->AddSliderData(value, maxValue, imageObj[0], imageObj[1]);
+		slider->AddSliderData(maxValue, maxValue, minValue, imageObj[0], imageObj[1]);
 	}
 }
 
@@ -215,7 +222,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(CButton) button =
-			std::dynamic_pointer_cast<CButton>(pScene->GetObjectFactory()->AddClone(L"Button", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<CButton>(pScene->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
 		_float3 position;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
 		button->GetTransform()->SetPosition(position);
@@ -260,7 +267,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-		dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
 
 		fontPosition.y *= -1;
 		button->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
@@ -285,7 +292,7 @@ void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
 
 
 		SP(CScrollViewObject) spScrollView =
-			std::dynamic_pointer_cast<CScrollViewObject>(pScene->GetObjectFactory()->AddClone(L"ScrollViewObject", true, (_int)ELayerID::UI, name));
+			std::dynamic_pointer_cast<CScrollViewObject>(pScene->GetObjectFactory()->AddClone(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, name));
 
 		_float3 pos;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", pos);
@@ -333,7 +340,7 @@ void CDataLoad::CanvasLoad(Engine::CScene * pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CCanvas) canvas =
-			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)ELayerID::UI, L"MainCanvas"));
+			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)Engine::ELayerID::UI, L"MainCanvas"));
 	}
 }
 
@@ -347,11 +354,7 @@ void CDataLoad::EffectLoad(Engine::CScene * pScene)
 
 void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 {
-	if (0 == function.compare(L"ChangeJongScene"))
-	{
-		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ChangeJongScene, &CButtonFunction());
-	}
-	else if (0 == function.compare(L"MainRoomScene")) // ¸ÞÀÎ¾À
+	if (0 == function.compare(L"MainRoomScene")) // ¸ÞÀÎ¾À
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction());
 	}

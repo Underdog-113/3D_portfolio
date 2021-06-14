@@ -12,7 +12,7 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 	for (int i = 0; i <= poolCount; i++)
 	{
 		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"DamageFontUIObject"));
+			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"DamageFontUIObject"));
 		image->AddComponent<Engine::CShaderC>()->
 			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"DamageFontShader")));
 		image->AddComponent<CDamageFontC>();
@@ -49,7 +49,7 @@ void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _
 		if (m_disabledObjectList.empty())
 		{
 			SP(Engine::CImageObject) image =
-				std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)ELayerID::UI, L"DamageFontUIObject"));
+				std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"DamageFontUIObject"));
 			image->AddComponent<CDamageFontC>();
 
 			m_disabledObjectList.emplace_back(image.get());

@@ -11,12 +11,6 @@ CCollider::~CCollider(void)
 {
 }
 
-void CCollider::Free(void)
-{
-	OnDestroy();
-	delete this;
-}
-
 void CCollider::Awake(void)
 {
 	MakeBS();

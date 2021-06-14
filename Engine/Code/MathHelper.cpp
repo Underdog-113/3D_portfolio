@@ -59,11 +59,6 @@ _float3 CMathHelper::AddZ(_float3 & vec, _float num)
 	return vec + _float3(0, 0, num);
 }
 
-void CMathHelper::MatrixForFromTo(_mat * pOut, const _float3 * fromDir, const _float3 * toDir)
-{
-	
-}
-
 _float3 CMathHelper::QuatToRad(_quat & Q)
 {
 	double roll, pitch, yaw;

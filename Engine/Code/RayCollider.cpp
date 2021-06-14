@@ -13,37 +13,40 @@ CRayCollider::CRayCollider()
 
 CRayCollider::~CRayCollider()
 {
+	OnDestroy();
 }
 
-CRayCollider * CRayCollider::Create(_float3 offset, _float3 direction, _float length, ERayType rayType)
+SP(CRayCollider) CRayCollider::Create(_int collisionID, _float3 offset, _float3 direction, _float length, ERayType rayType)
 {
-	CRayCollider* pRay = new CRayCollider;
-	pRay->SetOffsetOrigin(offset);
-	pRay->SetOffset(offset);
-	pRay->SetDirectionOrigin(direction);
-	pRay->SetDirection(direction);
-	pRay->SetLength(length);
-	pRay->SetRayType(rayType);
-	pRay->Awake();
+	SP(CRayCollider) spInstance(new CRayCollider, SmartDeleter<CRayCollider>);
+	spInstance->SetCollisionID(collisionID);
+	spInstance->SetOffsetOrigin(offset);
+	spInstance->SetOffset(offset);
+	spInstance->SetDirectionOrigin(direction);
+	spInstance->SetDirection(direction);
+	spInstance->SetLength(length);
+	spInstance->SetRayType(rayType);
+	spInstance->Awake();
 
-	return pRay;
+	return spInstance;
 }
 
-CCollider * CRayCollider::MakeClone(CCollisionC * pCC)
+SP(CCollider) CRayCollider::MakeClone(CCollisionC * pCC)
 {
-	CRayCollider* pRayClone = new CRayCollider;
-	pRayClone->SetOffsetOrigin(m_offsetOrigin);
-	pRayClone->SetOffset(m_offsetOrigin);
-	pRayClone->SetDirectionOrigin(m_directionOrigin);
-	pRayClone->SetDirection(m_directionOrigin);
-	pRayClone->SetLength(m_length);
-	pRayClone->SetRayType(m_rayType);
-	pRayClone->SetColliderType(m_colliderType);
-	pRayClone->SetRadiusBS(m_radiusBS);
+	SP(CRayCollider) spClone(new CRayCollider, SmartDeleter<CRayCollider>);
+	spClone->SetCollisionID(m_collisionID);
+	spClone->SetOffsetOrigin(m_offsetOrigin);
+	spClone->SetOffset(m_offsetOrigin);
+	spClone->SetDirectionOrigin(m_directionOrigin);
+	spClone->SetDirection(m_directionOrigin);
+	spClone->SetLength(m_length);
+	spClone->SetRayType(m_rayType);
+	spClone->SetColliderType(m_colliderType);
+	spClone->SetRadiusBS(m_radiusBS);
 
-	pRayClone->SetOwner(pCC);
+	spClone->SetOwner(pCC);
 
-	return pRayClone;
+	return spClone;
 }
 
 void CRayCollider::Awake(void)

@@ -10,31 +10,31 @@ CSphereCollider::CSphereCollider(void)
 
 CSphereCollider::~CSphereCollider(void)
 {
+	OnDestroy();
 }
 
-CSphereCollider* CSphereCollider::Create(_float radius, _float3 offset)
+SP(CCollider) CSphereCollider::Create(_int collisionID, _float radius, _float3 offset)
 {
-	CSphereCollider* pSphere = new CSphereCollider();
-	pSphere->SetRadius(radius);
-	pSphere->SetOffsetOrigin(offset);
-	pSphere->Awake();
+	SP(CSphereCollider) spInstance(new CSphereCollider, SmartDeleter<CSphereCollider>);
+	spInstance->SetCollisionID(collisionID);
+	spInstance->SetRadius(radius);
+	spInstance->SetOffsetOrigin(offset);
+	spInstance->Awake();
 
-	return pSphere;
+	return spInstance;
 }
 
-CCollider * CSphereCollider::MakeClone(CCollisionC * pCC)
+SP(CCollider) CSphereCollider::MakeClone(CCollisionC * pCC)
 {
-	CSphereCollider* pSphereClone = new CSphereCollider;
-	pSphereClone->SetOffsetOrigin(m_offsetOrigin);
-	pSphereClone->SetRadius(m_radius);
+	SP(CSphereCollider) spClone(new CSphereCollider, SmartDeleter<CSphereCollider>);
+	spClone->SetCollisionID(m_collisionID);
+	spClone->SetOffsetOrigin(m_offsetOrigin);
+	spClone->SetRadius(m_radius);
+	spClone->SetRadiusBS(m_radiusBS);
+	spClone->SetColliderType(m_colliderType);
+	spClone->SetOwner(pCC);
 
-	pSphereClone->SetRadiusBS(m_radiusBS);
-
-	pSphereClone->SetColliderType(m_colliderType);
-
-	pSphereClone->SetOwner(pCC);
-
-	return pSphereClone;
+	return spClone;
 }
 
 void CSphereCollider::Awake(void)

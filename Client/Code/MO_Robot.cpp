@@ -44,17 +44,17 @@ void CMO_Robot::LateUpdate(void)
 
 void CMO_Robot::PreRender(void)
 {
-	m_spComponentToRender->PreRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Robot::Render(void)
 {
-	m_spComponentToRender->Render(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Robot::PostRender(void)
 {
-	m_spComponentToRender->PostRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Robot::OnDestroy(void)

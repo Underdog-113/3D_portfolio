@@ -6,13 +6,14 @@
 BEGIN(Engine)
 class ENGINE_DLL CPointCollider final : public CCollider
 {
+	SMART_DELETER_REGISTER
 private:
 	explicit						CPointCollider		(void);
 	virtual						   ~CPointCollider		(void);
 
 public:
-	static		CPointCollider*		Create			(_float3 offset);
-				CCollider*			MakeClone		(CCollisionC* pCC) override;
+	static		SP(CPointCollider)	Create			(_int collisionID, _float3 offset);
+				SP(CCollider)		MakeClone		(CCollisionC* pCC) override;
 
 				void				Awake			(void) override;
 				void				OnDestroy		(void) override;

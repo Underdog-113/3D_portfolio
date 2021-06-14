@@ -81,8 +81,6 @@ void CVIBufferC::PostRender(void)
 
 void CVIBufferC::OnDestroy(void)
 {
-	m_pVertexBuffer->Release();
-	m_pIndexBuffer->Release();
 }
 
 void CVIBufferC::OnEnable(void)

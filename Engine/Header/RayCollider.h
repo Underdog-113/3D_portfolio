@@ -6,13 +6,14 @@
 BEGIN(Engine)
 class ENGINE_DLL CRayCollider final : public CCollider
 {
+	SMART_DELETER_REGISTER
 private:
 	explicit							CRayCollider		(void);
 									   ~CRayCollider		(void);
 public:
-	static			CRayCollider*		Create				(_float3 offset, _float3 direction, 
+	static			SP(CRayCollider)	Create				(_int collisionID, _float3 offset, _float3 direction, 
 															 _float length, ERayType rayType = ERayType::LIMITED);
-					CCollider*			MakeClone			(CCollisionC* pCC) override;
+					SP(CCollider)		MakeClone			(CCollisionC* pCC) override;
 
 					void				Awake				(void) override;
 					void				OnDestroy			(void) override;
