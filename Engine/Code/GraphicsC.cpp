@@ -47,6 +47,7 @@ void CGraphicsC::Start(SP(CComponent) spThis)
 	m_spTexture		= m_pOwner->GetComponent<CTextureC>();
 	m_spTransform	= m_pOwner->GetComponent<CTransformC>();
 	m_spRectTex		= m_pOwner->GetComponent<CRectTexC>();
+	m_spShader		= m_pOwner->GetComponent<CShaderC>();
 
 	if(m_spMesh != nullptr)
 		GenerateBV();

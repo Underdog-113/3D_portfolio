@@ -62,7 +62,6 @@ public:
 
 					void				SetForward				(_float3 forward);
 					void				SetForwardUp			(_float3 forward, _float3 up);
-
 #pragma endregion
 //Interface
 public:

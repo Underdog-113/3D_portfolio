@@ -1,20 +1,19 @@
 #pragma once
-#ifndef KIANA_H
-#define KIANA_H
+#ifndef KIANA_CATPAW_H
+#define KIANA_CATPAW_H
 
-#include "Valkyrie.h"
+#include "Object.h"
 
-class CFSM_KianaC;
-class CKiana final : public CValkyrie
+class CKiana_CatPaw final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
 private:
-	CKiana();
-	~CKiana();
-
+	CKiana_CatPaw();
+	~CKiana_CatPaw();
+	
 public:
-	static			SP(CKiana)				Create(_bool isStatic, Engine::CScene* pScene);
+	static			SP(CKiana_CatPaw)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -40,12 +39,16 @@ public:
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
 
-public:
-					void					SetBasicName		(void) override;
 
-private:
-	GETTOR			(SP(Engine::CObject),	m_CatPaw_Atk01,		nullptr, CatPaw_Atk01)
-
+protected:
+	static			_uint							m_s_uniqueID;
+	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
+	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
+	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
+	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 };
 
-#endif
+
+#endif // KIANA_CATPAW_H
+
+

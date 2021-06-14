@@ -204,4 +204,11 @@ CTextManager::GetInstance()->AddText(key, text, position, boxsize, fontsize, ali
 
 //SoundManager Macro
 #define SOUND CSoundManager::GetInstance()
+
+//PhysicsManager Macro
+#define GET_PxSDK CPhysicsManager::GetInstance()
+#define GET_PHYSICS CPhysicsManager::GetInstance()->GetPxPhysics()
+#define GET_PxMATERIAL CPhysicsManager::GetInstance()->GetPxMaterial()
+
+
 #endif // ! MACRO_H

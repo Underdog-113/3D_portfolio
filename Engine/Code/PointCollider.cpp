@@ -27,6 +27,7 @@ CCollider * CPointCollider::MakeClone(CCollisionC * pCC)
 	pPointClone->SetOffsetOrigin(m_offsetOrigin);
 	pPointClone->SetRadiusBS(m_radiusBS);
 	pPointClone->SetColliderType(m_colliderType);
+	
 
 	pPointClone->SetOwner(pCC);
 

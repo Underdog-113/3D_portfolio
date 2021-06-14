@@ -58,7 +58,8 @@ protected:
 
 	GETTOR			(_COLLIDERS,		m_vColliders,		{},				Colliders)
 
-	GETTOR			(_int,				m_collisionType,	UNDEFINED,		CollisionType)
+	
+	GETTOR			(_int,				m_physicsBodyType,	UNDEFINED,		PhysicsBodyType)
 
 	GETTOR_SETTOR	(_int,				m_collisionID,		UNDEFINED,		CollisionID)
 

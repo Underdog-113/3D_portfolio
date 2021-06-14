@@ -42,7 +42,7 @@ void CMainApp::Awake(void)
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
-
+	//Engine::CPhysicsManager::GetInstance()->Awake();
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }
@@ -86,6 +86,7 @@ void CMainApp::Update(void)
 	Engine::CGraphicsManager::GetInstance()->Update();
 
 	CDamageObjectPool::GetInstance()->Update();
+	//Engine::CPhysicsManager::GetInstance()->Update();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -116,10 +117,10 @@ void CMainApp::PreRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	
+
 	Engine::CGraphicsManager::GetInstance()->PreRender();
 	Engine::CTextManager::GetInstance()->PreRender();
-	
+
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -131,7 +132,7 @@ void CMainApp::Render(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	
+
 	Engine::CGraphicsManager::GetInstance()->Render();
 	Engine::CTextManager::GetInstance()->Render();
 
@@ -145,7 +146,7 @@ void CMainApp::PostRender(void)
 		return;
 
 	Engine::TIME_MEASURE_START;
-	
+
 	Engine::CGraphicsManager::GetInstance()->PostRender();
 	Engine::CTextManager::GetInstance()->PostRender();
 
@@ -163,8 +164,8 @@ void CMainApp::OnDestroy(void)
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 	Engine::CShaderManager::GetInstance()->DestroyInstance();
 	Engine::CPSC_Manager::GetInstance()->DestroyInstance();
+	//Engine::CPhysicsManager::GetInstance()->DestroyInstance();
 
-	
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
 

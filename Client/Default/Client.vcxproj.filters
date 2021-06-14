@@ -178,6 +178,12 @@
     <Filter Include="01.Scene\09.PartySettingScene">
       <UniqueIdentifier>{30860560-a729-4718-abad-bf80d65e2ecf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\CatPaw">
+      <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\02.RotationUI">
+      <UniqueIdentifier>{1b2e04ec-4118-4847-8f93-5755640c0439}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -294,9 +300,6 @@
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Valkyrie.h">
       <Filter>02.Objects\02.Valkyrie</Filter>
     </ClInclude>
@@ -312,17 +315,11 @@
     <ClInclude Include="..\Header\ClientScene.h">
       <Filter>01.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h">
-      <Filter>02.Objects\00.Valkyrie\00.Kiana\FSM_Kiana</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\FSM_KianaC.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StageController.h">
       <Filter>97.TempClass_ForDevelop</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_KianaC.h">
-      <Filter>dssdsd</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\UiAnimCtrC.h">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
@@ -360,7 +357,16 @@
     <ClInclude Include="..\Header\DamageObjectPool.h">
       <Filter>08.ObjectPool\DamageObjectPool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CatPaw_Claw.h" />
+    <ClInclude Include="..\Header\FSMDefine_Kiana.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_KianaC.h" />
+    <ClInclude Include="..\Header\RotationUiC.h">
+      <Filter>03.Component\00.UI\02.RotationUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -513,7 +519,12 @@
     <ClCompile Include="..\Code\DataLoad.cpp">
       <Filter>06.DataLoad</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RotationUiC.cpp">
+      <Filter>03.Component\00.UI\02.RotationUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

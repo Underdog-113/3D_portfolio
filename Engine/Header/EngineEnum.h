@@ -90,6 +90,14 @@ namespace Engine
 		NumOfCollisionType	= 2
 	};
 
+	enum class EPhysicsBodyType
+	{
+		Static					= 0,
+		Dynamic					= 1,
+		Kinematic				= 2,
+		NumOfPhysicsBodyType	= 3
+	};
+
 	enum class EColliderType
 	{
 		Point		= 0,
@@ -116,9 +124,9 @@ namespace Engine
 
 	enum class ECollisionID
 	{
-		CameraRay			= 0,
-		Button				= 1,
-		Mouse				= 2,
+		CameraRay			= (1 << 0),
+		Button				= (1 << 1),
+		Mouse				= (1 << 2),
 		NumOfColliderID		= 3
 	};
 

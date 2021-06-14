@@ -30,6 +30,7 @@ protected:
 	GETTOR_SETTOR	(_int,			m_colliderType,		-1,				ColliderType)
 	GETTOR_SETTOR	(CCollisionC*,	m_pOwner,			nullptr,		Owner)
 
+	GETTOR			(_int,			m_collisionType,	UNDEFINED,		CollisionType)
 	//부모 상대좌표
 	GETTOR_SETTOR	(_float3,		m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
 	//실제 좌표

@@ -9,6 +9,7 @@
 #include "FSM_SpiderC.h"
 #include "FSM_KianaC.h"
 #include "Kiana.h"
+#include "AniCtrl.h"
 
 CJongScene::CJongScene()
 {
@@ -97,21 +98,22 @@ void CJongScene::Start(void)
 
 		// Catpaw ATK01
 		{
-			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
+			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"testcatpaw");
 
-			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
+			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"CatPaw_Atk03");
 			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			m_spCatPaw->AddComponent<Engine::CTextureC>();
 			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
 			m_spCatPaw->GetTransform()->AddPositionY(1.f);
+			m_spCatPaw->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetReplay(true);
 		}
 
 		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
 
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"S02");
+			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
 			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject->AddComponent<Engine::CTextureC>();
 			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
