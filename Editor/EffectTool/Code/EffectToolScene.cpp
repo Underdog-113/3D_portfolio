@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "ObjectFactory.h"
 #include "EmptyObject.h"
+#include "MeshEffect.h"
 
 CEffectToolScene::CEffectToolScene()
 {
@@ -89,8 +90,11 @@ void CEffectToolScene::Free()
 void CEffectToolScene::InitPrototypes(void)
 {
 	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(false, this));
-	GetObjectFactory()->AddPrototype(spEmptyObjectPrototype);
+	ADD_PROTOTYPE(spEmptyObjectPrototype);
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(false, this));
 	ADD_PROTOTYPE(spCameraPrototype);
+
+	SP(Engine::CObject) spMeshEffect(CMeshEffect::Create(false, this));
+	ADD_PROTOTYPE(spMeshEffect);
 }

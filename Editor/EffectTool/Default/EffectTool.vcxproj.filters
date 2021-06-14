@@ -81,7 +81,7 @@
     <ClInclude Include="..\Header\MainEditor.h">
       <Filter>04.MainEditor</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\EffectMesh.h">
+    <ClInclude Include="..\Header\MeshEffect.h">
       <Filter>05.Object\00.EffectMesh</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,7 +110,7 @@
     <ClCompile Include="..\Code\MainEditor.cpp">
       <Filter>04.MainEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\EffectMesh.cpp">
+    <ClCompile Include="..\Code\MeshEffect.cpp">
       <Filter>05.Object\00.EffectMesh</Filter>
     </ClCompile>
   </ItemGroup>
@@ -244,6 +244,10 @@
     <Image Include="res\Honkai.ico">
       <Filter>99.Default</Filter>
     </Image>
+    <Image Include="res\Speed.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\AnimSpeed.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">

@@ -133,3 +133,9 @@ void CTextureC::ChangeTexture(std::wstring const & textureKey, _int meshIndex, _
 {
 	m_vTexData[meshIndex][texIndex] = m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey);
 }
+
+void CTextureC::DeleteTexture(_int meshIndex, _int texIndex)
+{
+	auto& iter_find = m_vTexData[meshIndex].begin();
+	m_vTexData[meshIndex].erase(iter_find + texIndex);
+}
