@@ -70,7 +70,7 @@ void CCollisionManager::LateUpdate(void)
 {
 	for (int i = 0; i < m_numOfColliderID; ++i)
 	{
-		for (auto& it = m_vCollisionComponents[i].begin(); it != m_vCollisionComponents[i].end();)
+		for (auto& it = m_vColliders[i].begin(); it != m_vColliders[i].end();)
 		{
 			if ((*it)->GetOwner() == nullptr)
 			{
@@ -110,13 +110,14 @@ void CCollisionManager::CheckCollision(CCollisionC* pCC)
 	std::vector<_int>& checkingLayer = GetLayersToCheck(pCC->GetCollisionID());
 	_bool isItCollided;
 
-	for (auto& layerID : checkingLayer)
+
+	for (auto& ccIt : m_vCollisionComponents[layerID])
 	{
-		for (auto& ccIt : m_vCollisionComponents[layerID])
+		for (auto& layerID : checkingLayer)
 		{
 			if (ccIt.get() == pCC)
-				continue;	
-			
+				continue;
+
 			//콜리션 컴포넌트 간의 BS 체크
 			if (CollisionHelper::CheckCollisionComponentBS(pCC, ccIt.get()) == false)
 				continue;
@@ -128,7 +129,7 @@ void CCollisionManager::CheckCollision(CCollisionC* pCC)
 				{
 					//콜라이더 간의 BS 체크
 					if (CollisionHelper::CheckColliderBS(*itMyCC, checkCollider) == false)
-						continue;					
+						continue;
 
 					_int myCType = (*itMyCC)->GetColliderType();
 					_int checkCType = checkCollider->GetColliderType();

@@ -69,12 +69,6 @@ namespace Engine
 		SliderShader			= 4,
 		WaterShader				= 5,
 		EffectShader			= 6,
-		/*Shader_Sample	= 0,
-		Shader_Terrain	= 1,
-		Shader_Mesh		= 2,
-		Shader_Shade	= 3,
-		Shader_Blend	= 4,
-		Shader_Skybox	= 5,*/
 		DamageFont				= 6,
 		NumOfShaderID			= 7
 
@@ -82,13 +76,6 @@ namespace Engine
 #pragma endregion
 
 #pragma region PhysicsEnum
-	enum class ECollisionType
-	{
-		Trigger				= 0,
-		Collide				= 1,
-		NumOfCollisionType	= 2
-	};
-
 	enum class EPhysicsBodyType
 	{
 		Static					= 0,

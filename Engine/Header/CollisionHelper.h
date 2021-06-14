@@ -102,7 +102,7 @@ static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 
 		if (instant == false)
 		{
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pPC1->GetIsTrigger() || pPC2->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -152,7 +152,7 @@ static _bool PointRay(CCollider* pC1, CCollider* pC2, _bool instant)
 
 		if (instant == false)
 		{
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pPC->GetIsTrigger() || pRC->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -193,7 +193,7 @@ static _bool PointSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 
 		if (instant == false)
 		{
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pPC->GetIsTrigger() || pSC->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -237,7 +237,7 @@ static _bool PointAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	CCollisionC* pCC1 = pPC->GetOwner();
 	CCollisionC* pCC2 = pAC->GetOwner();
 
-	if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+	if (pPC->GetIsTrigger() || pAC->GetIsTrigger())
 	{
 		pCC1->AddTriggeredCC(pCC2);
 		pCC2->AddTriggeredCC(pCC1);
@@ -290,7 +290,7 @@ static _bool PointObb(CCollider* pC1, CCollider* pC2, _bool instant)
 
 		if (instant == false)
 		{
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pPC->GetIsTrigger() || pOC->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -347,7 +347,7 @@ static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
 
 		if (instant == false)
 		{
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pRC1->GetIsTrigger() || pRC2->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -408,7 +408,7 @@ static _bool RaySphere(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	if (instant == false)
 	{
-		if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+		if (pRC->GetIsTrigger() || pSC->GetIsTrigger())
 		{
 			pCC1->AddTriggeredCC(pCC2);
 			pCC2->AddTriggeredCC(pCC1);
@@ -503,7 +503,7 @@ static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	if (instant == false)
 	{
-		if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+		if (pRC->GetIsTrigger() || pAC->GetIsTrigger())
 		{
 			pCC1->AddTriggeredCC(pCC2);
 			pCC2->AddTriggeredCC(pCC1);
@@ -604,7 +604,7 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	if (instant == false)
 	{
-		if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+		if (pRC->GetIsTrigger() || pOC->GetIsTrigger())
 		{
 			pCC1->AddTriggeredCC(pCC2);
 			pCC2->AddTriggeredCC(pCC1);
@@ -656,7 +656,7 @@ static _bool SphereSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 			CCollisionC* pCC1 = pSC1->GetOwner();
 			CCollisionC* pCC2 = pSC2->GetOwner();
 
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pSC1->GetIsTrigger() || pSC2->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -705,7 +705,7 @@ static _bool SphereAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 			CCollisionC* pCC1 = pSC->GetOwner();
 			CCollisionC* pCC2 = pAC->GetOwner();
 
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pAC->GetIsTrigger() || pSC->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -771,7 +771,7 @@ static _bool SphereObb(CCollider* pC1, CCollider* pC2, _bool instant)
 			CCollisionC* pCC1 = pOC->GetOwner();
 			CCollisionC* pCC2 = pSC->GetOwner();
 
-			if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+			if (pOC->GetIsTrigger() || pSC->GetIsTrigger())
 			{
 				pCC1->AddTriggeredCC(pCC2);
 				pCC2->AddTriggeredCC(pCC1);
@@ -822,7 +822,7 @@ static _bool AabbAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 		CCollisionC* pCC1 = pAC1->GetOwner();
 		CCollisionC* pCC2 = pAC2->GetOwner();
 
-		if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+		if (pAC1->GetIsTrigger() || pAC2->GetIsTrigger())
 		{
 			pCC1->AddTriggeredCC(pCC2);
 			pCC2->AddTriggeredCC(pCC1);
@@ -961,7 +961,7 @@ static _bool AabbObb(CCollider* pC1, CCollider* pC2, _bool instant)
 		CCollisionC* pCC1 = pAC->GetOwner();
 		CCollisionC* pCC2 = pOC->GetOwner();
 
-		if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+		if (pAC->GetIsTrigger() || pOC->GetIsTrigger())
 		{
 			pCC1->AddTriggeredCC(pCC2);
 			pCC2->AddTriggeredCC(pCC1);
@@ -1165,7 +1165,7 @@ static _bool ObbObb(CCollider* pC1, CCollider* pC2, _bool instant)
 		CCollisionC* pCC1 = pOC1->GetOwner();
 		CCollisionC* pCC2 = pOC2->GetOwner();
 
-		if (pCC1->GetIsTrigger() || pCC2->GetIsTrigger())
+		if (pOC1->GetIsTrigger() || pOC2->GetIsTrigger())
 		{
 			pCC1->AddTriggeredCC(pCC2);
 			pCC2->AddTriggeredCC(pCC1);

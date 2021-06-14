@@ -65,10 +65,6 @@ void CCollisionC::FixedUpdate(SP(CComponent) spThis)
 
 void CCollisionC::Update(SP(CComponent) spThis)
 {
-	for (auto& actor : m_vActor)
-	{
-		actor->is<PxRigidDynamic>()->setGlobalPose(m_spTransform->ToPxTrasnform());
-	}
 }
 
 void CCollisionC::LateUpdate(SP(CComponent) spSelf)
@@ -80,7 +76,9 @@ void CCollisionC::LateUpdate(SP(CComponent) spSelf)
 void CCollisionC::OnDestroy(void)
 {
 	for (auto& collider : m_vColliders)
-		collider->Free();
+	{
+		collider.reset();
+	}
 
 	m_vColliders.clear();
 }
@@ -114,42 +112,6 @@ void CCollisionC::AddCollider(CCollider* pCollider)
 	SP(CDebugC) spDebugC = m_pOwner->GetComponent<CDebugC>();
 	if (spDebugC != nullptr)
 		spDebugC->AddDebugCollider(pCollider);
-}
-
-void CCollisionC::AddCollider(PxShape * pShape, _int collisionType, _int physicsBodyType)
-{
-	PxTransform actorTransform(m_spTransform->ToPxTrasnform());
-	
-	if (collisionType == (_int)ECollisionType::Collide)
-	{
-		pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, true);
-		pShape->setFlag(PxShapeFlag::eSCENE_QUERY_SHAPE, true);
-	}
-	else
-	{
-		pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
-		pShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
-	}
-
-	if (physicsBodyType == (_int)EPhysicsBodyType::Static)
-	{
-		PxRigidStatic* pRigidStatic = PxCreateStatic(*GET_PHYSICS, actorTransform, *pShape);
-		pRigidStatic->userData = this;
-		GET_PxSDK->AddActor(pRigidStatic);
-		m_vActor.emplace_back(pRigidStatic);
-	}
-	else if (physicsBodyType == (_int)EPhysicsBodyType::Dynamic)
-	{
-		PxRigidDynamic* pRigidDynamic = PxCreateDynamic(*GET_PHYSICS, actorTransform, *pShape, 10);
-		pRigidDynamic->userData = this;
-		m_vActor.emplace_back(pRigidDynamic);
-	}
-	else
-	{
-		PxRigidDynamic* pRigidKinematic = PxCreateKinematic(*GET_PHYSICS, actorTransform, *pShape, 10);
-		pRigidKinematic->userData = this;
-		m_vActor.emplace_back(pRigidKinematic);
-	}
 }
 
 void CCollisionC::AddCollisionInfo(_CollisionInfo collisionInfo)

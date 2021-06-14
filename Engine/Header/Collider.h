@@ -11,7 +11,6 @@ protected:
 	virtual						   ~CCollider			(void);
 
 public:
-					void			Free				(void);
 	virtual			CCollider*		MakeClone			(CCollisionC* pCC) PURE;
 
 	virtual			void			Awake				(void) PURE;
@@ -27,11 +26,13 @@ public:
 protected:
 	virtual			void			MakeBS				(void) PURE;
 protected:
-	GETTOR_SETTOR	(_int,			m_colliderType,		-1,				ColliderType)
 	GETTOR_SETTOR	(CCollisionC*,	m_pOwner,			nullptr,		Owner)
 
-	GETTOR			(PxShape*,		m_pShape,			nullptr,		Shape)
-	GETTOR			(_int,			m_collisionType,	UNDEFINED,		CollisionType)
+	GETTOR_SETTOR	(_int,			m_collisionID,		UNDEFINED,		CollisionID)
+	GETTOR_SETTOR	(_int,			m_colliderType,		UNDEFINED,		ColliderType)
+
+	GETTOR_SETTOR	(_bool,			m_isTrigger,		false,			IsTrigger)
+
 	//ºÎ¸ð »ó´ëÁÂÇ¥
 	GETTOR_SETTOR	(_float3,		m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
 	//½ÇÁ¦ ÁÂÇ¥

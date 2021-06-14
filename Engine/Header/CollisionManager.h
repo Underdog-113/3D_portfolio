@@ -37,7 +37,7 @@ private:
 	
 private:
 	std::vector<std::vector<_int>> m_vCollisionMap;
-	std::vector<std::vector<SP(CCollisionC)>> m_vCollisionComponents;
+	std::vector<std::vector<SP(CCollider)>> m_vColliders;
 
 	typedef std::function<_bool(CCollider*, CCollider*, _bool)>	_COLLISION_CHECKER;
 	typedef std::array<std::array <_COLLISION_CHECKER, (_int)EColliderType::NumOfCT>, (_int)EColliderType::NumOfCT> _COLLISION_CHECKER_2D;

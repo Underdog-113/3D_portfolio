@@ -10,15 +10,16 @@ CPointCollider::CPointCollider()
 
 CPointCollider::~CPointCollider()
 {
+	OnDestroy();
 }
 
-CPointCollider * CPointCollider::Create(_float3 offset)
+SP(CPointCollider) CPointCollider::Create(_float3 offset)
 {
-	CPointCollider* pPoint = new CPointCollider;
-	pPoint->SetOffsetOrigin(offset);
-	pPoint->Awake();
+	SP(CPointCollider) spInstance(new CPointCollider, SmartDeleter<CPointCollider>);
+	spInstance->SetOffsetOrigin(offset);
+	spInstance->Awake();
 
-	return pPoint;
+	return spInstance;
 }
 
 CCollider * CPointCollider::MakeClone(CCollisionC * pCC)
@@ -38,11 +39,12 @@ void CPointCollider::Awake(void)
 {
 	__super::Awake();
 	m_colliderType = (_uint)EColliderType::Point;
-	m_pShape = GET_PHYSICS->createShape(PxSphereGeometry(0), *GET_PxMATERIAL);
 }
 
 void CPointCollider::OnDestroy(void)
 {
+	__super::OnDestroy();
+	
 }
 
 void CPointCollider::OnEnable(void)
