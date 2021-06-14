@@ -2,6 +2,13 @@
 #include "Kiana.h"
 
 #include "FSM_KianaC.h"
+#include "ObjectFactory.h"
+
+#include "Kiana_CatPaw_Atk01.h"
+#include "Kiana_CatPaw_Atk02.h"
+#include "Kiana_CatPaw_Atk03.h"
+#include "Kiana_CatPaw_Atk04.h"
+#include "Kiana_CatPaw_Atk05.h"
 
 CKiana::CKiana()
 {
@@ -49,15 +56,10 @@ void CKiana::Start(void)
 {
 	__super::Start();
 
-	//m_spMesh->AddMeshData(L"Kiana_decl");
-	
-	//m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//m_spTransform->SetSize(10, 10, 10);
-	
 	m_spMesh->OnRootMotion();
 
-	// ultra pos test
-	//const Engine::D3DXFRAME_DERIVED* pFrm = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip002_L_Forearm");
+	CreateCatPaw();
+
 }
 
 void CKiana::FixedUpdate(void)
@@ -68,6 +70,16 @@ void CKiana::FixedUpdate(void)
 void CKiana::Update(void)
 {
 	__super::Update();
+
+	if (m_ultraMode)
+	{
+		m_ultraTimer += GET_DT;
+		if (m_ultraTimer > m_ultraDuration)
+		{
+			m_ultraMode = false;
+			m_ultraTimer = 0.f;
+		}
+	}
 }
 
 void CKiana::LateUpdate(void)
@@ -120,6 +132,53 @@ void CKiana::OnDisable(void)
 	__super::OnDisable();
 }
 
+void CKiana::CreateCatPaw(void)
+{
+	m_CatPaw_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk01", false, (_uint)ELayerID::Player, L"CatPaw_Atk01");
+	m_CatPaw_Atk01->SetIsEnabled(false);
+	m_CatPaw_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk02", false, (_uint)ELayerID::Player, L"CatPaw_Atk02");
+	m_CatPaw_Atk02->SetIsEnabled(false);
+	m_CatPaw_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk03", false, (_uint)ELayerID::Player, L"CatPaw_Atk03");
+	m_CatPaw_Atk03->SetIsEnabled(false);
+	m_CatPaw_Atk04 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk04", false, (_uint)ELayerID::Player, L"CatPaw_Atk04");
+	m_CatPaw_Atk04->SetIsEnabled(false);
+	m_CatPaw_Atk05 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk05", false, (_uint)ELayerID::Player, L"CatPaw_Atk05");
+	m_CatPaw_Atk05->SetIsEnabled(false);
+}
+
 void CKiana::SetBasicName(void)
 {
+}
+
+void CKiana::UltraAtk(UltraAttack index)
+{
+	if (!m_ultraMode)
+		return;
+
+	switch (index)
+	{
+	case CKiana::ATK01:
+		m_CatPaw_Atk01->SetIsEnabled(true);
+		break;
+	case CKiana::ATK02:
+		m_CatPaw_Atk02->SetIsEnabled(true);
+		break;
+	case CKiana::ATK03:
+		m_CatPaw_Atk03->SetIsEnabled(true);
+		break;
+	case CKiana::ATK04:
+		m_CatPaw_Atk04->SetIsEnabled(true);
+		break;
+	case CKiana::ATK05:
+		m_CatPaw_Atk05->SetIsEnabled(true);
+		break;
+	case CKiana::Branch_ATK01:
+		break;
+	case CKiana::Branch_ATK02:
+		break;
+	case CKiana::QTE_ATK:
+		break;
+	default:
+		break;
+	}
 }

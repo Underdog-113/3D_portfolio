@@ -35,7 +35,7 @@ class CStageController
 	DECLARE_SINGLETON(CStageController)
 
 public:
-	enum Squad_Role { Actor, Wait_1, Wait_2};
+	enum Squad_Role { Actor, Wait_1, Wait_2 };
 
 public:
 	//CStageController();
@@ -64,12 +64,13 @@ public:
 	void SetInputLock_ByAni(bool value);
 
 private:
-	typedef std::vector<SP(Engine::CObject)> _Squad;
-	GETTOR			(_Squad,				m_vSquad,			{},			Squad)
-	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCurMainCam,		nullptr,	CurrentMainCam)
-	GETTOR_SETTOR	(SP(Engine::CObject),	m_spCurActor,		nullptr,	CurrentActor)
+	typedef std::pair<Squad_Stat, SP(Engine::CObject)> _SquadInfo;
+	typedef std::vector<_SquadInfo> _Squad;
+	GETTOR			(_Squad,				m_vSquad,			{},				Squad)
+	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCurMainCam,		nullptr,		CurrentMainCam)
+	GETTOR_SETTOR	(SP(Engine::CObject),	m_spcurActor,		nullptr,		CurrentActor)
 	
-	GETTOR			(bool,					m_inputLock_ByAni,  false,		InputLock_ByAni)
+	GETTOR			(bool,					m_inputLock_ByAni,  false,			InputLock_ByAni)
 
 private:
 	Engine::CInputManager*		m_pInput	= nullptr;

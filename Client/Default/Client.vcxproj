@@ -185,7 +185,7 @@
   <ItemGroup>
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
-    <ClInclude Include="..\Header\Kiana_CatPaw.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -212,6 +212,10 @@
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
@@ -245,7 +249,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
-    <ClCompile Include="..\Code\Kiana_CatPaw.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
     <ClCompile Include="..\Code\DamageFontC.cpp" />
@@ -266,6 +270,10 @@
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />

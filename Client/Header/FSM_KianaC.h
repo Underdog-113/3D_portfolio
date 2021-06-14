@@ -11,6 +11,7 @@
 #define Cool_HitPenalty			0.5f
 #define Cool_RunOnAttack		0.5f
 
+class CKiana;
 class CStageController;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
@@ -44,8 +45,11 @@ private: /* Special Actions */
 	bool CheckAction_BranchAttack();
 	bool CheckAction_RunBS_To_Run();
 
+	bool CheckAction_Ultra();
+
 
 private:
+	CKiana* m_pKiana = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
 	CStageController* m_pStageController = nullptr;
 	
@@ -246,11 +250,11 @@ public:
 	void RunStopRight_Update(float deltaTime);
 	void RunStopRight_End(void);
 public:
-	////Skill_10  
-	//void Jump_00_Init(void);
-	//void Jump_00_Enter(void);
-	//void Jump_00_Update(float deltaTime);
-	//void Jump_00_End(void);
+	//Skill_10  
+	void Skill_10_Init(void);
+	void Skill_10_Enter(void);
+	void Skill_10_Update(float deltaTime);
+	void Skill_10_End(void);
 	////SpecialStun  
 	//void Jump_00_Init(void);
 	//void Jump_00_Enter(void);

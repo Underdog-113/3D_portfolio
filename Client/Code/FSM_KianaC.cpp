@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "FSM_KianaC.h"
+
 #include "State.h"
 #include "DynamicMeshData.h"
-
 #include "AniCtrl.h"
+
 #include "FSMDefine_Kiana.h"
 #include "StageController.h"
+#include "Kiana.h"
 
 CFSM_KianaC::CFSM_KianaC()
 {
@@ -34,11 +36,13 @@ void CFSM_KianaC::Awake(void)
 
 void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
+	m_pKiana = static_cast<CKiana*>(m_pOwner);
+
 	RegisterAllState();
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
 	m_pStageController = CStageController::GetInstance();
 
 	SetStartState(L"StandBy");
@@ -126,11 +130,14 @@ void CFSM_KianaC::RegisterAllState()
 	
 	CreateState(CFSM_KianaC, pState, StandBy)
 		AddState(pState, Name_StandBy);
+
+	CreateState(CFSM_KianaC, pState, Skill_10)
+		AddState(pState, Name_Skill_10);
 }
 
 void CFSM_KianaC::FixRootMotionOffset(_uint index)
 {
-	m_pOwner->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
+	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
 }
 
 bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float coolTime /*= Cool_Attack*/)
@@ -282,6 +289,16 @@ bool CFSM_KianaC::CheckAction_RunBS_To_Run()
 	return false;
 }
 
+bool CFSM_KianaC::CheckAction_Ultra()
+{
+	if (Engine::IMKEY_DOWN(StageKey_Ult))
+	{
+		ChangeState(Name_Skill_10);
+		return true;
+	}
+	return false;
+}
+
 void CFSM_KianaC::StandBy_Init(void)
 {
 }
@@ -300,6 +317,9 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 		return;
 
 	if (CheckAction_EvadeBackward(0.f))
+		return;
+
+	if (CheckAction_Ultra())
 		return;
 
 	if (Engine::IMKEY_DOWN(StageKey_QTE))
@@ -377,6 +397,7 @@ void CFSM_KianaC::Attack_1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_1);
 	m_pStageController->SetInputLock_ByAni(true);
+	m_pKiana->UltraAtk(CKiana::ATK01);
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -857,6 +878,8 @@ void CFSM_KianaC::Run_Update(float deltaTime)
 		return;
 	if (CheckAction_EvadeForward())
 		return;
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_KianaC::Run_End(void)
@@ -919,6 +942,26 @@ void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 
 void CFSM_KianaC::RunStopRight_End(void)
 {
+}
+
+void CFSM_KianaC::Skill_10_Init(void)
+{
+}
+
+void CFSM_KianaC::Skill_10_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Skill_10);
+}
+
+void CFSM_KianaC::Skill_10_Update(float deltaTime)
+{
+	if (CheckAction_Idle())
+		return;
+}
+
+void CFSM_KianaC::Skill_10_End(void)
+{
+	m_pKiana->SetUltraMode(true);
 }
 
 void CFSM_KianaC::Stun_Enter(void)

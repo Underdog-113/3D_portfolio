@@ -11,6 +11,12 @@
 #include "Kiana.h"
 #include "AniCtrl.h"
 
+#include "Kiana_CatPaw_Atk01.h"
+#include "Kiana_CatPaw_Atk02.h"
+#include "Kiana_CatPaw_Atk03.h"
+#include "Kiana_CatPaw_Atk04.h"
+#include "Kiana_CatPaw_Atk05.h"
+
 CJongScene::CJongScene()
 {
 }
@@ -96,19 +102,6 @@ void CJongScene::Start(void)
 			m_pController->Start();
 		}
 
-		// Catpaw ATK01
-		{
-			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"testcatpaw");
-
-			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"CatPaw_Atk03");
-			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			m_spCatPaw->AddComponent<Engine::CTextureC>();
-			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
-			m_spCatPaw->GetTransform()->AddPositionY(1.f);
-			m_spCatPaw->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetReplay(true);
-		}
-
 		{
 			SP(Engine::CObject) spEmptyObject
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
@@ -165,4 +158,19 @@ void CJongScene::InitPrototypes(void)
 {
 	SP(CKiana) spKianaPrototype(CKiana::Create(false, this));
 	ADD_PROTOTYPE(spKianaPrototype);
+
+	SP(CKiana_CatPaw_Atk01) spPaw01(CKiana_CatPaw_Atk01::Create(false, this));
+	ADD_PROTOTYPE(spPaw01);
+
+	SP(CKiana_CatPaw_Atk02) spPaw02(CKiana_CatPaw_Atk02::Create(false, this));
+	ADD_PROTOTYPE(spPaw02);
+
+	SP(CKiana_CatPaw_Atk03) spPaw03(CKiana_CatPaw_Atk03::Create(false, this));
+	ADD_PROTOTYPE(spPaw03);
+
+	SP(CKiana_CatPaw_Atk04) spPaw04(CKiana_CatPaw_Atk04::Create(false, this));
+	ADD_PROTOTYPE(spPaw04);
+
+	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(false, this));
+	ADD_PROTOTYPE(spPaw05);
 }
