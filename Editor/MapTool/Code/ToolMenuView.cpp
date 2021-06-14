@@ -85,9 +85,6 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK9, m_curObjNameChk);
 	DDX_Control(pDX, IDC_EDIT19, m_obbOffset);
 	DDX_Control(pDX, IDC_EDIT20, m_obbSize);
-	DDX_Control(pDX, IDC_EDIT21, m_obbRight);
-	DDX_Control(pDX, IDC_EDIT22, m_obbUp);
-	DDX_Control(pDX, IDC_EDIT23, m_obbForward);
 	DDX_Control(pDX, IDC_COMBO9, m_obbCnt);
 	DDX_Control(pDX, IDC_CHECK8, m_selectedObbCol);
 	DDX_Control(pDX, IDC_CHECK2, m_showObjectChk);
@@ -962,12 +959,9 @@ void CToolMenuView::OnBnClickedCreateObbColliderBtn()
 
 	if (1 != m_colType[2].GetCheck())
 	{
-		CString cstrOffset, cstrSize, cstrRight, cstrUp, cstrForward;
+		CString cstrOffset, cstrSize;
 		m_obbOffset.GetWindowTextW(cstrOffset);
 		m_obbSize.GetWindowTextW(cstrSize);
-		m_obbRight.GetWindowTextW(cstrRight);
-		m_obbUp.GetWindowTextW(cstrUp);
-		m_obbForward.GetWindowTextW(cstrForward);
 
 		/* offset */
 		std::string str = CStrToStr(cstrOffset);
@@ -994,37 +988,7 @@ void CToolMenuView::OnBnClickedCreateObbColliderBtn()
 		//근데 rotationOffset이 필요함 (m_rotOffset)이라고 쓰고있음
 		//그리고 당연히 collisionID도 필요함.
 
-		/////////////////////////////////////////////////
-		/* right */
-		str = CStrToStr(cstrRight);
-		std::vector<std::string> vStrRight = split(str, ',');
 
-		_float3 right = _float3(
-			WstrToFloat(Engine::StrToWStr(vStrRight[0])),
-			WstrToFloat(Engine::StrToWStr(vStrRight[1])),
-			WstrToFloat(Engine::StrToWStr(vStrRight[2]))
-		);
-
-		/* up */
-		str = CStrToStr(cstrUp);
-		std::vector<std::string> vStrUp = split(str, ',');
-
-		_float3 up = _float3(
-			WstrToFloat(Engine::StrToWStr(vStrUp[0])),
-			WstrToFloat(Engine::StrToWStr(vStrUp[1])),
-			WstrToFloat(Engine::StrToWStr(vStrUp[2]))
-		);
-
-		/* forward */
-		str = CStrToStr(cstrForward);
-		std::vector<std::string> vStrForward = split(str, ',');
-
-		_float3 forward = _float3(
-			WstrToFloat(Engine::StrToWStr(vStrForward[0])),
-			WstrToFloat(Engine::StrToWStr(vStrForward[1])),
-			WstrToFloat(Engine::StrToWStr(vStrForward[2]))
-		);
-		///////////////////////////////////////////////////날려도됨
 
 		//툴에서 만들어
 		_int collisionID = 0;
