@@ -34,7 +34,7 @@ public:
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 
-	void AddSliderData(_float value, _float maxValue, SP(CObject) spBackGround, SP(CObject) spFill);
+	void AddSliderData(_float value, _float maxValue, _float minValue, SP(CObject) spBackGround, SP(CObject) spFill);
 private:
 	void SetBasicName(void) override;
 private:

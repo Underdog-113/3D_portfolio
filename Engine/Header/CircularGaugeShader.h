@@ -4,11 +4,11 @@
 #include "Shader.h"
 #include "Slider.h"
 BEGIN(Engine)
-class ENGINE_DLL CClicularGaugeShader final : public CShader
+class ENGINE_DLL CCircularGaugeShader final : public CShader
 {
 private:
-	explicit CClicularGaugeShader(void);
-	~CClicularGaugeShader(void);
+	explicit CCircularGaugeShader(void);
+	~CCircularGaugeShader(void);
 
 public:
 	static				CShader*			Create(void);

@@ -47,56 +47,10 @@ void CDongScene::Start(void)
 {
 	__super::Start();
 
-	{
-		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
-		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
-
-		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
-		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		background->GetTransform()->SetSize(_float3(104, 104, 0));
-		background->GetTexture()->AddTexture(L"AvatarButtonFrame", 0);
-
-		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
-		fill->SetParent(slider.get());
-		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + _float3(3.2f, -0.28f, -0.9f));
-		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
-		fill->GetTransform()->SetSize(_float3(106, 98, 0));
-		fill->GetTransform()->SetRotationZ(-43.186f);
-		fill->GetTexture()->AddTexture(L"AvatarButtonHP_Bar", 0);
-		fill->AddComponent<Engine::CShaderC>()->
-			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
-
-		slider->AddSliderData(100, 100, background, fill);
-	}
-
-	{
-		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(-150, 100, 0.0f));
-		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
-
-		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"BackGround"));
-		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		background->GetTransform()->SetSize(_float3(132, 13, 0));
-		background->GetTexture()->AddTexture(L"BarHp", 0);
-
-		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)ELayerID::UI, L"Fill"));
-		fill->SetParent(slider.get());
-		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
-		fill->GetTransform()->SetSize(_float3(128, 9, 0));
-		fill->GetTexture()->AddTexture(L"BarHpFill", 0);
-		fill->AddComponent<Engine::CShaderC>()->
-			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
-
-		slider->AddSliderData(100, 100, background, fill);
-	}
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->Load(this);
+	delete(Load);
 }
 
 void CDongScene::FixedUpdate(void)

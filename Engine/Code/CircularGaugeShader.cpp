@@ -1,37 +1,37 @@
 #include "EngineStdafx.h"
-#include "ClicularGaugeShader.h"
+#include "CircularGaugeShader.h"
 
 
 USING(Engine)
-CClicularGaugeShader::CClicularGaugeShader()
+CCircularGaugeShader::CCircularGaugeShader()
 {
 }
 
 
-CClicularGaugeShader::~CClicularGaugeShader()
+CCircularGaugeShader::~CCircularGaugeShader()
 {
 }
 
-CShader * CClicularGaugeShader::Create(void)
+CShader * CCircularGaugeShader::Create(void)
 {
-	CClicularGaugeShader* pInstance = new CClicularGaugeShader;
+	CCircularGaugeShader* pInstance = new CCircularGaugeShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CClicularGaugeShader::Free(void)
+void CCircularGaugeShader::Free(void)
 {
 	__super::Free();
 
 }
 
-void CClicularGaugeShader::Awake(void)
+void CCircularGaugeShader::Awake(void)
 {
 	__super::Awake();
 }
 
-void CClicularGaugeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CCircularGaugeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
 	m_spSlider = static_cast<CSlider*>(spGC->GetOwner()->GetParent());
 
@@ -39,8 +39,11 @@ void CClicularGaugeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	_float value = m_spSlider->GetValue() - minValue;
 	_float maxValue = m_spSlider->GetMaxValue() - minValue;
 
+	std::cout << value << std::endl;
+
 	// 비율구하기
 	_float ratio = value / maxValue;
+
 	m_pEffect->SetFloat("g_ratio", ratio);
 	m_pEffect->SetInt("g_direction", (_int)m_spSlider->GetDirection());
 

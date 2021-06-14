@@ -258,7 +258,7 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
       <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="00.Engine\02.Physics\00.PhysX\00.Manager">
       <UniqueIdentifier>{6bfdfff4-fd1a-4e55-a118-fc63a21a7f7c}</UniqueIdentifier>
     </Filter>
@@ -286,10 +286,10 @@
     <Filter Include="02.Objects\08.Canvas">
       <UniqueIdentifier>{9aace7d5-1390-46ac-a5be-fa2cce8643f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader">
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader">
       <UniqueIdentifier>{16e92165-0119-4c23-a4fc-a9f9ceba2d22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader">
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader">
       <UniqueIdentifier>{695e9423-cbcc-4a72-94a5-8375b5aa1dd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -542,11 +542,11 @@
     <ClCompile Include="..\Code\Canvas.cpp">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ClicularGaugeShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\DamageFontShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -822,11 +822,11 @@
     <ClInclude Include="..\Header\Canvas.h">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ClicularGaugeShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\DamageFontShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CircularGaugeShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -849,10 +849,10 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
