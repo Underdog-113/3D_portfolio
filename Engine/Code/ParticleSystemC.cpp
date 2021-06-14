@@ -117,9 +117,12 @@ void CParticleSystemC::OnDestroy()
 
 	m_vParticles.clear();
 
-	m_pVertexBuffer->Release();
-	m_pVertexBuffer	 = nullptr;
-	m_pTexture		 = nullptr;
+	if (m_pVertexBuffer != nullptr)
+	{
+		m_pVertexBuffer->Release();	
+	}
+	m_pVertexBuffer = nullptr;
+	m_pTexture = nullptr;
 	m_pGraphicDevice = nullptr;
 }
 
