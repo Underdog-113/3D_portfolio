@@ -57,24 +57,7 @@
 #include "fmod.h"
 #pragma comment (lib, "fmodex64_vc.lib")
 
-#include "PxPhysicsAPI.h"
 
-
-#ifdef _DEBUG
-#pragma comment(lib, "PhysX3CommonDEBUG_x64.lib")
-#pragma comment(lib, "PxFoundationDEBUG_x64.lib")
-#pragma comment(lib, "PhysX3ExtensionsDEBUG.lib")
-#pragma comment(lib, "PhysX3DEBUG_x64.lib")
-#endif
-
-#ifdef NDEBUG
-#pragma comment(lib, "PhysX3Common_x64.lib")
-#pragma comment(lib, "PxFoundation_x64.lib")
-#pragma comment(lib, "PhysX3Extensions.lib")
-#pragma comment(lib, "PhysX3_x64.lib")
-#endif
-
-using namespace physx;
 
 //프로젝트 내의 참조문서
 #include "EngineTypedef.h"
@@ -101,7 +84,6 @@ using namespace physx;
 #include "ShaderManager.h"
 #include "LightManager.h"
 #include "RenderTargetManager.h"
-#include "PhysicsManager.h"
 
 //ETC
 #include "MathHelper.h"

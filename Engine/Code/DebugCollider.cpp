@@ -103,7 +103,7 @@ void CDebugCollider::Update(void)
 void CDebugCollider::LateUpdate(void)
 {
 	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
-	m_spTransform->SetRotation(m_pCollider->GetOwner()->GetTransform()->GetRotation());
+	
 	switch (m_pCollider->GetColliderType())
 	{
 	case (_int)EColliderType::Ray:
@@ -112,12 +112,25 @@ void CDebugCollider::LateUpdate(void)
 		m_spTransform->AddPosition(pRay->GetDirection() * pRay->GetLength() / 2.f);
 		m_spTransform->SetForward(pRay->GetDirection());
 		m_spTransform->SetSize(0.01f, 0.01f, pRay->GetLength());
+		//m_spTransform->SetRotation(m_pCollider->GetOwner()->GetTransform()->GetRotation());
 		break;
+	}
+
+	case (_int)EColliderType::Sphere:
+	{
+		CSphereCollider* pShpere = static_cast<CSphereCollider*>(m_pCollider);
+
+	}
+
+	case (_int)EColliderType::AABB:
+	{
+
 	}
 
 	case (_int)EColliderType::OBB:
 	{
 		m_spTransform->SetForward(static_cast<CObbCollider*>(m_pCollider)->GetForward());
+		//m_spTransform->SetRotation(m_pCollider->GetOwner()->GetTransform()->GetRotation());
 		break;
 	}
 

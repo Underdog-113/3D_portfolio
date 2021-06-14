@@ -11,10 +11,10 @@ private:
 	virtual						   ~CObbCollider		(void);
 
 public:
-	static			CObbCollider*	Create				(_float3 size, _float3 offset = ZERO_VECTOR, 
-														 _float3 right = RIGHT_VECTOR, 
-														 _float3 up = UP_VECTOR, 
-														 _float3 forward = FORWARD_VECTOR);
+	static			CObbCollider*	Create				(_float3 size, 
+														 _float3 offset = ZERO_VECTOR, 
+														 _float3 rotOffset = ZERO_VECTOR);
+
 					CCollider*		MakeClone			(CCollisionC* pCC) override;
 
 					void			Awake				(void) override;
@@ -33,6 +33,7 @@ private:
 protected:
 	GETTOR_SETTOR	(_float3,		m_halfSize,			ONE_VECTOR,			HalfSize)
 	GETTOR_SETTOR	(_float3,		m_size,				ONE_VECTOR,			Size)
+	GETTOR_SETTOR	(_float3,		m_rotOffset,		ZERO_VECTOR,		RotOffset)
 
 	GETTOR_SETTOR	(_float3,		m_right,			RIGHT_VECTOR,		Right)
 	GETTOR_SETTOR	(_float3,		m_up,				UP_VECTOR,			Up)

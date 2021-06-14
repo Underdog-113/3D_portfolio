@@ -180,15 +180,15 @@ void CCollisionC::AddColliderFromFile(void)
 			}
 			case (_int)EColliderType::OBB:
 			{
-				_float3 size, right, up, forward;
+				_float3 size;
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_size", size);
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_offset", offset);
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_right", right);
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_up", up);
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_forward", forward);
+				//pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_right", right);
+				//pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_up", up);
+				//pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_forward", forward);
 
 
-				pCollider = CObbCollider::Create(size, offset, right, up, forward);
+				pCollider = CObbCollider::Create(size, offset);
 				break;
 			}
 			default:
