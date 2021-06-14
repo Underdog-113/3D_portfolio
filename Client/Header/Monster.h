@@ -35,15 +35,15 @@ public:
 
 	virtual void SetBasicName(void) override;
 
-private:
-	void	PickComponentToRender(void);
 
 protected:
-	static		_uint						m_s_uniqueID;
-	GETTOR(SP(Engine::CRenderComponent), m_spComponentToRender, nullptr, ComponentToRender)
-	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
-	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+	static		_uint							m_s_uniqueID;
+	GETTOR		(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
+	GETTOR		(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
+	GETTOR		(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
+	GETTOR		(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)			
 
+protected:
+	GETTOR		(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)
 };
 

@@ -63,6 +63,7 @@ public:
 			ABORT;
 		}
 		
+
 		auto& iter_object = (*ppDataMap)[dataID].find(objectKey);
 		if (iter_object == (*ppDataMap)[dataID].end())
 		{

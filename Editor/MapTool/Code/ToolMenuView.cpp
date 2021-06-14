@@ -91,6 +91,7 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBO9, m_obbCnt);
 	DDX_Control(pDX, IDC_CHECK8, m_selectedObbCol);
 	DDX_Control(pDX, IDC_CHECK2, m_showObjectChk);
+	DDX_Control(pDX, IDC_COMBO1, m_loadFileName);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -173,7 +174,7 @@ void CToolMenuView::OnInitialUpdate()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	HTREEITEM root[4]; // mesh, texture, collider, prefab, stage
 	HTREEITEM dynamicMeshChild[3];
-	HTREEITEM staticMeshChild[7];
+	HTREEITEM staticMeshChild[8];
 	HTREEITEM textureChild[17];
 	HTREEITEM prefabChild[4];
 
@@ -184,12 +185,13 @@ void CToolMenuView::OnInitialUpdate()
 
 	root[1] = m_tree.InsertItem(L"Static", 0, 1, TVI_ROOT, TVI_LAST);
 	staticMeshChild[0] = m_tree.InsertItem(L"Map", 1, 1, root[1], TVI_FIRST);
-	staticMeshChild[1] = m_tree.InsertItem(L"CatPaw", 1, 1, root[1], TVI_FIRST);
-	staticMeshChild[2] = m_tree.InsertItem(L"Weapon_Kiana", 1, 1, root[1], TVI_FIRST);
-	staticMeshChild[3] = m_tree.InsertItem(L"Weapon_Monster", 1, 1, root[1], TVI_FIRST);
-	staticMeshChild[4] = m_tree.InsertItem(L"Weapon_Sakura", 1, 1, root[1], TVI_FIRST);
-	staticMeshChild[5] = m_tree.InsertItem(L"Weapon_Theresa", 1, 1, root[1], TVI_FIRST);
-	staticMeshChild[6] = m_tree.InsertItem(L"Static", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[1] = m_tree.InsertItem(L"MainMenu", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[2] = m_tree.InsertItem(L"CatPaw", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[3] = m_tree.InsertItem(L"Weapon_Kiana", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[4] = m_tree.InsertItem(L"Weapon_Monster", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[5] = m_tree.InsertItem(L"Weapon_Sakura", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[6] = m_tree.InsertItem(L"Weapon_Theresa", 1, 1, root[1], TVI_FIRST);
+	staticMeshChild[7] = m_tree.InsertItem(L"Static", 1, 1, root[1], TVI_FIRST);
 
 	root[2] = m_tree.InsertItem(L"Texture", 0, 1, TVI_ROOT, TVI_LAST);
 	// Player texture
@@ -410,6 +412,7 @@ void CToolMenuView::OnTvnSelchangedTree(NMHDR * pNMHDR, LRESULT * pResult)
 	else if (L"Static" == curItemParentName)
 	{
 		SetChangeMeshList(L"Map");
+		SetChangeMeshList(L"MainMenu");
 		SetChangeMeshList(L"Static");
 		SetChangeMeshList(L"CatPaw");
 		SetChangeMeshList(L"Weapon_Kiana");
@@ -687,7 +690,10 @@ void CToolMenuView::OnBnClickedScaleBtn()
 
 void CToolMenuView::OnBnClickedSaveBtn()
 {
-	std::string filePath = "../../../Data/EditorScene/save.txt";
+	CString fileName;
+	m_saveFileName.GetWindowTextW(fileName);
+
+	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName);
 	std::wofstream ofsSave(filePath.data());
 
 	if (ofsSave.is_open())
@@ -724,7 +730,9 @@ void CToolMenuView::OnBnClickedLoadBtn()
 
 	// 데이터 파일 불러오기
 	std::string strLine = "";
-	std::string filePath = "../../../Data/EditorScene/Save.txt";
+	CString fileName;
+	m_loadFileName.GetWindowTextW(fileName);
+	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName);
 	std::ifstream ifsLoad(filePath.data());
 	
 	_float vPos = 0.f;

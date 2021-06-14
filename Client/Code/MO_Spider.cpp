@@ -1,23 +1,31 @@
 #include "stdafx.h"
 #include "..\Header\MO_Spider.h"
 
+#include "FSM_SpiderC.h"
+
 _uint CMO_Spider::m_s_uniqueID = 0;
 
 CMO_Spider::CMO_Spider()
 {
 }
 
+CMO_Spider::~CMO_Spider()
+{
+	OnDestroy();
+}
+
 SP(Engine::CObject) CMO_Spider::MakeClone(void)
 {
 	SP(CMO_Spider) spClone(new CMO_Spider, Engine::SmartDeleter<CMO_Spider>);
-
 	__super::InitClone(spClone);
 
-	spClone->m_spTransform = GetComponent<Engine::CTransformC>();
-	spClone->m_spMesh = GetComponent<Engine::CMeshC>();
-	spClone->m_spTexture = GetComponent<Engine::CTextureC>();
-	spClone->m_spGraphics = GetComponent<Engine::CGraphicsC>();
-	spClone->m_spFSM = GetComponent<FSM_SpiderC>();
+	spClone->m_spTransform		= spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spMesh			= spClone->GetComponent<Engine::CMeshC>();
+	spClone->m_spGraphics		= spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spShader			= spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_spTexture		= spClone->GetComponent<Engine::CTextureC>();
+	
+	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_SpiderC>();
 	return spClone;
 }
 
@@ -25,23 +33,14 @@ void CMO_Spider::Awake(void)
 {
 	__super::Awake();	
 
-	m_layerID = (_int)ELayerID::Enemy;
-	m_dataID =  (_int)EDataID::Enemy;
-
-	m_spMesh	 = AddComponent<Engine::CMeshC>();	
-	m_spMesh->SetInitTex(true);
-	m_spTexture  = AddComponent<Engine::CTextureC>();
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
-	m_spFSM		 = AddComponent<FSM_SpiderC>();
-
-
-
+	m_spStateMachine = AddComponent<CFSM_SpiderC>();
 }
 
 void CMO_Spider::Start(void)
 {
 	__super::Start();
 	
+	m_spMesh->OnRootMotion();
 }
 
 void CMO_Spider::FixedUpdate(void)
@@ -61,17 +60,32 @@ void CMO_Spider::LateUpdate(void)
 
 void CMO_Spider::PreRender(void)
 {
-	m_spComponentToRender->PreRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PreRender(m_spGraphics);
+}
+
+void CMO_Spider::PreRender(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
 void CMO_Spider::Render(void)
 {
-	m_spComponentToRender->Render(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->Render(m_spGraphics);
+}
+
+void CMO_Spider::Render(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
 void CMO_Spider::PostRender(void)
 {
-	m_spComponentToRender->PostRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PostRender(m_spGraphics);
+}
+
+void CMO_Spider::PostRender(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
 void CMO_Spider::OnDestroy(void)

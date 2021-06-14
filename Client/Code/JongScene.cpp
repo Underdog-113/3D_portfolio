@@ -6,9 +6,11 @@
 #include "DynamicMeshData.h"
 
 #include "StageController.h"
-#include "FSM_SpiderC.h"
 #include "FSM_KianaC.h"
 #include "Kiana.h"
+
+#include "FSM_SpiderC.h"
+#include "MO_Spider.h"
 
 CJongScene::CJongScene()
 {
@@ -40,8 +42,8 @@ void CJongScene::Awake(_int numOfLayers)
 	__super::Awake(numOfLayers);
 	
 	//m_pController = new CStageController;
-	m_pController = CStageController::GetInstance();
-	m_pController->Awake();	
+	//m_pController = CStageController::GetInstance();
+	//m_pController->Awake();	
 }
 
 void CJongScene::Start(void)
@@ -87,25 +89,25 @@ void CJongScene::Start(void)
 		}
 
 		// Kiana Body
-		{
-			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+		//{
+		//	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
 
-			m_spKiana = spKianaClone;
-			m_pController->AddSquadMember(m_spKiana);
-			m_pController->Start();
-		}
+		//	m_spKiana = spKianaClone;
+		//	m_pController->AddSquadMember(m_spKiana);
+		//	m_pController->Start();
+		//}
 
-		// Catpaw ATK01
-		{
-			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
+		//// Catpaw ATK01
+		//{
+		//	m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
 
-			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
-			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			m_spCatPaw->AddComponent<Engine::CTextureC>();
-			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
-			m_spCatPaw->GetTransform()->AddPositionY(1.f);
-		}
+		//	m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
+		//	m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//	m_spCatPaw->AddComponent<Engine::CTextureC>();
+		//	m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//	m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
+		//	m_spCatPaw->GetTransform()->AddPositionY(1.f);
+		//}
 
 		{
 			SP(Engine::CObject) spEmptyObject
@@ -120,6 +122,13 @@ void CJongScene::Start(void)
 			//spEmptyObject->GetTransform()->SetPositionY(-0.5);
 		}
 
+		// Spider
+		{
+			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			m_spSpider = spSpiderClone;
+			//m_pController->Start();
+		}
 	}
 }
 
@@ -131,9 +140,10 @@ void CJongScene::FixedUpdate(void)
 void CJongScene::Update(void)
 {
 	__super::Update();  
-	m_pController->Update();
-	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
-	m_pivot->GetTransform()->SetPositionY(0.f);
+	//m_pController->Update();
+	//m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
+	//m_pivot->GetTransform()->SetPosition(m_spSpider->GetTransform()->GetPosition());
+	//m_pivot->GetTransform()->SetPositionY(0.f);
 }
 
 void CJongScene::LateUpdate(void)
