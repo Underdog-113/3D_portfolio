@@ -47,12 +47,12 @@ void CKiana_CatPaw_Atk01::Awake(void)
 	m_dataID = (_int)EDataID::Player;
 	m_layerID = (_int)ELayerID::Player;
 
-	m_spMesh = AddComponent<Engine::CMeshC>();
+	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spMesh->SetInitTex(true);
 
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
-	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
+	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
+	m_spShader		= AddComponent<Engine::CShaderC>();
+	m_spTexture		= AddComponent<Engine::CTextureC>();
 }
 
 void CKiana_CatPaw_Atk01::Start(void)
@@ -126,7 +126,6 @@ void CKiana_CatPaw_Atk01::OnEnable(void)
 	__super::OnEnable();
 
 	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(1.f);
-	//m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->ResetTimers();
 	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->ChangeAniSet(0);
 }
 

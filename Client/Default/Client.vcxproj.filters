@@ -181,6 +181,9 @@
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\CatPaw">
       <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\Pistol">
+      <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -372,6 +375,7 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -539,6 +543,7 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

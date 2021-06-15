@@ -16,6 +16,7 @@
 #include "Kiana_CatPaw_Atk03.h"
 #include "Kiana_CatPaw_Atk04.h"
 #include "Kiana_CatPaw_Atk05.h"
+#include "Kiana_Pistol_USP45.h"
 
 CJongScene::CJongScene()
 {
@@ -24,8 +25,6 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
-	//delete m_pController;
-	m_pController->DestroyInstance();
 }
 
 CClientScene* CJongScene::Create(void)
@@ -140,6 +139,8 @@ void CJongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
+	m_pController->DestroyInstance();
+	m_pController = nullptr;
 }
 
 void CJongScene::OnEnable(void)
@@ -173,4 +174,7 @@ void CJongScene::InitPrototypes(void)
 
 	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(false, this));
 	ADD_PROTOTYPE(spPaw05);
+
+	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(false, this));
+	ADD_PROTOTYPE(spPistol);
 }

@@ -70,6 +70,14 @@ void CKiana_CatPaw_Atk04::FixedUpdate(void)
 void CKiana_CatPaw_Atk04::Update(void)
 {
 	__super::Update();
+
+	m_tempTimer += GET_DT;
+
+	if (m_tempTimer > m_tempDuration)
+	{
+		m_tempTimer = 0.f;
+		SetIsEnabled(false);
+	}
 }
 
 void CKiana_CatPaw_Atk04::LateUpdate(void)
@@ -115,11 +123,15 @@ void CKiana_CatPaw_Atk04::OnDestroy(void)
 void CKiana_CatPaw_Atk04::OnEnable(void)
 {
 	__super::OnEnable();
+	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(1.f);
+	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->ChangeAniSet(0);
 }
 
 void CKiana_CatPaw_Atk04::OnDisable(void)
 {
 	__super::OnDisable();
+	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->GetAniCtrl()->ResetTime();
+	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.f);
 }
 
 void CKiana_CatPaw_Atk04::SetBasicName(void)

@@ -216,6 +216,7 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
+    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />

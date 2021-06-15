@@ -1,19 +1,20 @@
 #pragma once
-#ifndef KIANA_CATPAW_ATK04_H
-#define KIANA_CATPAW_ATK04_H
+#ifndef KIANA_PISTOL_USP45_H
+#define KIANA_PISTOL_USP45_H
 
 #include "Object.h"
 
-class CKiana_CatPaw_Atk04 final : public Engine::CObject
+class CKiana_Pistol_USP45 : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
-private:
-	CKiana_CatPaw_Atk04();
-	~CKiana_CatPaw_Atk04();
+public:
+	CKiana_Pistol_USP45();
+	~CKiana_Pistol_USP45();
+
 	
 public:
-	static			SP(CKiana_CatPaw_Atk04)		Create(_bool isStatic, Engine::CScene* pScene);
+	static			SP(CKiana_Pistol_USP45)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -49,13 +50,8 @@ protected:
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 
-
-private:
-	_float m_tempTimer = 0.f;
-	_float m_tempDuration = 2.f;
 };
 
 
-#endif // KIANA_CATPAW_ATK04_H
 
-
+#endif

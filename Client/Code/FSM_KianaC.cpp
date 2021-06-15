@@ -426,6 +426,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
 	m_pStageController->SetInputLock_ByAni(true);
+	m_pKiana->UltraAtk(CKiana::ATK02);
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -454,6 +455,7 @@ void CFSM_KianaC::Attack_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageController->SetInputLock_ByAni(true);
+	m_pKiana->UltraAtk(CKiana::ATK03);
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -511,6 +513,7 @@ void CFSM_KianaC::Attack_4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageController->SetInputLock_ByAni(true);
+	m_pKiana->UltraAtk(CKiana::ATK04);
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -567,6 +570,7 @@ void CFSM_KianaC::Attack_5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageController->SetInputLock_ByAni(true);
+	m_pKiana->UltraAtk(CKiana::ATK05);
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)

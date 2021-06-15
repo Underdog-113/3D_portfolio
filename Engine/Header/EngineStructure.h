@@ -88,8 +88,9 @@ namespace Engine
 		_ulong					numBones;
 
 		_mat*					pFrameOffsetMatrix;
-		_mat**					ppCombinedTransformMatrix;
 
+		_mat**					ppCombinedTransformMatrix;
+		
 		_mat*					pRenderingMatrix;	// 최종적으로 변환이 끝나서 그리기를 수행하기 위한 행렬 정보
 													// pFrameOffsetMatrix * (*ppCombinedTransformMatrix)
 

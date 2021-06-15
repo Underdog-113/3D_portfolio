@@ -51,7 +51,7 @@ protected:
 
 private:
 	_float m_tempTimer = 0.f;
-	_float m_tempDuration = 2.f;
+	_float m_tempDuration = 1.5f;
 };
 
 
