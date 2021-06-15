@@ -14,13 +14,14 @@ enum class EComponentID
 };
 
 
-enum class EColliderID
+enum class ECollisionID
 {
-	Player				= 0 + (_uint)Engine::ECollisionID::NumOfColliderID,
-	Enemy				= 1 + (_uint)Engine::ECollisionID::NumOfColliderID,
-	Object				= 2 + (_uint)Engine::ECollisionID::NumOfColliderID,
-	Map					= 3 + (_uint)Engine::ECollisionID::NumOfColliderID,
-	NumOfColliderID		= 4 + (_uint)Engine::ECollisionID::NumOfColliderID
+	Floor				= 0 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Wall				= 1 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Player				= 2 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Enemy				= 3 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Trigger				= 4 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	NumOfColliderID		= 5 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
 enum class EDataID

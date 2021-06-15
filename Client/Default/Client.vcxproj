@@ -186,6 +186,7 @@
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />

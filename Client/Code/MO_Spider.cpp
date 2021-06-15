@@ -108,9 +108,14 @@ void CMO_Spider::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
-void CMO_Spider::Chase_Target(_float DeltaTime)
+void CMO_Spider::Chase_Target(_float3 targetPos)
 {
+	_float3 dir = targetPos - m_spTransform->GetPosition();
+	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
+
+	m_spTransform->SetForward(dir);
 }
+
 
 SP(CMO_Spider) CMO_Spider::Create(_bool isStatic, Engine::CScene * pScene)
 {

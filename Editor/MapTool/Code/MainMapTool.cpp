@@ -60,7 +60,7 @@ void CMainMapTool::Start(void)
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CTextManager::GetInstance()->Start();
-	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
+	Engine::CCollisionManager::GetInstance()->Start((_int)ECollisionID::NumOfColliderID);
 	Engine::CCollisionManager::GetInstance()->InitCollisionMap();
 
 	Engine::CRenderTargetManager::GetInstance()->Start();
