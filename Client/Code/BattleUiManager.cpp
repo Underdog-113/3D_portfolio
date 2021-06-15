@@ -2,6 +2,7 @@
 #include "BattleUiManager.h"
 #include "HitsUiC.h"
 #include "LifeObjectC.h"
+#include "TimerUiC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -15,6 +16,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_keyPad->GetTexture()->AddTexture(L"JoyStick_S", 0);
 
 	m_time = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_Time_4").get());
+	m_time->AddComponent<CTimerUiC>();
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_5").get()));
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_6").get()));
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
@@ -22,6 +24,13 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
 	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
 
+	m_playerHp = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerHp").get();
+	m_playerHp->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(-320.0f, 325.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
+
+	m_playerSp = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerSp").get();
+	m_playerSp->AddComponent<Engine::CTextC>()->AddFontData(L"3 / 108", _float2(265.0f, 395.0f), _float2(0, 0), 20, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
+
+	m_playerSTBar = static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_PlayerSTBar1_10").get());
 
 	m_playerHPBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_PlayerHPBar1_3").get()));
 	m_playerHPBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_PlayerHPBar2_4").get()));
@@ -36,6 +45,9 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
+	m_monsterName =	pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MonsterStateCanvas_MonsterName_0").get();
+	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -342.1f), _float2(0, 0), 50, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
+
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
 
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_0").get()));
@@ -48,11 +60,14 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_hitCount = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_HitCount_1").get());
 	m_hitCount->AddComponent<CHitsUiC>();
 	m_hits = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_Hits_2").get());
+
+	PlayerHp(m_playerHPBar[m_playerHPBar.size() - 1]->GetMaxValue());
+
 }
 
 void CBattleUiManager::Update(void)
 {
-	
+
 }
 
 void CBattleUiManager::OnDestroy(void)
@@ -102,7 +117,7 @@ void CBattleUiManager::MonsetrState(std::wstring name, _float hp, std::wstring p
 	// 오브젝트 켜주고 꺼주는 오브젝트가 필요할듯
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
-
+	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(hp);
@@ -172,6 +187,7 @@ void CBattleUiManager::PlayerHp(_float value)
 	{
 		object->SetValue(value);
 	}
+	m_playerHp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring((int)value) + L" / " + std::to_wstring((int)m_playerHPBar[m_playerHPBar.size() - 1]->GetMaxValue()));
 }
 
 void CBattleUiManager::PlayerHpDown(_float value)
@@ -180,6 +196,7 @@ void CBattleUiManager::PlayerHpDown(_float value)
 	{
 		object->SetValue(object->GetValue() - value);
 	}
+	m_playerHp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring((int)m_playerHPBar[0]->GetValue()) + L" / " + std::to_wstring((int)m_playerHPBar[m_playerHPBar.size() - 1]->GetMaxValue()));
 }
 
 void CBattleUiManager::PlayerHpUp(_float value)
@@ -188,5 +205,28 @@ void CBattleUiManager::PlayerHpUp(_float value)
 	{
 		object->SetValue(object->GetValue() + value);
 	}
+	m_playerHp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring((int)m_playerHPBar[0]->GetValue()) + L" / " + std::to_wstring((int)m_playerHPBar[m_playerHPBar.size() - 1]->GetMaxValue()));
+}
+
+void CBattleUiManager::PlayerSp(_float value)
+{
+	m_playerSTBar->SetValue(value);
+	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(value));
+
+}
+
+void CBattleUiManager::PlayerSpDown(_float value)
+{
+	m_playerSTBar->SetValue(m_playerSTBar->GetValue() - value);
+
+	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(m_playerSTBar->GetValue()));
+
+}
+
+void CBattleUiManager::PlayerSpUp(_float value)
+{
+	m_playerSTBar->SetValue(m_playerSTBar->GetValue() + value);
+	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(m_playerSTBar->GetValue()));
+
 }
 

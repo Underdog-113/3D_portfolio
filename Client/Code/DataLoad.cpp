@@ -203,7 +203,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"maxValue", maxValue);
 		dataStore->GetValue(false, dataID, objectKey, key + L"minValue", minValue);
 
-		slider->AddSliderData(value, maxValue, minValue, imageObj[0], imageObj[1]);
+		slider->AddSliderData(maxValue, maxValue, minValue, imageObj[0], imageObj[1]);
 	}
 }
 
