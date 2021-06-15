@@ -4,6 +4,8 @@
 #include "ObjectFactory.h"
 #include "EmptyObject.h"
 #include "MeshEffect.h"
+#include "AttackTrail.h"
+
 
 CEffectToolScene::CEffectToolScene()
 {
@@ -95,6 +97,6 @@ void CEffectToolScene::InitPrototypes(void)
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(false, this));
 	ADD_PROTOTYPE(spCameraPrototype);
 
-	SP(Engine::CObject) spMeshEffect(CMeshEffect::Create(false, this));
+	SP(CMeshEffect) spMeshEffect(CAttackTrail::Create(false, this));
 	ADD_PROTOTYPE(spMeshEffect);
 }

@@ -286,11 +286,14 @@
     <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
       <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
     </Filter>
-      <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
-        <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
+      <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader">
       <UniqueIdentifier>{bbe26739-63c8-43a8-97cc-b2bb217589e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader">
+      <UniqueIdentifier>{a75dc654-bebc-49a3-b5a7-0983ae845fc1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -551,6 +554,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\SkyBoxShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeshTrailShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,6 +842,9 @@
     <ClInclude Include="..\Header\SkyBoxShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MeshTrailShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -873,6 +882,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
-    </FxCompile>      
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -18,6 +18,7 @@
 #include "EffectShader.h"
 #include "CatPawShader.h"
 #include "CelShader.h"
+#include "MeshTrailShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -37,6 +38,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CCircularGaugeShader::Create());
 	m_vShaders.emplace_back(CCelShader::Create());
 	m_vShaders.emplace_back(CSkyBoxShader::Create());
+	m_vShaders.emplace_back(CMeshTrailShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -86,6 +88,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::CircularGauge;
 	else if (shaderName == L"CelShader")
 		return (_int)EShaderID::CelShader;
+	else if (shaderName == L"MeshTrailShader")
+		return (_int)EShaderID::MeshTrailShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");
