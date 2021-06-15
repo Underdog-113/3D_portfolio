@@ -121,6 +121,15 @@ void CRigidBodyC::UpdateLinear(void)
 	m_force *= (1 - m_drag);
 
 	m_velocity += (m_force / m_mass) * deltaTime;
+
+	if (m_onFloor)
+	{
+		if (m_velocity.y < 0)
+			m_velocity.y = 0;
+
+		m_onFloor = false;
+	}
+
 	m_spTransform->AddPosition(m_velocity * deltaTime);
 
 	m_force = ZERO_VECTOR;
