@@ -53,7 +53,11 @@ void CStageSelectionScene::Start(void)
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
-	Load->Load(this);
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
 	delete(Load);
 }
 

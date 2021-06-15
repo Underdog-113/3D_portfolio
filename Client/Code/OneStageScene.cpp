@@ -53,7 +53,11 @@ void COneStageScene::Start(void)
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
-	Load->Load(this);
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
@@ -108,8 +112,6 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	m_pLoading->Free();
-
 }
 
 void COneStageScene::OnEnable(void)
