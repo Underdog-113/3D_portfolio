@@ -118,9 +118,6 @@
     <Filter Include="02.Objects\04.UI\00.Button">
       <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\04.UI\00.Button\00.Manager">
-      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\04.UI\01.ScrollView">
       <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
     </Filter>
@@ -144,9 +141,6 @@
     </Filter>
     <Filter Include="03.Component\00.UI\01.DamageFont">
       <UniqueIdentifier>{51254a6d-c0d4-4550-9140-860bbe8988e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.UI\00.Button\01.ButtonFunction">
-      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
     </Filter>
     <Filter Include="06.DataLoad">
       <UniqueIdentifier>{4e050859-d9ff-4601-be3e-ce23afd1159b}</UniqueIdentifier>
@@ -181,8 +175,29 @@
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\CatPaw">
       <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Component\00.UI\02.RotationUI">
+    <Filter Include="03.Component\00.UI\03.Timer">
+      <UniqueIdentifier>{74ab1825-01ae-44ed-a11d-f1acc8db8642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager">
+      <UniqueIdentifier>{aaee55bd-5edf-4507-bcc2-29434ee64096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\04.UI\00.Button\00.ButtonFunction">
+      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.ButtonManager">
+      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\01.BattleUiManager">
+      <UniqueIdentifier>{f3403a50-55bf-4e14-9ea9-ae5e6f3ecc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\04.HitsUi">
+      <UniqueIdentifier>{70fedf36-cfa3-4296-ba3a-c07e95a374da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\02.RotationUi">
       <UniqueIdentifier>{1b2e04ec-4118-4847-8f93-5755640c0439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\05.LifeObject">
+      <UniqueIdentifier>{b63dddbc-67bd-4f8e-852f-ea09381d74a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -310,7 +325,7 @@
       <Filter>02.Objects\04.UI\01.ScrollView</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonManager.h">
-      <Filter>02.Objects\04.UI\00.Button\00.Manager</Filter>
+      <Filter>09.Manager\00.ButtonManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ClientScene.h">
       <Filter>01.Scene</Filter>
@@ -321,7 +336,6 @@
     <ClInclude Include="..\Header\StageController.h">
       <Filter>97.TempClass_ForDevelop</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CatPaw_Claw.h" />
     <ClInclude Include="FSMDefine_Spider.h">
       <Filter>02.Objects\03.Monster\MO_Spider\FSM</Filter>
     </ClInclude>
@@ -353,7 +367,7 @@
       <Filter>03.Component\00.UI\01.DamageFont</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonFunction.h">
-      <Filter>02.Objects\04.UI\00.Button\01.ButtonFunction</Filter>
+      <Filter>02.Objects\04.UI\00.Button\00.ButtonFunction</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DataLoad.h">
       <Filter>06.DataLoad</Filter>
@@ -368,7 +382,20 @@
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RotationUiC.h">
-      <Filter>03.Component\00.UI\02.RotationUI</Filter>
+      <Filter>03.Component\00.UI\02.RotationUi</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMDefine_Kiana.h" />
+    <ClInclude Include="..\Header\BattleUiManager.h">
+      <Filter>09.Manager\01.BattleUiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TimerUi.h">
+      <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\HitsUiC.h">
+      <Filter>03.Component\00.UI\04.HitsUi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LifeObjectC.h">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -475,7 +502,7 @@
       <Filter>02.Objects\04.UI\01.ScrollView</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonManager.cpp">
-      <Filter>02.Objects\04.UI\00.Button\00.Manager</Filter>
+      <Filter>09.Manager\00.ButtonManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ClientScene.cpp">
       <Filter>01.Scene</Filter>
@@ -514,7 +541,7 @@
       <Filter>03.Component\00.UI\01.DamageFont</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonFunction.cpp">
-      <Filter>02.Objects\04.UI\00.Button\01.ButtonFunction</Filter>
+      <Filter>02.Objects\04.UI\00.Button\00.ButtonFunction</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageObjectPool.cpp">
       <Filter>08.ObjectPool\DamageObjectPool</Filter>
@@ -525,9 +552,20 @@
     <ClCompile Include="..\Code\Kiana_CatPaw.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp">
-      <Filter>03.Component\00.UI\02.RotationUI</Filter>
+      <Filter>03.Component\00.UI\02.RotationUi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleUiManager.cpp">
+      <Filter>09.Manager\01.BattleUiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TimerUi.cpp">
+      <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HitsUiC.cpp">
+      <Filter>03.Component\00.UI\04.HitsUi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LifeObjectC.cpp">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -39,13 +39,13 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 {
 	GetOwner()->GetTransform()->AddPositionY(m_upSpeed * GET_DT);
 
-	m_enableTime -= GET_DT;
+	m_lifeTime -= GET_DT;
 
-	_float alphaValue = m_enableTime / m_oldEnableTime;
+	_float alphaValue = m_lifeTime / m_oldLifeTime;
 
 	GetOwner()->GetComponent<Engine::CShaderC>()->GetShaders()[0]->GetEffect()->SetFloat("g_alphaValue", alphaValue);
 
-	if (m_enableTime <= 0)
+	if (m_lifeTime <= 0)
 	{
 		GetOwner()->SetIsEnabled(false);
 	}
@@ -70,12 +70,12 @@ void CDamageFontC::OnDisable()
 	__super::OnDisable();
 }
 
-void CDamageFontC::AddDamageFontInit(_float upSpped, _float enableTime, _int damage, std::wstring color)
+void CDamageFontC::AddDamageFontInit(_float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
 	GetOwner()->SetIsEnabled(true);
 	m_upSpeed = upSpped;
-	m_enableTime = enableTime;
-	m_oldEnableTime = m_enableTime;
+	m_lifeTime = lifeTime;
+	m_oldLifeTime = m_lifeTime;
 	m_damage = damage;
 
 	// 텍스처를 지울수있는 기능이필요하다.

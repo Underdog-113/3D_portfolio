@@ -36,10 +36,8 @@ void CCircularGaugeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	m_spSlider = static_cast<CSlider*>(spGC->GetOwner()->GetParent());
 
 	_float minValue = m_spSlider->GetMinValue();
-	_float value = m_spSlider->GetValue() - minValue;
 	_float maxValue = m_spSlider->GetMaxValue() - minValue;
-
-	std::cout << value << std::endl;
+	_float value = (m_spSlider->GetValue() - minValue) - (maxValue * 0.5f);
 
 	// 비율구하기
 	_float ratio = value / maxValue;

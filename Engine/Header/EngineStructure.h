@@ -171,6 +171,8 @@ namespace Engine
 #pragma endregion
 	struct _TextCom
 	{
+		_TextCom() {}
+
 		_TextCom(std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible)
 		{
 			m_text.m_message = message;
