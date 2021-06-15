@@ -24,7 +24,7 @@ public:
 			
 			void					Setup				(_bool isFadeIn, _float speed);
 public:
-	static const	EComponentID	m_s_componentID = EComponentID::FadeInOut;
+	static const	EComponentID	m_s_componentID = EComponentID::Camera;
 
 private:
 	GETTOR_SETTOR	(_bool,		m_isFadeIn,		false,		IsFadeIn)

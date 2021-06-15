@@ -49,7 +49,7 @@ void CChangmoScene::Start(void)
 
 		spEmptyObject
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Floor");
-		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, _float3(0, 10, 10)));
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, _float3(0, 10, 10), ZERO_VECTOR, _float3(0, 0, PI/4)));
 		spEmptyObject->AddComponent<Engine::CDebugC>();
 		spEmptyObject->GetTransform()->SetPosition(-5, 0, 0);
 		
