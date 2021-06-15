@@ -13,8 +13,11 @@
 
 #include "DamageFontShader.h"
 #include "CircularGaugeShader.h"
+#include "SkyBoxShader.h"
 
 #include "EffectShader.h"
+#include "CatPawShader.h"
+#include "CelShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -28,9 +31,12 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CDeferredLightShader::Create());
 	m_vShaders.emplace_back(CSliderShader::Create());
 	m_vShaders.emplace_back(CWaterShader::Create());
-	m_vShaders.emplace_back(CDamageFontShader::Create());
 	m_vShaders.emplace_back(CEffectShader::Create());
+	m_vShaders.emplace_back(CDamageFontShader::Create());
+	m_vShaders.emplace_back(CCatPawShader::Create());
 	m_vShaders.emplace_back(CCircularGaugeShader::Create());
+	m_vShaders.emplace_back(CCelShader::Create());
+	m_vShaders.emplace_back(CSkyBoxShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -64,18 +70,22 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::DeferredBlendShader;
 	else if (shaderName == L"DeferredLightShader")
 		return (_int)EShaderID::DeferredLightShader;
-	//else if (shaderName == L"SkyBoxShader")
-	//	return (_int)EShaderID::SkyBoxShader;
+	else if (shaderName == L"SkyBoxShader")
+		return (_int)EShaderID::SkyBoxShader;
 	else if (shaderName == L"SliderShader")
 		return (_int)EShaderID::SliderShader;
 	else if (shaderName == L"WaterShader")
-		return (_int)EShaderID::WaterShader;	
+		return (_int)EShaderID::WaterShader;
 	else if (shaderName == L"DamageFontShader")
 		return (_int)EShaderID::DamageFont;
 	else if (shaderName == L"EffectShader")
 		return (_int)EShaderID::EffectShader;
+	else if (shaderName == L"CatPawShader")
+		return (_int)EShaderID::CatPawShader;
 	else if (shaderName == L"CircularGaugeShader")
 		return (_int)EShaderID::CircularGauge;
+	else if (shaderName == L"CelShader")
+		return (_int)EShaderID::CelShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");

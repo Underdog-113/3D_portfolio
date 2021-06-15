@@ -56,30 +56,20 @@ void CCubeTexC::LateUpdate(SP(CComponent) spThis)
 {
 }
 
-void CCubeTexC::PreRender(SP(CGraphicsC) spGC)
-{
-	__super::PreRender();
-	
-}
 
 void CCubeTexC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-}
-
-void CCubeTexC::Render(SP(CGraphicsC) spGC)
-{
+	__super::PreRender();
 }
 
 void CCubeTexC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-}
-
-void CCubeTexC::PostRender(SP(CGraphicsC) spGC)
-{
+	__super::Render();
 }
 
 void CCubeTexC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
+	__super::PostRender();
 }
 
 void CCubeTexC::OnDestroy(void)
