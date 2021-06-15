@@ -279,11 +279,15 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
       <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
-      <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
-        <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
-      </Filter>
-      <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
-        <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
+      <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
+      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
+      <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +542,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CubeTexC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CelShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -817,6 +824,9 @@
     <ClInclude Include="..\Header\CubeTexC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CelShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -848,6 +858,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

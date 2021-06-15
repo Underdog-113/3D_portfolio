@@ -125,17 +125,17 @@ float4 OutlinePixelShader(VS_OUTPUT Input) : COLOR0
 
 technique ToonShader
 {
-	pass OutLine
+	/*pass OutLine
 	{
 		VertexShader = compile vs_3_0 OutlineVertexShader();
 		PixelShader = compile ps_3_0 OutlinePixelShader();
 		CullMode = CW;
-	}
+	}*/
 	pass Toon
 	{
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();
-		CullMode = CCW;
+		//CullMode = CCW;
 	}
 
 };

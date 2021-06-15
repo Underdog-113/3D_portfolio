@@ -1,38 +1,38 @@
 #include "EngineStdafx.h"
-#include "..\Header\CatPawShader.h"
+#include "..\Header\CelShader.h"
 
 USING(Engine)
 
-CCatPawShader::CCatPawShader()
+CCelShader::CCelShader()
 {
 }
 
 
-CCatPawShader::~CCatPawShader()
+CCelShader::~CCelShader()
 {
 }
 
-CShader * CCatPawShader::Create()
+CShader * CCelShader::Create()
 {
-	CCatPawShader* pInstance = new CCatPawShader;
+	CCelShader* pInstance = new CCelShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CCatPawShader::Free()
+void CCelShader::Free()
 {
 	__super::Free();
 }
 
-void CCatPawShader::Awake()
+void CCelShader::Awake()
 {
 	__super::Awake();
 	m_fTime = 0.f;
 	m_fUVSpeed = 0.25f;
 }
 
-void CCatPawShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CCelShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
 
 	_mat worldMat, viewMat, projMat, WVP;
@@ -81,6 +81,5 @@ void CCatPawShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 		
 		pMtrl++;
 	}
-
 
 }
