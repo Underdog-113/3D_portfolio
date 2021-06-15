@@ -10,7 +10,6 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 
-#include "BattleUiManager.h"
 #include "TextManager.h"
 #include "DataLoad.h"
 COneStageScene::COneStageScene()
@@ -106,7 +105,7 @@ void COneStageScene::OnDestroy(void)
 void COneStageScene::OnEnable(void)
 {
 	__super::OnEnable();
-
+	CBattleUiManager::GetInstance()->OnDestroy();
 }
 
 void COneStageScene::OnDisable(void)

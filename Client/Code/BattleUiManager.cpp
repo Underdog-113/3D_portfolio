@@ -48,10 +48,6 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_hitCount = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_HitCount_1").get());
 	m_hitCount->AddComponent<CHitsUiC>();
 	m_hits = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_Hits_2").get());
-
-	
-
-
 }
 
 void CBattleUiManager::Update(void)
@@ -61,7 +57,14 @@ void CBattleUiManager::Update(void)
 
 void CBattleUiManager::OnDestroy(void)
 {
+	m_playerIllustration.clear();
+	m_playerProperty.clear();
+	m_skillPoint.clear();
 
+	m_monsterHpBar.clear();
+	m_playerHPBar.clear();
+	m_waitingPlayerHpBar.clear();
+	m_waitingPlayerStBar.clear();
 }
 
 void CBattleUiManager::KeyPad(_int value)
