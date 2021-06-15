@@ -33,6 +33,8 @@ private:
 	SP(Engine::CObject) m_spKiana;
 	Engine::CObject* m_pivot;
 
+	SP(Engine::CObject) m_spSpider;
+
 	Engine::CObject* m_obj;
 	Engine::CObject* m_obj1;
 	Engine::CObject* m_obj2;

@@ -18,8 +18,15 @@ enum class EComponentID
 
 enum class ECollisionID
 {
-	Map					= (1 << (0 + (_uint)Engine::ECollisionID::NumOfColliderID)),
-	NumOfColliderID		= 1 + (_uint)Engine::ECollisionID::NumOfColliderID
+	Floor				= 0 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	Wall				= 1 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	FloorRay			= 2 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	WallRay				= 3 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	PlayerHitBox		= 4 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	PlayerAttack		= 5 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	EnemyHitBox			= 6 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	EnemyAttack			= 7 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	NumOfColliderID		= 8 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
 enum class EDataID
@@ -38,9 +45,7 @@ enum class ELayerID
 	Player			= 0 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Map				= 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Enemy			= 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Camera			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	UI				= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID	= 5 + (_int)Engine::ELayerID::NumOfEngineLayerID
+	NumOfLayerID	= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID
 };
 
 enum class ELoadingID

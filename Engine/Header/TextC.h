@@ -23,13 +23,22 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
-	void AddFontData(std::wstring keyValue, std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible);
+	void AddFontData(std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible);
+	void ChangeMessage(std::wstring message);
 	void RenderText();
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
 	GETTOR_SETTOR(std::wstring, m_font, L"µ¸À½", Font);
-	std::unordered_map<std::wstring, _TextCom> m_textData;
+	_TextCom m_textData;
+
+	std::wstring m_message;
+	_float2 m_position;
+	_float2 m_boxSize;
+	_int m_fontSize;
+	DWORD m_alignment;
+	D3DXCOLOR m_color;
+	_bool m_isVisible;
 };
 END
 #endif

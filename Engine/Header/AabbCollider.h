@@ -6,13 +6,16 @@
 BEGIN(Engine)
 class ENGINE_DLL CAabbCollider final : public CCollider
 {
+	SMART_DELETER_REGISTER
 private:
 	explicit		CAabbCollider		(void);
 	virtual		   ~CAabbCollider		(void);
 
 public:
-	static		CAabbCollider*		Create					(_float3 size, _float3 offset = _float3(0, 0, 0));
-				CCollider*			MakeClone				(CCollisionC* pCC) override;
+	static		SP(CAabbCollider)	Create					(_int collisionID, 
+															 _float3 size = ONE_VECTOR, 
+															 _float3 offset = ZERO_VECTOR);
+				SP(CCollider)		MakeClone				(CCollisionC* pCC) override;
 
 				void				Awake					(void) override;
 				void				OnDestroy				(void) override;

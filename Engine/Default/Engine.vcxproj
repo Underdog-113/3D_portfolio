@@ -25,7 +25,10 @@
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
     <ClInclude Include="..\Header\Canvas.h" />
-    <ClInclude Include="..\Header\ClicularGaugeShader.h" />
+    <ClInclude Include="..\Header\CatPawShader.h" />
+    <ClInclude Include="..\Header\CelShader.h" />
+    <ClInclude Include="..\Header\CircularGaugeShader.h" />
+    <ClInclude Include="..\Header\CubeTexC.h" />
     <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DebugCollider.h" />
     <ClInclude Include="..\Header\Collider.h" />
@@ -59,9 +62,6 @@
     <ClInclude Include="..\Header\MeshShader.h" />
     <ClInclude Include="..\Header\Particle.h" />
     <ClInclude Include="..\Header\ParticleSystemC.h" />
-    <ClInclude Include="..\Header\PhysicsC.h" />
-    <ClInclude Include="..\Header\PhysicsHelper.h" />
-    <ClInclude Include="..\Header\PhysicsManager.h" />
     <ClInclude Include="..\Header\PSC_Manager.h" />
     <ClInclude Include="..\Header\RectTexC.h" />
     <ClInclude Include="..\Header\RectTexShader.h" />
@@ -74,8 +74,8 @@
     <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\ShaderManager.h" />
-    <ClInclude Include="..\Header\SimulationEventCallback.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
+    <ClInclude Include="..\Header\SkyBoxShader.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
     <ClInclude Include="..\Header\State.h" />
@@ -121,7 +121,10 @@
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
     <ClCompile Include="..\Code\Canvas.cpp" />
-    <ClCompile Include="..\Code\ClicularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\CatPawShader.cpp" />
+    <ClCompile Include="..\Code\CelShader.cpp" />
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\CubeTexC.cpp" />
     <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DebugCollider.cpp" />
     <ClCompile Include="..\Code\Collider.cpp" />
@@ -152,9 +155,6 @@
     <ClCompile Include="..\Code\MeshShader.cpp" />
     <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\ParticleSystemC.cpp" />
-    <ClCompile Include="..\Code\PhysicsC.cpp" />
-    <ClCompile Include="..\Code\PhysicsHelper.cpp" />
-    <ClCompile Include="..\Code\PhysicsManager.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp" />
     <ClCompile Include="..\Code\RectTexC.cpp" />
     <ClCompile Include="..\Code\RectTexShader.cpp" />
@@ -167,8 +167,8 @@
     <ClCompile Include="..\Code\Shader.cpp" />
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp" />
-    <ClCompile Include="..\Code\SimulationEventCallback.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
+    <ClCompile Include="..\Code\SkyBoxShader.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
@@ -206,6 +206,8 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\CelShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
@@ -213,6 +215,7 @@
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx" />
   </ItemGroup>
@@ -279,7 +282,7 @@
     <OutDir>$(SolutionDir)Bin/Engine/Debug/x64/</OutDir>
     <IntDir>$(SolutionDir)Log/Engine/Debug/x64/</IntDir>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include\;$(SolutionDir)ExternalLibrary\PhysX\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

@@ -6,7 +6,6 @@
 #include "DynamicMeshData.h"
 
 #include "StageController.h"
-#include "FSM_SpiderC.h"
 #include "FSM_KianaC.h"
 #include "Kiana.h"
 #include "AniCtrl.h"
@@ -44,10 +43,10 @@ void CJongScene::Free(void)
 void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	
+
 	//m_pController = new CStageController;
 	m_pController = CStageController::GetInstance();
-	m_pController->Awake();	
+	m_pController->Awake();
 }
 
 void CJongScene::Start(void)
@@ -55,7 +54,7 @@ void CJongScene::Start(void)
 		//Engine::CCameraManager::GetInstance()->GetMainCamera();
 	__super::Start();
 	{
-		//Engine::GET_CUR_SCENE;	// 쓰지 마세요오오옹
+		//Engine::GET_CUR_SCENE;
 		{
 			SP(Engine::CObject) spEmptyObject1
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
@@ -71,26 +70,6 @@ void CJongScene::Start(void)
 			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
 		}
 
-		{
-			//SP(Engine::CObject) spEmptyObject
-			//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
-
-			//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_decl");
-			//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			//spEmptyObject->AddComponent<Engine::CTextureC>();
-			//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			//spEmptyObject->GetTransform()->SetSize(1, 1, 1);
-
-			//spEmptyObject->AddComponent<CFSM_KianaC>();
-
-			//spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
-
-			//m_pKiana = spEmptyObject;
-
-			////m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
-			//m_pController->AddSquadMember(m_pKiana);
-
-		}
 
 		// Kiana Body
 		{
@@ -113,7 +92,6 @@ void CJongScene::Start(void)
 			//spEmptyObject->GetTransform()->SetRotationY(D3DXToRadian(-90));
 			//spEmptyObject->GetTransform()->SetPositionY(-0.5);
 		}
-
 	}
 }
 
@@ -124,7 +102,7 @@ void CJongScene::FixedUpdate(void)
 
 void CJongScene::Update(void)
 {
-	__super::Update();  
+	__super::Update();
 	m_pController->Update();
 	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
 	m_pivot->GetTransform()->SetPositionY(0.f);

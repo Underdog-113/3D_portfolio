@@ -19,15 +19,11 @@ SP(CComponent) CCollisionC::MakeClone(CObject* pObject)
 	SP(CCollisionC) spClone(new CCollisionC);
 	__super::InitClone(spClone, pObject);
 
-	spClone->SetCollisionID(m_collisionID);
 	for (auto& collider : m_vColliders)
 		spClone->m_vColliders.emplace_back(collider->MakeClone(spClone.get()));
 
-	spClone->m_isTrigger	= m_isTrigger;
-	spClone->m_offsetBS		= m_offsetBS;
-	spClone->m_radiusBS		= m_radiusBS;
 	spClone->m_resolveIn	= m_resolveIn;
-	
+
 	return spClone;
 }
 
@@ -43,7 +39,6 @@ void CCollisionC::Awake(void)
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
 		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
-		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"collisionID", m_collisionID);
 		AddColliderFromFile();
 	}
 }
@@ -55,8 +50,9 @@ void CCollisionC::Start(SP(CComponent) spThis)
 	m_spTransform = m_pOwner->GetComponent<CTransformC>();
 	m_spRigidbody = m_pOwner->GetComponent<CRigidBodyC>();
 
-	m_pObject = m_pOwner;
 	CCollisionManager::GetInstance()->AddCollisionToManager(std::dynamic_pointer_cast<CCollisionC>(spThis));
+	for (auto& collider : m_vColliders)
+		CCollisionManager::GetInstance()->AddColliderToManager(collider);
 }
 
 void CCollisionC::FixedUpdate(SP(CComponent) spThis)
@@ -65,10 +61,6 @@ void CCollisionC::FixedUpdate(SP(CComponent) spThis)
 
 void CCollisionC::Update(SP(CComponent) spThis)
 {
-	for (auto& actor : m_vActor)
-	{
-		actor->is<PxRigidDynamic>()->setGlobalPose(m_spTransform->ToPxTrasnform());
-	}
 }
 
 void CCollisionC::LateUpdate(SP(CComponent) spSelf)
@@ -80,7 +72,10 @@ void CCollisionC::LateUpdate(SP(CComponent) spSelf)
 void CCollisionC::OnDestroy(void)
 {
 	for (auto& collider : m_vColliders)
-		collider->Free();
+	{
+		collider->SetOwner(nullptr);
+		collider.reset();
+	}
 
 	m_vColliders.clear();
 }
@@ -88,68 +83,25 @@ void CCollisionC::OnDestroy(void)
 void CCollisionC::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
 void CCollisionC::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
-void CCollisionC::AddCollider(CCollider* pCollider)
+void CCollisionC::AddCollider(SP(CCollider) spCollider)
 {
-	pCollider->SetOwner(this);
-	m_vColliders.emplace_back(pCollider);
+	spCollider->SetOwner(this);
+	m_vColliders.emplace_back(spCollider);
 
-
-	if (m_radiusBS == UNDEFINED)
-	{
-		m_offsetBS = pCollider->GetOffsetOrigin();
-		m_radiusBS = pCollider->GetRadiusBS();
-	}
-	else
-		MergingBS(pCollider);
 
 	SP(CDebugC) spDebugC = m_pOwner->GetComponent<CDebugC>();
+
 	if (spDebugC != nullptr)
-		spDebugC->AddDebugCollider(pCollider);
-}
-
-void CCollisionC::AddCollider(PxShape * pShape, _int collisionType, _int physicsBodyType)
-{
-	PxTransform actorTransform(m_spTransform->ToPxTrasnform());
-	
-	if (collisionType == (_int)ECollisionType::Collide)
-	{
-		pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, true);
-		pShape->setFlag(PxShapeFlag::eSCENE_QUERY_SHAPE, true);
-	}
-	else
-	{
-		pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
-		pShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
-	}
-
-	if (physicsBodyType == (_int)EPhysicsBodyType::Static)
-	{
-		PxRigidStatic* pRigidStatic = PxCreateStatic(*GET_PHYSICS, actorTransform, *pShape);
-		pRigidStatic->userData = this;
-		GET_PxSDK->AddActor(pRigidStatic);
-		m_vActor.emplace_back(pRigidStatic);
-	}
-	else if (physicsBodyType == (_int)EPhysicsBodyType::Dynamic)
-	{
-		PxRigidDynamic* pRigidDynamic = PxCreateDynamic(*GET_PHYSICS, actorTransform, *pShape, 10);
-		pRigidDynamic->userData = this;
-		m_vActor.emplace_back(pRigidDynamic);
-	}
-	else
-	{
-		PxRigidDynamic* pRigidKinematic = PxCreateKinematic(*GET_PHYSICS, actorTransform, *pShape, 10);
-		pRigidKinematic->userData = this;
-		m_vActor.emplace_back(pRigidKinematic);
-	}
+		spDebugC->AddDebugCollider(spCollider.get());
 }
 
 void CCollisionC::AddCollisionInfo(_CollisionInfo collisionInfo)
@@ -165,7 +117,8 @@ void CCollisionC::AddTriggeredCC(CCollisionC* pCC)
 void CCollisionC::DeleteCollider(_int index)
 {
 	auto& iter = m_vColliders.begin();
-	m_vColliders[index]->Free();
+	m_vColliders[index]->SetOwner(nullptr);
+	m_vColliders[index].reset();
 	m_vColliders.erase(iter + index);
 
 	SP(CDebugC) spDebug;
@@ -191,8 +144,9 @@ void CCollisionC::AddColliderFromFile(void)
 		varKey = L"numOf_Type" + std::to_wstring(i) + L"_Collider";
 		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, varKey, numOfCollider);
 
-		CCollider* pCollider;
+		SP(CCollider) spCollider;
 		_float3 offset;
+		_int collisionID;
 		for (_int j = 0; j < numOfCollider; ++j)
 		{
 			std::wstring index = std::to_wstring(j);
@@ -201,7 +155,8 @@ void CCollisionC::AddColliderFromFile(void)
 			case (_int)EColliderType::Point:
 			{
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"PointCollider_" + index + L"_offset", offset);
-				pCollider = CPointCollider::Create(offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"PointCollider_" + index + L"_collisionID", collisionID);
+				spCollider = CPointCollider::Create(collisionID, offset);
 				break;
 			}
 			case (_int)EColliderType::Ray:
@@ -211,7 +166,8 @@ void CCollisionC::AddColliderFromFile(void)
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_offset", offset);
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_dir", dir);
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_len", len);
-				pCollider = CRayCollider::Create(offset, dir, len);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"RayCollider_" + index + L"_collisionID", collisionID);
+				spCollider = CRayCollider::Create(collisionID, offset, dir, len);
 				break;
 			}
 			case (_int)EColliderType::Sphere:
@@ -219,8 +175,9 @@ void CCollisionC::AddColliderFromFile(void)
 				_float radius;
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_radius", radius);
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"SphereCollider_" + index + L"_collisionID", collisionID);
 
-				pCollider = CSphereCollider::Create(radius, offset);
+				spCollider = CSphereCollider::Create(collisionID, radius, offset);
 				break;
 			}
 			case (_int)EColliderType::AABB:
@@ -228,21 +185,21 @@ void CCollisionC::AddColliderFromFile(void)
 				_float3 size;
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_size", size);
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_offset", offset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"AabbCollider_" + index + L"_collisionID", collisionID);
 
-				pCollider = CAabbCollider::Create(size, offset);
+				spCollider = CAabbCollider::Create(collisionID, size, offset);
 				break;
 			}
 			case (_int)EColliderType::OBB:
 			{
-				_float3 size, right, up, forward;
+				_float3 size;
+				_float3 rotOffset;
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_size", size);
 				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_offset", offset);
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_right", right);
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_up", up);
-				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_forward", forward);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_rotOffset", rotOffset);
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"ObbCollider_" + index + L"_collisionID", collisionID);
 
-
-				pCollider = CObbCollider::Create(size, offset, right, up, forward);
+				spCollider = CObbCollider::Create(collisionID, size, offset);
 				break;
 			}
 			default:
@@ -253,31 +210,8 @@ void CCollisionC::AddColliderFromFile(void)
 			}
 			}
 
-			AddCollider(pCollider);
+			AddCollider(spCollider);
 		}
-	}
-}
-
-void CCollisionC::MergingBS(CCollider* pCollider)
-{
-	_float3 curOffset = pCollider->GetOffsetOrigin();
-	_float curRadius = pCollider->GetRadiusBS();
-
-	_float3 delta = m_offsetBS - curOffset;
-	_float sqDist = D3DXVec3Dot(&delta, &delta);
-
-	if ((m_radiusBS - curRadius) * (m_radiusBS - curRadius) >= sqDist)
-	{
-		if (m_radiusBS < curRadius)
-			m_radiusBS = curRadius;
-	}
-	else
-	{
-		_float dist = sqrt(sqDist);
-		m_radiusBS = (dist + curRadius + m_radiusBS) * 0.5f;
-		m_offsetBS = curOffset;
-		if (dist > EPSILON)
-			m_offsetBS += ((m_radiusBS - curRadius) / dist) * delta;
 	}
 }
 
@@ -344,4 +278,3 @@ void CCollisionC::ProcessTriggers(void)
 	m_vPreTriggers = m_vCurTriggers;
 	m_vCurTriggers.clear();
 }
-

@@ -45,7 +45,7 @@ public:
 	CScrollViewObject* AddButtonObjectData(Function function, Object object, std::wstring texture)
 	{
 		SP(CButton) button =
-			std::dynamic_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)ELayerID::UI, L"0"));
+			std::dynamic_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, L"0"));
 		button->GetTransform()->SetPosition(_float3(300, 0, 0.0f));
 		button->GetTransform()->SetSize(_float3(70.5f, 76, 0.1f));
 		button->SetButtonType(CButton::UP);

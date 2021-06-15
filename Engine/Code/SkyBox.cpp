@@ -30,8 +30,9 @@ SP(CObject) CSkyBox::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform	= spClone->GetComponent<CTransformC>();
-	spClone->m_spMesh		= spClone->GetComponent<CMeshC>();
+	spClone->m_spCubeTex	= spClone->GetComponent<CCubeTexC>();
 	spClone->m_spGraphics	= spClone->GetComponent<CGraphicsC>();
+	spClone->m_spShader		= spClone->GetComponent<CShaderC>();
 
 	return spClone;
 }
@@ -39,6 +40,14 @@ SP(CObject) CSkyBox::MakeClone(void)
 void CSkyBox::Awake(void)
 {
 	__super::Awake();
+
+	m_layerID	= (_int)ELayerID::Decoration;
+	m_dataID	= (_int)EDataID::Object;
+
+	m_spCubeTex		= AddComponent<CCubeTexC>();
+	m_spTexture		= AddComponent<CTextureC>();
+	m_spGraphics	= AddComponent<CGraphicsC>();
+	m_spShader		= AddComponent<CShaderC>();
 }
 
 void CSkyBox::Start(void)
@@ -46,6 +55,7 @@ void CSkyBox::Start(void)
 	__super::Start();
 	
 	m_spGraphics->SetRenderID((_int)ERenderID::Base);
+	m_spTransform->SetSize(40, 40, 40);
 }
 
 void CSkyBox::FixedUpdate(void)
@@ -57,13 +67,32 @@ void CSkyBox::FixedUpdate(void)
 void CSkyBox::Update(void)
 {
 	__super::Update();
-	
+
+	_mat camWorldMat = GET_MAIN_CAM->GetViewMatrix();
+	D3DXMatrixInverse(&camWorldMat, NULL, &camWorldMat);
+
+	m_spTransform->SetPosition(camWorldMat._41, camWorldMat._42, camWorldMat._43);
 }
 
 void CSkyBox::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
+}
+
+void CSkyBox::PreRender(LPD3DXEFFECT pEffect)
+{
+	m_spCubeTex->PreRender(m_spGraphics, pEffect);
+}
+
+void CSkyBox::Render(LPD3DXEFFECT pEffect)
+{
+	m_spCubeTex->Render(m_spGraphics, pEffect);
+}
+
+void CSkyBox::PostRender(LPD3DXEFFECT pEffect)
+{
+	m_spCubeTex->PostRender(m_spGraphics, pEffect);
 }
 
 void CSkyBox::OnDestroy(void)

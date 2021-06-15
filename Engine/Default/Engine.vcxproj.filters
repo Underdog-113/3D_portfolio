@@ -10,32 +10,8 @@
     <Filter Include="00.Engine\01.Graphics">
       <UniqueIdentifier>{f83f6e63-d8dc-4dd2-9eb0-c0b734aeae84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\02.Physics">
-      <UniqueIdentifier>{702f858d-2969-4004-b82d-f323c7b1b103}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\04.SceneManager">
-      <UniqueIdentifier>{fb4e83f5-844c-4445-a777-26e333a38dd9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\05.ObjectFactory">
-      <UniqueIdentifier>{8ebaa4e4-dd82-4b85-a564-7d71a3516777}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\00.WndApp">
       <UniqueIdentifier>{69c77b5d-f1dc-45ab-903b-c7cb92296df7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\09.ResourceStore">
-      <UniqueIdentifier>{ea484a99-b15c-421e-b902-7646530c1123}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\09.ResourceStore\00.MeshStore">
-      <UniqueIdentifier>{e7e5b28c-988c-4b6c-91d3-6d9f8a599a13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\09.ResourceStore\01.TextureStore">
-      <UniqueIdentifier>{1ae02dd2-7e79-4631-a02c-ac54fc8d7c3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\09.ResourceStore\02.DataStore">
-      <UniqueIdentifier>{931926fc-9ad1-41c3-a9b4-32091479d949}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\07.FrameRateController">
-      <UniqueIdentifier>{38a70b59-dd53-4fc0-af18-6adf8eca7078}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.Engine\08.Input">
       <UniqueIdentifier>{ef1a0333-13ba-49c8-b529-67682c7fd06b}</UniqueIdentifier>
@@ -55,50 +31,11 @@
     <Filter Include="01.Structure\04.Component">
       <UniqueIdentifier>{d4dcb60f-dae3-45e2-a99a-6ec302fd00ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision">
-      <UniqueIdentifier>{b7cc312e-82d4-4fa3-982e-1ef3086f1f4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\00.Collider">
-      <UniqueIdentifier>{a4208006-5598-41dd-ad6a-1afac1fe0d28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\06.FontManager">
-      <UniqueIdentifier>{bf242712-4848-4d8b-a162-1028edb58c52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\00.Collider\00.Point">
-      <UniqueIdentifier>{fa63533e-d9ea-4ce7-b7c6-4d93becafe5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\00.Collider\01.Ray">
-      <UniqueIdentifier>{7a37ccd4-f0ac-4f43-91bd-20e309574d6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\00.Collider\02.Sphere">
-      <UniqueIdentifier>{9a528bd9-5870-43a7-bd23-6eeaefe9197c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\00.Collider\03.AABB">
-      <UniqueIdentifier>{ac9a677d-f0fe-4a51-8bcb-0295bfb7634b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\00.Collider\04.OBB">
-      <UniqueIdentifier>{2cb03ccb-41d3-42ec-b291-707dbaf6f097}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\02.CollisionHelper">
-      <UniqueIdentifier>{0cc52ac8-bf2a-48e1-b67c-ab9b08c1a0c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\10.SoundManager">
-      <UniqueIdentifier>{16634f5c-b59c-4359-9e0d-c0898ba0f223}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\00.DeviceManager">
       <UniqueIdentifier>{24387e55-fa5c-41b1-9198-7ffb7925e8f8}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.Engine\01.Graphics\01.GraphicsManager">
       <UniqueIdentifier>{a817bcad-cf26-4e3b-9b0c-0a55f18aa60c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\11.Math">
-      <UniqueIdentifier>{e687ba19-18d1-497a-a08b-dd491d90af0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\11.Math\00.Helper">
-      <UniqueIdentifier>{bdfc07aa-f72a-4a34-b843-73e6c94ca4ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\01.Collision\01.CollisionManager">
-      <UniqueIdentifier>{0fd891e5-81c1-4c86-b8a0-39283d835edf}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects">
       <UniqueIdentifier>{7006401b-caab-448a-9765-72d18dcdeb02}</UniqueIdentifier>
@@ -156,9 +93,6 @@
     </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Texture">
       <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect">
-      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Structure\04.Component\00.RenderComponent">
       <UniqueIdentifier>{b2366ca8-632f-44c1-aba9-56a757b34e24}</UniqueIdentifier>
@@ -253,17 +187,8 @@
     <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
       <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\02.Physics\00.PhysX">
-      <UniqueIdentifier>{18eeae3a-7185-4613-9c3b-65d04367f50b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
       <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
-        </Filter>
-    <Filter Include="00.Engine\02.Physics\00.PhysX\00.Manager">
-      <UniqueIdentifier>{6bfdfff4-fd1a-4e55-a118-fc63a21a7f7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\02.Physics\00.PhysX\01.Helper">
-      <UniqueIdentifier>{7fcc7115-91b0-4570-8a60-ab4c3cc27eca}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\03.DecoObject">
       <UniqueIdentifier>{1b02dc11-2315-4209-8153-e83cb6df50b0}</UniqueIdentifier>
@@ -280,17 +205,92 @@
     <Filter Include="02.Objects\07.Slider">
       <UniqueIdentifier>{10562c83-8778-4b99-9d76-55d4a9df9c37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\02.Physics\00.PhysX\01.EventCallback">
-      <UniqueIdentifier>{7544be39-25d1-4aa1-9a4c-f5c1ba9753f9}</UniqueIdentifier>
+    <Filter Include="00.Engine\02.Collision">
+      <UniqueIdentifier>{b7cc312e-82d4-4fa3-982e-1ef3086f1f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\00.Collider">
+      <UniqueIdentifier>{a4208006-5598-41dd-ad6a-1afac1fe0d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\00.Collider\00.Point">
+      <UniqueIdentifier>{fa63533e-d9ea-4ce7-b7c6-4d93becafe5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\00.Collider\01.Ray">
+      <UniqueIdentifier>{7a37ccd4-f0ac-4f43-91bd-20e309574d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\00.Collider\02.Sphere">
+      <UniqueIdentifier>{9a528bd9-5870-43a7-bd23-6eeaefe9197c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\00.Collider\03.AABB">
+      <UniqueIdentifier>{ac9a677d-f0fe-4a51-8bcb-0295bfb7634b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\00.Collider\04.OBB">
+      <UniqueIdentifier>{2cb03ccb-41d3-42ec-b291-707dbaf6f097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\02.CollisionHelper">
+      <UniqueIdentifier>{0cc52ac8-bf2a-48e1-b67c-ab9b08c1a0c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\02.Collision\01.CollisionManager">
+      <UniqueIdentifier>{0fd891e5-81c1-4c86-b8a0-39283d835edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\03.SceneManager">
+      <UniqueIdentifier>{fb4e83f5-844c-4445-a777-26e333a38dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\04.ObjectFactory">
+      <UniqueIdentifier>{8ebaa4e4-dd82-4b85-a564-7d71a3516777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\05.FontManager">
+      <UniqueIdentifier>{bf242712-4848-4d8b-a162-1028edb58c52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\06.FrameRateController">
+      <UniqueIdentifier>{38a70b59-dd53-4fc0-af18-6adf8eca7078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\07.ResourceStore">
+      <UniqueIdentifier>{ea484a99-b15c-421e-b902-7646530c1123}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\07.ResourceStore\00.MeshStore">
+      <UniqueIdentifier>{e7e5b28c-988c-4b6c-91d3-6d9f8a599a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\07.ResourceStore\01.TextureStore">
+      <UniqueIdentifier>{1ae02dd2-7e79-4631-a02c-ac54fc8d7c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\07.ResourceStore\02.DataStore">
+      <UniqueIdentifier>{931926fc-9ad1-41c3-a9b4-32091479d949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\09.SoundManager">
+      <UniqueIdentifier>{16634f5c-b59c-4359-9e0d-c0898ba0f223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\10.Math">
+      <UniqueIdentifier>{e687ba19-18d1-497a-a08b-dd491d90af0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\10.Math\00.Helper">
+      <UniqueIdentifier>{bdfc07aa-f72a-4a34-b843-73e6c94ca4ec}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\08.Canvas">
       <UniqueIdentifier>{9aace7d5-1390-46ac-a5be-fa2cce8643f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader">
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader">
       <UniqueIdentifier>{16e92165-0119-4c23-a4fc-a9f9ceba2d22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader">
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader">
       <UniqueIdentifier>{695e9423-cbcc-4a72-94a5-8375b5aa1dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader">
+      <UniqueIdentifier>{3811655b-405c-460f-a9dd-7226bf6ed2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
+      <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
+      <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
+      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
+        <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader">
+      <UniqueIdentifier>{bbe26739-63c8-43a8-97cc-b2bb217589e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -310,28 +310,28 @@
       <Filter>01.Structure\02.Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SceneManager.cpp">
-      <Filter>00.Engine\04.SceneManager</Filter>
+      <Filter>00.Engine\03.SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshStore.cpp">
-      <Filter>00.Engine\09.ResourceStore\00.MeshStore</Filter>
+      <Filter>00.Engine\07.ResourceStore\00.MeshStore</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ResourceStore.cpp">
-      <Filter>00.Engine\09.ResourceStore</Filter>
+      <Filter>00.Engine\07.ResourceStore</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ObjectFactory.cpp">
-      <Filter>00.Engine\05.ObjectFactory</Filter>
+      <Filter>00.Engine\04.ObjectFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextureStore.cpp">
-      <Filter>00.Engine\09.ResourceStore\01.TextureStore</Filter>
+      <Filter>00.Engine\07.ResourceStore\01.TextureStore</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\InputManager.cpp">
       <Filter>00.Engine\08.Input</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FRC.cpp">
-      <Filter>00.Engine\07.FrameRateController</Filter>
+      <Filter>00.Engine\06.FrameRateController</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DataStore.cpp">
-      <Filter>00.Engine\09.ResourceStore\02.DataStore</Filter>
+      <Filter>00.Engine\07.ResourceStore\02.DataStore</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Engine.cpp">
       <Filter>00.Engine</Filter>
@@ -346,31 +346,31 @@
       <Filter>00.Engine\01.Graphics\00.Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SoundManager.cpp">
-      <Filter>00.Engine\10.SoundManager</Filter>
+      <Filter>00.Engine\09.SoundManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Collider.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SphereCollider.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\02.Sphere</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\02.Sphere</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AabbCollider.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\03.AABB</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\03.AABB</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ObbCollider.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\04.OBB</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\04.OBB</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RayCollider.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\01.Ray</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\01.Ray</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PointCollider.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\00.Point</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\00.Point</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CollisionHelper.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\02.CollisionHelper</Filter>
+      <Filter>00.Engine\02.Collision\02.CollisionHelper</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextManager.cpp">
-      <Filter>00.Engine\06.FontManager</Filter>
+      <Filter>00.Engine\05.FontManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CameraManager.cpp">
       <Filter>00.Engine\01.Graphics\02.Camera\00.Manager</Filter>
@@ -397,10 +397,10 @@
       <Filter>03.Components\00.System\02.PhysicsComponent\01.Collision</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MathHelper.cpp">
-      <Filter>00.Engine\11.Math\00.Helper</Filter>
+      <Filter>00.Engine\10.Math\00.Helper</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CollisionManager.cpp">
-      <Filter>00.Engine\02.Physics\01.Collision\01.CollisionManager</Filter>
+      <Filter>00.Engine\02.Collision\01.CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Object.cpp">
       <Filter>01.Structure\03.Objects</Filter>
@@ -448,7 +448,7 @@
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RectTexC.cpp">
-      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RenderComponent.cpp">
       <Filter>01.Structure\04.Component\00.RenderComponent</Filter>
@@ -528,25 +528,29 @@
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PhysicsManager.cpp">
-      <Filter>00.Engine\02.Physics\00.PhysX\00.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PhysicsHelper.cpp" />
     <ClCompile Include="..\Code\DecoObject.cpp">
       <Filter>02.Objects\03.DecoObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PhysicsC.cpp" />
-    <ClCompile Include="..\Code\SimulationEventCallback.cpp">
-      <Filter>00.Engine\02.Physics\00.PhysX\01.EventCallback</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Canvas.cpp">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ClicularGaugeShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\DamageFontShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CatPawShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeTexC.cpp">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CelShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkyBoxShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -584,31 +588,31 @@
       <Filter>01.Structure\02.Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SceneManager.h">
-      <Filter>00.Engine\04.SceneManager</Filter>
+      <Filter>00.Engine\03.SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshStore.h">
-      <Filter>00.Engine\09.ResourceStore\00.MeshStore</Filter>
+      <Filter>00.Engine\07.ResourceStore\00.MeshStore</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ResourceStore.h">
-      <Filter>00.Engine\09.ResourceStore</Filter>
+      <Filter>00.Engine\07.ResourceStore</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\EngineComponents.h">
       <Filter>99.Include</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ObjectFactory.h">
-      <Filter>00.Engine\05.ObjectFactory</Filter>
+      <Filter>00.Engine\04.ObjectFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextureStore.h">
-      <Filter>00.Engine\09.ResourceStore\01.TextureStore</Filter>
+      <Filter>00.Engine\07.ResourceStore\01.TextureStore</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\InputManager.h">
       <Filter>00.Engine\08.Input</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FRC.h">
-      <Filter>00.Engine\07.FrameRateController</Filter>
+      <Filter>00.Engine\06.FrameRateController</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DataStore.h">
-      <Filter>00.Engine\09.ResourceStore\02.DataStore</Filter>
+      <Filter>00.Engine\07.ResourceStore\02.DataStore</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Engine.h">
       <Filter>00.Engine</Filter>
@@ -626,31 +630,31 @@
       <Filter>99.Include</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SoundManager.h">
-      <Filter>00.Engine\10.SoundManager</Filter>
+      <Filter>00.Engine\09.SoundManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SphereCollider.h">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\02.Sphere</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\02.Sphere</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Collider.h">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AabbCollider.h">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\03.AABB</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\03.AABB</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ObbCollider.h">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\04.OBB</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\04.OBB</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RayCollider.h">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\01.Ray</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\01.Ray</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\PointCollider.h">
-      <Filter>00.Engine\02.Physics\01.Collision\00.Collider\00.Point</Filter>
+      <Filter>00.Engine\02.Collision\00.Collider\00.Point</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CollisionHelper.h">
-      <Filter>00.Engine\02.Physics\01.Collision\02.CollisionHelper</Filter>
+      <Filter>00.Engine\02.Collision\02.CollisionHelper</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextManager.h">
-      <Filter>00.Engine\06.FontManager</Filter>
+      <Filter>00.Engine\05.FontManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CameraManager.h">
       <Filter>00.Engine\01.Graphics\02.Camera\00.Manager</Filter>
@@ -677,10 +681,10 @@
       <Filter>03.Components\00.System\02.PhysicsComponent\01.Collision</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MathHelper.h">
-      <Filter>00.Engine\11.Math\00.Helper</Filter>
+      <Filter>00.Engine\10.Math\00.Helper</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CollisionManager.h">
-      <Filter>00.Engine\02.Physics\01.Collision\01.CollisionManager</Filter>
+      <Filter>00.Engine\02.Collision\01.CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Object.h">
       <Filter>01.Structure\03.Objects</Filter>
@@ -728,7 +732,7 @@
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RectTexC.h">
-      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RenderComponent.h">
       <Filter>01.Structure\04.Component\00.RenderComponent</Filter>
@@ -808,25 +812,29 @@
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\PhysicsManager.h">
-      <Filter>00.Engine\02.Physics\00.PhysX\00.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\PhysicsHelper.h" />
     <ClInclude Include="..\Header\DecoObject.h">
       <Filter>02.Objects\03.DecoObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\PhysicsC.h" />
-    <ClInclude Include="..\Header\SimulationEventCallback.h">
-      <Filter>00.Engine\02.Physics\00.PhysX\01.EventCallback</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Canvas.h">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ClicularGaugeShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\DamageFontShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CatPawShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CircularGaugeShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CubeTexC.h">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CelShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SkyBoxShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -849,13 +857,22 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.CircularGaugeShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.DamageFontShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
+    </FxCompile>      
   </ItemGroup>
 </Project>

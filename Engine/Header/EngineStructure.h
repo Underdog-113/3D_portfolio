@@ -43,6 +43,15 @@ namespace Engine
 	}VERTEX_VNT;
 	const _uint FVF_VNT = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
 
+	typedef struct _VertexTexF3
+	{
+		_float3 position;
+		_float3 texUV;
+	}VERTEX_VT3;
+
+	const _uint FVF_VT3 = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE3(0);
+
+
 	typedef struct _VertexScreen
 	{
 		_float4 position;
@@ -172,6 +181,8 @@ namespace Engine
 #pragma endregion
 	struct _TextCom
 	{
+		_TextCom() {}
+
 		_TextCom(std::wstring message, _float2 position, _float2 boxSize, _int fontSize, DWORD alignment, D3DXCOLOR color, _bool isVisible)
 		{
 			m_text.m_message = message;

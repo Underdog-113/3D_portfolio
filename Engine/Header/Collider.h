@@ -7,37 +7,38 @@ BEGIN(Engine)
 class ENGINE_DLL CCollider abstract
 {
 protected:
-	explicit						CCollider			(void);
-	virtual						   ~CCollider			(void);
+	explicit								CCollider			(void);
+	virtual								   ~CCollider			(void);
 
 public:
-					void			Free				(void);
-	virtual			CCollider*		MakeClone			(CCollisionC* pCC) PURE;
+	virtual			SP(CCollider)			MakeClone			(CCollisionC* pCC) PURE;
 
-	virtual			void			Awake				(void) PURE;
-	virtual			void			OnDestroy			(void) PURE;
+	virtual			void					Awake				(void) PURE;
+	virtual			void					OnDestroy			(void) PURE;
 
-	virtual			void			OnEnable			(void) PURE;
-	virtual			void			OnDisable			(void) PURE;
+	virtual			void					OnEnable			(void) PURE;
+	virtual			void					OnDisable			(void) PURE;
 
 //Interface
 public:
-	virtual			void			UpdatePosition		(void) PURE;
+	virtual			void					UpdatePosition		(void) PURE;
 
 protected:
-	virtual			void			MakeBS				(void) PURE;
+	virtual			void					MakeBS				(void) PURE;
 protected:
-	GETTOR_SETTOR	(_int,			m_colliderType,		-1,				ColliderType)
-	GETTOR_SETTOR	(CCollisionC*,	m_pOwner,			nullptr,		Owner)
+	GETTOR_SETTOR	(CCollisionC*,			m_pOwner,			nullptr,		Owner)
 
-	GETTOR			(PxShape*,		m_pShape,			nullptr,		Shape)
-	GETTOR			(_int,			m_collisionType,	UNDEFINED,		CollisionType)
-	//ºÎ¸ð »ó´ëÁÂÇ¥
-	GETTOR_SETTOR	(_float3,		m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
-	//½ÇÁ¦ ÁÂÇ¥
-	GETTOR_SETTOR	(_float3,		m_offset,			ZERO_VECTOR,	Offset)
-	//BoundingSphereÀÇ ¹ÝÁö¸§.
-	GETTOR_SETTOR	(_float,		m_radiusBS,			0,				RadiusBS)	
+	GETTOR_SETTOR	(_int,					m_collisionID,		UNDEFINED,		CollisionID)
+	GETTOR_SETTOR	(_int,					m_colliderType,		UNDEFINED,		ColliderType)
+
+	GETTOR_SETTOR	(_bool,					m_isTrigger,		false,			IsTrigger)
+
+	//ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥
+	GETTOR_SETTOR	(_float3,				m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
+	GETTOR_SETTOR	(_float3,				m_offset,			ZERO_VECTOR,	Offset)
+	//BoundingSphereï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	GETTOR_SETTOR	(_float,				m_radiusBS,			0,				RadiusBS)
 };
 
 END

@@ -60,13 +60,9 @@ void CMainMapTool::Start(void)
 	Engine::CGraphicsManager::GetInstance()->Start();
 	Engine::CCameraManager::GetInstance()->Start();
 	Engine::CTextManager::GetInstance()->Start();
-
-//<<<<<<< HEAD
 	Engine::CCollisionManager::GetInstance()->Start((_int)EColliderID::NumOfColliderID);
 	Engine::CCollisionManager::GetInstance()->InitCollisionMap();
-//=======
-	//Engine::CCollisionManager::GetInstance()->Start((_int)ECollisionID::NumOfColliderID);
-//>>>>>>> 0be8f21ad0ba9e8d3eae8a19b9ea9d71b985be08
+
 	Engine::CRenderTargetManager::GetInstance()->Start();
 
 	// temp controller

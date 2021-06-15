@@ -2,6 +2,9 @@
 #define WOOSCENE_H
 
 #include "ClientScene.h"
+
+class CStageController;
+
 class CWooScene final :public CClientScene
 {
 private:
@@ -27,8 +30,12 @@ public:
 private:
 					void				InitPrototypes		(void) override;
 
-					SP(Engine::CObject) m_spSakura = nullptr;
+					Engine::CObject* m_pivot;
+					SP(Engine::CObject) m_spSpider;
+
 					_uint m_iIndex = 0;
+
+					CStageController* m_pController = nullptr;
 };
 
 #endif

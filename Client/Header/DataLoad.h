@@ -14,7 +14,7 @@ public:
 	void DeleGatePop(void(CDataLoad::* function)(Engine::CScene*), CDataLoad* dataload);
 	void Load(Engine::CScene* pScene);
 
-private:
+public:
 	// 이미지 로드
 	void ImageLoad(Engine::CScene* pScene);
 	

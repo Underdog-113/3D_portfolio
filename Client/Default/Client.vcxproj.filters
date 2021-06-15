@@ -118,9 +118,6 @@
     <Filter Include="02.Objects\04.UI\00.Button">
       <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\04.UI\00.Button\00.Manager">
-      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\04.UI\01.ScrollView">
       <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
     </Filter>
@@ -142,32 +139,8 @@
     <Filter Include="03.Component\00.UI\00.UiAnimCtr">
       <UniqueIdentifier>{6f618887-1947-493e-91fb-7be9673b0a6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\NewFilter1">
-      <UniqueIdentifier>{8dd069c6-6cc9-4380-9307-4bf16d87bad1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\NewFilter2">
-      <UniqueIdentifier>{e203b4f8-512a-4f19-a409-befd6efb4577}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\NewFilter3">
-      <UniqueIdentifier>{e883c7ed-0bd7-4e2f-802e-0973c7198fb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\NewFilter4">
-      <UniqueIdentifier>{ead88a62-4bf9-459d-90eb-18691c79c998}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\NewFilter5">
-      <UniqueIdentifier>{390502bb-37b5-44b5-a79b-6d5e2a11c73d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\NewFilter6">
-      <UniqueIdentifier>{2a933889-871f-4d7d-97af-e77cee502da8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\NewFilter7">
-      <UniqueIdentifier>{30860560-a729-4718-abad-bf80d65e2ecf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI\01.DamageFont">
       <UniqueIdentifier>{51254a6d-c0d4-4550-9140-860bbe8988e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.UI\00.Button\01.ButtonFunction">
-      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
     </Filter>
     <Filter Include="06.DataLoad">
       <UniqueIdentifier>{4e050859-d9ff-4601-be3e-ce23afd1159b}</UniqueIdentifier>
@@ -178,8 +151,53 @@
     <Filter Include="08.ObjectPool\DamageObjectPool">
       <UniqueIdentifier>{d1895693-21fc-4367-bb77-affbec198982}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\03.ThreeStageScene">
+      <UniqueIdentifier>{8dd069c6-6cc9-4380-9307-4bf16d87bad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\04.StageSelectionScene">
+      <UniqueIdentifier>{e203b4f8-512a-4f19-a409-befd6efb4577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\05.ReadyToSortieScene">
+      <UniqueIdentifier>{e883c7ed-0bd7-4e2f-802e-0973c7198fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\06.OneStageScene">
+      <UniqueIdentifier>{ead88a62-4bf9-459d-90eb-18691c79c998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\07.MainRoomScene">
+      <UniqueIdentifier>{390502bb-37b5-44b5-a79b-6d5e2a11c73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\08.TwoStageScene">
+      <UniqueIdentifier>{2a933889-871f-4d7d-97af-e77cee502da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\09.PartySettingScene">
+      <UniqueIdentifier>{30860560-a729-4718-abad-bf80d65e2ecf}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\CatPaw">
       <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\03.Timer">
+      <UniqueIdentifier>{74ab1825-01ae-44ed-a11d-f1acc8db8642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager">
+      <UniqueIdentifier>{aaee55bd-5edf-4507-bcc2-29434ee64096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\04.UI\00.Button\00.ButtonFunction">
+      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.ButtonManager">
+      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\01.BattleUiManager">
+      <UniqueIdentifier>{f3403a50-55bf-4e14-9ea9-ae5e6f3ecc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\04.HitsUi">
+      <UniqueIdentifier>{70fedf36-cfa3-4296-ba3a-c07e95a374da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\02.RotationUi">
+      <UniqueIdentifier>{1b2e04ec-4118-4847-8f93-5755640c0439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\05.LifeObject">
+      <UniqueIdentifier>{b63dddbc-67bd-4f8e-852f-ea09381d74a9}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\Pistol">
       <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
@@ -310,7 +328,7 @@
       <Filter>02.Objects\04.UI\01.ScrollView</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonManager.h">
-      <Filter>02.Objects\04.UI\00.Button\00.Manager</Filter>
+      <Filter>09.Manager\00.ButtonManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ClientScene.h">
       <Filter>01.Scene</Filter>
@@ -321,35 +339,38 @@
     <ClInclude Include="..\Header\StageController.h">
       <Filter>97.TempClass_ForDevelop</Filter>
     </ClInclude>
+    <ClInclude Include="FSMDefine_Spider.h">
+      <Filter>02.Objects\03.Monster\MO_Spider\FSM</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\UiAnimCtrC.h">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MainRoomScene.h">
-      <Filter>01.Scene\NewFilter5</Filter>
+      <Filter>01.Scene\07.MainRoomScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\OneStageScene.h">
-      <Filter>01.Scene\NewFilter4</Filter>
+      <Filter>01.Scene\06.OneStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ReadyToSortieScene.h">
-      <Filter>01.Scene\NewFilter3</Filter>
+      <Filter>01.Scene\05.ReadyToSortieScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StageSelectionScene.h">
-      <Filter>01.Scene\NewFilter2</Filter>
+      <Filter>01.Scene\04.StageSelectionScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ThreeStageScene.h">
-      <Filter>01.Scene\NewFilter1</Filter>
+      <Filter>01.Scene\03.ThreeStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TwoStageScene.h">
-      <Filter>01.Scene\NewFilter6</Filter>
+      <Filter>01.Scene\08.TwoStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\PartySettingScene.h">
-      <Filter>01.Scene\NewFilter7</Filter>
+      <Filter>01.Scene\09.PartySettingScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DamageFontC.h">
       <Filter>03.Component\00.UI\01.DamageFont</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonFunction.h">
-      <Filter>02.Objects\04.UI\00.Button\01.ButtonFunction</Filter>
+      <Filter>02.Objects\04.UI\00.Button\00.ButtonFunction</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DataLoad.h">
       <Filter>06.DataLoad</Filter>
@@ -376,6 +397,19 @@
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
+    <ClInclude Include="..\Header\RotationUiC.h">
+      <Filter>03.Component\00.UI\02.RotationUi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BattleUiManager.h">
+      <Filter>09.Manager\01.BattleUiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TimerUi.h">
+      <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\HitsUiC.h">
+      <Filter>03.Component\00.UI\04.HitsUi</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMDefine_Kiana.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -481,7 +515,7 @@
       <Filter>02.Objects\04.UI\01.ScrollView</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonManager.cpp">
-      <Filter>02.Objects\04.UI\00.Button\00.Manager</Filter>
+      <Filter>09.Manager\00.ButtonManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ClientScene.cpp">
       <Filter>01.Scene</Filter>
@@ -496,31 +530,31 @@
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MainRoomScene.cpp">
-      <Filter>01.Scene\NewFilter5</Filter>
+      <Filter>01.Scene\07.MainRoomScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\OneStageScene.cpp">
-      <Filter>01.Scene\NewFilter4</Filter>
+      <Filter>01.Scene\06.OneStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
-      <Filter>01.Scene\NewFilter3</Filter>
+      <Filter>01.Scene\05.ReadyToSortieScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StageSlectionScene.cpp">
-      <Filter>01.Scene\NewFilter2</Filter>
+      <Filter>01.Scene\04.StageSelectionScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ThreeStageScene.cpp">
-      <Filter>01.Scene\NewFilter1</Filter>
+      <Filter>01.Scene\03.ThreeStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TwoStageScene.cpp">
-      <Filter>01.Scene\NewFilter6</Filter>
+      <Filter>01.Scene\08.TwoStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PartySettingScene.cpp">
-      <Filter>01.Scene\NewFilter7</Filter>
+      <Filter>01.Scene\09.PartySettingScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageFontC.cpp">
       <Filter>03.Component\00.UI\01.DamageFont</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonFunction.cpp">
-      <Filter>02.Objects\04.UI\00.Button\01.ButtonFunction</Filter>
+      <Filter>02.Objects\04.UI\00.Button\00.ButtonFunction</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageObjectPool.cpp">
       <Filter>08.ObjectPool\DamageObjectPool</Filter>
@@ -544,6 +578,21 @@
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
+    <ClCompile Include="..\Code\RotationUiC.cpp">
+      <Filter>03.Component\00.UI\02.RotationUi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleUiManager.cpp">
+      <Filter>09.Manager\01.BattleUiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TimerUi.cpp">
+      <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HitsUiC.cpp">
+      <Filter>03.Component\00.UI\04.HitsUi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LifeObjectC.cpp">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

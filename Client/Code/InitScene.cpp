@@ -10,8 +10,10 @@
 #include "WooScene.h"
 #include "YongScene.h"
 #include "DongScene.h"
+
 #include "MainRoomScene.h"
 #include "StageSelectionScene.h"
+#include "OneStageScene.h"
 #pragma endregion
 
 CInitScene::CInitScene()
@@ -64,7 +66,7 @@ void CInitScene::Start(void)
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
 
 	m_pBackground =
-		ADD_CLONE(L"EmptyObject", false, (_int)ELayerID::UI, L"Background1");
+		ADD_CLONE(L"EmptyObject", false, (_int)Engine::ELayerID::UI, L"Background1");
 
 	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
 	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
@@ -90,7 +92,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"BG");
+			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"StaticBG");
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();
@@ -116,7 +118,7 @@ void CInitScene::Update(void)
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(CDongScene::Create(), false);
+				m_pLoading = CLoading::Create(COneStageScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))

@@ -9,35 +9,35 @@ CAabbCollider::CAabbCollider()
 
 CAabbCollider::~CAabbCollider()
 {
+	OnDestroy();
 }
 
-CAabbCollider * CAabbCollider::Create(_float3 size, _float3 offset)
+SP(CAabbCollider) CAabbCollider::Create(_int collisionID, _float3 size, _float3 offset)
 {
-	CAabbCollider*	pAabb = new CAabbCollider;
-	pAabb->SetOffsetOrigin(offset);
-	pAabb->SetOffset(offset);
-	pAabb->SetSize(size);
-	pAabb->SetHalfSize(size / 2.f);
-	pAabb->Awake();
+	SP(CAabbCollider) spInstance(new CAabbCollider, SmartDeleter<CAabbCollider>);
+	spInstance->SetCollisionID(collisionID);
+	spInstance->SetOffsetOrigin(offset);
+	spInstance->SetOffset(offset);
+	spInstance->SetSize(size);
+	spInstance->SetHalfSize(size / 2.f);
+	spInstance->Awake();
 
-	return pAabb;
+	return spInstance;
 }
 
-CCollider * CAabbCollider::MakeClone(CCollisionC * pCC)
+SP(CCollider) CAabbCollider::MakeClone(CCollisionC * pCC)
 {
-	CAabbCollider* pAabbClone = new CAabbCollider;
-	pAabbClone->SetOffsetOrigin(m_offsetOrigin);
-	pAabbClone->SetOffset(m_offsetOrigin);
-	pAabbClone->SetSize(m_size);
-	pAabbClone->SetHalfSize(m_halfSize);
+	SP(CAabbCollider) spClone(new CAabbCollider, SmartDeleter<CAabbCollider>);
+	spClone->SetCollisionID(m_collisionID);
+	spClone->SetSize(m_size);
+	spClone->SetHalfSize(m_halfSize);
+	spClone->SetOffsetOrigin(m_offsetOrigin);
+	spClone->SetOffset(m_offsetOrigin);
+	spClone->SetRadiusBS(m_radiusBS);
+	spClone->SetColliderType(m_colliderType);
+	spClone->SetOwner(pCC);
 
-	pAabbClone->SetRadiusBS(m_radiusBS);
-
-	pAabbClone->SetColliderType(m_colliderType);
-
-	pAabbClone->SetOwner(pCC);
-
-	return pAabbClone;
+	return spClone;
 }
 
 void CAabbCollider::Awake(void)

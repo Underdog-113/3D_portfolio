@@ -6,14 +6,15 @@
 BEGIN(Engine)
 class ENGINE_DLL CSphereCollider final : public CCollider
 {
+	SMART_DELETER_REGISTER
 private:
 	explicit							CSphereCollider		(void);
 									   ~CSphereCollider		(void);
 public:
-	static			CSphereCollider*	Create				(_float radius = 1,
+	static			SP(CCollider)		Create				(_int collisionID, _float radius = 1.f,
 															 _float3 offset = _float3(0, 0, 0));
 					
-					CCollider*			MakeClone			(CCollisionC* pCC) override;
+					SP(CCollider)		MakeClone			(CCollisionC* pCC) override;
 					
 					void				Awake				(void) override;
 					void				OnDestroy			(void) override;

@@ -82,7 +82,7 @@
     <OutDir>$(SolutionDir)Bin/Client/Debug/x64/</OutDir>
     <IntDir>$(SolutionDir)Log/Client/Debug/x64/</IntDir>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)ExternalLibrary\PhysX\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Reference\Library\Debug\;$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Reference\Library\Debug\;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
     <TargetName>HonkaiImpact</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -183,9 +183,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
-    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
+    <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
@@ -232,25 +234,30 @@
     <ClInclude Include="..\Header\OneStageScene.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
+    <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
+    <ClInclude Include="..\Header\TimerUi.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
+    <ClInclude Include="FSMDefine_Kiana.h" />
+    <ClInclude Include="FSMDefine_Spider.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
-    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
+    <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
     <ClCompile Include="..\Code\DamageFontC.cpp" />
@@ -271,11 +278,13 @@
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
+    <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />
@@ -291,10 +300,12 @@
     <ClCompile Include="..\Code\OneStageScene.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
+    <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
+    <ClCompile Include="..\Code\TimerUi.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />

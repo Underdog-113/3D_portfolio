@@ -10,6 +10,7 @@
 #include "TextureC.h"
 #include "DebugC.h"
 #include "RectTexC.h"
+#include "CubeTexC.h"
 #include "MeshC.h"
 #include "ShaderC.h"
 #include "GraphicsC.h"

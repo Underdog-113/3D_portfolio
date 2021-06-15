@@ -19,14 +19,14 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
-	void AddDamageFontInit(_float upSpped, _float enableTime, _int damage, std::wstring color);
+	void AddDamageFontInit(_float upSpped, _float lifeTime, _int damage, std::wstring color);
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
 	_int m_damage;
 	_float m_upSpeed;
-	_float m_enableTime;
-	_float m_oldEnableTime;
+	_float m_lifeTime;
+	_float m_oldLifeTime;
 };
 #endif
 

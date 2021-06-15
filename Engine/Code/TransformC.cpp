@@ -194,19 +194,6 @@ void CTransformC::SetForwardUp(_float3 forward, _float3 up)
 	m_up		= up;
 }
 
-PxTransform CTransformC::ToPxTrasnform(void)
-{
-
-	return PxTransform(ToPxVec3(m_position), PxQuat(PxIdentity));
-}
-
-void CTransformC::SetPxTransform(PxTransform pxTransform)
-{
-	m_position = _float3(pxTransform.p.x, pxTransform.p.y, pxTransform.p.z);
-
-	_quat q(pxTransform.q.x, pxTransform.q.y, pxTransform.q.z, pxTransform.q.w);
-	SetRotation(GET_MATH->QuatToRad(q));
-}
 
 void CTransformC::AddPosition(_float3 position)
 {

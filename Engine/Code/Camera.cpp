@@ -53,7 +53,12 @@ void CCamera::Awake(void)
 void CCamera::Start(void)
 {
 	__super::Start();
-	m_pCamRayCollider = static_cast<Engine::CRayCollider*>(m_spCollision->GetColliders()[0]);
+
+	_float3 camStartPos;
+	m_pScene->GET_VALUE(m_isStatic, m_dataID, m_objectKey, L"camStartPos", camStartPos);
+	m_spTransform->SetPosition(camStartPos);
+
+	m_pCamRayCollider = static_cast<Engine::CRayCollider*>(m_spCollision->GetColliders()[0].get());
 	m_pFrustum = CFrustum::Create(this);
 }
 
