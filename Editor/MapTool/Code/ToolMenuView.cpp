@@ -110,14 +110,16 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON5, &CToolMenuView::OnBnClickedPositionBtn)
 	ON_BN_CLICKED(IDC_BUTTON6, &CToolMenuView::OnBnClickedRotationBtn)
 	ON_BN_CLICKED(IDC_BUTTON7, &CToolMenuView::OnBnClickedScaleBtn)
-	ON_BN_CLICKED(IDC_BUTTON1, &CToolMenuView::OnBnClickedSaveBtn)
-	ON_BN_CLICKED(IDC_BUTTON2, &CToolMenuView::OnBnClickedLoadBtn)
 	ON_LBN_SELCHANGE(IDC_LIST4, &CToolMenuView::OnLbnSelchangeTextureList)
 	ON_CBN_SELCHANGE(IDC_COMBO4, &CToolMenuView::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_BUTTON3, &CToolMenuView::OnBnClickedCreatePrefBtn)
 	ON_BN_CLICKED(IDC_BUTTON16, &CToolMenuView::OnBnClickedCreateMesh)
 	ON_BN_CLICKED(IDC_CHECK9, &CToolMenuView::OnBnClickedCurObjectNameChk)
 	ON_BN_CLICKED(IDC_CHECK2, &CToolMenuView::OnBnClickedShowObjectChk)
+
+	/* save & load */
+	ON_BN_CLICKED(IDC_BUTTON1, &CToolMenuView::OnBnClickedSaveBtn)
+	ON_BN_CLICKED(IDC_BUTTON2, &CToolMenuView::OnBnClickedLoadBtn)
 
 	/* collision */
 	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
@@ -908,21 +910,24 @@ void CToolMenuView::OnBnClickedLoadBtn()
 		}
 		else if (!wcscmp(L"collider", dataTag))
 		{
-			if (spObject->GetComponent<Engine::CCollisionC>() == nullptr)
+			if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
 			{
 				spObject->AddComponent<Engine::CCollisionC>();
 				spObject->AddComponent<Engine::CDebugC>();
 			}
 
 			std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
-			CString collisionID = _wcsdup(wstr.c_str());
+			if (L"collisionID" == wstr)
+				colID = WstrToInt(dataValue);
 
 			std::getline(ifsLoad, strLine);
-			CString type = Engine::StrToWStr(strLine).c_str();
+			vStr = split(strLine, '=');
+			vStrTag = split(vStr[0], '_');
+			std::wstring type = Engine::StrToWStr(vStrTag[3]);
 
 			_int index = StrToInt(vStr[1]);
 
-			if (!wcscmp(L"type", type))
+			if (L"type" == type)
 			{
 				switch (index)
 				{
@@ -941,7 +946,6 @@ void CToolMenuView::OnBnClickedLoadBtn()
 					vStr = split(strLine, '=');
 					vStr = split(vStr[1], ',');
 					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-					colID = StrToInt(collisionID);
 
 					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
 					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
@@ -967,7 +971,6 @@ void CToolMenuView::OnBnClickedLoadBtn()
 					vStr = split(strLine, '=');
 					vStr = split(vStr[1], ',');
 					rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-					colID = StrToInt(collisionID);
 
 					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
 					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
@@ -1029,7 +1032,9 @@ void CToolMenuView::OnBnClickedCreateAABBColliderBtn()
 		ECollisionID collisionID;
 		m_colliderID.GetWindowTextW(cstrIdx);
 
-		if (L"Floor" == cstrIdx)
+		if (L"" == cstrIdx)
+			return;
+		else if (L"Floor" == cstrIdx)
 			collisionID = ECollisionID::Floor;
 		else if (L"Wall" == cstrIdx)
 			collisionID = ECollisionID::Wall;
@@ -1098,7 +1103,9 @@ void CToolMenuView::OnBnClickedCreateObbColliderBtn()
 		ECollisionID collisionID;
 		m_colliderID.GetWindowTextW(cstrIdx);
 		
-		if (L"Floor" == cstrIdx)
+		if (L"" == cstrIdx)
+			return;
+		else if (L"Floor" == cstrIdx)
 			collisionID = ECollisionID::Floor;
 		else if (L"Wall" == cstrIdx)
 			collisionID = ECollisionID::Wall;
@@ -1174,7 +1181,9 @@ void CToolMenuView::OnBnClickedCreateRayColliderBtn()
 		ECollisionID collisionID;
 		m_colliderID.GetWindowTextW(cstrIdx);
 
-		if (L"Floor" == cstrIdx)
+		if (L"" == cstrIdx)
+			return;
+		else if (L"Floor" == cstrIdx)
 			collisionID = ECollisionID::Floor;
 		else if (L"Wall" == cstrIdx)
 			collisionID = ECollisionID::Wall;
@@ -1345,6 +1354,7 @@ void CToolMenuView::OnCbnSelchangeAABBList()
 	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
 	_int idx = WstrToInt(wstr);
 
+	_int colID = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetCollisionID();
 	_float3 size = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetSize();
 	_float3 offset = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 
@@ -1358,6 +1368,27 @@ void CToolMenuView::OnCbnSelchangeAABBList()
 
 	m_aabbSize.SetWindowTextW(wstrSize.c_str());
 	m_aabbOffset.SetWindowTextW(wstrOffset.c_str());
+
+	switch (colID)
+	{
+	case 3:
+		m_colliderID.SetCurSel(0);
+		break;
+	case 4:
+		m_colliderID.SetCurSel(1);
+		break;
+	case 5:
+		m_colliderID.SetCurSel(2);
+		break;
+	case 6:
+		m_colliderID.SetCurSel(3);
+		break;
+	case 7:
+		m_colliderID.SetCurSel(4);
+		break;
+	}
+
+	
 }
 
 void CToolMenuView::OnCbnSelchangeRayList()
@@ -1376,6 +1407,7 @@ void CToolMenuView::OnCbnSelchangeRayList()
 	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
 	_int idx = WstrToInt(wstr);
 
+	_int colID = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetCollisionID();
 	_float3 offset = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 	_float3 dir = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetDirection();
 	_float len = static_cast<Engine::CRayCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetLength();
@@ -1395,6 +1427,25 @@ void CToolMenuView::OnCbnSelchangeRayList()
 	m_rayDir.SetWindowTextW(wstrDir.c_str());
 	m_rayLen.SetWindowTextW(wstrLen.c_str());
 	m_rayType.SetCurSel((_int)type);
+
+	switch (colID)
+	{
+	case 3:
+		m_colliderID.SetCurSel(0);
+		break;
+	case 4:
+		m_colliderID.SetCurSel(1);
+		break;
+	case 5:
+		m_colliderID.SetCurSel(2);
+		break;
+	case 6:
+		m_colliderID.SetCurSel(3);
+		break;
+	case 7:
+		m_colliderID.SetCurSel(4);
+		break;
+	}
 }
 
 void CToolMenuView::OnCbnSelchangeObbList()
@@ -1413,6 +1464,7 @@ void CToolMenuView::OnCbnSelchangeObbList()
 	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
 	_int idx = WstrToInt(wstr);
 
+	_int colID = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetCollisionID();
 	_float3 offset = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 	_float3 size = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetSize();
 	_float3 rotOffset = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetRotOffset();
@@ -1432,6 +1484,25 @@ void CToolMenuView::OnCbnSelchangeObbList()
 	m_obbOffset.SetWindowTextW(wstrOffset.c_str());
 	m_obbSize.SetWindowTextW(wstrSize.c_str());
 	m_obbRotOffset.SetWindowTextW(wstrRotOffset.c_str());
+
+	switch (colID)
+	{
+	case 3:
+		m_colliderID.SetCurSel(0);
+		break;
+	case 4:
+		m_colliderID.SetCurSel(1);
+		break;
+	case 5:
+		m_colliderID.SetCurSel(2);
+		break;
+	case 6:
+		m_colliderID.SetCurSel(3);
+		break;
+	case 7:
+		m_colliderID.SetCurSel(4);
+		break;
+	}
 }
 
 void CToolMenuView::OnBnClickedSelectedAABBCol()
@@ -1488,6 +1559,25 @@ void CToolMenuView::OnBnClickedModifyAABBColBtn()
 			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
 		);
 
+		CString cstrIdx;
+		ECollisionID collisionID;
+		m_colliderID.GetWindowTextW(cstrIdx);
+
+		if (L"" == cstrIdx)
+			return;
+		else if (L"Floor" == cstrIdx)
+			collisionID = ECollisionID::Floor;
+		else if (L"Wall" == cstrIdx)
+			collisionID = ECollisionID::Wall;
+		else if (L"Player" == cstrIdx)
+			collisionID = ECollisionID::Player;
+		else if (L"Enemy" == cstrIdx)
+			collisionID = ECollisionID::Enemy;
+		else if (L"Trigger" == cstrIdx)
+			collisionID = ECollisionID::Trigger;
+
+
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetCollisionID((_int)collisionID);
 		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(offset);
 		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffset(offset);
 		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetSize(size);
@@ -1533,7 +1623,7 @@ void CToolMenuView::OnBnClickedModifyObbColBtn()
 			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
 		);
 
-		/* right */
+		/* rotOffset */
 		str = CStrToStr(cstrRotOffset);
 		std::vector<std::string> vStrRotOffset = split(str, ',');
 
@@ -1543,8 +1633,28 @@ void CToolMenuView::OnBnClickedModifyObbColBtn()
 			WstrToFloat(Engine::StrToWStr(vStrRotOffset[2]))
 		);
 
+		CString cstrIdx;
+		ECollisionID collisionID;
+		m_colliderID.GetWindowTextW(cstrIdx);
+
+		if (L"" == cstrIdx)
+			return;
+		else if (L"Floor" == cstrIdx)
+			collisionID = ECollisionID::Floor;
+		else if (L"Wall" == cstrIdx)
+			collisionID = ECollisionID::Wall;
+		else if (L"Player" == cstrIdx)
+			collisionID = ECollisionID::Player;
+		else if (L"Enemy" == cstrIdx)
+			collisionID = ECollisionID::Enemy;
+		else if (L"Trigger" == cstrIdx)
+			collisionID = ECollisionID::Trigger;
+
+
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetCollisionID((_int)collisionID);
+
+
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(offset);
-		//static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffset(offset);
 
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetSize(size);
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetHalfSize(size * 0.5f);

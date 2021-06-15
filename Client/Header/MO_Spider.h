@@ -37,8 +37,7 @@ public:
 
 
 private:
-	void Chase_Target(_float baseAngle, _float3 targetPos, _float speed, _float deltaTime);
-	void ComputeLookAtTarget(_mat* pOut, _float3 dir, const _float3* pTargetPos);
+	void Chase_Target(_float3 targetPos);
 
 public:
 	static		SP(CMO_Spider)			Create(_bool isStatic, Engine::CScene* pScene);
