@@ -94,9 +94,6 @@
     <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Texture">
       <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect">
-      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Structure\04.Component\00.RenderComponent">
       <UniqueIdentifier>{b2366ca8-632f-44c1-aba9-56a757b34e24}</UniqueIdentifier>
     </Filter>
@@ -282,6 +279,11 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
       <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
+      <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
+        <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
+        <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -439,7 +441,7 @@
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RectTexC.cpp">
-      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RenderComponent.cpp">
       <Filter>01.Structure\04.Component\00.RenderComponent</Filter>
@@ -533,6 +535,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CircularGaugeShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeTexC.cpp">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -714,7 +719,7 @@
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RectTexC.h">
-      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.Rect</Filter>
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RenderComponent.h">
       <Filter>01.Structure\04.Component\00.RenderComponent</Filter>
@@ -808,6 +813,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\CircularGaugeShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CubeTexC.h">
+      <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

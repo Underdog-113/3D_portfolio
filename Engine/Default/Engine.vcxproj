@@ -27,6 +27,7 @@
     <ClInclude Include="..\Header\Canvas.h" />
     <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
+    <ClInclude Include="..\Header\CubeTexC.h" />
     <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DebugCollider.h" />
     <ClInclude Include="..\Header\Collider.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="..\Code\Canvas.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
     <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\CubeTexC.cpp" />
     <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DebugCollider.cpp" />
     <ClCompile Include="..\Code\Collider.cpp" />

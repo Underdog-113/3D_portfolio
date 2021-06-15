@@ -145,7 +145,7 @@ namespace Engine
 		Debug					= 7,
 		RectTex					= 8,
 		Physics					= 9,
-		FadeInOut				= 10,
+		CubeTex					= 10,
 		Shader					= 11,
         Text					= 12,
 		StateMachine			= 13,

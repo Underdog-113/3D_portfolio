@@ -591,7 +591,14 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 				_float	penet		= pRC->GetLength() - tMin;
 				pRC->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC, pOC, hitPoint, normal, penet));
 				pOC->GetOwner()->AddCollisionInfo(_CollisionInfo(pOC, pRC, hitPoint, -normal, penet));
-				pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
+				
+				if (normal.y == -1)
+				{
+					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y + 1);
+					pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>()->SetOnFloor(true);
+				}
+				else
+					pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
 			}
 			else
 			{
