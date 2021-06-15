@@ -54,11 +54,7 @@ void CCanvas::FixedUpdate(void)
 void CCanvas::Update(void)
 {
 	__super::Update();
-	if (Engine::IMKEY_DOWN(KEY_1))
-		SetIsEnabled(false);
 
-	if (Engine::IMKEY_DOWN(KEY_2))
-		SetIsEnabled(true);
 }
 
 void CCanvas::LateUpdate(void)

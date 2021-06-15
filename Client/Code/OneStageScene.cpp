@@ -57,7 +57,7 @@ void COneStageScene::Start(void)
 	delete(Load);
 
 	// (미완성)스크롤 뷰 예제
-
+	CBattleUiManager::GetInstance()->Start(this);
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -69,6 +69,25 @@ void COneStageScene::Update(void)
 {
 	__super::Update();
 
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	{
+		CBattleUiManager::GetInstance()->KeyPad(8);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+	{
+		CBattleUiManager::GetInstance()->HitCount(8);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
+	{
+		CBattleUiManager::GetInstance()->MonsetrState(L"", 100, L"DOWN");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
+	{
+		CBattleUiManager::GetInstance()->MonsterHpDown(0.5f);
+	}
 }
 
 void COneStageScene::LateUpdate(void)
@@ -86,7 +105,7 @@ void COneStageScene::OnDestroy(void)
 void COneStageScene::OnEnable(void)
 {
 	__super::OnEnable();
-
+	CBattleUiManager::GetInstance()->OnDestroy();
 }
 
 void COneStageScene::OnDisable(void)
