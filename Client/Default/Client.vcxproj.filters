@@ -398,6 +398,9 @@
       <Filter>03.Component\00.UI\05.LifeObject</Filter>
     </ClInclude>
     <ClInclude Include="FSMDefine_Kiana.h" />
+    <ClInclude Include="..\Header\ClientFunction.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

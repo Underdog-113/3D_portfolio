@@ -26,7 +26,7 @@
 #include "ClientEnum.h"
 #include "ClientMacro.h"
 #include "ClientStructure.h"
-
+#include "ClientFunction.h"
 
 //Client Managers
 #include "ButtonManager.h"

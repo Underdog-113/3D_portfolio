@@ -9,6 +9,7 @@
 #include "FSM_SpiderC.h"
 #include "MO_Spider.h"
 
+#include "DataLoad.h"
 CWooScene::CWooScene()
 {
 }
@@ -48,6 +49,12 @@ void CWooScene::Start(void)
 			m_spSpider = spSpiderClone;
 		}
 	}
+
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ToolLoad(this);
+	delete(Load);
+
 }
 
 void CWooScene::FixedUpdate(void)
