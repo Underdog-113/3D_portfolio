@@ -15,6 +15,7 @@
 #pragma endregion
 
 
+
 CMainApp::CMainApp(void)
 {
 }
@@ -168,6 +169,7 @@ void CMainApp::OnDestroy(void)
 
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
+	CBattleUiManager::GetInstance()->DestroyInstance();
 
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();

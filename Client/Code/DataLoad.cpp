@@ -28,7 +28,7 @@ void CDataLoad::Setting()
 	m_loadDeleGate += std::bind(&CDataLoad::ImageLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
-	//m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
+	m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::EffectLoad, &CDataLoad(), std::placeholders::_1);
 }
@@ -98,7 +98,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
 			//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
 			fontPosition.y *= -1;
-			image->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+			image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 		}
 
 		_int animCount;
@@ -201,7 +201,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"maxValue", maxValue);
 		dataStore->GetValue(false, dataID, objectKey, key + L"minValue", minValue);
 
-		slider->AddSliderData(maxValue, maxValue, minValue, imageObj[0], imageObj[1]);
+		slider->AddSliderData(value, maxValue, minValue, imageObj[0], imageObj[1]);
 	}
 }
 
@@ -270,7 +270,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
 
 		fontPosition.y *= -1;
-		button->AddComponent<Engine::CTextC>()->AddFontData(name, message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 	}	
 }
 
@@ -340,7 +340,7 @@ void CDataLoad::CanvasLoad(Engine::CScene * pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
 
 		SP(Engine::CCanvas) canvas =
-			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)Engine::ELayerID::UI, L"MainCanvas"));
+			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)Engine::ELayerID::UI, name));
 	}
 }
 

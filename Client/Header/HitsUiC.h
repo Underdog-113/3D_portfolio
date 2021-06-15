@@ -1,12 +1,12 @@
-#ifndef DAMAGEFONTCOMPONENT_H
-#define DAMAGEFONTCOMPONENT_H
+#ifndef HITSUICOMPONENT_H
+#define HITSUICOMPONENT_H
 
 #include "Component.h"
-class CDamageFontC  final : public Engine::CComponent
+class CHitsUiC  final : public Engine::CComponent
 {
 public:
-	explicit CDamageFontC();
-	~CDamageFontC();
+	explicit CHitsUiC();
+	~CHitsUiC();
 
 	// CComponent을(를) 통해 상속됨
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
@@ -19,17 +19,11 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
-	void AddDamageFontInit(_float upSpped, _float lifeTime, _int damage, std::wstring color);
+	void AddHitsCount(_int value);
+	
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	_int m_damage;
-	_float m_upSpeed;
-	_float m_lifeTime;
-	_float m_oldLifeTime;
+	_int m_hitsCount;
 };
 #endif
-
-// 텍스트 추가
-// 내가 원하는 텍스트의 오프셋을변경
-// 문자열비교

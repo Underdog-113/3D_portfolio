@@ -92,7 +92,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"BG");
+			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"StaticBG");
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();
