@@ -534,10 +534,11 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	SP(Engine::CObject) spMeshEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MeshEffect", false, (_int)Engine::ELayerID::Effect, L"Effect0");
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::EffectShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::CatPawShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
