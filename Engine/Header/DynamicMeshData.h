@@ -44,6 +44,7 @@ public:
 				double				GetAniTimeline			();
 
 				_DerivedD3DXFRAME*	GetFrameByName			(std::string name);
+				_mat*				GetFrameOffsetMatrix	(LPCSTR name);
 				_bool				IsAnimationEnd			(void);
 				void				SetAniFixTillEnd		(_bool isItFixed);
 
@@ -53,7 +54,7 @@ private:
 				void				UpdateFrameMatrices		(_DerivedD3DXFRAME* pFrame, _mat* pParentMat);
 				void				SetFrameMatPointer		(_DerivedD3DXFRAME* pFrame);
 				_uint				FindFirstAniIndex		(std::wstring const& fileName);
-
+				_mat*				FindFrameOffsetMatrix	(_DerivedD3DXFRAME* pFrame, LPCSTR name);
 
 private:
 	typedef std::vector<_DerivedD3DXMESHCONTAINER*> _MESHCONTAINERS;

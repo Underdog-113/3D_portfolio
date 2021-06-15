@@ -159,6 +159,18 @@ _DerivedD3DXFRAME * CDynamicMeshData::GetFrameByName(std::string name)
 	return (_DerivedD3DXFRAME*)D3DXFrameFind(m_pRootFrame, name.c_str());
 }
 
+_mat* CDynamicMeshData::GetFrameOffsetMatrix(LPCSTR name)
+{
+	_mat* pFindMat = FindFrameOffsetMatrix((_DerivedD3DXFRAME*)m_pRootFrame, name);
+	if (!pFindMat)
+	{
+		MSG_BOX(__FILE__, L"Can't find target bone");
+		ABORT;
+	}
+
+	return pFindMat;
+}
+
 _bool CDynamicMeshData::IsAnimationEnd(void)
 {
 	return m_pAniCtrl->IsItEnd();
@@ -241,4 +253,35 @@ _uint CDynamicMeshData::FindFirstAniIndex(std::wstring const & fileName)
 		return 0;
 	else
 		return std::stoi(fileName.substr(++startPoint, endPoint - startPoint));
+}
+
+_mat* CDynamicMeshData::FindFrameOffsetMatrix(_DerivedD3DXFRAME * pFrame, LPCSTR name)
+{
+	_mat* pFindMat = nullptr;
+
+	if (pFrame->pMeshContainer != nullptr)
+	{
+		_DerivedD3DXMESHCONTAINER*	pDerivedMeshContainer = (_DerivedD3DXMESHCONTAINER*)pFrame->pMeshContainer;
+
+		for (_ulong i = 0; i < pDerivedMeshContainer->numBones; ++i)
+		{
+			LPCSTR pBoneName = pDerivedMeshContainer->pSkinInfo->GetBoneName(i);
+			if (!strcmp(pBoneName, name))
+			{
+				return pDerivedMeshContainer->pFrameOffsetMatrix;
+			}
+		}
+	}
+
+
+	if (nullptr != pFrame->pFrameSibling)
+		pFindMat = FindFrameOffsetMatrix((D3DXFRAME_DERIVED*)pFrame->pFrameSibling, name);
+
+	if (pFindMat)
+		return pFindMat;
+
+	if (nullptr != pFrame->pFrameFirstChild)
+		pFindMat = FindFrameOffsetMatrix((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild, name);
+
+	return pFindMat;
 }

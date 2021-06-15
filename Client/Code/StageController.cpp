@@ -40,9 +40,14 @@ void CStageController::AddSquadMember(SP(Engine::CObject) pCharacter)
 		ABORT;
 	}
 
-	m_vSquad.emplace_back(pCharacter);
+	Base_Stat bs;
 
-	m_spCurActor = m_vSquad[Actor];
+	Squad_Stat ss(&bs);
+	_SquadInfo info = std::make_pair(ss, pCharacter);
+
+	m_vSquad.emplace_back(info);
+
+	m_spcurActor = m_vSquad[Actor].second;
 }
 
 
@@ -255,7 +260,7 @@ void CStageController::ReserveMoveOrder()
 
 void CStageController::RotateCurrentActor()
 {
-	SP(Engine::CTransformC) pActorTransform = m_spCurActor->GetTransform();
+	SP(Engine::CTransformC) pActorTransform = m_spcurActor->GetTransform();
 	
 	float rotSpeedRate = m_rotSpeedHighRate;
 
@@ -271,17 +276,17 @@ void CStageController::RotateCurrentActor()
 	D3DXVec3Normalize(&rotAxis, &rotAxis);
 	
 	if (rotAxis.y > 0.f)
-		m_spCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_DT);
+		m_spcurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_DT);
 	else
-		m_spCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
+		m_spcurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
 
 
 	if (angleSynchroRate > 0.99f)
 	{
 		if (rotAxis.y > 0.f)
-			m_spCurActor->GetTransform()->AddRotationY(D3DXToRadian(0.9f));
+			m_spcurActor->GetTransform()->AddRotationY(D3DXToRadian(0.9f));
 		else
-			m_spCurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
+			m_spcurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
 
 		m_rotateLock = true;
 	}
