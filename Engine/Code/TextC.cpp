@@ -113,7 +113,7 @@ void CTextC::ChangeMessage(std::wstring message)
 	}
 
 	m_message = message;
-
+	m_textData.m_pFont->Release();
 	m_textData = t;
 }
 

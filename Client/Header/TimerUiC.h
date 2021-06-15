@@ -2,11 +2,11 @@
 #define TIMERUICOMPONENT_H
 
 #include "Component.h"
-class CTimerUi  final : public Engine::CComponent
+class CTimerUiC  final : public Engine::CComponent
 {
 public:
-	explicit CTimerUi();
-	~CTimerUi();
+	explicit CTimerUiC();
+	~CTimerUiC();
 
 	// CComponent을(를) 통해 상속됨
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
@@ -19,9 +19,11 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
+	void Reset() { m_totalTime = 0; }
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
+	_float m_totalTime;
 };
 #endif
 
