@@ -78,7 +78,7 @@ void CMainRoomScene::LateUpdate(void)
 void CMainRoomScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
+	m_pLoading->Free();
 }
 
 void CMainRoomScene::OnEnable(void)

@@ -108,6 +108,7 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	m_pLoading->Free();
 
 }
 

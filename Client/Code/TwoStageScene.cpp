@@ -80,7 +80,7 @@ void CTwoStageScene::LateUpdate(void)
 void CTwoStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
+	m_pLoading->Free();
 }
 
 void CTwoStageScene::OnEnable(void)

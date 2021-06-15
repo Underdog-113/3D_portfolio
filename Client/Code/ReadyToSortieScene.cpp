@@ -77,7 +77,7 @@ void CReadyToSortieScene::LateUpdate(void)
 void CReadyToSortieScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
+	m_pLoading->Free();
 }
 
 void CReadyToSortieScene::OnEnable(void)

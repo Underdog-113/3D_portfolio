@@ -79,7 +79,7 @@ void CPartySettingScene::LateUpdate(void)
 void CPartySettingScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
+	m_pLoading->Free();
 }
 
 void CPartySettingScene::OnEnable(void)
