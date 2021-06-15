@@ -160,7 +160,7 @@ void CKiana::CreatePistol(void)
 	m_pLeftHand_World = new _mat;
 	*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
 
-	m_spWeapon_Left->GetTransform()->SetOffsetMatrix(m_pLeftHand_World);
+	//m_spWeapon_Left->GetTransform()->SetOffsetMatrix(m_pLeftHand_World);
 
 	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol_USP45", false, (_uint)ELayerID::Player, L"Weapon_Right");
 	m_spWeapon_Right->GetTransform()->SetParent(m_spTransform);
@@ -170,7 +170,7 @@ void CKiana::CreatePistol(void)
 	m_pRightHand_World = new _mat;
 	*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
 
-	m_spWeapon_Right->GetTransform()->SetOffsetMatrix(m_pRightHand_World);
+	//m_spWeapon_Right->GetTransform()->SetOffsetMatrix(m_pRightHand_World);
 }
 
 void CKiana::CreateCatPaw(void)
