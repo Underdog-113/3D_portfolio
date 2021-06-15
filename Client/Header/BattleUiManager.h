@@ -18,10 +18,17 @@ public:
 	void KeyPad(_int value); // 방향키 변경
 	void HitCount(_float lifeTime); // 콤보박스
 	void MonsetrState(std::wstring name, _float hp, std::wstring property); // 몬스터 체력바 속성 이름 표시
-	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, // 대기 플레이어 상태
-					 std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2);
-	void PlayerSkillPoint(std::wstring specialSP, std::wstring skillSP = L""); // 현재 플레이어 hp sp
 
+	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1,  _float playerSp1,
+					 std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2);
+	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1);
+
+	// HP SP 버튼4개 스킬포인트2개
+	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
+		std::wstring specialSP, std::wstring skillSP);
+	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
+		std::wstring specialSP);
+	
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
 	void PlayerHp(_float value);
@@ -31,6 +38,8 @@ public:
 	void PlayerSp(_float value);
 	void PlayerSpDown(_float value);
 	void PlayerSpUp(_float value);
+
+	void CollTime(_int value, _float collTime);
 private:
 
 private:
@@ -50,11 +59,15 @@ private:
 	std::vector<Engine::CImageObject*> m_playerProperty;
 	std::vector<Engine::CImageObject*> m_skillPoint;
 
+	std::vector<CButton*> m_skillButton;
+	std::vector<Engine::CSlider*> m_coolTimeSlider;
+
 	std::vector<Engine::CSlider*> m_monsterHpBar;
-	std::vector<Engine::CSlider*> m_playerHPBar;
-	Engine::CSlider* m_playerSTBar;
+	std::vector<Engine::CSlider*> m_playerHpBar;
+	Engine::CSlider* m_playerSpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerHpBar;
-	std::vector<Engine::CSlider*> m_waitingPlayerStBar;
+	std::vector<Engine::CSlider*> m_waitingPlayerSpBar;
+
 };
 
 

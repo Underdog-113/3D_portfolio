@@ -220,6 +220,7 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
     <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
+    <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
@@ -237,6 +238,7 @@
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
+    <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
@@ -303,6 +305,7 @@
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
+    <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />

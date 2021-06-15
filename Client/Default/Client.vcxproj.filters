@@ -202,6 +202,9 @@
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\Pistol">
       <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\06.SkillCollTime">
+      <UniqueIdentifier>{e5d81b2f-c56b-45ec-a322-15466f1bebda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -406,15 +409,18 @@
     <ClInclude Include="..\Header\HitsUiC.h">
       <Filter>03.Component\00.UI\04.HitsUi</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\LifeObjectC.h">
-      <Filter>03.Component\00.UI\05.LifeObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\TimerUiC.h">
       <Filter>03.Component\00.UI\03.Timer</Filter>
     </ClInclude>
     <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="..\Header\ClientFunction.h">
       <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SkillCollTimcC.h">
+      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LifeObjectC.h">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -598,6 +604,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\TimerUiC.cpp">
       <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkillCollTimcC.cpp">
+      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
