@@ -71,7 +71,7 @@ namespace Engine
 		DamageFont				= 7,
 		CatPawShader			= 8,
 		CircularGauge			= 9,
-		CelShader					= 10,
+		CelShader				= 10,
 		SkyBoxShader			= 11,
 		NumOfShaderID			= 12
 

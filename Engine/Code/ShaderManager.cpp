@@ -17,6 +17,7 @@
 
 #include "EffectShader.h"
 #include "CatPawShader.h"
+#include "CelShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -34,6 +35,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CDamageFontShader::Create());
 	m_vShaders.emplace_back(CCatPawShader::Create());
 	m_vShaders.emplace_back(CCircularGaugeShader::Create());
+	m_vShaders.emplace_back(CCelShader::Create());
 	m_vShaders.emplace_back(CSkyBoxShader::Create());
 }
 
@@ -82,6 +84,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::CatPawShader;
 	else if (shaderName == L"CircularGaugeShader")
 		return (_int)EShaderID::CircularGauge;
+	else if (shaderName == L"CelShader")
+		return (_int)EShaderID::CelShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");
