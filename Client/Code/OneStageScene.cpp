@@ -56,7 +56,6 @@ void COneStageScene::Start(void)
 	Load->Load(this);
 	delete(Load);
 
-	// (미완성)스크롤 뷰 예제
 	CBattleUiManager::GetInstance()->Start(this);
 }
 
@@ -81,12 +80,22 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsetrState(L"슬깃이", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
 	{
 		CBattleUiManager::GetInstance()->MonsterHpDown(0.5f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
+	{
+		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
+	{
+		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
 	}
 }
 

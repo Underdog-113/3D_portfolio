@@ -104,9 +104,6 @@ public:
 	// obb
 	CEdit m_obbOffset;
 	CEdit m_obbSize;
-	CEdit m_obbRight;
-	CEdit m_obbUp;
-	CEdit m_obbForward;
 	CComboBox m_obbCnt;
 	CButton m_selectedObbCol;
 
@@ -168,4 +165,5 @@ public:
 	CButton m_showObjectChk;
 	afx_msg void OnBnClickedShowObjectChk();
 	CComboBox m_loadFileName;
+	CEdit m_obbRotOffset;
 };

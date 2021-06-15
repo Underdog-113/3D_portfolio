@@ -186,6 +186,7 @@
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -239,7 +240,7 @@
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
-    <ClInclude Include="..\Header\TimerUi.h" />
+    <ClInclude Include="..\Header\TimerUiC.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
@@ -305,7 +306,7 @@
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
-    <ClCompile Include="..\Code\TimerUi.cpp" />
+    <ClCompile Include="..\Code\TimerUiC.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />

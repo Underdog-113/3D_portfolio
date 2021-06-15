@@ -11,6 +11,8 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 
+#include "ObjectFactory.h"
+#include "MeshData.h"
 
 CDataLoad::CDataLoad()
 {
@@ -201,7 +203,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"maxValue", maxValue);
 		dataStore->GetValue(false, dataID, objectKey, key + L"minValue", minValue);
 
-		slider->AddSliderData(value, maxValue, minValue, imageObj[0], imageObj[1]);
+		slider->AddSliderData(maxValue, maxValue, minValue, imageObj[0], imageObj[1]);
 	}
 }
 
@@ -346,6 +348,209 @@ void CDataLoad::CanvasLoad(Engine::CScene * pScene)
 
 void CDataLoad::ToolLoad(Engine::CScene* pScene)
 {
+	auto& objectFactory = pScene->GetObjectFactory();
+
+	// 데이터 파일 불러오기
+	std::string strLine = "";
+	std::string filePath = "../../Data/EditorScene/save.ini";
+	std::ifstream ifsLoad(filePath.data());
+
+	_float vPos = 0.f;
+	_float vRot = 0.f;
+
+	std::wstring protoObjectKey;
+	_bool isStatic;
+	_int layerID;
+	std::wstring meshKey;
+	_bool initTex;
+	_int renderID;
+	_float3 position;
+	_float3 scale;
+	_float3 rotation;
+	_int colID; // collider
+	_float3 offset; // collider
+	_float3 size; // collider
+	_float3 rotOffset; // collider
+	_int shaderID;
+
+	SP(Engine::CObject) spObject = nullptr;
+
+	while (!ifsLoad.eof())
+	{
+		Engine::_tchar* dataTag = nullptr;
+		Engine::_tchar* dataValue = nullptr;
+
+		std::getline(ifsLoad, strLine);
+
+		if ("" == strLine)
+			continue;
+
+		std::vector<std::string> vStr = split(strLine, '=');
+
+		if (!dataValue && !dataTag)
+		{
+			std::wstring wstr = Engine::StrToWStr(vStr[1]);
+			dataValue = _wcsdup(wstr.c_str());
+		}
+
+		if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
+			continue;
+
+		std::vector<std::string> vStrTag = split(vStr[0], '_');
+
+		std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
+		dataTag = _wcsdup(wstr.c_str());
+
+		if (!wcscmp(L"static", dataTag))
+		{
+			isStatic = WstrToBool(dataValue);
+			continue;
+		}
+		else if (!wcscmp(L"layerID", dataTag))
+		{
+			layerID = WstrToInt(dataValue);
+			spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
+
+			spObject->SetLayerID(layerID);
+			continue;
+		}
+		else if (!wcscmp(L"shaderKey", dataTag))
+		{
+			shaderID = WstrToInt(dataValue);
+			spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
+			continue;
+		}
+		else if (!wcscmp(L"meshKey", dataTag))
+		{
+			meshKey = dataValue;
+
+			spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
+			
+			continue;
+		}
+		else if (!wcscmp(L"initTex", dataTag))
+		{
+			initTex = WstrToBool(dataValue);
+			spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
+
+			if (initTex == true)
+			{
+				if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+					spObject->AddComponent<Engine::CTextureC>();
+				else
+					spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+
+				//고쳐야됨 쉐이더키 따로 세팅하기
+				if (spObject->GetComponent<Engine::CShaderC>() == nullptr)
+					spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+			}
+			else
+			{
+				spObject->AddComponent<Engine::CTextureC>();
+				spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
+				spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap");
+			}
+			continue;
+		}
+		else if (!wcscmp(L"renderID", dataTag))
+		{
+			renderID = WstrToInt(dataValue);
+			spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
+			spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+			continue;
+		}
+		else if (!wcscmp(L"scale", dataTag))
+		{
+			vStr = split(vStr[1], ',');
+			scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			spObject->GetTransform()->SetSize(scale);
+			continue;
+		}
+		else if (!wcscmp(L"rotation", dataTag))
+		{
+			vStr = split(vStr[1], ',');
+			rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			spObject->GetTransform()->SetRotation(rotation);
+			continue;
+		}
+		else if (!wcscmp(L"position", dataTag))
+		{
+			vStr = split(vStr[1], ',');
+			position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			spObject->GetTransform()->SetPosition(position);
+			continue;
+		}
+		else if (!wcscmp(L"collider", dataTag))
+		{
+			if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
+			{
+				spObject->AddComponent<Engine::CCollisionC>();
+				spObject->AddComponent<Engine::CDebugC>();
+			}
+
+			std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
+			if (L"collisionID" == wstr)
+				colID = WstrToInt(dataValue);
+
+			std::getline(ifsLoad, strLine);
+			vStr = split(strLine, '=');
+			vStrTag = split(vStr[0], '_');
+			std::wstring type = Engine::StrToWStr(vStrTag[3]);
+
+			_int index = StrToInt(vStr[1]);
+
+			if (L"type" == type)
+			{
+				switch (index)
+				{
+				case 1: // ray
+					break;
+				case 3: // aabb
+				{
+					/* offset */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					/* size */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
+					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+				}
+				break;
+				case 4: // obb
+				{
+					/* offset */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					/* size */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					/* rotOffset */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
+					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+					break;
+				}
+				}
+			}
+		}
+	}
 }
 
 void CDataLoad::EffectLoad(Engine::CScene * pScene)

@@ -69,6 +69,11 @@ inline std::wstring CStrToWStr(CString cstr)
 	return std::wstring(cstr);
 }
 
+inline _int CStrToInt(CString cstr)
+{
+	return _ttoi(cstr);
+}
+
 inline std::wstring FloatToWStr(_float num)
 {
 	return std::to_wstring(num);

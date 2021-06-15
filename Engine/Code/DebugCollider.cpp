@@ -80,7 +80,7 @@ void CDebugCollider::Start(void)
 	{
 		m_spMesh->AddMeshData(L"Cube");
 		CObbCollider* pObb = static_cast<CObbCollider*>(m_pCollider);
-		m_spTransform->SetRotation(m_pCollider->GetOwner()->GetTransform()->GetRotation() + pObb->GetRotOffset());
+		m_spTransform->SetRotation(m_pCollider->GetOwner()->GetOwner()->GetTransform()->GetRotation() + pObb->GetRotOffset());
 		m_spTransform->SetSize(pObb->GetSize());
 		break;
 	}

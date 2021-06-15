@@ -403,13 +403,19 @@
     <ClInclude Include="..\Header\BattleUiManager.h">
       <Filter>09.Manager\01.BattleUiManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\TimerUi.h">
-      <Filter>03.Component\00.UI\03.Timer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\HitsUiC.h">
       <Filter>03.Component\00.UI\04.HitsUi</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\LifeObjectC.h">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TimerUiC.h">
+      <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClInclude>
     <ClInclude Include="FSMDefine_Kiana.h" />
+    <ClInclude Include="..\Header\ClientFunction.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -584,14 +590,14 @@
     <ClCompile Include="..\Code\BattleUiManager.cpp">
       <Filter>09.Manager\01.BattleUiManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\TimerUi.cpp">
-      <Filter>03.Component\00.UI\03.Timer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\HitsUiC.cpp">
       <Filter>03.Component\00.UI\04.HitsUi</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\LifeObjectC.cpp">
       <Filter>03.Component\00.UI\05.LifeObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TimerUiC.cpp">
+      <Filter>03.Component\00.UI\03.Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
