@@ -37,7 +37,7 @@ public:
 
 
 private:
-	void Chase_Target(_float baseAngle, _float3* pTargetPos, _float speed, _float deltaTime);
+	void Chase_Target(_float baseAngle, _float3 targetPos, _float speed, _float deltaTime);
 	void ComputeLookAtTarget(_mat* pOut, _float3 dir, const _float3* pTargetPos);
 
 public:
