@@ -51,10 +51,6 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
 {
 	VS_OUTPUT Out;
 
-	g_WaveHeight;
-	g_WaveFrequency;
-	g_Speed;
-
 	float cosTime = g_WaveHeight * cos(g_fTime * g_Speed + Input.mUV.x * g_WaveFrequency);
 
 	Input.mPosition.y += cosTime;

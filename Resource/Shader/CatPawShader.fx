@@ -1,70 +1,124 @@
-float4x4 m_WVP;                 
-float4 m_LightDir;               
 
-texture g_BaseTex;     
-sampler BaseTex = sampler_state
-{
-	Texture = <g_BaseTex>;
-};
+float4x4 gWorldViewProjectionMatrix;
+float4x4 gInvWorldMatrix;
 
-texture g_NormalTex;      
-sampler NormalTex = sampler_state
+float4x4 gWorld;
+float4x4 gView;
+float4x4 gProjection;
+
+float4 gWorldLightPosition;
+float3 gSurfaceColor;
+
+float4 gDiffuseColor = float4(1, 1, 1, 1);
+float  gDiffuseIntensity = 1.0;
+float4 gLineColor = float4(1, 0.5, 0, 1);
+float  gLineThickness = .01;
+
+
+texture g_DiffuseTex;
+sampler Diffuse = sampler_state
 {
-	Texture = <g_NormalTex>;
+	Texture = <g_DiffuseTex>;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	MipFilter = NONE;
+	AddressU = Clamp;
+	AddressV = Clamp;
 };
 
 
 struct VS_INPUT
 {
-	float4 mPosition   : POSITION0;
-	float3 mNormal     : NORMAL0;
-	float2 mTex		   : TEXCOORD0;
+	float4 mPosition : POSITION;
+	float3 mNormal	 : NORMAL;
+	float2 mUV		 : TEXCOORD0;
+
 };
 
 struct VS_OUTPUT
 {
-	float4 Pos    : POSITION;
-	float2 Tex    : TEXCOORD0;
-	float3 Normal : TEXCOORD1;
+	float4 mPosition : POSITION;
+	float2 mUV		: TEXCOORD0;
+	float3 mDiffuse : TEXCOORD1;
+
 };
 
-VS_OUTPUT VS(VS_INPUT Input)
+
+VS_OUTPUT vs_main(VS_INPUT Input)
 {
-	VS_OUTPUT Out;
+	VS_OUTPUT Output;
 
-	Out.Pos = mul(Input.mPosition, m_WVP);
-	Out.Tex = Input.mTex;
-	Out.Normal = normalize(Input.mNormal.xyz);
+	Output.mPosition = mul(Input.mPosition, gWorldViewProjectionMatrix);
 
-	return Out;
+	float3 objectLightPosition = mul(gWorldLightPosition, gInvWorldMatrix);
+	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition);
+
+	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
+	Output.mUV = Input.mUV;
+
+	return(Output);
+
 }
 
-float4 PS(VS_OUTPUT In) : COLOR0
+struct PS_INPUT
 {
-	float4 Out;
+	float2 mUV : TEXCOORD0;
+	float3 mDiffuse : TEXCOORD1;
+};
 
-    // 하프 램버트 확산 조명을 통한 라이팅 계산
-    float p = dot(In.Normal, -m_LightDir.xyz);
-    p = p * 0.5f + 0.5;
-    p = p * p;
-    
-    //****************************************************************
-    // 툰 셰이더 처리
-    //****************************************************************
-    //색상 정보를 텍셀의 U 성분으로 하여 툰 맵 텍스처에서 빛 반사율을 얻음
-    float4 Col = tex2D(NormalTex, float2(p, 0.0f));
-    
-    // 색 정보를 반환.
-    Out = Col * tex2D(BaseTex, In.Tex);
+float4 ps_main(PS_INPUT Input) : COLOR
+{
 
-return Out;
+	// 빛의 강도
+	float intensity = dot(normalize(gWorldLightPosition), Input.mUV);
+
+
+if (intensity < 0)
+	intensity = 0;
+
+	float4 albedo = tex2D(Diffuse, Input.mUV) * gDiffuseColor * gDiffuseIntensity;
+	albedo.a = 1;
+
+	float3 diffuse = saturate(Input.mDiffuse);
+
+	diffuse = ceil(diffuse * 5) / 5.0f;
+	//diffuse = round(intensity * 5) / 3 * diffuse;
+
+
+	return float4(albedo * diffuse.xyz, 1);
 }
 
-technique TShader
+
+VS_OUTPUT OutlineVertexShader(VS_INPUT Input)
 {
-	pass P0
+	VS_OUTPUT output = (VS_OUTPUT)0;
+
+	float4 original = mul(mul(mul(Input.mPosition, gWorld), gView), gProjection);
+	float4 normal = mul(mul(mul(Input.mNormal, gWorld), gView), gProjection);
+
+	output.mPosition = original + (mul(gLineThickness, normal));
+
+	return output;
+}
+
+float4 OutlinePixelShader(VS_OUTPUT Input) : COLOR0
+{
+	return gLineColor;
+}
+
+technique ToonShader
+{
+	pass OutLine
 	{
-		VertexShader = compile vs_3_0 VS();
-		PixelShader = compile ps_3_0 PS();
+		VertexShader = compile vs_3_0 OutlineVertexShader();
+		PixelShader = compile ps_3_0 OutlinePixelShader();
+		CullMode = CW;
 	}
-}
+	pass Toon
+	{
+		VertexShader = compile vs_3_0 vs_main();
+		PixelShader = compile ps_3_0 ps_main();
+		CullMode = CCW;
+	}
+
+};
