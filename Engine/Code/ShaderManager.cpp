@@ -13,6 +13,7 @@
 
 #include "DamageFontShader.h"
 #include "CircularGaugeShader.h"
+#include "SkyBoxShader.h"
 
 #include "EffectShader.h"
 #pragma endregion
@@ -31,6 +32,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CDamageFontShader::Create());
 	m_vShaders.emplace_back(CEffectShader::Create());
 	m_vShaders.emplace_back(CCircularGaugeShader::Create());
+	m_vShaders.emplace_back(CSkyBoxShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -64,8 +66,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::DeferredBlendShader;
 	else if (shaderName == L"DeferredLightShader")
 		return (_int)EShaderID::DeferredLightShader;
-	//else if (shaderName == L"SkyBoxShader")
-	//	return (_int)EShaderID::SkyBoxShader;
+	else if (shaderName == L"SkyBoxShader")
+		return (_int)EShaderID::SkyBoxShader;
 	else if (shaderName == L"SliderShader")
 		return (_int)EShaderID::SliderShader;
 	else if (shaderName == L"WaterShader")

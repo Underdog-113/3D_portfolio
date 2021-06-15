@@ -65,13 +65,13 @@ namespace Engine
 		RectTexShader			= 1,
 		DeferredBlendShader		= 2,
 		DeferredLightShader		= 3,
-		//SkyBoxShader			= 4,
 		SliderShader			= 4,
 		WaterShader				= 5,
 		EffectShader			= 6,
 		DamageFont				= 7,
 		CircularGauge			= 8,
-		NumOfShaderID			= 9
+		SkyBoxShader			= 9,
+		NumOfShaderID			= 10
 
 	};
 #pragma endregion

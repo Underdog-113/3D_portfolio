@@ -321,7 +321,6 @@
     <ClInclude Include="..\Header\StageController.h">
       <Filter>97.TempClass_ForDevelop</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CatPaw_Claw.h" />
     <ClInclude Include="FSMDefine_Spider.h">
       <Filter>02.Objects\03.Monster\MO_Spider\FSM</Filter>
     </ClInclude>
@@ -370,6 +369,7 @@
     <ClInclude Include="..\Header\RotationUiC.h">
       <Filter>03.Component\00.UI\02.RotationUI</Filter>
     </ClInclude>
+    <ClInclude Include="FSMDefine_Kiana.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -525,7 +525,6 @@
     <ClCompile Include="..\Code\Kiana_CatPaw.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CatPaw_Claw.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp">
       <Filter>03.Component\00.UI\02.RotationUI</Filter>
     </ClCompile>

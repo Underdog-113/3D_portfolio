@@ -8,6 +8,8 @@
 #include "DebugCollider.h"
 #include "Camera.h"
 
+#include "SkyBox.h"
+
 #include "Button.h"
 #include "Slider.h"
 #include "ScrollViewObject.h"
@@ -112,8 +114,37 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
 
-	InitUiPrototypes();
+	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSkyBox);
 
+	InitUiPrototypes();
+	InitMonsterPrototypes();
+	
+}
+
+void CStaticScene::InitUiPrototypes(void)
+{
+	SP(Engine::CCanvas) spCanvasViewObject(Engine::CCanvas::Create(true, this));
+	GetObjectFactory()->AddPrototype(spCanvasViewObject);
+
+	SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spImageObject);
+
+	SP(CButton) spButtonObject(CButton::Create(true, this));
+	GetObjectFactory()->AddPrototype(spButtonObject);
+
+	SP(Engine::CSlider) spSliderObject(Engine::CSlider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSliderObject);
+
+	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScrollViewObject);
+
+	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDebugCOllider);
+}
+
+void CStaticScene::InitMonsterPrototypes(void)
+{
 	SP(CMonster) spMO_Spider(CMO_Spider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Spider);
 
@@ -137,25 +168,4 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMonster) spMB_Bronya(CMB_Bronya::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMB_Bronya);
-}
-
-void CStaticScene::InitUiPrototypes(void)
-{
-	SP(Engine::CCanvas) spCanvasViewObject(Engine::CCanvas::Create(true, this));
-	GetObjectFactory()->AddPrototype(spCanvasViewObject);
-
-	SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(true, this));
-	GetObjectFactory()->AddPrototype(spImageObject);
-
-	SP(CButton) spButtonObject(CButton::Create(true, this));
-	GetObjectFactory()->AddPrototype(spButtonObject);
-
-	SP(Engine::CSlider) spSliderObject(Engine::CSlider::Create(true, this));
-	GetObjectFactory()->AddPrototype(spSliderObject);
-
-	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
-	GetObjectFactory()->AddPrototype(spScrollViewObject);
-
-	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
-	GetObjectFactory()->AddPrototype(spDebugCOllider);
 }

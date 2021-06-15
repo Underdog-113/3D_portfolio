@@ -73,6 +73,7 @@
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\ShaderManager.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
+    <ClInclude Include="..\Header\SkyBoxShader.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
     <ClInclude Include="..\Header\State.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
+    <ClCompile Include="..\Code\SkyBoxShader.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
@@ -207,6 +209,7 @@
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx" />
   </ItemGroup>
