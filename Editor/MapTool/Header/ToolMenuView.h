@@ -165,4 +165,5 @@ public:
 	CButton m_showObjectChk;
 	afx_msg void OnBnClickedShowObjectChk();
 	CComboBox m_loadFileName;
+	CEdit m_obbRotOffset;
 };

@@ -89,6 +89,7 @@ void CToolMenuView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK8, m_selectedObbCol);
 	DDX_Control(pDX, IDC_CHECK2, m_showObjectChk);
 	DDX_Control(pDX, IDC_COMBO1, m_loadFileName);
+	DDX_Control(pDX, IDC_EDIT21, m_obbRotOffset);
 }
 
 BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
@@ -114,10 +115,13 @@ BEGIN_MESSAGE_MAP(CToolMenuView, CFormView)
 	ON_LBN_SELCHANGE(IDC_LIST4, &CToolMenuView::OnLbnSelchangeTextureList)
 	ON_CBN_SELCHANGE(IDC_COMBO4, &CToolMenuView::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_BUTTON3, &CToolMenuView::OnBnClickedCreatePrefBtn)
-	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
 	ON_BN_CLICKED(IDC_BUTTON16, &CToolMenuView::OnBnClickedCreateMesh)
 	ON_BN_CLICKED(IDC_CHECK9, &CToolMenuView::OnBnClickedCurObjectNameChk)
 	ON_BN_CLICKED(IDC_CHECK2, &CToolMenuView::OnBnClickedShowObjectChk)
+
+	/* collision */
+	ON_BN_CLICKED(IDC_BUTTON11, &CToolMenuView::OnBnClickedAddCollisionCBtn)
+
 
 	/* ray */
 	ON_BN_CLICKED(IDC_BUTTON13, &CToolMenuView::OnBnClickedCreateRayColliderBtn)
@@ -272,10 +276,11 @@ void CToolMenuView::OnInitialUpdate()
 	m_layerID.AddString(L"Enemy");
 	m_layerID.AddString(L"Map");
 
+	m_colliderID.AddString(L"Floor");
+	m_colliderID.AddString(L"Wall");
 	m_colliderID.AddString(L"Player");
 	m_colliderID.AddString(L"Enemy");
-	m_colliderID.AddString(L"Object");
-	m_colliderID.AddString(L"Map");
+	m_colliderID.AddString(L"Trigger");
 
 	m_rayType.AddString(L"ALL_INF"); // 앞뒤로 무한하게 쏨 (직선)
 	m_rayType.AddString(L"LIMITED"); // 선분
@@ -296,8 +301,37 @@ void CToolMenuView::OnPosX(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPositionX(GetEditControlData(&m_posX, pNMUpDown));
+
+	CString cstrVal;
+
+	if (m_selectedAABBCol)
+	{
+		m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+		_int idx = WstrToInt(wstr);
+
+		_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+
+		pos.x = GetEditControlData(&m_posX, pNMUpDown);
+
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	}
+	else if (m_selectedObbCol)
+	{
+		m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
+		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+		_int idx = WstrToInt(wstr);
+
+		_float3 pos = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+
+		pos.x = GetEditControlData(&m_posX, pNMUpDown);
+
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	}
+	else
+		pCurObj->GetTransform()->SetPositionX(GetEditControlData(&m_posX, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -307,8 +341,25 @@ void CToolMenuView::OnPosY(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPositionY(GetEditControlData(&m_posY, pNMUpDown));
+
+	CString cstrVal;
+
+	if (m_selectedAABBCol)
+	{
+		m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+		_int idx = WstrToInt(wstr);
+
+		_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+
+		pos.y = GetEditControlData(&m_posY, pNMUpDown);
+
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	}
+	else
+		pCurObj->GetTransform()->SetPositionY(GetEditControlData(&m_posY, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -318,8 +369,26 @@ void CToolMenuView::OnPosZ(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-	pCurObj->GetTransform()->SetPositionZ(GetEditControlData(&m_posZ, pNMUpDown));
+
+	CString cstrVal;
+
+	if (m_selectedAABBCol)
+	{
+		m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+		_int idx = WstrToInt(wstr);
+
+		_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+
+		pos.z = GetEditControlData(&m_posZ, pNMUpDown);
+
+		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	}
+	else
+		pCurObj->GetTransform()->SetPositionZ(GetEditControlData(&m_posZ, pNMUpDown));
+
 
 	*pResult = 0;
 }
@@ -551,7 +620,7 @@ void CToolMenuView::DataParsing(ELayerID layerID, std::wofstream* ofsSave)
 			_float len = {};
 			_float3 dir = {};
 			_float3 size = {};
-			_float3 right = {};
+			_float3 rotOffset = {};
 			_float3 up = {};
 			_float3 forward = {};
 
@@ -576,14 +645,8 @@ void CToolMenuView::DataParsing(ELayerID layerID, std::wofstream* ofsSave)
 				size = static_cast<Engine::CObbCollider*>((*col).get())->GetSize();
 				(*ofsSave) << name << "_collider_" << index << "_size=" << size.x << ',' << size.y << ',' << size.z << '\n';
 
-				right = static_cast<Engine::CObbCollider*>((*col).get())->GetRight();
-				(*ofsSave) << name << "_collider_" << index << "_right=" << right.x << ',' << right.y << ',' << right.z << '\n';
-
-				up = static_cast<Engine::CObbCollider*>((*col).get())->GetUp();
-				(*ofsSave) << name << "_collider_" << index << "_up=" << up.x << ',' << up.y << ',' << up.z << '\n';
-
-				forward = static_cast<Engine::CObbCollider*>((*col).get())->GetForward();
-				(*ofsSave) << name << "_collider_" << index << "_forward=" << forward.x << ',' << forward.y << ',' << forward.z << '\n';
+				rotOffset = static_cast<Engine::CObbCollider*>((*col).get())->GetRotOffset();
+				(*ofsSave) << name << "_collider_" << index << "_rotOffset=" << rotOffset.x << ',' << rotOffset.y << ',' << rotOffset.z << '\n';
 				break;
 			}
 			++index;
@@ -752,6 +815,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 	_int colID; // collider
 	_float3 offset; // collider
 	_float3 size; // collider
+	_float3 rotOffset; // collider
 
 	SP(Engine::CObject) spObject = nullptr;
 
@@ -885,7 +949,31 @@ void CToolMenuView::OnBnClickedLoadBtn()
 				}
 					break;
 				case 4: // obb
+				{
+					/* offset */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					/* size */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+					/* rotOffset */
+					std::getline(ifsLoad, strLine);
+					vStr = split(strLine, '=');
+					vStr = split(vStr[1], ',');
+					rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+					colID = StrToInt(collisionID);
+
+					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
+					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+					m_obbCnt.AddString(SizeToCStr(colIdx));
 					break;
+				}
 				}
 			}
 		}
@@ -935,12 +1023,24 @@ void CToolMenuView::OnBnClickedCreateAABBColliderBtn()
 			WstrToFloat(Engine::StrToWStr(vStrOffset[2]))
 		);
 
-		//툴에서 만들어
+		//툴에서 만들어 : 만듬
 		//콜리젼 아이디 기입하는 부분에서 콜리젼 아이디 받기
-		_int collisionID = 0;
+		CString cstrIdx;
+		ECollisionID collisionID;
+		m_colliderID.GetWindowTextW(cstrIdx);
 
+		if (L"Floor" == cstrIdx)
+			collisionID = ECollisionID::Floor;
+		else if (L"Wall" == cstrIdx)
+			collisionID = ECollisionID::Wall;
+		else if (L"Player" == cstrIdx)
+			collisionID = ECollisionID::Player;
+		else if (L"Enemy" == cstrIdx)
+			collisionID = ECollisionID::Enemy;
+		else if (L"Trigger" == cstrIdx)
+			collisionID = ECollisionID::Trigger;
 
-		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(collisionID, size, offset));
+		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create((_int)collisionID, size, offset));
 
 		size_t idx = curObj->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
 
@@ -957,11 +1057,12 @@ void CToolMenuView::OnBnClickedCreateObbColliderBtn()
 	if (nullptr == curObj)
 		return;
 
-	if (1 != m_colType[2].GetCheck())
+	if (1 == m_colType[2].GetCheck())
 	{
-		CString cstrOffset, cstrSize;
+		CString cstrOffset, cstrSize, cstrRotOffset;
 		m_obbOffset.GetWindowTextW(cstrOffset);
 		m_obbSize.GetWindowTextW(cstrSize);
+		m_obbRotOffset.GetWindowTextW(cstrRotOffset);
 
 		/* offset */
 		std::string str = CStrToStr(cstrOffset);
@@ -983,18 +1084,32 @@ void CToolMenuView::OnBnClickedCreateObbColliderBtn()
 			WstrToFloat(Engine::StrToWStr(vStrSize[2]))
 		);
 
-		//툴에서 만들어
-		//Right~Forward까지 필요없음 
-		//근데 rotationOffset이 필요함 (m_rotOffset)이라고 쓰고있음
-		//그리고 당연히 collisionID도 필요함.
+		/* rotOffset */
+		str = CStrToStr(cstrRotOffset);
+		std::vector<std::string> vStrRotOffset = split(str, ',');
 
+		_float3 rotOffset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrRotOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrRotOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrRotOffset[2]))
+		);
 
+		CString cstrIdx;
+		ECollisionID collisionID;
+		m_colliderID.GetWindowTextW(cstrIdx);
+		
+		if (L"Floor" == cstrIdx)
+			collisionID = ECollisionID::Floor;
+		else if (L"Wall" == cstrIdx)
+			collisionID = ECollisionID::Wall;
+		else if (L"Player" == cstrIdx)
+			collisionID = ECollisionID::Player;
+		else if (L"Enemy" == cstrIdx)
+			collisionID = ECollisionID::Enemy;
+		else if (L"Trigger" == cstrIdx)
+			collisionID = ECollisionID::Trigger;
 
-		//툴에서 만들어
-		_int collisionID = 0;
-		_float3 rotOffset = ZERO_VECTOR;
-
-		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(collisionID, size, offset, rotOffset));
+		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)collisionID, size, offset, rotOffset));
 
 		size_t idx = curObj->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
 
@@ -1055,9 +1170,22 @@ void CToolMenuView::OnBnClickedCreateRayColliderBtn()
 
 		//툴에서 만들어
 		//아이디 줘야해요
-		_int collisionID = 0;
+		CString cstrIdx;
+		ECollisionID collisionID;
+		m_colliderID.GetWindowTextW(cstrIdx);
 
-		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CRayCollider::Create(collisionID, offset, dir, len, rayType));
+		if (L"Floor" == cstrIdx)
+			collisionID = ECollisionID::Floor;
+		else if (L"Wall" == cstrIdx)
+			collisionID = ECollisionID::Wall;
+		else if (L"Player" == cstrIdx)
+			collisionID = ECollisionID::Player;
+		else if (L"Enemy" == cstrIdx)
+			collisionID = ECollisionID::Enemy;
+		else if (L"Trigger" == cstrIdx)
+			collisionID = ECollisionID::Trigger;
+
+		curObj->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CRayCollider::Create((_int)collisionID, offset, dir, len, rayType));
 
 		size_t idx = curObj->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
 
@@ -1076,22 +1204,23 @@ void CToolMenuView::OnBnClickedAddCollisionCBtn()
 		return;
 
 	CString cstrVal;
-	m_colliderID.GetLBText(m_colliderID.GetCurSel(), cstrVal);
 	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
 	_int colID = 0;
 
-	if (L"" == wstr)
-		return;
-	else if (L"Player" == wstr)
-		colID = (_int)EColliderID::Player;
-	else if (L"Enemy" == wstr)
-		colID = (_int)EColliderID::Enemy;
-	else if (L"Object" == wstr)
-		colID = (_int)EColliderID::Object;
-	else if (L"Map" == wstr)
-		colID = (_int)EColliderID::Map;
+	//if (L"" == wstr)
+	//	return;
+	//else if (L"Floor" == wstr)
+	//	colID = (_int)ECollisionID::Floor;
+	//else if (L"Wall" == wstr)
+	//	colID = (_int)ECollisionID::Wall;
+	//else if (L"Player" == wstr)
+	//	colID = (_int)ECollisionID::Player;
+	//else if (L"Enemy" == wstr)
+	//	colID = (_int)ECollisionID::Enemy;
+	//else if (L"Trigger" == wstr)
+	//	colID = (_int)ECollisionID::Trigger;
 
-	//잠시대기 curObj->AddComponent<Engine::CCollisionC>()->SetCollisionID((_int)colID);
+	curObj->AddComponent<Engine::CCollisionC>();
 	curObj->AddComponent<Engine::CDebugC>();
 
 	m_colType[0].EnableWindow(true);
@@ -1286,9 +1415,7 @@ void CToolMenuView::OnCbnSelchangeObbList()
 
 	_float3 offset = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 	_float3 size = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetSize();
-	_float3 right = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetRight();
-	_float3 up = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetUp();
-	_float3 forward = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetForward();
+	_float3 rotOffset = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetRotOffset();
 
 	std::wstring wstrOffset = DeleteCharInWstr(FloatToWStr(offset.x), '0') + L"," +
 		DeleteCharInWstr(FloatToWStr(offset.y), '0') + L"," +
@@ -1298,23 +1425,13 @@ void CToolMenuView::OnCbnSelchangeObbList()
 		DeleteCharInWstr(FloatToWStr(size.y), '0') + L"," +
 		DeleteCharInWstr(FloatToWStr(size.z), '0');
 
-	std::wstring wstrRight = DeleteCharInWstr(FloatToWStr(right.x), '0') + L"," +
-		DeleteCharInWstr(FloatToWStr(right.y), '0') + L"," +
-		DeleteCharInWstr(FloatToWStr(right.z), '0');
-
-	std::wstring wstrUp = DeleteCharInWstr(FloatToWStr(up.x), '0') + L"," +
-		DeleteCharInWstr(FloatToWStr(up.y), '0') + L"," +
-		DeleteCharInWstr(FloatToWStr(up.z), '0');
-
-	std::wstring wstrForward = DeleteCharInWstr(FloatToWStr(forward.x), '0') + L"," +
-		DeleteCharInWstr(FloatToWStr(forward.y), '0') + L"," +
-		DeleteCharInWstr(FloatToWStr(forward.z), '0');
+	std::wstring wstrRotOffset = DeleteCharInWstr(FloatToWStr(rotOffset.x), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(rotOffset.y), '0') + L"," +
+		DeleteCharInWstr(FloatToWStr(rotOffset.z), '0');
 
 	m_obbOffset.SetWindowTextW(wstrOffset.c_str());
 	m_obbSize.SetWindowTextW(wstrSize.c_str());
-	m_obbRight.SetWindowTextW(wstrRight.c_str());
-	m_obbUp.SetWindowTextW(wstrUp.c_str());
-	m_obbForward.SetWindowTextW(wstrForward.c_str());
+	m_obbRotOffset.SetWindowTextW(wstrRotOffset.c_str());
 }
 
 void CToolMenuView::OnBnClickedSelectedAABBCol()
@@ -1391,12 +1508,10 @@ void CToolMenuView::OnBnClickedModifyObbColBtn()
 
 	if (1 == m_colType[2].GetCheck())
 	{
-		CString cstrOffset, cstrSize, cstrRight, cstrUp, cstrForward;
+		CString cstrOffset, cstrSize, cstrRotOffset;
 		m_obbOffset.GetWindowTextW(cstrOffset);
 		m_obbSize.GetWindowTextW(cstrSize);
-		m_obbRight.GetWindowTextW(cstrRight);
-		m_obbUp.GetWindowTextW(cstrUp);
-		m_obbForward.GetWindowTextW(cstrForward);
+		m_obbRotOffset.GetWindowTextW(cstrRotOffset);
 
 		/* offset */
 		std::string str = CStrToStr(cstrOffset);
@@ -1419,44 +1534,22 @@ void CToolMenuView::OnBnClickedModifyObbColBtn()
 		);
 
 		/* right */
-		str = CStrToStr(cstrRight);
-		std::vector<std::string> vStrRight = split(str, ',');
+		str = CStrToStr(cstrRotOffset);
+		std::vector<std::string> vStrRotOffset = split(str, ',');
 
-		_float3 right = _float3(
-			WstrToFloat(Engine::StrToWStr(vStrRight[0])),
-			WstrToFloat(Engine::StrToWStr(vStrRight[1])),
-			WstrToFloat(Engine::StrToWStr(vStrRight[2]))
-		);
-
-		/* up */
-		str = CStrToStr(cstrUp);
-		std::vector<std::string> vStrUp = split(str, ',');
-
-		_float3 up = _float3(
-			WstrToFloat(Engine::StrToWStr(vStrUp[0])),
-			WstrToFloat(Engine::StrToWStr(vStrUp[1])),
-			WstrToFloat(Engine::StrToWStr(vStrUp[2]))
-		);
-
-		/* forward */
-		str = CStrToStr(cstrForward);
-		std::vector<std::string> vStrForward = split(str, ',');
-
-		_float3 forward = _float3(
-			WstrToFloat(Engine::StrToWStr(vStrForward[0])),
-			WstrToFloat(Engine::StrToWStr(vStrForward[1])),
-			WstrToFloat(Engine::StrToWStr(vStrForward[2]))
+		_float3 rotOffset = _float3(
+			WstrToFloat(Engine::StrToWStr(vStrRotOffset[0])),
+			WstrToFloat(Engine::StrToWStr(vStrRotOffset[1])),
+			WstrToFloat(Engine::StrToWStr(vStrRotOffset[2]))
 		);
 
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(offset);
-		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffset(offset);
+		//static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffset(offset);
 
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetSize(size);
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetHalfSize(size * 0.5f);
 
-		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetRight(right);
-		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetUp(up);
-		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetForward(forward);
+		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetRotOffset(rotOffset);
 
 		std::cout << "modify obb collider" << std::endl;
 	}

@@ -108,8 +108,34 @@ void CMO_Spider::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
-void CMO_Spider::Chase_Target(_float DeltaTime)
+void CMO_Spider::Chase_Target(_float baseAngle, _float3* pTargetPos, _float speed, _float deltaTime)
 {
+	_float3 dir = *pTargetPos - m_spTransform->GetPosition();
+	_float3 myPos = m_spTransform->GetPosition(); // enemy's pos
+	_float3 myScale = m_spTransform->GetSize(); // enemy's scale
+
+	myPos += *D3DXVec3Normalize(&dir, &dir) * speed * deltaTime;
+
+	_mat matScale, matRot, matTrans;
+
+	ComputeLookAtTarget(&matRot, pTargetPos);
+	D3DXMatrixScaling(&matScale, myScale.x, myScale.y, myScale.z);
+	D3DXMatrixTranslation(&matTrans, myPos.x, myPos.y, myPos.z);
+
+	_mat temp;
+	D3DXMatrixRotationY(&temp, baseAngle);
+
+	m_spTransform->UpdateWorldMatrix() = matScale * (matRot * temp) * matTrans;
+}
+
+void CMO_Spider::ComputeLookAtTarget(_mat * pOut, _float3 dir, const _float3* pTargetPos)
+{
+	_float3 dir = *pTargetPos - ;
+	_float3 axis = *D3DXVec3Cross(&vAxis, &m_vInfo[INFO_RIGHT], &vDir);
+	_float3 right;
+	_float angle = acosf(D3DXVec3Dot(D3DXVec3Normalize(&vDir, &vDir), D3DXVec3Normalize(&vRight, &m_vInfo[INFO_RIGHT])));
+
+	D3DXMatrixRotationAxis(pOut, &axis, angle);
 }
 
 SP(CMO_Spider) CMO_Spider::Create(_bool isStatic, Engine::CScene * pScene)
