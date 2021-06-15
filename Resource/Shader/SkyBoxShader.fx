@@ -60,7 +60,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 	
 	Out.vColor = texCUBE(BaseSampler, In.vTexUV);		// 2차원 텍스처로부터 UV 값에 해당하는 픽셀의 색상을 추출하는 함수, 반환타입은 VECTOR 타입
-
+	Out.vColor.x = 1;
 	//Out.vColor.rg = 0.9f;
 	return Out;
 }
