@@ -53,10 +53,13 @@ void COneStageScene::Start(void)
 	// 로드
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
-	Load->Load(this);
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
 	delete(Load);
 
-	// (미완성)스크롤 뷰 예제
 	CBattleUiManager::GetInstance()->Start(this);
 }
 
@@ -81,12 +84,22 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsetrState(L"슬깃이", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
 	{
 		CBattleUiManager::GetInstance()->MonsterHpDown(0.5f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
+	{
+		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
+	{
+		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
 	}
 }
 
@@ -99,7 +112,6 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void COneStageScene::OnEnable(void)

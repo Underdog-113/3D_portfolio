@@ -274,13 +274,22 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader">
       <UniqueIdentifier>{695e9423-cbcc-4a72-94a5-8375b5aa1dd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader">
+      <UniqueIdentifier>{3811655b-405c-460f-a9dd-7226bf6ed2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
+      <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
       <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
       <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.SkyBoxShader">
+      <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
+        <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader">
       <UniqueIdentifier>{bbe26739-63c8-43a8-97cc-b2bb217589e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -528,14 +537,20 @@
     <ClCompile Include="..\Code\DamageFontShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\CatPawShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\CircularGaugeShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CubeTexC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\CelShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\SkyBoxShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.SkyBoxShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -806,14 +821,20 @@
     <ClInclude Include="..\Header\DamageFontShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CatPawShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\CircularGaugeShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CubeTexC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CelShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SkyBoxShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.SkyBoxShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -844,8 +865,14 @@
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.SkyBoxShader</Filter>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
+    </FxCompile>      
   </ItemGroup>
 </Project>

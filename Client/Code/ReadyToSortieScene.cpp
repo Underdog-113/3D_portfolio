@@ -53,7 +53,11 @@ void CReadyToSortieScene::Start(void)
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
-	Load->Load(this);
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
 	delete(Load);
 }
 
@@ -77,7 +81,6 @@ void CReadyToSortieScene::LateUpdate(void)
 void CReadyToSortieScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void CReadyToSortieScene::OnEnable(void)

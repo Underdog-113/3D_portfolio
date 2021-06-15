@@ -37,7 +37,7 @@ public:
 
 
 private:
-	void Chase_Target(_float DeltaTime);
+	void Chase_Target(_float3 targetPos);
 
 public:
 	static		SP(CMO_Spider)			Create(_bool isStatic, Engine::CScene* pScene);

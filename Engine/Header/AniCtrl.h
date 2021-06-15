@@ -38,8 +38,8 @@ public:
 					void		ChangeFakeAnimState_EndToStart(void);
 					_bool		IsItEnd				(void);
 
-					double		GetTimeline			();
-
+					double		GetTimeline			(void);
+					void		ResetTimers			(void);
 
 private:
 					_uint		FindIndexByName		(std::string const& name, LPD3DXANIMATIONSET pAS);

@@ -54,7 +54,10 @@ void CMainRoomScene::Start(void)
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
-	Load->Load(this);
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->CanvasLoad(this);
 	delete(Load);
 
 }
@@ -78,7 +81,6 @@ void CMainRoomScene::LateUpdate(void)
 void CMainRoomScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void CMainRoomScene::OnEnable(void)
@@ -101,3 +103,4 @@ void CMainRoomScene::ChangeScene(CClientScene* pScene)
 void CMainRoomScene::InitPrototypes(void)
 {
 }
+

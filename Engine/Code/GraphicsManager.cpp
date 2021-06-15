@@ -413,16 +413,37 @@ void CGraphicsManager::RenderAlphaBlend(void)
 						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
 						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						pEffect->BeginPass(0);
+						if (vShader[i]->GetObjectKey() == L"CatPawShader")
+						{
+							for (_int j = 0; j < 2; ++j)
+							{
+								_uint maxPass = 0;
 
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
+								pEffect->Begin(&maxPass, 0);
+								pEffect->BeginPass(j);
 
-						pEffect->EndPass();
-						pEffect->End();
+								pObject->PreRender(pEffect);
+								pObject->Render(pEffect);
+								pObject->PostRender(pEffect);
+
+								pEffect->EndPass();
+								pEffect->End();
+							}							
+						}
+						else
+						{
+							_uint maxPass = 0;
+
+							pEffect->Begin(&maxPass, 0);
+							pEffect->BeginPass(0);
+
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+
+							pEffect->EndPass();
+							pEffect->End();
+						}
 					}
 				}
 				else

@@ -10,6 +10,13 @@
 #include "Kiana.h"
 #include "AniCtrl.h"
 
+#include "Kiana_CatPaw_Atk01.h"
+#include "Kiana_CatPaw_Atk02.h"
+#include "Kiana_CatPaw_Atk03.h"
+#include "Kiana_CatPaw_Atk04.h"
+#include "Kiana_CatPaw_Atk05.h"
+#include "Kiana_Pistol_USP45.h"
+
 CJongScene::CJongScene()
 {
 }
@@ -17,8 +24,6 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
-	//delete m_pController;
-	m_pController->DestroyInstance();
 }
 
 CClientScene* CJongScene::Create(void)
@@ -38,10 +43,10 @@ void CJongScene::Free(void)
 void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	
+
 	//m_pController = new CStageController;
 	m_pController = CStageController::GetInstance();
-	m_pController->Awake();	
+	m_pController->Awake();
 }
 
 void CJongScene::Start(void)
@@ -49,7 +54,7 @@ void CJongScene::Start(void)
 		//Engine::CCameraManager::GetInstance()->GetMainCamera();
 	__super::Start();
 	{
-		//Engine::GET_CUR_SCENE;	// 쓰지 마세요오오옹
+		//Engine::GET_CUR_SCENE;
 		{
 			SP(Engine::CObject) spEmptyObject1
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
@@ -65,26 +70,6 @@ void CJongScene::Start(void)
 			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
 		}
 
-		{
-			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Kiana");
-
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_decl");
-			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject->GetTransform()->SetSize(1, 1, 1);
-
-			spEmptyObject->AddComponent<CFSM_KianaC>();
-
-			spEmptyObject->GetComponent<Engine::CMeshC>()->OnRootMotion();
-
-			m_spKiana = spEmptyObject;
-
-			//m_pivot->GetTransform()->SetParent(m_pKiana->GetTransform());
-			m_pController->AddSquadMember(m_spKiana);
-
-		}
 
 		// Kiana Body
 		{
@@ -94,40 +79,6 @@ void CJongScene::Start(void)
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
 		}
-
-		// Catpaw ATK01
-		{
-			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CatPaw_ATK01");
-
-			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"Kiana_CatPaw_Atk01");
-			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			m_spCatPaw->AddComponent<Engine::CTextureC>();
-			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
-			m_spCatPaw->GetTransform()->AddPositionY(1.f);
-		}
-
-		{
-			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
-
-			m_spKiana = spKianaClone;
-			m_pController->AddSquadMember(m_spKiana);
-			m_pController->Start();
-		}
-
-		// Catpaw ATK01
-		{
-			m_spCatPaw = m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"testcatpaw");
-
-			m_spCatPaw->AddComponent<Engine::CMeshC>()->AddMeshData(L"CatPaw_Atk03");
-			m_spCatPaw->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			m_spCatPaw->AddComponent<Engine::CTextureC>();
-			m_spCatPaw->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			m_spCatPaw->GetTransform()->SetSize(1, 1, 1);
-			m_spCatPaw->GetTransform()->AddPositionY(1.f);
-			m_spCatPaw->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetReplay(true);
-		}
-
 
 		{
 			SP(Engine::CObject) spEmptyObject
@@ -151,7 +102,7 @@ void CJongScene::FixedUpdate(void)
 
 void CJongScene::Update(void)
 {
-	__super::Update();  
+	__super::Update();
 	m_pController->Update();
 	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
 	m_pivot->GetTransform()->SetPositionY(0.f);
@@ -166,6 +117,8 @@ void CJongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
+	m_pController->DestroyInstance();
+	m_pController = nullptr;
 }
 
 void CJongScene::OnEnable(void)
@@ -184,4 +137,22 @@ void CJongScene::InitPrototypes(void)
 {
 	SP(CKiana) spKianaPrototype(CKiana::Create(false, this));
 	ADD_PROTOTYPE(spKianaPrototype);
+
+	SP(CKiana_CatPaw_Atk01) spPaw01(CKiana_CatPaw_Atk01::Create(false, this));
+	ADD_PROTOTYPE(spPaw01);
+
+	SP(CKiana_CatPaw_Atk02) spPaw02(CKiana_CatPaw_Atk02::Create(false, this));
+	ADD_PROTOTYPE(spPaw02);
+
+	SP(CKiana_CatPaw_Atk03) spPaw03(CKiana_CatPaw_Atk03::Create(false, this));
+	ADD_PROTOTYPE(spPaw03);
+
+	SP(CKiana_CatPaw_Atk04) spPaw04(CKiana_CatPaw_Atk04::Create(false, this));
+	ADD_PROTOTYPE(spPaw04);
+
+	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(false, this));
+	ADD_PROTOTYPE(spPaw05);
+
+	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(false, this));
+	ADD_PROTOTYPE(spPistol);
 }

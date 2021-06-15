@@ -28,6 +28,9 @@ public:
 	void PlayerHpDown(_float value);
 	void PlayerHpUp(_float value);
 
+	void PlayerSp(_float value);
+	void PlayerSpDown(_float value);
+	void PlayerSpUp(_float value);
 private:
 
 private:
@@ -39,6 +42,9 @@ private:
 	Engine::CImageObject* m_hitCount;
 	Engine::CImageObject* m_hits;
 	Engine::CImageObject* m_monsterProperty;
+	Engine::CObject* m_monsterName;
+	Engine::CObject* m_playerHp;
+	Engine::CObject* m_playerSp;
 	Engine::CImageObject* m_time;
 	std::vector<Engine::CImageObject*> m_playerIllustration;
 	std::vector<Engine::CImageObject*> m_playerProperty;
@@ -46,6 +52,7 @@ private:
 
 	std::vector<Engine::CSlider*> m_monsterHpBar;
 	std::vector<Engine::CSlider*> m_playerHPBar;
+	Engine::CSlider* m_playerSTBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerHpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerStBar;
 };

@@ -69,9 +69,11 @@ namespace Engine
 		WaterShader				= 5,
 		EffectShader			= 6,
 		DamageFont				= 7,
-		CircularGauge			= 8,
-		SkyBoxShader			= 9,
-		NumOfShaderID			= 10
+		CatPawShader			= 8,
+		CircularGauge			= 9,
+		CelShader				= 10,
+		SkyBoxShader			= 11,
+		NumOfShaderID			= 12
 
 	};
 #pragma endregion

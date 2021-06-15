@@ -186,8 +186,8 @@
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
-    <ClInclude Include="..\Header\Kiana_CatPaw.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -214,7 +214,12 @@
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
-    <ClInclude Include="..\Header\LifeObjectC.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
@@ -235,7 +240,7 @@
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
-    <ClInclude Include="..\Header\TimerUi.h" />
+    <ClInclude Include="..\Header\TimerUiC.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
@@ -254,7 +259,6 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
-    <ClCompile Include="..\Code\Kiana_CatPaw.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
     <ClCompile Include="..\Code\DamageFontC.cpp" />
@@ -275,6 +279,12 @@
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
+    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -296,7 +306,7 @@
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
-    <ClCompile Include="..\Code\TimerUi.cpp" />
+    <ClCompile Include="..\Code\TimerUiC.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
