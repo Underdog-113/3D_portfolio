@@ -53,8 +53,10 @@ private:
 	
 	GETTOR_SETTOR	(_bool,				m_useGravity,			true,				UseGravity)
 	GETTOR_SETTOR	(_bool,				m_detectCollision,		true,				DetectCollision)
+	GETTOR_SETTOR	(_bool,				m_onFloor,				false,				OnFloor)
 	
 	GETTOR_SETTOR	(_float,			m_gravityConstant,		1.f,				GravityConstant)
+	GETTOR_SETTOR	(_float,			m_disFromGround,		UNDEFINED,			DisFromGround)
 
 	GETTOR_SETTOR	(_float,			m_mass,					1.f,				Mass)
 	GETTOR_SETTOR	(_float3,			m_centerOfMass,			ZERO_VECTOR,		CenterOfMass)

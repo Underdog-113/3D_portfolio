@@ -39,20 +39,43 @@ void CChangmoScene::Start(void)
 	__super::Start();
 
 	{
+		//Floor
 		SP(Engine::CObject) spEmptyObject
+			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Floor");
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Floor, _float3(10, 0, 10)));
+		spEmptyObject->AddComponent<Engine::CDebugC>();
+		spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
+		spEmptyObject->GetTransform()->AddRotationX(PI / 10);
+
+		spEmptyObject
+			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Floor");
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, _float3(0, 10, 10)));
+		spEmptyObject->AddComponent<Engine::CDebugC>();
+		spEmptyObject->GetTransform()->SetPosition(-5, 0, 0);
+		
+
+
+		
+		spEmptyObject
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
 		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
 		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(2, _float3(2, 2, 2)));
+		
+		spEmptyObject->AddComponent<Engine::CCollisionC>()->
+			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
+		spEmptyObject->GetComponent<Engine::CCollisionC>()->
+			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
+
 		spEmptyObject->AddComponent<Engine::CDebugC>();
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spEmptyObject->AddComponent<Engine::CRigidBodyC>();
 		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject->GetTransform()->SetPosition(0, 0, 0);
+		spEmptyObject->GetTransform()->SetPosition(0, 3, 0);
 		spEmptyObject->GetTransform()->AddRotationY(PI / 4);
 
-		spEmptyObject
+		/*spEmptyObject
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
 
 		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
@@ -62,7 +85,10 @@ void CChangmoScene::Start(void)
 		spEmptyObject->AddComponent<Engine::CDebugC>();
 		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);*/
+
+
+		
 
 		//spEmptyObject
 		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube1");
