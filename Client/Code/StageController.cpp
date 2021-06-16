@@ -19,7 +19,7 @@ void CStageController::Awake(void)
 
 void CStageController::Start(void)
 {
-	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
+	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera");
 }
 
 

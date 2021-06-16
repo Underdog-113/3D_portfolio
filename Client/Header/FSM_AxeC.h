@@ -1,16 +1,28 @@
 #pragma once
 #include "StateMachine.h"
 
-class FSM_AxeC final : public Engine::CStateMachineC
+class CStageController;
+class CFSM_AxeC final : public Engine::CStateMachineC
 {
 public:
-	FSM_AxeC();
-	~FSM_AxeC() = default;
+	CFSM_AxeC();
+	~CFSM_AxeC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
 	void Awake() override;
 	void Start(SP(CComponent)spThis) override;
+
+private:
+	void RegisterAllStage();
+	void FixRootMotionOffset(_uint index);
+
+private:
+	_float m_accTime = 0.f;
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
+	CStageController* m_pStageController = nullptr;
+
+	GETTOR_SETTOR(_bool, m_pattern1, false, Pattern1);
 
 public:
 	// <Animation List>
@@ -146,9 +158,5 @@ public:
 	void DIE_FLY_Enter(void);
 	void DIE_FLY_Update(float deltaTime);
 	void DIE_FLY_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
-
 };
 

@@ -85,7 +85,7 @@ void CMO_Spider::PostRender(void)
 
 void CMO_Spider::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CMO_Spider::OnDestroy(void)
@@ -108,7 +108,7 @@ void CMO_Spider::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
-void CMO_Spider::Chase_Target(_float3 targetPos)
+void CMO_Spider::ChaseTarget(_float3 targetPos)
 {
 	_float3 dir = targetPos - m_spTransform->GetPosition();
 	dir.y = 0; D3DXVec3Normalize(&dir, &dir);

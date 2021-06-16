@@ -20,6 +20,7 @@
 #include "MO_Axe.h"
 #include "MO_Robot.h"
 #include "MO_Spider.h"
+#include "MO_Sickle.h"
 #include "MO_Lancer.h"
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
@@ -162,6 +163,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CMonster) spMO_Lancer(CMO_Lancer::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Lancer);
+
+	SP(CMonster) spMO_Sickle(CMO_Sickle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Sickle);
 
 	SP(CMonster) spMB_Ganesha(CMB_Ganesha::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMB_Ganesha);

@@ -1,12 +1,13 @@
 #pragma once
 #include "Monster.h"
+
 class CMO_Axe : public CMonster
 {
 	SMART_DELETER_REGISTER
 
 private:
 	CMO_Axe();
-	virtual ~CMO_Axe() = default;
+	~CMO_Axe();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -22,8 +23,13 @@ public:
 	virtual void LateUpdate(void) override;
 
 	virtual void PreRender(void) override;
+	virtual void PreRender(LPD3DXEFFECT pEffect) override;
+
 	virtual void Render(void) override;
+	virtual void Render(LPD3DXEFFECT pEffect) override;
+
 	virtual void PostRender(void) override;
+	virtual void PostRender(LPD3DXEFFECT pEffect) override;
 
 	virtual void OnDestroy(void) override;
 
@@ -35,5 +41,9 @@ public:
 
 public:
 	static		SP(CMO_Axe)			Create(_bool isStatic, Engine::CScene* pScene);
+	void ChaseTarget(_float3 targetPos);
+
+private:
+	static		_uint				m_s_uniqueID;
 };
 

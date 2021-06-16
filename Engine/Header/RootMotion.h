@@ -32,7 +32,8 @@ private:
 
 	GETTOR_SETTOR	(_float3,	m_rootMotionOffset,			ZERO_VECTOR,	RootMotionOffset)
 	GETTOR_SETTOR	(_float3,	m_rootMotionPos,			ZERO_VECTOR,	RootMotionPos)
-
+		
+	GETTOR_SETTOR	(_float,	m_speed,					0.f,			Speed)
 	_float3 m_animStartOffset = ZERO_VECTOR;
 
 	_float3 m_prevRootMotionPos = ZERO_VECTOR;
