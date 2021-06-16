@@ -123,17 +123,13 @@ void CKiana_CatPaw_Atk01::OnDestroy(void)
 
 void CKiana_CatPaw_Atk01::OnEnable(void)
 {
+	m_spMesh->GetFirstMeshData_Dynamic()->ResetAnimation();
 	__super::OnEnable();
-
-	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(1.f);
-	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->ChangeAniSet(0);
 }
 
 void CKiana_CatPaw_Atk01::OnDisable(void)
 {
 	__super::OnDisable();
-	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->GetAniCtrl()->ResetTime();
-	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.f);
 }
 
 void CKiana_CatPaw_Atk01::SetBasicName(void)

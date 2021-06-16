@@ -219,6 +219,7 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h" />
     <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\Theresa.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
     <ClInclude Include="..\Header\TimerUiC.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
@@ -247,7 +249,6 @@
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
-    <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="FSMDefine_Spider.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
@@ -305,6 +307,7 @@
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\Theresa.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
     <ClCompile Include="..\Code\TimerUiC.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />

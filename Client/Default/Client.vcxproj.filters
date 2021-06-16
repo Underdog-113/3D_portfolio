@@ -202,6 +202,9 @@
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\Pistol">
       <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\01.Theresa">
+      <UniqueIdentifier>{a72f1c22-594a-4366-ad8a-6a4d215d293e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -396,7 +399,6 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\RotationUiC.h">
       <Filter>03.Component\00.UI\02.RotationUi</Filter>
     </ClInclude>
@@ -406,15 +408,20 @@
     <ClInclude Include="..\Header\HitsUiC.h">
       <Filter>03.Component\00.UI\04.HitsUi</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\LifeObjectC.h">
-      <Filter>03.Component\00.UI\05.LifeObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\TimerUiC.h">
       <Filter>03.Component\00.UI\03.Timer</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="..\Header\ClientFunction.h">
       <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa.h">
+      <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -583,7 +590,6 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp">
       <Filter>03.Component\00.UI\02.RotationUi</Filter>
     </ClCompile>
@@ -598,6 +604,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\TimerUiC.cpp">
       <Filter>03.Component\00.UI\03.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa.cpp">
+      <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -617,6 +632,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Initialize_Helper.txt" />
+    <Text Include="Initialize_Helper.txt">
+      <Filter>99.Default</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -15,6 +15,8 @@
 #include "Kiana_CatPaw_Atk03.h"
 #include "Kiana_CatPaw_Atk04.h"
 #include "Kiana_CatPaw_Atk05.h"
+
+#include "Kiana_CatPaw_Ring_Atk01.h"
 #include "Kiana_Pistol_USP45.h"
 
 CJongScene::CJongScene()
@@ -67,7 +69,9 @@ void CJongScene::Start(void)
 
 			m_pivot = spEmptyObject1.get();
 
+			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
 			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
+			cam->SetTargetDist(6.f);
 		}
 
 
@@ -152,6 +156,9 @@ void CJongScene::InitPrototypes(void)
 
 	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(false, this));
 	ADD_PROTOTYPE(spPaw05);
+
+	SP(CKiana_CatPaw_Ring_Atk01) spPawRing01(CKiana_CatPaw_Ring_Atk01::Create(false, this));
+	ADD_PROTOTYPE(spPawRing01);
 
 	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(false, this));
 	ADD_PROTOTYPE(spPistol);

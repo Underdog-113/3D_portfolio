@@ -144,8 +144,16 @@ void CDynamicMeshData::ChangeAniSet(std::string name, _bool fixTillEnd, _double 
 
 void CDynamicMeshData::PlayAnimation(void)
 {
-	m_pAniCtrl->Play();
+	if (m_playAnimation)
+	{
+		m_pAniCtrl->Play();
+		UpdateFrame();
+	}
+}
 
+void CDynamicMeshData::ResetAnimation(void)
+{
+	m_pAniCtrl->ResetAnimation();
 	UpdateFrame();
 }
 

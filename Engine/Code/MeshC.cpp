@@ -391,8 +391,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	// root motion
 	ApplyRootMotion(pDM);
 
-	pDM->GetAniCtrl()->Play();
-	pDM->UpdateFrame();
+	pDM->PlayAnimation();
 
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));

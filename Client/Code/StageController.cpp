@@ -309,6 +309,10 @@ void CStageController::SetInputLock_ByAni(bool lock)
 
 		m_prevMoveFlag = m_moveFlag;
 	}
+	else
+	{
+		m_reserveMoveFlag = m_moveFlag;
+	}
 }
 
 // 1. 새로운 애니 시작할 때 방향 고정
