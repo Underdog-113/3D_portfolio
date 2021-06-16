@@ -83,7 +83,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 		0.f);
 
 	Out.vColor += g_addColor;
-
+	Out.vColor.a = 1;
 	return Out;
 }
 

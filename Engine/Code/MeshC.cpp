@@ -376,6 +376,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			else
 				GET_DEVICE->SetTexture(0, nullptr);
 
+			GET_DEVICE->SetMaterial(&meshContainer->pMaterials[i].MatD3D);
+
 			meshContainer->MeshData.pMesh->DrawSubset(i);
 		}
 
@@ -447,6 +449,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			pEffect->CommitChanges();
 
 			pEffect->BeginPass(pass);
+			GET_DEVICE->SetMaterial(&meshContainer->pMaterials[i].MatD3D);
 			meshContainer->MeshData.pMesh->DrawSubset(i);
 			pEffect->EndPass();
 		}

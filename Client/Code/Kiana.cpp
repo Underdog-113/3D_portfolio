@@ -40,7 +40,7 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spMesh		= spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
+	//spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
