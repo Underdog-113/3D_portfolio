@@ -1,21 +1,20 @@
-#ifndef CANVAS_H
-#define CANVAS_H
+#ifndef TEXT_H
+#define TEXT_H
 
 #include "Object.h"
 
 BEGIN(Engine)
-class ENGINE_DLL CCanvas final : public CObject
+class ENGINE_DLL CTextObject final : public CObject
 {
-public:
 	SMART_DELETER_REGISTER
 private:
-	CCanvas();
-	~CCanvas();
+	CTextObject();
+	~CTextObject();
 
 public:
 	// CObject을(를) 통해 상속됨
-	static	SP(CCanvas) Create(_bool isStatic, CScene* pScene);
-	SP(CObject) MakeClone(void) override;
+	static	SP(CTextObject) Create(_bool isStatic, CScene* pScene);
+	SP(Engine::CObject) MakeClone(void) override;
 
 	void Awake(void) override;
 	void Start(void) override;
@@ -33,13 +32,15 @@ public:
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 
-	void AddObjectFind();
+
+
 private:
 	void SetBasicName(void) override;
 private:
 	static _uint m_s_uniqueID;
+	SP(CTextC) m_textC;
+	GETTOR(SP(CGraphicsC), m_spGraphics, nullptr, Graphics)
 
-	GETTOR(std::list<CObject*>, m_spObjectList, {}, ObjectList);
 };
 END
 #endif

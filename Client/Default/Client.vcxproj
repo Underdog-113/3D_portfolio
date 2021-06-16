@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
@@ -249,6 +250,7 @@
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
+    <ClInclude Include="AlphaLifeTimeC.h" />
     <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="FSMDefine_Spider.h" />
     <ClInclude Include="Resource.h" />
@@ -257,6 +259,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
@@ -316,6 +319,7 @@
     <ClCompile Include="..\Code\StageController.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
+    <ClCompile Include="AlphaLifeTimeC.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

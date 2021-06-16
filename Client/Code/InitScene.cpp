@@ -48,7 +48,6 @@ void CInitScene::Awake(_int numOfLayers)
 void CInitScene::Start(void)
 {
 	m_isStarted = true;
-
 	//DataStore Init
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);
 	m_pDataStore->InitDataForScene(m_objectKey);
@@ -78,6 +77,8 @@ void CInitScene::Start(void)
 void CInitScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
+
 }
 
 void CInitScene::Update(void)

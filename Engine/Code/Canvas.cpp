@@ -119,7 +119,7 @@ void CCanvas::AddObjectFind()
 		for (SP(CObject) object : layer->GetGameObjects())
 		{
 			std::wstring name = object->GetName().substr(0, strSize);
-			if (m_name == name)
+			if (m_name == name && object.get() != this)
 			{
 				m_spObjectList.emplace_back(object.get());
 			}

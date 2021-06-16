@@ -4,6 +4,8 @@
 #include "LifeObjectC.h"
 #include "TimerUiC.h"
 #include "SkillCollTimcC.h"
+#include "RotationUiC.h"
+#include "AlphaLifeTimeC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -22,8 +24,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_6").get()));
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_8").get()));
-	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
 	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
+	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get())); 
 
 	m_playerHp = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerHp").get();
 	m_playerHp->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(-320.0f, 325.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
@@ -49,13 +51,13 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_waitingPlayerSpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar2_8").get()));
 
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_13").get()));
-	m_coolTimeSlider[0]->AddComponent<CSkillCollTimcC>();
+	m_coolTimeSlider[Button_Type::BasicButton]->AddComponent<CSkillCollTimcC>();
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_12").get()));
-	m_coolTimeSlider[1]->AddComponent<CSkillCollTimcC>();
+	m_coolTimeSlider[Button_Type::EvasionButton]->AddComponent<CSkillCollTimcC>();
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_9").get()));
-	m_coolTimeSlider[2]->AddComponent<CSkillCollTimcC>();
+	m_coolTimeSlider[Button_Type::SpecialButton]->AddComponent<CSkillCollTimcC>();
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_11").get()));
-	m_coolTimeSlider[3]->AddComponent<CSkillCollTimcC>();
+	m_coolTimeSlider[Button_Type::SkillButton]->AddComponent<CSkillCollTimcC>();
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
@@ -75,6 +77,18 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_hitCount = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_HitCount_1").get());
 	m_hitCount->AddComponent<CHitsUiC>();
 	m_hits = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_Hits_2").get());
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	m_monsterTargetCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterTargetCanvas").get());
+	m_monsterTargetCanvas->AddComponent<CAlphaLifeTimeC>();
+
+	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_1").get()));
+	m_target[0]->AddComponent<CRotationUiC>()->SetSpeed(1);
+	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_2").get()));
+	m_target[1]->AddComponent<CRotationUiC>()->SetSpeed(-1);
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	m_giveUpCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"GiveUpCanvas").get());
+	m_giveUpCanvas->AddObjectFind();
+	m_giveUpCanvas->SetIsEnabled(false);
 
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
@@ -96,6 +110,8 @@ void CBattleUiManager::OnDestroy(void)
 	m_playerHpBar.clear();
 	m_waitingPlayerHpBar.clear();
 	m_waitingPlayerSpBar.clear();
+	m_coolTimeSlider.clear();
+	m_target.clear();
 }
 
 void CBattleUiManager::KeyPad(_int value)
@@ -168,15 +184,18 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 	PlayerHp(hpValue);
 	PlayerSp(spValue);
 
-	m_skillButton[0]->GetTexture()->ChangeTexture(buttonUI1);
-	m_skillButton[1]->GetTexture()->ChangeTexture(buttonUI2);
-	m_skillButton[2]->GetTexture()->ChangeTexture(buttonUI3);
-	m_skillButton[3]->GetTexture()->ChangeTexture(buttonUI4);
-	m_skillButton[3]->SetIsEnabled(true);
+	m_skillButton[Button_Type::BasicButton]->GetTexture()->ChangeTexture(buttonUI1);
+	m_skillButton[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
+	m_skillButton[Button_Type::SpecialButton]->GetTexture()->ChangeTexture(buttonUI3);
+	m_skillButton[Button_Type::SkillButton]->GetTexture()->ChangeTexture(buttonUI4);
+	m_skillButton[Button_Type::SkillButton]->SetIsEnabled(true);
 
-	m_skillPoint[0]->GetTexture()->ChangeTexture(specialSP);
-	m_skillPoint[1]->GetTexture()->ChangeTexture(skillSP);
-	m_skillPoint[0]->SetIsEnabled(true);
+	m_skillPoint[SkillPoint_Type::SpecialSp]->GetTexture()->ChangeTexture(specialSP);
+	m_skillPoint[SkillPoint_Type::SpecialSp]->SetIsEnabled(true);
+
+	m_skillPoint[SkillPoint_Type::SkillSp]->GetTexture()->ChangeTexture(skillSP);
+
+	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(true);
 }
 
 void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring specialSP)
@@ -184,13 +203,25 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 	PlayerHp(hpValue);
 	PlayerSp(spValue);
 
-	m_skillButton[0]->GetTexture()->ChangeTexture(buttonUI1);
-	m_skillButton[1]->GetTexture()->ChangeTexture(buttonUI2);
-	m_skillButton[2]->GetTexture()->ChangeTexture(buttonUI3);
-	m_skillButton[3]->SetIsEnabled(false);
+	m_skillButton[Button_Type::BasicButton] ->GetTexture()->ChangeTexture(buttonUI1);
+	m_skillButton[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
+	m_skillButton[Button_Type::SpecialButton]  ->GetTexture()->ChangeTexture(buttonUI3);
+	m_skillButton[Button_Type::SkillButton]->SetIsEnabled(false);
 
-	m_skillPoint[0]->GetTexture()->ChangeTexture(specialSP);
-	m_skillPoint[0]->SetIsEnabled(false);
+	m_skillPoint[SkillPoint_Type::SpecialSp]->GetTexture()->ChangeTexture(specialSP);
+	m_skillPoint[SkillPoint_Type::SpecialSp]->SetIsEnabled(false);
+
+	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
+}
+
+void CBattleUiManager::TargetUI(_float3 pos, _float value)
+{
+	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
+
+	m_target[0]->GetTransform()->SetPosition(pos);
+	m_target[1]->GetTransform()->SetPosition(pos);
+
+	m_monsterTargetCanvas->SetIsEnabled(true);
 }
 
 void CBattleUiManager::MonsterHpDown(_float value)
