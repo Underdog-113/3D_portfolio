@@ -107,6 +107,7 @@
     <ClInclude Include="..\Header\SceneManager.h" />
     <ClInclude Include="..\Header\SoundManager.h" />
     <ClInclude Include="..\Header\SphereCollider.h" />
+    <ClInclude Include="..\Header\TextObject.h" />
     <ClInclude Include="..\Header\TextureC.h" />
     <ClInclude Include="..\Header\TextureStore.h" />
     <ClInclude Include="..\Header\TransformC.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="..\Code\SceneManager.cpp" />
     <ClCompile Include="..\Code\SoundManager.cpp" />
     <ClCompile Include="..\Code\SphereCollider.cpp" />
+    <ClCompile Include="..\Code\TextObject.cpp" />
     <ClCompile Include="..\Code\TextureC.cpp" />
     <ClCompile Include="..\Code\TextureStore.cpp" />
     <ClCompile Include="..\Code\TransformC.cpp" />

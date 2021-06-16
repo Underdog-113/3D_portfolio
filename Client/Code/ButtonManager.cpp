@@ -78,6 +78,7 @@ void CButtonManager::ButtonActivation(std::list<CButton*> buttonList)
 
 	if (m_funcActivation)
 	{
+		m_activationButton = m_funcActivation;
 		m_funcActivation->FuncActivation();
 		m_funcActivation = nullptr;
 	}
@@ -150,8 +151,8 @@ void CButtonManager::ButtonUp()
 _bool CButtonManager::ButtonCollisionCheck(_float3 buttonPos, _float3 buttonScale, _float2 mousePos)
 {
 	_float2 pointDis;
-	pointDis.x = abs(buttonPos.x - mousePos.x);
-	pointDis.y = abs(buttonPos.y - mousePos.y);
+	pointDis.x = abs(buttonPos.x - mousePos.x) * 2.0f;
+	pointDis.y = abs(buttonPos.y - mousePos.y) * 2.0f;
 
 	if (buttonScale.x >= pointDis.x && buttonScale.y >= pointDis.y)
 	{

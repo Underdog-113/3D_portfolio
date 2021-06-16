@@ -449,8 +449,9 @@ void CTransformC::UpdateWorldMatrix(void)
                                         m_position.z);
 
 	m_rotMatrix			= rotateX * rotateY * rotateZ;
-	m_worldMat			= size * rotateX * rotateY * rotateZ * translation;
-	m_worldMatNoScale	= rotateX * rotateY * rotateZ * translation;
+
+	m_worldMat = size * rotateX * rotateY * rotateZ * translation;
+	m_worldMatNoScale = rotateX * rotateY * rotateZ * translation;
 
 	if(m_spParent)
 	{

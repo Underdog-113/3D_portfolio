@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
@@ -192,7 +193,6 @@
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
-    <ClInclude Include="..\Header\Kiana_CatPaw.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
     <ClInclude Include="..\Header\ClientEnum.h" />
@@ -219,6 +219,13 @@
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -238,8 +245,10 @@
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
+    <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\Theresa.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
     <ClInclude Include="..\Header\TimerUiC.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
@@ -248,19 +257,19 @@
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
-    <ClInclude Include="FSMDefine_Kiana.h" />
+    <ClInclude Include="AlphaLifeTimeC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
-    <ClCompile Include="..\Code\Kiana_CatPaw.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
     <ClCompile Include="..\Code\DamageFontC.cpp" />
@@ -281,6 +290,13 @@
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp" />
+    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -300,8 +316,10 @@
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
+    <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\Theresa.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
     <ClCompile Include="..\Code\TimerUiC.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
@@ -310,6 +328,7 @@
     <ClCompile Include="..\Code\StageController.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
+    <ClCompile Include="AlphaLifeTimeC.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

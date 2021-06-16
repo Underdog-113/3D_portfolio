@@ -205,6 +205,27 @@
     <Filter Include="02.Objects\03.Monster\MO_Sickle\FSM">
       <UniqueIdentifier>{8ed4d699-c3c9-422d-a26b-23bd53bdddb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\Pistol">
+      <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\01.Theresa">
+      <UniqueIdentifier>{a72f1c22-594a-4366-ad8a-6a4d215d293e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\06.SkillCollTime">
+      <UniqueIdentifier>{e5d81b2f-c56b-45ec-a322-15466f1bebda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\07.AlphaLifeTime">
+      <UniqueIdentifier>{a62f0e53-db56-4e99-a888-dfe2f40e2081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\10.BattleVictory">
+      <UniqueIdentifier>{aeab7aee-2a3e-4174-9d35-d430288c253d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\11.BattleEnd">
+      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\08.BattleRenunciation">
+      <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -381,26 +402,33 @@
     <ClInclude Include="..\Header\FSMDefine_Kiana.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw.h">
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RotationUiC.h">
       <Filter>03.Component\00.UI\02.RotationUi</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="..\Header\BattleUiManager.h">
       <Filter>09.Manager\01.BattleUiManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\HitsUiC.h">
       <Filter>03.Component\00.UI\04.HitsUi</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\LifeObjectC.h">
-      <Filter>03.Component\00.UI\05.LifeObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\TimerUiC.h">
       <Filter>03.Component\00.UI\03.Timer</Filter>
     </ClInclude>
-    <ClInclude Include="FSMDefine_Kiana.h" />
     <ClInclude Include="..\Header\ClientFunction.h">
       <Filter>98.Include</Filter>
     </ClInclude>
@@ -418,6 +446,27 @@
     </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Sickle.h">
       <Filter>02.Objects\03.Monster\MO_Sickle\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa.h">
+      <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SkillCollTimcC.h">
+      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LifeObjectC.h">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AlphaLifeTimeC.h">
+      <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BattleRenunciationC.h">
+      <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -571,7 +620,19 @@
     <ClCompile Include="..\Code\DataLoad.cpp">
       <Filter>06.DataLoad</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw.cpp">
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RotationUiC.cpp">
@@ -595,6 +656,24 @@
     <ClCompile Include="..\Code\FSM_SickleC.cpp">
       <Filter>02.Objects\03.Monster\MO_Sickle\FSM</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
+      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa.cpp">
+      <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkillCollTimcC.cpp">
+      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaLifeTimeC.cpp">
+      <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleRenunciationC.cpp">
+      <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -613,6 +692,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Initialize_Helper.txt" />
+    <Text Include="Initialize_Helper.txt">
+      <Filter>99.Default</Filter>
+    </Text>
   </ItemGroup>
 </Project>

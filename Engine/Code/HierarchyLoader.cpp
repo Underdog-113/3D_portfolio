@@ -138,7 +138,9 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 
 	//각 프레임의 OffsetMatrix에 skinInfo가 갖고있는 BoneOffsetMatrix를 넣어줌.
 	for (_ulong i = 0; i < pDerivedMeshContainer->numBones; ++i)
+	{
 		pDerivedMeshContainer->pFrameOffsetMatrix[i] = *pDerivedMeshContainer->pSkinInfo->GetBoneOffsetMatrix(i);
+	}
 
 	//만든 메쉬컨테이너 반환.
 	*ppNewMeshContainer = pDerivedMeshContainer;

@@ -53,7 +53,11 @@ void CPartySettingScene::Start(void)
 	// 로드
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
-	Load->Load(this);
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
 	delete(Load);
 
 	// (미완성)스크롤 뷰 예제
@@ -79,7 +83,6 @@ void CPartySettingScene::LateUpdate(void)
 void CPartySettingScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void CPartySettingScene::OnEnable(void)

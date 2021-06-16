@@ -29,10 +29,43 @@ sampler Diffuse = sampler_state
 	AddressV = Clamp;
 };
 
-texture g_SubTex;
-sampler SubTex = sampler_state
+texture g_Face;
+sampler Face = sampler_state
 {
-	Texture = <g_SubTex>;
+	Texture = <g_Face>;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	MipFilter = NONE;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+texture g_Body;
+sampler Body = sampler_state
+{
+	Texture = <g_Body>;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	MipFilter = NONE;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+texture g_Hair;
+sampler Hair = sampler_state
+{
+	Texture = <g_Hair>;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	MipFilter = NONE;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+texture g_Hair2;
+sampler Hair2 = sampler_state
+{
+	Texture = <g_Hair2>;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = NONE;
@@ -93,7 +126,10 @@ if (intensity < 0)
 	float4 albedo = tex2D(Diffuse, Input.mUV) * gDiffuseColor * gDiffuseIntensity;
 	albedo.a = 1;
 
-	float4 Sub = tex2D(SubTex, Input.mUV);
+	float4 mFace = tex2D(Face, Input.mUV);
+	float4 mBody = tex2D(Body, Input.mUV);
+	float4 mHair = tex2D(Hair, Input.mUV);
+	float4 mHair2 = tex2D(Hair2, Input.mUV);
 
 	float3 diffuse = saturate(Input.mDiffuse);
 
@@ -102,7 +138,7 @@ if (intensity < 0)
 	float rim = saturate(abs(dot(Input.mNormal, gViewDir)));
 	float3 Emission = pow(1 - rim, gRimPower) * gRImColor.rgb;
 
-	return float4(albedo * diffuse.xyz, 1) ;
+	return float4(albedo * diffuse.xyz * mFace * mBody * mHair * mHair2, 1) ;
 }
 
 
