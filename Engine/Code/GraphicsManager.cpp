@@ -37,8 +37,8 @@ void CGraphicsManager::Start(void)
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CONSTANT);
 
-	GET_DEVICE->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-	GET_DEVICE->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	//GET_DEVICE->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+	//GET_DEVICE->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 }
 
 void CGraphicsManager::FixedUpdate(void)
@@ -70,8 +70,8 @@ void CGraphicsManager::LateUpdate(void)
 void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
-		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DCOLOR_ARGB(255, 125, 125, 125),
+		D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+		D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f),
 		1.f, 0);
 
 	GET_DEVICE->BeginScene();
@@ -211,7 +211,7 @@ void CGraphicsManager::RenderBase(void)
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-
+	
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::Base])
 	{
 		if (pObject->GetIsEnabled())
@@ -232,9 +232,11 @@ void CGraphicsManager::RenderBase(void)
 
 						_uint maxPass = 0;
 						pEffect->Begin(&maxPass, 0);
+						
 						pObject->PreRender(pEffect);
 						pObject->Render(pEffect);
 						pObject->PostRender(pEffect);
+						
 						pEffect->End();
 					}
 				}
@@ -248,7 +250,7 @@ void CGraphicsManager::RenderBase(void)
 		}
 	}
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -318,13 +320,15 @@ void CGraphicsManager::RenderDeferBlend(void)
 	LPD3DXEFFECT pEffect = GET_SHADER((_int)EShaderID::DeferredBlendShader)->GetEffect();
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpeecularTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");
 
 	pEffect->Begin(NULL, 0);
 	pEffect->BeginPass(0);
 
 	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
 	pDevice->SetFVF(FVF_SCR);
+
+
 	pDevice->SetIndices(m_pIndexBuffer);
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 
@@ -360,9 +364,6 @@ void CGraphicsManager::RenderAlphaTest(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-
-	// 햇키드 얼굴 랜더링 할때 알파테스팅 해줘야됨
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 1); // 알파 기준 설정
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER); // 알파 테스팅 수행
@@ -389,6 +390,7 @@ void CGraphicsManager::RenderAlphaTest(void)
 void CGraphicsManager::RenderAlphaBlend(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
@@ -413,37 +415,21 @@ void CGraphicsManager::RenderAlphaBlend(void)
 						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
 						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-						if (vShader[i]->GetObjectKey() == L"CatPawShader")
+
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+
+						for (_uint i = 0; i < maxPass; ++i)
 						{
-							for (_int j = 0; j < 2; ++j)
-							{
-								_uint maxPass = 0;
-
-								pEffect->Begin(&maxPass, 0);
-								pEffect->BeginPass(j);
-
-								pObject->PreRender(pEffect);
-								pObject->Render(pEffect);
-								pObject->PostRender(pEffect);
-
-								pEffect->EndPass();
-								pEffect->End();
-							}							
-						}
-						else
-						{
-							_uint maxPass = 0;
-
-							pEffect->Begin(&maxPass, 0);
-							pEffect->BeginPass(0);
+							pEffect->BeginPass(i);
 
 							pObject->PreRender(pEffect);
 							pObject->Render(pEffect);
 							pObject->PostRender(pEffect);
 
 							pEffect->EndPass();
-							pEffect->End();
 						}
+						pEffect->End();
 					}
 				}
 				else
@@ -455,6 +441,8 @@ void CGraphicsManager::RenderAlphaBlend(void)
 			}
 		}
 	}
+
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }
 
 void CGraphicsManager::RenderParticle(void)
@@ -520,5 +508,4 @@ void CGraphicsManager::RenderUI(void)
 	}
 
 	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
-	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }

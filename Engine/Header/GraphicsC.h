@@ -36,7 +36,7 @@ private:
 	GETTOR			(SP(CRectTexC),		m_spRectTex,		nullptr,		RectTex)
 	GETTOR			(SP(CShaderC),		m_spShader,			nullptr,		Shader)
 
-	GETTOR_SETTOR	(_bool,				m_colorReverse,		true,			ColorReverse)
+	GETTOR_SETTOR	(_bool,				m_colorReverse,		false,			ColorReverse)
 	GETTOR			(_float3,			m_offsetBV,			ZERO_VECTOR,	OffsetBV)
 	GETTOR			(_float3,			m_sizeBV,			ONE_VECTOR,		SizeBV)
 	GETTOR_SETTOR	(_int,				m_renderID,			UNDEFINED,		RenderID)
