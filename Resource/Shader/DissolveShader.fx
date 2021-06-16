@@ -9,12 +9,9 @@ float4 gWorldLightPosition;
 
 float  gTime;
 float  gAlpha;
-float  gTrailAlpha;
 float  m_defaultDissolveVal = 0.9f;
 
 float3 gDissolveLineColor;
-
-bool   gisSpawn;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -48,11 +45,7 @@ struct VS_OUTPUT
 	float4 mPosition : POSITION;
 	float2 mUV		: TEXCOORD0;
 	float3 mDiffuse : TEXCOORD1;
-};
 
-struct PS_OUTPUT
-{
-	float4 vColor : COLOR0;
 };
 
 
@@ -67,8 +60,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 	Output.mUV.x = Input.mUV.x;
-	Output.mUV.y = Input.mUV.y;
-	Output.mUV = Input.mUV;
+	Output.mUV.y = -Input.mUV.y;
 
 	return(Output);
 
@@ -84,54 +76,40 @@ struct PS_INPUT
 
 float4 ps_main(VS_OUTPUT Input) : COLOR
 {
-	PS_OUTPUT Out = (PS_OUTPUT)0;
-
 	// Base albedo Texture
-	float4 albedo = tex2D(Diffuse, Input.mUV);
+	float3 albedo = tex2D(Diffuse, Input.mUV);
 
 	// Noise Texture
-	float4 Noise = tex2D(NoiseTex, Input.mUV);
+	float3 Noise = tex2D(NoiseTex, Input.mUV);
+
+	// To disappear to match the noise texture
+	float multiply1 = ((Noise.r * sin(gAlpha)) * 5.5f);
+	float multiply2 = Noise.r * sin(gAlpha);
 	
-	if (Input.mUV.x > gTrailAlpha)
+	// Current Dissolve Line Value
+	float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20));
+	
+	// Returns the "multiply2" multiple of "multiply1"
+	float multiple = pow(multiply1 + multiply2, 20);
+
+	// Dissolve Line Size
+	float3 DissolveLineSize;
+
+	if (m_defaultDissolveVal >= CurrentDissolveVal)
 	{
-		albedo.a = 0;
-		Noise.a = 0;
+		DissolveLineSize = (100.f, 1.f, 1.f);
+	}
+	else
+	{
+		DissolveLineSize = (0, 0, 0);
 	}
 
+	float3 diffuse = (DissolveLineSize * gDissolveLineColor + albedo);
 	
-
-	//// To disappear to match the noise texture
-	//float multiply1 = ((Noise.r * sin(gAlpha)) * 5.5f);
-	//float multiply2 = Noise.r * sin(gAlpha);
-	//
-	//// Current Dissolve Line Value
-	//float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20));
-	//
-	//// Returns the "multiply2" multiple of "multiply1"
-	//float multiple = pow(multiply1 + multiply2, 20);
-
-	//// Dissolve Line Size
-	//float3 DissolveLineSize;
-
-	//if (m_defaultDissolveVal >= CurrentDissolveVal)
-	//{
-	//	DissolveLineSize = (100.f, 1.f, 1.f);
-	//}
-	//else
-	//{
-	//	DissolveLineSize = (0, 0, 0);
-	//}
-
-	//float3 diffuse = (DissolveLineSize * gDissolveLineColor + albedo);
-
-	//return float4(diffuse, multiple);
-
-	return albedo * Noise;
+	return float4(diffuse, multiple);
 }
 
-
-
-technique ToonShader
+technique DissolveShader
 {
 	pass p0
 	{

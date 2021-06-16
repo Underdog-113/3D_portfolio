@@ -54,7 +54,7 @@ void CAttackTrail::Awake()
 void CAttackTrail::Start()
 {
 	__super::Start();
-	
+	m_fTrailAlpha = 1.f;
 }
 
 void CAttackTrail::FixedUpdate()
@@ -65,6 +65,14 @@ void CAttackTrail::FixedUpdate()
 void CAttackTrail::Update()
 {
 	__super::Update();
+
+	if (m_fTrailAlpha <= 0)
+	{
+		this->SetDeleteThis(true);
+	}
+
+	m_fTrailAlpha -= 1.f * GET_DT;
+
 }
 
 void CAttackTrail::LateUpdate()
@@ -80,16 +88,20 @@ void CAttackTrail::PreRender()
 void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+
 }
 
 void CAttackTrail::Render()
 {
+
 	m_spMesh->Render(m_spGraphics);
 }
 
 void CAttackTrail::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
+
+	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 }
 
 void CAttackTrail::PostRender()

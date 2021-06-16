@@ -44,6 +44,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	Out.vColor = vAlbedo * vShade + vSpecular;
 
+
 	return Out;
 }
 

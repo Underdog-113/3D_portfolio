@@ -73,6 +73,6 @@ void CDeviceManager::InitDevice(void)
 		MSG_BOX(__FILE__, L"Device creation failed in InitDevice");
 		ABORT;
 	}
-	m_pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+	/*m_pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);*/
 }

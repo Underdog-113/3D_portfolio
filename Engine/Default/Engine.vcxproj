@@ -214,6 +214,7 @@
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\EffectShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx" />

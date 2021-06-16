@@ -68,7 +68,7 @@ void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
 		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DCOLOR_ARGB(255, 125, 125, 125),
+		D3DXCOLOR(0, 0, 0, 1),
 		1.f, 0);
 
 	GET_DEVICE->BeginScene();
@@ -315,7 +315,7 @@ void CGraphicsManager::RenderDeferBlend(void)
 	LPD3DXEFFECT pEffect = GET_SHADER((_int)EShaderID::DeferredBlendShader)->GetEffect();
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpeecularTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");
 
 	pEffect->Begin(NULL, 0);
 	pEffect->BeginPass(0);
@@ -409,38 +409,22 @@ void CGraphicsManager::RenderAlphaBlend(void)
 					{
 						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
 						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+												
+						_uint maxPass = 0;
 
-						if (vShader[i]->GetObjectKey() == L"CatPawShader")
+						pEffect->Begin(&maxPass, 0);
+
+						for (_uint j = 0; j < maxPass; ++j)
 						{
-							for (_int j = 0; j < 2; ++j)
-							{
-								_uint maxPass = 0;
-
-								pEffect->Begin(&maxPass, 0);
-								pEffect->BeginPass(j);
-
-								pObject->PreRender(pEffect);
-								pObject->Render(pEffect);
-								pObject->PostRender(pEffect);
-
-								pEffect->EndPass();
-								pEffect->End();
-							}							
-						}
-						else
-						{
-							_uint maxPass = 0;
-
-							pEffect->Begin(&maxPass, 0);
-							pEffect->BeginPass(0);
+							pEffect->BeginPass(j);
 
 							pObject->PreRender(pEffect);
 							pObject->Render(pEffect);
 							pObject->PostRender(pEffect);
 
 							pEffect->EndPass();
-							pEffect->End();
 						}
+						pEffect->End();						
 					}
 				}
 				else

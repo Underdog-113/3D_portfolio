@@ -11,7 +11,6 @@ CMeshTrailShader::CMeshTrailShader()
 
 CMeshTrailShader::~CMeshTrailShader()
 {
-	m_fTime = 0.f;
 }
 
 
@@ -31,13 +30,11 @@ void CMeshTrailShader::Free()
 void CMeshTrailShader::Awake()
 {
 	__super::Awake();
-	m_fTime = 0.f;
 	m_fUVSpeed = 0.25f;
 }
 
 void CMeshTrailShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
-	m_fTime += GET_DT;
 
 	_mat worldMat, viewMat, projMat, WVP;
 
@@ -73,17 +70,8 @@ void CMeshTrailShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
-	size_t _dwMaterials = spGC->GetMesh()->GetMeshDatas().size();	
-
-	m_pEffect->SetFloat("gTime", m_fTime);
-
 	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
 
-	for (size_t i = 0; i < _dwMaterials; ++i)
-	{	
-		m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][i]->pTexture);
-		
-		pMtrl++;
-	}
 
 }

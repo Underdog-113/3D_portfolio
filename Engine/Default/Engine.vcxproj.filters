@@ -295,6 +295,9 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader">
       <UniqueIdentifier>{a75dc654-bebc-49a3-b5a7-0983ae845fc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader">
+      <UniqueIdentifier>{deea1f5e-2751-4c23-9ec1-18261d4ec4f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -885,6 +888,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
