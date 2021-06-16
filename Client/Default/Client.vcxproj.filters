@@ -208,6 +208,18 @@
     <Filter Include="03.Component\00.UI\06.SkillCollTime">
       <UniqueIdentifier>{e5d81b2f-c56b-45ec-a322-15466f1bebda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\07.AlphaLifeTime">
+      <UniqueIdentifier>{a62f0e53-db56-4e99-a888-dfe2f40e2081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\10.BattleVictory">
+      <UniqueIdentifier>{aeab7aee-2a3e-4174-9d35-d430288c253d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\11.BattleEnd">
+      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\08.BattleRenunciation">
+      <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -432,6 +444,12 @@
     <ClInclude Include="..\Header\LifeObjectC.h">
       <Filter>03.Component\00.UI\05.LifeObject</Filter>
     </ClInclude>
+    <ClInclude Include="AlphaLifeTimeC.h">
+      <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BattleRenunciationC.h">
+      <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -625,6 +643,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\SkillCollTimcC.cpp">
       <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaLifeTimeC.cpp">
+      <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleRenunciationC.cpp">
+      <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

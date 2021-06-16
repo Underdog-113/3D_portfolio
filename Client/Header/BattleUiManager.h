@@ -6,8 +6,31 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 #include "ImageObject.h"
+
+//public enum 
+// 0 : 일반공격
+// 1 : 회피
+// 2 : 필살기
+// 3 : 특수공격
+
+
+
 class CBattleUiManager final
 {
+public:
+	enum Button_Type
+	{
+		BasicButton,
+		EvasionButton,
+		SpecialButton,
+		SkillButton
+	};
+
+	enum SkillPoint_Type
+	{
+		SpecialSp,
+		SkillSp
+	};
 public:
 	DECLARE_SINGLETON(CBattleUiManager)
 public:
@@ -29,6 +52,8 @@ public:
 	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
 		std::wstring specialSP);
 	
+	void TargetUI(_float3 pos, _float value);
+
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
 	void PlayerHp(_float value);
@@ -46,6 +71,8 @@ private:
 	Engine::CCanvas* m_monsterStateCanvas;
 	Engine::CCanvas* m_mainCanvas;
 	Engine::CCanvas* m_hitsCanvas;
+	Engine::CCanvas* m_monsterTargetCanvas;
+	Engine::CCanvas* m_giveUpCanvas;
 
 	Engine::CImageObject* m_keyPad;
 	Engine::CImageObject* m_hitCount;
@@ -55,9 +82,11 @@ private:
 	Engine::CObject* m_playerHp;
 	Engine::CObject* m_playerSp;
 	Engine::CImageObject* m_time;
+
 	std::vector<Engine::CImageObject*> m_playerIllustration;
 	std::vector<Engine::CImageObject*> m_playerProperty;
 	std::vector<Engine::CImageObject*> m_skillPoint;
+	std::vector<Engine::CImageObject*> m_target;
 
 	std::vector<CButton*> m_skillButton;
 	std::vector<Engine::CSlider*> m_coolTimeSlider;
