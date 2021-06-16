@@ -162,7 +162,7 @@ void CScene::InitLights(void)
 	D3DLIGHT9* pLightInfo = new D3DLIGHT9;
 
 	pLightInfo->Type = D3DLIGHT_DIRECTIONAL;
-	pLightInfo->Direction = _float3(1.f, -1.f, 1.f);
+	pLightInfo->Direction = _float3(1.f, -1.f, 0.f);
 	pLightInfo->Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
 	pLightInfo->Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);

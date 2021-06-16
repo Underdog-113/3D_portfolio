@@ -156,7 +156,7 @@ void CKiana::CreatePistol(void)
 	Engine::CDynamicMeshData* pDM = m_spMesh->GetFirstMeshData_Dynamic();
 	
 	m_pLeftHand_Frame = pDM->GetFrameByName("Bip001_Prop2");
-	m_pLeftHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop2");
+	//m_pLeftHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop2");
 	m_pLeftHand_World = new _mat;
 	*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
 
@@ -166,7 +166,7 @@ void CKiana::CreatePistol(void)
 	m_spWeapon_Right->GetTransform()->SetParent(m_spTransform);
 
 	m_pRightHand_Frame = pDM->GetFrameByName("Bip001_Prop1");
-	m_pRightHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop1");
+	//m_pRightHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop1");
 	m_pRightHand_World = new _mat;
 	*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
 

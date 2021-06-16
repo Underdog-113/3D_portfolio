@@ -126,7 +126,7 @@ void CLight::RenderLight(LPD3DXEFFECT pEffect)
 
 	pEffect->SetVector("g_vCamPos", (_float4*)&viewMat._41);
 
-	pEffect->SetFloat("g_fPower", 10.f);
+	pEffect->SetFloat("g_fPower", 20.f);
 
 
 	pEffect->CommitChanges();

@@ -100,6 +100,12 @@ namespace Engine
 		return fileName.substr(0, lastindex);
 	}
 
+	inline _bool CheckExtension(const std::wstring& fileName, const std::wstring& compare)
+	{
+		_size lastindex = fileName.find_last_of('.');
+		return (fileName.substr(++lastindex) == compare);
+	}
+
 	inline char* _wstringTOpchar(std::wstring wstr)
 	{
 		size_t getVal = 0;
