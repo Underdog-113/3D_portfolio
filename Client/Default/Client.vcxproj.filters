@@ -205,6 +205,9 @@
     <Filter Include="02.Objects\02.Valkyrie\01.Theresa">
       <UniqueIdentifier>{a72f1c22-594a-4366-ad8a-6a4d215d293e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\06.SkillCollTime">
+      <UniqueIdentifier>{e5d81b2f-c56b-45ec-a322-15466f1bebda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -423,6 +426,12 @@
     <ClInclude Include="..\Header\Theresa.h">
       <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SkillCollTimcC.h">
+      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LifeObjectC.h">
+      <Filter>03.Component\00.UI\05.LifeObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -613,6 +622,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Theresa.cpp">
       <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkillCollTimcC.cpp">
+      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

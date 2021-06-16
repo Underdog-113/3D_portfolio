@@ -59,7 +59,7 @@ void CKiana::Start(void)
 	__super::Start();
 
 	m_spMesh->OnRootMotion();
-	
+
 	//weapon
 	//CreatePistol();
 
@@ -188,13 +188,13 @@ void CKiana::CreateCatPaw(void)
 	m_spCatPaw_Atk05->SetIsEnabled(false);
 
 	m_spCatPaw_Ring_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk01", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk01");
-	m_spCatPaw_Ring_Atk01->SetIsEnabled(false);																		  
+	m_spCatPaw_Ring_Atk01->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk02", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk02");
-	//m_spCatPaw_Ring_Atk02->SetIsEnabled(false);																		  
+	//m_spCatPaw_Ring_Atk02->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk03", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk03");
-	//m_spCatPaw_Ring_Atk03->SetIsEnabled(false);																		  
+	//m_spCatPaw_Ring_Atk03->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk04 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk04", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk04");
-	//m_spCatPaw_Ring_Atk04->SetIsEnabled(false);																		  
+	//m_spCatPaw_Ring_Atk04->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk05 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk05", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk05");
 	//m_spCatPaw_Ring_Atk05->SetIsEnabled(false);
 }
@@ -208,7 +208,7 @@ void CKiana::UltraAtk(UltraAttack index)
 {
 	if (!m_ultraMode)
 		return;
-	
+
 	_float3 pos;
 	switch (index)
 	{
@@ -332,4 +332,3 @@ void CKiana::UltraAtk_Ring(UltraAttack index)
 		break;
 	}
 }
-

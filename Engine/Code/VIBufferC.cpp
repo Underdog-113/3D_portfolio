@@ -34,7 +34,7 @@ void CVIBufferC::Awake(void)
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	if(FAILED(pDevice->CreateVertexBuffer(m_vtxSize * m_vtxCount, 
 										  0,// 정적 버퍼를 사용(d3dusage_dynamic 사용 시 동적 버퍼)
-										  m_FVF, 
+										  NULL, 
 										  D3DPOOL_MANAGED, 
 										  &m_pVertexBuffer, 
 										  NULL)))

@@ -54,7 +54,7 @@ void CSkyBox::Start(void)
 {
 	__super::Start();
 	
-	m_spTransform->SetSize(100, 100, 100);
+	m_spTransform->SetSize(40, 40, 40);
 }
 
 void CSkyBox::FixedUpdate(void)
@@ -78,6 +78,7 @@ void CSkyBox::LateUpdate(void)
 
 void CSkyBox::PreRender(LPD3DXEFFECT pEffect)
 {
+	pEffect->BeginPass(0);
 	m_spCubeTex->PreRender(m_spGraphics, pEffect);
 }
 
@@ -88,6 +89,7 @@ void CSkyBox::Render(LPD3DXEFFECT pEffect)
 
 void CSkyBox::PostRender(LPD3DXEFFECT pEffect)
 {
+	pEffect->EndPass();
 	m_spCubeTex->PostRender(m_spGraphics, pEffect);
 }
 

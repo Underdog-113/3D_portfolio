@@ -115,6 +115,9 @@ void CTextureStore::FindTexturesInSection(std::wstring sectionKey, std::vector<s
 void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 {
 	_TexData* pNewTex = new _TexData;
+
+	_bool isDDS = CheckExtension(fileName, L"dds");
+
 	std::wstring texKey = RemoveExtension(fileName);
 	std::wstring fullPath = filePath + fileName;
 	std::wstring sectionKey = GetLastDirName(filePath);
@@ -134,25 +137,32 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 			MSG_BOX(__FILE__, (L"TexKey : [" + texKey + L"] get image info failed in ParsingTexture").c_str());
 			ABORT;
 		}
-		if(FAILED(D3DXCreateTextureFromFileEx(GET_DEVICE,
-											  fullPath.c_str(),
-											  pNewTex->imageInfo.Width,
-											  pNewTex->imageInfo.Height,
-											  pNewTex->imageInfo.MipLevels,
-											  0,
-											  pNewTex->imageInfo.Format,
-											  D3DPOOL_MANAGED,
-											  D3DX_DEFAULT,
-											  D3DX_DEFAULT,
-											  0,
-											  nullptr,
-											  nullptr,
-											  (LPDIRECT3DTEXTURE9*)&pNewTex->pTexture)))
-		{
-			MSG_BOX(__FILE__, (L"TexKey : [" + texKey + L"] create texture failed in ParsingTexture").c_str());
-			ABORT;
-		}
 
+		if (isDDS)
+		{
+			D3DXCreateCubeTextureFromFile(GET_DEVICE, fullPath.c_str(), (LPDIRECT3DCUBETEXTURE9*)&pNewTex->pTexture);
+		}
+		else
+		{
+			if(FAILED(D3DXCreateTextureFromFileEx(GET_DEVICE,
+												  fullPath.c_str(),
+												  pNewTex->imageInfo.Width,
+												  pNewTex->imageInfo.Height,
+												  pNewTex->imageInfo.MipLevels,
+												  0,
+												  pNewTex->imageInfo.Format,
+												  D3DPOOL_MANAGED,
+												  D3DX_DEFAULT,
+												  D3DX_DEFAULT,
+												  0,
+												  nullptr,
+												  nullptr,
+												  (LPDIRECT3DTEXTURE9*)&pNewTex->pTexture)))
+			{
+				MSG_BOX(__FILE__, (L"TexKey : [" + texKey + L"] create texture failed in ParsingTexture").c_str());
+				ABORT;
+			}
+		}
 		pNewTex->sectionKey = sectionKey;
 
 		//Alpha���� �ؽ���

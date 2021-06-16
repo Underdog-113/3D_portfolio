@@ -49,7 +49,7 @@ namespace Engine
 		_float3 texUV;
 	}VERTEX_VT3;
 
-	const _uint FVF_VT3 = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE3(0);
+	const _ulong FVF_VT3 = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE3(0);
 
 
 	typedef struct _VertexScreen
@@ -57,7 +57,7 @@ namespace Engine
 		_float4 position;
 		_float2 texUV;
 	}VERTEX_SCR;
-	const _uint FVF_SCR = D3DFVF_XYZRHW | D3DFVF_TEX1;
+	const _ulong FVF_SCR = D3DFVF_XYZRHW | D3DFVF_TEX1;
 
 	typedef struct _Index16
 	{
@@ -77,12 +77,7 @@ namespace Engine
 		std::wstring sectionKey;
 	}TEXTURE_DATA;
 
-	typedef struct _Face
-	{
-		_uint vertexIndex[3];
-		_uint uvIndex[3];
-		_uint normIndex[3];
-	}FACE;
+
 
 	typedef struct _DerivedD3DXFRAME : public D3DXFRAME
 	{
