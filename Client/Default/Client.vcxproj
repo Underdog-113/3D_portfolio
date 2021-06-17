@@ -230,6 +230,7 @@
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
+    <ClInclude Include="..\Header\MapObject.h" />
     <ClInclude Include="..\Header\MB_Bronya.h" />
     <ClInclude Include="..\Header\MB_Ganesha.h" />
     <ClInclude Include="..\Header\Monster.h" />
@@ -301,6 +302,7 @@
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />
+    <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\MB_Bronya.cpp" />
     <ClCompile Include="..\Code\MB_Ganesha.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />

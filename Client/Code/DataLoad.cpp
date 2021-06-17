@@ -4,6 +4,7 @@
 
 #include "UiAnimCtrC.h"
 
+#include "DecoObject.h"
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -13,6 +14,8 @@
 
 #include "ObjectFactory.h"
 #include "MeshData.h"
+
+#include "MapObject.h"
 
 CDataLoad::CDataLoad()
 {
@@ -385,209 +388,451 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 
 void CDataLoad::ToolLoad(Engine::CScene* pScene)
 {
+	auto& pDataStore = pScene->GetDataStore();
+	auto& pObjectFactory = pScene->GetObjectFactory();
 	auto& objectFactory = pScene->GetObjectFactory();
 
-	// 데이터 파일 불러오기
-	std::string strLine = "";
-	std::string filePath = "../../Data/EditorScene/save.ini";
-	std::ifstream ifsLoad(filePath.data());
-
-	_float vPos = 0.f;
-	_float vRot = 0.f;
-
-	std::wstring protoObjectKey;
-	_bool isStatic;
-	_int layerID;
-	std::wstring meshKey;
-	_bool initTex;
-	_int renderID;
-	_float3 position;
-	_float3 scale;
-	_float3 rotation;
-	_int colID; // collider
-	_float3 offset; // collider
-	_float3 size; // collider
-	_float3 rotOffset; // collider
-	_int shaderID;
-
-	SP(Engine::CObject) spObject = nullptr;
-
-	while (!ifsLoad.eof())
+	/* deco */
+	_int numOfDecoObject;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", L"numOfDecoObject", numOfDecoObject);
+	for (_int i = 0; i < numOfDecoObject; ++i)
 	{
-		Engine::_tchar* dataTag = nullptr;
-		Engine::_tchar* dataValue = nullptr;
+		SP(Engine::CDecoObject) spDecoObject =
+			std::dynamic_pointer_cast<Engine::CDecoObject>(pObjectFactory->AddClone(L"DecoObject", true));
 
-		std::getline(ifsLoad, strLine);
 
-		if ("" == strLine)
-			continue;
+		_float3 position, rotation, size;
 
-		std::vector<std::string> vStr = split(strLine, '=');
+		//GETVALUE
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_position", position);
 
-		if (!dataValue && !dataTag)
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_rotation", rotation);
+
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_size", size);
+
+		spDecoObject->GetTransform()->SetPosition(position);
+		spDecoObject->GetTransform()->SetRotation(rotation);
+		spDecoObject->GetTransform()->SetSize(size);
+
+		_int numOfMeshData;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
+							 std::to_wstring(i) + L"_numOfMeshData", numOfMeshData);
+
+		for (_int j = 0; j < numOfMeshData; ++j)
 		{
-			std::wstring wstr = Engine::StrToWStr(vStr[1]);
-			dataValue = _wcsdup(wstr.c_str());
+			std::wstring meshKey;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
+								 std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
+
+			spDecoObject->GetMesh()->AddMeshData(meshKey);
 		}
 
-		if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
-			continue;
 
-		std::vector<std::string> vStrTag = split(vStr[0], '_');
+		_int numOfTexSet;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+							std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
 
-		std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
-		dataTag = _wcsdup(wstr.c_str());
-
-		if (!wcscmp(L"static", dataTag))
+		for (_int k = 0; k < numOfTexSet; ++k)
 		{
-			isStatic = WstrToBool(dataValue);
-			continue;
-		}
-		else if (!wcscmp(L"layerID", dataTag))
-		{
-			layerID = WstrToInt(dataValue);
-			spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
+			_int numOfTex;
 
-			spObject->SetLayerID(layerID);
-			continue;
-		}
-		else if (!wcscmp(L"shaderKey", dataTag))
-		{
-			shaderID = WstrToInt(dataValue);
-			spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
-			continue;
-		}
-		else if (!wcscmp(L"meshKey", dataTag))
-		{
-			meshKey = dataValue;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+								std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
 
-			spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
-			
-			continue;
-		}
-		else if (!wcscmp(L"initTex", dataTag))
-		{
-			initTex = WstrToBool(dataValue);
-			spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
-
-			if (initTex == true)
+			for (_int l = 0; l < numOfTex; ++l)
 			{
-				if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
-					spObject->AddComponent<Engine::CTextureC>();
-				else
-					spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+				std::wstring textureKey;
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+									 std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
 
-				//고쳐야됨 쉐이더키 따로 세팅하기
-				if (spObject->GetComponent<Engine::CShaderC>() == nullptr)
-					spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+				spDecoObject->GetTexture()->AddTexture(textureKey, k);
 			}
-			else
+		}
+
+		_int renderID;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+							 std::to_wstring(i) + L"_renderID", renderID);
+		spDecoObject->GetGraphics()->SetRenderID(renderID);
+	}
+
+
+
+
+	_int numOfMapObject;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject", L"numOfMapObject", numOfMapObject);
+	for (_int i = 0; i < numOfMapObject; ++i)
+	{
+		SP(CMapObject) spMapObject =
+			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", true));
+
+
+		_float3 position, rotation, size;
+
+		//GETVALUE
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_position", position);
+
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_rotation", rotation);
+
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_size", size);
+
+		spMapObject->GetTransform()->SetPosition(position);
+		spMapObject->GetTransform()->SetRotation(rotation);
+		spMapObject->GetTransform()->SetSize(size);
+
+		_int numOfMeshData;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_numOfMeshData", numOfMeshData);
+
+		for (_int j = 0; j < numOfMeshData; ++j)
+		{
+			std::wstring meshKey;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
+
+			spMapObject->GetMesh()->AddMeshData(meshKey);
+		}
+
+
+		_int numOfTexSet;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
+
+		for (_int k = 0; k < numOfTexSet; ++k)
+		{
+			_int numOfTex;
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
+
+			for (_int l = 0; l < numOfTex; ++l)
 			{
-				spObject->AddComponent<Engine::CTextureC>();
-				spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
-				spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap");
+				std::wstring textureKey;
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
+
+				spMapObject->GetTexture()->AddTexture(textureKey, k);
 			}
-			continue;
 		}
-		else if (!wcscmp(L"renderID", dataTag))
+
+		_int renderID;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_renderID", renderID);
+		spMapObject->GetGraphics()->SetRenderID(renderID);
+
+
+
+		/* map */
+		_int numOfCollider;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject", std::to_wstring(i) + L"_numOfCollider", numOfCollider);
+		for (_int j = 0; j < numOfCollider; ++j)
 		{
-			renderID = WstrToInt(dataValue);
-			spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
-			spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-			continue;
-		}
-		else if (!wcscmp(L"scale", dataTag))
-		{
-			vStr = split(vStr[1], ',');
-			scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			spObject->GetTransform()->SetSize(scale);
-			continue;
-		}
-		else if (!wcscmp(L"rotation", dataTag))
-		{
-			vStr = split(vStr[1], ',');
-			rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			spObject->GetTransform()->SetRotation(rotation);
-			continue;
-		}
-		else if (!wcscmp(L"position", dataTag))
-		{
-			vStr = split(vStr[1], ',');
-			position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			spObject->GetTransform()->SetPosition(position);
-			continue;
-		}
-		else if (!wcscmp(L"collider", dataTag))
-		{
-			if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
+			_int colliderType;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_colliderType" + std::to_wstring(j), colliderType);
+
+			_int collisionID;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_colliderCollisionID" + std::to_wstring(j), collisionID);
+
+			_float3 offset;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_colliderOffset" + std::to_wstring(j), offset);
+
+			_float radius; // sphere
+			_float3 size; // aabb or obb
+			_float3 rotOffset; // obb
+
+			switch (colliderType)
 			{
-				spObject->AddComponent<Engine::CCollisionC>();
-				spObject->AddComponent<Engine::CDebugC>();
-			}
-
-			std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
-			if (L"collisionID" == wstr)
-				colID = WstrToInt(dataValue);
-
-			std::getline(ifsLoad, strLine);
-			vStr = split(strLine, '=');
-			vStrTag = split(vStr[0], '_');
-			std::wstring type = Engine::StrToWStr(vStrTag[3]);
-
-			_int index = StrToInt(vStr[1]);
-
-			if (L"type" == type)
-			{
-				switch (index)
-				{
-				case 1: // ray
-					break;
-				case 3: // aabb
-				{
-					/* offset */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-					/* size */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
-					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-				}
+			case (_int)Engine::EColliderType::Point:
 				break;
-				case 4: // obb
-				{
-					/* offset */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+			case (_int)Engine::EColliderType::Ray:
+				break;
+			case (_int)Engine::EColliderType::Sphere:
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderRadius" + std::to_wstring(j), radius);
 
-					/* size */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+				spMapObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create(collisionID, radius, offset));
+				break;
+			case (_int)Engine::EColliderType::AABB:
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderSize" + std::to_wstring(j), size);
 
-					/* rotOffset */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+				spMapObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(collisionID, size, offset));
+				break;
+			case (_int)Engine::EColliderType::OBB:
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderSize" + std::to_wstring(j), size);
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderRotOffset" + std::to_wstring(j), rotOffset);
 
-					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
-					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-					break;
-				}
-				}
+				spMapObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(collisionID, size, offset, rotOffset));
+				break;
 			}
 		}
 	}
+
+	
+
+
+		
+
+
+
+	
+
+	//
+
+	//// 데이터 파일 불러오기
+	//std::string strLine = "";
+	//std::string filePath = "../../Data/EditorScene/save.ini";
+	//std::ifstream ifsLoad(filePath.data());
+
+	//_float vPos = 0.f;
+	//_float vRot = 0.f;
+
+	//std::wstring protoObjectKey;
+	//_bool isStatic;
+	//_int layerID;
+	//std::wstring meshKey;
+	//_bool initTex;
+	//_int renderID;
+	//_float3 position;
+	//_float3 scale;
+	//_float3 rotation;
+	//_int colID; // collider
+	//_float3 offset; // collider
+	//_float3 size; // collider
+	//_float3 rotOffset; // collider
+	//_int shaderID;
+
+	//SP(Engine::CObject) spObject = nullptr;
+
+	//Engine::_tchar* dataTag = nullptr;
+	//Engine::_tchar* dataValue = nullptr;
+
+	//std::vector<std::string> vStr;
+	//std::vector<std::string> vStrTag;
+
+	//while (!ifsLoad.eof())
+	//{
+	//	dataTag = nullptr;
+	//	dataValue = nullptr;
+
+	//	if (!vStr.empty())
+	//	{
+	//		auto& iter = vStr.begin();
+	//		for (; iter != vStr.end();)
+	//			iter = vStr.erase(iter);
+
+	//		vStr.clear();
+	//	}
+	//	
+	//	if (!vStrTag.empty())
+	//	{
+	//		auto& iter = vStrTag.begin();
+	//		for (; iter != vStrTag.end();)
+	//			iter = vStrTag.erase(iter);
+
+	//		vStrTag.clear();
+	//	}
+
+	//	std::getline(ifsLoad, strLine);
+
+	//	if ("" == strLine)
+	//		continue;
+
+	//	vStr = split(strLine, '=');
+
+	//	if (!dataValue && !dataTag)
+	//	{
+	//		std::wstring wstr = Engine::StrToWStr(vStr[1]);
+	//		dataValue = _wcsdup(wstr.c_str());
+	//	}
+
+	//	if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
+	//		continue;
+
+	//	vStrTag = split(vStr[0], '_');
+
+	//	std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
+	//	dataTag = _wcsdup(wstr.c_str());
+
+	//	if (!wcscmp(L"static", dataTag))
+	//	{
+	//		isStatic = WstrToBool(dataValue);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"layerID", dataTag))
+	//	{
+	//		layerID = WstrToInt(dataValue);
+	//		spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
+
+	//		spObject->SetLayerID(layerID);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"shaderKey", dataTag))
+	//	{
+	//		shaderID = WstrToInt(dataValue);
+	//		spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"meshKey", dataTag))
+	//	{
+	//		meshKey = dataValue;
+
+	//		spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"initTex", dataTag))
+	//	{
+	//		initTex = WstrToBool(dataValue);
+	//		spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
+
+	//		if (initTex == true)
+	//		{
+	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+	//				spObject->AddComponent<Engine::CTextureC>();
+	//			else
+	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+
+	//			//고쳐야됨 쉐이더키 따로 세팅하기
+	//			if (spObject->GetComponent<Engine::CShaderC>() == nullptr)
+	//				spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	//		}
+	//		else
+	//		{
+	//			spObject->AddComponent<Engine::CTextureC>();
+	//			spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
+	//			spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap");
+	//		}
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"renderID", dataTag))
+	//	{
+	//		renderID = WstrToInt(dataValue);
+	//		spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
+	//		spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"scale", dataTag))
+	//	{
+	//		vStr = split(vStr[1], ',');
+	//		scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+	//		spObject->GetTransform()->SetSize(scale);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"rotation", dataTag))
+	//	{
+	//		vStr = split(vStr[1], ',');
+	//		rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+	//		spObject->GetTransform()->SetRotation(rotation);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"position", dataTag))
+	//	{
+	//		vStr = split(vStr[1], ',');
+	//		position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+	//		spObject->GetTransform()->SetPosition(position);
+	//		delete dataTag;
+	//		delete dataValue;
+	//		continue;
+	//	}
+	//	else if (!wcscmp(L"collider", dataTag))
+	//	{
+	//		if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
+	//		{
+	//			spObject->AddComponent<Engine::CCollisionC>();
+	//			spObject->AddComponent<Engine::CDebugC>();
+	//		}
+
+	//		std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
+	//		if (L"collisionID" == wstr)
+	//			colID = WstrToInt(dataValue);
+
+	//		std::getline(ifsLoad, strLine);
+	//		vStr = split(strLine, '=');
+	//		vStrTag = split(vStr[0], '_');
+	//		std::wstring type = Engine::StrToWStr(vStrTag[3]);
+
+	//		_int index = StrToInt(vStr[1]);
+
+	//		if (L"type" == type)
+	//		{
+	//			switch (index)
+	//			{
+	//			case 1: // ray
+	//				break;
+	//			case 3: // aabb
+	//			{
+	//				/* offset */
+	//				std::getline(ifsLoad, strLine);
+	//				vStr = split(strLine, '=');
+	//				vStr = split(vStr[1], ',');
+	//				offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+	//				/* size */
+	//				std::getline(ifsLoad, strLine);
+	//				vStr = split(strLine, '=');
+	//				vStr = split(vStr[1], ',');
+	//				size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+	//				spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
+	//				size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+	//			}
+	//			break;
+	//			case 4: // obb
+	//			{
+	//				/* offset */
+	//				std::getline(ifsLoad, strLine);
+	//				vStr = split(strLine, '=');
+	//				vStr = split(vStr[1], ',');
+	//				offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+	//				/* size */
+	//				std::getline(ifsLoad, strLine);
+	//				vStr = split(strLine, '=');
+	//				vStr = split(vStr[1], ',');
+	//				size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+	//				/* rotOffset */
+	//				std::getline(ifsLoad, strLine);
+	//				vStr = split(strLine, '=');
+	//				vStr = split(vStr[1], ',');
+	//				rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+
+	//				spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
+	//				size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+	//				break;
+	//			}
+	//			}
+	//		}
+	//	}
+	//}
+
+	//ifsLoad.close();
 }
 
 void CDataLoad::EffectLoad(Engine::CScene * pScene)

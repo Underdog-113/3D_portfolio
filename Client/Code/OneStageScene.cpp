@@ -59,6 +59,7 @@ void COneStageScene::Start(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
+	Load->ToolLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);

@@ -66,58 +66,58 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 	{
-		{
-			SP(Engine::CObject) spEmptyObject1
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
+		//{
+		//	SP(Engine::CObject) spEmptyObject1
+		//		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
 
-			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
-			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject1->AddComponent<Engine::CTextureC>();
-			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
+		//	spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
+		//	spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//	spEmptyObject1->AddComponent<Engine::CTextureC>();
+		//	spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//	spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
 
-			m_pivot = spEmptyObject1.get();
+		//	m_pivot = spEmptyObject1.get();
 
-			Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera")->SetTarget(spEmptyObject1);
-		}
+		//	Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera")->SetTarget(spEmptyObject1);
+		//}
 
-		// Kiana Body
-		{
-			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+		//// Kiana Body
+		//{
+		//	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
 
-			m_spKiana = spKianaClone;
-			m_pController->AddSquadMember(m_spKiana);
-			m_pController->Start();
-		}
+		//	m_spKiana = spKianaClone;
+		//	m_pController->AddSquadMember(m_spKiana);
+		//	m_pController->Start();
+		//}
 
-		// Monster
-		{
-			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-			spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
-			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			m_spSpider = spSpiderClone;
+		//// Monster
+		//{
+		//	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+		//	spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
+		//	spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		//	m_spSpider = spSpiderClone;
 
-			SP(Engine::CObject) spAxeClone = ADD_CLONE(L"MO_Axe", true, (_uint)ELayerID::Enemy, L"MO_Axe");
-			spAxeClone->GetTransform()->SetPosition(0, 0, 3);
-			spAxeClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			m_spAxe = spAxeClone;
+		//	SP(Engine::CObject) spAxeClone = ADD_CLONE(L"MO_Axe", true, (_uint)ELayerID::Enemy, L"MO_Axe");
+		//	spAxeClone->GetTransform()->SetPosition(0, 0, 3);
+		//	spAxeClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		//	m_spAxe = spAxeClone;
 
-			SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-			//spSickleClone->GetTransform()->SetSize(5, 5, 5);
-			spSickleClone->GetTransform()->SetPosition(0, 0, 10);
-			spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			m_spSickle = spSickleClone;
+		//	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+		//	//spSickleClone->GetTransform()->SetSize(5, 5, 5);
+		//	spSickleClone->GetTransform()->SetPosition(0, 0, 10);
+		//	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		//	m_spSickle = spSickleClone;
 
-			m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
-			//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
-			//m_fsm = m_spAxe->GetComponent<CFSM_SickleC>();
-		}
+		//	m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
+		//	//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
+		//	//m_fsm = m_spAxe->GetComponent<CFSM_SickleC>();
+		//}
 	}
 
-	//CDataLoad* Load = new CDataLoad();
-	//Load->Setting();
-	//Load->ToolLoad(this);
-	//delete(Load);
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ToolLoad(this);
+	delete(Load);
 
 }
 
@@ -130,14 +130,14 @@ void CWooScene::Update(void)
 {
 	__super::Update();
 
-	m_pController->Update();
-	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
-	m_pivot->GetTransform()->SetPositionY(0.f);
+	//m_pController->Update();
+	//m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
+	//m_pivot->GetTransform()->SetPositionY(0.f);
 	
 	if (Engine::IMKEY_DOWN(KEY_Q))
 		m_pattern1 = true;
 
-	SicklePattern0();
+	//SicklePattern0();
 	//SpiderPattern0();
 
 	//AxePattern0();

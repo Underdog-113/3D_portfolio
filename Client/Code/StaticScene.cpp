@@ -26,6 +26,9 @@
 #include "MB_Bronya.h"
 #include "Monster.h"
 
+#include "DecoObject.h"
+#include "MapObject.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -117,6 +120,12 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSkyBox);
+
+	SP(Engine::CDecoObject) spDecoObject(Engine::CDecoObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDecoObject);
+
+	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMapObject);
 
 	InitUiPrototypes();
 	InitMonsterPrototypes();
