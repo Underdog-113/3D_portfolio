@@ -36,12 +36,10 @@ private:
 private:
 	HBITMAP m_hBitmap;
 	BITMAP  m_bitmap;
-	HTREEITEM m_hSoftEffectItem;
-	HTREEITEM m_hMeshEffectItem;
-	HTREEITEM m_hEffect;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnPaint();
+
 #pragma region EditButtonName
 	CBitmapButton m_bmp_EffectList;
 	CBitmapButton m_bmp_EffectType;
@@ -111,9 +109,6 @@ public:
 	CMFCButton m_btnListDelete;
 
 #pragma endregion
-	CTreeCtrl m_TreeCtrl;
-	
-	afx_msg void OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedDeleteEffectList();
 	afx_msg void OnBnClickedMeshEffect();
 	afx_msg void OnBnClickedSoftEffect();
@@ -252,6 +247,9 @@ private:
 	_float3 m_vSaveRot;
 	_float3 m_vSaveScale;
 	ACTION_STATE m_eActionState;
+public:
+	afx_msg void OnLbnSelchangeEffectList();
+	CListBox m_EffectListBox;
 };
 
 

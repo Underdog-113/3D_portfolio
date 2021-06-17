@@ -24,7 +24,7 @@ public:
 
 	void		CreateFixOffsetArray(_uint size);
 
-	_float3		GetRootMotionLocalPos(CDynamicMeshData* pDM);
+	_float3		GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pDM);
 	_float3		GetOwnerSizedPos(CObject * pOwner, _float3 pos);
 private:
 	GETTOR			(_bool*,	m_pIsFixRootMotionOffsets,	nullptr,		IsFixRootMotionOffsets)

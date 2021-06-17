@@ -64,7 +64,7 @@ void CKiana::Start(void)
 	//CreatePistol();
 
 	//catpaw
-	CreateCatPaw();
+	//CreateCatPaw();
 
 }
 

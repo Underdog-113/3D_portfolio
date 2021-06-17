@@ -73,7 +73,8 @@ namespace Engine
 		CircularGauge			= 9,
 		CelShader				= 10,
 		SkyBoxShader			= 11,
-		NumOfShaderID			= 12
+		MeshTrailShader			= 12,
+		NumOfShaderID			= 13
 
 	};
 #pragma endregion

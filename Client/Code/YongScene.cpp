@@ -40,23 +40,24 @@ void CYongScene::Start(void)
 {
 	__super::Start();
 	{
-		SP(Engine::CObject) spEmptyObject = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Map, L"Cube0");
+		//SP(Engine::CObject) spMeshEffect = ADD_CLONE(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
 
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"waterplane");
-		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"water", 0);
-		spEmptyObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap", 0);
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::WaterShader);
+		////spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		//spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(L"kiana_Attack_Trail");
+		//spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+		//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
 
-		spEmptyObject = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Enemy, L"Cube0");
+	/*	spEmptyObject = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Enemy, L"Cube0");
 		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
 		spEmptyObject->AddComponent<Engine::CParticleSystemC>();
 
 		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
 		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
 
-		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");
+		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");*/
 
 		//	// Save & Load Ex
 		//	_int numOfMeshEffect;

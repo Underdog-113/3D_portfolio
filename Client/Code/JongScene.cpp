@@ -65,13 +65,14 @@ void CJongScene::Start(void)
 			spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 			spEmptyObject1->AddComponent<Engine::CTextureC>();
 			spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
+			spEmptyObject1->GetTransform()->SetSize(2, 2, 2);
 
 			m_pivot = spEmptyObject1.get();
 
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
-			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
+			cam->SetTarget(spEmptyObject1);
 			cam->SetTargetDist(6.f);
+			CStageController::GetInstance()->SetCurrentMainCam(cam);
 		}
 
 
@@ -82,6 +83,7 @@ void CJongScene::Start(void)
 			m_spKiana = spKianaClone;
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
+
 		}
 
 		{

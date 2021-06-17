@@ -86,7 +86,6 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON40, m_bmp_ScaleZ);
 	DDX_Control(pDX, IDC_BUTTON42, m_bmp_AlphaWidth);
 	DDX_Control(pDX, IDC_BUTTON43, m_bmp_AlphaHeight);
-	DDX_Control(pDX, IDC_TREE1, m_TreeCtrl);
 	DDX_Control(pDX, IDC_EDIT1, m_edPosX);
 	DDX_Control(pDX, IDC_EDIT4, m_edPosY);
 	DDX_Control(pDX, IDC_EDIT7, m_edPosZ);
@@ -133,6 +132,7 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SPIN9, m_spinScaleZ);
 	DDX_Control(pDX, IDC_BUTTON44, m_bmp_Speed);
 	DDX_Control(pDX, IDC_BUTTON45, m_bmpAnimSpeed);
+	DDX_Control(pDX, IDC_LIST1, m_EffectListBox);
 }
 
 void CInspector::EditButtonStyle()
@@ -319,7 +319,6 @@ void CInspector::EditButtonStyle()
 BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_WM_PAINT()
 	ON_WM_PAINT()
-	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CInspector::OnTvnSelchangedEffectList)
 	ON_BN_CLICKED(IDC_MFCBUTTON1, &CInspector::OnBnClickedDeleteEffectList)
 	ON_BN_CLICKED(IDC_MFCBUTTON2, &CInspector::OnBnClickedMeshEffect)
 	ON_BN_CLICKED(IDC_MFCBUTTON3, &CInspector::OnBnClickedSoftEffect)
@@ -361,6 +360,7 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN11, &CInspector::OnDeltaposSpinAlphaHeight)
 	ON_EN_CHANGE(IDC_EDIT15, &CInspector::OnEnChangeEditSpeed)
 	ON_EN_CHANGE(IDC_EDIT16, &CInspector::OnEnChangeEditAnimSpeed)
+	ON_LBN_SELCHANGE(IDC_LIST1, &CInspector::OnLbnSelchangeEffectList)
 END_MESSAGE_MAP()
 
 
@@ -385,10 +385,6 @@ void CInspector::OnInitialUpdate()
 	m_hBitmap = LoadBitmap(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MAIN_BG));
 	GetObject(m_hBitmap, sizeof(BITMAP), &m_bitmap);
 	EditButtonStyle();
-	///////////////////////////////////////////////////
-
-	m_hEffect = m_TreeCtrl.InsertItem(L"Effect", 0, 1, TVI_ROOT, TVI_LAST);
-
 }
 
 void CInspector::OnPaint()
@@ -403,23 +399,13 @@ void CInspector::OnPaint()
 
 }
 
-void CInspector::OnTvnSelchangedEffectList(NMHDR *pNMHDR, LRESULT *pResult)
+void CInspector::OnLbnSelchangeEffectList()
 {
-	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-		
-	int index = 0;
-	HTREEITEM hItem = m_TreeCtrl.GetSelectedItem();
-	HTREEITEM hChild = m_TreeCtrl.GetChildItem(NULL);
-	while (hChild)
-	{
-		if (hChild == hItem) break;
-		hChild = m_TreeCtrl.GetNextItem(hChild, TVGN_NEXT);
-		++index;
-	}
-		
-	m_iSelectObjectNum = index - 1;
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	_int index = m_EffectListBox.GetCurSel();
 
-	*pResult = 0;
+	m_iSelectObjectNum = index;
+
 }
 
 
@@ -429,7 +415,7 @@ void CInspector::OnBnClickedDeleteEffectList()
 	spObject->SetDeleteThis(true);
 	spObject.reset();	
 
-	m_TreeCtrl.DeleteItem(m_TreeCtrl.GetSelectedItem());
+	m_EffectListBox.DeleteString(m_iSelectObjectNum);
 	m_btnModeTransform.SetCheck(false);
 	m_btnModeEdit.SetCheck(false);
 }
@@ -439,7 +425,7 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
 
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\StaticScene\\";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -452,7 +438,7 @@ void CInspector::OnBnClickedMeshEffect()
 
 		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
 
-		m_hMeshEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
+		m_EffectListBox.AddString(strFilePath);
 
 		Add_MeshEffect(strFilePath);
 
@@ -465,7 +451,7 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\SoftEffect\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -477,7 +463,7 @@ void CInspector::OnBnClickedSoftEffect()
 
 		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
 
-		m_hSoftEffectItem = m_TreeCtrl.InsertItem(strFilePath, 1, 1, m_hEffect, TVI_LAST);
+		m_EffectListBox.AddString(strFilePath);
 
 		Add_SoftEffect(strFilePath);
 
@@ -488,7 +474,7 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -511,7 +497,7 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -532,13 +518,13 @@ void CInspector::OnBnClickedAlphaMask()
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
 	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MeshEffect", false, (_int)Engine::ELayerID::Effect, L"Effect0");
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"Effect0");
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::CatPawShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)

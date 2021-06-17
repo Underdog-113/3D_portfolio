@@ -112,6 +112,7 @@ void CWooScene::Start(void)
 		//	//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
 		//	//m_fsm = m_spAxe->GetComponent<CFSM_SickleC>();
 		//}
+
 	}
 
 	CDataLoad* Load = new CDataLoad();

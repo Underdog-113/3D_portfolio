@@ -29,35 +29,34 @@ struct PS_IN
 
 struct PS_OUT
 {
-	vector		vColor : COLOR0;	
+	vector		vColor : COLOR0;
 };
 
-// ÇÈ¼¿ ½¦ÀÌ´õ
+// ï¿½È¼ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½
 
 PS_OUT		PS_MAIN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
-	
+
 	vector vAlbedo = tex2D(AlbedoSampler, In.vTexUV);
 	vector vShade = tex2D(ShadeSampler, In.vTexUV);
 	vector vSpecular = tex2D(SpecularSampler, In.vTexUV);
 
 	Out.vColor = vAlbedo * vShade + vSpecular;
-
 	return Out;
 }
 
 technique Default_Device
 {
-	pass	
+	pass
 	{
 		alphablendenable = true;
 		srcblend = srcalpha;
 		destblend = invsrcalpha;
 
 		zwriteenable = false;
-		vertexshader = NULL;	// ÁøÀÔÁ¡ ÇÔ¼ö ¸í½Ã
+		vertexshader = NULL;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}
-	
+
 };

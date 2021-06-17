@@ -12,6 +12,10 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+
+// import from jongscene
+#include "Include_ForTest.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -50,7 +54,7 @@ void COneStageScene::Start(void)
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
-	// ·Îµå
+	// ï¿½Îµï¿½
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
 	Load->ButtonLoad(this);
@@ -86,7 +90,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"½½±êÀÌ", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsetrState(L"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
@@ -106,7 +110,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-		CBattleUiManager::GetInstance()->CollTime(0, 100);
+		CBattleUiManager::GetInstance()->SkillExecution(0, 10, 1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
@@ -121,7 +125,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
-		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5);
+		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
 	}
 }
 

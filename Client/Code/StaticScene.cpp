@@ -26,8 +26,13 @@
 #include "MB_Bronya.h"
 #include "Monster.h"
 
+
 #include "DecoObject.h"
 #include "MapObject.h"
+
+#include "AttackTrail_Client.h"
+#include "MeshEffect_Client.h"
+
 
 #pragma endregion
 
@@ -126,10 +131,15 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
-
+	
+	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSkyBox);
+	
 	InitUiPrototypes();
 	InitMonsterPrototypes();
-	
+
+	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttack_Trail);
 }
 
 void CStaticScene::InitUiPrototypes(void)
