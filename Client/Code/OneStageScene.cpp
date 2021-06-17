@@ -52,7 +52,7 @@ void COneStageScene::Start(void)
 	__super::Start();
 
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-	
+
 	Start_SetupUI();
 
 	Start_SetupMembers();
@@ -72,7 +72,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
-		CBattleUiManager::GetInstance()->KeyPad(8);
+		CBattleUiManager::GetInstance()->KeyPad(4);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
@@ -118,6 +118,11 @@ void COneStageScene::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
 		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+		CBattleUiManager::GetInstance()->BattleEnd();
 	}
 }
 

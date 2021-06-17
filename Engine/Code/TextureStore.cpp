@@ -164,8 +164,8 @@ void CTextureStore::ParsingTexture(std::wstring filePath, std::wstring fileName)
 			}
 		}
 		pNewTex->sectionKey = sectionKey;
+		pNewTex->textureKey = texKey;
 
-		//Alpha���� �ؽ���
 		pNewTex->includeAlpha = (filePath.find(L"\\Alpha\\") != std::wstring::npos);
 		(*pCurMap)[texKey] = pNewTex;
 	}

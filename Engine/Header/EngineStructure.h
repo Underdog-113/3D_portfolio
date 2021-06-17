@@ -74,6 +74,8 @@ namespace Engine
 		IDirect3DBaseTexture9* pTexture;
 		D3DXIMAGE_INFO imageInfo;
 		_bool includeAlpha;
+
+		std::wstring textureKey;
 		std::wstring sectionKey;
 	}TEXTURE_DATA;
 

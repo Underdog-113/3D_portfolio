@@ -30,7 +30,6 @@ void CTimerUiC::Awake()
 void CTimerUiC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
-	m_totalTime = 0;
 }
 
 void CTimerUiC::FixedUpdate(SP(CComponent) spThis)

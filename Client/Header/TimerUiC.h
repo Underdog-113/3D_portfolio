@@ -23,7 +23,7 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	_float m_totalTime;
+	GETTOR(_float, m_totalTime, 0, TotalTime);
 };
 #endif
 

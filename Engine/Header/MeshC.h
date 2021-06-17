@@ -72,9 +72,9 @@ private:
 	GETTOR			(_float3,			m_minVertex,	MAX_VECTOR,		MinVertex)
 	GETTOR			(_float3,			m_maxVertex,	-MAX_VECTOR,	MaxVertex)
 	GETTOR_SETTOR	(_bool,				m_initTex,		false,			InitTex)	
-	GETTOR			(CRootMotion*,		m_pRootMotion,			nullptr,	RootMotion);
+	GETTOR			(CRootMotion*,		m_pRootMotion,	nullptr,		RootMotion);
 		
-	GETTOR(_float, m_halfYOffset, 0.f, HalfYOffset)
+	GETTOR			(_float,			m_halfYOffset,	0.f,			HalfYOffset)
 	GETTOR_SETTOR(_bool, m_isEffectMesh, false, isEffectMesh)
 };
 END
