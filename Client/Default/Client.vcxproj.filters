@@ -232,8 +232,14 @@
     <Filter Include="09.Manager\02.DataManager">
       <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
     </Filter>
-      <Filter Include="01.Scene\10.BattleEnd">
-        <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
+    <Filter Include="01.Scene\10.BattleEnd">
+      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\UILinker">
+      <UniqueIdentifier>{eac47758-5e7b-4d2f-a0af-fa0238c2173d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\StatusDealer">
+      <UniqueIdentifier>{1966fe85-0f86-47ae-9684-e6e4f2457d41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -369,9 +375,6 @@
     <ClInclude Include="..\Header\FSM_KianaC.h">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StageController.h">
-      <Filter>97.TempClass_ForDevelop</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\UiAnimCtrC.h">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClInclude>
@@ -486,17 +489,26 @@
     <ClInclude Include="..\Header\AttackTrail_Client.h">
       <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\DataManager.h">
-        <Filter>09.Manager\02.DataManager</Filter>
-      </ClInclude>
-      <ClInclude Include="..\Header\BattleEndScene.h">
-        <Filter>01.Scene\10.BattleEnd</Filter>
-      </ClInclude>
+    <ClInclude Include="..\Header\DataManager.h">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BattleEndScene.h">
+      <Filter>01.Scene\10.BattleEnd</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Include_ForTest.h">
       <Filter>01.Scene\06.OneStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_TheresaC.h">
       <Filter>02.Objects\02.Valkyrie\01.Theresa\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StatusDealer.h">
+      <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\UILinker.h">
+      <Filter>97.TempClass_ForDevelop\UILinker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageControlTower.h">
+      <Filter>97.TempClass_ForDevelop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -611,9 +623,6 @@
     <ClCompile Include="..\Code\FSM_KianaC.cpp">
       <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageController.cpp">
-      <Filter>97.TempClass_ForDevelop</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\UiAnimCtrC.cpp">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClCompile>
@@ -721,6 +730,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\FSM_TheresaC.cpp">
       <Filter>02.Objects\02.Valkyrie\01.Theresa\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StatusDealer.cpp">
+      <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UILinker.cpp">
+      <Filter>97.TempClass_ForDevelop\UILinker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageControlTower.cpp">
+      <Filter>97.TempClass_ForDevelop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

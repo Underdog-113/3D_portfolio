@@ -27,7 +27,7 @@
 
 #include "FSM_KianaC.h"
 #include "Kiana.h"
-#include "StageController.h"
+#include "StageControlTower.h"
 
 #include "DataLoad.h"
 CWooScene::CWooScene()
@@ -58,7 +58,7 @@ void CWooScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	m_pController = CStageController::GetInstance();
+	m_pController = CStageControlTower::GetInstance();
 	m_pController->Awake();
 }
 
@@ -134,7 +134,7 @@ void CWooScene::Update(void)
 	//m_pController->Update();
 	//m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
 	//m_pivot->GetTransform()->SetPositionY(0.f);
-	
+
 	if (Engine::IMKEY_DOWN(KEY_Q))
 		m_pattern1 = true;
 
@@ -253,7 +253,7 @@ void CWooScene::AxePattern1()
 	//	++m_curPatternIdx;
 	//	return;
 	//}
-	
+
 	//if (Name_Attack_1 == m_fsm->GetCurStateString() && 0.8f <= m_fsm->GetDM()->GetAniTimeline())
 	//{
 	//	m_fsm->ChangeState(Name_Attack_2);

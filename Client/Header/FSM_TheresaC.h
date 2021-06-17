@@ -2,7 +2,7 @@
 #include "StateMachine.h"
 
 class CTheresa;
-class CStageController;
+class CStageControlTower;
 class CFSM_TheresaC : public Engine::CStateMachineC
 {
 	enum Appear_Option { None, QTE };
@@ -210,7 +210,7 @@ public:
 private:
 	CTheresa* m_pTheresa= nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
-	CStageController* m_pStageController = nullptr;
+	CStageControlTower* m_pStageControlTower = nullptr;
 
 	Appear_Option m_appearOption = None;
 };

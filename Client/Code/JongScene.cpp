@@ -5,7 +5,7 @@
 
 #include "DynamicMeshData.h"
 
-#include "StageController.h"
+#include "StageControlTower.h"
 #include "FSM_KianaC.h"
 #include "Kiana.h"
 #include "AniCtrl.h"
@@ -46,8 +46,7 @@ void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	//m_pController = new CStageController;
-	m_pController = CStageController::GetInstance();
+	m_pController = CStageControlTower::GetInstance();
 	m_pController->Awake();
 }
 
@@ -72,7 +71,7 @@ void CJongScene::Start(void)
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
 			cam->SetTarget(spEmptyObject1);
 			cam->SetTargetDist(6.f);
-			CStageController::GetInstance()->SetCurrentMainCam(cam);
+			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 		}
 
 

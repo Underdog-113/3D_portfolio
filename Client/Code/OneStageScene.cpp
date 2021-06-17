@@ -42,7 +42,9 @@ void COneStageScene::Free(void)
 void COneStageScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	InitPrototypes();
+
+	m_pController = CStageControlTower::GetInstance();
+	m_pController->Awake();
 }
 
 void COneStageScene::Start(void)
@@ -51,22 +53,9 @@ void COneStageScene::Start(void)
 
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
-	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
+	Start_SetupUI();
 
-	// �ε�
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->ButtonLoad(this);
-	Load->ImageLoad(this);
-	Load->SliderLoad(this);
-	Load->ScrollViewLoad(this);
-	Load->CanvasLoad(this);
-	Load->TextLoad(this);
-	Load->ToolLoad(this);
-	delete(Load);
-
-	CBattleUiManager::GetInstance()->Start(this);
+	Start_SetupMembers();
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -78,9 +67,12 @@ void COneStageScene::Update(void)
 {
 	__super::Update();
 
+	m_pController->Update();
+
+
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
-		CBattleUiManager::GetInstance()->KeyPad(8);
+		CBattleUiManager::GetInstance()->KeyPad(4);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
@@ -90,7 +82,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"������", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsetrState(L"WooHyeng, The King of Guro", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
@@ -127,6 +119,11 @@ void COneStageScene::Update(void)
 	{
 		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
 	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+		CBattleUiManager::GetInstance()->BattleEnd();
+	}
 }
 
 void COneStageScene::LateUpdate(void)
@@ -140,6 +137,8 @@ void COneStageScene::OnDestroy(void)
 	__super::OnDestroy();
 	CBattleUiManager::GetInstance()->OnDestroy();
 
+	m_pController->DestroyInstance();
+	m_pController = nullptr;
 }
 
 void COneStageScene::OnEnable(void)
@@ -159,6 +158,59 @@ void COneStageScene::ChangeScene(CClientScene* pScene)
 	m_pLoading = CLoading::Create(pScene, false);
 }
 
+void COneStageScene::Start_SetupUI(void)
+{
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
+	Load->TextLoad(this);
+	delete(Load);
+
+	CBattleUiManager::GetInstance()->Start(this);
+}
+
+void COneStageScene::Start_SetupMembers(void)
+{
+	// Kiana
+	{
+		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+
+		m_spValkyrie = spKianaClone;
+		m_pController->AddSquadMember(m_spValkyrie);
+		m_pController->Start();
+	}
+	// Cam Target Set
+	{
+		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"OneStageSceneBasicCamera");
+		cam->SetTarget(m_spValkyrie);
+		cam->SetTargetDist(6.f);
+		CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	}
+	// Spider
+	{
+		SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+		spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
+		spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		m_spSpider = spSpiderClone;
+	}
+	// test map
+	{
+		SP(Engine::CObject) spEmptyObject
+			= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
+
+		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
+		spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		spEmptyObject->AddComponent<Engine::CTextureC>();
+		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	}
+}
+
 void COneStageScene::InitPrototypes(void)
 {
+	SP(CKiana) spKianaPrototype(CKiana::Create(false, this));
+	ADD_PROTOTYPE(spKianaPrototype);
 }

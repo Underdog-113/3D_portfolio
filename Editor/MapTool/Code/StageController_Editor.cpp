@@ -1,39 +1,39 @@
 #include "stdafx.h"
-#include "StageController_Editor.h"
+#include "StageControlTower_Editor.h"
 
-IMPLEMENT_SINGLETON(CStageController_Editor)
+IMPLEMENT_SINGLETON(CStageControlTower_Editor)
 
-//CStageController_Editor::CStageController_Editor()
+//CStageControlTower_Editor::CStageControlTower_Editor()
 //{
 //}
 //
 //
-//CStageController_Editor::~CStageController_Editor()
+//CStageControlTower_Editor::~CStageControlTower_Editor()
 //{
 //}
 
-void CStageController_Editor::Awake(void)
+void CStageControlTower_Editor::Awake(void)
 {
 	m_pInput = Engine::CInputManager::GetInstance();
 	//m_spCurMainCam = Engine::GET_MAIN_CAM;
 }
 
-void CStageController_Editor::Start(void)
+void CStageControlTower_Editor::Start(void)
 {
 }
 
 
-void CStageController_Editor::Update(void)
+void CStageControlTower_Editor::Update(void)
 {
 	if(m_spCurActor)
 		MoveControl();
 }
 
-void CStageController_Editor::OnDestroy()
+void CStageControlTower_Editor::OnDestroy()
 {
 }
 
-void CStageController_Editor::AddSquadMember(SP(Engine::CObject) pCharacter)
+void CStageControlTower_Editor::AddSquadMember(SP(Engine::CObject) pCharacter)
 {
 	//if (m_vSquad.size() == 3)
 	//{
@@ -45,7 +45,7 @@ void CStageController_Editor::AddSquadMember(SP(Engine::CObject) pCharacter)
 }
 
 
-void CStageController_Editor::MoveControl()
+void CStageControlTower_Editor::MoveControl()
 {
 	// stand
 	if (!m_inputLock_ByAni && !CheckMoveOrder())
@@ -59,7 +59,7 @@ void CStageController_Editor::MoveControl()
 		RotateCurrentActor();
 }
 
-_bool CStageController_Editor::CheckMoveOrder()
+_bool CStageControlTower_Editor::CheckMoveOrder()
 {
 	bool isMove = false;
 
@@ -164,7 +164,7 @@ _bool CStageController_Editor::CheckMoveOrder()
 	return true;
 }
 
-void CStageController_Editor::RotateCurrentActor()
+void CStageControlTower_Editor::RotateCurrentActor()
 {
 	SP(Engine::CTransformC) pActorTransform = m_spCurActor->GetTransform();
 

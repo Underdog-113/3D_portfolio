@@ -56,13 +56,13 @@ void CSlider::Update(void)
 {
 	__super::Update();
 
-	/*
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_1))
+	//*
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Z))
 	{
 		m_value -= 1.0f;
 	}
 
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_2))
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_X))
 	{
 		m_value += 1.0f;
 	}

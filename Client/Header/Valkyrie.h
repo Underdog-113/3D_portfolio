@@ -52,6 +52,8 @@ protected:
 protected:	
 	GETTOR			(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)
 		
+	GETTOR			(V_Stat*,					m_pStat,			nullptr,	Stat)
+
 };
 
 #endif
