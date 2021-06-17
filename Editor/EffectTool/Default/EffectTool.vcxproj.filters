@@ -31,14 +31,14 @@
     <Filter Include="05.Object">
       <UniqueIdentifier>{e38c0a56-103f-44b2-abc9-57f858a1f33c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object\00.EffectMesh">
+      <UniqueIdentifier>{f7260254-c1c9-4d69-915d-57ccb0f765e0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="05.Object\01.SoftEffect">
       <UniqueIdentifier>{90f243c2-8c3b-40ce-8289-511eed1f4fbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Object\00.MeshEffect">
-      <UniqueIdentifier>{f7260254-c1c9-4d69-915d-57ccb0f765e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05.Object\00.MeshEffect\AttackTrail">
-      <UniqueIdentifier>{b539cb87-63f3-4461-9f80-0c266ac77bb1}</UniqueIdentifier>
+    <Filter Include="05.Object\00.EffectMesh\00.AttackTrail">
+      <UniqueIdentifier>{06eeb9f6-9d93-4452-920a-7488f55cb385}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,10 +85,10 @@
       <Filter>04.MainEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshEffect.h">
-      <Filter>05.Object\00.MeshEffect</Filter>
+      <Filter>05.Object\00.EffectMesh</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AttackTrail.h">
-      <Filter>05.Object\00.MeshEffect\AttackTrail</Filter>
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +117,10 @@
       <Filter>04.MainEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshEffect.cpp">
-      <Filter>05.Object\00.MeshEffect</Filter>
+      <Filter>05.Object\00.EffectMesh</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AttackTrail.cpp">
-      <Filter>05.Object\00.MeshEffect\AttackTrail</Filter>
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +256,7 @@
     <Image Include="res\Speed.bmp">
       <Filter>97.Bitmap</Filter>
     </Image>
-    <Image Include="res\AnimSpeed.bmp">
-      <Filter>97.Bitmap</Filter>
-    </Image>
+    <Image Include="res\AnimSpeed.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">
