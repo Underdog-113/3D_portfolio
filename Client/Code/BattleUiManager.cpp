@@ -216,10 +216,13 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 
 void CBattleUiManager::TargetUI(_float3 pos, _float value)
 {
+	_float3 pos2D = pos - Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
+	pos2D.z = m_target[0]->GetTransform()->GetPosition().z;
+
 	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
 
-	m_target[0]->GetTransform()->SetPosition(pos);
-	m_target[1]->GetTransform()->SetPosition(pos);
+	m_target[0]->GetTransform()->SetPosition(pos2D);
+	m_target[1]->GetTransform()->SetPosition(pos2D);
 
 	m_monsterTargetCanvas->SetIsEnabled(true);
 }
