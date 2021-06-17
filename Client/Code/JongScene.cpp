@@ -70,7 +70,7 @@ void CJongScene::Start(void)
 			m_pivot = spEmptyObject1.get();
 
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
-			Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera")->SetTarget(spEmptyObject1);
+			cam->SetTarget(spEmptyObject1);
 			cam->SetTargetDist(6.f);
 		}
 
@@ -82,6 +82,7 @@ void CJongScene::Start(void)
 			m_spKiana = spKianaClone;
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
+
 		}
 
 		{

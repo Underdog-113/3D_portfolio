@@ -261,6 +261,7 @@
     <ClInclude Include="..\Header\StageController.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
+    <ClInclude Include="..\Header\Include_ForTest.h" />
     <ClInclude Include="AlphaLifeTimeC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />

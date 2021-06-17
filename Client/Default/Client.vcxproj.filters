@@ -485,6 +485,8 @@
       </ClInclude>
       <ClInclude Include="..\Header\BattleEndScene.h">
         <Filter>01.Scene\10.BattleEnd</Filter>
+    <ClInclude Include="..\Header\Include_ForTest.h">
+      <Filter>01.Scene\06.OneStageScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -608,9 +610,6 @@
     <ClCompile Include="..\Code\MainRoomScene.cpp">
       <Filter>01.Scene\07.MainRoomScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\OneStageScene.cpp">
-      <Filter>01.Scene\06.OneStageScene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
       <Filter>01.Scene\05.ReadyToSortieScene</Filter>
     </ClCompile>
@@ -702,7 +701,9 @@
         <Filter>09.Manager\02.DataManager</Filter>
       </ClCompile>
       <ClCompile Include="..\Code\BattleEndScene.cpp">
-        <Filter>01.Scene\10.BattleEnd</Filter>              
+        <Filter>01.Scene\10.BattleEnd</Filter>
+    <ClCompile Include="..\Code\OneStageScene.cpp">
+      <Filter>01.Scene\06.OneStageScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
