@@ -14,6 +14,7 @@
 #include "MainRoomScene.h"
 #include "StageSelectionScene.h"
 #include "OneStageScene.h"
+#include "BattleEndScene.h"
 #pragma endregion
 
 CInitScene::CInitScene()
