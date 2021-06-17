@@ -2,7 +2,7 @@
 #ifndef UILINKER_H
 #define UILINKER_H
 
-
+class CStageControlTower;
 class CUILinker
 {
 	enum JoyStick_Dir { Down = 2, Left = 4, Center = 5, Right = 6, Up = 8 };

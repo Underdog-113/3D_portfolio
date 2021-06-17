@@ -2,6 +2,8 @@
 #include "UILinker.h"
 
 #include "BattleUiManager.h"
+#include "StageControlTower.h"
+#include "Valkyrie.h"
 
 CUILinker::CUILinker()
 {
@@ -34,7 +36,7 @@ void CUILinker::Skill()
 	
 	m_pUIManager->SkillExecution(
 		CBattleUiManager::Button_Type::SkillButton,
-		cost,
+		(_int)cost,
 		cooltime);
 }
 
@@ -47,7 +49,7 @@ void CUILinker::Ultra()
 
 	m_pUIManager->SkillExecution(
 		CBattleUiManager::Button_Type::SpecialButton,
-		cost,
+		(_int)cost,
 		cooltime);
 }
 

@@ -33,13 +33,11 @@ bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate)
 	if (mhp < 0.f)
 	{
 		pDst->SetCurHp(0.f);
-		m_pLinker->MonsterHpSet(0.f);	// ui interactive
 
 		return true;
 	}
 
 	pDst->SetCurHp(mhp);
-	m_pLinker->MonsterHpSet(mhp);	// ui interactive
 	return false;
 }
 
@@ -59,12 +57,10 @@ bool CStatusDealer::Damage_MtoV(M_Stat * pSrc, V_Stat * pDst, _float dmgRate)
 	if (vhp < 0.f)
 	{
 		pDst->SetCurHp(0.f);
-		m_pLinker->MonsterHpSet(vhp);	// ui interactive
 		return true;
 	}
 
 	pDst->SetCurHp(vhp);
-	m_pLinker->MonsterHpSet(vhp);	// ui interactive
 	return false;
 }
 
@@ -78,7 +74,6 @@ void CStatusDealer::HpUp_Solo(Chara_Stat * pStat, _float value)
 		hp = pStat->GetMaxHp();
 
 	pStat->SetCurHp(hp);
-	m_pLinker->PlayerHpSet(hp);		// ui interactive
 }
 
 void CStatusDealer::HpDown_Solo(Chara_Stat * pStat, _float value)
@@ -91,7 +86,6 @@ void CStatusDealer::HpDown_Solo(Chara_Stat * pStat, _float value)
 		hp = 1.f;
 
 	pStat->SetCurHp(hp);
-	m_pLinker->PlayerHpSet(hp);		// ui interactive
 }
 
 void CStatusDealer::SpUp(V_Stat * pStat, _float value)
@@ -105,7 +99,6 @@ void CStatusDealer::SpUp(V_Stat * pStat, _float value)
 		sp = pStat->GetMaxSp();
 
 	pStat->SetCurSp(sp);
-	m_pLinker->PlayerSpSet(sp);		// ui interactive
 	// sp font
 }
 
@@ -119,7 +112,6 @@ void CStatusDealer::SpDown(V_Stat * pStat, _float value)
 		sp = 0.f;
 
 	pStat->SetCurSp(sp);
-	m_pLinker->PlayerSpSet(sp);		// ui interactive
 }
 
 bool CStatusDealer::BreakGauge(M_Stat * pStat, _float value)

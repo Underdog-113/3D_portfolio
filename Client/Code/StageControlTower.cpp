@@ -330,9 +330,9 @@ void CStageControlTower::StageUIControl()
 	// ult cool
 
 	// player hp
-	m_pLinker->PlayerHpSet(m_pCurActor->GetStat()->GetCurHp());
+	//m_pLinker->PlayerHpSet(m_pCurActor->GetStat()->GetCurHp());
 	// player sp
-	m_pLinker->PlayerSpSet(m_pCurActor->GetStat()->GetCurSp());
+	//m_pLinker->PlayerSpSet(m_pCurActor->GetStat()->GetCurSp());
 }
 
 // 1. 새로운 애니 시작할 때 방향 고정
