@@ -6,7 +6,7 @@
 #include "AniCtrl.h"
 
 #include "FSMDefine_Kiana.h"
-#include "StageController.h"
+#include "StageControlTower.h"
 #include "Theresa.h"
 
 CFSM_TheresaC::CFSM_TheresaC()

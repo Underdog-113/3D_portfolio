@@ -66,6 +66,11 @@ void CKiana::Start(void)
 	//catpaw
 	//CreateCatPaw();
 
+	// status
+	Base_Stat bs;
+
+	m_pStat = new V_Stat;
+	m_pStat->SetupStatus(&bs);
 }
 
 void CKiana::FixedUpdate(void)
@@ -128,6 +133,8 @@ void CKiana::PostRender(LPD3DXEFFECT pEffect)
 
 void CKiana::OnDestroy(void)
 {
+	delete m_pStat;
+
 	delete m_pLeftHand_World;
 	delete m_pRightHand_World;
 	__super::OnDestroy();

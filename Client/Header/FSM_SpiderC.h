@@ -3,7 +3,7 @@
 #define Cool_End		0.75f
 
 
-class CStageController;
+class CStageControlTower;
 class CFSM_SpiderC final : public Engine::CStateMachineC
 {
 public:
@@ -26,7 +26,7 @@ private: /* Normal Actions */
 private:
 	_float m_accTime = 0.f;
 	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
-	CStageController* m_pStageController = nullptr; // test
+	CStageControlTower* m_pStageControlTower = nullptr; // test
 
 public:
 	// <Animation List>

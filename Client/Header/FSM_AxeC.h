@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachine.h"
 
-class CStageController;
+class CStageControlTower;
 class CFSM_AxeC final : public Engine::CStateMachineC
 {
 public:
@@ -20,7 +20,7 @@ private:
 private:
 	_float m_accTime = 0.f;
 	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
-	CStageController* m_pStageController = nullptr;
+	CStageControlTower* m_pStageControlTower = nullptr;
 
 	GETTOR_SETTOR(_bool, m_pattern1, false, Pattern1);
 

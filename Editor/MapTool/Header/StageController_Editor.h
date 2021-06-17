@@ -1,6 +1,6 @@
 
-#ifndef STAGECONTROLLER_EDITOR_H
-#define STAGECONTROLLER_EDITOR_H
+#ifndef StageControlTower_EDITOR_H
+#define StageControlTower_EDITOR_H
 
 #define StageKey_Move_Left			KEY_LEFT
 #define StageKey_Move_Right			KEY_RIGHT
@@ -31,16 +31,16 @@
 #define MoveFlag_Back 0x08
 
 
-class CStageController_Editor
+class CStageControlTower_Editor
 {
-	DECLARE_SINGLETON(CStageController_Editor)
+	DECLARE_SINGLETON(CStageControlTower_Editor)
 
 public:
 	enum Squad_Role { Actor, Wait_1, Wait_2 };
 
 public:
-	//CStageController_Editor();
-	//~CStageController_Editor();
+	//CStageControlTower_Editor();
+	//~CStageControlTower_Editor();
 
 	void Awake(void);
 	void Start(void);

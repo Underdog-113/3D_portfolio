@@ -20,7 +20,7 @@
 
 #include "FSM_KianaC.h"
 #include "Kiana.h"
-#include "StageController.h"
+#include "StageControlTower.h"
 
 #include "DataLoad.h"
 CWooScene::CWooScene()
@@ -51,7 +51,7 @@ void CWooScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	m_pController = CStageController::GetInstance();
+	m_pController = CStageControlTower::GetInstance();
 	m_pController->Awake();
 }
 
@@ -85,7 +85,7 @@ void CWooScene::Start(void)
 			m_spKiana->GetTransform()->SetSize(1.f, 1.f, 1.f);
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera");
 			cam->SetTarget(spKianaClone);
-			CStageController::GetInstance()->SetCurrentMainCam(cam);
+			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 		}
 
 		// Monster
