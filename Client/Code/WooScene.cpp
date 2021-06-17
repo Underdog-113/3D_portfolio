@@ -18,6 +18,13 @@
 #include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
 
+#include "Kiana_CatPaw_Atk01.h"
+#include "Kiana_CatPaw_Atk02.h"
+#include "Kiana_CatPaw_Atk03.h"
+#include "Kiana_CatPaw_Atk04.h"
+#include "Kiana_CatPaw_Atk05.h"
+#include "Kiana_CatPaw_Ring_Atk01.h"
+
 #include "FSM_KianaC.h"
 #include "Kiana.h"
 #include "StageController.h"
@@ -96,6 +103,7 @@ void CWooScene::Start(void)
 			m_spAxe = spAxeClone;
 
 			SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+			//spSickleClone->GetTransform()->SetSize(5, 5, 5);
 			spSickleClone->GetTransform()->SetPosition(0, 0, 10);
 			spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			m_spSickle = spSickleClone;
@@ -129,6 +137,7 @@ void CWooScene::Update(void)
 	if (Engine::IMKEY_DOWN(KEY_Q))
 		m_pattern1 = true;
 
+	SicklePattern0();
 	//SpiderPattern0();
 
 	//AxePattern0();
@@ -171,6 +180,31 @@ void CWooScene::SpiderPattern0()
 
 	//mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
 	//m_spSickle->GetTransform()->SetPosition(mPos);
+}
+
+void CWooScene::SicklePattern0()
+{
+	_float3 tPos = m_spKiana->GetTransform()->GetPosition();
+	_float3 mPos = m_spSickle->GetTransform()->GetPosition();
+	_float mSpeed = 1.f;
+
+	_float3 *len = &(tPos - mPos);
+
+	if (D3DXVec3Length(len) < 1.5f)
+	{
+		m_fsm->ChangeState(Name_StandBy);
+		return;
+	}
+
+	if (Name_Walk_Forward != m_fsm->GetCurStateString())
+		m_fsm->ChangeState(Name_Walk_Forward);
+
+	static_cast<CMO_Sickle*>(m_spSickle.get())->ChaseTarget(tPos);
+
+	_float3 dir = tPos - mPos;
+
+	mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
+	m_spSickle->GetTransform()->SetPosition(mPos);
 }
 
 void CWooScene::AxePattern0()
@@ -261,6 +295,24 @@ void CWooScene::EndPattern()
 
 void CWooScene::InitPrototypes(void)
 {
+	SP(CKiana_CatPaw_Atk01) spPaw01(CKiana_CatPaw_Atk01::Create(false, this));
+	ADD_PROTOTYPE(spPaw01);
+
+	SP(CKiana_CatPaw_Atk02) spPaw02(CKiana_CatPaw_Atk02::Create(false, this));
+	ADD_PROTOTYPE(spPaw02);
+
+	SP(CKiana_CatPaw_Atk03) spPaw03(CKiana_CatPaw_Atk03::Create(false, this));
+	ADD_PROTOTYPE(spPaw03);
+
+	SP(CKiana_CatPaw_Atk04) spPaw04(CKiana_CatPaw_Atk04::Create(false, this));
+	ADD_PROTOTYPE(spPaw04);
+
+	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(false, this));
+	ADD_PROTOTYPE(spPaw05);
+
+	SP(CKiana_CatPaw_Ring_Atk01) spPawRing01(CKiana_CatPaw_Ring_Atk01::Create(false, this));
+	ADD_PROTOTYPE(spPawRing01);
+
 	SP(CKiana) spKianaPrototype(CKiana::Create(false, this));
 	ADD_PROTOTYPE(spKianaPrototype);
 }

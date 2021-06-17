@@ -34,6 +34,9 @@ private:
 	/* Spider */
 	void SpiderPattern0();
 
+	/* Sickle */
+	void SicklePattern0();
+
 	/* Axe */
 	void AxePattern0();
 	void AxePattern1();
