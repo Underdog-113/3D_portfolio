@@ -485,6 +485,7 @@
       </ClInclude>
       <ClInclude Include="..\Header\BattleEndScene.h">
         <Filter>01.Scene\10.BattleEnd</Filter>
+      </ClInclude>
     <ClInclude Include="..\Header\Include_ForTest.h">
       <Filter>01.Scene\06.OneStageScene</Filter>
     </ClInclude>
@@ -697,11 +698,12 @@
     <ClCompile Include="..\Code\AttackTrail_Client.cpp">
       <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClCompile>
-      <ClCompile Include="..\Code\DataManager.cpp">
-        <Filter>09.Manager\02.DataManager</Filter>
-      </ClCompile>
-      <ClCompile Include="..\Code\BattleEndScene.cpp">
-        <Filter>01.Scene\10.BattleEnd</Filter>
+    <ClCompile Include="..\Code\DataManager.cpp">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleEndScene.cpp">
+      <Filter>01.Scene\10.BattleEnd</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\OneStageScene.cpp">
       <Filter>01.Scene\06.OneStageScene</Filter>
     </ClCompile>
