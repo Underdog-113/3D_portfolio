@@ -48,7 +48,6 @@ void CInitScene::Awake(_int numOfLayers)
 void CInitScene::Start(void)
 {
 	m_isStarted = true;
-
 	//DataStore Init
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);
 	m_pDataStore->InitDataForScene(m_objectKey);
@@ -78,6 +77,8 @@ void CInitScene::Start(void)
 void CInitScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
+
 }
 
 void CInitScene::Update(void)
@@ -118,7 +119,7 @@ void CInitScene::Update(void)
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(CMainRoomScene::Create(), false);
+				m_pLoading = CLoading::Create(COneStageScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))

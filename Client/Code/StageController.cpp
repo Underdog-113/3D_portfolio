@@ -19,7 +19,7 @@ void CStageController::Awake(void)
 
 void CStageController::Start(void)
 {
-	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
+	m_spCurMainCam = Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera");
 }
 
 
@@ -308,6 +308,10 @@ void CStageController::SetInputLock_ByAni(bool lock)
 			m_rotateLock = false;
 
 		m_prevMoveFlag = m_moveFlag;
+	}
+	else
+	{
+		m_reserveMoveFlag = m_moveFlag;
 	}
 }
 

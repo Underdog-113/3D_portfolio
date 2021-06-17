@@ -13,6 +13,14 @@ public:
 	void ReadyToSortieScene();
 	void PartySettingScene();
 	void Sally();
+
+	void BattleRenunciation();
+
+	void ObjectOn();
+	void ObjectOff();
+
+private:
+	static _int stageValue;
 };
 
 #endif

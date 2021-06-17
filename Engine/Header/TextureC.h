@@ -34,6 +34,8 @@ public:
 	static const	EComponentID	m_s_componentID = EComponentID::Texture;
 private:
 	typedef std::vector<std::vector<_TexData*>> _TEXDATAS;
+	typedef std::vector<std::vector<std::vector<_TexData*>>> _SUBTEXDATAS;
+
 	GETTOR_SETTOR	(_TEXDATAS,		m_vTexData,			{},						TexData)
 	GETTOR_SETTOR	(D3DXCOLOR,		m_color,			_float4(1, 1, 1, 1),	Color)
 	GETTOR_SETTOR	(_int,			m_numOfTex,			0,						NumOfTex)	

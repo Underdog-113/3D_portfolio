@@ -18,7 +18,7 @@ CRenderTarget * CRenderTarget::Create(_uint const & width, _uint const & height,
 	pInstance->m_height		= height;
 	pInstance->m_format		= format;
 	pInstance->m_clearColor = color;
-
+	
 	pInstance->Awake();
 
 	return pInstance;
@@ -49,7 +49,7 @@ void CRenderTarget::Awake(void)
 	}
 
 	m_pTargetTexture->GetSurfaceLevel(0, &m_pCurSurface);
-	m_pTargetTexture->Release();
+	SafeRelease(m_pTargetTexture);
 }
 
 void CRenderTarget::Start(void)

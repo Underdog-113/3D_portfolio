@@ -54,6 +54,8 @@ public:
 					void					CreatePistol		(void);
 					void					CreateCatPaw		(void);
 					void					UltraAtk			(UltraAttack index);
+					void					UltraAtk_Ring		(UltraAttack index);
+
 
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
@@ -67,9 +69,20 @@ private:
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Atk04,		nullptr, CatPaw_Atk04)
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Atk05,		nullptr, CatPaw_Atk05)
 
+		
+	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk01,	nullptr, CatPaw_Ring_Atk01)
+	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk02,	nullptr, CatPaw_Ring_Atk02)
+	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk03,	nullptr, CatPaw_Ring_Atk03)
+	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk04,	nullptr, CatPaw_Ring_Atk04)
+	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk05,	nullptr, CatPaw_Ring_Atk05)
+
 	GETTOR_SETTOR	(_bool,					m_ultraMode,		false, UltraMode)
 
 private:
+	_mat*						m_pRightToe_World = nullptr;
+	_mat*						m_pRightToe_BoneOffset = nullptr;
+	Engine::D3DXFRAME_DERIVED*	m_pRightToe_Frame = nullptr;
+
 	_mat*						m_pLeftHand_World = nullptr;
 	_mat*						m_pLeftHand_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pLeftHand_Frame = nullptr;

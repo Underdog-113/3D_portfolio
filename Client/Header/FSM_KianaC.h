@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachine.h"
-#define Cool_Attack				0.2f
-#define Cool_BranchAttack		0.35f
+#define Cool_Attack				0.25f
+#define Cool_BranchAttack		0.5f
 #define Cool_BranchAttack3to4	0.3f
 #define Cool_Evade				0.2f
 #define Cool_End				0.75f
@@ -10,6 +10,12 @@
 
 #define Cool_HitPenalty			0.5f
 #define Cool_RunOnAttack		0.5f
+
+#define Delay_CreateCatPaw_Atk01 0.29f
+#define Delay_CreateCatPaw_Atk02 0.1f
+#define Delay_CreateCatPaw_Atk03 0.14f
+#define Delay_CreateCatPaw_Atk04 0.05f
+#define Delay_CreateCatPaw_Atk05 0.1f
 
 class CKiana;
 class CStageController;
@@ -34,9 +40,10 @@ private: /* Normal Actions */
 	bool CheckAction_Evade_OnAction(float coolTime = Cool_Evade);
 	bool CheckAction_EvadeForward(float coolTime = Cool_Evade);
 	bool CheckAction_EvadeBackward(float coolTime = Cool_Evade);
-	bool CheckAction_Idle(float coolTime = Cool_End);
+	bool CheckAction_StandBy_Timeout(float coolTime = Cool_End);
 	bool CheckAction_Run();
 	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
+	bool CheckAction_Run_End();
 	bool CheckAction_StandBy();
 
 	bool CheckAction_Emotion(const std::wstring& switchStateName, float coolTime = Cool_Emotion);
@@ -46,6 +53,11 @@ private: /* Special Actions */
 	bool CheckAction_RunBS_To_Run();
 
 	bool CheckAction_Ultra();
+
+private:
+	bool m_checkUltraRing = false;
+
+	bool m_checkUltraAtk = false;
 
 
 private:

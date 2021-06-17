@@ -54,7 +54,6 @@ void CSkyBox::Start(void)
 {
 	__super::Start();
 	
-	m_spGraphics->SetRenderID((_int)ERenderID::Base);
 	m_spTransform->SetSize(40, 40, 40);
 }
 
@@ -68,10 +67,7 @@ void CSkyBox::Update(void)
 {
 	__super::Update();
 
-	_mat camWorldMat = GET_MAIN_CAM->GetViewMatrix();
-	D3DXMatrixInverse(&camWorldMat, NULL, &camWorldMat);
-
-	m_spTransform->SetPosition(camWorldMat._41, camWorldMat._42, camWorldMat._43);
+	m_spTransform->SetPosition(GET_MAIN_CAM->GetTransform()->GetPosition());
 }
 
 void CSkyBox::LateUpdate(void)
@@ -82,6 +78,7 @@ void CSkyBox::LateUpdate(void)
 
 void CSkyBox::PreRender(LPD3DXEFFECT pEffect)
 {
+	pEffect->BeginPass(0);
 	m_spCubeTex->PreRender(m_spGraphics, pEffect);
 }
 
@@ -92,6 +89,7 @@ void CSkyBox::Render(LPD3DXEFFECT pEffect)
 
 void CSkyBox::PostRender(LPD3DXEFFECT pEffect)
 {
+	pEffect->EndPass();
 	m_spCubeTex->PostRender(m_spGraphics, pEffect);
 }
 

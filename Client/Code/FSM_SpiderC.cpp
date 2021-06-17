@@ -502,32 +502,32 @@ void CFSM_SpiderC::StandBy_Enter(void)
 
 void CFSM_SpiderC::StandBy_Update(float deltaTime)
 {
-	if (m_accTime >= 3.f)
-	{
-		ChangeState(Name_Walk_Forward);
-		m_accTime = 0.f;
-		return;
-	}
-	else
-		m_accTime += deltaTime;
+	//if (m_accTime >= 3.f)
+	//{
+	//	ChangeState(Name_Walk_Forward);
+	//	m_accTime = 0.f;
+	//	return;
+	//}
+	//else
+	//	m_accTime += deltaTime;
 
-	if (Engine::IMKEY_DOWN(KEY_UP))
-	{
-		ChangeState(Name_Walk_Forward);
-		return;
-	}
+	//if (Engine::IMKEY_DOWN(KEY_UP))
+	//{
+	//	ChangeState(Name_Walk_Forward);
+	//	return;
+	//}
 
-	if (Engine::IMKEY_DOWN(KEY_LEFT))
-	{
-		ChangeState(Name_Walk_Left);
-		return;
-	}
+	//if (Engine::IMKEY_DOWN(KEY_LEFT))
+	//{
+	//	ChangeState(Name_Walk_Left);
+	//	return;
+	//}
 
-	if (Engine::IMKEY_DOWN(KEY_RIGHT))
-	{
-		ChangeState(Name_Walk_Right);
-		return;
-	}
+	//if (Engine::IMKEY_DOWN(KEY_RIGHT))
+	//{
+	//	ChangeState(Name_Walk_Right);
+	//	return;
+	//}
 }
 
 void CFSM_SpiderC::StandBy_End(void)

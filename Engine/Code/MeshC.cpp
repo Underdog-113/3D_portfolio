@@ -116,7 +116,7 @@ void CMeshC::PreRender(SP(CGraphicsC) spGC)
 	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
 	pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
 	pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-	pDevice->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
+	//pDevice->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
 	pDevice->SetMaterial(&spGC->m_mtrl);
 }
 
@@ -376,6 +376,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			else
 				GET_DEVICE->SetTexture(0, nullptr);
 
+			GET_DEVICE->SetMaterial(&meshContainer->pMaterials[i].MatD3D);
+
 			meshContainer->MeshData.pMesh->DrawSubset(i);
 		}
 
@@ -391,8 +393,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	// root motion
 	ApplyRootMotion(pDM);
 
-	pDM->GetAniCtrl()->Play();
-	pDM->UpdateFrame();
+	pDM->PlayAnimation();
 
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
@@ -448,6 +449,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			pEffect->CommitChanges();
 
 			pEffect->BeginPass(pass);
+			GET_DEVICE->SetMaterial(&meshContainer->pMaterials[i].MatD3D);
 			meshContainer->MeshData.pMesh->DrawSubset(i);
 			pEffect->EndPass();
 		}

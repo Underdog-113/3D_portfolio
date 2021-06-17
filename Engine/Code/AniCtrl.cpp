@@ -45,6 +45,14 @@ CAniCtrl* CAniCtrl::MakeClone(void)
 										 m_pAniCtrl->GetMaxNumEvents(),
 										 &pClone->m_pFakeAniCtrl);
 	m_replay = true;
+
+	pClone->ChangeAniSet(0);
+
+	//LPD3DXANIMATIONSET pAS = NULL;
+
+	//m_pAniCtrl->GetAnimationSet(m_curIndex, &pAS);
+	//pClone->m_period = (_float)pAS->GetPeriod();
+
 	return pClone;
 }
 
@@ -73,8 +81,6 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	//if (m_curIndex == index)
 	//	return;
 
-	if (m_fixTillEnd && !IsItEnd())
-		return;
 
 	_int newTrack = m_curTrack == 0 ? 1 : 0;
 
@@ -150,8 +156,8 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 
 void CAniCtrl::ChangeFakeAniSet()
 {
-	if (m_fakeIndex == m_curIndex)
-		return;
+	//if (m_fakeIndex == m_curIndex)
+	//	return;
 
 	LPD3DXANIMATIONSET	pAnimationSet = nullptr;
 
@@ -249,6 +255,11 @@ _bool CAniCtrl::IsItEnd(void)
 	return false;
 }
 
+double CAniCtrl::GetTimeline_Blend(void)
+{
+	return (double)m_timer / m_period;
+}
+
 double CAniCtrl::GetTimeline(void)
 {
 	return (double)m_fakeTimer / m_fakePeriod;
@@ -258,6 +269,13 @@ void CAniCtrl::ResetTimers(void)
 {
 	m_timer = 0.f;
 	m_fakeTimer = 0.f;
+}
+
+void CAniCtrl::ResetAnimation(void)
+{
+	m_pAniCtrl->SetTrackPosition(0, m_period * 0.01);
+	m_pAniCtrl->SetTrackPosition(1, m_period * 0.01);
+	m_timer = m_period * 0.01f;
 }
 
 _uint CAniCtrl::FindIndexByName(std::string const & name, LPD3DXANIMATIONSET pAS)

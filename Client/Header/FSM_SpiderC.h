@@ -25,7 +25,7 @@ private: /* Normal Actions */
 
 private:
 	_float m_accTime = 0.f;
-	Engine::CDynamicMeshData* m_pDM = nullptr;
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
 	CStageController* m_pStageController = nullptr; // test
 
 public:

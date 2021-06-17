@@ -64,15 +64,13 @@ void CDeviceManager::InitDevice(void)
 
 	m_d3dpParm.FullScreen_RefreshRateInHz	= D3DPRESENT_RATE_DEFAULT;
 	m_d3dpParm.PresentationInterval			= D3DPRESENT_INTERVAL_IMMEDIATE;
-	
-	if(FAILED(m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, 
+
+	if(FAILED(m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
 								   CWndApp::GetInstance()->GetHWnd(),
-								   vp, 
+								   vp,
 								   &m_d3dpParm, &m_pDevice)))
 	{
 		MSG_BOX(__FILE__, L"Device creation failed in InitDevice");
 		ABORT;
 	}
-	/*m_pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);*/
 }

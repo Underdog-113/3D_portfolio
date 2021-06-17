@@ -203,7 +203,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"maxValue", maxValue);
 		dataStore->GetValue(false, dataID, objectKey, key + L"minValue", minValue);
 
-		slider->AddSliderData(maxValue, maxValue, minValue, imageObj[0], imageObj[1]);
+		slider->AddSliderData(value, maxValue, minValue, imageObj[0], imageObj[1]);
 	}
 }
 
@@ -344,6 +344,43 @@ void CDataLoad::CanvasLoad(Engine::CScene * pScene)
 		SP(Engine::CCanvas) canvas =
 			std::dynamic_pointer_cast<Engine::CCanvas>(pScene->GetObjectFactory()->AddClone(L"Canvas", true, (_int)Engine::ELayerID::UI, name));
 	}
+}
+
+void CDataLoad::TextLoad(Engine::CScene * pScene)
+{
+	Engine::CDataStore* dataStore = pScene->GetDataStore();
+
+	_int numOfImageObject;
+	_int dataID = (_int)EDataID::UI;
+	std::wstring objectKey = L"TextDataFile";
+	dataStore->GetValue(false, dataID, objectKey, L"numOfTextObject", numOfImageObject);
+
+	for (_int i = 0; i < numOfImageObject; ++i)
+	{
+		std::wstring key = L"TextObject" + std::to_wstring(i) + L"_";
+
+		std::wstring name;
+		dataStore->GetValue(false, dataID, objectKey, key + L"textName", name);
+
+		SP(Engine::CObject) text = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, name);
+		
+		_float sort;
+		dataStore->GetValue(false, dataID, objectKey, key + L"Sort", sort);
+		text->GetTransform()->SetPositionZ(sort);
+
+		std::wstring message;
+		_float2 fontPosition;
+		_int fontSize;
+		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
+
+		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
+		dataStore->GetValue(false, dataID, objectKey, key + L"textPosition", fontPosition);
+		dataStore->GetValue(false, dataID, objectKey, key + L"textSize", fontSize);
+		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+		fontPosition.y *= -1;
+		text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+	}
+
 }
 
 void CDataLoad::ToolLoad(Engine::CScene* pScene)
@@ -579,4 +616,17 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
+	else if (0 == function.compare(L"ObjectOn")) // 1스테이지
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"ObjectOff")) // 1스테이지
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOff, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"BattleRenunciation")) // 1스테이지
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleRenunciation, &CButtonFunction());
+	}
+	
 }

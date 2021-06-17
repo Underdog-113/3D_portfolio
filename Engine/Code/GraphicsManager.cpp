@@ -36,6 +36,9 @@ void CGraphicsManager::Start(void)
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CONSTANT);
+
+	//GET_DEVICE->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+	//GET_DEVICE->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 }
 
 void CGraphicsManager::FixedUpdate(void)
@@ -67,8 +70,8 @@ void CGraphicsManager::LateUpdate(void)
 void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
-		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DXCOLOR(0, 0, 0, 1),
+		D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+		D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f),
 		1.f, 0);
 
 	GET_DEVICE->BeginScene();
@@ -81,7 +84,7 @@ void CGraphicsManager::Render(void)
 	RenderDeferred();
 	RenderLights();
 	RenderDeferBlend();
-	
+
 	RenderWire();
 	RenderAlphaTest();
 	RenderAlphaBlend();
@@ -145,22 +148,22 @@ void CGraphicsManager::ClearRenderList(void)
 void CGraphicsManager::InitDeferredBuffer(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	if(FAILED(pDevice->CreateVertexBuffer(sizeof(_VertexScreen) * 4, 
-										  0,// Á¤Àû ¹öÆÛ¸¦ »ç¿ë(d3dusage_dynamic »ç¿ë ½Ã µ¿Àû ¹öÆÛ)
-										  FVF_SCR, 
-										  D3DPOOL_MANAGED, 
-										  &m_pVertexBuffer, 
+	if(FAILED(pDevice->CreateVertexBuffer(sizeof(_VertexScreen) * 4,
+										  0,// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¸ï¿½ ï¿½ï¿½ï¿½ï¿½(d3dusage_dynamic ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+										  FVF_SCR,
+										  D3DPOOL_MANAGED,
+										  &m_pVertexBuffer,
 										  NULL)))
 	{
 		MSG_BOX(__FILE__, L"Failed Creating VertexBuffer in CGraphicsManager::Awake()");
 		ABORT;
 	}
 
-	if(FAILED(pDevice->CreateIndexBuffer(sizeof(INDEX16) * 2, 
-										 0,// Á¤Àû ¹öÆÛ¸¦ »ç¿ë(d3dusage_dynamic »ç¿ë ½Ã µ¿Àû ¹öÆÛ)
-										 D3DFMT_INDEX16, 
-										 D3DPOOL_MANAGED, 
-										 &m_pIndexBuffer, 
+	if(FAILED(pDevice->CreateIndexBuffer(sizeof(INDEX16) * 2,
+										 0,// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¸ï¿½ ï¿½ï¿½ï¿½ï¿½(d3dusage_dynamic ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+										 D3DFMT_INDEX16,
+										 D3DPOOL_MANAGED,
+										 &m_pIndexBuffer,
 										 NULL)))
 	{
 		MSG_BOX(__FILE__, L"Failed Creating IndexBuffer in CGraphicsManager::Awake()");
@@ -229,9 +232,11 @@ void CGraphicsManager::RenderBase(void)
 
 						_uint maxPass = 0;
 						pEffect->Begin(&maxPass, 0);
+
 						pObject->PreRender(pEffect);
 						pObject->Render(pEffect);
 						pObject->PostRender(pEffect);
+
 						pEffect->End();
 					}
 				}
@@ -245,7 +250,7 @@ void CGraphicsManager::RenderBase(void)
 		}
 	}
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -305,7 +310,7 @@ void CGraphicsManager::RenderLights(void)
 	pEffect->Begin(NULL, 0);
 	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);
 	pEffect->End();
-	
+
 	END_MRT(L"MRT_LightAcc");
 }
 
@@ -322,6 +327,8 @@ void CGraphicsManager::RenderDeferBlend(void)
 
 	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
 	pDevice->SetFVF(FVF_SCR);
+
+
 	pDevice->SetIndices(m_pIndexBuffer);
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 
@@ -357,12 +364,9 @@ void CGraphicsManager::RenderAlphaTest(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-
-	// ÇÞÅ°µå ¾ó±¼ ·£´õ¸µ ÇÒ¶§ ¾ËÆÄÅ×½ºÆÃ ÇØÁà¾ßµÊ
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_ALPHAREF, 1); // ¾ËÆÄ ±âÁØ ¼³Á¤
-	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER); // ¾ËÆÄ Å×½ºÆÃ ¼öÇà
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 1); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER); // ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaTest])
 	{
@@ -386,6 +390,7 @@ void CGraphicsManager::RenderAlphaTest(void)
 void CGraphicsManager::RenderAlphaBlend(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
@@ -393,13 +398,13 @@ void CGraphicsManager::RenderAlphaBlend(void)
 	{
 		if (pObject->GetIsEnabled())
 		{
-			//±×·¡ÇÈ ÄÄÆ÷³ÍÆ®¸¦ ÁÖ¸é
-			//¸Þ½¬ ÄÄÆ÷³ÍÆ®°¡ °¡Áø ¹Î¸Æ½º ¹öÅØ½º * Æ®·£½ºÆûÀÇ »çÀÌÁî + Æ÷Áö¼ÇÀ¸·Î ÄÃ¸µ
+			//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö¸ï¿½
+			//ï¿½Þ½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸Æ½ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½ * Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				
+
 				SP(CComponent) pShader;
 				if (pShader = pObject->GetComponent<CShaderC>())
 				{
@@ -409,7 +414,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 					{
 						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
 						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-												
+
 						_uint maxPass = 0;
 
 						pEffect->Begin(&maxPass, 0);
@@ -424,7 +429,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 							pEffect->EndPass();
 						}
-						pEffect->End();						
+						pEffect->End();
 					}
 				}
 				else
@@ -436,10 +441,12 @@ void CGraphicsManager::RenderAlphaBlend(void)
 			}
 		}
 	}
+
+
 }
 
 void CGraphicsManager::RenderParticle(void)
-{ 
+{
 	CPSC_Manager::GetInstance()->PreRender();
 	CPSC_Manager::GetInstance()->Render();
 	CPSC_Manager::GetInstance()->PostRender();
@@ -453,13 +460,13 @@ void CGraphicsManager::RenderEffect(void)
 void CGraphicsManager::RenderUI(void)
 {
 	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, FALSE);
-	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(), 
+	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(),
 			[](CObject* pObj1, CObject* pObj2)
 			{
-				return pObj1->GetTransform()->GetPosition().z < pObj2->GetTransform()->GetPosition().z;								
+				return pObj1->GetTransform()->GetPosition().z < pObj2->GetTransform()->GetPosition().z;
 			});
 
-	
+
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::UI])
 	{
 		if (pObject->GetIsEnabled())
@@ -500,6 +507,6 @@ void CGraphicsManager::RenderUI(void)
 		}
 	}
 
-	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 }

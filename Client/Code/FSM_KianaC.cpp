@@ -150,7 +150,6 @@ bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float 
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -195,7 +194,7 @@ bool CFSM_KianaC::CheckAction_EvadeBackward(float coolTime)
 	return false;
 }
 
-bool CFSM_KianaC::CheckAction_Idle(float coolTime /*= Cool_End*/)
+bool CFSM_KianaC::CheckAction_StandBy_Timeout(float coolTime /*= Cool_End*/)
 {
 	if (m_pDM->GetAniTimeline() > coolTime)
 	{
@@ -230,6 +229,45 @@ bool CFSM_KianaC::CheckAction_Run_OnAction(float coolTime)
 			Engine::IMKEY_PRESS(StageKey_Move_Right))
 		{
 			ChangeState(Name_Run);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool CFSM_KianaC::CheckAction_Run_End()
+{
+	if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
+		!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
+		!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
+		!Engine::IMKEY_PRESS(StageKey_Move_Right))
+	{
+		double timeline = m_pDM->GetAniTimeline();
+		if (timeline > 0.8)
+		{
+			ChangeState(Name_RunStopLeft);
+			return true;
+		}
+		else if(timeline > 0.55)
+		{
+			ChangeState(Name_RunStopRight);
+			return true;
+		}
+		else if (timeline > 0.30)
+		{
+			ChangeState(Name_RunStopLeft);
+			return true;
+		}
+
+		else if (timeline > 0.05)
+		{
+			ChangeState(Name_RunStopRight);
+			return true;
+		}
+		else
+		{
+			ChangeState(Name_RunStopLeft);
 			return true;
 		}
 	}
@@ -272,8 +310,6 @@ bool CFSM_KianaC::CheckAction_BranchAttack()
 			ChangeState(Name_Attack_3_Branch);
 			return true;
 		}
-		if (CheckAction_Attack(Name_Attack_3))
-			return true;
 	}
 
 	return false;
@@ -397,18 +433,32 @@ void CFSM_KianaC::Attack_1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_1);
 	m_pStageController->SetInputLock_ByAni(true);
-	m_pKiana->UltraAtk(CKiana::ATK01);
+
+	m_checkUltraRing = false;
+	m_checkUltraAtk = false;
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
 {
-	if (CheckAction_Attack(Name_Attack_2))
+	if (!m_checkUltraRing && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01 - 0.1f)
+	{
+		m_pKiana->UltraAtk_Ring(CKiana::ATK01);
+		m_checkUltraRing = true;
+	}
+
+	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01)
+	{
+		m_pKiana->UltraAtk(CKiana::ATK01);
+		m_checkUltraAtk = true;
+	}
+
+	if (CheckAction_Attack(Name_Attack_2, 0.3f))
 		return;
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -426,18 +476,27 @@ void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
 	m_pStageController->SetInputLock_ByAni(true);
-	m_pKiana->UltraAtk(CKiana::ATK02);
+
+	m_checkUltraAtk = false;
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
 {
+	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk02)
+	{
+		m_pKiana->UltraAtk(CKiana::ATK02);
+		m_checkUltraAtk = true;
+	}
+
 	if (CheckAction_BranchAttack())
+		return;
+	if (CheckAction_Attack(Name_Attack_3))
 		return;
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -455,18 +514,24 @@ void CFSM_KianaC::Attack_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageController->SetInputLock_ByAni(true);
-	m_pKiana->UltraAtk(CKiana::ATK03);
+	m_checkUltraAtk = false;
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
 {
+	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk03)
+	{
+		m_pKiana->UltraAtk(CKiana::ATK03);
+		m_checkUltraAtk = true;
+	}
+
 	if (CheckAction_Attack(Name_Attack_4))
 		return;
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -513,11 +578,17 @@ void CFSM_KianaC::Attack_4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageController->SetInputLock_ByAni(true);
-	m_pKiana->UltraAtk(CKiana::ATK04);
+	m_checkUltraAtk = false;
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
 {
+	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk04)
+	{
+		m_pKiana->UltraAtk(CKiana::ATK04);
+		m_checkUltraAtk = true;
+	}
+
 	if (CheckAction_Attack(Name_Attack_5))
 		return;
 	if (CheckAction_Evade_OnAction())
@@ -525,7 +596,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
 
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -552,7 +623,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
 
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -570,17 +641,23 @@ void CFSM_KianaC::Attack_5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageController->SetInputLock_ByAni(true);
-	m_pKiana->UltraAtk(CKiana::ATK05);
+	m_checkUltraAtk = false;
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
 {
+	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk05)
+	{
+		m_pKiana->UltraAtk(CKiana::ATK05);
+		m_checkUltraAtk = true;
+	}
+
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
 
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -607,7 +684,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
 
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -647,7 +724,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 {
 	if (CheckAction_Run_OnAction(0.5f))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -670,7 +747,7 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 {
 	if (CheckAction_Run_OnAction(0.5f))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -694,7 +771,7 @@ void CFSM_KianaC::Hit_H_Update(float deltaTime)
 		return;
 	if (CheckAction_Run_OnAction(Cool_HitPenalty))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -717,7 +794,7 @@ void CFSM_KianaC::Hit_L_Update(float deltaTime)
 		return;
 	if (CheckAction_Run_OnAction(Cool_HitPenalty))
 		return;
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -857,7 +934,7 @@ void CFSM_KianaC::Idle_4to5_Enter(void)
 
 void CFSM_KianaC::Idle_4to5_Update(float deltaTime)
 {
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -876,7 +953,7 @@ void CFSM_KianaC::Run_Enter(void)
 
 void CFSM_KianaC::Run_Update(float deltaTime)
 {
-	if (CheckAction_StandBy())
+	if (CheckAction_Run_End())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
 		return;
@@ -901,6 +978,12 @@ void CFSM_KianaC::RunBS_Enter(void)
 
 void CFSM_KianaC::RunBS_Update(float deltaTime)
 {
+	if (CheckAction_RunBS_To_Run())
+		return;
+
+	if (CheckAction_Run_End())
+		return;
+
 	if (CheckAction_StandBy())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
@@ -924,7 +1007,13 @@ void CFSM_KianaC::RunStopLeft_Enter(void)
 
 void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 {
-	if (CheckAction_StandBy())
+	if (CheckAction_StandBy_Timeout())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_EvadeForward())
+		return;
+	if (CheckAction_Ultra())
 		return;
 }
 
@@ -938,10 +1027,19 @@ void CFSM_KianaC::RunStopRight_Init(void)
 
 void CFSM_KianaC::RunStopRight_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_RunStopRight);
 }
 
 void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 {
+	if (CheckAction_StandBy_Timeout())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_EvadeForward())
+		return;
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_KianaC::RunStopRight_End(void)
@@ -959,7 +1057,7 @@ void CFSM_KianaC::Skill_10_Enter(void)
 
 void CFSM_KianaC::Skill_10_Update(float deltaTime)
 {
-	if (CheckAction_Idle())
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -1009,15 +1107,6 @@ void CFSM_KianaC::SwitchOut_Enter(void)
 
 void CFSM_KianaC::SwitchOut_Update(float deltaTime)
 {
-	if (CheckAction_RunBS_To_Run())
-		return;
-
-	if (CheckAction_StandBy())
-		return;
-	if (CheckAction_Attack(Name_Attack_1, 0.f))
-		return;
-	if (CheckAction_EvadeForward())
-		return;
 }
 
 void CFSM_KianaC::SwitchOut_End(void)

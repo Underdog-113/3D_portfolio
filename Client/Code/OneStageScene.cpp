@@ -58,6 +58,7 @@ void COneStageScene::Start(void)
 	Load->SliderLoad(this);
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
+	Load->TextLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
@@ -101,6 +102,26 @@ void COneStageScene::Update(void)
 	{
 		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
 	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
+	{
+		CBattleUiManager::GetInstance()->CollTime(0, 100);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
+	{
+		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Skill_Bronya_Weapon_17", L"Defalut", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
+	{
+		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
+	{
+		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5);
+	}
 }
 
 void COneStageScene::LateUpdate(void)
@@ -112,6 +133,8 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	CBattleUiManager::GetInstance()->OnDestroy();
+
 }
 
 void COneStageScene::OnEnable(void)

@@ -46,5 +46,6 @@ void CSkyBoxShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	m_pEffect->SetMatrix("g_matProj", &projMat);
 
 	SP(CTextureC) spTexture = spGC->GetTexture();
+	_TexData* pTex = spTexture->GetTexData()[spTexture->GetMeshIndex()][spTexture->GetTexIndex()];
 	m_pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[spTexture->GetMeshIndex()][spTexture->GetTexIndex()]->pTexture);
 }

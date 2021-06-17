@@ -27,7 +27,11 @@ public:
 	// 스크롤뷰 로드
 	void ScrollViewLoad(Engine::CScene* pScene);
 
+	// 캔버스 로드
 	void CanvasLoad(Engine::CScene* pScene);
+
+	// 캔버스 로드
+	void TextLoad(Engine::CScene* pScene);
 
 	// 툴 로드
 	void ToolLoad(Engine::CScene* pScene);

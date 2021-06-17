@@ -33,13 +33,13 @@ public:
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 
+	void AddObjectFind();
 private:
 	void SetBasicName(void) override;
-	void AddObjectFind();
 private:
 	static _uint m_s_uniqueID;
 
-	std::list<CObject*> m_spObjectList;
+	GETTOR(std::list<CObject*>, m_spObjectList, {}, ObjectList);
 };
 END
 #endif
