@@ -56,44 +56,35 @@ void CChangmoScene::Start(void)
 
 
 		
-		spEmptyObject
-			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-
-		spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
-		spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-
-		spEmptyObject->AddComponent<Engine::CCollisionC>()->
-			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
-		spEmptyObject->GetComponent<Engine::CCollisionC>()->
-			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
-
-		spEmptyObject->AddComponent<Engine::CDebugC>();
-		spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spEmptyObject->AddComponent<Engine::CRigidBodyC>();
-		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject->GetTransform()->SetPosition(0, 3, 0);
+		//spEmptyObject
+		//	= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+		//
+		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+		//spEmptyObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		//
+		//spEmptyObject->AddComponent<Engine::CCollisionC>()->
+		//	AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
+		//spEmptyObject->GetComponent<Engine::CCollisionC>()->
+		//	AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
+		//
+		//spEmptyObject->AddComponent<Engine::CDebugC>();
+		//spEmptyObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spEmptyObject->AddComponent<Engine::CRigidBodyC>();
+		//spEmptyObject->GetTransform()->SetSize(2, 2, 2);
+		//spEmptyObject->GetTransform()->SetPosition(0, 3, 0);
 
 
 
 		SP(Engine::CObject) spEmptyObject1
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
 
-		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
-		spEmptyObject1->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"MB_Bronya");
+		spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		spEmptyObject1->AddComponent<Engine::CTextureC>();
 		spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-
-		spEmptyObject1->AddComponent<Engine::CCollisionC>()->
-			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
-		spEmptyObject1->GetComponent<Engine::CCollisionC>()->
-			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
-
-		spEmptyObject1->AddComponent<Engine::CDebugC>();
 		spEmptyObject1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-		spEmptyObject1->AddComponent<Engine::CRigidBodyC>();
-		spEmptyObject1->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject1->GetTransform()->SetPosition(3, 3, 0);
-
+		
 		
 	
 		SP(Engine::CObject) spSkyBox = ADD_CLONE(L"SkyBox", true);
@@ -178,26 +169,6 @@ void CChangmoScene::FixedUpdate(void)
 void CChangmoScene::Update(void)
 {
 	__super::Update();
-
-	SP(Engine::CObject) spObject = FindObjectByName(L"Cube0");
-
-	if (Engine::IMKEY_PRESS(KEY_UP))
-	{
-		spObject->GetTransform()->MoveForward(3 * GET_DT);
-	}
-	if (Engine::IMKEY_PRESS(KEY_Q))
-	{
-		spObject->GetTransform()->AddRotationY(PI / 90);
-	}
-
-
-	SP(Engine::CObject) spObject1 = FindObjectByName(L"Cube1");
-
-	_float3 dir = spObject->GetTransform()->GetPosition() - spObject1->GetTransform()->GetPosition();
-	dir.y = 0;
-	D3DXVec3Normalize(&dir, &dir);
-
-	spObject1->GetTransform()->SetForward(dir);
 }
 
 void CChangmoScene::LateUpdate(void)

@@ -188,6 +188,10 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
+    <ClInclude Include="..\Header\FSMDefine_Axe.h" />
+    <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
+    <ClInclude Include="..\Header\FSMDefine_Spider.h" />
+    <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -234,6 +238,7 @@
     <ClInclude Include="..\Header\MO_Ninza.h" />
     <ClInclude Include="..\Header\MO_Robot.h" />
     <ClInclude Include="..\Header\MO_Scout.h" />
+    <ClInclude Include="..\Header\MO_Sickle.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -253,7 +258,6 @@
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="AlphaLifeTimeC.h" />
-    <ClInclude Include="FSMDefine_Spider.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
@@ -264,6 +268,7 @@
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
@@ -304,6 +309,7 @@
     <ClCompile Include="..\Code\MO_Ninza.cpp" />
     <ClCompile Include="..\Code\MO_Robot.cpp" />
     <ClCompile Include="..\Code\MO_Scout.cpp" />
+    <ClCompile Include="..\Code\MO_Sickle.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
