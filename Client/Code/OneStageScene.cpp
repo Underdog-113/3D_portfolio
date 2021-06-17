@@ -80,57 +80,41 @@ void COneStageScene::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
 		CBattleUiManager::GetInstance()->KeyPad(8);
-		// ���̽�ƽ �����̴°� 8,4,5,6,2
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
 	{
 		CBattleUiManager::GetInstance()->HitCount(8);
-		// ������ �� ���� �޺��� ����
-		// �ִ� ������ ���� �ð�
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
 		CBattleUiManager::GetInstance()->MonsetrState(L"������", 100, L"DOWN");
-		// ������ �̸� curhp, �Ӽ���
-		// ������ ���°� ���߿�
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
 	{
 		CBattleUiManager::GetInstance()->MonsterHpDown(0.5f);
-		// �ٴ°�
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
 	{
 		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-		// ĳ���� swap�Ҷ����� ĳ���� �°� �����ؾ� �ϴϱ� �̰ɷ�
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
 	{
 		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-		// �÷��̾� �ٴ°�
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-		CBattleUiManager::GetInstance()->CollTime(0, 100);
-		// ù��°�� ��ư Ÿ��
-		// ��Ÿ��
-
-		// bool���� ��ȯ�ϰ�, ��Ÿ�� �������� �ȳ����� -> �̰� �߰�����
 		CBattleUiManager::GetInstance()->SkillExecution(0, 10, 1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
 		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Skill_Bronya_Weapon_17", L"Defalut", L"Defalut");
-
-		// ����
-		// hp, sp, ���� ��ư�� �ؽ�ó �̸� default
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
