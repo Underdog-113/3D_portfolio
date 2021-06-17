@@ -969,7 +969,7 @@ void CToolMenuView::OnBnClickedSaveBtn()
 	{
 		DataParsing(ELayerID::Player, &ofsSave);
 		DataParsing(ELayerID::Enemy, &ofsSave);
-		//DataParsing(ELayerID::Map, &ofsSave);
+		DataParsing(ELayerID::Map, &ofsSave);
 		ParsingDecoObject(&ofsDeco);
 		ParsingMapObject(&ofsMap);
 

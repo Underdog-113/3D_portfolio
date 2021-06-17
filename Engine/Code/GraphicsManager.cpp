@@ -398,8 +398,6 @@ void CGraphicsManager::RenderAlphaBlend(void)
 	{
 		if (pObject->GetIsEnabled())
 		{
-			//�׷��� ������Ʈ�� �ָ�
-			//�޽� ������Ʈ�� ���� �θƽ� ���ؽ� * Ʈ�������� ������ + ���������� �ø�
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
@@ -419,16 +417,16 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 						pEffect->Begin(&maxPass, 0);
 
-						for (_uint j = 0; j < 1; ++j)
-						{
-							pEffect->BeginPass(j);
+						//for (_uint j = 0; j < maxPass; ++j)
+						//{
+							pEffect->BeginPass(0);
 
 							pObject->PreRender(pEffect);
 							pObject->Render(pEffect);
 							pObject->PostRender(pEffect);
 
 							pEffect->EndPass();
-						}
+						//}
 						pEffect->End();
 					}
 				}
