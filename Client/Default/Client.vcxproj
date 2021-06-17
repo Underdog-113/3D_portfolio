@@ -190,6 +190,8 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
+    <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
+    <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
     <ClInclude Include="..\Header\DataManager.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />

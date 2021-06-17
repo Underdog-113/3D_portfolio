@@ -81,20 +81,29 @@ private:
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
 
+
+private:	/* Stage Info? */
+	GETTOR_SETTOR	(_uint,					m_hitCount,			0,				HitCount)
+	GETTOR_SETTOR	(_float,				m_chainLimitTime,	3.f,			ChainLimitTime)
+	GETTOR_SETTOR	(SP(Engine::CObject),	m_pCurTarget,		nullptr,		CurrentTarget)
+
+
 private:
 	Engine::CInputManager*		m_pInput	= nullptr;
 	float						m_rotSpeed	= 10.f;
 	float						m_rotSpeedHighRate = 0.8f;
 	float						m_rotSpeedLowRate = 0.5f;
 
-	_ubyte						m_moveFlag = 0;
+	GETTOR			(_ubyte,				m_moveFlag,			0,				MoveFlag);
 	_ubyte						m_prevMoveFlag = 0;
 	_float3						m_moveOrderDir = ZERO_VECTOR;
 
-	_ubyte						m_reserveMoveFlag = 0;
+	GETTOR			(_ubyte,				m_reserveMoveFlag,	0,				ReserveMoveFlag)
 	_float3						m_reserveMoveOrderDir = ZERO_VECTOR;
 
 	bool						m_rotateLock = false;
+
+
 };
 
 #endif

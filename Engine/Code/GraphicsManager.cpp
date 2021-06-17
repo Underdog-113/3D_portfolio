@@ -419,7 +419,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 						pEffect->Begin(&maxPass, 0);
 
-						for (_uint j = 0; j < maxPass; ++j)
+						for (_uint j = 0; j < 1; ++j)
 						{
 							pEffect->BeginPass(j);
 

@@ -5,6 +5,9 @@
 #include "ObjectFactory.h"
 #include "DynamicMeshData.h"
 
+#include "StageControlTower.h"
+#include "UILinker.h"
+
 #include "Kiana_CatPaw_Atk01.h"
 #include "Kiana_CatPaw_Atk02.h"
 #include "Kiana_CatPaw_Atk03.h"
@@ -40,7 +43,7 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spMesh		= spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
-	//spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
@@ -67,10 +70,10 @@ void CKiana::Start(void)
 	//CreateCatPaw();
 
 	// status
-	Base_Stat bs;
+	V_WarshipStat stat;
 
-	m_pStat = new V_Stat;
-	m_pStat->SetupStatus(&bs);
+	m_pStat = new V_Kiana_Stat;
+	m_pStat->SetupStatus(&stat);
 }
 
 void CKiana::FixedUpdate(void)
@@ -85,14 +88,7 @@ void CKiana::Update(void)
 	__super::Update();
 
 	if (m_ultraMode)
-	{
-		m_ultraTimer += GET_DT;
-		if (m_ultraTimer > m_ultraDuration)
-		{
-			m_ultraMode = false;
-			m_ultraTimer = 0.f;
-		}
-	}
+		UseUltraCost();
 
 }
 
@@ -128,7 +124,7 @@ void CKiana::PostRender(void)
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CKiana::OnDestroy(void)
@@ -204,6 +200,20 @@ void CKiana::CreateCatPaw(void)
 	//m_spCatPaw_Ring_Atk04->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk05 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk05", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk05");
 	//m_spCatPaw_Ring_Atk05->SetIsEnabled(false);
+}
+
+void CKiana::UseUltraCost(void)
+{
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= 10.f * GET_DT;
+
+	if (curSp < 0.f)
+	{
+		m_ultraMode = false;
+		curSp = 0.f;
+	}
+
+	m_pStat->SetCurSp(curSp);
 }
 
 
@@ -338,4 +348,12 @@ void CKiana::UltraAtk_Ring(UltraAttack index)
 	default:
 		break;
 	}
+}
+
+void CKiana::SetUltraMode(bool value)
+{
+	m_ultraMode = value;
+
+	if (m_ultraMode)
+		m_pCT->GetUILinker()->Ultra();
 }
