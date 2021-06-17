@@ -1,6 +1,12 @@
 #include "stdafx.h"
-#include "..\Header\FSM_TheresaC.h"
+#include "FSM_TheresaC.h"
 
+#include "State.h"
+#include "DynamicMeshData.h"
+#include "AniCtrl.h"
+
+#include "FSMDefine_Kiana.h"
+#include "StageController.h"
 #include "Theresa.h"
 
 CFSM_TheresaC::CFSM_TheresaC()

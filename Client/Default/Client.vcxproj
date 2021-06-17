@@ -192,6 +192,7 @@
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
+    <ClInclude Include="..\Header\FSM_TheresaC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
+    <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
