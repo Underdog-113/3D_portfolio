@@ -28,7 +28,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+	//_CrtSetBreakAlloc(423635);
 	
 #pragma region SubEnginesAwake
 	Engine::CFRC::GetInstance()->Awake();

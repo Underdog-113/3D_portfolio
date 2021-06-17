@@ -63,6 +63,7 @@ void COneStageScene::Start(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
+	Load->ToolLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
@@ -79,7 +80,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
-		CBattleUiManager::GetInstance()->KeyPad(8);
+		CBattleUiManager::GetInstance()->KeyPad(4);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
@@ -125,6 +126,11 @@ void COneStageScene::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
 		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+		CBattleUiManager::GetInstance()->BattleEnd();
 	}
 }
 

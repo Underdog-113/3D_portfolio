@@ -658,6 +658,206 @@ void CToolMenuView::DataParsing(ELayerID layerID, std::wofstream* ofsSave)
 	(*ofsSave) << '\n';
 }
 
+void CToolMenuView::ParsingDecoObject(std::wofstream * ofsSave)
+{
+	Engine::CLayer* layer = Engine::GET_CUR_SCENE->GetLayers()[(_int)ELayerID::Map];
+	
+
+	_int numOfDecoObject = 0;
+	for (auto& object : layer->GetGameObjects())
+	{
+		if (object->GetComponent<Engine::CCollisionC>())
+			continue;
+
+		(*ofsSave) << numOfDecoObject << L"_position="
+			<< object->GetTransform()->GetPosition().x << ','
+			<< object->GetTransform()->GetPosition().y << ','
+			<< object->GetTransform()->GetPosition().z << '\n';
+
+		(*ofsSave) << numOfDecoObject << L"_rotation="
+			<< object->GetTransform()->GetRotation().x << ','
+			<< object->GetTransform()->GetRotation().y << ','
+			<< object->GetTransform()->GetRotation().z << '\n';
+
+		(*ofsSave) << numOfDecoObject << L"_size="
+			<< object->GetTransform()->GetSize().x << ','
+			<< object->GetTransform()->GetSize().y << ','
+			<< object->GetTransform()->GetSize().z << '\n';
+
+		SP(Engine::CMeshC) spMesh = object->GetComponent<Engine::CMeshC>();
+
+		std::wstring isInitTex = L"true";
+		if (spMesh->GetMeshDatas()[0]->GetTexList()[0] == L"NoTexture")
+			isInitTex = L"false";
+
+		(*ofsSave) << numOfDecoObject << L"_initMesh=" << isInitTex << L'\n';
+
+		(*ofsSave) << numOfDecoObject << L"_numOfMeshData=" << spMesh->GetMeshDatas().size() << L'\n';
+		for (_int i = 0; i < spMesh->GetMeshDatas().size(); ++i)
+		{
+			(*ofsSave) << numOfDecoObject << L"_meshKey" << i << L'=' << spMesh->GetMeshDatas()[i]->GetMeshKey() << L'\n';
+		}
+
+		SP(Engine::CTextureC) spTexture = object->GetComponent<Engine::CTextureC>();
+		(*ofsSave) << numOfDecoObject << L"_numOfTexSet=" << spTexture->GetTexData().size() << L'\n';
+		for (_int i = 0; i < spTexture->GetTexData().size(); ++i)
+		{
+			(*ofsSave) << numOfDecoObject << L"_numOfTex" << i << L'=' << spTexture->GetTexData()[i].size() << L'\n';
+			for (_int j = 0; j < spTexture->GetTexData()[i].size(); ++j)
+			{
+				(*ofsSave) << numOfDecoObject << L"_textureKey" << i << L'_' << j << L'=' << spTexture->GetTexData()[i][j]->textureKey << L'\n';
+			}
+		}
+
+		(*ofsSave) << numOfDecoObject << L"_renderID=" << object->GetComponent<Engine::CGraphicsC>()->GetRenderID() << L"\n\n";
+		++numOfDecoObject;
+	}
+
+	(*ofsSave) << L"numOfDecoObject=" << numOfDecoObject;
+}
+
+void CToolMenuView::ParsingMapObject(std::wofstream * ofsSave)
+{
+	Engine::CLayer* layer = Engine::GET_CUR_SCENE->GetLayers()[(_int)ELayerID::Map];
+
+
+	_int numOfMapObject = 0;
+	for (auto& object : layer->GetGameObjects())
+	{
+		if (object->GetComponent<Engine::CCollisionC>() == nullptr)
+			continue;
+
+		(*ofsSave) << numOfMapObject << L"_position="
+			<< object->GetTransform()->GetPosition().x << ','
+			<< object->GetTransform()->GetPosition().y << ','
+			<< object->GetTransform()->GetPosition().z << '\n';
+
+		(*ofsSave) << numOfMapObject << L"_rotation="
+			<< object->GetTransform()->GetRotation().x << ','
+			<< object->GetTransform()->GetRotation().y << ','
+			<< object->GetTransform()->GetRotation().z << '\n';
+
+		(*ofsSave) << numOfMapObject << L"_size="
+			<< object->GetTransform()->GetSize().x << ','
+			<< object->GetTransform()->GetSize().y << ','
+			<< object->GetTransform()->GetSize().z << '\n';
+
+		SP(Engine::CMeshC) spMesh = object->GetComponent<Engine::CMeshC>();
+
+		std::wstring isInitTex = L"true";
+		if (spMesh->GetMeshDatas()[0]->GetTexList()[0] == L"NoTexture")
+			isInitTex = L"false";
+
+		(*ofsSave) << numOfMapObject << L"_initMesh=" << isInitTex << L'\n';
+
+		(*ofsSave) << numOfMapObject << L"_numOfMeshData=" << spMesh->GetMeshDatas().size() << L'\n';
+		for (_int i = 0; i < spMesh->GetMeshDatas().size(); ++i)
+		{
+			(*ofsSave) << numOfMapObject << L"_meshKey" << i << L'=' << spMesh->GetMeshDatas()[i]->GetMeshKey() << L'\n';
+		}
+
+		SP(Engine::CTextureC) spTexture = object->GetComponent<Engine::CTextureC>();
+		(*ofsSave) << numOfMapObject << L"_numOfTexSet=" << spTexture->GetTexData().size() << L'\n';
+		for (_int i = 0; i < spTexture->GetTexData().size(); ++i)
+		{
+			//나중에 수정
+			_int count = 0;
+			for (auto& iter = spTexture->GetTexData()[i].begin(); iter != spTexture->GetTexData()[i].end(); ++iter)
+			{
+				if(*iter == nullptr)
+					count++;
+			}
+			(*ofsSave) << numOfMapObject << L"_numOfTex" << i << L'=' << spTexture->GetTexData()[i].size() - count << L'\n';
+			for (_int j = 0; j < spTexture->GetTexData()[i].size() - count; ++j)
+			{
+				(*ofsSave) << numOfMapObject << L"_textureKey" << i << L'_' << j << L'=' << spTexture->GetTexData()[i][j]->textureKey << L'\n';
+			}
+		}
+
+		(*ofsSave) << numOfMapObject << L"_renderID=" << object->GetComponent<Engine::CGraphicsC>()->GetRenderID() << L"\n\n";
+
+		SP(Engine::CCollisionC) spCollision = object->GetComponent<Engine::CCollisionC>();
+		(*ofsSave) << numOfMapObject << L"_numOfCollider=" << spCollision->GetColliders().size() << L'\n';
+
+		for (_int i = 0; i < spCollision->GetColliders().size(); ++i)
+		{
+			SP(Engine::CCollider) spCollider = spCollision->GetColliders()[i];
+			_int type = spCollider->GetColliderType();
+			_int collisionID = spCollider->GetCollisionID();
+
+			(*ofsSave) << numOfMapObject << L"_colliderCollisionID" << std::to_wstring(i) << L'=' << collisionID << L'\n';
+			(*ofsSave) << numOfMapObject << L"_colliderType" << std::to_wstring(i) << L'=' << type << L'\n';
+			(*ofsSave) << numOfMapObject << L"_colliderOffset" << std::to_wstring(i) << L'='
+					   << spCollider->GetOffset().x << L','
+					   << spCollider->GetOffset().y << L','
+					   << spCollider->GetOffset().z << L'\n';
+
+			switch (type)
+			{
+			case (_int)Engine::EColliderType::Point:
+			{
+				SP(Engine::CPointCollider) spPointCollider =
+					std::dynamic_pointer_cast<Engine::CPointCollider>(spCollider);
+
+				//왜만들었누?
+				break;
+			}
+			case (_int)Engine::EColliderType::Ray:
+			{
+				SP(Engine::CRayCollider) spRayCollider =
+					std::dynamic_pointer_cast<Engine::CRayCollider>(spCollider);
+
+				//나중에 터지면 한다~
+				break;
+			}
+			case (_int)Engine::EColliderType::Sphere:
+			{
+				SP(Engine::CSphereCollider) spSphereCollider =
+					std::dynamic_pointer_cast<Engine::CSphereCollider>(spCollider);
+
+				(*ofsSave) << numOfMapObject << L"_colliderRadius" << std::to_wstring(i) << L'='
+						   << spSphereCollider->GetRadius() << L'\n';
+				break;
+			}
+			case (_int)Engine::EColliderType::AABB:
+			{
+				SP(Engine::CAabbCollider) spAabbCollider =
+					std::dynamic_pointer_cast<Engine::CAabbCollider>(spCollider);
+
+				(*ofsSave) << numOfMapObject << L"_colliderSize" << std::to_wstring(i) << L'='
+						   << spAabbCollider->GetSize().x << ','
+						   << spAabbCollider->GetSize().y << ','
+						   << spAabbCollider->GetSize().z << L'\n';
+				break;
+			}
+			case (_int)Engine::EColliderType::OBB:
+			{
+				SP(Engine::CObbCollider) spObbCollider =
+					std::dynamic_pointer_cast<Engine::CObbCollider>(spCollider);
+
+				(*ofsSave) << numOfMapObject << L"_colliderSize" << std::to_wstring(i) << L'='
+						   << spObbCollider->GetSize().x << ','
+						   << spObbCollider->GetSize().y << ','
+						   << spObbCollider->GetSize().z << L'\n';
+
+				(*ofsSave) << numOfMapObject << L"_colliderRotOffset" << std::to_wstring(i) << L'='
+						   << spObbCollider->GetRotOffset().x << ','
+						   << spObbCollider->GetRotOffset().y << ','
+						   << spObbCollider->GetRotOffset().z << L'\n';
+				break;
+			}
+			default:
+				break;
+			}
+
+		}
+
+		++numOfMapObject;
+	}
+
+	(*ofsSave) << L"numOfMapObject=" << numOfMapObject;
+}
+
 _float CToolMenuView::GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown)
 {
 	CString cstrValue;
@@ -760,18 +960,26 @@ void CToolMenuView::OnBnClickedSaveBtn()
 	CString fileName;
 	m_saveFileName.GetWindowTextW(fileName);
 
-	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName);
-	std::wofstream ofsSave(filePath.data());
+	std::string filePath = "../../../Data/EditorScene/";
+	std::wofstream ofsSave(filePath.data() + CStrToStr(fileName) +  ".ini");
+	std::wofstream ofsDeco(filePath.data() + std::string("mapDecoration") + ".ini");
+	std::wofstream ofsMap(filePath.data() + std::string("mapMapObject") + ".ini");
 
 	if (ofsSave.is_open())
 	{
 		DataParsing(ELayerID::Player, &ofsSave);
 		DataParsing(ELayerID::Enemy, &ofsSave);
-		DataParsing(ELayerID::Map, &ofsSave);
+		//DataParsing(ELayerID::Map, &ofsSave);
+		ParsingDecoObject(&ofsDeco);
+		ParsingMapObject(&ofsMap);
 
 		AfxMessageBox(L"Save Success | ObjectListView.cpp");
 	}
 	else AfxMessageBox(L"Save Failed | ObjectListView.cpp");
+
+	ofsSave.close();
+	ofsDeco.close();
+	ofsMap.close();
 }
 
 void CToolMenuView::OnBnClickedLoadBtn()
@@ -818,6 +1026,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 	_float3 offset; // collider
 	_float3 size; // collider
 	_float3 rotOffset; // collider
+	_int shaderID;
 
 	SP(Engine::CObject) spObject = nullptr;
 
@@ -858,6 +1067,14 @@ void CToolMenuView::OnBnClickedLoadBtn()
 			spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
 			spObject->SetLayerID(layerID);
 			m_objList.AddString(spObject->GetName().c_str());
+			continue;
+		}
+		else if (!wcscmp(L"shaderKey", dataTag))
+		{
+			shaderID = WstrToInt(dataValue);
+			spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
+			delete dataTag;
+			delete dataValue;
 			continue;
 		}
 		else if (!wcscmp(L"meshKey", dataTag))

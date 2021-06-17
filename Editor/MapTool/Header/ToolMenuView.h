@@ -42,6 +42,9 @@ public:
 	void SetChangeTextureList(std::wstring sectionKey);
 	void DataParsing(ELayerID layerID, std::wofstream* ofsSave);
 
+	void ParsingDecoObject(std::wofstream* ofsSave);
+	void ParsingMapObject(std::wofstream* ofsSave);
+
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosZ(NMHDR *pNMHDR, LRESULT *pResult);

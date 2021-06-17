@@ -175,7 +175,6 @@ void CFSM_SickleC::Walk_Forward_Enter(void)
 
 void CFSM_SickleC::Walk_Forward_Update(float deltaTime)
 {
-	int a = 0;
 }
 
 void CFSM_SickleC::Walk_Forward_End(void)
