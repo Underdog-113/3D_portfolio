@@ -121,8 +121,6 @@ void CMainMapTool::OnDestroy(void)
 	Engine::CTextManager::GetInstance()->DestroyInstance();
 	Engine::CRenderTargetManager::GetInstance()->DestroyInstance();
 
-	// temp controller
-	CStageControlTower_Editor::DestroyInstance();
 }
 
 void CMainMapTool::OnEnable(void)
