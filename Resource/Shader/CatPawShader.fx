@@ -106,6 +106,7 @@ if (intensity < 0)
 }
 
 
+
 VS_OUTPUT OutlineVertexShader(VS_INPUT Input)
 {
 	VS_OUTPUT output = (VS_OUTPUT)0;
