@@ -105,7 +105,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-		CBattleUiManager::GetInstance()->CollTime(0, 100);
+		CBattleUiManager::GetInstance()->SkillExecution(0, 10, 1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
@@ -120,7 +120,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
-		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5);
+		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
 	}
 }
 
