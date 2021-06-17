@@ -214,12 +214,6 @@
     <Filter Include="03.Component\00.UI\07.AlphaLifeTime">
       <UniqueIdentifier>{a62f0e53-db56-4e99-a888-dfe2f40e2081}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\10.BattleVictory">
-      <UniqueIdentifier>{aeab7aee-2a3e-4174-9d35-d430288c253d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\11.BattleEnd">
-      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI\08.BattleRenunciation">
       <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
     </Filter>
@@ -228,6 +222,18 @@
     </Filter>
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana\FSM">
       <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.Effect\01.MeshEffect">
+      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.Effect\01.MeshEffect\00.AttackTrail">
+      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager">
+      <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="01.Scene\10.BattleEnd">
+        <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -471,6 +477,18 @@
     <ClInclude Include="..\Header\BattleRenunciationC.h">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MeshEffect_Client.h">
+      <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AttackTrail_Client.h">
+      <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\DataManager.h">
+        <Filter>09.Manager\02.DataManager</Filter>
+      </ClInclude>
+      <ClInclude Include="..\Header\BattleEndScene.h">
+        <Filter>01.Scene\10.BattleEnd</Filter>
+      </ClInclude>
     <ClInclude Include="..\Header\Include_ForTest.h">
       <Filter>01.Scene\06.OneStageScene</Filter>
     </ClInclude>
@@ -679,6 +697,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\BattleRenunciationC.cpp">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeshEffect_Client.cpp">
+      <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackTrail_Client.cpp">
+      <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DataManager.cpp">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleEndScene.cpp">
+      <Filter>01.Scene\10.BattleEnd</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\OneStageScene.cpp">
       <Filter>01.Scene\06.OneStageScene</Filter>

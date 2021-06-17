@@ -34,9 +34,9 @@ void CShader::Awake(void)
 		MSG_BOX(__FILE__, L"Failed creating EffectFromFile in CMeshShader::Awake()");
 		ABORT;
 	}
-	else if (nullptr != m_pErrMsg)
+	/*else if (nullptr != m_pErrMsg)
 	{
 		MSG_BOX(__FILE__, L"CreateEffectFromFile warning in CMeshShader::Awake()");
 		ABORT;
-	}
+	}*/
 }

@@ -26,6 +26,9 @@
 #include "MB_Bronya.h"
 #include "Monster.h"
 
+#include "AttackTrail_Client.h"
+#include "MeshEffect_Client.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -114,13 +117,15 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
-
-	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
-	GetObjectFactory()->AddPrototype(spSkyBox);
-
+	
+	//SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
+	//GetObjectFactory()->AddPrototype(spSkyBox);
+	//
 	InitUiPrototypes();
 	InitMonsterPrototypes();
-	
+
+	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttack_Trail);
 }
 
 void CStaticScene::InitUiPrototypes(void)

@@ -54,7 +54,7 @@ void COneStageScene::Start(void)
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
-	// 로드
+	// 占싸듸옙
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
 	Load->ButtonLoad(this);
@@ -80,56 +80,41 @@ void COneStageScene::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
 		CBattleUiManager::GetInstance()->KeyPad(8);
-		// 조이스틱 움직이는거 8,4,5,6,2
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
 	{
 		CBattleUiManager::GetInstance()->HitCount(8);
-		// 실행할 때 마다 콤보수 증가
-		// 넣는 변수는 지속 시간 
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"슬깃이", 100, L"DOWN");
-		// 몬스터 이름 curhp, 속성값
-		// 죽으면 끄는건 나중에
+		CBattleUiManager::GetInstance()->MonsetrState(L"占쏙옙占쏙옙占쏙옙", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
 	{
 		CBattleUiManager::GetInstance()->MonsterHpDown(0.5f);
-		// 다는거
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
 	{
 		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-		// 캐릭터 swap할때마다 캐릭에 맞게 갱신해야 하니까 이걸로
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
 	{
 		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-		// 플레이어 다는거
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-		CBattleUiManager::GetInstance()->CollTime(0, 100);
-		// 첫번째는 버튼 타입	
-		// 쿨타임
-
-		// bool값을 반환하고, 쿨타임 끝났는지 안끝난쓰 -> 이건 추가예정
+		CBattleUiManager::GetInstance()->SkillExecution(0, 10, 1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
 		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Skill_Bronya_Weapon_17", L"Defalut", L"Defalut");
-
-		// 교대
-		// hp, sp, 각각 버튼의 텍스처 이름 default
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
@@ -139,9 +124,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
-		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5);
-
-		// 타겟
+		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
 	}
 }
 

@@ -90,6 +90,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_giveUpCanvas->AddObjectFind();
 	m_giveUpCanvas->SetIsEnabled(false);
 
+	m_victoryCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"VictoryCanvas").get());
+	m_victoryCanvas->AddObjectFind();
+	m_giveUpCanvas->SetIsEnabled(false);
+
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
 
@@ -157,6 +161,11 @@ void CBattleUiManager::MonsetrState(std::wstring name, _float hp, std::wstring p
 	m_monsterProperty->GetComponent<Engine::CTextC>()->ChangeMessage(property);
 }
 
+void CBattleUiManager::MonsterStateEnd()
+{
+	m_monsterStateCanvas->SetIsEnabled(true);
+}
+
 void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2)
 {
 	m_playerIllustration[0]->GetTexture()->ChangeTexture(playerTexture1, 0);
@@ -216,10 +225,13 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 
 void CBattleUiManager::TargetUI(_float3 pos, _float value)
 {
+	_float3 pos2D = pos - Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
+	pos2D.z = m_target[0]->GetTransform()->GetPosition().z;
+
 	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
 
-	m_target[0]->GetTransform()->SetPosition(pos);
-	m_target[1]->GetTransform()->SetPosition(pos);
+	m_target[0]->GetTransform()->SetPosition(pos2D);
+	m_target[1]->GetTransform()->SetPosition(pos2D);
 
 	m_monsterTargetCanvas->SetIsEnabled(true);
 }
@@ -285,9 +297,24 @@ void CBattleUiManager::PlayerSpUp(_float value)
 	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage((std::to_wstring((int)m_playerSpBar->GetValue()) + L" / " + std::to_wstring((int)m_playerSpBar->GetMaxValue())));
 }
 
-void CBattleUiManager::CollTime(_int value, _float collTime)
+bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 {
-	m_coolTimeSlider[value]->SetMaxValue(collTime);
-	m_coolTimeSlider[value]->SetValue(collTime);
+	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)
+	{
+		m_coolTimeSlider[value]->SetMaxValue(collTime);
+		m_coolTimeSlider[value]->SetValue(collTime);
+		PlayerSpDown((_float)spValue);
+	}
+	return false;
+}
+
+void CBattleUiManager::BattleEnd()
+{
+	m_monsterStateCanvas->SetIsEnabled(false);
+	m_mainCanvas->SetIsEnabled(false);
+	m_hitsCanvas->SetIsEnabled(false);
+	m_monsterTargetCanvas->SetIsEnabled(false);
+	m_giveUpCanvas->SetIsEnabled(false);
+	m_victoryCanvas->SetIsEnabled(true);
 }
 

@@ -4,4 +4,7 @@
     <LocalDebuggerEnvironment>PATH=$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)Reference\Library\Debug\;%PATH% $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup>
+    <ShowAllFiles>false</ShowAllFiles>
+  </PropertyGroup>
 </Project>

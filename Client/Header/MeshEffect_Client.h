@@ -1,11 +1,11 @@
 #pragma once
-class CMeshEffect : public Engine::CObject
+class CMeshEffect_Client : public Engine::CObject
 {
-	SMART_DELETER_REGISTER
-
 protected:
-	CMeshEffect();
-	virtual ~CMeshEffect() = default;
+	CMeshEffect_Client();
+	virtual	~CMeshEffect_Client() = default;
+
+	SMART_DELETER_REGISTER
 
 public:
 	SP(CObject) MakeClone()PURE;
@@ -35,12 +35,10 @@ protected:
 
 private:
 	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
-	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
-	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
-	GETTOR(_float,  m_fAlpha, 1.f, Alpha)
-    GETTOR(_float, m_fTime, 0.f, Time)
-    
-
+		GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
+		GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+		GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+		GETTOR(_float, m_fAlpha, 1.f, Alpha)
+		GETTOR(_float, m_fTime, 0.f, Time)
 };
 

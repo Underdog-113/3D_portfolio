@@ -37,6 +37,9 @@
     <Filter Include="05.Object\01.SoftEffect">
       <UniqueIdentifier>{90f243c2-8c3b-40ce-8289-511eed1f4fbc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object\00.EffectMesh\00.AttackTrail">
+      <UniqueIdentifier>{06eeb9f6-9d93-4452-920a-7488f55cb385}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="..\Header\MeshEffect.h">
       <Filter>05.Object\00.EffectMesh</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\AttackTrail.h">
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -112,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MeshEffect.cpp">
       <Filter>05.Object\00.EffectMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackTrail.cpp">
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
