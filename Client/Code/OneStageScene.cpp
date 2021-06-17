@@ -54,7 +54,7 @@ void COneStageScene::Start(void)
 	SP(Engine::CObject) spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
-	// ·Îµå
+	// ï¿½Îµï¿½
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
 	Load->ButtonLoad(this);
@@ -80,56 +80,57 @@ void COneStageScene::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
 		CBattleUiManager::GetInstance()->KeyPad(8);
-		// Á¶ÀÌ½ºÆ½ ¿òÁ÷ÀÌ´Â°Å 8,4,5,6,2
+		// ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´Â°ï¿½ 8,4,5,6,2
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
 	{
 		CBattleUiManager::GetInstance()->HitCount(8);
-		// ½ÇÇàÇÒ ¶§ ¸¶´Ù ÄÞº¸¼ö Áõ°¡
-		// ³Ö´Â º¯¼ö´Â Áö¼Ó ½Ã°£ 
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		// ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"½½±êÀÌ", 100, L"DOWN");
-		// ¸ó½ºÅÍ ÀÌ¸§ curhp, ¼Ó¼º°ª
-		// Á×À¸¸é ²ô´Â°Ç ³ªÁß¿¡
+		CBattleUiManager::GetInstance()->MonsetrState(L"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 100, L"DOWN");
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ curhp, ï¿½Ó¼ï¿½ï¿½ï¿½
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))
 	{
 		CBattleUiManager::GetInstance()->MonsterHpDown(0.5f);
-		// ´Ù´Â°Å
+		// ï¿½Ù´Â°ï¿½
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
 	{
 		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-		// Ä³¸¯ÅÍ swapÇÒ¶§¸¶´Ù Ä³¸¯¿¡ ¸Â°Ô °»½ÅÇØ¾ß ÇÏ´Ï±î ÀÌ°É·Î
+		// Ä³ï¿½ï¿½ï¿½ï¿½ swapï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï´Ï±ï¿½ ï¿½Ì°É·ï¿½
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
 	{
 		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-		// ÇÃ·¹ÀÌ¾î ´Ù´Â°Å
+		// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ù´Â°ï¿½
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
 		CBattleUiManager::GetInstance()->CollTime(0, 100);
-		// Ã¹¹øÂ°´Â ¹öÆ° Å¸ÀÔ	
-		// ÄðÅ¸ÀÓ
+		// Ã¹ï¿½ï¿½Â°ï¿½ï¿½ ï¿½ï¿½Æ° Å¸ï¿½ï¿½
+		// ï¿½ï¿½Å¸ï¿½ï¿½
 
-		// bool°ªÀ» ¹ÝÈ¯ÇÏ°í, ÄðÅ¸ÀÓ ³¡³µ´ÂÁö ¾È³¡³­¾² -> ÀÌ°Ç Ãß°¡¿¹Á¤
+		// boolï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï°ï¿½, ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½Ì°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
+		CBattleUiManager::GetInstance()->SkillExecution(0, 10, 1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
 		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Skill_Bronya_Weapon_17", L"Defalut", L"Defalut");
 
-		// ±³´ë
-		// hp, sp, °¢°¢ ¹öÆ°ÀÇ ÅØ½ºÃ³ ÀÌ¸§ default
+		// ï¿½ï¿½ï¿½ï¿½
+		// hp, sp, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½Ø½ï¿½Ã³ ï¿½Ì¸ï¿½ default
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
@@ -139,9 +140,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
-		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5);
-
-		// Å¸°Ù
+		CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
 	}
 }
 

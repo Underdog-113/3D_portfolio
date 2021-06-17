@@ -24,4 +24,4 @@ private:
 	_float  m_fTime;
 
 };
-
+END
