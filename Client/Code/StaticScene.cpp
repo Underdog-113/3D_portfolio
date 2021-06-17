@@ -121,8 +121,8 @@ void CStaticScene::InitPrototypes(void)
 	//SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
 	//GetObjectFactory()->AddPrototype(spSkyBox);
 	//
-	//InitUiPrototypes();
-	//InitMonsterPrototypes();
+	InitUiPrototypes();
+	InitMonsterPrototypes();
 
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Trail);
