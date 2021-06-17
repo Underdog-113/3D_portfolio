@@ -17,8 +17,6 @@
 #include "EditorScene.h"
 #pragma endregion
 
-#include "StageControlTower_Editor.h"
-
 CMainMapTool::CMainMapTool()
 {
 }
@@ -47,7 +45,6 @@ void CMainMapTool::Awake(void)
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CTextManager::GetInstance()->Awake();
-	CStageControlTower_Editor::GetInstance()->Awake();
 }
 
 void CMainMapTool::Start(void)
@@ -64,9 +61,6 @@ void CMainMapTool::Start(void)
 	Engine::CCollisionManager::GetInstance()->InitCollisionMap();
 
 	Engine::CRenderTargetManager::GetInstance()->Start();
-
-	// temp controller
-	CStageControlTower_Editor::GetInstance()->Start();
 }
 
 void CMainMapTool::FixedUpdate(void)

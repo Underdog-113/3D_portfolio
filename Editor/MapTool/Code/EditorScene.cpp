@@ -21,7 +21,6 @@
 
 #include "DynamicMeshData.h"
 #include "DebugCollider.h"
-#include "StageControlTower_Editor.h"
 
 #pragma region Prototypes
 #include "EmptyObject.h"
