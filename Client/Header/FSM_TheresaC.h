@@ -63,10 +63,10 @@ public:
 	void HIT_L_End(void);
 
 	//QTE_FY
-	void QTE_FY_Init(void);
-	void QTE_FY_Enter(void);
-	void QTE_FY_Update(float deltaTime);
-	void QTE_FY_End(void);
+	//void QTE_FY_Init(void);
+	//void QTE_FY_Enter(void);
+	//void QTE_FY_Update(float deltaTime);
+	//void QTE_FY_End(void);
 
 	//JUMP_2
 	void JUMP_2_Init(void);

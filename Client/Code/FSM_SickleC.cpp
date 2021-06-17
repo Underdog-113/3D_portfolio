@@ -170,7 +170,7 @@ void CFSM_SickleC::Walk_Forward_Init(void)
 
 void CFSM_SickleC::Walk_Forward_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Walk_Forward,false,0.01);
+	m_pDM->ChangeAniSet(Index_Hit_Shake_1);
 }
 
 void CFSM_SickleC::Walk_Forward_Update(float deltaTime)

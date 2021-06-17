@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Theresa.h"
 
+#include "FSM_TheresaC.h"
 
 CTheresa::CTheresa()
 {
@@ -14,7 +15,7 @@ CTheresa::~CTheresa()
 
 SP(CTheresa) CTheresa::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CTheresa) spInstance(new CKiana, Engine::SmartDeleter<CTheresa>);
+	SP(CTheresa) spInstance(new CTheresa, Engine::SmartDeleter<CTheresa>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -24,7 +25,7 @@ SP(CTheresa) CTheresa::Create(_bool isStatic, Engine::CScene * pScene)
 
 SP(Engine::CObject) CTheresa::MakeClone(void)
 {
-	SP(CKiana) spClone(new CTheresa, Engine::SmartDeleter<CTheresa>);
+	SP(CTheresa) spClone(new CTheresa, Engine::SmartDeleter<CTheresa>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -33,7 +34,7 @@ SP(Engine::CObject) CTheresa::MakeClone(void)
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
-	spClone->m_spStateMachine = spClone->GetComponent<CFSM_KianaC>();
+	spClone->m_spStateMachine = spClone->GetComponent<CFSM_TheresaC>();
 	return spClone;
 }
 

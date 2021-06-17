@@ -13,7 +13,7 @@ private:
 	~CTheresa();
 
 public:
-	static			SP(CKiana)				Create(_bool isStatic, Engine::CScene* pScene);
+	static			SP(CTheresa)				Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -42,12 +42,6 @@ public:
 					void					SetBasicName		(void) override;
 					
 public:
-					void					Update_WeaponTransform(void);
-
-					void					CreatePistol		(void);
-					void					CreateCatPaw		(void);
-					void					UltraAtk			(UltraAttack index);
-					void					UltraAtk_Ring		(UltraAttack index);
 
 
 private:

@@ -468,6 +468,9 @@
     <ClInclude Include="..\Header\BattleRenunciationC.h">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Include_ForTest.h">
+      <Filter>01.Scene\06.OneStageScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -590,9 +593,6 @@
     <ClCompile Include="..\Code\MainRoomScene.cpp">
       <Filter>01.Scene\07.MainRoomScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\OneStageScene.cpp">
-      <Filter>01.Scene\06.OneStageScene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
       <Filter>01.Scene\05.ReadyToSortieScene</Filter>
     </ClCompile>
@@ -673,6 +673,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BattleRenunciationC.cpp">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OneStageScene.cpp">
+      <Filter>01.Scene\06.OneStageScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

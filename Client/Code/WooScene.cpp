@@ -81,6 +81,9 @@ void CWooScene::Start(void)
 			m_spKiana = spKianaClone;
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
+
+
+			m_spKiana->GetTransform()->SetSize(1.f, 1.f, 1.f);
 		}
 
 		// Monster
@@ -98,6 +101,7 @@ void CWooScene::Start(void)
 			SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 			spSickleClone->GetTransform()->SetPosition(0, 0, 10);
 			spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			spSickleClone->GetTransform()->SetSize(2.f, 2.f, 2.f);
 			m_spSickle = spSickleClone;
 
 			m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
