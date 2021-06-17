@@ -41,9 +41,9 @@ void CBattleRenunciationC::Update(SP(CComponent) spThis)
 {
 	// 배경 점점 검은색으로 만들고 a값이 1이되면 씬체인지
 
-	/*CButtonManager::GetInstance()->OnDestroy();
+	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CMainRoomScene::Create());
-	SetIsEnabled(false);*/
+	SetIsEnabled(false);
 }
 
 void CBattleRenunciationC::LateUpdate(SP(CComponent) spThis)

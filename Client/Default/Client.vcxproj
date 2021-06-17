@@ -184,11 +184,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AttackTrail_Client.h" />
+    <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
+    <ClInclude Include="..\Header\DataManager.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
@@ -267,10 +269,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
+    <ClCompile Include="..\Code\BattleEndScene.cpp" />    
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
