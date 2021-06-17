@@ -442,7 +442,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 		}
 	}
 
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	
 }
 
 void CGraphicsManager::RenderParticle(void)
@@ -507,5 +507,6 @@ void CGraphicsManager::RenderUI(void)
 		}
 	}
 
+	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 }
