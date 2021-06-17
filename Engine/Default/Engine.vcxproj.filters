@@ -301,6 +301,9 @@
     <Filter Include="02.Objects\09.Text">
       <UniqueIdentifier>{55e89009-2f13-42a0-9ad6-3701b9538748}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader">
+      <UniqueIdentifier>{045ee1b4-ba29-4600-a5fc-0933ef05863b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -566,6 +569,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\TextObject.cpp">
       <Filter>02.Objects\09.Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DissolveShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpawnEffectShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -857,6 +866,12 @@
     <ClInclude Include="..\Header\TextObject.h">
       <Filter>02.Objects\09.Text</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DissolveShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SpawnEffectShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -900,6 +915,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

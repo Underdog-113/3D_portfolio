@@ -1,21 +1,21 @@
 #include "stdafx.h"
-#include "..\Header\AttackTrail.h"
+#include "..\Header\AttackTrail_Client.h"
 
-_uint CAttackTrail::m_s_uniqueID = 0;
+_uint CAttackTrail_Client::m_s_uniqueID = 0;
 
-CAttackTrail::CAttackTrail()
+CAttackTrail_Client::CAttackTrail_Client()
 {
 }
 
 
-CAttackTrail::~CAttackTrail()
+CAttackTrail_Client::~CAttackTrail_Client()
 {
 	OnDestroy();
 }
 
-SP(CAttackTrail) CAttackTrail::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CAttackTrail_Client) CAttackTrail_Client::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CAttackTrail) spInstance(new CAttackTrail, Engine::SmartDeleter<CAttackTrail>);
+	SP(CAttackTrail_Client) spInstance(new CAttackTrail_Client, Engine::SmartDeleter<CAttackTrail_Client>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -23,9 +23,9 @@ SP(CAttackTrail) CAttackTrail::Create(_bool isStatic, Engine::CScene * pScene)
 	return spInstance;
 }
 
-SP(Engine::CObject) CAttackTrail::MakeClone()
+SP(Engine::CObject) CAttackTrail_Client::MakeClone()
 {
-	SP(CAttackTrail) spClone(new CAttackTrail, Engine::SmartDeleter<CAttackTrail>);
+	SP(CAttackTrail_Client) spClone(new CAttackTrail_Client, Engine::SmartDeleter<CAttackTrail_Client>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -40,7 +40,7 @@ SP(Engine::CObject) CAttackTrail::MakeClone()
 	return spClone;
 }
 
-void CAttackTrail::Awake()
+void CAttackTrail_Client::Awake()
 {
 	__super::Awake();
 
@@ -51,18 +51,18 @@ void CAttackTrail::Awake()
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
-void CAttackTrail::Start()
+void CAttackTrail_Client::Start()
 {
 	__super::Start();
 	m_fTrailAlpha = 1.f;
 }
 
-void CAttackTrail::FixedUpdate()
+void CAttackTrail_Client::FixedUpdate()
 {
 	__super::FixedUpdate();
 }
 
-void CAttackTrail::Update()
+void CAttackTrail_Client::Update()
 {
 	__super::Update();
 
@@ -76,65 +76,62 @@ void CAttackTrail::Update()
 		m_fTrailAlpha = 1.f;
 	}
 
-	m_fTrailAlpha -= 1.3f * GET_DT;
-
+	m_fTrailAlpha -= 2.3f * GET_DT;
 }
 
-void CAttackTrail::LateUpdate()
+void CAttackTrail_Client::LateUpdate()
 {
 	__super::LateUpdate();
 }
 
-void CAttackTrail::PreRender()
+void CAttackTrail_Client::PreRender()
 {
 	m_spMesh->PreRender(m_spGraphics);
 }
 
-void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
+void CAttackTrail_Client::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
-
 }
 
-void CAttackTrail::Render()
+void CAttackTrail_Client::Render()
 {
-
 	m_spMesh->Render(m_spGraphics);
 }
 
-void CAttackTrail::Render(LPD3DXEFFECT pEffect)
+void CAttackTrail_Client::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 }
 
-void CAttackTrail::PostRender()
+void CAttackTrail_Client::PostRender()
 {
 	m_spMesh->PostRender(m_spGraphics);
 }
 
-void CAttackTrail::PostRender(LPD3DXEFFECT pEffect)
+void CAttackTrail_Client::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
-void CAttackTrail::OnDestroy()
+void CAttackTrail_Client::OnDestroy()
 {
 	__super::OnDestroy();
 }
 
-void CAttackTrail::OnEnable()
+void CAttackTrail_Client::OnEnable()
 {
 	__super::OnEnable();
 }
 
-void CAttackTrail::OnDisable()
+void CAttackTrail_Client::OnDisable()
 {
 	__super::OnDisable();
 }
 
-void CAttackTrail::SetBasicName()
+void CAttackTrail_Client::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }

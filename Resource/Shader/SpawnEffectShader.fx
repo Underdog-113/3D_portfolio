@@ -8,8 +8,8 @@ float4x4 gProjection;
 float4 gWorldLightPosition;
 
 float  gTime;
-float  gTrailAlpha;
-bool   gisSpawn;
+float  gAlpha;
+float  gUVSpeed;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -20,10 +20,10 @@ sampler Diffuse = sampler_state
 	AddressV = Wrap;
 };
 
-texture g_NoiseTex;
-sampler NoiseTex = sampler_state
+texture g_AlphaTex;
+sampler AlphaTex = sampler_state
 {
-	Texture = <g_NoiseTex>;
+	Texture = <g_AlphaTex>;
 	FILTER = MIN_MAG_MIP_LINEAR;
 	AddressU = Wrap;
 	AddressV = Wrap;
@@ -61,7 +61,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
-	Output.mUV = Input.mUV;
+	Output.mUV = Input.mUV + float2(gTime * gUVSpeed, 0);
 
 	return(Output);
 
@@ -83,26 +83,18 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
 	// Noise Texture
-	float4 Noise = tex2D(NoiseTex, Input.mUV);
-	
-	if (Input.mUV.x > gTrailAlpha)
-	{
-		albedo.a = 0;
-		Noise.a = 0;
-	}	
+	float4 _Alpha = tex2D(AlphaTex, Input.mUV);
 
-	return albedo * Noise;
+	return float4(albedo * _Alpha);
 }
 
-
-
-technique ToonShader
+technique TShader
 {
 	pass p0
 	{
 		CullMode = None;
 		AlphaBlendEnable = true;
-		DestBlend = InvsrcAlpha;
+		DestBlend = InvsrcAlpha; vs_main
 		SrcBlend = SrcAlpha;
 
 		VertexShader = compile vs_3_0 vs_main();

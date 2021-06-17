@@ -1,33 +1,35 @@
 #include "EngineStdafx.h"
-#include "..\Header\WaterShader.h"
+#include "..\Header\SpawnEffectShader.h"
 
 USING(Engine)
 
-CWaterShader::CWaterShader()
+CSpawnEffectShader::CSpawnEffectShader()
 {
 }
 
-CShader * CWaterShader::Create()
+CSpawnEffectShader::~CSpawnEffectShader()
 {
-	CWaterShader* pInstance = new CWaterShader;
+}
+
+CShader * CSpawnEffectShader::Create()
+{
+	CSpawnEffectShader* pInstance = new CSpawnEffectShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CWaterShader::Free()
+void CSpawnEffectShader::Free()
 {
 	__super::Free();
 }
 
-void CWaterShader::Awake()
+void CSpawnEffectShader::Awake()
 {
 	__super::Awake();
-	m_fTime = 0.f;
-	m_fUVSpeed = 0.25f;
 }
 
-void CWaterShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CSpawnEffectShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
 	m_fTime += GET_DT;
 
@@ -65,7 +67,7 @@ void CWaterShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
 	size_t _dwMaterials = spGC->GetMesh()->GetMeshDatas().size();
-	
+
 	m_pEffect->SetVector("g_LightColor", &m_vColor);
 
 	m_pEffect->SetFloat("g_fTime", m_fTime);

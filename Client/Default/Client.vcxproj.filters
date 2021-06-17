@@ -226,6 +226,12 @@
     <Filter Include="03.Component\00.UI\08.BattleRenunciation">
       <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\05.Effect\01.MeshEffect">
+      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\05.Effect\01.MeshEffect\00.AttackTrail">
+      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -468,6 +474,12 @@
     <ClInclude Include="..\Header\BattleRenunciationC.h">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MeshEffect_Client.h">
+      <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AttackTrail_Client.h">
+      <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -673,6 +685,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\BattleRenunciationC.cpp">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeshEffect_Client.cpp">
+      <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackTrail_Client.cpp">
+      <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

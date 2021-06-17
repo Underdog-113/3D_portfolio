@@ -2,11 +2,11 @@
 #include "Shader.h"
 
 BEGIN(Engine)
-class CMeshTrailShader final : public CShader
+class CDissolveShader final : public CShader
 {
 private:
-	CMeshTrailShader();
-	~CMeshTrailShader();
+	CDissolveShader();
+	~CDissolveShader();
 
 public:
 	static CShader* Create();
@@ -20,3 +20,4 @@ private:
 	_float4 m_Light_Pos;
 };
 END
+

@@ -82,7 +82,7 @@ void CGraphicsManager::Render(void)
 	RenderBase();
 
 	RenderDeferred();
-	RenderLights();
+	//RenderLights();
 	RenderDeferBlend();
 
 	RenderWire();

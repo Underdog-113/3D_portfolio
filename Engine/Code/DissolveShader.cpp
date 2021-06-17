@@ -1,39 +1,39 @@
 #include "EngineStdafx.h"
-#include "..\Header\MeshTrailShader.h"
-#include "Layer.h"
+#include "..\Header\DissolveShader.h"
 
 USING(Engine)
 
-CMeshTrailShader::CMeshTrailShader()
+CDissolveShader::CDissolveShader()
 {
 }
 
 
-CMeshTrailShader::~CMeshTrailShader()
+CDissolveShader::~CDissolveShader()
 {
 }
 
-
-CShader * CMeshTrailShader::Create()
+CShader * CDissolveShader::Create()
 {
-	CMeshTrailShader* pInstance = new CMeshTrailShader;
+	CDissolveShader* pInstance = new CDissolveShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CMeshTrailShader::Free()
+void CDissolveShader::Free()
 {
 	__super::Free();
 }
 
-void CMeshTrailShader::Awake()
+void CDissolveShader::Awake()
 {
 	__super::Awake();
 }
 
-void CMeshTrailShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CDissolveShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
+	// Add Alpha variables to objects that use this shader.
+	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
 
 	_mat worldMat, viewMat, projMat, WVP;
 
@@ -64,8 +64,6 @@ void CMeshTrailShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
-	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
-
-
+	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
 }

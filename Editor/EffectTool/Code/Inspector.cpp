@@ -425,7 +425,7 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
 
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\Static\\MeshEffect";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\StaticScene\\";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -451,7 +451,7 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\SoftEffect\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -474,7 +474,7 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -497,7 +497,7 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Static\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 

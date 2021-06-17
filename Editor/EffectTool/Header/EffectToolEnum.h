@@ -36,11 +36,12 @@ enum class EDataID
 
 enum class ELayerID
 {
-	Player = 0 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Map = 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Enemy = 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Camera = 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID = 4 + (_int)Engine::ELayerID::NumOfEngineLayerID
+	Player		 = 0 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	Map			 = 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	Enemy		 = 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	Camera		 = 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	Effect		 = 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	NumOfLayerID = 5 + (_int)Engine::ELayerID::NumOfEngineLayerID
 };
 
 //GraphicsComponent RenderID
