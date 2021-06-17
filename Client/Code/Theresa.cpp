@@ -107,7 +107,6 @@ void CTheresa::OnEnable(void)
 {
 	__super::OnEnable();
 }
-}
 
 void CTheresa::OnDisable(void)
 {

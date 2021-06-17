@@ -35,16 +35,8 @@ void CFSM_TheresaC::Awake(void)
 void CFSM_TheresaC::Start(SP(CComponent) spThis)
 {
 	m_pTheresa = static_cast<CTheresa*>(m_pOwner);
-
-	RegisterAllState();
-
+	
 	__super::Start(spThis);
-
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-	m_pStageController = CStageController::GetInstance();
-
-	SetStartState(L"StandBy");
-	m_curState->DoEnter();
 }
 
 void CFSM_TheresaC::RegisterAllState()
@@ -55,10 +47,6 @@ void CFSM_TheresaC::FixRootMotionOffset(_uint index)
 {
 }
 
-
-CFSM_TheresaC::~CFSM_TheresaC()
-{
-}
 
 void CFSM_TheresaC::VICTORY_Init(void)
 {

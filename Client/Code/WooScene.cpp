@@ -71,7 +71,6 @@ void CWooScene::Start(void)
 
 			m_pivot = spEmptyObject1.get();
 
-			Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera")->SetTarget(spEmptyObject1);
 		}
 
 		// Kiana Body
@@ -84,6 +83,9 @@ void CWooScene::Start(void)
 
 
 			m_spKiana->GetTransform()->SetSize(1.f, 1.f, 1.f);
+			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera");
+			cam->SetTarget(spKianaClone);
+			CStageController::GetInstance()->SetCurrentMainCam(cam);
 		}
 
 		// Monster
