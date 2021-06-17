@@ -132,9 +132,6 @@ void CStaticScene::InitPrototypes(void)
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
 	
-	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
-	GetObjectFactory()->AddPrototype(spSkyBox);
-	
 	InitUiPrototypes();
 	InitMonsterPrototypes();
 

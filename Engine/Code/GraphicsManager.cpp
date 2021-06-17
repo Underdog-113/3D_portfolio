@@ -250,7 +250,7 @@ void CGraphicsManager::RenderBase(void)
 		}
 	}
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
