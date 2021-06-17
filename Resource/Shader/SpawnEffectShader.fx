@@ -94,7 +94,7 @@ technique TShader
 	{
 		CullMode = None;
 		AlphaBlendEnable = true;
-		DestBlend = InvsrcAlpha; vs_main
+		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
 
 		VertexShader = compile vs_3_0 vs_main();
