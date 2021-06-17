@@ -128,7 +128,7 @@ void CKiana::PostRender(void)
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CKiana::OnDestroy(void)
