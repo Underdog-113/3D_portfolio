@@ -21,7 +21,6 @@
 
 #include "DynamicMeshData.h"
 #include "DebugCollider.h"
-#include "StageControlTower_Editor.h"
 
 #pragma region Prototypes
 #include "EmptyObject.h"
@@ -109,7 +108,6 @@ void CEditorScene::Update(void)
 	m_pMenuView->Update();
 
 	InputSetting();
-	CStageControlTower_Editor::GetInstance()->Update();
 }
 
 void CEditorScene::LateUpdate(void)
@@ -506,8 +504,6 @@ void CEditorScene::SetPickObject()
 				m_pMenuView->m_colType[2].EnableWindow(false);
 				m_pMenuView->m_showAllCol.EnableWindow(false);
 			}
-
-			CStageControlTower_Editor::GetInstance()->SetCurrentActor(m_pCurSelectedObject);
 
 			m_pMenuView->m_aabbCnt.ResetContent();
 
