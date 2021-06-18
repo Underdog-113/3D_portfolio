@@ -1,9 +1,17 @@
 #include "stdafx.h"
 #include "..\Header\MB_Ganesha.h"
 
+#include "FSM_GaneshaC.h"
+
+_uint CMB_Ganesha::m_s_uniqueID = 0;
 
 CMB_Ganesha::CMB_Ganesha()
 {
+}
+
+CMB_Ganesha::~CMB_Ganesha()
+{
+	OnDestroy();
 }
 
 SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
@@ -13,6 +21,12 @@ SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+
+	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
 
 	return spClone;
 }
@@ -20,11 +34,15 @@ SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
 void CMB_Ganesha::Awake(void)
 {
 	__super::Awake();
+
+	m_spStateMachine = AddComponent<CFSM_GaneshaC>();
 }
 
 void CMB_Ganesha::Start(void)
 {
 	__super::Start();
+
+	m_spMesh->OnRootMotion();
 }
 
 void CMB_Ganesha::FixedUpdate(void)
@@ -44,17 +62,32 @@ void CMB_Ganesha::LateUpdate(void)
 
 void CMB_Ganesha::PreRender(void)
 {
-	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PreRender(m_spGraphics);
+}
+
+void CMB_Ganesha::PreRender(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
 void CMB_Ganesha::Render(void)
 {
-	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->Render(m_spGraphics);
+}
+
+void CMB_Ganesha::Render(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
 void CMB_Ganesha::PostRender(void)
 {
-	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
+	m_spMesh->PostRender(m_spGraphics);
+}
+
+void CMB_Ganesha::PostRender(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CMB_Ganesha::OnDestroy(void)
@@ -74,6 +107,7 @@ void CMB_Ganesha::OnDisable(void)
 
 void CMB_Ganesha::SetBasicName(void)
 {
+	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
 SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
@@ -84,5 +118,13 @@ SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 	spInstance->Awake();
 
 	return spInstance;
+}
+
+void CMB_Ganesha::ChaseTarget(_float3 targetPos)
+{
+	_float3 dir = targetPos - m_spTransform->GetPosition();
+	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
+
+	m_spTransform->SetForward(dir);
 }
 

@@ -11,13 +11,13 @@
 //#include "FSMDefine_Spider.h"
 #include "MO_Spider.h"
 
-#include "FSM_AxeC.h"
-//#include "FSMDefine_Axe.h"
-#include "MO_Axe.h"
-
 #include "FSM_SickleC.h"
 #include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
+
+#include "FSM_GaneshaC.h"
+#include "FSMDefine_Ganesha.h"
+#include "MB_Ganesha.h"
 
 #include "FSM_KianaC.h"
 #include "Kiana.h"
@@ -30,12 +30,11 @@
 #include "Kiana_CatPaw_Ring_Atk01.h"
 #include "Kiana_Pistol_USP45.h"
 
-//#include "DataLoad.h"
+#include "DataLoad.h"
 
 CWooScene::CWooScene()
 {
 }
-
 
 CWooScene::~CWooScene()
 {
@@ -68,6 +67,18 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 	{
+		CDataLoad* Load = new CDataLoad();
+		Load->Setting();
+		Load->ButtonLoad(this);
+		Load->ImageLoad(this);
+		Load->SliderLoad(this);
+		Load->ScrollViewLoad(this);
+		Load->CanvasLoad(this);
+		Load->TextLoad(this);
+		delete(Load);
+
+		CBattleUiManager::GetInstance()->Start(this);
+
 		{
 			SP(Engine::CObject) spEmptyObject1
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
@@ -98,28 +109,36 @@ void CWooScene::Start(void)
 
 		// Monster
 		{
+			/* Spider */
 			//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
 			//spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
 			//spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			//m_spSpider = spSpiderClone;
 
+			/* Sickle */
 			SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-			spSickleClone->GetTransform()->SetSize(5, 5, 5);
+			spSickleClone->GetTransform()->SetSize(2, 2, 2);
 			spSickleClone->GetTransform()->SetPosition(0, 0, 10);
 			spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			m_spSickle = spSickleClone;
 
-			m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
-			//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
-		}
+			/* Ganesha */
+			//SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+			//spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
+			//spGaneshaClone->GetTransform()->SetPosition(0, 0, 10);
+			//spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			//m_spGanesha = spGaneshaClone;
 
+			//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
+			m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
+			//m_fsm = m_spGanesha->GetComponent<CFSM_GaneshaC>();
+		}
 	}
 
 	//CDataLoad* Load = new CDataLoad();
 	//Load->Setting();
 	//Load->ToolLoad(this);
 	//delete(Load);
-
 }
 
 void CWooScene::FixedUpdate(void)
@@ -135,11 +154,14 @@ void CWooScene::Update(void)
 	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
 	m_pivot->GetTransform()->SetPositionY(0.f);
 
-	if (Engine::IMKEY_DOWN(KEY_Q))
-		m_pattern1 = true;
-
 	SicklePattern0();
+	SicklePattern1();
+	SicklePattern2();
+	SicklePattern3();
 	//SpiderPattern0();
+	//GaneshaPattern0();
+	//GaneshaPattern1();
+	//GaneshaPattern2();
 }
 
 void CWooScene::LateUpdate(void)
@@ -184,48 +206,252 @@ void CWooScene::SpiderPattern0()
 
 void CWooScene::SicklePattern0()
 {
-	_float3 tPos = m_spKiana->GetTransform()->GetPosition();
-	_float3 mPos = m_spSickle->GetTransform()->GetPosition();
+	_float3 tPos = m_spKiana->GetTransform()->GetPosition(); // target pos
+	_float3 mPos = m_spSickle->GetTransform()->GetPosition(); // monster pos
 	//_float mSpeed = 1.f;
 
-	_float3 *len = &(tPos - mPos);
+	_float len = D3DXVec3Length(&(tPos - mPos));
 
-	if (D3DXVec3Length(len) < 1.5f)
-	{
-		m_fsm->ChangeState(Name_StandBy);
-		return;
-	}
-	else if (Name_Walk_Forward != m_fsm->GetCurStateString())
-		m_fsm->ChangeState(Name_Walk_Forward);
+	CoolTime(m_sickleAtkTime, m_sickleAtkCool, m_sickleAtkReady);
+	CoolTime(m_sickleWalkTime, m_sickleWalkCool, m_sickleWalkReady);
 
 	static_cast<CMO_Sickle*>(m_spSickle.get())->ChaseTarget(tPos);
 
-	_float3 dir = tPos - mPos;
+	if (false == m_sicklePattern0)
+		return;
 
-	mPos += *D3DXVec3Normalize(&dir, &dir) /** mSpeed*/ * GET_DT;
-	m_spSickle->GetTransform()->SetPosition(mPos);
+	//m_sickleAtkDis = 1.f;
+
+	// 상대가 공격 범위 밖이고
+	if (len > m_sickleAtkDis)
+	{
+		// 공격1 상태고, 애니가 끝났다면 
+		if (Name_Sickle_Attack_1 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+		{
+			m_fsm->ChangeState(Name_Sickle_Walk_Back);
+			m_sicklePattern1 = false;
+			m_sicklePattern2 = true;
+		}
+		if (Name_Sickle_Attack_2 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+		{
+			m_fsm->ChangeState(Name_Sickle_Walk_Back);
+			m_sicklePattern3 = false;
+			m_sicklePattern2 = true;
+		}
+
+		// 내가 대기 상태면 이동 애니로 변경
+		if (Name_Sickle_StandBy == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+		{
+			m_fsm->ChangeState(Name_Sickle_Walk_Forward);
+		}
+		// 내가 이동 중이라면
+		else if (Name_Sickle_Walk_Forward == m_fsm->GetCurStateString())
+		{
+			_float3 dir = tPos - mPos;
+
+			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+			m_spSickle->GetTransform()->SetPosition(mPos);
+		}
+		// 내가 뒤로 이동 중이라면
+		else if (Name_Sickle_Walk_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && false == m_sickleWalkReady)
+		{
+			_float3 dir = tPos - mPos;
+
+			mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+			m_spSickle->GetTransform()->SetPosition(mPos);
+		}
+		// 내가 뒤로 이동 중이라면
+		else if (Name_Sickle_Walk_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_sickleWalkReady)
+		{
+			m_fsm->ChangeState(Name_Sickle_Walk_Forward);
+		}
+	}
+	// 상대가 공격 범위 안이고
+	else if (len <= m_sickleAtkDis)
+	{
+		// 뒤로 이동 상태고, 애니가 끝났고, walkReady가 true라면 대기로 변경
+		if (Name_Sickle_Walk_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_sickleWalkReady)
+		{
+			m_fsm->ChangeState(Name_Sickle_StandBy);
+		}
+		
+		// 이동 상태라면 대기로 변경
+		if (Name_Sickle_Walk_Forward == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+		{
+			m_fsm->ChangeState(Name_Sickle_StandBy);
+			m_sicklePattern0 = false;
+
+			// 랜덤으로 공격 패턴 정함
+			m_sicklePattern3 = true;
+		}
+		
+		// 공격1 상태고, 애니가 끝났다면 
+		if (Name_Sickle_Attack_1 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+		{
+			m_fsm->ChangeState(Name_Sickle_Walk_Back);
+			m_sicklePattern1 = false;
+			m_sicklePattern2 = true;
+		}
+		if (Name_Sickle_Attack_2 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+		{
+			m_fsm->ChangeState(Name_Sickle_Walk_Back);
+			m_sicklePattern3 = false;
+			m_sicklePattern2 = true;
+		}
+	}
 }
 
-void CWooScene::PlayOnceAni(std::wstring playAni, std::wstring nextAni)
+void CWooScene::SicklePattern1()
 {
-	if (playAni != m_fsm->GetCurStateString())
-		m_fsm->ChangeState(playAni);
+	if (false == m_sicklePattern1)
+		return;
 
-	else if (m_fsm->GetDM()->GetAniTimeline() >= 0.8f)
-		m_fsm->ChangeState(nextAni);
+	m_fsm->ChangeState(Name_Sickle_Attack_1);
+	m_sickleAtkReady = false;
+	m_sicklePattern0 = true;
+	m_sicklePattern1 = false;
 }
 
-void CWooScene::PlayAni(std::wstring ani)
+void CWooScene::SicklePattern2()
 {
-	//if (ani != m_fsm->GetCurStateString())
-	//	m_fsm->ChangeState(ani);
+	if (false == m_sicklePattern2)
+		return;
+
+	m_fsm->ChangeState(Name_Sickle_Walk_Back);
+	m_sickleWalkReady = false;
+	m_sicklePattern0 = true;
+	m_sicklePattern2 = false;
 }
 
-void CWooScene::EndPattern()
+void CWooScene::SicklePattern3()
 {
-	m_pattern1 = false;
-	m_curPatternIdx = 0;
-	m_accTime = 0.f;
+	if (false == m_sicklePattern3)
+		return;
+
+	m_fsm->ChangeState(Name_Sickle_Attack_2);
+	m_sickleWalkReady = false;
+	m_sicklePattern0 = true;
+	m_sicklePattern3 = false;
+}
+
+void CWooScene::GaneshaPattern0()
+{
+	//_float3 tPos = m_spKiana->GetTransform()->GetPosition(); // target pos
+	//_float3 mPos = m_spGanesha->GetTransform()->GetPosition(); // monster pos
+	////_float mSpeed = 1.f;
+
+	//_float len = D3DXVec3Length(&(tPos - mPos));
+
+	//CoolTime(m_atkTime, m_sickleAtkCool, m_atkReady);
+	//CoolTime(m_walkTime, m_sickleWalkCool, m_walkReady);
+
+	//static_cast<CMB_Ganesha*>(m_spGanesha.get())->ChaseTarget(tPos);
+
+	//if (false == m_pattern0)
+	//	return;
+
+	//// 상대가 공격 범위 밖이고
+	//if (len > m_sickleAtkDis)
+	//{
+	//	// 공격 상태고, 애니가 끝났다면 
+	//	if (Name_Attack01 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_Jump_Back);
+	//		m_pattern1 = false;
+	//		m_pattern2 = true;
+	//	}
+
+	//	// 내가 대기 상태면 이동 애니로 변경
+	//	if (Name_StandBy == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_Run);
+	//	}
+	//	// 내가 이동 중이라면
+	//	else if (Name_Run == m_fsm->GetCurStateString())
+	//	{
+	//		_float3 dir = tPos - mPos;
+
+	//		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+	//		m_spGanesha->GetTransform()->SetPosition(mPos);
+	//	}
+	//	// 내가 뒤로 이동 중이라면
+	//	else if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && false == m_walkReady)
+	//	{
+	//		_float3 dir = tPos - mPos;
+
+	//		mPos -= *D3DXVec3Normalize(&dir, &dir) * 1.5f;
+	//		m_spGanesha->GetTransform()->SetPosition(mPos);
+	//		m_fsm->GetDM()->GetAniCtrl()->SetSpeed(0.5f);
+	//		m_walkReady = true;
+	//	}
+	//	// 내가 뒤로 이동 중이라면
+	//	else if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
+	//	{
+	//		m_fsm->ChangeState(Name_Run);
+	//	}
+	//}
+	//// 상대가 공격 범위 안이고
+	//else if (len <= m_sickleAtkDis)
+	//{
+	//	// 뒤로 이동 상태고, 애니가 끝났고, walkReady가 true라면 대기로 변경
+	//	if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
+	//	{
+	//		m_fsm->ChangeState(Name_StandBy);
+	//	}
+	//	
+	//	// 이동 상태라면 대기로 변경
+	//	if (Name_Run == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_StandBy);
+	//		m_pattern0 = false;
+	//		m_pattern1 = true;
+	//	}
+	//	
+	//	// 공격 상태고, 애니가 끝났다면 
+	//	if (Name_Attack01 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_Run);
+	//		m_pattern1 = false;
+	//		m_pattern2 = true;
+	//	}
+	//}
+}
+
+void CWooScene::GaneshaPattern1()
+{
+	//if (false == m_pattern1)
+	//	return;
+
+	//m_fsm->ChangeState(Name_Attack01);
+	//m_atkReady = false;
+	//m_pattern0 = true;
+	//m_pattern1 = false;
+}
+
+void CWooScene::GaneshaPattern2()
+{
+	//if (false == m_pattern2)
+	//	return;
+
+	//m_fsm->ChangeState(Name_Jump_Back);
+	//m_walkReady = false;
+	//m_pattern0 = true;
+	//m_pattern2 = false;
+}
+
+void CWooScene::CoolTime(_float& curTime, _float maxTime, _bool& readyType)
+{
+	if (true == readyType)
+		return;
+
+	if (maxTime <= curTime)
+	{
+		readyType = true;
+		curTime = 0.f;
+		return;
+	}
+	
+	curTime += GET_DT;
 }
 
 void CWooScene::InitPrototypes(void)

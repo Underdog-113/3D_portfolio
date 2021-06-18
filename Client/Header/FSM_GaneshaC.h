@@ -1,16 +1,25 @@
 #pragma once
 #include "StateMachine.h"
 
-class FSM_GaneshaC final : public Engine::CStateMachineC
+class CFSM_GaneshaC final : public Engine::CStateMachineC
 {
 public:
-	FSM_GaneshaC();
-	~FSM_GaneshaC() = default;
+	CFSM_GaneshaC();
+	~CFSM_GaneshaC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+
+private:
+	void RegisterAllStage();
+	void FixRootMotionOffset(_uint index);
+
+private:
+	_float m_accTime = 0.f;
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
+	GETTOR_SETTOR(_bool, m_pattern1, false, Pattern1);
 
 public:
 	// <Animation List>
@@ -122,10 +131,5 @@ public:
 	void Weak_Start_Enter(void);
 	void Weak_Start_Update(float deltaTime);
 	void Weak_Start_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
-
-
 };
 

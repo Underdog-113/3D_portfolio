@@ -519,6 +519,9 @@
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h">
       <Filter>98.Include\ClientStructure_Status</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
+      <Filter>02.Objects\03.Monster\MB_Ganesha\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -194,6 +194,7 @@
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
     <ClInclude Include="..\Header\DataManager.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
+    <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />

@@ -7,7 +7,7 @@ class CMB_Ganesha : public CMonster
 
 private:
 	CMB_Ganesha();
-	virtual ~CMB_Ganesha() = default;
+	~CMB_Ganesha();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -23,8 +23,13 @@ public:
 	virtual void LateUpdate(void) override;
 
 	virtual void PreRender(void) override;
+	virtual void PreRender(LPD3DXEFFECT pEffect) override;
+
 	virtual void Render(void) override;
+	virtual void Render(LPD3DXEFFECT pEffect) override;
+
 	virtual void PostRender(void) override;
+	virtual void PostRender(LPD3DXEFFECT pEffect) override;
 
 	virtual void OnDestroy(void) override;
 
@@ -35,6 +40,11 @@ public:
 	virtual void SetBasicName(void) override;
 
 public:
-	static		SP(CMB_Ganesha)			Create(_bool isStatic, Engine::CScene* pScene);
+	static SP(CMB_Ganesha) Create(_bool isStatic, Engine::CScene* pScene);
+	void ChaseTarget(_float3 targetPos);
+
+private:
+	static _uint m_s_uniqueID;
+
 };
 
