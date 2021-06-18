@@ -416,3 +416,28 @@ void CCamera::CameraMove(void)
 	if (IMKEY_PRESS(KEY_CONTROL))
 		m_spTransform->MoveDown(m_moveSpeed * GET_DT);
 }
+
+_float2 CCamera::WorldToScreenPoint(_float3 worldPos)
+{
+	// 전체화면의 절반
+	float halfWincx = Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
+	float halfWincy = Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f;
+
+	_float3 pos;
+	D3DXVec3TransformCoord(&pos, &worldPos, &m_viewMat);
+	D3DXVec3TransformCoord(&pos, &pos, &m_projMat);
+	// 3d좌표를 프로젝션 행렬까지 올려준다.
+
+	_mat viewportMat = _mat
+	{
+		halfWincx, 0.f        , 0.f             , 0.f,
+		0.f       , -halfWincy, 0.f             , 0.f,
+		0.f       , 0.f        , m_far - m_near, 0.f,
+		halfWincx, halfWincy ,m_near         , 1.f
+	};
+
+	//프로젝션 행렬까지 올라간 좌표를 뷰포트로 이동
+	D3DXVec3TransformCoord(&pos, &pos, &viewportMat);
+
+	return _float2(pos.x, pos.y);
+}

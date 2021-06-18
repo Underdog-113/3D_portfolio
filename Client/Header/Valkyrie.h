@@ -4,6 +4,7 @@
 #define VALKYRIE_H
 #include "Object.h"
 
+class CAttackBall;
 class CStageControlTower;
 class CValkyrie abstract : public Engine::CObject
 {
@@ -45,6 +46,7 @@ public:
 
 protected:
 	static			_uint							m_s_uniqueID;
+
 	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
 	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
@@ -58,7 +60,8 @@ protected:
 protected:	
 	GETTOR			(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)
 		
-	GETTOR			(V_Stat*,					m_pStat,			nullptr,	Stat)
+	GETTOR			(V_Stat*,						m_pStat,			nullptr,	Stat)
+	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 	
 protected:
 	CStageControlTower*			m_pCT = nullptr;

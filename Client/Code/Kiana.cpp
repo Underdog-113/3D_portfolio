@@ -14,6 +14,7 @@
 #include "Kiana_CatPaw_Atk04.h"
 #include "Kiana_CatPaw_Atk05.h"
 
+#include "AttackBall.h"
 
 CKiana::CKiana()
 {
@@ -51,8 +52,9 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
 
-	
+
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
+
 	return spClone;
 }
 
@@ -61,15 +63,6 @@ void CKiana::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_KianaC>();
-	/*m_spCollision->AddCollider(Engine::CSphereCollider::Create(
-							   (_int)ECollisionID::PlayerHitBox,
-							   3,
-							   _float3(0.f, m_spMesh->GetHalfYOffset(),0.f)));
-
-	m_spCollision->AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay,
-															_float3(0.f, m_spMesh->GetHalfYOffset(),0.f),
-															_float3(0, -1, 0),
-															m_spMesh->GetHalfYOffset()));*/
 
 }
 
@@ -237,6 +230,7 @@ void CKiana::UseUltraCost(void)
 
 void CKiana::SetBasicName(void)
 {
+	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
 void CKiana::UltraAtk(UltraAttack index)

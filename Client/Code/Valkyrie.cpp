@@ -2,6 +2,9 @@
 #include "Valkyrie.h"
 
 #include "StageControlTower.h"
+#include "AttackBall.h"
+
+_uint CValkyrie::m_s_uniqueID = 0;
 
 CValkyrie::CValkyrie()
 {
@@ -24,6 +27,8 @@ void CValkyrie::Awake(void)
 	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
 	m_spCollision = AddComponent<Engine::CCollisionC>();
 	m_spDebug = AddComponent<Engine::CDebugC>();
+	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	m_pAttackBall->SetOwner(this);
 }
 
 void CValkyrie::Start(void)
@@ -31,5 +36,3 @@ void CValkyrie::Start(void)
 	__super::Start();
 	m_pCT = CStageControlTower::GetInstance();
 }
-
-
