@@ -80,6 +80,7 @@
     <ClInclude Include="..\Header\SkyBoxShader.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
+    <ClInclude Include="..\Header\SoftEffectShader.h" />
     <ClInclude Include="..\Header\SpawnEffectShader.h" />
     <ClInclude Include="..\Header\State.h" />
     <ClInclude Include="..\Header\StateMachine.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="..\Code\SkyBoxShader.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
+    <ClCompile Include="..\Code\SoftEffectShader.cpp" />
     <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
     <ClCompile Include="..\Code\StateMachine.cpp" />
@@ -255,6 +257,7 @@
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>

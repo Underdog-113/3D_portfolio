@@ -74,7 +74,10 @@ namespace Engine
 		CelShader				= 10,
 		SkyBoxShader			= 11,
 		MeshTrailShader			= 12,
-		NumOfShaderID			= 13
+		DissolveShader			= 13,
+		SpawnEffectShader		= 14,
+		SoftEffectShader		= 15,
+		NumOfShaderID			= 16
 
 	};
 #pragma endregion

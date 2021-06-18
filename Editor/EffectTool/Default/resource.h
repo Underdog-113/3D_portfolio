@@ -43,10 +43,12 @@
 #define IDB_BITMAP_X                    347
 #define IDB_BITMAP_Y                    348
 #define IDB_BITMAP_Z                    349
-#define IDB_BITMAP_WIDTH                350
-#define IDB_BITMAP_HEIGHT               351
 #define IDB_BITMAP_SPEED                355
 #define IDB_BITMAP_ANIMSPEED            356
+#define IDB_BITMAP_MAXINDEXX            358
+#define IDB_BITMAP_MAXINDEXY            359
+#define IDB_BITMAP_TILING_X             360
+#define IDB_BITMAP_TILING_Y             361
 #define IDC_MFCBUTTON1                  1001
 #define IDC_TREE1                       1002
 #define IDC_MFCBUTTON2                  1004
@@ -152,14 +154,24 @@
 #define IDC_EDIT15                      1104
 #define IDC_EDIT16                      1105
 #define IDC_LIST1                       1106
+#define IDC_BUTTON46                    1107
+#define IDC_BUTTON47                    1109
+#define IDC_BUTTON48                    1110
+#define IDC_EDIT17                      1111
+#define IDC_EDIT18                      1112
+#define IDC_SPIN15                      1113
+#define IDC_SPIN16                      1114
+#define IDC_BUTTON49                    1115
+#define IDC_BUTTON50                    1116
+#define IDC_BUTTON51                    1117
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        357
+#define _APS_NEXT_RESOURCE_VALUE        362
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1107
+#define _APS_NEXT_CONTROL_VALUE         1114
 #define _APS_NEXT_SYMED_VALUE           311
 #endif
 #endif
