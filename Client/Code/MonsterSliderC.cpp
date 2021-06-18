@@ -31,6 +31,7 @@ void CMonsterSliderC::Start(SP(CComponent) spThis)
 	__super::Start(spThis);
 	m_sliderOwner = static_cast<Engine::CSlider*>(GetOwner());
 	m_bWhiteCheck = true;
+	m_speed = 8;
 }
 
 void CMonsterSliderC::FixedUpdate(SP(CComponent) spThis)
@@ -48,8 +49,11 @@ void CMonsterSliderC::Update(SP(CComponent) spThis)
 		}
 		else if (!m_bWhiteCheck)
 		{
-			m_sliderOwner->SetValue(m_sliderOwner->GetValue() - GET_DT * 5);
+			
 		}
+
+		m_sliderOwner->SetValue(m_sliderOwner->GetValue() - GET_DT * m_speed);
+		std::cout << m_sliderOwner->GetValue() << std::endl;
 	}
 }
 

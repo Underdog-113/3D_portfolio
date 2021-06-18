@@ -27,5 +27,6 @@ private:
 	GETTOR_SETTOR(Engine::CSlider*, m_monsterSlider, nullptr, MonsterSlider);
 
 	_bool m_bWhiteCheck;
+	_float m_speed;
 };
 #endif
