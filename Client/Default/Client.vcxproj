@@ -190,6 +190,7 @@
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />

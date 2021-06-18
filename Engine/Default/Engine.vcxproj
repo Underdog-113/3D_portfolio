@@ -39,7 +39,6 @@
     <ClInclude Include="..\Header\DataStore.h" />
     <ClInclude Include="..\Header\DebugC.h" />
     <ClInclude Include="..\Header\DebugObject.h" />
-    <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\DeferredBlendShader.h" />
     <ClInclude Include="..\Header\DeferredLightShader.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
@@ -140,7 +139,6 @@
     <ClCompile Include="..\Code\DataStore.cpp" />
     <ClCompile Include="..\Code\DebugC.cpp" />
     <ClCompile Include="..\Code\DebugObject.cpp" />
-    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DeferredBlendShader.cpp" />
     <ClCompile Include="..\Code\DeferredLightShader.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
