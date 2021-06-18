@@ -247,6 +247,9 @@
     <Filter Include="02.Objects\06.AttackBall">
       <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\09.MonsterSlider">
+      <UniqueIdentifier>{4df59e10-5cba-48dd-b315-8421ae81eb86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -525,6 +528,9 @@
     <ClInclude Include="..\Header\AttackBall.h">
       <Filter>02.Objects\06.AttackBall</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MonsterSlider.h">
+      <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -757,6 +763,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\AttackBall.cpp">
       <Filter>02.Objects\06.AttackBall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterSlider.cpp">
+      <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
