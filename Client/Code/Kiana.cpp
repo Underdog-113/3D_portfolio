@@ -14,6 +14,7 @@
 #include "Kiana_CatPaw_Atk04.h"
 #include "Kiana_CatPaw_Atk05.h"
 
+#include "AttackBall.h"
 
 CKiana::CKiana()
 {
@@ -47,6 +48,7 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
+	
 	return spClone;
 }
 
@@ -55,6 +57,7 @@ void CKiana::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_KianaC>();
+	
 }
 
 void CKiana::Start(void)
@@ -219,6 +222,7 @@ void CKiana::UseUltraCost(void)
 
 void CKiana::SetBasicName(void)
 {
+	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
 void CKiana::UltraAtk(UltraAttack index)
