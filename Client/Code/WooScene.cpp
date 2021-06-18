@@ -81,7 +81,7 @@ void CWooScene::Start(void)
 		Load->TextLoad(this);
 		delete(Load);
 
-		srand((_uint)time(NULL));
+		srand((_uint)time((NULL)));
 
 		CBattleUiManager::GetInstance()->Start(this);
 
@@ -288,8 +288,18 @@ void CWooScene::SicklePattern0()
 			m_fsm->ChangeState(Name_Sickle_StandBy);
 			m_sicklePattern0 = false;
 
+			_uint index = rand() % 3 + 1;
+
 			// 랜덤으로 공격 패턴 정함
-			m_sicklePattern3 = true;
+			switch (index)
+			{
+			case 1:
+				m_sicklePattern1 = true;
+				break;
+			case 3:
+				m_sicklePattern3 = true;
+				break;
+			}
 		}
 		
 		// 공격1 상태고, 애니가 끝났다면 
