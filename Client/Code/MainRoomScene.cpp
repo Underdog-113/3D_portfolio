@@ -95,10 +95,6 @@ void CMainRoomScene::OnDisable(void)
 
 }
 
-void CMainRoomScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
 
 void CMainRoomScene::InitPrototypes(void)
 {

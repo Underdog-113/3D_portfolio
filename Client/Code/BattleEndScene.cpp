@@ -95,10 +95,6 @@ void CBattleEndScene::OnDisable(void)
 
 }
 
-void CBattleEndScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
 
 void CBattleEndScene::InitPrototypes(void)
 {

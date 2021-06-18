@@ -97,10 +97,6 @@ void CPartySettingScene::OnDisable(void)
 
 }
 
-void CPartySettingScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
 
 void CPartySettingScene::InitPrototypes(void)
 {

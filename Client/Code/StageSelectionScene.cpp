@@ -81,7 +81,6 @@ void CStageSelectionScene::LateUpdate(void)
 void CStageSelectionScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void CStageSelectionScene::OnEnable(void)
@@ -94,11 +93,6 @@ void CStageSelectionScene::OnDisable(void)
 {
 	__super::OnDisable();
 
-}
-
-void CStageSelectionScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
 }
 
 void CStageSelectionScene::InitPrototypes(void)

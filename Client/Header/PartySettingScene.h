@@ -25,14 +25,12 @@ public:
 					void				OnEnable			(void) override;	 
 					void				OnDisable			(void) override;
 
-					void				ChangeScene			(CClientScene* pScene);
 private:
 	void DataInit();
 
 private:
 					void				InitPrototypes		(void) override;
 
-	GETTOR			(CLoading*,			m_pLoading,				nullptr,		Loading)
 };
 
 #endif
