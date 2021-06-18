@@ -128,7 +128,7 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSkyBox);
 
-	SP(Engine::CDecoObject) spDecoObject(Engine::CDecoObject::Create(true, this));
+	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spDecoObject);
 
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));

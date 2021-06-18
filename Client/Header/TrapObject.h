@@ -1,20 +1,19 @@
-#ifndef DECOOBJECT_H
-#define DECOOBJECT_H
+#ifndef TRAPOBJECT_H
+#define TRAPOBJECT_H
 
 #include "Object.h"
 
-BEGIN(Engine)
-class ENGINE_DLL CDecoObject final : public CObject
+class CTrapObject final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 private:
-	explicit						CDecoObject			(void);
-								   ~CDecoObject			(void);
+	explicit						CTrapObject			(void);
+								   ~CTrapObject			(void);
 
 public:
-	static		SP(CDecoObject)		Create				(_bool isStatic, CScene* pScene);
+	static		SP(CTrapObject)		Create				(_bool isStatic, Engine::CScene* pScene);
 
-				SP(CObject)			MakeClone			(void) override;
+				SP(Engine::CObject)	MakeClone			(void) override;
 		
 				void				Awake				(void) override;
 				void				Start				(void) override;
@@ -42,9 +41,10 @@ private:
 private:
 	static		_uint				m_s_uniqueID;
 
-	GETTOR		(SP(CMeshC),		m_spMesh,			nullptr,	Mesh)
-	GETTOR		(SP(CTextureC),		m_spTexture,		nullptr,	Texture)
-	GETTOR		(SP(CGraphicsC),	m_spGraphics,		nullptr,	Graphics)
+	GETTOR		(SP(Engine::CMeshC),		m_spMesh,			nullptr,	Mesh)
+	GETTOR		(SP(Engine::CTextureC),		m_spTexture,		nullptr,	Texture)
+	GETTOR		(SP(Engine::CGraphicsC),	m_spGraphics,		nullptr,	Graphics)
+
+	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
 };
-END
 #endif

@@ -1,8 +1,7 @@
-#include "EngineStdafx.h"
+#include "stdafx.h"
 #include "DecoObject.h"
 
 
-USING(Engine)
 _uint CDecoObject::m_s_uniqueID = 0;
 CDecoObject::CDecoObject()
 {
@@ -14,9 +13,9 @@ CDecoObject::~CDecoObject()
 	OnDestroy();
 }
 
-SP(CDecoObject) CDecoObject::Create(_bool isStatic, CScene * pScene)
+SP(CDecoObject) CDecoObject::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CDecoObject) spInstance(new CDecoObject, SmartDeleter<CDecoObject>);
+	SP(CDecoObject) spInstance(new CDecoObject, Engine::SmartDeleter<CDecoObject>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -24,15 +23,15 @@ SP(CDecoObject) CDecoObject::Create(_bool isStatic, CScene * pScene)
 	return spInstance;
 }
 
-SP(CObject) CDecoObject::MakeClone(void)
+SP(Engine::CObject) CDecoObject::MakeClone(void)
 {
-	SP(CDecoObject) spClone(new CDecoObject, SmartDeleter<CDecoObject>);
+	SP(CDecoObject) spClone(new CDecoObject, Engine::SmartDeleter<CDecoObject>);
 	__super::InitClone(spClone);
 
-	spClone->m_spTransform	= spClone->GetComponent<CTransformC>();
-	spClone->m_spMesh		= spClone->GetComponent<CMeshC>();
-	spClone->m_spTexture	= spClone->GetComponent<CTextureC>();
-	spClone->m_spGraphics	= spClone->GetComponent<CGraphicsC>();
+	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spMesh		= spClone->GetComponent<Engine::CMeshC>();
+	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
 
 	return spClone;
 }
@@ -41,14 +40,14 @@ void CDecoObject::Awake(void)
 {
 	__super::Awake();
 
-	m_layerID	= (_int)ELayerID::Decoration;
+	m_layerID	= (_int)Engine::ELayerID::Decoration;
 	m_dataID	= UNDEFINED;
 
 	m_addExtra = true;
 
-	m_spMesh		= AddComponent<CMeshC>();
-	m_spTexture		= AddComponent<CTextureC>();
-	m_spGraphics	= AddComponent<CGraphicsC>();
+	m_spMesh		= AddComponent<Engine::CMeshC>();
+	m_spTexture		= AddComponent<Engine::CTextureC>();
+	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
 }
 
 void CDecoObject::Start(void)

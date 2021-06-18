@@ -46,84 +46,6 @@
     <Filter Include="05.DeleGate">
       <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\01.MapObject">
-      <UniqueIdentifier>{1aed8968-743a-41bb-bd4b-c90e7b4a9d44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster">
-      <UniqueIdentifier>{211598c1-eb0b-4768-907e-f8852aceae34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Spider">
-      <UniqueIdentifier>{c018753b-4459-4729-9aa1-f124989a2513}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Spider\FSM">
-      <UniqueIdentifier>{7522bdb1-bd70-4493-a8f5-8c6c3a6056e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Lancer">
-      <UniqueIdentifier>{bb69a5fb-20de-4a03-ab41-683c5fd6e336}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Lancer\FSM">
-      <UniqueIdentifier>{4e0ba9d9-963e-475a-8210-13967c4f6c64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Robot">
-      <UniqueIdentifier>{ba62fde9-0141-45f2-af69-39aa74f7a62f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Robot\FSM">
-      <UniqueIdentifier>{3b0a3ddb-d67a-4b37-990b-dc1a93a8327e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Axe">
-      <UniqueIdentifier>{0799b1ba-0a55-4c92-a407-982145d97033}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Axe\FSM">
-      <UniqueIdentifier>{3eaf9202-679f-4a20-be62-eb8cb514651f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MB_Ganesha">
-      <UniqueIdentifier>{2fa8eab6-5f66-4214-95e7-63aa87abeea0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MB_Ganesha\FSM">
-      <UniqueIdentifier>{bff33868-824f-4a3e-b8ff-9da142bd33df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MB_Bronya">
-      <UniqueIdentifier>{199e26cf-2e27-428b-aeee-038a13fbf1b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MB_Bronya\FSM">
-      <UniqueIdentifier>{a2a6ee26-793f-4a1d-a827-953fe02c31ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Ninza">
-      <UniqueIdentifier>{253154c8-bf6c-479a-8074-94a34e30d62b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Ninza\FSM">
-      <UniqueIdentifier>{786bfeb7-e733-441b-8308-4c6105746e6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Scout">
-      <UniqueIdentifier>{974ca1cf-b207-48aa-8298-c5b132ab2142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Scout\FSM">
-      <UniqueIdentifier>{d43ade6f-b909-4463-82fd-080a74f138fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie">
-      <UniqueIdentifier>{aae8ad2c-f49d-44a2-967c-9c648d86446d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\00.Kiana">
-      <UniqueIdentifier>{5ffef45e-d9f4-4bc7-9dbe-4f404826fa7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\02.Sakura">
-      <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.UI">
-      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.UI\00.Button">
-      <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.UI\01.ScrollView">
-      <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\05.Effect">
-      <UniqueIdentifier>{aac3962e-7511-4415-aac9-726e31ebc547}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\05.Effect\02.Particle">
-      <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component">
       <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
     </Filter>
@@ -169,17 +91,11 @@
     <Filter Include="01.Scene\09.PartySettingScene">
       <UniqueIdentifier>{30860560-a729-4718-abad-bf80d65e2ecf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\CatPaw">
-      <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI\03.Timer">
       <UniqueIdentifier>{74ab1825-01ae-44ed-a11d-f1acc8db8642}</UniqueIdentifier>
     </Filter>
     <Filter Include="09.Manager">
       <UniqueIdentifier>{aaee55bd-5edf-4507-bcc2-29434ee64096}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.UI\00.Button\00.ButtonFunction">
-      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
     </Filter>
     <Filter Include="09.Manager\00.ButtonManager">
       <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
@@ -196,18 +112,6 @@
     <Filter Include="03.Component\00.UI\05.LifeObject">
       <UniqueIdentifier>{b63dddbc-67bd-4f8e-852f-ea09381d74a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Sickle">
-      <UniqueIdentifier>{4cd5a533-956a-4dc9-8808-8a4f78b305f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Monster\MO_Sickle\FSM">
-      <UniqueIdentifier>{8ed4d699-c3c9-422d-a26b-23bd53bdddb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\Pistol">
-      <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\01.Theresa">
-      <UniqueIdentifier>{a72f1c22-594a-4366-ad8a-6a4d215d293e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI\06.SkillCollTime">
       <UniqueIdentifier>{e5d81b2f-c56b-45ec-a322-15466f1bebda}</UniqueIdentifier>
     </Filter>
@@ -216,18 +120,6 @@
     </Filter>
     <Filter Include="03.Component\00.UI\08.BattleRenunciation">
       <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\01.Theresa\FSM">
-      <UniqueIdentifier>{869cc9cd-0cc6-40e1-8084-403e767a79bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\FSM">
-      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\05.Effect\01.MeshEffect">
-      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\05.Effect\01.MeshEffect\00.AttackTrail">
-      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
     </Filter>
     <Filter Include="09.Manager\02.DataManager">
       <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
@@ -244,8 +136,134 @@
     <Filter Include="98.Include\ClientStructure_Status">
       <UniqueIdentifier>{81dd6d3b-81d0-4830-ab34-47c2f9aafe29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\06.AttackBall">
+    <Filter Include="02.Objects\00.ForScene">
+      <UniqueIdentifier>{e4188c05-d30b-4b62-b385-9ed72d4ddf71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\00.DecoObject">
+      <UniqueIdentifier>{7b7fc362-4064-4f6f-9b0f-7f3797d96661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\01.MapObject">
+      <UniqueIdentifier>{1aed8968-743a-41bb-bd4b-c90e7b4a9d44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit">
+      <UniqueIdentifier>{b8153a4e-6fa3-47ee-bf23-55a3bca49a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI">
+      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI\00.Button">
+      <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI\00.Button\00.ButtonFunction">
+      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI\01.ScrollView">
+      <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect">
+      <UniqueIdentifier>{aac3962e-7511-4415-aac9-726e31ebc547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\02.Particle">
+      <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect">
+      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail">
+      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\02.TrapObject">
+      <UniqueIdentifier>{21b389d3-bc77-49f1-8891-166f0eaa6f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\03.PhaseChanger">
+      <UniqueIdentifier>{1d797f47-aba1-4cf8-a19a-a04fa50dd691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie">
+      <UniqueIdentifier>{aae8ad2c-f49d-44a2-967c-9c648d86446d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana">
+      <UniqueIdentifier>{5ffef45e-d9f4-4bc7-9dbe-4f404826fa7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw">
+      <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol">
+      <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\FSM">
+      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura">
+      <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa">
+      <UniqueIdentifier>{a72f1c22-594a-4366-ad8a-6a4d215d293e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM">
+      <UniqueIdentifier>{869cc9cd-0cc6-40e1-8084-403e767a79bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster">
+      <UniqueIdentifier>{211598c1-eb0b-4768-907e-f8852aceae34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider">
+      <UniqueIdentifier>{c018753b-4459-4729-9aa1-f124989a2513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM">
+      <UniqueIdentifier>{7522bdb1-bd70-4493-a8f5-8c6c3a6056e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer">
+      <UniqueIdentifier>{bb69a5fb-20de-4a03-ab41-683c5fd6e336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM">
+      <UniqueIdentifier>{4e0ba9d9-963e-475a-8210-13967c4f6c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot">
+      <UniqueIdentifier>{ba62fde9-0141-45f2-af69-39aa74f7a62f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM">
+      <UniqueIdentifier>{3b0a3ddb-d67a-4b37-990b-dc1a93a8327e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Axe">
+      <UniqueIdentifier>{0799b1ba-0a55-4c92-a407-982145d97033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM">
+      <UniqueIdentifier>{3eaf9202-679f-4a20-be62-eb8cb514651f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha">
+      <UniqueIdentifier>{2fa8eab6-5f66-4214-95e7-63aa87abeea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM">
+      <UniqueIdentifier>{bff33868-824f-4a3e-b8ff-9da142bd33df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya">
+      <UniqueIdentifier>{199e26cf-2e27-428b-aeee-038a13fbf1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM">
+      <UniqueIdentifier>{a2a6ee26-793f-4a1d-a827-953fe02c31ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza">
+      <UniqueIdentifier>{253154c8-bf6c-479a-8074-94a34e30d62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM">
+      <UniqueIdentifier>{786bfeb7-e733-441b-8308-4c6105746e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout">
+      <UniqueIdentifier>{974ca1cf-b207-48aa-8298-c5b132ab2142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM">
+      <UniqueIdentifier>{d43ade6f-b909-4463-82fd-080a74f138fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle">
+      <UniqueIdentifier>{4cd5a533-956a-4dc9-8808-8a4f78b305f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM">
+      <UniqueIdentifier>{8ed4d699-c3c9-422d-a26b-23bd53bdddb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\02.AttackBall">
       <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\04.Item">
+      <UniqueIdentifier>{777bc2af-ce9b-40d5-9e08-d9195d7c1e71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -304,73 +322,73 @@
       <Filter>01.Scene\00.InitScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Monster.h">
-      <Filter>02.Objects\03.Monster</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_SpiderC.h">
-      <Filter>02.Objects\03.Monster\MO_Spider\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Spider.h">
-      <Filter>02.Objects\03.Monster\MO_Spider</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Robot.h">
-      <Filter>02.Objects\03.Monster\MO_Robot</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Axe.h">
-      <Filter>02.Objects\03.Monster\MO_Axe</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MB_Ganesha.h">
-      <Filter>02.Objects\03.Monster\MB_Ganesha</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MB_Bronya.h">
-      <Filter>02.Objects\03.Monster\MB_Bronya</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Ninza.h">
-      <Filter>02.Objects\03.Monster\MO_Ninza</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Scout.h">
-      <Filter>02.Objects\03.Monster\MO_Scout</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Monster.h">
       <Filter>02.Objects\Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_ScoutC.h">
-      <Filter>02.Objects\03.Monster\MO_Scout\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_RobotC.h">
-      <Filter>02.Objects\03.Monster\MO_Robot\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_NinzaC.h">
-      <Filter>02.Objects\03.Monster\MO_Ninza\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Lancer.h">
-      <Filter>02.Objects\03.Monster\MO_Lancer</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_LancerC.h">
-      <Filter>02.Objects\03.Monster\MO_Lancer\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_AxeC.h">
-      <Filter>02.Objects\03.Monster\MO_Axe\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_GaneshaC.h">
-      <Filter>02.Objects\03.Monster\MB_Ganesha\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_BronyaC.h">
-      <Filter>02.Objects\03.Monster\MB_Bronya\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DeleGate.h">
       <Filter>05.DeleGate</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Valkyrie.h">
-      <Filter>02.Objects\02.Valkyrie</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Button.h">
-      <Filter>02.Objects\04.UI\00.Button</Filter>
+      <Filter>02.Objects\02.UI\00.Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ScrollViewObject.h">
-      <Filter>02.Objects\04.UI\01.ScrollView</Filter>
+      <Filter>02.Objects\02.UI\01.ScrollView</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonManager.h">
       <Filter>09.Manager\00.ButtonManager</Filter>
@@ -379,7 +397,7 @@
       <Filter>01.Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_KianaC.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\UiAnimCtrC.h">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
@@ -409,7 +427,7 @@
       <Filter>03.Component\00.UI\01.DamageFont</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonFunction.h">
-      <Filter>02.Objects\04.UI\00.Button\00.ButtonFunction</Filter>
+      <Filter>02.Objects\02.UI\00.Button\00.ButtonFunction</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DataLoad.h">
       <Filter>06.DataLoad</Filter>
@@ -418,22 +436,22 @@
       <Filter>08.ObjectPool\DamageObjectPool</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Kiana.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RotationUiC.h">
       <Filter>03.Component\00.UI\02.RotationUi</Filter>
@@ -451,28 +469,28 @@
       <Filter>98.Include</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MO_Sickle.h">
-      <Filter>02.Objects\03.Monster\MO_Sickle</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_SickleC.h">
-      <Filter>02.Objects\03.Monster\MO_Sickle\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Axe.h">
-      <Filter>02.Objects\03.Monster\MO_Axe\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Spider.h">
-      <Filter>02.Objects\03.Monster\MO_Spider\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Sickle.h">
-      <Filter>02.Objects\03.Monster\MO_Sickle\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Pistol_USP45.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\Pistol</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Theresa.h">
-      <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SkillCollTimcC.h">
       <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
@@ -487,13 +505,13 @@
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MapObject.h">
-      <Filter>02.Objects\01.MapObject</Filter>
+      <Filter>02.Objects\00.ForScene\01.MapObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshEffect_Client.h">
-      <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AttackTrail_Client.h">
-      <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DataManager.h">
       <Filter>09.Manager\02.DataManager</Filter>
@@ -505,7 +523,7 @@
       <Filter>01.Scene\06.OneStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_TheresaC.h">
-      <Filter>02.Objects\02.Valkyrie\01.Theresa\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StatusDealer.h">
       <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
@@ -523,7 +541,19 @@
       <Filter>98.Include\ClientStructure_Status</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AttackBall.h">
-      <Filter>02.Objects\06.AttackBall</Filter>
+      <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DecoObject.h">
+      <Filter>02.Objects\00.ForScene\00.DecoObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TrapObject.h">
+      <Filter>02.Objects\00.ForScene\02.TrapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PhaseChanger.h">
+      <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Item.h">
+      <Filter>02.Objects\04.Item</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Include_Valkyrie.h">
       <Filter>01.Scene\01.StaticScene</Filter>
@@ -564,73 +594,73 @@
       <Filter>01.Scene\00.InitScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
-      <Filter>02.Objects\03.Monster</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_SpiderC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Spider\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Spider.cpp">
-      <Filter>02.Objects\03.Monster\MO_Spider</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Robot.cpp">
-      <Filter>02.Objects\03.Monster\MO_Robot</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Axe.cpp">
-      <Filter>02.Objects\03.Monster\MO_Axe</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MB_Ganesha.cpp">
-      <Filter>02.Objects\03.Monster\MB_Ganesha</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MB_Bronya.cpp">
-      <Filter>02.Objects\03.Monster\MB_Bronya</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Ninza.cpp">
-      <Filter>02.Objects\03.Monster\MO_Ninza</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Scout.cpp">
-      <Filter>02.Objects\03.Monster\MO_Scout</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02.Objects\Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_ScoutC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Scout\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_RobotC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Robot\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_NinzaC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Ninza\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Lancer.cpp">
-      <Filter>02.Objects\03.Monster\MO_Lancer</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_LancerC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Lancer\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_AxeC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Axe\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_GaneshaC.cpp">
-      <Filter>02.Objects\03.Monster\MB_Ganesha\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_BronyaC.cpp">
-      <Filter>02.Objects\03.Monster\MB_Bronya\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DeleGate.cpp">
       <Filter>05.DeleGate</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Valkyrie.cpp">
-      <Filter>02.Objects\02.Valkyrie</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Button.cpp">
-      <Filter>02.Objects\04.UI\00.Button</Filter>
+      <Filter>02.Objects\02.UI\00.Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ScrollViewObject.cpp">
-      <Filter>02.Objects\04.UI\01.ScrollView</Filter>
+      <Filter>02.Objects\02.UI\01.ScrollView</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonManager.cpp">
       <Filter>09.Manager\00.ButtonManager</Filter>
@@ -639,7 +669,7 @@
       <Filter>01.Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_KianaC.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\UiAnimCtrC.cpp">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
@@ -663,7 +693,7 @@
       <Filter>03.Component\00.UI\01.DamageFont</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonFunction.cpp">
-      <Filter>02.Objects\04.UI\00.Button\00.ButtonFunction</Filter>
+      <Filter>02.Objects\02.UI\00.Button\00.ButtonFunction</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageObjectPool.cpp">
       <Filter>08.ObjectPool\DamageObjectPool</Filter>
@@ -672,19 +702,19 @@
       <Filter>06.DataLoad</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\CatPaw</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RotationUiC.cpp">
       <Filter>03.Component\00.UI\02.RotationUi</Filter>
@@ -702,19 +732,19 @@
       <Filter>03.Component\00.UI\03.Timer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Sickle.cpp">
-      <Filter>02.Objects\03.Monster\MO_Sickle</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_SickleC.cpp">
-      <Filter>02.Objects\03.Monster\MO_Sickle\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\Pistol</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Theresa.cpp">
-      <Filter>02.Objects\02.Valkyrie\01.Theresa</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SkillCollTimcC.cpp">
       <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
@@ -726,13 +756,13 @@
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MapObject.cpp">
-      <Filter>02.Objects\01.MapObject</Filter>
+      <Filter>02.Objects\00.ForScene\01.MapObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshEffect_Client.cpp">
-      <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AttackTrail_Client.cpp">
-      <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DataManager.cpp">
       <Filter>09.Manager\02.DataManager</Filter>
@@ -744,7 +774,7 @@
       <Filter>01.Scene\06.OneStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_TheresaC.cpp">
-      <Filter>02.Objects\02.Valkyrie\01.Theresa\FSM</Filter>
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StatusDealer.cpp">
       <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
@@ -756,10 +786,22 @@
       <Filter>97.TempClass_ForDevelop</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AttackBall.cpp">
-      <Filter>02.Objects\06.AttackBall</Filter>
+      <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StageSelectionScene.cpp">
       <Filter>01.Scene\04.StageSelectionScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DecoObject.cpp">
+      <Filter>02.Objects\00.ForScene\00.DecoObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TrapObject.cpp">
+      <Filter>02.Objects\00.ForScene\02.TrapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PhaseChanger.cpp">
+      <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Item.cpp">
+      <Filter>02.Objects\04.Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
