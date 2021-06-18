@@ -262,6 +262,9 @@
     <Filter Include="02.Objects\01.ForUnit\02.AttackBall">
       <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\04.Item">
+      <UniqueIdentifier>{777bc2af-ce9b-40d5-9e08-d9195d7c1e71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -549,6 +552,9 @@
     <ClInclude Include="..\Header\PhaseChanger.h">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Item.h">
+      <Filter>02.Objects\04.Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -790,6 +796,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PhaseChanger.cpp">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Item.cpp">
+      <Filter>02.Objects\04.Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
