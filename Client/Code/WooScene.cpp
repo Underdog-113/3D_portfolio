@@ -7,6 +7,7 @@
 #include "StageControlTower.h"
 #include "AniCtrl.h"
 
+/* for.Monster */
 #include "FSM_SpiderC.h"
 //#include "FSMDefine_Spider.h"
 #include "MO_Spider.h"
@@ -21,6 +22,9 @@
 
 #include "FSM_KianaC.h"
 #include "Kiana.h"
+
+#include <ctime>
+/**/
 
 #include "Kiana_CatPaw_Atk01.h"
 #include "Kiana_CatPaw_Atk02.h"
@@ -77,10 +81,12 @@ void CWooScene::Start(void)
 		Load->TextLoad(this);
 		delete(Load);
 
+		srand((_uint)time(NULL));
+
 		CBattleUiManager::GetInstance()->Start(this);
 
 		{
-			SP(Engine::CObject) spEmptyObject1
+			SP(Engine::CObject) spEmptyObject1 
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
 
 			spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
@@ -225,13 +231,14 @@ void CWooScene::SicklePattern0()
 	// 상대가 공격 범위 밖이고
 	if (len > m_sickleAtkDis)
 	{
-		// 공격1 상태고, 애니가 끝났다면 
+		// 공격1 상태면
 		if (Name_Sickle_Attack_1 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
 		{
 			m_fsm->ChangeState(Name_Sickle_Walk_Back);
 			m_sicklePattern1 = false;
 			m_sicklePattern2 = true;
 		}
+		// 공격2 상태면
 		if (Name_Sickle_Attack_2 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
 		{
 			m_fsm->ChangeState(Name_Sickle_Walk_Back);

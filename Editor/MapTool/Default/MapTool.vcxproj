@@ -194,6 +194,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\EditorDefine.h" />
     <ClInclude Include="..\Header\EditorEnum.h" />
     <ClInclude Include="..\Header\EditorExtern.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\EditorScene.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
