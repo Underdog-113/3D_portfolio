@@ -155,10 +155,6 @@ void COneStageScene::OnDisable(void)
 
 }
 
-void COneStageScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
 
 void COneStageScene::Start_SetupUI(void)
 {

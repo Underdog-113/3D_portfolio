@@ -25,6 +25,7 @@ void CValkyrie::Awake(void)
 	m_spTexture = AddComponent<Engine::CTextureC>();
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	m_pAttackBall->SetOwner(this);
 }
 
 void CValkyrie::Start(void)

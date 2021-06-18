@@ -95,10 +95,6 @@ void CTwoStageScene::OnDisable(void)
 
 }
 
-void CTwoStageScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
 
 void CTwoStageScene::InitPrototypes(void)
 {

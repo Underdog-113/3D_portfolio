@@ -338,7 +338,7 @@
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
-    <ClCompile Include="..\Code\StageSlectionScene.cpp" />
+    <ClCompile Include="..\Code\StageSelectionScene.cpp" />
     <ClCompile Include="..\Code\UILinker.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\StatusDealer.cpp" />

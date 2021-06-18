@@ -653,9 +653,6 @@
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
       <Filter>01.Scene\05.ReadyToSortieScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageSlectionScene.cpp">
-      <Filter>01.Scene\04.StageSelectionScene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\ThreeStageScene.cpp">
       <Filter>01.Scene\03.ThreeStageScene</Filter>
     </ClCompile>
@@ -766,6 +763,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MonsterSliderC.cpp">
       <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageSelectionScene.cpp">
+      <Filter>01.Scene\04.StageSelectionScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

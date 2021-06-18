@@ -394,6 +394,12 @@ void CGraphicsManager::RenderAlphaBlend(void)
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
+	std::sort(m_vRenderList[(_int)ERenderID::AlphaBlend].begin(), m_vRenderList[(_int)ERenderID::AlphaBlend].end(),
+		[](CObject* pObj1, CObject* pObj2)
+	{
+		return pObj1->GetTransform()->GetCamDistance() < pObj2->GetTransform()->GetCamDistance();
+	});
+
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaBlend])
 	{
 		if (pObject->GetIsEnabled())

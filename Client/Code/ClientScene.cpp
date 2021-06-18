@@ -47,7 +47,7 @@ void CClientScene::LateUpdate(void)
 void CClientScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	
+	delete m_pLoading;
 }
 
 void CClientScene::OnEnable(void)

@@ -5,7 +5,7 @@
 #include "EmptyObject.h"
 #include "MeshEffect.h"
 #include "AttackTrail.h"
-
+#include "SoftEffect.h"
 
 CEffectToolScene::CEffectToolScene()
 {
@@ -99,4 +99,7 @@ void CEffectToolScene::InitPrototypes(void)
 
 	SP(CMeshEffect) spMeshEffect(CAttackTrail::Create(false, this));
 	ADD_PROTOTYPE(spMeshEffect);
+
+	SP(CSoftEffect) spSoftEffect(CSoftEffect::Create(false, this));
+	ADD_PROTOTYPE(spSoftEffect);
 }

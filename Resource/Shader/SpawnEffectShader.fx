@@ -11,19 +11,19 @@ float  gTime;
 float  gAlpha;
 float  gUVSpeed;
 
-texture g_DiffuseTex;
+texture gDiffuseTex;
 sampler Diffuse = sampler_state
 {
-	Texture = <g_DiffuseTex>;
+	Texture = <gDiffuseTex>;
 	FILTER = MIN_MAG_MIP_LINEAR;
 	AddressU = Wrap;
 	AddressV = Wrap;
 };
 
-texture g_AlphaTex;
+texture gAlphaTex;
 sampler AlphaTex = sampler_state
 {
-	Texture = <g_AlphaTex>;
+	Texture = <gAlphaTex>;
 	FILTER = MIN_MAG_MIP_LINEAR;
 	AddressU = Wrap;
 	AddressV = Wrap;
