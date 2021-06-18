@@ -55,51 +55,41 @@ void CSoftEffect::Start(void)
 	__super::Start();
 	m_fAlphaWidth = 1.f;
 	m_fAlphaHeight = 1.f;
-	m_xIndex = 0;
-	m_yIndex = 0;
+	m_TilingX = 0;
+	m_TilingY = 0;
 	m_fTIme = 0.f;
-	m_isPlayingAnim = false;
 }
 
 void CSoftEffect::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-
+	/*m_maxXIndex =
+	m_maxYIndex = */
 }
 
 void CSoftEffect::Update(void)
 {
 	__super::Update();
 
-	if (Engine::IMKEY_DOWN(KEY_SPACE))
-	{
-		if (m_isPlayingAnim)
-		{
-			m_isPlayingAnim = false;
-		}
-		else
-			m_isPlayingAnim = true;
-	}
-
-	if (m_isPlayingAnim)
+	if (m_AnimisPlay)
 	{
 		m_fTIme += GET_DT;
 
 		if (m_fTIme >= 0.11f)
 		{
-			m_xIndex++;
+			m_TilingX++;
 
-			if (m_xIndex > 2)
+			if (m_TilingX >= m_maxXIndex)
 			{
-				m_xIndex = 0;
+				m_TilingX = 0;
 
-				if (m_yIndex > 1)
+				if (m_TilingY >= m_maxYIndex)
 				{
-					m_yIndex = 0;
+					m_TilingY = 0;
 				}
 				else
 				{
-					m_yIndex++;
+					m_TilingY++;
 				}
 			}
 			m_fTIme = 0;
@@ -149,8 +139,8 @@ void CSoftEffect::PreRender(LPD3DXEFFECT pEffect)
 	if (!m_spTexture->GetTexData().empty())
 	{
 		m_spRectTex->PreRender(m_spGraphics, pEffect);
-		pEffect->SetInt("xIndex", m_xIndex);
-		pEffect->SetInt("yIndex", m_yIndex);
+		pEffect->SetInt("TilingX", m_TilingX);
+		pEffect->SetInt("TilingY", m_TilingY);
 		pEffect->SetFloat("gWidth", m_fAlphaWidth);
 		pEffect->SetFloat("gHeight", m_fAlphaHeight);
 	}

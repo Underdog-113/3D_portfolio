@@ -91,7 +91,12 @@ public:
 	CBitmapButton m_bmp_AlphaHeight;
 	CBitmapButton m_bmp_Speed;
 	CBitmapButton m_bmpAnimSpeed;
-
+	CBitmapButton m_bmpTilingXTitle;
+	CBitmapButton m_bmpTilingYTitle;
+	CBitmapButton m_bmpTilingX;
+	CBitmapButton m_bmpTilingY;
+	CBitmapButton m_bmpIndexX;
+	CBitmapButton m_bmpIndexY;
 #pragma endregion
 
 #pragma region EventButtonName
@@ -225,13 +230,15 @@ public:
 #pragma endregion
 
 private:
-	enum ACTION_STATE { PLAY, PAUSE, STOP, STATE_END };
+	enum ACTION_STATE { PAUSE, PLAY, STOP, STATE_END };
 	
 private:
 	CString m_ObjectTag;
 	_int m_iSelectObjectNum;
 	_int m_iRepeat;
 	_int m_iRepeatCnt;
+	_int m_iTilingX;
+	_int m_iTilingY;
 
 	_float m_fSpeed;
 	_float m_fAnimSpeed;
@@ -249,6 +256,14 @@ private:
 public:
 	afx_msg void OnLbnSelchangeEffectList();
 	CListBox m_EffectListBox;
+
+	CEdit m_edTilingX;
+	CEdit m_edTilingY;
+	afx_msg void OnDeltaposSpinTilingX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinTilingY(NMHDR *pNMHDR, LRESULT *pResult);
+	CSpinButtonCtrl m_spinTilingX;
+	CSpinButtonCtrl m_spinTilingY;
+
 };
 
 
