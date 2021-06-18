@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "StageControlTower.h"
 
+#include "InputManager.h"
+
 #include "Valkyrie.h"
 #include "UILinker.h"
 #include "StatusDealer.h"
@@ -18,16 +20,16 @@ IMPLEMENT_SINGLETON(CStageControlTower)
 
 void CStageControlTower::Awake(void)
 {
+}
+
+void CStageControlTower::Start(void)
+{
 	m_pInput = Engine::CInputManager::GetInstance();
 	m_pLinker = new CUILinker;
 	m_pDealer = new CStatusDealer;
 
 	m_pLinker->SetControlTower(this);
 	m_pDealer->SetControlTower(this);
-}
-
-void CStageControlTower::Start(void)
-{
 }
 
 
@@ -39,8 +41,8 @@ void CStageControlTower::Update(void)
 
 void CStageControlTower::OnDestroy()
 {
-	delete m_pLinker;
-	delete m_pDealer;
+	SAFE_DELETE(m_pLinker)
+	SAFE_DELETE(m_pDealer)
 }
 
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
@@ -128,6 +130,8 @@ bool CStageControlTower::CheckMoveOrder()
 		m_moveFlag |= MoveFlag_Back;
 		
 	}
+
+	m_pLinker->MoveJoyStick();	// ui interact
 
 	if (!m_moveFlag)
 		return false;
@@ -221,6 +225,8 @@ void CStageControlTower::ReserveMoveOrder()
 		m_reserveMoveFlag &= ~MoveFlag_Forward;
 		m_reserveMoveFlag |= MoveFlag_Back;		
 	}
+
+	m_pLinker->MoveJoyStick();	// ui interact
 
 	if (!m_reserveMoveFlag)
 		return;
@@ -330,9 +336,20 @@ void CStageControlTower::StageUIControl()
 	// ult cool
 
 	// player hp
-	//m_pLinker->PlayerHpSet(m_pCurActor->GetStat()->GetCurHp());
+	m_pLinker->PlayerHpSet();
 	// player sp
-	//m_pLinker->PlayerSpSet(m_pCurActor->GetStat()->GetCurSp());
+	m_pLinker->PlayerSpSet();
+
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+		m_pLinker->PlayerChange();
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+		m_pLinker->PlayerChange_Test();
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
+		m_pDealer->HpDown_Valkyrie(m_pCurActor->GetStat(), 33.f);
+
 }
 
 // 1. 새로운 애니 시작할 때 방향 고정

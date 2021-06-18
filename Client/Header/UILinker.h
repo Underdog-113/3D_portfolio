@@ -5,19 +5,21 @@
 class CStageControlTower;
 class CUILinker
 {
-	enum JoyStick_Dir { Down = 2, Left = 4, Center = 5, Right = 6, Up = 8 };
+	enum JoyStick_Dir { NoDir, LD, D, RD, L, Center, R, LU, U, RU };
 
 public:
 	CUILinker();
 	~CUILinker();
 
 public:
+	void	PlayerChange		(void);
+	void	PlayerChange_Test	(void);
 	void	PlayerHpSet			(void);
 								 
 	void	PlayerSpSet			(void);
 
 public:
-	void	MoveJoyStick		(JoyStick_Dir dir);
+	void	MoveJoyStick		();
 
 	void	Skill				(void);
 	void	Ultra				(void);

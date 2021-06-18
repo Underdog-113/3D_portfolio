@@ -20,8 +20,9 @@ public:
 public:	/* Character */
 	bool Damage_VtoM(V_Stat* pSrc, M_Stat* pDst, _float dmgRate);
 	bool Damage_MtoV(M_Stat* pSrc, V_Stat* pDst, _float dmgRate);
-	void HpUp_Solo(Chara_Stat* pSrc, _float value);
-	void HpDown_Solo(Chara_Stat* pSrc, _float value);
+
+	void HpUp_Valkyrie(V_Stat* pSrc, _float value);
+	void HpDown_Valkyrie(V_Stat* pSrc, _float value);
 
 public:	/* Valkyrie */
 	void SpUp(V_Stat* pStat, _float value);

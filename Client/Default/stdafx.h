@@ -28,6 +28,9 @@
 #include "ClientStructure.h"
 #include "ClientFunction.h"
 
+#include "ClientStructure_ValkyrieStatus.h"
+#include "ClientStructure_MonsterStatus.h"
+
 //Client Managers
 #include "ButtonManager.h"
 #include "BattleUiManager.h"

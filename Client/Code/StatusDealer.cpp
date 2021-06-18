@@ -64,7 +64,7 @@ bool CStatusDealer::Damage_MtoV(M_Stat * pSrc, V_Stat * pDst, _float dmgRate)
 	return false;
 }
 
-void CStatusDealer::HpUp_Solo(Chara_Stat * pStat, _float value)
+void CStatusDealer::HpUp_Valkyrie(V_Stat * pStat, _float value)
 {
 	_float hp = pStat->GetCurHp();
 
@@ -76,7 +76,7 @@ void CStatusDealer::HpUp_Solo(Chara_Stat * pStat, _float value)
 	pStat->SetCurHp(hp);
 }
 
-void CStatusDealer::HpDown_Solo(Chara_Stat * pStat, _float value)
+void CStatusDealer::HpDown_Valkyrie(V_Stat * pStat, _float value)
 {
 	_float hp = pStat->GetCurHp();
 

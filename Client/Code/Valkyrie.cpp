@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "..\Header\Valkyrie.h"
+#include "Valkyrie.h"
 
+#include "StageControlTower.h"
 
 CValkyrie::CValkyrie()
 {
@@ -19,6 +20,12 @@ void CValkyrie::Awake(void)
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
 	m_spTexture = AddComponent<Engine::CTextureC>();
+}
+
+void CValkyrie::Start(void)
+{
+	__super::Start();
+	m_pCT = CStageControlTower::GetInstance();
 }
 
 

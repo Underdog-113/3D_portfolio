@@ -53,9 +53,11 @@ public:
 
 					void					CreatePistol		(void);
 					void					CreateCatPaw		(void);
+					void					UseUltraCost		(void);
 					void					UltraAtk			(UltraAttack index);
 					void					UltraAtk_Ring		(UltraAttack index);
 
+					void					SetUltraMode		(bool value);;
 
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
@@ -76,9 +78,10 @@ private:
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk04,	nullptr, CatPaw_Ring_Atk04)
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk05,	nullptr, CatPaw_Ring_Atk05)
 
-	GETTOR_SETTOR	(_bool,					m_ultraMode,		false, UltraMode)
+	GETTOR			(_bool,					m_ultraMode,		false, UltraMode)
 
 private:
+
 	_mat*						m_pRightToe_World = nullptr;
 	_mat*						m_pRightToe_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pRightToe_Frame = nullptr;
@@ -93,8 +96,6 @@ private:
 
 	_mat* m_pRightHand = nullptr;
 
-	_float m_ultraTimer = 0.f;
-	_float m_ultraDuration = 8.f;
 };
 
 #endif

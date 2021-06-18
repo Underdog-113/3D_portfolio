@@ -241,6 +241,9 @@
     <Filter Include="97.TempClass_ForDevelop\StatusDealer">
       <UniqueIdentifier>{1966fe85-0f86-47ae-9684-e6e4f2457d41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98.Include\ClientStructure_Status">
+      <UniqueIdentifier>{81dd6d3b-81d0-4830-ab34-47c2f9aafe29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -509,6 +512,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\StageControlTower.h">
       <Filter>97.TempClass_ForDevelop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h">
+      <Filter>98.Include\ClientStructure_Status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h">
+      <Filter>98.Include\ClientStructure_Status</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
