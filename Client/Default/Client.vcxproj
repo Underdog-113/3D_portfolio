@@ -184,15 +184,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AttackTrail_Client.h" />
+    <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
+    <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
+    <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
+    <ClInclude Include="..\Header\DataManager.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
+    <ClInclude Include="..\Header\FSM_TheresaC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -231,6 +236,7 @@
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
+    <ClInclude Include="..\Header\MapObject.h" />
     <ClInclude Include="..\Header\MB_Bronya.h" />
     <ClInclude Include="..\Header\MB_Ganesha.h" />
     <ClInclude Include="..\Header\MeshEffect_Client.h" />
@@ -249,16 +255,19 @@
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
+    <ClInclude Include="..\Header\UILinker.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\StatusDealer.h" />
     <ClInclude Include="..\Header\Theresa.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
     <ClInclude Include="..\Header\TimerUiC.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
-    <ClInclude Include="..\Header\StageController.h" />
+    <ClInclude Include="..\Header\StageControlTower.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
+    <ClInclude Include="..\Header\Include_ForTest.h" />
     <ClInclude Include="AlphaLifeTimeC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
@@ -267,11 +276,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
+    <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
+    <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
@@ -304,6 +316,7 @@
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />
+    <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\MB_Bronya.cpp" />
     <ClCompile Include="..\Code\MB_Ganesha.cpp" />
     <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
@@ -322,14 +335,16 @@
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\StageSlectionScene.cpp" />
+    <ClCompile Include="..\Code\UILinker.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\StatusDealer.cpp" />
     <ClCompile Include="..\Code\Theresa.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
     <ClCompile Include="..\Code\TimerUiC.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
-    <ClCompile Include="..\Code\StageController.cpp" />
+    <ClCompile Include="..\Code\StageControlTower.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="AlphaLifeTimeC.cpp" />

@@ -4,6 +4,7 @@
 #define VALKYRIE_H
 #include "Object.h"
 
+class CStageControlTower;
 class CValkyrie abstract : public Engine::CObject
 {
 	SMART_DELETER_REGISTER;
@@ -16,7 +17,7 @@ public:
 	virtual		SP(Engine::CObject)			MakeClone			(void) PURE;
 
 	virtual		void						Awake				(void);
-	//virtual		void						Start				(void);
+	virtual		void						Start				(void);
 
 	//virtual		void						FixedUpdate			(void);
 	//virtual		void						Update				(void);
@@ -52,6 +53,10 @@ protected:
 protected:	
 	GETTOR			(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)
 		
+	GETTOR			(V_Stat*,					m_pStat,			nullptr,	Stat)
+	
+protected:
+	CStageControlTower*			m_pCT = nullptr;
 };
 
 #endif

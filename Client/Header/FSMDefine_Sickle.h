@@ -68,3 +68,8 @@
 #define Index_Hit_Shake					31
 #define Index_Hit_Shake_1				32
 #define Index_Defend					33
+
+
+
+
+

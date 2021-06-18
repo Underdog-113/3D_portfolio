@@ -102,8 +102,6 @@ protected:
 	GETTOR			(_mat,				m_lastWorldMat,				{},					LastWorldMatrix)
 	GETTOR			(_mat,				m_lastWorldMatNoScale,		{},					LastWorldMatrixNoScale)
 
-	GETTOR_SETTOR	(_mat*,				m_pOffsetMat,				nullptr,			OffsetMatrix)
-
 	//Mine
 	GETTOR			(_float3,			m_forward,					FORWARD_VECTOR,		Forward)
 	GETTOR			(_float3,			m_up,						UP_VECTOR,			Up)

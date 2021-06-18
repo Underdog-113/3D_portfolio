@@ -82,7 +82,7 @@ void CGraphicsManager::Render(void)
 	RenderBase();
 
 	RenderDeferred();
-	//RenderLights();
+	RenderLights();
 	RenderDeferBlend();
 
 	RenderWire();
@@ -250,7 +250,7 @@ void CGraphicsManager::RenderBase(void)
 		}
 	}
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -423,16 +423,16 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 						pEffect->Begin(&maxPass, 0);
 
-						for (_uint j = 0; j < maxPass; ++j)
-						{
-							pEffect->BeginPass(j);
+						//for (_uint j = 0; j < maxPass; ++j)
+						//{
+							pEffect->BeginPass(0);
 
 							pObject->PreRender(pEffect);
 							pObject->Render(pEffect);
 							pObject->PostRender(pEffect);
 
 							pEffect->EndPass();
-						}
+						//}
 						pEffect->End();
 					}
 				}

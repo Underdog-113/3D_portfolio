@@ -106,9 +106,6 @@
     <Filter Include="02.Objects\02.Valkyrie\00.Kiana">
       <UniqueIdentifier>{5ffef45e-d9f4-4bc7-9dbe-4f404826fa7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana">
-      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\02.Valkyrie\02.Sakura">
       <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
     </Filter>
@@ -217,20 +214,35 @@
     <Filter Include="03.Component\00.UI\07.AlphaLifeTime">
       <UniqueIdentifier>{a62f0e53-db56-4e99-a888-dfe2f40e2081}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\10.BattleVictory">
-      <UniqueIdentifier>{aeab7aee-2a3e-4174-9d35-d430288c253d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\11.BattleEnd">
-      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI\08.BattleRenunciation">
       <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\01.Theresa\FSM">
+      <UniqueIdentifier>{869cc9cd-0cc6-40e1-8084-403e767a79bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.Valkyrie\00.Kiana\FSM">
+      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\05.Effect\01.MeshEffect">
       <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\05.Effect\01.MeshEffect\00.AttackTrail">
       <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager">
+      <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\10.BattleEnd">
+      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\UILinker">
+      <UniqueIdentifier>{eac47758-5e7b-4d2f-a0af-fa0238c2173d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\StatusDealer">
+      <UniqueIdentifier>{1966fe85-0f86-47ae-9684-e6e4f2457d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Include\ClientStructure_Status">
+      <UniqueIdentifier>{81dd6d3b-81d0-4830-ab34-47c2f9aafe29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -364,10 +376,7 @@
       <Filter>01.Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSM_KianaC.h">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StageController.h">
-      <Filter>97.TempClass_ForDevelop</Filter>
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\UiAnimCtrC.h">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
@@ -474,11 +483,41 @@
     <ClInclude Include="..\Header\BattleRenunciationC.h">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MapObject.h">
+      <Filter>02.Objects\01.MapObject</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\MeshEffect_Client.h">
       <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AttackTrail_Client.h">
       <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DataManager.h">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BattleEndScene.h">
+      <Filter>01.Scene\10.BattleEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Include_ForTest.h">
+      <Filter>01.Scene\06.OneStageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_TheresaC.h">
+      <Filter>02.Objects\02.Valkyrie\01.Theresa\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StatusDealer.h">
+      <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\UILinker.h">
+      <Filter>97.TempClass_ForDevelop\UILinker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageControlTower.h">
+      <Filter>97.TempClass_ForDevelop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h">
+      <Filter>98.Include\ClientStructure_Status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h">
+      <Filter>98.Include\ClientStructure_Status</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -591,19 +630,13 @@
       <Filter>01.Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FSM_KianaC.cpp">
-      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM_Kiana</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StageController.cpp">
-      <Filter>97.TempClass_ForDevelop</Filter>
+      <Filter>02.Objects\02.Valkyrie\00.Kiana\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\UiAnimCtrC.cpp">
       <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MainRoomScene.cpp">
       <Filter>01.Scene\07.MainRoomScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\OneStageScene.cpp">
-      <Filter>01.Scene\06.OneStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
       <Filter>01.Scene\05.ReadyToSortieScene</Filter>
@@ -686,11 +719,35 @@
     <ClCompile Include="..\Code\BattleRenunciationC.cpp">
       <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\MapObject.cpp">
+      <Filter>02.Objects\01.MapObject</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\MeshEffect_Client.cpp">
       <Filter>02.Objects\05.Effect\01.MeshEffect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AttackTrail_Client.cpp">
       <Filter>02.Objects\05.Effect\01.MeshEffect\00.AttackTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DataManager.cpp">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleEndScene.cpp">
+      <Filter>01.Scene\10.BattleEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OneStageScene.cpp">
+      <Filter>01.Scene\06.OneStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_TheresaC.cpp">
+      <Filter>02.Objects\02.Valkyrie\01.Theresa\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StatusDealer.cpp">
+      <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UILinker.cpp">
+      <Filter>97.TempClass_ForDevelop\UILinker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageControlTower.cpp">
+      <Filter>97.TempClass_ForDevelop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

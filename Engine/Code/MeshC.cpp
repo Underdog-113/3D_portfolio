@@ -339,7 +339,11 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
 	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
 
-	_float3 rootMotionMoveAmount = _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
+	_float3 rootMotionMoveAmount 
+		= _float3(
+			rootChildCombMat._41,
+			rootChildCombMat._42,
+			rootChildCombMat._43);
 
 	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
 
@@ -400,7 +404,11 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
 	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
 
-	_float3 rootMotionMoveAmount = _float3(rootChildCombMat._41, rootChildCombMat._42, rootChildCombMat._43);
+	_float3 rootMotionMoveAmount = 
+		_float3(
+			rootChildCombMat._41, 
+			rootChildCombMat._42,
+			rootChildCombMat._43);
 
 	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
 

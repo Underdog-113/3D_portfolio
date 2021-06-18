@@ -18,7 +18,7 @@
 #define Delay_CreateCatPaw_Atk05 0.1f
 
 class CKiana;
-class CStageController;
+class CStageControlTower;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
 	enum Appear_Option { None, QTE };
@@ -63,7 +63,7 @@ private:
 private:
 	CKiana* m_pKiana = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
-	CStageController* m_pStageController = nullptr;
+	CStageControlTower* m_pStageControlTower = nullptr;
 	
 	Appear_Option m_appearOption = None;
 	bool m_isUltraMode = false;

@@ -216,29 +216,53 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\CelShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\MeshShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx" />
+  </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

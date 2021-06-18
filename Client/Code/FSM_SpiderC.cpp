@@ -5,7 +5,7 @@
 
 #include "AniCtrl.h"
 #include "FSMDefine_Spider.h"
-#include "StageController.h"
+#include "StageControlTower.h"
 
 CFSM_SpiderC::CFSM_SpiderC()
 {
@@ -30,7 +30,7 @@ void CFSM_SpiderC::Start(SP(CComponent) spThis)
 	__super::Start(spThis);
 
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-	m_pStageController = CStageController::GetInstance();
+	m_pStageControlTower = CStageControlTower::GetInstance();
 
 	SetStartState(Name_Born);
 	m_curState->DoEnter();

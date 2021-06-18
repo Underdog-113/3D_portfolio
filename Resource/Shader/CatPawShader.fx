@@ -87,8 +87,8 @@ float4 ps_main(PS_INPUT Input) : COLOR
 	// ºûÀÇ °­µµ
 	float intensity = dot(normalize(gWorldLightPosition), Input.mUV);
 
-if (intensity < 0)
-	intensity = 0;
+	if (intensity < 0)
+		intensity = 0;
 
 	float4 albedo = tex2D(Diffuse, Input.mUV) * gDiffuseColor * gDiffuseIntensity;
 	albedo.a = 1;
@@ -102,7 +102,7 @@ if (intensity < 0)
 	float rim = saturate(abs(dot(Input.mNormal, gViewDir)));
 	float3 Emission = pow(1 - rim, gRimPower) * gRImColor.rgb;
 
-	return float4(albedo * diffuse.xyz, 1) ;
+	return float4(albedo * diffuse.xyz, 1);
 }
 
 

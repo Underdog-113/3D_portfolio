@@ -3,6 +3,7 @@
 
 #include "ClientScene.h"
 class CLoading;
+class CStageControlTower;
 class COneStageScene final :public CClientScene
 {
 private:
@@ -29,9 +30,20 @@ public:
 	void				ChangeScene(CClientScene* pScene);
 
 private:
+	void				Start_SetupUI(void);
+	void				Start_SetupMembers(void);
 	void				InitPrototypes(void) override;
 
+
+
 	GETTOR(CLoading*, m_pLoading, nullptr, Loading)
+
+
+private:
+	CStageControlTower* m_pController = nullptr;
+
+	SP(Engine::CObject) m_spValkyrie;
+	SP(Engine::CObject) m_spSpider;
 };
 
 #endif

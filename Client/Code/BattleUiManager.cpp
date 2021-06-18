@@ -13,10 +13,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
 
 	m_keyPad = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_KeyPad_0").get());
-	m_keyPad->GetTexture()->AddTexture(L"JoyStick_W", 0);
-	m_keyPad->GetTexture()->AddTexture(L"JoyStick_A", 0);
-	m_keyPad->GetTexture()->AddTexture(L"JoyStick_D", 0);
-	m_keyPad->GetTexture()->AddTexture(L"JoyStick_S", 0);
+	m_keyPad->GetTexture()->AddTexture(L"JoyStick_Move", 0);
 
 	m_time = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_Time_4").get());
 	m_time->AddComponent<CTimerUiC>();
@@ -90,6 +87,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_giveUpCanvas->AddObjectFind();
 	m_giveUpCanvas->SetIsEnabled(false);
 
+	m_victoryCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"VictoryCanvas").get());
+	m_victoryCanvas->AddObjectFind();
+	m_victoryCanvas->SetIsEnabled(false);
+
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
 
@@ -120,15 +121,35 @@ void CBattleUiManager::KeyPad(_int value)
 	{
 	case 8: // W
 		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(0);
+		break;
+	case 7: // W
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(45));
 		break;
 	case 4: // A
-		m_keyPad->GetTexture()->SetTexIndex(2);
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(90));
 		break;
-	case 6: // D
-		m_keyPad->GetTexture()->SetTexIndex(3);
+	case 1: // W
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(135));
 		break;
 	case 2: // S
-		m_keyPad->GetTexture()->SetTexIndex(4);
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(180));
+		break;
+	case 3: // S
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(225));
+		break;
+	case 6: // D
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(270));
+		break;
+	case 9: // S
+		m_keyPad->GetTexture()->SetTexIndex(1);
+		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(315));
 		break;
 	case 5: // 
 		m_keyPad->GetTexture()->SetTexIndex(0);
@@ -157,6 +178,11 @@ void CBattleUiManager::MonsetrState(std::wstring name, _float hp, std::wstring p
 	m_monsterProperty->GetComponent<Engine::CTextC>()->ChangeMessage(property);
 }
 
+void CBattleUiManager::MonsterStateEnd()
+{
+	m_monsterStateCanvas->SetIsEnabled(true);
+}
+
 void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2)
 {
 	m_playerIllustration[0]->GetTexture()->ChangeTexture(playerTexture1, 0);
@@ -181,6 +207,13 @@ void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstr
 
 void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, std::wstring specialSP, std::wstring skillSP)
 {
+	// 위에있는놈이랑 스왑해야한다.
+	/*
+	1. 매인 이미지 변경
+	2. 속성 변경
+	3. hp, sp변경
+	*/
+
 	PlayerHp(hpValue);
 	PlayerSp(spValue);
 
@@ -216,10 +249,13 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 
 void CBattleUiManager::TargetUI(_float3 pos, _float value)
 {
+	_float3 pos2D = pos - Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
+	pos2D.z = m_target[0]->GetTransform()->GetPosition().z;
+
 	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
 
-	m_target[0]->GetTransform()->SetPosition(pos);
-	m_target[1]->GetTransform()->SetPosition(pos);
+	m_target[0]->GetTransform()->SetPosition(pos2D);
+	m_target[1]->GetTransform()->SetPosition(pos2D);
 
 	m_monsterTargetCanvas->SetIsEnabled(true);
 }
@@ -285,9 +321,34 @@ void CBattleUiManager::PlayerSpUp(_float value)
 	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage((std::to_wstring((int)m_playerSpBar->GetValue()) + L" / " + std::to_wstring((int)m_playerSpBar->GetMaxValue())));
 }
 
-void CBattleUiManager::CollTime(_int value, _float collTime)
+bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 {
-	m_coolTimeSlider[value]->SetMaxValue(collTime);
-	m_coolTimeSlider[value]->SetValue(collTime);
+	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)
+	{
+		m_coolTimeSlider[value]->SetMaxValue(collTime);
+		m_coolTimeSlider[value]->SetValue(collTime);
+		PlayerSpDown((_float)spValue);
+	}
+	return false;
+}
+
+void CBattleUiManager::BattleEnd()
+{
+	m_monsterStateCanvas->SetIsEnabled(false);
+	m_mainCanvas->SetIsEnabled(false);
+	m_hitsCanvas->SetIsEnabled(false);
+	m_monsterTargetCanvas->SetIsEnabled(false);
+	m_giveUpCanvas->SetIsEnabled(false);
+	m_victoryCanvas->SetIsEnabled(true);
+
+
+	_float m_totalTime = m_time->GetComponent<CTimerUiC>()->GetTotalTime();
+	_int minute = (int)m_totalTime / 60;
+	_int second = (int)m_totalTime % 60;
+	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_3")->GetComponent<Engine::CTextC>()
+								->ChangeMessage(std::to_wstring(minute) + L" : " + std::to_wstring(second));
+
+	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->GetComponent<Engine::CTextC>()
+		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
 }
 
