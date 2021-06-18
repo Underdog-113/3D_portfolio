@@ -22,6 +22,8 @@ SP(CComponent) CTransformC::MakeClone(CObject* pObject)
 	spClone->SetPosition(m_position);
 	spClone->SetRotation(m_rotation);
 	spClone->SetSize(m_size);
+	spClone->SetCheckCamDistance(m_checkCamDist);
+
 	spClone->UpdateWorldMatrix();
 
 	return spClone;
@@ -67,6 +69,9 @@ void CTransformC::Update(SP(CComponent) spThis)
 void CTransformC::LateUpdate(SP(CComponent) spThis)
 {
 	UpdateWorldMatrix();
+	
+	if (m_checkCamDist)
+		UpdateCamDistance();
 }
 
 void CTransformC::OnDestroy(void)
@@ -461,7 +466,13 @@ void CTransformC::UpdateWorldMatrix(void)
 	}
 }
 
+void CTransformC::UpdateCamDistance(void)
+{
+	_float3 camPos = GET_MAIN_CAM->GetTransform()->GetPosition();
+	m_camDist = D3DXVec3LengthSq(&(camPos - m_position));
+}
+
 void CTransformC::UpdateParentMatrix(const _mat * pMat)
 {
-	m_worldMat *= *pMat;
+	m_lastWorldMat *= *pMat;
 }

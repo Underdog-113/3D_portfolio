@@ -3,7 +3,7 @@
 
 #include "ClientScene.h"
 class Engine::CObject;
-class CStageController;
+class CStageControlTower;
 class CJongScene final :public CClientScene
 {
 private:
@@ -43,7 +43,7 @@ private:
 	int num = 0;
 
 private:
-	CStageController* m_pController = nullptr;
+	CStageControlTower* m_pController = nullptr;
 };
 
 #endif

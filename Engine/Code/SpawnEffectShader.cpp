@@ -16,6 +16,7 @@ CShader * CSpawnEffectShader::Create()
 	CSpawnEffectShader* pInstance = new CSpawnEffectShader;
 	pInstance->Awake();
 
+
 	return pInstance;
 }
 
@@ -27,49 +28,46 @@ void CSpawnEffectShader::Free()
 void CSpawnEffectShader::Awake()
 {
 	__super::Awake();
+	m_fTime = 0.f;
+	m_fUVSpeed = 0.25f;
 }
 
 void CSpawnEffectShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
 	m_fTime += GET_DT;
 
-	_mat worldMat, viewMat, projMat;
+	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
 	viewMat = GET_MAIN_CAM->GetViewMatrix();
 	projMat = GET_MAIN_CAM->GetProjMatrix();
 
-	m_pEffect->SetMatrix("g_WorldMat", &worldMat);
-	m_pEffect->SetMatrix("g_ViewMat", &viewMat);
-	m_pEffect->SetMatrix("g_ProjMat", &projMat);
+	m_pEffect->SetMatrix("gWorld", &worldMat);
+	m_pEffect->SetMatrix("gView", &viewMat);
+	m_pEffect->SetMatrix("gProjection", &projMat);
 
+	WVP = worldMat * viewMat * projMat;
 
-	m_mFinalMat = worldMat * viewMat * projMat;
+	m_pEffect->SetMatrix("gWorldViewProjectionMatrix", &WVP);
 
-	// 광원의 방향
-	m_Light_Pos = D3DXVECTOR4(-0.577f, -0.577f, -0.577f, 0.f);
-	D3DXMatrixInverse(&m_mFinalMat, NULL, &worldMat);
-	D3DXVec4Transform(&m_vColor, &m_Light_Pos, &m_mFinalMat);
-	D3DXVec3Normalize((D3DXVECTOR3 *)&m_vColor, (D3DXVECTOR3 *)&m_vColor);
-	m_vColor.w = -1.f;		// 환경광 강도
+	// Get Inverse Transpose of World Matrix
+	_mat iTWM;
+	D3DXMatrixInverse(&iTWM, 0, &worldMat);
+	D3DXMatrixTranspose(&iTWM, &iTWM);
 
-	m_pEffect->SetVector("g_WorldLightPos", &m_vColor);
+	m_pEffect->SetMatrix("gInvWorldMatrix", &worldMat);
 
-	// 시점(로컬좌표계)
+	_float4 worldLightPos = _float4(500.f, 500.f, -500.f, 1.f);
 
-	m_vColor = D3DXVECTOR4(0, 0, 0, 1);
-	m_pEffect->SetVector("g_WorldCameraPos", &m_vColor);
+	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
 	SP(CTextureC) spTexture = spGC->GetTexture();
-	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
-	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
-	size_t _dwMaterials = spGC->GetMesh()->GetMeshDatas().size();
+	m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
+	m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
 
-	m_pEffect->SetVector("g_LightColor", &m_vColor);
-
-	m_pEffect->SetFloat("g_fTime", m_fTime);
-	m_pEffect->SetFloat("g_fUVSpeed", m_fUVSpeed);
+	m_pEffect->SetFloat("gTime", m_fTime);
+	m_pEffect->SetFloat("gUVSpeed", m_fUVSpeed);
 }

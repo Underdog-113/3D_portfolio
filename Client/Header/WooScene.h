@@ -3,7 +3,7 @@
 
 #include "ClientScene.h"
 
-class CStageController;
+class CStageControlTower;
 class CFSM_AxeC;
 class CFSM_SpiderC;
 class CFSM_SickleC;
@@ -34,6 +34,9 @@ private:
 	/* Spider */
 	void SpiderPattern0();
 
+	/* Sickle */
+	void SicklePattern0();
+
 	/* Axe */
 	void AxePattern0();
 	void AxePattern1();
@@ -62,7 +65,7 @@ private:
 					SP(CFSM_SickleC) m_fsm;
 					_float m_accTime = 0.f;
 
-					CStageController* m_pController = nullptr;
+					CStageControlTower* m_pController = nullptr;
 };
 
 #endif

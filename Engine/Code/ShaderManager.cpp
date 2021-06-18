@@ -19,6 +19,9 @@
 #include "CatPawShader.h"
 #include "CelShader.h"
 #include "MeshTrailShader.h"
+#include "DissolveShader.h"
+#include "SpawnEffectShader.h"
+#include "SoftEffectShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -39,6 +42,9 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CCelShader::Create());
 	m_vShaders.emplace_back(CSkyBoxShader::Create());
 	m_vShaders.emplace_back(CMeshTrailShader::Create());
+	m_vShaders.emplace_back(CDissolveShader::Create());
+	m_vShaders.emplace_back(CSpawnEffectShader::Create());
+	m_vShaders.emplace_back(CSoftEffectShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -90,6 +96,12 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::CelShader;
 	else if (shaderName == L"MeshTrailShader")
 		return (_int)EShaderID::MeshTrailShader;
+	else if (shaderName == L"DissolveShader")
+		return (_int)EShaderID::DissolveShader;
+	else if (shaderName == L"SpawnEffectShader")
+		return (_int)EShaderID::SpawnEffectShader;
+	else if (shaderName == L"SoftEffectShader")
+		return (_int)EShaderID::SoftEffectShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");

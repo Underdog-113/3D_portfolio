@@ -10,6 +10,8 @@ inline std::vector<std::string> split(std::string input, char delimiter)
 	while (getline(ss, temp, delimiter))
 		answer.push_back(temp);
 
+
+
 	return answer;
 }
 

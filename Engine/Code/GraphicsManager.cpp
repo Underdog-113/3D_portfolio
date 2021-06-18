@@ -82,7 +82,7 @@ void CGraphicsManager::Render(void)
 	RenderBase();
 
 	RenderDeferred();
-	//RenderLights();
+	RenderLights();
 	RenderDeferBlend();
 
 	RenderWire();
@@ -250,7 +250,7 @@ void CGraphicsManager::RenderBase(void)
 		}
 	}
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -394,12 +394,16 @@ void CGraphicsManager::RenderAlphaBlend(void)
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
+	std::sort(m_vRenderList[(_int)ERenderID::AlphaBlend].begin(), m_vRenderList[(_int)ERenderID::AlphaBlend].end(),
+		[](CObject* pObj1, CObject* pObj2)
+	{
+		return pObj1->GetTransform()->GetCamDistance() < pObj2->GetTransform()->GetCamDistance();
+	});
+
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaBlend])
 	{
 		if (pObject->GetIsEnabled())
 		{
-			//�׷��� ������Ʈ�� �ָ�
-			//�޽� ������Ʈ�� ���� �θƽ� ���ؽ� * Ʈ�������� ������ + ���������� �ø�
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
@@ -419,16 +423,16 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 						pEffect->Begin(&maxPass, 0);
 
-						for (_uint j = 0; j < maxPass; ++j)
-						{
-							pEffect->BeginPass(j);
+						//for (_uint j = 0; j < maxPass; ++j)
+						//{
+							pEffect->BeginPass(0);
 
 							pObject->PreRender(pEffect);
 							pObject->Render(pEffect);
 							pObject->PostRender(pEffect);
 
 							pEffect->EndPass();
-						}
+						//}
 						pEffect->End();
 					}
 				}

@@ -44,6 +44,8 @@ void CDecoObject::Awake(void)
 	m_layerID	= (_int)ELayerID::Decoration;
 	m_dataID	= UNDEFINED;
 
+	m_addExtra = true;
+
 	m_spMesh		= AddComponent<CMeshC>();
 	m_spTexture		= AddComponent<CTextureC>();
 	m_spGraphics	= AddComponent<CGraphicsC>();
@@ -71,6 +73,36 @@ void CDecoObject::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
+}
+
+void CDecoObject::PreRender(void)
+{
+	m_spMesh->PreRender(m_spGraphics);
+}
+
+void CDecoObject::PreRender(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->PreRender(m_spGraphics, pEffect);
+}
+
+void CDecoObject::Render(void)
+{
+	m_spMesh->Render(m_spGraphics);
+}
+
+void CDecoObject::Render(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->Render(m_spGraphics, pEffect);
+}
+
+void CDecoObject::PostRender(void)
+{
+	m_spMesh->PostRender(m_spGraphics);
+}
+
+void CDecoObject::PostRender(LPD3DXEFFECT pEffect)
+{
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CDecoObject::OnDestroy(void)

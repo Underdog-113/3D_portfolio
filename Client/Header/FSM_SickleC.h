@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachine.h"
 
-class CStageController;
+class CStageControlTower;
 class CFSM_SickleC final : public Engine::CStateMachineC
 {
 public:

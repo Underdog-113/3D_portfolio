@@ -5,7 +5,7 @@
 
 #include "AniCtrl.h"
 #include "FSMDefine_Axe.h"
-#include "StageController.h"
+#include "StageControlTower.h"
 
 CFSM_AxeC::CFSM_AxeC()
 {
@@ -30,7 +30,7 @@ void CFSM_AxeC::Start(SP(CComponent) spThis)
 	__super::Start(spThis);
 
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-	m_pStageController = CStageController::GetInstance();
+	m_pStageControlTower = CStageControlTower::GetInstance();
 
 	SetStartState(Name_IDLE);
 	m_curState->DoEnter();

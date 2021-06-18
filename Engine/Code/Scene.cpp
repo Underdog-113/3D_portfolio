@@ -167,6 +167,7 @@ void CScene::InitLights(void)
 	pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
 	pLightInfo->Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 
+
 	m_pLightManager->AddLight(pLightInfo);
 
 	pLightInfo = new D3DLIGHT9;

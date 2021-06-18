@@ -4,6 +4,7 @@
 #include "MeshEffect.h"
 #include "Object.h"
 #include "Layer.h"
+#include "SoftEffect.h"
 
 // CInspector
 
@@ -24,6 +25,8 @@ CInspector::CInspector()
 	m_isPlayAnim = false;
 	m_vSavePos.z = 2.f;
 	m_eActionState = STATE_END;
+	m_fAlphaWidth = 0.f;
+	m_fAlphaHeight = 0.f;
 }
 
 CInspector::~CInspector()
@@ -425,7 +428,7 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
 
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EditorScene\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -518,17 +521,22 @@ void CInspector::OnBnClickedAlphaMask()
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
 	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"Effect0");
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::SpawnEffectShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
 {
+	SP(Engine::CObject) spSoftEffect
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SoftEffect", false);
+	spSoftEffect->GetComponent<Engine::CGraphicsC>();
+	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::SoftEffectShader);
 }
 
 void CInspector::Add_Texture(CString TextureKey)
@@ -809,6 +817,21 @@ void CInspector::SettingUpdate()
 
 		m_edScaleZ.ShowWindow(false);
 		m_spinScaleZ.ShowWindow(false);
+	}
+
+	if (m_btnOptionUVSprite.GetCheck())
+	{
+		m_edAlphaWidth.ShowWindow(true);
+		m_spinAlphaWidth.ShowWindow(true);
+		m_edAlphaHeight.ShowWindow(true);
+		m_spinAlphaHeigth.ShowWindow(true);
+	}
+	else
+	{
+		m_edAlphaWidth.ShowWindow(false);
+		m_spinAlphaWidth.ShowWindow(false);
+		m_edAlphaHeight.ShowWindow(false);
+		m_spinAlphaHeigth.ShowWindow(false);
 	}
 #pragma endregion
 
@@ -1451,6 +1474,22 @@ void CInspector::OnDeltaposSpinRepeat(NMHDR *pNMHDR, LRESULT *pResult)
 void CInspector::OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	m_fAlphaWidth += pNMUpDown->iDelta * -1.f;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	pSoftEffect->SetAlphaWIdth(m_fAlphaWidth);
+
+	UpdateData(true);
+
+	CString str;
+	str.Format(L"%f", m_fAlphaWidth);
+	m_edAlphaWidth.SetWindowTextW(str.GetString());
+
+	UpdateData(false);
+
 	*pResult = 0;
 }
 
@@ -1458,6 +1497,20 @@ void CInspector::OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult)
 void CInspector::OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	m_fAlphaHeight += pNMUpDown->iDelta * -1.f;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	pSoftEffect->SetAlphaHeight(m_fAlphaHeight);
+
+	UpdateData(true);
+	CString str;
+	str.Format(L"%f", m_fAlphaHeight);
+	m_edAlphaHeight.SetWindowTextW(str.GetString());
+
+	UpdateData(false);
 
 	*pResult = 0;
 }

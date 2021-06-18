@@ -65,4 +65,9 @@ void CHitsUiC::AddHitsCount(_int value)
 {
 	m_hitsCount += value;
 	GetOwner()->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(m_hitsCount));
+
+	if (m_maxHitsCount <= m_hitsCount)
+	{
+		m_maxHitsCount = m_hitsCount;
+	}
 }

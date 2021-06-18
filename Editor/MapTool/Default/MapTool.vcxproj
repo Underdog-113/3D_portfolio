@@ -209,7 +209,6 @@
     <ClInclude Include="..\Header\MainMapTool.h" />
     <ClInclude Include="..\Header\MapToolDoc.h" />
     <ClInclude Include="..\Header\MapToolView.h" />
-    <ClInclude Include="..\Header\StageController_Editor.h" />
     <ClInclude Include="..\Header\ToolMenuView.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="Resource.h" />
@@ -225,7 +224,6 @@
     <ClCompile Include="..\Code\MainMapTool.cpp" />
     <ClCompile Include="..\Code\MapToolDoc.cpp" />
     <ClCompile Include="..\Code\MapToolView.cpp" />
-    <ClCompile Include="..\Code\StageController_Editor.cpp" />
     <ClCompile Include="..\Code\ToolMenuView.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="stdafx.cpp">
