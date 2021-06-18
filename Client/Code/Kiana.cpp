@@ -233,7 +233,7 @@ void CKiana::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
-void CKiana::UltraAtk(UltraAttack index)
+void CKiana::UltraAtk(AttackOption index)
 {
 	if (!m_ultraMode)
 		return;
@@ -298,7 +298,7 @@ void CKiana::UltraAtk(UltraAttack index)
 	}
 }
 
-void CKiana::UltraAtk_Ring(UltraAttack index)
+void CKiana::UltraAtk_Ring(AttackOption index)
 {
 	if (!m_ultraMode)
 		return;
@@ -368,4 +368,54 @@ void CKiana::SetUltraMode(bool value)
 
 	if (m_ultraMode)
 		m_pCT->GetUILinker()->Ultra();
+}
+
+SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
+{
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+
+	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
+	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
+
+	return spMeshEffect;
+}
+
+void CKiana::SetEffect(SP(Engine::CObject) spEffect, AttackOption option)
+{
+	switch (option)
+	{
+	case CKiana::ATK01:
+		m_spEffect_Attack1 = spEffect;
+		break;
+	case CKiana::ATK02:
+		m_spEffect_Attack2 = spEffect;
+		break;
+	case CKiana::ATK03:
+		m_spEffect_Attack3 = spEffect;
+		break;
+	case CKiana::ATK04:
+		m_spEffect_Attack4 = spEffect;
+		break;
+	case CKiana::ATK05:
+		m_spEffect_Attack5 = spEffect;
+		break;
+	case CKiana::Branch_ATK01:
+		break;
+	case CKiana::Branch_ATK02:
+		break;
+	case CKiana::QTE_ATK:
+		break;
+	default:
+		break;
+	}
 }

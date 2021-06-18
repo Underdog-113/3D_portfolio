@@ -143,6 +143,26 @@ void CFSM_KianaC::FixRootMotionOffset(_uint index)
 	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
 }
 
+
+void CFSM_KianaC::CreateEffect(std::wstring name)
+{
+
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+
+	spMeshEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	spMeshEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
+}
+
 bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float coolTime /*= Cool_Attack*/)
 {
 	if (Engine::IMKEY_DOWN(StageKey_Attack))
@@ -338,24 +358,6 @@ bool CFSM_KianaC::CheckAction_Ultra()
 	return false;
 }
 
-void CFSM_KianaC::CreateEffect(std::wstring name)
-{
-
-	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
-
-	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
-
-	spMeshEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	spMeshEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
-}
 
 void CFSM_KianaC::StandBy_Init(void)
 {
@@ -383,7 +385,7 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 	if (Engine::IMKEY_DOWN(StageKey_QTE))
 	{
 		ChangeState(Name_Appear);
-		m_appearOption = QTE;
+		m_appearOption = QTEAppear;
 		return;
 	}
 
@@ -434,7 +436,7 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 		case CFSM_KianaC::None:
 			ChangeState(Name_StandBy);
 			break;
-		case CFSM_KianaC::QTE:
+		case CFSM_KianaC::QTEAppear:
 			ChangeState(Name_Attack_QTE);
 			break;
 		default:
@@ -463,7 +465,9 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_checkUltraAtk = false;
 
 
-	CreateEffect(L"Kiana_Attack_0");
+	auto effect = m_pKiana->GetEffect_Attack1()->MakeClone();
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -508,7 +512,9 @@ void CFSM_KianaC::Attack_2_Enter(void)
 	m_checkUltraAtk = false;
 
 
-	CreateEffect(L"Kiana_Attack_1");
+	auto effect = m_pKiana->GetEffect_Attack2()->MakeClone();
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -548,7 +554,10 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_checkUltraAtk = false;
 
 
-	CreateEffect(L"Kiana_Attack_0");
+
+	auto effect = m_pKiana->GetEffect_Attack3()->MakeClone();
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -614,7 +623,10 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
 
-	CreateEffect(L"Kiana_Attack_3");
+
+	auto effect = m_pKiana->GetEffect_Attack4()->MakeClone();
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -678,6 +690,10 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
+
+	auto effect = m_pKiana->GetEffect_Attack5()->MakeClone();
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
