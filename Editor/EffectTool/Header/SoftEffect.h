@@ -44,11 +44,12 @@ private:
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 	GETTOR_SETTOR(_float, m_fAlphaWidth, 0.f, AlphaWIdth)
 	GETTOR_SETTOR(_float, m_fAlphaHeight, 0.f, AlphaHeight)
-
+	GETTOR_SETTOR(_int, m_maxXIndex, 0, maxXIndex)
+	GETTOR_SETTOR(_int, m_maxYIndex, 0, maxYIndex)
+	GETTOR_SETTOR(_bool, m_AnimisPlay, false, AnimisPlay)
 private:
 	_float m_fTIme;
-	_int   m_xIndex;
-	_int   m_yIndex;
-	_bool  m_isPlayingAnim;
+	_int   m_TilingX;
+	_int   m_TilingY;
 };
 

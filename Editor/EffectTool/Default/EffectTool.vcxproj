@@ -258,6 +258,8 @@
     <Image Include="res\Load.bmp" />
     <Image Include="res\Loop.bmp" />
     <Image Include="res\main_bg.bmp" />
+    <Image Include="res\maxIndexX.bmp" />
+    <Image Include="res\maxIndexY.bmp" />
     <Image Include="res\MeshEffect.bmp" />
     <Image Include="res\Option.bmp" />
     <Image Include="res\Pause.bmp" />
@@ -274,6 +276,9 @@
     <Image Include="res\Stop.bmp" />
     <Image Include="res\Texture.bmp" />
     <Image Include="res\TextureType.bmp" />
+    <Image Include="res\Tiling.bmp" />
+    <Image Include="res\TilingX.bmp" />
+    <Image Include="res\TilingY.bmp" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Transform.bmp" />
     <Image Include="res\UVAnimation.bmp" />

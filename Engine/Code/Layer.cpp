@@ -61,11 +61,11 @@ void CLayer::Update(void)
 		if (m_vGameObjects[i]->GetDeleteThis())
 			continue;
 
+		if (m_vGameObjects[i]->GetIsStarted() == false)
+			m_vGameObjects[i]->Start();
+
 		if (m_vGameObjects[i]->GetIsEnabled())
 		{
-			if (m_vGameObjects[i]->GetIsStarted() == false)
-				m_vGameObjects[i]->Start();
-
 			m_vGameObjects[i]->Update();
 		}
 	}

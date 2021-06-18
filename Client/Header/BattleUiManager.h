@@ -58,10 +58,12 @@ public:
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
 	void PlayerHp(_float value);
+	void PlayerHpMax(_float value);
 	void PlayerHpDown(_float value);
 	void PlayerHpUp(_float value);
 
 	void PlayerSp(_float value);
+	void PlayerSpMax(_float value);
 	void PlayerSpDown(_float value);
 	void PlayerSpUp(_float value);
 

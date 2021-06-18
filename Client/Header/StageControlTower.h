@@ -29,9 +29,9 @@
 #define MoveFlag_Forward 0x04
 #define MoveFlag_Back 0x08
 
+#include "StatusDealer.h"
 class CValkyrie;
 class CUILinker;
-class CStatusDealer;
 class CStageControlTower
 {
 	DECLARE_SINGLETON(CStageControlTower)

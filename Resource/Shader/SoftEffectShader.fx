@@ -2,8 +2,8 @@ matrix		g_matWorld;			// 상수 테이블
 matrix		g_matView;
 matrix		g_matProj;
 
-int xIndex;
-int yIndex;
+int TilingX;
+int TilingY;
 
 float gWidth;
 float gHeight;
@@ -56,8 +56,8 @@ VS_OUT		VS_MAIN(VS_IN In)
 	Out.vTexUV.x = Out.vTexUV.x / gWidth;
 	Out.vTexUV.y = Out.vTexUV.y / gHeight;
 
-	Out.vTexUV.x += 1 / gWidth * xIndex;
-	Out.vTexUV.y += 1 / gHeight * yIndex;
+	Out.vTexUV.x += 1 / gWidth * TilingX;
+	Out.vTexUV.y += 1 / gHeight * TilingY;
 	
 	Out.vProjPos = Out.vPosition;
 

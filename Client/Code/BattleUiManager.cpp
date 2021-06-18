@@ -249,8 +249,8 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 
 void CBattleUiManager::TargetUI(_float3 pos, _float value)
 {
-	_float3 pos2D = pos - Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
-	pos2D.z = m_target[0]->GetTransform()->GetPosition().z;
+	_float3 pos2D = Engine::GET_MAIN_CAM->WorldToScreenPoint(pos);
+	
 
 	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
 
@@ -285,6 +285,14 @@ void CBattleUiManager::PlayerHp(_float value)
 	m_playerHp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring((int)value) + L" / " + std::to_wstring((int)m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue()));
 }
 
+void CBattleUiManager::PlayerHpMax(_float value)
+{
+	for (auto object : m_playerHpBar)
+	{
+		object->SetMaxValue(value);
+	}
+}
+
 void CBattleUiManager::PlayerHpDown(_float value)
 {
 	for (auto object : m_playerHpBar)
@@ -307,6 +315,11 @@ void CBattleUiManager::PlayerSp(_float value)
 {
 	m_playerSpBar->SetValue(value);
 	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring((int)value) + L" / " + std::to_wstring((int)m_playerSpBar->GetMaxValue()));
+}
+
+void CBattleUiManager::PlayerSpMax(_float value)
+{
+	m_playerSpBar->SetMaxValue(value);
 }
 
 void CBattleUiManager::PlayerSpDown(_float value)

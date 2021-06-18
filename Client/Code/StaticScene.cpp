@@ -15,6 +15,8 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 
+#include "AttackBall.h"
+
 #include "MO_Scout.h"
 #include "MO_Ninza.h"
 #include "MO_Axe.h"
@@ -131,6 +133,9 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
+
+	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttackBall);
 	
 	InitUiPrototypes();
 	InitMonsterPrototypes();
