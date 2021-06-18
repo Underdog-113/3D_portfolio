@@ -36,6 +36,8 @@ void CDataStore::Awake(void)
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CDataStore::ParsingData, this, std::placeholders::_1, std::placeholders::_2);
 	m_resourcePath = _SOLUTIONDIR L"Resource\\Data";
+
+	
 }
 
 void CDataStore::OnDestroy(void)
@@ -85,7 +87,7 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 	std::wifstream readFile;
 	std::wstring fullPath = filePath + fileName;
 	readFile.open(fullPath.c_str());
-
+	
 	if (readFile.is_open())
 	{
 		std::wstring line;
@@ -94,9 +96,11 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 		std::wstring variableKey;
 		std::wstring keyValue;
 
-
 		while (!readFile.eof() && std::getline(readFile, line))
 		{
+			if (objectKey == L"Test")
+				int a = 5;
+			
 			_size symbolPos = line.find('=');
 			if (symbolPos != std::wstring::npos)
 			{
@@ -130,5 +134,5 @@ std::wstring CDataStore::GetVariableKey(const std::wstring & lineFromFile, _size
 
 std::wstring CDataStore::GetKeyValue(const std::wstring & lineFromFile, _size symbolPos)
 {
-	return lineFromFile.substr(++symbolPos);
+	return lineFromFile.substr(++symbolPos, std::wstring::npos);
 }

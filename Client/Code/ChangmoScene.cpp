@@ -89,6 +89,8 @@ void CChangmoScene::Start(void)
 	
 		SP(Engine::CObject) spSkyBox = ADD_CLONE(L"SkyBox", true);
 
+		
+
 		/*spEmptyObject
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
 
@@ -169,6 +171,7 @@ void CChangmoScene::FixedUpdate(void)
 void CChangmoScene::Update(void)
 {
 	__super::Update();
+
 }
 
 void CChangmoScene::LateUpdate(void)

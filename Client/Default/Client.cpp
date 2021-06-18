@@ -31,6 +31,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//_CrtSetBreakAlloc(315065);
 	//_CrtSetBreakAlloc(315064);
 	
+	std::locale::global(std::locale("korean"));
+
 #pragma region SubEnginesAwake
 	Engine::CFRC::GetInstance()->Awake();
 	Engine::CWndApp::GetInstance()->Awake();
