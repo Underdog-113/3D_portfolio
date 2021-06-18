@@ -40,7 +40,8 @@ public:
 				void						SetNear				(_float nearPlane);
 				void						SetFar				(_float farPlane);
 				void						SetFOV				(_float FOV);
-				_float2						WorldToScreenPoint(_float3 worldPos);
+
+				_float2						WorldToScreenPoint	(_float3 worldPos);
 
 private:
 				void						UpdateFixed			(void);
