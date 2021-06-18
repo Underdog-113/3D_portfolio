@@ -1,6 +1,7 @@
 #include "Stdafx.h"
 #include "MonsterSliderC.h"
 #include "Object.h"
+#include "GlitterC.h"
 
 CMonsterSliderC::CMonsterSliderC()
 {
@@ -32,6 +33,7 @@ void CMonsterSliderC::Start(SP(CComponent) spThis)
 	m_sliderOwner = static_cast<Engine::CSlider*>(GetOwner());
 	m_bWhiteCheck = true;
 	m_speed = 8;
+	m_timer = 2.0f;
 }
 
 void CMonsterSliderC::FixedUpdate(SP(CComponent) spThis)
@@ -45,15 +47,28 @@ void CMonsterSliderC::Update(SP(CComponent) spThis)
 	{
 		if (m_bWhiteCheck)
 		{
-			// 반짝이게 하고 내려가야함
+			if(!m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->GetIsEnabled())
+				m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->SetIsEnabled(true);
+
+			m_timer -= GET_DT;
+			if (m_timer <= 0)
+			{
+				m_timer = 2.0f;
+				m_bWhiteCheck = false;
+
+				if (m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->GetIsEnabled())
+					m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->SetIsEnabled(false);
+			}
+			
 		}
 		else if (!m_bWhiteCheck)
 		{
-			
+			m_sliderOwner->SetValue(m_sliderOwner->GetValue() - GET_DT * m_speed);
 		}
-
-		m_sliderOwner->SetValue(m_sliderOwner->GetValue() - GET_DT * m_speed);
-		std::cout << m_sliderOwner->GetValue() << std::endl;
+	}
+	else
+	{
+		m_bWhiteCheck = true;
 	}
 }
 

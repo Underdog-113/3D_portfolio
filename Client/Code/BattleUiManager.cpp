@@ -7,6 +7,7 @@
 #include "RotationUiC.h"
 #include "AlphaLifeTimeC.h"
 #include "MonsterSliderC.h"
+#include "GlitterC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -61,7 +62,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
 	m_monsterName =	pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MonsterStateCanvas_MonsterName_0").get();
-	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -342.1f), _float2(0, 0), 50, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
+	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -350.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
 	m_monsterProperty->GetTexture()->AddTexture(L"icon_up", 0);
@@ -72,10 +73,13 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_3").get()));
 	m_monsterWhiteHpBar[0]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	m_monsterWhiteHpBar[0]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_4").get()));
 	m_monsterWhiteHpBar[1]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	m_monsterWhiteHpBar[1]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_5").get()));
 	m_monsterWhiteHpBar[2]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	m_monsterWhiteHpBar[2]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

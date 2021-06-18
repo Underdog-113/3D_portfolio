@@ -14,6 +14,7 @@
 #include "DataLoad.h"
 
 #include  "DamageObjectPool.h"
+#include "GlitterC.h"
 CDongScene::CDongScene()
 {
 }
@@ -47,56 +48,14 @@ void CDongScene::Start(void)
 {
 	__super::Start();
 
-	/*{
-		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
-		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
-
-		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
-		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		background->GetTransform()->SetSize(_float3(104, 104, 0));
-		background->GetTexture()->AddTexture(L"AvatarButtonFrame", 0);
-
-		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
-		fill->SetParent(slider.get());
-		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + _float3(3.2f, -0.28f, -0.9f));
-		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
-		fill->GetTransform()->SetSize(_float3(106, 98, 0));
-		fill->GetTransform()->SetRotationZ(-43.186f);
-		fill->GetTexture()->AddTexture(L"AvatarButtonHP_Bar", 0);
-		fill->AddComponent<Engine::CShaderC>()->
-			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
-
-		slider->AddSliderData(100, 100, background, fill);
-	}
-
 	{
-		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(-150, 100, 0.0f));
-		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
-
-		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
-		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		background->GetTransform()->SetSize(_float3(132, 13, 0));
-		background->GetTexture()->AddTexture(L"BarHp", 0);
-
-		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
-		fill->SetParent(slider.get());
-		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
-		fill->GetTransform()->SetSize(_float3(128, 9, 0));
-		fill->GetTexture()->AddTexture(L"BarHpFill", 0);
-		fill->AddComponent<Engine::CShaderC>()->
-			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
-
-		slider->AddSliderData(100, 100, background, fill);
-	}*/
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"sdfsdf"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetTransform()->SetSize(_float3(800, 600, 0));
+		image->GetTexture()->AddTexture(L"Card_00", 0);
+		image->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
+	}
 }
 
 void CDongScene::FixedUpdate(void)
@@ -278,3 +237,55 @@ ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 CDamageObjectPool::GetInstance()->AddDamage(_float3(0, 0, 0), _float3(36, 51, 0), 36, 80.0f, 1, 123456789, L"Blue");
 }
 */
+
+
+/*{
+SP(Engine::CSlider) slider =
+std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
+slider->GetTransform()->SetPosition(_float3(150, 100, 0.0f));
+slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
+
+SP(Engine::CImageObject) background =
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
+background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+background->GetTransform()->SetSize(_float3(104, 104, 0));
+background->GetTexture()->AddTexture(L"AvatarButtonFrame", 0);
+
+SP(Engine::CImageObject) fill =
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
+fill->SetParent(slider.get());
+fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + _float3(3.2f, -0.28f, -0.9f));
+fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
+fill->GetTransform()->SetSize(_float3(106, 98, 0));
+fill->GetTransform()->SetRotationZ(-43.186f);
+fill->GetTexture()->AddTexture(L"AvatarButtonHP_Bar", 0);
+fill->AddComponent<Engine::CShaderC>()->
+AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+
+slider->AddSliderData(100, 100, background, fill);
+}
+
+{
+SP(Engine::CSlider) slider =
+std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
+slider->GetTransform()->SetPosition(_float3(-150, 100, 0.0f));
+slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
+
+SP(Engine::CImageObject) background =
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
+background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+background->GetTransform()->SetSize(_float3(132, 13, 0));
+background->GetTexture()->AddTexture(L"BarHp", 0);
+
+SP(Engine::CImageObject) fill =
+std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
+fill->SetParent(slider.get());
+fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
+fill->GetTransform()->SetSize(_float3(128, 9, 0));
+fill->GetTexture()->AddTexture(L"BarHpFill", 0);
+fill->AddComponent<Engine::CShaderC>()->
+AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+
+slider->AddSliderData(100, 100, background, fill);
+}*/

@@ -84,7 +84,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"WooHyeng, The King of Guro", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsetrState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_4))

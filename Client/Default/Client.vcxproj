@@ -190,6 +190,7 @@
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\FSM_TheresaC.h" />
+    <ClInclude Include="..\Header\GlitterC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -252,11 +254,13 @@
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
+    <ClInclude Include="..\Header\PhaseChanger.h" />
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
+    <ClInclude Include="..\Header\TrapObject.h" />
     <ClInclude Include="..\Header\UILinker.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\StatusDealer.h" />
@@ -284,9 +288,11 @@
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
+    <ClCompile Include="..\Code\GlitterC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
@@ -334,11 +340,13 @@
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
+    <ClCompile Include="..\Code\PhaseChanger.cpp" />
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\StageSelectionScene.cpp" />
+    <ClCompile Include="..\Code\TrapObject.cpp" />
     <ClCompile Include="..\Code\UILinker.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\StatusDealer.cpp" />
