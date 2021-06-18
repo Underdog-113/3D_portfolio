@@ -91,6 +91,7 @@ void CWooScene::Start(void)
 			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
 
 			m_spKiana = spKianaClone;
+			m_spKiana->GetTransform()->SetPosition(0, 0, 0);
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
 		}
@@ -102,20 +103,14 @@ void CWooScene::Start(void)
 			//spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			//m_spSpider = spSpiderClone;
 
-			//SP(Engine::CObject) spAxeClone = ADD_CLONE(L"MO_Axe", true, (_uint)ELayerID::Enemy, L"MO_Axe");
-			//spAxeClone->GetTransform()->SetPosition(0, 0, 3);
-			//spAxeClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			//m_spAxe = spAxeClone;
-
 			SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-			//spSickleClone->GetTransform()->SetSize(5, 5, 5);
+			spSickleClone->GetTransform()->SetSize(5, 5, 5);
 			spSickleClone->GetTransform()->SetPosition(0, 0, 10);
 			spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			m_spSickle = spSickleClone;
 
 			m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
 			//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
-			//m_fsm = m_spAxe->GetComponent<CFSM_SickleC>();
 		}
 
 	}
@@ -145,10 +140,6 @@ void CWooScene::Update(void)
 
 	SicklePattern0();
 	//SpiderPattern0();
-
-	//AxePattern0();
-	//AxePattern1();
-
 }
 
 void CWooScene::LateUpdate(void)
@@ -195,7 +186,7 @@ void CWooScene::SicklePattern0()
 {
 	_float3 tPos = m_spKiana->GetTransform()->GetPosition();
 	_float3 mPos = m_spSickle->GetTransform()->GetPosition();
-	_float mSpeed = 1.f;
+	//_float mSpeed = 1.f;
 
 	_float3 *len = &(tPos - mPos);
 
@@ -204,80 +195,15 @@ void CWooScene::SicklePattern0()
 		m_fsm->ChangeState(Name_StandBy);
 		return;
 	}
-
-	if (Name_Walk_Forward != m_fsm->GetCurStateString())
+	else if (Name_Walk_Forward != m_fsm->GetCurStateString())
 		m_fsm->ChangeState(Name_Walk_Forward);
 
 	static_cast<CMO_Sickle*>(m_spSickle.get())->ChaseTarget(tPos);
 
 	_float3 dir = tPos - mPos;
 
-	mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
+	mPos += *D3DXVec3Normalize(&dir, &dir) /** mSpeed*/ * GET_DT;
 	m_spSickle->GetTransform()->SetPosition(mPos);
-}
-
-void CWooScene::AxePattern0()
-{
-	//if (Name_Run != m_fsm->GetCurStateString())
-	//	m_fsm->ChangeState(Name_Run);
-
-	//_float3 tPos = m_spKiana->GetTransform()->GetPosition();
-	//_float3 mPos = m_spAxe->GetTransform()->GetPosition();
-	//_float mSpeed = 0.1f;
-
-	//static_cast<CMO_Axe*>(m_spAxe.get())->ChaseTarget(tPos);
-
-	//_float3 dir = tPos - mPos;
-
-	//mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
-	//m_spAxe->GetTransform()->SetPosition(mPos);
-}
-
-void CWooScene::AxePattern1()
-{
-	/*
-	1. attack1
-	4. idle
-	5. left walk
-	6. idle
-	*/
-
-	//if (Engine::IMKEY_DOWN(KEY_Q))
-	//{
-	//	if (false == m_fsm->GetPattern1())
-	//		m_fsm->SetPattern1(true);
-	//	else
-	//		m_fsm->SetPattern1(false);
-	//}
-
-	if (false == m_pattern1)
-		return;
-
-	m_accTime += GET_DT;
-
-	//if (0 == m_curPatternIdx)
-	//{
-	//	m_fsm->ChangeState(Name_Attack_1);
-	//	++m_curPatternIdx;
-	//	return;
-	//}
-
-	//if (Name_Attack_1 == m_fsm->GetCurStateString() && 0.8f <= m_fsm->GetDM()->GetAniTimeline())
-	//{
-	//	m_fsm->ChangeState(Name_Attack_2);
-	//	return;
-	//}
-
-	//if (Name_Attack_2 == m_fsm->GetCurStateString() && 0.8f <= m_fsm->GetDM()->GetAniTimeline())
-	//{
-	//	m_fsm->ChangeState(Name_IDLE);
-	//	EndPattern();
-	//	return;
-	//}
-}
-
-void CWooScene::AxePattern2()
-{
 }
 
 void CWooScene::PlayOnceAni(std::wstring playAni, std::wstring nextAni)

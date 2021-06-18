@@ -37,11 +37,6 @@ private:
 	/* Sickle */
 	void SicklePattern0();
 
-	/* Axe */
-	void AxePattern0();
-	void AxePattern1();
-	void AxePattern2();
-
 	void PlayOnceAni(std::wstring playAni, std::wstring nextAni);
 	void PlayAni(std::wstring ani);
 	void EndPattern();
@@ -51,14 +46,11 @@ private:
 
 					Engine::CObject* m_pivot;
 					SP(Engine::CObject) m_spSpider;
-					SP(Engine::CObject) m_spAxe;
 					SP(Engine::CObject) m_spSickle;
 					SP(Engine::CObject) m_spKiana;
 
 					_bool m_pattern1 = false;
 					_bool m_pattern2 = false;
-
-					_bool m_nextAni = false;
 
 					_uint m_curPatternIdx = 0;
 					
