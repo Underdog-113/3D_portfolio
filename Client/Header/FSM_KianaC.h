@@ -54,10 +54,13 @@ private: /* Special Actions */
 
 	bool CheckAction_Ultra();
 
+	void CreateEffect(std::wstring name);
+
 private:
 	bool m_checkUltraRing = false;
 
 	bool m_checkUltraAtk = false;
+
 
 
 private:

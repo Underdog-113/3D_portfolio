@@ -42,7 +42,7 @@
  
 #pragma endregion
 
-
+#include "Include_Valkyrie.h"
 
 CStaticScene::CStaticScene()
 {
@@ -140,6 +140,8 @@ void CStaticScene::InitPrototypes(void)
 	InitUiPrototypes();
 	InitMonsterPrototypes();
 
+	InitValkyriePrototypes();
+	
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Trail);
 }
@@ -193,4 +195,31 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CMonster) spMB_Bronya(CMB_Bronya::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMB_Bronya);
+}
+
+void CStaticScene::InitValkyriePrototypes(void)
+{
+	SP(CKiana) spKianaPrototype(CKiana::Create(true, this));
+	ADD_PROTOTYPE(spKianaPrototype);
+
+	SP(CKiana_CatPaw_Atk01) spPaw01(CKiana_CatPaw_Atk01::Create(true, this));
+	ADD_PROTOTYPE(spPaw01);
+
+	SP(CKiana_CatPaw_Atk02) spPaw02(CKiana_CatPaw_Atk02::Create(true, this));
+	ADD_PROTOTYPE(spPaw02);
+
+	SP(CKiana_CatPaw_Atk03) spPaw03(CKiana_CatPaw_Atk03::Create(true, this));
+	ADD_PROTOTYPE(spPaw03);
+
+	SP(CKiana_CatPaw_Atk04) spPaw04(CKiana_CatPaw_Atk04::Create(true, this));
+	ADD_PROTOTYPE(spPaw04);
+
+	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(true, this));
+	ADD_PROTOTYPE(spPaw05);
+
+	SP(CKiana_CatPaw_Ring_Atk01) spPawRing01(CKiana_CatPaw_Ring_Atk01::Create(true, this));
+	ADD_PROTOTYPE(spPawRing01);
+
+	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(true, this));
+	ADD_PROTOTYPE(spPistol);
 }

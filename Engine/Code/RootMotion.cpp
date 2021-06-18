@@ -35,7 +35,6 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		{
 			pDM->UpdateFrame();
 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 			
-			//rootMotionPos = GetOwnerSizedPos(pOwner, rootMotionPos);
 
 			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
 			moveAmount.y = 0.f;
@@ -44,9 +43,10 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			D3DXVec3Normalize(&moveForward, &moveForward);
 
 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-			//forwardMove = GetOwnerSizedPos(pOwner, forwardMove);
 			pOwner->GetTransform()->AddPosition(forwardMove);
-			//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+
+			if(m_isVerticalAnim)
+				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 		}
 		// change end -> start
@@ -58,7 +58,6 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			pDM->UpdateFrame();
 
 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
-			//rootMotionPos = GetOwnerSizedPos(pOwner, rootMotionPos);
 
 			float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
 			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
@@ -68,10 +67,11 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			D3DXVec3Normalize(&moveForward, &moveForward);
 
 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-			//forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
 			forwardMove *= moveDir;
 			pOwner->GetTransform()->AddPosition(forwardMove);
-			//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+
+			if (m_isVerticalAnim)
+				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 			m_prevRootMotionPos = rootMotionPos;
 		}
@@ -93,10 +93,11 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		D3DXVec3Normalize(&moveForward, &moveForward);
 
 		_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-		//forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
 		forwardMove *= moveDir;
 		pOwner->GetTransform()->AddPosition(forwardMove);
-		//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+
+		if (m_isVerticalAnim)
+			pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 		m_prevRootMotionPos = rootMotionPos;
 	}
@@ -111,7 +112,6 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	{
 		// none fix
 		pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod() * 0.01, NULL);
-		//pAniCtrl->GetFakeAniCtrl()->AdvanceTime(0, NULL);
 		pDM->UpdateFrame();
 		_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
 		m_animStartOffset = rootMotionPos;
@@ -132,11 +132,11 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	D3DXVec3Normalize(&moveForward, &moveForward);
 
 	_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-	//forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
 	forwardMove *= moveDir;
 	pOwner->GetTransform()->AddPosition(forwardMove);
 
-	//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+	if (m_isVerticalAnim)
+		pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 	m_prevRootMotionPos = rootMotionPos;
 
@@ -172,9 +172,9 @@ _float3 CRootMotion::GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pD
 	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
 
 	return _float3(
-		rootChildCombMat._41 /* * pOwner->GetTransform()->GetSize().x */,
-		pOwner->GetTransform()->GetPosition().y,//rootChildCombMat._42 /* * pOwner->GetTransform()->GetSize().y */,
-		rootChildCombMat._43 /* * pOwner->GetTransform()->GetSize().z */);;
+		rootChildCombMat._41,
+		rootChildCombMat._42,
+		rootChildCombMat._43);;
 }
 
 _float3 CRootMotion::GetOwnerSizedPos(CObject * pOwner, _float3 pos)

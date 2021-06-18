@@ -223,6 +223,7 @@
     <ClInclude Include="..\Header\FSM_ScoutC.h" />
     <ClInclude Include="..\Header\FSM_SpiderC.h" />
     <ClInclude Include="..\Header\ButtonFunction.h" />
+    <ClInclude Include="..\Header\Include_Valkyrie.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
