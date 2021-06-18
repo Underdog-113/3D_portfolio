@@ -41,6 +41,8 @@ public:
 				void						SetFar				(_float farPlane);
 				void						SetFOV				(_float FOV);
 
+				_float2						GetWorldToScreenPos (_float3 worldPos);
+
 private:
 				void						UpdateFixed			(void);
 				void						UpdateFree			(void);

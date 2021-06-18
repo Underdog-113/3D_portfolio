@@ -494,7 +494,14 @@ static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 					penet = 0.f;
 				pRC->GetOwner()->AddCollisionInfo(_CollisionInfo(pRC, pAC, hitPoint, normal, penet));
 				pAC->GetOwner()->AddCollisionInfo(_CollisionInfo(pAC, pRC, hitPoint, -normal, penet));
-				pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * (penet - EPSILON));
+
+				if (normal.y - EPSILON < -1)
+				{
+					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
+					pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>()->SetOnFloor(true);
+				}
+				else
+					pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
 			}
 			else
 			{
@@ -594,7 +601,7 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 				
 				if (normal.y - EPSILON < -1)
 				{
-					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y + 1);
+					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
 					pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>()->SetOnFloor(true);
 				}
 				else

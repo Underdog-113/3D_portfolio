@@ -20,6 +20,10 @@ void CValkyrie::Awake(void)
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
 	m_spTexture = AddComponent<Engine::CTextureC>();
+
+	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
+	m_spCollision = AddComponent<Engine::CCollisionC>();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 }
 
 void CValkyrie::Start(void)

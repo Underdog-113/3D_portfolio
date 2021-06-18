@@ -218,6 +218,29 @@ void CCamera::SetFOV(_float FOV)
 	m_projHasChanged = true;
 }
 
+_float2 CCamera::GetWorldToScreenPos(_float3 worldPos)
+{
+
+	float halfWincx = Engine::CWndApp::GetInstance()->GetWndWidth() * 0.5f;
+	float halfWincy = Engine::CWndApp::GetInstance()->GetWndHeight() * 0.5f;
+
+	_float3 pos;
+	D3DXVec3TransformCoord(&pos, &worldPos, &m_viewMat);
+	D3DXVec3TransformCoord(&pos, &pos, &m_projMat);
+
+	_mat viewportMat = _mat
+	{
+		halfWincx, 0.f        , 0.f             , 0.f,
+		0.f       , -halfWincy, 0.f             , 0.f,
+		0.f       , 0.f        , m_far - m_near, 0.f,
+		halfWincx, halfWincy ,m_near         , 1.f
+	};
+
+	D3DXVec3TransformCoord(&pos, &pos, &viewportMat);
+
+	return _float2(pos.x, pos.y);
+}
+
 void CCamera::UpdateFixed(void)
 {
 	m_spTransform->SetPosition(m_fixedPos);

@@ -46,6 +46,12 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 
+
+	spClone->m_spRigidBody	= spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
+
+	
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
 	return spClone;
 }
@@ -55,6 +61,16 @@ void CKiana::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_KianaC>();
+	/*m_spCollision->AddCollider(Engine::CSphereCollider::Create(
+							   (_int)ECollisionID::PlayerHitBox,
+							   3,
+							   _float3(0.f, m_spMesh->GetHalfYOffset(),0.f)));
+
+	m_spCollision->AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay,
+															_float3(0.f, m_spMesh->GetHalfYOffset(),0.f),
+															_float3(0, -1, 0),
+															m_spMesh->GetHalfYOffset()));*/
+
 }
 
 void CKiana::Start(void)
@@ -74,6 +90,8 @@ void CKiana::Start(void)
 
 	m_pStat = new V_Kiana_Stat;
 	m_pStat->SetupStatus(&stat);
+
+	m_spTransform->SetPositionY(10.f);
 }
 
 void CKiana::FixedUpdate(void)

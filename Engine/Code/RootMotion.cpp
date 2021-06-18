@@ -46,7 +46,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
 			//forwardMove = GetOwnerSizedPos(pOwner, forwardMove);
 			pOwner->GetTransform()->AddPosition(forwardMove);
-			pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+			//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 		}
 		// change end -> start
@@ -71,7 +71,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			//forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
 			forwardMove *= moveDir;
 			pOwner->GetTransform()->AddPosition(forwardMove);
-			pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+			//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 			m_prevRootMotionPos = rootMotionPos;
 		}
@@ -96,7 +96,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		//forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
 		forwardMove *= moveDir;
 		pOwner->GetTransform()->AddPosition(forwardMove);
-		pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+		//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 		m_prevRootMotionPos = rootMotionPos;
 	}
@@ -135,7 +135,8 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	//forwardMove = GetOwnerSizedPos(pOwner, forwardMove) * moveDir;
 	forwardMove *= moveDir;
 	pOwner->GetTransform()->AddPosition(forwardMove);
-	pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
+
+	//pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
 	m_prevRootMotionPos = rootMotionPos;
 
@@ -172,7 +173,7 @@ _float3 CRootMotion::GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pD
 
 	return _float3(
 		rootChildCombMat._41 /* * pOwner->GetTransform()->GetSize().x */,
-		rootChildCombMat._42 /* * pOwner->GetTransform()->GetSize().y */,
+		pOwner->GetTransform()->GetPosition().y,//rootChildCombMat._42 /* * pOwner->GetTransform()->GetSize().y */,
 		rootChildCombMat._43 /* * pOwner->GetTransform()->GetSize().z */);;
 }
 
