@@ -3,7 +3,6 @@
 #include "afxbutton.h"
 #include "afxcmn.h"
 
-
 // CInspector Æû ºäÀÔ´Ï´Ù.
 
 class CInspector : public CFormView
@@ -238,8 +237,8 @@ private:
 	_float m_fAnimSpeed;
 	_float m_fStartTime;
 	_float m_fEndTime;
-	_float m_fAlphaWidth;
-	_float m_fAlphaHeight;
+	GETTOR(_float, m_fAlphaWidth, 0.f, AlphaWidth)
+	GETTOR(_float, m_fAlphaHeight, 0.f, AlphaHeight)
 
 	_bool m_isPlayAnim;
 

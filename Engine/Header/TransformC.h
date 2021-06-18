@@ -82,6 +82,8 @@ public:
 					void				UpdateRotation			(void);
 					void				UpdateWorldMatrix		(void);
 
+					void				UpdateCamDistance		(void);
+
 					void				UpdateParentMatrix		(const _mat* pMat);
 
 
@@ -120,6 +122,8 @@ protected:
 	GETTOR			(_float3,			m_rotation,					ZERO_VECTOR,		Rotation)
 	GETTOR			(_float3,			m_size,						ONE_VECTOR,			Size)
 
+	GETTOR_SETTOR	(_bool,				m_checkCamDist,				false,				CheckCamDistance)
+	GETTOR			(_float,			m_camDist,					0,					CamDistance)
 };
 END
 #endif
