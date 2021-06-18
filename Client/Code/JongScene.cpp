@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "JongScene.h"
-#include "EmptyObject.h"
 #include "ObjectFactory.h"
 
 #include "DynamicMeshData.h"
@@ -70,7 +69,7 @@ void CJongScene::Start(void)
 
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"JongSceneBasicCamera");
 			cam->SetTarget(spEmptyObject1);
-			cam->SetTargetDist(6.f);
+			cam->SetTargetDist(2.f);
 			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 		}
 
@@ -83,16 +82,17 @@ void CJongScene::Start(void)
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
 
+			spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 		}
 
 		{
-			SP(Engine::CObject) spEmptyObject
-				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
-
-			spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
-			spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-			spEmptyObject->AddComponent<Engine::CTextureC>();
-			spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			//SP(Engine::CObject) spEmptyObject
+			//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
+			//
+			//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
+			//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+			//spEmptyObject->AddComponent<Engine::CTextureC>();
+			//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			//spEmptyObject->GetTransform()->SetSize(100, 1, 10);
 			//spEmptyObject->GetTransform()->SetRotationY(D3DXToRadian(-90));
 			//spEmptyObject->GetTransform()->SetPositionY(-0.5);

@@ -4,6 +4,7 @@
 #include "MeshEffect.h"
 #include "Object.h"
 #include "Layer.h"
+#include "SoftEffect.h"
 
 // CInspector
 
@@ -24,6 +25,10 @@ CInspector::CInspector()
 	m_isPlayAnim = false;
 	m_vSavePos.z = 2.f;
 	m_eActionState = STATE_END;
+	m_fAlphaWidth = 0.f;
+	m_fAlphaHeight = 0.f;
+	m_iTilingX = 1;
+	m_iTilingY = 1;
 }
 
 CInspector::~CInspector()
@@ -133,6 +138,16 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON44, m_bmp_Speed);
 	DDX_Control(pDX, IDC_BUTTON45, m_bmpAnimSpeed);
 	DDX_Control(pDX, IDC_LIST1, m_EffectListBox);
+	DDX_Control(pDX, IDC_BUTTON46, m_bmpTilingXTitle);
+	DDX_Control(pDX, IDC_BUTTON47, m_bmpTilingX);
+	DDX_Control(pDX, IDC_BUTTON48, m_bmpTilingY);
+	DDX_Control(pDX, IDC_EDIT17, m_edTilingX);
+	DDX_Control(pDX, IDC_EDIT18, m_edTilingY);
+	DDX_Control(pDX, IDC_SPIN15, m_spinTilingX);
+	DDX_Control(pDX, IDC_SPIN16, m_spinTilingY);
+	DDX_Control(pDX, IDC_BUTTON49, m_bmpIndexX);
+	DDX_Control(pDX, IDC_BUTTON50, m_bmpIndexY);
+	DDX_Control(pDX, IDC_BUTTON51, m_bmpTilingYTitle);
 }
 
 void CInspector::EditButtonStyle()
@@ -261,10 +276,10 @@ void CInspector::EditButtonStyle()
 	m_bmp_ScaleZ.LoadBitmaps(IDB_BITMAP_Z);
 	m_bmp_ScaleZ.SizeToContent();
 
-	m_bmp_AlphaWidth.LoadBitmaps(IDB_BITMAP_WIDTH);
+	m_bmp_AlphaWidth.LoadBitmaps(IDB_BITMAP_MAXINDEXX);
 	m_bmp_AlphaWidth.SizeToContent();
 
-	m_bmp_AlphaHeight.LoadBitmaps(IDB_BITMAP_HEIGHT);
+	m_bmp_AlphaHeight.LoadBitmaps(IDB_BITMAP_MAXINDEXY);
 	m_bmp_AlphaHeight.SizeToContent();
 
 	m_bmp_Speed.LoadBitmaps(IDB_BITMAP_SPEED);
@@ -272,6 +287,24 @@ void CInspector::EditButtonStyle()
 
 	m_bmpAnimSpeed.LoadBitmaps(IDB_BITMAP_ANIMSPEED);
 	m_bmpAnimSpeed.SizeToContent();
+
+	m_bmpTilingXTitle.LoadBitmaps(IDB_BITMAP_TILING_X);
+	m_bmpTilingXTitle.SizeToContent();
+
+	m_bmpTilingYTitle.LoadBitmaps(IDB_BITMAP_TILING_Y);
+	m_bmpTilingYTitle.SizeToContent();
+
+	m_bmpTilingX.LoadBitmaps(IDB_BITMAP_X);
+	m_bmpTilingX.SizeToContent();
+
+	m_bmpTilingY.LoadBitmaps(IDB_BITMAP_Y);
+	m_bmpTilingY.SizeToContent();
+
+	m_bmpIndexX.LoadBitmaps(IDB_BITMAP_X);
+	m_bmpIndexX.SizeToContent();
+
+	m_bmpIndexY.LoadBitmaps(IDB_BITMAP_Y);
+	m_bmpIndexY.SizeToContent();
 
 	// Event Button
 
@@ -361,6 +394,8 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_EN_CHANGE(IDC_EDIT15, &CInspector::OnEnChangeEditSpeed)
 	ON_EN_CHANGE(IDC_EDIT16, &CInspector::OnEnChangeEditAnimSpeed)
 	ON_LBN_SELCHANGE(IDC_LIST1, &CInspector::OnLbnSelchangeEffectList)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN15, &CInspector::OnDeltaposSpinTilingX)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN16, &CInspector::OnDeltaposSpinTilingY)
 END_MESSAGE_MAP()
 
 
@@ -425,7 +460,7 @@ void CInspector::OnBnClickedMeshEffect()
 {
 	CString str = _T("X Files(*.x) |*.x|"); // x 파일 표시
 
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\StaticScene\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\";
 
 	CFileDialog dlg(TRUE, _T("*.x"), NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, str);
 
@@ -451,7 +486,7 @@ void CInspector::OnBnClickedMeshEffect()
 void CInspector::OnBnClickedSoftEffect()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\SoftEffect\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -474,7 +509,7 @@ void CInspector::OnBnClickedSoftEffect()
 void CInspector::OnBnClickedTexture()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -497,7 +532,7 @@ void CInspector::OnBnClickedTexture()
 void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png 파일 표시
-	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\StaticScene\\Effect\\";
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -518,7 +553,7 @@ void CInspector::OnBnClickedAlphaMask()
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
 	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"Effect0");
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
@@ -529,6 +564,11 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 
 void CInspector::Add_SoftEffect(CString ObjectName)
 {
+	SP(Engine::CObject) spSoftEffect
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SoftEffect", false);
+	spSoftEffect->GetComponent<Engine::CGraphicsC>();
+	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::SoftEffectShader);
 }
 
 void CInspector::Add_Texture(CString TextureKey)
@@ -565,6 +605,7 @@ void CInspector::OptionUpdate()
 		m_btnOptionFadeOut.EnableWindow(false);
 		m_btnOptionUVSprite.EnableWindow(false);
 		m_btnOptionUVAnim.EnableWindow(false);
+		
 	}
 	else
 	{
@@ -574,8 +615,10 @@ void CInspector::OptionUpdate()
 		m_btnOptionFadeIn.EnableWindow(true);
 		m_btnOptionFadeOut.EnableWindow(true);
 		m_btnOptionUVSprite.EnableWindow(true);
-		m_btnOptionUVAnim.EnableWindow(true);
+		m_btnOptionUVAnim.EnableWindow(true);	
 	}
+
+	
 
 }
 
@@ -660,6 +703,14 @@ void CInspector::ModeUpdate()
 		m_btnModeTransform.EnableWindow(true);
 		m_btnModeEdit.EnableWindow(true);
 	}	
+	if (m_btnOptionUVSprite.GetCheck())
+	{
+		m_btnModeUVSprite.EnableWindow(true);
+	}
+	else
+	{
+		m_btnModeUVSprite.EnableWindow(false);
+	}
 }
 
 void CInspector::SettingUpdate()
@@ -810,6 +861,36 @@ void CInspector::SettingUpdate()
 		m_edScaleZ.ShowWindow(false);
 		m_spinScaleZ.ShowWindow(false);
 	}
+
+	if (m_btnModeUVSprite.GetCheck())
+	{		
+		m_edAlphaWidth.ShowWindow(true);
+		m_spinAlphaWidth.ShowWindow(true);
+		m_edAlphaHeight.ShowWindow(true);
+		m_spinAlphaHeigth.ShowWindow(true);
+	}
+	else
+	{
+		m_edAlphaWidth.ShowWindow(false);
+		m_spinAlphaWidth.ShowWindow(false);
+		m_edAlphaHeight.ShowWindow(false);
+		m_spinAlphaHeigth.ShowWindow(false);
+	}
+
+	if (m_btnModeUVSprite.GetCheck())
+	{
+		m_edTilingX.ShowWindow(true);
+		m_edTilingY.ShowWindow(true);
+		m_spinTilingX.ShowWindow(true);
+		m_spinTilingY.ShowWindow(true);
+	}
+	else
+	{
+		m_edTilingX.ShowWindow(false);
+		m_edTilingY.ShowWindow(false);
+		m_spinTilingX.ShowWindow(false);
+		m_spinTilingY.ShowWindow(false);
+	}
 #pragma endregion
 
 }
@@ -923,28 +1004,50 @@ void CInspector::AnimTransformUpdate(SP(Engine::CObject) spObject)
 
 void CInspector::OnBnClickedAnimPlay()
 {
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = PLAY;
+	pSoftEffect->SetAnimisPlay(ACTION_STATE::PLAY);
 }
 
 void CInspector::OnBnClickedAnimPause()
 {
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+		return;
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = PAUSE;
+	pSoftEffect->SetAnimisPlay(ACTION_STATE::PAUSE);
+
 }
 
 void CInspector::OnBnClickedAnimStop()
 {
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+		return;
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = STOP;
+
+	pSoftEffect->SetmaxXIndex(0);
+	pSoftEffect->SetmaxYIndex(0);
 }
 
 void CInspector::OnBnClickedSave()
 {
+	// Mesh Effect or Soft Effect Save
 }
 
 void CInspector::OnBnClickedLoad()
 {
+	// Mesh Effect or Soft Effect Load
+
 }
-
-
 
 void CInspector::OnEnChangeEditPosX()
 {
@@ -1451,6 +1554,25 @@ void CInspector::OnDeltaposSpinRepeat(NMHDR *pNMHDR, LRESULT *pResult)
 void CInspector::OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	m_fAlphaWidth += pNMUpDown->iDelta * -1.f;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+		return;
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	pSoftEffect->SetAlphaWIdth(m_fAlphaWidth);
+
+	UpdateData(true);
+
+	CString str;
+	str.Format(L"%f", m_fAlphaWidth);
+	m_edAlphaWidth.SetWindowTextW(str.GetString());
+
+	UpdateData(false);
+
 	*pResult = 0;
 }
 
@@ -1458,6 +1580,23 @@ void CInspector::OnDeltaposSpinAlphaWidth(NMHDR *pNMHDR, LRESULT *pResult)
 void CInspector::OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	m_fAlphaHeight += pNMUpDown->iDelta * -1.f;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+		return;
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	pSoftEffect->SetAlphaHeight(m_fAlphaHeight);
+
+	UpdateData(true);
+	CString str;
+	str.Format(L"%f", m_fAlphaHeight);
+	m_edAlphaHeight.SetWindowTextW(str.GetString());
+
+	UpdateData(false);
 
 	*pResult = 0;
 }
@@ -1480,4 +1619,52 @@ void CInspector::OnEnChangeEditAnimSpeed()
 	fResizeValue = (_float)_wtof(strResizeValue.GetString());
 
 	m_fAnimSpeed = fResizeValue;
+}
+
+void CInspector::OnDeltaposSpinTilingX(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+	m_iTilingX += pNMUpDown->iDelta * -1;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+		return;
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	pSoftEffect->SetmaxXIndex(m_iTilingX);
+
+	UpdateData(true);
+
+	CString str;
+	str.Format(L"%d", m_iTilingX);
+	m_edTilingX.SetWindowTextW(str.GetString());
+
+	UpdateData(false);
+	*pResult = 0;
+}
+
+
+void CInspector::OnDeltaposSpinTilingY(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+
+	m_iTilingY += pNMUpDown->iDelta * -1;
+
+	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+	if (spObject == nullptr)
+		return;
+
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	pSoftEffect->SetmaxYIndex(m_iTilingY);
+
+	UpdateData(true);
+
+	CString str;
+	str.Format(L"%d", m_iTilingY);
+	m_edTilingY.SetWindowTextW(str.GetString());
+
+	UpdateData(false);
+	*pResult = 0;
 }

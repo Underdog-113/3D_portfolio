@@ -66,10 +66,10 @@ void CAttackTrail_Client::Update()
 {
 	__super::Update();
 
-	/*if (m_fTrailAlpha <= 0)
+	if (m_fTrailAlpha <= 0)
 	{
 		this->SetDeleteThis(true);
-	}*/
+	}
 
 	if (Engine::IMKEY_DOWN(KEY_LEFT))
 	{

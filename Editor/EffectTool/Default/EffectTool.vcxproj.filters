@@ -90,6 +90,9 @@
     <ClInclude Include="..\Header\AttackTrail.h">
       <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SoftEffect.h">
+      <Filter>05.Object\01.SoftEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -121,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\AttackTrail.cpp">
       <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoftEffect.cpp">
+      <Filter>05.Object\01.SoftEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +263,11 @@
       <Filter>97.Bitmap</Filter>
     </Image>
     <Image Include="res\AnimSpeed.bmp" />
+    <Image Include="res\Tiling.bmp" />
+    <Image Include="res\maxIndexX.bmp" />
+    <Image Include="res\maxIndexY.bmp" />
+    <Image Include="res\TilingX.bmp" />
+    <Image Include="res\TilingY.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">

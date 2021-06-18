@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AttackBall.h" />
     <ClInclude Include="..\Header\AttackTrail_Client.h" />
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
@@ -276,6 +277,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
@@ -335,7 +337,7 @@
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
-    <ClCompile Include="..\Code\StageSlectionScene.cpp" />
+    <ClCompile Include="..\Code\StageSelectionScene.cpp" />
     <ClCompile Include="..\Code\UILinker.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\StatusDealer.cpp" />

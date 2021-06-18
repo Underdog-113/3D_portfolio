@@ -469,6 +469,8 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", true));
 
 
+		spMapObject->AddComponent<Engine::CDebugC>();
+
 		_float3 position, rotation, size;
 
 		//GETVALUE

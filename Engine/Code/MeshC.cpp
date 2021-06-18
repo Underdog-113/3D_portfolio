@@ -342,7 +342,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	_float3 rootMotionMoveAmount 
 		= _float3(
 			rootChildCombMat._41,
-			rootChildCombMat._42,
+			0/*rootChildCombMat._42*/,
 			rootChildCombMat._43);
 
 	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
@@ -424,6 +424,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			{
 				meshContainer->pRenderingMatrix[i]._41 -= rootMotionMoveAmount.x;
 				meshContainer->pRenderingMatrix[i]._42 -= rootMotionMoveAmount.y;
+				meshContainer->pRenderingMatrix[i]._42 += m_halfYOffset;
 				meshContainer->pRenderingMatrix[i]._43 -= rootMotionMoveAmount.z;
 			}
 		}

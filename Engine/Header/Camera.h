@@ -16,16 +16,16 @@ private:
 public:
 	static		SP(CCamera)					Create				(_bool isStatic, CScene* pScene);
 				SP(CObject)					MakeClone			(void) override;
-		
+
 				void						Awake				(void) override;
 				void						Start				(void) override;
-		
+
 				void						FixedUpdate			(void) override;
 				void						Update				(void) override;
 				void						LateUpdate			(void) override;
-		
+
 				void						OnDestroy			(void) override;
-		
+
 				void						OnEnable			(void) override;
 				void						OnDisable			(void) override;
 
@@ -35,11 +35,13 @@ public:
 				void						OnCollisionEnter	(_CollisionInfo ci);
 				void						OnCollisionStay		(_CollisionInfo ci);
 				void						OnCollisionExit		(_CollisionInfo ci);
-				
+
 public:
 				void						SetNear				(_float nearPlane);
 				void						SetFar				(_float farPlane);
 				void						SetFOV				(_float FOV);
+
+				_float2						WorldToScreenPoint	(_float3 worldPos);
 
 private:
 				void						UpdateFixed			(void);
@@ -59,7 +61,6 @@ private:
 
 				void						CameraRotate		(void);
 				void						CameraMove			(void);
-
 private:
 	static			_uint					m_s_uniqueID;
 	GETTOR			(SP(CCollisionC),		m_spCollision,		nullptr,				Collision)
@@ -67,7 +68,7 @@ private:
 	GETTOR			(CRayCollider*,			m_pCamRayCollider,	nullptr,				CamRayCollider)
 	GETTOR			(CFrustum*,				m_pFrustum,			nullptr,				Frustum)
 	GETTOR_SETTOR	(SP(CObject),			m_spTarget,			nullptr,				Target)
-	
+
 	GETTOR_SETTOR	(ECameraMode,			m_mode,				ECameraMode::Free,		Mode)
 
 	GETTOR_SETTOR	(_bool,					m_hasChanged,		false,					HasChanged)
@@ -96,7 +97,7 @@ private:
 	GETTOR			(_float,				m_lookAngleUp,		0.f,					LookAngleUp)
 	GETTOR_SETTOR	(_float,				m_awaySpeed,		1.f,					AwaySpeed)
 
-	
+
 };
 END
 #endif
