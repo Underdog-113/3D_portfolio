@@ -21,9 +21,12 @@ void CMonster::Awake(void)
 	m_spMesh = AddComponent<Engine::CMeshC>();
 	m_spMesh->SetInitTex(true);
 
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
-	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
+	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
+	m_spShader		= AddComponent<Engine::CShaderC>();
+	m_spTexture		= AddComponent<Engine::CTextureC>();
+	
+	//m_spCollision	= AddComponent<Engine::CCollisionC>();
+	//m_spDebug		= AddComponent<Engine::CDebugC>();
 }
 
 void CMonster::Start(void)
