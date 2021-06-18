@@ -43,6 +43,7 @@ void CAttackBall::Awake(void)
 	m_layerID	= (_int)ELayerID::Attack;
 	m_dataID	= UNDEFINED;
 	m_addExtra	= true;
+	m_isEnabled = false;
 
 	m_spCollision	= AddComponent<Engine::CCollisionC>();
 }
