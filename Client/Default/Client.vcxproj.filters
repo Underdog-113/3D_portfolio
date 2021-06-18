@@ -247,6 +247,9 @@
     <Filter Include="02.Objects\06.AttackBall">
       <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\00.DecoObject">
+      <UniqueIdentifier>{7b7fc362-4064-4f6f-9b0f-7f3797d96661}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -528,6 +531,9 @@
     <ClInclude Include="..\Header\AttackBall.h">
       <Filter>02.Objects\06.AttackBall</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DecoObject.h">
+      <Filter>02.Objects\00.DecoObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -760,6 +766,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\StageSelectionScene.cpp">
       <Filter>01.Scene\04.StageSelectionScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DecoObject.cpp">
+      <Filter>02.Objects\00.DecoObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

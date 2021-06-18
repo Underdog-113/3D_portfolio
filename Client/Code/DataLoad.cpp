@@ -396,8 +396,8 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", L"numOfDecoObject", numOfDecoObject);
 	for (_int i = 0; i < numOfDecoObject; ++i)
 	{
-		SP(Engine::CDecoObject) spDecoObject =
-			std::dynamic_pointer_cast<Engine::CDecoObject>(pObjectFactory->AddClone(L"DecoObject", true));
+		SP(CDecoObject) spDecoObject =
+			std::dynamic_pointer_cast<CDecoObject>(pObjectFactory->AddClone(L"DecoObject", true));
 
 
 		_float3 position, rotation, size;

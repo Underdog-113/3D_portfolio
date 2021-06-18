@@ -172,9 +172,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
       <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.DecoObject">
-      <UniqueIdentifier>{1b02dc11-2315-4209-8153-e83cb6df50b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\04.Camera">
       <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
     </Filter>
@@ -274,9 +271,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader">
       <UniqueIdentifier>{deea1f5e-2751-4c23-9ec1-18261d4ec4f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\09.Text">
-      <UniqueIdentifier>{55e89009-2f13-42a0-9ad6-3701b9538748}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader">
       <UniqueIdentifier>{045ee1b4-ba29-4600-a5fc-0933ef05863b}</UniqueIdentifier>
     </Filter>
@@ -306,6 +300,9 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader">
       <UniqueIdentifier>{55716081-6c16-4585-bdc2-aa693a780bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Text">
+      <UniqueIdentifier>{55e89009-2f13-42a0-9ad6-3701b9538748}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -543,9 +540,6 @@
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DecoObject.cpp">
-      <Filter>02.Objects\03.DecoObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Canvas.cpp">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClCompile>
@@ -571,7 +565,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextObject.cpp">
-      <Filter>02.Objects\09.Text</Filter>
+      <Filter>02.Objects\03.Text</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DissolveShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
@@ -839,9 +833,6 @@
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\DecoObject.h">
-      <Filter>02.Objects\03.DecoObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Canvas.h">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClInclude>
@@ -867,7 +858,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextObject.h">
-      <Filter>02.Objects\09.Text</Filter>
+      <Filter>02.Objects\03.Text</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DissolveShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
