@@ -7,7 +7,6 @@ float4x4 gView;
 float4x4 gProjection;
 
 float4 gWorldLightPosition;
-float3 gSurfaceColor;
 
 float4 gDiffuseColor = float4(1, 1, 1, 1);
 float  gDiffuseIntensity = 1.0;
@@ -64,8 +63,8 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 
 	Output.mPosition = mul(Input.mPosition, gWorldViewProjectionMatrix);
 
-	float3 objectLightPosition = mul(gWorldLightPosition, gInvWorldMatrix);
-	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition);
+	float4 objectLightPosition = mul(gWorldLightPosition, gInvWorldMatrix);
+	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition.xyz);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 	Output.mUV = Input.mUV;
@@ -85,7 +84,7 @@ struct PS_INPUT
 float4 ps_main(PS_INPUT Input) : COLOR
 {
 	// ºûÀÇ °­µµ
-	float intensity = dot(normalize(gWorldLightPosition), Input.mUV);
+	float intensity = dot(normalize(gWorldLightPosition.xy), Input.mUV);
 
 	if (intensity < 0)
 		intensity = 0;
@@ -102,7 +101,7 @@ float4 ps_main(PS_INPUT Input) : COLOR
 	float rim = saturate(abs(dot(Input.mNormal, gViewDir)));
 	float3 Emission = pow(1 - rim, gRimPower) * gRImColor.rgb;
 
-	return float4(albedo * diffuse.xyz, 1);
+	return float4(albedo.xyz * diffuse, 1);
 }
 
 
@@ -112,7 +111,7 @@ VS_OUTPUT OutlineVertexShader(VS_INPUT Input)
 	VS_OUTPUT output = (VS_OUTPUT)0;
 
 	float4 original = mul(mul(mul(Input.mPosition, gWorld), gView), gProjection);
-	float4 normal = mul(mul(mul(Input.mNormal, gWorld), gView), gProjection);
+	float4 normal = mul(mul(mul(float4(Input.mNormal,1), gWorld), gView), gProjection);
 
 	output.mPosition = original + (mul(gLineThickness, normal));
 
