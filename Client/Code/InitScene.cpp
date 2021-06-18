@@ -61,7 +61,7 @@ void CInitScene::Start(void)
 
 	SP(Engine::CCamera) spCameraObject =
 		std::dynamic_pointer_cast<Engine::CCamera>(ADD_CLONE(L"Camera", false));
-
+	spCameraObject->SetMode(Engine::ECameraMode::Edit);
 	Engine::CCameraManager::GetInstance()->AddCamera(L"InitSceneBasicCamera", spCameraObject);
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
 
@@ -78,8 +78,6 @@ void CInitScene::Start(void)
 void CInitScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
-
 }
 
 void CInitScene::Update(void)
@@ -120,7 +118,7 @@ void CInitScene::Update(void)
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(COneStageScene::Create(), false);
+				m_pLoading = CLoading::Create(CStageSelectionScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))

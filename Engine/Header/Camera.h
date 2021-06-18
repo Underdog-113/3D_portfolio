@@ -41,6 +41,8 @@ public:
 				void						SetFar				(_float farPlane);
 				void						SetFOV				(_float FOV);
 
+				_float2						WorldToScreenPoint	(_float3 worldPos);
+
 private:
 				void						UpdateFixed			(void);
 				void						UpdateFree			(void);
@@ -59,7 +61,6 @@ private:
 
 				void						CameraRotate		(void);
 				void						CameraMove			(void);
-
 private:
 	static			_uint					m_s_uniqueID;
 	GETTOR			(SP(CCollisionC),		m_spCollision,		nullptr,				Collision)

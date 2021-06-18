@@ -244,6 +244,9 @@
     <Filter Include="98.Include\ClientStructure_Status">
       <UniqueIdentifier>{81dd6d3b-81d0-4830-ab34-47c2f9aafe29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\06.AttackBall">
+      <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -519,6 +522,9 @@
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h">
       <Filter>98.Include\ClientStructure_Status</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\AttackBall.h">
+      <Filter>02.Objects\06.AttackBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -748,6 +754,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\StageControlTower.cpp">
       <Filter>97.TempClass_ForDevelop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackBall.cpp">
+      <Filter>02.Objects\06.AttackBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

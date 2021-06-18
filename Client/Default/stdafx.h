@@ -31,6 +31,8 @@
 #include "ClientStructure_ValkyrieStatus.h"
 #include "ClientStructure_MonsterStatus.h"
 
+#include "StageControlTower.h"
+
 //Client Managers
 #include "ButtonManager.h"
 #include "BattleUiManager.h"
