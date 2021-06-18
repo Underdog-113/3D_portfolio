@@ -528,7 +528,7 @@
     <ClInclude Include="..\Header\AttackBall.h">
       <Filter>02.Objects\06.AttackBall</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\MonsterSlider.h">
+    <ClInclude Include="..\Header\MonsterSliderC.h">
       <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
     </ClInclude>
   </ItemGroup>
@@ -764,7 +764,7 @@
     <ClCompile Include="..\Code\AttackBall.cpp">
       <Filter>02.Objects\06.AttackBall</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\MonsterSlider.cpp">
+    <ClCompile Include="..\Code\MonsterSliderC.cpp">
       <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
     </ClCompile>
   </ItemGroup>

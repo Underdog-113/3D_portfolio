@@ -6,6 +6,7 @@
 #include "SkillCollTimcC.h"
 #include "RotationUiC.h"
 #include "AlphaLifeTimeC.h"
+#include "MonsterSliderC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -63,10 +64,16 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -342.1f), _float2(0, 0), 50, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
+	m_monsterProperty->GetTexture()->AddTexture(L"icon_up", 0);
 
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_0").get()));
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_1").get()));
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_2").get()));
+
+	pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_3")->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_4")->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_5")->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	m_hitsCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"HitsCanvas").get());
 	m_hitsCanvas->AddComponent<CLifeObjectC>();
@@ -175,7 +182,15 @@ void CBattleUiManager::MonsetrState(std::wstring name, _float hp, std::wstring p
 	{
 		object->SetValue(hp);
 	}
-	m_monsterProperty->GetComponent<Engine::CTextC>()->ChangeMessage(property);
+
+	if (property == L"UP")
+	{
+		m_monsterProperty->GetTexture()->SetTexIndex(0);
+	}
+	else if (property == L"DOWN")
+	{
+		m_monsterProperty->GetTexture()->SetTexIndex(1);
+	}
 }
 
 void CBattleUiManager::MonsterStateEnd()
