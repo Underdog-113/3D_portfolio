@@ -101,7 +101,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-			//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+			dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 			fontPosition.y *= -1;
 			image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 		}
@@ -274,7 +274,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 
 		fontPosition.y *= -1;
 		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);		
@@ -381,7 +381,7 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textSize", fontSize);
-		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 		fontPosition.y *= -1;
 		text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 	}

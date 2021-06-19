@@ -6,6 +6,8 @@
 #include "SkillCollTimcC.h"
 #include "RotationUiC.h"
 #include "AlphaLifeTimeC.h"
+#include "MonsterSliderC.h"
+#include "GlitterC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -60,13 +62,26 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
 	m_monsterName =	pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MonsterStateCanvas_MonsterName_0").get();
-	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -342.1f), _float2(0, 0), 50, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
+	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -350.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
+	m_monsterProperty->GetTexture()->AddTexture(L"icon_up", 0);
 
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_0").get()));
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_1").get()));
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_2").get()));
+
+	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_3").get()));
+	m_monsterWhiteHpBar[0]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	m_monsterWhiteHpBar[0]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
+	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_4").get()));
+	m_monsterWhiteHpBar[1]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	m_monsterWhiteHpBar[1]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
+	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_5").get()));
+	m_monsterWhiteHpBar[2]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+	m_monsterWhiteHpBar[2]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
+
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	m_hitsCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"HitsCanvas").get());
 	m_hitsCanvas->AddComponent<CLifeObjectC>();
@@ -175,7 +190,21 @@ void CBattleUiManager::MonsetrState(std::wstring name, _float hp, std::wstring p
 	{
 		object->SetValue(hp);
 	}
-	m_monsterProperty->GetComponent<Engine::CTextC>()->ChangeMessage(property);
+	
+	for (auto object : m_monsterWhiteHpBar)
+	{
+		object->SetValue(hp);
+	}
+
+
+	if (property == L"UP")
+	{
+		m_monsterProperty->GetTexture()->SetTexIndex(0);
+	}
+	else if (property == L"DOWN")
+	{
+		m_monsterProperty->GetTexture()->SetTexIndex(1);
+	}
 }
 
 void CBattleUiManager::MonsterStateEnd()

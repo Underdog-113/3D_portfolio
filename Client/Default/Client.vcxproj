@@ -200,6 +200,7 @@
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\FSM_TheresaC.h" />
+    <ClInclude Include="..\Header\GlitterC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -245,6 +246,7 @@
     <ClInclude Include="..\Header\MB_Ganesha.h" />
     <ClInclude Include="..\Header\MeshEffect_Client.h" />
     <ClInclude Include="..\Header\Monster.h" />
+    <ClInclude Include="..\Header\MonsterSliderC.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
     <ClInclude Include="..\Header\MO_Lancer.h" />
     <ClInclude Include="..\Header\MO_Ninza.h" />
@@ -292,6 +294,7 @@
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
+    <ClCompile Include="..\Code\GlitterC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
@@ -330,6 +333,7 @@
     <ClCompile Include="..\Code\MB_Ganesha.cpp" />
     <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
+    <ClCompile Include="..\Code\MonsterSliderC.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
     <ClCompile Include="..\Code\MO_Lancer.cpp" />
     <ClCompile Include="..\Code\MO_Ninza.cpp" />

@@ -97,6 +97,7 @@ private:
 	std::vector<Engine::CSlider*> m_coolTimeSlider;
 
 	std::vector<Engine::CSlider*> m_monsterHpBar;
+	std::vector<Engine::CSlider*> m_monsterWhiteHpBar;
 	std::vector<Engine::CSlider*> m_playerHpBar;
 	Engine::CSlider* m_playerSpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerHpBar;
