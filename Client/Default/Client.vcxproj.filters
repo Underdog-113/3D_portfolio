@@ -262,6 +262,33 @@
     <Filter Include="02.Objects\01.ForUnit\02.AttackBall">
       <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\ATBSystem">
+      <UniqueIdentifier>{92f11ab2-1bca-4d9a-8b88-bc4a92b2d1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern">
+      <UniqueIdentifier>{21afe87b-b282-483c-b349-155160f77a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\ATBSystem\Component">
+      <UniqueIdentifier>{b5c7dd88-220d-4b34-8282-bbab5c886ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\00.Born">
+      <UniqueIdentifier>{3cfe2250-14c4-49fc-888e-0637a4c44329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\01.Die">
+      <UniqueIdentifier>{78469b04-6508-4765-a4e7-c4400502a247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select">
+      <UniqueIdentifier>{27f022f9-ca4a-40c4-a40a-11fc4bda2836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\04.Base">
+      <UniqueIdentifier>{f077e342-8143-4eb5-8a12-32bb1f84d27d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\02.Hit">
+      <UniqueIdentifier>{44f19451-b6f4-4a6e-9e27-f8f6ccb90302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select\00.Atk02">
+      <UniqueIdentifier>{7950979c-3485-4348-afab-5164b8ba418e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -537,9 +564,6 @@
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h">
       <Filter>98.Include\ClientStructure_Status</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
-      <Filter>02.Objects\03.Monster\MB_Ganesha\FSM</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\AttackBall.h">
       <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
     </ClInclude>
@@ -551,6 +575,31 @@
     </ClInclude>
     <ClInclude Include="..\Header\PhaseChanger.h">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
+    <ClInclude Include="..\Header\ATBPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PatternMachineC.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\04.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ClientPatterns.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleAtk02Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select\00.Atk02</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -793,6 +842,27 @@
     </ClCompile>
     <ClCompile Include="..\Code\PhaseChanger.cpp">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ATBPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PatternMachineC.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\00.Born</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\02.Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleAtk02Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select\00.Atk02</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

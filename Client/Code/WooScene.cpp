@@ -23,6 +23,9 @@
 #include "FSM_KianaC.h"
 #include "Kiana.h"
 
+#include "PatternMachineC.h"
+#include "ClientPatterns.h"
+
 #include <ctime>
 /**/
 
@@ -79,12 +82,14 @@ void CWooScene::Start(void)
 		Load->ScrollViewLoad(this);
 		Load->CanvasLoad(this);
 		Load->TextLoad(this);
+		Load->ToolLoad(this);
 		delete(Load);
 
 		srand((_uint)time((NULL)));
 
 		CBattleUiManager::GetInstance()->Start(this);
 
+		// Camera
 		{
 			SP(Engine::CObject) spEmptyObject1 
 				= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
@@ -109,6 +114,7 @@ void CWooScene::Start(void)
 
 			m_spKiana = spKianaClone;
 			m_spKiana->GetTransform()->SetPosition(0, 0, 0);
+			//m_spKiana->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 			m_pController->AddSquadMember(m_spKiana);
 			m_pController->Start();
 		}
@@ -126,6 +132,8 @@ void CWooScene::Start(void)
 			spSickleClone->GetTransform()->SetSize(2, 2, 2);
 			spSickleClone->GetTransform()->SetPosition(0, 0, 10);
 			spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+			spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 			m_spSickle = spSickleClone;
 
 			/* Ganesha */
@@ -140,11 +148,6 @@ void CWooScene::Start(void)
 			//m_fsm = m_spGanesha->GetComponent<CFSM_GaneshaC>();
 		}
 	}
-
-	//CDataLoad* Load = new CDataLoad();
-	//Load->Setting();
-	//Load->ToolLoad(this);
-	//delete(Load);
 }
 
 void CWooScene::FixedUpdate(void)
@@ -160,10 +163,10 @@ void CWooScene::Update(void)
 	m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
 	m_pivot->GetTransform()->SetPositionY(0.f);
 
-	SicklePattern0();
-	SicklePattern1();
-	SicklePattern2();
-	SicklePattern3();
+	//SicklePattern0();
+	//SicklePattern1();
+	//SicklePattern2();
+	//SicklePattern3();
 	//SpiderPattern0();
 	//GaneshaPattern0();
 	//GaneshaPattern1();
@@ -226,7 +229,23 @@ void CWooScene::SicklePattern0()
 	if (false == m_sicklePattern0)
 		return;
 
-	//m_sickleAtkDis = 1.f;
+	if (true == m_sickleAtkReady && Name_Sickle_Attack_1 != m_fsm->GetCurStateString() && Name_Sickle_Attack_2 != m_fsm->GetCurStateString())
+	{
+		// 공격 패턴 정하기
+		_uint index = rand() % 2 + 1;
+
+		// 랜덤으로 공격 패턴 정함
+		switch (index)
+		{
+		case 1:
+			m_sicklePattern1 = true;
+			break;
+		case 2:
+			m_sicklePattern3 = true;
+			break;
+		}
+	}
+	
 
 	// 상대가 공격 범위 밖이고
 	if (len > m_sickleAtkDis)
@@ -287,22 +306,9 @@ void CWooScene::SicklePattern0()
 		{
 			m_fsm->ChangeState(Name_Sickle_StandBy);
 			m_sicklePattern0 = false;
-
-			_uint index = rand() % 3 + 1;
-
-			// 랜덤으로 공격 패턴 정함
-			switch (index)
-			{
-			case 1:
-				m_sicklePattern1 = true;
-				break;
-			case 3:
-				m_sicklePattern3 = true;
-				break;
-			}
 		}
 		
-		// 공격1 상태고, 애니가 끝났다면 
+		// 공격 상태고, 애니가 끝났다면 
 		if (Name_Sickle_Attack_1 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
 		{
 			m_fsm->ChangeState(Name_Sickle_Walk_Back);
@@ -324,6 +330,7 @@ void CWooScene::SicklePattern1()
 		return;
 
 	m_fsm->ChangeState(Name_Sickle_Attack_1);
+	m_sickleAtkDis = 1.2f;
 	m_sickleAtkReady = false;
 	m_sicklePattern0 = true;
 	m_sicklePattern1 = false;
@@ -335,6 +342,7 @@ void CWooScene::SicklePattern2()
 		return;
 
 	m_fsm->ChangeState(Name_Sickle_Walk_Back);
+	m_sickleAtkDis = 3.f;
 	m_sickleWalkReady = false;
 	m_sicklePattern0 = true;
 	m_sicklePattern2 = false;
