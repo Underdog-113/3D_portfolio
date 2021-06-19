@@ -90,10 +90,12 @@ private:
 
 	std::vector<Engine::CImageObject*> m_playerIllustration;
 	std::vector<Engine::CImageObject*> m_playerProperty;
-	std::vector<Engine::CImageObject*> m_skillPoint;
+	std::vector<Engine::CImageObject*> m_skillPoint; // 스킬사용할때 필요한 게이지
 	std::vector<Engine::CImageObject*> m_target;
 
-	std::vector<CButton*> m_skillButton;
+	std::vector<Engine::CImageObject*> m_skillImage; // 스킬버튼 이미지
+	std::vector<Engine::CImageObject*> m_skillActivationImage; // 스킬이 활성화되면 나올 이미지
+	std::vector<CButton*> m_skillButton; // 스킬버튼
 	std::vector<Engine::CSlider*> m_coolTimeSlider;
 
 	std::vector<Engine::CSlider*> m_monsterHpBar;

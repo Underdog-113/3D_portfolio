@@ -59,7 +59,6 @@ void CMonsterSliderC::Update(SP(CComponent) spThis)
 				if (m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->GetIsEnabled())
 					m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->SetIsEnabled(false);
 			}
-			
 		}
 		else if (!m_bWhiteCheck)
 		{

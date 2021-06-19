@@ -240,7 +240,8 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		button->GetTransform()->SetSize(size);
 
 		_float sort;
-		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);		button->GetTransform()->SetPositionZ(sort);
+		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
+		button->GetTransform()->SetPositionZ(sort);
 
 		std::wstring textureKey;
 		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);

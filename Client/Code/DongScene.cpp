@@ -48,14 +48,39 @@ void CDongScene::Start(void)
 {
 	__super::Start();
 
-	{
+	/*{
 		SP(Engine::CImageObject) image =
 			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"sdfsdf"));
 		image->GetTransform()->SetPositionZ(0.0f);
 		image->GetTransform()->SetSize(_float3(800, 600, 0));
 		image->GetTexture()->AddTexture(L"Card_00", 0);
+		image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 		image->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
+	}*/
+
+
+	{
+		SP(Engine::CImageObject) image =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"sdfsdf"));
+		image->GetTransform()->SetPositionZ(0.0f);
+		image->GetTransform()->SetSize(_float3(800, 600, 0));
+		image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		image->GetTexture()->AddTexture(L"Card_00", 0);
 	}
+
+	{
+		SP(CButton) button =
+			std::dynamic_pointer_cast<CButton>(ADD_CLONE(L"Button", true, (_int)Engine::ELayerID::UI, L"0"));
+		button->GetTransform()->SetPositionZ(0.1f);
+		button->GetTransform()->SetSize(_float3(141, 152, 0.1f));
+		button->SetButtonType(CButton::UP);
+		button->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		button->GetTexture()->AddTexture(L"Card_00", 0);
+	}
+
+
+
+
 }
 
 void CDongScene::FixedUpdate(void)

@@ -104,17 +104,17 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-	    CBattleUiManager::GetInstance()->SkillExecution(0, 10, 1);
+	    CBattleUiManager::GetInstance()->SkillExecution(3, 0, 5);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Skill_Bronya_Weapon_17", L"Defalut", L"Defalut");
+	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
 	{
-	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Bronya_Weapon_14", L"Skill_Bronya_Weapon_15", L"Skill_Bronya_Weapon_16", L"Defalut");
+	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
