@@ -126,13 +126,6 @@ void CSoftEffect::LateUpdate(void)
 
 }
 
-void CSoftEffect::PreRender(void)
-{
-	if (!m_spTexture->GetTexData().empty())
-	{
-		m_spRectTex->PreRender(m_spGraphics);
-	}
-}
 
 void CSoftEffect::PreRender(LPD3DXEFFECT pEffect)
 {
@@ -146,27 +139,11 @@ void CSoftEffect::PreRender(LPD3DXEFFECT pEffect)
 	}
 }
 
-void CSoftEffect::Render(void)
-{
-	if (!m_spTexture->GetTexData().empty())
-	{
-		m_spRectTex->Render(m_spGraphics);
-	}
-}
-
 void CSoftEffect::Render(LPD3DXEFFECT pEffect)
 {
 	if (!m_spTexture->GetTexData().empty())
 	{
 		m_spRectTex->Render(m_spGraphics, pEffect);
-	}
-}
-
-void CSoftEffect::PostRender(void)
-{
-	if (!m_spTexture->GetTexData().empty())
-	{
-		m_spRectTex->PostRender(m_spGraphics);
 	}
 }
 

@@ -94,12 +94,12 @@ void CTextureC::OnDisable(void)
 
 void CTextureC::SetAlpha(_float alpha)
 {
-	m_color.a = alpha;
+	m_color.w = alpha;
 }
 
 void CTextureC::AddAlpha(_float alpha)
 {
-	m_color.a += alpha;
+	m_color.w += alpha;
 }
 
 

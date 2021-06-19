@@ -16,6 +16,7 @@ public:
 public:
 	virtual			void				SetUpConstantTable		(SP(CGraphicsC) spGC) PURE;
 					void				SetupWorldViewProj		(SP(CGraphicsC) spGC);
+					void				SetupOrthoWVP			(SP(CGraphicsC) spGC);
 protected:
 	GETTOR			(LPD3DXEFFECT,		m_pEffect,				nullptr,		Effect)
 	GETTOR			(LPD3DXBUFFER,		m_pErrMsg,				nullptr,		ErrMsg)
