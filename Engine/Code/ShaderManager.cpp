@@ -22,6 +22,8 @@
 #include "DissolveShader.h"
 #include "SpawnEffectShader.h"
 #include "SoftEffectShader.h"
+
+#include "WireShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -45,6 +47,7 @@ void CShaderManager::Awake(void)
 	m_vShaders.emplace_back(CDissolveShader::Create());
 	m_vShaders.emplace_back(CSpawnEffectShader::Create());
 	m_vShaders.emplace_back(CSoftEffectShader::Create());
+	m_vShaders.emplace_back(CWireShader::Create());
 }
 
 void CShaderManager::OnDestroy(void)
@@ -102,6 +105,8 @@ _int CShaderManager::GetShaderID(std::wstring shaderName)
 		return (_int)EShaderID::SpawnEffectShader;
 	else if (shaderName == L"SoftEffectShader")
 		return (_int)EShaderID::SoftEffectShader;
+	else if(shaderName == L"WireShader")
+		return (_int)EShaderID::WireShader;
 	else
 	{
 		MSG_BOX(__FILE__, L"Wrong shdaer name in CShaderManager::GetShaderID");

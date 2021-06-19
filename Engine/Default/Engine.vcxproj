@@ -39,7 +39,6 @@
     <ClInclude Include="..\Header\DataStore.h" />
     <ClInclude Include="..\Header\DebugC.h" />
     <ClInclude Include="..\Header\DebugObject.h" />
-    <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\DeferredBlendShader.h" />
     <ClInclude Include="..\Header\DeferredLightShader.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
@@ -117,6 +116,7 @@
     <ClInclude Include="..\Header\TransformC.h" />
     <ClInclude Include="..\Header\VIBufferC.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
+    <ClInclude Include="..\Header\WireShader.h" />
     <ClInclude Include="..\Header\WndApp.h" />
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +140,6 @@
     <ClCompile Include="..\Code\DataStore.cpp" />
     <ClCompile Include="..\Code\DebugC.cpp" />
     <ClCompile Include="..\Code\DebugObject.cpp" />
-    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DeferredBlendShader.cpp" />
     <ClCompile Include="..\Code\DeferredLightShader.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
@@ -213,6 +212,7 @@
     <ClCompile Include="..\Code\TransformC.cpp" />
     <ClCompile Include="..\Code\VIBufferC.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
+    <ClCompile Include="..\Code\WireShader.cpp" />
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +266,7 @@
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\WireShader.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>

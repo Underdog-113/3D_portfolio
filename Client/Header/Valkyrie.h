@@ -52,6 +52,11 @@ protected:
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 
+protected:
+	GETTOR			(SP(Engine::CRigidBodyC),		m_spRigidBody,			nullptr, RigidBody)
+	GETTOR			(SP(Engine::CCollisionC),		m_spCollision,			nullptr, Collision)
+	GETTOR			(SP(Engine::CDebugC),			m_spDebug,				nullptr, Debug)
+
 protected:	
 	GETTOR			(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)
 		

@@ -66,10 +66,10 @@ void CAttackTrail_Client::Update()
 {
 	__super::Update();
 
-	/*if (m_fTrailAlpha <= 0)
+	if (m_fTrailAlpha <= 0)
 	{
 		this->SetDeleteThis(true);
-	}*/
+	}
 
 	if (Engine::IMKEY_DOWN(KEY_LEFT))
 	{
@@ -84,20 +84,11 @@ void CAttackTrail_Client::LateUpdate()
 	__super::LateUpdate();
 }
 
-void CAttackTrail_Client::PreRender()
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CAttackTrail_Client::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CAttackTrail_Client::Render()
-{
-	m_spMesh->Render(m_spGraphics);
-}
 
 void CAttackTrail_Client::Render(LPD3DXEFFECT pEffect)
 {
@@ -106,10 +97,6 @@ void CAttackTrail_Client::Render(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 }
 
-void CAttackTrail_Client::PostRender()
-{
-	m_spMesh->PostRender(m_spGraphics);
-}
 
 void CAttackTrail_Client::PostRender(LPD3DXEFFECT pEffect)
 {

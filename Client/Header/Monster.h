@@ -23,9 +23,9 @@ public:
 
 	virtual void LateUpdate(void) override;
 
-	virtual void PreRender(void) PURE;
-	virtual void Render(void) PURE;
-	virtual void PostRender(void) PURE;
+	virtual void PreRender(LPD3DXEFFECT pEffect) PURE;
+	virtual void Render(LPD3DXEFFECT pEffect) PURE;
+	virtual void PostRender(LPD3DXEFFECT pEffect) PURE;
 
 	virtual void OnDestroy(void) override;
 
@@ -41,7 +41,11 @@ protected:
 	GETTOR		(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
 	GETTOR		(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR		(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
-	GETTOR		(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)			
+	GETTOR		(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)	
+
+protected:
+	//GETTOR		(SP(Engine::CCollisionC),		m_spCollision,		nullptr,	Collision)
+	//GETTOR		(SP(Engine::CDebugC),			m_spDebug,			nullptr,	Debug)
 
 protected:
 	GETTOR		(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)

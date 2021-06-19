@@ -94,11 +94,6 @@ void CThreeStageScene::OnDisable(void)
 
 }
 
-void CThreeStageScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
-
 void CThreeStageScene::InitPrototypes(void)
 {
 }

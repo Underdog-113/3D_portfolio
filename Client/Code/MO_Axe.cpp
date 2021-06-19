@@ -59,29 +59,14 @@ void CMO_Axe::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMO_Axe::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CMO_Axe::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CMO_Axe::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
-
 void CMO_Axe::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CMO_Axe::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CMO_Axe::PostRender(LPD3DXEFFECT pEffect)

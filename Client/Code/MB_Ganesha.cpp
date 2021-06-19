@@ -42,19 +42,16 @@ void CMB_Ganesha::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMB_Ganesha::PreRender(void)
+void CMB_Ganesha::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMB_Ganesha::Render(void)
+void CMB_Ganesha::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMB_Ganesha::PostRender(void)
+void CMB_Ganesha::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMB_Ganesha::OnDestroy(void)

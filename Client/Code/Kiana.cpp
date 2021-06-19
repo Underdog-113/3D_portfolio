@@ -47,8 +47,14 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 
+
+	spClone->m_spRigidBody	= spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
+
+
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
-	
+
 	return spClone;
 }
 
@@ -57,7 +63,7 @@ void CKiana::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_KianaC>();
-	
+
 }
 
 void CKiana::Start(void)
@@ -77,6 +83,8 @@ void CKiana::Start(void)
 
 	m_pStat = new V_Kiana_Stat;
 	m_pStat->SetupStatus(&stat);
+
+	m_spTransform->SetPositionY(10.f);
 }
 
 void CKiana::FixedUpdate(void)
@@ -100,29 +108,14 @@ void CKiana::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CKiana::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CKiana::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CKiana::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
-
 void CKiana::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CKiana::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)
@@ -225,7 +218,7 @@ void CKiana::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
-void CKiana::UltraAtk(UltraAttack index)
+void CKiana::UltraAtk(AttackOption index)
 {
 	if (!m_ultraMode)
 		return;
@@ -290,7 +283,7 @@ void CKiana::UltraAtk(UltraAttack index)
 	}
 }
 
-void CKiana::UltraAtk_Ring(UltraAttack index)
+void CKiana::UltraAtk_Ring(AttackOption index)
 {
 	if (!m_ultraMode)
 		return;
@@ -360,4 +353,54 @@ void CKiana::SetUltraMode(bool value)
 
 	if (m_ultraMode)
 		m_pCT->GetUILinker()->Ultra();
+}
+
+SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
+{
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+
+	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
+	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
+
+	return spMeshEffect;
+}
+
+void CKiana::SetEffect(SP(Engine::CObject) spEffect, AttackOption option)
+{
+	switch (option)
+	{
+	case CKiana::ATK01:
+		m_spEffect_Attack1 = spEffect;
+		break;
+	case CKiana::ATK02:
+		m_spEffect_Attack2 = spEffect;
+		break;
+	case CKiana::ATK03:
+		m_spEffect_Attack3 = spEffect;
+		break;
+	case CKiana::ATK04:
+		m_spEffect_Attack4 = spEffect;
+		break;
+	case CKiana::ATK05:
+		m_spEffect_Attack5 = spEffect;
+		break;
+	case CKiana::Branch_ATK01:
+		break;
+	case CKiana::Branch_ATK02:
+		break;
+	case CKiana::QTE_ATK:
+		break;
+	default:
+		break;
+	}
 }

@@ -100,51 +100,8 @@ void CMeshC::LateUpdate(SP(CComponent) spThis)
 {
 }
 
-void CMeshC::PreRenderWire(SP(CGraphicsC) spGC)
-{
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
-	pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
-	pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-
-	pDevice->SetMaterial(&spGC->m_mtrl);
-}
-
-void CMeshC::PreRender(SP(CGraphicsC) spGC)
-{
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetTransform()->GetLastWorldMatrix());
-	pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
-	pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-	//pDevice->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
-	pDevice->SetMaterial(&spGC->m_mtrl);
-}
-
 void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-}
-
-void CMeshC::RenderWire(SP(CGraphicsC) spGC)
-{
-	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
-	{
-		CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(m_vMeshDatas[i]);
-		for (_ulong j = 0; j < pSM->GetSubsetCount(); ++j)
-		{
-			pSM->GetMesh()->DrawSubset(j);
-		}
-	}
-}
-
-void CMeshC::Render(SP(CGraphicsC) spGC)
-{
-	for (_size i = 0; i < m_vMeshDatas.size(); ++i)
-	{
-		if (m_vMeshDatas[i]->GetMeshType() == (_int)EMeshType::Static)
-			RenderStatic(spGC, m_vMeshDatas[i], (_int)i);
-		else
-			RenderDynamic(spGC, m_vMeshDatas[i], (_int)i);
-	}
 }
 
 void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
@@ -156,14 +113,6 @@ void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 		else
 			RenderDynamic(spGC, m_vMeshDatas[i], (_int)i, pEffect);
 	}
-}
-
-void CMeshC::PostRenderWire(SP(CGraphicsC) spGC)
-{
-}
-
-void CMeshC::PostRender(SP(CGraphicsC) spGC)
-{
 }
 
 void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
@@ -308,15 +257,18 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int meshI
 
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
-		_TexData* pTexData = spGC->GetTexture()->GetTexData()[meshIndex][i];
+		if (spGC->GetTexture())
+		{
+			_TexData* pTexData = spGC->GetTexture()->GetTexData()[meshIndex][i];
 
-		if (pTexData->includeAlpha)
-			pass = 1;
-		else
-			pass = 0;
+			if (pTexData->includeAlpha)
+				pass = 1;
+			else
+				pass = 0;
 
-		pEffect->SetTexture("g_BaseTexture", pTexData->pTexture);
-		pEffect->CommitChanges();
+			pEffect->SetTexture("g_BaseTexture", pTexData->pTexture);
+			pEffect->CommitChanges();
+		}
 
 		pEffect->BeginPass(pass);
 		pSM->GetMesh()->DrawSubset(i);
@@ -342,7 +294,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 	_float3 rootMotionMoveAmount 
 		= _float3(
 			rootChildCombMat._41,
-			rootChildCombMat._42,
+			0/*rootChildCombMat._42*/,
 			rootChildCombMat._43);
 
 	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
@@ -424,6 +376,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			{
 				meshContainer->pRenderingMatrix[i]._41 -= rootMotionMoveAmount.x;
 				meshContainer->pRenderingMatrix[i]._42 -= rootMotionMoveAmount.y;
+				meshContainer->pRenderingMatrix[i]._42 += m_halfYOffset;
 				meshContainer->pRenderingMatrix[i]._43 -= rootMotionMoveAmount.z;
 			}
 		}

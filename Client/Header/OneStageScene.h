@@ -26,17 +26,11 @@ public:
 	void				OnEnable(void) override;
 	void				OnDisable(void) override;
 
-public:
-	void				ChangeScene(CClientScene* pScene);
-
 private:
 	void				Start_SetupUI(void);
 	void				Start_SetupMembers(void);
 	void				InitPrototypes(void) override;
 
-
-
-	GETTOR(CLoading*, m_pLoading, nullptr, Loading)
 
 
 private:

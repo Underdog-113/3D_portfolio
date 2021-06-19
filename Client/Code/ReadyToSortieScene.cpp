@@ -95,10 +95,6 @@ void CReadyToSortieScene::OnDisable(void)
 
 }
 
-void CReadyToSortieScene::ChangeScene(CClientScene* pScene)
-{
-	m_pLoading = CLoading::Create(pScene, false);
-}
 
 void CReadyToSortieScene::InitPrototypes(void)
 {

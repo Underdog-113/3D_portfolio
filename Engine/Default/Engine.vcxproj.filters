@@ -64,9 +64,6 @@
     <Filter Include="03.Components\00.System\00.Transform">
       <UniqueIdentifier>{b8a70213-5be9-4c86-88ce-81f9e0dba806}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent">
-      <UniqueIdentifier>{aae8af78-9aba-43e0-912e-5e8c59a48eb8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Components\00.System\02.PhysicsComponent">
       <UniqueIdentifier>{8471112c-b5b5-499a-be5c-825cfbca38f5}</UniqueIdentifier>
     </Filter>
@@ -81,18 +78,6 @@
     </Filter>
     <Filter Include="03.Components\01.Effect\00.FadeInOut">
       <UniqueIdentifier>{ddde980e-02dd-4d21-9898-c6eac442ec6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\03.Shader">
-      <UniqueIdentifier>{279918f3-50a6-4547-8f3e-cd69539ed9b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer">
-      <UniqueIdentifier>{bff4821e-494a-40fe-83e0-1f608076580b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\01.Mesh">
-      <UniqueIdentifier>{20bbbff3-bb4c-4660-aed0-5af5927b31d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Texture">
-      <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Structure\04.Component\00.RenderComponent">
       <UniqueIdentifier>{b2366ca8-632f-44c1-aba9-56a757b34e24}</UniqueIdentifier>
@@ -163,9 +148,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\03.DeferredLightShader">
       <UniqueIdentifier>{fbefd66d-fb54-40ac-883a-f79af4ceac61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
-      <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Components\99. Develop\01. ParticleSystem">
       <UniqueIdentifier>{fe05836d-e826-479d-823e-4bdcf9f40930}</UniqueIdentifier>
     </Filter>
@@ -189,9 +171,6 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
       <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.DecoObject">
-      <UniqueIdentifier>{1b02dc11-2315-4209-8153-e83cb6df50b0}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\04.Camera">
       <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
@@ -280,12 +259,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
       <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
-      <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
-      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
       <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
     </Filter>
@@ -298,14 +271,41 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader">
       <UniqueIdentifier>{deea1f5e-2751-4c23-9ec1-18261d4ec4f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\09.Text">
-      <UniqueIdentifier>{55e89009-2f13-42a0-9ad6-3701b9538748}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader">
       <UniqueIdentifier>{045ee1b4-ba29-4600-a5fc-0933ef05863b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent">
+      <UniqueIdentifier>{aae8af78-9aba-43e0-912e-5e8c59a48eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\03.Shader">
+      <UniqueIdentifier>{279918f3-50a6-4547-8f3e-cd69539ed9b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer">
+      <UniqueIdentifier>{bff4821e-494a-40fe-83e0-1f608076580b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex">
+      <UniqueIdentifier>{1a0d0916-1a8e-4da0-b725-225d7bfd556e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\00.VIBuffer\00.RectTex">
+      <UniqueIdentifier>{ffaa5455-3e4d-4c27-add8-197a07818eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\01.Mesh">
+      <UniqueIdentifier>{20bbbff3-bb4c-4660-aed0-5af5927b31d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\02.Texture">
+      <UniqueIdentifier>{7fb24413-afbb-47bf-b5fb-e2a4dfaf65b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
+      <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
+    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader">
       <UniqueIdentifier>{55716081-6c16-4585-bdc2-aa693a780bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Text">
+      <UniqueIdentifier>{55e89009-2f13-42a0-9ad6-3701b9538748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader">
+      <UniqueIdentifier>{2bd86ea5-c7ba-4d26-9f41-0dd24f09635e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -543,9 +543,6 @@
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DecoObject.cpp">
-      <Filter>02.Objects\03.DecoObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Canvas.cpp">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClCompile>
@@ -571,7 +568,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextObject.cpp">
-      <Filter>02.Objects\09.Text</Filter>
+      <Filter>02.Objects\03.Text</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DissolveShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
@@ -581,6 +578,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\SoftEffectShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WireShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -749,9 +749,6 @@
     <ClInclude Include="..\Header\FadeInOutC.h">
       <Filter>03.Components\01.Effect\00.FadeInOut</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Camera.h">
-      <Filter>02.Objects\04.Camera</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\ShaderC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\03.Shader</Filter>
     </ClInclude>
@@ -842,9 +839,6 @@
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\DecoObject.h">
-      <Filter>02.Objects\03.DecoObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Canvas.h">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClInclude>
@@ -870,7 +864,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextObject.h">
-      <Filter>02.Objects\09.Text</Filter>
+      <Filter>02.Objects\03.Text</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DissolveShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
@@ -878,8 +872,14 @@
     <ClInclude Include="..\Header\SpawnEffectShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Camera.h">
+      <Filter>02.Objects\04.Camera</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SoftEffectShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WireShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -930,6 +930,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\WireShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

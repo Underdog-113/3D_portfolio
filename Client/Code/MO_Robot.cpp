@@ -42,19 +42,16 @@ void CMO_Robot::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMO_Robot::PreRender(void)
+void CMO_Robot::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMO_Robot::Render(void)
+void CMO_Robot::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMO_Robot::PostRender(void)
+void CMO_Robot::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Robot::OnDestroy(void)

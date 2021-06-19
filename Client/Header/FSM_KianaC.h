@@ -21,7 +21,7 @@ class CKiana;
 class CStageControlTower;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
-	enum Appear_Option { None, QTE };
+	enum Appear_Option { None, QTEAppear };
 public:
 	CFSM_KianaC();
 	~CFSM_KianaC() = default;
@@ -34,6 +34,10 @@ public:
 private:
 	void RegisterAllState();
 	void FixRootMotionOffset(_uint index);
+
+	void CreateEffect(std::wstring name);
+
+
 
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
@@ -54,10 +58,12 @@ private: /* Special Actions */
 
 	bool CheckAction_Ultra();
 
+
 private:
 	bool m_checkUltraRing = false;
 
 	bool m_checkUltraAtk = false;
+
 
 
 private:
