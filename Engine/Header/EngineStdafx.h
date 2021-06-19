@@ -31,9 +31,10 @@
 
 //For FileStream
 #include <fstream>
+#include <ostream>
+#include <sstream>
 
 //For strings
-#include <sstream>
 #include <string>
 #include <codecvt>
 

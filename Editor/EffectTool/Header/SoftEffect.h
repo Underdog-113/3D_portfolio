@@ -38,6 +38,7 @@ public:
 private:
 	static _uint m_s_uniqueID;
 
+public:
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
 	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
 	GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
@@ -47,9 +48,10 @@ private:
 	GETTOR_SETTOR(_int, m_maxXIndex, 0, maxXIndex)
 	GETTOR_SETTOR(_int, m_maxYIndex, 0, maxYIndex)
 	GETTOR_SETTOR(_bool, m_AnimisPlay, false, AnimisPlay)
+	GETTOR_SETTOR(_int, m_TilingX, 0, TilingX)
+	GETTOR_SETTOR(_int, m_TilingY, 0, TilingY)
+
 private:
 	_float m_fTIme;
-	_int   m_TilingX;
-	_int   m_TilingY;
 };
 
