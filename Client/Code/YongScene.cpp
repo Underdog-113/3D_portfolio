@@ -2,6 +2,8 @@
 #include "YongScene.h"
 #include "FRC.h"
 
+#include "StageControlTower.h"
+#include "Kiana.h"
 CYongScene::CYongScene()
 {
 }
@@ -21,7 +23,6 @@ CClientScene * CYongScene::Create(void)
 
 void CYongScene::Free(void)
 {
-
 	OnDestroy();
 
 	delete this;
@@ -30,55 +31,64 @@ void CYongScene::Free(void)
 void CYongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-
 	
-
 	InitPrototypes();
+
+	m_pController = CStageControlTower::GetInstance();
+	m_pController->Awake();
 }
 
 void CYongScene::Start(void)
 {
 	__super::Start();
 	{
-		//SP(Engine::CObject) spMeshEffect = ADD_CLONE(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+		// Kiana Setting
+		{
+			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
-		////spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		//spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(L"kiana_Attack_Trail");
-		//spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
-		//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+			m_spKiana = spKianaClone;
+			m_pController->AddSquadMember(m_spKiana);
+			m_pController->Start(CStageControlTower::WithoutUI);
 
-	/*	spEmptyObject = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Enemy, L"Cube0");
-		spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Particle);
-		spEmptyObject->AddComponent<Engine::CParticleSystemC>();
+			spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 
-		spEmptyObject->GetTransform()->SetSize(2, 2, 2);
-		spEmptyObject->GetTransform()->SetPosition(3, 0, 0);
+			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+			cam->SetTarget(m_spKiana);
+			cam->SetTargetDist(2.f);
+			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+		}
 
-		m_pObjectFactory->AddClone(L"MO_Spider", true, (_int)ELayerID::Enemy, L"MO_Spider");*/
+		// cube terrain
+		{
 
-		//	// Save & Load Ex
-		//	_int numOfMeshEffect;
-		//	GET_VALUE(false, (_int)EDataID::EFFECT, m_objectKey + L"_EffectData", L"numOfMeshEffect", numOfMeshEffect);
+			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+			
+			spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+			spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+			spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			
+			spCube->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
+			spCube->GetComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
+			
+			spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+			spCube->AddComponent<Engine::CRigidBodyC>();
+			spCube->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+			spCube->GetTransform()->SetSize(10, 1, 10);
+			spCube->GetTransform()->SetPosition(0, -1, 0);
 
-		//	for (_int i = 0; I < numO!fMeshEffect; ++i)
-		//	{
-		//		SP(CMeshEffect) spMeshEffect = ADD_CLONE(L"MeshEffect", true, (_int)ELayerID::Effect);
+		}
 
-		//		_int numOfTexture;
-		//		GET_VALUE(false, (_int)EDataID::EFFECT, m_objectKey + L"_EffectData", L"numOfTexture" + std::to_wstring(i), numOfTexture);
-		//		for (_int j = 0; j < numOfTexture; ++j)
-		//		{
-		//			std::wstring curTexKey;
-		//			GET_VALUE(false, (_int)EDataID::EFFECT, m_objectKey + L"_EffectData", L"set" + std::to_wstring(i)
-		//				+ L"_texkey" + std::to_wstring(j), curTexKey);
-		//			spMeshEffect->GetTexture()->AddTexture(curTexKey);
-		//		}
-
-		//	}
-		}		
+		// add effects
+		CKiana* pKiana = (CKiana*)m_spKiana.get();
+		pKiana->SetEffect_Attack1(pKiana->CreateEffect(L"Kiana_Attack_0"));
+		pKiana->SetEffect_Attack2(pKiana->CreateEffect(L"Kiana_Attack_1"));
+		pKiana->SetEffect_Attack3(pKiana->CreateEffect(L"Kiana_Attack_2"));
+		pKiana->SetEffect_Attack4(pKiana->CreateEffect(L"Kiana_Attack_3"));
+		pKiana->SetEffect_Attack5(pKiana->CreateEffect(L"Kiana_Attack_3"));
+	}		
 }
 
 void CYongScene::FixedUpdate(void)
@@ -88,6 +98,7 @@ void CYongScene::FixedUpdate(void)
 
 void CYongScene::Update(void)
 {
+	m_pController->Update();
 	__super::Update();
 }
 
@@ -100,6 +111,8 @@ void CYongScene::LateUpdate(void)
 void CYongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	m_pController->DestroyInstance(); 
 }
 
 void CYongScene::OnEnable(void)

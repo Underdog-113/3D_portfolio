@@ -36,8 +36,8 @@ private:
 	GETTOR_SETTOR	(_float,	m_speed,					0.f,			Speed)
 
 	GETTOR_SETTOR	(_bool,		m_isVerticalAnim,			false,			IsVerticalAnim)
-	_float3 m_animStartOffset = ZERO_VECTOR;
 
+	_float3 m_animStartOffset = ZERO_VECTOR;
 	_float3 m_prevRootMotionPos = ZERO_VECTOR;
 };
 

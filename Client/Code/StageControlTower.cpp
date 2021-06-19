@@ -22,13 +22,17 @@ void CStageControlTower::Awake(void)
 {
 }
 
-void CStageControlTower::Start(void)
+void CStageControlTower::Start(CreateMode mode)
 {
 	m_pInput = Engine::CInputManager::GetInstance();
-	m_pLinker = new CUILinker;
+
+	m_mode = mode;
+	if (m_mode != WithoutUI)
+		m_pLinker = new CUILinker;
 	m_pDealer = new CStatusDealer;
 
-	m_pLinker->SetControlTower(this);
+	if (m_mode != WithoutUI)
+		m_pLinker->SetControlTower(this);
 	m_pDealer->SetControlTower(this);
 }
 
@@ -36,12 +40,14 @@ void CStageControlTower::Start(void)
 void CStageControlTower::Update(void)
 {
 	MoveControl();
-	StageUIControl();
+	if (m_mode != WithoutUI)
+		StageUIControl();
 }
 
 void CStageControlTower::OnDestroy()
 {
-	SAFE_DELETE(m_pLinker)
+	if (m_mode != WithoutUI)
+		SAFE_DELETE(m_pLinker)
 	SAFE_DELETE(m_pDealer)
 }
 
@@ -131,7 +137,8 @@ bool CStageControlTower::CheckMoveOrder()
 		
 	}
 
-	m_pLinker->MoveJoyStick();	// ui interact
+	if (m_mode != WithoutUI)
+		m_pLinker->MoveJoyStick();	// ui interact
 
 	if (!m_moveFlag)
 		return false;
@@ -226,7 +233,8 @@ void CStageControlTower::ReserveMoveOrder()
 		m_reserveMoveFlag |= MoveFlag_Back;		
 	}
 
-	m_pLinker->MoveJoyStick();	// ui interact
+	if (m_mode != WithoutUI)
+		m_pLinker->MoveJoyStick();	// ui interact
 
 	if (!m_reserveMoveFlag)
 		return;

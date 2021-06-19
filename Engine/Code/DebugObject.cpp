@@ -19,6 +19,7 @@ void CDebugObject::Awake(void)
 
 	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
+	m_spShader		= AddComponent<Engine::CShaderC>();
 }
 
 void CDebugObject::Start(void)
@@ -27,6 +28,7 @@ void CDebugObject::Start(void)
 
 	m_spMesh		= GetComponent<Engine::CMeshC>();
 	m_spGraphics	= GetComponent<Engine::CGraphicsC>();
+	m_spShader		= GetComponent<Engine::CShaderC>();
 }
 
 void CDebugObject::FixedUpdate(void)

@@ -31,6 +31,7 @@ SP(Engine::CObject) CImageObject::MakeClone(void)
 	spClone->m_spGraphics = spClone->GetComponent<CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<CRectTexC>();
+	spClone->m_spShader = spClone->GetComponent<CShaderC>();
 
 	return spClone;
 }
@@ -45,6 +46,7 @@ void CImageObject::Awake(void)
 	(m_spRectTex = AddComponent<CRectTexC>())->SetIsOrtho(true);
 	(m_spGraphics = AddComponent<CGraphicsC>())->SetRenderID((_int)ERenderID::UI);
 	m_spTexture = AddComponent<CTextureC>();
+	m_spShader = AddComponent<CShaderC>();
 }	
 
 void CImageObject::Start(void)
@@ -67,27 +69,11 @@ void CImageObject::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CImageObject::PreRender(void)
-{
-	m_spRectTex->PreRender(m_spGraphics);
-}
-
 void CImageObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PreRender(GetComponent<CGraphicsC>(), pEffect);
 }
 
-void CImageObject::Render(void)
-{
-	m_spRectTex->Render(m_spGraphics);
-
-	SP(CTextC) textC = GetComponent<CTextC>();
-
-	if (textC)
-	{
-		textC->Render(m_spGraphics);
-	}
-}
 
 void CImageObject::Render(LPD3DXEFFECT pEffect)
 {
@@ -99,11 +85,6 @@ void CImageObject::Render(LPD3DXEFFECT pEffect)
 	{
 		textC->Render(m_spGraphics);
 	}
-}
-
-void CImageObject::PostRender(void)
-{
-	m_spRectTex->PostRender(m_spGraphics);
 }
 
 void CImageObject::PostRender(LPD3DXEFFECT pEffect)

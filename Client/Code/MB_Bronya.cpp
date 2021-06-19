@@ -60,19 +60,17 @@ void CMB_Bronya::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMB_Bronya::PreRender(void)
+void CMB_Bronya::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMB_Bronya::Render(void)
+void CMB_Bronya::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMB_Bronya::PostRender(void)
+void CMB_Bronya::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
+
 }
 
 void CMB_Bronya::OnDestroy(void)

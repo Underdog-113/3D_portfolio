@@ -481,27 +481,4 @@ void CWooScene::CoolTime(_float& curTime, _float maxTime, _bool& readyType)
 
 void CWooScene::InitPrototypes(void)
 {
-	SP(CKiana) spKianaPrototype(CKiana::Create(false, this));
-	ADD_PROTOTYPE(spKianaPrototype);
-
-	SP(CKiana_CatPaw_Atk01) spPaw01(CKiana_CatPaw_Atk01::Create(false, this));
-	ADD_PROTOTYPE(spPaw01);
-
-	SP(CKiana_CatPaw_Atk02) spPaw02(CKiana_CatPaw_Atk02::Create(false, this));
-	ADD_PROTOTYPE(spPaw02);
-
-	SP(CKiana_CatPaw_Atk03) spPaw03(CKiana_CatPaw_Atk03::Create(false, this));
-	ADD_PROTOTYPE(spPaw03);
-
-	SP(CKiana_CatPaw_Atk04) spPaw04(CKiana_CatPaw_Atk04::Create(false, this));
-	ADD_PROTOTYPE(spPaw04);
-
-	SP(CKiana_CatPaw_Atk05) spPaw05(CKiana_CatPaw_Atk05::Create(false, this));
-	ADD_PROTOTYPE(spPaw05);
-
-	SP(CKiana_CatPaw_Ring_Atk01) spPawRing01(CKiana_CatPaw_Ring_Atk01::Create(false, this));
-	ADD_PROTOTYPE(spPawRing01);
-
-	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(false, this));
-	ADD_PROTOTYPE(spPistol);
 }

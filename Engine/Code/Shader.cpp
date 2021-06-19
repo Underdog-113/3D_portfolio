@@ -31,12 +31,38 @@ void CShader::Awake(void)
 										&m_pEffect,
 										&m_pErrMsg)))
 	{
-		MSG_BOX(__FILE__, L"Failed creating EffectFromFile in CMeshShader::Awake()");
+		MSG_BOX(__FILE__, L"Failed creating EffectFromFile in CShader::Awake()");
 		ABORT;
 	}
-	/*else if (nullptr != m_pErrMsg)
+	else if (nullptr != m_pErrMsg)
 	{
-		MSG_BOX(__FILE__, L"CreateEffectFromFile warning in CMeshShader::Awake()");
-		ABORT;
-	}*/
+		std::string pErrMsg = (char*)m_pErrMsg->GetBufferPointer();
+		MSG_BOX(__FILE__, (L"CreateEffectFromFile warning in " + m_objectKey + L"::Awake()").c_str());
+	}
+}
+
+void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)
+{
+	_mat worldMat, viewMat, projMat;
+
+	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	viewMat = GET_MAIN_CAM->GetViewMatrix();
+	projMat = GET_MAIN_CAM->GetProjMatrix();
+
+	m_pEffect->SetMatrix("g_matWorld", &worldMat);
+	m_pEffect->SetMatrix("g_matView", &viewMat);
+	m_pEffect->SetMatrix("g_matProj", &projMat);
+}
+
+void CShader::SetupOrthoWVP(SP(CGraphicsC) spGC)
+{
+	_mat worldMat, viewMat, projMat;
+
+	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	D3DXMatrixIdentity(&viewMat);
+	projMat = GET_MAIN_CAM->GetOrthoMatrix();
+
+	m_pEffect->SetMatrix("g_matWorld", &worldMat);
+	m_pEffect->SetMatrix("g_matView", &viewMat);
+	m_pEffect->SetMatrix("g_matProj", &projMat);
 }

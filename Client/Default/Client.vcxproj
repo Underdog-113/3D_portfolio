@@ -202,6 +202,7 @@
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\FSM_TheresaC.h" />
+    <ClInclude Include="..\Header\GlitterC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
     <ClInclude Include="..\Header\ChangmoScene.h" />
     <ClInclude Include="..\Header\ClientDefine.h" />
@@ -226,7 +227,9 @@
     <ClInclude Include="..\Header\FSM_ScoutC.h" />
     <ClInclude Include="..\Header\FSM_SpiderC.h" />
     <ClInclude Include="..\Header\ButtonFunction.h" />
+    <ClInclude Include="..\Header\Include_Valkyrie.h" />
     <ClInclude Include="..\Header\InitScene.h" />
+    <ClInclude Include="..\Header\Item.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
@@ -246,6 +249,7 @@
     <ClInclude Include="..\Header\MeshEffect_Client.h" />
     <ClInclude Include="..\Header\Monster.h" />
     <ClInclude Include="..\Header\ATBPattern.h" />
+    <ClInclude Include="..\Header\MonsterSliderC.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
     <ClInclude Include="..\Header\MO_Lancer.h" />
     <ClInclude Include="..\Header\MO_Ninza.h" />
@@ -299,6 +303,7 @@
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
+    <ClCompile Include="..\Code\GlitterC.cpp" />
     <ClCompile Include="..\Code\HitsUiC.cpp" />
     <ClCompile Include="..\Code\ChangmoScene.cpp" />
     <ClCompile Include="..\Code\ClientScene.cpp" />
@@ -318,6 +323,7 @@
     <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
     <ClCompile Include="..\Code\ButtonFunction.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
+    <ClCompile Include="..\Code\Item.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
@@ -337,6 +343,7 @@
     <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\ATBPattern.cpp" />
+    <ClCompile Include="..\Code\MonsterSliderC.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
     <ClCompile Include="..\Code\MO_Lancer.cpp" />
     <ClCompile Include="..\Code\MO_Ninza.cpp" />
