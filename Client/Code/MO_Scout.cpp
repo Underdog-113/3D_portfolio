@@ -42,19 +42,16 @@ void CMO_Scout::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMO_Scout::PreRender(void)
+void CMO_Scout::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMO_Scout::Render(void)
+void CMO_Scout::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMO_Scout::PostRender(void)
+void CMO_Scout::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Scout::OnDestroy(void)

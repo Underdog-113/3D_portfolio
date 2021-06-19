@@ -124,6 +124,8 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			}
 		}
 
+		image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+
 	}
 }
 
@@ -188,17 +190,17 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"imageTextureKey" + std::to_wstring(j), textureKey);
 			imageObj[j]->GetTexture()->AddTexture(textureKey, 0);
 		}
-
+		imageObj[0]->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 		imageObj[1]->SetParent(slider.get());
 		if (imageType == 0)
 		{
-			imageObj[1]->AddComponent<Engine::CShaderC>()->
-				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+			imageObj[1]->GetComponent<Engine::CShaderC>()->
+				AddShader((_int)Engine::EShaderID::SliderShader);
 		}
 		else if(imageType == 1)
 		{
-			imageObj[1]->AddComponent<Engine::CShaderC>()->
-				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"CircularGaugeShader")));
+			imageObj[1]->GetComponent<Engine::CShaderC>()->
+				AddShader((_int)Engine::EShaderID::CircularGauge);
 		}
 
 		_float value, maxValue, minValue;
@@ -262,6 +264,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
+		button->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 		if (name == L"Not")
 		{
@@ -274,7 +277,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
 
 		fontPosition.y *= -1;
-		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);		
 	}	
 }
 

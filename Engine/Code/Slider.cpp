@@ -74,16 +74,16 @@ void CSlider::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CSlider::PreRender(void)
+void CSlider::PreRender(LPD3DXEFFECT pEffect)
 {
 }
 
-void CSlider::Render(void)
+void CSlider::Render(LPD3DXEFFECT pEffect)
 {
 
 }
 
-void CSlider::PostRender(void)
+void CSlider::PostRender(LPD3DXEFFECT pEffect)
 {
 }
 

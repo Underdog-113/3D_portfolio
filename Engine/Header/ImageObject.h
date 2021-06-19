@@ -23,13 +23,8 @@ public:
 	void Update(void) override;
 	void LateUpdate(void) override;
 
-	void PreRender(void) override;
 	void PreRender(LPD3DXEFFECT pEffect) override;
-
-	void Render(void) override;
 	void Render(LPD3DXEFFECT pEffect) override;
-
-	void PostRender(void) override;
 	void PostRender(LPD3DXEFFECT pEffect) override;
 
 	void OnDestroy(void) override;
@@ -47,6 +42,7 @@ private:
 	GETTOR(SP(CGraphicsC), m_spGraphics, nullptr, Graphics)
 	GETTOR(SP(CTextureC), m_spTexture, nullptr, Texture)
 	GETTOR(SP(CRectTexC), m_spRectTex, nullptr, RectTex)
+	GETTOR(SP(CShaderC), m_spShader, nullptr, Shader)
 };
 END
 #endif

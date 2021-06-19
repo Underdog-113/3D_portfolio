@@ -77,29 +77,14 @@ void CMapObject::LateUpdate(void)
 
 }
 
-void CMapObject::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CMapObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CMapObject::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
-
 void CMapObject::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CMapObject::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CMapObject::PostRender(LPD3DXEFFECT pEffect)

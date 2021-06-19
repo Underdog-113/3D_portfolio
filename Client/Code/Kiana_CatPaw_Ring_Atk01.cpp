@@ -100,29 +100,14 @@ void CKiana_CatPaw_Ring_Atk01::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CKiana_CatPaw_Ring_Atk01::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CKiana_CatPaw_Ring_Atk01::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CKiana_CatPaw_Ring_Atk01::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
-
 void CKiana_CatPaw_Ring_Atk01::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CKiana_CatPaw_Ring_Atk01::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CKiana_CatPaw_Ring_Atk01::PostRender(LPD3DXEFFECT pEffect)

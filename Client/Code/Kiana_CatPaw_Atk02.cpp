@@ -85,29 +85,15 @@ void CKiana_CatPaw_Atk02::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CKiana_CatPaw_Atk02::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CKiana_CatPaw_Atk02::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CKiana_CatPaw_Atk02::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
 
 void CKiana_CatPaw_Atk02::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CKiana_CatPaw_Atk02::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CKiana_CatPaw_Atk02::PostRender(LPD3DXEFFECT pEffect)
