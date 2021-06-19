@@ -40,12 +40,12 @@ void CGlitterC::Update(SP(CComponent) spThis)
 {
 	if (m_A1Timer >= 0)
 	{
-		GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(D3DXCOLOR(1, 1, 1, 1));
+		GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(_float4(1, 1, 1, 1));
 		m_A1Timer -= GET_DT;
 	}
 	else if (m_A0Timer >= 0)
 	{
-		GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(D3DXCOLOR(1, 1, 1, 0));
+		GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(_float4(1, 1, 1, 0));
 		m_A0Timer -= GET_DT;
 	}
 	else
@@ -54,7 +54,7 @@ void CGlitterC::Update(SP(CComponent) spThis)
 		m_A1Timer = m_A1TimerMax;
 	}
 
-	std::cout << GetOwner()->GetComponent<Engine::CTextureC>()->GetColor().a << std::endl;
+	std::cout << GetOwner()->GetComponent<Engine::CTextureC>()->GetColor().w << std::endl;
 }
 
 void CGlitterC::LateUpdate(SP(CComponent) spThis)
