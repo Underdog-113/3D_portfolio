@@ -307,6 +307,9 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader">
       <UniqueIdentifier>{2bd86ea5-c7ba-4d26-9f41-0dd24f09635e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader">
+      <UniqueIdentifier>{ee032edd-4d68-4134-be41-495c09b49ee2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -581,6 +584,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\WireShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackRangeShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -881,6 +887,9 @@
     <ClInclude Include="..\Header\WireShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\AttackRangeShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -933,6 +942,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WireShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

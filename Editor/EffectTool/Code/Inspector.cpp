@@ -558,7 +558,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::AttackRangeShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)

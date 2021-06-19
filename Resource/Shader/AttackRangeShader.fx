@@ -8,24 +8,22 @@ float4x4 gProjection;
 float4 gWorldLightPosition;
 
 float  gTime;
-float  gAlpha;
-float  m_defaultDissolveVal = 0.9f;
+float  gAlpha = 1.f;
+float  gUVSpeed;
 
-float3 gDissolveLineColor;
-
-texture g_DiffuseTex;
+texture gDiffuseTex;
 sampler Diffuse = sampler_state
 {
-	Texture = <g_DiffuseTex>;
+	Texture = <gDiffuseTex>;
 	FILTER = MIN_MAG_MIP_LINEAR;
 	AddressU = Wrap;
 	AddressV = Wrap;
 };
 
-texture g_NoiseTex;
-sampler NoiseTex = sampler_state
+texture gAlphaTex;
+sampler AlphaTex = sampler_state
 {
-	Texture = <g_NoiseTex>;
+	Texture = <gAlphaTex>;
 	FILTER = MIN_MAG_MIP_LINEAR;
 	AddressU = Wrap;
 	AddressV = Wrap;
@@ -45,7 +43,11 @@ struct VS_OUTPUT
 	float4 mPosition : POSITION;
 	float2 mUV		: TEXCOORD0;
 	float3 mDiffuse : TEXCOORD1;
+};
 
+struct PS_OUTPUT
+{
+	float4 vColor : COLOR0;
 };
 
 
@@ -56,13 +58,12 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	Output.mPosition = mul(Input.mPosition, gWorldViewProjectionMatrix);
 
 	float4 objectLightPosition = mul(gWorldLightPosition, gInvWorldMatrix);
-	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition.xyz);
+	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
-	Output.mUV.x = Input.mUV.x;
-	Output.mUV.y = -Input.mUV.y;
+	Output.mUV = Input.mUV;/*+ float2(gTime * gUVSpeed, 0);*/
 
-	return(Output);
+	return Output;
 
 }
 
@@ -76,40 +77,18 @@ struct PS_INPUT
 
 float4 ps_main(VS_OUTPUT Input) : COLOR
 {
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
 	// Noise Texture
-	float4 Noise = tex2D(NoiseTex, Input.mUV);
+	float4 _Alpha = tex2D(AlphaTex, Input.mUV);
 
-	// To disappear to match the noise texture
-	float multiply1 = saturate((Noise.r * sin(gAlpha)) * 5.5f);
-	float multiply2 = saturate(Noise.r * sin(gAlpha));
-
-	// Current Dissolve Line Value
-	float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20)); 
-	
-	// Returns the "multiply2" multiple of "multiply1"
-	float multiple = pow(multiply1 + multiply2, 20);
-
-	// Dissolve Line Size
-	float3 DissolveLineSize;
-
-	if (m_defaultDissolveVal >= CurrentDissolveVal)
-	{
-		DissolveLineSize = (100.f, 1.f, 1.f);
-	}
-	else
-	{
-		DissolveLineSize = (0, 0, 0);
-	}
-
-	float3 diffuse = (DissolveLineSize * gDissolveLineColor + albedo);
-	
-	return float4(diffuse, multiple);
+	return float4(albedo * _Alpha);
 }
 
-technique DissolveShader
+technique TShader
 {
 	pass p0
 	{
