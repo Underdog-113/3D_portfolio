@@ -1,13 +1,13 @@
-#ifndef MONSTERSLIDERCTCOMPONENT_H
-#define MONSTERSLIDERCTCOMPONENT_H
+#ifndef SKILLACTIVATIONCOMPONENT_H
+#define SKILLACTIVATIONCOMPONENT_H
 
 #include "Component.h"
 #include "Slider.h"
-class CMonsterSliderC  final : public Engine::CComponent
+class CSkillActivationC  final : public Engine::CComponent
 {
 public:
-	explicit CMonsterSliderC();
-	~CMonsterSliderC();
+	explicit CSkillActivationC();
+	~CSkillActivationC();
 
 	// CComponent을(를) 통해 상속됨
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
@@ -23,12 +23,8 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	Engine::CSlider* m_sliderOwner;
-	GETTOR_SETTOR(Engine::CSlider*, m_monsterSlider, nullptr, MonsterSlider);
-
-	_bool m_bWhiteCheck;
-	_float m_speed;
-	_float m_timer;
-	_float m_timerMax;
+	GETTOR_SETTOR(_float, m_speed, 1 , Speed);
+	_float m_dir;
+	_float m_alpha;
 };
 #endif

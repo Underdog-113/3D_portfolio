@@ -8,6 +8,7 @@
 #include "AlphaLifeTimeC.h"
 #include "MonsterSliderC.h"
 #include "GlitterC.h"
+#include "SkillActivationC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -39,9 +40,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_skillButton.emplace_back(static_cast<CButton*>(pScene->FindObjectByName(L"MainCanvas_BasicAttack_0").get()));
 	m_skillImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_BasicAttack_16").get()));
 
-	m_skillButton.emplace_back(static_cast<CButton*>(pScene->FindObjectByName(L"MainCanvas_Evasion_1").get()));
-	m_skillImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_Evasion_17").get()));
-
+	m_skillButton.emplace_back(static_cast<CButton*>(pScene->FindObjectByName(L"MainCanvas_Evasion_1").get())); //
+	_float a = pScene->FindObjectByName(L"MainCanvas_Evasion_1")->GetTransform()->GetPosition().z;
+	m_skillImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_Evasion_17").get())); // 
+	_float s = pScene->FindObjectByName(L"MainCanvas_Evasion_17")->GetTransform()->GetPosition().z;
 	m_skillButton.emplace_back(static_cast<CButton*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkill_2").get()));
 	m_skillImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkill_18").get()));
 
@@ -49,8 +51,11 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_skillImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_Skill_19").get()));
 
 	m_skillActivationImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_EvasionActivation_18").get()));
+	m_skillActivationImage[0]->AddComponent<CSkillActivationC>();
 	m_skillActivationImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillActivation_19").get()));
+	m_skillActivationImage[1]->AddComponent<CSkillActivationC>();
 	m_skillActivationImage.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SkillActivation_21").get()));
+	m_skillActivationImage[2]->AddComponent<CSkillActivationC>();
 
 	int i = 0;
 	while (i < 3)
@@ -96,13 +101,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_3").get()));
 	m_monsterWhiteHpBar[0]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
-	m_monsterWhiteHpBar[0]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_4").get()));
 	m_monsterWhiteHpBar[1]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
-	m_monsterWhiteHpBar[1]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_5").get()));
 	m_monsterWhiteHpBar[2]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
-	m_monsterWhiteHpBar[2]->GetFill()->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//HitsCanvas
 	m_hitsCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"HitsCanvas").get());
@@ -138,6 +140,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 void CBattleUiManager::Update(void)
 {
+	_float a = Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Evasion_1")->GetTransform()->GetPosition().z;
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Evasion_1")->GetTransform()->SetPositionZ(0.0f);
+	_float s = Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Evasion_17")->GetTransform()->GetPosition().z;
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Evasion_17")->GetTransform()->SetPositionZ(0.15f);
 
 }
 
