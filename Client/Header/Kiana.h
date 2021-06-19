@@ -10,7 +10,7 @@ class CKiana final : public CValkyrie
 	SMART_DELETER_REGISTER
 
 public:
-	enum UltraAttack { 
+	enum AttackOption { 
 		ATK01, ATK02, ATK03, ATK04, ATK05,
 		Branch_ATK01, Branch_ATK02,
 		QTE_ATK
@@ -49,8 +49,8 @@ public:
 					void					CreatePistol		(void);
 					void					CreateCatPaw		(void);
 					void					UseUltraCost		(void);
-					void					UltraAtk			(UltraAttack index);
-					void					UltraAtk_Ring		(UltraAttack index);
+					void					UltraAtk			(AttackOption index);
+					void					UltraAtk_Ring		(AttackOption index);
 
 					void					SetUltraMode		(bool value);;
 
@@ -91,6 +91,15 @@ private:
 
 	_mat* m_pRightHand = nullptr;
 
+public:
+	SP(Engine::CObject) CreateEffect(std::wstring name);
+	void SetEffect(SP(Engine::CObject) spEffect, AttackOption option);
+
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack1, nullptr, Effect_Attack1)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack2, nullptr, Effect_Attack2)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack3, nullptr, Effect_Attack3)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack4, nullptr, Effect_Attack4)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack5, nullptr, Effect_Attack5)
 };
 
 #endif

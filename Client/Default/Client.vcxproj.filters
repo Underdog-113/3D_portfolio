@@ -555,6 +555,9 @@
     <ClInclude Include="..\Header\Item.h">
       <Filter>02.Objects\04.Item</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Include_Valkyrie.h">
+      <Filter>01.Scene\01.StaticScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

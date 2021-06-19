@@ -98,9 +98,6 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 
 		while (!readFile.eof() && std::getline(readFile, line))
 		{
-			if (objectKey == L"Test")
-				int a = 5;
-			
 			_size symbolPos = line.find('=');
 			if (symbolPos != std::wstring::npos)
 			{
