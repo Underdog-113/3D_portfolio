@@ -42,19 +42,16 @@ void CMO_Ninza::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMO_Ninza::PreRender(void)
+void CMO_Ninza::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMO_Ninza::Render(void)
+void CMO_Ninza::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(GetComponent<Engine::CGraphicsC>());
 }
 
-void CMO_Ninza::PostRender(void)
+void CMO_Ninza::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(GetComponent<Engine::CGraphicsC>());
 }
 
 void CMO_Ninza::OnDestroy(void)

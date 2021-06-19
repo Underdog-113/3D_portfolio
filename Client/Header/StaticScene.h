@@ -30,6 +30,7 @@ public:
 private:
 					void				InitUiPrototypes		(void);
 					void				InitMonsterPrototypes	(void);
+					void				InitValkyriePrototypes	(void);
 	GETTOR			(CLoading*,			m_pLoading,				nullptr,		Loading)
 };
 

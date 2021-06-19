@@ -37,6 +37,7 @@ class CStageControlTower
 	DECLARE_SINGLETON(CStageControlTower)
 
 public:
+	enum CreateMode { ALL, WithoutUI };
 	enum Squad_Role { Actor, Wait_1, Wait_2 };
 
 public:
@@ -44,7 +45,7 @@ public:
 	//~CStageControlTower();
 
 	void Awake(void);
-	void Start(void);
+	void Start(CreateMode mode = ALL);
 	void Update(void);
 
 	void OnDestroy();
@@ -103,6 +104,7 @@ private:
 
 	bool						m_rotateLock = false;
 
+	CreateMode					m_mode;
 
 };
 

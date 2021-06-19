@@ -31,6 +31,7 @@ SP(Engine::CObject) CButton::MakeClone(void)
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
+	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 
 	return spClone;
 }
@@ -44,6 +45,7 @@ void CButton::Awake(void)
 	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
 	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
 	m_spTexture = AddComponent<Engine::CTextureC>();
+	m_spShader = AddComponent<Engine::CShaderC>();
 }
 
 void CButton::Start(void)
@@ -68,19 +70,21 @@ void CButton::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CButton::PreRender(void)
+void CButton::PreRender(LPD3DXEFFECT pEffect)
 {
+	//확인할것
+	//텍스쳐가 빈 상태가 되는 경우가 있나?
 	if (!m_spTexture->GetTexData().empty())
 	{
-		m_spRectTex->PreRender(m_spGraphics);
+		m_spRectTex->PreRender(m_spGraphics, pEffect);
 	}
 }
 
-void CButton::Render(void)
+void CButton::Render(LPD3DXEFFECT pEffect)
 {
 	if (!m_spTexture->GetTexData().empty())
 	{
-		m_spRectTex->Render(m_spGraphics);
+		m_spRectTex->Render(m_spGraphics, pEffect);
 	}
 
 	SP(Engine::CTextC) spTextC = GetComponent<Engine::CTextC>();
@@ -91,11 +95,11 @@ void CButton::Render(void)
 	}
 }
 
-void CButton::PostRender(void)
+void CButton::PostRender(LPD3DXEFFECT pEffect)
 {
 	if (!m_spTexture->GetTexData().empty())
 	{
-		m_spRectTex->PostRender(m_spGraphics);
+		m_spRectTex->PostRender(m_spGraphics, pEffect);
 	}
 }
 

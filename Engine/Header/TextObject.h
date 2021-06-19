@@ -23,9 +23,9 @@ public:
 	void Update(void) override;
 	void LateUpdate(void) override;
 
-	void PreRender(void) override;
-	void Render(void) override;
-	void PostRender(void) override;
+	void PreRender(void);
+	void Render(void);
+	void PostRender(void);
 
 	void OnDestroy(void) override;
 

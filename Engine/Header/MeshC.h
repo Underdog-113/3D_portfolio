@@ -26,16 +26,8 @@ public:
 			void						LateUpdate		(SP(CComponent) spThis) override;
 
 
-			void						PreRenderWire	(SP(CGraphicsC) spGC);
-			void						PreRender		(SP(CGraphicsC) spGC) override;
 			void						PreRender		(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
-
-			void						RenderWire		(SP(CGraphicsC) spGC);
-			void						Render			(SP(CGraphicsC) spGC) override;
 			void						Render			(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
-
-			void						PostRenderWire	(SP(CGraphicsC) spGC);
-			void						PostRender		(SP(CGraphicsC) spGC) override;
 			void						PostRender		(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
 
 			void						OnDestroy		(void) override;

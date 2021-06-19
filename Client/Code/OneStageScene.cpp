@@ -176,7 +176,7 @@ void COneStageScene::Start_SetupMembers(void)
 {
 	// Kiana
 	{
-		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
 		m_spValkyrie = spKianaClone;
 		m_pController->AddSquadMember(m_spValkyrie);
@@ -212,6 +212,5 @@ void COneStageScene::Start_SetupMembers(void)
 
 void COneStageScene::InitPrototypes(void)
 {
-	SP(CKiana) spKianaPrototype(CKiana::Create(false, this));
-	ADD_PROTOTYPE(spKianaPrototype);
+
 }
