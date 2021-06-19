@@ -327,9 +327,6 @@ void CGraphicsManager::RenderDeferBlend(void)
 void CGraphicsManager::RenderWire(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::WireFrame])
 	{
 		if (pObject->GetIsEnabled())
@@ -359,8 +356,7 @@ void CGraphicsManager::RenderWire(void)
 			}
 		}
 	}
-	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	
 }
 
 void CGraphicsManager::RenderAlphaTest(void)

@@ -48,7 +48,7 @@ void CFadeInOutC::Update(SP(CComponent) spThis)
 		{
 			spOwnerGraphics->AddAlpha(0.016f / m_speed);
 
-			if (spOwnerGraphics->GetColor().a >= 1.f)
+			if (spOwnerGraphics->GetColor().w >= 1.f)
 			{
 				spOwnerGraphics->SetAlpha(1.f);
 				m_finish = true;
@@ -58,7 +58,7 @@ void CFadeInOutC::Update(SP(CComponent) spThis)
 		{
 			spOwnerGraphics->AddAlpha(-0.016f / m_speed);
 
-			if (spOwnerGraphics->GetColor().a <= 0.f)
+			if (spOwnerGraphics->GetColor().w <= 0.f)
 			{
 				spOwnerGraphics->SetAlpha(0.f);
 				m_finish = true;

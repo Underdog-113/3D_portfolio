@@ -19,7 +19,7 @@ void CDebugObject::Awake(void)
 
 	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
-	(m_spShader		= AddComponent<Engine::CShaderC>())->AddShader((_int)EShaderID::WireShader);
+	m_spShader		= AddComponent<Engine::CShaderC>();
 }
 
 void CDebugObject::Start(void)
