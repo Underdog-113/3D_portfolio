@@ -54,7 +54,7 @@ void CYongScene::Start(void)
 
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 			cam->SetTarget(m_spKiana);
-			cam->SetTargetDist(2.f);
+			cam->SetTargetDist(4.f);
 			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 		}
 
@@ -83,11 +83,11 @@ void CYongScene::Start(void)
 
 		// add effects
 		CKiana* pKiana = (CKiana*)m_spKiana.get();
-		pKiana->SetEffect_Attack1(pKiana->CreateEffect(L"Kiana_Attack_0"));
-		pKiana->SetEffect_Attack2(pKiana->CreateEffect(L"Kiana_Attack_1"));
-		pKiana->SetEffect_Attack3(pKiana->CreateEffect(L"Kiana_Attack_2"));
-		pKiana->SetEffect_Attack4(pKiana->CreateEffect(L"Kiana_Attack_3"));
-		pKiana->SetEffect_Attack5(pKiana->CreateEffect(L"Kiana_Attack_3"));
+		//pKiana->SetEffect_Attack1(pKiana->CreateEffect(L"Kiana_Attack_0"));
+		//pKiana->SetEffect_Attack2(pKiana->CreateEffect(L"Kiana_Attack_1"));
+		//pKiana->SetEffect_Attack3(pKiana->CreateEffect(L"Kiana_Attack_2"));
+		//pKiana->SetEffect_Attack4(pKiana->CreateEffect(L"Kiana_Attack_3"));
+		//pKiana->SetEffect_Attack5(pKiana->CreateEffect(L"Kiana_Attack_3"));
 	}		
 }
 

@@ -15,7 +15,7 @@ public:
 	void FixedUpdate() override;
 	void Update() override;
 	void LateUpdate() override;
-	
+
 	void PreRender(LPD3DXEFFECT pEffect)PURE;
 	void Render(LPD3DXEFFECT pEffect)PURE;
 	void PostRender(LPD3DXEFFECT pEffect)PURE;
@@ -36,7 +36,6 @@ private:
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 	GETTOR(_float,  m_fAlpha, 1.f, Alpha)
     GETTOR(_float, m_fTime, 0.f, Time)
-    
+
 
 };
-
