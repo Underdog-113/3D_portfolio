@@ -172,6 +172,9 @@ private:
 	afx_msg void OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnEnChangeEditSpeed();
 	afx_msg void OnEnChangeEditAnimSpeed();
+	afx_msg void OnDeltaposSpinTilingX(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeltaposSpinTilingY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLbnSelchangeEffectList();
 
 #pragma endregion
 
@@ -190,6 +193,8 @@ private:
 	CEdit m_edRepeat;
 	CEdit m_edAlphaWidth;
 	CEdit m_edAlphaHeight;
+	CEdit m_edTilingX;
+	CEdit m_edTilingY;
 #pragma endregion
 
 #pragma  region EventButton
@@ -227,7 +232,11 @@ public:
 	CSpinButtonCtrl m_spinScaleX;
 	CSpinButtonCtrl m_spinScaleY;
 	CSpinButtonCtrl m_spinScaleZ;
+	CSpinButtonCtrl m_spinTilingX;
+	CSpinButtonCtrl m_spinTilingY;
 #pragma endregion
+
+	CListBox m_EffectListBox;
 
 private:
 	enum ACTION_STATE { PAUSE, PLAY, STOP, STATE_END };
@@ -252,17 +261,11 @@ private:
 	_float3 m_vSavePos;
 	_float3 m_vSaveRot;
 	_float3 m_vSaveScale;
-	ACTION_STATE m_eActionState;
-public:
-	afx_msg void OnLbnSelchangeEffectList();
-	CListBox m_EffectListBox;
 
-	CEdit m_edTilingX;
-	CEdit m_edTilingY;
-	afx_msg void OnDeltaposSpinTilingX(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnDeltaposSpinTilingY(NMHDR *pNMHDR, LRESULT *pResult);
-	CSpinButtonCtrl m_spinTilingX;
-	CSpinButtonCtrl m_spinTilingY;
+	ACTION_STATE m_eActionState;
+
+private:
+	void SaveData(std::wstring Objectkey, SP(Engine::CObject) spObject);
 
 };
 

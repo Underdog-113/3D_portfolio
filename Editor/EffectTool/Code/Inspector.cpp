@@ -5,7 +5,6 @@
 #include "Object.h"
 #include "Layer.h"
 #include "SoftEffect.h"
-
 // CInspector
 
 #ifdef _DEBUG
@@ -559,7 +558,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::AttackRangeShader);
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
@@ -1041,11 +1040,77 @@ void CInspector::OnBnClickedAnimStop()
 void CInspector::OnBnClickedSave()
 {
 	// Mesh Effect or Soft Effect Save
+	// Soft Effect					Mesh Effect
+	// name							name
+	// Texture						Texture
+	// Tiling						Shader
+	// MaxIndex						Animation
+	
+	CString str = _T("txt Files(*.txt) |*.txt|"); // png 파일 표시
+	LPWSTR lpwstr = _SOLUTIONDIR L"Data\\";
+
+	CFileDialog dlg(TRUE, _T("*.txt"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
+
+	if (dlg.DoModal() == IDOK)
+	{
+		std::wstring filePath = _SOLUTIONDIR L"Data\\Save.txt";
+		std::wofstream ofsSave(filePath.data());
+
+		if (ofsSave.is_open())
+		{
+			if (m_EffectListBox.GetCount() > 0)
+			{
+				for (_int i = 0; i < m_EffectListBox.GetCount(); ++i)
+				{
+					SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[i];
+					SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
+
+					//Name
+					//ofsSave << spObject->
+					//std::wstring str = m_EffectListBox.FindString(i, );
+					
+					//Texture
+					/*D3DMATERIAL9* pMtrl = &spObject->GetComponent<Engine::CGraphicsC>()->m_mtrl;
+
+					size_t _dwMaterials = spObject->GetComponent<Engine::CGraphicsC>()->GetMesh()->GetMeshDatas().size();
+
+					for (_uint j = 0; j < spTexture->GetTexIndex(); ++j)
+					{
+						ofsSave << spTexture->GetTexData()[spTexture->GetMeshIndex()][i]->pTexture;
+					}
+*/
+					//Transoform
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetPosition().x;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetPosition().y;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetPosition().z;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetRotation().x;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetRotation().z;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetSize().x;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetSize().y;
+					ofsSave << spObject->GetComponent<Engine::CTransformC>()->GetSize().z;
+
+
+				}
+			}
+		}
+
+
+
+		//SaveData();
+		InvalidateRect(false);
+	}
+
+
 }
 
 void CInspector::OnBnClickedLoad()
 {
 	// Mesh Effect or Soft Effect Load
+
+
 
 }
 
@@ -1667,4 +1732,8 @@ void CInspector::OnDeltaposSpinTilingY(NMHDR *pNMHDR, LRESULT *pResult)
 
 	UpdateData(false);
 	*pResult = 0;
+}
+
+void CInspector::SaveData(std::wstring Objectkey, SP(Engine::CObject) spObject)
+{
 }
