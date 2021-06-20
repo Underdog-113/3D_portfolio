@@ -13,6 +13,7 @@
 #include "OneStageScene.h"
 #include "TwoStageScene.h"
 #include "ThreeStageScene.h"
+#include "BattleEndScene.h"
 
 #include "BattleRenunciationC.h"
 
@@ -85,6 +86,12 @@ void CButtonFunction::Sally()
 
 }
 
+void CButtonFunction::BattleEndScene()
+{
+	CButtonManager::GetInstance()->OnDestroy();
+	GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
+}
+
 void CButtonFunction::BattleRenunciation()
 {
 	GET_CUR_CLIENT_SCENE->FindObjectByName(L"GiveUpCanvas")->SetIsEnabled(false);
@@ -94,7 +101,7 @@ void CButtonFunction::BattleRenunciation()
 	spEmpty->GetTransform()->SetPosition(_float3(0, 0, 1));
 	spEmpty->GetTransform()->SetSize((_float)Engine::CWndApp::GetInstance()->GetWndWidth(), (_float)Engine::CWndApp::GetInstance()->GetWndHeight(), 0.0f);
 
-	spEmpty->GetTexture()->AddTexture(L"FadeInOut", 0);
+	//spEmpty->GetTexture()->AddTexture(L"FadeInOut", 0);
 
 	spEmpty->AddComponent<CBattleRenunciationC>();
 	//spEmpty->AddComponent<Engine::CFadeInOutC>();

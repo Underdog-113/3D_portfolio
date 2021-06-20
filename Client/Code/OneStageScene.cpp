@@ -69,13 +69,16 @@ void COneStageScene::Update(void)
 {
 	__super::Update();
 
+	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
+		return;
+
 	m_pController->Update();
 	CBattleUiManager::GetInstance()->Update();
 
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
-	    CBattleUiManager::GetInstance()->KeyPad(4);
+		CBattleUiManager::GetInstance()->PlayerSpDown(10);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
@@ -127,6 +130,8 @@ void COneStageScene::Update(void)
 	{
 	    CBattleUiManager::GetInstance()->BattleEnd();
 	}
+
+	
 }
 
 void COneStageScene::LateUpdate(void)

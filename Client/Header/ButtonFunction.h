@@ -13,6 +13,7 @@ public:
 	void ReadyToSortieScene();
 	void PartySettingScene();
 	void Sally();
+	void BattleEndScene();
 
 	void BattleRenunciation();
 
