@@ -423,7 +423,7 @@ void CFSM_KianaC::Appear_Init(void)
 void CFSM_KianaC::Appear_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Appear);
-	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(true);
+	//m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(true);
 }
 
 void CFSM_KianaC::Appear_Update(float deltaTime)
@@ -447,9 +447,8 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 
 void CFSM_KianaC::Appear_End(void)
 {
-	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(false);
 	m_appearOption = None;
-	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(false);
+	//m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(false);
 }
 
 void CFSM_KianaC::Attack_1_Init(void)
@@ -465,9 +464,6 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_checkUltraAtk = false;
 
 
-	auto effect = m_pKiana->GetEffect_Attack1()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -511,10 +507,6 @@ void CFSM_KianaC::Attack_2_Enter(void)
 
 	m_checkUltraAtk = false;
 
-
-	auto effect = m_pKiana->GetEffect_Attack2()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -552,12 +544,7 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-
-
-
-	auto effect = m_pKiana->GetEffect_Attack3()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -624,9 +611,6 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_checkUltraAtk = false;
 
 
-	auto effect = m_pKiana->GetEffect_Attack4()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -691,9 +675,6 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
 
-	auto effect = m_pKiana->GetEffect_Attack5()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)

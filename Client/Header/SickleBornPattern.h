@@ -16,7 +16,7 @@ public:
 	static SP(CSickleBornPattern) Create();
 
 private:
-	_float m_cost = 2.f;
+	_float m_cost = 0.f;
 
 };
 

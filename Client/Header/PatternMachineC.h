@@ -27,14 +27,15 @@ public:
 public:
 	void AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit);
 	void AddPattern(SP(CATBPattern) pPattern);
+	
+
+private:
+	void SortingPatterns(); // 처음 또는 비었을 때 다시 벡터에 패턴 랜덤 재정렬
 	void PlayBasePattern();
 	void PlayBornPattern();
 	void PlayDiePattern();
 	void PlayHitPattern();
-
-private:
-	void SortingPatterns(); // 처음 또는 비었을 때 다시 벡터에 패턴 랜덤 재정렬
-	void PalySelectPattern(); // 패턴 선택
+	void PlaySelectPattern(); // 패턴 선택
 
 public:
 	static const EComponentID m_s_componentID = EComponentID::Pattern;

@@ -16,8 +16,7 @@ public:
 	static SP(CSickleAtk02Pattern) Create();
 
 private:
-	_float m_cost = 3.f;
-
+	_float m_cost = 5.f;
 };
 
 #endif

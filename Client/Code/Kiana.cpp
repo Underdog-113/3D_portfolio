@@ -83,8 +83,6 @@ void CKiana::Start(void)
 
 	m_pStat = new V_Kiana_Stat;
 	m_pStat->SetupStatus(&stat);
-
-	m_spTransform->SetPositionY(10.f);
 }
 
 void CKiana::FixedUpdate(void)

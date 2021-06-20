@@ -35,27 +35,21 @@ private:
 	/* Spider */
 	void SpiderPattern0();
 
-	/* Sickle */
-	void SicklePattern0(); // base
-	void SicklePattern1(); // attack_1
-	void SicklePattern2(); // walk_back
-	void SicklePattern3(); // attack_2
-
 	/* Ganesha */
 	void GaneshaPattern0(); // base
 	void GaneshaPattern1();
 	void GaneshaPattern2();
 
-	void CoolTime(_float& curTime, _float maxTime, _bool& readyType); // ÇöÀç ÄðÅ¸ÀÓ, ¸Æ½º ÄðÅ¸ÀÓ, ÄðÅ¸ÀÓ Å¸ÀÔ
-
 private:
 	void InitPrototypes(void) override;
 
-	Engine::CObject* m_pivot;
+	SP(Engine::CObject) m_pivot;
 	SP(Engine::CObject) m_spSpider;
 	SP(Engine::CObject) m_spSickle;
 	SP(Engine::CObject) m_spGanesha;
 	SP(Engine::CObject) m_spKiana;
+
+	SP(Engine::CObject) m_pivot_kiana;
 
 	_uint m_curPatternIdx = 0;
 

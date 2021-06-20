@@ -49,7 +49,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
-	std::cout << "Cost : " << m_curCost << std::endl;
+	//std::cout << "Cost : " << m_curCost << std::endl;
 
 	// born 실행 (1번만)
 	//m_vPatterns[Pattern_Type::Born]->Pattern();
@@ -58,7 +58,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//GetDeleteThis();
 
 	// select 실행
-	//PalySelectPattern();
+	PlaySelectPattern();
 
 	// base 실행
 	PlayBasePattern();
@@ -151,16 +151,25 @@ void CPatternMachineC::SortingPatterns()
 	}
 }
 
-void CPatternMachineC::PalySelectPattern()
+void CPatternMachineC::PlaySelectPattern()
 {
 	_int index = m_vIndices.back();
 	_float cost = m_vPatterns[index]->GetCost();
 
 	// cost가 충분한지 확인
 	if (m_curCost < cost)
+	{
+		m_select = false;
 		return;
+	}
 
+	std::cout << "bCost : " << m_curCost << std::endl;
+
+	m_select = true;
 	m_curCost -= cost;
 	m_vIndices.pop_back();
 	m_vPatterns[index]->Pattern(m_pOwner);
+
+	std::cout << "aCost : " << m_curCost << std::endl;
+	std::cout << "=============================" << std::endl;
 }

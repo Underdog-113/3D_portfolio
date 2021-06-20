@@ -42,6 +42,7 @@ void CMO_Sickle::Start(void)
 	__super::Start();
 
 	m_spMesh->OnRootMotion();
+
 }
 
 void CMO_Sickle::FixedUpdate(void)
@@ -100,7 +101,8 @@ void CMO_Sickle::SetBasicName(void)
 void CMO_Sickle::ChaseTarget(_float3 targetPos)
 {
 	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
+	dir.y = 0;
+	D3DXVec3Normalize(&dir, &dir);
 
 	m_spTransform->SetForward(dir);
 }

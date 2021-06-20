@@ -376,8 +376,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, _int mesh
 			if (m_pRootMotion->GetIsRootMotion())
 			{
 				meshContainer->pRenderingMatrix[i]._41 -= rootMotionMoveAmount.x;
-				meshContainer->pRenderingMatrix[i]._42 -= rootMotionMoveAmount.y;
-				meshContainer->pRenderingMatrix[i]._42 += m_halfYOffset;
 				meshContainer->pRenderingMatrix[i]._43 -= rootMotionMoveAmount.z;
 			}
 		}
