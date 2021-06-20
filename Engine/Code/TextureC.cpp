@@ -1,6 +1,7 @@
 #include "EngineStdafx.h"
 #include "TextureC.h"
 #include "Object.h"
+#include "MeshData.h"
  
 USING(Engine)
 CTextureC::CTextureC()  
@@ -103,17 +104,22 @@ void CTextureC::AddAlpha(_float alpha)
 }
 
 
-void CTextureC::AddTexture(std::wstring const & textureKey, _int meshIndex)
+void CTextureC::ResizeTexSet(_int numOfTexSet)
+{
+	m_vTexData.resize(numOfTexSet);
+}
+
+void CTextureC::AddTexture(std::wstring const & textureKey, _int setIndex)
 {
 	SP(CMeshC) spOwnerMeshC;
 	if ((spOwnerMeshC = m_pOwner->GetComponent<CMeshC>()) != nullptr)
 	{
-		_size numOfMesh = spOwnerMeshC->GetMeshDatas().size();
-		if (m_vTexData.size() != numOfMesh)
-			m_vTexData.resize(numOfMesh);
+		_size numOfSubset = spOwnerMeshC->GetMeshData()->GetSubsetCount();
+		if (m_vTexData.size() != numOfSubset)
+			m_vTexData.resize(numOfSubset);
 
 
-		if (meshIndex < 0 || meshIndex >= numOfMesh)
+		if (setIndex < 0 || setIndex >= numOfSubset)
 		{
 			MSG_BOX(__FILE__, L"index is broken in AddTexture");
 			ABORT;
@@ -126,12 +132,12 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int meshIndex)
 	}
 	
 
-	m_vTexData[meshIndex].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
+	m_vTexData[setIndex].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
 }
 
-void CTextureC::ChangeTexture(std::wstring const & textureKey, _int meshIndex, _int texIndex)
+void CTextureC::ChangeTexture(std::wstring const & textureKey, _int setIndex, _int texIndex)
 {
-	m_vTexData[meshIndex][texIndex] = m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey);
+	m_vTexData[setIndex][texIndex] = m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey);
 }
 
 void CTextureC::DeleteTexture(_int meshIndex, _int texIndex)

@@ -429,7 +429,7 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
 								 std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
 
-			spDecoObject->GetMesh()->AddMeshData(meshKey);
+			spDecoObject->GetMesh()->SetMeshData(meshKey);
 		}
 
 
@@ -500,7 +500,7 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
 				std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
 
-			spMapObject->GetMesh()->AddMeshData(meshKey);
+			spMapObject->GetMesh()->SetMeshData(meshKey);
 		}
 
 
@@ -710,7 +710,7 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 
 	//		if (initTex == true)
 	//		{
-	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()[0]->GetMeshKey())
 	//				spObject->AddComponent<Engine::CTextureC>();
 	//			else
 	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);

@@ -39,7 +39,7 @@ void FSM_ScoutC::APPEAR_Init(void)
 
 void FSM_ScoutC::APPEAR_Enter(void)
 {
-	Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	Engine::CDynamicMeshData* pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 	pDM->ChangeAniSet(0);
 }
 

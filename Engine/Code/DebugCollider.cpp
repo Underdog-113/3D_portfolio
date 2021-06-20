@@ -51,7 +51,7 @@ void CDebugCollider::Start(void)
 	{
 	case (_int)EColliderType::Ray:
 	{
-		m_spMesh->AddMeshData(L"Cube");
+		m_spMesh->SetMeshData(L"Cube");
 		CRayCollider* pRay = static_cast<CRayCollider*>(m_pCollider);
 		m_spTransform->AddPosition(pRay->GetDirection() * pRay->GetLength() / 2.f);
 		m_spTransform->SetForward(pRay->GetDirection());
@@ -61,7 +61,7 @@ void CDebugCollider::Start(void)
 
 	case (_int)EColliderType::Sphere:
 	{
-		m_spMesh->AddMeshData(L"Sphere");
+		m_spMesh->SetMeshData(L"Sphere");
 
 		CSphereCollider* pShpere = static_cast<CSphereCollider*>(m_pCollider);
 		m_spTransform->SetSize(pShpere->GetRadius() * 2, pShpere->GetRadius() * 2, pShpere->GetRadius() * 2);
@@ -70,7 +70,7 @@ void CDebugCollider::Start(void)
 
 	case (_int)EColliderType::AABB:
 	{
-		m_spMesh->AddMeshData(L"Cube");
+		m_spMesh->SetMeshData(L"Cube");
 		CAabbCollider* pAabb = static_cast<CAabbCollider*>(m_pCollider);
 		m_spTransform->SetSize(pAabb->GetSize());
 		break;
@@ -78,7 +78,7 @@ void CDebugCollider::Start(void)
 
 	case (_int)EColliderType::OBB:
 	{
-		m_spMesh->AddMeshData(L"Cube");
+		m_spMesh->SetMeshData(L"Cube");
 		CObbCollider* pObb = static_cast<CObbCollider*>(m_pCollider);
 		m_spTransform->SetRotation(m_pCollider->GetOwner()->GetOwner()->GetTransform()->GetRotation() + pObb->GetRotOffset());
 		m_spTransform->SetSize(pObb->GetSize());

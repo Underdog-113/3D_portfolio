@@ -28,7 +28,7 @@ CMeshData* CStaticMeshData::MakeClone(void)
 	pClone->m_maxVertex		= m_maxVertex;
 
 	pClone->m_meshKey		= m_meshKey;
-	
+	pClone->m_subsetCount	= m_subsetCount;
 	return pClone;
 }
 

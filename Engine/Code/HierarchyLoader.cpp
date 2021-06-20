@@ -46,7 +46,9 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 	//현재 컨테이너의 섭셋들이 쓸 텍스쳐를 찾기 위해 텍스쳐 인덱스 시작값을 잡아줍니다.
 	//m_curTexLastIndex는 현재 마지막 index값 + 1 상태입니다
 	pDerivedMeshContainer->texIndexStart = m_curTexLastIndex;
+
 	m_curTexLastIndex += NumMaterials;
+	m_pOwner->SetSubsetCount(m_pOwner->GetSubsetCount() + NumMaterials);
 
 	//이름을 넣어줍니다.
 	AllocateName(&pDerivedMeshContainer->Name, Name);
@@ -95,7 +97,6 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 			if (pDerivedMeshContainer->pMaterials[i].pTextureFilename != nullptr)
 			{
 				m_pOwner->AddTexNameToList(StrToWStr(pDerivedMeshContainer->pMaterials[i].pTextureFilename));
-				//pDerivedMeshContainer->ppTexture = m_pOwner->m_pOwner->
 			}
 			else
 				m_pOwner->AddTexNameToList(L"NoTexture");

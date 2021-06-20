@@ -79,7 +79,7 @@ void CChangmoScene::Start(void)
 		SP(Engine::CObject) spEmptyObject1
 			= ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube1");
 
-		spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"MB_Bronya");
+		spEmptyObject1->AddComponent<Engine::CMeshC>()->SetMeshData(L"MB_Bronya");;
 		spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 		spEmptyObject1->AddComponent<Engine::CTextureC>();
 		spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
