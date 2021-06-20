@@ -2,6 +2,7 @@ matrix		g_matWorld;			// 상수 테이블
 matrix		g_matView;
 matrix		g_matProj;
 
+float4		g_color;
 
 texture		g_BaseTexture;
 
@@ -75,7 +76,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	Out.vColor = tex2D(BaseSampler, In.vTexUV);		// 2차원 텍스처로부터 UV 값에 해당하는 픽셀의 색상을 추출하는 함수, 반환타입은 VECTOR 타입
-	//Out.vColor.a = 1.f;
+	Out.vColor = Out.vColor * g_color;
 
 	return Out;
 }

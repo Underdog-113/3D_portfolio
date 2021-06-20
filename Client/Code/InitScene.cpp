@@ -69,7 +69,7 @@ void CInitScene::Start(void)
 		ADD_CLONE(L"EmptyObject", false, (_int)Engine::ELayerID::UI, L"Background1");
 
 	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
-	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");
+	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Loading");;
 	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
 	m_pBackground->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
 	m_pBackground->GetTransform()->SetSize(1440, 810, 1);
@@ -87,7 +87,6 @@ void CInitScene::Update(void)
 	{
 		if (m_selectNextScene)
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->SetColor(D3DXCOLOR(1, 1, 1, 1.f));
 			Engine::CSceneManager::GetInstance()->SceneChange(m_pLoading->GetNextScene());
 		}
 		else
