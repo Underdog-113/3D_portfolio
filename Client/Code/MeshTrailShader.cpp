@@ -1,8 +1,7 @@
-#include "EngineStdafx.h"
+#include "stdafx.h"
 #include "..\Header\MeshTrailShader.h"
 #include "Layer.h"
 
-USING(Engine)
 
 CMeshTrailShader::CMeshTrailShader()
 {
@@ -14,7 +13,7 @@ CMeshTrailShader::~CMeshTrailShader()
 }
 
 
-CShader * CMeshTrailShader::Create()
+Engine::CShader * CMeshTrailShader::Create()
 {
 	CMeshTrailShader* pInstance = new CMeshTrailShader;
 	pInstance->Awake();
@@ -32,14 +31,14 @@ void CMeshTrailShader::Awake()
 	__super::Awake();
 }
 
-void CMeshTrailShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
+	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
 	m_pEffect->SetMatrix("gWorld", &worldMat);
 	m_pEffect->SetMatrix("gView", &viewMat);
@@ -60,7 +59,7 @@ void CMeshTrailShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
-	SP(CTextureC) spTexture = spGC->GetTexture();
+	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 

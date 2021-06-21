@@ -369,9 +369,6 @@ void CStageControlTower::StageUIControl()
 {
 	// target hp
 
-	if (m_spCurTarget)
-		CBattleUiManager::GetInstance()->TargetUI(m_spCurTarget->GetTransform()->GetPosition(), 3.f);
-
 	// wp skill cool
 	// ult cool
 
@@ -431,6 +428,10 @@ void CStageControlTower::FindTarget()
 	m_moveOrderDir = targetPos - valkyriePos;
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
+
+	if (m_mode == WithoutUI)
+		return;
+
 	m_pLinker->OnTargetMarker();	// ui interaction
 	m_pLinker->MonsterInfoSet();
 }
@@ -457,7 +458,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	}	
 
 	// 4. ฤÞบธผ๖?
-	m_pLinker->Hit_Up();
+
+	if (m_mode != WithoutUI)
+		m_pLinker->Hit_Up();
 	
 	// 5. วรทนภฬพ๎ sp ศนตๆ
 

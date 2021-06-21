@@ -55,7 +55,7 @@ public:
 	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
 		std::wstring specialSP);
 	
-	void TargetUI(_float3 pos, _float value);
+	void TargetUI(Engine::CObject* object, _float value);
 
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);

@@ -54,6 +54,8 @@ void CDongScene::Start(void)
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 		slider->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
 		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
+		slider->SetCircularMaxValue(360.0f);
+		slider->SetCircularMinValue(200.0f);
 
 		SP(Engine::CImageObject) background =
 			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
@@ -63,13 +65,13 @@ void CDongScene::Start(void)
 
 		SP(Engine::CImageObject) fill =
 			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
-		fill->SetParent(slider.get());
 		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
 		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
 		fill->GetTransform()->SetSize(_float3(300, 300, 0));
-		fill->GetTexture()->AddTexture(L"B2785713", 0);
+		fill->GetTexture()->AddTexture(L"test", 0);
+		fill->SetParent(slider.get());
 		fill->GetComponent<Engine::CShaderC>()->
-			AddShader((_int)Engine::EShaderID::CircularGauge);
+			AddShader((_int)EShaderID::CircularGaugeShader);
 
 		slider->AddSliderData(100, 100, 0, background, fill);
 	}

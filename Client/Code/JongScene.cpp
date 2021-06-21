@@ -194,7 +194,7 @@ void CJongScene::CollisionDummy()
 
 
 	m_spDummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
-	m_spDummy->GetTransform()->SetPosition(2, 0, 5);
+	m_spDummy->GetTransform()->SetPosition(0, 0, 5);
 
 
 	m_spDummy2 = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");

@@ -9,6 +9,7 @@
 #include "MonsterSliderC.h"
 #include "GlitterC.h"
 #include "SkillActivationC.h"
+#include "TargetPositionC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -32,10 +33,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
 	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get())); 
 
-	m_playerHp = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerHp").get();
+	m_playerHp = pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerHp").get();
 	m_playerHp->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(-320.0f, 325.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
 
-	m_playerSp = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerSp").get();
+	m_playerSp = pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerSp").get();
 	m_playerSp->AddComponent<Engine::CTextC>()->AddFontData(L"3 / 108", _float2(265.0f, 395.0f), _float2(0, 0), 20, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
 
 	m_skillButton.emplace_back(static_cast<CButton*>(pScene->FindObjectByName(L"MainCanvas_BasicAttack_0").get()));
@@ -82,7 +83,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
-	m_monsterName =	pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"MonsterStateCanvas_MonsterName_0").get();
+	m_monsterName =	pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L"MonsterStateCanvas_MonsterName_0").get();
 	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -350.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
@@ -111,12 +112,15 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//MonsterTargetCanvas
 	m_monsterTargetCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterTargetCanvas").get());
-	m_monsterTargetCanvas->AddComponent<CAlphaLifeTimeC>();
+	m_monsterTargetCanvas->AddComponent<CLifeObjectC>();
 
 	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_1").get()));
 	m_target[0]->AddComponent<CRotationUiC>()->SetSpeed(1);
+	m_target[0]->AddComponent<CTargetPositionC>();
+	m_target[0]->AddComponent<CSkillActivationC>();
 	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_2").get()));
 	m_target[1]->AddComponent<CRotationUiC>()->SetSpeed(-1);
+	m_target[1]->AddComponent<CTargetPositionC>();
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// GiveUpCanvas
 	m_giveUpCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"GiveUpCanvas").get());
@@ -316,17 +320,12 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
 }
 
-void CBattleUiManager::TargetUI(_float3 pos, _float value)
+void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
-	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
-	_float3 pos2D = cam->WorldToScreenPoint(pos);
-	
-	pos2D.z = 0.f;
+	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
 
-	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
-
-	m_target[0]->GetTransform()->SetPosition(pos2D);
-	m_target[1]->GetTransform()->SetPosition(pos2D);
+	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
+	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 
 	m_monsterTargetCanvas->SetIsEnabled(true);
 }

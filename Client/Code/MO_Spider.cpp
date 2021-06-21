@@ -56,7 +56,7 @@ void CMO_Spider::Start(void)
 	stat.SetGrowAtk(1.2f);
 	stat.SetGrowDef(1.f);
 
-	stat.SetType(BaseStat::Mecha);
+	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
 }
 

@@ -121,7 +121,8 @@ _int CDataStore::GetIndex(std::wstring sectionKey)
 			return i;
 	}
 
-	return -1;
+	MSG_BOX(__FILE__, L"Wrong sectionKey in CDataStore::GetIndex()");
+	ABORT;
 }
 
 std::wstring CDataStore::GetVariableKey(const std::wstring & lineFromFile, _size symbolPos)

@@ -1,22 +1,22 @@
 #pragma once
 #include "Shader.h"
 
-BEGIN(Engine)
-class CMeshTrailShader final : public CShader
+
+class CMeshTrailShader final : public Engine::CShader
 {
 private:
 	CMeshTrailShader();
 	~CMeshTrailShader();
 
 public:
-	static CShader* Create();
+	static Engine::CShader* Create();
 	void Free();
 	void Awake() override;
 
 public:
-	void SetUpConstantTable(SP(CGraphicsC) spGC) override;
+	void SetUpConstantTable(SP(Engine::CGraphicsC) spGC) override;
 
 private:
 	_float4 m_Light_Pos;
 };
-END
+

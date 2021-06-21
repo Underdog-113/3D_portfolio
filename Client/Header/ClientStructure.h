@@ -2,7 +2,7 @@
 
 	typedef struct _Character_Base_Status
 	{
-		enum Character_Type { Human, Honkai, Mech };
+		enum Character_Type { Creature, Phychic, Mecha };
 
 		// base status - kiana A rank level 1
 		GETTOR_SETTOR(_float,	baseHp,		317.f,	BaseHp)
@@ -14,7 +14,7 @@
 		GETTOR_SETTOR(_float,	growDef,	1.09f,	GrowDef)
 		
 		GETTOR_SETTOR(_uint,	level,		1,		Level)					
-		GETTOR_SETTOR(Character_Type,	type,		Human,		Type)
+		GETTOR_SETTOR(Character_Type,	type,		Creature,		Type)
 	}BaseStat;
 		
 

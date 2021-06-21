@@ -2,20 +2,19 @@
 
 #include "Shader.h"
 
-BEGIN(Engine)
-class ENGINE_DLL CWaterShader final : public CShader
+class CWaterShader final : public Engine::CShader
 {
 private:
 	CWaterShader();
 	~CWaterShader() = default;
 
 public:
-	static CShader* Create();
+	static Engine::CShader* Create();
 	void Free();
 	void Awake() override;
 
 public:
-	void SetUpConstantTable(SP(CGraphicsC) spGC) override;
+	void SetUpConstantTable(SP(Engine::CGraphicsC) spGC) override;
 
 	_float4 m_vColor;
 	_float4 m_Light_Pos;
@@ -23,4 +22,4 @@ public:
 	_float  m_fUVSpeed;
 	_float  m_fTime;
 };
-END
+
