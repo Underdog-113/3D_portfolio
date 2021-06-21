@@ -17,28 +17,7 @@ void CGraphicsManager::Awake(void)
 
 void CGraphicsManager::Start(void)
 {
-	//LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	//D3DLIGHT9 light;
-	//ZeroMemory(&light, sizeof(D3DLIGHT9));
-
-	//light.Type = D3DLIGHT_DIRECTIONAL;
-	//light.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	//light.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	//light.Ambient = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	//light.Direction = _float3(1.f, -1.f, 1.f);
-	//
-	//pDevice->SetLight(0, &light);
-	//pDevice->LightEnable(0, TRUE);
-
-
-
-	////Get the alpha from the texture
-	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-	//pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CONSTANT);
-
-	//GET_DEVICE->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-	//GET_DEVICE->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	
 }
 
 void CGraphicsManager::FixedUpdate(void)
@@ -70,9 +49,9 @@ void CGraphicsManager::LateUpdate(void)
 void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
-		D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f),
-		1.f, 0);
+					  D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+					  D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f),
+					  1.f, 0);
 
 	GET_DEVICE->BeginScene();
 }
@@ -208,10 +187,6 @@ void CGraphicsManager::InitDeferredBuffer(void)
 
 void CGraphicsManager::RenderBase(void)
 {
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::Base])
 	{
 		if (pObject->GetIsEnabled())
@@ -220,31 +195,27 @@ void CGraphicsManager::RenderBase(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				SP(CComponent) spShader;
-				if (spShader = pObject->GetComponent<CShaderC>())
+				SP(CComponent) spShaderC = pObject->GetComponent<CShaderC>();
+
+				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShaderC)->GetShaders();
+
+				for (_size i = 0; i < vShader.size(); ++i)
 				{
-					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-					for (_size i = 0; i < vShader.size(); ++i)
-					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
 
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
+					pObject->PreRender(pEffect);
+					pObject->Render(pEffect);
+					pObject->PostRender(pEffect);
 
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-
-						pEffect->End();
-					}
+					pEffect->End();
 				}
 			}
 		}
 	}
-	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	//pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -264,23 +235,20 @@ void CGraphicsManager::RenderNonAlpha(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				SP(CComponent) spShader;
-				if (spShader = pObject->GetComponent<CShaderC>())
+				SP(CComponent) spShader = pObject->GetComponent<CShaderC>();
+				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+
+				for (_size i = 0; i < vShader.size(); ++i)
 				{
-					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-					for (_size i = 0; i < vShader.size(); ++i)
-					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-						pEffect->End();
-					}
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
+					pObject->PreRender(pEffect);
+					pObject->Render(pEffect);
+					pObject->PostRender(pEffect);
+					pEffect->End();
 				}
 			}
 		}
@@ -316,7 +284,6 @@ void CGraphicsManager::RenderDeferBlend(void)
 	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
 	pDevice->SetFVF(FVF_SCR);
 
-
 	pDevice->SetIndices(m_pIndexBuffer);
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 
@@ -326,7 +293,6 @@ void CGraphicsManager::RenderDeferBlend(void)
 
 void CGraphicsManager::RenderWire(void)
 {
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::WireFrame])
 	{
 		if (pObject->GetIsEnabled())
@@ -408,38 +374,33 @@ void CGraphicsManager::RenderAlphaBlend(void)
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
 
-				SP(CComponent) pShader;
-				if (pShader = pObject->GetComponent<CShaderC>())
+				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
+				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
+
+				for (_size i = 0; i < vShader.size(); ++i)
 				{
-					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-					for (_size i = 0; i < vShader.size(); ++i)
+					_uint maxPass = 0;
+
+					pEffect->Begin(&maxPass, 0);
+
+					for (_uint j = 0; j < maxPass; ++j)
 					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+						pEffect->BeginPass(0);
 
-						_uint maxPass = 0;
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
 
-						pEffect->Begin(&maxPass, 0);
-
-						//for (_uint j = 0; j < maxPass; ++j)
-						//{
-							pEffect->BeginPass(0);
-
-							pObject->PreRender(pEffect);
-							pObject->Render(pEffect);
-							pObject->PostRender(pEffect);
-
-							pEffect->EndPass();
-						//}
-						pEffect->End();
+						pEffect->EndPass();
 					}
+					pEffect->End();
 				}
 			}
 		}
 	}
-
-
 }
 
 void CGraphicsManager::RenderParticle(void)
@@ -472,32 +433,29 @@ void CGraphicsManager::RenderUI(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				SP(CComponent) pShader;
-				if (pShader = pObject->GetComponent<CShaderC>())
+				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
+				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
+
+				if(!pShader)
+					continue;
+				for (_size i = 0; i < vShader.size(); ++i)
 				{
-					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-					for (_size i = 0; i < vShader.size(); ++i)
-					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
+					pEffect->BeginPass(0);
 
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						pEffect->BeginPass(0);
+					pObject->PreRender(pEffect);
+					pObject->Render(pEffect);
+					pObject->PostRender(pEffect);
 
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-
-						pEffect->EndPass();
-						pEffect->End();
-					}
+					pEffect->EndPass();
+					pEffect->End();
 				}
 			}
 		}
 	}
-
-	GET_DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
 }

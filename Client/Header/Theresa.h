@@ -35,13 +35,13 @@ public:
 					void					OnDisable			(void) override;
 
 					void					SetBasicName		(void) override;
-					
+
+					void					ApplyHitInfo		(HitInfo info) override;
 public:
 
 
 private:
-	_float m_ultraTimer = 0.f;
-	_float m_ultraDuration = 8.f;
+	_uint idx = 0;
 };
 
 #endif

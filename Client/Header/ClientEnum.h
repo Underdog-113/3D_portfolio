@@ -58,3 +58,14 @@ enum class ELoadingID
 	BossSceneResource
 };
 #endif // CLIENTENUM_H
+
+
+// Floor		    : 3
+// Wall			    : 4
+// FloorRay		    : 5
+// WallRay		    : 6
+// PlayerHitBox	    : 7
+// PlayerAttack	    : 8
+// EnemyHitBox	    : 9
+// EnemyAttack	    : 10
+// NumOfColliderID  : 11

@@ -34,6 +34,7 @@ public:
 
 	virtual void SetBasicName(void) override;
 
+	virtual void ApplyHitInfo(HitInfo info) override;
 public:
 	static		SP(CMB_Ganesha)			Create(_bool isStatic, Engine::CScene* pScene);
 };

@@ -33,6 +33,7 @@ CMeshData * CDynamicMeshData::MakeClone(void)
 	pClone->m_maxVertex			= m_maxVertex;
 
 	pClone->m_meshKey			= m_meshKey;
+	pClone->m_subsetCount		= m_subsetCount;
 
 	return pClone;
 }
@@ -105,7 +106,6 @@ void CDynamicMeshData::Update(void)
 
 void CDynamicMeshData::OnDestory(void)
 {
-
 	m_pAniCtrl->Free();
 	delete this;
 }

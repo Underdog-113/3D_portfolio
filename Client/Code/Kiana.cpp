@@ -4,6 +4,7 @@
 #include "FSM_KianaC.h"
 #include "ObjectFactory.h"
 #include "DynamicMeshData.h"
+#include "StateMachine.h"
 
 #include "StageControlTower.h"
 #include "UILinker.h"
@@ -15,6 +16,7 @@
 #include "Kiana_CatPaw_Atk05.h"
 
 #include "AttackBall.h"
+#include "FSMDefine_Kiana.h"
 
 CKiana::CKiana()
 {
@@ -51,10 +53,10 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spRigidBody	= spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
-
-
+	
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
 
+	 
 	return spClone;
 }
 
@@ -72,6 +74,14 @@ void CKiana::Start(void)
 
 	m_spMesh->OnRootMotion();
 
+	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	m_pAttackBall->GetTransform()->SetSize(3.f, 3.f, 3.f);
+	m_pAttackBall->SetOwner(this);
+
+	FindRightToe();
+	FindLeftHand();
+	FindRightHand();
+
 	//weapon
 	//CreatePistol();
 
@@ -83,8 +93,6 @@ void CKiana::Start(void)
 
 	m_pStat = new V_Kiana_Stat;
 	m_pStat->SetupStatus(&stat);
-
-	m_spTransform->SetPositionY(10.f);
 }
 
 void CKiana::FixedUpdate(void)
@@ -94,9 +102,11 @@ void CKiana::FixedUpdate(void)
 
 void CKiana::Update(void)
 {
-	Update_WeaponTransform();
+	//Update_WeaponTransform();
 
 	__super::Update();
+	
+	UpdatePivotMatrices();
 
 	if (m_ultraMode)
 		UseUltraCost();
@@ -127,6 +137,7 @@ void CKiana::OnDestroy(void)
 {
 	delete m_pStat;
 
+	SAFE_DELETE(m_pRightToe_World)
 	delete m_pLeftHand_World;
 	delete m_pRightHand_World;
 	__super::OnDestroy();
@@ -146,6 +157,40 @@ void CKiana::Update_WeaponTransform(void)
 {
 	//*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
 	//*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
+}
+
+void CKiana::UpdatePivotMatrices(void)
+{
+	if (m_pRightToe_World)
+	{
+		_mat combMat = m_pRightToe_Frame->CombinedTransformMatrix;
+		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+		combMat._41 -= rootMotionPos.x;
+		combMat._43 -= rootMotionPos.z;
+
+		*m_pRightToe_World = combMat * m_spTransform->GetWorldMatrix();
+	}
+
+	if (m_pRightHand_World)
+	{
+		_mat combMat = m_pRightHand_Frame->CombinedTransformMatrix;
+		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+		combMat._41 -= rootMotionPos.x;
+		combMat._43 -= rootMotionPos.z;
+
+		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
+	}
+
+	if (m_pLeftHand_World)
+	{
+		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
+		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+		combMat._41 -= rootMotionPos.x;
+		combMat._43 -= rootMotionPos.z;
+
+		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
+	}
+
 }
 
 void CKiana::CreatePistol(void)
@@ -216,6 +261,26 @@ void CKiana::UseUltraCost(void)
 void CKiana::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+}
+
+void CKiana::ApplyHitInfo(HitInfo info)
+{
+	// attack strength
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Damage:
+		break;
+	case HitInfo::Str_Low:
+		m_spStateMachine->ChangeState(Name_Hit_L);
+		break;
+	case HitInfo::Str_High:
+		m_spStateMachine->ChangeState(Name_Hit_H);
+		break;
+	case HitInfo::Str_Airborne:
+		break;
+	}
+
+	// crowd control
 }
 
 void CKiana::UltraAtk(AttackOption index)
@@ -355,13 +420,46 @@ void CKiana::SetUltraMode(bool value)
 		m_pCT->GetUILinker()->Ultra();
 }
 
+void CKiana::FindLeftHand()
+{
+	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_L_Finger12");
+	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_L_Finger12");
+
+	m_pLeftHand_World = new _mat;
+	*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
+
+	m_pAttackBall->SetParentMatrix(m_pLeftHand_World);
+}
+
+void CKiana::FindRightHand()
+{
+	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_R_Finger12");
+	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_R_Finger12");
+
+	m_pRightHand_World = new _mat;
+	*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
+
+	m_pAttackBall->SetParentMatrix(m_pRightHand_World);
+}
+
+void CKiana::FindRightToe()
+{
+	m_pRightToe_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_R_Toe0");
+	m_pRightToe_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_R_Toe0");
+
+	m_pRightToe_World = new _mat;
+	*m_pRightToe_World = *m_pRightToe_BoneOffset * m_pRightToe_Frame->CombinedTransformMatrix;
+
+	m_pAttackBall->SetParentMatrix(m_pRightToe_World);
+}
+
 SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
 		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");

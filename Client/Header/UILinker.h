@@ -23,8 +23,8 @@ public:
 
 	void	Skill				(void);
 	void	Ultra				(void);
-	//void	Evade				(_float cooltime);
-	//void	Attack				(_float cooltime);
+	void	Evade				();
+	void	Attack				();
 
 	void	SwapToOne			(void);
 	void	SwapToTwo			(void);
@@ -32,7 +32,9 @@ public:
 	void	Hit_Up				(void);
 		
 public:
-	void	TargetMarker		(void);
+	void	OnTargetMarker		(void);
+	void	OffTargetMarker		(void);
+
 		
 	void	MonsterInfoSet		(void);
 	void	MonsterHpSet		(void);

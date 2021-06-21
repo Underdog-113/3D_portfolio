@@ -218,7 +218,7 @@ void CBattleUiManager::HitCount(_float lifeTime)
 	m_hitCount->GetComponent<CHitsUiC>()->AddHitsCount(1);
 }
 
-void CBattleUiManager::MonsetrState(std::wstring name, _float hp, std::wstring property)
+void CBattleUiManager::MonsterState(std::wstring name, _float hp, std::wstring property)
 {
 	// 오브젝트 켜주고 꺼주는 오브젝트가 필요할듯
 	m_monsterStateCanvas->SetIsEnabled(true);

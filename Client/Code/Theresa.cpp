@@ -2,6 +2,7 @@
 #include "Theresa.h"
 
 #include "FSM_TheresaC.h"
+#include "DynamicMeshData.h"
 
 CTheresa::CTheresa()
 {
@@ -51,6 +52,12 @@ void CTheresa::Start(void)
 
 	m_spMesh->OnRootMotion();
 
+
+	// status
+	V_WarshipStat stat;
+
+	m_pStat = new V_Theresa_Stat;
+	m_pStat->SetupStatus(&stat);
 }
 
 void CTheresa::FixedUpdate(void)
@@ -61,6 +68,17 @@ void CTheresa::FixedUpdate(void)
 void CTheresa::Update(void)
 {
 	__super::Update();
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
+	{
+		++idx;
+		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(17);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_I))
+	{
+		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(0);
+	}
 }
 
 void CTheresa::LateUpdate(void)
@@ -86,6 +104,8 @@ void CTheresa::PostRender(LPD3DXEFFECT pEffect)
 void CTheresa::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	SAFE_DELETE(m_pStat)
 }
 
 void CTheresa::OnEnable(void)
@@ -99,5 +119,10 @@ void CTheresa::OnDisable(void)
 }
 
 void CTheresa::SetBasicName(void)
+{
+	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+}
+
+void CTheresa::ApplyHitInfo(HitInfo info)
 {
 }

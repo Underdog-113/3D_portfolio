@@ -30,6 +30,7 @@ public:
 
 	virtual			void					SetBasicName	(void) override;
 
+	virtual			void					ApplyHitInfo	(HitInfo info) override;
 
 public:
 	void ChaseTarget(_float3 targetPos);

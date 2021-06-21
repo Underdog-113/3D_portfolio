@@ -38,7 +38,7 @@ void CRectTexShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 		SetupWorldViewProj(spGC);
 	
 	SP(CTextureC) spTexture = spGC->GetTexture();
-	m_pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[spTexture->GetMeshIndex()][spTexture->GetTexIndex()]->pTexture);
+	m_pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[spTexture->GetSetIndex()][spTexture->GetTexIndex()]->pTexture);
 
 	m_pEffect->SetVector("g_color", &spTexture->GetColor());
 }

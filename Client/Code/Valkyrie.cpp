@@ -27,12 +27,26 @@ void CValkyrie::Awake(void)
 	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
 	m_spCollision = AddComponent<Engine::CCollisionC>();
 	m_spDebug = AddComponent<Engine::CDebugC>();
-	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
-	m_pAttackBall->SetOwner(this);
 }
 
 void CValkyrie::Start(void)
 {
 	__super::Start();
 	m_pCT = CStageControlTower::GetInstance();
+}
+
+void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetStrengthType(strength);
+	info.SetCrowdControlType(cc);
+
+	m_pAttackBall->SetParentMatrix(pBoneMat);
+	m_pAttackBall->SetIsEnabled(true);
+}
+
+void CValkyrie::UnActiveAttackBall()
+{
+	m_pAttackBall->SetIsEnabled(false);
 }
