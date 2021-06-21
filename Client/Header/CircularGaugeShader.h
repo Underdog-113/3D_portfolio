@@ -3,26 +3,26 @@
 
 #include "Shader.h"
 #include "Slider.h"
-BEGIN(Engine)
-class ENGINE_DLL CCircularGaugeShader final : public CShader
+
+class CCircularGaugeShader final : public Engine::CShader
 {
 private:
 	explicit CCircularGaugeShader(void);
 	~CCircularGaugeShader(void);
 
 public:
-	static				CShader*			Create(void);
+	static				Engine::CShader*			Create(void);
 	void				Free(void);
 
 	void				Awake(void) override;
 
 public:
-	void				SetUpConstantTable(SP(CGraphicsC) spGC) override;
+	void				SetUpConstantTable(SP(Engine::CGraphicsC) spGC) override;
 
 private:
-	CSlider* m_spSlider;
+	Engine::CSlider* m_spSlider;
 	GETTOR_SETTOR(_int,		m_directionID,		UNDEFINED,		DirectionID)
 };
-END
+
 
 #endif

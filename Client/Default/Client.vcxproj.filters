@@ -304,6 +304,39 @@
     <Filter Include="03.Component\00.UI\10.SkillActivation">
       <UniqueIdentifier>{32868f76-d66f-4f14-8407-2aee397cb560}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader">
+      <UniqueIdentifier>{9ce06580-fa70-44fd-a34e-0ce6c1112db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\00.WaterShader">
+      <UniqueIdentifier>{2b3744a5-c07c-461c-a730-0e5e3b0c6698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\01.EffectShader">
+      <UniqueIdentifier>{39d3bec7-199e-452c-b74d-09172005fc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\02.DamageFontShader">
+      <UniqueIdentifier>{0ba5a878-5813-49ff-8079-14724d3cb4ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\03.CatPawShader">
+      <UniqueIdentifier>{79ca6d77-e451-452c-9f01-8aab630fa739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\04.CircularGaugeShader">
+      <UniqueIdentifier>{6498d179-2cd6-41bd-beea-127f182189c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\05.MeshTrailShader">
+      <UniqueIdentifier>{a61f6061-73a1-4408-bdf6-09e28c9b96c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\06.DissolveShader">
+      <UniqueIdentifier>{446380b0-babf-454d-ac8e-5a3d906cdef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\07.SpawnEffectShader">
+      <UniqueIdentifier>{f45bedaf-8fcb-4a27-84ba-1b33b00e5da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\08.SoftEffectShader">
+      <UniqueIdentifier>{e547720a-cadb-4e77-9425-811e7ebc8d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\09.AttackRangeShader">
+      <UniqueIdentifier>{afb5da92-a9b4-40be-a70c-f1bc52966bce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -606,6 +639,36 @@
     <ClInclude Include="SkillActivationC.h">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\AttackRangeShader.h">
+      <Filter>04.Shader\09.AttackRangeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CatPawShader.h">
+      <Filter>04.Shader\03.CatPawShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CircularGaugeShader.h">
+      <Filter>04.Shader\04.CircularGaugeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DamageFontShader.h">
+      <Filter>04.Shader\02.DamageFontShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DissolveShader.h">
+      <Filter>04.Shader\06.DissolveShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectShader.h">
+      <Filter>04.Shader\01.EffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MeshTrailShader.h">
+      <Filter>04.Shader\05.MeshTrailShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SoftEffectShader.h">
+      <Filter>04.Shader\08.SoftEffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SpawnEffectShader.h">
+      <Filter>04.Shader\07.SpawnEffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WaterShader.h">
+      <Filter>04.Shader\00.WaterShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -860,6 +923,36 @@
     <ClCompile Include="SkillActivationC.cpp">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\AttackRangeShader.cpp">
+      <Filter>04.Shader\09.AttackRangeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DamageFontShader.cpp">
+      <Filter>04.Shader\02.DamageFontShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CatPawShader.cpp">
+      <Filter>04.Shader\03.CatPawShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp">
+      <Filter>04.Shader\04.CircularGaugeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DissolveShader.cpp">
+      <Filter>04.Shader\06.DissolveShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectShader.cpp">
+      <Filter>04.Shader\01.EffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeshTrailShader.cpp">
+      <Filter>04.Shader\05.MeshTrailShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpawnEffectShader.cpp">
+      <Filter>04.Shader\07.SpawnEffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoftEffectShader.cpp">
+      <Filter>04.Shader\08.SoftEffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WaterShader.cpp">
+      <Filter>04.Shader\00.WaterShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -881,5 +974,37 @@
     <Text Include="Initialize_Helper.txt">
       <Filter>99.Default</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
+      <Filter>04.Shader\00.WaterShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
+      <Filter>04.Shader\09.AttackRangeShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
+      <Filter>04.Shader\03.CatPawShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
+      <Filter>04.Shader\04.CircularGaugeShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
+      <Filter>04.Shader\02.DamageFontShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
+      <Filter>04.Shader\06.DissolveShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
+      <Filter>04.Shader\01.EffectShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
+      <Filter>04.Shader\05.MeshTrailShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
+      <Filter>04.Shader\08.SoftEffectShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
+      <Filter>04.Shader\07.SpawnEffectShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

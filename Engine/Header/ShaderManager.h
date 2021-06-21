@@ -16,10 +16,14 @@ public:
 			CShader*			GetShader			(_int shaderID);
 			_int				GetShaderID			(std::wstring shaderName);
 
-
+			void				InitShaderList		(_uint numOfShader);
+			void				AddKeyAndShader		(CShader* pShader, std::wstring shaderKey, _uint ID);
 private:
-	typedef std::vector<CShader*> _Shaders;
-			_Shaders	m_vShaders;
+	typedef std::vector<CShader*> _SHADERS;
+	typedef std::vector<std::wstring> _HASHMAP;
+			_SHADERS	m_vShaders;
+			_HASHMAP	m_vHashKey;
+
 };
 END
 #endif // !MESHSTORE_H

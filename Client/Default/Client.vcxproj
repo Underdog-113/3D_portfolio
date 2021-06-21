@@ -184,17 +184,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AttackBall.h" />
+    <ClInclude Include="..\Header\AttackRangeShader.h" />
     <ClInclude Include="..\Header\AttackTrail_Client.h" />
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\CatPawShader.h" />
+    <ClInclude Include="..\Header\CircularGaugeShader.h" />
+    <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
     <ClInclude Include="..\Header\DataManager.h" />
+    <ClInclude Include="..\Header\DissolveShader.h" />
+    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
@@ -245,6 +251,7 @@
     <ClInclude Include="..\Header\MB_Bronya.h" />
     <ClInclude Include="..\Header\MB_Ganesha.h" />
     <ClInclude Include="..\Header\MeshEffect_Client.h" />
+    <ClInclude Include="..\Header\MeshTrailShader.h" />
     <ClInclude Include="..\Header\Monster.h" />
     <ClInclude Include="..\Header\MonsterSliderC.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
@@ -261,6 +268,8 @@
     <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\SkillCollTimcC.h" />
+    <ClInclude Include="..\Header\SoftEffectShader.h" />
+    <ClInclude Include="..\Header\SpawnEffectShader.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\TrapObject.h" />
     <ClInclude Include="..\Header\UILinker.h" />
@@ -273,6 +282,7 @@
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
+    <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
@@ -285,14 +295,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AttackBall.cpp" />
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\CatPawShader.cpp" />
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DataManager.cpp" />
+    <ClCompile Include="..\Code\DissolveShader.cpp" />
+    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
     <ClCompile Include="..\Code\GlitterC.cpp" />
@@ -333,6 +349,7 @@
     <ClCompile Include="..\Code\MB_Bronya.cpp" />
     <ClCompile Include="..\Code\MB_Ganesha.cpp" />
     <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
+    <ClCompile Include="..\Code\MeshTrailShader.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\MonsterSliderC.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
@@ -349,6 +366,8 @@
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
+    <ClCompile Include="..\Code\SoftEffectShader.cpp" />
+    <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
     <ClCompile Include="..\Code\StageSelectionScene.cpp" />
     <ClCompile Include="..\Code\TrapObject.cpp" />
     <ClCompile Include="..\Code\UILinker.cpp" />
@@ -361,6 +380,7 @@
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
+    <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="AlphaLifeTimeC.cpp" />
@@ -385,6 +405,70 @@
     <Text Include="Initialize_Helper.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

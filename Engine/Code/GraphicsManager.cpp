@@ -2,6 +2,7 @@
 #include "GraphicsManager.h"
 #include "Scene.h"
 #include "Object.h"
+#include "TextObject.h"
 #include "Frustum.h"
 #include "PSC_Manager.h"
 
@@ -128,7 +129,7 @@ void CGraphicsManager::InitDeferredBuffer(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	if(FAILED(pDevice->CreateVertexBuffer(sizeof(_VertexScreen) * 4,
-										  0,// ���� ���۸� ����(d3dusage_dynamic ���� �� ���� ����)
+										  0,
 										  FVF_SCR,
 										  D3DPOOL_MANAGED,
 										  &m_pVertexBuffer,
@@ -139,7 +140,7 @@ void CGraphicsManager::InitDeferredBuffer(void)
 	}
 
 	if(FAILED(pDevice->CreateIndexBuffer(sizeof(INDEX16) * 2,
-										 0,// ���� ���۸� ����(d3dusage_dynamic ���� �� ���� ����)
+										 0,
 										 D3DFMT_INDEX16,
 										 D3DPOOL_MANAGED,
 										 &m_pIndexBuffer,
@@ -187,6 +188,8 @@ void CGraphicsManager::InitDeferredBuffer(void)
 
 void CGraphicsManager::RenderBase(void)
 {
+	GET_DEVICE->SetRenderState(D3DRS_LIGHTING, FALSE);
+	GET_DEVICE->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::Base])
 	{
 		if (pObject->GetIsEnabled())
@@ -216,6 +219,8 @@ void CGraphicsManager::RenderBase(void)
 			}
 		}
 	}
+	GET_DEVICE->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	GET_DEVICE->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void CGraphicsManager::RenderDeferred(void)
@@ -354,11 +359,6 @@ void CGraphicsManager::RenderAlphaTest(void)
 
 void CGraphicsManager::RenderAlphaBlend(void)
 {
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
 	std::sort(m_vRenderList[(_int)ERenderID::AlphaBlend].begin(), m_vRenderList[(_int)ERenderID::AlphaBlend].end(),
 		[](CObject* pObj1, CObject* pObj2)
 	{
@@ -417,7 +417,11 @@ void CGraphicsManager::RenderEffect(void)
 
 void CGraphicsManager::RenderUI(void)
 {
-	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, FALSE);
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(),
 			[](CObject* pObj1, CObject* pObj2)
 			{
@@ -434,26 +438,38 @@ void CGraphicsManager::RenderUI(void)
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
 				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
-				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
 
-				for (_size i = 0; i < vShader.size(); ++i)
+				if (pShader == nullptr)
 				{
-					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+					Engine::CTextObject* pTextObject = static_cast<Engine::CTextObject*>(pObject);
+					pTextObject->PreRender();
+					pTextObject->Render();
+					pTextObject->PostRender();					
+				}
+				else
+				{
+					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
 
-					_uint maxPass = 0;
-					pEffect->Begin(&maxPass, 0);
-					pEffect->BeginPass(0);
+					for (_size i = 0; i < vShader.size(); ++i)
+					{
+						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-					pObject->PreRender(pEffect);
-					pObject->Render(pEffect);
-					pObject->PostRender(pEffect);
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+						pEffect->BeginPass(0);
 
-					pEffect->EndPass();
-					pEffect->End();
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+
+						pEffect->EndPass();
+						pEffect->End();
+					}
 				}
 			}
 		}
 	}
-	GET_DEVICE->SetRenderState(D3DRS_ZENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
 }

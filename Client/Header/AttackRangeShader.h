@@ -1,20 +1,20 @@
 #pragma once
 #include "Shader.h"
 
-BEGIN(Engine)
-class CSpawnEffectShader final : public CShader
+
+class CAttackRangeShader final : public Engine::CShader
 {
 private:
-	CSpawnEffectShader();
-	~CSpawnEffectShader();
+	CAttackRangeShader();
+	~CAttackRangeShader();
 
 public:
-	static CShader* Create();
+	static Engine::CShader* Create();
 	void Free();
 	void Awake() override;
 
 public:
-	void SetUpConstantTable(SP(CGraphicsC) spGC) override;
+	void SetUpConstantTable(SP(Engine::CGraphicsC) spGC) override;
 
 private:
 	_float4 m_vColor;
@@ -24,4 +24,4 @@ private:
 	_float  m_fTime;
 
 };
-END
+

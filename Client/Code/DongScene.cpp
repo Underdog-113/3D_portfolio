@@ -69,7 +69,7 @@ void CDongScene::Start(void)
 		fill->GetTransform()->SetSize(_float3(300, 300, 0));
 		fill->GetTexture()->AddTexture(L"B2785713", 0);
 		fill->GetComponent<Engine::CShaderC>()->
-			AddShader((_int)Engine::EShaderID::CircularGauge);
+			AddShader((_int)EShaderID::CircularGaugeShader);
 
 		slider->AddSliderData(100, 100, 0, background, fill);
 	}

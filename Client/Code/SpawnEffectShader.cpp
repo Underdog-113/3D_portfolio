@@ -1,7 +1,6 @@
-#include "EngineStdafx.h"
+#include "stdafx.h"
 #include "..\Header\SpawnEffectShader.h"
 
-USING(Engine)
 
 CSpawnEffectShader::CSpawnEffectShader()
 {
@@ -11,7 +10,7 @@ CSpawnEffectShader::~CSpawnEffectShader()
 {
 }
 
-CShader * CSpawnEffectShader::Create()
+Engine::CShader * CSpawnEffectShader::Create()
 {
 	CSpawnEffectShader* pInstance = new CSpawnEffectShader;
 	pInstance->Awake();
@@ -32,15 +31,15 @@ void CSpawnEffectShader::Awake()
 	m_fUVSpeed = 0.25f;
 }
 
-void CSpawnEffectShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CSpawnEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	m_fTime += GET_DT;
 
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
+	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
 	m_pEffect->SetMatrix("gWorld", &worldMat);
 	m_pEffect->SetMatrix("gView", &viewMat);
@@ -61,7 +60,7 @@ void CSpawnEffectShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
-	SP(CTextureC) spTexture = spGC->GetTexture();
+	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
