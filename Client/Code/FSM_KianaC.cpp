@@ -10,7 +10,7 @@
 #include "FSMDefine_Kiana.h"
 #include "StageControlTower.h"
 #include "Kiana.h"
-
+#include "AttackBall.h"
 
 CFSM_KianaC::CFSM_KianaC()
 {
@@ -385,7 +385,7 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 	if (Engine::IMKEY_DOWN(StageKey_QTE))
 	{
 		ChangeState(Name_Appear);
-		m_appearOption = QTEAppear;
+		m_appearOption = QTE;
 		return;
 	}
 
@@ -436,7 +436,7 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 		case CFSM_KianaC::None:
 			ChangeState(Name_StandBy);
 			break;
-		case CFSM_KianaC::QTEAppear:
+		case CFSM_KianaC::QTE:
 			ChangeState(Name_Attack_QTE);
 			break;
 		default:
@@ -464,10 +464,7 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_checkUltraRing = false;
 	m_checkUltraAtk = false;
 
-
-	auto effect = m_pKiana->GetEffect_Attack1()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -497,6 +494,8 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 void CFSM_KianaC::Attack_1_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_2_Init(void)
@@ -511,10 +510,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 
 	m_checkUltraAtk = false;
 
-
-	auto effect = m_pKiana->GetEffect_Attack2()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -540,6 +536,8 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 void CFSM_KianaC::Attack_2_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_3_Init(void)
@@ -552,12 +550,8 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-
-
-
-	auto effect = m_pKiana->GetEffect_Attack3()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -581,6 +575,8 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 void CFSM_KianaC::Attack_3_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_3_Branch_Init(void)
@@ -623,10 +619,7 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
 
-
-	auto effect = m_pKiana->GetEffect_Attack4()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -651,6 +644,8 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 void CFSM_KianaC::Attack_4_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+	
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_4_Branch_Init(void)
@@ -691,9 +686,7 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
 
-	auto effect = m_pKiana->GetEffect_Attack5()->MakeClone();
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
@@ -716,6 +709,8 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 void CFSM_KianaC::Attack_5_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_QTE_Init(void)

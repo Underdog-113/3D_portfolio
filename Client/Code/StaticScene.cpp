@@ -17,6 +17,7 @@
 
 #include "AttackBall.h"
 
+#include "MO_Dummy.h"
 #include "MO_Scout.h"
 #include "MO_Ninza.h"
 #include "MO_Axe.h"
@@ -169,6 +170,9 @@ void CStaticScene::InitUiPrototypes(void)
 
 void CStaticScene::InitMonsterPrototypes(void)
 {
+	SP(CMonster) spMO_Dummy(CMO_Dummy::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Dummy);
+
 	SP(CMonster) spMO_Spider(CMO_Spider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Spider);
 
@@ -222,4 +226,8 @@ void CStaticScene::InitValkyriePrototypes(void)
 
 	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(true, this));
 	ADD_PROTOTYPE(spPistol);
+
+
+	SP(CTheresa) spTheresaPrototype(CTheresa::Create(true, this));
+	ADD_PROTOTYPE(spTheresaPrototype);
 }

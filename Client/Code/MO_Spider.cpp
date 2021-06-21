@@ -25,6 +25,10 @@ SP(Engine::CObject) CMO_Spider::MakeClone(void)
 	spClone->m_spShader			= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture		= spClone->GetComponent<Engine::CTextureC>();
 	
+	//spClone->m_spRigidBody		= spClone->GetComponent<Engine::CRigidBodyC>();
+	//spClone->m_spCollision		= spClone->GetComponent<Engine::CCollisionC>();
+	//spClone->m_spDebug			= spClone->GetComponent<Engine::CDebugC>();
+	
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_SpiderC>();
 	return spClone;
 }

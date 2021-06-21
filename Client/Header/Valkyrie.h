@@ -44,6 +44,10 @@ public:
 	virtual		void						OnCollisionStay(Engine::_CollisionInfo ci) {};
 	virtual		void						OnCollisionExit(Engine::_CollisionInfo ci) {};
 
+public:
+	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat);
+	void UnActiveAttackBall();
+
 protected:
 	static			_uint							m_s_uniqueID;
 

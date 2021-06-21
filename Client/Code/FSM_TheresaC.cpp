@@ -5,7 +5,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 
-#include "FSMDefine_Kiana.h"
+#include "FSMDefine_Theresa.h"
 #include "StageControlTower.h"
 #include "Theresa.h"
 
@@ -37,16 +37,111 @@ void CFSM_TheresaC::Start(SP(CComponent) spThis)
 	m_pTheresa = static_cast<CTheresa*>(m_pOwner);
 	
 	__super::Start(spThis);
+
+	RegisterAllState();
+
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pTheresa->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pStageControlTower = CStageControlTower::GetInstance();
+
+	SetStartState(Name_APPEAR);
+	m_curState->DoEnter();
 }
 
 void CFSM_TheresaC::RegisterAllState()
 {
+	Engine::CState* pState;
+
+	CreateState(CFSM_TheresaC, pState, IDLE)
+		AddState(pState, Name_IDLE);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+		AddState(pState, Name_APPEAR);
+
 }
 
 void CFSM_TheresaC::FixRootMotionOffset(_uint index)
 {
 }
 
+void CFSM_TheresaC::IDLE_Init(void)
+{
+}
+
+void CFSM_TheresaC::IDLE_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_IDLE);
+}
+
+void CFSM_TheresaC::IDLE_Update(float deltaTime)
+{
+}
+
+void CFSM_TheresaC::IDLE_End(void)
+{
+}
 
 void CFSM_TheresaC::VICTORY_Init(void)
 {
@@ -54,6 +149,7 @@ void CFSM_TheresaC::VICTORY_Init(void)
 
 void CFSM_TheresaC::VICTORY_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_VICTORY);
 }
 
 void CFSM_TheresaC::VICTORY_Update(float deltaTime)
@@ -445,22 +541,6 @@ void CFSM_TheresaC::RUN_Update(float deltaTime)
 }
 
 void CFSM_TheresaC::RUN_End(void)
-{
-}
-
-void CFSM_TheresaC::IDLE_Init(void)
-{
-}
-
-void CFSM_TheresaC::IDLE_Enter(void)
-{
-}
-
-void CFSM_TheresaC::IDLE_Update(float deltaTime)
-{
-}
-
-void CFSM_TheresaC::IDLE_End(void)
 {
 }
 

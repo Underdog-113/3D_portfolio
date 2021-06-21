@@ -18,6 +18,8 @@
 #include "Kiana_CatPaw_Ring_Atk01.h"
 #include "Kiana_Pistol_USP45.h"
 
+#include "DataLoad.h"
+
 CJongScene::CJongScene()
 {
 }
@@ -52,24 +54,11 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
-	{
-		// Kiana Body
-		{
-			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
-			m_spKiana = spKianaClone;
-			m_pController->AddSquadMember(m_spKiana);
-			m_pController->Start(CStageControlTower::WithoutUI);
+	KianaTest();
+	CollisionDummy();
 
-			spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
-		}
-
-
-		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-		cam->SetTarget(m_spKiana);
-		cam->SetTargetDist(2.f);
-		CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-	}
+	SetupStageUI();
 }
 
 void CJongScene::FixedUpdate(void)
@@ -112,4 +101,82 @@ void CJongScene::OnDisable(void)
 
 void CJongScene::InitPrototypes(void)
 {
+}
+
+void CJongScene::KianaTest()
+{
+	// Kiana Body
+
+	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+
+	m_spKiana = spKianaClone;
+	m_pController->AddSquadMember(m_spKiana);
+	//m_pController->Start(CStageControlTower::WithoutUI);
+	m_pController->Start(CStageControlTower::ALL);
+
+
+	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+	cam->SetTarget(m_spKiana);
+	cam->SetTargetDist(2.f);
+	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+
+
+	// cube terrain
+	{
+
+		SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+
+		spCube->AddComponent<Engine::CCollisionC>()->
+			AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
+
+		spCube->AddComponent<Engine::CDebugC>();
+		spCube->AddComponent<Engine::CShaderC>();
+		spCube->GetTransform()->SetSize(10, 1, 10);
+		spCube->GetTransform()->SetPosition(0, -0.5f, 0);
+
+	}
+
+
+}
+
+void CJongScene::TheresaTest()
+{
+	// Theresa
+
+	SP(Engine::CObject) spTheresaClone = ADD_CLONE(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
+
+	m_spTheresa = spTheresaClone;
+	m_pController->AddSquadMember(m_spTheresa);
+	m_pController->Start(CStageControlTower::WithoutUI);
+
+	spTheresaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+
+	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+	cam->SetTarget(m_spTheresa);
+	cam->SetTargetDist(4.f);
+	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+}
+
+void CJongScene::CollisionDummy()
+{
+	SP(Engine::CObject) spDummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
+	spDummy->GetTransform()->SetPosition(0, 0, 5);
+	m_spDummy = spDummy;
+}
+
+void CJongScene::SetupStageUI()
+{
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
+	Load->TextLoad(this);
+	//Load->ToolLoad(this);
+	delete(Load);
+
+	CBattleUiManager::GetInstance()->Start(this);
 }

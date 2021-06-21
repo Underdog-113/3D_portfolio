@@ -198,6 +198,7 @@
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
+    <ClInclude Include="..\Header\FSMDefine_Theresa.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\FSM_TheresaC.h" />
     <ClInclude Include="..\Header\HitsUiC.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="..\Header\MeshEffect_Client.h" />
     <ClInclude Include="..\Header\Monster.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
+    <ClInclude Include="..\Header\MO_Dummy.h" />
     <ClInclude Include="..\Header\MO_Lancer.h" />
     <ClInclude Include="..\Header\MO_Ninza.h" />
     <ClInclude Include="..\Header\MO_Robot.h" />
@@ -331,6 +333,7 @@
     <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
+    <ClCompile Include="..\Code\MO_Dummy.cpp" />
     <ClCompile Include="..\Code\MO_Lancer.cpp" />
     <ClCompile Include="..\Code\MO_Ninza.cpp" />
     <ClCompile Include="..\Code\MO_Robot.cpp" />

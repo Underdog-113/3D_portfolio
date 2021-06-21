@@ -21,7 +21,7 @@ class CKiana;
 class CStageControlTower;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
-	enum Appear_Option { None, QTEAppear };
+	enum Appear_Option { None, QTE };
 public:
 	CFSM_KianaC();
 	~CFSM_KianaC() = default;
@@ -36,7 +36,6 @@ private:
 	void FixRootMotionOffset(_uint index);
 
 	void CreateEffect(std::wstring name);
-
 
 
 private: /* Normal Actions */

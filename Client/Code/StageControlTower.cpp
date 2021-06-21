@@ -2,8 +2,11 @@
 #include "StageControlTower.h"
 
 #include "InputManager.h"
+#include "Layer.h"
 
 #include "Valkyrie.h"
+#include "Monster.h"
+
 #include "UILinker.h"
 #include "StatusDealer.h"
 
@@ -318,21 +321,42 @@ void CStageControlTower::SetInputLock_ByAni(bool lock)
 {
 	m_inputLock_ByAni = lock;
 	
-	if (!lock)
+	if (lock)
 	{
-		m_prevMoveFlag = m_moveFlag;
-		m_moveFlag = m_reserveMoveFlag;
-
-
-		m_moveOrderDir = m_reserveMoveOrderDir;
-		if (m_prevMoveFlag != m_moveFlag)
-			m_rotateLock = false;
-
-		m_prevMoveFlag = m_moveFlag;
+		// start attack
+		if (m_moveFlag)
+		{
+			//move
+			m_reserveMoveFlag = m_moveFlag;
+			m_prevMoveFlag = m_moveFlag;
+		}
+		else
+		{
+			//stop
+			m_reserveMoveFlag = m_prevMoveFlag;
+			m_prevMoveFlag = 0;
+		}
 	}
 	else
 	{
-		m_reserveMoveFlag = m_moveFlag;
+		if (m_reserveMoveFlag)
+		{
+			if (m_prevMoveFlag != m_reserveMoveFlag)
+			{
+				// move
+				m_rotateLock = false;
+
+				m_moveFlag = m_reserveMoveFlag;
+				m_moveOrderDir = m_reserveMoveOrderDir;
+			}
+		}
+		else
+		{
+			// stop
+			m_rotateLock = true;
+			m_moveFlag = 0;
+			m_prevMoveFlag = 0;
+		}
 	}
 }
 
@@ -360,6 +384,62 @@ void CStageControlTower::StageUIControl()
 
 }
 
-// 1. 새로운 애니 시작할 때 방향 고정
-// 2. 회전 끝나면 회전 고정
-// 3. 새 키 들어오는지 확인해야함
+void CStageControlTower::FindTarget()
+{
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
+	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
+
+	// 1. 우선 플레이어와의 거리를 재고 가까운순
+	SP(Engine::CObject) spTarget;
+	_float minDistance = 10000.f;
+
+	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
+
+	for (auto& iter : monsterList)
+	{
+		_float3 monsterPos = iter->GetTransform()->GetPosition();
+
+		_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
+		if (distance < minDistance)
+		{
+			minDistance = distance;
+			spTarget = iter;
+		}
+	}
+
+	m_spCurTarget = spTarget;
+	
+	// 2. 가까운 정도가 비슷할 경우, 플레이어 앞에 있는 녀석으로
+
+}
+
+void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
+{
+	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
+	CMonster* pM = static_cast<CMonster*>(pMonster);
+
+	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
+	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate());
+	
+	// 2. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+	
+	if (isDead)
+	{
+		// 근데 시발 할게 너무많네?
+	}
+	else
+	{
+		pM->ApplyHitInfo(info);
+	}	
+
+	// 3. 히트 이펙트
+
+	// 4. 콤보수?
+	m_pLinker->Hit_Up();
+	
+	// 5. 플레이어 sp 획득
+
+	// 6. 보스면 스턴 게이지 깎아주세요
+
+
+}

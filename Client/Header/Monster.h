@@ -35,6 +35,8 @@ public:
 
 	virtual void SetBasicName(void) override;
 
+public:
+	virtual void ApplyHitInfo(HitInfo info);
 
 protected:
 	static		_uint							m_s_uniqueID;
@@ -42,10 +44,11 @@ protected:
 	GETTOR		(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR		(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR		(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)	
-
+		
 protected:
-	//GETTOR		(SP(Engine::CCollisionC),		m_spCollision,		nullptr,	Collision)
-	//GETTOR		(SP(Engine::CDebugC),			m_spDebug,			nullptr,	Debug)
+	//GETTOR			(SP(Engine::CRigidBodyC),		m_spRigidBody,			nullptr, RigidBody)
+	//GETTOR			(SP(Engine::CCollisionC),		m_spCollision,			nullptr, Collision)
+	//GETTOR			(SP(Engine::CDebugC),			m_spDebug,				nullptr, Debug)
 
 protected:
 	GETTOR		(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)

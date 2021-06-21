@@ -113,6 +113,8 @@ void CUILinker::Skill()
 		CBattleUiManager::Button_Type::SkillButton,
 		(_int)cost,
 		cooltime);
+
+	OnTargetMarker();
 }
 
 void CUILinker::Ultra()
@@ -126,6 +128,30 @@ void CUILinker::Ultra()
 		CBattleUiManager::Button_Type::SpecialButton,
 		(_int)cost,
 		cooltime);
+
+	OnTargetMarker();
+}
+
+void CUILinker::Evade()
+{
+	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
+
+	m_pUIManager->SkillExecution(
+		CBattleUiManager::Button_Type::EvasionButton,
+		0,
+		0.1f);
+}
+
+void CUILinker::Attack()
+{
+	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
+
+	m_pUIManager->SkillExecution(
+		CBattleUiManager::Button_Type::BasicButton,
+		0,
+		0.1f);
+
+	OnTargetMarker();
 }
 
 void CUILinker::SwapToOne(void)
@@ -142,9 +168,15 @@ void CUILinker::Hit_Up(void)
 	m_pUIManager->HitCount(time);
 }
 
-void CUILinker::TargetMarker(void)
+void CUILinker::OnTargetMarker(void)
 {
-	// retry
+	auto pTarget = CStageControlTower::GetInstance()->GetCurrentTarget();
+	if(pTarget)
+		m_pUIManager->TargetUI(pTarget->GetTransform()->GetPosition(), 2.f);
+}
+
+void CUILinker::OffTargetMarker(void)
+{
 	//m_pUIManager->
 }
 
@@ -156,7 +188,7 @@ void CUILinker::MonsterInfoSet()
 	_float hp = pStat->GetCurHp();
 	std::wstring monsterProperty = L"UP";
 
-	m_pUIManager->MonsetrState(name, hp, monsterProperty);
+	m_pUIManager->MonsterState(name, hp, monsterProperty);
 }
 
 void CUILinker::MonsterHpSet()

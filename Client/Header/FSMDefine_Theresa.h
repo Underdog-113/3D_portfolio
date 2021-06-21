@@ -1,4 +1,11 @@
 #pragma once
+#define Name_IDLE					L"IDLE"
+#define Name_RunBS					L"RunBS"
+#define Name_EvadeBackward			L"EvadeBackward"
+#define Name_EvadeForward			L"EvadeForward"
+#define Name_APPEAR					L"APPEAR"
+#define Name_RUN					L"RUN"
+
 #define Name_VICTORY				L"VICTORY"
 #define Name_Die					L"Die"
 #define Name_STUN					L"STUN"
@@ -26,40 +33,48 @@
 #define Name_RUNSTOPRIGHT			L"RUNSTOPRIGHT"
 #define Name_RUNSTOPLEFT			L"RUNSTOPLEFT"
 #define Name_FASTRUN				L"FASTRUN"
-#define Name_RUN					L"RUN"
-#define Name_IDLE					L"IDLE"
-#define Name_APPEAR					L"APPEAR"
 
-#define Index_VICTORY				0
-#define Index_Die					1
-#define Index_STUN					2
-#define Index_QTE_FY				3
-#define Index_HIT_H					4
-#define Index_HIT_L					5
-#define Index_QTE_FY				6
-#define Index_JUMP_2				7
-#define Index_JUMP_1				8
-#define Index_JUMP_0				9
-#define Index_SWITCHOUT				10
-#define Index_SWITCHINATTACK_YD		11
-#define Index_SWITCHINATTACK_TP		12
-#define Index_SWITCHINATTACK_FY		13
-#define Index_SWITCHIN				14
-#define Index_Ult					15
+
+#define Index_IDLE					0
+#define Index_RunBS					1
+#define Index_EvadeBackward			2
+#define Index_EvadeForward			3
+#define Index_APPEAR				4
+#define Index_RUN					5
+#define Index_FASTRUN				6
+#define Index_RUNSTOPLEFT			7
+#define Index_RUNSTOPRIGHT			8
+#define Index_ATTACK1				9
+#define Index_ATTACK2				10
+#define Index_ATTACK3				11
+#define Index_ATTACK4				12
+#define Index_CHARGE0				13
+#define Index_CHARGE1				14
+#define Index_CHARGE2				15
 #define Index_CROSSSKILL			16
-#define Index_CHARGE2				17
-#define Index_CHARGE1				18
-#define Index_CHARGE0				19
-#define Index_ATTACK4				20
-#define Index_ATTACK3				21
-#define Index_ATTACK2				22
-#define Index_ATTACK1				23
-#define Index_RUNSTOPRIGHT			24
-#define Index_RUNSTOPLEFT			25
-#define Index_FASTRUN				26
-#define Index_RUN					27
-#define Index_IDLE					28
-#define Index_APPEAR				29
+#define Index_Ult					17
+#define Index_SWITCHIN				18
+#define Index_SWITCHINATTACK_FY		19
+#define Index_SWITCHINATTACK_TP		20
+#define Index_SWITCHINATTACK_YD		21
+#define Index_SWITCHOUT				22
+#define Index_JUMP_0				23
+#define Index_JUMP_1				24
+#define Index_JUMP_2				25
+#define Index_QTE_FY2				26
+#define Index_HIT_L					27
+#define Index_HIT_H					28
+#define Index_QTE_FY				29
+#define Index_STUN					30
+#define Index_Die					31
+#define Index_VICTORY				32
+
+
+
+
+
+
+
 
 
 
