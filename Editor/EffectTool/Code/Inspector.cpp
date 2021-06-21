@@ -553,12 +553,13 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 {
 	SP(Engine::CObject) spMeshEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::AttackRangeShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+	
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
@@ -567,7 +568,7 @@ void CInspector::Add_SoftEffect(CString ObjectName)
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SoftEffect", false);
 	spSoftEffect->GetComponent<Engine::CGraphicsC>();
 	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::SoftEffectShader);
+	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CInspector::Add_Texture(CString TextureKey)
