@@ -1,9 +1,6 @@
 #pragma once
 #include "StateMachine.h"
-#define Cool_End		0.75f
 
-
-class CStageControlTower;
 class CFSM_SpiderC final : public Engine::CStateMachineC
 {
 public:
@@ -19,14 +16,8 @@ private:
 	void RegisterAllState();
 	void FixRootMotionOffset(_uint index);
 
-private: /* Normal Actions */
-	_bool CheckAction_Idle(_float coolTime = Cool_End);
-	_bool CheckAction_Run();
-
 private:
-	_float m_accTime = 0.f;
 	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
-	CStageControlTower* m_pStageControlTower = nullptr; // test
 
 public:
 	// <Animation List>
