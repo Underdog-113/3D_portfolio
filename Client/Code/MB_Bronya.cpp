@@ -36,7 +36,7 @@ void CMB_Bronya::Start(void)
 
 	spEmptyObject = m_pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Weapon");
 
-	spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"Weapon");
+	spEmptyObject->AddComponent<Engine::CMeshC>()->SetMeshData(L"Weapon");
 	spEmptyObject->AddComponent<Engine::CTextureC>();
 	spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
@@ -103,7 +103,7 @@ void CMB_Bronya::EquipWeapon()
 	if (m_pParentBoneMat == nullptr)
 	{
 		Engine::CDynamicMeshData* pDM =
-			static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"Bronya")->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+			static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"Bronya")->GetComponent<Engine::CMeshC>()->GetMeshData());
 
 		if (nullptr == pDM)
 		{

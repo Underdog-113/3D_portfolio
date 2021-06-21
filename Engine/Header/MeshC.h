@@ -2,70 +2,65 @@
 #define MESHC_H
 
 #include "RenderComponent.h"
-
+#include "StaticMeshData.h"
+#include "DynamicMeshData.h"
 BEGIN(Engine)
 
-class CMeshData;
+
 class CGraphicsC;
-class CStaticMeshData;
-class CDynamicMeshData;
 class CRootMotion;
 class ENGINE_DLL CMeshC final : public CRenderComponent
 {
 public:
-	explicit							CMeshC			(void);
-									   ~CMeshC			(void);
+	explicit							CMeshC						(void);
+									   ~CMeshC						(void);
 
 public:
-			SP(CComponent)				MakeClone		(CObject* pObject) override;
-			void						Awake			(void) override;
-			void						Start			(SP(CComponent) spThis) override;
+			SP(CComponent)				MakeClone					(CObject* pObject) override;
+			void						Awake						(void) override;
+			void						Start						(SP(CComponent) spThis) override;
 
-			void						FixedUpdate		(SP(CComponent) spThis) override;
-			void						Update			(SP(CComponent) spThis) override;
-			void						LateUpdate		(SP(CComponent) spThis) override;
+			void						FixedUpdate					(SP(CComponent) spThis) override;
+			void						Update						(SP(CComponent) spThis) override;
+			void						LateUpdate					(SP(CComponent) spThis) override;
 
 
-			void						PreRender		(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
-			void						Render			(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
-			void						PostRender		(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
+			void						PreRender					(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
+			void						Render						(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
+			void						PostRender					(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
 
-			void						OnDestroy		(void) override;
+			void						OnDestroy					(void) override;
 
-			void						OnEnable		(void) override;
-			void						OnDisable		(void) override;
+			void						OnEnable					(void) override;
+			void						OnDisable					(void) override;
 public:
-			void						AddMeshData		(CMeshData* pMeshData);
-			void						AddMeshData		(std::wstring meshKey);
-			void						GenMinMaxVtx	(void);
-			
-			void						OnRootMotion	(void);
-			void						OffRootMotion	(void);
-			void						ApplyRootMotion (CDynamicMeshData* pDM);
+			void						SetMeshData					(CMeshData* pMeshData);
+			void						SetMeshData					(std::wstring meshKey);
+			void						GenMinMaxVtx				(void);
 
-			CStaticMeshData*			GetFirstMeshData_Static(void);
-			CDynamicMeshData*			GetFirstMeshData_Dynamic(void);
+			void						OnRootMotion				(void);
+			void						OffRootMotion				(void);
+			void						ApplyRootMotion				(CDynamicMeshData* pDM);
+
+			CStaticMeshData*			GetFirstMeshData_Static		(void);
+			CDynamicMeshData*			GetFirstMeshData_Dynamic	(void);
 
 private:
-			void						RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
-			void						RenderStatic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex, LPD3DXEFFECT pEffect);
-
-			void						RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex);
-			void						RenderDynamic	(SP(CGraphicsC) spGC, CMeshData* pMeshData, _int meshIndex, LPD3DXEFFECT pEffect);
+			void						RenderStatic				(SP(CGraphicsC) spGC, CMeshData* pMeshData, LPD3DXEFFECT pEffect);
+			void						RenderDynamic				(SP(CGraphicsC) spGC, CMeshData* pMeshData, LPD3DXEFFECT pEffect);
 
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Mesh;
 
 private:
-	typedef std::vector<CMeshData*> _MESHES;
-	GETTOR_SETTOR	(_MESHES,			m_vMeshDatas,	{},				MeshDatas)
+	GETTOR			(CMeshData*,		m_pMeshData,				nullptr,		MeshData)
 
-	GETTOR			(_float3,			m_meshSize,		ZERO_VECTOR,	MeshSize)
-	GETTOR			(_float3,			m_minVertex,	MAX_VECTOR,		MinVertex)
-	GETTOR			(_float3,			m_maxVertex,	-MAX_VECTOR,	MaxVertex)
-	GETTOR_SETTOR	(_bool,				m_initTex,		false,			InitTex)	
-	GETTOR			(CRootMotion*,		m_pRootMotion,	nullptr,		RootMotion);
-		
+	GETTOR			(_float3,			m_meshSize,					ZERO_VECTOR,	MeshSize)
+	GETTOR			(_float3,			m_minVertex,				MAX_VECTOR,		MinVertex)
+	GETTOR			(_float3,			m_maxVertex,				-MAX_VECTOR,	MaxVertex)
+	GETTOR_SETTOR	(_bool,				m_initTex,					false,			InitTex)
+	GETTOR			(CRootMotion*,		m_pRootMotion,				nullptr,		RootMotion);
+
 	GETTOR			(_float3,			m_rootMotionPos, ZERO_VECTOR,	RootMotionPos)
 	GETTOR			(_float,			m_halfYOffset,	0.f,			HalfYOffset)
 	GETTOR_SETTOR(_bool, m_isEffectMesh, false, isEffectMesh)

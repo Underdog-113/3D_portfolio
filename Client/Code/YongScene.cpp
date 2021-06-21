@@ -63,7 +63,7 @@ void CYongScene::Start(void)
 
 			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 			
-			spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+			spCube->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
 			spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 			spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			

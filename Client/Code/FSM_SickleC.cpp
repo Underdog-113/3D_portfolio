@@ -28,7 +28,7 @@ void CFSM_SickleC::Start(SP(CComponent) spThis)
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
 	SetStartState(Name_Walk_Forward);
 	m_curState->DoEnter();

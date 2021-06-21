@@ -45,7 +45,7 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
 	SetStartState(L"Appear");
@@ -151,7 +151,7 @@ void CFSM_KianaC::CreateEffect(std::wstring name)
 		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
