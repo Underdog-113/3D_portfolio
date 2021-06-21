@@ -115,7 +115,7 @@ void CWooScene::Start(void)
 			// 2
 			m_pivot = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
-			m_pivot->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+			m_pivot->AddComponent<Engine::CMeshC>()->SetMeshData(L"Sphere");
 			m_pivot->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 			m_pivot->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
@@ -133,7 +133,7 @@ void CWooScene::Start(void)
 			//3		
 			m_pivot_kiana = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
-			m_pivot_kiana->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+			m_pivot_kiana->AddComponent<Engine::CMeshC>()->SetMeshData(L"Sphere");
 			m_pivot_kiana->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 			m_pivot_kiana->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
@@ -168,16 +168,16 @@ void CWooScene::Start(void)
 			m_spSpider = spSpiderClone;
 
 			/* Ganesha */
-			//SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-			//spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
-			//spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
-			//spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			//spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
-			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
-			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
-			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
-			//m_spGanesha = spGaneshaClone;
+			SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+			spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
+			spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
+			spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+			m_spGanesha = spGaneshaClone;
 		}
 	}
 }
