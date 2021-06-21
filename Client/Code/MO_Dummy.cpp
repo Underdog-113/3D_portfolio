@@ -123,6 +123,7 @@ void CMO_Dummy::SetBasicName(void)
 
 void CMO_Dummy::ApplyHitInfo(HitInfo info)
 {
+	// attack strength
 	switch (info.GetStrengthType())
 	{
 	case HitInfo::Str_Damage:
@@ -137,7 +138,7 @@ void CMO_Dummy::ApplyHitInfo(HitInfo info)
 		break;
 	}
 
-	// stateffect
+	// crowd control
 }
 
 void CMO_Dummy::ChaseTarget(_float3 targetPos)
@@ -146,6 +147,13 @@ void CMO_Dummy::ChaseTarget(_float3 targetPos)
 	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
 
 	m_spTransform->SetForward(dir);
+}
+
+void CMO_Dummy::SetStatus(BaseStat stat)
+{
+	if (!m_pStat)
+		m_pStat = new M_Stat;
+	m_pStat->SetupStatus(&stat);
 }
 
 

@@ -436,6 +436,8 @@ void CGraphicsManager::RenderUI(void)
 				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
 				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
 
+				if(!pShader)
+					continue;
 				for (_size i = 0; i < vShader.size(); ++i)
 				{
 					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();

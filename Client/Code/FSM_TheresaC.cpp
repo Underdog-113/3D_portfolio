@@ -40,10 +40,10 @@ void CFSM_TheresaC::Start(SP(CComponent) spThis)
 
 	RegisterAllState();
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pTheresa->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pTheresa->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
-	SetStartState(Name_APPEAR);
+	SetStartState(Name_IDLE);
 	m_curState->DoEnter();
 }
 
@@ -53,7 +53,7 @@ void CFSM_TheresaC::RegisterAllState()
 
 	CreateState(CFSM_TheresaC, pState, IDLE)
 		AddState(pState, Name_IDLE);
-
+/*
 	CreateState(CFSM_TheresaC, pState, APPEAR)
 		AddState(pState, Name_APPEAR);
 
@@ -119,7 +119,7 @@ void CFSM_TheresaC::RegisterAllState()
 
 	CreateState(CFSM_TheresaC, pState, APPEAR)
 		AddState(pState, Name_APPEAR);
-
+*/
 }
 
 void CFSM_TheresaC::FixRootMotionOffset(_uint index)

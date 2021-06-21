@@ -42,7 +42,8 @@ public:
 					void					OnDisable			(void) override;
 
 					void					SetBasicName		(void) override;
-					
+
+					void					ApplyHitInfo		(HitInfo info) override;
 public:
 					void					Update_WeaponTransform(void);
 					void					UpdatePivotMatrices(void);

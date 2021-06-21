@@ -300,10 +300,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 
 			if (m_pRootMotion->GetIsRootMotion())
 			{
-				meshContainer->pRenderingMatrix[i]._41 -= rootMotionMoveAmount.x;
-				//meshContainer->pRenderingMatrix[i]._42 -= rootMotionMoveAmount.y;
-				//meshContainer->pRenderingMatrix[i]._42 += m_halfYOffset;
-				meshContainer->pRenderingMatrix[i]._43 -= rootMotionMoveAmount.z;
+				vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
+				vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
 			}
 		}
 

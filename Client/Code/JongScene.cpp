@@ -18,6 +18,7 @@
 #include "Kiana_CatPaw_Ring_Atk01.h"
 #include "Kiana_Pistol_USP45.h"
 
+#include "MO_Dummy.h"
 #include "DataLoad.h"
 
 CJongScene::CJongScene()
@@ -47,8 +48,8 @@ void CJongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	m_pController = CStageControlTower::GetInstance();
-	m_pController->Awake();
+	m_pControlTower = CStageControlTower::GetInstance();
+	m_pControlTower->Awake();
 }
 
 void CJongScene::Start(void)
@@ -56,6 +57,8 @@ void CJongScene::Start(void)
 	__super::Start();
 
 	KianaTest();
+	//TheresaTest();
+
 	CollisionDummy();
 
 	SetupStageUI();
@@ -69,9 +72,28 @@ void CJongScene::FixedUpdate(void)
 void CJongScene::Update(void)
 {
 	__super::Update();
-	m_pController->Update();
-	//m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
-	//m_pivot->GetTransform()->SetPositionY(0.f);
+	m_pControlTower->Update();
+
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_C))
+	{
+		HitInfo info;
+		info.SetDamageRate(1.f);
+		info.SetStrengthType(HitInfo::Str_Low);
+		info.SetCrowdControlType(HitInfo::CC_None);
+
+		m_pControlTower->HitValkyrie(m_spDummy.get(), m_spKiana.get(), info);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_V))
+	{
+		HitInfo info;
+		info.SetDamageRate(1.f);
+		info.SetStrengthType(HitInfo::Str_High);
+		info.SetCrowdControlType(HitInfo::CC_None);
+
+		m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
+	}
 }
 
 void CJongScene::LateUpdate(void)
@@ -83,8 +105,8 @@ void CJongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
-	m_pController->DestroyInstance();
-	m_pController = nullptr;
+	m_pControlTower->DestroyInstance();
+	m_pControlTower = nullptr;
 }
 
 void CJongScene::OnEnable(void)
@@ -110,9 +132,9 @@ void CJongScene::KianaTest()
 	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
 	m_spKiana = spKianaClone;
-	m_pController->AddSquadMember(m_spKiana);
+	m_pControlTower->AddSquadMember(m_spKiana);
 	//m_pController->Start(CStageControlTower::WithoutUI);
-	m_pController->Start(CStageControlTower::ALL);
+	m_pControlTower->Start(CStageControlTower::ALL);
 
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
@@ -148,8 +170,8 @@ void CJongScene::TheresaTest()
 	SP(Engine::CObject) spTheresaClone = ADD_CLONE(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
 
 	m_spTheresa = spTheresaClone;
-	m_pController->AddSquadMember(m_spTheresa);
-	m_pController->Start(CStageControlTower::WithoutUI);
+	m_pControlTower->AddSquadMember(m_spTheresa);
+	m_pControlTower->Start(CStageControlTower::WithoutUI);
 
 	spTheresaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 
@@ -161,12 +183,24 @@ void CJongScene::TheresaTest()
 
 void CJongScene::CollisionDummy()
 {
+	BaseStat stat;
+	stat.SetBaseHp(321.f);
+	stat.SetBaseAtk(120.f);
+	stat.SetBaseDef(44.f);
+
+	stat.SetGrowHp(10.f);
+	stat.SetGrowAtk(1.2f);
+	stat.SetGrowDef(1.f);
+
+
 	m_spDummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
 	m_spDummy->GetTransform()->SetPosition(2, 0, 5);
 
 
 	m_spDummy2 = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
 	m_spDummy2->GetTransform()->SetPosition(-2, 0, 5);
+
+	static_cast<CMO_Dummy*>(m_spDummy2.get())->SetStatus(stat);
 }
 
 void CJongScene::SetupStageUI()

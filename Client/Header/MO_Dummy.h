@@ -33,9 +33,11 @@ public:
 	virtual			void					SetBasicName(void) override;
 
 
-	virtual			void					ApplyHitInfo(HitInfo info);
+	virtual			void					ApplyHitInfo(HitInfo info) override;
 public:
 	void ChaseTarget(_float3 targetPos);
+
+	void SetStatus(BaseStat stat);
 
 public:
 	static		SP(CMO_Dummy)			Create(_bool isStatic, Engine::CScene* pScene);

@@ -432,6 +432,7 @@ void CStageControlTower::FindTarget()
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
 	m_pLinker->OnTargetMarker();	// ui interaction
+	m_pLinker->MonsterInfoSet();
 }
 
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
@@ -441,8 +442,10 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate());
-	
-	// 2. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+
+	// 2. 슬라이더 조정
+
+	// 3. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
 	
 	if (isDead)
 	{
@@ -453,8 +456,6 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 		pM->ApplyHitInfo(info);
 	}	
 
-	// 3. 히트 이펙트
-
 	// 4. 콤보수?
 	m_pLinker->Hit_Up();
 	
@@ -462,6 +463,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 	// 6. 보스면 스턴 게이지 깎아주세요
 
+	// 7. 이펙트
+
+	// 8. 사운드
 
 }
 
@@ -473,17 +477,20 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	bool isDead = m_pDealer->Damage_MtoV( pM->GetStat(), pV->GetStat(), info.GetDamageRate());
 
-	// 2. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+	// 2. 슬라이더 조정
+	m_pLinker->PlayerHpSet();
+
+	// 3. 플레이어 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
 
 	if (isDead)
 	{
 	}
 	else
 	{
-		pM->ApplyHitInfo(info);
+		pV->ApplyHitInfo(info);
 	}
 
-	// 3. 히트 이펙트
+	// 4. 히트 이펙트
 
-
+	// 5. 사운드
 }

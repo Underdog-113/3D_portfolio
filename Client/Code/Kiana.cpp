@@ -4,6 +4,7 @@
 #include "FSM_KianaC.h"
 #include "ObjectFactory.h"
 #include "DynamicMeshData.h"
+#include "StateMachine.h"
 
 #include "StageControlTower.h"
 #include "UILinker.h"
@@ -15,6 +16,7 @@
 #include "Kiana_CatPaw_Atk05.h"
 
 #include "AttackBall.h"
+#include "FSMDefine_Kiana.h"
 
 CKiana::CKiana()
 {
@@ -259,6 +261,26 @@ void CKiana::UseUltraCost(void)
 void CKiana::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+}
+
+void CKiana::ApplyHitInfo(HitInfo info)
+{
+	// attack strength
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Damage:
+		break;
+	case HitInfo::Str_Low:
+		m_spStateMachine->ChangeState(Name_Hit_L);
+		break;
+	case HitInfo::Str_High:
+		m_spStateMachine->ChangeState(Name_Hit_H);
+		break;
+	case HitInfo::Str_Airborne:
+		break;
+	}
+
+	// crowd control
 }
 
 void CKiana::UltraAtk(AttackOption index)

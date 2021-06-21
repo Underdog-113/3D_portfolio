@@ -92,6 +92,10 @@ void CMB_Bronya::SetBasicName(void)
 {
 }
 
+void CMB_Bronya::ApplyHitInfo(HitInfo info)
+{
+}
+
 void CMB_Bronya::EquipWeapon()
 {
 	SP(Engine::CTransformC) pParentTransform;

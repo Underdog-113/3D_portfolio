@@ -72,7 +72,7 @@ void CTheresa::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
 	{
 		++idx;
-		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(idx);
+		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(17);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_I))
@@ -121,4 +121,8 @@ void CTheresa::OnDisable(void)
 void CTheresa::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+}
+
+void CTheresa::ApplyHitInfo(HitInfo info)
+{
 }

@@ -51,7 +51,7 @@ private:
 	int num = 0;
 
 private:
-	CStageControlTower* m_pController = nullptr;
+	CStageControlTower* m_pControlTower = nullptr;
 };
 
 #endif

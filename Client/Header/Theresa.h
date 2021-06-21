@@ -35,7 +35,8 @@ public:
 					void					OnDisable			(void) override;
 
 					void					SetBasicName		(void) override;
-					
+
+					void					ApplyHitInfo		(HitInfo info) override;
 public:
 
 

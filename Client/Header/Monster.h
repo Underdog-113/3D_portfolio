@@ -36,7 +36,7 @@ public:
 	virtual void SetBasicName(void) override;
 
 public:
-	virtual void ApplyHitInfo(HitInfo info);
+	virtual void ApplyHitInfo(HitInfo info) PURE;
 
 protected:
 	static		_uint							m_s_uniqueID;
