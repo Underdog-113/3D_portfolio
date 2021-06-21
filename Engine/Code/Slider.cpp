@@ -67,7 +67,7 @@ void CSlider::Update(void)
 		m_value += 1.0f;
 	}
 
-	std::cout << m_value << std::endl;
+	//std::cout << m_value << std::endl;
 	//*/
 }
 
