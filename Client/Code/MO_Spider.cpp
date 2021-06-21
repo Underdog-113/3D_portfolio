@@ -62,30 +62,18 @@ void CMO_Spider::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMO_Spider::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
 
 void CMO_Spider::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CMO_Spider::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
 
 void CMO_Spider::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CMO_Spider::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
-}
 
 void CMO_Spider::PostRender(LPD3DXEFFECT pEffect)
 {

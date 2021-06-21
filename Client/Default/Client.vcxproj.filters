@@ -262,11 +262,50 @@
     <Filter Include="02.Objects\01.ForUnit\02.AttackBall">
       <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\09.MonsterSlider">
+      <UniqueIdentifier>{4df59e10-5cba-48dd-b315-8421ae81eb86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI">
+      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI\00.Button">
+      <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI\00.Button\00.ButtonFunction">
+      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\02.UI\01.ScrollView">
+      <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect">
+      <UniqueIdentifier>{aac3962e-7511-4415-aac9-726e31ebc547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\02.Particle">
+      <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect">
+      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail">
+      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\02.TrapObject">
+      <UniqueIdentifier>{21b389d3-bc77-49f1-8891-166f0eaa6f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\03.PhaseChanger">
+      <UniqueIdentifier>{1d797f47-aba1-4cf8-a19a-a04fa50dd691}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\04.Item">
       <UniqueIdentifier>{777bc2af-ce9b-40d5-9e08-d9195d7c1e71}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Dummy">
       <UniqueIdentifier>{85adc61e-9908-4314-bfcd-a1d48a3e9a3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\01.Glitter">
+      <UniqueIdentifier>{6891e3f5-01dc-4912-8c4e-2965684858ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\10.SkillActivation">
+      <UniqueIdentifier>{32868f76-d66f-4f14-8407-2aee397cb560}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -555,6 +594,12 @@
     <ClInclude Include="..\Header\PhaseChanger.h">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MonsterSliderC.h">
+      <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\GlitterC.h">
+      <Filter>03.Component\01.Glitter</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Item.h">
       <Filter>02.Objects\04.Item</Filter>
     </ClInclude>
@@ -566,6 +611,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\MO_Dummy.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillActivationC.h">
+      <Filter>03.Component\00.UI\10.SkillActivation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -797,6 +845,9 @@
     <ClCompile Include="..\Code\AttackBall.cpp">
       <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\MonsterSliderC.cpp">
+      <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\StageSelectionScene.cpp">
       <Filter>01.Scene\04.StageSelectionScene</Filter>
     </ClCompile>
@@ -809,11 +860,17 @@
     <ClCompile Include="..\Code\PhaseChanger.cpp">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\GlitterC.cpp">
+      <Filter>03.Component\01.Glitter</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Item.cpp">
       <Filter>02.Objects\04.Item</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Dummy.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillActivationC.cpp">
+      <Filter>03.Component\00.UI\10.SkillActivation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

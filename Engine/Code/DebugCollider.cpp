@@ -146,19 +146,19 @@ void CDebugCollider::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CDebugCollider::PreRender(void)
+void CDebugCollider::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRenderWire(m_spGraphics);
+	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CDebugCollider::Render(void)
+void CDebugCollider::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->RenderWire(m_spGraphics);
+	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CDebugCollider::PostRender(void)
+void CDebugCollider::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRenderWire(m_spGraphics);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CDebugCollider::OnDestroy(void)

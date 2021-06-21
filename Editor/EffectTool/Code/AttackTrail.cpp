@@ -85,21 +85,10 @@ void CAttackTrail::LateUpdate()
 	__super::LateUpdate();
 }
 
-void CAttackTrail::PreRender()
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 
-}
-
-void CAttackTrail::Render()
-{
-
-	m_spMesh->Render(m_spGraphics);
 }
 
 void CAttackTrail::Render(LPD3DXEFFECT pEffect)
@@ -107,11 +96,6 @@ void CAttackTrail::Render(LPD3DXEFFECT pEffect)
 	m_spMesh->Render(m_spGraphics, pEffect);
 
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
-}
-
-void CAttackTrail::PostRender()
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CAttackTrail::PostRender(LPD3DXEFFECT pEffect)

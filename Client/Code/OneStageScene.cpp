@@ -69,8 +69,69 @@ void COneStageScene::Update(void)
 {
 	__super::Update();
 
-	m_pController->Update();
+	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
+		return;
 
+	m_pController->Update();
+	CBattleUiManager::GetInstance()->Update();
+
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	{
+		CBattleUiManager::GetInstance()->PlayerSpDown(10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+	{
+	    CBattleUiManager::GetInstance()->HitCount(8);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
+	{
+		CBattleUiManager::GetInstance()->MonsetrState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
+	{
+	    CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
+	{
+	    CBattleUiManager::GetInstance()->PlayerHp(100.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
+	{
+	    CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
+	{
+	    CBattleUiManager::GetInstance()->SkillExecution(3, 0, 5);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
+	{
+	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
+	{
+	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
+	{
+	    CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+	    CBattleUiManager::GetInstance()->BattleEnd();
+	}
+
+	
 }
 
 void COneStageScene::LateUpdate(void)

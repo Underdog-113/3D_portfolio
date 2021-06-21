@@ -105,7 +105,7 @@ void CSoftEffect::LateUpdate(void)
 	_mat matWorld, matView, matBill;
 
 	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
-	
+
 	D3DXMatrixIdentity(&matBill);
 
 	memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
@@ -119,19 +119,11 @@ void CSoftEffect::LateUpdate(void)
 	_float3 vPos = m_spGraphics->GetTransform()->GetPosition();
 	_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
 
-	
+
 	//Compute_ViewZ(&vPos);
 
 	/////////////////////////
 
-}
-
-void CSoftEffect::PreRender(void)
-{
-	if (!m_spTexture->GetTexData().empty())
-	{
-		m_spRectTex->PreRender(m_spGraphics);
-	}
 }
 
 void CSoftEffect::PreRender(LPD3DXEFFECT pEffect)
@@ -146,27 +138,11 @@ void CSoftEffect::PreRender(LPD3DXEFFECT pEffect)
 	}
 }
 
-void CSoftEffect::Render(void)
-{
-	if (!m_spTexture->GetTexData().empty())
-	{
-		m_spRectTex->Render(m_spGraphics);
-	}
-}
-
 void CSoftEffect::Render(LPD3DXEFFECT pEffect)
 {
 	if (!m_spTexture->GetTexData().empty())
 	{
 		m_spRectTex->Render(m_spGraphics, pEffect);
-	}
-}
-
-void CSoftEffect::PostRender(void)
-{
-	if (!m_spTexture->GetTexData().empty())
-	{
-		m_spRectTex->PostRender(m_spGraphics);
 	}
 }
 

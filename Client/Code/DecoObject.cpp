@@ -74,30 +74,18 @@ void CDecoObject::LateUpdate(void)
 	
 }
 
-void CDecoObject::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
 
 void CDecoObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CDecoObject::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
 
 void CDecoObject::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CDecoObject::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
-}
 
 void CDecoObject::PostRender(LPD3DXEFFECT pEffect)
 {

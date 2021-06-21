@@ -62,16 +62,16 @@ void CCanvas::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CCanvas::PreRender(void)
+void CCanvas::PreRender(LPD3DXEFFECT pEffect)
 {
 }
 
-void CCanvas::Render(void)
+void CCanvas::Render(LPD3DXEFFECT pEffect)
 {
 
 }
 
-void CCanvas::PostRender(void)
+void CCanvas::PostRender(LPD3DXEFFECT pEffect)
 {
 }
 

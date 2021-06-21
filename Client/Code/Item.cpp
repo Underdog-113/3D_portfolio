@@ -77,29 +77,14 @@ void CItem::LateUpdate(void)
 	
 }
 
-void CItem::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CItem::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CItem::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
-
 void CItem::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CItem::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CItem::PostRender(LPD3DXEFFECT pEffect)

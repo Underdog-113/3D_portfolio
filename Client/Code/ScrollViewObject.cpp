@@ -69,19 +69,19 @@ void CScrollViewObject::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CScrollViewObject::PreRender(void)
+void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PreRender(m_spGraphics);
+	m_spRectTex->PreRender(m_spGraphics, pEffect);
 }
 
-void CScrollViewObject::Render(void)
+void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->Render(m_spGraphics);
+	m_spRectTex->Render(m_spGraphics, pEffect);
 }
 
-void CScrollViewObject::PostRender(void)
+void CScrollViewObject::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PostRender(m_spGraphics);
+	m_spRectTex->PostRender(m_spGraphics, pEffect);
 }
 
 void CScrollViewObject::OnDestroy(void)

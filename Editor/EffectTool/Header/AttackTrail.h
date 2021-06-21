@@ -19,13 +19,8 @@ public:
 	void FixedUpdate() override;
 	void Update() override;
 	void LateUpdate() override;
-	void PreRender() override;
 	void PreRender(LPD3DXEFFECT pEffect) override;
-
-	void Render() override;
 	void Render(LPD3DXEFFECT pEffect) override;
-
-	void PostRender() override;
 	void PostRender(LPD3DXEFFECT pEffect) override;
 
 	void OnDestroy() override;
@@ -38,4 +33,3 @@ private:
 	static		_uint m_s_uniqueID;
 
 };
-

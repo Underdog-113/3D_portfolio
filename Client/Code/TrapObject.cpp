@@ -76,23 +76,11 @@ void CTrapObject::LateUpdate(void)
 	
 }
 
-void CTrapObject::PreRender(void)
-{
-}
-
 void CTrapObject::PreRender(LPD3DXEFFECT pEffect)
 {
 }
 
-void CTrapObject::Render(void)
-{
-}
-
 void CTrapObject::Render(LPD3DXEFFECT pEffect)
-{
-}
-
-void CTrapObject::PostRender(void)
 {
 }
 

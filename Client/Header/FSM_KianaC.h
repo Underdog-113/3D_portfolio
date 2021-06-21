@@ -37,6 +37,11 @@ private:
 
 	void CreateEffect(std::wstring name);
 
+	void CreateEffect_Attack1();
+	void CreateEffect_Attack2();
+	void CreateEffect_Attack3();
+	void CreateEffect_Attack4();
+	void CreateEffect_Attack5();
 
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
@@ -63,7 +68,7 @@ private:
 
 	bool m_checkUltraAtk = false;
 
-
+	bool m_checkEffect = false;
 
 private:
 	CKiana* m_pKiana = nullptr;

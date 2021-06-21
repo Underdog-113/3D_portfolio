@@ -116,29 +116,14 @@ void CKiana::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CKiana::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
-
 void CKiana::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CKiana::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
-
 void CKiana::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-}
-
-void CKiana::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
 }
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)
@@ -457,7 +442,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshTrailShader); 
 
 	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
 	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());

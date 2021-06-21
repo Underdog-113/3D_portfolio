@@ -58,50 +58,14 @@ void CRectTexC::LateUpdate(SP(CComponent) spThis)
 {
 }
 
-void CRectTexC::PreRender(SP(CGraphicsC) spGC)
-{
-	__super::PreRender();
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	SP(CTextureC) spTexture = spGC->GetTexture();
-
-	_mat identityMatrix;
-	D3DXMatrixIdentity(&identityMatrix);
-	pDevice->SetTransform(D3DTS_WORLD, &spGC->GetOwner()->GetTransform()->GetWorldMatrix());
-
-	if (m_isOrtho)
-	{
-		pDevice->SetTransform(D3DTS_VIEW, &identityMatrix);
-		pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetOrthoMatrix());
-	}
-	else
-	{
-		pDevice->SetTransform(D3DTS_VIEW, &GET_MAIN_CAM->GetViewMatrix());
-		pDevice->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
-	}
-
-	pDevice->SetTextureStageState(0, D3DTSS_CONSTANT, spGC->GetTexture()->GetColor());
-	pDevice->SetTexture(0, spTexture->GetTexData()[spTexture->GetMeshIndex()][spTexture->GetTexIndex()]->pTexture);
-}
-
 void CRectTexC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 	__super::PreRender();
 }
 
-void CRectTexC::Render(SP(CGraphicsC) spGC)
-{
-	__super::Render();
-}
-
 void CRectTexC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 	__super::Render();
-}
-
-void CRectTexC::PostRender(SP(CGraphicsC) spGC)
-{
-	__super::PostRender();
-	GET_DEVICE->SetTransform(D3DTS_PROJECTION, &GET_MAIN_CAM->GetProjMatrix());
 }
 
 void CRectTexC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)

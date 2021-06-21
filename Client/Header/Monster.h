@@ -23,9 +23,9 @@ public:
 
 	virtual void LateUpdate(void) override;
 
-	virtual void PreRender(void) PURE;
-	virtual void Render(void) PURE;
-	virtual void PostRender(void) PURE;
+	virtual void PreRender(LPD3DXEFFECT pEffect) PURE;
+	virtual void Render(LPD3DXEFFECT pEffect) PURE;
+	virtual void PostRender(LPD3DXEFFECT pEffect) PURE;
 
 	virtual void OnDestroy(void) override;
 

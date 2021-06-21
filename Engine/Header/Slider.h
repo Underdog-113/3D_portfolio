@@ -25,9 +25,9 @@ public:
 	void Update(void) override;
 	void LateUpdate(void) override;
 
-	void PreRender(void) override;
-	void Render(void) override;
-	void PostRender(void) override;
+	void PreRender(LPD3DXEFFECT pEffect) override;
+	void Render(LPD3DXEFFECT pEffect) override;
+	void PostRender(LPD3DXEFFECT pEffect) override;
 
 	void OnDestroy(void) override;
 
@@ -42,7 +42,7 @@ private:
 
 	GETTOR_SETTOR(_float, m_value, 1, Value)
 	GETTOR_SETTOR(_float, m_MaxValue, 1, MaxValue)
-		GETTOR_SETTOR(_float, m_MinValue, 1, MinValue)
+	GETTOR_SETTOR(_float, m_MinValue, 1, MinValue)
 	GETTOR_SETTOR(SP(CObject), m_spBackGround, nullptr, BackGround)
 	GETTOR_SETTOR(SP(CObject), m_spFill, nullptr, Fill)
 	GETTOR_SETTOR(ESliderDirection, m_direction, ESliderDirection::LeftToRight, Direction)

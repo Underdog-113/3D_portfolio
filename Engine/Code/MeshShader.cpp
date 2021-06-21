@@ -32,13 +32,7 @@ void CMeshShader::Awake(void)
 
 void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	_mat worldMat, viewMat, projMat;
-
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	SetupWorldViewProj(spGC);
 
 	_float4 addColor(0, 0, 0, 0);
 
@@ -48,7 +42,4 @@ void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	}
 
 	m_pEffect->SetVector("g_addColor", &addColor);
-	m_pEffect->SetMatrix("g_matWorld", &worldMat);
-	m_pEffect->SetMatrix("g_matView", &viewMat);
-	m_pEffect->SetMatrix("g_matProj", &projMat);
 }

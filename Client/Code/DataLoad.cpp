@@ -89,6 +89,11 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
 		image->GetTexture()->AddTexture(textureKey, 0);
 
+
+		_float4 textureColor;
+		dataStore->GetValue(false, dataID, objectKey, key + L"textureColor", textureColor);
+		image->GetTexture()->SetColor(textureColor);
+
 		std::wstring message;
 		_float2 fontPosition;
 		_int fontSize;
@@ -101,9 +106,13 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-			//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+			dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 			fontPosition.y *= -1;
-			image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+
+			if(name == L"R")
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+			else
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 		}
 
 		_int animCount;
@@ -123,6 +132,8 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 				image->GetTexture()->AddTexture(textureKey, 0);
 			}
 		}
+
+		image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 	}
 }
@@ -152,10 +163,6 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 
 		_int dir;
 		dataStore->GetValue(false, dataID, objectKey, key + L"direction", dir);
-		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
-
-		_int imageType;
-		dataStore->GetValue(false, dataID, objectKey, key + L"imageType", imageType);
 		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
 
 		_float sort;
@@ -188,17 +195,21 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"imageTextureKey" + std::to_wstring(j), textureKey);
 			imageObj[j]->GetTexture()->AddTexture(textureKey, 0);
 		}
-
+		imageObj[0]->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 		imageObj[1]->SetParent(slider.get());
+
+		_int imageType;
+		dataStore->GetValue(false, dataID, objectKey, key + L"imageType", imageType);
+
 		if (imageType == 0)
 		{
-			imageObj[1]->AddComponent<Engine::CShaderC>()->
-				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+			imageObj[1]->GetComponent<Engine::CShaderC>()->
+				AddShader((_int)Engine::EShaderID::SliderShader);
 		}
 		else if(imageType == 1)
 		{
-			imageObj[1]->AddComponent<Engine::CShaderC>()->
-				AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"CircularGaugeShader")));
+			imageObj[1]->GetComponent<Engine::CShaderC>()->
+				AddShader((_int)Engine::EShaderID::CircularGauge);
 		}
 
 		_float value, maxValue, minValue;
@@ -238,7 +249,8 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		button->GetTransform()->SetSize(size);
 
 		_float sort;
-		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);		button->GetTransform()->SetPositionZ(sort);
+		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
+		button->GetTransform()->SetPositionZ(sort);
 
 		std::wstring textureKey;
 		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
@@ -262,6 +274,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
+		button->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 		if (name == L"Not")
 		{
@@ -271,10 +284,10 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 
 		fontPosition.y *= -1;
-		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);		
 	}	
 }
 
@@ -378,7 +391,7 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textSize", fontSize);
-		//dataStore->GetValue(false, dataID, objectKey, L"imageObejct" + std::to_wstring(i) + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 		fontPosition.y *= -1;
 		text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 	}
@@ -859,19 +872,24 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::PartySettingScene, &CButtonFunction());
 	}
+	else if (0 == function.compare(L"BattleEndScene")) //  전투 종료
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction());
+
+	}
 	else if (0 == function.compare(L"Sally")) // 1스테이지
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOn")) // 1스테이지
+	else if (0 == function.compare(L"ObjectOn")) // 오브젝트 키기
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOff")) // 1스테이지
+	else if (0 == function.compare(L"ObjectOff")) // 오프젝트 끄기
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOff, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleRenunciation")) // 1스테이지
+	else if (0 == function.compare(L"BattleRenunciation")) // 전투종료 함수
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleRenunciation, &CButtonFunction());
 	}

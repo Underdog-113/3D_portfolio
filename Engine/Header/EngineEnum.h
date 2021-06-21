@@ -77,8 +77,9 @@ namespace Engine
 		DissolveShader			= 13,
 		SpawnEffectShader		= 14,
 		SoftEffectShader		= 15,
-		NumOfShaderID			= 16
-
+		WireShader				= 16,
+		AttackRangeShader		= 17,
+		NumOfShaderID			= 18
 	};
 #pragma endregion
 

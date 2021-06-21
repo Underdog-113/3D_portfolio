@@ -56,7 +56,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	Output.mPosition = mul(Input.mPosition, gWorldViewProjectionMatrix);
 
 	float4 objectLightPosition = mul(gWorldLightPosition, gInvWorldMatrix);
-	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition);
+	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition.xyz);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 	Output.mUV.x = Input.mUV.x;
@@ -77,17 +77,17 @@ struct PS_INPUT
 float4 ps_main(VS_OUTPUT Input) : COLOR
 {
 	// Base albedo Texture
-	float3 albedo = tex2D(Diffuse, Input.mUV);
+	float4 albedo = tex2D(Diffuse, Input.mUV);
 
 	// Noise Texture
-	float3 Noise = tex2D(NoiseTex, Input.mUV);
+	float4 Noise = tex2D(NoiseTex, Input.mUV);
 
 	// To disappear to match the noise texture
-	float multiply1 = ((Noise.r * sin(gAlpha)) * 5.5f);
-	float multiply2 = Noise.r * sin(gAlpha);
-	
+	float multiply1 = saturate((Noise.r * sin(gAlpha)) * 5.5f);
+	float multiply2 = saturate(Noise.r * sin(gAlpha));
+
 	// Current Dissolve Line Value
-	float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20));
+	float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20)); 
 	
 	// Returns the "multiply2" multiple of "multiply1"
 	float multiple = pow(multiply1 + multiply2, 20);
