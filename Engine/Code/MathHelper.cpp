@@ -115,6 +115,26 @@ _bool CMathHelper::SeparateAxisTest(_float3 const& axis,
 	return true;
 }
 
+void CMathHelper::Lerp(_float3 & src, _float3 & dest, _float lerpSpeed, _float lerpProportion)
+{
+	_float3 dir = dest - src;
+	_float length = D3DXVec3Length(&dir);
+	_float moveAmount = length * lerpProportion;
+
+	if (length < lerpSpeed * GET_DT)
+	{
+		src = dest;
+		return;
+	}
+	else if (moveAmount < lerpSpeed)
+		moveAmount = lerpSpeed;
+
+	dir /= length;
+	src += (dir * moveAmount * GET_DT);
+}
+
+
+
 _float CMathHelper::RandomFloatRange(_float min, _float max)
 {
 	srand(static_cast <unsigned> (time(0)));

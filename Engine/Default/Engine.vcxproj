@@ -53,6 +53,7 @@
     <ClInclude Include="..\Header\LightManager.h" />
     <ClInclude Include="..\Header\ImageObject.h" />
     <ClInclude Include="..\Header\MathHelper.h" />
+    <ClInclude Include="..\Header\MeshAlphaTestShader.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
     <ClInclude Include="..\Header\Particle.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="..\Code\LightManager.cpp" />
     <ClCompile Include="..\Code\ImageObject.cpp" />
     <ClCompile Include="..\Code\MathHelper.cpp" />
+    <ClCompile Include="..\Code\MeshAlphaTestShader.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
     <ClCompile Include="..\Code\Particle.cpp" />
@@ -206,6 +208,10 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
