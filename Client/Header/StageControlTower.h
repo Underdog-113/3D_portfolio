@@ -109,6 +109,7 @@ private:
 	_float3						m_reserveMoveOrderDir = ZERO_VECTOR;
 
 	bool						m_rotateLock = false;
+	bool						m_rotateByTarget = false;
 
 	CreateMode					m_mode;
 

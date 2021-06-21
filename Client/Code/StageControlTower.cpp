@@ -390,14 +390,16 @@ void CStageControlTower::FindTarget()
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
-	SP(Engine::CObject) spTarget;
+	SP(Engine::CObject) spTarget = nullptr;
 	_float minDistance = 10000.f;
 
 	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
-
+	valkyriePos.y = 0.f;
+	
 	for (auto& iter : monsterList)
 	{
 		_float3 monsterPos = iter->GetTransform()->GetPosition();
+		monsterPos.y = 0.f;
 
 		_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
 		if (distance < minDistance)
@@ -407,9 +409,25 @@ void CStageControlTower::FindTarget()
 		}
 	}
 
-	m_spCurTarget = spTarget;
-	
 	// 2. 가까운 정도가 비슷할 경우, 플레이어 앞에 있는 녀석으로
+
+
+	// 3. 같으면 냅두고, 다르면 방향 다시 재설정
+
+	if (m_spCurTarget != spTarget)
+	{
+		m_spCurTarget = spTarget;
+
+		m_rotateByTarget = true;
+		_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
+		targetPos.y = 0.f;
+		m_moveOrderDir = targetPos - valkyriePos;
+		D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+	}
+	else
+	{
+
+	}
 
 }
 

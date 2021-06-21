@@ -88,7 +88,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsetrState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
@@ -199,10 +199,10 @@ void COneStageScene::Start_SetupMembers(void)
 	}
 	// Spider
 	{
-		SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-		spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
-		spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		m_spSpider = spSpiderClone;
+		//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+		//spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
+		//spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		//m_spSpider = spSpiderClone;
 	}
 	// test map
 	{

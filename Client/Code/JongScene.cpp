@@ -120,6 +120,7 @@ void CJongScene::KianaTest()
 	cam->SetTargetDist(2.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
+	cam->SetMode(Engine::ECameraMode::TPS);
 
 	// cube terrain
 	{
@@ -133,7 +134,7 @@ void CJongScene::KianaTest()
 		spCube->AddComponent<Engine::CDebugC>();
 		spCube->AddComponent<Engine::CShaderC>();
 		spCube->GetTransform()->SetSize(10, 1, 10);
-		spCube->GetTransform()->SetPosition(0, -0.5f, 0);
+		spCube->GetTransform()->SetPosition(0, -1.f, 0);
 
 	}
 

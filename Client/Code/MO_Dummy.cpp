@@ -83,30 +83,18 @@ void CMO_Dummy::LateUpdate(void)
 	__super::LateUpdate();
 }
 
-void CMO_Dummy::PreRender(void)
-{
-	m_spMesh->PreRender(m_spGraphics);
-}
 
 void CMO_Dummy::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CMO_Dummy::Render(void)
-{
-	m_spMesh->Render(m_spGraphics);
-}
 
 void CMO_Dummy::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CMO_Dummy::PostRender(void)
-{
-	m_spMesh->PostRender(m_spGraphics);
-}
 
 void CMO_Dummy::PostRender(LPD3DXEFFECT pEffect)
 {
