@@ -32,7 +32,8 @@ void CChangmoScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	CStageControlTower::GetInstance()->Awake();
+	m_pControlTower = CStageControlTower::GetInstance();
+	m_pControlTower->Awake();
 }
 
 void CChangmoScene::Start(void)
@@ -41,9 +42,11 @@ void CChangmoScene::Start(void)
 
 	{
 		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
-		CStageControlTower::GetInstance()->AddSquadMember(spKianaClone);
-		//m_pController->Start(CStageControlTower::WithoutUI);
-		CStageControlTower::GetInstance()->Start(CStageControlTower::ALL);
+
+		m_spKiana = spKianaClone;
+		m_pControlTower->AddSquadMember(m_spKiana);
+		m_pControlTower->Start(CStageControlTower::WithoutUI);
+		//m_pControlTower->Start(CStageControlTower::ALL);
 
 
 		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
@@ -71,6 +74,12 @@ void CChangmoScene::Start(void)
 
 
 		SP(Engine::CObject) spSkyBox = ADD_CLONE(L"SkyBox", true);		
+
+
+
+		m_spDummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
+		m_spDummy->GetTransform()->SetPosition(0, 0, 5);
+
 	}
 
 
