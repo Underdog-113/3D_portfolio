@@ -99,7 +99,7 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 				m_pOwner->AddTexNameToList(StrToWStr(pDerivedMeshContainer->pMaterials[i].pTextureFilename));
 			}
 			else
-				m_pOwner->AddTexNameToList(L"NoTexture");
+				m_pOwner->AddTexNameToList(L"NoTex");
 		}
 	}
 	else

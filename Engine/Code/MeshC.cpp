@@ -46,18 +46,16 @@ void CMeshC::Awake(void)
 		std::wstring objectKey	= m_pOwner->GetObjectKey();
 		CScene*	pOwnerScene		= m_pOwner->GetScene();
 
-		_int numOfMeshData;
-		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfMeshData", numOfMeshData);
-		if (numOfMeshData == 0)
-			return;
-
 		std::wstring meshKey;
-		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"meshKey0", meshKey);
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"meshKey", meshKey);
 		m_pMeshData = pOwnerScene->GetMeshStore()->GetMeshData(meshKey);
+
+		if (m_pMeshData == nullptr)
+			return;
 
 		GenMinMaxVtx();
 
-		if (m_pMeshData && m_pMeshData->GetMeshType() == (_int)EMeshType::Dynamic)
+		if (m_pMeshData->GetMeshType() == (_int)EMeshType::Dynamic)
 		{
 			m_pRootMotion = new CRootMotion;
 
@@ -79,6 +77,8 @@ void CMeshC::Start(SP(CComponent) spThis)
 		{
 			spOwnerTexC->AddTexture(RemoveExtension(m_pMeshData->GetTexList()[i]), i);
 		}
+
+		spOwnerTexC->SetNumOfTex(m_pMeshData->GetSubsetCount());
 	}
 }
 
@@ -289,46 +289,45 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 
 	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
 
-	const std::vector<_DerivedD3DXMESHCONTAINER*>* pMeshContainers = &pDM->GetMeshContainers();
-	for (_int i = 0; i < pMeshContainers->size(); ++i)
+	const std::vector<_DerivedD3DXMESHCONTAINER*>& vMeshContainers = pDM->GetMeshContainers();
+	for (_int i = 0; i < vMeshContainers.size(); ++i)
 	{
-		for (_ulong j = 0; j < (*pMeshContainers)[i]->numBones; ++j)
+		for (_ulong j = 0; j < vMeshContainers[i]->numBones; ++j)
 		{
-			(*pMeshContainers)[i]->pRenderingMatrix[j] =
-				(*pMeshContainers)[i]->pFrameOffsetMatrix[j] * (*(*pMeshContainers)[i]->ppCombinedTransformMatrix[j]);
+			vMeshContainers[i]->pRenderingMatrix[j] =
+				vMeshContainers[i]->pFrameOffsetMatrix[j] * (*vMeshContainers[i]->ppCombinedTransformMatrix[j]);
 
 			if (m_pRootMotion->GetIsRootMotion())
 			{
-				(*pMeshContainers)[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
-				(*pMeshContainers)[i]->pRenderingMatrix[j]._42 -= rootMotionMoveAmount.y;
-				(*pMeshContainers)[i]->pRenderingMatrix[j]._42 += m_halfYOffset;
-				(*pMeshContainers)[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
+				vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
+				vMeshContainers[i]->pRenderingMatrix[j]._42 -= rootMotionMoveAmount.y;
+				vMeshContainers[i]->pRenderingMatrix[j]._42 += m_halfYOffset;
+				vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
 			}
 		}
 
 		void* pSrcVertex = nullptr;
 		void* pDestVertex = nullptr;
 
-		(*pMeshContainers)[i]->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
-		(*pMeshContainers)[i]->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
+		vMeshContainers[i]->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
+		vMeshContainers[i]->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
 
-		(*pMeshContainers)[i]->pSkinInfo->UpdateSkinnedMesh((*pMeshContainers)[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
+		vMeshContainers[i]->pSkinInfo->UpdateSkinnedMesh(vMeshContainers[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
 		_uint pass = 0;
-		for (_ulong j = 0; j < (*pMeshContainers)[i]->NumMaterials; ++j)
+		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
 		{
-			if (pTexData[(*pMeshContainers)[i]->texIndexStart + j][0] != nullptr)
+			if (pTexData[vMeshContainers[i]->texIndexStart + j][0] != nullptr)
 			{
-				if (pTexData[(*pMeshContainers)[i]->texIndexStart + j][0]->includeAlpha)
+				if (pTexData[vMeshContainers[i]->texIndexStart + j][0]->includeAlpha)
 					pass = 1;
 				else
 					pass = 0;
 
 				if (!m_isEffectMesh)
 				{
-					if(FAILED(pEffect->SetTexture("g_BaseTexture", pTexData[(*pMeshContainers)[i]->texIndexStart + j][0]->pTexture)))
-						int a = 5;
+					pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->texIndexStart + j][0]->pTexture);
 				}
 			}
 			else
@@ -338,14 +337,13 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			pEffect->CommitChanges();
 
 			pEffect->BeginPass(pass);
-			GET_DEVICE->SetMaterial(&(*pMeshContainers)[i]->pMaterials[j].MatD3D);
-			if(FAILED((*pMeshContainers)[i]->MeshData.pMesh->DrawSubset(j)))
-				int a = 5;
+			GET_DEVICE->SetMaterial(&vMeshContainers[i]->pMaterials[j].MatD3D);
+			vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
 			pEffect->EndPass();
 		}
 
-		(*pMeshContainers)[i]->MeshData.pMesh->UnlockVertexBuffer();
-		(*pMeshContainers)[i]->pOriMesh->UnlockVertexBuffer();
+		vMeshContainers[i]->MeshData.pMesh->UnlockVertexBuffer();
+		vMeshContainers[i]->pOriMesh->UnlockVertexBuffer();
 	}
 
 }

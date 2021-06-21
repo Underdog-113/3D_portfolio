@@ -29,7 +29,7 @@ public:
 				void			ResizeTexSet		(_int numOfTexSet);
 				void			AddTexture			(std::wstring const& textureKey, _int setIndex = 0);
 				void			ChangeTexture		(std::wstring const& textureKey, _int setIndex = 0, _int texIndex = 0);
-				void			DeleteTexture		(_int meshIndex, _int texIndex);
+				void			DeleteTexture		(_int setIndex, _int texIndex);
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Texture;

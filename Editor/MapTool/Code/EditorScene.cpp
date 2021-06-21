@@ -169,7 +169,7 @@ bool CEditorScene::IsMeshPicked(Engine::CObject * _pObject, _float3 * _pOutPickP
 
 	m_rayDir = rayDir;
 
-	Engine::CStaticMeshData* pStaticMesh = (Engine::CStaticMeshData*)_pObject->GetComponent<Engine::CMeshC>()->GetMeshData()[0];
+	Engine::CStaticMeshData* pStaticMesh = (Engine::CStaticMeshData*)_pObject->GetComponent<Engine::CMeshC>()->GetMeshData();
 
 	return CheckIntersect(pStaticMesh->GetMesh(), rayPos, rayDir, _pOutPickPoint);
 }
@@ -271,37 +271,37 @@ void CEditorScene::GetMouseRay(_mat _targetWorldMatrix, _float3 * _pOutRayPos, _
 
 void CEditorScene::SetInitAnimation(SP(Engine::CObject) spObj)
 {
-	std::wstring meshKey = spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0]->GetMeshKey();
+	std::wstring meshKey = spObj->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey();
 
 	if (L"Kiana" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("StandBy");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("StandBy");
 
 	else if (L"Theresa" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("IDLE");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("IDLE");
 
 	else if (L"Sakura" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("ui_standby");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("ui_standby");
 
 	else if (L"MB_Ganesha" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("StandBy");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("StandBy");
 
 	else if (L"MB_Bronya" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("IDLE");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("IDLE");
 
 	else if (L"MO_Ninza" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("standy");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("standy");
 
 	else if (L"MO_Robot" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("StandBy");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("StandBy");
 
 	else if (L"MO_Scout" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("IDLE");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("IDLE");
 
 	else if (L"MO_Spider" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("StandBy");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("StandBy");
 
 	else if (L"MO_Lancer" == meshKey)
-		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData()[0])->ChangeAniSet("STAND");
+		static_cast<Engine::CDynamicMeshData*>(spObj->GetComponent<Engine::CMeshC>()->GetMeshData())->ChangeAniSet("STAND");
 }
 
 void CEditorScene::SetPickingMode()
@@ -556,7 +556,7 @@ void CEditorScene::CreateObject(_bool isStatic, ELayerID layerID, std::wstring o
 
 	SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", isStatic, (_int)layerID, objName);
 
-	spObj->AddComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(fileName));
+	spObj->AddComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(fileName));
 
 	if (1 == m_pMenuView->m_initTexture.GetCheck())
 	{

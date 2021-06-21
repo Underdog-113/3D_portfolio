@@ -130,12 +130,12 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spDebugCOllider);
-	//SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
-	//GetObjectFactory()->AddPrototype(spDecoObject);
-	//
-	//SP(CMapObject) spMapObject(CMapObject::Create(true, this));
-	//GetObjectFactory()->AddPrototype(spMapObject);
-	//
+	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDecoObject);
+	
+	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMapObject);
+	
 	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBall);
 	
@@ -143,9 +143,9 @@ void CStaticScene::InitPrototypes(void)
 	InitMonsterPrototypes();
 	
 	InitValkyriePrototypes();
-	//
-	//SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
-	//GetObjectFactory()->AddPrototype(spAttack_Trail);
+	
+	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttack_Trail);
 }
 
 void CStaticScene::InitUiPrototypes(void)

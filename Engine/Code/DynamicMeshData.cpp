@@ -47,9 +47,6 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 {
 	__super::Awake(filePath, fileName);
 	
-	if (fileName == L"Kiana_decl.X")
-		int a = 5;
-
 	m_meshType = (_int)EMeshType::Dynamic;
 
 	m_pHierarchyLoader = CHierarchyLoader::Create(filePath, this);

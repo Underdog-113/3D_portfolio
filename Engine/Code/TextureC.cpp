@@ -131,7 +131,7 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int setIndex)
 			m_vTexData.resize(1);
 	}
 	
-
+	++m_numOfTex;
 	m_vTexData[setIndex].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
 }
 
@@ -140,8 +140,9 @@ void CTextureC::ChangeTexture(std::wstring const & textureKey, _int setIndex, _i
 	m_vTexData[setIndex][texIndex] = m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey);
 }
 
-void CTextureC::DeleteTexture(_int meshIndex, _int texIndex)
+void CTextureC::DeleteTexture(_int setIndex, _int texIndex)
 {
-	auto& iter_find = m_vTexData[meshIndex].begin();
-	m_vTexData[meshIndex].erase(iter_find + texIndex);
+	auto& iter_find = m_vTexData[setIndex].begin();
+	m_vTexData[setIndex].erase(iter_find + texIndex);
+	--m_numOfTex;
 }

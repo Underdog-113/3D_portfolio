@@ -36,7 +36,6 @@ void CTextureStore::Awake(void)
 	m_fpResourceHandler = std::bind(&CTextureStore::ParsingTexture, this, std::placeholders::_1, std::placeholders::_2);
 	m_resourcePath = _SOLUTIONDIR L"Resource\\Texture";
 
-	m_s_mStaticTextureData[L"NoTexture"] = nullptr;
 }
 
 void CTextureStore::OnDestroy(void)
