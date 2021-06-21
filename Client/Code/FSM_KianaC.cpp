@@ -469,8 +469,7 @@ void CFSM_KianaC::Appear_Init(void)
 void CFSM_KianaC::Appear_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Appear);
-
-	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(true);
+	//m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(true);
 }
 
 void CFSM_KianaC::Appear_Update(float deltaTime)
@@ -494,8 +493,8 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 
 void CFSM_KianaC::Appear_End(void)
 {
-	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(false);
 	m_appearOption = None;
+	//m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(false);
 }
 
 void CFSM_KianaC::Attack_1_Init(void)
@@ -510,7 +509,6 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_checkUltraRing = false;
 	m_checkUltraAtk = false;
 	m_checkEffect = false;
-
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
@@ -560,9 +558,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
 	m_pStageControlTower->SetInputLock_ByAni(true);
-
 	m_checkUltraAtk = false;
-
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix());
 }
 
@@ -608,7 +604,6 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix());
 }
 
@@ -681,7 +676,6 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
@@ -754,7 +748,6 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 

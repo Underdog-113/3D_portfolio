@@ -274,7 +274,6 @@ void CTransformC::Lerp(void)
 		_float length = D3DXVec3Length(&dir);
 		_float moveAmount = length * m_lerpProportion;
 
-		_float a = GET_DT;
 		if (length < m_lerpSpeed * GET_DT)
 		{
 			m_position	= m_goalPosition;

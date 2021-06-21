@@ -74,6 +74,7 @@ private:
 	GETTOR_SETTOR	(_bool,					m_hasChanged,		false,					HasChanged)
 	GETTOR_SETTOR	(_bool,					m_projHasChanged,	true,					ProjHasChanged)
 	GETTOR			(_bool,					m_wallCollided,		false,					WallCollided)
+	GETTOR_SETTOR	(_bool,					m_isTargetOn,		false,					IsTargetOn)
 
 	GETTOR_SETTOR	(_mat,					m_viewMat,			{},						ViewMatrix)
 	GETTOR_SETTOR	(_mat,					m_projMat,			{},						ProjMatrix)
@@ -89,6 +90,7 @@ private:
 	//For Fixed Camera
 	GETTOR_SETTOR	(_float3,				m_fixedPos,			ZERO_VECTOR,			FixedPos)
 	GETTOR_SETTOR	(_float3,				m_fixedDir,			FORWARD_VECTOR,			FixedDir)
+	GETTOR_SETTOR	(_float3,				m_targetPos,		ZERO_VECTOR,			TargetPos)
 
 	//For TPS Camera
 	GETTOR			(_float3,				m_targetOffset,		_float3(0, 0.5f, 0),	TargetOffset)

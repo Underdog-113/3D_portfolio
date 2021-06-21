@@ -26,6 +26,8 @@ public:
 									 _float const& minA, _float const& maxA, 
 									 _float const& minB, _float const& maxB);
 
+	void		Lerp				(_float3& src, _float3& dest, _float lerpSpeed, _float lerpProportion);
+
 	_float		RandomFloatRange	(_float min, _float max);
 	_int		RandomIntRange		(_int min, _int max);
 private:

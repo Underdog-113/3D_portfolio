@@ -1,39 +1,35 @@
 #include "stdafx.h"
 #include "WooScene.h"
-#include "EmptyObject.h"
-#include "ObjectFactory.h"
 
-#include "DynamicMeshData.h"
-#include "AniCtrl.h"
+//#include "EmptyObject.h"
+//#include "ObjectFactory.h"
 
+#include "StageControlTower.h"
+//#include "AniCtrl.h"
+#include "Kiana.h"
+
+/* for.Monster */
 #include "FSM_SpiderC.h"
 //#include "FSMDefine_Spider.h"
 #include "MO_Spider.h"
-
-#include "FSM_AxeC.h"
-//#include "FSMDefine_Axe.h"
-#include "MO_Axe.h"
 
 #include "FSM_SickleC.h"
 #include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
 
-#include "Kiana_CatPaw_Atk01.h"
-#include "Kiana_CatPaw_Atk02.h"
-#include "Kiana_CatPaw_Atk03.h"
-#include "Kiana_CatPaw_Atk04.h"
-#include "Kiana_CatPaw_Atk05.h"
-#include "Kiana_CatPaw_Ring_Atk01.h"
+#include "FSM_GaneshaC.h"
+#include "FSMDefine_Ganesha.h"
+#include "MB_Ganesha.h"
 
-#include "FSM_KianaC.h"
-#include "Kiana.h"
-#include "StageControlTower.h"
+#include "PatternMachineC.h"
+#include "ClientPatterns.h"
+/**/
 
-#include "DataLoad.h"
+//#include "DataLoad.h"
+
 CWooScene::CWooScene()
 {
 }
-
 
 CWooScene::~CWooScene()
 {
@@ -58,6 +54,8 @@ void CWooScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
+	InitPrototypes();
+
 	m_pController = CStageControlTower::GetInstance();
 	m_pController->Awake();
 }
@@ -66,60 +64,122 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 	{
-		//{
-		//	SP(Engine::CObject) spEmptyObject1
-		//		= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"Pivot");
+		//CDataLoad* Load = new CDataLoad();
+		//Load->Setting();
+		//Load->ButtonLoad(this);
+		//Load->ImageLoad(this);
+		//Load->SliderLoad(this);
+		//Load->ScrollViewLoad(this);
+		//Load->CanvasLoad(this);
+		//Load->TextLoad(this);
+		//Load->ToolLoad(this);
+		//delete(Load);
 
-		//	spEmptyObject1->AddComponent<Engine::CMeshC>()->AddMeshData(L"Pistol_USP45");
-		//	spEmptyObject1->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		//	spEmptyObject1->AddComponent<Engine::CTextureC>();
-		//	spEmptyObject1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		//	spEmptyObject1->GetTransform()->SetSize(1, 1, 1);
+		// Kiana Setting
+		{
+			SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
-		//	m_pivot = spEmptyObject1.get();
+			m_spKiana = spKianaClone;
+			m_pController->AddSquadMember(m_spKiana);
+			m_pController->Start(CStageControlTower::WithoutUI);
 
-		//	Engine::CCameraManager::GetInstance()->GetCamera(L"WooSceneBasicCamera")->SetTarget(spEmptyObject1);
-		//}
+			//spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 
-		//// Kiana Body
-		//{
-		//	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", false, (_uint)ELayerID::Player, L"Kiana");
+			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+			cam->SetTarget(m_spKiana);
+			cam->SetTargetDist(2.f);
+			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+		}
 
-		//	m_spKiana = spKianaClone;
-		//	m_pController->AddSquadMember(m_spKiana);
-		//	m_pController->Start();
-		//}
+		// cube terrain
+		{
 
-		//// Monster
-		//{
-		//	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-		//	spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
-		//	spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		//	m_spSpider = spSpiderClone;
+			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
-		//	SP(Engine::CObject) spAxeClone = ADD_CLONE(L"MO_Axe", true, (_uint)ELayerID::Enemy, L"MO_Axe");
-		//	spAxeClone->GetTransform()->SetPosition(0, 0, 3);
-		//	spAxeClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		//	m_spAxe = spAxeClone;
+			/*spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
+			spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);*/
+			spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
-		//	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-		//	//spSickleClone->GetTransform()->SetSize(5, 5, 5);
-		//	spSickleClone->GetTransform()->SetPosition(0, 0, 10);
-		//	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		//	m_spSickle = spSickleClone;
+			spCube->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::Floor, _float3(50, 0, 50)));
+			spCube->GetComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
 
-		//	m_fsm = m_spSickle->GetComponent<CFSM_SickleC>();
-		//	//m_fsm = m_spSpider->GetComponent<CFSM_SpiderC>();
-		//	//m_fsm = m_spAxe->GetComponent<CFSM_SickleC>();
-		//}
+			spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CShaderC>()/*->AddShader((_int)Engine::EShaderID::MeshShader)*/;
+			spCube->AddComponent<Engine::CRigidBodyC>();
+			spCube->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+			spCube->GetTransform()->SetSize(10, 1, 10);
+			spCube->GetTransform()->SetPosition(0, 0, 0);
 
+			// 2
+			m_pivot = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+			m_pivot->AddComponent<Engine::CMeshC>()->SetMeshData(L"Sphere");
+			m_pivot->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+			m_pivot->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+
+			m_pivot->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
+			m_pivot->GetComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
+
+			m_pivot->AddComponent<Engine::CDebugC>();
+			m_pivot->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+			m_pivot->AddComponent<Engine::CRigidBodyC>();
+			m_pivot->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+			m_pivot->GetTransform()->SetSize(0.1f, 0.1f, 0.1f);
+
+			//3		
+			m_pivot_kiana = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+			m_pivot_kiana->AddComponent<Engine::CMeshC>()->SetMeshData(L"Sphere");
+			m_pivot_kiana->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+			m_pivot_kiana->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+
+			m_pivot_kiana->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
+			m_pivot_kiana->GetComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
+
+			m_pivot_kiana->AddComponent<Engine::CDebugC>();
+			m_pivot_kiana->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+			m_pivot_kiana->AddComponent<Engine::CRigidBodyC>();
+			m_pivot_kiana->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+			m_pivot_kiana->GetTransform()->SetSize(0.1f, 0.1f, 0.1f);
+		}
+
+		// Monster
+		{
+			///* Sickle */
+			//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+			//spSickleClone->GetTransform()->SetSize(2, 2, 2);
+			//spSickleClone->GetTransform()->SetPosition(0, 0, 2);
+			//spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+			//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
+			//m_spSickle = spSickleClone;
+
+			/* Spider */
+			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+			spSpiderClone->GetTransform()->SetPosition(-3, 0, -7);
+			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+			m_spSpider = spSpiderClone;
+
+			/* Ganesha */
+			SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+			spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
+			spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
+			spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+			m_spGanesha = spGaneshaClone;
+		}
 	}
-
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->ToolLoad(this);
-	delete(Load);
-
 }
 
 void CWooScene::FixedUpdate(void)
@@ -131,19 +191,22 @@ void CWooScene::Update(void)
 {
 	__super::Update();
 
-	//m_pController->Update();
-	//m_pivot->GetTransform()->SetPosition(m_spKiana->GetTransform()->GetPosition());
-	//m_pivot->GetTransform()->SetPositionY(0.f);
+	m_pController->Update();
 
-	if (Engine::IMKEY_DOWN(KEY_Q))
-		m_pattern1 = true;
+	//_float3 pos1 = m_spKiana->GetTransform()->GetPosition();
+	//_float3 pos2 = m_spSickle->GetTransform()->GetPosition();
 
-	//SicklePattern0();
+	//m_pivot->GetTransform()->SetPosition(pos2);
+	//m_pivot_kiana->GetTransform()->SetPosition(pos1);
+
 	//SpiderPattern0();
+	//GaneshaPattern0();
+	//GaneshaPattern1();
+	//GaneshaPattern2();
 
-	//AxePattern0();
-	//AxePattern1();
-
+	//std::cout << "kiana  : " << pos2.x << "," << pos2.y << "," << pos2.z << std::endl;
+	//std::cout << "moster : " << pos1.x << "," << pos1.y << "," << pos1.z << std::endl;
+	//std::cout << "===========================================" << std::endl;
 }
 
 void CWooScene::LateUpdate(void)
@@ -154,6 +217,8 @@ void CWooScene::LateUpdate(void)
 void CWooScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	m_pController->DestroyInstance();
 }
 
 void CWooScene::OnEnable(void)
@@ -183,115 +248,109 @@ void CWooScene::SpiderPattern0()
 	//m_spSickle->GetTransform()->SetPosition(mPos);
 }
 
-void CWooScene::SicklePattern0()
+void CWooScene::GaneshaPattern0()
 {
-	_float3 tPos = m_spKiana->GetTransform()->GetPosition();
-	_float3 mPos = m_spSickle->GetTransform()->GetPosition();
-	_float mSpeed = 1.f;
+	//_float3 tPos = m_spKiana->GetTransform()->GetPosition(); // target pos
+	//_float3 mPos = m_spGanesha->GetTransform()->GetPosition(); // monster pos
+	////_float mSpeed = 1.f;
 
-	_float3 *len = &(tPos - mPos);
+	//_float len = D3DXVec3Length(&(tPos - mPos));
 
-	if (D3DXVec3Length(len) < 1.5f)
-	{
-		m_fsm->ChangeState(Name_StandBy);
-		return;
-	}
+	//CoolTime(m_atkTime, m_sickleAtkCool, m_atkReady);
+	//CoolTime(m_walkTime, m_sickleWalkCool, m_walkReady);
 
-	if (Name_Walk_Forward != m_fsm->GetCurStateString())
-		m_fsm->ChangeState(Name_Walk_Forward);
+	//static_cast<CMB_Ganesha*>(m_spGanesha.get())->ChaseTarget(tPos);
 
-	static_cast<CMO_Sickle*>(m_spSickle.get())->ChaseTarget(tPos);
-
-	_float3 dir = tPos - mPos;
-
-	mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
-	m_spSickle->GetTransform()->SetPosition(mPos);
-}
-
-void CWooScene::AxePattern0()
-{
-	//if (Name_Run != m_fsm->GetCurStateString())
-	//	m_fsm->ChangeState(Name_Run);
-
-	//_float3 tPos = m_spKiana->GetTransform()->GetPosition();
-	//_float3 mPos = m_spAxe->GetTransform()->GetPosition();
-	//_float mSpeed = 0.1f;
-
-	//static_cast<CMO_Axe*>(m_spAxe.get())->ChaseTarget(tPos);
-
-	//_float3 dir = tPos - mPos;
-
-	//mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
-	//m_spAxe->GetTransform()->SetPosition(mPos);
-}
-
-void CWooScene::AxePattern1()
-{
-	/*
-	1. attack1
-	4. idle
-	5. left walk
-	6. idle
-	*/
-
-	//if (Engine::IMKEY_DOWN(KEY_Q))
-	//{
-	//	if (false == m_fsm->GetPattern1())
-	//		m_fsm->SetPattern1(true);
-	//	else
-	//		m_fsm->SetPattern1(false);
-	//}
-
-	if (false == m_pattern1)
-		return;
-
-	m_accTime += GET_DT;
-
-	//if (0 == m_curPatternIdx)
-	//{
-	//	m_fsm->ChangeState(Name_Attack_1);
-	//	++m_curPatternIdx;
+	//if (false == m_pattern0)
 	//	return;
-	//}
 
-	//if (Name_Attack_1 == m_fsm->GetCurStateString() && 0.8f <= m_fsm->GetDM()->GetAniTimeline())
+	//// 상대가 공격 범위 밖이고
+	//if (len > m_sickleAtkDis)
 	//{
-	//	m_fsm->ChangeState(Name_Attack_2);
-	//	return;
-	//}
+	//	// 공격 상태고, 애니가 끝났다면 
+	//	if (Name_Attack01 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_Jump_Back);
+	//		m_pattern1 = false;
+	//		m_pattern2 = true;
+	//	}
 
-	//if (Name_Attack_2 == m_fsm->GetCurStateString() && 0.8f <= m_fsm->GetDM()->GetAniTimeline())
+	//	// 내가 대기 상태면 이동 애니로 변경
+	//	if (Name_StandBy == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_Run);
+	//	}
+	//	// 내가 이동 중이라면
+	//	else if (Name_Run == m_fsm->GetCurStateString())
+	//	{
+	//		_float3 dir = tPos - mPos;
+
+	//		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+	//		m_spGanesha->GetTransform()->SetPosition(mPos);
+	//	}
+	//	// 내가 뒤로 이동 중이라면
+	//	else if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && false == m_walkReady)
+	//	{
+	//		_float3 dir = tPos - mPos;
+
+	//		mPos -= *D3DXVec3Normalize(&dir, &dir) * 1.5f;
+	//		m_spGanesha->GetTransform()->SetPosition(mPos);
+	//		m_fsm->GetDM()->GetAniCtrl()->SetSpeed(0.5f);
+	//		m_walkReady = true;
+	//	}
+	//	// 내가 뒤로 이동 중이라면
+	//	else if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
+	//	{
+	//		m_fsm->ChangeState(Name_Run);
+	//	}
+	//}
+	//// 상대가 공격 범위 안이고
+	//else if (len <= m_sickleAtkDis)
 	//{
-	//	m_fsm->ChangeState(Name_IDLE);
-	//	EndPattern();
-	//	return;
+	//	// 뒤로 이동 상태고, 애니가 끝났고, walkReady가 true라면 대기로 변경
+	//	if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
+	//	{
+	//		m_fsm->ChangeState(Name_StandBy);
+	//	}
+	//	
+	//	// 이동 상태라면 대기로 변경
+	//	if (Name_Run == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_StandBy);
+	//		m_pattern0 = false;
+	//		m_pattern1 = true;
+	//	}
+	//	
+	//	// 공격 상태고, 애니가 끝났다면 
+	//	if (Name_Attack01 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
+	//	{
+	//		m_fsm->ChangeState(Name_Run);
+	//		m_pattern1 = false;
+	//		m_pattern2 = true;
+	//	}
 	//}
 }
 
-void CWooScene::AxePattern2()
+void CWooScene::GaneshaPattern1()
 {
+	//if (false == m_pattern1)
+	//	return;
+
+	//m_fsm->ChangeState(Name_Attack01);
+	//m_atkReady = false;
+	//m_pattern0 = true;
+	//m_pattern1 = false;
 }
 
-void CWooScene::PlayOnceAni(std::wstring playAni, std::wstring nextAni)
+void CWooScene::GaneshaPattern2()
 {
-	if (playAni != m_fsm->GetCurStateString())
-		m_fsm->ChangeState(playAni);
+	//if (false == m_pattern2)
+	//	return;
 
-	else if (m_fsm->GetDM()->GetAniTimeline() >= 0.8f)
-		m_fsm->ChangeState(nextAni);
-}
-
-void CWooScene::PlayAni(std::wstring ani)
-{
-	//if (ani != m_fsm->GetCurStateString())
-	//	m_fsm->ChangeState(ani);
-}
-
-void CWooScene::EndPattern()
-{
-	m_pattern1 = false;
-	m_curPatternIdx = 0;
-	m_accTime = 0.f;
+	//m_fsm->ChangeState(Name_Jump_Back);
+	//m_walkReady = false;
+	//m_pattern0 = true;
+	//m_pattern2 = false;
 }
 
 void CWooScene::InitPrototypes(void)

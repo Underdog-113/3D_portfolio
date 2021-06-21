@@ -268,7 +268,6 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFE
 	}
 }
 
-
 void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFECT pEffect)
 {
 	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
