@@ -63,6 +63,7 @@ private:
 	GETTOR		(D3DXFRAME*,			m_pRootFrame,			nullptr,	RootFrame)
 	GETTOR		(CHierarchyLoader*,		m_pHierarchyLoader,		nullptr,	HierarchyLoader)
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)
+	
 	GETTOR_SETTOR(_bool,				m_playAnimation,		true,		PlayAnimation)
 };
 END

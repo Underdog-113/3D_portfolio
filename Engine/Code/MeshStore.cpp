@@ -70,6 +70,9 @@ void CMeshStore::ClearCurResource(void)
 
 CMeshData* CMeshStore::GetMeshData(std::wstring meshKey)
 {
+	if (meshKey == L"NoMesh")
+		return nullptr;
+
 	auto iter_find_static = m_s_mStaticMeshData.find(meshKey);
 	if (iter_find_static != m_s_mStaticMeshData.end())
 		return iter_find_static->second->MakeClone();

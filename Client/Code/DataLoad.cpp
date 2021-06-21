@@ -129,7 +129,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			{
 				dataStore->GetValue(false, dataID, objectKey, key + L"AnimName" + std::to_wstring(j), textureKey);
 
-				image->GetTexture()->AddTexture(textureKey, 0);
+				image->GetTexture()->AddTexture(textureKey, j);
 			}
 		}
 
@@ -429,18 +429,13 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 		spDecoObject->GetTransform()->SetRotation(rotation);
 		spDecoObject->GetTransform()->SetSize(size);
 
-		_int numOfMeshData;
+
+		std::wstring meshKey;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
-							 std::to_wstring(i) + L"_numOfMeshData", numOfMeshData);
+							 std::to_wstring(i) + L"_meshKey", meshKey);
 
-		for (_int j = 0; j < numOfMeshData; ++j)
-		{
-			std::wstring meshKey;
-			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
-								 std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
+		spDecoObject->GetMesh()->SetMeshData(meshKey);
 
-			spDecoObject->GetMesh()->AddMeshData(meshKey);
-		}
 
 
 		_int numOfTexSet;
@@ -500,36 +495,28 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 		spMapObject->GetTransform()->SetRotation(rotation);
 		spMapObject->GetTransform()->SetSize(size);
 
-		_int numOfMeshData;
+		std::wstring meshKey;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-			std::to_wstring(i) + L"_numOfMeshData", numOfMeshData);
+							 std::to_wstring(i) + L"_meshKey", meshKey);
 
-		for (_int j = 0; j < numOfMeshData; ++j)
-		{
-			std::wstring meshKey;
-			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-				std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
-
-			spMapObject->GetMesh()->AddMeshData(meshKey);
-		}
+		spMapObject->GetMesh()->SetMeshData(meshKey);
 
 
 		_int numOfTexSet;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-			std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
+							 std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
 
 		for (_int k = 0; k < numOfTexSet; ++k)
 		{
 			_int numOfTex;
-
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-				std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
+								 std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
 
 			for (_int l = 0; l < numOfTex; ++l)
 			{
 				std::wstring textureKey;
 				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-					std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
+									 std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
 
 				spMapObject->GetTexture()->AddTexture(textureKey, k);
 			}
@@ -720,7 +707,7 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 
 	//		if (initTex == true)
 	//		{
-	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()[0]->GetMeshKey())
 	//				spObject->AddComponent<Engine::CTextureC>();
 	//			else
 	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);

@@ -129,18 +129,20 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSkyBox);
 
+	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDebugCOllider);
 	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spDecoObject);
-
+	
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
-
+	
 	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBall);
 	
 	InitUiPrototypes();
 	InitMonsterPrototypes();
-
+	
 	InitValkyriePrototypes();
 	
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
@@ -164,8 +166,7 @@ void CStaticScene::InitUiPrototypes(void)
 	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spScrollViewObject);
 
-	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
-	GetObjectFactory()->AddPrototype(spDebugCOllider);
+	
 }
 
 void CStaticScene::InitMonsterPrototypes(void)
