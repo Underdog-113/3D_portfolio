@@ -178,7 +178,7 @@ _float3 CRootMotion::GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pD
 	return _float3(
 		rootChildCombMat._41,
 		rootChildCombMat._42,
-		rootChildCombMat._43 );
+		rootChildCombMat._43);
 }
 
 _float3 CRootMotion::GetOwnerSizedPos(CObject * pOwner, _float3 pos)

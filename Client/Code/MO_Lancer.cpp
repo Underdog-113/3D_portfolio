@@ -73,6 +73,10 @@ void CMO_Lancer::SetBasicName(void)
 {
 }
 
+void CMO_Lancer::ApplyHitInfo(HitInfo info)
+{
+}
+
 SP(CMO_Lancer) CMO_Lancer::Create(_bool isStatic, Engine::CScene * pScene)
 {
 	SP(CMO_Lancer) spInstance(new CMO_Lancer, Engine::SmartDeleter<CMO_Lancer>);

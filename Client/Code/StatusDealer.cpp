@@ -19,15 +19,22 @@ bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate)
 
 	_float vatk = pSrc->GetCurAtk() + pSrc->GetBuffAtk();
 	_float vcrt = pSrc->GetCurCrt() + pSrc->GetBuffCrt();
-
-	_int chance = rand() % 100;
-	_float crtRate = vcrt > chance ? 2.f : 1.f;
-
-	_float damage = (vatk * dmgRate) * crtRate * (mdef / (mdef * 1000.f));
 	
+	_float pureDamage = vatk * dmgRate;
+
+	_int chance = rand() % 1000;
+	_float randRate = (_float)chance / 1000.f + 0.5f;	// 0.5 ~ 1.5
+	_float crtRate = vcrt / 100.f;
+	_float crtDamage = pureDamage * 2.f * crtRate * randRate;
+
+	_float totalDamage = pureDamage + crtDamage;
+
+	_float decrease = totalDamage * (mdef / (mdef + 1000.f));
+
+	_float finalDamage = totalDamage - decrease;
 	// font
 	
-	mhp -= damage;
+	mhp -= finalDamage;
 
 
 	if (mhp < 0.f)
@@ -47,12 +54,16 @@ bool CStatusDealer::Damage_MtoV(M_Stat * pSrc, V_Stat * pDst, _float dmgRate)
 	_float vdef = pDst->GetCurDef() + pDst->GetBuffDef();
 
 	_float matk = pSrc->GetCurAtk() + pSrc->GetBuffAtk();
+
+	_float totalDamage = matk * dmgRate;
 	
-	_float damage = (matk * dmgRate) * (vdef / (vdef * 1000.f));
+	_float decrease = totalDamage * (vdef / (vdef + 1000.f));
+
+	_float finalDamage = totalDamage - decrease;
 
 	// font
 
-	vhp -= damage;
+	vhp -= finalDamage;
 	
 	if (vhp < 0.f)
 	{

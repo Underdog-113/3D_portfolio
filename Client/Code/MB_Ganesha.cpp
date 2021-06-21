@@ -95,6 +95,10 @@ void CMB_Ganesha::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
+void CMB_Ganesha::ApplyHitInfo(HitInfo info)
+{
+}
+
 SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 {
 	SP(CMB_Ganesha) spInstance(new CMB_Ganesha, Engine::SmartDeleter<CMB_Ganesha>);

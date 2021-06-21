@@ -32,8 +32,9 @@ void CMonsterSliderC::Start(SP(CComponent) spThis)
 	__super::Start(spThis);
 	m_sliderOwner = static_cast<Engine::CSlider*>(GetOwner());
 	m_bWhiteCheck = true;
-	m_speed = 8;
-	m_timer = 2.0f;
+	m_speed = 20;
+	m_timerMax = 0.5f;
+	m_timer = m_timerMax;
 }
 
 void CMonsterSliderC::FixedUpdate(SP(CComponent) spThis)
@@ -47,19 +48,14 @@ void CMonsterSliderC::Update(SP(CComponent) spThis)
 	{
 		if (m_bWhiteCheck)
 		{
-			if(!m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->GetIsEnabled())
-				m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->SetIsEnabled(true);
+			// 여기서 슬레이드를 번쩍하게 빛내줘야한다.
 
 			m_timer -= GET_DT;
 			if (m_timer <= 0)
 			{
-				m_timer = 2.0f;
+				m_timer = m_timerMax;
 				m_bWhiteCheck = false;
-
-				if (m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->GetIsEnabled())
-					m_sliderOwner->GetFill()->GetComponent<CGlitterC>()->SetIsEnabled(false);
 			}
-			
 		}
 		else if (!m_bWhiteCheck)
 		{

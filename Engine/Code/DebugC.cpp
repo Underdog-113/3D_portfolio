@@ -84,7 +84,7 @@ void CDebugC::OnDestroy(void)
 void CDebugC::OnEnable(void)
 {
 	__super::OnEnable();
-	m_spBV->OnEnable();
+	//m_spBV->OnEnable();
 	
 	for (auto& debugCollider : m_vDebugCollider)
 		debugCollider->OnEnable();
@@ -93,7 +93,7 @@ void CDebugC::OnEnable(void)
 void CDebugC::OnDisable(void)
 {
 	__super::OnDisable();
-	m_spBV->OnDisable();
+	//m_spBV->OnDisable();
 
 	for (auto& debugCollider : m_vDebugCollider)
 		debugCollider->OnDisable();

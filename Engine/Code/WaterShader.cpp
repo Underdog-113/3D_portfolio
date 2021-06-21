@@ -59,12 +59,10 @@ void CWaterShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	m_pEffect->SetVector("g_WorldCameraPos", &m_vColor);
 
 	SP(CTextureC) spTexture = spGC->GetTexture();
-	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
-	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
+	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
-
-	size_t _dwMaterials = spGC->GetMesh()->GetMeshDatas().size();
 	
 	m_pEffect->SetVector("g_LightColor", &m_vColor);
 

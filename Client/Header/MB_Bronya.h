@@ -34,6 +34,7 @@ public:
 
 			void SetBasicName(void) override;
 
+			void ApplyHitInfo(HitInfo info) override;
 private:
 	void   EquipWeapon();
 

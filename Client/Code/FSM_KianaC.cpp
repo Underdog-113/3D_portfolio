@@ -10,7 +10,7 @@
 #include "FSMDefine_Kiana.h"
 #include "StageControlTower.h"
 #include "Kiana.h"
-
+#include "AttackBall.h"
 
 CFSM_KianaC::CFSM_KianaC()
 {
@@ -34,9 +34,9 @@ SP(Engine::CComponent) CFSM_KianaC::MakeClone(Engine::CObject * pObject)
 
 void CFSM_KianaC::Awake(void)
 {
-	__super::Awake();	
+	__super::Awake();
 }
-
+ 
 void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
 	m_pKiana = static_cast<CKiana*>(m_pOwner);
@@ -45,7 +45,7 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
 	SetStartState(L"Appear");
@@ -130,7 +130,7 @@ void CFSM_KianaC::RegisterAllState()
 
 	CreateState(CFSM_KianaC, pState, RunStopRight)
 		AddState(pState, Name_RunStopRight);
-	
+
 	CreateState(CFSM_KianaC, pState, StandBy)
 		AddState(pState, Name_StandBy);
 
@@ -151,7 +151,7 @@ void CFSM_KianaC::CreateEffect(std::wstring name)
 		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
@@ -215,6 +215,7 @@ bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float 
 		if (m_pDM->GetAniTimeline() > coolTime)
 		{
 			ChangeState(switchStateName);
+			m_pStageControlTower->FindTarget();
 			return true;
 		}
 	}
@@ -430,7 +431,7 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 	if (Engine::IMKEY_DOWN(StageKey_QTE))
 	{
 		ChangeState(Name_Appear);
-		m_appearOption = QTEAppear;
+		m_appearOption = QTE;
 		return;
 	}
 
@@ -480,7 +481,7 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 		case CFSM_KianaC::None:
 			ChangeState(Name_StandBy);
 			break;
-		case CFSM_KianaC::QTEAppear:
+		case CFSM_KianaC::QTE:
 			ChangeState(Name_Attack_QTE);
 			break;
 		default:
@@ -508,6 +509,7 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_checkUltraRing = false;
 	m_checkUltraAtk = false;
 	m_checkEffect = false;
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -543,6 +545,8 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 void CFSM_KianaC::Attack_1_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_2_Init(void)
@@ -555,7 +559,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_2);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-	m_checkEffect = false;
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -586,6 +590,8 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 void CFSM_KianaC::Attack_2_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_3_Init(void)
@@ -598,7 +604,7 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-	m_checkEffect = false;
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -627,6 +633,8 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 void CFSM_KianaC::Attack_3_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_3_Branch_Init(void)
@@ -668,7 +676,7 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-	m_checkEffect = false;
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -699,6 +707,8 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 void CFSM_KianaC::Attack_4_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_4_Branch_Init(void)
@@ -738,7 +748,7 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	m_checkUltraAtk = false;
-	m_checkEffect = false;
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
@@ -768,6 +778,8 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 void CFSM_KianaC::Attack_5_End(void)
 {
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_QTE_Init(void)
@@ -839,7 +851,7 @@ void CFSM_KianaC::EvadeBackward_End(void)
 
 void CFSM_KianaC::EvadeForward_Init(void)
 {
-}	
+}
 
 void CFSM_KianaC::EvadeForward_Enter(void)
 {

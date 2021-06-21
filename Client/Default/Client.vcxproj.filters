@@ -325,8 +325,14 @@
     <Filter Include="02.Objects\04.Item">
       <UniqueIdentifier>{777bc2af-ce9b-40d5-9e08-d9195d7c1e71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Dummy">
+      <UniqueIdentifier>{85adc61e-9908-4314-bfcd-a1d48a3e9a3e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Component\01.Glitter">
       <UniqueIdentifier>{6891e3f5-01dc-4912-8c4e-2965684858ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\10.SkillActivation">
+      <UniqueIdentifier>{32868f76-d66f-4f14-8407-2aee397cb560}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern">
       <UniqueIdentifier>{06991eb5-65ed-4f0a-b41f-435b67fd2e2f}</UniqueIdentifier>
@@ -702,6 +708,15 @@
     </ClInclude>
     <ClInclude Include="..\Header\Include_Valkyrie.h">
       <Filter>01.Scene\01.StaticScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Theresa.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MO_Dummy.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillActivationC.h">
+      <Filter>03.Component\00.UI\10.SkillActivation</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SpiderBornPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\00.Born</Filter>

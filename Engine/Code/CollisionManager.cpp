@@ -44,7 +44,7 @@ void CCollisionManager::Update(void)
 			//하나의 충돌에 대해서 양쪽 CollisionComponent가 CollisionInfo를 쏠 거야.
 			//ANS: Layer1이 Layer2를 체크해야할 레이어로 놓는다면
 			//Layer2는 Layer1을 체크해야할 레이어에 놓지 않으면 됨.
-			if (spCollider->GetOwner() != nullptr && spCollider->GetOwner()->GetIsEnabled())
+			if (spCollider->GetOwner()->GetOwner() != nullptr && spCollider->GetOwner()->GetIsEnabled())
 			{
 				CheckCollision(spCollider);
 			}

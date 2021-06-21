@@ -34,11 +34,11 @@ public:
 				void				UpdateFrame				(void);
 				void				ChangeAniSet			(_uint index, 
 															 _bool fixTillEnd = false,
-															 _double smoothTime = 0.25,
+															 _double smoothTime = 0.,
 															 _float changeWeight = 0.9f);
 				void				ChangeAniSet			(std::string name,
 															 _bool fixTillEnd = false,
-															 _double smoothTime = 0.25,
+															 _double smoothTime = 0.2,
 															 _float changeWeight = 0.9f);
 				void				PlayAnimation			(void);
 				void				ResetAnimation			(void);
@@ -63,6 +63,7 @@ private:
 	GETTOR		(D3DXFRAME*,			m_pRootFrame,			nullptr,	RootFrame)
 	GETTOR		(CHierarchyLoader*,		m_pHierarchyLoader,		nullptr,	HierarchyLoader)
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)
+	
 	GETTOR_SETTOR(_bool,				m_playAnimation,		true,		PlayAnimation)
 };
 END

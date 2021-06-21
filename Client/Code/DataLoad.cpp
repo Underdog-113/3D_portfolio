@@ -89,6 +89,11 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
 		image->GetTexture()->AddTexture(textureKey, 0);
 
+
+		_float4 textureColor;
+		dataStore->GetValue(false, dataID, objectKey, key + L"textureColor", textureColor);
+		image->GetTexture()->SetColor(textureColor);
+
 		std::wstring message;
 		_float2 fontPosition;
 		_int fontSize;
@@ -103,7 +108,11 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
 			dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 			fontPosition.y *= -1;
-			image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+
+			if(name == L"R")
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+			else
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 		}
 
 		_int animCount;
@@ -120,7 +129,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			{
 				dataStore->GetValue(false, dataID, objectKey, key + L"AnimName" + std::to_wstring(j), textureKey);
 
-				image->GetTexture()->AddTexture(textureKey, 0);
+				image->GetTexture()->AddTexture(textureKey, j);
 			}
 		}
 
@@ -156,10 +165,6 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"direction", dir);
 		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
 
-		_int imageType;
-		dataStore->GetValue(false, dataID, objectKey, key + L"imageType", imageType);
-		slider->SetDirection((Engine::CSlider::ESliderDirection)dir);
-
 		_float sort;
 		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
 
@@ -192,6 +197,10 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		}
 		imageObj[0]->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 		imageObj[1]->SetParent(slider.get());
+
+		_int imageType;
+		dataStore->GetValue(false, dataID, objectKey, key + L"imageType", imageType);
+
 		if (imageType == 0)
 		{
 			imageObj[1]->GetComponent<Engine::CShaderC>()->
@@ -240,7 +249,8 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		button->GetTransform()->SetSize(size);
 
 		_float sort;
-		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);		button->GetTransform()->SetPositionZ(sort);
+		dataStore->GetValue(false, dataID, objectKey, key + L"sortLayer", sort);
+		button->GetTransform()->SetPositionZ(sort);
 
 		std::wstring textureKey;
 		dataStore->GetValue(false, dataID, objectKey, key + L"textureKey", textureKey);
@@ -419,18 +429,13 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 		spDecoObject->GetTransform()->SetRotation(rotation);
 		spDecoObject->GetTransform()->SetSize(size);
 
-		_int numOfMeshData;
+
+		std::wstring meshKey;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
-							 std::to_wstring(i) + L"_numOfMeshData", numOfMeshData);
+							 std::to_wstring(i) + L"_meshKey", meshKey);
 
-		for (_int j = 0; j < numOfMeshData; ++j)
-		{
-			std::wstring meshKey;
-			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
-								 std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
+		spDecoObject->GetMesh()->SetMeshData(meshKey);
 
-			spDecoObject->GetMesh()->AddMeshData(meshKey);
-		}
 
 
 		_int numOfTexSet;
@@ -490,36 +495,28 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 		spMapObject->GetTransform()->SetRotation(rotation);
 		spMapObject->GetTransform()->SetSize(size);
 
-		_int numOfMeshData;
+		std::wstring meshKey;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-			std::to_wstring(i) + L"_numOfMeshData", numOfMeshData);
+							 std::to_wstring(i) + L"_meshKey", meshKey);
 
-		for (_int j = 0; j < numOfMeshData; ++j)
-		{
-			std::wstring meshKey;
-			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-				std::to_wstring(i) + L"_meshKey" + std::to_wstring(j), meshKey);
-
-			spMapObject->GetMesh()->AddMeshData(meshKey);
-		}
+		spMapObject->GetMesh()->SetMeshData(meshKey);
 
 
 		_int numOfTexSet;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-			std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
+							 std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
 
 		for (_int k = 0; k < numOfTexSet; ++k)
 		{
 			_int numOfTex;
-
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-				std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
+								 std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
 
 			for (_int l = 0; l < numOfTex; ++l)
 			{
 				std::wstring textureKey;
 				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
-					std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
+									 std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
 
 				spMapObject->GetTexture()->AddTexture(textureKey, k);
 			}
@@ -710,7 +707,7 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 
 	//		if (initTex == true)
 	//		{
-	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()[0]->GetMeshKey())
 	//				spObject->AddComponent<Engine::CTextureC>();
 	//			else
 	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
@@ -862,19 +859,24 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::PartySettingScene, &CButtonFunction());
 	}
+	else if (0 == function.compare(L"BattleEndScene")) //  전투 종료
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction());
+
+	}
 	else if (0 == function.compare(L"Sally")) // 1스테이지
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOn")) // 1스테이지
+	else if (0 == function.compare(L"ObjectOn")) // 오브젝트 키기
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOff")) // 1스테이지
+	else if (0 == function.compare(L"ObjectOff")) // 오프젝트 끄기
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOff, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleRenunciation")) // 1스테이지
+	else if (0 == function.compare(L"BattleRenunciation")) // 전투종료 함수
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleRenunciation, &CButtonFunction());
 	}

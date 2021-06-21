@@ -73,6 +73,10 @@ void CMO_Scout::SetBasicName(void)
 {
 }
 
+void CMO_Scout::ApplyHitInfo(HitInfo info)
+{
+}
+
 SP(CMO_Scout) CMO_Scout::Create(_bool isStatic, Engine::CScene * pScene)
 {
 	SP(CMO_Scout) spInstance(new CMO_Scout, Engine::SmartDeleter<CMO_Scout>);

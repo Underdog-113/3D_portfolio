@@ -39,6 +39,7 @@ protected:
 
 	GETTOR			(_int,			m_meshType,			UNDEFINED,		MeshType) //Static or Dynamic
 	GETTOR_SETTOR	(_int,			m_meshIndex,		UNDEFINED,		MeshIndex)
+	GETTOR_SETTOR	(_ulong,		m_subsetCount,		0,				SubsetCount)
 	GETTOR			(_float3,		m_meshSize,			ZERO_VECTOR,	MeshSize)
 
 	GETTOR			(_float3,		m_minVertex,		MAX_VECTOR,		MinVertex)
