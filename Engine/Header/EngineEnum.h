@@ -69,7 +69,8 @@ namespace Engine
 		CelShader				= 5,
 		SkyBoxShader			= 6,
 		WireShader				= 7,
-		NumOfShaderID			= 8
+		MeshAlphaTestShader		= 8,
+		NumOfShaderID			= 9
 	};
 
 #pragma endregion
