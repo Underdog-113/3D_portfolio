@@ -36,7 +36,7 @@ void CFSM_KianaC::Awake(void)
 {
 	__super::Awake();
 }
-
+ 
 void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
 	m_pKiana = static_cast<CKiana*>(m_pOwner);

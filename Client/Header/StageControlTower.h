@@ -74,6 +74,7 @@ public:
 public:		/* Battle */
 	void FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info);
+	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info);
 
 
 private:

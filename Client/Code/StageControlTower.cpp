@@ -145,6 +145,8 @@ bool CStageControlTower::CheckMoveOrder()
 
 	if (!m_moveFlag)
 		return false;
+	if (m_rotateByTarget)
+		return true;
 
 	m_moveOrderDir = ZERO_VECTOR;
 
@@ -241,6 +243,8 @@ void CStageControlTower::ReserveMoveOrder()
 
 	if (!m_reserveMoveFlag)
 		return;
+	if (m_rotateByTarget)
+		return;
 
 	m_reserveMoveOrderDir = ZERO_VECTOR;
 
@@ -313,6 +317,7 @@ void CStageControlTower::RotateCurrentActor()
 			m_pCurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
 
 		m_rotateLock = true;
+		m_rotateByTarget = false;
 	}
 
 }
@@ -364,6 +369,9 @@ void CStageControlTower::StageUIControl()
 {
 	// target hp
 
+	if (m_spCurTarget)
+		CBattleUiManager::GetInstance()->TargetUI(m_spCurTarget->GetTransform()->GetPosition(), 3.f);
+
 	// wp skill cool
 	// ult cool
 
@@ -390,7 +398,7 @@ void CStageControlTower::FindTarget()
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
-	SP(Engine::CObject) spTarget = nullptr;
+	SP(Engine::CObject) spTarget = m_spCurTarget;
 	_float minDistance = 10000.f;
 
 	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
@@ -414,21 +422,16 @@ void CStageControlTower::FindTarget()
 
 	// 3. 같으면 냅두고, 다르면 방향 다시 재설정
 
-	if (m_spCurTarget != spTarget)
-	{
-		m_spCurTarget = spTarget;
+	m_spCurTarget = spTarget;
 
-		m_rotateByTarget = true;
-		_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
-		targetPos.y = 0.f;
-		m_moveOrderDir = targetPos - valkyriePos;
-		D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
-	}
-	else
-	{
+	m_rotateLock = false;
+	m_rotateByTarget = true;
+	_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
+	targetPos.y = 0.f;
+	m_moveOrderDir = targetPos - valkyriePos;
+	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
-	}
-
+	m_pLinker->OnTargetMarker();	// ui interaction
 }
 
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
@@ -443,7 +446,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	
 	if (isDead)
 	{
-		// 근데 시발 할게 너무많네?
+		// two many things
 	}
 	else
 	{
@@ -458,6 +461,29 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	// 5. 플레이어 sp 획득
 
 	// 6. 보스면 스턴 게이지 깎아주세요
+
+
+}
+
+void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info)
+{
+	CMonster* pM = static_cast<CMonster*>(pMonster);
+	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
+
+	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
+	bool isDead = m_pDealer->Damage_MtoV( pM->GetStat(), pV->GetStat(), info.GetDamageRate());
+
+	// 2. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+
+	if (isDead)
+	{
+	}
+	else
+	{
+		pM->ApplyHitInfo(info);
+	}
+
+	// 3. 히트 이펙트
 
 
 }

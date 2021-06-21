@@ -416,5 +416,5 @@ _float2 CCamera::WorldToScreenPoint(_float3 worldPos)
 	//프로젝션 행렬까지 올라간 좌표를 뷰포트로 이동
 	D3DXVec3TransformCoord(&pos, &pos, &viewportMat);
 
-	return _float2(pos.x, pos.y);
+	return _float2(pos.x - halfWincx, -pos.y + halfWincy);
 }

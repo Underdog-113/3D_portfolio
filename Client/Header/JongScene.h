@@ -41,6 +41,7 @@ private:
 	Engine::CObject* m_pivot;
 
 	SP(Engine::CObject) m_spDummy;
+	SP(Engine::CObject) m_spDummy2;
 
 	Engine::CObject* m_obj;
 	Engine::CObject* m_obj1;

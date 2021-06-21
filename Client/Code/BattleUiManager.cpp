@@ -318,8 +318,10 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 
 void CBattleUiManager::TargetUI(_float3 pos, _float value)
 {
-	_float3 pos2D = Engine::GET_MAIN_CAM->WorldToScreenPoint(pos);
+	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
+	_float3 pos2D = cam->WorldToScreenPoint(pos);
 	
+	pos2D.z = 0.f;
 
 	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
 
