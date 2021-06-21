@@ -1,7 +1,5 @@
-#include "EngineStdafx.h"
-#include "..\Header\EffectShader.h"
-
-USING(Engine)
+#include "stdafx.h"
+#include "EffectShader.h"
 
 CEffectShader::CEffectShader()
 {
@@ -12,7 +10,7 @@ CEffectShader::~CEffectShader()
 {
 }
 
-CShader * CEffectShader::Create()
+Engine::CShader * CEffectShader::Create()
 {
 	CEffectShader* pInstance = new CEffectShader;
 	pInstance->Awake();
@@ -32,15 +30,15 @@ void CEffectShader::Awake()
 	m_fUVSpeed = 0.25f;
 }
 
-void CEffectShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	m_fTime += GET_DT;
 
 	_mat worldMat, viewMat, projMat;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
+	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
 	m_pEffect->SetMatrix("g_WorldMat", &worldMat);
 	m_pEffect->SetMatrix("g_ViewMat", &viewMat);
@@ -63,7 +61,7 @@ void CEffectShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	m_vColor = D3DXVECTOR4(0, 0, 0, 1);
 	m_pEffect->SetVector("g_WorldCameraPos", &m_vColor);
 
-	SP(CTextureC) spTexture = spGC->GetTexture();
+	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;

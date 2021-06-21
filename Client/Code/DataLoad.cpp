@@ -209,7 +209,7 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 		else if(imageType == 1)
 		{
 			imageObj[1]->GetComponent<Engine::CShaderC>()->
-				AddShader((_int)Engine::EShaderID::CircularGauge);
+				AddShader((_int)EShaderID::CircularGaugeShader);
 		}
 
 		_float value, maxValue, minValue;
@@ -377,7 +377,7 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 		std::wstring name;
 		dataStore->GetValue(false, dataID, objectKey, key + L"textName", name);
 
-		SP(Engine::CObject) text = pScene->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::UI, name);
+		SP(Engine::CObject) text = pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, name);
 		
 		_float sort;
 		dataStore->GetValue(false, dataID, objectKey, key + L"Sort", sort);

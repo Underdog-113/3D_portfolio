@@ -1,7 +1,5 @@
-#include "EngineStdafx.h"
+#include "stdafx.h"
 #include "..\Header\AttackRangeShader.h"
-
-USING(Engine)
 
 CAttackRangeShader::CAttackRangeShader()
 {
@@ -11,7 +9,7 @@ CAttackRangeShader::~CAttackRangeShader()
 {
 }
 
-CShader * CAttackRangeShader::Create()
+Engine::CShader * CAttackRangeShader::Create()
 {
 	CAttackRangeShader* pInstance = new CAttackRangeShader;
 	pInstance->Awake();
@@ -32,15 +30,15 @@ void CAttackRangeShader::Awake()
 	m_fUVSpeed = 0.25f;
 }
 
-void CAttackRangeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CAttackRangeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	m_fTime += GET_DT;
 
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
+	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
 	m_pEffect->SetMatrix("gWorld", &worldMat);
 	m_pEffect->SetMatrix("gView", &viewMat);
@@ -61,7 +59,7 @@ void CAttackRangeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
-	SP(CTextureC) spTexture = spGC->GetTexture();
+	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 

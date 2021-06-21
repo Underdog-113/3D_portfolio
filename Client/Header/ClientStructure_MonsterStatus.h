@@ -23,7 +23,7 @@ typedef struct _Monster_Stage_Status
 		type = pStat->GetType();
 	}
 	GETTOR_SETTOR(std::wstring, name, L"The king of Guro", name)
-	GETTOR_SETTOR(BaseStat::Character_Type, type, BaseStat::Human, Type)
+	GETTOR_SETTOR(BaseStat::Character_Type, type, BaseStat::Creature, Type)
 
 	GETTOR_SETTOR(_float, curHp, 0.f, CurHp)
 	GETTOR_SETTOR(_float, maxHp, 0.f, MaxHp)

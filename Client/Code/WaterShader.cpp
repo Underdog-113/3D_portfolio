@@ -1,13 +1,11 @@
-#include "EngineStdafx.h"
+#include "stdafx.h"
 #include "..\Header\WaterShader.h"
-
-USING(Engine)
 
 CWaterShader::CWaterShader()
 {
 }
 
-CShader * CWaterShader::Create()
+Engine::CShader * CWaterShader::Create()
 {
 	CWaterShader* pInstance = new CWaterShader;
 	pInstance->Awake();
@@ -27,15 +25,15 @@ void CWaterShader::Awake()
 	m_fUVSpeed = 0.25f;
 }
 
-void CWaterShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CWaterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	m_fTime += GET_DT;
 
 	_mat worldMat, viewMat, projMat;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
+	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
 	m_pEffect->SetMatrix("g_WorldMat", &worldMat);
 	m_pEffect->SetMatrix("g_ViewMat", &viewMat);
@@ -58,7 +56,7 @@ void CWaterShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	m_vColor = D3DXVECTOR4(0, 0, 0, 1);
 	m_pEffect->SetVector("g_WorldCameraPos", &m_vColor);
 
-	SP(CTextureC) spTexture = spGC->GetTexture();
+	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 

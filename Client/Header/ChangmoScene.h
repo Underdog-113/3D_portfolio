@@ -27,6 +27,12 @@ public:
 
 public:
 					void				InitPrototypes		(void) override;
+					
+private:
+	SP(Engine::CObject) m_spKiana;
+	SP(Engine::CObject) m_spDummy;
+
+	CStageControlTower* m_pControlTower = nullptr;
 };
 
 #endif
