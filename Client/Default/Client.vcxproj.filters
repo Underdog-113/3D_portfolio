@@ -304,6 +304,9 @@
     <Filter Include="03.Component\00.UI\10.SkillActivation">
       <UniqueIdentifier>{32868f76-d66f-4f14-8407-2aee397cb560}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\11.TargetPos">
+      <UniqueIdentifier>{5239baf1-b0c9-4da0-b9dd-4922cb76757b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -606,6 +609,9 @@
     <ClInclude Include="SkillActivationC.h">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\TargetPositionC.h">
+      <Filter>03.Component\00.UI\11.TargetPos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -859,6 +865,9 @@
     </ClCompile>
     <ClCompile Include="SkillActivationC.cpp">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TargetPositionC.cpp">
+      <Filter>03.Component\00.UI\11.TargetPos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

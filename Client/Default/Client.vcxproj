@@ -262,6 +262,7 @@
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
+    <ClInclude Include="..\Header\TargetPositionC.h" />
     <ClInclude Include="..\Header\TrapObject.h" />
     <ClInclude Include="..\Header\UILinker.h" />
     <ClInclude Include="..\Header\StaticScene.h" />
@@ -350,6 +351,7 @@
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\StageSelectionScene.cpp" />
+    <ClCompile Include="..\Code\TargetPositionC.cpp" />
     <ClCompile Include="..\Code\TrapObject.cpp" />
     <ClCompile Include="..\Code\UILinker.cpp" />
     <ClCompile Include="..\Code\StaticScene.cpp" />

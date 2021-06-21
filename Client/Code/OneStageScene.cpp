@@ -123,7 +123,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
-	    CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
+	    //CBattleUiManager::GetInstance()->TargetUI(_float3(0,0,0), 5.0f);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))

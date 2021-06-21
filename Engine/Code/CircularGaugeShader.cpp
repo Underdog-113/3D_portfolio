@@ -37,10 +37,13 @@ void CCircularGaugeShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	_float minValue = m_spSlider->GetMinValue();
 	_float maxValue = m_spSlider->GetMaxValue() - minValue;
-	_float value = (m_spSlider->GetValue() - minValue) - (maxValue * 0.5f);
+	_float value = m_spSlider->GetValue() - minValue;
 
 	// 비율구하기
 	_float ratio = (value / maxValue);
+	
+	m_pEffect->SetFloat("g_maxValue", m_spSlider->GetCircularMaxValue());
+	m_pEffect->SetFloat("g_minValue", m_spSlider->GetCircularMinValue());
 
 	m_pEffect->SetFloat("g_ratio", ratio);
 	m_pEffect->SetInt("g_direction", (_int)m_spSlider->GetDirection());

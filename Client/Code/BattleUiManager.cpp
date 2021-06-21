@@ -9,6 +9,7 @@
 #include "MonsterSliderC.h"
 #include "GlitterC.h"
 #include "SkillActivationC.h"
+#include "TargetPositionC.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -115,8 +116,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_1").get()));
 	m_target[0]->AddComponent<CRotationUiC>()->SetSpeed(1);
+	m_target[0]->AddComponent<CTargetPositionC>();
 	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_2").get()));
 	m_target[1]->AddComponent<CRotationUiC>()->SetSpeed(-1);
+	m_target[1]->AddComponent<CTargetPositionC>();
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// GiveUpCanvas
 	m_giveUpCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"GiveUpCanvas").get());
@@ -316,15 +319,12 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
 }
 
-void CBattleUiManager::TargetUI(_float3 pos, _float value)
+void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
-	_float3 pos2D = Engine::GET_MAIN_CAM->WorldToScreenPoint(pos);
-	
-
 	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
 
-	m_target[0]->GetTransform()->SetPosition(pos2D);
-	m_target[1]->GetTransform()->SetPosition(pos2D);
+	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
+	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 
 	m_monsterTargetCanvas->SetIsEnabled(true);
 }
