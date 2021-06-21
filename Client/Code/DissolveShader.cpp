@@ -1,7 +1,6 @@
-#include "EngineStdafx.h"
+#include "stdafx.h"
 #include "..\Header\DissolveShader.h"
 
-USING(Engine)
 
 CDissolveShader::CDissolveShader()
 {
@@ -12,7 +11,7 @@ CDissolveShader::~CDissolveShader()
 {
 }
 
-CShader * CDissolveShader::Create()
+Engine::CShader * CDissolveShader::Create()
 {
 	CDissolveShader* pInstance = new CDissolveShader;
 	pInstance->Awake();
@@ -30,7 +29,7 @@ void CDissolveShader::Awake()
 	__super::Awake();
 }
 
-void CDissolveShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	// Add Alpha variables to objects that use this shader.
 	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
@@ -38,8 +37,8 @@ void CDissolveShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
-	viewMat = GET_MAIN_CAM->GetViewMatrix();
-	projMat = GET_MAIN_CAM->GetProjMatrix();
+	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
+	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
 	m_pEffect->SetMatrix("gWorld", &worldMat);
 	m_pEffect->SetMatrix("gView", &viewMat);
@@ -60,7 +59,7 @@ void CDissolveShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
-	SP(CTextureC) spTexture = spGC->GetTexture();
+	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 

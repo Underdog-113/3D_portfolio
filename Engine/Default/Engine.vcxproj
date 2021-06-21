@@ -21,16 +21,12 @@
   <ItemGroup>
     <ClInclude Include="..\Header\AabbCollider.h" />
     <ClInclude Include="..\Header\AniCtrl.h" />
-    <ClInclude Include="..\Header\AttackRangeShader.h" />
     <ClInclude Include="..\Header\BoundingVolume.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
     <ClInclude Include="..\Header\Canvas.h" />
-    <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\CelShader.h" />
-    <ClInclude Include="..\Header\CircularGaugeShader.h" />
     <ClInclude Include="..\Header\CubeTexC.h" />
-    <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DebugCollider.h" />
     <ClInclude Include="..\Header\Collider.h" />
     <ClInclude Include="..\Header\CollisionC.h" />
@@ -43,9 +39,7 @@
     <ClInclude Include="..\Header\DeferredBlendShader.h" />
     <ClInclude Include="..\Header\DeferredLightShader.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
-    <ClInclude Include="..\Header\DissolveShader.h" />
     <ClInclude Include="..\Header\DynamicMeshData.h" />
-    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\EmptyObject.h" />
     <ClInclude Include="..\Header\Engine.h" />
     <ClInclude Include="..\Header\EngineComponents.h" />
@@ -61,7 +55,6 @@
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
-    <ClInclude Include="..\Header\MeshTrailShader.h" />
     <ClInclude Include="..\Header\Particle.h" />
     <ClInclude Include="..\Header\ParticleSystemC.h" />
     <ClInclude Include="..\Header\PSC_Manager.h" />
@@ -80,8 +73,6 @@
     <ClInclude Include="..\Header\SkyBoxShader.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
-    <ClInclude Include="..\Header\SoftEffectShader.h" />
-    <ClInclude Include="..\Header\SpawnEffectShader.h" />
     <ClInclude Include="..\Header\State.h" />
     <ClInclude Include="..\Header\StateMachine.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
@@ -116,23 +107,18 @@
     <ClInclude Include="..\Header\TextureStore.h" />
     <ClInclude Include="..\Header\TransformC.h" />
     <ClInclude Include="..\Header\VIBufferC.h" />
-    <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WireShader.h" />
     <ClInclude Include="..\Header\WndApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AabbCollider.cpp" />
     <ClCompile Include="..\code\AniCtrl.cpp" />
-    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
     <ClCompile Include="..\Code\Canvas.cpp" />
-    <ClCompile Include="..\Code\CatPawShader.cpp" />
     <ClCompile Include="..\Code\CelShader.cpp" />
-    <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
     <ClCompile Include="..\Code\CubeTexC.cpp" />
-    <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DebugCollider.cpp" />
     <ClCompile Include="..\Code\Collider.cpp" />
     <ClCompile Include="..\Code\CollisionC.cpp" />
@@ -145,9 +131,7 @@
     <ClCompile Include="..\Code\DeferredBlendShader.cpp" />
     <ClCompile Include="..\Code\DeferredLightShader.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
-    <ClCompile Include="..\Code\DissolveShader.cpp" />
     <ClCompile Include="..\Code\DynamicMeshData.cpp" />
-    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\EmptyObject.cpp" />
     <ClCompile Include="..\Code\Engine.cpp" />
     <ClCompile Include="..\Code\FadeInOutC.cpp" />
@@ -160,7 +144,6 @@
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
-    <ClCompile Include="..\Code\MeshTrailShader.cpp" />
     <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\ParticleSystemC.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp" />
@@ -179,8 +162,6 @@
     <ClCompile Include="..\Code\SkyBoxShader.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
-    <ClCompile Include="..\Code\SoftEffectShader.cpp" />
-    <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
     <ClCompile Include="..\Code\StateMachine.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />
@@ -213,22 +194,11 @@
     <ClCompile Include="..\Code\TextureStore.cpp" />
     <ClCompile Include="..\Code\TransformC.cpp" />
     <ClCompile Include="..\Code\VIBufferC.cpp" />
-    <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WireShader.cpp" />
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DeferredBlendShader.fx">
@@ -237,19 +207,8 @@
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
@@ -258,15 +217,6 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx" />
-    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WireShader.fx" />

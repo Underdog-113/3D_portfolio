@@ -4,6 +4,7 @@
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "ImageObject.h"
+#include "TextObject.h"
 
 #include "DebugCollider.h"
 #include "Camera.h"
@@ -151,6 +152,9 @@ void CStaticScene::InitPrototypes(void)
 
 void CStaticScene::InitUiPrototypes(void)
 {
+	SP(Engine::CTextObject) spTextObject(Engine::CTextObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTextObject);
+
 	SP(Engine::CCanvas) spCanvasViewObject(Engine::CCanvas::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCanvasViewObject);
 
