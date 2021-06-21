@@ -432,7 +432,8 @@ void CStageControlTower::FindTarget()
 	if (m_mode == WithoutUI)
 		return;
 
-	m_pLinker->OnTargetMarker();	// ui interaction
+	// ui interaction
+	//m_pLinker->OnTargetMarker();	
 	m_pLinker->MonsterInfoSet();
 }
 

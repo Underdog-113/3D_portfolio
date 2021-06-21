@@ -22,7 +22,9 @@ public:
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
+	_int a = 10;
 private:
-	GETTOR_SETTOR(Engine::CObject*, m_target, nullptr, Target);
+	GETTOR_SETTOR(Engine::CObject*, m_target, nullptr, Target)
+	
 };
 #endif

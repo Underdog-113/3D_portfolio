@@ -33,6 +33,7 @@ private:
 					void TheresaTest();
 
 					void CollisionDummy();
+					void SickleTest();
 
 					void SetupStageUI();
 private:
@@ -42,6 +43,7 @@ private:
 
 	SP(Engine::CObject) m_spDummy;
 	SP(Engine::CObject) m_spDummy2;
+	SP(Engine::CObject) m_spSickle;
 
 	Engine::CObject* m_obj;
 	Engine::CObject* m_obj1;
