@@ -112,11 +112,12 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//MonsterTargetCanvas
 	m_monsterTargetCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterTargetCanvas").get());
-	m_monsterTargetCanvas->AddComponent<CAlphaLifeTimeC>();
+	m_monsterTargetCanvas->AddComponent<CLifeObjectC>();
 
 	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_1").get()));
 	m_target[0]->AddComponent<CRotationUiC>()->SetSpeed(1);
 	m_target[0]->AddComponent<CTargetPositionC>();
+	m_target[0]->AddComponent<CSkillActivationC>();
 	m_target.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterTargetCanvas_TargetUi_2").get()));
 	m_target[1]->AddComponent<CRotationUiC>()->SetSpeed(-1);
 	m_target[1]->AddComponent<CTargetPositionC>();
@@ -321,7 +322,7 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 
 void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
-	m_monsterTargetCanvas->GetComponent<CAlphaLifeTimeC>()->SetLifeTime(value);
+	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
 
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
 	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);

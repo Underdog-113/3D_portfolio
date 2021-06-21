@@ -37,8 +37,11 @@ void CTargetPositionC::FixedUpdate(SP(CComponent) spThis)
 
 void CTargetPositionC::Update(SP(CComponent) spThis)
 {
-	_float3 pos2D = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
-	GetOwner()->GetTransform()->SetPosition(pos2D);
+	if (m_target != nullptr)
+	{
+		_float3 pos2D = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
+		GetOwner()->GetTransform()->SetPosition(pos2D);
+	}
 }
 
 void CTargetPositionC::LateUpdate(SP(CComponent) spThis)
