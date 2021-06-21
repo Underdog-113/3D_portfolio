@@ -369,9 +369,6 @@ void CStageControlTower::StageUIControl()
 {
 	// target hp
 
-	if (m_spCurTarget)
-		CBattleUiManager::GetInstance()->TargetUI(m_spCurTarget->GetTransform()->GetPosition(), 3.f);
-
 	// wp skill cool
 	// ult cool
 

@@ -73,9 +73,9 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	if (g_direction == 2)
 	{
-		float a = atan2(d.x, d.y) * (180.0f / 3.14); // 2개의 점사이의 절대각도
-		float ratioMax = -180 * g_ratio + (360 - g_maxValue);
-		float ratioMin = -180 * 1.0f	+ (360 - g_minValue);
+		float a = atan2(d.x, d.y) * (180.0f / 3.14); // 2개의 점사이의 절대각도를 구하고 라디안값을 디그리로 변경
+		float ratioMax = -180 * g_ratio + (360 - g_maxValue); // 그려야할 픽셀의 최대범위
+		float ratioMin = -180 * 1.0f	+ (360 - g_minValue); // 그려야할 픽셀의 최소범위
 		if (a < ratioMax || a > ratioMin)
 		{
 			Out.vColor.a = 0;
