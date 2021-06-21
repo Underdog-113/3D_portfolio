@@ -14,7 +14,7 @@ public:
 	virtual void CoolTime(_float& curTime, _float maxTime, _bool& readyType); // ÇöÀç ÄğÅ¸ÀÓ, ¸Æ½º ÄğÅ¸ÀÓ, ÄğÅ¸ÀÓ Å¸ÀÔ
 	virtual _float GetCost() { return m_cost; }
 
-private:
+protected:
 	_float m_cost = 0;
 };
 #endif

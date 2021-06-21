@@ -26,7 +26,7 @@ SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
-	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spStateMachine = spClone->GetComponent<CFSM_GaneshaC>();
 
 	return spClone;
 }

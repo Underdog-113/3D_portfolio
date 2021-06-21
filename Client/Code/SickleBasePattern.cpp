@@ -67,7 +67,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 공격 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동 상태라면 대기로 변경
+		// 내가 이동 상태라면 공격
 		if (Name_Sickle_Walk_Forward == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Sickle_Attack_1);

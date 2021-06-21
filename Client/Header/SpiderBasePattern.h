@@ -1,19 +1,19 @@
-#ifndef SICKLEBASEPATTERN_H
-#define SICKLEBASEPATTERN_H
+#ifndef SPIDERBASEPATTERN_H
+#define SPIDERBASEPATTERN_H
 
 #include "ATBPattern.h"
 
-class CSickleBasePattern : public CATBPattern
+class CSpiderBasePattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
 
 private:
-	explicit CSickleBasePattern();
-	virtual ~CSickleBasePattern();
+	explicit CSpiderBasePattern();
+	virtual ~CSpiderBasePattern();
 
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
-	static SP(CSickleBasePattern) Create();
+	static SP(CSpiderBasePattern) Create();
 
 private:
 	_float m_atkTime = 0.f; // °ø°Ý ÄðÅ¸ÀÓ

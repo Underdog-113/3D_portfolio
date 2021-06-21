@@ -1,9 +1,14 @@
 #include "stdafx.h"
 #include "SickleBornPattern.h"
 
-//#include "FSM_SickleC.h"
-//#include "FSMDefine_Sickle.h"
+#include "FSM_SickleC.h"
+#include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
+
+#include "StageControlTower.h"
+#include "Valkyrie.h"
+#include "DynamicMeshData.h"
+#include "PatternMachineC.h"
 
 CSickleBornPattern::CSickleBornPattern()
 {

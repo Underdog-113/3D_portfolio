@@ -14,10 +14,6 @@ private:
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
 	static SP(CSickleDiePattern) Create();
-
-private:
-	_float m_cost = 0.f;
-
 };
 
 #endif

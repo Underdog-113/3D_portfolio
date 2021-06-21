@@ -1,9 +1,14 @@
 #include "stdafx.h"
 #include "SickleHitPattern.h"
 
-//#include "FSM_SickleC.h"
-//#include "FSMDefine_Sickle.h"
+#include "FSM_SickleC.h"
+#include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
+
+#include "StageControlTower.h"
+#include "Valkyrie.h"
+#include "DynamicMeshData.h"
+#include "PatternMachineC.h"
 
 CSickleHitPattern::CSickleHitPattern()
 {
@@ -15,7 +20,7 @@ CSickleHitPattern::~CSickleHitPattern()
 
 void CSickleHitPattern::Pattern(Engine::CObject* pOwner)
 {
-	std::cout << "hit" << std::endl;
+	
 }
 
 SP(CSickleHitPattern) CSickleHitPattern::Create()

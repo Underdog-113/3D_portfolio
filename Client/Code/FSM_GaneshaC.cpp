@@ -30,7 +30,7 @@ void CFSM_GaneshaC::Start(SP(CComponent) spThis)
 
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
 
-	SetStartState(Name_Ganesha_StandBy);
+	SetStartState(Name_Ganesha_Born);
 	m_curState->DoEnter();
 }
 

@@ -54,19 +54,6 @@ private:
 	_uint m_curPatternIdx = 0;
 
 	SP(CFSM_SickleC) m_fsm;
-	
-	/* for. sickle */
-	_float m_sickleAtkTime = 0.f; // 공격 쿨타임
-	_float m_sickleWalkTime = 0.f; // 이동 쿨타임
-	_bool m_sickleAtkReady = true; // true : 공격 가능, false : 공격 불가
-	_bool m_sickleWalkReady = true; // ture : 이동 가능, false : 이동 불가
-	_bool m_sicklePattern0 = true;
-	_bool m_sicklePattern1 = false;
-	_bool m_sicklePattern2 = false;
-	_bool m_sicklePattern3 = false;
-	_float m_sickleAtkDis = 3.f/*3.f*/; // 낫 공격 거리
-	_float m_sickleAtkCool = 2.f; // 공격 쿨타임
-	_float m_sickleWalkCool = 0.3f; // 공격 끝나고 이동 시간
 
 	/* for. Ganesha */
 	_float m_ganeshaAtkTime = 0.f; // 공격 쿨타임

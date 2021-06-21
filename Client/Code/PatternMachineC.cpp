@@ -43,19 +43,22 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (m_curCost > m_maxCost)
 		m_curCost = m_maxCost;
 
-	if (m_vIndices.empty())
+	if (4 != m_vPatterns.size() && m_vIndices.empty())
 	{
 		SortingPatterns();
 		return;
 	}
 
-	//std::cout << "Cost : " << m_curCost << std::endl;
+	if (Engine::IMKEY_DOWN(KEY_Q))
+	{
+		m_onHit = true;
+	}
 
 	// born 실행 (1번만)
-	//m_vPatterns[Pattern_Type::Born]->Pattern();
-
-	// die 실행
-	//GetDeleteThis();
+	PlayBornPattern();
+	
+	// die 실행 (호출 실행)
+	//PlayDiePattern();
 
 	// select 실행
 	PlaySelectPattern();
@@ -119,13 +122,24 @@ void CPatternMachineC::AddPattern(SP(CATBPattern) pPattern)
 
 void CPatternMachineC::PlayBasePattern()
 {
-	if (!m_select)
+	if (true == m_onHit && true == m_onBase)
+	{
+		m_onBase = false;
+	}
+	else if (false == m_onHit &&  false == m_onSelect)
+	{
+		m_onBase = true;
 		m_vPatterns[Pattern_Type::Base]->Pattern(m_pOwner);
+	}
 }
 
 void CPatternMachineC::PlayBornPattern()
 {
-	m_vPatterns[Pattern_Type::Born]->Pattern(m_pOwner);
+	if (false == m_onBorn)
+	{
+		m_vPatterns[Pattern_Type::Born]->Pattern(m_pOwner);
+		return;
+	}
 }
 
 void CPatternMachineC::PlayDiePattern()
@@ -135,7 +149,7 @@ void CPatternMachineC::PlayDiePattern()
 
 void CPatternMachineC::PlayHitPattern()
 {
-	if (m_hit)
+	if (true == m_onHit)
 		m_vPatterns[Pattern_Type::Hit]->Pattern(m_pOwner);
 }
 
@@ -143,6 +157,9 @@ void CPatternMachineC::SortingPatterns()
 {
 	size_t size = m_vPatterns.size();
 	_int index;
+
+	if (4 == size)
+		return;
 
 	for (_int i = 0; i < size; ++i)
 	{
@@ -153,23 +170,34 @@ void CPatternMachineC::SortingPatterns()
 
 void CPatternMachineC::PlaySelectPattern()
 {
+	// base패턴 중이거나 select가 비었다면
+	if (true == m_onBase || m_vIndices.empty())
+		return;
+
 	_int index = m_vIndices.back();
 	_float cost = m_vPatterns[index]->GetCost();
 
-	// cost가 충분한지 확인
-	if (m_curCost < cost)
+	// select pattern이 진행중이라면
+	if (true == m_onSelect)
 	{
-		m_select = false;
+		if (true == m_onHit)
+			m_onSelect = false;
+		else
+			m_vPatterns[index]->Pattern(m_pOwner);
+
 		return;
 	}
+	// select pattern이 끝났다면
+	else if (false == m_onSelect)
+		m_vIndices.pop_back();
 
-	std::cout << "bCost : " << m_curCost << std::endl;
+	// cost가 충분하지 않다면
+	if (m_curCost < cost)
+		return;
 
-	m_select = true;
+	m_onSelect = true;
 	m_curCost -= cost;
-	m_vIndices.pop_back();
-	m_vPatterns[index]->Pattern(m_pOwner);
 
-	std::cout << "aCost : " << m_curCost << std::endl;
-	std::cout << "=============================" << std::endl;
+	//std::cout << "After Cost : " << m_curCost << std::endl;
+	//std::cout << "=============================" << std::endl;
 }
