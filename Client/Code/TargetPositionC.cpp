@@ -39,7 +39,9 @@ void CTargetPositionC::Update(SP(CComponent) spThis)
 {
 	if (m_target != nullptr)
 	{
-		_float3 pos2D = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
+		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
+		_float3 pos2D = cam->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
+		pos2D.z = 0.f;
 		GetOwner()->GetTransform()->SetPosition(pos2D);
 	}
 }
