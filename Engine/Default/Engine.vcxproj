@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\Header\AabbCollider.h" />
     <ClInclude Include="..\Header\AniCtrl.h" />
+    <ClInclude Include="..\Header\AttackRangeShader.h" />
     <ClInclude Include="..\Header\BoundingVolume.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
@@ -122,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\AabbCollider.cpp" />
     <ClCompile Include="..\code\AniCtrl.cpp" />
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
@@ -216,6 +218,7 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>

@@ -69,21 +69,20 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	float2 d = In.vTexUV - float2(0.5, 0.5); // 중앙을 0,0으로 만든다음에 자신의 픽셀과 거리를 구한다.
 
-
 	if (g_direction == 2)
 	{
 		float a = atan2(d.x, d.y); // 2개의 점사이의 절대각도
-		float ratio = (-3.14f *2) * g_ratio;
-		if (a < ratio)
+		float ratioMax = (-3.14f * 2.0) * g_ratio;
+		if (a < ratioMax)
 		{
 			Out.vColor.a = 0;
 		}
 	}
 	else if (g_direction == 3)
 	{
-		float a = atan2(d.x, -d.y); // 2개의 점사이의 절대각도
-		float ratio = (-3.14f * 2) * g_ratio;
-		if (a < ratio)
+		float a = atan2(-d.x, d.y); // 2개의 점사이의 절대각도
+		float ratioMax = (-3.14f * 2.0) * g_ratio;
+		if (a < ratioMax)
 		{
 			Out.vColor.a = 0;
 		}

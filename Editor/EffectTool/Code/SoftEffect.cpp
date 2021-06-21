@@ -105,7 +105,7 @@ void CSoftEffect::LateUpdate(void)
 	_mat matWorld, matView, matBill;
 
 	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
-	
+
 	D3DXMatrixIdentity(&matBill);
 
 	memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
@@ -119,13 +119,12 @@ void CSoftEffect::LateUpdate(void)
 	_float3 vPos = m_spGraphics->GetTransform()->GetPosition();
 	_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
 
-	
+
 	//Compute_ViewZ(&vPos);
 
 	/////////////////////////
 
 }
-
 
 void CSoftEffect::PreRender(LPD3DXEFFECT pEffect)
 {

@@ -262,12 +262,24 @@
     <Image Include="res\Speed.bmp">
       <Filter>97.Bitmap</Filter>
     </Image>
-    <Image Include="res\AnimSpeed.bmp" />
-    <Image Include="res\Tiling.bmp" />
-    <Image Include="res\maxIndexX.bmp" />
-    <Image Include="res\maxIndexY.bmp" />
-    <Image Include="res\TilingX.bmp" />
-    <Image Include="res\TilingY.bmp" />
+    <Image Include="res\TilingY.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\AnimSpeed.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\maxIndexX.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\maxIndexY.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\Tiling.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
+    <Image Include="res\TilingX.bmp">
+      <Filter>97.Bitmap</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">
