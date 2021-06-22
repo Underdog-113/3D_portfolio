@@ -552,7 +552,7 @@ void CInspector::OnBnClickedAlphaMask()
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
 	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
@@ -572,19 +572,31 @@ void CInspector::Add_SoftEffect(CString ObjectName)
 
 void CInspector::Add_Texture(CString TextureKey)
 {
-	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	if (m_iSelectObjectNum > -1)
 	{
-		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
-		spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0,0);
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+		if (spObject != nullptr)
+		{
+			SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
+
+			spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 0);
+		}
 	}
 }
 
 void CInspector::Add_AlphaMask(CString TextureKey)
 {
-	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	if (m_iSelectObjectNum > -1)
 	{
-		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
-		spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 1);
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+		if (spObject != nullptr)
+		{
+			SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
+
+			spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 1);
+		}
 	}
 }
 
@@ -908,10 +920,6 @@ void CInspector::ActionUpdate()
 		{
 			if (!m_isPlayAnim)
 			{
-				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
-
 				m_isPlayAnim = true;
 			}
 			m_fStartTime += GET_DT;
@@ -922,7 +930,7 @@ void CInspector::ActionUpdate()
 			{				
 				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+				spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
 				m_fStartTime = 0.f;
 				m_isPlayAnim = false;
 				m_iRepeatCnt++;
@@ -944,7 +952,7 @@ void CInspector::ActionUpdate()
 		{
 			spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 			spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-			spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+			spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
 		}
 		m_fStartTime = 0.f;
 		m_iRepeatCnt = 0;
@@ -1005,9 +1013,11 @@ void CInspector::OnBnClickedAnimPlay()
 {
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
-	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = PLAY;
-	pSoftEffect->SetAnimisPlay(ACTION_STATE::PLAY);
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+	
+	if(pSoftEffect != nullptr)
+		pSoftEffect->SetAnimisPlay(ACTION_STATE::PLAY);
 }
 
 void CInspector::OnBnClickedAnimPause()
@@ -1017,9 +1027,11 @@ void CInspector::OnBnClickedAnimPause()
 	if (spObject == nullptr)
 		return;
 
-	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = PAUSE;
-	pSoftEffect->SetAnimisPlay(ACTION_STATE::PAUSE);
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+
+	if(pSoftEffect != nullptr)
+		pSoftEffect->SetAnimisPlay(ACTION_STATE::PAUSE);
 
 }
 
@@ -1030,11 +1042,14 @@ void CInspector::OnBnClickedAnimStop()
 	if (spObject == nullptr)
 		return;
 
-	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = STOP;
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 
-	pSoftEffect->SetmaxXIndex(0);
-	pSoftEffect->SetmaxYIndex(0);
+	if (pSoftEffect != nullptr)
+	{
+		pSoftEffect->SetTilingX(0);
+		pSoftEffect->SetTilingY(0);
+	}
 }
 
 void CInspector::OnBnClickedSave()

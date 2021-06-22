@@ -34,7 +34,7 @@
 
 #include "AttackTrail_Client.h"
 #include "MeshEffect_Client.h"
-
+#include "AttackRange_Circle.h"
 
 #pragma endregion
 
@@ -144,6 +144,9 @@ void CStaticScene::InitPrototypes(void)
 	
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Trail);
+
+	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 }
 
 void CStaticScene::InitUiPrototypes(void)

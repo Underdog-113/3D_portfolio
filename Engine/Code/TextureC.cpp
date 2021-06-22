@@ -125,7 +125,7 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int meshIndex)
 			m_vTexData.resize(1);
 	}
 	
-
+	++m_numOfTex;
 	m_vTexData[meshIndex].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
 }
 

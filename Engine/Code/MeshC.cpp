@@ -80,6 +80,8 @@ void CMeshC::Start(SP(CComponent) spThis)
 			SP(CTextureC) spOwnerTexC = m_pOwner->GetComponent<CTextureC>();
 			for (_int j = 0; j < m_vMeshDatas[i]->GetTexList().size(); ++j)
 				spOwnerTexC->AddTexture(RemoveExtension(m_vMeshDatas[i]->GetTexList()[j]), i);
+
+			spOwnerTexC->SetNumOfTex(_int(m_vMeshDatas[i]->GetTexList().size()));
 		}
 	}
 

@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AttackBall.h" />
+    <ClInclude Include="..\Header\AttackRange_Circle.h" />
     <ClInclude Include="..\Header\AttackTrail_Client.h" />
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
@@ -284,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AttackBall.cpp" />
+    <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />

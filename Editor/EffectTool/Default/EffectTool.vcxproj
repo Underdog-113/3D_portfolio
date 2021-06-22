@@ -203,6 +203,7 @@
     <ClInclude Include="..\Header\MainEditor.h" />
     <ClInclude Include="..\Header\MeshEffect.h" />
     <ClInclude Include="..\Header\SoftEffect.h" />
+    <ClInclude Include="AttackRange_Editor.h" />
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="..\Code\MainEditor.cpp" />
     <ClCompile Include="..\Code\MeshEffect.cpp" />
     <ClCompile Include="..\Code\SoftEffect.cpp" />
+    <ClCompile Include="AttackRange_Editor.cpp" />
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />

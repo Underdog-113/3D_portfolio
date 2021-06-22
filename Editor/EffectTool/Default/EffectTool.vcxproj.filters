@@ -40,6 +40,9 @@
     <Filter Include="05.Object\00.EffectMesh\00.AttackTrail">
       <UniqueIdentifier>{06eeb9f6-9d93-4452-920a-7488f55cb385}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object\00.EffectMesh\01.AttackRange">
+      <UniqueIdentifier>{2ef5ee64-e241-4e28-be03-c768d48b27e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -93,6 +96,9 @@
     <ClInclude Include="..\Header\SoftEffect.h">
       <Filter>05.Object\01.SoftEffect</Filter>
     </ClInclude>
+    <ClInclude Include="AttackRange_Editor.h">
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\SoftEffect.cpp">
       <Filter>05.Object\01.SoftEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackRange_Editor.cpp">
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

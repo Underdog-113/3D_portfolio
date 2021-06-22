@@ -28,7 +28,7 @@ public:
 
 protected:
 	_float m_fTrailAlpha = 0.f;
-
+	
 private:
 	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
