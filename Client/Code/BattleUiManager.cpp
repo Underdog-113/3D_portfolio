@@ -328,7 +328,6 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
-	//m_target[0]->GetComponent<CTargetPositionC>()->m_target = object;
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
 	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 
@@ -337,6 +336,8 @@ void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 
 void CBattleUiManager::MonsterHpDown(_float value)
 {
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(m_monsterStateCanvas->GetComponent<CLifeObjectC>()->GetLifeTime() + 1);
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(object->GetValue() - value);
@@ -345,6 +346,8 @@ void CBattleUiManager::MonsterHpDown(_float value)
 
 void CBattleUiManager::MonsterHpUp(_float value)
 {
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(m_monsterStateCanvas->GetComponent<CLifeObjectC>()->GetLifeTime() + 1);
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(object->GetValue() + value);
