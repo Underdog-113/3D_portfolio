@@ -151,19 +151,18 @@ void CWooScene::Start(void)
 
 		// Monster
 		{
-			/* Sickle */
-			SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-			spSickleClone->GetTransform()->SetPosition(0, 10, 2);
-			spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-			//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
-			m_spSickle = spSickleClone;
+			///* Sickle */
+			//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+			//spSickleClone->GetTransform()->SetPosition(0, 10, 2);
+			//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+			////spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
+			//m_spSickle = spSickleClone;
 
-			///* Spider */
-			//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-			//spSpiderClone->GetTransform()->SetPosition(-3, 0, -7);
-			//spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
-			//m_spSpider = spSpiderClone;
+			/* Spider */
+			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+			spSpiderClone->GetTransform()->SetPosition(-3, 0, -7);
+			spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+			m_spSpider = spSpiderClone;
 
 			///* Ganesha */
 			//SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
