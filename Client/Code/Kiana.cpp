@@ -109,14 +109,7 @@ void CKiana::Update(void)
 	__super::Update();
 	
 	UpdatePivotMatrices();
-
-	m_timer += GET_DT;
-	if (m_timer > 0.2f)
-	{
-		CDamageObjectPool::GetInstance()->AddDamage(this, _float3(36, 51, 0), 36, 80.0f, 1, 123456789, L"Blue");
-		m_timer = 0.f;
-	}
-
+	
 
 	if (m_ultraMode)
 		UseUltraCost();

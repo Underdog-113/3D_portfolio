@@ -83,7 +83,6 @@ void COneStageScene::Start(void)
 	spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
 	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 	m_spSpider2 = spSpiderClone;
-	m_pControlTower->Start();
 }
 
 void COneStageScene::FixedUpdate(void)
