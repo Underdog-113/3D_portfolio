@@ -84,6 +84,8 @@ void COneStageScene::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
 	{
 	    CBattleUiManager::GetInstance()->HitCount(8);
+		CBattleUiManager::GetInstance()->HitCount(8);
+		CBattleUiManager::GetInstance()->HitCount(8);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
