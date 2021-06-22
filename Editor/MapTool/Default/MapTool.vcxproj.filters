@@ -37,6 +37,9 @@
     <Filter Include="01.View\01.MenuView">
       <UniqueIdentifier>{53ade857-1fe0-43fe-8420-b66a1ffa707f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Objects\00.DecoObject">
+      <UniqueIdentifier>{9f3e9e23-998c-48dd-adc8-5e81d5504609}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -90,6 +93,9 @@
     <ClInclude Include="..\Header\EditorFunction.h">
       <Filter>98.Include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DecoObject.h">
+      <Filter>03.Objects\00.DecoObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapTool.cpp">
@@ -115,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ToolMenuView.cpp">
       <Filter>01.View\01.MenuView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DecoObject.cpp">
+      <Filter>03.Objects\00.DecoObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

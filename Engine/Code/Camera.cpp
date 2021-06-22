@@ -60,6 +60,11 @@ void CCamera::Start(void)
 
 	m_pCamRayCollider = static_cast<Engine::CRayCollider*>(m_spCollision->GetColliders()[0].get());
 	m_pFrustum = CFrustum::Create(this);
+
+	if (m_mode == ECameraMode::TPS)
+		m_spCollision->SetIsEnabled(true);
+	else
+		m_spCollision->SetIsEnabled(false);
 }
 
 void CCamera::FixedUpdate(void)
@@ -416,5 +421,5 @@ _float2 CCamera::WorldToScreenPoint(_float3 worldPos)
 	//프로젝션 행렬까지 올라간 좌표를 뷰포트로 이동
 	D3DXVec3TransformCoord(&pos, &pos, &viewportMat);
 
-	return _float2(pos.x, pos.y);
+	return _float2(pos.x - halfWincx, -pos.y + halfWincy);
 }

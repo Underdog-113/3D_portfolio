@@ -40,12 +40,15 @@ private:
 private:
 	static _uint m_s_uniqueID;
 
-	GETTOR_SETTOR(_float, m_value, 1, Value)
-	GETTOR_SETTOR(_float, m_MaxValue, 1, MaxValue)
-		GETTOR_SETTOR(_float, m_MinValue, 1, MinValue)
-	GETTOR_SETTOR(SP(CObject), m_spBackGround, nullptr, BackGround)
-	GETTOR_SETTOR(SP(CObject), m_spFill, nullptr, Fill)
-	GETTOR_SETTOR(ESliderDirection, m_direction, ESliderDirection::LeftToRight, Direction)
+	GETTOR_SETTOR(_float, m_value, 1, Value);
+	GETTOR_SETTOR(_float, m_MaxValue, 1, MaxValue);
+	GETTOR_SETTOR(_float, m_MinValue, 1, MinValue);
+	GETTOR_SETTOR(SP(CObject), m_spBackGround, nullptr, BackGround);
+	GETTOR_SETTOR(SP(CObject), m_spFill, nullptr, Fill);
+	GETTOR_SETTOR(ESliderDirection, m_direction, ESliderDirection::LeftToRight, Direction);
+
+	GETTOR_SETTOR(_float, m_circularMaxValue, 0, CircularMaxValue);
+	GETTOR_SETTOR(_float, m_circularMinValue, 0, CircularMinValue);
 };
 END
 #endif

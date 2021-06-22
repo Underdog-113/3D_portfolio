@@ -31,7 +31,7 @@ void CYongScene::Free(void)
 void CYongScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	
+
 	InitPrototypes();
 
 	/*m_pController = CStageControlTower::GetInstance();
@@ -63,16 +63,16 @@ void CYongScene::Start(void)
 		//{
 
 		//	SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-		//	
+		//
 		//	spCube->AddComponent<Engine::CMeshC>()->AddMeshData(L"Sphere");
 		//	spCube->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 		//	spCube->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		//	
+		//
 		//	spCube->AddComponent<Engine::CCollisionC>()->
 		//		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 1.4f));
 		//	spCube->GetComponent<Engine::CCollisionC>()->
 		//		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::WallRay, ZERO_VECTOR, FORWARD_VECTOR, 1.1f));
-		//	
+		//
 		//	spCube->AddComponent<Engine::CDebugC>();
 		//	spCube->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		//	spCube->AddComponent<Engine::CRigidBodyC>();
@@ -89,7 +89,7 @@ void CYongScene::Start(void)
 		//pKiana->SetEffect_Attack3(pKiana->CreateEffect(L"Kiana_Attack_2"));
 		//pKiana->SetEffect_Attack4(pKiana->CreateEffect(L"Kiana_Attack_3"));
 		//pKiana->SetEffect_Attack5(pKiana->CreateEffect(L"Kiana_Attack_3"));
-	}		
+	}
 }
 
 void CYongScene::FixedUpdate(void)
@@ -113,19 +113,19 @@ void CYongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
-	//m_pController->DestroyInstance(); 
+	//m_pController->DestroyInstance();
 }
 
 void CYongScene::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
 void CYongScene::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
 void CYongScene::InitPrototypes(void)

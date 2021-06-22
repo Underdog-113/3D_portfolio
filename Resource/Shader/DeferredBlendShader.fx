@@ -32,7 +32,6 @@ struct PS_OUT
 	vector		vColor : COLOR0;
 };
 
-// �ȼ� ���̴�
 
 PS_OUT		PS_MAIN(PS_IN In)
 {
@@ -56,7 +55,7 @@ technique Default_Device
 		destblend = invsrcalpha;
 
 		zwriteenable = false;
-		vertexshader = NULL;	// ������ �Լ� ����
+		vertexshader = NULL;
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}
 

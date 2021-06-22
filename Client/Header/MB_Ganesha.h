@@ -7,7 +7,7 @@ class CMB_Ganesha : public CMonster
 
 private:
 	CMB_Ganesha();
-	virtual ~CMB_Ganesha() = default;
+	~CMB_Ganesha();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -34,7 +34,13 @@ public:
 
 	virtual void SetBasicName(void) override;
 
+	virtual void ApplyHitInfo(HitInfo info) override;
 public:
-	static		SP(CMB_Ganesha)			Create(_bool isStatic, Engine::CScene* pScene);
+	static SP(CMB_Ganesha) Create(_bool isStatic, Engine::CScene* pScene);
+	void ChaseTarget(_float3 targetPos);
+
+private:
+	static _uint m_s_uniqueID;
+
 };
 

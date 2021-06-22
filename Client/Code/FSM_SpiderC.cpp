@@ -5,7 +5,6 @@
 
 #include "AniCtrl.h"
 #include "FSMDefine_Spider.h"
-#include "StageControlTower.h"
 
 CFSM_SpiderC::CFSM_SpiderC()
 {
@@ -29,10 +28,9 @@ void CFSM_SpiderC::Start(SP(CComponent) spThis)
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]);
-	m_pStageControlTower = CStageControlTower::GetInstance();
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
-	SetStartState(Name_Born);
+	SetStartState(Name_StandBy);
 	m_curState->DoEnter();
 }
 
@@ -124,22 +122,6 @@ void CFSM_SpiderC::FixRootMotionOffset(_uint index)
 	m_pOwner->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
 }
 
-_bool CFSM_SpiderC::CheckAction_Idle(_float coolTime /*= Cool_End*/)
-{
-	if (m_pDM->GetAniTimeline() > coolTime)
-	{
-		ChangeState(Name_StandBy);
-		return true;
-	}
-
-	return false;
-}
-
-_bool CFSM_SpiderC::CheckAction_Run()
-{
-	return _bool();
-}
-
 void CFSM_SpiderC::ATTACK_1_Init(void)
 {
 }
@@ -191,7 +173,6 @@ void CFSM_SpiderC::ATTACK_2_BS_Enter(void)
 
 void CFSM_SpiderC::ATTACK_2_BS_Update(float deltaTime)
 {
-
 }
 
 void CFSM_SpiderC::ATTACK_2_BS_End(void)
@@ -305,11 +286,6 @@ void CFSM_SpiderC::BORN_Enter(void)
 
 void CFSM_SpiderC::BORN_Update(float deltaTime)
 {
-	if (true == m_pDM->GetAniCtrl()->IsItEnd())
-	{
-		ChangeState(Name_StandBy);
-		return;
-	}
 }
 
 void CFSM_SpiderC::BORN_End(void)
@@ -480,11 +456,6 @@ void CFSM_SpiderC::KnockDown_Enter(void)
 
 void CFSM_SpiderC::KnockDown_Update(float deltaTime)
 {
-	if (Engine::IMKEY_DOWN(KEY_TAB))
-	{
-		ChangeState(Name_StandBy);
-		return;
-	}
 }
 
 void CFSM_SpiderC::KnockDown_End(void)
@@ -502,32 +473,6 @@ void CFSM_SpiderC::StandBy_Enter(void)
 
 void CFSM_SpiderC::StandBy_Update(float deltaTime)
 {
-	//if (m_accTime >= 3.f)
-	//{
-	//	ChangeState(Name_Walk_Forward);
-	//	m_accTime = 0.f;
-	//	return;
-	//}
-	//else
-	//	m_accTime += deltaTime;
-
-	//if (Engine::IMKEY_DOWN(KEY_UP))
-	//{
-	//	ChangeState(Name_Walk_Forward);
-	//	return;
-	//}
-
-	//if (Engine::IMKEY_DOWN(KEY_LEFT))
-	//{
-	//	ChangeState(Name_Walk_Left);
-	//	return;
-	//}
-
-	//if (Engine::IMKEY_DOWN(KEY_RIGHT))
-	//{
-	//	ChangeState(Name_Walk_Right);
-	//	return;
-	//}
 }
 
 void CFSM_SpiderC::StandBy_End(void)
@@ -596,14 +541,6 @@ void CFSM_SpiderC::Walk_Forward_Enter(void)
 
 void CFSM_SpiderC::Walk_Forward_Update(float deltaTime)
 {
-	if (3.f <= m_accTime)
-	{
-		ChangeState(Name_Attack_1);
-		m_accTime = 0.f;
-		return;
-	}
-	else
-		m_accTime += deltaTime;
 }
 
 void CFSM_SpiderC::Walk_Forward_End(void)

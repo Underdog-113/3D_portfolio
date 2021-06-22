@@ -12,7 +12,8 @@ enum class EComponentID
 {
 	Default				= 0 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
 	Text				= 1 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	NumOfComponentID	= 2 + (_uint)Engine::EComponentID::NumOfEngineComponentID
+	Pattern				= 2 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
+	NumOfComponentID	= 3 + (_uint)Engine::EComponentID::NumOfEngineComponentID
 };
 
 
@@ -52,9 +53,35 @@ enum class ELayerID
 	NumOfLayerID	= 6 + (_int)Engine::ELayerID::NumOfEngineLayerID
 };
 
+enum class EShaderID
+{
+	WaterShader			= 0 + (_int)Engine::EShaderID::NumOfShaderID,
+	EffectShader		= 1 + (_int)Engine::EShaderID::NumOfShaderID,
+	DamageFontShader	= 2 + (_int)Engine::EShaderID::NumOfShaderID,
+	CatPawShader		= 3 + (_int)Engine::EShaderID::NumOfShaderID,
+	CircularGaugeShader	= 4 + (_int)Engine::EShaderID::NumOfShaderID,
+	MeshTrailShader		= 5 + (_int)Engine::EShaderID::NumOfShaderID,
+	DissolveShader		= 6 + (_int)Engine::EShaderID::NumOfShaderID,
+	SpawnEffectShader	= 7 + (_int)Engine::EShaderID::NumOfShaderID,
+	SoftEffectShader	= 8 + (_int)Engine::EShaderID::NumOfShaderID,
+	AttackRangeShader	= 9 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 10 + (_int)Engine::EShaderID::NumOfShaderID
+};
+
 enum class ELoadingID
 {
 	StaticResource,
 	BossSceneResource
 };
 #endif // CLIENTENUM_H
+
+
+// Floor		    : 3
+// Wall			    : 4
+// FloorRay		    : 5
+// WallRay		    : 6
+// PlayerHitBox	    : 7
+// PlayerAttack	    : 8
+// EnemyHitBox	    : 9
+// EnemyAttack	    : 10
+// NumOfColliderID  : 11

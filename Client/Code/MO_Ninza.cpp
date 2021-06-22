@@ -73,6 +73,10 @@ void CMO_Ninza::SetBasicName(void)
 {
 }
 
+void CMO_Ninza::ApplyHitInfo(HitInfo info)
+{
+}
+
 SP(CMO_Ninza) CMO_Ninza::Create(_bool isStatic, Engine::CScene * pScene)
 {
 	SP(CMO_Ninza) spInstance(new CMO_Ninza, Engine::SmartDeleter<CMO_Ninza>);

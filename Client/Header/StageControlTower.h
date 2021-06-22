@@ -53,6 +53,9 @@ public:
 public:
 	void AddSquadMember(SP(Engine::CObject) pValkyrie);
 
+public:
+
+
 private:	/* Actor Move */
 	void MoveControl();
 	bool CheckMoveOrder();
@@ -65,10 +68,14 @@ private:	/* Change Actor */
 
 public:
 	void SetInputLock_ByAni(bool value);
-
-
+	
 	void StageUIControl();
 	
+public:		/* Battle */
+	void FindTarget();
+	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info);
+	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info);
+
 
 private:
 	typedef std::vector<SP(Engine::CObject)> _Squad;
@@ -86,7 +93,7 @@ private:
 private:	/* Stage Info? */
 	GETTOR_SETTOR	(_uint,					m_hitCount,			0,				HitCount)
 	GETTOR_SETTOR	(_float,				m_chainLimitTime,	3.f,			ChainLimitTime)
-	GETTOR_SETTOR	(SP(Engine::CObject),	m_pCurTarget,		nullptr,		CurrentTarget)
+	GETTOR_SETTOR	(SP(Engine::CObject),	m_spCurTarget,		nullptr,		CurrentTarget)
 
 
 private:
@@ -103,6 +110,7 @@ private:
 	_float3						m_reserveMoveOrderDir = ZERO_VECTOR;
 
 	bool						m_rotateLock = false;
+	bool						m_rotateByTarget = false;
 
 	CreateMode					m_mode;
 

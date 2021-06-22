@@ -66,21 +66,13 @@ namespace Engine
 		DeferredBlendShader		= 2,
 		DeferredLightShader		= 3,
 		SliderShader			= 4,
-		WaterShader				= 5,
-		EffectShader			= 6,
-		DamageFont				= 7,
-		CatPawShader			= 8,
-		CircularGauge			= 9,
-		CelShader				= 10,
-		SkyBoxShader			= 11,
-		MeshTrailShader			= 12,
-		DissolveShader			= 13,
-		SpawnEffectShader		= 14,
-		SoftEffectShader		= 15,
-		WireShader				= 16,
-		AttackRangeShader		= 17,
-		NumOfShaderID			= 18
+		CelShader				= 5,
+		SkyBoxShader			= 6,
+		WireShader				= 7,
+		MeshAlphaTestShader		= 8,
+		NumOfShaderID			= 9
 	};
+
 #pragma endregion
 
 #pragma region PhysicsEnum

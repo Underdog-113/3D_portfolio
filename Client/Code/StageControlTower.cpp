@@ -2,8 +2,11 @@
 #include "StageControlTower.h"
 
 #include "InputManager.h"
+#include "Layer.h"
 
 #include "Valkyrie.h"
+#include "Monster.h"
+
 #include "UILinker.h"
 #include "StatusDealer.h"
 
@@ -142,6 +145,8 @@ bool CStageControlTower::CheckMoveOrder()
 
 	if (!m_moveFlag)
 		return false;
+	if (m_rotateByTarget)
+		return true;
 
 	m_moveOrderDir = ZERO_VECTOR;
 
@@ -238,6 +243,8 @@ void CStageControlTower::ReserveMoveOrder()
 
 	if (!m_reserveMoveFlag)
 		return;
+	if (m_rotateByTarget)
+		return;
 
 	m_reserveMoveOrderDir = ZERO_VECTOR;
 
@@ -310,6 +317,7 @@ void CStageControlTower::RotateCurrentActor()
 			m_pCurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
 
 		m_rotateLock = true;
+		m_rotateByTarget = false;
 	}
 
 }
@@ -318,21 +326,42 @@ void CStageControlTower::SetInputLock_ByAni(bool lock)
 {
 	m_inputLock_ByAni = lock;
 	
-	if (!lock)
+	if (lock)
 	{
-		m_prevMoveFlag = m_moveFlag;
-		m_moveFlag = m_reserveMoveFlag;
-
-
-		m_moveOrderDir = m_reserveMoveOrderDir;
-		if (m_prevMoveFlag != m_moveFlag)
-			m_rotateLock = false;
-
-		m_prevMoveFlag = m_moveFlag;
+		// start attack
+		if (m_moveFlag)
+		{
+			//move
+			m_reserveMoveFlag = m_moveFlag;
+			m_prevMoveFlag = m_moveFlag;
+		}
+		else
+		{
+			//stop
+			m_reserveMoveFlag = m_prevMoveFlag;
+			m_prevMoveFlag = 0;
+		}
 	}
 	else
 	{
-		m_reserveMoveFlag = m_moveFlag;
+		if (m_reserveMoveFlag)
+		{
+			if (m_prevMoveFlag != m_reserveMoveFlag)
+			{
+				// move
+				m_rotateLock = false;
+
+				m_moveFlag = m_reserveMoveFlag;
+				m_moveOrderDir = m_reserveMoveOrderDir;
+			}
+		}
+		else
+		{
+			// stop
+			m_rotateLock = true;
+			m_moveFlag = 0;
+			m_prevMoveFlag = 0;
+		}
 	}
 }
 
@@ -360,6 +389,111 @@ void CStageControlTower::StageUIControl()
 
 }
 
-// 1. 새로운 애니 시작할 때 방향 고정
-// 2. 회전 끝나면 회전 고정
-// 3. 새 키 들어오는지 확인해야함
+void CStageControlTower::FindTarget()
+{
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
+	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
+
+	// 1. 우선 플레이어와의 거리를 재고 가까운순
+	SP(Engine::CObject) spTarget = m_spCurTarget;
+	_float minDistance = 10000.f;
+
+	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
+	valkyriePos.y = 0.f;
+	
+	for (auto& iter : monsterList)
+	{
+		_float3 monsterPos = iter->GetTransform()->GetPosition();
+		monsterPos.y = 0.f;
+
+		_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
+		if (distance < minDistance)
+		{
+			minDistance = distance;
+			spTarget = iter;
+		}
+	}
+
+	// 2. 가까운 정도가 비슷할 경우, 플레이어 앞에 있는 녀석으로
+
+
+	// 3. 같으면 냅두고, 다르면 방향 다시 재설정
+
+	m_spCurTarget = spTarget;
+
+	m_rotateLock = false;
+	m_rotateByTarget = true;
+	_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
+	targetPos.y = 0.f;
+	m_moveOrderDir = targetPos - valkyriePos;
+	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+
+
+	if (m_mode == WithoutUI)
+		return;
+
+	m_pLinker->OnTargetMarker();	// ui interaction
+	m_pLinker->MonsterInfoSet();
+}
+
+void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
+{
+	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
+	CMonster* pM = static_cast<CMonster*>(pMonster);
+
+	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
+	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate());
+
+	// 2. 슬라이더 조정
+
+	// 3. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+	
+	if (isDead)
+	{
+		// two many things
+	}
+	else
+	{
+		pM->ApplyHitInfo(info);
+	}	
+
+	// 4. 콤보수?
+
+	if (m_mode != WithoutUI)
+		m_pLinker->Hit_Up();
+	
+	// 5. 플레이어 sp 획득
+
+	// 6. 보스면 스턴 게이지 깎아주세요
+
+	// 7. 이펙트
+
+	// 8. 사운드
+
+}
+
+void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info)
+{
+	CMonster* pM = static_cast<CMonster*>(pMonster);
+	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
+
+	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
+	bool isDead = m_pDealer->Damage_MtoV( pM->GetStat(), pV->GetStat(), info.GetDamageRate());
+
+	// 2. 슬라이더 조정
+	m_pLinker->PlayerHpSet();
+
+	// 3. 플레이어 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+
+	if (isDead)
+	{
+	}
+	else
+	{
+		pV->ApplyHitInfo(info);
+	}
+
+	// 4. 히트 이펙트
+
+	// 5. 사운드
+}

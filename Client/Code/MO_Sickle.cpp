@@ -25,7 +25,7 @@ SP(Engine::CObject) CMO_Sickle::MakeClone(void)
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
-	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spStateMachine = spClone->GetComponent<CFSM_SickleC>();
 
 	return spClone;
 }
@@ -42,6 +42,7 @@ void CMO_Sickle::Start(void)
 	__super::Start();
 
 	m_spMesh->OnRootMotion();
+
 }
 
 void CMO_Sickle::FixedUpdate(void)
@@ -97,10 +98,15 @@ void CMO_Sickle::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
+void CMO_Sickle::ApplyHitInfo(HitInfo info)
+{
+}
+
 void CMO_Sickle::ChaseTarget(_float3 targetPos)
 {
 	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
+	dir.y = 0;
+	D3DXVec3Normalize(&dir, &dir);
 
 	m_spTransform->SetForward(dir);
 }

@@ -42,9 +42,11 @@ public:
 					void					OnDisable			(void) override;
 
 					void					SetBasicName		(void) override;
-					
+
+					void					ApplyHitInfo		(HitInfo info) override;
 public:
 					void					Update_WeaponTransform(void);
+					void					UpdatePivotMatrices(void);
 
 					void					CreatePistol		(void);
 					void					CreateCatPaw		(void);
@@ -54,6 +56,13 @@ public:
 
 					void					SetUltraMode		(bool value);;
 
+
+					void					FindLeftHand();
+					void					FindRightHand();
+
+					void					FindRightToe();
+
+					
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Right,		nullptr, Weapon_Right)
@@ -73,25 +82,25 @@ private:
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk04,	nullptr, CatPaw_Ring_Atk04)
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk05,	nullptr, CatPaw_Ring_Atk05)
 
-	GETTOR			(_bool,					m_ultraMode,		false, UltraMode)
+	GETTOR			(_bool,					m_ultraMode,			false, UltraMode)
 
 private:
-
-	_mat*						m_pRightToe_World = nullptr;
+	
+	GETTOR			(_mat*,					m_pRightToe_World,			nullptr, RightToeWorldMatrix)
 	_mat*						m_pRightToe_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pRightToe_Frame = nullptr;
-
-	_mat*						m_pLeftHand_World = nullptr;
+	
+	GETTOR			(_mat*,					m_pLeftHand_World,			nullptr, LeftHandWorldMatrix)
 	_mat*						m_pLeftHand_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pLeftHand_Frame = nullptr;
-
-	_mat*						m_pRightHand_World = nullptr;
+	
+	GETTOR			(_mat*,					m_pRightHand_World,			nullptr, RightHandWorldMatrix)
 	_mat*						m_pRightHand_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pRightHand_Frame = nullptr;
 
 	_mat* m_pRightHand = nullptr;
 
-public:
+   public:
 	SP(Engine::CObject) CreateEffect(std::wstring name);
 	void SetEffect(SP(Engine::CObject) spEffect, AttackOption option);
 

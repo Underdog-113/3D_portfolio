@@ -29,11 +29,19 @@ public:
 private:
 					void				InitPrototypes		(void) override;
 
+					void KianaTest();
+					void TheresaTest();
+
+					void CollisionDummy();
+
+					void SetupStageUI();
 private:
 	SP(Engine::CObject) m_spKiana;
+	SP(Engine::CObject) m_spTheresa;
 	Engine::CObject* m_pivot;
 
-	SP(Engine::CObject) m_spSpider;
+	SP(Engine::CObject) m_spDummy;
+	SP(Engine::CObject) m_spDummy2;
 
 	Engine::CObject* m_obj;
 	Engine::CObject* m_obj1;
@@ -43,7 +51,7 @@ private:
 	int num = 0;
 
 private:
-	CStageControlTower* m_pController = nullptr;
+	CStageControlTower* m_pControlTower = nullptr;
 };
 
 #endif

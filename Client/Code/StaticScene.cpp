@@ -4,6 +4,7 @@
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "ImageObject.h"
+#include "TextObject.h"
 
 #include "DebugCollider.h"
 #include "Camera.h"
@@ -17,6 +18,7 @@
 
 #include "AttackBall.h"
 
+#include "MO_Dummy.h"
 #include "MO_Scout.h"
 #include "MO_Ninza.h"
 #include "MO_Axe.h"
@@ -128,18 +130,20 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSkyBox);
 
+	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDebugCOllider);
 	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spDecoObject);
-
+	
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
-
+	
 	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBall);
 	
 	InitUiPrototypes();
 	InitMonsterPrototypes();
-
+	
 	InitValkyriePrototypes();
 	
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
@@ -151,6 +155,9 @@ void CStaticScene::InitPrototypes(void)
 
 void CStaticScene::InitUiPrototypes(void)
 {
+	SP(Engine::CTextObject) spTextObject(Engine::CTextObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTextObject);
+
 	SP(Engine::CCanvas) spCanvasViewObject(Engine::CCanvas::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCanvasViewObject);
 
@@ -166,12 +173,14 @@ void CStaticScene::InitUiPrototypes(void)
 	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spScrollViewObject);
 
-	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
-	GetObjectFactory()->AddPrototype(spDebugCOllider);
+	
 }
 
 void CStaticScene::InitMonsterPrototypes(void)
 {
+	SP(CMonster) spMO_Dummy(CMO_Dummy::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMO_Dummy);
+
 	SP(CMonster) spMO_Spider(CMO_Spider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Spider);
 
@@ -225,4 +234,8 @@ void CStaticScene::InitValkyriePrototypes(void)
 
 	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(true, this));
 	ADD_PROTOTYPE(spPistol);
+
+
+	SP(CTheresa) spTheresaPrototype(CTheresa::Create(true, this));
+	ADD_PROTOTYPE(spTheresaPrototype);
 }

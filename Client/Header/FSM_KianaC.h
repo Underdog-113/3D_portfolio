@@ -21,7 +21,7 @@ class CKiana;
 class CStageControlTower;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
-	enum Appear_Option { None, QTEAppear };
+	enum Appear_Option { None, QTE };
 public:
 	CFSM_KianaC();
 	~CFSM_KianaC() = default;
@@ -42,7 +42,6 @@ private:
 	void CreateEffect_Attack3();
 	void CreateEffect_Attack4();
 	void CreateEffect_Attack5();
-
 
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);

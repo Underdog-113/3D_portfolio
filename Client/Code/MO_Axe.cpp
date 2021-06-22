@@ -94,6 +94,10 @@ void CMO_Axe::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
+void CMO_Axe::ApplyHitInfo(HitInfo info)
+{
+}
+
 void CMO_Axe::ChaseTarget(_float3 targetPos)
 {
 	_float3 dir = targetPos - m_spTransform->GetPosition();

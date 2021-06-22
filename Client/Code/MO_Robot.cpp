@@ -73,6 +73,10 @@ void CMO_Robot::SetBasicName(void)
 {
 }
 
+void CMO_Robot::ApplyHitInfo(HitInfo info)
+{
+}
+
 SP(CMO_Robot) CMO_Robot::Create(_bool isStatic, Engine::CScene * pScene)
 {
 	SP(CMO_Robot) spInstance(new CMO_Robot, Engine::SmartDeleter<CMO_Robot>);

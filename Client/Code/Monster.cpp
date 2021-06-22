@@ -24,9 +24,10 @@ void CMonster::Awake(void)
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
 	m_spShader		= AddComponent<Engine::CShaderC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
-	
-	//m_spCollision	= AddComponent<Engine::CCollisionC>();
-	//m_spDebug		= AddComponent<Engine::CDebugC>();
+
+	//m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
+	//m_spCollision = AddComponent<Engine::CCollisionC>();
+	//m_spDebug = AddComponent<Engine::CDebugC>();
 }
 
 void CMonster::Start(void)
@@ -44,6 +45,8 @@ void CMonster::Start(void)
 		stat.SetGrowHp(10.f);
 		stat.SetGrowAtk(1.2f);
 		stat.SetGrowDef(1.f);
+
+		stat.SetType(BaseStat::Mecha);
 
 		m_pStat = new M_Stat;
 		m_pStat->SetupStatus(&stat);
@@ -84,5 +87,9 @@ void CMonster::OnDisable(void)
 }
 
 void CMonster::SetBasicName(void)
+{
+}
+
+void CMonster::ApplyHitInfo(HitInfo info)
 {
 }

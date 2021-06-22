@@ -25,12 +25,16 @@ public:
 					void						OnEnable			(void) override;
 					void						OnDisable			(void) override;
 
+					void						OnCollisionEnter	(Engine::_CollisionInfo ci);
+					void						OnCollisionStay		(Engine::_CollisionInfo ci);
+					void						OnCollisionExit		(Engine::_CollisionInfo ci);
+
 					void						OnTriggerEnter		(Engine::CCollisionC const* pCollisionC);
 					void						OnTriggerStay		(Engine::CCollisionC const* pCollisionC);
 					void						OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
 
 public:
-					void						SetupBall			(CObject* pOwner, _mat* pParentMat, _float radius, _float damage);
+					void						SetupBall			(CObject* pOwner, _mat* pParentMat, _float radius, HitInfo info);
 private:
 					void						SetBasicName		(void) override;
 private:
@@ -42,7 +46,7 @@ private:
 	GETTOR			(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
 	GETTOR			(_int,						m_collisionID,		UNDEFINED,		CollisionID)
 	GETTOR_SETTOR	(Engine::CObject*,			m_pOwner,			nullptr,		Owner)
-	GETTOR_SETTOR	(_float,					m_damage,			UNDEFINED,		Damage)
+	GETTOR_SETTOR	(HitInfo,					m_hitInfo,			HitInfo(),		HitInfoMation)
 	GETTOR_SETTOR	(_mat*,						m_pParentMatrix,	nullptr,		ParentMatrix)
 
 	

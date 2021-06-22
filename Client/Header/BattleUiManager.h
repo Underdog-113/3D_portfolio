@@ -40,12 +40,14 @@ public:
 
 	void KeyPad(_int value); // 방향키 변경
 	void HitCount(_float lifeTime); // 콤보박스
-	void MonsetrState(std::wstring name, _float hp, std::wstring property); // 몬스터 체력바 속성 이름 표시
+	void MonsterState(std::wstring name, _float hp, std::wstring property); // 몬스터 체력바 속성 이름 표시
 	void MonsterStateEnd();
 
 	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1,  _float playerSp1,
 					 std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2);
 	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1);
+
+	void PlayerSkillActivation(_int value);
 
 	// HP SP 버튼4개 스킬포인트2개
 	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
@@ -53,7 +55,7 @@ public:
 	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
 		std::wstring specialSP);
 	
-	void TargetUI(_float3 pos, _float value);
+	void TargetUI(Engine::CObject* object, _float value);
 
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
@@ -72,6 +74,8 @@ public:
 private:
 
 private:
+	_bool m_activation;
+
 	Engine::CCanvas* m_monsterStateCanvas;
 	Engine::CCanvas* m_mainCanvas;
 	Engine::CCanvas* m_hitsCanvas;
@@ -90,10 +94,12 @@ private:
 
 	std::vector<Engine::CImageObject*> m_playerIllustration;
 	std::vector<Engine::CImageObject*> m_playerProperty;
-	std::vector<Engine::CImageObject*> m_skillPoint;
+	std::vector<Engine::CImageObject*> m_skillPoint; // 스킬사용할때 필요한 게이지
 	std::vector<Engine::CImageObject*> m_target;
 
-	std::vector<CButton*> m_skillButton;
+	std::vector<Engine::CImageObject*> m_skillImage; // 스킬버튼 이미지
+	std::vector<Engine::CImageObject*> m_skillActivationImage; // 스킬이 활성화되면 나올 이미지
+	std::vector<CButton*> m_skillButton; // 스킬버튼
 	std::vector<Engine::CSlider*> m_coolTimeSlider;
 
 	std::vector<Engine::CSlider*> m_monsterHpBar;

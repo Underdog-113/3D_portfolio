@@ -602,7 +602,7 @@ void CToolMenuView::DataParsing(ELayerID layerID, std::wofstream* ofsSave)
 
 		(*ofsSave) << name << "_static=" << vObjs[i]->GetIsStatic() << "\n";
 		(*ofsSave) << name << "_layerID=" << vObjs[i]->GetLayerID() << "\n";
-		(*ofsSave) << name << "_meshKey=" << vObjs[i]->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey() << '\n';
+		(*ofsSave) << name << "_meshKey=" << vObjs[i]->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey() << '\n';
 		(*ofsSave) << name << "_initTex=" << vObjs[i]->GetComponent<Engine::CMeshC>()->GetInitTex() << '\n';
 		(*ofsSave) << name << "_renderID=" << vObjs[i]->GetComponent<Engine::CGraphicsC>()->GetRenderID() << '\n';
 		(*ofsSave) << name << "_scale=" << vObjs[i]->GetTransform()->GetSize().x << ',' << vObjs[i]->GetTransform()->GetSize().y << ',' << vObjs[i]->GetTransform()->GetSize().z << '\n';
@@ -687,16 +687,12 @@ void CToolMenuView::ParsingDecoObject(std::wofstream * ofsSave)
 		SP(Engine::CMeshC) spMesh = object->GetComponent<Engine::CMeshC>();
 
 		std::wstring isInitTex = L"true";
-		if (spMesh->GetMeshDatas()[0]->GetTexList()[0] == L"NoTexture")
+		if (spMesh->GetMeshData()->GetTexList()[0] == L"NoTex")
 			isInitTex = L"false";
 
 		(*ofsSave) << numOfDecoObject << L"_initMesh=" << isInitTex << L'\n';
+		(*ofsSave) << numOfDecoObject << L"_meshKey" << L'=' << spMesh->GetMeshData()->GetMeshKey() << L'\n';
 
-		(*ofsSave) << numOfDecoObject << L"_numOfMeshData=" << spMesh->GetMeshDatas().size() << L'\n';
-		for (_int i = 0; i < spMesh->GetMeshDatas().size(); ++i)
-		{
-			(*ofsSave) << numOfDecoObject << L"_meshKey" << i << L'=' << spMesh->GetMeshDatas()[i]->GetMeshKey() << L'\n';
-		}
 
 		SP(Engine::CTextureC) spTexture = object->GetComponent<Engine::CTextureC>();
 		(*ofsSave) << numOfDecoObject << L"_numOfTexSet=" << spTexture->GetTexData().size() << L'\n';
@@ -705,7 +701,10 @@ void CToolMenuView::ParsingDecoObject(std::wofstream * ofsSave)
 			(*ofsSave) << numOfDecoObject << L"_numOfTex" << i << L'=' << spTexture->GetTexData()[i].size() << L'\n';
 			for (_int j = 0; j < spTexture->GetTexData()[i].size(); ++j)
 			{
-				(*ofsSave) << numOfDecoObject << L"_textureKey" << i << L'_' << j << L'=' << spTexture->GetTexData()[i][j]->textureKey << L'\n';
+				if (spTexture->GetTexData()[i][j] != nullptr)
+					(*ofsSave) << numOfDecoObject << L"_textureKey" << i << L'_' << j << L'=' << spTexture->GetTexData()[i][j]->textureKey << L'\n';
+				else
+					(*ofsSave) << numOfDecoObject << L"_textureKey" << i << L'_' << j << L'=' << L"NoTex" << L'\n';
 			}
 		}
 
@@ -745,36 +744,27 @@ void CToolMenuView::ParsingMapObject(std::wofstream * ofsSave)
 		SP(Engine::CMeshC) spMesh = object->GetComponent<Engine::CMeshC>();
 
 		std::wstring isInitTex = L"true";
-		if (spMesh->GetMeshDatas()[0]->GetTexList()[0] == L"NoTexture")
+		if (spMesh->GetMeshData()->GetTexList()[0] == L"NoTex")
 			isInitTex = L"false";
 
 		(*ofsSave) << numOfMapObject << L"_initMesh=" << isInitTex << L'\n';
-
-		(*ofsSave) << numOfMapObject << L"_numOfMeshData=" << spMesh->GetMeshDatas().size() << L'\n';
-		for (_int i = 0; i < spMesh->GetMeshDatas().size(); ++i)
-		{
-			(*ofsSave) << numOfMapObject << L"_meshKey" << i << L'=' << spMesh->GetMeshDatas()[i]->GetMeshKey() << L'\n';
-		}
+		(*ofsSave) << numOfMapObject << L"_meshKey" << L'=' << spMesh->GetMeshData()->GetMeshKey() << L'\n';
 
 		SP(Engine::CTextureC) spTexture = object->GetComponent<Engine::CTextureC>();
 		(*ofsSave) << numOfMapObject << L"_numOfTexSet=" << spTexture->GetTexData().size() << L'\n';
 		for (_int i = 0; i < spTexture->GetTexData().size(); ++i)
 		{
-			//나중에 수정
-			_int count = 0;
-			for (auto& iter = spTexture->GetTexData()[i].begin(); iter != spTexture->GetTexData()[i].end(); ++iter)
+			(*ofsSave) << numOfMapObject << L"_numOfTex" << i << L'=' << spTexture->GetTexData()[i].size() << L'\n';
+			for (_int j = 0; j < spTexture->GetTexData()[i].size(); ++j)
 			{
-				if(*iter == nullptr)
-					count++;
-			}
-			(*ofsSave) << numOfMapObject << L"_numOfTex" << i << L'=' << spTexture->GetTexData()[i].size() - count << L'\n';
-			for (_int j = 0; j < spTexture->GetTexData()[i].size() - count; ++j)
-			{
-				(*ofsSave) << numOfMapObject << L"_textureKey" << i << L'_' << j << L'=' << spTexture->GetTexData()[i][j]->textureKey << L'\n';
+				if(spTexture->GetTexData()[i][j] != nullptr)
+					(*ofsSave) << numOfMapObject << L"_textureKey" << i << L'_' << j << L'=' << spTexture->GetTexData()[i][j]->textureKey << L'\n';
+				else
+					(*ofsSave) << numOfMapObject << L"_textureKey" << i << L'_' << j << L'=' << L"NoTex" << L'\n';
 			}
 		}
 
-		(*ofsSave) << numOfMapObject << L"_renderID=" << object->GetComponent<Engine::CGraphicsC>()->GetRenderID() << L"\n\n";
+		(*ofsSave) << numOfMapObject << L"_renderID=" << object->GetComponent<Engine::CGraphicsC>()->GetRenderID() << L"\n";
 
 		SP(Engine::CCollisionC) spCollision = object->GetComponent<Engine::CCollisionC>();
 		(*ofsSave) << numOfMapObject << L"_numOfCollider=" << spCollision->GetColliders().size() << L'\n';
@@ -852,6 +842,7 @@ void CToolMenuView::ParsingMapObject(std::wofstream * ofsSave)
 
 		}
 
+		(*ofsSave) << L'\n';
 		++numOfMapObject;
 	}
 
@@ -1080,7 +1071,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 		else if (!wcscmp(L"meshKey", dataTag))
 		{
 			meshKey = dataValue;
-			spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
+			spObject->AddComponent<Engine::CMeshC>()->SetMeshData(meshKey);
 			continue;
 		}
 		else if (!wcscmp(L"initTex", dataTag))
@@ -1089,7 +1080,7 @@ void CToolMenuView::OnBnClickedLoadBtn()
 			spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
 			
 
-			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshDatas()[0]->GetMeshKey())
+			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey())
 				spObject->AddComponent<Engine::CTextureC>();
 			else
 				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);

@@ -15,6 +15,7 @@
 
 #include  "DamageObjectPool.h"
 #include "GlitterC.h"
+#include "SkillActivationC.h"
 CDongScene::CDongScene()
 {
 }
@@ -49,13 +50,32 @@ void CDongScene::Start(void)
 	__super::Start();
 
 	{
-		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"sdfsdf"));
-		image->GetTransform()->SetPositionZ(0.0f);
-		image->GetTransform()->SetSize(_float3(800, 600, 0));
-		image->GetTexture()->AddTexture(L"Card_00", 0);
-		image->AddComponent<CGlitterC>()->AddGlitterData(0.5f, 0.5f);
+		SP(Engine::CSlider) slider =
+			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
+		slider->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
+		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
+		slider->SetCircularMaxValue(360.0f);
+		slider->SetCircularMinValue(0.0f);
+
+		SP(Engine::CImageObject) background =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
+		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		background->GetTransform()->SetSize(_float3(300, 300, 0));
+		background->GetTexture()->AddTexture(L"CurrentMark", 0);
+
+		SP(Engine::CImageObject) fill =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
+		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
+		fill->GetTransform()->SetSize(_float3(300, 300, 0));
+		fill->GetTexture()->AddTexture(L"test", 0);
+		fill->SetParent(slider.get());
+		fill->GetComponent<Engine::CShaderC>()->
+			AddShader((_int)EShaderID::CircularGaugeShader);
+
+		slider->AddSliderData(100, 100, 0, background, fill);
 	}
+
 }
 
 void CDongScene::FixedUpdate(void)
@@ -66,6 +86,8 @@ void CDongScene::FixedUpdate(void)
 void CDongScene::Update(void)
 {
 	__super::Update();
+	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
+
 }
 
 void CDongScene::LateUpdate(void)

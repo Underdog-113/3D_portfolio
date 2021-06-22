@@ -435,7 +435,7 @@ void CInspector::OnPaint()
 
 void CInspector::OnLbnSelchangeEffectList()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 	_int index = m_EffectListBox.GetCurSel();
 
 	m_iSelectObjectNum = index;
@@ -447,7 +447,7 @@ void CInspector::OnBnClickedDeleteEffectList()
 {
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 	spObject->SetDeleteThis(true);
-	spObject.reset();	
+	spObject.reset();
 
 	m_EffectListBox.DeleteString(m_iSelectObjectNum);
 	m_btnModeTransform.SetCheck(false);
@@ -457,7 +457,7 @@ void CInspector::OnBnClickedDeleteEffectList()
 
 void CInspector::OnBnClickedMeshEffect()
 {
-	CString str = _T("X Files(*.x) |*.x|"); // x ÆÄÀÏ Ç¥½Ã
+	CString str = _T("X Files(*.x) |*.x|"); // x ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\";
 
@@ -484,7 +484,7 @@ void CInspector::OnBnClickedMeshEffect()
 
 void CInspector::OnBnClickedSoftEffect()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -507,7 +507,7 @@ void CInspector::OnBnClickedSoftEffect()
 
 void CInspector::OnBnClickedTexture()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -530,7 +530,7 @@ void CInspector::OnBnClickedTexture()
 
 void CInspector::OnBnClickedAlphaMask()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -558,7 +558,8 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::AttackRangeShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
@@ -567,7 +568,7 @@ void CInspector::Add_SoftEffect(CString ObjectName)
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SoftEffect", false);
 	spSoftEffect->GetComponent<Engine::CGraphicsC>();
 	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::SoftEffectShader);
+	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CInspector::Add_Texture(CString TextureKey)
@@ -616,7 +617,7 @@ void CInspector::OptionUpdate()
 		m_btnOptionFadeOut.EnableWindow(false);
 		m_btnOptionUVSprite.EnableWindow(false);
 		m_btnOptionUVAnim.EnableWindow(false);
-		
+
 	}
 	else
 	{
@@ -626,10 +627,10 @@ void CInspector::OptionUpdate()
 		m_btnOptionFadeIn.EnableWindow(true);
 		m_btnOptionFadeOut.EnableWindow(true);
 		m_btnOptionUVSprite.EnableWindow(true);
-		m_btnOptionUVAnim.EnableWindow(true);	
+		m_btnOptionUVAnim.EnableWindow(true);
 	}
 
-	
+
 
 }
 
@@ -713,7 +714,7 @@ void CInspector::ModeUpdate()
 	{
 		m_btnModeTransform.EnableWindow(true);
 		m_btnModeEdit.EnableWindow(true);
-	}	
+	}
 	if (m_btnOptionUVSprite.GetCheck())
 	{
 		m_btnModeUVSprite.EnableWindow(true);
@@ -874,7 +875,7 @@ void CInspector::SettingUpdate()
 	}
 
 	if (m_btnModeUVSprite.GetCheck())
-	{		
+	{
 		m_edAlphaWidth.ShowWindow(true);
 		m_spinAlphaWidth.ShowWindow(true);
 		m_edAlphaHeight.ShowWindow(true);
@@ -923,11 +924,11 @@ void CInspector::ActionUpdate()
 				m_isPlayAnim = true;
 			}
 			m_fStartTime += GET_DT;
-			
+
 			AnimTransformUpdate(spObject);
 
 			if (m_fStartTime >= m_fEndTime)
-			{				
+			{
 				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
 				spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
@@ -1015,7 +1016,7 @@ void CInspector::OnBnClickedAnimPlay()
 
 	m_eActionState = PLAY;
 	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
-	
+
 	if(pSoftEffect != nullptr)
 		pSoftEffect->SetAnimisPlay(ACTION_STATE::PLAY);
 }
@@ -1060,8 +1061,8 @@ void CInspector::OnBnClickedSave()
 	// Texture						Texture
 	// Tiling						Shader
 	// MaxIndex						Animation
-	
-	CString str = _T("txt Files(*.txt) |*.txt|"); // png ÆÄÀÏ Ç¥½Ã
+
+	CString str = _T("txt Files(*.txt) |*.txt|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Data\\";
 
 	CFileDialog dlg(TRUE, _T("*.txt"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -1085,7 +1086,7 @@ void CInspector::OnBnClickedSave()
 					//Name
 					//ofsSave << spObject->
 					//std::wstring str = m_EffectListBox.FindString(i, );
-					
+
 					//Texture
 					/*D3DMATERIAL9* pMtrl = &spObject->GetComponent<Engine::CGraphicsC>()->m_mtrl;
 
@@ -1375,7 +1376,7 @@ void CInspector::OnDeltaposSpinPosX(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 
-	
+
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
 	if (spObject == nullptr)

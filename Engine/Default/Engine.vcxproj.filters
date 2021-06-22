@@ -157,9 +157,6 @@
     <Filter Include="03.Components\99. Develop\01. ParticleSystem\ParticleComponent">
       <UniqueIdentifier>{f8723815-601e-49ed-a044-d619184070a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader">
-      <UniqueIdentifier>{a0cbd6f2-8c7a-41e1-84b9-bf3c6e83ad29}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\02.ImageObject">
       <UniqueIdentifier>{b387efc0-22ae-425d-8839-3ed29247f37c}</UniqueIdentifier>
     </Filter>
@@ -168,9 +165,6 @@
     </Filter>
     <Filter Include="00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion">
       <UniqueIdentifier>{9b3320a5-1a59-4393-bc65-5c6f17d913d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader">
-      <UniqueIdentifier>{16115b64-af50-4980-a0ee-bddb12eef9df}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\04.Camera">
       <UniqueIdentifier>{83941a3f-bfa0-4438-9006-d92c36005261}</UniqueIdentifier>
@@ -247,33 +241,6 @@
     <Filter Include="02.Objects\08.Canvas">
       <UniqueIdentifier>{9aace7d5-1390-46ac-a5be-fa2cce8643f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader">
-      <UniqueIdentifier>{16e92165-0119-4c23-a4fc-a9f9ceba2d22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader">
-      <UniqueIdentifier>{695e9423-cbcc-4a72-94a5-8375b5aa1dd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader">
-      <UniqueIdentifier>{3811655b-405c-460f-a9dd-7226bf6ed2d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw">
-      <UniqueIdentifier>{e524ab42-d1a1-4bc3-b018-aaef02054c04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader">
-      <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader">
-      <UniqueIdentifier>{bbe26739-63c8-43a8-97cc-b2bb217589e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader">
-      <UniqueIdentifier>{a75dc654-bebc-49a3-b5a7-0983ae845fc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader">
-      <UniqueIdentifier>{deea1f5e-2751-4c23-9ec1-18261d4ec4f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader">
-      <UniqueIdentifier>{045ee1b4-ba29-4600-a5fc-0933ef05863b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Components\00.System\01.GraphicsComponent">
       <UniqueIdentifier>{aae8af78-9aba-43e0-912e-5e8c59a48eb8}</UniqueIdentifier>
     </Filter>
@@ -298,17 +265,20 @@
     <Filter Include="03.Components\00.System\01.GraphicsComponent\04.Text">
       <UniqueIdentifier>{2d797b48-3503-4f89-8d75-05e71020b117}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader">
-      <UniqueIdentifier>{55716081-6c16-4585-bdc2-aa693a780bc6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Text">
       <UniqueIdentifier>{55e89009-2f13-42a0-9ad6-3701b9538748}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader">
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\05.CelShader">
+      <UniqueIdentifier>{3fe8a3fb-4600-4998-8a32-8fdce6434e5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader">
+      <UniqueIdentifier>{bbe26739-63c8-43a8-97cc-b2bb217589e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader">
       <UniqueIdentifier>{2bd86ea5-c7ba-4d26-9f41-0dd24f09635e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader">
-      <UniqueIdentifier>{ee032edd-4d68-4134-be41-495c09b49ee2}</UniqueIdentifier>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader">
+      <UniqueIdentifier>{3a2e517d-8655-4695-bfb1-f316c6eb873a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -522,9 +492,6 @@
     <ClCompile Include="..\Code\Particle.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\WaterShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
@@ -540,53 +507,29 @@
     <ClCompile Include="..\Code\RootMotion.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\EffectShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Canvas.cpp">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DamageFontShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CatPawShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CircularGaugeShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\CubeTexC.cpp">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CelShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.CelShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SkyBoxShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MeshTrailShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TextObject.cpp">
       <Filter>02.Objects\03.Text</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DissolveShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpawnEffectShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SoftEffectShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\WireShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\AttackRangeShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader</Filter>
+    <ClCompile Include="..\Code\MeshAlphaTestShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -821,9 +764,6 @@
     <ClInclude Include="..\Header\Particle.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\WaterShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
@@ -839,56 +779,32 @@
     <ClInclude Include="..\Header\RootMotion.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\01.DynamicMesh\02.RootMotion</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\EffectShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Canvas.h">
       <Filter>02.Objects\08.Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\DamageFontShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CatPawShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CircularGaugeShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\CubeTexC.h">
       <Filter>03.Components\00.System\01.GraphicsComponent\00.VIBuffer\01.CubeTex</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CelShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.CelShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SkyBoxShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MeshTrailShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TextObject.h">
       <Filter>02.Objects\03.Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\DissolveShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpawnEffectShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Camera.h">
       <Filter>02.Objects\04.Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\SoftEffectShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\WireShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\AttackRangeShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader</Filter>
+    <ClInclude Include="..\Header\MeshAlphaTestShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -907,44 +823,17 @@
     <FxCompile Include="..\..\Resource\Shader\SliderShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\04.SliderShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.WaterShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.CircularGaugeShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.DamageFontShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.EffectShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.KianaShader\Kiana_CatPaw</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.CelShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\05.CelShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\10.SkyBoxShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\11.MeshTrailShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\12.DissolveShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.SpawnEffectShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.SoftEffectShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\06.SkyBoxShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WireShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\15.WireShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\16.AttackRangeShader</Filter>
+    <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

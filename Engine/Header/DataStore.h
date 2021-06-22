@@ -17,6 +17,7 @@ public:
 
 				void					OnDestroy			(void) override;
 
+public:
 				void					ClearCurResource	(void) override;
 
 				void					InitDataForScene	(std::wstring curScene, _bool isStatic = false);

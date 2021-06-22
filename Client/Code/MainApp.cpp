@@ -10,6 +10,20 @@
 #include "DamageObjectPool.h"
 #pragma endregion
 
+#pragma region Shader
+#include "WaterShader.h"
+#include "EffectShader.h"
+#include "DamageFontShader.h"
+#include "CatPawShader.h"
+#include "CircularGaugeShader.h"
+#include "MeshTrailShader.h"
+#include "DissolveShader.h"
+#include "SpawnEffectShader.h"
+#include "SoftEffectShader.h"
+#include "AttackRangeShader.h"
+#pragma endregion
+
+
 #pragma region Prototypes
 #include "Camera.h"
 #pragma endregion
@@ -43,7 +57,18 @@ void CMainApp::Awake(void)
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
-	//Engine::CPhysicsManager::GetInstance()->Awake();
+	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)EShaderID::NumOfShaderID);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CWaterShader::Create(), L"WaterShader", (_uint)EShaderID::WaterShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CEffectShader::Create(), L"EffectShader", (_uint)EShaderID::EffectShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CDamageFontShader::Create(), L"DamageFontShader", (_uint)EShaderID::DamageFontShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCatPawShader::Create(), L"CatPawShader", (_uint)EShaderID::CatPawShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCircularGaugeShader::Create(), L"CircularGaugeShader", (_uint)EShaderID::CircularGaugeShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CMeshTrailShader::Create(), L"MeshTrailShader", (_uint)EShaderID::MeshTrailShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CDissolveShader::Create(), L"DissolveShader", (_uint)EShaderID::DissolveShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSpawnEffectShader::Create(), L"SpawnEffectShader", (_uint)EShaderID::SpawnEffectShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader::Create(), L"SoftEffectShader", (_uint)EShaderID::SoftEffectShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAttackRangeShader::Create(), L"AttackRangeShader", (_uint)EShaderID::AttackRangeShader);
+
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }

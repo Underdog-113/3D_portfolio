@@ -29,5 +29,6 @@ private:
 	_bool m_bWhiteCheck;
 	_float m_speed;
 	_float m_timer;
+	_float m_timerMax;
 };
 #endif

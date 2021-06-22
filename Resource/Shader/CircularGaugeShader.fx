@@ -1,5 +1,7 @@
 float		g_ratio;
 int			g_direction;
+float		g_maxValue;
+float		g_minValue;
 
 matrix		g_matWorld;			// 상수 테이블
 matrix		g_matView;
@@ -67,23 +69,23 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	Out.vColor = tex2D(BaseSampler, In.vTexUV);
 
-	float2 d = In.vTexUV - float2(0.5, 0.5); // 중앙을 0,0으로 만든다음에 자신의 픽셀과 거리를 구한다.
-
+	float2 d = In.vTexUV -float2(0.5, 0.5); // 중앙을 0,0으로 만든다음에 자신의 픽셀과 거리를 구한다.
 
 	if (g_direction == 2)
 	{
-		float a = atan2(d.x, d.y); // 2개의 점사이의 절대각도
-		float ratio = (-3.14f *2) * g_ratio;
-		if (a < ratio)
+		float a = atan2(d.x, d.y) * (180.0f / 3.14); // 2개의 점사이의 절대각도를 구하고 라디안값을 디그리로 변경
+		float ratioMax = -180 * g_ratio + (360 - g_maxValue); // 그려야할 픽셀의 최대범위
+		float ratioMin = -180 * 1.0f	+ (360 - g_minValue); // 그려야할 픽셀의 최소범위
+		if (a < ratioMax || a > ratioMin)
 		{
 			Out.vColor.a = 0;
 		}
 	}
 	else if (g_direction == 3)
 	{
-		float a = atan2(d.x, -d.y); // 2개의 점사이의 절대각도
-		float ratio = (-3.14f * 2) * g_ratio;
-		if (a < ratio)
+		float a = atan2(-d.x, d.y); // 2개의 점사이의 절대각도
+		float ratioMax = (-3.14f * 2.0) * g_ratio;
+		if (a < ratioMax)
 		{
 			Out.vColor.a = 0;
 		}

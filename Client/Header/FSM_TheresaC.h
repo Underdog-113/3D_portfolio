@@ -24,8 +24,19 @@ private: /* Normal Actions */
 private: /* Special Actions */
 
 private:
+	CTheresa* m_pTheresa = nullptr;
+	Engine::CDynamicMeshData* m_pDM = nullptr;
+	CStageControlTower* m_pStageControlTower = nullptr;
+
+	Appear_Option m_appearOption = None;
 
 public:
+	//IDLE
+	void IDLE_Init(void);
+	void IDLE_Enter(void);
+	void IDLE_Update(float deltaTime);
+	void IDLE_End(void);
+
 	//VICTORY
 	void VICTORY_Init(void);
 	void VICTORY_Enter(void);
@@ -194,24 +205,11 @@ public:
 	void RUN_Update(float deltaTime);
 	void RUN_End(void);
 
-	//IDLE
-	void IDLE_Init(void);
-	void IDLE_Enter(void);
-	void IDLE_Update(float deltaTime);
-	void IDLE_End(void);
-
 	//APPEAR
 	void APPEAR_Init(void);
 	void APPEAR_Enter(void);
 	void APPEAR_Update(float deltaTime);
 	void APPEAR_End(void);
 
-
-private:
-	CTheresa* m_pTheresa= nullptr;
-	Engine::CDynamicMeshData* m_pDM = nullptr;
-	CStageControlTower* m_pStageControlTower = nullptr;
-
-	Appear_Option m_appearOption = None;
 };
 
