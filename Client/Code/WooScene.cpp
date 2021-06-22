@@ -155,7 +155,6 @@ void CWooScene::Start(void)
 			//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 			//spSickleClone->GetTransform()->SetPosition(0, 10, 2);
 			//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-			////spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 			//m_spSickle = spSickleClone;
 
 			/* Spider */
@@ -166,7 +165,6 @@ void CWooScene::Start(void)
 
 			///* Ganesha */
 			//SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-			//spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
 			//spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
 			//spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			//spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
@@ -190,20 +188,11 @@ void CWooScene::Update(void)
 
 	m_pController->Update();
 
-	//_float3 pos1 = m_spKiana->GetTransform()->GetPosition();
-	//_float3 pos2 = m_spSickle->GetTransform()->GetPosition();
-
-	//m_pivot->GetTransform()->SetPosition(pos2);
-	//m_pivot_kiana->GetTransform()->SetPosition(pos1);
-
-	//SpiderPattern0();
-	//GaneshaPattern0();
-	//GaneshaPattern1();
-	//GaneshaPattern2();
-
-	//std::cout << "kiana  : " << pos2.x << "," << pos2.y << "," << pos2.z << std::endl;
-	//std::cout << "moster : " << pos1.x << "," << pos1.y << "," << pos1.z << std::endl;
-	//std::cout << "===========================================" << std::endl;
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
+	{
+		std::dynamic_pointer_cast<CMonster>(m_spGanesha)->GetStat()->SetCurHp(0.f);
+		m_spGanesha->GetComponent<CPatternMachineC>()->SetOnDie(true);
+	}
 }
 
 void CWooScene::LateUpdate(void)
@@ -226,128 +215,6 @@ void CWooScene::OnEnable(void)
 void CWooScene::OnDisable(void)
 {
 	__super::OnDisable();
-}
-
-void CWooScene::SpiderPattern0()
-{
-	//if (Name_Walk_Forward != m_fsm->GetCurStateString())
-	//	m_fsm->ChangeState(Name_Walk_Forward);
-
-	//_float3 tPos = m_spKiana->GetTransform()->GetPosition();
-	//_float3 mPos = m_spSickle->GetTransform()->GetPosition();
-	//_float mSpeed = 1.f;
-
-	//static_cast<CMO_Spider*>(m_spSickle.get())->ChaseTarget(tPos);
-
-	//_float3 dir = tPos - mPos;
-
-	//mPos += *D3DXVec3Normalize(&dir, &dir) * mSpeed * GET_DT;
-	//m_spSickle->GetTransform()->SetPosition(mPos);
-}
-
-void CWooScene::GaneshaPattern0()
-{
-	//_float3 tPos = m_spKiana->GetTransform()->GetPosition(); // target pos
-	//_float3 mPos = m_spGanesha->GetTransform()->GetPosition(); // monster pos
-	////_float mSpeed = 1.f;
-
-	//_float len = D3DXVec3Length(&(tPos - mPos));
-
-	//CoolTime(m_atkTime, m_sickleAtkCool, m_atkReady);
-	//CoolTime(m_walkTime, m_sickleWalkCool, m_walkReady);
-
-	//static_cast<CMB_Ganesha*>(m_spGanesha.get())->ChaseTarget(tPos);
-
-	//if (false == m_pattern0)
-	//	return;
-
-	//// 상대가 공격 범위 밖이고
-	//if (len > m_sickleAtkDis)
-	//{
-	//	// 공격 상태고, 애니가 끝났다면 
-	//	if (Name_Attack01 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
-	//	{
-	//		m_fsm->ChangeState(Name_Jump_Back);
-	//		m_pattern1 = false;
-	//		m_pattern2 = true;
-	//	}
-
-	//	// 내가 대기 상태면 이동 애니로 변경
-	//	if (Name_StandBy == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
-	//	{
-	//		m_fsm->ChangeState(Name_Run);
-	//	}
-	//	// 내가 이동 중이라면
-	//	else if (Name_Run == m_fsm->GetCurStateString())
-	//	{
-	//		_float3 dir = tPos - mPos;
-
-	//		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-	//		m_spGanesha->GetTransform()->SetPosition(mPos);
-	//	}
-	//	// 내가 뒤로 이동 중이라면
-	//	else if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && false == m_walkReady)
-	//	{
-	//		_float3 dir = tPos - mPos;
-
-	//		mPos -= *D3DXVec3Normalize(&dir, &dir) * 1.5f;
-	//		m_spGanesha->GetTransform()->SetPosition(mPos);
-	//		m_fsm->GetDM()->GetAniCtrl()->SetSpeed(0.5f);
-	//		m_walkReady = true;
-	//	}
-	//	// 내가 뒤로 이동 중이라면
-	//	else if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
-	//	{
-	//		m_fsm->ChangeState(Name_Run);
-	//	}
-	//}
-	//// 상대가 공격 범위 안이고
-	//else if (len <= m_sickleAtkDis)
-	//{
-	//	// 뒤로 이동 상태고, 애니가 끝났고, walkReady가 true라면 대기로 변경
-	//	if (Name_Jump_Back == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
-	//	{
-	//		m_fsm->ChangeState(Name_StandBy);
-	//	}
-	//	
-	//	// 이동 상태라면 대기로 변경
-	//	if (Name_Run == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
-	//	{
-	//		m_fsm->ChangeState(Name_StandBy);
-	//		m_pattern0 = false;
-	//		m_pattern1 = true;
-	//	}
-	//	
-	//	// 공격 상태고, 애니가 끝났다면 
-	//	if (Name_Attack01 == m_fsm->GetCurStateString() && m_fsm->GetDM()->IsAnimationEnd())
-	//	{
-	//		m_fsm->ChangeState(Name_Run);
-	//		m_pattern1 = false;
-	//		m_pattern2 = true;
-	//	}
-	//}
-}
-
-void CWooScene::GaneshaPattern1()
-{
-	//if (false == m_pattern1)
-	//	return;
-
-	//m_fsm->ChangeState(Name_Attack01);
-	//m_atkReady = false;
-	//m_pattern0 = true;
-	//m_pattern1 = false;
-}
-
-void CWooScene::GaneshaPattern2()
-{
-	//if (false == m_pattern2)
-	//	return;
-
-	//m_fsm->ChangeState(Name_Jump_Back);
-	//m_walkReady = false;
-	//m_pattern0 = true;
-	//m_pattern2 = false;
 }
 
 void CWooScene::InitPrototypes(void)

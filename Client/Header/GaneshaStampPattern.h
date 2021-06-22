@@ -21,7 +21,7 @@ private:
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 5.f; // 공격 거리
-	_float m_stampDis = 2.f; // 찍는 거리
+	_float m_stampDis = 0.9f; // 찍는 거리
 	_float m_atkCool = 2.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임

@@ -9,6 +9,7 @@
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
 #include "AttackBall.h"
+#include "AttackRange_Circle.h"
 
 CSpiderBasePattern::CSpiderBasePattern()
 {
@@ -54,6 +55,12 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Walk_Forward == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Attack_1);
+			SP(Engine::CObject) spMeshEffect
+				= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+
+			_float3 mPos = pOwner->GetTransform()->GetPosition();
+
+			spMeshEffect->GetTransform()->SetPosition(mPos);
 		}
 	}
 

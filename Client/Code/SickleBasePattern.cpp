@@ -8,6 +8,7 @@
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
+#include "AttackBall.h"
 
 CSickleBasePattern::CSickleBasePattern()
 {
@@ -73,13 +74,34 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Sickle_Attack_1);
-			static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, static_cast<CMO_Sickle*>(pOwner)->GetRightHandWorldMatrix());
 		}
+		
 		// 공격1 상태라면 뒤로 이동 상태로 변경
 		else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Sickle_Walk_Back);
 		}
+	}
+
+	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
+	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	{
+		static_cast<CMO_Sickle*>(pOwner)->UnActiveAttackBall();
+	}
+	// 내가 공격 상태고, 적절할 때 어택볼 생성
+	else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+
+		_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);
+		D3DXVec3Normalize(&look, &look);
+
+		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+		m_atkMat._41 += (m_atkDis * look.x / 2.f);
+		m_atkMat._43 += (m_atkDis * look.z / 2.f);
+
+		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat);
+		static_cast<Engine::CSphereCollider*>(static_cast<CMO_Sickle*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
 	}
 }
 

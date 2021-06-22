@@ -654,11 +654,17 @@ static _bool SphereSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 				_float3 normal;
 				D3DXVec3Normalize(&normal, &(center2 - center1));
 
+				
 				_float3 hitPoint1 = center1 + (normal * pSC1->GetRadius());
 				_float3 hitPoint2 = center2 + (-normal * pSC2->GetRadius());
 				_float	penet = D3DXVec3Length(&(hitPoint2 - hitPoint1));
 				pSC1->GetOwner()->AddCollisionInfo(_CollisionInfo(pSC1, pSC2, hitPoint1, normal, penet));
 				pSC2->GetOwner()->AddCollisionInfo(_CollisionInfo(pSC2, pSC1, hitPoint2, -normal, penet));
+
+				normal.y = 0;
+				D3DXVec3Normalize(&normal, &normal);
+				pSC1->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
+
 			}
 		}
 		return true;
