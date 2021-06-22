@@ -84,7 +84,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
 	m_monsterName = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterName_0").get();
-	m_monsterName = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHpCount_1").get();
+	m_monsterCount = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHpCount_1").get();
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
 	m_monsterProperty->GetTexture()->AddTexture(L"icon_up", 0);
@@ -250,7 +250,6 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hp, std::wstring p
 	{
 		object->SetValue(hp);
 	}
-
 
 	if (property == L"UP")
 	{
