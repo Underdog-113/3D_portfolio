@@ -84,10 +84,6 @@ void COneStageScene::Start(void)
 	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 	//m_vSpider.emplace_back(spSpiderClone);
 
-	spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
-	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
-	m_spSpider2 = spSpiderClone;
 }
 
 void COneStageScene::FixedUpdate(void)
