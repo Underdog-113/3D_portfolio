@@ -102,24 +102,13 @@ void COneStageScene::Update(void)
 	m_pBattleUIManager->Update();
 
 
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
+	if (Engine::IMKEY_DOWN(KEY_1) && Engine::IMKEY_PRESS(KEY_R))
 	{
-	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+		Create_Sickle(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
 	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
+	if (Engine::IMKEY_DOWN(KEY_2) && Engine::IMKEY_PRESS(KEY_R))
 	{
-	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
-	{
-	    CBattleUiManager::GetInstance()->TargetUI(nullptr, 5.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
-	{
-	    CBattleUiManager::GetInstance()->BattleEnd();
+		Create_Spider(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
 	}
 
 	if (true == m_bossSpawn)
@@ -210,9 +199,9 @@ void COneStageScene::SetupMembers(void)
 	Create_SceneCamera();
 
 	Create_Dummy(_float3(5.f, 0.f, 0.f));
-	Create_Dummy(_float3(10.f, 0.f, 0.f));
-	Create_Dummy(_float3(15.f, 0.f, 2.f));
-	Create_Dummy(_float3(15.f, 0.f, -2.f));
+	//Create_Dummy(_float3(10.f, 0.f, 0.f));
+	//Create_Dummy(_float3(15.f, 0.f, 2.f));
+	//Create_Dummy(_float3(15.f, 0.f, -2.f));
 	// Spider
 
 
@@ -248,6 +237,23 @@ void COneStageScene::Create_Dummy(_float3 pos)
 	m_vDummy.emplace_back(dummy);
 }
 
+void COneStageScene::Create_Sickle(_float3 pos)
+{			
+	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(pos);
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+
+	m_vSickle.emplace_back(spSickleClone);
+}
+
+void COneStageScene::Create_Spider(_float3 pos)
+{
+	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(pos);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+
+	m_vSpider.emplace_back(spSpiderClone);
+}
 
 void COneStageScene::InitPrototypes(void)
 {
