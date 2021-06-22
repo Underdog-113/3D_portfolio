@@ -186,7 +186,7 @@ void COneStageScene::SetupFromLoader(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	Load->ToolLoad(this);
+	Load->MapLoad(this);
 	delete(Load);
 
 }

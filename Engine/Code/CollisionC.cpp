@@ -92,9 +92,10 @@ void CCollisionC::OnDisable(void)
 
 }
 
-void CCollisionC::AddCollider(SP(CCollider) spCollider)
+void CCollisionC::AddCollider(SP(CCollider) spCollider, _bool isTrigger)
 {
 	spCollider->SetOwner(this);
+	spCollider->SetIsTrigger(isTrigger);
 	m_vColliders.emplace_back(spCollider);
 
 

@@ -28,6 +28,7 @@ public:
 					void				InitSettings			(void);
 					void				InitPrototypes			(void) override;
 private:
+					void				InitMapPrototypes		(void);
 					void				InitUiPrototypes		(void);
 					void				InitMonsterPrototypes	(void);
 					void				InitValkyriePrototypes	(void);

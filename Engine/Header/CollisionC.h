@@ -28,7 +28,7 @@ public:
 
 //interface
 public:
-					void			AddCollider			(SP(CCollider) spCollider);
+					void			AddCollider			(SP(CCollider) spCollider, _bool isTrigger = false);
 
 					void			AddCollisionInfo	(_CollisionInfo collisionInfo);
 
