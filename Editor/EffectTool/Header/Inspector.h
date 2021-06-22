@@ -159,9 +159,6 @@ private:
 	afx_msg void OnDeltaposSpinPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeltaposSpinPosY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeltaposSpinPosZ(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnDeltaposSpinRotX(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnDeltaposSpinRotY(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnDeltaposSpinRotZ(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeltaposSpinScaleX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeltaposSpinScaleY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeltaposSpinScaleZ(NMHDR *pNMHDR, LRESULT *pResult);
@@ -224,9 +221,6 @@ public:
 	CSpinButtonCtrl m_spinPosX;
 	CSpinButtonCtrl m_spinPosY;
 	CSpinButtonCtrl m_spinPosZ;
-	CSpinButtonCtrl m_spinRotX;
-	CSpinButtonCtrl m_spinRotY;
-	CSpinButtonCtrl m_spinRotZ;
 	CSpinButtonCtrl m_spinAlphaWidth;
 	CSpinButtonCtrl m_spinAlphaHeigth;
 	CSpinButtonCtrl m_spinScaleX;
@@ -267,6 +261,8 @@ private:
 private:
 	void SaveData(std::wstring Objectkey, SP(Engine::CObject) spObject);
 
+public:
+	CButton m_btnTestButton;
 };
 
 

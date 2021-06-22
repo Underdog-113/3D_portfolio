@@ -40,6 +40,45 @@
     <Filter Include="05.Object\00.EffectMesh\00.AttackTrail">
       <UniqueIdentifier>{06eeb9f6-9d93-4452-920a-7488f55cb385}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object\00.EffectMesh\01.AttackRange">
+      <UniqueIdentifier>{2ef5ee64-e241-4e28-be03-c768d48b27e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader">
+      <UniqueIdentifier>{ba2026dc-b38f-4256-a09b-2d7d50e11ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\00.AttackRangeShader">
+      <UniqueIdentifier>{169986f2-2a1f-40b8-8d58-3c4d145f4c3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\01.CatPawShader">
+      <UniqueIdentifier>{8e0ce369-1541-4bb3-ba7a-38432f605255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\02. CelShader">
+      <UniqueIdentifier>{4da6b3fa-add1-41a0-92f7-e1f6b9cf07d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\03. CircularGaugeShader">
+      <UniqueIdentifier>{81f3c10c-18d1-4272-8efd-ffdfba7689da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\04. DamageFontShader">
+      <UniqueIdentifier>{fec41c4a-8bd6-47b0-b921-9caa84746f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\05. DissolveShader">
+      <UniqueIdentifier>{488bec30-c5ee-4410-9cd9-cadee780027f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\06. EffectShader">
+      <UniqueIdentifier>{97881ed9-c62c-46fb-b7b1-de6e5701359c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\07. MeshTrailShader">
+      <UniqueIdentifier>{0d2283f0-5299-4c7e-aae9-068ed9f39457}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\08.SoftEffectShader">
+      <UniqueIdentifier>{7c985d7b-b064-496f-b504-c02bffa46491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\09.SpawnEffectShader">
+      <UniqueIdentifier>{ffa9bfb3-e0be-40c2-bcc4-a28f3e10858f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\10. WaterShader">
+      <UniqueIdentifier>{1450a4bb-8017-4ce5-98ee-a0043effc658}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -93,6 +132,42 @@
     <ClInclude Include="..\Header\SoftEffect.h">
       <Filter>05.Object\01.SoftEffect</Filter>
     </ClInclude>
+    <ClInclude Include="AttackRange_Editor.h">
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AttackRangeShader.h">
+      <Filter>06.Shader\00.AttackRangeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CatPawShader.h">
+      <Filter>06.Shader\01.CatPawShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CelShader.h">
+      <Filter>06.Shader\02. CelShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CircularGaugeShader.h">
+      <Filter>06.Shader\03. CircularGaugeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DamageFontShader.h">
+      <Filter>06.Shader\04. DamageFontShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DissolveShader.h">
+      <Filter>06.Shader\05. DissolveShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectShader.h">
+      <Filter>06.Shader\06. EffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MeshTrailShader.h">
+      <Filter>06.Shader\07. MeshTrailShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SoftEffectShader.h">
+      <Filter>06.Shader\08.SoftEffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SpawnEffectShader.h">
+      <Filter>06.Shader\09.SpawnEffectShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WaterShader.h">
+      <Filter>06.Shader\10. WaterShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -127,6 +202,42 @@
     </ClCompile>
     <ClCompile Include="..\Code\SoftEffect.cpp">
       <Filter>05.Object\01.SoftEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackRange_Editor.cpp">
+      <Filter>05.Object\00.EffectMesh\00.AttackTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackRangeShader.cpp">
+      <Filter>06.Shader\00.AttackRangeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CatPawShader.cpp">
+      <Filter>06.Shader\01.CatPawShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CelShader.cpp">
+      <Filter>06.Shader\02. CelShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp">
+      <Filter>06.Shader\03. CircularGaugeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DamageFontShader.cpp">
+      <Filter>06.Shader\04. DamageFontShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DissolveShader.cpp">
+      <Filter>06.Shader\05. DissolveShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectShader.cpp">
+      <Filter>06.Shader\06. EffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeshTrailShader.cpp">
+      <Filter>06.Shader\07. MeshTrailShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoftEffectShader.cpp">
+      <Filter>06.Shader\08.SoftEffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpawnEffectShader.cpp">
+      <Filter>06.Shader\09.SpawnEffectShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WaterShader.cpp">
+      <Filter>06.Shader\10. WaterShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
