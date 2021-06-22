@@ -254,7 +254,7 @@ void CKiana::UseUltraCost(void)
 		curSp = 0.f;
 	}
 
-	m_pStat->SetCurSp(curSp);
+	m_pStat->SetCurSp(curSp);                        
 }
 
 

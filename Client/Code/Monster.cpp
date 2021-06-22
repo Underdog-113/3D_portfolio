@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\Monster.h"
 
+#include "AttackBall.h"
 
 CMonster::CMonster()
 {
@@ -25,9 +26,9 @@ void CMonster::Awake(void)
 	m_spShader		= AddComponent<Engine::CShaderC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
 
-	//m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
-	//m_spCollision = AddComponent<Engine::CCollisionC>();
-	//m_spDebug = AddComponent<Engine::CDebugC>();
+	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
+	m_spCollision = AddComponent<Engine::CCollisionC>();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 }
 
 void CMonster::Start(void)
@@ -92,4 +93,20 @@ void CMonster::SetBasicName(void)
 
 void CMonster::ApplyHitInfo(HitInfo info)
 {
+}
+
+void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetStrengthType(strength);
+	info.SetCrowdControlType(cc);
+
+	m_pAttackBall->SetParentMatrix(pBoneMat);
+	m_pAttackBall->SetIsEnabled(true);
+}
+
+void CMonster::UnActiveAttackBall()
+{
+	m_pAttackBall->SetIsEnabled(false);
 }
