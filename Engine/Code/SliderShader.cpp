@@ -63,7 +63,7 @@ void CSliderShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	m_pEffect->SetMatrix("g_matProj", &projMat);
 
 	SP(CTextureC) spTexture = spGC->GetTexture();
-	IDirect3DBaseTexture9* s = spTexture->GetTexData()[0][0]->pTexture;
+	IDirect3DBaseTexture9* s = spTexture->GetTexData()[spTexture->GetSetIndex()][spTexture->GetTexIndex()]->pTexture;
 	m_pEffect->SetTexture("g_BaseTexture", s);
 	m_pEffect->CommitChanges();
 }

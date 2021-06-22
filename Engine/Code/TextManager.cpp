@@ -7,14 +7,14 @@ IMPLEMENT_SINGLETON(CTextManager)
 void CTextManager::Awake(void)
 {
 	__super::Awake();
-	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\KCCChassam.ttf", FR_PRIVATE, 0);
+	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\koverwatch.ttf", FR_PRIVATE, 0);
 }
 
 void CTextManager::Start(void)
 {
 
 	if (FAILED(D3DXCreateFont(GET_DEVICE, 0, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &m_pFont)))
+		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"koverwatch", &m_pFont)))
 	{
 		MSG_BOX(__FILE__, L"TextManager.cpp / 19");
 	}
@@ -110,17 +110,9 @@ void CTextManager::DeleteText(std::wstring textKey)
 	m_mTexts.erase(it);
 }
 
-void CTextManager::DrawMyText(_Text* pText) // ���⼭ �ؽ��Ŀ� �������ָ��Ǵµ� ��� ������?
+void CTextManager::DrawMyText(_Text* pText)
 {
-	/*if (FAILED(D3DXCreateFont(GET_DEVICE, pText->m_fontSize * -1, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &m_pFont)))
-	{
-		MSG_BOX(__FILE__, L"TextManager.cpp / 106");
-		m_pFont = nullptr;
-	}*/
-
 	if (!m_pFont)
-
 		return;
 
 	std::basic_string<WCHAR> msg = pText->m_message.c_str();

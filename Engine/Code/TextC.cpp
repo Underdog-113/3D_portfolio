@@ -26,7 +26,7 @@ void CTextC::Awake()
 
 	m_componentID = (_int)m_s_componentID;
 
-	//AddFontResourceEx(_SOLUTIONDIR L"±¼¸²", FR_PRIVATE, 0);
+	AddFontResourceEx(_SOLUTIONDIR L"Resource\\Font\\koverwatch.ttf", FR_PRIVATE, 0);
 }
 
 void CTextC::Start(SP(CComponent) spThis)
@@ -85,7 +85,7 @@ void CTextC::AddFontData(std::wstring message, _float2 position, _float2 boxSize
 	_TextCom t(message, position + correction, boxSize, fontSize, alignment, color, isVisible);
 
 	if (FAILED(D3DXCreateFont(GET_DEVICE, fontSize, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &t.m_pFont)))
+		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"koverwatch", &t.m_pFont)))
 	{
 		MSG_BOX(__FILE__, L"CTextC.cpp / AddFontData");
 	}
