@@ -36,11 +36,12 @@ void CDamageObjectPool::OnDestroy(void)
 	m_activationObjectList.clear();
 }
 
-void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _float upSpped, _float enableTime, _int damage, std::wstring color)
+void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float interval, _float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
 	// damage의 자릿수만큼 for문돌아야한다.
 	
-	int Tdamage = damage;
+	_int Tdamage = damage;
+	_float intervalSum = interval;
 	while (Tdamage != 0)
 	{
 		int value = Tdamage % 10;
@@ -57,11 +58,9 @@ void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _
 		}
 
 		Engine::CObject* object = m_disabledObjectList.front();
-		object->GetComponent<CDamageFontC>()->AddDamageFontInit(upSpped, enableTime, value, color);
-		object->GetTransform()->SetPosition(pos);
-		pos.x += interval;
+		object->GetComponent<CDamageFontC>()->AddDamageFontInit(target, intervalSum, upSpped, lifeTime, value, color);
+		intervalSum += interval;
 		object->GetTransform()->SetSize(size);
-
 		m_disabledObjectList.pop_front();
 		m_activationObjectList.emplace_back(object);
 	}
