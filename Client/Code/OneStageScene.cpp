@@ -187,7 +187,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))

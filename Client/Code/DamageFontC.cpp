@@ -78,6 +78,5 @@ void CDamageFontC::AddDamageFontInit(_float upSpped, _float lifeTime, _int damag
 	m_oldLifeTime = m_lifeTime;
 	m_damage = damage;
 
-	// 텍스처를 지울수있는 기능이필요하다.
 	GetOwner()->GetComponent<Engine::CTextureC>()->ChangeTexture(color + std::to_wstring(damage), 0);
 }

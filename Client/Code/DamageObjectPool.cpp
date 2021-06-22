@@ -18,6 +18,7 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 		image->AddComponent<CDamageFontC>();
 
 		image->SetIsEnabled(false);
+		image->GetTexture()->AddTexture(L"Defalut", 0);
 		m_disabledObjectList.emplace_back(image.get());
 	}
 
