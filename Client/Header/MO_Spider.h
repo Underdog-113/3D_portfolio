@@ -33,13 +33,16 @@ public:
 	virtual			void					ApplyHitInfo	(HitInfo info) override;
 
 public:
-	void ChaseTarget(_float3 targetPos);
-
-public:
 	static		SP(CMO_Spider)			Create(_bool isStatic, Engine::CScene* pScene);
-
+				void					ChaseTarget(_float3 targetPos);
+				void					SetStatus(BaseStat stat);
 private:
 	static		_uint				m_s_uniqueID;
+
+private:
+	GETTOR		(SP(Engine::CRigidBodyC),	m_spRigidBody,		nullptr,	RigidBody)
+	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
+	GETTOR		(SP(Engine::CDebugC),		m_spDebug,			nullptr,	Debug)
 
 //private:
 //	GETTOR(SP(FSM_SpiderC), m_spFSM, nullptr, FSM)//이거 나중에 지워 알게찌?

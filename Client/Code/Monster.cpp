@@ -102,6 +102,7 @@ void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, H
 	info.SetStrengthType(strength);
 	info.SetCrowdControlType(cc);
 
+	_float3 size = m_pAttackBall->GetTransform()->GetSize();
 	m_pAttackBall->SetParentMatrix(pBoneMat);
 	m_pAttackBall->SetIsEnabled(true);
 }

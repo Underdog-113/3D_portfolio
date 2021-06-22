@@ -8,6 +8,7 @@
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
+#include "AttackBall.h"
 
 CSpiderBasePattern::CSpiderBasePattern()
 {
@@ -24,10 +25,10 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_SpiderC) fsm = pOwner->GetComponent<CFSM_SpiderC>();
 
-	CoolTime(m_atkTime, m_atkCool, m_atkReady);
-	CoolTime(m_walkTime, m_walkCool, m_walkReady);
-
-	static_cast<CMO_Spider*>(pOwner)->ChaseTarget(tPos);
+	if (Name_Attack_1 != fsm->GetCurStateString())
+	{
+		static_cast<CMO_Spider*>(pOwner)->ChaseTarget(tPos);
+	}
 
 	// 상대가 공격 범위 밖이고
 	if (len > m_atkDis)
@@ -54,13 +55,20 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			fsm->ChangeState(Name_Attack_1);
 		}
-		
 	}
 
-	// 공격1 상태라면 사라짐
-	if (Name_Attack_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	// 공격1 상태가 완료되면 attackball off 및 오브젝트 제거
+	if (Name_Attack_1 == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline())
 	{
+		static_cast<CMO_Spider*>(pOwner)->UnActiveAttackBall();
 		pOwner->SetDeleteThis(true);
+	}
+	// 공격1 상태라면
+	else if (Name_Attack_1 == fsm->GetCurStateString() && 0.8f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_explosionPosMat = pOwner->GetTransform()->GetWorldMatrix();
+		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat);
+		static_cast<Engine::CSphereCollider*>(static_cast<CMO_Spider*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.f);
 	}
 }
 
