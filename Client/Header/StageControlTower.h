@@ -41,9 +41,6 @@ public:
 	enum Squad_Role { Actor, Wait_1, Wait_2 };
 
 public:
-	//CStageControlTower();
-	//~CStageControlTower();
-
 	void Awake(void);
 	void Start(CreateMode mode = ALL);
 	void Update(void);

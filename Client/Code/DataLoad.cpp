@@ -463,7 +463,7 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
 							 std::to_wstring(i) + L"_renderID", renderID);
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
-		spDecoObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	}
 
 

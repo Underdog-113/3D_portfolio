@@ -21,19 +21,19 @@ void CRenderTargetManager::Start(void)
 
 	//Add render targets
 	AddRenderTarget(L"Target_Albedo", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
-	InitDebugBufferMRT(L"Target_Albedo", 0, 0, 200, 200);
+	InitDebugBufferMRT(L"Target_Albedo", 0, 0, 256, 144);
 
 	AddRenderTarget(L"Target_Normal", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 1));
-	InitDebugBufferMRT(L"Target_Normal", 0, 200, 200, 200);
+	InitDebugBufferMRT(L"Target_Normal", 0, 144, 256, 144);
 	
 	AddRenderTarget(L"Target_Depth", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(1, 1, 1, 1));
-	InitDebugBufferMRT(L"Target_Depth", 0, 400, 200, 200);
+	InitDebugBufferMRT(L"Target_Depth", 0, 288, 256, 144);
 
 	AddRenderTarget(L"Target_Shade", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 1));
-	InitDebugBufferMRT(L"Target_Shade", 200, 0, 200, 200);
+	InitDebugBufferMRT(L"Target_Shade", 256, 0, 256, 144);
 
 	AddRenderTarget(L"Target_Specular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
-	InitDebugBufferMRT(L"Target_Specular", 200, 200, 200, 200);
+	InitDebugBufferMRT(L"Target_Specular", 256, 144, 256, 144);
 
 	
 	//Init RenderTargetMap and Put RenderTarget into themO

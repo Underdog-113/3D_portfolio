@@ -15,6 +15,7 @@ IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
 {
 	m_activation = true;
+	m_monsterHpCount = 0;
 	//MainCanvas
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
 
@@ -83,8 +84,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
-	m_monsterName =	pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L"MonsterStateCanvas_MonsterName_0").get();
-	m_monsterName->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(248.6f, -350.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
+	m_monsterName = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterName_0").get();
+	m_monsterCount = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHpCount_1").get();
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
 	m_monsterProperty->GetTexture()->AddTexture(L"icon_up", 0);
@@ -99,6 +100,18 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterWhiteHpBar[1]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_5").get()));
 	m_monsterWhiteHpBar[2]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
+
+	for (int i = 0; i < 3; i++)
+	{
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarOrange", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
+
+		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
+		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
+		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
+	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//HitsCanvas
 	m_hitsCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"HitsCanvas").get());
@@ -133,8 +146,6 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
-
-	
 }
 
 void CBattleUiManager::Update(void)
@@ -152,6 +163,26 @@ void CBattleUiManager::Update(void)
 		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(true);
 	else
 		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(false);
+
+
+	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
+	{
+		// 문제1 하얀색이 ㅈㄴ 부자연스럽다.
+		// 문제2 백그라운드의 색만 바뀐다.
+		m_monsterHpCount--;
+
+		for (auto object : m_monsterHpBar)
+		{
+			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
+			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount);
+		}
+
+		for (auto object : m_monsterWhiteHpBar)
+		{
+			object->SetValue(m_monsterWhiteHpBar[2]->GetMaxValue());
+		}
+	}
 }
 
 void CBattleUiManager::OnDestroy(void)
@@ -212,28 +243,30 @@ void CBattleUiManager::KeyPad(_int value)
 
 void CBattleUiManager::HitCount(_float lifeTime)
 {
-	// 오프젝트를 관리해주는게 필요할듯
 	m_hitsCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(lifeTime);
 	m_hitsCanvas->SetIsEnabled(true);
 	m_hitCount->GetComponent<CHitsUiC>()->AddHitsCount(1);
 }
 
-void CBattleUiManager::MonsterState(std::wstring name, _float hp, std::wstring property)
+void CBattleUiManager::MonsterState(std::wstring name, _float hp, _int hpCount, std::wstring property)
 {
-	// 오브젝트 켜주고 꺼주는 오브젝트가 필요할듯
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
+	m_monsterHpCount = hpCount;
+	m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(hp);
+		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount -1);
+		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount);
 	}
 	
 	for (auto object : m_monsterWhiteHpBar)
 	{
 		object->SetValue(hp);
 	}
-
 
 	if (property == L"UP")
 	{
@@ -323,7 +356,7 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
-
+	//m_target[0]->GetComponent<CTargetPositionC>()->m_target = object;
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
 	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 
@@ -408,8 +441,8 @@ bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 {
 	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)
 	{
-		m_coolTimeSlider[value]->SetMaxValue(collTime);
 		m_coolTimeSlider[value]->SetValue(collTime);
+		m_coolTimeSlider[value]->SetMaxValue(collTime);
 		PlayerSpDown((_float)spValue);
 	}
 	return false;
@@ -436,4 +469,5 @@ void CBattleUiManager::BattleEnd()
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->GetComponent<Engine::CTextC>()
 		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
 }
+
 

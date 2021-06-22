@@ -47,7 +47,7 @@ private:
 	GETTOR_SETTOR(SP(CObject), m_spFill, nullptr, Fill);
 	GETTOR_SETTOR(ESliderDirection, m_direction, ESliderDirection::LeftToRight, Direction);
 
-	GETTOR_SETTOR(_float, m_circularMaxValue, 0, CircularMaxValue);
+	GETTOR_SETTOR(_float, m_circularMaxValue, 360, CircularMaxValue);
 	GETTOR_SETTOR(_float, m_circularMinValue, 0, CircularMinValue);
 };
 END

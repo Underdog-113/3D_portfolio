@@ -56,19 +56,15 @@ void CSlider::Update(void)
 {
 	__super::Update();
 
-	//*
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Z))
 	{
-		m_value -= 1.0f;
+		m_value -= 0.5;
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_X))
 	{
-		m_value += 1.0f;
+		m_value += 0.5f;
 	}
-
-	//std::cout << "value : " << m_value << std::endl;
-	//*/
 }
 
 void CSlider::LateUpdate(void)

@@ -20,7 +20,14 @@ CSickleBornPattern::~CSickleBornPattern()
 
 void CSickleBornPattern::Pattern(Engine::CObject* pOwner)
 {
-	std::cout << "born" << std::endl;
+	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
+
+	// 내가 born 상태이고, 애니가 끝났다면
+	if (Name_Sickle_Born == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	{
+		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
+		fsm->ChangeState(Name_Sickle_StandBy);
+	}
 }
 
 SP(CSickleBornPattern) CSickleBornPattern::Create()

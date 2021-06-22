@@ -49,7 +49,6 @@ void CSkillActivationC::Update(SP(CComponent) spThis)
 		m_dir = m_speed * 1;
 	}
 	m_alpha += GET_DT * m_dir;
-	std::cout << m_alpha << std::endl;
 	GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(_float4(1, 1, 1, m_alpha));
 }
 

@@ -71,7 +71,7 @@ void CAttackRangeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	else
 	{
 		m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
-		//m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
+		//m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
 	}
 
 	m_pEffect->SetFloat("gTime", m_fTime);

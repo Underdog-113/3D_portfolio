@@ -37,6 +37,7 @@ SP(Engine::CObject) CKiana_CatPaw_Atk01::MakeClone(void)
 	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
 
 	return spClone;
 }
@@ -53,6 +54,10 @@ void CKiana_CatPaw_Atk01::Awake(void)
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
 	m_spShader		= AddComponent<Engine::CShaderC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
+	
+	m_spCollision	= AddComponent<Engine::CCollisionC>();
+	m_spDebug		= AddComponent<Engine::CDebugC>();
+
 }
 
 void CKiana_CatPaw_Atk01::Start(void)
@@ -61,6 +66,9 @@ void CKiana_CatPaw_Atk01::Start(void)
 
 	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetReplay(false);
 
+	//auto col = Engine::CObbCollider::Create((_int)ECollisionID::PlayerAttack);
+	//col->SetIsTrigger(true);
+	//m_spCollision->AddCollider(col);
 }
 
 void CKiana_CatPaw_Atk01::FixedUpdate(void)
@@ -115,6 +123,18 @@ void CKiana_CatPaw_Atk01::OnEnable(void)
 void CKiana_CatPaw_Atk01::OnDisable(void)
 {
 	__super::OnDisable();
+}
+
+void CKiana_CatPaw_Atk01::OnCollisionEnter(Engine::_CollisionInfo ci)
+{
+}
+
+void CKiana_CatPaw_Atk01::OnCollisionStay(Engine::_CollisionInfo ci)
+{
+}
+
+void CKiana_CatPaw_Atk01::OnCollisionExit(Engine::_CollisionInfo ci)
+{
 }
 
 void CKiana_CatPaw_Atk01::SetBasicName(void)

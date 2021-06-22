@@ -28,9 +28,9 @@ SP(Engine::CObject) CMO_Dummy::MakeClone(void)
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
-	//spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
-	//spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
-	//spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
 		
 	return spClone;
 }
@@ -45,10 +45,7 @@ void CMO_Dummy::Start(void)
 {
 	__super::Start();
 
-	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
-	m_spCollision = AddComponent<Engine::CCollisionC>();
-	m_spDebug = AddComponent<Engine::CDebugC>();
-
+	
 	m_spCollision->
 		AddCollider(Engine::CRayCollider::Create(
 		(_int)ECollisionID::FloorRay,
