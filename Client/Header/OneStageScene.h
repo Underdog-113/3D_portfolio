@@ -35,6 +35,9 @@ private:
 	void				Create_SceneCamera(void);
 	
 	void				Create_Dummy(_float3 pos);
+	void				Create_Sickle(_float3 pos);
+	void				Create_Spider(_float3 pos);
+
 
 	void				InitPrototypes(void) override;
 
@@ -48,9 +51,23 @@ private:
 	CBattleUiManager* m_pBattleUIManager = nullptr;
 
 	SP(Engine::CObject) m_spValkyrie;
-	SP(Engine::CObject) m_spSpider;
+
+	std::vector<SP(Engine::CObject)> m_vSickle;
+	std::vector<SP(Engine::CObject)> m_vSpider;
 
 
+	//SP(Engine::CObject) m_spGanesha;
+
+	SP(Engine::CObject) m_spSpider1;
+	SP(Engine::CObject) m_spSpider2;
+	
+	SP(Engine::CObject) m_spSickle1;
+	SP(Engine::CObject) m_spSickle2;
+	
+	SP(Engine::CObject) m_spGanesha;
+
+	_bool m_bossSpawn = false; // 보스 소환 스위치
+	_bool m_onBoss = false; // true : 보스 소환함 false : 보스 소환 안함
 
 	std::vector<SP(Engine::CObject)> m_vDummy;
 };

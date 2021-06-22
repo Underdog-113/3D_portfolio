@@ -28,6 +28,10 @@ SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
 
 	spClone->m_spStateMachine = spClone->GetComponent<CFSM_GaneshaC>();
 
+	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+
 	return spClone;
 }
 
@@ -41,6 +45,9 @@ void CMB_Ganesha::Awake(void)
 void CMB_Ganesha::Start(void)
 {
 	__super::Start();
+
+	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
+	m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 
