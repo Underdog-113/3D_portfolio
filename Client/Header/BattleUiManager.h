@@ -88,6 +88,7 @@ private:
 	Engine::CImageObject* m_hits;
 	Engine::CImageObject* m_monsterProperty;
 	Engine::CObject* m_monsterName;
+	Engine::CObject* m_monsterCount;
 	Engine::CObject* m_playerHp;
 	Engine::CObject* m_playerSp;
 	Engine::CImageObject* m_time;

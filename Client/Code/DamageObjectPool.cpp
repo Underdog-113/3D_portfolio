@@ -13,10 +13,11 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 	{
 		SP(Engine::CImageObject) image =
 			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"DamageFontUIObject"));
-		image->AddComponent<Engine::CShaderC>()->
-			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"DamageFontShader")));
+		image->GetComponent<Engine::CShaderC>()->
+			AddShader((_int)EShaderID::DamageFontShader);
 		image->AddComponent<CDamageFontC>();
 		image->SetIsEnabled(false);
+		image->GetTexture()->AddTexture(L"Defalut", 0);
 		m_disabledObjectList.emplace_back(image.get());
 	}
 
