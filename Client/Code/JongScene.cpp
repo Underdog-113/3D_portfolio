@@ -64,7 +64,7 @@ void CJongScene::Start(void)
 	KianaTest();
 	//TheresaTest();
 
-	CollisionDummy();
+	//CollisionDummy();
 	//SickleTest();
 
 	SetupStageUI();

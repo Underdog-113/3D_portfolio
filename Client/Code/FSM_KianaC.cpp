@@ -176,52 +176,52 @@ void CFSM_KianaC::CreateEffect_Attack1()
 
 void CFSM_KianaC::CreateEffect_Attack2()
 {
-	_float size = 0.05f;
+	_float size = 0.5f;
 
-	auto effect = m_pKiana->CreateEffect(L"kia");
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_1");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	
 
-	effect->GetTransform()->SetForward(m_pKiana->GetTransform()->GetForward());
-	//effect->GetTransform()->SetRotationX(D3DXToRadian(-90.f));
-	//effect->GetTransform()->SetRotationY(-m_pKiana->GetTransform()->GetRotation().y);
-	//effect->GetTransform()->SetRotationZ(D3DXToRadian(180.f));
-	
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CFSM_KianaC::CreateEffect_Attack3()
 {
-	_float size = 0.25f;
+	_float size = 0.5f;
 
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_2");
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_2");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	//effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CFSM_KianaC::CreateEffect_Attack4()
 {
-	_float size = 0.25f;
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_3");
+	_float size = 0.5f;
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_3");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	//effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
-	//effect->GetTransform()->AddRotationZ(D3DXToRadian(180.f));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CFSM_KianaC::CreateEffect_Attack5()
 {
-	_float size = 0.25f;
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_4");
+	_float size = 0.5f;
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_4");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	//effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
-	//effect->GetTransform()->AddRotationZ(D3DXToRadian(180.f));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float coolTime /*= Cool_Attack*/)
