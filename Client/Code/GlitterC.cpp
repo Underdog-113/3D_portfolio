@@ -53,8 +53,6 @@ void CGlitterC::Update(SP(CComponent) spThis)
 		m_A0Timer = m_A0TimerMax;
 		m_A1Timer = m_A1TimerMax;
 	}
-
-	std::cout << GetOwner()->GetComponent<Engine::CTextureC>()->GetColor().w << std::endl;
 }
 
 void CGlitterC::LateUpdate(SP(CComponent) spThis)

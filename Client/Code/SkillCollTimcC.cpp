@@ -41,6 +41,11 @@ void CSkillCollTimcC::FixedUpdate(SP(CComponent) spThis)
 void CSkillCollTimcC::Update(SP(CComponent) spThis)
 {
 	m_spSlider->SetValue(m_spSlider->GetValue() - GET_DT);
+
+	if (m_spSlider->GetValue() >= 0)
+	{
+		std::cout << m_spSlider->GetValue() << std::endl;
+	}
 }
 
 void CSkillCollTimcC::LateUpdate(SP(CComponent) spThis)

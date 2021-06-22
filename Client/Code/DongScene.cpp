@@ -53,9 +53,9 @@ void CDongScene::Start(void)
 		SP(Engine::CSlider) slider =
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
 		slider->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
-		slider->SetDirection((Engine::CSlider::ESliderDirection::BottomToTop));
+		slider->SetDirection((Engine::CSlider::ESliderDirection::TopToBottom));
 		slider->SetCircularMaxValue(360.0f);
-		slider->SetCircularMinValue(200.0f);
+		slider->SetCircularMinValue(0.0f);
 
 		SP(Engine::CImageObject) background =
 			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));

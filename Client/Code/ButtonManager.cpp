@@ -65,11 +65,11 @@ void CButtonManager::ButtonActivation(std::list<CButton*> buttonList)
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			if (m_funcActivation == nullptr)
+			if (button->GetIsEnabled() && m_funcActivation == nullptr)
 			{
 				m_funcActivation = button;
 			}
-			else if (m_funcActivation && m_funcActivation->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
+			else if (button->GetIsEnabled() && m_funcActivation->GetTransform()->GetPosition().z < button->GetTransform()->GetPosition().z)
 			{
 				m_funcActivation = button;
 			}
