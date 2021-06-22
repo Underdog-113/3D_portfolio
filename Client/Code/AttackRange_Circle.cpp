@@ -47,7 +47,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Diffuse
 		= std::dynamic_pointer_cast<CDecoObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_int)Engine::ELayerID::Effect, L"AttackRange1"));
 
-	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CMeshC>()->AddMeshData(L"AttackRange_Circle");
+	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
@@ -59,7 +59,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Alpha	= 
 		std::dynamic_pointer_cast<CDecoObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_int)Engine::ELayerID::Effect, L"AttackRange"));
 
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CMeshC>()->AddMeshData(L"AttackRange_Circle");
+	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");

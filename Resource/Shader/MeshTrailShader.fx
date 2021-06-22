@@ -47,6 +47,7 @@ struct VS_OUTPUT
 
 struct PS_OUTPUT
 {
+	float4 mHSBC   : COLOR;
 	float4 vColor : COLOR0;
 };
 
@@ -72,26 +73,52 @@ struct PS_INPUT
 	float2 mUV : TEXCOORD0;
 	float3 mDiffuse : TEXCOORD1;
 	float3 mNormal	 : NORMAL;
-
 };
+
+float3 applyHue(float3 aColor, float aHue)
+{
+	float angle = radians(aHue);
+	float3 k = float3(0.57735, 0.57735, 0.57735);
+	float cosAngle = cos(angle);
+
+	//Rodrigues' rotation formula
+	return aColor * cosAngle + cross(k, aColor) * sin(angle) + k * dot(k, aColor) * (1 - cosAngle);
+}
+
+
 
 float4 ps_main(VS_OUTPUT Input) : COLOR
 {
 	PS_OUTPUT Out = (PS_OUTPUT)0;
 
+	Out.mHSBC = float4(1,1,1,0.7);
+
+	float _Hue = 360 * Out.mHSBC.r;
+    float _Brightness = Out.mHSBC.g * 2 - 1;
+    float _Contrast = Out.mHSBC.b * 2;
+    float _Saturation = Out.mHSBC.a * 2;
+
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
+	float4 outputColor = albedo;
+	outputColor.rgb = applyHue(outputColor.rgb, _Hue);
+	outputColor.rgb = (outputColor.rgb - 0.5f) * (_Contrast)+0.5f;
+	outputColor.rgb = outputColor.rgb + _Brightness;
+
+	float3 intensity = dot(outputColor.rgb, float3(0.299, 0.587, 0.114));
+	outputColor.rgb = lerp(intensity, outputColor.rgb, _Saturation);
+
 	// Noise Texture
-	float4 Noise = tex2D(NoiseTex, Input.mUV);
+	//float4 Noise = tex2D(NoiseTex, Input.mUV);
 	
 	if (Input.mUV.x > gTrailAlpha)
 	{
-		albedo.a = 0;
-		Noise.a = 0;
+		outputColor.a = 0;
+		//Noise.a = 0;
 	}	
 
-	return albedo * Noise;
+	return outputColor;
 }
 
 
