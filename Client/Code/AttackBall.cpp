@@ -72,7 +72,6 @@ void CAttackBall::Start(void)
 	//col->SetIsTrigger(true);
 	m_spCollision->AddCollider(col);
 
-
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	AddComponent<Engine::CDebugC>();
 	AddComponent<Engine::CShaderC>();

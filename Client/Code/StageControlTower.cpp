@@ -13,14 +13,6 @@
 
 IMPLEMENT_SINGLETON(CStageControlTower)
 
-//CStageControlTower::CStageControlTower()
-//{
-//}
-//
-//
-//CStageControlTower::~CStageControlTower()
-//{
-//}
 
 void CStageControlTower::Awake(void)
 {
@@ -396,6 +388,9 @@ void CStageControlTower::FindTarget()
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
+	if (monsterList.empty())
+		return;
+
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
 	SP(Engine::CObject) spTarget = m_spCurTarget;
 	_float minDistance = 10000.f;
@@ -453,9 +448,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate(), &damage);
 	m_pLinker->MonsterHpDown(damage);
 
-	//CDamageObjectPool::GetInstance()->AddDamage(
-	//	pMonster->GetTransform()->GetPosition(),
-	//	_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
+	CDamageObjectPool::GetInstance()->AddDamage(
+		pMonster->GetTransform()->GetPosition(),
+		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
 
 	// 2. 슬라이더 조정
 

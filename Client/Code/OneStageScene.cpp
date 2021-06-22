@@ -51,14 +51,15 @@ void COneStageScene::Awake(_int numOfLayers)
 void COneStageScene::Start(void)
 {
 	__super::Start();
+	
+	SetupFromLoader();
 
-	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-
-	Start_SetupUI();
-
-	Start_SetupMembers();
-
-	//m_pController->Start();
+	SetupMembers();
+	
+	m_pBattleUIManager = CBattleUiManager::GetInstance();
+	m_pBattleUIManager->Start(this);
+	
+	m_pControlTower->Start();
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -74,7 +75,7 @@ void COneStageScene::Update(void)
 		return;
 
 	m_pControlTower->Update();
-	CBattleUiManager::GetInstance()->Update();
+	m_pBattleUIManager->Update();
 
 
 
@@ -90,16 +91,20 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	CBattleUiManager::DestroyInstance();
+	m_pBattleUIManager->OnDestroy();
+	m_pBattleUIManager->DestroyInstance();
 
+	m_pControlTower->OnDestroy();
 	m_pControlTower->DestroyInstance();
 	m_pControlTower = nullptr;
+
+	m_vDummy.clear();
 }
 
 void COneStageScene::OnEnable(void)
 {
 	__super::OnEnable();
-	CBattleUiManager::GetInstance()->OnDestroy();
+	m_pBattleUIManager->DestroyInstance();
 }
 
 void COneStageScene::OnDisable(void)
@@ -109,7 +114,7 @@ void COneStageScene::OnDisable(void)
 }
 
 
-void COneStageScene::Start_SetupUI(void)
+void COneStageScene::SetupFromLoader(void)
 {
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
@@ -122,33 +127,23 @@ void COneStageScene::Start_SetupUI(void)
 	Load->ToolLoad(this);
 	delete(Load);
 
-	CBattleUiManager::GetInstance()->Start(this);
 }
 
-void COneStageScene::Start_SetupMembers(void)
+void COneStageScene::SetupMembers(void)
 {
 	// Kiana
 	Create_ActorValkyrie();
 
 	// Cam Target Set
 	Create_SceneCamera();
-	// Spider
-	{
-		//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-		//spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
-		//spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		//m_spSpider = spSpiderClone;
-	}
-	// test map
-	{
-		//SP(Engine::CObject) spEmptyObject
-		//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
 
-		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
-		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		//spEmptyObject->AddComponent<Engine::CTextureC>();
-		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	}
+	Create_Dummy(_float3(5.f, 0.f, 0.f));
+	Create_Dummy(_float3(10.f, 0.f, 0.f));
+	Create_Dummy(_float3(15.f, 0.f, 2.f));
+	Create_Dummy(_float3(15.f, 0.f, -2.f));
+	// Spider
+
+
 }
 
 void COneStageScene::Create_ActorValkyrie(void)
@@ -162,11 +157,24 @@ void COneStageScene::Create_ActorValkyrie(void)
 
 void COneStageScene::Create_SceneCamera(void)
 {
+	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
-	cam->SetTargetDist(2.f);
+	cam->SetTargetDist(4.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	
+	cam->SetMode(Engine::ECameraMode::TPS);
 }
+
+void COneStageScene::Create_Dummy(_float3 pos)
+{
+	auto dummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
+	dummy->GetTransform()->SetPosition(pos);
+
+	m_vDummy.emplace_back(dummy);
+}
+
 
 void COneStageScene::InitPrototypes(void)
 {
@@ -187,7 +195,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"���� ����", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"aaaa", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
