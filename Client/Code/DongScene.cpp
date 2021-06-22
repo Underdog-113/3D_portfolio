@@ -68,8 +68,8 @@ void CDongScene::Update(void)
 {
 	__super::Update();
 	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
-
-
+	spEmpty->GetTransform()->AddPositionX(0);
+	CDamageObjectPool::GetInstance()->AddDamage(spEmpty.get(), _float3(36, 51, 0), 36, 80.0f, 10, 123456789, L"Blue");
 }
 
 void CDongScene::LateUpdate(void)

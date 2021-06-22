@@ -6,7 +6,6 @@
 IMPLEMENT_SINGLETON(CDamageObjectPool)
 void CDamageObjectPool::Start(Engine::CScene* pScene)
 {
-	// Ǯ �߱�ȭ
 	_int poolCount = 50;
 
 	for (int i = 0; i <= poolCount; i++)
@@ -26,21 +25,17 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 
 void CDamageObjectPool::Update(void)
 {
-	// Ȱ��ȭ�߿� ��Ȱ��ȭ�ȳ��� �Ѱ��ֱ�
 	ReMoveDamage();
 }
 
 void CDamageObjectPool::OnDestroy(void)
 {
-	// ���� ������Ʈ ����
 	m_disabledObjectList.clear();
 	m_activationObjectList.clear();
 }
 
 void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float interval, _float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
-	// damage�� �ڸ�����ŭ for�����ƾ��Ѵ�.
-
 	_int Tdamage = damage;
 	_float intervalSum = interval;
 	while (Tdamage != 0)
@@ -48,7 +43,6 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float
 		int value = Tdamage % 10;
 		Tdamage /= 10;
 
-		// ������ ���δ� ���ڸ����� �ɰ��� ���ݿ������� �����ϱ�
 		if (m_disabledObjectList.empty())
 		{
 			SP(Engine::CImageObject) image =
@@ -71,7 +65,6 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float
 
 void CDamageObjectPool::ReMoveDamage()
 {
-	// Ȱ��ȭ�� ������Ʈ�߿� ��Ȱ���� ������Ʈ�� �Ѱ��ֱ�
 	/*for (auto& iter = m_activationObjectList.begin(); iter != m_activationObjectList.end(); iter++)
 	{
 		if (!(*iter)->GetIsEnabled())
