@@ -25,14 +25,14 @@ void CSpiderHitPattern::Pattern(Engine::CObject* pOwner)
 	// 내가 피격 당했다면
 	if (Name_Hit_L != fsm->GetCurStateString() &&
 		Name_Attack_1 != fsm->GetCurStateString() &&
-		true == pOwner->GetComponent<CPatternMachineC>()->GetOnHit())
+		true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL())
 	{
 		fsm->ChangeState(Name_Hit_L);
 	}
 	else if (Name_Hit_L == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_StandBy);
-		pOwner->GetComponent<CPatternMachineC>()->SetOnHit(false);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
 	}
 }
 

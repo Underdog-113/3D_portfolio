@@ -408,8 +408,8 @@ bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 {
 	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)
 	{
-		m_coolTimeSlider[value]->SetMaxValue(collTime);
 		m_coolTimeSlider[value]->SetValue(collTime);
+		m_coolTimeSlider[value]->SetMaxValue(collTime);
 		PlayerSpDown((_float)spValue);
 	}
 	return false;

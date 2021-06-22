@@ -42,9 +42,6 @@ void CCircularGaugeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	// 비율구하기
 	_float ratio = (value / maxValue);
 
-	std::cout << ratio << std::endl;
-
-	// 1 ~ 0의값을 조정해야함
 	m_pEffect->SetFloat("g_maxValue", m_spSlider->GetCircularMaxValue());
 	m_pEffect->SetFloat("g_minValue", m_spSlider->GetCircularMinValue());
 

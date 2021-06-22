@@ -48,6 +48,7 @@ private:
 	GETTOR_SETTOR	(Engine::CObject*,			m_pOwner,			nullptr,		Owner)
 	GETTOR_SETTOR	(HitInfo,					m_hitInfo,			HitInfo(),		HitInfoMation)
 	GETTOR_SETTOR	(_mat*,						m_pParentMatrix,	nullptr,		ParentMatrix)
+	GETTOR_SETTOR	(_float3,					m_offset,			ZERO_VECTOR,	Offset)
 
 	
 };

@@ -67,10 +67,13 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 공격 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동 상태라면 공격
-		if (Name_Sickle_Walk_Forward == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		// 내가 이동 상태 or 대기 상태라면 공격
+		if ((Name_Sickle_Walk_Forward == fsm->GetCurStateString() ||
+			Name_Sickle_StandBy == fsm->GetCurStateString()) &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Sickle_Attack_1);
+			static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, static_cast<CMO_Sickle*>(pOwner)->GetRightHandWorldMatrix());
 		}
 		// 공격1 상태라면 뒤로 이동 상태로 변경
 		else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())

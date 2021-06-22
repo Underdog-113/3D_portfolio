@@ -109,7 +109,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-	    CBattleUiManager::GetInstance()->SkillExecution(3, 0, 5);
+	    CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))

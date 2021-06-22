@@ -26,11 +26,13 @@ void CFSM_SickleC::Start(SP(CComponent) spThis)
 {
 	RegisterAllStage();
 
+	
+
 	__super::Start(spThis);
 
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
-	SetStartState(Name_Sickle_StandBy);
+	SetStartState(Name_Sickle_Born);
 	m_curState->DoEnter();
 }
 
