@@ -61,9 +61,9 @@ void CCamera::Start(void)
 	m_pCamRayCollider = static_cast<Engine::CRayCollider*>(m_spCollision->GetColliders()[0].get());
 	m_pFrustum = CFrustum::Create(this);
 
-	if (m_mode == ECameraMode::TPS)
-		m_spCollision->SetIsEnabled(true);
-	else
+	//if (m_mode == ECameraMode::TPS)
+	//	m_spCollision->SetIsEnabled(true);
+	//else
 		m_spCollision->SetIsEnabled(false);
 }
 
