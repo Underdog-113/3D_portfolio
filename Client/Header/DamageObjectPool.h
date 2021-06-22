@@ -12,7 +12,7 @@ public:
 	void Update(void);
 	void OnDestroy(void);
 
-	void AddDamage(_float3 pos, _float3 size, _float interval, _float upSpped, _float enableTime, _int damage, std::wstring color);
+	void AddDamage(Engine::CObject* target, _float3 size, _float interval, _float upSpped, _float lifeTime, _int damage, std::wstring color);
 	void ReMoveDamage();
 private:
 	std::list<Engine::CObject*> m_disabledObjectList;

@@ -51,14 +51,14 @@ void COneStageScene::Awake(_int numOfLayers)
 void COneStageScene::Start(void)
 {
 	__super::Start();
-	
+
 	SetupFromLoader();
 
 	SetupMembers();
-	
+
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
-	
+
 	m_pControlTower->Start();
 }
 
@@ -163,7 +163,7 @@ void COneStageScene::Create_SceneCamera(void)
 	cam->SetTarget(m_spValkyrie);
 	cam->SetTargetDist(4.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-	
+
 	cam->SetMode(Engine::ECameraMode::TPS);
 }
 

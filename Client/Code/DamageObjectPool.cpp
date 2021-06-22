@@ -6,7 +6,7 @@
 IMPLEMENT_SINGLETON(CDamageObjectPool)
 void CDamageObjectPool::Start(Engine::CScene* pScene)
 {
-	// Ç® Ãß±âÈ­
+	// Ç® ï¿½ß±ï¿½È­
 	_int poolCount = 50;
 
 	for (int i = 0; i <= poolCount; i++)
@@ -26,28 +26,29 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 
 void CDamageObjectPool::Update(void)
 {
-	// È°¼ºÈ­Áß¿¡ ºñÈ°¼ºÈ­µÈ³ðµé ³Ñ°ÜÁÖ±â
+	// È°ï¿½ï¿½È­ï¿½ß¿ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½È³ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ö±ï¿½
 	ReMoveDamage();
 }
 
 void CDamageObjectPool::OnDestroy(void)
 {
-	// ¸ðµç ¿ÀºêÁ§Æ® »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	m_disabledObjectList.clear();
 	m_activationObjectList.clear();
 }
 
-void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _float upSpped, _float enableTime, _int damage, std::wstring color)
+void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float interval, _float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
-	// damageÀÇ ÀÚ¸´¼ö¸¸Å­ for¹®µ¹¾Æ¾ßÇÑ´Ù.
-	
-	int Tdamage = damage;
+	// damageï¿½ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½Å­ forï¿½ï¿½ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½Ñ´ï¿½.
+
+	_int Tdamage = damage;
+	_float intervalSum = interval;
 	while (Tdamage != 0)
 	{
 		int value = Tdamage % 10;
 		Tdamage /= 10;
 
-		// µ¥¹ÌÁö ÀüºÎ´Ù ÇÑÀÚ¸´¼ö·Î ÂÉ°³°í °£°Ý¿¡µû¶ó¼­ »ý¼ºÇÏ±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		if (m_disabledObjectList.empty())
 		{
 			SP(Engine::CImageObject) image =
@@ -58,18 +59,11 @@ void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _
 			image->GetTexture()->AddTexture(L"Defalut", 0);
 			m_disabledObjectList.emplace_back(image.get());
 		}
-		
+
 		Engine::CObject* object = m_disabledObjectList.front();
-		object->GetComponent<CDamageFontC>()->AddDamageFontInit(upSpped, enableTime, value, color);
-
-		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
-		_float3 pos2D = cam->WorldToScreenPoint(pos);
-		pos2D.z = 0.f;
-
-		object->GetTransform()->SetPosition(pos2D);
-		pos.x += interval;
+		object->GetComponent<CDamageFontC>()->AddDamageFontInit(target, intervalSum, upSpped, lifeTime, value, color);
+		intervalSum += interval;
 		object->GetTransform()->SetSize(size);
-
 		m_disabledObjectList.pop_front();
 		m_activationObjectList.emplace_back(object);
 	}
@@ -77,7 +71,7 @@ void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _
 
 void CDamageObjectPool::ReMoveDamage()
 {
-	// È°¼ºÈ­µÈ ¿ÀºêÁ§Æ®Áß¿¡ ºñÈ°¼ºµÈ ¿ÀºêÁ§Æ®·Î ³Ñ°ÜÁÖ±â
+	// È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ß¿ï¿½ ï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ö±ï¿½
 	/*for (auto& iter = m_activationObjectList.begin(); iter != m_activationObjectList.end(); iter++)
 	{
 		if (!(*iter)->GetIsEnabled())

@@ -53,10 +53,11 @@ void CDongScene::Start(void)
 
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
-	SP(Engine::CObject) spEmpty =
+	spEmpty =
 		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
+	spEmpty->GetTransform()->SetPosition(_float3(0, 0, 0));
 
-	CDamageObjectPool::GetInstance()->AddDamage(_float3(0, 0, 0), _float3(36, 51, 0), 36, 80.0f, 1, 123456789, L"Blue");
+	CDamageObjectPool::GetInstance()->AddDamage(spEmpty.get(), _float3(36, 51, 0), 36, 80.0f, 10, 123456789, L"Blue");
 }
 
 void CDongScene::FixedUpdate(void)
@@ -68,7 +69,7 @@ void CDongScene::Update(void)
 {
 	__super::Update();
 	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
-
+	spEmpty->GetTransform()->AddPositionX(-1);
 }
 
 void CDongScene::LateUpdate(void)
