@@ -28,7 +28,8 @@ enum class ECollisionID
 	PlayerAttack		= 5 + (_uint)Engine::ECollisionID::NumOfColliderID,
 	EnemyHitBox			= 6 + (_uint)Engine::ECollisionID::NumOfColliderID,
 	EnemyAttack			= 7 + (_uint)Engine::ECollisionID::NumOfColliderID,
-	NumOfColliderID		= 8 + (_uint)Engine::ECollisionID::NumOfColliderID
+	PhaseChanger		= 8 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	NumOfColliderID		= 9 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
 enum class EDataID

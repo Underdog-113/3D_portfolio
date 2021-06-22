@@ -109,7 +109,7 @@ technique Default_Device
 		alphablendenable = true;
 		srcblend = srcalpha;
 		destblend = invsrcalpha;
-
+		CullMode = NONE;
 		vertexshader = compile vs_3_0 VS_MAIN();	// 진입점 함수 명시
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}

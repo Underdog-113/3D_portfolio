@@ -34,7 +34,7 @@ public:
 	void TextLoad(Engine::CScene* pScene);
 
 	// Åø ·Îµå
-	void ToolLoad(Engine::CScene* pScene);
+	void MapLoad(Engine::CScene* pScene);
 	
 	void EffectLoad(Engine::CScene* pScene);
 

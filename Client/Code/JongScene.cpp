@@ -231,7 +231,7 @@ void CJongScene::SetupStageUI()
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	//Load->ToolLoad(this);
+	//Load->MapLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
