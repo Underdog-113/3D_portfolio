@@ -220,7 +220,7 @@ void CBattleUiManager::HitCount(_float lifeTime)
 	m_hitCount->GetComponent<CHitsUiC>()->AddHitsCount(1);
 }
 
-void CBattleUiManager::MonsterState(std::wstring name, _float hp, _int hpCount, std::wstring property)
+void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property)
 {
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
@@ -230,6 +230,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hp, _int hpCount, 
 
 	for (auto object : m_monsterHpBar)
 	{
+		object->SetMaxValue(hpMax);
 		object->SetValue(hp);
 		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
 		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);

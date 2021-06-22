@@ -67,17 +67,22 @@ void COneStageScene::Start(void)
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
 	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-	m_spSickle1 = spSickleClone;
+	m_vSickle.emplace_back(spSickleClone);
 
-	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
-	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-	m_spSickle2 = spSickleClone;
+	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
+	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	//m_vSickle.emplace_back(spSickleClone);
 
-	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(29.1903f, -1.f, 0.606165f);
-	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
-	m_spSpider1 = spSpiderClone;
+	//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	//spSpiderClone->GetTransform()->SetPosition(29.1903f, -1.f, 0.606165f);
+	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	//m_vSpider.emplace_back(spSpiderClone);
+
+	//spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	//spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
+	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	//m_vSpider.emplace_back(spSpiderClone);
 
 	spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
 	spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
@@ -133,7 +138,7 @@ void COneStageScene::Update(void)
 		m_bossSpawn = true;
 		m_onBoss = true;
 	}
-	
+
 	std::cout << "kiana x : " <<
 		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
@@ -184,7 +189,7 @@ void COneStageScene::SetupFromLoader(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	Load->ToolLoad(this);
+	Load->MapLoad(this);
 	delete(Load);
 
 }
@@ -237,7 +242,7 @@ void COneStageScene::Create_Dummy(_float3 pos)
 }
 
 void COneStageScene::Create_Sickle(_float3 pos)
-{			
+{
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(pos);
 	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
@@ -273,7 +278,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"aaaa", 100, 4, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"aaaa",100, 100, 4, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
