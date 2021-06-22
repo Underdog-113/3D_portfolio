@@ -1185,7 +1185,6 @@
     <ClCompile Include="..\Code\WaterShader.cpp">
       <Filter>04.Shader\00.WaterShader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\MO_Dummy.cpp" />
     <ClCompile Include="SkillActivationC.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
@@ -1201,6 +1200,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MO_Dummy.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

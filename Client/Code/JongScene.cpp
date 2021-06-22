@@ -64,8 +64,10 @@ void CJongScene::Start(void)
 	KianaTest();
 	//TheresaTest();
 
-	CollisionDummy();
+	//CollisionDummy();
 	//SickleTest();
+	SpiderTest();
+
 
 	SetupStageUI();
 }
@@ -99,6 +101,8 @@ void CJongScene::Update(void)
 
 		m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
 	}
+
+	_float3 pos = m_spKiana->GetTransform()->GetPosition();
 }
 
 void CJongScene::LateUpdate(void)
@@ -146,10 +150,10 @@ void CJongScene::KianaTest()
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spKiana);
-	cam->SetTargetDist(4.f);
+	cam->SetTargetDist(6.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
-	cam->SetMode(Engine::ECameraMode::TPS);
+	//cam->SetMode(Engine::ECameraMode::TPS);
 
 	// cube terrain
 	{
@@ -161,7 +165,7 @@ void CJongScene::KianaTest()
 
 		spCube->AddComponent<Engine::CDebugC>();
 		spCube->AddComponent<Engine::CShaderC>();
-		spCube->GetTransform()->SetSize(10, 1, 10);
+		spCube->GetTransform()->SetSize(20, 1, 20);
 		spCube->GetTransform()->SetPosition(0, -1.f, 0);
 
 	}
@@ -207,6 +211,13 @@ void CJongScene::CollisionDummy()
 	m_spDummy2->GetTransform()->SetPosition(-2, 0, 5);
 
 	static_cast<CMO_Dummy*>(m_spDummy2.get())->SetStatus(stat);
+}
+
+void CJongScene::SpiderTest()
+{
+	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(5.f, 0.f, 0.f);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 }
 
 void CJongScene::SickleTest()

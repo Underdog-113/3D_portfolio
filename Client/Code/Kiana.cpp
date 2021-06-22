@@ -312,7 +312,6 @@ void CKiana::UltraAtk(AttackOption index)
 
 		pos = m_spTransform->GetPosition() + m_spTransform->GetForward();
 		m_spCatPaw_Atk01->GetTransform()->SetPosition(pos);
-		m_spCatPaw_Atk01->GetTransform()->AddPositionY(-0.25f);
 		m_spCatPaw_Atk01->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
 		m_spCatPaw_Atk01->GetTransform()->UpdateWorldMatrix();
 		break;
@@ -372,22 +371,23 @@ void CKiana::UltraAtk_Ring(AttackOption index)
 	switch (index)
 	{
 	case CKiana::ATK01:
-		m_spCatPaw_Ring_Atk01->SetIsEnabled(true);
+		//m_spCatPaw_Ring_Atk01->SetIsEnabled(true);
 
-		pos = m_spTransform->GetPosition() + m_spTransform->GetForward() * 1.3f;
-		m_spCatPaw_Ring_Atk01->GetTransform()->SetPosition(pos);
-		m_spCatPaw_Ring_Atk01->GetTransform()->AddPositionY(-0.27f);
-		m_spCatPaw_Ring_Atk01->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
-		m_spCatPaw_Ring_Atk01->GetTransform()->UpdateWorldMatrix();
+		//pos = m_spTransform->GetPosition() + m_spTransform->GetForward() * 1.3f;
+		//m_spCatPaw_Ring_Atk01->GetTransform()->SetPosition(pos);
+		//m_spCatPaw_Ring_Atk01->GetTransform()->AddPositionY(-0.27f);
+		//m_spCatPaw_Ring_Atk01->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
+		//m_spCatPaw_Ring_Atk01->GetTransform()->UpdateWorldMatrix();
 		break;
 	case CKiana::ATK02:
-		m_spCatPaw_Ring_Atk02->SetIsEnabled(true);
+		//m_spCatPaw_Ring_Atk02->SetIsEnabled(true);
 
-		pos = m_spTransform->GetPosition() + m_spTransform->GetForward() * 1.3f;
-		m_spCatPaw_Ring_Atk02->GetTransform()->SetPosition(pos);
-		m_spCatPaw_Ring_Atk02->GetTransform()->AddPositionY(-0.27f);
-		m_spCatPaw_Ring_Atk02->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
-		m_spCatPaw_Ring_Atk02->GetTransform()->UpdateWorldMatrix();
+		//pos = m_spTransform->GetPosition() + m_spTransform->GetForward();
+
+		//m_spCatPaw_Ring_Atk02->GetTransform()->SetPosition(pos);
+		//m_spCatPaw_Ring_Atk02->GetTransform()->AddPositionY(-0.27f);
+		//m_spCatPaw_Ring_Atk02->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
+		//m_spCatPaw_Ring_Atk02->GetTransform()->UpdateWorldMatrix();
 		break;
 	case CKiana::ATK03:
 		//m_spCatPaw_Atk03->SetIsEnabled(true);
