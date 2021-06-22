@@ -37,7 +37,17 @@ private:
 	CStageControlTower* m_pController = nullptr;
 
 	SP(Engine::CObject) m_spValkyrie;
-	SP(Engine::CObject) m_spSpider;
+
+	SP(Engine::CObject) m_spSpider1;
+	SP(Engine::CObject) m_spSpider2;
+	
+	SP(Engine::CObject) m_spSickle1;
+	SP(Engine::CObject) m_spSickle2;
+	
+	SP(Engine::CObject) m_spGanesha;
+
+	_bool m_bossSpawn = false; // 보스 소환 스위치
+	_bool m_onBoss = false; // true : 보스 소환함 false : 보스 소환 안함
 };
 
 #endif

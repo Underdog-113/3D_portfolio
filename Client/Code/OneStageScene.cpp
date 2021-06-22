@@ -16,6 +16,10 @@
 // import from jongscene
 #include "Include_ForTest.h"
 
+// for monster pattern
+#include "PatternMachineC.h"
+#include "ClientPatterns.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -58,6 +62,26 @@ void COneStageScene::Start(void)
 	Start_SetupMembers();
 
 	//m_pController->Start();
+
+	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	m_spSickle1 = spSickleClone;
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	m_spSickle2 = spSickleClone;
+
+	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(29.1903f, -1.f, 0.606165f);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	m_spSpider1 = spSpiderClone;
+
+	spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	m_spSpider2 = spSpiderClone;
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -131,7 +155,36 @@ void COneStageScene::Update(void)
 	    CBattleUiManager::GetInstance()->BattleEnd();
 	}
 
+	if (true == m_bossSpawn)
+	{
+		/* Ganesha */
+		SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+		spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
+		spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
+		spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+		m_spGanesha = spGaneshaClone;
+
+		m_bossSpawn = false;
+	}
+	else if (Engine::IMKEY_DOWN(KEY_TAB))
+	{
+		m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
+	}
+	else if (Engine::IMKEY_DOWN(KEY_R))
+	{
+		m_bossSpawn = true;
+		m_onBoss = true;
+	}
 	
+	std::cout << "kiana x : " << 
+		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
+		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
+		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 }
 
 void COneStageScene::LateUpdate(void)
@@ -185,6 +238,7 @@ void COneStageScene::Start_SetupMembers(void)
 		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
 		m_spValkyrie = spKianaClone;
+		m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
 		m_pController->AddSquadMember(m_spValkyrie);
 		m_pController->Start();
 
