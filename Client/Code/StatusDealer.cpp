@@ -12,7 +12,7 @@ CStatusDealer::~CStatusDealer()
 {
 }
 
-bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate)
+bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate, _float* resDmg)
 {
 	_float mhp = pDst->GetCurHp();
 	_float mdef = pDst->GetCurDef() + pDst->GetBuffDef();
@@ -32,8 +32,8 @@ bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate)
 	_float decrease = totalDamage * (mdef / (mdef + 1000.f));
 
 	_float finalDamage = totalDamage - decrease;
+	*resDmg = finalDamage;
 	// font
-	
 	mhp -= finalDamage;
 
 
@@ -48,7 +48,7 @@ bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate)
 	return false;
 }
 
-bool CStatusDealer::Damage_MtoV(M_Stat * pSrc, V_Stat * pDst, _float dmgRate)
+bool CStatusDealer::Damage_MtoV(M_Stat * pSrc, V_Stat * pDst, _float dmgRate, _float* resDmg)
 {
 	_float vhp = pDst->GetCurHp();
 	_float vdef = pDst->GetCurDef() + pDst->GetBuffDef();
@@ -64,6 +64,7 @@ bool CStatusDealer::Damage_MtoV(M_Stat * pSrc, V_Stat * pDst, _float dmgRate)
 	// font
 
 	vhp -= finalDamage;
+	*resDmg = finalDamage;
 	
 	if (vhp < 0.f)
 	{

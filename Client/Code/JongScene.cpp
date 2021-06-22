@@ -5,6 +5,7 @@
 #include "DataLoad.h"
 #include "DynamicMeshData.h"
 
+#include "DamageObjectPool.h"
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
 #include "StageControlTower.h"
@@ -58,12 +59,13 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
+	CDamageObjectPool::GetInstance()->Start(this);
 
 	KianaTest();
 	//TheresaTest();
 
-	//CollisionDummy();
-	SickleTest();
+	CollisionDummy();
+	//SickleTest();
 
 	SetupStageUI();
 }
@@ -77,7 +79,6 @@ void CJongScene::Update(void)
 {
 	__super::Update();
 	m_pControlTower->Update();
-
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_C))
 	{
@@ -109,6 +110,8 @@ void CJongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
+	CBattleUiManager::DestroyInstance();
+	CDamageObjectPool::DestroyInstance();
 	m_pControlTower->DestroyInstance();
 	m_pControlTower = nullptr;
 }

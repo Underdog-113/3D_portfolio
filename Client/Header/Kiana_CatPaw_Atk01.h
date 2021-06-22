@@ -34,6 +34,10 @@ public:
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
 					
+					void					OnCollisionEnter	(Engine::_CollisionInfo ci);
+					void					OnCollisionStay		(Engine::_CollisionInfo ci);
+					void					OnCollisionExit		(Engine::_CollisionInfo ci);
+
 public:
 					void					SetBasicName		(void) override;
 
@@ -43,6 +47,10 @@ protected:
 	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+
+		
+	GETTOR			(SP(Engine::CCollisionC),		m_spCollision,		nullptr,	Collision)
+	GETTOR			(SP(Engine::CDebugC),			m_spDebug,			nullptr,	Debug)
 
 private:
 	_float m_tempTimer = 0.f;

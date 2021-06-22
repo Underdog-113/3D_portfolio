@@ -77,7 +77,6 @@ void CAttackTrail::Update()
 	}
 
 	m_fTrailAlpha -= 1.6f * GET_DT;
-
 }
 
 void CAttackTrail::LateUpdate()

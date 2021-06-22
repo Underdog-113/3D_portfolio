@@ -13,6 +13,7 @@ CAttackBall::CAttackBall()
 
 CAttackBall::~CAttackBall()
 {
+	OnDestroy();
 }
 
 SP(CAttackBall) CAttackBall::Create(_bool isStatic, Engine::CScene * pScene)

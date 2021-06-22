@@ -13,9 +13,10 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 	{
 		SP(Engine::CImageObject) image =
 			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"DamageFontUIObject"));
-		image->AddComponent<Engine::CShaderC>()->
-			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"DamageFontShader")));
+		image->GetComponent<Engine::CShaderC>()->
+			AddShader((_int)EShaderID::DamageFontShader);
 		image->AddComponent<CDamageFontC>();
+
 		image->SetIsEnabled(false);
 		m_disabledObjectList.emplace_back(image.get());
 	}
@@ -54,10 +55,15 @@ void CDamageObjectPool::AddDamage(_float3 pos, _float3 size,  _float interval, _
 
 			m_disabledObjectList.emplace_back(image.get());
 		}
-
+		
 		Engine::CObject* object = m_disabledObjectList.front();
 		object->GetComponent<CDamageFontC>()->AddDamageFontInit(upSpped, enableTime, value, color);
-		object->GetTransform()->SetPosition(pos);
+
+		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
+		_float3 pos2D = cam->WorldToScreenPoint(pos);
+		pos2D.z = 0.f;
+
+		object->GetTransform()->SetPosition(pos2D);
 		pos.x += interval;
 		object->GetTransform()->SetSize(size);
 

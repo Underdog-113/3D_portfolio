@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageControlTower.h"
 
+#include "DamageObjectPool.h"
 #include "InputManager.h"
 #include "Layer.h"
 
@@ -443,7 +444,11 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
-	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate());
+	_float damage = 0.f;
+	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate(), &damage);
+	CDamageObjectPool::GetInstance()->AddDamage(
+		pMonster->GetTransform()->GetPosition(),
+		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
 
 	// 2. 슬라이더 조정
 
@@ -479,7 +484,11 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
-	bool isDead = m_pDealer->Damage_MtoV( pM->GetStat(), pV->GetStat(), info.GetDamageRate());
+	_float damage = 0.f;
+	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
+	CDamageObjectPool::GetInstance()->AddDamage(
+		pMonster->GetTransform()->GetPosition(),
+		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Red");
 
 	// 2. 슬라이더 조정
 	m_pLinker->PlayerHpSet();

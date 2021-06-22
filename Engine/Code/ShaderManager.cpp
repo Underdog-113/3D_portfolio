@@ -12,7 +12,7 @@
 #include "SkyBoxShader.h"
 #include "CelShader.h"
 #include "WireShader.h"
-#include "MeshAlphaShader.h"
+#include "MeshAlphaTestShader.h"
 #pragma endregion
 
 USING(Engine)

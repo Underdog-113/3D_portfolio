@@ -182,15 +182,13 @@ void CFSM_KianaC::CreateEffect_Attack2()
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
+	
 
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
-	effect->GetTransform()->AddRotationZ(D3DXToRadian(30.f));
-	//_float3 effRot = effect->GetTransform()->GetRotation();
-	//_mat rotMat;
-	//D3DXMatrixIdentity(&rotMat);
-	//D3DXMatrixRotationAxis(&rotMat, &effect->GetTransform()->GetForward(), D3DXToRadian(90.f));
-	//D3DXVec3TransformNormal(&effRot, &effRot, &rotMat);
-	//effect->GetTransform()->SetRotation(effRot);
+	effect->GetTransform()->SetForward(m_pKiana->GetTransform()->GetForward());
+	//effect->GetTransform()->SetRotationX(D3DXToRadian(-90.f));
+	//effect->GetTransform()->SetRotationY(-m_pKiana->GetTransform()->GetRotation().y);
+	//effect->GetTransform()->SetRotationZ(D3DXToRadian(180.f));
+	
 }
 
 void CFSM_KianaC::CreateEffect_Attack3()
@@ -201,7 +199,7 @@ void CFSM_KianaC::CreateEffect_Attack3()
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
+	//effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
 }
 
 void CFSM_KianaC::CreateEffect_Attack4()
@@ -211,8 +209,8 @@ void CFSM_KianaC::CreateEffect_Attack4()
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationZ(D3DXToRadian(180.f));
+	//effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
+	//effect->GetTransform()->AddRotationZ(D3DXToRadian(180.f));
 }
 
 void CFSM_KianaC::CreateEffect_Attack5()
@@ -222,8 +220,8 @@ void CFSM_KianaC::CreateEffect_Attack5()
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationZ(D3DXToRadian(180.f));
+	//effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y + D3DXToRadian(180.f));
+	//effect->GetTransform()->AddRotationZ(D3DXToRadian(180.f));
 }
 
 bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float coolTime /*= Cool_Attack*/)
@@ -233,7 +231,6 @@ bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float 
 		if (m_pDM->GetAniTimeline() > coolTime)
 		{
 			ChangeState(switchStateName);
-			m_pStageControlTower->FindTarget();
 			return true;
 		}
 	}

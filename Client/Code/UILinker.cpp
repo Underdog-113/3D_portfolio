@@ -114,7 +114,7 @@ void CUILinker::Skill()
 		(_int)cost,
 		cooltime);
 
-	OnTargetMarker();
+	m_pCT->FindTarget();
 }
 
 void CUILinker::Ultra()
@@ -129,7 +129,7 @@ void CUILinker::Ultra()
 		(_int)cost,
 		cooltime);
 
-	OnTargetMarker();
+	m_pCT->FindTarget();
 }
 
 void CUILinker::Evade()
@@ -151,7 +151,7 @@ void CUILinker::Attack()
 		0,
 		0.1f);
 
-	OnTargetMarker();
+	m_pCT->FindTarget();
 }
 
 void CUILinker::SwapToOne(void)

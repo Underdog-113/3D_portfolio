@@ -76,7 +76,12 @@ void CAttackTrail_Client::Update()
 		m_fTrailAlpha = 1.f;
 	}
 
-	m_fTrailAlpha -= 2.3f * GET_DT;
+	//m_fTrailAlpha -= 2.3f * GET_DT;
+
+	if (Engine::IMKEY_PRESS(KEY_CONTROL))
+	{
+		m_spTransform->AddRotationZ(D3DXToRadian(1.f));
+	}
 }
 
 void CAttackTrail_Client::LateUpdate()

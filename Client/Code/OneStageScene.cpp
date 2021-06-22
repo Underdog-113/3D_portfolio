@@ -3,6 +3,7 @@
 
 #include "Loading.h"
 
+#include "DamageObjectPool.h"
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -143,7 +144,7 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	CBattleUiManager::GetInstance()->OnDestroy();
+	CBattleUiManager::DestroyInstance();
 
 	m_pController->DestroyInstance();
 	m_pController = nullptr;

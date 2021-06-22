@@ -112,7 +112,8 @@ SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 void CMB_Ganesha::ChaseTarget(_float3 targetPos)
 {
 	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
+	dir.y = 0;
+	D3DXVec3Normalize(&dir, &dir);
 
 	m_spTransform->SetForward(dir);
 }
