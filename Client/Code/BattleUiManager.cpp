@@ -103,14 +103,13 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	for (int i = 0; i < 3; i++)
 	{
-		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarOrange", 0);
-		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
-		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
-		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
-
 		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
 		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
 		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
+
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarOrange", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//HitsCanvas
@@ -153,36 +152,9 @@ void CBattleUiManager::Update(void)
 	if (!m_activation)
 		return;
 
-	// 1,2번만 sp체크해서 꺼주고 켜주면된다.
-	if (m_playerSpBar->GetValue() >= 80 && m_coolTimeSlider[Button_Type::SpecialButton]->GetValue() <= 0)
-		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(true);
-	else
-		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(false);
+	skillActivationImageCheck();
+	monsterHpBarCheck();
 
-	if (m_playerSpBar->GetValue() >= 7 && m_coolTimeSlider[Button_Type::SkillButton]->GetValue() <= 0)
-		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(true);
-	else
-		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(false);
-
-
-	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
-	{
-		// 문제1 하얀색이 ㅈㄴ 부자연스럽다.
-		// 문제2 백그라운드의 색만 바뀐다.
-		m_monsterHpCount--;
-
-		for (auto object : m_monsterHpBar)
-		{
-			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
-			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
-			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount);
-		}
-
-		for (auto object : m_monsterWhiteHpBar)
-		{
-			object->SetValue(m_monsterWhiteHpBar[2]->GetMaxValue());
-		}
-	}
 }
 
 void CBattleUiManager::OnDestroy(void)
@@ -259,8 +231,8 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hp, _int hpCount, 
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(hp);
-		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount -1);
-		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount);
+		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
 	}
 	
 	for (auto object : m_monsterWhiteHpBar)
@@ -356,7 +328,6 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
-	//m_target[0]->GetComponent<CTargetPositionC>()->m_target = object;
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
 	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 
@@ -365,6 +336,8 @@ void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 
 void CBattleUiManager::MonsterHpDown(_float value)
 {
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(m_monsterStateCanvas->GetComponent<CLifeObjectC>()->GetLifeTime() + 1);
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(object->GetValue() - value);
@@ -373,6 +346,8 @@ void CBattleUiManager::MonsterHpDown(_float value)
 
 void CBattleUiManager::MonsterHpUp(_float value)
 {
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(m_monsterStateCanvas->GetComponent<CLifeObjectC>()->GetLifeTime() + 1);
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(object->GetValue() + value);
@@ -468,6 +443,48 @@ void CBattleUiManager::BattleEnd()
 
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->GetComponent<Engine::CTextC>()
 		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
+}
+
+void CBattleUiManager::skillActivationImageCheck()
+{
+	// 1,2번만 sp체크해서 꺼주고 켜주면된다.
+	if (m_playerSpBar->GetValue() >= 80 && m_coolTimeSlider[Button_Type::SpecialButton]->GetValue() <= 0)
+		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(true);
+	else
+		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(false);
+
+	if (m_playerSpBar->GetValue() >= 7 && m_coolTimeSlider[Button_Type::SkillButton]->GetValue() <= 0)
+		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(true);
+	else
+		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(false);
+}
+
+void CBattleUiManager::monsterHpBarCheck()
+{
+	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
+	{
+		// 문제1 하얀색이 ㅈㄴ 부자연스럽다.
+		m_monsterHpCount--;
+
+		for (auto object : m_monsterHpBar)
+		{
+			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
+			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+		}
+
+		for (auto object : m_monsterWhiteHpBar)
+		{
+			object->SetValue(m_monsterWhiteHpBar[2]->GetMaxValue());
+		}
+
+		m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+	}
+	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount == 1)
+	{
+		m_monsterHpCount--;
+		m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"");
+	}
 }
 
 

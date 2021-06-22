@@ -72,7 +72,8 @@ public:
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	void BattleEnd();
 private:
-
+	void skillActivationImageCheck();
+	void monsterHpBarCheck();
 private:
 	_bool m_activation;
 	_int m_monsterHpCount;
