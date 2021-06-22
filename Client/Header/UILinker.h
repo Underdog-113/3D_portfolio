@@ -29,6 +29,7 @@ public:
 	void	SwapToOne			(void);
 	void	SwapToTwo			(void);
 
+	void	MonsterHpDown		(_float damage);
 	void	Hit_Up				(void);
 		
 public:

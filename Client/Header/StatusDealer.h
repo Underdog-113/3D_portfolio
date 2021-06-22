@@ -18,8 +18,8 @@ public:
 	~CStatusDealer();
 
 public:	/* Character */
-	bool Damage_VtoM(V_Stat* pSrc, M_Stat* pDst, _float dmgRate);
-	bool Damage_MtoV(M_Stat* pSrc, V_Stat* pDst, _float dmgRate);
+	bool Damage_VtoM(V_Stat* pSrc, M_Stat* pDst, _float dmgRate, _float* resDmg);
+	bool Damage_MtoV(M_Stat* pSrc, V_Stat* pDst, _float dmgRate, _float* resDmg);
 
 	void HpUp_Valkyrie(V_Stat* pSrc, _float value);
 	void HpDown_Valkyrie(V_Stat* pSrc, _float value);

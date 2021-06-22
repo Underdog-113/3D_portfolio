@@ -122,13 +122,9 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO7, m_btnModeUVSprite);
 	DDX_Control(pDX, IDC_RADIO8, m_btnModeUVAnim);
 	DDX_Control(pDX, IDC_RADIO9, m_btnModeScale);
-
 	DDX_Control(pDX, IDC_SPIN1, m_spinPosX);
 	DDX_Control(pDX, IDC_SPIN4, m_spinPosY);
 	DDX_Control(pDX, IDC_SPIN7, m_spinPosZ);
-	DDX_Control(pDX, IDC_SPIN2, m_spinRotX);
-	DDX_Control(pDX, IDC_SPIN5, m_spinRotY);
-	DDX_Control(pDX, IDC_SPIN8, m_spinRotZ);
 	DDX_Control(pDX, IDC_SPIN10, m_spinAlphaWidth);
 	DDX_Control(pDX, IDC_SPIN11, m_spinAlphaHeigth);
 	DDX_Control(pDX, IDC_SPIN3, m_spinScaleX);
@@ -147,6 +143,7 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON49, m_bmpIndexX);
 	DDX_Control(pDX, IDC_BUTTON50, m_bmpIndexY);
 	DDX_Control(pDX, IDC_BUTTON51, m_bmpTilingYTitle);
+	DDX_Control(pDX, IDC_CHECK10, m_btnTestButton);
 }
 
 void CInspector::EditButtonStyle()
@@ -379,9 +376,6 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN1, &CInspector::OnDeltaposSpinPosX)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN4, &CInspector::OnDeltaposSpinPosY)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN7, &CInspector::OnDeltaposSpinPosZ)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN2, &CInspector::OnDeltaposSpinRotX)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN5, &CInspector::OnDeltaposSpinRotY)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN8, &CInspector::OnDeltaposSpinRotZ)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN3, &CInspector::OnDeltaposSpinScaleX)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN6, &CInspector::OnDeltaposSpinScaleY)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN9, &CInspector::OnDeltaposSpinScaleZ)
@@ -435,7 +429,7 @@ void CInspector::OnPaint()
 
 void CInspector::OnLbnSelchangeEffectList()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 	_int index = m_EffectListBox.GetCurSel();
 
 	m_iSelectObjectNum = index;
@@ -447,7 +441,7 @@ void CInspector::OnBnClickedDeleteEffectList()
 {
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 	spObject->SetDeleteThis(true);
-	spObject.reset();	
+	spObject.reset();
 
 	m_EffectListBox.DeleteString(m_iSelectObjectNum);
 	m_btnModeTransform.SetCheck(false);
@@ -457,7 +451,7 @@ void CInspector::OnBnClickedDeleteEffectList()
 
 void CInspector::OnBnClickedMeshEffect()
 {
-	CString str = _T("X Files(*.x) |*.x|"); // x ÆÄÀÏ Ç¥½Ã
+	CString str = _T("X Files(*.x) |*.x|"); // x ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Mesh\\EffectToolScene\\";
 
@@ -484,7 +478,7 @@ void CInspector::OnBnClickedMeshEffect()
 
 void CInspector::OnBnClickedSoftEffect()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\SoftEffect\\";
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
@@ -507,7 +501,7 @@ void CInspector::OnBnClickedSoftEffect()
 
 void CInspector::OnBnClickedTexture()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -530,7 +524,7 @@ void CInspector::OnBnClickedTexture()
 
 void CInspector::OnBnClickedAlphaMask()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ÆÄÀÏ Ç¥½Ã
+	CString str = _T("png Files(*.png) |*.png|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -551,15 +545,31 @@ void CInspector::OnBnClickedAlphaMask()
 
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
-	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
-	
+	if (ObjectName == L"KianaTest.X")
+	{
+		SP(Engine::CObject) spMeshEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 1);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 2);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 3);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+	}
+	else
+	{
+		SP(Engine::CObject) spMeshEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+	}
+
 }
 
 void CInspector::Add_SoftEffect(CString ObjectName)
@@ -573,25 +583,76 @@ void CInspector::Add_SoftEffect(CString ObjectName)
 
 void CInspector::Add_Texture(CString TextureKey)
 {
-	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	if (m_iSelectObjectNum > -1)
 	{
-		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
-		spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0,0);
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+		if (spObject != nullptr)
+		{
+			SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
+
+			spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 0);
+		}
 	}
 }
 
 void CInspector::Add_AlphaMask(CString TextureKey)
 {
-	for (auto& obj : Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects())
+	if (m_iSelectObjectNum > -1)
 	{
-		SP(Engine::CTextureC) spTexture = obj->GetComponent<Engine::CTextureC>();
-		spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 1);
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+		if (spObject != nullptr)
+		{
+			SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
+
+			spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 1);
+		}
 	}
 }
 
 void CInspector::FunctionUpdate()
 {
+	
+	if (m_iSelectObjectNum > -1)
+	{
+		SP(Engine::CObject) spObject2 = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[0];
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
+		if (Engine::IMKEY_PRESS(KEY_UP))
+		{
+			spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(1.f));
+		}
+		if (Engine::IMKEY_PRESS(KEY_DOWN))
+		{
+			spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(-1.f));
+		}
+
+
+		if (m_btnTestButton.GetCheck())
+		{
+			if (spObject == nullptr)
+			{
+				MessageBox(L"spObject is Not Found / CInspector", NULL);
+				ABORT;
+			}
+
+			spObject->GetComponent<Engine::CTransformC>()->SetRotationY(spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
+			/*_mat rot;
+			D3DXMatrixRotationAxis(&rot, &UP_VECTOR, spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
+			_float3 newForward;
+			D3DXVec3TransformNormal(&newForward, &spObject->GetTransform()->GetForward(), &rot);
+			spObject->GetTransform()->SetForward(newForward);*/
+
+			CString str;
+			_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
+			str.Format(L"%f", fY);
+			m_edRotY.SetWindowTextW(str.GetString());
+
+			m_vSaveRot.x = fY;
+		}
+	}
+	
 }
 
 void CInspector::OptionUpdate()
@@ -605,7 +666,7 @@ void CInspector::OptionUpdate()
 		m_btnOptionFadeOut.EnableWindow(false);
 		m_btnOptionUVSprite.EnableWindow(false);
 		m_btnOptionUVAnim.EnableWindow(false);
-		
+
 	}
 	else
 	{
@@ -615,10 +676,10 @@ void CInspector::OptionUpdate()
 		m_btnOptionFadeIn.EnableWindow(true);
 		m_btnOptionFadeOut.EnableWindow(true);
 		m_btnOptionUVSprite.EnableWindow(true);
-		m_btnOptionUVAnim.EnableWindow(true);	
+		m_btnOptionUVAnim.EnableWindow(true);
 	}
 
-	
+
 
 }
 
@@ -702,7 +763,7 @@ void CInspector::ModeUpdate()
 	{
 		m_btnModeTransform.EnableWindow(true);
 		m_btnModeEdit.EnableWindow(true);
-	}	
+	}
 	if (m_btnOptionUVSprite.GetCheck())
 	{
 		m_btnModeUVSprite.EnableWindow(true);
@@ -728,13 +789,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(true);
 
 		m_edRotX.ShowWindow(false);
-		m_spinRotX.ShowWindow(false);
-
 		m_edRotY.ShowWindow(false);
-		m_spinRotY.ShowWindow(false);
-
 		m_edRotZ.ShowWindow(false);
-		m_spinRotZ.ShowWindow(false);
 
 		m_edScaleX.ShowWindow(false);
 		m_spinScaleX.ShowWindow(false);
@@ -757,13 +813,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(false);
 
 		m_edRotX.ShowWindow(true);
-		m_spinRotX.ShowWindow(true);
-
 		m_edRotY.ShowWindow(true);
-		m_spinRotY.ShowWindow(true);
-
 		m_edRotZ.ShowWindow(true);
-		m_spinRotZ.ShowWindow(true);
 
 		m_edScaleX.ShowWindow(false);
 		m_spinScaleX.ShowWindow(false);
@@ -786,13 +837,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(false);
 
 		m_edRotX.ShowWindow(false);
-		m_spinRotX.ShowWindow(false);
-
 		m_edRotY.ShowWindow(false);
-		m_spinRotY.ShowWindow(false);
-
 		m_edRotZ.ShowWindow(false);
-		m_spinRotZ.ShowWindow(false);
 
 		m_edScaleX.ShowWindow(true);
 		m_spinScaleX.ShowWindow(true);
@@ -815,13 +861,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(true);
 
 		m_edRotX.ShowWindow(true);
-		m_spinRotX.ShowWindow(true);
-
 		m_edRotY.ShowWindow(true);
-		m_spinRotY.ShowWindow(true);
-
 		m_edRotZ.ShowWindow(true);
-		m_spinRotZ.ShowWindow(true);
 
 		m_edScaleX.ShowWindow(true);
 		m_spinScaleX.ShowWindow(true);
@@ -844,13 +885,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(false);
 
 		m_edRotX.ShowWindow(false);
-		m_spinRotX.ShowWindow(false);
-
 		m_edRotY.ShowWindow(false);
-		m_spinRotY.ShowWindow(false);
-
 		m_edRotZ.ShowWindow(false);
-		m_spinRotZ.ShowWindow(false);
 
 		m_edScaleX.ShowWindow(false);
 		m_spinScaleX.ShowWindow(false);
@@ -863,7 +899,7 @@ void CInspector::SettingUpdate()
 	}
 
 	if (m_btnModeUVSprite.GetCheck())
-	{		
+	{
 		m_edAlphaWidth.ShowWindow(true);
 		m_spinAlphaWidth.ShowWindow(true);
 		m_edAlphaHeight.ShowWindow(true);
@@ -909,21 +945,17 @@ void CInspector::ActionUpdate()
 		{
 			if (!m_isPlayAnim)
 			{
-				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
-
 				m_isPlayAnim = true;
 			}
 			m_fStartTime += GET_DT;
-			
+
 			AnimTransformUpdate(spObject);
 
 			if (m_fStartTime >= m_fEndTime)
-			{				
+			{
 				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+				spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
 				m_fStartTime = 0.f;
 				m_isPlayAnim = false;
 				m_iRepeatCnt++;
@@ -945,7 +977,7 @@ void CInspector::ActionUpdate()
 		{
 			spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 			spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-			spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+			spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
 		}
 		m_fStartTime = 0.f;
 		m_iRepeatCnt = 0;
@@ -1006,9 +1038,11 @@ void CInspector::OnBnClickedAnimPlay()
 {
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
-	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = PLAY;
-	pSoftEffect->SetAnimisPlay(ACTION_STATE::PLAY);
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+
+	if(pSoftEffect != nullptr)
+		pSoftEffect->SetAnimisPlay(ACTION_STATE::PLAY);
 }
 
 void CInspector::OnBnClickedAnimPause()
@@ -1018,9 +1052,11 @@ void CInspector::OnBnClickedAnimPause()
 	if (spObject == nullptr)
 		return;
 
-	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = PAUSE;
-	pSoftEffect->SetAnimisPlay(ACTION_STATE::PAUSE);
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
+
+	if(pSoftEffect != nullptr)
+		pSoftEffect->SetAnimisPlay(ACTION_STATE::PAUSE);
 
 }
 
@@ -1031,11 +1067,14 @@ void CInspector::OnBnClickedAnimStop()
 	if (spObject == nullptr)
 		return;
 
-	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 	m_eActionState = STOP;
+	SP(CSoftEffect) pSoftEffect = std::dynamic_pointer_cast<CSoftEffect>(spObject);
 
-	pSoftEffect->SetmaxXIndex(0);
-	pSoftEffect->SetmaxYIndex(0);
+	if (pSoftEffect != nullptr)
+	{
+		pSoftEffect->SetTilingX(0);
+		pSoftEffect->SetTilingY(0);
+	}
 }
 
 void CInspector::OnBnClickedSave()
@@ -1046,8 +1085,8 @@ void CInspector::OnBnClickedSave()
 	// Texture						Texture
 	// Tiling						Shader
 	// MaxIndex						Animation
-	
-	CString str = _T("txt Files(*.txt) |*.txt|"); // png ÆÄÀÏ Ç¥½Ã
+
+	CString str = _T("txt Files(*.txt) |*.txt|"); // png ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 	LPWSTR lpwstr = _SOLUTIONDIR L"Data\\";
 
 	CFileDialog dlg(TRUE, _T("*.txt"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -1071,7 +1110,7 @@ void CInspector::OnBnClickedSave()
 					//Name
 					//ofsSave << spObject->
 					//std::wstring str = m_EffectListBox.FindString(i, );
-					
+
 					//Texture
 					/*D3DMATERIAL9* pMtrl = &spObject->GetComponent<Engine::CGraphicsC>()->m_mtrl;
 
@@ -1195,8 +1234,8 @@ void CInspector::OnEnChangeEditRotX()
 		ABORT;
 	}
 
-	spObject->GetComponent<Engine::CTransformC>()->SetRotationX(fResizeValue);
-	m_vSaveRot.x = fResizeValue;
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationX(D3DXToRadian(fResizeValue));
+	m_vSaveRot.x = D3DXToRadian(fResizeValue);
 
 }
 
@@ -1237,8 +1276,8 @@ void CInspector::OnEnChangeEditRotZ()
 		ABORT;
 	}
 
-	spObject->GetComponent<Engine::CTransformC>()->SetRotationZ(fResizeValue);
-	m_vSaveRot.z = fResizeValue;
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationZ(D3DXToRadian(fResizeValue));
+	m_vSaveRot.z = D3DXToRadian(fResizeValue);
 
 }
 
@@ -1361,7 +1400,7 @@ void CInspector::OnDeltaposSpinPosX(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 
-	
+
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
 	if (spObject == nullptr)
@@ -1434,85 +1473,6 @@ void CInspector::OnDeltaposSpinPosZ(NMHDR *pNMHDR, LRESULT *pResult)
 
 	*pResult = 0;
 }
-
-
-void CInspector::OnDeltaposSpinRotX(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-
-	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
-	if (spObject == nullptr)
-	{
-		MessageBox(L"spObject is Not Found / CInspector", NULL);
-		ABORT;
-	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationX(pNMUpDown->iDelta * -m_fSpeed);
-
-	UpdateData(true);
-	CString str;
-	_float fX= spObject->GetComponent<Engine::CTransformC>()->GetRotation().x;
-	str.Format(L"%f", fX);
-	m_edRotX.SetWindowTextW(str.GetString());
-
-	m_vSaveRot.x = fX;
-	UpdateData(false);
-
-	*pResult = 0;
-}
-
-
-void CInspector::OnDeltaposSpinRotY(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-
-	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
-	if (spObject == nullptr)
-	{
-		MessageBox(L"spObject is Not Found / CInspector", NULL);
-		ABORT;
-	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationY(pNMUpDown->iDelta * -m_fSpeed);
-
-	UpdateData(true);
-	CString str;
-	_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
-	str.Format(L"%f", fY);
-	m_edRotY.SetWindowTextW(str.GetString());
-
-	m_vSaveRot.y = fY;
-	UpdateData(false);
-
-	*pResult = 0;
-}
-
-
-void CInspector::OnDeltaposSpinRotZ(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-
-	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
-	if (spObject == nullptr)
-	{
-		MessageBox(L"spObject is Not Found / CInspector", NULL);
-		ABORT;
-	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(pNMUpDown->iDelta * -m_fSpeed);
-
-	UpdateData(true);
-	CString str;
-	_float fZ = spObject->GetComponent<Engine::CTransformC>()->GetRotation().z;
-	str.Format(L"%f", fZ);
-	m_edRotZ.SetWindowTextW(str.GetString());
-
-	m_vSaveRot.z = fZ;
-	UpdateData(false);
-
-	*pResult = 0;
-}
-
 
 void CInspector::OnDeltaposSpinScaleX(NMHDR *pNMHDR, LRESULT *pResult)
 {

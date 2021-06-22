@@ -43,6 +43,18 @@ void CMB_Ganesha::Start(void)
 	__super::Start();
 
 	m_spMesh->OnRootMotion();
+
+	BaseStat stat;
+	stat.SetBaseHp(5131.f);
+	stat.SetBaseAtk(117.f);
+	stat.SetBaseDef(25.f);
+
+	stat.SetGrowHp(516.f);
+	stat.SetGrowAtk(5.1f);
+	stat.SetGrowDef(2.9f);
+
+	//stat.SetType(BaseStat::Mecha);
+	m_pStat->SetupStatus(&stat);
 }
 
 void CMB_Ganesha::FixedUpdate(void)
@@ -112,7 +124,8 @@ SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 void CMB_Ganesha::ChaseTarget(_float3 targetPos)
 {
 	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
+	dir.y = 0;
+	D3DXVec3Normalize(&dir, &dir);
 
 	m_spTransform->SetForward(dir);
 }

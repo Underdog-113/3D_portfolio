@@ -153,31 +153,28 @@ void CWooScene::Start(void)
 		{
 			///* Sickle */
 			//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-			//spSickleClone->GetTransform()->SetSize(2, 2, 2);
-			//spSickleClone->GetTransform()->SetPosition(0, 0, 2);
-			//spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			//spSickleClone->GetTransform()->SetPosition(0, 10, 2);
 			//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-			//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
+			////spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 			//m_spSickle = spSickleClone;
 
 			/* Spider */
 			SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
 			spSpiderClone->GetTransform()->SetPosition(-3, 0, -7);
-			spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 			spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 			m_spSpider = spSpiderClone;
 
-			/* Ganesha */
-			SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-			spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
-			spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
-			spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-			spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
-			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
-			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
-			spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
-			m_spGanesha = spGaneshaClone;
+			///* Ganesha */
+			//SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+			//spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
+			//spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
+			//spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+			//spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+			//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+			//m_spGanesha = spGaneshaClone;
 		}
 	}
 }

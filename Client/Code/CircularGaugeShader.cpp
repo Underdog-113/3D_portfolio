@@ -31,7 +31,6 @@ void CCircularGaugeShader::Awake(void)
 	__super::Awake();
 }
 
-//_float value = m_spSlider->GetMaxValue() - ((m_spSlider->GetMaxValue()  - m_spSlider->GetValue()) * 2); // 1 ~ -1값으로 비율이 구해져서 현재 벨류를 2배로 내렸다.
 void CCircularGaugeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	m_spSlider = static_cast<Engine::CSlider*>(spGC->GetOwner()->GetParent());
@@ -43,9 +42,6 @@ void CCircularGaugeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	// 비율구하기
 	_float ratio = (value / maxValue);
 
-	std::cout << "비율 : " << ratio << std::endl;
-
-	// 1 ~ 0의값을 조정해야함
 	m_pEffect->SetFloat("g_maxValue", m_spSlider->GetCircularMaxValue());
 	m_pEffect->SetFloat("g_minValue", m_spSlider->GetCircularMinValue());
 

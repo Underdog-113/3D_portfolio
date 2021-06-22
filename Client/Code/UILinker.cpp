@@ -114,7 +114,7 @@ void CUILinker::Skill()
 		(_int)cost,
 		cooltime);
 
-	OnTargetMarker();
+	m_pCT->FindTarget();
 }
 
 void CUILinker::Ultra()
@@ -129,29 +129,16 @@ void CUILinker::Ultra()
 		(_int)cost,
 		cooltime);
 
-	OnTargetMarker();
+	m_pCT->FindTarget();
 }
 
 void CUILinker::Evade()
 {
-	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
-
-	m_pUIManager->SkillExecution(
-		CBattleUiManager::Button_Type::EvasionButton,
-		0,
-		0.1f);
 }
 
 void CUILinker::Attack()
 {
-	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
-
-	m_pUIManager->SkillExecution(
-		CBattleUiManager::Button_Type::BasicButton,
-		0,
-		0.1f);
-
-	OnTargetMarker();
+	m_pCT->FindTarget();
 }
 
 void CUILinker::SwapToOne(void)
@@ -160,6 +147,11 @@ void CUILinker::SwapToOne(void)
 
 void CUILinker::SwapToTwo(void)
 {
+}
+
+void CUILinker::MonsterHpDown(_float damage)
+{
+	m_pUIManager->MonsterHpDown(damage);
 }
 
 void CUILinker::Hit_Up(void)
@@ -188,7 +180,7 @@ void CUILinker::MonsterInfoSet()
 	_float hp = pStat->GetCurHp();
 	std::wstring monsterProperty = L"UP";
 
-	m_pUIManager->MonsterState(name, hp, monsterProperty);
+	m_pUIManager->MonsterState(name, hp, 4, monsterProperty);
 }
 
 void CUILinker::MonsterHpSet()
