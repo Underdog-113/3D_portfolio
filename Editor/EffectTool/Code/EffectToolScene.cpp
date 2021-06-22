@@ -6,6 +6,7 @@
 #include "MeshEffect.h"
 #include "AttackTrail.h"
 #include "SoftEffect.h"
+#include "AttackRange_Editor.h"
 
 CEffectToolScene::CEffectToolScene()
 {
@@ -102,4 +103,7 @@ void CEffectToolScene::InitPrototypes(void)
 
 	SP(CSoftEffect) spSoftEffect(CSoftEffect::Create(false, this));
 	ADD_PROTOTYPE(spSoftEffect);
+
+	SP(CAttackRange_Editor) spAttackRange(CAttackRange_Editor::Create(false, this));
+	ADD_PROTOTYPE(spAttackRange);
 }

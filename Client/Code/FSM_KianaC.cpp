@@ -48,6 +48,7 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
+	//m_pDM->GetAniCtrl()->SetSpeed(0.5f);
 	SetStartState(L"Appear");
 	m_curState->DoEnter();
 }
@@ -167,6 +168,7 @@ void CFSM_KianaC::CreateEffect_Attack1()
 {
 	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_0");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
 	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
@@ -174,38 +176,52 @@ void CFSM_KianaC::CreateEffect_Attack1()
 
 void CFSM_KianaC::CreateEffect_Attack2()
 {
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_1");
+	_float size = 0.5f;
+
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_1");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CFSM_KianaC::CreateEffect_Attack3()
 {
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_2");
+	_float size = 0.5f;
+
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_2");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CFSM_KianaC::CreateEffect_Attack4()
 {
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_3");
+	_float size = 0.5f;
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_3");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CFSM_KianaC::CreateEffect_Attack5()
 {
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_4");
+	_float size = 0.5f;
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_4");
 	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float coolTime /*= Cool_Attack*/)
@@ -215,7 +231,7 @@ bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float 
 		if (m_pDM->GetAniTimeline() > coolTime)
 		{
 			ChangeState(switchStateName);
-			m_pStageControlTower->FindTarget();
+			CStageControlTower::GetInstance()->FindTarget();
 			return true;
 		}
 	}
@@ -404,6 +420,13 @@ bool CFSM_KianaC::CheckAction_Ultra()
 	return false;
 }
 
+void CFSM_KianaC::ResetCheckMembers()
+{
+	m_checkUltraRing = false;
+	m_checkUltraAtk = false;
+	m_checkEffect = false;
+}
+
 
 void CFSM_KianaC::StandBy_Init(void)
 {
@@ -506,9 +529,7 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_1);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 
-	m_checkUltraRing = false;
-	m_checkUltraAtk = false;
-	m_checkEffect = false;
+	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
@@ -558,7 +579,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
 	m_pStageControlTower->SetInputLock_ByAni(true);
-	m_checkUltraAtk = false;
+	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix());
 }
 
@@ -602,8 +623,8 @@ void CFSM_KianaC::Attack_3_Init(void)
 void CFSM_KianaC::Attack_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3);
-	m_pStageControlTower->SetInputLock_ByAni(true);
-	m_checkUltraAtk = false;
+	m_pStageControlTower->SetInputLock_ByAni(true); 
+	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix());
 }
 
@@ -675,7 +696,7 @@ void CFSM_KianaC::Attack_4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageControlTower->SetInputLock_ByAni(true);
-	m_checkUltraAtk = false;
+	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 
@@ -747,7 +768,7 @@ void CFSM_KianaC::Attack_5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageControlTower->SetInputLock_ByAni(true);
-	m_checkUltraAtk = false;
+	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
 }
 

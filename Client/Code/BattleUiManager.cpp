@@ -15,6 +15,7 @@ IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
 {
 	m_activation = true;
+	m_monsterHpCount = 0;
 	//MainCanvas
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
 
@@ -102,14 +103,14 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	for (int i = 0; i < 3; i++)
 	{
-		m_monsterWhiteHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarOrange", 0);
-		m_monsterWhiteHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
-		m_monsterWhiteHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
-		m_monsterWhiteHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarOrange", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
 
-		m_monsterWhiteHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
-		m_monsterWhiteHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
-		m_monsterWhiteHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
+		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
+		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
+		m_monsterHpBar[i]->GetFill()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//HitsCanvas
@@ -164,11 +165,24 @@ void CBattleUiManager::Update(void)
 		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(false);
 
 
-	// 몬스터의 채력이 0이되면 백그라운드를 fill로 BackGround의 색을 변경
-	// 카운트값 내리기
-	// 흰색Bar도 초기화
+	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
+	{
+		// 문제1 하얀색이 ㅈㄴ 부자연스럽다.
+		// 문제2 백그라운드의 색만 바뀐다.
+		m_monsterHpCount--;
 
-	// 몬스터를 처음 줄때 카운트갯수와 max와 체력바를 받아서 셋팅해준다.
+		for (auto object : m_monsterHpBar)
+		{
+			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
+			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount);
+		}
+
+		for (auto object : m_monsterWhiteHpBar)
+		{
+			object->SetValue(m_monsterWhiteHpBar[2]->GetMaxValue());
+		}
+	}
 }
 
 void CBattleUiManager::OnDestroy(void)
@@ -229,21 +243,24 @@ void CBattleUiManager::KeyPad(_int value)
 
 void CBattleUiManager::HitCount(_float lifeTime)
 {
-	// 오프젝트를 관리해주는게 필요할듯
 	m_hitsCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(lifeTime);
 	m_hitsCanvas->SetIsEnabled(true);
 	m_hitCount->GetComponent<CHitsUiC>()->AddHitsCount(1);
 }
 
-void CBattleUiManager::MonsterState(std::wstring name, _float hp, std::wstring property)
+void CBattleUiManager::MonsterState(std::wstring name, _float hp, _int hpCount, std::wstring property)
 {
-	// 오브젝트 켜주고 꺼주는 오브젝트가 필요할듯
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
+	m_monsterHpCount = hpCount;
+	m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetValue(hp);
+		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount -1);
+		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount);
 	}
 	
 	for (auto object : m_monsterWhiteHpBar)
@@ -339,7 +356,7 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
-
+	//m_target[0]->GetComponent<CTargetPositionC>()->m_target = object;
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
 	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 

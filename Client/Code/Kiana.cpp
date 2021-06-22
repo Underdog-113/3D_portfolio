@@ -86,7 +86,7 @@ void CKiana::Start(void)
 	//CreatePistol();
 
 	//catpaw
-	//CreateCatPaw();
+	CreateCatPaw();
 
 	// status
 	V_WarshipStat stat;
@@ -220,18 +220,18 @@ void CKiana::CreatePistol(void)
 
 void CKiana::CreateCatPaw(void)
 {
-	m_spCatPaw_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk01", false, (_uint)ELayerID::Player, L"CatPaw_Atk01");
+	m_spCatPaw_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk01", true, (_uint)ELayerID::Player, L"CatPaw_Atk01");
 	m_spCatPaw_Atk01->SetIsEnabled(false);
-	m_spCatPaw_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk02", false, (_uint)ELayerID::Player, L"CatPaw_Atk02");
+	m_spCatPaw_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk02", true, (_uint)ELayerID::Player, L"CatPaw_Atk02");
 	m_spCatPaw_Atk02->SetIsEnabled(false);
-	m_spCatPaw_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk03", false, (_uint)ELayerID::Player, L"CatPaw_Atk03");
+	m_spCatPaw_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk03", true, (_uint)ELayerID::Player, L"CatPaw_Atk03");
 	m_spCatPaw_Atk03->SetIsEnabled(false);
-	m_spCatPaw_Atk04 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk04", false, (_uint)ELayerID::Player, L"CatPaw_Atk04");
+	m_spCatPaw_Atk04 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk04", true, (_uint)ELayerID::Player, L"CatPaw_Atk04");
 	m_spCatPaw_Atk04->SetIsEnabled(false);
-	m_spCatPaw_Atk05 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk05", false, (_uint)ELayerID::Player, L"CatPaw_Atk05");
+	m_spCatPaw_Atk05 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk05", true, (_uint)ELayerID::Player, L"CatPaw_Atk05");
 	m_spCatPaw_Atk05->SetIsEnabled(false);
 
-	m_spCatPaw_Ring_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk01", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk01");
+	m_spCatPaw_Ring_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk01", true, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk01");
 	m_spCatPaw_Ring_Atk01->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk02", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk02");
 	//m_spCatPaw_Ring_Atk02->SetIsEnabled(false);
@@ -462,8 +462,8 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"effect_superorange");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"effect_superorange");
 	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader); 
 
 	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());

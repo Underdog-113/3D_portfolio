@@ -23,6 +23,7 @@ void CDamageFontC::Awake()
 	__super::Awake();
 
 	m_componentID = (_int)m_s_componentID;
+	m_offSet = _float3(0, 0, GetOwner()->GetTransform()->GetPosition().z);
 }
 
 void CDamageFontC::Start(SP(CComponent) spThis)
@@ -37,7 +38,8 @@ void CDamageFontC::FixedUpdate(SP(CComponent) spThis)
 
 void CDamageFontC::Update(SP(CComponent) spThis)
 {
-	GetOwner()->GetTransform()->AddPositionY(m_upSpeed * GET_DT);
+	m_offSet.y += (m_upSpeed * GET_DT);
+	GetOwner()->GetTransform()->SetPosition(m_target->GetTransform()->GetPosition() + m_offSet);
 
 	m_lifeTime -= GET_DT;
 
@@ -70,13 +72,14 @@ void CDamageFontC::OnDisable()
 	__super::OnDisable();
 }
 
-void CDamageFontC::AddDamageFontInit(_float upSpped, _float lifeTime, _int damage, std::wstring color)
+void CDamageFontC::AddDamageFontInit(Engine::CObject* target, _float offSetX, _float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
 	GetOwner()->SetIsEnabled(true);
 	m_upSpeed = upSpped;
 	m_lifeTime = lifeTime;
 	m_oldLifeTime = m_lifeTime;
 	m_damage = damage;
-
+	m_target = target;
+	m_offSet.x = offSetX;
 	GetOwner()->GetComponent<Engine::CTextureC>()->ChangeTexture(color + std::to_wstring(damage), 0);
 }

@@ -9,7 +9,7 @@ public:
 	explicit CTargetPositionC();
 	~CTargetPositionC();
 
-	// CComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// CComponentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
 	void Awake() override;
 	void Start(SP(Engine::CComponent) spThis) override;
@@ -23,6 +23,7 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 private:
-	GETTOR_SETTOR(Engine::CObject*, m_target, nullptr, Target);
+	GETTOR_SETTOR(Engine::CObject*, m_target, nullptr, Target)
+
 };
 #endif

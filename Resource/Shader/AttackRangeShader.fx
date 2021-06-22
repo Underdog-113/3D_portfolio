@@ -63,6 +63,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 	Output.mUV = Input.mUV;/*+ float2(gTime * gUVSpeed, 0);*/
 
+	
 	return Output;
 
 }
@@ -84,6 +85,8 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	// Noise Texture
 	float4 _Alpha = tex2D(AlphaTex, Input.mUV);
+
+	_Alpha.a = gAlpha;
 
 	return float4(albedo * _Alpha);
 }

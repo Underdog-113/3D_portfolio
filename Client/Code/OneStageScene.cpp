@@ -3,6 +3,7 @@
 
 #include "Loading.h"
 
+#include "DamageObjectPool.h"
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -47,21 +48,21 @@ void COneStageScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	m_pController = CStageControlTower::GetInstance();
-	m_pController->Awake();
+	m_pControlTower = CStageControlTower::GetInstance();
+	m_pControlTower->Awake();
 }
 
 void COneStageScene::Start(void)
 {
 	__super::Start();
 
-	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+	SetupFromLoader();
 
-	Start_SetupUI();
+	SetupMembers();
 
-	Start_SetupMembers();
+	m_pBattleUIManager = CBattleUiManager::GetInstance();
+	m_pBattleUIManager->Start(this);
 
-	//m_pController->Start();
 
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
@@ -82,6 +83,7 @@ void COneStageScene::Start(void)
 	spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
 	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 	m_spSpider2 = spSpiderClone;
+	m_pControlTower->Start();
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -96,44 +98,9 @@ void COneStageScene::Update(void)
 	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
 		return;
 
-	m_pController->Update();
-	CBattleUiManager::GetInstance()->Update();
+	m_pControlTower->Update();
+	m_pBattleUIManager->Update();
 
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-	{
-		CBattleUiManager::GetInstance()->PlayerSpDown(10);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-	{
-	    CBattleUiManager::GetInstance()->HitCount(8);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
-	{
-		CBattleUiManager::GetInstance()->MonsterState(L"ss ss", 100, L"DOWN");
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
-	{
-	    CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
-	{
-	    CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
-	{
-	    CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
-	{
-	    CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
-	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
@@ -159,7 +126,6 @@ void COneStageScene::Update(void)
 	{
 		/* Ganesha */
 		SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-		spGaneshaClone->GetTransform()->SetSize(2, 2, 2);
 		spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
 		spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 		spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
@@ -175,16 +141,17 @@ void COneStageScene::Update(void)
 	{
 		m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
 	}
-	else if (Engine::IMKEY_DOWN(KEY_R))
+	else if (Engine::IMKEY_DOWN(KEY_E))
 	{
 		m_bossSpawn = true;
 		m_onBoss = true;
 	}
 	
-	std::cout << "kiana x : " << 
+	std::cout << "kiana x : " <<
 		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
+	//ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -196,16 +163,20 @@ void COneStageScene::LateUpdate(void)
 void COneStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	CBattleUiManager::GetInstance()->OnDestroy();
+	m_pBattleUIManager->OnDestroy();
+	m_pBattleUIManager->DestroyInstance();
 
-	m_pController->DestroyInstance();
-	m_pController = nullptr;
+	m_pControlTower->OnDestroy();
+	m_pControlTower->DestroyInstance();
+	m_pControlTower = nullptr;
+
+	m_vDummy.clear();
 }
 
 void COneStageScene::OnEnable(void)
 {
 	__super::OnEnable();
-	CBattleUiManager::GetInstance()->OnDestroy();
+	m_pBattleUIManager->DestroyInstance();
 }
 
 void COneStageScene::OnDisable(void)
@@ -215,7 +186,7 @@ void COneStageScene::OnDisable(void)
 }
 
 
-void COneStageScene::Start_SetupUI(void)
+void COneStageScene::SetupFromLoader(void)
 {
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
@@ -228,49 +199,115 @@ void COneStageScene::Start_SetupUI(void)
 	Load->ToolLoad(this);
 	delete(Load);
 
-	CBattleUiManager::GetInstance()->Start(this);
 }
 
-void COneStageScene::Start_SetupMembers(void)
+void COneStageScene::SetupMembers(void)
 {
 	// Kiana
-	{
-		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+	Create_ActorValkyrie();
 
-		m_spValkyrie = spKianaClone;
-		m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
-		m_pController->AddSquadMember(m_spValkyrie);
-		m_pController->Start();
-
-		//spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
-	}
 	// Cam Target Set
-	{
-		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"OneStageSceneBasicCamera");
-		cam->SetTarget(m_spValkyrie);
-		cam->SetTargetDist(2.f);
-		CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-	}
-	// Spider
-	{
-		//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-		//spSpiderClone->GetTransform()->SetPosition(0, 0, 5);
-		//spSpiderClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		//m_spSpider = spSpiderClone;
-	}
-	// test map
-	{
-		//SP(Engine::CObject) spEmptyObject
-		//	= m_pObjectFactory->AddClone(L"EmptyObject", true, (_int)ELayerID::Map, L"122");
+	Create_SceneCamera();
 
-		//spEmptyObject->AddComponent<Engine::CMeshC>()->AddMeshData(L"mainmenu_warship");
-		//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-		//spEmptyObject->AddComponent<Engine::CTextureC>();
-		//spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	}
+	Create_Dummy(_float3(5.f, 0.f, 0.f));
+	Create_Dummy(_float3(10.f, 0.f, 0.f));
+	Create_Dummy(_float3(15.f, 0.f, 2.f));
+	Create_Dummy(_float3(15.f, 0.f, -2.f));
+	// Spider
+
+
 }
+
+void COneStageScene::Create_ActorValkyrie(void)
+{
+	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+
+	m_spValkyrie = spKianaClone;
+	m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
+	m_pControlTower->AddSquadMember(m_spValkyrie);
+	m_pControlTower->Start(CStageControlTower::ALL);
+}
+
+void COneStageScene::Create_SceneCamera(void)
+{
+	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+
+	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+	cam->SetTarget(m_spValkyrie);
+	cam->SetTargetDist(4.f);
+	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+
+	cam->SetMode(Engine::ECameraMode::TPS);
+}
+
+void COneStageScene::Create_Dummy(_float3 pos)
+{
+	auto dummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
+	dummy->GetTransform()->SetPosition(pos);
+
+	m_vDummy.emplace_back(dummy);
+}
+
 
 void COneStageScene::InitPrototypes(void)
 {
 
+}
+
+void COneStageScene::ForUITest()
+{
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	{
+		CBattleUiManager::GetInstance()->PlayerSpDown(10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+	{
+		CBattleUiManager::GetInstance()->HitCount(8);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
+	{
+		CBattleUiManager::GetInstance()->MonsterState(L"aaaa", 100, 4, L"DOWN");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
+	{
+		CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
+	{
+		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
+	{
+		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
+	{
+		CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
+	{
+		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
+	{
+		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
+	{
+		CBattleUiManager::GetInstance()->TargetUI(nullptr, 5.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+		CBattleUiManager::GetInstance()->BattleEnd();
+	}
 }

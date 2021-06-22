@@ -13,6 +13,7 @@ CAttackBall::CAttackBall()
 
 CAttackBall::~CAttackBall()
 {
+	OnDestroy();
 }
 
 SP(CAttackBall) CAttackBall::Create(_bool isStatic, Engine::CScene * pScene)
@@ -70,7 +71,6 @@ void CAttackBall::Start(void)
 	auto col = Engine::CSphereCollider::Create(m_collisionID, 0.1f);
 	//col->SetIsTrigger(true);
 	m_spCollision->AddCollider(col);
-
 
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	AddComponent<Engine::CDebugC>();

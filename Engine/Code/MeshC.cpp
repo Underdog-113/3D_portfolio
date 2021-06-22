@@ -253,18 +253,11 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFE
 		{
 			_TexData* pTexData = spGC->GetTexture()->GetTexData()[i][0];
 
-			if (pTexData->includeAlpha)
-				pass = 1;
-			else
-				pass = 0;
-
 			pEffect->SetTexture("g_BaseTexture", pTexData->pTexture);
 			pEffect->CommitChanges();
 		}
 
-		pEffect->BeginPass(pass);
 		pSM->GetMesh()->DrawSubset(i);
-		pEffect->EndPass();
 	}
 }
 
@@ -318,11 +311,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 		{
 			if (pTexData[vMeshContainers[i]->texIndexStart + j][0] != nullptr)
 			{
-				if (pTexData[vMeshContainers[i]->texIndexStart + j][0]->includeAlpha)
-					pass = 1;
-				else
-					pass = 0;
-
 				if (!m_isEffectMesh)
 				{
 					pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->texIndexStart + j][0]->pTexture);
@@ -334,10 +322,9 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			}
 			pEffect->CommitChanges();
 
-			pEffect->BeginPass(pass);
+			
 			GET_DEVICE->SetMaterial(&vMeshContainers[i]->pMaterials[j].MatD3D);
 			vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
-			pEffect->EndPass();
 		}
 
 		vMeshContainers[i]->MeshData.pMesh->UnlockVertexBuffer();

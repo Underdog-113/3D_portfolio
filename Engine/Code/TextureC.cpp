@@ -2,9 +2,9 @@
 #include "TextureC.h"
 #include "Object.h"
 #include "MeshData.h"
- 
+
 USING(Engine)
-CTextureC::CTextureC()  
+CTextureC::CTextureC()
 {
 }
 
@@ -84,13 +84,13 @@ void CTextureC::OnDestroy(void)
 void CTextureC::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
 void CTextureC::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
 void CTextureC::SetAlpha(_float alpha)
@@ -130,7 +130,7 @@ void CTextureC::AddTexture(std::wstring const & textureKey, _int setIndex)
 		if (m_vTexData.size() == 0)
 			m_vTexData.resize(1);
 	}
-	
+
 	++m_numOfTex;
 	m_vTexData[setIndex].emplace_back(m_pOwner->GetScene()->GetTextureStore()->GetTextureData(textureKey));
 }
