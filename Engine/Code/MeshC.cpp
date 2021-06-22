@@ -93,6 +93,7 @@ void CMeshC::Update(SP(CComponent) spThis)
 
 void CMeshC::LateUpdate(SP(CComponent) spThis)
 {
+	m_haveDrawn = false;
 }
 
 void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
@@ -101,10 +102,14 @@ void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 
 void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
+
+	
 	if (m_pMeshData->GetMeshType() == (_int)EMeshType::Static)
 		RenderStatic(spGC, m_pMeshData, pEffect);
 	else
 		RenderDynamic(spGC, m_pMeshData, pEffect);
+
+	m_haveDrawn = true;
 }
 
 void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
@@ -266,9 +271,11 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
 
 	// root motion
-	ApplyRootMotion(pDM);
-
-	pDM->PlayAnimation();
+	if (m_haveDrawn == false)
+	{
+		ApplyRootMotion(pDM);
+		pDM->PlayAnimation();
+	}
 
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
