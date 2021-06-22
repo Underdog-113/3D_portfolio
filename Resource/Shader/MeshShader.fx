@@ -50,6 +50,28 @@ VS_OUT		VS_MAIN(VS_IN In)
 	return Out;
 }
 
+// πˆ≈ÿΩ∫Ω¶¿Ã¥ı
+VS_OUT		VS_OUTLINE(VS_IN In)
+{
+	VS_OUT		Out = (VS_OUT)0;
+
+	matrix			matWV, matWVP;
+
+	matWV = mul(g_matWorld, g_matView);
+	matWVP = mul(matWV, g_matProj);
+
+	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
+	Out.vNormal = normalize(mul(vector(In.vNormal.xyz, 0.f), matWVP));
+	Out.vPosition += (Out.vNormal) / 160;
+
+	Out.vTexUV = In.vTexUV;
+
+	Out.vProjPos = Out.vPosition;
+
+	return Out;
+}
+
+
 struct PS_IN
 {
 	vector		vNormal : NORMAL;
@@ -62,7 +84,6 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 	vector		vNormal : COLOR1;
 	vector		vDepth : COLOR2;
-	
 };
 
 // «»ºø Ω¶¿Ã¥ı
@@ -87,11 +108,30 @@ PS_OUT		PS_MAIN(PS_IN In)
 	return Out;
 }
 
+PS_OUT PS_OUTLINE(PS_IN In)
+{
+	PS_OUT Out = (PS_OUT)0;
+
+	Out.vColor = float4(0, 0, 0, 1);
+	Out.vNormal = float4(0, 0, 0, 1);
+	Out.vDepth = float4(0, 0, 0, 1);
+
+	return Out;
+}
+
 technique Default_Device
 {
-	pass	
+	pass Outline
+	{
+		vertexshader = compile vs_3_0 VS_OUTLINE();
+		pixelshader = compile ps_3_0 PS_OUTLINE();
+		CullMode = CW;
+	}
+
+	pass Origin	
 	{
 		vertexshader = compile vs_3_0 VS_MAIN();	
 		pixelshader = compile ps_3_0 PS_MAIN();
+		CullMode = CCW;
 	}
 };

@@ -15,7 +15,7 @@ float4 gLineColor = float4(1, 0.5, 0, 1);
 float  gLineThickness = .01;
 
 float3 gViewDir = float3(1, 1, 0);
-float4 gRImColor = float4(1, 1, 0, 1);
+float4 gRimColor = float4(1, 1, 0, 1);
 float  gRimPower = 3.f;
 
 texture g_DiffuseTex;
@@ -103,7 +103,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 	Output.mUV = Input.mUV;
 
-	return(Output);
+	return (Output);
 
 }
 
@@ -120,8 +120,8 @@ float4 ps_main(PS_INPUT Input) : COLOR
 	// ºûÀÇ °­µµ
 	float intensity = dot(normalize(gWorldLightPosition), Input.mUV);
 
-if (intensity < 0)
-	intensity = 0;
+	if (intensity < 0)
+		intensity = 0;
 
 	float4 albedo = tex2D(Diffuse, Input.mUV) * gDiffuseColor * gDiffuseIntensity;
 	albedo.a = 1;
@@ -136,11 +136,10 @@ if (intensity < 0)
 	diffuse = ceil(diffuse * intensity * 5) / 5.0f;
 
 	float rim = saturate(abs(dot(Input.mNormal, gViewDir)));
-	float3 Emission = pow(1 - rim, gRimPower) * gRImColor.rgb;
+	float3 Emission = pow(1 - rim, gRimPower) * gRimColor.rgb;
 
 	return float4(albedo * diffuse.xyz * mFace * mBody * mHair * mHair2, 1) ;
 }
-
 
 VS_OUTPUT OutlineVertexShader(VS_INPUT Input)
 {
@@ -159,19 +158,19 @@ float4 OutlinePixelShader(VS_OUTPUT Input) : COLOR0
 	return gLineColor;
 }
 
+
 technique ToonShader
 {
-	/*pass OutLine
+	/* pass OutLine
 	{
 		VertexShader = compile vs_3_0 OutlineVertexShader();
 		PixelShader = compile ps_3_0 OutlinePixelShader();
 		CullMode = CW;
-	}*/
-	pass Toon
+	} */
+		pass Toon
 	{
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();
 		//CullMode = CCW;
 	}
-
 };

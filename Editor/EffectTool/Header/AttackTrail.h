@@ -13,7 +13,6 @@ public:
 	static		SP(CAttackTrail)			Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject) MakeClone() override;
-
 	void Awake() override;
 	void Start() override;
 	void FixedUpdate() override;

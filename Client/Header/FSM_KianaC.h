@@ -64,10 +64,10 @@ private: /* Special Actions */
 
 
 private:
+	void ResetCheckMembers();
+
 	bool m_checkUltraRing = false;
-
 	bool m_checkUltraAtk = false;
-
 	bool m_checkEffect = false;
 
 private:

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageControlTower.h"
 
+#include "DamageObjectPool.h"
 #include "InputManager.h"
 #include "Layer.h"
 
@@ -12,14 +13,6 @@
 
 IMPLEMENT_SINGLETON(CStageControlTower)
 
-//CStageControlTower::CStageControlTower()
-//{
-//}
-//
-//
-//CStageControlTower::~CStageControlTower()
-//{
-//}
 
 void CStageControlTower::Awake(void)
 {
@@ -45,6 +38,7 @@ void CStageControlTower::Update(void)
 	MoveControl();
 	if (m_mode != WithoutUI)
 		StageUIControl();
+
 }
 
 void CStageControlTower::OnDestroy()
@@ -394,9 +388,12 @@ void CStageControlTower::FindTarget()
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
+	if (monsterList.empty())
+		return;
+
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
 	SP(Engine::CObject) spTarget = m_spCurTarget;
-	_float minDistance = 10000.f;
+	_float minDistance = 5.f;
 
 	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
 	valkyriePos.y = 0.f;
@@ -421,19 +418,27 @@ void CStageControlTower::FindTarget()
 
 	m_spCurTarget = spTarget;
 
-	m_rotateLock = false;
-	m_rotateByTarget = true;
-	_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
-	targetPos.y = 0.f;
-	m_moveOrderDir = targetPos - valkyriePos;
-	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
-
 
 	if (m_mode == WithoutUI)
 		return;
 
-	m_pLinker->OnTargetMarker();	// ui interaction
-	m_pLinker->MonsterInfoSet();
+	if (m_spCurTarget)
+	{
+		// ui interaction
+		m_pLinker->MonsterInfoSet();
+		
+		m_rotateLock = false;
+		m_rotateByTarget = true;
+		_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
+		targetPos.y = 0.f;
+		m_moveOrderDir = targetPos - valkyriePos;
+		D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+
+		// ui interaction
+		m_pLinker->OnTargetMarker();
+	}
+
+	
 }
 
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
@@ -442,7 +447,13 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
-	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate());
+	_float damage = 0.f;
+	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate(), &damage);
+	m_pLinker->MonsterHpDown(damage);
+
+	CDamageObjectPool::GetInstance()->AddDamage(
+		pMonster,
+		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
 
 	// 2. 슬라이더 조정
 
@@ -478,7 +489,11 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
-	bool isDead = m_pDealer->Damage_MtoV( pM->GetStat(), pV->GetStat(), info.GetDamageRate());
+	_float damage = 0.f;
+	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
+	//CDamageObjectPool::GetInstance()->AddDamage(
+	//	pMonster->GetTransform()->GetPosition(),
+	//	_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Red");
 
 	// 2. 슬라이더 조정
 	m_pLinker->PlayerHpSet();

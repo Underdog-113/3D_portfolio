@@ -49,7 +49,9 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	// 텍스처->월드
 	vNormal = vector(vNormal.xyz * 2.f - 1.f, 0.f);
 
+	
 	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * g_vMtrlDiffuse) + (g_vLightAmbient * g_vMtrlAmbient);
+	Out.vShade = ceil(Out.vShade * 30) / 30;
 
 	vector	vReflect = reflect(normalize(vector(g_vLightDir.xyz, 0.f)), vNormal);
 

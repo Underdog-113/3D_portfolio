@@ -6,7 +6,7 @@
 IMPLEMENT_SINGLETON(CDamageObjectPool)
 void CDamageObjectPool::Start(Engine::CScene* pScene)
 {
-	// Ç® Ãß±âÈ­
+	// Ç® ï¿½ß±ï¿½È­
 	_int poolCount = 50;
 
 	for (int i = 0; i <= poolCount; i++)
@@ -16,6 +16,7 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 		image->GetComponent<Engine::CShaderC>()->
 			AddShader((_int)EShaderID::DamageFontShader);
 		image->AddComponent<CDamageFontC>();
+
 		image->SetIsEnabled(false);
 		image->GetTexture()->AddTexture(L"Defalut", 0);
 		m_disabledObjectList.emplace_back(image.get());
@@ -25,21 +26,21 @@ void CDamageObjectPool::Start(Engine::CScene* pScene)
 
 void CDamageObjectPool::Update(void)
 {
-	// È°¼ºÈ­Áß¿¡ ºñÈ°¼ºÈ­µÈ³ðµé ³Ñ°ÜÁÖ±â
+	// È°ï¿½ï¿½È­ï¿½ß¿ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½È³ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ö±ï¿½
 	ReMoveDamage();
 }
 
 void CDamageObjectPool::OnDestroy(void)
 {
-	// ¸ðµç ¿ÀºêÁ§Æ® »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	m_disabledObjectList.clear();
 	m_activationObjectList.clear();
 }
 
 void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float interval, _float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
-	// damageÀÇ ÀÚ¸´¼ö¸¸Å­ for¹®µ¹¾Æ¾ßÇÑ´Ù.
-	
+	// damageï¿½ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½Å­ forï¿½ï¿½ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½Ñ´ï¿½.
+
 	_int Tdamage = damage;
 	_float intervalSum = interval;
 	while (Tdamage != 0)
@@ -47,13 +48,15 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float
 		int value = Tdamage % 10;
 		Tdamage /= 10;
 
-		// µ¥¹ÌÁö ÀüºÎ´Ù ÇÑÀÚ¸´¼ö·Î ÂÉ°³°í °£°Ý¿¡µû¶ó¼­ »ý¼ºÇÏ±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		if (m_disabledObjectList.empty())
 		{
 			SP(Engine::CImageObject) image =
 				std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"DamageFontUIObject"));
 			image->AddComponent<CDamageFontC>();
-
+			image->GetComponent<Engine::CShaderC>()->
+				AddShader((_int)EShaderID::DamageFontShader);
+			image->GetTexture()->AddTexture(L"Defalut", 0);
 			m_disabledObjectList.emplace_back(image.get());
 		}
 
@@ -68,7 +71,7 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 size,  _float
 
 void CDamageObjectPool::ReMoveDamage()
 {
-	// È°¼ºÈ­µÈ ¿ÀºêÁ§Æ®Áß¿¡ ºñÈ°¼ºµÈ ¿ÀºêÁ§Æ®·Î ³Ñ°ÜÁÖ±â
+	// È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ß¿ï¿½ ï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ö±ï¿½
 	/*for (auto& iter = m_activationObjectList.begin(); iter != m_activationObjectList.end(); iter++)
 	{
 		if (!(*iter)->GetIsEnabled())

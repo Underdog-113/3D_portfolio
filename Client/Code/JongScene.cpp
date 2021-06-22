@@ -2,8 +2,12 @@
 #include "JongScene.h"
 #include "ObjectFactory.h"
 
+#include "DataLoad.h"
 #include "DynamicMeshData.h"
 
+#include "DamageObjectPool.h"
+#include "PatternMachineC.h"
+#include "ClientPatterns.h"
 #include "StageControlTower.h"
 #include "FSM_KianaC.h"
 #include "Kiana.h"
@@ -19,7 +23,7 @@
 #include "Kiana_Pistol_USP45.h"
 
 #include "MO_Dummy.h"
-#include "DataLoad.h"
+#include "MO_Sickle.h"
 
 CJongScene::CJongScene()
 {
@@ -55,11 +59,13 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
+	CDamageObjectPool::GetInstance()->Start(this);
 
 	KianaTest();
 	//TheresaTest();
 
-	CollisionDummy();
+	//CollisionDummy();
+	//SickleTest();
 
 	SetupStageUI();
 }
@@ -73,7 +79,6 @@ void CJongScene::Update(void)
 {
 	__super::Update();
 	m_pControlTower->Update();
-
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_C))
 	{
@@ -105,6 +110,8 @@ void CJongScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
+	CBattleUiManager::DestroyInstance();
+	CDamageObjectPool::DestroyInstance();
 	m_pControlTower->DestroyInstance();
 	m_pControlTower = nullptr;
 }
@@ -133,7 +140,7 @@ void CJongScene::KianaTest()
 
 	m_spKiana = spKianaClone;
 	m_pControlTower->AddSquadMember(m_spKiana);
-	//m_pController->Start(CStageControlTower::WithoutUI);
+	//m_pControlTower->Start(CStageControlTower::WithoutUI);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
 
@@ -146,7 +153,6 @@ void CJongScene::KianaTest()
 
 	// cube terrain
 	{
-
 		SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
 
@@ -201,6 +207,18 @@ void CJongScene::CollisionDummy()
 	m_spDummy2->GetTransform()->SetPosition(-2, 0, 5);
 
 	static_cast<CMO_Dummy*>(m_spDummy2.get())->SetStatus(stat);
+}
+
+void CJongScene::SickleTest()
+{
+	/* Sickle */
+	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetSize(2, 2, 2);
+	spSickleClone->GetTransform()->SetPosition(0, 0, 2);
+	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
+	m_spSickle = spSickleClone;
 }
 
 void CJongScene::SetupStageUI()

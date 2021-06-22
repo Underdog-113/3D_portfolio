@@ -40,6 +40,8 @@ void CMainMapTool::Awake(void)
 	Engine::CGraphicsManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
+	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)Engine::EShaderID::NumOfShaderID);
+
 	Engine::CInputManager::GetInstance()->Awake();
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
