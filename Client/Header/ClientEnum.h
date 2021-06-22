@@ -13,7 +13,8 @@ enum class EComponentID
 	Default				= 0 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
 	Text				= 1 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
 	Pattern				= 2 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
-	NumOfComponentID	= 3 + (_uint)Engine::EComponentID::NumOfEngineComponentID
+	TargetPosition		= 3 + (_uint)Engine::EComponentID::NumOfEngineComponentID,
+	NumOfComponentID	= 4 + (_uint)Engine::EComponentID::NumOfEngineComponentID
 };
 
 

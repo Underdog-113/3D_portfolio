@@ -21,7 +21,7 @@ public:
 	void OnDisable() override;
 
 public:
-	static const	EComponentID	m_s_componentID = EComponentID::Text;
+	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 private:
 	GETTOR_SETTOR(Engine::CObject*, m_target, nullptr, Target);
 };
