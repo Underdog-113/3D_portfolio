@@ -35,11 +35,25 @@ public:
 	virtual void SetBasicName(void) override;
 
 	virtual void ApplyHitInfo(HitInfo info) override;
+
+			void FindRightHand();
 public:
-	static		SP(CMO_Sickle)			Create(_bool isStatic, Engine::CScene* pScene);
-	void ChaseTarget(_float3 targetPos);
+	static		SP(CMO_Sickle)				Create				(_bool isStatic, Engine::CScene* pScene);
+				void						ChaseTarget			(_float3 targetPos);
+				void						SetStatus			(BaseStat stat);
+				void						UpdatePivotMatrices(void);
 
 private:
-	static		_uint				m_s_uniqueID;
+	static		_uint						m_s_uniqueID;
+
+private:
+	GETTOR(_mat*, m_pRightHand_World, nullptr, RightHandWorldMatrix)
+	Engine::D3DXFRAME_DERIVED*	m_pRightHand_Frame = nullptr;
+	_mat* m_pRightHand_BoneOffset = nullptr;
+	_mat* m_pRightHand = nullptr;
+
+	GETTOR		(SP(Engine::CRigidBodyC),	m_spRigidBody,		nullptr,	RigidBody)
+	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
+	GETTOR		(SP(Engine::CDebugC),		m_spDebug,			nullptr,	Debug)
 };
 

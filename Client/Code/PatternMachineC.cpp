@@ -49,10 +49,14 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
-	if (Engine::IMKEY_DOWN(KEY_Q))
-	{
-		m_onHit = true;
-	}
+	//if (Engine::IMKEY_DOWN(KEY_Q))
+	//{
+	//	m_onHitFrontL = true;
+	//}
+	//else if (Engine::IMKEY_DOWN(KEY_E))
+	//{
+	//	m_onHitFront = true;
+	//}
 
 	// born 실행 (1번만)
 	PlayBornPattern();
@@ -122,11 +126,19 @@ void CPatternMachineC::AddPattern(SP(CATBPattern) pPattern)
 
 void CPatternMachineC::PlayBasePattern()
 {
-	if (true == m_onHit && true == m_onBase)
+	if ((true == m_onHitL ||
+		true == m_onHitH || 
+		true == m_onHitFrontL || 
+		true == m_onHitFront) 
+		&& true == m_onBase)
 	{
 		m_onBase = false;
 	}
-	else if (false == m_onHit &&  false == m_onSelect)
+	else if ((false == m_onHitL &&
+			false == m_onHitH &&  
+			false == m_onHitFrontL &&
+			false == m_onHitFront) &&
+			false == m_onSelect)
 	{
 		m_onBase = true;
 		m_vPatterns[Pattern_Type::Base]->Pattern(m_pOwner);
@@ -149,7 +161,10 @@ void CPatternMachineC::PlayDiePattern()
 
 void CPatternMachineC::PlayHitPattern()
 {
-	if (true == m_onHit)
+	if (true == m_onHitL ||
+		true == m_onHitH ||
+		true == m_onHitFrontL ||
+		true == m_onHitFront)
 		m_vPatterns[Pattern_Type::Hit]->Pattern(m_pOwner);
 }
 
@@ -180,7 +195,10 @@ void CPatternMachineC::PlaySelectPattern()
 	// select pattern이 진행중이라면
 	if (true == m_onSelect)
 	{
-		if (true == m_onHit)
+		if (true == m_onHitL ||
+			true == m_onHitH ||
+			true == m_onHitFrontL ||
+			true == m_onHitFront)
 			m_onSelect = false;
 		else
 			m_vPatterns[index]->Pattern(m_pOwner);
