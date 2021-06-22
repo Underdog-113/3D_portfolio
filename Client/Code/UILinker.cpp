@@ -178,9 +178,10 @@ void CUILinker::MonsterInfoSet()
 
 	std::wstring name = pStat->Getname();
 	_float hp = pStat->GetCurHp();
+	_float maxHp = pStat->GetMaxHp();
 	std::wstring monsterProperty = L"UP";
 
-	m_pUIManager->MonsterState(name, hp, 4, monsterProperty);
+	m_pUIManager->MonsterState(name, maxHp, hp, 4, monsterProperty);
 }
 
 void CUILinker::MonsterHpSet()
