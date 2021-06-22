@@ -393,7 +393,7 @@ void CStageControlTower::FindTarget()
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
 	SP(Engine::CObject) spTarget = m_spCurTarget;
-	_float minDistance = 10000.f;
+	_float minDistance = 100.f;
 
 	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
 	valkyriePos.y = 0.f;
@@ -449,7 +449,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	m_pLinker->MonsterHpDown(damage);
 
 	CDamageObjectPool::GetInstance()->AddDamage(
-		pMonster->GetTransform()->GetPosition(),
+		pMonster,
 		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
 
 	// 2. 슬라이더 조정

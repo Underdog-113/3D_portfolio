@@ -65,12 +65,12 @@ void CAttackRangeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	if (TexIndex == 2)
 	{
-		m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
-		m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][1]->pTexture);
+		m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
+		m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 	}
 	else
 	{
-		m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
+		m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 		//m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetMeshIndex()][0]->pTexture);
 	}
 
