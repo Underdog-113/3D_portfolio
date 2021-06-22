@@ -44,8 +44,8 @@ void COneStageScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 
-	m_pController = CStageControlTower::GetInstance();
-	m_pController->Awake();
+	m_pControlTower = CStageControlTower::GetInstance();
+	m_pControlTower->Awake();
 }
 
 void COneStageScene::Start(void)
@@ -73,66 +73,12 @@ void COneStageScene::Update(void)
 	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
 		return;
 
-	m_pController->Update();
+	m_pControlTower->Update();
 	CBattleUiManager::GetInstance()->Update();
 
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-	{
-		CBattleUiManager::GetInstance()->PlayerSpDown(10);
-	}
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-	{
-	    CBattleUiManager::GetInstance()->HitCount(8);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
-	{
-		CBattleUiManager::GetInstance()->MonsterState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
-	{
-	    CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
-	{
-	    CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
-	{
-	    CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
-	{
-	    CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
-	{
-	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
-	{
-	    CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
-	{
-	    CBattleUiManager::GetInstance()->TargetUI(nullptr, 5.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
-	{
-	    CBattleUiManager::GetInstance()->BattleEnd();
-	}
-
-	
+	//ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -146,8 +92,8 @@ void COneStageScene::OnDestroy(void)
 	__super::OnDestroy();
 	CBattleUiManager::DestroyInstance();
 
-	m_pController->DestroyInstance();
-	m_pController = nullptr;
+	m_pControlTower->DestroyInstance();
+	m_pControlTower = nullptr;
 }
 
 void COneStageScene::OnEnable(void)
@@ -182,22 +128,10 @@ void COneStageScene::Start_SetupUI(void)
 void COneStageScene::Start_SetupMembers(void)
 {
 	// Kiana
-	{
-		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+	Create_ActorValkyrie();
 
-		m_spValkyrie = spKianaClone;
-		m_pController->AddSquadMember(m_spValkyrie);
-		m_pController->Start();
-
-		//spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
-	}
 	// Cam Target Set
-	{
-		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(L"OneStageSceneBasicCamera");
-		cam->SetTarget(m_spValkyrie);
-		cam->SetTargetDist(2.f);
-		CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-	}
+	Create_SceneCamera();
 	// Spider
 	{
 		//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
@@ -217,7 +151,82 @@ void COneStageScene::Start_SetupMembers(void)
 	}
 }
 
+void COneStageScene::Create_ActorValkyrie(void)
+{
+	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+
+	m_spValkyrie = spKianaClone;
+	m_pControlTower->AddSquadMember(m_spValkyrie);
+	m_pControlTower->Start(CStageControlTower::ALL);
+}
+
+void COneStageScene::Create_SceneCamera(void)
+{
+	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+	cam->SetTarget(m_spValkyrie);
+	cam->SetTargetDist(2.f);
+	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+}
+
 void COneStageScene::InitPrototypes(void)
 {
 
+}
+
+void COneStageScene::ForUITest()
+{
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	{
+		CBattleUiManager::GetInstance()->PlayerSpDown(10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+	{
+		CBattleUiManager::GetInstance()->HitCount(8);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
+	{
+		CBattleUiManager::GetInstance()->MonsterState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
+	{
+		CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
+	{
+		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
+	{
+		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
+	{
+		CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
+	{
+		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
+	{
+		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
+	{
+		CBattleUiManager::GetInstance()->TargetUI(nullptr, 5.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+		CBattleUiManager::GetInstance()->BattleEnd();
+	}
 }

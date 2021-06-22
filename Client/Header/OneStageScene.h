@@ -28,13 +28,20 @@ public:
 
 private:
 	void				Start_SetupUI(void);
+	
 	void				Start_SetupMembers(void);
+	void				Create_ActorValkyrie(void);
+	void				Create_SceneCamera(void);
+
 	void				InitPrototypes(void) override;
+
+	void				ForUITest();
+
 
 
 
 private:
-	CStageControlTower* m_pController = nullptr;
+	CStageControlTower* m_pControlTower = nullptr;
 
 	SP(Engine::CObject) m_spValkyrie;
 	SP(Engine::CObject) m_spSpider;

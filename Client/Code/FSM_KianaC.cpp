@@ -231,6 +231,7 @@ bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float 
 		if (m_pDM->GetAniTimeline() > coolTime)
 		{
 			ChangeState(switchStateName);
+			CStageControlTower::GetInstance()->FindTarget();
 			return true;
 		}
 	}
