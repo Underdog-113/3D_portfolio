@@ -50,7 +50,7 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 
 	_float alphaValue = m_lifeTime / m_oldLifeTime;
 
-	GetOwner()->GetComponent<Engine::CShaderC>()->GetShaders()[0]->GetEffect()->SetFloat("g_alphaValue", alphaValue);
+	GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(_float4(1, 1, 1, alphaValue));
 
 	if (m_lifeTime <= 0)
 	{
