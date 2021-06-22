@@ -88,7 +88,7 @@ void COneStageScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"°æºñ ¸ÁÀÚ", 100, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"ss ss", 100, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))

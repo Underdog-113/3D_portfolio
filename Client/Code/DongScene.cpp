@@ -48,34 +48,15 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
+	//ObjectPool
+	CDamageObjectPool::GetInstance()->Start(this);
 
-	{
-		SP(Engine::CSlider) slider =
-			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", true, (_int)Engine::ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
-		slider->SetDirection((Engine::CSlider::ESliderDirection::TopToBottom));
-		slider->SetCircularMaxValue(360.0f);
-		slider->SetCircularMinValue(0.0f);
+	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
-		SP(Engine::CImageObject) background =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"BackGround"));
-		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		background->GetTransform()->SetSize(_float3(300, 300, 0));
-		background->GetTexture()->AddTexture(L"CurrentMark", 0);
+	SP(Engine::CObject) spEmpty =
+		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
 
-		SP(Engine::CImageObject) fill =
-			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"Fill"));
-		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
-		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
-		fill->GetTransform()->SetSize(_float3(300, 300, 0));
-		fill->GetTexture()->AddTexture(L"test", 0);
-		fill->SetParent(slider.get());
-		fill->GetComponent<Engine::CShaderC>()->
-			AddShader((_int)EShaderID::CircularGaugeShader);
-
-		slider->AddSliderData(100, 100, 0, background, fill);
-	}
-
+	CDamageObjectPool::GetInstance()->AddDamage(_float3(0, 0, 0), _float3(36, 51, 0), 36, 80.0f, 1, 123456789, L"Blue");
 }
 
 void CDongScene::FixedUpdate(void)
