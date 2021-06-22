@@ -54,15 +54,6 @@ private:
 
 	std::vector<SP(Engine::CObject)> m_vSickle;
 	std::vector<SP(Engine::CObject)> m_vSpider;
-
-
-	//SP(Engine::CObject) m_spGanesha;
-
-	SP(Engine::CObject) m_spSpider1;
-	SP(Engine::CObject) m_spSpider2;
-	
-	SP(Engine::CObject) m_spSickle1;
-	SP(Engine::CObject) m_spSickle2;
 	
 	SP(Engine::CObject) m_spGanesha;
 
