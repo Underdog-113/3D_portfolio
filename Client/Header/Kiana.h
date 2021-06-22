@@ -43,6 +43,11 @@ public:
 
 					void					SetBasicName		(void) override;
 
+					void					OnCollisionEnter(Engine::_CollisionInfo ci) override;
+					void					OnCollisionStay(Engine::_CollisionInfo ci) override;
+					void					OnCollisionExit(Engine::_CollisionInfo ci) override;
+
+
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
 					void					Update_WeaponTransform(void);
@@ -99,6 +104,8 @@ private:
 	Engine::D3DXFRAME_DERIVED*	m_pRightHand_Frame = nullptr;
 
 	_mat* m_pRightHand = nullptr;
+
+	float m_timer = 0.f;
 
    public:
 	SP(Engine::CObject) CreateEffect(std::wstring name);

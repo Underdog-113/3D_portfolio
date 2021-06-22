@@ -64,7 +64,7 @@ void CJongScene::Start(void)
 	KianaTest();
 	//TheresaTest();
 
-	//CollisionDummy();
+	CollisionDummy();
 	//SickleTest();
 
 	SetupStageUI();
@@ -146,7 +146,7 @@ void CJongScene::KianaTest()
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spKiana);
-	cam->SetTargetDist(2.f);
+	cam->SetTargetDist(4.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
 	cam->SetMode(Engine::ECameraMode::TPS);

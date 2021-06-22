@@ -587,6 +587,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 {
 	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk02)
 	{
+		m_pKiana->UltraAtk_Ring(CKiana::ATK02);
 		m_pKiana->UltraAtk(CKiana::ATK02);
 		m_checkUltraAtk = true;
 	}
