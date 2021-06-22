@@ -84,11 +84,11 @@ void COneStageScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_1) && Engine::IMKEY_PRESS(KEY_R))
 	{
-		Create_Sickle(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 0.f, 0.f));
+		Create_Sickle(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
 	}
 	if (Engine::IMKEY_DOWN(KEY_2) && Engine::IMKEY_PRESS(KEY_R))
 	{
-		Create_Spider(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 0.f, 0.f));
+		Create_Spider(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
 	}
 
 	//ForUITest();
