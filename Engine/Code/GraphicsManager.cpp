@@ -250,9 +250,14 @@ void CGraphicsManager::RenderNonAlpha(void)
 
 					_uint maxPass = 0;
 					pEffect->Begin(&maxPass, 0);
-					pObject->PreRender(pEffect);
-					pObject->Render(pEffect);
-					pObject->PostRender(pEffect);
+					for (_uint i = 0; i < maxPass; ++i)
+					{
+						pEffect->BeginPass(i);
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+						pEffect->EndPass();
+					}
 					pEffect->End();
 				}
 			}
@@ -318,9 +323,14 @@ void CGraphicsManager::RenderWire(void)
 
 						_uint maxPass = 0;
 						pEffect->Begin(&maxPass, 0);
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
+						for (_uint i = 0; i < maxPass; ++i)
+						{
+							pEffect->BeginPass(i);
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+							pEffect->EndPass();
+						}
 						pEffect->End();
 					}
 				}
@@ -354,9 +364,14 @@ void CGraphicsManager::RenderAlphaTest(void)
 
 						_uint maxPass = 0;
 						pEffect->Begin(&maxPass, 0);
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
+						for (_uint i = 0; i < maxPass; ++i)
+						{
+							pEffect->BeginPass(i);
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+							pEffect->EndPass();
+						}
 						pEffect->End();
 					}
 				}
@@ -466,13 +481,14 @@ void CGraphicsManager::RenderUI(void)
 
 						_uint maxPass = 0;
 						pEffect->Begin(&maxPass, 0);
-						pEffect->BeginPass(0);
-
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-
-						pEffect->EndPass();
+						for (_uint i = 0; i < maxPass; ++i)
+						{
+							pEffect->BeginPass(i);
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+							pEffect->EndPass();
+						}
 						pEffect->End();
 					}
 				}
