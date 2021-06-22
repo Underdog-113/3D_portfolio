@@ -113,16 +113,19 @@ void CCameraManager::ChangeCameraMode(ECameraMode newCameraMode)
 		m_spMainCamera->GetTransform()->SetPosition(m_spMainCamera->GetFixedPos());
 		m_spMainCamera->GetTransform()->SetForward(m_spMainCamera->GetFixedDir());
 		m_spMainCamera->SetMode(ECameraMode::Fixed);
+		m_spMainCamera->GetCollision()->SetIsEnabled(false);
 		break;
 
 	case ECameraMode::Free:
 		ShowCursor(false);
 		m_spMainCamera->SetMode(ECameraMode::Free);
+		m_spMainCamera->GetCollision()->SetIsEnabled(false);
 		break;
 
 	case ECameraMode::Edit:
 		ShowCursor(true);
 		m_spMainCamera->SetMode(ECameraMode::Edit);
+		m_spMainCamera->GetCollision()->SetIsEnabled(false);
 		break;
 
 	case ECameraMode::FPS:
@@ -134,6 +137,7 @@ void CCameraManager::ChangeCameraMode(ECameraMode newCameraMode)
 
 		ShowCursor(false);
 		m_spMainCamera->SetMode(ECameraMode::FPS);
+		m_spMainCamera->GetCollision()->SetIsEnabled(false);
 		break;
 
 	case ECameraMode::TPS:
@@ -145,6 +149,7 @@ void CCameraManager::ChangeCameraMode(ECameraMode newCameraMode)
 
 		ShowCursor(false);
 		m_spMainCamera->SetMode(ECameraMode::TPS);
+		m_spMainCamera->GetCollision()->SetIsEnabled(true);
 		break;
 	}
 }

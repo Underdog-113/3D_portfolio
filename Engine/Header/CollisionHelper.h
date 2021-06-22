@@ -539,10 +539,11 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	_float3 d = obbPos - rayStartPos;
 
+	
 	_float3 orientedAxis[3];
-	orientedAxis[0] = spObbTransform->GetRight();;
-	orientedAxis[1] = spObbTransform->GetUp();
-	orientedAxis[2] = spObbTransform->GetForward();
+	orientedAxis[0] = pOC->GetRight();
+	orientedAxis[1] = pOC->GetUp();
+	orientedAxis[2] = pOC->GetForward();
 
 	_float3 aabbMinPos = -pOC->GetHalfSize();
 	_float3 aabbMaxPos = pOC->GetHalfSize();

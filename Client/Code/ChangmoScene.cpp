@@ -58,7 +58,6 @@ void CChangmoScene::Start(void)
 
 		// cube terrain
 		{
-
 			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
 
 
@@ -69,7 +68,30 @@ void CChangmoScene::Start(void)
 			spCube->AddComponent<Engine::CShaderC>();
 			spCube->GetTransform()->SetSize(10, 1, 10);
 			spCube->GetTransform()->SetPosition(0, -1.f, 0);
+		}
 
+		{
+			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+
+			spCube->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, _float3(3.f, 3.f, 3.f), _float3(4, 1.5f, 4), _float3(0, PI / 3, 0)));
+
+			spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CShaderC>();
+		}
+
+		{
+			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+
+			spCube->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f), ZERO_VECTOR, _float3(PI/6, 0, 0)));
+
+			spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CShaderC>();
+			spCube->GetTransform()->SetSize(10, 1, 10);
+			spCube->GetTransform()->SetPosition(20, -1.f, 0);
 		}
 
 
