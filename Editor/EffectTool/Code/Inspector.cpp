@@ -122,13 +122,9 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO7, m_btnModeUVSprite);
 	DDX_Control(pDX, IDC_RADIO8, m_btnModeUVAnim);
 	DDX_Control(pDX, IDC_RADIO9, m_btnModeScale);
-
 	DDX_Control(pDX, IDC_SPIN1, m_spinPosX);
 	DDX_Control(pDX, IDC_SPIN4, m_spinPosY);
 	DDX_Control(pDX, IDC_SPIN7, m_spinPosZ);
-	DDX_Control(pDX, IDC_SPIN2, m_spinRotX);
-	DDX_Control(pDX, IDC_SPIN5, m_spinRotY);
-	DDX_Control(pDX, IDC_SPIN8, m_spinRotZ);
 	DDX_Control(pDX, IDC_SPIN10, m_spinAlphaWidth);
 	DDX_Control(pDX, IDC_SPIN11, m_spinAlphaHeigth);
 	DDX_Control(pDX, IDC_SPIN3, m_spinScaleX);
@@ -147,6 +143,7 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON49, m_bmpIndexX);
 	DDX_Control(pDX, IDC_BUTTON50, m_bmpIndexY);
 	DDX_Control(pDX, IDC_BUTTON51, m_bmpTilingYTitle);
+	DDX_Control(pDX, IDC_CHECK10, m_btnTestButton);
 }
 
 void CInspector::EditButtonStyle()
@@ -379,9 +376,6 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN1, &CInspector::OnDeltaposSpinPosX)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN4, &CInspector::OnDeltaposSpinPosY)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN7, &CInspector::OnDeltaposSpinPosZ)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN2, &CInspector::OnDeltaposSpinRotX)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN5, &CInspector::OnDeltaposSpinRotY)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN8, &CInspector::OnDeltaposSpinRotZ)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN3, &CInspector::OnDeltaposSpinScaleX)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN6, &CInspector::OnDeltaposSpinScaleY)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN9, &CInspector::OnDeltaposSpinScaleZ)
@@ -567,13 +561,13 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 	else
 	{
 		SP(Engine::CObject) spMeshEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 	}
 
 }
@@ -619,7 +613,46 @@ void CInspector::Add_AlphaMask(CString TextureKey)
 
 void CInspector::FunctionUpdate()
 {
+	
+	if (m_iSelectObjectNum > -1)
+	{
+		SP(Engine::CObject) spObject2 = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[0];
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
+		if (Engine::IMKEY_PRESS(KEY_UP))
+		{
+			spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(1.f));
+		}
+		if (Engine::IMKEY_PRESS(KEY_DOWN))
+		{
+			spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(-1.f));
+		}
+
+
+		if (m_btnTestButton.GetCheck())
+		{
+			if (spObject == nullptr)
+			{
+				MessageBox(L"spObject is Not Found / CInspector", NULL);
+				ABORT;
+			}
+
+			spObject->GetComponent<Engine::CTransformC>()->SetRotationY(spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
+			/*_mat rot;
+			D3DXMatrixRotationAxis(&rot, &UP_VECTOR, spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
+			_float3 newForward;
+			D3DXVec3TransformNormal(&newForward, &spObject->GetTransform()->GetForward(), &rot);
+			spObject->GetTransform()->SetForward(newForward);*/
+
+			CString str;
+			_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
+			str.Format(L"%f", fY);
+			m_edRotY.SetWindowTextW(str.GetString());
+
+			m_vSaveRot.x = fY;
+		}
+	}
+	
 }
 
 void CInspector::OptionUpdate()
@@ -756,13 +789,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(true);
 
 		m_edRotX.ShowWindow(false);
-		m_spinRotX.ShowWindow(false);
-
 		m_edRotY.ShowWindow(false);
-		m_spinRotY.ShowWindow(false);
-
 		m_edRotZ.ShowWindow(false);
-		m_spinRotZ.ShowWindow(false);
 
 		m_edScaleX.ShowWindow(false);
 		m_spinScaleX.ShowWindow(false);
@@ -785,13 +813,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(false);
 
 		m_edRotX.ShowWindow(true);
-		m_spinRotX.ShowWindow(true);
-
 		m_edRotY.ShowWindow(true);
-		m_spinRotY.ShowWindow(true);
-
 		m_edRotZ.ShowWindow(true);
-		m_spinRotZ.ShowWindow(true);
 
 		m_edScaleX.ShowWindow(false);
 		m_spinScaleX.ShowWindow(false);
@@ -814,13 +837,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(false);
 
 		m_edRotX.ShowWindow(false);
-		m_spinRotX.ShowWindow(false);
-
 		m_edRotY.ShowWindow(false);
-		m_spinRotY.ShowWindow(false);
-
 		m_edRotZ.ShowWindow(false);
-		m_spinRotZ.ShowWindow(false);
 
 		m_edScaleX.ShowWindow(true);
 		m_spinScaleX.ShowWindow(true);
@@ -843,13 +861,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(true);
 
 		m_edRotX.ShowWindow(true);
-		m_spinRotX.ShowWindow(true);
-
 		m_edRotY.ShowWindow(true);
-		m_spinRotY.ShowWindow(true);
-
 		m_edRotZ.ShowWindow(true);
-		m_spinRotZ.ShowWindow(true);
 
 		m_edScaleX.ShowWindow(true);
 		m_spinScaleX.ShowWindow(true);
@@ -872,13 +885,8 @@ void CInspector::SettingUpdate()
 		m_spinPosZ.ShowWindow(false);
 
 		m_edRotX.ShowWindow(false);
-		m_spinRotX.ShowWindow(false);
-
 		m_edRotY.ShowWindow(false);
-		m_spinRotY.ShowWindow(false);
-
 		m_edRotZ.ShowWindow(false);
-		m_spinRotZ.ShowWindow(false);
 
 		m_edScaleX.ShowWindow(false);
 		m_spinScaleX.ShowWindow(false);
@@ -1226,8 +1234,8 @@ void CInspector::OnEnChangeEditRotX()
 		ABORT;
 	}
 
-	spObject->GetComponent<Engine::CTransformC>()->SetRotationX(fResizeValue);
-	m_vSaveRot.x = fResizeValue;
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationX(D3DXToRadian(fResizeValue));
+	m_vSaveRot.x = D3DXToRadian(fResizeValue);
 
 }
 
@@ -1247,7 +1255,7 @@ void CInspector::OnEnChangeEditRotY()
 		ABORT;
 	}
 
-	spObject->GetComponent<Engine::CTransformC>()->SetRotationY(D3DXToDegree(fResizeValue));
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationY(fResizeValue);
 	m_vSaveRot.y = fResizeValue;
 
 }
@@ -1268,8 +1276,8 @@ void CInspector::OnEnChangeEditRotZ()
 		ABORT;
 	}
 
-	spObject->GetComponent<Engine::CTransformC>()->SetRotationZ(fResizeValue);
-	m_vSaveRot.z = fResizeValue;
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationZ(D3DXToRadian(fResizeValue));
+	m_vSaveRot.z = D3DXToRadian(fResizeValue);
 
 }
 
@@ -1465,85 +1473,6 @@ void CInspector::OnDeltaposSpinPosZ(NMHDR *pNMHDR, LRESULT *pResult)
 
 	*pResult = 0;
 }
-
-
-void CInspector::OnDeltaposSpinRotX(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-
-	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
-	if (spObject == nullptr)
-	{
-		MessageBox(L"spObject is Not Found / CInspector", NULL);
-		ABORT;
-	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationX(pNMUpDown->iDelta * -m_fSpeed);
-
-	UpdateData(true);
-	CString str;
-	_float fX= spObject->GetComponent<Engine::CTransformC>()->GetRotation().x;
-	str.Format(L"%f", fX);
-	m_edRotX.SetWindowTextW(str.GetString());
-
-	m_vSaveRot.x = fX;
-	UpdateData(false);
-
-	*pResult = 0;
-}
-
-
-void CInspector::OnDeltaposSpinRotY(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-
-	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
-	if (spObject == nullptr)
-	{
-		MessageBox(L"spObject is Not Found / CInspector", NULL);
-		ABORT;
-	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToDegree(pNMUpDown->iDelta * -m_fSpeed));
-	
-	UpdateData(true);
-	CString str;
-	_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
-	str.Format(L"%f", fY);
-	m_edRotY.SetWindowTextW(str.GetString());
-
-	m_vSaveRot.y = fY;
-	UpdateData(false);
-
-	*pResult = 0;
-}
-
-
-void CInspector::OnDeltaposSpinRotZ(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-
-	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
-	if (spObject == nullptr)
-	{
-		MessageBox(L"spObject is Not Found / CInspector", NULL);
-		ABORT;
-	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(pNMUpDown->iDelta * -m_fSpeed);
-
-	UpdateData(true);
-	CString str;
-	_float fZ = spObject->GetComponent<Engine::CTransformC>()->GetRotation().z;
-	str.Format(L"%f", fZ);
-	m_edRotZ.SetWindowTextW(str.GetString());
-
-	m_vSaveRot.z = fZ;
-	UpdateData(false);
-
-	*pResult = 0;
-}
-
 
 void CInspector::OnDeltaposSpinScaleX(NMHDR *pNMHDR, LRESULT *pResult)
 {

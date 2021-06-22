@@ -68,6 +68,7 @@ void CShaderManager::InitShaderList(_uint numOfShader)
 	AddKeyAndShader(CSkyBoxShader::Create(),			L"SkyBoxShader",			(_uint)EShaderID::SkyBoxShader);
 	AddKeyAndShader(CCelShader::Create(),				L"CelShader",				(_uint)EShaderID::CelShader);
 	AddKeyAndShader(CWireShader::Create(),				L"WireShader",				(_uint)EShaderID::WireShader);
+	AddKeyAndShader(CMeshAlphaTestShader::Create(),		L"MeshAlphaTestShader",		(_uint)EShaderID::MeshAlphaTestShader);
 }
 
 void CShaderManager::AddKeyAndShader(CShader * pShader, std::wstring shaderKey, _uint ID)

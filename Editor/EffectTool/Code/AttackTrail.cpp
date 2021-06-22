@@ -76,7 +76,7 @@ void CAttackTrail::Update()
 		m_fTrailAlpha = 1.f;
 	}
 
-	//m_fTrailAlpha -= 1.6f * GET_DT;
+	m_fTrailAlpha -= 0.1f * GET_DT;
 
 }
 
