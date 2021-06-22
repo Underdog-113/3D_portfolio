@@ -35,6 +35,9 @@ private:
 	void				Create_SceneCamera(void);
 	
 	void				Create_Dummy(_float3 pos);
+	void				Create_Sickle(_float3 pos);
+	void				Create_Spider(_float3 pos);
+
 
 	void				InitPrototypes(void) override;
 
@@ -48,7 +51,12 @@ private:
 	CBattleUiManager* m_pBattleUIManager = nullptr;
 
 	SP(Engine::CObject) m_spValkyrie;
-	SP(Engine::CObject) m_spSpider;
+
+	std::vector<SP(Engine::CObject)> m_vSickle;
+	std::vector<SP(Engine::CObject)> m_vSpider;
+
+
+	SP(Engine::CObject) m_spGanesha;
 
 
 

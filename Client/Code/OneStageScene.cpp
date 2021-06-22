@@ -17,6 +17,10 @@
 // import from jongscene
 #include "Include_ForTest.h"
 
+
+#include "PatternMachineC.h"
+#include "ClientPatterns.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -78,6 +82,14 @@ void COneStageScene::Update(void)
 	m_pBattleUIManager->Update();
 
 
+	if (Engine::IMKEY_DOWN(KEY_1) && Engine::IMKEY_PRESS(KEY_R))
+	{
+		Create_Sickle(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 0.f, 0.f));
+	}
+	if (Engine::IMKEY_DOWN(KEY_2) && Engine::IMKEY_PRESS(KEY_R))
+	{
+		Create_Spider(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 0.f, 0.f));
+	}
 
 	//ForUITest();
 }
@@ -138,9 +150,9 @@ void COneStageScene::SetupMembers(void)
 	Create_SceneCamera();
 
 	Create_Dummy(_float3(5.f, 0.f, 0.f));
-	Create_Dummy(_float3(10.f, 0.f, 0.f));
-	Create_Dummy(_float3(15.f, 0.f, 2.f));
-	Create_Dummy(_float3(15.f, 0.f, -2.f));
+	//Create_Dummy(_float3(10.f, 0.f, 0.f));
+	//Create_Dummy(_float3(15.f, 0.f, 2.f));
+	//Create_Dummy(_float3(15.f, 0.f, -2.f));
 	// Spider
 
 
@@ -175,6 +187,23 @@ void COneStageScene::Create_Dummy(_float3 pos)
 	m_vDummy.emplace_back(dummy);
 }
 
+void COneStageScene::Create_Sickle(_float3 pos)
+{			
+	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(pos);
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+
+	m_vSickle.emplace_back(spSickleClone);
+}
+
+void COneStageScene::Create_Spider(_float3 pos)
+{
+	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(pos);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+
+	m_vSpider.emplace_back(spSpiderClone);
+}
 
 void COneStageScene::InitPrototypes(void)
 {

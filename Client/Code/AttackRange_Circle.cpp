@@ -51,7 +51,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
-	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::AttackRangeShader);
+	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.f, 0.f, 0.f));
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPositionY(0.1f);
 	m_pAttackRange_Circle_Diffuse->SetParent(this);
@@ -64,7 +64,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::AttackRangeShader);
+	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
 	m_pAttackRange_Circle_Alpha->SetParent(this);
 

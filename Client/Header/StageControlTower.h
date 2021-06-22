@@ -19,7 +19,7 @@
 #define StageKey_Swap_2				KEY_2
 									 
 #define StageKey_Pause				KEY_TAB
-#define StageKey_Test_Emotion		KEY_R
+#define StageKey_Test_Emotion		KEY_Z
 #define StageKey_Test_Hit_L			KEY_F
 #define StageKey_Test_Hit_H			KEY_C
 
