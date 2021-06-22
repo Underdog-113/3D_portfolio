@@ -193,7 +193,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AttackRangeShader.h" />
     <ClInclude Include="..\Header\AttackTrail.h" />
+    <ClInclude Include="..\Header\CatPawShader.h" />
+    <ClInclude Include="..\Header\CelShader.h" />
+    <ClInclude Include="..\Header\CircularGaugeShader.h" />
+    <ClInclude Include="..\Header\DamageFontShader.h" />
+    <ClInclude Include="..\Header\DissolveShader.h" />
+    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\EffectToolDefine.h" />
     <ClInclude Include="..\Header\EffectToolEnum.h" />
     <ClInclude Include="..\Header\EffectToolInclude.h" />
@@ -202,7 +209,11 @@
     <ClInclude Include="..\Header\Inspector.h" />
     <ClInclude Include="..\Header\MainEditor.h" />
     <ClInclude Include="..\Header\MeshEffect.h" />
+    <ClInclude Include="..\Header\MeshTrailShader.h" />
     <ClInclude Include="..\Header\SoftEffect.h" />
+    <ClInclude Include="..\Header\SoftEffectShader.h" />
+    <ClInclude Include="..\Header\SpawnEffectShader.h" />
+    <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="AttackRange_Editor.h" />
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
@@ -213,12 +224,23 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail.cpp" />
+    <ClCompile Include="..\Code\CatPawShader.cpp" />
+    <ClCompile Include="..\Code\CelShader.cpp" />
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\DamageFontShader.cpp" />
+    <ClCompile Include="..\Code\DissolveShader.cpp" />
+    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\EffectToolScene.cpp" />
     <ClCompile Include="..\Code\Inspector.cpp" />
     <ClCompile Include="..\Code\MainEditor.cpp" />
     <ClCompile Include="..\Code\MeshEffect.cpp" />
+    <ClCompile Include="..\Code\MeshTrailShader.cpp" />
     <ClCompile Include="..\Code\SoftEffect.cpp" />
+    <ClCompile Include="..\Code\SoftEffectShader.cpp" />
+    <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
+    <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="AttackRange_Editor.cpp" />
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />

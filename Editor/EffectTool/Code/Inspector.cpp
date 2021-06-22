@@ -551,14 +551,30 @@ void CInspector::OnBnClickedAlphaMask()
 
 void CInspector::Add_MeshEffect(CString ObjectName)
 {
-	SP(Engine::CObject) spMeshEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spMeshEffect->GetComponent<Engine::CMeshC>()->AddMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+	if (ObjectName == L"KianaTest.X")
+	{
+		SP(Engine::CObject) spMeshEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 1);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 2);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 3);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+	}
+	else
+	{
+		SP(Engine::CObject) spMeshEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+	}
 
 }
 
@@ -1231,7 +1247,7 @@ void CInspector::OnEnChangeEditRotY()
 		ABORT;
 	}
 
-	spObject->GetComponent<Engine::CTransformC>()->SetRotationY(fResizeValue);
+	spObject->GetComponent<Engine::CTransformC>()->SetRotationY(D3DXToDegree(fResizeValue));
 	m_vSaveRot.y = fResizeValue;
 
 }
@@ -1488,8 +1504,8 @@ void CInspector::OnDeltaposSpinRotY(NMHDR *pNMHDR, LRESULT *pResult)
 		MessageBox(L"spObject is Not Found / CInspector", NULL);
 		ABORT;
 	}
-	spObject->GetComponent<Engine::CTransformC>()->AddRotationY(pNMUpDown->iDelta * -m_fSpeed);
-
+	spObject->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToDegree(pNMUpDown->iDelta * -m_fSpeed));
+	
 	UpdateData(true);
 	CString str;
 	_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
