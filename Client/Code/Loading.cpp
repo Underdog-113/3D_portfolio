@@ -25,6 +25,7 @@ _uint CLoading::ThreadMain(void * pArg)
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Scene", (_uint)EDataID::Scene);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"UI", (_uint)EDataID::UI);
+	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Stat", (_uint)EDataID::Stat);
 
 
 	const std::wstring& sceneName = pLoading->m_pNextScene->GetObjectKey();

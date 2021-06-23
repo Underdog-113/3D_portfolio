@@ -13,9 +13,6 @@ IMPLEMENT_SINGLETON(CDataManager)
 
 void CDataManager::Start()
 {
-	// 데이터파일을 읽어와서 값을 넣어주는식인데 네가 안쓸것도 읽어와야한다? 너무 구리잖아
-	// 사실 이렇게쓰면 인벤토리잖아 그냥
-
 	// 함장, 발키리정보 넣어주기
 	CaptainInit();
 }
@@ -87,7 +84,7 @@ CItemData * CDataManager::FindItemData(std::wstring keyValue)
 void CDataManager::CaptainInit()
 {
 	Engine::CDataStore* dataStore = GET_CUR_CLIENT_SCENE->GetDataStore();
-	_int dataID = (_int)EDataID::UI;
+	_int dataID = (_int)EDataID::Stat;
 	std::wstring objectKey = L"CaptainDataFile";
 
 	std::wstring name;
@@ -117,7 +114,7 @@ void CDataManager::CaptainInit()
 void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 {
 	Engine::CDataStore* dataStore = GET_CUR_CLIENT_SCENE->GetDataStore();
-	_int dataID = (_int)EDataID::Data;
+	_int dataID = (_int)EDataID::Stat;
 	std::wstring objectKey = valkyrieName;
 
 	_bool enable;
@@ -163,7 +160,7 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 void CDataManager::ItemInit(std::wstring itemName)
 {
 	Engine::CDataStore* dataStore = GET_CUR_CLIENT_SCENE->GetDataStore();
-	_int dataID = (_int)EDataID::Data;
+	_int dataID = (_int)EDataID::Stat;
 	std::wstring objectKey = itemName;
 
 	std::wstring name;
@@ -185,7 +182,7 @@ void CDataManager::ItemInit(std::wstring itemName)
 void CDataManager::WeaponInit(std::wstring weaponName)
 {
 	Engine::CDataStore* dataStore = GET_CUR_CLIENT_SCENE->GetDataStore();
-	_int dataID = (_int)EDataID::Data;
+	_int dataID = (_int)EDataID::Stat;
 	std::wstring objectKey = weaponName;
 
 	std::wstring name;

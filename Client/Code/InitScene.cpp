@@ -75,8 +75,6 @@ void CInitScene::Start(void)
 	m_pBackground->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
 	m_pBackground->GetTransform()->SetSize(1440, 810, 1);
 
-	CDataManager::GetInstance()->Start();
-
 }
 
 void CInitScene::FixedUpdate(void)
@@ -119,6 +117,7 @@ void CInitScene::Update(void)
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F4))
 			{
+				CDataManager::GetInstance()->Start();
 
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
@@ -134,6 +133,8 @@ void CInitScene::Update(void)
 			}
 			else if (Engine::IMKEY_DOWN(KEY_SHIFT))
 			{
+				CDataManager::GetInstance()->Start();
+
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
 				m_pLoading = CLoading::Create(COneStageScene::Create(), false);

@@ -158,7 +158,15 @@ namespace Engine
 		PLAYER,
 		PLAYEREFFECT,
 		EFFECT,
-		UI,
+		UI_ButtonUI,
+		UI_BoxOpen,
+		UI_BoxEnd,
+		UI_1,
+		UI_2,
+		UI_3,
+		UI_4,
+		UI_5,
+		UI_6,
 		NumOfChannelID
 	};
 

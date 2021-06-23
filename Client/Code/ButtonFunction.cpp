@@ -16,7 +16,7 @@
 #include "BattleEndScene.h"
 
 #include "BattleRenunciationC.h"
-
+#include "SoundManager.h"
 _int CButtonFunction::stageValue = 0;
 CButtonFunction::CButtonFunction()
 {
@@ -35,6 +35,7 @@ void CButtonFunction::MainRoomScene()
 
 void CButtonFunction::StageSelectionScene()
 {
+	Engine::CSoundManager::GetInstance()->StartSound(L"../Resource/Sound/UI/Battle_Result_0.waw", (int)Engine::EChannelID::UI_ButtonUI);
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CStageSelectionScene::Create());
 }
