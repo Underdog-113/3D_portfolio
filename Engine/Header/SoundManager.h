@@ -28,6 +28,7 @@ public:
 	// 0.f ~ 1.f 
 	void VolumeIncrease(_uint ID, float fVolume);
 
+	void LoadSoundFile(const std::wstring& path);
 private:
 	void LoadSoundFile();
 
