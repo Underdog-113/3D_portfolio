@@ -52,7 +52,7 @@ void COneStageScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
-	
+	m_pControlTower->SetPhaseControl(new COneStagePhaseControl);
 }
 
 void COneStageScene::Start(void)
