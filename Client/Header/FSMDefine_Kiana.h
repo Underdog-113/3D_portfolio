@@ -135,20 +135,14 @@
 #define Sound_HIT_1					L"K_HIT_1.wav"
 #define Sound_HIT_2					L"K_HIT_2.wav"
 #define Sound_HIT_3					L"K_HIT_3.wav"
-#define Sound_RUN_0					L"K_RUN_0.wav"
-#define Sound_RUN_1					L"K_RUN_1.wav"
-#define Sound_RUN_2					L"K_RUN_2.wav"
-#define Sound_RUN_3					L"K_RUN_3.wav"
+#define Sound_RUN_0					L"K_Run_0.wav"
+#define Sound_RUN_1					L"K_Run_1.wav"
+#define Sound_RUN_2					L"K_Run_2.wav"
+#define Sound_RUN_3					L"K_Run_3.wav"
+#define Sound_RUN_4					L"K_Run_4.wav"
 #define Sound_Ult_Att_0				L"K_Ult_Att_0.wav"
 #define Sound_Ult_Att_1				L"K_Ult_Att_1.wav"
 #define Sound_Ult_Att_2				L"K_Ult_Att_2.wav"
 #define Sound_Ult_Att_3				L"K_Ult_Att_3.wav"
-#define Sound_Ult_Start_0			L"K_Ult_Start_0.wav"
-#define Sound_Ult_Start_Voice_0		L"K_Ult_Start_Voice_0.wav"
-
-
-
-enum SoundType {
-	Attack_1_effect, Attack_2_effect, Attack_3_effect, Attack_4_effect, Attack_5_effect,
-	Attack_1_voice, Attack_2_voice, Attack_3_voice, Attack_4_voice, Attack_5_voice,
-};
+#define Sound_Ult_Start				L"K_Ult_Start.wav"
+#define Sound_Ult_Start_Voice		L"K_Ult_Start_Voice.wav"

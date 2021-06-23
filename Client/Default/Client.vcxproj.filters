@@ -453,7 +453,10 @@
     </Filter>
     <Filter Include="09.Manager\05.ReadyToSortieManager">
       <UniqueIdentifier>{b8adff24-4bd8-489c-a0f1-5b238a5be961}</UniqueIdentifier>
-      </Filter>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\03.AttackBox">
+      <UniqueIdentifier>{0e8be3c0-67f2-4a21-a668-aa555d2cd52f}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\00.ForScene\04.MapObject2D">
       <UniqueIdentifier>{c53797e0-9e70-4a90-b0e3-6e2a229f6a0b}</UniqueIdentifier>
     </Filter>
@@ -908,7 +911,10 @@
     </ClInclude>
     <ClInclude Include="..\Header\ReadyToSortieManager.h">
       <Filter>09.Manager\05.ReadyToSortieManager</Filter>
-      </ClInclude>
+    </ClInclude>
+    <ClInclude Include="..\Header\AttackBox.h">
+      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\MapObject2D.h">
       <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
     </ClInclude>
@@ -1304,12 +1310,17 @@
     <ClCompile Include="..\Code\MO_Dummy.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\AttackBox.cpp">
+      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MO_Dummy.cpp" />
+    <ClCompile Include="SkillActivationC.cpp" />
     <ClCompile Include="..\Code\StageSelectionManager.cpp">
       <Filter>09.Manager\04.StageSelectionManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieManager.cpp">
       <Filter>09.Manager\05.ReadyToSortieManager</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\MapObject2D.cpp">
       <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
     </ClCompile>

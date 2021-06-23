@@ -35,14 +35,14 @@ void CValkyrie::Start(void)
 	m_pCT = CStageControlTower::GetInstance();
 }
 
-void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat)
+void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius)
 {
 	HitInfo info;
 	info.SetDamageRate(damageRate);
 	info.SetStrengthType(strength);
 	info.SetCrowdControlType(cc);
 
-	m_pAttackBall->SetParentMatrix(pBoneMat);
+	m_pAttackBall->SetupBall(this, pBoneMat, radius, info);
 	m_pAttackBall->SetIsEnabled(true);
 }
 

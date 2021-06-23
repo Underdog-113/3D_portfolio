@@ -1,24 +1,24 @@
 #include "stdafx.h"
-#include "AttackBall.h"
+#include "AttackBox.h"
 #include "Valkyrie.h"
 #include "Monster.h"
 #include "StageControlTower.h"
 
 
-_uint CAttackBall::m_s_uniqueID = 0;
-CAttackBall::CAttackBall()
+_uint CAttackBox::m_s_uniqueID = 0;
+CAttackBox::CAttackBox()
 {
 }
 
 
-CAttackBall::~CAttackBall()
+CAttackBox::~CAttackBox()
 {
 	OnDestroy();
 }
 
-SP(CAttackBall) CAttackBall::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CAttackBox) CAttackBox::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CAttackBall) spInstance(new CAttackBall, Engine::SmartDeleter<CAttackBall>);
+	SP(CAttackBox) spInstance(new CAttackBox, Engine::SmartDeleter<CAttackBox>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -26,9 +26,9 @@ SP(CAttackBall) CAttackBall::Create(_bool isStatic, Engine::CScene * pScene)
 	return spInstance;
 }
 
-SP(Engine::CObject) CAttackBall::MakeClone(void)
+SP(Engine::CObject) CAttackBox::MakeClone(void)
 {
-	SP(CAttackBall) spClone(new CAttackBall, Engine::SmartDeleter<CAttackBall>);
+	SP(CAttackBox) spClone(new CAttackBox, Engine::SmartDeleter<CAttackBox>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
@@ -37,7 +37,7 @@ SP(Engine::CObject) CAttackBall::MakeClone(void)
 	return spClone;
 }
 
-void CAttackBall::Awake(void)
+void CAttackBox::Awake(void)
 {
 	__super::Awake();
 
@@ -49,13 +49,13 @@ void CAttackBall::Awake(void)
 	m_spCollision	= AddComponent<Engine::CCollisionC>();
 }
 
-void CAttackBall::Start(void)
+void CAttackBox::Start(void)
 {
 	__super::Start();
 	
 	if (m_pOwner == nullptr)
 	{
-		MSG_BOX(__FILE__, L"Owner is empty in CAttackBall::Start()");
+		MSG_BOX(__FILE__, L"Owner is empty in CAttackBox::Start()");
 		ABORT;
 	}	
 	
@@ -68,27 +68,28 @@ void CAttackBall::Start(void)
 		m_collisionID = (_int)ECollisionID::EnemyAttack;
 	}
 
-	auto col = Engine::CSphereCollider::Create(m_collisionID, 0.1f);
-	m_spCollision->AddCollider(col, true);
+	auto col = Engine::CObbCollider::Create(m_collisionID);
+	col->SetIsTrigger(true);
+	m_spCollision->AddCollider(col);
 
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	AddComponent<Engine::CDebugC>();
 	AddComponent<Engine::CShaderC>();
 }
 
-void CAttackBall::FixedUpdate(void)
+void CAttackBox::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 	
 }
 
-void CAttackBall::Update(void)
+void CAttackBox::Update(void)
 {
 	__super::Update();
 	
 }
 
-void CAttackBall::LateUpdate(void)
+void CAttackBox::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
@@ -99,26 +100,26 @@ void CAttackBall::LateUpdate(void)
 
 }
 
-void CAttackBall::OnDestroy(void)
+void CAttackBox::OnDestroy(void)
 {
 	__super::OnDestroy();
 	
 }
 
-void CAttackBall::OnEnable(void)
+void CAttackBox::OnEnable(void)
 {
 	__super::OnEnable();
 	
 }
 
-void CAttackBall::OnDisable(void)
+void CAttackBox::OnDisable(void)
 {
 	__super::OnDisable();
 	
 	m_vCollided.clear();
 }
 
-void CAttackBall::OnCollisionEnter(Engine::_CollisionInfo ci)
+void CAttackBox::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	Engine::CObject* pObject = ci.pOtherCollider->GetOwner()->GetOwner();
 
@@ -144,15 +145,15 @@ void CAttackBall::OnCollisionEnter(Engine::_CollisionInfo ci)
 	}
 }
 
-void CAttackBall::OnCollisionStay(Engine::_CollisionInfo ci)
+void CAttackBox::OnCollisionStay(Engine::_CollisionInfo ci)
 {
 }
 
-void CAttackBall::OnCollisionExit(Engine::_CollisionInfo ci)
+void CAttackBox::OnCollisionExit(Engine::_CollisionInfo ci)
 {
 }
 
-void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
+void CAttackBox::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 {
 	Engine::CObject* pObject = pCollisionC->GetOwner();
 
@@ -178,25 +179,28 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 	}
 }
 
-void CAttackBall::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
+void CAttackBox::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
 {
 }
 
-void CAttackBall::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
+void CAttackBox::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 {
 }
 
-void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, HitInfo info)
+void CAttackBox::SetupBox(CObject * pOwner, _mat * pParentMat, _float3 size, _float3 offset, _float3 rotOffset, HitInfo info)
 {
 	m_pOwner = pOwner;
 
 	m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
 
-	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);
+	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetSize(size);
+	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetHalfSize(size / 2.f);
+	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetOffsetOrigin(offset);
+	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetRotOffset(rotOffset);
 }
 
-void CAttackBall::SetBasicName(void)
+void CAttackBox::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }

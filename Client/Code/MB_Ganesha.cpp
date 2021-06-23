@@ -3,6 +3,7 @@
 
 #include "FSM_GaneshaC.h"
 #include "AttackBall.h"
+#include "AttackBox.h"
 #include "PatternMachineC.h"
 
 _uint CMB_Ganesha::m_s_uniqueID = 0;
@@ -68,6 +69,10 @@ void CMB_Ganesha::Start(void)
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
+
+	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
+	m_pAttackBox->SetOffset(_float3(0, 1, 0));
+	m_pAttackBox->SetOwner(this);
 }
 
 void CMB_Ganesha::FixedUpdate(void)
@@ -136,6 +141,11 @@ void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 	//case HitInfo::Str_Airborne:
 	//	break;
 	//}
+}
+
+void CMB_Ganesha::MonsterDead()
+{
+	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 
 SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
