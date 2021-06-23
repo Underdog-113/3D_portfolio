@@ -17,7 +17,7 @@ public:
 
 private:
 	_float m_atkTime = 0.f; // 공격 쿨타임
-	_float m_atkDis = 3.f; // 공격 거리
+	_float m_atkDis = 2.61f; // 공격 거리
 	_float m_atkCool = 2.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
@@ -27,6 +27,8 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_int m_jumpCnt = 0; // 두 번 점프 여부
+
+	_mat m_atkMat;
 };
 
 #endif

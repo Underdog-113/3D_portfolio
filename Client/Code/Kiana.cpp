@@ -18,6 +18,11 @@
 #include "AttackBall.h"
 #include "FSMDefine_Kiana.h"
 
+#include "BattleUiManager.h"
+#include "DamageObjectPool.h"
+
+_uint CKiana::m_s_uniqueID = 0;
+
 CKiana::CKiana()
 {
 }
@@ -107,6 +112,7 @@ void CKiana::Update(void)
 	__super::Update();
 	
 	UpdatePivotMatrices();
+	
 
 	if (m_ultraMode)
 		UseUltraCost();
@@ -233,8 +239,8 @@ void CKiana::CreateCatPaw(void)
 
 	m_spCatPaw_Ring_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk01", true, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk01");
 	m_spCatPaw_Ring_Atk01->SetIsEnabled(false);
-	//m_spCatPaw_Ring_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk02", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk02");
-	//m_spCatPaw_Ring_Atk02->SetIsEnabled(false);
+	m_spCatPaw_Ring_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk02", true, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk02");
+	m_spCatPaw_Ring_Atk02->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk03", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk03");
 	//m_spCatPaw_Ring_Atk03->SetIsEnabled(false);
 	//m_spCatPaw_Ring_Atk04 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Ring_Atk04", false, (_uint)ELayerID::Player, L"CatPaw_Ring_Atk04");
@@ -263,6 +269,18 @@ void CKiana::SetBasicName(void)
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
 
+void CKiana::OnCollisionEnter(Engine::_CollisionInfo ci)
+{
+}
+
+void CKiana::OnCollisionStay(Engine::_CollisionInfo ci)
+{
+}
+
+void CKiana::OnCollisionExit(Engine::_CollisionInfo ci)
+{
+}
+
 void CKiana::ApplyHitInfo(HitInfo info)
 {
 	// attack strength
@@ -289,6 +307,7 @@ void CKiana::UltraAtk(AttackOption index)
 		return;
 
 	_float3 pos;
+	HitInfo info;
 	switch (index)
 	{
 	case CKiana::ATK01:
@@ -297,9 +316,14 @@ void CKiana::UltraAtk(AttackOption index)
 
 		pos = m_spTransform->GetPosition() + m_spTransform->GetForward();
 		m_spCatPaw_Atk01->GetTransform()->SetPosition(pos);
-		m_spCatPaw_Atk01->GetTransform()->AddPositionY(-0.25f);
 		m_spCatPaw_Atk01->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
 		m_spCatPaw_Atk01->GetTransform()->UpdateWorldMatrix();
+
+		info.SetDamageRate(2.f);
+		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetCrowdControlType(_Hit_Info::CC_None);
+
+		static_cast<CKiana_CatPaw_Atk01*>(m_spCatPaw_Atk01.get())->SetupPaw(this, info);
 		break;
 	case CKiana::ATK02:
 		m_spCatPaw_Atk02->SetIsEnabled(true);
@@ -309,6 +333,12 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk02->GetTransform()->AddPositionY(-0.25f);
 		m_spCatPaw_Atk02->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
 		m_spCatPaw_Atk02->GetTransform()->UpdateWorldMatrix();
+
+		info.SetDamageRate(2.f);
+		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetCrowdControlType(_Hit_Info::CC_None);
+
+		static_cast<CKiana_CatPaw_Atk02*>(m_spCatPaw_Atk02.get())->SetupPaw(this, info);
 		break;
 	case CKiana::ATK03:
 		m_spCatPaw_Atk03->SetIsEnabled(true);
@@ -318,6 +348,12 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk03->GetTransform()->AddPositionY(-0.25f);
 		m_spCatPaw_Atk03->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
 		m_spCatPaw_Atk03->GetTransform()->UpdateWorldMatrix();
+
+		info.SetDamageRate(2.f);
+		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetCrowdControlType(_Hit_Info::CC_None);
+
+		static_cast<CKiana_CatPaw_Atk03*>(m_spCatPaw_Atk03.get())->SetupPaw(this, info);
 		break;
 	case CKiana::ATK04:
 		m_spCatPaw_Atk04->SetIsEnabled(true);
@@ -327,6 +363,12 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk04->GetTransform()->AddPositionY(-0.25f);
 		m_spCatPaw_Atk04->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
 		m_spCatPaw_Atk04->GetTransform()->UpdateWorldMatrix();
+
+		info.SetDamageRate(2.f);
+		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetCrowdControlType(_Hit_Info::CC_None);
+
+		static_cast<CKiana_CatPaw_Atk04*>(m_spCatPaw_Atk04.get())->SetupPaw(this, info);
 		break;
 	case CKiana::ATK05:
 		m_spCatPaw_Atk05->SetIsEnabled(true);
@@ -336,6 +378,12 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk05->GetTransform()->AddPositionY(-0.25f);
 		m_spCatPaw_Atk05->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
 		m_spCatPaw_Atk05->GetTransform()->UpdateWorldMatrix();
+
+		info.SetDamageRate(2.f);
+		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetCrowdControlType(_Hit_Info::CC_None);
+
+		static_cast<CKiana_CatPaw_Atk05*>(m_spCatPaw_Atk05.get())->SetupPaw(this, info);
 		break;
 	case CKiana::Branch_ATK01:
 		break;
@@ -357,22 +405,23 @@ void CKiana::UltraAtk_Ring(AttackOption index)
 	switch (index)
 	{
 	case CKiana::ATK01:
-		m_spCatPaw_Ring_Atk01->SetIsEnabled(true);
+		//m_spCatPaw_Ring_Atk01->SetIsEnabled(true);
 
-		pos = m_spTransform->GetPosition() + m_spTransform->GetForward() * 1.3f;
-		m_spCatPaw_Ring_Atk01->GetTransform()->SetPosition(pos);
-		m_spCatPaw_Ring_Atk01->GetTransform()->AddPositionY(-0.27f);
-		m_spCatPaw_Ring_Atk01->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
-		m_spCatPaw_Ring_Atk01->GetTransform()->UpdateWorldMatrix();
+		//pos = m_spTransform->GetPosition() + m_spTransform->GetForward() * 1.3f;
+		//m_spCatPaw_Ring_Atk01->GetTransform()->SetPosition(pos);
+		//m_spCatPaw_Ring_Atk01->GetTransform()->AddPositionY(-0.27f);
+		//m_spCatPaw_Ring_Atk01->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
+		//m_spCatPaw_Ring_Atk01->GetTransform()->UpdateWorldMatrix();
 		break;
 	case CKiana::ATK02:
-		//m_spCatPaw_Atk02->SetIsEnabled(true);
+		//m_spCatPaw_Ring_Atk02->SetIsEnabled(true);
 
-		//pos = m_spTransform->GetPosition();
-		//m_spCatPaw_Atk02->GetTransform()->SetPosition(pos);
-		//m_spCatPaw_Atk02->GetTransform()->AddPositionY(-0.25f);
-		//m_spCatPaw_Atk02->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
-		//m_spCatPaw_Atk02->GetTransform()->UpdateWorldMatrix();
+		//pos = m_spTransform->GetPosition() + m_spTransform->GetForward();
+
+		//m_spCatPaw_Ring_Atk02->GetTransform()->SetPosition(pos);
+		//m_spCatPaw_Ring_Atk02->GetTransform()->AddPositionY(-0.27f);
+		//m_spCatPaw_Ring_Atk02->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
+		//m_spCatPaw_Ring_Atk02->GetTransform()->UpdateWorldMatrix();
 		break;
 	case CKiana::ATK03:
 		//m_spCatPaw_Atk03->SetIsEnabled(true);

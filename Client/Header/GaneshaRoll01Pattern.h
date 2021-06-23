@@ -17,7 +17,7 @@ public:
 	static SP(CGaneshaRoll01Pattern) Create();
 
 private:
-	_float m_cost = 30.f;
+	_float m_cost = 25.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 8.f; // 공격 거리
@@ -30,6 +30,8 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_int m_jumpCnt = 0; // 두 번 점프 여부
+
+	_mat m_atkMat;
 };
 
 #endif

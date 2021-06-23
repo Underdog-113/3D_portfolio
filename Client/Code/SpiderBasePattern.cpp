@@ -9,6 +9,7 @@
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
 #include "AttackBall.h"
+#include "AttackRange_Circle.h"
 
 CSpiderBasePattern::CSpiderBasePattern()
 {
@@ -54,6 +55,12 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Walk_Forward == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Attack_1);
+			SP(Engine::CObject) spMeshEffect
+				= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+
+			_float3 mPos = pOwner->GetTransform()->GetPosition();
+
+			spMeshEffect->GetTransform()->SetPosition(mPos);
 		}
 	}
 
@@ -67,8 +74,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	else if (Name_Attack_1 == fsm->GetCurStateString() && 0.8f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_explosionPosMat = pOwner->GetTransform()->GetWorldMatrix();
-		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat);
-		static_cast<Engine::CSphereCollider*>(static_cast<CMO_Spider*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.f);
+		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat, 3.f);
 	}
 }
 

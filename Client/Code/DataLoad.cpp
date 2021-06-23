@@ -602,7 +602,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 		_float3 size;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_size", size);
-		//spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger, size), true);
+		spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger, size));
 	}
 
 

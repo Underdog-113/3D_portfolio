@@ -84,7 +84,6 @@ void COneStageScene::Start(void)
 	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 	//m_vSpider.emplace_back(spSpiderClone);
 
-	m_pControlTower->Start();
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -135,7 +134,7 @@ void COneStageScene::Update(void)
 		m_bossSpawn = true;
 		m_onBoss = true;
 	}
-	
+
 	std::cout << "kiana x : " <<
 		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
@@ -239,7 +238,7 @@ void COneStageScene::Create_Dummy(_float3 pos)
 }
 
 void COneStageScene::Create_Sickle(_float3 pos)
-{			
+{
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(pos);
 	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());

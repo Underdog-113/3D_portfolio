@@ -65,7 +65,10 @@ void CJongScene::Start(void)
 	//TheresaTest();
 
 	//CollisionDummy();
-	//SickleTest();
+	SickleTest();
+	//SpiderTest();
+	//GaneshaTest();
+
 
 	SetupStageUI();
 }
@@ -99,6 +102,8 @@ void CJongScene::Update(void)
 
 		m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
 	}
+
+	_float3 pos = m_spKiana->GetTransform()->GetPosition();
 }
 
 void CJongScene::LateUpdate(void)
@@ -146,10 +151,10 @@ void CJongScene::KianaTest()
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spKiana);
-	cam->SetTargetDist(2.f);
+	cam->SetTargetDist(6.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
-	cam->SetMode(Engine::ECameraMode::TPS);
+	//cam->SetMode(Engine::ECameraMode::TPS);
 
 	// cube terrain
 	{
@@ -161,7 +166,7 @@ void CJongScene::KianaTest()
 
 		spCube->AddComponent<Engine::CDebugC>();
 		spCube->AddComponent<Engine::CShaderC>();
-		spCube->GetTransform()->SetSize(10, 1, 10);
+		spCube->GetTransform()->SetSize(20, 1, 20);
 		spCube->GetTransform()->SetPosition(0, -1.f, 0);
 
 	}
@@ -209,6 +214,13 @@ void CJongScene::CollisionDummy()
 	static_cast<CMO_Dummy*>(m_spDummy2.get())->SetStatus(stat);
 }
 
+void CJongScene::SpiderTest()
+{
+	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(0.f, 0.f, 5.f);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+}
+
 void CJongScene::SickleTest()
 {
 	/* Sickle */
@@ -220,6 +232,20 @@ void CJongScene::SickleTest()
 	//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 	m_spSickle = spSickleClone;
 }
+
+void CJongScene::GaneshaTest()
+{
+	/* Ganesha */
+	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
+	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+	//m_spGanesha = spGaneshaClone;
+}
+
 
 void CJongScene::SetupStageUI()
 {

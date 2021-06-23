@@ -425,6 +425,7 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkUltraRing = false;
 	m_checkUltraAtk = false;
 	m_checkEffect = false;
+	m_checkEffectSecond = false;
 }
 
 
@@ -537,7 +538,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 {
 	if (!m_checkUltraRing && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01 - 0.1f)
 	{
-		m_pKiana->UltraAtk_Ring(CKiana::ATK01);
+		//m_pKiana->UltraAtk_Ring(CKiana::ATK01);
 		m_checkUltraRing = true;
 	}
 
@@ -587,6 +588,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 {
 	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk02)
 	{
+		//m_pKiana->UltraAtk_Ring(CKiana::ATK02);
 		m_pKiana->UltraAtk(CKiana::ATK02);
 		m_checkUltraAtk = true;
 	}
@@ -712,6 +714,12 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 	{
 		CreateEffect_Attack4();
 		m_checkEffect = true;
+	}
+
+	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > 0.15f)
+	{
+		CreateEffect_Attack4();
+		m_checkEffectSecond = true;
 	}
 
 	if (CheckAction_Attack(Name_Attack_5))
