@@ -17,6 +17,9 @@
 #define Delay_CreateCatPaw_Atk04 0.05f
 #define Delay_CreateCatPaw_Atk05 0.1f
 
+#define Delay_CreateCatPaw_Branch_Atk03 0.05f
+#define Delay_CreateCatPaw_Branch_Atk04 0.15f
+
 class CKiana;
 class CStageControlTower;
 class CFSM_KianaC final : public Engine::CStateMachineC
@@ -67,7 +70,9 @@ private: /* Special Actions */
 	void PlaySound_Effect(const std::wstring& soundName);
 
 	void PlaySound_Attack_RandomVoice();
-	void PlaySound_Attack_RandomVoice();
+	void PlaySound_Attack_RandomRun();
+	void PlaySound_Attack_RandomEvade();
+	void PlaySound_Attack_RandomHit();
 
 private:
 	void ResetCheckMembers();
@@ -85,8 +90,11 @@ private:
 	Appear_Option m_appearOption = None;
 	bool m_isUltraMode = false;
 
-	_uint m_prevVoiceIndex = 0;
+	_uint m_prevAttackSoundIndex = 0;
+	_uint m_prevRunSoundIndex = 0;
+	_uint m_prevHitSoundIndex = 0;
 
+	_double m_runSoundTimer = 0;
 public:
 	// StandBy  
 	void StandBy_Init(void);
