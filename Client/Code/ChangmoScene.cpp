@@ -3,7 +3,8 @@
 #include "EmptyObject.h"
 #include "SkyBox.h"
 #include "Kiana.h"
-
+#include "PhaseChanger.h"
+#include "OneStagePhaseControl.h"
 
 CChangmoScene::CChangmoScene()
 {
@@ -34,6 +35,7 @@ void CChangmoScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
+	m_pControlTower->SetPhaseControl(new COneStagePhaseControl);
 }
 
 void CChangmoScene::Start(void)
@@ -92,6 +94,13 @@ void CChangmoScene::Start(void)
 			spCube->AddComponent<Engine::CShaderC>();
 			spCube->GetTransform()->SetSize(10, 1, 10);
 			spCube->GetTransform()->SetPosition(20, -1.f, 0);
+		}
+
+		{
+			SP(CPhaseChanger) spPhaseChanger =
+				std::dynamic_pointer_cast<CPhaseChanger>(ADD_CLONE(L"PhaseChanger", true));
+			spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger), true);
+			spPhaseChanger->SetPhaseToDie(5);
 		}
 
 

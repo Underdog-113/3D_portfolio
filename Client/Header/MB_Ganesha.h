@@ -32,6 +32,15 @@ public:
 
 	virtual void OnDisable(void) override;
 
+	virtual			void			OnCollisionEnter	(Engine::_CollisionInfo ci) {}
+	virtual			void			OnCollisionStay		(Engine::_CollisionInfo ci) {}
+	virtual			void			OnCollisionExit		(Engine::_CollisionInfo ci) {}
+
+	virtual			void			OnTriggerEnter		(Engine::CCollisionC const* pCollisionC) {}
+	virtual			void			OnTriggerStay		(Engine::CCollisionC const* pCollisionC) {}
+	virtual			void			OnTriggerExit		(Engine::CCollisionC const* pCollisionC) {}
+
+
 	virtual void SetBasicName(void) override;
 
 	virtual void ApplyHitInfo(HitInfo info) override;

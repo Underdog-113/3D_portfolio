@@ -11,7 +11,7 @@ float  gTime;
 float  gAlpha;
 float  m_defaultDissolveVal = 0.9f;
 
-float3 gDissolveLineColor;
+float3 gDissolveLineColor = float3(1,0,0);
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state

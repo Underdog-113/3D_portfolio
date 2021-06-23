@@ -65,8 +65,8 @@ void CShaderManager::InitShaderList(_uint numOfShader)
 	AddKeyAndShader(CDeferredBlendShader::Create(),		L"DeferredBlendShader",		(_uint)EShaderID::DeferredBlendShader);
 	AddKeyAndShader(CDeferredLightShader::Create(),		L"DeferredLightShader",		(_uint)EShaderID::DeferredLightShader);
 	AddKeyAndShader(CSliderShader::Create(),			L"SliderShader",			(_uint)EShaderID::SliderShader);
-	AddKeyAndShader(CSkyBoxShader::Create(),			L"SkyBoxShader",			(_uint)EShaderID::SkyBoxShader);
 	AddKeyAndShader(CCelShader::Create(),				L"CelShader",				(_uint)EShaderID::CelShader);
+	AddKeyAndShader(CSkyBoxShader::Create(),			L"SkyBoxShader",			(_uint)EShaderID::SkyBoxShader);
 	AddKeyAndShader(CWireShader::Create(),				L"WireShader",				(_uint)EShaderID::WireShader);
 	AddKeyAndShader(CMeshAlphaTestShader::Create(),		L"MeshAlphaTestShader",		(_uint)EShaderID::MeshAlphaTestShader);
 }

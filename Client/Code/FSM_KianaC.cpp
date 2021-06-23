@@ -11,6 +11,7 @@
 #include "StageControlTower.h"
 #include "Kiana.h"
 #include "AttackBall.h"
+#include "SoundManager.h"
 
 CFSM_KianaC::CFSM_KianaC()
 {
@@ -147,7 +148,6 @@ void CFSM_KianaC::FixRootMotionOffset(_uint index)
 
 void CFSM_KianaC::CreateEffect(std::wstring name)
 {
-
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
 		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
 
@@ -420,6 +420,61 @@ bool CFSM_KianaC::CheckAction_Ultra()
 	return false;
 }
 
+void CFSM_KianaC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)channel);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)channel);
+}
+
+void CFSM_KianaC::PlaySound_Voice(const std::wstring & soundName)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::PLAYER);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)Engine::EChannelID::PLAYER);
+}
+
+void CFSM_KianaC::PlaySound_Effect(const std::wstring & soundName)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::PLAYEREFFECT);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)Engine::EChannelID::PLAYEREFFECT);
+}
+
+void CFSM_KianaC::PlaySound_Attack_RandomVoice()
+{
+	_uint idx = rand() % 6;
+	if (m_prevVoiceIndex == idx)
+		idx = (m_prevVoiceIndex + 1) % 6;
+	
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Voice(Sound_Attack_Voice_0);
+		break;
+	case 1:
+		PlaySound_Voice(Sound_Attack_Voice_1);
+		break;
+	case 2:
+		PlaySound_Voice(Sound_Attack_Voice_2);
+		break;
+	case 3:
+		PlaySound_Voice(Sound_Attack_Voice_3);
+		break;
+	case 4:
+		PlaySound_Voice(Sound_Attack_Voice_4);
+		break;
+	case 5:
+		PlaySound_Voice(Sound_Attack_Voice_5);
+		break;
+	default:
+		break;
+	}
+
+	m_prevVoiceIndex = idx;
+}
+
+
 void CFSM_KianaC::ResetCheckMembers()
 {
 	m_checkUltraRing = false;
@@ -551,6 +606,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01)
 	{
 		CreateEffect_Attack1();
+		PlaySound_Attack_RandomVoice();
 		m_checkEffect = true;
 	}
 

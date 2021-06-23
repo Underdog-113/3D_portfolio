@@ -11,6 +11,7 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
+#include "SoundManager.h"
 
 CGaneshaBasePattern::CGaneshaBasePattern()
 {
@@ -39,6 +40,9 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_JumpBack.wav", (_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+		
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -70,6 +74,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		
 		m_walkReady = false;
 	}
 	// 내가 뒤로 이동 중이라면

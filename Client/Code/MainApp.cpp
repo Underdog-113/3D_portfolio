@@ -50,6 +50,7 @@ void CMainApp::Awake(void)
 
 	Engine::CInputManager::GetInstance()->Awake();
 	Engine::CSoundManager::GetInstance()->Awake();
+	LoadSounds();
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
@@ -103,16 +104,17 @@ void CMainApp::Update(void)
 	Engine::TIME_MEASURE_START;
 
 	Engine::CInputManager::GetInstance()->Update();
-
 	Engine::CSceneManager::GetInstance()->Update();
 	CButtonManager::GetInstance()->Update();
+
+	
+
 	Engine::CCollisionManager::GetInstance()->Update();
 
 	Engine::CCameraManager::GetInstance()->Update();
 	Engine::CGraphicsManager::GetInstance()->Update();
 
 	CDamageObjectPool::GetInstance()->Update();
-	//Engine::CPhysicsManager::GetInstance()->Update();
 
 	_float time = Engine::GET_ELAPSED_TIME;
 }
@@ -212,4 +214,10 @@ void CMainApp::OnDisable(void)
 void CMainApp::InitStaticPrototype(void)
 {
 
+}
+
+void CMainApp::LoadSounds()
+{
+	//Engine::CSoundManager::GetInstance()->LoadSoundFile(L"BGM");
+	Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
 }
