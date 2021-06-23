@@ -69,6 +69,7 @@ private:
 	bool m_checkUltraRing = false;
 	bool m_checkUltraAtk = false;
 	bool m_checkEffect = false;
+	bool m_checkEffectSecond = false;
 
 private:
 	CKiana* m_pKiana = nullptr;

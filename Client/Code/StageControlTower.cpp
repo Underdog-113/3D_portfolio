@@ -393,7 +393,7 @@ void CStageControlTower::FindTarget()
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
 	SP(Engine::CObject) spTarget = m_spCurTarget;
-	_float minDistance = 100.f;
+	_float minDistance = 5.f;
 
 	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
 	valkyriePos.y = 0.f;
@@ -415,26 +415,29 @@ void CStageControlTower::FindTarget()
 
 
 	// 3. 같으면 냅두고, 다르면 방향 다시 재설정
-	if (m_spCurTarget != spTarget)
-	{
-		m_spCurTarget = spTarget;
-		m_pLinker->MonsterInfoSet();
-	}
 
-
-	m_rotateLock = false;
-	m_rotateByTarget = true;
-	_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
-	targetPos.y = 0.f;
-	m_moveOrderDir = targetPos - valkyriePos;
-	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+	m_spCurTarget = spTarget;
 
 
 	if (m_mode == WithoutUI)
 		return;
 
-	// ui interaction
-	m_pLinker->OnTargetMarker();	
+	if (m_spCurTarget)
+	{
+		// ui interaction
+		m_pLinker->MonsterInfoSet();
+		
+		m_rotateLock = false;
+		m_rotateByTarget = true;
+		_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
+		targetPos.y = 0.f;
+		m_moveOrderDir = targetPos - valkyriePos;
+		D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+
+		// ui interaction
+		m_pLinker->OnTargetMarker();
+	}
+
 	
 }
 
@@ -459,6 +462,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	if (isDead)
 	{
 		// two many things
+		pM->MonsterDead();
 	}
 	else
 	{
@@ -488,9 +492,9 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
 	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
-	//CDamageObjectPool::GetInstance()->AddDamage(
-	//	pMonster->GetTransform()->GetPosition(),
-	//	_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Red");
+	CDamageObjectPool::GetInstance()->AddDamage(
+		pValkyrie,
+		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Purple");
 
 	// 2. 슬라이더 조정
 	m_pLinker->PlayerHpSet();

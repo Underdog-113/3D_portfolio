@@ -28,13 +28,12 @@ public:
 	void AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit);
 	void AddPattern(SP(CATBPattern) pPattern);
 	
-
 private:
 	void SortingPatterns(); // 처음 또는 비었을 때 다시 벡터에 패턴 랜덤 재정렬
 	void PlayBasePattern();
 	void PlayBornPattern();
-	void PlayDiePattern();
 	void PlayHitPattern();
+	void PlayDiePattern();
 	void PlaySelectPattern(); // 패턴 선택
 
 public:
@@ -46,7 +45,7 @@ private:
 
 	GETTOR_SETTOR(_bool, m_onBorn, false, OnBorn);
 	GETTOR_SETTOR(_bool, m_onBase, false, OnBase);
-	//GETTOR_SETTOR(_bool, m_onDie, false, OnDie);
+	GETTOR_SETTOR(_bool, m_onDie, false, OnDie);
 	GETTOR_SETTOR(_bool, m_onHitL, false, OnHitL); // hit_l
 	GETTOR_SETTOR(_bool, m_onHitH, false, OnHitH); // hit_h
 	GETTOR_SETTOR(_bool, m_onHitFrontL, false, OnHitFrontL); // hit_front_l

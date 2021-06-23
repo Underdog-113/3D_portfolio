@@ -5,6 +5,7 @@
 #include "PatternMachineC.h"
 
 #include "AttackBall.h"
+#include "PatternMachineC.h"
 
 _uint CMO_Sickle::m_s_uniqueID = 0;
 
@@ -27,9 +28,7 @@ SP(Engine::CObject) CMO_Sickle::MakeClone(void)
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-
-	spClone->m_spStateMachine = spClone->GetComponent<CFSM_SickleC>();
-
+	
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
@@ -66,7 +65,6 @@ void CMO_Sickle::Start(void)
 	m_pStat->SetupStatus(&stat);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
-	m_pAttackBall->GetTransform()->SetSize(13.f, 13.f, 13.f);
 	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
 	
@@ -208,6 +206,11 @@ void CMO_Sickle::UpdatePivotMatrices(void)
 
 		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
 	}
+}
+
+void CMO_Sickle::MonsterDead()
+{
+	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 
 SP(CMO_Sickle) CMO_Sickle::Create(_bool isStatic, Engine::CScene * pScene)

@@ -40,8 +40,12 @@ void CTargetPositionC::Update(SP(CComponent) spThis)
 	if (m_target != nullptr)
 	{
 		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
-		_float3 pos2D = cam->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
+
+		_float3 T = m_target->GetTransform()->GetPosition();
+		T.y += m_target->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+		_float3 pos2D = cam->WorldToScreenPoint(T);
 		pos2D.z = 0.f;
+
 		GetOwner()->GetTransform()->SetPosition(pos2D);
 	}
 }

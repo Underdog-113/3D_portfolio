@@ -64,6 +64,9 @@ private:
 	GETTOR			(_float3,			m_rootMotionPos, ZERO_VECTOR,	RootMotionPos)
 	GETTOR			(_float,			m_halfYOffset,	0.f,			HalfYOffset)
 	GETTOR_SETTOR(_bool, m_isEffectMesh, false, isEffectMesh)
+
+
+	GETTOR			(_bool,				m_haveDrawn,				false,			HaveDrawn)
 };
 END
 #endif // !MESH_H

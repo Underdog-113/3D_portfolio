@@ -10,6 +10,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
+#include "AttackBall.h"
 
 CGaneshaBurst02Pattern::CGaneshaBurst02Pattern()
 {
@@ -96,6 +97,20 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
+	}
+
+	// 내가 burst 상태고, 적절할 때 어택볼 숨기기
+	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && 0.65f <= fsm->GetDM()->GetAniTimeline())
+	{
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+	}
+	// 내가 burst 상태고, 적절할 때 어택볼 생성
+	else if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && 0.55f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 3.4f);
+		// 폭발 범위의 콜라이더 크기 정함
+		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.4f);
 	}
 }
 

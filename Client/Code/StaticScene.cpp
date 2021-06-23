@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "StaticScene.h"
 
+#pragma region MapPrototypes
+#include "SkyBox.h"
+#include "DecoObject.h"
+#include "MapObject.h"
+#include "PhaseChanger.h"
+#pragma endregion
+
 #pragma region Prototype Headers
 #include "EmptyObject.h"
 #include "ImageObject.h"
@@ -9,7 +16,6 @@
 #include "DebugCollider.h"
 #include "Camera.h"
 
-#include "SkyBox.h"
 
 #include "Button.h"
 #include "Slider.h"
@@ -29,10 +35,6 @@
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
 #include "Monster.h"
-
-
-#include "DecoObject.h"
-#include "MapObject.h"
 
 #include "AttackTrail_Client.h"
 #include "MeshEffect_Client.h"
@@ -127,23 +129,16 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
 
-	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
-	GetObjectFactory()->AddPrototype(spSkyBox);
 
 	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spDebugCOllider);
-	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
-	GetObjectFactory()->AddPrototype(spDecoObject);
-	
-	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
-	GetObjectFactory()->AddPrototype(spMapObject);
 	
 	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBall);
 	
+	InitMapPrototypes();
 	InitUiPrototypes();
 	InitMonsterPrototypes();
-	
 	InitValkyriePrototypes();
 	
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
@@ -151,6 +146,21 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
+}
+
+void CStaticScene::InitMapPrototypes(void)
+{
+	SP(Engine::CSkyBox) spSkyBox(Engine::CSkyBox::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSkyBox);
+
+	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDecoObject);
+
+	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMapObject);
+
+	SP(CPhaseChanger) spPhaseChanger(CPhaseChanger::Create(true, this));
+	GetObjectFactory()->AddPrototype(spPhaseChanger);
 }
 
 void CStaticScene::InitUiPrototypes(void)
@@ -171,9 +181,7 @@ void CStaticScene::InitUiPrototypes(void)
 	GetObjectFactory()->AddPrototype(spSliderObject);
 
 	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
-	GetObjectFactory()->AddPrototype(spScrollViewObject);
-
-	
+	GetObjectFactory()->AddPrototype(spScrollViewObject);	
 }
 
 void CStaticScene::InitMonsterPrototypes(void)
@@ -231,6 +239,9 @@ void CStaticScene::InitValkyriePrototypes(void)
 
 	SP(CKiana_CatPaw_Ring_Atk01) spPawRing01(CKiana_CatPaw_Ring_Atk01::Create(true, this));
 	ADD_PROTOTYPE(spPawRing01);
+
+	SP(CKiana_CatPaw_Ring_Atk02) spPawRing02(CKiana_CatPaw_Ring_Atk02::Create(true, this));
+	ADD_PROTOTYPE(spPawRing02);
 
 	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(true, this));
 	ADD_PROTOTYPE(spPistol);

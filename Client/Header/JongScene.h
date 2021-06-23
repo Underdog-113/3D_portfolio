@@ -33,7 +33,9 @@ private:
 					void TheresaTest();
 
 					void CollisionDummy();
+					void SpiderTest();
 					void SickleTest();
+					void GaneshaTest();
 
 					void SetupStageUI();
 private:

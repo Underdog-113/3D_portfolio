@@ -254,6 +254,10 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk02.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
     <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
@@ -321,7 +325,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
-    <ClCompile Include="..\Code\AttackRangeShader.cpp" />    
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
@@ -374,6 +378,10 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk02.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />

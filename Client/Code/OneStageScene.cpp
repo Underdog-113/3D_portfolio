@@ -17,6 +17,10 @@
 // import from jongscene
 #include "Include_ForTest.h"
 
+// for monster pattern
+#include "PatternMachineC.h"
+#include "ClientPatterns.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -59,7 +63,27 @@ void COneStageScene::Start(void)
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
 
-	m_pControlTower->Start();
+
+	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	m_vSickle.emplace_back(spSickleClone);
+
+	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
+	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	//m_vSickle.emplace_back(spSickleClone);
+
+	//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	//spSpiderClone->GetTransform()->SetPosition(29.1903f, -1.f, 0.606165f);
+	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	//m_vSpider.emplace_back(spSpiderClone);
+
+	//spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	//spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
+	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	//m_vSpider.emplace_back(spSpiderClone);
+
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -77,9 +101,46 @@ void COneStageScene::Update(void)
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
 
+	if (Engine::IMKEY_DOWN(KEY_1) && Engine::IMKEY_PRESS(KEY_R))
+	{
+		Create_Sickle(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
+	}
+	if (Engine::IMKEY_DOWN(KEY_2) && Engine::IMKEY_PRESS(KEY_R))
+	{
+		Create_Spider(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
+	}
 
+	if (true == m_bossSpawn)
+	{
+		/* Ganesha */
+		SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+		spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
+		spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+		spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+		m_spGanesha = spGaneshaClone;
 
-	//ForUITest();
+		m_bossSpawn = false;
+	}
+	else if (Engine::IMKEY_DOWN(KEY_TAB))
+	{
+		m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
+	}
+	else if (Engine::IMKEY_DOWN(KEY_E))
+	{
+		m_bossSpawn = true;
+		m_onBoss = true;
+	}
+
+	std::cout << "kiana x : " <<
+		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
+		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
+		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
+
+	ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -124,7 +185,7 @@ void COneStageScene::SetupFromLoader(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	Load->ToolLoad(this);
+	Load->MapLoad(this);
 	delete(Load);
 
 }
@@ -138,9 +199,9 @@ void COneStageScene::SetupMembers(void)
 	Create_SceneCamera();
 
 	Create_Dummy(_float3(5.f, 0.f, 0.f));
-	Create_Dummy(_float3(10.f, 0.f, 0.f));
-	Create_Dummy(_float3(15.f, 0.f, 2.f));
-	Create_Dummy(_float3(15.f, 0.f, -2.f));
+	//Create_Dummy(_float3(10.f, 0.f, 0.f));
+	//Create_Dummy(_float3(15.f, 0.f, 2.f));
+	//Create_Dummy(_float3(15.f, 0.f, -2.f));
 	// Spider
 
 
@@ -151,6 +212,7 @@ void COneStageScene::Create_ActorValkyrie(void)
 	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
 	m_spValkyrie = spKianaClone;
+	m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
 	m_pControlTower->AddSquadMember(m_spValkyrie);
 	m_pControlTower->Start(CStageControlTower::ALL);
 }
@@ -175,6 +237,23 @@ void COneStageScene::Create_Dummy(_float3 pos)
 	m_vDummy.emplace_back(dummy);
 }
 
+void COneStageScene::Create_Sickle(_float3 pos)
+{
+	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(pos);
+	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+
+	m_vSickle.emplace_back(spSickleClone);
+}
+
+void COneStageScene::Create_Spider(_float3 pos)
+{
+	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
+	spSpiderClone->GetTransform()->SetPosition(pos);
+	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+
+	m_vSpider.emplace_back(spSpiderClone);
+}
 
 void COneStageScene::InitPrototypes(void)
 {
@@ -195,7 +274,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"aaaa", 100, 4, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"aaaa",100, 100, 4, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))

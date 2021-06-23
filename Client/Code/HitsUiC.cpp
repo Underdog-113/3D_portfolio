@@ -30,6 +30,7 @@ void CHitsUiC::Awake()
 void CHitsUiC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+	m_timer = 0.1f;
 }
 
 void CHitsUiC::FixedUpdate(SP(CComponent) spThis)
@@ -39,6 +40,19 @@ void CHitsUiC::FixedUpdate(SP(CComponent) spThis)
 
 void CHitsUiC::Update(SP(CComponent) spThis)
 {
+	// ½Ã°£°ª
+	m_timer -= GET_DT;
+
+	if (m_timer <= 0)
+	{
+		if (m_curHitsCount > m_hitsCount)
+		{
+			m_hitsCount++;
+		}
+
+		GetOwner()->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(m_hitsCount));
+		m_timer = 0.1f;
+	}
 }
 
 void CHitsUiC::LateUpdate(SP(CComponent) spThis)
@@ -59,15 +73,15 @@ void CHitsUiC::OnDisable()
 {
 	__super::OnDisable();
 	m_hitsCount = 0;
+	m_curHitsCount = 0;
 }
 
 void CHitsUiC::AddHitsCount(_int value)
 {
-	m_hitsCount += value;
-	GetOwner()->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(m_hitsCount));
+	m_curHitsCount += value;
 
-	if (m_maxHitsCount <= m_hitsCount)
+	if (m_maxHitsCount <= m_curHitsCount)
 	{
-		m_maxHitsCount = m_hitsCount;
+		m_maxHitsCount = m_curHitsCount;
 	}
 }

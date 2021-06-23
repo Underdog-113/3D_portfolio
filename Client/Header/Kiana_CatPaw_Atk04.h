@@ -4,6 +4,7 @@
 
 #include "Object.h"
 
+
 class CKiana_CatPaw_Atk04 final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -34,8 +35,21 @@ public:
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
 					
+					void					OnCollisionEnter	(Engine::_CollisionInfo ci);
+					void					OnCollisionStay		(Engine::_CollisionInfo ci);
+					void					OnCollisionExit		(Engine::_CollisionInfo ci);
+
+					void					OnTriggerEnter		(Engine::CCollisionC const* pCollisionC);
+					void					OnTriggerStay		(Engine::CCollisionC const* pCollisionC);
+					void					OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
+
 public:
 					void					SetBasicName		(void) override;
+
+					void					FindMidBone			(void);
+					
+					
+					void					SetupPaw			(CObject* pOwner, HitInfo info);
 
 protected:
 	static			_uint							m_s_uniqueID;
@@ -43,13 +57,32 @@ protected:
 	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+				
+private:
+	_float m_tempTimer = 0.f;
+	_float m_tempDuration = 1.5f;
+	
+	GETTOR			(_mat*,							m_pMidBone_World,	nullptr,	RightToeWorldMatrix)
+	
+	_mat*						m_pMidBone_BoneOffset = nullptr;
+	Engine::D3DXFRAME_DERIVED*	m_pMidBone_Frame = nullptr;
 
 
 private:
-	_float m_tempTimer = 0.f;
-	_float m_tempDuration = 2.f;
-};
+	
+	typedef std::vector<Engine::CObject*> _OBJECTS;
+	GETTOR			(_OBJECTS,					m_vCollided,		{},				Collided)
 
+	GETTOR			(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
+	GETTOR			(_int,						m_collisionID,		UNDEFINED,		CollisionID)
+	GETTOR_SETTOR	(Engine::CObject*,			m_pOwner,			nullptr,		Owner)
+	GETTOR_SETTOR	(HitInfo,					m_hitInfo,			HitInfo(),		HitInfoMation)
+	GETTOR_SETTOR	(_mat*,						m_pParentMatrix,	nullptr,		ParentMatrix)
+	GETTOR_SETTOR	(_float3,					m_offset,			ZERO_VECTOR,	Offset)
+
+	SP(Engine::CCollider) m_spCollider;
+
+};
 
 #endif // KIANA_CATPAW_ATK04_H
 

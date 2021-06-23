@@ -49,7 +49,7 @@ void CPhaseChanger::Awake(void)
 void CPhaseChanger::Start(void)
 {
 	__super::Start();
-	
+	AddComponent<Engine::CDebugC>();
 }
 
 void CPhaseChanger::FixedUpdate(void)
@@ -86,6 +86,18 @@ void CPhaseChanger::OnDisable(void)
 {
 	__super::OnDisable();
 	
+}
+
+void CPhaseChanger::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
+{
+}
+
+void CPhaseChanger::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
+{
+}
+
+void CPhaseChanger::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
+{
 }
 
 void CPhaseChanger::SetBasicName(void)

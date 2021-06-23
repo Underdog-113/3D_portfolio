@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "DataLoad.h"
-#include "DataStore.h"
 
 #include "UiAnimCtrC.h"
 
-#include "DecoObject.h"
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -12,11 +10,11 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 
-#include "ObjectFactory.h"
 #include "MeshData.h"
 
 #include "MapObject.h"
-
+#include "DecoObject.h"
+#include "PhaseChanger.h"
 CDataLoad::CDataLoad()
 {
 	
@@ -34,7 +32,7 @@ void CDataLoad::Setting()
 	m_loadDeleGate += std::bind(&CDataLoad::SliderLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::ScrollViewLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::CanvasLoad, &CDataLoad(), std::placeholders::_1);
-	//m_loadDeleGate += std::bind(&CDataLoad::ToolLoad, &CDataLoad(), std::placeholders::_1);
+	//m_loadDeleGate += std::bind(&CDataLoad::MapLoad, &CDataLoad(), std::placeholders::_1);
 	m_loadDeleGate += std::bind(&CDataLoad::EffectLoad, &CDataLoad(), std::placeholders::_1);
 }
 
@@ -398,7 +396,7 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 
 }
 
-void CDataLoad::ToolLoad(Engine::CScene* pScene)
+void CDataLoad::MapLoad(Engine::CScene* pScene)
 {
 	auto& pDataStore = pScene->GetDataStore();
 	auto& pObjectFactory = pScene->GetObjectFactory();
@@ -463,7 +461,11 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
 							 std::to_wstring(i) + L"_renderID", renderID);
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
-		spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+
+		if(renderID == 1)
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		else
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 	}
 
 
@@ -583,10 +585,34 @@ void CDataLoad::ToolLoad(Engine::CScene* pScene)
 	
 
 
-		
+	_int numOfPhaseChanger;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", L"numOfPhaseChanger", numOfPhaseChanger);
+	for (_int i = 0; i < numOfPhaseChanger; ++i)
+	{
+		SP(CPhaseChanger) spPhaseChanger =
+			std::dynamic_pointer_cast<CPhaseChanger>(pObjectFactory->AddClone(L"PhaseChanger", true));
+
+		_float3 position;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_position", position);
+		spPhaseChanger->GetTransform()->SetPosition(position);
+
+		_float3 rotation;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_rotation", rotation);
+		spPhaseChanger->GetTransform()->SetRotation(rotation);
+
+		_float3 size;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_size", size);
+		spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger, size));
+	}
 
 
-
+	SP(Engine::CImageObject) spFUCKTHATSHIT = 
+		std::dynamic_pointer_cast<Engine::CImageObject>(pObjectFactory->AddClone(L"ImageObject", true));
+	spFUCKTHATSHIT->GetTransform()->SetSize(16, 9, 0);
+	spFUCKTHATSHIT->GetTexture()->AddTexture(L"StaticBG", 0);
+	spFUCKTHATSHIT->GetGraphics()->SetRenderID((_uint)Engine::ERenderID::AlphaTest);
+	spFUCKTHATSHIT->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+	spFUCKTHATSHIT->GetRectTex()->SetIsOrtho(false);
 	
 
 	//

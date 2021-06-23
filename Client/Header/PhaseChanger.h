@@ -27,6 +27,9 @@ public:
 				void				OnEnable			(void) override;
 				void				OnDisable			(void) override;
 
+				void				OnTriggerEnter		(Engine::CCollisionC const* pCollisionC);
+				void				OnTriggerStay		(Engine::CCollisionC const* pCollisionC);
+				void				OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
 private:
 				void				SetBasicName		(void) override;
 private:

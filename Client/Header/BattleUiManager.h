@@ -40,7 +40,7 @@ public:
 
 	void KeyPad(_int value); // 방향키 변경
 	void HitCount(_float lifeTime); // 콤보박스
-	void MonsterState(std::wstring name, _float hp, _int hpCount, std::wstring property); // 몬스터 체력바 속성 이름 표시
+	void MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property); // 몬스터 체력바 속성 이름 표시
 	void MonsterStateEnd();
 
 	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1,  _float playerSp1,
@@ -72,7 +72,8 @@ public:
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	void BattleEnd();
 private:
-
+	void skillActivationImageCheck();
+	void monsterHpBarCheck();
 private:
 	_bool m_activation;
 	_int m_monsterHpCount;

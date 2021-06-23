@@ -166,3 +166,23 @@ void CMO_Spider::SetStatus(BaseStat stat)
 
 	m_pStat->SetupStatus(&stat);
 }
+
+SP(Engine::CObject) CMO_Spider::CreateEffect(std::wstring name)
+{
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+
+	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
+	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
+
+	return spMeshEffect;
+}

@@ -2,6 +2,8 @@
 #include "..\Header\MB_Ganesha.h"
 
 #include "FSM_GaneshaC.h"
+#include "AttackBall.h"
+#include "PatternMachineC.h"
 
 _uint CMB_Ganesha::m_s_uniqueID = 0;
 
@@ -28,6 +30,10 @@ SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
 
 	spClone->m_spStateMachine = spClone->GetComponent<CFSM_GaneshaC>();
 
+	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+
 	return spClone;
 }
 
@@ -42,6 +48,9 @@ void CMB_Ganesha::Start(void)
 {
 	__super::Start();
 
+	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
+	m_spTransform->SetRotationY(D3DXToRadian(90));
+
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
@@ -55,6 +64,10 @@ void CMB_Ganesha::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+
+	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	m_pAttackBall->SetOffset(_float3(0, 1, 0));
+	m_pAttackBall->SetOwner(this);
 }
 
 void CMB_Ganesha::FixedUpdate(void)
@@ -109,6 +122,20 @@ void CMB_Ganesha::SetBasicName(void)
 
 void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 {
+	//// attack strength
+	//switch (info.GetStrengthType())
+	//{
+	//case HitInfo::Str_Damage:
+	//	break;
+	//case HitInfo::Str_Low:
+	//	this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+	//	break;
+	//case HitInfo::Str_High:
+	//	this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+	//	break;
+	//case HitInfo::Str_Airborne:
+	//	break;
+	//}
 }
 
 SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
