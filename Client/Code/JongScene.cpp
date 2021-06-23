@@ -65,8 +65,9 @@ void CJongScene::Start(void)
 	//TheresaTest();
 
 	//CollisionDummy();
-	//SickleTest();
-	SpiderTest();
+	SickleTest();
+	//SpiderTest();
+	//GaneshaTest();
 
 
 	SetupStageUI();
@@ -231,6 +232,20 @@ void CJongScene::SickleTest()
 	//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 	m_spSickle = spSickleClone;
 }
+
+void CJongScene::GaneshaTest()
+{
+	/* Ganesha */
+	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
+	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
+	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
+	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+	//m_spGanesha = spGaneshaClone;
+}
+
 
 void CJongScene::SetupStageUI()
 {

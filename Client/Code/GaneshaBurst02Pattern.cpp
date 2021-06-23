@@ -108,9 +108,9 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 	else if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && 0.55f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
-		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat);
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 3.4f);
 		// 폭발 범위의 콜라이더 크기 정함
-		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.4f);
+		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.4f);
 	}
 }
 

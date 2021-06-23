@@ -193,6 +193,8 @@ void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, 
 
 	m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
+
+	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);
 }
 
 void CAttackBall::SetBasicName(void)
