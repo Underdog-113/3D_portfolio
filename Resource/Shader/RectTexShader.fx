@@ -114,14 +114,14 @@ technique Default_Device
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}
 
-	pass	
-	{
-		alphablendenable = true;
-		srcblend = srcalpha;
-		destblend = invsrcalpha;
-
-		vertexshader = compile vs_3_0 VS_MAIN();	// 진입점 함수 명시
-		pixelshader = compile ps_3_0 PS_EFFECT();
-	}
+	//pass	
+	//{
+	//	alphablendenable = true;
+	//	srcblend = srcalpha;
+	//	destblend = invsrcalpha;
+	//
+	//	vertexshader = compile vs_3_0 VS_MAIN();	// 진입점 함수 명시
+	//	pixelshader = compile ps_3_0 PS_EFFECT();
+	//}
 
 };

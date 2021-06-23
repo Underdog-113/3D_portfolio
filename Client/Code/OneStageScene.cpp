@@ -21,6 +21,8 @@
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
 
+#include "OneStagePhaseControl.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -50,6 +52,7 @@ void COneStageScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
+	
 }
 
 void COneStageScene::Start(void)
@@ -57,7 +60,6 @@ void COneStageScene::Start(void)
 	__super::Start();
 
 	SetupFromLoader();
-
 	SetupMembers();
 
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
