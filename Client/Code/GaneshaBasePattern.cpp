@@ -10,6 +10,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
+#include "AttackBall.h"
 
 CGaneshaBasePattern::CGaneshaBasePattern()
 {
@@ -56,8 +57,10 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 공격 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동 상태라면 공격
-		if (Name_Ganesha_Run == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		// 내가 이동, 대기 상태라면 공격
+		if ((Name_Ganesha_Run == fsm->GetCurStateString() ||
+			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Attack01);
 		}
@@ -93,7 +96,28 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 			pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
 		}
 	}
-}
+
+	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
+	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	{
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+	}
+	// 내가 공격 상태고, 적절할 때 어택볼 생성
+	else if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+
+		_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);
+		D3DXVec3Normalize(&look, &look);
+
+		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+		m_atkMat._41 += (m_atkDis * look.x * 1.1f);
+		m_atkMat._43 += (m_atkDis * look.z * 1.1f);
+
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat);
+		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
+	}
+} 
 
 SP(CGaneshaBasePattern) CGaneshaBasePattern::Create()
 {

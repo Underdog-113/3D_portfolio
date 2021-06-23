@@ -61,8 +61,8 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	// born 실행 (1번만)
 	PlayBornPattern();
 	
-	// die 실행 (호출 실행)
-	//PlayDiePattern();
+	// die 실행 (hp가 0일 때 1번만)
+	PlayDiePattern();
 
 	// select 실행
 	PlaySelectPattern();
@@ -126,18 +126,22 @@ void CPatternMachineC::AddPattern(SP(CATBPattern) pPattern)
 
 void CPatternMachineC::PlayBasePattern()
 {
+	// hit, die 패턴이면 base 패턴 종료
 	if ((true == m_onHitL ||
 		true == m_onHitH || 
 		true == m_onHitFrontL || 
-		true == m_onHitFront) 
+		true == m_onHitFront ||
+		true == m_onDie) 
 		&& true == m_onBase)
 	{
 		m_onBase = false;
 	}
+	// hit, die, select 패턴이 아니면
 	else if ((false == m_onHitL &&
 			false == m_onHitH &&  
 			false == m_onHitFrontL &&
-			false == m_onHitFront) &&
+			false == m_onHitFront &&
+			false == m_onDie) &&
 			false == m_onSelect)
 	{
 		m_onBase = true;
@@ -156,7 +160,8 @@ void CPatternMachineC::PlayBornPattern()
 
 void CPatternMachineC::PlayDiePattern()
 {
-	m_vPatterns[Pattern_Type::Die]->Pattern(m_pOwner);
+	if (true == m_onDie)
+		m_vPatterns[Pattern_Type::Die]->Pattern(m_pOwner);
 }
 
 void CPatternMachineC::PlayHitPattern()
@@ -185,8 +190,8 @@ void CPatternMachineC::SortingPatterns()
 
 void CPatternMachineC::PlaySelectPattern()
 {
-	// base패턴 중이거나 select가 비었다면
-	if (true == m_onBase || m_vIndices.empty())
+	// base, die패턴 중이거나 select가 비었다면
+	if (true == m_onBase || true == m_onDie || m_vIndices.empty())
 		return;
 
 	_int index = m_vIndices.back();

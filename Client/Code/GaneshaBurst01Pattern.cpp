@@ -10,6 +10,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
+#include "AttackBall.h"
 
 CGaneshaBurst01Pattern::CGaneshaBurst01Pattern()
 {
@@ -96,6 +97,23 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
+	}
+
+	// burst 상태가 완료되면 attackball off 및 오브젝트 제거
+	//if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.45f <= fsm->GetDM()->GetAniTimeline())
+	//{
+	//	static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+	//}
+	// burst 상태라면
+	else if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.3f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat);
+		// 폭발 범위의 콜라이더 크기 정함
+		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetSize(_float3(10.f, 3.f, 10.f));
+		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetHalfSize(_float3(10.f, 3.f, 10.f));
+		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetOffset(_float3(0.f, 0.f, 0.f));
+		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRotOffset(_float3(0.f, 0.f, 0.f));
 	}
 }
 

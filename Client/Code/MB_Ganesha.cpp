@@ -2,6 +2,7 @@
 #include "..\Header\MB_Ganesha.h"
 
 #include "FSM_GaneshaC.h"
+#include "AttackBall.h"
 
 _uint CMB_Ganesha::m_s_uniqueID = 0;
 
@@ -62,6 +63,10 @@ void CMB_Ganesha::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+
+	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	m_pAttackBall->SetOffset(_float3(0, 1, 0));
+	m_pAttackBall->SetOwner(this);
 }
 
 void CMB_Ganesha::FixedUpdate(void)

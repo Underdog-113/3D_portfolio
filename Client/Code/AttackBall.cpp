@@ -69,7 +69,7 @@ void CAttackBall::Start(void)
 	}
 
 	auto col = Engine::CSphereCollider::Create(m_collisionID, 0.1f);
-	//col->SetIsTrigger(true);
+	col->SetIsTrigger(true);
 	m_spCollision->AddCollider(col);
 
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);

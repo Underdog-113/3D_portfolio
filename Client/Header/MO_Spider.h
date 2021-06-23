@@ -36,8 +36,10 @@ public:
 	static		SP(CMO_Spider)			Create(_bool isStatic, Engine::CScene* pScene);
 				void					ChaseTarget(_float3 targetPos);
 				void					SetStatus(BaseStat stat);
+				SP(Engine::CObject)		CreateEffect(std::wstring name);
+
 private:
-	static		_uint				m_s_uniqueID;
+	static		_uint					m_s_uniqueID;
 
 private:
 	GETTOR		(SP(Engine::CRigidBodyC),	m_spRigidBody,		nullptr,	RigidBody)
