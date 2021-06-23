@@ -65,7 +65,7 @@ void CJongScene::Start(void)
 	//TheresaTest();
 
 	//CollisionDummy();
-	SickleTest();
+	//SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
 

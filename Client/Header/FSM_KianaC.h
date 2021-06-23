@@ -62,6 +62,12 @@ private: /* Special Actions */
 
 	bool CheckAction_Ultra();
 
+	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
+	void PlaySound_Voice(const std::wstring& soundName);
+	void PlaySound_Effect(const std::wstring& soundName);
+
+	void PlaySound_Attack_RandomVoice();
+	void PlaySound_Attack_RandomVoice();
 
 private:
 	void ResetCheckMembers();
@@ -78,6 +84,8 @@ private:
 	
 	Appear_Option m_appearOption = None;
 	bool m_isUltraMode = false;
+
+	_uint m_prevVoiceIndex = 0;
 
 public:
 	// StandBy  

@@ -111,3 +111,44 @@
 #define Index_Victory_01				53
 #define Index_Victory_Idle				54
 
+
+#define Sound_Attack_1_Effect		L"K_Attack_0.wav"
+#define Sound_Attack_2_Effect		L"K_Attack_1.wav"
+#define Sound_Attack_3_Effect		L"K_Attack_2.wav"
+#define Sound_Attack_4_Effect		L"K_Attack_3.wav"
+#define Sound_Attack_5_Effect		L"K_Attack_4.wav"
+#define Sound_Attack_Voice_0		L"K_Attack_Voice_0.wav"	
+#define Sound_Attack_Voice_1		L"K_Attack_Voice_1.wav"	
+#define Sound_Attack_Voice_2		L"K_Attack_Voice_2.wav"	
+#define Sound_Attack_Voice_3		L"K_Attack_Voice_3.wav"
+#define Sound_Attack_Voice_4		L"K_Attack_Voice_4.wav"
+#define Sound_Attack_Voice_5		L"K_Attack_Voice_5.wav"
+#define Sound_Attack_Voice_6		L"K_Attack_Voice_6.wav"	
+#define Sound_Branch_0 				L"K_Charge_0.wav"
+#define Sound_Branch_1				L"K_Charge_1.wav"
+#define Sound_Branch_Voice_0		L"K_Charge_Voice_0.wav"
+#define Sound_Branch_Voice_1		L"K_Charge_Voice_1.wav"
+#define Sound_Dead					L"K_DEAD.wav"
+#define Sound_Evade_0				L"K_Evade_0.wav"
+#define Sound_Evade_1				L"K_Evade_1.wav"
+#define Sound_HIT_0					L"K_HIT_0.wav"
+#define Sound_HIT_1					L"K_HIT_1.wav"
+#define Sound_HIT_2					L"K_HIT_2.wav"
+#define Sound_HIT_3					L"K_HIT_3.wav"
+#define Sound_RUN_0					L"K_RUN_0.wav"
+#define Sound_RUN_1					L"K_RUN_1.wav"
+#define Sound_RUN_2					L"K_RUN_2.wav"
+#define Sound_RUN_3					L"K_RUN_3.wav"
+#define Sound_Ult_Att_0				L"K_Ult_Att_0.wav"
+#define Sound_Ult_Att_1				L"K_Ult_Att_1.wav"
+#define Sound_Ult_Att_2				L"K_Ult_Att_2.wav"
+#define Sound_Ult_Att_3				L"K_Ult_Att_3.wav"
+#define Sound_Ult_Start_0			L"K_Ult_Start_0.wav"
+#define Sound_Ult_Start_Voice_0		L"K_Ult_Start_Voice_0.wav"
+
+
+
+enum SoundType {
+	Attack_1_effect, Attack_2_effect, Attack_3_effect, Attack_4_effect, Attack_5_effect,
+	Attack_1_voice, Attack_2_voice, Attack_3_voice, Attack_4_voice, Attack_5_voice,
+};
