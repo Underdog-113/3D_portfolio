@@ -15,6 +15,8 @@
 #include "MapObject.h"
 #include "DecoObject.h"
 #include "PhaseChanger.h"
+#include "MapObject2D.h"
+
 CDataLoad::CDataLoad()
 {
 	
@@ -285,8 +287,8 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
 
 		fontPosition.y *= -1;
-		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);		
-	}	
+		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+	}
 }
 
 void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
@@ -376,7 +378,7 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"textName", name);
 
 		SP(Engine::CObject) text = pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, name);
-		
+
 		_float sort;
 		dataStore->GetValue(false, dataID, objectKey, key + L"Sort", sort);
 		text->GetTransform()->SetPositionZ(sort);
@@ -429,7 +431,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 
 		std::wstring meshKey;
-		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", 
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
 							 std::to_wstring(i) + L"_meshKey", meshKey);
 
 		spDecoObject->GetMesh()->SetMeshData(meshKey);
@@ -582,7 +584,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		}
 	}
 
-	
+
 
 
 	_int numOfPhaseChanger;
@@ -602,22 +604,63 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 		_float3 size;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_size", size);
-		spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger, size));
+		spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger, size), true);
+
+		_int phaseToDie;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_phaseToDie", phaseToDie);
+		spPhaseChanger->SetPhaseToDie(phaseToDie);
+
+		_int numOfRestrictLine;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_numOfRestrictLine", numOfRestrictLine);
+
+		for (_int j = 0; j < numOfRestrictLine; ++j)
+		{
+			SP(CMapObject2D) spRestrictLine =
+				std::dynamic_pointer_cast<CMapObject2D>(pObjectFactory->AddClone(L"MapObject2D", true));
+
+			spRestrictLine->GetRectTex()->SetIsOrtho(false);
+			spRestrictLine->GetGraphics()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			spRestrictLine->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+
+			std::wstring texKey;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
+																				  L"_wall" +
+																				  std::to_wstring(j) +
+																				  L"_textureKey", texKey);
+			spRestrictLine->GetComponent<Engine::CTextureC>()->AddTexture(texKey);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
+																				  L"_wall" +
+																				  std::to_wstring(j) +
+																				  L"_position", position);
+			spRestrictLine->GetTransform()->SetPosition(position);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
+																				  L"_wall" +
+																				  std::to_wstring(j) +
+																				  L"_rotation", rotation);
+			spRestrictLine->GetTransform()->SetRotation(rotation);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
+																				  L"_wall" +
+																				  std::to_wstring(j) +
+																				  L"_size", size);
+			spRestrictLine->GetTransform()->SetSize(size);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
+																				  L"_wall" +
+																				  std::to_wstring(j) +
+																				  L"_colSize", size);
+			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
+
+			spPhaseChanger->AddRestrictLine(spRestrictLine);
+		}
 	}
 
 
-	SP(Engine::CImageObject) spFUCKTHATSHIT = 
-		std::dynamic_pointer_cast<Engine::CImageObject>(pObjectFactory->AddClone(L"ImageObject", true));
-	spFUCKTHATSHIT->GetTransform()->SetSize(16, 9, 0);
-	spFUCKTHATSHIT->GetTexture()->AddTexture(L"StaticBG", 0);
-	spFUCKTHATSHIT->GetGraphics()->SetRenderID((_uint)Engine::ERenderID::AlphaTest);
-	spFUCKTHATSHIT->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
-	spFUCKTHATSHIT->GetRectTex()->SetIsOrtho(false);
-	
-
 	//
 
-	//// µ¥ÀÌÅÍ ÆÄÀÏ ºÒ·¯¿À±â
+	//// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 	//std::string strLine = "";
 	//std::string filePath = "../../Data/EditorScene/save.ini";
 	//std::ifstream ifsLoad(filePath.data());
@@ -661,7 +704,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 	//		vStr.clear();
 	//	}
-	//	
+	//
 	//	if (!vStrTag.empty())
 	//	{
 	//		auto& iter = vStrTag.begin();
@@ -738,7 +781,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 	//			else
 	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 
-	//			//°íÃÄ¾ßµÊ ½¦ÀÌ´õÅ° µû·Î ¼¼ÆÃÇÏ±â
+	//			//ï¿½ï¿½ï¿½Ä¾ßµï¿½ ï¿½ï¿½ï¿½Ì´ï¿½Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	//			if (spObject->GetComponent<Engine::CShaderC>() == nullptr)
 	//				spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	//		}
@@ -869,42 +912,42 @@ void CDataLoad::EffectLoad(Engine::CScene * pScene)
 
 void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 {
-	if (0 == function.compare(L"MainRoomScene")) // ¸ÞÀÎ¾À
+	if (0 == function.compare(L"MainRoomScene")) // ï¿½ï¿½ï¿½Î¾ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"StageSelectionScene")) // ½ºÅ×ÀÌÁö °í¸£´Â¾À
+	else if (0 == function.compare(L"StageSelectionScene")) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â¾ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::StageSelectionScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ReadyToSortieScene")) // ÄÉ¸¯ÅÍ ÇÁ¸®¼Â
+	else if (0 == function.compare(L"ReadyToSortieScene")) // ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ReadyToSortieScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"PartySettingScene")) //  ÄÉ¸¯ÅÍ ÆÄÆ¼
+	else if (0 == function.compare(L"PartySettingScene")) //  ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::PartySettingScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleEndScene")) //  ÀüÅõ Á¾·á
+	else if (0 == function.compare(L"BattleEndScene")) //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction());
 
 	}
-	else if (0 == function.compare(L"Sally")) // 1½ºÅ×ÀÌÁö
+	else if (0 == function.compare(L"Sally")) // 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOn")) // ¿ÀºêÁ§Æ® Å°±â
+	else if (0 == function.compare(L"ObjectOn")) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Å°ï¿½ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOff")) // ¿ÀÇÁÁ§Æ® ²ô±â
+	else if (0 == function.compare(L"ObjectOff")) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOff, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleRenunciation")) // ÀüÅõÁ¾·á ÇÔ¼ö
+	else if (0 == function.compare(L"BattleRenunciation")) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleRenunciation, &CButtonFunction());
 	}
-	
+
 }

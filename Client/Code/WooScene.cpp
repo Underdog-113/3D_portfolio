@@ -18,7 +18,7 @@
 #include "ClientPatterns.h"
 /**/
 
-//#include "DataLoad.h"
+#include "DataLoad.h"
 
 CWooScene::CWooScene()
 {
@@ -57,23 +57,25 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 
-	//CDataLoad* Load = new CDataLoad();
-	//Load->Setting();
-	//Load->ButtonLoad(this);
-	//Load->ImageLoad(this);
-	//Load->SliderLoad(this);
-	//Load->ScrollViewLoad(this);
-	//Load->CanvasLoad(this);
-	//Load->TextLoad(this);
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
+	Load->TextLoad(this);
 	//Load->MapLoad(this);
-	//delete(Load);
+	delete(Load);
+
+	CBattleUiManager::GetInstance()->Start(this);
 
 	TerrainSetting();
 
 	PlayerSetting();
 	//SpiderSetting();
-	SickleSetting();
-	//GaneshaSetting();
+	//SickleSetting();
+	GaneshaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -83,7 +85,18 @@ void CWooScene::FixedUpdate(void)
 
 void CWooScene::Update(void)
 {
+	static int a = 5;
+
+	if (a == 5)
+	{
+		Engine::CTextManager::GetInstance()->AddText(L"SEX", L"", _float2(50, 50), _float2(100, 100), 30, 30, D3DXCOLOR(0, 0, 0, 1));
+		a = 6;
+	}
+
 	__super::Update();
+
+	
+
 
 	m_pController->Update();
 
@@ -127,7 +140,7 @@ void CWooScene::PlayerSetting(void)
 
 	m_spKiana = spKianaClone;
 	m_pController->AddSquadMember(m_spKiana);
-	m_pController->Start(CStageControlTower::WithoutUI);
+	m_pController->Start(CStageControlTower::ALL);
 
 	//spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 
@@ -211,11 +224,11 @@ void CWooScene::GaneshaSetting(void)
 	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	m_spGanesha = spGaneshaClone;
 }
-
+ 
 void CWooScene::SpiderSetting(void)
 {
 	/* Spider */

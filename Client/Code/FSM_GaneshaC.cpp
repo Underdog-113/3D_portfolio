@@ -30,7 +30,7 @@ void CFSM_GaneshaC::Start(SP(CComponent) spThis)
 
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
-	SetStartState(Name_Ganesha_Born);
+	SetStartState(Name_Ganesha_StandBy);
 	m_curState->DoEnter();
 }
 
@@ -126,6 +126,7 @@ void CFSM_GaneshaC::Attack01_Enter(void)
 
 void CFSM_GaneshaC::Attack01_Update(float deltaTime)
 {
+	
 }
 
 void CFSM_GaneshaC::Attack01_End(void)

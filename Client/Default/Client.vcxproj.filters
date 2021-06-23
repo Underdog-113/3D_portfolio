@@ -424,8 +424,47 @@
     <Filter Include="04.Shader\09.AttackRangeShader">
       <UniqueIdentifier>{afb5da92-a9b4-40be-a70c-f1bc52966bce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09.Manager\02.DataManager\00.CaptainData">
+      <UniqueIdentifier>{4ab6ea9f-9f60-4d36-98ae-4e925f0fac7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager\01.InStockValkyrieData">
+      <UniqueIdentifier>{8462a6b8-8dfc-4bbe-a435-d966095a5b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager\02.ValkyrieStatusData">
+      <UniqueIdentifier>{f058cc86-969f-42b0-90a9-72d74023dc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager\03.SquadData">
+      <UniqueIdentifier>{82cbad81-9bf6-4f1a-b419-517533b40a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager\04.CWeaponData">
+      <UniqueIdentifier>{44c9921e-015d-4f0c-94e7-a839653e2557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.DataManager\05.ItemData">
+      <UniqueIdentifier>{761915c7-b664-4867-8764-42c99390d9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\03.MainRoomManager">
+      <UniqueIdentifier>{d35ac856-8148-40f1-997e-1b2a2426b88a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring">
       <UniqueIdentifier>{fe6ee4c9-0f3f-4e9b-a656-034ccf462479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\04.StageSelectionManager">
+      <UniqueIdentifier>{18880be9-fe9c-425b-86ca-070e2abc27ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\05.ReadyToSortieManager">
+      <UniqueIdentifier>{b8adff24-4bd8-489c-a0f1-5b238a5be961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\03.AttackBox">
+      <UniqueIdentifier>{0e8be3c0-67f2-4a21-a668-aa555d2cd52f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\04.MapObject2D">
+      <UniqueIdentifier>{c53797e0-9e70-4a90-b0e3-6e2a229f6a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\PhaseControl">
+      <UniqueIdentifier>{81b3c7d2-a80a-4218-984d-4418a121a717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\PhaseControl\00.OneStage">
+      <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -672,9 +711,6 @@
     <ClInclude Include="..\Header\AttackTrail_Client.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\DataManager.h">
-      <Filter>09.Manager\02.DataManager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\BattleEndScene.h">
       <Filter>01.Scene\10.BattleEnd</Filter>
     </ClInclude>
@@ -711,7 +747,6 @@
     <ClInclude Include="..\Header\PhaseChanger.h">
       <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
     <ClInclude Include="..\Header\ATBPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem</Filter>
     </ClInclude>
@@ -829,6 +864,33 @@
     <ClInclude Include="..\Header\WaterShader.h">
       <Filter>04.Shader\00.WaterShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CaptainData.h">
+      <Filter>09.Manager\02.DataManager\00.CaptainData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\InStockValkyrieData.h">
+      <Filter>09.Manager\02.DataManager\01.InStockValkyrieData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieStatusData.h">
+      <Filter>09.Manager\02.DataManager\02.ValkyrieStatusData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SquadData.h">
+      <Filter>09.Manager\02.DataManager\03.SquadData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WeaponData.h">
+      <Filter>09.Manager\02.DataManager\04.CWeaponData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ItemData.h">
+      <Filter>09.Manager\02.DataManager\05.ItemData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DataManager.h">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MainRoomManager.h">
+      <Filter>09.Manager\03.MainRoomManager</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
     </ClInclude>
@@ -843,6 +905,24 @@
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageSelectionManager.h">
+      <Filter>09.Manager\04.StageSelectionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ReadyToSortieManager.h">
+      <Filter>09.Manager\05.ReadyToSortieManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AttackBox.h">
+      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MapObject2D.h">
+      <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PhaseControl.h">
+      <Filter>97.TempClass_ForDevelop\PhaseControl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\OneStagePhaseControl.h">
+      <Filter>97.TempClass_ForDevelop\PhaseControl\00.OneStage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1047,9 +1127,6 @@
     <ClCompile Include="..\Code\AttackTrail_Client.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DataManager.cpp">
-      <Filter>09.Manager\02.DataManager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\BattleEndScene.cpp">
       <Filter>01.Scene\10.BattleEnd</Filter>
     </ClCompile>
@@ -1185,7 +1262,36 @@
     <ClCompile Include="..\Code\WaterShader.cpp">
       <Filter>04.Shader\00.WaterShader</Filter>
     </ClCompile>
-    <ClCompile Include="SkillActivationC.cpp" />
+    <ClCompile Include="..\Code\CaptainData.cpp">
+      <Filter>09.Manager\02.DataManager\00.CaptainData</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillActivationC.cpp">
+      <Filter>03.Component\00.UI\10.SkillActivation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MO_Dummy.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\InStockValkyrieData.cpp">
+      <Filter>09.Manager\02.DataManager\01.InStockValkyrieData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieStatusData.cpp">
+      <Filter>09.Manager\02.DataManager\02.ValkyrieStatusData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SquadData.cpp">
+      <Filter>09.Manager\02.DataManager\03.SquadData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WeaponData.cpp">
+      <Filter>09.Manager\02.DataManager\04.CWeaponData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ItemData.cpp">
+      <Filter>09.Manager\02.DataManager\05.ItemData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DataManager.cpp">
+      <Filter>09.Manager\02.DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MainRoomManager.cpp">
+      <Filter>09.Manager\03.MainRoomManager</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
     </ClCompile>
@@ -1203,6 +1309,26 @@
     </ClCompile>
     <ClCompile Include="..\Code\MO_Dummy.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackBox.cpp">
+      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MO_Dummy.cpp" />
+    <ClCompile Include="SkillActivationC.cpp" />
+    <ClCompile Include="..\Code\StageSelectionManager.cpp">
+      <Filter>09.Manager\04.StageSelectionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ReadyToSortieManager.cpp">
+      <Filter>09.Manager\05.ReadyToSortieManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MapObject2D.cpp">
+      <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PhaseControl.cpp">
+      <Filter>97.TempClass_ForDevelop\PhaseControl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OneStagePhaseControl.cpp">
+      <Filter>97.TempClass_ForDevelop\PhaseControl\00.OneStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

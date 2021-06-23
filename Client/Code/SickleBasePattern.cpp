@@ -98,10 +98,10 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		D3DXVec3Normalize(&look, &look);
 
 		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
-		m_atkMat._41 += (m_atkDis * look.x / 2.f);
-		m_atkMat._43 += (m_atkDis * look.z / 2.f);
+		m_atkMat._41 += (m_atkDis * look.x / 1.8f);
+		m_atkMat._43 += (m_atkDis * look.z / 1.8f);
 
-		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
+		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.34f);
 	}
 }
 

@@ -16,7 +16,7 @@
 #include "BattleEndScene.h"
 
 #include "BattleRenunciationC.h"
-
+#include "SoundManager.h"
 _int CButtonFunction::stageValue = 0;
 CButtonFunction::CButtonFunction()
 {
@@ -29,18 +29,27 @@ CButtonFunction::~CButtonFunction()
 
 void CButtonFunction::MainRoomScene()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CMainRoomScene::Create());
 }
 
 void CButtonFunction::StageSelectionScene()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CStageSelectionScene::Create());
 }
 
 void CButtonFunction::ReadyToSortieScene()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	// 들어가는 씬의정보 저장 (이름으로 비교하면될듯하다)
 	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"MainCanvas_Attack_4")
 	{
@@ -61,12 +70,18 @@ void CButtonFunction::ReadyToSortieScene()
 
 void CButtonFunction::PartySettingScene()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CPartySettingScene::Create());
 }
 
 void CButtonFunction::Sally()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	// 해당씬이 아니라 저장한 씬으로 이동하게 만들어야한다.
 	CButtonManager::GetInstance()->OnDestroy();
 	switch (CButtonFunction::stageValue)
@@ -88,12 +103,17 @@ void CButtonFunction::Sally()
 
 void CButtonFunction::BattleEndScene()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
 }
 
 void CButtonFunction::BattleRenunciation()
 {
+
+
 	GET_CUR_CLIENT_SCENE->FindObjectByName(L"GiveUpCanvas")->SetIsEnabled(false);
 
 	SP(Engine::CImageObject) spEmpty =
@@ -111,6 +131,9 @@ void CButtonFunction::BattleRenunciation()
 
 void CButtonFunction::ObjectOn()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"PopUpIn.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	std::wstring findObjectName;
 	GET_CUR_CLIENT_SCENE->GetDataStore()->GetValue(false, (_int)EDataID::UI, L"ChangeNameDataFile", CButtonManager::GetInstance()->GetActivationButton()->GetName() , findObjectName);
 	GET_CUR_CLIENT_SCENE->FindObjectByName(findObjectName)->SetIsEnabled(true);
@@ -118,6 +141,9 @@ void CButtonFunction::ObjectOn()
 
 void CButtonFunction::ObjectOff()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"PopUpOut.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	std::wstring findObjectName;
 	GET_CUR_CLIENT_SCENE->GetDataStore()->GetValue(false, (_int)EDataID::UI, L"ChangeNameDataFile", CButtonManager::GetInstance()->GetActivationButton()->GetName(), findObjectName);
 	GET_CUR_CLIENT_SCENE->FindObjectByName(findObjectName)->SetIsEnabled(false);

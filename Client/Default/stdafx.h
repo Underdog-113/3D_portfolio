@@ -36,6 +36,7 @@
 //Client Managers
 #include "ButtonManager.h"
 #include "BattleUiManager.h"
+#include "DataManager.h"
 
 // »ç¿îµå
 //#include <io.h>

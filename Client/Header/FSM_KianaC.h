@@ -86,7 +86,7 @@ private:
 	CKiana* m_pKiana = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
 	CStageControlTower* m_pStageControlTower = nullptr;
-	
+
 	Appear_Option m_appearOption = None;
 	bool m_isUltraMode = false;
 
@@ -96,7 +96,7 @@ private:
 
 	_double m_runSoundTimer = 0;
 public:
-	// StandBy  
+	// StandBy
 	void StandBy_Init(void);
 	void StandBy_Enter(void);
 	void StandBy_Update(float deltaTime);
@@ -178,62 +178,62 @@ public:
 	void EvadeForward_End(void);
 
 public:
-	// Hit_H 
+	// Hit_H
 	void Hit_H_Init(void);
 	void Hit_H_Enter(void);
 	void Hit_H_Update(float deltaTime);
 	void Hit_H_End(void);
 
 public:
-	// Hit_L 
+	// Hit_L
 	void Hit_L_Init(void);
 	void Hit_L_Enter(void);
 	void Hit_L_Update(float deltaTime);
 	void Hit_L_End(void);
 
 public:
-	// Idle_01 
+	// Idle_01
 	void Idle_01_Init(void);
 	void Idle_01_Enter(void);
 	void Idle_01_Update(float deltaTime);
 	void Idle_01_End(void);
 
-	// Idle_1to2 
+	// Idle_1to2
 	void Idle_1to2_Init(void);
 	void Idle_1to2_Enter(void);
 	void Idle_1to2_Update(float deltaTime);
 	void Idle_1to2_End(void);
 
-	// Idle_02 
+	// Idle_02
 	void Idle_02_Init(void);
 	void Idle_02_Enter(void);
 	void Idle_02_Update(float deltaTime);
 	void Idle_02_End(void);
 
-	// Idle_2to3  
+	// Idle_2to3
 	void Idle_2to3_Init(void);
 	void Idle_2to3_Enter(void);
 	void Idle_2to3_Update(float deltaTime);
 	void Idle_2to3_End(void);
 
-	// Idle_03   
+	// Idle_03
 	void Idle_03_Init(void);
 	void Idle_03_Enter(void);
 	void Idle_03_Update(float deltaTime);
 	void Idle_03_End(void);
 
-	// Idle_3to4   
+	// Idle_3to4
 	void Idle_3to4_Init(void);
 	void Idle_3to4_Enter(void);
 	void Idle_3to4_Update(float deltaTime);
 	void Idle_3to4_End(void);
 
-	// Idle_4to5    
+	// Idle_4to5
 	void Idle_4to5_Init(void);
 	void Idle_4to5_Enter(void);
 	void Idle_4to5_Update(float deltaTime);
 	void Idle_4to5_End(void);
-	
+
 	//Idle01_AS
 	//Idle01_BS
 	//Idle01_Loop
@@ -251,55 +251,55 @@ public:
 	//Idle05_Loop
 
 public:
-	////Jump_00   
+	////Jump_00
 	//void Jump_00_Init(void);
 	//void Jump_00_Enter(void);
 	//void Jump_00_Update(float deltaTime);
 	//void Jump_00_End(void);
-	////Jump_01  
+	////Jump_01
 	//void Jump_01_Init(void);
 	//void Jump_01_Enter(void);
 	//void Jump_01_Update(float deltaTime);
 	//void Jump_01_End(void);
-	////Jump_02  
+	////Jump_02
 	//void Jump_02_Init(void);
 	//void Jump_02_Enter(void);
 	//void Jump_02_Update(float deltaTime);
 	//void Jump_02_End(void);
 
 public:
-	//Run  
+	//Run
 	void Run_Init(void);
 	void Run_Enter(void);
 	void Run_Update(float deltaTime);
 	void Run_End(void);
-	//RunBS  
+	//RunBS
 	void RunBS_Init(void);
 	void RunBS_Enter(void);
 	void RunBS_Update(float deltaTime);
 	void RunBS_End(void);
-	////RunStopLeft  
+	////RunStopLeft
 	void RunStopLeft_Init(void);
 	void RunStopLeft_Enter(void);
 	void RunStopLeft_Update(float deltaTime);
 	void RunStopLeft_End(void);
-	////RunStopRight  
+	////RunStopRight
 	void RunStopRight_Init(void);
 	void RunStopRight_Enter(void);
 	void RunStopRight_Update(float deltaTime);
 	void RunStopRight_End(void);
 public:
-	//Skill_10  
+	//Skill_10
 	void Skill_10_Init(void);
 	void Skill_10_Enter(void);
 	void Skill_10_Update(float deltaTime);
 	void Skill_10_End(void);
-	////SpecialStun  
+	////SpecialStun
 	//void Jump_00_Init(void);
 	//void Jump_00_Enter(void);
 	//void Jump_00_Update(float deltaTime);
 	//void Jump_00_End(void);
-	////SpecialStun_BS  
+	////SpecialStun_BS
 	//void Jump_00_Init(void);
 	//void Jump_00_Enter(void);
 	//void Jump_00_Update(float deltaTime);

@@ -11,6 +11,7 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
+#include "SoundManager.h"
 
 CGaneshaBasePattern::CGaneshaBasePattern()
 {
@@ -39,6 +40,9 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_JumpBack.wav", (_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+		
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -70,6 +74,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		
 		m_walkReady = false;
 	}
 	// 내가 뒤로 이동 중이라면
@@ -111,10 +116,10 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		D3DXVec3Normalize(&look, &look);
 
 		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
-		m_atkMat._41 += (m_atkDis * look.x * 1.1f);
-		m_atkMat._43 += (m_atkDis * look.z * 1.1f);
+		m_atkMat._41 += (m_atkDis * look.x * 1.f);
+		m_atkMat._43 += (m_atkDis * look.z * 1.f);
 
-		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.45f);
 		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
 	}
 } 

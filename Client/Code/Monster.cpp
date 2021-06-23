@@ -2,6 +2,7 @@
 #include "..\Header\Monster.h"
 
 #include "AttackBall.h"
+#include "AttackBox.h"
 
 CMonster::CMonster()
 {
@@ -110,6 +111,21 @@ void CMonster::UnActiveAttackBall()
 	m_pAttackBall->SetIsEnabled(false);
 }
 
+void CMonster::ActiveAttackBox(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float3 size, _float3 offset, _float3 rotOffset)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetStrengthType(strength);
+	info.SetCrowdControlType(cc);
+
+	m_pAttackBox->SetupBox(this, pBoneMat, size, offset, rotOffset, info);
+	m_pAttackBox->SetIsEnabled(true);
+}
+
+void CMonster::UnActiveAttackBox()
+{
+	m_pAttackBox->SetIsEnabled(false);
+}
 
 void CMonster::MonsterDead()
 {
