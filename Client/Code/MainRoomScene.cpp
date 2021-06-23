@@ -13,6 +13,7 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+#include "MainRoomManager.h"
 CMainRoomScene::CMainRoomScene()
 {
 }
@@ -58,8 +59,11 @@ void CMainRoomScene::Start(void)
 	Load->ImageLoad(this);
 	Load->SliderLoad(this);
 	Load->CanvasLoad(this);
+	Load->TextLoad(this);
 	delete(Load);
 
+	// 경험치 스테미너 골드 다이아 이름 레벨
+	CMainRoomManager::GetInstance()->Start(this);
 }
 
 void CMainRoomScene::FixedUpdate(void)
@@ -70,6 +74,7 @@ void CMainRoomScene::FixedUpdate(void)
 void CMainRoomScene::Update(void)
 {
 	__super::Update();
+	CMainRoomManager::GetInstance()->Update();
 }
 
 void CMainRoomScene::LateUpdate(void)
@@ -81,6 +86,7 @@ void CMainRoomScene::LateUpdate(void)
 void CMainRoomScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	CMainRoomManager::GetInstance()->OnDestroy();
 }
 
 void CMainRoomScene::OnEnable(void)

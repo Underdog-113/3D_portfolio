@@ -114,6 +114,7 @@ void CMainApp::Update(void)
 	CDamageObjectPool::GetInstance()->Update();
 	//Engine::CPhysicsManager::GetInstance()->Update();
 
+	CDataManager::GetInstance()->Update();
 	_float time = Engine::GET_ELAPSED_TIME;
 }
 
@@ -195,7 +196,7 @@ void CMainApp::OnDestroy(void)
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
 	CBattleUiManager::GetInstance()->DestroyInstance();
-
+	CDataManager::GetInstance()->DestroyInstance();
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();
 }

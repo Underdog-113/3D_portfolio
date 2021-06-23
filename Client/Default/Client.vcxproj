@@ -192,15 +192,16 @@
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientPatterns.h" />
     <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
     <ClInclude Include="..\Header\DamageFontShader.h" />
+    <ClInclude Include="..\Header\DataManager.h" />
     <ClInclude Include="..\Header\DecoObject.h" />
     <ClInclude Include="..\Header\ClientFunction.h" />
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
-    <ClInclude Include="..\Header\DataManager.h" />
     <ClInclude Include="..\Header\DissolveShader.h" />
     <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
@@ -245,7 +246,9 @@
     <ClInclude Include="..\Header\ButtonFunction.h" />
     <ClInclude Include="..\Header\Include_Valkyrie.h" />
     <ClInclude Include="..\Header\InitScene.h" />
+    <ClInclude Include="..\Header\InStockValkyrieData.h" />
     <ClInclude Include="..\Header\Item.h" />
+    <ClInclude Include="..\Header\ItemData.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
@@ -258,6 +261,7 @@
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\MainRoomManager.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
     <ClInclude Include="..\Header\MapObject.h" />
     <ClInclude Include="..\Header\MB_Bronya.h" />
@@ -294,6 +298,7 @@
     <ClInclude Include="..\Header\SpiderHitPattern.h" />
     <ClInclude Include="..\Header\SoftEffectShader.h" />
     <ClInclude Include="..\Header\SpawnEffectShader.h" />
+    <ClInclude Include="..\Header\SquadData.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\TargetPositionC.h" />
     <ClInclude Include="..\Header\TrapObject.h" />
@@ -307,7 +312,9 @@
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
+    <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
+    <ClInclude Include="..\Header\WeaponData.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
@@ -321,18 +328,19 @@
   <ItemGroup>
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
-    <ClCompile Include="..\Code\AttackRangeShader.cpp" />    
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
     <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
     <ClCompile Include="..\Code\DamageFontShader.cpp" />
-    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DataManager.cpp" />
+    <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
     <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
@@ -365,7 +373,9 @@
     <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
     <ClCompile Include="..\Code\ButtonFunction.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
+    <ClCompile Include="..\Code\InStockValkyrieData.cpp" />
     <ClCompile Include="..\Code\Item.cpp" />
+    <ClCompile Include="..\Code\ItemData.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
@@ -378,6 +388,7 @@
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\MainRoomManager.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\MB_Bronya.cpp" />
@@ -414,6 +425,7 @@
     <ClCompile Include="..\Code\SpiderHitPattern.cpp" />
     <ClCompile Include="..\Code\SoftEffectShader.cpp" />
     <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
+    <ClCompile Include="..\Code\SquadData.cpp" />
     <ClCompile Include="..\Code\StageSelectionScene.cpp" />
     <ClCompile Include="..\Code\TargetPositionC.cpp" />
     <ClCompile Include="..\Code\TrapObject.cpp" />
@@ -427,7 +439,9 @@
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
+    <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
+    <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="AlphaLifeTimeC.cpp" />

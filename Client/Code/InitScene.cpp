@@ -15,6 +15,7 @@
 #include "StageSelectionScene.h"
 #include "OneStageScene.h"
 #include "BattleEndScene.h"
+#include "ReadyToSortieScene.h"
 #pragma endregion
 
 CInitScene::CInitScene()
@@ -73,6 +74,9 @@ void CInitScene::Start(void)
 	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
 	m_pBackground->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
 	m_pBackground->GetTransform()->SetSize(1440, 810, 1);
+
+	CDataManager::GetInstance()->Start();
+
 }
 
 void CInitScene::FixedUpdate(void)
@@ -115,9 +119,10 @@ void CInitScene::Update(void)
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F4))
 			{
+
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(CDongScene::Create(), false);
+				m_pLoading = CLoading::Create(CMainRoomScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))
