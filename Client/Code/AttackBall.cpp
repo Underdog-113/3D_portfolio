@@ -141,7 +141,7 @@ void CAttackBall::OnCollisionEnter(Engine::_CollisionInfo ci)
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(pObject);
 		CMonster* pMonster = static_cast<CMonster*>(m_pOwner);
 
-		//CStageControlTower::GetInstance()->Damage_VtoM(pValkyrie->GetStat(), pMonster->GetStat(), m_damage);
+		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo);
 	}
 }
 
@@ -175,7 +175,7 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(pObject);
 		CMonster* pMonster = static_cast<CMonster*>(m_pOwner);
 
-		//CStageControlTower::GetInstance()->GetStatDealer()->Damage_VtoM(pValkyrie->GetStat(), pMonster->GetStat(), m_hitInfo);
+		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo);
 	}
 }
 
@@ -193,6 +193,8 @@ void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, 
 
 	m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
+
+	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);
 }
 
 void CAttackBall::SetBasicName(void)

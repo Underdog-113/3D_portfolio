@@ -491,9 +491,9 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
 	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
-	//CDamageObjectPool::GetInstance()->AddDamage(
-	//	pMonster->GetTransform()->GetPosition(),
-	//	_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Red");
+	CDamageObjectPool::GetInstance()->AddDamage(
+		pValkyrie,
+		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Purple");
 
 	// 2. 슬라이더 조정
 	m_pLinker->PlayerHpSet();

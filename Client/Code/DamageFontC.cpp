@@ -39,7 +39,12 @@ void CDamageFontC::FixedUpdate(SP(CComponent) spThis)
 void CDamageFontC::Update(SP(CComponent) spThis)
 {
 	m_offSet.y += (m_upSpeed * GET_DT);
-	GetOwner()->GetTransform()->SetPosition(m_target->GetTransform()->GetPosition() + m_offSet);
+
+	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
+	pos2d.z = 0.f;
+	
+
+	GetOwner()->GetTransform()->SetPosition(pos2d + m_offSet);
 
 	m_lifeTime -= GET_DT;
 
@@ -50,6 +55,7 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 	if (m_lifeTime <= 0)
 	{
 		GetOwner()->SetIsEnabled(false);
+		m_offSet = _float3(0, 0, 0);
 	}
 }
 

@@ -74,6 +74,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Sickle_Attack_1);
+			static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
 		}
 		
 		// 공격1 상태라면 뒤로 이동 상태로 변경
@@ -100,8 +101,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._41 += (m_atkDis * look.x / 2.f);
 		m_atkMat._43 += (m_atkDis * look.z / 2.f);
 
-		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat);
-		static_cast<Engine::CSphereCollider*>(static_cast<CMO_Sickle*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
+		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
 	}
 }
 

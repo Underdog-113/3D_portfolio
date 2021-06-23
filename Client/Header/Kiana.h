@@ -43,6 +43,11 @@ public:
 
 					void					SetBasicName		(void) override;
 
+					void					OnCollisionEnter(Engine::_CollisionInfo ci) override;
+					void					OnCollisionStay(Engine::_CollisionInfo ci) override;
+					void					OnCollisionExit(Engine::_CollisionInfo ci) override;
+
+
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
 					void					Update_WeaponTransform(void);
@@ -100,6 +105,9 @@ private:
 
 	_mat* m_pRightHand = nullptr;
 
+	float m_timer = 0.f;
+
+	static		_uint						m_s_uniqueID;
    public:
 	SP(Engine::CObject) CreateEffect(std::wstring name);
 	void SetEffect(SP(Engine::CObject) spEffect, AttackOption option);
