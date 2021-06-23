@@ -72,8 +72,8 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	//SickleSetting();
-	GaneshaSetting();
+	SickleSetting();
+	//GaneshaSetting();
 }
 
 void CWooScene::FixedUpdate(void)

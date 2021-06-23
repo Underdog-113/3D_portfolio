@@ -3,6 +3,7 @@
 
 #include "FSM_GaneshaC.h"
 #include "AttackBall.h"
+#include "PatternMachineC.h"
 
 _uint CMB_Ganesha::m_s_uniqueID = 0;
 
@@ -121,6 +122,20 @@ void CMB_Ganesha::SetBasicName(void)
 
 void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 {
+	//// attack strength
+	//switch (info.GetStrengthType())
+	//{
+	//case HitInfo::Str_Damage:
+	//	break;
+	//case HitInfo::Str_Low:
+	//	this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+	//	break;
+	//case HitInfo::Str_High:
+	//	this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+	//	break;
+	//case HitInfo::Str_Airborne:
+	//	break;
+	//}
 }
 
 SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
