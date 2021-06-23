@@ -484,8 +484,6 @@ static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 		else
 		{
 			_float3 normal		= pRC->GetDirection();
-			
-
 			if (pRC->GetOwner()->GetResolveIn())
 			{
 				_float3 hitPoint	= rayStartPos + normal * tMin;
