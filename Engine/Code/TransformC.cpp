@@ -51,6 +51,9 @@ void CTransformC::FixedUpdate(SP(CComponent) spThis)
 
 void CTransformC::Update(SP(CComponent) spThis)
 {
+	if (m_pOwner->GetObjectKey() == L"MB_Ganesha")
+		int a = 5;
+
 	if (m_spParent && m_spParent->GetOwner() == nullptr)
 	{
 		_quat rotQuat;
@@ -68,6 +71,9 @@ void CTransformC::Update(SP(CComponent) spThis)
 
 void CTransformC::LateUpdate(SP(CComponent) spThis)
 {
+	if (m_pOwner->GetObjectKey() == L"MB_Ganesha")
+		int a = 5;
+
 	UpdateWorldMatrix();
 	
 	if (m_checkCamDist)
@@ -391,7 +397,11 @@ void CTransformC::UpdateRotation(void)
 	{
 		withoutY = _float3(m_forward.x, 0.f, m_forward.z);
 		D3DXVec3Normalize(&withoutY, &withoutY);
-		_float yRotAngle = acosf(D3DXVec3Dot(&withoutY, &FORWARD_VECTOR));
+		_float dotCheck = D3DXVec3Dot(&withoutY, &FORWARD_VECTOR);
+		if (dotCheck > 1)
+			dotCheck = 1;
+
+		_float yRotAngle = acosf(dotCheck);
 
 		_float3 crossResult;
 		D3DXVec3Cross(&crossResult, &FORWARD_VECTOR, &withoutY);
@@ -402,7 +412,11 @@ void CTransformC::UpdateRotation(void)
 		D3DXMatrixRotationAxis(&yRot, &UP_VECTOR, yRotAngle);
 
 		D3DXVec3Cross(&m_right, &UP_VECTOR, &m_forward);
-		_float rightRotAngle = acosf(D3DXVec3Dot(&withoutY, &m_forward));
+		dotCheck = D3DXVec3Dot(&withoutY, &m_forward);
+		if (dotCheck > 1)
+			dotCheck = 1;
+
+		_float rightRotAngle = acosf(dotCheck);
 		if (m_forward.y >= 0)
 			rightRotAngle *= -1;
 

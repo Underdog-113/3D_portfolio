@@ -126,6 +126,7 @@ void CFSM_GaneshaC::Attack01_Enter(void)
 
 void CFSM_GaneshaC::Attack01_Update(float deltaTime)
 {
+	
 }
 
 void CFSM_GaneshaC::Attack01_End(void)

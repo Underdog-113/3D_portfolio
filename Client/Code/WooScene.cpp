@@ -56,7 +56,6 @@ void CWooScene::Awake(_int numOfLayers)
 void CWooScene::Start(void)
 {
 	__super::Start();
-
 	//CDataLoad* Load = new CDataLoad();
 	//Load->Setting();
 	//Load->ButtonLoad(this);
@@ -72,8 +71,8 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	SickleSetting();
-	//GaneshaSetting();
+	//SickleSetting();
+	GaneshaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -83,7 +82,18 @@ void CWooScene::FixedUpdate(void)
 
 void CWooScene::Update(void)
 {
+	static int a = 5;
+
+	if (a == 5)
+	{
+		Engine::CTextManager::GetInstance()->AddText(L"SEX", L"", _float2(50, 50), _float2(100, 100), 30, 30, D3DXCOLOR(0, 0, 0, 1));
+		a = 6;
+	}
+
 	__super::Update();
+
+	
+
 
 	m_pController->Update();
 
@@ -211,7 +221,7 @@ void CWooScene::GaneshaSetting(void)
 	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	m_spGanesha = spGaneshaClone;
 }
