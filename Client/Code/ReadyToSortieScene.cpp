@@ -12,6 +12,7 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+#include "ReadyToSortieManager.h"
 CReadyToSortieScene::CReadyToSortieScene()
 {
 }
@@ -58,7 +59,10 @@ void CReadyToSortieScene::Start(void)
 	Load->SliderLoad(this);
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
+	Load->TextLoad(this);
 	delete(Load);
+
+	CReadyToSortieManager::GetInstance()->Start(this);
 }
 
 void CReadyToSortieScene::FixedUpdate(void)
@@ -70,6 +74,7 @@ void CReadyToSortieScene::FixedUpdate(void)
 void CReadyToSortieScene::Update(void)
 {
 	__super::Update();
+	CReadyToSortieManager::GetInstance()->Update();
 }
 
 void CReadyToSortieScene::LateUpdate(void)
@@ -81,6 +86,9 @@ void CReadyToSortieScene::LateUpdate(void)
 void CReadyToSortieScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	CReadyToSortieManager::GetInstance()->OnDestroy();
+	CReadyToSortieManager::GetInstance()->DestroyInstance();
 }
 
 void CReadyToSortieScene::OnEnable(void)

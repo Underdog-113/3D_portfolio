@@ -12,6 +12,7 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+#include "StageSelectionManager.h"
 CStageSelectionScene::CStageSelectionScene()
 {
 }
@@ -57,8 +58,12 @@ void CStageSelectionScene::Start(void)
 	Load->ImageLoad(this);
 	Load->SliderLoad(this);
 	Load->ScrollViewLoad(this);
+	Load->TextLoad(this);
 	Load->CanvasLoad(this);
 	delete(Load);
+
+	CStageSelectionManager::GetInstance()->Start(this);
+
 }
 
 void CStageSelectionScene::FixedUpdate(void)
@@ -69,7 +74,7 @@ void CStageSelectionScene::FixedUpdate(void)
 void CStageSelectionScene::Update(void)
 {
 	__super::Update();
-
+	CStageSelectionManager::GetInstance()->Update();
 }
 
 void CStageSelectionScene::LateUpdate(void)
@@ -81,6 +86,9 @@ void CStageSelectionScene::LateUpdate(void)
 void CStageSelectionScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	CStageSelectionManager::GetInstance()->OnDestroy();
+	CStageSelectionManager::GetInstance()->DestroyInstance();
 }
 
 void CStageSelectionScene::OnEnable(void)

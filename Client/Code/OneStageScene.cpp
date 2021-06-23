@@ -142,7 +142,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 
-	ForUITest();
+	//ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -276,7 +276,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"aaaa",100, 100, 4, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"aaaa",219, 219, 4, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
