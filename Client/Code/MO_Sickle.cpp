@@ -5,6 +5,7 @@
 #include "PatternMachineC.h"
 
 #include "AttackBall.h"
+#include "PatternMachineC.h"
 
 _uint CMO_Sickle::m_s_uniqueID = 0;
 
@@ -205,6 +206,11 @@ void CMO_Sickle::UpdatePivotMatrices(void)
 
 		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
 	}
+}
+
+void CMO_Sickle::MonsterDead()
+{
+	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 
 SP(CMO_Sickle) CMO_Sickle::Create(_bool isStatic, Engine::CScene * pScene)
