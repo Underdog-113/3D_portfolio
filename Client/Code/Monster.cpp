@@ -90,7 +90,6 @@ void CMonster::OnDisable(void)
 void CMonster::SetBasicName(void)
 {
 }
-
 void CMonster::ApplyHitInfo(HitInfo info)
 {
 }
@@ -109,4 +108,9 @@ void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, H
 void CMonster::UnActiveAttackBall()
 {
 	m_pAttackBall->SetIsEnabled(false);
+}
+
+
+void CMonster::MonsterDead()
+{
 }
