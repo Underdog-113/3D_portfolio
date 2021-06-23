@@ -39,13 +39,18 @@ void CStageControlTower::Update(void)
 	if (m_mode != WithoutUI)
 		StageUIControl();
 
+	if(m_pPhaseControl)
+		m_pPhaseControl->Update();
 }
 
 void CStageControlTower::OnDestroy()
 {
 	if (m_mode != WithoutUI)
+	{
 		SAFE_DELETE(m_pLinker)
+	}
 	SAFE_DELETE(m_pDealer)
+	SAFE_DELETE(m_pPhaseControl)
 }
 
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)

@@ -260,6 +260,7 @@
     <ClInclude Include="..\Header\MainApp.h" />
     <ClInclude Include="..\Header\MainRoomScene.h" />
     <ClInclude Include="..\Header\MapObject.h" />
+    <ClInclude Include="..\Header\MapObject2D.h" />
     <ClInclude Include="..\Header\MB_Bronya.h" />
     <ClInclude Include="..\Header\MB_Ganesha.h" />
     <ClInclude Include="..\Header\MeshEffect_Client.h" />
@@ -275,10 +276,12 @@
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Sickle.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
     <ClInclude Include="..\Header\PatternMachineC.h" />
     <ClInclude Include="..\Header\PhaseChanger.h" />
+    <ClInclude Include="..\Header\PhaseControl.h" />
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
@@ -321,7 +324,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
-    <ClCompile Include="..\Code\AttackRangeShader.cpp" />    
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
@@ -380,6 +383,7 @@
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MainRoomScene.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
+    <ClCompile Include="..\Code\MapObject2D.cpp" />
     <ClCompile Include="..\Code\MB_Bronya.cpp" />
     <ClCompile Include="..\Code\MB_Ganesha.cpp" />
     <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
@@ -395,10 +399,12 @@
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Sickle.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
     <ClCompile Include="..\Code\PatternMachineC.cpp" />
     <ClCompile Include="..\Code\PhaseChanger.cpp" />
+    <ClCompile Include="..\Code\PhaseControl.cpp" />
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />

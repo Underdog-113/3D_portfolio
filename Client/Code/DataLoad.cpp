@@ -15,6 +15,8 @@
 #include "MapObject.h"
 #include "DecoObject.h"
 #include "PhaseChanger.h"
+#include "MapObject2D.h"
+
 CDataLoad::CDataLoad()
 {
 	
@@ -603,16 +605,57 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		_float3 size;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_size", size);
 		spPhaseChanger->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::PhaseChanger, size), true);
+
+		_int phaseToDie;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_phaseToDie", phaseToDie);
+		spPhaseChanger->SetPhaseToDie(phaseToDie);
+
+		_int numOfRestrictLine;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_numOfRestrictLine", numOfRestrictLine);
+
+		for (_int j = 0; j < numOfRestrictLine; ++j)
+		{
+			SP(CMapObject2D) spRestrictLine =
+				std::dynamic_pointer_cast<CMapObject2D>(pObjectFactory->AddClone(L"MapObject2D", true));
+
+			spRestrictLine->GetRectTex()->SetIsOrtho(false);
+			spRestrictLine->GetGraphics()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			spRestrictLine->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+
+			std::wstring texKey;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + 
+																				  L"_wall" + 
+																				  std::to_wstring(j) + 
+																				  L"_textureKey", texKey);
+			spRestrictLine->GetComponent<Engine::CTextureC>()->AddTexture(texKey);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + 
+																				  L"_wall" + 
+																				  std::to_wstring(j) + 
+																				  L"_position", position);
+			spRestrictLine->GetTransform()->SetPosition(position);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + 
+																				  L"_wall" + 
+																				  std::to_wstring(j) + 
+																				  L"_rotation", rotation);
+			spRestrictLine->GetTransform()->SetRotation(rotation);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + 
+																				  L"_wall" + 
+																				  std::to_wstring(j) + 
+																				  L"_size", size);
+			spRestrictLine->GetTransform()->SetSize(size);
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + 
+																				  L"_wall" + 
+																				  std::to_wstring(j) + 
+																				  L"_colSize", size);
+			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
+			
+			spPhaseChanger->AddRestrictLine(spRestrictLine);
+		}
 	}
-
-
-	SP(Engine::CImageObject) spFUCKTHATSHIT = 
-		std::dynamic_pointer_cast<Engine::CImageObject>(pObjectFactory->AddClone(L"ImageObject", true));
-	spFUCKTHATSHIT->GetTransform()->SetSize(16, 9, 0);
-	spFUCKTHATSHIT->GetTexture()->AddTexture(L"StaticBG", 0);
-	spFUCKTHATSHIT->GetGraphics()->SetRenderID((_uint)Engine::ERenderID::AlphaTest);
-	spFUCKTHATSHIT->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
-	spFUCKTHATSHIT->GetRectTex()->SetIsOrtho(false);
 	
 
 	//

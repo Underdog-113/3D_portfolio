@@ -331,9 +331,9 @@
     <Filter Include="03.Component\01.Glitter">
       <UniqueIdentifier>{6891e3f5-01dc-4912-8c4e-2965684858ef}</UniqueIdentifier>
     </Filter>
-<Filter Include="02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle">
-  <UniqueIdentifier>{b4f8eee6-b7fb-4542-8b53-0de7067f7a1f}</UniqueIdentifier>
-</Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle">
+      <UniqueIdentifier>{b4f8eee6-b7fb-4542-8b53-0de7067f7a1f}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Component\00.UI\10.SkillActivation">
       <UniqueIdentifier>{32868f76-d66f-4f14-8407-2aee397cb560}</UniqueIdentifier>
     </Filter>
@@ -423,6 +423,15 @@
     </Filter>
     <Filter Include="04.Shader\09.AttackRangeShader">
       <UniqueIdentifier>{afb5da92-a9b4-40be-a70c-f1bc52966bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\00.ForScene\04.MapObject2D">
+      <UniqueIdentifier>{c53797e0-9e70-4a90-b0e3-6e2a229f6a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\PhaseControl">
+      <UniqueIdentifier>{81b3c7d2-a80a-4218-984d-4418a121a717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.TempClass_ForDevelop\PhaseControl\00.OneStage">
+      <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -748,9 +757,9 @@
     <ClInclude Include="..\Header\Include_Valkyrie.h">
       <Filter>01.Scene\01.StaticScene</Filter>
     </ClInclude>
-<ClInclude Include="..\Header\AttackRange_Circle.h">
-  <Filter>02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle</Filter>
-</ClInclude>
+    <ClInclude Include="..\Header\AttackRange_Circle.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Theresa.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
     </ClInclude>
@@ -798,7 +807,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\TargetPositionC.h">
       <Filter>03.Component\00.UI\11.TargetPos</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\AttackRangeShader.h">
       <Filter>04.Shader\09.AttackRangeShader</Filter>
     </ClInclude>
@@ -828,6 +837,15 @@
     </ClInclude>
     <ClInclude Include="..\Header\WaterShader.h">
       <Filter>04.Shader\00.WaterShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MapObject2D.h">
+      <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PhaseControl.h">
+      <Filter>97.TempClass_ForDevelop\PhaseControl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\OneStagePhaseControl.h">
+      <Filter>97.TempClass_ForDevelop\PhaseControl\00.OneStage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1080,9 +1098,9 @@
     <ClCompile Include="..\Code\Item.cpp">
       <Filter>02.Objects\04.Item</Filter>
     </ClCompile>
-<ClCompile Include="..\Code\AttackRange_Circle.cpp">
-  <Filter>02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle</Filter>
-</ClCompile>
+    <ClCompile Include="..\Code\AttackRange_Circle.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\ATBPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem</Filter>
     </ClCompile>
@@ -1142,7 +1160,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\TargetPositionC.cpp">
       <Filter>03.Component\00.UI\11.TargetPos</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\AttackRangeShader.cpp">
       <Filter>04.Shader\09.AttackRangeShader</Filter>
     </ClCompile>
@@ -1172,6 +1190,17 @@
     </ClCompile>
     <ClCompile Include="..\Code\WaterShader.cpp">
       <Filter>04.Shader\00.WaterShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MO_Dummy.cpp" />
+    <ClCompile Include="SkillActivationC.cpp" />
+    <ClCompile Include="..\Code\MapObject2D.cpp">
+      <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PhaseControl.cpp">
+      <Filter>97.TempClass_ForDevelop\PhaseControl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OneStagePhaseControl.cpp">
+      <Filter>97.TempClass_ForDevelop\PhaseControl\00.OneStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
