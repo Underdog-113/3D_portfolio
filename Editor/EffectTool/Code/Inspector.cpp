@@ -567,7 +567,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
 	}
 
 }
@@ -614,44 +614,44 @@ void CInspector::Add_AlphaMask(CString TextureKey)
 void CInspector::FunctionUpdate()
 {
 	
-	if (m_iSelectObjectNum > -1)
-	{
-		SP(Engine::CObject) spObject2 = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[0];
-		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+	//if (m_iSelectObjectNum > -1)
+	//{
+	//	SP(Engine::CObject) spObject2 = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[0];
+	//	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
 
-		if (Engine::IMKEY_PRESS(KEY_UP))
-		{
-			spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(1.f));
-		}
-		if (Engine::IMKEY_PRESS(KEY_DOWN))
-		{
-			spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(-1.f));
-		}
+	//	if (Engine::IMKEY_PRESS(KEY_UP))
+	//	{
+	//		spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(1.f));
+	//	}
+	//	if (Engine::IMKEY_PRESS(KEY_DOWN))
+	//	{
+	//		spObject2->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(-1.f));
+	//	}
 
 
-		if (m_btnTestButton.GetCheck())
-		{
-			if (spObject == nullptr)
-			{
-				MessageBox(L"spObject is Not Found / CInspector", NULL);
-				ABORT;
-			}
+	//	if (m_btnTestButton.GetCheck())
+	//	{
+	//		if (spObject == nullptr)
+	//		{
+	//			MessageBox(L"spObject is Not Found / CInspector", NULL);
+	//			ABORT;
+	//		}
 
-			spObject->GetComponent<Engine::CTransformC>()->SetRotationY(spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
-			/*_mat rot;
-			D3DXMatrixRotationAxis(&rot, &UP_VECTOR, spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
-			_float3 newForward;
-			D3DXVec3TransformNormal(&newForward, &spObject->GetTransform()->GetForward(), &rot);
-			spObject->GetTransform()->SetForward(newForward);*/
+	//		spObject->GetComponent<Engine::CTransformC>()->SetRotationY(spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
+	//		/*_mat rot;
+	//		D3DXMatrixRotationAxis(&rot, &UP_VECTOR, spObject2->GetComponent<Engine::CTransformC>()->GetRotation().y);
+	//		_float3 newForward;
+	//		D3DXVec3TransformNormal(&newForward, &spObject->GetTransform()->GetForward(), &rot);
+	//		spObject->GetTransform()->SetForward(newForward);*/
 
-			CString str;
-			_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
-			str.Format(L"%f", fY);
-			m_edRotY.SetWindowTextW(str.GetString());
+	//		CString str;
+	//		_float fY = spObject->GetComponent<Engine::CTransformC>()->GetRotation().y;
+	//		str.Format(L"%f", fY);
+	//		m_edRotY.SetWindowTextW(str.GetString());
 
-			m_vSaveRot.x = fY;
-		}
-	}
+	//		m_vSaveRot.x = fY;
+	//	}
+	//}
 	
 }
 
