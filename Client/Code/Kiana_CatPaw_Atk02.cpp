@@ -91,11 +91,19 @@ void CKiana_CatPaw_Atk02::Update(void)
 {
 	__super::Update();
 
-	m_tempTimer += GET_DT;
+	/*m_tempTimer += GET_DT;
 
 	if (m_tempTimer > m_tempDuration)
 	{
 		m_tempTimer = 0.f;
+		SetIsEnabled(false);
+	}*/
+
+	m_fDissolveAlpha -= 1.f * GET_DT;
+
+	if (m_fDissolveAlpha < 0.f)
+	{
+		m_fDissolveAlpha = 1.f;
 		SetIsEnabled(false);
 	}
 	_mat rotMat;
@@ -116,6 +124,7 @@ void CKiana_CatPaw_Atk02::LateUpdate(void)
 void CKiana_CatPaw_Atk02::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("gAlpha", m_fDissolveAlpha);
 }
 
 void CKiana_CatPaw_Atk02::Render(LPD3DXEFFECT pEffect)

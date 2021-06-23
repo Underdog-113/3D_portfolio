@@ -219,5 +219,5 @@ void CMainApp::InitStaticPrototype(void)
 void CMainApp::LoadSounds()
 {
 	//Engine::CSoundManager::GetInstance()->LoadSoundFile(L"BGM");
-	Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
+	//Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
 }

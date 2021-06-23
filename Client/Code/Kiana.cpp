@@ -228,6 +228,8 @@ void CKiana::CreateCatPaw(void)
 {
 	m_spCatPaw_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk01", true, (_uint)ELayerID::Player, L"CatPaw_Atk01");
 	m_spCatPaw_Atk01->SetIsEnabled(false);
+
+		
 	m_spCatPaw_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk02", true, (_uint)ELayerID::Player, L"CatPaw_Atk02");
 	m_spCatPaw_Atk02->SetIsEnabled(false);
 	m_spCatPaw_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk03", true, (_uint)ELayerID::Player, L"CatPaw_Atk03");
