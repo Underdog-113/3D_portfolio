@@ -31,6 +31,8 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_int m_jumpCnt = 0; // 두 번 점프 여부
+
+	_mat m_atkMat;
 };
 
 #endif

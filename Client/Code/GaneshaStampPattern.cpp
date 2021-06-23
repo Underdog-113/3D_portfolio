@@ -10,6 +10,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
+#include "AttackBall.h"
 
 CGaneshaStampPattern::CGaneshaStampPattern()
 {
@@ -29,7 +30,10 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
+	if (Name_Ganesha_Stamp != fsm->GetCurStateString())
+	{
+		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
+	}
 
 	// 상대가 stamp 범위 밖이고
 	if (len > m_atkDis)
@@ -57,7 +61,9 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	else if (len <= m_atkDis)
 	{
 		// 내가 이동 상태라면 stamp
-		if (Name_Ganesha_Run == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		if ((Name_Ganesha_Run == fsm->GetCurStateString() ||
+			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Stamp);
 		}
@@ -92,6 +98,27 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
+	}
+
+	// 내가 stamp 상태고, 적절할 때 어택볼 숨기기
+	if (Name_Ganesha_Stamp == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
+	{
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+	}
+	// 내가 stamp 상태고, 적절할 때 어택볼 생성
+	else if (Name_Ganesha_Stamp == fsm->GetCurStateString() && 0.4f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+
+		_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);
+		D3DXVec3Normalize(&look, &look);
+
+		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+		m_atkMat._41 += (m_atkDis * look.x * 0.4f);
+		m_atkMat._43 += (m_atkDis * look.z * 0.4f);
+
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat);
+		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
 	}
 }
 

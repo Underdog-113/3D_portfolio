@@ -75,7 +75,8 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_explosionPosMat = pOwner->GetTransform()->GetWorldMatrix();
 		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat);
-		static_cast<Engine::CSphereCollider*>(static_cast<CMO_Spider*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.f);
+		// 폭발 범위의 콜라이더 크기 정함
+		static_cast<Engine::CSphereCollider*>(static_cast<CMO_Spider*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(2.2f);
 	}
 }
 

@@ -10,6 +10,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
+#include "AttackBall.h"
 
 CGaneshaRoll01Pattern::CGaneshaRoll01Pattern()
 {
@@ -98,6 +99,21 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
+	}
+
+	// roll 상태가 완료되면 attackball off
+	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
+	{
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+	}
+	// roll 상태라면
+	else if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && 0.345f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat);
+		// roll 범위의 콜라이더 크기 정함
+		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetOffset(_float3(0.7f, 0.6f, 0.f));
+		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(1.5f);
 	}
 }
 

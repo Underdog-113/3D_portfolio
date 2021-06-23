@@ -100,7 +100,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
 	{
-		//static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
 	else if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
@@ -117,7 +117,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat);
 		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
 	}
-}
+} 
 
 SP(CGaneshaBasePattern) CGaneshaBasePattern::Create()
 {
