@@ -104,16 +104,17 @@ void CMainApp::Update(void)
 	Engine::TIME_MEASURE_START;
 
 	Engine::CInputManager::GetInstance()->Update();
-
 	Engine::CSceneManager::GetInstance()->Update();
 	CButtonManager::GetInstance()->Update();
+
+	
+
 	Engine::CCollisionManager::GetInstance()->Update();
 
 	Engine::CCameraManager::GetInstance()->Update();
 	Engine::CGraphicsManager::GetInstance()->Update();
 
 	CDamageObjectPool::GetInstance()->Update();
-	//Engine::CPhysicsManager::GetInstance()->Update();
 
 	CDataManager::GetInstance()->Update();
 	_float time = Engine::GET_ELAPSED_TIME;

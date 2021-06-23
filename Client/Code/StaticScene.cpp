@@ -5,6 +5,7 @@
 #include "SkyBox.h"
 #include "DecoObject.h"
 #include "MapObject.h"
+#include "MapObject2D.h"
 #include "PhaseChanger.h"
 #pragma endregion
 
@@ -158,6 +159,9 @@ void CStaticScene::InitMapPrototypes(void)
 
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
+
+	SP(CMapObject2D) spMapObject2D(CMapObject2D::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMapObject2D);
 
 	SP(CPhaseChanger) spPhaseChanger(CPhaseChanger::Create(true, this));
 	GetObjectFactory()->AddPrototype(spPhaseChanger);
