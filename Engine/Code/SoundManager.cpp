@@ -155,6 +155,44 @@ void CSoundManager::VolumeIncrease(_uint ID, float fVolume)
 	FMOD_System_Update(m_pSystem);
 }
 
+void CSoundManager::LoadSoundFile(const std::wstring & path)
+{
+	WIN32_FIND_DATA fd;
+	std::wstring curDir = _SOLUTIONDIR L"Resource\\Sound\\";
+	curDir += path;
+	std::wstring fullFilePath, curFile;
+
+	HANDLE handle = FindFirstFile((curDir + L"\\*").c_str(), &fd);
+
+	if (handle == INVALID_HANDLE_VALUE)
+	{
+		MSG_BOX(__FILE__, L"Given path is wrong during getting handle in SoundManager");
+		ABORT;
+	}
+
+	do
+	{
+		curFile = fd.cFileName;
+		fullFilePath = curDir + L"\\" + curFile;
+
+		if (curFile[0] == '.')
+			continue;
+
+		FMOD_SOUND* pSound = nullptr;
+		FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem,
+			WStrToStr(fullFilePath).c_str(),
+			FMOD_HARDWARE, 0, &pSound);
+
+		if (eRes == FMOD_OK)
+		{
+			m_mapSound.emplace(curFile, pSound);
+		}
+
+	} while (FindNextFile(handle, &fd));
+
+	FMOD_System_Update(m_pSystem);
+}
+
 void CSoundManager::LoadSoundFile()
 {
 	WIN32_FIND_DATA fd;

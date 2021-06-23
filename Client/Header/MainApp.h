@@ -31,6 +31,8 @@ public:
 
 private:
 				void				InitStaticPrototype		(void);
+
+				void				LoadSounds();
 };
 
 #endif
