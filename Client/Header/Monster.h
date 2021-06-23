@@ -42,6 +42,10 @@ public:
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
 
+
+	virtual void MonsterDead();
+
+
 protected:
 	static		_uint							m_s_uniqueID;
 	GETTOR		(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)

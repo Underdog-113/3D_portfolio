@@ -43,6 +43,8 @@ public:
 				void						SetStatus			(BaseStat stat);
 				void						UpdatePivotMatrices(void);
 
+
+			void MonsterDead() override;
 private:
 	static		_uint						m_s_uniqueID;
 

@@ -462,6 +462,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	if (isDead)
 	{
 		// two many things
+		pM->MonsterDead();
 	}
 	else
 	{
