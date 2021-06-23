@@ -201,7 +201,7 @@ void CSoundManager::LoadSoundFile()
 	std::vector<std::wstring> fileNameVector;
 
 	std::wstring sourcePath = _SOLUTIONDIR L"Resource\\Sound";
-	std::wstring curDir = _SOLUTIONDIR L"Resource\\Sound";
+	std::wstring curDir;
 	std::wstring fullFilePath, curFile;
 
 
