@@ -67,7 +67,6 @@ private: /* Special Actions */
 	void PlaySound_Effect(const std::wstring& soundName);
 
 	void PlaySound_Attack_RandomVoice();
-	void PlaySound_Attack_RandomVoice();
 
 private:
 	void ResetCheckMembers();

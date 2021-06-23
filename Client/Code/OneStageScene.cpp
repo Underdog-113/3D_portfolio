@@ -52,7 +52,8 @@ void COneStageScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
-	
+	m_pControlTower->SetPhaseControl(new COneStagePhaseControl);
+	m_pControlTower->GetPhaseControl()->SetControlTower(m_pControlTower);
 }
 
 void COneStageScene::Start(void)
@@ -85,7 +86,6 @@ void COneStageScene::Start(void)
 	//spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
 	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 	//m_vSpider.emplace_back(spSpiderClone);
-
 }
 
 void COneStageScene::FixedUpdate(void)
