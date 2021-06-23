@@ -444,9 +444,15 @@
     </Filter>
     <Filter Include="09.Manager\03.MainRoomManager">
       <UniqueIdentifier>{d35ac856-8148-40f1-997e-1b2a2426b88a}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring">
       <UniqueIdentifier>{fe6ee4c9-0f3f-4e9b-a656-034ccf462479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\04.StageSelectionManager">
+      <UniqueIdentifier>{18880be9-fe9c-425b-86ca-070e2abc27ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\05.ReadyToSortieManager">
+      <UniqueIdentifier>{b8adff24-4bd8-489c-a0f1-5b238a5be961}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -872,7 +878,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\MainRoomManager.h">
       <Filter>09.Manager\03.MainRoomManager</Filter>
-        </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
     </ClInclude>
@@ -887,6 +893,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageSelectionManager.h">
+      <Filter>09.Manager\04.StageSelectionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ReadyToSortieManager.h">
+      <Filter>09.Manager\05.ReadyToSortieManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1255,7 +1267,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\MainRoomManager.cpp">
       <Filter>09.Manager\03.MainRoomManager</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
     </ClCompile>
@@ -1273,6 +1285,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\MO_Dummy.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageSelectionManager.cpp">
+      <Filter>09.Manager\04.StageSelectionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ReadyToSortieManager.cpp">
+      <Filter>09.Manager\05.ReadyToSortieManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

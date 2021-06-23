@@ -50,7 +50,7 @@ void CMainApp::Awake(void)
 
 	Engine::CInputManager::GetInstance()->Awake();
 	Engine::CSoundManager::GetInstance()->Awake();
-	LoadSounds();
+	//LoadSounds();
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
@@ -219,5 +219,6 @@ void CMainApp::InitStaticPrototype(void)
 void CMainApp::LoadSounds()
 {
 	//Engine::CSoundManager::GetInstance()->LoadSoundFile(L"BGM");
-	Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
+	/*Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
+	Engine::CSoundManager::GetInstance()->LoadSoundFile(L"UI");*/
 }

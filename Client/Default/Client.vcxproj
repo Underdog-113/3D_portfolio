@@ -287,6 +287,7 @@
     <ClInclude Include="..\Header\PartySettingScene.h" />
     <ClInclude Include="..\Header\PatternMachineC.h" />
     <ClInclude Include="..\Header\PhaseChanger.h" />
+    <ClInclude Include="..\Header\ReadyToSortieManager.h" />
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\RotationUiC.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
@@ -303,6 +304,7 @@
     <ClInclude Include="..\Header\SoftEffectShader.h" />
     <ClInclude Include="..\Header\SpawnEffectShader.h" />
     <ClInclude Include="..\Header\SquadData.h" />
+    <ClInclude Include="..\Header\StageSelectionManager.h" />
     <ClInclude Include="..\Header\StageSelectionScene.h" />
     <ClInclude Include="..\Header\TargetPositionC.h" />
     <ClInclude Include="..\Header\TrapObject.h" />
@@ -418,6 +420,7 @@
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
     <ClCompile Include="..\Code\PatternMachineC.cpp" />
     <ClCompile Include="..\Code\PhaseChanger.cpp" />
+    <ClCompile Include="..\Code\ReadyToSortieManager.cpp" />
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
@@ -434,6 +437,7 @@
     <ClCompile Include="..\Code\SoftEffectShader.cpp" />
     <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
     <ClCompile Include="..\Code\SquadData.cpp" />
+    <ClCompile Include="..\Code\StageSelectionManager.cpp" />
     <ClCompile Include="..\Code\StageSelectionScene.cpp" />
     <ClCompile Include="..\Code\TargetPositionC.cpp" />
     <ClCompile Include="..\Code\TrapObject.cpp" />

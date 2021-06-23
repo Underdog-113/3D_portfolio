@@ -86,7 +86,9 @@ void CMainRoomScene::LateUpdate(void)
 void CMainRoomScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	
 	CMainRoomManager::GetInstance()->OnDestroy();
+	CMainRoomManager::GetInstance()->DestroyInstance();
 }
 
 void CMainRoomScene::OnEnable(void)

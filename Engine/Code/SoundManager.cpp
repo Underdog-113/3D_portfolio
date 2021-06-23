@@ -220,6 +220,7 @@ void CSoundManager::LoadSoundFile()
 			WStrToStr(fullFilePath).c_str(),
 			FMOD_HARDWARE, 0, &pSound);
 
+
 		if (eRes == FMOD_OK)
 		{
 			m_mapSound.emplace(curFile, pSound);
