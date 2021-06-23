@@ -18,7 +18,7 @@
 #include "ClientPatterns.h"
 /**/
 
-//#include "DataLoad.h"
+#include "DataLoad.h"
 
 CWooScene::CWooScene()
 {
@@ -57,16 +57,18 @@ void CWooScene::Start(void)
 {
 	__super::Start();
 
-	//CDataLoad* Load = new CDataLoad();
-	//Load->Setting();
-	//Load->ButtonLoad(this);
-	//Load->ImageLoad(this);
-	//Load->SliderLoad(this);
-	//Load->ScrollViewLoad(this);
-	//Load->CanvasLoad(this);
-	//Load->TextLoad(this);
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
+	Load->TextLoad(this);
 	//Load->MapLoad(this);
-	//delete(Load);
+	delete(Load);
+
+	CBattleUiManager::GetInstance()->Start(this);
 
 	TerrainSetting();
 
@@ -127,7 +129,7 @@ void CWooScene::PlayerSetting(void)
 
 	m_spKiana = spKianaClone;
 	m_pController->AddSquadMember(m_spKiana);
-	m_pController->Start(CStageControlTower::WithoutUI);
+	m_pController->Start(CStageControlTower::ALL);
 
 	//spKianaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
 

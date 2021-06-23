@@ -531,7 +531,7 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_pStageControlTower->SetInputLock_ByAni(true);
 
 	ResetCheckMembers();
-	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -581,7 +581,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_2);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	ResetCheckMembers();
-	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -627,7 +627,7 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageControlTower->SetInputLock_ByAni(true); 
 	ResetCheckMembers();
-	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -699,7 +699,7 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	ResetCheckMembers();
-	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -777,7 +777,7 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageControlTower->SetInputLock_ByAni(true);
 	ResetCheckMembers();
-	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix());
+	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
