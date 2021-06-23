@@ -66,13 +66,23 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Stamp);
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_StandUp.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
 		}
 	}
 
+	/////////////////////////////////////////////////////////////
 	// 내가 stamp 상태라면 뒤로 이동
+	if (fsm->GetDM()->GetAniCtrl()->GetTimeline() >= 0.3f)
+	{
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+		Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Stamp.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
+	}
+
 	if (Name_Ganesha_Stamp == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		
 		m_walkReady = false;
 	}
 	// 내가 뒤로 이동 중이라면
