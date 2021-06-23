@@ -35,6 +35,10 @@ public:
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
 					
+					void					OnCollisionEnter	(Engine::_CollisionInfo ci);
+					void					OnCollisionStay		(Engine::_CollisionInfo ci);
+					void					OnCollisionExit		(Engine::_CollisionInfo ci);
+
 					void					OnTriggerEnter		(Engine::CCollisionC const* pCollisionC);
 					void					OnTriggerStay		(Engine::CCollisionC const* pCollisionC);
 					void					OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
@@ -44,8 +48,8 @@ public:
 
 					void					FindMidBone			(void);
 					
-
-					void					SetupPaw			(CObject* pOwner, _mat* pParentMat, _float radius, HitInfo info);
+					
+					void					SetupPaw			(CObject* pOwner, HitInfo info);
 
 protected:
 	static			_uint							m_s_uniqueID;

@@ -95,15 +95,14 @@ void CMonster::ApplyHitInfo(HitInfo info)
 {
 }
 
-void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat)
+void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)
 {
 	HitInfo info;
 	info.SetDamageRate(damageRate);
 	info.SetStrengthType(strength);
 	info.SetCrowdControlType(cc);
-
-	_float3 size = m_pAttackBall->GetTransform()->GetSize();
-	m_pAttackBall->SetParentMatrix(pBoneMat);
+	
+	m_pAttackBall->SetupBall(this, pBoneMat, radius, info);
 	m_pAttackBall->SetIsEnabled(true);
 }
 

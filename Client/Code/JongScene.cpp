@@ -216,7 +216,7 @@ void CJongScene::CollisionDummy()
 void CJongScene::SpiderTest()
 {
 	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(5.f, 0.f, 0.f);
+	spSpiderClone->GetTransform()->SetPosition(0.f, 0.f, 5.f);
 	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 }
 

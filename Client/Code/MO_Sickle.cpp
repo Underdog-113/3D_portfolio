@@ -27,9 +27,7 @@ SP(Engine::CObject) CMO_Sickle::MakeClone(void)
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-
-	spClone->m_spStateMachine = spClone->GetComponent<CFSM_SickleC>();
-
+	
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();

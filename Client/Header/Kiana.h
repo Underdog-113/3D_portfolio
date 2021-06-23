@@ -107,6 +107,7 @@ private:
 
 	float m_timer = 0.f;
 
+	static		_uint						m_s_uniqueID;
    public:
 	SP(Engine::CObject) CreateEffect(std::wstring name);
 	void SetEffect(SP(Engine::CObject) spEffect, AttackOption option);

@@ -425,6 +425,7 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkUltraRing = false;
 	m_checkUltraAtk = false;
 	m_checkEffect = false;
+	m_checkEffectSecond = false;
 }
 
 
@@ -713,6 +714,12 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 	{
 		CreateEffect_Attack4();
 		m_checkEffect = true;
+	}
+
+	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > 0.15f)
+	{
+		CreateEffect_Attack4();
+		m_checkEffectSecond = true;
 	}
 
 	if (CheckAction_Attack(Name_Attack_5))

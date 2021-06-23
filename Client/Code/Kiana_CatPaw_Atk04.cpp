@@ -143,6 +143,30 @@ void CKiana_CatPaw_Atk04::OnDisable(void)
 	__super::OnDisable();
 }
 
+void CKiana_CatPaw_Atk04::OnCollisionEnter(Engine::_CollisionInfo ci)
+{
+	Engine::CObject* pObject = ci.pOtherCollider->GetOwner()->GetOwner();
+
+	for (auto& object : m_vCollided)
+	{
+		if (pObject == object)
+			return;
+	}
+
+	CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
+	CMonster* pMonster = static_cast<CMonster*>(pObject);
+
+	CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+}
+
+void CKiana_CatPaw_Atk04::OnCollisionStay(Engine::_CollisionInfo ci)
+{
+}
+
+void CKiana_CatPaw_Atk04::OnCollisionExit(Engine::_CollisionInfo ci)
+{
+}
+
 void CKiana_CatPaw_Atk04::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 {
 	Engine::CObject* pObject = pCollisionC->GetOwner();
@@ -180,10 +204,8 @@ void CKiana_CatPaw_Atk04::FindMidBone(void)
 	*m_pMidBone_World = *m_pMidBone_BoneOffset * m_pMidBone_Frame->CombinedTransformMatrix;
 }
 
-void CKiana_CatPaw_Atk04::SetupPaw(CObject * pOwner, _mat * pParentMat, _float radius, HitInfo info)
+void CKiana_CatPaw_Atk04::SetupPaw(CObject * pOwner, HitInfo info)
 {
 	m_pOwner = pOwner;
-
-	m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
 }
