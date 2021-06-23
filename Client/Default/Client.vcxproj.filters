@@ -427,6 +427,9 @@
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring">
       <UniqueIdentifier>{fe6ee4c9-0f3f-4e9b-a656-034ccf462479}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\03.AttackBox">
+      <UniqueIdentifier>{0e8be3c0-67f2-4a21-a668-aa555d2cd52f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -844,6 +847,9 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\AttackBox.h">
+      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1203,6 +1209,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MO_Dummy.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackBox.cpp">
+      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

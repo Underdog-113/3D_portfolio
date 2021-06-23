@@ -23,6 +23,7 @@
 #include "Canvas.h"
 
 #include "AttackBall.h"
+#include "AttackBox.h"
 
 #include "MO_Dummy.h"
 #include "MO_Scout.h"
@@ -135,6 +136,9 @@ void CStaticScene::InitPrototypes(void)
 	
 	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBall);
+
+	SP(CAttackBox) spAttackBox(CAttackBox::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttackBox);
 	
 	InitMapPrototypes();
 	InitUiPrototypes();

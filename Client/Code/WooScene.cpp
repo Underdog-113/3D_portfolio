@@ -217,7 +217,7 @@ void CWooScene::GaneshaSetting(void)
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	m_spGanesha = spGaneshaClone;
 }
-
+ 
 void CWooScene::SpiderSetting(void)
 {
 	/* Spider */

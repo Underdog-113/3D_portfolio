@@ -10,7 +10,8 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
-#include "AttackBall.h"
+#include "AttackBox.h"
+#include "StageControlTower.h"
 
 CGaneshaBurst01Pattern::CGaneshaBurst01Pattern()
 {
@@ -99,21 +100,44 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
-	// burst 상태가 완료되면 attackball off 및 오브젝트 제거
-	//if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.45f <= fsm->GetDM()->GetAniTimeline())
-	//{
-	//	static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
-	//}
-	// burst 상태라면
-	else if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.3f <= fsm->GetDM()->GetAniTimeline())
+	// burst 상태가 완료되면 attackball off
+	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
+		m_onBurst = false;
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+	}
+	// burst 상태라면
+	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
+		0.4f <= fsm->GetDM()->GetAniTimeline() &&
+		0.5f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_onBurst)
+	{
+		m_onBurst = true;
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
-		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 1.5f);
-		// 폭발 범위의 콜라이더 크기 정함
-		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetSize(_float3(10.f, 3.f, 10.f));
-		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetHalfSize(_float3(10.f, 3.f, 10.f));
-		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetOffset(_float3(0.f, 0.f, 0.f));
-		static_cast<Engine::CObbCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRotOffset(_float3(0.f, 0.f, 0.f));
+		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
+		_float3 size = { 2.f, 2.f, 10.f };
+		_float3 offset = { 0.f, 0.f, 0.f }; 
+
+		_float3 mPos = pOwner->GetTransform()->GetPosition();
+		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+		_float3 beamDir = pPos - mPos;
+		beamDir.y = 0.f;
+		D3DXVec3Normalize(&beamDir, &beamDir);
+/*
+		_mat rotMat;
+		D3DXMatrixRotationYawPitchRoll(&rotMat,
+			pGanesha->GetTransform()->GetRotation().y,
+			pGanesha->GetTransform()->GetRotation().x,
+			pGanesha->GetTransform()->GetRotation().z);*/
+		
+		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
+
+		offset.z = (beamDir.z * size.z / 2.f);
+		
+		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
+		
+		
+		
 	}
 }
 

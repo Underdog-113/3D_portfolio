@@ -3,6 +3,7 @@
 // 몬스터들의 상위 클래스
 // 여기는 몬스터들의 공통된 속성을 정의하는 곳
 class CAttackBall;
+class CAttackBox;
 
 class CMonster abstract : public Engine::CObject
 {
@@ -42,6 +43,9 @@ public:
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
 
+	void ActiveAttackBox(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float3 size, _float3 offset, _float3 rotOffset);
+	void UnActiveAttackBox();
+
 
 	virtual void MonsterDead();
 
@@ -64,5 +68,6 @@ protected:
 protected:
 	GETTOR		(M_Stat*,						m_pStat,			nullptr,	Stat)
 	GETTOR		(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
+	GETTOR		(CAttackBox*,					m_pAttackBox,		nullptr,	AttackBox)
 };
 

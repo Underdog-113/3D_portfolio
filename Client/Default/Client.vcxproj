@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AttackBall.h" />
+    <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
     <ClInclude Include="..\Header\AttackRangeShader.h" />
     <ClInclude Include="..\Header\AttackTrail_Client.h" />
@@ -324,6 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AttackBall.cpp" />
+    <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
     <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
