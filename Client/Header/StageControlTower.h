@@ -30,6 +30,7 @@
 #define MoveFlag_Back 0x08
 
 #include "StatusDealer.h"
+#include "PhaseControl.h"
 class CValkyrie;
 class CUILinker;
 class CStageControlTower
@@ -85,7 +86,7 @@ private:
 		
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
-
+	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)
 
 private:	/* Stage Info? */
 	GETTOR_SETTOR	(_uint,					m_hitCount,			0,				HitCount)

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PhaseChanger.h"
-
+#include "MapObject2D.h"
+#include "StageControlTower.h"
 
 _uint CPhaseChanger::m_s_uniqueID = 0;
 CPhaseChanger::CPhaseChanger()
@@ -62,6 +63,8 @@ void CPhaseChanger::Update(void)
 {
 	__super::Update();
 	
+	if (CStageControlTower::GetInstance()->GetPhaseControl()->GetCurPhase() == m_phaseToDie)
+		m_deleteThis = true;
 }
 
 void CPhaseChanger::LateUpdate(void)
@@ -74,6 +77,13 @@ void CPhaseChanger::OnDestroy(void)
 {
 	__super::OnDestroy();
 	
+	for (auto& restrictLine : m_vRestrictLine)
+	{
+		restrictLine->SetDeleteThis(true);
+		restrictLine.reset();
+	}
+
+	m_vRestrictLine.clear();
 }
 
 void CPhaseChanger::OnEnable(void)
@@ -90,6 +100,11 @@ void CPhaseChanger::OnDisable(void)
 
 void CPhaseChanger::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 {
+	for (auto& restrictLine : m_vRestrictLine)
+		restrictLine->SetIsEnabled(true);
+
+	CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
+	m_spCollision->SetIsEnabled(false);
 }
 
 void CPhaseChanger::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
@@ -98,6 +113,12 @@ void CPhaseChanger::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
 
 void CPhaseChanger::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 {
+}
+
+void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine)
+{
+	spRestrictLine->SetIsEnabled(false);
+	m_vRestrictLine.emplace_back(spRestrictLine);
 }
 
 void CPhaseChanger::SetBasicName(void)

@@ -3,6 +3,7 @@
 
 #include "Object.h"
 
+class CMapObject2D;
 class CPhaseChanger final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -30,11 +31,19 @@ public:
 				void				OnTriggerEnter		(Engine::CCollisionC const* pCollisionC);
 				void				OnTriggerStay		(Engine::CCollisionC const* pCollisionC);
 				void				OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
+
+public:
+				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine);
 private:
 				void				SetBasicName		(void) override;
 private:
 	static		_uint				m_s_uniqueID;
 
-	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
+	typedef std::vector<SP(CMapObject2D)> _MAPOBJECT2DS;
+
+	GETTOR_SETTOR(_int,						m_phaseToDie,		UNDEFINED,		PhaseToDie)
+
+	GETTOR		(_MAPOBJECT2DS,				m_vRestrictLine,	{},				RestrictLines)
+	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
 };
 #endif

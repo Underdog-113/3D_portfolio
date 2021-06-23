@@ -75,7 +75,8 @@ private:
 	GETTOR			(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
 	GETTOR			(_int,						m_collisionID,		UNDEFINED,		CollisionID)
 	GETTOR_SETTOR	(Engine::CObject*,			m_pOwner,			nullptr,		Owner)
-	GETTOR_SETTOR	(HitInfo,					m_hitInfo,			HitInfo(),		HitInfoMation)
+	GETTOR_SETTOR	(HitInfo,					m_hitInfo,			HitInfo(),		
+		)
 	GETTOR_SETTOR	(_float3,					m_offset,			ZERO_VECTOR,	Offset)
 
 	SP(Engine::CCollider) m_spCollider;

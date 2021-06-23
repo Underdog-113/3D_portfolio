@@ -5,6 +5,7 @@
 #include "SkyBox.h"
 #include "DecoObject.h"
 #include "MapObject.h"
+#include "MapObject2D.h"
 #include "PhaseChanger.h"
 #pragma endregion
 
@@ -23,6 +24,7 @@
 #include "Canvas.h"
 
 #include "AttackBall.h"
+#include "AttackBox.h"
 
 #include "MO_Dummy.h"
 #include "MO_Scout.h"
@@ -135,6 +137,9 @@ void CStaticScene::InitPrototypes(void)
 	
 	SP(CAttackBall) spAttackBall(CAttackBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBall);
+
+	SP(CAttackBox) spAttackBox(CAttackBox::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttackBox);
 	
 	InitMapPrototypes();
 	InitUiPrototypes();
@@ -158,6 +163,9 @@ void CStaticScene::InitMapPrototypes(void)
 
 	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMapObject);
+
+	SP(CMapObject2D) spMapObject2D(CMapObject2D::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMapObject2D);
 
 	SP(CPhaseChanger) spPhaseChanger(CPhaseChanger::Create(true, this));
 	GetObjectFactory()->AddPrototype(spPhaseChanger);

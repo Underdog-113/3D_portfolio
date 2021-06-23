@@ -195,37 +195,63 @@ void CSoundManager::LoadSoundFile(const std::wstring & path)
 
 void CSoundManager::LoadSoundFile()
 {
-	WIN32_FIND_DATA fd;
+	WIN32_FIND_DATA fileData;
+	
+	std::vector<std::wstring> dirNameVector;
+	std::vector<std::wstring> fileNameVector;
+
+	std::wstring sourcePath = _SOLUTIONDIR L"Resource\\Sound";
 	std::wstring curDir = _SOLUTIONDIR L"Resource\\Sound";
 	std::wstring fullFilePath, curFile;
 
-	HANDLE handle = FindFirstFile((curDir + L"\\*").c_str(), &fd);
 
-	if (handle == INVALID_HANDLE_VALUE)
+	dirNameVector.push_back(sourcePath);
+
+	do 
 	{
-		MSG_BOX(__FILE__, L"Given path is wrong during getting handle in SoundManager");
-		ABORT;
-	}
+		curDir = dirNameVector.back();
+		dirNameVector.pop_back();
 
-	do
-	{
-		curFile = fd.cFileName;
-		fullFilePath = curDir + L"\\" + curFile;
-
-		if (curFile[0] == '.')
-			continue;
-
-		FMOD_SOUND* pSound = nullptr;
-		FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem,
-			WStrToStr(fullFilePath).c_str(),
-			FMOD_HARDWARE, 0, &pSound);
-
-		if (eRes == FMOD_OK)
+		//받은 디렉토리의 첫 파일을 찾아 fileData에 정보를 넣고 HANDLE을 반환
+		HANDLE findHandle = FindFirstFile((curDir + L"\\*").c_str(), &fileData);
+		if (findHandle == INVALID_HANDLE_VALUE)
 		{
-			m_mapSound.emplace(curFile, pSound);
+			MSG_BOX(__FILE__, L"Given path is wrong during getting handle in SoundManager");
+			ABORT;
 		}
 
-	} while (FindNextFile(handle, &fd));
+		do
+		{
+			//찾은 fileData로부터 현재 보고있는 파일, 그리고 풀 패스를 설정
+			curFile = fileData.cFileName;
+			fullFilePath = curDir + L"\\" + curFile;
+
+			//현재 보고있는 파일이 directory인지 아닌지 체크
+			bool isItDir = ((fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) ? false : true;
+
+
+			//파일 이름이 .으로 시작하면 시스템 파일이다, 넘김.
+			if (curFile[0] == '.')
+				continue;
+
+			//디렉토리라면 디렉토리 벡터에 넣고 넘긴다.
+			if (isItDir)
+			{
+				dirNameVector.push_back(fullFilePath);
+				continue;
+			}
+
+			//디렉토리가 아닌 파일마다 함수 포인터에 담긴 함수를 호출한다.
+			FMOD_SOUND* pSound = nullptr;
+			FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem,
+													   WStrToStr(fullFilePath).c_str(),
+													   FMOD_HARDWARE, 0, &pSound);
+
+			if (eRes == FMOD_OK)
+				m_mapSound.emplace(curFile, pSound);
+
+		} while (FindNextFile(findHandle, &fileData));
+	} while (!dirNameVector.empty());
 
 	FMOD_System_Update(m_pSystem);
 }

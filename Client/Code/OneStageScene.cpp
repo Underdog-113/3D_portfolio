@@ -21,6 +21,8 @@
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
 
+#include "OneStagePhaseControl.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -50,6 +52,7 @@ void COneStageScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
+	m_pControlTower->SetPhaseControl(new COneStagePhaseControl);
 }
 
 void COneStageScene::Start(void)
@@ -57,7 +60,6 @@ void COneStageScene::Start(void)
 	__super::Start();
 
 	SetupFromLoader();
-
 	SetupMembers();
 
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
@@ -140,7 +142,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 
-	ForUITest();
+	//ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -274,7 +276,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"aaaa",100, 100, 4, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"aaaa",219, 219, 4, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))

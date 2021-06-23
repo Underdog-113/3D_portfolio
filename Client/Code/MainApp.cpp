@@ -50,7 +50,7 @@ void CMainApp::Awake(void)
 
 	Engine::CInputManager::GetInstance()->Awake();
 	Engine::CSoundManager::GetInstance()->Awake();
-	LoadSounds();
+	//LoadSounds();
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CGraphicsManager::GetInstance()->Awake();
@@ -107,7 +107,7 @@ void CMainApp::Update(void)
 	Engine::CSceneManager::GetInstance()->Update();
 	CButtonManager::GetInstance()->Update();
 
-	
+
 
 	Engine::CCollisionManager::GetInstance()->Update();
 
@@ -116,6 +116,7 @@ void CMainApp::Update(void)
 
 	CDamageObjectPool::GetInstance()->Update();
 
+	CDataManager::GetInstance()->Update();
 	_float time = Engine::GET_ELAPSED_TIME;
 }
 
@@ -197,7 +198,7 @@ void CMainApp::OnDestroy(void)
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
 	CBattleUiManager::GetInstance()->DestroyInstance();
-
+	CDataManager::GetInstance()->DestroyInstance();
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();
 }
