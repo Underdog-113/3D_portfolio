@@ -37,14 +37,6 @@ public:
 private:
 	void FixRootMotionOffset(_uint index);
 
-	void CreateEffect(std::wstring name);
-
-	void CreateEffect_Attack1();
-	void CreateEffect_Attack2();
-	void CreateEffect_Attack3();
-	void CreateEffect_Attack4();
-	void CreateEffect_Attack5();
-
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
 	bool CheckAction_Evade_OnAction(float coolTime = Cool_Evade);
@@ -64,6 +56,16 @@ private: /* Special Actions */
 
 	bool CheckAction_Ultra();
 
+private: /* effect */
+	void CreateEffect(std::wstring name);
+
+	void CreateEffect_Attack1();
+	void CreateEffect_Attack2();
+	void CreateEffect_Attack3();
+	void CreateEffect_Attack4();
+	void CreateEffect_Attack5();
+
+private: /* sound */
 	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
 	void PlaySound_Voice(const std::wstring& soundName);
 	void PlaySound_Effect(const std::wstring& soundName);

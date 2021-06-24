@@ -466,6 +466,9 @@
     <Filter Include="10.ControlTower\PhaseControl\00.OneStage">
       <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
+      <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -924,6 +927,15 @@
     <ClInclude Include="..\Header\OneStagePhaseControl.h">
       <Filter>10.ControlTower\PhaseControl\00.OneStage</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Sakura.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_SakuraC.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Sakura.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1329,6 +1341,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp">
       <Filter>10.ControlTower\PhaseControl\00.OneStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_SakuraC.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

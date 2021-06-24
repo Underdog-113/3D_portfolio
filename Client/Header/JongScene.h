@@ -31,16 +31,20 @@ private:
 
 					void KianaTest();
 					void TheresaTest();
+					void SakuraTest();
 
 					void CollisionDummy();
 					void SpiderTest();
 					void SickleTest();
 					void GaneshaTest();
 
+					void FloorTest();
+
 					void SetupStageUI();
 private:
 	SP(Engine::CObject) m_spKiana;
 	SP(Engine::CObject) m_spTheresa;
+	SP(Engine::CObject) m_spSakura;
 	Engine::CObject* m_pivot;
 
 	SP(Engine::CObject) m_spDummy;
@@ -53,7 +57,7 @@ private:
 	Engine::CObject* m_obj3;
 	Engine::CObject* m_obj4;
 	int num = 0;
-
+	int idx = 0;
 private:
 	CStageControlTower* m_pControlTower = nullptr;
 };
