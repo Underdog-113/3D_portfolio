@@ -20,6 +20,9 @@ public:
 	void StopSound(_uint ID);
 	void StopAll();
 
+	void GetChannelFrequency(_uint ID, float* frequency);
+	void SetChannelFrequency(_uint ID, float frequency);
+
 	// 실행중이면 true
 	_bool IsPlaying(_uint eID);
 	// 0.f ~ 1.f 
@@ -40,6 +43,7 @@ private:
 	// 사운드 ,채널 객체 및 장치를 관리하는 객체 
 	FMOD_SYSTEM* m_pSystem;
 
+	FMOD_SOUND* m_pSound;
 	//
 	float m_fVolume[(_uint)EChannelID::NumOfChannelID];
 };

@@ -173,7 +173,13 @@ _float3 CRootMotion::GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pD
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
 	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
-	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+	D3DXFRAME* pBip001Frame = pDM->GetRootFrame()->pFrameFirstChild;
+	while (strcmp(pBip001Frame->Name, "Bip001"))
+	{
+		pBip001Frame = pBip001Frame->pFrameFirstChild;
+	}
+	_mat rootChildCombMat = pBip001Frame->TransformationMatrix * rootCombMat;
 
 	return _float3(
 		rootChildCombMat._41,

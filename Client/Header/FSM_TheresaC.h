@@ -1,5 +1,11 @@
 #pragma once
 #include "StateMachine.h"
+#define Cool_Attack				0.25f
+#define Cool_Evade				0.2f
+#define Cool_End				0.75f
+
+#define Cool_HitPenalty			0.5f
+#define Cool_RunOnAttack		0.5f
 
 class CTheresa;
 class CStageControlTower;
@@ -16,10 +22,20 @@ public:
 	void Start(SP(CComponent) spThis) override;
 
 private:
-	void RegisterAllState();
 	void FixRootMotionOffset(_uint index);
+	void ResetCheckMembers();
 
 private: /* Normal Actions */
+	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
+	bool CheckAction_Evade_OnAction(float coolTime = Cool_Evade);
+	bool CheckAction_EvadeForward(float coolTime = Cool_Evade);
+	bool CheckAction_EvadeBackward(float coolTime = Cool_Evade);
+	bool CheckAction_StandBy_Timeout(float coolTime = Cool_End);
+	bool CheckAction_Run();
+	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
+	bool CheckAction_Run_End();
+	bool CheckAction_Idle();
+	bool CheckAction_RunBS_To_Run();
 
 private: /* Special Actions */
 
@@ -37,6 +53,78 @@ public:
 	void IDLE_Update(float deltaTime);
 	void IDLE_End(void);
 
+	//APPEAR
+	void APPEAR_Init(void);
+	void APPEAR_Enter(void);
+	void APPEAR_Update(float deltaTime);
+	void APPEAR_End(void);
+
+	//RUN
+	void RUN_Init(void);
+	void RUN_Enter(void);
+	void RUN_Update(float deltaTime);
+	void RUN_End(void);
+
+	//RunBs
+	void RunBS_Init(void);
+	void RunBS_Enter(void);
+	void RunBS_Update(float deltaTime);
+	void RunBS_End(void);
+
+	//EvadeBackward
+	void EvadeBackward_Init(void);
+	void EvadeBackward_Enter(void);
+	void EvadeBackward_Update(float deltaTime);
+	void EvadeBackward_End(void);
+
+	//EvadeForward
+	void EvadeForward_Init(void);
+	void EvadeForward_Enter(void);
+	void EvadeForward_Update(float deltaTime);
+	void EvadeForward_End(void);
+
+	//ATTACK1
+	void ATTACK1_Init(void);
+	void ATTACK1_Enter(void);
+	void ATTACK1_Update(float deltaTime);
+	void ATTACK1_End(void);
+
+	//ATTACK2
+	void ATTACK2_Init(void);
+	void ATTACK2_Enter(void);
+	void ATTACK2_Update(float deltaTime);
+	void ATTACK2_End(void);
+
+	//ATTACK3
+	void ATTACK3_Init(void);
+	void ATTACK3_Enter(void);
+	void ATTACK3_Update(float deltaTime);
+	void ATTACK3_End(void);
+
+	//ATTACK4
+	void ATTACK4_Init(void);
+	void ATTACK4_Enter(void);
+	void ATTACK4_Update(float deltaTime);
+	void ATTACK4_End(void);
+
+	//CHARGE0
+	void CHARGE0_Init(void);
+	void CHARGE0_Enter(void);
+	void CHARGE0_Update(float deltaTime);
+	void CHARGE0_End(void);
+
+	//CHARGE1
+	void CHARGE1_Init(void);
+	void CHARGE1_Enter(void);
+	void CHARGE1_Update(float deltaTime);
+	void CHARGE1_End(void);
+
+	//CHARGE2
+	void CHARGE2_Init(void);
+	void CHARGE2_Enter(void);
+	void CHARGE2_Update(float deltaTime);
+	void CHARGE2_End(void);
+	
 	//VICTORY
 	void VICTORY_Init(void);
 	void VICTORY_Enter(void);
@@ -72,13 +160,7 @@ public:
 	void HIT_L_Enter(void);
 	void HIT_L_Update(float deltaTime);
 	void HIT_L_End(void);
-
-	//QTE_FY
-	//void QTE_FY_Init(void);
-	//void QTE_FY_Enter(void);
-	//void QTE_FY_Update(float deltaTime);
-	//void QTE_FY_End(void);
-
+	
 	//JUMP_2
 	void JUMP_2_Init(void);
 	void JUMP_2_Enter(void);
@@ -139,48 +221,6 @@ public:
 	void CROSSSKILL_Update(float deltaTime);
 	void CROSSSKILL_End(void);
 
-	//CHARGE2
-	void CHARGE2_Init(void);
-	void CHARGE2_Enter(void);
-	void CHARGE2_Update(float deltaTime);
-	void CHARGE2_End(void);
-
-	//CHARGE1
-	void CHARGE1_Init(void);
-	void CHARGE1_Enter(void);
-	void CHARGE1_Update(float deltaTime);
-	void CHARGE1_End(void);
-
-	//CHARGE0
-	void CHARGE0_Init(void);
-	void CHARGE0_Enter(void);
-	void CHARGE0_Update(float deltaTime);
-	void CHARGE0_End(void);
-
-	//ATTACK4
-	void ATTACK4_Init(void);
-	void ATTACK4_Enter(void);
-	void ATTACK4_Update(float deltaTime);
-	void ATTACK4_End(void);
-
-	//ATTACK3
-	void ATTACK3_Init(void);
-	void ATTACK3_Enter(void);
-	void ATTACK3_Update(float deltaTime);
-	void ATTACK3_End(void);
-
-	//ATTACK2
-	void ATTACK2_Init(void);
-	void ATTACK2_Enter(void);
-	void ATTACK2_Update(float deltaTime);
-	void ATTACK2_End(void);
-
-	//ATTACK1
-	void ATTACK1_Init(void);
-	void ATTACK1_Enter(void);
-	void ATTACK1_Update(float deltaTime);
-	void ATTACK1_End(void);
-
 	//RUNSTOPRIGHT
 	void RUNSTOPRIGHT_Init(void);
 	void RUNSTOPRIGHT_Enter(void);
@@ -199,17 +239,8 @@ public:
 	void FASTRUN_Update(float deltaTime);
 	void FASTRUN_End(void);
 
-	//RUN
-	void RUN_Init(void);
-	void RUN_Enter(void);
-	void RUN_Update(float deltaTime);
-	void RUN_End(void);
 
-	//APPEAR
-	void APPEAR_Init(void);
-	void APPEAR_Enter(void);
-	void APPEAR_Update(float deltaTime);
-	void APPEAR_End(void);
-
+private:
+	void RegisterAllState();
 };
 

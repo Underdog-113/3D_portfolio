@@ -207,9 +207,11 @@
     <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
+    <ClInclude Include="..\Header\FSMDefine_Sakura.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSMDefine_Theresa.h" />
+    <ClInclude Include="..\Header\FSM_SakuraC.h" />
     <ClInclude Include="..\Header\FSM_SickleC.h" />
     <ClInclude Include="..\Header\FSM_TheresaC.h" />
     <ClInclude Include="..\Header\GaneshaBasePattern.h" />
@@ -294,6 +296,7 @@
     <ClInclude Include="..\Header\PhaseControl.h" />
     <ClInclude Include="..\Header\ReadyToSortieScene.h" />
     <ClInclude Include="..\Header\RotationUiC.h" />
+    <ClInclude Include="..\Header\Sakura.h" />
     <ClInclude Include="..\Header\ScrollViewObject.h" />
     <ClInclude Include="..\Header\SickleAtk02Pattern.h" />
     <ClInclude Include="..\Header\SickleBasePattern.h" />
@@ -322,6 +325,7 @@
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
+    <ClInclude Include="..\Header\ActorController.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
@@ -354,6 +358,7 @@
     <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
     <ClCompile Include="..\Code\EffectShader.cpp" />
+    <ClCompile Include="..\Code\FSM_SakuraC.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
     <ClCompile Include="..\Code\GaneshaBasePattern.cpp" />
@@ -431,6 +436,7 @@
     <ClCompile Include="..\Code\PhaseControl.cpp" />
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
     <ClCompile Include="..\Code\RotationUiC.cpp" />
+    <ClCompile Include="..\Code\Sakura.cpp" />
     <ClCompile Include="..\Code\ScrollViewObject.cpp" />
     <ClCompile Include="..\Code\SickleAtk02Pattern.cpp" />
     <ClCompile Include="..\Code\SickleBasePattern.cpp" />
@@ -459,6 +465,7 @@
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
+    <ClCompile Include="..\Code\ActorController.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />

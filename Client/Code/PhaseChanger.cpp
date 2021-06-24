@@ -2,6 +2,7 @@
 #include "PhaseChanger.h"
 #include "MapObject2D.h"
 #include "StageControlTower.h"
+#include "PhaseControl.h"
 
 _uint CPhaseChanger::m_s_uniqueID = 0;
 CPhaseChanger::CPhaseChanger()
