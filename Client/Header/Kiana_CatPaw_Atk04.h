@@ -81,6 +81,7 @@ private:
 	GETTOR_SETTOR	(_float3,					m_offset,			ZERO_VECTOR,	Offset)
 
 	SP(Engine::CCollider) m_spCollider;
+	_float m_fDissolveAlpha = 1.f;
 
 };
 

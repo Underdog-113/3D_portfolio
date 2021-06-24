@@ -113,7 +113,7 @@ void CCollisionManager::CheckCollision(SP(CCollider) spCollider)
 	{
 		for (auto& checkCollider : m_vColliders[layerID])
 		{
-			if (checkCollider == spCollider)
+			if (checkCollider == spCollider || !checkCollider->GetOwner()->GetIsEnabled())
 				continue;
 
 			if (CollisionHelper::CheckColliderBS(spCollider, checkCollider) == true)
