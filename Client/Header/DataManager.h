@@ -31,7 +31,7 @@ public:
 	void WeaponInit(std::wstring weaponName); // 무기
 	void InStockValkyrieInit(std::wstring valkyrieName); // 보유 발키리
 private:
-	CCaptainData* m_captainData;
+	CCaptainData* m_captainData = nullptr;
 	CInStockValkyrieData* m_inStockValkyrieData;
 	std::list<CValkyrieStatusData*> m_valkyrieStatusDataList;
 	CSquadData* m_squadData;
