@@ -153,6 +153,7 @@ namespace Engine
 
 	enum class EChannelID
 	{
+		OUTGAME,
 		BGM,
 		AMBIENT,
 		PLAYER,
