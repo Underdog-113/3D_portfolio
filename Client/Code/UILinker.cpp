@@ -119,7 +119,7 @@ void CUILinker::Skill()
 
 void CUILinker::Ultra()
 {
-	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
+	/*V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
 
 	_float cost = stat->GetUltraCost();
 	_float cooltime = stat->GetUltraCoolTime();
@@ -129,7 +129,7 @@ void CUILinker::Ultra()
 		(_int)cost,
 		cooltime);
 
-	m_pCT->FindTarget();
+	m_pCT->FindTarget();*/
 }
 
 void CUILinker::Evade()

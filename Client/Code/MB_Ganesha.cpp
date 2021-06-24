@@ -55,7 +55,7 @@ void CMB_Ganesha::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(5131.f);
+	stat.SetBaseHp(1131.f);
 	stat.SetBaseAtk(117.f);
 	stat.SetBaseDef(25.f);
 

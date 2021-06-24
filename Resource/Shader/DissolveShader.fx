@@ -59,10 +59,9 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition.xyz);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
-	Output.mUV.x = Input.mUV.x;
-	Output.mUV.y = -Input.mUV.y;
+	Output.mUV = Input.mUV;
 
-	return(Output);
+	return Output;
 
 }
 
@@ -97,14 +96,14 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	if (m_defaultDissolveVal >= CurrentDissolveVal)
 	{
-		DissolveLineSize = (100.f, 1.f, 1.f);
+		DissolveLineSize = float3(100.f, 1.f, 1.f);
 	}
 	else
 	{
-		DissolveLineSize = (0, 0, 0);
+		DissolveLineSize = float3(0, 0, 0);
 	}
 
-	float3 diffuse = (DissolveLineSize * gDissolveLineColor + albedo);
+	float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + albedo.rgb);
 	
 	return float4(diffuse, multiple);
 }

@@ -17,6 +17,8 @@
 #include "BattleEndScene.h"
 #include "ReadyToSortieScene.h"
 #pragma endregion
+#include "SoundManager.h"
+
 
 CInitScene::CInitScene()
 {
@@ -44,7 +46,7 @@ void CInitScene::Free(void)
 void CInitScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-
+	Engine::CSoundManager::GetInstance()->StartSound(L"Elevator.wav", (_uint)Engine::EChannelID::OUTGAME);
 }
 
 void CInitScene::Start(void)
@@ -85,6 +87,20 @@ void CInitScene::FixedUpdate(void)
 void CInitScene::Update(void)
 {
 	__super::Update();
+
+	if(!m_isStaticScene)
+		m_fTempSoundLength += GET_DT;
+
+	if (m_fTempSoundLength >= 2.f)
+	{
+		if (!m_isStaticScene)
+		{
+			Engine::CSoundManager::GetInstance()->PlayBGM(L"Elevator_Loop.wav");
+			m_isStaticScene = true;
+		}
+		m_fTempSoundLength = 0.f;
+	}
+
 	if (m_pLoading->GetFinish())
 	{
 		if (m_selectNextScene)
@@ -94,6 +110,7 @@ void CInitScene::Update(void)
 		else
 		{
 			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"StaticBG");
+			
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();
@@ -153,6 +170,7 @@ void CInitScene::LateUpdate(void)
 void CInitScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	Engine::CSoundManager::GetInstance()->StopAll();
 	delete m_pLoading;
 }
 

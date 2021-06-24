@@ -90,7 +90,8 @@ void CJongScene::Update(void)
 		info.SetStrengthType(HitInfo::Str_Low);
 		info.SetCrowdControlType(HitInfo::CC_None);
 
-		m_pControlTower->HitValkyrie(m_spDummy.get(), m_spKiana.get(), info);
+		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
+		//m_pControlTower->HitValkyrie(m_spDummy.get(), m_spKiana.get(), info);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_V))
@@ -99,8 +100,9 @@ void CJongScene::Update(void)
 		info.SetDamageRate(1.f);
 		info.SetStrengthType(HitInfo::Str_High);
 		info.SetCrowdControlType(HitInfo::CC_None);
-
-		m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
+		
+		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
+		//m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
 	}
 
 	_float3 pos = m_spKiana->GetTransform()->GetPosition();

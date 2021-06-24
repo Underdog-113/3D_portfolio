@@ -402,7 +402,7 @@ bool CFSM_KianaC::CheckAction_BranchAttack()
 
 bool CFSM_KianaC::CheckAction_RunBS_To_Run()
 {
-	if (m_pDM->GetAniTimeline() > Cool_End)
+	if (m_pDM->GetAniTimeline() > Cool_End - 0.25f)
 	{
 		ChangeState(Name_Run);
 		return true;
@@ -444,8 +444,8 @@ void CFSM_KianaC::PlaySound_Effect(const std::wstring & soundName)
 void CFSM_KianaC::PlaySound_Attack_RandomVoice()
 {
 	_uint idx = rand() % 6;
-	if (m_prevVoiceIndex == idx)
-		idx = (m_prevVoiceIndex + 1) % 6;
+	if (m_prevAttackSoundIndex == idx)
+		idx = (m_prevAttackSoundIndex + 1) % 6;
 	
 	switch (idx)
 	{
@@ -471,7 +471,79 @@ void CFSM_KianaC::PlaySound_Attack_RandomVoice()
 		break;
 	}
 
-	m_prevVoiceIndex = idx;
+	m_prevAttackSoundIndex = idx;
+}
+
+void CFSM_KianaC::PlaySound_Attack_RandomRun()
+{
+	_uint idx = rand() % 5;
+	if (m_prevRunSoundIndex == idx)
+		idx = (m_prevRunSoundIndex + 1) % 5;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Effect(Sound_RUN_0);
+		break;
+	case 1:
+		PlaySound_Effect(Sound_RUN_1);
+		break;
+	case 2:
+		PlaySound_Effect(Sound_RUN_2);
+		break;
+	case 3:
+		PlaySound_Effect(Sound_RUN_3);
+		break;
+	case 4:
+		PlaySound_Effect(Sound_RUN_4);
+		break;
+	default:
+		break;
+	}
+
+	m_prevRunSoundIndex = idx;
+}
+
+void CFSM_KianaC::PlaySound_Attack_RandomEvade()
+{
+	_uint idx = rand() % 2;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Effect(Sound_Evade_0);
+		break;
+	case 1:
+		PlaySound_Effect(Sound_Evade_1);
+		break;
+	}
+}
+
+void CFSM_KianaC::PlaySound_Attack_RandomHit()
+{
+	//_uint idx = rand() % 4;
+	//if (m_prevHitSoundIndex == idx)
+	//	idx = (m_prevHitSoundIndex + 1) % 4;
+
+	//switch (idx)
+	//{
+	//case 0:
+	//	PlaySound_Effect(Sound_HIT_0);
+	//	break;
+	//case 1:
+	//	PlaySound_Effect(Sound_HIT_1);
+	//	break;
+	//case 2:
+	//	PlaySound_Effect(Sound_HIT_2);
+	//	break;
+	//case 3:
+	//	PlaySound_Effect(Sound_HIT_3);
+	//	break;
+	//default:
+	//	break;
+	//}
+
+	//m_prevHitSoundIndex = idx;
 }
 
 
@@ -607,6 +679,12 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 	{
 		CreateEffect_Attack1();
 		PlaySound_Attack_RandomVoice();
+
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Ult_Att_0);
+		else
+			PlaySound_Effect(Sound_Attack_1_Effect);
+
 		m_checkEffect = true;
 	}
 
@@ -652,6 +730,13 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 	{
 		CreateEffect_Attack2();
 		m_checkEffect = true;
+		
+		PlaySound_Attack_RandomVoice();
+		
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Ult_Att_1);
+		else
+			PlaySound_Effect(Sound_Attack_2_Effect);
 	}
 
 	if (CheckAction_BranchAttack())
@@ -697,6 +782,13 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 	{
 		CreateEffect_Attack3();
 		m_checkEffect = true;
+
+		PlaySound_Attack_RandomVoice();
+
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Ult_Att_1);
+		else
+			PlaySound_Effect(Sound_Attack_3_Effect);
 	}
 
 	if (CheckAction_Attack(Name_Attack_4))
@@ -725,10 +817,25 @@ void CFSM_KianaC::Attack_3_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3_Branch);
 	m_pStageControlTower->SetInputLock_ByAni(false);
+
+	m_checkEffect = false;
 }
 
 void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 {
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Branch_Atk03)
+	{
+		//CreateEffect_Attack4();
+		m_checkEffect = true;
+
+		PlaySound_Voice(Sound_Branch_Voice_0);
+
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Branch_0);
+		else
+			PlaySound_Effect(Sound_Branch_0);
+	}
+
 	if (m_pDM->GetAniTimeline() > Cool_BranchAttack3to4)
 	{
 		ChangeState(Name_Attack_4_Branch);
@@ -770,6 +877,13 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 	{
 		CreateEffect_Attack4();
 		m_checkEffect = true;
+
+		PlaySound_Attack_RandomVoice();
+
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Ult_Att_2);
+		else
+			PlaySound_Effect(Sound_Attack_4_Effect);
 	}
 
 	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > 0.15f)
@@ -805,10 +919,25 @@ void CFSM_KianaC::Attack_4_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4_Branch);
 	m_pStageControlTower->SetInputLock_ByAni(true);
+
+	m_checkEffect = false;
 }
 
 void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 {
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Branch_Atk04)
+	{
+		//CreateEffect_Attack4();
+		m_checkEffect = true;
+
+		PlaySound_Voice(Sound_Branch_Voice_1);
+
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Branch_1);
+		else
+			PlaySound_Effect(Sound_Branch_1);
+	}
+
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
@@ -848,6 +977,13 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 	{
 		CreateEffect_Attack5();
 		m_checkEffect = true;
+
+		PlaySound_Attack_RandomVoice();
+
+		if (m_pKiana->GetUltraMode())
+			PlaySound_Effect(Sound_Ult_Att_3);
+		else
+			PlaySound_Effect(Sound_Attack_5_Effect);
 	}
 
 
@@ -858,6 +994,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 	if (CheckAction_StandBy_Timeout())
 		return;
+
 }
 
 void CFSM_KianaC::Attack_5_End(void)
@@ -919,6 +1056,7 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
 	m_pStageControlTower->SetInputLock_ByAni(true);
+	PlaySound_Attack_RandomEvade();
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
@@ -942,6 +1080,7 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
 	m_pStageControlTower->SetInputLock_ByAni(true);
+	PlaySound_Attack_RandomEvade();
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
@@ -964,6 +1103,8 @@ void CFSM_KianaC::Hit_H_Init(void)
 void CFSM_KianaC::Hit_H_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Hit_H);
+
+	PlaySound_Attack_RandomHit();
 }
 
 void CFSM_KianaC::Hit_H_Update(float deltaTime)
@@ -987,6 +1128,8 @@ void CFSM_KianaC::Hit_L_Init(void)
 void CFSM_KianaC::Hit_L_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Hit_L);
+
+	PlaySound_Attack_RandomHit();
 }
 
 void CFSM_KianaC::Hit_L_Update(float deltaTime)
@@ -1154,6 +1297,14 @@ void CFSM_KianaC::Run_Enter(void)
 
 void CFSM_KianaC::Run_Update(float deltaTime)
 {
+	m_runSoundTimer += GET_DT;
+	if (m_runSoundTimer > 0.3f)
+	{
+		m_runSoundTimer = 0.f;
+		PlaySound_Attack_RandomRun();
+	}
+
+
 	if (CheckAction_Run_End())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
@@ -1166,6 +1317,7 @@ void CFSM_KianaC::Run_Update(float deltaTime)
 
 void CFSM_KianaC::Run_End(void)
 {
+	m_runSoundTimer = 0.f;
 }
 
 void CFSM_KianaC::RunBS_Init(void)
@@ -1179,6 +1331,13 @@ void CFSM_KianaC::RunBS_Enter(void)
 
 void CFSM_KianaC::RunBS_Update(float deltaTime)
 {
+	m_runSoundTimer += GET_DT;
+	if (m_runSoundTimer > 0.3f)
+	{
+		m_runSoundTimer = 0.f;
+		PlaySound_Attack_RandomRun();
+	}
+
 	if (CheckAction_RunBS_To_Run())
 		return;
 
@@ -1205,6 +1364,7 @@ void CFSM_KianaC::RunStopLeft_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopLeft);
 	m_pStageControlTower->SetInputLock_ByAni(true);
+
 }
 
 void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
@@ -1235,6 +1395,7 @@ void CFSM_KianaC::RunStopRight_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopRight);
 	m_pStageControlTower->SetInputLock_ByAni(true);
+
 }
 
 void CFSM_KianaC::RunStopRight_Update(float deltaTime)
@@ -1264,6 +1425,9 @@ void CFSM_KianaC::Skill_10_Init(void)
 void CFSM_KianaC::Skill_10_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Skill_10);
+
+	PlaySound_Voice(Sound_Ult_Start_Voice);
+	PlaySound_Effect(Sound_Ult_Start);
 }
 
 void CFSM_KianaC::Skill_10_Update(float deltaTime)

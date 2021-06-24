@@ -66,6 +66,8 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst01);
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Laser.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
 		}
 	}
 
