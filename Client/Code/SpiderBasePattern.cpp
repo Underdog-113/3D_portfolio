@@ -58,6 +58,9 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 			SP(Engine::CObject) spMeshEffect
 				= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
 
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_JumpBack.wav", (_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
 
 			spMeshEffect->GetTransform()->SetPosition(mPos);
