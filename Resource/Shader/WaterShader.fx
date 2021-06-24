@@ -6,11 +6,12 @@ float4 g_WorldLightPos;
 float4 g_WorldCameraPos;
 
 float g_fTime;
-float g_fUVSpeed;
+float g_fUVSpeed = 0.1;
 
-float g_WaveHeight = 3;
+float g_WaveHeight = 1.5f;
 float g_WaveFrequency = 10;
-float g_Speed = 2;
+float g_Speed = 5;
+float3 g_LightColor;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -29,7 +30,6 @@ sampler Specular = sampler_state
 	MagFilter = LINEAR;
 	MipFilter = NONE;
 };
-float3 g_LightColor;
 
 struct VS_INPUT
 {
@@ -88,8 +88,8 @@ struct PS_INPUT
 
 float4 PS_MAIN(PS_INPUT Input) : COLOR
 {
-	float4 albedo = tex2D(Diffuse, Input.mUV);
-	float3 diffuse = g_LightColor * albedo.rgb * saturate(Input.mDiffuse);
+	float4 albedo = tex2D(Diffuse, Input.mUV * 5);
+	float3 diffuse = albedo.rgb * saturate(Input.mDiffuse);
 
 	float3 reflection = normalize(Input.mReflection);
 	float3 viewDir = normalize(Input.mViewDir);
@@ -104,9 +104,7 @@ float4 PS_MAIN(PS_INPUT Input) : COLOR
 		specular *= specularIntensity.rgb * g_LightColor;
 	}
 
-	float3 ambient = float3(0.1f, 0.1f, 0.1f) * albedo;
-
-	return float4(ambient + diffuse + specular, 1);
+	return float4(albedo + specular, 1);
 }
 
 
