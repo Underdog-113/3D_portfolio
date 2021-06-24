@@ -5,7 +5,6 @@
 #define Name_EvadeForward			L"EvadeForward"
 #define Name_APPEAR					L"APPEAR"
 #define Name_RUN					L"RUN"
-
 #define Name_VICTORY				L"VICTORY"
 #define Name_Die					L"Die"
 #define Name_STUN					L"STUN"
