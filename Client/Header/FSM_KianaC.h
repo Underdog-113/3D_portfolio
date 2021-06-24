@@ -35,7 +35,6 @@ public:
 	void Start(SP(CComponent) spThis) override;
 
 private:
-	void RegisterAllState();
 	void FixRootMotionOffset(_uint index);
 
 	void CreateEffect(std::wstring name);
@@ -326,5 +325,6 @@ public:
 	//Victory_01
 	//Victory_Idle
 
-
+private:
+	void RegisterAllState();
 };

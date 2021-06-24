@@ -61,8 +61,8 @@ void CJongScene::Start(void)
 	__super::Start();
 	CDamageObjectPool::GetInstance()->Start(this);
 
-	KianaTest();
-	//TheresaTest();
+	//KianaTest();
+	TheresaTest();
 
 	//CollisionDummy();
 	//SickleTest();

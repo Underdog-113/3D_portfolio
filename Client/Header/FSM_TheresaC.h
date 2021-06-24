@@ -16,7 +16,6 @@ public:
 	void Start(SP(CComponent) spThis) override;
 
 private:
-	void RegisterAllState();
 	void FixRootMotionOffset(_uint index);
 
 private: /* Normal Actions */
@@ -211,5 +210,7 @@ public:
 	void APPEAR_Update(float deltaTime);
 	void APPEAR_End(void);
 
+private:
+	void RegisterAllState();
 };
 

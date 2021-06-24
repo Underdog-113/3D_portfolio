@@ -47,81 +47,6 @@ void CFSM_TheresaC::Start(SP(CComponent) spThis)
 	m_curState->DoEnter();
 }
 
-void CFSM_TheresaC::RegisterAllState()
-{
-	Engine::CState* pState;
-
-	CreateState(CFSM_TheresaC, pState, IDLE)
-		AddState(pState, Name_IDLE);
-/*
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-
-	CreateState(CFSM_TheresaC, pState, APPEAR)
-		AddState(pState, Name_APPEAR);
-*/
-}
-
 void CFSM_TheresaC::FixRootMotionOffset(_uint index)
 {
 }
@@ -590,4 +515,78 @@ void CFSM_TheresaC::HIT_L_Update(float deltaTime)
 
 void CFSM_TheresaC::HIT_L_End(void)
 {
+}
+
+void CFSM_TheresaC::RegisterAllState()
+{
+	Engine::CState* pState;
+
+	CreateState(CFSM_TheresaC, pState, IDLE)
+		AddState(pState, Name_IDLE);
+
+	//CreateState(CFSM_TheresaC, pState, RunBS)
+	//AddState(pState, Name_RunBS);
+	//
+	//CreateState(CFSM_TheresaC, pState, EvadeBackward)
+	//AddState(pState, Name_APPEAR);
+	//
+	//CreateState(CFSM_TheresaC, pState, EvadeForward)
+	//AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, RUN)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, VICTORY)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, Die)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, STUN)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, QTE_FY)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, HIT_H)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, HIT_L)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
+
+	CreateState(CFSM_TheresaC, pState, APPEAR)
+	AddState(pState, Name_APPEAR);
 }
