@@ -19,7 +19,6 @@ public:
 	_float4 m_vColor;
 	_float4 m_Light_Pos;
 	_mat    m_mFinalMat;
-	_float  m_fUVSpeed;
 	_float  m_fTime;
 };
 
