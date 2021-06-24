@@ -24,7 +24,8 @@ void CDataManager::Update(void)
 
 void CDataManager::OnDestroy(void)
 {
-	delete (m_captainData);
+	if(m_captainData != nullptr)
+		delete (m_captainData);
 }
 
 CCaptainData * CDataManager::FindCaptainData()
