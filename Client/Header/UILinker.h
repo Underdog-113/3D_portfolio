@@ -12,6 +12,9 @@ public:
 	~CUILinker();
 
 public:
+	void	UpdateLinker		(void);
+
+public:
 	void	PlayerChange		(void);
 	void	PlayerChange_Test	(void);
 	void	PlayerHpSet			(void);

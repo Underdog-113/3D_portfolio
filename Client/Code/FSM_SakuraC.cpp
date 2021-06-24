@@ -369,7 +369,7 @@ void CFSM_SakuraC::RunStopLeft_Init(void)
 void CFSM_SakuraC::RunStopLeft_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopLeft);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_SakuraC::RunStopLeft_Update(float deltaTime)
@@ -389,7 +389,7 @@ void CFSM_SakuraC::RunStopLeft_Update(float deltaTime)
 
 void CFSM_SakuraC::RunStopLeft_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::RunStopRight_Init(void)
@@ -399,7 +399,7 @@ void CFSM_SakuraC::RunStopRight_Init(void)
 void CFSM_SakuraC::RunStopRight_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopRight);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_SakuraC::RunStopRight_Update(float deltaTime)
@@ -419,7 +419,7 @@ void CFSM_SakuraC::RunStopRight_Update(float deltaTime)
 
 void CFSM_SakuraC::RunStopRight_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::EvadeForward_Init(void)
@@ -429,7 +429,7 @@ void CFSM_SakuraC::EvadeForward_Init(void)
 void CFSM_SakuraC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
@@ -442,7 +442,7 @@ void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 
 void CFSM_SakuraC::EvadeForward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::EvadeBackward_Init(void)
@@ -452,7 +452,7 @@ void CFSM_SakuraC::EvadeBackward_Init(void)
 void CFSM_SakuraC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
@@ -466,7 +466,7 @@ void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 
 void CFSM_SakuraC::EvadeBackward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	 m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::RegisterAllState()

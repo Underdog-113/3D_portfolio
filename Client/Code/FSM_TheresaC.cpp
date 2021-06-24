@@ -39,7 +39,7 @@ void CFSM_TheresaC::Awake(void)
 void CFSM_TheresaC::Start(SP(CComponent) spThis)
 {
 	m_pTheresa = static_cast<CTheresa*>(m_pOwner);
-	
+
 	__super::Start(spThis);
 
 	RegisterAllState();
@@ -380,8 +380,8 @@ void CFSM_TheresaC::EvadeBackward_Init(void)
 void CFSM_TheresaC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
-	
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+
 }
 
 void CFSM_TheresaC::EvadeBackward_Update(float deltaTime)
@@ -394,7 +394,7 @@ void CFSM_TheresaC::EvadeBackward_Update(float deltaTime)
 
 void CFSM_TheresaC::EvadeBackward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_TheresaC::EvadeForward_Init(void)
@@ -404,7 +404,7 @@ void CFSM_TheresaC::EvadeForward_Init(void)
 void CFSM_TheresaC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::EvadeForward_Update(float deltaTime)
@@ -417,7 +417,7 @@ void CFSM_TheresaC::EvadeForward_Update(float deltaTime)
 
 void CFSM_TheresaC::EvadeForward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::ATTACK1_Init(void)
@@ -427,7 +427,7 @@ void CFSM_TheresaC::ATTACK1_Init(void)
 void CFSM_TheresaC::ATTACK1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_ATTACK1);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	ResetCheckMembers();
 	//m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
@@ -460,7 +460,7 @@ void CFSM_TheresaC::ATTACK1_Update(float deltaTime)
 
 void CFSM_TheresaC::ATTACK1_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	//m_pKiana->UnActiveAttackBall();
 }
@@ -473,7 +473,7 @@ void CFSM_TheresaC::ATTACK2_Init(void)
 void CFSM_TheresaC::ATTACK2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_ATTACK2);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	//m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 }
@@ -505,7 +505,7 @@ void CFSM_TheresaC::ATTACK2_Update(float deltaTime)
 
 void CFSM_TheresaC::ATTACK2_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	//m_pKiana->UnActiveAttackBall();
 }
@@ -518,7 +518,7 @@ void CFSM_TheresaC::ATTACK3_Init(void)
 void CFSM_TheresaC::ATTACK3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_ATTACK3);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	//m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 
@@ -526,18 +526,18 @@ void CFSM_TheresaC::ATTACK3_Enter(void)
 
 void CFSM_TheresaC::ATTACK3_Update(float deltaTime)
 {
-// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk03)
-// 	{
-// 		CreateEffect_Attack3();
-// 		m_checkEffect = true;
-// 
-// 		PlaySound_Attack_RandomVoice();
-// 
-// 		if (m_pKiana->GetUltraMode())
-// 			PlaySound_Effect(Sound_Ult_Att_1);
-// 		else
-// 			PlaySound_Effect(Sound_Attack_3_Effect);
-// 	}
+	// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk03)
+	// 	{
+	// 		CreateEffect_Attack3();
+	// 		m_checkEffect = true;
+	// 
+	// 		PlaySound_Attack_RandomVoice();
+	// 
+	// 		if (m_pKiana->GetUltraMode())
+	// 			PlaySound_Effect(Sound_Ult_Att_1);
+	// 		else
+	// 			PlaySound_Effect(Sound_Attack_3_Effect);
+	// 	}
 
 	if (CheckAction_Attack(Name_ATTACK4))
 		return;
@@ -551,7 +551,7 @@ void CFSM_TheresaC::ATTACK3_Update(float deltaTime)
 
 void CFSM_TheresaC::ATTACK3_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	//m_pKiana->UnActiveAttackBall();
 }
@@ -564,7 +564,7 @@ void CFSM_TheresaC::ATTACK4_Init(void)
 void CFSM_TheresaC::ATTACK4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_ATTACK4);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	//m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
@@ -588,7 +588,7 @@ void CFSM_TheresaC::ATTACK4_Update(float deltaTime)
 
 void CFSM_TheresaC::ATTACK4_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	//m_pKiana->UnActiveAttackBall();
 }
@@ -872,7 +872,7 @@ void CFSM_TheresaC::RUNSTOPRIGHT_Init(void)
 void CFSM_TheresaC::RUNSTOPRIGHT_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RUNSTOPRIGHT);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::RUNSTOPRIGHT_Update(float deltaTime)
@@ -886,13 +886,13 @@ void CFSM_TheresaC::RUNSTOPRIGHT_Update(float deltaTime)
 		return;
 	if (CheckAction_EvadeForward())
 		return;
-// 	if (CheckAction_Ultra())
-// 		return;
+	// 	if (CheckAction_Ultra())
+	// 		return;
 }
 
 void CFSM_TheresaC::RUNSTOPRIGHT_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::RUNSTOPLEFT_Init(void)
@@ -902,7 +902,7 @@ void CFSM_TheresaC::RUNSTOPLEFT_Init(void)
 void CFSM_TheresaC::RUNSTOPLEFT_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RUNSTOPLEFT);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::RUNSTOPLEFT_Update(float deltaTime)
@@ -922,7 +922,7 @@ void CFSM_TheresaC::RUNSTOPLEFT_Update(float deltaTime)
 
 void CFSM_TheresaC::RUNSTOPLEFT_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::FASTRUN_Init(void)
@@ -999,40 +999,40 @@ void CFSM_TheresaC::RegisterAllState()
 		AddState(pState, Name_IDLE);
 
 	CreateState(CFSM_TheresaC, pState, RunBS)
-	AddState(pState, Name_RunBS);
-	
+		AddState(pState, Name_RunBS);
+
 	CreateState(CFSM_TheresaC, pState, EvadeBackward)
-	AddState(pState, Name_EvadeBackward);
-	
+		AddState(pState, Name_EvadeBackward);
+
 	CreateState(CFSM_TheresaC, pState, EvadeForward)
-	AddState(pState, Name_EvadeForward);
+		AddState(pState, Name_EvadeForward);
 
 	CreateState(CFSM_TheresaC, pState, APPEAR)
-	AddState(pState, Name_APPEAR);
+		AddState(pState, Name_APPEAR);
 
 	CreateState(CFSM_TheresaC, pState, RUN)
-	AddState(pState, Name_Run);
+		AddState(pState, Name_Run);
 
 	CreateState(CFSM_TheresaC, pState, FASTRUN)
-	AddState(pState, Name_FASTRUN);
+		AddState(pState, Name_FASTRUN);
 
 	CreateState(CFSM_TheresaC, pState, RUNSTOPLEFT)
-	AddState(pState, Name_RUNSTOPLEFT);
+		AddState(pState, Name_RUNSTOPLEFT);
 
 	CreateState(CFSM_TheresaC, pState, RUNSTOPRIGHT)
-	AddState(pState, Name_RUNSTOPRIGHT);
+		AddState(pState, Name_RUNSTOPRIGHT);
 
 	CreateState(CFSM_TheresaC, pState, ATTACK1)
-	AddState(pState, Name_ATTACK1);
+		AddState(pState, Name_ATTACK1);
 
 	CreateState(CFSM_TheresaC, pState, ATTACK2)
-	AddState(pState, Name_ATTACK2);
+		AddState(pState, Name_ATTACK2);
 
 	CreateState(CFSM_TheresaC, pState, ATTACK3)
-	AddState(pState, Name_ATTACK3);
+		AddState(pState, Name_ATTACK3);
 
 	CreateState(CFSM_TheresaC, pState, ATTACK4)
-	AddState(pState, Name_ATTACK4);
+		AddState(pState, Name_ATTACK4);
 
 	CreateState(CFSM_TheresaC, pState, CHARGE0)
 		AddState(pState, Name_CHARGE0);

@@ -3,6 +3,7 @@
 
 #include "BattleUiManager.h"
 #include "StageControlTower.h"
+#include "ActorController.h"
 #include "Valkyrie.h"
 #include "Monster.h"
 
@@ -14,6 +15,27 @@ CUILinker::CUILinker()
 
 CUILinker::~CUILinker()
 {
+}
+
+void CUILinker::UpdateLinker(void)
+{
+	// target hp
+
+	// wp skill cool
+	// ult cool
+
+	// player hp
+	PlayerHpSet();
+	// player sp
+	PlayerSpSet();
+
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+		PlayerChange();
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+		PlayerChange_Test();
+
 }
 
 void CUILinker::PlayerChange(void)
@@ -58,14 +80,15 @@ void CUILinker::PlayerSpSet()
 
 void CUILinker::MoveJoyStick()
 {
+	auto pActorController = m_pCT->GetActorController();
 	_ubyte flag;
-	if (m_pCT->GetInputLock_ByAni())
+	if (pActorController->GetInputLock_ByAni())
 	{
-		flag = m_pCT->GetReserveMoveFlag();
+		flag = pActorController->GetReserveMoveFlag();
 	}
 	else
 	{
-		flag = m_pCT->GetMoveFlag();
+		flag = pActorController->GetMoveFlag();
 	}
 
 

@@ -63,9 +63,11 @@ void CJongScene::Start(void)
 	__super::Start();
 	CDamageObjectPool::GetInstance()->Start(this);
 
-	//KianaTest();
+	KianaTest();
 	//TheresaTest();
-	SakuraTest();
+	//m_spTheresa->SetIsEnabled(false);
+	//SakuraTest();
+	//m_spSakura->SetIsEnabled(false);
 
 	//CollisionDummy();
 	//SickleTest();
@@ -166,7 +168,7 @@ void CJongScene::KianaTest()
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spKiana);
 	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 
 	//cam->SetMode(Engine::ECameraMode::TPS);
 
@@ -188,7 +190,7 @@ void CJongScene::TheresaTest()
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spTheresa);
 	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 }
 
 void CJongScene::SakuraTest()
@@ -204,7 +206,7 @@ void CJongScene::SakuraTest()
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spSakura);
 	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 }
 
 void CJongScene::CollisionDummy()

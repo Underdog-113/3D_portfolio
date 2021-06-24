@@ -325,6 +325,7 @@
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
+    <ClInclude Include="..\Header\ActorController.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
@@ -464,6 +465,7 @@
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
+    <ClCompile Include="..\Code\ActorController.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />

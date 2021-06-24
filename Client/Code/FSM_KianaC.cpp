@@ -569,7 +569,7 @@ void CFSM_KianaC::Attack_1_Init(void)
 void CFSM_KianaC::Attack_1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_1);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
@@ -614,7 +614,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_1_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -627,7 +627,7 @@ void CFSM_KianaC::Attack_2_Init(void)
 void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 }
@@ -667,7 +667,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_2_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -680,7 +680,7 @@ void CFSM_KianaC::Attack_3_Init(void)
 void CFSM_KianaC::Attack_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3);
-	m_pStageControlTower->SetInputLock_ByAni(true); 
+	m_pStageControlTower->ActorControl_SetInputLock(true); 
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 }
@@ -717,7 +717,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_3_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -730,7 +730,7 @@ void CFSM_KianaC::Attack_3_Branch_Init(void)
 void CFSM_KianaC::Attack_3_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3_Branch);
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_checkEffect = false;
 }
@@ -763,7 +763,7 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_3_Branch_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Attack_4_Init(void)
@@ -774,7 +774,7 @@ void CFSM_KianaC::Attack_4_Init(void)
 void CFSM_KianaC::Attack_4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
@@ -819,7 +819,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_4_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -832,7 +832,7 @@ void CFSM_KianaC::Attack_4_Branch_Init(void)
 void CFSM_KianaC::Attack_4_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4_Branch);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	m_checkEffect = false;
 }
@@ -863,7 +863,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_4_Branch_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Attack_5_Init(void)
@@ -874,7 +874,7 @@ void CFSM_KianaC::Attack_5_Init(void)
 void CFSM_KianaC::Attack_5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_5);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
@@ -913,7 +913,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_5_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -926,7 +926,7 @@ void CFSM_KianaC::Attack_QTE_Init(void)
 void CFSM_KianaC::Attack_QTE_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_QTE);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
@@ -942,7 +942,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_QTE_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Die_Init(void)
@@ -969,7 +969,7 @@ void CFSM_KianaC::EvadeBackward_Init(void)
 void CFSM_KianaC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
 }
 
@@ -983,7 +983,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 
 void CFSM_KianaC::EvadeBackward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::EvadeForward_Init(void)
@@ -993,7 +993,7 @@ void CFSM_KianaC::EvadeForward_Init(void)
 void CFSM_KianaC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
 }
 
@@ -1007,7 +1007,7 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 
 void CFSM_KianaC::EvadeForward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Hit_H_Init(void)
@@ -1277,7 +1277,7 @@ void CFSM_KianaC::RunStopLeft_Init(void)
 void CFSM_KianaC::RunStopLeft_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopLeft);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
@@ -1297,7 +1297,7 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 
 void CFSM_KianaC::RunStopLeft_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::RunStopRight_Init(void)
@@ -1307,7 +1307,7 @@ void CFSM_KianaC::RunStopRight_Init(void)
 void CFSM_KianaC::RunStopRight_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopRight);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 }
 
@@ -1328,7 +1328,7 @@ void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 
 void CFSM_KianaC::RunStopRight_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Skill_10_Init(void)
