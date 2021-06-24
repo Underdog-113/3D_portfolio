@@ -240,7 +240,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
 	}
 	
-	_float hpMaxSum = 0;
+	 hpMaxSum = 0;
 	for (auto object : m_monsterWhiteHpBar)
 	{
 		object->SetMinValue(hpMaxSum);
