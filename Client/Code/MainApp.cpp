@@ -107,7 +107,7 @@ void CMainApp::Update(void)
 	Engine::CSceneManager::GetInstance()->Update();
 	CButtonManager::GetInstance()->Update();
 
-	
+
 
 	Engine::CCollisionManager::GetInstance()->Update();
 
@@ -220,6 +220,5 @@ void CMainApp::InitStaticPrototype(void)
 void CMainApp::LoadSounds()
 {
 	//Engine::CSoundManager::GetInstance()->LoadSoundFile(L"BGM");
-	/*Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
-	Engine::CSoundManager::GetInstance()->LoadSoundFile(L"UI");*/
+	//Engine::CSoundManager::GetInstance()->LoadSoundFile(L"Kiana");
 }

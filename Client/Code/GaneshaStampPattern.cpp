@@ -66,13 +66,23 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Stamp);
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_StandUp.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
 		}
 	}
 
+	/////////////////////////////////////////////////////////////
 	// 내가 stamp 상태라면 뒤로 이동
+	if (fsm->GetDM()->GetAniCtrl()->GetTimeline() >= 0.3f)
+	{
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
+		Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Stamp.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
+	}
+
 	if (Name_Ganesha_Stamp == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		
 		m_walkReady = false;
 	}
 	// 내가 뒤로 이동 중이라면
@@ -117,7 +127,7 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._41 += (m_atkDis * look.x * 0.4f);
 		m_atkMat._43 += (m_atkDis * look.z * 0.4f);
 
-		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.3f);
+		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.9f);
 		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
 	}
 }

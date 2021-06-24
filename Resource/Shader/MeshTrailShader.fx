@@ -96,12 +96,13 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	float _Hue = 360 * Out.mHSBC.r;
     float _Brightness = Out.mHSBC.g * 2 - 1;
     float _Contrast = Out.mHSBC.b * 2;
-    float _Saturation = Out.mHSBC.a * 2;
+    float _Saturation = Out.mHSBC.a;
 
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
 	float4 outputColor = albedo;
+
 	outputColor.rgb = applyHue(outputColor.rgb, _Hue);
 	outputColor.rgb = (outputColor.rgb - 0.5f) * (_Contrast)+0.5f;
 	outputColor.rgb = outputColor.rgb + _Brightness;

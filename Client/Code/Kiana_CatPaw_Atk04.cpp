@@ -91,11 +91,20 @@ void CKiana_CatPaw_Atk04::Update(void)
 
 	m_tempTimer += GET_DT;
 
-	if (m_tempTimer > m_tempDuration)
+	/*if (m_tempTimer > m_tempDuration)
 	{
 		m_tempTimer = 0.f;
-		SetIsEnabled(false);		
+		SetIsEnabled(false);
+	}*/
+
+	m_fDissolveAlpha -= 1.f * GET_DT;
+
+	if (m_fDissolveAlpha < 0.f)
+	{
+		m_fDissolveAlpha = 1.f;
+		SetIsEnabled(false);
 	}
+
 	_mat rotMat;
 	D3DXMatrixRotationYawPitchRoll(&rotMat, m_spTransform->GetRotation().y, m_spTransform->GetRotation().x, m_spTransform->GetRotation().z);
 	
@@ -114,6 +123,7 @@ void CKiana_CatPaw_Atk04::LateUpdate(void)
 void CKiana_CatPaw_Atk04::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("gAlpha", m_fDissolveAlpha);
 }
 
 void CKiana_CatPaw_Atk04::Render(LPD3DXEFFECT pEffect)

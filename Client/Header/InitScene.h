@@ -31,6 +31,9 @@ public:
 	GETTOR			(CLoading*,				m_pLoading,				nullptr,		Loading)
 	GETTOR			(_bool,					m_selectNextScene,		false,			SelectNextScene)
 	GETTOR			(SP(Engine::CObject),	m_pBackground,			nullptr,		Background)
+
+	_float m_fTempSoundLength = 0.f;
+	_bool m_isStaticScene = false;
 };
 
 #endif

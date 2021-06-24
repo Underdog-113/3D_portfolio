@@ -53,6 +53,7 @@ void COneStageScene::Awake(_int numOfLayers)
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
 	m_pControlTower->SetPhaseControl(new COneStagePhaseControl);
+	m_pControlTower->GetPhaseControl()->SetControlTower(m_pControlTower);
 }
 
 void COneStageScene::Start(void)
@@ -85,7 +86,6 @@ void COneStageScene::Start(void)
 	//spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
 	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 	//m_vSpider.emplace_back(spSpiderClone);
-
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -121,7 +121,7 @@ void COneStageScene::Update(void)
 		spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
 		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
+		//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 		m_spGanesha = spGaneshaClone;
 
