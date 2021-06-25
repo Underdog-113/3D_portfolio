@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\Kiana_Pistol_USP45.h"
+#include "Kiana_Pistol.h"
 
 
-CKiana_Pistol_USP45::CKiana_Pistol_USP45()
+CKiana_Pistol::CKiana_Pistol()
 {
 }
 
 
-CKiana_Pistol_USP45::~CKiana_Pistol_USP45()
+CKiana_Pistol::~CKiana_Pistol()
 {
 	OnDestroy();
 }
 
-SP(CKiana_Pistol_USP45) CKiana_Pistol_USP45::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CKiana_Pistol) CKiana_Pistol::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CKiana_Pistol_USP45) spInstance(new CKiana_Pistol_USP45, Engine::SmartDeleter<CKiana_Pistol_USP45>);
+	SP(CKiana_Pistol) spInstance(new CKiana_Pistol, Engine::SmartDeleter<CKiana_Pistol>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +22,9 @@ SP(CKiana_Pistol_USP45) CKiana_Pistol_USP45::Create(_bool isStatic, Engine::CSce
 	return spInstance;
 }
 
-SP(Engine::CObject) CKiana_Pistol_USP45::MakeClone(void)
+SP(Engine::CObject) CKiana_Pistol::MakeClone(void)
 {
-	SP(CKiana_Pistol_USP45) spClone(new CKiana_Pistol_USP45, Engine::SmartDeleter<CKiana_Pistol_USP45>);
+	SP(CKiana_Pistol) spClone(new CKiana_Pistol, Engine::SmartDeleter<CKiana_Pistol>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
@@ -36,7 +36,7 @@ SP(Engine::CObject) CKiana_Pistol_USP45::MakeClone(void)
 	return spClone;
 }
 
-void CKiana_Pistol_USP45::Awake(void)
+void CKiana_Pistol::Awake(void)
 {
 	__super::Awake();
 	m_dataID = (_int)EDataID::Player;
@@ -50,55 +50,55 @@ void CKiana_Pistol_USP45::Awake(void)
 	m_spTexture		= AddComponent<Engine::CTextureC>();
 }
 
-void CKiana_Pistol_USP45::Start(void)
+void CKiana_Pistol::Start(void)
 {
 	__super::Start();
 }
 
-void CKiana_Pistol_USP45::FixedUpdate(void)
+void CKiana_Pistol::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 }
 
-void CKiana_Pistol_USP45::Update(void)
+void CKiana_Pistol::Update(void)
 {
 	__super::Update();
 }
 
-void CKiana_Pistol_USP45::LateUpdate(void)
+void CKiana_Pistol::LateUpdate(void)
 {
 	__super::LateUpdate();
 }
 
-void CKiana_Pistol_USP45::PreRender(LPD3DXEFFECT pEffect)
+void CKiana_Pistol::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CKiana_Pistol_USP45::Render(LPD3DXEFFECT pEffect)
+void CKiana_Pistol::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CKiana_Pistol_USP45::PostRender(LPD3DXEFFECT pEffect)
+void CKiana_Pistol::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-void CKiana_Pistol_USP45::OnDestroy(void)
+void CKiana_Pistol::OnDestroy(void)
 {
 	__super::OnDestroy();
 }
-void CKiana_Pistol_USP45::OnEnable(void)
+void CKiana_Pistol::OnEnable(void)
 {
 	__super::OnEnable();
 }
 
-void CKiana_Pistol_USP45::OnDisable(void)
+void CKiana_Pistol::OnDisable(void)
 {
 	__super::OnDisable();
 }
 
-void CKiana_Pistol_USP45::SetBasicName(void)
+void CKiana_Pistol::SetBasicName(void)
 {
 }

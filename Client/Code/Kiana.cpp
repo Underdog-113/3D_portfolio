@@ -15,6 +15,8 @@
 #include "Kiana_CatPaw_Atk04.h"
 #include "Kiana_CatPaw_Atk05.h"
 
+#include "Kiana_Pistol.h"
+
 #include "AttackBall.h"
 #include "FSMDefine_Kiana.h"
 
@@ -88,7 +90,7 @@ void CKiana::Start(void)
 	FindRightHand();
 
 	//weapon
-	//CreatePistol();
+	CreatePistol();
 
 	//catpaw
 	CreateCatPaw();
@@ -167,12 +169,6 @@ void CKiana::OnDisable(void)
 	__super::OnDisable();
 }
 
-void CKiana::Update_WeaponTransform(void)
-{
-	//*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
-	//*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
-}
-
 void CKiana::UpdatePivotMatrices(void)
 {
 	if (m_pRightToe_World)
@@ -209,27 +205,11 @@ void CKiana::UpdatePivotMatrices(void)
 
 void CKiana::CreatePistol(void)
 {
-	//m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol_USP45", false, (_uint)ELayerID::Player, L"Weapon_Left");
-	//m_spWeapon_Left->GetTransform()->SetParent(m_spTransform);
-
-	//Engine::CDynamicMeshData* pDM = m_spMesh->GetFirstMeshData_Dynamic();
-	//
-	//m_pLeftHand_Frame = pDM->GetFrameByName("Bip001_Prop2");
-	//m_pLeftHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop2");
-	//m_pLeftHand_World = new _mat;
-	//*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
-
-	//m_spWeapon_Left->GetTransform()->SetOffsetMatrix(m_pLeftHand_World);
-
-	//m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol_USP45", false, (_uint)ELayerID::Player, L"Weapon_Right");
-	//m_spWeapon_Right->GetTransform()->SetParent(m_spTransform);
-
-	//m_pRightHand_Frame = pDM->GetFrameByName("Bip001_Prop1");
-	//m_pRightHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop1");
-	//m_pRightHand_World = new _mat;
-	//*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
-
-	//m_spWeapon_Right->GetTransform()->SetOffsetMatrix(m_pRightHand_World);
+	m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Left");
+	static_cast<CKiana_Pistol*>(m_spWeapon_Left.get())->SetParentMatrix(m_pLeftHand_World);
+	
+	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Right");
+	static_cast<CKiana_Pistol*>(m_spWeapon_Right.get())->SetParentMatrix(m_pRightHand_World);
 }
 
 void CKiana::CreateCatPaw(void)

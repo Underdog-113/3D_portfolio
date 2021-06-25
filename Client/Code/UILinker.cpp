@@ -30,52 +30,150 @@ void CUILinker::UpdateLinker(void)
 	PlayerSpSet();
 
 
-	//if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-	//	PlayerChange();
-
-	//if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-	//	PlayerChange_Test();
-
 }
 
-void CUILinker::PlayerChange(void)
+void CUILinker::SwitchValkyrie(WaitSlot slot, V_Stat::Valkyrie_Type switchIn, V_Stat::Valkyrie_Type switchOut)
 {
-	auto pStat = m_pCT->GetCurrentActor()->GetStat();
-	m_pUIManager->PlayerChange(
-		pStat->GetCurHp() / pStat->GetMaxHp() * 100.f,
-		pStat->GetCurSp() / pStat->GetMaxSp() * 100.f,
-		L"Skill_Kiana_PT_001",
-		L"Skill_Kiana_PT_003",
-		L"Skill_Kiana_PT_004",
-		L"Skill_Kiana_Weapon_09",
-		L"Defalut",
-		L"Defalut");
+	SwitchValkyrie_Actor(switchIn);
+
+	switch (slot)
+	{
+	case CUILinker::Up:
+		SwitchValkyrie_UpSlot(switchOut);
+		break;
+	case CUILinker::Down:
+		SwitchValkyrie_DownSlot(switchOut);
+			break;
+	default:
+		break;
+	}
+	
 }
 
-void CUILinker::PlayerChange_Test(void)
+void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 {
-	auto pStat = m_pCT->GetCurrentActor()->GetStat();
-	m_pUIManager->PlayerChange(
-		pStat->GetCurHp() / pStat->GetMaxHp() * 100.f,
-		pStat->GetCurSp() / pStat->GetMaxSp() * 100.f,
-		L"Skill_Kiana_PT_001",
-		L"Skill_Kiana_PT_001",
-		L"Skill_Kiana_PT_001",
-		L"Skill_Kiana_PT_001",
-		L"Defalut",
-		L"Defalut");
+	CValkyrie* wait1member = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_1].get());
+	V_Stat* stat = wait1member->GetStat();
+
+	switch (switchOut)
+	{
+	case V_Stat::Valkyrie_Type::KIANA:
+		m_pUIManager->WaitingPlayerState(
+			0,
+			L"Kiana_Battle",
+			L"AvatarShengWu",
+			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		break;
+	case V_Stat::Valkyrie_Type::THERESA:
+		m_pUIManager->WaitingPlayerState(
+			0,
+			L"Teresa_Battle",
+			L"AvatarJiXie",
+			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		break;
+	case V_Stat::Valkyrie_Type::SAKURA:
+		m_pUIManager->WaitingPlayerState(
+			0,
+			L"Sakura_Battle",
+			L"AvatarYiNeng",
+			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		break;
+	default:
+		break;
+	}
+}
+
+void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
+{
+	CValkyrie* wait1member = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_1].get());
+	V_Stat* stat = wait1member->GetStat();
+
+	switch (switchOut)
+	{
+	case V_Stat::Valkyrie_Type::KIANA:
+		m_pUIManager->WaitingPlayerState(
+			1,
+			L"Kiana_Battle",
+			L"AvatarShengWu",
+			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		break;
+	case V_Stat::Valkyrie_Type::THERESA:
+		m_pUIManager->WaitingPlayerState(
+			1,
+			L"Teresa_Battle",
+			L"AvatarJiXie",
+			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		break;
+	case V_Stat::Valkyrie_Type::SAKURA:
+		m_pUIManager->WaitingPlayerState(
+			1,
+			L"Sakura_Battle",
+			L"AvatarYiNeng",
+			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		break;
+	default:
+		break;
+	}
+}
+
+
+void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
+{
+	switch (switchIn)
+	{
+	case V_Stat::Valkyrie_Type::KIANA:
+		m_pUIManager->PlayerChange(
+			L"Skill_Kiana_PT_001",
+			L"Skill_Kiana_PT_003",
+			L"Skill_Kiana_PT_004",
+			L"Skill_Kiana_Weapon_09",
+			L"Defalut",
+			L"Defalut");
+		break;
+	case V_Stat::Valkyrie_Type::THERESA:
+		m_pUIManager->PlayerChange(
+			L"Teresa_Battle",
+			L"Teresa_Battle",
+			L"Teresa_Battle",
+			L"Teresa_Battle",
+			L"Defalut",
+			L"Defalut");
+		break;
+	case V_Stat::Valkyrie_Type::SAKURA:
+		m_pUIManager->PlayerChange(
+			L"Sakura_Battle",
+			L"Sakura_Battle",
+			L"Sakura_Battle",
+			L"Sakura_Battle",
+			L"Defalut",
+			L"Defalut");
+		break;
+	default:
+		break;
+	}
+
 }
 
 void CUILinker::PlayerHpSet()
 {
 	auto pStat = m_pCT->GetCurrentActor()->GetStat();
-	m_pUIManager->PlayerHp(pStat->GetCurHp() / pStat->GetMaxHp() * 100.f);
+
+	m_pUIManager->PlayerHpMax(pStat->GetMaxHp());
+	m_pUIManager->PlayerHp(pStat->GetCurHp());
 }
 
 void CUILinker::PlayerSpSet()
 {
 	auto pStat = m_pCT->GetCurrentActor()->GetStat();
-	m_pUIManager->PlayerSp(pStat->GetCurSp() / pStat->GetMaxSp() * 100.f);
+
+	m_pUIManager->PlayerSpMax(pStat->GetMaxSp());
+	m_pUIManager->PlayerSp(pStat->GetCurSp());
 }
 
 void CUILinker::MoveJoyStick()

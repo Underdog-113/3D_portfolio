@@ -50,7 +50,6 @@ public:
 
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
-					void					Update_WeaponTransform(void);
 					void					UpdatePivotMatrices(void);
 
 					void					CreatePistol		(void);

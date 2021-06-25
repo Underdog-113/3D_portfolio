@@ -693,9 +693,6 @@
     <ClInclude Include="..\Header\FSMDefine_Sickle.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Theresa.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
     </ClInclude>
@@ -951,6 +948,9 @@
     <ClInclude Include="..\Header\ClientComponents.h">
       <Filter>98.Include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Pistol.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1129,9 +1129,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\FSM_SickleC.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Theresa.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
@@ -1368,6 +1365,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\SkillActivationC.cpp">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
+        </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Pistol.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
