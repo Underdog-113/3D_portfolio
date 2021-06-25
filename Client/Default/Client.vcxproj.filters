@@ -947,6 +947,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\SkillActivationC.h">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Header\ClientComponents.h">
+      <Filter>98.Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

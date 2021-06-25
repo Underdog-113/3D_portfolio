@@ -33,6 +33,8 @@ private:
 					void TheresaTest();
 					void SakuraTest();
 
+					void SetSceneCamera(SP(Engine::CObject) pTarget);
+
 					void CollisionDummy();
 					void SpiderTest();
 					void SickleTest();

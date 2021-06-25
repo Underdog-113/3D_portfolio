@@ -43,12 +43,14 @@ void CStageControlTower::Update(void)
 
 	m_pActorController->UpdateController();
 
-	if(m_pPhaseControl)
+	if (m_pPhaseControl)
 		m_pPhaseControl->Update();
 
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
-		m_pDealer->HpDown_Valkyrie(m_pCurActor->GetStat(), 33.f);
+	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
+		SwitchValkyrie(Wait_1);
+	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+		SwitchValkyrie(Wait_2);
 }
 
 void CStageControlTower::OnDestroy()
@@ -211,4 +213,45 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 4. 히트 이펙트
 
 	// 5. 사운드
+}
+
+void CStageControlTower::SwitchValkyrie(Squad_Role role)
+{
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
+
+	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
+	_float3 rot = m_pCurActor->GetTransform()->GetRotation();
+	
+	switch (role)
+	{
+	case CStageControlTower::Wait_1:
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_1];
+		m_vSquad[Wait_1] = m_vSquad[Wait_2];
+		m_vSquad[Wait_2] = pSwapValkyrie;
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+	}
+		break;
+	case CStageControlTower::Wait_2:
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_2];
+		m_vSquad[Wait_2] = pSwapValkyrie;
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+	}
+		break;
+	}
+
+	m_pCurActor->GetTransform()->SetPosition(pos);
+	m_pCurActor->GetTransform()->SetRotation(rot);
+
+
+	// 1. 대기 슬롯 이미지 바꿔주고
+	// 2. 아래 발키리 hp, sp 바꿔주고
+	// 3. 스킬 ui도
+
+
+	m_pCurActor->SetIsEnabled(true);
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 }

@@ -282,7 +282,7 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
 	
 	D3DXFRAME* pBip001Frame = pDM->GetRootFrame()->pFrameFirstChild;
-	while (strcmp(pBip001Frame->Name, "Bip001"))
+	while (strcmp(pBip001Frame->Name, "Bip001") && strcmp(pBip001Frame->Name, "Bone001"))
 	{
 		pBip001Frame = pBip001Frame->pFrameFirstChild;
 	}

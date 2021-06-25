@@ -36,8 +36,6 @@ void CDataStore::Awake(void)
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CDataStore::ParsingData, this, std::placeholders::_1, std::placeholders::_2);
 	m_resourcePath = _SOLUTIONDIR L"Resource\\Data";
-
-	
 }
 
 void CDataStore::OnDestroy(void)
@@ -100,6 +98,8 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 
 		while (!readFile.eof() && std::getline(readFile, line))
 		{
+			if (line[0] == L'/' || L' ' || L'\n')
+				continue;
 			_size symbolPos = line.find('=');
 			if (symbolPos != std::wstring::npos)
 			{

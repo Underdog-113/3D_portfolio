@@ -57,8 +57,6 @@ private: /* Special Actions */
 	bool CheckAction_Ultra();
 
 private: /* effect */
-	void CreateEffect(std::wstring name);
-
 	void CreateEffect_Attack1();
 	void CreateEffect_Attack2();
 	void CreateEffect_Attack3();

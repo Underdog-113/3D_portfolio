@@ -16,6 +16,7 @@ SP(Engine::CComponent) CPatternMachineC::MakeClone(Engine::CObject * pObject)
 {
 	SP(CPatternMachineC) spClone(new CPatternMachineC);
 	__super::InitClone(spClone, pObject);
+	spClone->m_vPatterns = m_vPatterns;
 
 	return spClone;
 }
