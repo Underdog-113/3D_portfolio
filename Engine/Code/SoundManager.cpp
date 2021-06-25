@@ -25,6 +25,7 @@ void CSoundManager::OnDestroy(void)
 	m_mapSound.clear();
 	FMOD_System_Release(m_pSystem);
 	FMOD_System_Close(m_pSystem);
+
 }
 
 
@@ -103,6 +104,16 @@ void CSoundManager::StopAll()
 {
 	for (int i = 0; i < (_uint)EChannelID::NumOfChannelID; ++i)
 		FMOD_Channel_Stop(m_pChannelArr[i]);
+}
+
+void CSoundManager::GetChannelFrequency(_uint ID, float * frequency)
+{
+	FMOD_Channel_GetFrequency(m_pChannelArr[ID], frequency);
+}
+
+void CSoundManager::SetChannelFrequency(_uint ID, float frequency)
+{
+	FMOD_Channel_SetFrequency(m_pChannelArr[ID], frequency);
 }
 
 _bool CSoundManager::IsPlaying(_uint ID)

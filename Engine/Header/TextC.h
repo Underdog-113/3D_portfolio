@@ -29,7 +29,6 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	GETTOR_SETTOR(std::wstring, m_font, L"µ¸À½", Font);
 	_TextCom m_textData;
 
 	std::wstring m_message;

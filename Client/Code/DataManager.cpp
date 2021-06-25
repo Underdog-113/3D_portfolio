@@ -14,7 +14,18 @@ IMPLEMENT_SINGLETON(CDataManager)
 void CDataManager::Start()
 {
 	// 함장, 발키리정보 넣어주기
+	m_inStockValkyrieData = new CInStockValkyrieData();
+	m_squadData = new CSquadData();
+
 	CaptainInit();
+	ValkyrieStatusDataListInit(L"투예복백련");
+	ValkyrieStatusDataListInit(L"월하초옹");
+	ValkyrieStatusDataListInit(L"역신무녀");
+	
+	InStockValkyrieInit(L"투예복·백련");
+	InStockValkyrieInit(L"월하초옹");
+	InStockValkyrieInit(L"역신무녀");
+	SquadInit(L"투예복·백련");
 }
 
 void CDataManager::Update(void)
@@ -24,12 +35,25 @@ void CDataManager::Update(void)
 
 void CDataManager::OnDestroy(void)
 {
-	//delete (m_captainData);
+	delete (m_captainData);
 }
 
 CCaptainData * CDataManager::FindCaptainData()
 {
 	return m_captainData;
+}
+
+CValkyrieStatusData * CDataManager::FindInStockValkyrieData(std::wstring keyValue)
+{
+	for (auto* data : m_inStockValkyrieData->GetValkyriesList())
+	{
+		if (data->GetSubName() == keyValue)
+		{
+			return data;
+		}
+	}
+
+	return new CValkyrieStatusData();
 }
 
 CInStockValkyrieData * CDataManager::FindInStockValkyrieData()
@@ -41,7 +65,7 @@ CValkyrieStatusData * CDataManager::FindvalkyrieStatusData(std::wstring keyValue
 {
 	for (auto* data : m_valkyrieStatusDataList)
 	{
-		if (data->GetName() == keyValue)
+		if (data->GetSubName() == keyValue)
 		{
 			return data;
 		}
@@ -126,30 +150,30 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	_int hoesim;
 	_float defense;
 	_float maxExperience;
-	_int rank;
-	_int property;
+	std::wstring rank;
+	std::wstring property;
 	_int maxLevel;
 	std::wstring weaponType;
 	std::wstring partyTextureKey;
 	std::wstring squadTextureKey;
 	std::wstring listTextureKey;
 
-	dataStore->GetValue(false, dataID, objectKey, L"enable", enable);
-	dataStore->GetValue(false, dataID, objectKey, L"Name", name);
-	dataStore->GetValue(false, dataID, objectKey, L"subName", subName);
-	dataStore->GetValue(false, dataID, objectKey, L"maxHp", maxHp);
-	dataStore->GetValue(false, dataID, objectKey, L"maxSp", maxSp);
-	dataStore->GetValue(false, dataID, objectKey, L"damage", damage);
-	dataStore->GetValue(false, dataID, objectKey, L"hoesim", hoesim);
-	dataStore->GetValue(false, dataID, objectKey, L"defense", defense);
-	dataStore->GetValue(false, dataID, objectKey, L"maxExperience", maxExperience);
-	dataStore->GetValue(false, dataID, objectKey, L"rank", rank);
-	dataStore->GetValue(false, dataID, objectKey, L"property", property);
-	dataStore->GetValue(false, dataID, objectKey, L"maxLevel", maxLevel);
-	dataStore->GetValue(false, dataID, objectKey, L"weaponType", weaponType);
-	dataStore->GetValue(false, dataID, objectKey, L"partyTextureKey", partyTextureKey);
-	dataStore->GetValue(false, dataID, objectKey, L"squadTextureKey", squadTextureKey);
-	dataStore->GetValue(false, dataID, objectKey, L"ListTextureKey", listTextureKey);
+	dataStore->GetValue(true, dataID, objectKey, L"enable", enable);
+	dataStore->GetValue(true, dataID, objectKey, L"Name", name);
+	dataStore->GetValue(true, dataID, objectKey, L"subName", subName);
+	dataStore->GetValue(true, dataID, objectKey, L"maxHp", maxHp);
+	dataStore->GetValue(true, dataID, objectKey, L"maxSp", maxSp);
+	dataStore->GetValue(true, dataID, objectKey, L"damage", damage);
+	dataStore->GetValue(true, dataID, objectKey, L"hoesim", hoesim);
+	dataStore->GetValue(true, dataID, objectKey, L"defense", defense);
+	dataStore->GetValue(true, dataID, objectKey, L"maxExperience", maxExperience);
+	dataStore->GetValue(true, dataID, objectKey, L"rank", rank);
+	dataStore->GetValue(true, dataID, objectKey, L"property", property);
+	dataStore->GetValue(true, dataID, objectKey, L"maxLevel", maxLevel);
+	dataStore->GetValue(true, dataID, objectKey, L"weaponType", weaponType);
+	dataStore->GetValue(true, dataID, objectKey, L"partyTextureKey", partyTextureKey);
+	dataStore->GetValue(true, dataID, objectKey, L"squadTextureKey", squadTextureKey);
+	dataStore->GetValue(true, dataID, objectKey, L"ListTextureKey", listTextureKey);
 
 	CValkyrieStatusData* valkyrie = new CValkyrieStatusData();
 	valkyrie->AddValkyrieData(enable, name, subName, maxHp, maxSp, damage, hoesim, defense, maxExperience, rank, property, maxLevel, weaponType, partyTextureKey, squadTextureKey, listTextureKey);
@@ -164,7 +188,7 @@ void CDataManager::ItemInit(std::wstring itemName)
 	std::wstring objectKey = itemName;
 
 	std::wstring name;
-	_int rank;
+	std::wstring rank;
 	std::wstring explanation;
 	std::wstring textureKey;
 
@@ -186,7 +210,7 @@ void CDataManager::WeaponInit(std::wstring weaponName)
 	std::wstring objectKey = weaponName;
 
 	std::wstring name;
-	_int rank;
+	std::wstring rank;
 	_float maxExperience;
 	_int maxLevel;
 	_int damage;
@@ -238,3 +262,11 @@ void CDataManager::InStockValkyrieInit(std::wstring valkyrieName)
 
 	m_inStockValkyrieData->AddValkyrieData(data);
 }
+
+void CDataManager::SquadInit(std::wstring valkyrieName)
+{
+	CValkyrieStatusData* data = FindInStockValkyrieData(valkyrieName);
+
+	m_squadData->AddValkyrieData(data);
+}
+

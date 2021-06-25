@@ -26,7 +26,7 @@ void CShader::Awake(void)
 										shaderPath.c_str(),
 										NULL,
 										NULL,
-										D3DXSHADER_DEBUG,
+										D3DXSHADER_ENABLE_BACKWARDS_COMPATIBILITY,
 										NULL,
 										&m_pEffect,
 										&m_pErrMsg)))

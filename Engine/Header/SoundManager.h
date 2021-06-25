@@ -43,6 +43,7 @@ private:
 	// 사운드 ,채널 객체 및 장치를 관리하는 객체 
 	FMOD_SYSTEM* m_pSystem;
 
+	FMOD_SOUND* m_pSound;
 	//
 	float m_fVolume[(_uint)EChannelID::NumOfChannelID];
 };

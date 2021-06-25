@@ -6,7 +6,8 @@ public:
 	CSquadData();
 	~CSquadData();
 
+	void AddValkyrieData(CValkyrieStatusData* data);
 private:
-	GETTOR_SETTOR(std::list<CValkyrieStatusData>, m_valkyriesList, {}, ValkyriesList);
+	GETTOR(std::vector<CValkyrieStatusData*>, m_valkyriesList, {}, ValkyriesList);
 };
 

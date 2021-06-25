@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "FSM_KianaC.h"
 
-#include "AttackTrail_Client.h"
-#include "ObjectFactory.h"
-#include "State.h"
+#include "SoundManager.h"
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 
-#include "FSMDefine_Kiana.h"
-#include "StageControlTower.h"
 #include "Kiana.h"
+#include "State.h"
+#include "FSMDefine_Kiana.h"
 #include "AttackBall.h"
-#include "SoundManager.h"
+
+#include "AttackTrail_Client.h"
+#include "StageControlTower.h"
 
 CFSM_KianaC::CFSM_KianaC()
 {
@@ -54,175 +54,11 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 	m_curState->DoEnter();
 }
 
-void CFSM_KianaC::RegisterAllState()
-{
-	Engine::CState* pState;
-
-	CreateState(CFSM_KianaC, pState, Appear)
-		AddState(pState, Name_Appear);
-
-	CreateState(CFSM_KianaC, pState, Attack_1)
-		AddState(pState, Name_Attack_1);
-
-	CreateState(CFSM_KianaC, pState, Attack_2)
-		AddState(pState, Name_Attack_2);
-
-	CreateState(CFSM_KianaC, pState, Attack_3)
-		AddState(pState, Name_Attack_3);
-
-	CreateState(CFSM_KianaC, pState, Attack_3_Branch)
-		AddState(pState, Name_Attack_3_Branch);
-
-	CreateState(CFSM_KianaC, pState, Attack_4)
-		AddState(pState, Name_Attack_4);
-
-	CreateState(CFSM_KianaC, pState, Attack_4_Branch)
-		AddState(pState, Name_Attack_4_Branch);
-
-	CreateState(CFSM_KianaC, pState, Attack_5)
-		AddState(pState, Name_Attack_5);
-
-	CreateState(CFSM_KianaC, pState, Attack_QTE)
-		AddState(pState, Name_Attack_QTE);
-
-	CreateState(CFSM_KianaC, pState, Die)
-		AddState(pState, Name_Die);
-
-	CreateState(CFSM_KianaC, pState, EvadeBackward)
-		AddState(pState, Name_EvadeBackward);
-
-	CreateState(CFSM_KianaC, pState, EvadeForward)
-		AddState(pState, Name_EvadeForward);
-
-	CreateState(CFSM_KianaC, pState, Hit_H)
-		AddState(pState, Name_Hit_H);
-
-	CreateState(CFSM_KianaC, pState, Hit_L)
-		AddState(pState, Name_Hit_L);
-
-	CreateState(CFSM_KianaC, pState, Idle_01)
-		AddState(pState, Name_Idle_01);
-
-	CreateState(CFSM_KianaC, pState, Idle_1to2)
-		AddState(pState, Name_Idle_1to2);
-
-	CreateState(CFSM_KianaC, pState, Idle_02)
-		AddState(pState, Name_Idle_02);
-
-	CreateState(CFSM_KianaC, pState, Idle_2to3)
-		AddState(pState, Name_Idle_2to3);
-
-	CreateState(CFSM_KianaC, pState, Idle_03)
-		AddState(pState, Name_Idle_03);
-
-	CreateState(CFSM_KianaC, pState, Idle_3to4)
-		AddState(pState, Name_Idle_3to4);
-
-	CreateState(CFSM_KianaC, pState, Idle_4to5)
-		AddState(pState, Name_Idle_4to5);
-
-	CreateState(CFSM_KianaC, pState, Run)
-		AddState(pState, Name_Run);
-
-	CreateState(CFSM_KianaC, pState, RunBS)
-		AddState(pState, Name_RunBS);
-
-	CreateState(CFSM_KianaC, pState, RunStopLeft)
-		AddState(pState, Name_RunStopLeft);
-
-	CreateState(CFSM_KianaC, pState, RunStopRight)
-		AddState(pState, Name_RunStopRight);
-
-	CreateState(CFSM_KianaC, pState, StandBy)
-		AddState(pState, Name_StandBy);
-
-	CreateState(CFSM_KianaC, pState, Skill_10)
-		AddState(pState, Name_Skill_10);
-}
-
 void CFSM_KianaC::FixRootMotionOffset(_uint index)
 {
 	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
 }
 
-
-void CFSM_KianaC::CreateEffect(std::wstring name)
-{
-	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
-
-	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
-
-	spMeshEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	spMeshEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
-}
-
-void CFSM_KianaC::CreateEffect_Attack1()
-{
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_0");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
-}
-
-void CFSM_KianaC::CreateEffect_Attack2()
-{
-	_float size = 0.5f;
-
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_1");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-}
-
-void CFSM_KianaC::CreateEffect_Attack3()
-{
-	_float size = 0.5f;
-
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_2");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-}
-
-void CFSM_KianaC::CreateEffect_Attack4()
-{
-	_float size = 0.5f;
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_3");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-}
-
-void CFSM_KianaC::CreateEffect_Attack5()
-{
-	_float size = 0.5f;
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_4");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-}
 
 bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float coolTime /*= Cool_Attack*/)
 {
@@ -420,6 +256,84 @@ bool CFSM_KianaC::CheckAction_Ultra()
 	return false;
 }
 
+void CFSM_KianaC::CreateEffect(std::wstring name)
+{
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_12");
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+
+	spMeshEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	spMeshEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
+}
+
+void CFSM_KianaC::CreateEffect_Attack1()
+{
+	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_0");
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
+	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
+}
+
+void CFSM_KianaC::CreateEffect_Attack2()
+{
+	_float size = 0.5f;
+
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_1");
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+}
+
+void CFSM_KianaC::CreateEffect_Attack3()
+{
+	_float size = 0.5f;
+
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_2");
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+}
+
+void CFSM_KianaC::CreateEffect_Attack4()
+{
+	_float size = 0.5f;
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_3");
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+}
+
+void CFSM_KianaC::CreateEffect_Attack5()
+{
+	_float size = 0.5f;
+	auto effect = m_pKiana->CreateEffect(L"K_Trail_4");
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+}
+
 void CFSM_KianaC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
 {
 	TCHAR* name = (TCHAR*)soundName.c_str();
@@ -586,11 +500,11 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 		return;
 	}
 
-	if (Engine::IMKEY_DOWN(StageKey_Test_Emotion))
-	{
-		ChangeState(Name_Idle_01);
-		return;
-	}
+// 	if (Engine::IMKEY_DOWN(StageKey_Test_Emotion))
+// 	{
+// 		ChangeState(Name_Idle_01);
+// 		return;
+// 	}
 
 	if (Engine::IMKEY_DOWN(StageKey_Test_Hit_L))
 	{
@@ -655,7 +569,7 @@ void CFSM_KianaC::Attack_1_Init(void)
 void CFSM_KianaC::Attack_1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_1);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
@@ -700,7 +614,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_1_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -713,7 +627,7 @@ void CFSM_KianaC::Attack_2_Init(void)
 void CFSM_KianaC::Attack_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_2);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 }
@@ -753,7 +667,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_2_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -766,7 +680,7 @@ void CFSM_KianaC::Attack_3_Init(void)
 void CFSM_KianaC::Attack_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3);
-	m_pStageControlTower->SetInputLock_ByAni(true); 
+	m_pStageControlTower->ActorControl_SetInputLock(true); 
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 }
@@ -803,7 +717,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_3_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -816,7 +730,7 @@ void CFSM_KianaC::Attack_3_Branch_Init(void)
 void CFSM_KianaC::Attack_3_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3_Branch);
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_checkEffect = false;
 }
@@ -849,7 +763,7 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_3_Branch_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Attack_4_Init(void)
@@ -860,7 +774,7 @@ void CFSM_KianaC::Attack_4_Init(void)
 void CFSM_KianaC::Attack_4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
@@ -905,7 +819,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_4_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -918,7 +832,7 @@ void CFSM_KianaC::Attack_4_Branch_Init(void)
 void CFSM_KianaC::Attack_4_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_4_Branch);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	m_checkEffect = false;
 }
@@ -949,7 +863,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_4_Branch_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Attack_5_Init(void)
@@ -960,7 +874,7 @@ void CFSM_KianaC::Attack_5_Init(void)
 void CFSM_KianaC::Attack_5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_5);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 }
@@ -999,7 +913,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_5_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
 }
@@ -1012,7 +926,7 @@ void CFSM_KianaC::Attack_QTE_Init(void)
 void CFSM_KianaC::Attack_QTE_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_QTE);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
@@ -1028,7 +942,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 
 void CFSM_KianaC::Attack_QTE_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Die_Init(void)
@@ -1055,7 +969,7 @@ void CFSM_KianaC::EvadeBackward_Init(void)
 void CFSM_KianaC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
 }
 
@@ -1069,7 +983,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 
 void CFSM_KianaC::EvadeBackward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::EvadeForward_Init(void)
@@ -1079,7 +993,7 @@ void CFSM_KianaC::EvadeForward_Init(void)
 void CFSM_KianaC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
 }
 
@@ -1093,7 +1007,7 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 
 void CFSM_KianaC::EvadeForward_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Hit_H_Init(void)
@@ -1363,8 +1277,7 @@ void CFSM_KianaC::RunStopLeft_Init(void)
 void CFSM_KianaC::RunStopLeft_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopLeft);
-	m_pStageControlTower->SetInputLock_ByAni(true);
-
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
@@ -1384,7 +1297,7 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 
 void CFSM_KianaC::RunStopLeft_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::RunStopRight_Init(void)
@@ -1394,7 +1307,7 @@ void CFSM_KianaC::RunStopRight_Init(void)
 void CFSM_KianaC::RunStopRight_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopRight);
-	m_pStageControlTower->SetInputLock_ByAni(true);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 }
 
@@ -1415,7 +1328,7 @@ void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 
 void CFSM_KianaC::RunStopRight_End(void)
 {
-	m_pStageControlTower->SetInputLock_ByAni(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::Skill_10_Init(void)
@@ -1486,4 +1399,90 @@ void CFSM_KianaC::SwitchOut_Update(float deltaTime)
 
 void CFSM_KianaC::SwitchOut_End(void)
 {
+}
+
+void CFSM_KianaC::RegisterAllState()
+{
+	Engine::CState* pState;
+
+	CreateState(CFSM_KianaC, pState, Appear)
+		AddState(pState, Name_Appear);
+
+	CreateState(CFSM_KianaC, pState, Attack_1)
+		AddState(pState, Name_Attack_1);
+
+	CreateState(CFSM_KianaC, pState, Attack_2)
+		AddState(pState, Name_Attack_2);
+
+	CreateState(CFSM_KianaC, pState, Attack_3)
+		AddState(pState, Name_Attack_3);
+
+	CreateState(CFSM_KianaC, pState, Attack_3_Branch)
+		AddState(pState, Name_Attack_3_Branch);
+
+	CreateState(CFSM_KianaC, pState, Attack_4)
+		AddState(pState, Name_Attack_4);
+
+	CreateState(CFSM_KianaC, pState, Attack_4_Branch)
+		AddState(pState, Name_Attack_4_Branch);
+
+	CreateState(CFSM_KianaC, pState, Attack_5)
+		AddState(pState, Name_Attack_5);
+
+	CreateState(CFSM_KianaC, pState, Attack_QTE)
+		AddState(pState, Name_Attack_QTE);
+
+	CreateState(CFSM_KianaC, pState, Die)
+		AddState(pState, Name_Die);
+
+	CreateState(CFSM_KianaC, pState, EvadeBackward)
+		AddState(pState, Name_EvadeBackward);
+
+	CreateState(CFSM_KianaC, pState, EvadeForward)
+		AddState(pState, Name_EvadeForward);
+
+	CreateState(CFSM_KianaC, pState, Hit_H)
+		AddState(pState, Name_Hit_H);
+
+	CreateState(CFSM_KianaC, pState, Hit_L)
+		AddState(pState, Name_Hit_L);
+
+	CreateState(CFSM_KianaC, pState, Idle_01)
+		AddState(pState, Name_Idle_01);
+
+	CreateState(CFSM_KianaC, pState, Idle_1to2)
+		AddState(pState, Name_Idle_1to2);
+
+	CreateState(CFSM_KianaC, pState, Idle_02)
+		AddState(pState, Name_Idle_02);
+
+	CreateState(CFSM_KianaC, pState, Idle_2to3)
+		AddState(pState, Name_Idle_2to3);
+
+	CreateState(CFSM_KianaC, pState, Idle_03)
+		AddState(pState, Name_Idle_03);
+
+	CreateState(CFSM_KianaC, pState, Idle_3to4)
+		AddState(pState, Name_Idle_3to4);
+
+	CreateState(CFSM_KianaC, pState, Idle_4to5)
+		AddState(pState, Name_Idle_4to5);
+
+	CreateState(CFSM_KianaC, pState, Run)
+		AddState(pState, Name_Run);
+
+	CreateState(CFSM_KianaC, pState, RunBS)
+		AddState(pState, Name_RunBS);
+
+	CreateState(CFSM_KianaC, pState, RunStopLeft)
+		AddState(pState, Name_RunStopLeft);
+
+	CreateState(CFSM_KianaC, pState, RunStopRight)
+		AddState(pState, Name_RunStopRight);
+
+	CreateState(CFSM_KianaC, pState, StandBy)
+		AddState(pState, Name_StandBy);
+
+	CreateState(CFSM_KianaC, pState, Skill_10)
+		AddState(pState, Name_Skill_10);
 }
