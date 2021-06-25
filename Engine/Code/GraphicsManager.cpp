@@ -51,7 +51,7 @@ void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
 					  D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-					  D3DXCOLOR(0.f, 0.f, 0.f, 1.f),
+					  D3DXCOLOR(0.f, 1.f, 0.f, 1.f),
 					  1.f, 0);
 
 	GET_DEVICE->BeginScene();
@@ -412,7 +412,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 
 					for (_uint j = 0; j < maxPass; ++j)
 					{
-						pEffect->BeginPass(0);
+						pEffect->BeginPass(j);
 
 						pObject->PreRender(pEffect);
 						pObject->Render(pEffect);
