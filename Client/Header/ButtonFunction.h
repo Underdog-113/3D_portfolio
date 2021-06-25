@@ -21,8 +21,8 @@ public:
 	void ObjectOff();
 
 public:
-	static _int stageValue;
-	static _int squadValue;
+	static _int stageValue; // 출격할 스테이지의 벨류
+	static _int squadValue; // 현재 선택된 스쿼드 맴버의 자리
 private:
 
 };

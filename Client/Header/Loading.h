@@ -2,7 +2,6 @@
 #define LOADING_H
 
 #include "Scene.h"
-
 class CLoading
 {
 public:
@@ -15,8 +14,6 @@ public:
 	static		CLoading*				Create					(Engine::CScene* pNextScene, _bool loadStaticResource = false);
 				void					Free					(void);
 				void					StartLoading			(void);
-
-			
 
 private:
 	GETTOR		(HANDLE,				m_threadHandle,			{},				ThreadHandle)

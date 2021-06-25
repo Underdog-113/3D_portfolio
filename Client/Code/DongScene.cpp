@@ -48,25 +48,6 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
-
-	SP(CScrollViewObject) spScrollView =
-		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
-	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
-	spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
-	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
-
-// 	spScrollView->
-// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
-// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
-// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
-// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
-// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct");
-
-// 	spScrollView->
-// 		AddImageObjectData(0, L"A", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"B", _float3(123, 112, 0), _float2(-40, -30))->
-// 		AddImageObjectData(2, L"S", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"SS", _float3(123, 112, 0), _float2(-40, -30))->
-// 		AddImageObjectData(4, L"SS", _float3(123, 112, 0), _float2(-40, -30));
-
 }
 
 void CDongScene::FixedUpdate(void)

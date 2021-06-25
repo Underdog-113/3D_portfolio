@@ -59,7 +59,7 @@ void CPartySettingScene::Start(void)
 	Load->ButtonLoad(this);
 	Load->ImageLoad(this);
 	Load->SliderLoad(this);
-	//Load->ScrollViewLoad(this);
+	Load->ScrollViewLoad(this);
 	Load->TextLoad(this);
 	Load->CanvasLoad(this);
 	delete(Load);
