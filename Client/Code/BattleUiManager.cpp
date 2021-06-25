@@ -117,7 +117,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_hitsCanvas->AddComponent<CLifeObjectC>();
 
 	m_hitCount = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_HitCount_1").get());
-	// �ؽ�ó ������ ����
+
 
 	m_hitCount->AddComponent<CHitsUiC>();
 	m_hits = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_Hits_2").get());
@@ -277,12 +277,12 @@ void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstr
 	m_waitingPlayerSpBar[1]->SetValue(playerSp2);
 }
 
-void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1)
+void CBattleUiManager::WaitingPlayerState(_uint num, std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1)
 {
-	m_playerIllustration[0]->GetTexture()->ChangeTexture(playerTexture1, 0);
-	m_playerProperty[0]->GetTexture()->ChangeTexture(playerProperty1, 0);
-	m_waitingPlayerHpBar[0]->SetValue(playerHp1);
-	m_waitingPlayerSpBar[0]->SetValue(playerSp1);
+	m_playerIllustration[num]->GetTexture()->ChangeTexture(playerTexture1, 0);
+	m_playerProperty[num]->GetTexture()->ChangeTexture(playerProperty1, 0);
+	m_waitingPlayerHpBar[num]->SetValue(playerHp1);
+	m_waitingPlayerSpBar[num]->SetValue(playerSp1);
 }
 
 void CBattleUiManager::PlayerSkillActivation(_int value)
@@ -290,18 +290,8 @@ void CBattleUiManager::PlayerSkillActivation(_int value)
 	m_skillActivationImage[value - 1]->SetIsEnabled(true);
 }
 
-void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, std::wstring specialSP, std::wstring skillSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, std::wstring specialSP, std::wstring skillSP)
 {
-	// �����ִ³��̶� �����ؾ��Ѵ�.
-	/*
-	1. ���� �̹��� ����
-	2. �Ӽ� ����
-	3. hp, sp����
-	*/
-
-	PlayerHp(hpValue);
-	PlayerSp(spValue);
-
 	m_skillImage[Button_Type::BasicButton]->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
 	m_skillImage[Button_Type::SpecialButton]->GetTexture()->ChangeTexture(buttonUI3);
@@ -317,11 +307,8 @@ void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(true);
 }
 
-void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring specialSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring specialSP)
 {
-	PlayerHp(hpValue);
-	PlayerSp(spValue);
-
 	m_skillImage[Button_Type::BasicButton] ->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
 	m_skillImage[Button_Type::SpecialButton]  ->GetTexture()->ChangeTexture(buttonUI3);
@@ -456,7 +443,6 @@ void CBattleUiManager::BattleEnd()
 
 void CBattleUiManager::skillActivationImageCheck()
 {
-	// 1,2���� spüũ�ؼ� ���ְ� ���ָ��ȴ�.
 	if (m_playerSpBar->GetValue() >= 80 && m_coolTimeSlider[Button_Type::SpecialButton]->GetValue() <= 0)
 		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(true);
 	else
@@ -472,7 +458,6 @@ void CBattleUiManager::monsterHpBarCheck()
 {
 	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
 	{
-		// ����1 �Ͼ����� ���� ���ڿ�������.
 		m_monsterHpCount--;
 
 		for (auto object : m_monsterHpBar)
