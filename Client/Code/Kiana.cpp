@@ -4,7 +4,7 @@
 #include "FSM_KianaC.h"
 #include "ObjectFactory.h"
 #include "DynamicMeshData.h"
-#include "StateMachine.h"
+#include "StateMachineC.h"
 
 #include "StageControlTower.h"
 #include "UILinker.h"
