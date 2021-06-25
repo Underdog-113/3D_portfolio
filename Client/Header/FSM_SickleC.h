@@ -1,5 +1,5 @@
 #pragma once
-#include "StateMachine.h"
+#include "StateMachineC.h"
 
 class CStageControlTower;
 class CFSM_SickleC final : public Engine::CStateMachineC

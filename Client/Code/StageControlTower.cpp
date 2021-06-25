@@ -46,6 +46,12 @@ void CStageControlTower::Update(void)
 	if (m_pPhaseControl)
 		m_pPhaseControl->Update();
 
+	if (m_spCurTarget->GetDeleteThis())
+	{
+		m_spCurTarget.reset();
+		m_spCurTarget = nullptr;
+	}
+
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);

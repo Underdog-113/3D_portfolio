@@ -36,8 +36,6 @@ void CDataStore::Awake(void)
 	__super::Awake();
 	m_fpResourceHandler = std::bind(&CDataStore::ParsingData, this, std::placeholders::_1, std::placeholders::_2);
 	m_resourcePath = _SOLUTIONDIR L"Resource\\Data";
-
-	
 }
 
 void CDataStore::OnDestroy(void)
@@ -88,8 +86,6 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 	std::wstring fullPath = filePath + fileName;
 	readFile.open(fullPath.c_str());
 	
-	if (fileName == L"mapPhaseChanger.ini")
-		int a = 5;
 	if (readFile.is_open())
 	{
 		std::wstring line;
@@ -100,6 +96,8 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 
 		while (!readFile.eof() && std::getline(readFile, line))
 		{
+			if (line[0] == L'/' || line[0] == L' ' || line[0] == L'\n')
+				continue;
 			_size symbolPos = line.find('=');
 			if (symbolPos != std::wstring::npos)
 			{
