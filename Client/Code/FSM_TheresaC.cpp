@@ -753,16 +753,41 @@ void CFSM_TheresaC::JUMP_0_End(void)
 {
 }
 
+void CFSM_TheresaC::SWITCHIN_Init(void)
+{
+}
+
+void CFSM_TheresaC::SWITCHIN_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_SWITCHIN);
+}
+
+void CFSM_TheresaC::SWITCHIN_Update(float deltaTime)
+{
+	if (CheckAction_StandBy_Timeout())
+		return;
+}
+
+void CFSM_TheresaC::SWITCHIN_End(void)
+{
+}
+
 void CFSM_TheresaC::SWITCHOUT_Init(void)
 {
 }
 
 void CFSM_TheresaC::SWITCHOUT_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_SWITCHOUT);
 }
 
 void CFSM_TheresaC::SWITCHOUT_Update(float deltaTime)
 {
+	if (m_pDM->GetAniTimeline() > 0.6)
+	{
+		m_pTheresa->SetIsEnabled(false);
+		return;
+	}
 }
 
 void CFSM_TheresaC::SWITCHOUT_End(void)
@@ -814,22 +839,6 @@ void CFSM_TheresaC::SWITCHINATTACK_FY_Update(float deltaTime)
 }
 
 void CFSM_TheresaC::SWITCHINATTACK_FY_End(void)
-{
-}
-
-void CFSM_TheresaC::SWITCHIN_Init(void)
-{
-}
-
-void CFSM_TheresaC::SWITCHIN_Enter(void)
-{
-}
-
-void CFSM_TheresaC::SWITCHIN_Update(float deltaTime)
-{
-}
-
-void CFSM_TheresaC::SWITCHIN_End(void)
 {
 }
 

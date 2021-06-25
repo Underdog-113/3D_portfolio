@@ -179,6 +179,12 @@ public:
 	void JUMP_0_Update(float deltaTime);
 	void JUMP_0_End(void);
 
+	//SWITCHIN
+	void SWITCHIN_Init(void);
+	void SWITCHIN_Enter(void);
+	void SWITCHIN_Update(float deltaTime);
+	void SWITCHIN_End(void);
+
 	//SWITCHOUT
 	void SWITCHOUT_Init(void);
 	void SWITCHOUT_Enter(void);
@@ -202,12 +208,6 @@ public:
 	void SWITCHINATTACK_FY_Enter(void);
 	void SWITCHINATTACK_FY_Update(float deltaTime);
 	void SWITCHINATTACK_FY_End(void);
-
-	//SWITCHIN
-	void SWITCHIN_Init(void);
-	void SWITCHIN_Enter(void);
-	void SWITCHIN_Update(float deltaTime);
-	void SWITCHIN_End(void);
 
 	//Ult
 	void Ult_Init(void);

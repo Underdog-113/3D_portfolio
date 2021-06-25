@@ -68,6 +68,9 @@ protected:
 	GETTOR			(V_Stat*,						m_pStat,			nullptr,	Stat)
 	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 	
+	GETTOR_SETTOR	(_bool,							m_isWait,			false,		IsWait)
+	
+
 protected:
 	CStageControlTower*			m_pCT = nullptr;
 };

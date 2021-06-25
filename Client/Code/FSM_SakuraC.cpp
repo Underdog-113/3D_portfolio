@@ -469,6 +469,47 @@ void CFSM_SakuraC::EvadeBackward_End(void)
 	 m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
+void CFSM_SakuraC::SwitchIn_Init(void)
+{
+}
+
+void CFSM_SakuraC::SwitchIn_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_switchin);
+}
+
+void CFSM_SakuraC::SwitchIn_Update(float deltaTime)
+{
+	if (CheckAction_StandBy_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::SwitchIn_End(void)
+{
+}
+
+void CFSM_SakuraC::SwitchOut_Init(void)
+{
+}
+
+void CFSM_SakuraC::SwitchOut_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_switchrole);
+}
+
+void CFSM_SakuraC::SwitchOut_Update(float deltaTime)
+{
+	if (m_pDM->GetAniTimeline() > 0.6)
+	{
+		m_pSakura->SetIsEnabled(false);
+		return;
+	}
+}
+
+void CFSM_SakuraC::SwitchOut_End(void)
+{
+}
+
 void CFSM_SakuraC::RegisterAllState()
 {
 	Engine::CState* pState;
@@ -493,4 +534,10 @@ void CFSM_SakuraC::RegisterAllState()
 
 	CreateState(CFSM_SakuraC, pState, EvadeBackward)
 		AddState(pState, Name_EvadeBackward);
+
+	CreateState(CFSM_SakuraC, pState, SwitchIn)
+		AddState(pState, Name_switchin);
+
+	CreateState(CFSM_SakuraC, pState, SwitchOut)
+		AddState(pState, Name_switchrole);
 }

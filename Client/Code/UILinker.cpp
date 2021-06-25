@@ -30,11 +30,11 @@ void CUILinker::UpdateLinker(void)
 	PlayerSpSet();
 
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-		PlayerChange();
+	//if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	//	PlayerChange();
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-		PlayerChange_Test();
+	//if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+	//	PlayerChange_Test();
 
 }
 

@@ -1,4 +1,10 @@
 #pragma once
+
+#define MoveFlag_Left 0x01
+#define MoveFlag_Right 0x02
+#define MoveFlag_Forward 0x04
+#define MoveFlag_Back 0x08
+
 class CActorController
 {
 public:
@@ -15,6 +21,9 @@ private:	/* Actor Move */
 	void RotateCurrentActor();
 
 	void TargetingOn();
+
+private:
+	 
 
 private:
 	Engine::CInputManager*		m_pInput	= nullptr;
