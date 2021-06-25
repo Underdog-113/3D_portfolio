@@ -257,4 +257,9 @@ void CStaticScene::InitValkyriePrototypes(void)
 
 	SP(CTheresa) spTheresaPrototype(CTheresa::Create(true, this));
 	ADD_PROTOTYPE(spTheresaPrototype);
+
+
+
+	SP(CSakura) spSakuraPrototype(CSakura::Create(true, this));
+	ADD_PROTOTYPE(spSakuraPrototype);
 }

@@ -27,7 +27,6 @@ public:
 				void					ChangeScene			(CScene* pScene);
 	virtual		void					InitPrototypes		(void) PURE;
 	virtual		void					InitLights			(void) override;
-
 protected:
 	GETTOR_SETTOR	(CLoading*,			m_pLoading,			nullptr,		Loading)
 };

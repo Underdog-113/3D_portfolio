@@ -11,7 +11,7 @@ CItemData::~CItemData()
 {
 }
 
-void CItemData::AddItemData(std::wstring name, _int rank, std::wstring explanation,	std::wstring textureKey)
+void CItemData::AddItemData(std::wstring name, std::wstring rank, std::wstring explanation,	std::wstring textureKey)
 {
 	m_name = name;
 	m_rank = rank;

@@ -56,7 +56,7 @@ void CYongScene::Start(void)
 			auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 			cam->SetTarget(m_spKiana);
 			cam->SetTargetDist(4.f);
-			CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+			CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 		}
 
 		// cube terrain

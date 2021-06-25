@@ -32,7 +32,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_8").get()));
 
 	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
-	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get())); 
+	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
 
 	m_playerHp = pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerHp").get();
 	m_playerHp->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(-320.0f, 325.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
@@ -117,7 +117,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_hitsCanvas->AddComponent<CLifeObjectC>();
 
 	m_hitCount = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_HitCount_1").get());
-	// ÅØ½ºÃ³ ¿À¸¥ÂÊ Á¤·Ä
+	// ï¿½Ø½ï¿½Ã³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	m_hitCount->AddComponent<CHitsUiC>();
 	m_hits = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_Hits_2").get());
@@ -207,7 +207,7 @@ void CBattleUiManager::KeyPad(_int value)
 		m_keyPad->GetTexture()->SetTexIndex(1);
 		m_keyPad->GetTransform()->SetRotationZ(D3DXToRadian(315));
 		break;
-	case 5: // 
+	case 5: //
 		m_keyPad->GetTexture()->SetTexIndex(0);
 		break;
 	}
@@ -239,8 +239,8 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
 		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
 	}
-	
-	 hpMaxSum = 0;
+
+	hpMaxSum = 0;
 	for (auto object : m_monsterWhiteHpBar)
 	{
 		object->SetMinValue(hpMaxSum);
@@ -292,11 +292,11 @@ void CBattleUiManager::PlayerSkillActivation(_int value)
 
 void CBattleUiManager::PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, std::wstring specialSP, std::wstring skillSP)
 {
-	// À§¿¡ÀÖ´Â³ðÀÌ¶û ½º¿ÒÇØ¾ßÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â³ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½.
 	/*
-	1. ¸ÅÀÎ ÀÌ¹ÌÁö º¯°æ
-	2. ¼Ó¼º º¯°æ
-	3. hp, spº¯°æ
+	1. ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	2. ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+	3. hp, spï¿½ï¿½ï¿½ï¿½
 	*/
 
 	PlayerHp(hpValue);
@@ -456,7 +456,7 @@ void CBattleUiManager::BattleEnd()
 
 void CBattleUiManager::skillActivationImageCheck()
 {
-	// 1,2¹ø¸¸ spÃ¼Å©ÇØ¼­ ²¨ÁÖ°í ÄÑÁÖ¸éµÈ´Ù.
+	// 1,2ï¿½ï¿½ï¿½ï¿½ spÃ¼Å©ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½È´ï¿½.
 	if (m_playerSpBar->GetValue() >= 80 && m_coolTimeSlider[Button_Type::SpecialButton]->GetValue() <= 0)
 		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(true);
 	else
@@ -472,7 +472,7 @@ void CBattleUiManager::monsterHpBarCheck()
 {
 	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
 	{
-		// ¹®Á¦1 ÇÏ¾á»öÀÌ ¤¸¤¤ ºÎÀÚ¿¬½º·´´Ù.
+		// ï¿½ï¿½ï¿½ï¿½1 ï¿½Ï¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		m_monsterHpCount--;
 
 		for (auto object : m_monsterHpBar)
@@ -495,5 +495,3 @@ void CBattleUiManager::monsterHpBarCheck()
 		m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"");
 	}
 }
-
-
