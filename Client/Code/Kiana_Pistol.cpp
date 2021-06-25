@@ -68,6 +68,8 @@ void CKiana_Pistol::Update(void)
 void CKiana_Pistol::LateUpdate(void)
 {
 	__super::LateUpdate();
+	_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
+	m_spTransform->SetPosition(pos);
 }
 
 void CKiana_Pistol::PreRender(LPD3DXEFFECT pEffect)

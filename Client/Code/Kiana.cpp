@@ -154,8 +154,8 @@ void CKiana::OnDestroy(void)
 	delete m_pStat;
 
 	SAFE_DELETE(m_pRightToe_World)
-	delete m_pLeftHand_World; 
-	delete m_pRightHand_World;
+	SAFE_DELETE(m_pLeftHand_World)
+	SAFE_DELETE(m_pRightHand_World)
 	__super::OnDestroy();
 }
 
