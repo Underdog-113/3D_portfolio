@@ -142,7 +142,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 
-	//ForUITest();
+	ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -226,7 +226,7 @@ void COneStageScene::Create_SceneCamera(void)
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
 	cam->SetTargetDist(4.f);
-	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 
 	cam->SetMode(Engine::ECameraMode::TPS);
 }

@@ -50,6 +50,7 @@ public:
 		button->GetTransform()->SetSize(_float3(70.5f, 76, 0.1f));
 		button->SetButtonType(CButton::UP);
 		button->GetTexture()->AddTexture(texture, 0);
+		button->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 		Delegate<> m_functionGate;
 		m_functionGate += std::bind(function, object);

@@ -3,6 +3,7 @@
 #include "MapObject2D.h"
 #include "Monster.h"
 #include "StageControlTower.h"
+#include "PhaseControl.h"
 
 _uint CPhaseChanger::m_s_uniqueID = 0;
 CPhaseChanger::CPhaseChanger()

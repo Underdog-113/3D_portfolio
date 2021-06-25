@@ -98,6 +98,14 @@ void CKiana::Start(void)
 
 	m_pStat = new V_Kiana_Stat;
 	m_pStat->SetupStatus(&stat);
+
+	if (m_isWait)
+	{
+		__super::FixedUpdate();
+		__super::Update();
+		__super::LateUpdate();
+		SetIsEnabled(false);
+	}
 }
 
 void CKiana::FixedUpdate(void)
@@ -144,7 +152,7 @@ void CKiana::OnDestroy(void)
 	delete m_pStat;
 
 	SAFE_DELETE(m_pRightToe_World)
-	delete m_pLeftHand_World;
+	delete m_pLeftHand_World; 
 	delete m_pRightHand_World;
 	__super::OnDestroy();
 }
@@ -254,7 +262,7 @@ void CKiana::CreateCatPaw(void)
 void CKiana::UseUltraCost(void)
 {
 	_float curSp = m_pStat->GetCurSp();
-	curSp -= 10.f * GET_DT;
+	//curSp -= 10.f * GET_DT;
 
 	if (curSp < 0.f)
 	{
@@ -514,7 +522,28 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
 	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader); 
+
+	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
+	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	//spMeshEffect->GetTransform()->AddRotationX(D3DXToRadian(90.f));
+
+	return spMeshEffect;
+}
+
+SP(Engine::CObject) CKiana::CreateEffect(std::wstring name, std::wstring texName1, std::wstring texName2)
+{
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+
+	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 
 	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
 	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());

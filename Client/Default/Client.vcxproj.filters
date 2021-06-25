@@ -49,9 +49,6 @@
     <Filter Include="03.Component">
       <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.TempClass_ForDevelop">
-      <UniqueIdentifier>{6be55b51-6ada-4c3b-80eb-2996112febd6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Component\00.UI">
       <UniqueIdentifier>{6e98ea24-5743-4425-8722-4ede02a61764}</UniqueIdentifier>
     </Filter>
@@ -126,12 +123,6 @@
     </Filter>
     <Filter Include="01.Scene\10.BattleEnd">
       <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.TempClass_ForDevelop\UILinker">
-      <UniqueIdentifier>{eac47758-5e7b-4d2f-a0af-fa0238c2173d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.TempClass_ForDevelop\StatusDealer">
-      <UniqueIdentifier>{1966fe85-0f86-47ae-9684-e6e4f2457d41}</UniqueIdentifier>
     </Filter>
     <Filter Include="98.Include\ClientStructure_Status">
       <UniqueIdentifier>{81dd6d3b-81d0-4830-ab34-47c2f9aafe29}</UniqueIdentifier>
@@ -460,11 +451,29 @@
     <Filter Include="02.Objects\00.ForScene\04.MapObject2D">
       <UniqueIdentifier>{c53797e0-9e70-4a90-b0e3-6e2a229f6a0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.TempClass_ForDevelop\PhaseControl">
+    <Filter Include="10.ControlTower">
+      <UniqueIdentifier>{6be55b51-6ada-4c3b-80eb-2996112febd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\UILinker">
+      <UniqueIdentifier>{eac47758-5e7b-4d2f-a0af-fa0238c2173d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\StatusDealer">
+      <UniqueIdentifier>{1966fe85-0f86-47ae-9684-e6e4f2457d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\PhaseControl">
       <UniqueIdentifier>{81b3c7d2-a80a-4218-984d-4418a121a717}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.TempClass_ForDevelop\PhaseControl\00.OneStage">
+    <Filter Include="10.ControlTower\PhaseControl\00.OneStage">
       <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\06.PartySetting">
+      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
+      <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\ValkyrieController">
+      <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -721,13 +730,13 @@
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StatusDealer.h">
-      <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
+      <Filter>10.ControlTower\StatusDealer</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\UILinker.h">
-      <Filter>97.TempClass_ForDevelop\UILinker</Filter>
+      <Filter>10.ControlTower\UILinker</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StageControlTower.h">
-      <Filter>97.TempClass_ForDevelop</Filter>
+      <Filter>10.ControlTower</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h">
       <Filter>98.Include\ClientStructure_Status</Filter>
@@ -919,10 +928,25 @@
       <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\PhaseControl.h">
-      <Filter>97.TempClass_ForDevelop\PhaseControl</Filter>
+      <Filter>10.ControlTower\PhaseControl</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\OneStagePhaseControl.h">
-      <Filter>97.TempClass_ForDevelop\PhaseControl\00.OneStage</Filter>
+      <Filter>10.ControlTower\PhaseControl\00.OneStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSM_SakuraC.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Sakura.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ActorController.h">
+      <Filter>10.ControlTower\ValkyrieController</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PartySettingManager.h">
+      <Filter>09.Manager\06.PartySetting</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ClientComponents.h">
       <Filter>98.Include</Filter>
@@ -1140,13 +1164,13 @@
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StatusDealer.cpp">
-      <Filter>97.TempClass_ForDevelop\StatusDealer</Filter>
+      <Filter>10.ControlTower\StatusDealer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\UILinker.cpp">
-      <Filter>97.TempClass_ForDevelop\UILinker</Filter>
+      <Filter>10.ControlTower\UILinker</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StageControlTower.cpp">
-      <Filter>97.TempClass_ForDevelop</Filter>
+      <Filter>10.ControlTower</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AttackBall.cpp">
       <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
@@ -1328,10 +1352,22 @@
       <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PhaseControl.cpp">
-      <Filter>97.TempClass_ForDevelop\PhaseControl</Filter>
+      <Filter>10.ControlTower\PhaseControl</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp">
-      <Filter>97.TempClass_ForDevelop\PhaseControl\00.OneStage</Filter>
+      <Filter>10.ControlTower\PhaseControl\00.OneStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FSM_SakuraC.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ActorController.cpp">
+      <Filter>10.ControlTower\ValkyrieController</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PartySettingManager.cpp">
+      <Filter>09.Manager\06.PartySetting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

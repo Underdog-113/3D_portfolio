@@ -22,6 +22,8 @@
 #include "Kiana_CatPaw_Ring_Atk01.h"
 #include "Kiana_Pistol_USP45.h"
 
+#include "Theresa.h"
+
 #include "MO_Dummy.h"
 #include "MO_Sickle.h"
 
@@ -62,12 +64,20 @@ void CJongScene::Start(void)
 	CDamageObjectPool::GetInstance()->Start(this);
 
 	KianaTest();
-	//TheresaTest();
+	TheresaTest();
+	static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
+	SakuraTest();
+	static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
+	m_pControlTower->Start(CStageControlTower::ALL);
+
+	SetSceneCamera(m_spKiana);
 
 	//CollisionDummy();
 	//SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
+
+	FloorTest();
 
 
 	SetupStageUI();
@@ -85,27 +95,34 @@ void CJongScene::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_C))
 	{
-		HitInfo info;
-		info.SetDamageRate(1.f);
-		info.SetStrengthType(HitInfo::Str_Low);
-		info.SetCrowdControlType(HitInfo::CC_None);
+// 		HitInfo info;
+// 		info.SetDamageRate(1.f);
+// 		info.SetStrengthType(HitInfo::Str_Low);
+// 		info.SetCrowdControlType(HitInfo::CC_None);
+// 
+// 		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
+// 		//m_pControlTower->HitValkyrie(m_spDummy.get(), m_spKiana.get(), info);
 
-		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
+		//++idx;
+		m_spTheresa->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->ChangeAniSet(26);
+
 		//m_pControlTower->HitValkyrie(m_spDummy.get(), m_spKiana.get(), info);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_V))
 	{
-		HitInfo info;
-		info.SetDamageRate(1.f);
-		info.SetStrengthType(HitInfo::Str_High);
-		info.SetCrowdControlType(HitInfo::CC_None);
-		
-		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
-		//m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
+// 		HitInfo info;
+// 		info.SetDamageRate(1.f);
+// 		info.SetStrengthType(HitInfo::Str_High);
+// 		info.SetCrowdControlType(HitInfo::CC_None);
+// 		
+// 		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
+// 		//m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
 	}
 
-	_float3 pos = m_spKiana->GetTransform()->GetPosition();
+//	_float3 pos = m_spKiana->GetTransform()->GetPosition();
+
+
 }
 
 void CJongScene::LateUpdate(void)
@@ -147,33 +164,6 @@ void CJongScene::KianaTest()
 
 	m_spKiana = spKianaClone;
 	m_pControlTower->AddSquadMember(m_spKiana);
-	//m_pControlTower->Start(CStageControlTower::WithoutUI);
-	m_pControlTower->Start(CStageControlTower::ALL);
-
-
-	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-	cam->SetTarget(m_spKiana);
-	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-
-	//cam->SetMode(Engine::ECameraMode::TPS);
-
-	// cube terrain
-	{
-		SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-
-
-		spCube->AddComponent<Engine::CCollisionC>()->
-			AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
-
-		spCube->AddComponent<Engine::CDebugC>();
-		spCube->AddComponent<Engine::CShaderC>();
-		spCube->GetTransform()->SetSize(20, 1, 20);
-		spCube->GetTransform()->SetPosition(0, -1.f, 0);
-
-	}
-
-
 }
 
 void CJongScene::TheresaTest()
@@ -184,14 +174,24 @@ void CJongScene::TheresaTest()
 
 	m_spTheresa = spTheresaClone;
 	m_pControlTower->AddSquadMember(m_spTheresa);
-	m_pControlTower->Start(CStageControlTower::WithoutUI);
+}
 
-	spTheresaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+void CJongScene::SakuraTest()
+{
+	SP(Engine::CObject) spSakuraClone = ADD_CLONE(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
 
+	m_spSakura = spSakuraClone;
+	m_pControlTower->AddSquadMember(m_spSakura);
+
+	//spSakuraClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+}
+
+void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
+{
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-	cam->SetTarget(m_spTheresa);
-	cam->SetTargetDist(4.f);
-	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+	cam->SetTarget(pTarget);
+	cam->SetTargetDist(10.f);
+	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 
 void CJongScene::CollisionDummy()
@@ -246,6 +246,25 @@ void CJongScene::GaneshaTest()
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	//m_spGanesha = spGaneshaClone;
+}
+
+void CJongScene::FloorTest()
+{
+	// cube terrain
+	{
+		SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+
+		spCube->AddComponent<Engine::CCollisionC>()->
+			AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
+
+		spCube->AddComponent<Engine::CDebugC>();
+		spCube->AddComponent<Engine::CShaderC>();
+		spCube->GetTransform()->SetSize(20, 1, 20);
+		spCube->GetTransform()->SetPosition(0, -1.f, 0);
+
+	}
+
 }
 
 

@@ -12,6 +12,8 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+#include "PartySettingManager.h"
+
 CPartySettingScene::CPartySettingScene()
 {
 }
@@ -20,6 +22,7 @@ CPartySettingScene::CPartySettingScene()
 CPartySettingScene::~CPartySettingScene()
 {
 }
+
 
 CClientScene* CPartySettingScene::Create(void)
 {
@@ -56,12 +59,12 @@ void CPartySettingScene::Start(void)
 	Load->ButtonLoad(this);
 	Load->ImageLoad(this);
 	Load->SliderLoad(this);
-	Load->ScrollViewLoad(this);
+	//Load->ScrollViewLoad(this);
+	Load->TextLoad(this);
 	Load->CanvasLoad(this);
 	delete(Load);
 
-	// (미완성)스크롤 뷰 예제
-
+	CPartySettingManager::GetInstance()->Start(this);
 }
 
 void CPartySettingScene::FixedUpdate(void)
@@ -72,6 +75,7 @@ void CPartySettingScene::FixedUpdate(void)
 void CPartySettingScene::Update(void)
 {
 	__super::Update();
+	CPartySettingManager::GetInstance()->Update();
 }
 
 void CPartySettingScene::LateUpdate(void)
@@ -83,6 +87,7 @@ void CPartySettingScene::LateUpdate(void)
 void CPartySettingScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	CPartySettingManager::GetInstance()->DestroyInstance();
 }
 
 void CPartySettingScene::OnEnable(void)

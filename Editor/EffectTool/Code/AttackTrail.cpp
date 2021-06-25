@@ -37,6 +37,7 @@ SP(Engine::CObject) CAttackTrail::MakeClone()
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 
+
 	return spClone;
 }
 
@@ -102,7 +103,8 @@ void CAttackTrail::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
-	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	/*pEffect->SetFloat("gAlpha", m_fTrailAlpha);*/
 }
 
 void CAttackTrail::PostRender(LPD3DXEFFECT pEffect)

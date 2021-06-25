@@ -48,14 +48,24 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
-	//ObjectPool
-	CDamageObjectPool::GetInstance()->Start(this);
 
-	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+	SP(CScrollViewObject) spScrollView =
+		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
+	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
+	spScrollView->GetTransform()->SetSize(_float3(500, 500, 0));
+	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
 
-	spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
-	spEmpty->GetTransform()->SetPosition(_float3(0, 0, 0));
+// 	spScrollView->
+// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
+// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
+// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
+// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct")->
+// 		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction(), L"SpotAct");
+
+// 	spScrollView->
+// 		AddImageObjectData(0, L"A", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"B", _float3(123, 112, 0), _float2(-40, -30))->
+// 		AddImageObjectData(2, L"S", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"SS", _float3(123, 112, 0), _float2(-40, -30))->
+// 		AddImageObjectData(4, L"SS", _float3(123, 112, 0), _float2(-40, -30));
 
 }
 
@@ -68,8 +78,6 @@ void CDongScene::Update(void)
 {
 	__super::Update();
 	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
-	spEmpty->GetTransform()->AddPositionX(0);
-	CDamageObjectPool::GetInstance()->AddDamage(spEmpty.get(), _float3(36, 51, 0), 36, 80.0f, 10, 123456789, L"Blue");
 }
 
 void CDongScene::LateUpdate(void)

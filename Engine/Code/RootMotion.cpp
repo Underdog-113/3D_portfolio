@@ -115,7 +115,7 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	if (!m_pIsFixRootMotionOffsets[pAniCtrl->GetFakeIndex()])
 	{
 		// none fix
-		pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod() * 0.01, NULL);
+		pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod() * 0.015, NULL);
 		pDM->UpdateFrame();
 		_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
 		m_animStartOffset = rootMotionPos;
@@ -127,7 +127,6 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	pAniCtrl->PlayFake();
 	pDM->UpdateFrame();
 	_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
-
 	float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
 	_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
 	moveAmount.y = 0.f;
@@ -173,7 +172,13 @@ _float3 CRootMotion::GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pD
 	_mat makeMeshLookAtMe;
 	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
 	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
-	_mat rootChildCombMat = pDM->GetRootFrame()->pFrameFirstChild->TransformationMatrix * rootCombMat;
+
+	D3DXFRAME* pBip001Frame = pDM->GetRootFrame()->pFrameFirstChild;
+	while (strcmp(pBip001Frame->Name, "Bip001"))
+	{
+		pBip001Frame = pBip001Frame->pFrameFirstChild;
+	}
+	_mat rootChildCombMat = pBip001Frame->TransformationMatrix * rootCombMat;
 
 	return _float3(
 		rootChildCombMat._41,

@@ -8,6 +8,6 @@ public:
 
 	void AddValkyrieData(CValkyrieStatusData* data);
 private:
-	GETTOR(std::list<CValkyrieStatusData*>, m_valkyriesList, {}, ValkyriesList);
+	GETTOR(std::vector<CValkyrieStatusData*>, m_valkyriesList, {}, ValkyriesList);
 };
 

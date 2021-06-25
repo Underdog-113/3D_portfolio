@@ -10,6 +10,8 @@
 
 #include "UILinker.h"
 #include "StatusDealer.h"
+#include "ActorController.h"
+#include "PhaseControl.h"
 
 IMPLEMENT_SINGLETON(CStageControlTower)
 
@@ -20,27 +22,35 @@ void CStageControlTower::Awake(void)
 
 void CStageControlTower::Start(CreateMode mode)
 {
-	m_pInput = Engine::CInputManager::GetInstance();
-
 	m_mode = mode;
 	if (m_mode != WithoutUI)
 		m_pLinker = new CUILinker;
+	m_pActorController = new CActorController;
 	m_pDealer = new CStatusDealer;
+
 
 	if (m_mode != WithoutUI)
 		m_pLinker->SetControlTower(this);
+	m_pActorController->SetControlTower(this);
 	m_pDealer->SetControlTower(this);
 }
 
 
 void CStageControlTower::Update(void)
 {
-	MoveControl();
 	if (m_mode != WithoutUI)
-		StageUIControl();
+		m_pLinker->UpdateLinker();
 
-	if(m_pPhaseControl)
+	m_pActorController->UpdateController();
+
+	if (m_pPhaseControl)
 		m_pPhaseControl->Update();
+
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
+		SwitchValkyrie(Wait_1);
+	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+		SwitchValkyrie(Wait_2);
 }
 
 void CStageControlTower::OnDestroy()
@@ -49,6 +59,7 @@ void CStageControlTower::OnDestroy()
 	{
 		SAFE_DELETE(m_pLinker)
 	}
+	SAFE_DELETE(m_pActorController)
 	SAFE_DELETE(m_pDealer)
 	SAFE_DELETE(m_pPhaseControl)
 }
@@ -67,325 +78,14 @@ void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
 	m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
 }
 
-
-void CStageControlTower::MoveControl()
+void CStageControlTower::ActorControl_SetCurrentMainCam(SP(Engine::CCamera) pCam)
 {
-	if (m_inputLock_ByAni)
-	{
-		ReserveMoveOrder();
-	}
-	else
-	{
-		if (!CheckMoveOrder())
-			return;
-	}
-
-	if (!m_rotateLock)
-	{
-		RotateCurrentActor();
-	}
+	m_pActorController->SetCurrentMainCam(pCam);
 }
 
-bool CStageControlTower::CheckMoveOrder()
+void CStageControlTower::ActorControl_SetInputLock(bool lock)
 {
-	bool isMove = false;
-
-	// up
-	if (m_pInput->KeyUp(StageKey_Move_Left))
-	{
-		m_moveFlag &= ~MoveFlag_Left;
-		
-	}
-	if (m_pInput->KeyUp(StageKey_Move_Right))
-	{
-		m_moveFlag &= ~MoveFlag_Right;
-		
-	}
-	if (m_pInput->KeyUp(StageKey_Move_Forward))
-	{
-		m_moveFlag &= ~MoveFlag_Forward;
-		
-	}
-	if (m_pInput->KeyUp(StageKey_Move_Back))
-	{
-		m_moveFlag &= ~MoveFlag_Back;
-		
-	}
-
-	// down
-	if (m_pInput->KeyPress(StageKey_Move_Left))
-	{
-		m_moveFlag &= ~MoveFlag_Right;
-		m_moveFlag |= MoveFlag_Left;
-		
-	}
-	if (m_pInput->KeyPress(StageKey_Move_Right))
-	{
-		m_moveFlag |= MoveFlag_Right;
-		m_moveFlag &= ~MoveFlag_Left;
-		
-	}
-
-	if (m_pInput->KeyPress(StageKey_Move_Forward))
-	{
-		m_moveFlag |= MoveFlag_Forward;
-		m_moveFlag &= ~MoveFlag_Back;
-		
-	}
-	if (m_pInput->KeyPress(StageKey_Move_Back))
-	{
-		m_moveFlag &= ~MoveFlag_Forward;
-		m_moveFlag |= MoveFlag_Back;
-		
-	}
-
-	if (m_mode != WithoutUI)
-		m_pLinker->MoveJoyStick();	// ui interact
-
-	if (!m_moveFlag)
-		return false;
-	if (m_rotateByTarget)
-		return true;
-
-	m_moveOrderDir = ZERO_VECTOR;
-
-	if (m_moveFlag & MoveFlag_Left)
-	{
-		_float3 right = m_spCurMainCam->GetTransform()->GetRight();
-		right = _float3(right.x, 0.f, right.z);
-		D3DXVec3Normalize(&right, &right);
-		m_moveOrderDir -= right;
-	}
-
-	if (m_moveFlag & MoveFlag_Right)
-	{
-		_float3 right = m_spCurMainCam->GetTransform()->GetRight();
-		right = _float3(right.x, 0.f, right.z);
-		D3DXVec3Normalize(&right, &right);
-		m_moveOrderDir += right;
-	}
-
-	if (m_moveFlag & MoveFlag_Forward)
-	{
-		_float3 forward = m_spCurMainCam->GetTransform()->GetForward();
-		forward = _float3(forward.x, 0.f, forward.z);
-		D3DXVec3Normalize(&forward, &forward);
-		m_moveOrderDir += forward;
-	}
-
-	if (m_moveFlag & MoveFlag_Back)
-	{
-		_float3 forward = m_spCurMainCam->GetTransform()->GetForward();
-		forward = _float3(forward.x, 0.f, forward.z);
-		D3DXVec3Normalize(&forward, &forward);
-		m_moveOrderDir -= forward;
-
-	}
-
-	m_moveOrderDir.y = 0.f;
-	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
-
-	if (m_prevMoveFlag != m_moveFlag)
-		m_rotateLock = false;
-
-	m_prevMoveFlag = m_moveFlag;
-	return true;
-}
-
-void CStageControlTower::ReserveMoveOrder()
-{
-	bool isMove = false;
-
-	// up
-	if (m_pInput->KeyUp(StageKey_Move_Left))
-	{
-		m_reserveMoveFlag &= ~MoveFlag_Left;		
-	}
-	if (m_pInput->KeyUp(StageKey_Move_Right))
-	{
-		m_reserveMoveFlag &= ~MoveFlag_Right;		
-	}
-	if (m_pInput->KeyUp(StageKey_Move_Forward))
-	{
-		m_reserveMoveFlag &= ~MoveFlag_Forward;		
-	}
-	if (m_pInput->KeyUp(StageKey_Move_Back))
-	{
-		m_reserveMoveFlag &= ~MoveFlag_Back;
-	}
-
-	// down
-	if (m_pInput->KeyPress(StageKey_Move_Left))
-	{
-		m_reserveMoveFlag &= ~MoveFlag_Right;
-		m_reserveMoveFlag |= MoveFlag_Left;		
-	}
-	if (m_pInput->KeyPress(StageKey_Move_Right))
-	{
-		m_reserveMoveFlag |= MoveFlag_Right;
-		m_reserveMoveFlag &= ~MoveFlag_Left;		
-	}
-
-	if (m_pInput->KeyPress(StageKey_Move_Forward))
-	{
-		m_reserveMoveFlag |= MoveFlag_Forward;
-		m_reserveMoveFlag &= ~MoveFlag_Back;		
-	}
-	if (m_pInput->KeyPress(StageKey_Move_Back))
-	{
-		m_reserveMoveFlag &= ~MoveFlag_Forward;
-		m_reserveMoveFlag |= MoveFlag_Back;		
-	}
-
-	if (m_mode != WithoutUI)
-		m_pLinker->MoveJoyStick();	// ui interact
-
-	if (!m_reserveMoveFlag)
-		return;
-	if (m_rotateByTarget)
-		return;
-
-	m_reserveMoveOrderDir = ZERO_VECTOR;
-
-	if (m_reserveMoveFlag & MoveFlag_Left)
-	{
-		_float3 right = m_spCurMainCam->GetTransform()->GetRight();
-		right = _float3(right.x, 0.f, right.z);
-		D3DXVec3Normalize(&right, &right);
-		m_reserveMoveOrderDir -= right;
-	}
-
-	if (m_reserveMoveFlag & MoveFlag_Right)
-	{
-		_float3 right = m_spCurMainCam->GetTransform()->GetRight();
-		right = _float3(right.x, 0.f, right.z);
-		D3DXVec3Normalize(&right, &right);
-		m_reserveMoveOrderDir += right;
-	}
-
-	if (m_reserveMoveFlag & MoveFlag_Forward)
-	{
-		_float3 forward = m_spCurMainCam->GetTransform()->GetForward();
-		forward = _float3(forward.x, 0.f, forward.z);
-		D3DXVec3Normalize(&forward, &forward);
-		m_reserveMoveOrderDir += forward;
-	}
-
-	if (m_reserveMoveFlag & MoveFlag_Back)
-	{
-		_float3 forward = m_spCurMainCam->GetTransform()->GetForward();
-		forward = _float3(forward.x, 0.f, forward.z);
-		D3DXVec3Normalize(&forward, &forward);
-		m_reserveMoveOrderDir -= forward;
-
-	}
-
-	m_reserveMoveOrderDir.y = 0.f;
-	D3DXVec3Normalize(&m_reserveMoveOrderDir, &m_reserveMoveOrderDir);
-
-}
-
-void CStageControlTower::RotateCurrentActor()
-{
-	SP(Engine::CTransformC) pActorTransform = m_pCurActor->GetTransform();
-	
-	float rotSpeedRate = m_rotSpeedHighRate;
-
-	_float3 actorForward = pActorTransform->GetForward();
-	actorForward = _float3(actorForward.x, 0.f, actorForward.z);
-	float angleSynchroRate = D3DXVec3Dot(&m_moveOrderDir, &actorForward);
-
-	if (angleSynchroRate > 0.95f)
-		rotSpeedRate = m_rotSpeedLowRate;
-
-	_float3 rotAxis = { 0.f, 0.f, 0.f };
-	D3DXVec3Cross(&rotAxis, &actorForward, &m_moveOrderDir);
-	D3DXVec3Normalize(&rotAxis, &rotAxis);
-	
-	if (rotAxis.y > 0.f)
-		m_pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_DT);
-	else
-		m_pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
-
-
-	if (angleSynchroRate > 0.99f)
-	{
-		if (rotAxis.y > 0.f)
-			m_pCurActor->GetTransform()->AddRotationY(D3DXToRadian(0.9f));
-		else
-			m_pCurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
-
-		m_rotateLock = true;
-		m_rotateByTarget = false;
-	}
-
-}
-
-void CStageControlTower::SetInputLock_ByAni(bool lock)
-{
-	m_inputLock_ByAni = lock;
-	
-	if (lock)
-	{
-		// start attack
-		if (m_moveFlag)
-		{
-			//move
-			m_reserveMoveFlag = m_moveFlag;
-			m_prevMoveFlag = m_moveFlag;
-		}
-		else
-		{
-			//stop
-			m_reserveMoveFlag = m_prevMoveFlag;
-			m_prevMoveFlag = 0;
-		}
-	}
-	else
-	{
-		if (m_reserveMoveFlag)
-		{
-			if (m_prevMoveFlag != m_reserveMoveFlag)
-			{
-				// move
-				m_rotateLock = false;
-
-				m_moveFlag = m_reserveMoveFlag;
-				m_moveOrderDir = m_reserveMoveOrderDir;
-			}
-		}
-		else
-		{
-			// stop
-			m_rotateLock = true;
-			m_moveFlag = 0;
-			m_prevMoveFlag = 0;
-		}
-	}
-}
-
-void CStageControlTower::StageUIControl()
-{
-	// target hp
-
-	// wp skill cool
-	// ult cool
-
-	// player hp
-	m_pLinker->PlayerHpSet();
-	// player sp
-	m_pLinker->PlayerSpSet();
-
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-		m_pLinker->PlayerChange();
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-		m_pLinker->PlayerChange_Test();
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
-		m_pDealer->HpDown_Valkyrie(m_pCurActor->GetStat(), 33.f);
-
+	m_pActorController->SetInputLock_ByAni(lock);
 }
 
 void CStageControlTower::FindTarget()
@@ -429,16 +129,12 @@ void CStageControlTower::FindTarget()
 
 	if (m_spCurTarget)
 	{
+		/// dkdkdkdkkd
+
+
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
 		
-		m_rotateLock = false;
-		m_rotateByTarget = true;
-		_float3 targetPos = m_spCurTarget->GetTransform()->GetPosition();
-		targetPos.y = 0.f;
-		m_moveOrderDir = targetPos - valkyriePos;
-		D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
-
 		// ui interaction
 		m_pLinker->OnTargetMarker();
 	}
@@ -517,4 +213,45 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 4. 히트 이펙트
 
 	// 5. 사운드
+}
+
+void CStageControlTower::SwitchValkyrie(Squad_Role role)
+{
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
+
+	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
+	_float3 rot = m_pCurActor->GetTransform()->GetRotation();
+	
+	switch (role)
+	{
+	case CStageControlTower::Wait_1:
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_1];
+		m_vSquad[Wait_1] = m_vSquad[Wait_2];
+		m_vSquad[Wait_2] = pSwapValkyrie;
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+	}
+		break;
+	case CStageControlTower::Wait_2:
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_2];
+		m_vSquad[Wait_2] = pSwapValkyrie;
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+	}
+		break;
+	}
+
+	m_pCurActor->GetTransform()->SetPosition(pos);
+	m_pCurActor->GetTransform()->SetRotation(rot);
+
+
+	// 1. 대기 슬롯 이미지 바꿔주고
+	// 2. 아래 발키리 hp, sp 바꿔주고
+	// 3. 스킬 ui도
+
+
+	m_pCurActor->SetIsEnabled(true);
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 }

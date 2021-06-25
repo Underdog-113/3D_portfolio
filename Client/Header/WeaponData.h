@@ -6,7 +6,7 @@ public:
 	~CWeaponData();
 
 	void AddWeaponData(std::wstring name,
-		_int rank,
+		std::wstring rank,
 		_float maxExperience,
 		_int maxLevel,
 		_int damage,
@@ -21,7 +21,7 @@ public:
 
 private:
 	GETTOR_SETTOR(std::wstring, m_name, L"", Name);
-	GETTOR_SETTOR(_int, m_rank, 0, Rank);
+	GETTOR_SETTOR(std::wstring, m_rank, 0, Rank);
 	GETTOR_SETTOR(_float, m_experience, 0, Experience);
 	GETTOR_SETTOR(_float, m_maxExperience, 0, MaxExperience);
 	GETTOR_SETTOR(_int, m_level, 0, Level);
