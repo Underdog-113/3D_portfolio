@@ -46,7 +46,7 @@ void CStageControlTower::Update(void)
 	if (m_pPhaseControl)
 		m_pPhaseControl->Update();
 
-	if (m_spCurTarget->GetDeleteThis())
+	if (m_spCurTarget && m_spCurTarget->GetDeleteThis())
 	{
 		m_spCurTarget.reset();
 		m_spCurTarget = nullptr;

@@ -68,7 +68,7 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->WaitingPlayerState(
 			0,
-			L"Theresa_Battle",
+			L"Teresa_Battle",
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
