@@ -86,8 +86,6 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 	std::wstring fullPath = filePath + fileName;
 	readFile.open(fullPath.c_str());
 	
-	if (fileName == L"mapPhaseChanger.ini")
-		int a = 5;
 	if (readFile.is_open())
 	{
 		std::wstring line;
@@ -98,7 +96,7 @@ void CDataStore::ParsingData(std::wstring filePath, std::wstring fileName)
 
 		while (!readFile.eof() && std::getline(readFile, line))
 		{
-			if (line[0] == L'/' || L' ' || L'\n')
+			if (line[0] == L'/' || line[0] == L' ' || line[0] == L'\n')
 				continue;
 			_size symbolPos = line.find('=');
 			if (symbolPos != std::wstring::npos)
