@@ -335,7 +335,7 @@ void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
 		spScrollView->GetTransform()->SetPosition(pos);
 		spScrollView->GetTransform()->SetPositionZ(sortLayer);
 		spScrollView->GetTransform()->SetSize(size);
-		spScrollView->GetTexture()->AddTexture(textureKey, 0);
+		//spScrollView->GetTexture()->ChangeTexture(textureKey);
 		spScrollView->AddScrollViewData(column, distanceXY, offSet);
 	}
 }

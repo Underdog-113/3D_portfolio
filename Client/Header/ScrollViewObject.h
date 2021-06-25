@@ -42,14 +42,14 @@ public:
 	CScrollViewObject* AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset);
 
 	template<typename Function, typename Object>
-	CScrollViewObject* AddButtonObjectData(Function function, Object object, std::wstring texture)
+	CScrollViewObject* AddButtonObjectData(Function function, Object object, _float2 size, std::wstring name, std::wstring texture1, std::wstring texture2)
 	{
 		SP(CButton) button =
-			std::dynamic_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, L"0"));
-		button->GetTransform()->SetPosition(_float3(300, 0, 0.0f));
-		button->GetTransform()->SetSize(_float3(70.5f, 76, 0.1f));
+			std::dynamic_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
+		button->GetTransform()->SetSize(_float3(size.x, size.y, 0.0f));
 		button->SetButtonType(CButton::UP);
-		button->GetTexture()->AddTexture(texture, 0);
+		button->GetTexture()->AddTexture(texture1, 0);
+		button->GetTexture()->AddTexture(texture2, 0);
 		button->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 		Delegate<> m_functionGate;
