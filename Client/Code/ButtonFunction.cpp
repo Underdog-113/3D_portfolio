@@ -18,6 +18,7 @@
 #include "BattleRenunciationC.h"
 #include "SoundManager.h"
 _int CButtonFunction::stageValue = 0;
+_int CButtonFunction::squadValue = 0;
 CButtonFunction::CButtonFunction()
 {
 }
@@ -50,7 +51,6 @@ void CButtonFunction::ReadyToSortieScene()
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
 	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
 
-	// 들어가는 씬의정보 저장 (이름으로 비교하면될듯하다)
 	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"MainCanvas_Attack_4")
 	{
 		CButtonFunction::stageValue = 0;
@@ -72,6 +72,19 @@ void CButtonFunction::PartySettingScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
 	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
+	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"PlayerIS1_Button_0")
+	{
+		CButtonFunction::squadValue = 0;
+	}
+	else if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"PlayerIS2_Button_0")
+	{
+		CButtonFunction::squadValue = 1;
+	}
+	else if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"PlayerIS3_Button_0")
+	{
+		CButtonFunction::squadValue = 2;
+	}
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CPartySettingScene::Create());
@@ -148,17 +161,3 @@ void CButtonFunction::ObjectOff()
 	GET_CUR_CLIENT_SCENE->GetDataStore()->GetValue(false, (_int)EDataID::UI, L"ChangeNameDataFile", CButtonManager::GetInstance()->GetActivationButton()->GetName(), findObjectName);
 	GET_CUR_CLIENT_SCENE->FindObjectByName(findObjectName)->SetIsEnabled(false);
 }
-
-/*
-아이템 펑션을 만들고 클릭된 버튼의 이름을 데이터스토어에 넘겨서 해당하는 정보를받아오게?
-
-어떻게 해야 버튼함수 하나가 모든 오브젝트를 끄고 킬수있을까??
-
-해당 버튼이 어떤 오브젝트를 종료시켜야될지 알고있어야한다.
-// 자신의 이름을 넣으면 내가 꺼야될 오브젝트의 이름을 알려주는 데이터파일을만든다??
-
-object1이 object2를 꺼야된다면
-getvalue(object1) 을하면 object2를반환받고 find로 해당 오브젝트를 찾고 해당 오브젝트를 종료시킨다.
-즉 자신의 이름을 내가 꺼야하는 이름으로 반환시켜주는 함수
-
-*/

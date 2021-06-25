@@ -133,10 +133,20 @@ void CButton::FuncActivation()
 
 void CButton::ButtonPressed()
 {
-	m_spTexture->SetTexIndex(1);
+	if (m_spTexture->GetTexData()[0][0]->textureKey == m_spTexture->GetTexData()[0][1]->textureKey)
+	{
+		m_spTexture->SetColor(_float4(0.7f, 0.7f, 0.7f, 1.0f));
+	}
+	else
+		m_spTexture->SetTexIndex(1);
 }
 
 void CButton::ButtonNormal()
 {
-	m_spTexture->SetTexIndex(0);
+	if (m_spTexture->GetTexData()[0][0]->textureKey == m_spTexture->GetTexData()[0][1]->textureKey)
+	{
+		m_spTexture->SetColor(_float4(1, 1, 1, 1.0f));
+	}
+	else
+		m_spTexture->SetTexIndex(0);
 }

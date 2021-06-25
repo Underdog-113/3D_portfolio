@@ -16,8 +16,8 @@ public:
 		_int hoesim,
 		_float defense,
 		_float maxExperience,
-		_int rank, 
-		_int property,
+		std::wstring rank,
+		std::wstring property,
 		_int maxLevel,
 		std::wstring weaponType,
 		std::wstring partyTextureKey,
@@ -38,8 +38,8 @@ private:
 	GETTOR_SETTOR(_float, m_defense, 0, Defense);
 	GETTOR_SETTOR(_float, m_experience, 0, Experience);
 	GETTOR_SETTOR(_float, m_maxExperience, 0, MaxExperience);
-	GETTOR_SETTOR(_int, m_rank, 0, Rank);
-	GETTOR_SETTOR(_int, m_property, 0, Property);
+	GETTOR_SETTOR(std::wstring, m_rank, L"", Rank);
+	GETTOR_SETTOR(std::wstring, m_property, L"", Property);
 	GETTOR_SETTOR(_int, m_battlePower, 0, BattlePower);
 	GETTOR_SETTOR(_int, m_level, 0, Level);
 	GETTOR_SETTOR(_int, m_maxLevel, 0, MaxLevel);

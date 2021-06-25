@@ -175,6 +175,7 @@ namespace Engine
 		GANESHA_RUSH,
 		GANESHA_STANDUP,
 		GANESHA_WALK,
+		OUTGAME,
 		NumOfChannelID
 	};
 

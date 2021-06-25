@@ -138,7 +138,7 @@ void CInitScene::Update(void)
 
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(CReadyToSortieScene::Create(), false);
+				m_pLoading = CLoading::Create(CDongScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))

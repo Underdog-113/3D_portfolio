@@ -287,6 +287,7 @@
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\PartySettingManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
     <ClInclude Include="..\Header\PatternMachineC.h" />
     <ClInclude Include="..\Header\PhaseChanger.h" />
@@ -424,6 +425,7 @@
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\PartySettingManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
     <ClCompile Include="..\Code\PatternMachineC.cpp" />
     <ClCompile Include="..\Code\PhaseChanger.cpp" />
