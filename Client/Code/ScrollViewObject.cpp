@@ -30,9 +30,9 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+/*	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();*/
 
 	return spClone;
 }
@@ -43,9 +43,9 @@ void CScrollViewObject::Awake(void)
 	m_layerID = (_int)Engine::ELayerID::UI;
 	m_addExtra = true;
 
-	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
+	/*(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
 	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
-	m_spTexture = AddComponent<Engine::CTextureC>();
+	m_spTexture = AddComponent<Engine::CTextureC>();*/
 }
 
 void CScrollViewObject::Start(void)
@@ -61,7 +61,7 @@ void CScrollViewObject::FixedUpdate(void)
 void CScrollViewObject::Update(void)
 {
 	__super::Update();
-	ImageObjectSort();
+	//ImageObjectSort();
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -71,7 +71,8 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PreRender(m_spGraphics, pEffect);
+	if(m_spTexture->GetTexData()[0][0] == NULL)
+		m_spRectTex->PreRender(m_spGraphics, pEffect);
 }
 
 void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
@@ -138,6 +139,7 @@ CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstr
 		std::dynamic_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
 	image->GetTransform()->SetSize(size);
 	image->GetTexture()->AddTexture(texture, 0);
+	image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 	ImageInfo info;
 	info.m_image = image;

@@ -466,6 +466,9 @@
     <Filter Include="10.ControlTower\PhaseControl\00.OneStage">
       <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09.Manager\06.PartySetting">
+      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
+      </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
@@ -942,6 +945,9 @@
     <ClInclude Include="..\Header\ActorController.h">
       <Filter>10.ControlTower\ValkyrieController</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\PartySettingManager.h">
+      <Filter>09.Manager\06.PartySetting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1356,6 +1362,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ActorController.cpp">
       <Filter>10.ControlTower\ValkyrieController</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PartySettingManager.cpp">
+      <Filter>09.Manager\06.PartySetting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

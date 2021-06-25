@@ -20,8 +20,11 @@ public:
 	void ObjectOn();
 	void ObjectOff();
 
-private:
+public:
 	static _int stageValue;
+	static _int squadValue;
+private:
+
 };
 
 #endif

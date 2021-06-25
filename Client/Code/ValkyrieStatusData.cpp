@@ -11,7 +11,7 @@ CValkyrieStatusData::~CValkyrieStatusData()
 {
 }
 
-void CValkyrieStatusData::AddValkyrieData(_bool enable, std::wstring name, std::wstring subName, _float maxHp, _float maxSp, _int damage, _int hoesim, _float defense, _float maxExperience, _int rank, _int property, _int maxLevel, std::wstring weaponType, std::wstring partyTextureKey, std::wstring squadTextureKey, std::wstring listTextureKey)
+void CValkyrieStatusData::AddValkyrieData(_bool enable, std::wstring name, std::wstring subName, _float maxHp, _float maxSp, _int damage, _int hoesim, _float defense, _float maxExperience, std::wstring rank, std::wstring property, _int maxLevel, std::wstring weaponType, std::wstring partyTextureKey, std::wstring squadTextureKey, std::wstring listTextureKey)
 {
 	m_enable = enable;
 	m_name = name;
