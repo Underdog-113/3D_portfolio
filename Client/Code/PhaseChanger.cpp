@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PhaseChanger.h"
 #include "MapObject2D.h"
+#include "Monster.h"
 #include "StageControlTower.h"
 
 _uint CPhaseChanger::m_s_uniqueID = 0;
@@ -63,14 +64,52 @@ void CPhaseChanger::Update(void)
 {
 	__super::Update();
 	
+	
+
+	if (m_timerStart)
+	{
+		m_spawnTimer += GET_DT;
+
+		_uint enabledEnemy = 0;
+		for (auto& monster : m_vMonster)
+		{
+			if (monster->GetDeleteThis() || monster->GetIsEnabled())
+			{
+				++enabledEnemy;
+				continue;
+			}
+
+			if (monster->GetSpawnTimer() <= m_spawnTimer)
+				monster->SetIsEnabled(true);
+		}
+
+		if (enabledEnemy == m_vMonster.size())
+			m_timerStart = false;
+	}
+	if (m_vMonster.size() == 0)
+		CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
+
 	if (CStageControlTower::GetInstance()->GetPhaseControl()->GetCurPhase() == m_phaseToDie)
+	{
 		m_deleteThis = true;
+		return;
+	}
 }
 
 void CPhaseChanger::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
+	for (auto& iter = m_vMonster.begin(); iter != m_vMonster.end();)
+	{
+		if ((*iter)->GetDeleteThis())
+		{
+			(*iter).reset();
+			iter = m_vMonster.erase(iter);
+		}
+		else
+			++iter;
+	}
 }
 
 void CPhaseChanger::OnDestroy(void)
@@ -105,6 +144,7 @@ void CPhaseChanger::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 
 	CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
 	m_spCollision->SetIsEnabled(false);
+	m_timerStart = true;
 }
 
 void CPhaseChanger::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
@@ -119,6 +159,12 @@ void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine)
 {
 	spRestrictLine->SetIsEnabled(false);
 	m_vRestrictLine.emplace_back(spRestrictLine);
+}
+
+void CPhaseChanger::AddMonster(SP(CMonster) spMonster)
+{
+	spMonster->SetIsEnabled(false);
+	m_vMonster.emplace_back(spMonster);
 }
 
 void CPhaseChanger::SetBasicName(void)

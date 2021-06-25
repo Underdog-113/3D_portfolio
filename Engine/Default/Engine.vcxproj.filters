@@ -447,9 +447,6 @@
     <ClCompile Include="..\Code\State.cpp">
       <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StateMachine.cpp">
-      <Filter>03.Components\99. Develop\00. StateMachine</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\RenderTarget.cpp">
       <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
     </ClCompile>
@@ -530,6 +527,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MeshAlphaTestShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StateMachineC.cpp">
+      <Filter>03.Components\99. Develop\00. StateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -719,9 +719,6 @@
     <ClInclude Include="..\Header\State.h">
       <Filter>03.Components\99. Develop\00. StateMachine\State</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StateMachine.h">
-      <Filter>03.Components\99. Develop\00. StateMachine</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\RenderTarget.h">
       <Filter>00.Engine\01.Graphics\05.RenderTarget</Filter>
     </ClInclude>
@@ -805,6 +802,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\MeshAlphaTestShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StateMachineC.h">
+      <Filter>03.Components\99. Develop\00. StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -101,7 +101,7 @@ void CChangmoScene::Start(void)
 
 
 
-		m_spDummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
+		m_spDummy = ADD_CLONE(L"MO_Sickle", true);
 		m_spDummy->GetTransform()->SetPosition(0, 0, 5);
 
 	}

@@ -194,6 +194,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
+    <ClInclude Include="..\Header\ClientComponents.h" />
     <ClInclude Include="..\Header\ClientPatterns.h" />
     <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
