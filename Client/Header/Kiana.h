@@ -50,7 +50,6 @@ public:
 
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
-					void					Update_WeaponTransform(void);
 					void					UpdatePivotMatrices(void);
 
 					void					CreatePistol		(void);
@@ -110,6 +109,7 @@ private:
 	static		_uint						m_s_uniqueID;
    public:
 	SP(Engine::CObject) CreateEffect(std::wstring name);
+	SP(Engine::CObject) CreateEffect(std::wstring name, std::wstring texName1, std::wstring texName2);
 	void SetEffect(SP(Engine::CObject) spEffect, AttackOption option);
 
 	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack1, nullptr, Effect_Attack1)

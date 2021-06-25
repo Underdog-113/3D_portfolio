@@ -25,6 +25,7 @@ void CDataManager::Start()
 	InStockValkyrieInit(L"투예복·백련");
 	InStockValkyrieInit(L"월하초옹");
 	InStockValkyrieInit(L"역신무녀");
+
 	SquadInit(L"투예복·백련");
 }
 
@@ -77,6 +78,19 @@ CValkyrieStatusData * CDataManager::FindvalkyrieStatusData(std::wstring keyValue
 CSquadData * CDataManager::FindSquadData()
 {
 	return m_squadData;
+}
+
+CValkyrieStatusData* CDataManager::FindSquadData(std::wstring keyValue)
+{
+	for (auto& data : m_squadData->GetValkyriesList())
+	{
+		if (data->GetSubName() == keyValue)
+		{
+			return data;
+		}
+	}
+
+	return new CValkyrieStatusData();
 }
 
 CWeaponData * CDataManager::FindWeaponData(std::wstring keyValue)
@@ -270,3 +284,14 @@ void CDataManager::SquadInit(std::wstring valkyrieName)
 	m_squadData->AddValkyrieData(data);
 }
 
+void CDataManager::SquadInit(_int value, std::wstring valkyrieName)
+{
+	CValkyrieStatusData* data = FindInStockValkyrieData(valkyrieName);
+
+	m_squadData->AddValkyrieData(value,data);
+}
+
+void CDataManager::SquadDelete(std::wstring keyValue)
+{
+	m_squadData->Erase(keyValue);
+}

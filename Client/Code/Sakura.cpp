@@ -57,7 +57,16 @@ void CSakura::Start(void)
 	V_WarshipStat stat;
 
 	m_pStat = new V_Sakura_Stat;
+	m_pStat->SetType(V_Stat::SAKURA);
 	m_pStat->SetupStatus(&stat);
+
+	if (m_isWait)
+	{
+		__super::FixedUpdate();
+		__super::Update();
+		__super::LateUpdate();
+		SetIsEnabled(false);
+	}
 }
 
 void CSakura::FixedUpdate(void)

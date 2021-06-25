@@ -5,7 +5,7 @@
 #include "FSMDefine_Ganesha.h"
 #include "MB_Ganesha.h"
 
-#include "StateMachine.h"
+#include "StateMachineC.h"
 #include "Valkyrie.h" 
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"

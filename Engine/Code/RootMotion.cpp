@@ -115,7 +115,7 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	if (!m_pIsFixRootMotionOffsets[pAniCtrl->GetFakeIndex()])
 	{
 		// none fix
-		pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod() * 0.01, NULL);
+		pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod() * 0.015, NULL);
 		pDM->UpdateFrame();
 		_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
 		m_animStartOffset = rootMotionPos;
@@ -127,7 +127,6 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	pAniCtrl->PlayFake();
 	pDM->UpdateFrame();
 	_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
-
 	float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
 	_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
 	moveAmount.y = 0.f;

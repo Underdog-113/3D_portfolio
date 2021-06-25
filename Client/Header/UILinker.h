@@ -5,6 +5,9 @@
 class CStageControlTower;
 class CUILinker
 {
+public:
+	enum WaitSlot { Up, Down };
+
 	enum JoyStick_Dir { NoDir, LD, D, RD, L, Center, R, LU, U, RU };
 
 public:
@@ -12,36 +15,40 @@ public:
 	~CUILinker();
 
 public:
-	void	UpdateLinker		(void);
+	void	UpdateLinker			(void);
 
 public:
-	void	PlayerChange		(void);
-	void	PlayerChange_Test	(void);
-	void	PlayerHpSet			(void);
-								 
-	void	PlayerSpSet			(void);
+	void	SwitchValkyrie			(WaitSlot slot, V_Stat::Valkyrie_Type switchIn, V_Stat::Valkyrie_Type switchOut);
+			
+	void	SwitchValkyrie_UpSlot	(V_Stat::Valkyrie_Type switchOut);
+	void	SwitchValkyrie_DownSlot	(V_Stat::Valkyrie_Type switchOut);
+
+	void	SwitchValkyrie_Actor	(V_Stat::Valkyrie_Type switchIn);
+
+	void	PlayerHpSet				(void);									 
+	void	PlayerSpSet				(void);
 
 public:
-	void	MoveJoyStick		();
+	void	MoveJoyStick			();
 
-	void	Skill				(void);
-	void	Ultra				(void);
-	void	Evade				();
-	void	Attack				();
+	void	Skill					(void);
+	void	Ultra					(void);
+	void	Evade					();
+	void	Attack					();
 
-	void	SwapToOne			(void);
-	void	SwapToTwo			(void);
+	void	SwapToOne				(void);
+	void	SwapToTwo				(void);
 
-	void	MonsterHpDown		(_float damage);
-	void	Hit_Up				(void);
+	void	MonsterHpDown			(_float damage);
+	void	Hit_Up					(void);
 		
 public:
-	void	OnTargetMarker		(void);
-	void	OffTargetMarker		(void);
+	void	OnTargetMarker			(void);
+	void	OffTargetMarker			(void);
 
 		
-	void	MonsterInfoSet		(void);
-	void	MonsterHpSet		(void);
+	void	MonsterInfoSet			(void);
+	void	MonsterHpSet			(void);
 
 
 private:

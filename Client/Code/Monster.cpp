@@ -29,9 +29,11 @@ void CMonster::Awake(void)
 	m_spShader		= AddComponent<Engine::CShaderC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
 
-	m_spRigidBody	= AddComponent<Engine::CRigidBodyC>();
-	m_spCollision	= AddComponent<Engine::CCollisionC>();
-	m_spDebug		= AddComponent<Engine::CDebugC>();
+	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
+	m_spCollision = AddComponent<Engine::CCollisionC>();
+	m_spDebug = AddComponent<Engine::CDebugC>();
+
+	m_spPatternMachine = AddComponent<CPatternMachineC>();
 }
 
 void CMonster::Start(void)
@@ -80,6 +82,7 @@ void CMonster::OnDestroy(void)
 	
 	ReturnChannelID();
 	SAFE_DELETE(m_pStat);
+	m_pAttackBall->SetDeleteThis(true);
 }
 
 void CMonster::OnEnable(void)

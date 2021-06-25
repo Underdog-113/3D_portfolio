@@ -67,10 +67,10 @@ void COneStageScene::Start(void)
 	m_pBattleUIManager->Start(this);
 
 
-	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
-	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-	m_vSickle.emplace_back(spSickleClone);
+	//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
+	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	//m_vSickle.emplace_back(spSickleClone);
 
 	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	//spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
@@ -301,12 +301,12 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))

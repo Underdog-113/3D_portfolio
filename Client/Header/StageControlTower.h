@@ -14,20 +14,15 @@
 #define StageKey_WeaponSkill		KEY_U
 #define StageKey_QTE				KEY_U
 #define StageKey_Ult				KEY_I
-									 
-#define StageKey_Swap_1				KEY_1
-#define StageKey_Swap_2				KEY_2
-									 
+
+#define StageKey_Switch_1			KEY_1
+#define StageKey_Switch_2			KEY_2
+
 #define StageKey_Pause				KEY_TAB
 #define StageKey_Test_Emotion		KEY_Z
 #define StageKey_Test_Hit_L			KEY_F
 #define StageKey_Test_Hit_H			KEY_C
 
-
-#define MoveFlag_Left 0x01
-#define MoveFlag_Right 0x02
-#define MoveFlag_Forward 0x04
-#define MoveFlag_Back 0x08
 
 class CValkyrie;
 class CActorController;
@@ -41,7 +36,6 @@ class CStageControlTower
 public:
 	enum CreateMode { ALL, WithoutUI };
 	enum Squad_Role { Actor, Wait_1, Wait_2 };
-
 public:
 	void Awake(void);
 	void Start(CreateMode mode = ALL);
@@ -58,6 +52,8 @@ public:		/* Battle */
 	void FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info);
+
+	void SwitchValkyrie(Squad_Role role);
 
 
 private:

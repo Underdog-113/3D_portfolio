@@ -27,6 +27,8 @@
 #include "ClientMacro.h"
 #include "ClientStructure.h"
 #include "ClientFunction.h"
+#include "ClientComponents.h"
+#include "ClientPatterns.h"
 
 #include "ClientStructure_ValkyrieStatus.h"
 #include "ClientStructure_MonsterStatus.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "StateMachine.h"
+#include "StateMachineC.h"
 #define Cool_Attack				0.25f
 #define Cool_Evade				0.2f
 #define Cool_End				0.75f
@@ -96,7 +96,17 @@ private:
 	void EvadeBackward_Update(float deltaTime);
 	void EvadeBackward_End(void);
 
+	//SwitchIn
+	void SwitchIn_Init(void);
+	void SwitchIn_Enter(void);
+	void SwitchIn_Update(float deltaTime);
+	void SwitchIn_End(void);
 
+	//SwitchOut
+	void SwitchOut_Init(void);
+	void SwitchOut_Enter(void);
+	void SwitchOut_Update(float deltaTime);
+	void SwitchOut_End(void);
 
 private:
 	void RegisterAllState();

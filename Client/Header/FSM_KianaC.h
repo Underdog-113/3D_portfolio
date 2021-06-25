@@ -1,5 +1,5 @@
 #pragma once
-#include "StateMachine.h"
+#include "StateMachineC.h"
 #define Cool_Attack				0.25f
 #define Cool_BranchAttack		0.5f
 #define Cool_BranchAttack3to4	0.3f
@@ -57,8 +57,6 @@ private: /* Special Actions */
 	bool CheckAction_Ultra();
 
 private: /* effect */
-	void CreateEffect(std::wstring name);
-
 	void CreateEffect_Attack1();
 	void CreateEffect_Attack2();
 	void CreateEffect_Attack3();

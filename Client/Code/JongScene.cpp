@@ -20,7 +20,7 @@
 #include "Kiana_CatPaw_Atk05.h"
 
 #include "Kiana_CatPaw_Ring_Atk01.h"
-#include "Kiana_Pistol_USP45.h"
+#include "Kiana_Pistol.h"
 
 #include "Theresa.h"
 
@@ -64,10 +64,13 @@ void CJongScene::Start(void)
 	CDamageObjectPool::GetInstance()->Start(this);
 
 	KianaTest();
-	//TheresaTest();
-	//m_spTheresa->SetIsEnabled(false);
-	//SakuraTest();
-	//m_spSakura->SetIsEnabled(false);
+	TheresaTest();
+	static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
+	SakuraTest();
+	static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
+	m_pControlTower->Start(CStageControlTower::ALL);
+
+	SetSceneCamera(m_spKiana);
 
 	//CollisionDummy();
 	//SickleTest();
@@ -161,18 +164,6 @@ void CJongScene::KianaTest()
 
 	m_spKiana = spKianaClone;
 	m_pControlTower->AddSquadMember(m_spKiana);
-	//m_pControlTower->Start(CStageControlTower::WithoutUI);
-	m_pControlTower->Start(CStageControlTower::ALL);
-
-
-	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-	cam->SetTarget(m_spKiana);
-	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
-
-	//cam->SetMode(Engine::ECameraMode::TPS);
-
-
 }
 
 void CJongScene::TheresaTest()
@@ -183,14 +174,6 @@ void CJongScene::TheresaTest()
 
 	m_spTheresa = spTheresaClone;
 	m_pControlTower->AddSquadMember(m_spTheresa);
-	m_pControlTower->Start(CStageControlTower::WithoutUI);
-
-	spTheresaClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
-
-	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-	cam->SetTarget(m_spTheresa);
-	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 }
 
 void CJongScene::SakuraTest()
@@ -199,14 +182,16 @@ void CJongScene::SakuraTest()
 
 	m_spSakura = spSakuraClone;
 	m_pControlTower->AddSquadMember(m_spSakura);
-	m_pControlTower->Start(CStageControlTower::WithoutUI);
 
-	spSakuraClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+	//spSakuraClone->GetComponent<Engine::CRigidBodyC>()->SetIsEnabled(false);
+}
 
+void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
+{
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-	cam->SetTarget(m_spSakura);
-	cam->SetTargetDist(6.f);
-	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
+	cam->SetTarget(pTarget);
+	cam->SetTargetDist(10.f);
+	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 
 void CJongScene::CollisionDummy()

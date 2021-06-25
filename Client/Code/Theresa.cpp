@@ -52,12 +52,22 @@ void CTheresa::Start(void)
 
 	m_spMesh->OnRootMotion();
 
+	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
 
 	// status
 	V_WarshipStat stat;
 
 	m_pStat = new V_Theresa_Stat;
+	m_pStat->SetType(V_Stat::THERESA);
 	m_pStat->SetupStatus(&stat);
+
+	if (m_isWait)
+	{
+		__super::FixedUpdate();
+		__super::Update();
+		__super::LateUpdate();
+		SetIsEnabled(false);
+	}
 }
 
 void CTheresa::FixedUpdate(void)

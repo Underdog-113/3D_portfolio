@@ -54,8 +54,7 @@ private:
 	_mat* m_pRightHand_BoneOffset = nullptr;
 	_mat* m_pRightHand = nullptr;
 
-	GETTOR		(SP(Engine::CRigidBodyC),	m_spRigidBody,		nullptr,	RigidBody)
-	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
-	GETTOR		(SP(Engine::CDebugC),		m_spDebug,			nullptr,	Debug)
+
+	
 };
 

@@ -46,7 +46,7 @@ public:
 
 	void AddFuncData(Delegate<> delegate)
 	{
-		m_functionGate += delegate;
+		m_functionGate = delegate;
 	}
 
 private:

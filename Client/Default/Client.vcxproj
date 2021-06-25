@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AlphaLifeTimeC.h" />
     <ClInclude Include="..\Header\AttackBall.h" />
     <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
+    <ClInclude Include="..\Header\ClientComponents.h" />
     <ClInclude Include="..\Header\ClientPatterns.h" />
     <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
@@ -264,7 +266,7 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
-    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -304,6 +306,7 @@
     <ClInclude Include="..\Header\SickleBornPattern.h" />
     <ClInclude Include="..\Header\SickleDiePattern.h" />
     <ClInclude Include="..\Header\SickleHitPattern.h" />
+    <ClInclude Include="..\Header\SkillActivationC.h" />
     <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\SpiderBasePattern.h" />
     <ClInclude Include="..\Header\SpiderBornPattern.h" />
@@ -333,14 +336,13 @@
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
-    <ClInclude Include="AlphaLifeTimeC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
-    <ClInclude Include="SkillActivationC.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
@@ -405,7 +407,7 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
-    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
+    <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -445,6 +447,7 @@
     <ClCompile Include="..\Code\SickleBornPattern.cpp" />
     <ClCompile Include="..\Code\SickleDiePattern.cpp" />
     <ClCompile Include="..\Code\SickleHitPattern.cpp" />
+    <ClCompile Include="..\Code\SkillActivationC.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\SpiderBasePattern.cpp" />
     <ClCompile Include="..\Code\SpiderBornPattern.cpp" />
@@ -473,9 +476,7 @@
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
-    <ClCompile Include="AlphaLifeTimeC.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="SkillActivationC.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

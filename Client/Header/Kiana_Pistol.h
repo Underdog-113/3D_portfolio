@@ -1,20 +1,20 @@
 #pragma once
-#ifndef KIANA_PISTOL_USP45_H
-#define KIANA_PISTOL_USP45_H
+#ifndef KIANA_PISTOL_H
+#define KIANA_PISTOL_H
 
 #include "Object.h"
 
-class CKiana_Pistol_USP45 : public Engine::CObject
+class CKiana_Pistol : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CKiana_Pistol_USP45();
-	~CKiana_Pistol_USP45();
+	CKiana_Pistol();
+	~CKiana_Pistol();
 
 	
 public:
-	static			SP(CKiana_Pistol_USP45)		Create(_bool isStatic, Engine::CScene* pScene);
+	static			SP(CKiana_Pistol)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -44,6 +44,8 @@ protected:
 	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+		
+	GETTOR_SETTOR	(_mat*,							m_pParentMatrix,	nullptr,	ParentMatrix)
 
 };
 

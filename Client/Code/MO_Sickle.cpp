@@ -1,11 +1,10 @@
 #include "stdafx.h"
-#include "..\Header\MO_Sickle.h"
+#include "MO_Sickle.h"
 
 #include "FSM_SickleC.h"
-#include "PatternMachineC.h"
-
 #include "AttackBall.h"
-#include "PatternMachineC.h"
+
+
 
 _uint CMO_Sickle::m_s_uniqueID = 0;
 
@@ -32,6 +31,7 @@ SP(Engine::CObject) CMO_Sickle::MakeClone(void)
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
 
 	return spClone;
 }
@@ -41,6 +41,7 @@ void CMO_Sickle::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_SickleC>();
+	m_spPatternMachine->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
 }
 
 void CMO_Sickle::Start(void)

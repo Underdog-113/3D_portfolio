@@ -45,14 +45,14 @@ public:
 
 	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1,  _float playerSp1,
 					 std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2);
-	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1);
+	void WaitingPlayerState(_uint num, std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1);
 
 	void PlayerSkillActivation(_int value);
 
 	// HP SP 버튼4개 스킬포인트2개
-	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
+	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
 		std::wstring specialSP, std::wstring skillSP);
-	void PlayerChange(_float hpValue, _float spValue, std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
+	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
 		std::wstring specialSP);
 	
 	void TargetUI(Engine::CObject* object, _float value);

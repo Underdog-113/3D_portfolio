@@ -16,6 +16,7 @@
 #include "DecoObject.h"
 #include "PhaseChanger.h"
 #include "MapObject2D.h"
+#include "Monster.h"
 
 CDataLoad::CDataLoad()
 {
@@ -335,7 +336,7 @@ void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
 		spScrollView->GetTransform()->SetPosition(pos);
 		spScrollView->GetTransform()->SetPositionZ(sortLayer);
 		spScrollView->GetTransform()->SetSize(size);
-		spScrollView->GetTexture()->AddTexture(textureKey, 0);
+		//spScrollView->GetTexture()->ChangeTexture(textureKey);
 		spScrollView->AddScrollViewData(column, distanceXY, offSet);
 	}
 }
@@ -592,7 +593,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 
 
-
+	std::vector<CPhaseChanger*> vPhaseChanger;
 	_int numOfPhaseChanger;
 	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", L"numOfPhaseChanger", numOfPhaseChanger);
 	for (_int i = 0; i < numOfPhaseChanger; ++i)
@@ -619,6 +620,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		_int numOfRestrictLine;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_numOfRestrictLine", numOfRestrictLine);
 
+		vPhaseChanger.emplace_back(spPhaseChanger.get());
 		for (_int j = 0; j < numOfRestrictLine; ++j)
 		{
 			SP(CMapObject2D) spRestrictLine =
@@ -663,6 +665,37 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		}
 	}
 
+	_int numOfMonster;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", L"numOfMonster", numOfMonster);
+	for (_int i = 0; i < numOfMonster; ++i)
+	{
+		std::wstring monsterType;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+																			  L"_type", monsterType);
+
+		SP(CMonster) spMonster =
+			std::dynamic_pointer_cast<CMonster>(pObjectFactory->AddClone(monsterType, true));
+		
+		_int phaseChangerNum;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+																			  L"_phaseChanger", phaseChangerNum);
+		vPhaseChanger[phaseChangerNum]->AddMonster(spMonster);
+
+		_float3 position;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+																			  L"_position", position);
+		spMonster->GetTransform()->SetPosition(position);
+		
+		_float3 rotation;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+																			  L"_rotation", rotation);
+		spMonster->GetTransform()->SetRotation(rotation);
+
+		_float timer;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+																			  L"_timer", timer);
+		spMonster->SetSpawnTimer(timer);
+	}
 
 	//
 
