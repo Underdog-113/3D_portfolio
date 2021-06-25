@@ -14,6 +14,8 @@
 
 #include "AabbCollider.h"
 #include "RayCollider.h"
+#include "DecoObject.h"
+#include "MapObject.h"
 
 // CToolMenuView
 
@@ -277,6 +279,7 @@ void CToolMenuView::OnInitialUpdate()
 	m_layerID.AddString(L"Player");
 	m_layerID.AddString(L"Enemy");
 	m_layerID.AddString(L"Map");
+	m_layerID.AddString(L"Deco");
 
 	m_colliderID.AddString(L"Floor");
 	m_colliderID.AddString(L"Wall");
@@ -660,7 +663,7 @@ void CToolMenuView::DataParsing(ELayerID layerID, std::wofstream* ofsSave)
 
 void CToolMenuView::ParsingDecoObject(std::wofstream * ofsSave)
 {
-	Engine::CLayer* layer = Engine::GET_CUR_SCENE->GetLayers()[(_int)ELayerID::Map];
+	Engine::CLayer* layer = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Decoration];
 	
 
 	_int numOfDecoObject = 0;
@@ -948,27 +951,32 @@ void CToolMenuView::OnBnClickedScaleBtn()
 
 void CToolMenuView::OnBnClickedSaveBtn()
 {
-	CString fileName;
-	m_saveFileName.GetWindowTextW(fileName);
-
-	std::string filePath = "../../../Data/EditorScene/";
-	std::wofstream ofsSave(filePath.data() + CStrToStr(fileName) +  ".ini");
+	std::string filePath = "../../../Resource/Data/EditorScene/Scene/";
 	std::wofstream ofsDeco(filePath.data() + std::string("mapDecoration") + ".ini");
 	std::wofstream ofsMap(filePath.data() + std::string("mapMapObject") + ".ini");
 
-	if (ofsSave.is_open())
+	if (ofsDeco.is_open())
 	{
-		DataParsing(ELayerID::Player, &ofsSave);
-		DataParsing(ELayerID::Enemy, &ofsSave);
-		DataParsing(ELayerID::Map, &ofsSave);
 		ParsingDecoObject(&ofsDeco);
-		ParsingMapObject(&ofsMap);
-
-		AfxMessageBox(L"Save Success | ObjectListView.cpp");
+		AfxMessageBox(L"Save Success | ofsDeco");
 	}
-	else AfxMessageBox(L"Save Failed | ObjectListView.cpp");
+	else
+	{
+		AfxMessageBox(L"Save Failed | ofsDeco");
+		return;
+	}
 
-	ofsSave.close();
+	if (ofsMap.is_open())
+	{
+		ParsingMapObject(&ofsMap);
+		AfxMessageBox(L"Save Success | ofsMap");
+	}
+	else
+	{
+		AfxMessageBox(L"Save Failed | ofsMap");
+		return;
+	}
+
 	ofsDeco.close();
 	ofsMap.close();
 }
@@ -994,201 +1002,390 @@ void CToolMenuView::OnBnClickedLoadBtn()
 		}
 	}
 
-	// 데이터 파일 불러오기
-	std::string strLine = "";
-	CString fileName;
-	m_loadFileName.GetWindowTextW(fileName);
-	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName) + ".ini";
-	std::ifstream ifsLoad(filePath.data());
-	
-	_float vPos = 0.f;
-	_float vRot = 0.f;
+	////////////////////////////////////////////////////////
 
-	std::wstring protoObjectKey;
-	_bool isStatic;
-	_int layerID;
-	std::wstring meshKey;
-	_bool initTex;
-	_int renderID;
-	_float3 position;
-	_float3 scale;
-	_float3 rotation;
-	_int colID; // collider
-	_float3 offset; // collider
-	_float3 size; // collider
-	_float3 rotOffset; // collider
-	_int shaderID;
+	Engine::CScene* pScene = Engine::GET_CUR_SCENE;
 
-	SP(Engine::CObject) spObject = nullptr;
+	auto& pDataStore = pScene->GetDataStore();
+	auto& pObjectFactory = pScene->GetObjectFactory();
 
-	while (!ifsLoad.eof())
+	/* deco */
+	_int numOfDecoObject;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration", L"numOfDecoObject", numOfDecoObject);
+	for (_int i = 0; i < numOfDecoObject; ++i)
 	{
-		_tchar* dataTag = nullptr;
-		_tchar* dataValue = nullptr;
+		SP(CDecoObject) spDecoObject =
+			std::dynamic_pointer_cast<CDecoObject>(pObjectFactory->AddClone(L"DecoObject", true));
+		m_objList.AddString(spDecoObject->GetName().c_str());
 
-		std::getline(ifsLoad, strLine);
+		_float3 position, rotation, size;
 
-		if ("" == strLine)
-			continue;
+		//GETVALUE
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_position", position);
 
-		std::vector<std::string> vStr = split(strLine, '=');
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_rotation", rotation);
 
-		if (!dataValue && !dataTag)
-		{
-			std::wstring wstr = Engine::StrToWStr(vStr[1]);
-			dataValue = _wcsdup(wstr.c_str());
-		}
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_size", size);
 
-		if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
-			continue;
+		spDecoObject->GetTransform()->SetPosition(position);
+		spDecoObject->GetTransform()->SetRotation(rotation);
+		spDecoObject->GetTransform()->SetSize(size);
 
-		std::vector<std::string> vStrTag = split(vStr[0], '_');
 
-		std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
-		dataTag = _wcsdup(wstr.c_str());
+		std::wstring meshKey;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_meshKey", meshKey);
 
-		if (!wcscmp(L"static", dataTag))
-		{
-			isStatic = WstrToBool(dataValue);
-			continue;
-		}
-		else if (!wcscmp(L"layerID", dataTag))
-		{ 
-			layerID = WstrToInt(dataValue);
-			spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
-			spObject->SetLayerID(layerID);
-			m_objList.AddString(spObject->GetName().c_str());
-			continue;
-		}
-		else if (!wcscmp(L"shaderKey", dataTag))
-		{
-			shaderID = WstrToInt(dataValue);
-			spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
-			delete dataTag;
-			delete dataValue;
-			continue;
-		}
-		else if (!wcscmp(L"meshKey", dataTag))
-		{
-			meshKey = dataValue;
-			spObject->AddComponent<Engine::CMeshC>()->SetMeshData(meshKey);
-			continue;
-		}
-		else if (!wcscmp(L"initTex", dataTag))
-		{
-			initTex =  WstrToBool(dataValue);
-			spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
-			
+		spDecoObject->GetMesh()->SetMeshData(meshKey);
 
-			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey())
-				spObject->AddComponent<Engine::CTextureC>();
-			else
-				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
 
-			spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-			continue;
-		}
-		else if (!wcscmp(L"renderID", dataTag))
+
+		_int numOfTexSet;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
+
+		for (_int k = 0; k < numOfTexSet; ++k)
 		{
-			renderID = WstrToInt(dataValue);
-			spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
-			spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-			continue;
-		}
-		else if (!wcscmp(L"scale", dataTag))
-		{
-			vStr = split(vStr[1], ',');
-			scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			spObject->GetTransform()->SetSize(scale);
-			continue;
-		}
-		else if (!wcscmp(L"rotation", dataTag))
-		{
-			vStr = split(vStr[1], ',');
-			rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			spObject->GetTransform()->SetRotation(rotation);
-			continue;
-		}
-		else if (!wcscmp(L"position", dataTag))
-		{
-			vStr = split(vStr[1], ',');
-			position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-			spObject->GetTransform()->SetPosition(position);
-			continue;
-		}
-		else if (!wcscmp(L"collider", dataTag))
-		{
-			if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
+			_int numOfTex;
+
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+				std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
+
+			for (_int l = 0; l < numOfTex; ++l)
 			{
-				spObject->AddComponent<Engine::CCollisionC>();
-				spObject->AddComponent<Engine::CDebugC>();
+				std::wstring textureKey;
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+					std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
+
+				spDecoObject->GetTexture()->AddTexture(textureKey, k);
 			}
+		}
 
-			std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
-			if (L"collisionID" == wstr)
-				colID = WstrToInt(dataValue);
+		_int renderID;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+			std::to_wstring(i) + L"_renderID", renderID);
+		spDecoObject->GetGraphics()->SetRenderID(renderID);
 
-			std::getline(ifsLoad, strLine);
-			vStr = split(strLine, '=');
-			vStrTag = split(vStr[0], '_');
-			std::wstring type = Engine::StrToWStr(vStrTag[3]);
+		if (renderID == 1)
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		else
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
+	}
 
-			_int index = StrToInt(vStr[1]);
 
-			if (L"type" == type)
+
+
+	_int numOfMapObject;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject", L"numOfMapObject", numOfMapObject);
+	for (_int i = 0; i < numOfMapObject; ++i)
+	{
+		SP(CMapObject) spMapObject =
+			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", true));
+		m_objList.AddString(spMapObject->GetName().c_str());
+
+		spMapObject->AddComponent<Engine::CDebugC>();
+
+		_float3 position, rotation, size;
+
+		//GETVALUE
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_position", position);
+
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_rotation", rotation);
+
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_size", size);
+
+		spMapObject->GetTransform()->SetPosition(position);
+		spMapObject->GetTransform()->SetRotation(rotation);
+		spMapObject->GetTransform()->SetSize(size);
+
+		std::wstring meshKey;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_meshKey", meshKey);
+
+		spMapObject->GetMesh()->SetMeshData(meshKey);
+
+
+		_int numOfTexSet;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_numOfTexSet", numOfTexSet);
+
+		for (_int k = 0; k < numOfTexSet; ++k)
+		{
+			_int numOfTex;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
+
+			for (_int l = 0; l < numOfTex; ++l)
 			{
-				switch (index)
-				{
-				case 1: // ray
-					break;
-				case 3: // aabb
-				{
-					/* offset */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+				std::wstring textureKey;
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
 
-					/* size */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+				spMapObject->GetTexture()->AddTexture(textureKey, k);
+			}
+		}
 
-					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
-					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-					m_aabbCnt.AddString(SizeToCStr(colIdx));
-				}
-					break;
-				case 4: // obb
-				{
-					/* offset */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+		_int renderID;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+			std::to_wstring(i) + L"_renderID", renderID);
+		spMapObject->GetGraphics()->SetRenderID(renderID);
+		spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 
-					/* size */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
 
-					/* rotOffset */
-					std::getline(ifsLoad, strLine);
-					vStr = split(strLine, '=');
-					vStr = split(vStr[1], ',');
-					rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+		/* map */
+		_int numOfCollider;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject", std::to_wstring(i) + L"_numOfCollider", numOfCollider);
+		for (_int j = 0; j < numOfCollider; ++j)
+		{
+			_int colliderType;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_colliderType" + std::to_wstring(j), colliderType);
 
-					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
-					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-					m_obbCnt.AddString(SizeToCStr(colIdx));
-					break;
-				}
-				}
+			_int collisionID;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_colliderCollisionID" + std::to_wstring(j), collisionID);
+
+			_float3 offset;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+				std::to_wstring(i) + L"_colliderOffset" + std::to_wstring(j), offset);
+
+			_float radius; // sphere
+			_float3 size; // aabb or obb
+			_float3 rotOffset; // obb
+
+			switch (colliderType)
+			{
+			case (_int)Engine::EColliderType::Point:
+				break;
+			case (_int)Engine::EColliderType::Ray:
+				break;
+			case (_int)Engine::EColliderType::Sphere:
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderRadius" + std::to_wstring(j), radius);
+
+				spMapObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create(collisionID, radius, offset));
+				break;
+			case (_int)Engine::EColliderType::AABB:
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderSize" + std::to_wstring(j), size);
+
+				spMapObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(collisionID, size, offset));
+				break;
+			case (_int)Engine::EColliderType::OBB:
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderSize" + std::to_wstring(j), size);
+				pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
+					std::to_wstring(i) + L"_colliderRotOffset" + std::to_wstring(j), rotOffset);
+
+				spMapObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(collisionID, size, offset, rotOffset));
+				break;
 			}
 		}
 	}
+
+
+
+	// 데이터 파일 불러오기
+// 	std::string strLine = "";
+// 	CString fileName;
+// 	m_loadFileName.GetWindowTextW(fileName);
+// 	std::string filePath = "../../../Data/EditorScene/" + CStrToStr(fileName) + ".ini";
+// 	std::ifstream ifsLoad(filePath.data());
+// 	
+// 	_float vPos = 0.f;
+// 	_float vRot = 0.f;
+// 
+// 	std::wstring protoObjectKey;
+// 	_bool isStatic;
+// 	_int layerID;
+// 	std::wstring meshKey;
+// 	_bool initTex;
+// 	_int renderID;
+// 	_float3 position;
+// 	_float3 scale;
+// 	_float3 rotation;
+// 	_int colID; // collider
+// 	_float3 offset; // collider
+// 	_float3 size; // collider
+// 	_float3 rotOffset; // collider
+// 	_int shaderID;
+// 
+// 	SP(Engine::CObject) spObject = nullptr;
+// 
+// 	while (!ifsLoad.eof())
+// 	{
+// 		_tchar* dataTag = nullptr;
+// 		_tchar* dataValue = nullptr;
+// 
+// 		std::getline(ifsLoad, strLine);
+// 
+// 		if ("" == strLine)
+// 			continue;
+// 
+// 		std::vector<std::string> vStr = split(strLine, '=');
+// 
+// 		if (!dataValue && !dataTag)
+// 		{
+// 			std::wstring wstr = Engine::StrToWStr(vStr[1]);
+// 			dataValue = _wcsdup(wstr.c_str());
+// 		}
+// 
+// 		if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
+// 			continue;
+// 
+// 		std::vector<std::string> vStrTag = split(vStr[0], '_');
+// 
+// 		std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
+// 		dataTag = _wcsdup(wstr.c_str());
+// 
+// 		if (!wcscmp(L"static", dataTag))
+// 		{
+// 			isStatic = WstrToBool(dataValue);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"layerID", dataTag))
+// 		{ 
+// 			layerID = WstrToInt(dataValue);
+// 			spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
+// 			spObject->SetLayerID(layerID);
+// 			m_objList.AddString(spObject->GetName().c_str());
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"shaderKey", dataTag))
+// 		{
+// 			shaderID = WstrToInt(dataValue);
+// 			spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
+// 			delete dataTag;
+// 			delete dataValue;
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"meshKey", dataTag))
+// 		{
+// 			meshKey = dataValue;
+// 			spObject->AddComponent<Engine::CMeshC>()->SetMeshData(meshKey);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"initTex", dataTag))
+// 		{
+// 			initTex =  WstrToBool(dataValue);
+// 			spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
+// 			
+// 
+// 			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey())
+// 				spObject->AddComponent<Engine::CTextureC>();
+// 			else
+// 				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+// 
+// 			spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"renderID", dataTag))
+// 		{
+// 			renderID = WstrToInt(dataValue);
+// 			spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
+// 			spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"scale", dataTag))
+// 		{
+// 			vStr = split(vStr[1], ',');
+// 			scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 			spObject->GetTransform()->SetSize(scale);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"rotation", dataTag))
+// 		{
+// 			vStr = split(vStr[1], ',');
+// 			rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 			spObject->GetTransform()->SetRotation(rotation);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"position", dataTag))
+// 		{
+// 			vStr = split(vStr[1], ',');
+// 			position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 			spObject->GetTransform()->SetPosition(position);
+// 			continue;
+// 		}
+// 		else if (!wcscmp(L"collider", dataTag))
+// 		{
+// 			if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
+// 			{
+// 				spObject->AddComponent<Engine::CCollisionC>();
+// 				spObject->AddComponent<Engine::CDebugC>();
+// 			}
+// 
+// 			std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
+// 			if (L"collisionID" == wstr)
+// 				colID = WstrToInt(dataValue);
+// 
+// 			std::getline(ifsLoad, strLine);
+// 			vStr = split(strLine, '=');
+// 			vStrTag = split(vStr[0], '_');
+// 			std::wstring type = Engine::StrToWStr(vStrTag[3]);
+// 
+// 			_int index = StrToInt(vStr[1]);
+// 
+// 			if (L"type" == type)
+// 			{
+// 				switch (index)
+// 				{
+// 				case 1: // ray
+// 					break;
+// 				case 3: // aabb
+// 				{
+// 					/* offset */
+// 					std::getline(ifsLoad, strLine);
+// 					vStr = split(strLine, '=');
+// 					vStr = split(vStr[1], ',');
+// 					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 
+// 					/* size */
+// 					std::getline(ifsLoad, strLine);
+// 					vStr = split(strLine, '=');
+// 					vStr = split(vStr[1], ',');
+// 					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 
+// 					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
+// 					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+// 					m_aabbCnt.AddString(SizeToCStr(colIdx));
+// 				}
+// 					break;
+// 				case 4: // obb
+// 				{
+// 					/* offset */
+// 					std::getline(ifsLoad, strLine);
+// 					vStr = split(strLine, '=');
+// 					vStr = split(vStr[1], ',');
+// 					offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 
+// 					/* size */
+// 					std::getline(ifsLoad, strLine);
+// 					vStr = split(strLine, '=');
+// 					vStr = split(vStr[1], ',');
+// 					size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 
+// 					/* rotOffset */
+// 					std::getline(ifsLoad, strLine);
+// 					vStr = split(strLine, '=');
+// 					vStr = split(vStr[1], ',');
+// 					rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
+// 
+// 					spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
+// 					size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
+// 					m_obbCnt.AddString(SizeToCStr(colIdx));
+// 					break;
+// 				}
+// 				}
+// 			}
+// 		}
+// 	}
 
 	AfxMessageBox(L"Load Success | ObjectListView.cpp");
 }
@@ -1858,15 +2055,10 @@ void CToolMenuView::OnBnClickedModifyObbColBtn()
 		else if (L"Trigger" == cstrIdx)
 			collisionID = ECollisionID::Trigger;
 
-
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetCollisionID((_int)collisionID);
-
-
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(offset);
-
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetSize(size);
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetHalfSize(size * 0.5f);
-
 		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetRotOffset(rotOffset);
 
 		std::cout << "modify obb collider" << std::endl;
@@ -1944,15 +2136,17 @@ void CToolMenuView::OnBnClickedCreateMesh()
 {
 	CString cstr;
 	std::wstring wstr;
-	ELayerID curLayerID = ELayerID::NumOfLayerID;
+	_int curLayerID = 0;
 	m_layerID.GetLBText(m_layerID.GetCurSel(), cstr);
 
 	if ("Player" == cstr)
-		curLayerID = ELayerID::Player;
+		curLayerID = (_int)ELayerID::Player;
 	else if ("Enemy" == cstr)
-		curLayerID = ELayerID::Enemy;
+		curLayerID = (_int)ELayerID::Enemy;
 	else if ("Map" == cstr)
-		curLayerID = ELayerID::Map;
+		curLayerID = (_int)ELayerID::Map;
+	else if ("Deco" == cstr)
+		curLayerID = (_int)Engine::ELayerID::Decoration;
 
 	m_curObjName.GetWindowTextW(cstr);
 	wstr = CStrToWStr(cstr);
@@ -1966,65 +2160,131 @@ void CToolMenuView::OnLbnSelchangeObjectList()
 	CString str;
 	std::wstring wstr;
 
-	for (_int i = (_int)ELayerID::Player; i < (_int)ELayerID::Camera; ++i) // player, enemy search
+	Engine::CScene* pScene = Engine::GET_CUR_SCENE;
+	auto& mapObjs = pScene->GetLayers()[(_uint)ELayerID::Map]->GetGameObjects();
+	auto& obj = mapObjs.begin();
+	
+	for (; obj != mapObjs.end(); ++obj)
 	{
-		auto& vObjs = Engine::GET_CUR_SCENE->GetLayers()[i]->GetGameObjects();
-		auto& obj = vObjs.begin();
-
-		for (; obj != vObjs.end(); ++obj)
+		m_objList.GetText(index, str);
+		wstr = Engine::StrToWStr(CStrToStr(str));
+		if (wstr == (*obj)->GetName())
 		{
-			m_objList.GetText(index, str);
-			wstr = Engine::StrToWStr(CStrToStr(str));
-			if (wstr == (*obj)->GetName())
+			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj())
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(obj->get());
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+			m_curObjNameChk.SetCheck(1);
+			m_curObjName.SetWindowTextW((*obj)->GetName().c_str());
+			std::cout << "Target Found in Object List" << std::endl;
+
+			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CCollisionC>())
 			{
-				if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj())
-					static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-
-				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(obj->get());
-				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
-				m_curObjNameChk.SetCheck(1);
-				m_curObjName.SetWindowTextW((*obj)->GetName().c_str());
-				std::cout << "Target Found in Object List" << std::endl;
-
-				if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CCollisionC>())
-				{
-					m_colType[0].EnableWindow(true);
-					m_colType[1].EnableWindow(true);
-					m_colType[2].EnableWindow(true);
-					m_showAllCol.EnableWindow(true);
-					m_addColC.EnableWindow(false);
-				}
-				else
-				{
-					m_colType[0].EnableWindow(false);
-					m_colType[1].EnableWindow(false);
-					m_colType[2].EnableWindow(false);
-					m_showAllCol.EnableWindow(false);
-					m_addColC.EnableWindow(true);
-				}
-
-				// collision cnt reset
-				m_aabbCnt.ResetContent();
-				if (nullptr != (*obj)->GetComponent<Engine::CCollisionC>())
-				{
-					_int idx = 0;
-
-					auto& vCol = (*obj)->GetComponent<Engine::CCollisionC>()->GetColliders();
-					auto& col = vCol.begin();
-
-					for (; col != vCol.end(); ++col)
-					{
-						if (3 == (*col)->GetColliderType())
-						{
-							m_aabbCnt.AddString(IntToCStr(idx));
-						}
-						++idx;
-					}
-				}
-				return;
+				m_colType[0].EnableWindow(true);
+				m_colType[1].EnableWindow(true);
+				m_colType[2].EnableWindow(true);
+				m_showAllCol.EnableWindow(true);
+				m_addColC.EnableWindow(false);
 			}
+			else
+			{
+				m_colType[0].EnableWindow(false);
+				m_colType[1].EnableWindow(false);
+				m_colType[2].EnableWindow(false);
+				m_showAllCol.EnableWindow(false);
+				m_addColC.EnableWindow(true);
+			}
+
+			// collision cnt reset
+			m_aabbCnt.ResetContent();
+			m_obbCnt.ResetContent();
+			if (nullptr != (*obj)->GetComponent<Engine::CCollisionC>())
+			{
+				_int idx = 0;
+
+				auto& vCol = (*obj)->GetComponent<Engine::CCollisionC>()->GetColliders();
+				auto& col = vCol.begin();
+
+				for (; col != vCol.end(); ++col)
+				{
+					if ((_int)Engine::EColliderType::AABB == (*col)->GetColliderType())
+					{
+						m_aabbCnt.AddString(IntToCStr(idx));
+					}
+					else if ((_int)Engine::EColliderType::OBB == (*col)->GetColliderType())
+					{
+						m_obbCnt.AddString(IntToCStr(idx));
+					}
+					++idx;
+				}
+			}
+			return;
 		}
 	}
+
+	auto& decoObjs = pScene->GetLayers()[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
+	obj = decoObjs.begin();
+
+	for (; obj != decoObjs.end(); ++obj)
+	{
+		m_objList.GetText(index, str);
+		wstr = Engine::StrToWStr(CStrToStr(str));
+		if (wstr == (*obj)->GetName())
+		{
+			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj())
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(obj->get());
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+			m_curObjNameChk.SetCheck(1);
+			m_curObjName.SetWindowTextW((*obj)->GetName().c_str());
+			std::cout << "Target Found in Object List" << std::endl;
+
+			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CCollisionC>())
+			{
+				m_colType[0].EnableWindow(true);
+				m_colType[1].EnableWindow(true);
+				m_colType[2].EnableWindow(true);
+				m_showAllCol.EnableWindow(true);
+				m_addColC.EnableWindow(false);
+			}
+			else
+			{
+				m_colType[0].EnableWindow(false);
+				m_colType[1].EnableWindow(false);
+				m_colType[2].EnableWindow(false);
+				m_showAllCol.EnableWindow(false);
+				m_addColC.EnableWindow(true);
+			}
+
+			// collision cnt reset
+			m_aabbCnt.ResetContent();
+			m_obbCnt.ResetContent();
+			if (nullptr != (*obj)->GetComponent<Engine::CCollisionC>())
+			{
+				_int idx = 0;
+
+				auto& vCol = (*obj)->GetComponent<Engine::CCollisionC>()->GetColliders();
+				auto& col = vCol.begin();
+
+				for (; col != vCol.end(); ++col)
+				{
+					if ((_int)Engine::EColliderType::AABB == (*col)->GetColliderType())
+					{
+						m_aabbCnt.AddString(IntToCStr(idx));
+					}
+					else if ((_int)Engine::EColliderType::OBB == (*col)->GetColliderType())
+					{
+						m_obbCnt.AddString(IntToCStr(idx));
+					}
+					++idx;
+				}
+			}
+			return;
+		}
+	}
+
 	std::cout << "Target not found in Object List" << std::endl;
 }
 
@@ -2048,27 +2308,46 @@ void CToolMenuView::OnBnClickedDelObjectWithObjList()
 	CString str;
 	std::wstring wstr;
 
-	for (_int i = (_int)ELayerID::Player; i < (_int)ELayerID::Camera; ++i) // player, enemy search
+	Engine::CScene* pScene = Engine::GET_CUR_SCENE;
+	auto& mapObjs = pScene->GetLayers()[(_uint)ELayerID::Map]->GetGameObjects();
+	auto& obj = mapObjs.begin();
+
+	for (; obj != mapObjs.end(); ++obj)
 	{
-		auto& vObjs = Engine::GET_CUR_SCENE->GetLayers()[i]->GetGameObjects();
-		auto& obj = vObjs.begin();
-
-		for (; obj != vObjs.end(); ++obj)
+		m_objList.GetText(index, str);
+		wstr = Engine::StrToWStr(CStrToStr(str));
+		if (wstr == (*obj)->GetName())
 		{
-			m_objList.GetText(index, str);
-			wstr = Engine::StrToWStr(CStrToStr(str));
-			if (wstr == (*obj)->GetName())
-			{
-				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
-				m_curObjNameChk.SetCheck(0);
-				m_curObjName.SetWindowTextW(L"");
-				(*obj)->SetDeleteThis(true);
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
+			m_curObjNameChk.SetCheck(0);
+			m_curObjName.SetWindowTextW(L"");
+			(*obj)->SetDeleteThis(true);
 
-				std::cout << "Target delete" << std::endl;
-				m_objList.DeleteString(index);
-				return;
-			}
+			std::cout << "Target delete" << std::endl;
+			m_objList.DeleteString(index);
+			return;
+		}
+	}
+
+	auto& decoObjs = pScene->GetLayers()[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
+	obj = decoObjs.begin();
+
+	for (; obj != decoObjs.end(); ++obj)
+	{
+		m_objList.GetText(index, str);
+		wstr = Engine::StrToWStr(CStrToStr(str));
+		if (wstr == (*obj)->GetName())
+		{
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
+			m_curObjNameChk.SetCheck(0);
+			m_curObjName.SetWindowTextW(L"");
+			(*obj)->SetDeleteThis(true);
+
+			std::cout << "Target delete" << std::endl;
+			m_objList.DeleteString(index);
+			return;
 		}
 	}
 }
@@ -2077,22 +2356,3 @@ void CToolMenuView::OnBnClickedShowObjectChk()
 {
 	
 }
-
-//{
-//int numOfEmptyObject;
-//GET_VALUE(static, ID, key, L"numOfEmptyObject", numOfEmptyObject);
-//
-//for (int i = 0; i < numOfEmptyObject; ++i)
-//{
-//	_bool isStatic;
-//	GET_VALUE(staic, ID, KEY, EmptyObject + std::to_wstring(i) + L"_static", isStatic);
-//
-//	SP(EmptyObject) spEmptyObject =
-//		ADD_CLONE(al; skdfjal; dkf);
-//
-//
-//}
-//}
-
-//툴에서 만들어
-//OBB저장하는거랑 OBB불러오는거

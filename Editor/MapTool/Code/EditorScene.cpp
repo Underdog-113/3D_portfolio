@@ -22,6 +22,9 @@
 #include "DynamicMeshData.h"
 #include "DebugCollider.h"
 
+#include "MapObject.h"
+#include "DecoObject.h"
+
 #pragma region Prototypes
 #include "EmptyObject.h"
 #include "Grid.h"
@@ -61,6 +64,7 @@ void CEditorScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"Scene", (_uint)EDataID::Scene);
 	m_pDataStore->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
 	m_pDataStore->AddDataSection(L"UI", (_uint)EDataID::UI);
+	m_pDataStore->AddDataSection(L"Stat", (_uint)EDataID::Stat);
 
 	m_pDataStore->InitDataForScene(L"StaticScene", true);
 	m_pMeshStore->InitMeshForScene(L"StaticScene", true);
@@ -342,71 +346,31 @@ void CEditorScene::SetCreateObject()
 				_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
 				_float len = D3DXVec3Length(&_float3(correctPoint - camPos));
 
-				//<< << << < HEAD
-					if (len < shortLen)
-					{
-						pTarget = pObject.get();
-						shortLen = len;
-						intersection = correctPoint;
-						m_intersect = intersection;
-					}
-				//== == == =
-			//SetInitAnimation(spObj);
-
-			//m_pCurSelectedObject = spObj.get();
-			//m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
-
-			//// add collider
-			//CString cstrVal;
-			//m_pMenuView->m_colliderID.GetLBText(m_pMenuView->m_colliderID.GetCurSel(), cstrVal);
-
-			//std::string str = CStrToStr(cstrVal);
-			//std::wstring wstr = Engine::StrToWStr(str);
-			//_int colID = 0;
-
-			//if (L"" == wstr)
-			//	return;
-			//else if (L"Player" == wstr)
-			//	colID = (_int)ECollisionID::Player;
-			//else if (L"Enemy" == wstr)
-			//	colID = (_int)ECollisionID::Enemy;
-			//else if (L"Object" == wstr)
-			//	colID = (_int)ECollisionID::Object;
-			//else if (L"Map" == wstr)
-			//	colID = (_int)ECollisionID::Map;
-
-			//m_pCurSelectedObject->AddComponent<Engine::CCollisionC>()->SetCollisionID(colID);
-			//m_pCurSelectedObject->AddComponent<Engine::CDebugC>();
-
-			////m_pMenuView->m_showCol.EnableWindow(true);
-			//m_pMenuView->m_colType[0].EnableWindow(true);
-			//m_pMenuView->m_colType[1].EnableWindow(true);
-
-			////
-			//_float3 size = _float3(1, 1, 1);
-			//_float3 offset = ZERO_VECTOR;
-
-			//if (1 == m_pMenuView->m_colType[0].GetCheck())
-			//{
-			//	m_pCurSelectedObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(size, offset));
-			//	std::cout << "add aabb collider" << std::endl;
-//>>>>>>> 0be8f21ad0ba9e8d3eae8a19b9ea9d71b985be08
+				if (len < shortLen)
+				{
+					pTarget = pObject.get();
+					shortLen = len;
+					intersection = correctPoint;
+					m_intersect = intersection;
+				}
 			}
 		}
 
 		CString cstrLayerID;
 		CString cstrName;
+		_int curLayerID = 0;
 		
-		ELayerID curLayerID = ELayerID::NumOfLayerID;
 		m_pMenuView->m_layerID.GetLBText(m_pMenuView->m_layerID.GetCurSel(), cstrLayerID);
 		m_pMenuView->m_curObjName.GetWindowTextW(cstrName);
 
 		if (L"Player" == cstrLayerID)
-			curLayerID = ELayerID::Player;
+			curLayerID = (_int)ELayerID::Player;
 		else if (L"Enemy" == cstrLayerID)
-			curLayerID = ELayerID::Enemy;
+			curLayerID = (_int)ELayerID::Enemy;
 		else if (L"Map" == cstrLayerID)
-			curLayerID = ELayerID::Map;
+			curLayerID = (_int)ELayerID::Map;
+		else if (L"Deco" == cstrLayerID)
+			curLayerID = (_int)Engine::ELayerID::Decoration;
 
 		CreateObject(true, curLayerID, CStrToWStr(cstrName), _float3(1.f, 1.f, 1.f), intersection);
 	}
@@ -550,52 +514,89 @@ void CEditorScene::SetLastDeleteObject()
 	}
 }
 
-void CEditorScene::CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size, _float3 intersection)
+void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objName, _float3 size, _float3 intersection)
 {
 	std::wstring fileName(m_pMenuView->GetCurSelFileName());
+	auto& pObjectFactory = Engine::GET_CUR_SCENE->GetObjectFactory();
 
-	SP(Engine::CObject) spObj = m_pObjectFactory->AddClone(L"EmptyObject", isStatic, (_int)layerID, objName);
-
-	spObj->AddComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(fileName));
-
-	if (1 == m_pMenuView->m_initTexture.GetCheck())
+	if (ELayerID::Map == (ELayerID)layerID)
 	{
-		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+		SP(CMapObject) spMapObject =
+			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"DecoObject", true));
+		m_pMenuView->m_objList.AddString(spMapObject->GetName().c_str());
 
-		if (Engine::RemoveExtension(fileName) != L"Cube")
-			spObj->AddComponent<Engine::CTextureC>();
-		else
-			spObj->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+		switch (m_pMenuView->m_renderAlpha.GetCheck())
+		{
+		case 0:
+			spMapObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			break;
+		case 1:
+			spMapObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			break;
+		}
+
+		spMapObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+		spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spMapObject->GetTransform()->SetSize(size);
+		spMapObject->GetTransform()->SetPosition(intersection);
+		spMapObject->GetMesh()->SetMeshData(Engine::RemoveExtension(fileName));
+
+		SetInitAnimation(spMapObject);
+
+		if (nullptr != m_pCurSelectedObject)
+			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+		m_pCurSelectedObject = spMapObject.get();
+		m_pCurSelectedObject->SetLayerID((_int)layerID);
+		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 	}
-	else if (0 == m_pMenuView->m_initTexture.GetCheck())
+	else if (Engine::ELayerID::Decoration == (Engine::ELayerID)layerID)
 	{
-		spObj->GetComponent<Engine::CMeshC>()->SetInitTex(false);
-		spObj->AddComponent<Engine::CTextureC>()->AddTexture(Engine::StrToWStr(CStrToStr(m_pMenuView->GetCurSelTextureFileName())), 0);
+		SP(CDecoObject) spDecoObject =
+			std::dynamic_pointer_cast<CDecoObject>(pObjectFactory->AddClone(L"DecoObject", true));
+		m_pMenuView->m_objList.AddString(spDecoObject->GetName().c_str());
+
+		switch (m_pMenuView->m_renderAlpha.GetCheck())
+		{
+		case 0:
+			spDecoObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			break;
+		case 1:
+			spDecoObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+			break;
+		}
+
+		spDecoObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+		spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spDecoObject->GetTransform()->SetSize(size);
+		spDecoObject->GetTransform()->SetPosition(intersection);
+		spDecoObject->GetMesh()->SetMeshData(Engine::RemoveExtension(fileName));
+		spDecoObject->GetMesh()->SetInitTex(IntToBool(m_pMenuView->m_initTexture.GetCheck()));
+
+		//for (_int k = 0; k < numOfTexSet; ++k)
+		//{
+		//	_int numOfTex;
+
+		//	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+		//		std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
+
+		//	for (_int l = 0; l < numOfTex; ++l)
+		//	{
+		//		std::wstring textureKey;
+		//		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
+		//			std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
+
+		//		spDecoObject->GetTexture()->AddTexture(textureKey, k);
+		//	}
+		//}
+
+		if (nullptr != m_pCurSelectedObject)
+			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+		m_pCurSelectedObject = spDecoObject.get();
+		//m_pCurSelectedObject->SetLayerID((_int)layerID);
+		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 	}
-
-	switch (m_pMenuView->m_renderAlpha.GetCheck())
-	{
-	case 0:
-		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-		break;
-	case 1:
-		spObj->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-		break;
-	}
-
-	spObj->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
-	spObj->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	spObj->GetTransform()->SetSize(size);
-	spObj->GetTransform()->SetPosition(intersection);
-
-	SetInitAnimation(spObj);
-
-	if (nullptr != m_pCurSelectedObject)
-		m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-
-	m_pCurSelectedObject = spObj.get();
-	m_pCurSelectedObject->SetLayerID((_int)layerID);
-	m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 
 	m_pMenuView->m_renderAlpha.SetCheck(0);
 	std::cout << "Create!" << std::endl;
@@ -606,8 +607,14 @@ void CEditorScene::CreateObject(_bool isStatic, ELayerID layerID, std::wstring o
 
 void CEditorScene::InitPrototypes(void)
 {
-	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
-	ADD_PROTOTYPE(spEmptyObjectPrototype);
+	//SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
+	//ADD_PROTOTYPE(spEmptyObjectPrototype);
+
+	SP(CDecoObject) spDecoObject(CDecoObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDecoObject);
+
+	SP(CMapObject) spMapObject(CMapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMapObject);
 
 	SP(Engine::CDebugCollider) spDebugColliderPrototype(Engine::CDebugCollider::Create(true, this));
 	ADD_PROTOTYPE(spDebugColliderPrototype);

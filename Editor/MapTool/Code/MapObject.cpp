@@ -1,21 +1,22 @@
 #include "stdafx.h"
-#include "DecoObject.h"
+#include "MapObject.h"
 
 
-_uint CDecoObject::m_s_uniqueID = 0;
-CDecoObject::CDecoObject()
+_uint CMapObject::m_s_uniqueID = 0;
+
+CMapObject::CMapObject()
 {
 }
 
 
-CDecoObject::~CDecoObject()
+CMapObject::~CMapObject()
 {
 	OnDestroy();
 }
 
-SP(CDecoObject) CDecoObject::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CMapObject) CMapObject::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CDecoObject) spInstance(new CDecoObject, Engine::SmartDeleter<CDecoObject>);
+	SP(CMapObject) spInstance(new CMapObject, Engine::SmartDeleter<CMapObject>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -23,93 +24,94 @@ SP(CDecoObject) CDecoObject::Create(_bool isStatic, Engine::CScene * pScene)
 	return spInstance;
 }
 
-SP(Engine::CObject) CDecoObject::MakeClone(void)
+SP(Engine::CObject) CMapObject::MakeClone(void)
 {
-	SP(CDecoObject) spClone(new CDecoObject, Engine::SmartDeleter<CDecoObject>);
+	SP(CMapObject) spClone(new CMapObject, Engine::SmartDeleter<CMapObject>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spMesh		= spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
+
 	return spClone;
 }
 
-void CDecoObject::Awake(void)
+void CMapObject::Awake(void)
 {
 	__super::Awake();
 
-	m_layerID	= (_int)Engine::ELayerID::Decoration;
-	m_dataID	= UNDEFINED;
+	m_layerID = (_int)ELayerID::Map;
+	m_dataID = UNDEFINED;
 
 	m_addExtra = true;
 
 	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
-	m_spShader		= AddComponent<Engine::CShaderC>();
+	m_spCollision	= AddComponent<Engine::CCollisionC>();
 }
 
-void CDecoObject::Start(void)
+void CMapObject::Start(void)
 {
 	__super::Start();
-	
+
 }
 
-void CDecoObject::FixedUpdate(void)
+void CMapObject::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-	
+
 }
 
-void CDecoObject::Update(void)
+void CMapObject::Update(void)
 {
 	__super::Update();
-	
+
 }
 
-void CDecoObject::LateUpdate(void)
+void CMapObject::LateUpdate(void)
 {
 	__super::LateUpdate();
-	
+
 }
 
-void CDecoObject::PreRender(LPD3DXEFFECT pEffect)
+void CMapObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
-
-void CDecoObject::Render(LPD3DXEFFECT pEffect)
+void CMapObject::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CDecoObject::PostRender(LPD3DXEFFECT pEffect)
+void CMapObject::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
-void CDecoObject::OnDestroy(void)
+
+void CMapObject::OnDestroy(void)
 {
 	__super::OnDestroy();
-	
+
 }
 
-void CDecoObject::OnEnable(void)
+void CMapObject::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
-void CDecoObject::OnDisable(void)
+void CMapObject::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
-void CDecoObject::SetBasicName(void)
+void CMapObject::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }

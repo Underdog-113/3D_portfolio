@@ -266,13 +266,3 @@ void CSoundManager::LoadSoundFile()
 
 	FMOD_System_Update(m_pSystem);
 }
-
-void CSoundManager::GetChannelFrequency(_uint ID, float * frequency)
-{
-	FMOD_Channel_GetFrequency(m_pChannelArr[ID], frequency);
-}
-
-void CSoundManager::SetChannelFrequency(_uint ID, float frequency)
-{
-	FMOD_Channel_SetFrequency(m_pChannelArr[ID], frequency);
-}

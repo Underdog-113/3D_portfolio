@@ -8,7 +8,10 @@ class CAttackBox;
 class CMonster abstract : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
-
+public:
+	enum EMonChID {
+		MON_0 = 1, MON_1 = 2, MON_2 = 4, MON_3 = 8, MON_4 = 16 
+	};
 protected:
 	CMonster();
 	virtual ~CMonster() = default;
@@ -54,6 +57,7 @@ public:
 
 protected:
 	static				_uint							m_s_uniqueID;
+	static				_uint							m_s_channelID;
 	GETTOR				(SP(Engine::CMeshC),			m_spMesh,			nullptr,					Mesh)
 	GETTOR				(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,					Graphics)
 	GETTOR				(SP(Engine::CTextureC),			m_spTexture,		nullptr,					Texture)

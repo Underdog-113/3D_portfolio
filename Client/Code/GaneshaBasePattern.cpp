@@ -77,7 +77,6 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 
 			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 			pOwner->GetTransform()->SetPosition(mPos);
-			//PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.8f);
 		}
 	}
 	// 상대가 공격 범위 안이고

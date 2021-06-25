@@ -4,6 +4,8 @@
 #include "AttackBall.h"
 #include "AttackBox.h"
 
+_uint CMonster::m_s_channelID = 0;
+
 CMonster::CMonster()
 {
 }
@@ -135,19 +137,45 @@ void CMonster::MonsterDead()
 
 void CMonster::SelectChannelID()
 {
-	//if (false == Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_0))
-	//	m_channelID = EChannelID::MONSTER_0;
-	if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_1))
+	if (!(m_s_channelID & EMonChID::MON_0))
+	{
+		m_channelID = EChannelID::MONSTER_0;
+		m_s_channelID |= EMonChID::MON_0;
+	}
+	else if (!(m_s_channelID & EMonChID::MON_1))
+	{
 		m_channelID = EChannelID::MONSTER_1;
-	else if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_2))
+		m_s_channelID |= EMonChID::MON_1;
+	}
+	else if(!(m_s_channelID & EMonChID::MON_2))
+	{
 		m_channelID = EChannelID::MONSTER_2;
-	else if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_3))
+		m_s_channelID |= EMonChID::MON_2;
+	}
+	else if (!(m_s_channelID & EMonChID::MON_3))
+	{
 		m_channelID = EChannelID::MONSTER_3;
-	else if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_4))
+		m_s_channelID |= EMonChID::MON_3;
+	}
+	else if (!(m_s_channelID & EMonChID::MON_4))
+	{
 		m_channelID = EChannelID::MONSTER_4;
+		m_s_channelID |= EMonChID::MON_4;
+	}
 }
 
 void CMonster::ReturnChannelID()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)m_channelID);
 }
+
+/*
+0000 0001 1
+0000 0010 2
+0000 0100 4
+0000 1000 8
+0001 0000 16
+
+0000 1001
+
+*/

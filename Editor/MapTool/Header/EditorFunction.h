@@ -79,6 +79,11 @@ inline std::wstring FloatToWStr(_float num)
 	return std::to_wstring(num);
 }
 
+inline _bool IntToBool(_int num)
+{
+	return (num >= 1) ? true : false;
+}
+
 inline std::wstring DeleteCharInWstr(std::wstring src, _byte ch)
 {
 	std::string str = Engine::WStrToStr(src);
