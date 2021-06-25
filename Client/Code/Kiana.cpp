@@ -205,10 +205,10 @@ void CKiana::UpdatePivotMatrices(void)
 
 void CKiana::CreatePistol(void)
 {
-	m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol", false, (_uint)ELayerID::Player, L"Weapon_Left");
+	m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Left");
 	static_cast<CKiana_Pistol*>(m_spWeapon_Left.get())->SetParentMatrix(m_pLeftHand_World);
 	
-	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol", false, (_uint)ELayerID::Player, L"Weapon_Right");
+	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Right");
 	static_cast<CKiana_Pistol*>(m_spWeapon_Right.get())->SetParentMatrix(m_pRightHand_World);
 }
 
