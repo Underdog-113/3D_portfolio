@@ -36,6 +36,30 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 	}
 
+	/************************* Sound */
+	// burst sound
+	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() &&
+		0.f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternPlaySound(L"Ganesha_Burst02.wav", pOwner);
+		m_onSound = true;
+	}
+	// run start sound
+	else if (Name_Ganesha_Run == fsm->GetCurStateString())
+	{
+		if (false == m_onRunStart)
+		{
+			PatternPlaySound(L"Ganesha_Run_Start.wav", pOwner);
+			m_onRunStart = true;
+		}
+		else if (true == m_onRunStart && false == PatternSoundEnd(pOwner))
+		{
+			PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.03f);
+		}
+	}
+
+	/************************* Range */
 	// 상대가 burst2 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -43,6 +67,9 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
+			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			m_onSound = false;
+			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -65,16 +92,18 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst02);
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Burst02.wav", (_uint)Engine::EChannelID::GANESHA_BARRIER);
 		}
 	}
 
+	/************************* JumpBack */
 	// 내가 burst2 상태라면 뒤로 이동
 	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;
+		m_onSound = false;
+		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -101,6 +130,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
+	/************************* AttackBall */
 	// 내가 burst 상태고, 적절할 때 어택볼 숨기기
 	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && 0.65f <= fsm->GetDM()->GetAniTimeline())
 	{
@@ -111,8 +141,6 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 3.4f);
-		// 폭발 범위의 콜라이더 크기 정함
-		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(3.4f);
 	}
 }
 

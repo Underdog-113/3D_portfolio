@@ -20,6 +20,9 @@ public:
 	void StopSound(_uint ID);
 	void StopAll();
 
+	void GetChannelFrequency(_uint ID, float* frequency);
+	void SetChannelFrequency(_uint ID, float frequency);
+
 	// 실행중이면 true
 	_bool IsPlaying(_uint eID);
 	// 0.f ~ 1.f 

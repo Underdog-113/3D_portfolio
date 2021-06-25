@@ -24,10 +24,12 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
+	static const EComponentID m_s_componentID = EComponentID::Pattern;
+
 public:
 	void AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit);
 	void AddPattern(SP(CATBPattern) pPattern);
-	
+
 private:
 	void SortingPatterns(); // 처음 또는 비었을 때 다시 벡터에 패턴 랜덤 재정렬
 	void PlayBasePattern();
@@ -35,9 +37,6 @@ private:
 	void PlayHitPattern();
 	void PlayDiePattern();
 	void PlaySelectPattern(); // 패턴 선택
-
-public:
-	static const EComponentID m_s_componentID = EComponentID::Pattern;
 
 private:
 	std::vector<SP(CATBPattern)> m_vPatterns;

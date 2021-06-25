@@ -90,6 +90,10 @@ void CCollisionC::OnDisable(void)
 {
 	__super::OnDisable();
 
+	m_vCurCollisions.clear();
+	m_vPreCollisions.clear();
+	m_vPreTriggers.clear();
+	m_vCurTriggers.clear();
 }
 
 void CCollisionC::AddCollider(SP(CCollider) spCollider, _bool isTrigger)

@@ -11,7 +11,6 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
-#include "SoundManager.h"
 
 CGaneshaBasePattern::CGaneshaBasePattern()
 {
@@ -33,6 +32,28 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 
 	static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 
+	// attack sound
+	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() &&
+		0.4f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternPlaySound(L"Ganesha_Upper.wav", pOwner);
+		m_onSound = true;
+	}
+	// run start sound
+	else if (Name_Ganesha_Run == fsm->GetCurStateString())
+	{
+		if (false == m_onRunStart)
+		{
+			PatternPlaySound(L"Ganesha_Run_Start.wav", pOwner);
+			m_onRunStart = true;
+		}
+		else if (true == m_onRunStart && false == PatternSoundEnd(pOwner))
+		{
+			PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.03f);
+		}
+	}
+
 	// 상대가 공격 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -40,9 +61,9 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_JumpBack.wav", (_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-		
+			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			m_onSound = false;
+			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -56,6 +77,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 
 			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 			pOwner->GetTransform()->SetPosition(mPos);
+			//PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.8f);
 		}
 	}
 	// 상대가 공격 범위 안이고
@@ -67,6 +89,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Attack01);
+			PatternStopSound(pOwner);
 		}
 	}
 
@@ -74,8 +97,10 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
-		
+		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;
+		m_onSound = false;
+		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -103,12 +128,12 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.59f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	else if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.49f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 

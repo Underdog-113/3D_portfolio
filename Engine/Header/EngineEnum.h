@@ -153,6 +153,7 @@ namespace Engine
 
 	enum class EChannelID
 	{
+		OUTGAME,
 		BGM,
 		AMBIENT,
 		PLAYER,
@@ -167,14 +168,6 @@ namespace Engine
 		UI_4,
 		UI_5,
 		UI_6,
-		GANESHA_JUMPBACK,
-		GANESHA_BARRIER,
-		GANESHA_DOWNATTACK,
-		GANESHA_LASER,
-		GANESHA_RUN,
-		GANESHA_RUSH,
-		GANESHA_STANDUP,
-		GANESHA_WALK,
 		NumOfChannelID
 	};
 

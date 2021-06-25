@@ -74,8 +74,8 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	//SickleSetting();
-	GaneshaSetting();
+	SickleSetting();
+	//GaneshaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -85,18 +85,7 @@ void CWooScene::FixedUpdate(void)
 
 void CWooScene::Update(void)
 {
-	static int a = 5;
-
-	if (a == 5)
-	{
-		Engine::CTextManager::GetInstance()->AddText(L"SEX", L"", _float2(50, 50), _float2(100, 100), 30, 30, D3DXCOLOR(0, 0, 0, 1));
-		a = 6;
-	}
-
 	__super::Update();
-
-	
-
 
 	m_pController->Update();
 
@@ -213,6 +202,7 @@ void CWooScene::SickleSetting(void)
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(0, 10, 2);
 	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
 	m_spSickle = spSickleClone;
 }
 

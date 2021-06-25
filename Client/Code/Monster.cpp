@@ -27,15 +27,14 @@ void CMonster::Awake(void)
 	m_spShader		= AddComponent<Engine::CShaderC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
 
-	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
-	m_spCollision = AddComponent<Engine::CCollisionC>();
-	m_spDebug = AddComponent<Engine::CDebugC>();
+	m_spRigidBody	= AddComponent<Engine::CRigidBodyC>();
+	m_spCollision	= AddComponent<Engine::CCollisionC>();
+	m_spDebug		= AddComponent<Engine::CDebugC>();
 }
 
 void CMonster::Start(void)
 {
 	__super::Start();
-
 
 	if (!m_pStat)
 	{
@@ -53,7 +52,9 @@ void CMonster::Start(void)
 		m_pStat = new M_Stat;
 		m_pStat->SetupStatus(&stat);
 	}
-		
+	
+	// select ChannelID for Sound
+	SelectChannelID();
 }
 
 void CMonster::FixedUpdate(void)
@@ -74,7 +75,8 @@ void CMonster::LateUpdate(void)
 void CMonster::OnDestroy(void)
 {
 	__super::OnDestroy();
-
+	
+	ReturnChannelID();
 	SAFE_DELETE(m_pStat);
 }
 
@@ -129,4 +131,23 @@ void CMonster::UnActiveAttackBox()
 
 void CMonster::MonsterDead()
 {
+}
+
+void CMonster::SelectChannelID()
+{
+	//if (false == Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_0))
+	//	m_channelID = EChannelID::MONSTER_0;
+	if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_1))
+		m_channelID = EChannelID::MONSTER_1;
+	else if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_2))
+		m_channelID = EChannelID::MONSTER_2;
+	else if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_3))
+		m_channelID = EChannelID::MONSTER_3;
+	else if (false == (_uint)Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::MONSTER_4))
+		m_channelID = EChannelID::MONSTER_4;
+}
+
+void CMonster::ReturnChannelID()
+{
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)m_channelID);
 }
