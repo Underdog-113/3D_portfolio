@@ -12,7 +12,7 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
-#include "PartySettingManager.h"
+#include "ValkyriegManager.h"
 
 CPartySettingScene::CPartySettingScene()
 {
@@ -64,7 +64,7 @@ void CPartySettingScene::Start(void)
 	Load->CanvasLoad(this);
 	delete(Load);
 
-	CPartySettingManager::GetInstance()->Start(this);
+	CValkyriegManager::GetInstance()->Start(this);
 }
 
 void CPartySettingScene::FixedUpdate(void)
@@ -75,7 +75,7 @@ void CPartySettingScene::FixedUpdate(void)
 void CPartySettingScene::Update(void)
 {
 	__super::Update();
-	CPartySettingManager::GetInstance()->Update();
+	CValkyriegManager::GetInstance()->Update();
 }
 
 void CPartySettingScene::LateUpdate(void)
@@ -87,7 +87,7 @@ void CPartySettingScene::LateUpdate(void)
 void CPartySettingScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	CPartySettingManager::GetInstance()->DestroyInstance();
+	CValkyriegManager::GetInstance()->DestroyInstance();
 }
 
 void CPartySettingScene::OnEnable(void)

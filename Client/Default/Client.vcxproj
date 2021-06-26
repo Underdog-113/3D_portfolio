@@ -291,7 +291,8 @@
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
-    <ClInclude Include="..\Header\PartySettingManager.h" />
+    <ClInclude Include="..\Header\ValkyrieFSM.h" />
+    <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
     <ClInclude Include="..\Header\PatternMachineC.h" />
     <ClInclude Include="..\Header\PhaseChanger.h" />
@@ -330,7 +331,10 @@
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
     <ClInclude Include="..\Header\ActorController.h" />
+    <ClInclude Include="..\Header\ValkyrieProperty.h" />
+    <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
+    <ClInclude Include="..\Header\ValkyrieWeapon.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
     <ClInclude Include="..\Header\WooScene.h" />
@@ -432,7 +436,8 @@
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
-    <ClCompile Include="..\Code\PartySettingManager.cpp" />
+    <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
+    <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
     <ClCompile Include="..\Code\PatternMachineC.cpp" />
     <ClCompile Include="..\Code\PhaseChanger.cpp" />
@@ -471,7 +476,10 @@
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
     <ClCompile Include="..\Code\ActorController.cpp" />
+    <ClCompile Include="..\Code\ValkyrieProperty.cpp" />
+    <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />

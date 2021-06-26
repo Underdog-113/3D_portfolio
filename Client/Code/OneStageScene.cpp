@@ -142,7 +142,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 
-	ForUITest();
+	//ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)

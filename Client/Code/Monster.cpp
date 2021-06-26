@@ -82,8 +82,8 @@ void CMonster::OnDestroy(void)
 	
 	ReturnChannelID();
 	SAFE_DELETE(m_pStat);
-
-	if (m_pAttackBall)
+	
+	if(m_pAttackBall)
 		m_pAttackBall->SetDeleteThis(true);
 	if (m_pAttackBox)
 		m_pAttackBox->SetDeleteThis(true);
