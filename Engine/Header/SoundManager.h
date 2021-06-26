@@ -10,7 +10,7 @@ public:
 	DECLARE_SINGLETON(CSoundManager)
 public:
 	void		Awake(void) override;
-
+	void		Start(_int numOfSoundChannel);
 	void		OnDestroy(void);
 public:
 	void StartSound(TCHAR* pSoundKey, _uint ID);
@@ -39,13 +39,11 @@ private:
 	// 사운드 리소스 정보를 갖는 객체 
 	std::unordered_map<std::wstring, FMOD_SOUND*> m_mapSound;
 	// FMOD_CHANNEL : 재생하고 있는 사운드를 관리할 객체 
-	FMOD_CHANNEL* m_pChannelArr[(_uint)EChannelID::NumOfChannelID];
+	FMOD_CHANNEL* m_pChannelArr[100];
 	// 사운드 ,채널 객체 및 장치를 관리하는 객체 
 	FMOD_SYSTEM* m_pSystem;
-
-	FMOD_SOUND* m_pSound;
 	//
-	float m_fVolume[(_uint)EChannelID::NumOfChannelID];
+	float m_fVolume[100];
 };
 
 END

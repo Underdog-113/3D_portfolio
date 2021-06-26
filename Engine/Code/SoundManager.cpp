@@ -16,6 +16,10 @@ void CSoundManager::Awake(void)
 	SetVolume((_uint)EChannelID::BGM, 0.5f);
 }
 
+void CSoundManager::Start(_int numOfSoundChannel)
+{
+}
+
 void CSoundManager::OnDestroy(void)
 {
 	for (auto& Mypair : m_mapSound)
@@ -23,8 +27,9 @@ void CSoundManager::OnDestroy(void)
 		FMOD_Sound_Release(Mypair.second);
 	}
 	m_mapSound.clear();
-	FMOD_System_Release(m_pSystem);
+	
 	FMOD_System_Close(m_pSystem);
+	FMOD_System_Release(m_pSystem);
 
 }
 
