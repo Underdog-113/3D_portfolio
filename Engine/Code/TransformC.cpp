@@ -489,3 +489,13 @@ void CTransformC::UpdateParentMatrix(const _mat * pMat)
 {
 	m_lastWorldMat *= *pMat;
 }
+
+void CTransformC::SetWorldMatrix(_mat worldMat)
+{
+	m_worldMat = worldMat;
+}
+
+void CTransformC::SetLastWorldMatrix(_mat worldMat)
+{
+	m_lastWorldMat = worldMat;
+}
