@@ -470,9 +470,7 @@ void CTransformC::UpdateWorldMatrix(void)
 	}
 
 	if (m_pParentMatrix)
-	{
 		UpdateParentMatrix(m_pParentMatrix);
-	}
 }
 
 void CTransformC::UpdateCamDistance(void)
@@ -485,7 +483,7 @@ void CTransformC::UpdateParentMatrix(const _mat * pMat)
 {
 	m_lastWorldMat *= *pMat;
 
-	_mat matToDecompose = m_worldMat;
+	_mat matToDecompose = m_lastWorldMat;
 
 	m_lastPosition = _float3(matToDecompose._41, matToDecompose._42, matToDecompose._43);
 	matToDecompose._41 = 0; matToDecompose._42 = 0; matToDecompose._43 = 0;

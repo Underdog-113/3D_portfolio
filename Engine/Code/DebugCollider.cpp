@@ -104,7 +104,7 @@ void CDebugCollider::Update(void)
 
 void CDebugCollider::LateUpdate(void)
 {
-	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
+	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetLastPosition() + m_pCollider->GetOffset());
 	
 	switch (m_pCollider->GetColliderType())
 	{

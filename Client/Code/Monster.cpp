@@ -29,7 +29,7 @@ void CMonster::Awake(void)
 
 	m_spRigidBody = AddComponent<Engine::CRigidBodyC>();
 	m_spCollision = AddComponent<Engine::CCollisionC>();
-	m_spDebug = AddComponent<Engine::CDebugC>();
+	//m_spDebug = AddComponent<Engine::CDebugC>();
 
 	m_spPatternMachine = AddComponent<CPatternMachineC>();
 }
