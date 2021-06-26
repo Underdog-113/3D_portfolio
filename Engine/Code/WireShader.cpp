@@ -34,5 +34,5 @@ void CWireShader::Awake(void)
 void CWireShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
 	SetupWorldViewProj(spGC);
-	m_pEffect->SetVector("g_color", &m_color);
+	m_pEffect->SetVector("g_color", &spGC->GetColor());
 }

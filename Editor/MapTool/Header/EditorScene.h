@@ -38,7 +38,7 @@ private:
 	void SetLastDeleteObject();
 
 public:
-	void CreateObject(_bool isStatic, ELayerID layerID, std::wstring objName, _float3 size = { 1.f, 1.f, 1.f }, _float3 intersection = { 0.f, 0.f, 0.f });
+	void CreateObject(_bool isStatic, _int layerID, std::wstring objName, _float3 size = { 1.f, 1.f, 1.f }, _float3 intersection = { 0.f, 0.f, 0.f });
 	void SetPickObject();
 
 private:

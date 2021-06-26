@@ -61,9 +61,9 @@ private:
 	GETTOR_SETTOR	(_bool,				m_initTex,					false,			InitTex)
 	GETTOR			(CRootMotion*,		m_pRootMotion,				nullptr,		RootMotion);
 
-	GETTOR			(_float3,			m_rootMotionPos, ZERO_VECTOR,	RootMotionPos)
-	GETTOR			(_float,			m_halfYOffset,	0.f,			HalfYOffset)
-	GETTOR_SETTOR(_bool, m_isEffectMesh, false, isEffectMesh)
+	GETTOR			(_float3,			m_rootMotionPos,			ZERO_VECTOR,	RootMotionPos)
+	GETTOR			(_float,			m_halfYOffset,				0.f,			HalfYOffset)
+	GETTOR_SETTOR	(_bool,				m_isEffectMesh,				false,			IsEffectMesh)
 
 
 	GETTOR			(_bool,				m_haveDrawn,				false,			HaveDrawn)

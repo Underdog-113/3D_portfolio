@@ -34,6 +34,7 @@ private:
 	_mat m_atkMat;
 
 	_bool m_onBurst = false;
+	_bool m_onRunStart = false;
 };
 
 #endif

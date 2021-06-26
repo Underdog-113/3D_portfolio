@@ -40,6 +40,9 @@
     <Filter Include="03.Objects\00.DecoObject">
       <UniqueIdentifier>{9f3e9e23-998c-48dd-adc8-5e81d5504609}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Objects\01.MapObject">
+      <UniqueIdentifier>{47797cfe-7b55-4713-97cb-c7de80b20cc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -96,6 +99,9 @@
     <ClInclude Include="..\Header\DecoObject.h">
       <Filter>03.Objects\00.DecoObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MapObject.h">
+      <Filter>03.Objects\01.MapObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapTool.cpp">
@@ -124,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DecoObject.cpp">
       <Filter>03.Objects\00.DecoObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MapObject.cpp">
+      <Filter>03.Objects\01.MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

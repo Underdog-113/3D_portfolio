@@ -4,6 +4,8 @@
 #include "AttackBall.h"
 #include "AttackBox.h"
 
+_uint CMonster::m_s_channelID = 0;
+
 CMonster::CMonster()
 {
 }
@@ -38,7 +40,6 @@ void CMonster::Start(void)
 {
 	__super::Start();
 
-
 	if (!m_pStat)
 	{
 		BaseStat stat;
@@ -55,7 +56,9 @@ void CMonster::Start(void)
 		m_pStat = new M_Stat;
 		m_pStat->SetupStatus(&stat);
 	}
-		
+	
+	// select ChannelID for Sound
+	SelectChannelID();
 }
 
 void CMonster::FixedUpdate(void)
@@ -76,9 +79,14 @@ void CMonster::LateUpdate(void)
 void CMonster::OnDestroy(void)
 {
 	__super::OnDestroy();
-
+	
+	ReturnChannelID();
 	SAFE_DELETE(m_pStat);
-	m_pAttackBall->SetDeleteThis(true);
+	
+	if(m_pAttackBall)
+		m_pAttackBall->SetDeleteThis(true);
+	if (m_pAttackBox)
+		m_pAttackBox->SetDeleteThis(true);
 }
 
 void CMonster::OnEnable(void)
@@ -133,3 +141,48 @@ void CMonster::UnActiveAttackBox()
 void CMonster::MonsterDead()
 {
 }
+
+void CMonster::SelectChannelID()
+{
+	if (!(m_s_channelID & EMonChID::MON_0))
+	{
+		m_channelID = EChannelID::MONSTER_0;
+		m_s_channelID |= EMonChID::MON_0;
+	}
+	else if (!(m_s_channelID & EMonChID::MON_1))
+	{
+		m_channelID = EChannelID::MONSTER_1;
+		m_s_channelID |= EMonChID::MON_1;
+	}
+	else if(!(m_s_channelID & EMonChID::MON_2))
+	{
+		m_channelID = EChannelID::MONSTER_2;
+		m_s_channelID |= EMonChID::MON_2;
+	}
+	else if (!(m_s_channelID & EMonChID::MON_3))
+	{
+		m_channelID = EChannelID::MONSTER_3;
+		m_s_channelID |= EMonChID::MON_3;
+	}
+	else if (!(m_s_channelID & EMonChID::MON_4))
+	{
+		m_channelID = EChannelID::MONSTER_4;
+		m_s_channelID |= EMonChID::MON_4;
+	}
+}
+
+void CMonster::ReturnChannelID()
+{
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)m_channelID);
+}
+
+/*
+0000 0001 1
+0000 0010 2
+0000 0100 4
+0000 1000 8
+0001 0000 16
+
+0000 1001
+
+*/

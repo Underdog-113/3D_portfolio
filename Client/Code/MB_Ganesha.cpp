@@ -3,8 +3,7 @@
 
 #include "FSM_GaneshaC.h"
 #include "AttackBall.h"
-#include "AttackBox.h"
-#include "PatternMachineC.h"
+//#include "AttackBox.h"
 
 _uint CMB_Ganesha::m_s_uniqueID = 0;
 
@@ -30,6 +29,7 @@ SP(Engine::CObject) CMB_Ganesha::MakeClone(void)
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
 	spClone->m_spStateMachine = spClone->GetComponent<CFSM_GaneshaC>();
+	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
 
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
@@ -43,6 +43,11 @@ void CMB_Ganesha::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_GaneshaC>();
+	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 }
 
 void CMB_Ganesha::Start(void)
@@ -70,9 +75,9 @@ void CMB_Ganesha::Start(void)
 	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
 
-	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
-	m_pAttackBox->SetOffset(_float3(0, 1, 0));
-	m_pAttackBox->SetOwner(this);
+	//m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
+	//m_pAttackBox->SetOffset(_float3(0, 1, 0));
+	//m_pAttackBox->SetOwner(this);
 }
 
 void CMB_Ganesha::FixedUpdate(void)

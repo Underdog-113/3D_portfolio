@@ -22,7 +22,7 @@ public:
 //Interface
 public:
 	virtual			void					UpdatePosition		(void) PURE;
-
+					void					UpdateBS			(void);
 protected:
 	virtual			void					MakeBS				(void) PURE;
 protected:

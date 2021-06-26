@@ -26,8 +26,9 @@ public:
 	void				OnDisable(void) override;
 
 private:
+	void				InitPrototypes(void) override;
 
 private:
-	void				InitPrototypes(void) override;
+	_bool m_init = false;
 };
 #endif
