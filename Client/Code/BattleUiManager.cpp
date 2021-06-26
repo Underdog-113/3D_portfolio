@@ -361,9 +361,13 @@ void CBattleUiManager::PlayerHp(_float value)
 
 void CBattleUiManager::PlayerHpMax(_float value)
 {
+	_float hpmax = value / 3;
+	_float hp = 0;
 	for (auto object : m_playerHpBar)
 	{
-		object->SetMaxValue(value);
+		object->SetMinValue(hp);
+		hp += hpmax;
+		object->SetMaxValue(hp);
 	}
 }
 
