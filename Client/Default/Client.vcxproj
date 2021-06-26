@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AlphaMaskShader.h" />
     <ClInclude Include="..\Header\AttackBall.h" />
     <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
@@ -265,6 +266,10 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
     <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -341,6 +346,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
@@ -406,6 +412,10 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -497,6 +507,10 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>

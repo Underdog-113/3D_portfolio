@@ -468,12 +468,27 @@
     </Filter>
     <Filter Include="09.Manager\06.PartySetting">
       <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="10.ControlTower\ValkyrieController">
       <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
+      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring">
+      <UniqueIdentifier>{5b05c9df-e55c-4ac2-a111-e8e7b95931c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Plane">
+      <UniqueIdentifier>{f71034e8-0b42-4bbb-b90e-57375c77c732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Shield">
+      <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\10.AlphaMaskShader">
+      <UniqueIdentifier>{03f4fa48-4c81-4dd3-9da5-f83d0007bbbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -948,6 +963,21 @@
     <ClInclude Include="..\Header\PartySettingManager.h">
       <Filter>09.Manager\06.PartySetting</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Ult_Shield.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Shield</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Ult_Plane.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Ult_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AlphaMaskShader.h">
+      <Filter>04.Shader\10.AlphaMaskShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Ult_Ring.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1366,6 +1396,21 @@
     <ClCompile Include="..\Code\PartySettingManager.cpp">
       <Filter>09.Manager\06.PartySetting</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Shield</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AlphaMaskShader.cpp">
+      <Filter>04.Shader\10.AlphaMaskShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -1418,6 +1463,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
       <Filter>04.Shader\07.SpawnEffectShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
+      <Filter>04.Shader\10.AlphaMaskShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
