@@ -403,7 +403,6 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 {
 	auto& pDataStore = pScene->GetDataStore();
 	auto& pObjectFactory = pScene->GetObjectFactory();
-	auto& objectFactory = pScene->GetObjectFactory();
 
 	/* deco */
 	_int numOfDecoObject;
@@ -476,9 +475,6 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 
 	}
-
-
-
 
 	_int numOfMapObject;
 	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject", L"numOfMapObject", numOfMapObject);
@@ -590,8 +586,12 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 			}
 		}
 	}
+}
 
-
+void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
+{
+	auto& pDataStore = pScene->GetDataStore();
+	auto& pObjectFactory = pScene->GetObjectFactory();
 
 	std::vector<CPhaseChanger*> vPhaseChanger;
 	_int numOfPhaseChanger;
@@ -632,33 +632,33 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 			std::wstring texKey;
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_textureKey", texKey);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_textureKey", texKey);
 			spRestrictLine->GetComponent<Engine::CTextureC>()->AddTexture(texKey);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_position", position);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_position", position);
 			spRestrictLine->GetTransform()->SetPosition(position);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_rotation", rotation);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_rotation", rotation);
 			spRestrictLine->GetTransform()->SetRotation(rotation);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_size", size);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_size", size);
 			spRestrictLine->GetTransform()->SetSize(size);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_colSize", size);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_colSize", size);
 			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
 
 			spPhaseChanger->AddRestrictLine(spRestrictLine);
@@ -671,278 +671,31 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 	{
 		std::wstring monsterType;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
-																			  L"_type", monsterType);
+			L"_type", monsterType);
 
 		SP(CMonster) spMonster =
 			std::dynamic_pointer_cast<CMonster>(pObjectFactory->AddClone(monsterType, true));
-		
+
 		_int phaseChangerNum;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
-																			  L"_phaseChanger", phaseChangerNum);
+			L"_phaseChanger", phaseChangerNum);
 		vPhaseChanger[phaseChangerNum]->AddMonster(spMonster);
 
 		_float3 position;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
-																			  L"_position", position);
+			L"_position", position);
 		spMonster->GetTransform()->SetPosition(position);
-		
+
 		_float3 rotation;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
-																			  L"_rotation", rotation);
+			L"_rotation", rotation);
 		spMonster->GetTransform()->SetRotation(rotation);
 
 		_float timer;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
-																			  L"_timer", timer);
+			L"_timer", timer);
 		spMonster->SetSpawnTimer(timer);
 	}
-
-	//
-
-	//// ������ ���� �ҷ�����
-	//std::string strLine = "";
-	//std::string filePath = "../../Data/EditorScene/save.ini";
-	//std::ifstream ifsLoad(filePath.data());
-
-	//_float vPos = 0.f;
-	//_float vRot = 0.f;
-
-	//std::wstring protoObjectKey;
-	//_bool isStatic;
-	//_int layerID;
-	//std::wstring meshKey;
-	//_bool initTex;
-	//_int renderID;
-	//_float3 position;
-	//_float3 scale;
-	//_float3 rotation;
-	//_int colID; // collider
-	//_float3 offset; // collider
-	//_float3 size; // collider
-	//_float3 rotOffset; // collider
-	//_int shaderID;
-
-	//SP(Engine::CObject) spObject = nullptr;
-
-	//Engine::_tchar* dataTag = nullptr;
-	//Engine::_tchar* dataValue = nullptr;
-
-	//std::vector<std::string> vStr;
-	//std::vector<std::string> vStrTag;
-
-	//while (!ifsLoad.eof())
-	//{
-	//	dataTag = nullptr;
-	//	dataValue = nullptr;
-
-	//	if (!vStr.empty())
-	//	{
-	//		auto& iter = vStr.begin();
-	//		for (; iter != vStr.end();)
-	//			iter = vStr.erase(iter);
-
-	//		vStr.clear();
-	//	}
-	//
-	//	if (!vStrTag.empty())
-	//	{
-	//		auto& iter = vStrTag.begin();
-	//		for (; iter != vStrTag.end();)
-	//			iter = vStrTag.erase(iter);
-
-	//		vStrTag.clear();
-	//	}
-
-	//	std::getline(ifsLoad, strLine);
-
-	//	if ("" == strLine)
-	//		continue;
-
-	//	vStr = split(strLine, '=');
-
-	//	if (!dataValue && !dataTag)
-	//	{
-	//		std::wstring wstr = Engine::StrToWStr(vStr[1]);
-	//		dataValue = _wcsdup(wstr.c_str());
-	//	}
-
-	//	if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
-	//		continue;
-
-	//	vStrTag = split(vStr[0], '_');
-
-	//	std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
-	//	dataTag = _wcsdup(wstr.c_str());
-
-	//	if (!wcscmp(L"static", dataTag))
-	//	{
-	//		isStatic = WstrToBool(dataValue);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"layerID", dataTag))
-	//	{
-	//		layerID = WstrToInt(dataValue);
-	//		spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
-
-	//		spObject->SetLayerID(layerID);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"shaderKey", dataTag))
-	//	{
-	//		shaderID = WstrToInt(dataValue);
-	//		spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"meshKey", dataTag))
-	//	{
-	//		meshKey = dataValue;
-
-	//		spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"initTex", dataTag))
-	//	{
-	//		initTex = WstrToBool(dataValue);
-	//		spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
-
-	//		if (initTex == true)
-	//		{
-	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()[0]->GetMeshKey())
-	//				spObject->AddComponent<Engine::CTextureC>();
-	//			else
-	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-
-	//			//���ľߵ� ���̴�Ű ���� �����ϱ�
-	//			if (spObject->GetComponent<Engine::CShaderC>() == nullptr)
-	//				spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	//		}
-	//		else
-	//		{
-	//			spObject->AddComponent<Engine::CTextureC>();
-	//			spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
-	//			spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap");
-	//		}
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"renderID", dataTag))
-	//	{
-	//		renderID = WstrToInt(dataValue);
-	//		spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
-	//		spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"scale", dataTag))
-	//	{
-	//		vStr = split(vStr[1], ',');
-	//		scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-	//		spObject->GetTransform()->SetSize(scale);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"rotation", dataTag))
-	//	{
-	//		vStr = split(vStr[1], ',');
-	//		rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-	//		spObject->GetTransform()->SetRotation(rotation);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"position", dataTag))
-	//	{
-	//		vStr = split(vStr[1], ',');
-	//		position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-	//		spObject->GetTransform()->SetPosition(position);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"collider", dataTag))
-	//	{
-	//		if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
-	//		{
-	//			spObject->AddComponent<Engine::CCollisionC>();
-	//			spObject->AddComponent<Engine::CDebugC>();
-	//		}
-
-	//		std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
-	//		if (L"collisionID" == wstr)
-	//			colID = WstrToInt(dataValue);
-
-	//		std::getline(ifsLoad, strLine);
-	//		vStr = split(strLine, '=');
-	//		vStrTag = split(vStr[0], '_');
-	//		std::wstring type = Engine::StrToWStr(vStrTag[3]);
-
-	//		_int index = StrToInt(vStr[1]);
-
-	//		if (L"type" == type)
-	//		{
-	//			switch (index)
-	//			{
-	//			case 1: // ray
-	//				break;
-	//			case 3: // aabb
-	//			{
-	//				/* offset */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				/* size */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
-	//				size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-	//			}
-	//			break;
-	//			case 4: // obb
-	//			{
-	//				/* offset */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				/* size */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				/* rotOffset */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
-	//				size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-	//				break;
-	//			}
-	//			}
-	//		}
-	//	}
-	//}
-
-	//ifsLoad.close();
 }
 
 void CDataLoad::EffectLoad(Engine::CScene * pScene)

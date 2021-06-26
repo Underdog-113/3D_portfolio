@@ -188,6 +188,7 @@ void COneStageScene::SetupFromLoader(void)
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
 	Load->MapLoad(this);
+	Load->PhaseChangerLoad(this);
 	delete(Load);
 
 }

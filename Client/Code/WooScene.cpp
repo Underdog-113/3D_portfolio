@@ -65,17 +65,18 @@ void CWooScene::Start(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	//Load->MapLoad(this);
+	Load->MapLoad(this);
+	//Load->PhaseChangerLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
 
-	TerrainSetting();
+	//TerrainSetting();
 
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
-	GaneshaSetting();
+	//GaneshaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -89,11 +90,10 @@ void CWooScene::Update(void)
 
 	m_pController->Update();
 
-	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
-	{
-		std::dynamic_pointer_cast<CMonster>(m_spGanesha)->GetStat()->SetCurHp(0.f);
-		m_spGanesha->GetComponent<CPatternMachineC>()->SetOnDie(true);
-	}
+// 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
+// 	{
+// 		//
+// 	}
 }
 
 void CWooScene::LateUpdate(void)

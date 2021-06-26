@@ -519,10 +519,11 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 	std::wstring fileName(m_pMenuView->GetCurSelFileName());
 	auto& pObjectFactory = Engine::GET_CUR_SCENE->GetObjectFactory();
 
+	/* Map */
 	if (ELayerID::Map == (ELayerID)layerID)
 	{
 		SP(CMapObject) spMapObject =
-			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"DecoObject", true));
+			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", true));
 		m_pMenuView->m_objList.AddString(spMapObject->GetName().c_str());
 
 		switch (m_pMenuView->m_renderAlpha.GetCheck())
@@ -540,6 +541,7 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 		spMapObject->GetTransform()->SetSize(size);
 		spMapObject->GetTransform()->SetPosition(intersection);
 		spMapObject->GetMesh()->SetMeshData(Engine::RemoveExtension(fileName));
+		spMapObject->GetMesh()->SetInitTex(IntToBool(m_pMenuView->m_initTexture.GetCheck()));
 
 		SetInitAnimation(spMapObject);
 
@@ -550,6 +552,7 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 		m_pCurSelectedObject->SetLayerID((_int)layerID);
 		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 	}
+	/* Deco */
 	else if (Engine::ELayerID::Decoration == (Engine::ELayerID)layerID)
 	{
 		SP(CDecoObject) spDecoObject =
@@ -573,29 +576,40 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 		spDecoObject->GetMesh()->SetMeshData(Engine::RemoveExtension(fileName));
 		spDecoObject->GetMesh()->SetInitTex(IntToBool(m_pMenuView->m_initTexture.GetCheck()));
 
-		//for (_int k = 0; k < numOfTexSet; ++k)
-		//{
-		//	_int numOfTex;
-
-		//	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
-		//		std::to_wstring(i) + L"_numOfTex" + std::to_wstring(k), numOfTex);
-
-		//	for (_int l = 0; l < numOfTex; ++l)
-		//	{
-		//		std::wstring textureKey;
-		//		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
-		//			std::to_wstring(i) + L"_textureKey" + std::to_wstring(k) + L'_' + std::to_wstring(l), textureKey);
-
-		//		spDecoObject->GetTexture()->AddTexture(textureKey, k);
-		//	}
-		//}
-
 		if (nullptr != m_pCurSelectedObject)
 			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
 
 		m_pCurSelectedObject = spDecoObject.get();
-		//m_pCurSelectedObject->SetLayerID((_int)layerID);
 		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
+	}
+	else if (ELayerID::Player == (ELayerID)layerID)
+	{
+// 		SP(CObject) spPlayerObject =
+// 			std::dynamic_pointer_cast<CObject>(pObjectFactory->AddClone(L"DecoObject", true));
+// 		m_pMenuView->m_objList.AddString(spDecoObject->GetName().c_str());
+// 
+// 		switch (m_pMenuView->m_renderAlpha.GetCheck())
+// 		{
+// 		case 0:
+// 			spDecoObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+// 			break;
+// 		case 1:
+// 			spDecoObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+// 			break;
+// 		}
+// 
+// 		spDecoObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+// 		spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+// 		spDecoObject->GetTransform()->SetSize(size);
+// 		spDecoObject->GetTransform()->SetPosition(intersection);
+// 		spDecoObject->GetMesh()->SetMeshData(Engine::RemoveExtension(fileName));
+// 		spDecoObject->GetMesh()->SetInitTex(IntToBool(m_pMenuView->m_initTexture.GetCheck()));
+// 
+// 		if (nullptr != m_pCurSelectedObject)
+// 			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+// 
+// 		m_pCurSelectedObject = spDecoObject.get();
+// 		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 	}
 
 	m_pMenuView->m_renderAlpha.SetCheck(0);
