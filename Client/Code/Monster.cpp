@@ -78,7 +78,11 @@ void CMonster::OnDestroy(void)
 	__super::OnDestroy();
 
 	SAFE_DELETE(m_pStat);
-	m_pAttackBall->SetDeleteThis(true);
+	
+	if(m_pAttackBall)
+		m_pAttackBall->SetDeleteThis(true);
+	if (m_pAttackBox)
+		m_pAttackBox->SetDeleteThis(true);
 }
 
 void CMonster::OnEnable(void)

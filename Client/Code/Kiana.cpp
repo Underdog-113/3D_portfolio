@@ -499,7 +499,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
@@ -519,7 +519,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name, std::wstring texName
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
