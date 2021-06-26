@@ -13,6 +13,9 @@ CValkyrieProperty::~CValkyrieProperty()
 
 void CValkyrieProperty::Start()
 {
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(true);
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas")->SetIsEnabled(false);
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(false);
 }
 
 void CValkyrieProperty::End()
