@@ -73,4 +73,5 @@ protected:
 	GETTOR				(CAttackBox*,					m_pAttackBox,		nullptr,					AttackBox)
 	GETTOR_SETTOR		(EChannelID,					m_channelID,		EChannelID::NumOfChannelID,	ChannelID)
 	GETTOR_SETTOR		(_float,						m_spawnTimer,		UNDEFINED,					SpawnTimer)
+	GETTOR_SETTOR		(SP(CPatternMachineC),			m_spPatternMachine,	nullptr,					PatternMachine)
 };

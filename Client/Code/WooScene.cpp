@@ -201,7 +201,6 @@ void CWooScene::SickleSetting(void)
 	/* Sickle */
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(0, 10, 2);
-	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
 	m_spSickle = spSickleClone;
 }
@@ -211,11 +210,7 @@ void CWooScene::GaneshaSetting(void)
 	/* Ganesha */
 	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
 	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
-	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
-	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
-	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
-	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
+	std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
 	m_spGanesha = spGaneshaClone;
 }
  
@@ -224,6 +219,7 @@ void CWooScene::SpiderSetting(void)
 	/* Spider */
 	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
 	spSpiderClone->GetTransform()->SetPosition(-3, 0, -7);
-	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
+	std::dynamic_pointer_cast<CMonster>(spSpiderClone)->SelectChannelID();
 	m_spSpider = spSpiderClone;
 }
+
