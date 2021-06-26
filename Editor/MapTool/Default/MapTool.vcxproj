@@ -208,6 +208,7 @@
     <ClInclude Include="..\Header\EditorTypedef.h" />
     <ClInclude Include="..\Header\MainFrm.h" />
     <ClInclude Include="..\Header\MainMapTool.h" />
+    <ClInclude Include="..\Header\MapObject.h" />
     <ClInclude Include="..\Header\MapToolDoc.h" />
     <ClInclude Include="..\Header\MapToolView.h" />
     <ClInclude Include="..\Header\ToolMenuView.h" />
@@ -224,6 +225,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\MainFrm.cpp" />
     <ClCompile Include="..\Code\MainMapTool.cpp" />
+    <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\MapToolDoc.cpp" />
     <ClCompile Include="..\Code\MapToolView.cpp" />
     <ClCompile Include="..\Code\ToolMenuView.cpp" />

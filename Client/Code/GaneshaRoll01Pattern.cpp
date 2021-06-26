@@ -67,8 +67,6 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Roll01);
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Roll.wav", (_uint)Engine::EChannelID::GANESHA_BARRIER);
 		}
 	}
 

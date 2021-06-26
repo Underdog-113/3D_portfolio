@@ -8,7 +8,10 @@ class CAttackBox;
 class CMonster abstract : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
-
+public:
+	enum EMonChID {
+		MON_0 = 1, MON_1 = 2, MON_2 = 4, MON_3 = 8, MON_4 = 16 
+	};
 protected:
 	CMonster();
 	virtual ~CMonster() = default;
@@ -46,26 +49,29 @@ public:
 	void ActiveAttackBox(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float3 size, _float3 offset, _float3 rotOffset);
 	void UnActiveAttackBox();
 
+	void SelectChannelID();
+	void ReturnChannelID();
 
 	virtual void MonsterDead();
 
 
 protected:
-	static			_uint							m_s_uniqueID;
-	GETTOR			(SP(Engine::CMeshC),			m_spMesh,				nullptr,		Mesh)
-	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,			nullptr,		Graphics)
-	GETTOR			(SP(Engine::CTextureC),			m_spTexture,			nullptr,		Texture)
-	GETTOR			(SP(Engine::CShaderC),			m_spShader,				nullptr,		Shader)	
-	GETTOR			(SP(Engine::CRigidBodyC),		m_spRigidBody,			nullptr,		RigidBody)
-	GETTOR			(SP(Engine::CCollisionC),		m_spCollision,			nullptr,		Collision)
-	GETTOR			(SP(Engine::CDebugC),			m_spDebug,				nullptr,		Debug)
-	GETTOR			(SP(Engine::CStateMachineC),	m_spStateMachine,		nullptr,		StateMachine)
-	GETTOR			(SP(CPatternMachineC),			m_spPatternMachine,		nullptr,		PatternMachine)
+	static				_uint							m_s_uniqueID;
+	static				_uint							m_s_channelID;
+	GETTOR				(SP(Engine::CMeshC),			m_spMesh,			nullptr,					Mesh)
+	GETTOR				(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,					Graphics)
+	GETTOR				(SP(Engine::CTextureC),			m_spTexture,		nullptr,					Texture)
+	GETTOR				(SP(Engine::CShaderC),			m_spShader,			nullptr,					Shader)	
+	GETTOR				(SP(Engine::CRigidBodyC),		m_spRigidBody,		nullptr,					RigidBody)
+	GETTOR				(SP(Engine::CCollisionC),		m_spCollision,		nullptr,					Collision)
+	GETTOR				(SP(Engine::CDebugC),			m_spDebug,			nullptr,					Debug)
+	GETTOR				(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,					StateMachine)
+
 protected:
-	GETTOR			(M_Stat*,						m_pStat,				nullptr,		Stat)
-	GETTOR			(CAttackBall*,					m_pAttackBall,			nullptr,		AttackBall)
-	GETTOR			(CAttackBox*,					m_pAttackBox,			nullptr,		AttackBox)
-
-	GETTOR_SETTOR	(_float,						m_spawnTimer,			UNDEFINED,		SpawnTimer)
+	GETTOR				(M_Stat*,						m_pStat,			nullptr,					Stat)
+	GETTOR				(CAttackBall*,					m_pAttackBall,		nullptr,					AttackBall)
+	GETTOR				(CAttackBox*,					m_pAttackBox,		nullptr,					AttackBox)
+	GETTOR_SETTOR		(EChannelID,					m_channelID,		EChannelID::NumOfChannelID,	ChannelID)
+	GETTOR_SETTOR		(_float,						m_spawnTimer,		UNDEFINED,					SpawnTimer)
+	GETTOR_SETTOR		(SP(CPatternMachineC),			m_spPatternMachine,	nullptr,					PatternMachine)
 };
-

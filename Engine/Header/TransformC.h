@@ -74,9 +74,6 @@ public:
 					void				MoveUp					(_float magnitude);
 					void				MoveDown				(_float magnitude);
 
-					void				CopyTransform			(CTransformC const& transform);
-
-					void				operator =				(CTransformC const& rhs);
 public:
 					void				UpdateForward			(void);
 					void				UpdateRotation			(void);
@@ -94,7 +91,8 @@ public:
 
 protected:
 	GETTOR_SETTOR	(SP(CTransformC),	m_spParent,					nullptr,			Parent)
-
+	
+	GETTOR_SETTOR	(const _mat*,		m_pParentMatrix,			nullptr,			ParentMatrix)
 	GETTOR			(_mat,				m_rotMatrix,				{},					RotMatrix)
 	GETTOR			(_mat,				m_lastRotMatrix,			{},					LastRotMatrix)
 	GETTOR			(_mat,				m_worldMat,					{},					WorldMatrix)
@@ -103,6 +101,10 @@ protected:
 	GETTOR			(_mat,				m_lastWorldMatNoScale,		{},					LastWorldMatrixNoScale)
 
 	//Mine
+	GETTOR			(_float3,			m_lastForward,				FORWARD_VECTOR,		LastForward)
+	GETTOR			(_float3,			m_lastUp,					UP_VECTOR,			LastUp)
+	GETTOR			(_float3,			m_lastRight,				RIGHT_VECTOR,		LastRight)
+
 	GETTOR			(_float3,			m_forward,					FORWARD_VECTOR,		Forward)
 	GETTOR			(_float3,			m_up,						UP_VECTOR,			Up)
 	GETTOR			(_float3,			m_right,					RIGHT_VECTOR,		Right)
@@ -115,6 +117,10 @@ protected:
 	GETTOR_SETTOR	(_float3,			m_goalPosition,				ZERO_VECTOR,		GoalPosition)
 	GETTOR_SETTOR	(_float,			m_lerpSpeed,				5.f,				LerpSpeed)
 	GETTOR			(_float,			m_lerpProportion,			0.15f,				LerpProportion)
+
+	GETTOR			(_float3,			m_lastPosition,				ZERO_VECTOR,		LastPosition)
+	GETTOR			(_float3,			m_lastRotation,				ZERO_VECTOR,		LastRotation)
+	GETTOR			(_float3,			m_lastSize,					ONE_VECTOR,			LastSize)
 
 	GETTOR			(_float3,			m_position,					ZERO_VECTOR,		Position)
 	GETTOR			(_float3,			m_rotation,					ZERO_VECTOR,		Rotation)

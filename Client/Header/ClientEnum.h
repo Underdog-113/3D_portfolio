@@ -71,6 +71,16 @@ enum class EShaderID
 	NumOfShaderID		= 10 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
+enum class EChannelID
+{
+	MONSTER_0			= 0 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_1			= 1 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_2			= 2 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_3			= 3 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_4			= 4 + (_int)Engine::EChannelID::NumOfChannelID,
+	NumOfChannelID		= 5 + (_int)Engine::EChannelID::NumOfChannelID,
+};
+
 enum class ELoadingID
 {
 	StaticResource,

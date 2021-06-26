@@ -52,13 +52,13 @@ void CWaterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	m_pEffect->SetVector("g_WorldLightPos", &m_vColor);
 
 	// 시점(로컬좌표계)
-#
-	m_vColor = D3DXVECTOR4(1, 1, 1, 1);
+
+	m_vColor = D3DXVECTOR4(0, 0, 0, 1);
 	m_pEffect->SetVector("g_WorldCameraPos", &m_vColor);
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
-	//m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 
 	m_pEffect->SetVector("g_LightColor", &m_vColor);
 

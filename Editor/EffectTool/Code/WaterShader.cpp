@@ -52,7 +52,7 @@ void CWaterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	m_pEffect->SetVector("g_WorldLightPos", &m_vColor);
 
 	// 시점(로컬좌표계)
-#
+
 	m_vColor = D3DXVECTOR4(1, 1, 1, 1);
 	m_pEffect->SetVector("g_WorldCameraPos", &m_vColor);
 

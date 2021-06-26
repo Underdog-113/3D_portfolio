@@ -1,19 +1,19 @@
-#ifndef DECOOBJECT_H
-#define DECOOBJECT_H
+#ifndef MAPOBJECT_H
+#define MAPOBJECT_H
 
 #include "Object.h"
 
-class CDecoObject final : public Engine::CObject
+class CMapObject final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 private:
-	explicit						CDecoObject			(void);
-								   ~CDecoObject			(void);
+	explicit						CMapObject			(void);
+								   ~CMapObject			(void);
 
 public:
-	static		SP(CDecoObject)		Create				(_bool isStatic, Engine::CScene* pScene);
+	static		SP(CMapObject)		Create				(_bool isStatic, Engine::CScene* pScene);
 
-				SP(Engine::CObject)	MakeClone			(void) override;
+				SP(CObject)			MakeClone			(void) override;
 		
 				void				Awake				(void) override;
 				void				Start				(void) override;
@@ -39,6 +39,6 @@ private:
 	GETTOR		(SP(Engine::CMeshC),		m_spMesh,			nullptr,	Mesh)
 	GETTOR		(SP(Engine::CTextureC),		m_spTexture,		nullptr,	Texture)
 	GETTOR		(SP(Engine::CGraphicsC),	m_spGraphics,		nullptr,	Graphics)
-	GETTOR		(SP(Engine::CShaderC),		m_spShader,			nullptr,    Shader)
+	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
 };
 #endif

@@ -35,7 +35,8 @@ enum class ECollisionID
 	Player				= 2 + (_uint)Engine::ECollisionID::NumOfColliderID,
 	Enemy				= 3 + (_uint)Engine::ECollisionID::NumOfColliderID,
 	Trigger				= 4 + (_uint)Engine::ECollisionID::NumOfColliderID,
-	NumOfColliderID		= 5 + (_uint)Engine::ECollisionID::NumOfColliderID
+	PhaseChanger		= 5 + (_uint)Engine::ECollisionID::NumOfColliderID,
+	NumOfColliderID		= 6 + (_uint)Engine::ECollisionID::NumOfColliderID
 };
 
 enum class EDataID
@@ -45,7 +46,8 @@ enum class EDataID
 	Scene				= 2 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Enemy				= 3 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	UI					= 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	NumOfDataID			= 5 + (_uint)Engine::EDataID::NumOfEngineDataID
+	Stat				= 5 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	NumOfDataID			= 6 + (_uint)Engine::EDataID::NumOfEngineDataID
 };
 
 
