@@ -325,16 +325,6 @@ void CFSM_KianaC::CreateEffect_Attack4()
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
 	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 
-	if (m_pKiana->GetUltraMode())
-	{
-		auto clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-		clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-		clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-		clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-	}
 }
 
 void CFSM_KianaC::CreateEffect_Attack5()
@@ -820,6 +810,35 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk04)
 	{
 		CreateEffect_Attack4();
+
+		if (m_pKiana->GetUltraMode())
+		{
+			_float size = 0.5f;
+			auto clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3_1", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
+			clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+			clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+			clawEffect->GetTransform()->SetSize(_float3(size, size, size));
+
+			clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+			clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+
+			clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3_2", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
+			clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+			clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+			clawEffect->GetTransform()->SetSize(_float3(size, size, size));
+
+			clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+			clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+
+			clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3_3", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
+			clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+			clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+			clawEffect->GetTransform()->SetSize(_float3(size, size, size));
+
+			clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+			clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+		}
+
 		m_checkEffect = true;
 
 		PlaySound_Attack_RandomVoice();

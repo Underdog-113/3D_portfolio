@@ -1,35 +1,30 @@
 #include "stdafx.h"
-#include "..\Header\DissolveShader.h"
+#include "..\Header\AlphaMaskShader.h"
 
 
-CDissolveShader::CDissolveShader()
+CAlphaMaskShader::CAlphaMaskShader()
 {
 }
 
-
-CDissolveShader::~CDissolveShader()
+Engine::CShader * CAlphaMaskShader::Create()
 {
-}
-
-Engine::CShader * CDissolveShader::Create()
-{
-	CDissolveShader* pInstance = new CDissolveShader;
+	CAlphaMaskShader* pInstance = new CAlphaMaskShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CDissolveShader::Free()
+void CAlphaMaskShader::Free()
 {
 	__super::Free();
 }
 
-void CDissolveShader::Awake()
+void CAlphaMaskShader::Awake()
 {
 	__super::Awake();
 }
 
-void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CAlphaMaskShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	// Add Alpha variables to objects that use this shader.
 	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
@@ -62,5 +57,5 @@ void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
-	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 }
