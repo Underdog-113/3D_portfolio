@@ -39,6 +39,7 @@
 #include "ButtonManager.h"
 #include "BattleUiManager.h"
 #include "DataManager.h"
+#include "ValkyriegManager.h"
 
 // »ç¿îµå
 //#include <io.h>

@@ -26,7 +26,7 @@ private:
 
 	CButton* m_clickButton;
 	CButton* m_funcActivation;
-	GETTOR(CButton*, m_activationButton, NULL, ActivationButton);
+	GETTOR(CButton*, m_activationButton, NULL, ActivationButton)
 };
 
 

@@ -94,9 +94,6 @@
     <Filter Include="09.Manager">
       <UniqueIdentifier>{aaee55bd-5edf-4507-bcc2-29434ee64096}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09.Manager\00.ButtonManager">
-      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09.Manager\01.BattleUiManager">
       <UniqueIdentifier>{f3403a50-55bf-4e14-9ea9-ae5e6f3ecc24}</UniqueIdentifier>
     </Filter>
@@ -117,9 +114,6 @@
     </Filter>
     <Filter Include="03.Component\00.UI\08.BattleRenunciation">
       <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.DataManager">
-      <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Scene\10.BattleEnd">
       <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
@@ -415,24 +409,6 @@
     <Filter Include="04.Shader\09.AttackRangeShader">
       <UniqueIdentifier>{afb5da92-a9b4-40be-a70c-f1bc52966bce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09.Manager\02.DataManager\00.CaptainData">
-      <UniqueIdentifier>{4ab6ea9f-9f60-4d36-98ae-4e925f0fac7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.DataManager\01.InStockValkyrieData">
-      <UniqueIdentifier>{8462a6b8-8dfc-4bbe-a435-d966095a5b64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.DataManager\02.ValkyrieStatusData">
-      <UniqueIdentifier>{f058cc86-969f-42b0-90a9-72d74023dc52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.DataManager\03.SquadData">
-      <UniqueIdentifier>{82cbad81-9bf6-4f1a-b419-517533b40a3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.DataManager\04.CWeaponData">
-      <UniqueIdentifier>{44c9921e-015d-4f0c-94e7-a839653e2557}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.DataManager\05.ItemData">
-      <UniqueIdentifier>{761915c7-b664-4867-8764-42c99390d9e5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09.Manager\03.MainRoomManager">
       <UniqueIdentifier>{d35ac856-8148-40f1-997e-1b2a2426b88a}</UniqueIdentifier>
     </Filter>
@@ -466,14 +442,53 @@
     <Filter Include="10.ControlTower\PhaseControl\00.OneStage">
       <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09.Manager\06.PartySetting">
-      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="10.ControlTower\ValkyrieController">
       <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager">
+      <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager\00.CaptainData">
+      <UniqueIdentifier>{4ab6ea9f-9f60-4d36-98ae-4e925f0fac7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager\01.InStockValkyrieData">
+      <UniqueIdentifier>{8462a6b8-8dfc-4bbe-a435-d966095a5b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager\02.ValkyrieStatusData">
+      <UniqueIdentifier>{f058cc86-969f-42b0-90a9-72d74023dc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager\03.SquadData">
+      <UniqueIdentifier>{82cbad81-9bf6-4f1a-b419-517533b40a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager\04.CWeaponData">
+      <UniqueIdentifier>{44c9921e-015d-4f0c-94e7-a839653e2557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\00.DataManager\05.ItemData">
+      <UniqueIdentifier>{761915c7-b664-4867-8764-42c99390d9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\02.ButtonManager">
+      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\06.ValkyriegManager">
+      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11.ValkyrieFSM">
+      <UniqueIdentifier>{e5eba95b-f0ff-439b-8c23-417c5075f606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11.ValkyrieFSM\01.ValkyrieSelect">
+      <UniqueIdentifier>{44dcc136-2bea-4713-bbe6-ec3f7e5d3b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11.ValkyrieFSM\02.ValkyrieProperty">
+      <UniqueIdentifier>{7160368b-34b9-4b7e-9e3f-294aa9cf1a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11.ValkyrieFSM\03.ValkyrieWeapon">
+      <UniqueIdentifier>{39c2650b-074c-44ee-924f-8bfd17cab5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11.ValkyrieFSM\00.ValkyrieFSM">
+      <UniqueIdentifier>{e860a1ae-bc87-418a-a644-4197443d6075}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -601,7 +616,7 @@
       <Filter>02.Objects\02.UI\01.ScrollView</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ButtonManager.h">
-      <Filter>09.Manager\00.ButtonManager</Filter>
+      <Filter>09.Manager\02.ButtonManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ClientScene.h">
       <Filter>01.Scene</Filter>
@@ -865,28 +880,28 @@
       <Filter>04.Shader\00.WaterShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CaptainData.h">
-      <Filter>09.Manager\02.DataManager\00.CaptainData</Filter>
+      <Filter>09.Manager\00.DataManager\00.CaptainData</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
       <Filter>99.Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\InStockValkyrieData.h">
-      <Filter>09.Manager\02.DataManager\01.InStockValkyrieData</Filter>
+      <Filter>09.Manager\00.DataManager\01.InStockValkyrieData</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieStatusData.h">
-      <Filter>09.Manager\02.DataManager\02.ValkyrieStatusData</Filter>
+      <Filter>09.Manager\00.DataManager\02.ValkyrieStatusData</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SquadData.h">
-      <Filter>09.Manager\02.DataManager\03.SquadData</Filter>
+      <Filter>09.Manager\00.DataManager\03.SquadData</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\WeaponData.h">
-      <Filter>09.Manager\02.DataManager\04.CWeaponData</Filter>
+      <Filter>09.Manager\00.DataManager\04.CWeaponData</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ItemData.h">
-      <Filter>09.Manager\02.DataManager\05.ItemData</Filter>
+      <Filter>09.Manager\00.DataManager\05.ItemData</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DataManager.h">
-      <Filter>09.Manager\02.DataManager</Filter>
+      <Filter>09.Manager\00.DataManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MainRoomManager.h">
       <Filter>09.Manager\03.MainRoomManager</Filter>
@@ -936,20 +951,32 @@
     <ClInclude Include="..\Header\ActorController.h">
       <Filter>10.ControlTower\ValkyrieController</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\PartySettingManager.h">
-      <Filter>09.Manager\06.PartySetting</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\AlphaLifeTimeC.h">
       <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SkillActivationC.h">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\ClientComponents.h">
       <Filter>98.Include</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Pistol.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyriegManager.h">
+      <Filter>09.Manager\06.ValkyriegManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieFSM.h">
+      <Filter>11.ValkyrieFSM\00.ValkyrieFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieSelect.h">
+      <Filter>11.ValkyrieFSM\01.ValkyrieSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieProperty.h">
+      <Filter>11.ValkyrieFSM\02.ValkyrieProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieWeapon.h">
+      <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1056,7 +1083,7 @@
       <Filter>02.Objects\02.UI\01.ScrollView</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ButtonManager.cpp">
-      <Filter>09.Manager\00.ButtonManager</Filter>
+      <Filter>09.Manager\02.ButtonManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ClientScene.cpp">
       <Filter>01.Scene</Filter>
@@ -1284,28 +1311,28 @@
       <Filter>04.Shader\00.WaterShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CaptainData.cpp">
-      <Filter>09.Manager\02.DataManager\00.CaptainData</Filter>
+      <Filter>09.Manager\00.DataManager\00.CaptainData</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Dummy.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\InStockValkyrieData.cpp">
-      <Filter>09.Manager\02.DataManager\01.InStockValkyrieData</Filter>
+      <Filter>09.Manager\00.DataManager\01.InStockValkyrieData</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp">
-      <Filter>09.Manager\02.DataManager\02.ValkyrieStatusData</Filter>
+      <Filter>09.Manager\00.DataManager\02.ValkyrieStatusData</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SquadData.cpp">
-      <Filter>09.Manager\02.DataManager\03.SquadData</Filter>
+      <Filter>09.Manager\00.DataManager\03.SquadData</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\WeaponData.cpp">
-      <Filter>09.Manager\02.DataManager\04.CWeaponData</Filter>
+      <Filter>09.Manager\00.DataManager\04.CWeaponData</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ItemData.cpp">
-      <Filter>09.Manager\02.DataManager\05.ItemData</Filter>
+      <Filter>09.Manager\00.DataManager\05.ItemData</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DataManager.cpp">
-      <Filter>09.Manager\02.DataManager</Filter>
+      <Filter>09.Manager\00.DataManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MainRoomManager.cpp">
       <Filter>09.Manager\03.MainRoomManager</Filter>
@@ -1332,7 +1359,6 @@
       <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MO_Dummy.cpp" />
-    <ClCompile Include="SkillActivationC.cpp" />
     <ClCompile Include="..\Code\StageSelectionManager.cpp">
       <Filter>09.Manager\04.StageSelectionManager</Filter>
     </ClCompile>
@@ -1357,17 +1383,29 @@
     <ClCompile Include="..\Code\ActorController.cpp">
       <Filter>10.ControlTower\ValkyrieController</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PartySettingManager.cpp">
-      <Filter>09.Manager\06.PartySetting</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\AlphaLifeTimeC.cpp">
       <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SkillActivationC.cpp">
       <Filter>03.Component\00.UI\10.SkillActivation</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\Kiana_Pistol.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyriegManager.cpp">
+      <Filter>09.Manager\06.ValkyriegManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieFSM.cpp">
+      <Filter>11.ValkyrieFSM\00.ValkyrieFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieSelect.cpp">
+      <Filter>11.ValkyrieFSM\01.ValkyrieSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieProperty.cpp">
+      <Filter>11.ValkyrieFSM\02.ValkyrieProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieWeapon.cpp">
+      <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
