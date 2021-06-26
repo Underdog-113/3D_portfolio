@@ -18,9 +18,6 @@ public:
 
 public:
 					void				SetUpConstantTable		(SP(CGraphicsC) spGC) override;
-
-private:
-	GETTOR_SETTOR	(_float4,			m_color,				_float4(0, 0, 0, 1),	Color)
 };
 END
 

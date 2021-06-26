@@ -148,6 +148,10 @@
 #define BACK_VECTOR		_float3(0,  0, -1)
 #define MAX_VECTOR		_float3(FLT_MAX, FLT_MAX, FLT_MAX)
 
+#define ZERO_VEC4		_float4(0, 0, 0, 0);
+#define DEFAULT_VEC4	_float4(0, 0, 0, 1);
+#define ONE_VEC4		_float4(1, 1, 1, 1);
+
 #define PLAYER_RAY_DISTANCE 0.7f
 
 #define PI 3.141592f
