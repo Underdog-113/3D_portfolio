@@ -41,6 +41,14 @@
 #include "DataManager.h"
 #include "ValkyriegManager.h"
 
+//Client Data
+#include "ValkyrieStatusData.h"
+#include "CaptainData.h"
+#include "InStockValkyrieData.h"
+#include "WeaponData.h"
+#include "ItemData.h"
+#include "SquadData.h"
+
 // »ç¿îµå
 //#include <io.h>
 //#include "fmod.h"

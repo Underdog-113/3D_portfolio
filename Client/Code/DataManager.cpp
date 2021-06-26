@@ -1,11 +1,6 @@
 #include "stdafx.h"
 #include "DataManager.h"
-#include "CaptainData.h"
-#include "InStockValkyrieData.h"
-#include "ValkyrieStatusData.h"
-#include "SquadData.h"
-#include "WeaponData.h"
-#include "ItemData.h"
+
 
 #include "ClientScene.h"
 
@@ -165,12 +160,12 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	_bool enable;
 	std::wstring name;
 	std::wstring subName;
-	_float maxHp;
-	_float maxSp;
+	_int maxHp;
+	_int maxSp;
 	_int damage;
 	_int hoesim;
-	_float defense;
-	_float maxExperience;
+	_int defense;
+	_int maxExperience;
 	std::wstring rank;
 	std::wstring property;
 	_int maxLevel;

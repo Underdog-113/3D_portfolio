@@ -3,11 +3,6 @@
 
 #include "ButtonFunction.h"
 
-#include "DataManager.h"
-#include "ValkyrieStatusData.h"
-#include "InStockValkyrieData.h"
-#include "SquadData.h"
-#include "WeaponData.h"
 #include "ClientScene.h"
 
 #include "ValkyrieSelect.h"

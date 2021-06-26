@@ -15,6 +15,9 @@ public:
 	virtual _uint LateUpdate() override;
 	virtual void OnDestroy(void) override;
 
+private:
+	void PropertyCanvas();
 
+	void ChangeSelect();
 };
 
