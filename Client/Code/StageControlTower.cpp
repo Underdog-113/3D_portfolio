@@ -46,6 +46,12 @@ void CStageControlTower::Update(void)
 	if (m_pPhaseControl)
 		m_pPhaseControl->Update();
 
+	if (m_spCurTarget && m_spCurTarget->GetDeleteThis())
+	{
+		m_spCurTarget.reset();
+		m_spCurTarget = nullptr;
+	}
+
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);
@@ -217,6 +223,9 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 void CStageControlTower::SwitchValkyrie(Squad_Role role)
 {
+	if (m_vSquad.size() < 3)
+		return;
+
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
 
 	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
@@ -228,9 +237,15 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	{
 		auto pSwapValkyrie = m_vSquad[Actor];
 		m_vSquad[Actor] = m_vSquad[Wait_1];
-		m_vSquad[Wait_1] = m_vSquad[Wait_2];
-		m_vSquad[Wait_2] = pSwapValkyrie;
+		m_vSquad[Wait_1] = pSwapValkyrie;
 		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+		auto wait1Member = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+
+		m_pLinker->SwitchValkyrie(
+			CUILinker::Up,
+			m_pCurActor->GetStat()->GetType(),
+			wait1Member->GetStat()->GetType());
+
 	}
 		break;
 	case CStageControlTower::Wait_2:
@@ -239,17 +254,24 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 		m_vSquad[Actor] = m_vSquad[Wait_2];
 		m_vSquad[Wait_2] = pSwapValkyrie;
 		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+		auto wait2Member = static_cast<CValkyrie*>(m_vSquad[Wait_2].get());
+
+		m_pLinker->SwitchValkyrie(
+			CUILinker::Down,
+			m_pCurActor->GetStat()->GetType(),
+			wait2Member->GetStat()->GetType());
 	}
 		break;
 	}
-
+	                                                        
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
 
+	Engine::GET_MAIN_CAM->SetTarget(m_vSquad[Actor]);
 
 	// 1. 대기 슬롯 이미지 바꿔주고
-	// 2. 아래 발키리 hp, sp 바꿔주고
 	// 3. 스킬 ui도
+	// 4. 카메라 타겟팅 바꿔주기
 
 
 	m_pCurActor->SetIsEnabled(true);

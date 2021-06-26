@@ -4,7 +4,7 @@
 #include "FSM_KianaC.h"
 #include "ObjectFactory.h"
 #include "DynamicMeshData.h"
-#include "StateMachine.h"
+#include "StateMachineC.h"
 
 #include "StageControlTower.h"
 #include "UILinker.h"
@@ -14,6 +14,8 @@
 #include "Kiana_CatPaw_Atk03.h"
 #include "Kiana_CatPaw_Atk04.h"
 #include "Kiana_CatPaw_Atk05.h"
+
+#include "Kiana_Pistol.h"
 
 #include "AttackBall.h"
 #include "FSMDefine_Kiana.h"
@@ -84,14 +86,14 @@ void CKiana::Start(void)
 	m_pAttackBall->SetOwner(this);
 
 	FindRightToe();
-	FindLeftHand();
-	FindRightHand();
+	//FindLeftHand();
+	//FindRightHand();
 
 	//weapon
 	//CreatePistol();
 
 	//catpaw
-	CreateCatPaw();
+	//CreateCatPaw();
 
 	// status
 	V_WarshipStat stat;
@@ -140,6 +142,16 @@ void CKiana::PreRender(LPD3DXEFFECT pEffect)
 void CKiana::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
+	//if (m_pLeftHand_World)
+	//{
+	//	_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
+	//	_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+	//	combMat._41 -= rootMotionPos.x;
+	//	combMat._43 -= rootMotionPos.z;
+
+	//	*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
+	//}
+	//m_spWeapon_Left->GetTransform()->SetWorldMatrix(*m_pLeftHand_World);
 }
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)
@@ -152,8 +164,8 @@ void CKiana::OnDestroy(void)
 	delete m_pStat;
 
 	SAFE_DELETE(m_pRightToe_World)
-	delete m_pLeftHand_World; 
-	delete m_pRightHand_World;
+	SAFE_DELETE(m_pLeftHand_World)
+	SAFE_DELETE(m_pRightHand_World)
 	__super::OnDestroy();
 }
 
@@ -165,12 +177,6 @@ void CKiana::OnEnable(void)
 void CKiana::OnDisable(void)
 {
 	__super::OnDisable();
-}
-
-void CKiana::Update_WeaponTransform(void)
-{
-	//*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
-	//*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
 }
 
 void CKiana::UpdatePivotMatrices(void)
@@ -195,41 +201,25 @@ void CKiana::UpdatePivotMatrices(void)
 		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
 	}
 
-	if (m_pLeftHand_World)
-	{
-		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
-		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-		combMat._41 -= rootMotionPos.x;
-		combMat._43 -= rootMotionPos.z;
-
-		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
-	}
+// 	if (m_pLeftHand_World)
+// 	{
+// 		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
+// 		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+// 		combMat._41 -= rootMotionPos.x;
+// 		combMat._43 -= rootMotionPos.z;
+// 
+// 		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
+// 	}
 
 }
 
 void CKiana::CreatePistol(void)
 {
-	//m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol_USP45", false, (_uint)ELayerID::Player, L"Weapon_Left");
-	//m_spWeapon_Left->GetTransform()->SetParent(m_spTransform);
-
-	//Engine::CDynamicMeshData* pDM = m_spMesh->GetFirstMeshData_Dynamic();
-	//
-	//m_pLeftHand_Frame = pDM->GetFrameByName("Bip001_Prop2");
-	//m_pLeftHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop2");
-	//m_pLeftHand_World = new _mat;
-	//*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
-
-	//m_spWeapon_Left->GetTransform()->SetOffsetMatrix(m_pLeftHand_World);
-
-	//m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol_USP45", false, (_uint)ELayerID::Player, L"Weapon_Right");
-	//m_spWeapon_Right->GetTransform()->SetParent(m_spTransform);
-
-	//m_pRightHand_Frame = pDM->GetFrameByName("Bip001_Prop1");
-	//m_pRightHand_BoneOffset = pDM->GetFrameOffsetMatrix("Bip001_Prop1");
-	//m_pRightHand_World = new _mat;
-	//*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
-
-	//m_spWeapon_Right->GetTransform()->SetOffsetMatrix(m_pRightHand_World);
+	m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Left");
+	static_cast<CKiana_Pistol*>(m_spWeapon_Left.get())->SetParentMatrix(m_pLeftHand_World);
+	
+	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Right");
+	static_cast<CKiana_Pistol*>(m_spWeapon_Right.get())->SetParentMatrix(m_pRightHand_World);
 }
 
 void CKiana::CreateCatPaw(void)
@@ -481,24 +471,22 @@ void CKiana::SetUltraMode(bool value)
 
 void CKiana::FindLeftHand()
 {
-	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_L_Finger12");
-	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_L_Finger12");
+	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Weapon_L");
+	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Weapon_L");
 
 	m_pLeftHand_World = new _mat;
 	*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
 
-	m_pAttackBall->SetParentMatrix(m_pLeftHand_World);
 }
 
 void CKiana::FindRightHand()
 {
-	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_R_Finger12");
-	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_R_Finger12");
+	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Weapon_R");
+	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Weapon_R");
 
 	m_pRightHand_World = new _mat;
 	*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
 
-	m_pAttackBall->SetParentMatrix(m_pRightHand_World);
 }
 
 void CKiana::FindRightToe()
@@ -519,7 +507,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
@@ -539,7 +527,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name, std::wstring texName
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);

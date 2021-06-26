@@ -58,6 +58,7 @@ void CTheresa::Start(void)
 	V_WarshipStat stat;
 
 	m_pStat = new V_Theresa_Stat;
+	m_pStat->SetType(V_Stat::THERESA);
 	m_pStat->SetupStatus(&stat);
 
 	if (m_isWait)

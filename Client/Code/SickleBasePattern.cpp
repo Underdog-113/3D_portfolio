@@ -30,6 +30,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 
 	static_cast<CMO_Sickle*>(pOwner)->ChaseTarget(tPos);
 
+	/************************* Range */
 	// 상대가 공격 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -68,15 +69,16 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 공격 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동 상태 or 대기 상태라면 공격
+		// 내가 이동, 대기 상태라면 공격
 		if ((Name_Sickle_Walk_Forward == fsm->GetCurStateString() ||
-			Name_Sickle_StandBy == fsm->GetCurStateString()) &&
+			Name_Sickle_StandBy == fsm->GetCurStateString() ||
+			Name_Sickle_Walk_Back == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Sickle_Attack_1);
+			PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
 			static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
 		}
-		
 		// 공격1 상태라면 뒤로 이동 상태로 변경
 		else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
@@ -84,6 +86,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
+	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
 	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
 	{

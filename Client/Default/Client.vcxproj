@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AlphaLifeTimeC.h" />
     <ClInclude Include="..\Header\AlphaMaskShader.h" />
     <ClInclude Include="..\Header\AttackBall.h" />
     <ClInclude Include="..\Header\AttackBox.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
+    <ClInclude Include="..\Header\ClientComponents.h" />
     <ClInclude Include="..\Header\ClientPatterns.h" />
     <ClInclude Include="..\Header\CatPawShader.h" />
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
@@ -270,6 +272,7 @@
     <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -294,7 +297,8 @@
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
-    <ClInclude Include="..\Header\PartySettingManager.h" />
+    <ClInclude Include="..\Header\ValkyrieFSM.h" />
+    <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
     <ClInclude Include="..\Header\PatternMachineC.h" />
     <ClInclude Include="..\Header\PhaseChanger.h" />
@@ -309,6 +313,7 @@
     <ClInclude Include="..\Header\SickleBornPattern.h" />
     <ClInclude Include="..\Header\SickleDiePattern.h" />
     <ClInclude Include="..\Header\SickleHitPattern.h" />
+    <ClInclude Include="..\Header\SkillActivationC.h" />
     <ClInclude Include="..\Header\SkillCollTimcC.h" />
     <ClInclude Include="..\Header\SpiderBasePattern.h" />
     <ClInclude Include="..\Header\SpiderBornPattern.h" />
@@ -332,21 +337,23 @@
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
     <ClInclude Include="..\Header\ActorController.h" />
+    <ClInclude Include="..\Header\ValkyrieProperty.h" />
+    <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
+    <ClInclude Include="..\Header\ValkyrieWeapon.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
-    <ClInclude Include="AlphaLifeTimeC.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
-    <ClInclude Include="SkillActivationC.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
+    <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
@@ -416,6 +423,7 @@
     <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
+    <ClCompile Include="..\Code\Kiana_Pistol.cpp" />    
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -440,7 +448,8 @@
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
-    <ClCompile Include="..\Code\PartySettingManager.cpp" />
+    <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
+    <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
     <ClCompile Include="..\Code\PatternMachineC.cpp" />
     <ClCompile Include="..\Code\PhaseChanger.cpp" />
@@ -455,6 +464,7 @@
     <ClCompile Include="..\Code\SickleBornPattern.cpp" />
     <ClCompile Include="..\Code\SickleDiePattern.cpp" />
     <ClCompile Include="..\Code\SickleHitPattern.cpp" />
+    <ClCompile Include="..\Code\SkillActivationC.cpp" />
     <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
     <ClCompile Include="..\Code\SpiderBasePattern.cpp" />
     <ClCompile Include="..\Code\SpiderBornPattern.cpp" />
@@ -478,14 +488,15 @@
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
     <ClCompile Include="..\Code\ActorController.cpp" />
+    <ClCompile Include="..\Code\ValkyrieProperty.cpp" />
+    <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
-    <ClCompile Include="AlphaLifeTimeC.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="SkillActivationC.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

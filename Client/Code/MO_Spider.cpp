@@ -32,6 +32,8 @@ SP(Engine::CObject) CMO_Spider::MakeClone(void)
 	spClone->m_spDebug			= spClone->GetComponent<Engine::CDebugC>();
 	
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_SpiderC>();
+	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
+
 	return spClone;
 }
 
@@ -40,6 +42,7 @@ void CMO_Spider::Awake(void)
 	__super::Awake();	
 
 	m_spStateMachine = AddComponent<CFSM_SpiderC>();
+	m_spPatternMachine->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 }
 
 void CMO_Spider::Start(void)
@@ -174,7 +177,7 @@ SP(Engine::CObject) CMO_Spider::CreateEffect(std::wstring name)
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");

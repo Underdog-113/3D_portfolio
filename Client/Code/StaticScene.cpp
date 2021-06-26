@@ -266,7 +266,7 @@ void CStaticScene::InitValkyriePrototypes(void)
 	SP(CKiana_CatPaw_Ring_Atk02) spPawRing02(CKiana_CatPaw_Ring_Atk02::Create(true, this));
 	ADD_PROTOTYPE(spPawRing02);
 
-	SP(CKiana_Pistol_USP45) spPistol(CKiana_Pistol_USP45::Create(true, this));
+	SP(CKiana_Pistol) spPistol(CKiana_Pistol::Create(true, this));
 	ADD_PROTOTYPE(spPistol);
 
 

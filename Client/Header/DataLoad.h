@@ -35,6 +35,9 @@ public:
 
 	// 툴 로드
 	void MapLoad(Engine::CScene* pScene);
+
+	// 페이즈 체인저 로드
+	void PhaseChangerLoad(Engine::CScene* pScene);
 	
 	void EffectLoad(Engine::CScene* pScene);
 

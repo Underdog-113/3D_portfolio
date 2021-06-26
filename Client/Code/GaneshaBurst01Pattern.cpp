@@ -5,7 +5,7 @@
 #include "FSMDefine_Ganesha.h"
 #include "MB_Ganesha.h"
 
-#include "StateMachine.h"
+#include "StateMachineC.h"
 #include "Valkyrie.h" 
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
@@ -37,6 +37,30 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 	}
 
+	/************************* Sound */
+	// burst sound
+	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternPlaySound(L"Ganesha_Laser.wav", pOwner);
+		m_onSound = true;
+	}
+	// run start sound
+	else if (Name_Ganesha_Run == fsm->GetCurStateString())
+	{
+		if (false == m_onRunStart)
+		{
+			PatternPlaySound(L"Ganesha_Run_Start.wav", pOwner);
+			m_onRunStart = true;
+		}
+		else if (true == m_onRunStart && false == PatternSoundEnd(pOwner))
+		{
+			PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.03f);
+		}
+	}
+
+	/************************* Range */
 	// 상대가 burst1 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -44,6 +68,9 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
+			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			m_onSound = false;
+			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -63,19 +90,23 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	else if (len <= m_atkDis)
 	{
 		// 내가 이동 상태라면 burst1
-		if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		if ((Name_Ganesha_StandBy == fsm->GetCurStateString() ||
+			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst01);
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Laser.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
 		}
 	}
 
+	/************************* JumpBack */
 	// 내가 burst1 상태라면 뒤로 이동
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;
+		m_onSound = false;
+		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -97,11 +128,13 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		else
 		{
 			fsm->ChangeState(Name_Ganesha_StandBy);
+			PatternStopSound(pOwner);
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
 	}
 
+	/************************* AttackBall */
 	// burst 상태가 완료되면 attackball off
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
@@ -137,9 +170,6 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		offset.z = (beamDir.z * size.z / 2.f);
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
-		
-		
-		
 	}
 }
 

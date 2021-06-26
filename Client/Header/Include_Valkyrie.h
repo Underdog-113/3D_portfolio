@@ -13,7 +13,7 @@
 #include "Kiana_CatPaw_Ring_Atk03.h"
 #include "Kiana_CatPaw_Ring_Atk04.h"
 #include "Kiana_CatPaw_Ring_Atk05.h"
-#include "Kiana_Pistol_USP45.h"
+#include "Kiana_Pistol.h"
 
 #include "Theresa.h"
 

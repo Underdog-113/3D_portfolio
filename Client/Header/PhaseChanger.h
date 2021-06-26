@@ -4,6 +4,7 @@
 #include "Object.h"
 
 class CMapObject2D;
+class CMonster;
 class CPhaseChanger final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -34,16 +35,21 @@ public:
 
 public:
 				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine);
+				void				AddMonster			(SP(CMonster) spMonster);
 private:
 				void				SetBasicName		(void) override;
 private:
 	static		_uint				m_s_uniqueID;
 
 	typedef std::vector<SP(CMapObject2D)> _MAPOBJECT2DS;
+	GETTOR			(_MAPOBJECT2DS,				m_vRestrictLine,	{},				RestrictLines)
 
-	GETTOR_SETTOR(_int,						m_phaseToDie,		UNDEFINED,		PhaseToDie)
+	typedef std::vector<SP(CMonster)> _MONSTERS;
+	GETTOR			(_MONSTERS,					m_vMonster,			{},				Monsters)
 
-	GETTOR		(_MAPOBJECT2DS,				m_vRestrictLine,	{},				RestrictLines)
-	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
+	GETTOR_SETTOR	(_int,						m_phaseToDie,		UNDEFINED,		PhaseToDie)
+	GETTOR			(_bool,						m_timerStart,		false,			TimerStart)
+	GETTOR			(_float,					m_spawnTimer,		0.f,			SpawnTimer)
+	GETTOR			(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
 };
 #endif

@@ -2,35 +2,33 @@
 #define PARTYSETTINGSCENE_H
 
 #include "ClientScene.h"
-class CLoading;
-class CPartySettingScene final :public CClientScene
+
+class CPartySettingScene final : public CClientScene
 {
 private:
-	explicit							CPartySettingScene			(void);
-									   ~CPartySettingScene			(void);
+	explicit							CPartySettingScene(void);
+	~CPartySettingScene(void);
 
 public:
-	static			CClientScene*		Create				(void);
-					void				Free				(void) override;
+	static			CClientScene*		Create(void);
+	void				Free(void) override;
 
-					void				Awake				(_int numOfLayers) override;
-					void				Start				(void) override;
-															   
-					void				FixedUpdate			(void) override;
-					void				Update				(void) override;
-					void				LateUpdate			(void) override;	
-					
-					void				OnDestroy			(void) override;
+	void				Awake(_int numOfLayers) override;
+	void				Start(void) override;
 
-					void				OnEnable			(void) override;	 
-					void				OnDisable			(void) override;
+	void				FixedUpdate(void) override;
+	void				Update(void) override;
+	void				LateUpdate(void) override;
 
-private:
-	void DataInit();
+	void				OnDestroy(void) override;
+
+	void				OnEnable(void) override;
+	void				OnDisable(void) override;
 
 private:
-					void				InitPrototypes		(void) override;
+	void				InitPrototypes(void) override;
 
+private:
+	_bool m_init = false;
 };
-
 #endif

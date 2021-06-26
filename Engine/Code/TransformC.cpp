@@ -38,7 +38,14 @@ void CTransformC::Awake(void)
 void CTransformC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
-	UpdateWorldMatrix();
+
+	m_lastPosition			= m_position;
+	m_lastRotation			= m_rotation;
+	m_lastSize				= m_size;
+
+	m_lastForward			= m_forward;
+	m_lastUp				= m_up;
+	m_lastRight				= m_right;
 
 	m_lastRotMatrix			= m_rotMatrix;
 	m_lastWorldMat			= m_worldMat;
@@ -51,9 +58,6 @@ void CTransformC::FixedUpdate(SP(CComponent) spThis)
 
 void CTransformC::Update(SP(CComponent) spThis)
 {
-	if (m_pOwner->GetObjectKey() == L"MB_Ganesha")
-		int a = 5;
-
 	if (m_spParent && m_spParent->GetOwner() == nullptr)
 	{
 		_quat rotQuat;
@@ -71,9 +75,6 @@ void CTransformC::Update(SP(CComponent) spThis)
 
 void CTransformC::LateUpdate(SP(CComponent) spThis)
 {
-	if (m_pOwner->GetObjectKey() == L"MB_Ganesha")
-		int a = 5;
-
 	UpdateWorldMatrix();
 	
 	if (m_checkCamDist)
@@ -276,13 +277,13 @@ void CTransformC::Lerp(void)
 {
 	if (m_lerpOn)
 	{
-		_float3 dir = m_goalPosition - m_position;
+		_float3 dir = m_goalPosition - m_lastPosition;
 		_float length = D3DXVec3Length(&dir);
 		_float moveAmount = length * m_lerpProportion;
 
 		if (length < m_lerpSpeed * GET_DT)
 		{
-			m_position	= m_goalPosition;
+			m_lastPosition	= m_goalPosition;
 			m_lerpOn	= false;
 			return;
 		}
@@ -290,7 +291,7 @@ void CTransformC::Lerp(void)
 			moveAmount = m_lerpSpeed;
 
 		dir /= length;
-		m_position += (dir * moveAmount * GET_DT);
+		m_lastPosition += (dir * moveAmount * GET_DT);
 	}
 }
 
@@ -298,7 +299,7 @@ void CTransformC::SlerpXZ(void)
 {
 	if (m_slerpOn)
 	{
-		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_forward);
+		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_lastForward);
 		GET_MATH->RoundOffRange(dotTwoForward, 1);
 
 		_float includedAngle = acos(dotTwoForward);
@@ -312,7 +313,7 @@ void CTransformC::SlerpXZ(void)
 		}
 
 		_float3 determinant;
-		D3DXVec3Cross(&determinant, &m_forward, &m_goalForward);
+		D3DXVec3Cross(&determinant, &m_lastForward, &m_goalForward);
 
 		if (determinant.y < 0)
 			AddRotationY(-m_slerpSpeed * GET_DT);
@@ -323,50 +324,32 @@ void CTransformC::SlerpXZ(void)
 
 void CTransformC::MoveForward(_float magnitude)
 {
-	AddPosition(m_forward * magnitude);
+	AddPosition(m_lastForward * magnitude);
 }
 
 void CTransformC::MoveBackward(_float magnitude)
 {
-	AddPosition(-m_forward * magnitude);
+	AddPosition(-m_lastForward * magnitude);
 }
 
 void CTransformC::MoveLeft(_float magnitude)
 {
-	AddPosition(-m_right * magnitude);
+	AddPosition(-m_lastRight * magnitude);
 }
 
 void CTransformC::MoveRight(_float magnitude)
 {
-	AddPosition(m_right * magnitude);
+	AddPosition(m_lastRight * magnitude);
 }
 
 void CTransformC::MoveUp(_float magnitude)
 {
-	AddPosition(m_up * magnitude);
+	AddPosition(m_lastUp * magnitude);
 }
 
 void CTransformC::MoveDown(_float magnitude)
 {
-	AddPosition(-m_up * magnitude);
-}
-
-void CTransformC::CopyTransform(CTransformC const & transform)
-{
-	*this = transform;
-}
-
-void CTransformC::operator=(CTransformC const & rhs)
-{
-	m_position	= rhs.m_position;
-	m_rotation	= rhs.m_rotation;
-	m_size		= rhs.m_size;
-
-	m_forward	= rhs.m_forward;
-	m_up		= rhs.m_up;
-	m_right		= rhs.m_right;
-
-	m_worldMat	= rhs.m_worldMat;
+	AddPosition(-m_lastUp * magnitude);
 }
 
 #pragma endregion
@@ -448,6 +431,14 @@ void CTransformC::UpdateRotation(void)
 
 void CTransformC::UpdateWorldMatrix(void)
 {
+	m_lastPosition			= m_position;
+	m_lastRotation			= m_rotation;
+	m_lastSize				= m_size;
+
+	m_lastForward			= m_forward;
+	m_lastUp				= m_up;
+	m_lastRight				= m_right;
+
 	m_lastRotMatrix			= m_rotMatrix;
 	m_lastWorldMat			= m_worldMat;
 	m_lastWorldMatNoScale	= m_worldMatNoScale;
@@ -466,7 +457,7 @@ void CTransformC::UpdateWorldMatrix(void)
                                         m_position.y,
                                         m_position.z);
 
-	m_rotMatrix			= rotateX * rotateY * rotateZ;
+	m_rotMatrix	= rotateX * rotateY * rotateZ;
 
 	m_worldMat = size * rotateX * rotateY * rotateZ * translation;
 	m_worldMatNoScale = rotateX * rotateY * rotateZ * translation;
@@ -476,6 +467,11 @@ void CTransformC::UpdateWorldMatrix(void)
 		m_rotMatrix			*= m_spParent->GetRotMatrix();
 		m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
 		m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
+	}
+
+	if (m_pParentMatrix)
+	{
+		UpdateParentMatrix(m_pParentMatrix);
 	}
 }
 
@@ -488,4 +484,51 @@ void CTransformC::UpdateCamDistance(void)
 void CTransformC::UpdateParentMatrix(const _mat * pMat)
 {
 	m_lastWorldMat *= *pMat;
+
+	_mat matToDecompose = m_worldMat;
+
+	m_lastPosition = _float3(matToDecompose._41, matToDecompose._42, matToDecompose._43);
+	matToDecompose._41 = 0; matToDecompose._42 = 0; matToDecompose._43 = 0;
+
+	
+	m_lastSize.x = D3DXVec3Length(&_float3(matToDecompose._11, matToDecompose._12, matToDecompose._13));
+	m_lastSize.y = D3DXVec3Length(&_float3(matToDecompose._21, matToDecompose._22, matToDecompose._23));
+	m_lastSize.z = D3DXVec3Length(&_float3(matToDecompose._31, matToDecompose._32, matToDecompose._33));
+
+	if (m_size.x != 0)
+	{
+		matToDecompose._11 /= m_lastSize.x;
+		matToDecompose._12 /= m_lastSize.x;
+		matToDecompose._13 /= m_lastSize.x;
+	}
+
+	if (m_size.y != 0)
+	{
+		matToDecompose._21 /= m_lastSize.y;
+		matToDecompose._22 /= m_lastSize.y;
+		matToDecompose._23 /= m_lastSize.y;
+	}
+
+	if (m_size.z != 0)
+	{
+		matToDecompose._31 /= m_lastSize.z;
+		matToDecompose._32 /= m_lastSize.z;
+		matToDecompose._33 /= m_lastSize.z;
+	}
+
+	_quat rotQuat;
+	D3DXQuaternionRotationMatrix(&rotQuat, &matToDecompose);
+	D3DXQuaternionNormalize(&rotQuat, &rotQuat);
+
+	m_lastRotation = GET_MATH->QuatToRad(rotQuat);
+}
+
+void CTransformC::SetWorldMatrix(_mat worldMat)
+{
+	m_worldMat = worldMat;
+}
+
+void CTransformC::SetLastWorldMatrix(_mat worldMat)
+{
+	m_lastWorldMat = worldMat;
 }

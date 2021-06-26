@@ -16,6 +16,7 @@
 #include "DecoObject.h"
 #include "PhaseChanger.h"
 #include "MapObject2D.h"
+#include "Monster.h"
 
 CDataLoad::CDataLoad()
 {
@@ -335,7 +336,7 @@ void CDataLoad::ScrollViewLoad(Engine::CScene* pScene)
 		spScrollView->GetTransform()->SetPosition(pos);
 		spScrollView->GetTransform()->SetPositionZ(sortLayer);
 		spScrollView->GetTransform()->SetSize(size);
-		spScrollView->GetTexture()->AddTexture(textureKey, 0);
+		//spScrollView->GetTexture()->ChangeTexture(textureKey);
 		spScrollView->AddScrollViewData(column, distanceXY, offSet);
 	}
 }
@@ -402,7 +403,6 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 {
 	auto& pDataStore = pScene->GetDataStore();
 	auto& pObjectFactory = pScene->GetObjectFactory();
-	auto& objectFactory = pScene->GetObjectFactory();
 
 	/* deco */
 	_int numOfDecoObject;
@@ -464,14 +464,17 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 							 std::to_wstring(i) + L"_renderID", renderID);
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
 
-		if(renderID == 1)
+		if (L"Stage02_Alpha_WaterPlane" == meshKey)
+		{
+			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
+		}
+		else if(renderID == 1)
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		else
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
+
 	}
-
-
-
 
 	_int numOfMapObject;
 	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject", L"numOfMapObject", numOfMapObject);
@@ -583,10 +586,14 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 			}
 		}
 	}
+}
 
+void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
+{
+	auto& pDataStore = pScene->GetDataStore();
+	auto& pObjectFactory = pScene->GetObjectFactory();
 
-
-
+	std::vector<CPhaseChanger*> vPhaseChanger;
 	_int numOfPhaseChanger;
 	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", L"numOfPhaseChanger", numOfPhaseChanger);
 	for (_int i = 0; i < numOfPhaseChanger; ++i)
@@ -613,6 +620,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		_int numOfRestrictLine;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) + L"_numOfRestrictLine", numOfRestrictLine);
 
+		vPhaseChanger.emplace_back(spPhaseChanger.get());
 		for (_int j = 0; j < numOfRestrictLine; ++j)
 		{
 			SP(CMapObject2D) spRestrictLine =
@@ -624,286 +632,70 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 
 			std::wstring texKey;
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_textureKey", texKey);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_textureKey", texKey);
 			spRestrictLine->GetComponent<Engine::CTextureC>()->AddTexture(texKey);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_position", position);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_position", position);
 			spRestrictLine->GetTransform()->SetPosition(position);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_rotation", rotation);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_rotation", rotation);
 			spRestrictLine->GetTransform()->SetRotation(rotation);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_size", size);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_size", size);
 			spRestrictLine->GetTransform()->SetSize(size);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-																				  L"_wall" +
-																				  std::to_wstring(j) +
-																				  L"_colSize", size);
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_colSize", size);
 			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
 
 			spPhaseChanger->AddRestrictLine(spRestrictLine);
 		}
 	}
 
+	_int numOfMonster;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", L"numOfMonster", numOfMonster);
+	for (_int i = 0; i < numOfMonster; ++i)
+	{
+		std::wstring monsterType;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+			L"_type", monsterType);
 
-	//
+		SP(CMonster) spMonster =
+			std::dynamic_pointer_cast<CMonster>(pObjectFactory->AddClone(monsterType, true));
 
-	//// ������ ���� �ҷ�����
-	//std::string strLine = "";
-	//std::string filePath = "../../Data/EditorScene/save.ini";
-	//std::ifstream ifsLoad(filePath.data());
+		_int phaseChangerNum;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+			L"_phaseChanger", phaseChangerNum);
+		vPhaseChanger[phaseChangerNum]->AddMonster(spMonster);
 
-	//_float vPos = 0.f;
-	//_float vRot = 0.f;
+		_float3 position;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+			L"_position", position);
+		spMonster->GetTransform()->SetPosition(position);
 
-	//std::wstring protoObjectKey;
-	//_bool isStatic;
-	//_int layerID;
-	//std::wstring meshKey;
-	//_bool initTex;
-	//_int renderID;
-	//_float3 position;
-	//_float3 scale;
-	//_float3 rotation;
-	//_int colID; // collider
-	//_float3 offset; // collider
-	//_float3 size; // collider
-	//_float3 rotOffset; // collider
-	//_int shaderID;
+		_float3 rotation;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+			L"_rotation", rotation);
+		spMonster->GetTransform()->SetRotation(rotation);
 
-	//SP(Engine::CObject) spObject = nullptr;
-
-	//Engine::_tchar* dataTag = nullptr;
-	//Engine::_tchar* dataValue = nullptr;
-
-	//std::vector<std::string> vStr;
-	//std::vector<std::string> vStrTag;
-
-	//while (!ifsLoad.eof())
-	//{
-	//	dataTag = nullptr;
-	//	dataValue = nullptr;
-
-	//	if (!vStr.empty())
-	//	{
-	//		auto& iter = vStr.begin();
-	//		for (; iter != vStr.end();)
-	//			iter = vStr.erase(iter);
-
-	//		vStr.clear();
-	//	}
-	//
-	//	if (!vStrTag.empty())
-	//	{
-	//		auto& iter = vStrTag.begin();
-	//		for (; iter != vStrTag.end();)
-	//			iter = vStrTag.erase(iter);
-
-	//		vStrTag.clear();
-	//	}
-
-	//	std::getline(ifsLoad, strLine);
-
-	//	if ("" == strLine)
-	//		continue;
-
-	//	vStr = split(strLine, '=');
-
-	//	if (!dataValue && !dataTag)
-	//	{
-	//		std::wstring wstr = Engine::StrToWStr(vStr[1]);
-	//		dataValue = _wcsdup(wstr.c_str());
-	//	}
-
-	//	if (!wcscmp(L"numOfEmptyObject", _wcsdup(Engine::StrToWStr(vStr[0]).c_str())))
-	//		continue;
-
-	//	vStrTag = split(vStr[0], '_');
-
-	//	std::wstring wstr = Engine::StrToWStr(vStrTag[1]);
-	//	dataTag = _wcsdup(wstr.c_str());
-
-	//	if (!wcscmp(L"static", dataTag))
-	//	{
-	//		isStatic = WstrToBool(dataValue);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"layerID", dataTag))
-	//	{
-	//		layerID = WstrToInt(dataValue);
-	//		spObject = objectFactory->AddClone(L"EmptyObject", isStatic, layerID, Engine::StrToWStr(vStrTag[0]));
-
-	//		spObject->SetLayerID(layerID);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"shaderKey", dataTag))
-	//	{
-	//		shaderID = WstrToInt(dataValue);
-	//		spObject->AddComponent<Engine::CShaderC>()->AddShader(shaderID);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"meshKey", dataTag))
-	//	{
-	//		meshKey = dataValue;
-
-	//		spObject->AddComponent<Engine::CMeshC>()->AddMeshData(meshKey);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"initTex", dataTag))
-	//	{
-	//		initTex = WstrToBool(dataValue);
-	//		spObject->GetComponent<Engine::CMeshC>()->SetInitTex(initTex);
-
-	//		if (initTex == true)
-	//		{
-	//			if (L"Cube" != spObject->GetComponent<Engine::CMeshC>()->GetMeshData()[0]->GetMeshKey())
-	//				spObject->AddComponent<Engine::CTextureC>();
-	//			else
-	//				spObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
-
-	//			//���ľߵ� ���̴�Ű ���� �����ϱ�
-	//			if (spObject->GetComponent<Engine::CShaderC>() == nullptr)
-	//				spObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	//		}
-	//		else
-	//		{
-	//			spObject->AddComponent<Engine::CTextureC>();
-	//			spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
-	//			spObject->GetComponent<Engine::CTextureC>()->AddTexture(L"WaterNormalMap");
-	//		}
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"renderID", dataTag))
-	//	{
-	//		renderID = WstrToInt(dataValue);
-	//		spObject->AddComponent<Engine::CGraphicsC>()->SetRenderID(renderID);
-	//		spObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"scale", dataTag))
-	//	{
-	//		vStr = split(vStr[1], ',');
-	//		scale = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-	//		spObject->GetTransform()->SetSize(scale);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"rotation", dataTag))
-	//	{
-	//		vStr = split(vStr[1], ',');
-	//		rotation = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-	//		spObject->GetTransform()->SetRotation(rotation);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"position", dataTag))
-	//	{
-	//		vStr = split(vStr[1], ',');
-	//		position = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-	//		spObject->GetTransform()->SetPosition(position);
-	//		delete dataTag;
-	//		delete dataValue;
-	//		continue;
-	//	}
-	//	else if (!wcscmp(L"collider", dataTag))
-	//	{
-	//		if (nullptr == spObject->GetComponent<Engine::CCollisionC>())
-	//		{
-	//			spObject->AddComponent<Engine::CCollisionC>();
-	//			spObject->AddComponent<Engine::CDebugC>();
-	//		}
-
-	//		std::wstring wstr = Engine::StrToWStr(vStrTag[3]);
-	//		if (L"collisionID" == wstr)
-	//			colID = WstrToInt(dataValue);
-
-	//		std::getline(ifsLoad, strLine);
-	//		vStr = split(strLine, '=');
-	//		vStrTag = split(vStr[0], '_');
-	//		std::wstring type = Engine::StrToWStr(vStrTag[3]);
-
-	//		_int index = StrToInt(vStr[1]);
-
-	//		if (L"type" == type)
-	//		{
-	//			switch (index)
-	//			{
-	//			case 1: // ray
-	//				break;
-	//			case 3: // aabb
-	//			{
-	//				/* offset */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				/* size */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create(colID, size, offset));
-	//				size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-	//			}
-	//			break;
-	//			case 4: // obb
-	//			{
-	//				/* offset */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				offset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				/* size */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				size = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				/* rotOffset */
-	//				std::getline(ifsLoad, strLine);
-	//				vStr = split(strLine, '=');
-	//				vStr = split(vStr[1], ',');
-	//				rotOffset = { StrToFloat(vStr[0]), StrToFloat(vStr[1]), StrToFloat(vStr[2]) };
-
-	//				spObject->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create(colID, size, offset, rotOffset));
-	//				size_t colIdx = spObject->GetComponent<Engine::CCollisionC>()->GetColliders().size() - 1;
-	//				break;
-	//			}
-	//			}
-	//		}
-	//	}
-	//}
-
-	//ifsLoad.close();
+		_float timer;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+			L"_timer", timer);
+		spMonster->SetSpawnTimer(timer);
+	}
 }
 
 void CDataLoad::EffectLoad(Engine::CScene * pScene)
@@ -912,42 +704,45 @@ void CDataLoad::EffectLoad(Engine::CScene * pScene)
 
 void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 {
-	if (0 == function.compare(L"MainRoomScene")) // ���ξ�
+	if (0 == function.compare(L"MainRoomScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"StageSelectionScene")) // �������� �����¾�
+	else if (0 == function.compare(L"StageSelectionScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::StageSelectionScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ReadyToSortieScene")) // �ɸ��� ������
+	else if (0 == function.compare(L"ReadyToSortieScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ReadyToSortieScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"PartySettingScene")) //  �ɸ��� ��Ƽ
+	else if (0 == function.compare(L"PartySettingScene")) 
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::PartySettingScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleEndScene")) //  ���� ����
+	else if (0 == function.compare(L"BattleEndScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction());
 
 	}
-	else if (0 == function.compare(L"Sally")) // 1��������
+	else if (0 == function.compare(L"Sally"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOn")) // ������Ʈ Ű��
+	else if (0 == function.compare(L"ObjectOn"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOff")) // ������Ʈ ����
+	else if (0 == function.compare(L"ObjectOff"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOff, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleRenunciation")) // �������� �Լ�
+	else if (0 == function.compare(L"BattleRenunciation"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleRenunciation, &CButtonFunction());
 	}
-
+	else if (0 == function.compare(L"ChangeFSMProperty"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMProperty, CValkyriegManager::GetInstance());
+	}
 }

@@ -23,6 +23,8 @@
 
 #include "OneStagePhaseControl.h"
 
+#include "Monster.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -67,10 +69,10 @@ void COneStageScene::Start(void)
 	m_pBattleUIManager->Start(this);
 
 
-	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
-	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-	m_vSickle.emplace_back(spSickleClone);
+	//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
+	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	//m_vSickle.emplace_back(spSickleClone);
 
 	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	//spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
@@ -116,13 +118,9 @@ void COneStageScene::Update(void)
 	{
 		/* Ganesha */
 		SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+		std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
 		spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
 		spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
-		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
-		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
-		//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
-		spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 		m_spGanesha = spGaneshaClone;
 
 		m_bossSpawn = false;
@@ -142,7 +140,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 
-	ForUITest();
+	//ForUITest();
 }
 
 void COneStageScene::LateUpdate(void)
@@ -188,6 +186,7 @@ void COneStageScene::SetupFromLoader(void)
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
 	Load->MapLoad(this);
+	Load->PhaseChangerLoad(this);
 	delete(Load);
 
 }
@@ -243,8 +242,7 @@ void COneStageScene::Create_Sickle(_float3 pos)
 {
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetPosition(pos);
-	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
 	m_vSickle.emplace_back(spSickleClone);
 }
 
@@ -252,8 +250,7 @@ void COneStageScene::Create_Spider(_float3 pos)
 {
 	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
 	spSpiderClone->GetTransform()->SetPosition(pos);
-	spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
-
+	std::dynamic_pointer_cast<CMonster>(spSpiderClone)->SelectChannelID();
 	m_vSpider.emplace_back(spSpiderClone);
 }
 
@@ -301,12 +298,12 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(100, 100, L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))

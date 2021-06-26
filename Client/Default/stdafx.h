@@ -27,6 +27,8 @@
 #include "ClientMacro.h"
 #include "ClientStructure.h"
 #include "ClientFunction.h"
+#include "ClientComponents.h"
+#include "ClientPatterns.h"
 
 #include "ClientStructure_ValkyrieStatus.h"
 #include "ClientStructure_MonsterStatus.h"
@@ -37,6 +39,7 @@
 #include "ButtonManager.h"
 #include "BattleUiManager.h"
 #include "DataManager.h"
+#include "ValkyriegManager.h"
 
 // »ç¿îµå
 //#include <io.h>

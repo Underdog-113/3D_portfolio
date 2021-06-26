@@ -1,5 +1,5 @@
 #pragma once
-#include "StateMachine.h"
+#include "StateMachineC.h"
 #define Cool_Attack				0.25f
 #define Cool_Evade				0.2f
 #define Cool_End				0.75f

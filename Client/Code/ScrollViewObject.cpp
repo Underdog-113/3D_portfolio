@@ -30,8 +30,8 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-/*	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	/*spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();*/
 
 	return spClone;
@@ -42,10 +42,10 @@ void CScrollViewObject::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)Engine::ELayerID::UI;
 	m_addExtra = true;
-
-	/*(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
-	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
-	m_spTexture = AddComponent<Engine::CTextureC>();*/
+	
+	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
+/*	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
+	(m_spTexture = AddComponent<Engine::CTextureC>())->AddTexture(L"Transparency",0);*/
 }
 
 void CScrollViewObject::Start(void)
@@ -61,7 +61,7 @@ void CScrollViewObject::FixedUpdate(void)
 void CScrollViewObject::Update(void)
 {
 	__super::Update();
-	//ImageObjectSort();
+	ImageObjectSort();
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -165,13 +165,15 @@ void CScrollViewObject::ImageObjectSort()
 		count++;
 
 		buttonObject->GetTransform()->SetPosition(pos);
-		pos.x += m_distanceXY.x;
+		
 
 		for (auto& imageObject : m_vImageObject[count-1])
 		{
-			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, 0);
+			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, 0.01f);
 			imageObject.m_image->GetTransform()->SetPosition(pos + T);
 		}
+
+		pos.x += m_distanceXY.x;
 
 		if (count % m_column == 0)
 		{
