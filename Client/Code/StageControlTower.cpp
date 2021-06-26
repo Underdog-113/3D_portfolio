@@ -223,6 +223,9 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 void CStageControlTower::SwitchValkyrie(Squad_Role role)
 {
+	if (m_vSquad.size() < 3)
+		return;
+
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
 
 	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
