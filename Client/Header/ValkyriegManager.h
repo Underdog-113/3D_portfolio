@@ -12,10 +12,8 @@ public:
 	void OnDestroy(void);
 
 	void ChangeFSM(STATE state);
+	void ChangeFSMProperty();
 private:
-
-
-
 	void FSMCreate();
 private:
 	CValkyrieFSM* m_valkyrieFSM[STATE::STATEEND];

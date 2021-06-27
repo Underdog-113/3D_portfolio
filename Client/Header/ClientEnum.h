@@ -68,7 +68,18 @@ enum class EShaderID
 	SpawnEffectShader	= 7 + (_int)Engine::EShaderID::NumOfShaderID,
 	SoftEffectShader	= 8 + (_int)Engine::EShaderID::NumOfShaderID,
 	AttackRangeShader	= 9 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 10 + (_int)Engine::EShaderID::NumOfShaderID
+	AlphaMaskShader     = 10 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 11 + (_int)Engine::EShaderID::NumOfShaderID
+};
+
+enum class EChannelID
+{
+	MONSTER_0			= 0 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_1			= 1 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_2			= 2 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_3			= 3 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_4			= 4 + (_int)Engine::EChannelID::NumOfChannelID,
+	NumOfChannelID		= 5 + (_int)Engine::EChannelID::NumOfChannelID,
 };
 
 enum class ELoadingID

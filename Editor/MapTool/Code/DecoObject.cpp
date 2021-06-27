@@ -32,7 +32,7 @@ SP(Engine::CObject) CDecoObject::MakeClone(void)
 	spClone->m_spMesh		= spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
-
+	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	return spClone;
 }
 
@@ -48,6 +48,7 @@ void CDecoObject::Awake(void)
 	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
+	m_spShader		= AddComponent<Engine::CShaderC>();
 }
 
 void CDecoObject::Start(void)

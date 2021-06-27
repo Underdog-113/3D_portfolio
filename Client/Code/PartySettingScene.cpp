@@ -64,17 +64,24 @@ void CPartySettingScene::Start(void)
 	Load->CanvasLoad(this);
 	delete(Load);
 
-	CValkyriegManager::GetInstance()->Start(this);
 }
 
 void CPartySettingScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+	
 }
 
 void CPartySettingScene::Update(void)
 {
 	__super::Update();
+
+	if (!m_init)
+	{
+		CValkyriegManager::GetInstance()->Start(this);
+		m_init = true;
+	}
+
 	CValkyriegManager::GetInstance()->Update();
 }
 

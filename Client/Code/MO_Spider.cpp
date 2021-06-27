@@ -32,6 +32,8 @@ SP(Engine::CObject) CMO_Spider::MakeClone(void)
 	spClone->m_spDebug			= spClone->GetComponent<Engine::CDebugC>();
 	
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_SpiderC>();
+	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
+
 	return spClone;
 }
 
@@ -40,6 +42,7 @@ void CMO_Spider::Awake(void)
 	__super::Awake();	
 
 	m_spStateMachine = AddComponent<CFSM_SpiderC>();
+	m_spPatternMachine->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 }
 
 void CMO_Spider::Start(void)

@@ -7,7 +7,7 @@ class CMO_Scout : public CMonster
 
 private:
 	CMO_Scout();
-	virtual ~CMO_Scout() = default;
+	virtual ~CMO_Scout();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -37,5 +37,10 @@ public:
 	virtual void ApplyHitInfo(HitInfo info) override;
 public:
 	static		SP(CMO_Scout)			Create(_bool isStatic, Engine::CScene* pScene);
-};
+				void					ChaseTarget(_float3 targetPos);
+				void					SetStatus(BaseStat stat);
+				void					MonsterDead() override;
 
+private:
+	static		_uint						m_s_uniqueID;
+};

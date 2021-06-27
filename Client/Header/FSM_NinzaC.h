@@ -1,6 +1,7 @@
 #pragma once
 #include "StateMachineC.h"
 
+class CStageControlTower;
 class FSM_NinzaC final : public Engine::CStateMachineC
 {
 public:
@@ -11,6 +12,13 @@ public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
 	void Awake() override;
 	void Start(SP(CComponent) spThis) override;
+
+private:
+	void RegisterAllStage();
+	void FixRootMotionOffset(_uint index);
+
+private:
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
 
 public:
 	// <Animation List>
@@ -230,8 +238,5 @@ public:
 	void Walk_R_Enter(void);
 	void Walk_R_Update(float deltaTime);
 	void Walk_R_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
 };
 

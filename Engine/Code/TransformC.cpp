@@ -520,3 +520,13 @@ void CTransformC::UpdateParentMatrix(const _mat * pMat)
 
 	m_lastRotation = GET_MATH->QuatToRad(rotQuat);
 }
+
+void CTransformC::SetWorldMatrix(_mat worldMat)
+{
+	m_worldMat = worldMat;
+}
+
+void CTransformC::SetLastWorldMatrix(_mat worldMat)
+{
+	m_lastWorldMat = worldMat;
+}

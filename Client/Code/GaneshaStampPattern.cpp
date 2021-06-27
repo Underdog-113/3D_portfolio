@@ -35,6 +35,34 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 	}
 
+	// stamp sound
+	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternPlaySound(L"Ganesha_Stamp.wav", pOwner);
+		m_onSound = true;
+	}
+	else if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		0.05f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternRepeatSound(L"Ganesha_StandUp.wav", pOwner, 0.35f);
+	}
+	// run start sound
+	else if (Name_Ganesha_Run == fsm->GetCurStateString())
+	{
+		if (false == m_onRunStart)
+		{
+			PatternPlaySound(L"Ganesha_Run_Start.wav", pOwner);
+			m_onRunStart = true;
+		}
+		else if (true == m_onRunStart && false == PatternSoundEnd(pOwner))
+		{
+			PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.03f);
+		}
+	}
+
 	// 상대가 stamp 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -42,6 +70,9 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Stamp == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
+			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			m_onSound = false;
+			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -66,24 +97,17 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Stamp);
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_StandUp.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
 		}
 	}
 
-	/////////////////////////////////////////////////////////////
 	// 내가 stamp 상태라면 뒤로 이동
-	if (fsm->GetDM()->GetAniCtrl()->GetTimeline() >= 0.3f)
-	{
-		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::GANESHA_JUMPBACK);
-		Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Stamp.wav", (_uint)Engine::EChannelID::GANESHA_LASER);
-	}
-
 	if (Name_Ganesha_Stamp == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
-		
+		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;
+		m_onSound = false;
+		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)

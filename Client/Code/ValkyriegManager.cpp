@@ -35,6 +35,11 @@ void CValkyriegManager::ChangeFSM(STATE state)
 	m_valkyrieFSM[m_valkyrieState]->Start();
 }
 
+void CValkyriegManager::ChangeFSMProperty()
+{
+	ChangeFSM(STATE::Property);
+}
+
 void CValkyriegManager::FSMCreate()
 {
 	m_valkyrieFSM[STATE::Select] = new CValkyrieSelect();

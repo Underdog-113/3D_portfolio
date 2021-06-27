@@ -33,6 +33,8 @@ private:
 	_int m_jumpCnt = 0; // 두 번 점프 여부
 
 	_mat m_atkMat;
+
+	_bool m_onRunStart = false;
 };
 
 #endif

@@ -28,12 +28,14 @@ CValkyrieSelect::~CValkyrieSelect()
 
 void CValkyrieSelect::Start()
 {
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
 	MainCanvas();
 	ValkyrieStatus();
 }
 
 void CValkyrieSelect::End()
 {
+	_int end = 10;
 }
 
 _uint CValkyrieSelect::FixedUpdate()
@@ -131,27 +133,27 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 	Delegate<> delegate;
 	if (keyValue == CValkyriegManager::m_oldSelectValkyrie)
 	{
-		scene->FindObjectByName(L"MainCanvas_Button_8")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 탈퇴");
+		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 탈퇴");
 		delegate += std::bind(&CValkyrieSelect::PartySecession, &CValkyrieSelect());
 	}
 	else if (CDataManager::GetInstance()->FindSquadData(keyValue)->GetName() != L"")
 	{
-		scene->FindObjectByName(L"MainCanvas_Button_8")->GetComponent<Engine::CTextC>()->ChangeMessage(L"편성중");
+		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"편성중");
 		delegate += std::bind(&CValkyrieSelect::Not, &CValkyrieSelect());
 	}
 	else if (CValkyriegManager::m_oldSelectValkyrie == L"") // 빈공간을 클릭
 	{
-		scene->FindObjectByName(L"MainCanvas_Button_8")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 가입");
+		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 가입");
 		delegate += std::bind(&CValkyrieSelect::PartyJoin, &CValkyrieSelect());
 	}
 	else if (keyValue != CValkyriegManager::m_oldSelectValkyrie) // 다른 맴버 클릭
 	{
-		scene->FindObjectByName(L"MainCanvas_Button_8")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 가입");
+		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 가입");
 		delegate += std::bind(&CValkyrieSelect::PartySwap, &CValkyrieSelect());
 	}
 
 
-	std::static_pointer_cast<CButton>(scene->FindObjectByName(L"MainCanvas_Button_8"))->
+	std::static_pointer_cast<CButton>(scene->FindObjectByName(L"ValkyrieCanvas_Button_0"))->
 		AddFuncData(delegate);
 }
 
@@ -186,3 +188,9 @@ void CValkyrieSelect::SceneChange()
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CReadyToSortieScene::Create());
 }
+
+/*
+1. 버튼을누르면 버튼쪽으로 이동하는 함수실행
+2. m_selectValkyrie값을 가지고 데이터를 받아와서 셋팅시작
+3. 뒤로가기 버튼도 다시 셋팅해줘야함
+*/

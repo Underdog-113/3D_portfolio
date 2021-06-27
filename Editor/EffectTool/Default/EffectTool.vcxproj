@@ -193,6 +193,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\AlphaMaskShader.h" />
     <ClInclude Include="..\Header\AttackRangeShader.h" />
     <ClInclude Include="..\Header\AttackTrail.h" />
     <ClInclude Include="..\Header\CatPawShader.h" />
@@ -224,6 +225,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
     <ClCompile Include="..\Code\AttackRangeShader.cpp" />
     <ClCompile Include="..\Code\AttackTrail.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
