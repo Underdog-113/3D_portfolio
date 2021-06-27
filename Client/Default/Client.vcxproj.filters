@@ -489,20 +489,21 @@
     </Filter>
     <Filter Include="11.ValkyrieFSM\00.ValkyrieFSM">
       <UniqueIdentifier>{e860a1ae-bc87-418a-a644-4197443d6075}</UniqueIdentifier>
-      <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
-        <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
-      </Filter>
-      <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring">
-        <UniqueIdentifier>{5b05c9df-e55c-4ac2-a111-e8e7b95931c6}</UniqueIdentifier>
-      </Filter>
-      <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Plane">
-        <UniqueIdentifier>{f71034e8-0b42-4bbb-b90e-57375c77c732}</UniqueIdentifier>
-      </Filter>
-      <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Shield">
-        <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
-      </Filter>
-      <Filter Include="04.Shader\10.AlphaMaskShader">
-        <UniqueIdentifier>{03f4fa48-4c81-4dd3-9da5-f83d0007bbbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
+      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring">
+      <UniqueIdentifier>{5b05c9df-e55c-4ac2-a111-e8e7b95931c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Plane">
+      <UniqueIdentifier>{f71034e8-0b42-4bbb-b90e-57375c77c732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_Shield">
+      <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\10.AlphaMaskShader">
+      <UniqueIdentifier>{03f4fa48-4c81-4dd3-9da5-f83d0007bbbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

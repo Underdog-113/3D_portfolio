@@ -58,7 +58,7 @@ void CKiana_Ult_Eff::Start()
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Ring", true, (_int)Engine::ELayerID::Effect));
 
 	m_spKianaUltRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Burst_Ring");
-	m_spKianaUltRing->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	m_spKianaUltRing->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	m_spKianaUltRing->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltRing->GetComponent<Engine::CTextureC>()->AddTexture(L"burst_ring");
 	m_spKianaUltRing->GetComponent<Engine::CTextureC>()->AddTexture(L"burst_ring");
@@ -69,7 +69,7 @@ void CKiana_Ult_Eff::Start()
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Plane", true, (_int)Engine::ELayerID::Effect));
 
 	m_spKianaUltPlane->GetComponent<Engine::CMeshC>()->SetMeshData(L"DissolvePlane");
-	m_spKianaUltPlane->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	m_spKianaUltPlane->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	m_spKianaUltPlane->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise");
@@ -80,7 +80,7 @@ void CKiana_Ult_Eff::Start()
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Shield", true, (_int)Engine::ELayerID::Effect));
 
 	m_spKianaUltShield->GetComponent<Engine::CMeshC>()->SetMeshData(L"BurstShield");
-	m_spKianaUltShield->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+	m_spKianaUltShield->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	m_spKianaUltShield->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltShield->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltShield->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");

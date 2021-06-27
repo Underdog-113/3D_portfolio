@@ -45,7 +45,7 @@ void CYongScene::Start(void)
 		SP(Engine::CObject) spMeshEffect
 			= m_pObjectFactory->AddClone(L"Kiana_Ult_Eff", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ring_Ground");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"ring_ground");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"ring_ground");
