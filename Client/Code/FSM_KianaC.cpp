@@ -250,6 +250,10 @@ bool CFSM_KianaC::CheckAction_Ultra()
 {
 	if (Engine::IMKEY_DOWN(StageKey_Ult))
 	{
+		auto pStat = m_pKiana->GetStat();
+		if (pStat->GetCurSp() < pStat->GetUltraCost())
+			return false;
+
 		ChangeState(Name_Skill_10);
 		return true;
 	}
