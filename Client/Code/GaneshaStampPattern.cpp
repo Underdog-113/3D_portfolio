@@ -37,17 +37,17 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 
 	// stamp sound
 	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
-		0.0f <= fsm->GetDM()->GetAniTimeline() &&
-		false == m_onSound)
-	{
-		PatternRepeatSound(L"Ganesha_StandUp.wav", pOwner, 0.1f);
-	}
-	else if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
-		0.4f <= fsm->GetDM()->GetAniTimeline() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onSound)
 	{
 		PatternPlaySound(L"Ganesha_Stamp.wav", pOwner);
 		m_onSound = true;
+	}
+	else if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		0.05f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternRepeatSound(L"Ganesha_StandUp.wav", pOwner, 0.35f);
 	}
 	// run start sound
 	else if (Name_Ganesha_Run == fsm->GetCurStateString())

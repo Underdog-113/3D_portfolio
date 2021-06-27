@@ -22,3 +22,15 @@
 #include "GaneshaRoll01Pattern.h"
 #include "GaneshaBurst01Pattern.h"
 #include "GaneshaBurst02Pattern.h"
+
+/* Scout */
+#include "ScoutBornPattern.h"
+#include "ScoutDiePattern.h"
+#include "ScoutHitPattern.h"
+#include "ScoutBasePattern.h"
+
+/* Lancer */
+#include "LancerBornPattern.h"
+#include "LancerDiePattern.h"
+#include "LancerHitPattern.h"
+#include "LancerBasePattern.h"

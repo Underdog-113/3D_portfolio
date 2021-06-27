@@ -16,6 +16,7 @@
 #include "RayCollider.h"
 #include "DecoObject.h"
 #include "MapObject.h"
+#include "DebugCollider.h"
 
 // CToolMenuView
 
@@ -311,31 +312,31 @@ void CToolMenuView::OnPosX(NMHDR *pNMHDR, LRESULT *pResult)
 
 	CString cstrVal;
 
-	if (m_selectedAABBCol)
-	{
-		m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
-		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
-		_int idx = WstrToInt(wstr);
+	//if (m_selectedAABBCol)
+	//{
+	//	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+	//	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	//	_int idx = WstrToInt(wstr);
 
-		_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+	//	_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 
-		pos.x = GetEditControlData(&m_posX, pNMUpDown);
+	//	pos.x = GetEditControlData(&m_posX, pNMUpDown);
 
-		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
-	}
-	else if (m_selectedObbCol)
-	{
-		m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
-		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
-		_int idx = WstrToInt(wstr);
+	//	static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	//}
+	//else if (m_selectedObbCol)
+	//{
+	//	m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
+	//	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	//	_int idx = WstrToInt(wstr);
 
-		_float3 pos = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+	//	_float3 pos = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 
-		pos.x = GetEditControlData(&m_posX, pNMUpDown);
+	//	pos.x = GetEditControlData(&m_posX, pNMUpDown);
 
-		static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
-	}
-	else
+	//	static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	//}
+	//else
 		pCurObj->GetTransform()->SetPositionX(GetEditControlData(&m_posX, pNMUpDown));
 
 	*pResult = 0;
@@ -351,19 +352,19 @@ void CToolMenuView::OnPosY(NMHDR *pNMHDR, LRESULT *pResult)
 
 	CString cstrVal;
 
-	if (m_selectedAABBCol)
-	{
-		m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
-		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
-		_int idx = WstrToInt(wstr);
+	//if (m_selectedAABBCol)
+	//{
+	//	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+	//	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	//	_int idx = WstrToInt(wstr);
 
-		_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+	//	_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 
-		pos.y = GetEditControlData(&m_posY, pNMUpDown);
+	//	pos.y = GetEditControlData(&m_posY, pNMUpDown);
 
-		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
-	}
-	else
+	//	static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	//}
+	//else
 		pCurObj->GetTransform()->SetPositionY(GetEditControlData(&m_posY, pNMUpDown));
 
 	*pResult = 0;
@@ -379,19 +380,19 @@ void CToolMenuView::OnPosZ(NMHDR *pNMHDR, LRESULT *pResult)
 
 	CString cstrVal;
 
-	if (m_selectedAABBCol)
-	{
-		m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
-		std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
-		_int idx = WstrToInt(wstr);
+	//if (m_selectedAABBCol)
+	//{
+	//	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
+	//	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
+	//	_int idx = WstrToInt(wstr);
 
-		_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
+	//	_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
 
-		pos.z = GetEditControlData(&m_posZ, pNMUpDown);
+	//	pos.z = GetEditControlData(&m_posZ, pNMUpDown);
 
-		static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
-	}
-	else
+	//	static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
+	//}
+	//else
 		pCurObj->GetTransform()->SetPositionZ(GetEditControlData(&m_posZ, pNMUpDown));
 
 
@@ -850,6 +851,18 @@ void CToolMenuView::ParsingMapObject(std::wofstream * ofsSave)
 	}
 
 	(*ofsSave) << L"numOfMapObject=" << numOfMapObject;
+}
+
+void CToolMenuView::SetColorForCurObjDebugCol(Engine::CObject * pCurObj, _int index)
+{
+	if (nullptr != m_preSelectedDebugCol)
+	{
+		m_preSelectedDebugCol->GetGraphics()->SetColor(_float4(0, 0, 0, 1));
+		m_preSelectedDebugCol = nullptr;
+	}
+
+	m_preSelectedDebugCol = pCurObj->GetComponent<Engine::CDebugC>()->GetDebugCollider()[index];
+	m_preSelectedDebugCol->GetGraphics()->SetColor(_float4(1, 0, 0, 1));
 }
 
 _float CToolMenuView::GetEditControlData(CEdit* pEdit, LPNMUPDOWN pNMUpDown)
@@ -1572,6 +1585,9 @@ void CToolMenuView::OnCbnSelchangeAABBList()
 							  DeleteCharInWstr(FloatToWStr(offset.y), '0') + L"," +
 							  DeleteCharInWstr(FloatToWStr(offset.z), '0');
 
+	// set color
+	SetColorForCurObjDebugCol(pCurObj, idx);
+
 	m_aabbSize.SetWindowTextW(wstrSize.c_str());
 	m_aabbOffset.SetWindowTextW(wstrOffset.c_str());
 
@@ -1593,8 +1609,6 @@ void CToolMenuView::OnCbnSelchangeAABBList()
 		m_colliderID.SetCurSel(4);
 		break;
 	}
-
-	
 }
 
 void CToolMenuView::OnCbnSelchangeRayList()
@@ -1676,8 +1690,7 @@ void CToolMenuView::OnCbnSelchangeObbList()
 	_float3 rotOffset = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetRotOffset();
 
 	// set color
-	pCurObj->GetComponent<Engine::CDebugC>()->GetDebugCollider()[idx];
-
+	SetColorForCurObjDebugCol(pCurObj, idx);
 
 	std::wstring wstrOffset = DeleteCharInWstr(FloatToWStr(offset.x), '0') + L"," +
 		DeleteCharInWstr(FloatToWStr(offset.y), '0') + L"," +
