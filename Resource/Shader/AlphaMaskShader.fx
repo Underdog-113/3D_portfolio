@@ -9,6 +9,9 @@ float4 gWorldLightPosition;
 
 float  gTime;
 float  gAlpha;
+float  gSpeed = 1.5;
+
+bool   gPlayingAnim;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -56,7 +59,15 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition.xyz);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
-	Output.mUV = Input.mUV;
+
+	if (gPlayingAnim)
+	{
+		Output.mUV = Input.mUV - float2(gSpeed * gTime, 0.f);
+	}
+	else
+	{
+		Output.mUV = Input.mUV;
+	}
 
 	return Output;
 
@@ -76,7 +87,7 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	float multiply = saturate(Serve.r * gAlpha);
 
-	float3 diffuse = albedo.rgb;
+	float3 diffuse = albedo.rgb;	
 
 	return float4(diffuse, multiply);
 }

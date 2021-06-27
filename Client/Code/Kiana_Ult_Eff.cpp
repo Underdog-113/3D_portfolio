@@ -28,8 +28,6 @@ SP(Engine::CObject) CKiana_Ult_Eff::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetPosition(_float3(0.f, 0.f, 0.f));
-	spClone->m_spTransform->SetRotation(_float3(0.f, 0.f, 0.f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
@@ -58,34 +56,34 @@ void CKiana_Ult_Eff::Start()
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Ring", true, (_int)Engine::ELayerID::Effect));
 
 	m_spKianaUltRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Burst_Ring");
-	m_spKianaUltRing->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	m_spKianaUltRing->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltRing->GetComponent<Engine::CTextureC>()->AddTexture(L"burst_ring");
 	m_spKianaUltRing->GetComponent<Engine::CTextureC>()->AddTexture(L"burst_ring");
 	m_spKianaUltRing->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-
+	m_spKianaUltRing->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.05f, this->GetTransform()->GetPosition().z));
+	m_spKianaUltRing->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.3f, 1.f, 0.3f));
 
 	m_spKianaUltPlane
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Plane", true, (_int)Engine::ELayerID::Effect));
 
 	m_spKianaUltPlane->GetComponent<Engine::CMeshC>()->SetMeshData(L"DissolvePlane");
-	m_spKianaUltPlane->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	m_spKianaUltPlane->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise");
 	m_spKianaUltPlane->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
-	
+	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z));
+	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.5f, 0.5f, 0.5f));
+
 
 	m_spKianaUltShield
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Shield", true, (_int)Engine::ELayerID::Effect));
 
 	m_spKianaUltShield->GetComponent<Engine::CMeshC>()->SetMeshData(L"BurstShield");
-	m_spKianaUltShield->GetComponent<Engine::CMeshC>()->SetisEffectMesh(true);
 	m_spKianaUltShield->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltShield->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltShield->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltShield->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	
+	m_spKianaUltShield->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z));
 }
 
 void CKiana_Ult_Eff::FixedUpdate()
@@ -112,7 +110,7 @@ void CKiana_Ult_Eff::Update()
 	}
 
 	m_spTransform->AddRotationY(1.f * GET_DT);
-	m_fAlpha -= 0.3f * GET_DT;
+	m_fAlpha -= 0.5f * GET_DT;
 
 }
 

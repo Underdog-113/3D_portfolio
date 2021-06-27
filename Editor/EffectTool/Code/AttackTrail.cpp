@@ -103,8 +103,9 @@ void CAttackTrail::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
-	/*pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);*/
+	//pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
+	pEffect->SetBool("gPlayingAnim", true);
 }
 
 void CAttackTrail::PostRender(LPD3DXEFFECT pEffect)

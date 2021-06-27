@@ -41,10 +41,16 @@
 #include "AttackTrail_Client.h"
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
+
 #include "Kiana_Ult_Eff.h"
 #include "Kiana_Ult_Plane.h"
 #include "Kiana_Ult_Shield.h"
 #include "Kiana_Ult_Ring.h"
+
+#include "Theresa_Ult_Eff.h"
+#include "Theresa_Ult_Charge.h"
+#include "Theresa_Ult_Smoke.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -148,13 +154,16 @@ void CStaticScene::InitPrototypes(void)
 	InitUiPrototypes();
 	InitMonsterPrototypes();
 	InitValkyriePrototypes();
-	
+
+	// Attack Trail
 	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Trail);
 
+	// Attack Range
 	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 
+	// Kiana Effect
 	SP(CMeshEffect_Client) spKiana_Ult_Eff(CKiana_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff);
 
@@ -166,6 +175,16 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
+
+	// Theresa Effect
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Charge(CTheresa_Ult_Charge::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Charge);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Smoke(CTheresa_Ult_Smoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Smoke);
 }
 
 void CStaticScene::InitMapPrototypes(void)

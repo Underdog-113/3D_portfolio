@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "..\Header\Kiana_Ult_Shield.h"
+#include "..\Header\Theresa_Ult_Charge.h"
 
 
-CKiana_Ult_Shield::CKiana_Ult_Shield()
+CTheresa_Ult_Charge::CTheresa_Ult_Charge()
 {
 }
 
 
-CKiana_Ult_Shield::~CKiana_Ult_Shield()
+CTheresa_Ult_Charge::~CTheresa_Ult_Charge()
 {
 }
 
-SP(CKiana_Ult_Shield) CKiana_Ult_Shield::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CTheresa_Ult_Charge) CTheresa_Ult_Charge::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CKiana_Ult_Shield) spInstance(new CKiana_Ult_Shield, Engine::SmartDeleter<CKiana_Ult_Shield>);
+	SP(CTheresa_Ult_Charge) spInstance(new CTheresa_Ult_Charge, Engine::SmartDeleter<CTheresa_Ult_Charge>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -21,9 +21,9 @@ SP(CKiana_Ult_Shield) CKiana_Ult_Shield::Create(_bool isStatic, Engine::CScene *
 	return spInstance;
 }
 
-SP(Engine::CObject) CKiana_Ult_Shield::MakeClone()
+SP(Engine::CObject) CTheresa_Ult_Charge::MakeClone()
 {
-	SP(CKiana_Ult_Shield) spClone(new CKiana_Ult_Shield, Engine::SmartDeleter<CKiana_Ult_Shield>);
+	SP(CTheresa_Ult_Charge) spClone(new CTheresa_Ult_Charge, Engine::SmartDeleter<CTheresa_Ult_Charge>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -35,7 +35,7 @@ SP(Engine::CObject) CKiana_Ult_Shield::MakeClone()
 	return spClone;
 }
 
-void CKiana_Ult_Shield::Awake()
+void CTheresa_Ult_Charge::Awake()
 {
 	__super::Awake();
 
@@ -46,67 +46,59 @@ void CKiana_Ult_Shield::Awake()
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
-void CKiana_Ult_Shield::Start()
+void CTheresa_Ult_Charge::Start()
 {
 	__super::Start();
-
 }
 
-void CKiana_Ult_Shield::FixedUpdate()
+void CTheresa_Ult_Charge::FixedUpdate()
 {
 	__super::FixedUpdate();
 }
 
-void CKiana_Ult_Shield::Update()
+void CTheresa_Ult_Charge::Update()
 {
 	__super::Update();
-
-	if (m_fAlpha <= 0.f)
-	{
-		this->SetDeleteThis(true);
-		m_fAlpha = 1.f;
-	}
-
-	m_fAlpha -= 0.5f * GET_DT;
 }
 
-void CKiana_Ult_Shield::LateUpdate()
+void CTheresa_Ult_Charge::LateUpdate()
 {
 	__super::LateUpdate();
 }
 
-void CKiana_Ult_Shield::PreRender(LPD3DXEFFECT pEffect)
+void CTheresa_Ult_Charge::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("gPlayingAnim", true);
 }
 
-void CKiana_Ult_Shield::Render(LPD3DXEFFECT pEffect)
+void CTheresa_Ult_Charge::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 }
 
-void CKiana_Ult_Shield::PostRender(LPD3DXEFFECT pEffect)
+void CTheresa_Ult_Charge::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
-void CKiana_Ult_Shield::OnDestroy()
+void CTheresa_Ult_Charge::OnDestroy()
 {
 	__super::OnDestroy();
 	m_fAlpha = 1.f;
 }
 
-void CKiana_Ult_Shield::OnEnable()
+void CTheresa_Ult_Charge::OnEnable()
 {
 	__super::OnEnable();
 }
 
-void CKiana_Ult_Shield::OnDisable()
+void CTheresa_Ult_Charge::OnDisable()
 {
 	__super::OnDisable();
 }
 
-void CKiana_Ult_Shield::SetBasicName()
+void CTheresa_Ult_Charge::SetBasicName()
 {
 }

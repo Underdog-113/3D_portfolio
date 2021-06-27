@@ -267,7 +267,6 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
-    <ClInclude Include="..\Header\Kiana_Pistol_USP45.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Eff.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
@@ -297,6 +296,9 @@
     <ClInclude Include="..\Header\MO_Spider.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Smoke.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -418,12 +420,11 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
-    <ClCompile Include="..\Code\Kiana_Pistol_USP45.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
-    <ClCompile Include="..\Code\Kiana_Pistol.cpp" />    
+    <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -448,6 +449,9 @@
     <ClCompile Include="..\Code\MO_Spider.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
