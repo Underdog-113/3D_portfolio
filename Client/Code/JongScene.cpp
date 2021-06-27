@@ -64,10 +64,10 @@ void CJongScene::Start(void)
 	CDamageObjectPool::GetInstance()->Start(this);
 
 	KianaTest();
-	TheresaTest();
-	static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
-	SakuraTest();
-	static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
+	//TheresaTest();
+	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
+	//SakuraTest();
+	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
 	SetSceneCamera(m_spKiana);
@@ -115,9 +115,10 @@ void CJongScene::Update(void)
 // 		info.SetDamageRate(1.f);
 // 		info.SetStrengthType(HitInfo::Str_High);
 // 		info.SetCrowdControlType(HitInfo::CC_None);
+// 
 // 		
 // 		((CKiana*)m_spKiana.get())->ApplyHitInfo(info);
-// 		//m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
+		//m_pControlTower->HitValkyrie(m_spDummy2.get(), m_spKiana.get(), info);
 	}
 
 //	_float3 pos = m_spKiana->GetTransform()->GetPosition();
@@ -190,7 +191,7 @@ void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
 {
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(pTarget);
-	cam->SetTargetDist(10.f);
+	cam->SetTargetDist(5.f);
 	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 
@@ -230,7 +231,7 @@ void CJongScene::SickleTest()
 	spSickleClone->GetTransform()->SetSize(2, 2, 2);
 	spSickleClone->GetTransform()->SetPosition(0, 0, 2);
 	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-	spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
 	//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 	m_spSickle = spSickleClone;
 }

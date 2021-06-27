@@ -1,19 +1,19 @@
-#ifndef SICKLEBASEPATTERN_H
-#define SICKLEBASEPATTERN_H
+#ifndef NINZABASEPATTERN_H
+#define NINZABASEPATTERN_H
 
 #include "ATBPattern.h"
 
-class CSickleBasePattern : public CATBPattern
+class CNinzaBasePattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
 
 private:
-	explicit CSickleBasePattern();
-	virtual ~CSickleBasePattern();
+	explicit CNinzaBasePattern();
+	virtual ~CNinzaBasePattern();
 
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
-	static SP(CSickleBasePattern) Create();
+	static SP(CNinzaBasePattern) Create();
 
 private:
 	_float m_atkTime = 0.f; // °ø°Ý ÄðÅ¸ÀÓ

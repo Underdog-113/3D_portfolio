@@ -1,38 +1,38 @@
 #include "stdafx.h"
-#include "SickleBornPattern.h"
+#include "NinzaBornPattern.h"
 
-#include "FSM_SickleC.h"
-#include "FSMDefine_Sickle.h"
-#include "MO_Sickle.h"
+#include "FSM_NinzaC.h"
+#include "FSMDefine_Ninza.h"
+#include "MO_Ninza.h"
 
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
 #include "PatternMachineC.h"
 
-CSickleBornPattern::CSickleBornPattern()
+CNinzaBornPattern::CNinzaBornPattern()
 {
 }
 
-CSickleBornPattern::~CSickleBornPattern()
+CNinzaBornPattern::~CNinzaBornPattern()
 {
 }
 
-void CSickleBornPattern::Pattern(Engine::CObject* pOwner)
+void CNinzaBornPattern::Pattern(Engine::CObject* pOwner)
 {
-	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
-
-	// 내가 born 상태이고, 애니가 끝났다면
-	if (Name_Sickle_Born == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
-	{
-		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
-		fsm->ChangeState(Name_Sickle_StandBy);
-	}
+// 	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
+// 
+// 	// 내가 born 상태이고, 애니가 끝났다면
+// 	if (Name_Sickle_Born == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+// 	{
+// 		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
+// 		fsm->ChangeState(Name_Sickle_StandBy);
+// 	}
 }
 
-SP(CSickleBornPattern) CSickleBornPattern::Create()
+SP(CNinzaBornPattern) CNinzaBornPattern::Create()
 {
-	SP(CSickleBornPattern) spInstance(new CSickleBornPattern, Engine::SmartDeleter<CSickleBornPattern>);
+	SP(CNinzaBornPattern) spInstance(new CNinzaBornPattern, Engine::SmartDeleter<CNinzaBornPattern>);
 
 	return spInstance;
 }

@@ -84,7 +84,9 @@ public:
 					void				UpdateParentMatrix		(const _mat* pMat);
 
 
-
+public:/* now tessssssstting */
+					void				SetWorldMatrix			(_mat worldMat);
+					void				SetLastWorldMatrix		(_mat worldMat);
 
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Transform;

@@ -704,42 +704,45 @@ void CDataLoad::EffectLoad(Engine::CScene * pScene)
 
 void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 {
-	if (0 == function.compare(L"MainRoomScene")) // ���ξ�
+	if (0 == function.compare(L"MainRoomScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::MainRoomScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"StageSelectionScene")) // �������� �����¾�
+	else if (0 == function.compare(L"StageSelectionScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::StageSelectionScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ReadyToSortieScene")) // �ɸ��� ������
+	else if (0 == function.compare(L"ReadyToSortieScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ReadyToSortieScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"PartySettingScene")) //  �ɸ��� ��Ƽ
+	else if (0 == function.compare(L"PartySettingScene")) 
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::PartySettingScene, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleEndScene")) //  ���� ����
+	else if (0 == function.compare(L"BattleEndScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction());
 
 	}
-	else if (0 == function.compare(L"Sally")) // 1��������
+	else if (0 == function.compare(L"Sally"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOn")) // ������Ʈ Ű��
+	else if (0 == function.compare(L"ObjectOn"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"ObjectOff")) // ������Ʈ ����
+	else if (0 == function.compare(L"ObjectOff"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOff, &CButtonFunction());
 	}
-	else if (0 == function.compare(L"BattleRenunciation")) // �������� �Լ�
+	else if (0 == function.compare(L"BattleRenunciation"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleRenunciation, &CButtonFunction());
 	}
-
+	else if (0 == function.compare(L"ChangeFSMProperty"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMProperty, CValkyriegManager::GetInstance());
+	}
 }

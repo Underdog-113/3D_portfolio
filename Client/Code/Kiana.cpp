@@ -86,14 +86,14 @@ void CKiana::Start(void)
 	m_pAttackBall->SetOwner(this);
 
 	FindRightToe();
-	FindLeftHand();
-	FindRightHand();
+	//FindLeftHand();
+	//FindRightHand();
 
 	//weapon
-	CreatePistol();
+	//CreatePistol();
 
 	//catpaw
-	CreateCatPaw();
+	//CreateCatPaw();
 
 	// status
 	V_WarshipStat stat;
@@ -142,6 +142,16 @@ void CKiana::PreRender(LPD3DXEFFECT pEffect)
 void CKiana::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
+	//if (m_pLeftHand_World)
+	//{
+	//	_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
+	//	_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+	//	combMat._41 -= rootMotionPos.x;
+	//	combMat._43 -= rootMotionPos.z;
+
+	//	*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
+	//}
+	//m_spWeapon_Left->GetTransform()->SetWorldMatrix(*m_pLeftHand_World);
 }
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)
@@ -154,8 +164,8 @@ void CKiana::OnDestroy(void)
 	delete m_pStat;
 
 	SAFE_DELETE(m_pRightToe_World)
-	delete m_pLeftHand_World; 
-	delete m_pRightHand_World;
+	SAFE_DELETE(m_pLeftHand_World)
+	SAFE_DELETE(m_pRightHand_World)
 	__super::OnDestroy();
 }
 
@@ -191,15 +201,15 @@ void CKiana::UpdatePivotMatrices(void)
 		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
 	}
 
-	if (m_pLeftHand_World)
-	{
-		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
-		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-		combMat._41 -= rootMotionPos.x;
-		combMat._43 -= rootMotionPos.z;
-
-		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
-	}
+// 	if (m_pLeftHand_World)
+// 	{
+// 		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
+// 		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+// 		combMat._41 -= rootMotionPos.x;
+// 		combMat._43 -= rootMotionPos.z;
+// 
+// 		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
+// 	}
 
 }
 
@@ -461,24 +471,22 @@ void CKiana::SetUltraMode(bool value)
 
 void CKiana::FindLeftHand()
 {
-	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_L_Finger12");
-	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_L_Finger12");
+	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Weapon_L");
+	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Weapon_L");
 
 	m_pLeftHand_World = new _mat;
 	*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
 
-	m_pAttackBall->SetParentMatrix(m_pLeftHand_World);
 }
 
 void CKiana::FindRightHand()
 {
-	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_R_Finger12");
-	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_R_Finger12");
+	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Weapon_R");
+	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Weapon_R");
 
 	m_pRightHand_World = new _mat;
 	*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;
 
-	m_pAttackBall->SetParentMatrix(m_pRightHand_World);
 }
 
 void CKiana::FindRightToe()

@@ -1,21 +1,21 @@
-#ifndef SICKLEHITPATTERN_H
-#define SICKLEHITPATTERN_H
+#ifndef NINZAHITPATTERN_H
+#define NINZAHITPATTERN_H
 
 #include "ATBPattern.h"
 
 class Engine::CObject;
 
-class CSickleHitPattern : public CATBPattern
+class CNinzaHitPattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
 
 private:
-	explicit CSickleHitPattern();
-	virtual ~CSickleHitPattern();
+	explicit CNinzaHitPattern();
+	virtual ~CNinzaHitPattern();
 
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
-	static SP(CSickleHitPattern) Create();
+	static SP(CNinzaHitPattern) Create();
 };
 
 #endif
