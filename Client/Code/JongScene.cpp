@@ -71,6 +71,7 @@ void CJongScene::Start(void)
 	m_pControlTower->Start(CStageControlTower::ALL);
 
 	SetSceneCamera(m_spKiana);
+	//SetSceneCamera(m_spTheresa);
 
 	//CollisionDummy();
 	//SickleTest();
