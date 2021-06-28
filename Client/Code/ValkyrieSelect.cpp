@@ -61,12 +61,12 @@ void CValkyrieSelect::MainCanvas()
 	if (squadValue < CDataManager::GetInstance()->FindSquadData()->GetValkyriesList().size())
 	{
 		data = CDataManager::GetInstance()->FindSquadData()->GetValkyriesList()[squadValue];
-		CValkyriegManager::m_oldSelectValkyrie = data->GetSubName();
+		CValkyriegManager::g_oldSelectValkyrie = data->GetSubName();
 	}
 	else
 	{
 		data = CDataManager::GetInstance()->FindInStockValkyrieData()->GetValkyriesList()[0];
-		CValkyriegManager::m_oldSelectValkyrie = L"";
+		CValkyriegManager::g_oldSelectValkyrie = L"";
 	}
 
 	DataSetting(data->GetSubName());
@@ -94,8 +94,8 @@ void CValkyrieSelect::ValkyrieStatus()
 
 void CValkyrieSelect::ValkyrieStatusSetting()
 {
-	CValkyriegManager::m_selectValkyrie = CButtonManager::GetInstance()->GetActivationButton()->GetName();
-	DataSetting(CValkyriegManager::m_selectValkyrie);
+	CValkyriegManager::g_selectValkyrie = CButtonManager::GetInstance()->GetActivationButton()->GetName();
+	DataSetting(CValkyriegManager::g_selectValkyrie);
 }
 
 void CValkyrieSelect::DataSetting(std::wstring keyValue)
@@ -126,7 +126,7 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 	}
 
 	Delegate<> delegate;
-	if (keyValue == CValkyriegManager::m_oldSelectValkyrie)
+	if (keyValue == CValkyriegManager::g_oldSelectValkyrie)
 	{
 		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 탈퇴");
 		delegate += std::bind(&CValkyrieSelect::PartySecession, &CValkyrieSelect());
@@ -136,12 +136,12 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"편성중");
 		delegate += std::bind(&CValkyrieSelect::Not, &CValkyrieSelect());
 	}
-	else if (CValkyriegManager::m_oldSelectValkyrie == L"") // 빈공간을 클릭
+	else if (CValkyriegManager::g_oldSelectValkyrie == L"") // 빈공간을 클릭
 	{
 		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 가입");
 		delegate += std::bind(&CValkyrieSelect::PartyJoin, &CValkyrieSelect());
 	}
-	else if (keyValue != CValkyriegManager::m_oldSelectValkyrie) // 다른 맴버 클릭
+	else if (keyValue != CValkyriegManager::g_oldSelectValkyrie) // 다른 맴버 클릭
 	{
 		scene->FindObjectByName(L"ValkyrieCanvas_Button_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"파티 가입");
 		delegate += std::bind(&CValkyrieSelect::PartySwap, &CValkyrieSelect());
@@ -154,20 +154,20 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 
 void CValkyrieSelect::PartyJoin()
 {
-	CDataManager::GetInstance()->SquadInit(CValkyriegManager::m_selectValkyrie);
+	CDataManager::GetInstance()->SquadInit(CValkyriegManager::g_selectValkyrie);
 	SceneChange();
 }
 
 void CValkyrieSelect::PartySwap()
 {
-	CDataManager::GetInstance()->SquadInit(CButtonFunction::squadValue, CValkyriegManager::m_selectValkyrie);
+	CDataManager::GetInstance()->SquadInit(CButtonFunction::squadValue, CValkyriegManager::g_selectValkyrie);
 
 	SceneChange();
 }
 
 void CValkyrieSelect::PartySecession()
 {
-	CDataManager::GetInstance()->SquadDelete(CValkyriegManager::m_oldSelectValkyrie);
+	CDataManager::GetInstance()->SquadDelete(CValkyriegManager::g_oldSelectValkyrie);
 	SceneChange();
 }
 
@@ -186,6 +186,6 @@ void CValkyrieSelect::SceneChange()
 
 /*
 1. 버튼을누르면 버튼쪽으로 이동하는 함수실행
-2. m_selectValkyrie값을 가지고 데이터를 받아와서 셋팅시작
+2. g_selectValkyrie값을 가지고 데이터를 받아와서 셋팅시작
 3. 뒤로가기 버튼도 다시 셋팅해줘야함
 */

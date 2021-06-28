@@ -285,7 +285,7 @@ void CUILinker::OnTargetMarker(void)
 {
 	auto pTarget = CStageControlTower::GetInstance()->GetCurrentTarget();
 	if(pTarget)
-		m_pUIManager->TargetUI(pTarget.get(), 3.f);
+		m_pUIManager->TargetUI(pTarget, 3.f);
 }
 
 void CUILinker::OffTargetMarker(void)

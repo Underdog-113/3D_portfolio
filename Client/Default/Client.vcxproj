@@ -331,6 +331,7 @@
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
     <ClInclude Include="..\Header\ActorController.h" />
+    <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
     <ClInclude Include="..\Header\ValkyrieProperty.h" />
     <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
@@ -476,6 +477,7 @@
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
     <ClCompile Include="..\Code\ActorController.cpp" />
+    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
     <ClCompile Include="..\Code\ValkyrieProperty.cpp" />
     <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />

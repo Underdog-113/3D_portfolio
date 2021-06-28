@@ -40,12 +40,12 @@ public:
 	void SquadDelete(std::wstring keyValue); // 스쿼드
 
 private:
-	CCaptainData* m_captainData = nullptr; // 함장
-	CInStockValkyrieData* m_inStockValkyrieData; // 보유 발키리
-	std::list<CValkyrieStatusData*> m_valkyrieStatusDataList; // 모든 발키리
-	CSquadData* m_squadData; // 파티 발키리
-	std::vector<CWeaponData*> m_weaponDataList; // 무기
-	std::vector<CItemData*> m_itemDataList; // 재료
+	CCaptainData* m_pCaptainData = nullptr; // 함장
+	CInStockValkyrieData* m_pInStockValkyrieData; // 보유 발키리
+	std::vector<CValkyrieStatusData*> m_pValkyrieStatusDataList; // 모든 발키리
+	CSquadData* m_pSquadData; // 파티 발키리
+	std::vector<CWeaponData*> m_pWeaponDataList; // 무기
+	std::vector<CItemData*> m_pItemDataList; // 재료
 };
 
 #endif

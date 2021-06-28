@@ -1,11 +1,11 @@
 #pragma once
 #include "ValkyrieFSM.h"
-class CValkyrieProperty :
+class CValkyrieLevelUp :
 	public CValkyrieFSM
 {
 public:
-	CValkyrieProperty();
-	virtual ~CValkyrieProperty();
+	CValkyrieLevelUp();
+	virtual ~CValkyrieLevelUp();
 
 	// CValkyrieFSM을(를) 통해 상속됨
 	virtual void Start() override;
@@ -15,13 +15,13 @@ public:
 	virtual _uint LateUpdate() override;
 	virtual void OnDestroy(void) override;
 
-private:
-	void PropertyCanvas();
-
-	void ChangeSelect();
-	void DataInput(std::wstring objectName, std::wstring  dataValue);
 
 private:
-	Engine::CScene* m_scene;
+	void LevelUp();
+	void ItemCountUp();
+	void ItemCountDown();
+private:
+	static std::wstring g_selectItemName;
+	static _int g_itemCount;
 };
 

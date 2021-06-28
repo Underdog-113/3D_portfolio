@@ -99,6 +99,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		_float2 fontPosition;
 		_int fontSize;
 		D3DXCOLOR color = D3DXCOLOR(1,1,1,1);
+		std::wstring alignment;
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
 
@@ -108,12 +109,23 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
 			dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
+			dataStore->GetValue(false, dataID, objectKey, key + L"alignment", alignment);
 			fontPosition.y *= -1;
 
-			if(name == L"R")
+			if (alignment == L"UpperLeft")
+			{
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, color, true);
+
+			}
+			else if (alignment == L"UpperRight")
+			{
 				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
-			else
+
+			}
+			else if (alignment == L"UpperCenter")
+			{
 				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+			}
 		}
 
 		_int animCount;
@@ -273,6 +285,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		_float2 fontPosition;
 		_int fontSize;
 		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
+		std::wstring alignment;
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
 		button->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
@@ -286,9 +299,23 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
 		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
-
+		dataStore->GetValue(false, dataID, objectKey, key + L"alignment", alignment);
 		fontPosition.y *= -1;
-		button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+
+		if (alignment == L"UpperLeft")
+		{
+			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, color, true);
+
+		}
+		else if (alignment == L"UpperRight")
+		{
+			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+
+		}
+		else if (alignment == L"UpperCenter")
+		{
+			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+		}
 	}
 }
 
@@ -388,13 +415,30 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 		_float2 fontPosition;
 		_int fontSize;
 		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
+		std::wstring alignment;
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textSize", fontSize);
 		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"alignment", alignment);
 		fontPosition.y *= -1;
-		text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+
+		if (alignment == L"UpperLeft")
+		{
+			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT+ DT_NOCLIP, color, true);
+
+		}
+		else if (alignment == L"UpperRight")
+		{
+			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+
+		}
+		else if (alignment == L"UpperCenter")
+		{
+			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+		}
+
 	}
 
 }
@@ -744,5 +788,9 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	else if (0 == function.compare(L"ChangeFSMProperty"))
 	{
 		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMProperty, CValkyriegManager::GetInstance());
+	}
+	else if (0 == function.compare(L"ChangeFSMLevelUp"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMLevelUp, CValkyriegManager::GetInstance());
 	}
 }
