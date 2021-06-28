@@ -9,6 +9,7 @@
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
 #include "PatternMachineC.h"
+#include "AniCtrl.h"
 
 CSickleHitPattern::CSickleHitPattern()
 {

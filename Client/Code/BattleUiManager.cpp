@@ -321,7 +321,7 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
 }
 
-void CBattleUiManager::TargetUI(Engine::CObject* object, _float value)
+void CBattleUiManager::TargetUI(SP(Engine::CObject) object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);

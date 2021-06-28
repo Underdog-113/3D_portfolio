@@ -34,7 +34,7 @@ void CSoftEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	_mat matWorld, matView, matProj;
 
-	matWorld = spGC->GetTransform()->GetLastWorldMatrix();
+	matWorld = spGC->GetTransform()->GetWorldMatrix();
 	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
 	matProj = Engine::GET_MAIN_CAM->GetProjMatrix();
 

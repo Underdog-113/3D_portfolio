@@ -523,7 +523,7 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 	if (ELayerID::Map == (ELayerID)layerID)
 	{
 		SP(CMapObject) spMapObject =
-			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", true));
+			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", isStatic));
 		m_pMenuView->m_objList.AddString(spMapObject->GetName().c_str());
 
 		switch (m_pMenuView->m_renderAlpha.GetCheck())
@@ -556,7 +556,7 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 	else if (Engine::ELayerID::Decoration == (Engine::ELayerID)layerID)
 	{
 		SP(CDecoObject) spDecoObject =
-			std::dynamic_pointer_cast<CDecoObject>(pObjectFactory->AddClone(L"DecoObject", true));
+			std::dynamic_pointer_cast<CDecoObject>(pObjectFactory->AddClone(L"DecoObject", isStatic));
 		m_pMenuView->m_objList.AddString(spDecoObject->GetName().c_str());
 
 		switch (m_pMenuView->m_renderAlpha.GetCheck())
@@ -584,32 +584,32 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 	}
 	else if (ELayerID::Player == (ELayerID)layerID)
 	{
-// 		SP(CObject) spPlayerObject =
-// 			std::dynamic_pointer_cast<CObject>(pObjectFactory->AddClone(L"DecoObject", true));
-// 		m_pMenuView->m_objList.AddString(spDecoObject->GetName().c_str());
-// 
-// 		switch (m_pMenuView->m_renderAlpha.GetCheck())
-// 		{
-// 		case 0:
-// 			spDecoObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-// 			break;
-// 		case 1:
-// 			spDecoObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-// 			break;
-// 		}
-// 
-// 		spDecoObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
-// 		spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-// 		spDecoObject->GetTransform()->SetSize(size);
-// 		spDecoObject->GetTransform()->SetPosition(intersection);
-// 		spDecoObject->GetMesh()->SetMeshData(Engine::RemoveExtension(fileName));
-// 		spDecoObject->GetMesh()->SetInitTex(IntToBool(m_pMenuView->m_initTexture.GetCheck()));
-// 
-// 		if (nullptr != m_pCurSelectedObject)
-// 			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
-// 
-// 		m_pCurSelectedObject = spDecoObject.get();
-// 		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
+		SP(Engine::CObject) spCubeObject = ADD_CLONE(L"EmptyObject", isStatic, (_int)ELayerID::Player, objName);
+ 		m_pMenuView->m_objList.AddString(spCubeObject->GetName().c_str());
+
+		switch (m_pMenuView->m_renderAlpha.GetCheck())
+		{
+		case 0:
+			spCubeObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			break;
+		case 1:
+			spCubeObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+			break;
+		}
+		
+		spCubeObject->AddComponent<Engine::CDebugC>();
+ 		spCubeObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+		spCubeObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spCubeObject->GetTransform()->SetSize(size);
+		spCubeObject->GetTransform()->SetPosition(intersection);
+		spCubeObject->AddComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(fileName));
+		spCubeObject->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall", 0);
+
+		if (nullptr != m_pCurSelectedObject)
+			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+
+		m_pCurSelectedObject = spCubeObject.get();
+		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 	}
 
 	m_pMenuView->m_renderAlpha.SetCheck(0);
@@ -635,6 +635,9 @@ void CEditorScene::InitPrototypes(void)
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	ADD_PROTOTYPE(spCameraPrototype);
+
+	SP(Engine::CEmptyObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spEmptyObjectPrototype);
 }
 
 void CEditorScene::InputSetting()

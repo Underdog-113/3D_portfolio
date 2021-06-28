@@ -49,6 +49,7 @@ private:
 	GETTOR_SETTOR(_bool, m_onHitH, false, OnHitH); // hit_h
 	GETTOR_SETTOR(_bool, m_onHitFrontL, false, OnHitFrontL); // hit_front_l
 	GETTOR_SETTOR(_bool, m_onHitFront, false, OnHitFront); // hit_front
+	GETTOR_SETTOR(_bool, m_onHitBack, false, OnHitBack); // hit_back
 	GETTOR_SETTOR(_bool, m_onSelect, false, OnSelect);
 	GETTOR_SETTOR(_float, m_curCost, 0.f, CurCost);
 	GETTOR_SETTOR(_float, m_maxCost, 30.f, MaxCost);
