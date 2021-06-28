@@ -1,11 +1,16 @@
 #pragma once
 #include "StateMachineC.h"
 #define Cool_Attack				0.25f
+#define Cool_ChargeAttack		0.5f
 #define Cool_Evade				0.2f
 #define Cool_End				0.75f
 
 #define Cool_HitPenalty			0.5f
 #define Cool_RunOnAttack		0.5f
+
+#define Delay_UltShowAxe		0.1f
+#define Delay_UltHideAxe		0.1f
+
 
 class CTheresa;
 class CStageControlTower;
@@ -39,6 +44,9 @@ private: /* Normal Actions */
 	bool CheckAction_Ultra();
 
 private: /* Special Actions */
+	bool CheckAction_ChargeAttack();
+	bool CheckAction_ChargeAttack_End();
+	bool CheckAction_ChargeMode();
 
 private:
 	CTheresa* m_pTheresa = nullptr;
@@ -46,6 +54,12 @@ private:
 	CStageControlTower* m_pStageControlTower = nullptr;
 
 	Appear_Option m_appearOption = None;
+
+	_uint m_chargeAttackIndex = 1;
+	_float m_chargeEnterTimer = 0.f;
+
+	bool m_ultraAxeOnOff = false;
+	bool m_ultraUsed = false;
 
 public:
 	//StandBy
