@@ -79,6 +79,8 @@ void CKiana::Start(void)
 {
 	__super::Start();
 
+	m_spTransform->SetSize(0.75f, 0.75f, 0.75f);
+
 	m_spMesh->OnRootMotion();
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
@@ -93,7 +95,7 @@ void CKiana::Start(void)
 	//CreatePistol();
 
 	//catpaw
-	//CreateCatPaw();
+	CreateCatPaw();
 
 	// status
 	V_WarshipStat stat;

@@ -101,6 +101,8 @@ namespace Engine
 													// pFrameOffsetMatrix * (*ppCombinedTransformMatrix)
 
 		_int					texIndexStart;
+
+		_bool					hide = false;
 	}D3DXMESHCONTAINER_DERIVED;
 #pragma endregion
 

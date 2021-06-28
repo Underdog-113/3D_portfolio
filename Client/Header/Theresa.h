@@ -41,6 +41,7 @@ public:
 
 
 private:
+	//std::vector<Engine::_DerivedD3DXMESHCONTAINER*> 
 	_uint idx = 0;
 };
 
