@@ -95,35 +95,35 @@ void CTransformC::OnDisable(void)
 	__super::OnDisable();
 }
 
-const _float3 & CTransformC::GetPosition(void)
-{
-	return m_lastPosition;
-}
-
-const _float3 & CTransformC::GetRotation(void)
-{
-	return m_lastRotation;
-}
-
-const _float3 & CTransformC::GetSize(void)
-{
-	return m_lastSize;
-}
-
-const _float3 & CTransformC::GetForward(void)
-{
-	return m_lastForward;
-}
-
-const _float3 & CTransformC::GetUp(void)
-{
-	return m_lastUp;
-}
-
-const _float3 & CTransformC::GetRight(void)
-{
-	return m_lastRight;
-}
+//const _float3 & CTransformC::GetPosition(void)
+//{
+//	return m_lastPosition;
+//}
+//
+//const _float3 & CTransformC::GetRotation(void)
+//{
+//	return m_lastRotation;
+//}
+//
+//const _float3 & CTransformC::GetSize(void)
+//{
+//	return m_lastSize;
+//}
+//
+//const _float3 & CTransformC::GetForward(void)
+//{
+//	return m_lastForward;
+//}
+//
+//const _float3 & CTransformC::GetUp(void)
+//{
+//	return m_lastUp;
+//}
+//
+//const _float3 & CTransformC::GetRight(void)
+//{
+//	return m_lastRight;
+//}
 
 #pragma region TransformSettors
 void CTransformC::SetPosition(_float3 position)

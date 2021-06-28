@@ -60,6 +60,9 @@ private:
 private:
 	typedef std::vector<_DerivedD3DXMESHCONTAINER*> _MESHCONTAINERS;
 	GETTOR		(_MESHCONTAINERS,		m_vMeshContainers,		{},			MeshContainers)
+
+	typedef std::vector<D3DMATERIAL9*> _MATERIALS;
+
 	GETTOR		(D3DXFRAME*,			m_pRootFrame,			nullptr,	RootFrame)
 	GETTOR		(CHierarchyLoader*,		m_pHierarchyLoader,		nullptr,	HierarchyLoader)
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)

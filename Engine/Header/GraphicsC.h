@@ -23,13 +23,18 @@ public:
 					void				OnEnable			(void) override;
 
 public:
+					D3DMATERIAL9&		GetMtrl				(void);
+
+public:
 	static const	EComponentID	m_s_componentID = EComponentID::Graphics;
 
-	D3DMATERIAL9 m_mtrl;
+	
 private:
 					void				GenerateBV			(void);
 
 private:
+					D3DMATERIAL9		m_mtrl				= {};		
+
 	GETTOR			(SP(CMeshC),		m_spMesh,			nullptr,		Mesh)
 	GETTOR			(SP(CTextureC),		m_spTexture,		nullptr,		Texture)
 	GETTOR			(SP(CTransformC),	m_spTransform,		nullptr,		Transform)
