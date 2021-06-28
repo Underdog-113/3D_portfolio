@@ -110,7 +110,12 @@ void CInitScene::Update(void)
 		else
 		{
 			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"Warning");
-			CDataManager::GetInstance()->Start();
+
+			if (!m_init)
+			{
+				CDataManager::GetInstance()->Start();
+				m_init = true;
+			}
 
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
