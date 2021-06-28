@@ -51,7 +51,7 @@ void CCircularGaugeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	LPDIRECT3DDEVICE9 pDevice = Engine::GET_DEVICE;
 	_mat worldMat, viewMat, projMat;
 
-	worldMat = spGC->GetTransform()->GetWorldMatrix();
+	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
 	if (spGC->GetRectTex()->GetIsOrtho())
 	{
 		D3DXMatrixIdentity(&viewMat);

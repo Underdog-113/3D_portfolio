@@ -61,7 +61,6 @@ void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
-	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);

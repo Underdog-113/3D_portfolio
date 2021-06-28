@@ -83,6 +83,11 @@ void CGraphicsC::OnEnable(void)
 	__super::OnEnable();
 }
 
+D3DMATERIAL9 & CGraphicsC::GetMtrl(void)
+{
+	return m_mtrl;
+}
+
 void CGraphicsC::OnDisable(void)
 {
 	__super::OnDisable();
