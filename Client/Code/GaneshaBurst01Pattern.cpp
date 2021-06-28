@@ -164,10 +164,10 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			pGanesha->GetTransform()->GetRotation().y,
 			pGanesha->GetTransform()->GetRotation().x,
 			pGanesha->GetTransform()->GetRotation().z);*/
-		
+		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
 		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
 
-		offset.z = (beamDir.z * size.z / 2.f);
+		offset.z = 5;
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}
