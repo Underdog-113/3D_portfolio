@@ -21,6 +21,7 @@ public:
 	void ItemCountUp();
 	void ItemCountDown();
 	void ItemSelect();
+	void ItemCountUiHelp();
 private:
 	static std::wstring g_selectItemName;
 	static _int g_itemCount;

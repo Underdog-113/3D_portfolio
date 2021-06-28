@@ -38,7 +38,9 @@ void CValkyrieSelect::Start()
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
 
+	/*CValkyriegManager::g_selectValkyrie = CButtonManager::GetInstance()->GetActivationButton()->GetName();
 
+	DataSetting(CValkyriegManager::g_selectValkyrie);*/
 }
 
 void CValkyrieSelect::End()
