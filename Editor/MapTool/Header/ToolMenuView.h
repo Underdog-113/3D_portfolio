@@ -45,6 +45,8 @@ public:
 	void ParsingDecoObject(std::wofstream* ofsSave);
 	void ParsingMapObject(std::wofstream* ofsSave);
 
+	void SetColorForCurObjDebugCol(Engine::CObject* pCurObj, _int index);
+
 	afx_msg void OnPosX(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosY(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnPosZ(NMHDR *pNMHDR, LRESULT *pResult);
@@ -120,6 +122,8 @@ public:
 	CButton m_renderAlpha; // alpha rendering on/off
 	
 	_int m_curSelLayerID; // cur selected layer id
+
+	SP(Engine::CDebugCollider) m_preSelectedDebugCol = nullptr;
 
 protected:
 	CEdit m_posX;

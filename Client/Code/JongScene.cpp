@@ -63,14 +63,15 @@ void CJongScene::Start(void)
 	__super::Start();
 	CDamageObjectPool::GetInstance()->Start(this);
 
-	KianaTest();
-	//TheresaTest();
+	//KianaTest();
+	TheresaTest();
 	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
 	//SakuraTest();
 	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
-	SetSceneCamera(m_spKiana);
+	//SetSceneCamera(m_spKiana);
+	SetSceneCamera(m_spTheresa);
 
 	//CollisionDummy();
 	//SickleTest();
@@ -191,7 +192,7 @@ void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
 {
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(pTarget);
-	cam->SetTargetDist(5.f);
+	cam->SetTargetDist(3.f);
 	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 

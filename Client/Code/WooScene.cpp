@@ -71,6 +71,7 @@ void CWooScene::Start(void)
 
 	CBattleUiManager::GetInstance()->Start(this);
 
+	// 맵 키면 꼭 주석!!!!!!!!!!!!!!
 	TerrainSetting();
 
 	PlayerSetting();

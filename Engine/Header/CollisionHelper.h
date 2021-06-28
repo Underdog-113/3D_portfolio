@@ -530,8 +530,6 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	_float3 rayStartPos = spRayTransform->GetPosition() + pRC->GetOffset();
 	_float3 obbPos = spObbTransform->GetPosition() + pOC->GetOffset();
 
-	_mat obbWorldMat = spObbTransform->GetWorldMatrix();
-
 	_float tMin = 0;
 	_float tMax = pRC->GetLength();
 

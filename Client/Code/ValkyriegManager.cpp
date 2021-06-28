@@ -4,15 +4,22 @@
 #include "ValkyrieSelect.h"
 #include "ValkyrieProperty.h"
 #include "ValkyrieWeapon.h"
+#include "ValkyrieLevelUp.h"
 
 IMPLEMENT_SINGLETON(CValkyriegManager)
-std::wstring CValkyriegManager::m_selectValkyrie = L"";
-std::wstring CValkyriegManager::m_oldSelectValkyrie = L"";
+std::wstring CValkyriegManager::g_selectValkyrie = L"";
+std::wstring CValkyriegManager::g_oldSelectValkyrie = L"";
 
 void CValkyriegManager::Start(Engine::CScene * pScene)
 {
 	m_scene = pScene;
 	FSMCreate();
+
+	std::wstring stamina = std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetStamina()) + L"/" + std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetMaxStamina());
+	pScene->FindObjectByName(L"MainCanvas_Text_0")->GetComponent<Engine::CTextC>()->ChangeMessage(stamina);
+	pScene->FindObjectByName(L"MainCanvas_Text_1")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetGold()));
+	pScene->FindObjectByName(L"MainCanvas_Text_2")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetDiamond()));
+
 }
 
 void CValkyriegManager::Update(void)
@@ -35,9 +42,19 @@ void CValkyriegManager::ChangeFSM(STATE state)
 	m_valkyrieFSM[m_valkyrieState]->Start();
 }
 
+void CValkyriegManager::ChangeFSMSelect()
+{
+	ChangeFSM(STATE::Select);
+}
+
 void CValkyriegManager::ChangeFSMProperty()
 {
 	ChangeFSM(STATE::Property);
+}
+
+void CValkyriegManager::ChangeFSMLevelUp()
+{
+	ChangeFSM(STATE::LevelUp);
 }
 
 void CValkyriegManager::FSMCreate()
@@ -45,6 +62,6 @@ void CValkyriegManager::FSMCreate()
 	m_valkyrieFSM[STATE::Select] = new CValkyrieSelect();
 	m_valkyrieFSM[STATE::Property] = new CValkyrieProperty();
 	m_valkyrieFSM[STATE::Weapon] = new CValkyrieWeapon();
-
+	m_valkyrieFSM[STATE::LevelUp] = new CValkyrieLevelUp();
 	m_valkyrieFSM[STATE::Select]->Start();
 }

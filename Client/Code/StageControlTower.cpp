@@ -135,8 +135,7 @@ void CStageControlTower::FindTarget()
 
 	if (m_spCurTarget)
 	{
-		/// dkdkdkdkkd
-
+		m_pActorController->TargetingOn();
 
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
@@ -150,6 +149,9 @@ void CStageControlTower::FindTarget()
 
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
 {
+	if (!pMonster)
+		return;
+
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 

@@ -45,7 +45,7 @@ void CKiana_Ult_Eff::Awake()
 void CKiana_Ult_Eff::Start()
 {
 	__super::Start();
-	
+
 	m_spKianaUltRing
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Ring", true, (_int)Engine::ELayerID::Effect));
 

@@ -210,7 +210,10 @@
     <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
+    <ClInclude Include="..\Header\FSMDefine_Lancer.h" />
+    <ClInclude Include="..\Header\FSMDefine_Ninza.h" />
     <ClInclude Include="..\Header\FSMDefine_Sakura.h" />
+    <ClInclude Include="..\Header\FSMDefine_Scout.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSMDefine_Theresa.h" />
@@ -296,6 +299,10 @@
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Sickle.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\NinzaBasePattern.h" />
+    <ClInclude Include="..\Header\NinzaBornPattern.h" />
+    <ClInclude Include="..\Header\NinzaDiePattern.h" />
+    <ClInclude Include="..\Header\NinzaHitPattern.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
@@ -306,6 +313,10 @@
     <ClInclude Include="..\Header\Theresa_Ult_Crack.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Smoke.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Trail.h" />
+    <ClInclude Include="..\Header\ScoutBasePattern.h" />
+    <ClInclude Include="..\Header\ScoutBornPattern.h" />
+    <ClInclude Include="..\Header\ScoutDiePattern.h" />
+    <ClInclude Include="..\Header\ScoutHitPattern.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -346,6 +357,7 @@
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
     <ClInclude Include="..\Header\ActorController.h" />
+    <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
     <ClInclude Include="..\Header\ValkyrieProperty.h" />
     <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
@@ -428,6 +440,10 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
     <ClCompile Include="..\Code\Kiana_Trail.cpp" />
+    <ClCompile Include="..\Code\LancerBasePattern.cpp" />
+    <ClCompile Include="..\Code\LancerBornPattern.cpp" />
+    <ClCompile Include="..\Code\LancerDiePattern.cpp" />
+    <ClCompile Include="..\Code\LancerHitPattern.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
@@ -456,6 +472,10 @@
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Sickle.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\NinzaBasePattern.cpp" />
+    <ClCompile Include="..\Code\NinzaBornPattern.cpp" />
+    <ClCompile Include="..\Code\NinzaDiePattern.cpp" />
+    <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
@@ -466,6 +486,10 @@
     <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Trail.cpp" />
+    <ClCompile Include="..\Code\ScoutBasePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
+    <ClCompile Include="..\Code\ScoutDiePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -506,6 +530,7 @@
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />
     <ClCompile Include="..\Code\ActorController.cpp" />
+    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
     <ClCompile Include="..\Code\ValkyrieProperty.cpp" />
     <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />

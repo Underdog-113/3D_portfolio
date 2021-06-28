@@ -7,7 +7,7 @@ class CMO_Ninza : public CMonster
 
 private:
 	CMO_Ninza();
-	virtual ~CMO_Ninza() = default;
+	virtual ~CMO_Ninza();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -37,5 +37,11 @@ public:
 	virtual void ApplyHitInfo(HitInfo info) override;
 public:
 	static		SP(CMO_Ninza)			Create(_bool isStatic, Engine::CScene* pScene);
-};
+	void						ChaseTarget(_float3 targetPos);
+	void						SetStatus(BaseStat stat);
+	void						UpdatePivotMatrices(void);
+	void						MonsterDead() override;
 
+private:
+	static		_uint						m_s_uniqueID;
+};

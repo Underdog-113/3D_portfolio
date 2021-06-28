@@ -50,6 +50,11 @@ void CTheresa::Start(void)
 {
 	__super::Start();
 
+	m_vMeshContainers = m_spMesh->GetFirstMeshData_Dynamic()->GetMeshContainers();
+
+	Off_Axe();
+	Off_Sword();
+
 	m_spMesh->OnRootMotion();
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
@@ -79,16 +84,7 @@ void CTheresa::Update(void)
 {
 	__super::Update();
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
-	{
-		++idx;
-		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(17);
-	}
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_I))
-	{
-		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(0);
-	}
 }
 
 void CTheresa::LateUpdate(void)
@@ -135,4 +131,35 @@ void CTheresa::SetBasicName(void)
 
 void CTheresa::ApplyHitInfo(HitInfo info)
 {
+}
+
+void CTheresa::On_Sword(void)
+{
+	m_vMeshContainers[Sword_0]->hide = false;
+	m_vMeshContainers[Sword_1]->hide = false;
+}
+
+void CTheresa::Off_Sword(void)
+{
+	m_vMeshContainers[Sword_0]->hide = true;
+	m_vMeshContainers[Sword_1]->hide = true;
+}
+
+void CTheresa::On_Axe(void)
+{
+	m_vMeshContainers[Axe_0]->hide = false;
+	m_vMeshContainers[Axe_1]->hide = false;
+	m_vMeshContainers[Axe_2]->hide = false;
+}
+
+void CTheresa::Off_Axe(void)
+{
+	m_vMeshContainers[Axe_0]->hide = true;
+	m_vMeshContainers[Axe_1]->hide = true;
+	m_vMeshContainers[Axe_2]->hide = true;
+}
+
+void CTheresa::SetChargeMode(bool value)
+{
+	m_chargeMode = value;
 }

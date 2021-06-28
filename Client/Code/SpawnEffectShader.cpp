@@ -37,7 +37,7 @@ void CSpawnEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	_mat worldMat, viewMat, projMat, WVP;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
 	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
@@ -61,8 +61,6 @@ void CSpawnEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
-
-	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
 	m_pEffect->SetTexture("gDiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("gAlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);

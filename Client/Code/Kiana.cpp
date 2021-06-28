@@ -79,6 +79,8 @@ void CKiana::Start(void)
 {
 	__super::Start();
 
+	m_spTransform->SetSize(0.45f, 0.45f, 0.45f);
+
 	m_spMesh->OnRootMotion();
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
@@ -86,14 +88,14 @@ void CKiana::Start(void)
 	m_pAttackBall->SetOwner(this);
 
 	FindRightToe();
-	//FindLeftHand();
-	//FindRightHand();
+	FindLeftHand();
+	FindRightHand();
 
 	//weapon
 	//CreatePistol();
 
 	//catpaw
-	//CreateCatPaw();
+	CreateCatPaw();
 
 	// status
 	V_WarshipStat stat;
@@ -201,15 +203,15 @@ void CKiana::UpdatePivotMatrices(void)
 		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
 	}
 
-// 	if (m_pLeftHand_World)
-// 	{
-// 		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
-// 		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-// 		combMat._41 -= rootMotionPos.x;
-// 		combMat._43 -= rootMotionPos.z;
-// 
-// 		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
-// 	}
+	if (m_pLeftHand_World)
+	{
+		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
+		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+		combMat._41 -= rootMotionPos.x;
+		combMat._43 -= rootMotionPos.z;
+
+		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
+	}
 
 }
 
@@ -471,8 +473,8 @@ void CKiana::SetUltraMode(bool value)
 
 void CKiana::FindLeftHand()
 {
-	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Weapon_L");
-	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Weapon_L");
+	m_pLeftHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_L_Hand");
+	m_pLeftHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_L_Hand");
 
 	m_pLeftHand_World = new _mat;
 	*m_pLeftHand_World = *m_pLeftHand_BoneOffset * m_pLeftHand_Frame->CombinedTransformMatrix;
@@ -481,8 +483,8 @@ void CKiana::FindLeftHand()
 
 void CKiana::FindRightHand()
 {
-	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Weapon_R");
-	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Weapon_R");
+	m_pRightHand_Frame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName("Bip001_R_Hand");
+	m_pRightHand_BoneOffset = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("Bip001_R_Hand");
 
 	m_pRightHand_World = new _mat;
 	*m_pRightHand_World = *m_pRightHand_BoneOffset * m_pRightHand_Frame->CombinedTransformMatrix;

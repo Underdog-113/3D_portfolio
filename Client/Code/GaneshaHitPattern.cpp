@@ -23,6 +23,9 @@ void CGaneshaHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_GaneshaC) fsm = pOwner->GetComponent<CFSM_GaneshaC>();
 
+	// 이전에 패턴에서 속도가 변경된 상태일 수도 있으므로 정상 속도로 돌림
+	fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+
 	// 내가 weak 상태라면 시간 카운트
 	if (true == m_onWeak && Name_Ganesha_Weak_End != fsm->GetCurStateString())
 	{

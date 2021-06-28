@@ -36,6 +36,30 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 	}
 
+	/************************* Sound */
+	// roll sound
+	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() &&
+		0.0f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternPlaySound(L"Ganesha_Roll.wav", pOwner);
+		m_onSound = true;
+	}
+	// run start sound
+	else if (Name_Ganesha_Run == fsm->GetCurStateString())
+	{
+		if (false == m_onRunStart)
+		{
+			PatternPlaySound(L"Ganesha_Run_Start.wav", pOwner);
+			m_onRunStart = true;
+		}
+		else if (true == m_onRunStart && false == PatternSoundEnd(pOwner))
+		{
+			PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.03f);
+		}
+	}
+
+	/************************* Range */
 	// 상대가 roll1 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -43,6 +67,10 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
+			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			m_onSound = false;
+			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -61,20 +89,26 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 roll1 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동 상태라면 roll1
+		// 내가 이동,대기 상태라면 roll1
 		if ((Name_Ganesha_Run == fsm->GetCurStateString() ||
 			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Roll01);
+			fsm->GetDM()->GetAniCtrl()->SetSpeed(0.9f);
 		}
 	}
 
+	/************************* JumpBack */
 	// 내가 roll1 상태라면 뒤로 이동
 	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;
+		m_onSound = false;
+		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -101,6 +135,7 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
+	/************************* AttackBall */
 	// roll 상태가 완료되면 attackball off
 	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
 	{

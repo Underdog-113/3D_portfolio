@@ -37,7 +37,7 @@ void CCelShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	_mat worldMat, viewMat, projMat, WVP;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	viewMat = GET_MAIN_CAM->GetViewMatrix();
 	projMat = GET_MAIN_CAM->GetProjMatrix();
 
@@ -68,7 +68,8 @@ void CCelShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	SP(CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_SubTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 
-	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
+	D3DMATERIAL9* pMtrl = &spGC->GetMtrl();
+	spGC->GetMesh()->GetFirstMeshData_Dynamic()->GetMeshContainers()[0]->pMaterials;
 
 	size_t _dwMaterials = spGC->GetMesh()->GetMeshData()->GetSubsetCount();
 

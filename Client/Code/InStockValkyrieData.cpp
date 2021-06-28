@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "InStockValkyrieData.h"
-#include "ValkyrieStatusData.h"
 
 
 CInStockValkyrieData::CInStockValkyrieData()

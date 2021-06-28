@@ -36,7 +36,7 @@ void CEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	_mat worldMat, viewMat, projMat;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
 	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
@@ -64,21 +64,21 @@ void CEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 
-	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
-
-	size_t _dwMaterials = spGC->GetMesh()->GetMeshData()->GetSubsetCount();
-
-	for (size_t i = 0; i < _dwMaterials; ++i)
-	{
-		m_vColor.x = pMtrl->Diffuse.r;
-		m_vColor.y = pMtrl->Diffuse.g;
-		m_vColor.z = pMtrl->Diffuse.b;
-
-		m_pEffect->SetVector("g_LightColor", &m_vColor);
-		m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][i]->pTexture);
-
-		pMtrl++;
-	}	
+	//D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
+	//
+	//size_t _dwMaterials = spGC->GetMesh()->GetMeshData()->GetSubsetCount();
+	//
+	//for (size_t i = 0; i < _dwMaterials; ++i)
+	//{
+	//	m_vColor.x = pMtrl->Diffuse.r;
+	//	m_vColor.y = pMtrl->Diffuse.g;
+	//	m_vColor.z = pMtrl->Diffuse.b;
+	//
+	//	m_pEffect->SetVector("g_LightColor", &m_vColor);
+	//	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][i]->pTexture);
+	//
+	//	pMtrl++;
+	//}	
 
 
 	m_pEffect->SetFloat("g_fTime", m_fTime);

@@ -67,6 +67,7 @@ private:
 
 
 	GETTOR			(_bool,				m_haveDrawn,				false,			HaveDrawn)
+
 };
 END
 #endif // !MESH_H

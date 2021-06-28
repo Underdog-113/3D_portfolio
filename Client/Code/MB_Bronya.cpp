@@ -41,6 +41,8 @@ void CMB_Bronya::Start(void)
 	spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spEmptyObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
+	EquipWeapon();
+
 }
 
 void CMB_Bronya::FixedUpdate(void)
@@ -51,8 +53,6 @@ void CMB_Bronya::FixedUpdate(void)
 void CMB_Bronya::Update(void)
 {
 	__super::Update();
-
-	EquipWeapon();
 }
 
 void CMB_Bronya::LateUpdate(void)
@@ -98,6 +98,7 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 
 void CMB_Bronya::EquipWeapon()
 {
+	//고쳐야함
 	SP(Engine::CTransformC) pParentTransform;
 	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Bronya")->GetComponent<Engine::CTransformC>());
 
@@ -133,7 +134,8 @@ void CMB_Bronya::EquipWeapon()
 	pWeaponTransform->SetPosition(_float3(1.1f, -0.22f, -0.6f));
 
 	// 부모의 매트릭스 *= 본 매트릭스;
-	pWeaponTransform->UpdateParentMatrix(m_pParentBoneMat);
+	//고칠필요있음
+	//pWeaponTransform->SetParentMatrix(m_pParentBoneMat);
 }
 
 SP(CMB_Bronya) CMB_Bronya::Create(_bool isStatic, Engine::CScene * pScene)

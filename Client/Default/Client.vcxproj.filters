@@ -543,6 +543,62 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane">
       <UniqueIdentifier>{fe921a0a-3732-47b7-a9fe-3df6f90ff48e}</UniqueIdentifier>
+      <Filter Include="04.Shader\10.AlphaMaskShader">
+        <UniqueIdentifier>{03f4fa48-4c81-4dd3-9da5-f83d0007bbbb}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern">
+        <UniqueIdentifier>{c39e1687-732f-468e-ae6e-1fe001a78f57}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born">
+        <UniqueIdentifier>{003588e7-1a66-4d29-8f86-abce04818038}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\01.Die">
+        <UniqueIdentifier>{f8f34b57-98df-407c-8af4-7b2d5c7252a6}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\02.Hit">
+        <UniqueIdentifier>{61de6eed-ae8c-43d8-8f89-3a58c83cc23c}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select">
+        <UniqueIdentifier>{0bd88830-d10e-4226-8d40-ad7e3dc68f71}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base">
+        <UniqueIdentifier>{d7d0af4f-b178-4d2c-b826-b870a197393e}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern">
+        <UniqueIdentifier>{8f6a5f6a-3725-484b-a576-22980f2d7f15}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\00.Born">
+        <UniqueIdentifier>{cf3e19c7-93ee-44a8-b764-93a81911b361}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\01.Die">
+        <UniqueIdentifier>{3538bb3e-27c2-4c00-9f9b-cf698cd577dd}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit">
+        <UniqueIdentifier>{b39fc36b-6650-44bd-9035-aba3cafe8a37}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select">
+        <UniqueIdentifier>{c8b1d065-e5be-4124-9601-fc80f54baa52}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\04.Base">
+        <UniqueIdentifier>{ddd82a19-0d22-4e2b-b555-071bb10375fa}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern">
+        <UniqueIdentifier>{695f017c-6638-4047-a1a1-86923692fcf6}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born">
+        <UniqueIdentifier>{f21390c6-6ae1-47de-8f12-b569a9547a88}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\01.Die">
+        <UniqueIdentifier>{250bcaa1-5a2b-4b19-8d2b-4962365a3f7e}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\02.Hit">
+        <UniqueIdentifier>{93c074e0-33b0-4eca-8890-e4d30426715d}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select">
+        <UniqueIdentifier>{ef94b413-2450-45ea-bf78-925ba49d8c04}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base">
+        <UniqueIdentifier>{a92e72f4-0f61-4794-9348-19ab645a096e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1029,6 +1085,54 @@
     <ClInclude Include="..\Header\ValkyrieWeapon.h">
       <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieLevelUp.h">
+      <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Header\ScoutBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Scout.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Lancer.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LancerBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LancerDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LancerHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LancerBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\04.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Ninza.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\NinzaBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\NinzaDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\NinzaHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\NinzaBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield</Filter>
     </ClInclude>
@@ -1502,6 +1606,45 @@
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp">
       <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp">
+      <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\02.Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LancerBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\00.Born</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LancerDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LancerHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LancerBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NinzaBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NinzaHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\02.Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NinzaDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NinzaBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield</Filter>

@@ -17,7 +17,7 @@ public:
 	static SP(CGaneshaRoll01Pattern) Create();
 
 private:
-	_float m_cost = 25.f;
+	_float m_cost = /*25.f*/0.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 8.f; // 공격 거리
@@ -32,6 +32,8 @@ private:
 	_int m_jumpCnt = 0; // 두 번 점프 여부
 
 	_mat m_atkMat;
+
+	_bool m_onRunStart = false;
 };
 
 #endif

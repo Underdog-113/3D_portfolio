@@ -250,7 +250,11 @@ bool CFSM_KianaC::CheckAction_Ultra()
 {
 	if (Engine::IMKEY_DOWN(StageKey_Ult))
 	{
-		ChangeState(Name_Skill_10);
+		auto pStat = m_pKiana->GetStat();
+		if (pStat->GetCurSp() < pStat->GetUltraCost())
+			return false;
+
+		ChangeState(Name_Ultra);
 		return true;
 	}
 	return false;
@@ -1059,6 +1063,38 @@ void CFSM_KianaC::EvadeForward_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
+void CFSM_KianaC::Failure_Init(void)
+{
+}
+
+void CFSM_KianaC::Failure_Enter(void)
+{
+}
+
+void CFSM_KianaC::Failure_Update(float deltaTime)
+{
+}
+
+void CFSM_KianaC::Failure_End(void)
+{
+}
+
+void CFSM_KianaC::Failure_Idle_Init(void)
+{
+}
+
+void CFSM_KianaC::Failure_Idle_Enter(void)
+{
+}
+
+void CFSM_KianaC::Failure_Idle_Update(float deltaTime)
+{
+}
+
+void CFSM_KianaC::Failure_Idle_End(void)
+{
+}
+
 void CFSM_KianaC::Hit_H_Init(void)
 {
 }
@@ -1121,7 +1157,7 @@ void CFSM_KianaC::Idle_01_Enter(void)
 
 void CFSM_KianaC::Idle_01_Update(float deltaTime)
 {
-	if (CheckAction_Emotion(Name_Idle_1to2))
+	if (CheckAction_Emotion(Name_Idle_02))
 		return;
 }
 
@@ -1129,25 +1165,6 @@ void CFSM_KianaC::Idle_01_End(void)
 {
 }
 
-void CFSM_KianaC::Idle_1to2_Init(void)
-{
-	FixRootMotionOffset(Index_Idle_1to2);
-}
-
-void CFSM_KianaC::Idle_1to2_Enter(void)
-{
-	m_pDM->ChangeAniSet(Index_Idle_1to2);
-}
-
-void CFSM_KianaC::Idle_1to2_Update(float deltaTime)
-{
-	if (CheckAction_Emotion(Name_Idle_02))
-		return;
-}
-
-void CFSM_KianaC::Idle_1to2_End(void)
-{
-}
 
 void CFSM_KianaC::Idle_02_Init(void)
 {
@@ -1161,7 +1178,7 @@ void CFSM_KianaC::Idle_02_Enter(void)
 
 void CFSM_KianaC::Idle_02_Update(float deltaTime)
 {
-	if (CheckAction_Emotion(Name_Idle_2to3))
+	if (CheckAction_Emotion(Name_Idle_03))
 		return;
 }
 
@@ -1169,25 +1186,6 @@ void CFSM_KianaC::Idle_02_End(void)
 {
 }
 
-void CFSM_KianaC::Idle_2to3_Init(void)
-{
-	FixRootMotionOffset(Index_Idle_2to3);
-}
-
-void CFSM_KianaC::Idle_2to3_Enter(void)
-{
-	m_pDM->ChangeAniSet(Index_Idle_2to3);
-}
-
-void CFSM_KianaC::Idle_2to3_Update(float deltaTime)
-{
-	if (CheckAction_Emotion(Name_Idle_03))
-		return;
-}
-
-void CFSM_KianaC::Idle_2to3_End(void)
-{
-}
 
 void CFSM_KianaC::Idle_03_Init(void)
 {
@@ -1201,51 +1199,11 @@ void CFSM_KianaC::Idle_03_Enter(void)
 
 void CFSM_KianaC::Idle_03_Update(float deltaTime)
 {
-	if (CheckAction_Emotion(Name_Idle_3to4))
+	if (CheckAction_Emotion(Name_StandBy))
 		return;
 }
 
 void CFSM_KianaC::Idle_03_End(void)
-{
-}
-
-void CFSM_KianaC::Idle_3to4_Init(void)
-{
-	FixRootMotionOffset(Index_Idle_3to4);
-}
-
-void CFSM_KianaC::Idle_3to4_Enter(void)
-{
-	m_pDM->ChangeAniSet(Index_Idle_3to4);
-}
-
-void CFSM_KianaC::Idle_3to4_Update(float deltaTime)
-{
-	if (CheckAction_Emotion(Name_Idle_4to5))
-		return;
-}
-
-void CFSM_KianaC::Idle_3to4_End(void)
-{
-}
-
-void CFSM_KianaC::Idle_4to5_Init(void)
-{
-	FixRootMotionOffset(Index_Idle_4to5);
-}
-
-void CFSM_KianaC::Idle_4to5_Enter(void)
-{
-	m_pDM->ChangeAniSet(Index_Idle_4to5);
-}
-
-void CFSM_KianaC::Idle_4to5_Update(float deltaTime)
-{
-	if (CheckAction_StandBy_Timeout())
-		return;
-}
-
-void CFSM_KianaC::Idle_4to5_End(void)
 {
 }
 
@@ -1380,27 +1338,20 @@ void CFSM_KianaC::RunStopRight_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
-void CFSM_KianaC::Skill_10_Init(void)
+void CFSM_KianaC::WeaponSkill_Init(void)
 {
 }
 
-void CFSM_KianaC::Skill_10_Enter(void)
+void CFSM_KianaC::WeaponSkill_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Skill_10);
-
-	PlaySound_Voice(Sound_Ult_Start_Voice);
-	PlaySound_Effect(Sound_Ult_Start);
 }
 
-void CFSM_KianaC::Skill_10_Update(float deltaTime)
+void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
-		return;
 }
 
-void CFSM_KianaC::Skill_10_End(void)
+void CFSM_KianaC::WeaponSkill_End(void)
 {
-	m_pKiana->SetUltraMode(true);
 }
 
 void CFSM_KianaC::Stun_Enter(void)
@@ -1457,6 +1408,63 @@ void CFSM_KianaC::SwitchOut_End(void)
 {
 }
 
+void CFSM_KianaC::Ultra_Init(void)
+{
+}
+
+void CFSM_KianaC::Ultra_Enter(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pDM->ChangeAniSet(Index_Ultra);
+
+	PlaySound_Voice(Sound_Ult_Start_Voice);
+	PlaySound_Effect(Sound_Ult_Start);
+}
+
+void CFSM_KianaC::Ultra_Update(float deltaTime)
+{
+	if (CheckAction_StandBy_Timeout())
+		return;
+}
+
+void CFSM_KianaC::Ultra_End(void)
+{
+	m_pKiana->SetUltraMode(true);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_KianaC::Victory_Init(void)
+{
+}
+
+void CFSM_KianaC::Victory_Enter(void)
+{
+}
+
+void CFSM_KianaC::Victory_Update(float deltaTime)
+{
+}
+
+void CFSM_KianaC::Victory_End(void)
+{
+}
+
+void CFSM_KianaC::Victory_Idle_Init(void)
+{
+}
+
+void CFSM_KianaC::Victory_Idle_Enter(void)
+{
+}
+
+void CFSM_KianaC::Victory_Idle_Update(float deltaTime)
+{
+}
+
+void CFSM_KianaC::Victory_Idle_End(void)
+{
+}
+
 void CFSM_KianaC::RegisterAllState()
 {
 	Engine::CState* pState;
@@ -1497,6 +1505,12 @@ void CFSM_KianaC::RegisterAllState()
 	CreateState(CFSM_KianaC, pState, EvadeForward)
 		AddState(pState, Name_EvadeForward);
 
+	CreateState(CFSM_KianaC, pState, Failure)
+		AddState(pState, Name_Failure);
+
+	CreateState(CFSM_KianaC, pState, Failure_Idle)
+		AddState(pState, Name_Failure_Idle);
+
 	CreateState(CFSM_KianaC, pState, Hit_H)
 		AddState(pState, Name_Hit_H);
 
@@ -1506,23 +1520,11 @@ void CFSM_KianaC::RegisterAllState()
 	CreateState(CFSM_KianaC, pState, Idle_01)
 		AddState(pState, Name_Idle_01);
 
-	CreateState(CFSM_KianaC, pState, Idle_1to2)
-		AddState(pState, Name_Idle_1to2);
-
 	CreateState(CFSM_KianaC, pState, Idle_02)
 		AddState(pState, Name_Idle_02);
-
-	CreateState(CFSM_KianaC, pState, Idle_2to3)
-		AddState(pState, Name_Idle_2to3);
-
+	
 	CreateState(CFSM_KianaC, pState, Idle_03)
 		AddState(pState, Name_Idle_03);
-
-	CreateState(CFSM_KianaC, pState, Idle_3to4)
-		AddState(pState, Name_Idle_3to4);
-
-	CreateState(CFSM_KianaC, pState, Idle_4to5)
-		AddState(pState, Name_Idle_4to5);
 
 	CreateState(CFSM_KianaC, pState, Run)
 		AddState(pState, Name_Run);
@@ -1539,12 +1541,19 @@ void CFSM_KianaC::RegisterAllState()
 	CreateState(CFSM_KianaC, pState, StandBy)
 		AddState(pState, Name_StandBy);
 
-	CreateState(CFSM_KianaC, pState, Skill_10)
-		AddState(pState, Name_Skill_10);
-	
 	CreateState(CFSM_KianaC, pState, SwitchIn)
 		AddState(pState, Name_SwitchIn);
 
 	CreateState(CFSM_KianaC, pState, SwitchOut)
 		AddState(pState, Name_SwitchOut);
+
+	CreateState(CFSM_KianaC, pState, Ultra)
+		AddState(pState, Name_Ultra);
+
+	CreateState(CFSM_KianaC, pState, Victory)
+		AddState(pState, Name_Victory);
+
+	CreateState(CFSM_KianaC, pState, Victory_Idle)
+		AddState(pState, Name_Victory_Idle);
+
 }

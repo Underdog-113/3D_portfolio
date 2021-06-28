@@ -45,23 +45,24 @@ void CUiAnimCtrC::Update(SP(CComponent) spThis)
 
 		if (m_time <= 0)
 		{
-			if (m_curAnimValue == m_animCount)
+			if (m_curAnimValue > m_animCount)
 			{
 				m_curAnimValue = 0;
 				m_play = m_repeat;
 			}
 
-			m_curAnimValue++;
 			GetOwner()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_curAnimValue);
+
+			m_curAnimValue++;
 
 			m_time = m_animSpeed;
 		}
+
 	}
 }
 
 void CUiAnimCtrC::LateUpdate(SP(CComponent) spThis)
 {
-
 }
 
 void CUiAnimCtrC::OnDestroy()

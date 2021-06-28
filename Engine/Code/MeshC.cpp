@@ -236,7 +236,6 @@ void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM)
 	}
 }
 
-//�̸�
 CStaticMeshData* CMeshC::GetFirstMeshData_Static(void)
 {
 	return static_cast<Engine::CStaticMeshData*>(m_pMeshData);
@@ -299,6 +298,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 	const std::vector<_DerivedD3DXMESHCONTAINER*>& vMeshContainers = pDM->GetMeshContainers();
 	for (_int i = 0; i < vMeshContainers.size(); ++i)
 	{
+		if (vMeshContainers[i]->hide)
+			continue;
 		for (_ulong j = 0; j < vMeshContainers[i]->numBones; ++j)
 		{
 			vMeshContainers[i]->pRenderingMatrix[j] =

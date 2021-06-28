@@ -35,7 +35,7 @@ void CCatPawShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	_mat worldMat, viewMat, projMat, WVP;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	viewMat = Engine::GET_MAIN_CAM->GetViewMatrix();
 	projMat = Engine::GET_MAIN_CAM->GetProjMatrix();
 
@@ -66,7 +66,6 @@ void CCatPawShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 	/*m_pEffect->SetTexture("g_SubTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);*/
 
-	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
 
 	size_t _dwMaterials = spGC->GetMesh()->GetMeshData()->GetSubsetCount();
 
@@ -77,7 +76,6 @@ void CCatPawShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 		m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][i]->pTexture);
 
 		
-		pMtrl++;
 	}
 
 
