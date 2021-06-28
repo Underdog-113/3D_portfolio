@@ -72,6 +72,8 @@ void CAttackBox::Start(void)
 	col->SetIsTrigger(true);
 	m_spCollision->AddCollider(col);
 
+	//m_spTransform->SetParent(m_pOwner->GetTransform());
+
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	AddComponent<Engine::CDebugC>();
 	AddComponent<Engine::CShaderC>();
@@ -94,6 +96,8 @@ void CAttackBox::LateUpdate(void)
 	__super::LateUpdate();
 	
 	//m_spTransform->UpdateParentMatrix(m_pParentMatrix);
+	//_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
+	//m_spTransform->SetPosition(pos);
 }
 
 void CAttackBox::OnDestroy(void)
@@ -187,7 +191,7 @@ void CAttackBox::SetupBox(CObject * pOwner, _mat * pParentMat, _float3 size, _fl
 {
 	m_pOwner = pOwner;
 
-	m_pParentMatrix = pParentMat;
+	//m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
 
 	

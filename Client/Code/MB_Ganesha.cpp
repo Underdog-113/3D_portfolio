@@ -46,7 +46,7 @@ void CMB_Ganesha::Awake(void)
 	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	//m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
 	//m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
 	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 }
 

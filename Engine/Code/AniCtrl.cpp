@@ -94,7 +94,13 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	_double blendTime = 0.2;
+	_float nextPeriod = (_float)pAS->GetPeriod();
+	_double blendTime;
+	if (m_period < nextPeriod)
+		blendTime = m_period * 0.2f;
+	else
+		blendTime = nextPeriod * 0.2f;
+	m_period = nextPeriod;
 
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
 	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
@@ -107,7 +113,6 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 
 	m_pAniCtrl->ResetTime();
 	m_timer = 0.f;
-	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->SetTrackPosition(newTrack, 0.0);
 	m_curIndex = index;
@@ -135,7 +140,13 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	_double blendTime = 0.2;
+	_float nextPeriod = (_float)pAS->GetPeriod();
+	_double blendTime;
+	if (m_period < nextPeriod)
+		blendTime = m_period * 0.2f;
+	else
+		blendTime = nextPeriod * 0.2f;
+	m_period = nextPeriod;
 
 	//현재 트랙을 끈다.
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
@@ -151,7 +162,6 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 
 	m_pAniCtrl->ResetTime();
 	m_timer = 0.f;
-	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->SetTrackPosition(newTrack, 0.0);
 
@@ -170,7 +180,6 @@ void CAniCtrl::ChangeFakeAniSet()
 
 	m_pFakeAniCtrl->GetAnimationSet(m_curIndex, &pAnimationSet);
 
-	m_fakePeriod = pAnimationSet->GetPeriod();
 
 	_int newTrack = m_fakeTrack == 0 ? 1 : 0;
 
@@ -178,22 +187,30 @@ void CAniCtrl::ChangeFakeAniSet()
 
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(m_fakeTrack);
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(newTrack);
+	
+	_float nextPeriod = (_float)pAnimationSet->GetPeriod();
+	_double blendTime;
+	if (m_fakePeriod < nextPeriod)
+		blendTime = m_fakePeriod * 0.01;
+	else
+		blendTime = nextPeriod * 0.01;
+	m_fakePeriod = nextPeriod;
 
-	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + m_fakePeriod * 0.005);
+	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + blendTime);
 	//m_pFakeAniCtrl->SetTrackEnable(m_fakeTrack, FALSE);
 	//m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod);
 
 	////꺼지는 동안 키 속도 세팅
-	m_pFakeAniCtrl->KeyTrackSpeed(m_fakeTrack, 1.f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
+	m_pFakeAniCtrl->KeyTrackSpeed(m_fakeTrack, 1.f, m_fakeTimer, blendTime, D3DXTRANSITION_LINEAR);
 	////꺼지는 동안 가중치
-	m_pFakeAniCtrl->KeyTrackWeight(m_fakeTrack, 0.01f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
+	m_pFakeAniCtrl->KeyTrackWeight(m_fakeTrack, 0.01f, m_fakeTimer, blendTime, D3DXTRANSITION_LINEAR);
 
 	m_pFakeAniCtrl->SetTrackEnable(newTrack, TRUE);
 
 	////꺼지는 동안 키 속도 세팅
-	m_pFakeAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
+	m_pFakeAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_fakeTimer, blendTime, D3DXTRANSITION_LINEAR);
 	////꺼지는 동안 가중치
-	m_pFakeAniCtrl->KeyTrackWeight(m_curTrack, 0.99f, m_fakeTimer, m_fakePeriod * 0.005, D3DXTRANSITION_LINEAR);
+	m_pFakeAniCtrl->KeyTrackWeight(m_curTrack, 0.99f, m_fakeTimer, blendTime, D3DXTRANSITION_LINEAR);
 
 	m_pFakeAniCtrl->ResetTime();
 	m_fakeTimer = 0.f;

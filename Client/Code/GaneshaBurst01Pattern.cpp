@@ -158,11 +158,18 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 		_float3 beamDir = pPos - mPos;
 		beamDir.y = 0.f;
-		D3DXVec3Normalize(&beamDir, &beamDir);		
-		pGanesha->GetAttackBox()->GetTransform()->SetLastRotation(pGanesha->GetTransform()->GetLastRotation());
-		pGanesha->GetAttackBox()->GetTransform()->SetLastPosition(mPos);
 
-		offset = _float3(0, 0, 5);
+		D3DXVec3Normalize(&beamDir, &beamDir);
+/*
+		_mat rotMat;
+		D3DXMatrixRotationYawPitchRoll(&rotMat,
+			pGanesha->GetTransform()->GetRotation().y,
+			pGanesha->GetTransform()->GetRotation().x,
+			pGanesha->GetTransform()->GetRotation().z);*/
+		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
+		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
+
+		offset.z = 5;
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}

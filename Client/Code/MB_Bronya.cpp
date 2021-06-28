@@ -134,7 +134,8 @@ void CMB_Bronya::EquipWeapon()
 	pWeaponTransform->SetPosition(_float3(1.1f, -0.22f, -0.6f));
 
 	// 부모의 매트릭스 *= 본 매트릭스;
-	pWeaponTransform->SetParentMatrix(m_pParentBoneMat);
+	//고칠필요있음
+	//pWeaponTransform->SetParentMatrix(m_pParentBoneMat);
 }
 
 SP(CMB_Bronya) CMB_Bronya::Create(_bool isStatic, Engine::CScene * pScene)

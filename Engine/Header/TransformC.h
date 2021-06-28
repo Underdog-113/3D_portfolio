@@ -24,16 +24,7 @@ public:
 					void				OnEnable				(void) override;
 					void				OnDisable				(void) override;
 
-//Gettors
-#pragma region Gettors
-	//const			_float3&			GetPosition				(void);
-	//const			_float3&			GetRotation				(void);
-	//const			_float3&			GetSize					(void);
-	//
-	//const			_float3&			GetForward				(void);
-	//const			_float3&			GetUp					(void);
-	//const			_float3&			GetRight				(void);
-#pragma endregion
+
 //Settors
 #pragma region Settors
 public:
@@ -105,9 +96,9 @@ public:
 	static const	EComponentID		m_s_componentID = EComponentID::Transform;
 
 protected:
-	GETTOR_SETTOR	(SP(CTransformC),	m_spParent,					nullptr,			Parent)
+	GETTOR			(SP(CTransformC),	m_spParent,					nullptr,			Parent)
 	
-	GETTOR_SETTOR	(const _mat*,		m_pParentMatrix,			nullptr,			ParentMatrix)
+	GETTOR			(const _mat*,		m_pParentMatrix,			nullptr,			ParentMatrix)
 	
 	GETTOR			(_mat,				m_lastRotMatrix,			{},					LastRotMatrix)
 	GETTOR			(_mat,				m_lastWorldMat,				{},					LastWorldMatrix)
@@ -116,44 +107,14 @@ protected:
 	GETTOR			(_mat,				m_rotMatrix,				{},					RotMatrix)
 	GETTOR			(_mat,				m_worldMat,					{},					WorldMatrix)
 	GETTOR			(_mat,				m_worldMatNoScale,			{},					WorldMatrixNoScale)
-
-					
-					//_mat				m_rotMatrix					= {};
-					//_mat				m_worldMat					= {};
-					//_mat				m_worldMatNoScale			= {};
-
-	//Mine
-	GETTOR			(_float3,			m_lastForward,				FORWARD_VECTOR,		LastForward)
-	GETTOR			(_float3,			m_lastUp,					UP_VECTOR,			LastUp)
-	GETTOR			(_float3,			m_lastRight,				RIGHT_VECTOR,		LastRight)
 	
 	GETTOR			(_float3,			m_forward,					FORWARD_VECTOR,		Forward)
 	GETTOR			(_float3,			m_up,						UP_VECTOR,			Up)
 	GETTOR			(_float3,			m_right,					RIGHT_VECTOR,		Right)
-	
-	GETTOR_SETTOR	(_float3,			m_lastPosition,				ZERO_VECTOR,		LastPosition)
-	GETTOR_SETTOR	(_float3,			m_lastRotation,				ZERO_VECTOR,		LastRotation)
-	GETTOR_SETTOR	(_float3,			m_lastSize,					ONE_VECTOR,			LastSize)
-	
+
 	GETTOR			(_float3,			m_position,					ZERO_VECTOR,		Position)
 	GETTOR			(_float3,			m_rotation,					ZERO_VECTOR,		Rotation)
 	GETTOR			(_float3,			m_size,						ONE_VECTOR,			Size)
-
-					//_float3				m_lastForward				= FORWARD_VECTOR;
-					//_float3				m_lastUp					= UP_VECTOR;
-					//_float3				m_lastRight					= RIGHT_VECTOR;
-					//
-					//_float3				m_forward					= FORWARD_VECTOR;
-					//_float3				m_up						= UP_VECTOR;
-					//_float3				m_right						= RIGHT_VECTOR;
-					//
-					//_float3				m_lastPosition				= ZERO_VECTOR;
-					//_float3				m_lastRotation				= ZERO_VECTOR;
-					//_float3				m_lastSize					= ONE_VECTOR;
-					//
-					//_float3				m_position					= ZERO_VECTOR;
-					//_float3				m_rotation					= ZERO_VECTOR;
-					//_float3				m_size						= ONE_VECTOR;
 
 	GETTOR_SETTOR	(_bool,				m_slerpOn,					false,				SlerpOn)
 	GETTOR_SETTOR	(_float3,			m_goalForward,				ZERO_VECTOR,		GoalForward)

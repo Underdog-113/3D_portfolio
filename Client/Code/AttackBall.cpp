@@ -190,11 +190,11 @@ void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, 
 	m_pOwner = pOwner;
 
 	//m_pParentMatrix = pParentMat;
-	GetTransform()->SetParentMatrix(pParentMat);
+	GetTransform()->SetPosition(pParentMat->_41, pParentMat->_42, pParentMat->_43);
 	m_hitInfo = info;
 
-	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->UpdateBS();
 	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);
+	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->UpdateBS();
 }
 
 void CAttackBall::SetBasicName(void)
