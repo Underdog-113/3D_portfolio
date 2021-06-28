@@ -46,8 +46,8 @@ static _bool CheckBS(_float3 const& pos1, _float3 const& pos2,
 
 static _bool CheckColliderBS(SP(CCollider) pCollider1, SP(CCollider) pCollider2)
 {
-	_float3 objOnePos = pCollider1->GetOwner()->GetTransform()->GetLastPosition();
-	_float3 objTwoPos = pCollider2->GetOwner()->GetTransform()->GetLastPosition();
+	_float3 objOnePos = pCollider1->GetOwner()->GetTransform()->GetPosition();
+	_float3 objTwoPos = pCollider2->GetOwner()->GetTransform()->GetPosition();
 
 	_float3 colliderOnePos = objOnePos + pCollider1->GetOffset();
 	_float3 colliderTwoPos = objTwoPos + pCollider2->GetOffset();
@@ -67,8 +67,8 @@ static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 	CPointCollider* pPC1 = static_cast<CPointCollider*>(pC1);
 	CPointCollider* pPC2 = static_cast<CPointCollider*>(pC2);
 
-	if (spTransform1->GetLastPosition() + pPC1->GetOffset() ==
-		spTransform2->GetLastPosition() + pPC2->GetOffset())
+	if (spTransform1->GetPosition() + pPC1->GetOffset() ==
+		spTransform2->GetPosition() + pPC2->GetOffset())
 	{
 		CCollisionC* pCC1 = pPC1->GetOwner();
 		CCollisionC* pCC2 = pPC2->GetOwner();
@@ -82,7 +82,7 @@ static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 			}
 			else
 			{
-				_float3 hitPoint = spTransform1->GetLastPosition() + pPC1->GetOffset();
+				_float3 hitPoint = spTransform1->GetPosition() + pPC1->GetOffset();
 				pPC1->GetOwner()->AddCollisionInfo(_CollisionInfo(pPC1, pPC2, hitPoint, ZERO_VECTOR, 0));
 				pPC2->GetOwner()->AddCollisionInfo(_CollisionInfo(pPC2, pPC1, hitPoint, ZERO_VECTOR, 0));
 			}
@@ -108,9 +108,9 @@ static _bool PointRay(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
 
-	_float3 rayStartPos = spRayTransform->GetLastPosition() + pRC->GetOffset();
+	_float3 rayStartPos = spRayTransform->GetPosition() + pRC->GetOffset();
 	_float3 rayDir = pRC->GetDirection();
-	_float3 pointPos = spPointTransform->GetLastPosition() + pPC->GetOffset();
+	_float3 pointPos = spPointTransform->GetPosition() + pPC->GetOffset();
 	_float t = 0.f;
 
 	_float3 rayStartToPoint = pointPos - rayStartPos;
@@ -156,8 +156,8 @@ static _bool PointSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
 
-	_float3 scPosition = spSphereTransform->GetLastPosition() + pSC->GetOffset();
-	_float3 pcPosition = spPointTransform->GetLastPosition() + pPC->GetOffset();
+	_float3 scPosition = spSphereTransform->GetPosition() + pSC->GetOffset();
+	_float3 pcPosition = spPointTransform->GetPosition() + pPC->GetOffset();
 
 	if (D3DXVec3LengthSq(&(scPosition - pcPosition)) <= pSC->GetRadius() * pSC->GetRadius())
 	{
@@ -197,8 +197,8 @@ static _bool PointAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
 
-	_float3 pcPosition = spPointTransform->GetLastPosition() + pPC->GetOffset();
-	_float3 acPosition = spAabbTransform->GetLastPosition() + pAC->GetOffset();
+	_float3 pcPosition = spPointTransform->GetPosition() + pPC->GetOffset();
+	_float3 acPosition = spAabbTransform->GetPosition() + pAC->GetOffset();
 	_float3 acHalfSize = pAC->GetHalfSize();
 
 	for (int i = 0; i < 3; ++i)
@@ -236,8 +236,8 @@ static _bool PointObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
 
-	_float3 pcPosition = spPointTransform->GetLastPosition() + pPC->GetOffset();
-	_float3 ocPosition = spObbTransform->GetLastPosition() + pOC->GetOffset();
+	_float3 pcPosition = spPointTransform->GetPosition() + pPC->GetOffset();
+	_float3 ocPosition = spObbTransform->GetPosition() + pOC->GetOffset();
 
 	_float3 obbToPoint = pcPosition - ocPosition;
 	_float3 closest = ocPosition;
@@ -289,8 +289,8 @@ static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spRayTransform1 = pRC1->GetOwner()->GetTransform();
 	SP(CTransformC) spRayTransform2 = pRC2->GetOwner()->GetTransform();
 
-	_float3 ray1Start = pRC1->GetOffset() + spRayTransform1->GetLastPosition();
-	_float3 ray2Start = pRC2->GetOffset() + spRayTransform2->GetLastPosition();
+	_float3 ray1Start = pRC1->GetOffset() + spRayTransform1->GetPosition();
+	_float3 ray2Start = pRC2->GetOffset() + spRayTransform2->GetPosition();
 
 	_float3 ray2StartToRay1Start = ray1Start - ray2Start;
 
@@ -350,8 +350,8 @@ static _bool RaySphere(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
 
-	_float3 rayStartPos = spRayTransform->GetLastPosition() + pRC->GetOffset();
-	_float3 spherePos = spSphereTransform->GetLastPosition() + pSC->GetOffset();
+	_float3 rayStartPos = spRayTransform->GetPosition() + pRC->GetOffset();
+	_float3 spherePos = spSphereTransform->GetPosition() + pSC->GetOffset();
 
 	_float3 m = rayStartPos - spherePos;
 	
@@ -424,8 +424,8 @@ static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
 	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
 
-	_float3 rayStartPos = spRayTransform->GetLastPosition() + pRC->GetOffset();
-	_float3 aabbPos = spAabbTransform->GetLastPosition() + pAC->GetOffset();
+	_float3 rayStartPos = spRayTransform->GetPosition() + pRC->GetOffset();
+	_float3 aabbPos = spAabbTransform->GetPosition() + pAC->GetOffset();
 
 
 	_float tMin = 0.f;
@@ -527,8 +527,8 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
 
-	_float3 rayStartPos = spRayTransform->GetLastPosition() + pRC->GetOffset();
-	_float3 obbPos = spObbTransform->GetLastPosition() + pOC->GetOffset();
+	_float3 rayStartPos = spRayTransform->GetPosition() + pRC->GetOffset();
+	_float3 obbPos = spObbTransform->GetPosition() + pOC->GetOffset();
 
 	_float tMin = 0;
 	_float tMax = pRC->GetLength();
@@ -627,8 +627,8 @@ static _bool SphereSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spSphereTransform1 = pSC1->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform2 = pSC2->GetOwner()->GetTransform();
 
-	_float3 center1 = spSphereTransform1->GetLastPosition() + pSC1->GetOffset();
-	_float3 center2 = spSphereTransform2->GetLastPosition() + pSC2->GetOffset();
+	_float3 center1 = spSphereTransform1->GetPosition() + pSC1->GetOffset();
+	_float3 center2 = spSphereTransform2->GetPosition() + pSC2->GetOffset();
 
 	_float sqDistanceCenter = D3DXVec3LengthSq(&(center1 - center2));
 
@@ -683,8 +683,8 @@ static _bool SphereAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
 
-	_float3 sphereCenter	= spSphereTransform->GetLastPosition() + pSC->GetOffset();
-	_float3 aabbCenter		= spAabbTransform->GetLastPosition() + pAC->GetOffset();
+	_float3 sphereCenter	= spSphereTransform->GetPosition() + pSC->GetOffset();
+	_float3 aabbCenter		= spAabbTransform->GetPosition() + pAC->GetOffset();
 
 	_float sqDist = pAC->SqDistFromPoint(sphereCenter);
 
@@ -748,8 +748,8 @@ static _bool SphereObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
 
-	_float3 sphereCenter = spSphereTransform->GetLastPosition() + pSC->GetOffset();
-	_float3 obbCenter = spObbTransform->GetLastPosition() + pOC->GetOffset();
+	_float3 sphereCenter = spSphereTransform->GetPosition() + pSC->GetOffset();
+	_float3 obbCenter = spObbTransform->GetPosition() + pOC->GetOffset();
 
 	_float3 closestOnOBB = pOC->ClosestFromPoint(sphereCenter);
 	_float3 sphereToClosest = closestOnOBB - sphereCenter;
@@ -794,8 +794,8 @@ static _bool AabbAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spAabbTransform1 = pAC1->GetOwner()->GetTransform();
 	SP(CTransformC) spAabbTransform2 = pAC2->GetOwner()->GetTransform();
 
-	_float3 aabb1Center = pAC1->GetOffset() + spAabbTransform1->GetLastPosition();
-	_float3 aabb2Center = pAC2->GetOffset() + spAabbTransform2->GetLastPosition();
+	_float3 aabb1Center = pAC1->GetOffset() + spAabbTransform1->GetPosition();
+	_float3 aabb2Center = pAC2->GetOffset() + spAabbTransform2->GetPosition();
 
 	_float3 basicAxis[3] = { _float3(1, 0, 0), _float3(0, 1, 0), _float3(0, 0, 1) };
 	for (int i = 0; i < 3; ++i)
@@ -846,8 +846,8 @@ static _bool AabbObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
 
-	_float3 aabbCenter = pAC->GetOffset() + spAabbTransform->GetLastPosition();
-	_float3 obbCenter = pOC->GetOffset() + spObbTransform->GetLastPosition();
+	_float3 aabbCenter = pAC->GetOffset() + spAabbTransform->GetPosition();
+	_float3 obbCenter = pOC->GetOffset() + spObbTransform->GetPosition();
 
 	_float3 aabbAxis[3];
 	aabbAxis[0] = _float3(1.f, 0.f, 0.f);
@@ -979,8 +979,8 @@ static _bool ObbObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	SP(CTransformC) spObbTransform1 = pOC1->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform2 = pOC2->GetOwner()->GetTransform();
 
-	_float3 obb1Center = pOC1->GetOffset() + spObbTransform1->GetLastPosition();
-	_float3 obb2Center = pOC2->GetOffset() + spObbTransform2->GetLastPosition();
+	_float3 obb1Center = pOC1->GetOffset() + spObbTransform1->GetPosition();
+	_float3 obb2Center = pOC2->GetOffset() + spObbTransform2->GetPosition();
 
 	_float3 obb1OrientedAxis[3];
 	obb1OrientedAxis[0] = pOC1->GetRight();
