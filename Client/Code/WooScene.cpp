@@ -65,18 +65,19 @@ void CWooScene::Start(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	//Load->MapLoad(this);
+	Load->MapLoad(this);
 	//Load->PhaseChangerLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
 
-	TerrainSetting();
+	// 맵 키면 꼭 주석!!!!!!!!!!!!!!
+	//TerrainSetting();
 
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
-	GaneshaSetting();
+	//GaneshaSetting();
 }
 
 void CWooScene::FixedUpdate(void)

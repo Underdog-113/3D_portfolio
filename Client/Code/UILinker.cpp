@@ -138,19 +138,19 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->PlayerChange(
-			L"Teresa_Battle",
-			L"Teresa_Battle",
-			L"Teresa_Battle",
-			L"Teresa_Battle",
+			L"Skill_Theresa_0",
+			L"Skill_Theresa_1",
+			L"Skill_Theresa_2",
+			L"Skill_Theresa_3",
 			L"Defalut",
 			L"Defalut");
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->PlayerChange(
-			L"Sakura_Battle",
-			L"Sakura_Battle",
-			L"Sakura_Battle",
-			L"Sakura_Battle",
+			L"Skill_Sakura_0",
+			L"Skill_Sakura_1",
+			L"Skill_Sakura_2",
+			L"Skill_Sakura_3",
 			L"Defalut",
 			L"Defalut");
 		break;

@@ -222,6 +222,20 @@ bool CFSM_TheresaC::CheckAction_RunBS_To_Run()
 	return false;
 }
 
+bool CFSM_TheresaC::CheckAction_Ultra()
+{
+	if (Engine::IMKEY_DOWN(StageKey_Ult))
+	{
+		auto pStat = m_pTheresa->GetStat();
+		if (pStat->GetCurSp() < pStat->GetUltraCost())
+			return false;
+
+		ChangeState(Name_Ult);
+		return true;
+	}
+	return false;
+}
+
 void CFSM_TheresaC::IDLE_Init(void)
 {
 }
@@ -242,8 +256,8 @@ void CFSM_TheresaC::IDLE_Update(float deltaTime)
 	if (CheckAction_EvadeBackward(0.f))
 		return;
 
-	//if (CheckAction_Ultra())
-	//	return;
+	if (CheckAction_Ultra())
+		return;
 
 	if (Engine::IMKEY_DOWN(StageKey_QTE))
 	{
@@ -328,8 +342,8 @@ void CFSM_TheresaC::RUN_Update(float deltaTime)
 		return;
 	if (CheckAction_EvadeForward())
 		return;
-	//if (CheckAction_Ultra())
-	//	return;
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_TheresaC::RUN_End(void)
@@ -848,10 +862,13 @@ void CFSM_TheresaC::Ult_Init(void)
 
 void CFSM_TheresaC::Ult_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Ult);
 }
 
 void CFSM_TheresaC::Ult_Update(float deltaTime)
 {
+	if (CheckAction_StandBy_Timeout())
+		return;
 }
 
 void CFSM_TheresaC::Ult_End(void)
@@ -895,8 +912,8 @@ void CFSM_TheresaC::RUNSTOPRIGHT_Update(float deltaTime)
 		return;
 	if (CheckAction_EvadeForward())
 		return;
-	// 	if (CheckAction_Ultra())
-	// 		return;
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_TheresaC::RUNSTOPRIGHT_End(void)
@@ -925,8 +942,8 @@ void CFSM_TheresaC::RUNSTOPLEFT_Update(float deltaTime)
 		return;
 	if (CheckAction_EvadeForward())
 		return;
-	//if (CheckAction_Ultra())
-	//	return;
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_TheresaC::RUNSTOPLEFT_End(void)

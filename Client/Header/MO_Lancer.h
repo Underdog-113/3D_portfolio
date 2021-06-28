@@ -7,7 +7,7 @@ class CMO_Lancer : public CMonster
 
 private:
 	CMO_Lancer();
-	virtual ~CMO_Lancer() = default;
+	~CMO_Lancer();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -37,5 +37,11 @@ public:
 	virtual void ApplyHitInfo(HitInfo info) override;
 public:
 	static		SP(CMO_Lancer)			Create(_bool isStatic, Engine::CScene* pScene);
+	void						ChaseTarget(_float3 targetPos);
+	void						SetStatus(BaseStat stat);
+	void						MonsterDead() override;
+
+private:
+	static		_uint						m_s_uniqueID;
 };
 

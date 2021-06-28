@@ -21,6 +21,7 @@
 #include "SpawnEffectShader.h"
 #include "SoftEffectShader.h"
 #include "AttackRangeShader.h"
+#include "AlphaMaskShader.h"
 #pragma endregion
 
 
@@ -69,6 +70,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSpawnEffectShader::Create(), L"SpawnEffectShader", (_uint)EShaderID::SpawnEffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader::Create(), L"SoftEffectShader", (_uint)EShaderID::SoftEffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAttackRangeShader::Create(), L"AttackRangeShader", (_uint)EShaderID::AttackRangeShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskShader::Create(), L"AlphaMaskShader", (_uint)EShaderID::AlphaMaskShader);
 
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();

@@ -45,7 +45,6 @@ void CDataManager::OnDestroy(void)
 		delete (obj);
 	}
 	m_pValkyrieStatusDataList.clear();
-	
 }
 
 CCaptainData * CDataManager::FindCaptainData()

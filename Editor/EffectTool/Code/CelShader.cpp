@@ -37,7 +37,7 @@ void CCelShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 
 	_mat worldMat, viewMat, projMat, WVP;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	viewMat = GET_MAIN_CAM->GetViewMatrix();
 	projMat = GET_MAIN_CAM->GetProjMatrix();
 

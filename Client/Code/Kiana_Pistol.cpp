@@ -68,6 +68,8 @@ void CKiana_Pistol::Update(void)
 void CKiana_Pistol::LateUpdate(void)
 {
 	__super::LateUpdate();
+
+	//m_spTransform->SetLastWorldMatrix(*m_pParentMatrix);
 }
 
 void CKiana_Pistol::PreRender(LPD3DXEFFECT pEffect)

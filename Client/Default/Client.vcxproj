@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AlphaLifeTimeC.h" />
+    <ClInclude Include="..\Header\AlphaMaskShader.h" />
     <ClInclude Include="..\Header\AttackBall.h" />
     <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
@@ -209,7 +210,10 @@
     <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
+    <ClInclude Include="..\Header\FSMDefine_Lancer.h" />
+    <ClInclude Include="..\Header\FSMDefine_Ninza.h" />
     <ClInclude Include="..\Header\FSMDefine_Sakura.h" />
+    <ClInclude Include="..\Header\FSMDefine_Scout.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
     <ClInclude Include="..\Header\FSMDefine_Spider.h" />
     <ClInclude Include="..\Header\FSMDefine_Theresa.h" />
@@ -267,6 +271,14 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
     <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\LancerBasePattern.h" />
+    <ClInclude Include="..\Header\LancerBornPattern.h" />
+    <ClInclude Include="..\Header\LancerDiePattern.h" />
+    <ClInclude Include="..\Header\LancerHitPattern.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -289,8 +301,16 @@
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Sickle.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\NinzaBasePattern.h" />
+    <ClInclude Include="..\Header\NinzaBornPattern.h" />
+    <ClInclude Include="..\Header\NinzaDiePattern.h" />
+    <ClInclude Include="..\Header\NinzaHitPattern.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\ScoutBasePattern.h" />
+    <ClInclude Include="..\Header\ScoutBornPattern.h" />
+    <ClInclude Include="..\Header\ScoutDiePattern.h" />
+    <ClInclude Include="..\Header\ScoutHitPattern.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -348,6 +368,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
+    <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
@@ -412,6 +433,14 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
+    <ClCompile Include="..\Code\LancerBasePattern.cpp" />
+    <ClCompile Include="..\Code\LancerBornPattern.cpp" />
+    <ClCompile Include="..\Code\LancerDiePattern.cpp" />
+    <ClCompile Include="..\Code\LancerHitPattern.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
@@ -435,8 +464,16 @@
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Sickle.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\NinzaBasePattern.cpp" />
+    <ClCompile Include="..\Code\NinzaBornPattern.cpp" />
+    <ClCompile Include="..\Code\NinzaDiePattern.cpp" />
+    <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\ScoutBasePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
+    <ClCompile Include="..\Code\ScoutDiePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -508,6 +545,10 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>

@@ -41,7 +41,10 @@
 #include "AttackTrail_Client.h"
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
-
+#include "Kiana_Ult_Eff.h"
+#include "Kiana_Ult_Plane.h"
+#include "Kiana_Ult_Shield.h"
+#include "Kiana_Ult_Ring.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -151,6 +154,18 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff(CKiana_Ult_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff_Plane(CKiana_Ult_Plane::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Plane);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff_Ring(CKiana_Ult_Ring::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Ring);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
 }
 
 void CStaticScene::InitMapPrototypes(void)

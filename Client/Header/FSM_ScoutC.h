@@ -1,16 +1,24 @@
 #pragma once
 #include "StateMachineC.h"
 
-class FSM_ScoutC final : public Engine::CStateMachineC
+class CStageControlTower;
+class CFSM_ScoutC final : public Engine::CStateMachineC
 {
 public:
-	FSM_ScoutC();
-	~FSM_ScoutC() = default;
+	CFSM_ScoutC();
+	~CFSM_ScoutC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+
+private:
+	void RegisterAllStage();
+	void FixRootMotionOffset(_uint index);
+
+private:
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
 
 public:
 	// <Animation List>
@@ -176,8 +184,4 @@ public:
 	void DIE_FLY_Enter(void);
 	void DIE_FLY_Update(float deltaTime);
 	void DIE_FLY_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
 };
-

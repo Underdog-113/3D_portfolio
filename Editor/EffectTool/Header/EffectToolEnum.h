@@ -57,7 +57,8 @@ enum class EShaderID
 	SpawnEffectShader	= 7 + (_int)Engine::EShaderID::NumOfShaderID,
 	SoftEffectShader	= 8 + (_int)Engine::EShaderID::NumOfShaderID,
 	AttackRangeShader	= 9 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 10 + (_int)Engine::EShaderID::NumOfShaderID
+	AlphaMaskShader     = 10 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 11 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 //GraphicsComponent RenderID

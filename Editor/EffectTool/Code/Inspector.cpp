@@ -566,7 +566,8 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	}
 
 }
@@ -1009,15 +1010,15 @@ void CInspector::AnimTransformUpdate(SP(Engine::CObject) spObject)
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().x <= m_vSaveRot.x)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(m_fAnimSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(D3DXToRadian(m_fAnimSpeed * GET_DT));
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().y <= m_vSaveRot.y)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(m_fAnimSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(m_fAnimSpeed * GET_DT));
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().z <= m_vSaveRot.z)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(m_fAnimSpeed * GET_DT);
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(D3DXToRadian(m_fAnimSpeed * GET_DT));
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().x <= m_vSaveScale.x)
 	{

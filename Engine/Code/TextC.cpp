@@ -90,6 +90,8 @@ void CTextC::AddFontData(std::wstring message, _float2 position, _float2 boxSize
 		MSG_BOX(__FILE__, L"CTextC.cpp / AddFontData");
 	}
 
+	
+
 	m_message = message;
 	m_position = position;
 	m_boxSize = boxSize;
