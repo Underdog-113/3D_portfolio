@@ -82,6 +82,9 @@
     <Filter Include="06.Shader\08. SoftEffectShader">
       <UniqueIdentifier>{7c985d7b-b064-496f-b504-c02bffa46491}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Shader\12. FireShader">
+      <UniqueIdentifier>{7486f62e-c525-46e5-8806-884d465c92fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -174,6 +177,9 @@
     <ClInclude Include="..\Header\AlphaMaskShader.h">
       <Filter>06.Shader\11. AlphaMaskShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FireShader.h">
+      <Filter>06.Shader\12. FireShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\AlphaMaskShader.cpp">
       <Filter>06.Shader\11. AlphaMaskShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FireShader.cpp">
+      <Filter>06.Shader\12. FireShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

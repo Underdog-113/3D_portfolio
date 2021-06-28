@@ -22,7 +22,7 @@
 #include "SoftEffectShader.h"
 #include "AttackRangeShader.h"
 #include "AlphaMaskShader.h"
-
+#include "FireShader.h"
 #pragma region Shader
 
 
@@ -71,6 +71,8 @@ void CMainEditor::Awake()
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader::Create(), L"SoftEffectShader", (_uint)EShaderID::SoftEffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAttackRangeShader::Create(), L"AttackRangeShader", (_uint)EShaderID::AttackRangeShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskShader::Create(), L"AlphaMaskShader", (_uint)EShaderID::AlphaMaskShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFireShader::Create(), L"FireShader", (_uint)EShaderID::FireShader);
+
 }
 
 void CMainEditor::Start()

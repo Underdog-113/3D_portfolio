@@ -517,6 +517,33 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke">
       <UniqueIdentifier>{fb2ebb8f-2086-4718-b783-ee66c91b20c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail">
+      <UniqueIdentifier>{ae0fcbf0-ee22-4afb-837d-1f678d41de71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail">
+      <UniqueIdentifier>{a3ce0d00-0e73-4298-bedb-af0292f6bb22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail">
+      <UniqueIdentifier>{7a2e52f6-3758-4ea4-97a9-cad40b71d61c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail\Kiana_Ult_Trail">
+      <UniqueIdentifier>{841304d0-71b3-450a-a4a3-8b01a2815f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail\Theresa_Ult_Trail">
+      <UniqueIdentifier>{49dc1c09-ea9d-461b-8341-21abc9d88485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire">
+      <UniqueIdentifier>{b9531daf-1032-44de-b744-b32eb7a88f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\11.FireShader">
+      <UniqueIdentifier>{1b1f342d-3d74-4b5b-97a9-375cdca38edb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom">
+      <UniqueIdentifier>{2e4d3c72-ab7e-4238-af18-9c75bcc0124c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane">
+      <UniqueIdentifier>{fe921a0a-3732-47b7-a9fe-3df6f90ff48e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -752,9 +779,6 @@
     </ClInclude>
     <ClInclude Include="..\Header\MeshEffect_Client.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AttackTrail_Client.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\BattleEndScene.h">
       <Filter>01.Scene\10.BattleEnd</Filter>
@@ -1029,6 +1053,30 @@
     <ClInclude Include="..\Header\Theresa_Ult_Smoke.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Ult_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail\Kiana_Ult_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail\Theresa_Ult_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FireShader.h">
+      <Filter>04.Shader\11.FireShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_Fire.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_Boom.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_Crack.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1222,9 +1270,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\MeshEffect_Client.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AttackTrail_Client.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BattleEndScene.cpp">
       <Filter>01.Scene\10.BattleEnd</Filter>
@@ -1482,6 +1527,30 @@
     <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_Ult_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail\Kiana_Ult_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail\Theresa_Ult_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FireShader.cpp">
+      <Filter>04.Shader\11.FireShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -1537,6 +1606,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
       <Filter>04.Shader\10.AlphaMaskShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
+      <Filter>04.Shader\11.FireShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

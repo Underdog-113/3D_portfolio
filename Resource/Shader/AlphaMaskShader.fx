@@ -7,7 +7,6 @@ float4x4 gProjection;
 
 float4 gWorldLightPosition;
 
-float  gTime;
 float  gAlpha;
 float  gSpeed = 1.5;
 
@@ -62,7 +61,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 
 	if (gPlayingAnim)
 	{
-		Output.mUV = Input.mUV - float2(gSpeed * gTime, 0.f);
+		Output.mUV = Input.mUV + float2(gSpeed, 0.f);
 	}
 	else
 	{

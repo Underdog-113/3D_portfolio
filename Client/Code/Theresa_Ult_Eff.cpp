@@ -39,12 +39,6 @@ SP(Engine::CObject) CTheresa_Ult_Eff::MakeClone()
 void CTheresa_Ult_Eff::Awake()
 {
 	__super::Awake();
-
-	m_addExtra = true;
-	m_spMesh = AddComponent<Engine::CMeshC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
-	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
 void CTheresa_Ult_Eff::Start()

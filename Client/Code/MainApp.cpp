@@ -22,6 +22,7 @@
 #include "SoftEffectShader.h"
 #include "AttackRangeShader.h"
 #include "AlphaMaskShader.h"
+#include "FireShader.h"
 #pragma endregion
 
 
@@ -58,6 +59,8 @@ void CMainApp::Awake(void)
 	Engine::CPSC_Manager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
+
+	/// Load Shader
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)EShaderID::NumOfShaderID);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CWaterShader::Create(), L"WaterShader", (_uint)EShaderID::WaterShader);
@@ -71,6 +74,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader::Create(), L"SoftEffectShader", (_uint)EShaderID::SoftEffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAttackRangeShader::Create(), L"AttackRangeShader", (_uint)EShaderID::AttackRangeShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskShader::Create(), L"AlphaMaskShader", (_uint)EShaderID::AlphaMaskShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFireShader::Create(), L"FireShader", (_uint)EShaderID::FireShader);
 
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();

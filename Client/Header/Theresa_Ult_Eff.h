@@ -6,6 +6,10 @@ class CTheresa_Ult_Eff : public CMeshEffect_Client
 	SMART_DELETER_REGISTER
 
 public:
+	CTheresa_Ult_Eff();
+	~CTheresa_Ult_Eff();
+
+public:
 	static SP(CTheresa_Ult_Eff) Create(_bool isStatic, Engine::CScene* pScene);
 	SP(Engine::CObject) MakeClone() override;
 

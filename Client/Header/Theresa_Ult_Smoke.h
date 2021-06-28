@@ -27,5 +27,7 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 	void SetBasicName()override;
+
+	_float m_fUVSpeed;
 };
 

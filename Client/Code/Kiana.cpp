@@ -503,7 +503,7 @@ void CKiana::FindRightToe()
 SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+		GetObjectFactory()->AddClone(L"Kiana_Trail", true, (_int)ELayerID::Effect, L"Cube0");
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
@@ -523,7 +523,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 SP(Engine::CObject) CKiana::CreateEffect(std::wstring name, std::wstring texName1, std::wstring texName2)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+		GetObjectFactory()->AddClone(L"Kiana_Ult_Trail", true, (_int)ELayerID::Effect, L"Cube0");
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);

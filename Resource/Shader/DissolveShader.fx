@@ -13,6 +13,8 @@ float  m_defaultDissolveVal = 0.9f;
 
 float3 gDissolveLineColor = float3(1,0,0);
 
+bool   gTrailCheck;
+
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
 {
@@ -81,15 +83,39 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	// Noise Texture
 	float4 Noise = tex2D(NoiseTex, Input.mUV);
 
+
 	// To disappear to match the noise texture
-	float multiply1 = saturate((Noise.r * sin(gAlpha)) * 5.5f);
-	float multiply2 = saturate(Noise.r * sin(gAlpha));
+	float multiply1 = 0;
+	float multiply2 = 0;
+
+	if (gTrailCheck)
+	{
+		if (Input.mUV.x > gAlpha)
+		{
+			albedo.a = gAlpha;
+			Noise.a  = gAlpha;
+		}
+	}
+	else
+	{
+		multiply1 = saturate((Noise.r * sin(gAlpha)) * 5.5f);
+		multiply2 = saturate(Noise.r * sin(gAlpha));
+	}
 
 	// Current Dissolve Line Value
-	float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20)); 
-	
+	float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 20));
+
 	// Returns the "multiply2" multiple of "multiply1"
-	float multiple = pow(multiply1 + multiply2, 20);
+	float multiple = 0;
+
+	if (gTrailCheck)
+	{
+		multiple = multiply1;
+	}
+	else
+	{
+		multiple = pow(multiply1 + multiply2, 20);
+	}
 
 	// Dissolve Line Size
 	float3 DissolveLineSize;
@@ -103,9 +129,19 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 		DissolveLineSize = float3(0, 0, 0);
 	}
 
-	float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + albedo.rgb);
-	
-	return float4(diffuse, multiple);
+	float3 diffuse = float3(0, 0, 0);
+
+	if (gTrailCheck)
+	{
+		diffuse = albedo.rgb;
+		return float4(diffuse, albedo.a);
+	}
+	else
+	{
+		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + albedo.rgb);
+		return float4(diffuse, multiple);
+	}
+
 }
 
 technique DissolveShader

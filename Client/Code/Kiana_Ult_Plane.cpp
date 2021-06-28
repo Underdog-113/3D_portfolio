@@ -40,12 +40,6 @@ SP(Engine::CObject) CKiana_Ult_Plane::MakeClone()
 void CKiana_Ult_Plane::Awake()
 {
 	__super::Awake();
-
-	m_addExtra = true;
-	m_spMesh = AddComponent<Engine::CMeshC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
-	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
 void CKiana_Ult_Plane::Start()

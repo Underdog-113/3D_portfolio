@@ -38,18 +38,13 @@ SP(Engine::CObject) CTheresa_Ult_Smoke::MakeClone()
 void CTheresa_Ult_Smoke::Awake()
 {
 	__super::Awake();
-
-	m_addExtra = true;
-	m_spMesh = AddComponent<Engine::CMeshC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
-	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
 void CTheresa_Ult_Smoke::Start()
 {
 	__super::Start();
-
+	m_fAlpha = 1.f;
+	m_fUVSpeed = 0.f;
 }
 
 void CTheresa_Ult_Smoke::FixedUpdate()
@@ -61,6 +56,13 @@ void CTheresa_Ult_Smoke::Update()
 {
 	__super::Update();
 
+	if (m_fAlpha <= 0)
+	{
+		this->SetDeleteThis(true);
+	}
+
+	m_fAlpha -= 0.5f * GET_DT;
+	m_fUVSpeed += GET_DT;
 }
 
 void CTheresa_Ult_Smoke::LateUpdate()
@@ -73,6 +75,7 @@ void CTheresa_Ult_Smoke::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetFloat("gSpeed", m_fUVSpeed);
 	pEffect->SetBool("gPlayingAnim", true);
 }
 
