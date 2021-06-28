@@ -134,12 +134,12 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
-	/************************* AttackBall */
-	// burst 상태가 완료되면 attackball off
+	/************************* AttackBox */
+	// burst 상태가 완료되면 attackbox off
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_onBurst = false;
-		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBox();
 	}
 	// burst 상태라면
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&

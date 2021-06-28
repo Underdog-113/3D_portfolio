@@ -2,6 +2,7 @@
 #include "PatternMachineC.h"
 
 #include "ClientPatterns.h"
+#include "Monster.h"
 
 CPatternMachineC::CPatternMachineC()
 {
@@ -50,10 +51,11 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
-	//if (Engine::IMKEY_DOWN(KEY_Q))
-	//{
-	//	m_onHitFrontL = true;
-	//}
+	if (Engine::IMKEY_DOWN(KEY_Q))
+	{
+		m_onDie = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+	}
 	//else if (Engine::IMKEY_DOWN(KEY_E))
 	//{
 	//	m_onHitFront = true;

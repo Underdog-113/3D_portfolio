@@ -94,8 +94,9 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		// 내가 뒤로 이동이 끝났다면
 		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
 		{
-			fsm->ChangeState(Name_RUN_F);
-			pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
+			//fsm->ChangeState(Name_RUN_F);
+			fsm->ChangeState(Name_IDLE);
+			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
 	}
 	// 상대가 공격 범위 안이고
@@ -108,36 +109,47 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_SHOOT_2);
-			//		//PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
-			//static_cast<CMO_Scout*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
+			PatternPlaySound(L"Scout_Laser.wav", pOwner);
 		}
-		// shoot1 상태라면 뒤로 이동 상태로 변경
+		// shoot2 상태라면 뒤로 이동 상태로 변경
 		else if (Name_SHOOT_2 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_RUN_B);
 		}
 	}
 
-	///************************* AttackBall */
-	//// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	//if (Name_SHOOT_1 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
-	//{
-	//	static_cast<CMO_Scout*>(pOwner)->UnActiveAttackBall();
-	//}
-	//// 내가 공격 상태고, 적절할 때 어택볼 생성
-	//else if (Name_SHOOT_1 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
-	//{
-	//	m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+ 	/************************* AttackBox */
+	// shoot2 상태가 완료되면 attackbox off
+	if (Name_SHOOT_2 == fsm->GetCurStateString() && 
+		0.6f <= fsm->GetDM()->GetAniTimeline())
+	{
+		m_onShoot2 = false;
+		static_cast<CMO_Scout*>(pOwner)->UnActiveAttackBox();
+	}
+	// shoot2 상태라면
+	if (Name_SHOOT_2 == fsm->GetCurStateString() &&
+		0.55f <= fsm->GetDM()->GetAniTimeline() &&
+		0.6f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_onShoot2)
+	{
+		m_onShoot2 = true;
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		CMO_Scout* pScout = static_cast<CMO_Scout*>(pOwner);
+		_float3 size = { 2.f, 1.f, 10.f };
+		_float3 offset = ZERO_VECTOR;
 
-	//	_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);
-	//	D3DXVec3Normalize(&look, &look);
+		_float3 mPos = pOwner->GetTransform()->GetPosition();
+		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+		_float3 beamDir = pPos - mPos;
+		beamDir.y = 0.f;
+		D3DXVec3Normalize(&beamDir, &beamDir);
+		pScout->GetAttackBox()->GetTransform()->SetForward(beamDir);
+		pScout->GetAttackBox()->GetTransform()->SetPosition(mPos);
 
-	//	m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
-	//	m_atkMat._41 += (m_atkDis * look.x / 1.8f);
-	//	m_atkMat._43 += (m_atkDis * look.z / 1.8f);
+		offset = _float3(0, 0, 5);
 
-	//	static_cast<CMO_Scout*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.34f);
-	//}
+		pScout->ActiveAttackBox(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
+	}
 }
 
 SP(CScoutShoot2Pattern) CScoutShoot2Pattern::Create()

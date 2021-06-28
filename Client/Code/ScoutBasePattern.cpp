@@ -35,21 +35,24 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* Set Move Count */
 	// 이번 패턴 동안 몇 번 이동을 바꿀 건지 정함
-	if (0 == m_moveCnt)
+	if (0 == m_moveCnt && true == m_walkReady)
 	{
 		m_moveCnt = GetRandRange(1, m_maxMoveCnt);
+	}
+
+	if (true == m_walkReady && 
+		Name_IDLE != fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		fsm->ChangeState(Name_IDLE);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
 		return;
-	}
-	// 카운트가 남아있다면 카운트를 줄임
-	else
-	{
-		--m_moveCnt;
 	}
 
 	/************************* Choose Move Dir */
 	// 이동 쿨타임이 되었다면 다음 이동 행동으로 변경
-	if (true == m_walkReady)
+	if (true == m_walkReady &&
+		Name_IDLE == fsm->GetCurStateString())
 	{
 		_int index = GetRandRange(2, 5);
 		m_walkReady = false;
@@ -75,6 +78,7 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(m_curState);
+		--m_moveCnt;
 	}
 	// 내가 앞으로 이동 중이라면
 	else if (Name_RUN_F == fsm->GetCurStateString())
@@ -95,13 +99,13 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	// 내가 왼쪽으로 이동 중이라면
 	else if (Name_RUN_L == fsm->GetCurStateString())
 	{
-		mPos.x -= GET_DT;
+		mPos.x += GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
 	}
 	// 내가 오른쪽으로 이동 중이라면
 	else if (Name_RUN_R == fsm->GetCurStateString())
 	{
-		mPos.x += GET_DT;
+		mPos.x -= GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
 	}
 }

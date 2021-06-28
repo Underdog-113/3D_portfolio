@@ -30,9 +30,6 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_atkMat;
-
-	_bool m_onBurst = false;
-	_bool m_onRunStart = false;
 };
 
 #endif

@@ -64,14 +64,11 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 shoot3 범위 밖이고
 	if (len > m_atkDis)
 	{
-// 		// 내가 shoot3 상태면
-// 		if (Name_SHOOT_3 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
-// 		{
-// 			fsm->ChangeState(Name_Ganesha_Jump_Back);
-// 			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
-// 			m_onSound = false;
-// 			m_onRunStart = false;
-// 		}
+		// 내가 shoot3 상태면
+		if (Name_SHOOT_3 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		{
+			fsm->ChangeState(Name_IDLE);
+		}
 		// 내가 대기 상태면 이동 애니로 변경
 		/*else*/ if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
