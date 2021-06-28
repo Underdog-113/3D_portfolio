@@ -48,7 +48,8 @@ void CChangmoScene::Start(void)
 	//	spCube0->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
 	//	spCube0->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	//	spCube0->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	//	
+	//	spCube0->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
+	//	spCube0->AddComponent<Engine::CDebugC>();
 	//
 	//	SP(Engine::CObject) spCube1 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"Child");
 	//	spCube1->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
@@ -57,7 +58,20 @@ void CChangmoScene::Start(void)
 	//	spCube1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	//	//spCube1->GetTransform()->SetParent(spCube0->GetTransform());
 	//	spCube1->GetTransform()->SetPosition(2, 0, 0);
-	//	spCube1->GetTransform()->SetParentMatrix(&spCube0->GetTransform()->GetLastWorldMatrix());
+	//	spCube1->GetTransform()->SetParent(spCube0->GetTransform());
+	//	spCube1->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
+	//	spCube1->AddComponent<Engine::CDebugC>();
+	//	//spCube1->GetTransform()->SetParentMatrix(&spCube0->GetTransform()->GetWorldMatrix());
+	//
+	//
+	//	SP(Engine::CObject) spCube2 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"no");
+	//	spCube2->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+	//	spCube2->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+	//	spCube2->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	//	spCube2->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	//	spCube2->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
+	//	spCube2->AddComponent<Engine::CDebugC>();
+	//	spCube2->GetTransform()->AddPositionX(5);
 	//}
 
 	{
@@ -151,6 +165,11 @@ void CChangmoScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_E))
 		FindObjectByName(L"Parent")->SetDeleteThis(true);
+	if (Engine::IMKEY_DOWN(KEY_Q))
+	{
+		FindObjectByName(L"Parent")->GetTransform()->SetPosition(0, 0, 0);
+		FindObjectByName(L"Parent")->GetTransform()->SetRotation(0, 0, 0);
+	}
 }
 
 void CChangmoScene::LateUpdate(void)

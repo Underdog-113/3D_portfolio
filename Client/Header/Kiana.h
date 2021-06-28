@@ -43,9 +43,9 @@ public:
 
 					void					SetBasicName		(void) override;
 
-					void					OnCollisionEnter(Engine::_CollisionInfo ci) override;
-					void					OnCollisionStay(Engine::_CollisionInfo ci) override;
-					void					OnCollisionExit(Engine::_CollisionInfo ci) override;
+					void					OnCollisionEnter	(Engine::_CollisionInfo ci) override;
+					void					OnCollisionStay		(Engine::_CollisionInfo ci) override;
+					void					OnCollisionExit		(Engine::_CollisionInfo ci) override;
 
 
 					void					ApplyHitInfo		(HitInfo info) override;

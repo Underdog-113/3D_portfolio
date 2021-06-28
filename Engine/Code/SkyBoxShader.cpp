@@ -36,7 +36,7 @@ void CSkyBoxShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	_mat worldMat, viewMat, projMat;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 
 	viewMat = GET_MAIN_CAM->GetViewMatrix();
 	projMat = GET_MAIN_CAM->GetProjMatrix();

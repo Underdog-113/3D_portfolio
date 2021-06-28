@@ -95,6 +95,36 @@ void CTransformC::OnDisable(void)
 	__super::OnDisable();
 }
 
+const _float3 & CTransformC::GetPosition(void)
+{
+	return m_lastPosition;
+}
+
+const _float3 & CTransformC::GetRotation(void)
+{
+	return m_lastRotation;
+}
+
+const _float3 & CTransformC::GetSize(void)
+{
+	return m_lastSize;
+}
+
+const _float3 & CTransformC::GetForward(void)
+{
+	return m_lastForward;
+}
+
+const _float3 & CTransformC::GetUp(void)
+{
+	return m_lastUp;
+}
+
+const _float3 & CTransformC::GetRight(void)
+{
+	return m_lastRight;
+}
+
 #pragma region TransformSettors
 void CTransformC::SetPosition(_float3 position)
 {
@@ -194,17 +224,17 @@ void CTransformC::SetForward(_float3 forward)
 	UpdateRotation();
 }
 
-void CTransformC::SetForwardUp(_float3 forward, _float3 up)
-{
-	D3DXVec3Normalize(&forward, &forward);
-	D3DXVec3Normalize(&up, &up);
-
-	if (forward == m_forward && up == m_up)
-		return;
-
-	m_forward	= forward;
-	m_up		= up;
-}
+//void CTransformC::SetForwardUp(_float3 forward, _float3 up)
+//{
+//	D3DXVec3Normalize(&forward, &forward);
+//	D3DXVec3Normalize(&up, &up);
+//
+//	if (forward == m_forward && up == m_up)
+//		return;
+//
+//	m_forward	= forward;
+//	m_up		= up;
+//}
 
 
 void CTransformC::AddPosition(_float3 position)
@@ -277,13 +307,13 @@ void CTransformC::Lerp(void)
 {
 	if (m_lerpOn)
 	{
-		_float3 dir = m_goalPosition - m_lastPosition;
+		_float3 dir = m_goalPosition - m_position;
 		_float length = D3DXVec3Length(&dir);
 		_float moveAmount = length * m_lerpProportion;
 
 		if (length < m_lerpSpeed * GET_DT)
 		{
-			m_lastPosition	= m_goalPosition;
+			m_position = m_goalPosition;
 			m_lerpOn	= false;
 			return;
 		}
@@ -291,7 +321,7 @@ void CTransformC::Lerp(void)
 			moveAmount = m_lerpSpeed;
 
 		dir /= length;
-		m_lastPosition += (dir * moveAmount * GET_DT);
+		m_position += (dir * moveAmount * GET_DT);
 	}
 }
 
@@ -299,7 +329,7 @@ void CTransformC::SlerpXZ(void)
 {
 	if (m_slerpOn)
 	{
-		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_lastForward);
+		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_forward);
 		GET_MATH->RoundOffRange(dotTwoForward, 1);
 
 		_float includedAngle = acos(dotTwoForward);
@@ -313,7 +343,7 @@ void CTransformC::SlerpXZ(void)
 		}
 
 		_float3 determinant;
-		D3DXVec3Cross(&determinant, &m_lastForward, &m_goalForward);
+		D3DXVec3Cross(&determinant, &m_forward, &m_goalForward);
 
 		if (determinant.y < 0)
 			AddRotationY(-m_slerpSpeed * GET_DT);
@@ -324,32 +354,32 @@ void CTransformC::SlerpXZ(void)
 
 void CTransformC::MoveForward(_float magnitude)
 {
-	AddPosition(m_lastForward * magnitude);
+	AddPosition(m_forward * magnitude);
 }
 
 void CTransformC::MoveBackward(_float magnitude)
 {
-	AddPosition(-m_lastForward * magnitude);
+	AddPosition(-m_forward * magnitude);
 }
 
 void CTransformC::MoveLeft(_float magnitude)
 {
-	AddPosition(-m_lastRight * magnitude);
+	AddPosition(-m_right * magnitude);
 }
 
 void CTransformC::MoveRight(_float magnitude)
 {
-	AddPosition(m_lastRight * magnitude);
+	AddPosition(m_right * magnitude);
 }
 
 void CTransformC::MoveUp(_float magnitude)
 {
-	AddPosition(m_lastUp * magnitude);
+	AddPosition(m_up * magnitude);
 }
 
 void CTransformC::MoveDown(_float magnitude)
 {
-	AddPosition(-m_lastUp * magnitude);
+	AddPosition(-m_up * magnitude);
 }
 
 #pragma endregion
@@ -462,15 +492,16 @@ void CTransformC::UpdateWorldMatrix(void)
 	m_worldMat = size * rotateX * rotateY * rotateZ * translation;
 	m_worldMatNoScale = rotateX * rotateY * rotateZ * translation;
 
-	if(m_spParent)
-	{
-		m_rotMatrix			*= m_spParent->GetRotMatrix();
-		m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
-		m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
-	}
+	if (m_spParent)
+		ApplyParentMatrix(&m_spParent->GetWorldMatrixNoScale());
+	//{
+	//	m_rotMatrix			*= m_spParent->GetRotMatrix();
+	//	m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
+	//	m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
+	//}
 
 	if (m_pParentMatrix)
-		UpdateParentMatrix(m_pParentMatrix);
+		ApplyParentMatrix(m_pParentMatrix);
 }
 
 void CTransformC::UpdateCamDistance(void)
@@ -479,9 +510,10 @@ void CTransformC::UpdateCamDistance(void)
 	m_camDist = D3DXVec3LengthSq(&(camPos - m_position));
 }
 
-void CTransformC::UpdateParentMatrix(const _mat * pMat)
+void CTransformC::ApplyParentMatrix(const _mat* pMat)
 {
-	m_lastWorldMat *= *pMat;
+	m_worldMatNoScale	*= *pMat;
+	m_lastWorldMat		*= *pMat;
 
 	_mat matToDecompose = m_lastWorldMat;
 
@@ -513,6 +545,8 @@ void CTransformC::UpdateParentMatrix(const _mat * pMat)
 		matToDecompose._32 /= m_lastSize.z;
 		matToDecompose._33 /= m_lastSize.z;
 	}
+
+	m_lastRotMatrix *= matToDecompose;
 
 	_quat rotQuat;
 	D3DXQuaternionRotationMatrix(&rotQuat, &matToDecompose);
