@@ -95,6 +95,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst01);
+
 		}
 	}
 
@@ -148,18 +149,18 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		false == m_onBurst)
 	{
 		m_onBurst = true;
-		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		m_atkMat = pOwner->GetTransform()->GetLastWorldMatrix();
 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
 		_float3 size = { 2.f, 2.f, 10.f };
 		_float3 offset = ZERO_VECTOR; 
 
-		_float3 mPos = pOwner->GetTransform()->GetPosition();
+		_float3 mPos = pOwner->GetTransform()->GetLastPosition();
 		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 		_float3 beamDir = pPos - mPos;
 		beamDir.y = 0.f;
 		D3DXVec3Normalize(&beamDir, &beamDir);		
-		pGanesha->GetAttackBox()->GetTransform()->SetForward(beamDir);
-		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
+		pGanesha->GetAttackBox()->GetTransform()->SetLastRotation(pGanesha->GetTransform()->GetLastRotation());
+		pGanesha->GetAttackBox()->GetTransform()->SetLastPosition(mPos);
 
 		offset = _float3(0, 0, 5);
 		

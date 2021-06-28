@@ -131,9 +131,9 @@ protected:
 	GETTOR			(_float3,			m_up,						UP_VECTOR,			Up)
 	GETTOR			(_float3,			m_right,					RIGHT_VECTOR,		Right)
 	
-	GETTOR			(_float3,			m_lastPosition,				ZERO_VECTOR,		LastPosition)
-	GETTOR			(_float3,			m_lastRotation,				ZERO_VECTOR,		LastRotation)
-	GETTOR			(_float3,			m_lastSize,					ONE_VECTOR,			LastSize)
+	GETTOR_SETTOR	(_float3,			m_lastPosition,				ZERO_VECTOR,		LastPosition)
+	GETTOR_SETTOR	(_float3,			m_lastRotation,				ZERO_VECTOR,		LastRotation)
+	GETTOR_SETTOR	(_float3,			m_lastSize,					ONE_VECTOR,			LastSize)
 	
 	GETTOR			(_float3,			m_position,					ZERO_VECTOR,		Position)
 	GETTOR			(_float3,			m_rotation,					ZERO_VECTOR,		Rotation)

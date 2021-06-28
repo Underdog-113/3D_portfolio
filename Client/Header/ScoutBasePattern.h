@@ -16,6 +16,9 @@ public:
 	static SP(CScoutBasePattern) Create();
 
 private:
+	void SetMoveSound();
+
+private:
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 6.f; // 공격 거리
 	_float m_atkCool = 2.f; // 공격 쿨타임
@@ -28,9 +31,10 @@ private:
 
 	_mat m_atkMat;
 
-	_int m_maxMoveCnt = 3; // 이동 방향을 바꾸는 맥스 개수
+	_int m_maxMoveCnt = 2; // 이동 방향을 바꾸는 맥스 개수
 	_int m_moveCnt = 0; // 이번 base 패턴 동안 몇 번의 이동 방향을 바꿀 건지
 	std::wstring m_curState;
+	_TCHAR* m_curMoveSound;
 };
 
 #endif

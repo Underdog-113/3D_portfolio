@@ -17,6 +17,9 @@ public:
 	static SP(CScoutShoot2Pattern) Create();
 
 private:
+	void SetMoveSound();
+
+private:
 	_float m_cost = 15.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
@@ -32,6 +35,10 @@ private:
 	_mat m_atkMat;
 
 	_bool m_onShoot2 = false;
+	_bool m_onChase = true; // 플레이어 추적 켜고 끄기
+
+	_float3 m_beamDir = {};
+	_TCHAR* m_curMoveSound;
 };
 
 #endif

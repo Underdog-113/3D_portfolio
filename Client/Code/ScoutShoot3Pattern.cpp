@@ -10,7 +10,7 @@
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
-#include "AttackBox.h"
+#include "AttackBall.h"
 #include "StageControlTower.h"
 
 CScoutShoot3Pattern::CScoutShoot3Pattern()
@@ -38,27 +38,22 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	/************************* Sound */
-	// burst sound
-// 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
-// 		0.3f <= fsm->GetDM()->GetAniTimeline() &&
-// 		false == m_onSound)
-// 	{
-// 		PatternPlaySound(L"Ganesha_Laser.wav", pOwner);
-// 		m_onSound = true;
-// 	}
-// 	// run start sound
-// 	else if (Name_Ganesha_Run == fsm->GetCurStateString())
-// 	{
-// 		if (false == m_onRunStart)
-// 		{
-// 			PatternPlaySound(L"Ganesha_Run_Start.wav", pOwner);
-// 			m_onRunStart = true;
-// 		}
-// 		else if (true == m_onRunStart && false == PatternSoundEnd(pOwner))
-// 		{
-// 			PatternRepeatSound(L"Ganesha_Run.wav", pOwner, 0.03f);
-// 		}
-// 	}
+	// shoot3 sound
+	if (Name_SHOOT_3 == fsm->GetCurStateString() &&
+		0.8f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onSound)
+	{
+		PatternPlaySound(L"Scout_UpAttack_2.wav", pOwner);
+		m_onSound = false;
+	}
+	else if (Name_SHOOT_3 == fsm->GetCurStateString() &&
+		0.0f <= fsm->GetDM()->GetAniTimeline() &&
+		0.4f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSound)
+	{
+		PatternPlaySound(L"Scout_UpAttack.wav", pOwner);
+		m_onSound = true;
+	}
 
 	/************************* Range */
 	// 상대가 shoot3 범위 밖이고
@@ -70,9 +65,10 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->ChangeState(Name_IDLE);
 		}
 		// 내가 대기 상태면 이동 애니로 변경
-		/*else*/ if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		else if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_RUN_F);
+			SetMoveSound();
 		}
 		// 내가 이동 중이라면
 		else if (Name_RUN_F == fsm->GetCurStateString())
@@ -81,6 +77,7 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 
 			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 			pOwner->GetTransform()->SetPosition(mPos);
+			PatternRepeatSound(m_curMoveSound, pOwner, 0.3f);
 		}
 	}
 	// 상대가 shoot3 범위 안이고
@@ -100,10 +97,10 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 	if (Name_SHOOT_3 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_RUN_B);
-		//PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
-		//m_walkReady = false;
-		//m_onSound = false;
-		//m_onRunStart = false;
+		SetMoveSound();
+		m_walkReady = false;
+		m_onSound = false;
+		m_onShoot = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_RUN_B == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -112,6 +109,7 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 
 		mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
+		PatternRepeatSound(m_curMoveSound, pOwner, 0.3f);
 	}
 	// 내가 뒤로 이동이 끝났다면
 	else if (Name_RUN_B == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
@@ -123,36 +121,37 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	/************************* AttackBall */
-// 	// burst 상태가 완료되면 attackball off
-// 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
-// 	{
-// 		m_onBurst = false;
-// 		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
-// 	}
-// 	// burst 상태라면
-// 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
-// 		0.4f <= fsm->GetDM()->GetAniTimeline() &&
-// 		0.5f > fsm->GetDM()->GetAniTimeline() &&
-// 		false == m_onBurst)
-// 	{
-// 		m_onBurst = true;
-// 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
-// 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
-// 		_float3 size = { 2.f, 2.f, 10.f };
-// 		_float3 offset = ZERO_VECTOR; 
-// 
-// 		_float3 mPos = pOwner->GetTransform()->GetPosition();
-// 		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-// 		_float3 beamDir = pPos - mPos;
-// 		beamDir.y = 0.f;
-// 		D3DXVec3Normalize(&beamDir, &beamDir);		
-// 		pGanesha->GetAttackBox()->GetTransform()->SetForward(beamDir);
-// 		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
-// 
-// 		offset = _float3(0, 0, 5);
-// 		
-// 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
-// 	}
+	// shoot3 상태가 완료되면 attackball off
+	if (Name_SHOOT_3 == fsm->GetCurStateString() && 
+		0.8f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onShoot)
+	{
+		m_onShoot = false;
+		static_cast<CMO_Scout*>(pOwner)->UnActiveAttackBall();
+	}
+	// shoot3 상태라면 포격 위치를 잡음
+	else if (Name_SHOOT_3 == fsm->GetCurStateString() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
+		0.4f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_firePosFix)
+	{
+		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		m_atkMat._41 = pPos.x;
+		m_atkMat._42 = (pPos.y + 0.2f);
+		m_atkMat._43 = pPos.z;
+		m_firePosFix = true;
+	}
+	// shoot3 상태라면 어택볼 생성
+	else if (Name_SHOOT_3 == fsm->GetCurStateString() &&
+		0.7f <= fsm->GetDM()->GetAniTimeline() &&
+		0.75f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_onShoot)
+	{
+		m_onShoot = true;
+		m_firePosFix = false;
+		static_cast<CMO_Scout*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.48f);
+	}
 }
 
 SP(CScoutShoot3Pattern) CScoutShoot3Pattern::Create()
@@ -160,4 +159,23 @@ SP(CScoutShoot3Pattern) CScoutShoot3Pattern::Create()
 	SP(CScoutShoot3Pattern) spInstance(new CScoutShoot3Pattern, Engine::SmartDeleter<CScoutShoot3Pattern>);
 
 	return spInstance;
+}
+
+void CScoutShoot3Pattern::SetMoveSound()
+{
+	/************************* Choose Move Sound */
+	_int index = GetRandRange(0, 2);
+
+	switch (index)
+	{
+	case 0:
+		m_curMoveSound = L"Scout_Move_0.wav";
+		break;
+	case 1:
+		m_curMoveSound = L"Scout_Move_1.wav";
+		break;
+	case 2:
+		m_curMoveSound = L"Scout_Move_2.wav";
+		break;
+	}
 }

@@ -79,7 +79,7 @@ void CKiana::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(0.75f, 0.75f, 0.75f);
+	m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
 
 	m_spMesh->OnRootMotion();
 

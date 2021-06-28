@@ -17,6 +17,9 @@ public:
 	static SP(CScoutShoot3Pattern) Create();
 
 private:
+	void SetMoveSound();
+
+private:
 	_float m_cost = 25.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
@@ -30,6 +33,9 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_atkMat;
+	_bool m_onShoot = false;
+	_bool m_firePosFix = false;
+	_TCHAR* m_curMoveSound;
 };
 
 #endif

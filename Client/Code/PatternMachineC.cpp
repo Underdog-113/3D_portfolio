@@ -53,13 +53,14 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	if (Engine::IMKEY_DOWN(KEY_Q))
 	{
-		m_onDie = true;
-		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+// 		m_onDie = true;
+// 		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+		m_onHitH = true;
 	}
-	//else if (Engine::IMKEY_DOWN(KEY_E))
-	//{
-	//	m_onHitFront = true;
-	//}
+	else if (Engine::IMKEY_DOWN(KEY_E))
+	{
+		m_onHitL= true;
+	}
 
 	// born 실행 (1번만)
 	PlayBornPattern();

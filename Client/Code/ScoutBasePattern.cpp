@@ -26,12 +26,7 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	// 내가 옆으로 이동하는게 아니면 대상을 바라봄
-	if (Name_RUN_L != fsm->GetCurStateString() &&
-		Name_RUN_R != fsm->GetCurStateString())
-	{
-		static_cast<CMO_Scout*>(pOwner)->ChaseTarget(tPos);
-	}
+	static_cast<CMO_Scout*>(pOwner)->ChaseTarget(tPos);
 
 	/************************* Set Move Count */
 	// 이번 패턴 동안 몇 번 이동을 바꿀 건지 정함
@@ -79,6 +74,7 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		fsm->ChangeState(m_curState);
 		--m_moveCnt;
+		SetMoveSound();
 	}
 	// 내가 앞으로 이동 중이라면
 	else if (Name_RUN_F == fsm->GetCurStateString())
@@ -87,6 +83,7 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 
 		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
+		PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_RUN_B == fsm->GetCurStateString())
@@ -95,18 +92,23 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 
 		mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
+		PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
 	}
 	// 내가 왼쪽으로 이동 중이라면
 	else if (Name_RUN_L == fsm->GetCurStateString())
 	{
 		mPos.x += GET_DT;
+		mPos.z -= GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
+		PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
 	}
 	// 내가 오른쪽으로 이동 중이라면
 	else if (Name_RUN_R == fsm->GetCurStateString())
 	{
 		mPos.x -= GET_DT;
+		mPos.z += GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
+		PatternRepeatSound(m_curMoveSound, pOwner, 0.3f);
 	}
 }
 
@@ -115,4 +117,23 @@ SP(CScoutBasePattern) CScoutBasePattern::Create()
 	SP(CScoutBasePattern) spInstance(new CScoutBasePattern, Engine::SmartDeleter<CScoutBasePattern>);
 
 	return spInstance;
+}
+
+void CScoutBasePattern::SetMoveSound()
+{
+	/************************* Choose Move Sound */
+	_int index = GetRandRange(0, 2);
+
+	switch (index)
+	{
+	case 0:
+		m_curMoveSound = L"Scout_Move_0.wav";
+		break;
+	case 1:
+		m_curMoveSound = L"Scout_Move_1.wav";
+		break;
+	case 2:
+		m_curMoveSound = L"Scout_Move_2.wav";
+		break;
+	}
 }
