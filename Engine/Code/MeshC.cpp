@@ -236,7 +236,6 @@ void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM)
 	}
 }
 
-//�̸�
 CStaticMeshData* CMeshC::GetFirstMeshData_Static(void)
 {
 	return static_cast<Engine::CStaticMeshData*>(m_pMeshData);
