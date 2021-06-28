@@ -27,6 +27,10 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_atkMat;
+
+	_int m_maxMoveCnt = 4; // 이동 방향을 바꾸는 맥스 개수
+	_int m_moveCnt = 0; // 이번 base 패턴 동안 몇 번의 이동 방향을 바꿀 건지
+	std::wstring m_curState;
 };
 
 #endif

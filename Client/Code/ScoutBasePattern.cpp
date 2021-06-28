@@ -7,8 +7,6 @@
 
 #include "StageControlTower.h"
 #include "Valkyrie.h"
-#include "DynamicMeshData.h"
-#include "AttackBall.h"
 
 CScoutBasePattern::CScoutBasePattern()
 {
@@ -28,10 +26,25 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	if (Name_RUN_L != fsm->GetCurStateString() && 
+	// 내가 옆으로 이동하는게 아니면 대상을 바라봄
+	if (Name_RUN_L != fsm->GetCurStateString() &&
 		Name_RUN_R != fsm->GetCurStateString())
 	{
 		static_cast<CMO_Scout*>(pOwner)->ChaseTarget(tPos);
+	}
+
+	/************************* Set Move Count */
+	// 이번 패턴 동안 몇 번 이동을 바꿀 건지 정함
+	if (0 == m_moveCnt)
+	{
+		m_moveCnt = GetRandRange(1, m_maxMoveCnt);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
+		return;
+	}
+	// 카운트가 남아있다면 카운트를 줄임
+	else
+	{
+		--m_moveCnt;
 	}
 
 	/************************* Choose Move Dir */
@@ -39,106 +52,58 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	if (true == m_walkReady)
 	{
 		_int index = GetRandRange(2, 5);
-		std::wstring curState;
+		m_walkReady = false;
 
 		switch (index)
 		{
 		case 2:
-			curState = Name_RUN_L;
+			m_curState = Name_RUN_L;
 			break;
 		case 3:
-			curState = Name_RUN_R;
+			m_curState = Name_RUN_R;
 			break;
 		case 4:
-			curState = Name_RUN_F;
+			m_curState = Name_RUN_F;
 			break;
 		case 5:
-			curState = Name_RUN_B;
+			m_curState = Name_RUN_B;
 			break;
 		}
 	}
 
-	
-
-
-	/************************* Range */
-	// 상대가 공격 범위 밖이고
-	if (len > m_atkDis)
+	// 내가 대기 상태면 이동 상태로 변경
+	if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
-		// 내가 shoot2 상태면
-		if (Name_SHOOT_2 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
-		{
-			fsm->ChangeState(Name_RUN_F);
-		}
-		// 내가 대기 상태면 이동 애니로 변경
-		/*else*/ if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
-		{
-			fsm->ChangeState(Name_RUN_F);
-		}
-		// 내가 이동 중이라면
-
-		else if (Name_RUN_F == fsm->GetCurStateString())
-		{
-			_float3 dir = tPos - mPos;
-
-			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-			pOwner->GetTransform()->SetPosition(mPos);
-		}
-		// 내가 뒤로 이동 중이라면
-		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && false == m_walkReady)
-		{
-			_float3 dir = tPos - mPos;
-
-			mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-			pOwner->GetTransform()->SetPosition(mPos);
-		}
-		// 내가 뒤로 이동이 끝났다면
-		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
-		{
-			fsm->ChangeState(Name_RUN_F);
-			pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
-		}
+		fsm->ChangeState(m_curState);
 	}
-	// 상대가 공격 범위 안이고
-	else if (len <= m_atkDis)
+	// 내가 앞으로 이동 중이라면
+	else if (Name_RUN_F == fsm->GetCurStateString())
 	{
-		// 내가 이동, 대기 상태라면 공격
-		if ((Name_RUN_F == fsm->GetCurStateString() ||
-			Name_IDLE == fsm->GetCurStateString() ||
-			Name_RUN_B == fsm->GetCurStateString()) &&
-			fsm->GetDM()->IsAnimationEnd())
-		{
-			fsm->ChangeState(Name_SHOOT_2);
-	//		//PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
-			//static_cast<CMO_Scout*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
-		}
-		// shoot1 상태라면 뒤로 이동 상태로 변경
-		else if (Name_SHOOT_2 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
-		{
-			fsm->ChangeState(Name_RUN_B);
-		}
+		_float3 dir = tPos - mPos;
+
+		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+		pOwner->GetTransform()->SetPosition(mPos);
 	}
+	// 내가 뒤로 이동 중이라면
+	else if (Name_RUN_B == fsm->GetCurStateString())
+	{
+		_float3 dir = tPos - mPos;
 
-	///************************* AttackBall */
-	//// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	//if (Name_SHOOT_1 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
-	//{
-	//	static_cast<CMO_Scout*>(pOwner)->UnActiveAttackBall();
-	//}
-	//// 내가 공격 상태고, 적절할 때 어택볼 생성
-	//else if (Name_SHOOT_1 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
-	//{
-	//	m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
-
-	//	_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);
-	//	D3DXVec3Normalize(&look, &look);
-
-	//	m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
-	//	m_atkMat._41 += (m_atkDis * look.x / 1.8f);
-	//	m_atkMat._43 += (m_atkDis * look.z / 1.8f);
-
-	//	static_cast<CMO_Scout*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.34f);
-	//}
+		mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+		pOwner->GetTransform()->SetPosition(mPos);
+	}
+	// 내가 왼쪽으로 이동 중이라면
+	else if (Name_RUN_L == fsm->GetCurStateString())
+	{
+		mPos.x -= GET_DT;
+		pOwner->GetTransform()->SetPosition(mPos);
+	}
+	// 내가 오른쪽으로 이동 중이라면
+	else if (Name_RUN_R == fsm->GetCurStateString())
+	{
+		mPos.x += GET_DT;
+		pOwner->GetTransform()->SetPosition(mPos);
+	}
 }
 
 SP(CScoutBasePattern) CScoutBasePattern::Create()
