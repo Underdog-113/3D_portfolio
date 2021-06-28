@@ -490,6 +490,9 @@
     <Filter Include="11.ValkyrieFSM\00.ValkyrieFSM">
       <UniqueIdentifier>{e860a1ae-bc87-418a-a644-4197443d6075}</UniqueIdentifier>
     </Filter>
+    <Filter Include="11.ValkyrieFSM\04.ValkyrieLevelUp">
+      <UniqueIdentifier>{c92b365f-8115-4e78-ae88-167cf2d02904}</UniqueIdentifier>
+      </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
       <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
     </Filter>
@@ -1071,6 +1074,9 @@
     <ClInclude Include="..\Header\ValkyrieWeapon.h">
       <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieLevelUp.h">
+      <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
+      </ClInclude>
     <ClInclude Include="..\Header\ScoutBornPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
     </ClInclude>
@@ -1580,6 +1586,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp">
       <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp">
+      <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ScoutBasePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base</Filter>

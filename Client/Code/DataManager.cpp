@@ -1,11 +1,6 @@
 #include "stdafx.h"
 #include "DataManager.h"
-#include "CaptainData.h"
-#include "InStockValkyrieData.h"
-#include "ValkyrieStatusData.h"
-#include "SquadData.h"
-#include "WeaponData.h"
-#include "ItemData.h"
+
 
 #include "ClientScene.h"
 
@@ -14,8 +9,8 @@ IMPLEMENT_SINGLETON(CDataManager)
 void CDataManager::Start()
 {
 	// 함장, 발키리정보 넣어주기
-	m_inStockValkyrieData = new CInStockValkyrieData();
-	m_squadData = new CSquadData();
+	m_pInStockValkyrieData = new CInStockValkyrieData();
+	m_pSquadData = new CSquadData();
 
 	CaptainInit();
 	ValkyrieStatusDataListInit(L"투예복백련");
@@ -36,24 +31,30 @@ void CDataManager::Update(void)
 
 void CDataManager::OnDestroy(void)
 {
-	if(m_captainData != nullptr)
-		delete (m_captainData);
+	if (m_pCaptainData != nullptr)
+		delete (m_pCaptainData);
 
-	if (m_inStockValkyrieData != nullptr)
-		delete(m_inStockValkyrieData);
+	if (m_pInStockValkyrieData != nullptr)
+		delete(m_pInStockValkyrieData);
 
-	if (m_squadData != nullptr)
-		delete(m_squadData);
+	if (m_pSquadData != nullptr)
+		delete(m_pSquadData);
+
+	for (auto& obj : m_pValkyrieStatusDataList)
+	{
+		delete (obj);
+	}
+	m_pValkyrieStatusDataList.clear();
 }
 
 CCaptainData * CDataManager::FindCaptainData()
 {
-	return m_captainData;
+	return m_pCaptainData;
 }
 
 CValkyrieStatusData * CDataManager::FindInStockValkyrieData(std::wstring keyValue)
 {
-	for (auto* data : m_inStockValkyrieData->GetValkyriesList())
+	for (auto* data : m_pInStockValkyrieData->GetValkyriesList())
 	{
 		if (data->GetSubName() == keyValue)
 		{
@@ -66,12 +67,12 @@ CValkyrieStatusData * CDataManager::FindInStockValkyrieData(std::wstring keyValu
 
 CInStockValkyrieData * CDataManager::FindInStockValkyrieData()
 {
-	return m_inStockValkyrieData;
+	return m_pInStockValkyrieData;
 }
 
 CValkyrieStatusData * CDataManager::FindvalkyrieStatusData(std::wstring keyValue)
 {
-	for (auto* data : m_valkyrieStatusDataList)
+	for (auto* data : m_pValkyrieStatusDataList)
 	{
 		if (data->GetSubName() == keyValue)
 		{
@@ -84,12 +85,12 @@ CValkyrieStatusData * CDataManager::FindvalkyrieStatusData(std::wstring keyValue
 
 CSquadData * CDataManager::FindSquadData()
 {
-	return m_squadData;
+	return m_pSquadData;
 }
 
 CValkyrieStatusData* CDataManager::FindSquadData(std::wstring keyValue)
 {
-	for (auto& data : m_squadData->GetValkyriesList())
+	for (auto& data : m_pSquadData->GetValkyriesList())
 	{
 		if (data->GetSubName() == keyValue)
 		{
@@ -102,7 +103,7 @@ CValkyrieStatusData* CDataManager::FindSquadData(std::wstring keyValue)
 
 CWeaponData * CDataManager::FindWeaponData(std::wstring keyValue)
 {
-	for (auto* data : m_weaponDataList)
+	for (auto* data : m_pWeaponDataList)
 	{
 		if (data->GetName() == keyValue)
 		{
@@ -115,7 +116,7 @@ CWeaponData * CDataManager::FindWeaponData(std::wstring keyValue)
 
 CItemData * CDataManager::FindItemData(std::wstring keyValue)
 {
-	for (auto* data : m_itemDataList)
+	for (auto* data : m_pItemDataList)
 	{
 		if (data->GetName() == keyValue)
 		{
@@ -153,7 +154,7 @@ void CDataManager::CaptainInit()
 	CCaptainData* captain = new CCaptainData();
 	captain->AddCaptainData(name, leval, experience, maxExperience, stamina, maxStamina, gold, diamond);
 
-	m_captainData = captain;
+	m_pCaptainData = captain;
 }
 
 void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
@@ -165,12 +166,12 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	_bool enable;
 	std::wstring name;
 	std::wstring subName;
-	_float maxHp;
-	_float maxSp;
+	_int maxHp;
+	_int maxSp;
 	_int damage;
 	_int hoesim;
-	_float defense;
-	_float maxExperience;
+	_int defense;
+	_int maxExperience;
 	std::wstring rank;
 	std::wstring property;
 	_int maxLevel;
@@ -199,7 +200,7 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	CValkyrieStatusData* valkyrie = new CValkyrieStatusData();
 	valkyrie->AddValkyrieData(enable, name, subName, maxHp, maxSp, damage, hoesim, defense, maxExperience, rank, property, maxLevel, weaponType, partyTextureKey, squadTextureKey, listTextureKey);
 
-	m_valkyrieStatusDataList.emplace_back(valkyrie);
+	m_pValkyrieStatusDataList.emplace_back(valkyrie);
 }
 
 void CDataManager::ItemInit(std::wstring itemName)
@@ -221,7 +222,7 @@ void CDataManager::ItemInit(std::wstring itemName)
 	CItemData* item = new CItemData();
 	item->AddItemData(name, rank, explanation, textureKey);
 
-	m_itemDataList.emplace_back(item);
+	m_pItemDataList.emplace_back(item);
 }
 
 void CDataManager::WeaponInit(std::wstring weaponName)
@@ -273,7 +274,7 @@ void CDataManager::WeaponInit(std::wstring weaponName)
 		textureKey,
 		messKey);
 
-	m_weaponDataList.emplace_back(weapon);
+	m_pWeaponDataList.emplace_back(weapon);
 }
 
 void CDataManager::InStockValkyrieInit(std::wstring valkyrieName)
@@ -281,24 +282,24 @@ void CDataManager::InStockValkyrieInit(std::wstring valkyrieName)
 	CValkyrieStatusData* data = FindvalkyrieStatusData(valkyrieName);
 	data->SetEnable(true);
 
-	m_inStockValkyrieData->AddValkyrieData(data);
+	m_pInStockValkyrieData->AddValkyrieData(data);
 }
 
 void CDataManager::SquadInit(std::wstring valkyrieName)
 {
 	CValkyrieStatusData* data = FindInStockValkyrieData(valkyrieName);
 
-	m_squadData->AddValkyrieData(data);
+	m_pSquadData->AddValkyrieData(data);
 }
 
 void CDataManager::SquadInit(_int value, std::wstring valkyrieName)
 {
 	CValkyrieStatusData* data = FindInStockValkyrieData(valkyrieName);
 
-	m_squadData->AddValkyrieData(value,data);
+	m_pSquadData->AddValkyrieData(value,data);
 }
 
 void CDataManager::SquadDelete(std::wstring keyValue)
 {
-	m_squadData->Erase(keyValue);
+	m_pSquadData->Erase(keyValue);
 }

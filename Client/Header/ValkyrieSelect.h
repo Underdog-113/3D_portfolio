@@ -29,5 +29,6 @@ private:
 	void SceneChange();
 
 private:
+	_bool m_init;
 };
 

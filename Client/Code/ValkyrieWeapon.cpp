@@ -6,7 +6,6 @@ CValkyrieWeapon::CValkyrieWeapon()
 {
 }
 
-
 CValkyrieWeapon::~CValkyrieWeapon()
 {
 }

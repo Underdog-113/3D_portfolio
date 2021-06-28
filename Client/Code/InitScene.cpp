@@ -110,7 +110,8 @@ void CInitScene::Update(void)
 		else
 		{
 			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"Warning");
-			
+			CDataManager::GetInstance()->Start();
+
 			if (Engine::IMKEY_DOWN(KEY_F1))
 			{
 				m_pLoading->GetNextScene()->Free();
@@ -134,8 +135,6 @@ void CInitScene::Update(void)
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F4))
 			{
-				CDataManager::GetInstance()->Start();
-
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
 				m_pLoading = CLoading::Create(CReadyToSortieScene::Create(), false);
@@ -150,8 +149,6 @@ void CInitScene::Update(void)
 			}
 			else if (Engine::IMKEY_DOWN(KEY_SHIFT))
 			{
-				CDataManager::GetInstance()->Start();
-
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
 				m_pLoading = CLoading::Create(COneStageScene::Create(), false);
