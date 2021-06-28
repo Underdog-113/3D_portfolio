@@ -65,6 +65,10 @@ void CValkyrieProperty::PropertyCanvas()
 	DataInput(L"PropertyCanvas_Text_16", data->GetSubName());
 	DataInput(L"PropertyCanvas_Text_18", std::to_wstring(data->GetBattlePower()));
 	m_scene->FindObjectByName(L"PropertyCanvas_Image_4")->GetComponent<Engine::CTextureC>()->ChangeTexture(data->GetProperty());
+
+	//슬라이어 Max값 Value값 잡아주기
+	std::static_pointer_cast<Engine::CSlider>(m_scene->FindObjectByName(L"PropertyCanvas_Slider_0"))->SetMaxValue((_float)data->GetMaxExperience());
+	std::static_pointer_cast<Engine::CSlider>(m_scene->FindObjectByName(L"PropertyCanvas_Slider_0"))->SetValue((_float)data->GetExperience());
 }
 
 void CValkyrieProperty::ChangeSelect()

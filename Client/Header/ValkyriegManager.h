@@ -12,6 +12,7 @@ public:
 	void OnDestroy(void);
 
 	void ChangeFSM(STATE state);
+	void ChangeFSMSelect();
 	void ChangeFSMProperty();
 	void ChangeFSMLevelUp();
 private:

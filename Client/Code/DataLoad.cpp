@@ -18,6 +18,8 @@
 #include "MapObject2D.h"
 #include "Monster.h"
 
+#include "ValkyrieLevelUp.h"
+
 CDataLoad::CDataLoad()
 {
 	
@@ -130,7 +132,6 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 
 		_int animCount;
 		dataStore->GetValue(false, dataID, objectKey, key + L"AnimCount", animCount);
-
 		if (animCount > 0)
 		{
 			image->AddComponent<CUiAnimCtrC>()->SetAnimCount(animCount);
@@ -138,6 +139,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			_float animSpeed;
 			dataStore->GetValue(false, dataID, objectKey, key + L"AnimSpeed", animSpeed);
 			image->GetComponent<CUiAnimCtrC>()->SetAnimSpeed(animSpeed);
+
 			for (int j = 0; j < animCount; j++)
 			{
 				dataStore->GetValue(false, dataID, objectKey, key + L"AnimName" + std::to_wstring(j), textureKey);
@@ -769,7 +771,6 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	else if (0 == function.compare(L"BattleEndScene"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction());
-
 	}
 	else if (0 == function.compare(L"Sally"))
 	{
@@ -794,5 +795,25 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	else if (0 == function.compare(L"ChangeFSMLevelUp"))
 	{
 		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMLevelUp, CValkyriegManager::GetInstance());
+	}
+	else if (0 == function.compare(L"LevelUp"))
+	{
+		button->AddFuncData<void(CValkyrieLevelUp::*)(), CValkyrieLevelUp*>(&CValkyrieLevelUp::LevelUp, &CValkyrieLevelUp());
+	}
+	else if (0 == function.compare(L"ItemCountUp"))
+	{
+		button->AddFuncData<void(CValkyrieLevelUp::*)(), CValkyrieLevelUp*>(&CValkyrieLevelUp::ItemCountUp, &CValkyrieLevelUp());
+	}
+	else if (0 == function.compare(L"ItemCountDown"))
+	{
+		button->AddFuncData<void(CValkyrieLevelUp::*)(), CValkyrieLevelUp*>(&CValkyrieLevelUp::ItemCountDown, &CValkyrieLevelUp());
+	}
+	else if (0 == function.compare(L"ItemSelect"))
+	{
+		button->AddFuncData<void(CValkyrieLevelUp::*)(), CValkyrieLevelUp*>(&CValkyrieLevelUp::ItemSelect, &CValkyrieLevelUp());
+	}
+	else if (0 == function.compare(L"ChangeFSMSelect"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMSelect, CValkyriegManager::GetInstance());
 	}
 }

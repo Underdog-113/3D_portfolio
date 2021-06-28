@@ -16,10 +16,11 @@ public:
 	virtual void OnDestroy(void) override;
 
 
-private:
+public:
 	void LevelUp();
 	void ItemCountUp();
 	void ItemCountDown();
+	void ItemSelect();
 private:
 	static std::wstring g_selectItemName;
 	static _int g_itemCount;

@@ -23,9 +23,22 @@ CValkyrieSelect::~CValkyrieSelect()
 
 void CValkyrieSelect::Start()
 {
+	if (m_init)
+	{
+		MainCanvas();
+		ValkyrieStatus();
+		m_init = false;
+	}
+	else
+	{
+		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
+		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(true);
+	}
+
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
-	MainCanvas();
-	ValkyrieStatus();
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
+
+
 }
 
 void CValkyrieSelect::End()
