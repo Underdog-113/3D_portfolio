@@ -176,6 +176,18 @@ public:
 	void EvadeForward_Update(float deltaTime);
 	void EvadeForward_End(void);
 
+	// Failure
+	void Failure_Init(void);
+	void Failure_Enter(void);
+	void Failure_Update(float deltaTime);
+	void Failure_End(void);
+
+	// Failure_Idle
+	void Failure_Idle_Init(void);
+	void Failure_Idle_Enter(void);
+	void Failure_Idle_Update(float deltaTime);
+	void Failure_Idle_End(void);
+
 public:
 	// Hit_H
 	void Hit_H_Init(void);
@@ -183,7 +195,6 @@ public:
 	void Hit_H_Update(float deltaTime);
 	void Hit_H_End(void);
 
-public:
 	// Hit_L
 	void Hit_L_Init(void);
 	void Hit_L_Enter(void);
@@ -196,75 +207,18 @@ public:
 	void Idle_01_Enter(void);
 	void Idle_01_Update(float deltaTime);
 	void Idle_01_End(void);
-
-	// Idle_1to2
-	void Idle_1to2_Init(void);
-	void Idle_1to2_Enter(void);
-	void Idle_1to2_Update(float deltaTime);
-	void Idle_1to2_End(void);
-
+	
 	// Idle_02
 	void Idle_02_Init(void);
 	void Idle_02_Enter(void);
 	void Idle_02_Update(float deltaTime);
 	void Idle_02_End(void);
-
-	// Idle_2to3
-	void Idle_2to3_Init(void);
-	void Idle_2to3_Enter(void);
-	void Idle_2to3_Update(float deltaTime);
-	void Idle_2to3_End(void);
-
+	
 	// Idle_03
 	void Idle_03_Init(void);
 	void Idle_03_Enter(void);
 	void Idle_03_Update(float deltaTime);
 	void Idle_03_End(void);
-
-	// Idle_3to4
-	void Idle_3to4_Init(void);
-	void Idle_3to4_Enter(void);
-	void Idle_3to4_Update(float deltaTime);
-	void Idle_3to4_End(void);
-
-	// Idle_4to5
-	void Idle_4to5_Init(void);
-	void Idle_4to5_Enter(void);
-	void Idle_4to5_Update(float deltaTime);
-	void Idle_4to5_End(void);
-
-	//Idle01_AS
-	//Idle01_BS
-	//Idle01_Loop
-	//Idle02_AS
-	//Idle02_BS
-	//Idle02_Loop
-	//Idle03_AS
-	//Idle03_BS
-	//Idle03_Loop
-	//Idle04_AS
-	//Idle04_BS
-	//Idle04_Loop
-	//Idle05_AS
-	//Idle05_BS
-	//Idle05_Loop
-
-public:
-	////Jump_00
-	//void Jump_00_Init(void);
-	//void Jump_00_Enter(void);
-	//void Jump_00_Update(float deltaTime);
-	//void Jump_00_End(void);
-	////Jump_01
-	//void Jump_01_Init(void);
-	//void Jump_01_Enter(void);
-	//void Jump_01_Update(float deltaTime);
-	//void Jump_01_End(void);
-	////Jump_02
-	//void Jump_02_Init(void);
-	//void Jump_02_Enter(void);
-	//void Jump_02_Update(float deltaTime);
-	//void Jump_02_End(void);
 
 public:
 	//Run
@@ -277,32 +231,23 @@ public:
 	void RunBS_Enter(void);
 	void RunBS_Update(float deltaTime);
 	void RunBS_End(void);
-	////RunStopLeft
+	//RunStopLeft
 	void RunStopLeft_Init(void);
 	void RunStopLeft_Enter(void);
 	void RunStopLeft_Update(float deltaTime);
 	void RunStopLeft_End(void);
-	////RunStopRight
+	//RunStopRight
 	void RunStopRight_Init(void);
 	void RunStopRight_Enter(void);
 	void RunStopRight_Update(float deltaTime);
 	void RunStopRight_End(void);
+
 public:
-	//Skill_10
-	void Skill_10_Init(void);
-	void Skill_10_Enter(void);
-	void Skill_10_Update(float deltaTime);
-	void Skill_10_End(void);
-	////SpecialStun
-	//void Jump_00_Init(void);
-	//void Jump_00_Enter(void);
-	//void Jump_00_Update(float deltaTime);
-	//void Jump_00_End(void);
-	////SpecialStun_BS
-	//void Jump_00_Init(void);
-	//void Jump_00_Enter(void);
-	//void Jump_00_Update(float deltaTime);
-	//void Jump_00_End(void);
+	//WeaponSkill
+	void WeaponSkill_Init(void);
+	void WeaponSkill_Enter(void);
+	void WeaponSkill_Update(float deltaTime);
+	void WeaponSkill_End(void);
 
 public:
 	//Stun
@@ -320,10 +265,21 @@ public:
 	void SwitchOut_Enter(void);
 	void SwitchOut_Update(float deltaTime);
 	void SwitchOut_End(void);
-	//UI_StandBy_No_Weapon_0
-	//UI_StandBy_No_Weapon_1
-	//Victory_01
+	//Ultra
+	void Ultra_Init(void);
+	void Ultra_Enter(void);
+	void Ultra_Update(float deltaTime);
+	void Ultra_End(void);
+	//Victory
+	void Victory_Init(void);
+	void Victory_Enter(void);
+	void Victory_Update(float deltaTime);
+	void Victory_End(void);
 	//Victory_Idle
+	void Victory_Idle_Init(void);
+	void Victory_Idle_Enter(void);
+	void Victory_Idle_Update(float deltaTime);
+	void Victory_Idle_End(void);
 
 private:
 	void RegisterAllState();

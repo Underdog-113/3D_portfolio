@@ -20,6 +20,7 @@ private:	/* Actor Move */
 	void ReserveMoveOrder();
 	void RotateCurrentActor();
 
+public:
 	void TargetingOn();
 
 private:
