@@ -559,6 +559,30 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base">
       <UniqueIdentifier>{a92e72f4-0f61-4794-9348-19ab645a096e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern">
+      <UniqueIdentifier>{a7508e0e-023a-466d-881c-33d6b33803fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\00.Born">
+      <UniqueIdentifier>{08a65d06-8bd2-4723-ab23-a2b5f4b615fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\01.Die">
+      <UniqueIdentifier>{7ad9af4f-7728-49e1-aef9-b2e89363f97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\02.Hit">
+      <UniqueIdentifier>{b62dbb03-559b-469c-b001-9154b3dc6ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select">
+      <UniqueIdentifier>{de6789e7-e89d-44dd-b465-8210abc58afa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\04.Base">
+      <UniqueIdentifier>{ae18c4f8-30b5-44eb-a59e-ff7ec759be67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\01.Shoot3">
+      <UniqueIdentifier>{6501e201-8449-41c7-bcd7-e799154e1f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2">
+      <UniqueIdentifier>{2418c899-ae7c-44fd-a949-258657c4e5b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1107,6 +1131,27 @@
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Robot.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\04.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutShoot3Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\01.Shoot3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutShoot2Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1586,6 +1631,24 @@
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Ult_ring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\00.Born</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\02.Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\01.Shoot3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

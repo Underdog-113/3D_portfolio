@@ -151,23 +151,17 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
 		_float3 size = { 2.f, 2.f, 10.f };
-		_float3 offset = { 0.f, 0.f, 0.f }; 
+		_float3 offset = ZERO_VECTOR; 
 
 		_float3 mPos = pOwner->GetTransform()->GetPosition();
 		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 		_float3 beamDir = pPos - mPos;
 		beamDir.y = 0.f;
-		D3DXVec3Normalize(&beamDir, &beamDir);
-/*
-		_mat rotMat;
-		D3DXMatrixRotationYawPitchRoll(&rotMat,
-			pGanesha->GetTransform()->GetRotation().y,
-			pGanesha->GetTransform()->GetRotation().x,
-			pGanesha->GetTransform()->GetRotation().z);*/
-		
-		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
+		D3DXVec3Normalize(&beamDir, &beamDir);		
+		pGanesha->GetAttackBox()->GetTransform()->SetForward(beamDir);
+		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
 
-		offset.z = (beamDir.z * size.z / 2.f);
+		offset = _float3(0, 0, 5);
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}

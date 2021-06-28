@@ -1,24 +1,18 @@
 #include "stdafx.h"
 #include "WooScene.h"
 
-#include "StageControlTower.h"
-#include "Kiana.h"
+#include "DataLoad.h"
 
 /* for.Monster */
-#include "FSM_SpiderC.h"
 #include "MO_Spider.h"
-
-#include "FSM_SickleC.h"
 #include "MO_Sickle.h"
-
-#include "FSM_GaneshaC.h"
+#include "MO_Scout.h"
+#include "MO_Lancer.h"
 #include "MB_Ganesha.h"
 
-#include "PatternMachineC.h"
-#include "ClientPatterns.h"
-/**/
-
-#include "DataLoad.h"
+/* for.Player */
+#include "StageControlTower.h"
+#include "Kiana.h"
 
 CWooScene::CWooScene()
 {
@@ -65,19 +59,21 @@ void CWooScene::Start(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	Load->MapLoad(this);
+	//Load->MapLoad(this);
 	//Load->PhaseChangerLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
 
 	// 맵 키면 꼭 주석!!!!!!!!!!!!!!
-	//TerrainSetting();
+	TerrainSetting();
 
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
 	//GaneshaSetting();
+	ScoutSetting();
+	//LancerSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -224,3 +220,20 @@ void CWooScene::SpiderSetting(void)
 	m_spSpider = spSpiderClone;
 }
 
+void CWooScene::ScoutSetting(void)
+{
+	/* Scout */
+	SP(Engine::CObject) spScoutClone = ADD_CLONE(L"MO_Scout", true, (_uint)ELayerID::Enemy, L"MO_Scout");
+	spScoutClone->GetTransform()->SetPosition(3, 0, 3);
+	std::dynamic_pointer_cast<CMonster>(spScoutClone)->SelectChannelID();
+	m_spScout = spScoutClone;
+}
+
+void CWooScene::LancerSetting(void)
+{
+	/* Lancer */
+	SP(Engine::CObject) spLancerClone = ADD_CLONE(L"MO_Lancer", true, (_uint)ELayerID::Enemy, L"MO_Lancer");
+	spLancerClone->GetTransform()->SetPosition(3, 0, 3);
+	std::dynamic_pointer_cast<CMonster>(spLancerClone)->SelectChannelID();
+	m_spLancer = spLancerClone;
+}

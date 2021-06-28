@@ -94,10 +94,6 @@ void CAttackBox::LateUpdate(void)
 	__super::LateUpdate();
 	
 	//m_spTransform->UpdateParentMatrix(m_pParentMatrix);
-
-	_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
-	m_spTransform->SetPosition(pos);
-
 }
 
 void CAttackBox::OnDestroy(void)
@@ -194,10 +190,12 @@ void CAttackBox::SetupBox(CObject * pOwner, _mat * pParentMat, _float3 size, _fl
 	m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
 
+	
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetSize(size);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetHalfSize(size / 2.f);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetOffsetOrigin(offset);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetRotOffset(rotOffset);
+	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->UpdateBS();
 }
 
 void CAttackBox::SetBasicName(void)

@@ -17,10 +17,6 @@
 // import from jongscene
 #include "Include_ForTest.h"
 
-// for monster pattern
-#include "PatternMachineC.h"
-#include "ClientPatterns.h"
-
 #include "OneStagePhaseControl.h"
 
 #include "Monster.h"
