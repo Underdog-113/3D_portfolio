@@ -45,7 +45,7 @@ void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)
 {
 	_mat worldMat, viewMat, projMat;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	viewMat = GET_MAIN_CAM->GetViewMatrix();
 	projMat = GET_MAIN_CAM->GetProjMatrix();
 
@@ -58,7 +58,7 @@ void CShader::SetupOrthoWVP(SP(CGraphicsC) spGC)
 {
 	_mat worldMat, viewMat, projMat;
 
-	worldMat = spGC->GetTransform()->GetLastWorldMatrix();
+	worldMat = spGC->GetTransform()->GetWorldMatrix();
 	D3DXMatrixIdentity(&viewMat);
 	projMat = GET_MAIN_CAM->GetOrthoMatrix();
 

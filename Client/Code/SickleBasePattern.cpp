@@ -77,7 +77,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			fsm->ChangeState(Name_Sickle_Attack_1);
 			PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
-			static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
+			//static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.3f);
 		}
 		// 공격1 상태라면 뒤로 이동 상태로 변경
 		else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())

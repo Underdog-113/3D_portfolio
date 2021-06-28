@@ -114,7 +114,7 @@ void CSoftEffect::LateUpdate(void)
 
 	D3DXMatrixInverse(&matBill, 0, &matBill);
 
-	m_spGraphics->GetTransform()->UpdateParentMatrix(&matBill);
+	m_spGraphics->GetTransform()->SetParentMatrix(&matBill);
 
 	_float3 vPos = m_spGraphics->GetTransform()->GetPosition();
 	_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();

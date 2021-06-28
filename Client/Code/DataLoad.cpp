@@ -178,7 +178,9 @@ void CDataLoad::SliderLoad(Engine::CScene* pScene)
 			_float3 pos;
 			dataStore->GetValue(false, dataID, objectKey, key + L"imagePosition" + std::to_wstring(j), pos);
 			pos.x *= -1;
-			imageObj[j]->GetTransform()->SetPosition(slider->GetTransform()->GetPosition() + pos);
+			imageObj[j]->GetTransform()->SetPosition(pos);
+
+			imageObj[j]->GetTransform()->SetParent(slider->GetTransform());
 
 			_float3 size;
 			dataStore->GetValue(false, dataID, objectKey, key + L"imageSize" + std::to_wstring(j), size);

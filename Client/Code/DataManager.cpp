@@ -36,14 +36,14 @@ void CDataManager::Update(void)
 
 void CDataManager::OnDestroy(void)
 {
-	//if(m_captainData != nullptr)
-	//	delete (m_captainData);
+	if(m_captainData != nullptr)
+		delete (m_captainData);
 
-	//if (m_inStockValkyrieData != nullptr)
-	//	delete(m_inStockValkyrieData);
+	if (m_inStockValkyrieData != nullptr)
+		delete(m_inStockValkyrieData);
 
-	//if (m_squadData != nullptr)
-	//	delete(m_squadData);
+	if (m_squadData != nullptr)
+		delete(m_squadData);
 }
 
 CCaptainData * CDataManager::FindCaptainData()
