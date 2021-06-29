@@ -41,12 +41,12 @@ void CFSM_KianaC::Awake(void)
 void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
 	m_pKiana = static_cast<CKiana*>(m_pOwner);
-
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
+	
 	RegisterAllState();
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
 	//m_pDM->GetAniCtrl()->SetSpeed(0.5f);
@@ -492,6 +492,7 @@ void CFSM_KianaC::ResetCheckMembers()
 
 void CFSM_KianaC::StandBy_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_StandBy);
 }
 
 void CFSM_KianaC::StandBy_Enter(void)
@@ -1209,6 +1210,7 @@ void CFSM_KianaC::Idle_03_End(void)
 
 void CFSM_KianaC::Run_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_StandBy);
 }
 
 void CFSM_KianaC::Run_Enter(void)

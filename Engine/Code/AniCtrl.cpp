@@ -12,6 +12,8 @@ CAniCtrl::CAniCtrl(LPD3DXANIMATIONCONTROLLER pAniCtrl)
 
 CAniCtrl::~CAniCtrl()
 {
+	if (m_pLoopAnims)
+		delete[] m_pLoopAnims;
 }
 
 CAniCtrl * CAniCtrl::Create(LPD3DXANIMATIONCONTROLLER pAniCtrl)
@@ -55,6 +57,8 @@ CAniCtrl* CAniCtrl::MakeClone(void)
 
 	pClone->m_fakePeriod = (_float)pAS->GetPeriod();
 
+	pClone->CreateLoopAnimArray(m_pAniCtrl->GetMaxNumAnimationSets());
+
 	return pClone;
 }
 
@@ -94,16 +98,18 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	_float nextPeriod = (_float)pAS->GetPeriod();
 	_double blendTime;
-	if (m_period < nextPeriod)
-		blendTime = m_period * 0.2f;
-	else
-		blendTime = nextPeriod * 0.2f;
-	m_period = nextPeriod;
 
-	if (blendTime > 0.15f)
-		blendTime = 0.15f;
+	blendTime = m_period - m_timer;
+	while (blendTime < 0.f)
+	{
+		blendTime += m_period;
+	}
+
+	if (blendTime > 0.2f || m_pLoopAnims[index])
+		blendTime = 0.2f;
+
+	m_period = (_float)pAS->GetPeriod();
 
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
 	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
@@ -143,16 +149,17 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
 	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
 
-	_float nextPeriod = (_float)pAS->GetPeriod();
 	_double blendTime;
-	if (m_period < nextPeriod)
-		blendTime = m_period * 0.2f;
-	else
-		blendTime = nextPeriod * 0.2f;
-	m_period = nextPeriod;
+	blendTime = m_period - m_timer;
+	while (blendTime < 0.f)
+	{
+		blendTime += m_period;
+	}
 
-	if (blendTime > 0.2f)
+	if (blendTime > 0.2f || m_pLoopAnims[m_curIndex])
 		blendTime = 0.2f;
+
+	m_period = (_float)pAS->GetPeriod();
 
 	//현재 트랙을 끈다.
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
@@ -194,16 +201,18 @@ void CAniCtrl::ChangeFakeAniSet()
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(m_fakeTrack);
 	m_pFakeAniCtrl->UnkeyAllTrackEvents(newTrack);
 	
-	_float nextPeriod = (_float)pAnimationSet->GetPeriod();
 	_double blendTime;
-	if (m_fakePeriod < nextPeriod)
-		blendTime = m_fakePeriod * 0.01;
-	else
-		blendTime = nextPeriod * 0.01;
-	m_fakePeriod = nextPeriod;
-
-	if (blendTime > 0.01f)
+	blendTime = m_fakePeriod - m_fakeTimer;
+	while (blendTime < 0.f)
+	{
+		blendTime += m_period;
+	}
+	
+	if (blendTime > 0.01f || m_pLoopAnims[m_curIndex])
 		blendTime = 0.01f;
+
+	m_fakePeriod = (_float)pAnimationSet->GetPeriod();
+
 
 	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + blendTime);
 	//m_pFakeAniCtrl->SetTrackEnable(m_fakeTrack, FALSE);
@@ -324,4 +333,19 @@ _uint CAniCtrl::FindIndexByName(std::string const & name, LPD3DXANIMATIONSET pAS
 	MSG_BOX(__FILE__, L"Failed to find animationSet by name in FindIndexByName");
 	ABORT;
 	return UNDEFINED;
+}
+
+void CAniCtrl::CreateLoopAnimArray(_uint size)
+{
+	m_pLoopAnims = new bool[size];
+
+	for (_uint i = 0; i < size; ++i)
+	{
+		m_pLoopAnims[i] = false;
+	}
+}
+
+void CAniCtrl::SetLoopAnim(_uint animIndex)
+{
+	m_pLoopAnims[animIndex] = true;
 }

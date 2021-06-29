@@ -69,9 +69,8 @@ void CTheresa::Start(void)
 	CreateAttackBall(&m_pAttackBall_LeftHand);
 	CreateAttackBall(&m_pAttackBall_RightHand);
 	CreateAttackBall(&m_pAttackBall_Axe);
+	CreateAttackBall(&m_pAttackBall_AxeStick);
 
-	m_pAttackBox_Axe = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
-	m_pAttackBox_Axe->SetOwner(this);
 
 	// status
 	V_WarshipStat stat;
@@ -174,9 +173,9 @@ void CTheresa::On_Axe(void)
 
 void CTheresa::Off_Axe(void)
 {
-	//m_vMeshContainers[Axe_0]->hide = true;
-	//m_vMeshContainers[Axe_1]->hide = true;
-	//m_vMeshContainers[Axe_2]->hide = true;
+	m_vMeshContainers[Axe_0]->hide = true;
+	m_vMeshContainers[Axe_1]->hide = true;
+	m_vMeshContainers[Axe_2]->hide = true;
 }
 
 void CTheresa::SetChargeMode(bool value)

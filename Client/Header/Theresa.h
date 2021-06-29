@@ -71,7 +71,7 @@ private:
 	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
 	GETTOR			(CAttackBall*,	m_pAttackBall_RightHand,	nullptr,	AttackBall_RightHand)
 	GETTOR			(CAttackBall*,	m_pAttackBall_Axe,			nullptr,	AttackBall_Axe)
-	GETTOR			(CAttackBox*,	m_pAttackBox_Axe,			nullptr,	AttackBox_Axe)
+	GETTOR			(CAttackBall*,	m_pAttackBall_AxeStick,		nullptr,	AttackBall_AxeStick)
 
 };
 

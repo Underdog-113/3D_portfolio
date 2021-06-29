@@ -48,7 +48,8 @@ public:
 				_mat*				GetFrameOffsetMatrix	(LPCSTR name);
 				_bool				IsAnimationEnd			(void);
 				void				SetAniFixTillEnd		(_bool isItFixed);
-
+				
+				void				SetLoopAnim				(_uint animIndex);
 private:
 	
 				void				SetupFrameMatrices		(_DerivedD3DXFRAME* pFrame, _mat* pParentMat);
