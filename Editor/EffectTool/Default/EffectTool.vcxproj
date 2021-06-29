@@ -201,7 +201,6 @@
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
     <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DissolveShader.h" />
-    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\EffectToolDefine.h" />
     <ClInclude Include="..\Header\EffectToolEnum.h" />
     <ClInclude Include="..\Header\EffectToolInclude.h" />
@@ -234,7 +233,6 @@
     <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
     <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
-    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\EffectToolScene.cpp" />
     <ClCompile Include="..\Code\FireShader.cpp" />
     <ClCompile Include="..\Code\Inspector.cpp" />

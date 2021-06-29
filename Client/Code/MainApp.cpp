@@ -64,7 +64,6 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)EShaderID::NumOfShaderID);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CWaterShader::Create(), L"WaterShader", (_uint)EShaderID::WaterShader);
-	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CEffectShader::Create(), L"EffectShader", (_uint)EShaderID::EffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CDamageFontShader::Create(), L"DamageFontShader", (_uint)EShaderID::DamageFontShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCatPawShader::Create(), L"CatPawShader", (_uint)EShaderID::CatPawShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCircularGaugeShader::Create(), L"CircularGaugeShader", (_uint)EShaderID::CircularGaugeShader);

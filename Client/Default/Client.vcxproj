@@ -206,7 +206,6 @@
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
     <ClInclude Include="..\Header\DissolveShader.h" />
-    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
@@ -391,7 +390,6 @@
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
-    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\FireShader.cpp" />
     <ClCompile Include="..\Code\FSM_SakuraC.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
@@ -594,12 +592,6 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

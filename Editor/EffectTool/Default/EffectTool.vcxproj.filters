@@ -64,25 +64,22 @@
     <Filter Include="06.Shader\05. DissolveShader">
       <UniqueIdentifier>{488bec30-c5ee-4410-9cd9-cadee780027f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Shader\06. EffectShader">
-      <UniqueIdentifier>{97881ed9-c62c-46fb-b7b1-de6e5701359c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06.Shader\07. MeshTrailShader">
+    <Filter Include="06.Shader\06. MeshTrailShader">
       <UniqueIdentifier>{0d2283f0-5299-4c7e-aae9-068ed9f39457}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Shader\10. WaterShader">
-      <UniqueIdentifier>{1450a4bb-8017-4ce5-98ee-a0043effc658}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06.Shader\11. AlphaMaskShader">
-      <UniqueIdentifier>{65e7660c-c0f3-46d2-adae-8cf764da3a18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06.Shader\09. SpawnEffectShader">
-      <UniqueIdentifier>{ffa9bfb3-e0be-40c2-bcc4-a28f3e10858f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06.Shader\08. SoftEffectShader">
+    <Filter Include="06.Shader\07. SoftEffectShader">
       <UniqueIdentifier>{7c985d7b-b064-496f-b504-c02bffa46491}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Shader\12. FireShader">
+    <Filter Include="06.Shader\08. SpawnEffectShader">
+      <UniqueIdentifier>{ffa9bfb3-e0be-40c2-bcc4-a28f3e10858f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\09. WaterShader">
+      <UniqueIdentifier>{1450a4bb-8017-4ce5-98ee-a0043effc658}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\10. AlphaMaskShader">
+      <UniqueIdentifier>{65e7660c-c0f3-46d2-adae-8cf764da3a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Shader\11. FireShader">
       <UniqueIdentifier>{7486f62e-c525-46e5-8806-884d465c92fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -159,26 +156,23 @@
     <ClInclude Include="..\Header\DissolveShader.h">
       <Filter>06.Shader\05. DissolveShader</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\EffectShader.h">
-      <Filter>06.Shader\06. EffectShader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\MeshTrailShader.h">
-      <Filter>06.Shader\07. MeshTrailShader</Filter>
+      <Filter>06.Shader\06. MeshTrailShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SoftEffectShader.h">
-      <Filter>06.Shader\08. SoftEffectShader</Filter>
+      <Filter>06.Shader\07. SoftEffectShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SpawnEffectShader.h">
-      <Filter>06.Shader\09. SpawnEffectShader</Filter>
+      <Filter>06.Shader\08. SpawnEffectShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\WaterShader.h">
-      <Filter>06.Shader\10. WaterShader</Filter>
+      <Filter>06.Shader\09. WaterShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AlphaMaskShader.h">
-      <Filter>06.Shader\11. AlphaMaskShader</Filter>
+      <Filter>06.Shader\10. AlphaMaskShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\FireShader.h">
-      <Filter>06.Shader\12. FireShader</Filter>
+      <Filter>06.Shader\11. FireShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,26 +230,23 @@
     <ClCompile Include="..\Code\DissolveShader.cpp">
       <Filter>06.Shader\05. DissolveShader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\EffectShader.cpp">
-      <Filter>06.Shader\06. EffectShader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\MeshTrailShader.cpp">
-      <Filter>06.Shader\07. MeshTrailShader</Filter>
+      <Filter>06.Shader\06. MeshTrailShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SoftEffectShader.cpp">
-      <Filter>06.Shader\08. SoftEffectShader</Filter>
+      <Filter>06.Shader\07. SoftEffectShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SpawnEffectShader.cpp">
-      <Filter>06.Shader\09. SpawnEffectShader</Filter>
+      <Filter>06.Shader\08. SpawnEffectShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\WaterShader.cpp">
-      <Filter>06.Shader\10. WaterShader</Filter>
+      <Filter>06.Shader\09. WaterShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AlphaMaskShader.cpp">
-      <Filter>06.Shader\11. AlphaMaskShader</Filter>
+      <Filter>06.Shader\10. AlphaMaskShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FireShader.cpp">
-      <Filter>06.Shader\12. FireShader</Filter>
+      <Filter>06.Shader\11. FireShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
