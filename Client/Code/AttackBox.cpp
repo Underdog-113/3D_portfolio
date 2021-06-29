@@ -31,8 +31,8 @@ SP(Engine::CObject) CAttackBox::MakeClone(void)
 	SP(CAttackBox) spClone(new CAttackBox, Engine::SmartDeleter<CAttackBox>);
 	__super::InitClone(spClone);
 
-	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 
 	return spClone;
 }
@@ -41,24 +41,24 @@ void CAttackBox::Awake(void)
 {
 	__super::Awake();
 
-	m_layerID	= (int)ELayerID::Attack;
-	m_dataID	= UNDEFINED;
-	m_addExtra	= true;
+	m_layerID = (int)ELayerID::Attack;
+	m_dataID = UNDEFINED;
+	m_addExtra = true;
 	m_isEnabled = false;
 
-	m_spCollision	= AddComponent<Engine::CCollisionC>();
+	m_spCollision = AddComponent<Engine::CCollisionC>();
 }
 
 void CAttackBox::Start(void)
 {
 	__super::Start();
-	
+
 	if (m_pOwner == nullptr)
 	{
 		MSG_BOX(__FILE__, L"Owner is empty in CAttackBox::Start()");
 		ABORT;
-	}	
-	
+	}
+
 	if (m_pOwner->GetLayerID() == (int)ELayerID::Player)
 	{
 		m_collisionID = (int)ECollisionID::PlayerAttack;
@@ -72,33 +72,6 @@ void CAttackBox::Start(void)
 	col->SetIsTrigger(true);
 	m_spCollision->AddCollider(col);
 
-	auto rayCol = Engine::CRayCollider::Create(
-		(int)ECollisionID::WallRay,
-		_float3(0.f, 0.f, 0.f),
-		_float3(1.f, 0.f, 0.f),
-		0.5f,
-		Engine::ERayType::LIMITED
-	);
-	m_spCollision->AddCollider(rayCol);
-	rayCol = Engine::CRayCollider::Create(
-		(int)ECollisionID::WallRay,
-		_float3(0.f, 0.f, 0.f),
-		_float3(0.f, 1.f, 0.f),
-		1.f,
-		Engine::ERayType::LIMITED
-	);
-	m_spCollision->AddCollider(rayCol);
-	rayCol = Engine::CRayCollider::Create(
-		(int)ECollisionID::WallRay,
-		_float3(0.f, 0.f, 0.f),
-		_float3(0.f, 0.f, 1.f),
-		1.5f,
-		Engine::ERayType::LIMITED
-	);
-	m_spCollision->AddCollider(rayCol);
-
-
-
 	//m_spTransform->SetParent(m_pOwner->GetTransform());
 
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((int)Engine::ERenderID::NonAlpha);
@@ -109,65 +82,58 @@ void CAttackBox::Start(void)
 void CAttackBox::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-	
+
 }
 
 void CAttackBox::Update(void)
 {
 	__super::Update();
-	
+
 }
 
 void CAttackBox::LateUpdate(void)
 {
 	__super::LateUpdate();
 
-	_float3 offsetPos;
-	D3DXVec3TransformCoord(&offsetPos, &m_offset, m_pParentMatrix);
-	m_spTransform->SetPosition(offsetPos);
+	// 
+	// 	_float3 ownerRot = m_pOwner->GetTransform()->GetRotation();
+	// 	//m_spTransform->SetRotation(ownerRot);
+	// 	_mat ownerYRotMat;
+	// 	D3DXMatrixRotationY(&ownerYRotMat, m_pOwner->GetTransform()->GetRotation().y);
+	// 
+	// 	_mat combRotMat = *m_pParentMatrix;
+	// 	//combRotMat._41 = 0.f;
+	// 	//combRotMat._42 = 0.f;
+	// 	//combRotMat._43 = 0.f;
+	// 	//_mat invDefaultLook;
+	// 	//D3DXMatrixRotationY(&invDefaultLook, D3DXToRadian(180.f));
+	// 	//D3DXMatrixInverse(&invDefaultLook, NULL, &invDefaultLook);
+	// 	combRotMat = combRotMat * ownerYRotMat;
+	// 
+	// 	m_spTransform->SetWorldMatrix(combRotMat);
+	// 	m_spTransform->SetLastWorldMatrix(combRotMat);
 
 
 
+	// 	_float3 rotOffset;
+	// 	rotOffset.x = atan2(combRotMat._32, combRotMat._33);
+	// 	rotOffset.y = atan2(-combRotMat._31, sqrtf(combRotMat._32 * combRotMat._32 + combRotMat._33* combRotMat._33));
+	// 	rotOffset.z = atan2(combRotMat._21, combRotMat._11);
+	// 
+	// 	m_spTransform->SetRotation(rotOffset);
 
-// 
-// 	_float3 ownerRot = m_pOwner->GetTransform()->GetRotation();
-// 	//m_spTransform->SetRotation(ownerRot);
-// 	_mat ownerYRotMat;
-// 	D3DXMatrixRotationY(&ownerYRotMat, m_pOwner->GetTransform()->GetRotation().y);
-// 
-// 	_mat combRotMat = *m_pParentMatrix;
-// 	//combRotMat._41 = 0.f;
-// 	//combRotMat._42 = 0.f;
-// 	//combRotMat._43 = 0.f;
-// 	//_mat invDefaultLook;
-// 	//D3DXMatrixRotationY(&invDefaultLook, D3DXToRadian(180.f));
-// 	//D3DXMatrixInverse(&invDefaultLook, NULL, &invDefaultLook);
-// 	combRotMat = combRotMat * ownerYRotMat;
-// 
-// 	m_spTransform->SetWorldMatrix(combRotMat);
-// 	m_spTransform->SetLastWorldMatrix(combRotMat);
-
-	
-
-// 	_float3 rotOffset;
-// 	rotOffset.x = atan2(combRotMat._32, combRotMat._33);
-// 	rotOffset.y = atan2(-combRotMat._31, sqrtf(combRotMat._32 * combRotMat._32 + combRotMat._33* combRotMat._33));
-// 	rotOffset.z = atan2(combRotMat._21, combRotMat._11);
-// 
-// 	m_spTransform->SetRotation(rotOffset);
-
-// 	D3DXQUATERNION qLocal, qTheresaY;
-// 	D3DXQuaternionRotationMatrix(&qLocal, m_pParentMatrix);
-// 	D3DXQuaternionRotationAxis(&qTheresaY, &_float3(0.f, 1.f, 0.f), m_pOwner->GetTransform()->GetRotation().y);
-// 
-// 	D3DXQUATERNION qWorld;
-// 	qWorld = qLocal * qTheresaY;
-// 
-// 	_mat newWorldMat = GetQuatRotationMatrix(qWorld);
-// 	newWorldMat._41 = offsetPos.x;
-// 	newWorldMat._42 = offsetPos.y;
-// 	newWorldMat._43 = offsetPos.z;
-// 	m_spTransform->SetLastWorldMatrix(newWorldMat);
+	// 	D3DXQUATERNION qLocal, qTheresaY;
+	// 	D3DXQuaternionRotationMatrix(&qLocal, m_pParentMatrix);
+	// 	D3DXQuaternionRotationAxis(&qTheresaY, &_float3(0.f, 1.f, 0.f), m_pOwner->GetTransform()->GetRotation().y);
+	// 
+	// 	D3DXQUATERNION qWorld;
+	// 	qWorld = qLocal * qTheresaY;
+	// 
+	// 	_mat newWorldMat = GetQuatRotationMatrix(qWorld);
+	// 	newWorldMat._41 = offsetPos.x;
+	// 	newWorldMat._42 = offsetPos.y;
+	// 	newWorldMat._43 = offsetPos.z;
+	// 	m_spTransform->SetLastWorldMatrix(newWorldMat);
 
 
 	//_float3 rotOffset = QuaternionToRadian(qWorld);
@@ -190,19 +156,23 @@ void CAttackBox::OnDestroy(void)
 {
 	__super::OnDestroy();
 
-	
+
 
 }
 
 void CAttackBox::OnEnable(void)
 {
 	__super::OnEnable();
+	if (m_spTransform)
+		m_spTransform->SetPosition(0, 0, 0);
+
+
 }
 
 void CAttackBox::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 	if (m_spTransform)
 		m_spTransform->SetPosition(0, 0, 0);
 	m_vCollided.clear();
@@ -285,7 +255,7 @@ void CAttackBox::SetupBox(CObject * pOwner, _mat * pParentMat, _float3 size, _fl
 	//m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
 
-	
+
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetSize(size);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetHalfSize(size / 2.f);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetOffsetOrigin(offset);
@@ -320,11 +290,11 @@ _mat CAttackBox::GetQuatRotationMatrix(D3DXQUATERNION rotation)
 	GetQuatRotationX(&right, right, rotation);
 	GetQuatRotationY(&right, right, rotation);
 	GetQuatRotationZ(&right, right, rotation);
-	   
+
 	GetQuatRotationX(&up, up, rotation);
 	GetQuatRotationY(&up, up, rotation);
 	GetQuatRotationZ(&up, up, rotation);
-	   
+
 	GetQuatRotationX(&look, look, rotation);
 	GetQuatRotationY(&look, look, rotation);
 	GetQuatRotationZ(&look, look, rotation);
