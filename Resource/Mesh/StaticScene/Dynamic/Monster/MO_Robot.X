@@ -163,49 +163,49 @@ Material Material__63 {
 }
 
 Frame RO_013 {
- 
+
 
  FrameTransformMatrix {
   0.393701,0.000000,0.000000,0.000000,0.000000,-0.000000,-0.393701,0.000000,0.000000,0.393701,-0.000000,0.000000,0.000000,0.000000,0.000000,1.000000;;
  }
 
  Frame Bip001 {
-  
+
 
   FrameTransformMatrix {
    -0.129985,0.991516,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.991516,0.129985,-0.000000,0.000000,0.000000,0.000000,1.355805,1.000000;;
   }
 
   Frame Bip001_Pelvis {
-   
+
 
    FrameTransformMatrix {
     -0.007204,0.998463,0.054954,0.000000,0.000197,-0.054954,0.998489,0.000000,0.999974,0.007204,0.000200,0.000000,0.000000,0.000000,0.000000,1.000000;;
    }
 
    Frame Bip001_Spine {
-    
+
 
     FrameTransformMatrix {
      0.995868,-0.090171,0.010763,0.000000,0.090776,0.991768,-0.090311,0.000000,-0.002531,0.090915,0.995856,0.000000,0.169437,-0.009376,0.000667,1.000000;;
     }
 
     Frame Bip001_L_Thigh {
-     
+
 
      FrameTransformMatrix {
       -0.999214,0.039002,0.007087,0.000000,-0.037970,-0.993036,0.111523,0.000000,0.011388,0.111166,0.993737,0.000000,-0.204093,0.373473,0.035406,1.000000;;
      }
 
      Frame Bip001_L_Calf {
-      
+
 
       FrameTransformMatrix {
        0.852178,0.000000,-0.523253,0.000000,-0.000000,1.000000,0.000000,0.000000,0.523253,-0.000000,0.852178,0.000000,0.474008,-0.000000,0.000000,1.000000;;
       }
 
       Frame Bip001_L_Foot {
-       
+
 
        FrameTransformMatrix {
         0.857632,0.073222,0.509025,0.000000,-0.088475,0.996061,0.005787,0.000000,-0.506597,-0.049999,0.860732,0.000000,0.644109,0.000000,0.000000,1.000000;;
@@ -215,42 +215,42 @@ Frame RO_013 {
     }
 
     Frame Bip001_Neck {
-     
+
 
      FrameTransformMatrix {
       1.000000,0.000000,-0.000000,0.000000,-0.000000,1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,0.683182,0.000000,-0.000068,1.000000;;
      }
 
      Frame Bip001_L_Clavicle {
-      
+
 
       FrameTransformMatrix {
        -0.290010,0.955633,0.051580,0.000000,0.957023,0.289633,0.014801,0.000000,-0.000795,0.053656,-0.998559,0.000000,-0.350493,0.270296,-0.099349,1.000000;;
       }
 
       Frame Bip001_L_UpperArm {
-       
+
 
        FrameTransformMatrix {
         0.709911,-0.620601,0.332987,0.000000,0.702315,0.588410,-0.400657,0.000000,0.052716,0.518293,0.853577,0.000000,0.368394,0.000000,0.000000,1.000000;;
        }
 
        Frame Bip001_L_Forearm {
-        
+
 
         FrameTransformMatrix {
          0.769501,-0.000000,-0.638646,0.000000,0.000000,1.000000,0.000000,0.000000,0.638646,0.000000,0.769501,0.000000,0.720928,0.000000,0.000000,1.000000;;
         }
 
         Frame Bone007 {
-         
+
 
          FrameTransformMatrix {
           0.975763,-0.218559,0.010826,0.000000,-0.217815,-0.974813,-0.047922,0.000000,0.021027,0.044403,-0.998793,0.000000,-0.101230,0.009248,0.007879,1.000000;;
          }
 
          Frame Bone001 {
-          
+
 
           FrameTransformMatrix {
            0.843627,-0.071117,-0.532200,0.000000,0.536929,0.114298,0.835849,0.000000,0.001386,-0.990898,0.134609,0.000000,0.608282,0.056153,0.406098,1.000000;;
@@ -258,7 +258,7 @@ Frame RO_013 {
          }
 
          Frame Bone003 {
-          
+
 
           FrameTransformMatrix {
            0.870570,0.067429,0.487402,0.000000,0.492043,-0.116511,-0.862740,0.000000,-0.001386,0.990898,-0.134609,0.000000,0.588581,-0.047332,-0.355481,1.000000;;
@@ -266,7 +266,7 @@ Frame RO_013 {
          }
 
          Frame Bone005 {
-          
+
 
           FrameTransformMatrix {
            0.778454,0.620618,-0.094032,0.000000,0.627580,-0.772472,0.097120,0.000000,-0.012362,-0.134616,-0.990821,0.000000,0.610450,-0.596779,0.096287,1.000000;;
@@ -278,42 +278,42 @@ Frame RO_013 {
      }
 
      Frame Bip001_R_Clavicle {
-      
+
 
       FrameTransformMatrix {
        -0.199690,-0.979131,-0.037777,0.000000,-0.979859,0.199510,0.008510,0.000000,-0.000796,0.038716,-0.999250,0.000000,-0.350493,-0.270296,-0.099347,1.000000;;
       }
 
       Frame Bip001_R_UpperArm {
-       
+
 
        FrameTransformMatrix {
         0.854681,0.505567,0.117993,0.000000,-0.466839,0.649012,0.600704,0.000000,0.227117,-0.568494,0.790717,0.000000,0.368394,0.000000,-0.000000,1.000000;;
        }
 
        Frame Bip001_R_Forearm {
-        
+
 
         FrameTransformMatrix {
          0.593261,0.000000,-0.805010,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.805010,0.000000,0.593261,0.000000,0.720928,0.000000,0.000000,1.000000;;
         }
 
         Frame Bip001_R_Hand {
-         
+
 
          FrameTransformMatrix {
           0.970073,0.242815,-0.000000,0.000000,-0.000193,0.000773,-1.000000,0.000000,-0.242815,0.970072,0.000796,0.000000,0.467667,-0.000000,0.000000,1.000000;;
          }
 
          Frame Bip001_R_Finger0 {
-          
+
 
           FrameTransformMatrix {
            0.885945,-0.072908,0.458024,0.000000,-0.093863,-0.995317,0.023124,0.000000,0.454193,-0.063478,-0.888639,0.000000,0.109410,0.045819,0.212764,1.000000;;
           }
 
           Frame Bip001_R_Finger01 {
-           
+
 
            FrameTransformMatrix {
             0.838969,-0.000000,0.544179,0.000000,0.000000,1.000000,-0.000000,0.000000,-0.544179,-0.000000,0.838969,0.000000,0.204449,0.000000,0.000000,1.000000;;
@@ -322,14 +322,14 @@ Frame RO_013 {
          }
 
          Frame Bip001_R_Finger1 {
-          
+
 
           FrameTransformMatrix {
            0.635984,-0.033489,0.770975,0.000000,0.053545,0.998565,-0.000795,0.000000,-0.769842,0.041788,0.636865,0.000000,0.241832,0.093362,-0.011522,1.000000;;
           }
 
           Frame Bip001_R_Finger11 {
-           
+
 
            FrameTransformMatrix {
             -0.353195,0.000000,0.935550,0.000000,0.000000,1.000000,0.000000,0.000000,-0.935550,0.000000,-0.353195,0.000000,0.232215,0.000000,-0.000000,1.000000;;
@@ -338,14 +338,14 @@ Frame RO_013 {
          }
 
          Frame Bip001_R_Finger2 {
-          
+
 
           FrameTransformMatrix {
            0.647779,-0.028892,0.761281,0.000000,0.046711,0.998907,-0.001837,0.000000,-0.760395,0.036750,0.648420,0.000000,0.233957,-0.083313,-0.026921,1.000000;;
           }
 
           Frame Bip001_R_Finger21 {
-           
+
 
            FrameTransformMatrix {
             -0.363867,0.000000,0.931451,0.000000,0.000000,1.000000,-0.000000,0.000000,-0.931451,-0.000000,-0.363867,0.000000,0.241181,-0.000000,-0.000000,1.000000;;
@@ -359,21 +359,21 @@ Frame RO_013 {
     }
 
     Frame Bip001_R_Thigh {
-     
+
 
      FrameTransformMatrix {
       -0.936464,-0.235265,0.260166,0.000000,0.121463,-0.913322,-0.388702,0.000000,0.329063,-0.332405,0.883869,0.000000,-0.135086,-0.385516,-0.034172,1.000000;;
      }
 
      Frame Bip001_R_Calf {
-      
+
 
       FrameTransformMatrix {
        0.832978,0.000000,-0.553307,0.000000,0.000000,1.000000,-0.000000,0.000000,0.553307,0.000000,0.832978,0.000000,0.474008,0.000000,-0.000000,1.000000;;
       }
 
       Frame Bip001_R_Foot {
-       
+
 
        FrameTransformMatrix {
         0.961853,-0.089112,0.258646,0.000000,0.104019,0.993579,-0.044504,0.000000,-0.253020,0.069711,0.964946,0.000000,0.644109,0.000000,-0.000000,1.000000;;
@@ -386,7 +386,7 @@ Frame RO_013 {
  }
 
  Frame MC_010 {
-  
+
 
   FrameTransformMatrix {
    1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000;;
@@ -72958,7 +72958,7 @@ Frame RO_013 {
  }
 
  Frame MC_010_L_Hand {
-  
+
 
   FrameTransformMatrix {
    1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000;;
@@ -92019,10 +92019,10 @@ AnimTicksPerSecond  {
 
 
 AnimationSet Walk_Forward {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -92048,7 +92048,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -92125,7 +92125,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -92202,7 +92202,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -92330,7 +92330,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -92458,7 +92458,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -92535,7 +92535,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -92612,7 +92612,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -92638,7 +92638,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -92715,7 +92715,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -92792,7 +92792,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -92869,7 +92869,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -92895,7 +92895,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -92921,7 +92921,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -92947,7 +92947,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -92973,7 +92973,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -93050,7 +93050,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -93127,7 +93127,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -93204,7 +93204,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -93281,7 +93281,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -93358,7 +93358,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -93435,7 +93435,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -93512,7 +93512,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -93589,7 +93589,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -93666,7 +93666,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -93743,7 +93743,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -93871,7 +93871,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -93948,7 +93948,7 @@ AnimationSet Walk_Forward {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -94026,10 +94026,10 @@ AnimationSet Walk_Forward {
 }
 
 AnimationSet Walk_Backward {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -94055,7 +94055,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -94132,7 +94132,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -94209,7 +94209,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -94337,7 +94337,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -94465,7 +94465,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -94542,7 +94542,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -94619,7 +94619,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -94645,7 +94645,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -94722,7 +94722,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -94799,7 +94799,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -94876,7 +94876,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -94902,7 +94902,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -94928,7 +94928,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -94954,7 +94954,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -94980,7 +94980,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -95057,7 +95057,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -95134,7 +95134,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -95211,7 +95211,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -95288,7 +95288,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -95365,7 +95365,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -95442,7 +95442,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -95519,7 +95519,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -95596,7 +95596,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -95673,7 +95673,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -95750,7 +95750,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -95878,7 +95878,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -95955,7 +95955,7 @@ AnimationSet Walk_Backward {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -96033,10 +96033,10 @@ AnimationSet Walk_Backward {
 }
 
 AnimationSet Throw_Blow {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -96062,7 +96062,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -96142,7 +96142,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -96168,7 +96168,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -96231,7 +96231,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -96311,7 +96311,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -96364,7 +96364,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -96417,7 +96417,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -96443,7 +96443,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -96469,7 +96469,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -96495,7 +96495,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -96521,7 +96521,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -96547,7 +96547,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -96573,7 +96573,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -96599,7 +96599,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -96625,7 +96625,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -96651,7 +96651,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -96677,7 +96677,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -96703,7 +96703,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -96729,7 +96729,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -96755,7 +96755,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -96781,7 +96781,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -96807,7 +96807,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -96833,7 +96833,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -96859,7 +96859,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -96885,7 +96885,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -96965,7 +96965,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -97018,7 +97018,7 @@ AnimationSet Throw_Blow {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -97072,10 +97072,10 @@ AnimationSet Throw_Blow {
 }
 
 AnimationSet Throw_02 {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -97101,7 +97101,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -97209,7 +97209,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -97235,7 +97235,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -97305,7 +97305,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -97413,7 +97413,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -97480,7 +97480,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -97547,7 +97547,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -97573,7 +97573,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -97640,7 +97640,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -97707,7 +97707,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -97774,7 +97774,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -97800,7 +97800,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -97826,7 +97826,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -97852,7 +97852,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -97878,7 +97878,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -97945,7 +97945,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -98012,7 +98012,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -98079,7 +98079,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -98146,7 +98146,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -98172,7 +98172,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -98198,7 +98198,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -98224,7 +98224,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -98250,7 +98250,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -98276,7 +98276,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -98302,7 +98302,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -98409,7 +98409,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -98476,7 +98476,7 @@ AnimationSet Throw_02 {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -98544,10 +98544,10 @@ AnimationSet Throw_02 {
 }
 
 AnimationSet Throw_01 {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -98573,7 +98573,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -98723,7 +98723,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -98749,7 +98749,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -98850,7 +98850,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -98998,7 +98998,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -99086,7 +99086,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -99174,7 +99174,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -99200,7 +99200,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -99288,7 +99288,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -99376,7 +99376,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -99464,7 +99464,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -99490,7 +99490,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -99516,7 +99516,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -99542,7 +99542,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -99568,7 +99568,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -99656,7 +99656,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -99744,7 +99744,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -99832,7 +99832,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -99919,7 +99919,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -99945,7 +99945,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -99971,7 +99971,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -99997,7 +99997,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -100023,7 +100023,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -100049,7 +100049,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -100075,7 +100075,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -100224,7 +100224,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -100312,7 +100312,7 @@ AnimationSet Throw_01 {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -100401,10 +100401,10 @@ AnimationSet Throw_01 {
 }
 
 AnimationSet StandUp {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -100430,7 +100430,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -100530,7 +100530,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -100556,7 +100556,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -100625,7 +100625,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -100723,7 +100723,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -100786,7 +100786,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -100849,7 +100849,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -100875,7 +100875,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -100938,7 +100938,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -101001,7 +101001,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -101064,7 +101064,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -101090,7 +101090,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -101116,7 +101116,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -101142,7 +101142,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -101168,7 +101168,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -101231,7 +101231,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -101294,7 +101294,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -101357,7 +101357,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -101420,7 +101420,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -101446,7 +101446,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -101472,7 +101472,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -101498,7 +101498,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -101524,7 +101524,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -101550,7 +101550,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -101576,7 +101576,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -101675,7 +101675,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -101738,7 +101738,7 @@ AnimationSet StandUp {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -101802,10 +101802,10 @@ AnimationSet StandUp {
 }
 
 AnimationSet StandBy {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -101831,7 +101831,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -101973,7 +101973,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -102055,7 +102055,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -102197,7 +102197,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -102341,7 +102341,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -102426,7 +102426,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -102511,7 +102511,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -102537,7 +102537,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -102622,7 +102622,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -102707,7 +102707,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -102792,7 +102792,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -102818,7 +102818,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -102844,7 +102844,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -102870,7 +102870,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -102896,7 +102896,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -102981,7 +102981,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -103066,7 +103066,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -103149,7 +103149,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -103232,7 +103232,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -103317,7 +103317,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -103401,7 +103401,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -103486,7 +103486,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -103571,7 +103571,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -103656,7 +103656,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -103741,7 +103741,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -103885,7 +103885,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -103970,7 +103970,7 @@ AnimationSet StandBy {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -104056,10 +104056,10 @@ AnimationSet StandBy {
 }
 
 AnimationSet Run_Attack_Quick {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -104085,7 +104085,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -104149,7 +104149,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -104194,7 +104194,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -104255,7 +104255,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -104319,7 +104319,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -104364,7 +104364,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -104409,7 +104409,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -104454,7 +104454,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -104518,7 +104518,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -104563,7 +104563,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -104608,7 +104608,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -104634,7 +104634,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -104660,7 +104660,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -104686,7 +104686,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -104712,7 +104712,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -104776,7 +104776,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -104821,7 +104821,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -104866,7 +104866,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -104911,7 +104911,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -104956,7 +104956,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -105001,7 +105001,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -105046,7 +105046,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -105091,7 +105091,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -105136,7 +105136,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -105181,7 +105181,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -105245,7 +105245,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -105290,7 +105290,7 @@ AnimationSet Run_Attack_Quick {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -105336,10 +105336,10 @@ AnimationSet Run_Attack_Quick {
 }
 
 AnimationSet Run_Attack {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -105365,7 +105365,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -105429,7 +105429,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -105474,7 +105474,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -105535,7 +105535,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -105599,7 +105599,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -105644,7 +105644,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -105689,7 +105689,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -105734,7 +105734,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -105798,7 +105798,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -105843,7 +105843,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -105888,7 +105888,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -105914,7 +105914,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -105940,7 +105940,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -105966,7 +105966,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -105992,7 +105992,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -106056,7 +106056,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -106101,7 +106101,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -106146,7 +106146,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -106191,7 +106191,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -106236,7 +106236,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -106281,7 +106281,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -106326,7 +106326,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -106371,7 +106371,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -106416,7 +106416,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -106461,7 +106461,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -106525,7 +106525,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -106570,7 +106570,7 @@ AnimationSet Run_Attack {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -106616,10 +106616,10 @@ AnimationSet Run_Attack {
 }
 
 AnimationSet Run_AS {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -106645,7 +106645,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -106707,7 +106707,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -106751,7 +106751,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -106809,7 +106809,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -106871,7 +106871,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -106915,7 +106915,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -106959,7 +106959,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -107003,7 +107003,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -107065,7 +107065,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -107109,7 +107109,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -107153,7 +107153,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -107179,7 +107179,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -107205,7 +107205,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -107231,7 +107231,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -107257,7 +107257,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -107319,7 +107319,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -107363,7 +107363,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -107407,7 +107407,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -107451,7 +107451,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -107495,7 +107495,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -107539,7 +107539,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -107583,7 +107583,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -107627,7 +107627,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -107671,7 +107671,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -107715,7 +107715,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -107777,7 +107777,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -107821,7 +107821,7 @@ AnimationSet Run_AS {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -107865,4119 +107865,11 @@ AnimationSet Run_AS {
  }
 }
 
-AnimationSet Attack_1_Right {
- 
-
- Animation {
-  
-  { RO_013 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;0.393701,0.393701,0.393701;;,
-   8320;3;0.393701,0.393701,0.393701;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.707107,0.707107,0.000000,0.000000;;,
-   8320;4;0.707107,0.707107,0.000000,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.000000,0.000000,0.000000;;,
-   8320;3;0.000000,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   52;
-   0;4;-0.466373,0.466373,0.531504,0.531504;;,
-   160;4;-0.450096,0.450096,0.545356,0.545356;;,
-   320;4;-0.431743,0.431743,0.559999,0.559999;;,
-   480;4;-0.413767,0.413767,0.573408,0.573408;;,
-   640;4;-0.398860,0.398860,0.583875,0.583875;;,
-   800;4;-0.389860,0.389860,0.589923,0.589923;;,
-   960;4;-0.385234,0.385234,0.592955,0.592955;;,
-   1120;4;-0.381486,0.381486,0.595373,0.595373;;,
-   1280;4;-0.378530,0.378530,0.597257,0.597257;;,
-   1440;4;-0.376274,0.376274,0.598680,0.598680;;,
-   1600;4;-0.374626,0.374626,0.599712,0.599712;;,
-   1760;4;-0.373491,0.373491,0.600420,0.600420;;,
-   1920;4;-0.372772,0.372772,0.600867,0.600867;;,
-   2080;4;-0.372370,0.372370,0.601116,0.601116;;,
-   2240;4;-0.372189,0.372189,0.601228,0.601228;;,
-   2560;4;-0.372130,0.372130,0.601265,0.601265;;,
-   2720;4;-0.371981,0.371981,0.601357,0.601357;;,
-   2880;4;-0.371696,0.371696,0.601533,0.601533;;,
-   3040;4;-0.371137,0.371137,0.601878,0.601878;;,
-   3200;4;-0.376141,0.376141,0.598764,0.598764;;,
-   3360;4;-0.482703,0.482703,0.516718,0.516718;;,
-   3520;4;-0.575690,0.575690,0.410586,0.410586;;,
-   3680;4;-0.593682,0.593682,0.384112,0.384112;;,
-   3840;4;-0.599152,0.599152,0.375522,0.375522;;,
-   4000;4;-0.605903,0.605903,0.364529,0.364529;;,
-   4160;4;-0.612691,0.612691,0.353002,0.353002;;,
-   4320;4;-0.619190,0.619190,0.341473,0.341473;;,
-   4480;4;-0.625115,0.625115,0.330501,0.330501;;,
-   4640;4;-0.630220,0.630220,0.320660,0.320660;;,
-   4800;4;-0.634286,0.634286,0.312540,0.312540;;,
-   4960;4;-0.637113,0.637113,0.306736,0.306736;;,
-   5120;4;-0.638499,0.638499,0.303840,0.303840;;,
-   5280;4;-0.638299,0.638299,0.304261,0.304261;;,
-   5440;4;-0.636879,0.636879,0.307222,0.307222;;,
-   5600;4;-0.634395,0.634395,0.312318,0.312318;;,
-   5760;4;-0.630922,0.630922,0.319276,0.319276;;,
-   5920;4;-0.626528,0.626528,0.327816,0.327816;;,
-   6080;4;-0.621278,0.621278,0.337659,0.337659;;,
-   6240;4;-0.615248,0.615248,0.348525,0.348525;;,
-   6400;4;-0.608522,0.608522,0.360139,0.360139;;,
-   6560;4;-0.601201,0.601201,0.372233,0.372233;;,
-   6720;4;-0.593401,0.593401,0.384546,0.384546;;,
-   6880;4;-0.585113,0.585113,0.397042,0.397042;;,
-   7040;4;-0.575592,0.575592,0.410724,0.410724;;,
-   7200;4;-0.564787,0.564787,0.425459,0.425459;;,
-   7360;4;-0.552814,0.552814,0.440904,0.440904;;,
-   7520;4;-0.539812,0.539812,0.456731,0.456731;;,
-   7680;4;-0.525951,0.525951,0.472626,0.472626;;,
-   7840;4;-0.511431,0.511431,0.488301,0.488301;;,
-   8000;4;-0.496484,0.496484,0.503491,0.503491;;,
-   8160;4;-0.481369,0.481369,0.517961,0.517961;;,
-   8320;4;-0.466373,0.466373,0.531504,0.531504;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;0.000000,0.000000,1.355805;;,
-   160;3;0.028733,-0.065989,1.350893;;,
-   320;3;0.059256,-0.136291,1.345728;;,
-   480;3;0.084050,-0.192791,1.341373;;,
-   640;3;0.095969,-0.218472,1.338892;;,
-   800;3;0.099801,-0.224260,1.337446;;,
-   960;3;0.102625,-0.227029,1.335987;;,
-   1120;3;0.105324,-0.229527,1.334555;;,
-   1280;3;0.107904,-0.231760,1.333146;;,
-   1440;3;0.110374,-0.233737,1.331753;;,
-   1600;3;0.112743,-0.235463,1.330374;;,
-   1760;3;0.115018,-0.236947,1.329003;;,
-   1920;3;0.117208,-0.238195,1.327637;;,
-   2080;3;0.119321,-0.239214,1.326270;;,
-   2240;3;0.121365,-0.240012,1.324897;;,
-   2400;3;0.123348,-0.240595,1.323516;;,
-   2560;3;0.125280,-0.240970,1.322121;;,
-   2720;3;0.127167,-0.241145,1.320707;;,
-   2880;3;0.129018,-0.241127,1.319270;;,
-   3040;3;0.130842,-0.240922,1.317805;;,
-   3200;3;0.126856,-0.218496,1.315004;;,
-   3360;3;0.013211,0.220959,1.287604;;,
-   3520;3;-0.102884,0.666370,1.260536;;,
-   3680;3;-0.109775,0.693309,1.258785;;,
-   3840;3;-0.109012,0.691641,1.258529;;,
-   4000;3;-0.107664,0.688656,1.258091;;,
-   4160;3;-0.105916,0.684716,1.257548;;,
-   4320;3;-0.103956,0.680185,1.256975;;,
-   4480;3;-0.101967,0.675429,1.256450;;,
-   4640;3;-0.100137,0.670810,1.256048;;,
-   4800;3;-0.098651,0.666693,1.255848;;,
-   4960;3;-0.097695,0.663441,1.255924;;,
-   5120;3;-0.097454,0.661419,1.256355;;,
-   5280;3;-0.098115,0.660990,1.257216;;,
-   5440;3;-0.099863,0.662519,1.258584;;,
-   5600;3;-0.102884,0.666370,1.260536;;,
-   5760;3;-0.109124,0.673282,1.263317;;,
-   5920;3;-0.119498,0.683390,1.267020;;,
-   6080;3;-0.132645,0.696153,1.271491;;,
-   6240;3;-0.147204,0.711029,1.276578;;,
-   6400;3;-0.161814,0.727479,1.282129;;,
-   6560;3;-0.175115,0.744961,1.287990;;,
-   6720;3;-0.185746,0.762935,1.294009;;,
-   6880;3;-0.192347,0.780860,1.300034;;,
-   7040;3;-0.193557,0.798197,1.305912;;,
-   7200;3;-0.187582,0.814728,1.311589;;,
-   7360;3;-0.171910,0.831973,1.317523;;,
-   7520;3;-0.148424,0.849999,1.323726;;,
-   7680;3;-0.119598,0.868557,1.330112;;,
-   7840;3;-0.087904,0.887402,1.336597;;,
-   8000;3;-0.055816,0.906286,1.343095;;,
-   8160;3;-0.025806,0.924963,1.349522;;,
-   8320;3;0.000000,0.943220,1.355805;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_Pelvis }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.484263,0.511749,0.487866,0.515354;;,
-   160;4;-0.488663,0.508994,0.492630,0.509362;;,
-   320;4;-0.493025,0.505986,0.497744,0.503146;;,
-   480;4;-0.497293,0.502729,0.503137,0.496806;;,
-   640;4;-0.501418,0.499236,0.508732,0.490445;;,
-   800;4;-0.505359,0.495530,0.514446,0.484157;;,
-   960;4;-0.509085,0.491645,0.520192,0.478036;;,
-   1120;4;-0.512573,0.487624,0.525878,0.472169;;,
-   1280;4;-0.515812,0.483519,0.531409,0.466639;;,
-   1440;4;-0.518797,0.479389,0.536685,0.461524;;,
-   1600;4;-0.521534,0.475302,0.541606,0.456896;;,
-   1760;4;-0.524035,0.471328,0.546067,0.452823;;,
-   1920;4;-0.526316,0.467542,0.549966,0.449370;;,
-   2080;4;-0.528368,0.464120,0.553015,0.446761;;,
-   2240;4;-0.530073,0.461631,0.554218,0.445827;;,
-   2400;4;-0.531532,0.459957,0.553830,0.446303;;,
-   2560;4;-0.532844,0.458831,0.552322,0.447764;;,
-   2720;4;-0.534093,0.457976,0.550171,0.449794;;,
-   2880;4;-0.535363,0.457116,0.547858,0.451977;;,
-   3040;4;-0.536748,0.455982,0.545860,0.453894;;,
-   3200;4;-0.539393,0.453346,0.542566,0.457335;;,
-   3360;4;-0.581419,0.397939,0.420213,0.571855;;,
-   3520;4;-0.470337,0.524587,0.474035,0.528094;;,
-   3680;4;-0.467550,0.527717,0.481315,0.520814;;,
-   3840;4;-0.471594,0.524846,0.484383,0.517212;;,
-   4000;4;-0.476025,0.521524,0.487692,0.513391;;,
-   4160;4;-0.480716,0.517796,0.491201,0.509432;;,
-   4320;4;-0.485548,0.513715,0.494867,0.505418;;,
-   4480;4;-0.490409,0.509347,0.498638,0.501422;;,
-   4640;4;-0.495199,0.504769,0.502457,0.497517;;,
-   4800;4;-0.499826,0.500069,0.506261,0.493767;;,
-   4960;4;-0.504211,0.495346,0.509978,0.490231;;,
-   5120;4;-0.508286,0.490709,0.513535,0.486962;;,
-   5280;4;-0.511994,0.486277,0.516852,0.484005;;,
-   5440;4;-0.515285,0.482173,0.519847,0.481404;;,
-   5600;4;-0.518116,0.478526,0.522438,0.479195;;,
-   5760;4;-0.520448,0.475465,0.524539,0.477415;;,
-   5920;4;-0.522241,0.473120,0.526070,0.476101;;,
-   6080;4;-0.523450,0.471615,0.526950,0.475293;;,
-   6240;4;-0.524005,0.471090,0.527074,0.475064;;,
-   6400;4;-0.523801,0.471714,0.526256,0.475576;;,
-   6560;4;-0.522885,0.473363,0.524587,0.476789;;,
-   6720;4;-0.521307,0.475866,0.522202,0.478639;;,
-   6880;4;-0.519115,0.479044,0.519242,0.481067;;,
-   7040;4;-0.516358,0.482717,0.515845,0.484007;;,
-   7200;4;-0.513094,0.486712,0.512151,0.487390;;,
-   7360;4;-0.509394,0.490861,0.508290,0.491135;;,
-   7520;4;-0.505348,0.495015,0.504389,0.495152;;,
-   7680;4;-0.501062,0.499036,0.500562,0.499338;;,
-   7840;4;-0.496661,0.502808,0.496911,0.503580;;,
-   8000;4;-0.492287,0.506233,0.493528,0.507752;;,
-   8160;4;-0.488097,0.509234,0.490491,0.511723;;,
-   8320;4;-0.484263,0.511749,0.487866,0.515354;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.000000,0.000000,0.000000;;,
-   8320;3;0.000000,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_Spine }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.997934,0.045400,0.003331,0.045331;;,
-   160;4;0.997226,-0.067281,0.001609,0.031810;;,
-   320;4;0.987568,-0.155692,-0.002886,0.021481;;,
-   480;4;0.973008,-0.230212,-0.009192,0.013167;;,
-   640;4;0.960807,-0.276715,-0.014387,0.008497;;,
-   800;4;0.953419,-0.301049,-0.017956,0.006310;;,
-   960;4;0.945970,-0.323491,-0.021801,0.004340;;,
-   1120;4;0.938588,-0.344066,-0.025766,0.002624;;,
-   1280;4;0.931393,-0.362801,-0.029695,0.001190;;,
-   1440;4;0.924496,-0.379723,-0.033432,0.000050;;,
-   1600;4;0.918004,-0.394858,-0.036821,-0.000789;;,
-   1760;4;0.912012,-0.408234,-0.039708,-0.001329;;,
-   1920;4;0.906611,-0.419876,-0.041942,-0.001573;;,
-   2080;4;0.901878,-0.429806,-0.043371,-0.001527;;,
-   2240;4;0.897881,-0.438047,-0.043850,-0.001192;;,
-   2400;4;0.895411,-0.443188,-0.042703,-0.000407;;,
-   2560;4;0.898129,-0.438147,-0.037279,0.001645;;,
-   2720;4;0.904620,-0.425227,-0.028664,0.004852;;,
-   2880;4;0.912616,-0.408299,-0.018547,0.008911;;,
-   3040;4;0.920121,-0.391315,-0.008546,0.013301;;,
-   3200;4;0.929062,-0.369441,0.003810,0.018525;;,
-   3360;4;0.981655,-0.087219,0.114541,0.125010;;,
-   3520;4;0.811027,0.536088,0.169575,0.161519;;,
-   3680;4;0.770308,0.593783,0.172940,0.155369;;,
-   3840;4;0.731982,0.640644,0.177252,0.149530;;,
-   4000;4;0.691702,0.683596,0.182572,0.144612;;,
-   4160;4;0.657441,0.715979,0.187837,0.140935;;,
-   4320;4;0.638328,0.732601,0.191606,0.138275;;,
-   4480;4;0.631545,0.738097,0.194275,0.136458;;,
-   4640;4;0.628103,0.740501,0.197043,0.135348;;,
-   4800;4;0.627966,0.740059,0.199641,0.134589;;,
-   4960;4;0.631062,0.736965,0.201819,0.133839;;,
-   5120;4;0.637284,0.731364,0.203338,0.132775;;,
-   5280;4;0.646500,0.723364,0.203947,0.131102;;,
-   5440;4;0.658545,0.713042,0.203378,0.128559;;,
-   5600;4;0.673228,0.700445,0.201329,0.124928;;,
-   5760;4;0.690327,0.685600,0.197462,0.120039;;,
-   5920;4;0.710853,0.667196,0.190952,0.114346;;,
-   6080;4;0.735099,0.644090,0.181611,0.108603;;,
-   6240;4;0.761744,0.616602,0.170047,0.103112;;,
-   6400;4;0.789524,0.585160,0.156897,0.098101;;,
-   6560;4;0.817296,0.550323,0.142817,0.093680;;,
-   6720;4;0.844087,0.512786,0.128467,0.089799;;,
-   6880;4;0.869130,0.473363,0.114478,0.086234;;,
-   7040;4;0.891876,0.432956,0.101425,0.082579;;,
-   7200;4;0.912274,0.391936,0.089606,0.078192;;,
-   7360;4;0.931569,0.347615,0.077984,0.072529;;,
-   7520;4;0.949325,0.300050,0.066106,0.066203;;,
-   7680;4;0.964897,0.249973,0.053803,0.059931;;,
-   7840;4;0.977783,0.198236,0.041041,0.054397;;,
-   8000;4;0.987645,0.145791,0.027932,0.050228;;,
-   8160;4;0.994338,0.093673,0.014721,0.047973;;,
-   8320;4;0.997934,0.045400,0.003331,0.045331;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;0.169437,-0.009376,0.000667;;,
-   160;3;0.169693,-0.001076,0.000669;;,
-   320;3;0.169436,0.007301,0.000702;;,
-   480;3;0.169108,0.014214,0.000733;;,
-   640;3;0.168880,0.017288,0.000754;;,
-   800;3;0.168683,0.018662,0.000736;;,
-   960;3;0.168489,0.020185,0.000667;;,
-   1120;3;0.168291,0.021674,0.000586;;,
-   1280;3;0.168094,0.023112,0.000499;;,
-   1440;3;0.167901,0.024482,0.000410;;,
-   1600;3;0.167717,0.025769,0.000325;;,
-   1760;3;0.167547,0.026953,0.000249;;,
-   1920;3;0.167393,0.028020,0.000187;;,
-   2080;3;0.167267,0.028862,0.000138;;,
-   2240;3;0.167170,0.029436,0.000102;;,
-   2400;3;0.167100,0.029815,0.000088;;,
-   2560;3;0.167051,0.030075,0.000109;;,
-   2720;3;0.167029,0.030231,0.000184;;,
-   2880;3;0.167067,0.030068,0.000354;;,
-   3040;3;0.167132,0.029753,0.000568;;,
-   3200;3;0.167215,0.029341,0.000817;;,
-   3360;3;0.169734,0.005044,0.002497;;,
-   3520;3;0.168754,-0.018868,0.001017;;,
-   3680;3;0.168897,-0.016762,0.001144;;,
-   3840;3;0.169086,-0.013735,0.001169;;,
-   4000;3;0.169282,-0.010654,0.001187;;,
-   4160;3;0.169466,-0.007504,0.001199;;,
-   4320;3;0.169618,-0.004271,0.001207;;,
-   4480;3;0.169717,-0.000941,0.001211;;,
-   4640;3;0.169685,0.002986,0.001196;;,
-   4800;3;0.169533,0.007201,0.001166;;,
-   4960;3;0.169369,0.010513,0.001151;;,
-   5120;3;0.169207,0.013086,0.001165;;,
-   5280;3;0.169015,0.015608,0.001193;;,
-   5440;3;0.168832,0.017668,0.001223;;,
-   5600;3;0.168697,0.018853,0.001240;;,
-   5760;3;0.168650,0.018752,0.001233;;,
-   5920;3;0.168669,0.017753,0.001206;;,
-   6080;3;0.168703,0.016539,0.001177;;,
-   6240;3;0.168749,0.015135,0.001143;;,
-   6400;3;0.168807,0.013565,0.001107;;,
-   6560;3;0.168873,0.011853,0.001069;;,
-   6720;3;0.168947,0.010026,0.001029;;,
-   6880;3;0.169025,0.008107,0.000987;;,
-   7040;3;0.169106,0.006121,0.000945;;,
-   7200;3;0.169189,0.004094,0.000902;;,
-   7360;3;0.169271,0.002050,0.000859;;,
-   7520;3;0.169351,0.000014,0.000817;;,
-   7680;3;0.169425,-0.001990,0.000776;;,
-   7840;3;0.169493,-0.003936,0.000736;;,
-   8000;3;0.169553,-0.005800,0.000698;;,
-   8160;3;0.169564,-0.007581,0.000670;;,
-   8320;3;0.169437,-0.009376,0.000667;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Thigh }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.019277,0.004627,0.055770,0.998247;;,
-   160;4;-0.009663,0.000372,0.166290,0.986030;;,
-   320;4;-0.002135,-0.005249,0.251543,0.967830;;,
-   480;4;0.004076,-0.012190,0.321473,0.946831;;,
-   640;4;0.008343,-0.016410,0.367995,0.929646;;,
-   800;4;0.011345,-0.017476,0.397005,0.917580;;,
-   960;4;0.014006,-0.018301,0.424014,0.905362;;,
-   1120;4;0.016470,-0.018870,0.448814,0.893274;;,
-   1280;4;0.018880,-0.019183,0.471215,0.881608;;,
-   1440;4;0.021369,-0.019249,0.491040,0.870662;;,
-   1600;4;0.024064,-0.019088,0.508122,0.860737;;,
-   1760;4;0.027088,-0.018718,0.522298,0.852127;;,
-   1920;4;0.030552,-0.018162,0.533403,0.845114;;,
-   2080;4;0.034591,-0.017317,0.540676,0.840341;;,
-   2240;4;0.039352,-0.015559,0.541168,0.839850;;,
-   2400;4;0.044673,-0.012950,0.536001,0.842935;;,
-   2560;4;0.050346,-0.009698,0.526916,0.848370;;,
-   2720;4;0.056177,-0.006053,0.515656,0.854930;;,
-   2880;4;0.062008,-0.002316,0.504016,0.861463;;,
-   3040;4;0.067722,0.001156,0.493845,0.866908;;,
-   3200;4;0.078044,0.004521,0.458669,0.885162;;,
-   3360;4;0.075850,0.127433,0.037201,0.988243;;,
-   3520;4;-0.008141,0.287643,-0.396152,0.871928;;,
-   3680;4;-0.010001,0.317617,-0.457835,0.830305;;,
-   3840;4;-0.001001,0.346602,-0.508880,0.787977;;,
-   4000;4;0.006539,0.374707,-0.553846,0.743510;;,
-   4160;4;0.014468,0.395304,-0.584758,0.708226;;,
-   4320;4;0.025571,0.403586,-0.597876,0.692105;;,
-   4480;4;0.038883,0.406393,-0.604357,0.684168;;,
-   4640;4;0.053701,0.406010,-0.607064,0.680988;;,
-   4800;4;0.069552,0.403223,-0.606647,0.681582;;,
-   4960;4;0.085909,0.398831,-0.603722,0.684889;;,
-   5120;4;0.102236,0.393682,-0.598916,0.689828;;,
-   5280;4;0.118022,0.388684,-0.592885,0.695330;;,
-   5440;4;0.132801,0.384815,-0.586334,0.700353;;,
-   5600;4;0.146155,0.383104,-0.580019,0.703881;;,
-   5760;4;0.159828,0.385408,-0.573245,0.705199;;,
-   5920;4;0.174323,0.390834,-0.564798,0.705595;;,
-   6080;4;0.187351,0.396467,-0.554659,0.707154;;,
-   6240;4;0.196511,0.399717,-0.542647,0.712141;;,
-   6400;4;0.199205,0.398346,-0.528257,0.722899;;,
-   6560;4;0.191066,0.391000,-0.510641,0.741525;;,
-   6720;4;0.165061,0.380300,-0.488340,0.767887;;,
-   6880;4;0.129120,0.366581,-0.458581,0.799156;;,
-   7040;4;0.093121,0.348794,-0.420177,0.832540;;,
-   7200;4;0.066538,0.324840,-0.374146,0.866064;;,
-   7360;4;0.048165,0.291439,-0.319655,0.900313;;,
-   7520;4;0.029720,0.250002,-0.257128,0.933006;;,
-   7680;4;0.010495,0.204602,-0.190964,0.959980;;,
-   7840;4;-0.008625,0.159173,-0.125603,0.979190;;,
-   8000;4;-0.022117,0.114638,-0.064353,0.991074;;,
-   8160;4;-0.019156,0.060735,-0.004436,0.997960;;,
-   8320;4;-0.019277,0.004627,0.055770,0.998247;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;-0.204093,0.373473,0.035406;;,
-   160;3;-0.194563,0.363211,-0.040130;;,
-   320;3;-0.183509,0.339564,-0.118182;;,
-   480;3;-0.174599,0.318293,-0.180401;;,
-   640;3;-0.170572,0.303583,-0.206789;;,
-   800;3;-0.169798,0.295011,-0.212309;;,
-   960;3;-0.169664,0.289945,-0.217065;;,
-   1120;3;-0.169581,0.285045,-0.221501;;,
-   1280;3;-0.169548,0.280301,-0.225645;;,
-   1440;3;-0.169563,0.275704,-0.229520;;,
-   1600;3;-0.169626,0.271246,-0.233154;;,
-   1760;3;-0.169733,0.266917,-0.236571;;,
-   1920;3;-0.169884,0.262709,-0.239797;;,
-   2080;3;-0.170077,0.258612,-0.242857;;,
-   2240;3;-0.170310,0.254618,-0.245778;;,
-   2400;3;-0.170582,0.250718,-0.248585;;,
-   2560;3;-0.170891,0.246903,-0.251303;;,
-   2720;3;-0.171236,0.243163,-0.253958;;,
-   2880;3;-0.171615,0.239490,-0.256576;;,
-   3040;3;-0.172026,0.235876,-0.259182;;,
-   3200;3;-0.180246,0.250773,-0.239603;;,
-   3360;3;-0.260703,0.321288,-0.014368;;,
-   3520;3;-0.182892,0.075716,0.387955;;,
-   3680;3;-0.162053,0.014167,0.401350;;,
-   3840;3;-0.145474,-0.033315,0.405655;;,
-   4000;3;-0.137970,-0.048689,0.403116;;,
-   4160;3;-0.130507,-0.063186,0.399783;;,
-   4320;3;-0.123301,-0.076460,0.395910;;,
-   4480;3;-0.116565,-0.088167,0.391752;;,
-   4640;3;-0.110513,-0.097961,0.387561;;,
-   4800;3;-0.105358,-0.105497,0.383592;;,
-   4960;3;-0.101315,-0.110429,0.380099;;,
-   5120;3;-0.098598,-0.112411,0.377336;;,
-   5280;3;-0.097721,-0.110450,0.375855;;,
-   5440;3;-0.100263,-0.101067,0.377017;;,
-   5600;3;-0.105610,-0.085187,0.379633;;,
-   5760;3;-0.112800,-0.064468,0.382143;;,
-   5920;3;-0.120870,-0.040562,0.382986;;,
-   6080;3;-0.128859,-0.015125,0.380599;;,
-   6240;3;-0.137769,0.014048,0.376531;;,
-   6400;3;-0.148426,0.048430,0.372110;;,
-   6560;3;-0.159598,0.085261,0.365446;;,
-   6720;3;-0.170053,0.121786,0.354649;;,
-   6880;3;-0.178557,0.155249,0.337829;;,
-   7040;3;-0.184224,0.183630,0.313693;;,
-   7200;3;-0.188432,0.209763,0.284951;;,
-   7360;3;-0.191693,0.234576,0.252888;;,
-   7520;3;-0.194233,0.258385,0.218301;;,
-   7680;3;-0.196281,0.281509,0.181988;;,
-   7840;3;-0.198064,0.304262,0.144745;;,
-   8000;3;-0.199808,0.326963,0.107368;;,
-   8160;3;-0.201743,0.349927,0.070656;;,
-   8320;3;-0.204094,0.373473,0.035406;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Calf }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.962335,-0.000000,-0.271867,-0.000000;;,
-   160;4;0.966119,-0.000000,-0.258098,-0.000000;;,
-   320;4;0.970050,0.000000,-0.242907,0.000000;;,
-   480;4;0.973741,0.000000,-0.227658,0.000000;;,
-   640;4;0.976893,-0.000000,-0.213730,0.000000;;,
-   800;4;0.979278,0.000000,-0.202522,0.000000;;,
-   960;4;0.980716,-0.000000,-0.195441,0.000000;;,
-   1120;4;0.981509,0.000000,-0.191414,0.000000;;,
-   1280;4;0.982101,-0.000000,-0.188353,0.000000;;,
-   1440;4;0.982523,-0.000000,-0.186139,0.000000;;,
-   1600;4;0.982804,-0.000000,-0.184654,0.000000;;,
-   1760;4;0.982968,0.000000,-0.183775,0.000000;;,
-   1920;4;0.983041,-0.000000,-0.183385,0.000000;;,
-   2080;4;0.983046,-0.000000,-0.183361,0.000000;;,
-   2240;4;0.983004,-0.000000,-0.183583,0.000000;;,
-   2400;4;0.982939,-0.000000,-0.183931,0.000000;;,
-   2560;4;0.982873,-0.000000,-0.184284,0.000000;;,
-   2720;4;0.982828,-0.000000,-0.184522,-0.000000;;,
-   2880;4;0.982828,-0.000000,-0.184523,-0.000000;;,
-   3040;4;0.982895,-0.000000,-0.184168,-0.000000;;,
-   3200;4;0.982952,-0.000000,-0.183862,-0.000000;;,
-   3360;4;0.942212,-0.000000,-0.335017,0.000000;;,
-   3520;4;0.843614,0.000000,-0.536950,0.000000;;,
-   3680;4;0.843026,-0.000000,-0.537873,-0.000000;;,
-   3840;4;0.841884,-0.000000,-0.539659,-0.000000;;,
-   4000;4;0.840274,-0.000000,-0.542162,-0.000000;;,
-   4160;4;0.838377,-0.000000,-0.545091,-0.000000;;,
-   4320;4;0.836375,0.000000,-0.548157,-0.000000;;,
-   4480;4;0.834457,-0.000000,-0.551073,-0.000000;;,
-   4640;4;0.832813,-0.000000,-0.553554,-0.000000;;,
-   4800;4;0.831638,-0.000000,-0.555318,-0.000000;;,
-   4960;4;0.831127,-0.000000,-0.556083,-0.000000;;,
-   5120;4;0.831472,-0.000000,-0.555566,-0.000000;;,
-   5280;4;0.832862,-0.000000,-0.553481,-0.000000;;,
-   5440;4;0.835473,0.000000,-0.549532,-0.000000;;,
-   5600;4;0.840626,-0.000000,-0.541616,-0.000000;;,
-   5760;4;0.853564,0.000000,-0.520989,-0.000000;;,
-   5920;4;0.870828,0.000000,-0.491589,-0.000000;;,
-   6080;4;0.888056,0.000000,-0.459736,-0.000000;;,
-   6240;4;0.901752,0.000000,-0.432253,-0.000000;;,
-   6400;4;0.912149,0.000000,-0.409858,0.000000;;,
-   6560;4;0.920508,0.000000,-0.390725,0.000000;;,
-   6720;4;0.925700,0.000000,-0.378258,0.000000;;,
-   6880;4;0.928129,0.000000,-0.372260,0.000000;;,
-   7040;4;0.929293,0.000000,-0.369344,0.000000;;,
-   7200;4;0.929769,0.000000,-0.368144,0.000000;;,
-   7360;4;0.930109,-0.000000,-0.367284,0.000000;;,
-   7520;4;0.930857,0.000000,-0.365384,0.000000;;,
-   7680;4;0.932542,0.000000,-0.361061,-0.000000;;,
-   7840;4;0.935656,0.000000,-0.352913,0.000000;;,
-   8000;4;0.942797,0.000000,-0.333367,-0.000000;;,
-   8160;4;0.953062,0.000000,-0.302775,-0.000000;;,
-   8320;4;0.962335,0.000000,-0.271868,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.474008,0.000000,-0.000000;;,
-   8320;3;0.474008,-0.000000,-0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Foot }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.963642,-0.014473,0.263486,-0.041950;;,
-   160;4;0.967791,-0.016618,0.247435,-0.043371;;,
-   320;4;0.972042,-0.018709,0.229712,-0.044909;;,
-   480;4;0.975896,-0.020880,0.212232,-0.046348;;,
-   640;4;0.978989,-0.023237,0.196941,-0.047479;;,
-   800;4;0.981067,-0.025862,0.185808,-0.048099;;,
-   960;4;0.982064,-0.028829,0.180013,-0.048106;;,
-   1120;4;0.982705,-0.032130,0.175966,-0.047907;;,
-   1280;4;0.983149,-0.035688,0.172856,-0.047592;;,
-   1440;4;0.983424,-0.039422,0.170581,-0.047178;;,
-   1600;4;0.983553,-0.043254,0.169038,-0.046683;;,
-   1760;4;0.983559,-0.047107,0.168123,-0.046123;;,
-   1920;4;0.983465,-0.050901,0.167731,-0.045513;;,
-   2080;4;0.983294,-0.054558,0.167758,-0.044868;;,
-   2240;4;0.983069,-0.058001,0.168098,-0.044200;;,
-   2400;4;0.982816,-0.061151,0.168643,-0.043518;;,
-   2560;4;0.982558,-0.063929,0.169288,-0.042830;;,
-   2720;4;0.982324,-0.066256,0.169924,-0.042144;;,
-   2880;4;0.982140,-0.068054,0.170445,-0.041464;;,
-   3040;4;0.982269,-0.065927,0.170643,-0.041017;;,
-   3200;4;0.980703,-0.044703,0.186382,-0.038530;;,
-   3360;4;0.947991,0.041306,0.313720,-0.034456;;,
-   3520;4;0.926301,0.092235,0.357823,-0.073629;;,
-   3680;4;0.930980,0.093522,0.345087,-0.073796;;,
-   3840;4;0.933086,0.097752,0.339362,-0.068027;;,
-   4000;4;0.935057,0.101965,0.333895,-0.061527;;,
-   4160;4;0.936909,0.106199,0.328561,-0.054503;;,
-   4320;4;0.938660,0.110487,0.323243,-0.047169;;,
-   4480;4;0.940325,0.114862,0.317831,-0.039739;;,
-   4640;4;0.941923,0.119355,0.312222,-0.032434;;,
-   4800;4;0.943474,0.123996,0.306322,-0.025472;;,
-   4960;4;0.944996,0.128813,0.300043,-0.019080;;,
-   5120;4;0.946510,0.133832,0.293303,-0.013482;;,
-   5280;4;0.948033,0.139074,0.286029,-0.008909;;,
-   5440;4;0.949582,0.144554,0.278150,-0.005592;;,
-   5600;4;0.951164,0.150902,0.269252,-0.004450;;,
-   5760;4;0.952778,0.160511,0.257618,-0.009085;;,
-   5920;4;0.954498,0.170515,0.243960,-0.018472;;,
-   6080;4;0.956587,0.177362,0.229234,-0.030605;;,
-   6240;4;0.959519,0.177699,0.214192,-0.043228;;,
-   6400;4;0.964063,0.170369,0.195241,-0.058633;;,
-   6560;4;0.969435,0.157293,0.171600,-0.077512;;,
-   6720;4;0.974268,0.140416,0.148385,-0.095226;;,
-   6880;4;0.977870,0.122394,0.131162,-0.107644;;,
-   7040;4;0.980048,0.106245,0.125889,-0.111219;;,
-   7200;4;0.981131,0.092113,0.131838,-0.107310;;,
-   7360;4;0.981480,0.078046,0.143449,-0.100140;;,
-   7520;4;0.980936,0.063783,0.159568,-0.090745;;,
-   7680;4;0.979357,0.049100,0.178978,-0.080102;;,
-   7840;4;0.976685,0.033874,0.200405,-0.069118;;,
-   8000;4;0.972993,0.018101,0.222531,-0.058624;;,
-   8160;4;0.968514,0.001907,0.244010,-0.049357;;,
-   8320;4;0.963642,-0.014473,0.263486,-0.041950;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.644109,-0.000000,0.000000;;,
-   8320;3;0.644109,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_Neck }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;1.000000,-0.000000,0.000000,-0.000000;;,
-   8320;4;1.000000,-0.000000,0.000000,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.683182,-0.000000,-0.000068;;,
-   8320;3;0.683182,0.000000,-0.000068;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Clavicle }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.016309,0.595591,0.802839,0.021317;;,
-   160;4;0.036660,0.596437,0.800573,0.044750;;,
-   320;4;0.058901,0.602888,0.792524,0.070438;;,
-   480;4;0.078990,0.614341,0.779456,0.093780;;,
-   640;4;0.093907,0.627258,0.765090,0.111202;;,
-   800;4;0.102484,0.636346,0.754932,0.120989;;,
-   960;4;0.107382,0.641301,0.749190,0.126159;;,
-   1120;4;0.111496,0.645475,0.744271,0.130351;;,
-   1280;4;0.114993,0.648855,0.740185,0.133754;;,
-   1440;4;0.118009,0.651476,0.736895,0.136525;;,
-   1600;4;0.120651,0.653404,0.734331,0.138796;;,
-   1760;4;0.123003,0.654732,0.732398,0.140672;;,
-   1920;4;0.125135,0.655570,0.730983,0.142244;;,
-   2080;4;0.127102,0.656044,0.729955,0.143588;;,
-   2240;4;0.128952,0.656289,0.729175,0.144777;;,
-   2400;4;0.130729,0.656452,0.728493,0.145875;;,
-   2560;4;0.132477,0.656684,0.727752,0.146947;;,
-   2720;4;0.134233,0.657146,0.726788,0.148054;;,
-   2880;4;0.136034,0.658004,0.725430,0.149253;;,
-   3040;4;0.137907,0.659432,0.723501,0.150594;;,
-   3200;4;0.135365,0.661864,0.722457,0.147204;;,
-   3360;4;-0.040163,0.663130,0.746022,-0.045780;;,
-   3520;4;-0.182283,0.624233,0.729076,-0.213436;;,
-   3680;4;-0.190819,0.620857,0.726643,-0.223862;;,
-   3840;4;-0.190102,0.621368,0.726611,-0.223160;;,
-   4000;4;-0.189693,0.622788,0.725600,-0.222835;;,
-   4160;4;-0.189469,0.624875,0.723892,-0.222740;;,
-   4320;4;-0.189306,0.627387,0.721763,-0.222726;;,
-   4480;4;-0.189088,0.630082,0.719491,-0.222654;;,
-   4640;4;-0.188711,0.632715,0.717356,-0.222396;;,
-   4800;4;-0.188082,0.635041,0.715638,-0.221834;;,
-   4960;4;-0.187117,0.636818,0.714612,-0.220860;;,
-   5120;4;-0.185737,0.637810,0.714546,-0.219370;;,
-   5280;4;-0.183853,0.637800,0.715690,-0.217251;;,
-   5440;4;-0.181358,0.636590,0.718267,-0.214371;;,
-   5600;4;-0.178116,0.634024,0.722461,-0.210568;;,
-   5760;4;-0.173943,0.629994,0.728400,-0.205633;;,
-   5920;4;-0.168598,0.624466,0.736137,-0.199298;;,
-   6080;4;-0.161668,0.617631,0.745564,-0.191128;;,
-   6240;4;-0.152928,0.610046,0.756128,-0.180905;;,
-   6400;4;-0.142417,0.602309,0.767128,-0.168693;;,
-   6560;4;-0.130265,0.595004,0.777873,-0.154641;;,
-   6720;4;-0.116704,0.588671,0.787734,-0.139008;;,
-   6880;4;-0.102069,0.583756,0.796172,-0.122151;;,
-   7040;4;-0.086781,0.580588,0.802784,-0.104517;;,
-   7200;4;-0.071314,0.579350,0.807321,-0.086607;;,
-   7360;4;-0.056158,0.580068,0.809700,-0.068938;;,
-   7520;4;-0.041773,0.582616,0.810006,-0.051996;;,
-   7680;4;-0.028546,0.586734,0.808466,-0.036198;;,
-   7840;4;-0.016762,0.592057,0.805426,-0.021859;;,
-   8000;4;-0.006583,0.598153,0.801303,-0.009169;;,
-   8160;4;0.002960,0.601481,0.798875,0.003326;;,
-   8320;4;0.016309,0.595591,0.802839,0.021317;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;-0.350493,0.270296,-0.099349;;,
-   8320;3;-0.350493,0.270296,-0.099349;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_UpperArm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.887679,0.258807,0.078934,0.372577;;,
-   160;4;0.892645,0.189353,-0.003622,0.409046;;,
-   320;4;0.895796,0.141891,-0.053850,0.417752;;,
-   480;4;0.904319,0.095134,-0.096460,0.404786;;,
-   640;4;0.909548,0.054835,-0.131487,0.390418;;,
-   800;4;0.912343,0.035508,-0.147675,0.380212;;,
-   960;4;0.914795,0.021608,-0.158261,0.370994;;,
-   1120;4;0.917192,0.009160,-0.166861,0.361708;;,
-   1280;4;0.919666,-0.001861,-0.173811,0.352138;;,
-   1440;4;0.922278,-0.011521,-0.179478,0.342138;;,
-   1600;4;0.925030,-0.019919,-0.184258,0.331619;;,
-   1760;4;0.927878,-0.027186,-0.188571,0.320538;;,
-   1920;4;0.930737,-0.033490,-0.192861,0.308888;;,
-   2080;4;0.933491,-0.039034,-0.197599,0.296690;;,
-   2240;4;0.935994,-0.044061,-0.203284,0.283988;;,
-   2400;4;0.938067,-0.048859,-0.210441,0.270846;;,
-   2560;4;0.940705,-0.048912,-0.218638,0.254713;;,
-   2720;4;0.944497,-0.041729,-0.226673,0.234100;;,
-   2880;4;0.948574,-0.030738,-0.234118,0.210837;;,
-   3040;4;0.952171,-0.019546,-0.240953,0.186895;;,
-   3200;4;0.955009,-0.010285,-0.249687,0.159711;;,
-   3360;4;0.996247,-0.047218,0.056905,-0.044994;;,
-   3520;4;0.907004,-0.419170,-0.010829,0.039034;;,
-   3680;4;0.905288,-0.419768,-0.019556,0.062177;;,
-   3840;4;0.906037,-0.416264,-0.022193,0.073003;;,
-   4000;4;0.906552,-0.412920,-0.024888,0.083919;;,
-   4160;4;0.907539,-0.408622,-0.026899,0.093154;;,
-   4320;4;0.909713,-0.402335,-0.027511,0.098955;;,
-   4480;4;0.913752,-0.393016,-0.025964,0.099607;;,
-   4640;4;0.919953,-0.380141,-0.021486,0.093372;;,
-   4800;4;0.926959,-0.366321,-0.014327,0.079689;;,
-   4960;4;0.934458,-0.350773,-0.004646,0.061029;;,
-   5120;4;0.942334,-0.332169,0.007406,0.040207;;,
-   5280;4;0.950461,-0.309444,0.021534,0.020115;;,
-   5440;4;0.958727,-0.281857,0.037228,0.003691;;,
-   5600;4;0.967008,-0.248955,0.053653,-0.006129;;,
-   5760;4;0.975762,-0.207473,0.069413,-0.004989;;,
-   5920;4;0.985937,-0.144339,0.082846,0.015173;;,
-   6080;4;0.991933,-0.069751,0.093834,0.048987;;,
-   6240;4;0.990508,0.001482,0.104662,0.089089;;,
-   6400;4;0.980776,0.068931,0.117303,0.139881;;,
-   6560;4;0.962465,0.132880,0.125016,0.200934;;,
-   6720;4;0.940855,0.182024,0.125588,0.256685;;,
-   6880;4;0.923656,0.211298,0.124046,0.294662;;,
-   7040;4;0.910000,0.227838,0.125204,0.322977;;,
-   7200;4;0.899309,0.236643,0.127697,0.344873;;,
-   7360;4;0.891349,0.241476,0.129033,0.361298;;,
-   7520;4;0.885654,0.245873,0.126248,0.373128;;,
-   7680;4;0.882810,0.250175,0.119012,0.379335;;,
-   7840;4;0.882915,0.252995,0.109833,0.379988;;,
-   8000;4;0.884632,0.254955,0.099554,0.377510;;,
-   8160;4;0.886643,0.256658,0.088969,0.374268;;,
-   8320;4;0.887679,0.258807,0.078934,0.372577;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.368394,0.000000,0.000000;;,
-   8320;3;0.368394,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Forearm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.940612,0.000000,-0.339484,0.000000;;,
-   160;4;0.913436,0.000000,-0.406983,0.000000;;,
-   320;4;0.883443,-0.000000,-0.468538,-0.000000;;,
-   480;4;0.862549,-0.000000,-0.505974,-0.000000;;,
-   640;4;0.847573,0.000000,-0.530679,-0.000000;;,
-   800;4;0.836257,0.000000,-0.548337,0.000000;;,
-   960;4;0.827453,0.000000,-0.561535,0.000000;;,
-   1120;4;0.819753,0.000000,-0.572718,0.000000;;,
-   1280;4;0.812166,0.000000,-0.583426,0.000000;;,
-   1440;4;0.804640,0.000000,-0.593763,0.000000;;,
-   1600;4;0.797193,0.000000,-0.603724,0.000000;;,
-   1760;4;0.789846,0.000000,-0.613305,0.000000;;,
-   1920;4;0.782619,0.000000,-0.622501,0.000000;;,
-   2080;4;0.775530,0.000000,-0.631310,0.000000;;,
-   2240;4;0.768601,-0.000000,-0.639729,0.000000;;,
-   2400;4;0.761849,0.000000,-0.647754,0.000000;;,
-   2560;4;0.755296,0.000000,-0.655384,0.000000;;,
-   2720;4;0.748960,0.000000,-0.662616,0.000000;;,
-   2880;4;0.742860,0.000000,-0.669447,0.000000;;,
-   3040;4;0.737015,0.000000,-0.675877,0.000000;;,
-   3200;4;0.731443,0.000000,-0.681902,0.000000;;,
-   3360;4;0.726817,0.000000,-0.686832,0.000000;;,
-   3520;4;0.726343,-0.000000,-0.687332,0.000000;;,
-   3680;4;0.728797,-0.000000,-0.684730,0.000000;;,
-   3840;4;0.732190,-0.000000,-0.681101,0.000000;;,
-   4000;4;0.734558,-0.000000,-0.678546,0.000000;;,
-   4160;4;0.735198,-0.000000,-0.677852,-0.000000;;,
-   4320;4;0.734927,-0.000000,-0.678146,0.000000;;,
-   4480;4;0.734084,-0.000000,-0.679058,0.000000;;,
-   4640;4;0.733008,-0.000000,-0.680220,0.000000;;,
-   4800;4;0.732038,0.000000,-0.681264,0.000000;;,
-   4960;4;0.731517,0.000000,-0.681823,0.000000;;,
-   5120;4;0.731788,0.000000,-0.681533,0.000000;;,
-   5280;4;0.733189,0.000000,-0.680025,0.000000;;,
-   5440;4;0.736053,0.000000,-0.676924,0.000000;;,
-   5600;4;0.740696,0.000000,-0.671840,0.000000;;,
-   5760;4;0.747411,0.000000,-0.664362,0.000000;;,
-   5920;4;0.759432,0.000000,-0.650587,0.000000;;,
-   6080;4;0.777677,0.000000,-0.628664,0.000000;;,
-   6240;4;0.799000,0.000000,-0.601331,-0.000000;;,
-   6400;4;0.820541,0.000000,-0.571588,-0.000000;;,
-   6560;4;0.839873,0.000000,-0.542783,-0.000000;;,
-   6720;4;0.855036,0.000000,-0.518569,-0.000000;;,
-   6880;4;0.866891,0.000000,-0.498498,-0.000000;;,
-   7040;4;0.877568,0.000000,-0.479453,-0.000000;;,
-   7200;4;0.887278,0.000000,-0.461235,-0.000000;;,
-   7360;4;0.896210,-0.000000,-0.443631,-0.000000;;,
-   7520;4;0.904529,0.000000,-0.426411,-0.000000;;,
-   7680;4;0.912383,-0.000000,-0.409338,-0.000000;;,
-   7840;4;0.919897,0.000000,-0.392160,-0.000000;;,
-   8000;4;0.927179,-0.000000,-0.374620,-0.000000;;,
-   8160;4;0.934314,0.000000,-0.356450,-0.000000;;,
-   8320;4;0.940612,0.000000,-0.339484,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.720928,0.000000,0.000000;;,
-   8320;3;0.720928,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bone007 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.023229,0.993651,-0.109791,0.008014;;,
-   8320;4;0.023229,0.993651,-0.109791,0.008014;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;-0.101230,0.009248,0.007879;;,
-   8320;3;-0.101230,0.009248,0.007879;;;
-  }
- }
-
- Animation {
-  
-  { Bone001 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000001;;,
-   8320;3;1.000000,1.000000,1.000001;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.723280,-0.631411,-0.184433,0.210170;;,
-   8320;4;0.723280,-0.631411,-0.184433,0.210170;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.608282,0.056153,0.406098;;,
-   8320;3;0.608282,0.056153,0.406098;;;
-  }
- }
-
- Animation {
-  
-  { Bone003 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000001,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.636288,0.728301,0.192047,0.166832;;,
-   8320;4;0.636288,0.728301,0.192047,0.166832;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.588581,-0.047331,-0.355481;;,
-   8320;3;0.588581,-0.047332,-0.355481;;;
-  }
- }
-
- Animation {
-  
-  { Bone005 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000001,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;-0.061568,0.940976,0.331623,-0.028267;;,
-   8320;4;-0.061568,0.940976,0.331623,-0.028267;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.610450,-0.596779,0.096287;;,
-   8320;3;0.610450,-0.596779,0.096287;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Clavicle }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.011940,-0.632466,0.774346,0.015247;;,
-   160;4;-0.090021,-0.638160,0.757730,0.102441;;,
-   320;4;-0.152402,-0.666917,0.710435,0.165160;;,
-   480;4;-0.212304,-0.669161,0.677711,0.218766;;,
-   640;4;-0.250511,-0.662050,0.660491,0.250372;;,
-   800;4;-0.266907,-0.662410,0.649256,0.261611;;,
-   960;4;-0.281899,-0.662528,0.638635,0.271540;;,
-   1120;4;-0.295672,-0.662340,0.628726,0.280335;;,
-   1280;4;-0.308397,-0.661816,0.619559,0.288164;;,
-   1440;4;-0.320236,-0.660954,0.611113,0.295179;;,
-   1600;4;-0.331334,-0.659777,0.603321,0.301524;;,
-   1760;4;-0.341827,-0.658323,0.596082,0.307329;;,
-   1920;4;-0.351840,-0.656648,0.589262,0.312718;;,
-   2080;4;-0.361488,-0.654816,0.582703,0.317805;;,
-   2240;4;-0.370878,-0.652901,0.576224,0.322700;;,
-   2400;4;-0.380108,-0.650987,0.569627,0.327504;;,
-   2560;4;-0.389270,-0.649164,0.562692,0.332314;;,
-   2720;4;-0.398445,-0.647529,0.555185,0.337222;;,
-   2880;4;-0.407704,-0.646187,0.546850,0.342309;;,
-   3040;4;-0.417105,-0.645253,0.537413,0.347648;;,
-   3200;4;-0.412783,-0.654333,0.535768,0.338248;;,
-   3360;4;-0.092147,-0.800646,0.588071,0.068166;;,
-   3520;4;0.229529,-0.790962,0.544824,-0.157677;;,
-   3680;4;0.242114,-0.788726,0.540284,-0.165486;;,
-   3840;4;0.246453,-0.790218,0.535569,-0.167283;;,
-   4000;4;0.251125,-0.792609,0.529272,-0.169050;;,
-   4160;4;0.255683,-0.795367,0.522396,-0.170646;;,
-   4320;4;0.259738,-0.797936,0.516003,-0.171976;;,
-   4480;4;0.262964,-0.799741,0.511212,-0.172995;;,
-   4640;4;0.265066,-0.800197,0.509172,-0.173688;;,
-   4800;4;0.265729,-0.798728,0.511020,-0.174014;;,
-   4960;4;0.264518,-0.794788,0.517809,-0.173830;;,
-   5120;4;0.261189,-0.787914,0.530109,-0.173079;;,
-   5280;4;0.257394,-0.778173,0.546194,-0.172823;;,
-   5440;4;0.252806,-0.766251,0.564959,-0.172541;;,
-   5600;4;0.246774,-0.752912,0.585504,-0.171496;;,
-   5760;4;0.238800,-0.738963,0.606889,-0.169099;;,
-   5920;4;0.228592,-0.725222,0.628161,-0.164965;;,
-   6080;4;0.216084,-0.712473,0.648407,-0.158930;;,
-   6240;4;0.201427,-0.701412,0.666810,-0.151041;;,
-   6400;4;0.184950,-0.692589,0.682704,-0.141520;;,
-   6560;4;0.167104,-0.686371,0.695620,-0.130704;;,
-   6720;4;0.148384,-0.682910,0.705310,-0.118971;;,
-   6880;4;0.129259,-0.682145,0.711753,-0.106668;;,
-   7040;4;0.110112,-0.683809,0.715147,-0.094052;;,
-   7200;4;0.091192,-0.687449,0.715889,-0.081247;;,
-   7360;4;0.072609,-0.692441,0.714562,-0.068234;;,
-   7520;4;0.054353,-0.697998,0.711922,-0.054874;;,
-   7680;4;0.033904,-0.706489,0.705940,-0.037044;;,
-   7840;4;0.008887,-0.710077,0.703971,-0.011685;;,
-   8000;4;-0.013854,-0.696599,0.717208,0.013097;;,
-   8160;4;-0.022189,-0.666572,0.744727,0.023893;;,
-   8320;4;-0.011940,-0.632466,0.774346,0.015247;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;-0.350493,-0.270296,-0.099347;;,
-   8320;3;-0.350493,-0.270296,-0.099347;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_UpperArm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.907525,-0.322084,-0.030061,-0.267873;;,
-   160;4;0.919703,-0.364411,-0.016890,-0.145137;;,
-   320;4;0.943741,-0.329621,-0.024208,-0.010814;;,
-   480;4;0.958584,-0.274023,-0.035554,0.069020;;,
-   640;4;0.969222,-0.221047,-0.040710,0.100451;;,
-   800;4;0.975562,-0.187577,-0.042592,0.106205;;,
-   960;4;0.980407,-0.158607,-0.044392,0.108051;;,
-   1120;4;0.984411,-0.130063,-0.046394,0.108935;;,
-   1280;4;0.987621,-0.101969,-0.048407,0.108924;;,
-   1440;4;0.990082,-0.074346,-0.050248,0.108102;;,
-   1600;4;0.991835,-0.047213,-0.051749,0.106569;;,
-   1760;4;0.992918,-0.020587,-0.052754,0.104438;;,
-   1920;4;0.993367,0.005521,-0.053116,0.101833;;,
-   2080;4;0.993215,0.031099,-0.052705,0.098891;;,
-   2240;4;0.992490,0.056137,-0.051401,0.095758;;,
-   2400;4;0.991219,0.080630,-0.049098,0.092589;;,
-   2560;4;0.989423,0.104570,-0.045702,0.089546;;,
-   2720;4;0.987119,0.127949,-0.041133,0.086797;;,
-   2880;4;0.986595,0.140977,-0.020681,0.079545;;,
-   3040;4;0.987096,0.144213,0.015963,0.067749;;,
-   3200;4;0.985849,0.147663,0.054319,0.057860;;,
-   3360;4;0.968362,-0.098950,0.227037,-0.030631;;,
-   3520;4;0.958572,0.083551,-0.233052,-0.140873;;,
-   3680;4;0.957479,0.089422,-0.240761,-0.131419;;,
-   3840;4;0.956391,0.088784,-0.246653,-0.128827;;,
-   4000;4;0.955177,0.088450,-0.253177,-0.125358;;,
-   4160;4;0.953851,0.088303,-0.260073,-0.121381;;,
-   4320;4;0.952436,0.088212,-0.267085,-0.117262;;,
-   4480;4;0.950971,0.088035,-0.273960,-0.113362;;,
-   4640;4;0.949507,0.087620,-0.280448,-0.110040;;,
-   4800;4;0.948108,0.086800,-0.286302,-0.107652;;,
-   4960;4;0.946842,0.085403,-0.291278,-0.106552;;,
-   5120;4;0.945777,0.083252,-0.295138,-0.107095;;,
-   5280;4;0.944966,0.080172,-0.297642,-0.109635;;,
-   5440;4;0.944442,0.075997,-0.298556,-0.114536;;,
-   5600;4;0.944194,0.070581,-0.297643,-0.122168;;,
-   5760;4;0.943632,0.064787,-0.295122,-0.135145;;,
-   5920;4;0.942221,0.059230,-0.291195,-0.154648;;,
-   6080;4;0.939984,0.053431,-0.285603,-0.178902;;,
-   6240;4;0.936970,0.046963,-0.278178,-0.206150;;,
-   6400;4;0.933299,0.039475,-0.268919,-0.234686;;,
-   6560;4;0.929181,0.030682,-0.258021,-0.262882;;,
-   6720;4;0.924928,0.020354,-0.245858,-0.289219;;,
-   6880;4;0.920951,0.008274,-0.232925,-0.312294;;,
-   7040;4;0.917737,-0.005827,-0.219748,-0.330810;;,
-   7200;4;0.915820,-0.022355,-0.206743,-0.343558;;,
-   7360;4;0.916165,-0.043190,-0.193432,-0.348368;;,
-   7520;4;0.920479,-0.075414,-0.175909,-0.340715;;,
-   7680;4;0.925618,-0.118380,-0.152994,-0.325285;;,
-   7840;4;0.927884,-0.169496,-0.124640,-0.307843;;,
-   8000;4;0.924617,-0.224719,-0.092418,-0.293332;;,
-   8160;4;0.915199,-0.278546,-0.059686,-0.285064;;,
-   8320;4;0.907525,-0.322084,-0.030061,-0.267873;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.368394,0.000000,-0.000000;;,
-   8320;3;0.368394,-0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Forearm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.892542,0.000000,-0.450965,-0.000000;;,
-   160;4;0.853886,0.000000,-0.520461,0.000000;;,
-   320;4;0.821425,0.000000,-0.570316,0.000000;;,
-   480;4;0.807772,0.000000,-0.589495,0.000000;;,
-   640;4;0.801409,0.000000,-0.598117,0.000000;;,
-   800;4;0.803613,0.000000,-0.595152,0.000000;;,
-   960;4;0.814071,0.000000,-0.580765,0.000000;;,
-   1120;4;0.826280,0.000000,-0.563260,0.000000;;,
-   1280;4;0.838947,-0.000000,-0.544213,0.000000;;,
-   1440;4;0.851879,0.000000,-0.523738,0.000000;;,
-   1600;4;0.864892,0.000000,-0.501959,0.000000;;,
-   1760;4;0.877810,0.000000,-0.479009,0.000000;;,
-   1920;4;0.890473,0.000000,-0.455036,0.000000;;,
-   2080;4;0.902735,0.000000,-0.430197,0.000000;;,
-   2240;4;0.914465,0.000000,-0.404664,0.000000;;,
-   2400;4;0.925553,0.000000,-0.378617,0.000000;;,
-   2560;4;0.935907,0.000000,-0.352247,0.000000;;,
-   2720;4;0.945455,0.000000,-0.325752,0.000000;;,
-   2880;4;0.954147,0.000000,-0.299339,0.000000;;,
-   3040;4;0.961952,-0.000000,-0.273218,0.000000;;,
-   3200;4;0.970156,0.000000,-0.242483,0.000000;;,
-   3360;4;0.999991,-0.000000,-0.004260,0.000000;;,
-   3520;4;0.997502,-0.000000,-0.070632,-0.000000;;,
-   3680;4;0.992819,0.000000,-0.119623,-0.000000;;,
-   3840;4;0.986293,0.000000,-0.165004,0.000000;;,
-   4000;4;0.977207,0.000000,-0.212287,0.000000;;,
-   4160;4;0.964830,0.000000,-0.262873,-0.000000;;,
-   4320;4;0.949309,0.000000,-0.314345,0.000000;;,
-   4480;4;0.931307,-0.000000,-0.364235,-0.000000;;,
-   4640;4;0.911973,-0.000000,-0.410250,0.000000;;,
-   4800;4;0.892873,-0.000000,-0.450309,-0.000000;;,
-   4960;4;0.875873,-0.000000,-0.482542,-0.000000;;,
-   5120;4;0.860931,-0.000000,-0.508721,0.000000;;,
-   5280;4;0.846966,-0.000000,-0.531647,0.000000;;,
-   5440;4;0.834418,-0.000000,-0.551132,-0.000000;;,
-   5600;4;0.823720,-0.000000,-0.566997,-0.000000;;,
-   5760;4;0.815283,0.000000,-0.579062,-0.000000;;,
-   5920;4;0.809488,0.000000,-0.587136,-0.000000;;,
-   6080;4;0.806671,0.000000,-0.591001,-0.000000;;,
-   6240;4;0.806983,0.000000,-0.590575,-0.000000;;,
-   6400;4;0.809661,0.000000,-0.586898,-0.000000;;,
-   6560;4;0.814241,0.000000,-0.580526,-0.000000;;,
-   6720;4;0.820351,0.000000,-0.571860,-0.000000;;,
-   6880;4;0.827614,0.000000,-0.561297,-0.000000;;,
-   7040;4;0.835662,0.000000,-0.549244,-0.000000;;,
-   7200;4;0.844142,0.000000,-0.536120,-0.000000;;,
-   7360;4;0.852725,0.000000,-0.522360,0.000000;;,
-   7520;4;0.861110,0.000000,-0.508419,0.000000;;,
-   7680;4;0.869024,0.000000,-0.494770,0.000000;;,
-   7840;4;0.876226,0.000000,-0.481901,0.000000;;,
-   8000;4;0.882498,0.000000,-0.470317,0.000000;;,
-   8160;4;0.887723,0.000000,-0.460379,-0.000000;;,
-   8320;4;0.892542,0.000000,-0.450965,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.720928,0.000000,-0.000000;;,
-   8320;3;0.720928,0.000000,-0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Hand }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.702076,0.701517,0.086463,-0.086532;;,
-   160;4;0.615266,0.782515,0.094241,-0.015379;;,
-   320;4;0.535832,0.837615,0.097719,0.041665;;,
-   480;4;0.459290,0.877777,0.100573,0.091895;;,
-   640;4;0.406742,0.899330,0.101112,0.124668;;,
-   800;4;0.377615,0.909326,0.101661,0.142122;;,
-   960;4;0.351647,0.917088,0.101973,0.157782;;,
-   1120;4;0.328355,0.923149,0.102204,0.171852;;,
-   1280;4;0.307215,0.927939,0.102432,0.184540;;,
-   1440;4;0.287680,0.931804,0.102667,0.196062;;,
-   1600;4;0.269186,0.935019,0.102864,0.206633;;,
-   1760;4;0.251159,0.937798,0.102932,0.216468;;,
-   1920;4;0.233018,0.940303,0.102742,0.225781;;,
-   2080;4;0.214178,0.942642,0.102128,0.234783;;,
-   2240;4;0.194535,0.944782,0.101097,0.243560;;,
-   2400;4;0.176333,0.946354,0.100662,0.251371;;,
-   2560;4;0.159301,0.947658,0.100786,0.257701;;,
-   2720;4;0.142674,0.949046,0.101233,0.262123;;,
-   2880;4;0.125688,0.950809,0.101782,0.264206;;,
-   3040;4;0.107581,0.953170,0.102245,0.263513;;,
-   3200;4;0.083612,0.959736,0.103913,0.247220;;,
-   3360;4;0.045757,0.984506,0.114065,0.125077;;,
-   3520;4;0.052589,0.991132,0.121230,0.013951;;,
-   3680;4;0.055496,0.990776,0.122638,-0.015599;;,
-   3840;4;0.052913,0.990743,0.123099,-0.021820;;,
-   4000;4;0.048373,0.990853,0.123464,-0.025064;;,
-   4160;4;0.042590,0.991065,0.123723,-0.025847;;,
-   4320;4;0.036278,0.991329,0.123857,-0.024685;;,
-   4480;4;0.030157,0.991597,0.123848,-0.022091;;,
-   4640;4;0.024949,0.991832,0.123698,-0.018580;;,
-   4800;4;0.021375,0.992014,0.123432,-0.014663;;,
-   4960;4;0.020156,0.992131,0.123097,-0.010853;;,
-   5120;4;0.022014,0.992163,0.122755,-0.007657;;,
-   5280;4;0.027668,0.992071,0.122465,-0.005585;;,
-   5440;4;0.037833,0.991762,0.122271,-0.005146;;,
-   5600;4;0.053553,0.991043,0.122151,-0.006682;;,
-   5760;4;0.076774,0.989517,0.121956,-0.009412;;,
-   5920;4;0.106616,0.986749,0.121617,-0.013018;;,
-   6080;4;0.141759,0.982316,0.121076,-0.017327;;,
-   6240;4;0.180855,0.975875,0.120287,-0.022158;;,
-   6400;4;0.222542,0.967220,0.119222,-0.027330;;,
-   6560;4;0.265465,0.956330,0.117878,-0.032663;;,
-   6720;4;0.308296,0.943393,0.116279,-0.037979;;,
-   6880;4;0.349761,0.928818,0.114478,-0.043109;;,
-   7040;4;0.389309,0.912948,0.112524,-0.047979;;,
-   7200;4;0.429823,0.894589,0.110263,-0.052967;;,
-   7360;4;0.471233,0.873485,0.107663,-0.058069;;,
-   7520;4;0.512859,0.849713,0.104734,-0.063201;;,
-   7680;4;0.554054,0.823444,0.101495,-0.068280;;,
-   7840;4;0.594215,0.794950,0.097982,-0.073233;;,
-   8000;4;0.632794,0.764597,0.094239,-0.077991;;,
-   8160;4;0.669315,0.732839,0.090324,-0.082494;;,
-   8320;4;0.702076,0.701517,0.086463,-0.086532;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.467667,0.000000,0.000000;;,
-   8320;3;0.467667,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger0 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.022302,0.970812,-0.042946,0.234911;;,
-   160;4;-0.027309,0.934741,-0.039639,0.352055;;,
-   320;4;-0.031120,0.894911,-0.036916,0.443626;;,
-   480;4;-0.034296,0.852001,-0.033964,0.521310;;,
-   640;4;-0.036241,0.821619,-0.032068,0.567979;;,
-   800;4;-0.036945,0.805711,-0.031034,0.590341;;,
-   960;4;-0.037590,0.790595,-0.030074,0.610444;;,
-   1120;4;-0.038176,0.776256,-0.029171,0.628584;;,
-   1280;4;-0.038708,0.762644,-0.028313,0.645038;;,
-   1440;4;-0.039195,0.749680,-0.027491,0.660067;;,
-   1600;4;-0.039648,0.737260,-0.026698,0.673916;;,
-   1760;4;-0.040079,0.725261,-0.025930,0.686817;;,
-   1920;4;-0.040503,0.713541,-0.025188,0.698988;;,
-   2080;4;-0.040935,0.701942,-0.024472,0.710635;;,
-   2240;4;-0.041394,0.690296,-0.023785,0.721951;;,
-   2400;4;-0.041897,0.678417,-0.023134,0.733116;;,
-   2560;4;-0.042465,0.666113,-0.022525,0.744300;;,
-   2720;4;-0.043117,0.653176,-0.021969,0.755658;;,
-   2880;4;-0.043483,0.644418,-0.021558,0.763132;;,
-   3040;4;-0.043505,0.640350,-0.021258,0.766556;;,
-   3200;4;-0.043614,0.635536,-0.020967,0.770553;;,
-   3360;4;-0.038946,0.767930,-0.028723,0.638703;;,
-   3520;4;-0.032069,0.884626,-0.036240,0.463783;;,
-   3680;4;-0.031156,0.895912,-0.037028,0.441587;;,
-   3840;4;-0.030601,0.901629,-0.037337,0.429809;;,
-   4000;4;-0.030048,0.907279,-0.037673,0.417758;;,
-   4160;4;-0.029504,0.912793,-0.038030,0.405577;;,
-   4320;4;-0.028976,0.918104,-0.038402,0.393410;;,
-   4480;4;-0.028469,0.923156,-0.038782,0.381405;;,
-   4640;4;-0.027988,0.927899,-0.039163,0.369713;;,
-   4800;4;-0.027537,0.932291,-0.039537,0.358487;;,
-   4960;4;-0.027118,0.936296,-0.039893,0.347884;;,
-   5120;4;-0.026734,0.939885,-0.040224,0.338059;;,
-   5280;4;-0.026387,0.943031,-0.040517,0.329172;;,
-   5440;4;-0.026078,0.945713,-0.040763,0.321380;;,
-   5600;4;-0.025799,0.948040,-0.040972,0.314446;;,
-   5760;4;-0.025536,0.950154,-0.041161,0.307996;;,
-   5920;4;-0.025287,0.952079,-0.041330,0.301990;;,
-   6080;4;-0.025051,0.953839,-0.041482,0.296385;;,
-   6240;4;-0.024825,0.955454,-0.041618,0.291136;;,
-   6400;4;-0.024609,0.956944,-0.041740,0.286200;;,
-   6560;4;-0.024401,0.958328,-0.041850,0.281532;;,
-   6720;4;-0.024199,0.959623,-0.041950,0.277089;;,
-   6880;4;-0.024002,0.960845,-0.042042,0.272824;;,
-   7040;4;-0.023809,0.962010,-0.042129,0.268692;;,
-   7200;4;-0.023619,0.963131,-0.042214,0.264648;;,
-   7360;4;-0.023431,0.964223,-0.042297,0.260645;;,
-   7520;4;-0.023244,0.965298,-0.042384,0.256638;;,
-   7680;4;-0.023058,0.966368,-0.042475,0.252581;;,
-   7840;4;-0.022871,0.967445,-0.042574,0.248426;;,
-   8000;4;-0.022683,0.968538,-0.042683,0.244127;;,
-   8160;4;-0.022493,0.969657,-0.042806,0.239638;;,
-   8320;4;-0.022302,0.970812,-0.042946,0.234911;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.109410,0.045819,0.212764;;,
-   8320;3;0.109410,0.045819,0.212764;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger01 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.958898,-0.000000,0.283752,0.000000;;,
-   160;4;0.977944,0.000000,0.208867,0.000000;;,
-   320;4;0.990541,0.000000,0.137218,-0.000000;;,
-   480;4;0.995780,-0.000000,0.091772,-0.000000;;,
-   640;4;0.998140,0.000000,0.060971,-0.000000;;,
-   800;4;0.999262,-0.000000,0.038418,-0.000000;;,
-   960;4;0.999779,-0.000000,0.021006,-0.000000;;,
-   1120;4;0.999983,-0.000000,0.005790,0.000000;;,
-   1280;4;0.999967,-0.000000,-0.008152,-0.000000;;,
-   1440;4;0.999780,-0.000000,-0.020988,-0.000000;;,
-   1600;4;0.999457,-0.000000,-0.032952,-0.000000;;,
-   1760;4;0.999019,-0.000000,-0.044279,0.000000;;,
-   1920;4;0.998475,-0.000000,-0.055206,0.000000;;,
-   2080;4;0.997822,-0.000000,-0.065966,0.000000;;,
-   2240;4;0.997047,-0.000000,-0.076796,-0.000000;;,
-   2400;4;0.996127,-0.000000,-0.087928,-0.000000;;,
-   2560;4;0.995028,-0.000000,-0.099596,-0.000000;;,
-   2720;4;0.993705,-0.000000,-0.112031,0.000000;;,
-   2880;4;0.992098,-0.000000,-0.125463,-0.000000;;,
-   3040;4;0.990135,-0.000000,-0.140119,-0.000000;;,
-   3200;4;0.983055,-0.000000,-0.183311,-0.000000;;,
-   3360;4;0.977029,-0.000000,-0.213105,0.000000;;,
-   3520;4;0.973211,0.000000,-0.229916,-0.000000;;,
-   3680;4;0.974782,0.000000,-0.223160,-0.000000;;,
-   3840;4;0.981063,0.000000,-0.193691,0.000000;;,
-   4000;4;0.987505,0.000000,-0.157588,-0.000000;;,
-   4160;4;0.993124,0.000000,-0.117070,0.000000;;,
-   4320;4;0.997226,0.000000,-0.074438,-0.000000;;,
-   4480;4;0.999486,0.000000,-0.032056,0.000000;;,
-   4640;4;0.999970,0.000000,0.007687,-0.000000;;,
-   4800;4;0.999100,-0.000000,0.042416,0.000000;;,
-   4960;4;0.997497,-0.000000,0.070711,-0.000000;;,
-   5120;4;0.995323,-0.000000,0.096602,-0.000000;;,
-   5280;4;0.992671,-0.000000,0.120851,0.000000;;,
-   5440;4;0.989665,-0.000000,0.143400,-0.000000;;,
-   5600;4;0.986427,0.000000,0.164199,-0.000000;;,
-   5760;4;0.983075,-0.000000,0.183202,-0.000000;;,
-   5920;4;0.979722,0.000000,0.200364,-0.000000;;,
-   6080;4;0.976472,-0.000000,0.215644,0.000000;;,
-   6240;4;0.973426,0.000000,0.229004,-0.000000;;,
-   6400;4;0.970673,-0.000000,0.240403,0.000000;;,
-   6560;4;0.968319,-0.000000,0.249717,-0.000000;;,
-   6720;4;0.966401,0.000000,0.257041,-0.000000;;,
-   6880;4;0.964886,-0.000000,0.262668,0.000000;;,
-   7040;4;0.963729,0.000000,0.266885,-0.000000;;,
-   7200;4;0.962867,0.000000,0.269978,0.000000;;,
-   7360;4;0.962233,0.000000,0.272229,0.000000;;,
-   7520;4;0.961753,0.000000,0.273919,0.000000;;,
-   7680;4;0.961350,0.000000,0.275329,0.000000;;,
-   7840;4;0.960945,0.000000,0.276739,0.000000;;,
-   8000;4;0.960457,0.000000,0.278427,0.000000;;,
-   8160;4;0.959804,0.000000,0.280672,0.000000;;,
-   8320;4;0.958898,-0.000000,0.283752,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.204449,0.000000,0.000000;;,
-   8320;3;0.204449,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger1 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.904353,0.011772,0.425945,0.024060;;,
-   160;4;0.945486,0.009010,0.324567,0.025118;;,
-   320;4;0.969377,0.006936,0.244122,0.025801;;,
-   480;4;0.984633,0.005014,0.172587,0.026192;;,
-   640;4;0.992907,0.003489,0.115845,0.026529;;,
-   800;4;0.996137,0.002654,0.083622,0.026658;;,
-   960;4;0.997912,0.002015,0.058760,0.026731;;,
-   1120;4;0.998955,0.001449,0.037011,0.026783;;,
-   1280;4;0.999482,0.000939,0.017782,0.026808;;,
-   1440;4;0.999641,0.000471,0.000470,0.026806;;,
-   1600;4;0.999521,0.000031,-0.015531,0.026784;;,
-   1760;4;0.999167,-0.000396,-0.030832,0.026749;;,
-   1920;4;0.998582,-0.000821,-0.046043,0.026712;;,
-   2080;4;0.997733,-0.001256,-0.061771,0.026688;;,
-   2240;4;0.996546,-0.001713,-0.078623,0.026694;;,
-   2400;4;0.994964,-0.002188,-0.096580,0.026734;;,
-   2560;4;0.993230,-0.002626,-0.113017,0.026728;;,
-   2720;4;0.991258,-0.003061,-0.129177,0.026668;;,
-   2880;4;0.988778,-0.003542,-0.146968,0.026570;;,
-   3040;4;0.985376,-0.004116,-0.168275,0.026459;;,
-   3200;4;0.977585,-0.005206,-0.208832,0.026266;;,
-   3360;4;0.955565,-0.007475,-0.293565,0.025697;;,
-   3520;4;0.950658,-0.007880,-0.309086,0.025547;;,
-   3680;4;0.961071,-0.006916,-0.275002,0.025872;;,
-   3840;4;0.972787,-0.005721,-0.230135,0.026287;;,
-   4000;4;0.982329,-0.004572,-0.185238,0.026392;;,
-   4160;4;0.989479,-0.003445,-0.142246,0.026182;;,
-   4320;4;0.994979,-0.002217,-0.096613,0.026027;;,
-   4480;4;0.998422,-0.000938,-0.049780,0.025958;;,
-   4640;4;0.999657,0.000337,-0.003224,0.025987;;,
-   4800;4;0.998794,0.001557,0.041569,0.026099;;,
-   4960;4;0.996189,0.002672,0.083135,0.026261;;,
-   5120;4;0.992410,0.003635,0.120050,0.026420;;,
-   5280;4;0.988104,0.004424,0.151417,0.026512;;,
-   5440;4;0.983415,0.005125,0.179346,0.026510;;,
-   5600;4;0.978482,0.005769,0.204551,0.026425;;,
-   5760;4;0.973439,0.006366,0.227345,0.026273;;,
-   5920;4;0.968375,0.006924,0.248038,0.026072;;,
-   6080;4;0.963338,0.007448,0.266941,0.025846;;,
-   6240;4;0.958344,0.007940,0.284355,0.025617;;,
-   6400;4;0.953380,0.008403,0.300582,0.025413;;,
-   6560;4;0.948410,0.008835,0.315915,0.025261;;,
-   6720;4;0.943437,0.009232,0.330465,0.025176;;,
-   6880;4;0.938786,0.009581,0.343451,0.025091;;,
-   7040;4;0.934491,0.009886,0.354972,0.024992;;,
-   7200;4;0.930503,0.010155,0.365298,0.024879;;,
-   7360;4;0.926759,0.010398,0.374697,0.024757;;,
-   7520;4;0.923181,0.010623,0.383429,0.024627;;,
-   7680;4;0.919682,0.010838,0.391750,0.024495;;,
-   7840;4;0.916161,0.011051,0.399916,0.024366;;,
-   8000;4;0.912513,0.011272,0.408173,0.024245;;,
-   8160;4;0.908619,0.011510,0.416770,0.024141;;,
-   8320;4;0.904353,0.011772,0.425945,0.024060;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.241833,0.093362,-0.011522;;,
-   8320;3;0.241833,0.093362,-0.011521;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger11 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.568685,0.000000,0.822556,-0.000000;;,
-   160;4;0.663347,0.000000,0.748312,0.000000;;,
-   320;4;0.729575,-0.000000,0.683901,0.000000;;,
-   480;4;0.782165,0.000000,0.623072,0.000000;;,
-   640;4;0.820072,-0.000000,0.572260,0.000000;;,
-   800;4;0.840481,0.000000,0.541841,0.000000;;,
-   960;4;0.855255,0.000000,0.518207,-0.000000;;,
-   1120;4;0.867355,0.000000,0.497691,0.000000;;,
-   1280;4;0.877462,0.000000,0.479646,0.000000;;,
-   1440;4;0.886167,0.000000,0.463366,0.000000;;,
-   1600;4;0.893987,0.000000,0.448094,0.000000;;,
-   1760;4;0.901374,0.000000,0.433041,0.000000;;,
-   1920;4;0.908729,0.000000,0.417388,-0.000000;;,
-   2080;4;0.916389,0.000000,0.400288,-0.000000;;,
-   2240;4;0.924354,0.000000,0.381536,0.000000;;,
-   2400;4;0.931383,0.000000,0.364042,-0.000000;;,
-   2560;4;0.937853,0.000000,0.347032,-0.000000;;,
-   2720;4;0.944331,0.000000,0.328996,-0.000000;;,
-   2880;4;0.951262,0.000000,0.308385,-0.000000;;,
-   3040;4;0.958942,-0.000000,0.283603,-0.000000;;,
-   3200;4;0.971902,0.000000,0.235386,0.000000;;,
-   3360;4;0.995746,-0.000000,0.092137,-0.000000;;,
-   3520;4;0.999938,-0.000000,0.011134,-0.000000;;,
-   3680;4;0.999905,-0.000000,0.013789,-0.000000;;,
-   3840;4;0.999474,-0.000000,0.032439,-0.000000;;,
-   4000;4;0.998807,-0.000000,0.048836,-0.000000;;,
-   4160;4;0.997889,0.000000,0.064951,0.000000;;,
-   4320;4;0.996703,0.000000,0.081137,0.000000;;,
-   4480;4;0.995212,0.000000,0.097746,-0.000000;;,
-   4640;4;0.993351,0.000000,0.115124,0.000000;;,
-   4800;4;0.991033,0.000000,0.133616,-0.000000;;,
-   4960;4;0.988139,0.000000,0.153560,-0.000000;;,
-   5120;4;0.984518,-0.000000,0.175286,0.000000;;,
-   5280;4;0.979976,-0.000000,0.199114,0.000000;;,
-   5440;4;0.974279,-0.000000,0.225347,-0.000000;;,
-   5600;4;0.967129,-0.000000,0.254286,-0.000000;;,
-   5760;4;0.958227,0.000000,0.286009,-0.000000;;,
-   5920;4;0.947407,0.000000,0.320031,0.000000;;,
-   6080;4;0.934560,0.000000,0.355807,0.000000;;,
-   6240;4;0.919627,0.000000,0.392793,-0.000000;;,
-   6400;4;0.902615,0.000000,0.430448,-0.000000;;,
-   6560;4;0.883597,-0.000000,0.468248,0.000000;;,
-   6720;4;0.862716,0.000000,0.505689,-0.000000;;,
-   6880;4;0.840187,0.000000,0.542298,-0.000000;;,
-   7040;4;0.816291,0.000000,0.577641,-0.000000;;,
-   7200;4;0.791376,-0.000000,0.611330,0.000000;;,
-   7360;4;0.764959,0.000000,0.644079,-0.000000;;,
-   7520;4;0.736386,0.000000,0.676562,0.000000;;,
-   7680;4;0.705822,-0.000000,0.708389,0.000000;;,
-   7840;4;0.673485,0.000000,0.739201,-0.000000;;,
-   8000;4;0.639639,0.000000,0.768675,-0.000000;;,
-   8160;4;0.604590,-0.000000,0.796537,0.000000;;,
-   8320;4;0.568685,-0.000000,0.822556,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.232215,0.000000,-0.000000;;,
-   8320;3;0.232215,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger2 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.907621,0.010628,0.419139,0.020824;;,
-   160;4;0.920152,0.009908,0.390875,0.020960;;,
-   320;4;0.932570,0.009162,0.360250,0.021187;;,
-   480;4;0.943967,0.008443,0.329232,0.021487;;,
-   640;4;0.953692,0.007796,0.299892,0.021819;;,
-   800;4;0.961342,0.007254,0.274370,0.022130;;,
-   960;4;0.966699,0.006844,0.254847,0.022356;;,
-   1120;4;0.970379,0.006535,0.240450,0.022502;;,
-   1280;4;0.973251,0.006279,0.228544,0.022617;;,
-   1440;4;0.975518,0.006061,0.218660,0.022702;;,
-   1600;4;0.977349,0.005871,0.210323,0.022761;;,
-   1760;4;0.978887,0.005699,0.203048,0.022798;;,
-   1920;4;0.980253,0.005534,0.196349,0.022818;;,
-   2080;4;0.981556,0.005368,0.189734,0.022828;;,
-   2240;4;0.982888,0.005191,0.182708,0.022836;;,
-   2400;4;0.984330,0.004995,0.174776,0.022851;;,
-   2560;4;0.985943,0.004771,0.165436,0.022882;;,
-   2720;4;0.987765,0.004511,0.154188,0.022941;;,
-   2880;4;0.990803,0.004024,0.133279,0.023013;;,
-   3040;4;0.994384,0.003322,0.103225,0.023119;;,
-   3200;4;0.997178,0.002583,0.071334,0.023237;;,
-   3360;4;0.943471,-0.006859,-0.330629,0.022351;;,
-   3520;4;0.848905,-0.011559,-0.528028,0.020323;;,
-   3680;4;0.871097,-0.010663,-0.490555,0.020807;;,
-   3840;4;0.899533,-0.009163,-0.436259,0.020851;;,
-   4000;4;0.925259,-0.007640,-0.378663,0.021256;;,
-   4160;4;0.947596,-0.006177,-0.318661,0.021872;;,
-   4320;4;0.966071,-0.004818,-0.257249,0.022532;;,
-   4480;4;0.980427,-0.003555,-0.195499,0.023048;;,
-   4640;4;0.990771,-0.002309,-0.133521,0.023240;;,
-   4800;4;0.997451,-0.000876,-0.067490,0.023135;;,
-   4960;4;0.999737,0.000695,-0.000325,0.022944;;,
-   5120;4;0.997696,0.002277,0.063848,0.022810;;,
-   5280;4;0.992387,0.003709,0.120971,0.022794;;,
-   5440;4;0.985650,0.004812,0.167177,0.022879;;,
-   5600;4;0.978801,0.005616,0.203451,0.022928;;,
-   5760;4;0.971981,0.006295,0.233860,0.022846;;,
-   5920;4;0.965503,0.006876,0.259314,0.022660;;,
-   6080;4;0.959504,0.007380,0.280704,0.022408;;,
-   6240;4;0.953994,0.007821,0.298905,0.022138;;,
-   6400;4;0.948881,0.008211,0.314767,0.021901;;,
-   6560;4;0.943997,0.008558,0.329123,0.021757;;,
-   6720;4;0.939405,0.008862,0.342008,0.021680;;,
-   6880;4;0.935290,0.009121,0.353106,0.021600;;,
-   7040;4;0.931608,0.009342,0.362708,0.021517;;,
-   7200;4;0.928296,0.009532,0.371102,0.021430;;,
-   7360;4;0.925277,0.009698,0.378568,0.021338;;,
-   7520;4;0.922460,0.009849,0.385383,0.021244;;,
-   7680;4;0.919744,0.009991,0.391821,0.021149;;,
-   7840;4;0.917023,0.010132,0.398150,0.021056;;,
-   8000;4;0.914179,0.010280,0.404638,0.020969;;,
-   8160;4;0.911089,0.010443,0.411548,0.020890;;,
-   8320;4;0.907621,0.010629,0.419139,0.020824;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.233957,-0.083313,-0.026921;;,
-   8320;3;0.233957,-0.083313,-0.026921;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger21 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.563974,-0.000000,0.825793,0.000000;;,
-   160;4;0.659387,0.000000,0.751804,-0.000000;;,
-   320;4;0.726155,0.000000,0.687532,-0.000000;;,
-   480;4;0.779178,-0.000000,0.626803,-0.000000;;,
-   640;4;0.817420,-0.000000,0.576042,0.000000;;,
-   800;4;0.838035,-0.000000,0.545617,0.000000;;,
-   960;4;0.852981,-0.000000,0.521942,0.000000;;,
-   1120;4;0.865238,-0.000000,0.501362,-0.000000;;,
-   1280;4;0.875486,-0.000000,0.483244,0.000000;;,
-   1440;4;0.884316,-0.000000,0.466890,0.000000;;,
-   1600;4;0.892243,-0.000000,0.451555,-0.000000;;,
-   1760;4;0.899723,-0.000000,0.436461,-0.000000;;,
-   1920;4;0.907154,-0.000000,0.420798,-0.000000;;,
-   2080;4;0.914878,-0.000000,0.403730,-0.000000;;,
-   2240;4;0.922896,-0.000000,0.385049,0.000000;;,
-   2400;4;0.929978,-0.000000,0.367614,-0.000000;;,
-   2560;4;0.936488,-0.000000,0.350699,-0.000000;;,
-   2720;4;0.942977,-0.000000,0.332857,-0.000000;;,
-   2880;4;0.949884,-0.000000,0.312602,-0.000000;;,
-   3040;4;0.957508,-0.000000,0.288406,-0.000000;;,
-   3200;4;0.970774,-0.000000,0.239997,-0.000000;;,
-   3360;4;0.991893,0.000000,0.127078,-0.000000;;,
-   3520;4;0.999588,0.000000,0.028713,-0.000000;;,
-   3680;4;0.999756,0.000000,0.022079,0.000000;;,
-   3840;4;0.999568,0.000000,0.029396,0.000000;;,
-   4000;4;0.998927,-0.000000,0.046320,0.000000;;,
-   4160;4;0.997651,-0.000000,0.068499,-0.000000;;,
-   4320;4;0.995797,-0.000000,0.091585,0.000000;;,
-   4480;4;0.993515,-0.000000,0.113704,-0.000000;;,
-   4640;4;0.990713,-0.000000,0.135970,-0.000000;;,
-   4800;4;0.987356,-0.000000,0.158520,-0.000000;;,
-   4960;4;0.983392,-0.000000,0.181492,-0.000000;;,
-   5120;4;0.978759,-0.000000,0.205017,-0.000000;;,
-   5280;4;0.973374,-0.000000,0.229222,0.000000;;,
-   5440;4;0.967145,-0.000000,0.254227,-0.000000;;,
-   5600;4;0.959958,-0.000000,0.280145,-0.000000;;,
-   5760;4;0.951684,-0.000000,0.307081,-0.000000;;,
-   5920;4;0.942174,-0.000000,0.335125,0.000000;;,
-   6080;4;0.931260,-0.000000,0.364355,0.000000;;,
-   6240;4;0.918753,-0.000000,0.394832,0.000000;;,
-   6400;4;0.904028,0.000000,0.427474,-0.000000;;,
-   6560;4;0.886551,-0.000000,0.462631,0.000000;;,
-   6720;4;0.866312,-0.000000,0.499504,-0.000000;;,
-   6880;4;0.843385,-0.000000,0.537310,-0.000000;;,
-   7040;4;0.817946,0.000000,0.575295,0.000000;;,
-   7200;4;0.790275,0.000000,0.612752,-0.000000;;,
-   7360;4;0.760758,-0.000000,0.649035,0.000000;;,
-   7520;4;0.729882,-0.000000,0.683573,-0.000000;;,
-   7680;4;0.698224,-0.000000,0.715879,0.000000;;,
-   7840;4;0.666254,0.000000,0.745725,-0.000000;;,
-   8000;4;0.633296,-0.000000,0.773910,0.000000;;,
-   8160;4;0.599202,0.000000,0.800598,-0.000000;;,
-   8320;4;0.563974,-0.000000,0.825793,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.241181,-0.000000,-0.000000;;,
-   8320;3;0.241182,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Thigh }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.092308,0.152471,-0.186596,0.966133;;,
-   160;4;0.097233,0.063489,-0.221519,0.968217;;,
-   320;4;0.131512,0.026028,-0.233329,0.963112;;,
-   480;4;0.190178,0.025901,-0.227416,0.954695;;,
-   640;4;0.222294,0.041308,-0.211577,0.950849;;,
-   800;4;0.220549,0.063596,-0.190041,0.954567;;,
-   960;4;0.213498,0.090441,-0.164991,0.958654;;,
-   1120;4;0.203838,0.120766,-0.137221,0.961788;;,
-   1280;4;0.193919,0.153097,-0.107913,0.962970;;,
-   1440;4;0.185605,0.185510,-0.078730,0.961737;;,
-   1600;4;0.180177,0.215707,-0.051765,0.958294;;,
-   1760;4;0.178341,0.241184,-0.029374,0.953500;;,
-   1920;4;0.179831,0.259696,-0.013723,0.948699;;,
-   2080;4;0.181429,0.271851,-0.004376,0.945072;;,
-   2240;4;0.182876,0.278957,-0.000196,0.942730;;,
-   2400;4;0.184754,0.282156,-0.000198,0.941411;;,
-   2560;4;0.187809,0.282579,-0.003404,0.940673;;,
-   2720;4;0.192859,0.281358,-0.008834,0.939981;;,
-   2880;4;0.203568,0.275761,-0.020282,0.939204;;,
-   3040;4;0.230049,0.252775,-0.053427,0.938258;;,
-   3200;4;0.257226,0.221307,-0.092960,0.936065;;,
-   3360;4;0.231935,0.509781,-0.083637,0.824218;;,
-   3520;4;0.305908,0.331663,-0.735251,0.505792;;,
-   3680;4;0.294611,0.299740,-0.778736,0.465759;;,
-   3840;4;0.283305,0.275991,-0.813423,0.426509;;,
-   4000;4;0.275503,0.252573,-0.844297,0.384015;;,
-   4160;4;0.273425,0.232919,-0.866546,0.346535;;,
-   4320;4;0.277862,0.220508,-0.877132,0.323743;;,
-   4480;4;0.288103,0.213876,-0.879536,0.312521;;,
-   4640;4;0.302081,0.209395,-0.879062,0.303562;;,
-   4800;4;0.318139,0.206792,-0.876076,0.297516;;,
-   4960;4;0.334670,0.205636,-0.871032,0.294981;;,
-   5120;4;0.350165,0.205392,-0.864472,0.296458;;,
-   5280;4;0.363230,0.205506,-0.856985,0.302337;;,
-   5440;4;0.372577,0.205498,-0.849145,0.312905;;,
-   5600;4;0.376993,0.205072,-0.841421,0.328380;;,
-   5760;4;0.375299,0.204231,-0.834066,0.348960;;,
-   5920;4;0.363548,0.207238,-0.825078,0.379645;;,
-   6080;4;0.342449,0.217585,-0.811013,0.421478;;,
-   6240;4;0.317744,0.233898,-0.790314,0.468758;;,
-   6400;4;0.294221,0.253373,-0.763018,0.516758;;,
-   6560;4;0.274725,0.271727,-0.730809,0.562680;;,
-   6720;4;0.259690,0.283811,-0.696301,0.605952;;,
-   6880;4;0.246506,0.284632,-0.661389,0.648679;;,
-   7040;4;0.228130,0.275678,-0.621426,0.696985;;,
-   7200;4;0.204560,0.262456,-0.573811,0.748340;;,
-   7360;4;0.178305,0.249077,-0.518580,0.798275;;,
-   7520;4;0.153065,0.237921,-0.458089,0.842685;;,
-   7680;4;0.133214,0.229651,-0.396676,0.878728;;,
-   7840;4;0.121047,0.217237,-0.339920,0.906979;;,
-   8000;4;0.112561,0.196564,-0.288337,0.930352;;,
-   8160;4;0.103907,0.172819,-0.238635,0.949942;;,
-   8320;4;0.092308,0.152471,-0.186596,0.966133;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;-0.135086,-0.385516,-0.034172;;,
-   160;3;-0.144166,-0.383172,0.042158;;,
-   320;3;-0.154601,-0.367702,0.122290;;,
-   480;3;-0.162965,-0.353103,0.186696;;,
-   640;3;-0.166715,-0.341534,0.215479;;,
-   800;3;-0.167168,-0.334358,0.223072;;,
-   960;3;-0.166759,-0.330974,0.229316;;,
-   1120;3;-0.166298,-0.327717,0.235228;;,
-   1280;3;-0.165786,-0.324584,0.240835;;,
-   1440;3;-0.165225,-0.321570,0.246166;;,
-   1600;3;-0.164616,-0.318673,0.251250;;,
-   1760;3;-0.163959,-0.315888,0.256115;;,
-   1920;3;-0.163257,-0.313210,0.260789;;,
-   2080;3;-0.162510,-0.310638,0.265300;;,
-   2240;3;-0.161719,-0.308165,0.269678;;,
-   2400;3;-0.160886,-0.305789,0.273951;;,
-   2560;3;-0.160012,-0.303505,0.278146;;,
-   2720;3;-0.159097,-0.301311,0.282293;;,
-   2880;3;-0.158144,-0.299201,0.286420;;,
-   3040;3;-0.157152,-0.297172,0.290556;;,
-   3200;3;-0.151748,-0.305088,0.285635;;,
-   3360;3;-0.057584,-0.408439,0.094763;;,
-   3520;3;-0.121532,-0.209768,-0.319436;;,
-   3680;3;-0.138357,-0.165029,-0.337056;;,
-   3840;3;-0.153078,-0.127627,-0.345212;;,
-   4000;3;-0.167795,-0.090318,-0.352685;;,
-   4160;3;-0.180924,-0.057834,-0.359216;;,
-   4320;3;-0.190882,-0.034914,-0.364545;;,
-   4480;3;-0.196614,-0.024750,-0.368733;;,
-   4640;3;-0.200354,-0.020848,-0.373314;;,
-   4800;3;-0.202683,-0.021364,-0.378003;;,
-   4960;3;-0.203720,-0.025779,-0.382177;;,
-   5120;3;-0.203584,-0.033574,-0.385213;;,
-   5280;3;-0.202395,-0.044233,-0.386490;;,
-   5440;3;-0.200273,-0.057238,-0.385384;;,
-   5600;3;-0.197337,-0.072071,-0.381274;;,
-   5760;3;-0.193283,-0.089439,-0.375135;;,
-   5920;3;-0.187939,-0.109923,-0.368244;;,
-   6080;3;-0.181617,-0.132815,-0.360423;;,
-   6240;3;-0.174633,-0.157407,-0.351496;;,
-   6400;3;-0.167299,-0.182993,-0.341287;;,
-   6560;3;-0.159929,-0.208865,-0.329618;;,
-   6720;3;-0.152837,-0.234316,-0.316312;;,
-   6880;3;-0.146336,-0.258639,-0.301194;;,
-   7040;3;-0.140741,-0.281127,-0.284086;;,
-   7200;3;-0.136365,-0.301073,-0.264811;;,
-   7360;3;-0.133626,-0.317819,-0.241068;;,
-   7520;3;-0.132450,-0.331703,-0.211699;;,
-   7680;3;-0.132409,-0.343507,-0.178239;;,
-   7840;3;-0.133078,-0.354009,-0.142222;;,
-   8000;3;-0.134031,-0.363991,-0.105183;;,
-   8160;3;-0.134842,-0.374233,-0.068654;;,
-   8320;3;-0.135086,-0.385516,-0.034172;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Calf }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.957334,-0.000000,-0.288984,-0.000000;;,
-   160;4;0.956725,0.000000,-0.290995,-0.000000;;,
-   320;4;0.956385,0.000000,-0.292108,0.000000;;,
-   480;4;0.954657,0.000000,-0.297708,0.000000;;,
-   640;4;0.950184,0.000000,-0.311689,0.000000;;,
-   800;4;0.944493,0.000000,-0.328530,0.000000;;,
-   960;4;0.937994,0.000000,-0.346653,0.000000;;,
-   1120;4;0.930736,0.000000,-0.365693,0.000000;;,
-   1280;4;0.922795,0.000000,-0.385292,0.000000;;,
-   1440;4;0.914272,0.000000,-0.405100,0.000000;;,
-   1600;4;0.905297,0.000000,-0.424780,0.000000;;,
-   1760;4;0.896025,0.000000,-0.444004,0.000000;;,
-   1920;4;0.886641,0.000000,-0.462458,0.000000;;,
-   2080;4;0.877354,0.000000,-0.479844,0.000000;;,
-   2240;4;0.868394,0.000000,-0.495876,0.000000;;,
-   2400;4;0.860008,0.000000,-0.510281,0.000000;;,
-   2560;4;0.852457,0.000000,-0.522798,0.000000;;,
-   2720;4;0.848110,-0.000000,-0.529820,0.000000;;,
-   2880;4;0.856225,0.000000,-0.516604,0.000000;;,
-   3040;4;0.869623,0.000000,-0.493717,0.000000;;,
-   3200;4;0.885268,-0.000000,-0.465081,-0.000000;;,
-   3360;4;0.949524,0.000000,-0.313693,0.000000;;,
-   3520;4;0.893956,-0.000000,-0.448154,0.000000;;,
-   3680;4;0.891755,-0.000000,-0.452520,0.000000;;,
-   3840;4;0.887604,-0.000000,-0.460607,0.000000;;,
-   4000;4;0.883097,-0.000000,-0.469191,0.000000;;,
-   4160;4;0.879932,-0.000000,-0.475100,0.000000;;,
-   4320;4;0.877793,-0.000000,-0.479040,0.000000;;,
-   4480;4;0.875250,-0.000000,-0.483671,0.000000;;,
-   4640;4;0.872399,-0.000000,-0.488794,0.000000;;,
-   4800;4;0.869342,-0.000000,-0.494211,0.000000;;,
-   4960;4;0.866182,-0.000000,-0.499729,-0.000000;;,
-   5120;4;0.863028,-0.000000,-0.505156,0.000000;;,
-   5280;4;0.859996,-0.000000,-0.510301,0.000000;;,
-   5440;4;0.857202,-0.000000,-0.514980,0.000000;;,
-   5600;4;0.854770,-0.000000,-0.519007,0.000000;;,
-   5760;4;0.852823,-0.000000,-0.522200,0.000000;;,
-   5920;4;0.851487,-0.000000,-0.524377,-0.000000;;,
-   6080;4;0.850884,-0.000000,-0.525353,-0.000000;;,
-   6240;4;0.851136,-0.000000,-0.524945,-0.000000;;,
-   6400;4;0.852355,-0.000000,-0.522963,-0.000000;;,
-   6560;4;0.854646,-0.000000,-0.519211,-0.000000;;,
-   6720;4;0.858346,-0.000000,-0.513072,-0.000000;;,
-   6880;4;0.864743,-0.000000,-0.502214,-0.000000;;,
-   7040;4;0.873443,-0.000000,-0.486927,-0.000000;;,
-   7200;4;0.883754,-0.000000,-0.467953,-0.000000;;,
-   7360;4;0.895006,-0.000000,-0.446055,-0.000000;;,
-   7520;4;0.906580,0.000000,-0.422033,-0.000000;;,
-   7680;4;0.917934,0.000000,-0.396734,0.000000;;,
-   7840;4;0.928613,0.000000,-0.371050,0.000000;;,
-   8000;4;0.938265,0.000000,-0.345918,0.000000;;,
-   8160;4;0.946634,0.000000,-0.322311,0.000000;;,
-   8320;4;0.957334,-0.000000,-0.288983,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.474008,-0.000000,0.000000;;,
-   8320;3;0.474008,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Foot }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.989997,0.028842,0.129209,0.048771;;,
-   160;4;0.973830,0.038599,0.207664,0.083910;;,
-   320;4;0.956832,0.041132,0.263348,0.115883;;,
-   480;4;0.950697,0.038072,0.273144,0.141837;;,
-   640;4;0.949546,0.033954,0.265418,0.163595;;,
-   800;4;0.949587,0.029891,0.259874,0.172790;;,
-   960;4;0.949270,0.025682,0.262090,0.171861;;,
-   1120;4;0.949163,0.021251,0.264606,0.169179;;,
-   1280;4;0.949215,0.016670,0.267339,0.165057;;,
-   1440;4;0.949370,0.012011,0.270209,0.159812;;,
-   1600;4;0.949578,0.007347,0.273141,0.153759;;,
-   1760;4;0.949792,0.002746,0.276071,0.147218;;,
-   1920;4;0.949970,-0.001720,0.278947,0.140512;;,
-   2080;4;0.950078,-0.005981,0.281727,0.133965;;,
-   2240;4;0.950088,-0.009971,0.284384,0.127906;;,
-   2400;4;0.949977,-0.013621,0.286899,0.122664;;,
-   2560;4;0.949728,-0.016866,0.289263,0.118569;;,
-   2720;4;0.949324,-0.019644,0.291469,0.115952;;,
-   2880;4;0.948291,-0.019715,0.293142,0.120097;;,
-   3040;4;0.944780,-0.009541,0.292252,0.147946;;,
-   3200;4;0.940767,0.002807,0.288714,0.177750;;,
-   3360;4;0.987358,-0.097804,-0.095226,0.080563;;,
-   3520;4;0.965536,-0.186588,0.178037,0.035043;;,
-   3680;4;0.962375,-0.155492,0.218479,0.043849;;,
-   3840;4;0.960878,-0.135604,0.236081,0.050907;;,
-   4000;4;0.958649,-0.115403,0.253258,0.059459;;,
-   4160;4;0.955857,-0.095873,0.269142,0.068624;;,
-   4320;4;0.952817,-0.077899,0.282989,0.077385;;,
-   4480;4;0.949959,-0.062270,0.294176,0.084626;;,
-   4640;4;0.947775,-0.049713,0.302159,0.089169;;,
-   4800;4;0.946615,-0.040652,0.306829,0.090130;;,
-   4960;4;0.945878,-0.033661,0.310333,0.088740;;,
-   5120;4;0.945459,-0.028159,0.313025,0.085610;;,
-   5280;4;0.945370,-0.023826,0.314844,0.081120;;,
-   5440;4;0.945613,-0.020357,0.315719,0.075659;;,
-   5600;4;0.946181,-0.017456,0.315578,0.069625;;,
-   5760;4;0.947068,-0.014831,0.314357,0.063420;;,
-   5920;4;0.948264,-0.012191,0.312005,0.057449;;,
-   6080;4;0.949758,-0.009236,0.308478,0.052114;;,
-   6240;4;0.951537,-0.005659,0.303742,0.047811;;,
-   6400;4;0.953580,-0.001138,0.297767,0.044927;;,
-   6560;4;0.955991,0.004443,0.290162,0.043210;;,
-   6720;4;0.958803,0.010814,0.280734,0.042058;;,
-   6880;4;0.961884,0.017734,0.269735,0.041327;;,
-   7040;4;0.965112,0.024961,0.257418,0.040884;;,
-   7200;4;0.968378,0.032250,0.244039,0.040614;;,
-   7360;4;0.971588,0.039358,0.229858,0.040421;;,
-   7520;4;0.974668,0.046034,0.215139,0.040231;;,
-   7680;4;0.977566,0.052025,0.200149,0.039994;;,
-   7840;4;0.980247,0.057076,0.185160,0.039681;;,
-   8000;4;0.982697,0.060926,0.170447,0.039284;;,
-   8160;4;0.985649,0.056607,0.153771,0.040586;;,
-   8320;4;0.989997,0.028842,0.129209,0.048771;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.644109,0.000000,-0.000000;;,
-   8320;3;0.644109,0.000000,-0.000000;;;
-  }
- }
-}
-
-AnimationSet Attack_1_Left {
- 
-
- Animation {
-  
-  { RO_013 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;0.393701,0.393701,0.393701;;,
-   8320;3;0.393701,0.393701,0.393701;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.707107,0.707107,0.000000,0.000000;;,
-   8320;4;0.707107,0.707107,0.000000,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.000000,0.000000,0.000000;;,
-   8320;3;0.000000,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.466373,0.466373,0.531504,0.531504;;,
-   160;4;-0.514465,0.514465,0.485104,0.485104;;,
-   320;4;-0.551012,0.551012,0.443155,0.443155;;,
-   480;4;-0.571978,0.571978,0.415742,0.415742;;,
-   640;4;-0.586069,0.586069,0.395630,0.395630;;,
-   800;4;-0.593054,0.593054,0.385081,0.385080;;,
-   960;4;-0.596072,0.596072,0.380392,0.380392;;,
-   1120;4;-0.598581,0.598581,0.376432,0.376432;;,
-   1280;4;-0.600641,0.600641,0.373136,0.373136;;,
-   1440;4;-0.602307,0.602308,0.370440,0.370440;;,
-   1600;4;-0.603634,0.603634,0.368274,0.368274;;,
-   1760;4;-0.604670,0.604670,0.366571,0.366570;;,
-   1920;4;-0.605464,0.605464,0.365257,0.365257;;,
-   2080;4;-0.606063,0.606063,0.364263,0.364263;;,
-   2240;4;-0.606512,0.606512,0.363516,0.363516;;,
-   2400;4;-0.606855,0.606855,0.362942,0.362942;;,
-   2560;4;-0.607138,0.607138,0.362469,0.362469;;,
-   2720;4;-0.607403,0.607403,0.362024,0.362024;;,
-   2880;4;-0.607696,0.607696,0.361532,0.361532;;,
-   3040;4;-0.609085,0.609085,0.359187,0.359187;;,
-   3200;4;-0.598764,0.598764,0.376141,0.376141;;,
-   3360;4;-0.516718,0.516718,0.482703,0.482703;;,
-   3520;4;-0.410586,0.410586,0.575690,0.575690;;,
-   3680;4;-0.384112,0.384112,0.593682,0.593682;;,
-   3840;4;-0.375537,0.375537,0.599143,0.599143;;,
-   4000;4;-0.364648,0.364648,0.605832,0.605831;;,
-   4160;4;-0.353291,0.353291,0.612524,0.612524;;,
-   4320;4;-0.341959,0.341959,0.618922,0.618922;;,
-   4480;4;-0.331164,0.331164,0.624764,0.624764;;,
-   4640;4;-0.321437,0.321437,0.629824,0.629824;;,
-   4800;4;-0.313320,0.313320,0.633901,0.633901;;,
-   4960;4;-0.307362,0.307362,0.636811,0.636811;;,
-   5120;4;-0.304109,0.304109,0.638371,0.638371;;,
-   5280;4;-0.304117,0.304117,0.638367,0.638367;;,
-   5440;4;-0.307590,0.307590,0.636701,0.636701;;,
-   5600;4;-0.313939,0.313939,0.633595,0.633595;;,
-   5760;4;-0.322498,0.322498,0.629282,0.629282;;,
-   5920;4;-0.332602,0.332602,0.624000,0.624000;;,
-   6080;4;-0.343596,0.343596,0.618014,0.618014;;,
-   6240;4;-0.354844,0.354844,0.611625,0.611625;;,
-   6400;4;-0.365732,0.365732,0.605178,0.605178;;,
-   6560;4;-0.375672,0.375672,0.599058,0.599058;;,
-   6720;4;-0.384335,0.384335,0.593538,0.593537;;,
-   6880;4;-0.392784,0.392784,0.587980,0.587980;;,
-   7040;4;-0.401217,0.401217,0.582259,0.582259;;,
-   7200;4;-0.409619,0.409619,0.576379,0.576379;;,
-   7360;4;-0.417975,0.417975,0.570348,0.570348;;,
-   7520;4;-0.426270,0.426270,0.564175,0.564175;;,
-   7680;4;-0.434492,0.434492,0.557868,0.557868;;,
-   7840;4;-0.442625,0.442625,0.551437,0.551437;;,
-   8000;4;-0.450658,0.450658,0.544892,0.544892;;,
-   8160;4;-0.458578,0.458578,0.538244,0.538244;;,
-   8320;4;-0.466373,0.466373,0.531504,0.531504;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;0.000000,0.000000,1.355805;;,
-   160;3;-0.054481,-0.063120,1.351132;;,
-   320;3;-0.111848,-0.129041,1.346306;;,
-   480;3;-0.160295,-0.185454,1.341868;;,
-   640;3;-0.186185,-0.218076,1.338438;;,
-   800;3;-0.198803,-0.237423,1.335676;;,
-   960;3;-0.203743,-0.248605,1.333249;;,
-   1120;3;-0.204351,-0.254134,1.330905;;,
-   1280;3;-0.203974,-0.256519,1.328389;;,
-   1440;3;-0.203848,-0.257599,1.325701;;,
-   1600;3;-0.203044,-0.257630,1.323009;;,
-   1760;3;-0.201657,-0.256743,1.320313;;,
-   1920;3;-0.199784,-0.255072,1.317610;;,
-   2080;3;-0.197519,-0.252750,1.314900;;,
-   2240;3;-0.194959,-0.249910,1.312182;;,
-   2400;3;-0.192200,-0.246683,1.309456;;,
-   2560;3;-0.189335,-0.243204,1.306719;;,
-   2720;3;-0.186462,-0.239605,1.303971;;,
-   2880;3;-0.183676,-0.236018,1.301212;;,
-   3040;3;-0.181072,-0.232577,1.298439;;,
-   3200;3;-0.176019,-0.218496,1.294950;;,
-   3360;3;-0.037448,0.254523,1.277242;;,
-   3520;3;0.102884,0.666370,1.260536;;,
-   3680;3;0.107684,0.680069,1.259554;;,
-   3840;3;0.107669,0.679570,1.259609;;,
-   4000;3;0.107098,0.678082,1.259481;;,
-   4160;3;0.106134,0.675877,1.259234;;,
-   4320;3;0.104938,0.673222,1.258927;;,
-   4480;3;0.103672,0.670389,1.258623;;,
-   4640;3;0.102498,0.667647,1.258382;;,
-   4800;3;0.101578,0.665266,1.258267;;,
-   4960;3;0.101074,0.663515,1.258340;;,
-   5120;3;0.101148,0.662665,1.258660;;,
-   5280;3;0.101962,0.662985,1.259291;;,
-   5440;3;0.103678,0.664745,1.260292;;,
-   5600;3;0.106458,0.668216,1.261727;;,
-   5760;3;0.110464,0.673666,1.263656;;,
-   5920;3;0.116040,0.681509,1.266218;;,
-   6080;3;0.124205,0.692623,1.269840;;,
-   6240;3;0.134698,0.706804,1.274422;;,
-   6400;3;0.147051,0.723678,1.279779;;,
-   6560;3;0.160797,0.742872,1.285725;;,
-   6720;3;0.175467,0.764011,1.292074;;,
-   6880;3;0.190594,0.786724,1.298640;;,
-   7040;3;0.205710,0.810636,1.305237;;,
-   7200;3;0.220346,0.835375,1.311680;;,
-   7360;3;0.234036,0.860568,1.317782;;,
-   7520;3;0.247249,0.888765,1.323794;;,
-   7680;3;0.260714,0.921708,1.330041;;,
-   7840;3;0.274345,0.957814,1.336443;;,
-   8000;3;0.288060,0.995503,1.342923;;,
-   8160;3;0.301776,1.033191,1.349403;;,
-   8320;3;0.315407,1.069298,1.355805;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_Pelvis }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.484263,0.511749,0.487866,0.515354;;,
-   160;4;-0.482698,0.512974,0.486330,0.517053;;,
-   320;4;-0.481146,0.514204,0.484759,0.518750;;,
-   480;4;-0.479606,0.515439,0.483157,0.520442;;,
-   640;4;-0.478077,0.516681,0.481526,0.522126;;,
-   800;4;-0.476559,0.517931,0.479868,0.523799;;,
-   960;4;-0.475051,0.519190,0.478186,0.525458;;,
-   1120;4;-0.473552,0.520459,0.476484,0.527099;;,
-   1280;4;-0.472062,0.521739,0.474763,0.528722;;,
-   1440;4;-0.470579,0.523030,0.473027,0.530321;;,
-   1600;4;-0.469103,0.524334,0.471279,0.531896;;,
-   1760;4;-0.467633,0.525651,0.469521,0.533443;;,
-   1920;4;-0.466168,0.526982,0.467757,0.534959;;,
-   2080;4;-0.464707,0.528328,0.465990,0.536442;;,
-   2240;4;-0.463249,0.529690,0.464223,0.537890;;,
-   2400;4;-0.461795,0.531068,0.462459,0.539300;;,
-   2560;4;-0.460341,0.532463,0.460701,0.540669;;,
-   2720;4;-0.458888,0.533877,0.458952,0.541996;;,
-   2880;4;-0.457435,0.535309,0.457216,0.543278;;,
-   3040;4;-0.455981,0.536760,0.455497,0.544512;;,
-   3200;4;-0.453348,0.539392,0.457335,0.542566;;,
-   3360;4;-0.397940,0.581418,0.571855,0.420213;;,
-   3520;4;-0.524588,0.470336,0.528094,0.474035;;,
-   3680;4;-0.527780,0.467481,0.520876,0.481246;;,
-   3840;4;-0.524696,0.471733,0.517085,0.484546;;,
-   4000;4;-0.521205,0.476283,0.513152,0.488032;;,
-   4160;4;-0.517357,0.481041,0.509127,0.491661;;,
-   4320;4;-0.513207,0.485920,0.505061,0.495392;;,
-   4480;4;-0.508812,0.490836,0.501005,0.499184;;,
-   4640;4;-0.504238,0.495711,0.497006,0.502991;;,
-   4800;4;-0.499554,0.500470,0.493114,0.506768;;,
-   4960;4;-0.494834,0.505045,0.489376,0.510471;;,
-   5120;4;-0.490156,0.509370,0.485840,0.514051;;,
-   5280;4;-0.485605,0.513387,0.482550,0.517463;;,
-   5440;4;-0.481267,0.517040,0.479550,0.520657;;,
-   5600;4;-0.477234,0.520279,0.476884,0.523584;;,
-   5760;4;-0.473598,0.523056,0.474592,0.526194;;,
-   5920;4;-0.470455,0.525328,0.472713,0.528437;;,
-   6080;4;-0.467902,0.527050,0.471286,0.530259;;,
-   6240;4;-0.466051,0.528171,0.470369,0.531587;;,
-   6400;4;-0.465033,0.528629,0.470084,0.532276;;,
-   6560;4;-0.464783,0.528501,0.470370,0.532368;;,
-   6720;4;-0.465209,0.527876,0.471141,0.531934;;,
-   6880;4;-0.466212,0.526839,0.472311,0.531046;;,
-   7040;4;-0.467692,0.525468,0.473797,0.529777;;,
-   7200;4;-0.469546,0.523844,0.475519,0.528201;;,
-   7360;4;-0.471670,0.522041,0.477397,0.526395;;,
-   7520;4;-0.473961,0.520137,0.479356,0.524440;;,
-   7680;4;-0.476313,0.518207,0.481321,0.522416;;,
-   7840;4;-0.478623,0.516327,0.483221,0.520407;;,
-   8000;4;-0.480787,0.514574,0.484989,0.518501;;,
-   8160;4;-0.482702,0.513023,0.486558,0.516786;;,
-   8320;4;-0.484263,0.511749,0.487866,0.515354;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.000000,0.000000,0.000000;;,
-   8320;3;0.000000,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_Spine }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.997934,0.045400,0.003331,0.045331;;,
-   160;4;0.991536,0.127272,-0.004051,0.025346;;,
-   320;4;0.980596,0.195691,-0.008186,0.008316;;,
-   480;4;0.970793,0.239650,-0.011172,-0.001998;;,
-   640;4;0.962082,0.272261,-0.013746,-0.009184;;,
-   800;4;0.956038,0.292581,-0.015268,-0.012462;;,
-   960;4;0.951793,0.306033,-0.016059,-0.013267;;,
-   1120;4;0.947608,0.318696,-0.016936,-0.013639;;,
-   1280;4;0.943500,0.330609,-0.017878,-0.013651;;,
-   1440;4;0.939486,0.341808,-0.018855,-0.013373;;,
-   1600;4;0.935578,0.352328,-0.019835,-0.012876;;,
-   1760;4;0.931787,0.362204,-0.020782,-0.012226;;,
-   1920;4;0.928121,0.371471,-0.021656,-0.011490;;,
-   2080;4;0.924587,0.380160,-0.022413,-0.010732;;,
-   2240;4;0.921189,0.388305,-0.023007,-0.010017;;,
-   2400;4;0.917931,0.395939,-0.023392,-0.009406;;,
-   2560;4;0.914813,0.403092,-0.023517,-0.008961;;,
-   2720;4;0.911836,0.409797,-0.023331,-0.008745;;,
-   2880;4;0.908998,0.416084,-0.022782,-0.008817;;,
-   3040;4;0.917135,0.398206,-0.011728,-0.012552;;,
-   3200;4;0.929063,0.369437,0.003811,-0.018526;;,
-   3360;4;0.981655,0.087215,0.114541,-0.125012;;,
-   3520;4;0.811025,-0.536092,0.169574,-0.161520;;,
-   3680;4;0.770000,-0.594157,0.172704,-0.155723;;,
-   3840;4;0.731102,-0.641622,0.176410,-0.150635;;,
-   4000;4;0.690170,-0.685153,0.181059,-0.146453;;,
-   4160;4;0.655155,-0.718114,0.185861,-0.143316;;,
-   4320;4;0.635168,-0.735352,0.189679,-0.140858;;,
-   4480;4;0.627551,-0.741397,0.192712,-0.139185;;,
-   4640;4;0.623523,-0.744129,0.195788,-0.138415;;,
-   4800;4;0.623117,-0.743777,0.198676,-0.138020;;,
-   4960;4;0.626320,-0.740507,0.201177,-0.137479;;,
-   5120;4;0.633079,-0.734430,0.203093,-0.136296;;,
-   5280;4;0.643305,-0.725605,0.204204,-0.134002;;,
-   5440;4;0.656870,-0.714045,0.204250,-0.130169;;,
-   5600;4;0.673608,-0.699714,0.202913,-0.124411;;,
-   5760;4;0.693602,-0.682241,0.199690,-0.116564;;,
-   5920;4;0.717934,-0.659878,0.193804,-0.107569;;,
-   6080;4;0.745544,-0.632567,0.185533,-0.097982;;,
-   6240;4;0.775051,-0.600645,0.175340,-0.088193;;,
-   6400;4;0.805156,-0.564584,0.163727,-0.078501;;,
-   6560;4;0.834696,-0.525014,0.151233,-0.069077;;,
-   6720;4;0.862691,-0.482716,0.138414,-0.059926;;,
-   6880;4;0.888375,-0.438602,0.125815,-0.050879;;,
-   7040;4;0.911206,-0.393688,0.113949,-0.041588;;,
-   7200;4;0.932100,-0.346063,0.102343,-0.030907;;,
-   7360;4;0.951469,-0.293717,0.089936,-0.018689;;,
-   7520;4;0.968304,-0.237710,0.076459,-0.005935;;,
-   7680;4;0.981829,-0.179286,0.061862,0.006402;;,
-   7840;4;0.991556,-0.119857,0.046327,0.017463;;,
-   8000;4;0.997330,-0.060952,0.030259,0.026515;;,
-   8160;4;0.999277,-0.005199,0.015249,0.034436;;,
-   8320;4;0.997934,0.045400,0.003331,0.045330;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;0.169437,-0.009376,0.000667;;,
-   160;3;0.169309,-0.011194,0.000697;;,
-   320;3;0.169183,-0.013056,0.000734;;,
-   480;3;0.169053,-0.014831,0.000757;;,
-   640;3;0.168915,-0.016393,0.000746;;,
-   800;3;0.168767,-0.017782,0.000701;;,
-   960;3;0.168615,-0.019125,0.000639;;,
-   1120;3;0.168460,-0.020421,0.000568;;,
-   1280;3;0.168303,-0.021666,0.000490;;,
-   1440;3;0.168148,-0.022861,0.000414;;,
-   1600;3;0.167996,-0.024003,0.000343;;,
-   1760;3;0.167850,-0.025090,0.000284;;,
-   1920;3;0.167709,-0.026115,0.000239;;,
-   2080;3;0.167569,-0.027046,0.000199;;,
-   2240;3;0.167433,-0.027877,0.000167;;,
-   2400;3;0.167307,-0.028612,0.000151;;,
-   2560;3;0.167196,-0.029251,0.000157;;,
-   2720;3;0.167107,-0.029796,0.000192;;,
-   2880;3;0.167091,-0.029942,0.000329;;,
-   3040;3;0.167140,-0.029707,0.000559;;,
-   3200;3;0.167215,-0.029340,0.000817;;,
-   3360;3;0.169734,-0.005044,0.002497;;,
-   3520;3;0.168754,0.018869,0.001017;;,
-   3680;3;0.168891,0.016798,0.001143;;,
-   3840;3;0.169080,0.013759,0.001164;;,
-   4000;3;0.169284,0.010645,0.001179;;,
-   4160;3;0.169475,0.007511,0.001190;;,
-   4320;3;0.169625,0.004410,0.001198;;,
-   4480;3;0.169705,0.001397,0.001205;;,
-   4640;3;0.169689,-0.001561,0.001214;;,
-   4800;3;0.169571,-0.004851,0.001228;;,
-   4960;3;0.169383,-0.008310,0.001243;;,
-   5120;3;0.169160,-0.011682,0.001256;;,
-   5280;3;0.168938,-0.014710,0.001264;;,
-   5440;3;0.168750,-0.017138,0.001264;;,
-   5600;3;0.168633,-0.018708,0.001254;;,
-   5760;3;0.168607,-0.019292,0.001231;;,
-   5920;3;0.168609,-0.019495,0.001202;;,
-   6080;3;0.168628,-0.019461,0.001170;;,
-   6240;3;0.168660,-0.019217,0.001135;;,
-   6400;3;0.168703,-0.018791,0.001097;;,
-   6560;3;0.168757,-0.018211,0.001058;;,
-   6720;3;0.168818,-0.017505,0.001016;;,
-   6880;3;0.168885,-0.016701,0.000974;;,
-   7040;3;0.168957,-0.015826,0.000931;;,
-   7200;3;0.169031,-0.014909,0.000888;;,
-   7360;3;0.169106,-0.013977,0.000845;;,
-   7520;3;0.169180,-0.013058,0.000802;;,
-   7680;3;0.169250,-0.012180,0.000761;;,
-   7840;3;0.169315,-0.011371,0.000722;;,
-   8000;3;0.169374,-0.010659,0.000684;;,
-   8160;3;0.169418,-0.010037,0.000659;;,
-   8320;3;0.169437,-0.009376,0.000667;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Thigh }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.019277,0.004627,0.055770,0.998247;;,
-   160;4;-0.052392,-0.119708,0.136359,0.982004;;,
-   320;4;-0.140115,-0.104221,0.201918,0.963709;;,
-   480;4;-0.225737,0.041988,0.215264,0.949179;;,
-   640;4;-0.244530,0.105657,0.195491,0.943835;;,
-   800;4;-0.241104,0.129739,0.176337,0.945485;;,
-   960;4;-0.234979,0.148471,0.159575,0.947247;;,
-   1120;4;-0.228401,0.167002,0.141773,0.948601;;,
-   1280;4;-0.221752,0.185369,0.123141,0.949369;;,
-   1440;4;-0.215391,0.203551,0.103948,0.949405;;,
-   1600;4;-0.209644,0.221473,0.084521,0.948607;;,
-   1760;4;-0.204801,0.239014,0.065237,0.946928;;,
-   1920;4;-0.201108,0.256008,0.046513,0.944379;;,
-   2080;4;-0.198772,0.272263,0.028796,0.941028;;,
-   2240;4;-0.197960,0.287567,0.012552,0.936995;;,
-   2400;4;-0.198800,0.301699,-0.001743,0.932445;;,
-   2560;4;-0.201394,0.314441,-0.013614,0.927568;;,
-   2720;4;-0.207440,0.322175,-0.017880,0.923500;;,
-   2880;4;-0.223890,0.310291,0.005744,0.923883;;,
-   3040;4;-0.245919,0.290638,0.040708,0.923795;;,
-   3200;4;-0.267564,0.268579,0.078292,0.922033;;,
-   3360;4;-0.291769,0.332708,0.114854,0.889373;;,
-   3520;4;-0.334713,0.279163,0.656542,0.615620;;,
-   3680;4;-0.323236,0.251905,0.711855,0.570372;;,
-   3840;4;-0.311923,0.229037,0.757516,0.525753;;,
-   4000;4;-0.305402,0.206053,0.798636,0.475870;;,
-   4160;4;-0.304806,0.185727,0.829964,0.428671;;,
-   4320;4;-0.309536,0.170603,0.848422,0.394034;;,
-   4480;4;-0.317692,0.159262,0.857951,0.370983;;,
-   4640;4;-0.327613,0.149138,0.864067,0.351875;;,
-   4800;4;-0.338402,0.140454,0.867242,0.337117;;,
-   4960;4;-0.349207,0.133349,0.867929,0.327066;;,
-   5120;4;-0.359241,0.127920,0.866535,0.322024;;,
-   5280;4;-0.367803,0.124270,0.863395,0.322223;;,
-   5440;4;-0.374287,0.122557,0.858736,0.327813;;,
-   5600;4;-0.378522,0.124872,0.851429,0.340877;;,
-   5760;4;-0.381707,0.138906,0.835097,0.370969;;,
-   5920;4;-0.383106,0.157679,0.811010,0.413074;;,
-   6080;4;-0.381036,0.172610,0.782871,0.460576;;,
-   6240;4;-0.371563,0.176050,0.755902,0.509470;;,
-   6400;4;-0.351698,0.173502,0.729162,0.560828;;,
-   6560;4;-0.325466,0.175502,0.696508,0.614937;;,
-   6720;4;-0.296599,0.182119,0.656398,0.669331;;,
-   6880;4;-0.268375,0.192076,0.608442,0.721720;;,
-   7040;4;-0.243198,0.202715,0.553487,0.770333;;,
-   7200;4;-0.222206,0.210167,0.493482,0.814206;;,
-   7360;4;-0.205070,0.209636,0.431258,0.853238;;,
-   7520;4;-0.186878,0.193256,0.368849,0.889764;;,
-   7680;4;-0.162016,0.161081,0.306112,0.924175;;,
-   7840;4;-0.129774,0.119896,0.243588,0.953650;;,
-   8000;4;-0.091446,0.077073,0.181589,0.976075;;,
-   8160;4;-0.050091,0.040470,0.119339,0.990763;;,
-   8320;4;-0.019277,0.004627,0.055770,0.998247;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;-0.204093,0.373473,0.035406;;,
-   160;3;-0.189836,0.372044,0.094085;;,
-   320;3;-0.177545,0.364698,0.144338;;,
-   480;3;-0.166964,0.351970,0.187148;;,
-   640;3;-0.164311,0.341760,0.209458;;,
-   800;3;-0.164575,0.331722,0.226217;;,
-   960;3;-0.165902,0.321395,0.241243;;,
-   1120;3;-0.167814,0.311358,0.254498;;,
-   1280;3;-0.169833,0.302187,0.265940;;,
-   1440;3;-0.171481,0.294456,0.275528;;,
-   1600;3;-0.172279,0.288744,0.283221;;,
-   1760;3;-0.171901,0.285458,0.288971;;,
-   1920;3;-0.170973,0.283850,0.292823;;,
-   2080;3;-0.169682,0.283540,0.295072;;,
-   2240;3;-0.168087,0.284283,0.296037;;,
-   2400;3;-0.166251,0.285834,0.296035;;,
-   2560;3;-0.164232,0.287947,0.295385;;,
-   2720;3;-0.162089,0.290377,0.294405;;,
-   2880;3;-0.159884,0.292880,0.293413;;,
-   3040;3;-0.157676,0.295211,0.292727;;,
-   3200;3;-0.151748,0.305089,0.285633;;,
-   3360;3;-0.057584,0.408439,0.094760;;,
-   3520;3;-0.121532,0.209767,-0.319437;;,
-   3680;3;-0.138139,0.164583,-0.337122;;,
-   3840;3;-0.152398,0.126225,-0.345372;;,
-   4000;3;-0.166625,0.087900,-0.352945;;,
-   4160;3;-0.179333,0.054545,-0.359560;;,
-   4320;3;-0.189035,0.031093,-0.364939;;,
-   4480;3;-0.194689,0.020851,-0.369240;;,
-   4640;3;-0.198148,0.016929,-0.374536;;,
-   4800;3;-0.200082,0.017480,-0.380298;;,
-   4960;3;-0.200790,0.022068,-0.385531;;,
-   5120;3;-0.200571,0.030256,-0.389240;;,
-   5280;3;-0.199724,0.041609,-0.390431;;,
-   5440;3;-0.198546,0.055692,-0.388107;;,
-   5600;3;-0.197337,0.072069,-0.381274;;,
-   5760;3;-0.195789,0.091289,-0.371100;;,
-   5920;3;-0.193522,0.113726,-0.359442;;,
-   6080;3;-0.190721,0.138689,-0.346329;;,
-   6240;3;-0.187573,0.165483,-0.331794;;,
-   6400;3;-0.184265,0.193416,-0.315867;;,
-   6560;3;-0.180982,0.221796,-0.298578;;,
-   6720;3;-0.177911,0.249930,-0.279960;;,
-   6880;3;-0.175238,0.277125,-0.260041;;,
-   7040;3;-0.173150,0.302688,-0.238854;;,
-   7200;3;-0.171833,0.325927,-0.216428;;,
-   7360;3;-0.171474,0.346148,-0.192795;;,
-   7520;3;-0.173302,0.360532,-0.163822;;,
-   7680;3;-0.177778,0.368282,-0.127284;;,
-   7840;3;-0.183934,0.371745,-0.086070;;,
-   8000;3;-0.190804,0.373261,-0.043068;;,
-   8160;3;-0.197421,0.375173,-0.001166;;,
-   8320;3;-0.204094,0.373473,0.035406;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Calf }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.962335,-0.000000,-0.271866,-0.000000;;,
-   160;4;0.988528,0.000000,-0.151037,0.000000;;,
-   320;4;0.985266,0.000000,-0.171028,-0.000000;;,
-   480;4;0.953580,-0.000000,-0.301141,0.000000;;,
-   640;4;0.930666,-0.000000,-0.365870,0.000000;;,
-   800;4;0.915150,-0.000000,-0.403114,0.000000;;,
-   960;4;0.902445,-0.000000,-0.430806,0.000000;;,
-   1120;4;0.892508,-0.000000,-0.451031,-0.000000;;,
-   1280;4;0.884924,-0.000000,-0.465736,-0.000000;;,
-   1440;4;0.878713,-0.000000,-0.477351,0.000000;;,
-   1600;4;0.873274,-0.000000,-0.487230,0.000000;;,
-   1760;4;0.868541,-0.000000,-0.495618,-0.000000;;,
-   1920;4;0.864433,-0.000000,-0.502749,-0.000000;;,
-   2080;4;0.860855,-0.000000,-0.508851,0.000000;;,
-   2240;4;0.857702,-0.000000,-0.514147,0.000000;;,
-   2400;4;0.854861,0.000000,-0.518856,0.000000;;,
-   2560;4;0.852214,0.000000,-0.523193,0.000000;;,
-   2720;4;0.849636,0.000000,-0.527370,0.000000;;,
-   2880;4;0.846999,0.000000,-0.531595,0.000000;;,
-   3040;4;0.848641,-0.000000,-0.528969,0.000000;;,
-   3200;4;0.861506,0.000000,-0.507748,-0.000000;;,
-   3360;4;1.000000,0.000000,-0.000572,0.000000;;,
-   3520;4;0.920980,0.000000,-0.389610,0.000000;;,
-   3680;4;0.916208,0.000000,-0.400702,-0.000000;;,
-   3840;4;0.911316,0.000000,-0.411708,0.000000;;,
-   4000;4;0.906475,0.000000,-0.422259,0.000000;;,
-   4160;4;0.901877,0.000000,-0.431993,-0.000000;;,
-   4320;4;0.897725,0.000000,-0.440556,0.000000;;,
-   4480;4;0.894234,-0.000000,-0.447600,0.000000;;,
-   4640;4;0.891623,0.000000,-0.452779,0.000000;;,
-   4800;4;0.889360,0.000000,-0.457207,0.000000;;,
-   4960;4;0.886828,0.000000,-0.462100,0.000000;;,
-   5120;4;0.884120,-0.000000,-0.467261,0.000000;;,
-   5280;4;0.881333,0.000000,-0.472496,-0.000000;;,
-   5440;4;0.878570,0.000000,-0.477613,-0.000000;;,
-   5600;4;0.875937,0.000000,-0.482425,-0.000000;;,
-   5760;4;0.873545,-0.000000,-0.486744,-0.000000;;,
-   5920;4;0.871506,-0.000000,-0.490385,-0.000000;;,
-   6080;4;0.869936,-0.000000,-0.493165,0.000000;;,
-   6240;4;0.868951,0.000000,-0.494899,-0.000000;;,
-   6400;4;0.868663,-0.000000,-0.495403,-0.000000;;,
-   6560;4;0.869184,-0.000000,-0.494490,-0.000000;;,
-   6720;4;0.870613,-0.000000,-0.491968,-0.000000;;,
-   6880;4;0.873045,0.000000,-0.487641,-0.000000;;,
-   7040;4;0.876555,-0.000000,-0.481302,-0.000000;;,
-   7200;4;0.882795,0.000000,-0.469759,-0.000000;;,
-   7360;4;0.892556,-0.000000,-0.450937,-0.000000;;,
-   7520;4;0.904583,0.000000,-0.426298,-0.000000;;,
-   7680;4;0.917668,0.000000,-0.397349,-0.000000;;,
-   7840;4;0.930738,-0.000000,-0.365687,-0.000000;;,
-   8000;4;0.942924,0.000000,-0.333009,0.000000;;,
-   8160;4;0.953589,0.000000,-0.301112,0.000000;;,
-   8320;4;0.962335,-0.000000,-0.271866,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.474008,-0.000000,0.000000;;,
-   8320;3;0.474008,-0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Foot }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.963642,-0.014473,0.263485,-0.041950;;,
-   160;4;0.960921,-0.032739,0.255701,-0.100881;;,
-   320;4;0.957114,-0.044695,0.245906,-0.146511;;,
-   480;4;0.956017,-0.042402,0.238116,-0.165937;;,
-   640;4;0.956238,-0.034670,0.232438,-0.174295;;,
-   800;4;0.956410,-0.027749,0.231482,-0.175856;;,
-   960;4;0.956131,-0.023230,0.233943,-0.174773;;,
-   1120;4;0.955900,-0.018562,0.236877,-0.172626;;,
-   1280;4;0.955691,-0.013812,0.240201,-0.169611;;,
-   1440;4;0.955474,-0.009048,0.243834,-0.165928;;,
-   1600;4;0.955225,-0.004339,0.247700,-0.161776;;,
-   1760;4;0.954920,0.000252,0.251728,-0.157358;;,
-   1920;4;0.954540,0.004659,0.255852,-0.152880;;,
-   2080;4;0.954069,0.008821,0.260014,-0.148550;;,
-   2240;4;0.953497,0.012680,0.264159,-0.144578;;,
-   2400;4;0.952814,0.016179,0.268238,-0.141177;;,
-   2560;4;0.952015,0.019268,0.272207,-0.138562;;,
-   2720;4;0.951094,0.021897,0.276018,-0.136948;;,
-   2880;4;0.949524,0.021683,0.279747,-0.140270;;,
-   3040;4;0.945310,0.010693,0.283284,-0.161320;;,
-   3200;4;0.940784,-0.001626,0.285000,-0.183573;;,
-   3360;4;0.960715,0.016673,-0.225458,-0.160992;;,
-   3520;4;0.979335,0.017884,0.148219,-0.136438;;,
-   3680;4;0.973203,-0.003641,0.181813,-0.140738;;,
-   3840;4;0.970010,-0.012821,0.192573,-0.147757;;,
-   4000;4;0.967039,-0.016556,0.201854,-0.154328;;,
-   4160;4;0.963949,-0.019645,0.210464,-0.161621;;,
-   4320;4;0.960842,-0.022062,0.218376,-0.169137;;,
-   4480;4;0.957828,-0.023809,0.225581,-0.176384;;,
-   4640;4;0.955024,-0.024908,0.232092,-0.182871;;,
-   4800;4;0.952551,-0.025396,0.237934,-0.188118;;,
-   4960;4;0.950533,-0.025325,0.243139,-0.191646;;,
-   5120;4;0.949090,-0.024745,0.247737,-0.192981;;,
-   5280;4;0.948339,-0.023592,0.251697,-0.191693;;,
-   5440;4;0.948322,-0.021331,0.254805,-0.187898;;,
-   5600;4;0.948910,-0.018138,0.257115,-0.182023;;,
-   5760;4;0.949953,-0.014303,0.258720,-0.174494;;,
-   5920;4;0.951301,-0.010112,0.259717,-0.165744;;,
-   6080;4;0.952811,-0.005857,0.260226,-0.156206;;,
-   6240;4;0.954350,-0.001845,0.260393,-0.146314;;,
-   6400;4;0.955803,0.001600,0.260394,-0.136500;;,
-   6560;4;0.957066,0.004140,0.260440,-0.127197;;,
-   6720;4;0.958045,0.005419,0.260765,-0.118836;;,
-   6880;4;0.958839,0.005471,0.261255,-0.111103;;,
-   7040;4;0.959598,0.004666,0.261648,-0.103392;;,
-   7200;4;0.960315,0.003157,0.261969,-0.095698;;,
-   7360;4;0.960980,0.001091,0.262240,-0.088019;;,
-   7520;4;0.961586,-0.001379,0.262478,-0.080348;;,
-   7680;4;0.962129,-0.004102,0.262697,-0.072681;;,
-   7840;4;0.962604,-0.006925,0.262904,-0.065013;;,
-   8000;4;0.963013,-0.009697,0.263105,-0.057338;;,
-   8160;4;0.963357,-0.012264,0.263300,-0.049652;;,
-   8320;4;0.963642,-0.014473,0.263485,-0.041950;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.644109,0.000000,0.000000;;,
-   8320;3;0.644109,0.000000,-0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_Neck }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;1.000000,-0.000000,-0.000000,-0.000000;;,
-   8320;4;1.000000,0.000000,-0.000000,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.683182,0.000000,-0.000068;;,
-   8320;3;0.683182,0.000000,-0.000068;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Clavicle }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.016309,0.595591,0.802839,0.021317;;,
-   160;4;-0.074670,0.618680,0.777122,-0.087985;;,
-   320;4;-0.136580,0.654580,0.727629,-0.153062;;,
-   480;4;-0.206157,0.663643,0.686502,-0.213992;;,
-   640;4;-0.251507,0.662500,0.659492,-0.250815;;,
-   800;4;-0.269483,0.664575,0.645222,-0.263455;;,
-   960;4;-0.285774,0.665860,0.632117,-0.274576;;,
-   1120;4;-0.300649,0.666251,0.620339,-0.284429;;,
-   1280;4;-0.314339,0.665729,0.609927,-0.293232;;,
-   1440;4;-0.327046,0.664336,0.600827,-0.301173;;,
-   1600;4;-0.338941,0.662168,0.592906,-0.308407;;,
-   1760;4;-0.350169,0.659360,0.585966,-0.315071;;,
-   1920;4;-0.360857,0.656078,0.579761,-0.321281;;,
-   2080;4;-0.371117,0.652514,0.574000,-0.327141;;,
-   2240;4;-0.381053,0.648881,0.568357,-0.332751;;,
-   2400;4;-0.390759,0.645410,0.562472,-0.338200;;,
-   2560;4;-0.400319,0.642349,0.555958,-0.343574;;,
-   2720;4;-0.409807,0.639963,0.548397,-0.348950;;,
-   2880;4;-0.419275,0.638538,0.539340,-0.354388;;,
-   3040;4;-0.418131,0.644852,0.536482,-0.348596;;,
-   3200;4;-0.412784,0.654332,0.535767,-0.338250;;,
-   3360;4;-0.092149,0.800646,0.588071,-0.068167;;,
-   3520;4;0.229527,0.790963,0.544824,0.157676;;,
-   3680;4;0.241949,0.788914,0.540145,0.165284;;,
-   3840;4;0.245705,0.791013,0.535015,0.166390;;,
-   4000;4;0.249518,0.794265,0.528150,0.167156;;,
-   4160;4;0.253091,0.797984,0.520647,0.167612;;,
-   4320;4;0.256209,0.801453,0.513667,0.167858;;,
-   4480;4;0.258746,0.803931,0.508426,0.168075;;,
-   4640;4;0.260620,0.804662,0.506172,0.168484;;,
-   4800;4;0.261717,0.802896,0.508142,0.169273;;,
-   4960;4;0.261768,0.797915,0.515505,0.170484;;,
-   5120;4;0.260181,0.789559,0.528599,0.171715;;,
-   5280;4;0.256437,0.780424,0.543761,0.171764;;,
-   5440;4;0.250607,0.771050,0.560007,0.170502;;,
-   5600;4;0.242825,0.761519,0.576980,0.167984;;,
-   5760;4;0.233236,0.751923,0.594329,0.164274;;,
-   5920;4;0.222002,0.742365,0.611708,0.159446;;,
-   6080;4;0.209311,0.732959,0.628785,0.153589;;,
-   6240;4;0.195375,0.723831,0.645247,0.146810;;,
-   6400;4;0.180433,0.715114,0.660809,0.139238;;,
-   6560;4;0.164759,0.706937,0.675224,0.131025;;,
-   6720;4;0.148653,0.699419,0.688292,0.122349;;,
-   6880;4;0.132448,0.692653,0.699877,0.113412;;,
-   7040;4;0.116495,0.686688,0.709916,0.104438;;,
-   7200;4;0.101160,0.681518,0.718435,0.095658;;,
-   7360;4;0.086801,0.677058,0.725560,0.087302;;,
-   7520;4;0.073748,0.673130,0.731523,0.079568;;,
-   7680;4;0.064806,0.664941,0.740418,0.073728;;,
-   7840;4;0.058810,0.649344,0.755165,0.067975;;,
-   8000;4;0.050203,0.629186,0.773462,0.057979;;,
-   8160;4;0.035696,0.609350,0.791000,0.041679;;,
-   8320;4;0.016309,0.595591,0.802839,0.021317;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;-0.350493,0.270296,-0.099349;;,
-   8320;3;-0.350493,0.270296,-0.099349;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_UpperArm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.887679,0.258807,0.078934,0.372577;;,
-   160;4;0.914192,0.338535,0.061882,0.214049;;,
-   320;4;0.941146,0.331451,0.024161,0.061644;;,
-   480;4;0.961521,0.268135,-0.023295,-0.055121;;,
-   640;4;0.969352,0.214821,-0.049663,-0.108365;;,
-   800;4;0.974002,0.172340,-0.061793,-0.133419;;,
-   960;4;0.977774,0.136014,-0.066938,-0.144839;;,
-   1120;4;0.981003,0.104729,-0.068686,-0.148147;;,
-   1280;4;0.983478,0.076676,-0.070879,-0.147878;;,
-   1440;4;0.985385,0.049667,-0.073175,-0.145586;;,
-   1600;4;0.986819,0.023474,-0.074900,-0.141516;;,
-   1760;4;0.987811,-0.001871,-0.075729,-0.135984;;,
-   1920;4;0.988383,-0.026337,-0.075372,-0.129327;;,
-   2080;4;0.988553,-0.049896,-0.073579,-0.121902;;,
-   2240;4;0.988336,-0.072522,-0.070134,-0.114079;;,
-   2400;4;0.987742,-0.094192,-0.064860,-0.106240;;,
-   2560;4;0.986777,-0.114876,-0.057610,-0.098770;;,
-   2720;4;0.985885,-0.132725,-0.045704,-0.091242;;,
-   2880;4;0.986698,-0.140219,-0.017989,-0.080260;;,
-   3040;4;0.987106,-0.143885,0.016966,-0.068051;;,
-   3200;4;0.985849,-0.147663,0.054319,-0.057860;;,
-   3360;4;0.968362,0.098950,0.227037,0.030631;;,
-   3520;4;0.958572,-0.083551,-0.233052,0.140873;;,
-   3680;4;0.957517,-0.089162,-0.240765,0.131315;;,
-   3840;4;0.956595,-0.087764,-0.246535,0.128231;;,
-   4000;4;0.955671,-0.086116,-0.252837,0.123896;;,
-   4160;4;0.954710,-0.084311,-0.259434,0.118803;;,
-   4320;4;0.953690,-0.082430,-0.266103,0.113450;;,
-   4480;4;0.952602,-0.080542,-0.272627,0.108338;;,
-   4640;4;0.951454,-0.078702,-0.278804,0.103974;;,
-   4800;4;0.950262,-0.076954,-0.284440,0.100871;;,
-   4960;4;0.949050,-0.075329,-0.289348,0.099539;;,
-   5120;4;0.947839,-0.073855,-0.293338,0.100494;;,
-   5280;4;0.946641,-0.072553,-0.296209,0.104247;;,
-   5440;4;0.945442,-0.071450,-0.297733,0.111305;;,
-   5600;4;0.944194,-0.070581,-0.297643,0.122168;;,
-   5760;4;0.941758,-0.072359,-0.296894,0.140395;;,
-   5920;4;0.937272,-0.077849,-0.295623,0.167536;;,
-   6080;4;0.931074,-0.085105,-0.292322,0.201012;;,
-   6240;4;0.923616,-0.092362,-0.285781,0.238185;;,
-   6400;4;0.915504,-0.098155,-0.275321,0.276437;;,
-   6560;4;0.907476,-0.101371,-0.260887,0.313287;;,
-   6720;4;0.900338,-0.101223,-0.243016,0.346538;;,
-   6880;4;0.894891,-0.097144,-0.222688,0.374359;;,
-   7040;4;0.891880,-0.088610,-0.201067,0.395311;;,
-   7200;4;0.891960,-0.074892,-0.179174,0.408284;;,
-   7360;4;0.897721,-0.049078,-0.153688,0.409961;;,
-   7520;4;0.907096,-0.007543,-0.121451,0.402950;;,
-   7680;4;0.913894,0.045761,-0.083294,0.394671;;,
-   7840;4;0.913442,0.105480,-0.041364,0.390880;;,
-   8000;4;0.904074,0.164613,0.000516,0.394402;;,
-   8160;4;0.888035,0.215578,0.037848,0.404335;;,
-   8320;4;0.887679,0.258807,0.078934,0.372577;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.368394,0.000000,0.000000;;,
-   8320;3;0.368394,0.000000,-0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_L_Forearm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.940612,0.000000,-0.339484,0.000000;;,
-   160;4;0.893681,-0.000000,-0.448703,-0.000000;;,
-   320;4;0.850769,-0.000000,-0.525541,-0.000000;;,
-   480;4;0.809809,-0.000000,-0.586693,0.000000;;,
-   640;4;0.794456,-0.000000,-0.607322,0.000000;;,
-   800;4;0.803629,-0.000000,-0.595131,0.000000;;,
-   960;4;0.814116,-0.000000,-0.580702,0.000000;;,
-   1120;4;0.825649,-0.000000,-0.564184,0.000000;;,
-   1280;4;0.837960,-0.000000,-0.545731,0.000000;;,
-   1440;4;0.850788,-0.000000,-0.525508,0.000000;;,
-   1600;4;0.863883,-0.000000,-0.503693,0.000000;;,
-   1760;4;0.877006,-0.000000,-0.480480,0.000000;;,
-   1920;4;0.889940,0.000000,-0.456077,0.000000;;,
-   2080;4;0.902489,-0.000000,-0.430712,0.000000;;,
-   2240;4;0.914482,-0.000000,-0.404627,0.000000;;,
-   2400;4;0.925773,-0.000000,-0.378081,0.000000;;,
-   2560;4;0.936247,-0.000000,-0.351344,0.000000;;,
-   2720;4;0.945818,-0.000000,-0.324699,0.000000;;,
-   2880;4;0.954429,-0.000000,-0.298438,0.000000;;,
-   3040;4;0.962054,-0.000000,-0.272860,0.000000;;,
-   3200;4;0.970156,-0.000000,-0.242483,-0.000000;;,
-   3360;4;0.999991,0.000000,-0.004260,-0.000000;;,
-   3520;4;0.997502,0.000000,-0.070632,0.000000;;,
-   3680;4;0.992772,0.000000,-0.120014,0.000000;;,
-   3840;4;0.986125,0.000000,-0.166006,-0.000000;;,
-   4000;4;0.976711,0.000000,-0.214559,-0.000000;;,
-   4160;4;0.963736,0.000000,-0.266858,-0.000000;;,
-   4320;4;0.947435,0.000000,-0.319948,-0.000000;;,
-   4480;4;0.928684,0.000000,-0.370873,0.000000;;,
-   4640;4;0.908952,0.000000,-0.416901,0.000000;;,
-   4800;4;0.890204,-0.000000,-0.455563,0.000000;;,
-   4960;4;0.874123,0.000000,-0.485704,0.000000;;,
-   5120;4;0.858869,-0.000000,-0.512196,0.000000;;,
-   5280;4;0.844624,-0.000000,-0.535359,0.000000;;,
-   5440;4;0.832152,-0.000000,-0.554548,0.000000;;,
-   5600;4;0.822237,-0.000000,-0.569145,0.000000;;,
-   5760;4;0.815652,-0.000000,-0.578543,0.000000;;,
-   5920;4;0.813115,-0.000000,-0.582104,0.000000;;,
-   6080;4;0.815007,-0.000000,-0.579452,0.000000;;,
-   6240;4;0.820036,-0.000000,-0.572312,0.000000;;,
-   6400;4;0.827460,-0.000000,-0.561525,0.000000;;,
-   6560;4;0.836712,-0.000000,-0.547643,0.000000;;,
-   6720;4;0.847229,-0.000000,-0.531229,-0.000000;;,
-   6880;4;0.858469,-0.000000,-0.512865,-0.000000;;,
-   7040;4;0.869934,-0.000000,-0.493167,-0.000000;;,
-   7200;4;0.881178,-0.000000,-0.472785,-0.000000;;,
-   7360;4;0.891814,-0.000000,-0.452403,-0.000000;;,
-   7520;4;0.901518,-0.000000,-0.432742,-0.000000;;,
-   7680;4;0.910028,-0.000000,-0.414547,0.000000;;,
-   7840;4;0.917940,-0.000000,-0.396721,-0.000000;;,
-   8000;4;0.925824,-0.000000,-0.377956,-0.000000;;,
-   8160;4;0.933447,-0.000000,-0.358717,0.000000;;,
-   8320;4;0.940612,0.000000,-0.339484,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.720928,0.000000,0.000000;;,
-   8320;3;0.720928,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bone007 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.023229,0.993651,-0.109791,0.008014;;,
-   8320;4;0.023229,0.993651,-0.109791,0.008014;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;-0.101230,0.009248,0.007879;;,
-   8320;3;-0.101230,0.009248,0.007879;;;
-  }
- }
-
- Animation {
-  
-  { Bone001 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000001;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.723280,-0.631411,-0.184433,0.210170;;,
-   8320;4;0.723280,-0.631411,-0.184433,0.210170;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.608282,0.056153,0.406098;;,
-   8320;3;0.608282,0.056153,0.406098;;;
-  }
- }
-
- Animation {
-  
-  { Bone003 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000001;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;0.636288,0.728301,0.192047,0.166832;;,
-   8320;4;0.636288,0.728301,0.192047,0.166832;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.588581,-0.047332,-0.355481;;,
-   8320;3;0.588581,-0.047331,-0.355481;;;
-  }
- }
-
- Animation {
-  
-  { Bone005 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   2;
-   0;4;-0.061568,0.940976,0.331623,-0.028267;;,
-   8320;4;-0.061568,0.940976,0.331623,-0.028267;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.610450,-0.596779,0.096287;;,
-   8320;3;0.610450,-0.596779,0.096286;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Clavicle }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;-0.011940,-0.632466,0.774346,0.015247;;,
-   160;4;0.019673,-0.616263,0.786919,-0.024325;;,
-   320;4;0.060209,-0.619477,0.779312,-0.072774;;,
-   480;4;0.086369,-0.632024,0.763111,-0.103675;;,
-   640;4;0.098939,-0.638087,0.754402,-0.118036;;,
-   800;4;0.108999,-0.642189,0.747664,-0.129274;;,
-   960;4;0.117178,-0.644108,0.743180,-0.138123;;,
-   1120;4;0.123902,-0.644128,0.740736,-0.145111;;,
-   1280;4;0.129449,-0.642898,0.739756,-0.150622;;,
-   1440;4;0.134043,-0.641331,0.739397,-0.154982;;,
-   1600;4;0.137911,-0.640523,0.738636,-0.158516;;,
-   1760;4;0.141275,-0.641685,0.736331,-0.161549;;,
-   1920;4;0.143716,-0.644220,0.733195,-0.163558;;,
-   2080;4;0.144879,-0.646648,0.730714,-0.164054;;,
-   2240;4;0.145029,-0.648944,0.728805,-0.163347;;,
-   2400;4;0.144420,-0.651119,0.727342,-0.161743;;,
-   2560;4;0.143304,-0.653203,0.726179,-0.159543;;,
-   2720;4;0.141925,-0.655236,0.725163,-0.157041;;,
-   2880;4;0.140524,-0.657261,0.724142,-0.154528;;,
-   3040;4;0.139337,-0.659325,0.722969,-0.152289;;,
-   3200;4;0.135367,-0.661863,0.722456,-0.147206;;,
-   3360;4;-0.040161,-0.663130,0.746022,0.045778;;,
-   3520;4;-0.182281,-0.624233,0.729076,0.213434;;,
-   3680;4;-0.190817,-0.620858,0.726644,0.223860;;,
-   3840;4;-0.190348,-0.621126,0.726676,0.223413;;,
-   4000;4;-0.190220,-0.621911,0.726056,0.223350;;,
-   4160;4;-0.190301,-0.623076,0.724982,0.223524;;,
-   4320;4;-0.190462,-0.624486,0.723646,0.223783;;,
-   4480;4;-0.190573,-0.625999,0.722246,0.223982;;,
-   4640;4;-0.190512,-0.627475,0.720981,0.223979;;,
-   4800;4;-0.190159,-0.628769,0.720053,0.223636;;,
-   4960;4;-0.189400,-0.629740,0.719658,0.222818;;,
-   5120;4;-0.188117,-0.630248,0.719990,0.221390;;,
-   5280;4;-0.186191,-0.630170,0.721224,0.219215;;,
-   5440;4;-0.183493,-0.629400,0.723511,0.216141;;,
-   5600;4;-0.179879,-0.627867,0.726966,0.212007;;,
-   5760;4;-0.175186,-0.625543,0.731650,0.206628;;,
-   5920;4;-0.169208,-0.622500,0.737532,0.199775;;,
-   6080;4;-0.161734,-0.619148,0.744268,0.191216;;,
-   6240;4;-0.152866,-0.615817,0.751410,0.181067;;,
-   6400;4;-0.142770,-0.612799,0.758524,0.169518;;,
-   6560;4;-0.131653,-0.610366,0.765204,0.156795;;,
-   6720;4;-0.119760,-0.608752,0.771092,0.143166;;,
-   6880;4;-0.107370,-0.608135,0.775899,0.128934;;,
-   7040;4;-0.094787,-0.608626,0.779421,0.114427;;,
-   7200;4;-0.082322,-0.610260,0.781543,0.099982;;,
-   7360;4;-0.070279,-0.612993,0.782250,0.085931;;,
-   7520;4;-0.058938,-0.616704,0.781623,0.072579;;,
-   7680;4;-0.048530,-0.621200,0.779829,0.060189;;,
-   7840;4;-0.039230,-0.626232,0.777108,0.048962;;,
-   8000;4;-0.030757,-0.630615,0.774527,0.038569;;,
-   8160;4;-0.021266,-0.631196,0.774866,0.026855;;,
-   8320;4;-0.011940,-0.632466,0.774346,0.015247;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;-0.350493,-0.270296,-0.099347;;,
-   8320;3;-0.350493,-0.270296,-0.099347;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_UpperArm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.907525,-0.322084,-0.030061,-0.267873;;,
-   160;4;0.906310,-0.239109,-0.065531,-0.342249;;,
-   320;4;0.906229,-0.171809,-0.088607,-0.376005;;,
-   480;4;0.909060,-0.104999,-0.112371,-0.387245;;,
-   640;4;0.909285,-0.052366,-0.132386,-0.391066;;,
-   800;4;0.910658,-0.029374,-0.142352,-0.386749;;,
-   960;4;0.912683,-0.013783,-0.149685,-0.380020;;,
-   1120;4;0.914925,-0.000268,-0.156427,-0.372080;;,
-   1280;4;0.917417,0.011368,-0.162735,-0.362951;;,
-   1440;4;0.920146,0.021314,-0.168756,-0.352702;;,
-   1600;4;0.923057,0.029766,-0.174636,-0.341440;;,
-   1760;4;0.926068,0.036928,-0.180528,-0.329309;;,
-   1920;4;0.929069,0.043025,-0.186603,-0.316480;;,
-   2080;4;0.931932,0.048306,-0.193053,-0.303149;;,
-   2240;4;0.934513,0.053049,-0.200098,-0.289539;;,
-   2400;4;0.936649,0.057560,-0.207989,-0.275892;;,
-   2560;4;0.939497,0.056682,-0.216690,-0.259188;;,
-   2720;4;0.943675,0.047594,-0.225409,-0.237494;;,
-   2880;4;0.948154,0.034211,-0.233490,-0.212877;;,
-   3040;4;0.952058,0.020657,-0.240779,-0.187576;;,
-   3200;4;0.955009,0.010285,-0.249687,-0.159711;;,
-   3360;4;0.996247,0.047218,0.056905,0.044994;;,
-   3520;4;0.907004,0.419170,-0.010829,-0.039034;;,
-   3680;4;0.905134,0.420153,-0.019556,-0.061824;;,
-   3840;4;0.905630,0.417339,-0.022135,-0.071922;;,
-   4000;4;0.905906,0.414718,-0.024738,-0.082046;;,
-   4160;4;0.906655,0.411181,-0.026659,-0.090540;;,
-   4320;4;0.908573,0.405689,-0.027225,-0.095758;;,
-   4480;4;0.912328,0.397194,-0.025721,-0.096089;;,
-   4640;4;0.918211,0.385210,-0.021447,-0.089671;;,
-   4800;4;0.924927,0.372397,-0.014695,-0.074932;;,
-   4960;4;0.932248,0.357604,-0.005441,-0.054810;;,
-   5120;4;0.940144,0.339129,0.006362,-0.032868;;,
-   5280;4;0.948577,0.315618,0.020592,-0.012788;;,
-   5440;4;0.957488,0.286107,0.036835,0.001655;;,
-   5600;4;0.966717,0.249956,0.054179,0.006647;;,
-   5760;4;0.977774,0.196955,0.071631,-0.005944;;,
-   5920;4;0.987513,0.125134,0.087948,-0.037754;;,
-   6080;4;0.990244,0.047145,0.102060,-0.082332;;,
-   6240;4;0.983438,-0.027263,0.115672,-0.136849;;,
-   6400;4;0.963671,-0.104049,0.124464,-0.212181;;,
-   6560;4;0.935527,-0.166081,0.120471,-0.287563;;,
-   6720;4;0.910653,-0.202866,0.110224,-0.342648;;,
-   6880;4;0.888054,-0.222114,0.100838,-0.389689;;,
-   7040;4;0.870914,-0.232004,0.090584,-0.423649;;,
-   7200;4;0.863494,-0.241496,0.078190,-0.435826;;,
-   7360;4;0.865759,-0.253114,0.064409,-0.426902;;,
-   7520;4;0.873586,-0.263357,0.050599,-0.406117;;,
-   7680;4;0.884462,-0.271758,0.035762,-0.377618;;,
-   7840;4;0.895824,-0.278500,0.019409,-0.345776;;,
-   8000;4;0.905228,-0.284948,0.002016,-0.315219;;,
-   8160;4;0.909616,-0.296944,-0.014880,-0.290175;;,
-   8320;4;0.907525,-0.322084,-0.030061,-0.267873;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.368394,0.000000,-0.000000;;,
-   8320;3;0.368394,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Forearm }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.892542,0.000000,-0.450965,-0.000000;;,
-   160;4;0.885537,0.000000,-0.464568,-0.000000;;,
-   320;4;0.878258,0.000000,-0.478188,-0.000000;;,
-   480;4;0.870718,0.000000,-0.491783,-0.000000;;,
-   640;4;0.862937,0.000000,-0.505312,-0.000000;;,
-   800;4;0.854935,0.000000,-0.518736,-0.000000;;,
-   960;4;0.846735,0.000000,-0.532015,-0.000000;;,
-   1120;4;0.838362,0.000000,-0.545114,-0.000000;;,
-   1280;4;0.829844,0.000000,-0.557996,-0.000000;;,
-   1440;4;0.821210,0.000000,-0.570627,-0.000000;;,
-   1600;4;0.812490,0.000000,-0.582975,-0.000000;;,
-   1760;4;0.803719,0.000000,-0.595009,-0.000000;;,
-   1920;4;0.794931,0.000000,-0.606699,0.000000;;,
-   2080;4;0.786163,0.000000,-0.618019,-0.000000;;,
-   2240;4;0.777417,0.000000,-0.628985,0.000000;;,
-   2400;4;0.768589,0.000000,-0.639744,0.000000;;,
-   2560;4;0.759866,0.000000,-0.650080,0.000000;;,
-   2720;4;0.751495,0.000000,-0.659739,0.000000;;,
-   2880;4;0.743733,0.000000,-0.668476,0.000000;;,
-   3040;4;0.736849,0.000000,-0.676057,0.000000;;,
-   3200;4;0.731115,-0.000000,-0.682254,-0.000000;;,
-   3360;4;0.727196,-0.000000,-0.686430,-0.000000;;,
-   3520;4;0.726975,0.000000,-0.686664,-0.000000;;,
-   3680;4;0.729251,-0.000000,-0.684246,-0.000000;;,
-   3840;4;0.732335,-0.000000,-0.680944,-0.000000;;,
-   4000;4;0.734558,-0.000000,-0.678546,-0.000000;;,
-   4160;4;0.735241,0.000000,-0.677805,-0.000000;;,
-   4320;4;0.735032,0.000000,-0.678033,-0.000000;;,
-   4480;4;0.734262,-0.000000,-0.678866,-0.000000;;,
-   4640;4;0.733266,0.000000,-0.679942,-0.000000;;,
-   4800;4;0.732377,0.000000,-0.680900,-0.000000;;,
-   4960;4;0.731931,0.000000,-0.681379,-0.000000;;,
-   5120;4;0.732265,0.000000,-0.681020,-0.000000;;,
-   5280;4;0.733712,0.000000,-0.679461,-0.000000;;,
-   5440;4;0.736598,0.000000,-0.676331,-0.000000;;,
-   5600;4;0.741232,0.000000,-0.671249,-0.000000;;,
-   5760;4;0.747903,0.000000,-0.663808,0.000000;;,
-   5920;4;0.761135,0.000000,-0.648593,0.000000;;,
-   6080;4;0.781967,0.000000,-0.623320,0.000000;;,
-   6240;4;0.805605,-0.000000,-0.592453,0.000000;;,
-   6400;4;0.827839,-0.000000,-0.560966,-0.000000;;,
-   6560;4;0.845234,-0.000000,-0.534396,-0.000000;;,
-   6720;4;0.855870,-0.000000,-0.517192,-0.000000;;,
-   6880;4;0.863643,-0.000000,-0.504104,-0.000000;;,
-   7040;4;0.869770,-0.000000,-0.493457,-0.000000;;,
-   7200;4;0.874654,-0.000000,-0.484748,0.000000;;,
-   7360;4;0.878660,-0.000000,-0.477449,0.000000;;,
-   7520;4;0.882125,-0.000000,-0.471016,-0.000000;;,
-   7680;4;0.885366,-0.000000,-0.464894,0.000000;;,
-   7840;4;0.888685,-0.000000,-0.458519,-0.000000;;,
-   8000;4;0.891782,-0.000000,-0.452465,-0.000000;;,
-   8160;4;0.892387,0.000000,-0.451271,-0.000000;;,
-   8320;4;0.892542,0.000000,-0.450965,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.720928,0.000000,0.000000;;,
-   8320;3;0.720928,0.000000,-0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Hand }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.702076,0.701517,0.086463,-0.086532;;,
-   160;4;0.685517,0.724461,0.029663,-0.065899;;,
-   320;4;0.665109,0.744715,-0.023503,-0.049780;;,
-   480;4;0.652109,0.755427,-0.048339,-0.041793;;,
-   640;4;0.643548,0.762130,-0.060575,-0.036518;;,
-   800;4;0.637517,0.766884,-0.066363,-0.032514;;,
-   960;4;0.633331,0.770362,-0.067534,-0.029547;;,
-   1120;4;0.630156,0.773175,-0.065938,-0.027500;;,
-   1280;4;0.627175,0.775863,-0.063239,-0.026246;;,
-   1440;4;0.624236,0.778554,-0.059497,-0.025353;;,
-   1600;4;0.621369,0.781211,-0.054768,-0.024696;;,
-   1760;4;0.618575,0.783808,-0.049235,-0.024216;;,
-   1920;4;0.615856,0.786318,-0.043084,-0.023857;;,
-   2080;4;0.613221,0.788716,-0.036502,-0.023568;;,
-   2240;4;0.610683,0.790976,-0.029675,-0.023303;;,
-   2400;4;0.608264,0.793073,-0.022792,-0.023019;;,
-   2560;4;0.605992,0.794986,-0.016044,-0.022678;;,
-   2720;4;0.603900,0.796691,-0.009620,-0.022244;;,
-   2880;4;0.602031,0.798170,-0.003711,-0.021687;;,
-   3040;4;0.600430,0.799401,0.001493,-0.020974;;,
-   3200;4;0.599147,0.800366,0.005801,-0.020077;;,
-   3360;4;0.598234,0.801046,0.009024,-0.018966;;,
-   3520;4;0.597556,0.801554,0.011282,-0.017626;;,
-   3680;4;0.596962,0.802005,0.012876,-0.016085;;,
-   3840;4;0.596474,0.802384,0.013893,-0.014379;;,
-   4000;4;0.596114,0.802673,0.014418,-0.012544;;,
-   4160;4;0.595901,0.802857,0.014538,-0.010616;;,
-   4320;4;0.595853,0.802919,0.014338,-0.008627;;,
-   4480;4;0.595990,0.802844,0.013906,-0.006613;;,
-   4640;4;0.596328,0.802617,0.013328,-0.004607;;,
-   4800;4;0.596885,0.802223,0.012691,-0.002641;;,
-   4960;4;0.597677,0.801646,0.012083,-0.000751;;,
-   5120;4;0.598723,0.800872,0.011589,0.001031;;,
-   5280;4;0.600039,0.799887,0.011298,0.002669;;,
-   5440;4;0.601641,0.798676,0.011296,0.004129;;,
-   5600;4;0.603546,0.797225,0.011668,0.005375;;,
-   5760;4;0.605767,0.795518,0.012500,0.006367;;,
-   5920;4;0.608319,0.793540,0.013876,0.007067;;,
-   6080;4;0.611212,0.791273,0.015880,0.007430;;,
-   6240;4;0.614919,0.788331,0.018752,0.007540;;,
-   6400;4;0.619762,0.784430,0.022580,0.007425;;,
-   6560;4;0.625528,0.779696,0.027211,0.006959;;,
-   6720;4;0.632004,0.774261,0.032488,0.006016;;,
-   6880;4;0.638982,0.768257,0.038246,0.004476;;,
-   7040;4;0.646266,0.761821,0.044317,0.002230;;,
-   7200;4;0.653664,0.755096,0.050528,-0.000825;;,
-   7360;4;0.660999,0.748226,0.056704,-0.004774;;,
-   7520;4;0.668104,0.741360,0.062670,-0.009696;;,
-   7680;4;0.674825,0.734648,0.068250,-0.015651;;,
-   7840;4;0.681199,0.728013,0.073351,-0.024172;;,
-   8000;4;0.688071,0.720201,0.078174,-0.041937;;,
-   8160;4;0.695180,0.711143,0.082542,-0.064711;;,
-   8320;4;0.702076,0.701517,0.086463,-0.086532;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.467667,-0.000000,0.000000;;,
-   8320;3;0.467667,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger0 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   52;
-   0;4;-0.022302,0.970812,-0.042946,0.234911;;,
-   160;4;-0.022256,0.971058,-0.042967,0.233893;;,
-   320;4;-0.022207,0.971316,-0.042990,0.232818;;,
-   480;4;-0.022156,0.971585,-0.043014,0.231694;;,
-   640;4;-0.022104,0.971862,-0.043038,0.230529;;,
-   800;4;-0.022050,0.972146,-0.043064,0.229330;;,
-   960;4;-0.021995,0.972434,-0.043090,0.228105;;,
-   1120;4;-0.021939,0.972724,-0.043117,0.226864;;,
-   1280;4;-0.021883,0.973015,-0.043145,0.225612;;,
-   1440;4;-0.021827,0.973305,-0.043172,0.224359;;,
-   1600;4;-0.021772,0.973592,-0.043200,0.223112;;,
-   1760;4;-0.021717,0.973873,-0.043227,0.221880;;,
-   1920;4;-0.021663,0.974148,-0.043254,0.220669;;,
-   2080;4;-0.021611,0.974415,-0.043281,0.219489;;,
-   2240;4;-0.021561,0.974671,-0.043307,0.218347;;,
-   2400;4;-0.021513,0.974916,-0.043332,0.217251;;,
-   2560;4;-0.021467,0.975148,-0.043357,0.216209;;,
-   2720;4;-0.021424,0.975364,-0.043379,0.215229;;,
-   2880;4;-0.021384,0.975565,-0.043401,0.214319;;,
-   3040;4;-0.021348,0.975747,-0.043420,0.213487;;,
-   3200;4;-0.021315,0.975910,-0.043438,0.212742;;,
-   3360;4;-0.021287,0.976051,-0.043454,0.212091;;,
-   3520;4;-0.021263,0.976171,-0.043467,0.211541;;,
-   3680;4;-0.021244,0.976265,-0.043477,0.211102;;,
-   3840;4;-0.021230,0.976335,-0.043485,0.210781;;,
-   4000;4;-0.021222,0.976377,-0.043490,0.210583;;,
-   4320;4;-0.021218,0.976397,-0.043493,0.210493;;,
-   4480;4;-0.021224,0.976373,-0.043491,0.210604;;,
-   4640;4;-0.021232,0.976331,-0.043487,0.210797;;,
-   4800;4;-0.021244,0.976272,-0.043481,0.211073;;,
-   4960;4;-0.021260,0.976195,-0.043473,0.211427;;,
-   5120;4;-0.021279,0.976102,-0.043464,0.211856;;,
-   5280;4;-0.021301,0.975994,-0.043453,0.212353;;,
-   5440;4;-0.021326,0.975872,-0.043440,0.212913;;,
-   5600;4;-0.021353,0.975737,-0.043426,0.213531;;,
-   5760;4;-0.021383,0.975590,-0.043411,0.214202;;,
-   5920;4;-0.021415,0.975432,-0.043395,0.214921;;,
-   6080;4;-0.021448,0.975264,-0.043378,0.215682;;,
-   6240;4;-0.021484,0.975087,-0.043360,0.216481;;,
-   6400;4;-0.021521,0.974902,-0.043341,0.217312;;,
-   6560;4;-0.021559,0.974710,-0.043322,0.218170;;,
-   6720;4;-0.021598,0.974513,-0.043303,0.219050;;,
-   6880;4;-0.021638,0.974311,-0.043283,0.219947;;,
-   7040;4;-0.021678,0.974105,-0.043263,0.220856;;,
-   7200;4;-0.021719,0.973897,-0.043242,0.221771;;,
-   7360;4;-0.021759,0.973688,-0.043222,0.222688;;,
-   7520;4;-0.021800,0.973479,-0.043202,0.223600;;,
-   7680;4;-0.021840,0.973271,-0.043182,0.224504;;,
-   7840;4;-0.021880,0.973065,-0.043163,0.225394;;,
-   8000;4;-0.021975,0.972563,-0.043113,0.227550;;,
-   8160;4;-0.022138,0.971695,-0.043029,0.231232;;,
-   8320;4;-0.022302,0.970812,-0.042946,0.234911;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.109410,0.045819,0.212764;;,
-   8320;3;0.109410,0.045819,0.212764;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger01 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.958898,0.000000,0.283752,0.000000;;,
-   160;4;0.948122,0.000000,0.317907,0.000000;;,
-   320;4;0.934739,0.000000,0.355336,-0.000000;;,
-   480;4;0.921415,-0.000000,0.388579,0.000000;;,
-   640;4;0.911824,-0.000000,0.410582,0.000000;;,
-   800;4;0.908787,-0.000000,0.417261,0.000000;;,
-   960;4;0.907145,0.000000,0.420817,0.000000;;,
-   1120;4;0.905780,-0.000000,0.423748,0.000000;;,
-   1280;4;0.904678,-0.000000,0.426095,0.000000;;,
-   1440;4;0.903826,-0.000000,0.427900,0.000000;;,
-   1600;4;0.903209,-0.000000,0.429201,0.000000;;,
-   1760;4;0.902810,-0.000000,0.430040,0.000000;;,
-   1920;4;0.902613,-0.000000,0.430454,0.000000;;,
-   2080;4;0.902599,-0.000000,0.430483,0.000000;;,
-   2240;4;0.902750,0.000000,0.430165,0.000000;;,
-   2400;4;0.903049,-0.000000,0.429538,0.000000;;,
-   2560;4;0.903475,0.000000,0.428641,0.000000;;,
-   2720;4;0.904010,-0.000000,0.427512,0.000000;;,
-   2880;4;0.904634,0.000000,0.426189,0.000000;;,
-   3040;4;0.905329,0.000000,0.424710,0.000000;;,
-   3200;4;0.906077,-0.000000,0.423114,0.000000;;,
-   3360;4;0.906857,-0.000000,0.421438,0.000000;;,
-   3520;4;0.907653,-0.000000,0.419722,0.000000;;,
-   3680;4;0.908446,-0.000000,0.418003,0.000000;;,
-   3840;4;0.909218,-0.000000,0.416321,0.000000;;,
-   4000;4;0.909951,-0.000000,0.414715,0.000000;;,
-   4160;4;0.910630,-0.000000,0.413223,0.000000;;,
-   4320;4;0.911236,-0.000000,0.411886,0.000000;;,
-   4480;4;0.911752,-0.000000,0.410741,0.000000;;,
-   4640;4;0.912163,-0.000000,0.409828,0.000000;;,
-   4800;4;0.912463,0.000000,0.409158,0.000000;;,
-   4960;4;0.912679,-0.000000,0.408678,0.000000;;,
-   5120;4;0.912837,-0.000000,0.408325,0.000000;;,
-   5280;4;0.912965,-0.000000,0.408039,0.000000;;,
-   5440;4;0.913090,-0.000000,0.407758,0.000000;;,
-   5600;4;0.913240,-0.000000,0.407423,0.000000;;,
-   5760;4;0.913441,-0.000000,0.406972,0.000000;;,
-   5920;4;0.913720,0.000000,0.406344,0.000000;;,
-   6080;4;0.914105,-0.000000,0.405478,0.000000;;,
-   6240;4;0.914621,-0.000000,0.404313,0.000000;;,
-   6400;4;0.915294,-0.000000,0.402787,-0.000000;;,
-   6560;4;0.916149,-0.000000,0.400838,0.000000;;,
-   6720;4;0.917210,0.000000,0.398403,0.000000;;,
-   6880;4;0.918500,-0.000000,0.395421,0.000000;;,
-   7040;4;0.920039,-0.000000,0.391827,-0.000000;;,
-   7200;4;0.921846,-0.000000,0.387557,0.000000;;,
-   7360;4;0.923937,0.000000,0.382544,0.000000;;,
-   7520;4;0.927493,0.000000,0.373840,0.000000;;,
-   7680;4;0.933073,-0.000000,0.359686,0.000000;;,
-   7840;4;0.939769,0.000000,0.341811,0.000000;;,
-   8000;4;0.946747,-0.000000,0.321978,0.000000;;,
-   8160;4;0.953307,-0.000000,0.302003,0.000000;;,
-   8320;4;0.958898,-0.000000,0.283752,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.204449,0.000000,0.000000;;,
-   8320;3;0.204449,0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger1 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   50;
-   0;4;0.904353,0.011772,0.425945,0.024060;;,
-   160;4;0.879542,0.012949,0.475081,0.023155;;,
-   320;4;0.852053,0.014253,0.522779,0.022456;;,
-   480;4;0.834101,0.015093,0.550961,0.022128;;,
-   640;4;0.826957,0.015415,0.561623,0.022004;;,
-   800;4;0.822240,0.015619,0.568504,0.021916;;,
-   960;4;0.819547,0.015727,0.572380,0.021851;;,
-   1120;4;0.818421,0.015761,0.573989,0.021805;;,
-   1280;4;0.818377,0.015746,0.574053,0.021773;;,
-   1440;4;0.818919,0.015707,0.573282,0.021753;;,
-   1600;4;0.819546,0.015668,0.572386,0.021741;;,
-   1760;4;0.819762,0.015653,0.572077,0.021735;;,
-   1920;4;0.819618,0.015659,0.572284,0.021732;;,
-   2080;4;0.819497,0.015664,0.572457,0.021730;;,
-   2240;4;0.819402,0.015669,0.572592,0.021729;;,
-   2880;4;0.819337,0.015672,0.572686,0.021728;;,
-   3040;4;0.819428,0.015674,0.572555,0.021738;;,
-   3200;4;0.819554,0.015670,0.572375,0.021744;;,
-   3360;4;0.819727,0.015664,0.572127,0.021750;;,
-   3520;4;0.819949,0.015657,0.571809,0.021758;;,
-   3680;4;0.820224,0.015647,0.571414,0.021766;;,
-   3840;4;0.820555,0.015635,0.570939,0.021776;;,
-   4000;4;0.820944,0.015621,0.570379,0.021788;;,
-   4160;4;0.821394,0.015604,0.569731,0.021800;;,
-   4320;4;0.821908,0.015584,0.568989,0.021814;;,
-   4480;4;0.822489,0.015561,0.568150,0.021830;;,
-   4640;4;0.823138,0.015536,0.567208,0.021846;;,
-   4800;4;0.823859,0.015507,0.566160,0.021865;;,
-   4960;4;0.824655,0.015475,0.565001,0.021884;;,
-   5120;4;0.825527,0.015440,0.563726,0.021906;;,
-   5280;4;0.826478,0.015401,0.562331,0.021929;;,
-   5440;4;0.827510,0.015358,0.560811,0.021953;;,
-   5600;4;0.828626,0.015312,0.559161,0.021980;;,
-   5760;4;0.829839,0.015262,0.557360,0.022010;;,
-   5920;4;0.831227,0.015206,0.555288,0.022048;;,
-   6080;4;0.832824,0.015144,0.552890,0.022096;;,
-   6240;4;0.834651,0.015073,0.550127,0.022151;;,
-   6400;4;0.836731,0.014992,0.546958,0.022215;;,
-   6560;4;0.839082,0.014898,0.543344,0.022286;;,
-   6720;4;0.841724,0.014792,0.539242,0.022363;;,
-   6880;4;0.844674,0.014670,0.534609,0.022446;;,
-   7040;4;0.847947,0.014532,0.529402,0.022535;;,
-   7200;4;0.851556,0.014376,0.523577,0.022630;;,
-   7360;4;0.855513,0.014201,0.517087,0.022732;;,
-   7520;4;0.859826,0.014005,0.509884,0.022840;;,
-   7680;4;0.865019,0.013761,0.501025,0.022963;;,
-   7840;4;0.873495,0.013342,0.486099,0.023153;;,
-   8000;4;0.883983,0.012812,0.466756,0.023414;;,
-   8160;4;0.894762,0.012262,0.445745,0.023729;;,
-   8320;4;0.904353,0.011772,0.425945,0.024060;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.241832,0.093362,-0.011522;;,
-   8320;3;0.241832,0.093362,-0.011522;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger11 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.568685,0.000000,0.822556,-0.000000;;,
-   160;4;0.577496,0.000000,0.816394,-0.000000;;,
-   320;4;0.587189,0.000000,0.809450,0.000000;;,
-   480;4;0.597226,0.000000,0.802073,0.000000;;,
-   640;4;0.607086,0.000000,0.794636,0.000000;;,
-   800;4;0.616266,0.000000,0.787538,0.000000;;,
-   960;4;0.624281,0.000000,0.781200,0.000000;;,
-   1120;4;0.630662,0.000000,0.776058,-0.000000;;,
-   1280;4;0.634943,0.000000,0.772559,-0.000000;;,
-   1440;4;0.636991,0.000000,0.770871,0.000000;;,
-   1600;4;0.638494,0.000000,0.769627,0.000000;;,
-   1760;4;0.639772,0.000000,0.768565,0.000000;;,
-   1920;4;0.640836,0.000000,0.767678,-0.000000;;,
-   2080;4;0.641695,0.000000,0.766960,-0.000000;;,
-   2240;4;0.642358,-0.000000,0.766405,-0.000000;;,
-   2400;4;0.642835,-0.000000,0.766005,-0.000000;;,
-   2560;4;0.643135,0.000000,0.765753,0.000000;;,
-   2720;4;0.643267,-0.000000,0.765642,0.000000;;,
-   2880;4;0.643240,0.000000,0.765665,-0.000000;;,
-   3040;4;0.643063,0.000000,0.765813,-0.000000;;,
-   3200;4;0.642746,0.000000,0.766080,-0.000000;;,
-   3360;4;0.642295,0.000000,0.766457,0.000000;;,
-   3520;4;0.641722,0.000000,0.766938,0.000000;;,
-   3680;4;0.641033,0.000000,0.767513,0.000000;;,
-   3840;4;0.640238,-0.000000,0.768176,0.000000;;,
-   4000;4;0.639346,-0.000000,0.768919,0.000000;;,
-   4160;4;0.638365,-0.000000,0.769734,-0.000000;;,
-   4320;4;0.637303,-0.000000,0.770613,-0.000000;;,
-   4480;4;0.636171,-0.000000,0.771548,-0.000000;;,
-   4640;4;0.634975,-0.000000,0.772533,-0.000000;;,
-   4800;4;0.633726,-0.000000,0.773558,-0.000000;;,
-   4960;4;0.632432,-0.000000,0.774616,-0.000000;;,
-   5120;4;0.631101,-0.000000,0.775700,-0.000000;;,
-   5280;4;0.629743,-0.000000,0.776803,-0.000000;;,
-   5440;4;0.628328,-0.000000,0.777949,-0.000000;;,
-   5600;4;0.626633,-0.000000,0.779315,-0.000000;;,
-   5760;4;0.624643,-0.000000,0.780911,-0.000000;;,
-   5920;4;0.622382,0.000000,0.782714,-0.000000;;,
-   6080;4;0.619875,-0.000000,0.784701,0.000000;;,
-   6240;4;0.617146,-0.000000,0.786849,-0.000000;;,
-   6400;4;0.614220,-0.000000,0.789135,0.000000;;,
-   6560;4;0.611121,-0.000000,0.791537,-0.000000;;,
-   6720;4;0.607876,0.000000,0.794032,-0.000000;;,
-   6880;4;0.604508,-0.000000,0.796599,-0.000000;;,
-   7040;4;0.601045,-0.000000,0.799215,0.000000;;,
-   7200;4;0.597511,-0.000000,0.801861,-0.000000;;,
-   7360;4;0.593934,-0.000000,0.804514,-0.000000;;,
-   7520;4;0.590340,-0.000000,0.807155,-0.000000;;,
-   7680;4;0.586755,-0.000000,0.809764,-0.000000;;,
-   7840;4;0.583209,-0.000000,0.812323,-0.000000;;,
-   8000;4;0.579727,-0.000000,0.814811,-0.000000;;,
-   8160;4;0.576339,0.000000,0.817211,-0.000000;;,
-   8320;4;0.568685,0.000000,0.822556,0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.232215,0.000000,-0.000000;;,
-   8320;3;0.232215,-0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger2 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   50;
-   0;4;0.907621,0.010629,0.419139,0.020824;;,
-   160;4;0.883178,0.011642,0.468466,0.020017;;,
-   320;4;0.856049,0.012771,0.516374,0.019389;;,
-   480;4;0.838310,0.013499,0.544692,0.019089;;,
-   640;4;0.831247,0.013778,0.555409,0.018977;;,
-   800;4;0.826582,0.013955,0.562326,0.018896;;,
-   960;4;0.823918,0.014048,0.566222,0.018839;;,
-   1120;4;0.822804,0.014077,0.567840,0.018798;;,
-   1280;4;0.822760,0.014064,0.567904,0.018770;;,
-   1440;4;0.823296,0.014029,0.567129,0.018753;;,
-   1600;4;0.823916,0.013994,0.566229,0.018743;;,
-   1760;4;0.824130,0.013982,0.565918,0.018739;;,
-   1920;4;0.823987,0.013987,0.566126,0.018736;;,
-   2080;4;0.823867,0.013992,0.566300,0.018734;;,
-   2240;4;0.823774,0.013995,0.566436,0.018732;;,
-   2880;4;0.823709,0.013998,0.566530,0.018732;;,
-   3040;4;0.823800,0.014000,0.566398,0.018741;;,
-   3200;4;0.823924,0.013997,0.566217,0.018746;;,
-   3360;4;0.824095,0.013992,0.565969,0.018751;;,
-   3520;4;0.824315,0.013985,0.565648,0.018758;;,
-   3680;4;0.824587,0.013977,0.565251,0.018766;;,
-   3840;4;0.824914,0.013967,0.564774,0.018775;;,
-   4000;4;0.825299,0.013954,0.564211,0.018785;;,
-   4160;4;0.825744,0.013940,0.563559,0.018796;;,
-   4320;4;0.826252,0.013923,0.562814,0.018808;;,
-   4480;4;0.826827,0.013903,0.561970,0.018822;;,
-   4640;4;0.827469,0.013881,0.561024,0.018837;;,
-   4800;4;0.828182,0.013856,0.559970,0.018853;;,
-   4960;4;0.828969,0.013828,0.558805,0.018871;;,
-   5120;4;0.829832,0.013798,0.557523,0.018890;;,
-   5280;4;0.830772,0.013764,0.556121,0.018911;;,
-   5440;4;0.831793,0.013728,0.554593,0.018933;;,
-   5600;4;0.832897,0.013688,0.552935,0.018957;;,
-   5760;4;0.834096,0.013644,0.551124,0.018984;;,
-   5920;4;0.835468,0.013596,0.549041,0.019018;;,
-   6080;4;0.837047,0.013543,0.546631,0.019060;;,
-   6240;4;0.838854,0.013481,0.543854,0.019110;;,
-   6400;4;0.840910,0.013411,0.540670,0.019167;;,
-   6560;4;0.843234,0.013331,0.537037,0.019230;;,
-   6720;4;0.845845,0.013239,0.532915,0.019299;;,
-   6880;4;0.848760,0.013134,0.528260,0.019373;;,
-   7040;4;0.851994,0.013015,0.523028,0.019453;;,
-   7200;4;0.855560,0.012880,0.517175,0.019539;;,
-   7360;4;0.859468,0.012729,0.510654,0.019630;;,
-   7520;4;0.863726,0.012560,0.503419,0.019727;;,
-   7680;4;0.868852,0.012349,0.494520,0.019838;;,
-   7840;4;0.877216,0.011986,0.479529,0.020010;;,
-   8000;4;0.887558,0.011527,0.460106,0.020246;;,
-   8160;4;0.898179,0.011052,0.439012,0.020528;;,
-   8320;4;0.907621,0.010629,0.419139,0.020824;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.233957,-0.083313,-0.026921;;,
-   8320;3;0.233957,-0.083313,-0.026921;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Finger21 }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.563974,0.000000,0.825793,-0.000000;;,
-   160;4;0.572820,0.000000,0.819681,-0.000000;;,
-   320;4;0.582553,0.000000,0.812793,-0.000000;;,
-   480;4;0.592632,0.000000,0.805473,0.000000;;,
-   640;4;0.602534,0.000000,0.798093,-0.000000;;,
-   800;4;0.611755,0.000000,0.791048,0.000000;;,
-   960;4;0.619806,-0.000000,0.784755,-0.000000;;,
-   1120;4;0.626216,0.000000,0.779650,-0.000000;;,
-   1280;4;0.630517,-0.000000,0.776175,0.000000;;,
-   1440;4;0.632574,0.000000,0.774500,-0.000000;;,
-   1600;4;0.634085,0.000000,0.773264,-0.000000;;,
-   1760;4;0.635369,-0.000000,0.772209,0.000000;;,
-   1920;4;0.636438,0.000000,0.771328,0.000000;;,
-   2080;4;0.637301,-0.000000,0.770615,-0.000000;;,
-   2240;4;0.637967,0.000000,0.770064,0.000000;;,
-   2400;4;0.638446,0.000000,0.769667,0.000000;;,
-   2560;4;0.638747,0.000000,0.769416,-0.000000;;,
-   2720;4;0.638880,-0.000000,0.769306,-0.000000;;,
-   2880;4;0.638853,-0.000000,0.769329,-0.000000;;,
-   3040;4;0.638676,0.000000,0.769476,-0.000000;;,
-   3200;4;0.638356,-0.000000,0.769741,0.000000;;,
-   3360;4;0.637904,-0.000000,0.770116,-0.000000;;,
-   3520;4;0.637328,-0.000000,0.770593,-0.000000;;,
-   3680;4;0.636636,-0.000000,0.771165,0.000000;;,
-   3840;4;0.635837,-0.000000,0.771823,-0.000000;;,
-   4000;4;0.634941,0.000000,0.772561,-0.000000;;,
-   4160;4;0.633955,-0.000000,0.773370,-0.000000;;,
-   4320;4;0.632889,-0.000000,0.774243,-0.000000;;,
-   4480;4;0.631751,-0.000000,0.775172,0.000000;;,
-   4640;4;0.630550,-0.000000,0.776149,-0.000000;;,
-   4800;4;0.629294,-0.000000,0.777167,-0.000000;;,
-   4960;4;0.627994,-0.000000,0.778218,-0.000000;;,
-   5120;4;0.626657,-0.000000,0.779295,0.000000;;,
-   5280;4;0.625293,-0.000000,0.780390,0.000000;;,
-   5440;4;0.623871,-0.000000,0.781527,0.000000;;,
-   5600;4;0.622168,-0.000000,0.782884,0.000000;;,
-   5760;4;0.620169,-0.000000,0.784468,0.000000;;,
-   5920;4;0.617898,0.000000,0.786259,-0.000000;;,
-   6080;4;0.615379,-0.000000,0.788231,0.000000;;,
-   6240;4;0.612638,0.000000,0.790364,0.000000;;,
-   6400;4;0.609699,-0.000000,0.792633,0.000000;;,
-   6560;4;0.606587,-0.000000,0.795017,-0.000000;;,
-   6720;4;0.603327,-0.000000,0.797494,0.000000;;,
-   6880;4;0.599945,-0.000000,0.800041,0.000000;;,
-   7040;4;0.596467,-0.000000,0.802638,0.000000;;,
-   7200;4;0.592918,-0.000000,0.805263,0.000000;;,
-   7360;4;0.589326,-0.000000,0.807896,-0.000000;;,
-   7520;4;0.585716,-0.000000,0.810516,-0.000000;;,
-   7680;4;0.582117,0.000000,0.813105,0.000000;;,
-   7840;4;0.578556,0.000000,0.815643,0.000000;;,
-   8000;4;0.575060,0.000000,0.818111,0.000000;;,
-   8160;4;0.571658,0.000000,0.820492,0.000000;;,
-   8320;4;0.563974,-0.000000,0.825793,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.241181,-0.000000,-0.000000;;,
-   8320;3;0.241181,-0.000000,0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Thigh }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.092308,0.152471,-0.186596,0.966133;;,
-   160;4;0.076911,0.097062,-0.248621,0.960652;;,
-   320;4;0.069512,0.039862,-0.311854,0.946745;;,
-   480;4;0.068185,-0.016366,-0.367547,0.927358;;,
-   640;4;0.059489,-0.064285,-0.383221,0.919495;;,
-   800;4;0.051318,-0.074089,-0.403443,0.910555;;,
-   960;4;0.043004,-0.082786,-0.424962,0.900392;;,
-   1120;4;0.034849,-0.090514,-0.446772,0.889375;;,
-   1280;4;0.027127,-0.097344,-0.467924,0.877973;;,
-   1440;4;0.020090,-0.103287,-0.487531,0.866742;;,
-   1600;4;0.013973,-0.108295,-0.504774,0.856318;;,
-   1760;4;0.009006,-0.112281,-0.518890,0.847387;;,
-   1920;4;0.005416,-0.115016,-0.529170,0.840667;;,
-   2080;4;0.003198,-0.115731,-0.535493,0.836567;;,
-   2240;4;0.002039,-0.114356,-0.538404,0.834889;;,
-   2400;4;0.001653,-0.110981,-0.538447,0.835318;;,
-   2560;4;0.001787,-0.105718,-0.536139,0.837482;;,
-   2720;4;0.002210,-0.098685,-0.531983,0.840982;;,
-   2880;4;0.003678,-0.086741,-0.522649,0.848116;;,
-   3040;4;0.010234,-0.059058,-0.494689,0.867001;;,
-   3200;4;0.016587,-0.029308,-0.461503,0.886499;;,
-   3360;4;0.011094,0.209375,-0.031084,0.977278;;,
-   3520;4;0.018241,0.442470,0.410772,0.796966;;,
-   3680;4;-0.001147,0.463009,0.476085,0.747639;;,
-   3840;4;-0.026855,0.478293,0.530054,0.699684;;,
-   4000;4;-0.051602,0.495333,0.576988,0.647354;;,
-   4160;4;-0.073181,0.510077,0.613556,0.598343;;,
-   4320;4;-0.090355,0.518156,0.638736,0.561575;;,
-   4480;4;-0.104432,0.519063,0.656183,0.537672;;,
-   4640;4;-0.117572,0.516222,0.669890,0.520517;;,
-   4800;4;-0.130149,0.510697,0.680620,0.508927;;,
-   4960;4;-0.142346,0.503529,0.688898,0.501613;;,
-   5120;4;-0.154187,0.495834,0.695032,0.497298;;,
-   5280;4;-0.165556,0.488848,0.699148,0.494784;;,
-   5440;4;-0.174364,0.482575,0.700960,0.495351;;,
-   5600;4;-0.175491,0.470573,0.696352,0.512697;;,
-   5760;4;-0.182696,0.454074,0.677533,0.548988;;,
-   5920;4;-0.199620,0.435114,0.644182,0.596538;;,
-   6080;4;-0.217828,0.414447,0.602241,0.646599;;,
-   6240;4;-0.235476,0.392446,0.552571,0.696565;;,
-   6400;4;-0.250927,0.369824,0.496546,0.744116;;,
-   6560;4;-0.262804,0.347618,0.436047,0.787374;;,
-   6720;4;-0.271122,0.327131,0.369517,0.826399;;,
-   6880;4;-0.272592,0.310687,0.289603,0.863306;;,
-   7040;4;-0.246655,0.304306,0.226674,0.891728;;,
-   7200;4;-0.200191,0.311605,0.175222,0.912208;;,
-   7360;4;-0.151468,0.315761,0.123443,0.928501;;,
-   7520;4;-0.112135,0.300414,0.067128,0.944813;;,
-   7680;4;-0.073828,0.275033,0.011186,0.958531;;,
-   7840;4;-0.033387,0.245204,-0.042280,0.967974;;,
-   8000;4;0.009576,0.214409,-0.092612,0.972297;;,
-   8160;4;0.054720,0.186417,-0.139748,0.970940;;,
-   8320;4;0.092308,0.152471,-0.186596,0.966133;;;
-  }
-
-  AnimationKey T {
-   2;
-   53;
-   0;3;-0.135086,-0.385516,-0.034172;;,
-   160;3;-0.147455,-0.362415,-0.084122;;,
-   320;3;-0.160481,-0.338700,-0.135933;;,
-   480;3;-0.170226,-0.318055,-0.178442;;,
-   640;3;-0.173655,-0.303071,-0.203438;;,
-   800;3;-0.173977,-0.289593,-0.221840;;,
-   960;3;-0.172584,-0.276951,-0.236591;;,
-   1120;3;-0.170156,-0.265431,-0.248165;;,
-   1280;3;-0.167374,-0.255319,-0.257036;;,
-   1440;3;-0.164919,-0.246899,-0.263679;;,
-   1600;3;-0.163471,-0.240458,-0.268567;;,
-   1760;3;-0.163499,-0.236208,-0.272003;;,
-   1920;3;-0.164129,-0.233791,-0.273401;;,
-   2080;3;-0.165118,-0.232864,-0.272958;;,
-   2240;3;-0.166403,-0.233137,-0.271034;;,
-   2400;3;-0.167925,-0.234316,-0.267990;;,
-   2560;3;-0.169620,-0.236110,-0.264186;;,
-   2720;3;-0.171428,-0.238225,-0.259983;;,
-   2880;3;-0.173287,-0.240369,-0.255741;;,
-   3040;3;-0.175136,-0.242250,-0.251821;;,
-   3200;3;-0.180246,-0.250775,-0.239601;;,
-   3360;3;-0.260703,-0.321288,-0.014366;;,
-   3520;3;-0.182892,-0.075713,0.387955;;,
-   3680;3;-0.162176,-0.013850,0.401351;;,
-   3840;3;-0.145820,0.034198,0.405609;;,
-   4000;3;-0.138588,0.050231,0.402944;;,
-   4160;3;-0.131492,0.065598,0.399462;;,
-   4320;3;-0.124695,0.079839,0.395428;;,
-   4480;3;-0.118359,0.092492,0.391107;;,
-   4640;3;-0.112646,0.103094,0.386763;;,
-   4800;3;-0.107719,0.111184,0.382660;;,
-   4960;3;-0.103741,0.116300,0.379063;;,
-   5120;3;-0.100873,0.117979,0.376236;;,
-   5280;3;-0.099626,0.115066,0.375149;;,
-   5440;3;-0.101729,0.103797,0.378874;;,
-   5600;3;-0.106372,0.085190,0.384766;;,
-   5760;3;-0.112341,0.061050,0.389317;;,
-   5920;3;-0.118422,0.033179,0.389022;;,
-   6080;3;-0.123401,0.003379,0.380370;;,
-   6240;3;-0.127652,-0.028518,0.365259;;,
-   6400;3;-0.132246,-0.063338,0.348016;;,
-   6560;3;-0.137010,-0.100262,0.328786;;,
-   6720;3;-0.141772,-0.138472,0.307712;;,
-   6880;3;-0.146361,-0.177150,0.284936;;,
-   7040;3;-0.150604,-0.215478,0.260601;;,
-   7200;3;-0.154330,-0.252639,0.234850;;,
-   7360;3;-0.157368,-0.287813,0.207826;;,
-   7520;3;-0.159544,-0.320182,0.179671;;,
-   7680;3;-0.160086,-0.347616,0.148814;;,
-   7840;3;-0.156150,-0.363831,0.107276;;,
-   8000;3;-0.149364,-0.372854,0.059002;;,
-   8160;3;-0.142057,-0.380286,0.009886;;,
-   8320;3;-0.135086,-0.385516,-0.034171;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Calf }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.957334,0.000000,-0.288983,-0.000000;;,
-   160;4;0.965286,0.000000,-0.261197,-0.000000;;,
-   320;4;0.972725,0.000000,-0.231961,-0.000000;;,
-   480;4;0.984377,-0.000000,-0.176076,-0.000000;;,
-   640;4;0.994336,0.000000,-0.106280,0.000000;;,
-   800;4;0.993368,0.000000,-0.114976,0.000000;;,
-   960;4;0.994077,0.000000,-0.108683,0.000000;;,
-   1120;4;0.994895,0.000000,-0.100915,0.000000;;,
-   1280;4;0.995733,0.000000,-0.092280,0.000000;;,
-   1440;4;0.996517,-0.000000,-0.083385,0.000000;;,
-   1600;4;0.997196,-0.000000,-0.074840,0.000000;;,
-   1760;4;0.997736,-0.000000,-0.067258,0.000000;;,
-   1920;4;0.998123,-0.000000,-0.061249,0.000000;;,
-   2080;4;0.998350,-0.000000,-0.057429,0.000000;;,
-   2240;4;0.998408,-0.000000,-0.056408,0.000000;;,
-   2400;4;0.998205,-0.000000,-0.059885,0.000000;;,
-   2560;4;0.997310,-0.000000,-0.073297,0.000000;;,
-   2720;4;0.995568,-0.000000,-0.094041,0.000000;;,
-   2880;4;0.992985,-0.000000,-0.118243,0.000000;;,
-   3040;4;0.989860,-0.000000,-0.142047,0.000000;;,
-   3200;4;0.986074,0.000000,-0.166308,-0.000000;;,
-   3360;4;0.919964,-0.000000,-0.392002,0.000000;;,
-   3520;4;0.808792,0.000000,-0.588095,-0.000000;;,
-   3680;4;0.811803,0.000000,-0.583932,0.000000;;,
-   3840;4;0.813802,0.000000,-0.581142,0.000000;;,
-   4000;4;0.815216,0.000000,-0.579158,0.000000;;,
-   4160;4;0.816250,-0.000000,-0.577700,0.000000;;,
-   4320;4;0.817106,0.000000,-0.576488,0.000000;;,
-   4480;4;0.817983,-0.000000,-0.575242,0.000000;;,
-   4640;4;0.819081,0.000000,-0.573678,0.000000;;,
-   4800;4;0.820594,-0.000000,-0.571512,0.000000;;,
-   4960;4;0.822713,-0.000000,-0.568457,0.000000;;,
-   5120;4;0.825625,0.000000,-0.564220,0.000000;;,
-   5280;4;0.829503,-0.000000,-0.558503,-0.000000;;,
-   5440;4;0.834507,-0.000000,-0.550998,0.000000;;,
-   5600;4;0.841535,-0.000000,-0.540202,0.000000;;,
-   5760;4;0.854061,-0.000000,-0.520173,0.000000;;,
-   5920;4;0.869928,-0.000000,-0.493179,0.000000;;,
-   6080;4;0.886350,0.000000,-0.463017,0.000000;;,
-   6240;4;0.901020,-0.000000,-0.433778,0.000000;;,
-   6400;4;0.911953,-0.000000,-0.410294,-0.000000;;,
-   6560;4;0.919231,0.000000,-0.393718,-0.000000;;,
-   6720;4;0.927832,0.000000,-0.372998,0.000000;;,
-   6880;4;0.949687,0.000000,-0.313199,-0.000000;;,
-   7040;4;0.961501,0.000000,-0.274802,0.000000;;,
-   7200;4;0.953425,0.000000,-0.301631,0.000000;;,
-   7360;4;0.953126,0.000000,-0.302573,0.000000;;,
-   7520;4;0.953360,0.000000,-0.301837,0.000000;;,
-   7680;4;0.953977,0.000000,-0.299881,0.000000;;,
-   7840;4;0.954828,0.000000,-0.297160,0.000000;;,
-   8000;4;0.955765,-0.000000,-0.294131,0.000000;;,
-   8160;4;0.956646,0.000000,-0.291253,-0.000000;;,
-   8320;4;0.957334,-0.000000,-0.288984,-0.000000;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.474008,0.000000,-0.000000;;,
-   8320;3;0.474008,0.000000,-0.000000;;;
-  }
- }
-
- Animation {
-  
-  { Bip001_R_Foot }
-
-  AnimationKey S {
-   1;
-   2;
-   0;3;1.000000,1.000000,1.000000;;,
-   8320;3;1.000000,1.000000,1.000000;;;
-  }
-
-  AnimationKey R {
-   0;
-   53;
-   0;4;0.989997,0.028842,0.129209,0.048771;;,
-   160;4;0.988536,0.019104,0.131282,0.072084;;,
-   320;4;0.986402,0.009251,0.133570,0.095311;;,
-   480;4;0.984622,0.004667,0.134220,0.111729;;,
-   640;4;0.983995,0.007744,0.131918,0.119547;;,
-   800;4;0.984034,0.014981,0.127935,0.122820;;,
-   960;4;0.984257,0.022990,0.124125,0.123704;;,
-   1120;4;0.984252,0.028386,0.122307,0.124432;;,
-   1280;4;0.984016,0.031344,0.122134,0.125748;;,
-   1440;4;0.983778,0.034261,0.122082,0.126894;;,
-   1600;4;0.983536,0.037086,0.122169,0.127896;;,
-   1760;4;0.983285,0.039771,0.122411,0.128778;;,
-   1920;4;0.983027,0.042264,0.122823,0.129566;;,
-   2080;4;0.982757,0.044517,0.123421,0.130283;;,
-   2240;4;0.982476,0.046479,0.124222,0.130956;;,
-   2400;4;0.982182,0.048101,0.125239,0.131607;;,
-   2560;4;0.981873,0.049332,0.126488,0.132261;;,
-   2720;4;0.981547,0.050122,0.127983,0.132940;;,
-   2880;4;0.981202,0.050421,0.129740,0.133667;;,
-   3040;4;0.981096,0.044934,0.130707,0.135453;;,
-   3200;4;0.979371,0.025403,0.148982,0.134134;;,
-   3360;4;0.952711,-0.026928,0.274702,0.127104;;,
-   3520;4;0.942025,-0.102702,0.278608,0.156267;;,
-   3680;4;0.947849,-0.098864,0.259455,0.156497;;,
-   3840;4;0.950382,-0.096139,0.250681,0.157136;;,
-   4000;4;0.952719,-0.093223,0.242055,0.158258;;,
-   4160;4;0.954893,-0.090125,0.233621,0.159621;;,
-   4320;4;0.956935,-0.086863,0.225423,0.160981;;,
-   4480;4;0.958879,-0.083460,0.217506,0.162100;;,
-   4640;4;0.960761,-0.079950,0.209914,0.162736;;,
-   4800;4;0.962614,-0.076369,0.202696,0.162653;;,
-   4960;4;0.964475,-0.072761,0.195898,0.161613;;,
-   5120;4;0.966373,-0.069172,0.189568,0.159382;;,
-   5280;4;0.968336,-0.065650,0.183753,0.155723;;,
-   5440;4;0.970383,-0.062244,0.178499,0.150402;;,
-   5600;4;0.972436,-0.059153,0.175828,0.141258;;,
-   5760;4;0.974092,-0.056599,0.183651,0.119225;;,
-   5920;4;0.975576,-0.053110,0.193648,0.089057;;,
-   6080;4;0.977904,-0.048138,0.195091,0.057675;;,
-   6240;4;0.982704,-0.042502,0.177774,0.029726;;,
-   6400;4;0.989225,-0.037592,0.141484,-0.001548;;,
-   6560;4;0.994144,-0.035069,0.096650,-0.033275;;,
-   6720;4;0.996078,-0.034655,0.054697,-0.060306;;,
-   6880;4;0.996035,-0.034068,0.027186,-0.077556;;,
-   7040;4;0.996193,-0.030530,0.022470,-0.078509;;,
-   7200;4;0.996961,-0.024223,0.033963,-0.065792;;,
-   7360;4;0.997406,-0.016816,0.050743,-0.048208;;,
-   7520;4;0.997363,-0.009173,0.063795,-0.033358;;,
-   7680;4;0.996894,-0.001205,0.076604,-0.018241;;,
-   7840;4;0.995917,0.006840,0.089986,-0.002085;;,
-   8000;4;0.994413,0.014680,0.103490,0.014738;;,
-   8160;4;0.992412,0.022076,0.116693,0.031830;;,
-   8320;4;0.989997,0.028842,0.129209,0.048771;;;
-  }
-
-  AnimationKey T {
-   2;
-   2;
-   0;3;0.644109,0.000000,-0.000000;;,
-   8320;3;0.644109,0.000000,0.000000;;;
-  }
- }
-}
-
 AnimationSet KnockDown {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -112003,7 +107895,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -112047,7 +107939,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -112073,7 +107965,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -112111,7 +108003,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -112155,7 +108047,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -112190,7 +108082,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -112225,7 +108117,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -112251,7 +108143,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -112286,7 +108178,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -112321,7 +108213,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -112356,7 +108248,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -112382,7 +108274,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -112408,7 +108300,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -112434,7 +108326,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -112460,7 +108352,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -112495,7 +108387,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -112530,7 +108422,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -112565,7 +108457,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -112600,7 +108492,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -112626,7 +108518,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -112652,7 +108544,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -112678,7 +108570,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -112704,7 +108596,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -112730,7 +108622,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -112756,7 +108648,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -112800,7 +108692,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -112835,7 +108727,7 @@ AnimationSet KnockDown {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -112871,10 +108763,10 @@ AnimationSet KnockDown {
 }
 
 AnimationSet Hit_Throw_Low {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -112900,7 +108792,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -112938,7 +108830,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -112964,7 +108856,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -113001,7 +108893,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -113039,7 +108931,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -113071,7 +108963,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -113103,7 +108995,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -113129,7 +109021,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -113161,7 +109053,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -113193,7 +109085,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -113225,7 +109117,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -113251,7 +109143,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -113277,7 +109169,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -113303,7 +109195,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -113329,7 +109221,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -113361,7 +109253,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -113393,7 +109285,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -113425,7 +109317,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -113451,7 +109343,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -113477,7 +109369,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -113503,7 +109395,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -113529,7 +109421,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -113555,7 +109447,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -113581,7 +109473,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -113607,7 +109499,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -113645,7 +109537,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -113677,7 +109569,7 @@ AnimationSet Hit_Throw_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -113710,10 +109602,10 @@ AnimationSet Hit_Throw_Low {
 }
 
 AnimationSet Hit_Throw {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -113739,7 +109631,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -113777,7 +109669,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -113803,7 +109695,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -113840,7 +109732,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -113878,7 +109770,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -113910,7 +109802,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -113942,7 +109834,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -113968,7 +109860,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -114000,7 +109892,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -114032,7 +109924,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -114064,7 +109956,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -114090,7 +109982,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -114116,7 +110008,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -114142,7 +110034,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -114168,7 +110060,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -114200,7 +110092,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -114232,7 +110124,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -114264,7 +110156,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -114290,7 +110182,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -114316,7 +110208,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -114342,7 +110234,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -114368,7 +110260,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -114394,7 +110286,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -114420,7 +110312,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -114446,7 +110338,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -114484,7 +110376,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -114516,7 +110408,7 @@ AnimationSet Hit_Throw {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -114549,10 +110441,10 @@ AnimationSet Hit_Throw {
 }
 
 AnimationSet Hit_Shake {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -114578,7 +110470,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -114604,7 +110496,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -114631,7 +110523,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -114659,7 +110551,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -114687,7 +110579,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -114714,7 +110606,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -114741,7 +110633,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -114768,7 +110660,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -114796,7 +110688,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -114823,7 +110715,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -114850,7 +110742,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -114876,7 +110768,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -114902,7 +110794,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -114928,7 +110820,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -114954,7 +110846,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -114982,7 +110874,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -115009,7 +110901,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -115035,7 +110927,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -115062,7 +110954,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -115088,7 +110980,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -115114,7 +111006,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -115140,7 +111032,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -115166,7 +111058,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -115192,7 +111084,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -115218,7 +111110,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -115246,7 +111138,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -115273,7 +111165,7 @@ AnimationSet Hit_Shake {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -115301,10 +111193,10 @@ AnimationSet Hit_Shake {
 }
 
 AnimationSet Hit_L_2_Light {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -115330,7 +111222,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -115368,7 +111260,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -115400,7 +111292,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -115438,7 +111330,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -115476,7 +111368,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -115508,7 +111400,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -115540,7 +111432,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -115566,7 +111458,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -115598,7 +111490,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -115630,7 +111522,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -115662,7 +111554,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -115688,7 +111580,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -115714,7 +111606,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -115740,7 +111632,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -115766,7 +111658,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -115798,7 +111690,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -115830,7 +111722,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -115862,7 +111754,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -115888,7 +111780,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -115920,7 +111812,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -115946,7 +111838,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -115978,7 +111870,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -116010,7 +111902,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -116042,7 +111934,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -116074,7 +111966,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -116112,7 +112004,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -116144,7 +112036,7 @@ AnimationSet Hit_L_2_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -116177,10 +112069,10 @@ AnimationSet Hit_L_2_Light {
 }
 
 AnimationSet Hit_L_2 {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -116206,7 +112098,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -116262,7 +112154,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -116303,7 +112195,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -116359,7 +112251,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -116415,7 +112307,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -116456,7 +112348,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -116497,7 +112389,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -116523,7 +112415,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -116564,7 +112456,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -116605,7 +112497,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -116646,7 +112538,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -116672,7 +112564,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -116698,7 +112590,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -116724,7 +112616,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -116750,7 +112642,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -116791,7 +112683,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -116832,7 +112724,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -116873,7 +112765,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -116899,7 +112791,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -116940,7 +112832,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -116966,7 +112858,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -117007,7 +112899,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -117048,7 +112940,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -117089,7 +112981,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -117130,7 +113022,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -117186,7 +113078,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -117227,7 +113119,7 @@ AnimationSet Hit_L_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -117269,10 +113161,10 @@ AnimationSet Hit_L_2 {
 }
 
 AnimationSet Hit_L_1_Light {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -117298,7 +113190,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -117336,7 +113228,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -117368,7 +113260,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -117406,7 +113298,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -117444,7 +113336,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -117476,7 +113368,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -117508,7 +113400,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -117534,7 +113426,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -117566,7 +113458,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -117598,7 +113490,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -117630,7 +113522,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -117656,7 +113548,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -117682,7 +113574,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -117708,7 +113600,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -117734,7 +113626,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -117766,7 +113658,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -117798,7 +113690,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -117830,7 +113722,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -117862,7 +113754,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -117894,7 +113786,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -117926,7 +113818,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -117958,7 +113850,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -117990,7 +113882,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -118022,7 +113914,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -118054,7 +113946,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -118092,7 +113984,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -118124,7 +114016,7 @@ AnimationSet Hit_L_1_Light {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -118157,10 +114049,10 @@ AnimationSet Hit_L_1_Light {
 }
 
 AnimationSet Hit_L_1 {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -118186,7 +114078,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -118242,7 +114134,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -118283,7 +114175,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -118339,7 +114231,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -118395,7 +114287,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -118436,7 +114328,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -118477,7 +114369,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -118503,7 +114395,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -118544,7 +114436,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -118585,7 +114477,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -118626,7 +114518,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -118652,7 +114544,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -118678,7 +114570,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -118704,7 +114596,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -118730,7 +114622,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -118771,7 +114663,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -118812,7 +114704,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -118853,7 +114745,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -118894,7 +114786,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -118935,7 +114827,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -118976,7 +114868,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -119017,7 +114909,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -119058,7 +114950,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -119099,7 +114991,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -119140,7 +115032,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -119196,7 +115088,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -119237,7 +115129,7 @@ AnimationSet Hit_L_1 {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -119279,10 +115171,10 @@ AnimationSet Hit_L_1 {
 }
 
 AnimationSet Hit_H {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -119308,7 +115200,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -119384,7 +115276,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -119435,7 +115327,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -119502,7 +115394,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -119578,7 +115470,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -119629,7 +115521,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -119680,7 +115572,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -119706,7 +115598,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -119757,7 +115649,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -119808,7 +115700,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -119859,7 +115751,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -119885,7 +115777,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -119911,7 +115803,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -119937,7 +115829,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -119963,7 +115855,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -120014,7 +115906,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -120065,7 +115957,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -120116,7 +116008,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -120142,7 +116034,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -120193,7 +116085,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -120219,7 +116111,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -120270,7 +116162,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -120321,7 +116213,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -120372,7 +116264,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -120423,7 +116315,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -120499,7 +116391,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -120550,7 +116442,7 @@ AnimationSet Hit_H {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -120602,10 +116494,10 @@ AnimationSet Hit_H {
 }
 
 AnimationSet Hit_Back {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -120631,7 +116523,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -120701,7 +116593,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -120749,7 +116641,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -120819,7 +116711,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -120889,7 +116781,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -120937,7 +116829,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -120985,7 +116877,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -121033,7 +116925,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -121103,7 +116995,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -121151,7 +117043,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -121199,7 +117091,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -121225,7 +117117,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -121251,7 +117143,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -121277,7 +117169,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -121303,7 +117195,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -121373,7 +117265,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -121421,7 +117313,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -121469,7 +117361,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -121495,7 +117387,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -121543,7 +117435,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -121591,7 +117483,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -121639,7 +117531,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -121687,7 +117579,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -121735,7 +117627,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -121783,7 +117675,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -121853,7 +117745,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -121901,7 +117793,7 @@ AnimationSet Hit_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -121950,10 +117842,10 @@ AnimationSet Hit_Back {
 }
 
 AnimationSet Freefall_Low {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -121979,7 +117871,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -122089,7 +117981,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -122115,7 +118007,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -122192,7 +118084,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -122300,7 +118192,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -122368,7 +118260,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -122436,7 +118328,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -122462,7 +118354,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -122530,7 +118422,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -122598,7 +118490,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -122666,7 +118558,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -122692,7 +118584,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -122718,7 +118610,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -122744,7 +118636,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -122770,7 +118662,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -122838,7 +118730,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -122906,7 +118798,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -122974,7 +118866,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -123042,7 +118934,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -123068,7 +118960,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -123094,7 +118986,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -123120,7 +119012,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -123146,7 +119038,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -123172,7 +119064,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -123198,7 +119090,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -123307,7 +119199,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -123375,7 +119267,7 @@ AnimationSet Freefall_Low {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -123444,10 +119336,10 @@ AnimationSet Freefall_Low {
 }
 
 AnimationSet Freefall {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -123473,7 +119365,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -123595,7 +119487,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -123621,7 +119513,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -123704,7 +119596,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -123825,7 +119717,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -123899,7 +119791,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -123973,7 +119865,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -123999,7 +119891,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -124073,7 +119965,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -124147,7 +120039,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -124221,7 +120113,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -124247,7 +120139,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -124273,7 +120165,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -124299,7 +120191,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -124325,7 +120217,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -124399,7 +120291,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -124473,7 +120365,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -124547,7 +120439,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -124621,7 +120513,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -124647,7 +120539,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -124673,7 +120565,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -124699,7 +120591,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -124725,7 +120617,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -124751,7 +120643,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -124777,7 +120669,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -124898,7 +120790,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -124972,7 +120864,7 @@ AnimationSet Freefall {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -125047,10 +120939,10 @@ AnimationSet Freefall {
 }
 
 AnimationSet FastRun_Loop {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -125076,7 +120968,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -125130,7 +121022,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -125170,7 +121062,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -125224,7 +121116,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -125278,7 +121170,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -125318,7 +121210,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -125358,7 +121250,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -125398,7 +121290,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -125452,7 +121344,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -125492,7 +121384,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -125532,7 +121424,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -125558,7 +121450,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -125584,7 +121476,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -125610,7 +121502,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -125636,7 +121528,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -125690,7 +121582,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -125730,7 +121622,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -125770,7 +121662,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -125810,7 +121702,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -125850,7 +121742,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -125890,7 +121782,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -125930,7 +121822,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -125970,7 +121862,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -126010,7 +121902,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -126050,7 +121942,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -126104,7 +121996,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -126144,7 +122036,7 @@ AnimationSet FastRun_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -126185,10 +122077,10 @@ AnimationSet FastRun_Loop {
 }
 
 AnimationSet Die_Back {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -126214,7 +122106,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -126319,7 +122211,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -126470,7 +122362,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -126576,7 +122468,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -126794,7 +122686,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -126945,7 +122837,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -127040,7 +122932,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -127066,7 +122958,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -127119,7 +123011,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -127199,7 +123091,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -127278,7 +123170,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -127304,7 +123196,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -127330,7 +123222,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -127356,7 +123248,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -127382,7 +123274,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -127448,7 +123340,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -127528,7 +123420,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -127604,7 +123496,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -127630,7 +123522,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -127684,7 +123576,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -127710,7 +123602,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -127745,7 +123637,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -127802,7 +123694,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -127837,7 +123729,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -127894,7 +123786,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -128111,7 +124003,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -128262,7 +124154,7 @@ AnimationSet Die_Back {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -128358,10 +124250,10 @@ AnimationSet Die_Back {
 }
 
 AnimationSet Die {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -128387,7 +124279,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -128665,7 +124557,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -128815,7 +124707,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -129009,7 +124901,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -129287,7 +125179,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -129439,7 +125331,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -129591,7 +125483,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -129617,7 +125509,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -129769,7 +125661,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -129921,7 +125813,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -130073,7 +125965,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -130099,7 +125991,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -130125,7 +126017,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -130151,7 +126043,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -130177,7 +126069,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -130328,7 +126220,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -130480,7 +126372,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -130632,7 +126524,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -130778,7 +126670,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -130895,7 +126787,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -130998,7 +126890,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -131072,7 +126964,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -131179,7 +127071,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -131252,7 +127144,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -131359,7 +127251,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -131637,7 +127529,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -131789,7 +127681,7 @@ AnimationSet Die {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -131942,10 +127834,10 @@ AnimationSet Die {
 }
 
 AnimationSet Attack_Run_Loop {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -131971,7 +127863,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -132025,7 +127917,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -132065,7 +127957,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -132119,7 +128011,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -132173,7 +128065,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -132213,7 +128105,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -132253,7 +128145,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -132293,7 +128185,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -132347,7 +128239,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -132387,7 +128279,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -132427,7 +128319,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -132453,7 +128345,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -132479,7 +128371,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -132505,7 +128397,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -132531,7 +128423,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -132585,7 +128477,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -132625,7 +128517,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -132665,7 +128557,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -132705,7 +128597,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -132745,7 +128637,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -132785,7 +128677,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -132825,7 +128717,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -132865,7 +128757,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -132905,7 +128797,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -132945,7 +128837,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -132999,7 +128891,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -133039,7 +128931,7 @@ AnimationSet Attack_Run_Loop {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -133080,10 +128972,10 @@ AnimationSet Attack_Run_Loop {
 }
 
 AnimationSet Run_Attack_BS {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -133109,7 +129001,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -133147,7 +129039,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -133179,7 +129071,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -133217,7 +129109,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -133255,7 +129147,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -133287,7 +129179,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -133319,7 +129211,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -133351,7 +129243,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -133389,7 +129281,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -133421,7 +129313,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -133453,7 +129345,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -133479,7 +129371,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -133505,7 +129397,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -133531,7 +129423,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -133557,7 +129449,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -133595,7 +129487,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -133627,7 +129519,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -133659,7 +129551,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -133691,7 +129583,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -133723,7 +129615,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -133755,7 +129647,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -133787,7 +129679,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -133819,7 +129711,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -133851,7 +129743,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -133883,7 +129775,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -133921,7 +129813,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -133953,7 +129845,7 @@ AnimationSet Run_Attack_BS {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -133986,10 +129878,10 @@ AnimationSet Run_Attack_BS {
 }
 
 AnimationSet Attack_2 {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -134015,7 +129907,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -134339,7 +130231,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -134514,7 +130406,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -134808,7 +130700,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -135132,7 +131024,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -135307,7 +131199,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -135482,7 +131374,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -135657,7 +131549,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -135981,7 +131873,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -136156,7 +132048,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -136314,7 +132206,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -136340,7 +132232,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -136366,7 +132258,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -136392,7 +132284,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -136418,7 +132310,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -136742,7 +132634,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -136917,7 +132809,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -137087,7 +132979,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -137252,7 +133144,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -137426,7 +133318,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -137452,7 +133344,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -137610,7 +133502,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -137785,7 +133677,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -137944,7 +133836,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -138119,7 +134011,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -138442,7 +134334,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -138615,7 +134507,7 @@ AnimationSet Attack_2 {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -138791,10 +134683,10 @@ AnimationSet Attack_2 {
 }
 
 AnimationSet Attack_1_Right {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -138820,7 +134712,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -138947,7 +134839,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -139024,7 +134916,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -139152,7 +135044,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -139280,7 +135172,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -139357,7 +135249,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -139434,7 +135326,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -139460,7 +135352,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -139537,7 +135429,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -139614,7 +135506,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -139691,7 +135583,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -139717,7 +135609,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -139743,7 +135635,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -139769,7 +135661,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -139795,7 +135687,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -139872,7 +135764,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -139949,7 +135841,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -140026,7 +135918,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -140103,7 +135995,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -140180,7 +136072,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -140257,7 +136149,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -140334,7 +136226,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -140411,7 +136303,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -140488,7 +136380,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -140565,7 +136457,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -140693,7 +136585,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -140770,7 +136662,7 @@ AnimationSet Attack_1_Right {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {
@@ -140848,10 +136740,10 @@ AnimationSet Attack_1_Right {
 }
 
 AnimationSet Attack_1_Left {
- 
+
 
  Animation {
-  
+
   { RO_013 }
 
   AnimationKey S {
@@ -140877,7 +136769,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001 }
 
   AnimationKey S {
@@ -141005,7 +136897,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_Pelvis }
 
   AnimationKey S {
@@ -141082,7 +136974,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_Spine }
 
   AnimationKey S {
@@ -141210,7 +137102,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_L_Thigh }
 
   AnimationKey S {
@@ -141338,7 +137230,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_L_Calf }
 
   AnimationKey S {
@@ -141415,7 +137307,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_L_Foot }
 
   AnimationKey S {
@@ -141492,7 +137384,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_Neck }
 
   AnimationKey S {
@@ -141518,7 +137410,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_L_Clavicle }
 
   AnimationKey S {
@@ -141595,7 +137487,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_L_UpperArm }
 
   AnimationKey S {
@@ -141672,7 +137564,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_L_Forearm }
 
   AnimationKey S {
@@ -141749,7 +137641,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bone007 }
 
   AnimationKey S {
@@ -141775,7 +137667,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bone001 }
 
   AnimationKey S {
@@ -141801,7 +137693,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bone003 }
 
   AnimationKey S {
@@ -141827,7 +137719,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bone005 }
 
   AnimationKey S {
@@ -141853,7 +137745,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Clavicle }
 
   AnimationKey S {
@@ -141930,7 +137822,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_UpperArm }
 
   AnimationKey S {
@@ -142007,7 +137899,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Forearm }
 
   AnimationKey S {
@@ -142084,7 +137976,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Hand }
 
   AnimationKey S {
@@ -142161,7 +138053,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger0 }
 
   AnimationKey S {
@@ -142237,7 +138129,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger01 }
 
   AnimationKey S {
@@ -142314,7 +138206,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger1 }
 
   AnimationKey S {
@@ -142388,7 +138280,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger11 }
 
   AnimationKey S {
@@ -142465,7 +138357,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger2 }
 
   AnimationKey S {
@@ -142539,7 +138431,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Finger21 }
 
   AnimationKey S {
@@ -142616,7 +138508,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Thigh }
 
   AnimationKey S {
@@ -142744,7 +138636,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Calf }
 
   AnimationKey S {
@@ -142821,7 +138713,7 @@ AnimationSet Attack_1_Left {
  }
 
  Animation {
-  
+
   { Bip001_R_Foot }
 
   AnimationKey S {

@@ -189,19 +189,22 @@ void CAttackBox::LateUpdate(void)
 void CAttackBox::OnDestroy(void)
 {
 	__super::OnDestroy();
+
 	
+
 }
 
 void CAttackBox::OnEnable(void)
 {
 	__super::OnEnable();
-	
 }
 
 void CAttackBox::OnDisable(void)
 {
 	__super::OnDisable();
 	
+	if (m_spTransform)
+		m_spTransform->SetPosition(0, 0, 0);
 	m_vCollided.clear();
 }
 
@@ -249,7 +252,9 @@ void CAttackBox::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 			return;
 	}
 
-	if (m_collisionID == (int)ECollisionID::PlayerAttack)
+	m_vCollided.emplace_back(pObject);
+
+	if (m_collisionID == (_int)ECollisionID::PlayerAttack)
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 		CMonster* pMonster = static_cast<CMonster*>(pObject);
@@ -280,6 +285,7 @@ void CAttackBox::SetupBox(CObject * pOwner, _mat * pParentMat, _float3 size, _fl
 	//m_pParentMatrix = pParentMat;
 	m_hitInfo = info;
 
+	
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetSize(size);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetHalfSize(size / 2.f);
 	static_cast<Engine::CObbCollider*>(m_spCollision->GetColliders()[0].get())->SetOffsetOrigin(offset);

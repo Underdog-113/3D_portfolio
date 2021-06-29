@@ -126,7 +126,6 @@ void CKiana::Update(void)
 	UpdatePivotMatrix(m_pRightToe_World, m_pRightToe_Frame);
 	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
 	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
-	
 
 	if (m_ultraMode)
 		UseUltraCost();

@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "MO_Scout.h"
 
+#include "FSM_ScoutC.h"
 #include "AttackBall.h"
+#include "AttackBox.h"
 
 _uint CMO_Scout::m_s_uniqueID = 0;
 
@@ -38,15 +40,18 @@ void CMO_Scout::Awake(void)
 {
 	__super::Awake();
 
+	m_spStateMachine = AddComponent<CFSM_ScoutC>();
 	m_spPatternMachine->AddNecessaryPatterns(CScoutBornPattern::Create(), CScoutDiePattern::Create(), CScoutBasePattern::Create(), CScoutHitPattern::Create());
+	m_spPatternMachine->AddPattern(CScoutShoot2Pattern::Create());
+	m_spPatternMachine->AddPattern(CScoutShoot3Pattern::Create());
 }
 
 void CMO_Scout::Start(void)
 {
 	__super::Start();
 
-	//m_spTransform->SetSize(1.7f, 1.7f, 1.7f);
-	m_spTransform->SetRotationY(D3DXToRadian(90));
+	m_spTransform->SetSize(0.7f, 0.7f, 0.7f);
+	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 
@@ -65,6 +70,10 @@ void CMO_Scout::Start(void)
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
+
+	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
+	m_pAttackBox->SetOffset(_float3(0, 1, 0));
+	m_pAttackBox->SetOwner(this);
 }
 
 void CMO_Scout::FixedUpdate(void)

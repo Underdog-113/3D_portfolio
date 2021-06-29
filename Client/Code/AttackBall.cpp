@@ -92,12 +92,8 @@ void CAttackBall::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
-	_float3 offsetPos;
-	D3DXVec3TransformCoord(&offsetPos, &m_offset, m_pParentMatrix);
-	m_spTransform->SetPosition(offsetPos);
-
-	//_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
-	//m_spTransform->SetPosition(pos);
+	_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
+	m_spTransform->SetPosition(pos);
 }
 
 void CAttackBall::OnDestroy(void)
@@ -162,6 +158,7 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		if (pObject == object)
 			return;
 	}
+	m_vCollided.emplace_back(pObject);
 
 	if (m_collisionID == (_int)ECollisionID::PlayerAttack)
 	{
