@@ -24,11 +24,12 @@ void CFSM_GaneshaC::Awake(void)
 
 void CFSM_GaneshaC::Start(SP(CComponent) spThis)
 {
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
+
 	RegisterAllStage();
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
 	SetStartState(Name_Ganesha_StandBy);
 	m_curState->DoEnter();
@@ -272,6 +273,7 @@ void CFSM_GaneshaC::Roll02_End(void)
 
 void CFSM_GaneshaC::Run_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_Ganesha_Run);
 }
 
 void CFSM_GaneshaC::Run_Enter(void)
@@ -306,6 +308,7 @@ void CFSM_GaneshaC::Stamp_End(void)
 
 void CFSM_GaneshaC::StandBy_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_Ganesha_StandBy);
 }
 
 void CFSM_GaneshaC::StandBy_Enter(void)

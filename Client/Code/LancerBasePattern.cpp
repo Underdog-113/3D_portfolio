@@ -77,6 +77,7 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 			true == m_walkReady)
 		{
 			fsm->ChangeState(Name_WALK_FORWARD);
+			pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
 		}
 	}
 	// 상대가 공격 범위 안이고
@@ -94,13 +95,12 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		else if (Name_ATTACK_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_WALK_BACKWARD);
-			pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
 		}
 	}
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_ATTACK_1 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_ATTACK_1 == fsm->GetCurStateString() && 0.54f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 	}
