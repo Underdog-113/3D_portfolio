@@ -492,7 +492,7 @@
     </Filter>
     <Filter Include="11.ValkyrieFSM\04.ValkyrieLevelUp">
       <UniqueIdentifier>{c92b365f-8115-4e78-ae88-167cf2d02904}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
       <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
     </Filter>
@@ -585,6 +585,18 @@
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2">
       <UniqueIdentifier>{2418c899-ae7c-44fd-a949-258657c4e5b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select\00.ATTACK_2">
+      <UniqueIdentifier>{6e9030d3-a1ef-41f8-b03f-2937017069e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\00.RUN_ATTACK">
+      <UniqueIdentifier>{b63d1bf5-1028-4ece-92b0-c950a7053b16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\02.Attack2">
+      <UniqueIdentifier>{19b6e8f5-2acb-4ad5-b93a-09d59614481f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1">
+      <UniqueIdentifier>{e43854d2-f38b-4403-9543-41658ef3bb18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1076,7 +1088,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieLevelUp.h">
       <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\ScoutBornPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
     </ClInclude>
@@ -1157,6 +1169,18 @@
     </ClInclude>
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LancerAttack2Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select\00.ATTACK_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotRunAttackPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\00.RUN_ATTACK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotAttack2Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\02.Attack2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotAttack1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1658,6 +1682,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LancerAttack2Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select\00.ATTACK_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotRunAttackPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\00.RUN_ATTACK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotAttack2Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\02.Attack2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotAttack1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

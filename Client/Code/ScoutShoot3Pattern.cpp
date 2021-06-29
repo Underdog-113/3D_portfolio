@@ -77,7 +77,7 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 
 			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 			pOwner->GetTransform()->SetPosition(mPos);
-			PatternRepeatSound(m_curMoveSound, pOwner, 0.3f);
+			PatternRepeatSound(m_curMoveSound, pOwner, 0.6f);
 		}
 	}
 	// 상대가 shoot3 범위 안이고

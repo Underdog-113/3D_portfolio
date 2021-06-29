@@ -23,6 +23,9 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_ScoutC) fsm = pOwner->GetComponent<CFSM_ScoutC>();
 
+	if (false == fsm->GetDM())
+		return;
+
 	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
@@ -75,6 +78,7 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(m_curState);
 		--m_moveCnt;
 		SetMoveSound();
+		PatternPlaySound(m_curMoveSound, pOwner);
 	}
 	// 내가 앞으로 이동 중이라면
 	else if (Name_RUN_F == fsm->GetCurStateString())
@@ -83,7 +87,6 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 
 		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
-		PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_RUN_B == fsm->GetCurStateString())
@@ -92,7 +95,6 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 
 		mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
-		PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
 	}
 	// 내가 왼쪽으로 이동 중이라면
 	else if (Name_RUN_L == fsm->GetCurStateString())
@@ -100,7 +102,6 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 		mPos.x += GET_DT;
 		mPos.z -= GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
-		PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
 	}
 	// 내가 오른쪽으로 이동 중이라면
 	else if (Name_RUN_R == fsm->GetCurStateString())
@@ -108,7 +109,6 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 		mPos.x -= GET_DT;
 		mPos.z += GET_DT;
 		pOwner->GetTransform()->SetPosition(mPos);
-		PatternRepeatSound(m_curMoveSound, pOwner, 0.3f);
 	}
 }
 

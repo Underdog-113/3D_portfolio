@@ -272,6 +272,7 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
     <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\LancerAttack2Pattern.h" />
     <ClInclude Include="..\Header\LancerBasePattern.h" />
     <ClInclude Include="..\Header\LancerBornPattern.h" />
     <ClInclude Include="..\Header\LancerDiePattern.h" />
@@ -308,10 +309,13 @@
     <ClInclude Include="..\Header\NinzaHitPattern.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\RobotAttack1Pattern.h" />
+    <ClInclude Include="..\Header\RobotAttack2Pattern.h" />
     <ClInclude Include="..\Header\RobotBasePattern.h" />
     <ClInclude Include="..\Header\RobotBornPattern.h" />
     <ClInclude Include="..\Header\RobotDiePattern.h" />
     <ClInclude Include="..\Header\RobotHitPattern.h" />
+    <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
     <ClInclude Include="..\Header\ScoutBasePattern.h" />
     <ClInclude Include="..\Header\ScoutBornPattern.h" />
     <ClInclude Include="..\Header\ScoutDiePattern.h" />
@@ -440,6 +444,7 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
+    <ClCompile Include="..\Code\LancerAttack2Pattern.cpp" />
     <ClCompile Include="..\Code\LancerBasePattern.cpp" />
     <ClCompile Include="..\Code\LancerBornPattern.cpp" />
     <ClCompile Include="..\Code\LancerDiePattern.cpp" />
@@ -477,10 +482,13 @@
     <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\RobotAttack1Pattern.cpp" />
+    <ClCompile Include="..\Code\RobotAttack2Pattern.cpp" />
     <ClCompile Include="..\Code\RobotBasePattern.cpp" />
     <ClCompile Include="..\Code\RobotBornPattern.cpp" />
     <ClCompile Include="..\Code\RobotDiePattern.cpp" />
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
+    <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
     <ClCompile Include="..\Code\ScoutBasePattern.cpp" />
     <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
     <ClCompile Include="..\Code\ScoutDiePattern.cpp" />

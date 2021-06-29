@@ -103,19 +103,22 @@ void CAttackBox::LateUpdate(void)
 void CAttackBox::OnDestroy(void)
 {
 	__super::OnDestroy();
+
 	
+
 }
 
 void CAttackBox::OnEnable(void)
 {
 	__super::OnEnable();
-	
 }
 
 void CAttackBox::OnDisable(void)
 {
 	__super::OnDisable();
 	
+	if (m_spTransform)
+		m_spTransform->SetPosition(0, 0, 0);
 	m_vCollided.clear();
 }
 
@@ -162,6 +165,8 @@ void CAttackBox::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		if (pObject == object)
 			return;
 	}
+
+	m_vCollided.emplace_back(pObject);
 
 	if (m_collisionID == (_int)ECollisionID::PlayerAttack)
 	{

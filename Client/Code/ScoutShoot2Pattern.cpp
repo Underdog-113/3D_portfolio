@@ -28,13 +28,28 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_ScoutC) fsm = pOwner->GetComponent<CFSM_ScoutC>();
 
-	CoolTime(m_atkTime, m_atkCool, m_atkReady);
-	CoolTime(m_walkTime, m_walkCool, m_walkReady);
+	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
+	//CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
 	// 내가 상대를 추적
 	if (true == m_onChase)
 	{
 		static_cast<CMO_Scout*>(pOwner)->ChaseTarget(tPos);
+	}
+
+	/************************* Sound */
+	// run start sound
+	if ((Name_RUN_F == fsm->GetCurStateString() ||
+		 Name_RUN_B == fsm->GetCurStateString()) &&
+		 true == m_onWalk)
+	{
+		PatternRepeatSound(m_curMoveSound, pOwner, 0.6f);
+	}
+	else if ((Name_RUN_F == fsm->GetCurStateString() ||
+			  Name_RUN_B == fsm->GetCurStateString()) &&
+			  false == m_onWalk)
+	{
+		PatternStopSound(pOwner);
 	}
 
 	/************************* Range */
@@ -60,7 +75,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 
 			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 			pOwner->GetTransform()->SetPosition(mPos);
-			PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
+			m_onWalk = true;
 		}
 		// 내가 뒤로 이동 중이라면
 		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && false == m_walkReady)
@@ -69,15 +84,14 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 
 			mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
 			pOwner->GetTransform()->SetPosition(mPos);
-			PatternRepeatSound(m_curMoveSound, pOwner, 0.5f);
+			m_onWalk = true;
 		}
 		// 내가 뒤로 이동이 끝났다면
 		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
 		{
-			m_walkReady = false;
 			fsm->ChangeState(Name_IDLE);
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
-			PatternStopSound(pOwner);
+			m_onWalk = false;
 		}
 	}
 	// 상대가 공격 범위 안이고
@@ -91,12 +105,13 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			fsm->ChangeState(Name_SHOOT_2);
 			m_onChase = false;
+			m_onWalk = false;
+
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
 			_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 			m_beamDir = pPos - mPos;
 			m_beamDir.y = 0.f;
 			D3DXVec3Normalize(&m_beamDir, &m_beamDir);
-
 			PatternPlaySound(L"Scout_Laser.wav", pOwner);
 		}
 		// shoot2 상태라면 뒤로 이동 상태로 변경
@@ -105,21 +120,22 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->ChangeState(Name_RUN_B);
 			SetMoveSound();
 			m_onChase = true;
+			m_onWalk = true;
 		}
 	}
 
  	/************************* AttackBox */
 	// shoot2 상태가 완료되면 attackbox off
 	if (Name_SHOOT_2 == fsm->GetCurStateString() && 
-		0.6f <= fsm->GetDM()->GetAniTimeline())
+		0.7f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_onShoot2 = false;
 		static_cast<CMO_Scout*>(pOwner)->UnActiveAttackBox();
 	}
 	// shoot2 상태라면
-	if (Name_SHOOT_2 == fsm->GetCurStateString() &&
-		0.55f <= fsm->GetDM()->GetAniTimeline() &&
-		0.6f > fsm->GetDM()->GetAniTimeline() &&
+	else if (Name_SHOOT_2 == fsm->GetCurStateString() &&
+		0.65f <= fsm->GetDM()->GetAniTimeline() &&
+		0.7f > fsm->GetDM()->GetAniTimeline() &&
 		false == m_onShoot2)
 	{
 		m_onShoot2 = true;
@@ -129,7 +145,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		_float3 offset = ZERO_VECTOR;
 		_float3 mPos = pOwner->GetTransform()->GetPosition();
 		
-		pScout->GetAttackBox()->GetTransform()->SetForward(m_beamDir);
+		pScout->GetAttackBox()->GetTransform()->SetRotation(pScout->GetTransform()->GetRotation());
 		pScout->GetAttackBox()->GetTransform()->SetPosition(mPos);
 
 		offset = _float3(0, 0, 5);

@@ -1,11 +1,11 @@
 #pragma once
 #include "StateMachineC.h"
 
-class FSM_RobotC final : public Engine::CStateMachineC
+class CFSM_RobotC final : public Engine::CStateMachineC
 {
 public:
-	FSM_RobotC();
-	~FSM_RobotC() = default;
+	CFSM_RobotC();
+	~CFSM_RobotC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;

@@ -154,7 +154,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		_float3 size = { 2.f, 2.f, 10.f };
 		_float3 offset = ZERO_VECTOR; 
 
-		_float3 mPos = pOwner->GetTransform()->GetLastPosition();
+		_float3 mPos = pOwner->GetTransform()->GetPosition();
 		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 		_float3 beamDir = pPos - mPos;
 		beamDir.y = 0.f;

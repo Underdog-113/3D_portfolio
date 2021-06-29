@@ -36,6 +36,7 @@
 #include "LancerDiePattern.h"
 #include "LancerHitPattern.h"
 #include "LancerBasePattern.h"
+#include "LancerAttack2Pattern.h"
 
 /* Ninza */
 #include "NinzaBornPattern.h"
@@ -48,5 +49,8 @@
 #include "RobotDiePattern.h"
 #include "RobotHitPattern.h"
 #include "RobotBasePattern.h"
+#include "RobotRunAttackPattern.h"
+#include "RobotAttack1Pattern.h"
+#include "RobotAttack2Pattern.h"
 
 /* Bronya */

@@ -8,6 +8,7 @@
 #include "MO_Sickle.h"
 #include "MO_Scout.h"
 #include "MO_Lancer.h"
+#include "MO_Robot.h"
 #include "MB_Ganesha.h"
 
 /* for.Player */
@@ -72,8 +73,9 @@ void CWooScene::Start(void)
 	//SpiderSetting();
 	//SickleSetting();
 	//GaneshaSetting();
-	ScoutSetting();
-	//LancerSetting();
+	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
+	LancerSetting();
+	//RobotSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -236,4 +238,13 @@ void CWooScene::LancerSetting(void)
 	spLancerClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spLancerClone)->SelectChannelID();
 	m_spLancer = spLancerClone;
+}
+
+void CWooScene::RobotSetting(void)
+{
+	/* Robot */
+	SP(Engine::CObject) spRobotClone = ADD_CLONE(L"MO_Robot", true, (_uint)ELayerID::Enemy, L"MO_Robot");
+	spRobotClone->GetTransform()->SetPosition(3, 0, 3);
+	std::dynamic_pointer_cast<CMonster>(spRobotClone)->SelectChannelID();
+	m_spRobot = spRobotClone;
 }

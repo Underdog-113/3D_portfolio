@@ -124,7 +124,6 @@ void CKiana::Update(void)
 	__super::Update();
 	
 	UpdatePivotMatrices();
-	
 
 	if (m_ultraMode)
 		UseUltraCost();

@@ -30,6 +30,8 @@ SP(Engine::CObject) CMO_Robot::MakeClone(void)
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+
+	spClone->m_spStateMachine = spClone->GetComponent<CFSM_RobotC>();
 	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
 
 	return spClone;
@@ -38,20 +40,24 @@ SP(Engine::CObject) CMO_Robot::MakeClone(void)
 void CMO_Robot::Awake(void)
 {
 	__super::Awake();
+	m_spStateMachine = AddComponent<CFSM_RobotC>();
 	m_spPatternMachine->AddNecessaryPatterns(CRobotBornPattern::Create(), CRobotDiePattern::Create(), CRobotBasePattern::Create(), CRobotHitPattern::Create());
+	//m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create());
+	m_spPatternMachine->AddPattern(CRobotAttack1Pattern::Create());
+	m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
 }
 
 void CMO_Robot::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(1.7f, 1.7f, 1.7f);
-	m_spTransform->SetRotationY(D3DXToRadian(90));
+	//m_spTransform->SetSize(1.f, 1.f, 1.f);
+	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(549.f);
+	stat.SetBaseHp(849.f);
 	stat.SetBaseAtk(43.f);
 	stat.SetBaseDef(19.f);
 
