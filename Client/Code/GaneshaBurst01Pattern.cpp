@@ -140,7 +140,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_onBurst = false;
-		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBox();
+		//static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBox();
 	}
 	// burst 상태라면
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
@@ -149,7 +149,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		false == m_onBurst)
 	{
 		m_onBurst = true;
-		m_atkMat = pOwner->GetTransform()->GetLastWorldMatrix();
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
 		_float3 size = { 2.f, 2.f, 10.f };
 		_float3 offset = ZERO_VECTOR; 
@@ -166,10 +166,10 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			pGanesha->GetTransform()->GetRotation().y,
 			pGanesha->GetTransform()->GetRotation().x,
 			pGanesha->GetTransform()->GetRotation().z);*/
-		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
+		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos + beamDir * 5);
 		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
 
-		offset.z = 5;
+		//offset.z = 5;
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}

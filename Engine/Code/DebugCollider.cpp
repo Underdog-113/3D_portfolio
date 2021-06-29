@@ -46,6 +46,9 @@ void CDebugCollider::Start(void)
 {
 	__super::Start();
 
+	if (m_pOwner->GetObjectKey() == L"AttackBox")
+		int a = 5;
+
 	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
 	switch (m_pCollider->GetColliderType())
 	{
@@ -99,11 +102,17 @@ void CDebugCollider::FixedUpdate(void)
 
 void CDebugCollider::Update(void)
 {
+	if (m_pOwner->GetObjectKey() == L"AttackBox")
+		int a = 5;
 	__super::Update();
+
+	
 }
 
 void CDebugCollider::LateUpdate(void)
 {
+	if (m_pOwner->GetObjectKey() == L"AttackBox")
+		int a = 5;
 	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
 	switch (m_pCollider->GetColliderType())
 	{

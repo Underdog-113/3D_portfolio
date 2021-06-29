@@ -100,9 +100,9 @@ protected:
 	
 	GETTOR			(const _mat*,		m_pParentMatrix,			nullptr,			ParentMatrix)
 	
-	GETTOR			(_mat,				m_lastRotMatrix,			{},					LastRotMatrix)
-	GETTOR			(_mat,				m_lastWorldMat,				{},					LastWorldMatrix)
-	GETTOR			(_mat,				m_lastWorldMatNoScale,		{},					LastWorldMatrixNoScale)
+	//GETTOR			(_mat,				m_lastRotMatrix,			{},					LastRotMatrix)
+	//GETTOR			(_mat,				m_lastWorldMat,				{},					LastWorldMatrix)
+	//GETTOR			(_mat,				m_lastWorldMatNoScale,		{},					LastWorldMatrixNoScale)
 
 	GETTOR			(_mat,				m_rotMatrix,				{},					RotMatrix)
 	GETTOR			(_mat,				m_worldMat,					{},					WorldMatrix)
