@@ -190,6 +190,10 @@ void CDynamicMeshData::SetAniFixTillEnd(_bool isItFixed)
 	m_pAniCtrl->SetFixTillEnd(isItFixed);
 }
 
+void CDynamicMeshData::SetLoopAnim(_uint animIndex)
+{
+	m_pAniCtrl->SetLoopAnim(animIndex);
+}
 
 void CDynamicMeshData::SetupFrameMatrices(_DerivedD3DXFRAME * pFrame, _mat * pParentMat)
 {
