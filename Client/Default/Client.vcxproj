@@ -270,7 +270,6 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
-    <ClInclude Include="..\Header\Kiana_Pistol.h" />
     <ClInclude Include="..\Header\LancerAttack2Pattern.h" />
     <ClInclude Include="..\Header\LancerBasePattern.h" />
     <ClInclude Include="..\Header\LancerBornPattern.h" />
@@ -281,7 +280,6 @@
     <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
-    <ClInclude Include="..\Header\Kiana_Pistol.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Trail.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
