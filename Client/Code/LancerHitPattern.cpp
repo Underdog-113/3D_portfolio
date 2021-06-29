@@ -5,12 +5,6 @@
 #include "FSMDefine_Lancer.h"
 #include "MO_Lancer.h"
 
-//#include "StageControlTower.h"
-//#include "Valkyrie.h"
-//#include "DynamicMeshData.h"
-//#include "PatternMachineC.h"
-//#include "AniCtrl.h"
-
 CLancerHitPattern::CLancerHitPattern()
 {
 }
@@ -28,6 +22,7 @@ void CLancerHitPattern::Pattern(Engine::CObject* pOwner)
 		true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL())
 	{
 		fsm->ChangeState(Name_HIT_L);
+		PatternPlaySound(L"Lencer_Hit.wav", pOwner);
 	}
 	else if (Name_HIT_L == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
@@ -39,6 +34,7 @@ void CLancerHitPattern::Pattern(Engine::CObject* pOwner)
 		true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitH())
 	{
 		fsm->ChangeState(Name_HIT_H);
+		PatternPlaySound(L"Lencer_Hit.wav", pOwner);
 	}
 	else if (Name_HIT_H == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
