@@ -64,21 +64,8 @@ void CCatPawShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
-	/*m_pEffect->SetTexture("g_SubTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);*/
-
-	D3DMATERIAL9* pMtrl = &spGC->m_mtrl;
-
-	size_t _dwMaterials = spGC->GetMesh()->GetMeshData()->GetSubsetCount();
-
-	
-
-	for (size_t i = 0; i < _dwMaterials; ++i)
-	{	
-		m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][i]->pTexture);
-
-		
-		pMtrl++;
-	}
+	m_pEffect->SetTexture("g_SubTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);	
 
 
 }

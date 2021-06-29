@@ -42,14 +42,15 @@ void CYongScene::Start(void)
 {
 	__super::Start();
 	{
-		SP(Engine::CObject) spMeshEffect
+		// Kiana Ult
+		/*SP(Engine::CObject) spMeshEffect
 			= m_pObjectFactory->AddClone(L"Kiana_Ult_Eff", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ring_Ground");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"ring_ground");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"ring_ground");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);*/
+
 		////SpawnAttackRange();
 		//// Kiana Setting333
 		//{
@@ -109,6 +110,25 @@ void CYongScene::Update(void)
 {
 	//m_pController->Update();
 	__super::Update();
+
+	if (Engine::IMKEY_DOWN(KEY_X))
+	{
+		//SP(Engine::CObject) spMeshEffect
+		//	= m_pObjectFactory->AddClone(L"Theresa_Ult_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		//spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Trail_1");
+		//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Tornado_3");
+		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"ATK_Distortion_3");
+		//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+
+		SP(Engine::CObject) spMeshEffect
+			= m_pObjectFactory->AddClone(L"Theresa_Ult_Boom", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Boom");
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	}
 }
 
 void CYongScene::LateUpdate(void)
