@@ -30,6 +30,12 @@ private:
 	void FixRootMotionOffset(_uint index);
 	void ResetCheckMembers();
 
+	void OnSwordCollider();
+	void OffSwordCollider();
+
+	void OnAxeCollider();
+	void OffAxeCollider();
+
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
 	bool CheckAction_Evade_OnAction(float coolTime = Cool_Evade);

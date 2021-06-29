@@ -35,6 +35,15 @@ public:
 
 public:
 					void						SetupBox			(CObject * pOwner, _mat * pParentMat, _float3 size, _float3 offset, _float3 rotOffset, HitInfo info);
+
+					void						SetAttackInfo		(CObject* pOwner, _mat* pParentMatrix, HitInfo info);
+					void						SetBoxRange			(_float3 size, _float3 offset, _float3 rotOffset);
+
+					_mat						GetQuatRotationMatrix(D3DXQUATERNION rotation);
+					void						GetQuatRotationX(_float3* pOut, _float3 in, D3DXQUATERNION rotation);
+					void						GetQuatRotationY(_float3* pOut, _float3 in, D3DXQUATERNION rotation);
+					void						GetQuatRotationZ(_float3* pOut, _float3 in, D3DXQUATERNION rotation);
+					_float3						QuaternionToRadian(D3DXQUATERNION rotation);
 private:
 					void						SetBasicName		(void) override;
 private:

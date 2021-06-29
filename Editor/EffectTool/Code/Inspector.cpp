@@ -526,7 +526,7 @@ void CInspector::OnBnClickedAlphaMask()
 {
 	CString str = _T("png Files(*.png) |*.png|"); // png ���� ǥ��
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
-
+#
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
 
 	dlg.m_ofn.lpstrInitialDir = lpwstr;
@@ -550,7 +550,6 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		SP(Engine::CObject) spMeshEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Editor", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex", 1);
@@ -563,11 +562,10 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		SP(Engine::CObject) spMeshEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackTrail", false, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(Engine::RemoveExtension(ObjectName.operator LPCWSTR()));
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	}
 
 }
@@ -955,7 +953,7 @@ void CInspector::ActionUpdate()
 			{
 				spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 				spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-				spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
+				spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
 				m_fStartTime = 0.f;
 				m_isPlayAnim = false;
 				m_iRepeatCnt++;
@@ -977,7 +975,7 @@ void CInspector::ActionUpdate()
 		{
 			spObject->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.f, 0.f, 2.f));
 			spObject->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0.f, 0.f, 0.f));
-			spObject->GetComponent<Engine::CTransformC>()->SetSize(m_vSaveScale);
+			spObject->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
 		}
 		m_fStartTime = 0.f;
 		m_iRepeatCnt = 0;
@@ -1010,15 +1008,15 @@ void CInspector::AnimTransformUpdate(SP(Engine::CObject) spObject)
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().x <= m_vSaveRot.x)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(D3DXToRadian(m_fAnimSpeed * GET_DT));
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationX(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().y <= m_vSaveRot.y)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(m_fAnimSpeed * GET_DT));
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationY(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetRotation().z <= m_vSaveRot.z)
 	{
-		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(D3DXToRadian(m_fAnimSpeed * GET_DT));
+		spObject->GetComponent<Engine::CTransformC>()->AddRotationZ(m_fAnimSpeed * GET_DT);
 	}
 	if (spObject->GetComponent<Engine::CTransformC>()->GetSize().x <= m_vSaveScale.x)
 	{

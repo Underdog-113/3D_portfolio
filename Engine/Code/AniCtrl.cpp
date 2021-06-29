@@ -102,6 +102,9 @@ void CAniCtrl::ChangeAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _
 		blendTime = nextPeriod * 0.2f;
 	m_period = nextPeriod;
 
+	if (blendTime > 0.15f)
+		blendTime = 0.15f;
+
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
 	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
 	m_pAniCtrl->KeyTrackWeight(m_curTrack, 0.1f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
@@ -147,6 +150,9 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	else
 		blendTime = nextPeriod * 0.2f;
 	m_period = nextPeriod;
+
+	if (blendTime > 0.2f)
+		blendTime = 0.2f;
 
 	//현재 트랙을 끈다.
 	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
@@ -195,6 +201,9 @@ void CAniCtrl::ChangeFakeAniSet()
 	else
 		blendTime = nextPeriod * 0.01;
 	m_fakePeriod = nextPeriod;
+
+	if (blendTime > 0.01f)
+		blendTime = 0.01f;
 
 	m_pFakeAniCtrl->KeyTrackEnable(m_fakeTrack, FALSE, m_fakeTimer + blendTime);
 	//m_pFakeAniCtrl->SetTrackEnable(m_fakeTrack, FALSE);

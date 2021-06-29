@@ -4,6 +4,8 @@
 #include "FSM_TheresaC.h"
 #include "DynamicMeshData.h"
 
+#include "AttackBox.h"
+
 CTheresa::CTheresa()
 {
 }
@@ -49,6 +51,7 @@ void CTheresa::Awake(void)
 void CTheresa::Start(void)
 {
 	__super::Start();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 
 	m_vMeshContainers = m_spMesh->GetFirstMeshData_Dynamic()->GetMeshContainers();
 
@@ -58,6 +61,17 @@ void CTheresa::Start(void)
 	m_spMesh->OnRootMotion();
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
+
+	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_Prop1");
+	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_Prop2");
+	CreatePivotMatrix(&m_pAxePivot_World, &m_pAxePivot_Frame, "Cross_T6_Bone019");
+
+	CreateAttackBall(&m_pAttackBall_LeftHand);
+	CreateAttackBall(&m_pAttackBall_RightHand);
+	CreateAttackBall(&m_pAttackBall_Axe);
+
+	m_pAttackBox_Axe = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
+	m_pAttackBox_Axe->SetOwner(this);
 
 	// status
 	V_WarshipStat stat;
@@ -84,7 +98,9 @@ void CTheresa::Update(void)
 {
 	__super::Update();
 
-
+	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
+	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
+	UpdatePivotMatrix(m_pAxePivot_World, m_pAxePivot_Frame);
 }
 
 void CTheresa::LateUpdate(void)
@@ -110,6 +126,10 @@ void CTheresa::PostRender(LPD3DXEFFECT pEffect)
 void CTheresa::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	SAFE_DELETE(m_pLeftHand_World)
+	SAFE_DELETE(m_pRightHand_World)
+	SAFE_DELETE(m_pAxePivot_World)
 
 	SAFE_DELETE(m_pStat)
 }
@@ -154,12 +174,13 @@ void CTheresa::On_Axe(void)
 
 void CTheresa::Off_Axe(void)
 {
-	m_vMeshContainers[Axe_0]->hide = true;
-	m_vMeshContainers[Axe_1]->hide = true;
-	m_vMeshContainers[Axe_2]->hide = true;
+	//m_vMeshContainers[Axe_0]->hide = true;
+	//m_vMeshContainers[Axe_1]->hide = true;
+	//m_vMeshContainers[Axe_2]->hide = true;
 }
 
 void CTheresa::SetChargeMode(bool value)
 {
 	m_chargeMode = value;
 }
+

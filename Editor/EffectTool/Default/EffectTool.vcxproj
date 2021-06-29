@@ -201,12 +201,12 @@
     <ClInclude Include="..\Header\CircularGaugeShader.h" />
     <ClInclude Include="..\Header\DamageFontShader.h" />
     <ClInclude Include="..\Header\DissolveShader.h" />
-    <ClInclude Include="..\Header\EffectShader.h" />
     <ClInclude Include="..\Header\EffectToolDefine.h" />
     <ClInclude Include="..\Header\EffectToolEnum.h" />
     <ClInclude Include="..\Header\EffectToolInclude.h" />
     <ClInclude Include="..\Header\EffectToolScene.h" />
     <ClInclude Include="..\Header\EffectToolTypedef.h" />
+    <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\Inspector.h" />
     <ClInclude Include="..\Header\MainEditor.h" />
     <ClInclude Include="..\Header\MeshEffect.h" />
@@ -233,8 +233,8 @@
     <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
     <ClCompile Include="..\Code\DamageFontShader.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
-    <ClCompile Include="..\Code\EffectShader.cpp" />
     <ClCompile Include="..\Code\EffectToolScene.cpp" />
+    <ClCompile Include="..\Code\FireShader.cpp" />
     <ClCompile Include="..\Code\Inspector.cpp" />
     <ClCompile Include="..\Code\MainEditor.cpp" />
     <ClCompile Include="..\Code\MeshEffect.cpp" />

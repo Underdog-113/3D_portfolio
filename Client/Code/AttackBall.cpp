@@ -186,6 +186,7 @@ void CAttackBall::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 
 void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, HitInfo info)
 {
+	m_offset = ZERO_VECTOR;
 	m_pOwner = pOwner;
 
 	m_pParentMatrix = pParentMat;

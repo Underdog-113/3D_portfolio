@@ -38,13 +38,26 @@
 #include "MB_Bronya.h"
 #include "Monster.h"
 
-#include "AttackTrail_Client.h"
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
+
+// Kiana
+#include "Kiana_Trail.h"
+#include "Kiana_Ult_Trail.h"
 #include "Kiana_Ult_Eff.h"
 #include "Kiana_Ult_Plane.h"
 #include "Kiana_Ult_Shield.h"
 #include "Kiana_Ult_Ring.h"
+
+// Theresa
+#include "Theresa_Trail.h"
+#include "Theresa_Ult_Trail.h"
+#include "Theresa_Ult_Eff.h"
+#include "Theresa_Ult_Charge.h"
+#include "Theresa_Ult_Smoke.h"
+#include "Theresa_Ult_Fire.h"
+#include "Theresa_Ult_Boom.h"
+#include "Theresa_Ult_Crack.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -148,13 +161,19 @@ void CStaticScene::InitPrototypes(void)
 	InitUiPrototypes();
 	InitMonsterPrototypes();
 	InitValkyriePrototypes();
-	
-	SP(CMeshEffect_Client) spAttack_Trail(CAttackTrail_Client::Create(true, this));
-	GetObjectFactory()->AddPrototype(spAttack_Trail);
 
+	// Attack Trail
+	SP(CMeshEffect_Client) spKiana_Trail(CKiana_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Trail);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Trail(CKiana_Ult_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Trail);
+
+	// Attack Range
 	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 
+	// Kiana Effect
 	SP(CMeshEffect_Client) spKiana_Ult_Eff(CKiana_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff);
 
@@ -166,6 +185,31 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
+
+	// Theresa Effect
+	SP(CMeshEffect_Client) spTheresa_Trail(CTheresa_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Trail);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Trail(CTheresa_Ult_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Trail);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Charge(CTheresa_Ult_Charge::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Charge);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Smoke(CTheresa_Ult_Smoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Smoke);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Fire(CTheresa_Ult_Fire::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Fire);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Boom(CTheresa_Ult_Boom::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Boom);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Crack(CTheresa_Ult_Crack::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
 }
 
 void CStaticScene::InitMapPrototypes(void)

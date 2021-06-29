@@ -29,9 +29,6 @@ SP(Engine::CObject) CKiana_Ult_Plane::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetPosition(_float3(0.f, 0.f, 0.f));
-	spClone->m_spTransform->SetRotation(_float3(0.f, 0.f, 0.f));
-	spClone->m_spTransform->SetSize(_float3(0.5f, 0.5f, 0.5f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
@@ -43,12 +40,6 @@ SP(Engine::CObject) CKiana_Ult_Plane::MakeClone()
 void CKiana_Ult_Plane::Awake()
 {
 	__super::Awake();
-
-	m_addExtra = true;
-	m_spMesh = AddComponent<Engine::CMeshC>();
-	m_spTexture = AddComponent<Engine::CTextureC>();
-	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
 void CKiana_Ult_Plane::Start()
