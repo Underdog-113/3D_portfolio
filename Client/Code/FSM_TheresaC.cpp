@@ -65,10 +65,8 @@ void CFSM_TheresaC::ResetCheckMembers()
 
 void CFSM_TheresaC::OnSwordCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_LeftHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetLeftHandWorldMatrix(), 0.1f);
-	m_pTheresa->GetAttackBall_LeftHand()->SetOffset(_float3(0.f, 0.5f, 0.f));
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_RightHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetRightHandWorldMatrix(), 0.1f);
-	m_pTheresa->GetAttackBall_RightHand()->SetOffset(_float3(0.f, 0.5f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_LeftHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetLeftHandWorldMatrix(), 0.1f, _float3(0.f, 0.5f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_RightHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetRightHandWorldMatrix(), 0.1f, _float3(0.f, 0.5f, 0.f));
 }
 
 void CFSM_TheresaC::OffSwordCollider()
@@ -79,10 +77,8 @@ void CFSM_TheresaC::OffSwordCollider()
 
 void CFSM_TheresaC::OnAxeCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f);
-	m_pTheresa->GetAttackBall_Axe()->SetOffset(_float3(2.f, 0.f, 0.f));
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f);
-	m_pTheresa->GetAttackBall_AxeStick()->SetOffset(_float3(1.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(2.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
 }
 
 void CFSM_TheresaC::OffAxeCollider()
@@ -962,15 +958,18 @@ void CFSM_TheresaC::SwitchOut_End(void)
 
 void CFSM_TheresaC::Ultra_Init(void)
 {
+
 }
 
 void CFSM_TheresaC::Ultra_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Ultra);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
 
 	m_pTheresa->Off_Sword();
 	m_ultraAxeOnOff = false;
+	m_ultraImpact = false;
 }
 
 void CFSM_TheresaC::Ultra_Update(float deltaTime)
@@ -978,7 +977,15 @@ void CFSM_TheresaC::Ultra_Update(float deltaTime)
 	if (!m_ultraAxeOnOff && m_pDM->GetAniTimeline() > Delay_UltShowAxe)
 	{
 		m_pTheresa->On_Axe();
+		OnAxeCollider();
 		m_ultraAxeOnOff = true;
+	}
+
+	if (!m_ultraImpact && m_pDM->GetAniTimeline() > 0.605f)
+	{
+		OffAxeCollider();
+		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeImpact(), 3.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 1.f, _float3(2.f, 0.f, 0.f));
+		m_ultraImpact = true;
 	}
 
 	if (CheckAction_StandBy_Timeout())
@@ -989,6 +996,7 @@ void CFSM_TheresaC::Ultra_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_ultraUsed = true;
+	m_pTheresa->GetAttackBall_AxeImpact()->SetIsEnabled(false);
 }
 
 void CFSM_TheresaC::CastCross_Init(void)

@@ -66,6 +66,7 @@ private:
 
 	bool m_ultraAxeOnOff = false;
 	bool m_ultraUsed = false;
+	bool m_ultraImpact = false;
 
 public:
 	//StandBy

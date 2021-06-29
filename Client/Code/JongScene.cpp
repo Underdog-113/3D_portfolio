@@ -63,15 +63,16 @@ void CJongScene::Start(void)
 	__super::Start();
 	CDamageObjectPool::GetInstance()->Start(this);
 
-	KianaTest();
+	//KianaTest();
 	//TheresaTest();
 	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
-	//SakuraTest();
+	SakuraTest();
 	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
-	SetSceneCamera(m_spKiana);
+	//SetSceneCamera(m_spKiana);
 	//SetSceneCamera(m_spTheresa);
+	SetSceneCamera(m_spSakura);
 
 	//CollisionDummy();
 	//SickleTest();

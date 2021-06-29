@@ -70,6 +70,7 @@ void CTheresa::Start(void)
 	CreateAttackBall(&m_pAttackBall_RightHand);
 	CreateAttackBall(&m_pAttackBall_Axe);
 	CreateAttackBall(&m_pAttackBall_AxeStick);
+	CreateAttackBall(&m_pAttackBall_AxeImpact);
 
 
 	// status

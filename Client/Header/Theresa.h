@@ -57,8 +57,7 @@ private:
 	
 	GETTOR			(_bool,			m_chargeMode,			false,		ChargeMode)
 
-private:
-	
+private:	
 	GETTOR			(_mat*,			m_pLeftHand_World,		nullptr,	LeftHandWorldMatrix)
 	GETTOR			(_mat*,			m_pRightHand_World,		nullptr,	RightHandWorldMatrix)
 	Engine::D3DXFRAME_DERIVED*	m_pLeftHand_Frame = nullptr;
@@ -66,13 +65,12 @@ private:
 	
 	GETTOR			(_mat*,			m_pAxePivot_World,		nullptr,	AxePivotWorldMatrix)
 	Engine::D3DXFRAME_DERIVED*	m_pAxePivot_Frame = nullptr;
-
-
+	
 	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
 	GETTOR			(CAttackBall*,	m_pAttackBall_RightHand,	nullptr,	AttackBall_RightHand)
 	GETTOR			(CAttackBall*,	m_pAttackBall_Axe,			nullptr,	AttackBall_Axe)
 	GETTOR			(CAttackBall*,	m_pAttackBall_AxeStick,		nullptr,	AttackBall_AxeStick)
-
+	GETTOR			(CAttackBall*,	m_pAttackBall_AxeImpact,	nullptr,	AttackBall_AxeImpact)
 };
 
 

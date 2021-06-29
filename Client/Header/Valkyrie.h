@@ -49,7 +49,7 @@ public:
 public:
 	void CreateAttackBall(CAttackBall** ppAttackBall);
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
-	void ActiveAttackBall(CAttackBall* pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
+	void ActiveAttackBall(CAttackBall* pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius, _float3 offset = ZERO_VECTOR);
 	void UnActiveAttackBall();
 
 	void ActiveAttackBox(CAttackBox* pAttackBox, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat);
