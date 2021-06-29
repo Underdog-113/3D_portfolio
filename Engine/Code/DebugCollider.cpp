@@ -46,7 +46,7 @@ void CDebugCollider::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetParent(m_pOwner->GetTransform());
+	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
 	switch (m_pCollider->GetColliderType())
 	{
 	case (_int)EColliderType::Ray:
@@ -104,8 +104,7 @@ void CDebugCollider::Update(void)
 
 void CDebugCollider::LateUpdate(void)
 {
-	m_spTransform->SetPosition(m_pCollider->GetOffset());
-	
+	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
 	switch (m_pCollider->GetColliderType())
 	{
 	case (_int)EColliderType::Ray:

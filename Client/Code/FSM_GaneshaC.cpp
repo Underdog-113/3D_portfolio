@@ -203,6 +203,7 @@ void CFSM_GaneshaC::Die_End(void)
 
 void CFSM_GaneshaC::Jump_Back_Init(void)
 {
+	FixRootMotionOffset(Index_Ganesha_Jump_Back);
 }
 
 void CFSM_GaneshaC::Jump_Back_Enter(void)
