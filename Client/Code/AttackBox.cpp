@@ -110,13 +110,13 @@ void CAttackBox::OnDestroy(void)
 void CAttackBox::OnEnable(void)
 {
 	__super::OnEnable();
-	
+	m_spTransform->SetPosition(0, 0, 0);
+	m_spTransform->SetRotation(0, 0, 0);
 }
 
 void CAttackBox::OnDisable(void)
 {
 	__super::OnDisable();
-	
 	m_vCollided.clear();
 }
 
