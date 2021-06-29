@@ -4,6 +4,8 @@
 #include "FSM_TheresaC.h"
 #include "DynamicMeshData.h"
 
+#include "AttackBox.h"
+
 CTheresa::CTheresa()
 {
 }
@@ -49,10 +51,26 @@ void CTheresa::Awake(void)
 void CTheresa::Start(void)
 {
 	__super::Start();
+	m_spDebug = AddComponent<Engine::CDebugC>();
+
+	m_vMeshContainers = m_spMesh->GetFirstMeshData_Dynamic()->GetMeshContainers();
+
+	Off_Axe();
+	Off_Sword();
 
 	m_spMesh->OnRootMotion();
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
+
+	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_Prop1");
+	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_Prop2");
+	CreatePivotMatrix(&m_pAxePivot_World, &m_pAxePivot_Frame, "Cross_T6_Bone019");
+
+	CreateAttackBall(&m_pAttackBall_LeftHand);
+	CreateAttackBall(&m_pAttackBall_RightHand);
+	CreateAttackBall(&m_pAttackBall_Axe);
+	CreateAttackBall(&m_pAttackBall_AxeStick);
+
 
 	// status
 	V_WarshipStat stat;
@@ -79,7 +97,9 @@ void CTheresa::Update(void)
 {
 	__super::Update();
 
-
+	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
+	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
+	UpdatePivotMatrix(m_pAxePivot_World, m_pAxePivot_Frame);
 }
 
 void CTheresa::LateUpdate(void)
@@ -106,6 +126,10 @@ void CTheresa::OnDestroy(void)
 {
 	__super::OnDestroy();
 
+	SAFE_DELETE(m_pLeftHand_World)
+	SAFE_DELETE(m_pRightHand_World)
+	SAFE_DELETE(m_pAxePivot_World)
+
 	SAFE_DELETE(m_pStat)
 }
 
@@ -127,3 +151,35 @@ void CTheresa::SetBasicName(void)
 void CTheresa::ApplyHitInfo(HitInfo info)
 {
 }
+
+void CTheresa::On_Sword(void)
+{
+	m_vMeshContainers[Sword_0]->hide = false;
+	m_vMeshContainers[Sword_1]->hide = false;
+}
+
+void CTheresa::Off_Sword(void)
+{
+	m_vMeshContainers[Sword_0]->hide = true;
+	m_vMeshContainers[Sword_1]->hide = true;
+}
+
+void CTheresa::On_Axe(void)
+{
+	m_vMeshContainers[Axe_0]->hide = false;
+	m_vMeshContainers[Axe_1]->hide = false;
+	m_vMeshContainers[Axe_2]->hide = false;
+}
+
+void CTheresa::Off_Axe(void)
+{
+	m_vMeshContainers[Axe_0]->hide = true;
+	m_vMeshContainers[Axe_1]->hide = true;
+	m_vMeshContainers[Axe_2]->hide = true;
+}
+
+void CTheresa::SetChargeMode(bool value)
+{
+	m_chargeMode = value;
+}
+

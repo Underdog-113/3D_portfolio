@@ -2,6 +2,11 @@
 #ifndef THERESA_H
 #define THERESA_H
 
+#define Axe_0	5
+#define Axe_1	6
+#define Axe_2	7
+#define Sword_0 3
+#define Sword_1 4
 
 #include "Valkyrie.h"
 class CTheresa final : public CValkyrie
@@ -38,10 +43,37 @@ public:
 
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
-
+					void					On_Sword			(void);
+					void					Off_Sword			(void);
+					void					On_Axe				(void);
+					void					Off_Axe				(void);
+					
+					void					SetChargeMode		(bool value);
+					
 
 private:
+	std::vector<Engine::_DerivedD3DXMESHCONTAINER*> m_vMeshContainers;
 	_uint idx = 0;
+	
+	GETTOR			(_bool,			m_chargeMode,			false,		ChargeMode)
+
+private:
+	
+	GETTOR			(_mat*,			m_pLeftHand_World,		nullptr,	LeftHandWorldMatrix)
+	GETTOR			(_mat*,			m_pRightHand_World,		nullptr,	RightHandWorldMatrix)
+	Engine::D3DXFRAME_DERIVED*	m_pLeftHand_Frame = nullptr;
+	Engine::D3DXFRAME_DERIVED*	m_pRightHand_Frame = nullptr;
+	
+	GETTOR			(_mat*,			m_pAxePivot_World,		nullptr,	AxePivotWorldMatrix)
+	Engine::D3DXFRAME_DERIVED*	m_pAxePivot_Frame = nullptr;
+
+
+	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
+	GETTOR			(CAttackBall*,	m_pAttackBall_RightHand,	nullptr,	AttackBall_RightHand)
+	GETTOR			(CAttackBall*,	m_pAttackBall_Axe,			nullptr,	AttackBall_Axe)
+	GETTOR			(CAttackBall*,	m_pAttackBall_AxeStick,		nullptr,	AttackBall_AxeStick)
+
 };
+
 
 #endif

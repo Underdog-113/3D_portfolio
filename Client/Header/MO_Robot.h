@@ -7,7 +7,7 @@ class CMO_Robot : public CMonster
 
 private:
 	CMO_Robot();
-	virtual ~CMO_Robot() = default;
+	virtual ~CMO_Robot();
 
 public:
 	virtual SP(CObject) MakeClone(void) override;
@@ -37,6 +37,12 @@ public:
 	virtual void ApplyHitInfo(HitInfo info) override;
 public:
 	static		SP(CMO_Robot)			Create(_bool isStatic, Engine::CScene* pScene);
+	void						ChaseTarget(_float3 targetPos);
+	void						SetStatus(BaseStat stat);
+	void						UpdatePivotMatrices(void);
+	void						MonsterDead() override;
 
+private:
+	static		_uint						m_s_uniqueID;
 };
 

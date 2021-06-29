@@ -59,4 +59,9 @@ inline std::wstring DeleteCharInWstr(std::wstring src, _byte ch)
 	return Engine::StrToWStr(str);
 }
 
+inline _int GetRandRange(_int min, _int max)
+{
+	return rand() % ((max - min) + 1) + min;
+}
+
 #endif

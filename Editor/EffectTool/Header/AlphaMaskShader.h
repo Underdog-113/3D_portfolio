@@ -14,5 +14,6 @@ public:
 	void SetUpConstantTable(SP(Engine::CGraphicsC) spGC) override;
 
 	_float4 m_Light_Pos;
+	_float  m_fTime = 0.f;
 };
 

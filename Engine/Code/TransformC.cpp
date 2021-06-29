@@ -39,14 +39,6 @@ void CTransformC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
-	m_lastPosition			= m_position;
-	m_lastRotation			= m_rotation;
-	m_lastSize				= m_size;
-
-	m_lastForward			= m_forward;
-	m_lastUp				= m_up;
-	m_lastRight				= m_right;
-
 	m_lastRotMatrix			= m_rotMatrix;
 	m_lastWorldMat			= m_worldMat;
 	m_lastWorldMatNoScale	= m_worldMatNoScale;
@@ -93,36 +85,6 @@ void CTransformC::OnEnable(void)
 void CTransformC::OnDisable(void)
 {
 	__super::OnDisable();
-}
-
-const _float3 & CTransformC::GetPosition(void)
-{
-	return m_lastPosition;
-}
-
-const _float3 & CTransformC::GetRotation(void)
-{
-	return m_lastRotation;
-}
-
-const _float3 & CTransformC::GetSize(void)
-{
-	return m_lastSize;
-}
-
-const _float3 & CTransformC::GetForward(void)
-{
-	return m_lastForward;
-}
-
-const _float3 & CTransformC::GetUp(void)
-{
-	return m_lastUp;
-}
-
-const _float3 & CTransformC::GetRight(void)
-{
-	return m_lastRight;
 }
 
 #pragma region TransformSettors
@@ -461,14 +423,6 @@ void CTransformC::UpdateRotation(void)
 
 void CTransformC::UpdateWorldMatrix(void)
 {
-	m_lastPosition			= m_position;
-	m_lastRotation			= m_rotation;
-	m_lastSize				= m_size;
-
-	m_lastForward			= m_forward;
-	m_lastUp				= m_up;
-	m_lastRight				= m_right;
-
 	m_lastRotMatrix			= m_rotMatrix;
 	m_lastWorldMat			= m_worldMat;
 	m_lastWorldMatNoScale	= m_worldMatNoScale;
@@ -492,14 +446,15 @@ void CTransformC::UpdateWorldMatrix(void)
 	m_worldMat = size * rotateX * rotateY * rotateZ * translation;
 	m_worldMatNoScale = rotateX * rotateY * rotateZ * translation;
 
-	if (m_spParent)
-		ApplyParentMatrix(&m_spParent->GetWorldMatrixNoScale());
-	//{
-	//	m_rotMatrix			*= m_spParent->GetRotMatrix();
-	//	m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
-	//	m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
-	//}
+	
 
+	if (m_spParent)
+	{
+		m_rotMatrix			*= m_spParent->GetRotMatrix();
+		m_worldMatNoScale	*= m_spParent->GetWorldMatrixNoScale();
+		m_worldMat			*= m_spParent->GetWorldMatrixNoScale();
+	}
+	//ApplyParentMatrix(&m_spParent->GetWorldMatrixNoScale());
 	if (m_pParentMatrix)
 		ApplyParentMatrix(m_pParentMatrix);
 }
@@ -517,33 +472,33 @@ void CTransformC::ApplyParentMatrix(const _mat* pMat)
 
 	_mat matToDecompose = m_lastWorldMat;
 
-	m_lastPosition = _float3(matToDecompose._41, matToDecompose._42, matToDecompose._43);
+	m_position = _float3(matToDecompose._41, matToDecompose._42, matToDecompose._43);
 	matToDecompose._41 = 0; matToDecompose._42 = 0; matToDecompose._43 = 0;
 
 	
-	m_lastSize.x = D3DXVec3Length(&_float3(matToDecompose._11, matToDecompose._12, matToDecompose._13));
-	m_lastSize.y = D3DXVec3Length(&_float3(matToDecompose._21, matToDecompose._22, matToDecompose._23));
-	m_lastSize.z = D3DXVec3Length(&_float3(matToDecompose._31, matToDecompose._32, matToDecompose._33));
+	m_size.x = D3DXVec3Length(&_float3(matToDecompose._11, matToDecompose._12, matToDecompose._13));
+	m_size.y = D3DXVec3Length(&_float3(matToDecompose._21, matToDecompose._22, matToDecompose._23));
+	m_size.z = D3DXVec3Length(&_float3(matToDecompose._31, matToDecompose._32, matToDecompose._33));
 
 	if (m_size.x != 0)
 	{
-		matToDecompose._11 /= m_lastSize.x;
-		matToDecompose._12 /= m_lastSize.x;
-		matToDecompose._13 /= m_lastSize.x;
+		matToDecompose._11 /= m_size.x;
+		matToDecompose._12 /= m_size.x;
+		matToDecompose._13 /= m_size.x;
 	}
 
 	if (m_size.y != 0)
 	{
-		matToDecompose._21 /= m_lastSize.y;
-		matToDecompose._22 /= m_lastSize.y;
-		matToDecompose._23 /= m_lastSize.y;
+		matToDecompose._21 /= m_size.y;
+		matToDecompose._22 /= m_size.y;
+		matToDecompose._23 /= m_size.y;
 	}
 
 	if (m_size.z != 0)
 	{
-		matToDecompose._31 /= m_lastSize.z;
-		matToDecompose._32 /= m_lastSize.z;
-		matToDecompose._33 /= m_lastSize.z;
+		matToDecompose._31 /= m_size.z;
+		matToDecompose._32 /= m_size.z;
+		matToDecompose._33 /= m_size.z;
 	}
 
 	m_lastRotMatrix *= matToDecompose;
@@ -552,7 +507,7 @@ void CTransformC::ApplyParentMatrix(const _mat* pMat)
 	D3DXQuaternionRotationMatrix(&rotQuat, &matToDecompose);
 	D3DXQuaternionNormalize(&rotQuat, &rotQuat);
 
-	m_lastRotation = GET_MATH->QuatToRad(rotQuat);
+	m_rotation = GET_MATH->QuatToRad(rotQuat);
 }
 
 void CTransformC::SetWorldMatrix(_mat worldMat)

@@ -96,9 +96,9 @@ void CChangmoScene::Start(void)
 
 
 			spCube->AddComponent<Engine::CCollisionC>()->
-				AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
+				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
 
-			//spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CDebugC>();
 			spCube->AddComponent<Engine::CShaderC>();
 			spCube->GetTransform()->SetSize(10, 1, 10);
 			spCube->GetTransform()->SetPosition(0, -1.f, 0);
@@ -111,7 +111,7 @@ void CChangmoScene::Start(void)
 			spCube->AddComponent<Engine::CCollisionC>()->
 				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, _float3(3.f, 3.f, 3.f), _float3(4, 1.5f, 4), _float3(0, PI / 3, 0)));
 
-			//spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CDebugC>();
 			spCube->AddComponent<Engine::CShaderC>();
 		}
 
@@ -122,7 +122,7 @@ void CChangmoScene::Start(void)
 			spCube->AddComponent<Engine::CCollisionC>()->
 				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f), ZERO_VECTOR, _float3(PI/6, 0, 0)));
 
-			//spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CDebugC>();
 			spCube->AddComponent<Engine::CShaderC>();
 			spCube->GetTransform()->SetSize(10, 1, 10);
 			spCube->GetTransform()->SetPosition(20, -1.f, 0);
@@ -133,8 +133,8 @@ void CChangmoScene::Start(void)
 
 
 
-		m_spDummy = ADD_CLONE(L"MO_Sickle", true);
-		m_spDummy->GetTransform()->SetPosition(0, 0, 5);
+		//m_spDummy = ADD_CLONE(L"MO_Sickle", true);
+		//m_spDummy->GetTransform()->SetPosition(0, 0, 5);
 
 	}
 
@@ -154,22 +154,22 @@ void CChangmoScene::Update(void)
 
 	
 
-	if(Engine::IMKEY_PRESS(KEY_UP))
-		FindObjectByName(L"Parent")->GetTransform()->MoveForward(0.2f);
-	if (Engine::IMKEY_PRESS(KEY_LEFT))
-		FindObjectByName(L"Parent")->GetTransform()->AddRotationY(PI / 90);
-	if (Engine::IMKEY_PRESS(KEY_RIGHT))
-		FindObjectByName(L"Parent")->GetTransform()->AddRotationZ(PI / 90);
-	if (Engine::IMKEY_PRESS(KEY_DOWN))
-		FindObjectByName(L"Parent")->GetTransform()->AddRotationX(PI / 90);
-
-	if (Engine::IMKEY_DOWN(KEY_E))
-		FindObjectByName(L"Parent")->SetDeleteThis(true);
-	if (Engine::IMKEY_DOWN(KEY_Q))
-	{
-		FindObjectByName(L"Parent")->GetTransform()->SetPosition(0, 0, 0);
-		FindObjectByName(L"Parent")->GetTransform()->SetRotation(0, 0, 0);
-	}
+	//if(Engine::IMKEY_PRESS(KEY_UP))
+	//	FindObjectByName(L"Parent")->GetTransform()->MoveForward(0.2f);
+	//if (Engine::IMKEY_PRESS(KEY_LEFT))
+	//	FindObjectByName(L"Parent")->GetTransform()->AddRotationY(PI / 90);
+	//if (Engine::IMKEY_PRESS(KEY_RIGHT))
+	//	FindObjectByName(L"Parent")->GetTransform()->AddRotationZ(PI / 90);
+	//if (Engine::IMKEY_PRESS(KEY_DOWN))
+	//	FindObjectByName(L"Parent")->GetTransform()->AddRotationX(PI / 90);
+	//
+	//if (Engine::IMKEY_DOWN(KEY_E))
+	//	FindObjectByName(L"Parent")->SetDeleteThis(true);
+	//if (Engine::IMKEY_DOWN(KEY_Q))
+	//{
+	//	FindObjectByName(L"Parent")->GetTransform()->SetPosition(0, 0, 0);
+	//	FindObjectByName(L"Parent")->GetTransform()->SetRotation(0, 0, 0);
+	//}
 }
 
 void CChangmoScene::LateUpdate(void)

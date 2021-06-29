@@ -39,82 +39,85 @@ void CFSM_ScoutC::RegisterAllStage()
 	Engine::CState* pState;
 
 	CreateState(CFSM_ScoutC, pState, APPEAR)
-		AddState(pState, L"APPEAR");
+		AddState(pState, Name_APPEAR);
 
 	CreateState(CFSM_ScoutC, pState, IDLE)
-		AddState(pState, L"IDLE");
+		AddState(pState, Name_IDLE);
 
 	CreateState(CFSM_ScoutC, pState, RUN_L)
-		AddState(pState, L"RUN_L");
+		AddState(pState, Name_RUN_L);
 
 	CreateState(CFSM_ScoutC, pState, RUN_R)
-		AddState(pState, L"RUN_R");
+		AddState(pState, Name_RUN_R);
+
+	CreateState(CFSM_ScoutC, pState, RUN_F)
+		AddState(pState, Name_RUN_F);
 
 	CreateState(CFSM_ScoutC, pState, RUN_B)
-		AddState(pState, L"RUN_B");
+		AddState(pState, Name_RUN_B);
 
 	CreateState(CFSM_ScoutC, pState, SHOOT_1)
-		AddState(pState, L"SHOOT_1");
+		AddState(pState, Name_SHOOT_1);
 
 	CreateState(CFSM_ScoutC, pState, SHOOT_2)
-		AddState(pState, L"SHOOT_2");
+		AddState(pState, Name_SHOOT_2);
 
 	CreateState(CFSM_ScoutC, pState, SHOOT_3)
-		AddState(pState, L"SHOOT_3");
+		AddState(pState, Name_SHOOT_3);
 
 	CreateState(CFSM_ScoutC, pState, SHOOT_FIREFALL)
-		AddState(pState, L"SHOOT_FIREFALL");
+		AddState(pState, Name_SHOOT_FIREFALL);
 
 	CreateState(CFSM_ScoutC, pState, LASER_BS)
-		AddState(pState, L"LASER_BS");
+		AddState(pState, Name_LASER_BS);
 
 	CreateState(CFSM_ScoutC, pState, LASER_LOOP)
-		AddState(pState, L"LASER_LOOP");
+		AddState(pState, Name_LASER_LOOP);
 
 	CreateState(CFSM_ScoutC, pState, LASER_AS)
-		AddState(pState, L"LASER_AS");
+		AddState(pState, Name_Laser_AS);
 
 	CreateState(CFSM_ScoutC, pState, HIT_L)
-		AddState(pState, L"HIT_L");
+		AddState(pState, Name_HIT_L);
 
 	CreateState(CFSM_ScoutC, pState, HIT_H)
-		AddState(pState, L"HIT_H");
+		AddState(pState, Name_HIT_H);
 
 	CreateState(CFSM_ScoutC, pState, HIT_FRONT)
-		AddState(pState, L"HIT_FRONT");
+		AddState(pState, Name_HIT_FRONT);
 
 	CreateState(CFSM_ScoutC, pState, HIT_BACK)
-		AddState(pState, L"HIT_BACK");
+		AddState(pState, Name_HIT_BACK);
 
 	CreateState(CFSM_ScoutC, pState, THROW_0)
-		AddState(pState, L"THROW_0");
+		AddState(pState, Name_Throw_0);
 
 	CreateState(CFSM_ScoutC, pState, THROW_1)
-		AddState(pState, L"THROW_1");
+		AddState(pState, Name_Throw_1);
 
 	CreateState(CFSM_ScoutC, pState, THROW_2)
-		AddState(pState, L"THROW_2");
+		AddState(pState, Name_Throw_2);
 
 	CreateState(CFSM_ScoutC, pState, THROW_BLOW)
-		AddState(pState, L"THROW_BLOW");
+		AddState(pState, Name_Throw_Blow);
 
 	CreateState(CFSM_ScoutC, pState, THROW_LOW)
-		AddState(pState, L"THROW_LOW");
+		AddState(pState, Name_Throw_Low);
 
 	CreateState(CFSM_ScoutC, pState, KNOCK_DOWN)
-		AddState(pState, L"KNOCK_DOWN");
+		AddState(pState, Name_KnockDown);
 
 	CreateState(CFSM_ScoutC, pState, STAND_UP)
-		AddState(pState, L"STAND_UP");
+		AddState(pState, Name_StandUp);
 
 	CreateState(CFSM_ScoutC, pState, STUN)
-		AddState(pState, L"STUN");
+		AddState(pState, Name_Stun);
 
 	CreateState(CFSM_ScoutC, pState, DIE)
-		AddState(pState, L"DIE");
+		AddState(pState, Name_DIE);
 
 	CreateState(CFSM_ScoutC, pState, DIE_FLY)
-		AddState(pState, L"DIE_FLY");
+		AddState(pState, Name_DIE_FLY);
 }
 
 void CFSM_ScoutC::FixRootMotionOffset(_uint index)

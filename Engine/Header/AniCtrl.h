@@ -42,8 +42,12 @@ public:
 					double		GetTimeline			(void);
 					void		ResetTimers			(void);
 					void		ResetAnimation		(void);
+
+					void		CreateLoopAnimArray(_uint size);
+					void		SetLoopAnim(_uint animIndex);
 private:
 					_uint		FindIndexByName		(std::string const& name, LPD3DXANIMATIONSET pAS);
+					
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pAniCtrl,		nullptr,	AniCtrl)
 	GETTOR			(_uint,							m_curTrack,		0,			CurTrack)
@@ -53,6 +57,9 @@ private:
 	GETTOR			(_float,						m_period,		0,			Period)
 	GETTOR_SETTOR	(_bool,							m_replay,		true,		Replay)	
 	GETTOR_SETTOR	(_bool,							m_fixTillEnd,	false,		FixTillEnd)
+		
+		
+	GETTOR			(_bool*,				m_pLoopAnims,	nullptr,			LoopAnims)
 
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)

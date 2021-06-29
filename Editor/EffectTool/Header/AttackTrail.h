@@ -31,4 +31,7 @@ public:
 private:
 	static		_uint m_s_uniqueID;
 
+private:
+	_float m_fSpeed;
+
 };

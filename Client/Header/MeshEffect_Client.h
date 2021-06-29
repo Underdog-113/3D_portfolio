@@ -8,7 +8,7 @@ protected:
 	SMART_DELETER_REGISTER
 
 public:
-	SP(CObject) MakeClone()PURE;
+	SP(Engine::CObject) MakeClone()PURE;
 
 	void Awake() override;
 	void Start() override;
@@ -27,14 +27,12 @@ public:
 	void SetBasicName()PURE;
 
 protected:
-	_float m_fTrailAlpha = 0.f;
-
-private:
+	GETTOR(_float, m_fTrailAlpha,0.f, TrailAlpha);
 	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
-		GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
-		GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
-		GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
-		GETTOR(_float, m_fAlpha, 1.f, Alpha)
-		GETTOR(_float, m_fTime, 0.f, Time)
+	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
+	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+	GETTOR(_float, m_fAlpha, 1.f, Alpha)
+	GETTOR(_float, m_fTime, 0.f, Time)
 };
 

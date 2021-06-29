@@ -39,7 +39,7 @@ void CMO_Ninza::Awake(void)
 {
 	__super::Awake();
 
-	//m_spPatternMachine->AddNecessaryPatterns(CNinzaBornPattern::Create(), CNinzaDiePattern::Create(), CNinzaBasePattern::Create(), CNinzaHitPattern::Create());
+	m_spPatternMachine->AddNecessaryPatterns(CNinzaBornPattern::Create(), CNinzaDiePattern::Create(), CNinzaBasePattern::Create(), CNinzaHitPattern::Create());
 }
 
 void CMO_Ninza::Start(void)

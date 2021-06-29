@@ -119,7 +119,7 @@ void CObject::InitClone(SP(CObject) spClone)
 	spClone->SetObjectKey(m_objectKey);
 	spClone->SetDataID(m_dataID);
 	spClone->SetLayerID(m_layerID);
-	spClone->SetIsEnabled(m_isEnabled);
+	spClone->m_isEnabled = (m_isEnabled);
 	spClone->SetScene(m_pScene);
 	
 	for (auto& component : m_mComponents)

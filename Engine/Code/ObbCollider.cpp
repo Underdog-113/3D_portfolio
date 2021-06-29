@@ -77,7 +77,7 @@ void CObbCollider::UpdatePosition(void)
 	D3DXMatrixRotationX(&rotateX, m_pOwner->GetTransform()->GetRotation().x + m_rotOffset.x);
 	D3DXMatrixRotationY(&rotateY, m_pOwner->GetTransform()->GetRotation().y + m_rotOffset.y);
 	D3DXMatrixRotationZ(&rotateZ, m_pOwner->GetTransform()->GetRotation().z + m_rotOffset.z);
-	_float hey = m_pOwner->GetTransform()->GetRotation().z + m_rotOffset.z;
+	
 	result = rotateX * rotateY * rotateZ;
 
 	D3DXVec3TransformNormal(&m_right,	&RIGHT_VECTOR,		&result);

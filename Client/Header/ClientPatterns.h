@@ -28,9 +28,29 @@
 #include "ScoutDiePattern.h"
 #include "ScoutHitPattern.h"
 #include "ScoutBasePattern.h"
+#include "ScoutShoot2Pattern.h"
+#include "ScoutShoot3Pattern.h"
 
 /* Lancer */
 #include "LancerBornPattern.h"
 #include "LancerDiePattern.h"
 #include "LancerHitPattern.h"
 #include "LancerBasePattern.h"
+#include "LancerAttack2Pattern.h"
+
+/* Ninza */
+#include "NinzaBornPattern.h"
+#include "NinzaDiePattern.h"
+#include "NinzaHitPattern.h"
+#include "NinzaBasePattern.h"
+
+/* Robot */
+#include "RobotBornPattern.h"
+#include "RobotDiePattern.h"
+#include "RobotHitPattern.h"
+#include "RobotBasePattern.h"
+#include "RobotRunAttackPattern.h"
+#include "RobotAttack1Pattern.h"
+#include "RobotAttack2Pattern.h"
+
+/* Bronya */

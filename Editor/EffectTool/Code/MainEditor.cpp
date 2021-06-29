@@ -12,7 +12,6 @@
 #include "FRC.h"
 #include "EffectToolScene.h"
 #include "WaterShader.h"
-#include "EffectShader.h"
 #include "DamageFontShader.h"
 #include "CatPawShader.h"
 #include "CircularGaugeShader.h"
@@ -22,7 +21,7 @@
 #include "SoftEffectShader.h"
 #include "AttackRangeShader.h"
 #include "AlphaMaskShader.h"
-
+#include "FireShader.h"
 #pragma region Shader
 
 
@@ -61,7 +60,6 @@ void CMainEditor::Awake()
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)EShaderID::NumOfShaderID);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CWaterShader::Create(), L"WaterShader", (_uint)EShaderID::WaterShader);
-	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CEffectShader::Create(), L"EffectShader", (_uint)EShaderID::EffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CDamageFontShader::Create(), L"DamageFontShader", (_uint)EShaderID::DamageFontShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCatPawShader::Create(), L"CatPawShader", (_uint)EShaderID::CatPawShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCircularGaugeShader::Create(), L"CircularGaugeShader", (_uint)EShaderID::CircularGaugeShader);
@@ -71,6 +69,8 @@ void CMainEditor::Awake()
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader::Create(), L"SoftEffectShader", (_uint)EShaderID::SoftEffectShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAttackRangeShader::Create(), L"AttackRangeShader", (_uint)EShaderID::AttackRangeShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskShader::Create(), L"AlphaMaskShader", (_uint)EShaderID::AlphaMaskShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFireShader::Create(), L"FireShader", (_uint)EShaderID::FireShader);
+
 }
 
 void CMainEditor::Start()

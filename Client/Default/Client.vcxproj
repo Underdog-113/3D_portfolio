@@ -189,7 +189,6 @@
     <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
     <ClInclude Include="..\Header\AttackRangeShader.h" />
-    <ClInclude Include="..\Header\AttackTrail_Client.h" />
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
@@ -207,11 +206,12 @@
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
     <ClInclude Include="..\Header\DissolveShader.h" />
-    <ClInclude Include="..\Header\EffectShader.h" />
+    <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
     <ClInclude Include="..\Header\FSMDefine_Lancer.h" />
     <ClInclude Include="..\Header\FSMDefine_Ninza.h" />
+    <ClInclude Include="..\Header\FSMDefine_Robot.h" />
     <ClInclude Include="..\Header\FSMDefine_Sakura.h" />
     <ClInclude Include="..\Header\FSMDefine_Scout.h" />
     <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
@@ -273,15 +273,17 @@
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
-    <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\LancerAttack2Pattern.h" />
     <ClInclude Include="..\Header\LancerBasePattern.h" />
     <ClInclude Include="..\Header\LancerBornPattern.h" />
     <ClInclude Include="..\Header\LancerDiePattern.h" />
     <ClInclude Include="..\Header\LancerHitPattern.h" />
+    <ClInclude Include="..\Header\Kiana_Trail.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Eff.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Trail.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -310,11 +312,28 @@
     <ClInclude Include="..\Header\NinzaHitPattern.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\RobotAttack1Pattern.h" />
+    <ClInclude Include="..\Header\RobotAttack2Pattern.h" />
+    <ClInclude Include="..\Header\RobotBasePattern.h" />
+    <ClInclude Include="..\Header\RobotBornPattern.h" />
+    <ClInclude Include="..\Header\RobotDiePattern.h" />
+    <ClInclude Include="..\Header\RobotHitPattern.h" />
+    <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
+    <ClInclude Include="..\Header\Theresa_Trail.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Fire.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Crack.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Smoke.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Trail.h" />
     <ClInclude Include="..\Header\ScoutBasePattern.h" />
     <ClInclude Include="..\Header\ScoutBornPattern.h" />
     <ClInclude Include="..\Header\ScoutDiePattern.h" />
     <ClInclude Include="..\Header\ScoutHitPattern.h" />
     <ClInclude Include="..\Header\stuffItem.h" />
+    <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
+    <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -372,13 +391,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
     <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
+    <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
     <ClCompile Include="..\Code\AttackBall.cpp" />
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
     <ClCompile Include="..\Code\AttackRangeShader.cpp" />
-    <ClCompile Include="..\Code\AttackTrail_Client.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
@@ -391,7 +409,7 @@
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
-    <ClCompile Include="..\Code\EffectShader.cpp" />
+    <ClCompile Include="..\Code\FireShader.cpp" />
     <ClCompile Include="..\Code\FSM_SakuraC.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
     <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
@@ -441,6 +459,8 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
+    <ClCompile Include="..\Code\LancerAttack2Pattern.cpp" />
+    <ClCompile Include="..\Code\Kiana_Trail.cpp" />
     <ClCompile Include="..\Code\LancerBasePattern.cpp" />
     <ClCompile Include="..\Code\LancerBornPattern.cpp" />
     <ClCompile Include="..\Code\LancerDiePattern.cpp" />
@@ -450,6 +470,7 @@
     <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Trail.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -478,11 +499,28 @@
     <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\RobotAttack1Pattern.cpp" />
+    <ClCompile Include="..\Code\RobotAttack2Pattern.cpp" />
+    <ClCompile Include="..\Code\RobotBasePattern.cpp" />
+    <ClCompile Include="..\Code\RobotBornPattern.cpp" />
+    <ClCompile Include="..\Code\RobotDiePattern.cpp" />
+    <ClCompile Include="..\Code\RobotHitPattern.cpp" />
+    <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
+    <ClCompile Include="..\Code\Theresa_Trail.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Trail.cpp" />
     <ClCompile Include="..\Code\ScoutBasePattern.cpp" />
     <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
     <ClCompile Include="..\Code\ScoutDiePattern.cpp" />
     <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
     <ClCompile Include="..\Code\stuffItem.cpp" />
+    <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
+    <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -589,11 +627,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\EffectShader.fx">
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

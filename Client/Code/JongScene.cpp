@@ -77,6 +77,7 @@ void CJongScene::Start(void)
 	//SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
+	//RobotTest();
 
 	FloorTest();
 
@@ -192,7 +193,7 @@ void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
 {
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(pTarget);
-	cam->SetTargetDist(5.f);
+	cam->SetTargetDist(3.f);
 	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 
@@ -242,12 +243,19 @@ void CJongScene::GaneshaTest()
 	/* Ganesha */
 	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
 	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
-	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+	//spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	//m_spGanesha = spGaneshaClone;
+}
+
+void CJongScene::RobotTest()
+{
+	/* Ganesha */
+	SP(Engine::CObject) spRobotClone = ADD_CLONE(L"MO_Robot", true, (_uint)ELayerID::Enemy, L"MO_Robot");
+	spRobotClone->GetTransform()->SetPosition(3, 2, 3);
 }
 
 void CJongScene::FloorTest()

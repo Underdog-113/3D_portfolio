@@ -252,7 +252,7 @@ void CCamera::UpdateTPS(void)
 	if (m_wallCollided == false && m_targetDist < 3)
 	{
 		_float newTargetDist = m_targetDist + m_awaySpeed * GET_DT;
-
+	
 		newTargetDist = GET_MATH->Min(newTargetDist, 3);
 		m_targetDist = newTargetDist;
 	}
