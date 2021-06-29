@@ -40,6 +40,7 @@
 #include "BattleUiManager.h"
 #include "DataManager.h"
 #include "ValkyriegManager.h"
+#include "InventoryManager.h"
 
 //Client Data
 #include "ValkyrieStatusData.h"

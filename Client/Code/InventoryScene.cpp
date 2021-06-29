@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "PartySettingScene.h"
+#include "InventoryScene.h"
 
 #include "Loading.h"
 
@@ -12,38 +12,39 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+#include "InventoryManager.h"
 
-CPartySettingScene::CPartySettingScene()
+CInventoryScene::CInventoryScene()
 {
 }
 
 
-CPartySettingScene::~CPartySettingScene()
+CInventoryScene::~CInventoryScene()
 {
 }
 
 
-CClientScene* CPartySettingScene::Create(void)
+CClientScene* CInventoryScene::Create(void)
 {
-	CPartySettingScene* pInstance = new CPartySettingScene;
+	CInventoryScene* pInstance = new CInventoryScene;
 	pInstance->Awake((_int)ELayerID::NumOfLayerID);
 
 	return pInstance;
 }
 
-void CPartySettingScene::Free(void)
+void CInventoryScene::Free(void)
 {
 	OnDestroy();
 	delete this;
 }
 
-void CPartySettingScene::Awake(_int numOfLayers)
+void CInventoryScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	InitPrototypes();
 }
 
-void CPartySettingScene::Start(void)
+void CInventoryScene::Start(void)
 {
 	__super::Start();
 
@@ -57,7 +58,6 @@ void CPartySettingScene::Start(void)
 	Load->Setting();
 	Load->ButtonLoad(this);
 	Load->ImageLoad(this);
-	Load->SliderLoad(this);
 	Load->ScrollViewLoad(this);
 	Load->TextLoad(this);
 	Load->CanvasLoad(this);
@@ -65,50 +65,50 @@ void CPartySettingScene::Start(void)
 
 }
 
-void CPartySettingScene::FixedUpdate(void)
+void CInventoryScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-	
+
 }
 
-void CPartySettingScene::Update(void)
+void CInventoryScene::Update(void)
 {
 	__super::Update();
 
 	if (!m_init)
 	{
-		CValkyriegManager::GetInstance()->Start(this);
+		CInventoryManager::GetInstance()->Start(this);
 		m_init = true;
 	}
 
-	CValkyriegManager::GetInstance()->Update();
+	CInventoryManager::GetInstance()->Update();
 }
 
-void CPartySettingScene::LateUpdate(void)
+void CInventoryScene::LateUpdate(void)
 {
 	__super::LateUpdate();
 
 }
 
-void CPartySettingScene::OnDestroy(void)
+void CInventoryScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	CValkyriegManager::GetInstance()->DestroyInstance();
+	CInventoryManager::GetInstance()->DestroyInstance();
 }
 
-void CPartySettingScene::OnEnable(void)
+void CInventoryScene::OnEnable(void)
 {
 	__super::OnEnable();
 
 }
 
-void CPartySettingScene::OnDisable(void)
+void CInventoryScene::OnDisable(void)
 {
 	__super::OnDisable();
 
 }
 
 
-void CPartySettingScene::InitPrototypes(void)
+void CInventoryScene::InitPrototypes(void)
 {
 }

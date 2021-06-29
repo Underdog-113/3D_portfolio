@@ -22,6 +22,11 @@ void CDataManager::Start()
 	InStockValkyrieInit(L"역신무녀");
 
 	SquadInit(L"투예복·백련");
+	ItemInit(L"ValkyrieExpData1",50);
+	ItemInit(L"ValkyrieExpData2",30);
+	ItemInit(L"ValkyrieExpData3",10);
+
+
 }
 
 void CDataManager::Update(void)
@@ -45,6 +50,13 @@ void CDataManager::OnDestroy(void)
 		delete (obj);
 	}
 	m_pValkyrieStatusDataList.clear();
+
+	for (auto& obj : m_pItemDataList)
+	{
+		delete (obj);
+	}
+	m_pItemDataList.clear();
+	
 }
 
 CCaptainData * CDataManager::FindCaptainData()
@@ -101,6 +113,11 @@ CValkyrieStatusData* CDataManager::FindSquadData(std::wstring keyValue)
 	return new CValkyrieStatusData();
 }
 
+std::vector<CWeaponData*> CDataManager::FindWeaponData()
+{
+	return m_pWeaponDataList;
+}
+
 CWeaponData * CDataManager::FindWeaponData(std::wstring keyValue)
 {
 	for (auto* data : m_pWeaponDataList)
@@ -112,6 +129,11 @@ CWeaponData * CDataManager::FindWeaponData(std::wstring keyValue)
 	}
 
 	return new CWeaponData();
+}
+
+std::vector<CItemData*> CDataManager::FindItemData()
+{
+	return m_pItemDataList;
 }
 
 CItemData * CDataManager::FindItemData(std::wstring keyValue)
@@ -203,7 +225,7 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	m_pValkyrieStatusDataList.emplace_back(valkyrie);
 }
 
-void CDataManager::ItemInit(std::wstring itemName)
+void CDataManager::ItemInit(std::wstring itemName, _int count)
 {
 	Engine::CDataStore* dataStore = GET_CUR_CLIENT_SCENE->GetDataStore();
 	_int dataID = (_int)EDataID::Stat;
@@ -212,16 +234,28 @@ void CDataManager::ItemInit(std::wstring itemName)
 	std::wstring name;
 	std::wstring rank;
 	std::wstring explanation;
+	_int experience;
 	std::wstring textureKey;
 
-	dataStore->GetValue(false, dataID, objectKey, L"Name", name);
-	dataStore->GetValue(false, dataID, objectKey, L"Rank", rank);
-	dataStore->GetValue(false, dataID, objectKey, L"Explanation", explanation);
-	dataStore->GetValue(false, dataID, objectKey, L"TextureKey", textureKey);
+	dataStore->GetValue(true, dataID, objectKey, L"Name", name);
+
+	for (auto& iter : m_pItemDataList)
+	{
+		if (iter->GetName() == name)
+		{
+			iter->SetCount(iter->GetCount() + count);
+		}
+		break;
+	}
+
+	dataStore->GetValue(true, dataID, objectKey, L"Rank", rank);
+	dataStore->GetValue(true, dataID, objectKey, L"Explanation", explanation);
+	dataStore->GetValue(true, dataID, objectKey, L"Experience", experience);
+	dataStore->GetValue(true, dataID, objectKey, L"TextureKey", textureKey);
 
 	CItemData* item = new CItemData();
-	item->AddItemData(name, rank, explanation, textureKey);
-
+	item->AddItemData(name, rank, explanation, experience, textureKey);
+	item->SetCount(count);
 	m_pItemDataList.emplace_back(item);
 }
 
@@ -302,4 +336,18 @@ void CDataManager::SquadInit(_int value, std::wstring valkyrieName)
 void CDataManager::SquadDelete(std::wstring keyValue)
 {
 	m_pSquadData->Erase(keyValue);
+}
+
+void CDataManager::ItemDelete(std::wstring keyValue)
+{
+	for (auto& iter = m_pItemDataList.begin(); iter != m_pItemDataList.end(); iter++)
+	{
+		if ((*iter)->GetName() == keyValue)
+		{
+			m_pItemDataList.erase(iter);
+			return;
+		}
+
+	}
+	
 }

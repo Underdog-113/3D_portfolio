@@ -11,14 +11,14 @@ public:
 	void Update(void);
 	void OnDestroy(void);
 
-	void ChangeFSM(STATE state);
 	void ChangeFSMSelect();
 	void ChangeFSMProperty();
 	void ChangeFSMLevelUp();
 private:
+	void ChangeFSM(STATE state);
 	void FSMCreate();
 private:
-	CValkyrieFSM* m_valkyrieFSM[STATE::STATEEND];
+	GETTOR(CValkyrieFSM*, m_valkyrieFSM[STATE::STATEEND], {}, ValkyrieFSM);
 	GETTOR(STATE, m_valkyrieState, STATE::Select, valkyrieState);
 	GETTOR(STATE, m_valkyrieOldState, STATE::Select, valkyrieOldState);
 

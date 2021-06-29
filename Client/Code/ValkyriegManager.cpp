@@ -31,7 +31,10 @@ void CValkyriegManager::Update(void)
 
 void CValkyriegManager::OnDestroy(void)
 {
-
+	for (auto& obj : m_valkyrieFSM)
+	{
+		delete(obj);
+	}
 }
 
 void CValkyriegManager::ChangeFSM(STATE state)

@@ -22,6 +22,7 @@
 #include "Slider.h"
 #include "ScrollViewObject.h"
 #include "Canvas.h"
+#include "ItemButton.h"
 
 #include "AttackBall.h"
 #include "AttackBox.h"
@@ -205,6 +206,9 @@ void CStaticScene::InitUiPrototypes(void)
 
 	SP(CScrollViewObject) spScrollViewObject(CScrollViewObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spScrollViewObject);	
+
+	SP(CItemButton) spItemButtonObject(CItemButton::Create(true, this));
+	GetObjectFactory()->AddPrototype(spItemButtonObject);
 }
 
 void CStaticScene::InitMonsterPrototypes(void)
