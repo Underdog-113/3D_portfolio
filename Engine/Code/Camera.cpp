@@ -249,16 +249,16 @@ void CCamera::UpdateTPS(void)
 {
 	CameraRotate();
 
-	//if (m_wallCollided == false && m_targetDist < 3)
-	//{
-	//	_float newTargetDist = m_targetDist + m_awaySpeed * GET_DT;
-	//
-	//	newTargetDist = GET_MATH->Min(newTargetDist, 3);
-	//	m_targetDist = newTargetDist;
-	//}
+	if (m_wallCollided == false && m_targetDist < 3)
+	{
+		_float newTargetDist = m_targetDist + m_awaySpeed * GET_DT;
+	
+		newTargetDist = GET_MATH->Min(newTargetDist, 3);
+		m_targetDist = newTargetDist;
+	}
 
 	//RayCollider 길이 업데이트
-	//m_pCamRayCollider->SetLength(m_targetDist);
+	m_pCamRayCollider->SetLength(m_targetDist);
 }
 
 void CCamera::LateUpdateFixed(void)

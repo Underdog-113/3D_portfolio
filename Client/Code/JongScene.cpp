@@ -77,6 +77,7 @@ void CJongScene::Start(void)
 	//SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
+	//RobotTest();
 
 	FloorTest();
 
@@ -248,6 +249,13 @@ void CJongScene::GaneshaTest()
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	//m_spGanesha = spGaneshaClone;
+}
+
+void CJongScene::RobotTest()
+{
+	/* Ganesha */
+	SP(Engine::CObject) spRobotClone = ADD_CLONE(L"MO_Robot", true, (_uint)ELayerID::Enemy, L"MO_Robot");
+	spRobotClone->GetTransform()->SetPosition(3, 2, 3);
 }
 
 void CJongScene::FloorTest()

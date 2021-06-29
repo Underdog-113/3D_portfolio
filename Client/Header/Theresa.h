@@ -63,9 +63,15 @@ private:
 	GETTOR			(_mat*,			m_pRightHand_World,		nullptr,	RightHandWorldMatrix)
 	Engine::D3DXFRAME_DERIVED*	m_pLeftHand_Frame = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pRightHand_Frame = nullptr;
+	
+	GETTOR			(_mat*,			m_pAxePivot_World,		nullptr,	AxePivotWorldMatrix)
+	Engine::D3DXFRAME_DERIVED*	m_pAxePivot_Frame = nullptr;
+
 
 	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
 	GETTOR			(CAttackBall*,	m_pAttackBall_RightHand,	nullptr,	AttackBall_RightHand)
+	GETTOR			(CAttackBall*,	m_pAttackBall_Axe,			nullptr,	AttackBall_Axe)
+	GETTOR			(CAttackBox*,	m_pAttackBox_Axe,			nullptr,	AttackBox_Axe)
 
 };
 

@@ -92,7 +92,9 @@ void CAttackBall::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
-	//m_spTransform->UpdateParentMatrix(m_pParentMatrix);
+	_float3 offsetPos;
+	D3DXVec3TransformCoord(&offsetPos, &m_offset, m_pParentMatrix);
+	m_spTransform->SetPosition(offsetPos);
 
 	//_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
 	//m_spTransform->SetPosition(pos);
@@ -187,9 +189,10 @@ void CAttackBall::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 
 void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, HitInfo info)
 {
+	m_offset = ZERO_VECTOR;
 	m_pOwner = pOwner;
 
-	//m_pParentMatrix = pParentMat;
+	m_pParentMatrix = pParentMat;
 	GetTransform()->SetPosition(pParentMat->_41, pParentMat->_42, pParentMat->_43);
 	m_hitInfo = info;
 

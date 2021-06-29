@@ -3,6 +3,7 @@
 
 #include "StageControlTower.h"
 #include "AttackBall.h"
+#include "AttackBox.h"
 
 _uint CValkyrie::m_s_uniqueID = 0;
 
@@ -66,6 +67,17 @@ void CValkyrie::ActiveAttackBall(CAttackBall * pAttackBall, _float damageRate, H
 void CValkyrie::UnActiveAttackBall()
 {
 	m_pAttackBall->SetIsEnabled(false);
+}
+
+void CValkyrie::ActiveAttackBox(CAttackBox * pAttackBox, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetStrengthType(strength);
+	info.SetCrowdControlType(cc);
+
+	pAttackBox->SetAttackInfo(this, pBoneMat, info);
+	pAttackBox->SetIsEnabled(true);
 }
 
 void CValkyrie::CreatePivotMatrix(_mat** ppPivotMatrix, Engine::D3DXFRAME_DERIVED** ppFrame, std::string frameName)
