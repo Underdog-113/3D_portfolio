@@ -35,6 +35,12 @@ void CValkyrie::Start(void)
 	m_pCT = CStageControlTower::GetInstance();
 }
 
+void CValkyrie::CreateAttackBall(CAttackBall ** ppAttackBall)
+{
+	*ppAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	(*ppAttackBall)->SetOwner(this);
+}
+
 void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius)
 {
 	HitInfo info;
@@ -46,7 +52,37 @@ void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, 
 	m_pAttackBall->SetIsEnabled(true);
 }
 
+void CValkyrie::ActiveAttackBall(CAttackBall * pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetStrengthType(strength);
+	info.SetCrowdControlType(cc);
+
+	pAttackBall->SetupBall(this, pBoneMat, radius, info);
+	pAttackBall->SetIsEnabled(true);
+}
+
 void CValkyrie::UnActiveAttackBall()
 {
 	m_pAttackBall->SetIsEnabled(false);
+}
+
+void CValkyrie::CreatePivotMatrix(_mat** ppPivotMatrix, Engine::D3DXFRAME_DERIVED** ppFrame, std::string frameName)
+{
+	*ppFrame = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameByName(frameName);
+	//auto test = m_spMesh->GetFirstMeshData_Dynamic()->GetFrameOffsetMatrix("");
+
+	*ppPivotMatrix = new _mat;
+	**ppPivotMatrix = (*ppFrame)->CombinedTransformMatrix;
+}
+
+void CValkyrie::UpdatePivotMatrix(_mat* pPivotMatrix, Engine::D3DXFRAME_DERIVED * pFrame)
+{
+	_mat combMat = pFrame->CombinedTransformMatrix;
+	_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+	combMat._41 -= rootMotionPos.x;
+	combMat._43 -= rootMotionPos.z;
+
+	*pPivotMatrix = combMat * m_spTransform->GetWorldMatrix();
 }

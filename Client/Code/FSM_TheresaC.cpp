@@ -538,6 +538,10 @@ void CFSM_TheresaC::Attack1_Enter(void)
 	m_pTheresa->On_Sword();
 
 	m_chargeEnterTimer = 0.f;
+
+	m_pDM->GetAniCtrl()->SetSpeed(0.5f);
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_LeftHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetLeftHandWorldMatrix(), 0.3f);
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_RightHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetRightHandWorldMatrix(), 0.3f);
 }
 
 void CFSM_TheresaC::Attack1_Update(float deltaTime)
@@ -570,6 +574,8 @@ void CFSM_TheresaC::Attack1_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
+ 	m_pTheresa->GetAttackBall_LeftHand()->SetIsEnabled(false);
+ 	m_pTheresa->GetAttackBall_RightHand()->SetIsEnabled(false);
 	//m_pKiana->UnActiveAttackBall();
 }
 

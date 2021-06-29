@@ -50,8 +50,6 @@ public:
 
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
-					void					UpdatePivotMatrices(void);
-
 					void					CreatePistol		(void);
 					void					CreateCatPaw		(void);
 					void					UseUltraCost		(void);
@@ -60,13 +58,7 @@ public:
 
 					void					SetUltraMode		(bool value);;
 
-
-					void					FindLeftHand();
-					void					FindRightHand();
-
-					void					FindRightToe();
-
-					
+										
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Right,		nullptr, Weapon_Right)

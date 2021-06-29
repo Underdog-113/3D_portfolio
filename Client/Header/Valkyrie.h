@@ -46,8 +46,13 @@ public:
 
 	virtual		void						ApplyHitInfo(HitInfo info) PURE;
 public:
+	void CreateAttackBall(CAttackBall** ppAttackBall);
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
+	void ActiveAttackBall(CAttackBall* pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
+
+	void CreatePivotMatrix(_mat** ppPivotMatrix, Engine::D3DXFRAME_DERIVED** ppFrame, std::string frameName);
+	void UpdatePivotMatrix(_mat* pPivotMatrix, Engine::D3DXFRAME_DERIVED* pFrame);
 
 protected:
 	static			_uint							m_s_uniqueID;

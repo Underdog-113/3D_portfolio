@@ -49,11 +49,25 @@ public:
 					void					Off_Axe				(void);
 					
 					void					SetChargeMode		(bool value);
+					
+
 private:
 	std::vector<Engine::_DerivedD3DXMESHCONTAINER*> m_vMeshContainers;
 	_uint idx = 0;
 	
-	GETTOR			(_bool,					m_chargeMode,			false, ChargeMode)
+	GETTOR			(_bool,			m_chargeMode,			false,		ChargeMode)
+
+private:
+	
+	GETTOR			(_mat*,			m_pLeftHand_World,		nullptr,	LeftHandWorldMatrix)
+	GETTOR			(_mat*,			m_pRightHand_World,		nullptr,	RightHandWorldMatrix)
+	Engine::D3DXFRAME_DERIVED*	m_pLeftHand_Frame = nullptr;
+	Engine::D3DXFRAME_DERIVED*	m_pRightHand_Frame = nullptr;
+
+	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
+	GETTOR			(CAttackBall*,	m_pAttackBall_RightHand,	nullptr,	AttackBall_RightHand)
+
 };
+
 
 #endif

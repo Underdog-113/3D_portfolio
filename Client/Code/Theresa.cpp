@@ -4,6 +4,7 @@
 #include "FSM_TheresaC.h"
 #include "DynamicMeshData.h"
 
+
 CTheresa::CTheresa()
 {
 }
@@ -49,6 +50,7 @@ void CTheresa::Awake(void)
 void CTheresa::Start(void)
 {
 	__super::Start();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 
 	m_vMeshContainers = m_spMesh->GetFirstMeshData_Dynamic()->GetMeshContainers();
 
@@ -58,6 +60,12 @@ void CTheresa::Start(void)
 	m_spMesh->OnRootMotion();
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
+
+	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_Prop1");
+	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_Prop2");
+
+	CreateAttackBall(&m_pAttackBall_LeftHand);
+	CreateAttackBall(&m_pAttackBall_RightHand);
 
 	// status
 	V_WarshipStat stat;
@@ -84,7 +92,8 @@ void CTheresa::Update(void)
 {
 	__super::Update();
 
-
+	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
+	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
 }
 
 void CTheresa::LateUpdate(void)
@@ -110,6 +119,9 @@ void CTheresa::PostRender(LPD3DXEFFECT pEffect)
 void CTheresa::OnDestroy(void)
 {
 	__super::OnDestroy();
+
+	SAFE_DELETE(m_pLeftHand_World)
+	SAFE_DELETE(m_pRightHand_World)
 
 	SAFE_DELETE(m_pStat)
 }
@@ -163,3 +175,4 @@ void CTheresa::SetChargeMode(bool value)
 {
 	m_chargeMode = value;
 }
+
