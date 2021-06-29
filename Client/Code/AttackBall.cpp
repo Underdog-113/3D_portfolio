@@ -92,10 +92,8 @@ void CAttackBall::LateUpdate(void)
 {
 	__super::LateUpdate();
 	
-	//m_spTransform->UpdateParentMatrix(m_pParentMatrix);
-
-	//_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
-	//m_spTransform->SetPosition(pos);
+	_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
+	m_spTransform->SetPosition(pos);
 }
 
 void CAttackBall::OnDestroy(void)
@@ -160,6 +158,7 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		if (pObject == object)
 			return;
 	}
+	m_vCollided.emplace_back(pObject);
 
 	if (m_collisionID == (_int)ECollisionID::PlayerAttack)
 	{
@@ -187,9 +186,10 @@ void CAttackBall::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 
 void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, HitInfo info)
 {
+	m_offset = ZERO_VECTOR;
 	m_pOwner = pOwner;
 
-	//m_pParentMatrix = pParentMat;
+	m_pParentMatrix = pParentMat;
 	GetTransform()->SetPosition(pParentMat->_41, pParentMat->_42, pParentMat->_43);
 	m_hitInfo = info;
 

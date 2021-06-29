@@ -111,8 +111,8 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	
 	if (Input.mUV.x > gTrailAlpha)
 	{
-		outputColor.a = 0;
-		Noise.a = 0;
+		outputColor.a = gTrailAlpha;
+		Noise.a = gTrailAlpha;
 	}	
 
 	return outputColor * Noise;

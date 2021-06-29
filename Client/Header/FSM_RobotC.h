@@ -1,16 +1,23 @@
 #pragma once
 #include "StateMachineC.h"
 
-class FSM_RobotC final : public Engine::CStateMachineC
+class CFSM_RobotC final : public Engine::CStateMachineC
 {
 public:
-	FSM_RobotC();
-	~FSM_RobotC() = default;
+	CFSM_RobotC();
+	~CFSM_RobotC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+
+private:
+	void RegisterAllStage();
+	void FixRootMotionOffset(_uint index);
+
+private:
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
 
 public:
 	// <Animation List>
@@ -135,18 +142,6 @@ public:
 	void KnockDown_Update(float deltaTime);
 	void KnockDown_End(void);
 
-	// Attack_1_Left
-	void Attack_1_Left_Init(void);
-	void Attack_1_Left_Enter(void);
-	void Attack_1_Left_Update(float deltaTime);
-	void Attack_1_Left_End(void);
-
-	// Attack_1_Right
-	void Attack_1_Right_Init(void);
-	void Attack_1_Right_Enter(void);
-	void Attack_1_Right_Update(float deltaTime);
-	void Attack_1_Right_End(void);
-
 	// Run_AS
 	void Run_AS_Init(void);
 	void Run_AS_Enter(void);
@@ -206,9 +201,4 @@ public:
 	void Walk_Forward_Enter(void);
 	void Walk_Forward_Update(float deltaTime);
 	void Walk_Forward_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
-
 };
-

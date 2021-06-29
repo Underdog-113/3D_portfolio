@@ -1,6 +1,6 @@
 #pragma once
 #define Name_APPEAR				L"APPEAR"
-#define Name_ATTACK1			L"ATTACK1"
+#define Name_ATTACK_1			L"ATTACK_1"
 #define Name_ATTACK_2			L"ATTACK_2"
 #define Name_ATTACK3			L"ATTACK3"
 #define Name_BOM_READY			L"BOM_READY"

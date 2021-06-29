@@ -5,13 +5,11 @@ class CAttackTrail_Client : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
-public:
+protected:
 	CAttackTrail_Client();
-	~CAttackTrail_Client();
+	virtual ~CAttackTrail_Client() = default;
 
 public:
-	static		SP(CAttackTrail_Client)			Create(_bool isStatic, Engine::CScene* pScene);
-
 	SP(Engine::CObject) MakeClone() override;
 
 	void Awake() override;
@@ -20,9 +18,9 @@ public:
 	void Update() override;
 	void LateUpdate() override;
 
-	void PreRender(LPD3DXEFFECT pEffect) override;
-	void Render(LPD3DXEFFECT pEffect) override;
-	void PostRender(LPD3DXEFFECT pEffect) override;
+	void PreRender(LPD3DXEFFECT pEffect) PURE;
+	void Render(LPD3DXEFFECT pEffect) PURE;
+	void PostRender(LPD3DXEFFECT pEffect) PURE;
 
 	void OnDestroy() override;
 	void OnEnable() override;
@@ -30,7 +28,11 @@ public:
 
 	void SetBasicName()override;
 
-private:
+protected:
+	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
+	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
+	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 	static		_uint m_s_uniqueID;
 };
 

@@ -39,15 +39,17 @@ void CMO_Lancer::Awake(void)
 {
 	__super::Awake();
 
+	m_spStateMachine = AddComponent<CFSM_LancerC>();
 	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(), CLancerDiePattern::Create(), CLancerBasePattern::Create(), CLancerHitPattern::Create());
+	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
 }
 
 void CMO_Lancer::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(1.7f, 1.7f, 1.7f);
-	m_spTransform->SetRotationY(D3DXToRadian(90));
+	m_spTransform->SetSize(0.8f, 0.8f, 0.8f);
+	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 

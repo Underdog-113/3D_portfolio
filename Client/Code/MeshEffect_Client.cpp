@@ -11,6 +11,12 @@ CMeshEffect_Client::CMeshEffect_Client()
 void CMeshEffect_Client::Awake()
 {
 	__super::Awake();
+
+	m_addExtra = true;
+	m_spMesh = AddComponent<Engine::CMeshC>();
+	m_spTexture = AddComponent<Engine::CTextureC>();
+	m_spShader = AddComponent<Engine::CShaderC>();
+	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 }
 
 void CMeshEffect_Client::Start()
