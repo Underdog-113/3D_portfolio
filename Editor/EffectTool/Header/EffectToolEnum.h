@@ -48,18 +48,17 @@ enum class ELayerID
 enum class EShaderID
 {
 	WaterShader			= 0 + (_int)Engine::EShaderID::NumOfShaderID,
-	EffectShader		= 1 + (_int)Engine::EShaderID::NumOfShaderID,
-	DamageFontShader	= 2 + (_int)Engine::EShaderID::NumOfShaderID,
-	CatPawShader		= 3 + (_int)Engine::EShaderID::NumOfShaderID,
-	CircularGaugeShader	= 4 + (_int)Engine::EShaderID::NumOfShaderID,
-	MeshTrailShader		= 5 + (_int)Engine::EShaderID::NumOfShaderID,
-	DissolveShader		= 6 + (_int)Engine::EShaderID::NumOfShaderID,
-	SpawnEffectShader	= 7 + (_int)Engine::EShaderID::NumOfShaderID,
-	SoftEffectShader	= 8 + (_int)Engine::EShaderID::NumOfShaderID,
-	AttackRangeShader	= 9 + (_int)Engine::EShaderID::NumOfShaderID,
-	AlphaMaskShader     = 10 + (_int)Engine::EShaderID::NumOfShaderID,
-	FireShader			= 11 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 12 + (_int)Engine::EShaderID::NumOfShaderID
+	DamageFontShader	= 1 + (_int)Engine::EShaderID::NumOfShaderID,
+	CatPawShader		= 2 + (_int)Engine::EShaderID::NumOfShaderID,
+	CircularGaugeShader	= 3 + (_int)Engine::EShaderID::NumOfShaderID,
+	MeshTrailShader		= 4 + (_int)Engine::EShaderID::NumOfShaderID,
+	DissolveShader		= 5 + (_int)Engine::EShaderID::NumOfShaderID,
+	SpawnEffectShader	= 6 + (_int)Engine::EShaderID::NumOfShaderID,
+	SoftEffectShader	= 7 + (_int)Engine::EShaderID::NumOfShaderID,
+	AttackRangeShader	= 8 + (_int)Engine::EShaderID::NumOfShaderID,
+	AlphaMaskShader     = 9 + (_int)Engine::EShaderID::NumOfShaderID,
+	FireShader			= 10 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 11 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 //GraphicsComponent RenderID

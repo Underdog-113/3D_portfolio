@@ -53,7 +53,7 @@ void CTheresa_Ult_Boom::Start()
 	spFireEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Fire");
 	spFireEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
-	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire_3");
+	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire");
 	spFireEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	spFireEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
 
@@ -76,9 +76,10 @@ void CTheresa_Ult_Boom::Start()
 	spSmokeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 	spSmokeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPositionY(1.1f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(1.5f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(1.5f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPositionY(0.1f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(0.3f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeY(0.f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(0.3f);
 
 
 
@@ -103,7 +104,7 @@ void CTheresa_Ult_Boom::Update()
 	m_spTransform->AddSizeY(0.5f * GET_DT);
 	m_spTransform->AddSizeZ(0.5f * GET_DT);
 
-	m_fAlpha -= 1.f * GET_DT;
+	m_fAlpha -= 1.5f * GET_DT;
 }
 
 void CTheresa_Ult_Boom::LateUpdate()

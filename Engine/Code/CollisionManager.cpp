@@ -46,6 +46,10 @@ void CCollisionManager::Update(void)
 			//Layer2는 Layer1을 체크해야할 레이어에 놓지 않으면 됨.
 			if (spCollider->GetOwner()->GetOwner() != nullptr && spCollider->GetOwner()->GetIsEnabled())
 			{
+				if (spCollider->GetOwner()->GetOwner()->GetObjectKey() == L"AttackBox" &&
+					spCollider->GetOwner()->GetOwner()->GetTransform()->GetPosition() != _float3(0, 0, 0))
+					int a = 5;
+
 				CheckCollision(spCollider);
 			}
 		}
