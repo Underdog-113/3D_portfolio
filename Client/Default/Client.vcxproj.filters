@@ -598,6 +598,12 @@
     <Filter Include="04.Shader\10.FireShader">
       <UniqueIdentifier>{1b1f342d-3d74-4b5b-97a9-375cdca38edb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att">
+      <UniqueIdentifier>{b579e2bb-cfa4-4e4b-a9e9-96e59cc4ff9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke">
+      <UniqueIdentifier>{8aee29ef-6c6b-423d-82d6-d0f9923cc643}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1162,6 +1168,12 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
+    <ClInclude Include="..\Header\TheresaCharge_Att.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MoveUpSmoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1670,6 +1682,12 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
+    <ClCompile Include="..\Code\TheresaCharge_Att.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MoveUpSmoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

@@ -58,6 +58,8 @@
 #include "Theresa_Ult_Fire.h"
 #include "Theresa_Ult_Boom.h"
 #include "Theresa_Ult_Crack.h"
+#include "TheresaCharge_Att.h"
+#include "MoveUpSmoke.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -210,6 +212,14 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Crack(CTheresa_Ult_Crack::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
+	
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeAtt(CTheresaCharge_Att::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeAtt);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
+
+
 }
 
 void CStaticScene::InitMapPrototypes(void)
