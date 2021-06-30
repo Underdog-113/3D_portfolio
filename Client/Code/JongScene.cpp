@@ -197,7 +197,7 @@ void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
 {
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(pTarget);
-	cam->SetTargetDist(3.f);
+	cam->SetTargetDist(2.f);
 	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 

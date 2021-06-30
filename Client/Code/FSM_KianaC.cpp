@@ -522,7 +522,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 	{
 		//m_pKiana->UltraAtk_Ring(CKiana::ATK01);
 		m_checkUltraRing = true;
-	}
+	} 
 
 	if (!m_checkUltraAtk && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01)
 	{

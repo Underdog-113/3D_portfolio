@@ -33,7 +33,7 @@ private:
 	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCurMainCam,		nullptr,		CurrentMainCam)
 
 	float						m_rotSpeed	= 10.f;
-	float						m_rotSpeedHighRate = 0.8f;
+	float						m_rotSpeedHighRate = 1.f;
 	float						m_rotSpeedLowRate = 0.5f;
 	
 	GETTOR			(bool,		m_inputLock_ByAni,  false,			InputLock_ByAni)
