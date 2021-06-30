@@ -53,13 +53,14 @@ void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, 
 	m_pAttackBall->SetIsEnabled(true);
 }
 
-void CValkyrie::ActiveAttackBall(CAttackBall * pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)
+void CValkyrie::ActiveAttackBall(CAttackBall * pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius, _float3 offset)
 {
 	HitInfo info;
 	info.SetDamageRate(damageRate);
 	info.SetStrengthType(strength);
 	info.SetCrowdControlType(cc);
 
+	pAttackBall->SetOffset(offset);
 	pAttackBall->SetupBall(this, pBoneMat, radius, info);
 	pAttackBall->SetIsEnabled(true);
 }

@@ -99,16 +99,7 @@ private:
 	float m_timer = 0.f;
 
 	static		_uint						m_s_uniqueID;
-   public:
-	SP(Engine::CObject) CreateEffect(std::wstring name);
-	SP(Engine::CObject) CreateEffect(std::wstring name, std::wstring texName1, std::wstring texName2);
-	void SetEffect(SP(Engine::CObject) spEffect, AttackOption option);
 
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack1, nullptr, Effect_Attack1)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack2, nullptr, Effect_Attack2)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack3, nullptr, Effect_Attack3)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack4, nullptr, Effect_Attack4)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack5, nullptr, Effect_Attack5)
 };
 
 #endif

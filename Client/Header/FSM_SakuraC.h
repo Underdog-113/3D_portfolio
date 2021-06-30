@@ -36,6 +36,7 @@ private: /* Normal Actions */
 	bool CheckAction_Run_End();
 	bool CheckAction_Idle();
 	bool CheckAction_RunBS_To_Run();
+	bool CheckAction_Ultra();
 
 private: /* Special Actions */
 

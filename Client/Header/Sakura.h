@@ -38,7 +38,8 @@ public:
 
 					void					ApplyHitInfo		(HitInfo info) override;
 public:
-
+	
+	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
 
 private:
 	_uint idx = 0;

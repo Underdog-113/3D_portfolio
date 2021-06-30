@@ -63,7 +63,7 @@ private:
 
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)
-	GETTOR			(_uint,							m_fakeTrack,			0,			FakeOldTrack)
+	GETTOR			(_uint,							m_fakeTrack,			0,			FakeTrack)
 	GETTOR			(_uint,							m_fakeIndex,			0,			FakeIndex)
 	GETTOR			(double,						m_fakeTimer,			0.f,		FakeTimer)
 	GETTOR			(_double,						m_fakePeriod,			0,			FakePeriod)

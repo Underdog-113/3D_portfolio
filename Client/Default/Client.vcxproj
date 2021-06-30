@@ -206,6 +206,9 @@
     <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
     <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
     <ClInclude Include="..\Header\DissolveShader.h" />
+    <ClInclude Include="..\Header\EffectMaker.h" />
+    <ClInclude Include="..\Header\EffectMaker_Kiana.h" />
+    <ClInclude Include="..\Header\EffectMaker_Theresa.h" />
     <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
@@ -409,6 +412,9 @@
     <ClCompile Include="..\Code\DataManager.cpp" />
     <ClCompile Include="..\Code\DecoObject.cpp" />
     <ClCompile Include="..\Code\DissolveShader.cpp" />
+    <ClCompile Include="..\Code\EffectMaker.cpp" />
+    <ClCompile Include="..\Code\EffectMaker_Kiana.cpp" />
+    <ClCompile Include="..\Code\EffectMaker_Theresa.cpp" />
     <ClCompile Include="..\Code\FireShader.cpp" />
     <ClCompile Include="..\Code\FSM_SakuraC.cpp" />
     <ClCompile Include="..\Code\FSM_SickleC.cpp" />
