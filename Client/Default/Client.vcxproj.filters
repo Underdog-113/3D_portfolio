@@ -663,6 +663,11 @@
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect">
       <UniqueIdentifier>{99d4c270-08a2-447b-8191-21301f1c553a}</UniqueIdentifier>
+      <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att">
+        <UniqueIdentifier>{b579e2bb-cfa4-4e4b-a9e9-96e59cc4ff9a}</UniqueIdentifier>
+      </Filter>
+      <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke">
+        <UniqueIdentifier>{8aee29ef-6c6b-423d-82d6-d0f9923cc643}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern">
       <UniqueIdentifier>{8650c632-f201-4e89-af60-92c846b00327}</UniqueIdentifier>
@@ -1313,6 +1318,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\EffectMaker_Theresa.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
+      <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
+      <ClInclude Include="..\Header\TheresaCharge_Att.h">
+        <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
+      </ClInclude>
+      <ClInclude Include="..\Header\MoveUpSmoke.h">
+        <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\BronyaBasePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base</Filter>
@@ -1898,6 +1909,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\EffectMaker_Theresa.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
+      <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
+      <ClCompile Include="..\Code\TheresaCharge_Att.cpp">
+        <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
+      </ClCompile>
+      <ClCompile Include="..\Code\MoveUpSmoke.cpp">
+        <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BronyaBasePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base</Filter>

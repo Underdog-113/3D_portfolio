@@ -306,6 +306,7 @@
     <ClInclude Include="..\Header\Monster.h" />
     <ClInclude Include="..\Header\ATBPattern.h" />
     <ClInclude Include="..\Header\MonsterSliderC.h" />
+    <ClInclude Include="..\Header\MoveUpSmoke.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
     <ClInclude Include="..\Header\MO_Dummy.h" />
     <ClInclude Include="..\Header\MO_Lancer.h" />
@@ -328,6 +329,7 @@
     <ClInclude Include="..\Header\RobotDiePattern.h" />
     <ClInclude Include="..\Header\RobotHitPattern.h" />
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
+    <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
@@ -501,6 +503,7 @@
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\ATBPattern.cpp" />
     <ClCompile Include="..\Code\MonsterSliderC.cpp" />
+    <ClCompile Include="..\Code\MoveUpSmoke.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
     <ClCompile Include="..\Code\MO_Dummy.cpp" />
     <ClCompile Include="..\Code\MO_Lancer.cpp" />
@@ -523,6 +526,7 @@
     <ClCompile Include="..\Code\RobotDiePattern.cpp" />
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
+    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />    
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />

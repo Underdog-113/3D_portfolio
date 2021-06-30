@@ -81,14 +81,15 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 {
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
+	albedo.a = gAlpha;
+	float4 alphaVal = tex2D(ServeTex, Input.mUV);
 
-	float4 Serve = tex2D(ServeTex, Input.mUV);
+	float4 blendColor = (alphaVal * albedo);
 
-	float multiply = saturate(Serve.r * gAlpha);
+	blendColor = saturate(blendColor);
 
-	float3 diffuse = albedo.rgb;	
 
-	return float4(diffuse, multiply);
+	return blendColor;
 }
 
 technique AlphaMask
@@ -99,7 +100,6 @@ technique AlphaMask
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
-
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();
 	}
