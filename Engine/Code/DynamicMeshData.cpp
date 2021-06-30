@@ -160,6 +160,11 @@ void CDynamicMeshData::ResetAnimation(void)
 
 double CDynamicMeshData::GetAniTimeline()
 {
+	if (m_rootMotionOff)
+	{
+		return	m_pAniCtrl->GetTimeline_Blend();
+	}
+
 	return m_pAniCtrl->GetTimeline();
 }
 

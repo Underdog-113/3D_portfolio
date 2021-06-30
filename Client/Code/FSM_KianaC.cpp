@@ -543,9 +543,9 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 		m_checkEffect = true;
 	}
 
-	if (CheckAction_Attack(Name_Attack_2, 0.3f))
-		return;
 	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack_2, 0.3f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -596,11 +596,11 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 			PlaySound_Effect(Sound_Attack_2_Effect);
 	}
 
+	if (CheckAction_Evade_OnAction())
+		return;
 	if (CheckAction_BranchAttack())
 		return;
 	if (CheckAction_Attack(Name_Attack_3))
-		return;
-	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;

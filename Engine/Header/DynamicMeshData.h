@@ -69,6 +69,9 @@ private:
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)
 	
 	GETTOR_SETTOR(_bool,				m_playAnimation,		true,		PlayAnimation)
+
+		
+	GETTOR_SETTOR(_bool,				m_rootMotionOff,		true,		RootMotionOff)
 };
 END
 #endif

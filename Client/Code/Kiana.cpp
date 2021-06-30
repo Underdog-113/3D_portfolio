@@ -78,6 +78,7 @@ void CKiana::Awake(void)
 void CKiana::Start(void)
 {
 	__super::Start();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 
 	m_spTransform->SetSize(0.45f, 0.45f, 0.45f);
 
@@ -240,14 +241,17 @@ void CKiana::SetBasicName(void)
 
 void CKiana::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionEnter(ci);
 }
 
 void CKiana::OnCollisionStay(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionStay(ci);
 }
 
 void CKiana::OnCollisionExit(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionExit(ci);
 }
 
 void CKiana::ApplyHitInfo(HitInfo info)

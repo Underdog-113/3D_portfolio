@@ -111,14 +111,16 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			if (D3DXVec3Length(&forwardMove) > D3DXVec3Length(&m_prevMoveAmount) * 1.2f &&
 				D3DXVec3Length(&forwardMove) > D3DXVec3Length(&startToCur) * 0.75f)
 			{
-				pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
+				if(!m_isTargetCollide)
+					pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
 				return;
 			}
 		}
 
 		forwardMove *= moveDir;
 		m_prevMoveAmount = forwardMove;
-		pOwner->GetTransform()->AddPosition(forwardMove);
+		if (!m_isTargetCollide)
+			pOwner->GetTransform()->AddPosition(forwardMove);
 		if (m_isVerticalAnim)
 			pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 

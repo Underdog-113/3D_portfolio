@@ -41,9 +41,9 @@ public:
 
 	//virtual		void						SetBasicName		(void);
 
-	virtual		void						OnCollisionEnter(Engine::_CollisionInfo ci) {};
-	virtual		void						OnCollisionStay(Engine::_CollisionInfo ci) {};
-	virtual		void						OnCollisionExit(Engine::_CollisionInfo ci) {};
+	virtual		void						OnCollisionEnter(Engine::_CollisionInfo ci);
+	virtual		void						OnCollisionStay(Engine::_CollisionInfo ci);
+	virtual		void						OnCollisionExit(Engine::_CollisionInfo ci);
 
 	virtual		void						ApplyHitInfo(HitInfo info) PURE;
 public:

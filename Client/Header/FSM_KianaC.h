@@ -3,7 +3,7 @@
 #define Cool_Attack				0.25f
 #define Cool_BranchAttack		0.5f
 #define Cool_BranchAttack3to4	0.3f
-#define Cool_Evade				0.2f
+#define Cool_Evade				0.1f
 #define Cool_End				0.75f
 
 #define Cool_Emotion			0.75f

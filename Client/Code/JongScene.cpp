@@ -75,7 +75,7 @@ void CJongScene::Start(void)
 	//SetSceneCamera(m_spSakura);
 
 	//CollisionDummy();
-	//SickleTest();
+	SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
 	//RobotTest();
@@ -236,6 +236,17 @@ void CJongScene::SickleTest()
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	spSickleClone->GetTransform()->SetSize(2, 2, 2);
 	spSickleClone->GetTransform()->SetPosition(0, 0, 2);
+	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetSize(2, 2, 2);
+	spSickleClone->GetTransform()->SetPosition(0, 0, 4);
+	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetSize(2, 2, 2);
+	spSickleClone->GetTransform()->SetPosition(2, 0, 2);
 	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
 	//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
