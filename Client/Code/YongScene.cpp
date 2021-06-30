@@ -126,8 +126,8 @@ void CYongScene::Update(void)
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Boom");
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom_2");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	}
 }
 
