@@ -63,22 +63,25 @@ void CJongScene::Start(void)
 	__super::Start();
 	CDamageObjectPool::GetInstance()->Start(this);
 
-	//KianaTest();
+	KianaTest();
 	//TheresaTest();
 	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
-	SakuraTest();
+	//SakuraTest();
 	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
-	//SetSceneCamera(m_spKiana);
+	SetSceneCamera(m_spKiana);
 	//SetSceneCamera(m_spTheresa);
-	SetSceneCamera(m_spSakura);
+	//SetSceneCamera(m_spSakura);
 
 	//CollisionDummy();
 	//SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
 	//RobotTest();
+
+	//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Ninza", true, (_uint)ELayerID::Enemy, L"MO_Ninza");
+	//spSpiderClone->GetTransform()->SetPosition(0.f, 0.f, 5.f);
 
 	FloorTest();
 

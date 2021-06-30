@@ -71,6 +71,21 @@ private:
 	GETTOR			(CAttackBall*,	m_pAttackBall_Axe,			nullptr,	AttackBall_Axe)
 	GETTOR			(CAttackBall*,	m_pAttackBall_AxeStick,		nullptr,	AttackBall_AxeStick)
 	GETTOR			(CAttackBall*,	m_pAttackBall_AxeImpact,	nullptr,	AttackBall_AxeImpact)
+
+
+public:
+
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack1, nullptr, Effect_Attack1)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack2, nullptr, Effect_Attack2)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack3, nullptr, Effect_Attack3)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack4, nullptr, Effect_Attack4)
+		
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Charge0, nullptr, Effect_Charge0)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Charge1, nullptr, Effect_Charge1)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Charge2, nullptr, Effect_Charge2)
+		
+	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Ultra, nullptr, Effect_Ultra)
+
 };
 
 

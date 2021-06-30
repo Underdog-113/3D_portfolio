@@ -53,6 +53,7 @@ private: /* Special Actions */
 	bool CheckAction_ChargeAttack();
 	bool CheckAction_ChargeAttack_End();
 	bool CheckAction_ChargeMode();
+	
 
 private:
 	CTheresa* m_pTheresa = nullptr;

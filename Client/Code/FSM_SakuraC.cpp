@@ -39,15 +39,15 @@ void CFSM_SakuraC::Awake(void)
 void CFSM_SakuraC::Start(SP(CComponent) spThis)
 {
 	m_pSakura = static_cast<CSakura*>(m_pOwner);
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pSakura->GetComponent<Engine::CMeshC>()->GetMeshData());
 
 	__super::Start(spThis);
 
 	RegisterAllState();
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pSakura->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
-	SetStartState(Name_StandBy);
+	SetStartState(Name_Appear);
 	m_curState->DoEnter();
 }
 
@@ -222,6 +222,20 @@ bool CFSM_SakuraC::CheckAction_RunBS_To_Run()
 	return false;
 }
 
+bool CFSM_SakuraC::CheckAction_Ultra()
+{
+	if (Engine::IMKEY_DOWN(StageKey_Ult))
+	{
+		auto pStat = m_pSakura->GetStat();
+		if (pStat->GetCurSp() < pStat->GetUltraCost())
+			return false;
+
+		ChangeState(Name_Ultra);
+		return true;
+	}
+	return false;
+}
+
 
 void CFSM_SakuraC::Appear_Init(void)
 {
@@ -249,6 +263,10 @@ void CFSM_SakuraC::Appear_Update(float deltaTime)
 		}
 		return;
 	}
+
+
+	if (CheckAction_StandBy_Timeout())
+		return;
 }
 
 void CFSM_SakuraC::Appear_End(void)
@@ -258,6 +276,7 @@ void CFSM_SakuraC::Appear_End(void)
 
 void CFSM_SakuraC::StandBy_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_StandBy);
 }
 
 void CFSM_SakuraC::StandBy_Enter(void)
@@ -270,22 +289,14 @@ void CFSM_SakuraC::StandBy_Update(float deltaTime)
 	if (CheckAction_Run())
 		return;
 
-// 	if (CheckAction_Attack(Name_ATTACK1, 0.f))
-// 		return;
+	if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+		return;
 
 	if (CheckAction_EvadeBackward(0.f))
 		return;
 
-	//if (CheckAction_Ultra())
-	//	return;
-
-// 	if (Engine::IMKEY_DOWN(StageKey_QTE))
-// 	{
-// 		ChangeState(Name_APPEAR);
-// 		m_appearOption = QTE;
-// 		return;
-// 	}
-
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_SakuraC::StandBy_End(void)
@@ -294,6 +305,7 @@ void CFSM_SakuraC::StandBy_End(void)
 
 void CFSM_SakuraC::Run_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_Run);
 }
 
 void CFSM_SakuraC::Run_Enter(void)
@@ -303,22 +315,14 @@ void CFSM_SakuraC::Run_Enter(void)
 
 void CFSM_SakuraC::Run_Update(float deltaTime)
 {
-	//m_runSoundTimer += GET_DT;
-	//if (m_runSoundTimer > 0.3f)
-	//{
-	//	m_runSoundTimer = 0.f;
-	//	PlaySound_Attack_RandomRun();
-	//}
-
-
 	if (CheckAction_Run_End())
 		return;
-// 	if (CheckAction_Attack(Name_ATTACK1, 0.f))
-// 		return;
+	if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+		return;
 	if (CheckAction_EvadeForward())
 		return;
-	//if (CheckAction_Ultra())
-	//	return;
+	if (CheckAction_Ultra())
+		return;
 }
 
 void CFSM_SakuraC::Run_End(void)
@@ -351,8 +355,8 @@ void CFSM_SakuraC::RunBS_Update(float deltaTime)
 
 	if (CheckAction_Idle())
 		return;
-// 	if (CheckAction_Attack(Name_ATTACK1, 0.f))
-// 		return;
+ 	if (CheckAction_Attack(Name_Attack1_Combat, 0.f))
+ 		return;
 	if (CheckAction_EvadeForward())
 		return;
 
@@ -475,7 +479,7 @@ void CFSM_SakuraC::SwitchIn_Init(void)
 
 void CFSM_SakuraC::SwitchIn_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_switchin);
+	m_pDM->ChangeAniSet(Index_SwitchIn);
 }
 
 void CFSM_SakuraC::SwitchIn_Update(float deltaTime)
@@ -494,7 +498,7 @@ void CFSM_SakuraC::SwitchOut_Init(void)
 
 void CFSM_SakuraC::SwitchOut_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_switchrole);
+	m_pDM->ChangeAniSet(Index_SwitchOut);
 }
 
 void CFSM_SakuraC::SwitchOut_Update(float deltaTime)
@@ -513,6 +517,9 @@ void CFSM_SakuraC::SwitchOut_End(void)
 void CFSM_SakuraC::RegisterAllState()
 {
 	Engine::CState* pState;
+
+	CreateState(CFSM_SakuraC, pState, Appear)
+		AddState(pState, Name_Appear);
 
 	CreateState(CFSM_SakuraC, pState, StandBy)
 		AddState(pState, Name_StandBy);
@@ -536,8 +543,8 @@ void CFSM_SakuraC::RegisterAllState()
 		AddState(pState, Name_EvadeBackward);
 
 	CreateState(CFSM_SakuraC, pState, SwitchIn)
-		AddState(pState, Name_switchin);
+		AddState(pState, Name_SwitchIn);
 
 	CreateState(CFSM_SakuraC, pState, SwitchOut)
-		AddState(pState, Name_switchrole);
+		AddState(pState, Name_SwitchOut);
 }
