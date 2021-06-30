@@ -41,6 +41,7 @@ private:
 	void ScoutSetting(void);
 	void LancerSetting(void);
 	void RobotSetting(void);
+	void NinzaSetting(void);
 
 private:
 	SP(Engine::CObject) m_pivot;
@@ -51,6 +52,7 @@ private:
 	SP(Engine::CObject) m_spScout;
 	SP(Engine::CObject) m_spLancer;
 	SP(Engine::CObject) m_spRobot;
+	SP(Engine::CObject) m_spNinza;
 
 	SP(Engine::CObject) m_pivot_kiana;
 

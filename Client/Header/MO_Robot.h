@@ -32,17 +32,22 @@ public:
 
 	virtual void OnDisable(void) override;
 
+	virtual	void OnCollisionEnter(Engine::_CollisionInfo ci);
+	virtual	void OnCollisionStay(Engine::_CollisionInfo ci);
+	virtual	void OnCollisionExit(Engine::_CollisionInfo ci);
+
 	virtual void SetBasicName(void) override;
 
 	virtual void ApplyHitInfo(HitInfo info) override;
 public:
-	static		SP(CMO_Robot)			Create(_bool isStatic, Engine::CScene* pScene);
+	static		SP(CMO_Robot)	Create(_bool isStatic, Engine::CScene* pScene);
 	void						ChaseTarget(_float3 targetPos);
 	void						SetStatus(BaseStat stat);
 	void						UpdatePivotMatrices(void);
 	void						MonsterDead() override;
 
 private:
-	static		_uint						m_s_uniqueID;
+	static		_uint			m_s_uniqueID;
+	
+	GETTOR_SETTOR(_bool, m_checkCol, false, CheckCol)
 };
-

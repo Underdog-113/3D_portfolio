@@ -9,11 +9,14 @@
 #include "MO_Scout.h"
 #include "MO_Lancer.h"
 #include "MO_Robot.h"
+#include "MO_Ninza.h"
 #include "MB_Ganesha.h"
 
 /* for.Player */
 #include "StageControlTower.h"
 #include "Kiana.h"
+
+#include "AniCtrl.h"
 
 CWooScene::CWooScene()
 {
@@ -75,7 +78,8 @@ void CWooScene::Start(void)
 	//GaneshaSetting();
 	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
 	//LancerSetting();
-	RobotSetting();
+	//RobotSetting();
+	NinzaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -88,11 +92,6 @@ void CWooScene::Update(void)
 	__super::Update();
 
 	m_pController->Update();
-
-// 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
-// 	{
-// 		//
-// 	}
 }
 
 void CWooScene::LateUpdate(void)
@@ -247,4 +246,15 @@ void CWooScene::RobotSetting(void)
 	spRobotClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spRobotClone)->SelectChannelID();
 	m_spRobot = spRobotClone;
+}
+
+void CWooScene::NinzaSetting(void)
+{
+	/* Ninza */
+	SP(Engine::CObject) spNinzaClone = ADD_CLONE(L"MO_Ninza", true, (_uint)ELayerID::Enemy, L"MO_Ninza");
+	spNinzaClone->GetTransform()->SetPosition(3, 0, 3);
+	std::dynamic_pointer_cast<CMonster>(spNinzaClone)->SelectChannelID();
+	m_spNinza = spNinzaClone;
+
+	m_spNinza->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.1f);
 }

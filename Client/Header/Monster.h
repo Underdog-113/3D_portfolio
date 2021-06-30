@@ -39,6 +39,10 @@ public:
 
 	virtual void OnDisable(void) override;
 
+	virtual	void OnCollisionEnter(Engine::_CollisionInfo ci) {}
+	virtual	void OnCollisionStay(Engine::_CollisionInfo ci) {}
+	virtual	void OnCollisionExit(Engine::_CollisionInfo ci) {}
+
 	virtual void SetBasicName(void) override;
 
 public:

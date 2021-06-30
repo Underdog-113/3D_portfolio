@@ -5,6 +5,8 @@
 #include "FSMDefine_Robot.h"
 #include "MO_Robot.h"
 
+#include "AniCtrl.h"
+
 CRobotDiePattern::CRobotDiePattern()
 {
 }
@@ -21,11 +23,13 @@ void CRobotDiePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Die != fsm->GetCurStateString() && 0 >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurHp())
 	{
 		fsm->ChangeState(Name_Die);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.6f);
 		PatternPlaySound(L"Robot_Dead.wav", pOwner);
 	}
 	// die 애니가 끝나면
 	else if (Name_Die == fsm->GetCurStateString() && 0.95f <= fsm->GetDM()->GetAniTimeline())
 	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->SetDeleteThis(true);
 	}
 }

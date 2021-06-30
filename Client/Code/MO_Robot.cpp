@@ -42,8 +42,7 @@ void CMO_Robot::Awake(void)
 	__super::Awake();
 	m_spStateMachine = AddComponent<CFSM_RobotC>();
 	m_spPatternMachine->AddNecessaryPatterns(CRobotBornPattern::Create(), CRobotDiePattern::Create(), CRobotBasePattern::Create(), CRobotHitPattern::Create());
-	m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create()); 
-	m_spPatternMachine->AddPattern(CRobotAttack1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create()); 
 	m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
 }
 
@@ -116,6 +115,21 @@ void CMO_Robot::OnEnable(void)
 void CMO_Robot::OnDisable(void)
 {
 	__super::OnDisable();
+}
+
+void CMO_Robot::OnCollisionEnter(Engine::_CollisionInfo ci)
+{
+	if (L"Kiana" == ci.pOtherCollider->GetOwner()->GetOwner()->GetObjectKey())
+		m_checkCol = true;
+}
+
+void CMO_Robot::OnCollisionStay(Engine::_CollisionInfo ci)
+{
+}
+
+void CMO_Robot::OnCollisionExit(Engine::_CollisionInfo ci)
+{
+	m_checkCol = false;
 }
 
 void CMO_Robot::SetBasicName(void)
