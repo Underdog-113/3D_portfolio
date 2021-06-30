@@ -29,6 +29,8 @@ void CActorController::UpdateController()
 			return;
 	}
 
+
+
 	if (!m_rotateLock)
 	{
 		RotateCurrentActor();
@@ -80,6 +82,9 @@ void CActorController::SetInputLock_ByAni(bool lock)
 
 bool CActorController::CheckMoveOrder()
 {
+	if (m_rotateByTarget)
+		return false;
+
 	bool isMove = false;
 
 	// up
@@ -234,8 +239,6 @@ void CActorController::ReserveMoveOrder()
 
 	if (!m_reserveMoveFlag)
 		return;
-	if (m_rotateByTarget)
-		return;
 
 	m_reserveMoveOrderDir = ZERO_VECTOR;
 
@@ -330,4 +333,7 @@ void CActorController::TargetingOn()
 	m_moveOrderDir = targetPos - valkyriePos;
 
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+
+	m_moveFlag = 0;
+	m_prevMoveFlag = 0;
 }

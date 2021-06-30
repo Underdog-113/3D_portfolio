@@ -650,9 +650,9 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 			PlaySound_Effect(Sound_Attack_3_Effect);
 	}
 
-	if (CheckAction_Attack(Name_Attack_4))
-		return;
 	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack_4))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -757,9 +757,9 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 		m_checkEffectSecond = true;
 	}
 
-	if (CheckAction_Attack(Name_Attack_5))
-		return;
 	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack_5))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -919,13 +919,17 @@ void CFSM_KianaC::EvadeBackward_Init(void)
 
 void CFSM_KianaC::EvadeBackward_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_EvadeBackward);
+	m_pDM->RepeatAniSet(Index_EvadeBackward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 {
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.4f))
+		return;
 	if (CheckAction_Run_OnAction(0.5f))
 		return;
 	if (CheckAction_StandBy_Timeout())
@@ -943,13 +947,17 @@ void CFSM_KianaC::EvadeForward_Init(void)
 
 void CFSM_KianaC::EvadeForward_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_EvadeForward);
+	m_pDM->RepeatAniSet(Index_EvadeForward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 {
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.4f))
+		return;
 	if (CheckAction_Run_OnAction(0.5f))
 		return;
 	if (CheckAction_StandBy_Timeout())
@@ -1031,7 +1039,7 @@ void CFSM_KianaC::Hit_L_Enter(void)
 
 void CFSM_KianaC::Hit_L_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction(Cool_HitPenalty))
+	if (CheckAction_Evade_OnAction(Cool_HitPenalty - 0.2f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_HitPenalty))
 		return;
@@ -1124,12 +1132,11 @@ void CFSM_KianaC::Run_Update(float deltaTime)
 		PlaySound_Attack_RandomRun();
 	}
 
-
+	if (CheckAction_EvadeForward())
+		return;
 	if (CheckAction_Run_End())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
-		return;
-	if (CheckAction_EvadeForward())
 		return;
 	if (CheckAction_Ultra())
 		return;
@@ -1158,17 +1165,16 @@ void CFSM_KianaC::RunBS_Update(float deltaTime)
 		PlaySound_Attack_RandomRun();
 	}
 
+	if (CheckAction_EvadeForward())
+		return;
+
 	if (CheckAction_RunBS_To_Run())
 		return;
-
 	if (CheckAction_Run_End())
 		return;
-
 	if (CheckAction_StandBy())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
-		return;
-	if (CheckAction_EvadeForward())
 		return;
 }
 
@@ -1191,11 +1197,11 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
+	if (CheckAction_EvadeForward())
+		return;
 	if (CheckAction_Run())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
-		return;
-	if (CheckAction_EvadeForward())
 		return;
 	if (CheckAction_Ultra())
 		return;
@@ -1222,11 +1228,11 @@ void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
+	if (CheckAction_EvadeForward())
+		return;
 	if (CheckAction_Run())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
-		return;
-	if (CheckAction_EvadeForward())
 		return;
 	if (CheckAction_Ultra())
 		return;

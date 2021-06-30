@@ -46,6 +46,7 @@ private:
 
 	bool						m_rotateLock = false;
 	bool						m_rotateByTarget = false;
+	bool						m_inputLock_ByTarget = false;
 
 
 };
