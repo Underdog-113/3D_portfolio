@@ -64,16 +64,18 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 burst1 범위 밖이고
 	if (len > m_atkDis)
 	{
-		// 내가 burst1 상태면
-		if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		// 내가 burst1 상태가 끝났다면
+		if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
 			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 			m_onSound = false;
 			m_onRunStart = false;
 		}
-		// 내가 대기 상태면 이동 애니로 변경
-		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		// 내가 대기 상태가 끝났다면
+		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Run);
 		}
@@ -89,19 +91,29 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 burst1 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동 상태라면 burst1
-		if ((Name_Ganesha_StandBy == fsm->GetCurStateString() ||
-			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
+		// 내가 이동 상태가 끝났다면
+		if (Name_Ganesha_StandBy == fsm->GetCurStateString() &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst01);
 
+			// burst 위치 잡기
+			CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
+			_float3 mPos = pOwner->GetTransform()->GetPosition();
+			_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+			_float3 beamDir = pPos - mPos;
+			beamDir.y = 0.f;
+
+			D3DXVec3Normalize(&beamDir, &beamDir);
+			pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos + beamDir * 5);
+			pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
 		}
 	}
 
 	/************************* JumpBack */
-	// 내가 burst1 상태라면 뒤로 이동
-	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	// 내가 burst1 상태가 끝났다면
+	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
 		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
@@ -110,7 +122,9 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
-	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
+	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_walkReady)
 	{
 		_float3 dir = tPos - mPos;
 
@@ -118,7 +132,9 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		pOwner->GetTransform()->SetPosition(mPos);
 	}
 	// 내가 뒤로 이동이 끝났다면
-	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
+	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_walkReady)
 	{
 		++m_jumpCnt;
 
@@ -136,16 +152,17 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	/************************* AttackBox */
-	// burst 상태가 완료되면 attackbox off
-	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
+	// burst1 상태가 완료되면 attackbox off
+	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
+		0.59f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_onBurst = false;
-		//static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBox();
+		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBox();
 	}
-	// burst 상태라면
+	// burst1 상태라면
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
-		0.4f <= fsm->GetDM()->GetAniTimeline() &&
-		0.5f > fsm->GetDM()->GetAniTimeline() &&
+		0.47f <= fsm->GetDM()->GetAniTimeline() &&
+		0.59f > fsm->GetDM()->GetAniTimeline() &&
 		false == m_onBurst)
 	{
 		m_onBurst = true;
@@ -153,23 +170,6 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
 		_float3 size = { 2.f, 2.f, 10.f };
 		_float3 offset = ZERO_VECTOR; 
-
-		_float3 mPos = pOwner->GetTransform()->GetPosition();
-		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-		_float3 beamDir = pPos - mPos;
-		beamDir.y = 0.f;
-
-		D3DXVec3Normalize(&beamDir, &beamDir);
-/*
-		_mat rotMat;
-		D3DXMatrixRotationYawPitchRoll(&rotMat,
-			pGanesha->GetTransform()->GetRotation().y,
-			pGanesha->GetTransform()->GetRotation().x,
-			pGanesha->GetTransform()->GetRotation().z);*/
-		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos + beamDir * 5);
-		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
-
-		//offset.z = 5;
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}

@@ -131,6 +131,7 @@ void CFSM_RobotC::RegisterAllStage()
 
 void CFSM_RobotC::FixRootMotionOffset(_uint index)
 {
+	m_pOwner->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
 }
 
 void CFSM_RobotC::ATTACK_1_Left_Init(void)

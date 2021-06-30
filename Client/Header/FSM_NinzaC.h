@@ -2,11 +2,11 @@
 #include "StateMachineC.h"
 
 class CStageControlTower;
-class FSM_NinzaC final : public Engine::CStateMachineC
+class CFSM_NinzaC final : public Engine::CStateMachineC
 {
 public:
-	FSM_NinzaC();
-	~FSM_NinzaC() = default;
+	CFSM_NinzaC();
+	~CFSM_NinzaC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
@@ -22,12 +22,6 @@ private:
 
 public:
 	// <Animation List>
-
-	//StandBy
-	void StandBy_Init(void);
-	void StandBy_Enter(void);
-	void StandBy_Update(float deltaTime);
-	void StandBy_End(void);
 
 	//Attack_1_as
 	void Attack_1_as_Init(void);
@@ -70,6 +64,12 @@ public:
 	void Attack_2_atk_as_long_Enter(void);
 	void Attack_2_atk_as_long_Update(float deltaTime);
 	void Attack_2_atk_as_long_End(void);
+
+	//Attack_2_bs
+	void Attack_2_bs_Init(void);
+	void Attack_2_bs_Enter(void);
+	void Attack_2_bs_Update(float deltaTime);
+	void Attack_2_bs_End(void);
 
 	//Born
 	void Born_Init(void);
@@ -155,11 +155,11 @@ public:
 	void Hit_Throw_Update(float deltaTime);
 	void Hit_Throw_End(void);
 
-	//Hit_Throw_L
-	void Hit_Throw_L_Init(void);
-	void Hit_Throw_L_Enter(void);
-	void Hit_Throw_L_Update(float deltaTime);
-	void Hit_Throw_L_End(void);
+	//Hit_Throw_Low
+	void Hit_Throw_Low_Init(void);
+	void Hit_Throw_Low_Enter(void);
+	void Hit_Throw_Low_Update(float deltaTime);
+	void Hit_Throw_Low_End(void);
 
 	//KnockDown
 	void KnockDown_Init(void);
@@ -172,6 +172,12 @@ public:
 	void Run_Enter(void);
 	void Run_Update(float deltaTime);
 	void Run_End(void);
+
+	//StandBy
+	void StandBy_Init(void);
+	void StandBy_Enter(void);
+	void StandBy_Update(float deltaTime);
+	void StandBy_End(void);
 
 	//StandUp
 	void StandUp_Init(void);
@@ -239,4 +245,3 @@ public:
 	void Walk_R_Update(float deltaTime);
 	void Walk_R_End(void);
 };
-

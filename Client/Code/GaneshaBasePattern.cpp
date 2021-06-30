@@ -30,8 +30,12 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
+	if (Name_Ganesha_Attack01 != fsm->GetCurStateString())
+	{
+		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
+	}
 
+	/************************* Sound */
 	// attack sound
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() &&
 		0.4f <= fsm->GetDM()->GetAniTimeline() &&
@@ -54,6 +58,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
+	/************************* Range */
 	// 상대가 공격 범위 밖이고
 	if (len > m_atkDis)
 	{
@@ -92,6 +97,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
+	/************************* JumpBack */
 	// 내가 공격1 상태라면 뒤로 이동 상태로 변경
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 	{
@@ -126,6 +132,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
+	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
 	if (Name_Ganesha_Attack01 == fsm->GetCurStateString() && 0.59f <= fsm->GetDM()->GetAniTimeline())
 	{

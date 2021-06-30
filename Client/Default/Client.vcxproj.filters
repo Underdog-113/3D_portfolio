@@ -1104,9 +1104,6 @@
     <ClInclude Include="..\Header\ClientComponents.h">
       <Filter>98.Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Pistol.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\ValkyriegManager.h">
       <Filter>09.Manager\06.ValkyriegManager</Filter>
     </ClInclude>
@@ -1250,6 +1247,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\LancerHitPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\NinzaAttack2Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1790,6 +1790,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieLevelUp.cpp">
       <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NinzaAttack2Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

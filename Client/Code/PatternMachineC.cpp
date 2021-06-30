@@ -51,16 +51,26 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
+	_float3 pos = m_pOwner->GetTransform()->GetPosition();
+
 	if (Engine::IMKEY_DOWN(KEY_Q))
 	{
-		m_onDie = true;
-		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
-		//m_onHitH = true;
+		std::cout << "==============" << std::endl;
+		std::cout << "x: " << pos.x << ", y: " << pos.y << ", z: " << pos.z << std::endl;
+		std::cout << "==============" << std::endl;
 	}
-	else if (Engine::IMKEY_DOWN(KEY_E))
-	{
-		m_onHitL= true;
-	}
+
+	//if (Engine::IMKEY_DOWN(KEY_Q))
+	//{
+	//	m_onDie = true;
+	//	static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+	//	//m_onHitH = true;
+	//}
+	//
+	//if (Engine::IMKEY_DOWN(KEY_E))
+	//{
+	//	m_onHitL= true;
+	//}
 
 	// born 실행 (1번만)
 	PlayBornPattern();

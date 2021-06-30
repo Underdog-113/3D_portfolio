@@ -92,6 +92,32 @@ void CWooScene::Update(void)
 	__super::Update();
 
 	m_pController->Update();
+
+	//if (Engine::IMKEY_DOWN(KEY_Q))
+	//{
+	//	switch (m_index)
+	//	{
+	//	case 0:
+	//		LancerSetting();
+	//		break;
+	//	case 1:
+	//		RobotSetting();
+	//		break;
+	//	case 2:
+	//		ScoutSetting();
+	//		break;
+	//	}
+
+	//	++m_index;
+
+	//	if (m_index >= 3)
+	//		m_index = 0;
+	//}
+
+	//if (Engine::IMKEY_DOWN(KEY_E))
+	//{
+	//	if ()
+	//}
 }
 
 void CWooScene::LateUpdate(void)
@@ -197,10 +223,30 @@ void CWooScene::TerrainSetting(void)
 void CWooScene::SickleSetting(void)
 {
 	/* Sickle */
+	//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(0, 10, 2);
+	//std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	//m_spSickle = spSickleClone;
+
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(0, 10, 2);
+	spSickleClone->GetTransform()->SetPosition(0, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_spSickle = spSickleClone;
+	m_vSickles.emplace_back(spSickleClone);
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(5, 0, 5);
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	m_vSickles.emplace_back(spSickleClone);
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(2, 0, 2);
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	m_vSickles.emplace_back(spSickleClone);
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(5, 0, 7);
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	m_vSickles.emplace_back(spSickleClone);
 }
 
 void CWooScene::GaneshaSetting(void)
@@ -252,9 +298,9 @@ void CWooScene::NinzaSetting(void)
 {
 	/* Ninza */
 	SP(Engine::CObject) spNinzaClone = ADD_CLONE(L"MO_Ninza", true, (_uint)ELayerID::Enemy, L"MO_Ninza");
-	spNinzaClone->GetTransform()->SetPosition(3, 0, 3);
+	spNinzaClone->GetTransform()->SetPosition(0,0,0);
 	std::dynamic_pointer_cast<CMonster>(spNinzaClone)->SelectChannelID();
 	m_spNinza = spNinzaClone;
 
-	m_spNinza->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.1f);
+	//m_spNinza->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.1f);
 }

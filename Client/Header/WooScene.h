@@ -47,6 +47,8 @@ private:
 	SP(Engine::CObject) m_pivot;
 	SP(Engine::CObject) m_spSpider;
 	SP(Engine::CObject) m_spSickle;
+	std::vector<SP(Engine::CObject)> m_vSickles;
+
 	SP(Engine::CObject) m_spGanesha;
 	SP(Engine::CObject) m_spKiana;
 	SP(Engine::CObject) m_spScout;
@@ -59,6 +61,8 @@ private:
 	_uint m_curPatternIdx = 0;
 
 	CStageControlTower* m_pController = nullptr;
+
+	_int m_index = 0;
 };
 
 #endif

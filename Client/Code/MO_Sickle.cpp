@@ -48,7 +48,7 @@ void CMO_Sickle::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(1.7f, 1.7f, 1.7f);
+	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();

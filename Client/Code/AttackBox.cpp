@@ -163,18 +163,12 @@ void CAttackBox::OnDestroy(void)
 void CAttackBox::OnEnable(void)
 {
 	__super::OnEnable();
-	if (m_spTransform)
-		m_spTransform->SetPosition(0, 0, 0);
-
-
 }
 
 void CAttackBox::OnDisable(void)
 {
 	__super::OnDisable();
 
-	if (m_spTransform)
-		m_spTransform->SetPosition(0, 0, 0);
 	m_vCollided.clear();
 }
 

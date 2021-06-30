@@ -43,6 +43,7 @@
 #include "NinzaDiePattern.h"
 #include "NinzaHitPattern.h"
 #include "NinzaBasePattern.h"
+#include "NinzaAttack2Pattern.h"
 
 /* Robot */
 #include "RobotBornPattern.h"

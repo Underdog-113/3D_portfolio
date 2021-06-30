@@ -42,7 +42,7 @@ void CMO_Robot::Awake(void)
 	__super::Awake();
 	m_spStateMachine = AddComponent<CFSM_RobotC>();
 	m_spPatternMachine->AddNecessaryPatterns(CRobotBornPattern::Create(), CRobotDiePattern::Create(), CRobotBasePattern::Create(), CRobotHitPattern::Create());
-	//m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create()); 
+	m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create());
 	m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
 }
 
