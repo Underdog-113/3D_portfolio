@@ -258,7 +258,10 @@
     <ClInclude Include="..\Header\Include_Valkyrie.h" />
     <ClInclude Include="..\Header\InitScene.h" />
     <ClInclude Include="..\Header\InStockValkyrieData.h" />
+    <ClInclude Include="..\Header\InventoryManager.h" />
+    <ClInclude Include="..\Header\InventoryScene.h" />
     <ClInclude Include="..\Header\Item.h" />
+    <ClInclude Include="..\Header\ItemButton.h" />
     <ClInclude Include="..\Header\ItemData.h" />
     <ClInclude Include="..\Header\JongScene.h" />
     <ClInclude Include="..\Header\Kiana.h" />
@@ -330,6 +333,7 @@
     <ClInclude Include="..\Header\ScoutBornPattern.h" />
     <ClInclude Include="..\Header\ScoutDiePattern.h" />
     <ClInclude Include="..\Header\ScoutHitPattern.h" />
+    <ClInclude Include="..\Header\stuffItem.h" />
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
@@ -377,6 +381,7 @@
     <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\ValkyrieWeapon.h" />
+    <ClInclude Include="..\Header\WaponItem.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
     <ClInclude Include="..\Header\WooScene.h" />
@@ -441,7 +446,10 @@
     <ClCompile Include="..\Code\ButtonFunction.cpp" />
     <ClCompile Include="..\Code\InitScene.cpp" />
     <ClCompile Include="..\Code\InStockValkyrieData.cpp" />
+    <ClCompile Include="..\Code\InventoryManager.cpp" />
+    <ClCompile Include="..\Code\InventoryScene.cpp" />
     <ClCompile Include="..\Code\Item.cpp" />
+    <ClCompile Include="..\Code\ItemButton.cpp" />
     <ClCompile Include="..\Code\ItemData.cpp" />
     <ClCompile Include="..\Code\JongScene.cpp" />
     <ClCompile Include="..\Code\Kiana.cpp" />
@@ -514,6 +522,7 @@
     <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
     <ClCompile Include="..\Code\ScoutDiePattern.cpp" />
     <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
+    <ClCompile Include="..\Code\stuffItem.cpp" />
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
@@ -561,6 +570,7 @@
     <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
+    <ClCompile Include="..\Code\WaponItem.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />

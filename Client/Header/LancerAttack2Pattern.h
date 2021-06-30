@@ -20,10 +20,10 @@ private:
 	void SetMoveSound();
 
 private:
-	_float m_cost = 3.f;
+	_float m_cost = 20.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
-	_float m_atkDis = 3.f; // 공격 거리
+	_float m_atkDis = 2.3f; // 공격 거리
 	_float m_atkCool = 6.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임

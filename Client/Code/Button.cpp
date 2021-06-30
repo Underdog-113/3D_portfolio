@@ -107,7 +107,8 @@ void CButton::OnDestroy(void)
 {
 	__super::OnDestroy();
 	m_functionGate.clear();
-	//delete(&m_functionGate);
+	CButtonManager::GetInstance()->DeleteButtonList(this);
+
 }
 
 void CButton::OnEnable(void)

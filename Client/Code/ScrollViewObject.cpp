@@ -62,6 +62,7 @@ void CScrollViewObject::Update(void)
 {
 	__super::Update();
 	ImageObjectSort();
+	Scroll();
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -101,6 +102,11 @@ void CScrollViewObject::OnEnable(void)
 
 		buttonObject->SetIsEnabled(true);
 
+		for (auto& textObject : m_vTextObject)
+		{
+			textObject.m_text->SetIsEnabled(true);
+		}
+
 		for (auto& imageObject : m_vImageObject[count - 1])
 		{
 			imageObject.m_image->SetIsEnabled(true);
@@ -119,11 +125,42 @@ void CScrollViewObject::OnDisable(void)
 
 		buttonObject->SetIsEnabled(false);
 
+		for (auto& textObject : m_vTextObject)
+		{
+			textObject.m_text->SetIsEnabled(false);
+		}
+
 		for (auto& imageObject : m_vImageObject[count - 1])
 		{
 			imageObject.m_image->SetIsEnabled(false);
 		}
 	}
+}
+
+void CScrollViewObject::AllDelete()
+{
+	_int count = 0;
+
+	for (auto& buttonObject : m_vButtonObject)
+	{
+		count++;
+
+		buttonObject->SetDeleteThis(true);
+
+		for (auto& textObject : m_vTextObject)
+		{
+			textObject.m_text->SetDeleteThis(true);
+		}
+
+		for (auto& imageObject : m_vImageObject[count - 1])
+		{
+			imageObject.m_image->SetDeleteThis(true);
+		}
+	}
+
+	m_vButtonObject.clear();
+	m_vTextObject.clear();
+	m_vImageObject.clear();
 }
 
 void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet)
@@ -136,7 +173,7 @@ void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _floa
 CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset)
 {
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
+		std::static_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
 	image->GetTransform()->SetSize(size);
 	image->GetTexture()->AddTexture(texture, 0);
 	image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
@@ -146,6 +183,22 @@ CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstr
 	info.m_offset = offset;
 
 	m_vImageObject[number].emplace_back(info);
+
+	return this;
+}
+
+CScrollViewObject * CScrollViewObject::AddTextObjectData(_int number, _float2 offset, _int fontSize, D3DXCOLOR color, std::wstring message)
+{
+	SP(Engine::CTextObject) textObject =
+		std::static_pointer_cast<Engine::CTextObject>(GetScene()->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L""));
+	_float2 pos = _float2(m_spTransform->GetPosition().x, m_spTransform->GetPosition().y);
+	textObject->AddComponent<Engine::CTextC>()->AddFontData(message, _float2(0,0), _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, color, true);
+
+	TextInfo info;
+	info.m_text = textObject;
+	info.m_offset = offset;
+
+	m_vTextObject.emplace_back(info);
 
 	return this;
 }
@@ -162,12 +215,17 @@ void CScrollViewObject::ImageObjectSort()
 	pos.z += 0.01f;
 	for (auto& buttonObject : m_vButtonObject)
 	{
-		count++;
+
 
 		buttonObject->GetTransform()->SetPosition(pos);
-		
 
-		for (auto& imageObject : m_vImageObject[count-1])
+
+		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.02f);
+		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);
+
+
+
+		for (auto& imageObject : m_vImageObject[count])
 		{
 			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, 0.01f);
 			imageObject.m_image->GetTransform()->SetPosition(pos + T);
@@ -175,6 +233,7 @@ void CScrollViewObject::ImageObjectSort()
 
 		pos.x += m_distanceXY.x;
 
+		count++;
 		if (count % m_column == 0)
 		{
 			pos.x = GetTransform()->GetPosition().x + m_offSet.x;
@@ -183,4 +242,10 @@ void CScrollViewObject::ImageObjectSort()
 	}
 }
 
-// 처음 지정위치에서 시작해서 간격만큼 이미지추가
+void CScrollViewObject::Scroll()
+{
+	// 마우스가 스크롤뷰 안을 클릭하면 현재 위치를 저장
+	// 마우스가 이동하는면 이동 대신 빠르게이동하면 빠르게 이동되고
+	// 빠르게 이동하다가 마우스를 놔버리면 해당 속도로 느리게 이동된다
+}
+

@@ -574,6 +574,24 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base">
       <UniqueIdentifier>{a92e72f4-0f61-4794-9348-19ab645a096e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\05.ItemButton">
+      <UniqueIdentifier>{2a544fee-4369-4f15-8407-c9671ddeca67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\11.Inventory">
+      <UniqueIdentifier>{9b023afc-92c3-4855-9400-5ae0a7d37d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\07.InventoryManager">
+      <UniqueIdentifier>{d9e6398d-8d0b-4824-9869-8d2a7ed62e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12InvertoryFSM">
+      <UniqueIdentifier>{96d305ee-0f86-4292-b815-4d732181c40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12InvertoryFSM\00.Wapon">
+      <UniqueIdentifier>{a3674c05-0219-4efc-b4f6-df0724f35edd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12InvertoryFSM\01.Item">
+      <UniqueIdentifier>{3a16b10e-af08-454f-b87b-ff1a7c4b2ed7}</UniqueIdentifier>
+      </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern">
       <UniqueIdentifier>{a7508e0e-023a-466d-881c-33d6b33803fe}</UniqueIdentifier>
     </Filter>
@@ -1250,6 +1268,21 @@
     </ClInclude>
     <ClInclude Include="..\Header\EffectMaker_Kiana.h" />
     <ClInclude Include="..\Header\EffectMaker.h" />
+    <ClInclude Include="..\Header\ItemButton.h">
+      <Filter>02.Objects\05.ItemButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\InventoryScene.h">
+      <Filter>01.Scene\11.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\InventoryManager.h">
+      <Filter>09.Manager\07.InventoryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WaponItem.h">
+      <Filter>12InvertoryFSM\00.Wapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\stuffItem.h">
+      <Filter>12InvertoryFSM\01.Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1792,6 +1825,21 @@
     </ClCompile>
     <ClCompile Include="..\Code\EffectMaker_Kiana.cpp" />
     <ClCompile Include="..\Code\EffectMaker.cpp" />
+    <ClCompile Include="..\Code\ItemButton.cpp">
+      <Filter>02.Objects\05.ItemButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\InventoryScene.cpp">
+      <Filter>01.Scene\11.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\InventoryManager.cpp">
+      <Filter>09.Manager\07.InventoryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WaponItem.cpp">
+      <Filter>12InvertoryFSM\00.Wapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\stuffItem.cpp">
+      <Filter>12InvertoryFSM\01.Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

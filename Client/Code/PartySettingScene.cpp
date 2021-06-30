@@ -12,7 +12,6 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
-#include "ValkyriegManager.h"
 
 CPartySettingScene::CPartySettingScene()
 {

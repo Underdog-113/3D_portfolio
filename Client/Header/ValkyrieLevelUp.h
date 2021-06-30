@@ -1,5 +1,6 @@
 #pragma once
 #include "ValkyrieFSM.h"
+#include "ItemButton.h"
 class CValkyrieLevelUp :
 	public CValkyrieFSM
 {
@@ -22,8 +23,16 @@ public:
 	void ItemCountDown();
 	void ItemSelect();
 	void ItemCountUiHelp();
+
+
 private:
+	void ItemButtonSetting();
+
+public:
 	static std::wstring g_selectItemName;
 	static _int g_itemCount;
+private:
+	std::vector<SP(CItemButton)> m_spItemButtonObject;
+
 };
 
