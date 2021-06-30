@@ -53,7 +53,7 @@ void CTheresa_Ult_Boom::Start()
 	spFireEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Fire");
 	spFireEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
-	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire_3");
+	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire");
 	spFireEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	spFireEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
 

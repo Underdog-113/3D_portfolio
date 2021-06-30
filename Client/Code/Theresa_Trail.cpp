@@ -46,6 +46,7 @@ void CTheresa_Trail::Awake()
 void CTheresa_Trail::Start()
 {
 	__super::Start();
+	m_fTrailAlpha = 1.f;
 
 }
 

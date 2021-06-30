@@ -12,7 +12,6 @@
 
 #pragma region Shader
 #include "WaterShader.h"
-#include "EffectShader.h"
 #include "DamageFontShader.h"
 #include "CatPawShader.h"
 #include "CircularGaugeShader.h"
