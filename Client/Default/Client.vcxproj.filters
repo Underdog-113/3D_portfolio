@@ -664,6 +664,24 @@
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect">
       <UniqueIdentifier>{99d4c270-08a2-447b-8191-21301f1c553a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern">
+      <UniqueIdentifier>{8650c632-f201-4e89-af60-92c846b00327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\00.Born">
+      <UniqueIdentifier>{a7fcee84-08f7-44f4-b35b-29a35331c367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\01.Die">
+      <UniqueIdentifier>{2b8a4f89-1fd6-4bc0-915a-25eb2c0b2184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\02.Hit">
+      <UniqueIdentifier>{731be15b-8096-44dc-8a9f-b69199abc977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select">
+      <UniqueIdentifier>{234368cf-c5df-4103-b0cb-822f5ce6f9fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base">
+      <UniqueIdentifier>{f4ec6647-3ee5-4e5a-9b6c-a20c0a3e45b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1050,9 +1068,6 @@
     <ClInclude Include="..\Header\CaptainData.h">
       <Filter>09.Manager\00.DataManager\00.CaptainData</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
-      <Filter>99.Default</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\InStockValkyrieData.h">
       <Filter>09.Manager\00.DataManager\01.InStockValkyrieData</Filter>
     </ClInclude>
@@ -1298,6 +1313,24 @@
     </ClInclude>
     <ClInclude Include="..\Header\EffectMaker_Theresa.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\FSMDefine_Bronya.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1865,6 +1898,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\EffectMaker_Theresa.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\00.Born</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\02.Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

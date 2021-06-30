@@ -192,6 +192,10 @@
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BronyaBasePattern.h" />
+    <ClInclude Include="..\Header\BronyaBornPattern.h" />
+    <ClInclude Include="..\Header\BronyaDiePattern.h" />
+    <ClInclude Include="..\Header\BronyaHitPattern.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
@@ -211,6 +215,7 @@
     <ClInclude Include="..\Header\EffectMaker_Theresa.h" />
     <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
+    <ClInclude Include="..\Header\FSMDefine_Bronya.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
     <ClInclude Include="..\Header\FSMDefine_Lancer.h" />
     <ClInclude Include="..\Header\FSMDefine_Ninza.h" />
@@ -404,6 +409,10 @@
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />

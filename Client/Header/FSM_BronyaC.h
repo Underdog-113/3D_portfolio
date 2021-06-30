@@ -2,16 +2,23 @@
 
 #include "StateMachineC.h"
 
-class FSM_BronyaC final : public Engine::CStateMachineC
+class CFSM_BronyaC final : public Engine::CStateMachineC
 {
 public:
-	FSM_BronyaC();
-	~FSM_BronyaC() = default;
+	CFSM_BronyaC();
+	~CFSM_BronyaC() = default;
 
 public:
 	SP(Engine::CComponent) MakeClone(Engine::CObject* pObject) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+
+private:
+	void RegisterAllStage();
+	void FixRootMotionOffset(_uint index);
+
+private:
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM)
 
 public:
 	// <Animation List>
@@ -207,7 +214,4 @@ public:
 	void Die_Enter(void);
 	void Die_Update(float deltaTime);
 	void Die_End(void);
-
-private:
-	HRESULT Init_FSM_Setting();
 };

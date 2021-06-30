@@ -11,6 +11,7 @@
 #include "MO_Robot.h"
 #include "MO_Ninza.h"
 #include "MB_Ganesha.h"
+#include "MB_Bronya.h"
 
 /* for.Player */
 #include "StageControlTower.h"
@@ -79,7 +80,8 @@ void CWooScene::Start(void)
 	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
 	//LancerSetting();
 	//RobotSetting();
-	NinzaSetting();
+	//NinzaSetting();
+	BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -256,6 +258,15 @@ void CWooScene::GaneshaSetting(void)
 	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
 	m_spGanesha = spGaneshaClone;
+}
+
+void CWooScene::BronyaSetting(void)
+{
+	/* Bronya */
+	SP(Engine::CObject) spBronyaClone = ADD_CLONE(L"MB_Bronya", true, (_uint)ELayerID::Enemy, L"MB_Bronya");
+	spBronyaClone->GetTransform()->SetPosition(3, 0, 3);
+	std::dynamic_pointer_cast<CMonster>(spBronyaClone)->SelectChannelID();
+	m_spBronya = spBronyaClone;
 }
  
 void CWooScene::SpiderSetting(void)

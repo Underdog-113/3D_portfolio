@@ -24,11 +24,12 @@ void CFSM_NinzaC::Awake()
 
 void CFSM_NinzaC::Start(SP(CComponent) spThis)
 {
+	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
+
 	RegisterAllStage();
 
 	__super::Start(spThis);
 
-	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
 	SetStartState(Name_standby);
 	m_curState->DoEnter();
@@ -157,7 +158,6 @@ void CFSM_NinzaC::FixRootMotionOffset(_uint index)
 
 void CFSM_NinzaC::StandBy_Init(void)
 {
-	FixRootMotionOffset(Index_standby);
 }
 
 void CFSM_NinzaC::StandBy_Enter(void)

@@ -55,3 +55,7 @@
 #include "RobotAttack2Pattern.h"
 
 /* Bronya */
+#include "BronyaBornPattern.h"
+#include "BronyaDiePattern.h"
+#include "BronyaHitPattern.h"
+#include "BronyaBasePattern.h"

@@ -50,7 +50,7 @@ void CMO_Ninza::Start(void)
 	__super::Start();
 
 	//m_spTransform->SetSize(1.7f, 1.7f, 1.7f);
-	m_spTransform->SetRotationY(D3DXToRadian(90));
+	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 

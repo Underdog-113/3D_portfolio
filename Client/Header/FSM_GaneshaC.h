@@ -17,9 +17,7 @@ private:
 	void FixRootMotionOffset(_uint index);
 
 private:
-	_float m_accTime = 0.f;
-	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM);
-	GETTOR_SETTOR(_bool, m_pattern1, false, Pattern1);
+	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM)
 
 public:
 	// <Animation List>
