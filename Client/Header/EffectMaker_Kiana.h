@@ -27,18 +27,6 @@ public:
 	void CreateEffect_Claw4_3();
 	void CreateEffect_Claw5();
 
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack1, nullptr, Effect_Attack1)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack2, nullptr, Effect_Attack2)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack3, nullptr, Effect_Attack3)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack4, nullptr, Effect_Attack4)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack5, nullptr, Effect_Attack5)
-
-
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack3_Branch, nullptr, Effect_Attack3_Branch)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Attack4_Branch, nullptr, Effect_Attack4_Branch)
-	GETTOR_SETTOR(SP(Engine::CObject), m_spEffect_Ultra, nullptr, Effect_Ultra)
-
-
 private:
 	CKiana* m_pKiana;
 };

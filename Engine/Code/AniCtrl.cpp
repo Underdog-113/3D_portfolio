@@ -265,8 +265,8 @@ void CAniCtrl::PlayFake()
 	{
 		m_isFakeAniEnd = true;
 
-		m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod * 0.99);
-		m_pFakeAniCtrl->AdvanceTime(0, NULL);
+		//m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod * 0.99);
+		//m_pFakeAniCtrl->AdvanceTime(0, NULL);
 		return;
 	}
 
@@ -278,8 +278,8 @@ void CAniCtrl::ChangeFakeAnimState_EndToStart(void)
 	m_isFakeAniEnd = false;
 
 	m_fakeTimer = m_fakePeriod * 0.01;
-	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakeTimer);
-	m_pFakeAniCtrl->AdvanceTime(0, NULL);
+	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, 0.0);
+	m_pFakeAniCtrl->AdvanceTime(m_fakeTimer, NULL);
 }
 
 _bool CAniCtrl::IsItEnd(void)

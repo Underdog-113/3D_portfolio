@@ -46,6 +46,9 @@ void CKiana_Ult_Eff::Start()
 {
 	__super::Start();
 
+	_float sizeRatio = 5.f;
+	m_fAlpha = 1.f;
+
 	m_spKianaUltRing
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Ring", true, (_int)Engine::ELayerID::Effect));
 
@@ -54,8 +57,8 @@ void CKiana_Ult_Eff::Start()
 	m_spKianaUltRing->GetComponent<Engine::CTextureC>()->AddTexture(L"burst_ring");
 	m_spKianaUltRing->GetComponent<Engine::CTextureC>()->AddTexture(L"burst_ring");
 	m_spKianaUltRing->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	m_spKianaUltRing->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.05f, this->GetTransform()->GetPosition().z));
-	m_spKianaUltRing->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.3f, 1.f, 0.3f));
+	m_spKianaUltRing->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition() + _float3(0.f, 0.05f, 0.f));
+	m_spKianaUltRing->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.3f, 1.f, 0.3f) * sizeRatio);
 
 	m_spKianaUltPlane
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_Ult_Plane", true, (_int)Engine::ELayerID::Effect));
@@ -65,8 +68,8 @@ void CKiana_Ult_Eff::Start()
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise");
 	m_spKianaUltPlane->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
-	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z));
-	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.5f, 0.5f, 0.5f));
+	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
+	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.5f, 0.5f, 0.5f) * sizeRatio);
 
 
 	m_spKianaUltShield
@@ -77,7 +80,9 @@ void CKiana_Ult_Eff::Start()
 	m_spKianaUltShield->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltShield->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltShield->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	m_spKianaUltShield->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z));
+	m_spKianaUltShield->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition() + _float3(0.f, -0.35f, 0.f));
+	m_spKianaUltShield->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f) * sizeRatio);
+
 }
 
 void CKiana_Ult_Eff::FixedUpdate()

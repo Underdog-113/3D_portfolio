@@ -13,9 +13,15 @@
 
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
+#include "EffectMaker_Theresa.h"
 
 CFSM_TheresaC::CFSM_TheresaC()
 {
+}
+
+CFSM_TheresaC::~CFSM_TheresaC()
+{
+	OnDestroy();
 }
 
 SP(Engine::CComponent) CFSM_TheresaC::MakeClone(Engine::CObject * pObject)
@@ -41,7 +47,8 @@ void CFSM_TheresaC::Start(SP(CComponent) spThis)
 {
 	m_pTheresa = static_cast<CTheresa*>(m_pOwner);
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pTheresa->GetComponent<Engine::CMeshC>()->GetMeshData());
-	
+	m_pEffectMaker = new CEffectMaker_Theresa(m_pTheresa);
+
 	__super::Start(spThis);
 
 	RegisterAllState();
@@ -52,6 +59,12 @@ void CFSM_TheresaC::Start(SP(CComponent) spThis)
 	m_curState->DoEnter();
 }
 
+void CFSM_TheresaC::OnDestroy()
+{
+	__super::OnDestroy();
+	delete m_pEffectMaker;
+}
+
 void CFSM_TheresaC::FixRootMotionOffset(_uint index)
 {
 	m_pTheresa->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
@@ -59,7 +72,7 @@ void CFSM_TheresaC::FixRootMotionOffset(_uint index)
 
 void CFSM_TheresaC::ResetCheckMembers()
 {
-	//m_checkEffect = false;
+	m_checkEffect = false;
 	//m_checkEffectSecond = false;
 }
 
@@ -564,22 +577,25 @@ void CFSM_TheresaC::Attack1_Enter(void)
 
 	m_pTheresa->On_Sword();
 	OnSwordCollider();
+
+	m_pEffectMaker->CreateEffect_Attack1_1();
 }
 
 void CFSM_TheresaC::Attack1_Update(float deltaTime)
 {
-	//if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01)
-	//{
-	//	CreateEffect_Attack1();
-	//	PlaySound_Attack_RandomVoice();
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.1f)
+	{
+		m_pEffectMaker->CreateEffect_Attack1_2();
+		//CreateEffect_Attack1();
+		//PlaySound_Attack_RandomVoice();
 
-	//	if (m_pKiana->GetUltraraMode())
-	//		PlaySound_Effect(Sound_Ultra_Att_0);
-	//	else
-	//		PlaySound_Effect(Sound_Attack_1_Effect);
+		//if (m_pKiana->GetUltraraMode())
+		//	PlaySound_Effect(Sound_Ultra_Att_0);
+		//else
+		//	PlaySound_Effect(Sound_Attack_1_Effect);
 
-	//	m_checkEffect = true;
-	//}
+		m_checkEffect = true;
+	}
 
 	if (CheckAction_ChargeMode())
 		return;
@@ -614,22 +630,25 @@ void CFSM_TheresaC::Attack2_Enter(void)
 	m_chargeEnterTimer = 0.f;
 
 	OnSwordCollider();
+
+	m_pEffectMaker->CreateEffect_Attack2_1();
 }
 
 void CFSM_TheresaC::Attack2_Update(float deltaTime)
 {
-	//if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk02)
-	//{
-	//	CreateEffect_Attack2();
-	//	m_checkEffect = true;
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.1f)
+	{
+		m_pEffectMaker->CreateEffect_Attack2_2();
+		//CreateEffect_Attack1();
+		//PlaySound_Attack_RandomVoice();
 
-	//	PlaySound_Attack_RandomVoice();
+		//if (m_pKiana->GetUltraraMode())
+		//	PlaySound_Effect(Sound_Ultra_Att_0);
+		//else
+		//	PlaySound_Effect(Sound_Attack_1_Effect);
 
-	//	if (m_pKiana->GetUltraraMode())
-	//		PlaySound_Effect(Sound_Ultra_Att_1);
-	//	else
-	//		PlaySound_Effect(Sound_Attack_2_Effect);
-	//}
+		m_checkEffect = true;
+	}
 
 	if (CheckAction_ChargeMode())
 		return;
@@ -665,22 +684,25 @@ void CFSM_TheresaC::Attack3_Enter(void)
 	m_chargeEnterTimer = 0.f;
 
 	OnSwordCollider();
+
+	m_pEffectMaker->CreateEffect_Attack3_1();
 }
 
 void CFSM_TheresaC::Attack3_Update(float deltaTime)
 {
-	// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk03)
-	// 	{
-	// 		CreateEffect_Attack3();
-	// 		m_checkEffect = true;
-	// 
-	// 		PlaySound_Attack_RandomVoice();
-	// 
-	// 		if (m_pKiana->GetUltraraMode())
-	// 			PlaySound_Effect(Sound_Ultra_Att_1);
-	// 		else
-	// 			PlaySound_Effect(Sound_Attack_3_Effect);
-	// 	}
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.1f)
+	{
+		m_pEffectMaker->CreateEffect_Attack3_2();
+		//CreateEffect_Attack1();
+		//PlaySound_Attack_RandomVoice();
+
+		//if (m_pKiana->GetUltraraMode())
+		//	PlaySound_Effect(Sound_Ultra_Att_0);
+		//else
+		//	PlaySound_Effect(Sound_Attack_1_Effect);
+
+		m_checkEffect = true;
+	}
 
 	if (CheckAction_ChargeMode())
 		return;
@@ -716,15 +738,25 @@ void CFSM_TheresaC::Attack4_Enter(void)
 	m_chargeEnterTimer = 0.f;
 
 	OnSwordCollider();
+
+	m_pEffectMaker->CreateEffect_Attack4_1();
 }
 
 void CFSM_TheresaC::Attack4_Update(float deltaTime)
 {
-	//if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > 0.15f)
-	//{
-	//	CreateEffect_Attack4();
-	//	m_checkEffectSecond = true;
-	//}
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.3f)
+	{
+		m_pEffectMaker->CreateEffect_Attack4_2();
+		//CreateEffect_Attack1();
+		//PlaySound_Attack_RandomVoice();
+
+		//if (m_pKiana->GetUltraraMode())
+		//	PlaySound_Effect(Sound_Ultra_Att_0);
+		//else
+		//	PlaySound_Effect(Sound_Attack_1_Effect);
+
+		m_checkEffect = true;
+	}
 
 	if (CheckAction_ChargeMode())
 		return;
@@ -970,21 +1002,29 @@ void CFSM_TheresaC::Ultra_Enter(void)
 	m_pTheresa->Off_Sword();
 	m_ultraAxeOnOff = false;
 	m_ultraImpact = false;
+
+	m_pEffectMaker->CreateEffect_Ultra_Charge();
+	m_pDM->GetAniCtrl()->SetSpeed(0.8f);
 }
 
 void CFSM_TheresaC::Ultra_Update(float deltaTime)
 {
 	if (!m_ultraAxeOnOff && m_pDM->GetAniTimeline() > Delay_UltShowAxe)
 	{
+		m_pDM->GetAniCtrl()->SetSpeed(1.f);
 		m_pTheresa->On_Axe();
 		OnAxeCollider();
 		m_ultraAxeOnOff = true;
+
+		m_pEffectMaker->CreateEffect_Ultra_Trail();
+		m_pEffectMaker->CreateEffect_Ultra_Smoke();
 	}
 
 	if (!m_ultraImpact && m_pDM->GetAniTimeline() > 0.605f)
 	{
 		OffAxeCollider();
 		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeImpact(), 3.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 1.f, _float3(2.f, 0.f, 0.f));
+		m_pEffectMaker->CreateEffect_Ultra_Bomb();
 		m_ultraImpact = true;
 	}
 

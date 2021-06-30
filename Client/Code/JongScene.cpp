@@ -64,10 +64,10 @@ void CJongScene::Start(void)
 	CDamageObjectPool::GetInstance()->Start(this);
 
 	KianaTest();
-	//TheresaTest();
-	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
-	//SakuraTest();
-	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
+	TheresaTest();
+	static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
+	SakuraTest();
+	static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
 	SetSceneCamera(m_spKiana);

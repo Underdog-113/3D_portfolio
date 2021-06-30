@@ -51,7 +51,9 @@ void CSakura::Start(void)
 	__super::Start();
 
 	m_spMesh->OnRootMotion();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 
+	m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
 
 	// status
 	V_WarshipStat stat;

@@ -1107,7 +1107,7 @@ void CFSM_KianaC::Idle_03_End(void)
 
 void CFSM_KianaC::Run_Init(void)
 {
-	m_pDM->SetLoopAnim(Index_StandBy);
+	m_pDM->SetLoopAnim(Index_Run);
 }
 
 void CFSM_KianaC::Run_Enter(void)
@@ -1318,6 +1318,7 @@ void CFSM_KianaC::Ultra_Enter(void)
 
 	PlaySound_Voice(Sound_Ult_Start_Voice);
 	PlaySound_Effect(Sound_Ult_Start);
+	m_pEffectMaker->CreateEffect_Ultra();
 }
 
 void CFSM_KianaC::Ultra_Update(float deltaTime)

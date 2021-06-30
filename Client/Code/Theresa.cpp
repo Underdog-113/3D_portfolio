@@ -60,7 +60,7 @@ void CTheresa::Start(void)
 
 	m_spMesh->OnRootMotion();
 
-	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
+	m_spTransform->SetSize(0.7f, 0.7f, 0.7f);
 
 	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_Prop1");
 	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_Prop2");

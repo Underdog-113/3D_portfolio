@@ -135,7 +135,7 @@ bool CFSM_SakuraC::CheckAction_Run()
 		Engine::IMKEY_PRESS(StageKey_Move_Back) ||
 		Engine::IMKEY_PRESS(StageKey_Move_Right))
 	{
-		ChangeState(Name_RunBS);
+		ChangeState(Name_Run);
 		return true;
 	}
 
@@ -169,20 +169,14 @@ bool CFSM_SakuraC::CheckAction_Run_End()
 		double timeline = m_pDM->GetAniTimeline();
 		if (timeline > 0.8)
 		{
-			ChangeState(Name_RunStopLeft);
+			ChangeState(Name_RunStopRight);
 			return true;
 		}
 		else if (timeline > 0.55)
 		{
-			ChangeState(Name_RunStopRight);
-			return true;
-		}
-		else if (timeline > 0.30)
-		{
 			ChangeState(Name_RunStopLeft);
 			return true;
 		}
-
 		else if (timeline > 0.05)
 		{
 			ChangeState(Name_RunStopRight);

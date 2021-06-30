@@ -287,7 +287,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 	}
 	_mat rootChildCombMat = pBip001Frame->TransformationMatrix * rootCombMat;
 
-
 	_float3 rootMotionMoveAmount = _float3(rootChildCombMat._41,
 										   rootChildCombMat._42,
 										   rootChildCombMat._43);
