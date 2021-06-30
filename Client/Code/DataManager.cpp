@@ -26,7 +26,14 @@ void CDataManager::Start()
 	ItemInit(L"ValkyrieExpData2",30);
 	ItemInit(L"ValkyrieExpData3",10);
 
-
+	WeaponInit(L"Weapon_Pistol_1");
+	WeaponInit(L"Weapon_Pistol_2");
+	WeaponInit(L"Weapon_Pistol_3");
+	WeaponInit(L"Weapon_Pistol_4");
+	WeaponInit(L"Weapon_Pistol_5");
+	WeaponInit(L"Weapon_Pistol_6");
+	WeaponInit(L"Weapon_Pistol_7");
+	WeaponInit(L"Weapon_Pistol_8");
 }
 
 void CDataManager::Update(void)
@@ -56,6 +63,12 @@ void CDataManager::OnDestroy(void)
 		delete (obj);
 	}
 	m_pItemDataList.clear();
+	
+	for (auto& obj : m_pWeaponDataList)
+	{
+		delete (obj);
+	}
+	m_pWeaponDataList.clear();
 	
 }
 
@@ -277,21 +290,21 @@ void CDataManager::WeaponInit(std::wstring weaponName)
 	_int hoesimIncrease;
 	_int upgradeGold;
 	std::wstring textureKey;
-	std::wstring messKey;
+	std::wstring messKey=L"";
 
-	dataStore->GetValue(false, dataID, objectKey, L"Name", name);
-	dataStore->GetValue(false, dataID, objectKey, L"Rank", rank);
-	dataStore->GetValue(false, dataID, objectKey, L"MaxExperience", maxExperience);
-	dataStore->GetValue(false, dataID, objectKey, L"MaxLevel", maxLevel);
-	dataStore->GetValue(false, dataID, objectKey, L"Damage", damage);
-	dataStore->GetValue(false, dataID, objectKey, L"Hoesim", hoesim);
-	dataStore->GetValue(false, dataID, objectKey, L"Explanation", explanation);
-	dataStore->GetValue(false, dataID, objectKey, L"WeaponType", weaponType);
-	dataStore->GetValue(false, dataID, objectKey, L"DamageIncrease", damageIncrease);
-	dataStore->GetValue(false, dataID, objectKey, L"HoesimIncrease", hoesimIncrease);
-	dataStore->GetValue(false, dataID, objectKey, L"UpgradeGold", upgradeGold);
-	dataStore->GetValue(false, dataID, objectKey, L"TextureKey", textureKey);
-	dataStore->GetValue(false, dataID, objectKey, L"MessKey", messKey);
+	dataStore->GetValue(true, dataID, objectKey, L"Name", name);
+	dataStore->GetValue(true, dataID, objectKey, L"Rank", rank);
+	dataStore->GetValue(true, dataID, objectKey, L"MaxExperience", maxExperience);
+	dataStore->GetValue(true, dataID, objectKey, L"MaxLevel", maxLevel);
+	dataStore->GetValue(true, dataID, objectKey, L"Damage", damage);
+	dataStore->GetValue(true, dataID, objectKey, L"Hoesim", hoesim);
+	dataStore->GetValue(true, dataID, objectKey, L"Explanation", explanation);
+	dataStore->GetValue(true, dataID, objectKey, L"WeaponType", weaponType);
+	dataStore->GetValue(true, dataID, objectKey, L"DamageIncrease", damageIncrease);
+	dataStore->GetValue(true, dataID, objectKey, L"HoesimIncrease", hoesimIncrease);
+	dataStore->GetValue(true, dataID, objectKey, L"UpgradeGold", upgradeGold);
+	dataStore->GetValue(true, dataID, objectKey, L"TextureKey", textureKey);
+	//dataStore->GetValue(true, dataID, objectKey, L"MessKey", messKey);
 
 	CWeaponData* weapon = new CWeaponData();
 	weapon->AddWeaponData(name,

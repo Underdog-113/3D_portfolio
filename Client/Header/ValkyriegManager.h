@@ -14,6 +14,7 @@ public:
 	void ChangeFSMSelect();
 	void ChangeFSMProperty();
 	void ChangeFSMLevelUp();
+	void ChangeFSMWeapon();
 private:
 	void ChangeFSM(STATE state);
 	void FSMCreate();

@@ -827,4 +827,9 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CInventoryManager::*)(), CInventoryManager*>(&CInventoryManager::ItemFSM, CInventoryManager::GetInstance());
 	}
+	else if (0 == function.compare(L"ChangeFSMWeapon"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMWeapon, CValkyriegManager::GetInstance());
+	}
+	
 }

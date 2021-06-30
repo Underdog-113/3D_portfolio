@@ -60,6 +60,11 @@ void CValkyriegManager::ChangeFSMLevelUp()
 	ChangeFSM(STATE::LevelUp);
 }
 
+void CValkyriegManager::ChangeFSMWeapon()
+{
+	ChangeFSM(STATE::Weapon);
+}
+
 void CValkyriegManager::FSMCreate()
 {
 	m_valkyrieFSM[STATE::Select] = new CValkyrieSelect();

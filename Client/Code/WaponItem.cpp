@@ -15,7 +15,6 @@ CWaponItem::CWaponItem()
 
 }
 
-
 CWaponItem::~CWaponItem()
 {
 }
@@ -39,13 +38,14 @@ void CWaponItem::Start()
 
 		// 별달고 레벨달고
 		spScrollView->
-			AddTextObjectData(i, _float2(0, 0), 30, D3DXCOLOR(1, 1, 1, 1), std::to_wstring(weaponData[i]->GetLevel()));
+			AddTextObjectData(i, _float2(-27.2f, -81.9f), 30, D3DXCOLOR(0, 0, 0, 1), L"LV." + std::to_wstring(weaponData[i]->GetLevel()));
 	}
 }
 
 void CWaponItem::End()
 {
-	_int end = 10;
+	CScrollViewObject* spScrollView = static_cast<CScrollViewObject*>(CInventoryManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas_ScrollView_0").get());
+	spScrollView->AllDelete(); _int end = 10;
 }
 
 _uint CWaponItem::FixedUpdate()

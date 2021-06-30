@@ -15,14 +15,12 @@ CStuffItem::CStuffItem()
 
 }
 
-
 CStuffItem::~CStuffItem()
 {
 }
 
 void CStuffItem::Start()
 {
-
 	std::vector<CItemData*> stuffItem = CDataManager::GetInstance()->FindItemData();
 	_size size = stuffItem.size();
 

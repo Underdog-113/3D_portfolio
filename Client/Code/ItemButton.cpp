@@ -129,7 +129,8 @@ void CItemButton::textCreate(std::wstring name, _float2 pos, _float sort, _int f
 {
 	m_textObj = std::dynamic_pointer_cast<Engine::CTextObject>(m_pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, name));
 	m_textObj->GetTransform()->SetPositionZ(sort + 0.02f);
-	m_textObj->AddComponent<Engine::CTextC>()->AddFontData(message, pos, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+	_float2 posParents = _float2(m_spTransform->GetPosition().x, m_spTransform->GetPosition().y);
+	m_textObj->AddComponent<Engine::CTextC>()->AddFontData(message, posParents + pos, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
 }
 
 void CItemButton::ItemSelect()

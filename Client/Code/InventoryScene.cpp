@@ -87,7 +87,6 @@ void CInventoryScene::Update(void)
 void CInventoryScene::LateUpdate(void)
 {
 	__super::LateUpdate();
-
 }
 
 void CInventoryScene::OnDestroy(void)

@@ -159,11 +159,11 @@ void CValkyrieLevelUp::ItemButtonSetting()
 		object->GetTransform()->SetPosition(statPos);
 		object->SetItemName(data[i]->GetName());
 		// 버튼
-		object->ButtonCreate(data[i]->GetName(), _float3(statPos.x + 0.0f, statPos.y + 0.0f, statPos.z), _float3(122.3f, 149.4f, 0), L"UI_3", CButton::UP);
+		object->ButtonCreate(data[i]->GetName(), _float3(0.0f, 0.0f, 0.0f), _float3(122.3f, 149.4f, 0), L"UI_4", CButton::UP);
 		// 이미지
-		object->ImageCreate(L"", _float3(statPos.x + 0.0f, statPos.y + 16.3f, statPos.z), _float3(122.1f, 106.4f, 0), data[i]->GetTextureKey());
+		object->ImageCreate(L"", _float3(0.0f, 16.3f, statPos.z), _float3(122.1f, 106.4f, 0), data[i]->GetTextureKey());
 		// 텍스트
-		object->textCreate(L"", _float2(statPos .x + -0.0f, statPos.y + 62.1f), statPos.z, 28, D3DXCOLOR(0, 0, 0, 1), L"", L"×" + std::to_wstring(data[i]->GetCount()));
+		object->textCreate(L"", _float2(0.0f, 62.1f), statPos.z, 28, D3DXCOLOR(0, 0, 0, 1), L"", L"×" + std::to_wstring(data[i]->GetCount()));
 
 		object->GetButton()->AddFuncData<void(CItemButton::*)(), CItemButton*>(&CItemButton::ItemSelect, object.get());
 
