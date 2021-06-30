@@ -288,9 +288,18 @@ void CActorController::RotateCurrentActor()
 	_float3 actorForward = pActorTransform->GetForward();
 	actorForward = _float3(actorForward.x, 0.f, actorForward.z);
 	float angleSynchroRate = D3DXVec3Dot(&m_moveOrderDir, &actorForward);
+	GET_MATH->RoundOffRange(angleSynchroRate, 1);
 
-	if (angleSynchroRate > 0.95f)
-		rotSpeedRate = m_rotSpeedLowRate;
+	_float angle = acos(angleSynchroRate);
+	
+	if (abs(angle) < m_rotSpeed * rotSpeedRate * GET_DT)
+	{
+		m_moveOrderDir = actorForward;
+		return;
+	}
+
+	//if (angleSynchroRate > 0.95f)
+	//	rotSpeedRate = m_rotSpeedLowRate;
 
 	_float3 rotAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&rotAxis, &actorForward, &m_moveOrderDir);

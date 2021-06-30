@@ -252,10 +252,16 @@ void CCamera::UpdateTPS(void)
 	if (m_wallCollided == false && m_targetDist < 3)
 	{
 		_float newTargetDist = m_targetDist + m_awaySpeed * GET_DT;
-	
+
 		newTargetDist = GET_MATH->Min(newTargetDist, 3);
 		m_targetDist = newTargetDist;
 	}
+
+	if (IMKEY_PRESS(KEY_D))
+		m_lookAngleUp += (PI / 3) * GET_DT;
+	if (IMKEY_PRESS(KEY_A))
+		m_lookAngleUp -= (PI / 3) * GET_DT;
+
 
 	//RayCollider 길이 업데이트
 	m_pCamRayCollider->SetLength(m_targetDist);
@@ -377,7 +383,7 @@ void CCamera::CameraRotate(void)
 									 * pIM->GetMouseSensitivity().x
 									 * GET_DT);
 
-		m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, -PI / 2.f, PI / 2.f);
+		m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, 0, PI / 6.f);
 		m_lookAngleUp = GET_MATH->RoundOffRange(m_lookAngleUp, 2 * PI);
 		break;
 	}
