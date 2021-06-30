@@ -75,7 +75,7 @@ void CValkyrieProperty::ChangeSelect()
 {
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(true);
-	CValkyriegManager::GetInstance()->ChangeFSM(CValkyriegManager::STATE::Select);
+	CValkyriegManager::GetInstance()->ChangeFSMSelect();
 }
 
 void CValkyrieProperty::DataInput(std::wstring objectName, std::wstring  dataValue)

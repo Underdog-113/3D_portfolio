@@ -23,7 +23,9 @@ public:
 	CValkyrieStatusData* FindvalkyrieStatusData(std::wstring keyValue); // 모든 발키리
 	CSquadData* FindSquadData(); // 파티 발키리
 	CValkyrieStatusData* FindSquadData(std::wstring keyValue); // 파티 발키리
+	std::vector<CWeaponData*> FindWeaponData(); // 무기
 	CWeaponData* FindWeaponData(std::wstring keyValue); // 무기
+	std::vector<CItemData*> FindItemData(); // 재료
 	CItemData* FindItemData(std::wstring keyValue); // 재료
 	
 	// 삽입
@@ -33,12 +35,12 @@ public:
 	void SquadInit(std::wstring valkyrieName); // 스쿼드
 	void SquadInit(_int value, std::wstring valkyrieName); // 스쿼드
 	void WeaponInit(std::wstring weaponName); // 무기
-	void ItemInit(std::wstring itemName); // 아이템
+	void ItemInit(std::wstring itemName, _int count = 1); // 아이템
 
 
 	// 삭제
 	void SquadDelete(std::wstring keyValue); // 스쿼드
-
+	void ItemDelete(std::wstring keyValue); //  재료
 private:
 	CCaptainData* m_pCaptainData = nullptr; // 함장
 	CInStockValkyrieData* m_pInStockValkyrieData; // 보유 발키리

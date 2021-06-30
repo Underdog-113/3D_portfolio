@@ -14,17 +14,19 @@
 
 class CTheresa;
 class CStageControlTower;
+class CEffectMaker_Theresa;
 class CFSM_TheresaC : public Engine::CStateMachineC
 {
 	enum Appear_Option { None, QTE };
 public:
 	CFSM_TheresaC();
-	~CFSM_TheresaC() = default;
+	virtual ~CFSM_TheresaC();
 
 public:
 	SP(Engine::CComponent)		MakeClone(Engine::CObject* pObject) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+	void OnDestroy() override;
 
 private:
 	void FixRootMotionOffset(_uint index);
@@ -53,11 +55,13 @@ private: /* Special Actions */
 	bool CheckAction_ChargeAttack();
 	bool CheckAction_ChargeAttack_End();
 	bool CheckAction_ChargeMode();
+	
 
 private:
 	CTheresa* m_pTheresa = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
 	CStageControlTower* m_pStageControlTower = nullptr;
+	CEffectMaker_Theresa* m_pEffectMaker = nullptr;
 
 	Appear_Option m_appearOption = None;
 
@@ -66,6 +70,10 @@ private:
 
 	bool m_ultraAxeOnOff = false;
 	bool m_ultraUsed = false;
+	bool m_ultraImpact = false;
+
+	bool m_checkEffect = false;
+
 
 public:
 	//StandBy

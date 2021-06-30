@@ -39,6 +39,7 @@ private:
 
 	_float3 m_animStartOffset = ZERO_VECTOR;
 	_float3 m_prevRootMotionPos = ZERO_VECTOR;
+	_float3 m_prevMoveAmount = _float3(100.f,100.f,100.f);
 };
 
 END

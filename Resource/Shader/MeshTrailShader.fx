@@ -97,6 +97,15 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
+	// Noise Texture
+	float4 Noise = tex2D(NoiseTex, Input.mUV);
+
+	if (Input.mUV.x > gTrailAlpha)
+	{
+		albedo.a = 0;
+		Noise.a = 0;
+	}
+
 	float4 outputColor = albedo;
 
 	outputColor.rgb = applyHue(outputColor.rgb, _Hue);
@@ -105,15 +114,6 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	float3 intensity = dot(outputColor.rgb, float3(0.299, 0.587, 0.114));
 	outputColor.rgb = lerp(intensity, outputColor.rgb, _Saturation);
-
-	// Noise Texture
-	float4 Noise = tex2D(NoiseTex, Input.mUV);
-	
-	if (Input.mUV.x > gTrailAlpha)
-	{
-		outputColor.a = gTrailAlpha;
-		Noise.a = gTrailAlpha;
-	}	
 
 	return outputColor * Noise;
 }

@@ -12,9 +12,15 @@
 
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
+#include "EffectMaker_Kiana.h"
 
 CFSM_KianaC::CFSM_KianaC()
 {
+}
+
+CFSM_KianaC::~CFSM_KianaC()
+{
+	OnDestroy();
 }
 
 SP(Engine::CComponent) CFSM_KianaC::MakeClone(Engine::CObject * pObject)
@@ -42,6 +48,7 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
 	m_pKiana = static_cast<CKiana*>(m_pOwner);
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
+	m_pEffectMaker = new CEffectMaker_Kiana(m_pKiana);
 	
 	RegisterAllState();
 
@@ -52,6 +59,13 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 	//m_pDM->GetAniCtrl()->SetSpeed(0.5f);
 	SetStartState(L"Appear");
 	m_curState->DoEnter();
+}
+
+void CFSM_KianaC::OnDestroy()
+{
+	__super::OnDestroy();
+
+	delete m_pEffectMaker;
 }
 
 void CFSM_KianaC::FixRootMotionOffset(_uint index)
@@ -258,100 +272,6 @@ bool CFSM_KianaC::CheckAction_Ultra()
 		return true;
 	}
 	return false;
-}
-
-void CFSM_KianaC::CreateEffect_Attack1()
-{
-	auto effect = m_pKiana->CreateEffect(L"Kiana_Attack_0");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
-}
-
-void CFSM_KianaC::CreateEffect_Attack2()
-{
-	_float size = 0.5f;
-
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_1");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-
-	if (m_pKiana->GetUltraMode())
-	{
-		auto clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_1", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-		clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-		clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-		clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-	}
-}
-
-void CFSM_KianaC::CreateEffect_Attack3()
-{
-	_float size = 0.5f;
-
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_2");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-
-	if (m_pKiana->GetUltraMode())
-	{
-		auto clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_2", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-		clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-		clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-		clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-	}
-}
-
-void CFSM_KianaC::CreateEffect_Attack4()
-{
-	_float size = 0.5f;
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_3");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-
-}
-
-void CFSM_KianaC::CreateEffect_Attack5()
-{
-	_float size = 0.5f;
-	auto effect = m_pKiana->CreateEffect(L"K_Trail_4");
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
-	effect->GetTransform()->SetSize(_float3(size, size, size));
-
-	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-
-	if (m_pKiana->GetUltraMode())
-	{
-		auto clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_4", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-		clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-		clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-		clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-	}
 }
 
 void CFSM_KianaC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
@@ -612,7 +532,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk01)
 	{
-		CreateEffect_Attack1();
+		m_pEffectMaker->CreateEffect_Attack1();
 		PlaySound_Attack_RandomVoice();
 
 		if (m_pKiana->GetUltraMode())
@@ -665,7 +585,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 	}
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk02)
 	{
-		CreateEffect_Attack2();
+		m_pEffectMaker->CreateEffect_Attack2();
 		m_checkEffect = true;
 		
 		PlaySound_Attack_RandomVoice();
@@ -719,7 +639,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 	}
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk03)
 	{
-		CreateEffect_Attack3();
+		m_pEffectMaker->CreateEffect_Attack3();
 		m_checkEffect = true;
 
 		PlaySound_Attack_RandomVoice();
@@ -814,34 +734,11 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk04)
 	{
-		CreateEffect_Attack4();
+		m_pEffectMaker->CreateEffect_Attack4();
 
 		if (m_pKiana->GetUltraMode())
 		{
-			_float size = 0.5f;
-			auto clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3_1", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-			clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-			clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-			clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-			clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-			clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-
-			clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3_2", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-			clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-			clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-			clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-			clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-			clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-
-			clawEffect = m_pKiana->CreateEffect(L"CatPaw_Att_3_3", L"Kiana_CatPaw_Trail", L"Kiana_CatPaw_Trail");
-			clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-			clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
-			clawEffect->GetTransform()->SetSize(_float3(size, size, size));
-
-			clawEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-			clawEffect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+			m_pEffectMaker->CreateEffect_Claw4();
 		}
 
 		m_checkEffect = true;
@@ -856,7 +753,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > 0.15f)
 	{
-		CreateEffect_Attack4();
+		m_pEffectMaker->CreateEffect_Attack4();
 		m_checkEffectSecond = true;
 	}
 
@@ -943,7 +840,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_CreateCatPaw_Atk05)
 	{
-		CreateEffect_Attack5();
+		m_pEffectMaker->CreateEffect_Attack5();
 		m_checkEffect = true;
 
 		PlaySound_Attack_RandomVoice();
@@ -1210,7 +1107,7 @@ void CFSM_KianaC::Idle_03_End(void)
 
 void CFSM_KianaC::Run_Init(void)
 {
-	m_pDM->SetLoopAnim(Index_StandBy);
+	m_pDM->SetLoopAnim(Index_Run);
 }
 
 void CFSM_KianaC::Run_Enter(void)
@@ -1421,6 +1318,7 @@ void CFSM_KianaC::Ultra_Enter(void)
 
 	PlaySound_Voice(Sound_Ult_Start_Voice);
 	PlaySound_Effect(Sound_Ult_Start);
+	m_pEffectMaker->CreateEffect_Ultra();
 }
 
 void CFSM_KianaC::Ultra_Update(float deltaTime)

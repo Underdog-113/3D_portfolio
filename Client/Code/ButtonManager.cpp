@@ -27,6 +27,7 @@ void CButtonManager::Update(void)
 	{
 		ButtonActivation(m_PressButtonList);
 	}
+
 }
 
 void CButtonManager::OnDestroy(void)
@@ -57,6 +58,32 @@ void CButtonManager::AddButtonList(CButton* buttonObject)
 	});
 }
 
+void CButtonManager::DeleteButtonList(CButton * buttonObject)
+{
+	std::list<CButton*> obj;
+	switch (buttonObject->GetButtonType())
+	{
+	case CButton::EButton_Type::UP:
+		obj = m_UpButtonList;
+		break;
+	case CButton::EButton_Type::Down:
+		obj = m_DownButtonList;
+		break;
+	case CButton::EButton_Type::Press:
+		obj = m_PressButtonList;
+		break;
+	}
+
+	for (auto& iter = m_UpButtonList.begin(); iter != m_UpButtonList.end(); iter++)
+	{
+		if ((*iter) == buttonObject)
+		{
+			m_UpButtonList.erase(iter);
+			return;
+		}
+	}
+}
+
 void CButtonManager::ButtonActivation(std::list<CButton*> buttonList)
 {
 	_float2 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
@@ -79,6 +106,7 @@ void CButtonManager::ButtonActivation(std::list<CButton*> buttonList)
 	if (m_funcActivation)
 	{
 		m_activationButton = m_funcActivation;
+		m_name = m_activationButton->GetName();
 		m_funcActivation->FuncActivation();
 		m_funcActivation = nullptr;
 	}

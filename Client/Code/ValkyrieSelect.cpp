@@ -27,20 +27,37 @@ void CValkyrieSelect::Start()
 	{
 		MainCanvas();
 		ValkyrieStatus();
+
+		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
+		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
+
+		if (CButtonFunction::squadValue >= CDataManager::GetInstance()->FindSquadData()->GetValkyriesList().size())
+		{
+			CValkyriegManager::g_selectValkyrie = L"투예복·백련";
+		}
+		else
+			CValkyriegManager::g_selectValkyrie = CDataManager::GetInstance()->FindSquadData()->GetValkyriesList()[CButtonFunction::squadValue]->GetSubName();
+
 		m_init = false;
 	}
 	else
 	{
 		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
 		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(true);
+
+		CInStockValkyrieData* allValkyrie = CDataManager::GetInstance()->FindInStockValkyrieData();
+
+		_int count = 0;
+		for (auto& data : allValkyrie->GetValkyriesList())
+		{
+			std::dynamic_pointer_cast<CScrollViewObject>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas_ScrollView_0"))->
+				GetTextObject()[count].m_text->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(data->GetLevel()));
+
+			count++;
+		}
 	}
 
-	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
-	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
-
-	/*CValkyriegManager::g_selectValkyrie = CButtonManager::GetInstance()->GetActivationButton()->GetName();
-
-	DataSetting(CValkyriegManager::g_selectValkyrie);*/
+	DataSetting(CValkyriegManager::g_selectValkyrie);
 }
 
 void CValkyrieSelect::End()
@@ -104,6 +121,8 @@ void CValkyrieSelect::ValkyrieStatus()
 		spScrollView->
 			AddImageObjectData(i, allValkyrie->GetValkyriesList()[i]->GetListTextureKey(), _float3(170.0f, 153.0f, 0.0f), _float2(0, 26))->
 			AddImageObjectData(i, allValkyrie->GetValkyriesList()[i]->GetRank(), _float3(47.0f, 47.0f, 0.0f), _float2(-68, -77));
+
+		spScrollView->AddTextObjectData(i, _float2(33.4f, -84.92f), 35, D3DXCOLOR(0.1960784f, 0.1960784f, 0.1960784f, 1), L"LV." + std::to_wstring(allValkyrie->GetValkyriesList()[i]->GetLevel()));
 	}
 }
 

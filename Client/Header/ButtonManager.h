@@ -12,6 +12,7 @@ public:
 	void OnDestroy(void);
 
 	void AddButtonList(CButton* buttonObject);
+	void DeleteButtonList(CButton* buttonObject);
 private:
 	void ButtonActivation(std::list<CButton*> buttonList);
 
@@ -26,7 +27,8 @@ private:
 
 	CButton* m_clickButton;
 	CButton* m_funcActivation;
-	GETTOR(CButton*, m_activationButton, NULL, ActivationButton)
+	GETTOR(CButton*, m_activationButton, NULL, ActivationButton);
+	GETTOR(std::wstring, m_name, L"", Name);
 };
 
 

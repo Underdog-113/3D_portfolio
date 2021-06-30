@@ -107,7 +107,7 @@ void CTextC::ChangeMessage(std::wstring message)
 	_TextCom t(message, m_position + correction, m_boxSize, m_fontSize, m_alignment, m_color, m_isVisible);
 
 	if (FAILED(D3DXCreateFont(GET_DEVICE, m_fontSize, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"SohoGothicProMedium", &t.m_pFont)))
+		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"koverwatch", &t.m_pFont)))
 	{
 		MSG_BOX(__FILE__, L"CTextC.cpp / AddFontData");
 	}

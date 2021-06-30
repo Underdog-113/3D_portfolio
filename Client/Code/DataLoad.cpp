@@ -100,7 +100,7 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 		std::wstring message;
 		_float2 fontPosition;
 		_int fontSize;
-		D3DXCOLOR color = D3DXCOLOR(1,1,1,1);
+		_float4 color;// = D3DXCOLOR(1, 1, 1, 1);
 		std::wstring alignment;
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
@@ -110,23 +110,23 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 			dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 			dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-			dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
+			dataStore->GetValue(false, dataID, objectKey, key + L"color", color);
 			dataStore->GetValue(false, dataID, objectKey, key + L"alignment", alignment);
 			fontPosition.y *= -1;
 
 			if (alignment == L"UpperLeft")
 			{
-				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, color, true);
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, (D3DXCOLOR)color, true);
 
 			}
 			else if (alignment == L"UpperRight")
 			{
-				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, (D3DXCOLOR)color, true);
 
 			}
 			else if (alignment == L"UpperCenter")
 			{
-				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+				image->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, (D3DXCOLOR)color, true);
 			}
 		}
 
@@ -287,7 +287,7 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		std::wstring message;
 		_float2 fontPosition;
 		_int fontSize;
-		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
+		_float4 color;// = D3DXCOLOR(1, 1, 1, 1);
 		std::wstring alignment;
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontName", name);
@@ -301,23 +301,23 @@ void CDataLoad::ButtonLoad(Engine::CScene* pScene)
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"fontSize", fontSize);
-		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"color", color);
 		dataStore->GetValue(false, dataID, objectKey, key + L"alignment", alignment);
 		fontPosition.y *= -1;
 
 		if (alignment == L"UpperLeft")
 		{
-			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, color, true);
+			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, (D3DXCOLOR)color, true);
 
 		}
 		else if (alignment == L"UpperRight")
 		{
-			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, (D3DXCOLOR)color, true);
 
 		}
 		else if (alignment == L"UpperCenter")
 		{
-			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+			button->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, (D3DXCOLOR)color, true);
 		}
 	}
 }
@@ -417,29 +417,29 @@ void CDataLoad::TextLoad(Engine::CScene * pScene)
 		std::wstring message;
 		_float2 fontPosition;
 		_int fontSize;
-		D3DXCOLOR color = D3DXCOLOR(1, 1, 1, 1);
+		_float4 color;// = D3DXCOLOR(1, 1, 1, 1);
 		std::wstring alignment;
 
 		dataStore->GetValue(false, dataID, objectKey, key + L"message", message);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textPosition", fontPosition);
 		dataStore->GetValue(false, dataID, objectKey, key + L"textSize", fontSize);
-		dataStore->GetValue(false, dataID, objectKey, key + L"color", (_float4)color);
+		dataStore->GetValue(false, dataID, objectKey, key + L"color", color);
 		dataStore->GetValue(false, dataID, objectKey, key + L"alignment", alignment);
 		fontPosition.y *= -1;
 
 		if (alignment == L"UpperLeft")
 		{
-			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT+ DT_NOCLIP, color, true);
+			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT+ DT_NOCLIP, (D3DXCOLOR)color, true);
 
 		}
 		else if (alignment == L"UpperRight")
 		{
-			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, color, true);
+			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_RIGHT + DT_NOCLIP, (D3DXCOLOR)color, true);
 
 		}
 		else if (alignment == L"UpperCenter")
 		{
-			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, color, true);
+			text->AddComponent<Engine::CTextC>()->AddFontData(message, fontPosition, _float2(0, 0), fontSize, DT_VCENTER + DT_CENTER + DT_NOCLIP, (D3DXCOLOR)color, true);
 		}
 
 	}
@@ -815,4 +815,21 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMSelect, CValkyriegManager::GetInstance());
 	}
+	else if (0 == function.compare(L"InventoryScene"))
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::InventoryScene, &CButtonFunction());
+	}
+	else if (0 == function.compare(L"WeaponFSM"))
+	{
+		button->AddFuncData<void(CInventoryManager::*)(), CInventoryManager*>(&CInventoryManager::WeaponFSM, CInventoryManager::GetInstance());
+	}
+	else if (0 == function.compare(L"ItemFSM"))
+	{
+		button->AddFuncData<void(CInventoryManager::*)(), CInventoryManager*>(&CInventoryManager::ItemFSM, CInventoryManager::GetInstance());
+	}
+	else if (0 == function.compare(L"ChangeFSMWeapon"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMWeapon, CValkyriegManager::GetInstance());
+	}
+	
 }

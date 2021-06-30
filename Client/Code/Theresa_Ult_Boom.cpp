@@ -48,14 +48,17 @@ void CTheresa_Ult_Boom::Start()
 {
 	__super::Start();
 
+	_float3 size = this->GetTransform()->GetSize();
+
 	SP(Engine::CObject) spFireEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Fire", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 	spFireEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Fire");
 	spFireEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
-	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire_3");
+	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire");
 	spFireEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	spFireEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
+	spFireEffect->GetComponent<Engine::CTransformC>()->SetSize(size);
 
 	SP(Engine::CObject) spCrackEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Crack", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
@@ -65,8 +68,9 @@ void CTheresa_Ult_Boom::Start()
 	spCrackEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Groundcracks_04");
 	spCrackEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
-	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeX(2.f);
-	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(2.f);
+	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeX(2.f * size.x);
+	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeY(size.y);
+	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(2.f * size.z);
 
 	SP(Engine::CObject) spSmokeEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Smoke", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
@@ -76,11 +80,12 @@ void CTheresa_Ult_Boom::Start()
 	spSmokeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 	spSmokeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPositionY(1.1f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(1.5f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(1.5f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(0.3f * size.x);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeY(0.f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(0.3f * size.z);
 
 
+	m_fUVSpeed = 0.f;
 
 	m_fAlpha = 1.f;
 }
@@ -103,7 +108,9 @@ void CTheresa_Ult_Boom::Update()
 	m_spTransform->AddSizeY(0.5f * GET_DT);
 	m_spTransform->AddSizeZ(0.5f * GET_DT);
 
-	m_fAlpha -= 1.f * GET_DT;
+	m_fAlpha -= 0.5f * GET_DT;
+	m_fUVSpeed += GET_DT;
+
 }
 
 void CTheresa_Ult_Boom::LateUpdate()
@@ -115,7 +122,7 @@ void CTheresa_Ult_Boom::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-	pEffect->SetBool("gPlayingAnim", false);
+	pEffect->SetFloat("gSpeed", m_fUVSpeed);
 
 }
 
