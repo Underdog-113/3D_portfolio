@@ -106,9 +106,9 @@ void CAttackTrail::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
-	//pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);#
-	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
-	pEffect->SetFloat("gSpeed", m_fSpeed);
+	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	/*pEffect->SetFloat("gAlpha", m_fTrailAlpha);*/
+	/*pEffect->SetFloat("gSpeed", m_fSpeed);*/
 
 	//if (m_fTrailAlpha > 1.f )
 	//	pEffect->SetBool("gTrailCheck",  true);
