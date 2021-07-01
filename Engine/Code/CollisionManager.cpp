@@ -128,14 +128,6 @@ void CCollisionManager::CheckCollision(SP(CCollider) spCollider)
 				
 
 				isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider.get(), checkCollider.get(), false);
-
-				if (isItCollided == true)
-				{
-					if (spCollider->GetOwner()->GetOwner()->GetName() == L"Camera1")
-						int a = 5;
-					else if (checkCollider->GetOwner()->GetOwner()->GetName() == L"Camera1")
-						int b = 5;
-				}
 			}
 		}
 	}
