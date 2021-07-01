@@ -929,7 +929,7 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 {
-	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.4)
+	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_pKiana->OnHitbox();
 		m_isEvade = false;
@@ -978,7 +978,7 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 {
-	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.4)
+	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_pKiana->OnHitbox();
 		m_isEvade = false;
@@ -1239,7 +1239,7 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
-	if (CheckAction_EvadeForward())
+	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
 		return;
@@ -1270,7 +1270,7 @@ void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
-	if (CheckAction_EvadeForward())
+	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
 		return;
