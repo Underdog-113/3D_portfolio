@@ -92,35 +92,55 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		pDM->UpdateFrame();
 
 		_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
+		
+		_float3 moveAmountDir = rootMotionPos - m_prevRootMotionPos;
+		moveAmountDir.y = 0.f;
 
-		float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
-		_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
+		// Set direction
+		_float3 moveDir = moveAmountDir;
+		D3DXVec3Normalize(&moveDir, &moveDir);
 
-		moveAmount.y = 0.f;
-		_float3 moveForward = pOwner->GetTransform()->GetForward();
-		moveForward.y = 0.f;
-		D3DXVec3Normalize(&moveForward, &moveForward);
+		float angleSynchroRate = D3DXVec3Dot(&moveDir, &_float3(0.f,0.f,1.f));
+		if (angleSynchroRate > 0.5f)
+		{
+			// forward
+			float moveFlag = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
+			_float3 ownerForward = pOwner->GetTransform()->GetForward();
+			ownerForward.y = 0.f;
+			D3DXVec3Normalize(&ownerForward, &ownerForward);
+			moveDir = ownerForward * moveFlag;
+		}
+		else
+		{
+			// right
+			float moveFlag = (rootMotionPos.x - m_prevRootMotionPos.x) > 0.f ? 1.f : -1.f;
+			_float3 ownerRight = pOwner->GetTransform()->GetRight();
+			ownerRight.y = 0.f;
+			D3DXVec3Normalize(&ownerRight, &ownerRight);
+			moveDir = ownerRight * moveFlag;
+		}
 
-		_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
+
+
+		_float3 moveResult = moveDir * D3DXVec3Length(&moveAmountDir);
 
 		_float3 startNoY = m_animStartOffset;
 		startNoY.y = 0.f;
 		_float3 startToCur = m_prevRootMotionPos - startNoY;
 		if (pDM->GetAniTimeline() < 0.1)
 		{
-			if (D3DXVec3Length(&forwardMove) > D3DXVec3Length(&m_prevMoveAmount) * 1.2f &&
-				D3DXVec3Length(&forwardMove) > D3DXVec3Length(&startToCur) * 0.75f)
+			if (D3DXVec3Length(&moveResult) > D3DXVec3Length(&m_prevMoveAmount) * 1.2f &&
+				D3DXVec3Length(&moveResult) > D3DXVec3Length(&startToCur) * 0.75f)
 			{
 				if(!m_isTargetCollide)
 					pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
 				return;
 			}
 		}
-
-		forwardMove *= moveDir;
-		m_prevMoveAmount = forwardMove;
+	
+		m_prevMoveAmount = moveResult;
 		if (!m_isTargetCollide)
-			pOwner->GetTransform()->AddPosition(forwardMove);
+			pOwner->GetTransform()->AddPosition(moveResult);
 		if (m_isVerticalAnim)
 			pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
