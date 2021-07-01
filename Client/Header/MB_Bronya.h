@@ -51,6 +51,7 @@ private:
 	static _uint m_s_uniqueID;
 
 	const _mat*  m_pParentBoneMat = nullptr;
+	_mat m_actualBoneMat;
 	const _mat*  m_pParentWorldMat = nullptr;
 	_float3		 m_vDir;
 

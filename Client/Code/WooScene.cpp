@@ -264,9 +264,13 @@ void CWooScene::BronyaSetting(void)
 {
 	/* Bronya */
 	SP(Engine::CObject) spBronyaClone = ADD_CLONE(L"MB_Bronya", true, (_uint)ELayerID::Enemy, L"MB_Bronya");
-	spBronyaClone->GetTransform()->SetPosition(3, 0, 3);
+	spBronyaClone->GetTransform()->SetPosition(0, 0, 0);
 	std::dynamic_pointer_cast<CMonster>(spBronyaClone)->SelectChannelID();
 	m_spBronya = spBronyaClone;
+
+	/* Weapon */
+	SP(Engine::CObject) spWeaponClone = ADD_CLONE(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
+	m_spBronyaWeapon = spWeaponClone;
 }
  
 void CWooScene::SpiderSetting(void)

@@ -61,6 +61,7 @@ private:
 	SP(Engine::CObject) m_spRobot;
 	SP(Engine::CObject) m_spNinza;
 	SP(Engine::CObject) m_spBronya;
+	SP(Engine::CObject) m_spBronyaWeapon;
 
 	SP(Engine::CObject) m_pivot_kiana;
 

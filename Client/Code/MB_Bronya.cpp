@@ -35,6 +35,7 @@ SP(Engine::CObject) CMB_Bronya::MakeClone(void)
 	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
 
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
+	//spClone->m_spRigidBody->SetIsEnabled(false);
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
 
@@ -53,8 +54,10 @@ void CMB_Bronya::Start(void)
 {
 	__super::Start();
 	
-	//m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
-	m_spTransform->SetRotationY(D3DXToRadian(90));
+	m_spTransform->SetSize(0.8f, 0.8f, 0.8f);
+	//m_spTransform->SetRotationY(D3DXToRadian(90));
+
+	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
 	stat.SetBaseHp(5277.f);
@@ -88,6 +91,18 @@ void CMB_Bronya::FixedUpdate(void)
 void CMB_Bronya::Update(void)
 {
 	__super::Update();
+
+	SP(Engine::CTransformC) pWeaponTransform;
+	pWeaponTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Bronya_Weapon")->GetComponent<Engine::CTransformC>());
+
+
+	m_actualBoneMat = *m_pParentBoneMat;
+	_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
+	m_actualBoneMat._41 -= rootMotionPos.x;
+	m_actualBoneMat._43 -= rootMotionPos.z;
+	m_actualBoneMat *= m_spTransform->GetWorldMatrix();
+	
+	pWeaponTransform->SetParentMatrix(&m_actualBoneMat);
 }
 
 void CMB_Bronya::LateUpdate(void)
@@ -186,7 +201,7 @@ void CMB_Bronya::EquipWeapon()
 	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CTransformC>());
 
 	SP(Engine::CTransformC) pWeaponTransform;
-	pWeaponTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Weapon")->GetComponent<Engine::CTransformC>());
+	pWeaponTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Bronya_Weapon")->GetComponent<Engine::CTransformC>());
 
 	if (m_pParentBoneMat == nullptr)
 	{
@@ -210,28 +225,12 @@ void CMB_Bronya::EquipWeapon()
 		m_pParentBoneMat = &pFrm->CombinedTransformMatrix;
 
 
+
 		m_pParentWorldMat = &pParentTransform->GetWorldMatrix();
 	}
 
 	pWeaponTransform->SetRotation(_float3(30.2f, 23.8f, 1.6f));
 	pWeaponTransform->SetPosition(_float3(1.1f, -0.22f, -0.6f));
-
-	// 부모의 매트릭스 *= 본 매트릭스;
-	//고칠필요있음
-	pWeaponTransform->SetParent(m_spTransform);
-
-//	SP(Engine::CTransformC) pParentTransform;
-//	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CTransformC>());
-//
-//	Engine::CDynamicMeshData* pDM =
-//		static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CMeshC>()->GetMeshData());
-//
-//	const Engine::D3DXFRAME_DERIVED* pFrm = pDM->GetFrameByName("Bip002_L_Forearm");
-//	m_pParentBoneMat = &pFrm->CombinedTransformMatrix;
-//	_mat wm = pParentTransform->GetWorldMatrix(); 
-//
-//	m_spWeapon = GetScene()->ADD_CLONE(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
-//	static_cast<CBronya_Weapon*>(m_spWeapon.get())->SetParentMatrix(&wm);
 }
 
 SP(CMB_Bronya) CMB_Bronya::Create(_bool isStatic, Engine::CScene * pScene)
