@@ -61,7 +61,11 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 
 void CDamageFontC::LateUpdate(SP(CComponent) spThis)
 {
-
+	if (m_target->GetDeleteThis())
+	{
+		GetOwner()->SetIsEnabled(false);
+		m_offSet = _float3(0, 0, 0);
+	}
 }
 
 void CDamageFontC::OnDestroy()
