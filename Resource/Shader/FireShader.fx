@@ -7,11 +7,8 @@ float4x4 gProjection;
 
 float4 gWorldLightPosition;
 
-float  gTime;
 float  gSpeed;
 float  gAlpha;
-
-bool   gTrailCheck;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -82,26 +79,15 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 {
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV + float2(0, gSpeed));
+	albedo.a = gAlpha;
 
 	// Noise Texture
 	float4 Noise = tex2D(NoiseTex, Input.mUV * albedo.r);
 
-	// To disappear to match the noise texture
-	float multiply1 = 0;
-	float multiply2 = 0;	
-
-	multiply1 = saturate((Noise.r * sin(gAlpha)) * 5.5f);
-	multiply2 = saturate(Noise.r * sin(gAlpha));
-
-	float multiple = pow(multiply1 + multiply2, 20);
-
-	float3 TempColor = float3(0, 0, 0);
-	float3 TempColor2 = float3(1, 0, 0);	
-
-	float3 diffuse = TempColor * TempColor2.rgb + albedo.rgb;
-
-
-	return float4(diffuse, multiple);
+	float4 blendColor = (Noise * albedo);
+	blendColor = saturate(blendColor);
+		
+	return blendColor;
 }
 
 technique DissolveShader

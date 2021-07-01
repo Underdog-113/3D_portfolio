@@ -26,7 +26,14 @@ public:
 													 _bool fixTillEnd = false,
 													 _double smoothTime = 0.2,
 													 _float changeWeight = 0.9f);
+
 					void		ChangeAniSet		(std::string name,
+													 _bool fixTillEnd = false,
+													 _double smoothTime = 0.2,
+													 _float changeWeight = 0.9f);
+
+					
+					void		RepeatAniSet		(_uint index,
 													 _bool fixTillEnd = false,
 													 _double smoothTime = 0.2,
 													 _float changeWeight = 0.9f);
@@ -63,7 +70,7 @@ private:
 
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)
-	GETTOR			(_uint,							m_fakeTrack,			0,			FakeOldTrack)
+	GETTOR			(_uint,							m_fakeTrack,			0,			FakeTrack)
 	GETTOR			(_uint,							m_fakeIndex,			0,			FakeIndex)
 	GETTOR			(double,						m_fakeTimer,			0.f,		FakeTimer)
 	GETTOR			(_double,						m_fakePeriod,			0,			FakePeriod)

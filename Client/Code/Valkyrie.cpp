@@ -2,6 +2,7 @@
 #include "Valkyrie.h"
 
 #include "StageControlTower.h"
+#include "ActorController.h"
 #include "AttackBall.h"
 #include "AttackBox.h"
 
@@ -36,6 +37,26 @@ void CValkyrie::Start(void)
 	m_pCT = CStageControlTower::GetInstance();
 }
 
+void CValkyrie::OnCollisionEnter(Engine::_CollisionInfo ci)
+{
+	if (m_pCT->GetActorController()->m_rotateByTarget &&
+		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
+		m_spMesh->GetRootMotion()->SetIsTargetCollide(true);
+
+}
+
+void CValkyrie::OnCollisionStay(Engine::_CollisionInfo ci)
+{
+}
+
+void CValkyrie::OnCollisionExit(Engine::_CollisionInfo ci)
+{
+	if (!m_pCT->GetActorController()->m_rotateByTarget ||
+		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
+		m_spMesh->GetRootMotion()->SetIsTargetCollide(false);
+
+}
+
 void CValkyrie::CreateAttackBall(CAttackBall ** ppAttackBall)
 {
 	*ppAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
@@ -53,13 +74,14 @@ void CValkyrie::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, 
 	m_pAttackBall->SetIsEnabled(true);
 }
 
-void CValkyrie::ActiveAttackBall(CAttackBall * pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)
+void CValkyrie::ActiveAttackBall(CAttackBall * pAttackBall, _float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius, _float3 offset)
 {
 	HitInfo info;
 	info.SetDamageRate(damageRate);
 	info.SetStrengthType(strength);
 	info.SetCrowdControlType(cc);
 
+	pAttackBall->SetOffset(offset);
 	pAttackBall->SetupBall(this, pBoneMat, radius, info);
 	pAttackBall->SetIsEnabled(true);
 }

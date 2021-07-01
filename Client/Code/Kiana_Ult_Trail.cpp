@@ -45,6 +45,7 @@ void CKiana_Ult_Trail::Awake()
 void CKiana_Ult_Trail::Start()
 {
 	__super::Start();
+	m_fTrailAlpha = 1.f;
 }
 
 void CKiana_Ult_Trail::FixedUpdate()

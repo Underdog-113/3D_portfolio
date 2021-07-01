@@ -48,8 +48,6 @@ CAniCtrl* CAniCtrl::MakeClone(void)
 										 &pClone->m_pFakeAniCtrl);
 	m_replay = true;
 
-	//pClone->ChangeAniSet(0);
-
 	LPD3DXANIMATIONSET pAS = NULL;
 
 	m_pAniCtrl->GetAnimationSet(m_curIndex, &pAS);
@@ -184,6 +182,54 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	ChangeFakeAniSet();
 }
 
+void CAniCtrl::RepeatAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _float changeWeight)
+{
+	if (index > m_pAniCtrl->GetMaxNumAnimationSets() - 1)
+		index = 0;
+	
+	_int newTrack = m_curTrack == 0 ? 1 : 0;
+
+	LPD3DXANIMATIONSET pAS = NULL;
+
+	m_pAniCtrl->GetAnimationSet(index, &pAS);
+
+	m_pAniCtrl->SetTrackAnimationSet(newTrack, pAS);
+	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
+	m_pAniCtrl->UnkeyAllTrackEvents(newTrack);
+
+	_double blendTime;
+
+	blendTime = m_period - m_timer;
+	while (blendTime < 0.f)
+	{
+		blendTime += m_period;
+	}
+
+	if (blendTime > 0.2f || m_pLoopAnims[index])
+		blendTime = 0.2f;
+
+	m_period = (_float)pAS->GetPeriod();
+
+	m_pAniCtrl->KeyTrackEnable(m_curTrack, FALSE, m_timer + blendTime);
+	m_pAniCtrl->KeyTrackSpeed(m_curTrack, 1.f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
+	m_pAniCtrl->KeyTrackWeight(m_curTrack, 0.1f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
+
+
+	m_pAniCtrl->SetTrackEnable(newTrack, TRUE);
+	m_pAniCtrl->KeyTrackSpeed(newTrack, 1.f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
+	m_pAniCtrl->KeyTrackWeight(newTrack, 0.9f, m_timer, blendTime, D3DXTRANSITION_LINEAR);
+
+	m_pAniCtrl->ResetTime();
+	m_timer = 0.f;
+
+	m_pAniCtrl->SetTrackPosition(newTrack, 0.0);
+	m_curIndex = index;
+	m_curTrack = newTrack;
+	m_fixTillEnd = fixTillEnd;
+
+	ChangeFakeAniSet();
+}
+
 void CAniCtrl::ChangeFakeAniSet()
 {
 	//if (m_fakeIndex == m_curIndex)
@@ -265,8 +311,8 @@ void CAniCtrl::PlayFake()
 	{
 		m_isFakeAniEnd = true;
 
-		m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod * 0.99);
-		m_pFakeAniCtrl->AdvanceTime(0, NULL);
+		//m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakePeriod * 0.99);
+		//m_pFakeAniCtrl->AdvanceTime(0, NULL);
 		return;
 	}
 
@@ -278,8 +324,8 @@ void CAniCtrl::ChangeFakeAnimState_EndToStart(void)
 	m_isFakeAniEnd = false;
 
 	m_fakeTimer = m_fakePeriod * 0.01;
-	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, m_fakeTimer);
-	m_pFakeAniCtrl->AdvanceTime(0, NULL);
+	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, 0.0);
+	m_pFakeAniCtrl->AdvanceTime(m_fakeTimer, NULL);
 }
 
 _bool CAniCtrl::IsItEnd(void)

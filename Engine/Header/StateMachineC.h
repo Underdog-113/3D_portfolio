@@ -39,7 +39,7 @@ public:
 			void		Update			(SP(CComponent) spThis);
 			void		LateUpdate		(SP(CComponent) spThis);
 
-			 void		OnDestroy		(void);
+	virtual void		OnDestroy		(void);
 
 			 void		OnEnable		(void);
 			 void		OnDisable		(void);
