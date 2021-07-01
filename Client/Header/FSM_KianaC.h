@@ -91,6 +91,8 @@ private:
 
 	Appear_Option m_appearOption = None;
 	bool m_isUltraMode = false;
+	bool m_isEvade = false;
+	bool m_isSecondEvade = false;
 
 	_uint m_prevAttackSoundIndex = 0;
 	_uint m_prevRunSoundIndex = 0;

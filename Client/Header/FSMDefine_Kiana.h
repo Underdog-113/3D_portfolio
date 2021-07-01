@@ -86,6 +86,8 @@
 #define Sound_HIT_1					L"K_HIT_1.wav"
 #define Sound_HIT_2					L"K_HIT_2.wav"
 #define Sound_HIT_3					L"K_HIT_3.wav"
+#define Sound_HIT_3					L"K_HIT_3.wav"
+#define Sound_HIT					L"PlayerHit.wav"
 #define Sound_RUN_0					L"K_Run_0.wav"
 #define Sound_RUN_1					L"K_Run_1.wav"
 #define Sound_RUN_2					L"K_Run_2.wav"

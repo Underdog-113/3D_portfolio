@@ -57,7 +57,7 @@ void CFSM_KianaC::Start(SP(CComponent) spThis)
 	m_pStageControlTower = CStageControlTower::GetInstance();
 
 	//m_pDM->GetAniCtrl()->SetSpeed(0.5f);
-	SetStartState(L"Appear");
+	SetStartState(Name_Appear);
 	m_curState->DoEnter();
 }
 
@@ -129,7 +129,7 @@ bool CFSM_KianaC::CheckAction_EvadeBackward(float coolTime)
 	return false;
 }
 
-bool CFSM_KianaC::CheckAction_StandBy_Timeout(float coolTime /*= Cool_End*/)
+bool CFSM_KianaC::CheckAction_StandBy_Timeout(float coolTime)
 {
 	if (m_pDM->GetAniTimeline() > coolTime)
 	{
@@ -398,6 +398,8 @@ void CFSM_KianaC::PlaySound_Attack_RandomHit()
 	//}
 
 	//m_prevHitSoundIndex = idx;
+
+	PlaySound_Effect(Sound_HIT);
 }
 
 
@@ -422,15 +424,15 @@ void CFSM_KianaC::StandBy_Enter(void)
 
 void CFSM_KianaC::StandBy_Update(float deltaTime)
 {
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+
 	if (CheckAction_Run())
 		return;
 
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
 		return;
-
-	if (CheckAction_EvadeBackward(0.f))
-		return;
-
+	
 	if (CheckAction_Ultra())
 		return;
 
@@ -438,24 +440,6 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 	{
 		ChangeState(Name_Appear);
 		m_appearOption = QTE;
-		return;
-	}
-
-// 	if (Engine::IMKEY_DOWN(StageKey_Test_Emotion))
-// 	{
-// 		ChangeState(Name_Idle_01);
-// 		return;
-// 	}
-
-	if (Engine::IMKEY_DOWN(StageKey_Test_Hit_L))
-	{
-		ChangeState(Name_Hit_L);
-		return;
-	}
-
-	if (Engine::IMKEY_DOWN(StageKey_Test_Hit_H))
-	{
-		ChangeState(Name_Hit_H);
 		return;
 	}
 }
@@ -613,8 +597,6 @@ void CFSM_KianaC::Attack_2_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_pKiana->UnActiveAttackBall();
-
-	m_pDM->GetAniCtrl()->SetSpeed(1.f);
 }
 
 void CFSM_KianaC::Attack_3_Init(void)
@@ -922,18 +904,39 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 	m_pDM->RepeatAniSet(Index_EvadeBackward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
+
+	m_isEvade = true;
+	m_pKiana->OffHitbox();
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction())
+	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
+	{
+		m_pKiana->OnHitbox();
+		m_isEvade = false;
+	}
+
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
+	{
+		m_isSecondEvade = true;
 		return;
+	}
 	if (CheckAction_Attack(Name_Attack_1, 0.4f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_Run_OnAction(0.5f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_StandBy_Timeout())
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 }
 
 void CFSM_KianaC::EvadeBackward_End(void)
@@ -950,18 +953,39 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 	m_pDM->RepeatAniSet(Index_EvadeForward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
+
+	m_isEvade = true;
+	m_pKiana->OffHitbox();
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction())
+	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
+	{
+		m_pKiana->OnHitbox();
+		m_isEvade = false;
+	}
+
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
+	{
+		m_isSecondEvade = true;
 		return;
+	}
 	if (CheckAction_Attack(Name_Attack_1, 0.4f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_Run_OnAction(0.5f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_StandBy_Timeout())
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 }
 
 void CFSM_KianaC::EvadeForward_End(void)
@@ -975,10 +999,16 @@ void CFSM_KianaC::Failure_Init(void)
 
 void CFSM_KianaC::Failure_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Failure);
 }
 
 void CFSM_KianaC::Failure_Update(float deltaTime)
 {
+	if (m_pDM->IsAnimationEnd())
+	{
+		ChangeState(Name_Failure_Idle);
+		return;
+	}
 }
 
 void CFSM_KianaC::Failure_End(void)
@@ -987,10 +1017,12 @@ void CFSM_KianaC::Failure_End(void)
 
 void CFSM_KianaC::Failure_Idle_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_Failure_Idle);
 }
 
 void CFSM_KianaC::Failure_Idle_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Failure_Idle);
 }
 
 void CFSM_KianaC::Failure_Idle_Update(float deltaTime)
@@ -1167,7 +1199,6 @@ void CFSM_KianaC::RunBS_Update(float deltaTime)
 
 	if (CheckAction_EvadeForward())
 		return;
-
 	if (CheckAction_RunBS_To_Run())
 		return;
 	if (CheckAction_Run_End())
@@ -1197,7 +1228,7 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
-	if (CheckAction_EvadeForward())
+	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
 		return;
@@ -1228,7 +1259,7 @@ void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
-	if (CheckAction_EvadeForward())
+	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
 		return;
