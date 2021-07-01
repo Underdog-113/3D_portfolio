@@ -57,6 +57,9 @@ public:
 	void CreatePivotMatrix(_mat** ppPivotMatrix, Engine::D3DXFRAME_DERIVED** ppFrame, std::string frameName);
 	void UpdatePivotMatrix(_mat* pPivotMatrix, Engine::D3DXFRAME_DERIVED* pFrame);
 
+	void OnHitbox();
+	void OffHitbox();
+
 protected:
 	static			_uint							m_s_uniqueID;
 

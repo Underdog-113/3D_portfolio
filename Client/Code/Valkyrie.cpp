@@ -120,3 +120,21 @@ void CValkyrie::UpdatePivotMatrix(_mat* pPivotMatrix, Engine::D3DXFRAME_DERIVED 
 
 	*pPivotMatrix = combMat * m_spTransform->GetWorldMatrix();
 }
+
+void CValkyrie::OnHitbox()
+{
+
+}
+
+void CValkyrie::OffHitbox()
+{
+
+	auto cols = m_spCollision->GetColliders();
+	for (auto col : cols)
+	{
+		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
+		{
+			//col->
+		}
+	}
+}

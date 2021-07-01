@@ -922,18 +922,39 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 	m_pDM->RepeatAniSet(Index_EvadeBackward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
+
+	m_isEvade = true;
+	m_pKiana->OffHitbox();
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction())
+	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.4)
+	{
+		m_pKiana->OnHitbox();
+		m_isEvade = false;
+	}
+
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction())
+	{
+		m_isSecondEvade = true;
 		return;
+	}
 	if (CheckAction_Attack(Name_Attack_1, 0.4f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_Run_OnAction(0.5f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_StandBy_Timeout())
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 }
 
 void CFSM_KianaC::EvadeBackward_End(void)
@@ -950,18 +971,39 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 	m_pDM->RepeatAniSet(Index_EvadeForward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	PlaySound_Attack_RandomEvade();
+
+	m_isEvade = true;
+	m_pKiana->OffHitbox();
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction())
+	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.4)
+	{
+		m_pKiana->OnHitbox();
+		m_isEvade = false;
+	}
+
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction())
+	{
+		m_isSecondEvade = true;
 		return;
+	}
 	if (CheckAction_Attack(Name_Attack_1, 0.4f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_Run_OnAction(0.5f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 	if (CheckAction_StandBy_Timeout())
+	{
+		m_isSecondEvade = false;
 		return;
+	}
 }
 
 void CFSM_KianaC::EvadeForward_End(void)
