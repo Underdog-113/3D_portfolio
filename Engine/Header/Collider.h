@@ -32,6 +32,7 @@ protected:
 	GETTOR_SETTOR	(_int,					m_colliderType,		UNDEFINED,		ColliderType)
 
 	GETTOR_SETTOR	(_bool,					m_isTrigger,		false,			IsTrigger)
+	GETTOR_SETTOR	(_bool,					m_isEnabled,		true,			IsEnabled)
 
 	//�θ� ������ǥ
 	GETTOR_SETTOR	(_float3,				m_offsetOrigin,		ZERO_VECTOR,	OffsetOrigin)
