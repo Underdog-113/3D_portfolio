@@ -935,7 +935,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 		m_isEvade = false;
 	}
 
-	if (!m_isSecondEvade && CheckAction_Evade_OnAction())
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
 	{
 		m_isSecondEvade = true;
 		return;
@@ -984,7 +984,7 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 		m_isEvade = false;
 	}
 
-	if (!m_isSecondEvade && CheckAction_Evade_OnAction())
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
 	{
 		m_isSecondEvade = true;
 		return;

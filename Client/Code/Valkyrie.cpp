@@ -123,18 +123,26 @@ void CValkyrie::UpdatePivotMatrix(_mat* pPivotMatrix, Engine::D3DXFRAME_DERIVED 
 
 void CValkyrie::OnHitbox()
 {
-
-}
-
-void CValkyrie::OffHitbox()
-{
-
 	auto cols = m_spCollision->GetColliders();
 	for (auto col : cols)
 	{
 		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
 		{
-			//col->
+			col->SetIsEnabled(true);
+			break;
+		}
+	}
+}
+
+void CValkyrie::OffHitbox()
+{
+	auto cols = m_spCollision->GetColliders();
+	for (auto col : cols)
+	{
+		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
+		{
+			col->SetIsEnabled(false);
+			break;
 		}
 	}
 }
