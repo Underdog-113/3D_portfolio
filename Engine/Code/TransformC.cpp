@@ -39,9 +39,9 @@ void CTransformC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
-	m_lastRotMatrix			= m_rotMatrix;
-	m_lastWorldMat			= m_worldMat;
-	m_lastWorldMatNoScale	= m_worldMatNoScale;
+	//m_lastRotMatrix			= m_rotMatrix;
+	//m_lastWorldMat			= m_worldMat;
+	//m_lastWorldMatNoScale	= m_worldMatNoScale;
 }
 
 void CTransformC::FixedUpdate(SP(CComponent) spThis)
@@ -53,7 +53,7 @@ void CTransformC::Update(SP(CComponent) spThis)
 	if (m_spParent && m_spParent->GetOwner() == nullptr)
 	{
 		_quat rotQuat;
-		D3DXQuaternionRotationMatrix(&rotQuat, &m_lastRotMatrix);
+		D3DXQuaternionRotationMatrix(&rotQuat, &m_rotMatrix);
 		D3DXQuaternionNormalize(&rotQuat, &rotQuat);
 
 		_float3 finalRotation = GET_MATH->QuatToRad(rotQuat);
@@ -423,9 +423,9 @@ void CTransformC::UpdateRotation(void)
 
 void CTransformC::UpdateWorldMatrix(void)
 {
-	m_lastRotMatrix			= m_rotMatrix;
-	m_lastWorldMat			= m_worldMat;
-	m_lastWorldMatNoScale	= m_worldMatNoScale;
+	//m_lastRotMatrix			= m_rotMatrix;
+	//m_lastWorldMat			= m_worldMat;
+	//m_lastWorldMatNoScale	= m_worldMatNoScale;
 
 	_mat rotateX, rotateY, rotateZ, size, translation, result;
 
@@ -468,9 +468,9 @@ void CTransformC::UpdateCamDistance(void)
 void CTransformC::ApplyParentMatrix(const _mat* pMat)
 {
 	m_worldMatNoScale	*= *pMat;
-	m_lastWorldMat		*= *pMat;
+	//m_lastWorldMat		*= *pMat;
 
-	_mat matToDecompose = m_lastWorldMat;
+	_mat matToDecompose = m_worldMat;
 
 	m_position = _float3(matToDecompose._41, matToDecompose._42, matToDecompose._43);
 	matToDecompose._41 = 0; matToDecompose._42 = 0; matToDecompose._43 = 0;
@@ -501,7 +501,7 @@ void CTransformC::ApplyParentMatrix(const _mat* pMat)
 		matToDecompose._33 /= m_size.z;
 	}
 
-	m_lastRotMatrix *= matToDecompose;
+	//m_lastRotMatrix *= matToDecompose;
 
 	_quat rotQuat;
 	D3DXQuaternionRotationMatrix(&rotQuat, &matToDecompose);
@@ -517,5 +517,5 @@ void CTransformC::SetWorldMatrix(_mat worldMat)
 
 void CTransformC::SetLastWorldMatrix(_mat worldMat)
 {
-	m_lastWorldMat = worldMat;
+	//m_lastWorldMat = worldMat;
 }

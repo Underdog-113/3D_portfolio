@@ -43,6 +43,7 @@ void CTheresa_Ult_Charge::Awake()
 void CTheresa_Ult_Charge::Start()
 {
 	__super::Start();
+	m_fAlpha = 1.f;
 }
 
 void CTheresa_Ult_Charge::FixedUpdate()
@@ -53,6 +54,13 @@ void CTheresa_Ult_Charge::FixedUpdate()
 void CTheresa_Ult_Charge::Update()
 {
 	__super::Update();
+
+	if (m_fAlpha <= 0)
+	{
+		this->SetDeleteThis(true);
+	}
+
+	m_fAlpha -= 0.5f * GET_DT;
 }
 
 void CTheresa_Ult_Charge::LateUpdate()

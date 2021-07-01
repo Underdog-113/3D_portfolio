@@ -145,6 +145,7 @@ technique Default_Device
 		alphablendenable = true;
 		srcblend = one;
 		destblend = one;
+
 		zwriteenable = false;
 		vertexshader = NULL;
 		pixelshader = compile ps_3_0 PS_POINT();

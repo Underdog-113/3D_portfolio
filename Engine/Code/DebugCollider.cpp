@@ -105,43 +105,48 @@ void CDebugCollider::Update(void)
 void CDebugCollider::LateUpdate(void)
 {
 	m_spTransform->SetPosition(m_pOwner->GetTransform()->GetPosition() + m_pCollider->GetOffset());
-	switch (m_pCollider->GetColliderType())
-	{
-	case (_int)EColliderType::Ray:
-	{
-		CRayCollider* pRay = static_cast<CRayCollider*>(m_pCollider);
-		m_spTransform->AddPosition(pRay->GetDirection() * pRay->GetLength() / 2.f);
-		m_spTransform->SetForward(pRay->GetDirection());
-		m_spTransform->SetSize(0.01f, 0.01f, pRay->GetLength());
-		break;
-	}
 
-	case (_int)EColliderType::Sphere:
+	if (m_pCollider->GetIsEnabled())
 	{
-		CSphereCollider* pShpere = static_cast<CSphereCollider*>(m_pCollider);
-		m_spTransform->SetSize(pShpere->GetRadius() * 2, pShpere->GetRadius() * 2, pShpere->GetRadius() * 2);
-		break;
-	}
+		switch (m_pCollider->GetColliderType())
+		{
+		case (_int)EColliderType::Ray:
+		{
+			CRayCollider* pRay = static_cast<CRayCollider*>(m_pCollider);
+			m_spTransform->AddPosition(pRay->GetDirection() * pRay->GetLength() / 2.f);
+			m_spTransform->SetForward(pRay->GetDirection());
+			m_spTransform->SetSize(0.01f, 0.01f, pRay->GetLength());
+			break;
+		}
 
-	case (_int)EColliderType::AABB:
-	{
-		CAabbCollider* pAabb = static_cast<CAabbCollider*>(m_pCollider);
-		m_spTransform->SetSize(pAabb->GetSize());
-		break;
-	}
+		case (_int)EColliderType::Sphere:
+		{
+			CSphereCollider* pShpere = static_cast<CSphereCollider*>(m_pCollider);
+			m_spTransform->SetSize(pShpere->GetRadius() * 2, pShpere->GetRadius() * 2, pShpere->GetRadius() * 2);
+			break;
+		}
 
-	case (_int)EColliderType::OBB:
-	{
-		CObbCollider* pObb = static_cast<CObbCollider*>(m_pCollider);
-		m_spTransform->SetRotation(m_pCollider->GetOwner()->GetTransform()->GetRotation() + pObb->GetRotOffset());
-		m_spTransform->SetSize(pObb->GetSize());
-		break;
-	}
+		case (_int)EColliderType::AABB:
+		{
+			CAabbCollider* pAabb = static_cast<CAabbCollider*>(m_pCollider);
+			m_spTransform->SetSize(pAabb->GetSize());
+			break;
+		}
 
-	default:
-		break;
-	}
+		case (_int)EColliderType::OBB:
+		{
+			CObbCollider* pObb = static_cast<CObbCollider*>(m_pCollider);
+			m_spTransform->SetRotation(m_pCollider->GetOwner()->GetTransform()->GetRotation() + pObb->GetRotOffset());
+			m_spTransform->SetSize(pObb->GetSize());
+			break;
+		}
 
+		default:
+			break;
+		}
+	}
+	else
+		m_spTransform->SetSize(0, 0, 0);
 	__super::LateUpdate();
 }
 

@@ -44,6 +44,7 @@ void CReadyToSortieManager::PlayerIS(Engine::CScene * pScene)
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_0")->SetIsEnabled(false);
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_1")->SetIsEnabled(false);
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_2")->SetIsEnabled(false);
+			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Text_11")->SetIsEnabled(false);
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_3")->SetIsEnabled(true);
 		}
 		else
@@ -52,11 +53,14 @@ void CReadyToSortieManager::PlayerIS(Engine::CScene * pScene)
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_1")->GetComponent<Engine::CTextureC>()->ChangeTexture(valkyrieStatus[i]->GetRank());
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_2")->SetIsEnabled(false);
 			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_3")->SetIsEnabled(false);
+			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Text_11")->SetIsEnabled(true);
+			pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Text_11")->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(valkyrieStatus[i]->GetLevel()));
 
 			if (i == 0)
 			{
 				pScene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Image_2")->SetIsEnabled(true);
 			}
+
 		}
 	}
 

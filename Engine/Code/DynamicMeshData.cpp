@@ -143,6 +143,11 @@ void CDynamicMeshData::ChangeAniSet(std::string name, _bool fixTillEnd, _double 
 	m_pAniCtrl->ChangeAniSet(name, fixTillEnd, smoothTime, changeWeight);
 }
 
+void CDynamicMeshData::RepeatAniSet(_uint index, _bool fixTillEnd, _double smoothTime, _float changeWeight)
+{
+	m_pAniCtrl->RepeatAniSet(index, fixTillEnd, smoothTime, changeWeight);
+}
+
 void CDynamicMeshData::PlayAnimation(void)
 {
 	if (m_playAnimation)
@@ -160,6 +165,11 @@ void CDynamicMeshData::ResetAnimation(void)
 
 double CDynamicMeshData::GetAniTimeline()
 {
+	if (m_rootMotionOff)
+	{
+		return	m_pAniCtrl->GetTimeline_Blend();
+	}
+
 	return m_pAniCtrl->GetTimeline();
 }
 
@@ -190,6 +200,10 @@ void CDynamicMeshData::SetAniFixTillEnd(_bool isItFixed)
 	m_pAniCtrl->SetFixTillEnd(isItFixed);
 }
 
+void CDynamicMeshData::SetLoopAnim(_uint animIndex)
+{
+	m_pAniCtrl->SetLoopAnim(animIndex);
+}
 
 void CDynamicMeshData::SetupFrameMatrices(_DerivedD3DXFRAME * pFrame, _mat * pParentMat)
 {

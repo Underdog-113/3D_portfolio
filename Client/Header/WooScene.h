@@ -38,6 +38,9 @@ private:
 	void SickleSetting(void);
 	void GaneshaSetting(void);
 	void SpiderSetting(void);
+	void ScoutSetting(void);
+	void LancerSetting(void);
+	void RobotSetting(void);
 
 private:
 	SP(Engine::CObject) m_pivot;
@@ -45,6 +48,9 @@ private:
 	SP(Engine::CObject) m_spSickle;
 	SP(Engine::CObject) m_spGanesha;
 	SP(Engine::CObject) m_spKiana;
+	SP(Engine::CObject) m_spScout;
+	SP(Engine::CObject) m_spLancer;
+	SP(Engine::CObject) m_spRobot;
 
 	SP(Engine::CObject) m_pivot_kiana;
 

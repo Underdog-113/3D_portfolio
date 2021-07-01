@@ -44,7 +44,7 @@ void CCollisionManager::Update(void)
 			//하나의 충돌에 대해서 양쪽 CollisionComponent가 CollisionInfo를 쏠 거야.
 			//ANS: Layer1이 Layer2를 체크해야할 레이어로 놓는다면
 			//Layer2는 Layer1을 체크해야할 레이어에 놓지 않으면 됨.
-			if (spCollider->GetOwner()->GetOwner() != nullptr && spCollider->GetOwner()->GetIsEnabled())
+			if (spCollider->GetOwner()->GetOwner() != nullptr && spCollider->GetIsEnabled())
 			{
 				CheckCollision(spCollider);
 			}
@@ -54,7 +54,7 @@ void CCollisionManager::Update(void)
 
 	for (auto& spCollision : m_vCollisions)
 	{
-		if (spCollision->GetOwner() != nullptr && spCollision->GetOwner()->GetIsEnabled())
+		if (spCollision->GetOwner() != nullptr && spCollision->GetIsEnabled())
 		{
 			spCollision->ProcessCollisions();
 			spCollision->ProcessTriggers();
@@ -124,14 +124,6 @@ void CCollisionManager::CheckCollision(SP(CCollider) spCollider)
 				
 
 				isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider.get(), checkCollider.get(), false);
-
-				if (isItCollided == true)
-				{
-					if (spCollider->GetOwner()->GetOwner()->GetName() == L"Camera1")
-						int a = 5;
-					else if (checkCollider->GetOwner()->GetOwner()->GetName() == L"Camera1")
-						int b = 5;
-				}
 			}
 		}
 	}

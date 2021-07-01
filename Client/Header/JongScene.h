@@ -39,6 +39,7 @@ private:
 					void SpiderTest();
 					void SickleTest();
 					void GaneshaTest();
+					void RobotTest();
 
 					void FloorTest();
 

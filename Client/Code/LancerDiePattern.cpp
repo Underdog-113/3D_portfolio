@@ -26,7 +26,7 @@ void CLancerDiePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_DIE != fsm->GetCurStateString() && 0 >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurHp())
 	{
 		fsm->ChangeState(Name_DIE);
-		//PatternPlaySound(L"Sickle_Dead.wav", pOwner);
+		PatternPlaySound(L"Lencer_Dead.wav", pOwner);
 	}
 	// die 애니가 끝나면
 	else if (Name_DIE == fsm->GetCurStateString() && 0.95f <= fsm->GetDM()->GetAniTimeline())

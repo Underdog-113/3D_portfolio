@@ -1,6 +1,6 @@
 #pragma once
 #include "StateMachineC.h"
-#define Cool_Attack				0.25f
+#define Cool_Attack				0.2f
 #define Cool_BranchAttack		0.5f
 #define Cool_BranchAttack3to4	0.3f
 #define Cool_Evade				0.2f
@@ -22,17 +22,26 @@
 
 class CKiana;
 class CStageControlTower;
+class CEffectMaker_Kiana;
 class CFSM_KianaC final : public Engine::CStateMachineC
 {
+public:
+	enum AttackOption {
+		ATK01, ATK02, ATK03, ATK04, ATK05,
+		Branch_ATK01, Branch_ATK02,
+		QTE_ATK
+	};
+
 	enum Appear_Option { None, QTE };
 public:
 	CFSM_KianaC();
-	~CFSM_KianaC() = default;
+	virtual ~CFSM_KianaC();
 
 public:
 	SP(Engine::CComponent)		MakeClone(Engine::CObject* pOwner) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
+	void OnDestroy() override;
 
 private:
 	void FixRootMotionOffset(_uint index);
@@ -55,14 +64,7 @@ private: /* Special Actions */
 	bool CheckAction_RunBS_To_Run();
 
 	bool CheckAction_Ultra();
-
-private: /* effect */
-	void CreateEffect_Attack1();
-	void CreateEffect_Attack2();
-	void CreateEffect_Attack3();
-	void CreateEffect_Attack4();
-	void CreateEffect_Attack5();
-
+	
 private: /* sound */
 	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
 	void PlaySound_Voice(const std::wstring& soundName);
@@ -85,9 +87,12 @@ private:
 	CKiana* m_pKiana = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
 	CStageControlTower* m_pStageControlTower = nullptr;
+	CEffectMaker_Kiana* m_pEffectMaker = nullptr;
 
 	Appear_Option m_appearOption = None;
 	bool m_isUltraMode = false;
+	bool m_isEvade = false;
+	bool m_isSecondEvade = false;
 
 	_uint m_prevAttackSoundIndex = 0;
 	_uint m_prevRunSoundIndex = 0;

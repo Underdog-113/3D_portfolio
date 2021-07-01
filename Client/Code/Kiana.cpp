@@ -60,10 +60,10 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spRigidBody	= spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
-	
+
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
 
-	 
+
 	return spClone;
 }
 
@@ -78,6 +78,7 @@ void CKiana::Awake(void)
 void CKiana::Start(void)
 {
 	__super::Start();
+	m_spDebug = AddComponent<Engine::CDebugC>();
 
 	m_spTransform->SetSize(0.45f, 0.45f, 0.45f);
 
@@ -87,9 +88,9 @@ void CKiana::Start(void)
 	m_pAttackBall->GetTransform()->SetSize(3.f, 3.f, 3.f);
 	m_pAttackBall->SetOwner(this);
 
-	FindRightToe();
-	FindLeftHand();
-	FindRightHand();
+	CreatePivotMatrix(&m_pRightToe_World, &m_pRightToe_Frame, "Bip001_R_Toe0");
+	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_R_Hand");
+	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_L_Hand");
 
 	//weapon
 	//CreatePistol();
@@ -122,9 +123,10 @@ void CKiana::Update(void)
 	//Update_WeaponTransform();
 
 	__super::Update();
-	
-	UpdatePivotMatrices();
-	
+
+	UpdatePivotMatrix(m_pRightToe_World, m_pRightToe_Frame);
+	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
+	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
 
 	if (m_ultraMode)
 		UseUltraCost();
@@ -181,45 +183,11 @@ void CKiana::OnDisable(void)
 	__super::OnDisable();
 }
 
-void CKiana::UpdatePivotMatrices(void)
-{
-	if (m_pRightToe_World)
-	{
-		_mat combMat = m_pRightToe_Frame->CombinedTransformMatrix;
-		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-		combMat._41 -= rootMotionPos.x;
-		combMat._43 -= rootMotionPos.z;
-
-		*m_pRightToe_World = combMat * m_spTransform->GetWorldMatrix();
-	}
-
-	if (m_pRightHand_World)
-	{
-		_mat combMat = m_pRightHand_Frame->CombinedTransformMatrix;
-		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-		combMat._41 -= rootMotionPos.x;
-		combMat._43 -= rootMotionPos.z;
-
-		*m_pRightHand_World = combMat * m_spTransform->GetWorldMatrix();
-	}
-
-	if (m_pLeftHand_World)
-	{
-		_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
-		_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-		combMat._41 -= rootMotionPos.x;
-		combMat._43 -= rootMotionPos.z;
-
-		*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
-	}
-
-}
-
 void CKiana::CreatePistol(void)
 {
 	m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Left");
 	static_cast<CKiana_Pistol*>(m_spWeapon_Left.get())->SetParentMatrix(m_pLeftHand_World);
-	
+
 	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Right");
 	static_cast<CKiana_Pistol*>(m_spWeapon_Right.get())->SetParentMatrix(m_pRightHand_World);
 }
@@ -229,7 +197,7 @@ void CKiana::CreateCatPaw(void)
 	m_spCatPaw_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk01", true, (_uint)ELayerID::Player, L"CatPaw_Atk01");
 	m_spCatPaw_Atk01->SetIsEnabled(false);
 
-		
+
 	m_spCatPaw_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk02", true, (_uint)ELayerID::Player, L"CatPaw_Atk02");
 	m_spCatPaw_Atk02->SetIsEnabled(false);
 	m_spCatPaw_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk03", true, (_uint)ELayerID::Player, L"CatPaw_Atk03");
@@ -262,7 +230,7 @@ void CKiana::UseUltraCost(void)
 		curSp = 0.f;
 	}
 
-	m_pStat->SetCurSp(curSp);                        
+	m_pStat->SetCurSp(curSp);
 }
 
 
@@ -273,14 +241,17 @@ void CKiana::SetBasicName(void)
 
 void CKiana::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionEnter(ci);
 }
 
 void CKiana::OnCollisionStay(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionStay(ci);
 }
 
 void CKiana::OnCollisionExit(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionExit(ci);
 }
 
 void CKiana::ApplyHitInfo(HitInfo info)
@@ -514,7 +485,7 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"explosionpoint1");
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ability_aura");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader); 
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 
 	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());
 	spMeshEffect->GetTransform()->AddPositionY(GetComponent<Engine::CMeshC>()->GetHalfYOffset());

@@ -13,17 +13,31 @@ CValkyrieLevelUp::~CValkyrieLevelUp()
 
 void CValkyrieLevelUp::Start()
 {
+	if (CDataManager::GetInstance()->FindItemData().size() == 0)
+	{
+		CValkyriegManager::GetInstance()->ChangeFSMProperty();
+		return;
+	}
+
 	g_itemCount = 0;
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(true);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Text_4")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie)->GetLevel()));
-
+	ItemButtonSetting();
 	ItemCountUp();
 
+	std::static_pointer_cast<Engine::CSlider>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Slider_0"))->SetMaxValue((_float)CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetCount());
 }
 
 void CValkyrieLevelUp::End()
 {
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
+
+
+	for (auto& obj : m_spItemButtonObject)
+	{
+		obj->SetDeleteThis(true);
+	}
+	m_spItemButtonObject.clear();
 }
 
 _uint CValkyrieLevelUp::FixedUpdate()
@@ -49,9 +63,8 @@ void CValkyrieLevelUp::OnDestroy(void)
 void CValkyrieLevelUp::LevelUp()
 {
 	CValkyrieStatusData* data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
-
-	//100은 내가 선택한 아이템의 경험치만큼 오르게 변경
-	_int expSum = data->GetExperience() + (100 * g_itemCount);
+	
+	_int expSum = data->GetExperience() + (CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetExperience() * g_itemCount);
 	_int levalUpSum = 0;
 
 	while (true)
@@ -69,6 +82,7 @@ void CValkyrieLevelUp::LevelUp()
 
 	data->SetExperience(expSum);
 	data->SetLevel(data->GetLevel() + levalUpSum);
+	CDataManager::GetInstance()->FindItemData(g_selectItemName)->CountDown(g_itemCount);
 	g_itemCount = 0;
 	CValkyriegManager::GetInstance()->ChangeFSMProperty();
 }
@@ -76,6 +90,9 @@ void CValkyrieLevelUp::LevelUp()
 void CValkyrieLevelUp::ItemCountUp()
 {
 	g_itemCount++;
+
+	if (g_itemCount >= CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetCount())
+		g_itemCount = CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetCount();
 
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Text_7")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(g_itemCount));
 	std::static_pointer_cast<Engine::CSlider>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Slider_0"))->SetValue((_float)g_itemCount);
@@ -106,7 +123,7 @@ void CValkyrieLevelUp::ItemCountUiHelp()
 {
 	CValkyrieStatusData* data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
 
-	_int expSum = data->GetExperience() + (100 * g_itemCount);
+	_int expSum = data->GetExperience() + (CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetExperience() * g_itemCount);
 	_int levalUpSum = data->GetLevel();
 	_int nextExp = data->GetMaxExperience();
 
@@ -126,5 +143,34 @@ void CValkyrieLevelUp::ItemCountUiHelp()
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Text_5")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(levalUpSum));
 }
 
+void CValkyrieLevelUp::ItemButtonSetting()
+{
+	std::vector<CItemData*> data = CDataManager::GetInstance()->FindItemData();
+	size_t size = data.size();
+	_float offsetX = 174.2f;
+	_float3 statPos = _float3(-offsetX * (int)(size * 0.5f), 0, 0.7f);
 
-// 아이템 셀렉후 몇개 사용할지 지정하고 레벨업
+	CValkyrieLevelUp::g_selectItemName = data[0]->GetName();
+
+	for (int i = 0; i < size; i++)
+	{
+		SP(CItemButton) object;
+		object = std::dynamic_pointer_cast<CItemButton>(CValkyriegManager::GetInstance()->GetScene()->GetObjectFactory()->AddClone(L"ItemButton", true, (_int)Engine::ELayerID::UI, L""));
+		object->GetTransform()->SetPosition(statPos);
+		object->SetItemName(data[i]->GetName());
+		// 버튼
+		object->ButtonCreate(data[i]->GetName(), _float3(0.0f, 0.0f, 0.0f), _float3(122.3f, 149.4f, 0), L"UI_4", CButton::UP);
+		// 이미지
+		object->ImageCreate(L"", _float3(0.0f, 16.3f, statPos.z), _float3(122.1f, 106.4f, 0), data[i]->GetTextureKey());
+		// 텍스트
+		object->textCreate(L"", _float2(0.0f, 62.1f), statPos.z, 28, D3DXCOLOR(0, 0, 0, 1), L"", L"×" + std::to_wstring(data[i]->GetCount()));
+
+		object->GetButton()->AddFuncData<void(CItemButton::*)(), CItemButton*>(&CItemButton::ItemSelect, object.get());
+
+		statPos.x += offsetX;
+		m_spItemButtonObject.emplace_back(object);
+	}
+
+}
+// 사이의 거리
+// 시작위치

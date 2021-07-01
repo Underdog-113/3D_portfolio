@@ -31,7 +31,10 @@ void CValkyriegManager::Update(void)
 
 void CValkyriegManager::OnDestroy(void)
 {
-
+	for (auto& obj : m_valkyrieFSM)
+	{
+		delete(obj);
+	}
 }
 
 void CValkyriegManager::ChangeFSM(STATE state)
@@ -55,6 +58,11 @@ void CValkyriegManager::ChangeFSMProperty()
 void CValkyriegManager::ChangeFSMLevelUp()
 {
 	ChangeFSM(STATE::LevelUp);
+}
+
+void CValkyriegManager::ChangeFSMWeapon()
+{
+	ChangeFSM(STATE::Weapon);
 }
 
 void CValkyriegManager::FSMCreate()

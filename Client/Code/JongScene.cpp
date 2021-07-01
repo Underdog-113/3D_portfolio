@@ -63,20 +63,25 @@ void CJongScene::Start(void)
 	__super::Start();
 	CDamageObjectPool::GetInstance()->Start(this);
 
-	//KianaTest();
+	KianaTest();
 	TheresaTest();
-	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
-	//SakuraTest();
-	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
+	static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
+	SakuraTest();
+	static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
-	//SetSceneCamera(m_spKiana);
-	SetSceneCamera(m_spTheresa);
+	SetSceneCamera(m_spKiana);
+	//SetSceneCamera(m_spTheresa);
+	//SetSceneCamera(m_spSakura);
 
 	//CollisionDummy();
-	//SickleTest();
+	SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
+	//RobotTest();
+
+	//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Ninza", true, (_uint)ELayerID::Enemy, L"MO_Ninza");
+	//spSpiderClone->GetTransform()->SetPosition(0.f, 0.f, 5.f);
 
 	FloorTest();
 
@@ -192,7 +197,7 @@ void CJongScene::SetSceneCamera(SP(Engine::CObject) pTarget)
 {
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(pTarget);
-	cam->SetTargetDist(3.f);
+	cam->SetTargetDist(2.f);
 	m_pControlTower->ActorControl_SetCurrentMainCam(cam);
 }
 
@@ -232,6 +237,17 @@ void CJongScene::SickleTest()
 	spSickleClone->GetTransform()->SetSize(2, 2, 2);
 	spSickleClone->GetTransform()->SetPosition(0, 0, 2);
 	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetSize(2, 2, 2);
+	spSickleClone->GetTransform()->SetPosition(0, 0, 4);
+	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetSize(2, 2, 2);
+	spSickleClone->GetTransform()->SetPosition(2, 0, 2);
+	spSickleClone->GetTransform()->SetRotationY(D3DXToRadian(90));
 	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
 	//spSickleClone->GetComponent<CPatternMachineC>()->AddPattern(CSickleAtk02Pattern::Create());
 	m_spSickle = spSickleClone;
@@ -242,12 +258,19 @@ void CJongScene::GaneshaTest()
 	/* Ganesha */
 	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
 	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
-	spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
+	//spGaneshaClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaStampPattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaRoll01Pattern::Create());
 	//spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst01Pattern::Create());
 	spGaneshaClone->GetComponent<CPatternMachineC>()->AddPattern(CGaneshaBurst02Pattern::Create());
 	//m_spGanesha = spGaneshaClone;
+}
+
+void CJongScene::RobotTest()
+{
+	/* Ganesha */
+	SP(Engine::CObject) spRobotClone = ADD_CLONE(L"MO_Robot", true, (_uint)ELayerID::Enemy, L"MO_Robot");
+	spRobotClone->GetTransform()->SetPosition(3, 2, 3);
 }
 
 void CJongScene::FloorTest()

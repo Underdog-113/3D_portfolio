@@ -211,11 +211,17 @@ void CMeshC::GenMinMaxVtx(void)
 void CMeshC::OnRootMotion(void)
 {
 	m_pRootMotion->SetIsRootMotion(true);
+
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+	pDM->SetRootMotionOff(false);
 }
 
 void CMeshC::OffRootMotion(void)
 {
 	m_pRootMotion->SetIsRootMotion(false);
+
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+	pDM->SetRootMotionOff(true);
 }
 
 void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM)
@@ -286,7 +292,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 		pBip001Frame = pBip001Frame->pFrameFirstChild;
 	}
 	_mat rootChildCombMat = pBip001Frame->TransformationMatrix * rootCombMat;
-
 
 	_float3 rootMotionMoveAmount = _float3(rootChildCombMat._41,
 										   rootChildCombMat._42,

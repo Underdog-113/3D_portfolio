@@ -36,9 +36,11 @@ private:
 	GETTOR_SETTOR	(_float,	m_speed,					0.f,			Speed)
 
 	GETTOR_SETTOR	(_bool,		m_isVerticalAnim,			false,			IsVerticalAnim)
+	GETTOR_SETTOR	(_bool,		m_isTargetCollide,			false,			IsTargetCollide)
 
 	_float3 m_animStartOffset = ZERO_VECTOR;
 	_float3 m_prevRootMotionPos = ZERO_VECTOR;
+	_float3 m_prevMoveAmount = _float3(100.f,100.f,100.f);
 };
 
 END

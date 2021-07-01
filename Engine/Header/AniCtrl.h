@@ -26,7 +26,14 @@ public:
 													 _bool fixTillEnd = false,
 													 _double smoothTime = 0.2,
 													 _float changeWeight = 0.9f);
+
 					void		ChangeAniSet		(std::string name,
+													 _bool fixTillEnd = false,
+													 _double smoothTime = 0.2,
+													 _float changeWeight = 0.9f);
+
+					
+					void		RepeatAniSet		(_uint index,
 													 _bool fixTillEnd = false,
 													 _double smoothTime = 0.2,
 													 _float changeWeight = 0.9f);
@@ -42,8 +49,12 @@ public:
 					double		GetTimeline			(void);
 					void		ResetTimers			(void);
 					void		ResetAnimation		(void);
+
+					void		CreateLoopAnimArray(_uint size);
+					void		SetLoopAnim(_uint animIndex);
 private:
 					_uint		FindIndexByName		(std::string const& name, LPD3DXANIMATIONSET pAS);
+					
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pAniCtrl,		nullptr,	AniCtrl)
 	GETTOR			(_uint,							m_curTrack,		0,			CurTrack)
@@ -53,10 +64,13 @@ private:
 	GETTOR			(_float,						m_period,		0,			Period)
 	GETTOR_SETTOR	(_bool,							m_replay,		true,		Replay)	
 	GETTOR_SETTOR	(_bool,							m_fixTillEnd,	false,		FixTillEnd)
+		
+		
+	GETTOR			(_bool*,				m_pLoopAnims,	nullptr,			LoopAnims)
 
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)
-	GETTOR			(_uint,							m_fakeTrack,			0,			FakeOldTrack)
+	GETTOR			(_uint,							m_fakeTrack,			0,			FakeTrack)
 	GETTOR			(_uint,							m_fakeIndex,			0,			FakeIndex)
 	GETTOR			(double,						m_fakeTimer,			0.f,		FakeTimer)
 	GETTOR			(_double,						m_fakePeriod,			0,			FakePeriod)

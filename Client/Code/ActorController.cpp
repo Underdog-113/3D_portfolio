@@ -9,6 +9,7 @@
 CActorController::CActorController()
 {
 	m_pInput = Engine::CInputManager::GetInstance();
+	m_rotSpeed = 18.f;
 }
 
 
@@ -28,6 +29,8 @@ void CActorController::UpdateController()
 		if (!CheckMoveOrder())
 			return;
 	}
+
+
 
 	if (!m_rotateLock)
 	{
@@ -80,6 +83,9 @@ void CActorController::SetInputLock_ByAni(bool lock)
 
 bool CActorController::CheckMoveOrder()
 {
+	if (m_rotateByTarget)
+		return false;
+
 	bool isMove = false;
 
 	// up
@@ -234,8 +240,6 @@ void CActorController::ReserveMoveOrder()
 
 	if (!m_reserveMoveFlag)
 		return;
-	if (m_rotateByTarget)
-		return;
 
 	m_reserveMoveOrderDir = ZERO_VECTOR;
 
@@ -290,7 +294,11 @@ void CActorController::RotateCurrentActor()
 	float angleSynchroRate = D3DXVec3Dot(&m_moveOrderDir, &actorForward);
 
 	if (angleSynchroRate > 0.95f)
-		rotSpeedRate = m_rotSpeedLowRate;
+	{
+		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
+		rotSpeedRate = 1.f - lerpValue;
+	}
+
 
 	_float3 rotAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&rotAxis, &actorForward, &m_moveOrderDir);
@@ -302,13 +310,8 @@ void CActorController::RotateCurrentActor()
 		pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
 
 
-	if (angleSynchroRate > 0.99f)
+	if (angleSynchroRate > 0.999f)
 	{
-		if (rotAxis.y > 0.f)
-			pCurActor->GetTransform()->AddRotationY(D3DXToRadian(0.9f));
-		else
-			pCurActor->GetTransform()->AddRotationY(D3DXToRadian(-0.9f));
-
 		m_rotateLock = true;
 		m_rotateByTarget = false;
 	}
@@ -330,4 +333,7 @@ void CActorController::TargetingOn()
 	m_moveOrderDir = targetPos - valkyriePos;
 
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
+
+	m_moveFlag = 0;
+	m_prevMoveFlag = 0;
 }

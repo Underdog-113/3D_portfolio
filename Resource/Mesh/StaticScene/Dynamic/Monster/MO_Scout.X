@@ -158,7 +158,7 @@ Frame MS_020 {
   1.000000,0.000000,0.000000,0.000000,0.000000,-0.000000,-1.000000,0.000000,0.000000,1.000000,-0.000000,0.000000,0.000000,0.000000,0.000000,1.000000;;
  }
 
- Frame Dummy001 {
+ Frame Bip001 {
   
 
   FrameTransformMatrix {
@@ -7400,7 +7400,7 @@ AnimationSet DIE_FLY {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -7993,7 +7993,7 @@ AnimationSet DIE {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -8512,7 +8512,7 @@ AnimationSet Stun {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -9509,7 +9509,7 @@ AnimationSet StandUp {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -10244,7 +10244,7 @@ AnimationSet KnockDown {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -10680,7 +10680,7 @@ AnimationSet Throw_Low {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -10936,7 +10936,7 @@ AnimationSet Throw_Blow {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -11493,7 +11493,7 @@ AnimationSet Throw_2 {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -12036,7 +12036,7 @@ AnimationSet Throw_1 {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -12711,7 +12711,7 @@ AnimationSet Throw_0 {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -12967,7 +12967,7 @@ AnimationSet HIT_BACK {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -13495,7 +13495,7 @@ AnimationSet HIT_FRONT {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -14025,7 +14025,7 @@ AnimationSet HIT_H {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -14496,7 +14496,7 @@ AnimationSet HIT_L {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -14967,7 +14967,7 @@ AnimationSet Laser_AS {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -15321,7 +15321,7 @@ AnimationSet LASER_LOOP {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -15960,7 +15960,7 @@ AnimationSet LASER_BS {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -16333,7 +16333,7 @@ AnimationSet SHOOT_FIREFALL {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -17283,7 +17283,7 @@ AnimationSet SHOOT_3 {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -18279,7 +18279,7 @@ AnimationSet SHOOT_2 {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -19715,7 +19715,7 @@ AnimationSet SHOOT_1 {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -20665,7 +20665,7 @@ AnimationSet RUN_B {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -21241,7 +21241,7 @@ AnimationSet RUN_F {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -21817,7 +21817,7 @@ AnimationSet RUN_R {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -22393,7 +22393,7 @@ AnimationSet RUN_L {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -22969,7 +22969,7 @@ AnimationSet IDLE {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;
@@ -23742,7 +23742,7 @@ AnimationSet APPEAR {
 
  Animation {
   
-  { Dummy001 }
+  { Bip001 }
 
   AnimationKey S {
    1;

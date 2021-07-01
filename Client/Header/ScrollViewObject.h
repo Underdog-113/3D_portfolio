@@ -1,9 +1,11 @@
+
 #ifndef SCROLLVIEW_H
 #define SCROLLVIEW_H
 
 #include "Object.h"
 #include "ImageObject.h"
 #include "Button.h"
+#include "TextObject.h"
 class CScrollViewObject final : public Engine::CObject
 {
 	struct ImageInfo
@@ -11,6 +13,13 @@ class CScrollViewObject final : public Engine::CObject
 		SP(Engine::CImageObject) m_image;
 		_float2 m_offset;
 	};
+
+	struct TextInfo
+	{
+		SP(Engine::CTextObject) m_text;
+		_float2 m_offset;
+	};
+
 
 	SMART_DELETER_REGISTER
 private:
@@ -38,14 +47,18 @@ public:
 	void OnEnable(void) override;
 	void OnDisable(void) override;
 
+	void AllDelete();
+
 	void AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet);
 	CScrollViewObject* AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset);
+	CScrollViewObject* AddTextObjectData(_int number, _float2 offset, _int fontSize, D3DXCOLOR color, std::wstring message);
+
 
 	template<typename Function, typename Object>
 	CScrollViewObject* AddButtonObjectData(Function function, Object object, _float2 size, std::wstring name, std::wstring texture1, std::wstring texture2)
 	{
 		SP(CButton) button =
-			std::dynamic_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
+			std::static_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
 		button->GetTransform()->SetSize(_float3(size.x, size.y, 0.0f));
 		button->SetButtonType(CButton::UP);
 		button->GetTexture()->AddTexture(texture1, 0);
@@ -65,6 +78,8 @@ public:
 private:
 	void SetBasicName(void) override;
 	void ImageObjectSort();
+
+	void Scroll();
 private:
 	static _uint m_s_uniqueID;
 
@@ -78,5 +93,6 @@ private:
 
 	GETTOR_SETTOR(std::vector<SP(CButton)>, m_vButtonObject, {}, ButtonObject) // 그려야될 버튼오브젝트의 그룹 (이놈은 무조건 한개임
 	GETTOR_SETTOR(std::vector<std::vector<ImageInfo>>, m_vImageObject, {}, ImageObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
+	GETTOR_SETTOR(std::vector<TextInfo>, m_vTextObject, {}, TextObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
 };
 #endif

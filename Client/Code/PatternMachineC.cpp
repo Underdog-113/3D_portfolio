@@ -2,6 +2,7 @@
 #include "PatternMachineC.h"
 
 #include "ClientPatterns.h"
+#include "Monster.h"
 
 CPatternMachineC::CPatternMachineC()
 {
@@ -50,14 +51,16 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
-	//if (Engine::IMKEY_DOWN(KEY_Q))
-	//{
-	//	m_onHitFrontL = true;
-	//}
-	//else if (Engine::IMKEY_DOWN(KEY_E))
-	//{
-	//	m_onHitFront = true;
-	//}
+	if (Engine::IMKEY_DOWN(KEY_Q))
+	{
+		m_onDie = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+		//m_onHitH = true;
+	}
+	else if (Engine::IMKEY_DOWN(KEY_E))
+	{
+		m_onHitL= true;
+	}
 
 	// born 실행 (1번만)
 	PlayBornPattern();
@@ -167,6 +170,9 @@ void CPatternMachineC::PlayDiePattern()
 
 void CPatternMachineC::PlayHitPattern()
 {
+	if (true == m_onDie)
+		return;
+
 	if (true == m_onHitL ||
 		true == m_onHitH ||
 		true == m_onHitFrontL ||

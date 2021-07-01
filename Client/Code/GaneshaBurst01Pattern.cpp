@@ -95,6 +95,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst01);
+
 		}
 	}
 
@@ -134,12 +135,12 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
-	/************************* AttackBall */
-	// burst 상태가 완료되면 attackball off
+	/************************* AttackBox */
+	// burst 상태가 완료되면 attackbox off
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_onBurst = false;
-		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
+		//static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBox();
 	}
 	// burst 상태라면
 	if (Name_Ganesha_Burst01 == fsm->GetCurStateString() &&
@@ -151,12 +152,13 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
 		_float3 size = { 2.f, 2.f, 10.f };
-		_float3 offset = { 0.f, 0.f, 0.f }; 
+		_float3 offset = ZERO_VECTOR; 
 
 		_float3 mPos = pOwner->GetTransform()->GetPosition();
 		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 		_float3 beamDir = pPos - mPos;
 		beamDir.y = 0.f;
+
 		D3DXVec3Normalize(&beamDir, &beamDir);
 /*
 		_mat rotMat;
@@ -164,10 +166,10 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			pGanesha->GetTransform()->GetRotation().y,
 			pGanesha->GetTransform()->GetRotation().x,
 			pGanesha->GetTransform()->GetRotation().z);*/
-		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos);
+		pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos + beamDir * 5);
 		pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
 
-		offset.z = 5;
+		//offset.z = 5;
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}
