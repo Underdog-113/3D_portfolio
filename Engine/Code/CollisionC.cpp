@@ -84,6 +84,9 @@ void CCollisionC::OnEnable(void)
 {
 	__super::OnEnable();
 
+	for (auto& collider : m_vColliders)
+		collider->SetIsEnabled(true);
+
 	m_vCurCollisions.clear();
 	m_vPreCollisions.clear();
 	m_vPreTriggers.clear();
@@ -93,6 +96,9 @@ void CCollisionC::OnEnable(void)
 void CCollisionC::OnDisable(void)
 {
 	__super::OnDisable();
+
+	for (auto& collider : m_vColliders)
+		collider->SetIsEnabled(false);
 }
 
 void CCollisionC::AddCollider(SP(CCollider) spCollider, _bool isTrigger)
