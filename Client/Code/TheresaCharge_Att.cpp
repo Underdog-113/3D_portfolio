@@ -55,7 +55,7 @@ void CTheresaCharge_Att::Start()
 	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke403");
 	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke403");
 	m_spTheresaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z + 0.5f));
+	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x , -0.6f, this->GetTransform()->GetPosition().z));
 	m_fUVSpeed = 0.f;
 	m_fAlpha = 1.f;
 
@@ -78,6 +78,8 @@ void CTheresaCharge_Att::Update()
 		this->SetDeleteThis(true);
 	}
 
+	m_spTransform->AddSizeX(0.01f * GET_DT);
+	m_spTransform->AddSizeY(0.01f * GET_DT);
 	m_fAlpha -= 0.5f * GET_DT;
 	m_fUVSpeed += GET_DT;
 }

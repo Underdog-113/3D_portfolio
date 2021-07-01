@@ -512,7 +512,8 @@ SP(Engine::CObject) CKiana::CreateEffect(std::wstring name)
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"K_Trail");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"explosionpoint1");
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ability_aura");
 	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader); 
 
 	spMeshEffect->GetTransform()->SetPosition(GetTransform()->GetPosition());

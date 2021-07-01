@@ -389,6 +389,7 @@ BEGIN_MESSAGE_MAP(CInspector, CFormView)
 	ON_LBN_SELCHANGE(IDC_LIST1, &CInspector::OnLbnSelchangeEffectList)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN15, &CInspector::OnDeltaposSpinTilingX)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN16, &CInspector::OnDeltaposSpinTilingY)
+	ON_BN_CLICKED(IDC_MFCBUTTON11, &CInspector::OnBnClickedServeTex)
 END_MESSAGE_MAP()
 
 
@@ -501,7 +502,7 @@ void CInspector::OnBnClickedSoftEffect()
 
 void CInspector::OnBnClickedTexture()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ���� ǥ��
+	CString str = _T("png Files(*.png) |*.png|");
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -521,10 +522,32 @@ void CInspector::OnBnClickedTexture()
 	}
 }
 
+void CInspector::OnBnClickedServeTex()
+{
+	CString str = _T("png Files(*.png) |*.png|"); 
+	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
+
+	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
+
+	dlg.m_ofn.lpstrInitialDir = lpwstr;
+
+	if (dlg.DoModal() == IDOK)
+	{
+
+		CString strFilePath = dlg.GetPathName();
+
+		strFilePath = strFilePath.Right(strFilePath.GetLength() - strFilePath.ReverseFind('\\') - 1);
+
+		Add_ServeTex(strFilePath);
+
+		InvalidateRect(false);
+	}
+}
+
 
 void CInspector::OnBnClickedAlphaMask()
 {
-	CString str = _T("png Files(*.png) |*.png|"); // png ���� ǥ��
+	CString str = _T("png Files(*.png) |*.png|");
 	LPWSTR lpwstr = _SOLUTIONDIR L"Resource\\Texture\\EffectToolScene\\Effect\\";
 #
 	CFileDialog dlg(TRUE, _T("*.png"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, str, this);
@@ -565,7 +588,8 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 	}
 
 }
@@ -594,7 +618,7 @@ void CInspector::Add_Texture(CString TextureKey)
 	}
 }
 
-void CInspector::Add_AlphaMask(CString TextureKey)
+void CInspector::Add_ServeTex(CString TextureKey)
 {
 	if (m_iSelectObjectNum > -1)
 	{
@@ -605,6 +629,21 @@ void CInspector::Add_AlphaMask(CString TextureKey)
 			SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
 
 			spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 1);
+		}
+	}
+}
+
+void CInspector::Add_AlphaMask(CString TextureKey)
+{
+	if (m_iSelectObjectNum > -1)
+	{
+		SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
+
+		if (spObject != nullptr)
+		{
+			SP(Engine::CTextureC) spTexture = spObject->GetComponent<Engine::CTextureC>();
+
+			spTexture->ChangeTexture(Engine::RemoveExtension(TextureKey.operator LPCWSTR()), 0, 2);
 		}
 	}
 }
@@ -1696,3 +1735,5 @@ void CInspector::OnDeltaposSpinTilingY(NMHDR *pNMHDR, LRESULT *pResult)
 void CInspector::SaveData(std::wstring Objectkey, SP(Engine::CObject) spObject)
 {
 }
+
+

@@ -39,7 +39,8 @@ SP(Engine::CObject) CMoveUpSmoke::MakeClone()
 void CMoveUpSmoke::Awake()
 {
 	__super::Awake();
-	m_spTransform->SetRotationZ(D3DXToRadian(-90.f));
+	//m_spTransform->SetRotationZ(D3DXToRadian(90.f));
+	//m_spTransform->SetRotationY(D3DXToRadian(-45.f));
 }
 
 void CMoveUpSmoke::Start()
@@ -62,7 +63,8 @@ void CMoveUpSmoke::Update()
 	{
 		this->SetDeleteThis(true);
 	}
-
+	m_spTransform->AddSizeX(0.1f * GET_DT);
+	m_spTransform->AddSizeY(0.1f * GET_DT);
 	m_fAlpha -= 0.5f * GET_DT;
 	m_fUVSpeed += GET_DT;
 }
