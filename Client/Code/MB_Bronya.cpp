@@ -6,6 +6,10 @@
 #include "AttackBall.h"
 #include "AttackBox.h"
 
+#include "Bronya_Weapon.h"
+
+_uint CMB_Bronya::m_s_uniqueID = 0;
+
 CMB_Bronya::CMB_Bronya()
 {
 }
@@ -179,7 +183,7 @@ void CMB_Bronya::EquipWeapon()
 {
 	//고쳐야함
 	SP(Engine::CTransformC) pParentTransform;
-	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Bronya")->GetComponent<Engine::CTransformC>());
+	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CTransformC>());
 
 	SP(Engine::CTransformC) pWeaponTransform;
 	pWeaponTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Weapon")->GetComponent<Engine::CTransformC>());
@@ -187,7 +191,7 @@ void CMB_Bronya::EquipWeapon()
 	if (m_pParentBoneMat == nullptr)
 	{
 		Engine::CDynamicMeshData* pDM =
-			static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"Bronya")->GetComponent<Engine::CMeshC>()->GetMeshData());
+			static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CMeshC>()->GetMeshData());
 
 		if (nullptr == pDM)
 		{
@@ -214,7 +218,20 @@ void CMB_Bronya::EquipWeapon()
 
 	// 부모의 매트릭스 *= 본 매트릭스;
 	//고칠필요있음
-	//pWeaponTransform->SetParentMatrix(m_pParentBoneMat);
+	pWeaponTransform->SetParent(m_spTransform);
+
+//	SP(Engine::CTransformC) pParentTransform;
+//	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CTransformC>());
+//
+//	Engine::CDynamicMeshData* pDM =
+//		static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CMeshC>()->GetMeshData());
+//
+//	const Engine::D3DXFRAME_DERIVED* pFrm = pDM->GetFrameByName("Bip002_L_Forearm");
+//	m_pParentBoneMat = &pFrm->CombinedTransformMatrix;
+//	_mat wm = pParentTransform->GetWorldMatrix(); 
+//
+//	m_spWeapon = GetScene()->ADD_CLONE(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
+//	static_cast<CBronya_Weapon*>(m_spWeapon.get())->SetParentMatrix(&wm);
 }
 
 SP(CMB_Bronya) CMB_Bronya::Create(_bool isStatic, Engine::CScene * pScene)

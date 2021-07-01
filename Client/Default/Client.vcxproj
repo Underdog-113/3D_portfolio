@@ -196,6 +196,7 @@
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
     <ClInclude Include="..\Header\BronyaHitPattern.h" />
+    <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
@@ -415,6 +416,7 @@
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
     <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
+    <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
@@ -526,7 +528,7 @@
     <ClCompile Include="..\Code\RobotDiePattern.cpp" />
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
-    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />    
+    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />

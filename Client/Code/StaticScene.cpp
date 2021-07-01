@@ -37,6 +37,7 @@
 #include "MO_Lancer.h"
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
+#include "Bronya_Weapon.h"
 #include "Monster.h"
 
 #include "MeshEffect_Client.h"
@@ -296,6 +297,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CMonster) spMB_Bronya(CMB_Bronya::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMB_Bronya);
+
+	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
+	ADD_PROTOTYPE(spBronyaWeapon);
 }
 
 void CStaticScene::InitValkyriePrototypes(void)

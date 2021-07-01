@@ -54,6 +54,8 @@ private:
 	const _mat*  m_pParentWorldMat = nullptr;
 	_float3		 m_vDir;
 
+	SP(Engine::CObject) m_spWeapon;
+
 public:
 	static		SP(CMB_Bronya)			Create(_bool isStatic, Engine::CScene* pScene);
 	void ChaseTarget(_float3 targetPos);

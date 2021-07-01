@@ -96,7 +96,7 @@ public:
 	static const	EComponentID		m_s_componentID = EComponentID::Transform;
 
 protected:
-	GETTOR			(SP(CTransformC),	m_spParent,					nullptr,			Parent)
+	GETTOR_SETTOR	(SP(CTransformC),	m_spParent,					nullptr,			Parent)
 	
 	GETTOR			(const _mat*,		m_pParentMatrix,			nullptr,			ParentMatrix)
 	

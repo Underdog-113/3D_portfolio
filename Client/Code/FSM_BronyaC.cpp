@@ -142,6 +142,10 @@ void CFSM_BronyaC::FixRootMotionOffset(_uint index)
 	m_pOwner->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
 }
 
+void CFSM_BronyaC::IDLE_Init(void)
+{
+}
+
 void CFSM_BronyaC::IDLE_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_IDLE);
