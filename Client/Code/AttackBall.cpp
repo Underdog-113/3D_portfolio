@@ -70,6 +70,7 @@ void CAttackBall::Start(void)
 
 	auto col = Engine::CSphereCollider::Create(m_collisionID, 0.1f);
 	m_spCollision->AddCollider(col, true);
+	m_pCollider = (Engine::CSphereCollider*)col.get();
 
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	AddComponent<Engine::CDebugC>();
@@ -131,14 +132,14 @@ void CAttackBall::OnCollisionEnter(Engine::_CollisionInfo ci)
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 		CMonster* pMonster = static_cast<CMonster*>(pObject);
 
-		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ci.hitPoint);
 	}
 	else
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(pObject);
 		CMonster* pMonster = static_cast<CMonster*>(m_pOwner);
 
-		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo);
+		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo, ci.hitPoint);
 	}
 }
 
@@ -166,14 +167,26 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 		CMonster* pMonster = static_cast<CMonster*>(pObject);
 
-		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+		_float3 ballPos = m_spTransform->GetPosition();
+		_float3 monPos = pMonster->GetTransform()->GetPosition();
+		_float3 dir = monPos - ballPos;
+		D3DXVec3Normalize(&dir, &dir);
+		dir *= m_pCollider->GetRadius();
+
+		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ballPos + dir);
 	}
 	else
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(pObject);
 		CMonster* pMonster = static_cast<CMonster*>(m_pOwner);
 
-		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo);
+		_float3 ballPos = m_spTransform->GetPosition();
+		_float3 valkyriePos = pValkyrie->GetTransform()->GetPosition();
+		_float3 dir = valkyriePos - ballPos;
+		D3DXVec3Normalize(&dir, &dir);
+		dir *= m_pCollider->GetRadius();
+
+		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo, ballPos + dir);
 	}
 }
 

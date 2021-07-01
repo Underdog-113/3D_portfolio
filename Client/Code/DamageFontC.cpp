@@ -40,7 +40,7 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 {
 	m_offSet.y += (m_upSpeed * GET_DT);
 
-	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition());
+	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition() + m_hitPointOffset);
 	pos2d.z = 0.f;
 	
 
@@ -82,7 +82,7 @@ void CDamageFontC::OnDisable()
 	__super::OnDisable();
 }
 
-void CDamageFontC::AddDamageFontInit(Engine::CObject* target, _float offSetX, _float upSpped, _float lifeTime, _int damage, std::wstring color)
+void CDamageFontC::AddDamageFontInit(Engine::CObject* target, _float3 hitPoint, _float offSetX, _float upSpped, _float lifeTime, _int damage, std::wstring color)
 {
 	GetOwner()->SetIsEnabled(true);
 	m_upSpeed = upSpped;
@@ -91,5 +91,6 @@ void CDamageFontC::AddDamageFontInit(Engine::CObject* target, _float offSetX, _f
 	m_damage = damage;
 	m_target = target;
 	m_offSet.x = offSetX;
+	m_hitPointOffset = hitPoint - target->GetTransform()->GetPosition();
 	GetOwner()->GetComponent<Engine::CTextureC>()->ChangeTexture(color + std::to_wstring(damage), 0);
 }

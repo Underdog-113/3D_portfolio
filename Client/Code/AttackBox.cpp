@@ -193,14 +193,14 @@ void CAttackBox::OnCollisionEnter(Engine::_CollisionInfo ci)
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 		CMonster* pMonster = static_cast<CMonster*>(pObject);
 
-		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ZERO_VECTOR);
 	}
 	else
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(pObject);
 		CMonster* pMonster = static_cast<CMonster*>(m_pOwner);
 
-		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo);
+		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo, ZERO_VECTOR);
 	}
 }
 
@@ -229,14 +229,14 @@ void CAttackBox::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 		CMonster* pMonster = static_cast<CMonster*>(pObject);
 
-		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ZERO_VECTOR);
 	}
 	else
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(pObject);
 		CMonster* pMonster = static_cast<CMonster*>(m_pOwner);
 
-		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo);
+		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo, ZERO_VECTOR);
 	}
 }
 
