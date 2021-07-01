@@ -379,6 +379,7 @@
     <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\ValkyrieWeapon.h" />
+    <ClInclude Include="..\Header\ValkyrieWeaponSwap.h" />
     <ClInclude Include="..\Header\WaponItem.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
@@ -566,6 +567,7 @@
     <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp" />
     <ClCompile Include="..\Code\WaponItem.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />

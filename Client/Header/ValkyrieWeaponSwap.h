@@ -1,11 +1,11 @@
 #pragma once
 #include "ValkyrieFSM.h"
-class CValkyrieWeapon :
+class CValkyrieWeaponSwap :
 	public CValkyrieFSM
 {
 public:
-	CValkyrieWeapon();
-	virtual ~CValkyrieWeapon();
+	CValkyrieWeaponSwap();
+	virtual ~CValkyrieWeaponSwap();
 
 	// CValkyrieFSM을(를) 통해 상속됨
 	virtual void Start() override;
@@ -16,10 +16,6 @@ public:
 	virtual void OnDestroy(void) override;
 
 private:
-	void WeaponCanvas();
-
-	void ChangeSelect();
-	void DataInput(std::wstring objectName, std::wstring  dataValue);
 
 private:
 	Engine::CScene* m_scene;

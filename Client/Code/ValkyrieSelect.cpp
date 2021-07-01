@@ -23,13 +23,14 @@ CValkyrieSelect::~CValkyrieSelect()
 
 void CValkyrieSelect::Start()
 {
+
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"WeaponCanvas")->SetIsEnabled(false);
 	if (m_init)
 	{
 		MainCanvas();
 		ValkyrieStatus();
-
-		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
-		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
 
 		if (CButtonFunction::squadValue >= CDataManager::GetInstance()->FindSquadData()->GetValkyriesList().size())
 		{
@@ -42,6 +43,12 @@ void CValkyrieSelect::Start()
 	}
 	else
 	{
+		Delegate<> delegate;
+		delegate += std::bind(&CButtonFunction::ReadyToSortieScene, &CButtonFunction());
+
+		std::static_pointer_cast<CButton>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas_Button_1"))->
+			AddFuncData(delegate);
+
 		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
 		CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(true);
 
@@ -63,6 +70,8 @@ void CValkyrieSelect::Start()
 void CValkyrieSelect::End()
 {
 	_int end = 10;
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(false);
+
 }
 
 _uint CValkyrieSelect::FixedUpdate()
@@ -142,7 +151,7 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 	scene->FindObjectByName(L"ValkyrieCanvas_Image_3")->GetComponent<Engine::CTextureC>()->ChangeTexture(data->GetRank());
 	scene->FindObjectByName(L"ValkyrieCanvas_Image_4")->GetComponent<Engine::CTextureC>()->ChangeTexture(data->GetProperty());
 	scene->FindObjectByName(L"ValkyrieCanvas_Text_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(data->GetLevel()));
-	//m_scene->FindObjectByName(L"ValkyrieCanvas_Text_5")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetWeaponData()->GetName());
+	scene->FindObjectByName(L"ValkyrieCanvas_Text_5")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetWeaponData()->GetName());
 	scene->FindObjectByName(L"ValkyrieCanvas_Text_2")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetSubName());
 	scene->FindObjectByName(L"ValkyrieCanvas_Text_3")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetName());
 
