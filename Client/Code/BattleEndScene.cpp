@@ -12,6 +12,7 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+#include "BattleEndManager.h"
 CBattleEndScene::CBattleEndScene()
 {
 }
@@ -57,8 +58,7 @@ void CBattleEndScene::Start(void)
 	Load->TextLoad(this);
 	delete(Load);
 
-	// (미완성)스크롤 뷰 예제
-
+	m_init = false;
 }
 
 void CBattleEndScene::FixedUpdate(void)
@@ -70,6 +70,14 @@ void CBattleEndScene::Update(void)
 {
 	__super::Update();
 
+	if (!m_init)
+	{
+		CBattleEndManager::GetInstance()->Start(this);
+		m_init = true;
+	}
+
+
+	CBattleEndManager::GetInstance()->Update();
 }
 
 void CBattleEndScene::LateUpdate(void)
@@ -81,6 +89,7 @@ void CBattleEndScene::LateUpdate(void)
 void CBattleEndScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	CBattleEndManager::GetInstance()->DestroyInstance();
 }
 
 void CBattleEndScene::OnEnable(void)

@@ -189,6 +189,7 @@
     <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
     <ClInclude Include="..\Header\AttackRangeShader.h" />
+    <ClInclude Include="..\Header\BattleEndManager.h" />
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
@@ -403,6 +404,7 @@
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
     <ClCompile Include="..\Code\AttackRangeShader.cpp" />
+    <ClCompile Include="..\Code\BattleEndManager.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
@@ -516,7 +518,7 @@
     <ClCompile Include="..\Code\RobotDiePattern.cpp" />
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
-    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />    
+    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />

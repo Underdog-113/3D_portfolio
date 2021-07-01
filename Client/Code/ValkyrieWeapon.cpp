@@ -65,6 +65,19 @@ void CValkyrieWeapon::WeaponCanvas()
 
 	m_scene->FindObjectByName(L"WeaponCanvas_Image_4")->GetComponent<Engine::CTextureC>()->ChangeTexture(data->GetProperty());
 
+	for (int i = 0; i < 4; i++)
+	{
+		std::wstring textureKey = L"";
+		if (i < data->GetWeaponData()->GetRank())
+			textureKey = L"StarBig";
+		else
+			textureKey = L"StarBigGray";
+
+		m_scene->FindObjectByName(L"WeaponCanvas_Image_" + std::to_wstring(5 + i))->GetComponent<Engine::CTextureC>()->ChangeTexture(textureKey);
+
+	}
+
+	
 }
 
 void CValkyrieWeapon::ChangeSelect()

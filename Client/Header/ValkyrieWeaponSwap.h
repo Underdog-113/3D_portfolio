@@ -15,10 +15,12 @@ public:
 	virtual _uint LateUpdate() override;
 	virtual void OnDestroy(void) override;
 
+	void WeaponChange();
 private:
-
+	void SelectWeapon();
 private:
 	Engine::CScene* m_scene;
 
+	static std::wstring g_selectWeaponName;
 };
 

@@ -682,6 +682,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke">
       <UniqueIdentifier>{8aee29ef-6c6b-423d-82d6-d0f9923cc643}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09.Manager\08.BattleEndManager">
+      <UniqueIdentifier>{3b35bbce-0f5a-4d95-bc2f-1a51781a0f1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1324,6 +1327,9 @@
     <ClInclude Include="..\Header\MoveUpSmoke.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BattleEndManager.h">
+      <Filter>09.Manager\08.BattleEndManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1897,6 +1903,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MoveUpSmoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BattleEndManager.cpp">
+      <Filter>09.Manager\08.BattleEndManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

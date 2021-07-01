@@ -14,9 +14,9 @@ void CDataManager::Start()
 
 	CaptainInit();
 	
-	ItemInit(L"ValkyrieExpData1",50);
-	ItemInit(L"ValkyrieExpData2",30);
-	ItemInit(L"ValkyrieExpData3",10);
+	ItemInit(L"하급 학습 칩",50);
+	ItemInit(L"특급 학습 칩",30);
+	ItemInit(L"고급 학습 칩",10);
 
 	WeaponInit(L"Weapon_Pistol_1");
 	WeaponInit(L"Weapon_Pistol_2");

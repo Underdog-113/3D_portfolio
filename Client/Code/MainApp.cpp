@@ -201,8 +201,17 @@ void CMainApp::OnDestroy(void)
 
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
-	CBattleUiManager::GetInstance()->DestroyInstance();
 	CDataManager::GetInstance()->DestroyInstance();
+
+	CReadyToSortieManager::GetInstance()->DestroyInstance();
+	CBattleEndManager::GetInstance()->DestroyInstance();
+	CBattleUiManager::GetInstance()->DestroyInstance();
+	CMainRoomManager::GetInstance()->DestroyInstance();
+	CStageSelectionManager::GetInstance()->DestroyInstance();
+	CValkyriegManager::GetInstance()->DestroyInstance();
+	CInventoryManager::GetInstance()->DestroyInstance();
+	CBattleEndManager::GetInstance()->DestroyInstance();
+
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();
 }

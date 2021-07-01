@@ -15,8 +15,8 @@ public:
 	virtual _uint LateUpdate() override;
 	virtual void OnDestroy(void) override;
 
-private:
 	void InformationWindow();
+private:
 
 private:
 	_bool m_init;

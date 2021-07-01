@@ -27,6 +27,7 @@ void CValkyrieSelect::Start()
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"WeaponCanvas")->SetIsEnabled(false);
+	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"WeaponSwapCanvas")->SetIsEnabled(false);
 	if (m_init)
 	{
 		MainCanvas();
