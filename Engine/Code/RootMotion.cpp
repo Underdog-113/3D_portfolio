@@ -37,17 +37,17 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		{
 //			pDM->UpdateFrame();
 
-// 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 		
-// 
+// 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
+//
 // 			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
 // 			moveAmount.y = 0.f;
 // 			_float3 moveForward = pOwner->GetTransform()->GetForward();
 // 			moveForward.y = 0.f;
 // 			D3DXVec3Normalize(&moveForward, &moveForward);
-// 
+//
 // 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
 // 			pOwner->GetTransform()->AddPosition(forwardMove);
-// 
+//
 // 			if(m_isVerticalAnim)
 // 				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
@@ -62,25 +62,25 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		{
 			//pDM->UpdateFrame();
 
-// 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
-// 
+// 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
+//
 // 			float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
 // 			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
 // 			moveAmount.y = 0.f;
 // 			_float3 moveForward = pOwner->GetTransform()->GetForward();
 // 			moveForward.y = 0.f;
 // 			D3DXVec3Normalize(&moveForward, &moveForward);
-// 
+//
 // 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
 // 			forwardMove *= moveDir;
 // 			pOwner->GetTransform()->AddPosition(forwardMove);
-// 
+//
 // 			if (m_isVerticalAnim)
 // 				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
-// 
+//
 // 			if (m_isVerticalAnim)
 // 				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
-// 
+//
 // 			m_prevRootMotionPos = rootMotionPos;
 		}
 
@@ -91,11 +91,11 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 
 		pDM->UpdateFrame();
 
-		_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
+		_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
 
 		float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
 		_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
-		
+
 		moveAmount.y = 0.f;
 		_float3 moveForward = pOwner->GetTransform()->GetForward();
 		moveForward.y = 0.f;
@@ -111,14 +111,16 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 			if (D3DXVec3Length(&forwardMove) > D3DXVec3Length(&m_prevMoveAmount) * 1.2f &&
 				D3DXVec3Length(&forwardMove) > D3DXVec3Length(&startToCur) * 0.75f)
 			{
-				pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
+				if(!m_isTargetCollide)
+					pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
 				return;
 			}
 		}
 
 		forwardMove *= moveDir;
 		m_prevMoveAmount = forwardMove;
-		pOwner->GetTransform()->AddPosition(forwardMove);
+		if (!m_isTargetCollide)
+			pOwner->GetTransform()->AddPosition(forwardMove);
 		if (m_isVerticalAnim)
 			pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
 
@@ -149,7 +151,7 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 
 	//pAniCtrl->PlayFake();
 	//pDM->UpdateFrame();
-	//_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM); 
+	//_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
 	//float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
 	//_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
 	//moveAmount.y = 0.f;
@@ -202,13 +204,13 @@ _float3 CRootMotion::GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pD
 		pBip001Frame = pBip001Frame->pFrameFirstChild;
 	}
 	_mat rootChildCombMat = pBip001Frame->TransformationMatrix * rootCombMat;
-	
+
 //	return _float3(
 //		rootChildCombMat._41,
 //		rootChildCombMat._42,
 //		rootChildCombMat._43);
 
-	return GetOwnerSizedPos(pOwner, 
+	return GetOwnerSizedPos(pOwner,
 		_float3(rootChildCombMat._41,
 		rootChildCombMat._42,
 		rootChildCombMat._43));

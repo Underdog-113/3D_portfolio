@@ -211,11 +211,17 @@ void CMeshC::GenMinMaxVtx(void)
 void CMeshC::OnRootMotion(void)
 {
 	m_pRootMotion->SetIsRootMotion(true);
+
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+	pDM->SetRootMotionOff(false);
 }
 
 void CMeshC::OffRootMotion(void)
 {
 	m_pRootMotion->SetIsRootMotion(false);
+
+	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+	pDM->SetRootMotionOff(true);
 }
 
 void CMeshC::ApplyRootMotion(CDynamicMeshData* pDM)

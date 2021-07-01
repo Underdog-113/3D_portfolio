@@ -7,6 +7,7 @@
 
 #include "Valkyrie.h"
 #include "Monster.h"
+#include "PatternMachineC.h"
 
 #include "UILinker.h"
 #include "StatusDealer.h"
@@ -147,9 +148,9 @@ void CStageControlTower::FindTarget()
 	
 }
 
-void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info)
+void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info, _float3 hitPoint)
 {
-	if (!pMonster)
+	if (!pMonster || pMonster->GetComponent<CPatternMachineC>()->GetOnDie())
 		return;
 
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
@@ -161,7 +162,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	m_pLinker->MonsterHpDown(damage);
 
 	CDamageObjectPool::GetInstance()->AddDamage(
-		pMonster,
+		pMonster, hitPoint,
 		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
 
 	// 2. 슬라이더 조정
@@ -193,7 +194,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 }
 
-void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info)
+void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
 {
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
@@ -202,7 +203,7 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	_float damage = 0.f;
 	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
 	CDamageObjectPool::GetInstance()->AddDamage(
-		pValkyrie,
+		pValkyrie, hitPoint,
 		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Purple");
 
 	// 2. 슬라이더 조정

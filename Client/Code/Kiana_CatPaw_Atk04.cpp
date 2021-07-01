@@ -71,9 +71,10 @@ void CKiana_CatPaw_Atk04::Start(void)
 
 	m_layerID = (_int)ELayerID::Attack;
 	m_collisionID = (_int)ECollisionID::PlayerAttack;
-	m_spCollider = Engine::CSphereCollider::Create(m_collisionID, 1.f);
-	m_spCollider->SetIsTrigger(true);
-	m_spCollision->AddCollider(m_spCollider);
+	auto col = Engine::CSphereCollider::Create(m_collisionID, 1.f);
+	col->SetIsTrigger(true);
+	m_spCollision->AddCollider(col);
+	m_pCollider = (Engine::CSphereCollider*)col.get();
 
 	AddComponent<Engine::CDebugC>();
 
@@ -112,7 +113,7 @@ void CKiana_CatPaw_Atk04::Update(void)
 
 	combMat = combMat * rotMat;
 	_float3 pos = _float3(combMat._41, combMat._42, combMat._43);
-	m_spCollider->SetOffset(pos);
+	m_pCollider->SetOffset(pos);
 }
 
 void CKiana_CatPaw_Atk04::LateUpdate(void)
@@ -166,7 +167,7 @@ void CKiana_CatPaw_Atk04::OnCollisionEnter(Engine::_CollisionInfo ci)
 	CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 	CMonster* pMonster = static_cast<CMonster*>(pObject);
 
-	CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+	CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ci.hitPoint);
 }
 
 void CKiana_CatPaw_Atk04::OnCollisionStay(Engine::_CollisionInfo ci)
@@ -190,7 +191,13 @@ void CKiana_CatPaw_Atk04::OnTriggerEnter(Engine::CCollisionC const * pCollisionC
 	CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pOwner);
 	CMonster* pMonster = static_cast<CMonster*>(pObject);
 
-	CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo);
+	_float3 ballPos = m_spTransform->GetPosition();
+	_float3 monPos = pMonster->GetTransform()->GetPosition();
+	_float3 dir = monPos - ballPos;
+	D3DXVec3Normalize(&dir, &dir);
+	dir *= m_pCollider->GetRadius();
+
+	CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ballPos + dir);
 }
 
 void CKiana_CatPaw_Atk04::OnTriggerStay(Engine::CCollisionC const * pCollisionC)

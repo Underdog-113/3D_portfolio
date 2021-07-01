@@ -2,6 +2,7 @@
 #include "Valkyrie.h"
 
 #include "StageControlTower.h"
+#include "ActorController.h"
 #include "AttackBall.h"
 #include "AttackBox.h"
 
@@ -34,6 +35,26 @@ void CValkyrie::Start(void)
 {
 	__super::Start();
 	m_pCT = CStageControlTower::GetInstance();
+}
+
+void CValkyrie::OnCollisionEnter(Engine::_CollisionInfo ci)
+{
+	if (m_pCT->GetActorController()->m_rotateByTarget &&
+		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
+		m_spMesh->GetRootMotion()->SetIsTargetCollide(true);
+
+}
+
+void CValkyrie::OnCollisionStay(Engine::_CollisionInfo ci)
+{
+}
+
+void CValkyrie::OnCollisionExit(Engine::_CollisionInfo ci)
+{
+	if (!m_pCT->GetActorController()->m_rotateByTarget ||
+		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
+		m_spMesh->GetRootMotion()->SetIsTargetCollide(false);
+
 }
 
 void CValkyrie::CreateAttackBall(CAttackBall ** ppAttackBall)

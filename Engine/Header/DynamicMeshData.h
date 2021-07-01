@@ -40,6 +40,11 @@ public:
 															 _bool fixTillEnd = false,
 															 _double smoothTime = 0.2,
 															 _float changeWeight = 0.9f);
+				
+				void				RepeatAniSet			(_uint index, 
+															 _bool fixTillEnd = false,
+															 _double smoothTime = 0.,
+															 _float changeWeight = 0.9f);
 				void				PlayAnimation			(void);
 				void				ResetAnimation			(void);
 				double				GetAniTimeline			();
@@ -69,6 +74,9 @@ private:
 	GETTOR		(CAniCtrl*,				m_pAniCtrl,				nullptr,	AniCtrl)
 	
 	GETTOR_SETTOR(_bool,				m_playAnimation,		true,		PlayAnimation)
+
+		
+	GETTOR_SETTOR(_bool,				m_rootMotionOff,		true,		RootMotionOff)
 };
 END
 #endif

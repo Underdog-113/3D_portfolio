@@ -576,6 +576,11 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 		}
 	}
 
+	if (abs(tMax) < 0.01f)
+		tMax = 0;
+	if (abs(tMin) < 0.01f)
+		tMin = 0;
+
 	CCollisionC* pCC1 = pRC->GetOwner();
 	CCollisionC* pCC2 = pOC->GetOwner();
 

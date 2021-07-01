@@ -180,6 +180,9 @@ void CPatternMachineC::PlayDiePattern()
 
 void CPatternMachineC::PlayHitPattern()
 {
+	if (true == m_onDie)
+		return;
+
 	if (true == m_onHitL ||
 		true == m_onHitH ||
 		true == m_onHitFrontL ||

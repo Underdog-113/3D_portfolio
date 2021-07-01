@@ -78,8 +78,8 @@ private:
 	GETTOR_SETTOR	(HitInfo,					m_hitInfo,			HitInfo(),		
 		)
 	GETTOR_SETTOR	(_float3,					m_offset,			ZERO_VECTOR,	Offset)
-
-	SP(Engine::CCollider) m_spCollider;
+		
+	Engine::CSphereCollider* m_pCollider;
 	_float m_fDissolveAlpha = 1.f;
 };
 
