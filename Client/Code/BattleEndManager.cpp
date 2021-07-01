@@ -19,10 +19,6 @@ void CBattleEndManager::Start(Engine::CScene * pScene)
 
 
 	ItemSave T;
-	T.itemName = L"중급 학습 칩";
-	T.count = 40;
-	m_itemList.emplace_back(T);
-
 	T.itemName = L"특급 학습 칩";
 	T.count = 40;
 	m_itemList.emplace_back(T);
@@ -119,6 +115,8 @@ void CBattleEndManager::ItemUI()
 
 		count++;
 	}
+
+	
 	// 획득 아이템 리스트를 받으면 해당 아이템리스트의 텍스처를 스크롤뷰에띄운다 다만 스크롤뷰에 해당 아이템이 존재하면 그냥 갯수만 올린다.
 }
 

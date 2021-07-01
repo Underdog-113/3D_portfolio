@@ -285,8 +285,8 @@ void CDataManager::ItemInit(std::wstring itemName, _int count)
 		if (iter->GetName() == name)
 		{
 			iter->SetCount(iter->GetCount() + count);
+			return;
 		}
-		break;
 	}
 
 	dataStore->GetValue(true, dataID, objectKey, L"Rank", rank);
