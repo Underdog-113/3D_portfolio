@@ -68,11 +68,9 @@ void CMO_Scout::Start(void)
 	m_pStat->SetupStatus(&stat);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
-	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
 
 	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
-	m_pAttackBox->SetOffset(_float3(0, 1, 0));
 	m_pAttackBox->SetOwner(this);
 }
 

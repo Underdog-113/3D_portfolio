@@ -195,7 +195,7 @@ void COneStageScene::SetupMembers(void)
 	// Cam Target Set
 	Create_SceneCamera();
 
-	Create_Dummy(_float3(5.f, 0.f, 0.f));
+	//Create_Dummy(_float3(5.f, 0.f, 0.f));
 	//Create_Dummy(_float3(10.f, 0.f, 0.f));
 	//Create_Dummy(_float3(15.f, 0.f, 2.f));
 	//Create_Dummy(_float3(15.f, 0.f, -2.f));

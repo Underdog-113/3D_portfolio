@@ -67,7 +67,6 @@ void CMO_Spider::Start(void)
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true, (_int)ELayerID::Attack, L"Explosion")).get();
 	m_pAttackBall->GetTransform()->SetSize(6.f, 6.f, 6.f);
-	m_pAttackBall->SetOffset(_float3(0, 0, 0));
 	m_pAttackBall->SetOwner(this);
 }
 
