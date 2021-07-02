@@ -88,7 +88,7 @@ void CPhaseChanger::Update(void)
 			m_timerStart = false;
 	}
 	if (m_vMonster.size() == 0)
-		CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
+		CStageControlTower::GetInstance()->IncreasePhase();
 
 	if (CStageControlTower::GetInstance()->GetPhaseControl()->GetCurPhase() == m_phaseToDie)
 	{
@@ -143,7 +143,7 @@ void CPhaseChanger::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 	for (auto& restrictLine : m_vRestrictLine)
 		restrictLine->SetIsEnabled(true);
 
-	CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
+	CStageControlTower::GetInstance()->IncreasePhase();
 	m_spCollision->SetIsEnabled(false);
 	m_timerStart = true;
 }

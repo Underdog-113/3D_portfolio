@@ -12,6 +12,7 @@ public:
 	virtual			void						Update					(void) PURE;
 					void						IncreasePhase			(void);
 
+					void						ChangePhase				(_int phaseNum);
 protected:
 	GETTOR_SETTOR	(CStageControlTower*,		m_pCT,					nullptr,		ControlTower)
 	GETTOR_SETTOR	(_int,						m_curPhase,				UNDEFINED,		CurPhase)

@@ -14,9 +14,9 @@
 #include "ActorController.h"
 #include "PhaseControl.h"
 
+#include "OneStagePhaseControl.h"
+
 IMPLEMENT_SINGLETON(CStageControlTower)
-
-
 void CStageControlTower::Awake(void)
 {
 }
@@ -58,6 +58,11 @@ void CStageControlTower::Update(void)
 		SwitchValkyrie(Wait_1);
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
 		SwitchValkyrie(Wait_2);
+
+
+	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
+		m_pPhaseControl->SetCurPhase((_uint)COneStagePhaseControl::EOneStagePhase::StageResult);
+
 }
 
 void CStageControlTower::OnDestroy()
@@ -95,12 +100,32 @@ void CStageControlTower::ActorControl_SetInputLock(bool lock)
 	m_pActorController->SetInputLock_ByAni(lock);
 }
 
+void CStageControlTower::IncreasePhase()
+{
+	m_pPhaseControl->IncreasePhase();
+}
+
+void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
+{
+	m_pPhaseControl->ChangePhase((_int)phaseType);
+}
+
 void CStageControlTower::FindTarget()
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
 	if (monsterList.empty())
+		return;
+
+	int count = 0;
+	for (auto& iter : monsterList)
+	{
+		if (iter->GetIsEnabled())
+			++count;
+	}
+
+	if (count == 0)
 		return;
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
@@ -115,6 +140,9 @@ void CStageControlTower::FindTarget()
 	
 	for (auto& iter : monsterList)
 	{
+		if(!iter->GetIsEnabled())
+			continue;
+
 		_float3 monsterPos = iter->GetTransform()->GetPosition();
 		monsterPos.y = 0.f;
 

@@ -5,6 +5,7 @@
 
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
+#include "BattleUiManager.h"
 
 COneStagePhaseControl::COneStagePhaseControl()
 {
@@ -79,12 +80,39 @@ void COneStagePhaseControl::Update(void)
 	case (_int)EOneStagePhase::BossEnd:
 		++m_curPhase;
 		break;
-
 		//Result screen
 	case (_int)EOneStagePhase::StageResult:
+		++m_curPhase;
+		OpenStageResult();
 		break;
-
+		// Wait Change Scene
+	case (_int)EOneStagePhase::StageResult_Idle:
+		break;
 	default:
 		break;
 	}
+}
+
+
+void COneStagePhaseControl::OpenStageResult(void)
+{
+	uint64_t ssss = StageKey_AllOut;
+	uint64_t keyyy = StageKey_Move_Left;
+	uint64_t keyyyaa = KEY_A;
+	uint64_t keyyyaasdfbbba = 0;
+	int zerrrr = 0;
+	uint64_t keyyyabbba = zerrrr;
+
+	StageKeyAllOut(true)
+	
+	uint64_t keyyyyy = StageKey_Move_Left;
+
+	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
+	CBattleUiManager::GetInstance()->BattleEnd();
+	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
+}
+
+void COneStagePhaseControl::ChangePhase(EOneStagePhase phaseType)
+{
+	m_curPhase = (_int)phaseType;
 }
