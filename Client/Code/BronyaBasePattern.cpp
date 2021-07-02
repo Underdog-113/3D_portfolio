@@ -59,7 +59,7 @@ void CBronyaBasePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->IsAnimationEnd() &&
 		false == m_atkReady)
 	{
-		fsm->ChangeState(Name_Evade_Right);
+		fsm->ChangeState(Name_Evade_Left);
 	}
 } 
 
