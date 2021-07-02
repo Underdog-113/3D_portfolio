@@ -62,6 +62,10 @@
 #include "Theresa_Ult_Crack.h"
 #include "TheresaCharge_Att.h"
 #include "MoveUpSmoke.h"
+
+// Sakura
+#include "Sakura_Charge_Att.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -220,6 +224,11 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
+
+	// Sakura
+
+	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
 
 
 }

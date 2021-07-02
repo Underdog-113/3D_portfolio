@@ -16,7 +16,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack1_1()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_1", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_1", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
@@ -29,7 +29,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack1_2()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_1_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_1_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	//effect->GetTransform()->AddPosition(m_pTheresa->GetTransform()->GetForward() * 0.1f);
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
@@ -43,7 +43,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack2_1()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
@@ -56,7 +56,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack2_2()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_2_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_2_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
@@ -70,7 +70,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack3_1()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_3", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_3", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
@@ -83,7 +83,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack3_2()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_3_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_3_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
@@ -96,7 +96,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack4_1()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_4", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_4", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
@@ -109,7 +109,7 @@ void CEffectMaker_Theresa::CreateEffect_Attack4_2()
 {
 	_float size = 0.2f;
 
-	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_4_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name);
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Theresa_Att_4_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
 	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));

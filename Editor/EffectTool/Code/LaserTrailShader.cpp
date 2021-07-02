@@ -1,39 +1,39 @@
 #include "stdafx.h"
-#include "..\Header\MeshTrailShader.h"
-#include "Layer.h"
+#include "..\Header\LaserTrailShader.h"
 
 
-CMeshTrailShader::CMeshTrailShader()
+CLaserTrailShader::CLaserTrailShader()
 {
 }
 
 
-CMeshTrailShader::~CMeshTrailShader()
+CLaserTrailShader::~CLaserTrailShader()
 {
+	
 }
 
-
-Engine::CShader * CMeshTrailShader::Create()
+Engine::CShader * CLaserTrailShader::Create()
 {
-	CMeshTrailShader* pInstance = new CMeshTrailShader;
+	CLaserTrailShader* pInstance = new CLaserTrailShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CMeshTrailShader::Free()
+void CLaserTrailShader::Free()
 {
 	__super::Free();
+
 }
 
-void CMeshTrailShader::Awake()
+void CLaserTrailShader::Awake()
 {
 	__super::Awake();
+
 }
 
-void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CLaserTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
-
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetWorldMatrix();
@@ -63,5 +63,4 @@ void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 	m_pEffect->SetTexture("g_AlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][2]->pTexture);
-
 }

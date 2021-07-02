@@ -3,8 +3,9 @@
 
 
 #define AttackTrail_ObjectKey	L"Theresa_Trail"
-#define AttackTrail_Tex1Name	L"ground_seele_urtral"
+#define AttackTrail_Tex1Name	L"H_Trail"
 #define AttackTrail_Tex2Name	L"ground_seele_urtral"
+#define AttackTrail_Tex3Name	L"ground_seele_urtral"
 
 #define Ultra_Charge_ObjectKey	L"Theresa_Ult_Charge"
 #define Ultra_Charge_Tex1Name	L"Charge"
@@ -17,7 +18,7 @@
 #define Ultra_Smoke_ObjectKey	L"Theresa_Ult_Smoke"
 #define Ultra_Smoke_Tex1Name	L"fx_snowfield_fog03"
 #define Ultra_Smoke_Tex2Name	L"fx_snowfield_fog03"
-
+#
 #define Ultra_Boom_ObjectKey	L"Theresa_Ult_Boom"
 #define Ultra_Boom_Tex1Name		L"Ult_Boom"
 #define Ultra_Boom_Tex2Name		L"Ult_Boom"

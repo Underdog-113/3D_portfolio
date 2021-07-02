@@ -294,6 +294,7 @@
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Trail.h" />
+    <ClInclude Include="..\Header\LaserTrailShader.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -331,6 +332,7 @@
     <ClInclude Include="..\Header\RobotDiePattern.h" />
     <ClInclude Include="..\Header\RobotHitPattern.h" />
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
+    <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
@@ -494,6 +496,7 @@
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Trail.cpp" />
+    <ClCompile Include="..\Code\LaserTrailShader.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -531,6 +534,7 @@
     <ClCompile Include="..\Code\RobotDiePattern.cpp" />
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
+    <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
@@ -655,6 +659,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>

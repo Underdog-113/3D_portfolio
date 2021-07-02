@@ -517,9 +517,6 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane">
       <UniqueIdentifier>{fe921a0a-3732-47b7-a9fe-3df6f90ff48e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\10.AlphaMaskShader">
-      <UniqueIdentifier>{03f4fa48-4c81-4dd3-9da5-f83d0007bbbb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern">
       <UniqueIdentifier>{c39e1687-732f-468e-ae6e-1fe001a78f57}</UniqueIdentifier>
     </Filter>
@@ -705,6 +702,12 @@
     </Filter>
     <Filter Include="09.Manager\08.BattleEndManager">
       <UniqueIdentifier>{3b35bbce-0f5a-4d95-bc2f-1a51781a0f1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\11.LaserTrail">
+      <UniqueIdentifier>{5f8cb29c-397e-4ba9-bdc7-fad9bc7bf9a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att">
+      <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1372,6 +1375,12 @@
     <ClInclude Include="..\Header\BattleEndManager.h">
       <Filter>09.Manager\08.BattleEndManager</Filter>
     </ClInclude>
+      <ClInclude Include="..\Header\LaserTrailShader.h">
+        <Filter>04.Shader\11.LaserTrail</Filter>
+      </ClInclude>
+      <ClInclude Include="..\Header\Sakura_Charge_Att.h">
+        <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1967,6 +1976,12 @@
     <ClCompile Include="..\Code\BattleEndManager.cpp">
       <Filter>09.Manager\08.BattleEndManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\LaserTrailShader.cpp">
+      <Filter>04.Shader\11.LaserTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_Charge_Att.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2022,6 +2037,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <Filter>04.Shader\10.FireShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
+      <Filter>04.Shader\11.LaserTrail</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
