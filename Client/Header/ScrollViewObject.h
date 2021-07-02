@@ -13,7 +13,7 @@ class CScrollViewObject final : public Engine::CObject
 	struct ImageInfo
 	{
 		SP(Engine::CImageObject) m_image;
-		_float2 m_offset;
+		_float3 m_offset;
 	};
 
 	struct TextInfo
@@ -52,7 +52,7 @@ public:
 	void AllDelete();
 
 	void AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet);
-	CScrollViewObject* AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset);
+	CScrollViewObject* AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset, _float sort = 0);
 	CScrollViewObject* AddTextObjectData(_int number, _float2 offset, _int fontSize, D3DXCOLOR color, std::wstring message);
 
 
