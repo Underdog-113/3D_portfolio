@@ -72,8 +72,8 @@ void CWooScene::Start(void)
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
-	//GaneshaSetting();
-	ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
+	GaneshaSetting();
+	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
 	//LancerSetting();
 	//RobotSetting();
 }

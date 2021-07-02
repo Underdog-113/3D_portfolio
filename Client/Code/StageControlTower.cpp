@@ -14,9 +14,9 @@
 #include "ActorController.h"
 #include "PhaseControl.h"
 
+#include "OneStagePhaseControl.h"
+
 IMPLEMENT_SINGLETON(CStageControlTower)
-
-
 void CStageControlTower::Awake(void)
 {
 }
@@ -58,6 +58,11 @@ void CStageControlTower::Update(void)
 		SwitchValkyrie(Wait_1);
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
 		SwitchValkyrie(Wait_2);
+
+
+	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
+		m_pPhaseControl->SetCurPhase((_uint)COneStagePhaseControl::EOneStagePhase::StageResult);
+
 }
 
 void CStageControlTower::OnDestroy()
@@ -103,6 +108,16 @@ void CStageControlTower::FindTarget()
 	if (monsterList.empty())
 		return;
 
+	int count = 0;
+	for (auto& iter : monsterList)
+	{
+		if (iter->GetIsEnabled())
+			++count;
+	}
+
+	if (count == 0)
+		return;
+
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
 	SP(Engine::CObject) spTarget = m_spCurTarget;
 	_float minDistance = 5.f;
@@ -115,6 +130,9 @@ void CStageControlTower::FindTarget()
 	
 	for (auto& iter : monsterList)
 	{
+		if(!iter->GetIsEnabled())
+			continue;
+
 		_float3 monsterPos = iter->GetTransform()->GetPosition();
 		monsterPos.y = 0.f;
 

@@ -101,7 +101,8 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		D3DXVec3Normalize(&moveDir, &moveDir);
 
 		float angleSynchroRate = D3DXVec3Dot(&moveDir, &_float3(0.f,0.f,1.f));
-		if (angleSynchroRate > 0.5f)
+
+		if (angleSynchroRate > 0.5f || angleSynchroRate < -0.5f)
 		{
 			// forward
 			float moveFlag = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
@@ -242,6 +243,6 @@ _float3 CRootMotion::GetOwnerSizedPos(CObject * pOwner, _float3 pos)
 	_float3 size = pOwner->GetTransform()->GetSize();
 	return _float3(
 		pos.x * size.x,
-		pos.y * size.y,
+		pos.y,
 		pos.z * size.z);
 }

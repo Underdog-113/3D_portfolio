@@ -1376,10 +1376,16 @@ void CFSM_KianaC::Victory_Init(void)
 
 void CFSM_KianaC::Victory_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Victory);
 }
 
 void CFSM_KianaC::Victory_Update(float deltaTime)
 {
+	if (m_pDM->IsAnimationEnd())
+	{
+		ChangeState(Name_Victory_Idle);
+		return;
+	}
 }
 
 void CFSM_KianaC::Victory_End(void)
@@ -1388,10 +1394,12 @@ void CFSM_KianaC::Victory_End(void)
 
 void CFSM_KianaC::Victory_Idle_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_Victory_Idle);
 }
 
 void CFSM_KianaC::Victory_Idle_Enter(void)
 {
+	m_pDM->ChangeAniSet(Index_Victory_Idle);
 }
 
 void CFSM_KianaC::Victory_Idle_Update(float deltaTime)

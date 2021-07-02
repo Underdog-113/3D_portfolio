@@ -75,7 +75,7 @@ void CJongScene::Start(void)
 	//SetSceneCamera(m_spSakura);
 
 	//CollisionDummy();
-	SickleTest();
+	//SickleTest();
 	//SpiderTest();
 	//GaneshaTest();
 	//RobotTest();
