@@ -75,13 +75,13 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	SickleSetting();
+	//SickleSetting();
 	//GaneshaSetting();
 	//ScoutSetting(); // «œ¥√¿« ø’¿⁄¡ˆ..
 	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
-	//BronyaSetting();
+	BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -235,20 +235,20 @@ void CWooScene::SickleSetting(void)
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
 	m_vSickles.emplace_back(spSickleClone);
 
-	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(5, 0, 5);
-	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_vSickles.emplace_back(spSickleClone);
+	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(5, 0, 5);
+	//std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	//m_vSickles.emplace_back(spSickleClone);
 
-	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(2, 0, 2);
-	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_vSickles.emplace_back(spSickleClone);
+	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(2, 0, 2);
+	//std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	//m_vSickles.emplace_back(spSickleClone);
 
-	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(5, 0, 7);
-	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_vSickles.emplace_back(spSickleClone);
+	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(5, 0, 7);
+	//std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	//m_vSickles.emplace_back(spSickleClone);
 }
 
 void CWooScene::GaneshaSetting(void)

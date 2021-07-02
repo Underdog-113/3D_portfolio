@@ -45,9 +45,9 @@ void CMB_Ganesha::Awake(void)
 	m_spStateMachine = AddComponent<CFSM_GaneshaC>();
 	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 }
 
 void CMB_Ganesha::Start(void)
@@ -72,11 +72,9 @@ void CMB_Ganesha::Start(void)
 	m_pStat->SetupStatus(&stat);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
-	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
 
 	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
-	m_pAttackBox->SetOffset(_float3(0, 1, 0));
 	m_pAttackBox->SetOwner(this);
 }
 

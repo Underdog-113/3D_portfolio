@@ -102,7 +102,7 @@ void COneStageScene::Update(void)
 
 		m_bossSpawn = false;
 	}
-	else if (Engine::IMKEY_DOWN(KEY_TAB))
+	else if (Engine::IMKEY_DOWN(KEY_UP))
 	{
 		m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
 	}
@@ -175,7 +175,6 @@ void COneStageScene::SetupMembers(void)
 
 	// Cam Target Set
 	Create_SceneCamera();
-	
 }
 
 void COneStageScene::Create_ActorValkyrie(void)
