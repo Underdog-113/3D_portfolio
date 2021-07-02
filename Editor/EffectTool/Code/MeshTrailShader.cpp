@@ -52,7 +52,6 @@ void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	_mat iTWM;
 	D3DXMatrixInverse(&iTWM, 0, &worldMat);
 	D3DXMatrixTranspose(&iTWM, &iTWM);
-#
 	m_pEffect->SetMatrix("gInvWorldMatrix", &worldMat);
 
 	_float4 worldLightPos = _float4(500.f, 500.f, -500.f, 1.f);

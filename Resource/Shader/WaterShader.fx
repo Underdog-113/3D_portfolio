@@ -6,7 +6,7 @@ float4 g_WorldLightPos;
 float4 g_WorldCameraPos;
 
 float g_fTime;
-float g_UVSpeed = 0.01;
+float g_UVSpeed = 0.1;
 
 float g_WaveHeight = 0.5;
 float g_WaveFrequency = 30;
@@ -22,10 +22,10 @@ sampler Diffuse = sampler_state
 	MipFilter = NONE;
 };
 
-texture g_SpecularTex;
-sampler Specular = sampler_state
+texture g_NoiseTex;
+sampler NoiseTex = sampler_state
 {
-	Texture = <g_SpecularTex>;
+	Texture = <g_NoiseTex>;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = NONE;
@@ -71,7 +71,7 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
 
 	Out.mDiffuse = dot(-lightDir, worldNormal);
 	Out.mReflection = reflect(lightDir, worldNormal);
-	Out.mUV = Input.mUV + float2(g_fTime * g_UVSpeed, g_fTime * 0.005);
+	Out.mUV = Input.mUV/* + float2(g_fTime * g_UVSpeed, g_fTime * 0.005)*/;
 
 	return Out;
 }
@@ -88,23 +88,14 @@ struct PS_INPUT
 
 float4 PS_MAIN(PS_INPUT Input) : COLOR
 {
-	float4 albedo = tex2D(Diffuse, Input.mUV * 60);
-	//float3 diffuse = albedo.rgb * saturate(Input.mDiffuse);
+	float4 albedo = tex2D(Diffuse, (Input.mUV * 50) + float2(g_fTime * g_UVSpeed, 0.f));
+	float4 Noise = tex2D(NoiseTex, (Input.mUV * 50) * albedo.r - float2(g_fTime * g_UVSpeed, 0.f));
 
-	//float3 reflection = normalize(Input.mReflection);
-	//float3 viewDir = normalize(Input.mViewDir);
-	//float3 specular = 0;
+	float4 finalColor = albedo * Noise;
 
-	//if (diffuse.x > 0)
-	//{
-	//	specular = saturate(dot(reflection, -viewDir));
-	//	specular = pow(specular, 20.f);
+	finalColor = saturate(finalColor);
 
-	//	float4 specularIntensity = tex2D(Specular, Input.mUV);
-	//	specular *= specularIntensity.rgb * g_LightColor;
-	//}
-
-	return albedo * 3;
+	return finalColor;
 }
 
 

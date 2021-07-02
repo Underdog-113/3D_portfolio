@@ -144,6 +144,7 @@ void CInspector::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON50, m_bmpIndexY);
 	DDX_Control(pDX, IDC_BUTTON51, m_bmpTilingYTitle);
 	DDX_Control(pDX, IDC_CHECK10, m_btnTestButton);
+	DDX_Control(pDX, IDC_MFCBUTTON11, m_btnServeTex);
 }
 
 void CInspector::EditButtonStyle()
@@ -343,6 +344,10 @@ void CInspector::EditButtonStyle()
 	m_btnListDelete.EnableWindowsTheming(FALSE);
 	m_btnListDelete.SetFaceColor(RGB(50, 50, 50));
 	m_btnListDelete.SetTextColor(RGB(255, 255, 255));
+
+	m_btnServeTex.EnableWindowsTheming(FALSE);
+	m_btnServeTex.SetFaceColor(RGB(50, 50, 50));
+	m_btnServeTex.SetTextColor(RGB(255, 255, 255));
 }
 
 BEGIN_MESSAGE_MAP(CInspector, CFormView)
@@ -588,8 +593,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
 	}
 
 }

@@ -512,7 +512,8 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
 
 		if (L"Stage02_Alpha_WaterPlane" == meshKey)
-		{
+		{			
+			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"waterNor");
 			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
 		}

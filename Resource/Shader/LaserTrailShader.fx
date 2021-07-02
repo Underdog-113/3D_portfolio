@@ -92,28 +92,7 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 		
 	if (Input.mUV.x > gTrailAlpha)
 	{
-		float multiply1 = saturate((Alpha.r * sin(gTrailAlpha)) * 3.7f);
-		float multiply2 = saturate(Alpha.r * sin(gTrailAlpha));
-
-		float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 25));
-
-		float multiple = pow(multiply1 + multiply2, 25);
-
-		// Dissolve Line Size
-		float3 DissolveLineSize;
-
-		if (m_defaultDissolveVal >= CurrentDissolveVal)
-		{
-			DissolveLineSize = float3(100.f, 1.f, 1.f);
-		}
-		else
-		{
-			DissolveLineSize = float3(0, 0, 0);
-		}
-
-		float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
-
-		return float4(diffuse, multiple);
+		blendColor.a = 0;
 	}
 
 	return blendColor;

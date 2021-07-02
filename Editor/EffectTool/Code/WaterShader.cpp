@@ -58,7 +58,7 @@ void CWaterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
-	//m_pEffect->SetTexture("g_SpecularTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 
 	m_pEffect->SetVector("g_LightColor", &m_vColor);
 

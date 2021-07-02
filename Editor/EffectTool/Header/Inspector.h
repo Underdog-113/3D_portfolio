@@ -111,6 +111,7 @@ public:
 	CMFCButton m_btnSoftEffect;
 	CMFCButton m_btnMeshEffect;
 	CMFCButton m_btnListDelete;
+	CMFCButton m_btnServeTex;
 
 #pragma endregion
 	afx_msg void OnBnClickedDeleteEffectList();
