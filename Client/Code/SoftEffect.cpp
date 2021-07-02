@@ -68,7 +68,7 @@ void CSoftEffect::LateUpdate(void)
 
 	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
 
-	m_spGraphics->GetTransform()->SetWorldMatrix(matWorld * matBill);
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 
 	_float3 vPos = m_spGraphics->GetTransform()->GetPosition();
 	_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();

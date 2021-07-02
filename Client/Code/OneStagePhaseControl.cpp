@@ -96,16 +96,6 @@ void COneStagePhaseControl::Update(void)
 
 void COneStagePhaseControl::OpenStageResult(void)
 {
-	uint64_t ssss = StageKey_AllOut;
-	uint64_t keyyy = StageKey_Move_Left;
-	uint64_t keyyyaa = KEY_A;
-	uint64_t keyyyaasdfbbba = 0;
-	int zerrrr = 0;
-	uint64_t keyyyabbba = zerrrr;
-
-	StageKeyAllOut(true)
-	
-	uint64_t keyyyyy = StageKey_Move_Left;
 
 	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();

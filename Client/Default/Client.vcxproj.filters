@@ -1381,11 +1381,11 @@
     <ClInclude Include="..\Header\BattleEndManager.h">
       <Filter>09.Manager\08.BattleEndManager</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\LaserTrailShader.h">
-        <Filter>04.Shader\11.LaserTrail</Filter>
-      </ClInclude>
-      <ClInclude Include="..\Header\Sakura_Charge_Att.h">
-        <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    <ClInclude Include="..\Header\LaserTrailShader.h">
+      <Filter>04.Shader\11.LaserTrail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Charge_Att.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MonsterHitEffect.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
@@ -1393,6 +1393,7 @@
     <ClInclude Include="..\Header\SoftEffect.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CameraMan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2000,6 +2001,7 @@
     <ClCompile Include="..\Code\SoftEffect.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\CameraMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

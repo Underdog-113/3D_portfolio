@@ -176,6 +176,8 @@ void COneStageScene::SetupMembers(void)
 
 	// Cam Target Set
 	Create_SceneCamera();
+
+	Create_Dummy(_float3(43.3345f, -1.f, -0.075913f));
 }
 
 void COneStageScene::Create_ActorValkyrie(void)
