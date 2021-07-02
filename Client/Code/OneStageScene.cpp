@@ -259,7 +259,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
 	{
-		CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
+		CBattleUiManager::GetInstance()->HitCount(5);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
@@ -279,12 +279,12 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", 10, 11);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", 10);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))

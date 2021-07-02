@@ -24,7 +24,7 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
-	_int m_hitsCount;
+	GETTOR(_int, m_hitsCount, 0, HitsCount);
 	_int m_curHitsCount;
 	_float m_timer;
 	GETTOR(_int, m_maxHitsCount, 0, MaxHitsCount);
