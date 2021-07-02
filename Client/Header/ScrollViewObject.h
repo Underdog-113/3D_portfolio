@@ -8,10 +8,12 @@
 #include "TextObject.h"
 class CScrollViewObject final : public Engine::CObject
 {
+	enum EDir_Type { Up = 0, Down = 1, Left = 2, Right = 3 };
+
 	struct ImageInfo
 	{
 		SP(Engine::CImageObject) m_image;
-		_float2 m_offset;
+		_float3 m_offset;
 	};
 
 	struct TextInfo
@@ -50,7 +52,7 @@ public:
 	void AllDelete();
 
 	void AddScrollViewData(_int column, _float2 distanceXY, _float2 offSet);
-	CScrollViewObject* AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset);
+	CScrollViewObject* AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset, _float sort = 0);
 	CScrollViewObject* AddTextObjectData(_int number, _float2 offset, _int fontSize, D3DXCOLOR color, std::wstring message);
 
 
@@ -89,10 +91,15 @@ private:
 
 	GETTOR_SETTOR(_int, m_column, 1, Column) // 열의 갯수
 	GETTOR_SETTOR(_float2, m_offSet, _float2(0, 0), OffSet) // 이미지 시작 위치
-	GETTOR_SETTOR(_float2, m_distanceXY, _float2(1,1), DistanceXY) // 이미지 사이의 거리
+	GETTOR_SETTOR(_float2, m_distanceXY, _float2(1, 1), DistanceXY) // 이미지 사이의 거리
 
 	GETTOR_SETTOR(std::vector<SP(CButton)>, m_vButtonObject, {}, ButtonObject) // 그려야될 버튼오브젝트의 그룹 (이놈은 무조건 한개임
 	GETTOR_SETTOR(std::vector<std::vector<ImageInfo>>, m_vImageObject, {}, ImageObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
 	GETTOR_SETTOR(std::vector<TextInfo>, m_vTextObject, {}, TextObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
+
+	GETTOR_SETTOR(EDir_Type, m_dir, EDir_Type::Down, Dir);
+
+	_float3 dir;
+	_float offset;
 };
 #endif

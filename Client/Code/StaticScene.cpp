@@ -37,6 +37,7 @@
 #include "MO_Lancer.h"
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
+#include "Bronya_Weapon.h"
 #include "Monster.h"
 
 #include "MeshEffect_Client.h"
@@ -61,6 +62,10 @@
 #include "Theresa_Ult_Crack.h"
 #include "TheresaCharge_Att.h"
 #include "MoveUpSmoke.h"
+
+// Sakura
+#include "Sakura_Charge_Att.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -220,6 +225,11 @@ void CStaticScene::InitPrototypes(void)
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
 
+	// Sakura
+
+	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
+
 
 }
 
@@ -296,6 +306,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CMonster) spMB_Bronya(CMB_Bronya::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMB_Bronya);
+
+	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
+	ADD_PROTOTYPE(spBronyaWeapon);
 }
 
 void CStaticScene::InitValkyriePrototypes(void)

@@ -456,7 +456,11 @@ void CTransformC::UpdateWorldMatrix(void)
 	}
 	//ApplyParentMatrix(&m_spParent->GetWorldMatrixNoScale());
 	if (m_pParentMatrix)
-		ApplyParentMatrix(m_pParentMatrix);
+	{
+		m_worldMat *= *m_pParentMatrix;
+	}
+		
+		//ApplyParentMatrix(m_pParentMatrix);
 }
 
 void CTransformC::UpdateCamDistance(void)

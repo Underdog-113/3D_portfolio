@@ -17,11 +17,11 @@ public:
 	static SP(CRobotRunAttackPattern) Create();
 
 private:
-	_float m_cost = 18.f;
+	_float m_cost = 7.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
-	_float m_runDis = 7.f;
-	_float m_atkDis = 1.f; // 공격 거리
+	_float m_atkDis = 1.5f;
+	_float m_minDis = 2.f; // 최소 공격 거리
 	_float m_atkCool = 6.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
@@ -32,8 +32,14 @@ private:
 
 	_mat m_atkMat;
 
+	_bool m_onRun = false;
 	_bool m_atkEnd = false;
+	_bool m_aniSpeedDown = false;
+	_bool m_onAtkBall = false;
 	_float3 m_tPos;
+
+	_float m_accTime = 0.f; // 달리기 카운트 현재 시간
+	_float m_maxTime = 3.5f; // 달리기 카운트 맥스 시간
 };
 
 #endif

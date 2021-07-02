@@ -52,7 +52,6 @@ void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	_mat iTWM;
 	D3DXMatrixInverse(&iTWM, 0, &worldMat);
 	D3DXMatrixTranspose(&iTWM, &iTWM);
-
 	m_pEffect->SetMatrix("gInvWorldMatrix", &worldMat);
 
 	_float4 worldLightPos = _float4(500.f, 500.f, -500.f, 1.f);
@@ -62,6 +61,7 @@ void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
-	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_AlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][2]->pTexture);
 
 }

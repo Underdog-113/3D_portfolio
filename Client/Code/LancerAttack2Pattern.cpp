@@ -77,6 +77,7 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 			true == m_walkReady)
 		{
 			fsm->ChangeState(Name_WALK_FORWARD);
+			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
 	}
 	// 상대가 공격 범위 안이고
@@ -94,18 +95,17 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		else if (Name_ATTACK_2 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_WALK_BACKWARD);
-			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
 	}
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_ATTACK_2 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_ATTACK_2 == fsm->GetCurStateString() && 0.57f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	else if (Name_ATTACK_2 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_ATTACK_2 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
@@ -113,8 +113,8 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		D3DXVec3Normalize(&look, &look);
 
 		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
-		m_atkMat._41 += (m_atkDis * look.x / 1.6f);
-		m_atkMat._43 += (m_atkDis * look.z / 1.6f);
+		m_atkMat._41 += (m_atkDis * look.x / 1.2f);
+		m_atkMat._43 += (m_atkDis * look.z / 1.2f);
 
 		static_cast<CMO_Lancer*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.42f);
 	}
@@ -125,23 +125,4 @@ SP(CLancerAttack2Pattern) CLancerAttack2Pattern::Create()
 	SP(CLancerAttack2Pattern) spInstance(new CLancerAttack2Pattern, Engine::SmartDeleter<CLancerAttack2Pattern>);
 
 	return spInstance;
-}
-
-void CLancerAttack2Pattern::SetMoveSound()
-{
-	/************************* Choose Move Sound */
-	_int index = GetRandRange(0, 2);
-
-	switch (index)
-	{
-	case 0:
-		m_curMoveSound = L"Scout_Move_0.wav";
-		break;
-	case 1:
-		m_curMoveSound = L"Scout_Move_1.wav";
-		break;
-	case 2:
-		m_curMoveSound = L"Scout_Move_2.wav";
-		break;
-	}
 }

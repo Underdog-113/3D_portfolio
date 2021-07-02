@@ -189,9 +189,15 @@
     <ClInclude Include="..\Header\AttackBox.h" />
     <ClInclude Include="..\Header\AttackRange_Circle.h" />
     <ClInclude Include="..\Header\AttackRangeShader.h" />
+    <ClInclude Include="..\Header\BattleEndManager.h" />
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BronyaBasePattern.h" />
+    <ClInclude Include="..\Header\BronyaBornPattern.h" />
+    <ClInclude Include="..\Header\BronyaDiePattern.h" />
+    <ClInclude Include="..\Header\BronyaHitPattern.h" />
+    <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
@@ -211,6 +217,7 @@
     <ClInclude Include="..\Header\EffectMaker_Theresa.h" />
     <ClInclude Include="..\Header\FireShader.h" />
     <ClInclude Include="..\Header\FSMDefine_Axe.h" />
+    <ClInclude Include="..\Header\FSMDefine_Bronya.h" />
     <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
     <ClInclude Include="..\Header\FSMDefine_Lancer.h" />
     <ClInclude Include="..\Header\FSMDefine_Ninza.h" />
@@ -287,6 +294,7 @@
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
     <ClInclude Include="..\Header\Kiana_Ult_Trail.h" />
+    <ClInclude Include="..\Header\LaserTrailShader.h" />
     <ClInclude Include="..\Header\LifeObjectC.h" />
     <ClInclude Include="..\Header\Loading.h" />
     <ClInclude Include="..\Header\MainApp.h" />
@@ -310,6 +318,7 @@
     <ClInclude Include="..\Header\MO_Scout.h" />
     <ClInclude Include="..\Header\MO_Sickle.h" />
     <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\NinzaAttack2Pattern.h" />
     <ClInclude Include="..\Header\NinzaBasePattern.h" />
     <ClInclude Include="..\Header\NinzaBornPattern.h" />
     <ClInclude Include="..\Header\NinzaDiePattern.h" />
@@ -323,6 +332,7 @@
     <ClInclude Include="..\Header\RobotDiePattern.h" />
     <ClInclude Include="..\Header\RobotHitPattern.h" />
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
+    <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
@@ -384,6 +394,7 @@
     <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\ValkyrieWeapon.h" />
+    <ClInclude Include="..\Header\ValkyrieWeaponSwap.h" />
     <ClInclude Include="..\Header\WaponItem.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
@@ -402,9 +413,15 @@
     <ClCompile Include="..\Code\AttackBox.cpp" />
     <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
     <ClCompile Include="..\Code\AttackRangeShader.cpp" />
+    <ClCompile Include="..\Code\BattleEndManager.cpp" />
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
+    <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
@@ -479,6 +496,7 @@
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
     <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
     <ClCompile Include="..\Code\Kiana_Ult_Trail.cpp" />
+    <ClCompile Include="..\Code\LaserTrailShader.cpp" />
     <ClCompile Include="..\Code\LifeObjectC.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -502,6 +520,7 @@
     <ClCompile Include="..\Code\MO_Scout.cpp" />
     <ClCompile Include="..\Code\MO_Sickle.cpp" />
     <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\NinzaAttack2Pattern.cpp" />
     <ClCompile Include="..\Code\NinzaBasePattern.cpp" />
     <ClCompile Include="..\Code\NinzaBornPattern.cpp" />
     <ClCompile Include="..\Code\NinzaDiePattern.cpp" />
@@ -515,7 +534,8 @@
     <ClCompile Include="..\Code\RobotDiePattern.cpp" />
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
-    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />    
+    <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
+    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
@@ -576,6 +596,7 @@
     <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp" />
     <ClCompile Include="..\Code\WaponItem.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />
@@ -638,6 +659,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>

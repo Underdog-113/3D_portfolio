@@ -51,6 +51,9 @@ void CScrollViewObject::Awake(void)
 void CScrollViewObject::Start(void)
 {
 	__super::Start();
+	offset = 0;
+
+	dir = _float3(0, 1, 0);
 }
 
 void CScrollViewObject::FixedUpdate(void)
@@ -170,7 +173,7 @@ void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _floa
 	m_offSet = offSet;
 }
 
-CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset)
+CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset, _float sort)
 {
 	SP(Engine::CImageObject) image =
 		std::static_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
@@ -180,7 +183,7 @@ CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstr
 
 	ImageInfo info;
 	info.m_image = image;
-	info.m_offset = offset;
+	info.m_offset = _float3(offset.x, offset.y, sort);
 
 	m_vImageObject[number].emplace_back(info);
 
@@ -220,14 +223,12 @@ void CScrollViewObject::ImageObjectSort()
 		buttonObject->GetTransform()->SetPosition(pos);
 
 
-		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.02f);
+		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
 		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);
-
-
 
 		for (auto& imageObject : m_vImageObject[count])
 		{
-			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, 0.01f);
+			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, imageObject.m_offset.z + 0.01f);
 			imageObject.m_image->GetTransform()->SetPosition(pos + T);
 		}
 
@@ -244,8 +245,38 @@ void CScrollViewObject::ImageObjectSort()
 
 void CScrollViewObject::Scroll()
 {
+
 	// 마우스가 스크롤뷰 안을 클릭하면 현재 위치를 저장
 	// 마우스가 이동하는면 이동 대신 빠르게이동하면 빠르게 이동되고
 	// 빠르게 이동하다가 마우스를 놔버리면 해당 속도로 느리게 이동된다
+
+	// 그려야할 모든 오브젝트의 위치값을 알고있다 해당 위치값을 더해주고 빼서 이동시킬수있다.
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(MOUSE_LEFT))
+	{
+	/*	_int count = 0;
+		for (auto& buttonObject : m_vButtonObject)
+		{
+			count++;
+
+			buttonObject->GetTransform()->SetPosition(dir * offset);
+
+			for (auto& textObject : m_vTextObject)
+			{
+				textObject.m_text->GetTransform()->SetPosition(dir * offset);
+			}
+
+			for (auto& imageObject : m_vImageObject[count - 1])
+			{
+				imageObject.m_image->GetTransform()->SetPosition(dir * offset);
+			}
+		}*/
+	}
+	else
+	{
+		offset = 0;
+		
+	}
+
 }
 

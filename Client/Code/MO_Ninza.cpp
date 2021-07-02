@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\MO_Ninza.h"
 
-#include "FSM_SickleC.h"
+#include "FSM_NinzaC.h"
 #include "AttackBall.h"
 
 _uint CMO_Ninza::m_s_uniqueID = 0;
@@ -30,6 +30,8 @@ SP(Engine::CObject) CMO_Ninza::MakeClone(void)
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+
+	spClone->m_spStateMachine = spClone->GetComponent<CFSM_NinzaC>();
 	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
 
 	return spClone;
@@ -39,6 +41,7 @@ void CMO_Ninza::Awake(void)
 {
 	__super::Awake();
 
+	m_spStateMachine = AddComponent<CFSM_NinzaC>();
 	m_spPatternMachine->AddNecessaryPatterns(CNinzaBornPattern::Create(), CNinzaDiePattern::Create(), CNinzaBasePattern::Create(), CNinzaHitPattern::Create());
 }
 
@@ -47,7 +50,7 @@ void CMO_Ninza::Start(void)
 	__super::Start();
 
 	//m_spTransform->SetSize(1.7f, 1.7f, 1.7f);
-	m_spTransform->SetRotationY(D3DXToRadian(90));
+	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 

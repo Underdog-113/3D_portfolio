@@ -53,22 +53,24 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	/************************* Range */
-	// 상대가 공격 범위 밖이고
+	// 상대가 shoot2 범위 밖이고
 	if (len > m_atkDis)
 	{
-		// 내가 shoot2 상태면
-		if (Name_SHOOT_2 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		// 내가 shoot2 상태가 끝났다면
+		if (Name_SHOOT_2 == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_RUN_B);
 			m_onChase = true;
 		}
-		// 내가 대기 상태면 이동 애니로 변경
-		else if (Name_IDLE == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		// 내가 대기 상태가 끝났다면
+		else if (Name_IDLE == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_RUN_F);
 			SetMoveSound();
 		}
-		// 내가 이동 중이라면
+		// 내가 이동 상태라면
 		else if (Name_RUN_F == fsm->GetCurStateString())
 		{
 			_float3 dir = tPos - mPos;
@@ -77,8 +79,10 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 			pOwner->GetTransform()->SetPosition(mPos);
 			m_onWalk = true;
 		}
-		// 내가 뒤로 이동 중이라면
-		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && false == m_walkReady)
+		// 내가 뒤로 이동 상태라면
+		else if (Name_RUN_B == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd() &&
+			false == m_walkReady)
 		{
 			_float3 dir = tPos - mPos;
 
@@ -87,17 +91,19 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 			m_onWalk = true;
 		}
 		// 내가 뒤로 이동이 끝났다면
-		else if (Name_RUN_B == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd() && true == m_walkReady)
+		else if (Name_RUN_B == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd() &&
+			true == m_walkReady)
 		{
 			fsm->ChangeState(Name_IDLE);
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 			m_onWalk = false;
 		}
 	}
-	// 상대가 공격 범위 안이고
+	// 상대가 shoot2 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		// 내가 이동, 대기 상태라면 공격
+		// 내가 이동, 대기 상태가 끝났다면
 		if ((Name_RUN_F == fsm->GetCurStateString() ||
 			Name_IDLE == fsm->GetCurStateString() ||
 			Name_RUN_B == fsm->GetCurStateString()) &&
@@ -106,13 +112,18 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->ChangeState(Name_SHOOT_2);
 			m_onChase = false;
 			m_onWalk = false;
+			PatternPlaySound(L"Scout_Laser.wav", pOwner);
 
+			// shoot2 위치 잡기
+			CMO_Scout* pScout = static_cast<CMO_Scout*>(pOwner);
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
 			_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-			m_beamDir = pPos - mPos;
-			m_beamDir.y = 0.f;
-			D3DXVec3Normalize(&m_beamDir, &m_beamDir);
-			PatternPlaySound(L"Scout_Laser.wav", pOwner);
+			_float3 beamDir = pPos - mPos;
+			beamDir.y = 0.f;
+
+			D3DXVec3Normalize(&beamDir, &beamDir);
+			pScout->GetAttackBox()->GetTransform()->SetPosition(mPos + beamDir * 5);
+			pScout->GetAttackBox()->GetTransform()->SetRotation(pScout->GetTransform()->GetRotation());
 		}
 		// shoot2 상태라면 뒤로 이동 상태로 변경
 		else if (Name_SHOOT_2 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
@@ -143,14 +154,8 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		CMO_Scout* pScout = static_cast<CMO_Scout*>(pOwner);
 		_float3 size = { 2.f, 1.f, 10.f };
 		_float3 offset = ZERO_VECTOR;
-		_float3 mPos = pOwner->GetTransform()->GetPosition();
-		
-		pScout->GetAttackBox()->GetTransform()->SetRotation(pScout->GetTransform()->GetRotation());
-		pScout->GetAttackBox()->GetTransform()->SetPosition(mPos);
 
-		offset = _float3(0, 0, 5);
-
-		pScout->ActiveAttackBox(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
+		pScout->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
 	}
 }
 

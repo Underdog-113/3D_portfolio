@@ -82,6 +82,9 @@
     <Filter Include="06.Shader\11. FireShader">
       <UniqueIdentifier>{7486f62e-c525-46e5-8806-884d465c92fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Shader\12. LaserShader">
+      <UniqueIdentifier>{b4f37f54-a495-4829-8638-ebd15da37e52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -174,6 +177,9 @@
     <ClInclude Include="..\Header\FireShader.h">
       <Filter>06.Shader\11. FireShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\LaserTrailShader.h">
+      <Filter>06.Shader\12. LaserShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\FireShader.cpp">
       <Filter>06.Shader\11. FireShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LaserTrailShader.cpp">
+      <Filter>06.Shader\12. LaserShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

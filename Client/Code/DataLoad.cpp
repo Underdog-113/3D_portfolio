@@ -19,6 +19,7 @@
 #include "Monster.h"
 
 #include "ValkyrieLevelUp.h"
+#include "ValkyrieWeaponSwap.h"
 
 CDataLoad::CDataLoad()
 {
@@ -512,7 +513,8 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
 
 		if (L"Stage02_Alpha_WaterPlane" == meshKey)
-		{
+		{			
+			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"waterNor");
 			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
 		}
@@ -830,6 +832,14 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	else if (0 == function.compare(L"ChangeFSMWeapon"))
 	{
 		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMWeapon, CValkyriegManager::GetInstance());
+	}
+	else if (0 == function.compare(L"changeFSMWeaponSwap"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::changeFSMWeaponSwap, CValkyriegManager::GetInstance());
+	}
+	else if (0 == function.compare(L"WeaponChange"))
+	{
+		button->AddFuncData<void(CValkyrieWeaponSwap::*)(), CValkyrieWeaponSwap*>(&CValkyrieWeaponSwap::WeaponChange, &CValkyrieWeaponSwap());
 	}
 	
 }

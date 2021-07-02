@@ -9,11 +9,15 @@
 #include "MO_Scout.h"
 #include "MO_Lancer.h"
 #include "MO_Robot.h"
+#include "MO_Ninza.h"
 #include "MB_Ganesha.h"
+#include "MB_Bronya.h"
 
 /* for.Player */
 #include "StageControlTower.h"
 #include "Kiana.h"
+
+#include "AniCtrl.h"
 
 CWooScene::CWooScene()
 {
@@ -71,11 +75,13 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	//SickleSetting();
-	GaneshaSetting();
+	SickleSetting();
+	//GaneshaSetting();
 	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
 	//LancerSetting();
 	//RobotSetting();
+	//NinzaSetting();
+	//BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -89,10 +95,31 @@ void CWooScene::Update(void)
 
 	m_pController->Update();
 
-// 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
-// 	{
-// 		//
-// 	}
+	//if (Engine::IMKEY_DOWN(KEY_Q))
+	//{
+	//	switch (m_index)
+	//	{
+	//	case 0:
+	//		LancerSetting();
+	//		break;
+	//	case 1:
+	//		RobotSetting();
+	//		break;
+	//	case 2:
+	//		ScoutSetting();
+	//		break;
+	//	}
+
+	//	++m_index;
+
+	//	if (m_index >= 3)
+	//		m_index = 0;
+	//}
+
+	//if (Engine::IMKEY_DOWN(KEY_E))
+	//{
+	//	if ()
+	//}
 }
 
 void CWooScene::LateUpdate(void)
@@ -198,10 +225,30 @@ void CWooScene::TerrainSetting(void)
 void CWooScene::SickleSetting(void)
 {
 	/* Sickle */
+	//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	//spSickleClone->GetTransform()->SetPosition(0, 10, 2);
+	//std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	//m_spSickle = spSickleClone;
+
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(0, 10, 2);
+	spSickleClone->GetTransform()->SetPosition(0, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_spSickle = spSickleClone;
+	m_vSickles.emplace_back(spSickleClone);
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(5, 0, 5);
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	m_vSickles.emplace_back(spSickleClone);
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(2, 0, 2);
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	m_vSickles.emplace_back(spSickleClone);
+
+	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+	spSickleClone->GetTransform()->SetPosition(5, 0, 7);
+	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+	m_vSickles.emplace_back(spSickleClone);
 }
 
 void CWooScene::GaneshaSetting(void)
@@ -211,6 +258,19 @@ void CWooScene::GaneshaSetting(void)
 	spGaneshaClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
 	m_spGanesha = spGaneshaClone;
+}
+
+void CWooScene::BronyaSetting(void)
+{
+	/* Bronya */
+	SP(Engine::CObject) spBronyaClone = ADD_CLONE(L"MB_Bronya", true, (_uint)ELayerID::Enemy, L"MB_Bronya");
+	spBronyaClone->GetTransform()->SetPosition(0, 0, 0);
+	std::dynamic_pointer_cast<CMonster>(spBronyaClone)->SelectChannelID();
+	m_spBronya = spBronyaClone;
+
+	/* Weapon */
+	SP(Engine::CObject) spWeaponClone = ADD_CLONE(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
+	m_spBronyaWeapon = spWeaponClone;
 }
  
 void CWooScene::SpiderSetting(void)
@@ -247,4 +307,15 @@ void CWooScene::RobotSetting(void)
 	spRobotClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spRobotClone)->SelectChannelID();
 	m_spRobot = spRobotClone;
+}
+
+void CWooScene::NinzaSetting(void)
+{
+	/* Ninza */
+	SP(Engine::CObject) spNinzaClone = ADD_CLONE(L"MO_Ninza", true, (_uint)ELayerID::Enemy, L"MO_Ninza");
+	spNinzaClone->GetTransform()->SetPosition(0,0,0);
+	std::dynamic_pointer_cast<CMonster>(spNinzaClone)->SelectChannelID();
+	m_spNinza = spNinzaClone;
+
+	//m_spNinza->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.1f);
 }

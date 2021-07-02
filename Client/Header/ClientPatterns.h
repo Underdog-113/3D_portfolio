@@ -43,6 +43,7 @@
 #include "NinzaDiePattern.h"
 #include "NinzaHitPattern.h"
 #include "NinzaBasePattern.h"
+#include "NinzaAttack2Pattern.h"
 
 /* Robot */
 #include "RobotBornPattern.h"
@@ -54,3 +55,7 @@
 #include "RobotAttack2Pattern.h"
 
 /* Bronya */
+#include "BronyaBornPattern.h"
+#include "BronyaDiePattern.h"
+#include "BronyaHitPattern.h"
+#include "BronyaBasePattern.h"

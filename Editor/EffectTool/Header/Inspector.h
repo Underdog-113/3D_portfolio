@@ -111,6 +111,7 @@ public:
 	CMFCButton m_btnSoftEffect;
 	CMFCButton m_btnMeshEffect;
 	CMFCButton m_btnListDelete;
+	CMFCButton m_btnServeTex;
 
 #pragma endregion
 	afx_msg void OnBnClickedDeleteEffectList();
@@ -123,6 +124,7 @@ private:
 	void Add_MeshEffect(CString ObjectName);
 	void Add_SoftEffect(CString ObjectName);
 	void Add_Texture(CString TextureKey);
+	void Add_ServeTex(CString TextureKey);
 	void Add_AlphaMask(CString TextureKey);
 
 public:
@@ -263,6 +265,7 @@ private:
 
 public:
 	CButton m_btnTestButton;
+	afx_msg void OnBnClickedServeTex();
 };
 
 

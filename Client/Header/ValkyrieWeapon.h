@@ -16,7 +16,10 @@ public:
 	virtual void OnDestroy(void) override;
 
 private:
+	void WeaponCanvas();
+
 	void ChangeSelect();
+	void DataInput(std::wstring objectName, std::wstring  dataValue);
 
 private:
 	Engine::CScene* m_scene;

@@ -22,6 +22,7 @@
 #include "AttackRangeShader.h"
 #include "AlphaMaskShader.h"
 #include "FireShader.h"
+#include "LaserTrailShader.h"
 #pragma endregion
 
 
@@ -73,6 +74,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAttackRangeShader::Create(), L"AttackRangeShader", (_uint)EShaderID::AttackRangeShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskShader::Create(), L"AlphaMaskShader", (_uint)EShaderID::AlphaMaskShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFireShader::Create(), L"FireShader", (_uint)EShaderID::FireShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CLaserTrailShader::Create(), L"LaserTrail", (_uint)EShaderID::LaserShader);
 
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
@@ -201,8 +203,17 @@ void CMainApp::OnDestroy(void)
 
 	//Client Manager
 	CButtonManager::GetInstance()->DestroyInstance();
-	CBattleUiManager::GetInstance()->DestroyInstance();
 	CDataManager::GetInstance()->DestroyInstance();
+
+	CReadyToSortieManager::GetInstance()->DestroyInstance();
+	CBattleEndManager::GetInstance()->DestroyInstance();
+	CBattleUiManager::GetInstance()->DestroyInstance();
+	CMainRoomManager::GetInstance()->DestroyInstance();
+	CStageSelectionManager::GetInstance()->DestroyInstance();
+	CValkyriegManager::GetInstance()->DestroyInstance();
+	CInventoryManager::GetInstance()->DestroyInstance();
+	CBattleEndManager::GetInstance()->DestroyInstance();
+
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();
 }
