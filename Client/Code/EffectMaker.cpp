@@ -11,7 +11,7 @@ CEffectMaker::~CEffectMaker()
 {
 }
 
-SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring objName)
+SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring texName3, std::wstring objName)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
 		GetObjectFactory()->AddClone(objectKey, true, (_int)ELayerID::Effect, objName);
@@ -21,6 +21,7 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName3);
 	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 
 	//spMeshEffect->GetTransform()->SetPosition(m_pOwner->GetTransform()->GetPosition());

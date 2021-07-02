@@ -60,10 +60,10 @@ SP(Engine::CObject) CKiana::MakeClone(void)
 	spClone->m_spRigidBody	= spClone->GetComponent<Engine::CRigidBodyC>();
 	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
-	
+
 	spClone->m_spStateMachine	= spClone->GetComponent<CFSM_KianaC>();
 
-	 
+
 	return spClone;
 }
 
@@ -123,7 +123,7 @@ void CKiana::Update(void)
 	//Update_WeaponTransform();
 
 	__super::Update();
-	
+
 	UpdatePivotMatrix(m_pRightToe_World, m_pRightToe_Frame);
 	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
 	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
@@ -187,7 +187,7 @@ void CKiana::CreatePistol(void)
 {
 	m_spWeapon_Left = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Left");
 	static_cast<CKiana_Pistol*>(m_spWeapon_Left.get())->SetParentMatrix(m_pLeftHand_World);
-	
+
 	m_spWeapon_Right = GetScene()->ADD_CLONE(L"Kiana_Pistol", true, (_uint)ELayerID::Player, L"Weapon_Right");
 	static_cast<CKiana_Pistol*>(m_spWeapon_Right.get())->SetParentMatrix(m_pRightHand_World);
 }
@@ -197,7 +197,7 @@ void CKiana::CreateCatPaw(void)
 	m_spCatPaw_Atk01 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk01", true, (_uint)ELayerID::Player, L"CatPaw_Atk01");
 	m_spCatPaw_Atk01->SetIsEnabled(false);
 
-		
+
 	m_spCatPaw_Atk02 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk02", true, (_uint)ELayerID::Player, L"CatPaw_Atk02");
 	m_spCatPaw_Atk02->SetIsEnabled(false);
 	m_spCatPaw_Atk03 = GetScene()->ADD_CLONE(L"Kiana_CatPaw_Atk03", true, (_uint)ELayerID::Player, L"CatPaw_Atk03");
@@ -230,7 +230,7 @@ void CKiana::UseUltraCost(void)
 		curSp = 0.f;
 	}
 
-	m_pStat->SetCurSp(curSp);                        
+	m_pStat->SetCurSp(curSp);
 }
 
 
@@ -441,4 +441,3 @@ void CKiana::SetUltraMode(bool value)
 	if (m_ultraMode)
 		m_pCT->GetUILinker()->Ultra();
 }
-

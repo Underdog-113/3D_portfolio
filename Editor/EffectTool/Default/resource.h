@@ -133,6 +133,7 @@
 #define IDC_EDIT8                       1083
 #define IDC_EDIT9                       1084
 #define IDC_SPIN2                       1085
+#define IDC_MFCBUTTON11                 1085
 #define IDC_SPIN3                       1086
 #define IDC_BUTTON45                    1087
 #define IDC_SPIN4                       1088

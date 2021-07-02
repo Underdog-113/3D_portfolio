@@ -95,6 +95,8 @@ technique DissolveShader
 	pass p0
 	{
 		CullMode = None;
+		AlphaTestEnable = true;
+		zWriteEnable = false;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
