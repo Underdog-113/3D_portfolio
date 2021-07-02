@@ -104,7 +104,8 @@ void COneStageScene::Update(void)
 	}
 	else if (Engine::IMKEY_DOWN(KEY_UP))
 	{
-		m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
+		//m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
+		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
 	}
 	else if (Engine::IMKEY_DOWN(KEY_E))
 	{
@@ -258,7 +259,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
 	{
-		CBattleUiManager::GetInstance()->MonsterHpDown(30.0f);
+		CBattleUiManager::GetInstance()->HitCount(5);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
@@ -278,12 +279,12 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", 10, 11);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Defalut");
+		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", 10);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
