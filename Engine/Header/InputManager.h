@@ -47,6 +47,9 @@ private:
 	GETTOR			(_float3,				m_mouseLastFramePos,	ZERO_VECTOR,		MouseLastFramePos)
 	GETTOR			(_float2,				m_mouseSensitivity,		_float2(PI, PI),	MouseSensitivity)
 	GETTOR_SETTOR	(_float,				m_mouseWheelDir,		0.f,				MouseWheelDir)
+		
+	GETTOR_SETTOR	(_bool,					m_keyInputEnabled,		true,				KeyInputEnabled)
+	GETTOR_SETTOR	(_bool,					m_mouseInputEnabled,	true,				MouseInputEnabled)
 };
 END
 

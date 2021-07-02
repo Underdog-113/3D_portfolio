@@ -96,6 +96,7 @@ void COneStagePhaseControl::Update(void)
 
 void COneStagePhaseControl::OpenStageResult(void)
 {
+	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
 
 	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();
