@@ -66,6 +66,7 @@ void CKiana_Ult_Eff::Start()
 	m_spKianaUltPlane->GetComponent<Engine::CMeshC>()->SetMeshData(L"DissolvePlane");
 	m_spKianaUltPlane->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise");
+	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise");
 	m_spKianaUltPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
 	m_spKianaUltPlane->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
 	m_spKianaUltPlane->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
