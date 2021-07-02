@@ -113,7 +113,7 @@ void CAttackTrail::Render(LPD3DXEFFECT pEffect)
 	//if (m_fTrailAlpha > 1.f )#
 	//	pEffect->SetBool("gTrailCheck",  true);
 
-	pEffect->SetBool("gPlayingAnim", true);#
+	pEffect->SetBool("gPlayingAnim", true);
 }
 
 void CAttackTrail::PostRender(LPD3DXEFFECT pEffect)
