@@ -27,7 +27,8 @@ public:
 
 private:
 	void				InitPrototypes(void) override;
-
+private:
+	bool m_init;
 };
 
 #endif

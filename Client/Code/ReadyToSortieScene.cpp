@@ -13,6 +13,9 @@
 #include "TextManager.h"
 #include "DataLoad.h"
 #include "ReadyToSortieManager.h"
+
+#include "BattleEndScene.h"
+
 CReadyToSortieScene::CReadyToSortieScene()
 {
 }
@@ -75,6 +78,12 @@ void CReadyToSortieScene::Update(void)
 {
 	__super::Update();
 	CReadyToSortieManager::GetInstance()->Update();
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	{
+		CButtonManager::GetInstance()->OnDestroy();
+		GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
+	}
 }
 
 void CReadyToSortieScene::LateUpdate(void)
@@ -87,7 +96,6 @@ void CReadyToSortieScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 
-	CReadyToSortieManager::GetInstance()->OnDestroy();
 	CReadyToSortieManager::GetInstance()->DestroyInstance();
 }
 

@@ -13,18 +13,10 @@ void CDataManager::Start()
 	m_pSquadData = new CSquadData();
 
 	CaptainInit();
-	ValkyrieStatusDataListInit(L"투예복백련");
-	ValkyrieStatusDataListInit(L"월하초옹");
-	ValkyrieStatusDataListInit(L"역신무녀");
 	
-	InStockValkyrieInit(L"투예복·백련");
-	InStockValkyrieInit(L"월하초옹");
-	InStockValkyrieInit(L"역신무녀");
-
-	SquadInit(L"투예복·백련");
-	ItemInit(L"ValkyrieExpData1",50);
-	ItemInit(L"ValkyrieExpData2",30);
-	ItemInit(L"ValkyrieExpData3",10);
+	ItemInit(L"하급 학습 칩",50);
+	ItemInit(L"특급 학습 칩",30);
+	ItemInit(L"고급 학습 칩",10);
 
 	WeaponInit(L"Weapon_Pistol_1");
 	WeaponInit(L"Weapon_Pistol_2");
@@ -34,6 +26,40 @@ void CDataManager::Start()
 	WeaponInit(L"Weapon_Pistol_6");
 	WeaponInit(L"Weapon_Pistol_7");
 	WeaponInit(L"Weapon_Pistol_8");
+	WeaponInit(L"Weapon_Pistol_9");
+	WeaponInit(L"Weapon_Pistol_10");
+
+	WeaponInit(L"Weapon_Cross_1");
+	WeaponInit(L"Weapon_Cross_2");
+	WeaponInit(L"Weapon_Cross_3");
+	WeaponInit(L"Weapon_Cross_4");
+	WeaponInit(L"Weapon_Cross_5");
+	WeaponInit(L"Weapon_Cross_6");
+	WeaponInit(L"Weapon_Cross_7");
+	WeaponInit(L"Weapon_Cross_8");
+	WeaponInit(L"Weapon_Cross_9");
+	WeaponInit(L"Weapon_Cross_10");
+
+	WeaponInit(L"Weapon_Katana_1");
+	WeaponInit(L"Weapon_Katana_2");
+	WeaponInit(L"Weapon_Katana_3");
+	WeaponInit(L"Weapon_Katana_4");
+	WeaponInit(L"Weapon_Katana_5");
+	WeaponInit(L"Weapon_Katana_6");
+	WeaponInit(L"Weapon_Katana_7");
+	WeaponInit(L"Weapon_Katana_8");
+	WeaponInit(L"Weapon_Katana_9");
+	WeaponInit(L"Weapon_Katana_10");
+
+	ValkyrieStatusDataListInit(L"투예복백련");
+	ValkyrieStatusDataListInit(L"월하초옹");
+	ValkyrieStatusDataListInit(L"역신무녀");
+
+	InStockValkyrieInit(L"투예복·백련");
+	InStockValkyrieInit(L"월하초옹");
+	InStockValkyrieInit(L"역신무녀");
+
+	SquadInit(L"투예복·백련");
 }
 
 void CDataManager::Update(void)
@@ -211,6 +237,7 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	std::wstring property;
 	_int maxLevel;
 	std::wstring weaponType;
+	std::wstring weaponName;
 	std::wstring partyTextureKey;
 	std::wstring squadTextureKey;
 	std::wstring listTextureKey;
@@ -228,13 +255,14 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	dataStore->GetValue(true, dataID, objectKey, L"property", property);
 	dataStore->GetValue(true, dataID, objectKey, L"maxLevel", maxLevel);
 	dataStore->GetValue(true, dataID, objectKey, L"weaponType", weaponType);
+	dataStore->GetValue(true, dataID, objectKey, L"weaponName", weaponName);
 	dataStore->GetValue(true, dataID, objectKey, L"partyTextureKey", partyTextureKey);
 	dataStore->GetValue(true, dataID, objectKey, L"squadTextureKey", squadTextureKey);
 	dataStore->GetValue(true, dataID, objectKey, L"ListTextureKey", listTextureKey);
 
 	CValkyrieStatusData* valkyrie = new CValkyrieStatusData();
 	valkyrie->AddValkyrieData(enable, name, subName, maxHp, maxSp, damage, hoesim, defense, maxExperience, rank, property, maxLevel, weaponType, partyTextureKey, squadTextureKey, listTextureKey);
-
+	valkyrie->SetWeaponData(FindWeaponData(weaponName));
 	m_pValkyrieStatusDataList.emplace_back(valkyrie);
 }
 
@@ -245,7 +273,7 @@ void CDataManager::ItemInit(std::wstring itemName, _int count)
 	std::wstring objectKey = itemName;
 
 	std::wstring name;
-	std::wstring rank;
+	_int rank;
 	std::wstring explanation;
 	_int experience;
 	std::wstring textureKey;
@@ -257,8 +285,8 @@ void CDataManager::ItemInit(std::wstring itemName, _int count)
 		if (iter->GetName() == name)
 		{
 			iter->SetCount(iter->GetCount() + count);
+			return;
 		}
-		break;
 	}
 
 	dataStore->GetValue(true, dataID, objectKey, L"Rank", rank);
@@ -279,7 +307,7 @@ void CDataManager::WeaponInit(std::wstring weaponName)
 	std::wstring objectKey = weaponName;
 
 	std::wstring name;
-	std::wstring rank;
+	_int rank;
 	_float maxExperience;
 	_int maxLevel;
 	_int damage;

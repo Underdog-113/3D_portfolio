@@ -11,6 +11,16 @@
 #define Delay_UltShowAxe		0.1f
 #define Delay_UltHideAxe		0.1f
 
+#define Delay_Effect_Attack1_1	0.1f
+#define Delay_Effect_Attack1_2	0.15f
+#define Delay_Effect_Attack2_1	0.1f
+#define Delay_Effect_Attack2_2	0.15f
+#define Delay_Effect_Attack3_1	0.1f
+#define Delay_Effect_Attack3_2	0.15f
+#define Delay_Effect_Attack4_1	0.1f
+#define Delay_Effect_Attack4_2	0.3f
+
+#define Panelty_Stun			1.5f
 
 class CTheresa;
 class CStageControlTower;
@@ -47,7 +57,7 @@ private: /* Normal Actions */
 	bool CheckAction_Run();
 	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
 	bool CheckAction_Run_End();
-	bool CheckAction_Idle();
+	bool CheckAction_StandBy();
 	bool CheckAction_RunBS_To_Run();
 	bool CheckAction_Ultra();
 
@@ -55,8 +65,19 @@ private: /* Special Actions */
 	bool CheckAction_ChargeAttack();
 	bool CheckAction_ChargeAttack_End();
 	bool CheckAction_ChargeMode();
-	
 
+private: /* sound */
+	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
+	void PlaySound_Voice(const std::wstring& soundName);
+	void PlaySound_Effect(const std::wstring& soundName);
+
+	void PlaySound_Charge_RandomVoice();
+	void PlaySound_Attack_RandomRun();
+
+
+	_double m_runSoundTimer = 0;
+	_uint m_prevChargeVoiceSoundIndex = 0;
+	_uint m_prevRunSoundIndex = 0;
 private:
 	CTheresa* m_pTheresa = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
@@ -67,12 +88,16 @@ private:
 
 	_uint m_chargeAttackIndex = 1;
 	_float m_chargeEnterTimer = 0.f;
+	_float m_stunTimer = 0.f;
 
 	bool m_ultraAxeOnOff = false;
 	bool m_ultraUsed = false;
 	bool m_ultraImpact = false;
 
 	bool m_checkEffect = false;
+	bool m_checkEffectSecond = false;
+	bool m_isEvade = false;
+	bool m_isSecondEvade = false;
 
 
 public:

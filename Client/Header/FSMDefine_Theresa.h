@@ -63,10 +63,35 @@
 
 
 
-
-
-
-
+#define Sound_Attack1_Effect		L"T_Attack_0.wav"
+#define Sound_Attack2_Effect		L"T_Attack_1.wav"
+#define Sound_Attack3_Effect		L"T_Attack_2.wav"
+#define Sound_Attack4_Effect		L"T_Attack_3.wav"
+#define Sound_Attack1_Voice			L"T_Att_Voice_0.wav"	
+#define Sound_Attack2_Voice			L"T_Att_Voice_0.wav"	
+#define Sound_Attack3_Voice			L"T_Att_Voice_2.wav"	
+#define Sound_Attack4_Voice			L"T_Att_Voice_3.wav"
+#define Sound_Charge0_Effect		L"T_Charge_0.wav"
+#define Sound_Charge1_Effect		L"T_Charge_1.wav"
+#define Sound_Charge2_Effect		L"T_Charge_2.wav"
+#define Sound_Charge_Slow1_Effect	L"T_Charge_Slow_1.wav"
+#define Sound_Charge_Slow2_Effect	L"T_Charge_Slow_2.wav"
+#define Sound_Charge_Voice0			L"T_Charge_Voice_0.wav"	
+#define Sound_Charge_Voice1			L"T_Charge_Voice_1.wav"	
+#define Sound_Charge_Voice2			L"T_Charge_Voice_2.wav"	
+#define Sound_Dead					L"T_Dead.wav"
+#define Sound_ESkill				L"T_ESkill_Voice.wav"
+#define Sound_Evade					L"T_Evade.wav"
+#define Sound_EvadeLand				L"T_Land.wav"
+#define Sound_HIT_Effect			L"PlayerHit.wav"
+#define Sound_HIT_Voice				L"T_Hit.wav"
+#define Sound_RUN_0					L"T_Run_0.wav"
+#define Sound_RUN_1					L"T_Run_1.wav"
+#define Sound_RUN_2					L"T_Run_2.wav"
+#define Sound_RUN_3					L"T_Run_3.wav"
+#define Sound_RUN_4					L"T_Run_4.wav"
+#define Sound_Ult					L"T_Ult.wav"
+#define Sound_Ult_Voice				L"T_Ult_Voice.wav"
 
 
 

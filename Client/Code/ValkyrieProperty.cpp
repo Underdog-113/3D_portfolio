@@ -52,7 +52,6 @@ void CValkyrieProperty::PropertyCanvas()
 {
 
 	m_scene->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(true);
-	m_scene->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(false);
 	CValkyrieStatusData* data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
 
 	DataInput(L"PropertyCanvas_Text_2", std::to_wstring(data->GetHp()));

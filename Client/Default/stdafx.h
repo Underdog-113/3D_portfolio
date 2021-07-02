@@ -42,6 +42,15 @@
 #include "ValkyriegManager.h"
 #include "InventoryManager.h"
 
+#include "ReadyToSortieManager.h"
+#include "BattleEndManager.h"
+#include "BattleUiManager.h"
+#include "MainRoomManager.h"
+#include "StageSelectionManager.h"
+#include "ValkyriegManager.h"
+#include "InventoryManager.h"
+#include "BattleEndManager.h"
+
 //Client Data
 #include "ValkyrieStatusData.h"
 #include "CaptainData.h"

@@ -51,6 +51,9 @@ void CScrollViewObject::Awake(void)
 void CScrollViewObject::Start(void)
 {
 	__super::Start();
+	offset = 0;
+
+	dir = _float3(0, 1, 0);
 }
 
 void CScrollViewObject::FixedUpdate(void)
@@ -244,8 +247,38 @@ void CScrollViewObject::ImageObjectSort()
 
 void CScrollViewObject::Scroll()
 {
+
 	// 마우스가 스크롤뷰 안을 클릭하면 현재 위치를 저장
 	// 마우스가 이동하는면 이동 대신 빠르게이동하면 빠르게 이동되고
 	// 빠르게 이동하다가 마우스를 놔버리면 해당 속도로 느리게 이동된다
+
+	// 그려야할 모든 오브젝트의 위치값을 알고있다 해당 위치값을 더해주고 빼서 이동시킬수있다.
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(MOUSE_LEFT))
+	{
+	/*	_int count = 0;
+		for (auto& buttonObject : m_vButtonObject)
+		{
+			count++;
+
+			buttonObject->GetTransform()->SetPosition(dir * offset);
+
+			for (auto& textObject : m_vTextObject)
+			{
+				textObject.m_text->GetTransform()->SetPosition(dir * offset);
+			}
+
+			for (auto& imageObject : m_vImageObject[count - 1])
+			{
+				imageObject.m_image->GetTransform()->SetPosition(dir * offset);
+			}
+		}*/
+	}
+	else
+	{
+		offset = 0;
+		
+	}
+
 }
 

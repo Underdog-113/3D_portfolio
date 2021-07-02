@@ -75,13 +75,13 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	//SickleSetting();
+	SickleSetting();
 	//GaneshaSetting();
 	//ScoutSetting(); // «œ¥√¿« ø’¿⁄¡ˆ..
 	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
-	BronyaSetting();
+	//BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)

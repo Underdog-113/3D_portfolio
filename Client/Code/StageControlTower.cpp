@@ -107,7 +107,10 @@ void CStageControlTower::FindTarget()
 	SP(Engine::CObject) spTarget = m_spCurTarget;
 	_float minDistance = 5.f;
 
-	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition();
+	_float3 valkyrieForward = m_pCurActor->GetTransform()->GetForward();
+	valkyrieForward.y = 0.f;
+
+	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition() + valkyrieForward;
 	valkyriePos.y = 0.f;
 	
 	for (auto& iter : monsterList)

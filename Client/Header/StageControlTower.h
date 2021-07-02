@@ -73,6 +73,11 @@ private:	/* Stage Info? */
 
 	GETTOR			(CreateMode,			m_mode,				ALL,			CurrentMode)
 
+
+	GETTOR(std::list<ItemSave>, m_itemList, {}, ItemList)
+	GETTOR(_int, m_gold, 0, Gold)
+	GETTOR(_int, m_captainExp, 0, CaptainExp)
+	GETTOR(_int, m_valkyrieExp, 0, ValkyrieExp)
 };
 
 #endif

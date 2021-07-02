@@ -34,9 +34,16 @@ void CWaponItem::Start()
 				_float2(172.0f, 205.0f), weaponData[i]->GetName(), L"UI_4", L"UI_4");
 		
 		spScrollView->
-			AddImageObjectData(i, weaponData[i]->GetTextureKey(), _float3(163.7f, 143.6f, 0.0f), _float2(0, 26));
+			AddImageObjectData(i, weaponData[i]->GetTextureKey(), _float3(163.7f, 143.6f, 0.0f), _float2(0, 20));
 
-		// 별달고 레벨달고
+		_float2 offset = _float2(-18.0f * (_int)(weaponData[i]->GetRank() * 0.5f), -51.4f);
+		for (int j = 0; j < weaponData[i]->GetRank(); j++)
+		{
+			spScrollView->
+				AddImageObjectData(i, L"StarBig", _float3(26.3f, 26.3f, 0.0f), offset);
+			offset.x += 25.0f;
+		}
+
 		spScrollView->
 			AddTextObjectData(i, _float2(-27.2f, -81.9f), 30, D3DXCOLOR(0, 0, 0, 1), L"LV." + std::to_wstring(weaponData[i]->GetLevel()));
 	}

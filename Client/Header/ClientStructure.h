@@ -27,3 +27,10 @@
 		GETTOR_SETTOR(Strength,		strength,	Str_Damage,	StrengthType)
 		GETTOR_SETTOR(CrowdControl,	statEffect, CC_None,	CrowdControlType)
 	}HitInfo;
+
+	typedef struct _ItemSave
+	{
+		std::wstring itemName;
+		_int count;
+
+	}ItemSave;
