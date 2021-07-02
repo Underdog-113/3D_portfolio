@@ -26,8 +26,13 @@ void CInputManager::FixedUpdate(void)
 
 void CInputManager::Update(void)
 {
-	KeyUpdate();
-	MouseUpdate();
+	m_lastFrameKey = m_key;
+	m_key = 0;
+
+	if(m_keyInputEnabled)
+		KeyUpdate();
+	if(m_mouseInputEnabled)
+		MouseUpdate();
 }
 
 void CInputManager::LateUpdate(void)
@@ -74,10 +79,7 @@ bool CInputManager::KeyPress(uint64_t key)
 
 
 void CInputManager::KeyUpdate(void)
-{
-	m_lastFrameKey = m_key;
-	m_key = 0;
-	
+{	
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		m_key |= KEY_LEFT;
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
