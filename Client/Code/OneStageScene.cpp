@@ -104,7 +104,8 @@ void COneStageScene::Update(void)
 	}
 	else if (Engine::IMKEY_DOWN(KEY_UP))
 	{
-		m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
+		//m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
+		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
 	}
 	else if (Engine::IMKEY_DOWN(KEY_E))
 	{
