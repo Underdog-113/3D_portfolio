@@ -55,6 +55,7 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		// change end -> start
 		pAniCtrl->ChangeFakeAnimState_EndToStart();
 		pDM->UpdateFrame();
+		pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
 		//m_prevRootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
 		m_prevRootMotionPos = m_animStartOffset;
 		m_prevMoveAmount = ZERO_VECTOR;

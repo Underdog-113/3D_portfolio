@@ -57,11 +57,7 @@ void CStageControlTower::Update(void)
 		SwitchValkyrie(Wait_1);
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
 		SwitchValkyrie(Wait_2);
-
-
-	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
-		m_pPhaseControl->SetCurPhase((_uint)COneStagePhaseControl::EOneStagePhase::StageResult);
-
+	
 }
 
 void CStageControlTower::OnDestroy()

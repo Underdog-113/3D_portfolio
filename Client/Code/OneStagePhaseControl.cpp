@@ -68,19 +68,19 @@ void COneStagePhaseControl::Update(void)
 		++m_curPhase;
 		break;
 
-		//Before being collised with PhaseChanger3
-	case (_int)EOneStagePhase::BeforeBoss:
-		break;
+	//	//Before being collised with PhaseChanger3
+	//case (_int)EOneStagePhase::BeforeBoss:
+	//	break;
 
-		//After being collided with PhaseChanger3
-	case (_int)EOneStagePhase::BossBegin:
-		break;
+	//	//After being collided with PhaseChanger3
+	//case (_int)EOneStagePhase::BossBegin:
+	//	break;
 
-		//After killing Boss
-	case (_int)EOneStagePhase::BossEnd:
-		++m_curPhase;
-		break;
-		//Result screen
+	//	//After killing Boss
+	//case (_int)EOneStagePhase::BossEnd:
+	//	++m_curPhase;
+	//	break;
+	//	//Result screen
 	case (_int)EOneStagePhase::StageResult:
 		++m_curPhase;
 		OpenStageResult();
