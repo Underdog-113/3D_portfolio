@@ -109,9 +109,8 @@ void CEffectMaker_Kiana::CreateEffect_Ultra()
 {
 	_float size = 5.f;
 	auto effect = CreateEffect_AlphaMask(L"Kiana_Ult_Eff", L"Ring_Ground", L"ring_ground", L"ring_ground");
-	effect->GetTransform()->SetPositionX(m_pKiana->GetTransform()->GetPosition().x);
-	effect->GetTransform()->SetPositionZ(m_pKiana->GetTransform()->GetPosition().z);
-	effect->GetTransform()->AddPositionY(-m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
+	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	//effect->GetTransform()->AddPositionY(-m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
 
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
@@ -122,7 +121,7 @@ void CEffectMaker_Kiana::CreateEffect_Ultra()
 void CEffectMaker_Kiana::CreateEffect_Claw2()
 {
 	_float size = 0.5f;
-	auto clawEffect = CreateEffect_Trail(UltraTrail_ObjectKey, L"CatPaw_Att_1", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
+	auto clawEffect = CreateEffect_Dissolve(UltraTrail_ObjectKey, L"CatPaw_Att_1", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
 	clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	clawEffect->GetTransform()->SetSize(_float3(size, size, size));
@@ -134,7 +133,7 @@ void CEffectMaker_Kiana::CreateEffect_Claw2()
 void CEffectMaker_Kiana::CreateEffect_Claw3()
 {
 	_float size = 0.5f;
-	auto clawEffect = CreateEffect_Trail(UltraTrail_ObjectKey, L"CatPaw_Att_2", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
+	auto clawEffect = CreateEffect_Dissolve(UltraTrail_ObjectKey, L"CatPaw_Att_2", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
 	clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	clawEffect->GetTransform()->SetSize(_float3(size, size, size));
@@ -154,7 +153,7 @@ void CEffectMaker_Kiana::CreateEffect_Claw4()
 void CEffectMaker_Kiana::CreateEffect_Claw4_1()
 {
 	_float size = 0.5f;
-	auto clawEffect = CreateEffect_Trail(UltraTrail_ObjectKey, L"CatPaw_Att_3_1", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
+	auto clawEffect = CreateEffect_Dissolve(UltraTrail_ObjectKey, L"CatPaw_Att_3_1", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
 	clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	clawEffect->GetTransform()->SetSize(_float3(size, size, size));
@@ -166,7 +165,7 @@ void CEffectMaker_Kiana::CreateEffect_Claw4_1()
 void CEffectMaker_Kiana::CreateEffect_Claw4_2()
 {
 	_float size = 0.5f;
-	auto clawEffect = CreateEffect_Trail(UltraTrail_ObjectKey, L"CatPaw_Att_3_2", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
+	auto clawEffect = CreateEffect_Dissolve(UltraTrail_ObjectKey, L"CatPaw_Att_3_2", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
 	clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	clawEffect->GetTransform()->SetSize(_float3(size, size, size));
@@ -178,7 +177,7 @@ void CEffectMaker_Kiana::CreateEffect_Claw4_2()
 void CEffectMaker_Kiana::CreateEffect_Claw4_3()
 {
 	_float size = 0.5f;
-	auto clawEffect = CreateEffect_Trail(UltraTrail_ObjectKey, L"CatPaw_Att_3_3", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
+	auto clawEffect = CreateEffect_Dissolve(UltraTrail_ObjectKey, L"CatPaw_Att_3_3", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
 	clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	clawEffect->GetTransform()->SetSize(_float3(size, size, size));
@@ -190,7 +189,7 @@ void CEffectMaker_Kiana::CreateEffect_Claw4_3()
 void CEffectMaker_Kiana::CreateEffect_Claw5()
 {
 	_float size = 0.5f;
-	auto clawEffect = CreateEffect_Trail(UltraTrail_ObjectKey, L"CatPaw_Att_4", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
+	auto clawEffect = CreateEffect_Dissolve(UltraTrail_ObjectKey, L"CatPaw_Att_4", UltraTrail_Tex1Name, UltraTrail_Tex2Name, UltraTrail_Tex3Name);
 	clawEffect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
 	clawEffect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	clawEffect->GetTransform()->SetSize(_float3(size, size, size));

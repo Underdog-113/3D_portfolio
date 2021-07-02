@@ -133,8 +133,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Kiana_PT_003",
 			L"Skill_Kiana_PT_004",
 			L"Skill_Kiana_Weapon_09",
-			L"Defalut",
-			L"Defalut");
+			10,
+			11);
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->PlayerChange(
@@ -142,8 +142,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Theresa_1",
 			L"Skill_Theresa_2",
 			L"Skill_Theresa_3",
-			L"Defalut",
-			L"Defalut");
+			10,
+			11);
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->PlayerChange(
@@ -151,8 +151,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Sakura_1",
 			L"Skill_Sakura_2",
 			L"Skill_Sakura_3",
-			L"Defalut",
-			L"Defalut");
+			10,
+			11);
 		break;
 	default:
 		break;

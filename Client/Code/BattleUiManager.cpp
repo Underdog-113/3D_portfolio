@@ -44,8 +44,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_8").get()));
 
-	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
-	m_skillPoint.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
+	m_skillPoint.emplace_back(static_cast<Engine::CTextObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
+	m_skillPoint.emplace_back(static_cast<Engine::CTextObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
 
 	m_playerHp = pScene->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_PlayerHp").get();
 	m_playerHp->AddComponent<Engine::CTextC>()->AddFontData(L"", _float2(-320.0f, 325.0f), _float2(0, 0), 30, DT_VCENTER + DT_CENTER + DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1), true);
@@ -130,7 +130,6 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_hitsCanvas->AddComponent<CLifeObjectC>();
 
 	m_hitCount = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_HitCount_1").get());
-
 
 	m_hitCount->AddComponent<CHitsUiC>();
 	m_hits = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"HitsCanvas_Hits_2").get());
@@ -231,6 +230,33 @@ void CBattleUiManager::HitCount(_float lifeTime)
 	m_hitsCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(lifeTime);
 	m_hitsCanvas->SetIsEnabled(true);
 	m_hitCount->GetComponent<CHitsUiC>()->AddHitsCount(1);
+
+	if (m_hitCount->GetComponent<CHitsUiC>()->GetHitsCount() == 0)
+	{
+		m_hitCount->GetComponent<Engine::CTextureC>()->ChangeTexture(L"HpBarKara 881168");
+		m_hitCount->GetComponent<Engine::CTextureC>()->SetColor(_float4(1, 1, 1, 1));
+		m_hitCount->GetTransform()->SetPosition(_float3(-589.6f, 206.48f, m_hitCount->GetTransform()->GetPosition().z));
+		m_hitCount->GetTransform()->SetSize(_float3(89.6f, 84.8f, 0.0f));
+	}
+	if (m_hitCount->GetComponent<CHitsUiC>()->GetHitsCount() == 9)
+	{
+		m_hitCount->GetComponent<Engine::CTextureC>()->ChangeTexture(L"DamageBar2");
+		m_hitCount->GetComponent<Engine::CTextureC>()->SetColor(_float4(0.4431f, 0.7529f, 0.6117f, 1));
+		m_hitCount->GetTransform()->SetPosition(_float3(-598.34f, 206.48f, m_hitCount->GetTransform()->GetPosition().z));
+		m_hitCount->GetTransform()->SetSize(_float3(87.0f, 84.8f, 0.0f));
+	}
+	if (m_hitCount->GetComponent<CHitsUiC>()->GetHitsCount() == 19)
+	{
+		m_hitCount->GetComponent<Engine::CTextureC>()->SetColor(_float4(0.5490f, 0.8509f, 0.9058f, 1));
+	}
+	if (m_hitCount->GetComponent<CHitsUiC>()->GetHitsCount() == 39)
+	{
+		m_hitCount->GetComponent<Engine::CTextureC>()->SetColor(_float4(0.9176f, 0.5803f, 0.9803f, 1));
+	}
+	if (m_hitCount->GetComponent<CHitsUiC>()->GetHitsCount() == 49)
+	{
+		m_hitCount->GetComponent<Engine::CTextureC>()->SetColor(_float4(0.8784f, 0.7215f, 0.1294f, 1));
+	}
 }
 
 void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property)
@@ -303,7 +329,7 @@ void CBattleUiManager::PlayerSkillActivation(_int value)
 	m_skillActivationImage[value - 1]->SetIsEnabled(true);
 }
 
-void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, std::wstring specialSP, std::wstring skillSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, _int specialSP, _int skillSP)
 {
 	m_skillImage[Button_Type::BasicButton]->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
@@ -312,15 +338,15 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_skillButton[Button_Type::SkillButton]->SetIsEnabled(true);
 	m_skillImage[Button_Type::SkillButton]->SetIsEnabled(true);
 
-	m_skillPoint[SkillPoint_Type::SpecialSp]->GetTexture()->ChangeTexture(specialSP);
+	m_skillPoint[SkillPoint_Type::SpecialSp]->GetComponent<Engine::CTextC>()->ChangeMessage(L"SP : " + std::to_wstring(specialSP));
 	m_skillPoint[SkillPoint_Type::SpecialSp]->SetIsEnabled(true);
 
-	m_skillPoint[SkillPoint_Type::SkillSp]->GetTexture()->ChangeTexture(skillSP);
+	m_skillPoint[SkillPoint_Type::SkillSp]->GetComponent<Engine::CTextC>()->ChangeMessage(L"SP : " + std::to_wstring(skillSP));
 
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(true);
 }
 
-void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring specialSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, _int specialSP)
 {
 	m_skillImage[Button_Type::BasicButton] ->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
@@ -328,7 +354,7 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_skillImage[Button_Type::SkillButton]->SetIsEnabled(false);
 	m_skillButton[Button_Type::SkillButton]->SetIsEnabled(false);
 
-	m_skillPoint[SkillPoint_Type::SpecialSp]->GetTexture()->ChangeTexture(specialSP);
+	m_skillPoint[SkillPoint_Type::SpecialSp]->GetComponent<Engine::CTextC>()->ChangeMessage(L"SP : " + std::to_wstring(specialSP));
 	m_skillPoint[SkillPoint_Type::SpecialSp]->SetIsEnabled(false);
 
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);

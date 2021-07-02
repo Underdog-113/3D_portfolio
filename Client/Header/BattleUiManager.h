@@ -51,9 +51,9 @@ public:
 
 	// HP SP 버튼4개 스킬포인트2개
 	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
-		std::wstring specialSP, std::wstring skillSP);
+		_int specialSP, _int skillSP);
 	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
-		std::wstring specialSP);
+		_int specialSP);
 	
 	void TargetUI(SP(Engine::CObject) object, _float value);
 
@@ -100,9 +100,10 @@ private:
 	Engine::CObject* m_playerSp;
 	Engine::CImageObject* m_time;
 
+
 	std::vector<Engine::CImageObject*> m_playerIllustration;
 	std::vector<Engine::CImageObject*> m_playerProperty;
-	std::vector<Engine::CImageObject*> m_skillPoint; // 스킬사용할때 필요한 게이지
+	std::vector<Engine::CTextObject*> m_skillPoint; // 스킬사용할때 필요한 게이지
 	std::vector<Engine::CImageObject*> m_target;
 
 	std::vector<Engine::CImageObject*> m_skillImage; // 스킬버튼 이미지

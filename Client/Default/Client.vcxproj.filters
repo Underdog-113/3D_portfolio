@@ -712,6 +712,12 @@
     <Filter Include="02.Objects\00.ForScene\05.Portal">
       <UniqueIdentifier>{c037e8dd-2f30-4dd3-aa1e-438896505014}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect">
+      <UniqueIdentifier>{e8acabec-ae7a-40b0-b0f3-d97c2fece6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
+      <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1387,6 +1393,13 @@
     <ClInclude Include="..\Header\Portal.h">
       <Filter>02.Objects\00.ForScene\05.Portal</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MonsterHitEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SoftEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CameraMan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1991,6 +2004,13 @@
     <ClCompile Include="..\Code\Portal.cpp">
       <Filter>02.Objects\00.ForScene\05.Portal</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\MonsterHitEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoftEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CameraMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

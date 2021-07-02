@@ -30,6 +30,7 @@ private:
 
 	_float3 m_offSet;
 	_float3 m_hitPointOffset;
+	_float m_hitPointOffsetLength;
 	Engine::CObject* m_target;
 };
 #endif
