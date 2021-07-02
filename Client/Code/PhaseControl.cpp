@@ -15,3 +15,8 @@ void CPhaseControl::IncreasePhase(void)
 {
 	++m_curPhase;
 }
+
+void CPhaseControl::ChangePhase(_int phaseNum)
+{
+	m_curPhase = phaseNum;
+}

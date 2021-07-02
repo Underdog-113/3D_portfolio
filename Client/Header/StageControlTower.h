@@ -40,6 +40,8 @@ class CActorController;
 class CUILinker;
 class CStatusDealer;
 class CPhaseControl;
+class COneStagePhaseControl;
+enum class EOneStagePhase;
 class CStageControlTower
 {
 	DECLARE_SINGLETON(CStageControlTower)
@@ -59,6 +61,12 @@ public:
 	void ActorControl_SetCurrentMainCam(SP(Engine::CCamera) pCam);
 	void ActorControl_SetInputLock(bool lock);
 	
+
+public:		/* Phase */
+	void IncreasePhase();
+	void ChangePhase(EOneStagePhase phaseType);
+
+
 public:		/* Battle */
 	void FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);

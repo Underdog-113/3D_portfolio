@@ -111,3 +111,8 @@ void COneStagePhaseControl::OpenStageResult(void)
 	CBattleUiManager::GetInstance()->BattleEnd();
 	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
 }
+
+void COneStagePhaseControl::ChangePhase(EOneStagePhase phaseType)
+{
+	m_curPhase = (_int)phaseType;
+}

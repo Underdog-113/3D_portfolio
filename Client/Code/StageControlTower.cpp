@@ -100,6 +100,16 @@ void CStageControlTower::ActorControl_SetInputLock(bool lock)
 	m_pActorController->SetInputLock_ByAni(lock);
 }
 
+void CStageControlTower::IncreasePhase()
+{
+	m_pPhaseControl->IncreasePhase();
+}
+
+void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
+{
+	m_pPhaseControl->ChangePhase((_int)phaseType);
+}
+
 void CStageControlTower::FindTarget()
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
