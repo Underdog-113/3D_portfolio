@@ -12,7 +12,7 @@ float  gTrailAlpha;
 bool   gisSpawn;
 
 float  m_defaultDissolveVal = 0.9f;
-float3 gDissolveLineColor = float3(1, 0, 0);
+float3 gDissolveLineColor = float3(0, 0, 0);
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -86,13 +86,14 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	// Alpha Texture
 	float4 Alpha = tex2D(AlphaTex, Input.mUV);
 
-	float4 blendColor = (Alpha * albedo) + ((1.0f - Alpha) * Serve);
+	float4 blendColor = (Alpha * albedo) + ((1.f - Alpha) * Serve);
 
+	blendColor.a = 0;
 	blendColor = saturate(blendColor);
-		
+
 	if (Input.mUV.x > gTrailAlpha)
 	{
-		float multiply1 = saturate((Alpha.r * sin(gTrailAlpha)) * 3.7f);
+		float multiply1 = saturate((Alpha.r * sin(gTrailAlpha)) * 5.5f);
 		float multiply2 = saturate(Alpha.r * sin(gTrailAlpha));
 
 		float CurrentDissolveVal = saturate(pow(multiply1 + multiply2, 25));
@@ -104,14 +105,14 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 		if (m_defaultDissolveVal >= CurrentDissolveVal)
 		{
-			DissolveLineSize = float3(100.f, 1.f, 1.f);
+			DissolveLineSize = float3(1.f, 1.f, 1.f);
 		}
 		else
 		{
 			DissolveLineSize = float3(0, 0, 0);
 		}
 
-		float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
+		float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb );
 
 		return float4(diffuse, multiple);
 	}
