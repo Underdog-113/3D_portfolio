@@ -29,5 +29,6 @@ public:
 
 private:
 	CKiana* m_pKiana;
+	float m_forwardOffset = 1.f;
 };
 

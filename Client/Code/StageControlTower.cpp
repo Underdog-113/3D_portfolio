@@ -15,7 +15,6 @@
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
-
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
 {
