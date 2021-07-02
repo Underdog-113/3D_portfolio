@@ -47,5 +47,7 @@ public:
 
 private:
 	CTheresa* m_pTheresa;
+
+	float m_forwardOffset = -0.2f;
 };
 
