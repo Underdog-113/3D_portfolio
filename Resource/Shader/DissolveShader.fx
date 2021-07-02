@@ -24,6 +24,7 @@ sampler Diffuse = sampler_state
 	AddressV = Wrap;
 };
 
+
 texture g_NoiseTex;
 sampler NoiseTex = sampler_state
 {
@@ -32,6 +33,15 @@ sampler NoiseTex = sampler_state
 	AddressU = Wrap;
 	AddressV = Wrap;
 };
+
+
+texture g_ServeTex;
+sampler ServeTex = sampler_state
+{
+	Texture = <g_ServeTex>;
+	FILTER = MIN_MAG_MIP_LINEAR;
+};
+
 
 
 struct VS_INPUT
@@ -81,7 +91,13 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
 	// Noise Texture
+	float4 Serve = tex2D(ServeTex, Input.mUV);
+
+	// Noise Texture
 	float4 Noise = tex2D(NoiseTex, Input.mUV);
+
+
+	float4 blendColor = (Noise * albedo) + ((1.0f - Noise) * Serve);
 
 
 	// To disappear to match the noise texture
@@ -133,12 +149,11 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	if (gTrailCheck)
 	{
-		diffuse = albedo.rgb;
-		return float4(diffuse, albedo.a);
+		return blendColor;
 	}
 	else
 	{
-		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + albedo.rgb);
+		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
 		return float4(diffuse, multiple);
 	}
 
