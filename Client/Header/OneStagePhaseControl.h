@@ -5,6 +5,7 @@
 
 class COneStagePhaseControl final : public CPhaseControl
 {
+public:
 	enum class EOneStagePhase
 	{
 		PlayerSummon		= 0,
@@ -21,14 +22,18 @@ class COneStagePhaseControl final : public CPhaseControl
 		BossBegin			= 11,
 		BossEnd				= 12,
 		StageResult			= 13,
-		NumOfPhse			= 14
+		StageResult_Idle	= 14,
+		NumOfPhse			= 15
 	};
 public:
 	COneStagePhaseControl();
 	~COneStagePhaseControl();
 
 public:
-					void		Update		(void) override;
+					void		Update				(void) override;
+
+public:
+					void		OpenStageResult		(void);
 };
 
 #endif

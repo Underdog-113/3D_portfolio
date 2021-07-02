@@ -27,7 +27,7 @@
 #define Name_SwitchIn					L"SwitchIn"
 #define Name_SwitchOut					L"SwitchOut"
 #define Name_Ultra						L"Ultra"
-#define Name_Victory					L"Victory_01"
+#define Name_Victory					L"Victory"
 #define Name_Victory_Idle				L"Victory_Idle"
 
 #define Index_Appear					0

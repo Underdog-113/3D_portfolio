@@ -100,7 +100,7 @@ private:
 	GETTOR_SETTOR	(_float,				m_awaySpeed,		1.f,					AwaySpeed)
 
 	GETTOR			(_float,				m_minDistTPS,		1.f,					MinDistTPS)
-	GETTOR			(_float,				m_maxDistTPS,		3.f,					MaxDistTPS)
+	GETTOR_SETTOR	(_float,				m_maxDistTPS,		3.f,					MaxDistTPS)
 
 };
 END

@@ -173,7 +173,7 @@ void CScrollViewObject::AddScrollViewData(_int column, _float2 distanceXY, _floa
 	m_offSet = offSet;
 }
 
-CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset)
+CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstring texture, _float3 size, _float2 offset, _float sort)
 {
 	SP(Engine::CImageObject) image =
 		std::static_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
@@ -183,7 +183,7 @@ CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstr
 
 	ImageInfo info;
 	info.m_image = image;
-	info.m_offset = offset;
+	info.m_offset = _float3(offset.x, offset.y, sort);
 
 	m_vImageObject[number].emplace_back(info);
 
@@ -223,14 +223,12 @@ void CScrollViewObject::ImageObjectSort()
 		buttonObject->GetTransform()->SetPosition(pos);
 
 
-		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.02f);
+		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
 		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);
-
-
 
 		for (auto& imageObject : m_vImageObject[count])
 		{
-			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, 0.01f);
+			_float3 T = _float3(imageObject.m_offset.x, imageObject.m_offset.y, imageObject.m_offset.z + 0.01f);
 			imageObject.m_image->GetTransform()->SetPosition(pos + T);
 		}
 

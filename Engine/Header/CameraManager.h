@@ -29,9 +29,9 @@ public:
 
 			void					DeleteMainCam		(void);
 
+			void					ChangeCameraMode	(ECameraMode newCameraMode);
 private:
 			void					SetMainCameraMode	(void);
-			void					ChangeCameraMode	(ECameraMode newCameraMode);
 
 private:
 	std::unordered_map<std::wstring, SP(CCamera)> m_mCameras;

@@ -103,11 +103,12 @@ void CBattleEndManager::ItemUI()
 		spScrollView->AddImageObjectData(count, CDataManager::GetInstance()->FindItemData(item.itemName)->GetTextureKey(), _float3(108.0f, 94.4f, 0), _float2(0.0f, 12.5f));
 
 		_int rank = CDataManager::GetInstance()->FindItemData(item.itemName)->GetRank();
-		_float2 offset = _float2(-18.0f * (_int)(rank * 0.5f), -36.4f);
+		_float2 offset = _float2(-18.0f * (_int)(rank * 0.5f), -34.4f);
+
 		for (int i = 0; i < rank; i++)
 		{
 			spScrollView->
-				AddImageObjectData(count, L"StarBig", _float3(26.3f, 26.3f, 0.0f), offset);
+				AddImageObjectData(count, L"StarBig", _float3(22.3f, 22.3f, 0.0f), offset , 0.01f);
 			offset.x += 25.0f;
 		}
 

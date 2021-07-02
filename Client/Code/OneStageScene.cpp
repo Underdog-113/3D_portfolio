@@ -65,25 +65,6 @@ void COneStageScene::Start(void)
 	m_pBattleUIManager->Start(this);
 
 
-	//SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	//spSickleClone->GetTransform()->SetPosition(25.0548f, -1.f, 0.421f);
-	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-	//m_vSickle.emplace_back(spSickleClone);
-
-	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	//spSickleClone->GetTransform()->SetPosition(26.8889f, -1.f, -0.855956f);
-	//spSickleClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
-	//m_vSickle.emplace_back(spSickleClone);
-
-	//SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	//spSpiderClone->GetTransform()->SetPosition(29.1903f, -1.f, 0.606165f);
-	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
-	//m_vSpider.emplace_back(spSpiderClone);
-
-	//spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	//spSpiderClone->GetTransform()->SetPosition(31.5491f, -1.f, -0.827802f);
-	//spSpiderClone->AddComponent<CPatternMachineC>()->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
-	//m_vSpider.emplace_back(spSpiderClone);
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -194,14 +175,6 @@ void COneStageScene::SetupMembers(void)
 
 	// Cam Target Set
 	Create_SceneCamera();
-
-	//Create_Dummy(_float3(5.f, 0.f, 0.f));
-	//Create_Dummy(_float3(10.f, 0.f, 0.f));
-	//Create_Dummy(_float3(15.f, 0.f, 2.f));
-	//Create_Dummy(_float3(15.f, 0.f, -2.f));
-	// Spider
-
-
 }
 
 void COneStageScene::Create_ActorValkyrie(void)
@@ -212,6 +185,17 @@ void COneStageScene::Create_ActorValkyrie(void)
 	m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
 	m_pControlTower->AddSquadMember(m_spValkyrie);
 	m_pControlTower->Start(CStageControlTower::ALL);
+
+	SP(Engine::CObject) spTheresaClone = ADD_CLONE(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
+
+	m_pControlTower->AddSquadMember(spTheresaClone);
+	static_cast<CValkyrie*>(spTheresaClone.get())->SetIsWait(true);
+
+	SP(Engine::CObject) spSakuraClone = ADD_CLONE(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
+
+	m_pControlTower->AddSquadMember(spSakuraClone);
+	static_cast<CValkyrie*>(spSakuraClone.get())->SetIsWait(true);
+
 }
 
 void COneStageScene::Create_SceneCamera(void)
@@ -220,7 +204,7 @@ void COneStageScene::Create_SceneCamera(void)
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
-	cam->SetTargetDist(4.f);
+	cam->SetMaxDistTPS(2.f);
 	CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
 
 	cam->SetMode(Engine::ECameraMode::TPS);

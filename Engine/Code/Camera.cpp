@@ -249,11 +249,11 @@ void CCamera::UpdateTPS(void)
 {
 	CameraRotate();
 
-	if (m_wallCollided == false && m_targetDist < 3)
+	if (m_wallCollided == false && m_targetDist < m_maxDistTPS)
 	{
 		_float newTargetDist = m_targetDist + m_awaySpeed * GET_DT;
 
-		newTargetDist = GET_MATH->Min(newTargetDist, 3);
+		newTargetDist = GET_MATH->Min(newTargetDist, m_maxDistTPS);
 		m_targetDist = newTargetDist;
 	}
 
