@@ -65,6 +65,7 @@ void CEditorScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
 	m_pDataStore->AddDataSection(L"UI", (_uint)EDataID::UI);
 	m_pDataStore->AddDataSection(L"Stat", (_uint)EDataID::Stat);
+	m_pDataStore->AddDataSection(L"Monster", (_uint)EDataID::Monster);
 
 	m_pDataStore->InitDataForScene(L"StaticScene", true);
 	m_pMeshStore->InitMeshForScene(L"StaticScene", true);

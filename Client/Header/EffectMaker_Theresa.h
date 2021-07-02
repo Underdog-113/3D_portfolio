@@ -47,5 +47,7 @@ public:
 
 private:
 	CTheresa* m_pTheresa;
+
+	_float3 m_posOffset = _float3(0.f, 0.1f, 0.1f);
 };
 

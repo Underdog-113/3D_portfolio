@@ -48,7 +48,7 @@ void CMO_Sickle::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
+	//m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
@@ -66,7 +66,6 @@ void CMO_Sickle::Start(void)
 	m_pStat->SetupStatus(&stat);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
-	m_pAttackBall->SetOffset(_float3(0, 1, 0));
 	m_pAttackBall->SetOwner(this);
 	
 	FindRightHand();
