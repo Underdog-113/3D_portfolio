@@ -673,6 +673,12 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att">
       <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect">
+      <UniqueIdentifier>{e8acabec-ae7a-40b0-b0f3-d97c2fece6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
+      <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1318,6 +1324,12 @@
     <ClInclude Include="..\Header\Sakura_Charge_Att.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MonsterHitEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SoftEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1894,6 +1906,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterHitEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoftEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

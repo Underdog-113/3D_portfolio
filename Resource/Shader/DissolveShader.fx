@@ -149,10 +149,11 @@ technique DissolveShader
 	pass p0
 	{
 		CullMode = None;
+		AlphaTestEnable = true;
+		zWriteEnable = false;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
-
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();
 	}
