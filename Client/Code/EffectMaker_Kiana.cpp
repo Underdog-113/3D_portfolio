@@ -28,11 +28,10 @@ void CEffectMaker_Kiana::CreateEffect_Attack1()
 	_float size = 0.5f;
 
 	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"K_Trail_0", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-	effect->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward());
+	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
+	effect->GetTransform()->AddPositionZ(m_forwardOffset);
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
-	effect->GetTransform()->SetRotationY(m_pKiana->GetTransform()->GetRotation().y);
 
 }
 
@@ -41,12 +40,11 @@ void CEffectMaker_Kiana::CreateEffect_Attack2()
 	_float size = 0.5f;
 
 	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"K_Trail_1", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
 
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 
 
 	if (m_pKiana->GetUltraMode())
@@ -60,12 +58,11 @@ void CEffectMaker_Kiana::CreateEffect_Attack3()
 	_float size = 0.5f;
 
 	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"K_Trail_2", AttackTrail_Tex1Name, AttackTrail_Tex2Name , AttackTrail_Tex3Name);
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
 
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 
 	if (m_pKiana->GetUltraMode())
 	{
@@ -77,24 +74,22 @@ void CEffectMaker_Kiana::CreateEffect_Attack4()
 {
 	_float size = 0.5f;
 	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"K_Trail_3", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
 
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 }
 
 void CEffectMaker_Kiana::CreateEffect_Attack5()
 {
 	_float size = 0.5f;
 	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"K_Trail_4", AttackTrail_Tex1Name, AttackTrail_Tex2Name , AttackTrail_Tex3Name);
-	effect->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
 	effect->GetTransform()->SetSize(_float3(size, size, size));
 
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	effect->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
 
 	if (m_pKiana->GetUltraMode())
 	{

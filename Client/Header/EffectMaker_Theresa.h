@@ -48,6 +48,6 @@ public:
 private:
 	CTheresa* m_pTheresa;
 
-	float m_forwardOffset = -0.2f;
+	_float3 m_posOffset = _float3(0.f, 0.1f, 0.1f);
 };
 
