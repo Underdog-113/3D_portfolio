@@ -1399,7 +1399,7 @@
     <ClInclude Include="..\Header\SoftEffect.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CameraMan.h" />
+    <ClInclude Include="..\Header\StageCameraMan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2010,7 +2010,7 @@
     <ClCompile Include="..\Code\SoftEffect.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CameraMan.cpp" />
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

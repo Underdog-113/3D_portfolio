@@ -200,7 +200,7 @@
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
-    <ClInclude Include="..\Header\CameraMan.h" />
+    <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
     <ClInclude Include="..\Header\ClientPatterns.h" />
@@ -428,7 +428,7 @@
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
-    <ClCompile Include="..\Code\CameraMan.cpp" />
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
     <ClCompile Include="..\Code\CircularGaugeShader.cpp" />

@@ -50,6 +50,7 @@ void CInputManager::OnEnable(void)
 void CInputManager::OnDisable(void)
 {
 }
+
 bool CInputManager::KeyUp(uint64_t key)
 {
 	if ((m_lastFrameKey & key) && !(m_key & key))

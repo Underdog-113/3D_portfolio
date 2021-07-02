@@ -12,6 +12,7 @@
 #include "UILinker.h"
 #include "StatusDealer.h"
 #include "ActorController.h"
+#include "StageCameraMan.h"
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
@@ -27,12 +28,13 @@ void CStageControlTower::Start(CreateMode mode)
 		m_pLinker = new CUILinker;
 	m_pActorController = new CActorController;
 	m_pDealer = new CStatusDealer;
-
+	m_pCameraMan = new CStageCameraMan;
 
 	if (m_mode != WithoutUI)
 		m_pLinker->SetControlTower(this);
 	m_pActorController->SetControlTower(this);
 	m_pDealer->SetControlTower(this);
+
 }
 
 
@@ -40,6 +42,8 @@ void CStageControlTower::Update(void)
 {
 	if (m_mode != WithoutUI)
 		m_pLinker->UpdateLinker();
+
+	m_pCameraMan->UpdateCameraMan();
 
 	m_pActorController->UpdateController();
 
@@ -73,6 +77,7 @@ void CStageControlTower::OnDestroy()
 	SAFE_DELETE(m_pActorController)
 	SAFE_DELETE(m_pDealer)
 	SAFE_DELETE(m_pPhaseControl)
+	SAFE_DELETE(m_pCameraMan)
 }
 
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
@@ -89,14 +94,15 @@ void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
 	m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
 }
 
-void CStageControlTower::ActorControl_SetCurrentMainCam(SP(Engine::CCamera) pCam)
-{
-	m_pActorController->SetCurrentMainCam(pCam);
-}
-
 void CStageControlTower::ActorControl_SetInputLock(bool lock)
 {
 	m_pActorController->SetInputLock_ByAni(lock);
+}
+
+void CStageControlTower::SetCurrentMainCam(SP(Engine::CCamera) pCam)
+{
+	m_pActorController->SetCurrentMainCam(pCam);
+	m_pCameraMan->SetCamera(pCam);
 }
 
 void CStageControlTower::IncreasePhase()

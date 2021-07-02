@@ -256,13 +256,6 @@ void CCamera::UpdateTPS(void)
 		newTargetDist = GET_MATH->Min(newTargetDist, m_maxDistTPS);
 		m_targetDist = newTargetDist;
 	}
-
-	if (IMKEY_PRESS(KEY_D))
-		m_lookAngleUp += (PI / 3) * GET_DT;
-	if (IMKEY_PRESS(KEY_A))
-		m_lookAngleUp -= (PI / 3) * GET_DT;
-
-
 	//RayCollider 길이 업데이트
 	m_pCamRayCollider->SetLength(m_targetDist);
 }
