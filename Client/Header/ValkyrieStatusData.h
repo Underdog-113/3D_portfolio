@@ -52,5 +52,7 @@ private:
 	GETTOR_SETTOR(std::wstring, m_squadTextureKey, {}, SquadTextureKey);
 	// 발키리 목록에 들어갈 이미지
 	GETTOR_SETTOR(std::wstring, m_listTextureKey, {}, ListTextureKey);
+
+
 };
 

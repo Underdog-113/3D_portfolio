@@ -16,6 +16,19 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 {
 	m_activation = true;
 	m_monsterHpCount = 0;
+
+	m_specialUICanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"specialUICanvas").get());
+	m_specialUICanvas->AddObjectFind();
+	m_specialUICanvas->SetIsEnabled(false);
+	m_specialUBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"specialUICanvas_specialU_0").get()));
+	m_specialUBar[0]->SetValue(4);
+	m_specialUBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"specialUICanvas_specialU_1").get()));
+	m_specialUBar[1]->SetValue(4);
+	m_specialUBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"specialUICanvas_specialU_2").get()));
+	m_specialUBar[2]->SetValue(4);
+	m_specialUBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"specialUICanvas_specialU_3").get()));
+	m_specialUBar[3]->SetValue(4);
+
 	//MainCanvas
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
 
@@ -412,6 +425,27 @@ void CBattleUiManager::PlayerSpUp(_float value)
 	m_playerSp->GetComponent<Engine::CTextC>()->ChangeMessage((std::to_wstring((int)m_playerSpBar->GetValue()) + L" / " + std::to_wstring((int)m_playerSpBar->GetMaxValue())));
 }
 
+void CBattleUiManager::SpecialUICanvasOn()
+{
+	m_specialUICanvas->SetIsEnabled(true);
+}
+
+void CBattleUiManager::SpecialUIUp()
+{
+	for (auto& obj : m_specialUBar)
+	{
+		obj->SetValue(obj->GetValue() + 1);
+	}
+}
+
+void CBattleUiManager::SpecialUIDwon()
+{
+	for (auto& obj : m_specialUBar)
+	{
+		obj->SetValue(obj->GetValue() - 1);
+	}
+}
+
 bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 {
 	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)
@@ -433,7 +467,7 @@ void CBattleUiManager::BattleEnd()
 	m_monsterTargetCanvas->SetIsEnabled(false);
 	m_giveUpCanvas->SetIsEnabled(false);
 	m_victoryCanvas->SetIsEnabled(true);
-
+	m_specialUICanvas->SetIsEnabled(false);
 
 	_float m_totalTime = m_time->GetComponent<CTimerUiC>()->GetTotalTime();
 	_int minute = (int)m_totalTime / 60;
