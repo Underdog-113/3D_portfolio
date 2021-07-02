@@ -69,6 +69,10 @@ public:
 	void PlayerSpDown(_float value);
 	void PlayerSpUp(_float value);
 
+	void SpecialUICanvasOn();
+	void SpecialUIUp();
+	void SpecialUIDwon();
+
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	void BattleEnd();
 private:
@@ -84,6 +88,7 @@ private:
 	Engine::CCanvas* m_monsterTargetCanvas;
 	Engine::CCanvas* m_giveUpCanvas;
 	Engine::CCanvas* m_victoryCanvas;
+	Engine::CCanvas* m_specialUICanvas;
 
 	Engine::CImageObject* m_keyPad;
 	Engine::CImageObject* m_hitCount;
@@ -111,7 +116,7 @@ private:
 	Engine::CSlider* m_playerSpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerHpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerSpBar;
-
+	std::vector<Engine::CSlider*> m_specialUBar;
 };
 
 
