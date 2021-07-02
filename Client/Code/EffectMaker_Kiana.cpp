@@ -5,12 +5,12 @@
 #define AttackTrail_ObjectKey	L"Kiana_Trail"
 #define AttackTrail_Tex1Name	L"K_Trail"
 #define AttackTrail_Tex2Name	L"explosionpoint1"
-#define AttackTrail_Tex3Name	L"Ability_aura"
+#define AttackTrail_Tex3Name	L"yun01"
 
 #define UltraTrail_ObjectKey	L"Kiana_Ult_Trail"
 #define UltraTrail_Tex1Name		L"Kiana_CatPaw_Trail"
 #define UltraTrail_Tex2Name		L"explosionpoint1"
-#define UltraTrail_Tex3Name		L"Ability_aura"
+#define UltraTrail_Tex3Name		L"yun01"
 
 CEffectMaker_Kiana::CEffectMaker_Kiana(CKiana * pKiana)
 {
