@@ -43,6 +43,9 @@
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
 
+#include "SoftEffect.h"
+#include "MonsterHitEffect.h"
+
 // Kiana
 #include "Kiana_Trail.h"
 #include "Kiana_Ult_Trail.h"
@@ -230,7 +233,9 @@ void CStaticScene::InitPrototypes(void)
 	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
 
-
+	// Hit
+	SP(CSoftEffect) spHitEffect(CMonsterHitEffect::Create(true, this));
+	GetObjectFactory()->AddPrototype(spHitEffect);
 }
 
 void CStaticScene::InitMapPrototypes(void)

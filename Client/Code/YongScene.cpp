@@ -137,14 +137,21 @@ void CYongScene::Update(void)
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Charge_Att_Fire");
 		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);*/
 
-		SP(Engine::CObject) spMeshEffect
+		/*SP(Engine::CObject) spMeshEffect
 			= m_pObjectFactory->AddClone(L"Sakura_Charge_Att", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sakura_Beam");
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_3");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_3");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_3");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);*/
+
+		SP(Engine::CObject) spSoftEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
+		spSoftEffect->GetComponent<Engine::CGraphicsC>();
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
+		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	}
 }
 

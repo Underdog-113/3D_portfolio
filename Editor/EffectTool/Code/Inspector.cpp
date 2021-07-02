@@ -593,7 +593,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	}
 
 }
@@ -603,6 +603,7 @@ void CInspector::Add_SoftEffect(CString ObjectName)
 	SP(Engine::CObject) spSoftEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SoftEffect", false);
 	spSoftEffect->GetComponent<Engine::CGraphicsC>();
+	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 }
