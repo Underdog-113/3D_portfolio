@@ -709,6 +709,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att">
       <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\00.ForScene\05.Portal">
+      <UniqueIdentifier>{c037e8dd-2f30-4dd3-aa1e-438896505014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1375,11 +1378,14 @@
     <ClInclude Include="..\Header\BattleEndManager.h">
       <Filter>09.Manager\08.BattleEndManager</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\LaserTrailShader.h">
-        <Filter>04.Shader\11.LaserTrail</Filter>
-      </ClInclude>
-      <ClInclude Include="..\Header\Sakura_Charge_Att.h">
-        <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    <ClInclude Include="..\Header\LaserTrailShader.h">
+      <Filter>04.Shader\11.LaserTrail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Charge_Att.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Portal.h">
+      <Filter>02.Objects\00.ForScene\05.Portal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1981,6 +1987,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Portal.cpp">
+      <Filter>02.Objects\00.ForScene\05.Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

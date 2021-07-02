@@ -42,7 +42,8 @@ enum class EDataID
 	UI				= 5 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Stat			= 6 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Monster			= 7 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	NumOfDataID		= 8 + (_uint)Engine::EDataID::NumOfEngineDataID
+	ClientObject	= 8 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	NumOfDataID		= 9 + (_uint)Engine::EDataID::NumOfEngineDataID
 };
 
 

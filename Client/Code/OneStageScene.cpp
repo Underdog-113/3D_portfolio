@@ -91,27 +91,27 @@ void COneStageScene::Update(void)
 		Create_Spider(m_spValkyrie->GetTransform()->GetPosition() + _float3(3.f, 1.f, 0.f));
 	}
 
-	if (true == m_bossSpawn)
-	{
-		/* Ganesha */
-		SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-		std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
-		spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
-		spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-		m_spGanesha = spGaneshaClone;
+	//if (true == m_bossSpawn)
+	//{
+	//	/* Ganesha */
+	//	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
+	//	std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
+	//	spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
+	//	spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
+	//	m_spGanesha = spGaneshaClone;
 
-		m_bossSpawn = false;
-	}
-	else if (Engine::IMKEY_DOWN(KEY_UP))
+	//	m_bossSpawn = false;
+	//}
+	if (Engine::IMKEY_DOWN(KEY_UP))
 	{
 		//m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
 		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
 	}
-	else if (Engine::IMKEY_DOWN(KEY_E))
-	{
-		m_bossSpawn = true;
-		m_onBoss = true;
-	}
+	//else if (Engine::IMKEY_DOWN(KEY_E))
+	//{
+	//	m_bossSpawn = true;
+	//	m_onBoss = true;
+	//}
 
 	std::cout << "kiana x : " <<
 		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
@@ -165,8 +165,8 @@ void COneStageScene::SetupFromLoader(void)
 	Load->TextLoad(this);
 	Load->MapLoad(this);
 	Load->PhaseChangerLoad(this);
+	Load->PortalLoad(this);
 	delete(Load);
-
 }
 
 void COneStageScene::SetupMembers(void)

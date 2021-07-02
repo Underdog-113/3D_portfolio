@@ -17,6 +17,7 @@
 #include "PhaseChanger.h"
 #include "MapObject2D.h"
 #include "Monster.h"
+#include "Portal.h"
 
 #include "ValkyrieLevelUp.h"
 #include "ValkyrieWeaponSwap.h"
@@ -744,6 +745,37 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
 			L"_timer", timer);
 		spMonster->SetSpawnTimer(timer);
+	}
+}
+
+void CDataLoad::PortalLoad(Engine::CScene * pScene)
+{
+	auto& pDataStore = pScene->GetDataStore();
+	auto& pObjectFactory = pScene->GetObjectFactory();
+
+	
+	_int numOfPortal;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPortal", L"numOfPortal", numOfPortal);
+	for (_int i = 0; i < numOfPortal; ++i)
+	{
+		SP(CPortal) spPortal =
+			std::dynamic_pointer_cast<CPortal>(pObjectFactory->AddClone(L"Portal", true));
+
+		_float3 position;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPortal", std::to_wstring(i) + L"_position", position);
+		spPortal->GetTransform()->SetPosition(position);
+
+		_float3 rotation;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPortal", std::to_wstring(i) + L"_rotation", rotation);
+		spPortal->GetTransform()->SetRotation(rotation);
+
+		_float3 size;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPortal", std::to_wstring(i) + L"_size", size);
+		spPortal->GetTransform()->SetSize(size);
+
+		_float3 dest;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPortal", std::to_wstring(i) + L"_dest", dest);
+		spPortal->SetDestPos(dest);
 	}
 }
 

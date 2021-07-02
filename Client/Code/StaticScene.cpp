@@ -7,6 +7,7 @@
 #include "MapObject.h"
 #include "MapObject2D.h"
 #include "PhaseChanger.h"
+#include "Portal.h"
 #pragma endregion
 
 #pragma region Prototype Headers
@@ -249,6 +250,9 @@ void CStaticScene::InitMapPrototypes(void)
 
 	SP(CPhaseChanger) spPhaseChanger(CPhaseChanger::Create(true, this));
 	GetObjectFactory()->AddPrototype(spPhaseChanger);
+
+	SP(CPortal) spPortal(CPortal::Create(true, this));
+	GetObjectFactory()->AddPrototype(spPortal);
 }
 
 void CStaticScene::InitUiPrototypes(void)

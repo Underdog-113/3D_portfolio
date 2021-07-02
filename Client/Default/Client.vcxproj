@@ -325,6 +325,7 @@
     <ClInclude Include="..\Header\NinzaHitPattern.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\Portal.h" />
     <ClInclude Include="..\Header\RobotAttack1Pattern.h" />
     <ClInclude Include="..\Header\RobotAttack2Pattern.h" />
     <ClInclude Include="..\Header\RobotBasePattern.h" />
@@ -527,6 +528,7 @@
     <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\Portal.cpp" />
     <ClCompile Include="..\Code\RobotAttack1Pattern.cpp" />
     <ClCompile Include="..\Code\RobotAttack2Pattern.cpp" />
     <ClCompile Include="..\Code\RobotBasePattern.cpp" />

@@ -39,6 +39,9 @@ public:
 	// 페이즈 체인저 로드
 	void PhaseChangerLoad(Engine::CScene* pScene);
 	
+	// 포탈 로드
+	void PortalLoad(Engine::CScene* pScene);
+
 	void EffectLoad(Engine::CScene* pScene);
 
 	void ButtonFunction(SP(CButton) button, std::wstring function);
