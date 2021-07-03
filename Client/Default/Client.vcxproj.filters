@@ -721,6 +721,21 @@
     <Filter Include="10.ControlTower\CameraMan">
       <UniqueIdentifier>{e9c40220-419e-4b07-8e13-4ba6315e98d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1">
+      <UniqueIdentifier>{a79a242c-70fc-4a53-a5fa-aedff815da33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1">
+      <UniqueIdentifier>{dd0c389f-7044-40a3-983f-a9e2db94ff9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1">
+      <UniqueIdentifier>{b1ebeac4-84f6-4011-919a-91c0a834c132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape">
+      <UniqueIdentifier>{da2f0892-4404-413b-bbc2-903235846cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn">
+      <UniqueIdentifier>{a7cc5d8f-e9e8-42cf-8b0c-7e47c747eb68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1405,6 +1420,24 @@
     <ClInclude Include="..\Header\StageCameraMan.h">
       <Filter>10.ControlTower\CameraMan</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaShoot1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaThrow1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaShock1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaEscapePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterSpawnEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterSpawnBeam.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2017,6 +2050,24 @@
     </ClCompile>
     <ClCompile Include="..\Code\StageCameraMan.cpp">
       <Filter>10.ControlTower\CameraMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaEscapePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterSpawnEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

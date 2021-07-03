@@ -48,17 +48,17 @@ void CMO_Lancer::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(0.8f, 0.8f, 0.8f);
+	m_spTransform->SetSize(0.7f, 0.7f, 0.7f);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(522.f);
-	stat.SetBaseAtk(31.f);
-	stat.SetBaseDef(15.f);
+	stat.SetBaseHp(2522.f);
+	stat.SetBaseAtk(45.f);
+	stat.SetBaseDef(25.f);
 
-	stat.SetGrowHp(9.f);
+	stat.SetGrowHp(259.f);
 	stat.SetGrowAtk(2.8f);
 	stat.SetGrowDef(1.f);
 

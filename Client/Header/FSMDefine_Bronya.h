@@ -64,3 +64,66 @@
 #define Index_Weak_Start_H		29
 #define Index_Hit_H				30
 #define Index_Die				31
+
+/*
+
+#define Name_IDLE
+
+//이동1
+#define Name_Run				: 앞으로 이동
+#define Name_DashBack			: 뒤로 빠르게 이동		
+#define Name_Evade_Left			: 왼쪽 이동
+#define Name_Evade_Right		: 오른쪽 이동
+
+//이동2
+#define Name_Snealth			: 주먹 쥐기
+#define Name_Stealth_Back		: dashback 이랑 같은 애니?
+
+// 공격1
+#define Name_Attack_1			: 정권 찌르기
+
+// 공격2
+#define Name_Shoot_1			: 미사일 발사 (1~3 동일한 애니인듯)
+#define Name_Shoot_2
+#define Name_Shoot_3
+
+// 공격3
+#define Name_Shock_1			: 제자리에서 로봇 손으로 땅 찍기
+#define Name_Shock_2			: 앞으로 전진하면서 대포로 땅 찍기
+#define Name_Shock_2_Boom		: 대포로 찍고 나서 일어섬
+#define Name_Shock_2_Miss		: 대포로 찍고 나서 일어섬
+
+// 공격4
+#define Name_Throw_1			: 폭탄 3개 던지기
+#define Name_Throw_2			: 팔꿈치를 굽혔다가 쭉 폄
+#define Name_Throw_3			: 주먹을 쥐지 않고 쥐는 동작이랑 비슷하게 함
+
+// 탈출기
+#define Name_Escape_Out			: 탈출
+#define Name_Escape_In			: 재진입
+
+// 궁극기1
+#define Name_Arsenal_Charge		: 진입
+#define Name_Arsenal_Loop		: 시전 중
+#define Name_Arsenal_End		: 끝내기
+
+// 궁극기2
+#define Name_Skill_Ultra		: 주먹 쥐기
+
+// 스턴
+#define Name_Weak				: 로봇과 같이 고개를 떨구고 헤롱헤롱 함
+
+// 히트
+#define Name_Weak_Hit_L			: 약한 히트
+#define Name_Weak_Start_L		: 위와 같은 애니?
+#define Name_Weak_Hit_H			: 강한 히트
+#define Name_Weak_Start_H		: 위와 같은 애니?
+#define Name_Hit_H				: 위와 같은 애니?
+
+// 죽음
+#define Name_Die				: 죽음
+
+// 기타
+#define Name_Summon				: 손을 위로 올렸다가 내림
+
+*/

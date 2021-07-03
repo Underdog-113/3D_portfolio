@@ -4,10 +4,6 @@
 #include "Engine.h"
 
 BEGIN(Engine)
-class CCollisionC;
-class CBoxCollider;
-class CSphereCollider;
-class CRayCollider;
 class ENGINE_DLL CCollisionManager final : public CEngine
 {
 	DECLARE_SINGLETON(CCollisionManager)
@@ -43,7 +39,7 @@ private:
 	std::vector<SP(CCollisionC)> m_vCollisions;
 	std::vector<std::vector<SP(CCollider)>> m_vColliders;
 
-	typedef std::function<_bool(CCollider*, CCollider*, _bool)>	_COLLISION_CHECKER;
+	typedef std::function<_bool(SP(CCollider), SP(CCollider), _bool)>	_COLLISION_CHECKER;
 	typedef std::array<std::array <_COLLISION_CHECKER, (_int)EColliderType::NumOfCT>, (_int)EColliderType::NumOfCT> _COLLISION_CHECKER_2D;
 	_COLLISION_CHECKER_2D m_fpCollisionChecker;
 

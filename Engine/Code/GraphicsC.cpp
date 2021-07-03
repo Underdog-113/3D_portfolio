@@ -83,6 +83,11 @@ void CGraphicsC::OnEnable(void)
 	__super::OnEnable();
 }
 
+void CGraphicsC::AddMaterial(D3DMATERIAL9 mtrl)
+{
+	m_vMaterials.emplace_back(mtrl);
+}
+
 D3DMATERIAL9 & CGraphicsC::GetMtrl(void)
 {
 	return m_mtrl;

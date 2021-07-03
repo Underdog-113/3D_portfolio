@@ -10,9 +10,9 @@
 BEGIN(Engine)
 BEGIN(CollisionHelper)
 
-static _bool CollisionTypeSorting(CCollider* pC1, CCollider* pC2,
+static _bool CollisionTypeSorting(SP(CCollider) pC1, SP(CCollider) pC2,
 								  EColliderType supposedType1, EColliderType supposedType2,
-								  CCollider*& pSortedC1, CCollider*& pSortedC2)
+								  SP(CCollider)& pSortedC1, SP(CCollider)& pSortedC2)
 {
 	if (pC1->GetColliderType() == (_int)supposedType1 && pC2->GetColliderType() == (_int)supposedType2)
 	{
@@ -59,13 +59,13 @@ static _bool CheckColliderBS(SP(CCollider) pCollider1, SP(CCollider) pCollider2)
 }
 
 
-static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool PointPoint(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 {
 	SP(CTransformC) spTransform1 = pC1->GetOwner()->GetTransform();
 	SP(CTransformC) spTransform2 = pC2->GetOwner()->GetTransform();
 
-	CPointCollider* pPC1 = static_cast<CPointCollider*>(pC1);
-	CPointCollider* pPC2 = static_cast<CPointCollider*>(pC2);
+	SP(CPointCollider) pPC1 = std::dynamic_pointer_cast<CPointCollider>(pC1);
+	SP(CPointCollider) pPC2 = std::dynamic_pointer_cast<CPointCollider>(pC2);
 
 	if (spTransform1->GetPosition() + pPC1->GetOffset() ==
 		spTransform2->GetPosition() + pPC2->GetOffset())
@@ -83,7 +83,7 @@ static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 			else
 			{
 				_float3 hitPoint = spTransform1->GetPosition() + pPC1->GetOffset();
-				pPC1->GetOwner()->AddCollisionInfo(_CollisionInfo(pPC1, pPC2, hitPoint, ZERO_VECTOR, 0));
+				pPC1->GetOwner()->AddCollisionInfo(_CollisionInfo(pC1, pC2, hitPoint, ZERO_VECTOR, 0));
 				pPC2->GetOwner()->AddCollisionInfo(_CollisionInfo(pPC2, pPC1, hitPoint, ZERO_VECTOR, 0));
 			}
 		}
@@ -94,16 +94,16 @@ static _bool PointPoint(CCollider* pC1, CCollider* pC2, _bool instant)
 	return false;
 }
 
-static _bool PointRay(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool PointRay(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 {
-	CCollider* pSupposedPC = nullptr;
-	CCollider* pSupposedRC = nullptr;
+	SP(CCollider) pSupposedPC = nullptr;
+	SP(CCollider) pSupposedRC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Point, EColliderType::Ray, pSupposedPC, pSupposedRC))
 		return false;
 
-	CPointCollider* pPC = static_cast<CPointCollider*>(pSupposedPC);
-	CRayCollider* pRC = static_cast<CRayCollider*>(pSupposedRC);
+	SP(CPointCollider)	pPC = std::dynamic_pointer_cast<CPointCollider>(pSupposedPC);
+	SP(CRayCollider)	pRC = std::dynamic_pointer_cast<CRayCollider>(pSupposedRC);
 
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
@@ -142,16 +142,16 @@ static _bool PointRay(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	return false;
 }
-static _bool PointSphere(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool PointSphere(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CCollider* pSupposedPC = nullptr;
-	CCollider* pSupposedSC = nullptr;
+	SP(CCollider) pSupposedPC = nullptr;
+	SP(CCollider) pSupposedSC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Point, EColliderType::Sphere, pSupposedPC, pSupposedSC))
 		return false;
 
-	CPointCollider* pPC = static_cast<CPointCollider*>(pSupposedPC);
-	CSphereCollider* pSC = static_cast<CSphereCollider*>(pSupposedSC);
+	SP(CPointCollider)	pPC = std::dynamic_pointer_cast<CPointCollider>(pSupposedPC);
+	SP(CSphereCollider) pSC = std::dynamic_pointer_cast<CSphereCollider>(pSupposedSC);
 
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
@@ -183,19 +183,19 @@ static _bool PointSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 	return false; 
 }
 
-static _bool PointAabb(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool PointAabb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CCollider* pSupposedPC = nullptr;
-	CCollider* pSupposedAC = nullptr;
+	SP(CCollider) pSupposedPC = nullptr;
+	SP(CCollider) pSupposedAC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Point, EColliderType::Sphere, pSupposedPC, pSupposedAC))
 		return false;
 
-	CPointCollider* pPC = static_cast<CPointCollider*>(pSupposedPC);
-	CAabbCollider* pAC = static_cast<CAabbCollider*>(pSupposedAC);
+	SP(CPointCollider)	pPC = std::dynamic_pointer_cast<CPointCollider>(pSupposedPC);
+	SP(CAabbCollider)	pAC = std::dynamic_pointer_cast<CAabbCollider>(pSupposedAC);
 
-	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
-	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
+	SP(CTransformC) spPointTransform	= pPC->GetOwner()->GetTransform();
+	SP(CTransformC) spAabbTransform		= pAC->GetOwner()->GetTransform();
 
 	_float3 pcPosition = spPointTransform->GetPosition() + pPC->GetOffset();
 	_float3 acPosition = spAabbTransform->GetPosition() + pAC->GetOffset();
@@ -222,16 +222,16 @@ static _bool PointAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	}
 	return true; 
 }
-static _bool PointObb(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool PointObb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CCollider* pSupposedPC = nullptr;
-	CCollider* pSupposedOC = nullptr;
+	SP(CCollider) pSupposedPC = nullptr;
+	SP(CCollider) pSupposedOC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Point, EColliderType::Sphere, pSupposedPC, pSupposedOC))
 		return false;
 
-	CPointCollider* pPC = static_cast<CPointCollider*>(pSupposedPC);
-	CObbCollider* pOC = static_cast<CObbCollider*>(pSupposedOC);
+	SP(CPointCollider)	pPC = std::dynamic_pointer_cast<CPointCollider>(pSupposedPC);
+	SP(CObbCollider)	pOC = std::dynamic_pointer_cast<CObbCollider>(pSupposedOC);
 
 	SP(CTransformC) spPointTransform = pPC->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
@@ -281,10 +281,10 @@ static _bool PointObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	return false; 
 }
 
-static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool RayRay(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CRayCollider* pRC1 = static_cast<CRayCollider*>(pC1);
-	CRayCollider* pRC2 = static_cast<CRayCollider*>(pC2);
+	SP(CRayCollider) pRC1 = std::dynamic_pointer_cast<CRayCollider>(pC1);
+	SP(CRayCollider) pRC2 = std::dynamic_pointer_cast<CRayCollider>(pC2);
 
 	SP(CTransformC) spRayTransform1 = pRC1->GetOwner()->GetTransform();
 	SP(CTransformC) spRayTransform2 = pRC2->GetOwner()->GetTransform();
@@ -336,16 +336,16 @@ static _bool RayRay(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	return false;
 }
-static _bool RaySphere(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool RaySphere(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CCollider* pSupposedRC = nullptr;
-	CCollider* pSupposedSC = nullptr;
+	SP(CCollider) pSupposedRC = nullptr;
+	SP(CCollider) pSupposedSC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Ray, EColliderType::Sphere, pSupposedRC, pSupposedSC))
 		return false;
 
-	CRayCollider* pRC = static_cast<CRayCollider*>(pSupposedRC);
-	CSphereCollider* pSC = static_cast<CSphereCollider*>(pSupposedSC);
+	SP(CRayCollider)	pRC = std::dynamic_pointer_cast<CRayCollider>(pSupposedRC);
+	SP(CSphereCollider) pSC = std::dynamic_pointer_cast<CSphereCollider>(pSupposedSC);
 
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
@@ -409,16 +409,16 @@ static _bool RaySphere(CCollider* pC1, CCollider* pC2, _bool instant)
 	}
 	return true; 
 }
-static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool RayAabb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CCollider* pSupposedRC = nullptr;
-	CCollider* pSupposedAC = nullptr;
+	SP(CCollider) pSupposedRC = nullptr;
+	SP(CCollider) pSupposedAC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Ray, EColliderType::AABB, pSupposedRC, pSupposedAC))
 		return false;
 
-	CRayCollider* pRC = static_cast<CRayCollider*>(pSupposedRC);
-	CAabbCollider* pAC = static_cast<CAabbCollider*>(pSupposedAC);
+	SP(CRayCollider) pRC = std::dynamic_pointer_cast<CRayCollider>(pSupposedRC);
+	SP(CAabbCollider) pAC = std::dynamic_pointer_cast<CAabbCollider>(pSupposedAC);
 
 
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
@@ -495,8 +495,14 @@ static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 
 				if (normal.y - EPSILON < -1)
 				{
-					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
-					pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>()->SetOnFloor(true);
+					SP(CRigidBodyC) spRigidBody = pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>();
+
+					if (spRigidBody)
+					{
+						pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
+
+						spRigidBody->SetOnFloor(true);
+					}
 				}
 				else
 					pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
@@ -513,16 +519,16 @@ static _bool RayAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 
 	return true;
 }
-static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool RayObb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CCollider* pSupposedRC = nullptr;
-	CCollider* pSupposedOC = nullptr;
+	SP(CCollider) pSupposedRC = nullptr;
+	SP(CCollider) pSupposedOC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::Ray, EColliderType::OBB, pSupposedRC, pSupposedOC))
 		return false;
 
-	CRayCollider* pRC = static_cast<CRayCollider*>(pSupposedRC);
-	CObbCollider* pOC = static_cast<CObbCollider*>(pSupposedOC);
+	SP(CRayCollider) pRC = std::dynamic_pointer_cast<CRayCollider>(pSupposedRC);
+	SP(CObbCollider) pOC = std::dynamic_pointer_cast<CObbCollider>(pSupposedOC);
 
 	SP(CTransformC) spRayTransform = pRC->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
@@ -603,8 +609,15 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 				
 				if (normal.y - EPSILON < -1)
 				{
-					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
-					pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>()->SetOnFloor(true);
+
+					SP(CRigidBodyC) spRigidBody = pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>();
+
+					if (spRigidBody)
+					{
+						pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
+
+						spRigidBody->SetOnFloor(true);
+					}
 				}
 				else
 					pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
@@ -624,10 +637,10 @@ static _bool RayObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	return true; 
 }
 
-static _bool SphereSphere(CCollider* pC1, CCollider* pC2, _bool instant)
+static _bool SphereSphere(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 { 
-	CSphereCollider* pSC1 = static_cast<CSphereCollider*>(pC1);
-	CSphereCollider* pSC2 = static_cast<CSphereCollider*>(pC2);
+	SP(CSphereCollider) pSC1 = std::dynamic_pointer_cast<CSphereCollider>(pC1);
+	SP(CSphereCollider) pSC2 = std::dynamic_pointer_cast<CSphereCollider>(pC2);
 
 	SP(CTransformC) spSphereTransform1 = pSC1->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform2 = pSC2->GetOwner()->GetTransform();
@@ -674,16 +687,16 @@ static _bool SphereSphere(CCollider* pC1, CCollider* pC2, _bool instant)
 		return false;
 }
 
-static _bool SphereAabb(CCollider* pC1, CCollider* pC2, _bool instant) 
+static _bool SphereAabb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant) 
 { 
-	CCollider* pSupposedAC = nullptr;
-	CCollider* pSupposedSC = nullptr;
+	SP(CCollider) pSupposedAC = nullptr;
+	SP(CCollider) pSupposedSC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::AABB, EColliderType::Sphere, pSupposedAC, pSupposedSC))
 		return false;
 
-	CAabbCollider* pAC = static_cast<CAabbCollider*>(pSupposedAC);
-	CSphereCollider* pSC = static_cast<CSphereCollider*>(pSupposedSC);
+	SP(CAabbCollider) pAC = std::dynamic_pointer_cast<CAabbCollider>(pSupposedAC);
+	SP(CSphereCollider) pSC = std::dynamic_pointer_cast<CSphereCollider>(pSupposedSC);
 
 	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
@@ -739,16 +752,16 @@ static _bool SphereAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	else
 		return false;
 }
-static _bool SphereObb(CCollider* pC1, CCollider* pC2, _bool instant) 
+static _bool SphereObb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant) 
 {
-	CCollider* pSupposedOC = nullptr;
-	CCollider* pSupposedSC = nullptr;
+	SP(CCollider) pSupposedOC = nullptr;
+	SP(CCollider) pSupposedSC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::OBB, EColliderType::Sphere, pSupposedOC, pSupposedSC))
 		return false;
 
-	CObbCollider* pOC = static_cast<CObbCollider*>(pSupposedOC);
-	CSphereCollider* pSC = static_cast<CSphereCollider*>(pSupposedSC);
+	SP(CObbCollider) pOC = std::dynamic_pointer_cast<CObbCollider>(pSupposedOC);
+	SP(CSphereCollider) pSC = std::dynamic_pointer_cast<CSphereCollider>(pSupposedSC);
 
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
 	SP(CTransformC) spSphereTransform = pSC->GetOwner()->GetTransform();
@@ -791,10 +804,10 @@ static _bool SphereObb(CCollider* pC1, CCollider* pC2, _bool instant)
 		return false;
 }
 
-static _bool AabbAabb(CCollider* pC1, CCollider* pC2, _bool instant) 
+static _bool AabbAabb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant) 
 { 
-	CAabbCollider* pAC1 = static_cast<CAabbCollider*>(pC1);
-	CAabbCollider* pAC2 = static_cast<CAabbCollider*>(pC2);
+	SP(CAabbCollider) pAC1 = std::dynamic_pointer_cast<CAabbCollider>(pC1);
+	SP(CAabbCollider) pAC2 = std::dynamic_pointer_cast<CAabbCollider>(pC2);
 
 	SP(CTransformC) spAabbTransform1 = pAC1->GetOwner()->GetTransform();
 	SP(CTransformC) spAabbTransform2 = pAC2->GetOwner()->GetTransform();
@@ -837,16 +850,16 @@ static _bool AabbAabb(CCollider* pC1, CCollider* pC2, _bool instant)
 	}
 	return true; 
 }
-static _bool AabbObb(CCollider* pC1, CCollider* pC2, _bool instant) 
+static _bool AabbObb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant) 
 { 
-	CCollider* pSupposedOC = nullptr;
-	CCollider* pSupposedAC = nullptr;
+	SP(CCollider) pSupposedOC = nullptr;
+	SP(CCollider) pSupposedAC = nullptr;
 
 	if (!CollisionTypeSorting(pC1, pC2, EColliderType::OBB, EColliderType::AABB, pSupposedOC, pSupposedAC))
 		return false;
 
-	CAabbCollider* pAC = static_cast<CAabbCollider*>(pSupposedAC);
-	CObbCollider* pOC = static_cast<CObbCollider*>(pSupposedOC);
+	SP(CAabbCollider) pAC = std::dynamic_pointer_cast<CAabbCollider>(pSupposedAC);
+	SP(CObbCollider) pOC = std::dynamic_pointer_cast<CObbCollider>(pSupposedOC);
 
 	SP(CTransformC) spAabbTransform = pAC->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform = pOC->GetOwner()->GetTransform();
@@ -976,10 +989,10 @@ static _bool AabbObb(CCollider* pC1, CCollider* pC2, _bool instant)
 	return true;
 }
 
-static _bool ObbObb(CCollider* pC1, CCollider* pC2, _bool instant) 
+static _bool ObbObb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant) 
 { 
-	CObbCollider* pOC1 = static_cast<CObbCollider*>(pC1);
-	CObbCollider* pOC2 = static_cast<CObbCollider*>(pC2);
+	SP(CObbCollider) pOC1 = std::dynamic_pointer_cast<CObbCollider>(pC1);
+	SP(CObbCollider) pOC2 = std::dynamic_pointer_cast<CObbCollider>(pC2);
 
 	SP(CTransformC) spObbTransform1 = pOC1->GetOwner()->GetTransform();
 	SP(CTransformC) spObbTransform2 = pOC2->GetOwner()->GetTransform();

@@ -27,39 +27,56 @@ void CBronyaBasePattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
-	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	//if (Name_Shoot_1 != fsm->GetCurStateString() &&
-	//	Name_Evade_Left != fsm->GetCurStateString() &&
-	//	Name_Evade_Right != fsm->GetCurStateString())
-	//{
-	//	static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
-	//}
-
-	// 상대가 공격 범위 안이고
-	if (len <= m_atkDis)
+	/************************* Chase Target */
+	if (Name_Evade_Left != fsm->GetCurStateString() &&
+		Name_Evade_Right != fsm->GetCurStateString())
 	{
-		// 내가 이동, 대기 상태가 끝났다면
-		if ((Name_Run == fsm->GetCurStateString() ||
-			Name_IDLE == fsm->GetCurStateString()) &&
-			fsm->GetDM()->IsAnimationEnd() &&
-			true == m_atkReady)
-		{
-			fsm->ChangeState(Name_Shoot_1);
-			m_atkReady = false;
-		}
+		static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
 	}
-	// 내가 shoot1이 쿨타임이라면
-	//else if ()
 
-	/************************* Evade */
-	// 내가 shoot1 상태가 끝났다면
-	if (Name_Shoot_1 == fsm->GetCurStateString() &&
-		fsm->GetDM()->IsAnimationEnd() &&
-		false == m_atkReady)
+	// 이동 상태가 비었다면
+	if (L"" == m_curState)
 	{
-		fsm->ChangeState(Name_Evade_Left);
+		m_curState = Name_Run;
+	}
+
+	/************************* Choose Move Dir */
+	// 내가 대기 상태가 끝났다면
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd() &&
+		true == m_walkReady)
+	{
+		_int index = GetRandRange(0, 3);
+
+		switch (index)
+		{
+		case 0:
+			m_curState = Name_Run;
+			break;
+		case 1:
+			m_curState = Name_DashBack;
+			break;
+		case 2:
+			m_curState = Name_Evade_Left;
+			break;
+		case 3:
+			m_curState = Name_Evade_Right;
+			break;
+		}
+
+		// 이동 상태로 변경
+		fsm->ChangeState(m_curState);
+	}
+	// 내가 이동 상태가 끝났다면
+	else if (m_curState == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		// 대기 상태로 변경
+		fsm->ChangeState(Name_IDLE);
+		m_walkReady = false;
+		pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
 	}
 } 
 
