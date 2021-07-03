@@ -718,6 +718,18 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
       <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1">
+      <UniqueIdentifier>{a79a242c-70fc-4a53-a5fa-aedff815da33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1">
+      <UniqueIdentifier>{dd0c389f-7044-40a3-983f-a9e2db94ff9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1">
+      <UniqueIdentifier>{b1ebeac4-84f6-4011-919a-91c0a834c132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape">
+      <UniqueIdentifier>{da2f0892-4404-413b-bbc2-903235846cdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1400,6 +1412,18 @@
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CameraMan.h" />
+    <ClInclude Include="..\Header\BronyaShoot1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaThrow1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaShock1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaEscapePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2011,6 +2035,18 @@
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CameraMan.cpp" />
+    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaEscapePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

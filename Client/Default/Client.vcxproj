@@ -196,7 +196,11 @@
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
+    <ClInclude Include="..\Header\BronyaEscapePattern.h" />
     <ClInclude Include="..\Header\BronyaHitPattern.h" />
+    <ClInclude Include="..\Header\BronyaShock1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaThrow1Pattern.h" />
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
@@ -424,7 +428,11 @@
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaEscapePattern.cpp" />
     <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp" />
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />

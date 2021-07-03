@@ -80,36 +80,6 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 		SetMoveSound();
 		PatternPlaySound(m_curMoveSound, pOwner);
 	}
-	// 내가 앞으로 이동 중이라면
-	else if (Name_RUN_F == fsm->GetCurStateString())
-	{
-		_float3 dir = tPos - mPos;
-
-		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-		pOwner->GetTransform()->SetPosition(mPos);
-	}
-	// 내가 뒤로 이동 중이라면
-	else if (Name_RUN_B == fsm->GetCurStateString())
-	{
-		_float3 dir = tPos - mPos;
-
-		mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-		pOwner->GetTransform()->SetPosition(mPos);
-	}
-	// 내가 왼쪽으로 이동 중이라면
-	else if (Name_RUN_L == fsm->GetCurStateString())
-	{
-		mPos.x += GET_DT;
-		mPos.z -= GET_DT;
-		pOwner->GetTransform()->SetPosition(mPos);
-	}
-	// 내가 오른쪽으로 이동 중이라면
-	else if (Name_RUN_R == fsm->GetCurStateString())
-	{
-		mPos.x -= GET_DT;
-		mPos.z += GET_DT;
-		pOwner->GetTransform()->SetPosition(mPos);
-	}
 }
 
 SP(CScoutBasePattern) CScoutBasePattern::Create()

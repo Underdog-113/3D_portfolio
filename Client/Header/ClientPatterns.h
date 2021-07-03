@@ -59,3 +59,7 @@
 #include "BronyaDiePattern.h"
 #include "BronyaHitPattern.h"
 #include "BronyaBasePattern.h"
+#include "BronyaShoot1Pattern.h"
+#include "BronyaThrow1Pattern.h"
+#include "BronyaShock1Pattern.h"
+#include "BronyaEscapePattern.h"

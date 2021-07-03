@@ -40,7 +40,7 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 {
 	m_offSet.y += (m_upSpeed * GET_DT);
 
-	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition() + m_hitPointOffset);
+	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition() /*+ m_hitPointOffset*/);
 	pos2d.z = 0.f;
 	
 

@@ -35,7 +35,6 @@ SP(Engine::CObject) CMB_Bronya::MakeClone(void)
 	spClone->m_spPatternMachine = spClone->GetComponent<CPatternMachineC>();
 
 	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
-	//spClone->m_spRigidBody->SetIsEnabled(false);
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
 
@@ -48,6 +47,10 @@ void CMB_Bronya::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_BronyaC>();
 	m_spPatternMachine->AddNecessaryPatterns(CBronyaBornPattern::Create(), CBronyaDiePattern::Create(), CBronyaBasePattern::Create(), CBronyaHitPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 }
 
 void CMB_Bronya::Start(void)
@@ -60,7 +63,7 @@ void CMB_Bronya::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(5277.f);
+	stat.SetBaseHp(26277.f);
 	stat.SetBaseAtk(110.f);
 	stat.SetBaseDef(37.f);
 
@@ -78,7 +81,6 @@ void CMB_Bronya::Start(void)
 	m_pAttackBox->SetOwner(this);
 	
 	EquipWeapon();
-
 }
 
 void CMB_Bronya::FixedUpdate(void)

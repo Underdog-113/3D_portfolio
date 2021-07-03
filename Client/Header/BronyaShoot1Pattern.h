@@ -1,21 +1,24 @@
-#ifndef BRONYABASEPATTERN_H
-#define BRONYABASEPATTERN_H
+#ifndef BRONYASHOOT1PATTERN_H
+#define BRONYASHOOT1PATTERN_H
 
 #include "ATBPattern.h"
 
-class CBronyaBasePattern : public CATBPattern
+class CBronyaShoot1Pattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
 
 private:
-	explicit CBronyaBasePattern();
-	virtual ~CBronyaBasePattern();
+	explicit CBronyaShoot1Pattern();
+	virtual ~CBronyaShoot1Pattern();
 
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
-	static SP(CBronyaBasePattern) Create();
+	virtual _float GetCost() { return m_cost; }
+	static SP(CBronyaShoot1Pattern) Create();
 
 private:
+	_float m_cost = 10.f;
+
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 25.f; // 공격 거리
 	_float m_atkCool = 3.f; // 공격 쿨타임
@@ -29,7 +32,6 @@ private:
 
 	_mat m_atkMat;
 	std::wstring m_curState;
-
 };
 
 #endif

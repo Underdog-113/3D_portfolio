@@ -31,8 +31,8 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	if (Name_ATTACK_1 != fsm->GetCurStateString()/* &&
-		Name_WALK_BACKWARD != fsm->GetCurStateString()*/)
+	// 내가 공격1 상태가 아니라면 상대 추적
+	if (Name_ATTACK_1 != fsm->GetCurStateString())
 	{
 		static_cast<CMO_Lancer*>(pOwner)->ChaseTarget(tPos);
 	}
@@ -45,37 +45,40 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		if (Name_ATTACK_1 == fsm->GetCurStateString() &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
-			fsm->ChangeState(Name_WALK_FORWARD);
+			// 뒤로 이동
+			fsm->ChangeState(Name_WALK_BACKWARD);
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_STAND == fsm->GetCurStateString() &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
+			// 앞으로 이동
 			fsm->ChangeState(Name_WALK_FORWARD);
 		}
-		// 내가 이동 중이라면
-		else if (Name_WALK_FORWARD == fsm->GetCurStateString())
-		{
-			_float3 dir = tPos - mPos;
+		//// 내가 이동 중이라면
+		//else if (Name_WALK_FORWARD == fsm->GetCurStateString())
+		//{
+		//	_float3 dir = tPos - mPos;
 
-			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-			pOwner->GetTransform()->SetPosition(mPos);
-		}
-		// 내가 뒤로 이동 중이라면
-		else if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
-			fsm->GetDM()->IsAnimationEnd() &&
-			false == m_walkReady)
-		{
-			_float3 dir = tPos - mPos;
+		//	mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+		//	pOwner->GetTransform()->SetPosition(mPos);
+		//}
+		//// 내가 뒤로 이동 중이라면
+		//else if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
+		//	fsm->GetDM()->IsAnimationEnd() &&
+		//	false == m_walkReady)
+		//{
+		//	_float3 dir = tPos - mPos;
 
-			mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-			pOwner->GetTransform()->SetPosition(mPos);
-		}
+		//	mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+		//	pOwner->GetTransform()->SetPosition(mPos);
+		//}
 		// 내가 뒤로 이동이 끝났다면
 		else if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
 			fsm->GetDM()->IsAnimationEnd() &&
 			true == m_walkReady)
 		{
+			// 앞으로 이동
 			fsm->ChangeState(Name_WALK_FORWARD);
 			pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
 		}
@@ -85,15 +88,19 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 내가 이동, 대기 상태가 끝났다면
 		if ((Name_WALK_FORWARD == fsm->GetCurStateString() ||
+			Name_WALK_BACKWARD == fsm->GetCurStateString() ||
 			Name_STAND == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
+			// 공격 상태로 변경
 			fsm->ChangeState(Name_ATTACK_1);
 			PatternPlaySound(L"Lencer_Skill_Attack_2.wav", pOwner);
 		}
 		// 내가 공격1 상태가 끝났다면
-		else if (Name_ATTACK_1 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		else if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
+			// 뒤로 이동
 			fsm->ChangeState(Name_WALK_BACKWARD);
 		}
 	}
