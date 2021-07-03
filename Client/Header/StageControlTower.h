@@ -29,6 +29,7 @@ class CValkyrie;
 class CActorController;
 class CUILinker;
 class CStatusDealer;
+class CStageCameraMan;
 class CPhaseControl;
 class COneStagePhaseControl;
 enum class EOneStagePhase;
@@ -48,9 +49,9 @@ public:
 
 public:
 	void AddSquadMember(SP(Engine::CObject) pValkyrie);
-	void ActorControl_SetCurrentMainCam(SP(Engine::CCamera) pCam);
 	void ActorControl_SetInputLock(bool lock);
-	
+
+	void SetCurrentMainCam(SP(Engine::CCamera) pCam);
 
 public:		/* Phase */
 	void IncreasePhase();
@@ -76,6 +77,8 @@ private:
 	GETTOR			(CActorController*,		m_pActorController,	nullptr,		ActorController)
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
+	GETTOR			(CStageCameraMan*,		m_pCameraMan,		nullptr,		CameraMan)
+
 	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)
 
 private:	/* Stage Info? */

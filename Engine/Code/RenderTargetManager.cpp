@@ -20,6 +20,7 @@ void CRenderTargetManager::Start(void)
 	pDevice->GetViewport(&viewport);
 
 	//Add render targets
+#pragma region BasicRT
 	AddRenderTarget(L"Target_Albedo", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
 	InitDebugBufferMRT(L"Target_Albedo", 0, 0, 256, 144);
 
@@ -29,23 +30,44 @@ void CRenderTargetManager::Start(void)
 	AddRenderTarget(L"Target_Depth", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(1, 1, 1, 1));
 	InitDebugBufferMRT(L"Target_Depth", 0, 288, 256, 144);
 
+	AddRenderTarget(L"Target_MtrlSpecular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	InitDebugBufferMRT(L"Target_MtrlSpecular", 512, 288, 256, 144);
 
+	InitMRT(L"MRT_Deferred", L"Target_Albedo");
+	InitMRT(L"MRT_Deferred", L"Target_Normal");
+	InitMRT(L"MRT_Deferred", L"Target_Depth");
+	InitMRT(L"MRT_Deferred", L"Target_MtrlSpecular");
+#pragma endregion
 
+#pragma region LightRT
 	AddRenderTarget(L"Target_Shade", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 1));
 	InitDebugBufferMRT(L"Target_Shade", 256, 0, 256, 144);
 
 	AddRenderTarget(L"Target_Specular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
 	InitDebugBufferMRT(L"Target_Specular", 256, 144, 256, 144);
 
-	
-	//Init RenderTargetMap and Put RenderTarget into themO
-	InitMRT(L"MRT_Deferred", L"Target_Albedo");
-	InitMRT(L"MRT_Deferred", L"Target_Normal");
-	InitMRT(L"MRT_Deferred", L"Target_Depth");
-
 	InitMRT(L"MRT_LightAcc", L"Target_Shade");
-	InitMRT(L"MRT_LightAcc", L"Target_Specular");
+	InitMRT(L"MRT_LightAcc", L"Target_Specular");	
+#pragma endregion
 
+#pragma region MaterialRT
+	//AddRenderTarget(L"Material_Diffuse", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	//InitDebugBufferMRT(L"Material_Diffuse", 512, 0, 256, 144);
+	//
+	//AddRenderTarget(L"Material_Ambient", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	//InitDebugBufferMRT(L"Material_Diffuse", 512, 144, 256, 144);
+	//
+	//AddRenderTarget(L"Material_Specular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	//InitDebugBufferMRT(L"Material_Specular", 512, 288, 256, 144);
+	//
+	//AddRenderTarget(L"Material_Emissive", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	//InitDebugBufferMRT(L"Material_Emissive", 512, 432, 256, 144);
+	//
+	//InitMRT(L"MRT_Mtrl", L"Material_Diffuse");
+	//InitMRT(L"MRT_Material", L"Material_Ambient");
+	//InitMRT(L"MRT_Mtrl", L"Material_Specular");
+	//InitMRT(L"MRT_Mtrl", L"Material_Emissive");
+#pragma endregion
 }
 
 void CRenderTargetManager::OnDestroy(void)

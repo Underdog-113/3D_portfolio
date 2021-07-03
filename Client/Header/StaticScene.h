@@ -32,6 +32,7 @@ private:
 					void				InitUiPrototypes		(void);
 					void				InitMonsterPrototypes	(void);
 					void				InitValkyriePrototypes	(void);
+					void				InitEffectPrototypes	(void);
 	GETTOR			(CLoading*,			m_pLoading,				nullptr,		Loading)
 };
 

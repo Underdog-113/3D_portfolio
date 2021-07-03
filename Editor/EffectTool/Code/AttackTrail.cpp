@@ -102,9 +102,9 @@ void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 
 	//pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
-	//pEffect->SetFloat("gSpeed", m_fSpeed);#
+	//pEffect->SetFloat("gSpeed", m_fSpeed);
 
-	//if (m_fTrailAlpha > 1.f )#
+	//if (m_fTrailAlpha > 1.f )
 	pEffect->SetBool("gTrailCheck", false);
 
 	//pEffect->SetBool("gPlayingAnim", false);

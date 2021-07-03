@@ -23,6 +23,7 @@ public:
 					void				OnEnable			(void) override;
 
 public:
+					void				AddMaterial			(D3DMATERIAL9 mtrl);
 					D3DMATERIAL9&		GetMtrl				(void);
 
 public:
@@ -33,6 +34,9 @@ private:
 					void				GenerateBV			(void);
 
 private:
+	typedef std::vector<D3DMATERIAL9> _MATERIALS;
+	GETTOR			(_MATERIALS,		m_vMaterials,		{},				Materials)
+
 					D3DMATERIAL9		m_mtrl				= {};		
 
 	GETTOR			(SP(CMeshC),		m_spMesh,			nullptr,		Mesh)

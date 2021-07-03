@@ -730,6 +730,9 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape">
       <UniqueIdentifier>{da2f0892-4404-413b-bbc2-903235846cdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn">
+      <UniqueIdentifier>{a7cc5d8f-e9e8-42cf-8b0c-7e47c747eb68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1424,6 +1427,13 @@
     <ClInclude Include="..\Header\BronyaEscapePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\MonsterSpawnEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterSpawnBeam.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2046,6 +2056,13 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaEscapePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
