@@ -28,8 +28,10 @@ void CSickleHitPattern::Pattern(Engine::CObject* pOwner)
 		true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL())
 	{
 		fsm->ChangeState(Name_Sickle_Hit_L);
+		PatternPlaySound(L"KianaAttackHit.wav", pOwner);
 	}
-	else if (Name_Sickle_Hit_L == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	else if (Name_Sickle_Hit_L == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Sickle_StandBy);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
