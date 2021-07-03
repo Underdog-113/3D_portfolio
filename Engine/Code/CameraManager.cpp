@@ -151,5 +151,18 @@ void CCameraManager::ChangeCameraMode(ECameraMode newCameraMode)
 		m_spMainCamera->SetMode(ECameraMode::TPS);
 		m_spMainCamera->GetCollision()->SetIsEnabled(true);
 		break;
+
+	case ECameraMode::TPS_Custom:
+		if (m_spMainCamera->GetTarget() == nullptr)
+		{
+			ChangeCameraMode(ECameraMode::Free);
+			break;
+		}
+
+		ShowCursor(false);
+		m_spMainCamera->SetMode(ECameraMode::TPS_Custom);
+		m_spMainCamera->GetCollision()->SetIsEnabled(true);
+		break;
+
 	}
 }

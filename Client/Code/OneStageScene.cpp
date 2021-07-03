@@ -209,7 +209,7 @@ void COneStageScene::Create_SceneCamera(void)
 	cam->SetMaxDistTPS(2.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
-	cam->SetMode(Engine::ECameraMode::TPS);
+	cam->SetMode(Engine::ECameraMode::TPS_Custom);
 }
 
 void COneStageScene::Create_Dummy(_float3 pos)

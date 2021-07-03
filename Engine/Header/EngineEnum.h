@@ -31,7 +31,8 @@ namespace Engine
 		Edit			= 2,
 		FPS				= 3,
 		TPS				= 4,
-		NumOfCameraMode	= 5
+		TPS_Custom		= 5,
+		NumOfCameraMode	= 6
 	};
 
 	//MeshType
