@@ -11,6 +11,8 @@ CMeshEffect_Client::CMeshEffect_Client()
 void CMeshEffect_Client::Awake()
 {
 	__super::Awake();
+	m_layerID = (_int)Engine::ELayerID::Effect;
+	m_dataID = (_int)EDataID::Effect;
 
 	m_addExtra = true;
 	m_spMesh = AddComponent<Engine::CMeshC>();

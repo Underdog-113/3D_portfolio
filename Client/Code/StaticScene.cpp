@@ -44,6 +44,8 @@
 
 #include "SoftEffect.h"
 #include "MonsterHitEffect.h"
+#include "MonsterSpawnBeam.h"
+#include "MonsterSpawnEff.h"
 
 // Kiana
 #include "Kiana_Trail.h"
@@ -157,7 +159,6 @@ void CStaticScene::InitPrototypes(void)
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(true, this));
 	GetObjectFactory()->AddPrototype(spCameraPrototype);
 
-
 	SP(Engine::CDebugCollider) spDebugCOllider(Engine::CDebugCollider::Create(true, this));
 	GetObjectFactory()->AddPrototype(spDebugCOllider);
 	
@@ -171,70 +172,7 @@ void CStaticScene::InitPrototypes(void)
 	InitUiPrototypes();
 	InitMonsterPrototypes();
 	InitValkyriePrototypes();
-
-	// Attack Trail
-	SP(CMeshEffect_Client) spKiana_Trail(CKiana_Trail::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKiana_Trail);
-
-	SP(CMeshEffect_Client) spKiana_Ult_Trail(CKiana_Ult_Trail::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKiana_Ult_Trail);
-
-	// Attack Range
-	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
-	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
-
-	// Kiana Effect
-	SP(CMeshEffect_Client) spKiana_Ult_Eff(CKiana_Ult_Eff::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff);
-
-	SP(CMeshEffect_Client) spKiana_Ult_Eff_Plane(CKiana_Ult_Plane::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Plane);
-
-	SP(CMeshEffect_Client) spKiana_Ult_Eff_Ring(CKiana_Ult_Ring::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Ring);
-
-	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
-
-	// Theresa Effect
-	SP(CMeshEffect_Client) spTheresa_Trail(CTheresa_Trail::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Trail);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Trail(CTheresa_Ult_Trail::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Trail);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Charge(CTheresa_Ult_Charge::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Charge);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Smoke(CTheresa_Ult_Smoke::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Smoke);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Fire(CTheresa_Ult_Fire::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Fire);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Boom(CTheresa_Ult_Boom::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Boom);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Crack(CTheresa_Ult_Crack::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
-	
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeAtt(CTheresaCharge_Att::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeAtt);
-
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
-
-	// Sakura
-
-	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
-	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
-
-	// Hit
-	SP(CSoftEffect) spHitEffect(CMonsterHitEffect::Create(true, this));
-	GetObjectFactory()->AddPrototype(spHitEffect);
+	InitEffectPrototypes();
 }
 
 void CStaticScene::InitMapPrototypes(void)
@@ -349,4 +287,79 @@ void CStaticScene::InitValkyriePrototypes(void)
 
 	SP(CSakura) spSakuraPrototype(CSakura::Create(true, this));
 	ADD_PROTOTYPE(spSakuraPrototype);
+}
+
+void CStaticScene::InitEffectPrototypes(void)
+{
+	// Attack Trail
+	SP(CMeshEffect_Client) spKiana_Trail(CKiana_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Trail);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Trail(CKiana_Ult_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Trail);
+
+	// Attack Range
+	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
+
+	// Kiana Effect
+	SP(CMeshEffect_Client) spKiana_Ult_Eff(CKiana_Ult_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff_Plane(CKiana_Ult_Plane::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Plane);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff_Ring(CKiana_Ult_Ring::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Ring);
+
+	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
+
+	// Theresa Effect
+	SP(CMeshEffect_Client) spTheresa_Trail(CTheresa_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Trail);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Trail(CTheresa_Ult_Trail::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Trail);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Charge(CTheresa_Ult_Charge::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Charge);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Smoke(CTheresa_Ult_Smoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Smoke);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Fire(CTheresa_Ult_Fire::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Fire);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Boom(CTheresa_Ult_Boom::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Boom);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Crack(CTheresa_Ult_Crack::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeAtt(CTheresaCharge_Att::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeAtt);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
+
+	// Sakura
+
+	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
+
+	// Monster Spawn
+
+	SP(CMeshEffect_Client) spMonster_Spawn_Beam(CMonsterSpawnBeam::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMonster_Spawn_Beam);
+
+	SP(CMeshEffect_Client) spMonster_Spawn_Eff(CMonsterSpawnEff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMonster_Spawn_Eff);
+
+	// Hit
+	SP(CSoftEffect) spHitEffect(CMonsterHitEffect::Create(true, this));
+	GetObjectFactory()->AddPrototype(spHitEffect);
 }

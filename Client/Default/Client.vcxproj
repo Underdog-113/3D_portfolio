@@ -303,6 +303,8 @@
     <ClInclude Include="..\Header\ATBPattern.h" />
     <ClInclude Include="..\Header\MonsterHitEffect.h" />
     <ClInclude Include="..\Header\MonsterSliderC.h" />
+    <ClInclude Include="..\Header\MonsterSpawnBeam.h" />
+    <ClInclude Include="..\Header\MonsterSpawnEff.h" />
     <ClInclude Include="..\Header\MoveUpSmoke.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
     <ClInclude Include="..\Header\MO_Dummy.h" />
@@ -499,6 +501,8 @@
     <ClCompile Include="..\Code\ATBPattern.cpp" />
     <ClCompile Include="..\Code\MonsterHitEffect.cpp" />
     <ClCompile Include="..\Code\MonsterSliderC.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnEff.cpp" />
     <ClCompile Include="..\Code\MoveUpSmoke.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
     <ClCompile Include="..\Code\MO_Dummy.cpp" />
