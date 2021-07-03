@@ -17,6 +17,7 @@ public:
 	void Start();
 
 	void UpdateCameraMan();
+	void PivotChasing();
 
 public:
 	void SetNearTake();
@@ -29,9 +30,9 @@ public:
 	
 	void ShakeCamera();
 
+	bool MouseControlMode();
 	void ManualControlMode();
 	void AutoControlMode();
-
 
 private:
 
@@ -49,8 +50,18 @@ private:
 
 
 private:
-	GETTOR_SETTOR(SP(Engine::CCamera), m_spCamera, nullptr, Camera)
+	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCamera,		nullptr,	Camera)		
+	GETTOR			(SP(Engine::CObject),	m_spPivot,		nullptr,	Pivot)
 
+private:
+	_float m_followTimer = 0.f;
+
+	_float3 m_dstPivotPos = ZERO_VECTOR;
+	_float m_movePivotTimer = 0.f;
+	_float m_chaseSpeed = 5.f;
+	_float m_chaseSpeedIncreaseTimer = 0.f;
+
+private:
 	TakeType m_curTakeType = Mid;
 	TakeType m_nextTakeType = Mid;
 	_float m_curMaxDist = 3.f;
@@ -65,6 +76,9 @@ private:
 	_float m_rotateLerpTimer = 0.f;
 	_float m_rotateLerpStart = 0.f;
 	
+	_float m_horzCorrectingSpeed = 5.f;
+	_float m_speedIncreaseTimer = 0.f;
+private:
 	float m_enterAutoTimer = 0.f;
 
 	bool m_whyCursorOffOneMore = true;
