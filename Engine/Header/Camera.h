@@ -48,12 +48,14 @@ private:
 				void						UpdateEdit			(void);
 				void						UpdateFPS			(void);
 				void						UpdateTPS			(void);
+				void						UpdateTPS_Custom	(void);
 
 				void						LateUpdateFixed		(void);
 				void						LateUpdateFree		(void);
 				void						LateUpdateEdit		(void);
 				void						LateUpdateFPS		(void);
 				void						LateUpdateTPS		(void);
+				void						LateUpdateTPS_Custom(void);
 
 				void						UpdateProjMat		(void);
 				void						UpdateOrthoMat		(void);

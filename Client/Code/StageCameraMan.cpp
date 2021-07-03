@@ -15,7 +15,7 @@ CStageCameraMan::~CStageCameraMan()
 
 void CStageCameraMan::UpdateCameraMan()
 {
-	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS)
+	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS_Custom)
 		return;
 
 	
@@ -71,13 +71,17 @@ void CStageCameraMan::ChangeTake()
 		if (m_changeTakeTimer > 1.f)
 		{
 			m_curMaxDist = m_dstMaxDist;
+			m_curTakeType = m_nextTakeType;
 			switch (m_nextTakeType)
 			{
 			case CStageCameraMan::Near:
+				m_curTakeType = Near;
 				break;
 			case CStageCameraMan::Mid:
+				m_curTakeType = Mid;
 				break;
 			case CStageCameraMan::Far:
+				m_curTakeType = Far;
 				break;
 			}
 			return;
@@ -88,40 +92,40 @@ void CStageCameraMan::ChangeTake()
 		break;
 	}
 	}
-// 	if (m_curMaxDist == m_dstMaxDist)
-// 	{
-// 		if (m_noAction)
-// 		{
-// 			m_gotoNearTakeTimer += GET_DT;
-// 			if (m_gotoNearTakeTimer > 3.f)
-// 			{
-// 				SetNearTake();
-// 			}
-// 			return;
-// 		}
-// 		
-// 		if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Move_Right) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Attack) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Evade) &&
-// 				!Engine::IMKEY_PRESS(StageKey_WeaponSkill) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Switch_1) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Switch_2) &&
-// 				!Engine::IMKEY_PRESS(StageKey_Ult))
-// 		{
-// 			m_gotoNearTakeTimer = 0.f;
-// 			m_noAction = true;
-// 		}
-// 		else if(m_dstMaxDist == NearTake)
-// 		{
-// 
-// 			m_noAction = false;
-// 			SetMidTake();
-// 		}
-// 		return;
-// 	}
+	if (m_curMaxDist == m_dstMaxDist)
+	{
+		if (m_noAction)
+		{
+			m_gotoNearTakeTimer += GET_DT;
+			if (m_gotoNearTakeTimer > 3.f)
+			{
+				SetNearTake();
+			}
+			return;
+		}
+		
+		if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
+				!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
+				!Engine::IMKEY_PRESS(StageKey_Move_Right) &&
+				!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
+				!Engine::IMKEY_PRESS(StageKey_Attack) &&
+				!Engine::IMKEY_PRESS(StageKey_Evade) &&
+				!Engine::IMKEY_PRESS(StageKey_WeaponSkill) &&
+				!Engine::IMKEY_PRESS(StageKey_Switch_1) &&
+				!Engine::IMKEY_PRESS(StageKey_Switch_2) &&
+				!Engine::IMKEY_PRESS(StageKey_Ult))
+		{
+			m_gotoNearTakeTimer = 0.f;
+			m_noAction = true;
+		}
+		else if(m_dstMaxDist == NearTake)
+		{
+
+			m_noAction = false;
+			SetMidTake();
+		}
+		return;
+	}
 
 }
 
