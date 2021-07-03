@@ -272,6 +272,8 @@ void CGraphicsManager::RenderLights(void)
 	LPD3DXEFFECT pEffect = GET_SHADER((_int)EShaderID::DeferredLightShader)->GetEffect();
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Normal", "g_NormalTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_MtrlSpecular", "g_SpecMtrlTexture");
 
 	pEffect->Begin(NULL, 0);
 	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);

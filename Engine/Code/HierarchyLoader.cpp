@@ -45,7 +45,7 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 
 	//현재 컨테이너의 섭셋들이 쓸 텍스쳐를 찾기 위해 텍스쳐 인덱스 시작값을 잡아줍니다.
 	//m_curTexLastIndex는 현재 마지막 index값 + 1 상태입니다
-	pDerivedMeshContainer->texIndexStart = m_curTexLastIndex;
+	pDerivedMeshContainer->subsetIndexStart = m_curTexLastIndex;
 
 	m_curTexLastIndex += NumMaterials;
 	m_pOwner->SetSubsetCount(m_pOwner->GetSubsetCount() + NumMaterials);

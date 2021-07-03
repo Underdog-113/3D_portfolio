@@ -6,6 +6,12 @@ texture		g_BaseTexture;
 
 float4		g_addColor;
 
+float4		g_ambient;
+float4		g_diffuse;
+float4		g_emissive;
+float4		g_specular;
+float		g_specularPower;
+
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
@@ -19,7 +25,6 @@ struct VS_IN
 	vector		vPosition   : POSITION;	
 	vector		vNormal		: NORMAL;
 	float2		vTexUV		: TEXCOORD0;
-	
 };
 
 struct VS_OUT
@@ -84,6 +89,7 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 	vector		vNormal : COLOR1;
 	vector		vDepth : COLOR2;
+	vector		vSpecMtrl : COLOR3;
 };
 
 // 픽셀 쉐이더
@@ -92,7 +98,13 @@ PS_OUT		PS_MAIN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 	
-	Out.vColor = tex2D(BaseSampler, In.vTexUV);
+	float4 albedo = tex2D(BaseSampler, In.vTexUV);
+	float4 diffuse = albedo * saturate(g_diffuse);
+	float4 ambient = albedo * saturate(g_ambient);
+
+	Out.vColor = ambient + diffuse;
+	Out.vColor += g_addColor;
+	
 
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
@@ -103,8 +115,15 @@ PS_OUT		PS_MAIN(PS_IN In)
 						0.f,
 						0.f);
 
-	Out.vColor += g_addColor;
-	Out.vColor.a = 1;
+
+	Out.vSpecMtrl	= g_specular;
+	Out.vSpecMtrl.w = g_specularPower;
+	
+	Out.vColor.a = g_diffuse.x;
+	Out.vNormal.a = g_diffuse.y;
+	Out.vDepth.z = g_diffuse.z;
+	Out.vDepth.w = g_ambient.x;
+
 	return Out;
 }
 

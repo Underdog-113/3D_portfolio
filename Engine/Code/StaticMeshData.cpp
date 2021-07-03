@@ -100,8 +100,6 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 
 	m_pMtrl = (D3DXMATERIAL*)m_pSubset->GetBufferPointer();
 	
-	if (fileName == L"Stage02_Alpha_BushStyle01.x")
-		int a = 5;
 	for (_size i = 0; i < m_subsetCount; ++i)
 	{
 		if (m_pMtrl[i].pTextureFilename != nullptr)
