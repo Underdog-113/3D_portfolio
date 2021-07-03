@@ -28,7 +28,7 @@ enum class EDataID
 	Player = 1 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Scene = 2 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Enemy = 3 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	EFFECT = 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	Effect = 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	UI = 5 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Stat = 6 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	NumOfDataID = 7 + (_uint)Engine::EDataID::NumOfEngineDataID

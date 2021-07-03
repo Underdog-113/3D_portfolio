@@ -603,8 +603,15 @@ static _bool RayObb(SP(CCollider) pC1, SP(CCollider) pC2, _bool instant)
 				
 				if (normal.y - EPSILON < -1)
 				{
-					pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
-					pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>()->SetOnFloor(true);
+
+					SP(CRigidBodyC) spRigidBody = pRC->GetOwner()->GetOwner()->GetComponent<CRigidBodyC>();
+
+					if (spRigidBody)
+					{
+						pRC->GetOwner()->GetOwner()->GetTransform()->SetPositionY(hitPoint.y);
+
+						spRigidBody->SetOnFloor(true);
+					}
 				}
 				else
 					pRC->GetOwner()->GetOwner()->GetTransform()->AddPosition(-normal * penet);
