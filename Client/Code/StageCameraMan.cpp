@@ -71,13 +71,13 @@ void CStageCameraMan::ChangeTake()
 		if (m_changeTakeTimer > 1.f)
 		{
 			m_curMaxDist = m_dstMaxDist;
-			switch (m_curMaxDist)
+			switch (m_nextTakeType)
 			{
-			case NearTake:
+			case CStageCameraMan::Near:
 				break;
-			case MidTake:
+			case CStageCameraMan::Mid:
 				break;
-			case FarTake:
+			case CStageCameraMan::Far:
 				break;
 			}
 			return;
@@ -87,42 +87,41 @@ void CStageCameraMan::ChangeTake()
 		m_spCamera->SetMaxDistTPS(lerpPoint);
 		break;
 	}
-	if (m_curMaxDist == m_dstMaxDist)
-	{
-		}
-
-		if (m_noAction)
-		{
-			m_gotoNearTakeTimer += GET_DT;
-			if (m_gotoNearTakeTimer > 3.f)
-			{
-				SetNearTake();
-			}
-			return;
-		}
-		
-		if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
-				!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
-				!Engine::IMKEY_PRESS(StageKey_Move_Right) &&
-				!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
-				!Engine::IMKEY_PRESS(StageKey_Attack) &&
-				!Engine::IMKEY_PRESS(StageKey_Evade) &&
-				!Engine::IMKEY_PRESS(StageKey_WeaponSkill) &&
-				!Engine::IMKEY_PRESS(StageKey_Switch_1) &&
-				!Engine::IMKEY_PRESS(StageKey_Switch_2) &&
-				!Engine::IMKEY_PRESS(StageKey_Ult))
-		{
-			m_gotoNearTakeTimer = 0.f;
-			m_noAction = true;
-		}
-		else if(m_dstMaxDist == NearTake)
-		{
-
-			m_noAction = false;
-			SetMidTake();
-		}
-		return;
 	}
+// 	if (m_curMaxDist == m_dstMaxDist)
+// 	{
+// 		if (m_noAction)
+// 		{
+// 			m_gotoNearTakeTimer += GET_DT;
+// 			if (m_gotoNearTakeTimer > 3.f)
+// 			{
+// 				SetNearTake();
+// 			}
+// 			return;
+// 		}
+// 		
+// 		if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Move_Right) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Attack) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Evade) &&
+// 				!Engine::IMKEY_PRESS(StageKey_WeaponSkill) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Switch_1) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Switch_2) &&
+// 				!Engine::IMKEY_PRESS(StageKey_Ult))
+// 		{
+// 			m_gotoNearTakeTimer = 0.f;
+// 			m_noAction = true;
+// 		}
+// 		else if(m_dstMaxDist == NearTake)
+// 		{
+// 
+// 			m_noAction = false;
+// 			SetMidTake();
+// 		}
+// 		return;
+// 	}
 
 }
 
@@ -205,7 +204,7 @@ void CStageCameraMan::AutoControlMode()
 		return;
 	}
 
-	ChangeTake();
+	//ChangeTake();
 	
 	ApplyHorizontalMove();
 }
