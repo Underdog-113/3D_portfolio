@@ -103,6 +103,7 @@ void CStageControlTower::SetCurrentMainCam(SP(Engine::CCamera) pCam)
 {
 	m_pActorController->SetCurrentMainCam(pCam);
 	m_pCameraMan->SetCamera(pCam);
+	m_pCameraMan->Start();
 }
 
 void CStageControlTower::IncreasePhase()

@@ -13,6 +13,13 @@ CStageCameraMan::~CStageCameraMan()
 {
 }
 
+void CStageCameraMan::Start()
+{
+	m_spCamera->SetTargetDist(MidTake);
+	m_spCamera->SetMaxDistTPS(MidTake);
+	m_spCamera->SetMode(Engine::ECameraMode::TPS_Custom);
+}
+
 void CStageCameraMan::UpdateCameraMan()
 {
 	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS_Custom)
@@ -31,7 +38,7 @@ void CStageCameraMan::SetNearTake()
 	m_nextTakeType = Near;
 	m_dstMaxDist = NearTake;
 	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 1.f;
+	m_changeTakeSpeed = 0.5f;
 }
 
 void CStageCameraMan::SetMidTake()
@@ -50,7 +57,7 @@ void CStageCameraMan::SetFarTake()
 	m_nextTakeType = Far;
 	m_dstMaxDist = FarTake;
 	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 2.f;
+	m_changeTakeSpeed = 3.f;
 }
 
 void CStageCameraMan::ChangeTake()
@@ -58,87 +65,93 @@ void CStageCameraMan::ChangeTake()
 	switch (m_curTakeType)
 	{
 	case CStageCameraMan::Near:
-
-		break;
-	case CStageCameraMan::Mid:
-
-		break;
-	case CStageCameraMan::Far:
-		break;
-	case CStageCameraMan::Change:
-	{
-		m_changeTakeTimer += GET_DT;
-		if (m_changeTakeTimer > 1.f)
+		if (!CheckNoAction())
 		{
-			m_curMaxDist = m_dstMaxDist;
-			m_curTakeType = m_nextTakeType;
-			switch (m_nextTakeType)
-			{
-			case CStageCameraMan::Near:
-				m_curTakeType = Near;
-				break;
-			case CStageCameraMan::Mid:
-				m_curTakeType = Mid;
-				break;
-			case CStageCameraMan::Far:
-				m_curTakeType = Far;
-				break;
-			}
+			SetMidTake();
 			return;
 		}
-
-		_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, m_changeTakeTimer);
-		m_spCamera->SetMaxDistTPS(lerpPoint);
 		break;
-	}
-	}
-	if (m_curMaxDist == m_dstMaxDist)
-	{
-		if (m_noAction)
+	case CStageCameraMan::Mid:
+		if (CheckNoAction())
 		{
 			m_gotoNearTakeTimer += GET_DT;
 			if (m_gotoNearTakeTimer > 3.f)
 			{
+				m_gotoNearTakeTimer = 0.f;
 				SetNearTake();
 			}
-			return;
 		}
-		
-		if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
-				!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
-				!Engine::IMKEY_PRESS(StageKey_Move_Right) &&
-				!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
-				!Engine::IMKEY_PRESS(StageKey_Attack) &&
-				!Engine::IMKEY_PRESS(StageKey_Evade) &&
-				!Engine::IMKEY_PRESS(StageKey_WeaponSkill) &&
-				!Engine::IMKEY_PRESS(StageKey_Switch_1) &&
-				!Engine::IMKEY_PRESS(StageKey_Switch_2) &&
-				!Engine::IMKEY_PRESS(StageKey_Ult))
+		else
 		{
 			m_gotoNearTakeTimer = 0.f;
-			m_noAction = true;
 		}
-		else if(m_dstMaxDist == NearTake)
+		break;
+	case CStageCameraMan::Far:
+		break;
+	case CStageCameraMan::Change:
+		if (m_nextTakeType == Near && !CheckNoAction())
 		{
-
-			m_noAction = false;
+			float curDist = m_dstMaxDist;
 			SetMidTake();
+
+			m_curMaxDist = curDist;
 		}
-		return;
+
+		m_changeTakeTimer += GET_DT * m_changeTakeSpeed;
+		if (m_changeTakeTimer > 1.f)
+		{
+			m_curMaxDist = m_dstMaxDist;
+			m_curTakeType = m_nextTakeType;
+			m_spCamera->SetTargetDist(m_dstMaxDist);
+			m_spCamera->SetMaxDistTPS(m_dstMaxDist);
+			return;
+		}
+
+
+		float inverseRate = 1.f - m_changeTakeTimer;
+		float sLerpTimer = 1.f - inverseRate * inverseRate;
+
+		_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, sLerpTimer);
+		m_spCamera->SetTargetDist(lerpPoint);
+		m_spCamera->SetMaxDistTPS(lerpPoint);
+		break;
 	}
-
 }
 
-void CStageCameraMan::ApplyTargetingMove()
+void CStageCameraMan::AppendTargetCorrecting()
 {
 }
 
-void CStageCameraMan::ApplyHorizontalMove()
+void CStageCameraMan::AppendHorizontalCorrecting()
 {
+	bool isCorrected = false;
+
 	if (Engine::IMKEY_PRESS(StageKey_Move_Left))
-		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() - (PI / 3) * GET_DT);
+	{
+		m_rotateYDst -= (PI / 3) * GET_DT;
+		isCorrected = true;
+
+		m_rotateLerpTimer += GET_DT;
+		if (m_rotateLerpTimer > 0.5f)
+		{
+			m_rotateLerpTimer = 0.5f;
+		}
+	}
+		//m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() - (PI / 3) * GET_DT);
 	if (Engine::IMKEY_PRESS(StageKey_Move_Right))
-		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + (PI / 3) * GET_DT);
+	{
+		m_rotateYDst += (PI / 3) * GET_DT;
+	}
+		
+		//m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + (PI / 3) * GET_DT);
+
+
+
+	float inverseRate = 1.f - m_rotateLerpTimer;
+	float sLerpTimer = 1.f - inverseRate * inverseRate;
+
+	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, sLerpTimer);
+	m_spCamera->SetLookAngleUp(lerpPoint);
 }
 
 void CStageCameraMan::ShakeCamera()
@@ -155,7 +168,7 @@ void CStageCameraMan::ManualControlMode()
 	if (Engine::IMKEY_PRESS(StageKey_CamRotateLeft))
 	{
 		//m_spCamera->SetLookAngleUp();
-		m_rotateDst -= m_rotateSpeed;
+		m_rotateYDst -= m_rotateSpeed;
 		m_enterAutoTimer = 0.f;
 
 		m_rotateLerpTimer = 0.5f;
@@ -164,7 +177,7 @@ void CStageCameraMan::ManualControlMode()
 	}
 	if (Engine::IMKEY_PRESS(StageKey_CamRotateRight))
 	{
-		m_rotateDst += m_rotateSpeed;
+		m_rotateYDst += m_rotateSpeed;
 		m_enterAutoTimer = 0.f;
 
 
@@ -175,7 +188,7 @@ void CStageCameraMan::ManualControlMode()
 	if (Engine::IMKEY_PRESS(MOUSE_RIGHT))
 	{
 		m_spCamera->SetRightClicked(true);
-		m_rotateDst = m_spCamera->GetLookAngleUp();
+		m_rotateYDst = m_spCamera->GetLookAngleUp();
 		m_manualControl = true;
 		return;
 	}
@@ -187,14 +200,14 @@ void CStageCameraMan::ManualControlMode()
 	m_rotateLerpTimer += GET_DT;
 	if (m_rotateLerpTimer > 1.f)
 	{
-		m_spCamera->SetLookAngleUp(m_rotateDst);
+		m_spCamera->SetLookAngleUp(m_rotateYDst);
 		return;
 	}
 
 	float inverseRate = 1.f - m_rotateLerpTimer;
 	float sLerpTimer = 1.f - inverseRate * inverseRate;
 
-	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateDst, sLerpTimer);
+	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, sLerpTimer);
 	m_spCamera->SetLookAngleUp(lerpPoint);
 }
 
@@ -202,15 +215,34 @@ void CStageCameraMan::AutoControlMode()
 {
 	HideMouseCursor();
 
+	AppendHorizontalCorrecting();
+
 	if (m_enterAutoTimer < 1.f)
 	{
 		m_enterAutoTimer += GET_DT;
 		return;
 	}
 
-	//ChangeTake();
+	ChangeTake();
 	
-	ApplyHorizontalMove();
+}
+
+bool CStageCameraMan::CheckNoAction()
+{
+	if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
+		!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
+		!Engine::IMKEY_PRESS(StageKey_Move_Right) &&
+		!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
+		!Engine::IMKEY_PRESS(StageKey_Attack) &&
+		!Engine::IMKEY_PRESS(StageKey_Evade) &&
+		!Engine::IMKEY_PRESS(StageKey_WeaponSkill) &&
+		!Engine::IMKEY_PRESS(StageKey_Switch_1) &&
+		!Engine::IMKEY_PRESS(StageKey_Switch_2) &&
+		!Engine::IMKEY_PRESS(StageKey_Ult))
+	{
+		return true;
+	}
+	return false;
 }
 
 void CStageCameraMan::ShowMouseCursor()

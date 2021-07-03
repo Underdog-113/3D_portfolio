@@ -450,7 +450,6 @@ void CCamera::CameraRotate(void)
 			m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, 0, PI / 6.f);
 			m_lookAngleUp = GET_MATH->RoundOffRange(m_lookAngleUp, 2 * PI);
 
-			m_prevPT = curPt;
 		}
 		m_prevPT = curPt;
 		break;

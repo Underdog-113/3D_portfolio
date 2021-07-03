@@ -206,10 +206,7 @@ void COneStageScene::Create_SceneCamera(void)
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
-	cam->SetMaxDistTPS(2.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-
-	cam->SetMode(Engine::ECameraMode::TPS_Custom);
 }
 
 void COneStageScene::Create_Dummy(_float3 pos)

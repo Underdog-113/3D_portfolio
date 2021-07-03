@@ -14,6 +14,8 @@ public:
 	CStageCameraMan();
 	~CStageCameraMan();
 
+	void Start();
+
 	void UpdateCameraMan();
 
 public:
@@ -22,8 +24,8 @@ public:
 	void SetFarTake();
 	void ChangeTake();
 
-	void ApplyTargetingMove();
-	void ApplyHorizontalMove();
+	void AppendTargetCorrecting();
+	void AppendHorizontalCorrecting();
 	
 	void ShakeCamera();
 
@@ -38,6 +40,7 @@ private:
 		return _start * (1.f - _time) + _time * _end;
 	}
 
+	bool CheckNoAction();
 
 
 	void ShowMouseCursor();
@@ -54,10 +57,10 @@ private:
 	_float m_dstMaxDist = 3.f;
 	_float m_gotoNearTakeTimer = 0.f;
 	_float m_changeTakeTimer = 0.f;
-	_float m_changeTakeSpeed = 1.f;
+	_float m_changeTakeSpeed = 2.f;
 
 private:
-	_float m_rotateDst = 0.f;
+	_float m_rotateYDst = 0.f;
 	_float m_rotateSpeed = D3DXToRadian(3.f);
 	_float m_rotateLerpTimer = 0.f;
 	_float m_rotateLerpStart = 0.f;
