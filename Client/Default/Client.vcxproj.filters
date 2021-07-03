@@ -718,6 +718,9 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
       <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\CameraMan">
+      <UniqueIdentifier>{e9c40220-419e-4b07-8e13-4ba6315e98d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1399,7 +1402,9 @@
     <ClInclude Include="..\Header\SoftEffect.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\StageCameraMan.h">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2010,7 +2015,9 @@
     <ClCompile Include="..\Code\SoftEffect.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageCameraMan.cpp" />
+    <ClCompile Include="..\Code\StageCameraMan.cpp">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
