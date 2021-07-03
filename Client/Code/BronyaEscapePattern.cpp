@@ -34,7 +34,7 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	// 이스케이프할 위치
 	_float3 ePos = { 0.f, 0.f, 0.f };
 
-	// 만약 이스케이프 외 애니메이션이 종료되었다면
+	// 이스케이프 외 애니메이션이 종료되었다면
 	if (Name_Escape_In != fsm->GetCurStateString() &&
 		Name_Escape_Out != fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
@@ -42,23 +42,24 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		// escape in 실행
 		fsm->ChangeState(Name_Escape_In);
 	}
-	// 만약 escape in 상태 중 적정한 위치에 도달하면
+	// escape in 상태 중 적정한 위치에 도달하면
 	else if (Name_Escape_In == fsm->GetCurStateString() &&
-		0.37f <= fsm->GetDM()->GetAniTimeline())
+		0.38f <= fsm->GetDM()->GetAniTimeline())
 	{
+		// 애니메이션 정지
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(0.f);
+		m_onEscape = true;
 	}
-
-
-	/************************* Shock1 End */
-	// 내가 escape out 상태가 끝났다면
-	if (Name_Escape_Out == fsm->GetCurStateString() &&
-		fsm->GetDM()->IsAnimationEnd())
+	// escape in 상태 중이면서 이동해야 한다면
+	else if (Name_Escape_In == fsm->GetCurStateString() &&
+		true == m_onEscape)
 	{
-		// 대기 상태로 변경
-		fsm->ChangeState(Name_IDLE);
-		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		pOwner->GetTransform()->SetSlerpOn(true);
+		pOwner->GetTransform()->SetGoalPosition(ePos);
 	}
+
+
+
 }
 
 SP(CBronyaEscapePattern) CBronyaEscapePattern::Create()

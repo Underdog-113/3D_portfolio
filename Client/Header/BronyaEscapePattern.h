@@ -31,7 +31,8 @@ private:
 	_bool m_onAtk = false;
 
 	_mat m_atkMat;
-	std::wstring m_curState;
+
+	_bool m_onEscape = false;
 };
 
 #endif

@@ -361,7 +361,15 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	// Monster Spawn
 
-	SP(CMeshEffect_Client) spMonster_Spawn_Beam(CMonsterSpawnBeam::Create(true, this));
+	SP(CMonsterSpawnBeam) spMonster_Spawn_Beam(CMonsterSpawnBeam::Create(true, this));
+	spMonster_Spawn_Beam->GetMesh()->SetMeshData(L"SpawnBeam");
+	spMonster_Spawn_Beam->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMonster_Spawn_Beam->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
+	spMonster_Spawn_Beam->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
+	spMonster_Spawn_Beam->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
+	spMonster_Spawn_Beam->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spMonster_Spawn_Beam->GetCollision()->
+		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
 	GetObjectFactory()->AddPrototype(spMonster_Spawn_Beam);
 
 	SP(CMeshEffect_Client) spMonster_Spawn_Eff(CMonsterSpawnEff::Create(true, this));

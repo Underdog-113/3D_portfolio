@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Header\MonsterSpawnBeam.h"
-
+#include "Monster.h"
 
 CMonsterSpawnBeam::CMonsterSpawnBeam()
 {
@@ -38,7 +38,7 @@ SP(Engine::CObject) CMonsterSpawnBeam::MakeClone()
 void CMonsterSpawnBeam::Awake()
 {
 	__super::Awake();
-	m_spTransform->SetPositionY(10.f);
+	//m_spTransform->SetPositionY(10.f);
 	m_spTransform->SetRotationX(D3DXToRadian(90.f));
 
 	m_spCollision = AddComponent<Engine::CCollisionC>();
@@ -123,7 +123,10 @@ void CMonsterSpawnBeam::OnCollisionEnter(Engine::_CollisionInfo ci)
 	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(ci.hitPoint);
 
+	m_spMonster->SetIsEnabled(true);
+
 	m_bSpawn = true;
+
 }
 
 void CMonsterSpawnBeam::OnCollisionStay(Engine::_CollisionInfo ci)

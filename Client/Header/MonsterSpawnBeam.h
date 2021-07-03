@@ -1,6 +1,7 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
+class CMonster;
 class CMonsterSpawnBeam : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
@@ -35,5 +36,6 @@ public:
 private:
 	_bool m_bSpawn;
 	GETTOR(SP(Engine::CCollisionC), m_spCollision, nullptr, Collision)
+	GETTOR_SETTOR(SP(CMonster),	m_spMonster, nullptr, Monster)
 };
 
