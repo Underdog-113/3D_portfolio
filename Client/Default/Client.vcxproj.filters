@@ -580,15 +580,6 @@
     <Filter Include="09.Manager\07.InventoryManager">
       <UniqueIdentifier>{d9e6398d-8d0b-4824-9869-8d2a7ed62e8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="12InvertoryFSM">
-      <UniqueIdentifier>{96d305ee-0f86-4292-b815-4d732181c40d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12InvertoryFSM\00.Wapon">
-      <UniqueIdentifier>{a3674c05-0219-4efc-b4f6-df0724f35edd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12InvertoryFSM\01.Item">
-      <UniqueIdentifier>{3a16b10e-af08-454f-b87b-ff1a7c4b2ed7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern">
       <UniqueIdentifier>{a7508e0e-023a-466d-881c-33d6b33803fe}</UniqueIdentifier>
     </Filter>
@@ -1375,11 +1366,11 @@
     <ClInclude Include="..\Header\BattleEndManager.h">
       <Filter>09.Manager\08.BattleEndManager</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\LaserTrailShader.h">
-        <Filter>04.Shader\11.LaserTrail</Filter>
-      </ClInclude>
-      <ClInclude Include="..\Header\Sakura_Charge_Att.h">
-        <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    <ClInclude Include="..\Header\LaserTrailShader.h">
+      <Filter>04.Shader\11.LaserTrail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Charge_Att.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,7 @@ void CValkyrieLevelUp::Start()
 	}
 
 	g_itemCount = 0;
+
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(true);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Text_4")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie)->GetLevel()));
 	ItemButtonSetting();
@@ -81,7 +82,7 @@ void CValkyrieLevelUp::LevelUp()
 	}
 
 	data->SetExperience(expSum);
-	data->SetLevel(data->GetLevel() + levalUpSum);
+	data->LevelUp();
 	CDataManager::GetInstance()->FindItemData(g_selectItemName)->CountDown(g_itemCount);
 	g_itemCount = 0;
 	CValkyriegManager::GetInstance()->ChangeFSMProperty();

@@ -223,8 +223,8 @@ void CScrollViewObject::ImageObjectSort()
 		buttonObject->GetTransform()->SetPosition(pos);
 
 
-		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
-		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);
+		/*_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
+		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);*/
 
 		for (auto& imageObject : m_vImageObject[count])
 		{

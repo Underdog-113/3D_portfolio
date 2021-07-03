@@ -30,10 +30,20 @@ void CValkyrieStatusData::AddValkyrieData(_bool enable, std::wstring name, std::
 	m_maxLevel = maxLevel;
 	m_weaponType = weaponType;
 
+	m_battlePower = m_damage + m_hoesim;
+
 	m_partyTextureKey = partyTextureKey;
 	
 	m_squadTextureKey = squadTextureKey;
 	
 	m_listTextureKey = listTextureKey;
+}
+
+void CValkyrieStatusData::LevelUp()
+{
+	m_level += 1;
+	m_damage = (int)(m_damage * 1.2f);
+	m_hoesim = (int)(m_hoesim * 1.2f);
+	m_defense = (int)(m_defense * 1.2f);
 }
 

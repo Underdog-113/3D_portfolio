@@ -74,6 +74,8 @@ void CBattleEndManager::CaptainUI()
  	_float maxVlaue = CDataManager::GetInstance()->FindCaptainData()->GetMaxExperience();
 	_float TminValue = maxVlaue / 10;
 	_float minValue = 0;
+	
+
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -116,9 +118,6 @@ void CBattleEndManager::ItemUI()
 
 		count++;
 	}
-
-	
-	// 획득 아이템 리스트를 받으면 해당 아이템리스트의 텍스처를 스크롤뷰에띄운다 다만 스크롤뷰에 해당 아이템이 존재하면 그냥 갯수만 올린다.
 }
 
 void CBattleEndManager::PlayerIS()
@@ -136,9 +135,9 @@ void CBattleEndManager::DataUpdate()
 			Engine::CSlider* slider = static_cast<Engine::CSlider*>(m_scene->FindObjectByName(L"PlayerIS" + std::to_wstring(i +1)  + L"_Slider_10").get());
 			slider->SetValue(slider->GetValue() + 1);
 
-			if (slider->GetValue() == slider->GetMaxValue())
+			if (slider->GetValue() >= slider->GetMaxValue())
 			{
-				valkyrieStatus[i]->SetLevel(valkyrieStatus[i]->GetLevel() + 1);
+				valkyrieStatus[i]->LevelUp();
 				valkyrieStatus[i]->SetMaxExperience(((_int)(valkyrieStatus[i]->GetMaxExperience() * 1.5f)));
 				slider->SetValue(0);
 				slider->SetMaxValue((_float)valkyrieStatus[i]->GetMaxExperience());
@@ -149,6 +148,18 @@ void CBattleEndManager::DataUpdate()
 		}
 		m_addValkryieExp++;
 	}
+	else if (m_valkyrieExp == m_addValkryieExp)
+
+	{
+		for (int i = 0; i < m_squadSize; i++)
+		{
+			Engine::CSlider* slider = static_cast<Engine::CSlider*>(m_scene->FindObjectByName(L"PlayerIS" + std::to_wstring(i + 1) + L"_Slider_10").get());
+			slider->SetValue(slider->GetValue() + 1);
+
+			valkyrieStatus[i]->SetExperience((_int)slider->GetValue());
+			m_addValkryieExp = 9999;
+		}
+	}
 
 	if (m_captainExp > m_addCaptainExp)
 	{
@@ -157,7 +168,7 @@ void CBattleEndManager::DataUpdate()
 			Engine::CSlider* slider = static_cast<Engine::CSlider*>(m_scene->FindObjectByName(L"MainCanvas_Slider_" + std::to_wstring(i)).get());
 			slider->SetValue(slider->GetValue() + 1);
 
-			if (slider->GetValue() == CDataManager::GetInstance()->FindCaptainData()->GetMaxExperience())
+			if (slider->GetValue() >= CDataManager::GetInstance()->FindCaptainData()->GetMaxExperience())
 			{
 				CDataManager::GetInstance()->FindCaptainData()->SetLevel(CDataManager::GetInstance()->FindCaptainData()->GetLevel() + 1);
 				CDataManager::GetInstance()->FindCaptainData()->SetMaxExperience(CDataManager::GetInstance()->FindCaptainData()->GetMaxExperience() * 1.5f);
@@ -177,10 +188,18 @@ void CBattleEndManager::DataUpdate()
 				}
 
 				m_addCaptainExp++;
+				m_scene->FindObjectByName(L"MainCanvas_Text_1")->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetLevel()));
+
 				return;
 			}
 		}
 
 		m_addCaptainExp++;
+	}
+	else if(m_captainExp == m_addCaptainExp)
+	{
+		Engine::CSlider* slider = static_cast<Engine::CSlider*>(m_scene->FindObjectByName(L"MainCanvas_Slider_" + std::to_wstring(0)).get());
+		CDataManager::GetInstance()->FindCaptainData()->SetExperience(slider->GetValue());
+		m_addCaptainExp = 99999;
 	}
 }
