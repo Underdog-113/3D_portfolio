@@ -123,7 +123,7 @@ void CCollisionManager::CheckCollision(SP(CCollider) spCollider)
 
 				
 
-				isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider.get(), checkCollider.get(), false);
+				isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider, checkCollider, false);
 			}
 		}
 	}
@@ -151,7 +151,7 @@ _bool CCollisionManager::CheckCollisionInstant(SP(CCollider) spCollider, _int ch
 		{
 			_int myCType = spCollider->GetColliderType();
 			_int checkCType = checkCollider->GetColliderType();
-			isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider.get(), checkCollider.get(), true);
+			isItCollided = (m_fpCollisionChecker[myCType][checkCType])(spCollider, checkCollider, true);
 		}
 	}
 

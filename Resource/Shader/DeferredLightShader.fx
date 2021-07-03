@@ -1,17 +1,26 @@
-texture			g_NormalTexture;
+texture			g_albedoTexture;
+sampler ColorSampler = sampler_state
+{
+	texture = g_albedoTexture;
+};
 
+texture			g_NormalTexture;
 sampler NormalSampler = sampler_state
 {
 	texture = g_NormalTexture;
 };
 
 texture			g_DepthTexture;
-
 sampler DepthSampler = sampler_state
 {
 	texture = g_DepthTexture;
 };
 
+texture			g_SpecMtrlTexture;
+sampler SpecMtrlSampler = sampler_state
+{
+	texture = g_SpecMtrlTexture;
+};
 
 vector			g_vLightDir;
 vector			g_vLightPos;
@@ -44,20 +53,24 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	// 텍스쳐 uv 상태의 법선 성분
-	vector		vNormal = tex2D(NormalSampler, In.vTexUV);
-
+	vector		vNormal		= tex2D(NormalSampler, In.vTexUV);
+	vector		vColor		= tex2D(ColorSampler, In.vTexUV);
+	vector		vDepth		= tex2D(DepthSampler, In.vTexUV);
+	vector		vSpecular	= tex2D(SpecMtrlSampler, In.vTexUV);
 	// 텍스처->월드
 	vNormal = vector(vNormal.xyz * 2.f - 1.f, 0.f);
 
+	vector diffuse = vector(0.5, vNormal.a, vDepth.z, 1.f);
+	vector ambient = vector(vDepth.a, vDepth.a, vDepth.a, 1.f);
 	
 	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * g_vMtrlDiffuse) + (g_vLightAmbient * g_vMtrlAmbient);
-	Out.vShade = ceil(Out.vShade * 30) / 30;
+	//Out.vShade = ceil(Out.vShade * 30) / 30;
 
 	vector	vReflect = reflect(normalize(vector(g_vLightDir.xyz, 0.f)), vNormal);
 
 	// vPosition : 월드 상에 존재하는 픽셀의 위치 값
 
-	vector  vDepth  = tex2D(DepthSampler, In.vTexUV);
+	
 	float	fViewZ = vDepth.y * 1000.f;	// 텍스처 uv 상태로 만들기 위해 far 값으로 나눠 저장했던 뷰스페이스 z값을 다시 far값을 곱해줘서 원상태로 복구
 	
 	vector		vPosition;
@@ -76,7 +89,8 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	
 	vector	vLook = normalize(g_vCamPos - vPosition);
 
-	Out.vSpecular = pow(saturate(dot(normalize(vReflect), vLook)), g_fPower);
+	Out.vSpecular = pow(saturate(dot(normalize(vReflect), vLook)), vSpecular.a);
+	Out.vSpecular *= vector(vSpecular.xyz, 1);
 
 
 	return Out;

@@ -265,6 +265,9 @@ void CCollisionC::ProcessTriggers(void)
 
 	for (auto& curTrigger : m_vCurTriggers)
 	{
+		if (curTrigger->GetOwner() == nullptr)
+			continue;
+
 		_bool alreadyThere = false;
 		for (auto& it = m_vPreTriggers.begin(); it != m_vPreTriggers.end(); ++it)
 		{

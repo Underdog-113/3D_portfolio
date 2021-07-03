@@ -6,7 +6,7 @@
 BEGIN(Engine)
 class ENGINE_DLL CCollider abstract
 {
-protected:
+public:
 	explicit								CCollider			(void);
 	virtual								   ~CCollider			(void);
 

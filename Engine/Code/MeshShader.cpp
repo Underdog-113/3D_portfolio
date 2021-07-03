@@ -41,5 +41,6 @@ void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 		addColor = _float4(0.5f, 0.f, 0.f, 0.f);
 	}
 
+
 	m_pEffect->SetVector("g_addColor", &addColor);
 }
