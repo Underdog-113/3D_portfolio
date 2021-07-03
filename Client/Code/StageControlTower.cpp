@@ -333,18 +333,3 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 }
-
-_float3 CStageControlTower::GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration)
-{
-	if (curTime == lerpDuration)
-		return endPos;	
-
-	_float3 dir = endPos - startPos;
-	_float length = D3DXVec3Length(&dir);
-	_float timeline = curTime / lerpDuration;
-
-	_float moveAmount = length * timeline;
-
-	D3DXVec3Normalize(&dir, &dir);
-	return startPos + dir * moveAmount;
-}

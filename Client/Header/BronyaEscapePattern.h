@@ -17,7 +17,7 @@ public:
 	static SP(CBronyaEscapePattern) Create();
 
 private:
-	_float m_cost = 20.f;
+	_float m_cost = /*20.f;*/ 20.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 25.f; // 공격 거리
@@ -29,10 +29,15 @@ private:
 	_bool m_atkReady = true; // true : 공격 가능, false : 공격 불가
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
+	_bool m_onEscape = false;
 
 	_mat m_atkMat;
 
-	_bool m_onEscape = false;
+private:
+	_float3 m_lerpStartPos = ZERO_VECTOR;
+	_float3 m_lerpEndPos = ZERO_VECTOR;
+	_float m_lerpMaxTimer = 0.7f;
+	_float m_lerpCurTimer = 0.f;
 };
 
 #endif
