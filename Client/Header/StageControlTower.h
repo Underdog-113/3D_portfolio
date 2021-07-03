@@ -65,6 +65,7 @@ public:		/* Battle */
 
 	void SwitchValkyrie(Squad_Role role);
 
+	_float3 GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration = 1.f);
 
 public:		/* Stage Control Mode */
 	void StageClear();

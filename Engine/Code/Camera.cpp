@@ -350,34 +350,47 @@ void CCamera::CameraRotate(void)
 
 	POINT curPt;
 	GetCursorPos(&curPt);
-	POINT m_centerPt = { GET_WND_WIDTH >> 1, GET_WND_HEIGHT >> 1 };
-	ClientToScreen(GET_HANDLE, &m_centerPt);
-	SetCursorPos(m_centerPt.x, m_centerPt.y);
-
-	if (curPt.x == m_centerPt.x && curPt.y == m_centerPt.y)
-		return;
 
 
 	switch (m_mode)
 	{
 	case ECameraMode::Free:
+	{
+		POINT m_centerPt = { GET_WND_WIDTH >> 1, GET_WND_HEIGHT >> 1 };
+		ClientToScreen(GET_HANDLE, &m_centerPt);
+		SetCursorPos(m_centerPt.x, m_centerPt.y);
+
+		if (curPt.x == m_centerPt.x && curPt.y == m_centerPt.y)
+			return;
+
 		m_spTransform->AddRotationX(D3DXToRadian((_float)(curPt.y - m_centerPt.y)
-									* pIM->GetMouseSensitivity().y
-									* GET_DT));
+			* pIM->GetMouseSensitivity().y
+			* GET_DT));
 		m_spTransform->AddRotationY(D3DXToRadian((_float)(curPt.x - m_centerPt.x)
-									* pIM->GetMouseSensitivity().x
-									* GET_DT));
+			* pIM->GetMouseSensitivity().x
+			* GET_DT));
+	}
 		break;
 	case ECameraMode::TPS:
-		m_lookAngleRight += D3DXToRadian((_float)(curPt.y - m_centerPt.y)
-										* pIM->GetMouseSensitivity().y
-										* GET_DT);
-		m_lookAngleUp += D3DXToRadian((_float)(curPt.x - m_centerPt.x)
-									 * pIM->GetMouseSensitivity().x
-									 * GET_DT);
+		if (m_isRightClicked)
+		{
+			if (curPt.x == m_prevPT.x && curPt.y == m_prevPT.y)
+				return;
 
-		m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, 0, PI / 6.f);
-		m_lookAngleUp = GET_MATH->RoundOffRange(m_lookAngleUp, 2 * PI);
+			m_lookAngleRight += D3DXToRadian((_float)(curPt.y - m_prevPT.y)
+				* pIM->GetMouseSensitivity().y
+				* GET_DT);
+			m_lookAngleUp += D3DXToRadian((_float)(curPt.x - m_prevPT.x)
+				* pIM->GetMouseSensitivity().x
+				* GET_DT);
+
+			m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, 0, PI / 6.f);
+			m_lookAngleUp = GET_MATH->RoundOffRange(m_lookAngleUp, 2 * PI);
+
+			m_prevPT = curPt;
+		}
+		m_prevPT = curPt;
+
 		break;
 	}
 }
@@ -422,3 +435,4 @@ _float2 CCamera::WorldToScreenPoint(_float3 worldPos)
 
 	return _float2(pos.x - halfWincx, -pos.y + halfWincy);
 }
+

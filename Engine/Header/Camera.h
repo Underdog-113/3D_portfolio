@@ -42,7 +42,6 @@ public:
 				void						SetFOV				(_float FOV);
 
 				_float2						WorldToScreenPoint	(_float3 worldPos);
-
 private:
 				void						UpdateFixed			(void);
 				void						UpdateFree			(void);
@@ -101,7 +100,10 @@ private:
 
 	GETTOR_SETTOR	(_float,				m_minDistTPS,		1.f,					MinDistTPS)
 	GETTOR_SETTOR	(_float,				m_maxDistTPS,		3.f,					MaxDistTPS)
+	GETTOR_SETTOR	(_bool,					m_isRightClicked,	false,					RightClicked)
 
+
+	POINT m_prevPT;
 };
 END
 #endif
