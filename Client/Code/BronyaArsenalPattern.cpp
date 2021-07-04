@@ -78,6 +78,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 대기 상태로 변경
 		fsm->ChangeState(Name_IDLE);
+		m_movedCenter = m_movedCorner = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
 } 

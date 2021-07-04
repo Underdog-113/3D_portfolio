@@ -47,7 +47,7 @@ void CMB_Bronya::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_BronyaC>();
 	m_spPatternMachine->AddNecessaryPatterns(CBronyaBornPattern::Create(), CBronyaDiePattern::Create(), CBronyaBasePattern::Create(), CBronyaHitPattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());

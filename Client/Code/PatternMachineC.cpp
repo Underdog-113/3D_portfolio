@@ -45,9 +45,6 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (m_curCost > m_maxCost)
 		m_curCost = m_maxCost;
 
-	//std::cout << "cost : " << m_curCost << std::endl;
-	//std::cout << "================================= " << std::endl;
-
 	if (false == m_previewMode &&
 		Pattern_Type::TypeEnd != m_vPatterns.size() &&
 		m_vIndices.empty())
@@ -63,11 +60,6 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		m_previewMode = (false == m_previewMode) ? m_previewMode = true : m_previewMode = false;
 		m_vIndices.clear();
 	}
-
-
-	std::cout << "curHP: " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
-	std::cout << "=================================" << std::endl;
-
 
 	//if (Engine::IMKEY_DOWN(KEY_Q))
 	//{
@@ -252,19 +244,22 @@ void CPatternMachineC::PlaySelectPattern()
 		else
 			m_vPatterns[index]->Pattern(m_pOwner);
 
+		// select pattern이 끝났다면
+		if (false == m_onSelect)
+			m_vIndices.pop_back();
+
 		return;
 	}
-	// select pattern이 끝났다면
-	else if (false == m_onSelect)
-		m_vIndices.pop_back();
 
 	// cost가 충분하지 않다면
 	if (m_curCost < cost)
 		return;
 
+	std::cout << "Before Cost : " << m_curCost << std::endl;
+
 	m_onSelect = true;
 	m_curCost -= cost;
 
-	//std::cout << "After Cost : " << m_curCost << std::endl;
-	//std::cout << "=============================" << std::endl;
+	std::cout << "After Cost : " << m_curCost << std::endl;
+	std::cout << "=============================" << std::endl;
 }
