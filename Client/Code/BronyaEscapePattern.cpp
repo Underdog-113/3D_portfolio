@@ -54,8 +54,8 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		m_onEscape = true;
 
 		// 목표 위치 잡기
-		_float x = (_float)GetRandRange(-20, 20);
-		_float z = (_float)GetRandRange(-20, 20);
+		_float x = (_float)GetRandRange(-15, 15);
+		_float z = (_float)GetRandRange(-15, 15);
 
 		// 이스케이프 위치로 이동
 		m_lerpStartPos = mPos;
