@@ -42,19 +42,20 @@ public:
 				void						SetFOV				(_float FOV);
 
 				_float2						WorldToScreenPoint	(_float3 worldPos);
-
 private:
 				void						UpdateFixed			(void);
 				void						UpdateFree			(void);
 				void						UpdateEdit			(void);
 				void						UpdateFPS			(void);
 				void						UpdateTPS			(void);
+				void						UpdateTPS_Custom	(void);
 
 				void						LateUpdateFixed		(void);
 				void						LateUpdateFree		(void);
 				void						LateUpdateEdit		(void);
 				void						LateUpdateFPS		(void);
 				void						LateUpdateTPS		(void);
+				void						LateUpdateTPS_Custom(void);
 
 				void						UpdateProjMat		(void);
 				void						UpdateOrthoMat		(void);
@@ -101,7 +102,10 @@ private:
 
 	GETTOR_SETTOR	(_float,				m_minDistTPS,		1.f,					MinDistTPS)
 	GETTOR_SETTOR	(_float,				m_maxDistTPS,		3.f,					MaxDistTPS)
+	GETTOR_SETTOR	(_bool,					m_isRightClicked,	false,					RightClicked)
 
+
+	POINT m_prevPT;
 };
 END
 #endif

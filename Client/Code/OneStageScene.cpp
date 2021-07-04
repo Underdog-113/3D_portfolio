@@ -63,8 +63,7 @@ void COneStageScene::Start(void)
 
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
-
-
+	
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -210,7 +209,7 @@ void COneStageScene::Create_SceneCamera(void)
 	cam->SetMaxDistTPS(2.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
-	cam->SetMode(Engine::ECameraMode::TPS);
+	cam->SetMode(Engine::ECameraMode::TPS_Custom);
 }
 
 void COneStageScene::Create_Dummy(_float3 pos)
@@ -294,8 +293,8 @@ void COneStageScene::ForUITest()
 		CBattleUiManager::GetInstance()->TargetUI(nullptr, 5.0f);
 	}
 
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
-	{
-		CBattleUiManager::GetInstance()->BattleEnd();
-	}
+// 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+// 	{
+// 		CBattleUiManager::GetInstance()->BattleEnd();
+// 	}
 }
