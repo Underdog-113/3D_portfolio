@@ -60,7 +60,7 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	// 텍스처->월드
 	vNormal = vector(vNormal.xyz * 2.f - 1.f, 0.f);
 
-	vector diffuse = vector(0.5, vNormal.a, vDepth.z, 1.f);
+	vector diffuse = vector(vColor.a, vNormal.a, vDepth.z, 1.f);
 	vector ambient = vector(vDepth.a, vDepth.a, vDepth.a, 1.f);
 	
 	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * g_vMtrlDiffuse) + (g_vLightAmbient * g_vMtrlAmbient);
@@ -89,7 +89,7 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	
 	vector	vLook = normalize(g_vCamPos - vPosition);
 
-	Out.vSpecular = pow(saturate(dot(normalize(vReflect), vLook)), vSpecular.a);
+	Out.vSpecular = pow(saturate(dot(normalize(vReflect), vLook)), 20);
 	Out.vSpecular *= vector(vSpecular.xyz, 1);
 
 
