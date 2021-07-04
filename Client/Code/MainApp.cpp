@@ -23,6 +23,7 @@
 #include "AlphaMaskShader.h"
 #include "FireShader.h"
 #include "LaserTrailShader.h"
+#include "OutlineShader.h"
 #pragma endregion
 
 
@@ -75,6 +76,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskShader::Create(), L"AlphaMaskShader", (_uint)EShaderID::AlphaMaskShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFireShader::Create(), L"FireShader", (_uint)EShaderID::FireShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CLaserTrailShader::Create(), L"LaserTrail", (_uint)EShaderID::LaserShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(COutlineShader::Create(), L"OutlineShader", (_uint)EShaderID::OutlineShader);
 
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();

@@ -12,6 +12,14 @@ float4		g_emissive;
 float4		g_specular;
 float		g_specularPower;
 
+vector		g_lightDir;
+vector		g_lightDiffuse;
+vector		g_lightAmbient;
+
+vector		g_camPos;
+matrix		g_invProjMat;
+matrix		g_invViewMat;
+
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
@@ -140,12 +148,12 @@ PS_OUT PS_OUTLINE(PS_IN In)
 
 technique Default_Device
 {
-	pass Outline
-	{
-		vertexshader = compile vs_3_0 VS_OUTLINE();
-		pixelshader = compile ps_3_0 PS_OUTLINE();
-		CullMode = CW;
-	}
+	//pass Outline
+	//{
+	//	vertexshader = compile vs_3_0 VS_OUTLINE();
+	//	pixelshader = compile ps_3_0 PS_OUTLINE();
+	//	CullMode = CW;
+	//}
 
 	pass Origin	
 	{

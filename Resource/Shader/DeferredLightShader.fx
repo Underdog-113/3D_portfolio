@@ -89,7 +89,9 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	
 	vector	vLook = normalize(g_vCamPos - vPosition);
 
-	Out.vSpecular = pow(saturate(dot(normalize(vReflect), vLook)), 20);
+	vector dotRNL = saturate(dot(normalize(vReflect), vLook));
+	Out.vSpecular = pow(dotRNL, vSpecular.a);
+	Out.vSpecular.a = dotRNL.a;
 	Out.vSpecular *= vector(vSpecular.xyz, 1);
 
 

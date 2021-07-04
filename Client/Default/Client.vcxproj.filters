@@ -718,6 +718,9 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
       <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\12.OutlineShader">
+      <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1400,6 +1403,9 @@
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\OutlineShader.h">
+      <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2011,6 +2017,9 @@
       <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp">
+      <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2069,6 +2078,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <Filter>04.Shader\11.LaserTrail</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
+      <Filter>04.Shader\12.OutlineShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

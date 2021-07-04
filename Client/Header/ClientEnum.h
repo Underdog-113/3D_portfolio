@@ -72,7 +72,8 @@ enum class EShaderID
 	AlphaMaskShader     = 9 + (_int)Engine::EShaderID::NumOfShaderID,
 	FireShader			= 10 + (_int)Engine::EShaderID::NumOfShaderID,
 	LaserShader  		= 11 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 12 + (_int)Engine::EShaderID::NumOfShaderID
+	OutlineShader		= 12 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 13 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID
