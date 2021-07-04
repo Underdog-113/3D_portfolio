@@ -75,7 +75,7 @@ void CStageCameraMan::PivotChasing()
 
 	AppendTargetCorrecting();
 
-	_float3 lerpPosition = pCT->GetLerpPosition(
+	_float3 lerpPosition = GetLerpPosition(
 		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_DT * m_chaseSpeed);
 
 

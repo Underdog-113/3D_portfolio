@@ -193,6 +193,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 
+	// 타격하는 발키리의 타입 설정
+	
+
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
 	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate(), &damage);
@@ -245,8 +248,23 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	spSoftEffect->GetTransform()->SetSize(randSize, randSize, randSize);
 
 	// 8. 사운드
+	V_Stat::Valkyrie_Type valkyrieType = pV->GetStat()->GetType();
+	_TCHAR* fileName = L"";
 
-
+	switch (valkyrieType)
+	{
+	case V_Stat::Valkyrie_Type::KIANA:
+		fileName = L"KianaAttackHit.wav";
+		break;
+	case V_Stat::Valkyrie_Type::THERESA:
+		fileName = L"TeressaAttackHit.wav";
+		break;
+	case V_Stat::Valkyrie_Type::SAKURA:
+		fileName = L"SakuraAttackHit.wav";
+		break;
+	}
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)pM->GetHitChannelID());
+	Engine::CSoundManager::GetInstance()->StartSound(fileName, (_uint)pM->GetHitChannelID());
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
@@ -277,6 +295,7 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 4. 히트 이펙트
 
 	// 5. 사운드
+
 }
 
 void CStageControlTower::SwitchValkyrie(Squad_Role role)
@@ -332,21 +351,6 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
-}
-
-_float3 CStageControlTower::GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration)
-{
-	if (curTime == lerpDuration)
-		return endPos;	
-
-	_float3 dir = endPos - startPos;
-	_float length = D3DXVec3Length(&dir);
-	_float timeline = curTime / lerpDuration;
-
-	_float moveAmount = length * timeline;
-
-	D3DXVec3Normalize(&dir, &dir);
-	return startPos + dir * moveAmount;
 }
 
 void CStageControlTower::OffCameraTargeting()

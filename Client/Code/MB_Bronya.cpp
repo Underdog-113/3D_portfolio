@@ -50,7 +50,8 @@ void CMB_Bronya::Awake(void)
 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
 }
 
 void CMB_Bronya::Start(void)
@@ -73,6 +74,7 @@ void CMB_Bronya::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+	m_pStat->SetHPMagnification(6);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
