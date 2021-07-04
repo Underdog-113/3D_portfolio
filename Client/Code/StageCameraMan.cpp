@@ -23,23 +23,27 @@ void CStageCameraMan::Start()
 	m_spCamera->SetMode(Engine::ECameraMode::TPS_Custom);
 
 
-	m_spPivot = std::dynamic_pointer_cast<Engine::CEmptyObject>(
-		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)ELayerID::Player, L"CameraPivot"));
-
-	
+	m_spPivot = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Camera, L"CameraPivot");
 	m_spPivot->AddComponent<Engine::CCollisionC>()->
-		AddCollider(Engine::CSphereCollider::Create(0,1.f));
-
+		AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::FloorRay, _float3(0.25f, 0.25f, 0.25f)));
 	m_spPivot->AddComponent<Engine::CDebugC>();
 	m_spPivot->AddComponent<Engine::CShaderC>();
-	m_spPivot->GetTransform()->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
+	m_spPivot->GetComponent<Engine::CTransformC>()->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
+
+	m_spCamera->SetTarget(m_spPivot);
+
+	m_isStart = true;
 }
 
 void CStageCameraMan::UpdateCameraMan()
 {
+	if(!m_isStart)
+		Start();
+
 	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS_Custom)
 		return;
-
+	
+	PivotChasing();
 	
 	if (!MouseControlMode())
 	{
@@ -48,6 +52,45 @@ void CStageCameraMan::UpdateCameraMan()
 		if (!m_manualControl)
 			AutoControlMode();
 	}
+}
+
+void CStageCameraMan::PivotChasing()
+{
+// 	bool isMove = false;
+// 
+// 	if (Engine::IMKEY_PRESS(StageKey_Move_Forward) ||
+// 		Engine::IMKEY_PRESS(StageKey_Move_Left) || 
+// 		Engine::IMKEY_PRESS(StageKey_Move_Right) || 
+// 		Engine::IMKEY_PRESS(StageKey_Move_Back))
+// 	{
+// 		isMove = true;
+// 	}
+// 
+	if (m_speedIncreaseTimer < 1.f)
+	{
+		m_chaseSpeedIncreaseTimer += GET_DT;
+	}
+
+	CStageControlTower* pCT = CStageControlTower::GetInstance();
+
+	AppendTargetCorrecting();
+
+	_float3 lerpPosition = pCT->GetLerpPosition(
+		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_DT * m_chaseSpeed);
+
+
+	if (D3DXVec3Length(&(m_dstPivotPos - lerpPosition)) < 0.01f)
+	{
+		lerpPosition = m_dstPivotPos;
+		m_chaseSpeedIncreaseTimer = 0.f;
+	}
+	m_spPivot->GetTransform()->SetPosition(lerpPosition);
+}
+
+void CStageCameraMan::SetIsTargeting(bool value)
+{
+	m_isTargeting = value;
+	m_targetingTimer = 0.f;
 }
 
 void CStageCameraMan::SetNearTake()
@@ -138,15 +181,41 @@ void CStageCameraMan::ChangeTake()
 
 void CStageCameraMan::AppendTargetCorrecting()
 {
-	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_DT * m_horzCorrectingSpeed * m_speedIncreaseTimer);
-	m_spCamera->SetLookAngleUp(lerpPoint);
-	m_rotateLerpStart = lerpPoint;
+	auto pCT = CStageControlTower::GetInstance();
 
-	if (abs(m_rotateYDst - m_rotateLerpStart) < 0.01f)
+	if (!m_isTargeting)
 	{
-		m_rotateYDst = m_rotateLerpStart;
-		m_speedIncreaseTimer = 0.f;
+		_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
+		_float3 pivotPos = m_spPivot->GetTransform()->GetPosition();
+		_float3 dir = actorPos - pivotPos;
+		_float len = D3DXVec3Length(&dir);
+
+		D3DXVec3Normalize(&dir, &dir);
+		if (len > MaxChaseDistance)
+			m_dstPivotPos = pivotPos + dir * MaxChaseDistance;
+		else
+			m_dstPivotPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
+		return;
 	}
+
+	m_targetingTimer += GET_DT;
+
+	if (m_targetingTimer > 2.f || !pCT->GetCurrentTarget())
+	{
+		m_isTargeting = false;
+		m_targetingTimer = 0.f;
+		return;
+	}
+
+
+	_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
+	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
+
+	_float3 dir = targetPos - actorPos;
+	_float distance = D3DXVec3Length(&dir) * 0.5f;
+	
+	D3DXVec3Normalize(&dir, &dir);
+	m_dstPivotPos = actorPos + dir * distance;
 }
 
 void CStageCameraMan::AppendHorizontalCorrecting()
@@ -194,6 +263,7 @@ bool CStageCameraMan::MouseControlMode()
 		m_rotateYDst = m_spCamera->GetLookAngleUp();
 
 		ChangeTake();
+		m_isTargeting = false;
 		return true;
 	}
 	else
@@ -219,6 +289,7 @@ void CStageCameraMan::ManualControlMode()
 		m_rotateLerpTimer = 0.5f;
 		m_rotateLerpStart = m_spCamera->GetLookAngleUp();
 		m_manualControl = true;
+		m_isTargeting = false;
 	}
 	if (Engine::IMKEY_PRESS(StageKey_CamRotateRight))
 	{
@@ -229,6 +300,7 @@ void CStageCameraMan::ManualControlMode()
 		m_rotateLerpTimer = 0.5f;
 		m_rotateLerpStart = m_spCamera->GetLookAngleUp();
 		m_manualControl = true;
+		m_isTargeting = false;
 	}
 
 	m_rotateLerpTimer += GET_DT;

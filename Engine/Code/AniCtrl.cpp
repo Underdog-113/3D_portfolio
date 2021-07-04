@@ -323,9 +323,9 @@ void CAniCtrl::ChangeFakeAnimState_EndToStart(void)
 {
 	m_isFakeAniEnd = false;
 
-	m_fakeTimer = m_fakePeriod * 0.01;
 	m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, 0.0);
-	m_pFakeAniCtrl->AdvanceTime(m_fakeTimer, NULL);
+	m_fakeTimer = 0.f;
+	PlayFake();
 }
 
 _bool CAniCtrl::IsItEnd(void)

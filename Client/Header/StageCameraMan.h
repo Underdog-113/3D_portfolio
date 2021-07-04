@@ -4,6 +4,7 @@
 #define MidTake 3.f
 #define FarTake 4.5f
 
+#define MaxChaseDistance 0.5f
 
 class CStageCameraMan
 {
@@ -18,6 +19,8 @@ public:
 
 	void UpdateCameraMan();
 	void PivotChasing();
+
+	void SetIsTargeting(bool value);
 
 public:
 	void SetNearTake();
@@ -43,7 +46,6 @@ private:
 
 	bool CheckNoAction();
 
-
 	void ShowMouseCursor();
 	void HideMouseCursor();
 
@@ -52,13 +54,17 @@ private:
 private:
 	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCamera,		nullptr,	Camera)		
 	GETTOR			(SP(Engine::CObject),	m_spPivot,		nullptr,	Pivot)
+	GETTOR			(_bool,					m_isTargeting,	false,		IsTargeting)		
 
+	bool m_returnToActor = false;
+	_float m_targetingTimer = 0.f;
+	bool m_isStart = false;
 private:
 	_float m_followTimer = 0.f;
 
 	_float3 m_dstPivotPos = ZERO_VECTOR;
 	_float m_movePivotTimer = 0.f;
-	_float m_chaseSpeed = 5.f;
+	_float m_chaseSpeed = 7.f;
 	_float m_chaseSpeedIncreaseTimer = 0.f;
 
 private:

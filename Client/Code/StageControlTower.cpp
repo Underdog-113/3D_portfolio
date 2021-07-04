@@ -103,7 +103,6 @@ void CStageControlTower::SetCurrentMainCam(SP(Engine::CCamera) pCam)
 {
 	m_pActorController->SetCurrentMainCam(pCam);
 	m_pCameraMan->SetCamera(pCam);
-	m_pCameraMan->Start();
 }
 
 void CStageControlTower::IncreasePhase()
@@ -135,7 +134,7 @@ void CStageControlTower::FindTarget()
 		return;
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
-	SP(Engine::CObject) spTarget = m_spCurTarget;
+	SP(Engine::CObject) spTarget = nullptr;
 	_float minDistance = 5.f;
 
 	_float3 valkyrieForward = m_pCurActor->GetTransform()->GetForward();
@@ -174,6 +173,7 @@ void CStageControlTower::FindTarget()
 	if (m_spCurTarget)
 	{
 		m_pActorController->TargetingOn();
+		m_pCameraMan->SetIsTargeting(true);
 
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
@@ -245,6 +245,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	spSoftEffect->GetTransform()->SetSize(randSize, randSize, randSize);
 
 	// 8. 사운드
+
 
 }
 
@@ -323,9 +324,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	                                                        
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
-
-	Engine::GET_MAIN_CAM->SetTarget(m_vSquad[Actor]);
-
+	
 	// 1. 대기 슬롯 이미지 바꿔주고
 	// 3. 스킬 ui도
 	// 4. 카메라 타겟팅 바꿔주기
@@ -348,4 +347,9 @@ _float3 CStageControlTower::GetLerpPosition(_float3 startPos, _float3 endPos, _f
 
 	D3DXVec3Normalize(&dir, &dir);
 	return startPos + dir * moveAmount;
+}
+
+void CStageControlTower::OffCameraTargeting()
+{
+	m_pCameraMan->SetIsTargeting(false);
 }

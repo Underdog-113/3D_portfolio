@@ -67,8 +67,9 @@ public:		/* Battle */
 
 	_float3 GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration = 1.f);
 
+	void OffCameraTargeting();
+
 public:		/* Stage Control Mode */
-	void StageClear();
 
 private:
 	typedef std::vector<SP(Engine::CObject)> _Squad;
