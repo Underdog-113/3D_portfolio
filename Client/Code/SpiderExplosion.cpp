@@ -38,7 +38,8 @@ SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
 void CSpiderExplosion::Awake(void)
 {
 	__super::Awake();
-
+	m_spTransform->SetSizeX(6);
+	m_spTransform->SetSizeY(10);
 }
 
 void CSpiderExplosion::Start(void)
