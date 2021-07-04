@@ -31,7 +31,8 @@ enum class EDataID
 	Effect = 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	UI = 5 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Stat = 6 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	NumOfDataID = 7 + (_uint)Engine::EDataID::NumOfEngineDataID
+	Monster = 7 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	NumOfDataID = 8 + (_uint)Engine::EDataID::NumOfEngineDataID
 };
 
 
