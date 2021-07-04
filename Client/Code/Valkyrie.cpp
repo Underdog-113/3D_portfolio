@@ -128,7 +128,8 @@ void CValkyrie::OnHitbox()
 	{
 		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
 		{
-			col->SetIsEnabled(true);
+			//col->SetIsEnabled(true);
+			col->SetIsTrigger(false);
 			break;
 		}
 	}
@@ -141,7 +142,8 @@ void CValkyrie::OffHitbox()
 	{
 		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
 		{
-			col->SetIsEnabled(false);
+			//col->SetIsEnabled(false);
+			col->SetIsTrigger(true);
 			break;
 		}
 	}

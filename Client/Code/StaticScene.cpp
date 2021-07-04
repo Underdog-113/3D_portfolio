@@ -48,7 +48,7 @@
 #include "MonsterHitEffect.h"
 #include "MonsterSpawnBeam.h"
 #include "MonsterSpawnEff.h"
-
+#include "SpiderExplosion.h"
 // Kiana
 #include "Kiana_Trail.h"
 #include "Kiana_Ult_Trail.h"
@@ -378,4 +378,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	// Hit
 	SP(CSoftEffect) spHitEffect(CMonsterHitEffect::Create(true, this));
 	GetObjectFactory()->AddPrototype(spHitEffect);
+
+	// Spider
+	SP(CSoftEffect) spSpiderExplosionEffect(CSpiderExplosion::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSpiderExplosionEffect);
 }

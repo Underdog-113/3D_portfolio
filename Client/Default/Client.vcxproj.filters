@@ -733,6 +733,9 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal">
       <UniqueIdentifier>{1870b79e-3fbb-43b1-ae2e-ffffd934c13f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
+      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1441,6 +1444,9 @@
     <ClInclude Include="..\Header\BronyaArsenalPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SpiderExplosion.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2074,6 +2080,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
+    </ClCompile>
+      <ClCompile Include="..\Code\SpiderExplosion.cpp">
+        <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>

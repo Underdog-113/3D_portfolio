@@ -183,8 +183,11 @@ bool CActorController::CheckMoveOrder()
 	m_moveOrderDir.y = 0.f;
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
-	if (m_prevMoveFlag != m_moveFlag || m_moveFlag & MoveFlag_Left || m_moveFlag & MoveFlag_Right)
+// 	if (m_prevMoveFlag != m_moveFlag || m_moveFlag & MoveFlag_Left || m_moveFlag & MoveFlag_Right)
+// 		m_rotateLock = false;
+	if (m_moveFlag)
 		m_rotateLock = false;
+
 
 	m_prevMoveFlag = m_moveFlag;
 	return true;
@@ -291,7 +294,8 @@ void CActorController::RotateCurrentActor()
 
 	_float3 actorForward = pActorTransform->GetForward();
 	actorForward = _float3(actorForward.x, 0.f, actorForward.z);
-	float angleSynchroRate = D3DXVec3Dot(&m_moveOrderDir, &actorForward);
+	D3DXVec3Normalize(&actorForward, &actorForward);
+	float angleSynchroRate = D3DXVec3Dot(&actorForward, &m_moveOrderDir);
 
 	if (angleSynchroRate > 0.95f)
 	{
@@ -305,16 +309,33 @@ void CActorController::RotateCurrentActor()
 	D3DXVec3Normalize(&rotAxis, &rotAxis);
 
 	if (rotAxis.y > 0.f)
-		pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_DT);
-	else
-		pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
-
-
-	if (angleSynchroRate > 0.999f)
 	{
-		m_rotateLock = true;
-		m_rotateByTarget = false;
+		if (angleSynchroRate > 0.99f)
+		{
+			m_rotateLock = true;
+			m_rotateByTarget = false;
+
+			_float cosValue = acosf(angleSynchroRate);
+			pCurActor->GetTransform()->AddRotationY(cosValue);
+			return;
+		}
+		pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_DT);
 	}
+	else
+	{
+		if (angleSynchroRate > 0.99f)
+		{
+			m_rotateLock = true;
+			m_rotateByTarget = false;
+
+			_float cosValue = acosf(angleSynchroRate);
+			pCurActor->GetTransform()->AddRotationY(-cosValue);
+			return;
+		}
+		pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
+	}
+
+
 
 }
 
