@@ -730,6 +730,9 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra">
       <UniqueIdentifier>{c0a18fcb-7e43-4693-b653-656616947a09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal">
+      <UniqueIdentifier>{1870b79e-3fbb-43b1-ae2e-ffffd934c13f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1435,6 +1438,9 @@
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2068,6 +2074,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
