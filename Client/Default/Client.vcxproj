@@ -205,6 +205,8 @@
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
@@ -441,6 +443,8 @@
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />

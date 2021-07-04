@@ -730,8 +730,14 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra">
       <UniqueIdentifier>{c0a18fcb-7e43-4693-b653-656616947a09}</UniqueIdentifier>
     </Filter>
-      <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
-        <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
+      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign">
+      <UniqueIdentifier>{93c456d7-b285-4600-8fc2-065a4c0ad8e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail">
+      <UniqueIdentifier>{c46648ae-b379-4ec1-b8d3-bfc450a2ace8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1438,8 +1444,14 @@
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\SpiderExplosion.h">
-        <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    <ClInclude Include="..\Header\SpiderExplosion.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sickle_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterAttackSign.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2074,9 +2086,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
-    </ClCompile>      
-      <ClCompile Include="..\Code\SpiderExplosion.cpp">
-        <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpiderExplosion.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sickle_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterAttackSign.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
