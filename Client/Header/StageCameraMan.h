@@ -4,6 +4,7 @@
 #define MidTake 3.f
 #define FarTake 4.5f
 
+#define MaxChaseDistance 0.5f
 
 class CStageCameraMan
 {
@@ -14,7 +15,12 @@ public:
 	CStageCameraMan();
 	~CStageCameraMan();
 
+	void Start();
+
 	void UpdateCameraMan();
+	void PivotChasing();
+
+	void SetIsTargeting(bool value);
 
 public:
 	void SetNearTake();
@@ -22,14 +28,14 @@ public:
 	void SetFarTake();
 	void ChangeTake();
 
-	void ApplyTargetingMove();
-	void ApplyHorizontalMove();
+	void AppendTargetCorrecting();
+	void AppendHorizontalCorrecting();
 	
 	void ShakeCamera();
 
+	bool MouseControlMode();
 	void ManualControlMode();
 	void AutoControlMode();
-
 
 private:
 
@@ -38,7 +44,7 @@ private:
 		return _start * (1.f - _time) + _time * _end;
 	}
 
-
+	bool CheckNoAction();
 
 	void ShowMouseCursor();
 	void HideMouseCursor();
@@ -46,22 +52,39 @@ private:
 
 
 private:
-	GETTOR_SETTOR(SP(Engine::CCamera), m_spCamera, nullptr, Camera)
+	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCamera,		nullptr,	Camera)		
+	GETTOR			(SP(Engine::CObject),	m_spPivot,		nullptr,	Pivot)
+	GETTOR			(_bool,					m_isTargeting,	false,		IsTargeting)		
 
+	bool m_returnToActor = false;
+	_float m_targetingTimer = 0.f;
+	bool m_isStart = false;
+private:
+	_float m_followTimer = 0.f;
+
+	_float3 m_dstPivotPos = ZERO_VECTOR;
+	_float m_movePivotTimer = 0.f;
+	_float m_chaseSpeed = 7.f;
+	_float m_chaseSpeedIncreaseTimer = 0.f;
+
+private:
 	TakeType m_curTakeType = Mid;
 	TakeType m_nextTakeType = Mid;
 	_float m_curMaxDist = 3.f;
 	_float m_dstMaxDist = 3.f;
 	_float m_gotoNearTakeTimer = 0.f;
 	_float m_changeTakeTimer = 0.f;
-	_float m_changeTakeSpeed = 1.f;
+	_float m_changeTakeSpeed = 2.f;
 
 private:
-	_float m_rotateDst = 0.f;
+	_float m_rotateYDst = 0.f;
 	_float m_rotateSpeed = D3DXToRadian(3.f);
 	_float m_rotateLerpTimer = 0.f;
 	_float m_rotateLerpStart = 0.f;
 	
+	_float m_horzCorrectingSpeed = 5.f;
+	_float m_speedIncreaseTimer = 0.f;
+private:
 	float m_enterAutoTimer = 0.f;
 
 	bool m_whyCursorOffOneMore = true;

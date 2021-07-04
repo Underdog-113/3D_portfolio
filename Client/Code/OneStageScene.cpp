@@ -206,10 +206,7 @@ void COneStageScene::Create_SceneCamera(void)
 
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
-	cam->SetMaxDistTPS(2.f);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-
-	cam->SetMode(Engine::ECameraMode::TPS_Custom);
 }
 
 void COneStageScene::Create_Dummy(_float3 pos)
@@ -280,12 +277,12 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", 10, 11);
+		CBattleUiManager::GetInstance()->MonsterState(L"", 1000, 900, 2, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
 	{
-		CBattleUiManager::GetInstance()->PlayerChange(L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", L"Skill_Kiana_PT_001", 10);
+		CBattleUiManager::GetInstance()->MonsterHpDown(10);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))

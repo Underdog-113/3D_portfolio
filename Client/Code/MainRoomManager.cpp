@@ -16,9 +16,11 @@ void CMainRoomManager::Start(Engine::CScene * pScene)
 	for (int i = 0; i <= 7; i++)
 	{
 		Engine::CSlider* slider = static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_Slider_" + std::to_wstring(i)).get());
-		slider->SetMaxValue(maxValue);
 		slider->SetValue(value);
+
+		slider->SetMinValue(maxValue);
 		maxValue += maxExp;
+		slider->SetMaxValue(maxValue);
 	}
 
 	std::wstring stamina = std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetStamina()) + L"/" + std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetMaxStamina());

@@ -255,6 +255,7 @@ void CUILinker::Ultra()
 
 void CUILinker::Evade()
 {
+	m_pCT->OffCameraTargeting();
 }
 
 void CUILinker::Attack()

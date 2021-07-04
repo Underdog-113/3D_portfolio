@@ -50,13 +50,13 @@ void CValkyrieProperty::OnDestroy(void)
 
 void CValkyrieProperty::PropertyCanvas()
 {
-
+	m_scene->FindObjectByName(L"WeaponCanvas")->SetIsEnabled(false);
 	m_scene->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(true);
 	CValkyrieStatusData* data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
 
 	DataInput(L"PropertyCanvas_Text_2", std::to_wstring(data->GetHp()));
-	DataInput(L"PropertyCanvas_Text_4", std::to_wstring(data->GetDamage()));
-	DataInput(L"PropertyCanvas_Text_6", std::to_wstring(data->GetHoesim()));
+	DataInput(L"PropertyCanvas_Text_4", std::to_wstring(data->GetDamage() + data->GetWeaponData()->GetDamage()));
+	DataInput(L"PropertyCanvas_Text_6", std::to_wstring(data->GetHoesim() + data->GetWeaponData()->GetHoesim()));
 	DataInput(L"PropertyCanvas_Text_8", std::to_wstring(data->GetSp()));
 	DataInput(L"PropertyCanvas_Text_10", std::to_wstring(data->GetDefense()));
 	DataInput(L"PropertyCanvas_Text_11", std::to_wstring(data->GetExperience()) + L" / " + std::to_wstring(data->GetMaxExperience()));

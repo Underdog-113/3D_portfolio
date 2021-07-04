@@ -88,6 +88,7 @@ private:
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
 	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
 	GETTOR(SP(Engine::CRectTexC), m_spRectTex, nullptr, RectTex)
+	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 
 	GETTOR_SETTOR(_int, m_column, 1, Column) // 열의 갯수
 	GETTOR_SETTOR(_float2, m_offSet, _float2(0, 0), OffSet) // 이미지 시작 위치

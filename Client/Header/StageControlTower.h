@@ -66,8 +66,9 @@ public:		/* Battle */
 	void SwitchValkyrie(Squad_Role role);
 
 
+	void OffCameraTargeting();
+
 public:		/* Stage Control Mode */
-	void StageClear();
 
 private:
 	typedef std::vector<SP(Engine::CObject)> _Squad;
@@ -90,9 +91,9 @@ private:	/* Stage Info? */
 
 
 	GETTOR(std::list<ItemSave>, m_itemList, {}, ItemList)
-	GETTOR(_int, m_gold, 0, Gold)
-	GETTOR(_int, m_captainExp, 0, CaptainExp)
-	GETTOR(_int, m_valkyrieExp, 0, ValkyrieExp)
+	GETTOR(_int, m_gold, 30, Gold)
+	GETTOR(_int, m_captainExp, 530, CaptainExp)
+	GETTOR(_int, m_valkyrieExp, 830, ValkyrieExp)
 };
 
 #endif
