@@ -193,6 +193,7 @@
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
@@ -431,6 +432,7 @@
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />

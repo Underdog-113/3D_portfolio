@@ -64,3 +64,4 @@
 #include "BronyaShock1Pattern.h"
 #include "BronyaEscapePattern.h"
 #include "BronyaSkillUltraPattern.h"
+#include "BronyaArsenalPattern.h"
