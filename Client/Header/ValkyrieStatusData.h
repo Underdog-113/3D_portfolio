@@ -25,6 +25,8 @@ public:
 		std::wstring listTextureKey
 		);
 
+	void LevelUp();
+
 private:
 	GETTOR_SETTOR(_bool, m_enable, false, Enable);
 	GETTOR_SETTOR(std::wstring, m_name , L"" , Name);
@@ -41,7 +43,7 @@ private:
 	GETTOR_SETTOR(std::wstring, m_rank, L"", Rank);
 	GETTOR_SETTOR(std::wstring, m_property, L"", Property);
 	GETTOR_SETTOR(_int, m_battlePower, 0, BattlePower);
-	GETTOR_SETTOR(_int, m_level, 0, Level);
+	GETTOR(_int, m_level, 0, Level);
 	GETTOR_SETTOR(_int, m_maxLevel, 0, MaxLevel);
 	GETTOR_SETTOR(std::wstring, m_weaponType, {}, WeaponType);
 	GETTOR_SETTOR(CWeaponData*, m_weaponData, {}, WeaponData);

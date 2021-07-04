@@ -48,6 +48,24 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
+
+	SP(CScrollViewObject) spScrollView =
+		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
+	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
+	spScrollView->GetTransform()->SetSize(_float3(200, 200, 0));
+	spScrollView->AddScrollViewData(4, _float2(123, 112), _float2(100, 100));
+
+	spScrollView->
+		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction(), _float2(100, 100), L"", L"BgBlue_0", L"BgBlue_0")->
+		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction(), _float2(100, 100), L"", L"BgBlue_0", L"BgBlue_0")->
+		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction(), _float2(100, 100), L"", L"BgBlue_0", L"BgBlue_0")->
+		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction(), _float2(100, 100), L"", L"BgBlue_0", L"BgBlue_0")->
+		AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction(), _float2(100, 100), L"", L"BgBlue_0", L"BgBlue_0");
+
+	spScrollView->
+		AddImageObjectData(0, L"10101", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(1, L"10201", _float3(123, 112, 0), _float2(-40, -30))->
+		AddImageObjectData(2, L"10301", _float3(123, 112, 0), _float2(-40, -30))->AddImageObjectData(3, L"10402", _float3(123, 112, 0), _float2(-40, -30))->
+		AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 }
 
 void CDongScene::FixedUpdate(void)
@@ -58,7 +76,6 @@ void CDongScene::FixedUpdate(void)
 void CDongScene::Update(void)
 {
 	__super::Update();
-	Engine::GET_MAIN_CAM->SetMode(Engine::ECameraMode::Edit);
 }
 
 void CDongScene::LateUpdate(void)

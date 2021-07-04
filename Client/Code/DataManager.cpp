@@ -263,6 +263,7 @@ void CDataManager::ValkyrieStatusDataListInit(std::wstring valkyrieName)
 	CValkyrieStatusData* valkyrie = new CValkyrieStatusData();
 	valkyrie->AddValkyrieData(enable, name, subName, maxHp, maxSp, damage, hoesim, defense, maxExperience, rank, property, maxLevel, weaponType, partyTextureKey, squadTextureKey, listTextureKey);
 	valkyrie->SetWeaponData(FindWeaponData(weaponName));
+	valkyrie->SetBattlePower(valkyrie->GetDamage() + valkyrie->GetHoesim() + valkyrie->GetWeaponData()->GetDamage() + valkyrie->GetWeaponData()->GetHoesim());
 	m_pValkyrieStatusDataList.emplace_back(valkyrie);
 }
 

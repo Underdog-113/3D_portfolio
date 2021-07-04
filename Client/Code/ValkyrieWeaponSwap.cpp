@@ -82,6 +82,11 @@ void CValkyrieWeaponSwap::SelectWeapon()
 
 void CValkyrieWeaponSwap::WeaponChange()
 {
-	CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie)->SetWeaponData(CDataManager::GetInstance()->FindWeaponData(g_selectWeaponName));
+	CValkyrieStatusData* valkyrieData = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
+	valkyrieData->SetWeaponData(CDataManager::GetInstance()->FindWeaponData(g_selectWeaponName));
+	valkyrieData->SetDamage(valkyrieData->GetDamage() + valkyrieData->GetWeaponData()->GetDamage());
+	valkyrieData->SetHoesim(valkyrieData->GetHoesim() + valkyrieData->GetWeaponData()->GetHoesim());
+	valkyrieData->SetBattlePower(valkyrieData->GetDamage() + valkyrieData->GetHoesim() + valkyrieData->GetWeaponData()->GetDamage() + valkyrieData->GetWeaponData()->GetHoesim());
+
 	CValkyriegManager::GetInstance()->ChangeFSMWeapon();
 }
