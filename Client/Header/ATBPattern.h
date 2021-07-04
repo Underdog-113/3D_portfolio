@@ -23,6 +23,7 @@ public:
 protected:
 	_float m_cost = 0;
 	_float m_accTime = 0.f;
+	_float m_weight = 0.f; // 스킬 가중치
 	_bool m_onSound = false;
 };
 #endif

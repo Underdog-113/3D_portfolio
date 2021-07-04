@@ -99,6 +99,9 @@ void CCamera::Update(void)
 		UpdateTPS();
 		break;
 
+	case ECameraMode::TPS_Custom:
+		UpdateTPS_Custom();
+		break;
 	default:
 		MSG_BOX(__FILE__, L"Camera mode enum is broken in Update");
 		ABORT;
@@ -131,6 +134,10 @@ void CCamera::LateUpdate(void)
 
 	case ECameraMode::TPS:
 		LateUpdateTPS();
+		break;
+
+	case ECameraMode::TPS_Custom:
+		LateUpdateTPS_Custom();
 		break;
 
 	default:
@@ -256,13 +263,21 @@ void CCamera::UpdateTPS(void)
 		newTargetDist = GET_MATH->Min(newTargetDist, m_maxDistTPS);
 		m_targetDist = newTargetDist;
 	}
+	//RayCollider 길이 업데이트
+	m_pCamRayCollider->SetLength(m_targetDist);
+}
 
-	if (IMKEY_PRESS(KEY_D))
-		m_lookAngleUp += (PI / 3) * GET_DT;
-	if (IMKEY_PRESS(KEY_A))
-		m_lookAngleUp -= (PI / 3) * GET_DT;
+void CCamera::UpdateTPS_Custom(void)
+{
+	CameraRotate();
 
+	if (m_wallCollided == false && m_targetDist < m_maxDistTPS)
+	{
+		_float newTargetDist = m_targetDist + m_awaySpeed * GET_DT;
 
+		newTargetDist = GET_MATH->Min(newTargetDist, m_maxDistTPS);
+		m_targetDist = newTargetDist;
+	}
 	//RayCollider 길이 업데이트
 	m_pCamRayCollider->SetLength(m_targetDist);
 }
@@ -334,6 +349,30 @@ void CCamera::LateUpdateTPS(void)
 					   &UP_VECTOR);	
 }
 
+void CCamera::LateUpdateTPS_Custom(void)
+{
+	//TPS ViewMatrixUpdate
+	_mat rotationMatrix;
+	SP(CTransformC) spTargetTransform = m_spTarget->GetTransform();
+	_float3 invLook = _float3(0, 0, -m_targetDist);
+
+	/* 임의의 축 회전 */
+	D3DXMatrixRotationAxis(&rotationMatrix, &RIGHT_VECTOR, m_lookAngleRight);
+	D3DXVec3TransformNormal(&invLook, &invLook, &rotationMatrix);
+
+	/* 임의의 축 회전2 */
+	D3DXMatrixRotationAxis(&rotationMatrix, &UP_VECTOR, m_lookAngleUp);
+	D3DXVec3TransformNormal(&invLook, &invLook, &rotationMatrix);
+
+	m_spTransform->SetPosition(invLook + spTargetTransform->GetPosition() + m_targetOffset);
+	m_spTransform->SetForward(-invLook);
+
+	D3DXMatrixLookAtLH(&m_viewMat,
+		&m_spTransform->GetPosition(),
+		&(m_spTransform->GetPosition() + m_spTransform->GetForward()),
+		&UP_VECTOR);
+}
+
 void CCamera::UpdateProjMat(void)
 {
 	if(m_projHasChanged)
@@ -357,34 +396,63 @@ void CCamera::CameraRotate(void)
 
 	POINT curPt;
 	GetCursorPos(&curPt);
-	POINT m_centerPt = { GET_WND_WIDTH >> 1, GET_WND_HEIGHT >> 1 };
-	ClientToScreen(GET_HANDLE, &m_centerPt);
-	SetCursorPos(m_centerPt.x, m_centerPt.y);
-
-	if (curPt.x == m_centerPt.x && curPt.y == m_centerPt.y)
-		return;
 
 
 	switch (m_mode)
 	{
 	case ECameraMode::Free:
+	{
+		POINT m_centerPt = { GET_WND_WIDTH >> 1, GET_WND_HEIGHT >> 1 };
+		ClientToScreen(GET_HANDLE, &m_centerPt);
+		SetCursorPos(m_centerPt.x, m_centerPt.y);
+
+		if (curPt.x == m_centerPt.x && curPt.y == m_centerPt.y)
+			return;
+
 		m_spTransform->AddRotationX(D3DXToRadian((_float)(curPt.y - m_centerPt.y)
-									* pIM->GetMouseSensitivity().y
-									* GET_DT));
+			* pIM->GetMouseSensitivity().y
+			* GET_DT));
 		m_spTransform->AddRotationY(D3DXToRadian((_float)(curPt.x - m_centerPt.x)
-									* pIM->GetMouseSensitivity().x
-									* GET_DT));
+			* pIM->GetMouseSensitivity().x
+			* GET_DT));
+	}
 		break;
 	case ECameraMode::TPS:
+	{
+		POINT m_centerPt = { GET_WND_WIDTH >> 1, GET_WND_HEIGHT >> 1 };
+		ClientToScreen(GET_HANDLE, &m_centerPt);
+		SetCursorPos(m_centerPt.x, m_centerPt.y);
+
 		m_lookAngleRight += D3DXToRadian((_float)(curPt.y - m_centerPt.y)
-										* pIM->GetMouseSensitivity().y
-										* GET_DT);
+			* pIM->GetMouseSensitivity().y
+			* GET_DT);
 		m_lookAngleUp += D3DXToRadian((_float)(curPt.x - m_centerPt.x)
-									 * pIM->GetMouseSensitivity().x
-									 * GET_DT);
+			* pIM->GetMouseSensitivity().x
+			* GET_DT);
 
 		m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, 0, PI / 6.f);
 		m_lookAngleUp = GET_MATH->RoundOffRange(m_lookAngleUp, 2 * PI);
+	}
+		break;
+	case ECameraMode::TPS_Custom:
+		if (m_isRightClicked)
+		{
+			if (curPt.x == m_prevPT.x && curPt.y == m_prevPT.y)
+				return;
+
+			m_lookAngleRight += D3DXToRadian((_float)(curPt.y - m_prevPT.y)
+				* pIM->GetMouseSensitivity().y
+				* GET_DT);
+			m_lookAngleUp += D3DXToRadian((_float)(curPt.x - m_prevPT.x)
+				* pIM->GetMouseSensitivity().x
+				* GET_DT);
+
+			m_lookAngleRight = GET_MATH->MinMax(m_lookAngleRight, 0, PI / 6.f);
+			m_lookAngleUp = GET_MATH->RoundOffRange(m_lookAngleUp, 2 * PI);
+
+			m_prevPT = curPt;
+		}
+		m_prevPT = curPt;
 		break;
 	}
 }
@@ -429,3 +497,4 @@ _float2 CCamera::WorldToScreenPoint(_float3 worldPos)
 
 	return _float2(pos.x - halfWincx, -pos.y + halfWincy);
 }
+

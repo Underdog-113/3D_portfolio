@@ -7,7 +7,7 @@ class CATBPattern;
 
 class CPatternMachineC : public Engine::CComponent
 {
-	enum Pattern_Type { Born, Die, Base, Hit };
+	enum Pattern_Type { Born, Die, Base, Hit, TypeEnd };
 
 public:
 	explicit CPatternMachineC();
@@ -42,6 +42,8 @@ private:
 	std::vector<SP(CATBPattern)> m_vPatterns;
 	std::vector<_int> m_vIndices;
 
+	_bool m_previewMode = false; // 시연회용 모드
+
 	GETTOR_SETTOR(_bool, m_onBorn, false, OnBorn);
 	GETTOR_SETTOR(_bool, m_onBase, false, OnBase);
 	GETTOR_SETTOR(_bool, m_onDie, false, OnDie);
@@ -52,7 +54,7 @@ private:
 	GETTOR_SETTOR(_bool, m_onHitBack, false, OnHitBack); // hit_back
 	GETTOR_SETTOR(_bool, m_onSelect, false, OnSelect);
 	GETTOR_SETTOR(_float, m_curCost, 0.f, CurCost);
-	GETTOR_SETTOR(_float, m_maxCost, 30.f, MaxCost);
+	GETTOR_SETTOR(_float, m_maxCost, 70.f, MaxCost);
 };
 
 #endif

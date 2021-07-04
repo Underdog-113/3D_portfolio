@@ -17,8 +17,8 @@ public:
 
 private:
 	_float m_atkTime = 0.f; // 공격 쿨타임
-	_float m_atkDis = 1.7f; // 낫 공격 거리
-	_float m_atkCool = 2.f; // 공격 쿨타임
+	_float m_atkDis = 1.f; // 낫 공격 거리
+	_float m_atkCool = 5.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
 	_float m_walkCool = 0.3f; // 공격 끝나고 이동 시간

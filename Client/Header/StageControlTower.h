@@ -1,44 +1,35 @@
 #ifndef StageControlTower_H
 #define StageControlTower_H
 
-#define MULT(x, y) ((x)*(y))
 
-static uint64_t StageKey_AllOut = 1;
-#define StageKeyAllOut(boolValue)		\
-{										\
-   if (boolValue)						\
-     StageKey_AllOut = 0;				\
-   else									\
-	 StageKey_AllOut = 1;				\
-}
+#define StageKey_Move_Left			KEY_A
+#define StageKey_Move_Right			KEY_D
+#define StageKey_Move_Forward		KEY_W
+#define StageKey_Move_Back			KEY_S
 
-#define StageKey_Move_Left			MULT(KEY_A, StageKey_AllOut)
-#define StageKey_Move_Right			MULT(KEY_D, StageKey_AllOut)
-#define StageKey_Move_Forward		MULT(KEY_W, StageKey_AllOut)
-#define StageKey_Move_Back			MULT(KEY_S, StageKey_AllOut)
+#define StageKey_CamRotateLeft		KEY_Q
+#define StageKey_CamRotateRight		KEY_E
 
-#define StageKey_CamRotateLeft		MULT(KEY_Q, StageKey_AllOut)
-#define StageKey_CamRotateRight		MULT(KEY_E, StageKey_AllOut)
+#define StageKey_Attack				KEY_J
+#define StageKey_Evade				KEY_K
+#define StageKey_WeaponSkill		KEY_U
+#define StageKey_QTE				KEY_U
+#define StageKey_Ult				KEY_I
 
-#define StageKey_Attack				MULT(KEY_J, StageKey_AllOut)
-#define StageKey_Evade				MULT(KEY_K, StageKey_AllOut)
-#define StageKey_WeaponSkill		MULT(KEY_U, StageKey_AllOut)
-#define StageKey_QTE				MULT(KEY_U, StageKey_AllOut)
-#define StageKey_Ult				MULT(KEY_I, StageKey_AllOut)
+#define StageKey_Switch_1			KEY_1
+#define StageKey_Switch_2			KEY_2
 
-#define StageKey_Switch_1			MULT(KEY_1, StageKey_AllOut)
-#define StageKey_Switch_2			MULT(KEY_2, StageKey_AllOut)
-									
-#define StageKey_Pause				MULT(KEY_TAB, StageKey_AllOut)
-#define StageKey_Test_Emotion		MULT(KEY_Z, StageKey_AllOut)
-#define StageKey_Test_Hit_L			MULT(KEY_F, StageKey_AllOut)
-#define StageKey_Test_Hit_H			MULT(KEY_C, StageKey_AllOut)
+#define StageKey_Pause				KEY_TAB
+#define StageKey_Test_Emotion		KEY_Z
+#define StageKey_Test_Hit_L			KEY_F
+#define StageKey_Test_Hit_H			KEY_C
 
 
 class CValkyrie;
 class CActorController;
 class CUILinker;
 class CStatusDealer;
+class CStageCameraMan;
 class CPhaseControl;
 class COneStagePhaseControl;
 enum class EOneStagePhase;
@@ -58,9 +49,9 @@ public:
 
 public:
 	void AddSquadMember(SP(Engine::CObject) pValkyrie);
-	void ActorControl_SetCurrentMainCam(SP(Engine::CCamera) pCam);
 	void ActorControl_SetInputLock(bool lock);
-	
+
+	void SetCurrentMainCam(SP(Engine::CCamera) pCam);
 
 public:		/* Phase */
 	void IncreasePhase();
@@ -74,6 +65,7 @@ public:		/* Battle */
 
 	void SwitchValkyrie(Squad_Role role);
 
+	_float3 GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration = 1.f);
 
 public:		/* Stage Control Mode */
 	void StageClear();
@@ -86,6 +78,8 @@ private:
 	GETTOR			(CActorController*,		m_pActorController,	nullptr,		ActorController)
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
+	GETTOR			(CStageCameraMan*,		m_pCameraMan,		nullptr,		CameraMan)
+
 	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)
 
 private:	/* Stage Info? */

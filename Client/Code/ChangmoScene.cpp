@@ -86,7 +86,7 @@ void CChangmoScene::Start(void)
 		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 		cam->SetTarget(spKianaClone);
 		cam->SetTargetDist(2.f);
-		CStageControlTower::GetInstance()->ActorControl_SetCurrentMainCam(cam);
+		CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
 		cam->SetMode(Engine::ECameraMode::TPS);
 

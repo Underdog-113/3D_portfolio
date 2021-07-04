@@ -22,6 +22,7 @@ void CEffectToolScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"Player", (_uint)EDataID::Player);
 	m_pDataStore->AddDataSection(L"Scene", (_uint)EDataID::Scene);
 	m_pDataStore->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
+	m_pDataStore->AddDataSection(L"Effect", (_uint)EDataID::Effect);
 	m_pDataStore->AddDataSection(L"UI", (_uint)EDataID::UI);
 	m_pDataStore->AddDataSection(L"Stat", (_uint)EDataID::Stat);
 

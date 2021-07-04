@@ -80,6 +80,23 @@ void CMeshC::Start(SP(CComponent) spThis)
 
 		spOwnerTexC->SetNumOfTex(m_pMeshData->GetSubsetCount());
 	}
+
+	SP(CGraphicsC) spGraphics = m_pOwner->GetComponent<CGraphicsC>();
+	if (m_pMeshData->GetMeshType() == (_int)EMeshType::Static)
+	{
+		CStaticMeshData* pSM = static_cast<CStaticMeshData*>(m_pMeshData);
+		for (_uint i = 0; i < pSM->GetSubsetCount(); ++i)
+			spGraphics->AddMaterial(pSM->GetMtrl()[i].MatD3D);
+	}
+	else // DynamicMesh
+	{
+		CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
+		for (auto& meshContainer : pDM->GetMeshContainers())
+		{
+			for (_uint i = 0; i < meshContainer->NumMaterials; ++i)
+				spGraphics->AddMaterial(meshContainer->pMaterials[i].MatD3D);
+		}
+	}
 }
 
 void CMeshC::FixedUpdate(SP(CComponent) spThis)
@@ -98,12 +115,11 @@ void CMeshC::LateUpdate(SP(CComponent) spThis)
 
 void CMeshC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
+
 }
 
 void CMeshC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-
-	
 	if (m_pMeshData->GetMeshType() == (_int)EMeshType::Static)
 		RenderStatic(spGC, m_pMeshData, pEffect);
 	else
@@ -153,7 +169,7 @@ void CMeshC::SetMeshData(CMeshData * pMeshData)
 	{
 		m_pRootMotion = new CRootMotion;
 
-		CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+		CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
 		m_pRootMotion->CreateFixOffsetArray(pDM->GetAniCtrl()->GetAniCtrl()->GetNumAnimationSets());
 	}
 }
@@ -176,7 +192,7 @@ void CMeshC::SetMeshData(std::wstring meshKey)
 	{
 		m_pRootMotion = new CRootMotion;
 
-		CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+		CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
 		m_pRootMotion->CreateFixOffsetArray(pDM->GetAniCtrl()->GetAniCtrl()->GetNumAnimationSets());
 	}
 }
@@ -212,7 +228,7 @@ void CMeshC::OnRootMotion(void)
 {
 	m_pRootMotion->SetIsRootMotion(true);
 
-	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+	CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
 	pDM->SetRootMotionOff(false);
 }
 
@@ -220,7 +236,7 @@ void CMeshC::OffRootMotion(void)
 {
 	m_pRootMotion->SetIsRootMotion(false);
 
-	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(m_pMeshData);
+	CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
 	pDM->SetRootMotionOff(true);
 }
 
@@ -254,26 +270,40 @@ CDynamicMeshData* CMeshC::GetFirstMeshData_Dynamic(void)
 
 void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFECT pEffect)
 {
-	CStaticMeshData* pSM = dynamic_cast<CStaticMeshData*>(pMeshData);
+	CStaticMeshData* pSM = static_cast<CStaticMeshData*>(pMeshData);
 	_uint pass = 0;
 
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
+		D3DMATERIAL9 curMtrl = spGC->GetMaterials()[i];
+		_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
+		_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
+		_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
+		_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
+		_float specularPower = curMtrl.Power;
+
+		pEffect->SetVector("g_ambient", &ambient);
+		pEffect->SetVector("g_diffuse", &diffuse);
+		pEffect->SetVector("g_emissive", &emissive);
+		pEffect->SetVector("g_specular", &specular);
+		pEffect->SetFloat("g_specularPower", specularPower);
+
+
 		if (spGC->GetTexture())
 		{
 			_TexData* pTexData = spGC->GetTexture()->GetTexData()[i][0];
 
 			pEffect->SetTexture("g_BaseTexture", pTexData->pTexture);
-			pEffect->CommitChanges();
+			
 		}
-
+		pEffect->CommitChanges();
 		pSM->GetMesh()->DrawSubset(i);
 	}
 }
 
 void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFECT pEffect)
 {
-	CDynamicMeshData* pDM = dynamic_cast<CDynamicMeshData*>(pMeshData);
+	CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(pMeshData);
 
 	// root motion
 	if (m_haveDrawn == false)
@@ -329,19 +359,31 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 		_uint pass = 0;
 		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
 		{
-			if (pTexData[vMeshContainers[i]->texIndexStart + j][0] != nullptr)
+			if (pTexData[vMeshContainers[i]->subsetIndexStart + j][0] != nullptr)
 			{
 				if (!m_isEffectMesh)
 				{
-					pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->texIndexStart + j][0]->pTexture);
+					pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->subsetIndexStart + j][0]->pTexture);
 				}
 			}
 			else
 			{
 				pEffect->SetTexture("g_BaseTexture", nullptr);
 			}
-			pEffect->CommitChanges();
+			D3DMATERIAL9 curMtrl = spGC->GetMaterials()[vMeshContainers[i]->subsetIndexStart + j];
+			_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
+			_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
+			_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
+			_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
+			_float specularPower = curMtrl.Power;
 
+			pEffect->SetVector("g_ambient", &ambient);
+			pEffect->SetVector("g_diffuse", &diffuse);
+			pEffect->SetVector("g_emissive", &emissive);
+			pEffect->SetVector("g_specular", &specular);
+			pEffect->SetFloat("g_specularPower", specularPower);
+
+			pEffect->CommitChanges();
 			
 			GET_DEVICE->SetMaterial(&vMeshContainers[i]->pMaterials[j].MatD3D);
 			vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);

@@ -700,6 +700,33 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att">
       <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\00.ForScene\05.Portal">
+      <UniqueIdentifier>{c037e8dd-2f30-4dd3-aa1e-438896505014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect">
+      <UniqueIdentifier>{e8acabec-ae7a-40b0-b0f3-d97c2fece6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
+      <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\CameraMan">
+      <UniqueIdentifier>{e9c40220-419e-4b07-8e13-4ba6315e98d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1">
+      <UniqueIdentifier>{a79a242c-70fc-4a53-a5fa-aedff815da33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1">
+      <UniqueIdentifier>{dd0c389f-7044-40a3-983f-a9e2db94ff9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1">
+      <UniqueIdentifier>{b1ebeac4-84f6-4011-919a-91c0a834c132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape">
+      <UniqueIdentifier>{da2f0892-4404-413b-bbc2-903235846cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn">
+      <UniqueIdentifier>{a7cc5d8f-e9e8-42cf-8b0c-7e47c747eb68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1372,6 +1399,36 @@
     <ClInclude Include="..\Header\Sakura_Charge_Att.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Portal.h">
+      <Filter>02.Objects\00.ForScene\05.Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterHitEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SoftEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageCameraMan.h">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaShoot1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaThrow1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaShock1Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaEscapePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterSpawnEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterSpawnBeam.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1972,6 +2029,36 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Portal.cpp">
+      <Filter>02.Objects\00.ForScene\05.Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterHitEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoftEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageCameraMan.cpp">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaEscapePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterSpawnEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

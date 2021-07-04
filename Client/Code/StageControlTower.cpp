@@ -12,6 +12,7 @@
 #include "UILinker.h"
 #include "StatusDealer.h"
 #include "ActorController.h"
+#include "StageCameraMan.h"
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
@@ -27,12 +28,13 @@ void CStageControlTower::Start(CreateMode mode)
 		m_pLinker = new CUILinker;
 	m_pActorController = new CActorController;
 	m_pDealer = new CStatusDealer;
-
+	m_pCameraMan = new CStageCameraMan;
 
 	if (m_mode != WithoutUI)
 		m_pLinker->SetControlTower(this);
 	m_pActorController->SetControlTower(this);
 	m_pDealer->SetControlTower(this);
+
 }
 
 
@@ -40,6 +42,8 @@ void CStageControlTower::Update(void)
 {
 	if (m_mode != WithoutUI)
 		m_pLinker->UpdateLinker();
+
+	m_pCameraMan->UpdateCameraMan();
 
 	m_pActorController->UpdateController();
 
@@ -58,10 +62,10 @@ void CStageControlTower::Update(void)
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
 		SwitchValkyrie(Wait_2);
 
-
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
-		m_pPhaseControl->SetCurPhase((_uint)COneStagePhaseControl::EOneStagePhase::StageResult);
+		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
+	
 }
 
 void CStageControlTower::OnDestroy()
@@ -73,6 +77,7 @@ void CStageControlTower::OnDestroy()
 	SAFE_DELETE(m_pActorController)
 	SAFE_DELETE(m_pDealer)
 	SAFE_DELETE(m_pPhaseControl)
+	SAFE_DELETE(m_pCameraMan)
 }
 
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
@@ -89,14 +94,15 @@ void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
 	m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
 }
 
-void CStageControlTower::ActorControl_SetCurrentMainCam(SP(Engine::CCamera) pCam)
-{
-	m_pActorController->SetCurrentMainCam(pCam);
-}
-
 void CStageControlTower::ActorControl_SetInputLock(bool lock)
 {
 	m_pActorController->SetInputLock_ByAni(lock);
+}
+
+void CStageControlTower::SetCurrentMainCam(SP(Engine::CCamera) pCam)
+{
+	m_pActorController->SetCurrentMainCam(pCam);
+	m_pCameraMan->SetCamera(pCam);
 }
 
 void CStageControlTower::IncreasePhase()
@@ -219,6 +225,23 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	// 6. 보스면 스턴 게이지 깎아주세요
 
 	// 7. 이펙트
+	SP(Engine::CObject) spSoftEffect
+		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
+	spSoftEffect->GetComponent<Engine::CGraphicsC>();
+	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
+	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
+	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+
+	_float3 monsterPos = pMonster->GetTransform()->GetPosition();
+	monsterPos.y += pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+	_float3 monToHit = hitPoint - monsterPos;
+	float len = D3DXVec3Length(&monToHit) * 0.75f;
+	D3DXVec3Normalize(&monToHit, &monToHit);
+
+	spSoftEffect->GetTransform()->SetPosition(monsterPos + monToHit * len);
+
+	float randSize = 1.5f + rand() % 2 * 0.5f;
+	spSoftEffect->GetTransform()->SetSize(randSize, randSize, randSize);
 
 	// 8. 사운드
 
@@ -309,4 +332,19 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+}
+
+_float3 CStageControlTower::GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration)
+{
+	if (curTime == lerpDuration)
+		return endPos;	
+
+	_float3 dir = endPos - startPos;
+	_float length = D3DXVec3Length(&dir);
+	_float timeline = curTime / lerpDuration;
+
+	_float moveAmount = length * timeline;
+
+	D3DXVec3Normalize(&dir, &dir);
+	return startPos + dir * moveAmount;
 }

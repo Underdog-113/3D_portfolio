@@ -196,10 +196,15 @@
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
+    <ClInclude Include="..\Header\BronyaEscapePattern.h" />
     <ClInclude Include="..\Header\BronyaHitPattern.h" />
+    <ClInclude Include="..\Header\BronyaShock1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaThrow1Pattern.h" />
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
     <ClInclude Include="..\Header\ClientPatterns.h" />
@@ -308,7 +313,10 @@
     <ClInclude Include="..\Header\MeshTrailShader.h" />
     <ClInclude Include="..\Header\Monster.h" />
     <ClInclude Include="..\Header\ATBPattern.h" />
+    <ClInclude Include="..\Header\MonsterHitEffect.h" />
     <ClInclude Include="..\Header\MonsterSliderC.h" />
+    <ClInclude Include="..\Header\MonsterSpawnBeam.h" />
+    <ClInclude Include="..\Header\MonsterSpawnEff.h" />
     <ClInclude Include="..\Header\MoveUpSmoke.h" />
     <ClInclude Include="..\Header\MO_Axe.h" />
     <ClInclude Include="..\Header\MO_Dummy.h" />
@@ -325,6 +333,7 @@
     <ClInclude Include="..\Header\NinzaHitPattern.h" />
     <ClInclude Include="..\Header\OneStagePhaseControl.h" />
     <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\Portal.h" />
     <ClInclude Include="..\Header\RobotAttack1Pattern.h" />
     <ClInclude Include="..\Header\RobotAttack2Pattern.h" />
     <ClInclude Include="..\Header\RobotBasePattern.h" />
@@ -333,6 +342,7 @@
     <ClInclude Include="..\Header\RobotHitPattern.h" />
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
     <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
+    <ClInclude Include="..\Header\SoftEffect.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
@@ -420,10 +430,15 @@
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaEscapePattern.cpp" />
     <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp" />
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
     <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
@@ -510,7 +525,10 @@
     <ClCompile Include="..\Code\MeshTrailShader.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\ATBPattern.cpp" />
+    <ClCompile Include="..\Code\MonsterHitEffect.cpp" />
     <ClCompile Include="..\Code\MonsterSliderC.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnEff.cpp" />
     <ClCompile Include="..\Code\MoveUpSmoke.cpp" />
     <ClCompile Include="..\Code\MO_Axe.cpp" />
     <ClCompile Include="..\Code\MO_Dummy.cpp" />
@@ -527,6 +545,7 @@
     <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
     <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\Portal.cpp" />
     <ClCompile Include="..\Code\RobotAttack1Pattern.cpp" />
     <ClCompile Include="..\Code\RobotAttack2Pattern.cpp" />
     <ClCompile Include="..\Code\RobotBasePattern.cpp" />
@@ -535,6 +554,7 @@
     <ClCompile Include="..\Code\RobotHitPattern.cpp" />
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
+    <ClCompile Include="..\Code\SoftEffect.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />

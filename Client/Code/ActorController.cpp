@@ -183,7 +183,7 @@ bool CActorController::CheckMoveOrder()
 	m_moveOrderDir.y = 0.f;
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
-	if (m_prevMoveFlag != m_moveFlag)
+	if (m_prevMoveFlag != m_moveFlag || m_moveFlag & MoveFlag_Left || m_moveFlag & MoveFlag_Right)
 		m_rotateLock = false;
 
 	m_prevMoveFlag = m_moveFlag;

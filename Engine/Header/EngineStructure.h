@@ -99,7 +99,7 @@ namespace Engine
 		
 		_mat*					pRenderingMatrix;	// 최종적으로 변환이 끝나서 그리기를 수행하기 위한 행렬 정보
 													// pFrameOffsetMatrix * (*ppCombinedTransformMatrix)
-		_int					texIndexStart;
+		_int					subsetIndexStart;
 
 		_bool					hide = false;
 	}D3DXMESHCONTAINER_DERIVED;
@@ -108,20 +108,23 @@ namespace Engine
 	class CCollider;
 	struct _CollisionInfo
 	{
+		_CollisionInfo(void)
+		{
+		}
 		_CollisionInfo(const _CollisionInfo& ci)
 			: pMyCollider(ci.pMyCollider), pOtherCollider(ci.pOtherCollider), hitPoint(ci.hitPoint), normal(ci.normal), penetLength(ci.penetLength)
 		{
 		}
-		_CollisionInfo(CCollider* pMine, CCollider* pOthers, _float3 cHitPoint, _float3 cNormal, _float cPenet)
+		_CollisionInfo(SP(CCollider) pMine, SP(CCollider) pOthers, _float3 cHitPoint, _float3 cNormal, _float cPenet)
 			: pMyCollider(pMine), pOtherCollider(pOthers), hitPoint(cHitPoint), normal(cNormal), penetLength(cPenet)
 		{
 		}
 
-		CCollider*	pMyCollider		= nullptr;
-		CCollider*	pOtherCollider	= nullptr;	
-		_float3		hitPoint		= ZERO_VECTOR;
-		_float3		normal			= ZERO_VECTOR;
-		_float		penetLength		= 0.f;
+		SP(CCollider)	pMyCollider		= nullptr;
+		SP(CCollider)	pOtherCollider	= nullptr;	
+		_float3			hitPoint		= ZERO_VECTOR;
+		_float3			normal			= ZERO_VECTOR;
+		_float			penetLength		= 0.f;
 	};
 
 	//Text

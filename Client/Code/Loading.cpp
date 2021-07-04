@@ -24,9 +24,11 @@ _uint CLoading::ThreadMain(void * pArg)
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Player", (_uint)EDataID::Player);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Scene", (_uint)EDataID::Scene);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
+	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Effect", (_uint)EDataID::Effect);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"UI", (_uint)EDataID::UI);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Stat", (_uint)EDataID::Stat);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Monster", (_uint)EDataID::Monster);
+	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"ClientObject", (_uint)EDataID::ClientObject);
 
 
 	const std::wstring& sceneName = pLoading->m_pNextScene->GetObjectKey();

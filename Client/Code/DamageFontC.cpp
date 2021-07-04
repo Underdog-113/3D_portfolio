@@ -40,7 +40,7 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 {
 	m_offSet.y += (m_upSpeed * GET_DT);
 
-	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition() + m_hitPointOffset);
+	_float3 pos2d = Engine::GET_MAIN_CAM->WorldToScreenPoint(m_target->GetTransform()->GetPosition() /*+ m_hitPointOffset*/);
 	pos2d.z = 0.f;
 	
 
@@ -92,5 +92,6 @@ void CDamageFontC::AddDamageFontInit(Engine::CObject* target, _float3 hitPoint, 
 	m_target = target;
 	m_offSet.x = offSetX;
 	m_hitPointOffset = hitPoint - target->GetTransform()->GetPosition();
+	m_hitPointOffsetLength = D3DXVec3Length(&m_hitPointOffset);
 	GetOwner()->GetComponent<Engine::CTextureC>()->ChangeTexture(color + std::to_wstring(damage), 0);
 }

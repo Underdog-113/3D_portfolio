@@ -45,7 +45,12 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (m_curCost > m_maxCost)
 		m_curCost = m_maxCost;
 
-	if (4 != m_vPatterns.size() && m_vIndices.empty())
+	std::cout << "cost : " << m_curCost << std::endl;
+	std::cout << "================================= " << std::endl;
+
+	if (false == m_previewMode &&
+		Pattern_Type::TypeEnd != m_vPatterns.size() &&
+		m_vIndices.empty())
 	{
 		SortingPatterns();
 		return;
@@ -53,11 +58,10 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	_float3 pos = m_pOwner->GetTransform()->GetPosition();
 
-	if (Engine::IMKEY_DOWN(KEY_Q))
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
 	{
-		std::cout << "==============" << std::endl;
-		std::cout << "x: " << pos.x << ", y: " << pos.y << ", z: " << pos.z << std::endl;
-		std::cout << "==============" << std::endl;
+		m_previewMode = (false == m_previewMode) ? m_previewMode = true : m_previewMode = false;
+		m_vIndices.clear();
 	}
 
 	//if (Engine::IMKEY_DOWN(KEY_Q))
@@ -200,8 +204,24 @@ void CPatternMachineC::SortingPatterns()
 
 	for (_int i = 0; i < size; ++i)
 	{
-		index = rand() % (size - 4) + 4;
+		// 시연회 모드가 아니면 랜덤하게 패턴 정렬
+		if (false == m_previewMode)
+		{
+			index = rand() % (size - Pattern_Type::TypeEnd) + Pattern_Type::TypeEnd;
+		}
+		// 시연회 모드라면 순서대로 패턴 정렬
+		else if (true == m_previewMode)
+		{
+			index = i + Pattern_Type::TypeEnd;
+		}
+
 		m_vIndices.emplace_back(index);
+
+		// 시연회 모드 패턴 마지막에 base 패턴 넣기
+		if (true == m_previewMode && size - 1 == i)
+		{
+			m_vIndices.emplace_back(Pattern_Type::Base);
+		}
 	}
 }
 

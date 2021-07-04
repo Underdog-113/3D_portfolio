@@ -45,9 +45,9 @@ void CMB_Ganesha::Awake(void)
 	m_spStateMachine = AddComponent<CFSM_GaneshaC>();
 	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 }
 
 void CMB_Ganesha::Start(void)
@@ -60,7 +60,7 @@ void CMB_Ganesha::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(1131.f);
+	stat.SetBaseHp(4131.f);
 	stat.SetBaseAtk(117.f);
 	stat.SetBaseDef(25.f);
 
