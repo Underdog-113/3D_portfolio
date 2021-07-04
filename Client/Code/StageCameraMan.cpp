@@ -4,6 +4,7 @@
 #include "ObjectFactory.h"
 #include "EmptyObject.h"
 #include "Valkyrie.h"
+#include "CameraShake.h"
 
 #include "WndApp.h"
 
@@ -14,6 +15,7 @@ CStageCameraMan::CStageCameraMan()
 
 CStageCameraMan::~CStageCameraMan()
 {
+	delete m_pCameraShake;
 }
 
 void CStageCameraMan::Start()
@@ -33,6 +35,10 @@ void CStageCameraMan::Start()
 	m_spCamera->SetTarget(m_spPivot);
 
 	m_isStart = true;
+
+	m_pCameraShake = new CCameraShake;
+	m_pCameraShake->SetCamera(m_spCamera);
+	
 }
 
 void CStageCameraMan::UpdateCameraMan()
@@ -42,7 +48,15 @@ void CStageCameraMan::UpdateCameraMan()
 
 	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS_Custom)
 		return;
-	
+
+	auto camTr = m_spCamera->GetTransform();
+
+	if (m_pCameraShake->IsShaking()) 
+	{
+		camTr->SetPosition(m_noShakePos);
+		camTr->SetRotation(m_noShakeRot);
+	}
+
 	PivotChasing();
 	
 	if (!MouseControlMode())
@@ -52,20 +66,28 @@ void CStageCameraMan::UpdateCameraMan()
 		if (!m_manualControl)
 			AutoControlMode();
 	}
+
+	if (Engine::IMKEY_DOWN(StageKey_Attack))
+		m_pCameraShake->Preset_Low(m_spCamera->GetTransform()->GetPosition());
+
+	if (m_pCameraShake->IsShaking())
+	{
+		m_pCameraShake->PlayShake();
+
+		m_noShakePos = camTr->GetPosition();
+		m_noShakeRot = camTr->GetRotation();
+		camTr->AddPosition(m_pCameraShake->GetLocationOscilation());
+
+		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
+		camTr->AddRotation(rotOscilation);
+
+		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
+		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
+	}
 }
 
 void CStageCameraMan::PivotChasing()
 {
-// 	bool isMove = false;
-// 
-// 	if (Engine::IMKEY_PRESS(StageKey_Move_Forward) ||
-// 		Engine::IMKEY_PRESS(StageKey_Move_Left) || 
-// 		Engine::IMKEY_PRESS(StageKey_Move_Right) || 
-// 		Engine::IMKEY_PRESS(StageKey_Move_Back))
-// 	{
-// 		isMove = true;
-// 	}
-// 
 	if (m_speedIncreaseTimer < 1.f)
 	{
 		m_chaseSpeedIncreaseTimer += GET_DT;

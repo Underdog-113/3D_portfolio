@@ -1435,6 +1435,9 @@
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CameraShake.h">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2068,6 +2071,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CameraShake.cpp">
+      <Filter>10.ControlTower\CameraMan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

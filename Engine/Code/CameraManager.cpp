@@ -102,6 +102,8 @@ void CCameraManager::SetMainCameraMode(void)
 		ChangeCameraMode(ECameraMode::FPS);
 	else if (IMKEY_PRESS(KEY_SHIFT) && IMKEY_DOWN(KEY_5))
 		ChangeCameraMode(ECameraMode::TPS);
+	else if (IMKEY_PRESS(KEY_CONTROL) && IMKEY_DOWN(KEY_5))
+		ChangeCameraMode(ECameraMode::TPS_Custom);
 }
 
 void CCameraManager::ChangeCameraMode(ECameraMode newCameraMode)
