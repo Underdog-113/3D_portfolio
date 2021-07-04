@@ -292,7 +292,7 @@ void CTransformC::SlerpXZ(void)
 	if (m_slerpOn)
 	{
 		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_forward);
-		GET_MATH->RoundOffRange(dotTwoForward, 1);
+		dotTwoForward = GET_MATH->RoundOffRange(dotTwoForward, 1);
 
 		_float includedAngle = acos(dotTwoForward);
 
@@ -373,8 +373,7 @@ void CTransformC::UpdateRotation(void)
 		withoutY = _float3(m_forward.x, 0.f, m_forward.z);
 		D3DXVec3Normalize(&withoutY, &withoutY);
 		_float dotCheck = D3DXVec3Dot(&withoutY, &FORWARD_VECTOR);
-		if (dotCheck > 1)
-			dotCheck = 1;
+		dotCheck = GET_MATH->RoundOffRange(dotCheck, 1);
 
 		_float yRotAngle = acosf(dotCheck);
 
