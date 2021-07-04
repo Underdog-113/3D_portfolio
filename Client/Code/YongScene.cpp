@@ -148,14 +148,14 @@ void CYongScene::Update(void)
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
 		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);*/
 
-		//SP(Engine::CObject) spSoftEffect
-		//	= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
-		//spSoftEffect->GetComponent<Engine::CGraphicsC>();
-		//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-		//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-		//spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		SP(Engine::CObject) spSoftEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
+		spSoftEffect->GetComponent<Engine::CGraphicsC>();
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spider_Explosion");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spider_Explosion");
+		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 
-		SP(CMonsterSpawnBeam) spMeshEffect =
+	/*	SP(CMonsterSpawnBeam) spMeshEffect =
 			std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
 
 		spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
@@ -178,7 +178,7 @@ void CYongScene::Update(void)
 			spCube->AddComponent<Engine::CShaderC>();
 			spCube->GetTransform()->SetSize(10, 1, 10);
 			spCube->GetTransform()->SetPosition(0, -1.f, 0);
-		}
+		}*/
 	}
 }
 
