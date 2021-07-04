@@ -32,7 +32,7 @@ void CMonsterSliderC::Start(SP(CComponent) spThis)
 	__super::Start(spThis);
 	m_sliderOwner = static_cast<Engine::CSlider*>(GetOwner());
 	m_bWhiteCheck = true;
-	m_speed = 20;
+	m_speed = 60;
 	m_timerMax = 0.2f;
 	m_timer = m_timerMax;
 }
