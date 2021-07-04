@@ -31,8 +31,8 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	/*spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();*/
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 
 	return spClone;
 }
@@ -44,8 +44,10 @@ void CScrollViewObject::Awake(void)
 	m_addExtra = true;
 	
 	(m_spRectTex = AddComponent<Engine::CRectTexC>())->SetIsOrtho(true);
-/*	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
-	(m_spTexture = AddComponent<Engine::CTextureC>())->AddTexture(L"Transparency",0);*/
+	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::UI);
+	(m_spTexture = AddComponent<Engine::CTextureC>())->AddTexture(L"Defalut",0);
+	m_spShader = AddComponent<Engine::CShaderC>();
+	m_spShader->AddShader((_int)Engine::EShaderID::RectTexShader);
 }
 
 void CScrollViewObject::Start(void)
@@ -75,13 +77,19 @@ void CScrollViewObject::LateUpdate(void)
 
 void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
 {
-	if(m_spTexture->GetTexData()[0][0] == NULL)
+	if(m_spTexture != nullptr)
 		m_spRectTex->PreRender(m_spGraphics, pEffect);
 }
 
 void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->Render(m_spGraphics, pEffect);
+	if (m_spTexture != nullptr)
+		m_spRectTex->Render(m_spGraphics, pEffect);
+
+	for (auto& obj : m_vButtonObject)
+	{
+		obj->Render(pEffect);
+	}
 }
 
 void CScrollViewObject::PostRender(LPD3DXEFFECT pEffect)
