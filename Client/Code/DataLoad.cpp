@@ -726,6 +726,10 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 		SP(CMonster) spMonster =
 			std::dynamic_pointer_cast<CMonster>(pObjectFactory->AddClone(monsterType, true));
 
+		_bool isBoss;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
+			L"_boss", isBoss);
+
 		_int phaseChangerNum;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
 			L"_phaseChanger", phaseChangerNum);

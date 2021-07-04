@@ -62,20 +62,23 @@ public:
 protected:
 	static				_uint							m_s_uniqueID;
 	static				_uint							m_s_channelID;
-	GETTOR				(SP(Engine::CMeshC),			m_spMesh,			nullptr,					Mesh)
-	GETTOR				(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,					Graphics)
-	GETTOR				(SP(Engine::CTextureC),			m_spTexture,		nullptr,					Texture)
-	GETTOR				(SP(Engine::CShaderC),			m_spShader,			nullptr,					Shader)	
-	GETTOR				(SP(Engine::CRigidBodyC),		m_spRigidBody,		nullptr,					RigidBody)
-	GETTOR				(SP(Engine::CCollisionC),		m_spCollision,		nullptr,					Collision)
-	GETTOR				(SP(Engine::CDebugC),			m_spDebug,			nullptr,					Debug)
-	GETTOR				(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,					StateMachine)
+	GETTOR				(SP(Engine::CMeshC),			m_spMesh,			nullptr,						Mesh)
+	GETTOR				(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,						Graphics)
+	GETTOR				(SP(Engine::CTextureC),			m_spTexture,		nullptr,						Texture)
+	GETTOR				(SP(Engine::CShaderC),			m_spShader,			nullptr,						Shader)	
+	GETTOR				(SP(Engine::CRigidBodyC),		m_spRigidBody,		nullptr,						RigidBody)
+	GETTOR				(SP(Engine::CCollisionC),		m_spCollision,		nullptr,						Collision)
+	GETTOR				(SP(Engine::CDebugC),			m_spDebug,			nullptr,						Debug)
+	GETTOR				(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,						StateMachine)
 
 protected:
-	GETTOR				(M_Stat*,						m_pStat,			nullptr,					Stat)
-	GETTOR				(CAttackBall*,					m_pAttackBall,		nullptr,					AttackBall)
-	GETTOR				(CAttackBox*,					m_pAttackBox,		nullptr,					AttackBox)
-	GETTOR_SETTOR		(EChannelID,					m_channelID,		EChannelID::NumOfChannelID,	ChannelID)
-	GETTOR_SETTOR		(_float,						m_spawnTimer,		UNDEFINED,					SpawnTimer)
-	GETTOR_SETTOR		(SP(CPatternMachineC),			m_spPatternMachine,	nullptr,					PatternMachine)
+	GETTOR				(M_Stat*,						m_pStat,			nullptr,						Stat)
+	GETTOR				(CAttackBall*,					m_pAttackBall,		nullptr,						AttackBall)
+	GETTOR				(CAttackBox*,					m_pAttackBox,		nullptr,						AttackBox)
+	GETTOR_SETTOR		(EChannelID,					m_channelID,		EChannelID::NumOfChannelID,		ChannelID)
+	GETTOR_SETTOR		(EChannelID,					m_hitChannelID,		EChannelID::NumOfChannelID,		HitChannelID)
+	GETTOR_SETTOR		(_float,						m_spawnTimer,		UNDEFINED,						SpawnTimer)
+	GETTOR_SETTOR		(SP(CPatternMachineC),			m_spPatternMachine,	nullptr,						PatternMachine)
+	GETTOR_SETTOR		(V_Stat::Valkyrie_Type,			m_valkyrieType,		V_Stat::Valkyrie_Type::KIANA,	ValkyrieType)
+	GETTOR_SETTOR		(_bool,							m_isBoss,			false,							IsBoss)
 };

@@ -191,7 +191,9 @@ void CPatternMachineC::PlayHitPattern()
 		true == m_onHitH ||
 		true == m_onHitFrontL ||
 		true == m_onHitFront)
+	{
 		m_vPatterns[Pattern_Type::Hit]->Pattern(m_pOwner);
+	}
 }
 
 void CPatternMachineC::SortingPatterns()

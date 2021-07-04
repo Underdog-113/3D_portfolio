@@ -19,6 +19,7 @@ public:
 	void PatternRepeatSound(_TCHAR* fileName, Engine::CObject* pOwner, _float interval);
 	void SetPrequency(Engine::CObject* pOwner, _float* frequency);
 	_bool PatternSoundEnd(Engine::CObject* pOwner);
+	
 
 protected:
 	_float m_cost = 0;
