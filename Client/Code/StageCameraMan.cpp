@@ -187,6 +187,9 @@ void CStageCameraMan::AppendTargetCorrecting()
 	{
 		_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
 		_float3 pivotPos = m_spPivot->GetTransform()->GetPosition();
+		if (actorPos == pivotPos)
+			return;
+
 		_float3 dir = actorPos - pivotPos;
 		_float len = D3DXVec3Length(&dir);
 
