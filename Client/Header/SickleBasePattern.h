@@ -25,6 +25,8 @@ private:
 
 	_bool m_atkReady = true; // true : 공격 가능, false : 공격 불가
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
+	_bool m_onSignEffect = false;
+	_bool m_onTrailEffect = false;
 
 	_mat m_atkMat;
 };

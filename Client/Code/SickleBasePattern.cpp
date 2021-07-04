@@ -44,6 +44,8 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_Sickle_Walk_Back);
+			m_onSignEffect = false;
+			m_onTrailEffect = false;
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_Sickle_StandBy == fsm->GetCurStateString() &&
@@ -91,6 +93,8 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_Sickle_Walk_Back);
+			m_onSignEffect = false;
+			m_onTrailEffect = false;
 		}
 	}
 
@@ -113,6 +117,41 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._43 += (m_atkDis * look.z / 2.2f);
 
 		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.2f);
+	}
+
+	/************************* Effect */
+	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() &&
+		0.1f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSignEffect)
+	{
+		SP(Engine::CObject) spSoftEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
+		spSoftEffect->GetComponent<Engine::CGraphicsC>();
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
+		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		spSoftEffect->GetTransform()->SetPosition(mPos);
+		spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.6f);
+		m_onSignEffect = true;
+	}
+
+	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() &&
+		0.2f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onTrailEffect)
+	{
+		SP(Engine::CObject) spMeshEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sickle_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sickle_Attack");
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BloomMask");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+		//spMeshEffect->GetTransform()->SetRotationX(D3DXToRadian(180.f));
+		spMeshEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+		spMeshEffect->GetTransform()->AddRotationY(pOwner->GetTransform()->GetRotation().y);
+		spMeshEffect->GetTransform()->SetPosition(mPos);
+		m_onTrailEffect = true;
 	}
 }
 
