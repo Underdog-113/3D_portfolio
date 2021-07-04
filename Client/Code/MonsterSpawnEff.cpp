@@ -38,7 +38,7 @@ SP(Engine::CObject) CMonsterSpawnEff::MakeClone()
 void CMonsterSpawnEff::Awake()
 {
 	__super::Awake();
-	m_spTransform->SetSize(_float3(0.1f, 0.1f, 0.1f));		
+	m_spTransform->SetSize(_float3(0.05f, 0.05f, 0.05f));		
 }
 
 void CMonsterSpawnEff::Start()

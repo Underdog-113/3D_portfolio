@@ -25,6 +25,9 @@ void CEffectToolScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"Effect", (_uint)EDataID::Effect);
 	m_pDataStore->AddDataSection(L"UI", (_uint)EDataID::UI);
 	m_pDataStore->AddDataSection(L"Stat", (_uint)EDataID::Stat);
+	m_pDataStore->AddDataSection(L"Monster", (_uint)EDataID::Monster);
+	m_pDataStore->AddDataSection(L"ClientObject", (_uint)EDataID::ClientObject);
+
 
 	m_pDataStore->InitDataForScene(L"StaticScene", true);
 	m_pMeshStore->InitMeshForScene(L"StaticScene", true);
