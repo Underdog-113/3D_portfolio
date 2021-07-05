@@ -387,8 +387,7 @@ void CTransformC::UpdateRotation(void)
 
 		D3DXVec3Cross(&m_right, &UP_VECTOR, &m_forward);
 		dotCheck = D3DXVec3Dot(&withoutY, &m_forward);
-		if (dotCheck > 1)
-			dotCheck = 1;
+		dotCheck = GET_MATH->RoundOffRange(dotCheck, 1);
 
 		_float rightRotAngle = acosf(dotCheck);
 		if (m_forward.y >= 0)

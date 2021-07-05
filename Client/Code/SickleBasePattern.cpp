@@ -147,9 +147,9 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
 		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
-		//spMeshEffect->GetTransform()->SetRotationX(D3DXToRadian(180.f));
-		spMeshEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		spMeshEffect->GetTransform()->AddRotationY(pOwner->GetTransform()->GetRotation().y);
+		//spMeshEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
+		spMeshEffect->GetTransform()->AddRotationY(PI);
 		spMeshEffect->GetTransform()->SetPosition(mPos);
 		m_onTrailEffect = true;
 	}

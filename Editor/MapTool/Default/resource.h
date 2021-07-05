@@ -82,7 +82,6 @@
 #define IDC_BUTTON19                    1075
 #define IDC_EDIT18                      1076
 #define IDC_EDIT21                      1077
-#define IDC_EDIT23                      1079
 #define IDC_CHECK9                      1080
 #define IDC_RADIO3                      1081
 #define IDC_BUTTON20                    1082
