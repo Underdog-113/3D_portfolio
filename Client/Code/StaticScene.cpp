@@ -44,6 +44,12 @@
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
 
+// Scout
+#include "Scout_Att_Range.h"
+#include "Scout_Att_Range_Hold.h"
+#include "Scout_Laser.h"
+#include "ScoutBall.h"
+
 #include "SoftEffect.h"
 #include "MonsterHitEffect.h"
 #include "MonsterSpawnBeam.h"
@@ -289,11 +295,8 @@ void CStaticScene::InitValkyriePrototypes(void)
 	SP(CKiana_Pistol) spPistol(CKiana_Pistol::Create(true, this));
 	ADD_PROTOTYPE(spPistol);
 
-
 	SP(CTheresa) spTheresaPrototype(CTheresa::Create(true, this));
 	ADD_PROTOTYPE(spTheresaPrototype);
-
-
 
 	SP(CSakura) spSakuraPrototype(CSakura::Create(true, this));
 	ADD_PROTOTYPE(spSakuraPrototype);
@@ -392,5 +395,18 @@ void CStaticScene::InitEffectPrototypes(void)
 	// Sickle
 	SP(CMeshEffect_Client) spSickleTrail(CSickle_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSickleTrail);
+
+	// Scout
+	SP(CMeshEffect_Client) spScoutAttRange(CScout_Att_Range::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutAttRange);
+	
+	SP(CMeshEffect_Client) spScoutAttRange_Hold(CScout_Att_Range_Hold::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutAttRange_Hold);
+
+	SP(CMeshEffect_Client) spScoutLaser(CScout_Laser::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutLaser);
+
+	SP(CMeshEffect_Client) spScoutBall(CScoutBall::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutBall);
 
 }

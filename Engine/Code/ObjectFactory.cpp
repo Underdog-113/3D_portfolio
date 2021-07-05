@@ -122,7 +122,7 @@ SP(CObject) CObjectFactory::AddClone(const std::wstring & protoObjectKey,
 		ABORT;
 	}
 
-	SP(CObject) spClone = iter_find_prototype->second->MakeClone();
+ 	SP(CObject) spClone = iter_find_prototype->second->MakeClone();
 	if (spClone == nullptr)
 	{
 		MSG_BOX(__FILE__, (protoObjectKey + L" failed to make clone in AddClone").c_str());

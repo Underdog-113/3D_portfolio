@@ -6,6 +6,7 @@
 #include "Kiana.h"
 
 #include "MonsterSpawnBeam.h"
+#include "Scout_Att_Range.h"
 CYongScene::CYongScene()
 {
 }
@@ -115,31 +116,21 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		SP(Engine::CObject) spMeshEffect
-			= m_pObjectFactory->AddClone(L"Sickle_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sickle_Attack");
+
+		SP(CScout_Att_Range) spScoutRange = std::dynamic_pointer_cast<CScout_Att_Range>(m_pObjectFactory->AddClone(L"Scout_Att_Range", true, (_int)Engine::ELayerID::Effect, L"MeshEffect"));
+		spScoutRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Att_Range_Move");
+		spScoutRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		spScoutRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+
+		SP(Engine::CObject) spMeshEffect = m_pObjectFactory->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BloomMask");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
-
-
-		/*SP(Engine::CObject) spMeshEffect
-			= m_pObjectFactory->AddClone(L"Sakura_Charge_Att", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sakura_Beam");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);*/
-
-	/*	SP(Engine::CObject) spSoftEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
-		spSoftEffect->GetComponent<Engine::CGraphicsC>();
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
-		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);*/
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 
 	/*	SP(CMonsterSpawnBeam) spMeshEffect =
 			std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));

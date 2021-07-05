@@ -208,6 +208,10 @@
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\ScoutBall.h" />
+    <ClInclude Include="..\Header\Scout_Att_Range.h" />
+    <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
+    <ClInclude Include="..\Header\Scout_Laser.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
@@ -448,6 +452,10 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\ScoutBall.cpp" />
+    <ClCompile Include="..\Code\Scout_Att_Range.cpp" />
+    <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
+    <ClCompile Include="..\Code\Scout_Laser.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />

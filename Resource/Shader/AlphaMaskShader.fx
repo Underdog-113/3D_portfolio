@@ -9,8 +9,10 @@ float4 gWorldLightPosition;
 
 float  gAlpha;
 float  gSpeed = 1.5;
+float  gTmpAlpha;
 
 bool   gPlayingAnim;
+bool   g_bAlphaCtrl;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -81,13 +83,22 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 {
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
-	albedo.a = gAlpha;
 	float4 alphaVal = tex2D(ServeTex, Input.mUV);
 
-	float4 blendColor = (alphaVal * albedo);
+	if (g_bAlphaCtrl)
+	{
+		if (Input.mUV.x >= gAlpha)
+		{
+			albedo.a = 0;
+		}
+		alphaVal.a = gTmpAlpha;
+	}
+	else
+		albedo.a = gAlpha;
+
+	float4 blendColor = (alphaVal * albedo);	
 
 	blendColor = saturate(blendColor);
-
 
 	return blendColor;
 }
