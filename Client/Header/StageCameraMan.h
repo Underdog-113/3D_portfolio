@@ -32,11 +32,12 @@ public:
 	void AppendTargetCorrecting();
 	void AppendHorizontalCorrecting();
 	
-	void ShakeCamera();
-
 	bool MouseControlMode();
 	void ManualControlMode();
 	void AutoControlMode();
+
+public:
+	void ShakeCamera_Low(_float3 eventPos);
 
 private:
 
@@ -57,7 +58,7 @@ private:
 	GETTOR			(SP(Engine::CObject),	m_spPivot,		nullptr,	Pivot)
 	GETTOR			(_bool,					m_isTargeting,	false,		IsTargeting)		
 	GETTOR			(CCameraShake*,			m_pCameraShake,	nullptr,	CameraShake)	
-
+	GETTOR_SETTOR	(_bool,					m_isSwitching,	false,		IsSwitching)
 	_float3 m_noShakePos = ZERO_VECTOR;
 	_float3 m_noShakeRot = ZERO_VECTOR;
 

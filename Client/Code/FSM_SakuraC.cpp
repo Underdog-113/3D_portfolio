@@ -192,7 +192,7 @@ bool CFSM_SakuraC::CheckAction_Run_End()
 	return false;
 }
 
-bool CFSM_SakuraC::CheckAction_Idle()
+bool CFSM_SakuraC::CheckAction_StandBy()
 {
 	if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
 		!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
@@ -200,6 +200,19 @@ bool CFSM_SakuraC::CheckAction_Idle()
 		!Engine::IMKEY_PRESS(StageKey_Move_Right))
 	{
 		ChangeState(Name_StandBy);
+		return true;
+	}
+
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_Idle()
+{
+	m_idleTimer += GET_DT;
+
+	if (m_idleTimer > 3.f)
+	{
+		ChangeState(Name_Idle);
 		return true;
 	}
 
@@ -276,20 +289,20 @@ void CFSM_SakuraC::StandBy_Init(void)
 void CFSM_SakuraC::StandBy_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_StandBy);
+	m_idleTimer = 0.f;
 }
 
 void CFSM_SakuraC::StandBy_Update(float deltaTime)
 {
 	if (CheckAction_Run())
 		return;
-
 	if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
 		return;
-
 	if (CheckAction_EvadeBackward(0.f))
 		return;
-
 	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_Idle())
 		return;
 }
 
@@ -345,9 +358,6 @@ void CFSM_SakuraC::RunBS_Update(float deltaTime)
 		return;
 
 	if (CheckAction_Run_End())
-		return;
-
-	if (CheckAction_Idle())
 		return;
  	if (CheckAction_Attack(Name_Attack1_Combat, 0.f))
  		return;
@@ -484,6 +494,7 @@ void CFSM_SakuraC::SwitchIn_Update(float deltaTime)
 
 void CFSM_SakuraC::SwitchIn_End(void)
 {
+	CStageControlTower::GetInstance()->EndSwitching();
 }
 
 void CFSM_SakuraC::SwitchOut_Init(void)

@@ -4,9 +4,6 @@
 
 CCameraShake::CCameraShake()
 {
-
-	// blend in이 0이면, wave가 1 상태에서 시작.
-	// 
 }
 
 
@@ -52,6 +49,9 @@ bool CCameraShake::IsShaking()
 
 _float CCameraShake::AdvanceSinWave(Wave wave)
 {
+	if (wave.amplitude == 0.f)
+		return 0.f;
+
 	_float sinFrequency = 2 * PI * wave.frequency;
 	_float curTimeline = sinFrequency * (m_timer + wave.offset);
 	_float curAmplitude = wave.amplitude * m_amplitudeRate;
@@ -70,12 +70,12 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 
 	float randomOffset = 0.f;
 	randomOffset = (rand() % 100) / 100.f;
-	m_pitchWave.amplitude = 0.01f;
+	m_pitchWave.amplitude = D3DXToRadian(0.5f);
 	m_pitchWave.frequency = 10.f;
 	m_pitchWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_yawWave.amplitude = 0.01f;
+	m_yawWave.amplitude = D3DXToRadian(0.5f);
 	m_yawWave.frequency = 10.f;
 	m_yawWave.offset = randomOffset;
 
@@ -117,12 +117,12 @@ void CCameraShake::Preset_Boom(_float3 eventPos)
 
 	float randomOffset = 0.f;
 	randomOffset = (rand() % 100) / 100.f;
-	m_pitchWave.amplitude = 10.f;
+	m_pitchWave.amplitude = D3DXToRadian(10.f);
 	m_pitchWave.frequency = 25.f;
 	m_pitchWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_yawWave.amplitude = 5.f;
+	m_yawWave.amplitude = D3DXToRadian(5.f);
 	m_yawWave.frequency = 25.f;
 	m_yawWave.offset = randomOffset;
 

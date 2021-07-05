@@ -57,6 +57,7 @@ private: /* Normal Actions */
 	bool CheckAction_Run_End();
 	bool CheckAction_StandBy();
 
+	bool CheckAction_Idle();
 	bool CheckAction_Emotion(const std::wstring& switchStateName, float coolTime = Cool_Emotion);
 
 private: /* Special Actions */
@@ -99,6 +100,9 @@ private:
 	_uint m_prevHitSoundIndex = 0;
 
 	_double m_runSoundTimer = 0;
+
+	_uint m_idleMotionIndex = 0;
+	_float m_idleTimer = 0.f;
 public:
 	// StandBy
 	void StandBy_Init(void);

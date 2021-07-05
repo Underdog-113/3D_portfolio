@@ -34,9 +34,10 @@ private: /* Normal Actions */
 	bool CheckAction_Run();
 	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
 	bool CheckAction_Run_End();
-	bool CheckAction_Idle();
+	bool CheckAction_StandBy();
 	bool CheckAction_RunBS_To_Run();
 	bool CheckAction_Ultra();
+	bool CheckAction_Idle();
 
 private: /* Special Actions */
 
@@ -47,7 +48,7 @@ private:
 	CStageControlTower* m_pStageControlTower = nullptr;
 
 	Appear_Option m_appearOption = None;
-
+	_float m_idleTimer = 0.f;
 private:
 	// Appear
 	void Appear_Init(void);

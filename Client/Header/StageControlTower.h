@@ -67,6 +67,7 @@ public:		/* Battle */
 
 
 	void OffCameraTargeting();
+	void EndSwitching();
 
 public:		/* Stage Control Mode */
 
