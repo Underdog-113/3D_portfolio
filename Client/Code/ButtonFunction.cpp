@@ -15,7 +15,7 @@
 #include "ThreeStageScene.h"
 #include "BattleEndScene.h"
 #include "InventoryScene.h"
-
+#include "SupplyScene.h"
 
 #include "BattleRenunciationC.h"
 #include "SoundManager.h"
@@ -133,6 +133,15 @@ void CButtonFunction::BattleEndScene()
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
+}
+
+void CButtonFunction::SupplyScene()
+{
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
+	CButtonManager::GetInstance()->OnDestroy();
+	GET_CUR_CLIENT_SCENE->ChangeScene(CSupplyScene::Create());
 }
 
 void CButtonFunction::BattleRenunciation()

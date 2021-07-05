@@ -343,6 +343,11 @@
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
     <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
     <ClInclude Include="..\Header\SoftEffect.h" />
+    <ClInclude Include="..\Header\StuffItem.h" />
+    <ClInclude Include="..\Header\SupplyItem.h" />
+    <ClInclude Include="..\Header\SupplyManager.h" />
+    <ClInclude Include="..\Header\SupplyScene.h" />
+    <ClInclude Include="..\Header\SupplyWapon.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
@@ -356,7 +361,6 @@
     <ClInclude Include="..\Header\ScoutBornPattern.h" />
     <ClInclude Include="..\Header\ScoutDiePattern.h" />
     <ClInclude Include="..\Header\ScoutHitPattern.h" />
-    <ClInclude Include="..\Header\stuffItem.h" />
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
@@ -404,6 +408,7 @@
     <ClInclude Include="..\Header\ValkyrieSelect.h" />
     <ClInclude Include="..\Header\ValkyrieStatusData.h" />
     <ClInclude Include="..\Header\ValkyrieWeapon.h" />
+    <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h" />
     <ClInclude Include="..\Header\ValkyrieWeaponSwap.h" />
     <ClInclude Include="..\Header\WaponItem.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
@@ -555,6 +560,11 @@
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
     <ClCompile Include="..\Code\SoftEffect.cpp" />
+    <ClCompile Include="..\Code\StuffItem.cpp" />
+    <ClCompile Include="..\Code\SupplyItem.cpp" />
+    <ClCompile Include="..\Code\SupplyManager.cpp" />
+    <ClCompile Include="..\Code\SupplyScene.cpp" />
+    <ClCompile Include="..\Code\SupplyWapon.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
@@ -568,7 +578,6 @@
     <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
     <ClCompile Include="..\Code\ScoutDiePattern.cpp" />
     <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
-    <ClCompile Include="..\Code\stuffItem.cpp" />
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
@@ -616,6 +625,7 @@
     <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
     <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp" />
     <ClCompile Include="..\Code\WaponItem.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />

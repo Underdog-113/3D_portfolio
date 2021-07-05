@@ -3,7 +3,7 @@
 #include "ValkyrieFSM.h"
 
 #include "WaponItem.h"
-#include "stuffItem.h"
+#include "StuffItem.h"
 
 IMPLEMENT_SINGLETON(CInventoryManager)
 void CInventoryManager::Start(Engine::CScene * pScene)

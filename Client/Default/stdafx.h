@@ -50,6 +50,7 @@
 #include "ValkyriegManager.h"
 #include "InventoryManager.h"
 #include "BattleEndManager.h"
+#include "SupplyManager.h"
 
 //Client Data
 #include "ValkyrieStatusData.h"

@@ -67,7 +67,7 @@ void CScrollViewObject::Update(void)
 {
 	__super::Update();
 	ImageObjectSort();
-	Scroll();
+	//Scroll();
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -231,8 +231,8 @@ void CScrollViewObject::ImageObjectSort()
 		buttonObject->GetTransform()->SetPosition(pos);
 
 
-		/*_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
-		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);*/
+		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
+		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);
 
 		for (auto& imageObject : m_vImageObject[count])
 		{
@@ -262,7 +262,7 @@ void CScrollViewObject::Scroll()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(MOUSE_LEFT))
 	{
-	/*	_int count = 0;
+		_int count = 0;
 		for (auto& buttonObject : m_vButtonObject)
 		{
 			count++;
@@ -278,12 +278,11 @@ void CScrollViewObject::Scroll()
 			{
 				imageObject.m_image->GetTransform()->SetPosition(dir * offset);
 			}
-		}*/
+		}
 	}
 	else
 	{
 		offset = 0;
-		
 	}
 
 }
