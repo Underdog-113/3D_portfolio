@@ -280,6 +280,7 @@ void CCamera::UpdateTPS_Custom(void)
 	}
 	//RayCollider 길이 업데이트
 	m_pCamRayCollider->SetLength(m_targetDist);
+
 }
 
 void CCamera::LateUpdateFixed(void)
@@ -366,11 +367,12 @@ void CCamera::LateUpdateTPS_Custom(void)
 
 	m_spTransform->SetPosition(invLook + spTargetTransform->GetPosition() + m_targetOffset);
 	m_spTransform->SetForward(-invLook);
-
+	
 	D3DXMatrixLookAtLH(&m_viewMat,
 		&m_spTransform->GetPosition(),
 		&(m_spTransform->GetPosition() + m_spTransform->GetForward()),
 		&UP_VECTOR);
+
 }
 
 void CCamera::UpdateProjMat(void)

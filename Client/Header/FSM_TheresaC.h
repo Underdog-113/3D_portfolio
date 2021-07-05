@@ -60,6 +60,7 @@ private: /* Normal Actions */
 	bool CheckAction_StandBy();
 	bool CheckAction_RunBS_To_Run();
 	bool CheckAction_Ultra();
+	bool CheckAction_Idle();
 
 private: /* Special Actions */
 	bool CheckAction_ChargeAttack();
@@ -99,6 +100,7 @@ private:
 	bool m_isEvade = false;
 	bool m_isSecondEvade = false;
 
+	_float m_idleTimer = 0.f;
 
 public:
 	//StandBy

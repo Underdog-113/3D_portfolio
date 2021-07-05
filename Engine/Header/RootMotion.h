@@ -26,6 +26,8 @@ public:
 
 	_float3		GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pDM);
 	_float3		GetOwnerSizedPos(CObject * pOwner, _float3 pos);
+
+	void		ResetPrevMoveAmount();
 private:
 	GETTOR			(_bool*,	m_pIsFixRootMotionOffsets,	nullptr,		IsFixRootMotionOffsets)
 	GETTOR_SETTOR	(_bool,		m_isRootMotion,				false,			IsRootMotion)

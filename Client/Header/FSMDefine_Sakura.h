@@ -56,7 +56,7 @@
 #define Name_Failure_Loop			L"Failure_Loop"
 #define Name_Hit_H					L"Hit_H"
 #define Name_Hit_L					L"Hit_L"
-#define Name_Idle1					L"Idle1"
+#define Name_Idle					L"Idle"
 #define Name_Run					L"Run"
 #define Name_RunBS					L"RunBS"
 #define Name_RunStopLeft			L"RunStopLeft"

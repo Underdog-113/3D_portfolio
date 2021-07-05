@@ -109,6 +109,8 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 
 void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamicMeshData * pDM)
 {
+	pOwner->GetTransform()->AddPosition(m_prevMoveAmount);
+
 	// change
 	pAniCtrl->GetFakeAniCtrl()->AdvanceTime(pAniCtrl->GetFakePeriod(), NULL);
 	pAniCtrl->GetFakeAniCtrl()->SetTrackPosition(pAniCtrl->GetFakeTrack(), 0.0);
@@ -180,4 +182,9 @@ _float3 CRootMotion::GetOwnerSizedPos(CObject * pOwner, _float3 pos)
 		pos.x * size.x,
 		pos.y,
 		pos.z * size.z);
+}
+
+void CRootMotion::ResetPrevMoveAmount()
+{
+	m_prevMoveAmount = ZERO_VECTOR;
 }

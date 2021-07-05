@@ -224,6 +224,34 @@ bool CFSM_KianaC::CheckAction_StandBy()
 	return false;
 }
 
+bool CFSM_KianaC::CheckAction_Idle()
+{
+	m_idleTimer += GET_DT;
+	if (m_idleTimer > 3.f)
+	{
+		switch (m_idleMotionIndex)
+		{
+		case 0:
+			ChangeState(Name_Idle_01);
+			break;
+		case 1:
+			ChangeState(Name_Idle_02);
+			break;
+		case 2:
+			ChangeState(Name_Idle_03);
+			break;
+		default:
+			break;
+		}
+		++m_idleMotionIndex;
+		if (m_idleMotionIndex == 3)
+			m_idleMotionIndex = 0;
+		return true;
+	}
+
+	return false;
+}
+
 bool CFSM_KianaC::CheckAction_Emotion(const std::wstring & switchStateName, float coolTime)
 {
 	if (m_pDM->GetAniTimeline() > coolTime)
@@ -420,6 +448,7 @@ void CFSM_KianaC::StandBy_Init(void)
 void CFSM_KianaC::StandBy_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_StandBy);
+	m_idleTimer = 0.f;
 }
 
 void CFSM_KianaC::StandBy_Update(float deltaTime)
@@ -436,12 +465,8 @@ void CFSM_KianaC::StandBy_Update(float deltaTime)
 	if (CheckAction_Ultra())
 		return;
 
-	if (Engine::IMKEY_DOWN(StageKey_QTE))
-	{
-		ChangeState(Name_Appear);
-		m_appearOption = QTE;
+	if (CheckAction_Idle())
 		return;
-	}
 }
 
 void CFSM_KianaC::StandBy_End(void)
@@ -1095,7 +1120,15 @@ void CFSM_KianaC::Idle_01_Enter(void)
 
 void CFSM_KianaC::Idle_01_Update(float deltaTime)
 {
-	if (CheckAction_Emotion(Name_Idle_02))
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+	if (CheckAction_Run())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -1116,7 +1149,15 @@ void CFSM_KianaC::Idle_02_Enter(void)
 
 void CFSM_KianaC::Idle_02_Update(float deltaTime)
 {
-	if (CheckAction_Emotion(Name_Idle_03))
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+	if (CheckAction_Run())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -1137,7 +1178,15 @@ void CFSM_KianaC::Idle_03_Enter(void)
 
 void CFSM_KianaC::Idle_03_Update(float deltaTime)
 {
-	if (CheckAction_Emotion(Name_StandBy))
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+	if (CheckAction_Run())
+		return;
+	if (CheckAction_Attack(Name_Attack_1, 0.f))
+		return;
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -1202,8 +1251,6 @@ void CFSM_KianaC::RunBS_Update(float deltaTime)
 	if (CheckAction_RunBS_To_Run())
 		return;
 	if (CheckAction_Run_End())
-		return;
-	if (CheckAction_StandBy())
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
 		return;
@@ -1320,6 +1367,7 @@ void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 
 void CFSM_KianaC::SwitchIn_End(void)
 {
+	CStageControlTower::GetInstance()->EndSwitching();
 }
 
 void CFSM_KianaC::SwitchOut_Init(void)
@@ -1333,7 +1381,7 @@ void CFSM_KianaC::SwitchOut_Enter(void)
 
 void CFSM_KianaC::SwitchOut_Update(float deltaTime)
 {
-	if (m_pDM->GetAniTimeline() > 0.6)
+	if (m_pDM->GetAniTimeline() > 0.75)
 	{
 		m_pKiana->SetIsEnabled(false);
 		return;

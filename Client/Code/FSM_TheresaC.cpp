@@ -274,6 +274,18 @@ bool CFSM_TheresaC::CheckAction_Ultra()
 	return false;
 }
 
+bool CFSM_TheresaC::CheckAction_Idle()
+{
+	m_idleTimer += GET_DT;
+	if (m_idleTimer > 3.f)
+	{
+		ChangeState(Name_Idle);
+		return true;
+	}
+
+	return false;
+}
+
 bool CFSM_TheresaC::CheckAction_ChargeAttack()
 {
 	if (Engine::IMKEY_DOWN(StageKey_Attack))
@@ -412,6 +424,7 @@ void CFSM_TheresaC::StandBy_Enter(void)
 	m_pTheresa->Off_Axe();
 
 	m_chargeEnterTimer = 0.f;
+	m_idleTimer = 0.f;
 }
 
 void CFSM_TheresaC::StandBy_Update(float deltaTime)
@@ -427,6 +440,9 @@ void CFSM_TheresaC::StandBy_Update(float deltaTime)
 
 	if (CheckAction_Ultra())
 		return;
+
+	if (CheckAction_Idle())
+		return;
 }
 
 void CFSM_TheresaC::StandBy_End(void)
@@ -439,23 +455,19 @@ void CFSM_TheresaC::Idle_Init(void)
 
 void CFSM_TheresaC::Idle_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_StandBy);
+	m_pDM->ChangeAniSet(Index_Idle);
 }
 
 void CFSM_TheresaC::Idle_Update(float deltaTime)
 {
 	if (CheckAction_EvadeBackward(0.f))
 		return;
-
 	if (CheckAction_Run())
 		return;
-
 	if (CheckAction_Attack(Name_Attack1, 0.f))
 		return;
-
 	if (CheckAction_Ultra())
 		return;
-
 	if (CheckAction_StandBy_Timeout())
 		return;
 }
@@ -566,8 +578,6 @@ void CFSM_TheresaC::RunBS_Update(float deltaTime)
 	if (CheckAction_RunBS_To_Run())
 		return;
 	if (CheckAction_Run_End())
-		return;
-	if (CheckAction_StandBy())
 		return;
 	if (CheckAction_Attack(Name_Attack1, 0.f))
 		return;
@@ -1103,6 +1113,7 @@ void CFSM_TheresaC::SwitchIn_Update(float deltaTime)
 
 void CFSM_TheresaC::SwitchIn_End(void)
 {
+	CStageControlTower::GetInstance()->EndSwitching();
 }
 
 void CFSM_TheresaC::SwitchOut_Init(void)
@@ -1116,7 +1127,7 @@ void CFSM_TheresaC::SwitchOut_Enter(void)
 
 void CFSM_TheresaC::SwitchOut_Update(float deltaTime)
 {
-	if (m_pDM->GetAniTimeline() > 0.6)
+	if (m_pDM->GetAniTimeline() > 0.75)
 	{
 		m_pTheresa->SetIsEnabled(false);
 		return;

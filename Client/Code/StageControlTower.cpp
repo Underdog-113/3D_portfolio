@@ -18,7 +18,7 @@
 #include "OneStagePhaseControl.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
-{
+{ 
 }
 
 void CStageControlTower::Start(CreateMode mode)
@@ -265,6 +265,20 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	}
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)pM->GetHitChannelID());
 	Engine::CSoundManager::GetInstance()->StartSound(fileName, (_uint)pM->GetHitChannelID());
+
+	// 9. shake
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Low:
+		m_pCameraMan->ShakeCamera_Low(hitPoint);
+		break;
+	case HitInfo::Str_High:
+		break;
+	case HitInfo::Str_Airborne:
+		break;
+	default:
+		break;
+	}
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
@@ -323,6 +337,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 			m_pCurActor->GetStat()->GetType(),
 			wait1Member->GetStat()->GetType());
 
+
 	}
 		break;
 	case CStageControlTower::Wait_2:
@@ -340,6 +355,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	}
 		break;
 	}
+	m_pCurActor->GetComponent<Engine::CMeshC>()->GetRootMotion()->ResetPrevMoveAmount();
 	                                                        
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
@@ -351,9 +367,15 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+	m_pCameraMan->SetIsSwitching(true);
 }
 
 void CStageControlTower::OffCameraTargeting()
 {
 	m_pCameraMan->SetIsTargeting(false);
+}
+
+void CStageControlTower::EndSwitching()
+{
+	m_pCameraMan->SetIsSwitching(false);
 }
