@@ -320,7 +320,7 @@ void CActorController::RotateCurrentActor()
 			pCurActor->GetTransform()->AddRotationY(cosValue);
 			return;
 		}
-		pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_DT);
+		pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_PLAYER_DT);
 	}
 	else
 	{
@@ -334,7 +334,7 @@ void CActorController::RotateCurrentActor()
 			pCurActor->GetTransform()->AddRotationY(-cosValue);
 			return;
 		}
-		pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_DT);
+		pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_PLAYER_DT);
 	}
 
 

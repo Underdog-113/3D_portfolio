@@ -291,7 +291,7 @@ void CAniCtrl::ChangeFakeAniSet()
 
 void CAniCtrl::Play(void)
 {
-	_float deltaTime = GET_DT;
+	_float deltaTime = m_isAdvanceByPure == true ? GET_PURE_DT : GET_DT;
 	m_timer += deltaTime * m_speed;
 	if (m_replay == false && m_timer > m_period)
 	{
@@ -305,7 +305,7 @@ void CAniCtrl::Play(void)
 
 void CAniCtrl::PlayFake()
 {
-	_float deltaTime = GET_DT;
+	_float deltaTime = m_isAdvanceByPure == true ? GET_PURE_DT : GET_DT;
 	m_fakeTimer += deltaTime * m_speed;
 	if (m_fakeTimer / m_fakePeriod >= 0.99)
 	{

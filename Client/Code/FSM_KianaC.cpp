@@ -140,15 +140,18 @@ bool CFSM_KianaC::CheckAction_StandBy_Timeout(float coolTime)
 	return false;
 }
 
-bool CFSM_KianaC::CheckAction_Run()
+bool CFSM_KianaC::CheckAction_Run(float coolTime)
 {
-	if (Engine::IMKEY_PRESS(StageKey_Move_Forward) ||
-		Engine::IMKEY_PRESS(StageKey_Move_Left) ||
-		Engine::IMKEY_PRESS(StageKey_Move_Back) ||
-		Engine::IMKEY_PRESS(StageKey_Move_Right))
+	if (m_pDM->GetAniTimeline() > coolTime)
 	{
-		ChangeState(Name_RunBS);
-		return true;
+		if (Engine::IMKEY_PRESS(StageKey_Move_Forward) ||
+			Engine::IMKEY_PRESS(StageKey_Move_Left) ||
+			Engine::IMKEY_PRESS(StageKey_Move_Back) ||
+			Engine::IMKEY_PRESS(StageKey_Move_Right))
+		{
+			ChangeState(Name_RunBS);
+			return true;
+		}
 	}
 
 	return false;
@@ -226,7 +229,7 @@ bool CFSM_KianaC::CheckAction_StandBy()
 
 bool CFSM_KianaC::CheckAction_Idle()
 {
-	m_idleTimer += GET_DT;
+	m_idleTimer += GET_PLAYER_DT;
 	if (m_idleTimer > 3.f)
 	{
 		switch (m_idleMotionIndex)
@@ -437,6 +440,10 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkUltraAtk = false;
 	m_checkEffect = false;
 	m_checkEffectSecond = false;
+}
+
+void CFSM_KianaC::ResetCheckMembers_Hit()
+{
 }
 
 
@@ -932,14 +939,16 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 
 	m_isEvade = true;
 	m_pKiana->OffHitbox();
+	m_pKiana->SetIsEvade(true);
 }
 
 void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 {
 	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pKiana->OnHitbox();
 		m_isEvade = false;
+		m_pKiana->OnHitbox();
+		m_pKiana->SetIsEvade(false);
 	}
 
 	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
@@ -952,7 +961,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 		m_isSecondEvade = false;
 		return;
 	}
-	if (CheckAction_Run_OnAction(0.5f))
+	if (CheckAction_Run(0.3f))
 	{
 		m_isSecondEvade = false;
 		return;
@@ -967,6 +976,10 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 void CFSM_KianaC::EvadeBackward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_isEvade = false;
+	m_pKiana->OnHitbox();
+	m_pKiana->SetIsEvade(false);
 }
 
 void CFSM_KianaC::EvadeForward_Init(void)
@@ -981,14 +994,16 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 
 	m_isEvade = true;
 	m_pKiana->OffHitbox();
+	m_pKiana->SetIsEvade(true);
 }
 
 void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 {
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pKiana->OnHitbox();
 		m_isEvade = false;
+		m_pKiana->OnHitbox();
+		m_pKiana->SetIsEvade(false);
 	}
 
 	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
@@ -1001,7 +1016,7 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 		m_isSecondEvade = false;
 		return;
 	}
-	if (CheckAction_Run_OnAction(0.5f))
+	if (CheckAction_Run(0.3f))
 	{
 		m_isSecondEvade = false;
 		return;
@@ -1016,6 +1031,10 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 void CFSM_KianaC::EvadeForward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_isEvade = false;
+	m_pKiana->OnHitbox();
+	m_pKiana->SetIsEvade(false);
 }
 
 void CFSM_KianaC::Failure_Init(void)
@@ -1206,7 +1225,7 @@ void CFSM_KianaC::Run_Enter(void)
 
 void CFSM_KianaC::Run_Update(float deltaTime)
 {
-	m_runSoundTimer += GET_DT;
+	m_runSoundTimer += GET_PLAYER_DT;
 	if (m_runSoundTimer > 0.3f)
 	{
 		m_runSoundTimer = 0.f;
@@ -1239,7 +1258,7 @@ void CFSM_KianaC::RunBS_Enter(void)
 
 void CFSM_KianaC::RunBS_Update(float deltaTime)
 {
-	m_runSoundTimer += GET_DT;
+	m_runSoundTimer += GET_PLAYER_DT;
 	if (m_runSoundTimer > 0.3f)
 	{
 		m_runSoundTimer = 0.f;

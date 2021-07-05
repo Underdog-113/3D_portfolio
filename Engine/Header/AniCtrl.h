@@ -58,6 +58,7 @@ private:
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pAniCtrl,		nullptr,	AniCtrl)
 	GETTOR			(_uint,							m_curTrack,		0,			CurTrack)
+	GETTOR			(_uint,							m_oldTrack,		0,			OldTrack)
 	GETTOR			(_uint,							m_curIndex,		0,			CurIndex)
 	GETTOR			(_float,						m_timer,		0.f,		Timer)
 	GETTOR_SETTOR	(_float,						m_speed,		1.f,		Speed)
@@ -65,8 +66,18 @@ private:
 	GETTOR_SETTOR	(_bool,							m_replay,		true,		Replay)	
 	GETTOR_SETTOR	(_bool,							m_fixTillEnd,	false,		FixTillEnd)
 		
+	GETTOR_SETTOR	(_bool,							m_isAdvanceByPure,	false,	IsAdvanceByPure)
 		
-	GETTOR			(_bool*,				m_pLoopAnims,	nullptr,			LoopAnims)
+	GETTOR			(_bool*,						m_pLoopAnims,	nullptr,	LoopAnims)
+
+
+	_float m_oldWeight = 0.f;
+	_float m_curWeight = 0.f;
+
+	_float m_prevLerpWeight = 0.f;
+	double m_blendTimer = 0;
+	double m_blendDuration = 0;
+	_bool m_isBlending = false;
 
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pFakeAniCtrl,			nullptr,	FakeAniCtrl)

@@ -22,7 +22,7 @@ CRootMotion * CRootMotion::MakeClone(void)
 	CRootMotion* pClone = new CRootMotion;
 
 	pClone->m_pIsFixRootMotionOffsets = m_pIsFixRootMotionOffsets;
-	m_prevMoveAmount = _float3(100.f, 100.f, 100.f);
+	m_prevMoveAmount = ZERO_VECTOR;
 
 	return pClone;
 }

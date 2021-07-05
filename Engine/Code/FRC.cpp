@@ -52,6 +52,7 @@ _bool CFRC::FrameLock(void)
 		m_spfLimit = 0.f;
 		QueryPerformanceFrequency(&m_cpuTick);
 
+		PlayPerfectEvade();
 		return true;
 	}
 	return false;
@@ -80,4 +81,14 @@ _float CFRC::GetElapsedTime(void)
 _float CFRC::GetDeltaTime(void)
 {
 	return m_deltaTime * m_dtCoef;
+}
+
+_float CFRC::GetPureDeltaTime(void)
+{
+	return m_deltaTime;
+}
+
+
+void CFRC::PlayPerfectEvade(void)
+{
 }
