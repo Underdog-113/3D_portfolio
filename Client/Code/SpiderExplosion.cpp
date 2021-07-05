@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\MonsterHitEffect.h"
+#include "..\Header\SpiderExplosion.h"
 
-_uint CMonsterHitEffect::m_s_uniqueID = 0;
+_uint CSpiderExplosion::m_s_uniqueID = 0;
 
-CMonsterHitEffect::CMonsterHitEffect()
+CSpiderExplosion::CSpiderExplosion()
 {
 }
 
 
-CMonsterHitEffect::~CMonsterHitEffect()
+CSpiderExplosion::~CSpiderExplosion()
 {
 }
 
-SP(CMonsterHitEffect) CMonsterHitEffect::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CSpiderExplosion) CSpiderExplosion::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CMonsterHitEffect) spInstance(new CMonsterHitEffect, Engine::SmartDeleter<CMonsterHitEffect>);
+	SP(CSpiderExplosion) spInstance(new CSpiderExplosion, Engine::SmartDeleter<CSpiderExplosion>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +22,9 @@ SP(CMonsterHitEffect) CMonsterHitEffect::Create(_bool isStatic, Engine::CScene *
 	return spInstance;
 }
 
-SP(Engine::CObject) CMonsterHitEffect::MakeClone(void)
+SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
 {
-	SP(CMonsterHitEffect) spClone(new CMonsterHitEffect, Engine::SmartDeleter<CMonsterHitEffect>);
+	SP(CSpiderExplosion) spClone(new CSpiderExplosion, Engine::SmartDeleter<CSpiderExplosion>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -35,45 +35,45 @@ SP(Engine::CObject) CMonsterHitEffect::MakeClone(void)
 	return spClone;
 }
 
-void CMonsterHitEffect::Awake(void)
+void CSpiderExplosion::Awake(void)
 {
-	__super::Awake();	
+	__super::Awake();
+
 }
 
-void CMonsterHitEffect::Start(void)
+void CSpiderExplosion::Start(void)
 {
 	__super::Start();
 
-	m_fAlphaWidth = 4.f;
-	m_fAlphaHeight = 4.f;
+	m_fAlphaWidth = 29.f;
+	m_fAlphaHeight = 1.f;
 	m_TilingX = 0;
 	m_TilingY = 0;
 
-	m_maxXIndex = 4;
-	m_maxYIndex = 3;
+	m_maxXIndex = 29;
+	m_maxYIndex = 0;
 	m_fTIme = 0.f;
 }
 
-void CMonsterHitEffect::FixedUpdate(void)
+void CSpiderExplosion::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-
 }
 
-void CMonsterHitEffect::Update(void)
+void CSpiderExplosion::Update(void)
 {
 	__super::Update();
 
 	UpdateFrame(0.05f);
 }
 
-void CMonsterHitEffect::LateUpdate(void)
+void CSpiderExplosion::LateUpdate(void)
 {
 	__super::LateUpdate();
 
 }
 
-void CMonsterHitEffect::PreRender(LPD3DXEFFECT pEffect)
+void CSpiderExplosion::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
 	pEffect->SetInt("TilingX", m_TilingX);
@@ -82,42 +82,43 @@ void CMonsterHitEffect::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
 }
 
-void CMonsterHitEffect::Render(LPD3DXEFFECT pEffect)
+void CSpiderExplosion::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
 
 }
 
-void CMonsterHitEffect::PostRender(LPD3DXEFFECT pEffect)
+void CSpiderExplosion::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PostRender(m_spGraphics, pEffect);
 
 }
 
-void CMonsterHitEffect::OnDestroy(void)
+void CSpiderExplosion::OnDestroy(void)
 {
 	__super::OnDestroy();
 
 }
 
-void CMonsterHitEffect::OnEnable(void)
+void CSpiderExplosion::OnEnable(void)
 {
 	__super::OnEnable();
 
 }
 
-void CMonsterHitEffect::OnDisable(void)
+void CSpiderExplosion::OnDisable(void)
 {
 	__super::OnDisable();
 
 }
 
-void CMonsterHitEffect::SetBasicName(void)
+void CSpiderExplosion::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+
 }
 
-void CMonsterHitEffect::UpdateFrame(_float _frmSpeed)
+void CSpiderExplosion::UpdateFrame(_float _frmSpeed)
 {
 	m_fTIme += GET_DT;
 

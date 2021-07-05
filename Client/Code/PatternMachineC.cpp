@@ -45,8 +45,8 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (m_curCost > m_maxCost)
 		m_curCost = m_maxCost;
 
-	std::cout << "cost : " << m_curCost << std::endl;
-	std::cout << "================================= " << std::endl;
+	//std::cout << "cost : " << m_curCost << std::endl;
+	//std::cout << "================================= " << std::endl;
 
 	if (false == m_previewMode &&
 		Pattern_Type::TypeEnd != m_vPatterns.size() &&
@@ -63,6 +63,11 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		m_previewMode = (false == m_previewMode) ? m_previewMode = true : m_previewMode = false;
 		m_vIndices.clear();
 	}
+
+
+	std::cout << "curHP: " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
+	std::cout << "=================================" << std::endl;
+
 
 	//if (Engine::IMKEY_DOWN(KEY_Q))
 	//{

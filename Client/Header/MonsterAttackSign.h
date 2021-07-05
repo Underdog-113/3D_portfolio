@@ -1,16 +1,16 @@
 #pragma once
 #include "SoftEffect.h"
 
-class CMonsterHitEffect  : public CSoftEffect
+class CMonsterAttackSign : public CSoftEffect
 {
 	SMART_DELETER_REGISTER
 
 private:
-	CMonsterHitEffect();
-	~CMonsterHitEffect();
+	CMonsterAttackSign();
+	~CMonsterAttackSign();
 
 public:
-	static	SP(CMonsterHitEffect) Create(_bool isStatic, Engine::CScene* pScene);
+	static	SP(CMonsterAttackSign) Create(_bool isStatic, Engine::CScene* pScene);
 	SP(Engine::CObject) MakeClone(void) override;
 	void Awake(void) override;
 	void Start(void) override;

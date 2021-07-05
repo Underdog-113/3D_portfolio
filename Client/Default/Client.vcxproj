@@ -193,6 +193,7 @@
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
@@ -206,6 +207,9 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\Sickle_Trail.h" />
+    <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
@@ -429,6 +433,7 @@
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
@@ -442,6 +447,9 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\Sickle_Trail.cpp" />
+    <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />

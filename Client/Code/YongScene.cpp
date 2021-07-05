@@ -115,29 +115,15 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		//SP(Engine::CObject) spMeshEffect
-		//	= m_pObjectFactory->AddClone(L"Theresa_Ult_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		//spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Trail_1");
-		//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Tornado_3");
-		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"ATK_Distortion_3");
-		//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
-
-		/*SP(Engine::CObject) spMeshEffect
-			= m_pObjectFactory->AddClone(L"Theresa_Ult_Boom", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Boom");
+		SP(Engine::CObject) spMeshEffect
+			= m_pObjectFactory->AddClone(L"Sickle_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sickle_Attack");
 		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Boom_2");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);*/
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BloomMask");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 
-		/*SP(Engine::CObject) spMeshEffect
-			= m_pObjectFactory->AddClone(L"TheresaCharge_Att", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Charge_Att");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Charge_Att_Fire");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);*/
 
 		/*SP(Engine::CObject) spMeshEffect
 			= m_pObjectFactory->AddClone(L"Sakura_Charge_Att", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
@@ -148,14 +134,14 @@ void CYongScene::Update(void)
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
 		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);*/
 
-		//SP(Engine::CObject) spSoftEffect
-		//	= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
-		//spSoftEffect->GetComponent<Engine::CGraphicsC>();
-		//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-		//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-		//spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	/*	SP(Engine::CObject) spSoftEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
+		spSoftEffect->GetComponent<Engine::CGraphicsC>();
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
+		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);*/
 
-		SP(CMonsterSpawnBeam) spMeshEffect =
+	/*	SP(CMonsterSpawnBeam) spMeshEffect =
 			std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
 
 		spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
@@ -178,7 +164,7 @@ void CYongScene::Update(void)
 			spCube->AddComponent<Engine::CShaderC>();
 			spCube->GetTransform()->SetSize(10, 1, 10);
 			spCube->GetTransform()->SetPosition(0, -1.f, 0);
-		}
+		}*/
 	}
 }
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\MonsterSpawnBeam.h"
 #include "Monster.h"
+#include "SoundManager.h"
 
 CMonsterSpawnBeam::CMonsterSpawnBeam()
 {
@@ -49,6 +50,9 @@ void CMonsterSpawnBeam::Start()
 	__super::Start();
 
 	AddComponent<Engine::CDebugC>();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::MONSTER_SPAWN);
+	Engine::CSoundManager::GetInstance()->StartSound(L"Spawn.wav",(_uint)EChannelID::MONSTER_SPAWN);
+	Engine::CSoundManager::GetInstance()->SetVolume((_uint)EChannelID::MONSTER_SPAWN, 0.5f);
 	m_bSpawn = false;
 	m_fAlpha = 1.f;
 }
