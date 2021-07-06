@@ -11,6 +11,7 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
+#include "StageControlTower.h"
 
 CBronyaEscapePattern::CBronyaEscapePattern()
 {
@@ -29,10 +30,10 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
-
-	// 이스케이프할 위치
-	_float3 ePos = { 0.f, 0.f, 0.f };
+	if (Name_Escape_Out != fsm->GetCurStateString())
+	{
+		static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
+	}
 
 	// 이스케이프 외 애니메이션이 종료되었다면
 	if (Name_Escape_In != fsm->GetCurStateString() &&
@@ -40,26 +41,61 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->IsAnimationEnd())
 	{
 		// escape in 실행
-		fsm->ChangeState(Name_Escape_In);
+		fsm->ChangeState(Name_Escape_Out);
 	}
-	// escape in 상태 중 적정한 위치에 도달하면
-	else if (Name_Escape_In == fsm->GetCurStateString() &&
-		0.38f <= fsm->GetDM()->GetAniTimeline())
+	// escape in 상태 중 적절한 위치로 올라왔다면
+	else if (Name_Escape_Out == fsm->GetCurStateString() &&
+		0.76f <= fsm->GetDM()->GetAniTimeline() &&
+		0.f >= m_lerpCurTimer &&
+		false == m_onEscape)
 	{
 		// 애니메이션 정지
-		fsm->GetDM()->GetAniCtrl()->SetSpeed(0.f);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(0.05f);
 		m_onEscape = true;
+
+		// 목표 위치 잡기
+		_float x = (_float)GetRandRange(-15, 15);
+		_float z = (_float)GetRandRange(-15, 15);
+
+		// 이스케이프 위치로 이동
+		m_lerpStartPos = mPos;
+		m_lerpEndPos = _float3(x, mPos.y, z);
+		m_lerpCurTimer = 0.f;
 	}
-	// escape in 상태 중이면서 이동해야 한다면
-	else if (Name_Escape_In == fsm->GetCurStateString() &&
+	// escape in 상태 중 목표 위치로 이동 중이라면
+	else if (Name_Escape_Out == fsm->GetCurStateString() &&
+		0.05f >= fsm->GetDM()->GetAniCtrl()->GetSpeed() &&
+		m_lerpCurTimer < m_lerpMaxTimer)
+	{
+		m_lerpCurTimer += GET_DT;
+
+		if (m_lerpCurTimer >= m_lerpMaxTimer)
+		{
+			m_lerpCurTimer = m_lerpMaxTimer;
+		}
+
+		_float3 currentPos = GetLerpPosition(m_lerpStartPos, m_lerpEndPos, m_lerpCurTimer, 0.3f);
+		pOwner->GetTransform()->SetPosition(currentPos);
+	}
+	// escape in 상태 중이면서 이동이 끝났다면
+	else if (Name_Escape_Out == fsm->GetCurStateString() &&
+		m_lerpCurTimer <= m_lerpMaxTimer &&
 		true == m_onEscape)
 	{
-		pOwner->GetTransform()->SetSlerpOn(true);
-		pOwner->GetTransform()->SetGoalPosition(ePos);
+		// 애니메이션 재생
+		fsm->ChangeState(Name_Escape_In);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		m_onEscape = false;
 	}
-
-
-
+	// escape in 상태가 끝났다면
+	else if (Name_Escape_In == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		// 대기 상태로 변경
+		fsm->ChangeState(Name_IDLE);
+		m_lerpCurTimer = 0.f;
+		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+	}
 }
 
 SP(CBronyaEscapePattern) CBronyaEscapePattern::Create()

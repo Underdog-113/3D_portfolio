@@ -33,5 +33,8 @@ public:
 
 private:
 	static _uint m_s_uniqueID;
+
+private:
+	void UpdateFrame(_float _frmSpeed);
 };
 

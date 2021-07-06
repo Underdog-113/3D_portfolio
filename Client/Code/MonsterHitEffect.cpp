@@ -64,28 +64,7 @@ void CMonsterHitEffect::Update(void)
 {
 	__super::Update();
 
-	m_fTIme += GET_DT;
-
-	if (m_fTIme >= 0.05f)
-	{
-		m_TilingX++;
-
-		if (m_TilingX >= m_maxXIndex)
-		{
-			m_TilingX = 0;
-
-			if (m_TilingY >= m_maxYIndex)
-			{
-				m_TilingY = 0;
-				SetDeleteThis(true);
-			}
-			else
-			{
-				m_TilingY++;
-			}
-		}
-		m_fTIme = 0;
-	}
+	UpdateFrame(0.05f);
 }
 
 void CMonsterHitEffect::LateUpdate(void)
@@ -136,4 +115,30 @@ void CMonsterHitEffect::OnDisable(void)
 void CMonsterHitEffect::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+}
+
+void CMonsterHitEffect::UpdateFrame(_float _frmSpeed)
+{
+	m_fTIme += GET_DT;
+
+	if (m_fTIme >= _frmSpeed)
+	{
+		m_TilingX++;
+
+		if (m_TilingX >= m_maxXIndex)
+		{
+			m_TilingX = 0;
+
+			if (m_TilingY >= m_maxYIndex)
+			{
+				m_TilingY = 0;
+				SetDeleteThis(true);
+			}
+			else
+			{
+				m_TilingY++;
+			}
+		}
+		m_fTIme = 0;
+	}
 }

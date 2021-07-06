@@ -29,7 +29,8 @@ void CSickleHitPattern::Pattern(Engine::CObject* pOwner)
 	{
 		fsm->ChangeState(Name_Sickle_Hit_L);
 	}
-	else if (Name_Sickle_Hit_L == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	else if (Name_Sickle_Hit_L == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Sickle_StandBy);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);

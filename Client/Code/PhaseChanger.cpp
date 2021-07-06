@@ -85,13 +85,16 @@ void CPhaseChanger::Update(void)
 			{
 				//빔 생성 or Enabled를 켜서 활성화를 시키든 하면서
 				//빔의 몬스터 포인터를 줘요.
-				SP(CMonsterSpawnBeam) spMonsterSpawnBeam =
-					std::dynamic_pointer_cast<CMonsterSpawnBeam>(monster->GetScene()->GetObjectFactory()->AddClone(L"MonsterSpawnBeam", true));
-				spMonsterSpawnBeam->SetMonster(monster);
-				spMonsterSpawnBeam->GetTransform()->SetPosition(monster->GetTransform()->GetPosition());
-				spMonsterSpawnBeam->GetTransform()->AddPositionY(10);
-				monster->SetSpawnTimer(FLT_MAX);
-				//monster->SetIsEnabled(true);
+
+				if (false == monster->GetIsBoss())
+				{
+					SP(CMonsterSpawnBeam) spMonsterSpawnBeam =
+						std::dynamic_pointer_cast<CMonsterSpawnBeam>(monster->GetScene()->GetObjectFactory()->AddClone(L"MonsterSpawnBeam", true));
+					spMonsterSpawnBeam->SetMonster(monster);
+					spMonsterSpawnBeam->GetTransform()->SetPosition(monster->GetTransform()->GetPosition());
+					spMonsterSpawnBeam->GetTransform()->AddPositionY(10);
+					monster->SetSpawnTimer(FLT_MAX);
+				}
 			}
 		}
 

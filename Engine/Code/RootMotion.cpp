@@ -33,25 +33,6 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 
 	if (pAniCtrl->GetIsFakeAniEnd())
 	{
-		// 99% ?
-		{
-//			pDM->UpdateFrame();
-
-// 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
-//
-// 			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
-// 			moveAmount.y = 0.f;
-// 			_float3 moveForward = pOwner->GetTransform()->GetForward();
-// 			moveForward.y = 0.f;
-// 			D3DXVec3Normalize(&moveForward, &moveForward);
-//
-// 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-// 			pOwner->GetTransform()->AddPosition(forwardMove);
-//
-// 			if(m_isVerticalAnim)
-// 				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
-
-		}
 		// change end -> start
 		pAniCtrl->ChangeFakeAnimState_EndToStart();
 		pDM->UpdateFrame();
@@ -59,31 +40,6 @@ void CRootMotion::RootMotionMove(CObject * pOwner, CAniCtrl * pAniCtrl, CDynamic
 		//m_prevRootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
 		m_prevRootMotionPos = m_animStartOffset;
 		m_prevMoveAmount = ZERO_VECTOR;
-		// 1% ?
-		{
-			//pDM->UpdateFrame();
-
-// 			_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
-//
-// 			float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
-// 			_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
-// 			moveAmount.y = 0.f;
-// 			_float3 moveForward = pOwner->GetTransform()->GetForward();
-// 			moveForward.y = 0.f;
-// 			D3DXVec3Normalize(&moveForward, &moveForward);
-//
-// 			_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-// 			forwardMove *= moveDir;
-// 			pOwner->GetTransform()->AddPosition(forwardMove);
-//
-// 			if (m_isVerticalAnim)
-// 				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
-//
-// 			if (m_isVerticalAnim)
-// 				pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
-//
-// 			m_prevRootMotionPos = rootMotionPos;
-		}
 
 	}
 	else
@@ -168,28 +124,6 @@ void CRootMotion::RootMotionMove_WhileChange(CObject * pOwner, CAniCtrl * pAniCt
 	}
 
 	m_prevRootMotionPos = rootMotionPos;
-
-	// update frame
-
-	//pAniCtrl->PlayFake();
-	//pDM->UpdateFrame();
-	//_float3 rootMotionPos = GetRootMotionLocalPos(pOwner, pDM);
-	//float moveDir = (rootMotionPos.z - m_prevRootMotionPos.z) > 0.f ? 1.f : -1.f;
-	//_float3 moveAmount = rootMotionPos - m_prevRootMotionPos;
-	//moveAmount.y = 0.f;
-	//_float3 moveForward = pOwner->GetTransform()->GetForward();
-	//moveForward.y = 0.f;
-	//D3DXVec3Normalize(&moveForward, &moveForward);
-	//
-	//_float3 forwardMove = moveForward * D3DXVec3Length(&moveAmount);
-	//forwardMove *= moveDir;
-	//pOwner->GetTransform()->AddPosition(forwardMove);
-	//
-	//if (m_isVerticalAnim)
-	//	pOwner->GetTransform()->SetPositionY(rootMotionPos.y * pOwner->GetTransform()->GetSize().y);
-	//
-	//m_prevRootMotionPos = rootMotionPos;
-
 
 	pAniCtrl->SetIsFakeAniChange(false);
 }

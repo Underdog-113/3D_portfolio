@@ -4,6 +4,7 @@
 
 #include "SupplyWapon.h"
 #include "SupplyItem.h"
+#include "SupplyOut.h"
 
 IMPLEMENT_SINGLETON(CSupplyManager)
 void CSupplyManager::Start(Engine::CScene * pScene)
@@ -41,6 +42,11 @@ void CSupplyManager::ItemFSM()
 	ChangeFSM(STATE::Item);
 }
 
+void CSupplyManager::OutFSM()
+{
+	ChangeFSM(STATE::Out);
+}
+
 void CSupplyManager::ChangeFSM(STATE state)
 {
 	m_supplyFSM[m_supplyState]->End();
@@ -53,5 +59,6 @@ void CSupplyManager::FSMCreate()
 {
 	m_supplyFSM[STATE::Weapon] = new CSupplyWapon;
 	m_supplyFSM[STATE::Item] = new CSupplyItem;
+	m_supplyFSM[STATE::Out] = new CSupplyOut;
 	m_supplyFSM[STATE::Weapon]->Start();
 }

@@ -60,17 +60,18 @@ void CRectTexC::LateUpdate(SP(CComponent) spThis)
 
 void CRectTexC::PreRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-	__super::PreRender();
+	__super::PreRender(spGC, pEffect);
+
 }
 
 void CRectTexC::Render(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-	__super::Render();
+	__super::Render(spGC, pEffect);
 }
 
 void CRectTexC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
-	__super::PostRender();
+	__super::PostRender(spGC, pEffect);
 }
 
 void CRectTexC::OnDestroy(void)

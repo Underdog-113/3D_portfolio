@@ -53,9 +53,9 @@ void CScrollViewObject::Awake(void)
 void CScrollViewObject::Start(void)
 {
 	__super::Start();
-	offset = 0;
-
-	dir = _float3(0, 1, 0);
+	m_oldMousePos = _float3(0, 0, 0);
+	m_dir = _float3(0, 0.1f, 0);
+	ImageObjectSort();
 }
 
 void CScrollViewObject::FixedUpdate(void)
@@ -66,8 +66,8 @@ void CScrollViewObject::FixedUpdate(void)
 void CScrollViewObject::Update(void)
 {
 	__super::Update();
-	ImageObjectSort();
-	//Scroll();
+	
+	Scroll();
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -79,17 +79,35 @@ void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	if(m_spTexture != nullptr)
 		m_spRectTex->PreRender(m_spGraphics, pEffect);
+
 }
 
 void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
 {
+	// t스탠실 등록
 	if (m_spTexture != nullptr)
 		m_spRectTex->Render(m_spGraphics, pEffect);
 
-	for (auto& obj : m_vButtonObject)
+	// 스탠실메스크 변경
+
+	/*for (auto& obj : m_vButtonObject)
 	{
+		obj->PreRender(pEffect);
 		obj->Render(pEffect);
+		obj->PostRender(pEffect);
 	}
+
+	size_t size = m_vImageObject.size();
+	for (int i = 0; i < size; i++)
+	{
+		for (auto& obj : m_vImageObject[i])
+		{
+			obj.m_image->Render(pEffect);
+		}
+	}*/
+
+
+	// 스탠실 종료
 }
 
 void CScrollViewObject::PostRender(LPD3DXEFFECT pEffect)
@@ -226,10 +244,7 @@ void CScrollViewObject::ImageObjectSort()
 	pos.z += 0.01f;
 	for (auto& buttonObject : m_vButtonObject)
 	{
-
-
 		buttonObject->GetTransform()->SetPosition(pos);
-
 
 		_float3 T = _float3(m_vTextObject[count].m_offset.x, m_vTextObject[count].m_offset.y, 0.09f);
 		m_vTextObject[count].m_text->GetTransform()->SetPosition(pos + T);
@@ -253,37 +268,105 @@ void CScrollViewObject::ImageObjectSort()
 
 void CScrollViewObject::Scroll()
 {
+	if (Engine::CInputManager::GetInstance()->KeyDown(MOUSE_LEFT))
+	{	
+		m_oldMousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	}
 
-	// 마우스가 스크롤뷰 안을 클릭하면 현재 위치를 저장
-	// 마우스가 이동하는면 이동 대신 빠르게이동하면 빠르게 이동되고
-	// 빠르게 이동하다가 마우스를 놔버리면 해당 속도로 느리게 이동된다
-
-	// 그려야할 모든 오브젝트의 위치값을 알고있다 해당 위치값을 더해주고 빼서 이동시킬수있다.
+	if (Engine::CInputManager::GetInstance()->KeyUp(MOUSE_LEFT))
+	{
+		m_oldMousePos = _float3(0,0,0);
+	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(MOUSE_LEFT))
 	{
+		_float3 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+		_float dir;
 		_int count = 0;
+
+		Directionadjustment(m_oldMousePos, mousePos, dir);
+
+		/*SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0, 0 });
+		std::cout << "m_oldMousePos : " << m_oldMousePos.y << std::endl;
+		std::cout << "mousePos : " << mousePos.y << std::endl;
+		std::cout << "dir : " << dir << std::endl;*/
+
+		if (ScrollChack(dir))
+			return;
+
 		for (auto& buttonObject : m_vButtonObject)
 		{
 			count++;
 
-			buttonObject->GetTransform()->SetPosition(dir * offset);
+			buttonObject->GetTransform()->AddPosition(m_dir * dir);
 
 			for (auto& textObject : m_vTextObject)
 			{
-				textObject.m_text->GetTransform()->SetPosition(dir * offset);
+				textObject.m_text->GetTransform()->AddPosition(m_dir * dir);
 			}
 
 			for (auto& imageObject : m_vImageObject[count - 1])
 			{
-				imageObject.m_image->GetTransform()->SetPosition(dir * offset);
+				imageObject.m_image->GetTransform()->AddPosition(m_dir * dir);
 			}
 		}
-	}
-	else
-	{
-		offset = 0;
-	}
 
+		m_oldMousePos = Engine::CInputManager::GetInstance()->GetMousePos();
+	}
 }
 
+bool CScrollViewObject::ScrollChack(_float dir)
+{
+	switch (m_dirType)
+	{
+	case EDir_Type::UpandDown:
+	{
+		_float s = m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir);
+		std::cout << "dir : " << s << std::endl;
+
+		if (m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir) > m_offSet.y)
+		{
+			return true;
+		}
+		break;
+	}
+	case EDir_Type::RightandLeft:
+		if (m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().x + (m_dir.x * dir) > m_offSet.x)
+		{
+			return true;
+		}
+		break;
+	}
+
+	return false;
+}
+
+void CScrollViewObject::Directionadjustment(_float3 pos1, _float3 pos2, _float & dir)
+{
+	switch (m_dirType)
+	{
+	case EDir_Type::UpandDown:
+		pos1.x = 0; pos1.z = 0;
+		pos2.x = 0; pos2.z = 0;
+		dir = Engine::Direction(pos1, pos2);
+		if (pos1.y > pos2.y)
+		{
+			dir *= -1;
+		}
+		break;
+	case EDir_Type::RightandLeft:
+		pos1.y = 0; pos1.z = 0;
+		pos2.y = 0; pos2.z = 0;
+		if (pos1.x > pos2.x)
+		{
+			dir *= -1;
+		}
+		break;
+	}
+}
+
+/*
+1. 맨위에 이미지가 offset보다 이하로 내려갈수없다.
+2. 맨 아래 이미지가 offset보다 위로 올라갈수없다.
+
+*/

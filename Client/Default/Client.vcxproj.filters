@@ -745,6 +745,27 @@
     <Filter Include="12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp">
       <UniqueIdentifier>{7daa3b6d-c7f8-4026-a628-4cc2c0b35488}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra">
+      <UniqueIdentifier>{c0a18fcb-7e43-4693-b653-656616947a09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
+      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign">
+      <UniqueIdentifier>{93c456d7-b285-4600-8fc2-065a4c0ad8e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail">
+      <UniqueIdentifier>{c46648ae-b379-4ec1-b8d3-bfc450a2ace8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal">
+      <UniqueIdentifier>{1870b79e-3fbb-43b1-ae2e-ffffd934c13f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
+      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
+      <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1462,6 +1483,27 @@
     <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h">
       <Filter>12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SpiderExplosion.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sickle_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterAttackSign.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SpiderExplosion.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SupplyOut.h">
+      <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2107,6 +2149,27 @@
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp">
       <Filter>12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpiderExplosion.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sickle_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterAttackSign.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpiderExplosion.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SupplyOut.cpp">
+      <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

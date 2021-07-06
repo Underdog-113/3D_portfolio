@@ -15,6 +15,8 @@ public:
 	virtual _uint LateUpdate() override;
 	virtual void OnDestroy(void) override;
 
+	//확인버튼
+
 private:
 	_bool m_init;
 };

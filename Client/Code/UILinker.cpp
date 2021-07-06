@@ -255,6 +255,7 @@ void CUILinker::Ultra()
 
 void CUILinker::Evade()
 {
+	m_pCT->OffCameraTargeting();
 }
 
 void CUILinker::Attack()
@@ -301,8 +302,9 @@ void CUILinker::MonsterInfoSet()
 	_float hp = pStat->GetCurHp();
 	_float maxHp = pStat->GetMaxHp();
 	std::wstring monsterProperty = L"UP";
+	_int hpMagnification = pStat->GetHPMagnification();
 
-	m_pUIManager->MonsterState(name, maxHp, hp, 4, monsterProperty);
+	m_pUIManager->MonsterState(name, maxHp, hp, hpMagnification, monsterProperty);
 }
 
 void CUILinker::MonsterHpSet()

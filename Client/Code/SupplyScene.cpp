@@ -67,8 +67,6 @@ void CSupplyScene::Start(void)
 void CSupplyScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-
-
 }
 
 void CSupplyScene::Update(void)

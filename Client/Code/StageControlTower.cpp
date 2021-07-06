@@ -134,7 +134,7 @@ void CStageControlTower::FindTarget()
 		return;
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
-	SP(Engine::CObject) spTarget = m_spCurTarget;
+	SP(Engine::CObject) spTarget = nullptr;
 	_float minDistance = 5.f;
 
 	_float3 valkyrieForward = m_pCurActor->GetTransform()->GetForward();
@@ -173,6 +173,7 @@ void CStageControlTower::FindTarget()
 	if (m_spCurTarget)
 	{
 		m_pActorController->TargetingOn();
+		m_pCameraMan->SetIsTargeting(true);
 
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
@@ -191,6 +192,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
 	CMonster* pM = static_cast<CMonster*>(pMonster);
+
+	// 타격하는 발키리의 타입 설정
+	
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
@@ -244,7 +248,23 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	spSoftEffect->GetTransform()->SetSize(randSize, randSize, randSize);
 
 	// 8. 사운드
+	V_Stat::Valkyrie_Type valkyrieType = pV->GetStat()->GetType();
+	_TCHAR* fileName = L"";
 
+	switch (valkyrieType)
+	{
+	case V_Stat::Valkyrie_Type::KIANA:
+		fileName = L"KianaAttackHit.wav";
+		break;
+	case V_Stat::Valkyrie_Type::THERESA:
+		fileName = L"TeressaAttackHit.wav";
+		break;
+	case V_Stat::Valkyrie_Type::SAKURA:
+		fileName = L"SakuraAttackHit.wav";
+		break;
+	}
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)pM->GetHitChannelID());
+	Engine::CSoundManager::GetInstance()->StartSound(fileName, (_uint)pM->GetHitChannelID());
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
@@ -275,6 +295,7 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	// 4. 히트 이펙트
 
 	// 5. 사운드
+
 }
 
 void CStageControlTower::SwitchValkyrie(Squad_Role role)
@@ -322,9 +343,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	                                                        
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
-
-	Engine::GET_MAIN_CAM->SetTarget(m_vSquad[Actor]);
-
+	
 	// 1. 대기 슬롯 이미지 바꿔주고
 	// 3. 스킬 ui도
 	// 4. 카메라 타겟팅 바꿔주기
@@ -334,17 +353,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 }
 
-_float3 CStageControlTower::GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime, _float lerpDuration)
+void CStageControlTower::OffCameraTargeting()
 {
-	if (curTime == lerpDuration)
-		return endPos;	
-
-	_float3 dir = endPos - startPos;
-	_float length = D3DXVec3Length(&dir);
-	_float timeline = curTime / lerpDuration;
-
-	_float moveAmount = length * timeline;
-
-	D3DXVec3Normalize(&dir, &dir);
-	return startPos + dir * moveAmount;
+	m_pCameraMan->SetIsTargeting(false);
 }

@@ -287,9 +287,7 @@ void CJongScene::FloorTest()
 		spCube->AddComponent<Engine::CShaderC>();
 		spCube->GetTransform()->SetSize(20, 1, 20);
 		spCube->GetTransform()->SetPosition(0, -1.f, 0);
-
 	}
-
 }
 
 

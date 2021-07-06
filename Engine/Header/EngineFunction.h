@@ -122,6 +122,13 @@ namespace Engine
 		return StrToWStr(str.substr(str.find_last_of('\\') + 1));
 	}
 
+	inline float Direction(_float3 pointOne, _float3 pointTwo)
+	{
+		_float x = pointOne.x - pointTwo.x;
+		_float y = pointOne.y - pointTwo.y;
+		return sqrt((x * x) + (y * y));
+	}
+
 	inline std::wstringstream& operator >> (std::wstringstream& in, _float4 & float4)
 	{
 		std::wstring vecStr;
