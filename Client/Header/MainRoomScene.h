@@ -28,6 +28,14 @@ public:
 
 private:
 					void				InitPrototypes		(void) override;
+
+					_float3				m_pos;
+					_float3				m_upMax;
+					_float3				m_downMax;
+					_bool				m_moveUp = false;
+					_bool				m_moveDown = false;
+
+					std::vector<SP(Engine::CObject)> m_vControlDesk;
 };
 
 #endif

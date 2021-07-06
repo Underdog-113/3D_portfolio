@@ -80,36 +80,6 @@ void CTwoStageScene::Update(void)
 
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
-
-
-	//if (true == m_bossSpawn)
-	//{
-	//	/* Ganesha */
-	//	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-	//	std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
-	//	spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
-	//	spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-	//	m_spGanesha = spGaneshaClone;
-
-	//	m_bossSpawn = false;
-	//}
-	if (Engine::IMKEY_DOWN(KEY_UP))
-	{
-		//m_spValkyrie->GetTransform()->SetPosition(-46, 15, 0);
-		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
-	}
-	//else if (Engine::IMKEY_DOWN(KEY_E))
-	//{
-	//	m_bossSpawn = true;
-	//	m_onBoss = true;
-	//}
-
-	std::cout << "kiana x : " <<
-		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
-		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
-		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
-
-	//ForUITest();
 }
 
 void CTwoStageScene::LateUpdate(void)
@@ -140,9 +110,7 @@ void CTwoStageScene::OnEnable(void)
 void CTwoStageScene::OnDisable(void)
 {
 	__super::OnDisable();
-
 }
-
 
 void CTwoStageScene::SetupFromLoader(void)
 {
@@ -155,7 +123,7 @@ void CTwoStageScene::SetupFromLoader(void)
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
 	Load->MapLoad(this);
-	Load->PhaseChangerLoad(this);
+	//Load->PhaseChangerLoad(this);
 	Load->PortalLoad(this);
 	delete(Load);
 }
@@ -168,7 +136,7 @@ void CTwoStageScene::SetupMembers(void)
 	// Cam Target Set
 	Create_SceneCamera();
 
-	Create_Dummy(_float3(43.3345f, -1.f, -0.075913f));
+	//Create_Dummy(_float3(43.3345f, -1.f, -0.075913f));
 }
 
 void CTwoStageScene::Create_ActorValkyrie(void)
@@ -176,7 +144,7 @@ void CTwoStageScene::Create_ActorValkyrie(void)
 	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
 	m_spValkyrie = spKianaClone;
-	m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
+	m_spValkyrie->GetTransform()->SetPosition(70.4f, -5.29f, -7.73f);
 	m_pControlTower->AddSquadMember(m_spValkyrie);
 	m_pControlTower->Start(CStageControlTower::ALL);
 

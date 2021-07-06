@@ -73,6 +73,7 @@ private:
 
 
 	// test
+	_bool m_sickle = false;
 	_bool m_scout = false;
 	_bool m_bronya = false;
 };
