@@ -45,8 +45,6 @@ public:
 					void		ChangeFakeAnimState_EndToStart(void);
 					_bool		IsItEnd				(void);
 					
-					double		GetTimeline_Blend	(void);
-					double		GetTimeline			(void);
 					void		ResetTimers			(void);
 					void		ResetAnimation		(void);
 
@@ -63,6 +61,7 @@ private:
 	GETTOR			(_float,						m_timer,		0.f,		Timer)
 	GETTOR_SETTOR	(_float,						m_speed,		1.f,		Speed)
 	GETTOR			(_float,						m_period,		0,			Period)
+	GETTOR			(double,						m_timeline,		0,			AniTimeline)
 	GETTOR_SETTOR	(_bool,							m_replay,		true,		Replay)	
 	GETTOR_SETTOR	(_bool,							m_fixTillEnd,	false,		FixTillEnd)
 		
@@ -85,6 +84,7 @@ private:
 	GETTOR			(_uint,							m_fakeIndex,			0,			FakeIndex)
 	GETTOR			(double,						m_fakeTimer,			0.f,		FakeTimer)
 	GETTOR			(_double,						m_fakePeriod,			0,			FakePeriod)
+	GETTOR			(double,						m_fakeTimeline,			0,			Timeline)
 	GETTOR			(double,						m_savedFakeAniTime,		0.f,		SavedDeltaTime)
 	GETTOR_SETTOR	(_bool,							m_isFakeAniEnd,			false,		IsFakeAniEnd)
 	GETTOR_SETTOR	(_bool,							m_isFakeAniChange,		false,		IsFakeAniChange)

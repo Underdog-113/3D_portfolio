@@ -167,7 +167,7 @@ double CDynamicMeshData::GetAniTimeline()
 {
 	if (m_rootMotionOff)
 	{
-		return	m_pAniCtrl->GetTimeline_Blend();
+		return	m_pAniCtrl->GetAniTimeline();
 	}
 
 	return m_pAniCtrl->GetTimeline();

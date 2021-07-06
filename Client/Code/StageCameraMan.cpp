@@ -124,6 +124,8 @@ void CStageCameraMan::SetNearTake()
 	m_dstMaxDist = NearTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 0.5f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = NearAngle;
 }
 
 void CStageCameraMan::SetMidTake()
@@ -133,6 +135,8 @@ void CStageCameraMan::SetMidTake()
 	m_dstMaxDist = MidTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 2.f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = NormalAngle;
 }
 
 void CStageCameraMan::SetFarTake()
@@ -143,6 +147,7 @@ void CStageCameraMan::SetFarTake()
 	m_dstMaxDist = FarTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 3.f;
+	m_rotateXDst = NormalAngle;
 }
 
 void CStageCameraMan::ChangeTake()
@@ -181,6 +186,9 @@ void CStageCameraMan::ChangeTake()
 			m_dstMaxDist = MidTake;
 			m_changeTakeTimer = 0.f;
 			m_changeTakeSpeed = 2.f;
+
+			m_rotateXStart = m_spCamera->GetLookAngleRight();
+			m_rotateXDst = NormalAngle;
 		}
 
 		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
@@ -199,6 +207,9 @@ void CStageCameraMan::ChangeTake()
 		_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, sLerpTimer);
 		m_spCamera->SetTargetDist(lerpPoint);
 		m_spCamera->SetMaxDistTPS(lerpPoint);
+
+		lerpPoint = FloatLerp(m_rotateXStart, m_rotateXDst, sLerpTimer);
+		m_spCamera->SetLookAngleRight(lerpPoint);
 		break;
 	}
 }

@@ -293,6 +293,8 @@ void CAniCtrl::Play(void)
 {
 	_float deltaTime = m_isAdvanceByPure == true ? GET_PURE_DT : GET_DT;
 	m_timer += deltaTime * m_speed;
+	m_timeline = (double)m_timer / m_period;
+
 	if (m_replay == false && m_timer > m_period)
 	{
 		m_timer = (_float)m_period;
@@ -307,6 +309,8 @@ void CAniCtrl::PlayFake()
 {
 	_float deltaTime = m_isAdvanceByPure == true ? GET_PURE_DT : GET_DT;
 	m_fakeTimer += deltaTime * m_speed;
+
+	m_fakeTimeline = (double)m_fakeTimer / m_fakePeriod;
 	if (m_fakeTimer / m_fakePeriod >= 0.99)
 	{
 		m_isFakeAniEnd = true;
@@ -341,16 +345,6 @@ _bool CAniCtrl::IsItEnd(void)
 
 
 	return false;
-}
-
-double CAniCtrl::GetTimeline_Blend(void)
-{
-	return (double)m_timer / m_period;
-}
-
-double CAniCtrl::GetTimeline(void)
-{
-	return (double)m_fakeTimer / m_fakePeriod;
 }
 
 void CAniCtrl::ResetTimers(void)

@@ -4,6 +4,10 @@
 #define MidTake 3.f
 #define FarTake 4.5f
 
+#define NearAngle 0.f
+#define NormalAngle D3DXToRadian(10.f)
+
+
 #define MaxChaseDistance 0.5f
 
 class CCameraShake;
@@ -83,6 +87,8 @@ private:
 	_float m_changeTakeSpeed = 2.f;
 
 private:
+	_float m_rotateXStart = 0.f;
+	_float m_rotateXDst = 0.f;
 	_float m_rotateYDst = 0.f;
 	_float m_rotateSpeed = D3DXToRadian(3.f);
 	_float m_rotateLerpTimer = 0.f;
