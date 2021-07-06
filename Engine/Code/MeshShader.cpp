@@ -39,6 +39,5 @@ void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 		m_addColor = _float4(0.5f, 0.f, 0.f, 0.f);
 	}
 
-	m_pEffect->SetTexture("g_LutTexture", GET_CUR_SCENE->GetTextureStore()->GetTextureData(L"Lut3D_00")->pTexture);
 	m_pEffect->SetVector("g_addColor", &m_addColor);
 }

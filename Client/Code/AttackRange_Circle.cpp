@@ -30,7 +30,10 @@ SP(Engine::CObject) CAttackRange_Circle::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetRotation(_float3(0.f, 0.f, 0.f));
+	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
+	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
+	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
 	return spClone;
 }
@@ -53,10 +56,9 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.f, 0.f, 0.f));
-	m_pAttackRange_Circle_Diffuse->SetParent(this);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.1f, this->GetTransform()->GetPosition().z));
 	
-	m_pAttackRange_Circle_Alpha	= 
+	/*m_pAttackRange_Circle_Alpha	= 
 		std::dynamic_pointer_cast<CDecoObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_int)Engine::ELayerID::Effect, L"AttackRange"));
 
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
@@ -67,7 +69,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_pAttackRange_Circle_Alpha->SetParent(this);
 	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.1f, this->GetTransform()->GetPosition().z));
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));
+	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
 
 
 }
@@ -83,9 +85,9 @@ void CAttackRange_Circle::Update()
 
 
 	if (m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->GetSize().x >=
-		m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->GetSize().x)
+		this->GetComponent<Engine::CTransformC>()->GetSize().x)
 	{
-		m_pAttackRange_Circle_Alpha->SetDeleteThis(true);
+		//m_pAttackRange_Circle_Alpha->SetDeleteThis(true);
 		m_pAttackRange_Circle_Diffuse->SetDeleteThis(true);
 		SetDeleteThis(true);
 	}
@@ -102,17 +104,20 @@ void CAttackRange_Circle::LateUpdate()
 }
 void CAttackRange_Circle::PreRender(LPD3DXEFFECT pEffect)
 {
-	return;
+	m_spMesh->PreRender(m_spGraphics, pEffect);
+
 }
 
 void CAttackRange_Circle::Render(LPD3DXEFFECT pEffect)
 {
-	return;
+	m_spMesh->Render(m_spGraphics, pEffect);
+
 }
 
 void CAttackRange_Circle::PostRender(LPD3DXEFFECT pEffect)
 {
-	return;
+	m_spMesh->PostRender(m_spGraphics, pEffect);
+
 }
 
 void CAttackRange_Circle::OnDestroy()

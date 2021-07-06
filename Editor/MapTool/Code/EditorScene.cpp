@@ -63,9 +63,11 @@ void CEditorScene::Awake(_int numOfLayers)
 	m_pDataStore->AddDataSection(L"Player", (_uint)EDataID::Player);
 	m_pDataStore->AddDataSection(L"Scene", (_uint)EDataID::Scene);
 	m_pDataStore->AddDataSection(L"Enemy", (_uint)EDataID::Enemy);
+	m_pDataStore->AddDataSection(L"Effect", (_uint)EDataID::Effect);
 	m_pDataStore->AddDataSection(L"UI", (_uint)EDataID::UI);
 	m_pDataStore->AddDataSection(L"Stat", (_uint)EDataID::Stat);
 	m_pDataStore->AddDataSection(L"Monster", (_uint)EDataID::Monster);
+	m_pDataStore->AddDataSection(L"ClientObject", (_uint)EDataID::ClientObject);
 
 	m_pDataStore->InitDataForScene(L"StaticScene", true);
 	m_pMeshStore->InitMeshForScene(L"StaticScene", true);
@@ -525,15 +527,15 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 	{
 		SP(CMapObject) spMapObject =
 			std::dynamic_pointer_cast<CMapObject>(pObjectFactory->AddClone(L"MapObject", isStatic));
-		m_pMenuView->m_objList.AddString(spMapObject->GetName().c_str());
+		//m_pMenuView->m_objList.AddString(spMapObject->GetName().c_str());
 
 		switch (m_pMenuView->m_renderAlpha.GetCheck())
 		{
 		case 0:
-			spMapObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			spMapObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			break;
 		case 1:
-			spMapObject->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			spMapObject->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
 			break;
 		}
 
@@ -558,7 +560,7 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 	{
 		SP(CDecoObject) spDecoObject =
 			std::dynamic_pointer_cast<CDecoObject>(pObjectFactory->AddClone(L"DecoObject", isStatic));
-		m_pMenuView->m_objList.AddString(spDecoObject->GetName().c_str());
+		//m_pMenuView->m_objList.AddString(spDecoObject->GetName().c_str());
 
 		switch (m_pMenuView->m_renderAlpha.GetCheck())
 		{
@@ -581,6 +583,7 @@ void CEditorScene::CreateObject(_bool isStatic, _int layerID, std::wstring objNa
 			m_pCurSelectedObject->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
 
 		m_pCurSelectedObject = spDecoObject.get();
+		m_pCurSelectedObject->SetLayerID((_int)layerID);
 		m_pMenuView->m_curObjName.SetWindowTextW(m_pCurSelectedObject->GetName().c_str());
 	}
 	else if (ELayerID::Player == (ELayerID)layerID)
