@@ -17,6 +17,7 @@
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
+#include "TwoStagePhaseControl.h"
 #include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
@@ -66,9 +67,6 @@ void CStageControlTower::Update(void)
 		SwitchValkyrie(Wait_1);
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
 		SwitchValkyrie(Wait_2);
-
-	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
-		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
 	if (GetIsPerfectEvadeMode())
 	{
@@ -128,6 +126,11 @@ void CStageControlTower::IncreasePhase()
 }
 
 void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
+{
+	m_pPhaseControl->ChangePhase((_int)phaseType);
+}
+
+void CStageControlTower::ChangePhase(ETwoStagePhase phaseType)
 {
 	m_pPhaseControl->ChangePhase((_int)phaseType);
 }

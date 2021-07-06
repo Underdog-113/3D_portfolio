@@ -763,6 +763,9 @@
     <Filter Include="04.Shader\12.OutlineShader">
       <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
+      <UniqueIdentifier>{bafd16d1-7ce7-4c77-80bd-e2a0a7e20931}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1468,9 +1471,9 @@
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClInclude>
-<ClInclude Include="..\Header\CameraShake.h">
-  <Filter>10.ControlTower\CameraMan</Filter>
-</ClInclude>
+    <ClInclude Include="..\Header\CameraShake.h">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SpiderExplosion.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClInclude>
@@ -1485,7 +1488,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\TimeSeeker.h">
       <Filter>10.ControlTower\TimeTraveler</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\SpiderExplosion.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClInclude>
@@ -1511,6 +1514,9 @@
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\OutlineShader.h">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2146,9 +2152,9 @@
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClCompile>
-<ClCompile Include="..\Code\CameraShake.cpp">
-  <Filter>10.ControlTower\CameraMan</Filter>
-</ClCompile>
+    <ClCompile Include="..\Code\CameraShake.cpp">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\SpiderExplosion.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
@@ -2157,9 +2163,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MonsterAttackSign.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
-</ClCompile>
-<ClCompile Include="..\Code\SpiderExplosion.cpp">
-  <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpiderExplosion.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
@@ -2180,6 +2186,9 @@
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

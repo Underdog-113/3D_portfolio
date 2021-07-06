@@ -371,6 +371,7 @@
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
     <ClInclude Include="..\Header\TimeSeeker.h" />
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -595,6 +596,7 @@
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
     <ClCompile Include="..\Code\TimeSeeker.cpp" />
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />

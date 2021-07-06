@@ -58,9 +58,6 @@ private:
 	
 	SP(Engine::CObject) m_spGanesha;
 
-	//_bool m_bossSpawn = false; // 보스 소환 스위치
-	//_bool m_onBoss = false; // true : 보스 소환함 false : 보스 소환 안함
-
 	std::vector<SP(Engine::CObject)> m_vDummy;
 };
 
