@@ -147,7 +147,7 @@ void CYongScene::Update(void)
 		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
 		//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 
-		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutMeteor", true);
+		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutCircleRange", true);
 	
 		/*	SP(CMonsterSpawnBeam) spMeshEffect =
 				std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));

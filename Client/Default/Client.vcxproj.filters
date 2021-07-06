@@ -763,6 +763,9 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor">
       <UniqueIdentifier>{c351ef75-90cc-4cf9-9b3b-f27b1de2b26e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range">
+      <UniqueIdentifier>{ebed8560-5517-420c-a919-68a3f3c4ae7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1513,6 +1516,7 @@
     <ClInclude Include="..\Header\SparkEffect.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ScoutCircleRange.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2183,6 +2187,7 @@
     <ClCompile Include="..\Code\SparkEffect.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

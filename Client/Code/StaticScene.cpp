@@ -50,6 +50,7 @@
 #include "Scout_Laser.h"
 #include "ScoutBall.h"
 #include "ScoutMeteor.h"
+#include "ScoutCircleRange.h"
 
 #include "SoftEffect.h"
 #include "MonsterHitEffect.h"
@@ -425,5 +426,14 @@ void CStaticScene::InitEffectPrototypes(void)
 	spSparkEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spark_v2");
 	spSparkEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);	
 	GetObjectFactory()->AddPrototype(spSparkEffect);
+
+	SP(CMeshEffect_Client) spScoutCircleRange(CScoutCircleRange::Create(true, this));
+	spScoutCircleRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
+	spScoutCircleRange->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spScoutCircleRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"BonusShield_3");
+	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spScoutCircleRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spScoutCircleRange);
 
 }
