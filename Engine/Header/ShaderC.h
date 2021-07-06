@@ -31,6 +31,7 @@ public:
 protected:
 	typedef std::vector<CShader*> _SHADERS;
 	GETTOR			(_SHADERS,			m_vShaders,			{},		Shaders)
+	GETTOR			(_bool,				m_shaderPerSubset,	false,	ShaderPerSubset)
 };
 END
 

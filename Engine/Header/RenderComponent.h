@@ -34,6 +34,8 @@ public:
 	virtual		void			PostRender				(SP(CGraphicsC) spGC) {}
 	virtual		void			PostRender				(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) {}
 
+	virtual		void			RenderPerShader			(SP(CGraphicsC) spGC) {}
+
 	virtual		void			OnDestroy				(void) PURE;
 															   
 	virtual		void			OnEnable				(void);

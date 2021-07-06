@@ -36,6 +36,8 @@ public:
 					void					Render				(LPD3DXEFFECT pEffect) override;
 					void					PostRender			(LPD3DXEFFECT pEffect) override;
 		
+					void					RenderPerShader		(SP(Engine::CShaderC) spShader) override;
+
 					void					OnDestroy			(void) override;
 		
 					void					OnEnable			(void) override;

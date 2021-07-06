@@ -165,6 +165,10 @@ void CKiana::PostRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
+void CKiana::RenderPerShader(SP(Engine::CShaderC) spShader)
+{
+}
+
 void CKiana::OnDestroy(void)
 {
 	delete m_pStat;

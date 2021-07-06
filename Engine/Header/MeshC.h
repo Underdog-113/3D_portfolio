@@ -29,6 +29,8 @@ public:
 			void						Render						(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
 			void						PostRender					(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect) override;
 
+			void						RenderPerShader				(SP(CGraphicsC) spGC) override;
+
 			void						OnDestroy					(void) override;
 
 			void						OnEnable					(void) override;
@@ -47,7 +49,9 @@ public:
 
 private:
 			void						RenderStatic				(SP(CGraphicsC) spGC, CMeshData* pMeshData, LPD3DXEFFECT pEffect);
+			void						RenderStaticPerShader		(SP(CGraphicsC) spGC);
 			void						RenderDynamic				(SP(CGraphicsC) spGC, CMeshData* pMeshData, LPD3DXEFFECT pEffect);
+			void						RenderDynamicPerShader		(SP(CGraphicsC) spGC);
 
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Mesh;
