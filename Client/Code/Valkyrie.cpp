@@ -37,6 +37,27 @@ void CValkyrie::Start(void)
 	m_pCT = CStageControlTower::GetInstance();
 }
 
+void CValkyrie::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
+{
+	for (auto pCollider : pCollisionC->GetColliders())
+	{
+		if (pCollider->GetCollisionID() == (_uint)ECollisionID::EnemyAttack)
+		{
+			if (m_isEvade)
+				CStageControlTower::GetInstance()->OnPerfectEvadeMode();
+			break;
+		}
+	}
+}
+
+void CValkyrie::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
+{
+}
+
+void CValkyrie::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
+{
+}
+
 void CValkyrie::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	if (m_pCT->GetActorController()->m_rotateByTarget &&

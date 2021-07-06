@@ -214,6 +214,7 @@
     <ClInclude Include="..\Header\Scout_Laser.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
+    <ClInclude Include="..\Header\OutlineShader.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
@@ -369,6 +370,7 @@
     <ClInclude Include="..\Header\stuffItem.h" />
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
+    <ClInclude Include="..\Header\TimeSeeker.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -458,6 +460,7 @@
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
@@ -591,6 +594,7 @@
     <ClCompile Include="..\Code\stuffItem.cpp" />
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
+    <ClCompile Include="..\Code\TimeSeeker.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -709,6 +713,12 @@
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>

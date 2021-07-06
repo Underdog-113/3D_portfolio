@@ -13,7 +13,7 @@ CCameraShake::~CCameraShake()
 
 void CCameraShake::PlayShake()
 {
-	m_timer += GET_DT;
+	m_timer += GET_PLAYER_DT;
 
 	if (m_timer < m_blendInTime)
 	{
@@ -21,7 +21,10 @@ void CCameraShake::PlayShake()
 	}
 	else if(m_timer >  m_duration - m_blendOutTime)
 	{
-		m_amplitudeRate = (m_duration - m_timer) / m_blendOutTime;
+		if (m_blendOutTime == 0.f)
+			m_amplitudeRate = 0.f;
+		else
+			m_amplitudeRate = (m_duration - m_timer) / m_blendOutTime;
 	}
 	else
 	{
@@ -71,12 +74,12 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	float randomOffset = 0.f;
 	randomOffset = (rand() % 100) / 100.f;
 	m_pitchWave.amplitude = D3DXToRadian(0.5f);
-	m_pitchWave.frequency = 10.f;
+	m_pitchWave.frequency = 20.f;
 	m_pitchWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
 	m_yawWave.amplitude = D3DXToRadian(0.5f);
-	m_yawWave.frequency = 10.f;
+	m_yawWave.frequency = 20.f;
 	m_yawWave.offset = randomOffset;
 
 	randomOffset = 0.f;
@@ -84,20 +87,20 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	m_rollWave.frequency = 0.f;
 	m_rollWave.offset = 0.f;
 
-	randomOffset = 0.f;
-	m_xWave.amplitude = 0.f;
-	m_xWave.frequency = 0.f;
-	m_xWave.offset = 0.f;
+	randomOffset = (rand() % 100) / 100.f;
+	m_xWave.amplitude = 5.f;
+	m_xWave.frequency = 20.f;
+	m_xWave.offset = randomOffset;
 
 	randomOffset = 0.f;
 	m_yWave.amplitude = 0.f;
 	m_yWave.frequency = 0.f;
-	m_yWave.offset = 0.f;
+	m_yWave.offset = 0.f; 
 
-	randomOffset = 0.f;
-	m_zWave.amplitude = 0.f;
-	m_zWave.frequency = 0.f;
-	m_zWave.offset = 0.f;
+	randomOffset = (rand() % 100) / 100.f;
+	m_zWave.amplitude = 5.f;
+	m_zWave.frequency = 20.f;
+	m_zWave.offset = randomOffset;
 }
 
 void CCameraShake::Preset_High(_float3 eventPos)
@@ -163,7 +166,7 @@ void CCameraShake::SetDistanceRate(_float3 eventPos)
 	if (len > m_outerRadius)
 		m_distanceRate = 0.f;
 	else if (len > m_innerRadius)
-		m_distanceRate = (len - m_innerRadius) / (m_outerRadius - m_innerRadius);
+		m_distanceRate = 1.f - (len - m_innerRadius) / (m_outerRadius - m_innerRadius);
 	else
 		m_distanceRate = 1.f;
 }

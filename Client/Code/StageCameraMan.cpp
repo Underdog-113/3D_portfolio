@@ -92,7 +92,7 @@ void CStageCameraMan::PivotChasing()
 {
 	if (m_speedIncreaseTimer < 1.f)
 	{
-		m_chaseSpeedIncreaseTimer += GET_DT;
+		m_chaseSpeedIncreaseTimer += GET_PLAYER_DT;
 	}
 
 	CStageControlTower* pCT = CStageControlTower::GetInstance();
@@ -100,7 +100,7 @@ void CStageCameraMan::PivotChasing()
 	AppendTargetCorrecting();
 
 	_float3 lerpPosition = GetLerpPosition(
-		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_DT * m_chaseSpeed);
+		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_PLAYER_DT * m_chaseSpeed);
 
 
 	if (D3DXVec3Length(&(m_dstPivotPos - lerpPosition)) < 0.01f)
@@ -124,6 +124,8 @@ void CStageCameraMan::SetNearTake()
 	m_dstMaxDist = NearTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 0.5f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = NearAngle;
 }
 
 void CStageCameraMan::SetMidTake()
@@ -133,6 +135,8 @@ void CStageCameraMan::SetMidTake()
 	m_dstMaxDist = MidTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 2.f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = NormalAngle;
 }
 
 void CStageCameraMan::SetFarTake()
@@ -143,6 +147,7 @@ void CStageCameraMan::SetFarTake()
 	m_dstMaxDist = FarTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 3.f;
+	m_rotateXDst = NormalAngle;
 }
 
 void CStageCameraMan::ChangeTake()
@@ -159,7 +164,7 @@ void CStageCameraMan::ChangeTake()
 	case CStageCameraMan::Mid:
 		if (CheckNoAction())
 		{
-			m_gotoNearTakeTimer += GET_DT;
+			m_gotoNearTakeTimer += GET_PLAYER_DT;
 			if (m_gotoNearTakeTimer > 3.f)
 			{
 				m_gotoNearTakeTimer = 0.f;
@@ -181,9 +186,12 @@ void CStageCameraMan::ChangeTake()
 			m_dstMaxDist = MidTake;
 			m_changeTakeTimer = 0.f;
 			m_changeTakeSpeed = 2.f;
+
+			m_rotateXStart = m_spCamera->GetLookAngleRight();
+			m_rotateXDst = NormalAngle;
 		}
 
-		m_changeTakeTimer += GET_DT * m_changeTakeSpeed;
+		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
 		if (m_changeTakeTimer > 1.f)
 		{
 			m_curMaxDist = m_dstMaxDist;
@@ -199,6 +207,9 @@ void CStageCameraMan::ChangeTake()
 		_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, sLerpTimer);
 		m_spCamera->SetTargetDist(lerpPoint);
 		m_spCamera->SetMaxDistTPS(lerpPoint);
+
+		lerpPoint = FloatLerp(m_rotateXStart, m_rotateXDst, sLerpTimer);
+		m_spCamera->SetLookAngleRight(lerpPoint);
 		break;
 	}
 }
@@ -225,7 +236,7 @@ void CStageCameraMan::AppendTargetCorrecting()
 		return;
 	}
 
-	m_targetingTimer += GET_DT;
+	m_targetingTimer += GET_PLAYER_DT;
 
 	if (m_targetingTimer > 2.f || !pCT->GetCurrentTarget())
 	{
@@ -251,22 +262,22 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 
 	if (Engine::IMKEY_PRESS(StageKey_Move_Left))
 	{
-		m_rotateYDst -= (PI / 3) * GET_DT;
+		m_rotateYDst -= (PI / 4) * GET_PLAYER_DT;
 		isCorrecting = true;
 	}
 
 	if (Engine::IMKEY_PRESS(StageKey_Move_Right))
 	{
-		m_rotateYDst += (PI / 3) * GET_DT;
+		m_rotateYDst += (PI / 4) * GET_PLAYER_DT;
 		isCorrecting = true;
 	}
 
 	if (isCorrecting &&  m_speedIncreaseTimer < 1.f)
 	{
-		m_speedIncreaseTimer += GET_DT;
+		m_speedIncreaseTimer += GET_PLAYER_DT;
 	}
 
-	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_DT * m_horzCorrectingSpeed * m_speedIncreaseTimer);
+	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT * m_horzCorrectingSpeed * m_speedIncreaseTimer);
 	m_spCamera->SetLookAngleUp(lerpPoint);
 	m_rotateLerpStart = lerpPoint;
 
@@ -327,7 +338,7 @@ void CStageCameraMan::ManualControlMode()
 		m_isTargeting = false;
 	}
 
-	m_rotateLerpTimer += GET_DT;
+	m_rotateLerpTimer += GET_PLAYER_DT;
 	if (m_rotateLerpTimer > 1.f)
 	{
 		m_spCamera->SetLookAngleUp(m_rotateYDst);
@@ -347,7 +358,7 @@ void CStageCameraMan::AutoControlMode()
 
 	if (m_enterAutoTimer < 1.f)
 	{
-		m_enterAutoTimer += GET_DT;
+		m_enterAutoTimer += GET_PLAYER_DT;
 		m_speedIncreaseTimer = 0.f;
 		return;
 	}
@@ -398,7 +409,7 @@ void CStageCameraMan::ShowMouseCursor()
 
 void CStageCameraMan::HideMouseCursor()
 {
-	m_hideCursorTimer += GET_DT;
+	m_hideCursorTimer += GET_PLAYER_DT;
 
 	if (m_cursorOn && m_hideCursorTimer > 3.f)
 	{

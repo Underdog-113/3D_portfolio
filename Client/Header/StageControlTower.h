@@ -30,6 +30,7 @@ class CActorController;
 class CUILinker;
 class CStatusDealer;
 class CStageCameraMan;
+class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
 enum class EOneStagePhase;
@@ -69,6 +70,10 @@ public:		/* Battle */
 	void OffCameraTargeting();
 	void EndSwitching();
 
+	void OnPerfectEvadeMode();
+	_bool GetIsPerfectEvadeMode();
+
+	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 
 private:
@@ -80,6 +85,7 @@ private:
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
 	GETTOR			(CStageCameraMan*,		m_pCameraMan,		nullptr,		CameraMan)
+	GETTOR			(CTimeSeeker*,			m_pTimeSeeker,		nullptr,		TimeSeeker)
 
 	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)
 

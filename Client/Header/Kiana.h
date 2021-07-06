@@ -82,6 +82,10 @@ private:
 
 private:
 	
+	GETTOR			(_mat*,					m_pLeftToe_World,			nullptr, LeftToeWorldMatrix)
+	_mat*						m_pLeftToe_BoneOffset = nullptr;
+	Engine::D3DXFRAME_DERIVED*	m_pLeftToe_Frame = nullptr;
+
 	GETTOR			(_mat*,					m_pRightToe_World,			nullptr, RightToeWorldMatrix)
 	_mat*						m_pRightToe_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pRightToe_Frame = nullptr;

@@ -7,6 +7,7 @@
 #define Name_Attack2				L"Attack2"
 #define Name_Attack3				L"Attack3"
 #define Name_Attack4				L"Attack4"
+#define Name_Attack_QTE				L"Attack_QTE"
 #define Name_Charge0				L"Charge0"
 #define Name_Charge1				L"Charge1"
 #define Name_Charge2				L"Charge2"

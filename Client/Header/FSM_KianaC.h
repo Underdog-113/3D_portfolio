@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachineC.h"
-#define Cool_Attack				0.2f
-#define Cool_BranchAttack		0.5f
+#define Cool_Attack				0.15f
+#define Cool_BranchAttack		0.4f
 #define Cool_BranchAttack3to4	0.3f
 #define Cool_Evade				0.15f
 #define Cool_End				0.75f
@@ -19,6 +19,13 @@
 
 #define Delay_CreateCatPaw_Branch_Atk03 0.05f
 #define Delay_CreateCatPaw_Branch_Atk04 0.15f
+
+
+#define Delay_Effect_Atk01 0.25f
+#define Delay_Effect_Atk02 0.05f
+#define Delay_Effect_Atk03 0.10f
+#define Delay_Effect_Atk04 0.0f
+#define Delay_Effect_Atk05 0.05f
 
 class CKiana;
 class CStageControlTower;
@@ -52,7 +59,7 @@ private: /* Normal Actions */
 	bool CheckAction_EvadeForward(float coolTime = Cool_Evade);
 	bool CheckAction_EvadeBackward(float coolTime = Cool_Evade);
 	bool CheckAction_StandBy_Timeout(float coolTime = Cool_End);
-	bool CheckAction_Run();
+	bool CheckAction_Run(float coolTime = 0.f);
 	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
 	bool CheckAction_Run_End();
 	bool CheckAction_StandBy();
@@ -78,11 +85,13 @@ private: /* sound */
 
 private:
 	void ResetCheckMembers();
+	void ResetCheckMembers_Hit();
 
 	bool m_checkUltraRing = false;
 	bool m_checkUltraAtk = false;
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
+	bool m_checkAttack = false;
 
 private:
 	CKiana* m_pKiana = nullptr;

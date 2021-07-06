@@ -421,9 +421,6 @@
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\ValkyrieController">
-      <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
       <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
     </Filter>
@@ -745,6 +742,12 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
       <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\TimeTraveler">
+      <UniqueIdentifier>{c16141b8-a600-4736-be66-22b76077d3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\ActorController">
+      <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect">
       <UniqueIdentifier>{c5167018-275d-4076-84c4-1aae6c23d23c}</UniqueIdentifier>
     </Filter>
@@ -756,6 +759,9 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball">
       <UniqueIdentifier>{b8c0882e-f095-4a65-8ffd-956901dc2cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\12.OutlineShader">
+      <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1207,7 +1213,7 @@
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ActorController.h">
-      <Filter>10.ControlTower\ValkyrieController</Filter>
+      <Filter>10.ControlTower\ActorController</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AlphaLifeTimeC.h">
       <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
@@ -1477,18 +1483,21 @@
     <ClInclude Include="..\Header\BronyaArsenalPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\TimeSeeker.h">
+      <Filter>10.ControlTower\TimeTraveler</Filter>
+      </ClInclude>
     <ClInclude Include="..\Header\SpiderExplosion.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClInclude>
-<ClInclude Include="..\Header\Sickle_Trail.h">
-  <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
-</ClInclude>
-<ClInclude Include="..\Header\MonsterAttackSign.h">
-  <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
-</ClInclude>
-<ClInclude Include="..\Header\BronyaArsenalPattern.h">
-  <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
-</ClInclude>
+    <ClInclude Include="..\Header\Sickle_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterAttackSign.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Scout_Att_Range.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClInclude>
@@ -1498,6 +1507,10 @@
     <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\OutlineShader.h">
+      <Filter>04.Shader\12.OutlineShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1896,7 +1909,7 @@
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ActorController.cpp">
-      <Filter>10.ControlTower\ValkyrieController</Filter>
+      <Filter>10.ControlTower\ActorController</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AlphaLifeTimeC.cpp">
       <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
@@ -2143,13 +2156,16 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MonsterAttackSign.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>  
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
 </ClCompile>
 <ClCompile Include="..\Code\SpiderExplosion.cpp">
   <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TimeSeeker.cpp">
+      <Filter>10.ControlTower\TimeTraveler</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scout_Att_Range.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
@@ -2160,6 +2176,10 @@
     <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp">
+      <Filter>04.Shader\12.OutlineShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2219,6 +2239,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <Filter>04.Shader\11.LaserTrail</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
+      <Filter>04.Shader\12.OutlineShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

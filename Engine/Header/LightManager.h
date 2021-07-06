@@ -25,6 +25,8 @@ public:
 				void				ClearLights		(void);
 private:
 	std::vector<CLight*> m_vLights;
+
+	GETTOR_SETTOR	(_float4,		m_globalAmbient,	_float4(0.2f, 0.2f, 0.2f, 0.2f),	GlobalAmbient)
 };
 END
 

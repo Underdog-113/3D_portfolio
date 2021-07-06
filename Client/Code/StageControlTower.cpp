@@ -13,9 +13,11 @@
 #include "StatusDealer.h"
 #include "ActorController.h"
 #include "StageCameraMan.h"
+#include "TimeSeeker.h"
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
+#include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
 { 
@@ -29,6 +31,7 @@ void CStageControlTower::Start(CreateMode mode)
 	m_pActorController = new CActorController;
 	m_pDealer = new CStatusDealer;
 	m_pCameraMan = new CStageCameraMan;
+	m_pTimeSeeker = new CTimeSeeker;
 
 	if (m_mode != WithoutUI)
 		m_pLinker->SetControlTower(this);
@@ -42,6 +45,8 @@ void CStageControlTower::Update(void)
 {
 	if (m_mode != WithoutUI)
 		m_pLinker->UpdateLinker();
+
+	m_pTimeSeeker->UpdateTimeSeeker();
 
 	m_pCameraMan->UpdateCameraMan();
 
@@ -65,7 +70,18 @@ void CStageControlTower::Update(void)
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
-	
+	if (GetIsPerfectEvadeMode())
+	{
+		Engine::CMeshShader* pMeshShader =
+			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+		pMeshShader->SetAddColor(_float4(0.4f, 0, 0, 0));
+	}
+	else
+	{
+		Engine::CMeshShader* pMeshShader =
+			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+		pMeshShader->SetAddColor(_float4(0, 0, 0, 0));
+	}
 }
 
 void CStageControlTower::OnDestroy()
@@ -78,6 +94,7 @@ void CStageControlTower::OnDestroy()
 	SAFE_DELETE(m_pDealer)
 	SAFE_DELETE(m_pPhaseControl)
 	SAFE_DELETE(m_pCameraMan)
+	SAFE_DELETE(m_pTimeSeeker)
 }
 
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
@@ -286,6 +303,9 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
 
+	if (pV->GetIsEvade())
+		return;
+
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
 	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
@@ -366,7 +386,11 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 
 	m_pCurActor->SetIsEnabled(true);
-	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+	if(m_spCurTarget)
+		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Attack_QTE");
+	else
+		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+
 	m_pCameraMan->SetIsSwitching(true);
 }
 
@@ -378,4 +402,19 @@ void CStageControlTower::OffCameraTargeting()
 void CStageControlTower::EndSwitching()
 {
 	m_pCameraMan->SetIsSwitching(false);
+}
+
+void CStageControlTower::OnPerfectEvadeMode()
+{
+	m_pTimeSeeker->OnPerfectEvadeMode();
+}
+
+_bool CStageControlTower::GetIsPerfectEvadeMode()
+{
+	return m_pTimeSeeker->GetIsPerfectEvadeMode();
+}
+
+_float CStageControlTower::GetPlayerDeltaTime()
+{
+	return m_pTimeSeeker->GetPlayerDeltaTime();
 }
