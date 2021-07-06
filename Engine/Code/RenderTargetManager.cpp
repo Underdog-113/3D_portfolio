@@ -30,7 +30,7 @@ void CRenderTargetManager::Start(void)
 	AddRenderTarget(L"Target_Depth", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(1, 1, 1, 1));
 	InitDebugBufferMRT(L"Target_Depth", 0, 288, 256, 144);
 
-	AddRenderTarget(L"Target_MtrlSpecular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	AddRenderTarget(L"Target_MtrlSpecular", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(1, 1, 1, 0));
 	InitDebugBufferMRT(L"Target_MtrlSpecular", 0, 432, 256, 144);
 
 	InitMRT(L"MRT_Deferred", L"Target_Albedo");

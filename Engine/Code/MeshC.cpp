@@ -383,9 +383,9 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			pEffect->SetVector("g_specular", &specular);
 			pEffect->SetFloat("g_specularPower", specularPower);
 
+
 			pEffect->CommitChanges();
 			
-			GET_DEVICE->SetMaterial(&vMeshContainers[i]->pMaterials[j].MatD3D);
 			vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
 		}
 

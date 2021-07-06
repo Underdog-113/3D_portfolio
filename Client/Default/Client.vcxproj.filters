@@ -760,6 +760,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball">
       <UniqueIdentifier>{b8c0882e-f095-4a65-8ffd-956901dc2cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\12.OutlineShader">
+      <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1505,6 +1508,10 @@
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\OutlineShader.h">
+      <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2170,6 +2177,10 @@
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp">
+      <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2228,6 +2239,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <Filter>04.Shader\11.LaserTrail</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
+      <Filter>04.Shader\12.OutlineShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
