@@ -2,10 +2,11 @@
 
 #define NearTake 1.5f
 #define MidTake 3.f
-#define FarTake 4.5f
+#define FarTake 4.f
 
 #define NearAngle 0.f
-#define NormalAngle D3DXToRadian(10.f)
+#define MidAngle D3DXToRadian(10.f)
+#define FarAngle D3DXToRadian(15.f)
 
 
 #define MaxChaseDistance 0.5f
@@ -82,7 +83,7 @@ private:
 	TakeType m_nextTakeType = Mid;
 	_float m_curMaxDist = 3.f;
 	_float m_dstMaxDist = 3.f;
-	_float m_gotoNearTakeTimer = 0.f;
+	_float m_gotoNextTakeTimer = 0.f;
 	_float m_changeTakeTimer = 0.f;
 	_float m_changeTakeSpeed = 2.f;
 

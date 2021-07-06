@@ -298,6 +298,7 @@ void CActorController::RotateCurrentActor()
 
 	if (angleSynchroRate > 0.95f)
 	{
+		m_rotSpeed = 12.f;
 		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
 		rotSpeedRate = 1.f - lerpValue;
 	}

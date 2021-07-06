@@ -225,7 +225,7 @@ void CKiana::CreateCatPaw(void)
 void CKiana::UseUltraCost(void)
 {
 	_float curSp = m_pStat->GetCurSp();
-	//curSp -= 10.f * GET_PLAYER_DT;
+	curSp -= 10.f * GET_PLAYER_DT;
 
 	if (curSp < 0.f)
 	{

@@ -515,6 +515,9 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_1);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
+
 	ResetCheckMembers();
 }
 
@@ -577,6 +580,8 @@ void CFSM_KianaC::Attack_2_Enter(void)
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -634,6 +639,9 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3);
 	m_pStageControlTower->ActorControl_SetInputLock(true); 
 	ResetCheckMembers();
+
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -688,6 +696,10 @@ void CFSM_KianaC::Attack_3_Branch_Enter(void)
 
 	m_checkEffect = false;
 	m_checkAttack = false;
+
+
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
@@ -740,6 +752,9 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_4);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
+	
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -823,6 +838,9 @@ void CFSM_KianaC::Attack_4_Branch_Enter(void)
 
 	m_checkEffect = false;
 	m_checkAttack = false;
+
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
@@ -872,6 +890,9 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_5);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
+
+	if (m_pKiana->GetUltraMode())
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)

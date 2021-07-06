@@ -242,6 +242,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 		m_pLinker->Hit_Up();
 	
 	// 5. 플레이어 sp 획득
+	m_pDealer->SpUp(m_pCurActor->GetStat(), 3.f);
 
 	// 6. 보스면 스턴 게이지 깎아주세요
 
@@ -392,6 +393,11 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 
 	m_pCameraMan->SetIsSwitching(true);
+}
+
+void CStageControlTower::SetCameraFarTake()
+{
+	m_pCameraMan->SetFarTake();
 }
 
 void CStageControlTower::OffCameraTargeting()

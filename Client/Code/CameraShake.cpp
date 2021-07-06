@@ -72,15 +72,26 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	m_blendOutTime = 0.1f;
 
 	float randomOffset = 0.f;
+	
 	randomOffset = (rand() % 100) / 100.f;
-	m_pitchWave.amplitude = D3DXToRadian(0.5f);
+	m_pitchWave.amplitude = D3DXToRadian(0.3f);
 	m_pitchWave.frequency = 20.f;
 	m_pitchWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_yawWave.amplitude = D3DXToRadian(0.5f);
+	m_yawWave.amplitude = D3DXToRadian(0.3f);
 	m_yawWave.frequency = 20.f;
 	m_yawWave.offset = randomOffset;
+
+	//randomOffset = 0.f;
+	//m_pitchWave.amplitude = 0.f;
+	//m_pitchWave.frequency = 0.f;
+	//m_pitchWave.offset = 0.f;
+	//
+	//randomOffset = 0.f;
+	//m_yawWave.amplitude = 0.f;
+	//m_yawWave.frequency = 0.f;
+	//m_yawWave.offset = 0.f;
 
 	randomOffset = 0.f;
 	m_rollWave.amplitude = 0.f;
@@ -88,17 +99,17 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	m_rollWave.offset = 0.f;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_xWave.amplitude = 5.f;
+	m_xWave.amplitude = 50.f;
 	m_xWave.frequency = 20.f;
 	m_xWave.offset = randomOffset;
 
-	randomOffset = 0.f;
-	m_yWave.amplitude = 0.f;
-	m_yWave.frequency = 0.f;
+	randomOffset = (rand() % 100) / 100.f;
+	m_yWave.amplitude = 50.f;
+	m_yWave.frequency = 20.f;
 	m_yWave.offset = 0.f; 
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_zWave.amplitude = 5.f;
+	m_zWave.amplitude = 1.f;
 	m_zWave.frequency = 20.f;
 	m_zWave.offset = randomOffset;
 }
