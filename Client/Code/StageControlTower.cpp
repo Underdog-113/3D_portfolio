@@ -17,6 +17,7 @@
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
+#include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
 { 
@@ -69,7 +70,18 @@ void CStageControlTower::Update(void)
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
-	
+	if (GetIsPerfectEvadeMode())
+	{
+		Engine::CMeshShader* pMeshShader =
+			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+		pMeshShader->SetAddColor(_float4(0.4f, 0, 0, 0));
+	}
+	else
+	{
+		Engine::CMeshShader* pMeshShader =
+			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+		pMeshShader->SetAddColor(_float4(0, 0, 0, 0));
+	}
 }
 
 void CStageControlTower::OnDestroy()
