@@ -16,49 +16,49 @@ sampler SpecularSampler = sampler_state
 	texture = g_SpecularTexture;
 };
 
-texture g_LutTexture;
-sampler LutSampler = sampler_state
-{
-	texture = g_LutTexture;
-};
+//texture g_LutTexture;
+//sampler LutSampler = sampler_state
+//{
+//	texture = g_LutTexture;
+//};
 
 bool g_timeSlow;
 
-float3 GetLutColor(float3 colorIN)
-{
-	/*float u = floor(colorIN.b * 15.f) / 15.f * 240.f;
-	u = floor(colorIN.r * 15.f) + u;
-	u /= 255.f;
-
-	float v = floor(colorIN.g * 15.f) / 15.f;
-
-	float3 left = tex2D(LutSampler, float2(u, v)).rgb;
-
-	u = floor(colorIN.b * 15.f) / 15.f * 240.f;
-	u = floor(colorIN.r * 15.f) + u;
-	u /= 255.f;
-
-	v = ceil(colorIN.g * 15.f) / 15.f;
-
-	float3 right = tex2D(LutSampler, float2(u, v)).rgb;
-	
-	float3 color;
-	color.r = lerp(left.r, right.r, frac(colorIN.r * 15.f));
-	color.g = lerp(left.g, right.g, frac(colorIN.g * 15.f));
-	color.b = lerp(left.b, right.b, frac(colorIN.b * 15.f));
-
-	return color;*/
-	float2 lutSize = float2(0.00390625, 0.0625); // 1 / float2(256, 16)
-	float4 lutUV;
-	
-	colorIN = saturate(colorIN) * 15.0;
-	lutUV.w = floor(colorIN.b);
-	lutUV.xy = (colorIN.rg + 0.5) * lutSize;
-	lutUV.x += lutUV.w * lutSize.y;
-	lutUV.z = lutUV.x + lutSize.y;
-	
-	return lerp(tex2Dlod(LutSampler, lutUV.xyzz).rgb, tex2Dlod(LutSampler, lutUV.zyzz).rgb, colorIN.b - lutUV.w);
-}
+//float3 GetLutColor(float3 colorIN)
+//{
+//	/*float u = floor(colorIN.b * 15.f) / 15.f * 240.f;
+//	u = floor(colorIN.r * 15.f) + u;
+//	u /= 255.f;
+//
+//	float v = floor(colorIN.g * 15.f) / 15.f;
+//
+//	float3 left = tex2D(LutSampler, float2(u, v)).rgb;
+//
+//	u = floor(colorIN.b * 15.f) / 15.f * 240.f;
+//	u = floor(colorIN.r * 15.f) + u;
+//	u /= 255.f;
+//
+//	v = ceil(colorIN.g * 15.f) / 15.f;
+//
+//	float3 right = tex2D(LutSampler, float2(u, v)).rgb;
+//	
+//	float3 color;
+//	color.r = lerp(left.r, right.r, frac(colorIN.r * 15.f));
+//	color.g = lerp(left.g, right.g, frac(colorIN.g * 15.f));
+//	color.b = lerp(left.b, right.b, frac(colorIN.b * 15.f));
+//
+//	return color;*/
+//	float2 lutSize = float2(0.00390625, 0.0625); // 1 / float2(256, 16)
+//	float4 lutUV;
+//	
+//	colorIN = saturate(colorIN) * 15.0;
+//	lutUV.w = floor(colorIN.b);
+//	lutUV.xy = (colorIN.rg + 0.5) * lutSize;
+//	lutUV.x += lutUV.w * lutSize.y;
+//	lutUV.z = lutUV.x + lutSize.y;
+//	
+//	return lerp(tex2Dlod(LutSampler, lutUV.xyzz).rgb, tex2Dlod(LutSampler, lutUV.zyzz).rgb, colorIN.b - lutUV.w);
+//}
 
 struct PS_IN
 {

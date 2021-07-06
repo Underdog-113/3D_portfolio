@@ -289,7 +289,7 @@ void CGraphicsManager::RenderDeferBlend(void)
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");
-	pEffect->SetTexture("g_LutTexture", GET_CUR_SCENE->GetTextureStore()->GetTextureData(L"Lut3D_00")->pTexture);
+	//pEffect->SetTexture("g_LutTexture", GET_CUR_SCENE->GetTextureStore()->GetTextureData(L"Lut3D_00")->pTexture);
 
 
 	pEffect->Begin(NULL, 0);

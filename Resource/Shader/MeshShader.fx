@@ -22,28 +22,6 @@ sampler BaseSampler = sampler_state
 	magfilter = linear;
 };
 
-texture g_LutTexture;
-sampler LutSampler = sampler_state
-{
-	texture = g_LutTexture;
-};
-
-
-float3 GetLutColor(float3 colorIN)
-{
-	float2 lutSize = float2(0.00390625, 0.0625); // 1 / float2(256, 16)
-	float4 lutUV;
-
-	colorIN = saturate(colorIN) * 15.0;
-	lutUV.w = floor(colorIN.b);
-	lutUV.xy = (colorIN.rg + 0.5) * lutSize;
-	lutUV.x += lutUV.w * lutSize.y;
-	lutUV.z = lutUV.x + lutSize.y;
-
-	return lerp(tex2Dlod(LutSampler, lutUV.xyzz).rgb, tex2Dlod(LutSampler, lutUV.zyzz).rgb, colorIN.b - lutUV.w);
-}
-
-
 struct VS_IN
 {
 	vector		vPosition   : POSITION;	
@@ -129,8 +107,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	float4 ambient = albedo * saturate(g_ambient);
 
 	Out.vColor = ambient + diffuse;
-	
-	//Out.vColor = float4(GetLutColor(Out.vColor.rgb), 0);
+
 
 	Out.vColor += g_addColor;
 	
