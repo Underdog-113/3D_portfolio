@@ -76,14 +76,14 @@ void CAttackTrail::Update()
 	}
 	if (Engine::IMKEY_PRESS(KEY_UP))
 	{
-		m_fTrailAlpha += 1.f * GET_DT;
+		//m_fTrailAlpha += 1.f * GET_DT;
+		m_fSpeed -= GET_DT;
 	}
 	if (Engine::IMKEY_DOWN(KEY_LEFT))
 	{
 		m_fTrailAlpha = 1.f;
 	}
 
-	m_fSpeed += GET_DT;
 
 	//m_fTrailAlpha -= 0.1f * GET_DT;
 
@@ -100,10 +100,8 @@ void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 
 	//pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
-	//pEffect->SetFloat("gSpeed", m_fSpeed);
-
-	//if (m_fTrailAlpha > 1.f )
-	//pEffect->SetBool("gTrailCheck", false);
+	pEffect->SetFloat("gSpeed", m_fSpeed);
+	pEffect->SetBool("gPlayingAnim_UpDown", true);
 
 
 }

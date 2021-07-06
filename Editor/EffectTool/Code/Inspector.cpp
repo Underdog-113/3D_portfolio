@@ -1653,7 +1653,7 @@ void CInspector::OnDeltaposSpinAlphaHeight(NMHDR *pNMHDR, LRESULT *pResult)
 	m_fAlphaHeight += pNMUpDown->iDelta * -1.f;
 
 	SP(Engine::CObject) spObject = Engine::GET_CUR_SCENE->GetLayers()[(_int)Engine::ELayerID::Effect]->GetGameObjects()[m_iSelectObjectNum];
-
+#
 	if (spObject == nullptr)
 		return;
 
