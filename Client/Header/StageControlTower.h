@@ -71,6 +71,8 @@ public:		/* Battle */
 	void EndSwitching();
 
 	void OnPerfectEvadeMode();
+	_bool GetIsPerfectEvadeMode();
+
 	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 

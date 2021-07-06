@@ -374,7 +374,11 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 
 	m_pCurActor->SetIsEnabled(true);
-	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+	if(m_spCurTarget)
+		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Attack_QTE");
+	else
+		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+
 	m_pCameraMan->SetIsSwitching(true);
 }
 
@@ -391,6 +395,11 @@ void CStageControlTower::EndSwitching()
 void CStageControlTower::OnPerfectEvadeMode()
 {
 	m_pTimeSeeker->OnPerfectEvadeMode();
+}
+
+_bool CStageControlTower::GetIsPerfectEvadeMode()
+{
+	return m_pTimeSeeker->GetIsPerfectEvadeMode();
 }
 
 _float CStageControlTower::GetPlayerDeltaTime()

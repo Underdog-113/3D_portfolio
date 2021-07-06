@@ -12,7 +12,7 @@ public:
 	_float GetPlayerDeltaTime();
 
 private:
-	_bool	m_perfectEvadeMode = false;
+	GETTOR	(_bool, m_perfectEvadeMode, false, IsPerfectEvadeMode)
 	_bool	m_slowAll = false;
 	_float	m_slowTimer = 0.f;
 };
