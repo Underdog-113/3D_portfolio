@@ -48,7 +48,7 @@ private:
 	GETTOR_SETTOR	(_uint,					m_width,				0,				Width)
 	GETTOR_SETTOR	(_uint,					m_height,				0,				Height)
 	GETTOR_SETTOR	(D3DFORMAT,				m_format,				{},				Format)
-	GETTOR_SETTOR	(D3DXCOLOR,				m_clearColor,			{},				CColor)
+	GETTOR_SETTOR	(D3DXCOLOR,				m_clearColor,			{},				Color)
 };
 
 END

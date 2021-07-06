@@ -519,10 +519,16 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
 		}
-		else if(renderID == 1)
+		else if (renderID == 1)
+		{
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		}
 		else
+		{
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
+		}
 
 	}
 
@@ -583,7 +589,8 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
 			std::to_wstring(i) + L"_renderID", renderID);
 		spMapObject->GetGraphics()->SetRenderID(renderID);
-		spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
+		spMapObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 
 
 		/* map */

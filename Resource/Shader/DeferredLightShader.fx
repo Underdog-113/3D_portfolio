@@ -1,7 +1,7 @@
-texture			g_albedoTexture;
+texture			g_AlbedoTexture;
 sampler ColorSampler = sampler_state
 {
-	texture = g_albedoTexture;
+	texture = g_AlbedoTexture;
 };
 
 texture			g_NormalTexture;
@@ -26,6 +26,7 @@ vector			g_vLightDir;
 vector			g_vLightPos;
 vector			g_vLightDiffuse;
 vector			g_vLightAmbient;
+vector			g_vGlobalAmbient;
 
 vector			g_vMtrlDiffuse = (vector)1.f;
 vector			g_vMtrlAmbient = (vector)1.f;
@@ -44,8 +45,8 @@ struct PS_IN
 
 struct PS_OUT
 {
-	vector		vShade : COLOR0;
-	vector		vSpecular : COLOR1;
+	vector		vShade		: COLOR0;
+	vector		vSpecular	: COLOR1;
 };
 
 PS_OUT		PS_DIRECTIONAL(PS_IN In)
@@ -56,16 +57,20 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	vector		vNormal		= tex2D(NormalSampler, In.vTexUV);
 	vector		vColor		= tex2D(ColorSampler, In.vTexUV);
 	vector		vDepth		= tex2D(DepthSampler, In.vTexUV);
-	vector		vSpecular	= tex2D(SpecMtrlSampler, In.vTexUV);
+	
+	
+
+	vector mtrlDiffuse	= vector(vColor.a, vNormal.a, vDepth.z, 1.f);
+	vector mtrlAmbient	= vector(vDepth.a, vDepth.a, vDepth.a, 1.f);
+	vector mtrlSpecular = tex2D(SpecMtrlSampler, In.vTexUV);
+
 	// 텍스처->월드
 	vNormal = vector(vNormal.xyz * 2.f - 1.f, 0.f);
-
-	vector diffuse = vector(vColor.a, vNormal.a, vDepth.z, 1.f);
-	vector ambient = vector(vDepth.a, vDepth.a, vDepth.a, 1.f);
 	
-	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * g_vMtrlDiffuse) + (g_vLightAmbient * g_vMtrlAmbient);
-	//Out.vShade = ceil(Out.vShade * 30) / 30;
-
+	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * mtrlDiffuse) +
+						 (g_vLightAmbient * (mtrlAmbient + g_vGlobalAmbient));
+	Out.vShade = floor(Out.vShade * 2.5) / 2;
+	Out.vShade.a = 1.f;
 	vector	vReflect = reflect(normalize(vector(g_vLightDir.xyz, 0.f)), vNormal);
 
 	// vPosition : 월드 상에 존재하는 픽셀의 위치 값
@@ -89,10 +94,14 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	
 	vector	vLook = normalize(g_vCamPos - vPosition);
 
+
+	if (mtrlSpecular.w == 0)
+		mtrlSpecular.w = 20;
+
 	vector dotRNL = saturate(dot(normalize(vReflect), vLook));
-	Out.vSpecular = pow(dotRNL, vSpecular.a);
-	Out.vSpecular.a = dotRNL.a;
-	Out.vSpecular *= vector(vSpecular.xyz, 1);
+	Out.vSpecular = pow(dotRNL, mtrlSpecular.w);
+	Out.vSpecular.a = 0;
+	Out.vSpecular *= vector(mtrlSpecular.xyz, 1);
 
 
 	return Out;
@@ -103,10 +112,15 @@ PS_OUT		PS_POINT(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	// 텍스쳐 uv 상태의 법선 성분
-	vector		vNormal = tex2D(NormalSampler, In.vTexUV);
+	vector		vNormal		= tex2D(NormalSampler, In.vTexUV);
+	vector		vColor		= tex2D(ColorSampler, In.vTexUV);
+	vector		vDepth		= tex2D(DepthSampler, In.vTexUV);
+
+	vector mtrlDiffuse	= vector(vColor.a, vNormal.a, vDepth.z, 1.f);
+	vector mtrlAmbient	= vector(vDepth.a, vDepth.a, vDepth.a, 1.f);
+	vector mtrlSpecular = tex2D(SpecMtrlSampler, In.vTexUV);
 
 	// vPosition : 월드 상에 존재하는 픽셀의 위치 값
-	vector  vDepth = tex2D(DepthSampler, In.vTexUV);
 	float	fViewZ = vDepth.y * 1000.f;	// 텍스처 uv 상태로 만들기 위해 far 값으로 나눠 저장했던 뷰스페이스 z값을 다시 far값을 곱해줘서 원상태로 복구
 
 	vector		vPosition;
@@ -132,13 +146,17 @@ PS_OUT		PS_POINT(PS_IN In)
 
 	float	fAtt = max((g_fRange - fDistance) / g_fRange, 0.f);
 
-	Out.vShade = (saturate(dot(normalize(vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * g_vMtrlDiffuse) + (g_vLightAmbient * g_vMtrlAmbient)) * fAtt;
+	Out.vShade = (saturate(dot(normalize(vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * mtrlDiffuse) + 
+							   (g_vLightAmbient * (mtrlAmbient + g_vGlobalAmbient))) * fAtt;
 	Out.vShade.a = 1.f;
 
 	vector	vReflect = reflect(normalize(vector(vLightDir.xyz, 0.f)), vNormal);
 	vector	vLook = normalize(g_vLightPos - vPosition);
 
-	Out.vSpecular = (pow(saturate(dot(normalize(vReflect), vLook)), g_fPower)) * fAtt;
+	vector dotRNL = saturate(dot(normalize(vReflect), vLook));
+	Out.vSpecular = pow(dotRNL, mtrlSpecular.a);
+	Out.vSpecular.a = dotRNL.a;
+	Out.vSpecular *= vector(mtrlSpecular.xyz, 1);
 	
 	return Out;
 }

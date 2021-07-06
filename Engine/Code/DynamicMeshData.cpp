@@ -71,9 +71,6 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 
 	m_meshSize = m_maxVertex - m_minVertex;
 
-	
-
-
 	m_pAniCtrl = CAniCtrl::Create(pAniCtrl); 
 	m_pAniCtrl->ChangeAniSet(FindFirstAniIndex(fileName));
 
