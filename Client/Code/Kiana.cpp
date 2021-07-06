@@ -88,6 +88,7 @@ void CKiana::Start(void)
 	m_pAttackBall->GetTransform()->SetSize(3.f, 3.f, 3.f);
 	m_pAttackBall->SetOwner(this);
 
+	CreatePivotMatrix(&m_pLeftToe_World, &m_pLeftToe_Frame, "Bip001_L_Toe0");
 	CreatePivotMatrix(&m_pRightToe_World, &m_pRightToe_Frame, "Bip001_R_Toe0");
 	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_R_Hand");
 	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_L_Hand");
@@ -124,6 +125,7 @@ void CKiana::Update(void)
 
 	__super::Update();
 
+	UpdatePivotMatrix(m_pLeftToe_World, m_pLeftToe_Frame);
 	UpdatePivotMatrix(m_pRightToe_World, m_pRightToe_Frame);
 	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
 	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
@@ -167,6 +169,7 @@ void CKiana::OnDestroy(void)
 {
 	delete m_pStat;
 
+	SAFE_DELETE(m_pLeftToe_World)
 	SAFE_DELETE(m_pRightToe_World)
 	SAFE_DELETE(m_pLeftHand_World)
 	SAFE_DELETE(m_pRightHand_World)

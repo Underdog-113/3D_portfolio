@@ -11,7 +11,7 @@ public:
 	void CreateEffect_Attack1();
 	void CreateEffect_Attack2();
 	void CreateEffect_Attack3();
-	void CreateEffect_Attack4();
+	void CreateEffect_Attack4(_float yPos);
 	void CreateEffect_Attack5();
 
 	void CreateEffect_Attack3_Branch();

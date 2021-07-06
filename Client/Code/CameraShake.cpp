@@ -67,9 +67,9 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	SetDistanceRate(eventPos);
 	m_timer = 0.f;
 
-	m_duration = 0.25f;
+	m_duration = 0.2f;
 	m_blendInTime = 0.f;
-	m_blendOutTime = 0.15f;
+	m_blendOutTime = 0.1f;
 
 	float randomOffset = 0.f;
 	randomOffset = (rand() % 100) / 100.f;
@@ -88,7 +88,7 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	m_rollWave.offset = 0.f;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_xWave.amplitude = 10.f;
+	m_xWave.amplitude = 5.f;
 	m_xWave.frequency = 20.f;
 	m_xWave.offset = randomOffset;
 
@@ -98,7 +98,7 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	m_yWave.offset = 0.f; 
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_zWave.amplitude = 10.f;
+	m_zWave.amplitude = 5.f;
 	m_zWave.frequency = 20.f;
 	m_zWave.offset = randomOffset;
 }

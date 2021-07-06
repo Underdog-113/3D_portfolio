@@ -20,6 +20,13 @@
 #define Delay_CreateCatPaw_Branch_Atk03 0.05f
 #define Delay_CreateCatPaw_Branch_Atk04 0.15f
 
+
+#define Delay_Effect_Atk01 0.25f
+#define Delay_Effect_Atk02 0.05f
+#define Delay_Effect_Atk03 0.10f
+#define Delay_Effect_Atk04 0.0f
+#define Delay_Effect_Atk05 0.05f
+
 class CKiana;
 class CStageControlTower;
 class CEffectMaker_Kiana;
@@ -84,6 +91,7 @@ private:
 	bool m_checkUltraAtk = false;
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
+	bool m_checkAttack = false;
 
 private:
 	CKiana* m_pKiana = nullptr;
