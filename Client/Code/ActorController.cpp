@@ -333,6 +333,7 @@ void CActorController::RotateCurrentActor()
 			_float cosValue = acosf(angleSynchroRate);
 
 			pCurActor->GetTransform()->AddRotationY(cosValue);
+			
 			return;
 		}
 		pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_PLAYER_DT);
@@ -351,8 +352,6 @@ void CActorController::RotateCurrentActor()
 		}
 		pCurActor->GetTransform()->AddRotationY(-m_rotSpeed * rotSpeedRate * GET_PLAYER_DT);
 	}
-
-
 
 }
 
@@ -374,4 +373,37 @@ void CActorController::TargetingOn()
 
 	m_moveFlag = 0;
 	m_prevMoveFlag = 0;
+}
+
+void CActorController::LookHittedDirection(_float3 hitPos)
+{
+	CValkyrie* pCurActor = m_pCT->GetCurrentActor();
+	_float3 valkyriePos = pCurActor->GetTransform()->GetPosition();
+	valkyriePos.y = 0.f;
+
+	hitPos.y = 0.f;
+	_float3 dir = hitPos - valkyriePos;
+
+	D3DXVec3Normalize(&dir, &dir);
+	
+	_float3 rotAxis = { 0.f, 0.f, 0.f };
+	_float3 actorForward = pCurActor->GetTransform()->GetForward();
+	D3DXVec3Cross(&rotAxis, &actorForward, &dir);
+	D3DXVec3Normalize(&rotAxis, &rotAxis);
+
+	float angleSynchroRate = D3DXVec3Dot(&actorForward, &dir);
+	angleSynchroRate = GET_MATH->RoundOffRange(angleSynchroRate, 1);
+	_float cosValue = acosf(angleSynchroRate);
+
+	if (rotAxis.y > 0.f)
+	{
+		pCurActor->GetTransform()->AddRotationY(cosValue);
+	}
+	else
+	{
+		pCurActor->GetTransform()->AddRotationY(-cosValue);
+	}
+
+	m_moveOrderDir = dir;
+	m_reserveMoveOrderDir = dir;
 }

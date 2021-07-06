@@ -58,8 +58,11 @@ public:
 					void					UltraAtk			(AttackOption index);
 					void					UltraAtk_Ring		(AttackOption index);
 
-					void					SetUltraMode		(bool value);;
+					void					SetUltraMode		(bool value);
+					void					UseWeaponSkill		(void);
 
+					_bool					CheckUltraUseable	(void);
+					_bool					CheckSkillUseable	(void);
 										
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
@@ -105,7 +108,6 @@ private:
 	float m_timer = 0.f;
 
 	static		_uint						m_s_uniqueID;
-
 };
 
 #endif

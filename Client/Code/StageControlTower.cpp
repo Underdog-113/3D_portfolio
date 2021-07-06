@@ -64,8 +64,8 @@ void CStageControlTower::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);
-	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
-		SwitchValkyrie(Wait_2);
+// 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+// 		SwitchValkyrie(Wait_2);
 
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
@@ -326,9 +326,12 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	else
 	{
 		pV->ApplyHitInfo(info);
+
+		m_pActorController->LookHittedDirection(pMonster->GetTransform()->GetPosition());
 	}
 
 	// 4. 히트 이펙트
+
 
 	// 5. 사운드
 
