@@ -186,17 +186,22 @@ void CTransformC::SetForward(_float3 forward)
 	UpdateRotation();
 }
 
-//void CTransformC::SetForwardUp(_float3 forward, _float3 up)
-//{
-//	D3DXVec3Normalize(&forward, &forward);
-//	D3DXVec3Normalize(&up, &up);
-//
-//	if (forward == m_forward && up == m_up)
-//		return;
-//
-//	m_forward	= forward;
-//	m_up		= up;
-//}
+void CTransformC::SetForwardUp(_float3 forward, _float3 up)
+{
+	D3DXVec3Normalize(&forward, &forward);
+	D3DXVec3Normalize(&up, &up);
+
+	if (abs(D3DXVec3Dot(&forward, &up)) > EPSILON)
+		return;
+
+	if (forward == m_forward && up == m_up)
+		return;
+
+	m_forward	= forward;
+	m_up		= up;
+
+	UpdateRotationWithUp();
+}
 
 
 void CTransformC::AddPosition(_float3 position)
@@ -416,6 +421,27 @@ void CTransformC::UpdateRotation(void)
 		else
 			m_rotation = _float3(D3DXToRadian(-90), 0, 0);
 	}
+}
+
+void CTransformC::UpdateRotationWithUp(void)
+{
+	D3DXVec3Cross(&m_right, &m_up, &m_forward);
+	_mat rotMatrix;
+	D3DXMatrixIdentity(&rotMatrix);
+	rotMatrix._11 = m_right.x;		rotMatrix._12 = m_right.y;		rotMatrix._13 = m_right.z;
+	rotMatrix._21 = m_up.x;			rotMatrix._22 = m_up.y;			rotMatrix._23 = m_up.z;
+	rotMatrix._31 = m_forward.x;	rotMatrix._32 = m_forward.y;	rotMatrix._33 = m_forward.z;
+
+	_quat rotQuat;
+	D3DXQuaternionRotationMatrix(&rotQuat, &rotMatrix);
+	D3DXQuaternionNormalize(&rotQuat, &rotQuat);
+
+
+	m_rotation = GET_MATH->QuatToRad(rotQuat);
+	if (abs(m_rotation.x) < EPSILON)
+		m_rotation.x = 0;
+	if (abs(m_rotation.z) < EPSILON)
+		m_rotation.z = 0;
 }
 
 

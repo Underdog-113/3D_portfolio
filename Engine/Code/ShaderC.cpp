@@ -18,8 +18,8 @@ SP(CComponent) CShaderC::MakeClone(CObject * pObject)
 	SP(CShaderC) spClone(new CShaderC);
 	__super::InitClone(spClone, pObject);
 
-	spClone->m_vShaders = m_vShaders;
-
+	spClone->m_vShaders			= m_vShaders;
+	spClone->m_shaderPerSubset	= m_shaderPerSubset;
 	return spClone;
 }
 
