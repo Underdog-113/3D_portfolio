@@ -3,8 +3,8 @@
 #include "Kiana.h"
 
 #define AttackTrail_ObjectKey	L"Kiana_Trail"
-#define AttackTrail_Tex1Name	L"K_Trail"
-#define AttackTrail_Tex2Name	L"explosionpoint1"
+#define AttackTrail_Tex1Name	L"BloomMask"
+#define AttackTrail_Tex2Name	L"fireburst"
 #define AttackTrail_Tex3Name	L"yun01"
 
 #define UltraTrail_ObjectKey	L"Kiana_Ult_Trail"
