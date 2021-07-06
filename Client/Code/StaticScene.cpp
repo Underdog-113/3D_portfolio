@@ -43,12 +43,14 @@
 
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
-
+#include "SparkEffect.h"
 // Scout
 #include "Scout_Att_Range.h"
 #include "Scout_Att_Range_Hold.h"
 #include "Scout_Laser.h"
 #include "ScoutBall.h"
+#include "ScoutMeteor.h"
+#include "ScoutCircleRange.h"
 
 #include "SoftEffect.h"
 #include "MonsterHitEffect.h"
@@ -408,5 +410,30 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spScoutBall(CScoutBall::Create(true, this));
 	GetObjectFactory()->AddPrototype(spScoutBall);
+
+	SP(CScoutMeteor) spScoutMeteor(CScoutMeteor::Create(true, this));
+	spScoutMeteor->GetComponent<Engine::CGraphicsC>();
+	spScoutMeteor->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+	spScoutMeteor->GetComponent<Engine::CTextureC>()->AddTexture(L"Scout_Meteor");
+	spScoutMeteor->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	spScoutMeteor->GetCollision()->
+		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 0.2f));
+	GetObjectFactory()->AddPrototype(spScoutMeteor);
+
+	SP(CSoftEffect) spSparkEffect(CSparkEffect::Create(true, this));
+	spSparkEffect->GetComponent<Engine::CGraphicsC>();
+	spSparkEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spark_v2");
+	spSparkEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spark_v2");
+	spSparkEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);	
+	GetObjectFactory()->AddPrototype(spSparkEffect);
+
+	SP(CMeshEffect_Client) spScoutCircleRange(CScoutCircleRange::Create(true, this));
+	spScoutCircleRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
+	spScoutCircleRange->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spScoutCircleRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"BonusShield_3");
+	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spScoutCircleRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spScoutCircleRange);
 
 }

@@ -30,11 +30,6 @@ private:
 
 
 private:
-	void SpawnAttackRange();
-
-
-
-private:
 	SP(Engine::CObject) m_spKiana;
 private:
 	CStageControlTower* m_pController = nullptr;
