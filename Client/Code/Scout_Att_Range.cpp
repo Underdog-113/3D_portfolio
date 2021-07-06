@@ -80,6 +80,8 @@ void CScout_Att_Range::Update()
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
 		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 		spMeshEffect->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
+		spMeshEffect->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y + 0.5f);
+		spMeshEffect->GetTransform()->SetRotation(this->GetTransform()->GetRotation());
 
 		m_spAtt_Range_Hold->SetDeleteThis(true);
 		this->SetDeleteThis(true);

@@ -65,20 +65,20 @@ void CWooScene::Start(void)
 	Load->ScrollViewLoad(this);
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
-	//Load->MapLoad(this);
+	Load->MapLoad(this);
 	//Load->PhaseChangerLoad(this);
 	delete(Load);
 
 	CBattleUiManager::GetInstance()->Start(this);
 
 	// ¸Ê Å°¸é ²À ÁÖ¼®!!!!!!!!!!!!!!
-	TerrainSetting();
+	//TerrainSetting();
 
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
 	//GaneshaSetting();
-	ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
+	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
 	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();

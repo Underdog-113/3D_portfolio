@@ -27,7 +27,7 @@ SP(Engine::CObject) CScoutBall::MakeClone()
 	SP(CScoutBall) spClone(new CScoutBall, Engine::SmartDeleter<CScoutBall>);
 	__super::InitClone(spClone);
 
-	_float tmpSize = 0.01f;
+	_float tmpSize = 0.03f;
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spTransform->SetSize(_float3(tmpSize, tmpSize, tmpSize));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
@@ -60,12 +60,12 @@ void CScoutBall::Update()
 {
 	__super::Update();
 
-	if (m_spTransform->GetSize().z >= 0.03f)
+	if (m_spTransform->GetSize().z >= 0.1f)
 	{
 		this->SetDeleteThis(true);
 	}
 
-	_float size = 0.01f * GET_DT;	
+	_float size = 0.033f * GET_DT;	
 	m_spTransform->AddSize(_float3(size, size, size));
 }
 

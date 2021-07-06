@@ -28,9 +28,9 @@ SP(Engine::CObject) CScout_Laser::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSizeX(0.3f);
-	spClone->m_spTransform->SetSizeY(0.3f);
-	spClone->m_spTransform->SetSizeZ(0.3f);
+	spClone->m_spTransform->SetSizeX(1.f);
+	spClone->m_spTransform->SetSizeY(1.f);
+	spClone->m_spTransform->SetSizeZ(1.f);
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
