@@ -44,7 +44,7 @@ private:
 
 	void				ForUITest();
 
-
+	void				FindSkyObject();
 
 
 private:
@@ -57,6 +57,7 @@ private:
 	std::vector<SP(Engine::CObject)> m_vSpider;
 	
 	SP(Engine::CObject) m_spGanesha;
+	SP(Engine::CObject) m_spSky;
 
 	std::vector<SP(Engine::CObject)> m_vDummy;
 };

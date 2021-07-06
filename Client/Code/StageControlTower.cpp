@@ -63,10 +63,10 @@ void CStageControlTower::Update(void)
 	}
 
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
-		SwitchValkyrie(Wait_1);
-	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
-		SwitchValkyrie(Wait_2);
+	//if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
+	//	SwitchValkyrie(Wait_1);
+	//if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+	//	SwitchValkyrie(Wait_2);
 
 	if (GetIsPerfectEvadeMode())
 	{
