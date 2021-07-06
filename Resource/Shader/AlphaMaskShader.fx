@@ -12,8 +12,8 @@ float  gSpeed = 1.5;
 float  gTmpAlpha;
 
 bool   gPlayingAnim;
+bool   gPlayingAnim_UpDown = false;
 bool   g_bAlphaCtrl;
-
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
 {
@@ -61,7 +61,11 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 
-	if (gPlayingAnim)
+	if (gPlayingAnim_UpDown)
+	{
+		Output.mUV = Input.mUV + float2(0.f, gSpeed);
+	}
+	else if (gPlayingAnim)
 	{
 		Output.mUV = Input.mUV + float2(gSpeed, 0.f);
 	}
@@ -82,9 +86,9 @@ struct PS_INPUT
 float4 ps_main(VS_OUTPUT Input) : COLOR
 {
 	// Base albedo Texture
-	float4 albedo = tex2D(Diffuse, Input.mUV);
+	float4 albedo = tex2D(Diffuse, Input.mUV);	
 	float4 alphaVal = tex2D(ServeTex, Input.mUV);
-
+	
 	if (g_bAlphaCtrl)
 	{
 		if (Input.mUV.x >= gAlpha)
