@@ -103,11 +103,11 @@ void COneStageScene::Update(void)
 	//	m_bossSpawn = true;
 	//	m_onBoss = true;
 	//}
-
-	std::cout << "kiana x : " <<
-		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
-		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
-		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
+// 
+// 	std::cout << "kiana x : " <<
+// 		m_spValkyrie->GetTransform()->GetPosition().x << ", y : " <<
+// 		m_spValkyrie->GetTransform()->GetPosition().y << ", z : " <<
+// 		m_spValkyrie->GetTransform()->GetPosition().z << std::endl;
 
 	//ForUITest();
 }

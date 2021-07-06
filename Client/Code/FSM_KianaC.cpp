@@ -305,6 +305,20 @@ bool CFSM_KianaC::CheckAction_Ultra()
 	return false;
 }
 
+bool CFSM_KianaC::CheckAction_WeaponSkill()
+{
+	if (Engine::IMKEY_DOWN(StageKey_WeaponSkill))
+	{
+		auto pStat = m_pKiana->GetStat();
+		if (pStat->GetCurSp() < pStat->GetSkillCost())
+			return false;
+
+		ChangeState(Name_WeaponSkill);
+		return true;
+	}
+	return false;
+}
+
 void CFSM_KianaC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
 {
 	TCHAR* name = (TCHAR*)soundName.c_str();
@@ -1614,6 +1628,9 @@ void CFSM_KianaC::RegisterAllState()
 
 	CreateState(CFSM_KianaC, pState, RunStopRight)
 		AddState(pState, Name_RunStopRight);
+
+	CreateState(CFSM_KianaC, pState, WeaponSkill)
+		AddState(pState, Name_WeaponSkill);
 
 	CreateState(CFSM_KianaC, pState, StandBy)
 		AddState(pState, Name_StandBy);

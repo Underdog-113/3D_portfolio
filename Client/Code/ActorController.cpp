@@ -183,10 +183,25 @@ bool CActorController::CheckMoveOrder()
 	m_moveOrderDir.y = 0.f;
 	D3DXVec3Normalize(&m_moveOrderDir, &m_moveOrderDir);
 
+
 // 	if (m_prevMoveFlag != m_moveFlag || m_moveFlag & MoveFlag_Left || m_moveFlag & MoveFlag_Right)
 // 		m_rotateLock = false;
 	if (m_moveFlag)
-		m_rotateLock = false;
+	{
+
+		CValkyrie* pCurActor = m_pCT->GetCurrentActor();
+
+		_float3 actorForward = pCurActor->GetTransform()->GetForward();
+		actorForward = _float3(actorForward.x, 0.f, actorForward.z);
+		D3DXVec3Normalize(&actorForward, &actorForward);
+
+		float angleSynchroRate = D3DXVec3Dot(&actorForward, &m_moveOrderDir);
+
+		if (angleSynchroRate < 0.99f)
+		{
+			m_rotateLock = false;
+		}
+	}
 
 
 	m_prevMoveFlag = m_moveFlag;
@@ -295,10 +310,11 @@ void CActorController::RotateCurrentActor()
 	D3DXVec3Normalize(&actorForward, &actorForward);
 
 	float angleSynchroRate = D3DXVec3Dot(&actorForward, &m_moveOrderDir);
+	angleSynchroRate = GET_MATH->RoundOffRange(angleSynchroRate, 1);
 
 	if (angleSynchroRate > 0.95f)
 	{
-		m_rotSpeed = 12.f;
+		m_rotSpeed = 10.f;
 		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
 		rotSpeedRate = 1.f - lerpValue;
 	}
@@ -307,7 +323,6 @@ void CActorController::RotateCurrentActor()
 	_float3 rotAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&rotAxis, &actorForward, &m_moveOrderDir);
 	D3DXVec3Normalize(&rotAxis, &rotAxis);
-	angleSynchroRate = GET_MATH->RoundOffRange(angleSynchroRate, 1);
 	if (rotAxis.y > 0.f)
 	{
 		if (angleSynchroRate > 0.99f)
@@ -316,7 +331,6 @@ void CActorController::RotateCurrentActor()
 			m_rotateByTarget = false;
 
 			_float cosValue = acosf(angleSynchroRate);
-
 
 			pCurActor->GetTransform()->AddRotationY(cosValue);
 			return;

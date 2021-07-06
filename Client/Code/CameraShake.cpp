@@ -96,21 +96,21 @@ void CCameraShake::Preset_Low(_float3 eventPos)
 	randomOffset = 0.f;
 	m_rollWave.amplitude = 0.f;
 	m_rollWave.frequency = 0.f;
-	m_rollWave.offset = 0.f;
+	m_rollWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_xWave.amplitude = 50.f;
+	m_xWave.amplitude = 100.f;
 	m_xWave.frequency = 20.f;
 	m_xWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_yWave.amplitude = 50.f;
+	m_yWave.amplitude = 100.f;
 	m_yWave.frequency = 20.f;
-	m_yWave.offset = 0.f; 
+	m_yWave.offset = randomOffset;
 
-	randomOffset = (rand() % 100) / 100.f;
-	m_zWave.amplitude = 1.f;
-	m_zWave.frequency = 20.f;
+	randomOffset = 0.f;
+	m_zWave.amplitude = 0.f;
+	m_zWave.frequency = 0.f;
 	m_zWave.offset = randomOffset;
 }
 

@@ -82,6 +82,7 @@ void CStageControlTower::Update(void)
 			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
 		pMeshShader->SetAddColor(_float4(0, 0, 0, 0));
 	}
+
 }
 
 void CStageControlTower::OnDestroy()
