@@ -75,7 +75,7 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	//SpiderSetting();
+	SpiderSetting();
 	//SickleSetting();
 	//GaneshaSetting();
 	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
@@ -95,6 +95,29 @@ void CWooScene::Update(void)
 	__super::Update();
 
 	m_pController->Update();
+
+
+	if (Engine::IMKEY_DOWN(KEY_R))
+	{
+		if (false == m_scout)
+		{
+			ScoutSetting();
+			m_scout = true;
+		}
+		else if (true == m_scout)
+		{
+			m_spScout->SetDeleteThis(true);
+		}
+	}
+
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
+	{
+		if (false == m_bronya)
+		{
+			BronyaSetting();
+			m_bronya = true;
+		}
+	}
 }
 
 void CWooScene::LateUpdate(void)

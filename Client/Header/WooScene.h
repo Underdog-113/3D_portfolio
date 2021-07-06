@@ -70,6 +70,11 @@ private:
 	CStageControlTower* m_pController = nullptr;
 
 	_int m_index = 0;
+
+
+	// test
+	_bool m_scout = false;
+	_bool m_bronya = false;
 };
 
 #endif
