@@ -141,11 +141,7 @@ void CYongScene::Update(void)
 		//spScoutRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 
 		//SP(Engine::CObject) spMeshEffect = m_pObjectFactory->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
-		//spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
-		//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
-		//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
-		//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	
 
 		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutCircleRange", true);
 	

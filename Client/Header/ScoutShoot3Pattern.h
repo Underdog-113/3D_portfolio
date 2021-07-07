@@ -38,6 +38,8 @@ private:
 	_TCHAR* m_curMoveSound;
 
 	_bool m_onWalk = false;
+
+	SP(Engine::CObject) m_spScoutBall;
 };
 
 #endif
