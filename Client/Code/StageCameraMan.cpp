@@ -26,7 +26,7 @@ void CStageCameraMan::Start()
 	m_spCamera->SetLookAngleRight(MidAngle);
 
 
-	m_spPivot = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Camera, L"CameraPivot");
+	m_spPivot = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)Engine::ELayerID::Camera, L"CameraPivot");
 	m_spPivot->AddComponent<Engine::CCollisionC>()->
 		AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::FloorRay, _float3(0.25f, 0.25f, 0.25f)));
 	m_spPivot->AddComponent<Engine::CDebugC>();

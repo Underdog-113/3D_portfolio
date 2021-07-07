@@ -14,7 +14,7 @@ CEffectMaker::~CEffectMaker()
 SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring texName3, std::wstring objName)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(objectKey, true, (_int)ELayerID::Effect, objName);
+		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, objName);
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -33,7 +33,7 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std
 SP(Engine::CObject) CEffectMaker::CreateEffect_AlphaMask(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring objName)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(objectKey, true, (_int)ELayerID::Effect, objName);
+		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, objName);
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -48,7 +48,7 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_AlphaMask(std::wstring objectKey,
 SP(Engine::CObject) CEffectMaker::CreateEffect_Dissolve(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring objName)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(objectKey, true, (_int)ELayerID::Effect, objName);
+		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, objName);
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -63,7 +63,7 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Dissolve(std::wstring objectKey, 
 SP(Engine::CObject) CEffectMaker::CreateEffect_Fire(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring objName)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(objectKey, true, (_int)ELayerID::Effect, objName);
+		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, objName);
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
