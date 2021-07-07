@@ -68,7 +68,7 @@ void CScoutBall::Update()
 			this->SetDeleteThis(true);
 		}
 
-		size = 0.055f * GET_DT;
+		size = 0.049f /*0.033f*/ * GET_DT;
 	}
 	else
 	{
@@ -82,6 +82,9 @@ void CScoutBall::Update()
 	
 	
 	m_spTransform->AddSize(_float3(size, size, size));
+
+	if (m_ready)
+		m_spTransform->AddPosition(m_direction * GET_DT);
 }
 
 void CScoutBall::LateUpdate()
