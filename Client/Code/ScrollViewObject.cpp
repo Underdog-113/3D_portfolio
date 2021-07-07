@@ -33,6 +33,7 @@ SP(Engine::CObject) CScrollViewObject::MakeClone(void)
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
+	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 
 	return spClone;
 }
@@ -54,7 +55,9 @@ void CScrollViewObject::Start(void)
 {
 	__super::Start();
 	m_oldMousePos = _float3(0, 0, 0);
-	m_dir = _float3(0, 0.1f, 0);
+	m_dir = _float3(0, 1.0f, 0);
+	m_chack = false;
+	m_speed = 0;
 	ImageObjectSort();
 }
 
@@ -68,6 +71,44 @@ void CScrollViewObject::Update(void)
 	__super::Update();
 	
 	Scroll();
+
+	if (m_chack)
+	{
+		if (ScrollChack(m_speed))
+		{
+			m_speed = 0;
+			return;
+		}
+
+		_int count = 0;
+		for (auto& buttonObject : m_vButtonObject)
+		{
+			count++;
+
+			buttonObject->GetTransform()->AddPosition(m_dir * m_speed);
+
+			for (auto& imageObject : m_vImageObject[count - 1])
+			{
+				imageObject.m_image->GetTransform()->AddPosition(m_dir * m_speed);
+			}
+		}
+
+		for (auto& textObject : m_vTextObject)
+		{
+			textObject.m_text->GetTransform()->AddPosition(m_dir * m_speed);
+		}
+
+		if (m_speed > 0)
+		{
+			m_speed = max(m_speed - GET_DT * 10, 0);
+		}
+		else if (m_speed < 0)
+		{
+			m_speed = min(m_speed + GET_DT * 10, 0);
+		}
+
+		std::cout << "m_speed : " << m_speed << std::endl; 
+	}
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -79,7 +120,6 @@ void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	if(m_spTexture != nullptr)
 		m_spRectTex->PreRender(m_spGraphics, pEffect);
-
 }
 
 void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
@@ -275,40 +315,50 @@ void CScrollViewObject::Scroll()
 
 	if (Engine::CInputManager::GetInstance()->KeyUp(MOUSE_LEFT))
 	{
+		if (m_speed != 0)
+		{
+			m_chack = true;
+			m_speed *= 0.3f;
+		}
+
 		m_oldMousePos = _float3(0,0,0);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(MOUSE_LEFT))
 	{
+		m_speed = 0;
+		m_chack = false;
 		_float3 mousePos = Engine::CInputManager::GetInstance()->GetMousePos();
-		_float dir;
 		_int count = 0;
 
-		Directionadjustment(m_oldMousePos, mousePos, dir);
+		Directionadjustment(m_oldMousePos, mousePos, m_speed);
 
-		/*SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0, 0 });
-		std::cout << "m_oldMousePos : " << m_oldMousePos.y << std::endl;
-		std::cout << "mousePos : " << mousePos.y << std::endl;
-		std::cout << "dir : " << dir << std::endl;*/
+		/*system("cls");
+		std::cout << "m_oldMousePos : " << m_oldMousePos.y <<std::endl;
+		std::cout << "mousePos : " << mousePos.y <<  std::endl;
+		std::cout << "m_speed : " << m_speed << std::endl;*/
 
-		if (ScrollChack(dir))
+		if (ScrollChack(m_speed))
+		{
+			m_oldMousePos = Engine::CInputManager::GetInstance()->GetMousePos();
 			return;
+		}
 
 		for (auto& buttonObject : m_vButtonObject)
 		{
 			count++;
 
-			buttonObject->GetTransform()->AddPosition(m_dir * dir);
-
-			for (auto& textObject : m_vTextObject)
-			{
-				textObject.m_text->GetTransform()->AddPosition(m_dir * dir);
-			}
+			buttonObject->GetTransform()->AddPosition(m_dir * m_speed);
 
 			for (auto& imageObject : m_vImageObject[count - 1])
 			{
-				imageObject.m_image->GetTransform()->AddPosition(m_dir * dir);
+				imageObject.m_image->GetTransform()->AddPosition(m_dir * m_speed);
 			}
+		}
+
+		for (auto& textObject : m_vTextObject)
+		{
+			textObject.m_text->GetTransform()->AddPosition(m_dir * m_speed);
 		}
 
 		m_oldMousePos = Engine::CInputManager::GetInstance()->GetMousePos();
@@ -322,9 +372,13 @@ bool CScrollViewObject::ScrollChack(_float dir)
 	case EDir_Type::UpandDown:
 	{
 		_float s = m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir);
-		std::cout << "dir : " << s << std::endl;
 
-		if (m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir) > m_offSet.y)
+		if (m_vButtonObject[0]->GetTransform()->GetPosition().y + (m_dir.y * dir) < m_offSet.y + (GetTransform()->GetSize().y * 0.5f))
+		{
+			return true;
+		}
+
+		if (m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir) > m_offSet.y - (GetTransform()->GetSize().y * 0.5f))
 		{
 			return true;
 		}
@@ -349,7 +403,7 @@ void CScrollViewObject::Directionadjustment(_float3 pos1, _float3 pos2, _float &
 		pos1.x = 0; pos1.z = 0;
 		pos2.x = 0; pos2.z = 0;
 		dir = Engine::Direction(pos1, pos2);
-		if (pos1.y > pos2.y)
+		if (pos1.y > pos2.y) 
 		{
 			dir *= -1;
 		}
@@ -366,7 +420,9 @@ void CScrollViewObject::Directionadjustment(_float3 pos1, _float3 pos2, _float &
 }
 
 /*
-1. 맨위에 이미지가 offset보다 이하로 내려갈수없다.
-2. 맨 아래 이미지가 offset보다 위로 올라갈수없다.
+이동하는 코드를 update문에 박아두고
+현재 마우스체크부분에는 속도값을 주는코드로바꾸면 이동하는 값만큼의 이속을줄수있지않을까
 
+문제는 이속을주고 손가락을때야 스피드가 적용되고 그외에는 그냥 손가락움직이는거에 맞춰서 지금 방식으로 이동한다.
+빠르게 손가락두는것과 그냥 손가락두는것의 차이를 알아야한다.
 */

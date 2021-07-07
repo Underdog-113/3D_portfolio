@@ -55,7 +55,7 @@ void CDongScene::Start(void)
 	spScrollView->GetTransform()->SetSize(_float3(200, 200, 0));
 	spScrollView->AddScrollViewData(5, _float2(123, 112), _float2(100, 100));
 
-	for (int i = 0; i <= 20; i++)
+	for (int i = 0; i <= 500; i++)
 	{
 		spScrollView->
 			AddButtonObjectData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::BattleEndScene, &CButtonFunction(), _float2(100, 100), L"", L"BgBlue_0", L"BgBlue_0");

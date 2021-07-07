@@ -105,5 +105,8 @@ private:
 
 	_float3 m_dir;
 	_float3 m_oldMousePos;
+	_float m_speed;
+
+	_bool m_chack;
 };
 #endif
