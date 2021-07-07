@@ -101,6 +101,7 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 		m_walkReady = false;
 		m_onSound = false;
 		m_onShoot = false;
+		m_onEffect = false;
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_RUN_B == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -151,6 +152,55 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 		m_onShoot = true;
 		m_firePosFix = false;
 		static_cast<CMO_Scout*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.48f);
+
+		// effect
+	}
+
+	/************************* Effect */
+	if (Name_SHOOT_3 == fsm->GetCurStateString() &&
+		0.09f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onEffect)
+	{
+		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+
+		_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);
+		D3DXVec3Normalize(&look, &look);
+
+		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset() + 0.4f;
+		m_atkMat._41 += (look.x / 2.4f);
+		m_atkMat._43 += (look.z / 2.4f);
+
+		_float3 a = { m_atkMat._41, m_atkMat._42, m_atkMat._43 };
+		_float3 b = { m_atkMat._41, m_atkMat._42, m_atkMat._43 };
+
+		_float3 right = { m_atkMat._11, m_atkMat._12, m_atkMat._13 };
+
+		a -= right / 1.5f;
+		b += right / 1.5f;
+
+		SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
+		spMeshEffect->GetTransform()->AddRotationY(PI);
+		spMeshEffect->GetTransform()->SetPosition(a);
+
+		spMeshEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
+		spMeshEffect->GetTransform()->AddRotationY(PI);
+		spMeshEffect->GetTransform()->SetPosition(b);
+
+		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutCircleRange", true);
+
+		m_onEffect = true;
 	}
 }
 
