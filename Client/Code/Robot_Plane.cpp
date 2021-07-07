@@ -58,7 +58,7 @@ void CRobot_Plane::Update()
 {
 	__super::Update();
 
-	m_spTransform->AddRotationY(3.f * GET_DT);
+	m_spTransform->AddRotationY(0.5f * GET_DT);
 
 }
 

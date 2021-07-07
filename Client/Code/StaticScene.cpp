@@ -44,6 +44,7 @@
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
 #include "SparkEffect.h"
+
 // Scout
 #include "Scout_Att_Range.h"
 #include "Scout_Att_Range_Hold.h"
@@ -59,6 +60,7 @@
 #include "MonsterAttackSign.h"
 #include "Sickle_Trail.h"
 #include "SpiderExplosion.h"
+
 // Kiana
 #include "Kiana_Trail.h"
 #include "Kiana_Ult_Trail.h"
@@ -84,7 +86,9 @@
 
 // Robot
 #include "RobotHookEff.h"
-
+#include "Robot_Plane.h"
+#include "Robot_Impact.h"
+#include "Robot_Impact_Smoke.h"
 
 #pragma endregion
 
@@ -452,5 +456,30 @@ void CStaticScene::InitEffectPrototypes(void)
 	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
 	spRobotHookEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spRobotHookEffect);
+
+	SP(CMeshEffect_Client) spRobotPlane(CRobot_Plane::Create(true, this));
+	spRobotPlane->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Plane");
+	spRobotPlane->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spRobotPlane->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spRobotPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"SkyColor");
+	spRobotPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"SkyColor");
+	spRobotPlane->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spRobotPlane);
+
+	SP(CSoftEffect) spRobotImpact(CRobot_Impact::Create(true, this));
+	spRobotImpact->GetComponent<Engine::CGraphicsC>();
+	spRobotImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"ImpactColor");
+	spRobotImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Effect_Wave07");
+	spRobotImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spRobotImpact);
+
+	SP(CMeshEffect_Client) spRobotImpactSmoke(CRobot_Impact_Smoke::Create(true, this));
+	spRobotImpactSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Impact");
+	spRobotImpactSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spRobotImpactSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spRobotImpactSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spRobotImpactSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
+	spRobotImpactSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spRobotImpactSmoke);
 
 }
