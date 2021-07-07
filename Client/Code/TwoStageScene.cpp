@@ -247,7 +247,7 @@ void CTwoStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
 	{
-		CBattleUiManager::GetInstance()->TargetUI(nullptr, 5.0f);
+		CBattleUiManager::GetInstance()->OnTargetUI(nullptr, 5.0f);
 	}
 
 	// 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
