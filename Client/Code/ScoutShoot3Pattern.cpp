@@ -12,7 +12,7 @@
 #include "PatternMachineC.h"
 #include "AttackBall.h"
 #include "StageControlTower.h"
-
+#include "ScoutBall.h"
 CScoutShoot3Pattern::CScoutShoot3Pattern()
 {
 }
@@ -23,6 +23,7 @@ CScoutShoot3Pattern::~CScoutShoot3Pattern()
 
 void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 {
+
 	_float3 tPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition(); // target pos
 	_float3 mPos = pOwner->GetTransform()->GetPosition(); // monster pos
 	_float len = D3DXVec3Length(&(tPos - mPos));
@@ -30,6 +31,10 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
+
+	m_spScoutBall = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+
+	std::dynamic_pointer_cast<CScoutBall>(m_spScoutBall)->SetFlyingBall(true);
 
 	// 내가 shoot3 상태가 아니면 상대를 추적
 	if (Name_SHOOT_3 != fsm->GetCurStateString())

@@ -208,6 +208,8 @@
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\RobotHookEff.h" />
+    <ClInclude Include="..\Header\Robot_Plane.h" />
     <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\ScoutCircleRange.h" />
     <ClInclude Include="..\Header\ScoutMeteor.h" />
@@ -458,6 +460,8 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\RobotHookEff.cpp" />
+    <ClCompile Include="..\Code\Robot_Plane.cpp" />
     <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
     <ClCompile Include="..\Code\ScoutMeteor.cpp" />

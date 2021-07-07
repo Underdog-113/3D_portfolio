@@ -82,6 +82,10 @@
 // Sakura
 #include "Sakura_Charge_Att.h"
 
+// Robot
+#include "RobotHookEff.h"
+
+
 #pragma endregion
 
 #pragma region Static setting
@@ -409,6 +413,11 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spScoutLaser);
 
 	SP(CMeshEffect_Client) spScoutBall(CScoutBall::Create(true, this));
+	spScoutBall->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
+	spScoutBall->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spScoutBall->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+	spScoutBall->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+	spScoutBall->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spScoutBall);
 
 	SP(CScoutMeteor) spScoutMeteor(CScoutMeteor::Create(true, this));
@@ -435,5 +444,13 @@ void CStaticScene::InitEffectPrototypes(void)
 	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
 	spScoutCircleRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spScoutCircleRange);
+
+	// Robot
+	SP(CSoftEffect) spRobotHookEffect(CRobotHookEff::Create(true, this));
+	spRobotHookEffect->GetComponent<Engine::CGraphicsC>();
+	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
+	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
+	spRobotHookEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spRobotHookEffect);
 
 }
