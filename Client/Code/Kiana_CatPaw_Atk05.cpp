@@ -135,7 +135,7 @@ void CKiana_CatPaw_Atk05::Render(LPD3DXEFFECT pEffect)
 
 void CKiana_CatPaw_Atk05::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CKiana_CatPaw_Atk05::OnDestroy(void)

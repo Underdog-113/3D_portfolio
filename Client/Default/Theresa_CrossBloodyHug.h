@@ -2,16 +2,18 @@
 #ifndef CROSSBLOODHUG_H
 #define CROSSBLOODHUG_H
 
+#include "Object.h"
 
-class CCrossBloodHug final : public Engine::CObject
+class CTheresa_CrossBlade;
+class CTheresa_CrossBloodyHug final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CCrossBloodHug();
-	~CCrossBloodHug();
+	CTheresa_CrossBloodyHug();
+	~CTheresa_CrossBloodyHug();
 public:
-	static			SP(CCrossBloodHug)		Create(_bool isStatic, Engine::CScene* pScene);
+	static			SP(CTheresa_CrossBloodyHug)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -43,9 +45,11 @@ protected:
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 				
-private:
+private:	
+	GETTOR			(SP(Engine::CObject),			m_spCrossBlade,		nullptr,	CrossBlade)
+
 	_float m_activeTimer = 0.f;
-	_float m_activeDuration = 1.5f;
+	_float m_activeDuration = 2.f;
 
 private:
 	_float m_fDissolveAlpha = 1.f;

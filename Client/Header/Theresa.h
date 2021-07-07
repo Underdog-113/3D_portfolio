@@ -54,10 +54,17 @@ public:
 					void					UseUltra			(void) override;
 
 private:
+					void					CreateCross			(void);
+
+private:
 	std::vector<Engine::_DerivedD3DXMESHCONTAINER*> m_vMeshContainers;
 	_uint idx = 0;
 	
 	GETTOR			(_bool,			m_chargeMode,			false,		ChargeMode)
+
+private:
+	
+	GETTOR			(SP(Engine::CObject),	m_spCrossBloodyHug,	nullptr,	CrossBloodyHug)
 
 private:	
 	GETTOR			(_mat*,			m_pLeftHand_World,		nullptr,	LeftHandWorldMatrix)

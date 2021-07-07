@@ -85,6 +85,8 @@ void CTheresa::Start(void)
 	CreateAttackBall(&m_pAttackBall_AxeStick);
 	CreateAttackBall(&m_pAttackBall_AxeImpact);
 
+	CreateCross();
+
 	if (m_isWait)
 	{
 		__super::FixedUpdate();
@@ -198,6 +200,10 @@ void CTheresa::UseSkill(void)
 	m_pStat->SetCurSp(curSp);
 
 	m_skillTimer = 0.f;
+
+	//test
+	m_spCrossBloodyHug->SetIsEnabled(true);
+	m_spCrossBloodyHug->GetTransform()->SetPosition(m_spTransform->GetPosition() + _float3(0, 1.f, 0));
 }
 
 void CTheresa::UseUltra(void)
@@ -208,4 +214,10 @@ void CTheresa::UseUltra(void)
 	m_pStat->SetCurSp(curSp);
 
 	m_ultraTimer = 0.f;
+}
+
+void CTheresa::CreateCross(void)
+{
+	m_spCrossBloodyHug = GetScene()->ADD_CLONE(L"Theresa_CrossBloodyHug", true, (_uint)ELayerID::Player, L"CrossBloodyHug");
+	m_spCrossBloodyHug->SetIsEnabled(false);
 }
