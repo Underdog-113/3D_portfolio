@@ -57,12 +57,10 @@ public:
 					void					UseUltraCost		(void);
 					void					UltraAtk			(AttackOption index);
 					void					UltraAtk_Ring		(AttackOption index);
-
-					void					SetUltraMode		(bool value);
-					void					UseWeaponSkill		(void);
-
-					_bool					CheckUltraUseable	(void);
-					_bool					CheckSkillUseable	(void);
+					
+public:
+					void					UseSkill			(void) override;
+					void					UseUltra			(void) override;
 										
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
@@ -83,7 +81,7 @@ private:
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk04,	nullptr, CatPaw_Ring_Atk04)
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk05,	nullptr, CatPaw_Ring_Atk05)
 
-	GETTOR			(_bool,					m_ultraMode,			false, UltraMode)
+	GETTOR_SETTOR	(_bool,					m_ultraMode,			false,	UltraMode)
 
 private:
 	

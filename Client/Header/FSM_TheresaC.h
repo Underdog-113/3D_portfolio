@@ -20,6 +20,10 @@
 #define Delay_Effect_Attack4_1	0.1f
 #define Delay_Effect_Attack4_2	0.3f
 
+#define Delay_Effect_Charge0	0.05f
+#define Delay_Effect_Charge1	0.15f
+#define Delay_Effect_Charge2	0.15f
+
 #define Panelty_Stun			1.5f
 
 class CTheresa;
@@ -59,7 +63,8 @@ private: /* Normal Actions */
 	bool CheckAction_Run_End();
 	bool CheckAction_StandBy();
 	bool CheckAction_RunBS_To_Run();
-	bool CheckAction_Ultra();
+	bool CheckAction_Ultra(float coolTime = 0.f);
+	bool CheckAction_WeaponSkill(float coolTime = 0.f);
 	bool CheckAction_Idle();
 
 private: /* Special Actions */
@@ -95,6 +100,7 @@ private:
 	bool m_ultraUsed = false;
 	bool m_ultraImpact = false;
 
+	bool m_checkAttack = false;
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
 	bool m_isEvade = false;

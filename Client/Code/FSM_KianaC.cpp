@@ -291,15 +291,18 @@ bool CFSM_KianaC::CheckAction_RunBS_To_Run()
 	return false;
 }
 
-bool CFSM_KianaC::CheckAction_Ultra()
+bool CFSM_KianaC::CheckAction_Ultra(float coolTime)
 {
-	if (Engine::IMKEY_DOWN(StageKey_Ult))
+	if (m_pDM->GetAniTimeline() > coolTime)
 	{
-		if (!m_pKiana->CheckUltraUseable())
-			return false;
-
-		ChangeState(Name_Ultra);
-		return true;
+		if (Engine::IMKEY_DOWN(StageKey_Ult))
+		{
+			if (m_pStageControlTower->ActUltra())
+			{
+				ChangeState(Name_Ultra);
+				return true;
+			}
+		}
 	}
 	return false;
 }
@@ -310,11 +313,11 @@ bool CFSM_KianaC::CheckAction_WeaponSkill(float coolTime)
 	{
 		if (Engine::IMKEY_DOWN(StageKey_WeaponSkill))
 		{
-			if (!m_pKiana->CheckSkillUseable())
-				return false;
-
-			ChangeState(Name_WeaponSkill);
-			return true;
+			if (m_pStageControlTower->ActSkill())
+			{
+				ChangeState(Name_WeaponSkill);
+				return true;
+			}
 		}
 	}
 	return false;
@@ -533,10 +536,11 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_1);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
+	ResetCheckMembers();
+
 	if (m_pKiana->GetUltraMode())
 		CStageControlTower::GetInstance()->SetCameraFarTake();
 
-	ResetCheckMembers();
 }
 
 void CFSM_KianaC::Attack_1_Update(float deltaTime)
@@ -557,7 +561,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 	{
 		m_pEffectMaker->CreateEffect_Attack1();
 		PlaySound_Attack_RandomVoice();
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.1f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_0);
@@ -574,7 +578,9 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 		return;
 	if (CheckAction_Attack(Name_Attack_2, 0.3f))
 		return;
-	if (CheckAction_WeaponSkill(0.3f))
+	if (CheckAction_Ultra(Delay_Effect_Atk01 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Atk01 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -619,7 +625,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		m_checkEffect = true;
 		
 		PlaySound_Attack_RandomVoice();
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.2f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 		
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_1);
@@ -636,7 +642,9 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		return;
 	if (CheckAction_Attack(Name_Attack_3))
 		return;
-	if (CheckAction_WeaponSkill(0.15f))
+	if (CheckAction_Ultra(Delay_Effect_Atk02 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Atk02 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -679,7 +687,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		m_checkEffect = true;
 
 		PlaySound_Attack_RandomVoice();
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.3f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_1);
@@ -693,7 +701,9 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		return;
 	if (CheckAction_Attack(Name_Attack_4))
 		return;
-	if (CheckAction_WeaponSkill(0.15f))
+	if (CheckAction_Ultra(Delay_Effect_Atk03 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Atk03 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -743,7 +753,7 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 	if (!m_checkAttack &&  m_pDM->GetAniTimeline() > 0.1)
 	{
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(0.8f, HitInfo::Str_Airborne, HitInfo::CC_Airborne, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
@@ -755,7 +765,9 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 		ChangeState(Name_Attack_4_Branch);
 		return;
 	}
-	if (CheckAction_WeaponSkill(0.3f))
+	if (CheckAction_WeaponSkill(0.15f))
+		return;
+	if (CheckAction_Ultra(0.15f))
 		return;
 	if (CheckAction_Evade_OnAction())
 		return;
@@ -812,7 +824,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 	if (!m_checkEffectSecond && !m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Atk04 + 0.05f)
 	{
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(0.9f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
@@ -827,7 +839,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Atk04 + 0.15f)
 	{
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.4f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
@@ -838,7 +850,9 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 		return;
 	if (CheckAction_Attack(Name_Attack_5))
 		return;
-	if (CheckAction_WeaponSkill(0.15f))
+	if (CheckAction_WeaponSkill(Delay_Effect_Atk04 + 0.2f))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Atk04 + 0.2f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -937,7 +951,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 		m_checkEffect = true;
 
 		PlaySound_Attack_RandomVoice();
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_3);
@@ -1366,6 +1380,10 @@ void CFSM_KianaC::RunBS_Update(float deltaTime)
 		return;
 	if (CheckAction_Attack(Name_Attack_1, 0.f))
 		return;
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
 }
 
 void CFSM_KianaC::RunBS_End(void)
@@ -1444,7 +1462,6 @@ void CFSM_KianaC::WeaponSkill_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_WeaponSkill);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
-	m_pKiana->UseWeaponSkill();
 }
 
 void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
@@ -1488,11 +1505,11 @@ void CFSM_KianaC::SwitchIn_Enter(void)
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 {
-	if (m_pDM->GetAniTimeline() > 0.5f)
-	{
-		ChangeState(Name_Attack_QTE);
-		return;
-	}
+// 	if (m_pDM->GetAniTimeline() > 0.5f)
+// 	{
+// 		ChangeState(Name_Attack_QTE);
+// 		return;
+// 	}
 
 	if (CheckAction_StandBy_Timeout())
 		return;

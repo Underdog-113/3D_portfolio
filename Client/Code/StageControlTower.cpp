@@ -133,6 +133,34 @@ void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
 	m_pPhaseControl->ChangePhase((_int)phaseType);
 }
 
+void CStageControlTower::ActAttack()
+{
+}
+
+void CStageControlTower::ActEvade()
+{
+}
+
+bool CStageControlTower::ActSkill()
+{
+	if (!m_pCurActor->CheckSkillUseable())
+		return false;
+
+	m_pCurActor->UseSkill();
+	m_pLinker->Skill();
+	return true;
+}
+
+bool CStageControlTower::ActUltra()
+{
+	if (!m_pCurActor->CheckUltraUseable())
+		return false;
+
+	m_pCurActor->UseUltra();
+	m_pLinker->Ultra();
+	return true;
+}
+
 void CStageControlTower::FindTarget()
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];

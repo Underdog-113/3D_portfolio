@@ -60,6 +60,11 @@ public:		/* Phase */
 
 
 public:		/* Battle */
+	void ActAttack();
+	void ActEvade();
+	bool ActSkill();
+	bool ActUltra();
+
 	void FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);

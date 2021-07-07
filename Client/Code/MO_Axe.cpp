@@ -103,7 +103,7 @@ void CMO_Axe::ChaseTarget(_float3 targetPos)
 	_float3 dir = targetPos - m_spTransform->GetPosition();
 	dir.y = 0; D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 SP(CMO_Axe) CMO_Axe::Create(_bool isStatic, Engine::CScene * pScene)

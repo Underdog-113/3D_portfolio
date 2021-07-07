@@ -2,7 +2,7 @@
 
 #define NearTake 1.5f
 #define MidTake 3.f
-#define FarTake 4.f
+#define FarTake 5.f
 
 #define NearAngle 0.f
 #define MidAngle D3DXToRadian(10.f)

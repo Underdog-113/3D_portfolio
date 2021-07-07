@@ -49,7 +49,9 @@ public:
 					void					Off_Axe				(void);
 					
 					void					SetChargeMode		(bool value);
-					
+public:
+					void					UseSkill			(void) override;
+					void					UseUltra			(void) override;
 
 private:
 	std::vector<Engine::_DerivedD3DXMESHCONTAINER*> m_vMeshContainers;

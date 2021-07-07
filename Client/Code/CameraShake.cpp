@@ -76,12 +76,12 @@ void CCameraShake::Preset_LowAttack(_float3 eventPos)
 	float randomOffset = 0.f;
 	
 	randomOffset = (rand() % 100) / 100.f;
-	m_xWave.amplitude = 0.04f;
+	m_xWave.amplitude = 0.03f;
 	m_xWave.frequency = 20.f;
 	m_xWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	m_yWave.amplitude = 0.04f;
+	m_yWave.amplitude = 0.03f;
 	m_yWave.frequency = 20.f;
 	m_yWave.offset = randomOffset;
 

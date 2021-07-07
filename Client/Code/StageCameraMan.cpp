@@ -156,6 +156,11 @@ void CStageCameraMan::SetMidTake()
 
 void CStageCameraMan::SetFarTake()
 {
+	if (m_curTakeType == Far)
+	{
+		m_gotoNextTakeTimer = 0.f;
+		return;
+	}
 	if (m_curTakeType == Change && m_nextTakeType == Far)
 		return;
 
@@ -163,7 +168,7 @@ void CStageCameraMan::SetFarTake()
 	m_nextTakeType = Far;
 	m_dstMaxDist = FarTake;
 	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 2.f;
+	m_changeTakeSpeed = 2.5f;
 	m_rotateXDst = FarAngle;
 }
 

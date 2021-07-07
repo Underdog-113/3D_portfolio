@@ -147,6 +147,7 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 	}
 
 	// crowd control
+
 }
 
 void CMO_Sickle::FindRightHand()

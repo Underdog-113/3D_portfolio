@@ -1,19 +1,17 @@
 #pragma once
-#ifndef SAKURA_H
-#define SAKURA_H
+#ifndef CROSSBLOODHUG_H
+#define CROSSBLOODHUG_H
 
 
-#include "Valkyrie.h"
-class CSakura final : public CValkyrie
+class CCrossBloodHug final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
-private:
-	CSakura();
-	~CSakura();
-
 public:
-	static			SP(CSakura)				Create(_bool isStatic, Engine::CScene* pScene);
+	CCrossBloodHug();
+	~CCrossBloodHug();
+public:
+	static			SP(CCrossBloodHug)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -34,19 +32,25 @@ public:
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
 
+public:
 					void					SetBasicName		(void) override;
 
-					void					ApplyHitInfo		(HitInfo info) override;
-					
-public:
-					void					UseSkill			(void) override;
-					void					UseUltra			(void) override;
-public:
-	
-	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
+
+protected:
+	static			_uint							m_s_uniqueID;
+	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
+	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
+	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
+	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+				
+private:
+	_float m_activeTimer = 0.f;
+	_float m_activeDuration = 1.5f;
 
 private:
-	_uint idx = 0;
+	_float m_fDissolveAlpha = 1.f;
 };
 
-#endif
+
+
+#endif // CROSSBLOODHUG_H
