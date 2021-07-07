@@ -143,7 +143,7 @@ void CYongScene::Update(void)
 		//SP(Engine::CObject) spMeshEffect = m_pObjectFactory->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
 	
 
-		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutCircleRange", true);
+		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact", true);
 	
 		/*	SP(CMonsterSpawnBeam) spMeshEffect =
 				std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
