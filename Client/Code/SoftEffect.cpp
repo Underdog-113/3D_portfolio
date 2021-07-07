@@ -23,7 +23,6 @@ void CSoftEffect::Awake(void)
 	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spTexture = AddComponent<Engine::CTextureC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
-
 	m_spTransform->SetCheckCamDistance(true);
 
 }

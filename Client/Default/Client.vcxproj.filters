@@ -760,8 +760,17 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball">
       <UniqueIdentifier>{b8c0882e-f095-4a65-8ffd-956901dc2cc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\12.OutlineShader">
-      <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
+<Filter Include="04.Shader\12.OutlineShader">
+  <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
+</Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\02.Spark">
+      <UniqueIdentifier>{60fcde3a-32ea-4af4-9111-460e9d900e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor">
+      <UniqueIdentifier>{c351ef75-90cc-4cf9-9b3b-f27b1de2b26e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range">
+      <UniqueIdentifier>{ebed8560-5517-420c-a919-68a3f3c4ae7e}</UniqueIdentifier>
     </Filter>
     <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
       <UniqueIdentifier>{bafd16d1-7ce7-4c77-80bd-e2a0a7e20931}</UniqueIdentifier>
@@ -1507,17 +1516,25 @@
     <ClInclude Include="..\Header\Scout_Laser.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\OutlineShader.h">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutMeteor.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutBall.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\TwoStagePhaseControl.h">
       <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SparkEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutCircleRange.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2167,6 +2184,9 @@
     <ClCompile Include="..\Code\SpiderExplosion.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\SpiderExplosion.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
     </ClCompile>
@@ -2179,17 +2199,25 @@
     <ClCompile Include="..\Code\Scout_Laser.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutMeteor.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutBall.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SparkEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
       <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

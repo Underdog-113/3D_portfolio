@@ -37,6 +37,8 @@ protected:
 	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
 	GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+	GETTOR(SP(Engine::CCollisionC), m_spCollision, nullptr, Collision)
+
 	GETTOR_SETTOR(_float, m_fAlphaWidth, 0.f, AlphaWIdth)
 	GETTOR_SETTOR(_float, m_fAlphaHeight, 0.f, AlphaHeight)
 	GETTOR_SETTOR(_int, m_maxXIndex, 0, maxXIndex)

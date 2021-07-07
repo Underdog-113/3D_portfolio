@@ -240,25 +240,33 @@ void CGraphicsManager::RenderNonAlpha(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
-				SP(CComponent) spShader = pObject->GetComponent<CShaderC>();
-				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
+				const std::vector<CShader*>& vShader = spShader->GetShaders();
 
-				for (_size i = 0; i < vShader.size(); ++i)
+
+				if (spShader->GetShaderPerSubset() == false)
 				{
-					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-					_uint maxPass = 0;
-					pEffect->Begin(&maxPass, 0);
-					for (_uint i = 0; i < maxPass; ++i)
+					for (_size i = 0; i < vShader.size(); ++i)
 					{
-						pEffect->BeginPass(i);
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-						pEffect->EndPass();
+						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+						for (_uint i = 0; i < maxPass; ++i)
+						{
+							pEffect->BeginPass(i);
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+							pEffect->EndPass();
+						}
+						pEffect->End();
 					}
-					pEffect->End();
+				}
+				else
+				{
+
 				}
 			}
 		}
