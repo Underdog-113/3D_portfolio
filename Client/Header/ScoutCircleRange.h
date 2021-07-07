@@ -1,16 +1,16 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
-class CScoutBall
-	: public CMeshEffect_Client
+class CScoutCircleRange : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
-public:
-	CScoutBall();
-	~CScoutBall();
 
 public:
-	static		SP(CScoutBall)			Create(_bool isStatic, Engine::CScene* pScene);
+	CScoutCircleRange();
+	~CScoutCircleRange();
+
+public:
+	static		SP(CScoutCircleRange)			Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject) MakeClone() override;
 
@@ -31,9 +31,12 @@ public:
 	void SetBasicName()override;
 
 private:
+	_float m_fSize = 0.f;
+	_bool  m_bSpawn = false;
+private:
 	static		_uint m_s_uniqueID;
 
-public:
-	GETTOR_SETTOR(_bool, m_bFlyingBall, false, FlyingBall);
+private:
+	SP(Engine::CObject) m_spScoutMeteor;
 };
 

@@ -42,8 +42,8 @@ void CMO_Scout::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_ScoutC>();
 	m_spPatternMachine->AddNecessaryPatterns(CScoutBornPattern::Create(), CScoutDiePattern::Create(), CScoutBasePattern::Create(), CScoutHitPattern::Create());
-	m_spPatternMachine->AddPattern(CScoutShoot2Pattern::Create());
-	//m_spPatternMachine->AddPattern(CScoutShoot3Pattern::Create());
+	//m_spPatternMachine->AddPattern(CScoutShoot2Pattern::Create());
+	m_spPatternMachine->AddPattern(CScoutShoot3Pattern::Create());
 }
 
 void CMO_Scout::Start(void)
@@ -160,7 +160,7 @@ void CMO_Scout::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 void CMO_Scout::SetStatus(BaseStat stat)

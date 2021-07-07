@@ -1,16 +1,16 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
-class CScoutBall
-	: public CMeshEffect_Client
+class CRobot_Plane : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
-public:
-	CScoutBall();
-	~CScoutBall();
+
+private:
+	CRobot_Plane();
+	~CRobot_Plane();
 
 public:
-	static		SP(CScoutBall)			Create(_bool isStatic, Engine::CScene* pScene);
+	static		SP(CRobot_Plane)			Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject) MakeClone() override;
 
@@ -32,8 +32,5 @@ public:
 
 private:
 	static		_uint m_s_uniqueID;
-
-public:
-	GETTOR_SETTOR(_bool, m_bFlyingBall, false, FlyingBall);
 };
 
