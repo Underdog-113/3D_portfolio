@@ -17,6 +17,7 @@
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
+#include "TwoStagePhaseControl.h"
 #include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
@@ -60,6 +61,7 @@ void CStageControlTower::Update(void)
 		m_spCurTarget.reset();
 		m_spCurTarget = nullptr;
 	}
+
 
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))

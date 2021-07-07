@@ -201,24 +201,6 @@ void CWooScene::SickleSetting(void)
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 
 	//////////////////
-
-	//SP(CMonsterSpawnBeam) spMeshEffect =
-	//	std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
-
-	//spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
-	//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-	//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-	//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-	//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	//spMeshEffect->GetCollision()->AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
-
-
-
-	//spSickleClone->GetTransform()->SetPosition(0, 0, 3);
-
-
-	//////////////////
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
 	m_vSickles.emplace_back(spSickleClone);
 

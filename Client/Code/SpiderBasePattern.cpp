@@ -90,17 +90,19 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 		// effect
 		SP(Engine::CObject) spSoftEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spider_Explosion");
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spider_Explosion");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
 		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 		spSoftEffect->GetTransform()->SetPosition(mPos);
-		spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.3f);
+		spSoftEffect->GetTransform()->SetPositionY(mPos.x - 0.1f);
+		spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
+		spSoftEffect->GetTransform()->SetSize(11.f, 9.f, 0.f);
 	}
 	// 공격1 상태라면
 	else if (Name_Attack_1 == fsm->GetCurStateString() && 0.89f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_explosionPosMat = pOwner->GetTransform()->GetWorldMatrix();
-		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat, 3.f);
+		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat, 2.8f);
 
 		if (false == m_onSound)
 		{

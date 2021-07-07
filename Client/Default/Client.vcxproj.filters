@@ -772,6 +772,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range">
       <UniqueIdentifier>{ebed8560-5517-420c-a919-68a3f3c4ae7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
+      <UniqueIdentifier>{bafd16d1-7ce7-4c77-80bd-e2a0a7e20931}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff">
       <UniqueIdentifier>{0910b4d3-2a6a-487e-8dfb-d5f5f4423cee}</UniqueIdentifier>
     </Filter>
@@ -780,6 +783,12 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane">
       <UniqueIdentifier>{0aca0ce5-27b1-42a5-8dd0-e0f554705b6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke">
+      <UniqueIdentifier>{10f1d217-74cc-4ab9-9b7b-e9c06c37ff2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact">
+      <UniqueIdentifier>{5926fddd-4ee8-4a44-9e77-503e0c1204d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1525,7 +1534,6 @@
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\OutlineShader.h">
       <Filter>04.Shader\12.OutlineShader</Filter>
     </ClInclude>
@@ -1534,6 +1542,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\ScoutBall.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SparkEffect.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
@@ -1544,7 +1555,15 @@
     <ClInclude Include="..\Header\RobotHookEff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\Robot_Plane.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2212,7 +2231,6 @@
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp">
       <Filter>04.Shader\12.OutlineShader</Filter>
     </ClCompile>
@@ -2225,13 +2243,24 @@
     <ClCompile Include="..\Code\SparkEffect.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\ScoutCircleRange.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RobotHookEff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\Robot_Plane.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Impact.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

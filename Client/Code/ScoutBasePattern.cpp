@@ -35,7 +35,8 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	// 이번 패턴 동안 몇 번 이동을 바꿀 건지 정함
 	if (0 == m_moveCnt && true == m_walkReady)
 	{
-		m_moveCnt = GetRandRange(1, m_maxMoveCnt);
+		//m_moveCnt = GetRandRange(1, m_maxMoveCnt);
+		m_moveCnt = 1;
 	}
 
 	if (true == m_walkReady && 

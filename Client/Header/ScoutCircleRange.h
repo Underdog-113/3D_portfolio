@@ -31,6 +31,10 @@ public:
 	void SetBasicName()override;
 
 private:
+	GETTOR_SETTOR(Engine::CObject*, m_pBallShooter, nullptr, BallShooter)
+	GETTOR_SETTOR(EChannelID, m_channelID, EChannelID::NumOfChannelID, ChannelID)
+	GETTOR_SETTOR(_mat, m_atkMat, {}, AtkMat)
+
 	_float m_fSize = 0.f;
 	_bool  m_bSpawn = false;
 private:

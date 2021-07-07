@@ -63,6 +63,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			fsm->ChangeState(Name_RUN_B);
 			m_onChase = true;
+			m_onEffect = false;
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_IDLE == fsm->GetCurStateString() &&
