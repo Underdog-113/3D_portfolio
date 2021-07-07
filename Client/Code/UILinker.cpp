@@ -285,12 +285,12 @@ void CUILinker::OnTargetMarker(void)
 {
 	auto pTarget = CStageControlTower::GetInstance()->GetCurrentTarget();
 	if(pTarget)
-		m_pUIManager->TargetUI(pTarget, 3.f);
+		m_pUIManager->OnTargetUI(pTarget, 3.f);
 }
 
 void CUILinker::OffTargetMarker(void)
 {
-	//m_pUIManager->
+	m_pUIManager->OffTargetUI();
 }
 
 void CUILinker::MonsterInfoSet()
@@ -304,6 +304,11 @@ void CUILinker::MonsterInfoSet()
 	_int hpMagnification = pStat->GetHPMagnification();
 
 	m_pUIManager->MonsterState(name, maxHp, hp, hpMagnification, monsterProperty);
+}
+
+void CUILinker::OffMonsterInfo(void)
+{
+	m_pUIManager->MonsterStateEnd();
 }
 
 void CUILinker::MonsterHpSet()

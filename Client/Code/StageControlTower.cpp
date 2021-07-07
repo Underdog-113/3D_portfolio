@@ -163,7 +163,7 @@ void CStageControlTower::FindTarget()
 	
 	for (auto& iter : monsterList)
 	{
-		if(!iter->GetIsEnabled())
+		if(!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
 			continue;
 
 		_float3 monsterPos = iter->GetTransform()->GetPosition();
@@ -229,7 +229,13 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	
 	if (isDead)
 	{
-		// two many things
+		if (m_spCurTarget.get() == pM)
+		{
+			m_spCurTarget = nullptr;
+			m_pLinker->OffTargetMarker();
+			m_pLinker->OffMonsterInfo();
+		}
+
 		pM->MonsterDead();
 	}
 	else
@@ -298,6 +304,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	default:
 		break;
 	}
+
+	if (info.GetStrengthType() == HitInfo::Str_High)
+		m_pTimeSeeker->OnAttackImpactSlow();
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
@@ -391,10 +400,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 
 	m_pCurActor->SetIsEnabled(true);
-	if(m_spCurTarget)
-		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Attack_QTE");
-	else
-		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 
 	m_pCameraMan->SetIsSwitching(true);
 }

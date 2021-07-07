@@ -57,8 +57,8 @@ void CStageCameraMan::UpdateCameraMan()
 
 	if (m_pCameraShake->IsShaking()) 
 	{
-		camTr->SetPosition(m_noShakePos);		// 카메라 쉐이크 원상복구
-		camTr->SetRotation(m_noShakeRot);		// 쉐이크 이외의 이동, 회전값을 적용해야함
+		camTr->AddPosition(-m_pCameraShake->GetLocationOscilation());
+		camTr->SetPosition(m_noShakeRot);
 	}
 
 	PivotChasing();
@@ -76,9 +76,10 @@ void CStageCameraMan::UpdateCameraMan()
 	{
 		m_pCameraShake->PlayShake();
 
-		m_noShakePos = camTr->GetPosition();	// 카메라 쉐이크 이동값 기억
+		m_noShakePos = m_spCamera->GetShakePosOffset();
 		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
-		camTr->AddPosition(m_pCameraShake->GetLocationOscilation());
+		
+		m_spCamera->SetShakePosOffset(m_pCameraShake->GetLocationOscilation());
 
 		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
 		camTr->AddRotation(rotOscilation);
@@ -86,6 +87,10 @@ void CStageCameraMan::UpdateCameraMan()
 		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
 		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
 		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
+	}
+	else
+	{
+		m_spCamera->SetShakePosOffset(ZERO_VECTOR);
 	}
 }
 
@@ -393,7 +398,7 @@ void CStageCameraMan::AutoControlMode()
 
 void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)
 {
-	m_pCameraShake->Preset_Low(eventPos);
+	m_pCameraShake->Preset_LowAttack(eventPos);
 }
 
 

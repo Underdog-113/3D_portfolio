@@ -18,6 +18,7 @@ CTimeSeeker::~CTimeSeeker()
 void CTimeSeeker::UpdateTimeSeeker()
 {
 	PlayPerfectEvadeMode();
+	PlayAttackImpactSlow();
 }
 
 void CTimeSeeker::OnPerfectEvadeMode()
@@ -60,4 +61,30 @@ _float CTimeSeeker::GetPlayerDeltaTime()
 		return GET_DT;
 
 	return GET_PURE_DT;
+}
+
+void CTimeSeeker::OnAttackImpactSlow()
+{
+	m_isAttackImpactSlow = true;
+	m_slowTimer = 0.f;
+
+	Engine::CFRC::GetInstance()->SetDtCoef(0.1f);
+
+	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+	pActor->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetIsAdvanceByPure(false);
+}
+
+void CTimeSeeker::PlayAttackImpactSlow()
+{
+	if (m_isAttackImpactSlow)
+	{
+		m_slowTimer += GET_PURE_DT;
+		if (m_slowTimer > 0.2f)
+		{
+			m_isAttackImpactSlow = false;
+			Engine::CFRC::GetInstance()->SetDtCoef(1.f);
+			auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+			pActor->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetIsAdvanceByPure(true);
+		}
+	}
 }

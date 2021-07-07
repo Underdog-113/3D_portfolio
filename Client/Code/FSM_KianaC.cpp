@@ -1449,13 +1449,11 @@ void CFSM_KianaC::WeaponSkill_Enter(void)
 
 void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction())
+	if (CheckAction_Evade_OnAction(0.4f))
 		return;
-	if (CheckAction_Run())
+	if (CheckAction_Run(0.4f))
 		return;
-	if (CheckAction_Attack(Name_Attack_1, 0.f))
-		return;
-	if (CheckAction_Ultra())
+	if (CheckAction_Attack(Name_Attack_1, 0.4f))
 		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
@@ -1490,6 +1488,12 @@ void CFSM_KianaC::SwitchIn_Enter(void)
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 {
+	if (m_pDM->GetAniTimeline() > 0.5f)
+	{
+		ChangeState(Name_Attack_QTE);
+		return;
+	}
+
 	if (CheckAction_StandBy_Timeout())
 		return;
 }
