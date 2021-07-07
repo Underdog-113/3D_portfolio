@@ -68,7 +68,7 @@ public:		/* Battle */
 
 	void SwitchValkyrie(Squad_Role role);
 
-
+	void SetCameraFarTake();
 	void OffCameraTargeting();
 	void EndSwitching();
 

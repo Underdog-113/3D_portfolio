@@ -55,7 +55,8 @@ public:
 	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
 		_int specialSP);
 	
-	void TargetUI(SP(Engine::CObject) object, _float value);
+	void OnTargetUI(SP(Engine::CObject) object, _float value);
+	void OffTargetUI();
 
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);

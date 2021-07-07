@@ -21,14 +21,23 @@ public:
 	
 	_float AdvanceSinWave(Wave wave);
 
-public:
-	void Preset_Low(_float3 eventPos);
-	void Preset_High(_float3 eventPos);
+public:	/* Player Action */
+	void Preset_LowAttack(_float3 eventPos);	// kiana base attack, theresa base attack
+	void Preset_HighAttack_Vert(_float3 eventPos); // cat paw attack_5, theresa axe down
+	void Preset_HighAttack_Horz(_float3 eventPos); // theresa axe horz
+
+	void Preset_Theresa_UltImpact();
+
+public: /* Enemy Action */
 	void Preset_Boom(_float3 eventPos);
 	
 	void Preset_Run();
 
 	void SetDistanceRate(_float3 eventPos);
+
+private:
+	void ResetRotMember();
+	void ResetLocMember();
 
 private:
 	GETTOR_SETTOR(SP(Engine::CCamera), m_spCamera, nullptr, Camera)

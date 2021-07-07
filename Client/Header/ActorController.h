@@ -22,6 +22,7 @@ private:	/* Actor Move */
 
 public:
 	void TargetingOn();
+	void LookHittedDirection(_float3 hitPos);
 
 private:
 

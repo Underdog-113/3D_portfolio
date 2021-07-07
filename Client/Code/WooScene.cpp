@@ -81,7 +81,7 @@ void CWooScene::Start(void)
 	ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
 	//LancerSetting();
 	//RobotSetting();
-	//NinzaSetting();
+	NinzaSetting();
 	//BronyaSetting();
 }
 

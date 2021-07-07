@@ -112,6 +112,9 @@ void CKiana::Start(void)
 		__super::LateUpdate();
 		SetIsEnabled(false);
 	}
+
+	m_skillTimer = m_pStat->GetSkillCoolTime();
+	m_ultraTimer = m_pStat->GetUltraCoolTime();
 }
 
 void CKiana::FixedUpdate(void)
@@ -133,6 +136,11 @@ void CKiana::Update(void)
 	if (m_ultraMode)
 		UseUltraCost();
 
+	if(m_ultraTimer < m_pStat->GetUltraCoolTime())
+		m_ultraTimer += GET_PLAYER_DT;
+
+	if (m_skillTimer < m_pStat->GetSkillCoolTime())
+		m_skillTimer += GET_PLAYER_DT;
 }
 
 void CKiana::LateUpdate(void)
@@ -229,7 +237,7 @@ void CKiana::CreateCatPaw(void)
 void CKiana::UseUltraCost(void)
 {
 	_float curSp = m_pStat->GetCurSp();
-	//curSp -= 10.f * GET_PLAYER_DT;
+	curSp -= 10.f * GET_PLAYER_DT;
 
 	if (curSp < 0.f)
 	{
@@ -447,4 +455,39 @@ void CKiana::SetUltraMode(bool value)
 
 	if (m_ultraMode)
 		m_pCT->GetUILinker()->Ultra();
+
+	m_ultraTimer = 0.f;
+}
+
+void CKiana::UseWeaponSkill(void)
+{
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= m_pStat->GetSkillCost();
+	
+	m_pStat->SetCurSp(curSp);
+	m_pCT->GetUILinker()->Skill();
+
+	m_skillTimer = 0.f;
+}
+
+_bool CKiana::CheckUltraUseable(void)
+{
+	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
+		return false;
+
+	if (m_pStat->GetCurSp() < m_pStat->GetUltraCost())
+		return false;
+
+	return true;
+}
+
+_bool CKiana::CheckSkillUseable(void)
+{
+	if (m_skillTimer < m_pStat->GetSkillCoolTime())
+		return false;
+
+	if (m_pStat->GetCurSp() < m_pStat->GetSkillCost())
+		return false;
+
+	return true;
 }

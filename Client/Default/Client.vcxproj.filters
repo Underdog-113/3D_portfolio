@@ -784,6 +784,12 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane">
       <UniqueIdentifier>{0aca0ce5-27b1-42a5-8dd0-e0f554705b6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke">
+      <UniqueIdentifier>{10f1d217-74cc-4ab9-9b7b-e9c06c37ff2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact">
+      <UniqueIdentifier>{5926fddd-4ee8-4a44-9e77-503e0c1204d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1549,7 +1555,15 @@
     <ClInclude Include="..\Header\RobotHookEff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\Robot_Plane.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2238,7 +2252,15 @@
     <ClCompile Include="..\Code\RobotHookEff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\Robot_Plane.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Impact.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
