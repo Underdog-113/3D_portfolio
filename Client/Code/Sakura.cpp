@@ -48,19 +48,19 @@ void CSakura::Awake(void)
 
 void CSakura::Start(void)
 {
-	__super::Start();
-
-	m_spMesh->OnRootMotion();
-	m_spDebug = AddComponent<Engine::CDebugC>();
-
-	m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
-
 	// status
 	V_WarshipStat stat;
 
 	m_pStat = new V_Sakura_Stat;
 	m_pStat->SetType(V_Stat::SAKURA);
 	m_pStat->SetupStatus(&stat);
+
+	__super::Start();
+
+	m_spMesh->OnRootMotion();
+	m_spDebug = AddComponent<Engine::CDebugC>();
+
+	m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
 
 	if (m_isWait)
 	{
@@ -69,6 +69,7 @@ void CSakura::Start(void)
 		__super::LateUpdate();
 		SetIsEnabled(false);
 	}
+
 }
 
 void CSakura::FixedUpdate(void)
@@ -135,5 +136,13 @@ void CSakura::SetBasicName(void)
 }
 
 void CSakura::ApplyHitInfo(HitInfo info)
+{
+}
+
+void CSakura::UseSkill(void)
+{
+}
+
+void CSakura::UseUltra(void)
 {
 }

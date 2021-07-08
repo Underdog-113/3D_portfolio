@@ -134,6 +134,8 @@ void CMO_Sickle::SetBasicName(void)
 
 void CMO_Sickle::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
@@ -151,6 +153,7 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 	}
 
 	// crowd control
+
 }
 
 void CMO_Sickle::FindRightHand()

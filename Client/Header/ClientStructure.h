@@ -26,6 +26,9 @@
 		GETTOR_SETTOR(_float,		damageRate,	1.f,	DamageRate)
 		GETTOR_SETTOR(Strength,		strength,	Str_Damage,	StrengthType)
 		GETTOR_SETTOR(CrowdControl,	statEffect, CC_None,	CrowdControlType)
+
+		GETTOR_SETTOR(_float,		breakDamage,	20.f,	BreakDamage)
+
 	}HitInfo;
 
 	typedef struct _ItemSave

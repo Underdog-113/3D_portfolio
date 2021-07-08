@@ -77,6 +77,12 @@ void CKiana::Awake(void)
 
 void CKiana::Start(void)
 {
+	// status
+	V_WarshipStat stat;
+
+	m_pStat = new V_Kiana_Stat;
+	m_pStat->SetupStatus(&stat);
+
 	__super::Start();
 	m_spDebug = AddComponent<Engine::CDebugC>();
 
@@ -99,12 +105,6 @@ void CKiana::Start(void)
 	//catpaw
 	CreateCatPaw();
 
-	// status
-	V_WarshipStat stat;
-
-	m_pStat = new V_Kiana_Stat;
-	m_pStat->SetupStatus(&stat);
-
 	if (m_isWait)
 	{
 		__super::FixedUpdate();
@@ -113,8 +113,6 @@ void CKiana::Start(void)
 		SetIsEnabled(false);
 	}
 
-	m_skillTimer = m_pStat->GetSkillCoolTime();
-	m_ultraTimer = m_pStat->GetUltraCoolTime();
 }
 
 void CKiana::FixedUpdate(void)
@@ -124,8 +122,6 @@ void CKiana::FixedUpdate(void)
 
 void CKiana::Update(void)
 {
-	//Update_WeaponTransform();
-
 	__super::Update();
 
 	UpdatePivotMatrix(m_pLeftToe_World, m_pLeftToe_Frame);
@@ -135,12 +131,6 @@ void CKiana::Update(void)
 
 	if (m_ultraMode)
 		UseUltraCost();
-
-	if(m_ultraTimer < m_pStat->GetUltraCoolTime())
-		m_ultraTimer += GET_PLAYER_DT;
-
-	if (m_skillTimer < m_pStat->GetSkillCoolTime())
-		m_skillTimer += GET_PLAYER_DT;
 }
 
 void CKiana::LateUpdate(void)
@@ -449,45 +439,17 @@ void CKiana::UltraAtk_Ring(AttackOption index)
 	}
 }
 
-void CKiana::SetUltraMode(bool value)
-{
-	m_ultraMode = value;
-
-	if (m_ultraMode)
-		m_pCT->GetUILinker()->Ultra();
-
-	m_ultraTimer = 0.f;
-}
-
-void CKiana::UseWeaponSkill(void)
+void CKiana::UseSkill(void)
 {
 	_float curSp = m_pStat->GetCurSp();
 	curSp -= m_pStat->GetSkillCost();
-	
+
 	m_pStat->SetCurSp(curSp);
-	m_pCT->GetUILinker()->Skill();
 
 	m_skillTimer = 0.f;
 }
 
-_bool CKiana::CheckUltraUseable(void)
+void CKiana::UseUltra(void)
 {
-	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
-		return false;
-
-	if (m_pStat->GetCurSp() < m_pStat->GetUltraCost())
-		return false;
-
-	return true;
-}
-
-_bool CKiana::CheckSkillUseable(void)
-{
-	if (m_skillTimer < m_pStat->GetSkillCoolTime())
-		return false;
-
-	if (m_pStat->GetCurSp() < m_pStat->GetSkillCost())
-		return false;
-
-	return true;
+	m_ultraTimer = 0.f;
 }

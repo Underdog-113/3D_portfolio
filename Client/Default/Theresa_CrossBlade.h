@@ -1,19 +1,14 @@
 #pragma once
-#ifndef SAKURA_H
-#define SAKURA_H
 
+#include "Object.h"
 
-#include "Valkyrie.h"
-class CSakura final : public CValkyrie
+class CTheresa_CrossBlade :	public Engine::CObject
 {
-	SMART_DELETER_REGISTER
-
-private:
-	CSakura();
-	~CSakura();
-
 public:
-	static			SP(CSakura)				Create(_bool isStatic, Engine::CScene* pScene);
+	CTheresa_CrossBlade();
+	~CTheresa_CrossBlade();
+public:
+	static			SP(CTheresa_CrossBlade)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -34,19 +29,17 @@ public:
 					void					OnEnable			(void) override;
 					void					OnDisable			(void) override;
 
+public:
 					void					SetBasicName		(void) override;
 
-					void					ApplyHitInfo		(HitInfo info) override;
-					
-public:
-					void					UseSkill			(void) override;
-					void					UseUltra			(void) override;
-public:
-	
-	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
 
-private:
-	_uint idx = 0;
+protected:
+	static			_uint							m_s_uniqueID;
+	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
+	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
+	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
+	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+
+
 };
 
-#endif
