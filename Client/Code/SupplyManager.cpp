@@ -49,6 +49,9 @@ void CSupplyManager::OutFSM()
 
 void CSupplyManager::ChangeFSM(STATE state)
 {
+	if (state == m_supplyState)
+		return;
+
 	m_supplyFSM[m_supplyState]->End();
 	m_supplyOldState = m_supplyState;
 	m_supplyState = state;

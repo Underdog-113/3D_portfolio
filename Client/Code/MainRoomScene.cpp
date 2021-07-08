@@ -69,6 +69,9 @@ void CMainRoomScene::Start(void)
 void CMainRoomScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
 }
 
 void CMainRoomScene::Update(void)

@@ -45,6 +45,9 @@ void CInventoryManager::ItemFSM()
 
 void CInventoryManager::ChangeFSM(STATE state)
 {
+	if (m_inventoryState == state)
+		return;
+
 	m_inventoryFSM[m_inventoryState]->End();
 	m_inventoryOldState = m_inventoryState;
 	m_inventoryState = state;

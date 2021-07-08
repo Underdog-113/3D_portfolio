@@ -108,5 +108,6 @@ private:
 	_float m_speed;
 
 	_bool m_chack;
+	_bool m_init;
 };
 #endif

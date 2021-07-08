@@ -58,7 +58,7 @@ void CScrollViewObject::Start(void)
 	m_dir = _float3(0, 1.0f, 0);
 	m_chack = false;
 	m_speed = 0;
-	ImageObjectSort();
+	m_init = false;
 }
 
 void CScrollViewObject::FixedUpdate(void)
@@ -114,6 +114,12 @@ void CScrollViewObject::Update(void)
 void CScrollViewObject::LateUpdate(void)
 {
 	__super::LateUpdate();
+
+	if (!m_init)
+	{
+		ImageObjectSort();
+		m_init = true;
+	}
 }
 
 void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
@@ -124,30 +130,9 @@ void CScrollViewObject::PreRender(LPD3DXEFFECT pEffect)
 
 void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
 {
-	// t스탠실 등록
 	if (m_spTexture != nullptr)
 		m_spRectTex->Render(m_spGraphics, pEffect);
 
-	// 스탠실메스크 변경
-
-	/*for (auto& obj : m_vButtonObject)
-	{
-		obj->PreRender(pEffect);
-		obj->Render(pEffect);
-		obj->PostRender(pEffect);
-	}
-
-	size_t size = m_vImageObject.size();
-	for (int i = 0; i < size; i++)
-	{
-		for (auto& obj : m_vImageObject[i])
-		{
-			obj.m_image->Render(pEffect);
-		}
-	}*/
-
-
-	// 스탠실 종료
 }
 
 void CScrollViewObject::PostRender(LPD3DXEFFECT pEffect)
@@ -163,6 +148,7 @@ void CScrollViewObject::OnDestroy(void)
 void CScrollViewObject::OnEnable(void)
 {
 	__super::OnEnable();
+	m_init = false;
 
 	_int count = 0;
 	for (auto& buttonObject : m_vButtonObject)
@@ -208,6 +194,7 @@ void CScrollViewObject::OnDisable(void)
 
 void CScrollViewObject::AllDelete()
 {
+	m_init = false;
 	_int count = 0;
 
 	for (auto& buttonObject : m_vButtonObject)
@@ -295,7 +282,7 @@ void CScrollViewObject::ImageObjectSort()
 			imageObject.m_image->GetTransform()->SetPosition(pos + T);
 		}
 
-		pos.x += m_distanceXY.x;
+		pos.x += m_distanceXY.x;  
 
 		count++;
 		if (count % m_column == 0)
@@ -318,7 +305,7 @@ void CScrollViewObject::Scroll()
 		if (m_speed != 0)
 		{
 			m_chack = true;
-			m_speed *= 0.3f;
+			m_speed *= 0.5f;
 		}
 
 		m_oldMousePos = _float3(0,0,0);
@@ -373,12 +360,12 @@ bool CScrollViewObject::ScrollChack(_float dir)
 	{
 		_float s = m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir);
 
-		if (m_vButtonObject[0]->GetTransform()->GetPosition().y + (m_dir.y * dir) < m_offSet.y + (GetTransform()->GetSize().y * 0.5f))
+		if (m_vButtonObject[0]->GetTransform()->GetPosition().y + (m_dir.y * dir) + (m_offSet.y * 0.5) < GetTransform()->GetPosition().y + (GetTransform()->GetSize().y * 0.5f))
 		{
 			return true;
 		}
 
-		if (m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir) > m_offSet.y - (GetTransform()->GetSize().y * 0.5f))
+		if (m_vButtonObject[m_vButtonObject.size() - 1]->GetTransform()->GetPosition().y + (m_dir.y * dir) - (m_offSet.y * 0.5)> GetTransform()->GetPosition().y - (GetTransform()->GetSize().y * 0.5f))
 		{
 			return true;
 		}
