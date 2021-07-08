@@ -787,6 +787,18 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact">
       <UniqueIdentifier>{5926fddd-4ee8-4a44-9e77-503e0c1204d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect">
+      <UniqueIdentifier>{084e2e52-68de-41fb-9b13-b615af88112a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide">
+      <UniqueIdentifier>{5dff535b-00e7-4e5d-8a64-fd616ecb2fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range">
+      <UniqueIdentifier>{c96bc23b-0933-49fb-9af7-1dddd01412aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
+      <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1559,6 +1571,15 @@
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Lancer_Att_Range.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Lancer_OutSideEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Lancer_Impact.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2253,6 +2274,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Lancer_OutSideEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Lancer_Impact.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

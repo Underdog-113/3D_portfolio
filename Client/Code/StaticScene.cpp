@@ -90,6 +90,11 @@
 #include "Robot_Impact.h"
 #include "Robot_Impact_Smoke.h"
 
+// Lancer
+#include "Lancer_Impact.h"
+#include "Lancer_OutSideEff.h"
+#include "Lancer_Att_Range.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -481,5 +486,31 @@ void CStaticScene::InitEffectPrototypes(void)
 	spRobotImpactSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
 	spRobotImpactSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spRobotImpactSmoke);
+
+	// Lancer
+	SP(CMeshEffect_Client) spLancer_Att_Range(CLancer_Att_Range::Create(true, this));
+	spLancer_Att_Range->GetComponent<Engine::CMeshC>()->SetMeshData(L"Lancer_Att_Range");
+	spLancer_Att_Range->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spLancer_Att_Range->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spLancer_Att_Range->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spLancer_Att_Range->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spLancer_Att_Range->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spLancer_Att_Range);
+
+	SP(CMeshEffect_Client) spLancer_OutSideEff(CLancer_OutSideEff::Create(true, this));
+	spLancer_OutSideEff->GetComponent<Engine::CMeshC>()->SetMeshData(L"Lancer_OutSideEff");
+	spLancer_OutSideEff->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spLancer_OutSideEff->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spLancer_OutSideEff->GetComponent<Engine::CTextureC>()->AddTexture(L"Lancer_Eff_Color");
+	spLancer_OutSideEff->GetComponent<Engine::CTextureC>()->AddTexture(L"Soft");
+	spLancer_OutSideEff->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spLancer_OutSideEff);
+
+	SP(CSoftEffect) spLancer_Impact(CLancer_Impact::Create(true, this));
+	spLancer_Impact->GetComponent<Engine::CGraphicsC>();
+	spLancer_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"puncture");
+	spLancer_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"puncture");
+	spLancer_Impact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spLancer_Impact);
 
 }

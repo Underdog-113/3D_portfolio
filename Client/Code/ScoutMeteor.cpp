@@ -147,7 +147,7 @@ void CScoutMeteor::OnCollisionEnter(Engine::_CollisionInfo ci)
 		else if (i == 3)
 		{
 			spSoftEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SparkEffect", true);
-			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + -1.2, ci.hitPoint.y, ci.hitPoint.z + -1.5f);
+			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + -1.2f, ci.hitPoint.y, ci.hitPoint.z + -1.5f);
 			spSoftEffect->GetTransform()->SetRotation(0, D3DXToRadian(75), D3DXToRadian(15));
 		}
 	}
