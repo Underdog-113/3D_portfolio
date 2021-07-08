@@ -181,7 +181,8 @@ void CTheresa_CrossBloodyHug::FallDown()
 void CTheresa_CrossBloodyHug::StretchBlade()
 {
 	auto pDM = m_spMesh->GetFirstMeshData_Dynamic();
-	if(pDM->GetAniTimeline > 0.99f)
+	if(pDM->GetAniTimeline() > 0.99f)
+	{ }
 
 }
 

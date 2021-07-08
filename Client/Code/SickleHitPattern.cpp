@@ -11,6 +11,8 @@
 #include "PatternMachineC.h"
 #include "AniCtrl.h"
 
+#include "SickleBasePattern.h"
+
 CSickleHitPattern::CSickleHitPattern()
 {
 }
@@ -22,6 +24,8 @@ CSickleHitPattern::~CSickleHitPattern()
 void CSickleHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
+
+	std::dynamic_pointer_cast<CSickleBasePattern>(pOwner->GetComponent<CPatternMachineC>()->GetPatterns()[2])->GetSignEffect()->SetDeleteThis(true);
 
 	// 내가 약피격 당했다면
 	if (Name_Sickle_Hit_L != fsm->GetCurStateString() &&

@@ -95,6 +95,15 @@ void CWooScene::Update(void)
 	__super::Update();
 
 	m_pController->Update();
+
+	if (nullptr != m_spRobot)
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spRobot)->GetStat()->GetCurHp())
+		{
+			m_spRobot = nullptr;
+		}
+	}
+
 }
 
 void CWooScene::LateUpdate(void)

@@ -284,23 +284,23 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	// 6. 보스면 스턴 게이지 깎아주세요
 
 	// 7. 이펙트
-	SP(Engine::CObject) spSoftEffect
-		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
-	spSoftEffect->GetComponent<Engine::CGraphicsC>();
-	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	//SP(Engine::CObject) spSoftEffect
+	//	= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
+	//spSoftEffect->GetComponent<Engine::CGraphicsC>();
+	//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
+	//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
+	//spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 
-	_float3 monsterPos = pMonster->GetTransform()->GetPosition();
-	monsterPos.y += pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
-	_float3 monToHit = hitPoint - monsterPos;
-	float len = D3DXVec3Length(&monToHit) * 0.75f;
-	D3DXVec3Normalize(&monToHit, &monToHit);
+	//_float3 monsterPos = pMonster->GetTransform()->GetPosition();
+	//monsterPos.y += pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+	//_float3 monToHit = hitPoint - monsterPos;
+	//float len = D3DXVec3Length(&monToHit) * 0.75f;
+	//D3DXVec3Normalize(&monToHit, &monToHit);
 
-	spSoftEffect->GetTransform()->SetPosition(monsterPos + monToHit * len);
+	//spSoftEffect->GetTransform()->SetPosition(monsterPos + monToHit * len);
 
-	float randSize = 1.5f + rand() % 2 * 0.5f;
-	spSoftEffect->GetTransform()->SetSize(randSize, randSize, randSize);
+	//float randSize = 1.5f + rand() % 2 * 0.5f;
+	//spSoftEffect->GetTransform()->SetSize(randSize, randSize, randSize);
 
 	// 8. 사운드
 	V_Stat::Valkyrie_Type valkyrieType = pV->GetStat()->GetType();

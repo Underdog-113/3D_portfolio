@@ -56,7 +56,7 @@ void CMO_Sickle::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(91745.f);
+	stat.SetBaseHp(745.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
 

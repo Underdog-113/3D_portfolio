@@ -33,6 +33,11 @@ private:
 
 	_float3 m_tPos;
 	_bool m_onAtkBall = false;
+
+	// effect
+	SP(Engine::CObject) m_spImpactEffect;
+	_bool m_onEffect = false;
+	_mat* m_pLeftUpperArm;
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "FSM_RobotC.h"
 #include "AttackBall.h"
+#include "SoftEffect.h"
 
 _uint CMO_Robot::m_s_uniqueID = 0;
 
@@ -43,7 +44,7 @@ void CMO_Robot::Awake(void)
 	m_spStateMachine = AddComponent<CFSM_RobotC>();
 	m_spPatternMachine->AddNecessaryPatterns(CRobotBornPattern::Create(), CRobotDiePattern::Create(), CRobotBasePattern::Create(), CRobotHitPattern::Create());
 	//m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create());
-	//m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
+	m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
 }
 
 void CMO_Robot::Start(void)
@@ -57,7 +58,7 @@ void CMO_Robot::Start(void)
 
 	BaseStat stat;
 	stat.SetBaseHp(849.f);
-	stat.SetBaseAtk(43.f);
+	stat.SetBaseAtk(73.f);
 	stat.SetBaseDef(19.f);
 
 	stat.SetGrowHp(12.f);
@@ -66,9 +67,12 @@ void CMO_Robot::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+	m_pStat->SetHPMagnification(3);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
+
+	m_spPlane = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Plane", true);
 }
 
 void CMO_Robot::FixedUpdate(void)
@@ -79,6 +83,9 @@ void CMO_Robot::FixedUpdate(void)
 void CMO_Robot::Update(void)
 {
 	__super::Update();
+
+	// effect
+	m_spPlane->GetTransform()->SetPosition(m_spTransform->GetPosition());
 }
 
 void CMO_Robot::LateUpdate(void)
