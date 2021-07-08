@@ -790,6 +790,12 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact">
       <UniqueIdentifier>{5926fddd-4ee8-4a44-9e77-503e0c1204d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\12.BossStageScene">
+      <UniqueIdentifier>{d25df95d-6620-4257-9e89-d17d52f0ae18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne">
+      <UniqueIdentifier>{7d8ac4f3-af33-4322-87c8-d6c065672d2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1564,6 +1570,12 @@
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BossStageScene.h">
+      <Filter>01.Scene\12.BossStageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2260,6 +2272,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BossStageScene.cpp">
+      <Filter>01.Scene\12.BossStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

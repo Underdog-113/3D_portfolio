@@ -15,6 +15,7 @@
 #include "StageSelectionScene.h"
 #include "OneStageScene.h"
 #include "TwoStageScene.h"
+#include "BossStageScene.h"
 #include "BattleEndScene.h"
 #include "ReadyToSortieScene.h"
 #pragma endregion
@@ -167,14 +168,14 @@ void CInitScene::Update(void)
 				m_pLoading = CLoading::Create(CTwoStageScene::Create(), false);
 				m_selectNextScene = true;
 			}
-			//else if (Engine::IMKEY_PRESS(KEY_CONTROL) && Engine::IMKEY_DOWN(KEY_3))
-			//{
-			//	m_pLoading->GetNextScene()->Free();
-			//	delete m_pLoading;
-			//	//m_pLoading = CLoading::Create(CBronyaBossStageScene::Create(), false);
-			//	m_selectNextScene = true;
-			//}
 			else if (Engine::IMKEY_PRESS(KEY_CONTROL) && Engine::IMKEY_DOWN(KEY_3))
+			{
+				m_pLoading->GetNextScene()->Free();
+				delete m_pLoading;
+				m_pLoading = CLoading::Create(CBossStageScene::Create(), false);
+				m_selectNextScene = true;
+			}
+			else if (Engine::IMKEY_PRESS(KEY_CONTROL) && Engine::IMKEY_DOWN(KEY_4))
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;

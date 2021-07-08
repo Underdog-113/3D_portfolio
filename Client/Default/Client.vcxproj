@@ -193,6 +193,7 @@
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BossStageScene.h" />
     <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="..\Header\Scout_Att_Range.h" />
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
     <ClInclude Include="..\Header\Scout_Laser.h" />
+    <ClInclude Include="..\Header\SickleAirbornePattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
@@ -447,6 +449,7 @@
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BossStageScene.cpp" />
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
@@ -472,6 +475,7 @@
     <ClCompile Include="..\Code\Scout_Att_Range.cpp" />
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
+    <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />

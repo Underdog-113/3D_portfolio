@@ -743,7 +743,7 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 	if (!m_checkAttack &&  m_pDM->GetAniTimeline() > 0.1)
 	{
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
