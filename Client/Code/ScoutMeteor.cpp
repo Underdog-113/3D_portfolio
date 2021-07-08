@@ -124,16 +124,33 @@ void CScoutMeteor::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	SP(Engine::CObject) spSoftEffect;
 
-	spSoftEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SparkEffect", true);
-	spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + 2, ci.hitPoint.y, ci.hitPoint.z);
-	/*for (_int i = 0; i < 5; ++i)
+	for (_int i = 0; i < 4; ++i)
 	{
 		if (i == 0)
 		{
 			spSoftEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SparkEffect", true);
-			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + 2, ci.hitPoint.y, ci.hitPoint.z);
+			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + 1.2f, ci.hitPoint.y, ci.hitPoint.z);
+			spSoftEffect->GetTransform()->SetRotation(0, D3DXToRadian(-90), D3DXToRadian(-15));
 		}		
-	}*/
+		else if (i == 1)
+		{
+			spSoftEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SparkEffect", true);
+			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + 0.7f, ci.hitPoint.y, ci.hitPoint.z + 1.5f);
+			spSoftEffect->GetTransform()->SetRotation(0, D3DXToRadian(-75), D3DXToRadian(-15));
+		}
+		else if (i == 2)
+		{
+			spSoftEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SparkEffect", true);
+			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + -1.2f, ci.hitPoint.y, ci.hitPoint.z);
+			spSoftEffect->GetTransform()->SetRotation(0, D3DXToRadian(90), D3DXToRadian(15));
+		}
+		else if (i == 3)
+		{
+			spSoftEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SparkEffect", true);
+			spSoftEffect->GetTransform()->SetPosition(ci.hitPoint.x + -1.2f, ci.hitPoint.y, ci.hitPoint.z + -1.5f);
+			spSoftEffect->GetTransform()->SetRotation(0, D3DXToRadian(75), D3DXToRadian(15));
+		}
+	}
 
 	this->SetDeleteThis(true);
 }

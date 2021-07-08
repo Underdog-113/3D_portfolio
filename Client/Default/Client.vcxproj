@@ -208,6 +208,9 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\Lancer_Att_Range.h" />
+    <ClInclude Include="..\Header\Lancer_Impact.h" />
+    <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
@@ -466,6 +469,9 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
+    <ClCompile Include="..\Code\Lancer_Impact.cpp" />
+    <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />

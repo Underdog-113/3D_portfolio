@@ -56,7 +56,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.f, 0.f, 0.f));
-	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.1f, this->GetTransform()->GetPosition().z));
+	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, this->GetTransform()->GetPosition().y, this->GetTransform()->GetPosition().z));
 	
 	/*m_pAttackRange_Circle_Alpha	= 
 		std::dynamic_pointer_cast<CDecoObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_int)Engine::ELayerID::Effect, L"AttackRange"));
