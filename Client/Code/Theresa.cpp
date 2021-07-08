@@ -203,7 +203,7 @@ void CTheresa::UseSkill(void)
 
 	//test
 	m_spCrossBloodyHug->SetIsEnabled(true);
-	m_spCrossBloodyHug->GetTransform()->SetPosition(m_spTransform->GetPosition() + _float3(0, 1.f, 0));
+	m_spCrossBloodyHug->GetTransform()->SetPosition(m_spTransform->GetPosition() + _float3(0.f, 1.f, 0.f));
 }
 
 void CTheresa::UseUltra(void)
@@ -220,4 +220,6 @@ void CTheresa::CreateCross(void)
 {
 	m_spCrossBloodyHug = GetScene()->ADD_CLONE(L"Theresa_CrossBloodyHug", true, (_uint)ELayerID::Player, L"CrossBloodyHug");
 	m_spCrossBloodyHug->SetIsEnabled(false);
+
+	m_spCrossBloodyHug->GetTransform()->SetSize(m_spTransform->GetSize());
 }

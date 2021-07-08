@@ -8,6 +8,8 @@ class CTheresa_CrossBlade;
 class CTheresa_CrossBloodyHug final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
+		
+	enum SkillState{ Ready, Fall, Stretch, Roll, End };
 
 public:
 	CTheresa_CrossBloodyHug();
@@ -37,6 +39,11 @@ public:
 public:
 					void					SetBasicName		(void) override;
 
+private:
+					void					FallDown();
+					void					StretchBlade();
+					void					RollBlade();
+					void					EndSkill();
 
 protected:
 	static			_uint							m_s_uniqueID;
@@ -48,8 +55,16 @@ protected:
 private:	
 	GETTOR			(SP(Engine::CObject),			m_spCrossBlade,		nullptr,	CrossBlade)
 
+	SkillState m_skillState = Ready;
+
+	_float m_fallTimer = 0.f;
+	_float m_fallDuration = 0.5f;
+	_float m_fallStartY = 0.f;
+
 	_float m_activeTimer = 0.f;
 	_float m_activeDuration = 2.f;
+
+	_bool m_beginAnimEnd = false;
 
 private:
 	_float m_fDissolveAlpha = 1.f;

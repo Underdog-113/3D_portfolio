@@ -78,17 +78,41 @@ void CTheresa_CrossBloodyHug::Update(void)
 	__super::Update();
 
 	// sp 12, 10초, 2초동안 0.25초마다 한번씩 벤다 200퍼
+	switch (m_skillState)
+	{
+	case CTheresa_CrossBloodyHug::Ready:
+		break;
+	case CTheresa_CrossBloodyHug::Fall:
+		FallDown();
+		break;
+	case CTheresa_CrossBloodyHug::Stretch:
+		StretchBlade();
+		break;
+	case CTheresa_CrossBloodyHug::Roll:
+		RollBlade();
+		break;
+	case CTheresa_CrossBloodyHug::End:
+		EndSkill();
+		break;
+	default:
+		break;
+	}
 	// 십자가 공중에 소환
+
+
 	// 바닥에 꼿고
 	// 펼치기 애니메이션
 	// 바로 칼날 소환해서 빙글빙글
-	m_activeTimer += GET_DT;
-
-	if (m_activeTimer > m_activeDuration)
+	if (m_beginAnimEnd)
 	{
-		// remove effect
-		SetIsEnabled(false);
+		m_activeTimer += GET_DT;
 
+		if (m_activeTimer > m_activeDuration)
+		{
+			// remove effect
+			SetIsEnabled(false);
+
+		}
 	}
 
 	// 끝나면 ㅂㅂ
@@ -124,6 +148,9 @@ void CTheresa_CrossBloodyHug::OnDestroy(void)
 void CTheresa_CrossBloodyHug::OnEnable(void)
 {
 	__super::OnEnable();
+	m_fallTimer = 0.f;
+	m_activeTimer = 0.f;
+	m_fallStartY = m_spTransform->GetPosition().y;
 }
 
 void CTheresa_CrossBloodyHug::OnDisable(void)
@@ -132,5 +159,36 @@ void CTheresa_CrossBloodyHug::OnDisable(void)
 }
 
 void CTheresa_CrossBloodyHug::SetBasicName(void)
+{
+}
+
+void CTheresa_CrossBloodyHug::FallDown()
+{
+	m_fallTimer += GET_PLAYER_DT;
+
+	if (m_fallTimer > m_fallDuration)
+	{
+		m_spTransform->SetPositionY(m_fallStartY - 1.f);
+		m_skillState = Stretch;
+		m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(1.f);
+		return;
+	}
+
+	float lerpY = GetLerpFloat(m_fallStartY, m_fallStartY - 1.f, m_fallTimer / m_fallDuration);
+	m_spTransform->SetPositionY(lerpY);
+}
+
+void CTheresa_CrossBloodyHug::StretchBlade()
+{
+	auto pDM = m_spMesh->GetFirstMeshData_Dynamic();
+	if(pDM->GetAniTimeline > 0.99f)
+
+}
+
+void CTheresa_CrossBloodyHug::RollBlade()
+{
+}
+
+void CTheresa_CrossBloodyHug::EndSkill()
 {
 }
