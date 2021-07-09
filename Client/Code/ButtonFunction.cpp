@@ -11,7 +11,7 @@
 #include "PartySettingScene.h"
 #include "StageSelectionScene.h"
 #include "OneStageScene.h"
-#include "TwoStageScene.h"
+#include "ThreeStageScene.h"
 #include "ThreeStageScene.h"
 #include "BattleEndScene.h"
 #include "InventoryScene.h"

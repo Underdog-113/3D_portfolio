@@ -29,50 +29,11 @@ void CTwoStagePhaseControl::Update(void)
 			++m_curPhase;
 		break;
 
-		//Before being collided with PhaseChanger0
-	case (_int)ETwoStagePhase::BeforeFirstFight:
-		break;
-
-		//After being collided with PhaseChanger0
-	case (_int)ETwoStagePhase::FirstFightBegin:
-		break;
-
-		//After killing all the enemies
-	case (_int)ETwoStagePhase::FirstFightEnd:
-		++m_curPhase;
-		break;
-
-		//Before being collised with PhaseChanger1
-	case (_int)ETwoStagePhase::BeforeSecondFight:
-		break;
-
-		//After being collided with PhaseChanger1
-	case (_int)ETwoStagePhase::SecondFightBegin:
-		break;
-
-		//After killing all the enemies
-	case (_int)ETwoStagePhase::SecondFightEnd:
-		++m_curPhase;
-		break;
-
-		//Before being collised with PhaseChanger2
-	case (_int)ETwoStagePhase::BeforeMidBoss:
-		break;
-
-		//After being collided with PhaseChanger2
-	case (_int)ETwoStagePhase::MidBossBegin:
-		break;
-
-		//After killing MidBoss
-	case (_int)ETwoStagePhase::MidBossEnd:
-		++m_curPhase;
-		break;
-
-		//Before being collised with PhaseChanger3
+		//Before being collised with PhaseChanger0
 	case (_int)ETwoStagePhase::BeforeBoss:
 		break;
 
-		//After being collided with PhaseChanger3
+		//After being collided with PhaseChanger0
 	case (_int)ETwoStagePhase::BossBegin:
 		break;
 

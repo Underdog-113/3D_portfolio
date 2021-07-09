@@ -19,7 +19,7 @@ SP(CComponent) CShaderC::MakeClone(CObject * pObject)
 	__super::InitClone(spClone, pObject);
 
 	spClone->m_vShaders			= m_vShaders;
-	spClone->m_shaderPerSubset	= m_shaderPerSubset;
+	spClone->m_vShaderPerSubset	= m_vShaderPerSubset;
 	return spClone;
 }
 
@@ -45,12 +45,24 @@ void CShaderC::Awake(void)
 			_int shaderID = CShaderManager::GetInstance()->GetShaderID(shaderKey);
 			m_vShaders.emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
 		}
+
+		_int numOfShaderPerSubset;
+		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfShaderPerSubset", numOfShaderPerSubset);
+
+		for (_int i = 0; i < numOfShaderPerSubset; ++i)
+		{
+			std::wstring shaderKey;
+			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"shaderPerSubsetKey" + std::to_wstring(i), shaderKey);
+			_int shaderID = CShaderManager::GetInstance()->GetShaderID(shaderKey);
+			m_vShaderPerSubset.emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
+		}
 	}
 }
 
 void CShaderC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+
 }
 
 void CShaderC::FixedUpdate(SP(CComponent) spThis)
@@ -87,4 +99,9 @@ CShader* CShaderC::AddShader(_int shaderID)
 	m_vShaders.emplace_back(pShader);
 
 	return pShader;
+}
+
+void CShaderC::ResizeShaderPerSubset(_int size)
+{
+	m_vShaderPerSubset.resize(size, nullptr);
 }

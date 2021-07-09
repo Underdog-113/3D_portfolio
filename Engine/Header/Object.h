@@ -25,7 +25,7 @@ public:
 	virtual			void			Render				(LPD3DXEFFECT pEffect) {}
 	virtual			void			PostRender			(LPD3DXEFFECT pEffect) {}
 	
-	virtual			void			RenderPerShader		(SP(CShaderC) spShader) {}
+	virtual			void			RenderPerShader		(void) {}
 
 	virtual			void			OnDestroy			(void);
 	

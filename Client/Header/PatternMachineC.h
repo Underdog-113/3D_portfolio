@@ -39,7 +39,7 @@ private:
 	void PlaySelectPattern(); // 패턴 선택
 
 private:
-	std::vector<SP(CATBPattern)> m_vPatterns;
+	GETTOR(std::vector<SP(CATBPattern)>, m_vPatterns, {}, Patterns)
 	std::vector<_int> m_vIndices;
 
 	_bool m_previewMode = false; // 시연회용 모드

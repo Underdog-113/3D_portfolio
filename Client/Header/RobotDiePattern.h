@@ -14,6 +14,9 @@ private:
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
 	static SP(CRobotDiePattern) Create();
+
+private:
+	SP(Engine::CObject) m_spSoftEffect;
 };
 
 #endif

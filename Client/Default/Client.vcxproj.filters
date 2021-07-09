@@ -823,8 +823,17 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
       <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
+      <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
+      <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Component\00.UI\12.SizeUp">
       <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\13.FaceShader">
+      <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -974,12 +983,6 @@
     </ClInclude>
     <ClInclude Include="..\Header\StageSelectionScene.h">
       <Filter>01.Scene\04.StageSelectionScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ThreeStageScene.h">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TwoStageScene.h">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\PartySettingScene.h">
       <Filter>01.Scene\09.PartySettingScene</Filter>
@@ -1623,7 +1626,6 @@
     <ClInclude Include="..\Header\SickleAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h">
@@ -1635,8 +1637,23 @@
     <ClInclude Include="..\Header\Lancer_Impact.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ThreeStageScene.h">
+      <Filter>01.Scene\03.ThreeStageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ThreeStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStageScene.h">
+      <Filter>01.Scene\08.TwoStageScene</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SizeUpC.h">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\OutlineMeshShader.h">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1759,12 +1776,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
       <Filter>01.Scene\05.ReadyToSortieScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ThreeStageScene.cpp">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TwoStageScene.cpp">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PartySettingScene.cpp">
       <Filter>01.Scene\09.PartySettingScene</Filter>
@@ -2355,7 +2366,6 @@
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
@@ -2367,8 +2377,23 @@
     <ClCompile Include="..\Code\Lancer_Impact.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ThreeStageScene.cpp">
+      <Filter>01.Scene\03.ThreeStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStageScene.cpp">
+      <Filter>01.Scene\08.TwoStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\SizeUpC.cpp">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OutlineMeshShader.cpp">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2431,6 +2456,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineMeshShader.fx">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

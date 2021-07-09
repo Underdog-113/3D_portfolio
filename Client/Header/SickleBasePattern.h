@@ -29,6 +29,8 @@ private:
 	_bool m_onTrailEffect = false;
 
 	_mat m_atkMat;
+
+	GETTOR_SETTOR(SP(Engine::CObject), m_spSignEffect, {}, SignEffect)
 };
 
 #endif

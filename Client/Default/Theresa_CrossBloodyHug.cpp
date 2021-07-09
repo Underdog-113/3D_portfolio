@@ -215,7 +215,6 @@ void CTheresa_CrossBloodyHug::StretchBlade()
 		m_skillState = Roll;
 		return;
 	}
-
 }
 
 void CTheresa_CrossBloodyHug::RollBlade()

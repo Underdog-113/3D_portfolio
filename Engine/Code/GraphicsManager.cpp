@@ -240,9 +240,10 @@ void CGraphicsManager::RenderNonAlpha(void)
 				CheckAabb(pObject->GetTransform()->GetPosition(),
 					pObject->GetTransform()->GetSize() / 2.f))
 			{
-				SP(CComponent) spShader = pObject->GetComponent<CShaderC>();
-				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
 
+
+				const std::vector<CShader*>& vShader = spShader->GetShaders();
 				for (_size i = 0; i < vShader.size(); ++i)
 				{
 					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
@@ -260,6 +261,8 @@ void CGraphicsManager::RenderNonAlpha(void)
 					}
 					pEffect->End();
 				}
+
+				pObject->RenderPerShader();
 			}
 		}
 	}
@@ -273,7 +276,6 @@ void CGraphicsManager::RenderLights(void)
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Normal", "g_NormalTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_MtrlSpecular", "g_SpecMtrlTexture");
 
 	pEffect->Begin(NULL, 0);
 	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);
