@@ -7,7 +7,7 @@ class CATBPattern;
 
 class CPatternMachineC : public Engine::CComponent
 {
-	enum Pattern_Type { Born, Die, Base, Hit, TypeEnd };
+	enum Pattern_Type { Born, Die, Base, Hit, Airborne, TypeEnd };
 
 public:
 	explicit CPatternMachineC();
@@ -27,7 +27,7 @@ public:
 	static const EComponentID m_s_componentID = EComponentID::Pattern;
 
 public:
-	void AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit);
+	void AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit, SP(CATBPattern) pAirborne = nullptr);
 	void AddPattern(SP(CATBPattern) pPattern);
 
 private:
@@ -53,6 +53,7 @@ private:
 	GETTOR_SETTOR(_bool, m_onHitFront, false, OnHitFront); // hit_front
 	GETTOR_SETTOR(_bool, m_onHitBack, false, OnHitBack); // hit_back
 	GETTOR_SETTOR(_bool, m_onSelect, false, OnSelect);
+	GETTOR_SETTOR(_bool, m_onAirborne, false, OnAirBorne);
 	GETTOR_SETTOR(_float, m_curCost, 0.f, CurCost);
 	GETTOR_SETTOR(_float, m_maxCost, 70.f, MaxCost);
 };

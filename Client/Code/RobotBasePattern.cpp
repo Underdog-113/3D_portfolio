@@ -108,6 +108,8 @@ void CRobotBasePattern::Pattern(Engine::CObject* pOwner)
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
 	else if (Name_Attack_1_Left == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
 	{
+		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact", true);
+
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
 		_float3 look = _float3(m_atkMat._31, m_atkMat._32, m_atkMat._33);

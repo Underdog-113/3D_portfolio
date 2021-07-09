@@ -50,8 +50,6 @@ public:
 	}
 
 private:
-
-private:
 	static _uint m_s_uniqueID;
 
 	GETTOR_SETTOR(EButton_Type, m_buttonType, EButton_Type::UP, ButtonType)

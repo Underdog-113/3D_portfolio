@@ -36,7 +36,7 @@ void CRectTexShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 		SetupOrthoWVP(spGC);
 	else
 		SetupWorldViewProj(spGC);
-	
+
 	SP(CTextureC) spTexture = spGC->GetTexture();
 	m_pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[spTexture->GetSetIndex()][spTexture->GetTexIndex()]->pTexture);
 

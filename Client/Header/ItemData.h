@@ -1,6 +1,7 @@
 #pragma once
 class CItemData
 {
+public:	enum STATE {Default, WeaponMaterial, ValkyrieMaterial};
 public:
 	CItemData();
 	~CItemData();
@@ -9,7 +10,8 @@ public:
 		_int rank,
 		std::wstring explanation,
 		_int experience,
-		std::wstring textureKey);
+		std::wstring textureKey,
+		STATE type);
 
 	void CountDown(_int value);
 private:
@@ -20,5 +22,6 @@ private:
 	GETTOR_SETTOR(std::wstring, m_textureKey, L"", TextureKey);
 
 	GETTOR_SETTOR(_int, m_count, 0, Count);
+	GETTOR_SETTOR(STATE, m_type, STATE::Default , Type);
 };
 

@@ -264,7 +264,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
-	m_monsterHpCount = hpCount;
+	m_monsterHpCount = 4;
 	m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
 
 	_float ThpMax = (hpMax / m_monsterHpCount) / 3;

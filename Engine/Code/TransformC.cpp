@@ -39,6 +39,7 @@ void CTransformC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
+	D3DXMatrixIdentity(&m_parentRotMatrix);
 	//m_lastRotMatrix			= m_rotMatrix;
 	//m_lastWorldMat			= m_worldMat;
 	//m_lastWorldMatNoScale	= m_worldMatNoScale;
@@ -466,9 +467,10 @@ void CTransformC::UpdateWorldMatrix(void)
                                         m_position.z);
 
 	m_rotMatrix	= rotateX * rotateY * rotateZ;
+	m_rotMatrix *= m_parentRotMatrix;
 
-	m_worldMat = size * rotateX * rotateY * rotateZ * translation;
-	m_worldMatNoScale = rotateX * rotateY * rotateZ * translation;
+	m_worldMat = size * m_rotMatrix * translation;
+	m_worldMatNoScale = m_rotMatrix * translation;
 
 	
 

@@ -17,6 +17,7 @@ void CDataManager::Start()
 	ItemInit(L"하급 학습 칩",50);
 	ItemInit(L"특급 학습 칩",30);
 	ItemInit(L"고급 학습 칩",10);
+	ItemInit(L"무기 강화제", 100);
 
 	WeaponInit(L"Weapon_Pistol_1");
 	WeaponInit(L"Weapon_Pistol_2");
@@ -278,7 +279,7 @@ void CDataManager::ItemInit(std::wstring itemName, _int count)
 	std::wstring explanation;
 	_int experience;
 	std::wstring textureKey;
-
+	_int type;
 	dataStore->GetValue(true, dataID, objectKey, L"Name", name);
 
 	for (auto& iter : m_pItemDataList)
@@ -294,9 +295,10 @@ void CDataManager::ItemInit(std::wstring itemName, _int count)
 	dataStore->GetValue(true, dataID, objectKey, L"Explanation", explanation);
 	dataStore->GetValue(true, dataID, objectKey, L"Experience", experience);
 	dataStore->GetValue(true, dataID, objectKey, L"TextureKey", textureKey);
+	dataStore->GetValue(true, dataID, objectKey, L"Type", type);
 
 	CItemData* item = new CItemData();
-	item->AddItemData(name, rank, explanation, experience, textureKey);
+	item->AddItemData(name, rank, explanation, experience, textureKey, (CItemData::STATE)type);
 	item->SetCount(count);
 	m_pItemDataList.emplace_back(item);
 }
@@ -309,7 +311,7 @@ void CDataManager::WeaponInit(std::wstring weaponName)
 
 	std::wstring name;
 	_int rank;
-	_float maxExperience;
+	_int maxExperience;
 	_int maxLevel;
 	_int damage;
 	_int hoesim;

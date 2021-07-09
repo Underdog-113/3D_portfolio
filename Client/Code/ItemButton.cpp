@@ -139,6 +139,12 @@ void CItemButton::ItemSelect()
 	CValkyrieLevelUp::g_itemCount = 0;
 	static_cast<CValkyrieLevelUp*>(CValkyriegManager::GetInstance()->GetValkyrieFSM())->ItemCountUp();
 	std::static_pointer_cast<Engine::CSlider>(GET_CUR_CLIENT_SCENE->FindObjectByName(L"LevelUpCanvas_Slider_0"))->SetMaxValue((_float)CDataManager::GetInstance()->FindItemData(m_itemName)->GetCount());
+
+	if (m_selectObject != nullptr)
+		m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() - _float3(20, 20, 0));
+
+	m_selectObject = CButtonManager::GetInstance()->GetActivationButton();
+	m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() + _float3(20, 20, 0));
 }
 
 void CItemButton::SetBasicName(void)

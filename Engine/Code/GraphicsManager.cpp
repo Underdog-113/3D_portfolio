@@ -50,9 +50,9 @@ void CGraphicsManager::LateUpdate(void)
 void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
-					  D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-					  D3DXCOLOR(0.f, 1.f, 0.f, 1.f),
-					  1.f, 0);
+		D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+		D3DXCOLOR(0.f, 1.f, 0.f, 1.f),
+		1.f, 0);
 
 	GET_DEVICE->BeginScene();
 }
@@ -128,23 +128,23 @@ void CGraphicsManager::ClearRenderList(void)
 void CGraphicsManager::InitDeferredBuffer(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	if(FAILED(pDevice->CreateVertexBuffer(sizeof(_VertexScreen) * 4,
-										  0,
-										  FVF_SCR,
-										  D3DPOOL_MANAGED,
-										  &m_pVertexBuffer,
-										  NULL)))
+	if (FAILED(pDevice->CreateVertexBuffer(sizeof(_VertexScreen) * 4,
+		0,
+		FVF_SCR,
+		D3DPOOL_MANAGED,
+		&m_pVertexBuffer,
+		NULL)))
 	{
 		MSG_BOX(__FILE__, L"Failed Creating VertexBuffer in CGraphicsManager::Awake()");
 		ABORT;
 	}
 
-	if(FAILED(pDevice->CreateIndexBuffer(sizeof(INDEX16) * 2,
-										 0,
-										 D3DFMT_INDEX16,
-										 D3DPOOL_MANAGED,
-										 &m_pIndexBuffer,
-										 NULL)))
+	if (FAILED(pDevice->CreateIndexBuffer(sizeof(INDEX16) * 2,
+		0,
+		D3DFMT_INDEX16,
+		D3DPOOL_MANAGED,
+		&m_pIndexBuffer,
+		NULL)))
 	{
 		MSG_BOX(__FILE__, L"Failed Creating IndexBuffer in CGraphicsManager::Awake()");
 		ABORT;
@@ -196,7 +196,7 @@ void CGraphicsManager::RenderBase(void)
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
-						  pObject->GetTransform()->GetSize() / 2.f))
+					pObject->GetTransform()->GetSize() / 2.f))
 			{
 				SP(CComponent) spShaderC = pObject->GetComponent<CShaderC>();
 
@@ -238,35 +238,27 @@ void CGraphicsManager::RenderNonAlpha(void)
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
-						  pObject->GetTransform()->GetSize() / 2.f))
+					pObject->GetTransform()->GetSize() / 2.f))
 			{
-				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
-				const std::vector<CShader*>& vShader = spShader->GetShaders();
+				SP(CComponent) spShader = pObject->GetComponent<CShaderC>();
+				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
 
-
-				if (spShader->GetShaderPerSubset() == false)
+				for (_size i = 0; i < vShader.size(); ++i)
 				{
-					for (_size i = 0; i < vShader.size(); ++i)
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
+					for (_uint i = 0; i < maxPass; ++i)
 					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						for (_uint i = 0; i < maxPass; ++i)
-						{
-							pEffect->BeginPass(i);
-							pObject->PreRender(pEffect);
-							pObject->Render(pEffect);
-							pObject->PostRender(pEffect);
-							pEffect->EndPass();
-						}
-						pEffect->End();
+						pEffect->BeginPass(i);
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+						pEffect->EndPass();
 					}
-				}
-				else
-				{
-
+					pEffect->End();
 				}
 			}
 		}
@@ -297,8 +289,6 @@ void CGraphicsManager::RenderDeferBlend(void)
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");
-	//pEffect->SetTexture("g_LutTexture", GET_CUR_SCENE->GetTextureStore()->GetTextureData(L"Lut3D_00")->pTexture);
-
 
 	pEffect->Begin(NULL, 0);
 	pEffect->BeginPass(0);
@@ -321,7 +311,7 @@ void CGraphicsManager::RenderWire(void)
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
-					      pObject->GetTransform()->GetSize() / 2.f))
+					pObject->GetTransform()->GetSize() / 2.f))
 			{
 				SP(CComponent) spShader;
 				if (spShader = pObject->GetComponent<CShaderC>())
@@ -362,7 +352,7 @@ void CGraphicsManager::RenderAlphaTest(void)
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
-						  pObject->GetTransform()->GetSize() / 2.f))
+					pObject->GetTransform()->GetSize() / 2.f))
 			{
 				SP(CComponent) spShader;
 				if (spShader = pObject->GetComponent<CShaderC>())
@@ -407,7 +397,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
-						  pObject->GetTransform()->GetSize() / 2.f))
+					pObject->GetTransform()->GetSize() / 2.f))
 			{
 
 				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
@@ -459,10 +449,10 @@ void CGraphicsManager::RenderUI(void)
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 	std::sort(m_vRenderList[(_int)ERenderID::UI].begin(), m_vRenderList[(_int)ERenderID::UI].end(),
-			[](CObject* pObj1, CObject* pObj2)
-			{
-				return pObj1->GetTransform()->GetPosition().z < pObj2->GetTransform()->GetPosition().z;
-			});
+		[](CObject* pObj1, CObject* pObj2)
+	{
+		return pObj1->GetTransform()->GetPosition().z < pObj2->GetTransform()->GetPosition().z;
+	});
 
 
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::UI])
@@ -471,7 +461,7 @@ void CGraphicsManager::RenderUI(void)
 		{
 			if (GET_MAIN_CAM->GetFrustum()->
 				CheckAabb(pObject->GetTransform()->GetPosition(),
-						  pObject->GetTransform()->GetSize() / 2.f))
+					pObject->GetTransform()->GetSize() / 2.f))
 			{
 				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
 

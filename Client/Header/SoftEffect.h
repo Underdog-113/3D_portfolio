@@ -34,18 +34,19 @@ private:
 
 protected:
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
-	GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
-	GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
-	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
-	GETTOR(SP(Engine::CCollisionC), m_spCollision, nullptr, Collision)
+		GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
+		GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
+		GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+		GETTOR(SP(Engine::CCollisionC), m_spCollision, nullptr, Collision)
 
-	GETTOR_SETTOR(_float, m_fAlphaWidth, 0.f, AlphaWIdth)
-	GETTOR_SETTOR(_float, m_fAlphaHeight, 0.f, AlphaHeight)
-	GETTOR_SETTOR(_int, m_maxXIndex, 0, maxXIndex)
-	GETTOR_SETTOR(_int, m_maxYIndex, 0, maxYIndex)
-	GETTOR_SETTOR(_bool, m_AnimisPlay, false, AnimisPlay)
-	GETTOR_SETTOR(_int, m_TilingX, 0, TilingX)
-	GETTOR_SETTOR(_int, m_TilingY, 0, TilingY)
+		GETTOR_SETTOR(_float, m_fAlphaWidth, 0.f, AlphaWIdth)
+		GETTOR_SETTOR(_float, m_fAlphaHeight, 0.f, AlphaHeight)
+		GETTOR_SETTOR(_int, m_maxXIndex, 0, maxXIndex)
+		GETTOR_SETTOR(_int, m_maxYIndex, 0, maxYIndex)
+		GETTOR_SETTOR(_bool, m_AnimisPlay, false, AnimisPlay)
+		GETTOR_SETTOR(_int, m_TilingX, 0, TilingX)
+		GETTOR_SETTOR(_int, m_TilingY, 0, TilingY)
+		_bool m_bBillboard;
 
 protected:
 	_float m_fTIme;

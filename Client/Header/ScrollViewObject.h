@@ -6,9 +6,10 @@
 #include "ImageObject.h"
 #include "Button.h"
 #include "TextObject.h"
+
 class CScrollViewObject final : public Engine::CObject
 {
-	enum EDir_Type { Up = 0, Down = 1, Left = 2, Right = 3 };
+	enum EDir_Type { UpandDown = 0, RightandLeft = 1};
 
 	struct ImageInfo
 	{
@@ -61,6 +62,7 @@ public:
 	{
 		SP(CButton) button =
 			std::static_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
+		//button->GetComponent<Engine::CGraphicsC>()->SetIsEnabled(false);
 		button->GetTransform()->SetSize(_float3(size.x, size.y, 0.0f));
 		button->SetButtonType(CButton::UP);
 		button->GetTexture()->AddTexture(texture1, 0);
@@ -82,6 +84,8 @@ private:
 	void ImageObjectSort();
 
 	void Scroll();
+	bool ScrollChack(_float dir);
+	void Directionadjustment(_float3 pos1, _float3 pos2, _float& dir);
 private:
 	static _uint m_s_uniqueID;
 
@@ -98,9 +102,13 @@ private:
 	GETTOR_SETTOR(std::vector<std::vector<ImageInfo>>, m_vImageObject, {}, ImageObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
 	GETTOR_SETTOR(std::vector<TextInfo>, m_vTextObject, {}, TextObject) // 그려야될 이미지오브젝트의 그룹 (이놈은 여러개임)
 
-	GETTOR_SETTOR(EDir_Type, m_dir, EDir_Type::Down, Dir);
+	GETTOR_SETTOR(EDir_Type, m_dirType, EDir_Type::UpandDown, DirType);
 
-	_float3 dir;
-	_float offset;
+	_float3 m_dir;
+	_float3 m_oldMousePos;
+	_float m_speed;
+
+	_bool m_chack;
+	_bool m_init;
 };
 #endif
