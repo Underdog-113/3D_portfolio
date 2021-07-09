@@ -207,6 +207,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />

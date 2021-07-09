@@ -435,9 +435,19 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	m_pCameraMan->SetIsSwitching(true);
 }
 
+void CStageControlTower::SetCameraMidTake()
+{
+	m_pCameraMan->SetMidTake();
+}
+
 void CStageControlTower::SetCameraFarTake()
 {
 	m_pCameraMan->SetFarTake();
+}
+
+void CStageControlTower::SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
+{
+	m_pCameraMan->SetCustomTake(dstMaxDistance, changeSpeed, dstXAngle);
 }
 
 void CStageControlTower::OffCameraTargeting()
@@ -449,6 +459,7 @@ void CStageControlTower::EndSwitching()
 {
 	m_pCameraMan->SetIsSwitching(false);
 }
+
 
 void CStageControlTower::OnPerfectEvadeMode()
 {

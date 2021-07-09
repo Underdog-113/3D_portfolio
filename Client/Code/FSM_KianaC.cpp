@@ -513,6 +513,7 @@ void CFSM_KianaC::Appear_Init(void)
 void CFSM_KianaC::Appear_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Appear);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	//m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(true);
 }
 
@@ -524,6 +525,7 @@ void CFSM_KianaC::Appear_Update(float deltaTime)
 
 void CFSM_KianaC::Appear_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 	//m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->SetIsVerticalAnim(false);
 }
 

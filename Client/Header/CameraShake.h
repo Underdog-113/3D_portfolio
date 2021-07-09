@@ -5,6 +5,8 @@ struct Wave
 	float amplitude = 0.f;			// 진폭, -amplitued ~ amplitude
 	float frequency = 0.f;			// 초당 주파수
 	float offset = 0.f;				// 그래프에서의 타임라인 시작 위치
+
+	float ampAxisOffset = 0.f;
 };
 
 class CCameraShake
@@ -26,7 +28,10 @@ public:	/* Player Action */
 	void Preset_HighAttack_Vert(_float3 eventPos); // cat paw attack_5, theresa axe down
 	void Preset_HighAttack_Horz(_float3 eventPos); // theresa axe horz
 
-	void Preset_Theresa_UltImpact();
+	void Preset_Theresa_Charge1Impact(_float3 eventPos);
+	void Preset_Theresa_Charge2Impact(_float3 eventPos);
+	void Preset_Theresa_UltImpact(_float3 eventPos);
+	void Preset_Theresa_CrossImpact(_float3 eventPos);
 
 public: /* Enemy Action */
 	void Preset_Boom(_float3 eventPos);
@@ -36,8 +41,10 @@ public: /* Enemy Action */
 	void SetDistanceRate(_float3 eventPos);
 
 private:
+	void ResetAllMember();
 	void ResetRotMember();
 	void ResetLocMember();
+	void ResetWave(Wave& wave);
 
 private:
 	GETTOR_SETTOR(SP(Engine::CCamera), m_spCamera, nullptr, Camera)

@@ -65,6 +65,7 @@ void CTheresa_CrossBlade::FixedUpdate(void)
 
 void CTheresa_CrossBlade::Update(void)
 {
+	__super::Update();
 }
 
 void CTheresa_CrossBlade::LateUpdate(void)

@@ -13,6 +13,7 @@
 
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
+#include "StageCameraMan.h"
 #include "EffectMaker_Theresa.h"
 
 CFSM_TheresaC::CFSM_TheresaC()
@@ -75,6 +76,8 @@ void CFSM_TheresaC::ResetCheckMembers()
 	m_checkAttack = false;
 	m_checkEffect = false;
 	m_checkEffectSecond = false;
+	m_checkShake = false;
+	m_checkTake = false;
 }
 
 void CFSM_TheresaC::OnSwordCollider()
@@ -506,6 +509,7 @@ void CFSM_TheresaC::Appear_Init(void)
 
 void CFSM_TheresaC::Appear_Enter(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pDM->ChangeAniSet(Index_Idle);
 	m_pTheresa->Off_Sword();
 	m_pTheresa->Off_Axe();
@@ -519,6 +523,7 @@ void CFSM_TheresaC::Appear_Update(float deltaTime)
 
 void CFSM_TheresaC::Appear_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_appearOption = None;
 }
 
@@ -606,7 +611,7 @@ void CFSM_TheresaC::EvadeBackward_Init(void)
 
 void CFSM_TheresaC::EvadeBackward_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_EvadeBackward);
+	m_pDM->RepeatAniSet(Index_EvadeBackward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pTheresa->Off_Sword();
 	m_pTheresa->Off_Axe();
@@ -664,7 +669,7 @@ void CFSM_TheresaC::EvadeForward_Init(void)
 
 void CFSM_TheresaC::EvadeForward_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_EvadeForward);
+	m_pDM->RepeatAniSet(Index_EvadeForward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	m_pTheresa->Off_Sword();
@@ -1041,6 +1046,25 @@ void CFSM_TheresaC::Charge1_Update(float deltaTime)
 		OnAxeCollider();
 		m_checkAttack = true;
 	}
+
+	if (!m_checkTake && !m_checkShake && m_pDM->GetAniTimeline() > 0.21f)
+	{
+		CStageControlTower::GetInstance()->SetCameraCustomTake(2.8f, 2.5f, D3DXToRadian(12.f));
+		m_checkTake = true;
+	}
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.26f)
+	{
+		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_Charge1Impact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
+		m_checkShake = true;
+		m_checkTake = false;
+	}
+
+	if (!m_checkTake && m_pDM->GetAniTimeline() > 0.35f)
+	{
+		CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 2.f, D3DXToRadian(10.f));
+		m_checkTake = true;
+	}
+
 	if (m_pDM->GetAniTimeline() > 0.4f)
 		OffAxeCollider();
 
@@ -1059,7 +1083,7 @@ void CFSM_TheresaC::Charge1_Update(float deltaTime)
 void CFSM_TheresaC::Charge1_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
-
+	
 	m_pTheresa->Off_Axe();
 	OffAxeCollider();
 }
@@ -1095,6 +1119,26 @@ void CFSM_TheresaC::Charge2_Update(float deltaTime)
 		OnAxeCollider();
 		m_checkAttack = true;
 	}
+
+	if (!m_checkTake && !m_checkShake && m_pDM->GetAniTimeline() > 0.18f)
+	{
+		CStageControlTower::GetInstance()->SetCameraCustomTake(2.8f, 2.5f, D3DXToRadian(12.f));
+		m_checkTake = true;
+	}
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.23f)
+	{
+		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_Charge2Impact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
+
+		m_checkShake = true;
+		m_checkTake = false;
+	}
+	
+	if (!m_checkTake && m_pDM->GetAniTimeline() > 0.33f)
+	{
+		CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 2.f, D3DXToRadian(10.f));
+		m_checkTake = true;
+	}
+
 	if (m_pDM->GetAniTimeline() > 0.3f)
 		OffAxeCollider();
 
@@ -1305,11 +1349,20 @@ void CFSM_TheresaC::CastCross_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_CastCross);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	m_pTheresa->Off_Sword();
+	m_pTheresa->Off_Axe();
 }
 
 void CFSM_TheresaC::CastCross_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction())
+	if (CheckAction_Evade_OnAction(0.5f))
+		return;
+	if (CheckAction_Run_OnAction(0.5f))
+		return;
+	if (CheckAction_Attack(Name_Attack1, 0.5f))
+		return;
+	if (CheckAction_Ultra(0.5f))
 		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
@@ -1317,6 +1370,7 @@ void CFSM_TheresaC::CastCross_Update(float deltaTime)
 
 void CFSM_TheresaC::CastCross_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_TheresaC::RunStopRight_Init(void)

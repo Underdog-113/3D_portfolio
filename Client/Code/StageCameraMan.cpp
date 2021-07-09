@@ -128,6 +128,9 @@ void CStageCameraMan::SetNearTake()
 	if (m_curTakeType == Near)
 		return;
 
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
 	m_curTakeType = Change;
 	m_nextTakeType = Near;
 	m_dstMaxDist = NearTake;
@@ -144,6 +147,9 @@ void CStageCameraMan::SetMidTake()
 
 	if (m_curTakeType == Change && m_nextTakeType == Far)
 		return;
+
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
 
 	m_curTakeType = Change;
 	m_nextTakeType = Mid;
@@ -164,12 +170,31 @@ void CStageCameraMan::SetFarTake()
 	if (m_curTakeType == Change && m_nextTakeType == Far)
 		return;
 
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
 	m_curTakeType = Change;
 	m_nextTakeType = Far;
 	m_dstMaxDist = FarTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 2.5f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = FarAngle;
+}
+
+void CStageCameraMan::SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
+{
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
+	m_gotoNextTakeTimer = 0.f;
+	m_curTakeType = Change;
+	m_nextTakeType = Custom;
+	m_dstMaxDist = dstMaxDistance;
+	m_changeTakeTimer = 0.f;
+	m_changeTakeSpeed = changeSpeed;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = dstXAngle;
 }
 
 void CStageCameraMan::ChangeTake()
@@ -187,7 +212,7 @@ void CStageCameraMan::ChangeTake()
 		if (CheckNoAction())
 		{
 			m_gotoNextTakeTimer += GET_PLAYER_DT;
-			if (m_gotoNextTakeTimer > 3.f)
+			if (m_gotoNextTakeTimer > 4.f)
 			{
 				m_gotoNextTakeTimer = 0.f;
 				SetNearTake();
@@ -199,6 +224,17 @@ void CStageCameraMan::ChangeTake()
 		}
 		break;
 	case CStageCameraMan::Far:
+		if (CheckNoAction())
+		{
+			m_gotoNextTakeTimer += GET_PLAYER_DT;
+			if (m_gotoNextTakeTimer > 1.5f)
+			{
+				m_gotoNextTakeTimer = 0.f;
+				SetMidTake();
+			}
+		}
+		break;
+	case CStageCameraMan::Custom:
 		if (CheckNoAction())
 		{
 			m_gotoNextTakeTimer += GET_PLAYER_DT;
@@ -281,7 +317,7 @@ void CStageCameraMan::AppendTargetCorrecting()
 	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 
 	_float3 dir = targetPos - actorPos;
-	_float distance = D3DXVec3Length(&dir) * 0.5f;
+	_float distance = D3DXVec3Length(&dir) * 0.55f;
 	
 	D3DXVec3Normalize(&dir, &dir);
 	m_dstPivotPos = actorPos + dir * distance;
@@ -373,6 +409,7 @@ void CStageCameraMan::ManualControlMode()
 	if (m_rotateLerpTimer > 1.f)
 	{
 		m_spCamera->SetLookAngleUp(m_rotateYDst);
+		m_rotateLerpStart = m_spCamera->GetLookAngleUp();
 		return;
 	}
 
@@ -404,6 +441,21 @@ void CStageCameraMan::AutoControlMode()
 void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)
 {
 	m_pCameraShake->Preset_LowAttack(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Theresa_Charge1Impact(_float3 eventPos)
+{
+	m_pCameraShake->Preset_Theresa_Charge1Impact(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Theresa_Charge2Impact(_float3 eventPos)
+{
+	m_pCameraShake->Preset_Theresa_Charge2Impact(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Theresa_CrossImpact(_float3 eventPos)
+{
+	m_pCameraShake->Preset_Theresa_CrossImpact(eventPos);
 }
 
 

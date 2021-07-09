@@ -15,7 +15,7 @@ class CCameraShake;
 class CStageCameraMan
 {
 public:
-	enum TakeType { Near, Mid, Far, Change };
+	enum TakeType { Near, Mid, Far, Custom, Change };
 
 public:
 	CStageCameraMan();
@@ -32,6 +32,7 @@ public:
 	void SetNearTake();
 	void SetMidTake();
 	void SetFarTake();
+	void SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void ChangeTake();
 
 	void AppendTargetCorrecting();
@@ -43,6 +44,10 @@ public:
 
 public:
 	void ShakeCamera_Low(_float3 eventPos);
+
+	void ShakeCamera_Theresa_Charge1Impact(_float3 eventPos);
+	void ShakeCamera_Theresa_Charge2Impact(_float3 eventPos);
+	void ShakeCamera_Theresa_CrossImpact(_float3 eventPos);
 
 private:
 

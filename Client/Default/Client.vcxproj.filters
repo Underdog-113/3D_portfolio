@@ -1557,6 +1557,9 @@
     <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
