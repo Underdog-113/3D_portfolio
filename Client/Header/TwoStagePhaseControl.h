@@ -9,18 +9,9 @@ public:
 	enum class ETwoStagePhase
 	{
 		PlayerSummon		,
-		BeforeFirstFight	,
-		FirstFightBegin		,
-		FirstFightEnd		,
-		BeforeSecondFight	,
-		SecondFightBegin	,
-		SecondFightEnd		,
-		BeforeMidBoss		,
-		MidBossBegin		,
-		MidBossEnd			,
-		BeforeBoss,
-		BossBegin,
-		BossEnd,
+		BeforeBoss			,
+		BossBegin			,
+		BossEnd				,
 		StageResult			,
 		StageResult_Idle	,
 		NumOfPhse			

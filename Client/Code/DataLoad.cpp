@@ -736,6 +736,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 		_bool isBoss;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
 			L"_boss", isBoss);
+		spMonster->SetIsBoss(isBoss);
 
 		_int phaseChangerNum;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +

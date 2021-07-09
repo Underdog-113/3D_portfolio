@@ -11,7 +11,7 @@
 #include "PartySettingScene.h"
 #include "StageSelectionScene.h"
 #include "OneStageScene.h"
-#include "TwoStageScene.h"
+#include "ThreeStageScene.h"
 #include "ThreeStageScene.h"
 #include "BattleEndScene.h"
 #include "InventoryScene.h"
@@ -115,7 +115,7 @@ void CButtonFunction::Sally()
 		GET_CUR_CLIENT_SCENE->ChangeScene(COneStageScene::Create());
 		break;
 	case 1:
-		GET_CUR_CLIENT_SCENE->ChangeScene(CTwoStageScene::Create());
+		//GET_CUR_CLIENT_SCENE->ChangeScene(CTwoStageScene::Create());
 		break;
 	case 2:
 		GET_CUR_CLIENT_SCENE->ChangeScene(CThreeStageScene::Create());

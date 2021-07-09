@@ -33,9 +33,9 @@ class CStageCameraMan;
 class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
-class CTwoStagePhaseControl;
+class CThreeStagePhaseControl;
 enum class EOneStagePhase;
-enum class ETwoStagePhase;
+enum class EThreeStagePhase;
 class CStageControlTower
 {
 	DECLARE_SINGLETON(CStageControlTower)
@@ -59,7 +59,7 @@ public:
 public:		/* Phase */
 	void IncreasePhase();
 	void ChangePhase(EOneStagePhase phaseType);
-	void ChangePhase(ETwoStagePhase phaseType);
+	void ChangePhase(EThreeStagePhase phaseType);
 
 public:		/* Battle */
 	void ActAttack();
