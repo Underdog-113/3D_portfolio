@@ -301,11 +301,6 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	}
 }
 
-void CBattleUiManager::MonsterStateUpdate()
-{
-	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
-}
-
 void CBattleUiManager::MonsterStateEnd()
 {
 	m_monsterStateCanvas->SetIsEnabled(true);
@@ -387,7 +382,7 @@ void CBattleUiManager::OffTargetUI()
 
 void CBattleUiManager::MonsterHpDown(_float value)
 {
-	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(m_monsterStateCanvas->GetComponent<CLifeObjectC>()->GetLifeTime() + 1);
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10.f);
 
 	for (auto object : m_monsterHpBar)
 	{

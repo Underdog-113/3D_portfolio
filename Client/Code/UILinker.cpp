@@ -313,7 +313,8 @@ void CUILinker::OffMonsterInfo(void)
 	m_pUIManager->MonsterStateEnd();
 }
 
-void CUILinker::MonsterHpSet()
+void CUILinker::MonsterHpDown(_float damage)
 {
+	m_pUIManager->MonsterHpDown(damage);
 	//_float value
 }

@@ -49,7 +49,7 @@ public:
 		
 	void	MonsterInfoSet			(void);
 	void	OffMonsterInfo			(void);
-	void	MonsterHpSet			(void);
+	void	MonsterHpDown			(_float damage);
 
 
 private:
