@@ -67,7 +67,7 @@ public:		/* Battle */
 	bool ActSkill();
 	bool ActUltra();
 
-	void FindTarget();
+	bool FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 

@@ -163,13 +163,13 @@ bool CStageControlTower::ActUltra()
 	return true;
 }
 
-void CStageControlTower::FindTarget()
+bool CStageControlTower::FindTarget()
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
 	if (monsterList.empty())
-		return;
+		return false;
 
 	int count = 0;
 	for (auto& iter : monsterList)
@@ -179,7 +179,7 @@ void CStageControlTower::FindTarget()
 	}
 
 	if (count == 0)
-		return;
+		return false;
 
 	// 1. 우선 플레이어와의 거리를 재고 가까운순
 	SP(Engine::CObject) spTarget = nullptr;
@@ -216,7 +216,7 @@ void CStageControlTower::FindTarget()
 
 
 	if (m_mode == WithoutUI)
-		return;
+		return false;
 
 	if (m_spCurTarget)
 	{
@@ -228,9 +228,11 @@ void CStageControlTower::FindTarget()
 		
 		// ui interaction
 		m_pLinker->OnTargetMarker();
+
+		return true;
 	}
 
-	
+	return false;
 }
 
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info, _float3 hitPoint)
@@ -262,8 +264,13 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 		if (m_spCurTarget.get() == pM)
 		{
 			m_spCurTarget = nullptr;
-			m_pLinker->OffTargetMarker();
-			m_pLinker->OffMonsterInfo();
+
+			if (!FindTarget())
+			{
+				m_pLinker->OffTargetMarker();
+				m_pLinker->OffMonsterInfo();
+				return;
+			}
 		}
 
 		pM->MonsterDead();
