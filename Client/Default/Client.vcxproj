@@ -225,6 +225,7 @@
     <ClInclude Include="..\Header\Scout_Laser.h" />
     <ClInclude Include="..\Header\SickleAirbornePattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
+    <ClInclude Include="..\Header\SizeUpC.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\OutlineShader.h" />
@@ -492,6 +493,7 @@
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
+    <ClCompile Include="..\Code\SizeUpC.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp" />
