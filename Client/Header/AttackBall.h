@@ -35,6 +35,7 @@ public:
 
 public:
 					void						SetupBall			(CObject* pOwner, _mat* pParentMat, _float radius, HitInfo info);
+					void						SetupBall			(_float radius, HitInfo info);
 private:
 					void						SetBasicName		(void) override;
 private:

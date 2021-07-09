@@ -120,6 +120,10 @@ void CButtonManager::ButtonDown()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
+			if (!button->GetIsEnabled())
+			{
+				continue;
+			}
 			if (m_clickButton == nullptr)
 			{
 				m_clickButton = button;
@@ -135,6 +139,10 @@ void CButtonManager::ButtonDown()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
+			if (!button->GetIsEnabled())
+			{
+				continue;
+			}
 			if (m_clickButton == nullptr)
 			{
 				m_clickButton = button;
@@ -150,7 +158,11 @@ void CButtonManager::ButtonDown()
 	{
 		if (ButtonCollisionCheck(button->GetTransform()->GetPosition(), button->GetTransform()->GetSize(), mousePos))
 		{
-			if (m_clickButton == nullptr)
+			if (!button->GetIsEnabled())
+			{
+				continue;
+			}
+			else if (m_clickButton == nullptr)
 			{
 				m_clickButton = button;
 			}

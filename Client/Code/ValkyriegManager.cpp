@@ -6,7 +6,7 @@
 #include "ValkyrieWeapon.h"
 #include "ValkyrieLevelUp.h"
 #include "ValkyrieWeaponSwap.h"
-
+#include "ValkyrieWeaponLevelUp.h"
 IMPLEMENT_SINGLETON(CValkyriegManager)
 std::wstring CValkyriegManager::g_selectValkyrie = L"";
 std::wstring CValkyriegManager::g_oldSelectValkyrie = L"";
@@ -66,9 +66,14 @@ void CValkyriegManager::ChangeFSMWeapon()
 	ChangeFSM(STATE::Weapon);
 }
 
-void CValkyriegManager::changeFSMWeaponSwap()
+void CValkyriegManager::ChangeFSMWeaponSwap()
 {
 	ChangeFSM(STATE::WeaponSwap);
+}
+
+void CValkyriegManager::ChangeFSMWeaponLevelUp()
+{
+	ChangeFSM(STATE::WeaponLevelUp);
 }
 
 void CValkyriegManager::FSMCreate()
@@ -78,5 +83,6 @@ void CValkyriegManager::FSMCreate()
 	m_valkyrieFSM[STATE::Weapon] = new CValkyrieWeapon();
 	m_valkyrieFSM[STATE::LevelUp] = new CValkyrieLevelUp();
 	m_valkyrieFSM[STATE::WeaponSwap] = new CValkyrieWeaponSwap();
+	m_valkyrieFSM[STATE::WeaponLevelUp] = new CValkyrieWeaponLevelUp();
 	m_valkyrieFSM[STATE::Select]->Start();
 }

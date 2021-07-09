@@ -93,12 +93,12 @@ void CAttackBall::LateUpdate(void)
 {
 	__super::LateUpdate();
 
-	_float3 pos = m_spTransform->GetPosition();
-
- 	_float3 offsetPos;
- 	D3DXVec3TransformCoord(&offsetPos, &m_offset, m_pParentMatrix);
- 	m_spTransform->SetPosition(offsetPos);
-
+	if (m_pParentMatrix)
+	{
+		_float3 offsetPos;
+		D3DXVec3TransformCoord(&offsetPos, &m_offset, m_pParentMatrix);
+		m_spTransform->SetPosition(offsetPos);
+	}
 }
 
 void CAttackBall::OnDestroy(void)
@@ -209,6 +209,14 @@ void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, 
 
 	_float3 pos = _float3(m_pParentMatrix->_41, m_pParentMatrix->_42, m_pParentMatrix->_43);
 	m_spTransform->SetPosition(pos);
+	m_hitInfo = info;
+
+	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);
+	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->UpdateBS();
+}
+
+void CAttackBall::SetupBall( _float radius, HitInfo info)
+{
 	m_hitInfo = info;
 
 	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);

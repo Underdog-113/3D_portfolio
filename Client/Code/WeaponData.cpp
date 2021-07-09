@@ -11,7 +11,7 @@ CWeaponData::~CWeaponData()
 {
 }
 
-void CWeaponData::AddWeaponData(std::wstring name, _int rank, _float maxExperience, _int maxLevel, _int damage, _int hoesim, std::wstring explanation, std::wstring weaponType, _int damageIncrease, _int hoesimIncrease, _int upgradeGold,	std::wstring textureKey, std::wstring messKey)
+void CWeaponData::AddWeaponData(std::wstring name, _int rank, _int maxExperience, _int maxLevel, _int damage, _int hoesim, std::wstring explanation, std::wstring weaponType, _int damageIncrease, _int hoesimIncrease, _int upgradeGold,	std::wstring textureKey, std::wstring messKey)
 {
 	m_name = name;
 	m_rank = rank;
@@ -30,4 +30,12 @@ void CWeaponData::AddWeaponData(std::wstring name, _int rank, _float maxExperien
 
 	m_textureKey = textureKey;
 	m_messKey = messKey;
+}
+
+void CWeaponData::LevelUp()
+{
+	m_level += 1;
+	m_damage += m_damageIncrease;
+	m_hoesim += m_hoesimIncrease;
+	
 }

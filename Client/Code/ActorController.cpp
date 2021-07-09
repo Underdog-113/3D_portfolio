@@ -10,6 +10,8 @@ CActorController::CActorController()
 {
 	m_pInput = Engine::CInputManager::GetInstance();
 	m_rotSpeed = 18.f;
+
+	m_rotateLock = true;
 }
 
 

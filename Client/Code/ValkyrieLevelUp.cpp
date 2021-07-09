@@ -18,6 +18,7 @@ void CValkyrieLevelUp::Start()
 		CValkyriegManager::GetInstance()->ChangeFSMProperty();
 		return;
 	}
+	m_selectObject = nullptr;
 
 	g_itemCount = 0;
 
@@ -66,13 +67,12 @@ void CValkyrieLevelUp::LevelUp()
 	CValkyrieStatusData* data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
 	
 	_int expSum = data->GetExperience() + (CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetExperience() * g_itemCount);
-	_int levalUpSum = 0;
 
 	while (true)
 	{
 		if (expSum >= data->GetMaxExperience())
 		{
-			levalUpSum++;
+			data->LevelUp();
 			expSum -= data->GetMaxExperience();
 			data->SetMaxExperience((_int)(data->GetMaxExperience() * 1.5));
 			continue;
@@ -82,7 +82,6 @@ void CValkyrieLevelUp::LevelUp()
 	}
 
 	data->SetExperience(expSum);
-	data->LevelUp();
 	CDataManager::GetInstance()->FindItemData(g_selectItemName)->CountDown(g_itemCount);
 	g_itemCount = 0;
 	CValkyriegManager::GetInstance()->ChangeFSMProperty();
@@ -118,6 +117,17 @@ void CValkyrieLevelUp::ItemSelect()
 {
 	// 어떤 아이템을 쓸건인지
 	g_selectItemName = CButtonManager::GetInstance()->GetActivationButton()->GetName();
+	g_itemCount = 0;
+
+	static_cast<CValkyrieLevelUp*>(CValkyriegManager::GetInstance()->GetValkyrieFSM())->ItemCountUp();
+	std::static_pointer_cast<Engine::CSlider>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Slider_0"))->SetMaxValue((_float)CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetCount());
+
+
+	if (m_selectObject != nullptr)
+		m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() - _float3(20, 20, 0));
+
+	m_selectObject = CButtonManager::GetInstance()->GetActivationButton();
+	m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() + _float3(20, 20, 0));
 }
 
 void CValkyrieLevelUp::ItemCountUiHelp()
@@ -149,12 +159,15 @@ void CValkyrieLevelUp::ItemButtonSetting()
 	std::vector<CItemData*> data = CDataManager::GetInstance()->FindItemData();
 	size_t size = data.size();
 	_float offsetX = 174.2f;
-	_float3 statPos = _float3(-offsetX * (int)(size * 0.5f), 0, 0.7f);
+	_float3 statPos = _float3(-offsetX * (int)(4 * 0.5f), 0, 0.7f);
 
 	CValkyrieLevelUp::g_selectItemName = data[0]->GetName();
 
 	for (int i = 0; i < size; i++)
 	{
+		if(data[i]->GetType() != CItemData::STATE::ValkyrieMaterial)
+			continue;
+
 		SP(CItemButton) object;
 		object = std::dynamic_pointer_cast<CItemButton>(CValkyriegManager::GetInstance()->GetScene()->GetObjectFactory()->AddClone(L"ItemButton", true, (_int)Engine::ELayerID::UI, L""));
 		object->GetTransform()->SetPosition(statPos);
@@ -166,7 +179,7 @@ void CValkyrieLevelUp::ItemButtonSetting()
 		// 텍스트
 		object->textCreate(L"", _float2(0.0f, 62.1f), statPos.z, 28, D3DXCOLOR(0, 0, 0, 1), L"", L"×" + std::to_wstring(data[i]->GetCount()));
 
-		object->GetButton()->AddFuncData<void(CItemButton::*)(), CItemButton*>(&CItemButton::ItemSelect, object.get());
+		object->GetButton()->AddFuncData<void(CValkyrieLevelUp::*)(), CValkyrieLevelUp*>(&CValkyrieLevelUp::ItemSelect, this);
 
 		statPos.x += offsetX;
 		m_spItemButtonObject.emplace_back(object);

@@ -4,6 +4,8 @@
 
 #include "Object.h"
 
+class CTheresa;
+class CAttackBall;
 class CTheresa_CrossBlade;
 class CTheresa_CrossBloodyHug final : public Engine::CObject
 {
@@ -40,6 +42,7 @@ public:
 					void					SetBasicName		(void) override;
 
 private:
+					void					FallReady();
 					void					FallDown();
 					void					StretchBlade();
 					void					RollBlade();
@@ -53,16 +56,18 @@ protected:
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 				
 private:	
+	GETTOR_SETTOR	(CTheresa*,						m_pTheresa,			nullptr,	Theresa)
 	GETTOR			(SP(Engine::CObject),			m_spCrossBlade,		nullptr,	CrossBlade)
+	GETTOR_SETTOR	(_float,						m_fallStartY,		0.f,		FallStartY)
+	GETTOR_SETTOR	(_float,						m_fallEndY,			0.f,		FallEndY)
+		
+	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 
 	SkillState m_skillState = Ready;
 
-	_float m_fallTimer = 0.f;
-	_float m_fallDuration = 0.5f;
-	_float m_fallStartY = 0.f;
-
-	_float m_activeTimer = 0.f;
-	_float m_activeDuration = 2.f;
+	_float m_stateTimer = 0.f;
+	_float m_stateDuration = 0.2f;
+	_float m_attackTimer = 0.f;
 
 	_bool m_beginAnimEnd = false;
 

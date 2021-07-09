@@ -15,6 +15,7 @@ public:
 	void InventoryScene();
 	void Sally();
 	void BattleEndScene();
+	void SupplyScene();
 
 	void BattleRenunciation();
 

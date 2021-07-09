@@ -7,6 +7,7 @@
 #include "UILinker.h"
 
 #include "AttackBox.h"
+#include "Theresa_CrossBloodyHug.h"
 
 CTheresa::CTheresa()
 {
@@ -202,8 +203,13 @@ void CTheresa::UseSkill(void)
 	m_skillTimer = 0.f;
 
 	//test
-	m_spCrossBloodyHug->SetIsEnabled(true);
-	m_spCrossBloodyHug->GetTransform()->SetPosition(m_spTransform->GetPosition() + _float3(0.f, 1.f, 0.f));
+	m_pCrossBloodyHug->SetIsEnabled(true);
+	m_pCrossBloodyHug->GetTransform()->SetPosition(m_spTransform->GetPosition() + _float3(0.f, 1.7f, 0.f));
+	m_pCrossBloodyHug->GetTransform()->AddPosition(m_spTransform->GetForward() * 1.5f);
+	m_pCrossBloodyHug->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
+	m_pCrossBloodyHug->SetFallStartY(m_spTransform->GetPosition().y + 1.7f);
+	m_pCrossBloodyHug->SetFallEndY(m_spTransform->GetPosition().y);
+
 }
 
 void CTheresa::UseUltra(void)
@@ -218,8 +224,10 @@ void CTheresa::UseUltra(void)
 
 void CTheresa::CreateCross(void)
 {
-	m_spCrossBloodyHug = GetScene()->ADD_CLONE(L"Theresa_CrossBloodyHug", true, (_uint)ELayerID::Player, L"CrossBloodyHug");
-	m_spCrossBloodyHug->SetIsEnabled(false);
+	auto spCross = GetScene()->ADD_CLONE(L"Theresa_CrossBloodyHug", true, (_uint)ELayerID::Player, L"CrossBloodyHug");
+	m_pCrossBloodyHug = static_cast<CTheresa_CrossBloodyHug*>(spCross.get());
+	m_pCrossBloodyHug->SetIsEnabled(false);
 
-	m_spCrossBloodyHug->GetTransform()->SetSize(m_spTransform->GetSize());
+	m_pCrossBloodyHug->GetTransform()->SetSize(0.75f, 0.75f, 0.75f);
+	m_pCrossBloodyHug->SetTheresa(this);
 }

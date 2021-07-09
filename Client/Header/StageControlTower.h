@@ -73,7 +73,9 @@ public:		/* Battle */
 
 	void SwitchValkyrie(Squad_Role role);
 
+	void SetCameraMidTake();
 	void SetCameraFarTake();
+	void SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void OffCameraTargeting();
 	void EndSwitching();
 

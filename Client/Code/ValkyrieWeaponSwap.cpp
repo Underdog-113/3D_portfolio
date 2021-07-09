@@ -13,6 +13,7 @@ CValkyrieWeaponSwap::~CValkyrieWeaponSwap()
 void CValkyrieWeaponSwap::Start()
 {
 	std::cout << "무기시작" << std::endl;
+	m_selectObject = nullptr;
 	
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"WeaponSwapCanvas")->SetIsEnabled(true);
 	m_scene = CValkyriegManager::GetInstance()->GetScene();
@@ -78,6 +79,12 @@ void CValkyrieWeaponSwap::OnDestroy(void)
 void CValkyrieWeaponSwap::SelectWeapon()
 {
 	g_selectWeaponName = CButtonManager::GetInstance()->GetActivationButton()->GetName();
+
+	if(m_selectObject != nullptr)
+		m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() - _float3(20, 20, 0));
+
+	m_selectObject = CButtonManager::GetInstance()->GetActivationButton();
+	m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() + _float3(20, 20, 0));
 }
 
 void CValkyrieWeaponSwap::WeaponChange()
