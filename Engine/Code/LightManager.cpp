@@ -49,7 +49,7 @@ void CLightManager::AddLight(D3DLIGHT9 * pLightInfo)
 
 void CLightManager::RenderLights(LPD3DXEFFECT pEffect)
 {
-	m_globalAmbient = _float4(3, 3, 3, 3);
+	m_globalAmbient = _float4(.5f, .5f, .5f, .5f);
 	pEffect->SetVector("g_vGlobalAmbient", &m_globalAmbient);
 	for (auto& light : m_vLights)
 		light->RenderLight(pEffect);

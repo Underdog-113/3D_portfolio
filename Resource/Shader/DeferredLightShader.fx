@@ -16,6 +16,10 @@ sampler DepthSampler = sampler_state
 	texture = g_DepthTexture;
 };
 
+texture			g_LightMap;
+
+
+
 matrix			g_matInvProj;
 matrix			g_matInvView;
 
@@ -54,14 +58,14 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	vector		vColor		= tex2D(ColorSampler, In.vTexUV);
 	vector		vDepth		= tex2D(DepthSampler, In.vTexUV);
 	
-	
+	vector		vNormalComplement = (vector)vNormal.a;
 	// 텍스처->월드
 	vNormal = vector(vNormal.xyz * 2.f - 1.f, 0.f);
 	
-	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) * 
+	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) *
 						  (g_vLightDiffuse * g_vMtrlDiffuse) +
 						  (g_vLightAmbient * (g_vMtrlAmbient + g_vGlobalAmbient));
-	//Out.vShade = floor(Out.vShade * 2.5) / 2;
+	Out.vShade = floor(Out.vShade * 2) / 2;
 	//Out.vShade.a = 0.f;
 	vector	vReflect = reflect(normalize(vector(g_vLightDir.xyz, 0.f)), vNormal);
 
@@ -86,12 +90,12 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 	
 	vector	vLook = normalize(g_vCamPos - vPosition);
 
-	//vector dotRNL = saturate(dot(normalize(vReflect), vLook));
-	//Out.vSpecular = pow(dotRNL, 20);
-	//Out.vSpecular.a = 0;
+	vector dotRNL = saturate(dot(normalize(vReflect), vLook));
+	Out.vSpecular = pow(dotRNL, 40);
+	Out.vSpecular.a = 0;
 	//Out.vSpecular *= g_vMtrlSpecular;
 
-	Out.vSpecular = (vector)0;
+	//Out.vSpecular = (vector)0;
 
 
 	return Out;

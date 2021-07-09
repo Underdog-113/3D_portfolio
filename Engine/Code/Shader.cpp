@@ -52,6 +52,8 @@ void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)
 	m_pEffect->SetMatrix("g_matWorld", &worldMat);
 	m_pEffect->SetMatrix("g_matView", &viewMat);
 	m_pEffect->SetMatrix("g_matProj", &projMat);
+
+	m_pEffect->CommitChanges();
 }
 
 void CShader::SetupOrthoWVP(SP(CGraphicsC) spGC)
@@ -65,4 +67,5 @@ void CShader::SetupOrthoWVP(SP(CGraphicsC) spGC)
 	m_pEffect->SetMatrix("g_matWorld", &worldMat);
 	m_pEffect->SetMatrix("g_matView", &viewMat);
 	m_pEffect->SetMatrix("g_matProj", &projMat);
+	m_pEffect->CommitChanges();
 }
