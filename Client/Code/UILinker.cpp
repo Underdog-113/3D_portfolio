@@ -316,5 +316,4 @@ void CUILinker::OffMonsterInfo(void)
 void CUILinker::MonsterHpDown(_float damage)
 {
 	m_pUIManager->MonsterHpDown(damage);
-	//_float value
 }

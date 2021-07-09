@@ -207,26 +207,27 @@ bool CStageControlTower::FindTarget()
 		}
 	}
 
-	// 2. 가까운 정도가 비슷할 경우, 플레이어 앞에 있는 녀석으로
-
-
-	// 3. 같으면 냅두고, 다르면 방향 다시 재설정
-
-	m_spCurTarget = spTarget;
-
 
 	if (m_mode == WithoutUI)
 		return false;
 
-	if (m_spCurTarget)
+	if (spTarget && m_spCurTarget == spTarget)
 	{
+		m_pActorController->TargetingOn();
+		m_pCameraMan->SetIsTargeting(true);
+
+		return true;
+	}
+	else if (m_spCurTarget)
+	{
+		m_spCurTarget = spTarget;
+
 		m_pActorController->TargetingOn();
 		m_pCameraMan->SetIsTargeting(true);
 
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
-
-		
+				
 		// ui interaction
 		m_pLinker->OnTargetMarker();
 
