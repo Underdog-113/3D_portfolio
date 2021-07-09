@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\Robot_Impact_Smoke.h"
+#include "..\Header\Ganesha_Impact_Eff.h"
 
-_uint CRobot_Impact_Smoke::m_s_uniqueID = 0;
+_uint CGanesha_Impact_Eff::m_s_uniqueID = 0;
 
-CRobot_Impact_Smoke::CRobot_Impact_Smoke()
+CGanesha_Impact_Eff::CGanesha_Impact_Eff()
 {
 }
 
 
-CRobot_Impact_Smoke::~CRobot_Impact_Smoke()
+CGanesha_Impact_Eff::~CGanesha_Impact_Eff()
 {
 }
 
-SP(CRobot_Impact_Smoke) CRobot_Impact_Smoke::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CGanesha_Impact_Eff) CGanesha_Impact_Eff::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CRobot_Impact_Smoke) spInstance(new CRobot_Impact_Smoke, Engine::SmartDeleter<CRobot_Impact_Smoke>);
+	SP(CGanesha_Impact_Eff) spInstance(new CGanesha_Impact_Eff, Engine::SmartDeleter<CGanesha_Impact_Eff>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +22,9 @@ SP(CRobot_Impact_Smoke) CRobot_Impact_Smoke::Create(_bool isStatic, Engine::CSce
 	return spInstance;
 }
 
-SP(Engine::CObject) CRobot_Impact_Smoke::MakeClone()
+SP(Engine::CObject) CGanesha_Impact_Eff::MakeClone()
 {
-	SP(CRobot_Impact_Smoke) spClone(new CRobot_Impact_Smoke, Engine::SmartDeleter<CRobot_Impact_Smoke>);
+	SP(CGanesha_Impact_Eff) spClone(new CGanesha_Impact_Eff, Engine::SmartDeleter<CGanesha_Impact_Eff>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -36,29 +36,26 @@ SP(Engine::CObject) CRobot_Impact_Smoke::MakeClone()
 	return spClone;
 }
 
-void CRobot_Impact_Smoke::Awake()
+void CGanesha_Impact_Eff::Awake()
 {
 	__super::Awake();
 
 }
 
-void CRobot_Impact_Smoke::Start()
+void CGanesha_Impact_Eff::Start()
 {
 	__super::Start();
 	m_fAlpha = 1.3f;
 	m_fTime = 0.f;
 }
 
-void CRobot_Impact_Smoke::FixedUpdate()
+void CGanesha_Impact_Eff::FixedUpdate()
 {
 	__super::FixedUpdate();
-
 }
 
-void CRobot_Impact_Smoke::Update()
+void CGanesha_Impact_Eff::Update()
 {
-	__super::Update();
-
 	if (m_fAlpha <= 0)
 	{
 		this->SetDeleteThis(true);
@@ -71,13 +68,13 @@ void CRobot_Impact_Smoke::Update()
 	m_spTransform->AddSize(_size * GET_DT);
 }
 
-void CRobot_Impact_Smoke::LateUpdate()
+void CGanesha_Impact_Eff::LateUpdate()
 {
 	__super::LateUpdate();
 
 }
 
-void CRobot_Impact_Smoke::PreRender(LPD3DXEFFECT pEffect)
+void CGanesha_Impact_Eff::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
@@ -85,38 +82,34 @@ void CRobot_Impact_Smoke::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetBool("gPlayingAnim", true);
 }
 
-void CRobot_Impact_Smoke::Render(LPD3DXEFFECT pEffect)
+void CGanesha_Impact_Eff::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-
 }
 
-void CRobot_Impact_Smoke::PostRender(LPD3DXEFFECT pEffect)
+void CGanesha_Impact_Eff::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
-
 }
 
-void CRobot_Impact_Smoke::OnDestroy()
+void CGanesha_Impact_Eff::OnDestroy()
 {
 	__super::OnDestroy();
 
 }
 
-void CRobot_Impact_Smoke::OnEnable()
+void CGanesha_Impact_Eff::OnEnable()
 {
 	__super::OnEnable();
 }
 
-
-void CRobot_Impact_Smoke::OnDisable()
+void CGanesha_Impact_Eff::OnDisable()
 {
 	__super::OnDisable();
 
 }
 
-void CRobot_Impact_Smoke::SetBasicName()
+void CGanesha_Impact_Eff::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
-
 }
