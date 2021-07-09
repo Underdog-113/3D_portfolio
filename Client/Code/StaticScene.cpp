@@ -241,9 +241,6 @@ void CStaticScene::InitMonsterPrototypes(void)
 	SP(CMonster) spMO_Ninza(CMO_Ninza::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Ninza);
 
-	SP(CMonster) spMO_Axe(CMO_Axe::Create(true, this));
-	GetObjectFactory()->AddPrototype(spMO_Axe);
-
 	SP(CMonster) spMO_Scout(CMO_Scout::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Scout);
 

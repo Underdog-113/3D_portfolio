@@ -91,10 +91,12 @@ void CMeshC::Start(SP(CComponent) spThis)
 	else // DynamicMesh
 	{
 		CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
+		spGraphics->ResizeMaterial(pDM->GetSubsetCount());
+		m_pOwner->GetComponent<CShaderC>()->ResizeShaderPerSubset(pDM->GetSubsetCount());
 		for (auto& meshContainer : pDM->GetMeshContainers())
 		{
 			for (_uint i = 0; i < meshContainer->NumMaterials; ++i)
-				spGraphics->AddMaterial(meshContainer->pMaterials[i].MatD3D);
+				spGraphics->AddMaterial(meshContainer->pMaterials[i].MatD3D, meshContainer->subsetIndexStart + i);
 		}
 	}
 }
@@ -135,9 +137,9 @@ void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 void CMeshC::RenderPerShader(SP(CGraphicsC) spGC)
 {
 	if (m_pMeshData->GetMeshType() == (_int)EMeshType::Static)
-		RenderStaticPerShader(spGC);
+		RenderStaticPerSubset(spGC);
 	else
-		RenderDynamicPerShader(spGC);
+		RenderDynamicPerSubset(spGC);
 
 	m_haveDrawn = true;
 }
@@ -311,7 +313,7 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFE
 	}
 }
 
-void CMeshC::RenderStaticPerShader(SP(CGraphicsC) spGC)
+void CMeshC::RenderStaticPerSubset(SP(CGraphicsC) spGC)
 {
 	CStaticMeshData* pSM = static_cast<CStaticMeshData*>(m_pMeshData);
 	_uint pass = 0;
@@ -319,18 +321,36 @@ void CMeshC::RenderStaticPerShader(SP(CGraphicsC) spGC)
 	SP(CShaderC) spShader = spGC->GetShader();
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
-		D3DMATERIAL9 curMtrl = spGC->GetMaterials()[i];
-		_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
-		_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
-		_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
-		_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
-		_float specularPower = curMtrl.Power;
-
 		CShader* pCurShader = spShader->GetShaders()[i];
 		LPD3DXEFFECT pEffect = pCurShader->GetEffect();
 
 		pCurShader->SetUpConstantTable(spGC);
-		pSM->GetMesh()->DrawSubset(i);
+
+		D3DMATERIAL9 curMtrl = spGC->GetMaterials()[i];
+		_float4 ambient		(curMtrl.Ambient.r,		curMtrl.Ambient.g,	curMtrl.Ambient.b,	curMtrl.Ambient.a);
+		_float4 diffuse		(curMtrl.Diffuse.r,		curMtrl.Diffuse.g,	curMtrl.Diffuse.b,	curMtrl.Diffuse.a);
+		_float4 emissive	(curMtrl.Emissive.r,	curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
+		_float4 specular	(curMtrl.Specular.r,	curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
+		_float	specularPower = curMtrl.Power;
+
+		pEffect->SetVector("g_ambient", &ambient);
+		pEffect->SetVector("g_diffuse", &diffuse);
+		pEffect->SetVector("g_emissive", &emissive);
+		pEffect->SetVector("g_specular", &specular);
+		pEffect->SetFloat("g_specularPower", specularPower);
+
+
+		pEffect->CommitChanges();
+
+		_uint maxPass = 0;
+		pEffect->Begin(&maxPass, 0);
+		for (_uint i = 0; i < maxPass; ++i)
+		{
+			pEffect->BeginPass(i);
+			pSM->GetMesh()->DrawSubset(i);
+			pEffect->EndPass();
+		}
+		pEffect->End();
 	}
 }
 
@@ -389,7 +409,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 		vMeshContainers[i]->pSkinInfo->UpdateSkinnedMesh(vMeshContainers[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
-		_uint pass = 0;
 		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
 		{
 			if (pTexData[vMeshContainers[i]->subsetIndexStart + j][0] != nullptr)
@@ -416,8 +435,9 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			pEffect->SetVector("g_specular", &specular);
 			pEffect->SetFloat("g_specularPower", specularPower);
 
-
 			pEffect->CommitChanges();
+
+
 			
 			vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
 		}
@@ -428,6 +448,110 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 
 }
 
-void CMeshC::RenderDynamicPerShader(SP(CGraphicsC) spGC)
+void CMeshC::RenderDynamicPerSubset(SP(CGraphicsC) spGC)
 {
+	CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
+
+	// root motion
+	if (m_haveDrawn == false)
+	{
+		ApplyRootMotion(pDM);
+		pDM->PlayAnimation();
+	}
+
+	_mat makeMeshLookAtMe;
+	D3DXMatrixRotationY(&makeMeshLookAtMe, D3DXToRadian(180.f));
+	_mat rootCombMat = pDM->GetRootFrame()->TransformationMatrix * makeMeshLookAtMe;
+
+	D3DXFRAME* pBip001Frame = pDM->GetRootFrame()->pFrameFirstChild;
+	while (strcmp(pBip001Frame->Name, "Bip001") && strcmp(pBip001Frame->Name, "Bone001"))
+	{
+		pBip001Frame = pBip001Frame->pFrameFirstChild;
+	}
+	_mat rootChildCombMat = pBip001Frame->TransformationMatrix * rootCombMat;
+
+	_float3 rootMotionMoveAmount = _float3(rootChildCombMat._41,
+										   rootChildCombMat._42,
+										   rootChildCombMat._43);
+
+	m_rootMotionPos = rootMotionMoveAmount;
+	m_halfYOffset = rootChildCombMat._42 * m_pOwner->GetTransform()->GetSize().y;
+
+	const std::vector<_DerivedD3DXMESHCONTAINER*>& vMeshContainers = pDM->GetMeshContainers();
+	for (_int i = 0; i < vMeshContainers.size(); ++i)
+	{
+		if (vMeshContainers[i]->hide)
+			continue;
+		for (_ulong j = 0; j < vMeshContainers[i]->numBones; ++j)
+		{
+			vMeshContainers[i]->pRenderingMatrix[j] =
+				vMeshContainers[i]->pFrameOffsetMatrix[j] * (*vMeshContainers[i]->ppCombinedTransformMatrix[j]);
+
+			if (m_pRootMotion->GetIsRootMotion())
+			{
+				vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
+				vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
+			}
+		}
+
+		void* pSrcVertex = nullptr;
+		void* pDestVertex = nullptr;
+
+		vMeshContainers[i]->pOriMesh->LockVertexBuffer(0, &pSrcVertex);
+		vMeshContainers[i]->MeshData.pMesh->LockVertexBuffer(0, &pDestVertex);
+
+		vMeshContainers[i]->pSkinInfo->UpdateSkinnedMesh(vMeshContainers[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
+
+		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
+		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
+		{
+			CShader* pCurShader = spGC->GetShader()->GetShaderPerSubset()[vMeshContainers[i]->subsetIndexStart + j];
+
+			if (pCurShader == nullptr)
+				continue;
+
+			LPD3DXEFFECT pEffect = pCurShader->GetEffect();
+
+			pCurShader->SetUpConstantTable(spGC);
+			if (pTexData[vMeshContainers[i]->subsetIndexStart + j][0] != nullptr)
+			{
+				if (!m_isEffectMesh)
+				{
+					pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->subsetIndexStart + j][0]->pTexture);
+				}
+			}
+			else
+			{
+				pEffect->SetTexture("g_BaseTexture", nullptr);
+			}
+			D3DMATERIAL9 curMtrl = spGC->GetMaterials()[vMeshContainers[i]->subsetIndexStart + j];
+			_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
+			_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
+			_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
+			_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
+			_float specularPower = curMtrl.Power;
+
+			pEffect->SetVector("g_ambient", &ambient);
+			pEffect->SetVector("g_diffuse", &diffuse);
+			pEffect->SetVector("g_emissive", &emissive);
+			pEffect->SetVector("g_specular", &specular);
+			pEffect->SetFloat("g_specularPower", specularPower);
+
+
+			pEffect->CommitChanges();
+
+			_uint maxPass = 0;
+			pEffect->Begin(&maxPass, 0);
+			for (_uint k = 0; k < maxPass; ++k)
+			{
+				pEffect->BeginPass(j);
+				vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
+				pEffect->EndPass();
+			}
+			pEffect->End();			
+		}
+
+		vMeshContainers[i]->MeshData.pMesh->UnlockVertexBuffer();
+		vMeshContainers[i]->pOriMesh->UnlockVertexBuffer();
+	}
 }

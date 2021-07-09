@@ -241,33 +241,28 @@ void CGraphicsManager::RenderNonAlpha(void)
 						  pObject->GetTransform()->GetSize() / 2.f))
 			{
 				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
+
+
 				const std::vector<CShader*>& vShader = spShader->GetShaders();
-
-
-				if (spShader->GetShaderPerSubset() == false)
+				for (_size i = 0; i < vShader.size(); ++i)
 				{
-					for (_size i = 0; i < vShader.size(); ++i)
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
+					for (_uint i = 0; i < maxPass; ++i)
 					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						for (_uint i = 0; i < maxPass; ++i)
-						{
-							pEffect->BeginPass(i);
-							pObject->PreRender(pEffect);
-							pObject->Render(pEffect);
-							pObject->PostRender(pEffect);
-							pEffect->EndPass();
-						}
-						pEffect->End();
+						pEffect->BeginPass(i);
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+						pEffect->EndPass();
 					}
+					pEffect->End();
 				}
-				else
-				{
 
-				}
+				pObject->RenderPerShader();
 			}
 		}
 	}
@@ -281,7 +276,6 @@ void CGraphicsManager::RenderLights(void)
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Normal", "g_NormalTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_MtrlSpecular", "g_SpecMtrlTexture");
 
 	pEffect->Begin(NULL, 0);
 	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);

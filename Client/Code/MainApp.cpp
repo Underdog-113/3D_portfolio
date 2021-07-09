@@ -24,6 +24,7 @@
 #include "FireShader.h"
 #include "LaserTrailShader.h"
 #include "OutlineShader.h"
+#include "OutlineMeshShader.h"
 #pragma endregion
 
 
@@ -61,7 +62,7 @@ void CMainApp::Awake(void)
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 
-	/// Load Shader
+	// Load Shader
 	Engine::CShaderManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)EShaderID::NumOfShaderID);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CWaterShader::Create(), L"WaterShader", (_uint)EShaderID::WaterShader);
@@ -77,6 +78,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFireShader::Create(), L"FireShader", (_uint)EShaderID::FireShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CLaserTrailShader::Create(), L"LaserTrail", (_uint)EShaderID::LaserShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(COutlineShader::Create(), L"OutlineShader", (_uint)EShaderID::OutlineShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(COutlineMeshShader::Create(), L"OutlineMeshShader", (_uint)EShaderID::OutlineMeshShader);
 
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();

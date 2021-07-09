@@ -83,9 +83,17 @@ void CGraphicsC::OnEnable(void)
 	__super::OnEnable();
 }
 
-void CGraphicsC::AddMaterial(D3DMATERIAL9 mtrl)
+void CGraphicsC::AddMaterial(D3DMATERIAL9 mtrl, _int index)
 {
-	m_vMaterials.emplace_back(mtrl);
+	if (index == UNDEFINED)
+		m_vMaterials.emplace_back(mtrl);
+	else
+		m_vMaterials[index] = mtrl;
+}
+
+void CGraphicsC::ResizeMaterial(_int size)
+{
+	m_vMaterials.resize(size);
 }
 
 D3DMATERIAL9 & CGraphicsC::GetMtrl(void)

@@ -21,6 +21,8 @@ struct PS_IN
 struct PS_OUT
 {
 	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth : COLOR2;
 };
 
 VS_OUT VS_OUTLINE(VS_IN In)
@@ -33,7 +35,7 @@ VS_OUT VS_OUTLINE(VS_IN In)
 	matWVP = mul(matWV, g_matProj);
 
 	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
-	Out.vPosition += (normalize(mul(vector(In.vNormal.xyz, 0.f), matWVP)) / 160);
+	Out.vPosition += (normalize(mul(vector(In.vNormal.xyz, 0.f), matWVP)) / 320);
 
 	return Out;
 }
@@ -44,7 +46,8 @@ PS_OUT PS_OUTLINE(PS_IN In)
 	PS_OUT Out = (PS_OUT)0;
 
 	Out.vColor = float4(0, 0, 0, 1);
-
+	Out.vNormal = float4(0, 0, 0, 0);
+	Out.vDepth = float4(0, 0, 0, 0);
 	return Out;
 }
 
