@@ -160,7 +160,7 @@ void CMO_Scout::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 void CMO_Scout::SetStatus(BaseStat stat)

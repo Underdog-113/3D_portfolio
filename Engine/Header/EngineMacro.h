@@ -152,8 +152,10 @@ CRenderTargetManager::GetInstance()->EndMRT(mrtName)
 //FRC Macro
 #ifdef EXPORTS_ENGINE
 #define GET_DT CFRC::GetInstance()->GetDeltaTime()
+#define GET_PURE_DT CFRC::GetInstance()->GetPureDeltaTime()
 #else
 #define GET_DT Engine::CFRC::GetInstance()->GetDeltaTime()
+#define GET_PURE_DT Engine::CFRC::GetInstance()->GetPureDeltaTime()
 #endif
 #define TIME_MEASURE_START CFRC::GetInstance()->TimerStart()
 #define GET_ELAPSED_TIME CFRC::GetInstance()->GetElapsedTime()

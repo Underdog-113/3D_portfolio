@@ -77,6 +77,12 @@ void CKiana::Awake(void)
 
 void CKiana::Start(void)
 {
+	// status
+	V_WarshipStat stat;
+
+	m_pStat = new V_Kiana_Stat;
+	m_pStat->SetupStatus(&stat);
+
 	__super::Start();
 	m_spDebug = AddComponent<Engine::CDebugC>();
 
@@ -88,6 +94,7 @@ void CKiana::Start(void)
 	m_pAttackBall->GetTransform()->SetSize(3.f, 3.f, 3.f);
 	m_pAttackBall->SetOwner(this);
 
+	CreatePivotMatrix(&m_pLeftToe_World, &m_pLeftToe_Frame, "Bip001_L_Toe0");
 	CreatePivotMatrix(&m_pRightToe_World, &m_pRightToe_Frame, "Bip001_R_Toe0");
 	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_R_Hand");
 	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_L_Hand");
@@ -98,12 +105,6 @@ void CKiana::Start(void)
 	//catpaw
 	CreateCatPaw();
 
-	// status
-	V_WarshipStat stat;
-
-	m_pStat = new V_Kiana_Stat;
-	m_pStat->SetupStatus(&stat);
-
 	if (m_isWait)
 	{
 		__super::FixedUpdate();
@@ -111,6 +112,7 @@ void CKiana::Start(void)
 		__super::LateUpdate();
 		SetIsEnabled(false);
 	}
+
 }
 
 void CKiana::FixedUpdate(void)
@@ -120,17 +122,15 @@ void CKiana::FixedUpdate(void)
 
 void CKiana::Update(void)
 {
-	//Update_WeaponTransform();
-
 	__super::Update();
 
+	UpdatePivotMatrix(m_pLeftToe_World, m_pLeftToe_Frame);
 	UpdatePivotMatrix(m_pRightToe_World, m_pRightToe_Frame);
 	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
 	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
 
 	if (m_ultraMode)
 		UseUltraCost();
-
 }
 
 void CKiana::LateUpdate(void)
@@ -163,10 +163,15 @@ void CKiana::PostRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
+void CKiana::RenderPerShader(SP(Engine::CShaderC) spShader)
+{
+}
+
 void CKiana::OnDestroy(void)
 {
 	delete m_pStat;
 
+	SAFE_DELETE(m_pLeftToe_World)
 	SAFE_DELETE(m_pRightToe_World)
 	SAFE_DELETE(m_pLeftHand_World)
 	SAFE_DELETE(m_pRightHand_World)
@@ -222,7 +227,7 @@ void CKiana::CreateCatPaw(void)
 void CKiana::UseUltraCost(void)
 {
 	_float curSp = m_pStat->GetCurSp();
-	//curSp -= 10.f * GET_DT;
+	curSp -= 10.f * GET_PLAYER_DT;
 
 	if (curSp < 0.f)
 	{
@@ -434,10 +439,17 @@ void CKiana::UltraAtk_Ring(AttackOption index)
 	}
 }
 
-void CKiana::SetUltraMode(bool value)
+void CKiana::UseSkill(void)
 {
-	m_ultraMode = value;
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= m_pStat->GetSkillCost();
 
-	if (m_ultraMode)
-		m_pCT->GetUILinker()->Ultra();
+	m_pStat->SetCurSp(curSp);
+
+	m_skillTimer = 0.f;
+}
+
+void CKiana::UseUltra(void)
+{
+	m_ultraTimer = 0.f;
 }

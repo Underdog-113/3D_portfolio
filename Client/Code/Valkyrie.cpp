@@ -35,6 +35,41 @@ void CValkyrie::Start(void)
 {
 	__super::Start();
 	m_pCT = CStageControlTower::GetInstance();
+
+	m_skillTimer = m_pStat->GetSkillCoolTime();
+	m_ultraTimer = m_pStat->GetUltraCoolTime();
+}
+
+void CValkyrie::Update(void)
+{
+	__super::Update();
+
+	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
+		m_ultraTimer += GET_PLAYER_DT;
+
+	if (m_skillTimer < m_pStat->GetSkillCoolTime())
+		m_skillTimer += GET_PLAYER_DT;
+}
+
+void CValkyrie::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
+{
+	for (auto pCollider : pCollisionC->GetColliders())
+	{
+		if (pCollider->GetCollisionID() == (_uint)ECollisionID::EnemyAttack)
+		{
+			if (m_isEvade)
+				CStageControlTower::GetInstance()->OnPerfectEvadeMode();
+			break;
+		}
+	}
+}
+
+void CValkyrie::OnTriggerStay(Engine::CCollisionC const * pCollisionC)
+{
+}
+
+void CValkyrie::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
+{
 }
 
 void CValkyrie::OnCollisionEnter(Engine::_CollisionInfo ci)
@@ -147,4 +182,26 @@ void CValkyrie::OffHitbox()
 			break;
 		}
 	}
+}
+
+_bool CValkyrie::CheckUltraUseable(void)
+{
+	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
+		return false;
+
+	if (m_pStat->GetCurSp() < m_pStat->GetUltraCost())
+		return false;
+
+	return true;
+}
+
+_bool CValkyrie::CheckSkillUseable(void)
+{
+	if (m_skillTimer < m_pStat->GetSkillCoolTime())
+		return false;
+
+	if (m_pStat->GetCurSp() < m_pStat->GetSkillCost())
+		return false;
+
+	return true;
 }

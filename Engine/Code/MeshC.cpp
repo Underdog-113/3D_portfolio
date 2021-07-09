@@ -132,6 +132,16 @@ void CMeshC::PostRender(SP(CGraphicsC) spGC, LPD3DXEFFECT pEffect)
 {
 }
 
+void CMeshC::RenderPerShader(SP(CGraphicsC) spGC)
+{
+	if (m_pMeshData->GetMeshType() == (_int)EMeshType::Static)
+		RenderStaticPerShader(spGC);
+	else
+		RenderDynamicPerShader(spGC);
+
+	m_haveDrawn = true;
+}
+
 void CMeshC::OnDestroy(void)
 {
 	SAFE_DELETE(m_pRootMotion);
@@ -301,6 +311,29 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFE
 	}
 }
 
+void CMeshC::RenderStaticPerShader(SP(CGraphicsC) spGC)
+{
+	CStaticMeshData* pSM = static_cast<CStaticMeshData*>(m_pMeshData);
+	_uint pass = 0;
+
+	SP(CShaderC) spShader = spGC->GetShader();
+	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
+	{
+		D3DMATERIAL9 curMtrl = spGC->GetMaterials()[i];
+		_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
+		_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
+		_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
+		_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
+		_float specularPower = curMtrl.Power;
+
+		CShader* pCurShader = spShader->GetShaders()[i];
+		LPD3DXEFFECT pEffect = pCurShader->GetEffect();
+
+		pCurShader->SetUpConstantTable(spGC);
+		pSM->GetMesh()->DrawSubset(i);
+	}
+}
+
 void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFECT pEffect)
 {
 	CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(pMeshData);
@@ -383,9 +416,9 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			pEffect->SetVector("g_specular", &specular);
 			pEffect->SetFloat("g_specularPower", specularPower);
 
+
 			pEffect->CommitChanges();
 			
-			GET_DEVICE->SetMaterial(&vMeshContainers[i]->pMaterials[j].MatD3D);
 			vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
 		}
 
@@ -393,4 +426,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 		vMeshContainers[i]->pOriMesh->UnlockVertexBuffer();
 	}
 
+}
+
+void CMeshC::RenderDynamicPerShader(SP(CGraphicsC) spGC)
+{
 }

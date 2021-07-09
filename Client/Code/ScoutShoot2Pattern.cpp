@@ -12,6 +12,7 @@
 #include "PatternMachineC.h"
 #include "AttackBox.h"
 #include "StageControlTower.h"
+#include "Scout_Att_Range.h"
 
 CScoutShoot2Pattern::CScoutShoot2Pattern()
 {
@@ -62,6 +63,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			fsm->ChangeState(Name_RUN_B);
 			m_onChase = true;
+			m_onEffect = false;
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_IDLE == fsm->GetCurStateString() &&
@@ -132,6 +134,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 			SetMoveSound();
 			m_onChase = true;
 			m_onWalk = true;
+			m_onEffect = false;
 		}
 	}
 
@@ -156,6 +159,38 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		_float3 offset = ZERO_VECTOR;
 
 		pScout->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
+	}
+
+	/************************* Effect */
+	if (Name_SHOOT_2 == fsm->GetCurStateString() &&
+		0.09f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onEffect)
+	{
+		SP(CScout_Att_Range) spScoutRange = std::dynamic_pointer_cast<CScout_Att_Range>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Scout_Att_Range", true, (_int)Engine::ELayerID::Effect, L"MeshEffect"));
+		spScoutRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Att_Range_Move");
+		spScoutRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		spScoutRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spScoutRange->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
+		spScoutRange->GetTransform()->AddRotationY(PI);
+		spScoutRange->GetTransform()->SetPosition(mPos);
+
+
+		SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
+		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
+		spMeshEffect->GetTransform()->AddRotationY(PI);
+		spMeshEffect->GetTransform()->SetPosition(mPos);
+		spMeshEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
+		spMeshEffect->GetTransform()->SetPositionZ(mPos.z - 0.5f);
+
+		m_onEffect = true;
 	}
 }
 

@@ -280,6 +280,7 @@ void CCamera::UpdateTPS_Custom(void)
 	}
 	//RayCollider 길이 업데이트
 	m_pCamRayCollider->SetLength(m_targetDist);
+
 }
 
 void CCamera::LateUpdateFixed(void)
@@ -365,12 +366,14 @@ void CCamera::LateUpdateTPS_Custom(void)
 	D3DXVec3TransformNormal(&invLook, &invLook, &rotationMatrix);
 
 	m_spTransform->SetPosition(invLook + spTargetTransform->GetPosition() + m_targetOffset);
+	m_spTransform->AddPosition(m_shakePosOffset);
 	m_spTransform->SetForward(-invLook);
-
+	
 	D3DXMatrixLookAtLH(&m_viewMat,
 		&m_spTransform->GetPosition(),
 		&(m_spTransform->GetPosition() + m_spTransform->GetForward()),
 		&UP_VECTOR);
+
 }
 
 void CCamera::UpdateProjMat(void)
@@ -458,13 +461,13 @@ void CCamera::CameraRotate(void)
 
 void CCamera::CameraMove(void)
 {
-	if (IMKEY_PRESS(KEY_D))
+	if (IMKEY_PRESS(KEY_RIGHT))
 		m_spTransform->MoveRight(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_A))
+	if (IMKEY_PRESS(KEY_LEFT))
 		m_spTransform->MoveLeft(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_W))
+	if (IMKEY_PRESS(KEY_UP))
 		m_spTransform->MoveForward(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_S))
+	if (IMKEY_PRESS(KEY_DOWN))
 		m_spTransform->MoveBackward(m_moveSpeed * GET_DT);
 	if (IMKEY_PRESS(KEY_SPACE))
 		m_spTransform->MoveUp(m_moveSpeed * GET_DT);

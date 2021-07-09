@@ -34,7 +34,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	// 공격1 상태 중 사운드 재생
 	if (Name_Attack_1 == fsm->GetCurStateString() && 0.8f > fsm->GetDM()->GetAniTimeline())
 	{
-		PatternRepeatSound(L"Spider_Boom_Ready.wav", pOwner, 0.4f);
+		PatternRepeatSound(L"Spider_Boom_Ready.wav", pOwner, 0.1f);
 	}
 
 	// 상대가 공격 범위 밖이고
@@ -69,7 +69,15 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 				= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
 
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
-			spMeshEffect->GetTransform()->SetPosition(mPos);
+			spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
+			spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+			spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
+			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
+			spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+			spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(mPos);
+			spMeshEffect->GetComponent<Engine::CTransformC>()->SetPositionY(0.1f);
+			spMeshEffect->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));
 		}
 	}
 
@@ -78,12 +86,23 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		static_cast<CMO_Spider*>(pOwner)->UnActiveAttackBall();
 		pOwner->SetDeleteThis(true);
+
+		// effect
+		SP(Engine::CObject) spSoftEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		spSoftEffect->GetTransform()->SetPosition(mPos);
+		spSoftEffect->GetTransform()->SetPositionY(mPos.x - 0.1f);
+		spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
+		spSoftEffect->GetTransform()->SetSize(11.f, 9.f, 0.f);
 	}
 	// 공격1 상태라면
-	else if (Name_Attack_1 == fsm->GetCurStateString() && 0.8f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Attack_1 == fsm->GetCurStateString() && 0.89f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_explosionPosMat = pOwner->GetTransform()->GetWorldMatrix();
-		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat, 3.f);
+		static_cast<CMO_Spider*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_explosionPosMat, 2.8f);
 
 		if (false == m_onSound)
 		{

@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachineC.h"
-#define Cool_Attack				0.2f
-#define Cool_BranchAttack		0.5f
+#define Cool_Attack				0.15f
+#define Cool_BranchAttack		0.4f
 #define Cool_BranchAttack3to4	0.3f
 #define Cool_Evade				0.15f
 #define Cool_End				0.75f
@@ -19,6 +19,13 @@
 
 #define Delay_CreateCatPaw_Branch_Atk03 0.05f
 #define Delay_CreateCatPaw_Branch_Atk04 0.15f
+
+
+#define Delay_Effect_Atk01 0.25f
+#define Delay_Effect_Atk02 0.05f
+#define Delay_Effect_Atk03 0.10f
+#define Delay_Effect_Atk04 0.0f
+#define Delay_Effect_Atk05 0.05f
 
 class CKiana;
 class CStageControlTower;
@@ -52,18 +59,20 @@ private: /* Normal Actions */
 	bool CheckAction_EvadeForward(float coolTime = Cool_Evade);
 	bool CheckAction_EvadeBackward(float coolTime = Cool_Evade);
 	bool CheckAction_StandBy_Timeout(float coolTime = Cool_End);
-	bool CheckAction_Run();
+	bool CheckAction_Run(float coolTime = 0.f);
 	bool CheckAction_Run_OnAction(float coolTime = Cool_Evade);
 	bool CheckAction_Run_End();
 	bool CheckAction_StandBy();
 
+	bool CheckAction_Idle();
 	bool CheckAction_Emotion(const std::wstring& switchStateName, float coolTime = Cool_Emotion);
 
 private: /* Special Actions */
 	bool CheckAction_BranchAttack();
 	bool CheckAction_RunBS_To_Run();
 
-	bool CheckAction_Ultra();
+	bool CheckAction_Ultra(float coolTime = 0.f);
+	bool CheckAction_WeaponSkill(float coolTime = 0.f);
 	
 private: /* sound */
 	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
@@ -77,11 +86,13 @@ private: /* sound */
 
 private:
 	void ResetCheckMembers();
+	void ResetCheckMembers_Hit();
 
 	bool m_checkUltraRing = false;
 	bool m_checkUltraAtk = false;
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
+	bool m_checkAttack = false;
 
 private:
 	CKiana* m_pKiana = nullptr;
@@ -99,6 +110,9 @@ private:
 	_uint m_prevHitSoundIndex = 0;
 
 	_double m_runSoundTimer = 0;
+
+	_uint m_idleMotionIndex = 0;
+	_float m_idleTimer = 0.f;
 public:
 	// StandBy
 	void StandBy_Init(void);

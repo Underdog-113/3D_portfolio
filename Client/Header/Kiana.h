@@ -36,6 +36,8 @@ public:
 					void					Render				(LPD3DXEFFECT pEffect) override;
 					void					PostRender			(LPD3DXEFFECT pEffect) override;
 		
+					void					RenderPerShader		(SP(Engine::CShaderC) spShader) override;
+
 					void					OnDestroy			(void) override;
 		
 					void					OnEnable			(void) override;
@@ -55,9 +57,10 @@ public:
 					void					UseUltraCost		(void);
 					void					UltraAtk			(AttackOption index);
 					void					UltraAtk_Ring		(AttackOption index);
-
-					void					SetUltraMode		(bool value);;
-
+					
+public:
+					void					UseSkill			(void) override;
+					void					UseUltra			(void) override;
 										
 private:
 	GETTOR			(SP(Engine::CObject),	m_spWeapon_Left,		nullptr, Weapon_Left)
@@ -78,10 +81,14 @@ private:
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk04,	nullptr, CatPaw_Ring_Atk04)
 	GETTOR			(SP(Engine::CObject),	m_spCatPaw_Ring_Atk05,	nullptr, CatPaw_Ring_Atk05)
 
-	GETTOR			(_bool,					m_ultraMode,			false, UltraMode)
+	GETTOR_SETTOR	(_bool,					m_ultraMode,			false,	UltraMode)
 
 private:
 	
+	GETTOR			(_mat*,					m_pLeftToe_World,			nullptr, LeftToeWorldMatrix)
+	_mat*						m_pLeftToe_BoneOffset = nullptr;
+	Engine::D3DXFRAME_DERIVED*	m_pLeftToe_Frame = nullptr;
+
 	GETTOR			(_mat*,					m_pRightToe_World,			nullptr, RightToeWorldMatrix)
 	_mat*						m_pRightToe_BoneOffset = nullptr;
 	Engine::D3DXFRAME_DERIVED*	m_pRightToe_Frame = nullptr;
@@ -99,7 +106,6 @@ private:
 	float m_timer = 0.f;
 
 	static		_uint						m_s_uniqueID;
-
 };
 
 #endif

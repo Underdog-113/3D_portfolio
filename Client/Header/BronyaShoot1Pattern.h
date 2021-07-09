@@ -17,7 +17,7 @@ public:
 	static SP(CBronyaShoot1Pattern) Create();
 
 private:
-	_float m_cost = 10.f;
+	_float m_cost = 7.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 25.f; // 공격 거리

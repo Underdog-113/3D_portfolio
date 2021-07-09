@@ -37,6 +37,7 @@ private:
 	_bool m_onShoot2 = false;
 	_bool m_onChase = true; // 플레이어 추적 켜고 끄기
 	_bool m_onWalk = false;
+	_bool m_onEffect = false;
 
 	_TCHAR* m_curMoveSound;
 };

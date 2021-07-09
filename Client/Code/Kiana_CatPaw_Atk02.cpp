@@ -135,7 +135,7 @@ void CKiana_CatPaw_Atk02::Render(LPD3DXEFFECT pEffect)
 
 void CKiana_CatPaw_Atk02::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 }
 
 void CKiana_CatPaw_Atk02::OnDestroy(void)
@@ -157,18 +157,6 @@ void CKiana_CatPaw_Atk02::OnDisable(void)
 
 void CKiana_CatPaw_Atk02::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
-	Engine::CObject* pObject = ci.pOtherCollider->GetOwner()->GetOwner();
-
-	for (auto& object : m_vCollided)
-	{
-		if (pObject == object)
-			return;
-	}
-
-	CValkyrie* pValkyrie = static_cast<CValkyrie*>(m_pKiana);
-	CMonster* pMonster = static_cast<CMonster*>(pObject);
-
-	CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ci.hitPoint);
 }
 
 void CKiana_CatPaw_Atk02::OnCollisionStay(Engine::_CollisionInfo ci)

@@ -30,9 +30,12 @@ class CActorController;
 class CUILinker;
 class CStatusDealer;
 class CStageCameraMan;
+class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
+class CTwoStagePhaseControl;
 enum class EOneStagePhase;
+enum class ETwoStagePhase;
 class CStageControlTower
 {
 	DECLARE_SINGLETON(CStageControlTower)
@@ -56,18 +59,28 @@ public:
 public:		/* Phase */
 	void IncreasePhase();
 	void ChangePhase(EOneStagePhase phaseType);
-
+	void ChangePhase(ETwoStagePhase phaseType);
 
 public:		/* Battle */
+	void ActAttack();
+	void ActEvade();
+	bool ActSkill();
+	bool ActUltra();
+
 	void FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 
 	void SwitchValkyrie(Squad_Role role);
 
-
+	void SetCameraFarTake();
 	void OffCameraTargeting();
+	void EndSwitching();
 
+	void OnPerfectEvadeMode();
+	_bool GetIsPerfectEvadeMode();
+
+	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 
 private:
@@ -79,6 +92,7 @@ private:
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
 	GETTOR			(CStageCameraMan*,		m_pCameraMan,		nullptr,		CameraMan)
+	GETTOR			(CTimeSeeker*,			m_pTimeSeeker,		nullptr,		TimeSeeker)
 
 	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)
 

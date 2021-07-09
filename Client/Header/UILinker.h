@@ -48,6 +48,7 @@ public:
 
 		
 	void	MonsterInfoSet			(void);
+	void	OffMonsterInfo			(void);
 	void	MonsterHpSet			(void);
 
 

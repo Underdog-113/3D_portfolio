@@ -72,14 +72,15 @@ void CFSM_TheresaC::FixRootMotionOffset(_uint index)
 
 void CFSM_TheresaC::ResetCheckMembers()
 {
+	m_checkAttack = false;
 	m_checkEffect = false;
 	m_checkEffectSecond = false;
 }
 
 void CFSM_TheresaC::OnSwordCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_LeftHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetLeftHandWorldMatrix(), 0.1f, _float3(0.f, 0.5f, 0.f));
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_RightHand(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetRightHandWorldMatrix(), 0.1f, _float3(0.f, 0.5f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_LeftHand(), 0.6f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetLeftHandWorldMatrix(), 0.1f, _float3(0.f, 0.5f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_RightHand(), 0.6f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetRightHandWorldMatrix(), 0.1f, _float3(0.f, 0.5f, 0.f));
 }
 
 void CFSM_TheresaC::OffSwordCollider()
@@ -90,8 +91,8 @@ void CFSM_TheresaC::OffSwordCollider()
 
 void CFSM_TheresaC::OnAxeCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(2.f, 0.f, 0.f));
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.6f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.3f, _float3(2.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
 }
 
 void CFSM_TheresaC::OffAxeCollider()
@@ -260,17 +261,47 @@ bool CFSM_TheresaC::CheckAction_RunBS_To_Run()
 	return false;
 }
 
-bool CFSM_TheresaC::CheckAction_Ultra()
+bool CFSM_TheresaC::CheckAction_Ultra(float coolTime)
 {
-	if (Engine::IMKEY_DOWN(StageKey_Ult))
+	if (m_pDM->GetAniTimeline() > coolTime)
 	{
-		auto pStat = m_pTheresa->GetStat();
-		if (pStat->GetCurSp() < pStat->GetUltraCost())
-			return false;
+		if (Engine::IMKEY_DOWN(StageKey_Ult))
+		{
+			if (m_pStageControlTower->ActUltra())
+			{
+				ChangeState(Name_Ultra);
+				return true;
+			}
+		}
+	}
+	return false;
+}
 
-		ChangeState(Name_Ultra);
+bool CFSM_TheresaC::CheckAction_WeaponSkill(float coolTime)
+{
+	if (m_pDM->GetAniTimeline() > coolTime)
+	{
+		if (Engine::IMKEY_DOWN(StageKey_WeaponSkill))
+		{
+			if (m_pStageControlTower->ActSkill())
+			{
+				ChangeState(Name_CastCross);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool CFSM_TheresaC::CheckAction_Idle()
+{
+	m_idleTimer += GET_DT;
+	if (m_idleTimer > 3.f)
+	{
+		ChangeState(Name_Idle);
 		return true;
 	}
+
 	return false;
 }
 
@@ -412,6 +443,7 @@ void CFSM_TheresaC::StandBy_Enter(void)
 	m_pTheresa->Off_Axe();
 
 	m_chargeEnterTimer = 0.f;
+	m_idleTimer = 0.f;
 }
 
 void CFSM_TheresaC::StandBy_Update(float deltaTime)
@@ -427,6 +459,12 @@ void CFSM_TheresaC::StandBy_Update(float deltaTime)
 
 	if (CheckAction_Ultra())
 		return;
+
+	if (CheckAction_WeaponSkill())
+		return;
+
+	if (CheckAction_Idle())
+		return;
 }
 
 void CFSM_TheresaC::StandBy_End(void)
@@ -439,23 +477,21 @@ void CFSM_TheresaC::Idle_Init(void)
 
 void CFSM_TheresaC::Idle_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_StandBy);
+	m_pDM->ChangeAniSet(Index_Idle);
 }
 
 void CFSM_TheresaC::Idle_Update(float deltaTime)
 {
 	if (CheckAction_EvadeBackward(0.f))
 		return;
-
 	if (CheckAction_Run())
 		return;
-
 	if (CheckAction_Attack(Name_Attack1, 0.f))
 		return;
-
 	if (CheckAction_Ultra())
 		return;
-
+	if (CheckAction_WeaponSkill())
+		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
 }
@@ -477,23 +513,6 @@ void CFSM_TheresaC::Appear_Enter(void)
 
 void CFSM_TheresaC::Appear_Update(float deltaTime)
 {
-// 	if (m_pDM->GetAniCtrl()->IsItEnd())
-// 	{
-// 		switch (m_appearOption)
-// 		{
-// 		case CFSM_TheresaC::None:
-// 			ChangeState(Name_StandBy);
-// 			break;
-// 		case CFSM_TheresaC::QTE:
-// 			//ChangeState(Name_QTE_FY);
-// 			break;
-// 		default:
-// 			break;
-// 		}
-// 		return;
-// 	}
-
-
 	if (CheckAction_StandBy_Timeout())
 		return;
 }
@@ -519,7 +538,7 @@ void CFSM_TheresaC::Run_Enter(void)
 
 void CFSM_TheresaC::Run_Update(float deltaTime)
 {
-	m_runSoundTimer += GET_DT;
+	m_runSoundTimer += GET_PLAYER_DT;
 	if (m_runSoundTimer > 0.3f)
 	{
 		m_runSoundTimer = 0.f;
@@ -534,6 +553,8 @@ void CFSM_TheresaC::Run_Update(float deltaTime)
 	if (CheckAction_Attack(Name_Attack1, 0.f))
 		return;
 	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
 		return;
 }
 
@@ -567,9 +588,11 @@ void CFSM_TheresaC::RunBS_Update(float deltaTime)
 		return;
 	if (CheckAction_Run_End())
 		return;
-	if (CheckAction_StandBy())
-		return;
 	if (CheckAction_Attack(Name_Attack1, 0.f))
+		return;
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
 		return;
 }
 
@@ -592,14 +615,16 @@ void CFSM_TheresaC::EvadeBackward_Enter(void)
 
 	m_isEvade = true;
 	m_pTheresa->OffHitbox();
+	m_pTheresa->SetIsEvade(true);
 }
 
 void CFSM_TheresaC::EvadeBackward_Update(float deltaTime)
 {
 	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pTheresa->OnHitbox();
 		m_isEvade = false;
+		m_pTheresa->OnHitbox();
+		m_pTheresa->SetIsEvade(false);
 	}
 
 	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
@@ -627,6 +652,10 @@ void CFSM_TheresaC::EvadeBackward_Update(float deltaTime)
 void CFSM_TheresaC::EvadeBackward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_isEvade = false;
+	m_pTheresa->OnHitbox();
+	m_pTheresa->SetIsEvade(false);
 }
 
 void CFSM_TheresaC::EvadeForward_Init(void)
@@ -645,14 +674,16 @@ void CFSM_TheresaC::EvadeForward_Enter(void)
 
 	m_isEvade = true;
 	m_pTheresa->OffHitbox();
+	m_pTheresa->SetIsEvade(true);
 }
 
 void CFSM_TheresaC::EvadeForward_Update(float deltaTime)
 {
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pTheresa->OnHitbox();
 		m_isEvade = false;
+		m_pTheresa->OnHitbox();
+		m_pTheresa->SetIsEvade(false);
 	}
 
 	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
@@ -680,6 +711,10 @@ void CFSM_TheresaC::EvadeForward_Update(float deltaTime)
 void CFSM_TheresaC::EvadeForward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_isEvade = false;
+	m_pTheresa->OnHitbox();
+	m_pTheresa->SetIsEvade(false);
 }
 
 void CFSM_TheresaC::Attack1_Init(void)
@@ -696,7 +731,6 @@ void CFSM_TheresaC::Attack1_Enter(void)
 	m_chargeEnterTimer = 0.f;
 
 	m_pTheresa->On_Sword();
-	OnSwordCollider();
 }
 
 void CFSM_TheresaC::Attack1_Update(float deltaTime)
@@ -707,8 +741,12 @@ void CFSM_TheresaC::Attack1_Update(float deltaTime)
 		PlaySound_Effect(Sound_Attack1_Effect);
 		PlaySound_Voice(Sound_Attack1_Voice);
 
+		OnSwordCollider();
 		m_checkEffect = true;
 	}
+	if (m_pDM->GetAniTimeline() > Delay_Effect_Attack1_1 + 0.1f)
+		OffSwordCollider();
+
 	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > Delay_Effect_Attack1_2)
 	{
 		m_pEffectMaker->CreateEffect_Attack1_2();
@@ -716,12 +754,17 @@ void CFSM_TheresaC::Attack1_Update(float deltaTime)
 		m_checkEffectSecond = true;
 	}
 
+
 	if (CheckAction_ChargeMode())
 		return;
 
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Attack(Name_Attack2, 0.25f))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Attack1_1 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Attack1_1 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -747,10 +790,9 @@ void CFSM_TheresaC::Attack2_Enter(void)
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 	m_chargeEnterTimer = 0.f;
-
-	OnSwordCollider();
-
+	
 	m_pEffectMaker->CreateEffect_Attack2_1();
+	OnSwordCollider();
 }
 
 void CFSM_TheresaC::Attack2_Update(float deltaTime)
@@ -770,11 +812,18 @@ void CFSM_TheresaC::Attack2_Update(float deltaTime)
 		m_checkEffectSecond = true;
 	}
 
+	if (m_pDM->GetAniTimeline() > Delay_Effect_Attack2_2 + 0.07f)
+		OffSwordCollider();
+
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_ChargeMode())
 		return;
 	if (CheckAction_Attack(Name_Attack3))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Attack2_2 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Attack2_2 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -815,18 +864,30 @@ void CFSM_TheresaC::Attack3_Update(float deltaTime)
 
 		m_checkEffect = true;
 	}
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Attack3_2 - 0.05f)
+	{
+		m_checkAttack = true;
+		OffSwordCollider();
+	}
 	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > Delay_Effect_Attack3_2)
 	{
 		m_pEffectMaker->CreateEffect_Attack3_2();
 
+		OnSwordCollider();
 		m_checkEffectSecond = true;
 	}
 
+	if (m_pDM->GetAniTimeline() > Delay_Effect_Attack3_2 + 0.1f)
+		OffSwordCollider();
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_ChargeMode())
 		return;
 	if (CheckAction_Attack(Name_Attack4))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Attack3_2 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Attack3_2 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -853,8 +914,6 @@ void CFSM_TheresaC::Attack4_Enter(void)
 	ResetCheckMembers();
 
 	m_chargeEnterTimer = 0.f;
-
-	OnSwordCollider();
 }
 
 void CFSM_TheresaC::Attack4_Update(float deltaTime)
@@ -865,19 +924,31 @@ void CFSM_TheresaC::Attack4_Update(float deltaTime)
 		PlaySound_Effect(Sound_Attack4_Effect);
 		PlaySound_Voice(Sound_Attack4_Voice);
 
+		OnSwordCollider();
 		m_checkEffect = true;
+	}
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Attack4_2 - 0.05f) 
+	{
+		m_checkAttack = true;
+		OffSwordCollider();
 	}
 	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > Delay_Effect_Attack4_2)
 	{
 		m_pEffectMaker->CreateEffect_Attack4_2();
 
+		OnSwordCollider();
 		m_checkEffectSecond = true;
 	}
 
+	if (m_pDM->GetAniTimeline() > Delay_Effect_Attack4_2 + 0.1f)
+		OffSwordCollider();
 	if (CheckAction_ChargeMode())
 		return;
-
 	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Attack4_2 + 0.1f))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Attack4_2 + 0.1f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
@@ -907,14 +978,19 @@ void CFSM_TheresaC::Charge0_Enter(void)
 	m_pTheresa->Off_Sword();
 	m_pTheresa->On_Axe();
 	m_chargeEnterTimer = 0.f;
-
-	OnAxeCollider();
-
-	PlaySound_Effect(Sound_Charge0_Effect);
+	
 }
 
 void CFSM_TheresaC::Charge0_Update(float deltaTime)
 {
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Charge0)
+	{
+		m_pEffectMaker->CreateEffect_Charge0();
+		PlaySound_Effect(Sound_Charge0_Effect);
+
+		m_checkAttack = true;
+	}
+
 	if (m_pDM->GetAniTimeline() > 0.8f)
 	{
 		ChangeState(Name_Charge1);
@@ -923,12 +999,15 @@ void CFSM_TheresaC::Charge0_Update(float deltaTime)
 
 	if (CheckAction_Evade_OnAction())
 		return;
+	if (CheckAction_WeaponSkill(0.2f))
+		return;
+	if (CheckAction_Ultra(0.2f))
+		return;
 }
 
 void CFSM_TheresaC::Charge0_End(void)
 {
 	m_pTheresa->Off_Axe();
-	OffAxeCollider();
 }
 
 void CFSM_TheresaC::Charge1_Init(void)
@@ -942,16 +1021,34 @@ void CFSM_TheresaC::Charge1_Enter(void)
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_chargeAttackIndex = 2;
 
-	m_pTheresa->On_Axe();
-	OnAxeCollider();
+	ResetCheckMembers();
 
-	PlaySound_Effect(Sound_Charge1_Effect);
-	PlaySound_Charge_RandomVoice();
+	m_pTheresa->On_Axe();
 }
 
 void CFSM_TheresaC::Charge1_Update(float deltaTime)
 {
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	{
+		m_pEffectMaker->CreateEffect_Charge1();
+		PlaySound_Effect(Sound_Charge1_Effect);
+		PlaySound_Charge_RandomVoice();
+
+		m_checkEffect = true;
+	}
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	{
+		OnAxeCollider();
+		m_checkAttack = true;
+	}
+	if (m_pDM->GetAniTimeline() > 0.4f)
+		OffAxeCollider();
+
 	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_WeaponSkill(0.5f))
+		return;
+	if (CheckAction_Ultra(0.5f))
 		return;
 	if (CheckAction_ChargeAttack())
 		return;
@@ -978,16 +1075,34 @@ void CFSM_TheresaC::Charge2_Enter(void)
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_chargeAttackIndex = 1;
 
-	m_pTheresa->On_Axe();
-	OnAxeCollider();
+	ResetCheckMembers();
 
-	PlaySound_Effect(Sound_Charge2_Effect);
-	PlaySound_Charge_RandomVoice();
+	m_pTheresa->On_Axe();
 }
 
 void CFSM_TheresaC::Charge2_Update(float deltaTime)
 {
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge2)
+	{
+		m_pEffectMaker->CreateEffect_Charge2();
+		PlaySound_Effect(Sound_Charge2_Effect);
+		PlaySound_Charge_RandomVoice();
+
+		m_checkEffect = true;
+	}
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Charge2 + 0.05f)
+	{
+		OnAxeCollider();
+		m_checkAttack = true;
+	}
+	if (m_pDM->GetAniTimeline() > 0.3f)
+		OffAxeCollider();
+
 	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_WeaponSkill(0.5f))
+		return;
+	if (CheckAction_Ultra(0.5f))
 		return;
 	if (CheckAction_ChargeAttack())
 		return;
@@ -1103,6 +1218,7 @@ void CFSM_TheresaC::SwitchIn_Update(float deltaTime)
 
 void CFSM_TheresaC::SwitchIn_End(void)
 {
+	CStageControlTower::GetInstance()->EndSwitching();
 }
 
 void CFSM_TheresaC::SwitchOut_Init(void)
@@ -1116,7 +1232,7 @@ void CFSM_TheresaC::SwitchOut_Enter(void)
 
 void CFSM_TheresaC::SwitchOut_Update(float deltaTime)
 {
-	if (m_pDM->GetAniTimeline() > 0.6)
+	if (m_pDM->GetAniTimeline() > 0.75)
 	{
 		m_pTheresa->SetIsEnabled(false);
 		return;
@@ -1134,8 +1250,8 @@ void CFSM_TheresaC::Ultra_Init(void)
 
 void CFSM_TheresaC::Ultra_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Ultra);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pDM->ChangeAniSet(Index_Ultra);
 	ResetCheckMembers();
 
 	m_pTheresa->Off_Sword();
@@ -1188,6 +1304,7 @@ void CFSM_TheresaC::CastCross_Init(void)
 void CFSM_TheresaC::CastCross_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_CastCross);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::CastCross_Update(float deltaTime)
@@ -1215,9 +1332,6 @@ void CFSM_TheresaC::RunStopRight_Enter(void)
 
 void CFSM_TheresaC::RunStopRight_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
-		return;
-
 	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
@@ -1225,6 +1339,10 @@ void CFSM_TheresaC::RunStopRight_Update(float deltaTime)
 	if (CheckAction_Attack(Name_Attack1, 0.f))
 		return;
 	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -1246,9 +1364,6 @@ void CFSM_TheresaC::RunStopLeft_Enter(void)
 
 void CFSM_TheresaC::RunStopLeft_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
-		return;
-
 	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
@@ -1256,6 +1371,10 @@ void CFSM_TheresaC::RunStopLeft_Update(float deltaTime)
 	if (CheckAction_Attack(Name_Attack1, 0.f))
 		return;
 	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
@@ -1287,7 +1406,8 @@ void CFSM_TheresaC::Hit_H_Init(void)
 void CFSM_TheresaC::Hit_H_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Hit_H);
-
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	
 	PlaySound_Effect(Sound_HIT_Effect);
 	PlaySound_Effect(Sound_HIT_Voice);
 }
@@ -1304,6 +1424,7 @@ void CFSM_TheresaC::Hit_H_Update(float deltaTime)
 
 void CFSM_TheresaC::Hit_H_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_TheresaC::Hit_L_Init(void)
@@ -1313,6 +1434,7 @@ void CFSM_TheresaC::Hit_L_Init(void)
 void CFSM_TheresaC::Hit_L_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Hit_L);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	PlaySound_Effect(Sound_HIT_Effect);
 	PlaySound_Effect(Sound_HIT_Voice);
@@ -1330,6 +1452,7 @@ void CFSM_TheresaC::Hit_L_Update(float deltaTime)
 
 void CFSM_TheresaC::Hit_L_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_TheresaC::RegisterAllState()

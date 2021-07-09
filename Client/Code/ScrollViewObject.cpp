@@ -138,6 +138,32 @@ void CScrollViewObject::Render(LPD3DXEFFECT pEffect)
 void CScrollViewObject::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PostRender(m_spGraphics, pEffect);
+
+	/*for (auto& obj : m_vButtonObject)
+	{
+
+		SP(Engine::CComponent) pShader = obj->GetComponent<Engine::CShaderC>();
+
+		const std::vector<Engine::CShader*>& vShader = std::dynamic_pointer_cast<Engine::CShaderC>(pShader)->GetShaders();
+
+		for (_size i = 0; i < vShader.size(); ++i)
+		{
+			LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+			vShader[i]->SetUpConstantTable(obj->GetComponent<Engine::CGraphicsC>());
+
+			_uint maxPass = 0;
+			pEffect->Begin(&maxPass, 0);
+			for (_uint i = 0; i < maxPass; ++i)
+			{
+				pEffect->BeginPass(i);
+				obj->PreRender(pEffect);
+				obj->Render(pEffect);
+				obj->PostRender(pEffect);
+				pEffect->EndPass();
+			}
+			pEffect->End();
+		}
+	}*/
 }
 
 void CScrollViewObject::OnDestroy(void)
@@ -230,6 +256,7 @@ CScrollViewObject * CScrollViewObject::AddImageObjectData(_int number, std::wstr
 {
 	SP(Engine::CImageObject) image =
 		std::static_pointer_cast<Engine::CImageObject>(GetScene()->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"ScrollViewImageObject"));
+	//image->DeleteComponent<Engine::CGraphicsC>();
 	image->GetTransform()->SetSize(size);
 	image->GetTexture()->AddTexture(texture, 0);
 	image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
@@ -247,6 +274,7 @@ CScrollViewObject * CScrollViewObject::AddTextObjectData(_int number, _float2 of
 {
 	SP(Engine::CTextObject) textObject =
 		std::static_pointer_cast<Engine::CTextObject>(GetScene()->GetObjectFactory()->AddClone(L"TextObject", true, (_int)Engine::ELayerID::UI, L""));
+	//textObject->DeleteComponent<Engine::CGraphicsC>();
 	_float2 pos = _float2(m_spTransform->GetPosition().x, m_spTransform->GetPosition().y);
 	textObject->AddComponent<Engine::CTextC>()->AddFontData(message, _float2(0,0), _float2(0, 0), fontSize, DT_VCENTER + DT_LEFT + DT_NOCLIP, color, true);
 

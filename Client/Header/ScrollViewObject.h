@@ -62,6 +62,7 @@ public:
 	{
 		SP(CButton) button =
 			std::static_pointer_cast<CButton>(GetScene()->GetObjectFactory()->AddClone(L"Button", true, (_int)Engine::ELayerID::UI, name));
+		//button->GetComponent<Engine::CGraphicsC>()->SetIsEnabled(false);
 		button->GetTransform()->SetSize(_float3(size.x, size.y, 0.0f));
 		button->SetButtonType(CButton::UP);
 		button->GetTexture()->AddTexture(texture1, 0);

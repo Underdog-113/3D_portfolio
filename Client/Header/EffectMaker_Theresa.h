@@ -3,9 +3,9 @@
 
 
 #define AttackTrail_ObjectKey	L"Theresa_Trail"
-#define AttackTrail_Tex1Name	L"H_Trail"
-#define AttackTrail_Tex2Name	L"ground_seele_urtral"
-#define AttackTrail_Tex3Name	L"ground_seele_urtral"
+#define AttackTrail_Tex1Name	L"Tornado_3"
+#define AttackTrail_Tex2Name	L"Tornado_3"
+#define AttackTrail_Tex3Name	L"yun01"
 
 #define Ultra_Charge_ObjectKey	L"Theresa_Ult_Charge"
 #define Ultra_Charge_Tex1Name	L"Charge"
@@ -24,8 +24,7 @@
 #define Ultra_Boom_Tex2Name		L"Ult_Boom"
 
 class CTheresa;
-class CEffectMaker_Theresa :
-	public CEffectMaker
+class CEffectMaker_Theresa :public CEffectMaker
 {
 public:
 	CEffectMaker_Theresa(CTheresa* pTheresa);
@@ -39,6 +38,10 @@ public:
 	void CreateEffect_Attack3_2();
 	void CreateEffect_Attack4_1();
 	void CreateEffect_Attack4_2();
+
+	void CreateEffect_Charge0();
+	void CreateEffect_Charge1();
+	void CreateEffect_Charge2();
 
 	void CreateEffect_Ultra_Charge();
 	void CreateEffect_Ultra_Trail();

@@ -44,7 +44,7 @@ private:
 
 	void				ForUITest();
 
-
+	void				FindSkyObject();
 
 
 private:
@@ -57,9 +57,7 @@ private:
 	std::vector<SP(Engine::CObject)> m_vSpider;
 	
 	SP(Engine::CObject) m_spGanesha;
-
-	//_bool m_bossSpawn = false; // 보스 소환 스위치
-	//_bool m_onBoss = false; // true : 보스 소환함 false : 보스 소환 안함
+	SP(Engine::CObject) m_spSky;
 
 	std::vector<SP(Engine::CObject)> m_vDummy;
 };

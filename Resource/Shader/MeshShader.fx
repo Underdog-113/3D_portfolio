@@ -12,6 +12,8 @@ float4		g_emissive;
 float4		g_specular;
 float		g_specularPower;
 
+bool g_timeSlow;
+
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
@@ -99,10 +101,14 @@ PS_OUT		PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 	
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
+
+
 	float4 diffuse = albedo * saturate(g_diffuse);
 	float4 ambient = albedo * saturate(g_ambient);
 
 	Out.vColor = ambient + diffuse;
+
+
 	Out.vColor += g_addColor;
 	
 
@@ -127,26 +133,8 @@ PS_OUT		PS_MAIN(PS_IN In)
 	return Out;
 }
 
-PS_OUT PS_OUTLINE(PS_IN In)
-{
-	PS_OUT Out = (PS_OUT)0;
-
-	Out.vColor	= float4(0, 0, 0, 1);
-	Out.vNormal = float4(0, 0, 0, 1);
-	Out.vDepth	= float4(0, 0, 0, 1);
-	Out.vSpecMtrl = float4(0, 0, 0, 1);
-	return Out;
-}
-
 technique Default_Device
 {
-	pass Outline
-	{
-		vertexshader = compile vs_3_0 VS_OUTLINE();
-		pixelshader = compile ps_3_0 PS_OUTLINE();
-		CullMode = CW;
-	}
-
 	pass Origin	
 	{
 		vertexshader = compile vs_3_0 VS_MAIN();	

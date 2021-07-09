@@ -13,12 +13,15 @@
 #include "StatusDealer.h"
 #include "ActorController.h"
 #include "StageCameraMan.h"
+#include "TimeSeeker.h"
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
+#include "TwoStagePhaseControl.h"
+#include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
-{
+{ 
 }
 
 void CStageControlTower::Start(CreateMode mode)
@@ -29,6 +32,7 @@ void CStageControlTower::Start(CreateMode mode)
 	m_pActorController = new CActorController;
 	m_pDealer = new CStatusDealer;
 	m_pCameraMan = new CStageCameraMan;
+	m_pTimeSeeker = new CTimeSeeker;
 
 	if (m_mode != WithoutUI)
 		m_pLinker->SetControlTower(this);
@@ -42,6 +46,8 @@ void CStageControlTower::Update(void)
 {
 	if (m_mode != WithoutUI)
 		m_pLinker->UpdateLinker();
+
+	m_pTimeSeeker->UpdateTimeSeeker();
 
 	m_pCameraMan->UpdateCameraMan();
 
@@ -57,15 +63,28 @@ void CStageControlTower::Update(void)
 	}
 
 
+
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);
-	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
-		SwitchValkyrie(Wait_2);
+// 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+// 		SwitchValkyrie(Wait_2);
 
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
-	
+	if (GetIsPerfectEvadeMode())
+	{
+		Engine::CMeshShader* pMeshShader =
+			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+		pMeshShader->SetAddColor(_float4(0.4f, 0, 0, 0));
+	}
+	else
+	{
+		Engine::CMeshShader* pMeshShader =
+			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+		pMeshShader->SetAddColor(_float4(0, 0, 0, 0));
+	}
+
 }
 
 void CStageControlTower::OnDestroy()
@@ -78,6 +97,7 @@ void CStageControlTower::OnDestroy()
 	SAFE_DELETE(m_pDealer)
 	SAFE_DELETE(m_pPhaseControl)
 	SAFE_DELETE(m_pCameraMan)
+	SAFE_DELETE(m_pTimeSeeker)
 }
 
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
@@ -115,6 +135,34 @@ void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
 	m_pPhaseControl->ChangePhase((_int)phaseType);
 }
 
+void CStageControlTower::ActAttack()
+{
+}
+
+void CStageControlTower::ActEvade()
+{
+}
+
+bool CStageControlTower::ActSkill()
+{
+	if (!m_pCurActor->CheckSkillUseable())
+		return false;
+
+	m_pCurActor->UseSkill();
+	m_pLinker->Skill();
+	return true;
+}
+
+bool CStageControlTower::ActUltra()
+{
+	if (!m_pCurActor->CheckUltraUseable())
+		return false;
+
+	m_pCurActor->UseUltra();
+	m_pLinker->Ultra();
+	return true;
+}
+
 void CStageControlTower::FindTarget()
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
@@ -145,7 +193,7 @@ void CStageControlTower::FindTarget()
 	
 	for (auto& iter : monsterList)
 	{
-		if(!iter->GetIsEnabled())
+		if(!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
 			continue;
 
 		_float3 monsterPos = iter->GetTransform()->GetPosition();
@@ -211,7 +259,13 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	
 	if (isDead)
 	{
-		// two many things
+		if (m_spCurTarget.get() == pM)
+		{
+			m_spCurTarget = nullptr;
+			m_pLinker->OffTargetMarker();
+			m_pLinker->OffMonsterInfo();
+		}
+
 		pM->MonsterDead();
 	}
 	else
@@ -225,6 +279,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 		m_pLinker->Hit_Up();
 	
 	// 5. 플레이어 sp 획득
+	m_pDealer->SpUp(m_pCurActor->GetStat(), 3.f);
 
 	// 6. 보스면 스턴 게이지 깎아주세요
 
@@ -265,12 +320,32 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	}
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)pM->GetHitChannelID());
 	Engine::CSoundManager::GetInstance()->StartSound(fileName, (_uint)pM->GetHitChannelID());
+
+	// 9. shake
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Low:
+		m_pCameraMan->ShakeCamera_Low(hitPoint);
+		break;
+	case HitInfo::Str_High:
+		break;
+	case HitInfo::Str_Airborne:
+		break;
+	default:
+		break;
+	}
+
+	if (info.GetStrengthType() == HitInfo::Str_High)
+		m_pTimeSeeker->OnAttackImpactSlow();
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
 {
 	CMonster* pM = static_cast<CMonster*>(pMonster);
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
+
+	if (pV->GetIsEvade())
+		return;
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
@@ -290,9 +365,12 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	else
 	{
 		pV->ApplyHitInfo(info);
+
+		m_pActorController->LookHittedDirection(pMonster->GetTransform()->GetPosition());
 	}
 
 	// 4. 히트 이펙트
+
 
 	// 5. 사운드
 
@@ -323,6 +401,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 			m_pCurActor->GetStat()->GetType(),
 			wait1Member->GetStat()->GetType());
 
+
 	}
 		break;
 	case CStageControlTower::Wait_2:
@@ -340,6 +419,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	}
 		break;
 	}
+	m_pCurActor->GetComponent<Engine::CMeshC>()->GetRootMotion()->ResetPrevMoveAmount();
 	                                                        
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
@@ -351,9 +431,36 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+
+	m_pCameraMan->SetIsSwitching(true);
+}
+
+void CStageControlTower::SetCameraFarTake()
+{
+	m_pCameraMan->SetFarTake();
 }
 
 void CStageControlTower::OffCameraTargeting()
 {
 	m_pCameraMan->SetIsTargeting(false);
+}
+
+void CStageControlTower::EndSwitching()
+{
+	m_pCameraMan->SetIsSwitching(false);
+}
+
+void CStageControlTower::OnPerfectEvadeMode()
+{
+	m_pTimeSeeker->OnPerfectEvadeMode();
+}
+
+_bool CStageControlTower::GetIsPerfectEvadeMode()
+{
+	return m_pTimeSeeker->GetIsPerfectEvadeMode();
+}
+
+_float CStageControlTower::GetPlayerDeltaTime()
+{
+	return m_pTimeSeeker->GetPlayerDeltaTime();
 }

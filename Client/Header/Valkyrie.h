@@ -22,7 +22,7 @@ public:
 	virtual		void						Start				(void);
 
 	//virtual		void						FixedUpdate			(void);
-	//virtual		void						Update				(void);
+	virtual		void						Update				(void);
 	//virtual		void						LateUpdate			(void);
 
 	//virtual		void						PreRender			(void) {};
@@ -40,6 +40,11 @@ public:
 	//virtual		void						OnDisable			(void);
 
 	//virtual		void						SetBasicName		(void);
+
+	
+	virtual		void						OnTriggerEnter		(Engine::CCollisionC const* pCollisionC);
+	virtual		void						OnTriggerStay		(Engine::CCollisionC const* pCollisionC);
+	virtual		void						OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
 
 	virtual		void						OnCollisionEnter(Engine::_CollisionInfo ci);
 	virtual		void						OnCollisionStay(Engine::_CollisionInfo ci);
@@ -59,6 +64,14 @@ public:
 
 	void OnHitbox();
 	void OffHitbox();
+
+public:
+	virtual void UseSkill(void) PURE;
+	virtual void UseUltra(void) PURE;
+
+	_bool	CheckUltraUseable(void);
+	_bool	CheckSkillUseable(void);
+
 
 protected:
 	static			_uint							m_s_uniqueID;
@@ -80,7 +93,10 @@ protected:
 	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 	
 	GETTOR_SETTOR	(_bool,							m_isWait,			false,		IsWait)
+	GETTOR_SETTOR	(_bool,							m_isEvade,			false,		IsEvade)
 	
+	GETTOR_SETTOR	(_float,						m_skillTimer,		0.f,		SkillTimer)
+	GETTOR_SETTOR	(_float,						m_ultraTimer,		0.f,		UltraTimer)
 
 protected:
 	CStageControlTower*			m_pCT = nullptr;

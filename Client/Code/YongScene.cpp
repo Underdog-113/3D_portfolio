@@ -6,6 +6,8 @@
 #include "Kiana.h"
 
 #include "MonsterSpawnBeam.h"
+#include "ScoutMeteor.h"
+#include "Scout_Att_Range.h"
 CYongScene::CYongScene()
 {
 }
@@ -100,6 +102,20 @@ void CYongScene::Start(void)
 		//pKiana->SetEffect_Attack3(pKiana->CreateEffect(L"Kiana_Attack_2"));
 		//pKiana->SetEffect_Attack4(pKiana->CreateEffect(L"Kiana_Attack_3"));
 		//pKiana->SetEffect_Attack5(pKiana->CreateEffect(L"Kiana_Attack_3"));
+
+		// Floor
+		{
+			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
+
+
+			spCube->AddComponent<Engine::CCollisionC>()->
+				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
+
+			spCube->AddComponent<Engine::CDebugC>();
+			spCube->AddComponent<Engine::CShaderC>();
+			spCube->GetTransform()->SetSize(10, 1, 10);
+			spCube->GetTransform()->SetPosition(0, -1.f, 0);
+		}
 	}
 }
 
@@ -115,56 +131,34 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		SP(Engine::CObject) spMeshEffect
-			= m_pObjectFactory->AddClone(L"Sickle_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sickle_Attack");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BloomMask");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 
+		//SP(CScout_Att_Range) spScoutRange = std::dynamic_pointer_cast<CScout_Att_Range>(m_pObjectFactory->AddClone(L"Scout_Att_Range", true, (_int)Engine::ELayerID::Effect, L"MeshEffect"));
+		//spScoutRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Att_Range_Move");
+		//spScoutRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+		//spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		//spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		//spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+		//spScoutRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 
-		/*SP(Engine::CObject) spMeshEffect
-			= m_pObjectFactory->AddClone(L"Sakura_Charge_Att", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sakura_Beam");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_Dodge_Line");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);*/
+		//SP(Engine::CObject) spMeshEffect = m_pObjectFactory->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
+	
 
-	/*	SP(Engine::CObject) spSoftEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
-		spSoftEffect->GetComponent<Engine::CGraphicsC>();
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
-		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);*/
+		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact", true);
+	
+		/*	SP(CMonsterSpawnBeam) spMeshEffect =
+				std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
 
-	/*	SP(CMonsterSpawnBeam) spMeshEffect =
-			std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
+			spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
+			spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
+			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
+			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
+			spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+			spMeshEffect->GetCollision()->AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
 
-		spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-		spMeshEffect->GetCollision()->
-			AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
+			*/
 
-		{
-			SP(Engine::CObject) spCube = ADD_CLONE(L"EmptyObject", true, (_int)ELayerID::Player, L"Cube0");
-
-
-			spCube->AddComponent<Engine::CCollisionC>()->
-				AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Floor, _float3(20.f, 1.f, 20.f)));
-
-			spCube->AddComponent<Engine::CDebugC>();
-			spCube->AddComponent<Engine::CShaderC>();
-			spCube->GetTransform()->SetSize(10, 1, 10);
-			spCube->GetTransform()->SetPosition(0, -1.f, 0);
-		}*/
+		
 	}
 }
 
@@ -195,10 +189,4 @@ void CYongScene::OnDisable(void)
 
 void CYongScene::InitPrototypes(void)
 {
-}
-
-void CYongScene::SpawnAttackRange()
-{
-	SP(Engine::CObject) spMeshEffect
-		= this->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
 }

@@ -29,9 +29,7 @@ SP(Engine::CObject) CAttackTrail::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetPosition(_float3(0.f, 0.f, 0.f));
 	spClone->m_spTransform->SetRotation(_float3(0.f, 0.f, 0.f));
-	spClone->GetComponent<Engine::CTransformC>()->SetPositionZ(2.f);
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
@@ -69,24 +67,25 @@ void CAttackTrail::Update()
 	__super::Update();
 
 	/*if (m_fTrailAlpha <= 0)
-	{
+	{#
 		this->SetDeleteThis(true);
 	}*/
-	if (Engine::IMKEY_PRESS(KEY_DOWN))
+	if (Engine::IMKEY_PRESS(KEY_Q))
 	{
 		m_fTrailAlpha -= 0.5f * GET_DT;
 	}
-	if (Engine::IMKEY_PRESS(KEY_UP))
+	if (Engine::IMKEY_PRESS(KEY_E))
 	{
 		m_fTrailAlpha += 1.f * GET_DT;
+		//m_fSpeed -= GET_DT;
 	}
-	if (Engine::IMKEY_DOWN(KEY_LEFT))
+	if (Engine::IMKEY_DOWN(KEY_X))
 	{
 		m_fTrailAlpha = 1.f;
+		m_fSpeed = 0.3f;
 	}
 
-	m_fSpeed += GET_DT;
-
+	m_fSpeed += 0.3f * GET_DT;
 	//m_fTrailAlpha -= 0.1f * GET_DT;
 
 }
@@ -100,14 +99,11 @@ void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 
-	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
-	//pEffect->SetFloat("gAlpha", m_fTrailAlpha);
-	//pEffect->SetFloat("gSpeed", m_fSpeed);
+   //pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gSpeed", m_fSpeed);
+	pEffect->SetBool("gPlayingAnim", true);
 
-	//if (m_fTrailAlpha > 1.f )
-	//pEffect->SetBool("gTrailCheck", false);
-
-	//pEffect->SetBool("gPlayingAnim", false);
 
 }
 

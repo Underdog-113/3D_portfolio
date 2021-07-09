@@ -147,7 +147,7 @@ void CMO_Spider::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 
@@ -172,7 +172,7 @@ void CMO_Spider::SetStatus(BaseStat stat)
 SP(Engine::CObject) CMO_Spider::CreateEffect(std::wstring name)
 {
 	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
-		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)ELayerID::Effect, L"Cube0");
+		GetObjectFactory()->AddClone(L"AttackTrail_Client", true, (_int)Engine::ELayerID::Effect, L"Cube0");
 
 	//spEmptyObject->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);

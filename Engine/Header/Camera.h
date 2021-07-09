@@ -95,6 +95,7 @@ private:
 
 	//For TPS Camera
 	GETTOR_SETTOR	(_float3,				m_targetOffset,		_float3(0, 0.5f, 0),	TargetOffset)
+	GETTOR_SETTOR	(_float3,				m_shakePosOffset,	_float3(0, 0.f, 0),		ShakePosOffset)
 	GETTOR_SETTOR	(_float,				m_targetDist,		3.f,					TargetDist)
 	GETTOR_SETTOR	(_float,				m_lookAngleRight,	PI/7.f,					LookAngleRight)
 	GETTOR_SETTOR	(_float,				m_lookAngleUp,		0.f,					LookAngleUp)
@@ -105,7 +106,17 @@ private:
 	GETTOR_SETTOR	(_bool,					m_isRightClicked,	false,					RightClicked)
 
 
+private:
+	GETTOR_SETTOR	(_float3,				m_noShakePos,		ZERO_VECTOR,			NoShakePos)
+	GETTOR_SETTOR	(_float3,				m_noShakeRot,		ZERO_VECTOR,			NoShakeRot)
+	GETTOR_SETTOR	(_float3,				m_shakePos,			ZERO_VECTOR,			ShakePos)
+	GETTOR_SETTOR	(_float3,				m_shakeRot,			ZERO_VECTOR,			ShakeRot)
+
+
+
 	POINT m_prevPT;
+
+
 };
 END
 #endif

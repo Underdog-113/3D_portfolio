@@ -418,9 +418,6 @@
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\ValkyrieController">
-      <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
       <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
     </Filter>
@@ -765,6 +762,54 @@
     </Filter>
     <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
       <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
+        </Filter>
+    <Filter Include="10.ControlTower\TimeTraveler">
+      <UniqueIdentifier>{c16141b8-a600-4736-be66-22b76077d3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\ActorController">
+      <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect">
+      <UniqueIdentifier>{c5167018-275d-4076-84c4-1aae6c23d23c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range">
+      <UniqueIdentifier>{14a143e7-5484-4a05-a12d-0bfdd6f4add5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser">
+      <UniqueIdentifier>{3f7f8e15-53a8-482c-b4cc-3dda9d2eb998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball">
+      <UniqueIdentifier>{b8c0882e-f095-4a65-8ffd-956901dc2cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\12.OutlineShader">
+      <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\02.Spark">
+      <UniqueIdentifier>{60fcde3a-32ea-4af4-9111-460e9d900e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor">
+      <UniqueIdentifier>{c351ef75-90cc-4cf9-9b3b-f27b1de2b26e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range">
+      <UniqueIdentifier>{ebed8560-5517-420c-a919-68a3f3c4ae7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff">
+      <UniqueIdentifier>{0910b4d3-2a6a-487e-8dfb-d5f5f4423cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect">
+      <UniqueIdentifier>{4e257c1f-0474-4799-84c0-2ed19d18476f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane">
+      <UniqueIdentifier>{0aca0ce5-27b1-42a5-8dd0-e0f554705b6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross">
+      <UniqueIdentifier>{ec3bff50-cc42-4278-add9-ec9a50bf84de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\12.BossStageScene">
+      <UniqueIdentifier>{d25df95d-6620-4257-9e89-d17d52f0ae18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne">
+      <UniqueIdentifier>{7d8ac4f3-af33-4322-87c8-d6c065672d2b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1216,7 +1261,7 @@
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ActorController.h">
-      <Filter>10.ControlTower\ValkyrieController</Filter>
+      <Filter>10.ControlTower\ActorController</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AlphaLifeTimeC.h">
       <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
@@ -1486,6 +1531,9 @@
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CameraShake.h">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SpiderExplosion.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClInclude>
@@ -1498,12 +1546,68 @@
     <ClInclude Include="..\Header\BronyaArsenalPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\TimeSeeker.h">
+      <Filter>10.ControlTower\TimeTraveler</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SpiderExplosion.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SupplyOut.h">
       <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Sickle_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MonsterAttackSign.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Scout_Att_Range.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Scout_Laser.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\OutlineShader.h">
+      <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutMeteor.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutBall.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SparkEffect.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ScoutCircleRange.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\RobotHookEff.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="Theresa_CrossBloodyHug.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClInclude>
+    <ClInclude Include="Theresa_CrossBlade.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BossStageScene.h">
+      <Filter>01.Scene\12.BossStageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
+    <ClInclude Include="..\Header\Robot_Impact.h" />
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1901,7 +2005,7 @@
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ActorController.cpp">
-      <Filter>10.ControlTower\ValkyrieController</Filter>
+      <Filter>10.ControlTower\ActorController</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AlphaLifeTimeC.cpp">
       <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
@@ -2153,6 +2257,9 @@
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\CameraShake.cpp">
+      <Filter>10.ControlTower\CameraMan</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\SpiderExplosion.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
@@ -2165,12 +2272,62 @@
     <ClCompile Include="..\Code\SpiderExplosion.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\SpiderExplosion.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SupplyOut.cpp">
       <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\TimeSeeker.cpp">
+      <Filter>10.ControlTower\TimeTraveler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scout_Att_Range.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scout_Laser.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageCameraMan.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp">
+      <Filter>04.Shader\12.OutlineShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutMeteor.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutBall.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SparkEffect.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutCircleRange.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RobotHookEff.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="Theresa_CrossBloodyHug.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClCompile>
+    <ClCompile Include="Theresa_CrossBlade.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BossStageScene.cpp">
+      <Filter>01.Scene\12.BossStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2229,6 +2386,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <Filter>04.Shader\11.LaserTrail</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
+      <Filter>04.Shader\12.OutlineShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

@@ -42,8 +42,8 @@ void CMO_Robot::Awake(void)
 	__super::Awake();
 	m_spStateMachine = AddComponent<CFSM_RobotC>();
 	m_spPatternMachine->AddNecessaryPatterns(CRobotBornPattern::Create(), CRobotDiePattern::Create(), CRobotBasePattern::Create(), CRobotHitPattern::Create());
-	m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create());
-	m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
+	//m_spPatternMachine->AddPattern(CRobotRunAttackPattern::Create());
+	//m_spPatternMachine->AddPattern(CRobotAttack2Pattern::Create());
 }
 
 void CMO_Robot::Start(void)
@@ -172,7 +172,7 @@ void CMO_Robot::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 void CMO_Robot::SetStatus(BaseStat stat)

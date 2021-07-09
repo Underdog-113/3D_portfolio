@@ -26,6 +26,8 @@ public:
 
 	_float3		GetRootMotionLocalPos(CObject* pOwner, CDynamicMeshData* pDM);
 	_float3		GetOwnerSizedPos(CObject * pOwner, _float3 pos);
+
+	void		ResetPrevMoveAmount();
 private:
 	GETTOR			(_bool*,	m_pIsFixRootMotionOffsets,	nullptr,		IsFixRootMotionOffsets)
 	GETTOR_SETTOR	(_bool,		m_isRootMotion,				false,			IsRootMotion)
@@ -40,7 +42,7 @@ private:
 
 	_float3 m_animStartOffset = ZERO_VECTOR;
 	_float3 m_prevRootMotionPos = ZERO_VECTOR;
-	_float3 m_prevMoveAmount = _float3(100.f,100.f,100.f);
+	_float3 m_prevMoveAmount = ZERO_VECTOR;
 };
 
 END

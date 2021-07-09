@@ -43,6 +43,15 @@
 
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
+#include "SparkEffect.h"
+
+// Scout
+#include "Scout_Att_Range.h"
+#include "Scout_Att_Range_Hold.h"
+#include "Scout_Laser.h"
+#include "ScoutBall.h"
+#include "ScoutMeteor.h"
+#include "ScoutCircleRange.h"
 
 #include "SoftEffect.h"
 #include "MonsterHitEffect.h"
@@ -51,6 +60,7 @@
 #include "MonsterAttackSign.h"
 #include "Sickle_Trail.h"
 #include "SpiderExplosion.h"
+
 // Kiana
 #include "Kiana_Trail.h"
 #include "Kiana_Ult_Trail.h"
@@ -73,6 +83,12 @@
 
 // Sakura
 #include "Sakura_Charge_Att.h"
+
+// Robot
+#include "RobotHookEff.h"
+#include "Robot_Plane.h"
+#include "Robot_Impact.h"
+#include "Robot_Impact_Smoke.h"
 
 #pragma endregion
 
@@ -289,11 +305,14 @@ void CStaticScene::InitValkyriePrototypes(void)
 	SP(CKiana_Pistol) spPistol(CKiana_Pistol::Create(true, this));
 	ADD_PROTOTYPE(spPistol);
 
-
 	SP(CTheresa) spTheresaPrototype(CTheresa::Create(true, this));
 	ADD_PROTOTYPE(spTheresaPrototype);
 
+	SP(CTheresa_CrossBloodyHug) spCrossBloodyHugPrototype(CTheresa_CrossBloodyHug::Create(true, this));
+	ADD_PROTOTYPE(spCrossBloodyHugPrototype);
 
+	SP(CTheresa_CrossBlade) spCrossBladePrototype(CTheresa_CrossBlade::Create(true, this));
+	ADD_PROTOTYPE(spCrossBladePrototype);
 
 	SP(CSakura) spSakuraPrototype(CSakura::Create(true, this));
 	ADD_PROTOTYPE(spSakuraPrototype);
@@ -392,5 +411,81 @@ void CStaticScene::InitEffectPrototypes(void)
 	// Sickle
 	SP(CMeshEffect_Client) spSickleTrail(CSickle_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSickleTrail);
+
+	// Scout
+	SP(CMeshEffect_Client) spScoutAttRange(CScout_Att_Range::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutAttRange);
+	
+	SP(CMeshEffect_Client) spScoutAttRange_Hold(CScout_Att_Range_Hold::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutAttRange_Hold);
+
+	SP(CMeshEffect_Client) spScoutLaser(CScout_Laser::Create(true, this));
+	GetObjectFactory()->AddPrototype(spScoutLaser);
+
+	SP(CMeshEffect_Client) spScoutBall(CScoutBall::Create(true, this));
+	spScoutBall->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
+	spScoutBall->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spScoutBall->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+	spScoutBall->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+	spScoutBall->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spScoutBall);
+
+	SP(CScoutMeteor) spScoutMeteor(CScoutMeteor::Create(true, this));
+	spScoutMeteor->GetComponent<Engine::CGraphicsC>();
+	spScoutMeteor->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
+	spScoutMeteor->GetComponent<Engine::CTextureC>()->AddTexture(L"Scout_Meteor");
+	spScoutMeteor->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	spScoutMeteor->GetCollision()->
+		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 0.2f));
+	GetObjectFactory()->AddPrototype(spScoutMeteor);
+
+	SP(CSoftEffect) spSparkEffect(CSparkEffect::Create(true, this));
+	spSparkEffect->GetComponent<Engine::CGraphicsC>();
+	spSparkEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spark_v2");
+	spSparkEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Spark_v2");
+	spSparkEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);	
+	GetObjectFactory()->AddPrototype(spSparkEffect);
+
+	SP(CMeshEffect_Client) spScoutCircleRange(CScoutCircleRange::Create(true, this));
+	spScoutCircleRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
+	spScoutCircleRange->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spScoutCircleRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"BonusShield_3");
+	spScoutCircleRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spScoutCircleRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spScoutCircleRange);
+
+	// Robot
+	SP(CSoftEffect) spRobotHookEffect(CRobotHookEff::Create(true, this));
+	spRobotHookEffect->GetComponent<Engine::CGraphicsC>();
+	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
+	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
+	spRobotHookEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spRobotHookEffect);
+
+	SP(CMeshEffect_Client) spRobotPlane(CRobot_Plane::Create(true, this));
+	spRobotPlane->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Plane");
+	spRobotPlane->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spRobotPlane->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spRobotPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"SkyColor");
+	spRobotPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"SkyColor");
+	spRobotPlane->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spRobotPlane);
+
+	SP(CSoftEffect) spRobotImpact(CRobot_Impact::Create(true, this));
+	spRobotImpact->GetComponent<Engine::CGraphicsC>();
+	spRobotImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"ImpactColor");
+	spRobotImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Effect_Wave07");
+	spRobotImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spRobotImpact);
+
+	SP(CMeshEffect_Client) spRobotImpactSmoke(CRobot_Impact_Smoke::Create(true, this));
+	spRobotImpactSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Impact");
+	spRobotImpactSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spRobotImpactSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spRobotImpactSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spRobotImpactSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
+	spRobotImpactSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spRobotImpactSmoke);
 
 }

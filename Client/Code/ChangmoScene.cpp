@@ -42,53 +42,53 @@ void CChangmoScene::Start(void)
 {
 	__super::Start();
 
-	//{
-	//	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"Parent");
-	//	spCube0->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-	//	spCube0->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
-	//	spCube0->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//	spCube0->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	//	spCube0->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
-	//	spCube0->AddComponent<Engine::CDebugC>();
-	//
-	//	SP(Engine::CObject) spCube1 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"Child");
-	//	spCube1->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-	//	spCube1->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
-	//	spCube1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//	spCube1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	//	//spCube1->GetTransform()->SetParent(spCube0->GetTransform());
-	//	spCube1->GetTransform()->SetPosition(2, 0, 0);
-	//	spCube1->GetTransform()->SetParent(spCube0->GetTransform());
-	//	spCube1->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
-	//	spCube1->AddComponent<Engine::CDebugC>();
-	//	//spCube1->GetTransform()->SetParentMatrix(&spCube0->GetTransform()->GetWorldMatrix());
-	//
-	//
-	//	SP(Engine::CObject) spCube2 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"no");
-	//	spCube2->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-	//	spCube2->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
-	//	spCube2->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	//	spCube2->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	//	spCube2->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
-	//	spCube2->AddComponent<Engine::CDebugC>();
-	//	spCube2->GetTransform()->AddPositionX(5);
-	//}
+	{
+		SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"Parent");
+		spCube0->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		spCube0->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		spCube0->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spCube0->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spCube0->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
+		spCube0->AddComponent<Engine::CDebugC>();
+	
+		SP(Engine::CObject) spCube1 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"Child");
+		spCube1->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		spCube1->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		spCube1->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spCube1->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spCube1->GetTransform()->SetParent(spCube0->GetTransform());
+		spCube1->GetTransform()->SetPosition(2, 0, 0);
+		spCube1->GetTransform()->SetParent(spCube0->GetTransform());
+		spCube1->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
+		spCube1->AddComponent<Engine::CDebugC>();
+		//spCube1->GetTransform()->SetParentMatrix(&spCube0->GetTransform()->GetWorldMatrix());
+	
+	
+		SP(Engine::CObject) spCube2 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"no");
+		spCube2->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		spCube2->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		spCube2->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+		spCube2->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		spCube2->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CSphereCollider::Create((_int)ECollisionID::EnemyHitBox));
+		spCube2->AddComponent<Engine::CDebugC>();
+		spCube2->GetTransform()->AddPositionX(5);
+	}
 
 	{
-		SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+		//SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
-		m_spKiana = spKianaClone;
-		m_pControlTower->AddSquadMember(m_spKiana);
-		m_pControlTower->Start(CStageControlTower::WithoutUI);
-		//m_pControlTower->Start(CStageControlTower::ALL);
+		//m_spKiana = spKianaClone;
+		//m_pControlTower->AddSquadMember(m_spKiana);
+		//m_pControlTower->Start(CStageControlTower::WithoutUI);
+		////m_pControlTower->Start(CStageControlTower::ALL);
 
 
-		auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
-		cam->SetTarget(spKianaClone);
-		cam->SetTargetDist(2.f);
-		CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+		//auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+		//cam->SetTarget(spKianaClone);
+		//cam->SetTargetDist(2.f);
+		//CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 
-		cam->SetMode(Engine::ECameraMode::TPS);
+		//cam->SetMode(Engine::ECameraMode::TPS);
 
 		// cube terrain
 		{
@@ -150,26 +150,26 @@ void CChangmoScene::FixedUpdate(void)
 void CChangmoScene::Update(void)
 {
 	__super::Update();
-	CStageControlTower::GetInstance()->Update();
+	//CStageControlTower::GetInstance()->Update();
 
 	
 
-	//if(Engine::IMKEY_PRESS(KEY_UP))
-	//	FindObjectByName(L"Parent")->GetTransform()->MoveForward(0.2f);
-	//if (Engine::IMKEY_PRESS(KEY_LEFT))
-	//	FindObjectByName(L"Parent")->GetTransform()->AddRotationY(PI / 90);
-	//if (Engine::IMKEY_PRESS(KEY_RIGHT))
-	//	FindObjectByName(L"Parent")->GetTransform()->AddRotationZ(PI / 90);
-	//if (Engine::IMKEY_PRESS(KEY_DOWN))
-	//	FindObjectByName(L"Parent")->GetTransform()->AddRotationX(PI / 90);
-	//
-	//if (Engine::IMKEY_DOWN(KEY_E))
-	//	FindObjectByName(L"Parent")->SetDeleteThis(true);
-	//if (Engine::IMKEY_DOWN(KEY_Q))
-	//{
-	//	FindObjectByName(L"Parent")->GetTransform()->SetPosition(0, 0, 0);
-	//	FindObjectByName(L"Parent")->GetTransform()->SetRotation(0, 0, 0);
-	//}
+	if(Engine::IMKEY_PRESS(KEY_W))
+		FindObjectByName(L"Parent")->GetTransform()->SetForwardUp(_float3(1, 0, 0), _float3(0, 1, 1));
+	if (Engine::IMKEY_PRESS(KEY_A))
+		FindObjectByName(L"Parent")->GetTransform()->SetForwardUp(_float3(1, 0, 1), _float3(0, 1, 0));
+	if (Engine::IMKEY_PRESS(KEY_RIGHT))
+		FindObjectByName(L"Parent")->GetTransform()->AddRotationZ(PI / 90);
+	if (Engine::IMKEY_PRESS(KEY_DOWN))
+		FindObjectByName(L"Parent")->GetTransform()->AddRotationX(PI / 90);
+	
+	if (Engine::IMKEY_DOWN(KEY_E))
+		FindObjectByName(L"Parent")->SetDeleteThis(true);
+	if (Engine::IMKEY_DOWN(KEY_Q))
+	{
+		FindObjectByName(L"Parent")->GetTransform()->SetPosition(0, 0, 0);
+		FindObjectByName(L"Parent")->GetTransform()->SetRotation(0, 0, 0);
+	}
 }
 
 void CChangmoScene::LateUpdate(void)

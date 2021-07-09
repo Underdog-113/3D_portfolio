@@ -22,6 +22,7 @@
 #define Name_RunBS						L"RunBS"
 #define Name_RunStopLeft				L"RunStopLeft"
 #define Name_RunStopRight				L"RunStopRight"
+#define Name_WeaponSkill				L"WeaponSkill"
 #define Name_StandBy					L"StandBy"
 #define Name_Stun						L"Stun"
 #define Name_SwitchIn					L"SwitchIn"

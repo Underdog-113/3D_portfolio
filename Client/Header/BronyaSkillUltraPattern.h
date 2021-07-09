@@ -22,7 +22,7 @@ private:
 	void MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 mPos);
 
 private:
-	_float m_cost = /*35.f;*/ 3.f;
+	_float m_cost = 25.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 1.5f; // 공격 거리

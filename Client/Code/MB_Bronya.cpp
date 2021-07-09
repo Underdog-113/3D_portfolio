@@ -47,11 +47,11 @@ void CMB_Bronya::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_BronyaC>();
 	m_spPatternMachine->AddNecessaryPatterns(CBronyaBornPattern::Create(), CBronyaDiePattern::Create(), CBronyaBasePattern::Create(), CBronyaHitPattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
 	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
 }
 
@@ -252,5 +252,5 @@ void CMB_Bronya::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }

@@ -119,7 +119,7 @@ void CMonsterHitEffect::SetBasicName(void)
 
 void CMonsterHitEffect::UpdateFrame(_float _frmSpeed)
 {
-	m_fTIme += GET_DT;
+	m_fTIme += GET_PURE_DT;
 
 	if (m_fTIme >= _frmSpeed)
 	{

@@ -21,6 +21,10 @@ public:
 					void				TimerStart			(void);
 					_float				GetElapsedTime		(void);
 					_float				GetDeltaTime		(void);
+					_float				GetPureDeltaTime	(void);
+
+					void				PerfectEvadeMode	(void);
+					void				PlayPerfectEvade	(void);
 private:
 
 					//cpu의 초당 진동수

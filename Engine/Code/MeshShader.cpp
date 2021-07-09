@@ -34,13 +34,10 @@ void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
 	SetupWorldViewProj(spGC);
 
-	_float4 addColor(0, 0, 0, 0);
-
 	if (spGC->GetColorReverse())
 	{
-		addColor = _float4(0.5f, 0.f, 0.f, 0.f);
+		m_addColor = _float4(0.5f, 0.f, 0.f, 0.f);
 	}
 
-
-	m_pEffect->SetVector("g_addColor", &addColor);
+	m_pEffect->SetVector("g_addColor", &m_addColor);
 }

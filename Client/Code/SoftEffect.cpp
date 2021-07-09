@@ -23,18 +23,17 @@ void CSoftEffect::Awake(void)
 	(m_spGraphics = AddComponent<Engine::CGraphicsC>())->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spTexture = AddComponent<Engine::CTextureC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
-
 	m_spTransform->SetCheckCamDistance(true);
 
 }
 void CSoftEffect::Start(void)
 {
 	__super::Start();
-	m_fAlphaWidth = 1.f;
+	/*m_fAlphaWidth = 1.f;
 	m_fAlphaHeight = 1.f;
 	m_TilingX = 0;
 	m_TilingY = 0;
-	m_fTIme = 0.f;
+	m_fTIme = 0.f;*/
 }
 
 void CSoftEffect::FixedUpdate(void)

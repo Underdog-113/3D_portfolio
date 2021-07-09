@@ -45,9 +45,6 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (m_curCost > m_maxCost)
 		m_curCost = m_maxCost;
 
-	//std::cout << "cost : " << m_curCost << std::endl;
-	//std::cout << "================================= " << std::endl;
-
 	if (false == m_previewMode &&
 		Pattern_Type::TypeEnd != m_vPatterns.size() &&
 		m_vIndices.empty())
@@ -60,26 +57,9 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
 	{
-		m_previewMode = (false == m_previewMode) ? m_previewMode = true : m_previewMode = false;
-		m_vIndices.clear();
+		m_onAirborne = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetbreakGauge(0.f);
 	}
-
-
-	std::cout << "curHP: " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
-	std::cout << "=================================" << std::endl;
-
-
-	//if (Engine::IMKEY_DOWN(KEY_Q))
-	//{
-	//	m_onDie = true;
-	//	static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
-	//	//m_onHitH = true;
-	//}
-	//
-	//if (Engine::IMKEY_DOWN(KEY_E))
-	//{
-	//	m_onHitL= true;
-	//}
 
 	// born 실행 (1번만)
 	PlayBornPattern();
@@ -93,7 +73,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	// base 실행
 	PlayBasePattern();
 
-	// hit 실행
+	// hit, airborne 실행
 	PlayHitPattern();
 }
 
@@ -122,12 +102,13 @@ void CPatternMachineC::OnDisable()
 	__super::OnDisable();
 }
 
-void CPatternMachineC::AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit)
+void CPatternMachineC::AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit, SP(CATBPattern) pAirborne)
 {
 	m_vPatterns.emplace_back(pBorn);
 	m_vPatterns.emplace_back(pDie);
 	m_vPatterns.emplace_back(pBase);
 	m_vPatterns.emplace_back(pHit);
+	m_vPatterns.emplace_back(pAirborne);
 }
 
 void CPatternMachineC::AddPattern(SP(CATBPattern) pPattern)
@@ -154,17 +135,19 @@ void CPatternMachineC::PlayBasePattern()
 		true == m_onHitH || 
 		true == m_onHitFrontL || 
 		true == m_onHitFront ||
-		true == m_onDie) 
-		&& true == m_onBase)
+		true == m_onDie ||
+		true == m_onAirborne) &&
+		true == m_onBase)
 	{
 		m_onBase = false;
 	}
 	// hit, die, select 패턴이 아니면
-	else if ((false == m_onHitL &&
+	else if (false == m_onHitL &&
 			false == m_onHitH &&  
 			false == m_onHitFrontL &&
 			false == m_onHitFront &&
-			false == m_onDie) &&
+			false == m_onDie &&
+			false == m_onAirborne &&
 			false == m_onSelect)
 	{
 		m_onBase = true;
@@ -192,10 +175,15 @@ void CPatternMachineC::PlayHitPattern()
 	if (true == m_onDie)
 		return;
 
-	if (true == m_onHitL ||
-		true == m_onHitH ||
-		true == m_onHitFrontL ||
-		true == m_onHitFront)
+	if (true == m_onAirborne &&
+		nullptr != m_vPatterns[Pattern_Type::Airborne])
+	{
+		m_vPatterns[Pattern_Type::Airborne]->Pattern(m_pOwner);
+	}
+	else if (true == m_onHitL ||
+			 true == m_onHitH ||
+			 true == m_onHitFrontL ||
+			 true == m_onHitFront)
 	{
 		m_vPatterns[Pattern_Type::Hit]->Pattern(m_pOwner);
 	}
@@ -206,7 +194,7 @@ void CPatternMachineC::SortingPatterns()
 	size_t size = m_vPatterns.size();
 	_int index;
 
-	if (4 == size)
+	if (Pattern_Type::TypeEnd == size)
 		return;
 
 	for (_int i = 0; i < size; ++i)
@@ -252,19 +240,37 @@ void CPatternMachineC::PlaySelectPattern()
 		else
 			m_vPatterns[index]->Pattern(m_pOwner);
 
+		// select pattern이 끝났다면
+		if (false == m_onSelect)
+			m_vIndices.pop_back();
+
 		return;
 	}
-	// select pattern이 끝났다면
-	else if (false == m_onSelect)
-		m_vIndices.pop_back();
+
+	// 궁극기라면
+	if (60.f <= cost)
+	{
+		// cost가 너무 낮다면
+		if ((cost - 10) > m_curCost)
+		{
+			std::cout << "skip" << std::endl;
+			m_curCost += 20.f;
+			m_vIndices.pop_back();
+			return;
+		}
+	}
 
 	// cost가 충분하지 않다면
 	if (m_curCost < cost)
+	{
 		return;
+	}
+
+	std::cout << "Before Cost : " << m_curCost << std::endl;
 
 	m_onSelect = true;
 	m_curCost -= cost;
 
-	//std::cout << "After Cost : " << m_curCost << std::endl;
-	//std::cout << "=============================" << std::endl;
+	std::cout << "After Cost : " << m_curCost << std::endl;
+	std::cout << "=============================" << std::endl;
 }

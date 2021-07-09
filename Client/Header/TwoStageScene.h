@@ -27,7 +27,33 @@ public:
 
 
 private:
+	void				SetupFromLoader(void);
+
+	void				SetupMembers(void);
+	void				Create_ActorValkyrie(void);
+	void				Create_SceneCamera(void);
+
+	void				Create_Dummy(_float3 pos);
+	void				Create_Sickle(_float3 pos);
+	void				Create_Spider(_float3 pos);
+
+
 	void				InitPrototypes(void) override;
+
+	void				ForUITest();
+
+private:
+	CStageControlTower* m_pControlTower = nullptr;
+	CBattleUiManager* m_pBattleUIManager = nullptr;
+
+	SP(Engine::CObject) m_spValkyrie;
+
+	std::vector<SP(Engine::CObject)> m_vSickle;
+	std::vector<SP(Engine::CObject)> m_vSpider;
+
+	SP(Engine::CObject) m_spGanesha;
+
+	std::vector<SP(Engine::CObject)> m_vDummy;
 
 };
 

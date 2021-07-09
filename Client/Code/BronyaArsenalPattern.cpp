@@ -27,7 +27,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
-	CoolTime(m_walkTime, m_walkCool, m_walkReady);
+	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 
 	// 1. 센터로 escape
 	// 2. 구석으로 escape
@@ -36,38 +36,50 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Center */
 	if (false == m_movedCenter)
 	{
-		MoveCenter(pOwner, fsm, mPos);
+		_float3 endPos = { 0.f, mPos.y, 0.f };
+		EscapePos(pOwner, fsm, mPos, endPos, m_movedCenter);
 	}
 
 	/************************* Move Corner */
-	if (false == m_movedCenter)
+	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		MoveCorner(pOwner, fsm, mPos);
+		_float3 endPos = { 0.f, mPos.y, 15.f };
+		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
 	}
 
-	/************************* Ultra */
-	// 내가 대기 상태가 끝났고, 센터로 이동했으면
+	/************************* Arsenal */
+	// 내가 대기 상태가 끝났고, corner로 이동했으면
 	if (Name_IDLE == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd() &&
-		false == m_onShock)
+		false == m_onArsenal)
 	{
-		// skill ultra 상태로 변경
-		fsm->ChangeState(Name_Skill_Ultra);
+		// Arsenal Charge 상태로 변경
+		fsm->ChangeState(Name_Arsenal_Charge);
 	}
-	// 내가 skill ultra 상태가 끝났다면
-	else if (Name_Skill_Ultra == fsm->GetCurStateString() &&
+	// 내가 Arsenal Charge 상태가 끝났다면
+	else if (Name_Arsenal_Charge == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
-		// 쉐이더로 사라짐
-		//
-		fsm->ChangeState(Name_IDLE);
-		m_onShock = true;
+		// Arsenal Loop 상태로 변경
+		fsm->ChangeState(Name_Arsenal_Loop);
+		m_atkReady = false;
 	}
-	// 내가 대기 상태가 끝났다면
-	else if (true == m_onShock)
+	// 내가 Arsenal Loop가 끝났고, 쿨타임도 끝났다면
+	else if (Name_Arsenal_Loop == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd() &&
+		true == m_atkReady)
 	{
-		// 목표에게 shock1
-		m_spShock1P->Pattern(pOwner);
+		// Arsenal End 상태로 변경
+		fsm->ChangeState(Name_Arsenal_End);
+	}
+	// 내가 Arsenal End 상태가 끝났다면
+	else if (Name_Arsenal_End == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		// 대기 상태로 변경
+		fsm->ChangeState(Name_IDLE);
+		m_movedCenter = m_movedCorner = false;
+		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
 } 
 
@@ -78,7 +90,7 @@ SP(CBronyaArsenalPattern) CBronyaArsenalPattern::Create()
 	return spInstance;
 }
 
-void CBronyaArsenalPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 mPos)
+void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 monPos, _float3 endPos, _bool& moved)
 {
 	// 이스케이프 외 애니메이션이 종료되었다면
 	if (Name_Escape_In != spFSM->GetCurStateString() &&
@@ -99,8 +111,8 @@ void CBronyaArsenalPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC)
 		m_onEscape = true;
 
 		// 센터로 이동
-		m_lerpStartPos = mPos;
-		m_lerpEndPos = _float3(0.f, mPos.y, 0.f);
+		m_lerpStartPos = monPos;
+		m_lerpEndPos = _float3(endPos);
 		m_lerpCurTimer = 0.f;
 	}
 	// escape in 상태 중 목표 위치로 이동 중이라면
@@ -135,66 +147,6 @@ void CBronyaArsenalPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC)
 		// 대기 상태로 변경
 		spFSM->ChangeState(Name_IDLE);
 		m_lerpCurTimer = 0.f;
-		m_movedCenter = true;
-	}
-}
-
-void CBronyaArsenalPattern::MoveCorner(Engine::CObject * pOwner, SP(CFSM_BronyaC) spFSM, _float3 mPos)
-{
-	// 이스케이프 외 애니메이션이 종료되었다면
-	if (Name_Escape_In != spFSM->GetCurStateString() &&
-		Name_Escape_Out != spFSM->GetCurStateString() &&
-		spFSM->GetDM()->IsAnimationEnd())
-	{
-		// escape in 실행
-		spFSM->ChangeState(Name_Escape_Out);
-	}
-	// escape in 상태 중 적절한 위치로 올라왔다면
-	else if (Name_Escape_Out == spFSM->GetCurStateString() &&
-		0.76f <= spFSM->GetDM()->GetAniTimeline() &&
-		0.f >= m_lerpCurTimer &&
-		false == m_onEscape)
-	{
-		// 애니메이션 정지
-		spFSM->GetDM()->GetAniCtrl()->SetSpeed(0.05f);
-		m_onEscape = true;
-
-		// 센터로 이동
-		m_lerpStartPos = mPos;
-		m_lerpEndPos = _float3(0.f, mPos.y, 15.f);
-		m_lerpCurTimer = 0.f;
-	}
-	// escape in 상태 중 목표 위치로 이동 중이라면
-	else if (Name_Escape_Out == spFSM->GetCurStateString() &&
-		0.05f >= spFSM->GetDM()->GetAniCtrl()->GetSpeed() &&
-		m_lerpCurTimer < m_lerpMaxTimer)
-	{
-		m_lerpCurTimer += GET_DT;
-
-		if (m_lerpCurTimer >= m_lerpMaxTimer)
-		{
-			m_lerpCurTimer = m_lerpMaxTimer;
-		}
-
-		_float3 currentPos = GetLerpPosition(m_lerpStartPos, m_lerpEndPos, m_lerpCurTimer, 0.3f);
-		pOwner->GetTransform()->SetPosition(currentPos);
-	}
-	// escape in 상태 중이면서 이동이 끝났다면
-	else if (Name_Escape_Out == spFSM->GetCurStateString() &&
-		m_lerpCurTimer <= m_lerpMaxTimer &&
-		true == m_onEscape)
-	{
-		// 애니메이션 재생
-		spFSM->ChangeState(Name_Escape_In);
-		spFSM->GetDM()->GetAniCtrl()->SetSpeed(1.f);
-		m_onEscape = false;
-	}
-	// escape in 상태가 끝났다면
-	else if (Name_Escape_In == spFSM->GetCurStateString() &&
-		spFSM->GetDM()->IsAnimationEnd())
-	{
-		// 대기 상태로 변경
-		spFSM->ChangeState(Name_IDLE);
-		m_lerpCurTimer = 0.f;
+		moved = true;
 	}
 }

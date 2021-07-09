@@ -1966,7 +1966,7 @@ void CToolMenuView::OnBnClickedCreateMesh()
 	else if ("Deco" == cstr)
 		curLayerID = (_int)Engine::ELayerID::Decoration;
 
-	m_curObjName.GetWindowTextW(cstr);
+	m_curObjName.SetWindowTextW(cstr);
 	wstr = CStrToWStr(cstr);
 
 	static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->CreateObject(true, curLayerID, wstr);

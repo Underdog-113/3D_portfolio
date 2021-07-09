@@ -193,6 +193,7 @@
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BossStageScene.h" />
     <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
@@ -206,9 +207,23 @@
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\RobotHookEff.h" />
+    <ClInclude Include="..\Header\Robot_Impact.h" />
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
+    <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\ScoutBall.h" />
+    <ClInclude Include="..\Header\ScoutCircleRange.h" />
+    <ClInclude Include="..\Header\ScoutMeteor.h" />
+    <ClInclude Include="..\Header\Scout_Att_Range.h" />
+    <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
+    <ClInclude Include="..\Header\Scout_Laser.h" />
+    <ClInclude Include="..\Header\SickleAirbornePattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
+    <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
+    <ClInclude Include="..\Header\OutlineShader.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
@@ -369,6 +384,8 @@
     <ClInclude Include="..\Header\ScoutHitPattern.h" />
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
+    <ClInclude Include="..\Header\TimeSeeker.h" />
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -422,6 +439,8 @@
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
+    <ClInclude Include="Theresa_CrossBlade.h" />
+    <ClInclude Include="Theresa_CrossBloodyHug.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
@@ -438,6 +457,7 @@
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BossStageScene.cpp" />
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
@@ -451,9 +471,23 @@
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\RobotHookEff.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
+    <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\ScoutBall.cpp" />
+    <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
+    <ClCompile Include="..\Code\ScoutMeteor.cpp" />
+    <ClCompile Include="..\Code\Scout_Att_Range.cpp" />
+    <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
+    <ClCompile Include="..\Code\Scout_Laser.cpp" />
+    <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
+    <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
@@ -592,6 +626,8 @@
     <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
+    <ClCompile Include="..\Code\TimeSeeker.cpp" />
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -645,6 +681,8 @@
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Theresa_CrossBlade.cpp" />
+    <ClCompile Include="Theresa_CrossBloodyHug.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -711,6 +749,12 @@
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>

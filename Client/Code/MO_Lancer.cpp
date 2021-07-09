@@ -155,8 +155,8 @@ void CMO_Lancer::ChaseTarget(_float3 targetPos)
 	_float3 dir = targetPos - m_spTransform->GetPosition();
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
-
-	m_spTransform->SetForward(dir);
+	
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 void CMO_Lancer::SetStatus(BaseStat stat)

@@ -56,7 +56,7 @@ void CSlider::Update(void)
 {
 	__super::Update();
 
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Z))
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_C))
 	{
 		m_value -= 0.5;
 	}
