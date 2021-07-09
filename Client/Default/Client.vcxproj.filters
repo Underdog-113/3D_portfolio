@@ -1652,7 +1652,7 @@
     <ClInclude Include="..\Header\SizeUpC.h">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\OutlineMeshShader.h">
+    <ClInclude Include="..\Header\FaceShader.h">
       <Filter>04.Shader\13.FaceShader</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2392,7 +2392,7 @@
     <ClCompile Include="..\Code\SizeUpC.cpp">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\OutlineMeshShader.cpp">
+    <ClCompile Include="..\Code\FaceShader.cpp">
       <Filter>04.Shader\13.FaceShader</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2457,7 +2457,7 @@
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <Filter>04.Shader\12.OutlineShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\OutlineMeshShader.fx">
+    <FxCompile Include="..\..\Resource\Shader\FaceShader.fx">
       <Filter>04.Shader\13.FaceShader</Filter>
     </FxCompile>
   </ItemGroup>
