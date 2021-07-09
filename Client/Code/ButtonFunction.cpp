@@ -13,8 +13,11 @@
 #include "OneStageScene.h"
 #include "TwoStageScene.h"
 #include "ThreeStageScene.h"
+#include "ThreeStageScene.h"
 #include "BattleEndScene.h"
 #include "InventoryScene.h"
+#include "SupplyScene.h"
+#include "BossStageScene.h"
 
 
 #include "BattleRenunciationC.h"
@@ -65,6 +68,10 @@ void CButtonFunction::ReadyToSortieScene()
 	{
 		CButtonFunction::stageValue = 2;
 	}
+	else if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"MainCanvas_Attack_7")
+	{
+		CButtonFunction::stageValue = 3;
+	}
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CReadyToSortieScene::Create());
@@ -107,7 +114,12 @@ void CButtonFunction::Sally()
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
 	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
 
-	// 해당씬이 아니라 저장한 씬으로 이동하게 만들어야한다.
+	GET_CUR_CLIENT_SCENE->FindObjectByName(L"MainCanvas")->SetIsEnabled(false);
+	GET_CUR_CLIENT_SCENE->FindObjectByName(L"PlayerIS1")->SetIsEnabled(false);
+	GET_CUR_CLIENT_SCENE->FindObjectByName(L"PlayerIS2")->SetIsEnabled(false);
+	GET_CUR_CLIENT_SCENE->FindObjectByName(L"PlayerIS3")->SetIsEnabled(false);
+	GET_CUR_CLIENT_SCENE->FindObjectByName(L"EndCanvas")->SetIsEnabled(true);
+
 	CButtonManager::GetInstance()->OnDestroy();
 	switch (CButtonFunction::stageValue)
 	{
@@ -120,6 +132,8 @@ void CButtonFunction::Sally()
 	case 2:
 		GET_CUR_CLIENT_SCENE->ChangeScene(CThreeStageScene::Create());
 		break;
+	case 3:
+		GET_CUR_CLIENT_SCENE->ChangeScene(CBossStageScene::Create());
 	default:
 		break;
 	}
@@ -133,6 +147,15 @@ void CButtonFunction::BattleEndScene()
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
+}
+
+void CButtonFunction::SupplyScene()
+{
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+
+	CButtonManager::GetInstance()->OnDestroy();
+	GET_CUR_CLIENT_SCENE->ChangeScene(CSupplyScene::Create());
 }
 
 void CButtonFunction::BattleRenunciation()

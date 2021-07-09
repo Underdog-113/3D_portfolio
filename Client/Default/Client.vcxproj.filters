@@ -415,9 +415,6 @@
     <Filter Include="10.ControlTower\PhaseControl\00.OneStage">
       <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09.Manager\06.PartySetting">
-      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
@@ -450,24 +447,6 @@
     </Filter>
     <Filter Include="09.Manager\06.ValkyriegManager">
       <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="11.ValkyrieFSM">
-      <UniqueIdentifier>{e5eba95b-f0ff-439b-8c23-417c5075f606}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="11.ValkyrieFSM\01.ValkyrieSelect">
-      <UniqueIdentifier>{44dcc136-2bea-4713-bbe6-ec3f7e5d3b3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="11.ValkyrieFSM\02.ValkyrieProperty">
-      <UniqueIdentifier>{7160368b-34b9-4b7e-9e3f-294aa9cf1a0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="11.ValkyrieFSM\03.ValkyrieWeapon">
-      <UniqueIdentifier>{39c2650b-074c-44ee-924f-8bfd17cab5f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="11.ValkyrieFSM\00.ValkyrieFSM">
-      <UniqueIdentifier>{e860a1ae-bc87-418a-a644-4197443d6075}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="11.ValkyrieFSM\04.ValkyrieLevelUp">
-      <UniqueIdentifier>{c92b365f-8115-4e78-ae88-167cf2d02904}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
       <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
@@ -643,18 +622,6 @@
     <Filter Include="04.Shader\10.FireShader">
       <UniqueIdentifier>{1b1f342d-3d74-4b5b-97a9-375cdca38edb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="11.ValkyrieFSM\05.ValkyrieWeaponSwap">
-      <UniqueIdentifier>{c578cd65-8839-4311-a1ae-76eb55761af2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1.InvertoryFSM">
-      <UniqueIdentifier>{96d305ee-0f86-4292-b815-4d732181c40d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1.InvertoryFSM\00.Wapon">
-      <UniqueIdentifier>{a3674c05-0219-4efc-b4f6-df0724f35edd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1.InvertoryFSM\01.Item">
-      <UniqueIdentifier>{3a16b10e-af08-454f-b87b-ff1a7c4b2ed7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Effect">
       <UniqueIdentifier>{5455ceab-439e-4736-83aa-24692c0c1609}</UniqueIdentifier>
     </Filter>
@@ -724,6 +691,57 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn">
       <UniqueIdentifier>{a7cc5d8f-e9e8-42cf-8b0c-7e47c747eb68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\12.supplyScene">
+      <UniqueIdentifier>{c4f29c95-eee2-4390-8df8-074f44b3c9ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.Manager\09.SupplyManager">
+      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM">
+      <UniqueIdentifier>{2dc4cdf2-a345-418c-afa4-22b45620d54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM">
+      <UniqueIdentifier>{e5eba95b-f0ff-439b-8c23-417c5075f606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\01.ValkyrieSelect">
+      <UniqueIdentifier>{44dcc136-2bea-4713-bbe6-ec3f7e5d3b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\02.ValkyrieProperty">
+      <UniqueIdentifier>{7160368b-34b9-4b7e-9e3f-294aa9cf1a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\03.ValkyrieWeapon">
+      <UniqueIdentifier>{39c2650b-074c-44ee-924f-8bfd17cab5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\00.ValkyrieFSM">
+      <UniqueIdentifier>{e860a1ae-bc87-418a-a644-4197443d6075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\04.ValkyrieLevelUp">
+      <UniqueIdentifier>{c92b365f-8115-4e78-ae88-167cf2d02904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\05.ValkyrieWeaponSwap">
+      <UniqueIdentifier>{c578cd65-8839-4311-a1ae-76eb55761af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\01.InvertoryFSM">
+      <UniqueIdentifier>{96d305ee-0f86-4292-b815-4d732181c40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\01.InvertoryFSM\00.Wapon">
+      <UniqueIdentifier>{a3674c05-0219-4efc-b4f6-df0724f35edd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\01.InvertoryFSM\01.Item">
+      <UniqueIdentifier>{3a16b10e-af08-454f-b87b-ff1a7c4b2ed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\03.SupplyFSM">
+      <UniqueIdentifier>{06a2a42d-931e-4beb-a50f-5f3b3fdb825f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\03.SupplyFSM\00.SupplyWapon">
+      <UniqueIdentifier>{db7ab574-9c0a-4786-9917-99d8b736ed91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\03.SupplyFSM\01.SupplyItem">
+      <UniqueIdentifier>{0819646d-d3c2-415e-bbbb-fb6b5583a4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp">
+      <UniqueIdentifier>{7daa3b6d-c7f8-4026-a628-4cc2c0b35488}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra">
       <UniqueIdentifier>{c0a18fcb-7e43-4693-b653-656616947a09}</UniqueIdentifier>
     </Filter>
@@ -741,6 +759,9 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
       <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
+      <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
     </Filter>
     <Filter Include="10.ControlTower\TimeTraveler">
       <UniqueIdentifier>{c16141b8-a600-4736-be66-22b76077d3d6}</UniqueIdentifier>
@@ -781,11 +802,14 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane">
       <UniqueIdentifier>{0aca0ce5-27b1-42a5-8dd0-e0f554705b6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke">
-      <UniqueIdentifier>{10f1d217-74cc-4ab9-9b7b-e9c06c37ff2b}</UniqueIdentifier>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross">
+      <UniqueIdentifier>{ec3bff50-cc42-4278-add9-ec9a50bf84de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact">
-      <UniqueIdentifier>{5926fddd-4ee8-4a44-9e77-503e0c1204d7}</UniqueIdentifier>
+    <Filter Include="01.Scene\12.BossStageScene">
+      <UniqueIdentifier>{d25df95d-6620-4257-9e89-d17d52f0ae18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne">
+      <UniqueIdentifier>{7d8ac4f3-af33-4322-87c8-d6c065672d2b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect">
       <UniqueIdentifier>{084e2e52-68de-41fb-9b13-b615af88112a}</UniqueIdentifier>
@@ -799,29 +823,40 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
       <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff">
-      <UniqueIdentifier>{b3b303c8-8a9a-47b8-b40d-42b4d00c2d14}</UniqueIdentifier>
+<Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff">
+  <UniqueIdentifier>{b3b303c8-8a9a-47b8-b40d-42b4d00c2d14}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\GaneshUpperEff">
+  <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_RollingEff">
+  <UniqueIdentifier>{121daa22-86d1-48e7-8db5-bb37d1ef3930}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff">
+  <UniqueIdentifier>{40c911a6-205f-462d-8c4e-9d453efb7b14}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff">
+  <UniqueIdentifier>{439f6403-72e8-4722-bf89-0d16b268e5db}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff">
+  <UniqueIdentifier>{a8aae665-8c95-4a00-876b-40412d63ab79}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff">
+  <UniqueIdentifier>{84b49c45-27ec-465a-b09f-af4c9cb8a5c7}</UniqueIdentifier>
+</Filter>
+<Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff">
+  <UniqueIdentifier>{28d3c19b-93ec-46ad-a0f4-59aa998a728a}</UniqueIdentifier>
+    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
+      <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\GaneshUpperEff">
-      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
+    <Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
+      <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_RollingEff">
-      <UniqueIdentifier>{121daa22-86d1-48e7-8db5-bb37d1ef3930}</UniqueIdentifier>
+    <Filter Include="03.Component\00.UI\12.SizeUp">
+      <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff">
-      <UniqueIdentifier>{40c911a6-205f-462d-8c4e-9d453efb7b14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff">
-      <UniqueIdentifier>{439f6403-72e8-4722-bf89-0d16b268e5db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff">
-      <UniqueIdentifier>{a8aae665-8c95-4a00-876b-40412d63ab79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff">
-      <UniqueIdentifier>{84b49c45-27ec-465a-b09f-af4c9cb8a5c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff">
-      <UniqueIdentifier>{28d3c19b-93ec-46ad-a0f4-59aa998a728a}</UniqueIdentifier>
+    <Filter Include="04.Shader\13.FaceShader">
+      <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -971,12 +1006,6 @@
     </ClInclude>
     <ClInclude Include="..\Header\StageSelectionScene.h">
       <Filter>01.Scene\04.StageSelectionScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ThreeStageScene.h">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TwoStageScene.h">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\PartySettingScene.h">
       <Filter>01.Scene\09.PartySettingScene</Filter>
@@ -1288,19 +1317,19 @@
       <Filter>09.Manager\06.ValkyriegManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieFSM.h">
-      <Filter>11.ValkyrieFSM\00.ValkyrieFSM</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\00.ValkyrieFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieSelect.h">
-      <Filter>11.ValkyrieFSM\01.ValkyrieSelect</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\01.ValkyrieSelect</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieProperty.h">
-      <Filter>11.ValkyrieFSM\02.ValkyrieProperty</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\02.ValkyrieProperty</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieWeapon.h">
-      <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\03.ValkyrieWeapon</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ValkyrieLevelUp.h">
-      <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ScoutBornPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
@@ -1440,14 +1469,8 @@
     <ClInclude Include="..\Header\InventoryManager.h">
       <Filter>09.Manager\07.InventoryManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\WaponItem.h">
-      <Filter>1.InvertoryFSM\00.Wapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\stuffItem.h">
-      <Filter>1.InvertoryFSM\01.Item</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\ValkyrieWeaponSwap.h">
-      <Filter>11.ValkyrieFSM\05.ValkyrieWeaponSwap</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\05.ValkyrieWeaponSwap</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\EffectMaker.h">
       <Filter>02.Objects\01.ForUnit</Filter>
@@ -1525,6 +1548,27 @@
     <ClInclude Include="..\Header\MonsterSpawnBeam.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SupplyScene.h">
+      <Filter>01.Scene\12.supplyScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SupplyManager.h">
+      <Filter>09.Manager\09.SupplyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SupplyWapon.h">
+      <Filter>12.FSM\03.SupplyFSM\00.SupplyWapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SupplyItem.h">
+      <Filter>12.FSM\03.SupplyFSM\01.SupplyItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WaponItem.h">
+      <Filter>12.FSM\01.InvertoryFSM\00.Wapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StuffItem.h">
+      <Filter>12.FSM\01.InvertoryFSM\01.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h">
+      <Filter>12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClInclude>
@@ -1548,6 +1592,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\SpiderExplosion.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SupplyOut.h">
+      <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Sickle_Trail.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
@@ -1586,15 +1633,24 @@
     <ClInclude Include="..\Header\RobotHookEff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Plane.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane</Filter>
+    <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="Theresa_CrossBloodyHug.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Impact.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact</Filter>
+    <ClInclude Include="Theresa_CrossBlade.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    <ClInclude Include="..\Header\Kiana_Pistol.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BossStageScene.h">
+      <Filter>01.Scene\12.BossStageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact.h" />
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
     </ClInclude>
@@ -1604,11 +1660,29 @@
     <ClInclude Include="..\Header\Lancer_Impact.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_LaserEff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+<ClInclude Include="..\Header\Ganesha_LaserEff.h">
+  <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+</ClInclude>
+<ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
+  <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+</ClInclude>
+    <ClInclude Include="..\Header\ThreeStageScene.h">
+      <Filter>01.Scene\03.ThreeStageScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+    <ClInclude Include="..\Header\ThreeStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoStageScene.h">
+      <Filter>01.Scene\08.TwoStageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SizeUpC.h">
+      <Filter>03.Component\00.UI\12.SizeUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\OutlineMeshShader.h">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1731,12 +1805,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
       <Filter>01.Scene\05.ReadyToSortieScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ThreeStageScene.cpp">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TwoStageScene.cpp">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PartySettingScene.cpp">
       <Filter>01.Scene\09.PartySettingScene</Filter>
@@ -2022,16 +2090,16 @@
       <Filter>09.Manager\06.ValkyriegManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieFSM.cpp">
-      <Filter>11.ValkyrieFSM\00.ValkyrieFSM</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\00.ValkyrieFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieSelect.cpp">
-      <Filter>11.ValkyrieFSM\01.ValkyrieSelect</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\01.ValkyrieSelect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieProperty.cpp">
-      <Filter>11.ValkyrieFSM\02.ValkyrieProperty</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\02.ValkyrieProperty</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieWeapon.cpp">
-      <Filter>11.ValkyrieFSM\03.ValkyrieWeapon</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\03.ValkyrieWeapon</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ScoutBasePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base</Filter>
@@ -2148,7 +2216,7 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ValkyrieLevelUp.cpp">
-      <Filter>11.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\NinzaAttack2Pattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select</Filter>
@@ -2162,14 +2230,8 @@
     <ClCompile Include="..\Code\InventoryManager.cpp">
       <Filter>09.Manager\07.InventoryManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\WaponItem.cpp">
-      <Filter>1.InvertoryFSM\00.Wapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\stuffItem.cpp">
-      <Filter>1.InvertoryFSM\01.Item</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp">
-      <Filter>11.ValkyrieFSM\05.ValkyrieWeaponSwap</Filter>
+      <Filter>12.FSM\02.ValkyrieFSM\05.ValkyrieWeaponSwap</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\EffectMaker.cpp">
       <Filter>02.Objects\01.ForUnit</Filter>
@@ -2241,6 +2303,27 @@
     <ClCompile Include="..\Code\MonsterSpawnBeam.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\SupplyScene.cpp">
+      <Filter>01.Scene\12.supplyScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SupplyManager.cpp">
+      <Filter>09.Manager\09.SupplyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SupplyWapon.cpp">
+      <Filter>12.FSM\03.SupplyFSM\00.SupplyWapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SupplyItem.cpp">
+      <Filter>12.FSM\03.SupplyFSM\01.SupplyItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WaponItem.cpp">
+      <Filter>12.FSM\01.InvertoryFSM\00.Wapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StuffItem.cpp">
+      <Filter>12.FSM\01.InvertoryFSM\01.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp">
+      <Filter>12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
     </ClCompile>
@@ -2264,6 +2347,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SupplyOut.cpp">
+      <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TimeSeeker.cpp">
       <Filter>10.ControlTower\TimeTraveler</Filter>
@@ -2296,15 +2382,21 @@
     <ClCompile Include="..\Code\RobotHookEff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Plane.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane</Filter>
+    <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="Theresa_CrossBloodyHug.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Impact.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\05.Robot_Impact</Filter>
+    <ClCompile Include="Theresa_CrossBlade.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Imapct_Smoke</Filter>
+    <ClCompile Include="..\Code\BossStageScene.cpp">
+      <Filter>01.Scene\12.BossStageScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
     </ClCompile>
@@ -2314,11 +2406,29 @@
     <ClCompile Include="..\Code\Lancer_Impact.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_LaserEff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+<ClCompile Include="..\Code\Ganesha_LaserEff.cpp">
+  <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+</ClCompile>
+<ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp">
+  <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+</ClCompile>
+    <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+    <ClCompile Include="..\Code\ThreeStageScene.cpp">
+      <Filter>01.Scene\03.ThreeStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStageScene.cpp">
+      <Filter>01.Scene\08.TwoStageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SizeUpC.cpp">
+      <Filter>03.Component\00.UI\12.SizeUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OutlineMeshShader.cpp">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2381,6 +2491,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineMeshShader.fx">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

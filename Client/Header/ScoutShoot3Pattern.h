@@ -20,7 +20,7 @@ private:
 	void SetMoveSound();
 
 private:
-	_float m_cost = 25.f;
+	_float m_cost = 11.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 6.f; // 공격 거리
@@ -35,11 +35,15 @@ private:
 	_mat m_atkMat;
 	_bool m_onShoot = false;
 	_bool m_firePosFix = false;
+	_bool m_onEffect = false;
+	_bool m_oneTime = false;
 	_TCHAR* m_curMoveSound;
 
 	_bool m_onWalk = false;
 
-	SP(Engine::CObject) m_spScoutBall;
+	SP(Engine::CObject) m_spLeftScoutBall;
+	SP(Engine::CObject) m_spRightScoutBall;
+	SP(Engine::CObject) m_spCircleRange;
 };
 
 #endif

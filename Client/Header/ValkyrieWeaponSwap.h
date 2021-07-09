@@ -20,7 +20,7 @@ private:
 	void SelectWeapon();
 private:
 	Engine::CScene* m_scene;
-
+	Engine::CObject* m_selectObject;
 	static std::wstring g_selectWeaponName;
 };
 

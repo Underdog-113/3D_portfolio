@@ -23,7 +23,8 @@ public:
 					void				OnEnable			(void) override;
 
 public:
-					void				AddMaterial			(D3DMATERIAL9 mtrl);
+					void				AddMaterial			(D3DMATERIAL9 mtrl, _int index = UNDEFINED);
+					void				ResizeMaterial		(_int size);
 					D3DMATERIAL9&		GetMtrl				(void);
 
 public:

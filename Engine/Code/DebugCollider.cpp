@@ -114,7 +114,10 @@ void CDebugCollider::LateUpdate(void)
 		{
 			CRayCollider* pRay = static_cast<CRayCollider*>(m_pCollider);
 			m_spTransform->AddPosition(pRay->GetDirection() * pRay->GetLength() / 2.f);
-			m_spTransform->SetForward(pRay->GetDirection());
+			if(abs(pRay->GetDirection().y) != 1)
+				m_spTransform->SetForwardUp(pRay->GetDirection(), UP_VECTOR);
+			else
+				m_spTransform->SetForward(pRay->GetDirection());
 			m_spTransform->SetSize(0.01f, 0.01f, pRay->GetLength());
 			break;
 		}

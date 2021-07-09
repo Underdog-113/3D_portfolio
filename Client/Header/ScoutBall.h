@@ -34,6 +34,8 @@ private:
 	static		_uint m_s_uniqueID;
 
 public:
-	GETTOR_SETTOR(_bool, m_bFlyingBall, false, FlyingBall);
+	GETTOR_SETTOR(_bool, m_bFlyingBall, false, FlyingBall)
+	GETTOR_SETTOR(_bool, m_ready,		false,	Ready)
+	GETTOR_SETTOR(_float3, m_direction, ZERO_VECTOR, Direction)
 };
 

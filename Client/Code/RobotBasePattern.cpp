@@ -9,6 +9,7 @@
 #include "Valkyrie.h"
 #include "DynamicMeshData.h"
 #include "AttackBall.h"
+#include "AniCtrl.h"
 
 CRobotBasePattern::CRobotBasePattern()
 {
@@ -85,10 +86,13 @@ void CRobotBasePattern::Pattern(Engine::CObject* pOwner)
 		// 내가 이동, 대기 상태가 끝났다면
 		if ((Name_Walk_Forward == fsm->GetCurStateString() ||
 			Name_StandBy == fsm->GetCurStateString()) &&
+			/*0.9f <= fsm->GetDM()->GetAniTimeline()*/
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Attack_1_Left);
-			//PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
+			m_onEffect = false;
+			m_onAttackball = false;
+			return;
 		}
 		// 내가 공격1 상태가 끝났다면
 		else if (Name_Attack_1_Left == fsm->GetCurStateString() &&
@@ -101,12 +105,17 @@ void CRobotBasePattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_Attack_1_Left == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_Attack_1_Left == fsm->GetCurStateString() &&
+		0.47f <= fsm->GetDM()->GetAniTimeline() &&
+		0.49f > fsm->GetDM()->GetAniTimeline() &&
+		true == m_onAttackball)
 	{
 		static_cast<CMO_Robot*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	else if (Name_Attack_1_Left == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Attack_1_Left == fsm->GetCurStateString() &&
+		0.37f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onAttackball)
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
@@ -118,6 +127,44 @@ void CRobotBasePattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._43 += (m_atkDis * look.z / 1.7f);
 
 		static_cast<CMO_Robot*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.4f);
+
+		m_onAttackball = true;
+	}
+	
+	/************************* Effect */
+	// 내가 attack_1_left 가 적정한 때에
+	if (Name_Attack_1_Left == fsm->GetCurStateString() &&
+		0.32f <= fsm->GetDM()->GetAniTimeline() &&
+		0.34f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_onEffect)
+	{
+		m_spHookEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"RobotHookEff", true);
+		m_spHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
+		m_spHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
+		m_spHookEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		m_spHookEffect->GetTransform()->SetSize(2.f, 2.f, 2.f);
+
+		// 주먹 뼈 찾기
+		m_pLeftUpperArm = &fsm->GetDM()->GetFrameByName("Bip001_L_Hand")->CombinedTransformMatrix;
+
+		m_onEffect = true;
+	}
+	// 내가 attack_1_left 상태 중이라면
+	else if (Name_Attack_1_Left == fsm->GetCurStateString() &&
+		true == m_onEffect)
+	{
+		_mat combMat = *m_pLeftUpperArm;
+		_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
+		combMat._41 -= rootMotionPos.x;
+		combMat._43 -= rootMotionPos.z;
+
+		_mat realPosMat = combMat * pOwner->GetTransform()->GetWorldMatrix();
+
+		_mat wMat = pOwner->GetTransform()->GetWorldMatrix();
+		_float3 right = { wMat._11, wMat._12, wMat._13 };
+		D3DXVec3Normalize(&right, &right);
+		_float3 pos = { realPosMat._41, realPosMat._42, realPosMat._43 };
+		m_spHookEffect->GetTransform()->SetPosition(pos - (right * 1.3f));
 	}
 }
 

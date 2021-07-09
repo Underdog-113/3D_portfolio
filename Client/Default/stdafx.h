@@ -17,6 +17,8 @@
 #include "d3dx9.h"
 #pragma comment(lib, "d3dx9.lib")
 
+#include<ctime>
+
 //Engine's stdafx.h
 #include "EngineStdafx.h"
 
@@ -50,6 +52,7 @@
 #include "ValkyriegManager.h"
 #include "InventoryManager.h"
 #include "BattleEndManager.h"
+#include "SupplyManager.h"
 
 //Client Data
 #include "ValkyrieStatusData.h"

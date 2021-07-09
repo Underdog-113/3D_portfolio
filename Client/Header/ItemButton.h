@@ -50,6 +50,7 @@ private:
 	std::wstring m_buttonTexture;
 	std::wstring m_imageTexture;
 	_int m_itemCount;
+	Engine::CObject* m_selectObject;
 };
 
 #endif

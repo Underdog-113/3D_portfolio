@@ -19,7 +19,7 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
-	void AddDamageFontInit(Engine::CObject* target, _float3 hitPoint, _float offSetX, _float upSpped, _float lifeTime, _int damage, std::wstring color);
+	void AddDamageFontInit(Engine::CObject* target, _float3 hitPoint, _float offSetX, _float upSpped, _float lifeTime, _int damage, std::wstring color, _float3 pos);
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Text;
 private:
@@ -32,6 +32,8 @@ private:
 	_float3 m_hitPointOffset;
 	_float m_hitPointOffsetLength;
 	Engine::CObject* m_target;
+
+	_float3 m_pos;
 };
 #endif
 

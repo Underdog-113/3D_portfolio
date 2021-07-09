@@ -52,10 +52,8 @@ enum class ELayerID
 	Player			= 0 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Map				= 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Enemy			= 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Camera			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Effect			= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Attack			= 5 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID	= 6 + (_int)Engine::ELayerID::NumOfEngineLayerID
+	Attack			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	NumOfLayerID	= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 };
 
 enum class EShaderID
@@ -73,7 +71,8 @@ enum class EShaderID
 	FireShader			= 10 + (_int)Engine::EShaderID::NumOfShaderID,
 	LaserShader  		= 11 + (_int)Engine::EShaderID::NumOfShaderID,
 	OutlineShader		= 12 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 13 + (_int)Engine::EShaderID::NumOfShaderID
+	OutlineMeshShader	= 13 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 14 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

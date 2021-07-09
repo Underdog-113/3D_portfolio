@@ -18,9 +18,9 @@ public:
 		BeforeMidBoss		,
 		MidBossBegin		,
 		MidBossEnd			,
-		BeforeBoss,
-		BossBegin,
-		BossEnd,
+		//BeforeBoss,
+		//BossBegin,
+		//BossEnd,
 		StageResult			,
 		StageResult_Idle	,
 		NumOfPhse			

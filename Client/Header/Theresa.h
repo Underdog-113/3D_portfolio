@@ -9,6 +9,7 @@
 #define Sword_1 4
 
 #include "Valkyrie.h"
+class CTheresa_CrossBloodyHug;
 class CTheresa final : public CValkyrie
 {
 	SMART_DELETER_REGISTER
@@ -49,13 +50,22 @@ public:
 					void					Off_Axe				(void);
 					
 					void					SetChargeMode		(bool value);
-					
+public:
+					void					UseSkill			(void) override;
+					void					UseUltra			(void) override;
+
+private:
+					void					CreateCross			(void);
 
 private:
 	std::vector<Engine::_DerivedD3DXMESHCONTAINER*> m_vMeshContainers;
 	_uint idx = 0;
 	
 	GETTOR			(_bool,			m_chargeMode,			false,		ChargeMode)
+
+private:
+	
+	GETTOR			(CTheresa_CrossBloodyHug*,	m_pCrossBloodyHug,	nullptr,	CrossBloodyHug)
 
 private:	
 	GETTOR			(_mat*,			m_pLeftHand_World,		nullptr,	LeftHandWorldMatrix)

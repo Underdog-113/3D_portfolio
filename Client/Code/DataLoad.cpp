@@ -21,6 +21,7 @@
 
 #include "ValkyrieLevelUp.h"
 #include "ValkyrieWeaponSwap.h"
+#include "ValkyrieWeaponLevelUp.h"
 
 CDataLoad::CDataLoad()
 {
@@ -736,6 +737,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 		_bool isBoss;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
 			L"_boss", isBoss);
+		spMonster->SetIsBoss(isBoss);
 
 		_int phaseChangerNum;
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMonsterSpawn", std::to_wstring(i) +
@@ -820,6 +822,10 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::Sally, &CButtonFunction());
 	}
+	else if (0 == function.compare(L"SupplyScene"))
+	{
+		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::SupplyScene, &CButtonFunction());
+	}
 	else if (0 == function.compare(L"ObjectOn"))
 	{
 		button->AddFuncData<void(CButtonFunction::*)(), CButtonFunction*>(&CButtonFunction::ObjectOn, &CButtonFunction());
@@ -876,13 +882,28 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	{
 		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMWeapon, CValkyriegManager::GetInstance());
 	}
-	else if (0 == function.compare(L"changeFSMWeaponSwap"))
+	else if (0 == function.compare(L"ChangeFSMWeaponSwap"))
 	{
-		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::changeFSMWeaponSwap, CValkyriegManager::GetInstance());
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMWeaponSwap, CValkyriegManager::GetInstance());
+	}
+	else if (0 == function.compare(L"ChangeFSMWeaponLevelUp"))
+	{
+		button->AddFuncData<void(CValkyriegManager::*)(), CValkyriegManager*>(&CValkyriegManager::ChangeFSMWeaponLevelUp, CValkyriegManager::GetInstance());
 	}
 	else if (0 == function.compare(L"WeaponChange"))
 	{
 		button->AddFuncData<void(CValkyrieWeaponSwap::*)(), CValkyrieWeaponSwap*>(&CValkyrieWeaponSwap::WeaponChange, &CValkyrieWeaponSwap());
 	}
-	
+	else if (0 == function.compare(L"WeaponItemCountUp"))
+	{
+		button->AddFuncData<void(CValkyrieWeaponLevelUp::*)(), CValkyrieWeaponLevelUp*>(&CValkyrieWeaponLevelUp::ItemCountUp, &CValkyrieWeaponLevelUp());
+	}
+	else if (0 == function.compare(L"WeaponItemCountDown"))
+	{
+		button->AddFuncData<void(CValkyrieWeaponLevelUp::*)(), CValkyrieWeaponLevelUp*>(&CValkyrieWeaponLevelUp::ItemCountDown, &CValkyrieWeaponLevelUp());
+	}
+	else if (0 == function.compare(L"WeaponLevelUp"))
+	{
+		button->AddFuncData<void(CValkyrieWeaponLevelUp::*)(), CValkyrieWeaponLevelUp*>(&CValkyrieWeaponLevelUp::LevelUp , &CValkyrieWeaponLevelUp());
+	}
 }

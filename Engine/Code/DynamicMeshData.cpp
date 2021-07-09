@@ -53,6 +53,9 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 
 	LPD3DXANIMATIONCONTROLLER pAniCtrl = nullptr;
 
+	if (fileName == L"Kiana_Wp.X")
+		int a = 5;
+
 	if (FAILED(D3DXLoadMeshHierarchyFromX((filePath + fileName).c_str(),
 			   D3DXMESH_MANAGED,
 			   GET_DEVICE,
@@ -65,6 +68,7 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 		ABORT;
 	}
 
+	
 	//할일 : 나중에 GET_VALUE로 읽어와야함.
 	m_minVertex =  _float3(-100, -100, -100);
 	m_maxVertex = _float3(100, 100, 100);

@@ -78,8 +78,8 @@ void CWooScene::Start(void)
 	//SpiderSetting();
 	//SickleSetting();
 	//GaneshaSetting();
-	ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
-	//LancerSetting();
+	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
+	LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
 	//BronyaSetting();
@@ -95,6 +95,15 @@ void CWooScene::Update(void)
 	__super::Update();
 
 	m_pController->Update();
+
+	if (nullptr != m_spRobot)
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spRobot)->GetStat()->GetCurHp())
+		{
+			m_spRobot = nullptr;
+		}
+	}
+
 }
 
 void CWooScene::LateUpdate(void)
@@ -199,24 +208,6 @@ void CWooScene::SickleSetting(void)
 {
 	/* Sickle */
 	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-
-	//////////////////
-
-	//SP(CMonsterSpawnBeam) spMeshEffect =
-	//	std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
-
-	//spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
-	//spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-	//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-	//spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-	//spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	//spMeshEffect->GetCollision()->AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
-
-
-
-	//spSickleClone->GetTransform()->SetPosition(0, 0, 3);
-
 
 	//////////////////
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();

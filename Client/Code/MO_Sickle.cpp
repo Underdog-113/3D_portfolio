@@ -4,8 +4,6 @@
 #include "FSM_SickleC.h"
 #include "AttackBall.h"
 
-
-
 _uint CMO_Sickle::m_s_uniqueID = 0;
 
 CMO_Sickle::CMO_Sickle()
@@ -41,7 +39,11 @@ void CMO_Sickle::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_SickleC>();
-	m_spPatternMachine->AddNecessaryPatterns(CSickleBornPattern::Create(), CSickleDiePattern::Create(), CSickleBasePattern::Create(), CSickleHitPattern::Create());
+	m_spPatternMachine->AddNecessaryPatterns(CSickleBornPattern::Create(), 
+											 CSickleDiePattern::Create(), 
+											 CSickleBasePattern::Create(), 
+											 CSickleHitPattern::Create(), 
+											 CSickleAirbornePattern::Create());
 }
 
 void CMO_Sickle::Start(void)
@@ -54,7 +56,7 @@ void CMO_Sickle::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(217.f);
+	stat.SetBaseHp(745.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
 
@@ -64,6 +66,7 @@ void CMO_Sickle::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+	m_pStat->SetHPMagnification(4);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -131,6 +134,8 @@ void CMO_Sickle::SetBasicName(void)
 
 void CMO_Sickle::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
@@ -143,10 +148,12 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 		this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
 		break;
 	case HitInfo::Str_Airborne:
+		this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
 		break;
 	}
 
 	// crowd control
+
 }
 
 void CMO_Sickle::FindRightHand()
@@ -167,7 +174,7 @@ void CMO_Sickle::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 void CMO_Sickle::SetStatus(BaseStat stat)

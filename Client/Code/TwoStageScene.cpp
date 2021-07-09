@@ -3,6 +3,7 @@
 
 #include "Loading.h"
 
+#include "DamageObjectPool.h"
 #include "ImageObject.h"
 #include "Button.h"
 #include "Slider.h"
@@ -12,6 +13,15 @@
 
 #include "TextManager.h"
 #include "DataLoad.h"
+
+// import from jongscene
+#include "Include_ForTest.h"
+
+#include "TwoStagePhaseControl.h"
+
+#include "Monster.h"
+#include "Layer.h"
+
 CTwoStageScene::CTwoStageScene()
 {
 }
@@ -38,26 +48,23 @@ void CTwoStageScene::Free(void)
 void CTwoStageScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
-	InitPrototypes();
+
+	m_pControlTower = CStageControlTower::GetInstance();
+	m_pControlTower->Awake();
+	m_pControlTower->SetPhaseControl(new CTwoStagePhaseControl);
+	m_pControlTower->GetPhaseControl()->SetControlTower(m_pControlTower);
 }
 
 void CTwoStageScene::Start(void)
 {
 	__super::Start();
 
-	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+	SetupFromLoader();
+	SetupMembers();
+	FindSkyObject();
 
-	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
-
-	// 로드
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->Load(this);
-	delete(Load);
-
-	// (미완성)스크롤 뷰 예제
-
+	m_pBattleUIManager = CBattleUiManager::GetInstance();
+	m_pBattleUIManager->Start(this);
 }
 
 void CTwoStageScene::FixedUpdate(void)
@@ -69,6 +76,15 @@ void CTwoStageScene::Update(void)
 {
 	__super::Update();
 
+	if (Engine::CSceneManager::GetInstance()->GetSceneChanged())
+		return;
+
+	m_pControlTower->Update();
+	m_pBattleUIManager->Update();
+
+	// Sky Rotation
+	m_spSky->GetTransform()->SetRotationY(
+		m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
 }
 
 void CTwoStageScene::LateUpdate(void)
@@ -80,13 +96,20 @@ void CTwoStageScene::LateUpdate(void)
 void CTwoStageScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	m_pLoading->Free();
+	m_pBattleUIManager->OnDestroy();
+	m_pBattleUIManager->DestroyInstance();
+
+	m_pControlTower->OnDestroy();
+	m_pControlTower->DestroyInstance();
+	m_pControlTower = nullptr;
+
+	m_vDummy.clear();
 }
 
 void CTwoStageScene::OnEnable(void)
 {
 	__super::OnEnable();
-
+	m_pBattleUIManager->DestroyInstance();
 }
 
 void CTwoStageScene::OnDisable(void)
@@ -96,6 +119,136 @@ void CTwoStageScene::OnDisable(void)
 }
 
 
+void CTwoStageScene::SetupFromLoader(void)
+{
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->ScrollViewLoad(this);
+	Load->CanvasLoad(this);
+	Load->TextLoad(this);
+	Load->MapLoad(this);
+	Load->PhaseChangerLoad(this);
+	Load->PortalLoad(this);
+	delete(Load);
+}
+
+void CTwoStageScene::SetupMembers(void)
+{
+	// Kiana
+	Create_ActorValkyrie();
+
+	// Cam Target Set
+	Create_SceneCamera();
+}
+
+void CTwoStageScene::Create_ActorValkyrie(void)
+{
+	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+
+	m_spValkyrie = spKianaClone;
+	m_spValkyrie->GetTransform()->SetPosition(-19.2f, 0.248f, 0.1f);
+	m_pControlTower->AddSquadMember(m_spValkyrie);
+	m_pControlTower->Start(CStageControlTower::ALL);
+
+	SP(Engine::CObject) spTheresaClone = ADD_CLONE(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
+
+	m_pControlTower->AddSquadMember(spTheresaClone);
+	static_cast<CValkyrie*>(spTheresaClone.get())->SetIsWait(true);
+
+	SP(Engine::CObject) spSakuraClone = ADD_CLONE(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
+
+	m_pControlTower->AddSquadMember(spSakuraClone);
+	static_cast<CValkyrie*>(spSakuraClone.get())->SetIsWait(true);
+
+}
+
+void CTwoStageScene::Create_SceneCamera(void)
+{
+	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+
+	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
+	cam->SetTarget(m_spValkyrie);
+	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
+}
+
 void CTwoStageScene::InitPrototypes(void)
 {
+
+}
+
+void CTwoStageScene::ForUITest()
+{
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
+	{
+		CBattleUiManager::GetInstance()->SpecialUICanvasOn();
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
+	{
+		CBattleUiManager::GetInstance()->SpecialUIUp();
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
+	{
+		CBattleUiManager::GetInstance()->SpecialUIDwon();
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
+	{
+		CBattleUiManager::GetInstance()->HitCount(5);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
+	{
+		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
+	{
+		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
+	{
+		CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
+	{
+		CBattleUiManager::GetInstance()->MonsterState(L"", 1000, 900, 2, L"DOWN");
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
+	{
+		CBattleUiManager::GetInstance()->MonsterHpDown(10);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
+	{
+		CBattleUiManager::GetInstance()->OnTargetUI(nullptr, 5.0f);
+	}
+
+// 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+// 	{
+// 		CBattleUiManager::GetInstance()->BattleEnd();
+// 	}
+}
+
+void CTwoStageScene::FindSkyObject()
+{
+	auto map = m_vLayers[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
+	auto iter = map.begin();
+
+	for (; iter != map.end(); ++iter)
+	{
+		if (L"DecoObject17" == (*iter)->GetName())
+		{
+			m_spSky = *iter;
+			m_spSky->GetTransform()->SetPosition(_float3(-60.57f, -12.917f, 0.f));
+			break;
+		}
+	}
 }

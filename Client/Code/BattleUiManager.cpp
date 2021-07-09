@@ -264,8 +264,11 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
-	m_monsterHpCount = 2;
+	m_monsterHpCount = hpCount;
 	m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+
+	_int a = (m_monsterHpCount -1) % 4;
+	std::cout << a << std::endl;
 
 	_float ThpMax = (hpMax / m_monsterHpCount) / 3;
 	_float hpMaxSum = 0;
@@ -275,8 +278,8 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		hpMaxSum += ThpMax;
 		object->SetMaxValue(hpMaxSum);
 		object->SetValue(hp / m_monsterHpCount);
-		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
-		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
+		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 	}
 
 	hpMaxSum = 0;
@@ -329,7 +332,9 @@ void CBattleUiManager::PlayerSkillActivation(_int value)
 	m_skillActivationImage[value - 1]->SetIsEnabled(true);
 }
 
-void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, _int specialSP, _int skillSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
+	_int specialSP, _int skillSP,
+	_float coolTime1, _float coolTime2, _float coolTime3)
 {
 	m_skillImage[Button_Type::BasicButton]->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
@@ -344,9 +349,15 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_skillPoint[SkillPoint_Type::SkillSp]->GetComponent<Engine::CTextC>()->ChangeMessage(L"SP : " + std::to_wstring(skillSP));
 
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(true);
+
+	m_coolTimeSlider[Button_Type::EvasionButton]->SetValue(coolTime1);
+	m_coolTimeSlider[Button_Type::SpecialButton]->SetValue(coolTime2);
+	m_coolTimeSlider[Button_Type::SkillButton]->SetValue(coolTime3);
 }
 
-void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, _int specialSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
+	_int specialSP,
+	_float coolTime1, _float coolTime2)
 {
 	m_skillImage[Button_Type::BasicButton] ->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
@@ -358,9 +369,12 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_skillPoint[SkillPoint_Type::SpecialSp]->SetIsEnabled(false);
 
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
+
+	m_coolTimeSlider[Button_Type::EvasionButton]->SetValue(coolTime1);
+	m_coolTimeSlider[Button_Type::SpecialButton]->SetValue(coolTime2);
 }
 
-void CBattleUiManager::TargetUI(SP(Engine::CObject) object, _float value)
+void CBattleUiManager::OnTargetUI(SP(Engine::CObject) object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
@@ -369,9 +383,17 @@ void CBattleUiManager::TargetUI(SP(Engine::CObject) object, _float value)
 	m_monsterTargetCanvas->SetIsEnabled(true);
 }
 
+void CBattleUiManager::OffTargetUI()
+{
+	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(nullptr);
+	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(nullptr);
+
+	m_monsterTargetCanvas->SetIsEnabled(false);
+}
+
 void CBattleUiManager::MonsterHpDown(_float value)
 {
-	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(m_monsterStateCanvas->GetComponent<CLifeObjectC>()->GetLifeTime() + 1);
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10.f);
 
 	for (auto object : m_monsterHpBar)
 	{
@@ -456,6 +478,11 @@ void CBattleUiManager::SpecialUICanvasOn()
 	m_specialUICanvas->SetIsEnabled(true);
 }
 
+void CBattleUiManager::SpecialUICanvasOff()
+{
+	m_specialUICanvas->SetIsEnabled(false);
+}
+
 void CBattleUiManager::SpecialUIUp()
 {
 	for (auto& obj : m_specialUBar)
@@ -527,8 +554,10 @@ void CBattleUiManager::monsterHpBarCheck()
 		for (auto object : m_monsterHpBar)
 		{
 			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
-			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
-			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+			_int a = (m_monsterHpCount - 1) % 4;
+			std::cout << a << std::endl;
+			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
+			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 		}
 
 		for (auto object : m_monsterWhiteHpBar)

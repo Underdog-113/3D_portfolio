@@ -42,7 +42,7 @@ void CMO_Scout::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_ScoutC>();
 	m_spPatternMachine->AddNecessaryPatterns(CScoutBornPattern::Create(), CScoutDiePattern::Create(), CScoutBasePattern::Create(), CScoutHitPattern::Create());
-	//m_spPatternMachine->AddPattern(CScoutShoot2Pattern::Create());
+	m_spPatternMachine->AddPattern(CScoutShoot2Pattern::Create());
 	m_spPatternMachine->AddPattern(CScoutShoot3Pattern::Create());
 }
 

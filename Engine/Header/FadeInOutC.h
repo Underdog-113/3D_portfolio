@@ -28,8 +28,10 @@ public:
 
 private:
 	GETTOR_SETTOR	(_bool,		m_isFadeIn,		false,		IsFadeIn)
-	GETTOR_SETTOR	(_float,	m_speed,		1.f,		Speed)
 	GETTOR_SETTOR	(_bool,		m_finish,		false,		Finish)
+	GETTOR_SETTOR	(_bool,		m_autoDelete,	true,		AutoDelete)
+	GETTOR_SETTOR	(_float,	m_speed,		1.f,		Speed)
+	
 	
 };
 END

@@ -192,7 +192,8 @@ void CRobotAttack2Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Attack_2);
-			//PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
+			m_onEffect = false;
+			return;
 		}
 		// 내가 공격1 상태가 끝났다면
 		else if (Name_Attack_2 == fsm->GetCurStateString() &&
@@ -212,7 +213,7 @@ void CRobotAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		m_onAtkBall = false;
 		static_cast<CMO_Robot*>(pOwner)->UnActiveAttackBall();
 	}
-	// shoot2 상태라면
+	// attack2 상태라면
 	else if (Name_Attack_2 == fsm->GetCurStateString() &&
 		0.65f <= fsm->GetDM()->GetAniTimeline() &&
 		0.7f > fsm->GetDM()->GetAniTimeline() &&
@@ -222,6 +223,31 @@ void CRobotAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
 		static_cast<CMO_Robot*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 1.7f);
+	}
+
+	/************************* Effect */
+	// attack2 상태라면
+	if (Name_Attack_2 == fsm->GetCurStateString() &&
+		0.7f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onEffect)
+	{
+		m_spImpactEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact", true);
+
+		//// 주먹 뼈 찾기
+		//m_pLeftUpperArm = &fsm->GetDM()->GetFrameByName("Bip001_L_Hand")->CombinedTransformMatrix;
+
+		//_mat combMat = *m_pLeftUpperArm;
+		//_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
+		//combMat._41 -= rootMotionPos.x;
+		//combMat._43 -= rootMotionPos.z;
+		//_mat realPosMat = combMat * pOwner->GetTransform()->GetWorldMatrix();
+		//_float3 pos = { realPosMat._41, realPosMat._42, realPosMat._43 };
+		//m_spImpactEffect->GetTransform()->SetPosition(pos);
+		//m_spImpactEffect->GetTransform()->AddPositionY(0.7f);
+
+		m_spImpactEffect->GetTransform()->SetPosition(mPos);
+
+		m_onEffect = true;
 	}
 }
 

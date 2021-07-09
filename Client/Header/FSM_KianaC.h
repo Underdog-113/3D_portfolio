@@ -71,7 +71,8 @@ private: /* Special Actions */
 	bool CheckAction_BranchAttack();
 	bool CheckAction_RunBS_To_Run();
 
-	bool CheckAction_Ultra();
+	bool CheckAction_Ultra(float coolTime = 0.f);
+	bool CheckAction_WeaponSkill(float coolTime = 0.f);
 	
 private: /* sound */
 	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);

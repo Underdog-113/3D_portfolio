@@ -51,11 +51,14 @@ public:
 
 	// HP SP 버튼4개 스킬포인트2개
 	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
-		_int specialSP, _int skillSP);
+		_int specialSP, _int skillSP,
+		_float coolTime1, _float coolTime2, _float coolTime3);
 	void PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
-		_int specialSP);
+		_int specialSP,
+		_float coolTime1, _float coolTime2);
 	
-	void TargetUI(SP(Engine::CObject) object, _float value);
+	void OnTargetUI(SP(Engine::CObject) object, _float value);
+	void OffTargetUI();
 
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
@@ -70,6 +73,7 @@ public:
 	void PlayerSpUp(_float value);
 
 	void SpecialUICanvasOn();
+	void SpecialUICanvasOff();
 	void SpecialUIUp();
 	void SpecialUIDwon();
 

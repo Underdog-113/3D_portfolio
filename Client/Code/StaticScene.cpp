@@ -137,6 +137,19 @@ void CStaticScene::Awake(_int numOfLayers)
 
 void CStaticScene::Start(void)
 {
+	_int a = 4 % 4;
+	std::cout << a << std::endl;
+
+	a = 5 % 4;
+	std::cout << a << std::endl;
+
+	a = 6 % 4;
+	std::cout << a << std::endl;
+
+	a = 7 % 4;
+	std::cout << a << std::endl;
+
+
 	InitSettings();
 }
 
@@ -260,9 +273,6 @@ void CStaticScene::InitMonsterPrototypes(void)
 	SP(CMonster) spMO_Ninza(CMO_Ninza::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Ninza);
 
-	SP(CMonster) spMO_Axe(CMO_Axe::Create(true, this));
-	GetObjectFactory()->AddPrototype(spMO_Axe);
-
 	SP(CMonster) spMO_Scout(CMO_Scout::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMO_Scout);
 
@@ -316,6 +326,12 @@ void CStaticScene::InitValkyriePrototypes(void)
 
 	SP(CTheresa) spTheresaPrototype(CTheresa::Create(true, this));
 	ADD_PROTOTYPE(spTheresaPrototype);
+
+	SP(CTheresa_CrossBloodyHug) spCrossBloodyHugPrototype(CTheresa_CrossBloodyHug::Create(true, this));
+	ADD_PROTOTYPE(spCrossBloodyHugPrototype);
+
+	SP(CTheresa_CrossBlade) spCrossBladePrototype(CTheresa_CrossBlade::Create(true, this));
+	ADD_PROTOTYPE(spCrossBladePrototype);
 
 	SP(CSakura) spSakuraPrototype(CSakura::Create(true, this));
 	ADD_PROTOTYPE(spSakuraPrototype);

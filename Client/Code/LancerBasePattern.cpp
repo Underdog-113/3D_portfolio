@@ -95,6 +95,8 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 			// 공격 상태로 변경
 			fsm->ChangeState(Name_ATTACK_1);
 			PatternPlaySound(L"Lencer_Skill_Attack_2.wav", pOwner);
+			m_onEffect = false;
+			return;
 		}
 		// 내가 공격1 상태가 끝났다면
 		else if (Name_ATTACK_1 == fsm->GetCurStateString() &&
@@ -107,12 +109,14 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_ATTACK_1 == fsm->GetCurStateString() && 0.54f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.54f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	else if (Name_ATTACK_1 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.37f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
@@ -122,8 +126,19 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
 		m_atkMat._41 += (m_atkDis * look.x / 1.6f);
 		m_atkMat._43 += (m_atkDis * look.z / 1.6f);
+	}
 
+	/************************* Effect */
+	if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.27f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onEffect)
+	{
 		static_cast<CMO_Lancer*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.45f);
+		SP(Engine::CObject) spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Lancer_OutSideEff", true);
+		spEffect->GetTransform()->SetSize(0.7f, 0.7f, 0.7f);
+		spEffect->GetTransform()->SetPosition(_float3(m_atkMat._41, m_atkMat._42, m_atkMat._43));
+
+		m_onEffect = true;
 	}
 }
 

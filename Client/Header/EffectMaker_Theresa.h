@@ -3,8 +3,8 @@
 
 
 #define AttackTrail_ObjectKey	L"Theresa_Trail"
-#define AttackTrail_Tex1Name	L"TheresaTrail2"
-#define AttackTrail_Tex2Name	L"TheresaTrail2"
+#define AttackTrail_Tex1Name	L"Tornado_3"
+#define AttackTrail_Tex2Name	L"Tornado_3"
 #define AttackTrail_Tex3Name	L"yun01"
 
 #define Ultra_Charge_ObjectKey	L"Theresa_Ult_Charge"
@@ -38,6 +38,10 @@ public:
 	void CreateEffect_Attack3_2();
 	void CreateEffect_Attack4_1();
 	void CreateEffect_Attack4_2();
+
+	void CreateEffect_Charge0();
+	void CreateEffect_Charge1();
+	void CreateEffect_Charge2();
 
 	void CreateEffect_Ultra_Charge();
 	void CreateEffect_Ultra_Trail();

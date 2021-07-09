@@ -119,6 +119,18 @@ void CEffectMaker_Theresa::CreateEffect_Attack4_2()
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
 }
 
+void CEffectMaker_Theresa::CreateEffect_Charge0()
+{
+}
+
+void CEffectMaker_Theresa::CreateEffect_Charge1()
+{
+}
+
+void CEffectMaker_Theresa::CreateEffect_Charge2()
+{
+}
+
 void CEffectMaker_Theresa::CreateEffect_Ultra_Charge()
 {
 	_float3 size = _float3(0.05f, 0.05f, 0.05f);

@@ -33,7 +33,9 @@ class CStageCameraMan;
 class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
+class CThreeStagePhaseControl;
 enum class EOneStagePhase;
+enum class EThreeStagePhase;
 class CStageControlTower
 {
 	DECLARE_SINGLETON(CStageControlTower)
@@ -57,16 +59,23 @@ public:
 public:		/* Phase */
 	void IncreasePhase();
 	void ChangePhase(EOneStagePhase phaseType);
-
+	void ChangePhase(EThreeStagePhase phaseType);
 
 public:		/* Battle */
-	void FindTarget();
+	void ActAttack();
+	void ActEvade();
+	bool ActSkill();
+	bool ActUltra();
+
+	bool FindTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 
 	void SwitchValkyrie(Squad_Role role);
 
-
+	void SetCameraMidTake();
+	void SetCameraFarTake();
+	void SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void OffCameraTargeting();
 	void EndSwitching();
 

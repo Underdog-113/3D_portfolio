@@ -31,7 +31,7 @@ void CFSM_NinzaC::Start(SP(CComponent) spThis)
 	__super::Start(spThis);
 
 
-	SetStartState(Name_standby);
+	SetStartState(Name_born);
 	m_curState->DoEnter();
 }
 
@@ -158,6 +158,7 @@ void CFSM_NinzaC::FixRootMotionOffset(_uint index)
 
 void CFSM_NinzaC::StandBy_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_standby);
 }
 
 void CFSM_NinzaC::StandBy_Enter(void)

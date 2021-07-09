@@ -6,12 +6,6 @@ texture		g_BaseTexture;
 
 float4		g_addColor;
 
-float4		g_ambient;
-float4		g_diffuse;
-float4		g_emissive;
-float4		g_specular;
-float		g_specularPower;
-
 bool g_timeSlow;
 
 sampler BaseSampler = sampler_state
@@ -57,27 +51,6 @@ VS_OUT VS_MAIN(VS_IN In)
 	return Out;
 }
 
-// 버텍스쉐이더
-VS_OUT VS_OUTLINE(VS_IN In)
-{
-	VS_OUT Out = (VS_OUT)0;
-
-	matrix matWV, matWVP;
-
-	matWV  = mul(g_matWorld, g_matView);
-	matWVP = mul(matWV, g_matProj);
-
-	Out.vPosition	= mul(vector(In.vPosition.xyz, 1.f), matWVP);
-	Out.vNormal		= normalize(mul(vector(In.vNormal.xyz, 0.f), matWVP));
-	Out.vPosition	+= (Out.vNormal) / 160;
-
-	Out.vTexUV = In.vTexUV;
-
-	Out.vProjPos = Out.vPosition;
-
-	return Out;
-}
-
 
 struct PS_IN
 {
@@ -91,7 +64,6 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 	vector		vNormal : COLOR1;
 	vector		vDepth : COLOR2;
-	vector		vSpecMtrl : COLOR3;
 };
 
 // 픽셀 쉐이더
@@ -102,12 +74,8 @@ PS_OUT		PS_MAIN(PS_IN In)
 	
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
-
-	float4 diffuse = albedo * saturate(g_diffuse);
-	float4 ambient = albedo * saturate(g_ambient);
-
-	Out.vColor = ambient + diffuse;
-
+	Out.vColor = albedo;
+	Out.vColor.a = 1;
 
 	Out.vColor += g_addColor;
 	
@@ -120,15 +88,6 @@ PS_OUT		PS_MAIN(PS_IN In)
 						In.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)
 						0.f,
 						0.f);
-
-
-	Out.vSpecMtrl	= g_specular;
-	Out.vSpecMtrl.w = g_specularPower;
-	
-	Out.vColor.a = g_diffuse.x;
-	Out.vNormal.a = g_diffuse.y;
-	Out.vDepth.z = g_diffuse.z;
-	Out.vDepth.w = g_ambient.x;
 
 	return Out;
 }
