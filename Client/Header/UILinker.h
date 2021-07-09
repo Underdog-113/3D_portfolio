@@ -49,7 +49,6 @@ public:
 		
 	void	MonsterInfoSet			(void);
 	void	OffMonsterInfo			(void);
-	void	MonsterHpDown			(_float damage);
 
 
 private:

@@ -99,7 +99,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
 	}
 
-	ForUITest();
+	//ForUITest();
 
 	// Sky Rotation
 	m_spSky->GetTransform()->SetRotationY(

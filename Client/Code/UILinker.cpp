@@ -72,7 +72,7 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
-		//m_pUIManager->SpecialUICanvasOff();
+		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->WaitingPlayerState(
@@ -109,7 +109,7 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
-		//m_pUIManager->SpecialUICanvasOff();
+		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->WaitingPlayerState(
@@ -148,6 +148,7 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			20,
 			100,
 			0, 0, 0); // 회피,궁,아이템스킬
+		m_pUIManager->SpecialUICanvasOn();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->PlayerChange(
@@ -314,9 +315,4 @@ void CUILinker::MonsterInfoSet()
 void CUILinker::OffMonsterInfo(void)
 {
 	m_pUIManager->MonsterStateEnd();
-}
-
-void CUILinker::MonsterHpDown(_float damage)
-{
-	m_pUIManager->MonsterHpDown(damage);
 }

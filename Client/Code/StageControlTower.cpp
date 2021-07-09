@@ -218,7 +218,7 @@ bool CStageControlTower::FindTarget()
 
 		return true;
 	}
-	else if (m_spCurTarget)
+	else if (spTarget)
 	{
 		m_spCurTarget = spTarget;
 
