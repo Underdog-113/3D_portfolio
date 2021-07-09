@@ -111,4 +111,6 @@ private:
 
 	bool m_manualControl = false;
 	bool m_noAction = true;
+
+	_uint m_prevMoveKey = 0;
 };
