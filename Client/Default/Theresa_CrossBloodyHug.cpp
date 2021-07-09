@@ -7,6 +7,9 @@
 #include "AniCtrl.h"
 #pragma endregion
 
+#include "AttackBall.h"
+#include "StageCameraMan.h"
+
 
 CTheresa_CrossBloodyHug::CTheresa_CrossBloodyHug()
 {
@@ -66,6 +69,12 @@ void CTheresa_CrossBloodyHug::Start(void)
 
 	m_spCrossBlade = GetScene()->ADD_CLONE(L"Theresa_CrossBlade", true, (_uint)ELayerID::Player, L"CrossBlade");
 	m_spCrossBlade->SetIsEnabled(false);
+	m_spCrossBlade->GetTransform()->SetSizeY(2.f);
+
+	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
+	m_pAttackBall->GetTransform()->SetSize(5.f, 5.f, 5.f);
+	m_pAttackBall->SetIsEnabled(false);
+	m_pAttackBall->SetOwner((Engine::CObject*)m_pTheresa);
 }
 
 void CTheresa_CrossBloodyHug::FixedUpdate(void)
@@ -81,6 +90,7 @@ void CTheresa_CrossBloodyHug::Update(void)
 	switch (m_skillState)
 	{
 	case CTheresa_CrossBloodyHug::Ready:
+		FallReady();
 		break;
 	case CTheresa_CrossBloodyHug::Fall:
 		FallDown();
@@ -99,21 +109,6 @@ void CTheresa_CrossBloodyHug::Update(void)
 	}
 	// ½ÊÀÚ°¡ °øÁß¿¡ ¼ÒÈ¯
 
-
-	// ¹Ù´Ú¿¡ ²Æ°í
-	// ÆîÄ¡±â ¾Ö´Ï¸ÞÀÌ¼Ç
-	// ¹Ù·Î Ä®³¯ ¼ÒÈ¯ÇØ¼­ ºù±Ûºù±Û
-	if (m_beginAnimEnd)
-	{
-		m_activeTimer += GET_DT;
-
-		if (m_activeTimer > m_activeDuration)
-		{
-			// remove effect
-			SetIsEnabled(false);
-
-		}
-	}
 
 	// ³¡³ª¸é ¤²¤²
 
@@ -148,45 +143,114 @@ void CTheresa_CrossBloodyHug::OnDestroy(void)
 void CTheresa_CrossBloodyHug::OnEnable(void)
 {
 	__super::OnEnable();
-	m_fallTimer = 0.f;
-	m_activeTimer = 0.f;
-	m_fallStartY = m_spTransform->GetPosition().y;
+	m_stateTimer = 0.f;
+	m_stateDuration = 0.5f;
+	m_skillState = Ready;
+	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.f);
+
+	HitInfo info;
+	info.SetDamageRate(0.25f);
+	info.SetStrengthType(HitInfo::Str_Damage);
+	info.SetCrowdControlType(HitInfo::CC_None);
+	m_pAttackBall->SetupBall(1.2f, info);
+
+	CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 1.5f, D3DXToRadian(5.f));
 }
 
 void CTheresa_CrossBloodyHug::OnDisable(void)
 {
-	__super::OnDisable();
+	__super::OnDisable();	
+	m_spMesh->GetFirstMeshData_Dynamic()->ResetAnimation();
 }
 
 void CTheresa_CrossBloodyHug::SetBasicName(void)
 {
 }
 
+void CTheresa_CrossBloodyHug::FallReady()
+{
+	m_stateTimer += GET_PLAYER_DT;
+
+	if (m_stateTimer > m_stateDuration)
+	{
+		m_stateTimer = 0.f;
+		m_stateDuration = 0.12f;
+		m_skillState = Fall;
+
+		CStageControlTower::GetInstance()->SetCameraCustomTake(4.f, 2.f, D3DXToRadian(10.f));
+		return;
+	}
+}
+
 void CTheresa_CrossBloodyHug::FallDown()
 {
-	m_fallTimer += GET_PLAYER_DT;
+	m_stateTimer += GET_PLAYER_DT;
 
-	if (m_fallTimer > m_fallDuration)
+	if (m_stateTimer > m_stateDuration)
 	{
-		m_spTransform->SetPositionY(m_fallStartY - 1.f);
+		m_spTransform->SetPositionY(m_fallEndY);
 		m_skillState = Stretch;
 		m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(1.f);
+		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_CrossImpact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
 		return;
 	}
 
-	float lerpY = GetLerpFloat(m_fallStartY, m_fallStartY - 1.f, m_fallTimer / m_fallDuration);
+	float lerpY = GetLerpFloat(m_fallStartY, m_fallEndY, m_stateTimer / m_stateDuration);
 	m_spTransform->SetPositionY(lerpY);
 }
 
 void CTheresa_CrossBloodyHug::StretchBlade()
 {
-	auto pDM = m_spMesh->GetFirstMeshData_Dynamic();
+	if (m_spMesh->GetFirstMeshData_Dynamic()->GetAniTimeline() > 0.99f)
+	{
+		m_stateTimer = 0.f;
+		m_stateDuration = 2.f;
+		m_spCrossBlade->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		//m_spCrossBlade->GetTransform()->AddPositionX(0.5f);
+		m_spCrossBlade->GetTransform()->AddPositionY(0.3f);
+		m_spCrossBlade->SetIsEnabled(true);
+		m_pAttackBall->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		//0m_pAttackBall->GetTransform()->AddPositionX(0.3f);
+		m_pAttackBall->GetTransform()->AddPositionY(0.3f);
+		m_skillState = Roll;
+		return;
+	}
+
 }
 
 void CTheresa_CrossBloodyHug::RollBlade()
 {
+	// ¹Ù·Î Ä®³¯ ¼ÒÈ¯ÇØ¼­ ºù±Ûºù±Û
+
+	m_stateTimer += GET_PLAYER_DT;
+	m_attackTimer += GET_PLAYER_DT;
+
+	m_spCrossBlade->GetTransform()->AddRotationY(D3DXToRadian(480.f) * GET_PLAYER_DT);
+
+	if (m_pAttackBall->GetIsEnabled())
+	{
+		m_pAttackBall->SetIsEnabled(false);
+	}
+
+	if (m_attackTimer > 0.25f)
+	{
+		m_attackTimer = 0.f;
+		m_pAttackBall->SetIsEnabled(true);
+	}
+
+	if (m_stateTimer > m_stateDuration)
+	{
+		m_skillState = End;
+		return;
+	}
+
+
 }
 
 void CTheresa_CrossBloodyHug::EndSkill()
 {
+	// remove effectd
+	m_spCrossBlade->SetIsEnabled(false);
+	m_pAttackBall->SetIsEnabled(false);
+	SetIsEnabled(false);
 }

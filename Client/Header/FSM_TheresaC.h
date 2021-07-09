@@ -103,6 +103,8 @@ private:
 	bool m_checkAttack = false;
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
+	bool m_checkShake = false;
+	bool m_checkTake = false;
 	bool m_isEvade = false;
 	bool m_isSecondEvade = false;
 

@@ -9,6 +9,7 @@
 #define Sword_1 4
 
 #include "Valkyrie.h"
+class CTheresa_CrossBloodyHug;
 class CTheresa final : public CValkyrie
 {
 	SMART_DELETER_REGISTER
@@ -64,7 +65,7 @@ private:
 
 private:
 	
-	GETTOR			(SP(Engine::CObject),	m_spCrossBloodyHug,	nullptr,	CrossBloodyHug)
+	GETTOR			(CTheresa_CrossBloodyHug*,	m_pCrossBloodyHug,	nullptr,	CrossBloodyHug)
 
 private:	
 	GETTOR			(_mat*,			m_pLeftHand_World,		nullptr,	LeftHandWorldMatrix)

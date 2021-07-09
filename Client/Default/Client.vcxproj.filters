@@ -1614,6 +1614,9 @@
     <ClInclude Include="Theresa_CrossBlade.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_Pistol.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\BossStageScene.h">
       <Filter>01.Scene\12.BossStageScene</Filter>
     </ClInclude>
