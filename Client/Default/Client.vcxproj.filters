@@ -1681,8 +1681,17 @@
     <ClInclude Include="..\Header\SizeUpC.h">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\OutlineMeshShader.h">
+    <ClInclude Include="..\Header\FaceShader.h">
       <Filter>04.Shader\13.FaceShader</Filter>
+<<<<<<< HEAD
+=======
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_LaserEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+>>>>>>> 70ffb4c81af34ba9ad4a2798c7f5a0d99972d0bb
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2427,7 +2436,7 @@
     <ClCompile Include="..\Code\SizeUpC.cpp">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\OutlineMeshShader.cpp">
+    <ClCompile Include="..\Code\FaceShader.cpp">
       <Filter>04.Shader\13.FaceShader</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2492,7 +2501,7 @@
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <Filter>04.Shader\12.OutlineShader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\OutlineMeshShader.fx">
+    <FxCompile Include="..\..\Resource\Shader\FaceShader.fx">
       <Filter>04.Shader\13.FaceShader</Filter>
     </FxCompile>
   </ItemGroup>

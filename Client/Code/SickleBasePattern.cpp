@@ -125,7 +125,6 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_spSignEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
-		m_spSignEffect->GetComponent<Engine::CGraphicsC>();
 		m_spSignEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
 		m_spSignEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
 		m_spSignEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);

@@ -46,6 +46,4 @@ void CSoftEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	m_pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[0][0]->pTexture);
 	m_pEffect->SetTexture("g_ServeTexture", spTexture->GetTexData()[0][1]->pTexture);
-
-	//Engine::CRenderTargetManager::GetInstance()->SetRenderTargetTexture(m_pEffect, L"Target_Depth", "g_DepthTexture");
 }
