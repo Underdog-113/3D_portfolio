@@ -79,7 +79,7 @@ void CTimeSeeker::PlayAttackImpactSlow()
 	if (m_isAttackImpactSlow)
 	{
 		m_slowTimer += GET_PURE_DT;
-		if (m_slowTimer > 0.2f)
+		if (m_slowTimer > 0.1f)
 		{
 			m_isAttackImpactSlow = false;
 			Engine::CFRC::GetInstance()->SetDtCoef(1.f);

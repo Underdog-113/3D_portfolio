@@ -78,6 +78,12 @@ void CValkyrie::OnCollisionEnter(Engine::_CollisionInfo ci)
 		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
 		m_spMesh->GetRootMotion()->SetIsTargetCollide(true);
 
+
+	if (ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyAttack)
+	{
+		if (m_isEvade)
+			CStageControlTower::GetInstance()->OnPerfectEvadeMode();
+	}
 }
 
 void CValkyrie::OnCollisionStay(Engine::_CollisionInfo ci)
@@ -172,16 +178,16 @@ void CValkyrie::OnHitbox()
 
 void CValkyrie::OffHitbox()
 {
-	auto cols = m_spCollision->GetColliders();
-	for (auto col : cols)
-	{
-		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
-		{
-			//col->SetIsEnabled(false);
-			col->SetIsTrigger(true);
-			break;
-		}
-	}
+	//auto cols = m_spCollision->GetColliders();
+	//for (auto col : cols)
+	//{
+	//	if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
+	//	{
+	//		//col->SetIsEnabled(false);
+	//		col->SetIsTrigger(true);
+	//		break;
+	//	}
+	//}
 }
 
 _bool CValkyrie::CheckUltraUseable(void)

@@ -72,6 +72,7 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->WaitingPlayerState(
@@ -108,6 +109,7 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->WaitingPlayerState(
@@ -134,7 +136,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Kiana_PT_004",
 			L"Skill_Kiana_Weapon_09",
 			10,
-			11);
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->PlayerChange(
@@ -142,8 +145,10 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Theresa_1",
 			L"Skill_Theresa_2",
 			L"Skill_Theresa_3",
-			10,
-			11);
+			20,
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
+		m_pUIManager->SpecialUICanvasOn();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->PlayerChange(
@@ -152,7 +157,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Sakura_2",
 			L"Skill_Sakura_3",
 			10,
-			11);
+			11,
+			0,0,0); // 회피,궁,아이템스킬
 		break;
 	default:
 		break;
@@ -309,9 +315,4 @@ void CUILinker::MonsterInfoSet()
 void CUILinker::OffMonsterInfo(void)
 {
 	m_pUIManager->MonsterStateEnd();
-}
-
-void CUILinker::MonsterHpSet()
-{
-	//_float value
 }

@@ -49,9 +49,9 @@ public:
 
 private:
 			void						RenderStatic				(SP(CGraphicsC) spGC, CMeshData* pMeshData, LPD3DXEFFECT pEffect);
-			void						RenderStaticPerShader		(SP(CGraphicsC) spGC);
+			void						RenderStaticPerSubset		(SP(CGraphicsC) spGC);
 			void						RenderDynamic				(SP(CGraphicsC) spGC, CMeshData* pMeshData, LPD3DXEFFECT pEffect);
-			void						RenderDynamicPerShader		(SP(CGraphicsC) spGC);
+			void						RenderDynamicPerSubset		(SP(CGraphicsC) spGC);
 
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Mesh;

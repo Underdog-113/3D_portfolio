@@ -101,7 +101,6 @@ void CStageCameraMan::PivotChasing()
 		m_chaseSpeedIncreaseTimer += GET_PLAYER_DT;
 	}
 
-	CStageControlTower* pCT = CStageControlTower::GetInstance();
 
 	AppendTargetCorrecting();
 

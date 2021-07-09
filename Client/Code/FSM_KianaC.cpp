@@ -1035,7 +1035,7 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 	PlaySound_Attack_RandomEvade();
 
 	m_isEvade = true;
-	m_pKiana->OffHitbox();
+	//m_pKiana->OffHitbox();
 	m_pKiana->SetIsEvade(true);
 }
 
@@ -1075,7 +1075,7 @@ void CFSM_KianaC::EvadeBackward_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_isEvade = false;
-	m_pKiana->OnHitbox();
+	//m_pKiana->OnHitbox();
 	m_pKiana->SetIsEvade(false);
 }
 
@@ -1090,7 +1090,7 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 	PlaySound_Attack_RandomEvade();
 
 	m_isEvade = true;
-	m_pKiana->OffHitbox();
+	//m_pKiana->OffHitbox();
 	m_pKiana->SetIsEvade(true);
 }
 
@@ -1130,7 +1130,7 @@ void CFSM_KianaC::EvadeForward_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_isEvade = false;
-	m_pKiana->OnHitbox();
+	//m_pKiana->OnHitbox();
 	m_pKiana->SetIsEvade(false);
 }
 

@@ -213,6 +213,7 @@
     <ClInclude Include="..\Header\Lancer_Impact.h" />
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\OutlineMeshShader.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
@@ -482,6 +483,7 @@
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\OutlineMeshShader.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
@@ -760,6 +762,12 @@
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineMeshShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>

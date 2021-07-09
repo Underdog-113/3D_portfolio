@@ -65,9 +65,9 @@ void CFadeInOutC::Update(SP(CComponent) spThis)
 			}
 		}
 	}
-	else
+	else if(m_autoDelete)
 	{
-		m_pOwner->DeleteComponent<CFadeInOutC>();
+		m_pOwner->SetDeleteThis(true);
 	}
 }
 

@@ -131,8 +131,14 @@ void CChangmoScene::Start(void)
 
 		SP(Engine::CObject) spSkyBox = ADD_CLONE(L"SkyBox", true);		
 
-
-
+		SP(Engine::CImageObject) spImageObject
+			= std::dynamic_pointer_cast<Engine::CImageObject>(m_pObjectFactory->AddClone(L"ImageObject", true));
+		spImageObject->GetTexture()->AddTexture(L"White");
+		spImageObject->GetTransform()->SetPositionZ(0);
+		spImageObject->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		spImageObject->GetRectTex()->SetIsOrtho(true);
+		spImageObject->GetTransform()->SetSize(100, 100, 1);
+		spImageObject->AddComponent<Engine::CFadeInOutC>();
 		//m_spDummy = ADD_CLONE(L"MO_Sickle", true);
 		//m_spDummy->GetTransform()->SetPosition(0, 0, 5);
 

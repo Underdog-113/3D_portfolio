@@ -22,7 +22,8 @@ public:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 private:
-	
+	GETTOR_SETTOR(_float, m_size, 0, Size);
+	GETTOR_SETTOR(_float, m_speed, 0, Speed);
 
 };
 #endif
