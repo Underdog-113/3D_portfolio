@@ -70,7 +70,7 @@ void CCameraShake::Preset_LowAttack(_float3 eventPos)
 	m_blendInTime = 0.f;
 	m_blendOutTime = 0.1f;
 
-	ResetRotMember();
+	ResetAllMember();
 
 	float randomOffset = 0.f;
 	

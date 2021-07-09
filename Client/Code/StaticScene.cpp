@@ -95,6 +95,10 @@
 #include "Lancer_OutSideEff.h"
 #include "Lancer_Att_Range.h"
 
+//Ganesha
+#include "Ganesha_LaserEff.h"
+#include "Ganesha_Charge_Eff.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -528,5 +532,27 @@ void CStaticScene::InitEffectPrototypes(void)
 	spLancer_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"puncture");
 	spLancer_Impact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spLancer_Impact);
+
+
+	// Ganesha
+	SP(CMeshEffect_Client) spGaneshaLaserEffect(CGanesha_LaserEff::Create(true, this));
+	spGaneshaLaserEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Laser");
+	spGaneshaLaserEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaLaserEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaLaserEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LaserColor2");
+	spGaneshaLaserEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LaserColor2");
+	spGaneshaLaserEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaLaserEffect);
+
+	SP(CMeshEffect_Client) spGaneshaChargeEffect(CGanesha_Charge_Eff::Create(true, this));
+	spGaneshaChargeEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Charge");
+	spGaneshaChargeEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaChargeEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaChargeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Lancer_Eff_Color");
+	spGaneshaChargeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ability_aura");
+	spGaneshaChargeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaChargeEffect);
+
+
 
 }

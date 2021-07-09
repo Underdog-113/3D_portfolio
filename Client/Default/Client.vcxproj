@@ -208,7 +208,9 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
-    <ClInclude Include="..\Header\Kiana_Pistol.h" />
+<ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
+    <ClInclude Include="..\Header\Ganesha_LaserEff.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h" />
     <ClInclude Include="..\Header\Lancer_Impact.h" />
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
@@ -479,6 +481,8 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
+    <ClCompile Include="..\Code\Ganesha_LaserEff.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
