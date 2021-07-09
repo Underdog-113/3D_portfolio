@@ -1,13 +1,13 @@
-#ifndef OUTLINEMESHSHADER_H
-#define OUTLINEMESHSHADER_H
+#ifndef FACESHSHADER_H
+#define FACESHSHADER_H
 
 #include "Shader.h"
 
-class COutlineMeshShader final : public Engine::CShader
+class CFaceShader final : public Engine::CShader
 {
 private:
-	explicit							COutlineMeshShader		(void);
-									   ~COutlineMeshShader		(void);
+	explicit							CFaceShader				(void);
+									   ~CFaceShader				(void);
 
 public:
 	static			Engine::CShader*	Create					(void);

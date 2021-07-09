@@ -102,8 +102,11 @@ void COneStageScene::Update(void)
 	//ForUITest();
 
 	// Sky Rotation
-	m_spSky->GetTransform()->SetRotationY(
-		m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
+	if (nullptr != m_spSky)
+	{
+		m_spSky->GetTransform()->SetRotationY(
+			m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
+	}
 }
 
 void COneStageScene::LateUpdate(void)

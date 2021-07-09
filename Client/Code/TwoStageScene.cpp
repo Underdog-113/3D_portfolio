@@ -83,8 +83,11 @@ void CTwoStageScene::Update(void)
 	m_pBattleUIManager->Update();
 
 	// Sky Rotation
-	m_spSky->GetTransform()->SetRotationY(
-		m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
+	if (nullptr != m_spSky)
+	{
+		m_spSky->GetTransform()->SetRotationY(
+			m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
+	}
 }
 
 void CTwoStageScene::LateUpdate(void)
