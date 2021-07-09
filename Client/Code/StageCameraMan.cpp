@@ -324,34 +324,85 @@ void CStageCameraMan::AppendTargetCorrecting()
 
 void CStageCameraMan::AppendHorizontalCorrecting()
 {
+	_float rotateAngle = 45.f;
 	bool isCorrecting = false;
+	m_speedIncreaseTimer += GET_PLAYER_DT * 2.f;
 
-	if (Engine::IMKEY_PRESS(StageKey_Move_Left))
+	if (m_speedIncreaseTimer < 1.f)
 	{
-		m_rotateYDst -= (PI / 4) * GET_PLAYER_DT;
-		isCorrecting = true;
+		if (Engine::IMKEY_PRESS(StageKey_Move_Left))
+		{
+			if (m_prevMoveKey != StageKey_Move_Left)
+			{
+				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
+				m_speedIncreaseTimer = 0.f;
+			}
+			isCorrecting = true;
+			m_rotateYDst -= D3DXToRadian(rotateAngle) * GET_PLAYER_DT * m_speedIncreaseTimer;
+			m_prevMoveKey = StageKey_Move_Left;
+		}
+
+		if (Engine::IMKEY_PRESS(StageKey_Move_Right))
+		{
+			if (m_prevMoveKey != StageKey_Move_Right)
+			{
+				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
+				m_speedIncreaseTimer = 0.f;
+			}
+			isCorrecting = true;
+			m_rotateYDst += D3DXToRadian(rotateAngle) * GET_PLAYER_DT * m_speedIncreaseTimer;
+			m_prevMoveKey = StageKey_Move_Right;
+		}
+
+		if (!isCorrecting)
+			m_speedIncreaseTimer = 0.f;
+		else
+		{
+			_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT);
+			m_spCamera->SetLookAngleUp(lerpPoint);
+			m_rotateLerpStart = lerpPoint;
+		}
+	}
+	else
+	{
+
+		if (Engine::IMKEY_PRESS(StageKey_Move_Left))
+		{
+			m_rotateYDst -= D3DXToRadian(rotateAngle) * GET_PLAYER_DT;
+			isCorrecting = true;
+
+			if (m_prevMoveKey == StageKey_Move_Right)
+			{
+				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
+				m_speedIncreaseTimer = 0.f;
+			}
+			m_prevMoveKey = StageKey_Move_Left;
+		}
+
+		if (Engine::IMKEY_PRESS(StageKey_Move_Right))
+		{
+			m_rotateYDst += D3DXToRadian(rotateAngle) * GET_PLAYER_DT;
+			isCorrecting = true;
+
+			if (m_prevMoveKey == StageKey_Move_Left)
+			{
+				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
+				m_speedIncreaseTimer = 0.f;
+			}
+			m_prevMoveKey = StageKey_Move_Right;
+		}
+
+		_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT * m_horzCorrectingSpeed);
+		m_spCamera->SetLookAngleUp(lerpPoint);
+		m_rotateLerpStart = lerpPoint;
+
+		if (abs(m_rotateYDst - m_rotateLerpStart) < 0.01f)
+		{
+			m_rotateYDst = lerpPoint;
+			m_speedIncreaseTimer = 0.f;
+		}
 	}
 
-	if (Engine::IMKEY_PRESS(StageKey_Move_Right))
-	{
-		m_rotateYDst += (PI / 4) * GET_PLAYER_DT;
-		isCorrecting = true;
-	}
-
-	if (isCorrecting &&  m_speedIncreaseTimer < 1.f)
-	{
-		m_speedIncreaseTimer += GET_PLAYER_DT;
-	}
-
-	_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT * m_horzCorrectingSpeed * m_speedIncreaseTimer);
-	m_spCamera->SetLookAngleUp(lerpPoint);
-	m_rotateLerpStart = lerpPoint;
-
-	if (abs(m_rotateYDst - m_rotateLerpStart) < 0.01f)
-	{
-		m_rotateYDst = m_rotateLerpStart;
-		m_speedIncreaseTimer = 0.f;
-	}
 }
 
 
@@ -383,7 +434,6 @@ void CStageCameraMan::ManualControlMode()
 
 	if (Engine::IMKEY_PRESS(StageKey_CamRotateLeft))
 	{
-		//m_spCamera->SetLookAngleUp();
 		m_rotateYDst -= m_rotateSpeed;
 		m_enterAutoTimer = 0.f;
 
