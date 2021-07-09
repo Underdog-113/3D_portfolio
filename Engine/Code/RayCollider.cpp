@@ -72,6 +72,7 @@ void CRayCollider::UpdatePosition(void)
 	__super::UpdatePosition();
 
 	D3DXVec3TransformNormal(&m_direction, &m_directionOrigin, &m_pOwner->GetTransform()->GetRotMatrix());
+
 }
 
 void CRayCollider::MakeBS(void)

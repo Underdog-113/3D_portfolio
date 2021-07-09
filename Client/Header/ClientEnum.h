@@ -52,10 +52,8 @@ enum class ELayerID
 	Player			= 0 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Map				= 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Enemy			= 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Camera			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Effect			= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	Attack			= 5 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID	= 6 + (_int)Engine::ELayerID::NumOfEngineLayerID
+	Attack			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	NumOfLayerID	= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 };
 
 enum class EShaderID

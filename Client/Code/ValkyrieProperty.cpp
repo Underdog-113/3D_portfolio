@@ -18,8 +18,7 @@ void CValkyrieProperty::Start()
 	Delegate<> delegate;
 	delegate += std::bind(&CValkyrieProperty::ChangeSelect, &CValkyrieProperty());
 
-	std::static_pointer_cast<CButton>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas_Button_1"))->
-		AddFuncData(delegate);
+	std::static_pointer_cast<CButton>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas_Button_1"))->AddFuncData(delegate);
 	// 데이터 셋팅
 
 	PropertyCanvas();

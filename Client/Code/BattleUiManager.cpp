@@ -264,8 +264,11 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
-	m_monsterHpCount = 2;
+	m_monsterHpCount = 7;
 	m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+
+	_int a = (m_monsterHpCount -1) % 4;
+	std::cout << a << std::endl;
 
 	_float ThpMax = (hpMax / m_monsterHpCount) / 3;
 	_float hpMaxSum = 0;
@@ -275,8 +278,8 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		hpMaxSum += ThpMax;
 		object->SetMaxValue(hpMaxSum);
 		object->SetValue(hp / m_monsterHpCount);
-		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
-		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
+		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 	}
 
 	hpMaxSum = 0;
@@ -360,13 +363,21 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
 }
 
-void CBattleUiManager::TargetUI(SP(Engine::CObject) object, _float value)
+void CBattleUiManager::OnTargetUI(SP(Engine::CObject) object, _float value)
 {
 	m_monsterTargetCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(value);
 	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(object);
 	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(object);
 
 	m_monsterTargetCanvas->SetIsEnabled(true);
+}
+
+void CBattleUiManager::OffTargetUI()
+{
+	m_target[0]->GetComponent<CTargetPositionC>()->SetTarget(nullptr);
+	m_target[1]->GetComponent<CTargetPositionC>()->SetTarget(nullptr);
+
+	m_monsterTargetCanvas->SetIsEnabled(false);
 }
 
 void CBattleUiManager::MonsterHpDown(_float value)
@@ -527,8 +538,10 @@ void CBattleUiManager::monsterHpBarCheck()
 		for (auto object : m_monsterHpBar)
 		{
 			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
-			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
-			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(m_monsterHpCount - 1);
+			_int a = (m_monsterHpCount - 1) % 4;
+			std::cout << a << std::endl;
+			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
+			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 		}
 
 		for (auto object : m_monsterWhiteHpBar)

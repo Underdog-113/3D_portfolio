@@ -38,10 +38,22 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 hitPoint, _fl
 {
 	_int Tdamage = damage;
 	_float intervalSum = interval;
+
+	_float3 pos;
+	pos.x = (((_float)(std::rand() % (3 * 2)) - 3) / 10) - +target->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+	pos.y = (((_float)(std::rand() % (3 * 2)) - 3) / 10) + target->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+	pos.z = 0;
+
+	int aa = 0;
 	while (Tdamage != 0)
 	{
 		int value = Tdamage % 10;
 		Tdamage /= 10;
+
+		if (aa == 0 && value == 0)
+		{
+			continue;
+		}
 
 		if (m_disabledObjectList.empty())
 		{
@@ -54,8 +66,10 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 hitPoint, _fl
 			m_disabledObjectList.emplace_back(image.get());
 		}
 
+		std::cout << damage << std::endl;
+
 		Engine::CObject* object = m_disabledObjectList.front();
-		object->GetComponent<CDamageFontC>()->AddDamageFontInit(target, hitPoint, intervalSum, upSpped, lifeTime, value, color);
+		object->GetComponent<CDamageFontC>()->AddDamageFontInit(target, hitPoint, intervalSum, upSpped, lifeTime, value, color, pos);
 		intervalSum += interval;
 		object->GetTransform()->SetSize(size);
 		m_disabledObjectList.pop_front();

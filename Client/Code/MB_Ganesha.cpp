@@ -60,7 +60,8 @@ void CMB_Ganesha::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(4131.f);
+	//stat.SetBaseHp(4131.f);
+	stat.SetBaseHp(31.f);
 	stat.SetBaseAtk(117.f);
 	stat.SetBaseDef(25.f);
 
@@ -168,6 +169,6 @@ void CMB_Ganesha::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetForward(dir);
+	m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 

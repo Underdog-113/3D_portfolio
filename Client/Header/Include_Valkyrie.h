@@ -16,5 +16,7 @@
 #include "Kiana_Pistol.h"
 
 #include "Theresa.h"
+#include "Theresa_CrossBloodyHug.h"
+#include "Theresa_CrossBlade.h"
 
 #include "Sakura.h"

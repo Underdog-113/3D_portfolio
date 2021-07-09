@@ -47,7 +47,8 @@ public:
 	void						MonsterDead() override;
 
 private:
-	static		_uint			m_s_uniqueID;
+	static		_uint				m_s_uniqueID;
 	
 	GETTOR_SETTOR(_bool, m_checkCol, false, CheckCol)
+	GETTOR(SP(Engine::CObject), m_spPlane, {}, Plane)
 };

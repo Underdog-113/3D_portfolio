@@ -2,7 +2,7 @@
 class CValkyrieFSM;
 class CValkyriegManager
 {
-public:	enum STATE { Select, Property, Weapon, LevelUp, WeaponSwap, STATEEND };
+public:	enum STATE { Select, Property, Weapon, LevelUp, WeaponSwap, WeaponLevelUp, STATEEND };
 public:
 	DECLARE_SINGLETON(CValkyriegManager)
 
@@ -15,7 +15,8 @@ public:
 	void ChangeFSMProperty();
 	void ChangeFSMLevelUp();
 	void ChangeFSMWeapon();
-	void changeFSMWeaponSwap();
+	void ChangeFSMWeaponSwap();
+	void ChangeFSMWeaponLevelUp();
 private:
 	void ChangeFSM(STATE state);
 	void FSMCreate();

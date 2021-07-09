@@ -17,6 +17,7 @@
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
+#include "ThreeStagePhaseControl.h"
 #include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
@@ -62,10 +63,11 @@ void CStageControlTower::Update(void)
 	}
 
 
+
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);
-	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
-		SwitchValkyrie(Wait_2);
+// 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+// 		SwitchValkyrie(Wait_2);
 
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
@@ -82,6 +84,7 @@ void CStageControlTower::Update(void)
 			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
 		pMeshShader->SetAddColor(_float4(0, 0, 0, 0));
 	}
+
 }
 
 void CStageControlTower::OnDestroy()
@@ -132,6 +135,34 @@ void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
 	m_pPhaseControl->ChangePhase((_int)phaseType);
 }
 
+void CStageControlTower::ActAttack()
+{
+}
+
+void CStageControlTower::ActEvade()
+{
+}
+
+bool CStageControlTower::ActSkill()
+{
+	if (!m_pCurActor->CheckSkillUseable())
+		return false;
+
+	m_pCurActor->UseSkill();
+	m_pLinker->Skill();
+	return true;
+}
+
+bool CStageControlTower::ActUltra()
+{
+	if (!m_pCurActor->CheckUltraUseable())
+		return false;
+
+	m_pCurActor->UseUltra();
+	m_pLinker->Ultra();
+	return true;
+}
+
 void CStageControlTower::FindTarget()
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
@@ -162,7 +193,7 @@ void CStageControlTower::FindTarget()
 	
 	for (auto& iter : monsterList)
 	{
-		if(!iter->GetIsEnabled())
+		if(!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
 			continue;
 
 		_float3 monsterPos = iter->GetTransform()->GetPosition();
@@ -228,7 +259,13 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	
 	if (isDead)
 	{
-		// two many things
+		if (m_spCurTarget.get() == pM)
+		{
+			m_spCurTarget = nullptr;
+			m_pLinker->OffTargetMarker();
+			m_pLinker->OffMonsterInfo();
+		}
+
 		pM->MonsterDead();
 	}
 	else
@@ -242,6 +279,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 		m_pLinker->Hit_Up();
 	
 	// 5. 플레이어 sp 획득
+	m_pDealer->SpUp(m_pCurActor->GetStat(), 3.f);
 
 	// 6. 보스면 스턴 게이지 깎아주세요
 
@@ -296,6 +334,9 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	default:
 		break;
 	}
+
+	if (info.GetStrengthType() == HitInfo::Str_High)
+		m_pTimeSeeker->OnAttackImpactSlow();
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
@@ -324,9 +365,12 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	else
 	{
 		pV->ApplyHitInfo(info);
+
+		m_pActorController->LookHittedDirection(pMonster->GetTransform()->GetPosition());
 	}
 
 	// 4. 히트 이펙트
+
 
 	// 5. 사운드
 
@@ -386,12 +430,24 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 
 	m_pCurActor->SetIsEnabled(true);
-	if(m_spCurTarget)
-		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Attack_QTE");
-	else
-		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 
 	m_pCameraMan->SetIsSwitching(true);
+}
+
+void CStageControlTower::SetCameraMidTake()
+{
+	m_pCameraMan->SetMidTake();
+}
+
+void CStageControlTower::SetCameraFarTake()
+{
+	m_pCameraMan->SetFarTake();
+}
+
+void CStageControlTower::SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
+{
+	m_pCameraMan->SetCustomTake(dstMaxDistance, changeSpeed, dstXAngle);
 }
 
 void CStageControlTower::OffCameraTargeting()
@@ -403,6 +459,7 @@ void CStageControlTower::EndSwitching()
 {
 	m_pCameraMan->SetIsSwitching(false);
 }
+
 
 void CStageControlTower::OnPerfectEvadeMode()
 {

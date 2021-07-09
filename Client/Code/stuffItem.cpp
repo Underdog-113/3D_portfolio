@@ -21,11 +21,12 @@ CStuffItem::~CStuffItem()
 
 void CStuffItem::Start()
 {
+	
 	std::vector<CItemData*> stuffItem = CDataManager::GetInstance()->FindItemData();
 	_size size = stuffItem.size();
 
 	CScrollViewObject* spScrollView = static_cast<CScrollViewObject*>(CInventoryManager::GetInstance()->GetScene()->FindObjectByName(L"MainCanvas_ScrollView_0").get());
-	
+
 	for (int i = 0; i < size; i++)
 	{
 		spScrollView->

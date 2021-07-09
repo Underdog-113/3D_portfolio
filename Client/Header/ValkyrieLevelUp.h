@@ -33,6 +33,6 @@ public:
 	static _int g_itemCount;
 private:
 	std::vector<SP(CItemButton)> m_spItemButtonObject;
-
+	Engine::CObject* m_selectObject;
 };
 

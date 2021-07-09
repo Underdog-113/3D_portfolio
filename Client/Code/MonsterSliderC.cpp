@@ -48,8 +48,6 @@ void CMonsterSliderC::Update(SP(CComponent) spThis)
 	{
 		if (m_bWhiteCheck)
 		{
-			// 여기서 슬레이드를 번쩍하게 빛내줘야한다.
-
 			m_timer -= GET_DT;
 			if (m_timer <= 0)
 			{

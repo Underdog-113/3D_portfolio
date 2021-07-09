@@ -3,8 +3,11 @@
 
 #include "FSM_TheresaC.h"
 #include "DynamicMeshData.h"
+#include "StageControlTower.h"
+#include "UILinker.h"
 
 #include "AttackBox.h"
+#include "Theresa_CrossBloodyHug.h"
 
 CTheresa::CTheresa()
 {
@@ -54,6 +57,13 @@ void CTheresa::Awake(void)
 
 void CTheresa::Start(void)
 {
+	// status
+	V_WarshipStat stat;
+
+	m_pStat = new V_Theresa_Stat;
+	m_pStat->SetType(V_Stat::THERESA);
+	m_pStat->SetupStatus(&stat);
+
 	__super::Start();
 	m_spDebug = AddComponent<Engine::CDebugC>();
 
@@ -76,13 +86,7 @@ void CTheresa::Start(void)
 	CreateAttackBall(&m_pAttackBall_AxeStick);
 	CreateAttackBall(&m_pAttackBall_AxeImpact);
 
-
-	// status
-	V_WarshipStat stat;
-
-	m_pStat = new V_Theresa_Stat;
-	m_pStat->SetType(V_Stat::THERESA);
-	m_pStat->SetupStatus(&stat);
+	CreateCross();
 
 	if (m_isWait)
 	{
@@ -188,3 +192,42 @@ void CTheresa::SetChargeMode(bool value)
 	m_chargeMode = value;
 }
 
+
+void CTheresa::UseSkill(void)
+{
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= m_pStat->GetSkillCost();
+
+	m_pStat->SetCurSp(curSp);
+
+	m_skillTimer = 0.f;
+
+	//test
+	m_pCrossBloodyHug->SetIsEnabled(true);
+	m_pCrossBloodyHug->GetTransform()->SetPosition(m_spTransform->GetPosition() + _float3(0.f, 1.7f, 0.f));
+	m_pCrossBloodyHug->GetTransform()->AddPosition(m_spTransform->GetForward() * 1.5f);
+	m_pCrossBloodyHug->GetTransform()->SetRotationY(m_spTransform->GetRotation().y);
+	m_pCrossBloodyHug->SetFallStartY(m_spTransform->GetPosition().y + 1.7f);
+	m_pCrossBloodyHug->SetFallEndY(m_spTransform->GetPosition().y);
+
+}
+
+void CTheresa::UseUltra(void)
+{
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= m_pStat->GetUltraCost();
+
+	m_pStat->SetCurSp(curSp);
+
+	m_ultraTimer = 0.f;
+}
+
+void CTheresa::CreateCross(void)
+{
+	auto spCross = GetScene()->ADD_CLONE(L"Theresa_CrossBloodyHug", true, (_uint)ELayerID::Player, L"CrossBloodyHug");
+	m_pCrossBloodyHug = static_cast<CTheresa_CrossBloodyHug*>(spCross.get());
+	m_pCrossBloodyHug->SetIsEnabled(false);
+
+	m_pCrossBloodyHug->GetTransform()->SetSize(0.75f, 0.75f, 0.75f);
+	m_pCrossBloodyHug->SetTheresa(this);
+}

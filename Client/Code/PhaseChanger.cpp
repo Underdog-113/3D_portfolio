@@ -75,6 +75,11 @@ void CPhaseChanger::Update(void)
 		_uint enabledEnemy = 0;
 		for (auto& monster : m_vMonster)
 		{
+			//if (true == monster->GetIsBoss())
+			//{
+			//	monster->OnEnable();
+			//}
+
 			if (monster->GetDeleteThis() || monster->GetIsEnabled())
 			{
 				++enabledEnemy;

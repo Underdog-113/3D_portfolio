@@ -80,4 +80,9 @@ inline _float3 GetLerpPosition(_float3 startPos, _float3 endPos, _float curTime,
 	return startPos + dir * moveAmount;
 }
 
+inline float GetLerpFloat(float _start, float _end, float _time)
+{
+	return _start * (1.f - _time) + _time * _end;
+}
+
 #endif

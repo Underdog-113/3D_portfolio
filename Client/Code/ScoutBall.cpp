@@ -60,13 +60,31 @@ void CScoutBall::Update()
 {
 	__super::Update();
 
-	if (m_spTransform->GetSize().z >= 0.1f)
+	_float size = 0.f;
+	if (m_bFlyingBall)
 	{
-		this->SetDeleteThis(true);
-	}
+		if (m_spTransform->GetSize().z >= 0.1f)
+		{
+			this->SetDeleteThis(true);
+		}
 
-	_float size = 0.033f * GET_DT;	
+		size = 0.049f /*0.033f*/ * GET_DT;
+	}
+	else
+	{
+		if (m_spTransform->GetSize().z >= 0.1f)
+		{
+			this->SetDeleteThis(true);
+		}
+
+	   size = 0.033f * GET_DT;
+	}
+	
+	
 	m_spTransform->AddSize(_float3(size, size, size));
+
+	if (m_ready)
+		m_spTransform->AddPosition(m_direction * GET_DT);
 }
 
 void CScoutBall::LateUpdate()

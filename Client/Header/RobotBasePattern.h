@@ -27,6 +27,14 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_atkMat;
+
+	/* for.attackball */
+	_bool m_onAttackball = false;
+
+	/* for.effect */
+	SP(Engine::CObject) m_spHookEffect;
+	_bool m_onEffect = false;
+	_mat* m_pLeftUpperArm;
 };
 
 #endif

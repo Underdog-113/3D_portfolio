@@ -2,10 +2,11 @@
 
 #define NearTake 1.5f
 #define MidTake 3.f
-#define FarTake 4.5f
+#define FarTake 5.f
 
 #define NearAngle 0.f
-#define NormalAngle D3DXToRadian(10.f)
+#define MidAngle D3DXToRadian(10.f)
+#define FarAngle D3DXToRadian(15.f)
 
 
 #define MaxChaseDistance 0.5f
@@ -14,7 +15,7 @@ class CCameraShake;
 class CStageCameraMan
 {
 public:
-	enum TakeType { Near, Mid, Far, Change };
+	enum TakeType { Near, Mid, Far, Custom, Change };
 
 public:
 	CStageCameraMan();
@@ -31,6 +32,7 @@ public:
 	void SetNearTake();
 	void SetMidTake();
 	void SetFarTake();
+	void SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void ChangeTake();
 
 	void AppendTargetCorrecting();
@@ -42,6 +44,10 @@ public:
 
 public:
 	void ShakeCamera_Low(_float3 eventPos);
+
+	void ShakeCamera_Theresa_Charge1Impact(_float3 eventPos);
+	void ShakeCamera_Theresa_Charge2Impact(_float3 eventPos);
+	void ShakeCamera_Theresa_CrossImpact(_float3 eventPos);
 
 private:
 
@@ -82,7 +88,7 @@ private:
 	TakeType m_nextTakeType = Mid;
 	_float m_curMaxDist = 3.f;
 	_float m_dstMaxDist = 3.f;
-	_float m_gotoNearTakeTimer = 0.f;
+	_float m_gotoNextTakeTimer = 0.f;
 	_float m_changeTakeTimer = 0.f;
 	_float m_changeTakeSpeed = 2.f;
 

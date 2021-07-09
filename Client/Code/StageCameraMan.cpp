@@ -23,9 +23,10 @@ void CStageCameraMan::Start()
 	m_spCamera->SetTargetDist(MidTake);
 	m_spCamera->SetMaxDistTPS(MidTake);
 	m_spCamera->SetMode(Engine::ECameraMode::TPS_Custom);
+	m_spCamera->SetLookAngleRight(MidAngle);
 
 
-	m_spPivot = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Camera, L"CameraPivot");
+	m_spPivot = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)Engine::ELayerID::Camera, L"CameraPivot");
 	m_spPivot->AddComponent<Engine::CCollisionC>()->
 		AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::FloorRay, _float3(0.25f, 0.25f, 0.25f)));
 	m_spPivot->AddComponent<Engine::CDebugC>();
@@ -56,8 +57,8 @@ void CStageCameraMan::UpdateCameraMan()
 
 	if (m_pCameraShake->IsShaking()) 
 	{
-		camTr->SetPosition(m_noShakePos);		// 카메라 쉐이크 원상복구
-		camTr->SetRotation(m_noShakeRot);		// 쉐이크 이외의 이동, 회전값을 적용해야함
+		camTr->AddPosition(-m_pCameraShake->GetLocationOscilation());
+		camTr->SetPosition(m_noShakeRot);
 	}
 
 	PivotChasing();
@@ -75,9 +76,10 @@ void CStageCameraMan::UpdateCameraMan()
 	{
 		m_pCameraShake->PlayShake();
 
-		m_noShakePos = camTr->GetPosition();	// 카메라 쉐이크 이동값 기억
+		m_noShakePos = m_spCamera->GetShakePosOffset();
 		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
-		camTr->AddPosition(m_pCameraShake->GetLocationOscilation());
+		
+		m_spCamera->SetShakePosOffset(m_pCameraShake->GetLocationOscilation());
 
 		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
 		camTr->AddRotation(rotOscilation);
@@ -85,6 +87,10 @@ void CStageCameraMan::UpdateCameraMan()
 		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
 		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
 		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
+	}
+	else
+	{
+		m_spCamera->SetShakePosOffset(ZERO_VECTOR);
 	}
 }
 
@@ -119,6 +125,12 @@ void CStageCameraMan::SetIsTargeting(bool value)
 
 void CStageCameraMan::SetNearTake()
 {
+	if (m_curTakeType == Near)
+		return;
+
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
 	m_curTakeType = Change;
 	m_nextTakeType = Near;
 	m_dstMaxDist = NearTake;
@@ -130,24 +142,59 @@ void CStageCameraMan::SetNearTake()
 
 void CStageCameraMan::SetMidTake()
 {
+	if (m_curTakeType == Mid)
+		return;
+
+	if (m_curTakeType == Change && m_nextTakeType == Far)
+		return;
+
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
 	m_curTakeType = Change;
 	m_nextTakeType = Mid;
 	m_dstMaxDist = MidTake;
 	m_changeTakeTimer = 0.f;
 	m_changeTakeSpeed = 2.f;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
-	m_rotateXDst = NormalAngle;
+	m_rotateXDst = MidAngle;
 }
 
 void CStageCameraMan::SetFarTake()
 {
-	// 거의 행동 끝나면 바로 mid로
+	if (m_curTakeType == Far)
+	{
+		m_gotoNextTakeTimer = 0.f;
+		return;
+	}
+	if (m_curTakeType == Change && m_nextTakeType == Far)
+		return;
+
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
 	m_curTakeType = Change;
 	m_nextTakeType = Far;
 	m_dstMaxDist = FarTake;
 	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 3.f;
-	m_rotateXDst = NormalAngle;
+	m_changeTakeSpeed = 2.5f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = FarAngle;
+}
+
+void CStageCameraMan::SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
+{
+	if (m_curTakeType == Change)
+		m_curMaxDist = m_spCamera->GetMaxDistTPS();
+
+	m_gotoNextTakeTimer = 0.f;
+	m_curTakeType = Change;
+	m_nextTakeType = Custom;
+	m_dstMaxDist = dstMaxDistance;
+	m_changeTakeTimer = 0.f;
+	m_changeTakeSpeed = changeSpeed;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = dstXAngle;
 }
 
 void CStageCameraMan::ChangeTake()
@@ -164,19 +211,39 @@ void CStageCameraMan::ChangeTake()
 	case CStageCameraMan::Mid:
 		if (CheckNoAction())
 		{
-			m_gotoNearTakeTimer += GET_PLAYER_DT;
-			if (m_gotoNearTakeTimer > 3.f)
+			m_gotoNextTakeTimer += GET_PLAYER_DT;
+			if (m_gotoNextTakeTimer > 4.f)
 			{
-				m_gotoNearTakeTimer = 0.f;
+				m_gotoNextTakeTimer = 0.f;
 				SetNearTake();
 			}
 		}
 		else
 		{
-			m_gotoNearTakeTimer = 0.f;
+			m_gotoNextTakeTimer = 0.f;
 		}
 		break;
 	case CStageCameraMan::Far:
+		if (CheckNoAction())
+		{
+			m_gotoNextTakeTimer += GET_PLAYER_DT;
+			if (m_gotoNextTakeTimer > 1.5f)
+			{
+				m_gotoNextTakeTimer = 0.f;
+				SetMidTake();
+			}
+		}
+		break;
+	case CStageCameraMan::Custom:
+		if (CheckNoAction())
+		{
+			m_gotoNextTakeTimer += GET_PLAYER_DT;
+			if (m_gotoNextTakeTimer > 1.5f)
+			{
+				m_gotoNextTakeTimer = 0.f;
+				SetMidTake();
+			}
+		}
 		break;
 	case CStageCameraMan::Change:
 		if (m_nextTakeType == Near && !CheckNoAction())
@@ -188,7 +255,7 @@ void CStageCameraMan::ChangeTake()
 			m_changeTakeSpeed = 2.f;
 
 			m_rotateXStart = m_spCamera->GetLookAngleRight();
-			m_rotateXDst = NormalAngle;
+			m_rotateXDst = MidAngle;
 		}
 
 		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
@@ -250,7 +317,7 @@ void CStageCameraMan::AppendTargetCorrecting()
 	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 
 	_float3 dir = targetPos - actorPos;
-	_float distance = D3DXVec3Length(&dir) * 0.5f;
+	_float distance = D3DXVec3Length(&dir) * 0.55f;
 	
 	D3DXVec3Normalize(&dir, &dir);
 	m_dstPivotPos = actorPos + dir * distance;
@@ -342,6 +409,7 @@ void CStageCameraMan::ManualControlMode()
 	if (m_rotateLerpTimer > 1.f)
 	{
 		m_spCamera->SetLookAngleUp(m_rotateYDst);
+		m_rotateLerpStart = m_spCamera->GetLookAngleUp();
 		return;
 	}
 
@@ -372,7 +440,22 @@ void CStageCameraMan::AutoControlMode()
 
 void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)
 {
-	m_pCameraShake->Preset_Low(eventPos);
+	m_pCameraShake->Preset_LowAttack(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Theresa_Charge1Impact(_float3 eventPos)
+{
+	m_pCameraShake->Preset_Theresa_Charge1Impact(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Theresa_Charge2Impact(_float3 eventPos)
+{
+	m_pCameraShake->Preset_Theresa_Charge2Impact(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Theresa_CrossImpact(_float3 eventPos)
+{
+	m_pCameraShake->Preset_Theresa_CrossImpact(eventPos);
 }
 
 

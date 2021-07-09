@@ -37,6 +37,10 @@ public:
 					void					SetBasicName		(void) override;
 
 					void					ApplyHitInfo		(HitInfo info) override;
+					
+public:
+					void					UseSkill			(void) override;
+					void					UseUltra			(void) override;
 public:
 	
 	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)

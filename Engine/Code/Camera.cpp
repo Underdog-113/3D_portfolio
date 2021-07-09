@@ -366,6 +366,7 @@ void CCamera::LateUpdateTPS_Custom(void)
 	D3DXVec3TransformNormal(&invLook, &invLook, &rotationMatrix);
 
 	m_spTransform->SetPosition(invLook + spTargetTransform->GetPosition() + m_targetOffset);
+	m_spTransform->AddPosition(m_shakePosOffset);
 	m_spTransform->SetForward(-invLook);
 	
 	D3DXMatrixLookAtLH(&m_viewMat,

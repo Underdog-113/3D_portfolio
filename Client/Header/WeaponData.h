@@ -7,7 +7,7 @@ public:
 
 	void AddWeaponData(std::wstring name,
 		_int rank,
-		_float maxExperience,
+		_int maxExperience,
 		_int maxLevel,
 		_int damage,
 		_int hoesim,
@@ -19,11 +19,12 @@ public:
 		std::wstring textureKey,
 		std::wstring messKey);
 
+	void LevelUp();
 private:
 	GETTOR_SETTOR(std::wstring, m_name, L"", Name);
 	GETTOR_SETTOR(_int, m_rank, 1, Rank);
-	GETTOR_SETTOR(_float, m_experience, 0.0f, Experience);
-	GETTOR_SETTOR(_float, m_maxExperience, 0.0f, MaxExperience);
+	GETTOR_SETTOR(_int, m_experience, 0, Experience);
+	GETTOR_SETTOR(_int, m_maxExperience, 0, MaxExperience);
 	GETTOR_SETTOR(_int, m_level, 0, Level);
 	GETTOR_SETTOR(_int, m_maxLevel, 0, MaxLevel);
 	GETTOR_SETTOR(_int, m_damage, 0, Damage);
