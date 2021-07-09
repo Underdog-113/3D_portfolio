@@ -140,7 +140,7 @@ void CInitScene::Update(void)
 				m_pLoading = CLoading::Create(CWooScene::Create(), false);
 				m_selectNextScene = true;
 			}
-			else if (Engine::IMKEY_DOWN(KEY_F4))
+			else if (!Engine::IMKEY_DOWN(KEY_F4))
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;

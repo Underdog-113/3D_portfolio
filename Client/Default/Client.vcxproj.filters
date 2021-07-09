@@ -762,7 +762,7 @@
     </Filter>
     <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
       <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="10.ControlTower\TimeTraveler">
       <UniqueIdentifier>{c16141b8-a600-4736-be66-22b76077d3d6}</UniqueIdentifier>
     </Filter>
@@ -822,6 +822,9 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
       <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\12.SizeUp">
+      <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1617,9 +1620,9 @@
     <ClInclude Include="..\Header\SickleAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClInclude>
-<ClInclude Include="..\Header\TwoStagePhaseControl.h" />
-<ClInclude Include="..\Header\Robot_Impact.h" />
-<ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
+    <ClInclude Include="..\Header\Robot_Impact.h" />
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
     </ClInclude>
@@ -1628,6 +1631,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Lancer_Impact.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SizeUpC.h">
+      <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2346,9 +2352,9 @@
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClCompile>
-<ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
-<ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
-<ClCompile Include="..\Code\Robot_Impact.cpp" />
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
     </ClCompile>
@@ -2357,6 +2363,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Lancer_Impact.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SizeUpC.cpp">
+      <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
