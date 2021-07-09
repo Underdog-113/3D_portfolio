@@ -48,6 +48,7 @@ void CThreeStagePhaseControl::Update(void)
 
 		//After being collided with PhaseChanger1
 	case (_int)EThreeStagePhase::SecondFightBegin:
+		
 		break;
 
 		//After killing all the enemies
@@ -56,15 +57,15 @@ void CThreeStagePhaseControl::Update(void)
 		break;
 
 		//Before being collised with PhaseChanger2
-	case (_int)EThreeStagePhase::BeforeMidBoss:
+	case (_int)EThreeStagePhase::BeforeThirdFight:
 		break;
 
 		//After being collided with PhaseChanger2
-	case (_int)EThreeStagePhase::MidBossBegin:
+	case (_int)EThreeStagePhase::ThirdFightBegin:
 		break;
 
 		//After killing MidBoss
-	case (_int)EThreeStagePhase::MidBossEnd:
+	case (_int)EThreeStagePhase::ThirdFightEnd:
 		++m_curPhase;
 		break;
 

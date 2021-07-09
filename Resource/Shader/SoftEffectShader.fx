@@ -93,7 +93,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	Out.vColor = tex2D(BaseSampler, In.vTexUV );		// 2차원 텍스처로부터 UV 값에 해당하는 픽셀의 색상을 추출하는 함수, 반환타입은 VECTOR 타입
-	Out.vColor.a = 1.f;
+	//Out.vColor.a = 1.f;
 
 	return Out;
 }
@@ -133,8 +133,8 @@ technique Default_Device
 		AlphaTestEnable = true;
 		zWriteEnable = false;
 		AlphaBlendEnable = true;
-		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
+		DestBlend = InvsrcAlpha;
 		vertexshader = compile vs_3_0 VS_MAIN();	// 진입점 함수 명시
 		pixelshader = compile ps_3_0 PS_EFFECT();
 	}

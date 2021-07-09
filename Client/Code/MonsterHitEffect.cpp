@@ -32,6 +32,15 @@ SP(Engine::CObject) CMonsterHitEffect::MakeClone(void)
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_bBillboard = true;
+
+	spClone->m_fAlphaWidth = 4.f;
+	spClone->m_fAlphaHeight = 4.f;
+	spClone->m_TilingX = 0;
+	spClone->m_TilingY = 0;
+	spClone->m_maxXIndex = 4;
+	spClone->m_maxYIndex = 3;
+	spClone->m_fTIme = 0.f;
 	return spClone;
 }
 
@@ -44,14 +53,7 @@ void CMonsterHitEffect::Start(void)
 {
 	__super::Start();
 
-	m_fAlphaWidth = 4.f;
-	m_fAlphaHeight = 4.f;
-	m_TilingX = 0;
-	m_TilingY = 0;
 
-	m_maxXIndex = 4;
-	m_maxYIndex = 3;
-	m_fTIme = 0.f;
 }
 
 void CMonsterHitEffect::FixedUpdate(void)
@@ -76,6 +78,23 @@ void CMonsterHitEffect::LateUpdate(void)
 void CMonsterHitEffect::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
+
+	_mat matWorld, matView, matProj;
+
+	matWorld = this->GetGraphics()->GetTransform()->GetWorldMatrix();
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+	matProj = Engine::GET_MAIN_CAM->GetProjMatrix();
+
+	pEffect->SetMatrix("g_matWorld", &matWorld);
+	pEffect->SetMatrix("g_matView", &matView);
+	pEffect->SetMatrix("g_matProj", &matProj);
+
+	SP(Engine::CTextureC) spTexture = this->GetGraphics()->GetTexture();
+
+	pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[0][0]->pTexture);
+	pEffect->SetTexture("g_ServeTexture", spTexture->GetTexData()[0][1]->pTexture);
+
+
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
