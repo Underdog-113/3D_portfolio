@@ -34,6 +34,9 @@ void CShaderManager::OnDestroy(void)
 
 CShader* CShaderManager::GetShader(_int shaderID)
 {
+	if (shaderID == UNDEFINED)
+		return nullptr;
+
 	if (shaderID < 0 || shaderID >= m_vShaders.size())
 	{
 		MSG_BOX(__FILE__, L"Shader Index is broken");
@@ -45,6 +48,9 @@ CShader* CShaderManager::GetShader(_int shaderID)
 
 _int CShaderManager::GetShaderID(std::wstring shaderName)
 {
+	if (shaderName == L"NoShader")
+		return -1;
+
 	for (_uint i = 0; i < m_vHashKey.size(); ++i)
 	{
 		if (m_vHashKey[i] == shaderName)

@@ -832,6 +832,9 @@
     <Filter Include="03.Component\00.UI\12.SizeUp">
       <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\13.FaceShader">
+      <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1649,6 +1652,9 @@
     <ClInclude Include="..\Header\SizeUpC.h">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\OutlineMeshShader.h">
+      <Filter>04.Shader\13.FaceShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2386,6 +2392,9 @@
     <ClCompile Include="..\Code\SizeUpC.cpp">
       <Filter>03.Component\00.UI\12.SizeUp</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\OutlineMeshShader.cpp">
+      <Filter>04.Shader\13.FaceShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2447,6 +2456,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <Filter>04.Shader\12.OutlineShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\OutlineMeshShader.fx">
+      <Filter>04.Shader\13.FaceShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
