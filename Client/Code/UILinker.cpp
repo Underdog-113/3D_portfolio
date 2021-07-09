@@ -136,7 +136,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Kiana_PT_004",
 			L"Skill_Kiana_Weapon_09",
 			10,
-			100);
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->PlayerChange(
@@ -145,7 +146,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Theresa_2",
 			L"Skill_Theresa_3",
 			20,
-			100);
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
 		m_pUIManager->PlayerChange(
@@ -154,7 +156,8 @@ void CUILinker::SwitchValkyrie_Actor(V_Stat::Valkyrie_Type switchIn)
 			L"Skill_Sakura_2",
 			L"Skill_Sakura_3",
 			10,
-			11);
+			11,
+			0,0,0); // 회피,궁,아이템스킬
 		break;
 	default:
 		break;

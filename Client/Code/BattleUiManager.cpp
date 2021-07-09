@@ -332,7 +332,9 @@ void CBattleUiManager::PlayerSkillActivation(_int value)
 	m_skillActivationImage[value - 1]->SetIsEnabled(true);
 }
 
-void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4, _int specialSP, _int skillSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, std::wstring buttonUI4,
+	_int specialSP, _int skillSP,
+	_float coolTime1, _float coolTime2, _float coolTime3)
 {
 	m_skillImage[Button_Type::BasicButton]->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
@@ -347,9 +349,15 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_skillPoint[SkillPoint_Type::SkillSp]->GetComponent<Engine::CTextC>()->ChangeMessage(L"SP : " + std::to_wstring(skillSP));
 
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(true);
+
+	m_coolTimeSlider[Button_Type::EvasionButton]->SetValue(coolTime1);
+	m_coolTimeSlider[Button_Type::SpecialButton]->SetValue(coolTime2);
+	m_coolTimeSlider[Button_Type::SkillButton]->SetValue(coolTime3);
 }
 
-void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3, _int specialSP)
+void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonUI2, std::wstring buttonUI3,
+	_int specialSP,
+	_float coolTime1, _float coolTime2)
 {
 	m_skillImage[Button_Type::BasicButton] ->GetTexture()->ChangeTexture(buttonUI1);
 	m_skillImage[Button_Type::EvasionButton]->GetTexture()->ChangeTexture(buttonUI2);
@@ -361,6 +369,9 @@ void CBattleUiManager::PlayerChange(std::wstring buttonUI1, std::wstring buttonU
 	m_skillPoint[SkillPoint_Type::SpecialSp]->SetIsEnabled(false);
 
 	m_coolTimeSlider[Button_Type::SkillButton]->SetIsEnabled(false);
+
+	m_coolTimeSlider[Button_Type::EvasionButton]->SetValue(coolTime1);
+	m_coolTimeSlider[Button_Type::SpecialButton]->SetValue(coolTime2);
 }
 
 void CBattleUiManager::OnTargetUI(SP(Engine::CObject) object, _float value)
@@ -465,6 +476,11 @@ void CBattleUiManager::PlayerSpUp(_float value)
 void CBattleUiManager::SpecialUICanvasOn()
 {
 	m_specialUICanvas->SetIsEnabled(true);
+}
+
+void CBattleUiManager::SpecialUICanvasOff()
+{
+	m_specialUICanvas->SetIsEnabled(false);
 }
 
 void CBattleUiManager::SpecialUIUp()
