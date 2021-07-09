@@ -70,7 +70,7 @@ void CScrollViewObject::Update(void)
 {
 	__super::Update();
 	
-	Scroll();
+	/*Scroll();
 
 	if (m_chack)
 	{
@@ -108,7 +108,7 @@ void CScrollViewObject::Update(void)
 		}
 
 		std::cout << "m_speed : " << m_speed << std::endl; 
-	}
+	}*/
 }
 
 void CScrollViewObject::LateUpdate(void)
