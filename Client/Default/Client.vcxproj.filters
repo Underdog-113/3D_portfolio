@@ -823,17 +823,41 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
       <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
-      <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
+<Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
+  <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
+</Filter>
+<Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
+  <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
+</Filter>
+<Filter Include="03.Component\00.UI\12.SizeUp">
+  <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
+</Filter>
+<Filter Include="04.Shader\13.FaceShader">
+  <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
+</Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff">
+      <UniqueIdentifier>{b3b303c8-8a9a-47b8-b40d-42b4d00c2d14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
-      <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\GaneshUpperEff">
+      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Component\00.UI\12.SizeUp">
-      <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_RollingEff">
+      <UniqueIdentifier>{121daa22-86d1-48e7-8db5-bb37d1ef3930}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\13.FaceShader">
-      <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff">
+      <UniqueIdentifier>{40c911a6-205f-462d-8c4e-9d453efb7b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff">
+      <UniqueIdentifier>{439f6403-72e8-4722-bf89-0d16b268e5db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff">
+      <UniqueIdentifier>{a8aae665-8c95-4a00-876b-40412d63ab79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff">
+      <UniqueIdentifier>{84b49c45-27ec-465a-b09f-af4c9cb8a5c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff">
+      <UniqueIdentifier>{28d3c19b-93ec-46ad-a0f4-59aa998a728a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1637,23 +1661,28 @@
     <ClInclude Include="..\Header\Lancer_Impact.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ThreeStageScene.h">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
+<ClInclude Include="..\Header\ThreeStageScene.h">
+  <Filter>01.Scene\03.ThreeStageScene</Filter>
+</ClInclude>
+<ClInclude Include="..\Header\ThreeStagePhaseControl.h">
+  <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
+</ClInclude>
+<ClInclude Include="..\Header\TwoStagePhaseControl.h">
+  <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+</ClInclude>
+<ClInclude Include="..\Header\TwoStageScene.h">
+  <Filter>01.Scene\08.TwoStageScene</Filter>
+</ClInclude>
+<ClInclude Include="..\Header\SizeUpC.h">
+  <Filter>03.Component\00.UI\12.SizeUp</Filter>
+</ClInclude>
+<ClInclude Include="..\Header\OutlineMeshShader.h">
+  <Filter>04.Shader\13.FaceShader</Filter>
+    <ClInclude Include="..\Header\Ganesha_LaserEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ThreeStagePhaseControl.h">
-      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TwoStagePhaseControl.h">
-      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TwoStageScene.h">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SizeUpC.h">
-      <Filter>03.Component\00.UI\12.SizeUp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\OutlineMeshShader.h">
-      <Filter>04.Shader\13.FaceShader</Filter>
+    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2377,23 +2406,29 @@
     <ClCompile Include="..\Code\Lancer_Impact.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp">
-      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
+<ClCompile Include="..\Code\ThreeStagePhaseControl.cpp">
+  <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
+</ClCompile>
+<ClCompile Include="..\Code\ThreeStageScene.cpp">
+  <Filter>01.Scene\03.ThreeStageScene</Filter>
+</ClCompile>
+<ClCompile Include="..\Code\TwoStageScene.cpp">
+  <Filter>01.Scene\08.TwoStageScene</Filter>
+</ClCompile>
+<ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
+  <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
+</ClCompile>
+<ClCompile Include="..\Code\SizeUpC.cpp">
+  <Filter>03.Component\00.UI\12.SizeUp</Filter>
+</ClCompile>
+<ClCompile Include="..\Code\OutlineMeshShader.cpp">
+  <Filter>04.Shader\13.FaceShader</Filter>
+</ClCompile>
+  <ClCompile Include="..\Code\Ganesha_LaserEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ThreeStageScene.cpp">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TwoStageScene.cpp">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
-      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SizeUpC.cpp">
-      <Filter>03.Component\00.UI\12.SizeUp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\OutlineMeshShader.cpp">
-      <Filter>04.Shader\13.FaceShader</Filter>
+    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
