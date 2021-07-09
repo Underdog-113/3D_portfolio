@@ -301,6 +301,11 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	}
 }
 
+void CBattleUiManager::MonsterStateUpdate()
+{
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
+}
+
 void CBattleUiManager::MonsterStateEnd()
 {
 	m_monsterStateCanvas->SetIsEnabled(true);

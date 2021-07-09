@@ -225,6 +225,7 @@ bool CStageControlTower::FindTarget()
 
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
+
 		
 		// ui interaction
 		m_pLinker->OnTargetMarker();
