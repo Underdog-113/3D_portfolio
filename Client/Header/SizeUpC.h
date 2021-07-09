@@ -24,6 +24,7 @@ public:
 private:
 	GETTOR_SETTOR(_float, m_size, 0, Size);
 	GETTOR_SETTOR(_float, m_speed, 0, Speed);
+	GETTOR_SETTOR(_float, m_stopTime, 0, StopTime);
 
 };
 #endif
