@@ -44,8 +44,6 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_Sickle_Walk_Back);
-			m_onSignEffect = false;
-			m_onTrailEffect = false;
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_Sickle_StandBy == fsm->GetCurStateString() &&
@@ -84,7 +82,10 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 				// 공격1 상태로 변경
 				fsm->ChangeState(Name_Sickle_Attack_1);
 				m_atkReady = false;
+				m_onSignEffect = false;
+				m_onTrailEffect = false;
 				PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
+				return;
 			}
 		}
 		// 공격1 상태가 끝났다면
@@ -93,8 +94,6 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_Sickle_Walk_Back);
-			m_onSignEffect = false;
-			m_onTrailEffect = false;
 		}
 	}
 
@@ -124,19 +123,19 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		0.1f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onSignEffect)
 	{
-		SP(Engine::CObject) spSoftEffect
+		m_spSignEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
-		spSoftEffect->GetComponent<Engine::CGraphicsC>();
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
-		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
-		spSoftEffect->GetTransform()->SetPosition(mPos);
-		spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.6f);
+		m_spSignEffect->GetComponent<Engine::CGraphicsC>();
+		m_spSignEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LeftLight_Red");
+		m_spSignEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"k_line01");
+		m_spSignEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		m_spSignEffect->GetTransform()->SetPosition(mPos);
+		m_spSignEffect->GetTransform()->SetPositionY(mPos.y + 0.6f);
 		m_onSignEffect = true;
 	}
 
 	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() &&
-		0.2f <= fsm->GetDM()->GetAniTimeline() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onTrailEffect)
 	{
 		SP(Engine::CObject) spMeshEffect
@@ -151,6 +150,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
 		spMeshEffect->GetTransform()->AddRotationY(PI);
 		spMeshEffect->GetTransform()->SetPosition(mPos);
+		spMeshEffect->GetTransform()->SetSize(0.6f, 0.6f, 0.6f);
 		m_onTrailEffect = true;
 	}
 }

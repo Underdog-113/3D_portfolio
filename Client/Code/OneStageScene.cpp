@@ -150,7 +150,7 @@ void COneStageScene::SetupFromLoader(void)
 	Load->TextLoad(this);
 	Load->MapLoad(this);
 	Load->PhaseChangerLoad(this);
-	Load->PortalLoad(this);
+	//Load->PortalLoad(this);
 	delete(Load);
 }
 

@@ -11,6 +11,8 @@
 #include "PatternMachineC.h"
 #include "AniCtrl.h"
 
+#include "SickleBasePattern.h"
+
 CSickleHitPattern::CSickleHitPattern()
 {
 }

@@ -57,9 +57,13 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
 	{
-		m_onAirborne = true;
-		static_cast<CMonster*>(m_pOwner)->GetStat()->SetbreakGauge(0.f);
+		//m_onAirborne = true;
+		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetbreakGauge(0.f);
+
+		m_onDie = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
 	}
+
 
 	// born 실행 (1번만)
 	PlayBornPattern();

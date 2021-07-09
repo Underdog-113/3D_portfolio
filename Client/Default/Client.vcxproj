@@ -389,8 +389,11 @@
     <ClInclude Include="..\Header\ScoutHitPattern.h" />
     <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
+    <ClInclude Include="..\Header\ThreeStagePhaseControl.h" />
+    <ClInclude Include="..\Header\ThreeStageScene.h" />
     <ClInclude Include="..\Header\TimeSeeker.h" />
     <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
+    <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -424,9 +427,7 @@
     <ClInclude Include="..\Header\StaticScene.h" />
     <ClInclude Include="..\Header\StatusDealer.h" />
     <ClInclude Include="..\Header\Theresa.h" />
-    <ClInclude Include="..\Header\ThreeStageScene.h" />
     <ClInclude Include="..\Header\TimerUiC.h" />
-    <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\UiAnimCtrC.h" />
     <ClInclude Include="..\Header\Valkyrie.h" />
     <ClInclude Include="..\Header\StageControlTower.h" />
@@ -635,8 +636,11 @@
     <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
+    <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\ThreeStageScene.cpp" />
     <ClCompile Include="..\Code\TimeSeeker.cpp" />
     <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -670,9 +674,7 @@
     <ClCompile Include="..\Code\StaticScene.cpp" />
     <ClCompile Include="..\Code\StatusDealer.cpp" />
     <ClCompile Include="..\Code\Theresa.cpp" />
-    <ClCompile Include="..\Code\ThreeStageScene.cpp" />
     <ClCompile Include="..\Code\TimerUiC.cpp" />
-    <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
     <ClCompile Include="..\Code\Valkyrie.cpp" />
     <ClCompile Include="..\Code\StageControlTower.cpp" />

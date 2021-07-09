@@ -17,7 +17,7 @@
 #include "PhaseControl.h"
 
 #include "OneStagePhaseControl.h"
-#include "TwoStagePhaseControl.h"
+#include "ThreeStagePhaseControl.h"
 #include "MeshShader.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)

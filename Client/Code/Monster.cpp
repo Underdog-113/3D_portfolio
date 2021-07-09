@@ -131,6 +131,7 @@ void CMonster::ApplyHitInfo(HitInfo info)
 	{
 		breakGauge = 0.f;
 	}
+	m_pStat->SetbreakGauge(breakGauge);
 }
 
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)

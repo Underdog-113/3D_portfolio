@@ -41,7 +41,7 @@ void CMO_Lancer::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_LancerC>();
 	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(), CLancerDiePattern::Create(), CLancerBasePattern::Create(), CLancerHitPattern::Create());
-	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
+	//m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
 }
 
 void CMO_Lancer::Start(void)

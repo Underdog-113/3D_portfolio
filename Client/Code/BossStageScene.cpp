@@ -17,7 +17,7 @@
 // import from jongscene
 #include "Include_ForTest.h"
 
-#include "TwoStagePhaseControl.h"
+#include "ThreeStagePhaseControl.h"
 
 #include "Monster.h"
 
@@ -50,7 +50,7 @@ void CBossStageScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
-	m_pControlTower->SetPhaseControl(new CTwoStagePhaseControl);
+	m_pControlTower->SetPhaseControl(new CThreeStagePhaseControl);
 	m_pControlTower->GetPhaseControl()->SetControlTower(m_pControlTower);
 }
 
