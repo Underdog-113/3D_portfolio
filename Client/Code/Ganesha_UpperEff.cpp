@@ -1,20 +1,21 @@
 #include "stdafx.h"
-#include "..\Header\SpiderExplosion.h"
+#include "..\Header\Ganesha_UpperEff.h"
 
-_uint CSpiderExplosion::m_s_uniqueID = 0;
+_uint CGanesha_UpperEff::m_s_uniqueID = 0;
 
-CSpiderExplosion::CSpiderExplosion()
+
+CGanesha_UpperEff::CGanesha_UpperEff()
 {
 }
 
 
-CSpiderExplosion::~CSpiderExplosion()
+CGanesha_UpperEff::~CGanesha_UpperEff()
 {
 }
 
-SP(CSpiderExplosion) CSpiderExplosion::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CGanesha_UpperEff) CGanesha_UpperEff::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CSpiderExplosion) spInstance(new CSpiderExplosion, Engine::SmartDeleter<CSpiderExplosion>);
+	SP(CGanesha_UpperEff) spInstance(new CGanesha_UpperEff, Engine::SmartDeleter<CGanesha_UpperEff>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +23,10 @@ SP(CSpiderExplosion) CSpiderExplosion::Create(_bool isStatic, Engine::CScene * p
 	return spInstance;
 }
 
-SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
+SP(Engine::CObject) CGanesha_UpperEff::MakeClone(void)
 {
-	SP(CSpiderExplosion) spClone(new CSpiderExplosion, Engine::SmartDeleter<CSpiderExplosion>);
+	SP(CGanesha_UpperEff) spClone(new CGanesha_UpperEff, Engine::SmartDeleter<CGanesha_UpperEff>);
+
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -36,91 +38,93 @@ SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
 	return spClone;
 }
 
-void CSpiderExplosion::Awake(void)
+void CGanesha_UpperEff::Awake(void)
 {
 	__super::Awake();
-	m_spTransform->SetSizeX(6);
-	m_spTransform->SetSizeY(10);
+
 }
 
-void CSpiderExplosion::Start(void)
+void CGanesha_UpperEff::Start(void)
 {
 	__super::Start();
 
-	m_fAlphaWidth = 16.f;
-	m_fAlphaHeight = 1.f;
+	// 텍스처 지정해야함.
+	m_fAlphaWidth = 0.f;
+	m_fAlphaHeight = 0.f;
 	m_TilingX = 0;
 	m_TilingY = 0;
 
-	m_maxXIndex = 16;
+	m_maxXIndex = 0;
 	m_maxYIndex = 0;
 	m_fTIme = 0.f;
 }
 
-void CSpiderExplosion::FixedUpdate(void)
+void CGanesha_UpperEff::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 }
 
-void CSpiderExplosion::Update(void)
+void CGanesha_UpperEff::Update(void)
 {
 	__super::Update();
 
-	UpdateFrame(0.05f);
+	UpdateFrame(0.1f);
 }
 
-void CSpiderExplosion::LateUpdate(void)
+void CGanesha_UpperEff::LateUpdate(void)
 {
 	__super::LateUpdate();
 
 }
 
-void CSpiderExplosion::PreRender(LPD3DXEFFECT pEffect)
+void CGanesha_UpperEff::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+
+	pEffect->CommitChanges();
 }
 
-void CSpiderExplosion::Render(LPD3DXEFFECT pEffect)
+void CGanesha_UpperEff::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
 
 }
 
-void CSpiderExplosion::PostRender(LPD3DXEFFECT pEffect)
+void CGanesha_UpperEff::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PostRender(m_spGraphics, pEffect);
 
 }
 
-void CSpiderExplosion::OnDestroy(void)
+void CGanesha_UpperEff::OnDestroy(void)
 {
 	__super::OnDestroy();
 
 }
 
-void CSpiderExplosion::OnEnable(void)
+void CGanesha_UpperEff::OnEnable(void)
 {
 	__super::OnEnable();
 
 }
 
-void CSpiderExplosion::OnDisable(void)
+void CGanesha_UpperEff::OnDisable(void)
 {
 	__super::OnDisable();
 
 }
 
-void CSpiderExplosion::SetBasicName(void)
+void CGanesha_UpperEff::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
 }
 
-void CSpiderExplosion::UpdateFrame(_float _frmSpeed)
+void CGanesha_UpperEff::UpdateFrame(_float _frmSpeed)
 {
 	m_fTIme += GET_DT;
 

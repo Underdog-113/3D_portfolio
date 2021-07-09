@@ -820,9 +820,6 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff">
       <UniqueIdentifier>{b3b303c8-8a9a-47b8-b40d-42b4d00c2d14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\GaneshUpperEff">
-      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_RollingEff">
       <UniqueIdentifier>{121daa22-86d1-48e7-8db5-bb37d1ef3930}</UniqueIdentifier>
     </Filter>
@@ -855,6 +852,15 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff">
       <UniqueIdentifier>{0910b4d3-2a6a-487e-8dfb-d5f5f4423cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff">
+      <UniqueIdentifier>{847b0b22-bcac-4ba7-8ce0-d4a7b15e0a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact">
+      <UniqueIdentifier>{6d293627-7985-4854-b46f-015740f997d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff">
+      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1694,6 +1700,21 @@
     <ClInclude Include="..\Header\Robot_Plane.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Dome.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Dome_Impact.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_SmokeEff.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Impact_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_UpperEff.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2445,6 +2466,21 @@
     </ClCompile>
     <ClCompile Include="..\Code\Robot_Plane.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Dome.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Impact_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_UpperEff.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
