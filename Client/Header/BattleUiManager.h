@@ -79,6 +79,9 @@ public:
 
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	void BattleEnd();
+
+	void QteOn(_int value);
+	void QteOff(_int value);
 private:
 	void skillActivationImageCheck();
 	void monsterHpBarCheck();
@@ -122,6 +125,8 @@ private:
 	std::vector<Engine::CSlider*> m_waitingPlayerHpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerSpBar;
 	std::vector<Engine::CSlider*> m_specialUBar;
+
+	std::vector<Engine::CObject*> m_vQte;
 };
 
 

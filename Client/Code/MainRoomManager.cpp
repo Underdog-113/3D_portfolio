@@ -27,6 +27,13 @@ void CMainRoomManager::Start(Engine::CScene * pScene)
 	pScene->FindObjectByName(L"MainCanvas_Text_2")->GetComponent<Engine::CTextC>()->ChangeMessage(stamina);
 	pScene->FindObjectByName(L"MainCanvas_Text_3")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetGold()));
 	pScene->FindObjectByName(L"MainCanvas_Text_4")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetDiamond()));
+
+	pScene->FindObjectByName(L"MainCanvas_Image_21")->AddComponent<CSizeUpC>()->SetSize(197.118f);
+	pScene->FindObjectByName(L"MainCanvas_Image_21")->GetComponent<CSizeUpC>()->SetSpeed(100.0f);
+	pScene->FindObjectByName(L"MainCanvas_Image_21")->GetComponent<CSizeUpC>()->SetStopTime(0.5f);
+
+	pScene->FindObjectByName(L"MainCanvas_Image_22")->AddComponent<CSizeUpC>()->SetSize(197.118f);
+	pScene->FindObjectByName(L"MainCanvas_Image_22")->GetComponent<CSizeUpC>()->SetSpeed(100.0f);
 }
 
 void CMainRoomManager::Update(void)
