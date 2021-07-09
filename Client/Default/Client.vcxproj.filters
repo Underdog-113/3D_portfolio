@@ -811,6 +811,18 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne">
       <UniqueIdentifier>{7d8ac4f3-af33-4322-87c8-d6c065672d2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect">
+      <UniqueIdentifier>{084e2e52-68de-41fb-9b13-b615af88112a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide">
+      <UniqueIdentifier>{5dff535b-00e7-4e5d-8a64-fd616ecb2fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range">
+      <UniqueIdentifier>{c96bc23b-0933-49fb-9af7-1dddd01412aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
+      <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1605,9 +1617,18 @@
     <ClInclude Include="..\Header\SickleAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
-    <ClInclude Include="..\Header\Robot_Impact.h" />
-    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
+<ClInclude Include="..\Header\TwoStagePhaseControl.h" />
+<ClInclude Include="..\Header\Robot_Impact.h" />
+<ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
+    <ClInclude Include="..\Header\Lancer_Att_Range.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Lancer_OutSideEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Lancer_Impact.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2325,9 +2346,18 @@
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
-    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
-    <ClCompile Include="..\Code\Robot_Impact.cpp" />
+<ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
+<ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
+<ClCompile Include="..\Code\Robot_Impact.cpp" />
+    <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Lancer_OutSideEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Lancer_Impact.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
