@@ -78,25 +78,9 @@ void CMonsterHitEffect::LateUpdate(void)
 
 void CMonsterHitEffect::PreRender(LPD3DXEFFECT pEffect)
 {
-	/*_mat matWorld, matView, matProj;
 
-	matWorld = this->GetGraphics()->GetTransform()->GetWorldMatrix();
-	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
-	matProj = Engine::GET_MAIN_CAM->GetProjMatrix();
-
-	pEffect->SetMatrix("g_matWorld", &matWorld);
-	pEffect->SetMatrix("g_matView", &matView);
-	pEffect->SetMatrix("g_matProj", &matProj);
-
-	SP(Engine::CTextureC) spTexture = this->GetGraphics()->GetTexture();
-
-	pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[0][0]->pTexture);
-	pEffect->SetTexture("g_ServeTexture", spTexture->GetTexData()[0][1]->pTexture);*/
 
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
-
-	
-
 
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
