@@ -585,7 +585,7 @@ void CBattleUiManager::monsterHpBarCheck()
 	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
 	{
 		m_monsterHpCount--;
-
+		std::cout << m_monsterHpCount << std::endl;
 		for (auto object : m_monsterHpBar)
 		{
 			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
