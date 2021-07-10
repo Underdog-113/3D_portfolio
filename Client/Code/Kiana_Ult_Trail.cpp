@@ -62,7 +62,7 @@ void CKiana_Ult_Trail::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fTrailAlpha -= 2.3f * GET_DT;
+	m_fTrailAlpha -= 1.8f * GET_DT;
 }
 
 void CKiana_Ult_Trail::LateUpdate()

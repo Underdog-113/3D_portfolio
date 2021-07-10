@@ -287,20 +287,6 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFE
 
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
-		D3DMATERIAL9 curMtrl = spGC->GetMaterials()[i];
-		_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
-		_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
-		_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
-		_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
-		_float specularPower = curMtrl.Power;
-
-		pEffect->SetVector("g_ambient", &ambient);
-		pEffect->SetVector("g_diffuse", &diffuse);
-		pEffect->SetVector("g_emissive", &emissive);
-		pEffect->SetVector("g_specular", &specular);
-		pEffect->SetFloat("g_specularPower", specularPower);
-
-
 		if (spGC->GetTexture())
 		{
 			_TexData* pTexData = spGC->GetTexture()->GetTexData()[i][0];
@@ -325,21 +311,6 @@ void CMeshC::RenderStaticPerSubset(SP(CGraphicsC) spGC)
 		LPD3DXEFFECT pEffect = pCurShader->GetEffect();
 
 		pCurShader->SetUpConstantTable(spGC);
-
-		D3DMATERIAL9 curMtrl = spGC->GetMaterials()[i];
-		_float4 ambient		(curMtrl.Ambient.r,		curMtrl.Ambient.g,	curMtrl.Ambient.b,	curMtrl.Ambient.a);
-		_float4 diffuse		(curMtrl.Diffuse.r,		curMtrl.Diffuse.g,	curMtrl.Diffuse.b,	curMtrl.Diffuse.a);
-		_float4 emissive	(curMtrl.Emissive.r,	curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
-		_float4 specular	(curMtrl.Specular.r,	curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
-		_float	specularPower = curMtrl.Power;
-
-		pEffect->SetVector("g_ambient", &ambient);
-		pEffect->SetVector("g_diffuse", &diffuse);
-		pEffect->SetVector("g_emissive", &emissive);
-		pEffect->SetVector("g_specular", &specular);
-		pEffect->SetFloat("g_specularPower", specularPower);
-
-
 		pEffect->CommitChanges();
 
 		_uint maxPass = 0;
@@ -422,19 +393,6 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			{
 				pEffect->SetTexture("g_BaseTexture", nullptr);
 			}
-			D3DMATERIAL9 curMtrl = spGC->GetMaterials()[vMeshContainers[i]->subsetIndexStart + j];
-			_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
-			_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
-			_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
-			_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
-			_float specularPower = curMtrl.Power;
-
-			pEffect->SetVector("g_ambient", &ambient);
-			pEffect->SetVector("g_diffuse", &diffuse);
-			pEffect->SetVector("g_emissive", &emissive);
-			pEffect->SetVector("g_specular", &specular);
-			pEffect->SetFloat("g_specularPower", specularPower);
-
 			pEffect->CommitChanges();
 
 
@@ -524,19 +482,6 @@ void CMeshC::RenderDynamicPerSubset(SP(CGraphicsC) spGC)
 			{
 				pEffect->SetTexture("g_BaseTexture", nullptr);
 			}
-			D3DMATERIAL9 curMtrl = spGC->GetMaterials()[vMeshContainers[i]->subsetIndexStart + j];
-			_float4 ambient(curMtrl.Ambient.r, curMtrl.Ambient.g, curMtrl.Ambient.b, curMtrl.Ambient.a);
-			_float4 diffuse(curMtrl.Diffuse.r, curMtrl.Diffuse.g, curMtrl.Diffuse.b, curMtrl.Diffuse.a);
-			_float4 emissive(curMtrl.Emissive.r, curMtrl.Emissive.g, curMtrl.Emissive.b, curMtrl.Emissive.a);
-			_float4 specular(curMtrl.Specular.r, curMtrl.Specular.g, curMtrl.Specular.b, curMtrl.Specular.a);
-			_float specularPower = curMtrl.Power;
-
-			pEffect->SetVector("g_ambient", &ambient);
-			pEffect->SetVector("g_diffuse", &diffuse);
-			pEffect->SetVector("g_emissive", &emissive);
-			pEffect->SetVector("g_specular", &specular);
-			pEffect->SetFloat("g_specularPower", specularPower);
-
 
 			pEffect->CommitChanges();
 

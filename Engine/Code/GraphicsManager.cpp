@@ -157,16 +157,16 @@ void CGraphicsManager::InitDeferredBuffer(void)
 
 	m_pVertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
 
-	pVertex[0].position = _float4(0.f, 0.f, 0.f, 1.f);
+	pVertex[0].position = _float4(-1.f, -1.f, 0.f, 1.f);
 	pVertex[0].texUV = _float2(0.f, 0.f);
 
-	pVertex[1].position = _float4((_float)viewport.Width, 0.f, 0.f, 1.f);
+	pVertex[1].position = _float4((_float)viewport.Width - 1.f, -1.f, 0.f, 1.f);
 	pVertex[1].texUV = _float2(1.f, 0.f);
 
-	pVertex[2].position = _float4((_float)viewport.Width, (_float)viewport.Height, 0.f, 1.f);
+	pVertex[2].position = _float4((_float)viewport.Width - 1.f, (_float)viewport.Height - 1.f, 0.f, 1.f);
 	pVertex[2].texUV = _float2(1.f, 1.f);
 
-	pVertex[3].position = _float4(0.f, (_float)viewport.Height, 0.f, 1.f);
+	pVertex[3].position = _float4(-1.f, (_float)viewport.Height - 1.f, 0.f, 1.f);
 	pVertex[3].texUV = _float2(0.f, 1.f);
 
 	m_pVertexBuffer->Unlock();
@@ -249,6 +249,7 @@ void CGraphicsManager::RenderNonAlpha(void)
 					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
 					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
+					pEffect->CommitChanges();
 					_uint maxPass = 0;
 					pEffect->Begin(&maxPass, 0);
 					for (_uint i = 0; i < maxPass; ++i)

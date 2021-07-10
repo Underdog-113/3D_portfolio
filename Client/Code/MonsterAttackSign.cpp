@@ -29,20 +29,14 @@ SP(Engine::CObject) CMonsterAttackSign::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSizeX(5);
-	spClone->m_spTransform->SetSizeY(1);
+	spClone->m_spTransform->SetSizeX(3);
+	spClone->m_spTransform->SetSizeY(2);
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_bBillboard = true;
-	spClone->m_fAlphaWidth = 1.f;
-	spClone->m_fAlphaHeight = 6.f;
-	spClone->m_TilingX = 0;
-	spClone->m_TilingY = 0;
-	spClone->m_maxXIndex = 1;
-	spClone->m_maxYIndex = 5;
-	spClone->m_fTIme = 0.f;
+
 	return spClone;
 }
 
@@ -55,8 +49,13 @@ void CMonsterAttackSign::Awake(void)
 void CMonsterAttackSign::Start(void)
 {
 	__super::Start();
-
-	
+	m_fAlphaWidth = 1.f;
+	m_fAlphaHeight = 1.f;
+	m_TilingX = 0;
+	m_TilingY = 0;
+	m_maxXIndex = 1;
+	m_maxYIndex = 0;
+	m_fTIme = 0.f;	
 }
 
 void CMonsterAttackSign::FixedUpdate(void)
@@ -69,7 +68,13 @@ void CMonsterAttackSign::Update(void)
 {
 	__super::Update();
 
-	UpdateFrame(0.1f);
+	if (this->GetTransform()->GetSize().y <= 0)
+	{
+		this->SetDeleteThis(true);
+	}
+
+	this->GetTransform()->AddSizeY(-3.5f * GET_DT);
+
 }
 
 void CMonsterAttackSign::LateUpdate(void)
@@ -80,23 +85,7 @@ void CMonsterAttackSign::LateUpdate(void)
 
 void CMonsterAttackSign::PreRender(LPD3DXEFFECT pEffect)
 {
-	/*_mat matWorld, matView, matProj;
-	
-	matWorld = this->GetGraphics()->GetTransform()->GetWorldMatrix();
-	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
-	matProj = Engine::GET_MAIN_CAM->GetProjMatrix();
-	
-	pEffect->SetMatrix("g_matWorld", &matWorld);
-	pEffect->SetMatrix("g_matView", &matView);
-	pEffect->SetMatrix("g_matProj", &matProj);
-	
-	SP(Engine::CTextureC) spTexture = this->GetGraphics()->GetTexture();
-	
-	pEffect->SetTexture("g_BaseTexture", spTexture->GetTexData()[0][0]->pTexture);
-	pEffect->SetTexture("g_ServeTexture", spTexture->GetTexData()[0][1]->pTexture);*/
-	m_spRectTex->PreRender(m_spGraphics, pEffect);
-
-	
+	m_spRectTex->PreRender(m_spGraphics, pEffect);	
 
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);

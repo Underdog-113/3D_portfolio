@@ -8,9 +8,9 @@
 #define AttackTrail_Tex3Name	L"yun01"
 
 #define UltraTrail_ObjectKey	L"Kiana_Ult_Trail"
-#define UltraTrail_Tex1Name		L"Kiana_CatPaw_Trail"
-#define UltraTrail_Tex2Name		L"Kiana_CatPaw_Trail"
-#define UltraTrail_Tex3Name		L"yun01"
+#define UltraTrail_Tex1Name		L"Yellow"
+#define UltraTrail_Tex2Name		L"Yellow"
+#define UltraTrail_Tex3Name		L"Austerity"
 
 CEffectMaker_Kiana::CEffectMaker_Kiana(CKiana * pKiana)
 {
