@@ -136,8 +136,10 @@ PS_OUT		PS_POINT(PS_IN In)
 
 	float	fAtt = max((g_fRange - fDistance) / g_fRange, 0.f);
 
-	Out.vShade = (saturate(dot(normalize(vLightDir) * -1.f, vNormal)) * (g_vLightDiffuse * g_vMtrlDiffuse) + 
-							   (g_vLightAmbient * (g_vMtrlAmbient + g_vGlobalAmbient))) * fAtt;
+	Out.vShade = saturate(dot(normalize(g_vLightDir) * -1.f, vNormal)) *
+						  (g_vLightDiffuse * g_vMtrlDiffuse) +
+						  (g_vLightAmbient * (g_vMtrlAmbient + g_vGlobalAmbient)) * fAtt;
+	//Out.vShade = floor(Out.vShade * 2) / 2;
 	Out.vShade.a = 1.f;
 
 	vector	vReflect = reflect(normalize(vector(vLightDir.xyz, 0.f)), vNormal);

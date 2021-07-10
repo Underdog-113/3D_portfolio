@@ -23,6 +23,7 @@
     <ClInclude Include="..\Header\AniCtrl.h" />
     <ClInclude Include="..\Header\BoundingVolume.h" />
     <ClInclude Include="..\Header\Camera.h" />
+    <ClInclude Include="..\Header\CameraLight.h" />
     <ClInclude Include="..\Header\CameraManager.h" />
     <ClInclude Include="..\Header\Canvas.h" />
     <ClInclude Include="..\Header\CelShader.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="..\code\AniCtrl.cpp" />
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
+    <ClCompile Include="..\Code\CameraLight.cpp" />
     <ClCompile Include="..\Code\CameraManager.cpp" />
     <ClCompile Include="..\Code\Canvas.cpp" />
     <ClCompile Include="..\Code\CelShader.cpp" />

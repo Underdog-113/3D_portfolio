@@ -1,6 +1,6 @@
 #include "EngineStdafx.h"
 #include "LightManager.h"
-
+#include "CameraLight.h"
 
 
 USING(Engine)
@@ -35,6 +35,12 @@ void CLightManager::Start(void)
 {
 }
 
+void CLightManager::Update(void)
+{
+	for (auto& light : m_vLights)
+		light->UpdateLight();
+}
+
 void CLightManager::OnDestroy(void)
 {
 	ClearLights();
@@ -43,6 +49,13 @@ void CLightManager::OnDestroy(void)
 void CLightManager::AddLight(D3DLIGHT9 * pLightInfo)
 {
 	CLight* pLight = CLight::Create(pLightInfo, (_int)m_vLights.size());
+
+	m_vLights.push_back(pLight);
+}
+
+void CLightManager::AddCameraLight(D3DLIGHT9 * pLightInfo)
+{
+	CLight* pLight = CCameraLight::Create(pLightInfo, (_int)m_vLights.size());
 
 	m_vLights.push_back(pLight);
 }
