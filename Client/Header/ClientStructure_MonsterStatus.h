@@ -35,7 +35,9 @@ typedef struct _Monster_Stage_Status
 	GETTOR_SETTOR(_float, curDef, 0.f, CurDef)
 	GETTOR_SETTOR(_float, buffDef, 0.f, BuffDef)
 
-	GETTOR_SETTOR(_float, breakGauge, 100.f, breakGauge)
+	GETTOR_SETTOR(_float, curBreakGauge, 100.f, CurBreakGauge)
+	GETTOR_SETTOR(_float, maxBreakGauge, 100.f, MaxBreakGauge)
+	GETTOR_SETTOR(_bool, onSuperArmor, false, OnSuperArmor)
 	GETTOR_SETTOR(_uint, hpMagnification, 1, HPMagnification)
 
 }M_Stat;
