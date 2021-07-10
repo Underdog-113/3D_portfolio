@@ -34,6 +34,10 @@ private:
 	/* for.lerp */
 	_bool m_onLerp = false;
 
+	/* for.effect */
+	GETTOR_SETTOR(SP(Engine::CObject), m_spSignEffect, {}, SignEffect)
+	_bool m_onSignEffect = false;
+
 	_bool m_onShoot2 = false;
 	_bool m_onWalk = false;
 

@@ -92,6 +92,7 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 			// 공격 상태로 변경
 			fsm->ChangeState(Name_ATTACK_2);
 			PatternPlaySound(L"Lencer_Skill_Attack.wav", pOwner);
+			m_onSignEffect = false;
 			return;
 		}
 		// 공격2 상태가 끝났다면
@@ -131,6 +132,18 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._43 += (m_atkDis * look.z / 1.2f);
 
 		static_cast<CMO_Lancer*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.42f);
+	}
+
+	/************************* Effect */
+	if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.1f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSignEffect)
+	{
+		m_spSignEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
+		m_spSignEffect->GetTransform()->SetPosition(mPos);
+		m_spSignEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
+		m_spSignEffect->GetTransform()->SetSize(4.f, 2.f, 2.f);
+		m_onSignEffect = true;
 	}
 }
 

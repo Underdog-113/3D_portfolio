@@ -24,6 +24,7 @@ CSickleHitPattern::~CSickleHitPattern()
 void CSickleHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
+	static_cast<CMO_Sickle*>(pOwner)->UnActiveAttackBall();
 
 	// 내가 약피격 당했다면
 	if (Name_Sickle_Hit_L != fsm->GetCurStateString() &&

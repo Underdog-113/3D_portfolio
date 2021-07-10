@@ -103,6 +103,7 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 				PatternPlaySound(L"Lencer_Skill_Attack_2.wav", pOwner);
 				//m_atkReady = false;
 				m_onEffect = false;
+				m_onSignEffect = false;
 				return;
 			}
 		}
@@ -150,6 +151,18 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	/************************* Effect */
+	if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.1f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSignEffect)
+	{
+		m_spSignEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
+		m_spSignEffect->GetTransform()->SetPosition(mPos);
+		m_spSignEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
+		m_spSignEffect->GetTransform()->SetSize(4.f, 2.f, 2.f);
+		m_onSignEffect = true;
+	}
+
+
 	//if (Name_ATTACK_1 == fsm->GetCurStateString() &&
 	//	0.27f <= fsm->GetDM()->GetAniTimeline() &&
 	//	false == m_onEffect)

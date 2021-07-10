@@ -56,6 +56,7 @@ void CMO_Sickle::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
+	//stat.SetBaseHp(445.f);
 	stat.SetBaseHp(445.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
@@ -66,7 +67,7 @@ void CMO_Sickle::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(4);
+	m_pStat->SetHPMagnification(1);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);

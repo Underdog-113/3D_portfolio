@@ -66,7 +66,8 @@ void CMO_Lancer::Start(void)
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(3);
 	m_pStat->SetOnSuperArmor(true);
-	//m_pStat->Set
+	m_pStat->SetMaxBreakGauge(230.f);
+	m_pStat->SetCurBreakGauge(230.f);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
