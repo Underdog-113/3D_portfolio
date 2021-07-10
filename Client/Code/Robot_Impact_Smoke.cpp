@@ -45,7 +45,7 @@ void CRobot_Impact_Smoke::Awake()
 void CRobot_Impact_Smoke::Start()
 {
 	__super::Start();
-	m_fAlpha = 1.f;
+	m_fAlpha = 1.3f;
 	m_fTime = 0.f;
 }
 
@@ -64,7 +64,7 @@ void CRobot_Impact_Smoke::Update()
 		this->SetDeleteThis(true);
 	}
 
-	_float3 _size = _float3(0.3f, 0.3f, 0.3f);
+	_float3 _size = _float3(0.5f, 0.5f, 0.5f);
 
 	m_fAlpha -= 0.3f * GET_DT;
 	m_fTime += 0.2f * GET_DT;
@@ -106,8 +106,8 @@ void CRobot_Impact_Smoke::OnDestroy()
 void CRobot_Impact_Smoke::OnEnable()
 {
 	__super::OnEnable();
-
 }
+
 
 void CRobot_Impact_Smoke::OnDisable()
 {

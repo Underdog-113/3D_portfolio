@@ -78,10 +78,10 @@ PS_OUT		PS_MAIN(PS_IN In)
 	vector vAlbedo = saturate(tex2D(AlbedoSampler, In.vTexUV));
 	//vAlbedo = float4(GetLutColor(vAlbedo.rgb), 1);
 
-	vector vShade = tex2D(ShadeSampler, In.vTexUV);
-	vector vSpecular = tex2D(SpecularSampler, In.vTexUV);
+	vector vShade = saturate(tex2D(ShadeSampler, In.vTexUV));
+	vector vSpecular = saturate(tex2D(SpecularSampler, In.vTexUV));
 
-	Out.vColor = vAlbedo * vShade + vSpecular;
+	Out.vColor = vAlbedo * vShade;// +vSpecular;
 	
 
 	

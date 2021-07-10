@@ -98,6 +98,14 @@
 //Ganesha
 #include "Ganesha_LaserEff.h"
 #include "Ganesha_Charge_Eff.h"
+#include "Ganesha_Dome.h"
+#include "Ganesha_Dome_Impact.h"
+#include "Ganesha_SmokeEff.h"
+#include "Ganesha_UpperEff.h"
+
+//Bronya
+#include "Bronya_Cannon_Charge.h"
+#include "Bronya_Shot_Smoke.h"
 
 #pragma endregion
 
@@ -421,10 +429,17 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	// Spider
 	SP(CSoftEffect) spSpiderExplosionEffect(CSpiderExplosion::Create(true, this));
+	spSpiderExplosionEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Exp");
+	spSpiderExplosionEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Exp");
+	spSpiderExplosionEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spSpiderExplosionEffect);
 
 	// Monster AttackSign
 	SP(CSoftEffect) spMonsterAttack_Sign(CMonsterAttackSign::Create(true, this));
+	spMonsterAttack_Sign->GetComponent<Engine::CGraphicsC>();
+	spMonsterAttack_Sign->GetComponent<Engine::CTextureC>()->AddTexture(L"RedFlare");
+	spMonsterAttack_Sign->GetComponent<Engine::CTextureC>()->AddTexture(L"RedFlare");
+	spMonsterAttack_Sign->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spMonsterAttack_Sign);
 
 	// Sickle
@@ -553,6 +568,56 @@ void CStaticScene::InitEffectPrototypes(void)
 	spGaneshaChargeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spGaneshaChargeEffect);
 
+	SP(CMeshEffect_Client) spGaneshaDomeEff(CGanesha_Dome::Create(true, this));
+	spGaneshaDomeEff->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Dome");
+	spGaneshaDomeEff->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaDomeEff->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaDomeEff->GetComponent<Engine::CTextureC>()->AddTexture(L"Dome_Color");
+	spGaneshaDomeEff->GetComponent<Engine::CTextureC>()->AddTexture(L"Dome_Color");
+	spGaneshaDomeEff->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaDomeEff);
+
+	SP(CMeshEffect_Client) spGaneshaDomeImpact(CGanesha_Dome_Impact::Create(true, this));
+	spGaneshaDomeImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Charge");
+	spGaneshaDomeImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaDomeImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaDomeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"effect_Ring07");
+	spGaneshaDomeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"effect_Ring07");
+	spGaneshaDomeImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaDomeImpact);
+
+	SP(CSoftEffect) spGaneshaSmoke(CGanesha_SmokeEff::Create(true, this));
+	spGaneshaSmoke->GetComponent<Engine::CGraphicsC>();
+	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
+	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
+	spGaneshaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spGaneshaSmoke);
 
 
+	// 텍스처 추가해야함
+	/*SP(CSoftEffect) spGaneshaUpper(CGanesha_UpperEff::Create(true, this));
+	spGaneshaUpper->GetComponent<Engine::CGraphicsC>();
+	spGaneshaUpper->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
+	spGaneshaUpper->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
+	spGaneshaUpper->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spGaneshaUpper);*/
+
+
+	SP(CMeshEffect_Client) spBronyaCharge(CBronya_Cannon_Charge::Create(true, this));
+	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
+	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaCharge->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaCharge->GetComponent<Engine::CTextureC>()->AddTexture(L"Swirl");
+	spBronyaCharge->GetComponent<Engine::CTextureC>()->AddTexture(L"Swirl");
+	spBronyaCharge->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaCharge);
+
+	SP(CMeshEffect_Client) spBronyaShotSmoke(CBronya_Cannon_Charge::Create(true, this));
+	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
+	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaShotSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaShotSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"machineSmoke_3");
+	spBronyaShotSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"machineSmoke_3");
+	spBronyaShotSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaShotSmoke);
 }

@@ -122,6 +122,7 @@ void CKiana_CatPaw_Atk01::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
+
 }
 
 void CKiana_CatPaw_Atk01::PostRender(LPD3DXEFFECT pEffect)

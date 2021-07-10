@@ -130,35 +130,22 @@ void CYongScene::Update(void)
 	__super::Update();
 
 	if (Engine::IMKEY_DOWN(KEY_X))
-	{
-
-		//SP(CScout_Att_Range) spScoutRange = std::dynamic_pointer_cast<CScout_Att_Range>(m_pObjectFactory->AddClone(L"Scout_Att_Range", true, (_int)Engine::ELayerID::Effect, L"MeshEffect"));
-		//spScoutRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Att_Range_Move");
-		//spScoutRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		//spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
-		//spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
-		//spScoutRange->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
-		//spScoutRange->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-
-		//SP(Engine::CObject) spMeshEffect = m_pObjectFactory->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
-	
-
-		Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Charge_Eff", true);
-	
-		/*	SP(CMonsterSpawnBeam) spMeshEffect =
-				std::dynamic_pointer_cast<CMonsterSpawnBeam>(m_pObjectFactory->AddClone(L"MonsterSpawnBeam", true));
-
-			spMeshEffect->GetMesh()->SetMeshData(L"SpawnBeam");
-			spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam_4");
-			spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-			spMeshEffect->GetCollision()->AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
-
-			*/
-
+	{	
+		//Ganesha Smoke Eff
+// 		_float fX = 0;
+// 		for (_int i = 0; i < 8; ++i)
+// 		{
+// 			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
+// 
+// 			// Ganesha Pos X + fX 
+// 			spObj->GetTransform()->SetPositionX(fX);
+// 			///////////////////////////
+// 
+// 			spObj->GetTransform()->SetPositionZ(_float(rand() % 2) );			
+// 			fX += 0.5f;
+// 		}		
 		
+
 	}
 }
 

@@ -148,6 +148,35 @@ void CCameraShake::Preset_HighAttack_Horz(_float3 eventPos)
 	m_zWave.offset = randomOffset;
 }
 
+void CCameraShake::Preset_Kiana_Attack2N3()
+{
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition());
+	m_timer = 0.f;
+
+	m_duration = 0.2f;
+	m_blendInTime = 0.f;
+	m_blendOutTime = 0.1f;
+
+	ResetAllMember();
+
+	float randomOffset = 0.f;
+
+	randomOffset = (rand() % 100) / 100.f;
+	m_xWave.amplitude = 0.03f;
+	m_xWave.frequency = 20.f;
+	m_xWave.offset = randomOffset;
+
+	randomOffset = (rand() % 100) / 100.f;
+	m_yWave.amplitude = 0.03f;
+	m_yWave.frequency = 20.f;
+	m_yWave.offset = randomOffset;
+
+	m_zWave.amplitude = 0.03f;
+	m_zWave.frequency = 0.5f;
+	m_zWave.offset = 0.25f / m_zWave.frequency;
+	m_zWave.ampAxisOffset = m_zWave.amplitude;
+}
+
 void CCameraShake::Preset_Theresa_Charge1Impact(_float3 eventPos)
 {
 	SetDistanceRate(eventPos);

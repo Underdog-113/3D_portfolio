@@ -28,6 +28,12 @@ public:	/* Player Action */
 	void Preset_HighAttack_Vert(_float3 eventPos); // cat paw attack_5, theresa axe down
 	void Preset_HighAttack_Horz(_float3 eventPos); // theresa axe horz
 
+	void Preset_Kiana_Attack2N3();
+
+	void Preset_Kiana_Claw1();
+	void Preset_Kiana_Claw5();
+
+
 	void Preset_Theresa_Charge1Impact(_float3 eventPos);
 	void Preset_Theresa_Charge2Impact(_float3 eventPos);
 	void Preset_Theresa_UltImpact(_float3 eventPos);
