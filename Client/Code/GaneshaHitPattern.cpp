@@ -34,7 +34,7 @@ void CGaneshaHitPattern::Pattern(Engine::CObject* pOwner)
 
 	// 내가 weak 상태가 아니라면
 	if (false == m_onWeak && 
-		0.f >= static_cast<CMonster*>(pOwner)->GetStat()->GetbreakGauge())
+		false == static_cast<CMonster*>(pOwner)->GetStat()->GetOnSuperArmor())
 	{
 		fsm->ChangeState(Name_Ganesha_Weak_Start);
 	}

@@ -41,7 +41,7 @@ void CMO_Lancer::Awake(void)
 
 	m_spStateMachine = AddComponent<CFSM_LancerC>();
 	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(), CLancerDiePattern::Create(), CLancerBasePattern::Create(), CLancerHitPattern::Create());
-	//m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
+	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
 }
 
 void CMO_Lancer::Start(void)
@@ -54,7 +54,7 @@ void CMO_Lancer::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(2522.f);
+	stat.SetBaseHp(4761.f);
 	stat.SetBaseAtk(45.f);
 	stat.SetBaseDef(25.f);
 
@@ -64,7 +64,10 @@ void CMO_Lancer::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(2);
+	m_pStat->SetHPMagnification(3);
+	m_pStat->SetOnSuperArmor(true);
+	m_pStat->SetMaxBreakGauge(230.f);
+	m_pStat->SetCurBreakGauge(230.f);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -122,6 +125,13 @@ void CMO_Lancer::SetBasicName(void)
 
 void CMO_Lancer::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
+	if (true == m_pStat->GetOnSuperArmor())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{

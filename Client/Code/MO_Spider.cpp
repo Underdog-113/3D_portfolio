@@ -55,7 +55,7 @@ void CMO_Spider::Start(void)
 	
 	BaseStat stat;
 	stat.SetBaseHp(321.f);
-	stat.SetBaseAtk(60.f);	// <- 공격력 좀 쎄게 하셔도 될ㄹㄹㄹ듯
+	stat.SetBaseAtk(120.f);
 	stat.SetBaseDef(22.f);
 
 	stat.SetGrowHp(10.f);
@@ -64,6 +64,8 @@ void CMO_Spider::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+	m_pStat->SetMaxBreakGauge(9999.f);
+	m_pStat->SetCurBreakGauge(9999.f);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true, (_int)ELayerID::Attack, L"Explosion")).get();
 	m_pAttackBall->GetTransform()->SetSize(6.f, 6.f, 6.f);
@@ -125,6 +127,13 @@ void CMO_Spider::SetBasicName(void)
 
 void CMO_Spider::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
+	if (true == m_pStat->GetOnSuperArmor())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{

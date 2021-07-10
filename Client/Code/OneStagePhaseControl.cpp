@@ -104,5 +104,4 @@ void COneStagePhaseControl::OpenStageResult(void)
 	CBattleUiManager::GetInstance()->BattleEnd();
 	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
 	ShowCursor(true);
-
 }

@@ -104,7 +104,13 @@ void CWooScene::Update(void)
 			m_spRobot = nullptr;
 		}
 	}
-
+	else if (false == m_vSickles.empty())
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_vSickles.back())->GetStat()->GetCurHp())
+		{
+			m_vSickles.pop_back();
+		}
+	}
 }
 
 void CWooScene::LateUpdate(void)

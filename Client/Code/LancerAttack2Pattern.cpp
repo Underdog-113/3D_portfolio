@@ -29,10 +29,17 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 	SP(CFSM_LancerC) fsm = pOwner->GetComponent<CFSM_LancerC>();
 
 	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
-	//CoolTime(m_walkTime, m_walkCool, m_walkReady);
+	CoolTime(m_walkTime, m_walkCool, m_walkReady);
+
+	/************************* Lerp Move */
+	if (true == m_onLerp && false == pOwner->GetTransform()->GetSlerpOn())
+	{
+		m_onLerp = false;
+	}
 
 	// 내가 공격2 상태가 아니라면 상대를 추적
-	if (Name_ATTACK_2 != fsm->GetCurStateString())
+	if (Name_ATTACK_2 != fsm->GetCurStateString() &&
+		false == m_onLerp)
 	{
 		static_cast<CMO_Lancer*>(pOwner)->ChaseTarget(tPos);
 	}
@@ -45,8 +52,15 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_ATTACK_2 == fsm->GetCurStateString() &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
-			// 앞으로 이동
-			fsm->ChangeState(Name_WALK_FORWARD);
+			// 뒤로 이동
+			fsm->ChangeState(Name_WALK_BACKWARD);
+			m_onLerp = true;
+
+			_float3 dir = tPos - mPos;
+			D3DXVec3Normalize(&dir, &dir);
+
+			pOwner->GetTransform()->SetSlerpOn(true);
+			pOwner->GetTransform()->SetGoalForward(dir);
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_STAND == fsm->GetCurStateString() &&
@@ -55,24 +69,6 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 			// 앞으로 이동
 			fsm->ChangeState(Name_WALK_FORWARD);
 		}
-		//// 내가 이동 중이라면
-		//else if (Name_WALK_FORWARD == fsm->GetCurStateString())
-		//{
-		//	_float3 dir = tPos - mPos;
-
-		//	mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-		//	pOwner->GetTransform()->SetPosition(mPos);
-		//}
-		// 내가 뒤로 이동 중이라면
-		//else if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
-		//	fsm->GetDM()->IsAnimationEnd() &&
-		//	false == m_walkReady)
-		//{
-		//	_float3 dir = tPos - mPos;
-
-		//	mPos -= *D3DXVec3Normalize(&dir, &dir) * GET_DT;
-		//	pOwner->GetTransform()->SetPosition(mPos);
-		//}
 		// 내가 뒤로 이동이 끝났다면
 		else if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
 			fsm->GetDM()->IsAnimationEnd() &&
@@ -90,11 +86,14 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		if ((Name_WALK_FORWARD == fsm->GetCurStateString() ||
 			Name_WALK_BACKWARD == fsm->GetCurStateString() ||
 			Name_STAND == fsm->GetCurStateString()) &&
-			fsm->GetDM()->IsAnimationEnd())
+			fsm->GetDM()->IsAnimationEnd() &&
+			false == m_onLerp)
 		{
 			// 공격 상태로 변경
 			fsm->ChangeState(Name_ATTACK_2);
 			PatternPlaySound(L"Lencer_Skill_Attack.wav", pOwner);
+			m_onSignEffect = false;
+			return;
 		}
 		// 공격2 상태가 끝났다면
 		else if (Name_ATTACK_2 == fsm->GetCurStateString() &&
@@ -102,17 +101,26 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_WALK_BACKWARD);
+			m_onLerp = true;
+
+			_float3 dir = tPos - mPos;
+			D3DXVec3Normalize(&dir, &dir);
+
+			pOwner->GetTransform()->SetSlerpOn(true);
+			pOwner->GetTransform()->SetGoalForward(dir);
 		}
 	}
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_ATTACK_2 == fsm->GetCurStateString() && 0.57f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_ATTACK_2 == fsm->GetCurStateString() && 
+		0.57f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	else if (Name_ATTACK_2 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_ATTACK_2 == fsm->GetCurStateString() && 
+		0.47f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
@@ -123,7 +131,19 @@ void CLancerAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._41 += (m_atkDis * look.x / 1.2f);
 		m_atkMat._43 += (m_atkDis * look.z / 1.2f);
 
-		static_cast<CMO_Lancer*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.42f);
+		static_cast<CMO_Lancer*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.42f);
+	}
+
+	/************************* Effect */
+	if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.1f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSignEffect)
+	{
+		m_spSignEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
+		m_spSignEffect->GetTransform()->SetPosition(mPos);
+		m_spSignEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
+		m_spSignEffect->GetTransform()->SetSize(4.f, 2.f, 2.f);
+		m_onSignEffect = true;
 	}
 }
 

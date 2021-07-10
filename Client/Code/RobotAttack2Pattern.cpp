@@ -231,7 +231,16 @@ void CRobotAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		0.7f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onEffect)
 	{
-		m_spImpactEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact", true);
+		m_spImpactEffect = 
+			Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact", true);
+
+		m_spImpactEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		m_spImpactEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		m_spImpactEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		m_spImpactEffect->GetTransform()->SetPosition(mPos);
+		//m_spImpactEffect->GetTransform()->SetPositionX(mPos.x - 0.3f);
+		//m_spImpactEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
+		//m_spImpactEffect->GetTransform()->SetSize(2.f, 2.f, 2.f);
 
 		//// ÁÖ¸Ô »À Ã£±â
 		//m_pLeftUpperArm = &fsm->GetDM()->GetFrameByName("Bip001_L_Hand")->CombinedTransformMatrix;
