@@ -42,6 +42,7 @@ public:
 	void HitCount(_float lifeTime); // 콤보박스
 	void MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property); // 몬스터 체력바 속성 이름 표시
 	void MonsterStateEnd();
+	bool IsMonsterStateOn();
 
 	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1,  _float playerSp1,
 					 std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2);

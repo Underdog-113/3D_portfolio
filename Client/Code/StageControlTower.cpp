@@ -56,10 +56,9 @@ void CStageControlTower::Update(void)
 	if (m_pPhaseControl)
 		m_pPhaseControl->Update();
 
-	if (m_spCurTarget && m_spCurTarget->GetDeleteThis())
+	if (m_spCurTarget && m_spCurTarget->GetDeleteThis() || !CBattleUiManager::GetInstance()->IsMonsterStateOn())
 	{
-		m_spCurTarget.reset();
-		m_spCurTarget = nullptr;
+		RemoveTarget();
 	}
 
 
@@ -241,6 +240,12 @@ bool CStageControlTower::FindTarget()
 	return false;
 }
 
+void CStageControlTower::RemoveTarget()
+{
+	m_spCurTarget.reset();
+	m_spCurTarget = nullptr;
+}
+
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info, _float3 hitPoint)
 {
 	if (!pMonster || pMonster->GetComponent<CPatternMachineC>()->GetOnDie())
@@ -317,15 +322,15 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 		m_pCameraMan->ShakeCamera_Low(hitPoint);
 		break;
 	case HitInfo::Str_High:
+		m_pTimeSeeker->OnAttackImpactSlow();
 		break;
 	case HitInfo::Str_Airborne:
+		m_pTimeSeeker->OnAttackImpactSlow();
 		break;
 	default:
 		break;
 	}
 
-	if (info.GetStrengthType() == HitInfo::Str_High)
-		m_pTimeSeeker->OnAttackImpactSlow();
 
 	// 3. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
 

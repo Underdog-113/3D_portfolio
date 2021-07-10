@@ -50,7 +50,9 @@ private:
 public:
 	void ShakeCamera_Low(_float3 eventPos);
 
-	void ShakeCamera_Kiana_2N3();
+	void ShakeCamera_Kiana_ForwardAttack();
+	void ShakeCamera_Kiana_Claw5();
+	void ShakeCamera_Kiana_Run();
 
 	void ShakeCamera_Theresa_Charge1Impact(_float3 eventPos);
 	void ShakeCamera_Theresa_Charge2Impact(_float3 eventPos);
