@@ -862,6 +862,9 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff">
       <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff">
+      <UniqueIdentifier>{02a5d758-92b8-4946-9e0b-4c7d15096fad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1715,6 +1718,12 @@
     <ClInclude Include="..\Header\Ganesha_UpperEff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Bronya_Cannon_Charge.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_Shot_Smoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2481,6 +2490,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Ganesha_UpperEff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

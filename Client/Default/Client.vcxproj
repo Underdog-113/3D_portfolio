@@ -204,6 +204,8 @@
     <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h" />
     <ClInclude Include="..\Header\BronyaThrow1Pattern.h" />
+    <ClInclude Include="..\Header\Bronya_Cannon_Charge.h" />
+    <ClInclude Include="..\Header\Bronya_Shot_Smoke.h" />
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
@@ -482,6 +484,8 @@
     <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp" />
     <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp" />
+    <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp" />
+    <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp" />
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />

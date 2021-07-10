@@ -54,9 +54,7 @@ void CRobotDiePattern::Pattern(Engine::CObject* pOwner)
 
 		m_spSoftEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
-		m_spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
-		m_spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
-		m_spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	
 		m_spSoftEffect->GetTransform()->SetPosition(mPos);
 		m_spSoftEffect->GetTransform()->SetPositionX(mPos.x - 0.3f);
 		m_spSoftEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
