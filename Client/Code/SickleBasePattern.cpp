@@ -117,7 +117,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._41 += (m_atkDis * look.x / 2.2f);
 		m_atkMat._43 += (m_atkDis * look.z / 2.2f);
 
-		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.2f);
+		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.28f);
 	}
 
 	/************************* Effect */

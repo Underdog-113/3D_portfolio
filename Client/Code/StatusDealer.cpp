@@ -36,8 +36,6 @@ bool CStatusDealer::Damage_VtoM(V_Stat * pSrc, M_Stat * pDst, _float dmgRate, _f
 	// font
 	mhp -= finalDamage;
 
-	std::cout << "mhp: " << mhp << std::endl;
-	system("cls");
 	if (mhp < 0.f)
 	{
 		pDst->SetCurHp(0.f);

@@ -75,8 +75,8 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	//SpiderSetting();
-	SickleSetting();
+	SpiderSetting();
+	//SickleSetting();
 	//GaneshaSetting();
 	//ScoutSetting();
 	//LancerSetting();
@@ -109,6 +109,13 @@ void CWooScene::Update(void)
 		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_vSickles.back())->GetStat()->GetCurHp())
 		{
 			m_vSickles.pop_back();
+		}
+	}
+	else if (false == m_spSpider)
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spSpider)->GetStat()->GetCurHp())
+		{
+			m_spSpider = nullptr;
 		}
 	}
 }

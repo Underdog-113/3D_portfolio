@@ -64,8 +64,14 @@ void CMO_Spider::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+	m_pStat->SetOnSuperArmor(true);
 	m_pStat->SetMaxBreakGauge(9999.f);
 	m_pStat->SetCurBreakGauge(9999.f);
+
+	m_pSuperArmor->SetHitL(true);
+	m_pSuperArmor->SetHitH(true);
+	m_pSuperArmor->SetAirborne(true);
+	SetWeakTime(7.f);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true, (_int)ELayerID::Attack, L"Explosion")).get();
 	m_pAttackBall->GetTransform()->SetSize(6.f, 6.f, 6.f);
@@ -137,15 +143,40 @@ void CMO_Spider::ApplyHitInfo(HitInfo info)
 	// attack strength
 	switch (info.GetStrengthType())
 	{
-	case HitInfo::Str_Damage:
+	case HitInfo::Str_Damage: // hit 모션 없는 대미지
 		break;
 	case HitInfo::Str_Low:
-		this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		if (false == m_pSuperArmor->GetHitL())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
+		else if (true == m_pSuperArmor->GetHitL())
+		{
+			//if (true == m_pStat->GetOnSuperArmor()) break;
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
 		break;
 	case HitInfo::Str_High:
-		this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		if (false == m_pSuperArmor->GetHitH())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
+		else if (true == m_pSuperArmor->GetHitH())
+		{
+			//if (true == m_pStat->GetOnSuperArmor()) break;
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
 		break;
 	case HitInfo::Str_Airborne:
+		if (false == m_pSuperArmor->GetAirborne())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
+		else if (true == m_pSuperArmor->GetAirborne())
+		{
+			//if (true == m_pStat->GetOnSuperArmor()) break;
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
 		break;
 	}
 }

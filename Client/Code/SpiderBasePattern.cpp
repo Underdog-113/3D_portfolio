@@ -64,6 +64,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Attack_1);
+
 			// effect
 			SP(Engine::CObject) spMeshEffect
 				= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
@@ -85,18 +86,19 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Attack_1 == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMO_Spider*>(pOwner)->UnActiveAttackBall();
+		static_cast<CMO_Spider*>(pOwner)->GetStat()->SetCurHp(0.f);
 		pOwner->SetDeleteThis(true);
 
-		// effect
-		SP(Engine::CObject) spSoftEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
-		spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
-		spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
-		spSoftEffect->GetTransform()->SetPosition(mPos);
-		spSoftEffect->GetTransform()->SetPositionY(mPos.x - 0.1f);
-		spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
-		spSoftEffect->GetTransform()->SetSize(11.f, 9.f, 0.f);
+		//// effect
+		//SP(Engine::CObject) spSoftEffect
+		//	= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
+		//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		//spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
+		//spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+		//spSoftEffect->GetTransform()->SetPosition(mPos);
+		//spSoftEffect->GetTransform()->SetPositionY(mPos.x - 0.1f);
+		//spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
+		//spSoftEffect->GetTransform()->SetSize(11.f, 9.f, 0.f);
 	}
 	// 공격1 상태라면
 	else if (Name_Attack_1 == fsm->GetCurStateString() && 0.89f <= fsm->GetDM()->GetAniTimeline())
