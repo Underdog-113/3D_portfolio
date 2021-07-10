@@ -303,7 +303,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 
 void CBattleUiManager::MonsterStateEnd()
 {
-	m_monsterStateCanvas->SetIsEnabled(true);
+	m_monsterStateCanvas->SetIsEnabled(false);
 }
 
 void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2)

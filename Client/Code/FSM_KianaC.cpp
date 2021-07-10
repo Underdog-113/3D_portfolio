@@ -12,6 +12,7 @@
 
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
+#include "StageCameraMan.h"
 #include "EffectMaker_Kiana.h"
 
 CFSM_KianaC::CFSM_KianaC()
@@ -82,6 +83,7 @@ bool CFSM_KianaC::CheckAction_Attack(const std::wstring& switchStateName, float 
 		{
 			ChangeState(switchStateName);
 			CStageControlTower::GetInstance()->FindTarget();
+			CStageControlTower::GetInstance()->ActAttack();
 			return true;
 		}
 	}
@@ -623,7 +625,6 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 	}
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk02)
 	{
-		m_pEffectMaker->CreateEffect_Attack2();
 		m_checkEffect = true;
 		
 		PlaySound_Attack_RandomVoice();
@@ -632,7 +633,11 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_1);
 		else
+		{
 			PlaySound_Effect(Sound_Attack_2_Effect);
+			m_pEffectMaker->CreateEffect_Attack2();
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_2N3();
+		}
 	}
 
 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk02 + 0.1f)
@@ -685,7 +690,6 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 	}
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk03)
 	{
-		m_pEffectMaker->CreateEffect_Attack3();
 		m_checkEffect = true;
 
 		PlaySound_Attack_RandomVoice();
@@ -694,7 +698,11 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_1);
 		else
+		{
 			PlaySound_Effect(Sound_Attack_3_Effect);
+			m_pEffectMaker->CreateEffect_Attack3();
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_2N3();
+		}
 	}
 
 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk03 + 0.1f)
