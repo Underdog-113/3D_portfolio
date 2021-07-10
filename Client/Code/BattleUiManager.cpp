@@ -117,6 +117,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_1").get()));
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_2").get()));
 
+	m_barkGaugeBar = static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_2").get());
+
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_3").get()));
 	m_monsterWhiteHpBar[0]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_4").get()));
@@ -167,6 +169,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
+
+	SquadOff(pScene);
 }
 
 void CBattleUiManager::Update(void)
@@ -421,6 +425,17 @@ void CBattleUiManager::MonsterHpUp(_float value)
 	}
 }
 
+void CBattleUiManager::BreakGaugeSeeting(_float value)
+{
+	m_barkGaugeBar->SetMaxValue(value);
+
+}
+
+void CBattleUiManager::BreakGaugeDown(_float value)
+{
+	m_barkGaugeBar->SetValue(m_barkGaugeBar->GetValue() - value);
+}
+
 void CBattleUiManager::PlayerHp(_float value)
 {
 	for (auto object : m_playerHpBar)
@@ -587,9 +602,37 @@ void CBattleUiManager::monsterHpBarCheck()
 
 		m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
 	}
-	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount == 1)
+	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount <= 1)
 	{
 		m_monsterHpCount--;
 		m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"");
+	}
+}
+
+void CBattleUiManager::SquadOff(Engine::CScene * pScene)
+{
+	size_t squadCount = CDataManager::GetInstance()->FindSquadData()->GetValkyriesList().size();
+
+	if (squadCount == 1)
+	{
+		pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_5")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerHPBar1_5")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_PlayerProperty_8")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar1_6")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_SkillCollTime_14")->SetIsEnabled(false);
+
+		pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_6")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerHPBar2_7")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar2_8")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_SkillCollTime_13")->SetIsEnabled(false);
+	}
+	else if (squadCount == 2)
+	{
+		pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_6")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerHPBar2_7")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar2_8")->SetIsEnabled(false);
+		pScene->FindObjectByName(L"MainCanvas_SkillCollTime_13")->SetIsEnabled(false);
 	}
 }

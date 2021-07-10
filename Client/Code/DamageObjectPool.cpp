@@ -70,7 +70,7 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 hitPoint, _fl
 
 		Engine::CObject* object = m_disabledObjectList.front();
 		object->GetComponent<CDamageFontC>()->AddDamageFontInit(target, hitPoint, intervalSum, upSpped, lifeTime, value, color, pos);
-		intervalSum += interval;
+		intervalSum -= interval;
 		object->GetTransform()->SetSize(size);
 		m_disabledObjectList.pop_front();
 		m_activationObjectList.emplace_back(object);

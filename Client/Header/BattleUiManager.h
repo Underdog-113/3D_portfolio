@@ -62,6 +62,8 @@ public:
 
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
+	void BreakGaugeSeeting(_float value);
+	void BreakGaugeDown(_float value);
 	void PlayerHp(_float value);
 	void PlayerHpMax(_float value);
 	void PlayerHpDown(_float value);
@@ -85,6 +87,7 @@ public:
 private:
 	void skillActivationImageCheck();
 	void monsterHpBarCheck();
+	void SquadOff(Engine::CScene * pScene);
 private:
 	_bool m_activation;
 	_int m_monsterHpCount;
@@ -118,6 +121,7 @@ private:
 	std::vector<CButton*> m_skillButton; // 스킬버튼
 	std::vector<Engine::CSlider*> m_coolTimeSlider;
 
+	Engine::CSlider* m_barkGaugeBar;
 	std::vector<Engine::CSlider*> m_monsterHpBar;
 	std::vector<Engine::CSlider*> m_monsterWhiteHpBar;
 	std::vector<Engine::CSlider*> m_playerHpBar;
