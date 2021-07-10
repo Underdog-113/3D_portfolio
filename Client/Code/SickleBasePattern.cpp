@@ -99,12 +99,14 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && 0.47f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_Sickle_Attack_1 == fsm->GetCurStateString() &&
+		0.47f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMO_Sickle*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() && 0.37f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Sickle_Attack_1 == fsm->GetCurStateString() &&
+		0.37f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
@@ -115,7 +117,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._41 += (m_atkDis * look.x / 2.2f);
 		m_atkMat._43 += (m_atkDis * look.z / 2.2f);
 
-		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.2f);
+		static_cast<CMO_Sickle*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_atkMat, 0.28f);
 	}
 
 	/************************* Effect */

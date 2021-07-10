@@ -4,8 +4,8 @@
 #define MidTake 3.f
 #define FarTake 5.f
 
-#define NearAngle 0.f
-#define MidAngle D3DXToRadian(10.f)
+#define NearAngle D3DXToRadian(10.f)
+#define MidAngle D3DXToRadian(15.f)
 #define FarAngle D3DXToRadian(15.f)
 
 
@@ -35,6 +35,11 @@ public:
 	void SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void ChangeTake();
 
+public:
+	void OnAttackDirectionCorrecting();
+	void AppendAttackDirectionCorrecting();
+
+private:
 	void AppendTargetCorrecting();
 	void AppendHorizontalCorrecting();
 	
@@ -44,6 +49,10 @@ public:
 
 public:
 	void ShakeCamera_Low(_float3 eventPos);
+
+	void ShakeCamera_Kiana_ForwardAttack();
+	void ShakeCamera_Kiana_Claw5();
+	void ShakeCamera_Kiana_Run();
 
 	void ShakeCamera_Theresa_Charge1Impact(_float3 eventPos);
 	void ShakeCamera_Theresa_Charge2Impact(_float3 eventPos);
@@ -102,6 +111,11 @@ private:
 	
 	_float m_horzCorrectingSpeed = 5.f;
 	_float m_speedIncreaseTimer = 0.f;
+
+	_float m_attackCorrectingTimer = 0.f;
+	_float m_attackCorrectingAngle = 0.f;
+	bool m_isAttackCorrecting = false;
+
 private:
 	float m_enterAutoTimer = 0.f;
 

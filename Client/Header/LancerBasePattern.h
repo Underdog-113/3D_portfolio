@@ -21,14 +21,19 @@ private:
 	_float m_atkCool = 6.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
-	_float m_walkCool = 5.f; // 공격 끝나고 이동 시간
+	_float m_walkCool = 0.8f; // 공격 끝나고 이동 시간
 
 	_bool m_atkReady = true; // true : 공격 가능, false : 공격 불가
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_atkMat;
 
+	/* for.lerp */
+	_bool m_onLerp = false;
+
 	/* for.effect */
+	GETTOR_SETTOR(SP(Engine::CObject), m_spSignEffect, {}, SignEffect)
+	_bool m_onSignEffect = false;
 	_bool m_onEffect = false;
 };
 

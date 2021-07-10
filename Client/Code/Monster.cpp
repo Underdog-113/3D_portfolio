@@ -55,6 +55,7 @@ void CMonster::Start(void)
 
 		m_pStat = new M_Stat;
 		m_pStat->SetupStatus(&stat);
+		m_pSuperArmor = new M_SuperArmor;
 	}
 	
 	// select ChannelID for Sound
@@ -69,6 +70,18 @@ void CMonster::FixedUpdate(void)
 void CMonster::Update(void)
 {
 	__super::Update();
+
+	if (false == m_pStat->GetOnSuperArmor())
+	{
+		m_accTime += GET_DT;
+
+		if (m_accTime >= m_weakTime)
+		{
+			m_pStat->SetOnSuperArmor(true);
+			m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
+			m_accTime = 0.f;
+		}
+	}
 }
 
 void CMonster::LateUpdate(void)
@@ -125,13 +138,14 @@ void CMonster::SetBasicName(void)
 }
 void CMonster::ApplyHitInfo(HitInfo info)
 {
-	_float breakGauge = m_pStat->GetbreakGauge() - info.GetBreakDamage();
+	_float breakGauge = m_pStat->GetCurBreakGauge() - info.GetBreakDamage();
 
-	if (breakGauge < 0.f)
+	if (breakGauge <= 0.f)
 	{
 		breakGauge = 0.f;
+		m_pStat->SetOnSuperArmor(false);
 	}
-	m_pStat->SetbreakGauge(breakGauge);
+	m_pStat->SetCurBreakGauge(breakGauge);
 }
 
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)

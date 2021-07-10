@@ -280,6 +280,60 @@ void CStageCameraMan::ChangeTake()
 	}
 }
 
+void CStageCameraMan::OnAttackDirectionCorrecting()
+{
+	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+
+	_float3 actorForward = pActor->GetTransform()->GetForward();
+	actorForward.y = 0.f;
+	D3DXVec3Normalize(&actorForward, &actorForward);
+	_float3 camForward = m_spCamera->GetTransform()->GetForward();
+	camForward.y = 0.f;
+	D3DXVec3Normalize(&camForward, &camForward);
+
+	float angleSynchroRate = D3DXVec3Dot(&actorForward, &camForward);
+	angleSynchroRate = GET_MATH->RoundOffRange(angleSynchroRate, 1);
+
+	if (angleSynchroRate > 0.99f)
+	{
+		m_isAttackCorrecting = false;
+		return;
+	}
+
+	_float3 crossVector = ZERO_VECTOR;
+	D3DXVec3Cross(&crossVector, &camForward, &actorForward);
+	if (crossVector.y > 0.f)
+	{
+		// right
+		m_attackCorrectingAngle = D3DXToRadian(10.f);
+	}
+	else
+	{
+		// left
+
+		m_attackCorrectingAngle = -D3DXToRadian(10.f);
+	}
+
+	m_attackCorrectingTimer = 0.f;
+	m_isAttackCorrecting = true;
+}
+
+void CStageCameraMan::AppendAttackDirectionCorrecting()
+{
+	if (!m_isAttackCorrecting)
+		return;
+
+	m_attackCorrectingTimer += GET_PLAYER_DT * 2.f;
+
+	if (m_attackCorrectingTimer > 1.f)
+	{
+		m_isAttackCorrecting = false;
+		return;
+	}
+
+	m_rotateYDst += m_attackCorrectingAngle * GET_PLAYER_DT * 2.f;
+}
+
 void CStageCameraMan::AppendTargetCorrecting()
 {
 	auto pCT = CStageControlTower::GetInstance();
@@ -311,19 +365,21 @@ void CStageCameraMan::AppendTargetCorrecting()
 		return;
 	}
 
-
 	_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
 	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 
 	_float3 dir = targetPos - actorPos;
 	_float distance = D3DXVec3Length(&dir) * 0.55f;
-	
+
 	D3DXVec3Normalize(&dir, &dir);
 	m_dstPivotPos = actorPos + dir * distance;
 }
 
 void CStageCameraMan::AppendHorizontalCorrecting()
 {
+	if (m_isTargeting)
+		return;
+
 	_float rotateAngle = 45.f;
 	bool isCorrecting = false;
 	m_speedIncreaseTimer += GET_PLAYER_DT * 2.f;
@@ -405,7 +461,6 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 
 }
 
-
 bool CStageCameraMan::MouseControlMode()
 {
 	if (Engine::IMKEY_PRESS(MOUSE_RIGHT))
@@ -481,7 +536,7 @@ void CStageCameraMan::AutoControlMode()
 	}
 
 	AppendHorizontalCorrecting();
-
+	AppendAttackDirectionCorrecting();
 
 	ChangeTake();
 	
@@ -490,6 +545,20 @@ void CStageCameraMan::AutoControlMode()
 void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)
 {
 	m_pCameraShake->Preset_LowAttack(eventPos);
+}
+
+void CStageCameraMan::ShakeCamera_Kiana_ForwardAttack()
+{
+	m_pCameraShake->Preset_Kiana_ForwardAttack();
+}
+
+void CStageCameraMan::ShakeCamera_Kiana_Claw5()
+{
+	m_pCameraShake->Preset_Kiana_Claw5();
+}
+
+void CStageCameraMan::ShakeCamera_Kiana_Run()
+{
 }
 
 void CStageCameraMan::ShakeCamera_Theresa_Charge1Impact(_float3 eventPos)

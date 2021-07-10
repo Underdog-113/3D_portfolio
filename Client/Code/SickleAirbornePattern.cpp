@@ -22,14 +22,11 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
 
-	std::cout << "Break Gauge : " << static_cast<CMonster*>(pOwner)->GetStat()->GetbreakGauge() << std::endl;
-
 	// 내가 break guage가 0이고, airborne 상태, standup 상태가 아니라면
 	if (Name_Sickle_Throw_01 != fsm->GetCurStateString() &&
 		Name_Sickle_Throw_02 != fsm->GetCurStateString() &&
 		Name_Sickle_StandUp != fsm->GetCurStateString() &&
-		Name_Sickle_Hit_Throw != fsm->GetCurStateString() &&
-		0 >= static_cast<CMonster*>(pOwner)->GetStat()->GetbreakGauge())
+		Name_Sickle_Hit_Throw != fsm->GetCurStateString())
 	{
 		fsm->ChangeState(Name_Sickle_Throw_01);
 		//PatternPlaySound(L"Sickle_Dead.wav", pOwner);

@@ -16,6 +16,8 @@ CLancerHitPattern::~CLancerHitPattern()
 void CLancerHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_LancerC) fsm = pOwner->GetComponent<CFSM_LancerC>();
+	
+	static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 
 	// 내가 약피격 당했다면
 	if (Name_HIT_L != fsm->GetCurStateString() &&

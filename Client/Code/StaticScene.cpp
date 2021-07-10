@@ -612,7 +612,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaCharge->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaCharge);
 
-	SP(CMeshEffect_Client) spBronyaShotSmoke(CBronya_Cannon_Charge::Create(true, this));
+	SP(CMeshEffect_Client) spBronyaShotSmoke(CBronya_Shot_Smoke::Create(true, this));
 	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
 	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spBronyaShotSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);

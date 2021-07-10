@@ -61,6 +61,7 @@ void CDamageFontC::Update(SP(CComponent) spThis)
 	{
 		GetOwner()->SetIsEnabled(false);
 		m_offSet = _float3(0, 0, 0);
+		m_target = nullptr;
 	}
 }
 
@@ -70,6 +71,7 @@ void CDamageFontC::LateUpdate(SP(CComponent) spThis)
 	{
 		GetOwner()->SetIsEnabled(false);
 		m_offSet = _float3(0, 0, 0);
+		m_target = nullptr;
 	}
 }
 

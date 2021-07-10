@@ -75,11 +75,11 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	//SpiderSetting();
+	SpiderSetting();
 	//SickleSetting();
 	//GaneshaSetting();
-	//ScoutSetting(); // ÇÏ´ÃÀÇ ¿ÕÀÚÁö..
-	LancerSetting();
+	//ScoutSetting();
+	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
 	//BronyaSetting();
@@ -95,6 +95,7 @@ void CWooScene::Update(void)
 	__super::Update();
 
 	m_pController->Update();
+	CBattleUiManager::GetInstance()->Update();
 
 	if (nullptr != m_spRobot)
 	{
@@ -103,7 +104,20 @@ void CWooScene::Update(void)
 			m_spRobot = nullptr;
 		}
 	}
-
+	else if (false == m_vSickles.empty())
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_vSickles.back())->GetStat()->GetCurHp())
+		{
+			m_vSickles.pop_back();
+		}
+	}
+	else if (false == m_spSpider)
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spSpider)->GetStat()->GetCurHp())
+		{
+			m_spSpider = nullptr;
+		}
+	}
 }
 
 void CWooScene::LateUpdate(void)
@@ -213,10 +227,10 @@ void CWooScene::SickleSetting(void)
 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
 	m_vSickles.emplace_back(spSickleClone);
 
-	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	//spSickleClone->GetTransform()->SetPosition(5, 0, 5);
-	//std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	//m_vSickles.emplace_back(spSickleClone);
+// 	spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
+// 	spSickleClone->GetTransform()->SetPosition(5, 0, 5);
+// 	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
+// 	m_vSickles.emplace_back(spSickleClone);
 
 	//spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
 	//spSickleClone->GetTransform()->SetPosition(2, 0, 2);

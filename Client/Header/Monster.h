@@ -75,10 +75,15 @@ protected:
 	GETTOR				(M_Stat*,						m_pStat,			nullptr,						Stat)
 	GETTOR				(CAttackBall*,					m_pAttackBall,		nullptr,						AttackBall)
 	GETTOR				(CAttackBox*,					m_pAttackBox,		nullptr,						AttackBox)
+	GETTOR				(M_SuperArmor*,					m_pSuperArmor,		nullptr,						SuperArmor)
 	GETTOR_SETTOR		(EChannelID,					m_channelID,		EChannelID::NumOfChannelID,		ChannelID)
 	GETTOR_SETTOR		(EChannelID,					m_hitChannelID,		EChannelID::NumOfChannelID,		HitChannelID)
 	GETTOR_SETTOR		(_float,						m_spawnTimer,		UNDEFINED,						SpawnTimer)
 	GETTOR_SETTOR		(SP(CPatternMachineC),			m_spPatternMachine,	nullptr,						PatternMachine)
 	GETTOR_SETTOR		(V_Stat::Valkyrie_Type,			m_valkyrieType,		V_Stat::Valkyrie_Type::KIANA,	ValkyrieType)
 	GETTOR_SETTOR		(_bool,							m_isBoss,			false,							IsBoss)
+	GETTOR_SETTOR		(_float,						m_weakTime,			5.f,							WeakTime) // SuperArmor가 깨지고 n초 후에 breakGauge 채우기 전까지의 시간
+
+private:
+	_float m_accTime = 0.f;
 };
