@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\SpiderExplosion.h"
+#include "..\Header\Ganesha_SmokeEff.h"
 
-_uint CSpiderExplosion::m_s_uniqueID = 0;
+_uint CGanesha_SmokeEff::m_s_uniqueID = 0;
 
-CSpiderExplosion::CSpiderExplosion()
+CGanesha_SmokeEff::CGanesha_SmokeEff()
 {
 }
 
 
-CSpiderExplosion::~CSpiderExplosion()
+CGanesha_SmokeEff::~CGanesha_SmokeEff()
 {
 }
 
-SP(CSpiderExplosion) CSpiderExplosion::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CGanesha_SmokeEff) CGanesha_SmokeEff::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CSpiderExplosion) spInstance(new CSpiderExplosion, Engine::SmartDeleter<CSpiderExplosion>);
+	SP(CGanesha_SmokeEff) spInstance(new CGanesha_SmokeEff, Engine::SmartDeleter<CGanesha_SmokeEff>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +22,10 @@ SP(CSpiderExplosion) CSpiderExplosion::Create(_bool isStatic, Engine::CScene * p
 	return spInstance;
 }
 
-SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
+SP(Engine::CObject) CGanesha_SmokeEff::MakeClone(void)
 {
-	SP(CSpiderExplosion) spClone(new CSpiderExplosion, Engine::SmartDeleter<CSpiderExplosion>);
+	SP(CGanesha_SmokeEff) spClone(new CGanesha_SmokeEff, Engine::SmartDeleter<CGanesha_SmokeEff>);
+
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -36,91 +37,92 @@ SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
 	return spClone;
 }
 
-void CSpiderExplosion::Awake(void)
+void CGanesha_SmokeEff::Awake(void)
 {
 	__super::Awake();
-	m_spTransform->SetSizeX(6);
-	m_spTransform->SetSizeY(10);
+
 }
 
-void CSpiderExplosion::Start(void)
+void CGanesha_SmokeEff::Start(void)
 {
 	__super::Start();
 
-	m_fAlphaWidth = 16.f;
-	m_fAlphaHeight = 1.f;
+	m_fAlphaWidth = 7.f;
+	m_fAlphaHeight = 3.f;
 	m_TilingX = 0;
 	m_TilingY = 0;
 
-	m_maxXIndex = 16;
-	m_maxYIndex = 0;
+	m_maxXIndex = 7;
+	m_maxYIndex = 2;
 	m_fTIme = 0.f;
 }
 
-void CSpiderExplosion::FixedUpdate(void)
+void CGanesha_SmokeEff::FixedUpdate(void)
 {
 	__super::FixedUpdate();
+
 }
 
-void CSpiderExplosion::Update(void)
+void CGanesha_SmokeEff::Update(void)
 {
 	__super::Update();
 
-	UpdateFrame(0.05f);
+	UpdateFrame(0.02f);
 }
 
-void CSpiderExplosion::LateUpdate(void)
+void CGanesha_SmokeEff::LateUpdate(void)
 {
 	__super::LateUpdate();
-
 }
 
-void CSpiderExplosion::PreRender(LPD3DXEFFECT pEffect)
+void CGanesha_SmokeEff::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+
+	pEffect->CommitChanges();
 }
 
-void CSpiderExplosion::Render(LPD3DXEFFECT pEffect)
+void CGanesha_SmokeEff::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
 
 }
 
-void CSpiderExplosion::PostRender(LPD3DXEFFECT pEffect)
+void CGanesha_SmokeEff::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PostRender(m_spGraphics, pEffect);
 
 }
 
-void CSpiderExplosion::OnDestroy(void)
+void CGanesha_SmokeEff::OnDestroy(void)
 {
 	__super::OnDestroy();
 
 }
 
-void CSpiderExplosion::OnEnable(void)
+void CGanesha_SmokeEff::OnEnable(void)
 {
 	__super::OnEnable();
 
 }
 
-void CSpiderExplosion::OnDisable(void)
+void CGanesha_SmokeEff::OnDisable(void)
 {
 	__super::OnDisable();
 
 }
 
-void CSpiderExplosion::SetBasicName(void)
+void CGanesha_SmokeEff::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
 }
 
-void CSpiderExplosion::UpdateFrame(_float _frmSpeed)
+void CGanesha_SmokeEff::UpdateFrame(_float _frmSpeed)
 {
 	m_fTIme += GET_DT;
 

@@ -793,14 +793,8 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range">
       <UniqueIdentifier>{ebed8560-5517-420c-a919-68a3f3c4ae7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff">
-      <UniqueIdentifier>{0910b4d3-2a6a-487e-8dfb-d5f5f4423cee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect">
       <UniqueIdentifier>{4e257c1f-0474-4799-84c0-2ed19d18476f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect\Robot_Plane">
-      <UniqueIdentifier>{0aca0ce5-27b1-42a5-8dd0-e0f554705b6d}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross">
       <UniqueIdentifier>{ec3bff50-cc42-4278-add9-ec9a50bf84de}</UniqueIdentifier>
@@ -823,23 +817,8 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
       <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
     </Filter>
-<Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
-  <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
-</Filter>
-<Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
-  <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
-</Filter>
-<Filter Include="03.Component\00.UI\12.SizeUp">
-  <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
-</Filter>
-<Filter Include="04.Shader\13.FaceShader">
-  <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
-</Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff">
       <UniqueIdentifier>{b3b303c8-8a9a-47b8-b40d-42b4d00c2d14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\GaneshUpperEff">
-      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_RollingEff">
       <UniqueIdentifier>{121daa22-86d1-48e7-8db5-bb37d1ef3930}</UniqueIdentifier>
@@ -858,6 +837,30 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff">
       <UniqueIdentifier>{28d3c19b-93ec-46ad-a0f4-59aa998a728a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
+      <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
+      <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\12.SizeUp">
+      <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\13.FaceShader">
+      <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff">
+      <UniqueIdentifier>{0910b4d3-2a6a-487e-8dfb-d5f5f4423cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff">
+      <UniqueIdentifier>{847b0b22-bcac-4ba7-8ce0-d4a7b15e0a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact">
+      <UniqueIdentifier>{6d293627-7985-4854-b46f-015740f997d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff">
+      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1632,9 +1635,8 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\RobotHookEff.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
+      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Plane.h" />
     <ClInclude Include="Theresa_CrossBloodyHug.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClInclude>
@@ -1650,8 +1652,6 @@
     <ClInclude Include="..\Header\SickleAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Robot_Impact.h" />
-    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
     </ClInclude>
@@ -1660,6 +1660,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\Lancer_Impact.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_LaserEff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ThreeStageScene.h">
       <Filter>01.Scene\03.ThreeStageScene</Filter>
@@ -1684,6 +1690,30 @@
     </ClInclude>
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Robot_Plane.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Dome.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Dome_Impact.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_SmokeEff.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Impact_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_UpperEff.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2381,9 +2411,8 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RobotHookEff.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\04.RobotHoockEff</Filter>
+      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Plane.cpp" />
     <ClCompile Include="Theresa_CrossBloodyHug.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
     </ClCompile>
@@ -2396,8 +2425,6 @@
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
-    <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
     </ClCompile>
@@ -2406,6 +2433,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Lancer_Impact.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_LaserEff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp">
       <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
@@ -2425,11 +2458,29 @@
     <ClCompile Include="..\Code\FaceShader.cpp">
       <Filter>04.Shader\13.FaceShader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_LaserEff.cpp">
-        <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
+    <ClCompile Include="..\Code\Robot_Impact.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Robot_Plane.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Dome.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Impact_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_UpperEff.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

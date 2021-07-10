@@ -92,6 +92,16 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_coolTimeSlider[Button_Type::SpecialButton]->AddComponent<CSkillCollTimcC>();
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_12").get()));
 	m_coolTimeSlider[Button_Type::SkillButton]->AddComponent<CSkillCollTimcC>();
+
+	pScene->FindObjectByName(L"MainCanvas_Image_22")->AddComponent<CSizeUpC>()->SetSize(171.3f);
+	pScene->FindObjectByName(L"MainCanvas_Image_22")->GetComponent<CSizeUpC>()->SetSpeed(150.0f);
+	pScene->FindObjectByName(L"MainCanvas_Image_22")->SetIsEnabled(false);
+	m_vQte.emplace_back(pScene->FindObjectByName(L"MainCanvas_Image_22").get());
+
+	pScene->FindObjectByName(L"MainCanvas_Image_23")->AddComponent<CSizeUpC>()->SetSize(171.3f);
+	pScene->FindObjectByName(L"MainCanvas_Image_23")->GetComponent<CSizeUpC>()->SetSpeed(150.0f);
+	pScene->FindObjectByName(L"MainCanvas_Image_23")->SetIsEnabled(false);
+	m_vQte.emplace_back(pScene->FindObjectByName(L"MainCanvas_Image_23").get());
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//MonsterStateCanvas
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
@@ -303,7 +313,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 
 void CBattleUiManager::MonsterStateEnd()
 {
-	m_monsterStateCanvas->SetIsEnabled(true);
+	m_monsterStateCanvas->SetIsEnabled(false);
 }
 
 void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2)
@@ -530,6 +540,16 @@ void CBattleUiManager::BattleEnd()
 
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->GetComponent<Engine::CTextC>()
 		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
+}
+
+void CBattleUiManager::QteOn(_int value)
+{
+	m_vQte[value]->SetIsEnabled(true);
+}
+
+void CBattleUiManager::QteOff(_int value)
+{
+	m_vQte[value]->SetIsEnabled(false);
 }
 
 void CBattleUiManager::skillActivationImageCheck()
