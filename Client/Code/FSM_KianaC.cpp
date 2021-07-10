@@ -276,6 +276,8 @@ bool CFSM_KianaC::CheckAction_BranchAttack()
 		if (m_pDM->GetAniTimeline() > Cool_BranchAttack)
 		{
 			ChangeState(Name_Attack_3_Branch);
+			CStageControlTower::GetInstance()->FindTarget();
+			CStageControlTower::GetInstance()->ActAttack();
 			return true;
 		}
 	}
@@ -563,14 +565,19 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
 	{
-		m_pEffectMaker->CreateEffect_Attack1();
 		PlaySound_Attack_RandomVoice();
 		m_pKiana->ActiveAttackBall(1.1f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
+		{
 			PlaySound_Effect(Sound_Ult_Att_0);
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_ForwardAttack();
+		}
 		else
+		{
 			PlaySound_Effect(Sound_Attack_1_Effect);
+			m_pEffectMaker->CreateEffect_Attack1();
+		}
 
 		m_checkEffect = true;
 	}
@@ -636,7 +643,7 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		{
 			PlaySound_Effect(Sound_Attack_2_Effect);
 			m_pEffectMaker->CreateEffect_Attack2();
-			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_2N3();
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_ForwardAttack();
 		}
 	}
 
@@ -701,7 +708,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		{
 			PlaySound_Effect(Sound_Attack_3_Effect);
 			m_pEffectMaker->CreateEffect_Attack3();
-			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_2N3();
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_ForwardAttack();
 		}
 	}
 
@@ -738,8 +745,7 @@ void CFSM_KianaC::Attack_3_Branch_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_3_Branch);
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
-	m_checkEffect = false;
-	m_checkAttack = false;
+	ResetCheckMembers();
 
 
 	if (m_pKiana->GetUltraMode())
@@ -788,6 +794,7 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 void CFSM_KianaC::Attack_3_Branch_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_4_Init(void)
@@ -815,7 +822,6 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk04)
 	{
-		m_pEffectMaker->CreateEffect_Attack4(-0.05f);
 
 		if (m_pKiana->GetUltraMode())
 		{
@@ -829,7 +835,10 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 		if (m_pKiana->GetUltraMode())
 			PlaySound_Effect(Sound_Ult_Att_2);
 		else
+		{
 			PlaySound_Effect(Sound_Attack_4_Effect);
+			m_pEffectMaker->CreateEffect_Attack4(-0.05f);
+		}
 	}
 
 	if (!m_checkEffectSecond && !m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Atk04 + 0.05f)
@@ -842,14 +851,15 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 	{
 		m_pKiana->UnActiveAttackBall();
 
-		m_pEffectMaker->CreateEffect_Attack4(0.f);
+		if (!m_pKiana->GetUltraMode())
+			m_pEffectMaker->CreateEffect_Attack4(0.f);
 		m_checkEffectSecond = true;
 		m_checkAttack = false;
 	}
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Atk04 + 0.15f)
 	{
-		m_pKiana->ActiveAttackBall(1.4f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.4f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
@@ -888,8 +898,7 @@ void CFSM_KianaC::Attack_4_Branch_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack_4_Branch);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
-	m_checkEffect = false;
-	m_checkAttack = false;
+	ResetCheckMembers();
 
 	if (m_pKiana->GetUltraMode())
 		CStageControlTower::GetInstance()->SetCameraFarTake();
@@ -912,7 +921,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 
 	if (!m_checkAttack &&  m_pDM->GetAniTimeline() > 0.2)
 	{
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pKiana->GetLeftToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
@@ -930,6 +939,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 void CFSM_KianaC::Attack_4_Branch_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pKiana->UnActiveAttackBall();
 }
 
 void CFSM_KianaC::Attack_5_Init(void)
@@ -964,9 +974,15 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
+		{
 			PlaySound_Effect(Sound_Ult_Att_3);
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_Claw5();
+		}
 		else
+		{
+			m_pEffectMaker->CreateEffect_Attack5();
 			PlaySound_Effect(Sound_Attack_5_Effect);
+		}
 	}
 
 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)

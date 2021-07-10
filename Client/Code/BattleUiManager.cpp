@@ -316,6 +316,11 @@ void CBattleUiManager::MonsterStateEnd()
 	m_monsterStateCanvas->SetIsEnabled(false);
 }
 
+bool CBattleUiManager::IsMonsterStateOn()
+{
+	return m_monsterStateCanvas->GetIsEnabled();
+}
+
 void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2)
 {
 	m_playerIllustration[0]->GetTexture()->ChangeTexture(playerTexture1, 0);

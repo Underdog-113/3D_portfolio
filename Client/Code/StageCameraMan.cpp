@@ -547,9 +547,18 @@ void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)
 	m_pCameraShake->Preset_LowAttack(eventPos);
 }
 
-void CStageCameraMan::ShakeCamera_Kiana_2N3()
+void CStageCameraMan::ShakeCamera_Kiana_ForwardAttack()
 {
-	m_pCameraShake->Preset_Kiana_Attack2N3();
+	m_pCameraShake->Preset_Kiana_ForwardAttack();
+}
+
+void CStageCameraMan::ShakeCamera_Kiana_Claw5()
+{
+	m_pCameraShake->Preset_Kiana_Claw5();
+}
+
+void CStageCameraMan::ShakeCamera_Kiana_Run()
+{
 }
 
 void CStageCameraMan::ShakeCamera_Theresa_Charge1Impact(_float3 eventPos)
