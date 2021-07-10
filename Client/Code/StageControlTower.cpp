@@ -137,6 +137,8 @@ void CStageControlTower::ChangePhase(EOneStagePhase phaseType)
 
 void CStageControlTower::ActAttack()
 {
+	if (!m_spCurTarget)
+		m_pCameraMan->OnAttackDirectionCorrecting();
 }
 
 void CStageControlTower::ActEvade()
@@ -174,7 +176,8 @@ bool CStageControlTower::FindTarget()
 	int count = 0;
 	for (auto& iter : monsterList)
 	{
-		if (iter->GetIsEnabled())
+		CMonster* mon = (CMonster*)iter.get();
+		if (mon->GetIsEnabled() && !mon->GetComponent<CPatternMachineC>()->GetOnDie())
 			++count;
 	}
 
@@ -216,6 +219,7 @@ bool CStageControlTower::FindTarget()
 		m_pActorController->TargetingOn();
 		m_pCameraMan->SetIsTargeting(true);
 
+		m_pLinker->OnTargetMarker();
 		return true;
 	}
 	else if (spTarget)
@@ -251,36 +255,13 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	_float damage = 0.f;
 	bool isDead = m_pDealer->Damage_VtoM(pV->GetStat(), pM->GetStat(), info.GetDamageRate(), &damage);
-	m_pLinker->MonsterHpDown(damage);
 
 	CDamageObjectPool::GetInstance()->AddDamage(
 		pMonster, hitPoint,
 		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Blue");
 
 	// 2. 슬라이더 조정
-
-	// 3. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
-	
-	if (isDead)
-	{
-		if (m_spCurTarget.get() == pM)
-		{
-			m_spCurTarget = nullptr;
-
-			if (!FindTarget())
-			{
-				m_pLinker->OffTargetMarker();
-				m_pLinker->OffMonsterInfo();
-				return;
-			}
-		}
-
-		pM->MonsterDead();
-	}
-	else
-	{
-		pM->ApplyHitInfo(info);
-	}	
+	m_pLinker->MonsterHpDown(damage);
 
 	// 4. 콤보수?
 
@@ -345,6 +326,27 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 	if (info.GetStrengthType() == HitInfo::Str_High)
 		m_pTimeSeeker->OnAttackImpactSlow();
+
+	// 3. 몬스터 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
+
+	if (isDead)
+	{
+		pM->MonsterDead();
+
+		if (m_spCurTarget.get() == pM)
+		{
+			m_pLinker->OffTargetMarker();
+			m_pLinker->OffMonsterInfo();
+			m_spCurTarget = nullptr;
+
+			FindTarget();
+		}
+
+	}
+	else
+	{
+		pM->ApplyHitInfo(info);
+	}
 }
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
