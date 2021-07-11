@@ -257,6 +257,7 @@ void CFSM_ScoutC::SHOOT_2_Enter(void)
 
 void CFSM_ScoutC::SHOOT_2_Update(float deltaTime)
 {
+
 }
 
 void CFSM_ScoutC::SHOOT_2_End(void)
