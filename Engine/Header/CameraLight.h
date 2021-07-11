@@ -20,7 +20,7 @@ public:
 
 protected:
 	GETTOR			(_float,				m_timer,			0,			Timer)
-	GETTOR			(_float,				m_timeLimit,		1.5f,		TimeLimit)
+	GETTOR			(_float,				m_timeLimit,		1.f,		TimeLimit)
 };
 
 END
