@@ -862,7 +862,7 @@ void CFSM_KianaC::Attack_4_Update(float deltaTime)
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Atk04 + 0.15f)
 	{
-		m_pKiana->ActiveAttackBall(1.4f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.4f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 
@@ -924,7 +924,7 @@ void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
 
 	if (!m_checkAttack &&  m_pDM->GetAniTimeline() > 0.2)
 	{
-		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pKiana->GetLeftToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetLeftToeWorldMatrix(), 0.3f);
 		m_checkAttack = true;
 	}
 

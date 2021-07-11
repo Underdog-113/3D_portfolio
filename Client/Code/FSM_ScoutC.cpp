@@ -251,14 +251,20 @@ void CFSM_ScoutC::SHOOT_2_Init(void)
 void CFSM_ScoutC::SHOOT_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SHOOT_2);
+
+	// break 안줄
+	// 수퍼아머 on
 }
 
 void CFSM_ScoutC::SHOOT_2_Update(float deltaTime)
 {
+
 }
 
 void CFSM_ScoutC::SHOOT_2_End(void)
 {
+	// break 다시
+	// 수퍼아머 off
 }
 
 void CFSM_ScoutC::SHOOT_3_Init(void)
