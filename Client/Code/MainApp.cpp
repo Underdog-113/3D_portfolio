@@ -79,7 +79,6 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CLaserTrailShader::Create(), L"LaserTrail", (_uint)EShaderID::LaserShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(COutlineShader::Create(), L"OutlineShader", (_uint)EShaderID::OutlineShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFaceShader::Create(), L"FaceShader", (_uint)EShaderID::FaceShader);
-
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }

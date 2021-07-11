@@ -99,7 +99,10 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
 	}
 
-	//ForUITest();
+	if (Engine::IMKEY_PRESS(KEY_SHIFT))
+	{
+		ForUITest();
+	}
 
 	// Sky Rotation
 	if (nullptr != m_spSky)
@@ -232,22 +235,22 @@ void COneStageScene::ForUITest()
 {
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
 	{
-		CBattleUiManager::GetInstance()->SpecialUICanvasOn();
+		CBattleUiManager::GetInstance()->QteOn(0);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
 	{
-		CBattleUiManager::GetInstance()->SpecialUIUp();
+		CBattleUiManager::GetInstance()->QteOn(1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
 	{
-		CBattleUiManager::GetInstance()->SpecialUIDwon();
+		CBattleUiManager::GetInstance()->QteOff(0);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
 	{
-		CBattleUiManager::GetInstance()->HitCount(5);
+		CBattleUiManager::GetInstance()->QteOff(1);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))

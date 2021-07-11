@@ -39,7 +39,7 @@ void CSlider::Awake(void)
 	__super::Awake();
 	m_layerID = (_int)ELayerID::Decoration;	
 	m_addExtra = true;
-
+	m_spHandle = nullptr;
 }	
 
 void CSlider::Start(void)
@@ -56,14 +56,16 @@ void CSlider::Update(void)
 {
 	__super::Update();
 
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_C))
+	if (m_spHandle)
 	{
-		m_value -= 0.5;
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_X))
-	{
-		m_value += 0.5f;
+		/*
+		자신의 벨류에 맞는곳의 이미지를띄운다.
+		해당 벨류로 인하여 이미지의 위치가변경될수도있고 
+		이미지의위치에 의하여 벨류가 변경될수도있다.
+		슬라이더 min위치와 max위치 사이에 이미지가 어디에있는가
+		1. 이미지 위치를 어떻게 수정할까?
+		2. 이미지가 이동하면 bool값을 바꾼다.
+		*/
 	}
 }
 
