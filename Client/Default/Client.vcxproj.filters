@@ -865,6 +865,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff">
       <UniqueIdentifier>{02a5d758-92b8-4946-9e0b-4c7d15096fad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
+      <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1724,6 +1727,9 @@
     <ClInclude Include="..\Header\Bronya_Shot_Smoke.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ScoutAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2496,6 +2502,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

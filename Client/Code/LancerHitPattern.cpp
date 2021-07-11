@@ -16,6 +16,7 @@ CLancerHitPattern::~CLancerHitPattern()
 void CLancerHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_LancerC) fsm = pOwner->GetComponent<CFSM_LancerC>();
+	static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 	
 	static_cast<CMO_Lancer*>(pOwner)->UnActiveAttackBall();
 

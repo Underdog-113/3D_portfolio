@@ -155,7 +155,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		m_onShoot2 = true;
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		CMO_Scout* pScout = static_cast<CMO_Scout*>(pOwner);
-		_float3 size = { 2.f, 1.f, 10.f };
+		_float3 size = { 0.5f, 1.f, 10.f };
 		_float3 offset = ZERO_VECTOR;
 
 		pScout->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
@@ -166,6 +166,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		0.09f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onEffect)
 	{
+		// 공격 범위 이펙트
 		SP(CScout_Att_Range) spScoutRange = std::dynamic_pointer_cast<CScout_Att_Range>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Scout_Att_Range", true, (_int)Engine::ELayerID::Effect, L"MeshEffect"));
 		spScoutRange->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Att_Range_Move");
 		spScoutRange->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
@@ -177,6 +178,15 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		spScoutRange->GetTransform()->AddRotationY(PI);
 		spScoutRange->GetTransform()->SetPosition(mPos);
 
+		// ball 이펙트
+		_mat atkMat = pOwner->GetTransform()->GetWorldMatrix();
+
+		_float3 look = _float3(atkMat._31, atkMat._32, atkMat._33);
+		D3DXVec3Normalize(&look, &look);
+
+		atkMat._42 += pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
+		atkMat._41 += (look.x / 2.2f);
+		atkMat._43 += (look.z / 2.2f);
 
 		SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ScoutBall", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
 		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Ball");
@@ -186,9 +196,7 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
 		spMeshEffect->GetTransform()->AddRotationY(PI);
-		spMeshEffect->GetTransform()->SetPosition(mPos);
-		spMeshEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
-		spMeshEffect->GetTransform()->SetPositionZ(mPos.z - 0.5f);
+		spMeshEffect->GetTransform()->SetPosition(_float3(atkMat._41, atkMat._42, atkMat._43));
 
 		m_onEffect = true;
 	}

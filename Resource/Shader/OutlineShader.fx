@@ -46,7 +46,7 @@ PS_OUT PS_OUTLINE(PS_IN In)
 	PS_OUT Out = (PS_OUT)0;
 
 	Out.vColor = float4(0, 0, 0, 1);
-	Out.vNormal = float4(0, 0, 0, 0);
+	Out.vNormal = float4(0, 0, 0, -1);
 	Out.vDepth = float4(0, 0, 0, 0);
 	return Out;
 }

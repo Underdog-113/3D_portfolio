@@ -242,16 +242,24 @@ void CTwoStageScene::ForUITest()
 
 void CTwoStageScene::FindSkyObject()
 {
-	auto map = m_vLayers[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
+	auto& map = m_vLayers[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
 	auto iter = map.begin();
 
 	for (; iter != map.end(); ++iter)
 	{
-		if (L"DecoObject17" == (*iter)->GetName())
+		auto& comp = (*iter)->GetComponents().begin();
+
+		for (; comp != (*iter)->GetComponents().end(); ++comp)
 		{
-			m_spSky = *iter;
-			m_spSky->GetTransform()->SetPosition(_float3(-60.57f, -12.917f, 0.f));
-			break;
+			if ((_uint)Engine::EComponentID::Mesh == (*comp).second->GetComponentID())
+			{
+				if (L"Stage02_Alpha_S02_Sky" == (*iter)->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey())
+				{
+					m_spSky = *iter;
+					m_spSky->GetTransform()->SetPosition(_float3(-60.57f, -12.917f, 0.f));
+					return;
+				}
+			}
 		}
 	}
 }

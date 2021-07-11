@@ -227,6 +227,7 @@
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\ScoutAirbornePattern.h" />
     <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\ScoutCircleRange.h" />
     <ClInclude Include="..\Header\ScoutMeteor.h" />
@@ -506,6 +507,7 @@
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\ScoutAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
     <ClCompile Include="..\Code\ScoutMeteor.cpp" />

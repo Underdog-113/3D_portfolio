@@ -110,6 +110,7 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 			std::dynamic_pointer_cast<CScoutCircleRange>(m_spCircleRange)->SetBallShooter(pOwner);
 			
 			m_spCircleRange->GetTransform()->SetPosition(tPos);
+			m_targetMat = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetWorldMatrix();
 		}
 	}
 
@@ -157,14 +158,14 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 		0.4f > fsm->GetDM()->GetAniTimeline() &&
 		false == m_firePosFix)
 	{
-		_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
-		m_atkMat._41 = pPos.x;
-		m_atkMat._42 = (pPos.y + 0.2f);
-		m_atkMat._43 = pPos.z;
+		//_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+		//m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
+		//m_atkMat._41 = pPos.x;
+		m_targetMat._42 += 0.3f;
+		//m_atkMat._43 = pPos.z;
 		m_firePosFix = true;
 
-		std::dynamic_pointer_cast<CScoutCircleRange>(m_spCircleRange)->SetAtkMat(m_atkMat);
+		std::dynamic_pointer_cast<CScoutCircleRange>(m_spCircleRange)->SetAtkMat(m_targetMat);
 	}
 	// shoot3 상태라면 어택볼 생성
 	else if (Name_SHOOT_3 == fsm->GetCurStateString() &&

@@ -98,7 +98,6 @@ PS_OUT		PS_EFFECT(PS_IN In)
 	float fViewZ = tex2D(DepthSampler, vDetphUV).y * 1000.f;
 
 	Out.vColor.a = Out.vColor.a * max((fViewZ - In.vProjPos.w), 0.f);
-	
 	return Out;
 }
 

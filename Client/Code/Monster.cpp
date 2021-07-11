@@ -95,7 +95,8 @@ void CMonster::OnDestroy(void)
 	
 	ReturnChannelID();
 	SAFE_DELETE(m_pStat);
-	
+	SAFE_DELETE(m_pSuperArmor);
+
 	if(m_pAttackBall)
 		m_pAttackBall->SetDeleteThis(true);
 	if (m_pAttackBox)
@@ -138,6 +139,11 @@ void CMonster::SetBasicName(void)
 }
 void CMonster::ApplyHitInfo(HitInfo info)
 {
+	if (true == m_pStat->GetOnBPShield())
+	{
+		return;
+	}
+
 	_float breakGauge = m_pStat->GetCurBreakGauge() - info.GetBreakDamage();
 
 	if (breakGauge <= 0.f)

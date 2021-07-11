@@ -4,12 +4,8 @@
 #include "FSM_GaneshaC.h"
 #include "FSMDefine_Ganesha.h"
 #include "MB_Ganesha.h"
-
-#include "StateMachineC.h"
-#include "Valkyrie.h" 
-#include "DynamicMeshData.h"
 #include "AniCtrl.h"
-#include "PatternMachineC.h"
+#include "Valkyrie.h"
 
 CGaneshaHitPattern::CGaneshaHitPattern()
 {
@@ -22,6 +18,7 @@ CGaneshaHitPattern::~CGaneshaHitPattern()
 void CGaneshaHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_GaneshaC) fsm = pOwner->GetComponent<CFSM_GaneshaC>();
+	static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
 
 	// 이전에 패턴에서 속도가 변경된 상태일 수도 있으므로 정상 속도로 돌림
 	fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);

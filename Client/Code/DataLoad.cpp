@@ -522,12 +522,10 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		}
 		else if (renderID == 1)
 		{
-			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		}
 		else
 		{
-			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 		}
 
@@ -590,8 +588,8 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapMapObject",
 			std::to_wstring(i) + L"_renderID", renderID);
 		spMapObject->GetGraphics()->SetRenderID(renderID);
-		spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
-		spMapObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		//spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::OutlineShader);
+		spMapObject->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 
 
 		/* map */
