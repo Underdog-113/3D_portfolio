@@ -48,8 +48,8 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
-
-	SP(CScrollViewObject) spScrollView =
+	
+	/*SP(CScrollViewObject) spScrollView =
 		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
 	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));
 	spScrollView->GetTransform()->SetSize(_float3(200, 200, 0));
@@ -63,7 +63,7 @@ void CDongScene::Start(void)
 		spScrollView->AddImageObjectData(i, L"10101", _float3(80, 80, 0), _float2(0, 0));
 
 		spScrollView->AddTextObjectData(i, _float2(0, 0), 20, D3DXCOLOR(1, 1, 1, 1), L"Message");
-	}
+	}*/
 }
 
 void CDongScene::FixedUpdate(void)

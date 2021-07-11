@@ -145,19 +145,6 @@ void CStaticScene::Awake(_int numOfLayers)
 
 void CStaticScene::Start(void)
 {
-	_int a = 4 % 4;
-	std::cout << a << std::endl;
-
-	a = 5 % 4;
-	std::cout << a << std::endl;
-
-	a = 6 % 4;
-	std::cout << a << std::endl;
-
-	a = 7 % 4;
-	std::cout << a << std::endl;
-
-
 	InitSettings();
 }
 

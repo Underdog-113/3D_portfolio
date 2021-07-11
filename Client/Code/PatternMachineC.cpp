@@ -64,9 +64,6 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
 	}
 
-	
-
-
 	// born 실행 (1번만)
 	PlayBornPattern();
 	

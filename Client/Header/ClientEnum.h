@@ -72,7 +72,8 @@ enum class EShaderID
 	LaserShader  		= 11 + (_int)Engine::EShaderID::NumOfShaderID,
 	OutlineShader		= 12 + (_int)Engine::EShaderID::NumOfShaderID,
 	FaceShader			= 13 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 14 + (_int)Engine::EShaderID::NumOfShaderID
+	MonsterTargetShader = 14 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 15 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID
