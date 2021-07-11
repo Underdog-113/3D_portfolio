@@ -43,7 +43,8 @@ public:
 					void					UseUltra			(void) override;
 public:
 	
-	GETTOR			(CAttackBall*,	m_pAttackBall_LeftHand,		nullptr,	AttackBall_LeftHand)
+	GETTOR			(_mat*,					m_pHand_World,		nullptr,	HandWorldMatrix)
+	Engine::D3DXFRAME_DERIVED*	m_pHand_Frame = nullptr;
 
 private:
 	_uint idx = 0;

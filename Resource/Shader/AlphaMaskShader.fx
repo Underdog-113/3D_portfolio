@@ -112,8 +112,7 @@ technique AlphaMask
 	pass p0
 	{
 		CullMode = None;
-		AlphaTestEnable = true;
-		zWriteEnable = true;
+		zWriteEnable = false;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;

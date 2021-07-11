@@ -14,6 +14,8 @@
 #define Delay_Effect_Atk04 0.0f
 #define Delay_Effect_Atk05 0.05f
 
+#define Delay_Effect_Charge1 0.3f
+
 class CSakura;
 class CStageControlTower;
 class CFSM_SakuraC : public Engine::CStateMachineC

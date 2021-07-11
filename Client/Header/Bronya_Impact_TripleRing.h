@@ -1,16 +1,16 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
-class CBronya_Shot_Smoke : public CMeshEffect_Client
+class CBronya_Impact_TripleRing : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CBronya_Shot_Smoke();
-	~CBronya_Shot_Smoke();
+	CBronya_Impact_TripleRing();
+	~CBronya_Impact_TripleRing();
 
 public:
-	static SP(CBronya_Shot_Smoke) Create(_bool isStatic, Engine::CScene* pScene);
+	static SP(CBronya_Impact_TripleRing) Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject) MakeClone() override;
 
@@ -32,8 +32,5 @@ public:
 
 private:
 	static		_uint m_s_uniqueID;
-
-private:
-	void Billboard();
 };
 
