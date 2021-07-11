@@ -29,6 +29,8 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 		Name_Sickle_Hit_Throw != fsm->GetCurStateString())
 	{
 		fsm->ChangeState(Name_Sickle_Throw_01);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
 		//PatternPlaySound(L"Sickle_Dead.wav", pOwner);
 	}
 	// 내가 Throw_01, Throw_02 상태, Hit_Throw 중에 공격을 받으면

@@ -56,7 +56,7 @@ void CMO_Sickle::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	//stat.SetBaseHp(445.f);
+	//stat.SetBaseHp(2445.f);
 	stat.SetBaseHp(3545.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
@@ -69,11 +69,13 @@ void CMO_Sickle::Start(void)
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(2);
 	m_pStat->SetOnSuperArmor(true);
+	m_pStat->SetMaxBreakGauge(145.f);
+	m_pStat->SetMaxBreakGauge(m_pStat->GetMaxBreakGauge());
 
 	m_pSuperArmor->SetHitL(false);
 	m_pSuperArmor->SetHitH(false);
 	m_pSuperArmor->SetAirborne(true);
-	m_weakTime = 7.f;
+	m_weakTime = 5.f;
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
