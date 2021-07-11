@@ -232,25 +232,9 @@ bool CFSM_KianaC::CheckAction_StandBy()
 bool CFSM_KianaC::CheckAction_Idle()
 {
 	m_idleTimer += GET_PLAYER_DT;
-	if (m_idleTimer > 3.f)
+	if (m_idleTimer > 5.f)
 	{
-		switch (m_idleMotionIndex)
-		{
-		case 0:
-			ChangeState(Name_Idle_01);
-			break;
-		case 1:
-			ChangeState(Name_Idle_02);
-			break;
-		case 2:
-			ChangeState(Name_Idle_03);
-			break;
-		default:
-			break;
-		}
-		++m_idleMotionIndex;
-		if (m_idleMotionIndex == 3)
-			m_idleMotionIndex = 0;
+		ChangeState(Name_Idle_01);
 		return true;
 	}
 
@@ -1001,7 +985,8 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
 		return;
-
+	if (CheckAction_Attack(Name_Attack_1, 0.5f))
+		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
 
@@ -1069,7 +1054,6 @@ void CFSM_KianaC::EvadeBackward_Enter(void)
 	PlaySound_Attack_RandomEvade();
 
 	m_isEvade = true;
-	//m_pKiana->OffHitbox();
 	m_pKiana->SetIsEvade(true);
 }
 
@@ -1124,7 +1108,6 @@ void CFSM_KianaC::EvadeForward_Enter(void)
 	PlaySound_Attack_RandomEvade();
 
 	m_isEvade = true;
-	//m_pKiana->OffHitbox();
 	m_pKiana->SetIsEvade(true);
 }
 
@@ -1133,7 +1116,6 @@ void CFSM_KianaC::EvadeForward_Update(float deltaTime)
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_isEvade = false;
-		m_pKiana->OnHitbox();
 		m_pKiana->SetIsEvade(false);
 	}
 
@@ -1164,7 +1146,6 @@ void CFSM_KianaC::EvadeForward_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
 	m_isEvade = false;
-	//m_pKiana->OnHitbox();
 	m_pKiana->SetIsEvade(false);
 }
 
@@ -1438,9 +1419,6 @@ void CFSM_KianaC::RunStopLeft_Enter(void)
 
 void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
-		return;
-
 	if (CheckAction_Evade_OnAction(0.1f))
 		return;
 	if (CheckAction_Run())
@@ -1450,6 +1428,8 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 	if (CheckAction_Ultra())
 		return;
 	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_StandBy_Timeout())
 		return;
 }
 

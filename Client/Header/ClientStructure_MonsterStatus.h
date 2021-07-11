@@ -42,6 +42,8 @@ typedef struct _Monster_Stage_Status
 	GETTOR_SETTOR(_bool, onBPShield, false, OnBPShield)
 	GETTOR_SETTOR(_uint, hpMagnification, 1, HPMagnification)
 
+	GETTOR_SETTOR(HitInfo::CrowdControl, currentCC, HitInfo::CrowdControl::CC_None, CurrentCC)
+	GETTOR_SETTOR(_uint, sakuraCounter, 0, SakuraCounter)
 }M_Stat;
 
 typedef struct _Monster_Super_Armor
