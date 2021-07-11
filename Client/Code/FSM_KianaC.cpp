@@ -744,7 +744,7 @@ void CFSM_KianaC::Attack_3_Branch_Init(void)
 void CFSM_KianaC::Attack_3_Branch_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_3_Branch);
-	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	ResetCheckMembers();
 
@@ -779,9 +779,9 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 	if (m_pDM->GetAniTimeline() > Cool_BranchAttack3to4)
 	{
+		ChangeState(Name_Attack_4_Branch);
 		CStageControlTower::GetInstance()->FindTarget();
 		CStageControlTower::GetInstance()->ActAttack();
-		ChangeState(Name_Attack_4_Branch);
 		return;
 	}
 	if (CheckAction_WeaponSkill(0.15f))
