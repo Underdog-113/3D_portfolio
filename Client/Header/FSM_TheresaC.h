@@ -195,6 +195,13 @@ public:
 	void Charge2_Update(float deltaTime);
 	void Charge2_End(void);
 	
+	//Attack_QTE
+	void Attack_QTE_Init(void);
+	void Attack_QTE_Enter(void);
+	void Attack_QTE_Update(float deltaTime);
+	void Attack_QTE_End(void);
+	
+
 	//Victory
 	void Victory_Init(void);
 	void Victory_Enter(void);

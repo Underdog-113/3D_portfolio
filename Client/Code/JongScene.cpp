@@ -34,6 +34,7 @@ CJongScene::CJongScene()
 
 CJongScene::~CJongScene()
 {
+	m_pControlTower->DestroyInstance();
 }
 
 CClientScene* CJongScene::Create(void)
@@ -61,18 +62,18 @@ void CJongScene::Awake(_int numOfLayers)
 void CJongScene::Start(void)
 {
 	__super::Start();
-	CDamageObjectPool::GetInstance()->Start(this);
+	SetupStageUI();
 
-	KianaTest();
-	TheresaTest();
-	static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
+	//KianaTest();
+	//TheresaTest();
+	//static_cast<CValkyrie*>(m_spTheresa.get())->SetIsWait(true);
 	SakuraTest();
-	static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
+	//static_cast<CValkyrie*>(m_spSakura.get())->SetIsWait(true);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
-	SetSceneCamera(m_spKiana);
+	//SetSceneCamera(m_spKiana);
 	//SetSceneCamera(m_spTheresa);
-	//SetSceneCamera(m_spSakura);
+	SetSceneCamera(m_spSakura);
 
 	//CollisionDummy();
 	//SickleTest();
@@ -86,7 +87,6 @@ void CJongScene::Start(void)
 	FloorTest();
 
 
-	SetupStageUI();
 }
 
 void CJongScene::FixedUpdate(void)

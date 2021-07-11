@@ -283,27 +283,27 @@ void CFSM_SakuraC::Appear_End(void)
 
 void CFSM_SakuraC::StandBy_Init(void)
 {
-	m_pDM->SetLoopAnim(Index_StandBy);
+	m_pDM->SetLoopAnim(1);
 }
 
 void CFSM_SakuraC::StandBy_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_StandBy);
+	m_pDM->ChangeAniSet(1);
 	m_idleTimer = 0.f;
 }
 
 void CFSM_SakuraC::StandBy_Update(float deltaTime)
 {
-	if (CheckAction_Run())
-		return;
-	if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
-		return;
-	if (CheckAction_EvadeBackward(0.f))
-		return;
-	if (CheckAction_Ultra())
-		return;
-	if (CheckAction_Idle())
-		return;
+	//if (CheckAction_Run())
+	//	return;
+	//if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+	//	return;
+	//if (CheckAction_EvadeBackward(0.f))
+	//	return;
+	//if (CheckAction_Ultra())
+	//	return;
+	//if (CheckAction_Idle())
+	//	return;
 }
 
 void CFSM_SakuraC::StandBy_End(void)

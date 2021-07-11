@@ -320,6 +320,7 @@ bool CFSM_KianaC::CheckAction_WeaponSkill(float coolTime)
 			if (m_pStageControlTower->ActSkill())
 			{
 				ChangeState(Name_WeaponSkill);
+				CStageControlTower::GetInstance()->FindTarget();
 				return true;
 			}
 		}
@@ -778,6 +779,8 @@ void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
 
 	if (m_pDM->GetAniTimeline() > Cool_BranchAttack3to4)
 	{
+		CStageControlTower::GetInstance()->FindTarget();
+		CStageControlTower::GetInstance()->ActAttack();
 		ChangeState(Name_Attack_4_Branch);
 		return;
 	}
@@ -976,7 +979,6 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 		if (m_pKiana->GetUltraMode())
 		{
 			PlaySound_Effect(Sound_Ult_Att_3);
-			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_Claw5();
 		}
 		else
 		{
@@ -986,7 +988,15 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 	}
 
 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
+	{
 		m_pKiana->UnActiveAttackBall();
+
+		if (!m_checkAttack && m_pKiana->GetUltraMode())
+		{
+			m_checkAttack = false;
+			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_Claw5();
+		}
+	}
 	if (CheckAction_Evade_OnAction())
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
@@ -1488,10 +1498,35 @@ void CFSM_KianaC::WeaponSkill_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_WeaponSkill);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->LookTarget();
+	ResetCheckMembers();
 }
 
 void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 {
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
+	{
+		PlaySound_Effect(Sound_Attack_2_Effect);
+
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			HitInfo info;
+			info.SetDamageRate(0.8f);
+			info.SetBreakDamage(50.f);
+			info.SetStrengthType(HitInfo::Str_Airborne);
+			info.SetCrowdControlType(HitInfo::CC_None);
+
+			m_pStageControlTower->HitMonster(
+				m_pKiana,
+				m_pStageControlTower->GetCurrentTarget().get(),
+				info,
+				m_pStageControlTower->GetCurrentTarget().get()->GetTransform()->GetPosition());
+
+		}
+		m_checkAttack = true;
+	}
+
+
 	if (CheckAction_Evade_OnAction(0.4f))
 		return;
 	if (CheckAction_Run(0.4f))

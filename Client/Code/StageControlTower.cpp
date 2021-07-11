@@ -65,8 +65,8 @@ void CStageControlTower::Update(void)
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);
-// 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
-// 		SwitchValkyrie(Wait_2);
+	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
+		SwitchValkyrie(Wait_2);
 
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
@@ -238,6 +238,12 @@ bool CStageControlTower::FindTarget()
 	}
 
 	return false;
+}
+
+void CStageControlTower::LookTarget()
+{
+	if(m_spCurTarget)
+	m_pActorController->LookHittedDirection(m_spCurTarget->GetTransform()->GetPosition());
 }
 
 void CStageControlTower::RemoveTarget()

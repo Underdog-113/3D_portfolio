@@ -240,8 +240,6 @@ void CUILinker::Skill()
 		CBattleUiManager::Button_Type::SkillButton,
 		(_int)cost,
 		cooltime);
-
-	m_pCT->FindTarget();
 }
 
 void CUILinker::Ultra()

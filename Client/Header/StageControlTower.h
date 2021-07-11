@@ -68,6 +68,7 @@ public:		/* Battle */
 	bool ActUltra();
 
 	bool FindTarget();
+	void LookTarget();
 	void RemoveTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
@@ -114,3 +115,4 @@ private:	/* Stage Info? */
 };
 
 #endif
+

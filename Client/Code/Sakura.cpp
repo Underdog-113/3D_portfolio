@@ -60,7 +60,7 @@ void CSakura::Start(void)
 	m_spMesh->OnRootMotion();
 	m_spDebug = AddComponent<Engine::CDebugC>();
 
-	m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
+	//m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
 
 	if (m_isWait)
 	{
