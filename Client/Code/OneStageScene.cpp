@@ -82,18 +82,6 @@ void COneStageScene::Update(void)
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
 
-
-	//if (true == m_bossSpawn)
-	//{
-	//	/* Ganesha */
-	//	SP(Engine::CObject) spGaneshaClone = ADD_CLONE(L"MB_Ganesha", true, (_uint)ELayerID::Enemy, L"MB_Ganesha");
-	//	std::dynamic_pointer_cast<CMonster>(spGaneshaClone)->SelectChannelID();
-	//	spGaneshaClone->GetTransform()->SetPosition(-46, 15, 0);
-	//	spGaneshaClone->GetTransform()->SetRotationY(D3DXToRadian(90));
-	//	m_spGanesha = spGaneshaClone;
-
-	//	m_bossSpawn = false;
-	//}
 	if (Engine::IMKEY_DOWN(KEY_UP))
 	{
 		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
@@ -288,16 +276,24 @@ void COneStageScene::ForUITest()
 
 void COneStageScene::FindSkyObject()
 {
-	auto map = m_vLayers[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
+	auto& map = m_vLayers[(_uint)Engine::ELayerID::Decoration]->GetGameObjects();
 	auto iter = map.begin();
 
 	for (; iter != map.end(); ++iter)
 	{
-		if (L"DecoObject17" == (*iter)->GetName())
+		auto& comp = (*iter)->GetComponents().begin();
+
+		for (; comp != (*iter)->GetComponents().end(); ++comp)
 		{
-			m_spSky = *iter;
-			m_spSky->GetTransform()->SetPosition(_float3(-60.57f, -12.917f, 0.f));
-			break;
+			if ((_uint)Engine::EComponentID::Mesh == (*comp).second->GetComponentID())
+			{
+				if (L"Stage02_Alpha_S02_Sky" == (*iter)->GetComponent<Engine::CMeshC>()->GetMeshData()->GetMeshKey())
+				{
+					m_spSky = *iter;
+					m_spSky->GetTransform()->SetPosition(_float3(-60.57f, -12.917f, 0.f));
+					return;
+				}
+			}
 		}
 	}
 }

@@ -65,6 +65,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	}
 
 	std::cout << "BP : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
+	//std::cout << "HP : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
 
 
 	// born 실행 (1번만)

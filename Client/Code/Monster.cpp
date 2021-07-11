@@ -95,7 +95,8 @@ void CMonster::OnDestroy(void)
 	
 	ReturnChannelID();
 	SAFE_DELETE(m_pStat);
-	
+	SAFE_DELETE(m_pSuperArmor);
+
 	if(m_pAttackBall)
 		m_pAttackBall->SetDeleteThis(true);
 	if (m_pAttackBox)

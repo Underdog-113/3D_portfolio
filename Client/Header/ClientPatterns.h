@@ -31,6 +31,7 @@
 #include "ScoutBasePattern.h"
 #include "ScoutShoot2Pattern.h"
 #include "ScoutShoot3Pattern.h"
+#include "ScoutAirbornePattern.h"
 
 /* Lancer */
 #include "LancerBornPattern.h"

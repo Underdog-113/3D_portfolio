@@ -73,7 +73,7 @@ void CMO_Sickle::Start(void)
 	m_pSuperArmor->SetHitL(false);
 	m_pSuperArmor->SetHitH(false);
 	m_pSuperArmor->SetAirborne(true);
-	SetWeakTime(7.f);
+	m_weakTime = 7.f;
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);

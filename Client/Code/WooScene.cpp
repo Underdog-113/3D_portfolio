@@ -75,13 +75,14 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	SpiderSetting();
+	//SpiderSetting();
 	//SickleSetting();
-	//GaneshaSetting();
-	//ScoutSetting();
+	ScoutSetting();
 	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
+
+	//GaneshaSetting();
 	//BronyaSetting();
 }
 
@@ -111,7 +112,7 @@ void CWooScene::Update(void)
 			m_vSickles.pop_back();
 		}
 	}
-	else if (false == m_spSpider)
+	else if (nullptr != m_spSpider)
 	{
 		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spSpider)->GetStat()->GetCurHp())
 		{
@@ -269,7 +270,7 @@ void CWooScene::SpiderSetting(void)
 {
 	/* Spider */
 	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(-3, 0, -7);
+	spSpiderClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spSpiderClone)->SelectChannelID();
 	m_spSpider = spSpiderClone;
 }
