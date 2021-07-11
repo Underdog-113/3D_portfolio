@@ -5,6 +5,7 @@
 
 #include "AniCtrl.h"
 #include "FSMDefine_Scout.h"
+#include "Monster.h"
 
 CFSM_ScoutC::CFSM_ScoutC()
 {
@@ -251,6 +252,7 @@ void CFSM_ScoutC::SHOOT_2_Init(void)
 void CFSM_ScoutC::SHOOT_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SHOOT_2);
+	static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnPatternShield(true);
 }
 
 void CFSM_ScoutC::SHOOT_2_Update(float deltaTime)
@@ -259,6 +261,7 @@ void CFSM_ScoutC::SHOOT_2_Update(float deltaTime)
 
 void CFSM_ScoutC::SHOOT_2_End(void)
 {
+	static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnPatternShield(false);
 }
 
 void CFSM_ScoutC::SHOOT_3_Init(void)
@@ -268,6 +271,7 @@ void CFSM_ScoutC::SHOOT_3_Init(void)
 void CFSM_ScoutC::SHOOT_3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SHOOT_3);
+	static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnPatternShield(true);
 }
 
 void CFSM_ScoutC::SHOOT_3_Update(float deltaTime)
@@ -276,6 +280,7 @@ void CFSM_ScoutC::SHOOT_3_Update(float deltaTime)
 
 void CFSM_ScoutC::SHOOT_3_End(void)
 {
+	static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnPatternShield(false);
 }
 
 void CFSM_ScoutC::SHOOT_FIREFALL_Init(void)

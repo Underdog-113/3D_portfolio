@@ -60,7 +60,7 @@ void CMO_Scout::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(3145.f);
+	stat.SetBaseHp(4145.f);
 	stat.SetBaseAtk(15.f);
 	stat.SetBaseDef(5.f);
 
@@ -136,6 +136,11 @@ void CMO_Scout::SetBasicName(void)
 void CMO_Scout::ApplyHitInfo(HitInfo info)
 {
 	__super::ApplyHitInfo(info);
+
+	if (true == m_pStat->GetOnPatternShield())
+	{
+		return;
+	}
 
 	// attack strength
 	switch (info.GetStrengthType())

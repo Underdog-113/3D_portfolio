@@ -139,6 +139,11 @@ void CMonster::SetBasicName(void)
 }
 void CMonster::ApplyHitInfo(HitInfo info)
 {
+	if (true == m_pStat->GetOnBPShield())
+	{
+		return;
+	}
+
 	_float breakGauge = m_pStat->GetCurBreakGauge() - info.GetBreakDamage();
 
 	if (breakGauge <= 0.f)

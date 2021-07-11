@@ -83,9 +83,8 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	PlayHitPattern();
 
 	std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
-	std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
-	std::cout << "Pattern  : " << std::endl;
-	system("cls");
+	//std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
+	//std::cout << "Pattern  : " << std::endl;
 }
 
 void CPatternMachineC::LateUpdate(SP(Engine::CComponent) spThis)
