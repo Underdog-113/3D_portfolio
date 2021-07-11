@@ -75,8 +75,8 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	SpiderSetting();
-	//SickleSetting();
+	//SpiderSetting();
+	SickleSetting();
 	//GaneshaSetting();
 	//ScoutSetting();
 	//LancerSetting();
