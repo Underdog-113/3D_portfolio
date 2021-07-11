@@ -18,6 +18,8 @@ public:
 private:
 	_float m_stunTime = 4.f;
 	_float m_accTime = 0.f;
+
+	_bool m_onStun = false;
 };
 
 #endif

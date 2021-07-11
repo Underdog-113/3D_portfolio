@@ -7,6 +7,7 @@
 #include "SickleBasePattern.h"
 #include "SickleAtk02Pattern.h"
 #include "SickleAirbornePattern.h"
+#include "SickleStunPattern.h"
 
 /* Spider */
 #include "SpiderBornPattern.h"
