@@ -236,6 +236,7 @@
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
     <ClInclude Include="..\Header\Scout_Laser.h" />
     <ClInclude Include="..\Header\SickleAirbornePattern.h" />
+    <ClInclude Include="..\Header\SickleStunPattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SizeUpC.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
@@ -517,6 +518,7 @@
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
+    <ClCompile Include="..\Code\SickleStunPattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SizeUpC.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />

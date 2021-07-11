@@ -871,6 +871,9 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne">
       <UniqueIdentifier>{8bb9614d-bd0d-42d4-9216-1cfe8a3938ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\06.Stun">
+      <UniqueIdentifier>{b6405dd1-c670-4f9e-89b7-65eafc69c20a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1736,6 +1739,9 @@
     <ClInclude Include="..\Header\LancerAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SickleStunPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\06.Stun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2514,6 +2520,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\LancerAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleStunPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\06.Stun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
