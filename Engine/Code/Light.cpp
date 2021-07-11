@@ -94,6 +94,10 @@ void CLight::InitLight(D3DLIGHT9 * pLightInfo, const _int & index)
 	m_pIndexBuffer->Unlock();
 }
 
+void CLight::UpdateLight(void)
+{
+}
+
 void CLight::RenderLight(LPD3DXEFFECT pEffect)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
