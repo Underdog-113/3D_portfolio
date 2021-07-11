@@ -1408,7 +1408,7 @@ void CFSM_KianaC::RunBS_Update(float deltaTime)
 		PlaySound_Attack_RandomRun();
 	}
 
-	if (CheckAction_EvadeForward())
+	if (CheckAction_Evade_OnAction(0.f))
 		return;
 	if (CheckAction_RunBS_To_Run())
 		return;
@@ -1441,7 +1441,7 @@ void CFSM_KianaC::RunStopLeft_Update(float deltaTime)
 	if (CheckAction_StandBy_Timeout())
 		return;
 
-	if (CheckAction_Evade_OnAction(0.1f))
+	if (CheckAction_Evade_OnAction(0.f))
 		return;
 	if (CheckAction_Run())
 		return;
@@ -1471,7 +1471,7 @@ void CFSM_KianaC::RunStopRight_Enter(void)
 
 void CFSM_KianaC::RunStopRight_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction(0.1f))
+	if (CheckAction_Evade_OnAction(0.f))
 		return;
 	if (CheckAction_Run())
 		return;

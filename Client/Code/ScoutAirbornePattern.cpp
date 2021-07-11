@@ -29,7 +29,8 @@ void CScoutAirbornePattern::Pattern(Engine::CObject* pOwner)
 		Name_Throw_0 != fsm->GetCurStateString())
 	{
 		fsm->ChangeState(Name_Throw_1);
-		//PatternPlaySound(L"Sickle_Dead.wav", pOwner);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
 	}
 	// 내가 Throw_01, Throw_02 상태, Hit_Throw 중에 공격을 받으면
 	else if ((Name_Throw_1 == fsm->GetCurStateString() ||

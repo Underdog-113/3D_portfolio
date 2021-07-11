@@ -52,25 +52,30 @@ void CSoftEffect::LateUpdate(void)
 {
 	__super::LateUpdate();
 
-	if (m_bBillboard)
-	{
+	//if (m_bBillboard)
+	//{
 		// Billboard
-		_mat matWorld, matView, matBill;
+	//_mat matWorld, matView, matBill;
 
-		matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+	//matView = Engine::GET_MAIN_CAM->GetViewMatrix();
 
-		D3DXMatrixIdentity(&matBill);
+	//D3DXMatrixIdentity(&matBill);
 
-		memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
-		memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_float3));
-		memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_float3));
+	//matBill._11 = matView._11;
+	//matBill._13 = matView._13;
+	//matBill._31 = matView._31;
+	//matBill._33 = matView._33;
 
-		D3DXMatrixInverse(&matBill, 0, &matBill);
+	////memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
+	////memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_float3));
+	////memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_float3));
 
-		matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+	//D3DXMatrixInverse(&matBill, 0, &matBill);
 
-		m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
-	}
+	//matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	//m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
+	//}
 }
 
 void CSoftEffect::OnDestroy(void)

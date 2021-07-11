@@ -57,7 +57,7 @@ void CMO_Sickle::Start(void)
 
 	BaseStat stat;
 	//stat.SetBaseHp(2445.f);
-	stat.SetBaseHp(3545.f);
+	stat.SetBaseHp(445.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
 
@@ -75,7 +75,6 @@ void CMO_Sickle::Start(void)
 	m_pSuperArmor->SetHitL(false);
 	m_pSuperArmor->SetHitH(false);
 	m_pSuperArmor->SetAirborne(true);
-	m_weakTime = 5.f;
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);

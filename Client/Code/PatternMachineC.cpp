@@ -269,6 +269,16 @@ void CPatternMachineC::PlaySelectPattern()
 			return;
 		}
 	}
+	else if (50.f <= cost)
+	{
+		if ((cost - 10) > m_curCost)
+		{
+			std::cout << "skip" << std::endl;
+			m_curCost += 13.f;
+			m_vIndices.pop_back();
+			return;
+		}
+	}
 
 	// cost가 충분하지 않다면
 	if (m_curCost < cost)

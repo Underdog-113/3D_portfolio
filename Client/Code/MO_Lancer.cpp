@@ -40,7 +40,11 @@ void CMO_Lancer::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_LancerC>();
-	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(), CLancerDiePattern::Create(), CLancerBasePattern::Create(), CLancerHitPattern::Create());
+	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(), 
+		CLancerDiePattern::Create(), 
+		CLancerBasePattern::Create(), 
+		CLancerHitPattern::Create(),
+		CLancerAirbornePattern::Create());
 	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
 }
 
@@ -48,13 +52,14 @@ void CMO_Lancer::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetSize(0.7f, 0.7f, 0.7f);
+	m_spTransform->SetSize(0.6f, 0.6f, 0.6f);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(4761.f);
+	//stat.SetBaseHp(4761.f);
+	stat.SetBaseHp(7761.f);
 	stat.SetBaseAtk(45.f);
 	stat.SetBaseDef(25.f);
 
@@ -66,8 +71,13 @@ void CMO_Lancer::Start(void)
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(3);
 	m_pStat->SetOnSuperArmor(true);
-	m_pStat->SetMaxBreakGauge(230.f);
-	m_pStat->SetCurBreakGauge(230.f);
+	m_pStat->SetMaxBreakGauge(330.f);
+	m_pStat->SetCurBreakGauge(330.f);
+
+	m_pSuperArmor->SetHitL(true);
+	m_pSuperArmor->SetHitH(false);
+	m_pSuperArmor->SetAirborne(true);
+	m_weakTime = 3.f;
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -127,23 +137,40 @@ void CMO_Lancer::ApplyHitInfo(HitInfo info)
 {
 	__super::ApplyHitInfo(info);
 
-	if (true == m_pStat->GetOnSuperArmor())
-	{
-		return;
-	}
-
 	// attack strength
 	switch (info.GetStrengthType())
 	{
-	case HitInfo::Str_Damage:
+	case HitInfo::Str_Damage: // hit 모션 없는 대미지
 		break;
 	case HitInfo::Str_Low:
-		this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		if (false == m_pSuperArmor->GetHitL())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
+		else if (true == m_pSuperArmor->GetHitL())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
 		break;
 	case HitInfo::Str_High:
-		this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		if (false == m_pSuperArmor->GetHitH())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
+		else if (true == m_pSuperArmor->GetHitH())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
 		break;
 	case HitInfo::Str_Airborne:
+		if (false == m_pSuperArmor->GetAirborne())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
+		else if (true == m_pSuperArmor->GetAirborne())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
 		break;
 	}
 

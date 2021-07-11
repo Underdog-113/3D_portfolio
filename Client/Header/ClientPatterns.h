@@ -39,6 +39,7 @@
 #include "LancerHitPattern.h"
 #include "LancerBasePattern.h"
 #include "LancerAttack2Pattern.h"
+#include "LancerAirbornePattern.h"
 
 /* Ninza */
 #include "NinzaBornPattern.h"

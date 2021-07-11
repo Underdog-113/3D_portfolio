@@ -5,11 +5,6 @@
 #include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
 
-#include "StageControlTower.h"
-#include "Valkyrie.h"
-#include "DynamicMeshData.h"
-#include "PatternMachineC.h"
-
 CSickleAirbornePattern::CSickleAirbornePattern()
 {
 }
@@ -23,15 +18,14 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
 
 	// 내가 break guage가 0이고, airborne 상태, standup 상태가 아니라면
-	if (Name_Sickle_Throw_01 != fsm->GetCurStateString() &&
-		Name_Sickle_Throw_02 != fsm->GetCurStateString() &&
+	if (Name_Sickle_Throw_01 != fsm->GetCurStateString() && // 에어본
+		Name_Sickle_Throw_02 != fsm->GetCurStateString() && // 작은 에어본
 		Name_Sickle_StandUp != fsm->GetCurStateString() &&
-		Name_Sickle_Hit_Throw != fsm->GetCurStateString())
+		Name_Sickle_Hit_Throw != fsm->GetCurStateString()) // 파닥파닥
 	{
 		fsm->ChangeState(Name_Sickle_Throw_01);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
-		//PatternPlaySound(L"Sickle_Dead.wav", pOwner);
 	}
 	// 내가 Throw_01, Throw_02 상태, Hit_Throw 중에 공격을 받으면
 	else if ((Name_Sickle_Throw_01 == fsm->GetCurStateString() ||
