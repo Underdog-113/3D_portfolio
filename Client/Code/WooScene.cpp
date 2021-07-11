@@ -119,6 +119,13 @@ void CWooScene::Update(void)
 			m_spSpider = nullptr;
 		}
 	}
+	else if (nullptr != m_spScout)
+	{
+		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spScout)->GetStat()->GetCurHp())
+		{
+			m_spScout = nullptr;
+		}
+	}
 }
 
 void CWooScene::LateUpdate(void)
