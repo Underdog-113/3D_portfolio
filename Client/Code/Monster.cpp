@@ -55,6 +55,7 @@ void CMonster::Start(void)
 
 		m_pStat = new M_Stat;
 		m_pStat->SetupStatus(&stat);
+		m_pSuperArmor = new M_SuperArmor;
 	}
 	
 	// select ChannelID for Sound

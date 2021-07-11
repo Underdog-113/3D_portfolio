@@ -41,3 +41,11 @@ typedef struct _Monster_Stage_Status
 	GETTOR_SETTOR(_uint, hpMagnification, 1, HPMagnification)
 
 }M_Stat;
+
+typedef struct _Monster_Super_Armor
+{
+	GETTOR_SETTOR(_bool, hitL, false, HitL)
+	GETTOR_SETTOR(_bool, hitH, false, HitH)
+	GETTOR_SETTOR(_bool, airborne, false, Airborne)
+	GETTOR_SETTOR(_bool, stun, false, Stun)
+}M_SuperArmor;
