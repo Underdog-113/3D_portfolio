@@ -1,16 +1,19 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
-class CBronya_Shot_Smoke : public CMeshEffect_Client
+class CBronya_FlashBang : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CBronya_Shot_Smoke();
-	~CBronya_Shot_Smoke();
+	enum FLASHBANG_STATE { SIZE_UP, SIZE_DOWN, STATE_END};
 
 public:
-	static SP(CBronya_Shot_Smoke) Create(_bool isStatic, Engine::CScene* pScene);
+	CBronya_FlashBang();
+	~CBronya_FlashBang();
+
+public:
+	static SP(CBronya_FlashBang) Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject) MakeClone() override;
 
@@ -29,11 +32,14 @@ public:
 	void OnDisable() override;
 
 	void SetBasicName()override;
+	
+private:
+	FLASHBANG_STATE m_eState;
 
 private:
 	static		_uint m_s_uniqueID;
 
 private:
-	void Billboard();
+	void Movement();
 };
 
