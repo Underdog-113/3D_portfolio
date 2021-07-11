@@ -50,5 +50,6 @@ protected:
 
 protected:
 	_float m_fTIme;
+	_float m_fAlpha;
 };
 
