@@ -94,6 +94,9 @@ private:
 	bool m_checkEffectSecond = false;
 	bool m_checkAttack = false;
 
+	bool m_isUltraMode = false;
+	bool m_isEvade = false;
+	bool m_isSecondEvade = false;
 private:
 	CKiana* m_pKiana = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
@@ -101,9 +104,6 @@ private:
 	CEffectMaker_Kiana* m_pEffectMaker = nullptr;
 
 	Appear_Option m_appearOption = None;
-	bool m_isUltraMode = false;
-	bool m_isEvade = false;
-	bool m_isSecondEvade = false;
 
 	_uint m_prevAttackSoundIndex = 0;
 	_uint m_prevRunSoundIndex = 0;

@@ -67,7 +67,7 @@ public:		/* Battle */
 	bool ActSkill();
 	bool ActUltra();
 
-	bool FindTarget();
+	bool FindTarget(HitInfo::CrowdControl cc = HitInfo::CrowdControl::CC_None);
 	void LookTarget();
 	void RemoveTarget();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);

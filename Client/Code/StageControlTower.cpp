@@ -164,7 +164,7 @@ bool CStageControlTower::ActUltra()
 	return true;
 }
 
-bool CStageControlTower::FindTarget()
+bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 {
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
@@ -172,12 +172,40 @@ bool CStageControlTower::FindTarget()
 	if (monsterList.empty())
 		return false;
 
+	std::vector<SP(Engine::CObject)> filteredMonsterList;
 	int count = 0;
 	for (auto& iter : monsterList)
 	{
 		CMonster* mon = (CMonster*)iter.get();
 		if (mon->GetIsEnabled() && !mon->GetComponent<CPatternMachineC>()->GetOnDie())
-			++count;
+		{
+
+			switch (cc)
+			{
+			case _Hit_Info::CC_None:
+				++count;
+				break;
+			case _Hit_Info::CC_Stun:
+				++count;
+				break;
+			case _Hit_Info::CC_Sakura:
+			{
+				CMonster* pMonster = (CMonster*)iter.get();
+				M_Stat* pStat = pMonster->GetStat();
+
+				if (pStat->GetCurrentCC() == HitInfo::CrowdControl::CC_Sakura)
+					filteredMonsterList.emplace_back(iter);
+				++count;
+			}
+				break;
+			case _Hit_Info::CC_Airborne:
+				++count;
+				break;
+			default:
+				break;
+			}
+		}
+
 	}
 
 	if (count == 0)
@@ -193,21 +221,45 @@ bool CStageControlTower::FindTarget()
 	_float3 valkyriePos = m_pCurActor->GetTransform()->GetPosition() + valkyrieForward;
 	valkyriePos.y = 0.f;
 	
-	for (auto& iter : monsterList)
+	if (!filteredMonsterList.empty())
 	{
-		if(!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
-			continue;
-
-		_float3 monsterPos = iter->GetTransform()->GetPosition();
-		monsterPos.y = 0.f;
-
-		_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
-		if (distance < minDistance)
+		// 상태이상 필터링 몬스터
+		for (auto& iter : filteredMonsterList)
 		{
-			minDistance = distance;
-			spTarget = iter;
+			if (!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
+				continue;
+
+			_float3 monsterPos = iter->GetTransform()->GetPosition();
+			monsterPos.y = 0.f;
+
+			_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
+			if (distance < minDistance)
+			{
+				minDistance = distance;
+				spTarget = iter;
+			}
 		}
 	}
+	else
+	{
+		// 모든 적
+		for (auto& iter : monsterList)
+		{
+			if (!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
+				continue;
+
+			_float3 monsterPos = iter->GetTransform()->GetPosition();
+			monsterPos.y = 0.f;
+
+			_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
+			if (distance < minDistance)
+			{
+				minDistance = distance;
+				spTarget = iter;
+			}
+		}
+	}
+
 
 
 	if (m_mode == WithoutUI)

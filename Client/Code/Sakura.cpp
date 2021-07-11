@@ -81,16 +81,6 @@ void CSakura::Update(void)
 {
 	__super::Update();
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_TAB))
-	{
-		++idx;
-		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(17);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_I))
-	{
-		m_spMesh->GetFirstMeshData_Dynamic()->ChangeAniSet(0);
-	}
 }
 
 void CSakura::LateUpdate(void)
