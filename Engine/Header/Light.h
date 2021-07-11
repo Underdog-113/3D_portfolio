@@ -2,9 +2,9 @@
 #define LIGHT_H
 
 BEGIN(Engine)
-class ENGINE_DLL CLight final
+class ENGINE_DLL CLight
 {
-private:
+protected:
 	explicit								CLight				(void);
 										   ~CLight				(void);
 
@@ -12,10 +12,11 @@ public:
 	static			CLight*					Create				(D3DLIGHT9* pLightInfo, const _int& index);
 					void					Free				(void);
 
-					void					InitLight			(D3DLIGHT9* pLightInfo, const _int& index);
-					void					RenderLight			(LPD3DXEFFECT pEffect);
+	virtual			void					InitLight			(D3DLIGHT9* pLightInfo, const _int& index);
+	virtual			void					UpdateLight			(void);
+	virtual			void					RenderLight			(LPD3DXEFFECT pEffect);
 	
-private:
+protected:
 	typedef LPDIRECT3DVERTEXBUFFER9 _VERTEX_BUFFER;
 	typedef LPDIRECT3DINDEXBUFFER9  _INDEX_BUFFER;
 

@@ -16,10 +16,13 @@ public:
 
 				void				Awake			(void) override;
 				void				Start			(void);
+
+				void				Update			(void);
 				void				OnDestroy		(void);
 				
 public:
 				void				AddLight		(D3DLIGHT9* pLightInfo);
+				void				AddCameraLight	(D3DLIGHT9* pLightInfo);
 				void				RenderLights	(LPD3DXEFFECT pEffect);
 
 				void				ClearLights		(void);
