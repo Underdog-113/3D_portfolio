@@ -57,6 +57,8 @@ void CScene::Update(void)
 		if(layer->GetEnable())
 			layer->Update();
 	}
+
+	m_pLightManager->Update();
 }
 
 void CScene::LateUpdate(void)
@@ -166,19 +168,18 @@ void CScene::InitLights(void)
 	pLightInfo->Diffuse = D3DXCOLOR(1.4f, 1.4f, 1.4f, 1.f);
 	pLightInfo->Ambient = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	pLightInfo->Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	m_pLightManager->AddCameraLight(pLightInfo);
 
-
-	//m_pLightManager->AddLight(pLightInfo);
-	//
-	//pLightInfo = new D3DLIGHT9;
-	//pLightInfo->Type = D3DLIGHT_POINT;
-	//pLightInfo->Position = _float3(10.f, 5.f, 10.f);
-	//pLightInfo->Diffuse = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
-	//pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.f, 0.f, 1.f);
-	//pLightInfo->Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
-	//pLightInfo->Range = 10.f;
-	//
-	//m_pLightManager->AddLight(pLightInfo);
+	
+	pLightInfo = new D3DLIGHT9;
+	pLightInfo->Type = D3DLIGHT_POINT;
+	pLightInfo->Position = _float3(0.f, 0.f, 0.f);
+	pLightInfo->Diffuse = D3DXCOLOR(1.f, .8f, .8f, 1.f);
+	pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.f, 0.f, 1.f);
+	pLightInfo->Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	pLightInfo->Range = 5.f;
+	
+	m_pLightManager->AddCameraLight(pLightInfo);
 	//
 	//
 	//pLightInfo = new D3DLIGHT9;
@@ -189,7 +190,7 @@ void CScene::InitLights(void)
 	//pLightInfo->Specular = D3DXCOLOR(0.f, 0.f, 1.f, 1.f);
 	//pLightInfo->Range = 10.f;
 
-	m_pLightManager->AddLight(pLightInfo);
+	//m_pLightManager->AddLight(pLightInfo);
 }
 
 void CScene::InitLayers(_int numOfLayers)

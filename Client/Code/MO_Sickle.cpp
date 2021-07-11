@@ -57,7 +57,7 @@ void CMO_Sickle::Start(void)
 
 	BaseStat stat;
 	//stat.SetBaseHp(445.f);
-	stat.SetBaseHp(445.f);
+	stat.SetBaseHp(3545.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
 
@@ -67,7 +67,13 @@ void CMO_Sickle::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(1);
+	m_pStat->SetHPMagnification(2);
+	m_pStat->SetOnSuperArmor(true);
+
+	m_pSuperArmor->SetHitL(false);
+	m_pSuperArmor->SetHitH(false);
+	m_pSuperArmor->SetAirborne(true);
+	m_weakTime = 7.f;
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -140,16 +146,40 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 	// attack strength
 	switch (info.GetStrengthType())
 	{
-	case HitInfo::Str_Damage:
+	case HitInfo::Str_Damage: // hit 모션 없는 대미지
 		break;
 	case HitInfo::Str_Low:
-		this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		if (false == m_pSuperArmor->GetHitL())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
+		else if (true == m_pSuperArmor->GetHitL())
+		{
+			//if (true == m_pStat->GetOnSuperArmor()) break;
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
 		break;
 	case HitInfo::Str_High:
-		this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		if (false == m_pSuperArmor->GetHitH())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
+		else if (true == m_pSuperArmor->GetHitH())
+		{
+			//if (true == m_pStat->GetOnSuperArmor()) break;
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
 		break;
 	case HitInfo::Str_Airborne:
-		this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		if (false == m_pSuperArmor->GetAirborne())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
+		else if (true == m_pSuperArmor->GetAirborne())
+		{
+			//if (true == m_pStat->GetOnSuperArmor()) break;
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
 		break;
 	}
 

@@ -29,13 +29,12 @@ SP(Engine::CObject) CScoutMeteor::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetPositionY(5.f);
-	
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_bBillboard = true;
 
 	return spClone;
 }
@@ -87,6 +86,7 @@ void CScoutMeteor::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->CommitChanges();
 }
 
 void CScoutMeteor::Render(LPD3DXEFFECT pEffect)
@@ -152,7 +152,7 @@ void CScoutMeteor::OnCollisionEnter(Engine::_CollisionInfo ci)
 		}
 	}
 
-	this->SetDeleteThis(true);
+ 	this->SetDeleteThis(true);
 }
 
 void CScoutMeteor::OnCollisionStay(Engine::_CollisionInfo ci)

@@ -41,7 +41,11 @@ void CMO_Scout::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_ScoutC>();
-	m_spPatternMachine->AddNecessaryPatterns(CScoutBornPattern::Create(), CScoutDiePattern::Create(), CScoutBasePattern::Create(), CScoutHitPattern::Create());
+	m_spPatternMachine->AddNecessaryPatterns(CScoutBornPattern::Create(), 
+		CScoutDiePattern::Create(), 
+		CScoutBasePattern::Create(), 
+		CScoutHitPattern::Create(),
+		CScoutAirbornePattern::Create());
 	m_spPatternMachine->AddPattern(CScoutShoot2Pattern::Create());
 	m_spPatternMachine->AddPattern(CScoutShoot3Pattern::Create());
 }
@@ -56,7 +60,7 @@ void CMO_Scout::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(145.f);
+	stat.SetBaseHp(4145.f);
 	stat.SetBaseAtk(15.f);
 	stat.SetBaseDef(5.f);
 
@@ -66,6 +70,11 @@ void CMO_Scout::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
+	m_pStat->SetOnSuperArmor(true);
+
+	m_pSuperArmor->SetHitL(false);
+	m_pSuperArmor->SetHitH(false);
+	m_pSuperArmor->SetAirborne(true);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -126,18 +135,50 @@ void CMO_Scout::SetBasicName(void)
 
 void CMO_Scout::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
+	if (true == m_pStat->GetOnPatternShield())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
-	case HitInfo::Str_Damage:
+	case HitInfo::Str_Damage: // hit 모션 없는 대미지
 		break;
 	case HitInfo::Str_Low:
-		this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		if (false == m_pSuperArmor->GetHitL())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
+		else if (true == m_pSuperArmor->GetHitL())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
 		break;
 	case HitInfo::Str_High:
-		this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		if (false == m_pSuperArmor->GetHitH())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
+		else if (true == m_pSuperArmor->GetHitH())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
 		break;
 	case HitInfo::Str_Airborne:
+		if (false == m_pSuperArmor->GetAirborne())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
+		else if (true == m_pSuperArmor->GetAirborne())
+		{
+			if (false == m_pStat->GetOnSuperArmor())
+			{
+				this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+			}
+		}
 		break;
 	}
 

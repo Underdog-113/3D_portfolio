@@ -1116,7 +1116,8 @@ void CFSM_TheresaC::Charge2_Update(float deltaTime)
 	}
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Charge2 + 0.05f)
 	{
-		OnAxeCollider();
+		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.6f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.3f, _float3(2.f, 0.f, 0.f));
+		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
 		m_checkAttack = true;
 	}
 
@@ -1155,6 +1156,77 @@ void CFSM_TheresaC::Charge2_Update(float deltaTime)
 }
 
 void CFSM_TheresaC::Charge2_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pTheresa->Off_Axe();
+	OffAxeCollider();
+}
+
+void CFSM_TheresaC::Attack_QTE_Init(void)
+{
+}
+
+void CFSM_TheresaC::Attack_QTE_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Charge1);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	ResetCheckMembers();
+
+	m_pTheresa->On_Axe();
+}
+
+void CFSM_TheresaC::Attack_QTE_Update(float deltaTime)
+{
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	{
+		m_pEffectMaker->CreateEffect_Charge1();
+		PlaySound_Effect(Sound_Charge1_Effect);
+		PlaySound_Charge_RandomVoice();
+
+		m_checkEffect = true;
+	}
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	{
+		OnAxeCollider();
+		m_checkAttack = true;
+	}
+
+	if (!m_checkTake && !m_checkShake && m_pDM->GetAniTimeline() > 0.21f)
+	{
+		CStageControlTower::GetInstance()->SetCameraCustomTake(2.8f, 2.5f, D3DXToRadian(12.f));
+		m_checkTake = true;
+	}
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.26f)
+	{
+		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_Charge1Impact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
+		m_checkShake = true;
+		m_checkTake = false;
+	}
+
+	if (!m_checkTake && m_pDM->GetAniTimeline() > 0.35f)
+	{
+		CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 2.f, D3DXToRadian(10.f));
+		m_checkTake = true;
+	}
+
+	if (m_pDM->GetAniTimeline() > 0.4f)
+		OffAxeCollider();
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack1))
+		return;
+	if (CheckAction_WeaponSkill(0.5f))
+		return;
+	if (CheckAction_Ultra(0.5f))
+		return;
+	if (CheckAction_ChargeAttack_End())
+		return;
+}
+
+void CFSM_TheresaC::Attack_QTE_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 
@@ -1252,10 +1324,22 @@ void CFSM_TheresaC::SwitchIn_Init(void)
 void CFSM_TheresaC::SwitchIn_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SwitchIn);
+	m_pTheresa->Off_Sword();
+	m_pTheresa->Off_Axe();
 }
 
 void CFSM_TheresaC::SwitchIn_Update(float deltaTime)
 {
+	if (CheckAction_EvadeBackward(0.4f))
+		return;
+	if (CheckAction_Run_OnAction(0.4f))
+		return;
+	if (CheckAction_Attack(Name_Attack1, 0.4f))
+		return;
+	if (CheckAction_Ultra(0.4f))
+		return;
+	if (CheckAction_WeaponSkill(0.4f))
+		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
 }
@@ -1594,8 +1678,8 @@ void CFSM_TheresaC::RegisterAllState()
 // 	CreateState(CFSM_TheresaC, pState, JUMP_2)
 // 		AddState(pState, Name_JUMP_2);
 // 
-// 	CreateState(CFSM_TheresaC, pState, QTE_FY)
-// 		AddState(pState, Name_QTE_FY);
+ 	CreateState(CFSM_TheresaC, pState, Attack_QTE)
+ 		AddState(pState, Name_Attack_QTE);
 
 	CreateState(CFSM_TheresaC, pState, Hit_L)
 		AddState(pState, Name_Hit_L);

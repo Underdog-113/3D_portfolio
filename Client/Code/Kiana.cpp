@@ -81,6 +81,7 @@ void CKiana::Start(void)
 	V_WarshipStat stat;
 
 	m_pStat = new V_Kiana_Stat;
+	m_pStat->SetUltraCost(75.f);
 	m_pStat->SetupStatus(&stat);
 
 	__super::Start();
@@ -98,7 +99,7 @@ void CKiana::Start(void)
 	CreatePivotMatrix(&m_pRightToe_World, &m_pRightToe_Frame, "Bip001_R_Toe0");
 	CreatePivotMatrix(&m_pRightHand_World, &m_pRightHand_Frame, "Bip001_R_Hand");
 	CreatePivotMatrix(&m_pLeftHand_World, &m_pLeftHand_Frame, "Bip001_L_Hand");
-
+	
 	//weapon
 	//CreatePistol();
 
@@ -336,7 +337,7 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk03->GetTransform()->UpdateWorldMatrix();
 
 		info.SetDamageRate(2.f);
-		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetStrengthType(_Hit_Info::Str_Airborne);
 		info.SetCrowdControlType(_Hit_Info::CC_None);
 
 		static_cast<CKiana_CatPaw_Atk03*>(m_spCatPaw_Atk03.get())->SetupPaw(this, info);
@@ -351,7 +352,7 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk04->GetTransform()->UpdateWorldMatrix();
 
 		info.SetDamageRate(2.f);
-		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetStrengthType(_Hit_Info::Str_Airborne);
 		info.SetCrowdControlType(_Hit_Info::CC_None);
 
 		static_cast<CKiana_CatPaw_Atk04*>(m_spCatPaw_Atk04.get())->SetupPaw(this, info);

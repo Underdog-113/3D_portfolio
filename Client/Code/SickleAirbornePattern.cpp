@@ -26,8 +26,7 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Sickle_Throw_01 != fsm->GetCurStateString() &&
 		Name_Sickle_Throw_02 != fsm->GetCurStateString() &&
 		Name_Sickle_StandUp != fsm->GetCurStateString() &&
-		Name_Sickle_Hit_Throw != fsm->GetCurStateString() &&
-		0 >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurBreakGauge())
+		Name_Sickle_Hit_Throw != fsm->GetCurStateString())
 	{
 		fsm->ChangeState(Name_Sickle_Throw_01);
 		//PatternPlaySound(L"Sickle_Dead.wav", pOwner);

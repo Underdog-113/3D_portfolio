@@ -64,9 +64,6 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
 	}
 
-	//std::cout << "BP : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
-
-
 	// born 실행 (1번만)
 	PlayBornPattern();
 	
@@ -81,6 +78,10 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	// hit, airborne 실행
 	PlayHitPattern();
+
+	std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
+	//std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
+	//std::cout << "Pattern  : " << std::endl;
 }
 
 void CPatternMachineC::LateUpdate(SP(Engine::CComponent) spThis)

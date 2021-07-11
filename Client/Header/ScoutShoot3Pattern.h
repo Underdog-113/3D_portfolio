@@ -33,6 +33,8 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_atkMat;
+	_mat m_targetMat;
+
 	_bool m_onShoot = false;
 	_bool m_firePosFix = false;
 	_bool m_onEffect = false;

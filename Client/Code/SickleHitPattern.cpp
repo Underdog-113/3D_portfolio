@@ -5,14 +5,6 @@
 #include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
 
-#include "StageControlTower.h"
-#include "Valkyrie.h"
-#include "DynamicMeshData.h"
-#include "PatternMachineC.h"
-#include "AniCtrl.h"
-
-#include "SickleBasePattern.h"
-
 CSickleHitPattern::CSickleHitPattern()
 {
 }

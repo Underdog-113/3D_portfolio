@@ -5,12 +5,6 @@
 #include "FSMDefine_Robot.h"
 #include "MO_Robot.h"
 
-#include "StageControlTower.h"
-#include "Valkyrie.h"
-#include "DynamicMeshData.h"
-#include "PatternMachineC.h"
-#include "AniCtrl.h"
-
 CRobotHitPattern::CRobotHitPattern()
 {
 }
@@ -22,6 +16,7 @@ CRobotHitPattern::~CRobotHitPattern()
 void CRobotHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_RobotC) fsm = pOwner->GetComponent<CFSM_RobotC>();
+	static_cast<CMO_Robot*>(pOwner)->UnActiveAttackBall();
 
 	// 내가 약피격 당했다면
 	if (Name_Hit_L_1 != fsm->GetCurStateString() &&
