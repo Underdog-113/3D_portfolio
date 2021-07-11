@@ -52,6 +52,7 @@ void CSakura::Start(void)
 	V_WarshipStat stat;
 
 	m_pStat = new V_Sakura_Stat;
+	m_pStat->SetUltraCost(100.f);
 	m_pStat->SetType(V_Stat::SAKURA);
 	m_pStat->SetupStatus(&stat);
 
@@ -60,7 +61,10 @@ void CSakura::Start(void)
 	m_spMesh->OnRootMotion();
 	m_spDebug = AddComponent<Engine::CDebugC>();
 
-	//m_spTransform->SetSize(0.4f, 0.4f, 0.4f);
+	m_spTransform->SetSize(1.2f, 1.2f, 1.2f);
+
+	CreatePivotMatrix(&m_pHand_World, &m_pHand_Frame, "Bip001_Prop1");
+	CreateAttackBall(&m_pAttackBall);
 
 	if (m_isWait)
 	{
@@ -81,6 +85,7 @@ void CSakura::Update(void)
 {
 	__super::Update();
 
+	UpdatePivotMatrix(m_pHand_World, m_pHand_Frame);
 }
 
 void CSakura::LateUpdate(void)
@@ -107,6 +112,7 @@ void CSakura::OnDestroy(void)
 {
 	__super::OnDestroy();
 
+	SAFE_DELETE(m_pHand_World)
 	SAFE_DELETE(m_pStat)
 }
 
@@ -131,8 +137,18 @@ void CSakura::ApplyHitInfo(HitInfo info)
 
 void CSakura::UseSkill(void)
 {
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= m_pStat->GetSkillCost();
+	m_pStat->SetCurSp(curSp);
+
+	m_skillTimer = 0.f;
 }
 
 void CSakura::UseUltra(void)
 {
+	_float curSp = m_pStat->GetCurSp();
+	curSp -= m_pStat->GetUltraCost();
+
+	m_pStat->SetCurSp(curSp);
+	m_ultraTimer = 0.f;
 }

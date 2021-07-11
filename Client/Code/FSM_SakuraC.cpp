@@ -679,17 +679,48 @@ void CFSM_SakuraC::Charge1_Init(void)
 
 void CFSM_SakuraC::Charge1_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Attack5);
+	m_pDM->ChangeAniSet(Index_Charge1);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
 }
 
 void CFSM_SakuraC::Charge1_Update(float deltaTime)
 {
+
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	{
+		/*		m_pEffectMaker->CreateEffect_Attack5();*/
+		m_checkEffect = true;
+		// 
+		// 		PlaySound_Attack_RandomVoice();
+		// 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		// 
+		// 		m_pEffectMaker->CreateEffect_Attack5();
+		// 		PlaySound_Effect(Sound_Attack_5_Effect);
+	}
+
+	// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
+	// 	{
+	// 		m_pKiana->UnActiveAttackBall();
+	// 	}
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack1_Combat))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack + 0.15f))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
 }
 
 void CFSM_SakuraC::Charge1_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::Charge1_AS_Init(void)
