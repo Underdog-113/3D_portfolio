@@ -55,6 +55,7 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Dissolve(std::wstring objectKey, 
 	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
 	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
 
 	return spMeshEffect;

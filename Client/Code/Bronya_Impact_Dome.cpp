@@ -1,21 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\Ganesha_Dome.h"
+#include "..\Header\Bronya_Impact_Dome.h"
 
-_uint CGanesha_Dome::m_s_uniqueID = 0;
+_uint CBronya_Impact_Dome::m_s_uniqueID = 0;
 
-
-CGanesha_Dome::CGanesha_Dome()
+CBronya_Impact_Dome::CBronya_Impact_Dome()
 {
 }
 
 
-CGanesha_Dome::~CGanesha_Dome()
+CBronya_Impact_Dome::~CBronya_Impact_Dome()
 {
 }
 
-SP(CGanesha_Dome) CGanesha_Dome::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CBronya_Impact_Dome) CBronya_Impact_Dome::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CGanesha_Dome) spInstance(new CGanesha_Dome, Engine::SmartDeleter<CGanesha_Dome>);
+	SP(CBronya_Impact_Dome) spInstance(new CBronya_Impact_Dome, Engine::SmartDeleter<CBronya_Impact_Dome>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -23,14 +22,13 @@ SP(CGanesha_Dome) CGanesha_Dome::Create(_bool isStatic, Engine::CScene * pScene)
 	return spInstance;
 }
 
-SP(Engine::CObject) CGanesha_Dome::MakeClone()
+SP(Engine::CObject) CBronya_Impact_Dome::MakeClone()
 {
-	SP(CGanesha_Dome) spClone(new CGanesha_Dome, Engine::SmartDeleter<CGanesha_Dome>);
+	SP(CBronya_Impact_Dome) spClone(new CBronya_Impact_Dome, Engine::SmartDeleter<CBronya_Impact_Dome>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spTransform->SetRotationZ(D3DXToRadian(180.f));
-	spClone->m_spTransform->SetSize(_float3(8.f, 8.f, 8.f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -39,28 +37,29 @@ SP(Engine::CObject) CGanesha_Dome::MakeClone()
 	return spClone;
 }
 
-void CGanesha_Dome::Awake()
+void CBronya_Impact_Dome::Awake()
 {
 	__super::Awake();
 
 }
 
-void CGanesha_Dome::Start()
+void CBronya_Impact_Dome::Start()
 {
 	__super::Start();
 	m_fAlpha = 0.25f;
 }
 
-void CGanesha_Dome::FixedUpdate()
+void CBronya_Impact_Dome::FixedUpdate()
 {
 	__super::FixedUpdate();
+
 }
 
-void CGanesha_Dome::Update()
+void CBronya_Impact_Dome::Update()
 {
 	__super::Update();
 
-	if (this->GetTransform()->GetSize().x >= 10.f)
+	if (this->GetTransform()->GetSize().x >= 8.f)
 	{
 		this->SetDeleteThis(true);
 	}
@@ -68,55 +67,51 @@ void CGanesha_Dome::Update()
 	_float _size = 2.3f * GET_DT;
 
 	this->GetTransform()->AddSize(_float3(_size, _size, _size));
-
 }
 
-void CGanesha_Dome::LateUpdate()
+void CBronya_Impact_Dome::LateUpdate()
 {
 	__super::LateUpdate();
 
 }
 
-void CGanesha_Dome::PreRender(LPD3DXEFFECT pEffect)
+void CBronya_Impact_Dome::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-	pEffect->SetBool("gPlayingAnim", false);
-
-	pEffect->CommitChanges();
 }
 
-void CGanesha_Dome::Render(LPD3DXEFFECT pEffect)
+void CBronya_Impact_Dome::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
 }
 
-void CGanesha_Dome::PostRender(LPD3DXEFFECT pEffect)
+void CBronya_Impact_Dome::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 
 }
 
-void CGanesha_Dome::OnDestroy()
+void CBronya_Impact_Dome::OnDestroy()
 {
 	__super::OnDestroy();
 
 }
 
-void CGanesha_Dome::OnEnable()
+void CBronya_Impact_Dome::OnEnable()
 {
 	__super::OnEnable();
 
 }
 
-void CGanesha_Dome::OnDisable()
+void CBronya_Impact_Dome::OnDisable()
 {
 	__super::OnDisable();
 
 }
 
-void CGanesha_Dome::SetBasicName()
+void CBronya_Impact_Dome::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
