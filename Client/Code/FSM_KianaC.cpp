@@ -1493,8 +1493,8 @@ void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 			HitInfo info;
 			info.SetDamageRate(0.8f);
 			info.SetBreakDamage(50.f);
-			info.SetStrengthType(HitInfo::Str_Airborne);
-			info.SetCrowdControlType(HitInfo::CC_None);
+			info.SetStrengthType(HitInfo::Str_Damage);
+			info.SetCrowdControlType(HitInfo::CC_Stun);
 
 			m_pStageControlTower->HitMonster(
 				m_pKiana,

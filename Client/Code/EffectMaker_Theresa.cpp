@@ -146,7 +146,7 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Trail()
 {
 	_float3 size = _float3(0.3f, 0.2f, 0.3f);
 
-	auto effect = CreateEffect_Dissolve(Ultra_Trail_ObjectKey, L"Ult_Trail", Ultra_Trail_Tex1Name, Ultra_Trail_Tex2Name);
+	auto effect = CreateEffect_Dissolve(Ultra_Trail_ObjectKey, L"Ult_Trail", Ultra_Trail_Tex1Name, Ultra_Trail_Tex2Name, Ultra_Trail_Tex3Name);
 	effect->GetTransform()->SetParent(m_pTheresa->GetTransform());
 	effect->GetTransform()->SetSize(size);
 
