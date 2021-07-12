@@ -45,7 +45,8 @@ public:
 	
 	GETTOR			(_mat*,					m_pHand_World,		nullptr,	HandWorldMatrix)
 	Engine::D3DXFRAME_DERIVED*	m_pHand_Frame = nullptr;
-
+	
+	GETTOR			(CAttackBall*,			m_pFlashAttackBall,		nullptr, FlashAttackBall)
 private:
 	_uint idx = 0;
 };

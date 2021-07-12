@@ -65,6 +65,8 @@ public:
 	void OnHitbox();
 	void OffHitbox();
 
+	Engine::CCollider* GetHitbox();
+
 public:
 	virtual void UseSkill(void) PURE;
 	virtual void UseUltra(void) PURE;

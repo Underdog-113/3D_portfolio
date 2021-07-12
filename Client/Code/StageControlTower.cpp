@@ -61,8 +61,6 @@ void CStageControlTower::Update(void)
 		RemoveTarget();
 	}
 
-
-
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 		SwitchValkyrie(Wait_1);
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))

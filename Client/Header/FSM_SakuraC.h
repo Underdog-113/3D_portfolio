@@ -14,7 +14,17 @@
 #define Delay_Effect_Atk04 0.0f
 #define Delay_Effect_Atk05 0.05f
 
-#define Delay_Effect_Charge1 0.3f
+#define Delay_Attack1_StandBy	0.11f
+#define Delay_Attack1_Combat	0.09f
+#define Delay_Attack2_1	0.10f
+#define Delay_Attack2_2	0.27f
+#define Delay_Attack3	0.28f
+#define Delay_Attack4_1	0.15f
+#define Delay_Attack4_2	0.22f
+#define Delay_Attack4_3	0.37f
+
+#define Delay_Effect_Charge1 0.4f
+
 
 class CSakura;
 class CStageControlTower;
@@ -33,6 +43,8 @@ public:
 private:
 	void FixRootMotionOffset(_uint index);
 	void ResetCheckMembers();
+
+	void OnAttackBall(_float damageRate, _float breakDamage, HitInfo::Strength strType, HitInfo::CrowdControl ccType);
 
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
@@ -56,6 +68,11 @@ private: /* Special Actions */
 private:
 	bool m_checkEffect = false;
 	bool m_checkAttack = false;
+	bool m_checkAttack2nd = false;
+	bool m_checkAttack3rd = false;
+	bool m_checkFlashCol = false;
+	bool m_checkEndFlash = false;
+	bool m_checkFlashMove = false;
 
 	bool m_isEvade = false;
 	bool m_isSecondEvade = false;
@@ -71,6 +88,8 @@ private:
 	_float m_chargeEnterTimer = 0.f;
 
 	_double m_runSoundTimer = 0;
+
+	_float3 m_targetToSakura = ZERO_VECTOR;
 
 private:
 	// Appear
@@ -120,6 +139,12 @@ private:
 	void Attack5_Enter(void);
 	void Attack5_Update(float deltaTime);
 	void Attack5_End(void);
+
+	// Attack6
+	void Attack6_Init(void);
+	void Attack6_Enter(void);
+	void Attack6_Update(float deltaTime);
+	void Attack6_End(void);
 
 	// Charge1
 	void Charge1_Init(void);

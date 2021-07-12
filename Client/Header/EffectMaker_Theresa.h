@@ -14,11 +14,12 @@
 #define Ultra_Trail_ObjectKey	L"Theresa_Ult_Trail"
 #define Ultra_Trail_Tex1Name	L"Tornado_3"
 #define Ultra_Trail_Tex2Name	L"ATK_Distortion_3"
+#define Ultra_Trail_Tex3Name	L"yun01"
 
 #define Ultra_Smoke_ObjectKey	L"Theresa_Ult_Smoke"
 #define Ultra_Smoke_Tex1Name	L"fx_snowfield_fog03"
 #define Ultra_Smoke_Tex2Name	L"fx_snowfield_fog03"
-#
+
 #define Ultra_Boom_ObjectKey	L"Theresa_Ult_Boom"
 #define Ultra_Boom_Tex1Name		L"Ult_Boom"
 #define Ultra_Boom_Tex2Name		L"Ult_Boom"

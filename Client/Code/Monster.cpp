@@ -190,6 +190,19 @@ void CMonster::MonsterDead()
 {
 }
 
+Engine::CCollider * CMonster::GetHitBox()
+{
+	auto cols = m_spCollision->GetColliders();
+	for (auto col : cols)
+	{
+		if (col->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
+		{
+			return col.get();
+		}
+	}
+	return nullptr;
+}
+
 void CMonster::SelectChannelID()
 {
 	if (!(m_s_channelID & EMonChID::MON_0))

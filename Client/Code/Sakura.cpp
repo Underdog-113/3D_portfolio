@@ -3,6 +3,7 @@
 
 #include "FSM_SakuraC.h"
 #include "DynamicMeshData.h"
+#include "AttackBall.h"
 
 CSakura::CSakura()
 {
@@ -35,6 +36,10 @@ SP(Engine::CObject) CSakura::MakeClone(void)
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 
+	spClone->m_spRigidBody = spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
+
 	spClone->m_spStateMachine = spClone->GetComponent<CFSM_SakuraC>();
 	return spClone;
 }
@@ -63,8 +68,11 @@ void CSakura::Start(void)
 
 	m_spTransform->SetSize(1.2f, 1.2f, 1.2f);
 
-	CreatePivotMatrix(&m_pHand_World, &m_pHand_Frame, "Bip001_Prop1");
+	//CreatePivotMatrix(&m_pHand_World, &m_pHand_Frame, "Bip001_Prop1");
 	CreateAttackBall(&m_pAttackBall);
+	CreateAttackBall(&m_pFlashAttackBall);
+
+	m_pAttackBall->SetIsEnabled(false);
 
 	if (m_isWait)
 	{
@@ -85,7 +93,10 @@ void CSakura::Update(void)
 {
 	__super::Update();
 
-	UpdatePivotMatrix(m_pHand_World, m_pHand_Frame);
+	m_pAttackBall->GetTransform()->SetPosition(m_spTransform->GetPosition());
+	m_pAttackBall->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset());
+	m_pAttackBall->GetTransform()->AddPosition(m_spTransform->GetForward() * 0.5f);
+	//UpdatePivotMatrix(m_pHand_World, m_pHand_Frame);
 }
 
 void CSakura::LateUpdate(void)
