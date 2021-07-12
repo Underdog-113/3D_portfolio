@@ -1,2637 +1,578 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="99.Default">
-      <UniqueIdentifier>{2e2272e7-60a5-4c36-adc2-8142c3f7423d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.MainApp">
-      <UniqueIdentifier>{3e7dbc9b-69a3-4014-a846-dbbceb7d70df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="98.Include">
-      <UniqueIdentifier>{f2001eae-e2d3-4e20-90c3-b74150ed8f0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene">
-      <UniqueIdentifier>{fb3559bc-5e87-4c5b-b57e-9625bdbbf03c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects">
-      <UniqueIdentifier>{50f5935f-2a42-4e51-81e7-19417db711ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\99.Loading">
-      <UniqueIdentifier>{ea353fc7-3e80-41cf-9933-6e363a009886}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\00.InitScene">
-      <UniqueIdentifier>{d20a2dfd-4f11-4780-a070-1c3d0d6fb340}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\01.StaticScene">
-      <UniqueIdentifier>{d8fbf8f6-7698-40c3-8f49-e9af75ebd861}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.PrivateScene">
-      <UniqueIdentifier>{ba34bee0-78ed-48de-a03c-9bd7db564c86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.PrivateScene\00.Changmo">
-      <UniqueIdentifier>{b5ddb26e-4a5e-42e9-a402-6ccf5eefef78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.PrivateScene\00.YongScene">
-      <UniqueIdentifier>{4f6ac84a-8dc7-4b08-ae1e-c09ed668fb00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.PrivateScene\00.WooScene">
-      <UniqueIdentifier>{5000a794-c7a6-4be8-baac-f35b87564dbe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.PrivateScene\00.DongScene">
-      <UniqueIdentifier>{5be9e514-de30-44ea-8fd3-412b167faada}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.PrivateScene\00.JongScene">
-      <UniqueIdentifier>{63f84f0b-d155-4a53-b15b-6e496573ce04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05.DeleGate">
-      <UniqueIdentifier>{c83d4b85-dedd-4e0a-aaf1-15da693d36af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component">
-      <UniqueIdentifier>{614eb073-2122-4fe1-b528-07ee62180f53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI">
-      <UniqueIdentifier>{6e98ea24-5743-4425-8722-4ede02a61764}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\00.UiAnimCtr">
-      <UniqueIdentifier>{6f618887-1947-493e-91fb-7be9673b0a6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\01.DamageFont">
-      <UniqueIdentifier>{51254a6d-c0d4-4550-9140-860bbe8988e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06.DataLoad">
-      <UniqueIdentifier>{4e050859-d9ff-4601-be3e-ce23afd1159b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08.ObjectPool">
-      <UniqueIdentifier>{e5f788ac-3f96-48aa-b07a-57601377624f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08.ObjectPool\DamageObjectPool">
-      <UniqueIdentifier>{d1895693-21fc-4367-bb77-affbec198982}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\03.ThreeStageScene">
-      <UniqueIdentifier>{8dd069c6-6cc9-4380-9307-4bf16d87bad1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\04.StageSelectionScene">
-      <UniqueIdentifier>{e203b4f8-512a-4f19-a409-befd6efb4577}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\05.ReadyToSortieScene">
-      <UniqueIdentifier>{e883c7ed-0bd7-4e2f-802e-0973c7198fb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\06.OneStageScene">
-      <UniqueIdentifier>{ead88a62-4bf9-459d-90eb-18691c79c998}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\07.MainRoomScene">
-      <UniqueIdentifier>{390502bb-37b5-44b5-a79b-6d5e2a11c73d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\08.TwoStageScene">
-      <UniqueIdentifier>{2a933889-871f-4d7d-97af-e77cee502da8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\09.PartySettingScene">
-      <UniqueIdentifier>{30860560-a729-4718-abad-bf80d65e2ecf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\03.Timer">
-      <UniqueIdentifier>{74ab1825-01ae-44ed-a11d-f1acc8db8642}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager">
-      <UniqueIdentifier>{aaee55bd-5edf-4507-bcc2-29434ee64096}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\01.BattleUiManager">
-      <UniqueIdentifier>{f3403a50-55bf-4e14-9ea9-ae5e6f3ecc24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\04.HitsUi">
-      <UniqueIdentifier>{70fedf36-cfa3-4296-ba3a-c07e95a374da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\02.RotationUi">
-      <UniqueIdentifier>{1b2e04ec-4118-4847-8f93-5755640c0439}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\05.LifeObject">
-      <UniqueIdentifier>{b63dddbc-67bd-4f8e-852f-ea09381d74a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\06.SkillCollTime">
-      <UniqueIdentifier>{e5d81b2f-c56b-45ec-a322-15466f1bebda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\07.AlphaLifeTime">
-      <UniqueIdentifier>{a62f0e53-db56-4e99-a888-dfe2f40e2081}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\08.BattleRenunciation">
-      <UniqueIdentifier>{798eb329-a8de-43a9-bfe3-7062e8f499c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\10.BattleEnd">
-      <UniqueIdentifier>{6c2d8867-7ca6-4ee7-9b1d-483dc7998edc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="98.Include\ClientStructure_Status">
-      <UniqueIdentifier>{81dd6d3b-81d0-4830-ab34-47c2f9aafe29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene">
-      <UniqueIdentifier>{e4188c05-d30b-4b62-b385-9ed72d4ddf71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\00.DecoObject">
-      <UniqueIdentifier>{7b7fc362-4064-4f6f-9b0f-7f3797d96661}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\01.MapObject">
-      <UniqueIdentifier>{1aed8968-743a-41bb-bd4b-c90e7b4a9d44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit">
-      <UniqueIdentifier>{b8153a4e-6fa3-47ee-bf23-55a3bca49a64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI">
-      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI\00.Button">
-      <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI\00.Button\00.ButtonFunction">
-      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI\01.ScrollView">
-      <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect">
-      <UniqueIdentifier>{aac3962e-7511-4415-aac9-726e31ebc547}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\02.Particle">
-      <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect">
-      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail">
-      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\02.TrapObject">
-      <UniqueIdentifier>{21b389d3-bc77-49f1-8891-166f0eaa6f0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\03.PhaseChanger">
-      <UniqueIdentifier>{1d797f47-aba1-4cf8-a19a-a04fa50dd691}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie">
-      <UniqueIdentifier>{aae8ad2c-f49d-44a2-967c-9c648d86446d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana">
-      <UniqueIdentifier>{5ffef45e-d9f4-4bc7-9dbe-4f404826fa7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw">
-      <UniqueIdentifier>{be8f7361-c14b-43b0-8fc6-d45d7014f509}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol">
-      <UniqueIdentifier>{a270032a-5f28-45bf-a99b-d15810858d17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\FSM">
-      <UniqueIdentifier>{509a888c-7a65-4ca3-98a0-de4c45a2926c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura">
-      <UniqueIdentifier>{ffd0e5c8-acb7-4886-b398-f13cebef01e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa">
-      <UniqueIdentifier>{a72f1c22-594a-4366-ad8a-6a4d215d293e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM">
-      <UniqueIdentifier>{869cc9cd-0cc6-40e1-8084-403e767a79bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster">
-      <UniqueIdentifier>{211598c1-eb0b-4768-907e-f8852aceae34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider">
-      <UniqueIdentifier>{c018753b-4459-4729-9aa1-f124989a2513}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM">
-      <UniqueIdentifier>{7522bdb1-bd70-4493-a8f5-8c6c3a6056e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer">
-      <UniqueIdentifier>{bb69a5fb-20de-4a03-ab41-683c5fd6e336}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM">
-      <UniqueIdentifier>{4e0ba9d9-963e-475a-8210-13967c4f6c64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot">
-      <UniqueIdentifier>{ba62fde9-0141-45f2-af69-39aa74f7a62f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM">
-      <UniqueIdentifier>{3b0a3ddb-d67a-4b37-990b-dc1a93a8327e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Axe">
-      <UniqueIdentifier>{0799b1ba-0a55-4c92-a407-982145d97033}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM">
-      <UniqueIdentifier>{3eaf9202-679f-4a20-be62-eb8cb514651f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha">
-      <UniqueIdentifier>{2fa8eab6-5f66-4214-95e7-63aa87abeea0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM">
-      <UniqueIdentifier>{bff33868-824f-4a3e-b8ff-9da142bd33df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya">
-      <UniqueIdentifier>{199e26cf-2e27-428b-aeee-038a13fbf1b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM">
-      <UniqueIdentifier>{a2a6ee26-793f-4a1d-a827-953fe02c31ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza">
-      <UniqueIdentifier>{253154c8-bf6c-479a-8074-94a34e30d62b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM">
-      <UniqueIdentifier>{786bfeb7-e733-441b-8308-4c6105746e6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout">
-      <UniqueIdentifier>{974ca1cf-b207-48aa-8298-c5b132ab2142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM">
-      <UniqueIdentifier>{d43ade6f-b909-4463-82fd-080a74f138fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle">
-      <UniqueIdentifier>{4cd5a533-956a-4dc9-8808-8a4f78b305f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM">
-      <UniqueIdentifier>{8ed4d699-c3c9-422d-a26b-23bd53bdddb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\02.AttackBall">
-      <UniqueIdentifier>{54d923a6-b9d4-41d7-9ffa-d7f4dd868fc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\ATBSystem">
-      <UniqueIdentifier>{92f11ab2-1bca-4d9a-8b88-bc4a92b2d1a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern">
-      <UniqueIdentifier>{21afe87b-b282-483c-b349-155160f77a41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\ATBSystem\Component">
-      <UniqueIdentifier>{b5c7dd88-220d-4b34-8282-bbab5c886ff8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\00.Born">
-      <UniqueIdentifier>{3cfe2250-14c4-49fc-888e-0637a4c44329}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\01.Die">
-      <UniqueIdentifier>{78469b04-6508-4765-a4e7-c4400502a247}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select">
-      <UniqueIdentifier>{27f022f9-ca4a-40c4-a40a-11fc4bda2836}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\04.Base">
-      <UniqueIdentifier>{f077e342-8143-4eb5-8a12-32bb1f84d27d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\02.Hit">
-      <UniqueIdentifier>{44f19451-b6f4-4a6e-9e27-f8f6ccb90302}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select\00.Atk02">
-      <UniqueIdentifier>{7950979c-3485-4348-afab-5164b8ba418e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\09.MonsterSlider">
-      <UniqueIdentifier>{4df59e10-5cba-48dd-b315-8421ae81eb86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI">
-      <UniqueIdentifier>{6849d882-e3b5-46df-9a05-87399aa649e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI\00.Button">
-      <UniqueIdentifier>{92ae74b4-e5f1-45d6-8db1-4dd89bc97fbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI\00.Button\00.ButtonFunction">
-      <UniqueIdentifier>{585fe866-a339-4585-877e-f5b4f0074060}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\02.UI\01.ScrollView">
-      <UniqueIdentifier>{6608eb7d-47e7-4eff-b4b8-14dc0028b305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect">
-      <UniqueIdentifier>{aac3962e-7511-4415-aac9-726e31ebc547}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\02.Particle">
-      <UniqueIdentifier>{41ed5ef2-4f71-4ef8-876a-e0e554e5d0cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect">
-      <UniqueIdentifier>{d1f7d984-f4ef-402d-bb25-acdabedd1b89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail">
-      <UniqueIdentifier>{6c604190-9002-483b-b101-fdea514f19af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\02.TrapObject">
-      <UniqueIdentifier>{21b389d3-bc77-49f1-8891-166f0eaa6f0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\03.PhaseChanger">
-      <UniqueIdentifier>{1d797f47-aba1-4cf8-a19a-a04fa50dd691}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\04.Item">
-      <UniqueIdentifier>{777bc2af-ce9b-40d5-9e08-d9195d7c1e71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Dummy">
-      <UniqueIdentifier>{85adc61e-9908-4314-bfcd-a1d48a3e9a3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\01.Glitter">
-      <UniqueIdentifier>{6891e3f5-01dc-4912-8c4e-2965684858ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle">
-      <UniqueIdentifier>{b4f8eee6-b7fb-4542-8b53-0de7067f7a1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\10.SkillActivation">
-      <UniqueIdentifier>{32868f76-d66f-4f14-8407-2aee397cb560}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern">
-      <UniqueIdentifier>{06991eb5-65ed-4f0a-b41f-435b67fd2e2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\00.Born">
-      <UniqueIdentifier>{415abffa-1d56-4542-94b1-9742a1f43037}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\01.Die">
-      <UniqueIdentifier>{848f73b8-fa0a-4797-bd0b-d9fdeb02f352}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\02.Hit">
-      <UniqueIdentifier>{eea6f2d3-4d6f-448e-a93d-66ae0a744472}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\03.Select">
-      <UniqueIdentifier>{1cfac773-33f8-4d4f-9922-ba2fba72a503}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\04.Base">
-      <UniqueIdentifier>{b9862242-5553-4ace-8c4a-43157fd7c975}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern">
-      <UniqueIdentifier>{5477e8c8-3202-4050-b53f-26670933eda6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\00.Born">
-      <UniqueIdentifier>{cf169aeb-550d-47dc-b59d-b91be768dd62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\01.Die">
-      <UniqueIdentifier>{9cc04ed8-b445-4263-88f9-6b165b0d1b7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\02.Hit">
-      <UniqueIdentifier>{f8d58ca7-145c-45f8-a1f5-e63dbf2bc72b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select">
-      <UniqueIdentifier>{5232c301-1e47-4955-b4cb-4df6032c61ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\04.Base">
-      <UniqueIdentifier>{3ff14974-952d-4ccb-9a1c-0760c4b8e70e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\00.Stamp">
-      <UniqueIdentifier>{eed6600f-2a61-4f9e-90f0-f99213a36f00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\01.Roll01">
-      <UniqueIdentifier>{6026440e-c984-4f9d-8aa3-ea16ba737f2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\02.Roll02">
-      <UniqueIdentifier>{4d0bf10b-db18-46c1-b52a-bdd9b6153dd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\03.Burst01">
-      <UniqueIdentifier>{892536a5-1e83-4f29-9a49-d0116c0db9c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\04.Burst02">
-      <UniqueIdentifier>{bbdb4df4-0f51-4d48-a38f-3fe2a837f3c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\11.TargetPos">
-      <UniqueIdentifier>{5239baf1-b0c9-4da0-b9dd-4922cb76757b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader">
-      <UniqueIdentifier>{9ce06580-fa70-44fd-a34e-0ce6c1112db1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\00.WaterShader">
-      <UniqueIdentifier>{2b3744a5-c07c-461c-a730-0e5e3b0c6698}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\03.MainRoomManager">
-      <UniqueIdentifier>{d35ac856-8148-40f1-997e-1b2a2426b88a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring">
-      <UniqueIdentifier>{fe6ee4c9-0f3f-4e9b-a656-034ccf462479}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\04.StageSelectionManager">
-      <UniqueIdentifier>{18880be9-fe9c-425b-86ca-070e2abc27ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\05.ReadyToSortieManager">
-      <UniqueIdentifier>{b8adff24-4bd8-489c-a0f1-5b238a5be961}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\03.AttackBox">
-      <UniqueIdentifier>{0e8be3c0-67f2-4a21-a668-aa555d2cd52f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\04.MapObject2D">
-      <UniqueIdentifier>{c53797e0-9e70-4a90-b0e3-6e2a229f6a0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower">
-      <UniqueIdentifier>{6be55b51-6ada-4c3b-80eb-2996112febd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\UILinker">
-      <UniqueIdentifier>{eac47758-5e7b-4d2f-a0af-fa0238c2173d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\StatusDealer">
-      <UniqueIdentifier>{1966fe85-0f86-47ae-9684-e6e4f2457d41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\PhaseControl">
-      <UniqueIdentifier>{81b3c7d2-a80a-4218-984d-4418a121a717}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\PhaseControl\00.OneStage">
-      <UniqueIdentifier>{8fc039bb-be6e-4608-a5cb-21e186ebcfd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
-      <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
-      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager">
-      <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager\00.CaptainData">
-      <UniqueIdentifier>{4ab6ea9f-9f60-4d36-98ae-4e925f0fac7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager\01.InStockValkyrieData">
-      <UniqueIdentifier>{8462a6b8-8dfc-4bbe-a435-d966095a5b64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager\02.ValkyrieStatusData">
-      <UniqueIdentifier>{f058cc86-969f-42b0-90a9-72d74023dc52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager\03.SquadData">
-      <UniqueIdentifier>{82cbad81-9bf6-4f1a-b419-517533b40a3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager\04.CWeaponData">
-      <UniqueIdentifier>{44c9921e-015d-4f0c-94e7-a839653e2557}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\00.DataManager\05.ItemData">
-      <UniqueIdentifier>{761915c7-b664-4867-8764-42c99390d9e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\02.ButtonManager">
-      <UniqueIdentifier>{c52fecae-3991-4bbf-8108-35ff947ab66a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\06.ValkyriegManager">
-      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
-      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult">
-      <UniqueIdentifier>{a649ca41-85c2-4e3c-bf53-50b010a9b607}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge">
-      <UniqueIdentifier>{34e3e2de-42b6-4c10-b663-bb19b6f894e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Plane">
-      <UniqueIdentifier>{f71034e8-0b42-4bbb-b90e-57375c77c732}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_ring">
-      <UniqueIdentifier>{5b05c9df-e55c-4ac2-a111-e8e7b95931c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield">
-      <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke">
-      <UniqueIdentifier>{fb2ebb8f-2086-4718-b783-ee66c91b20c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail">
-      <UniqueIdentifier>{ae0fcbf0-ee22-4afb-837d-1f678d41de71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail">
-      <UniqueIdentifier>{a3ce0d00-0e73-4298-bedb-af0292f6bb22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail">
-      <UniqueIdentifier>{7a2e52f6-3758-4ea4-97a9-cad40b71d61c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail\Kiana_Ult_Trail">
-      <UniqueIdentifier>{841304d0-71b3-450a-a4a3-8b01a2815f67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail\Theresa_Ult_Trail">
-      <UniqueIdentifier>{49dc1c09-ea9d-461b-8341-21abc9d88485}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire">
-      <UniqueIdentifier>{b9531daf-1032-44de-b744-b32eb7a88f77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom">
-      <UniqueIdentifier>{2e4d3c72-ab7e-4238-af18-9c75bcc0124c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane">
-      <UniqueIdentifier>{fe921a0a-3732-47b7-a9fe-3df6f90ff48e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern">
-      <UniqueIdentifier>{c39e1687-732f-468e-ae6e-1fe001a78f57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born">
-      <UniqueIdentifier>{003588e7-1a66-4d29-8f86-abce04818038}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\01.Die">
-      <UniqueIdentifier>{f8f34b57-98df-407c-8af4-7b2d5c7252a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\02.Hit">
-      <UniqueIdentifier>{61de6eed-ae8c-43d8-8f89-3a58c83cc23c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select">
-      <UniqueIdentifier>{0bd88830-d10e-4226-8d40-ad7e3dc68f71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base">
-      <UniqueIdentifier>{d7d0af4f-b178-4d2c-b826-b870a197393e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern">
-      <UniqueIdentifier>{8f6a5f6a-3725-484b-a576-22980f2d7f15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\00.Born">
-      <UniqueIdentifier>{cf3e19c7-93ee-44a8-b764-93a81911b361}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\01.Die">
-      <UniqueIdentifier>{3538bb3e-27c2-4c00-9f9b-cf698cd577dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit">
-      <UniqueIdentifier>{b39fc36b-6650-44bd-9035-aba3cafe8a37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select">
-      <UniqueIdentifier>{c8b1d065-e5be-4124-9601-fc80f54baa52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\04.Base">
-      <UniqueIdentifier>{ddd82a19-0d22-4e2b-b555-071bb10375fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern">
-      <UniqueIdentifier>{695f017c-6638-4047-a1a1-86923692fcf6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born">
-      <UniqueIdentifier>{f21390c6-6ae1-47de-8f12-b569a9547a88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\01.Die">
-      <UniqueIdentifier>{250bcaa1-5a2b-4b19-8d2b-4962365a3f7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\02.Hit">
-      <UniqueIdentifier>{93c074e0-33b0-4eca-8890-e4d30426715d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select">
-      <UniqueIdentifier>{ef94b413-2450-45ea-bf78-925ba49d8c04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base">
-      <UniqueIdentifier>{a92e72f4-0f61-4794-9348-19ab645a096e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\05.ItemButton">
-      <UniqueIdentifier>{2a544fee-4369-4f15-8407-c9671ddeca67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\11.Inventory">
-      <UniqueIdentifier>{9b023afc-92c3-4855-9400-5ae0a7d37d93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\07.InventoryManager">
-      <UniqueIdentifier>{d9e6398d-8d0b-4824-9869-8d2a7ed62e8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern">
-      <UniqueIdentifier>{a7508e0e-023a-466d-881c-33d6b33803fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\00.Born">
-      <UniqueIdentifier>{08a65d06-8bd2-4723-ab23-a2b5f4b615fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\01.Die">
-      <UniqueIdentifier>{7ad9af4f-7728-49e1-aef9-b2e89363f97f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\02.Hit">
-      <UniqueIdentifier>{b62dbb03-559b-469c-b001-9154b3dc6ef9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select">
-      <UniqueIdentifier>{de6789e7-e89d-44dd-b465-8210abc58afa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\04.Base">
-      <UniqueIdentifier>{ae18c4f8-30b5-44eb-a59e-ff7ec759be67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\01.Shoot3">
-      <UniqueIdentifier>{6501e201-8449-41c7-bcd7-e799154e1f3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2">
-      <UniqueIdentifier>{2418c899-ae7c-44fd-a949-258657c4e5b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select\00.ATTACK_2">
-      <UniqueIdentifier>{6e9030d3-a1ef-41f8-b03f-2937017069e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\00.RUN_ATTACK">
-      <UniqueIdentifier>{b63d1bf5-1028-4ece-92b0-c950a7053b16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\02.Attack2">
-      <UniqueIdentifier>{19b6e8f5-2acb-4ad5-b93a-09d59614481f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1">
-      <UniqueIdentifier>{e43854d2-f38b-4403-9543-41658ef3bb18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\01.DamageFontShader">
-      <UniqueIdentifier>{0ba5a878-5813-49ff-8079-14724d3cb4ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\02.CatPawShader">
-      <UniqueIdentifier>{79ca6d77-e451-452c-9f01-8aab630fa739}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\03.CircularGaugeShader">
-      <UniqueIdentifier>{6498d179-2cd6-41bd-beea-127f182189c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\04.MeshTrailShader">
-      <UniqueIdentifier>{a61f6061-73a1-4408-bdf6-09e28c9b96c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\05.DissolveShader">
-      <UniqueIdentifier>{446380b0-babf-454d-ac8e-5a3d906cdef8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\06.SpawnEffectShader">
-      <UniqueIdentifier>{f45bedaf-8fcb-4a27-84ba-1b33b00e5da1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\07.SoftEffectShader">
-      <UniqueIdentifier>{e547720a-cadb-4e77-9425-811e7ebc8d62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\08.AttackRangeShader">
-      <UniqueIdentifier>{afb5da92-a9b4-40be-a70c-f1bc52966bce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\09.AlphaMaskShader">
-      <UniqueIdentifier>{03f4fa48-4c81-4dd3-9da5-f83d0007bbbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\10.FireShader">
-      <UniqueIdentifier>{1b1f342d-3d74-4b5b-97a9-375cdca38edb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Effect">
-      <UniqueIdentifier>{5455ceab-439e-4736-83aa-24692c0c1609}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect">
-      <UniqueIdentifier>{99d4c270-08a2-447b-8191-21301f1c553a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att">
-      <UniqueIdentifier>{b579e2bb-cfa4-4e4b-a9e9-96e59cc4ff9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke">
-      <UniqueIdentifier>{8aee29ef-6c6b-423d-82d6-d0f9923cc643}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern">
-      <UniqueIdentifier>{8650c632-f201-4e89-af60-92c846b00327}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\00.Born">
-      <UniqueIdentifier>{a7fcee84-08f7-44f4-b35b-29a35331c367}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\01.Die">
-      <UniqueIdentifier>{2b8a4f89-1fd6-4bc0-915a-25eb2c0b2184}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\02.Hit">
-      <UniqueIdentifier>{731be15b-8096-44dc-8a9f-b69199abc977}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select">
-      <UniqueIdentifier>{234368cf-c5df-4103-b0cb-822f5ce6f9fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base">
-      <UniqueIdentifier>{f4ec6647-3ee5-4e5a-9b6c-a20c0a3e45b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon">
-      <UniqueIdentifier>{568af76b-0c60-4d67-9b49-a92c25a2d1b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\08.BattleEndManager">
-      <UniqueIdentifier>{3b35bbce-0f5a-4d95-bc2f-1a51781a0f1d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\11.LaserTrail">
-      <UniqueIdentifier>{5f8cb29c-397e-4ba9-bdc7-fad9bc7bf9a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att">
-      <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\00.ForScene\05.Portal">
-      <UniqueIdentifier>{c037e8dd-2f30-4dd3-aa1e-438896505014}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect">
-      <UniqueIdentifier>{e8acabec-ae7a-40b0-b0f3-d97c2fece6d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect">
-      <UniqueIdentifier>{49e1f071-81f6-469c-98c7-8edf81b37be9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\CameraMan">
-      <UniqueIdentifier>{e9c40220-419e-4b07-8e13-4ba6315e98d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1">
-      <UniqueIdentifier>{a79a242c-70fc-4a53-a5fa-aedff815da33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1">
-      <UniqueIdentifier>{dd0c389f-7044-40a3-983f-a9e2db94ff9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1">
-      <UniqueIdentifier>{b1ebeac4-84f6-4011-919a-91c0a834c132}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape">
-      <UniqueIdentifier>{da2f0892-4404-413b-bbc2-903235846cdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn">
-      <UniqueIdentifier>{a7cc5d8f-e9e8-42cf-8b0c-7e47c747eb68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\12.supplyScene">
-      <UniqueIdentifier>{c4f29c95-eee2-4390-8df8-074f44b3c9ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09.Manager\09.SupplyManager">
-      <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM">
-      <UniqueIdentifier>{2dc4cdf2-a345-418c-afa4-22b45620d54d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM">
-      <UniqueIdentifier>{e5eba95b-f0ff-439b-8c23-417c5075f606}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\01.ValkyrieSelect">
-      <UniqueIdentifier>{44dcc136-2bea-4713-bbe6-ec3f7e5d3b3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\02.ValkyrieProperty">
-      <UniqueIdentifier>{7160368b-34b9-4b7e-9e3f-294aa9cf1a0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\03.ValkyrieWeapon">
-      <UniqueIdentifier>{39c2650b-074c-44ee-924f-8bfd17cab5f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\00.ValkyrieFSM">
-      <UniqueIdentifier>{e860a1ae-bc87-418a-a644-4197443d6075}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\04.ValkyrieLevelUp">
-      <UniqueIdentifier>{c92b365f-8115-4e78-ae88-167cf2d02904}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\05.ValkyrieWeaponSwap">
-      <UniqueIdentifier>{c578cd65-8839-4311-a1ae-76eb55761af2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\01.InvertoryFSM">
-      <UniqueIdentifier>{96d305ee-0f86-4292-b815-4d732181c40d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\01.InvertoryFSM\00.Wapon">
-      <UniqueIdentifier>{a3674c05-0219-4efc-b4f6-df0724f35edd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\01.InvertoryFSM\01.Item">
-      <UniqueIdentifier>{3a16b10e-af08-454f-b87b-ff1a7c4b2ed7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\03.SupplyFSM">
-      <UniqueIdentifier>{06a2a42d-931e-4beb-a50f-5f3b3fdb825f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\03.SupplyFSM\00.SupplyWapon">
-      <UniqueIdentifier>{db7ab574-9c0a-4786-9917-99d8b736ed91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\03.SupplyFSM\01.SupplyItem">
-      <UniqueIdentifier>{0819646d-d3c2-415e-bbbb-fb6b5583a4bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp">
-      <UniqueIdentifier>{7daa3b6d-c7f8-4026-a628-4cc2c0b35488}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra">
-      <UniqueIdentifier>{c0a18fcb-7e43-4693-b653-656616947a09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
-      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign">
-      <UniqueIdentifier>{93c456d7-b285-4600-8fc2-065a4c0ad8e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail">
-      <UniqueIdentifier>{c46648ae-b379-4ec1-b8d3-bfc450a2ace8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal">
-      <UniqueIdentifier>{1870b79e-3fbb-43b1-ae2e-ffffd934c13f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
-      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
-      <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\TimeTraveler">
-      <UniqueIdentifier>{c16141b8-a600-4736-be66-22b76077d3d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\ActorController">
-      <UniqueIdentifier>{51a36b91-4495-497c-b6cd-b68cb93266c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect">
-      <UniqueIdentifier>{c5167018-275d-4076-84c4-1aae6c23d23c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range">
-      <UniqueIdentifier>{14a143e7-5484-4a05-a12d-0bfdd6f4add5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser">
-      <UniqueIdentifier>{3f7f8e15-53a8-482c-b4cc-3dda9d2eb998}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball">
-      <UniqueIdentifier>{b8c0882e-f095-4a65-8ffd-956901dc2cc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\12.OutlineShader">
-      <UniqueIdentifier>{3d04efc2-db01-4bca-ad3b-32fcb155baf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\02.Spark">
-      <UniqueIdentifier>{60fcde3a-32ea-4af4-9111-460e9d900e38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor">
-      <UniqueIdentifier>{c351ef75-90cc-4cf9-9b3b-f27b1de2b26e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range">
-      <UniqueIdentifier>{ebed8560-5517-420c-a919-68a3f3c4ae7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect">
-      <UniqueIdentifier>{4e257c1f-0474-4799-84c0-2ed19d18476f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross">
-      <UniqueIdentifier>{ec3bff50-cc42-4278-add9-ec9a50bf84de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\12.BossStageScene">
-      <UniqueIdentifier>{d25df95d-6620-4257-9e89-d17d52f0ae18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne">
-      <UniqueIdentifier>{7d8ac4f3-af33-4322-87c8-d6c065672d2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect">
-      <UniqueIdentifier>{084e2e52-68de-41fb-9b13-b615af88112a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide">
-      <UniqueIdentifier>{5dff535b-00e7-4e5d-8a64-fd616ecb2fe6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range">
-      <UniqueIdentifier>{c96bc23b-0933-49fb-9af7-1dddd01412aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact">
-      <UniqueIdentifier>{f3471f77-58f4-4286-aec2-4f15f3ea29bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff">
-      <UniqueIdentifier>{b3b303c8-8a9a-47b8-b40d-42b4d00c2d14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_RollingEff">
-      <UniqueIdentifier>{121daa22-86d1-48e7-8db5-bb37d1ef3930}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff">
-      <UniqueIdentifier>{40c911a6-205f-462d-8c4e-9d453efb7b14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff">
-      <UniqueIdentifier>{439f6403-72e8-4722-bf89-0d16b268e5db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff">
-      <UniqueIdentifier>{a8aae665-8c95-4a00-876b-40412d63ab79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff">
-      <UniqueIdentifier>{84b49c45-27ec-465a-b09f-af4c9cb8a5c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff">
-      <UniqueIdentifier>{28d3c19b-93ec-46ad-a0f4-59aa998a728a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\PhaseControl\01.TwoStage">
-      <UniqueIdentifier>{8e1597cf-62ed-44cb-b40a-40bf61012b68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\PhaseControl\02.ThreeStage">
-      <UniqueIdentifier>{5da63ffa-16c9-4a8f-9c58-1031d7efa88f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\00.UI\12.SizeUp">
-      <UniqueIdentifier>{da49088c-7d69-4be3-af9f-9e132afcdcd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Shader\13.FaceShader">
-      <UniqueIdentifier>{8757a4d2-d5cb-4739-a1c1-ab68a3340456}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff">
-      <UniqueIdentifier>{0910b4d3-2a6a-487e-8dfb-d5f5f4423cee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff">
-      <UniqueIdentifier>{847b0b22-bcac-4ba7-8ce0-d4a7b15e0a51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact">
-      <UniqueIdentifier>{6d293627-7985-4854-b46f-015740f997d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff">
-      <UniqueIdentifier>{549f2268-1ec6-4266-bfbe-0183d752b5c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff">
-      <UniqueIdentifier>{02a5d758-92b8-4946-9e0b-4c7d15096fad}</UniqueIdentifier>
-    </Filter>
-<Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
-  <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge">
-      <UniqueIdentifier>{cf91bd3d-9d1e-4e76-925c-b6560071ecd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Shot_Smoke">
-      <UniqueIdentifier>{1d260946-7942-401c-96c4-c3ff0b269589}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact">
-      <UniqueIdentifier>{d61346f9-a28f-4992-9772-005b9cc1574e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_Ring">
-      <UniqueIdentifier>{39a90fd2-39e9-4709-a55b-e453ccddd720}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_TripleRing">
-      <UniqueIdentifier>{74dddda3-2c25-446c-ba17-1b2e9d12a767}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_FlashBang">
-      <UniqueIdentifier>{93aeffcd-1ae4-4cfc-bcda-68e5fca934d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff">
-      <UniqueIdentifier>{a655804f-ce03-44df-a5f3-a1124f36e10d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_FlashBang_AS">
-      <UniqueIdentifier>{603e031c-4c15-4dec-a5f9-21cfb8de2ab8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke">
-      <UniqueIdentifier>{d1dd660e-1def-4f60-a77c-1c628ceda4a7}</UniqueIdentifier>
-    </Filter>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\FireShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\FaceShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Resource.h">
-      <Filter>99.Default</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>99.Default</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>99.Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>99.Default</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MainApp.h">
-      <Filter>00.MainApp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ChangmoScene.h">
-      <Filter>01.Scene\02.PrivateScene\00.Changmo</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientEnum.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientMacro.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientStructure.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientTypedef.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientDefine.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\YongScene.h">
-      <Filter>01.Scene\02.PrivateScene\00.YongScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\WooScene.h">
-      <Filter>01.Scene\02.PrivateScene\00.WooScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DongScene.h">
-      <Filter>01.Scene\02.PrivateScene\00.DongScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\JongScene.h">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Loading.h">
-      <Filter>01.Scene\99.Loading</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StaticScene.h">
-      <Filter>01.Scene\01.StaticScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\InitScene.h">
-      <Filter>01.Scene\00.InitScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Monster.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_SpiderC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Spider.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Robot.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Axe.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MB_Ganesha.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MB_Bronya.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Ninza.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Scout.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Monster.h">
-      <Filter>02.Objects\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_ScoutC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_RobotC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_NinzaC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Lancer.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_LancerC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_AxeC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_GaneshaC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_BronyaC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DeleGate.h">
-      <Filter>05.DeleGate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Valkyrie.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Button.h">
-      <Filter>02.Objects\02.UI\00.Button</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScrollViewObject.h">
-      <Filter>02.Objects\02.UI\01.ScrollView</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ButtonManager.h">
-      <Filter>09.Manager\02.ButtonManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientScene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_KianaC.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\UiAnimCtrC.h">
-      <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MainRoomScene.h">
-      <Filter>01.Scene\07.MainRoomScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\OneStageScene.h">
-      <Filter>01.Scene\06.OneStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ReadyToSortieScene.h">
-      <Filter>01.Scene\05.ReadyToSortieScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StageSelectionScene.h">
-      <Filter>01.Scene\04.StageSelectionScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\PartySettingScene.h">
-      <Filter>01.Scene\09.PartySettingScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DamageFontC.h">
-      <Filter>03.Component\00.UI\01.DamageFont</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ButtonFunction.h">
-      <Filter>02.Objects\02.UI\00.Button\00.ButtonFunction</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DataLoad.h">
-      <Filter>06.DataLoad</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DamageObjectPool.h">
-      <Filter>08.ObjectPool\DamageObjectPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Kiana.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RotationUiC.h">
-      <Filter>03.Component\00.UI\02.RotationUi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BattleUiManager.h">
-      <Filter>09.Manager\01.BattleUiManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\HitsUiC.h">
-      <Filter>03.Component\00.UI\04.HitsUi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TimerUiC.h">
-      <Filter>03.Component\00.UI\03.Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientFunction.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Sickle.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_SickleC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Axe.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Spider.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Sickle.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SkillCollTimcC.h">
-      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LifeObjectC.h">
-      <Filter>03.Component\00.UI\05.LifeObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BattleRenunciationC.h">
-      <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MapObject.h">
-      <Filter>02.Objects\00.ForScene\01.MapObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MeshEffect_Client.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BattleEndScene.h">
-      <Filter>01.Scene\10.BattleEnd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Include_ForTest.h">
-      <Filter>01.Scene\06.OneStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_TheresaC.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StatusDealer.h">
-      <Filter>10.ControlTower\StatusDealer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\UILinker.h">
-      <Filter>10.ControlTower\UILinker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StageControlTower.h">
-      <Filter>10.ControlTower</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h">
-      <Filter>98.Include\ClientStructure_Status</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h">
-      <Filter>98.Include\ClientStructure_Status</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AttackBall.h">
-      <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DecoObject.h">
-      <Filter>02.Objects\00.ForScene\00.DecoObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TrapObject.h">
-      <Filter>02.Objects\00.ForScene\02.TrapObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\PhaseChanger.h">
-      <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ATBPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\PatternMachineC.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SickleBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SickleBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientPatterns.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SickleDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SickleHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SickleAtk02Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select\00.Atk02</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MonsterSliderC.h">
-      <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GlitterC.h">
-      <Filter>03.Component\01.Glitter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Item.h">
-      <Filter>02.Objects\04.Item</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Include_Valkyrie.h">
-      <Filter>01.Scene\01.StaticScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AttackRange_Circle.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Theresa.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MO_Dummy.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpiderBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpiderDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpiderHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpiderBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaStampPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\00.Stamp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaRoll01Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\01.Roll01</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaBurst01Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\03.Burst01</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\GaneshaBurst02Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\04.Burst02</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TargetPositionC.h">
-      <Filter>03.Component\00.UI\11.TargetPos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AttackRangeShader.h">
-      <Filter>04.Shader\08.AttackRangeShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CatPawShader.h">
-      <Filter>04.Shader\02.CatPawShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CircularGaugeShader.h">
-      <Filter>04.Shader\03.CircularGaugeShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DamageFontShader.h">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DissolveShader.h">
-      <Filter>04.Shader\05.DissolveShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MeshTrailShader.h">
-      <Filter>04.Shader\04.MeshTrailShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SoftEffectShader.h">
-      <Filter>04.Shader\07.SoftEffectShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpawnEffectShader.h">
-      <Filter>04.Shader\06.SpawnEffectShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\WaterShader.h">
-      <Filter>04.Shader\00.WaterShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CaptainData.h">
-      <Filter>09.Manager\00.DataManager\00.CaptainData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\InStockValkyrieData.h">
-      <Filter>09.Manager\00.DataManager\01.InStockValkyrieData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieStatusData.h">
-      <Filter>09.Manager\00.DataManager\02.ValkyrieStatusData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SquadData.h">
-      <Filter>09.Manager\00.DataManager\03.SquadData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\WeaponData.h">
-      <Filter>09.Manager\00.DataManager\04.CWeaponData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ItemData.h">
-      <Filter>09.Manager\00.DataManager\05.ItemData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\DataManager.h">
-      <Filter>09.Manager\00.DataManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MainRoomManager.h">
-      <Filter>09.Manager\03.MainRoomManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk02.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StageSelectionManager.h">
-      <Filter>09.Manager\04.StageSelectionManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ReadyToSortieManager.h">
-      <Filter>09.Manager\05.ReadyToSortieManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AttackBox.h">
-      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MapObject2D.h">
-      <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\PhaseControl.h">
-      <Filter>10.ControlTower\PhaseControl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\OneStagePhaseControl.h">
-      <Filter>10.ControlTower\PhaseControl\00.OneStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Sakura.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSM_SakuraC.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Sakura.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ActorController.h">
-      <Filter>10.ControlTower\ActorController</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AlphaLifeTimeC.h">
-      <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SkillActivationC.h">
-      <Filter>03.Component\00.UI\10.SkillActivation</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ClientComponents.h">
-      <Filter>98.Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyriegManager.h">
-      <Filter>09.Manager\06.ValkyriegManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieFSM.h">
-      <Filter>12.FSM\02.ValkyrieFSM\00.ValkyrieFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieSelect.h">
-      <Filter>12.FSM\02.ValkyrieFSM\01.ValkyrieSelect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieProperty.h">
-      <Filter>12.FSM\02.ValkyrieFSM\02.ValkyrieProperty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieWeapon.h">
-      <Filter>12.FSM\02.ValkyrieFSM\03.ValkyrieWeapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieLevelUp.h">
-      <Filter>12.FSM\02.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Scout.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Lancer.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Ninza.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\NinzaBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\NinzaDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\NinzaHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\NinzaBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Ult_Shield.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Ult_Plane.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Ult_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\AlphaMaskShader.h">
-      <Filter>04.Shader\09.AlphaMaskShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Ult_Ring.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Charge.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Smoke.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Trail.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Robot.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutShoot3Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\01.Shoot3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutShoot2Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LancerAttack2Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select\00.ATTACK_2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotRunAttackPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\00.RUN_ATTACK</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotAttack2Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\02.Attack2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotAttack1Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Trail.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Ult_Trail.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail\Kiana_Ult_Trail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Trail.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail\Theresa_Ult_Trail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FireShader.h">
-      <Filter>04.Shader\10.FireShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Fire.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Boom.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Crack.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LancerBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LancerDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LancerBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LancerHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\NinzaAttack2Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ItemButton.h">
-      <Filter>02.Objects\05.ItemButton</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\InventoryScene.h">
-      <Filter>01.Scene\11.Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\InventoryManager.h">
-      <Filter>09.Manager\07.InventoryManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieWeaponSwap.h">
-      <Filter>12.FSM\02.ValkyrieFSM\05.ValkyrieWeaponSwap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\EffectMaker.h">
-      <Filter>02.Objects\01.ForUnit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\EffectMaker_Kiana.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\EffectMaker_Theresa.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
-    <ClInclude Include="..\Header\TheresaCharge_Att.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MoveUpSmoke.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaBasePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaBornPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\00.Born</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaDiePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\01.Die</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaHitPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\02.Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Ganesha.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FSMDefine_Bronya.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Weapon.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BattleEndManager.h">
-      <Filter>09.Manager\08.BattleEndManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\LaserTrailShader.h">
-      <Filter>04.Shader\11.LaserTrail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Sakura_Charge_Att.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Portal.h">
-      <Filter>02.Objects\00.ForScene\05.Portal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MonsterHitEffect.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SoftEffect.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StageCameraMan.h">
-      <Filter>10.ControlTower\CameraMan</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaShoot1Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaThrow1Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaShock1Pattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaEscapePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MonsterSpawnEff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MonsterSpawnBeam.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SupplyScene.h">
-      <Filter>01.Scene\12.supplyScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SupplyManager.h">
-      <Filter>09.Manager\09.SupplyManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SupplyWapon.h">
-      <Filter>12.FSM\03.SupplyFSM\00.SupplyWapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SupplyItem.h">
-      <Filter>12.FSM\03.SupplyFSM\01.SupplyItem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\WaponItem.h">
-      <Filter>12.FSM\01.InvertoryFSM\00.Wapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StuffItem.h">
-      <Filter>12.FSM\01.InvertoryFSM\01.Item</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h">
-      <Filter>12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaSkillUltraPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\CameraShake.h">
-      <Filter>10.ControlTower\CameraMan</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpiderExplosion.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Sickle_Trail.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MonsterAttackSign.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaArsenalPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TimeSeeker.h">
-      <Filter>10.ControlTower\TimeTraveler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SpiderExplosion.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SupplyOut.h">
-      <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Sickle_Trail.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\MonsterAttackSign.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaArsenalPattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Scout_Att_Range.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Scout_Laser.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\StageCameraMan.h" />
-    <ClInclude Include="..\Header\OutlineShader.h">
-      <Filter>04.Shader\12.OutlineShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutMeteor.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutBall.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SparkEffect.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutCircleRange.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\RobotHookEff.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
-    </ClInclude>
-    <ClInclude Include="Theresa_CrossBloodyHug.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClInclude>
-    <ClInclude Include="Theresa_CrossBlade.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Kiana_Pistol.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BossStageScene.h">
-      <Filter>01.Scene\12.BossStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SickleAirbornePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Lancer_Att_Range.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Lancer_OutSideEff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Lancer_Impact.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_LaserEff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ThreeStageScene.h">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ThreeStagePhaseControl.h">
-      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TwoStagePhaseControl.h">
-      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\TwoStageScene.h">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\SizeUpC.h">
-      <Filter>03.Component\00.UI\12.SizeUp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\FaceShader.h">
-      <Filter>04.Shader\13.FaceShader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_LaserEff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Robot_Impact.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Robot_Impact_Smoke.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Robot_Plane.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_Dome.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_Dome_Impact.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_SmokeEff.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_Impact_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Ganesha_UpperEff.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Cannon_Charge.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Shot_Smoke.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Shot_Smoke</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Impact.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Impact_Ring.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Impact_TripleRing.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_TripleRing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_FlashBang.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_FlashBang</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\BronyaFlashBang_AS.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_FlashBang_AS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Bronya_RandomSmoke.h">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\ScoutAirbornePattern.h">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>99.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>99.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MainApp.cpp">
-      <Filter>00.MainApp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ChangmoScene.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.Changmo</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\YongScene.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.YongScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\WooScene.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.WooScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DongScene.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.DongScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\JongScene.cpp">
-      <Filter>01.Scene\02.PrivateScene\00.JongScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Loading.cpp">
-      <Filter>01.Scene\99.Loading</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StaticScene.cpp">
-      <Filter>01.Scene\01.StaticScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\InitScene.cpp">
-      <Filter>01.Scene\00.InitScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Monster.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_SpiderC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Spider.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Robot.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Axe.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MB_Ganesha.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MB_Bronya.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Ninza.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Scout.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Monster.cpp">
-      <Filter>02.Objects\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_ScoutC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_RobotC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_NinzaC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Lancer.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_LancerC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_AxeC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Axe\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_GaneshaC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_BronyaC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DeleGate.cpp">
-      <Filter>05.DeleGate</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Valkyrie.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Button.cpp">
-      <Filter>02.Objects\02.UI\00.Button</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScrollViewObject.cpp">
-      <Filter>02.Objects\02.UI\01.ScrollView</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ButtonManager.cpp">
-      <Filter>09.Manager\02.ButtonManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ClientScene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_KianaC.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\UiAnimCtrC.cpp">
-      <Filter>03.Component\00.UI\00.UiAnimCtr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MainRoomScene.cpp">
-      <Filter>01.Scene\07.MainRoomScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ReadyToSortieScene.cpp">
-      <Filter>01.Scene\05.ReadyToSortieScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PartySettingScene.cpp">
-      <Filter>01.Scene\09.PartySettingScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DamageFontC.cpp">
-      <Filter>03.Component\00.UI\01.DamageFont</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ButtonFunction.cpp">
-      <Filter>02.Objects\02.UI\00.Button\00.ButtonFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DamageObjectPool.cpp">
-      <Filter>08.ObjectPool\DamageObjectPool</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DataLoad.cpp">
-      <Filter>06.DataLoad</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RotationUiC.cpp">
-      <Filter>03.Component\00.UI\02.RotationUi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BattleUiManager.cpp">
-      <Filter>09.Manager\01.BattleUiManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\HitsUiC.cpp">
-      <Filter>03.Component\00.UI\04.HitsUi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LifeObjectC.cpp">
-      <Filter>03.Component\00.UI\05.LifeObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TimerUiC.cpp">
-      <Filter>03.Component\00.UI\03.Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Sickle.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_SickleC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SkillCollTimcC.cpp">
-      <Filter>03.Component\00.UI\06.SkillCollTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BattleRenunciationC.cpp">
-      <Filter>03.Component\00.UI\08.BattleRenunciation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MapObject.cpp">
-      <Filter>02.Objects\00.ForScene\01.MapObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MeshEffect_Client.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BattleEndScene.cpp">
-      <Filter>01.Scene\10.BattleEnd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\OneStageScene.cpp">
-      <Filter>01.Scene\06.OneStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_TheresaC.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StatusDealer.cpp">
-      <Filter>10.ControlTower\StatusDealer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\UILinker.cpp">
-      <Filter>10.ControlTower\UILinker</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StageControlTower.cpp">
-      <Filter>10.ControlTower</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AttackBall.cpp">
-      <Filter>02.Objects\01.ForUnit\02.AttackBall</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MonsterSliderC.cpp">
-      <Filter>03.Component\00.UI\09.MonsterSlider</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StageSelectionScene.cpp">
-      <Filter>01.Scene\04.StageSelectionScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DecoObject.cpp">
-      <Filter>02.Objects\00.ForScene\00.DecoObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TrapObject.cpp">
-      <Filter>02.Objects\00.ForScene\02.TrapObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PhaseChanger.cpp">
-      <Filter>02.Objects\00.ForScene\03.PhaseChanger</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GlitterC.cpp">
-      <Filter>03.Component\01.Glitter</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Item.cpp">
-      <Filter>02.Objects\04.Item</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AttackRange_Circle.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\01.AttackRange_Circle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ATBPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PatternMachineC.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\ATBSystem\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SickleBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SickleBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SickleDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SickleHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SickleAtk02Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\03.Select\00.Atk02</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Spider\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaStampPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\00.Stamp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaRoll01Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\01.Roll01</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaBurst01Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\03.Burst01</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GaneshaBurst02Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\03.Select\04.Burst02</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TargetPositionC.cpp">
-      <Filter>03.Component\00.UI\11.TargetPos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AttackRangeShader.cpp">
-      <Filter>04.Shader\08.AttackRangeShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DamageFontShader.cpp">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CatPawShader.cpp">
-      <Filter>04.Shader\02.CatPawShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CircularGaugeShader.cpp">
-      <Filter>04.Shader\03.CircularGaugeShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DissolveShader.cpp">
-      <Filter>04.Shader\05.DissolveShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MeshTrailShader.cpp">
-      <Filter>04.Shader\04.MeshTrailShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpawnEffectShader.cpp">
-      <Filter>04.Shader\06.SpawnEffectShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SoftEffectShader.cpp">
-      <Filter>04.Shader\07.SoftEffectShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\WaterShader.cpp">
-      <Filter>04.Shader\00.WaterShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CaptainData.cpp">
-      <Filter>09.Manager\00.DataManager\00.CaptainData</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Dummy.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\InStockValkyrieData.cpp">
-      <Filter>09.Manager\00.DataManager\01.InStockValkyrieData</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieStatusData.cpp">
-      <Filter>09.Manager\00.DataManager\02.ValkyrieStatusData</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SquadData.cpp">
-      <Filter>09.Manager\00.DataManager\03.SquadData</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\WeaponData.cpp">
-      <Filter>09.Manager\00.DataManager\04.CWeaponData</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ItemData.cpp">
-      <Filter>09.Manager\00.DataManager\05.ItemData</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DataManager.cpp">
-      <Filter>09.Manager\00.DataManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MainRoomManager.cpp">
-      <Filter>09.Manager\03.MainRoomManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk02.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Dummy.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AttackBox.cpp">
-      <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MO_Dummy.cpp" />
-    <ClCompile Include="..\Code\StageSelectionManager.cpp">
-      <Filter>09.Manager\04.StageSelectionManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ReadyToSortieManager.cpp">
-      <Filter>09.Manager\05.ReadyToSortieManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MapObject2D.cpp">
-      <Filter>02.Objects\00.ForScene\04.MapObject2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PhaseControl.cpp">
-      <Filter>10.ControlTower\PhaseControl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\OneStagePhaseControl.cpp">
-      <Filter>10.ControlTower\PhaseControl\00.OneStage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Sakura.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FSM_SakuraC.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ActorController.cpp">
-      <Filter>10.ControlTower\ActorController</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AlphaLifeTimeC.cpp">
-      <Filter>03.Component\00.UI\07.AlphaLifeTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SkillActivationC.cpp">
-      <Filter>03.Component\00.UI\10.SkillActivation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Pistol.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyriegManager.cpp">
-      <Filter>09.Manager\06.ValkyriegManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieFSM.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\00.ValkyrieFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieSelect.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\01.ValkyrieSelect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieProperty.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\02.ValkyrieProperty</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieWeapon.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\03.ValkyrieWeapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LancerBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LancerDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LancerHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LancerBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\NinzaBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\NinzaHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\NinzaDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\NinzaBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AlphaMaskShader.cpp">
-      <Filter>04.Shader\09.AlphaMaskShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\01.Shoot3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\03.Select\00.Shoot2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LancerAttack2Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\03.Select\00.ATTACK_2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotRunAttackPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\00.RUN_ATTACK</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotAttack2Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\02.Attack2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotAttack1Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Trail.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Trail.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Kiana_Ult_Trail.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Kiana_Trail\Kiana_Ult_Trail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Trail.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Theresa_Trail\Theresa_Ult_Trail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FireShader.cpp">
-      <Filter>04.Shader\10.FireShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\04.ValkyrieLevelUp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\NinzaAttack2Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\03.Select</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ItemButton.cpp">
-      <Filter>02.Objects\05.ItemButton</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\InventoryScene.cpp">
-      <Filter>01.Scene\11.Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\InventoryManager.cpp">
-      <Filter>09.Manager\07.InventoryManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\05.ValkyrieWeaponSwap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\EffectMaker.cpp">
-      <Filter>02.Objects\01.ForUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\EffectMaker_Kiana.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\EffectMaker_Theresa.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
-    <ClCompile Include="..\Code\TheresaCharge_Att.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MoveUpSmoke.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att\UpSmoke</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaBasePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\04.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaBornPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\00.Born</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaDiePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\01.Die</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaHitPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\02.Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Weapon.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BattleEndManager.cpp">
-      <Filter>09.Manager\08.BattleEndManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LaserTrailShader.cpp">
-      <Filter>04.Shader\11.LaserTrail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Sakura_Charge_Att.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Portal.cpp">
-      <Filter>02.Objects\00.ForScene\05.Portal</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MonsterHitEffect.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\00.MonsterHitEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SoftEffect.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StageCameraMan.cpp">
-      <Filter>10.ControlTower\CameraMan</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\00.Shoot1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\01.Throw1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\02.Shock1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaEscapePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\03.Escape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MonsterSpawnEff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\06.MonsterSpawn</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SupplyScene.cpp">
-      <Filter>01.Scene\12.supplyScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SupplyManager.cpp">
-      <Filter>09.Manager\09.SupplyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SupplyWapon.cpp">
-      <Filter>12.FSM\03.SupplyFSM\00.SupplyWapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SupplyItem.cpp">
-      <Filter>12.FSM\03.SupplyFSM\01.SupplyItem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\WaponItem.cpp">
-      <Filter>12.FSM\01.InvertoryFSM\00.Wapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StuffItem.cpp">
-      <Filter>12.FSM\01.InvertoryFSM\01.Item</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp">
-      <Filter>12.FSM\02.ValkyrieFSM\06.ValkyrieWeaponLevelUp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\04.SkillUltra</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CameraShake.cpp">
-      <Filter>10.ControlTower\CameraMan</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderExplosion.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Sickle_Trail.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sickle_Trail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MonsterAttackSign.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\99.MonsterAttackSign</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderExplosion.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SpiderExplosion.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaArsenalPattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SupplyOut.cpp">
-      <Filter>12.FSM\03.SupplyFSM\02.SupplyOut</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TimeSeeker.cpp">
-      <Filter>10.ControlTower\TimeTraveler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scout_Att_Range.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scout_Laser.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Laser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
-    </ClCompile>
+    <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
+    <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
+    <ClCompile Include="..\Code\AttackBall.cpp" />
+    <ClCompile Include="..\Code\AttackBox.cpp" />
+    <ClCompile Include="..\Code\AttackRange_Circle.cpp" />
+    <ClCompile Include="..\Code\AttackRangeShader.cpp" />
+    <ClCompile Include="..\Code\BattleEndManager.cpp" />
+    <ClCompile Include="..\Code\BattleEndScene.cpp" />
+    <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
+    <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BossStageScene.cpp" />
+    <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaEscapePattern.cpp" />
+    <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp" />
+    <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShock1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp" />
+    <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp" />
+    <ClCompile Include="..\Code\Bronya_FlashBang.cpp" />
+    <ClCompile Include="..\Code\Bronya_Impact.cpp" />
+    <ClCompile Include="..\Code\Bronya_Impact_Ring.cpp" />
+    <ClCompile Include="..\Code\Bronya_Impact_TripleRing.cpp" />
+    <ClCompile Include="..\Code\Bronya_RandomSmoke.cpp" />
+    <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp" />
+    <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
+    <ClCompile Include="..\Code\Button.cpp" />
+    <ClCompile Include="..\Code\ButtonManager.cpp" />
+    <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Impact_Eff.cpp" />
+    <ClCompile Include="..\Code\Ganesha_LaserEff.cpp" />
+    <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp" />
+    <ClCompile Include="..\Code\Ganesha_UpperEff.cpp" />
+    <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
+    <ClCompile Include="..\Code\Lancer_Impact.cpp" />
+    <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
+    <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
+    <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\RobotHookEff.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact.cpp" />
+    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
+    <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\ScoutAirbornePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutBall.cpp" />
+    <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
+    <ClCompile Include="..\Code\ScoutMeteor.cpp" />
+    <ClCompile Include="..\Code\Scout_Att_Range.cpp" />
+    <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
+    <ClCompile Include="..\Code\Scout_Laser.cpp" />
+    <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
+    <ClCompile Include="..\Code\Sickle_Trail.cpp" />
+    <ClCompile Include="..\Code\SizeUpC.cpp" />
+    <ClCompile Include="..\Code\SparkEffect.cpp" />
+    <ClCompile Include="..\Code\SpiderExplosion.cpp" />
+    <ClCompile Include="..\Code\OutlineShader.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
-    <ClCompile Include="..\Code\OutlineShader.cpp">
-      <Filter>04.Shader\12.OutlineShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutMeteor.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\03.ScoutMeteor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutBall.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Ball</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SparkEffect.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\02.Spark</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutCircleRange.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Circle_Range</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RobotHookEff.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
-    </ClCompile>
-    <ClCompile Include="Theresa_CrossBloodyHug.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClCompile>
-    <ClCompile Include="Theresa_CrossBlade.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BossStageScene.cpp">
-      <Filter>01.Scene\12.BossStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SickleAirbornePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\05.Airborne</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Lancer_Att_Range.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_Att_Range</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Lancer_OutSideEff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\09.Lancer_Effect\Lancer_OutSide</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Lancer_Impact.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\06.Lancer_Impact</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_LaserEff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_LaserEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ChargeEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp">
-      <Filter>10.ControlTower\PhaseControl\02.ThreeStage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ThreeStageScene.cpp">
-      <Filter>01.Scene\03.ThreeStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TwoStageScene.cpp">
-      <Filter>01.Scene\08.TwoStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp">
-      <Filter>10.ControlTower\PhaseControl\01.TwoStage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SizeUpC.cpp">
-      <Filter>03.Component\00.UI\12.SizeUp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\FaceShader.cpp">
-      <Filter>04.Shader\13.FaceShader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Robot_Impact.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Robot_Plane.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\08.Robot_Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_Dome.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_DomeEff\Ganesha_Dome_Impact</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_SmokeEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_Impact_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_ImpactEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Ganesha_UpperEff.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Shot_Smoke</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Impact.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Impact_Ring.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Impact_TripleRing.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_TripleRing</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_FlashBang.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_FlashBang</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_FlashBang_AS</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Bronya_RandomSmoke.cpp">
-      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
-    </ClCompile>
+    <ClCompile Include="..\Code\CaptainData.cpp" />
+    <ClCompile Include="..\Code\CatPawShader.cpp" />
+    <ClCompile Include="..\Code\CircularGaugeShader.cpp" />
+    <ClCompile Include="..\Code\DamageFontShader.cpp" />
+    <ClCompile Include="..\Code\DataManager.cpp" />
+    <ClCompile Include="..\Code\DecoObject.cpp" />
+    <ClCompile Include="..\Code\DissolveShader.cpp" />
+    <ClCompile Include="..\Code\EffectMaker.cpp" />
+    <ClCompile Include="..\Code\EffectMaker_Kiana.cpp" />
+    <ClCompile Include="..\Code\EffectMaker_Theresa.cpp" />
+    <ClCompile Include="..\Code\FireShader.cpp" />
+    <ClCompile Include="..\Code\FSM_SakuraC.cpp" />
+    <ClCompile Include="..\Code\FSM_SickleC.cpp" />
+    <ClCompile Include="..\Code\FSM_TheresaC.cpp" />
+    <ClCompile Include="..\Code\GaneshaBasePattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaBornPattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaBurst01Pattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaBurst02Pattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaDiePattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaHitPattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaRoll01Pattern.cpp" />
+    <ClCompile Include="..\Code\GaneshaStampPattern.cpp" />
+    <ClCompile Include="..\Code\GlitterC.cpp" />
+    <ClCompile Include="..\Code\HitsUiC.cpp" />
+    <ClCompile Include="..\Code\ChangmoScene.cpp" />
+    <ClCompile Include="..\Code\ClientScene.cpp" />
+    <ClCompile Include="..\Code\DamageFontC.cpp" />
+    <ClCompile Include="..\Code\DamageObjectPool.cpp" />
+    <ClCompile Include="..\Code\DataLoad.cpp" />
+    <ClCompile Include="..\Code\DeleGate.cpp" />
+    <ClCompile Include="..\Code\DongScene.cpp" />
+    <ClCompile Include="..\Code\FSM_AxeC.cpp" />
+    <ClCompile Include="..\Code\FSM_BronyaC.cpp" />
+    <ClCompile Include="..\Code\FSM_GaneshaC.cpp" />
+    <ClCompile Include="..\Code\FSM_KianaC.cpp" />
+    <ClCompile Include="..\Code\FSM_LancerC.cpp" />
+    <ClCompile Include="..\Code\FSM_NinzaC.cpp" />
+    <ClCompile Include="..\Code\FSM_RobotC.cpp" />
+    <ClCompile Include="..\Code\FSM_ScoutC.cpp" />
+    <ClCompile Include="..\Code\FSM_SpiderC.cpp" />
+    <ClCompile Include="..\Code\ButtonFunction.cpp" />
+    <ClCompile Include="..\Code\InitScene.cpp" />
+    <ClCompile Include="..\Code\InStockValkyrieData.cpp" />
+    <ClCompile Include="..\Code\InventoryManager.cpp" />
+    <ClCompile Include="..\Code\InventoryScene.cpp" />
+    <ClCompile Include="..\Code\Item.cpp" />
+    <ClCompile Include="..\Code\ItemButton.cpp" />
+    <ClCompile Include="..\Code\ItemData.cpp" />
+    <ClCompile Include="..\Code\JongScene.cpp" />
+    <ClCompile Include="..\Code\Kiana.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk01.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk02.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk03.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk04.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Atk05.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk01.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk02.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk03.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk04.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp" />
+    <ClCompile Include="..\Code\LancerAttack2Pattern.cpp" />
+    <ClCompile Include="..\Code\Kiana_Trail.cpp" />
+    <ClCompile Include="..\Code\LancerBasePattern.cpp" />
+    <ClCompile Include="..\Code\LancerBornPattern.cpp" />
+    <ClCompile Include="..\Code\LancerDiePattern.cpp" />
+    <ClCompile Include="..\Code\LancerHitPattern.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp" />
+    <ClCompile Include="..\Code\Kiana_Pistol.cpp" />
+    <ClCompile Include="..\Code\Kiana_Ult_Trail.cpp" />
+    <ClCompile Include="..\Code\LaserTrailShader.cpp" />
+    <ClCompile Include="..\Code\LifeObjectC.cpp" />
+    <ClCompile Include="..\Code\Loading.cpp" />
+    <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\MainRoomManager.cpp" />
+    <ClCompile Include="..\Code\MainRoomScene.cpp" />
+    <ClCompile Include="..\Code\MapObject.cpp" />
+    <ClCompile Include="..\Code\MapObject2D.cpp" />
+    <ClCompile Include="..\Code\MB_Bronya.cpp" />
+    <ClCompile Include="..\Code\MB_Ganesha.cpp" />
+    <ClCompile Include="..\Code\MeshEffect_Client.cpp" />
+    <ClCompile Include="..\Code\MeshTrailShader.cpp" />
+    <ClCompile Include="..\Code\Monster.cpp" />
+    <ClCompile Include="..\Code\ATBPattern.cpp" />
+    <ClCompile Include="..\Code\MonsterHitEffect.cpp" />
+    <ClCompile Include="..\Code\MonsterSliderC.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnBeam.cpp" />
+    <ClCompile Include="..\Code\MonsterSpawnEff.cpp" />
+    <ClCompile Include="..\Code\MoveUpSmoke.cpp" />
+    <ClCompile Include="..\Code\MO_Axe.cpp" />
+    <ClCompile Include="..\Code\MO_Dummy.cpp" />
+    <ClCompile Include="..\Code\MO_Lancer.cpp" />
+    <ClCompile Include="..\Code\MO_Ninza.cpp" />
+    <ClCompile Include="..\Code\MO_Robot.cpp" />
+    <ClCompile Include="..\Code\MO_Scout.cpp" />
+    <ClCompile Include="..\Code\MO_Sickle.cpp" />
+    <ClCompile Include="..\Code\MO_Spider.cpp" />
+    <ClCompile Include="..\Code\NinzaAttack2Pattern.cpp" />
+    <ClCompile Include="..\Code\NinzaBasePattern.cpp" />
+    <ClCompile Include="..\Code\NinzaBornPattern.cpp" />
+    <ClCompile Include="..\Code\NinzaDiePattern.cpp" />
+    <ClCompile Include="..\Code\NinzaHitPattern.cpp" />
+    <ClCompile Include="..\Code\OneStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\OneStageScene.cpp" />
+    <ClCompile Include="..\Code\Portal.cpp" />
+    <ClCompile Include="..\Code\RobotAttack1Pattern.cpp" />
+    <ClCompile Include="..\Code\RobotAttack2Pattern.cpp" />
+    <ClCompile Include="..\Code\RobotBasePattern.cpp" />
+    <ClCompile Include="..\Code\RobotBornPattern.cpp" />
+    <ClCompile Include="..\Code\RobotDiePattern.cpp" />
+    <ClCompile Include="..\Code\RobotHitPattern.cpp" />
+    <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
+    <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
+    <ClCompile Include="..\Code\SoftEffect.cpp" />
+    <ClCompile Include="..\Code\StuffItem.cpp" />
+    <ClCompile Include="..\Code\SupplyItem.cpp" />
+    <ClCompile Include="..\Code\SupplyManager.cpp" />
+    <ClCompile Include="..\Code\SupplyOut.cpp" />
+    <ClCompile Include="..\Code\SupplyScene.cpp" />
+    <ClCompile Include="..\Code\SupplyWapon.cpp" />
+    <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
+    <ClCompile Include="..\Code\Theresa_Trail.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Trail.cpp" />
+    <ClCompile Include="..\Code\ScoutBasePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutBornPattern.cpp" />
+    <ClCompile Include="..\Code\ScoutDiePattern.cpp" />
+    <ClCompile Include="..\Code\ScoutHitPattern.cpp" />
+    <ClCompile Include="..\Code\ScoutShoot2Pattern.cpp" />
+    <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
+    <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\ThreeStageScene.cpp" />
+    <ClCompile Include="..\Code\TimeSeeker.cpp" />
+    <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
+    <ClCompile Include="..\Code\TwoStageScene.cpp" />
+    <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
+    <ClCompile Include="..\Code\ValkyriegManager.cpp" />
+    <ClCompile Include="..\Code\PartySettingScene.cpp" />
+    <ClCompile Include="..\Code\PatternMachineC.cpp" />
+    <ClCompile Include="..\Code\PhaseChanger.cpp" />
+    <ClCompile Include="..\Code\ReadyToSortieManager.cpp" />
+    <ClCompile Include="..\Code\PhaseControl.cpp" />
+    <ClCompile Include="..\Code\ReadyToSortieScene.cpp" />
+    <ClCompile Include="..\Code\RotationUiC.cpp" />
+    <ClCompile Include="..\Code\Sakura.cpp" />
+    <ClCompile Include="..\Code\ScrollViewObject.cpp" />
+    <ClCompile Include="..\Code\SickleAtk02Pattern.cpp" />
+    <ClCompile Include="..\Code\SickleBasePattern.cpp" />
+    <ClCompile Include="..\Code\SickleBornPattern.cpp" />
+    <ClCompile Include="..\Code\SickleDiePattern.cpp" />
+    <ClCompile Include="..\Code\SickleHitPattern.cpp" />
+    <ClCompile Include="..\Code\SkillActivationC.cpp" />
+    <ClCompile Include="..\Code\SkillCollTimcC.cpp" />
+    <ClCompile Include="..\Code\SpiderBasePattern.cpp" />
+    <ClCompile Include="..\Code\SpiderBornPattern.cpp" />
+    <ClCompile Include="..\Code\SpiderDiePattern.cpp" />
+    <ClCompile Include="..\Code\SpiderHitPattern.cpp" />
+    <ClCompile Include="..\Code\SoftEffectShader.cpp" />
+    <ClCompile Include="..\Code\SpawnEffectShader.cpp" />
+    <ClCompile Include="..\Code\SquadData.cpp" />
+    <ClCompile Include="..\Code\StageSelectionManager.cpp" />
+    <ClCompile Include="..\Code\StageSelectionScene.cpp" />
+    <ClCompile Include="..\Code\TargetPositionC.cpp" />
+    <ClCompile Include="..\Code\TrapObject.cpp" />
+    <ClCompile Include="..\Code\UILinker.cpp" />
+    <ClCompile Include="..\Code\StaticScene.cpp" />
+    <ClCompile Include="..\Code\StatusDealer.cpp" />
+    <ClCompile Include="..\Code\Theresa.cpp" />
+    <ClCompile Include="..\Code\TimerUiC.cpp" />
+    <ClCompile Include="..\Code\UiAnimCtrC.cpp" />
+    <ClCompile Include="..\Code\Valkyrie.cpp" />
+    <ClCompile Include="..\Code\StageControlTower.cpp" />
+    <ClCompile Include="..\Code\ActorController.cpp" />
+    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
+    <ClCompile Include="..\Code\ValkyrieProperty.cpp" />
+    <ClCompile Include="..\Code\ValkyrieSelect.cpp" />
+    <ClCompile Include="..\Code\ValkyrieStatusData.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeapon.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp" />
+    <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp" />
+    <ClCompile Include="..\Code\WaponItem.cpp" />
+    <ClCompile Include="..\Code\WaterShader.cpp" />
+    <ClCompile Include="..\Code\WeaponData.cpp" />
+    <ClCompile Include="..\Code\WooScene.cpp" />
+    <ClCompile Include="..\Code\YongScene.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Theresa_CrossBlade.cpp" />
+    <ClCompile Include="Theresa_CrossBloodyHug.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>99.Default</Filter>
-    </Image>
-    <Image Include="Client.ico">
-      <Filter>99.Default</Filter>
-    </Image>
-    <Image Include="Honkai.ico">
-      <Filter>99.Default</Filter>
-    </Image>
+    <ClInclude Include="..\Header\AlphaLifeTimeC.h" />
+    <ClInclude Include="..\Header\AlphaMaskShader.h" />
+    <ClInclude Include="..\Header\AttackBall.h" />
+    <ClInclude Include="..\Header\AttackBox.h" />
+    <ClInclude Include="..\Header\AttackRange_Circle.h" />
+    <ClInclude Include="..\Header\AttackRangeShader.h" />
+    <ClInclude Include="..\Header\BattleEndManager.h" />
+    <ClInclude Include="..\Header\BattleEndScene.h" />
+    <ClInclude Include="..\Header\BattleRenunciationC.h" />
+    <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BossStageScene.h" />
+    <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
+    <ClInclude Include="..\Header\BronyaBasePattern.h" />
+    <ClInclude Include="..\Header\BronyaBornPattern.h" />
+    <ClInclude Include="..\Header\BronyaDiePattern.h" />
+    <ClInclude Include="..\Header\BronyaEscapePattern.h" />
+    <ClInclude Include="..\Header\BronyaFlashBang_AS.h" />
+    <ClInclude Include="..\Header\BronyaHitPattern.h" />
+    <ClInclude Include="..\Header\BronyaShock1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaSkillUltraPattern.h" />
+    <ClInclude Include="..\Header\BronyaThrow1Pattern.h" />
+    <ClInclude Include="..\Header\Bronya_Cannon_Charge.h" />
+    <ClInclude Include="..\Header\Bronya_FlashBang.h" />
+    <ClInclude Include="..\Header\Bronya_Impact.h" />
+    <ClInclude Include="..\Header\Bronya_Impact_Ring.h" />
+    <ClInclude Include="..\Header\Bronya_Impact_TripleRing.h" />
+    <ClInclude Include="..\Header\Bronya_RandomSmoke.h" />
+    <ClInclude Include="..\Header\Bronya_Shot_Smoke.h" />
+    <ClInclude Include="..\Header\Bronya_Weapon.h" />
+    <ClInclude Include="..\Header\Button.h" />
+    <ClInclude Include="..\Header\ButtonManager.h" />
+    <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
+    <ClInclude Include="..\Header\Ganesha_Dome.h" />
+    <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
+    <ClInclude Include="..\Header\Ganesha_Impact_Eff.h" />
+    <ClInclude Include="..\Header\Ganesha_LaserEff.h" />
+    <ClInclude Include="..\Header\Ganesha_SmokeEff.h" />
+    <ClInclude Include="..\Header\Ganesha_UpperEff.h" />
+    <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\Lancer_Att_Range.h" />
+    <ClInclude Include="..\Header\Lancer_Impact.h" />
+    <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
+    <ClInclude Include="..\Header\MonsterAttackSign.h" />
+    <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\RobotHookEff.h" />
+    <ClInclude Include="..\Header\Robot_Impact.h" />
+    <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
+    <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\ScoutAirbornePattern.h" />
+    <ClInclude Include="..\Header\ScoutBall.h" />
+    <ClInclude Include="..\Header\ScoutCircleRange.h" />
+    <ClInclude Include="..\Header\ScoutMeteor.h" />
+    <ClInclude Include="..\Header\Scout_Att_Range.h" />
+    <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
+    <ClInclude Include="..\Header\Scout_Laser.h" />
+    <ClInclude Include="..\Header\SickleAirbornePattern.h" />
+    <ClInclude Include="..\Header\Sickle_Trail.h" />
+    <ClInclude Include="..\Header\SizeUpC.h" />
+    <ClInclude Include="..\Header\SparkEffect.h" />
+    <ClInclude Include="..\Header\SpiderExplosion.h" />
+    <ClInclude Include="..\Header\OutlineShader.h" />
+    <ClInclude Include="..\Header\StageCameraMan.h" />
+    <ClInclude Include="..\Header\CaptainData.h" />
+    <ClInclude Include="..\Header\ClientComponents.h" />
+    <ClInclude Include="..\Header\ClientPatterns.h" />
+    <ClInclude Include="..\Header\CatPawShader.h" />
+    <ClInclude Include="..\Header\CircularGaugeShader.h" />
+    <ClInclude Include="..\Header\DamageFontShader.h" />
+    <ClInclude Include="..\Header\DataManager.h" />
+    <ClInclude Include="..\Header\DecoObject.h" />
+    <ClInclude Include="..\Header\ClientFunction.h" />
+    <ClInclude Include="..\Header\ClientStructure_MonsterStatus.h" />
+    <ClInclude Include="..\Header\ClientStructure_ValkyrieStatus.h" />
+    <ClInclude Include="..\Header\DissolveShader.h" />
+    <ClInclude Include="..\Header\EffectMaker.h" />
+    <ClInclude Include="..\Header\EffectMaker_Kiana.h" />
+    <ClInclude Include="..\Header\EffectMaker_Theresa.h" />
+    <ClInclude Include="..\Header\FireShader.h" />
+    <ClInclude Include="..\Header\FSMDefine_Axe.h" />
+    <ClInclude Include="..\Header\FSMDefine_Bronya.h" />
+    <ClInclude Include="..\Header\FSMDefine_Ganesha.h" />
+    <ClInclude Include="..\Header\FSMDefine_Lancer.h" />
+    <ClInclude Include="..\Header\FSMDefine_Ninza.h" />
+    <ClInclude Include="..\Header\FSMDefine_Robot.h" />
+    <ClInclude Include="..\Header\FSMDefine_Sakura.h" />
+    <ClInclude Include="..\Header\FSMDefine_Scout.h" />
+    <ClInclude Include="..\Header\FSMDefine_Sickle.h" />
+    <ClInclude Include="..\Header\FSMDefine_Spider.h" />
+    <ClInclude Include="..\Header\FSMDefine_Theresa.h" />
+    <ClInclude Include="..\Header\FSM_SakuraC.h" />
+    <ClInclude Include="..\Header\FSM_SickleC.h" />
+    <ClInclude Include="..\Header\FSM_TheresaC.h" />
+    <ClInclude Include="..\Header\GaneshaBasePattern.h" />
+    <ClInclude Include="..\Header\GaneshaBornPattern.h" />
+    <ClInclude Include="..\Header\GaneshaBurst01Pattern.h" />
+    <ClInclude Include="..\Header\GaneshaDiePattern.h" />
+    <ClInclude Include="..\Header\GaneshaHitPattern.h" />
+    <ClInclude Include="..\Header\GaneshaRoll01Pattern.h" />
+    <ClInclude Include="..\Header\GaneshaBurst02Pattern.h" />
+    <ClInclude Include="..\Header\GaneshaStampPattern.h" />
+    <ClInclude Include="..\Header\GlitterC.h" />
+    <ClInclude Include="..\Header\HitsUiC.h" />
+    <ClInclude Include="..\Header\ChangmoScene.h" />
+    <ClInclude Include="..\Header\ClientDefine.h" />
+    <ClInclude Include="..\Header\ClientEnum.h" />
+    <ClInclude Include="..\Header\ClientMacro.h" />
+    <ClInclude Include="..\Header\ClientScene.h" />
+    <ClInclude Include="..\Header\ClientStructure.h" />
+    <ClInclude Include="..\Header\ClientTypedef.h" />
+    <ClInclude Include="..\Header\DamageFontC.h" />
+    <ClInclude Include="..\Header\DamageObjectPool.h" />
+    <ClInclude Include="..\Header\DataLoad.h" />
+    <ClInclude Include="..\Header\DeleGate.h" />
+    <ClInclude Include="..\Header\DongScene.h" />
+    <ClInclude Include="..\Header\FSMDefine_Kiana.h" />
+    <ClInclude Include="..\Header\FSM_AxeC.h" />
+    <ClInclude Include="..\Header\FSM_BronyaC.h" />
+    <ClInclude Include="..\Header\FSM_GaneshaC.h" />
+    <ClInclude Include="..\Header\FSM_KianaC.h" />
+    <ClInclude Include="..\Header\FSM_LancerC.h" />
+    <ClInclude Include="..\Header\FSM_NinzaC.h" />
+    <ClInclude Include="..\Header\FSM_RobotC.h" />
+    <ClInclude Include="..\Header\FSM_ScoutC.h" />
+    <ClInclude Include="..\Header\FSM_SpiderC.h" />
+    <ClInclude Include="..\Header\ButtonFunction.h" />
+    <ClInclude Include="..\Header\Include_Valkyrie.h" />
+    <ClInclude Include="..\Header\InitScene.h" />
+    <ClInclude Include="..\Header\InStockValkyrieData.h" />
+    <ClInclude Include="..\Header\InventoryManager.h" />
+    <ClInclude Include="..\Header\InventoryScene.h" />
+    <ClInclude Include="..\Header\Item.h" />
+    <ClInclude Include="..\Header\ItemButton.h" />
+    <ClInclude Include="..\Header\ItemData.h" />
+    <ClInclude Include="..\Header\JongScene.h" />
+    <ClInclude Include="..\Header\Kiana.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk01.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk02.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk03.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk04.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Atk05.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk01.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk02.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk03.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk04.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Ring_Atk05.h" />
+    <ClInclude Include="..\Header\LancerAttack2Pattern.h" />
+    <ClInclude Include="..\Header\LancerBasePattern.h" />
+    <ClInclude Include="..\Header\LancerBornPattern.h" />
+    <ClInclude Include="..\Header\LancerDiePattern.h" />
+    <ClInclude Include="..\Header\LancerHitPattern.h" />
+    <ClInclude Include="..\Header\Kiana_Trail.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Plane.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Ring.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Shield.h" />
+    <ClInclude Include="..\Header\Kiana_Ult_Trail.h" />
+    <ClInclude Include="..\Header\LaserTrailShader.h" />
+    <ClInclude Include="..\Header\LifeObjectC.h" />
+    <ClInclude Include="..\Header\Loading.h" />
+    <ClInclude Include="..\Header\MainApp.h" />
+    <ClInclude Include="..\Header\MainRoomManager.h" />
+    <ClInclude Include="..\Header\MainRoomScene.h" />
+    <ClInclude Include="..\Header\MapObject.h" />
+    <ClInclude Include="..\Header\MapObject2D.h" />
+    <ClInclude Include="..\Header\MB_Bronya.h" />
+    <ClInclude Include="..\Header\MB_Ganesha.h" />
+    <ClInclude Include="..\Header\MeshEffect_Client.h" />
+    <ClInclude Include="..\Header\MeshTrailShader.h" />
+    <ClInclude Include="..\Header\Monster.h" />
+    <ClInclude Include="..\Header\ATBPattern.h" />
+    <ClInclude Include="..\Header\MonsterHitEffect.h" />
+    <ClInclude Include="..\Header\MonsterSliderC.h" />
+    <ClInclude Include="..\Header\MonsterSpawnBeam.h" />
+    <ClInclude Include="..\Header\MonsterSpawnEff.h" />
+    <ClInclude Include="..\Header\MoveUpSmoke.h" />
+    <ClInclude Include="..\Header\MO_Axe.h" />
+    <ClInclude Include="..\Header\MO_Dummy.h" />
+    <ClInclude Include="..\Header\MO_Lancer.h" />
+    <ClInclude Include="..\Header\MO_Ninza.h" />
+    <ClInclude Include="..\Header\MO_Robot.h" />
+    <ClInclude Include="..\Header\MO_Scout.h" />
+    <ClInclude Include="..\Header\MO_Sickle.h" />
+    <ClInclude Include="..\Header\MO_Spider.h" />
+    <ClInclude Include="..\Header\NinzaAttack2Pattern.h" />
+    <ClInclude Include="..\Header\NinzaBasePattern.h" />
+    <ClInclude Include="..\Header\NinzaBornPattern.h" />
+    <ClInclude Include="..\Header\NinzaDiePattern.h" />
+    <ClInclude Include="..\Header\NinzaHitPattern.h" />
+    <ClInclude Include="..\Header\OneStagePhaseControl.h" />
+    <ClInclude Include="..\Header\OneStageScene.h" />
+    <ClInclude Include="..\Header\Portal.h" />
+    <ClInclude Include="..\Header\RobotAttack1Pattern.h" />
+    <ClInclude Include="..\Header\RobotAttack2Pattern.h" />
+    <ClInclude Include="..\Header\RobotBasePattern.h" />
+    <ClInclude Include="..\Header\RobotBornPattern.h" />
+    <ClInclude Include="..\Header\RobotDiePattern.h" />
+    <ClInclude Include="..\Header\RobotHitPattern.h" />
+    <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
+    <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
+    <ClInclude Include="..\Header\SoftEffect.h" />
+    <ClInclude Include="..\Header\StuffItem.h" />
+    <ClInclude Include="..\Header\SupplyItem.h" />
+    <ClInclude Include="..\Header\SupplyManager.h" />
+    <ClInclude Include="..\Header\SupplyOut.h" />
+    <ClInclude Include="..\Header\SupplyScene.h" />
+    <ClInclude Include="..\Header\SupplyWapon.h" />
+    <ClInclude Include="..\Header\TheresaCharge_Att.h" />
+    <ClInclude Include="..\Header\Theresa_Trail.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Fire.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Crack.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Smoke.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Trail.h" />
+    <ClInclude Include="..\Header\ScoutBasePattern.h" />
+    <ClInclude Include="..\Header\ScoutBornPattern.h" />
+    <ClInclude Include="..\Header\ScoutDiePattern.h" />
+    <ClInclude Include="..\Header\ScoutHitPattern.h" />
+    <ClInclude Include="..\Header\ScoutShoot2Pattern.h" />
+    <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
+    <ClInclude Include="..\Header\ThreeStagePhaseControl.h" />
+    <ClInclude Include="..\Header\ThreeStageScene.h" />
+    <ClInclude Include="..\Header\TimeSeeker.h" />
+    <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
+    <ClInclude Include="..\Header\TwoStageScene.h" />
+    <ClInclude Include="..\Header\ValkyrieFSM.h" />
+    <ClInclude Include="..\Header\ValkyriegManager.h" />
+    <ClInclude Include="..\Header\PartySettingScene.h" />
+    <ClInclude Include="..\Header\PatternMachineC.h" />
+    <ClInclude Include="..\Header\PhaseChanger.h" />
+    <ClInclude Include="..\Header\ReadyToSortieManager.h" />
+    <ClInclude Include="..\Header\PhaseControl.h" />
+    <ClInclude Include="..\Header\ReadyToSortieScene.h" />
+    <ClInclude Include="..\Header\RotationUiC.h" />
+    <ClInclude Include="..\Header\Sakura.h" />
+    <ClInclude Include="..\Header\ScrollViewObject.h" />
+    <ClInclude Include="..\Header\SickleAtk02Pattern.h" />
+    <ClInclude Include="..\Header\SickleBasePattern.h" />
+    <ClInclude Include="..\Header\SickleBornPattern.h" />
+    <ClInclude Include="..\Header\SickleDiePattern.h" />
+    <ClInclude Include="..\Header\SickleHitPattern.h" />
+    <ClInclude Include="..\Header\SkillActivationC.h" />
+    <ClInclude Include="..\Header\SkillCollTimcC.h" />
+    <ClInclude Include="..\Header\SpiderBasePattern.h" />
+    <ClInclude Include="..\Header\SpiderBornPattern.h" />
+    <ClInclude Include="..\Header\SpiderDiePattern.h" />
+    <ClInclude Include="..\Header\SpiderHitPattern.h" />
+    <ClInclude Include="..\Header\SoftEffectShader.h" />
+    <ClInclude Include="..\Header\SpawnEffectShader.h" />
+    <ClInclude Include="..\Header\SquadData.h" />
+    <ClInclude Include="..\Header\StageSelectionManager.h" />
+    <ClInclude Include="..\Header\StageSelectionScene.h" />
+    <ClInclude Include="..\Header\TargetPositionC.h" />
+    <ClInclude Include="..\Header\TrapObject.h" />
+    <ClInclude Include="..\Header\UILinker.h" />
+    <ClInclude Include="..\Header\StaticScene.h" />
+    <ClInclude Include="..\Header\StatusDealer.h" />
+    <ClInclude Include="..\Header\Theresa.h" />
+    <ClInclude Include="..\Header\TimerUiC.h" />
+    <ClInclude Include="..\Header\UiAnimCtrC.h" />
+    <ClInclude Include="..\Header\Valkyrie.h" />
+    <ClInclude Include="..\Header\StageControlTower.h" />
+    <ClInclude Include="..\Header\ActorController.h" />
+    <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
+    <ClInclude Include="..\Header\ValkyrieProperty.h" />
+    <ClInclude Include="..\Header\ValkyrieSelect.h" />
+    <ClInclude Include="..\Header\ValkyrieStatusData.h" />
+    <ClInclude Include="..\Header\ValkyrieWeapon.h" />
+    <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h" />
+    <ClInclude Include="..\Header\ValkyrieWeaponSwap.h" />
+    <ClInclude Include="..\Header\WaponItem.h" />
+    <ClInclude Include="..\Header\WaterShader.h" />
+    <ClInclude Include="..\Header\WeaponData.h" />
+    <ClInclude Include="..\Header\WooScene.h" />
+    <ClInclude Include="..\Header\YongScene.h" />
+    <ClInclude Include="..\Header\Include_ForTest.h" />
+    <ClInclude Include="Theresa_CrossBlade.h" />
+    <ClInclude Include="Theresa_CrossBloodyHug.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Explosion.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Client.rc">
-      <Filter>99.Default</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="Client.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Initialize_Helper.txt">
-      <Filter>99.Default</Filter>
-    </Text>
+    <Image Include="Client.ico" />
+    <Image Include="small.ico" />
+    <Image Include="Honkai.ico" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
-      <Filter>04.Shader\00.WaterShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
-      <Filter>04.Shader\08.AttackRangeShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
-      <Filter>04.Shader\02.CatPawShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\CircularGaugeShader.fx">
-      <Filter>04.Shader\03.CircularGaugeShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
-      <Filter>04.Shader\05.DissolveShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
-      <Filter>04.Shader\04.MeshTrailShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
-      <Filter>04.Shader\07.SoftEffectShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
-      <Filter>04.Shader\06.SpawnEffectShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
-      <Filter>04.Shader\09.AlphaMaskShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
-      <Filter>04.Shader\10.FireShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
-      <Filter>04.Shader\11.LaserTrail</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
-      <Filter>04.Shader\12.OutlineShader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\FaceShader.fx">
-      <Filter>04.Shader\13.FaceShader</Filter>
-    </FxCompile>
+    <Text Include="Initialize_Helper.txt" />
   </ItemGroup>
 </Project>
