@@ -865,8 +865,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff">
       <UniqueIdentifier>{02a5d758-92b8-4946-9e0b-4c7d15096fad}</UniqueIdentifier>
     </Filter>
-<Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
-  <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
+      <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
+    </Filter>      
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge">
       <UniqueIdentifier>{cf91bd3d-9d1e-4e76-925c-b6560071ecd4}</UniqueIdentifier>
     </Filter>
