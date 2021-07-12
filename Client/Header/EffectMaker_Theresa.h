@@ -20,9 +20,9 @@
 #define Ultra_Smoke_Tex1Name	L"fx_snowfield_fog03"
 #define Ultra_Smoke_Tex2Name	L"fx_snowfield_fog03"
 
-#define Ultra_Boom_ObjectKey	L"Theresa_Ult_Boom"
-#define Ultra_Boom_Tex1Name		L"Ult_Boom"
-#define Ultra_Boom_Tex2Name		L"Ult_Boom"
+#define Ultra_Explosion_ObjectKey	L"Theresa_Ult_Explosion"
+#define Ultra_Explosion_Tex1Name	L"Ult_Boom"
+#define Ultra_Explosion_Tex2Name	L"Ult_Boom"
 
 class CTheresa;
 class CEffectMaker_Theresa :public CEffectMaker
@@ -54,4 +54,3 @@ private:
 
 	_float3 m_posOffset = _float3(0.f, 0.1f, 0.1f);
 };
-

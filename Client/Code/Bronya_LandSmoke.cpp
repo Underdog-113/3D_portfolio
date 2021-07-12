@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\Ganesha_Impact_Eff.h"
+#include "..\Header\Bronya_LandSmoke.h"
 
-_uint CGanesha_Impact_Eff::m_s_uniqueID = 0;
+_uint CBronya_LandSmoke::m_s_uniqueID = 0;
 
-CGanesha_Impact_Eff::CGanesha_Impact_Eff()
+CBronya_LandSmoke::CBronya_LandSmoke()
 {
 }
 
 
-CGanesha_Impact_Eff::~CGanesha_Impact_Eff()
+CBronya_LandSmoke::~CBronya_LandSmoke()
 {
 }
 
-SP(CGanesha_Impact_Eff) CGanesha_Impact_Eff::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CBronya_LandSmoke) CBronya_LandSmoke::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CGanesha_Impact_Eff) spInstance(new CGanesha_Impact_Eff, Engine::SmartDeleter<CGanesha_Impact_Eff>);
+	SP(CBronya_LandSmoke) spInstance(new CBronya_LandSmoke, Engine::SmartDeleter<CBronya_LandSmoke>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +22,9 @@ SP(CGanesha_Impact_Eff) CGanesha_Impact_Eff::Create(_bool isStatic, Engine::CSce
 	return spInstance;
 }
 
-SP(Engine::CObject) CGanesha_Impact_Eff::MakeClone()
+SP(Engine::CObject) CBronya_LandSmoke::MakeClone()
 {
-	SP(CGanesha_Impact_Eff) spClone(new CGanesha_Impact_Eff, Engine::SmartDeleter<CGanesha_Impact_Eff>);
+	SP(CBronya_LandSmoke) spClone(new CBronya_LandSmoke, Engine::SmartDeleter<CBronya_LandSmoke>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
@@ -36,25 +36,27 @@ SP(Engine::CObject) CGanesha_Impact_Eff::MakeClone()
 	return spClone;
 }
 
-void CGanesha_Impact_Eff::Awake()
+void CBronya_LandSmoke::Awake()
 {
 	__super::Awake();
 
 }
 
-void CGanesha_Impact_Eff::Start()
+void CBronya_LandSmoke::Start()
 {
 	__super::Start();
+
 	m_fAlpha = 1.3f;
 	m_fTime = 0.f;
 }
 
-void CGanesha_Impact_Eff::FixedUpdate()
+void CBronya_LandSmoke::FixedUpdate()
 {
 	__super::FixedUpdate();
+
 }
 
-void CGanesha_Impact_Eff::Update()
+void CBronya_LandSmoke::Update()
 {
 	__super::Update();
 
@@ -65,18 +67,18 @@ void CGanesha_Impact_Eff::Update()
 
 	_float3 _size = _float3(0.5f, 0.5f, 0.5f);
 
-	m_fAlpha -= 0.3f * GET_DT;
+	m_fAlpha -= 2.3f * GET_DT;
 	m_fTime += 0.2f * GET_DT;
 	m_spTransform->AddSize(_size * GET_DT);
 }
 
-void CGanesha_Impact_Eff::LateUpdate()
+void CBronya_LandSmoke::LateUpdate()
 {
 	__super::LateUpdate();
 
 }
 
-void CGanesha_Impact_Eff::PreRender(LPD3DXEFFECT pEffect)
+void CBronya_LandSmoke::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
@@ -86,34 +88,38 @@ void CGanesha_Impact_Eff::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->CommitChanges();
 }
 
-void CGanesha_Impact_Eff::Render(LPD3DXEFFECT pEffect)
+void CBronya_LandSmoke::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
+
 }
 
-void CGanesha_Impact_Eff::PostRender(LPD3DXEFFECT pEffect)
+void CBronya_LandSmoke::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
+
 }
 
-void CGanesha_Impact_Eff::OnDestroy()
+void CBronya_LandSmoke::OnDestroy()
 {
 	__super::OnDestroy();
 
 }
 
-void CGanesha_Impact_Eff::OnEnable()
+void CBronya_LandSmoke::OnEnable()
 {
 	__super::OnEnable();
+
 }
 
-void CGanesha_Impact_Eff::OnDisable()
+void CBronya_LandSmoke::OnDisable()
 {
 	__super::OnDisable();
 
 }
 
-void CGanesha_Impact_Eff::SetBasicName()
+void CBronya_LandSmoke::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+
 }
