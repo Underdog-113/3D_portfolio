@@ -487,9 +487,6 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire">
       <UniqueIdentifier>{b9531daf-1032-44de-b744-b32eb7a88f77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom">
-      <UniqueIdentifier>{2e4d3c72-ab7e-4238-af18-9c75bcc0124c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane">
       <UniqueIdentifier>{fe921a0a-3732-47b7-a9fe-3df6f90ff48e}</UniqueIdentifier>
     </Filter>
@@ -865,8 +862,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff">
       <UniqueIdentifier>{02a5d758-92b8-4946-9e0b-4c7d15096fad}</UniqueIdentifier>
     </Filter>
-<Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
-  <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
+      <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge">
       <UniqueIdentifier>{cf91bd3d-9d1e-4e76-925c-b6560071ecd4}</UniqueIdentifier>
     </Filter>
@@ -893,6 +891,9 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke">
       <UniqueIdentifier>{d1dd660e-1def-4f60-a77c-1c628ceda4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Explosion">
+      <UniqueIdentifier>{2e4d3c72-ab7e-4238-af18-9c75bcc0124c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1475,9 +1476,6 @@
     <ClInclude Include="..\Header\Theresa_Ult_Fire.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Theresa_Ult_Boom.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Theresa_Ult_Crack.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
     </ClInclude>
@@ -1773,6 +1771,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\ScoutAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_Explosion.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Explosion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2299,9 +2300,6 @@
     <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Fire</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Boom</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Plane</Filter>
     </ClCompile>
@@ -2567,6 +2565,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Explosion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
