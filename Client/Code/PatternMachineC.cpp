@@ -79,7 +79,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	// hit, airborne ½ÇÇà
 	PlayHitPattern();
 
-	std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
+	//std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
 	//std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
 	//std::cout << "Pattern  : " << std::endl;
 }
