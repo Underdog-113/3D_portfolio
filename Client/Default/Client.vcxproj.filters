@@ -867,6 +867,33 @@
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
       <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
+    </Filter>      
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge">
+      <UniqueIdentifier>{cf91bd3d-9d1e-4e76-925c-b6560071ecd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Shot_Smoke">
+      <UniqueIdentifier>{1d260946-7942-401c-96c4-c3ff0b269589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact">
+      <UniqueIdentifier>{d61346f9-a28f-4992-9772-005b9cc1574e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_Ring">
+      <UniqueIdentifier>{39a90fd2-39e9-4709-a55b-e453ccddd720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_TripleRing">
+      <UniqueIdentifier>{74dddda3-2c25-446c-ba17-1b2e9d12a767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_FlashBang">
+      <UniqueIdentifier>{93aeffcd-1ae4-4cfc-bcda-68e5fca934d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff">
+      <UniqueIdentifier>{a655804f-ce03-44df-a5f3-a1124f36e10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_FlashBang_AS">
+      <UniqueIdentifier>{603e031c-4c15-4dec-a5f9-21cfb8de2ab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke">
+      <UniqueIdentifier>{d1dd660e-1def-4f60-a77c-1c628ceda4a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1722,10 +1749,28 @@
       <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Bronya_Cannon_Charge.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Bronya_Shot_Smoke.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Shot_Smoke</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_Impact.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_Impact_Ring.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_Impact_TripleRing.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_TripleRing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_FlashBang.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_FlashBang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaFlashBang_AS.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_FlashBang_AS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_RandomSmoke.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\ScoutAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
@@ -2498,10 +2543,28 @@
       <Filter>02.Objects\03.Effect\03.SoftEffect\07.Ganesha_SoftEff\Ganesha_UpperEff</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Shot_Smoke</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_Impact.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_Impact_Ring.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_Impact_TripleRing.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Impact\Bronya_Impact_TripleRing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_FlashBang.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_FlashBang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_FlashBang_AS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bronya_RandomSmoke.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
