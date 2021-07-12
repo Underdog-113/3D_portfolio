@@ -39,6 +39,8 @@ void CShader::Awake(void)
 		std::string pErrMsg = (char*)m_pErrMsg->GetBufferPointer();
 		MSG_BOX(__FILE__, (L"CreateEffectFromFile warning in " + m_objectKey + L"::Awake()").c_str());
 	}
+
+	m_vRenderTargets.resize(4, nullptr);
 }
 
 void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)

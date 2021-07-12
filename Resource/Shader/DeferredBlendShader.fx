@@ -81,7 +81,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	vector vShade = saturate(tex2D(ShadeSampler, In.vTexUV));
 	vector vSpecular = saturate(tex2D(SpecularSampler, In.vTexUV));
 
-	Out.vColor = vAlbedo;// *vShade;// +vSpecular;
+	Out.vColor = vAlbedo * vShade;// +vSpecular;
 	
 
 	

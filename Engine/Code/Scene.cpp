@@ -165,21 +165,21 @@ void CScene::InitLights(void)
 
 	pLightInfo->Type = D3DLIGHT_DIRECTIONAL;
 	pLightInfo->Direction = _float3(1.f, -1.f, 0.f);
-	pLightInfo->Diffuse = D3DXCOLOR(1.4f, 1.4f, 1.4f, 1.f);
+	pLightInfo->Diffuse = D3DXCOLOR(.8f, .8f, .8f, 1.f);
 	pLightInfo->Ambient = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	pLightInfo->Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	m_pLightManager->AddCameraLight(pLightInfo);
 
 	
-	pLightInfo = new D3DLIGHT9;
-	pLightInfo->Type = D3DLIGHT_POINT;
-	pLightInfo->Position = _float3(0.f, 0.f, 0.f);
-	pLightInfo->Diffuse = D3DXCOLOR(1.f, .8f, .8f, 1.f);
-	pLightInfo->Ambient = D3DXCOLOR(0.2f, 0.f, 0.f, 1.f);
-	pLightInfo->Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
-	pLightInfo->Range = 5.f;
-	
-	m_pLightManager->AddCameraLight(pLightInfo);
+	//pLightInfo = new D3DLIGHT9;
+	//pLightInfo->Type = D3DLIGHT_POINT;
+	//pLightInfo->Position = _float3(0.f, 0.f, 0.f);
+	//pLightInfo->Diffuse = D3DXCOLOR(1.f, .8f, .8f, 1.f);
+	//pLightInfo->Ambient = D3DXCOLOR(0.6f, 0.6f, 0.6f, 1.f);
+	//pLightInfo->Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	//pLightInfo->Range = 35.f;
+	//
+	//m_pLightManager->AddCameraLight(pLightInfo);
 	//
 	//
 	//pLightInfo = new D3DLIGHT9;

@@ -18,6 +18,8 @@ public:
 					void				SetupWorldViewProj		(SP(CGraphicsC) spGC);
 					void				SetupOrthoWVP			(SP(CGraphicsC) spGC);
 protected:
+	typedef std::vector<CRenderTarget*> _RenderTargets;
+	GETTOR			(_RenderTargets,	m_vRenderTargets,		{},				RenderTargets)
 	GETTOR			(LPD3DXEFFECT,		m_pEffect,				nullptr,		Effect)
 	GETTOR			(LPD3DXBUFFER,		m_pErrMsg,				nullptr,		ErrMsg)
 };
