@@ -14,6 +14,9 @@ public:
 	void OnAttackImpactSlow();
 	void PlayAttackImpactSlow();
 
+	void OnSakuraUltraActive();
+	void OffSakuraUltraActive();
+
 private:
 	GETTOR	(_bool, m_perfectEvadeMode, false, IsPerfectEvadeMode)
 	_bool	m_slowAll = false;
@@ -21,5 +24,8 @@ private:
 
 	
 	GETTOR	(_bool, m_isAttackImpactSlow, false, IsAttackImpactSlow)
+
+		
+	GETTOR	(_bool, m_sakuraUltraSlow, false, IsSakuraUltarSlow)
 };
 

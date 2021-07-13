@@ -84,6 +84,9 @@ public:		/* Battle */
 	void OnPerfectEvadeMode();
 	_bool GetIsPerfectEvadeMode();
 
+	void OnSakuraUltraActive();
+	void OffSakuraUltraActive();
+
 	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 
