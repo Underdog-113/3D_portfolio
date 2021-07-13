@@ -127,6 +127,7 @@
 #include "Bronya_Ult_Impact.h"
 #include "Bronya_Ult_Impact_Smoke.h"
 #include "Bronya_Ult_Range.h"
+#include "Bronya_Ult_Laser.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -828,4 +829,11 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronya_Ult_Range->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
 	spBronya_Ult_Range->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	GetObjectFactory()->AddPrototype(spBronya_Ult_Range);
+
+	SP(CSoftEffect) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
+	spBronya_UIt_Laser->GetComponent<Engine::CGraphicsC>();
+	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
+	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
+	spBronya_UIt_Laser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 }

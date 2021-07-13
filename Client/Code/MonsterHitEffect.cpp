@@ -34,13 +34,6 @@ SP(Engine::CObject) CMonsterHitEffect::MakeClone(void)
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_bBillboard = true;
 
-	spClone->m_fAlphaWidth = 4.f;
-	spClone->m_fAlphaHeight = 4.f;
-	spClone->m_TilingX = 0;
-	spClone->m_TilingY = 0;
-	spClone->m_maxXIndex = 4;
-	spClone->m_maxYIndex = 3;
-	spClone->m_fTIme = 0.f;
 	return spClone;
 }
 
@@ -48,6 +41,14 @@ void CMonsterHitEffect::Awake(void)
 {
 	__super::Awake();	
 
+	m_fAlphaWidth = 4.f;
+	m_fAlphaHeight = 4.f;
+	m_TilingX = 0;
+	m_TilingY = 0;
+	m_maxXIndex = 4;
+	m_maxYIndex = 3;
+	m_fAlpha = 1.f;
+	m_fTIme = 0.f;
 }
 
 void CMonsterHitEffect::Start(void)

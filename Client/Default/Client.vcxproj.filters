@@ -1844,7 +1844,9 @@
     <ClInclude Include="..\Header\Bronya_Ult_Range.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Bronya_Ult_Laser.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Laser.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2687,7 +2689,9 @@
     <ClCompile Include="..\Code\Bronya_Ult_Range.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
