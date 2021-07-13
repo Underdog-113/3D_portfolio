@@ -2,6 +2,7 @@
 #include "StateMachineC.h"
 #define Cool_Attack				0.25f
 #define Cool_ChargeAttack		0.5f
+#define Cool_ChargeQuick		0.3f
 #define Cool_Evade				0.2f
 #define Cool_End				0.85f
 
@@ -46,9 +47,14 @@ private:
 
 	void OnAttackBall(_float damageRate, _float breakDamage, HitInfo::Strength strType, HitInfo::CrowdControl ccType);
 
+	void FlashAttack(_float damageRate, _float breakDamage, HitInfo::Strength strType, HitInfo::CrowdControl ccType);
+	void SakuraCutting();
+	void InfernoActive_1st();
+
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
 	bool CheckAction_Charge(float coolTime = Cool_ChargeAttack);
+	bool CheckAction_ChargeQuick(float coolTime = Cool_ChargeQuick);
 	bool CheckAction_Evade_OnAction(float coolTime = Cool_Evade);
 	bool CheckAction_EvadeForward(float coolTime = Cool_Evade);
 	bool CheckAction_EvadeBackward(float coolTime = Cool_Evade);
@@ -64,6 +70,7 @@ private: /* Normal Actions */
 	bool CheckAction_Idle();
 
 private: /* Special Actions */
+	bool CheckAction_ChargeEnd();
 
 private:
 	bool m_checkEffect = false;
@@ -90,6 +97,7 @@ private:
 	_double m_runSoundTimer = 0;
 
 	_float3 m_targetToSakura = ZERO_VECTOR;
+
 
 private:
 	// Appear

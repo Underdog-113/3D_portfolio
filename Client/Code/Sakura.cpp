@@ -4,6 +4,9 @@
 #include "FSM_SakuraC.h"
 #include "DynamicMeshData.h"
 #include "AttackBall.h"
+#include "Layer.h"
+
+#include "Monster.h"
 
 CSakura::CSakura()
 {
@@ -97,6 +100,26 @@ void CSakura::Update(void)
 	m_pAttackBall->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset());
 	m_pAttackBall->GetTransform()->AddPosition(m_spTransform->GetForward() * 0.5f);
 	//UpdatePivotMatrix(m_pHand_World, m_pHand_Frame);
+
+	if (m_8SliceAttack)
+	{
+		m_8sliceTimer += GET_PLAYER_DT;
+		if (m_8sliceTimer > 0.02f)
+		{
+			m_8sliceTimer = 0.f;
+			Act8SliceAttack();
+			++m_8sliceCount;
+			if (m_8sliceCount == 8)
+				m_8SliceAttack = false;
+		}
+	}
+
+	if (m_infernoMode)
+	{
+		m_infernoTimer += GET_PLAYER_DT;
+		if (m_infernoTimer > 10.f)
+			m_infernoMode = false;
+	}
 }
 
 void CSakura::LateUpdate(void)
@@ -162,4 +185,38 @@ void CSakura::UseUltra(void)
 
 	m_pStat->SetCurSp(curSp);
 	m_ultraTimer = 0.f;
+	m_infernoTimer = 0.f;
+	m_pCT->OnSakuraUltraActive();
+}
+
+void CSakura::On8SliceAttack(void)
+{
+	m_8SliceAttack = true;
+	m_8sliceCount = 0;
+	m_8sliceTimer = 0.f;
+}
+
+void CSakura::Act8SliceAttack(void)
+{
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
+	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
+
+	HitInfo info;
+	info.SetDamageRate(0.1f);
+	info.SetBreakDamage(1.f);
+	info.SetStrengthType(HitInfo::Str_Airborne);
+	info.SetCrowdControlType(HitInfo::CC_Airborne);
+
+	for (auto& iter : monsterList)
+	{
+		CMonster* pMonster = (CMonster*)iter.get();
+		if (pMonster->GetIsEnabled() && !pMonster->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			m_pCT->HitMonster(
+				this,
+				pMonster,
+				info,
+				pMonster->GetTransform()->GetPosition() + _float3(0.f, pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset(), 0.f));
+		}
+	}
 }
