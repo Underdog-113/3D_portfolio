@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\Bronya_Shot_Smoke.h"
+#include "..\Header\Bronya_Ult_Impact_Smoke.h"
 
-_uint CBronya_Shot_Smoke::m_s_uniqueID = 0;
+_uint CBronya_Ult_Impact_Smoke::m_s_uniqueID = 0;
 
-CBronya_Shot_Smoke::CBronya_Shot_Smoke()
+CBronya_Ult_Impact_Smoke::CBronya_Ult_Impact_Smoke()
 {
 }
 
 
-CBronya_Shot_Smoke::~CBronya_Shot_Smoke()
+CBronya_Ult_Impact_Smoke::~CBronya_Ult_Impact_Smoke()
 {
 }
 
-SP(CBronya_Shot_Smoke) CBronya_Shot_Smoke::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CBronya_Ult_Impact_Smoke) CBronya_Ult_Impact_Smoke::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CBronya_Shot_Smoke) spInstance(new CBronya_Shot_Smoke, Engine::SmartDeleter<CBronya_Shot_Smoke>);
+	SP(CBronya_Ult_Impact_Smoke) spInstance(new CBronya_Ult_Impact_Smoke, Engine::SmartDeleter<CBronya_Ult_Impact_Smoke>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,13 +22,12 @@ SP(CBronya_Shot_Smoke) CBronya_Shot_Smoke::Create(_bool isStatic, Engine::CScene
 	return spInstance;
 }
 
-SP(Engine::CObject) CBronya_Shot_Smoke::MakeClone()
+SP(Engine::CObject) CBronya_Ult_Impact_Smoke::MakeClone()
 {
-	SP(CBronya_Shot_Smoke) spClone(new CBronya_Shot_Smoke, Engine::SmartDeleter<CBronya_Shot_Smoke>);
+	SP(CBronya_Ult_Impact_Smoke) spClone(new CBronya_Ult_Impact_Smoke, Engine::SmartDeleter<CBronya_Ult_Impact_Smoke>);
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetRotationZ(D3DXToRadian(90.f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -37,25 +36,25 @@ SP(Engine::CObject) CBronya_Shot_Smoke::MakeClone()
 	return spClone;
 }
 
-void CBronya_Shot_Smoke::Awake()
+void CBronya_Ult_Impact_Smoke::Awake()
 {
 	__super::Awake();
 
 }
 
-void CBronya_Shot_Smoke::Start()
+void CBronya_Ult_Impact_Smoke::Start()
 {
 	__super::Start();
 	m_fAlpha = 1.f;
 }
 
-void CBronya_Shot_Smoke::FixedUpdate()
+void CBronya_Ult_Impact_Smoke::FixedUpdate()
 {
 	__super::FixedUpdate();
 
 }
 
-void CBronya_Shot_Smoke::Update()
+void CBronya_Ult_Impact_Smoke::Update()
 {
 	__super::Update();
 
@@ -65,58 +64,57 @@ void CBronya_Shot_Smoke::Update()
 	}
 
 	m_fAlpha -= 0.5f * GET_DT;
-
 }
 
-void CBronya_Shot_Smoke::LateUpdate()
+void CBronya_Ult_Impact_Smoke::LateUpdate()
 {
 	__super::LateUpdate();
 	Billboard();
 }
 
-void CBronya_Shot_Smoke::PreRender(LPD3DXEFFECT pEffect)
+void CBronya_Ult_Impact_Smoke::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 }
 
-void CBronya_Shot_Smoke::Render(LPD3DXEFFECT pEffect)
+void CBronya_Ult_Impact_Smoke::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
 
 }
 
-void CBronya_Shot_Smoke::PostRender(LPD3DXEFFECT pEffect)
+void CBronya_Ult_Impact_Smoke::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
 
 }
 
-void CBronya_Shot_Smoke::OnDestroy()
+void CBronya_Ult_Impact_Smoke::OnDestroy()
 {
 	__super::OnDestroy();
 
 }
-#
-void CBronya_Shot_Smoke::OnEnable()
+
+void CBronya_Ult_Impact_Smoke::OnEnable()
 {
 	__super::OnEnable();
 
 }
 
-void CBronya_Shot_Smoke::OnDisable()
+void CBronya_Ult_Impact_Smoke::OnDisable()
 {
 	__super::OnDisable();
 
 }
 
-void CBronya_Shot_Smoke::SetBasicName()
+void CBronya_Ult_Impact_Smoke::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
 }
 
-void CBronya_Shot_Smoke::Billboard()
+void CBronya_Ult_Impact_Smoke::Billboard()
 {
 	_mat matWorld, matView, matBill;
 

@@ -57,19 +57,7 @@ void CAttackRange_Circle::Start()
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.f, 0.f, 0.f));
 	m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, this->GetTransform()->GetPosition().y, this->GetTransform()->GetPosition().z));
-	
-	/*m_pAttackRange_Circle_Alpha	= 
-		std::dynamic_pointer_cast<CDecoObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_int)Engine::ELayerID::Effect, L"AttackRange"));
 
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
-	m_pAttackRange_Circle_Alpha->SetParent(this);
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.1f, this->GetTransform()->GetPosition().z));
-	m_pAttackRange_Circle_Alpha->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
 
 
 }
@@ -87,7 +75,6 @@ void CAttackRange_Circle::Update()
 	if (m_pAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->GetSize().x >=
 		this->GetComponent<Engine::CTransformC>()->GetSize().x)
 	{
-		//m_pAttackRange_Circle_Alpha->SetDeleteThis(true);
 		m_pAttackRange_Circle_Diffuse->SetDeleteThis(true);
 		SetDeleteThis(true);
 	}
