@@ -191,7 +191,7 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 				CMonster* pMonster = (CMonster*)iter.get();
 				M_Stat* pStat = pMonster->GetStat();
 
-				if (pStat->GetCurrentCC() == HitInfo::CrowdControl::CC_Sakura)
+				if (pStat->GetSakuraCounter() > 0)
 					filteredMonsterList.emplace_back(iter);
 				++count;
 			}
@@ -541,6 +541,17 @@ _bool CStageControlTower::GetIsPerfectEvadeMode()
 {
 	return m_pTimeSeeker->GetIsPerfectEvadeMode();
 }
+
+void CStageControlTower::OnSakuraUltraActive()
+{
+	m_pTimeSeeker->OnSakuraUltraActive();
+}
+
+void CStageControlTower::OffSakuraUltraActive()
+{
+	m_pTimeSeeker->OffSakuraUltraActive();
+}
+
 
 _float CStageControlTower::GetPlayerDeltaTime()
 {

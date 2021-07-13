@@ -33,7 +33,7 @@ private:
 	static _uint m_s_uniqueID;
 
 protected:
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
+		GETTOR(SP(Engine::CGraphicsC), m_spGraphics, {}, Graphics)
 		GETTOR(SP(Engine::CTextureC), m_spTexture, {}, Texture)
 		GETTOR(SP(Engine::CRectTexC), m_spRectTex, {}, RectTex)
 		GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)

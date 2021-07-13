@@ -41,14 +41,25 @@ public:
 public:
 					void					UseSkill			(void) override;
 					void					UseUltra			(void) override;
+					void					On8SliceAttack		(void);
+					void					Act8SliceAttack		(void);
 public:
 	
 	GETTOR			(_mat*,					m_pHand_World,		nullptr,	HandWorldMatrix)
 	Engine::D3DXFRAME_DERIVED*	m_pHand_Frame = nullptr;
 	
 	GETTOR			(CAttackBall*,			m_pFlashAttackBall,		nullptr, FlashAttackBall)
+
+	GETTOR_SETTOR	(_bool,					m_infernoMode,			false,	InfernoMode)
+	GETTOR_SETTOR	(_float,				m_infernoTimer,			0.f,	InfernoTimer)
+
 private:
 	_uint idx = 0;
+
+private:
+	GETTOR			(_bool,					m_8SliceAttack,			false,  8SliceAttack)
+	_uint m_8sliceCount = 0;
+	_float m_8sliceTimer = 0.f;
 };
 
 #endif
