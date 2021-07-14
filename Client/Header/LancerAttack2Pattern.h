@@ -17,7 +17,10 @@ public:
 	static SP(CLancerAttack2Pattern) Create();
 
 private:
-	_float m_cost = 35.f;
+	_mat GetRHandMat(Engine::CObject* pOwner);
+
+private:
+	_float m_cost = /*35*/1.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 2.3f; // 공격 거리
@@ -35,8 +38,13 @@ private:
 	_bool m_onLerp = false;
 
 	/* for.effect */
-	GETTOR_SETTOR(SP(Engine::CObject), m_spSignEffect, {}, SignEffect)
+	SP(Engine::CObject) m_spSignEffect = nullptr;
+	SP(Engine::CObject) m_spBladeEffect = nullptr;
+
+	_mat* m_pRHand;
+
 	_bool m_onSignEffect = false;
+	_bool m_onBladeEffect = false;
 
 	_bool m_onShoot2 = false;
 	_bool m_onWalk = false;

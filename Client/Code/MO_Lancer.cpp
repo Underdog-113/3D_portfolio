@@ -53,6 +53,7 @@ void CMO_Lancer::Start(void)
 	__super::Start();
 
 	m_spTransform->SetSize(0.6f, 0.6f, 0.6f);
+	m_spTransform->SetSlerpSpeed(PI / 2);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
