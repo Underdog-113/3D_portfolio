@@ -479,6 +479,7 @@
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
     <ClInclude Include="Bronya_Ult_Impact.h" />
+    <ClInclude Include="EffectMaker_Sakura.h" />
     <ClInclude Include="Theresa_CrossBlade.h" />
     <ClInclude Include="Theresa_CrossBloodyHug.h" />
     <ClInclude Include="Resource.h" />
@@ -760,6 +761,7 @@
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="Bronya_Ult_Impact.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="EffectMaker_Sakura.cpp" />
     <ClCompile Include="Theresa_CrossBlade.cpp" />
     <ClCompile Include="Theresa_CrossBloodyHug.cpp" />
     <ClCompile Include="stdafx.cpp">

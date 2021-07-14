@@ -916,6 +916,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult">
       <UniqueIdentifier>{25e7161f-b362-4b0b-9724-6a15054eab89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect">
+      <UniqueIdentifier>{6c830e19-2f74-47ee-b28f-79a6207c2b04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1845,6 +1848,9 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Bronya_Ult_Laser.h" />
+    <ClInclude Include="EffectMaker_Sakura.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2688,6 +2694,9 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp" />
+    <ClCompile Include="EffectMaker_Sakura.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
