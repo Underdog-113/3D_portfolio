@@ -19,6 +19,8 @@
 #include "OneStagePhaseControl.h"
 #include "ThreeStagePhaseControl.h"
 #include "MeshShader.h"
+
+#include "TrapObject.h"
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
 { 
@@ -414,15 +416,25 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject * pValkyrie, HitInfo info, _float3 hitPoint)
 {
-	CMonster* pM = static_cast<CMonster*>(pMonster);
 	CValkyrie* pV = static_cast<CValkyrie*>(pValkyrie);
+	_bool isDead = false;
+	_float damage = 0.f;
 
 	if (pV->GetIsEvade())
 		return;
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
-	_float damage = 0.f;
-	bool isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
+	if (pMonster->GetLayerID() == (_int)ELayerID::Map)
+	{
+		CTrapObject* pT = static_cast<CTrapObject*>(pMonster);
+		isDead = m_pDealer->Damage_MtoV(pT->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
+	}
+	else if (pMonster->GetLayerID() == (_int)ELayerID::Enemy)
+	{
+		CMonster* pM = static_cast<CMonster*>(pMonster);
+		isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
+	}
+
 	CDamageObjectPool::GetInstance()->AddDamage(
 		pValkyrie, hitPoint,
 		_float3(36, 51, 0), 36, 80.0f, 1, (_int)damage, L"Purple");

@@ -35,6 +35,11 @@ private:
 
 	_bool m_onBurst = false;
 	_bool m_onRunStart = false;
+
+	_float3 m_burstDir;
+	_float3 m_burstPos;
+
+	SP(Engine::CObject) m_spEffect = nullptr;
 };
 
 #endif

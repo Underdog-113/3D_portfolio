@@ -101,11 +101,13 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
 			_float3 pPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-			_float3 beamDir = pPos - mPos;
-			beamDir.y = 0.f;
+			m_burstDir = pPos - mPos;
+			m_burstDir.y = 0.f;
 
-			D3DXVec3Normalize(&beamDir, &beamDir);
-			pGanesha->GetAttackBox()->GetTransform()->SetPosition(mPos + beamDir * 5);
+			D3DXVec3Normalize(&m_burstDir, &m_burstDir);
+			m_burstPos = mPos + m_burstDir * 5;
+
+			pGanesha->GetAttackBox()->GetTransform()->SetPosition(m_burstPos);
 			pGanesha->GetAttackBox()->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
 		}
 	}
@@ -117,6 +119,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
 		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+		m_spEffect->SetDeleteThis(true);
 		m_walkReady = false;
 		m_onSound = false;
 		m_onRunStart = false;
@@ -168,10 +171,19 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		m_onBurst = true;
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
-		_float3 size = { 2.f, 2.f, 10.f };
+		_float3 size = { 1.1f, 2.f, 15.f };
 		_float3 offset = ZERO_VECTOR; 
 		
 		pGanesha->ActiveAttackBox(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, size, offset, ZERO_VECTOR);
+
+		// effect
+		m_burstPos = mPos + m_burstDir * 2.f;
+
+		m_spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_LaserEff", true);
+		m_spEffect->GetTransform()->SetPosition(_float3(m_burstPos.x, m_burstPos.y + 0.3f, m_burstPos.z));
+		m_spEffect->GetTransform()->SetRotation(pGanesha->GetTransform()->GetRotation());
+		m_spEffect->GetTransform()->AddRotationY(D3DXToRadian(180));
+		m_spEffect->GetTransform()->SetSize(_float3(8.f, 12.f, 10.f));
 	}
 }
 

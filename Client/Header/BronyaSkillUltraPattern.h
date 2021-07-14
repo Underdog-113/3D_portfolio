@@ -20,9 +20,11 @@ public:
 
 private:
 	void MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 mPos);
+	void EscapeBack(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM);
 
 private:
-	_float m_cost = 25.f;
+	//_float m_cost = 25.f;
+	_float m_cost = 5.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 1.5f; // 공격 거리
@@ -38,6 +40,15 @@ private:
 	_bool m_movedCenter = false;
 	_bool m_onShock = false;
 
+	// 내려찍는 패턴을 몇 번 반복할지 정함
+	// 최소 2번, 최대 4번을 반복
+	_int m_curCnt = 0;
+	_int m_minCnt = 2;
+	_int m_maxCnt = 4;
+
+	// 현재 실행하고 있는 shock 패턴
+	_int m_curPattern = 0;
+
 	_mat m_atkMat;
 	std::wstring m_curState;
 
@@ -48,6 +59,7 @@ private:
 	_float m_lerpCurTimer = 0.f;
 
 	SP(CBronyaShock1Pattern) m_spShock1P = CBronyaShock1Pattern::Create();
+	SP(CBronyaShock2Pattern) m_spShock2P = CBronyaShock2Pattern::Create();
 };
 
 #endif

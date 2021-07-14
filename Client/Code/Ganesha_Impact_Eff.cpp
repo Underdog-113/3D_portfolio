@@ -45,7 +45,7 @@ void CGanesha_Impact_Eff::Awake()
 void CGanesha_Impact_Eff::Start()
 {
 	__super::Start();
-	m_fAlpha = 1.3f;
+	m_fAlpha = 1.f;
 	m_fTime = 0.f;
 }
 
@@ -56,6 +56,8 @@ void CGanesha_Impact_Eff::FixedUpdate()
 
 void CGanesha_Impact_Eff::Update()
 {
+	__super::Update();
+
 	if (m_fAlpha <= 0)
 	{
 		this->SetDeleteThis(true);
@@ -63,7 +65,7 @@ void CGanesha_Impact_Eff::Update()
 
 	_float3 _size = _float3(0.5f, 0.5f, 0.5f);
 
-	m_fAlpha -= 0.3f * GET_DT;
+	m_fAlpha -= 0.7f * GET_DT;
 	m_fTime += 0.2f * GET_DT;
 	m_spTransform->AddSize(_size * GET_DT);
 }
@@ -80,6 +82,8 @@ void CGanesha_Impact_Eff::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", m_fTime);
 	pEffect->SetBool("gPlayingAnim", true);
+
+	pEffect->CommitChanges();
 }
 
 void CGanesha_Impact_Eff::Render(LPD3DXEFFECT pEffect)

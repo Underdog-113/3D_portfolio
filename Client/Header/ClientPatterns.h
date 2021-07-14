@@ -1,5 +1,11 @@
 #pragma once
 
+/* Box */
+#include "BoxBornPattern.h"
+#include "BoxDiePattern.h"
+#include "BoxHitPattern.h"
+#include "BoxBasePattern.h"
+
 /* Sickle */
 #include "SickleBornPattern.h"
 #include "SickleDiePattern.h"
@@ -66,6 +72,9 @@
 #include "BronyaShoot1Pattern.h"
 #include "BronyaThrow1Pattern.h"
 #include "BronyaShock1Pattern.h"
+#include "BronyaShock2Pattern.h"
 #include "BronyaEscapePattern.h"
 #include "BronyaSkillUltraPattern.h"
 #include "BronyaArsenalPattern.h"
+#include "BronyaAirbornePattern.h"
+#include "BronyaStunPattern.h"

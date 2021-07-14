@@ -73,7 +73,7 @@ void CAttackBall::Start(void)
 	m_pCollider = (Engine::CSphereCollider*)col.get();
 
 	AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	AddComponent<Engine::CDebugC>();
+	//AddComponent<Engine::CDebugC>();
 	AddComponent<Engine::CShaderC>();
 }
 

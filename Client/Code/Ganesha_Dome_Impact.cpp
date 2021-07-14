@@ -10,6 +10,8 @@ CGanesha_Dome_Impact::CGanesha_Dome_Impact()
 
 CGanesha_Dome_Impact::~CGanesha_Dome_Impact()
 {
+	if (m_spDomeObject != nullptr)
+		m_spDomeObject->SetDeleteThis(true);
 }
 
 SP(CGanesha_Dome_Impact) CGanesha_Dome_Impact::Create(_bool isStatic, Engine::CScene * pScene)
@@ -28,7 +30,7 @@ SP(Engine::CObject) CGanesha_Dome_Impact::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSize(_float3(0.5f, 1.f, 0.5f));
+	//spClone->m_spTransform->SetSize(_float3(0.5f, 1.f, 0.5f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -47,7 +49,10 @@ void CGanesha_Dome_Impact::Start()
 {
 	__super::Start();
 	m_fAlpha = 1.f;
-	m_fSpawnTime = 0.f;
+	m_spDomeObject = Engine::GET_CUR_SCENE->ADD_CLONE(L"Ganesha_Dome", true);
+
+	_float3 iPos = this->GetTransform()->GetPosition();
+	m_spDomeObject->GetTransform()->SetPosition(_float3(iPos.x, iPos.y - 0.6f, iPos.z));
 
 }
 
@@ -61,19 +66,6 @@ void CGanesha_Dome_Impact::Update()
 {
 	__super::Update();
 
-	if (m_fSpawnTime >= 0.3f)
-	{
-		if (m_spDomeObject != nullptr)
-		{
-			m_spDomeObject->SetDeleteThis(true);
-		}
-
-		m_spDomeObject = Engine::GET_CUR_SCENE->ADD_CLONE(L"Ganesha_Dome", true);
-		m_spDomeObject->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
-		m_fSpawnTime = 0.f;
-	}
-
-	m_fSpawnTime += GET_DT;
 	m_fTime += GET_DT;
 }
 
@@ -106,6 +98,7 @@ void CGanesha_Dome_Impact::PostRender(LPD3DXEFFECT pEffect)
 void CGanesha_Dome_Impact::OnDestroy()
 {
 	__super::OnDestroy();
+	
 
 }
 

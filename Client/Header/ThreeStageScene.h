@@ -6,55 +6,38 @@ class CLoading;
 class CThreeStageScene final :public CClientScene
 {
 private:
-	explicit							CThreeStageScene(void);
+	explicit					CThreeStageScene(void);
 	~CThreeStageScene(void);
 
 public:
-	static			CClientScene*		Create(void);
-	void				Free(void) override;
-
-	void				Awake(_int numOfLayers) override;
-	void				Start(void) override;
-
-	void				FixedUpdate(void) override;
-	void				Update(void) override;
-	void				LateUpdate(void) override;
-
-	void				OnDestroy(void) override;
-
-	void				OnEnable(void) override;
-	void				OnDisable(void) override;
-
+	static		CClientScene*	Create(void);
+				void			Free(void) override;
+				void			Awake(_int numOfLayers) override;
+				void			Start(void) override;
+				void			FixedUpdate(void) override;
+				void			Update(void) override;
+				void			LateUpdate(void) override;
+				void			OnDestroy(void) override;
+				void			OnEnable(void) override;
+				void			OnDisable(void) override;
 
 private:
-	void				SetupFromLoader(void);
-
-	void				SetupMembers(void);
-	void				Create_ActorValkyrie(void);
-	void				Create_SceneCamera(void);
-
-	void				Create_Dummy(_float3 pos);
-	void				Create_Sickle(_float3 pos);
-	void				Create_Spider(_float3 pos);
-
-
-	void				InitPrototypes(void) override;
-
-	void				ForUITest();
+				void			SetupFromLoader(void);
+				void			SetupMembers(void);
+				void			SetupBoxes(void);
+				void			Create_ActorValkyrie(void);
+				void			Create_SceneCamera(void);
+				void			InitPrototypes(void) override;
+				void			ForUITest();
 
 private:
-	CStageControlTower* m_pControlTower = nullptr;
-	CBattleUiManager* m_pBattleUIManager = nullptr;
+	CStageControlTower*					m_pControlTower = nullptr;
+	CBattleUiManager*					m_pBattleUIManager = nullptr;
 
-	SP(Engine::CObject) m_spValkyrie;
+	SP(Engine::CObject)					m_spValkyrie;
 
-	std::vector<SP(Engine::CObject)> m_vSickle;
-	std::vector<SP(Engine::CObject)> m_vSpider;
-
-	SP(Engine::CObject) m_spGanesha;
-
-	std::vector<SP(Engine::CObject)> m_vDummy;
-
+	std::vector<SP(Engine::CObject)>	m_vBox;
+	std::vector<SP(Engine::CObject)>	m_vTrap;
 };
 
 #endif

@@ -42,6 +42,9 @@ public:
 	// Æ÷Å» ·Îµå
 	void PortalLoad(Engine::CScene* pScene);
 
+	// Æ®·¦ ·Îµå
+	void TrapLoad(Engine::CScene* pScene);
+
 	void EffectLoad(Engine::CScene* pScene);
 
 	void ButtonFunction(SP(CButton) button, std::wstring function);

@@ -82,8 +82,8 @@ void CWooScene::Start(void)
 	//RobotSetting();
 	//NinzaSetting();
 
-	//GaneshaSetting();
-	BronyaSetting();
+	GaneshaSetting();
+	//BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)

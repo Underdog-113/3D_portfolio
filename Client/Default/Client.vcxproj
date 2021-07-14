@@ -194,6 +194,11 @@
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\BossStageScene.h" />
+    <ClInclude Include="..\Header\BoxBasePattern.h" />
+    <ClInclude Include="..\Header\BoxBornPattern.h" />
+    <ClInclude Include="..\Header\BoxDiePattern.h" />
+    <ClInclude Include="..\Header\BoxHitPattern.h" />
+    <ClInclude Include="..\Header\BronyaAirbornePattern.h" />
     <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
@@ -202,8 +207,11 @@
     <ClInclude Include="..\Header\BronyaFlashBang_AS.h" />
     <ClInclude Include="..\Header\BronyaHitPattern.h" />
     <ClInclude Include="..\Header\BronyaShock1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaShock2Pattern.h" />
     <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h" />
+    <ClInclude Include="..\Header\BronyaStealthBackPattern.h" />
+    <ClInclude Include="..\Header\BronyaStunPattern.h" />
     <ClInclude Include="..\Header\BronyaThrow1Pattern.h" />
     <ClInclude Include="..\Header\Bronya_Cannon_Charge.h" />
     <ClInclude Include="..\Header\Bronya_FlashBang.h" />
@@ -230,6 +238,7 @@
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\OJ_Box.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
@@ -483,6 +492,11 @@
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\BossStageScene.cpp" />
+    <ClCompile Include="..\Code\BoxBasePattern.cpp" />
+    <ClCompile Include="..\Code\BoxBornPattern.cpp" />
+    <ClCompile Include="..\Code\BoxDiePattern.cpp" />
+    <ClCompile Include="..\Code\BoxHitPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaAirbornePattern.cpp" />
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
@@ -491,8 +505,11 @@
     <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp" />
     <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
     <ClCompile Include="..\Code\BronyaShock1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShock2Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaStealthBackPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaStunPattern.cpp" />
     <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp" />
     <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp" />
     <ClCompile Include="..\Code\Bronya_FlashBang.cpp" />
@@ -518,6 +535,7 @@
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\OJ_Box.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />

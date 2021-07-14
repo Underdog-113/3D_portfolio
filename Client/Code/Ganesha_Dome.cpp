@@ -30,7 +30,7 @@ SP(Engine::CObject) CGanesha_Dome::MakeClone()
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
 	spClone->m_spTransform->SetRotationZ(D3DXToRadian(180.f));
-	spClone->m_spTransform->SetSize(_float3(8.f,8.f,8.f));
+	spClone->m_spTransform->SetSize(_float3(8.f, 8.f, 8.f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -48,6 +48,7 @@ void CGanesha_Dome::Awake()
 void CGanesha_Dome::Start()
 {
 	__super::Start();
+	m_fSize = m_spTransform->GetSize().x;
 	m_fAlpha = 0.25f;
 }
 
@@ -60,9 +61,15 @@ void CGanesha_Dome::Update()
 {
 	__super::Update();
 
-	_float _size = 2.3f;
+	_float _size = 0.f;
+	_size += 30.f * GET_DT;
 
-	this->GetTransform()->AddSize(_float3(_size, _size, _size) * GET_DT);
+	if (this->GetTransform()->GetSize().x >= m_fSize + 10.f)
+	{
+		this->GetTransform()->SetSize(_float3(m_fSize, m_fSize, m_fSize));
+	}
+
+	this->GetTransform()->AddSize(_float3(_size, _size, _size) );
 
 }
 

@@ -60,10 +60,10 @@ void CThreeStageScene::Start(void)
 
 	SetupFromLoader();
 	SetupMembers();
+	SetupBoxes();
 
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
-
 }
 
 void CThreeStageScene::FixedUpdate(void)
@@ -85,7 +85,6 @@ void CThreeStageScene::Update(void)
 void CThreeStageScene::LateUpdate(void)
 {
 	__super::LateUpdate();
-
 }
 
 void CThreeStageScene::OnDestroy(void)
@@ -97,8 +96,6 @@ void CThreeStageScene::OnDestroy(void)
 	m_pControlTower->OnDestroy();
 	m_pControlTower->DestroyInstance();
 	m_pControlTower = nullptr;
-
-	m_vDummy.clear();
 }
 
 void CThreeStageScene::OnEnable(void)
@@ -125,6 +122,7 @@ void CThreeStageScene::SetupFromLoader(void)
 	Load->MapLoad(this);
 	Load->PhaseChangerLoad(this);
 	Load->PortalLoad(this);
+	Load->TrapLoad(this);
 	delete(Load);
 }
 
@@ -135,8 +133,19 @@ void CThreeStageScene::SetupMembers(void)
 
 	// Cam Target Set
 	Create_SceneCamera();
+}
 
-	//Create_Dummy(_float3(43.3345f, -1.f, -0.075913f));
+void CThreeStageScene::SetupBoxes(void)
+{
+	SP(Engine::CObject) spBoxClone = ADD_CLONE(L"OJ_Box", true, (_uint)ELayerID::Enemy, L"OJ_Box");
+	spBoxClone->GetTransform()->SetPosition(32.82f, -1.735f, 1.35f);
+	std::dynamic_pointer_cast<CMonster>(spBoxClone)->SelectChannelID();
+	m_vBox.emplace_back(spBoxClone);
+
+	spBoxClone = ADD_CLONE(L"OJ_Box", true, (_uint)ELayerID::Enemy, L"OJ_Box");
+	spBoxClone->GetTransform()->SetPosition(35.11f, -1.735f, 1.35f);
+	std::dynamic_pointer_cast<CMonster>(spBoxClone)->SelectChannelID();
+	m_vBox.emplace_back(spBoxClone);
 }
 
 void CThreeStageScene::Create_ActorValkyrie(void)
@@ -169,33 +178,8 @@ void CThreeStageScene::Create_SceneCamera(void)
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 }
 
-void CThreeStageScene::Create_Dummy(_float3 pos)
-{
-	auto dummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
-	dummy->GetTransform()->SetPosition(pos);
-
-	m_vDummy.emplace_back(dummy);
-}
-
-void CThreeStageScene::Create_Sickle(_float3 pos)
-{
-	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(pos);
-	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_vSickle.emplace_back(spSickleClone);
-}
-
-void CThreeStageScene::Create_Spider(_float3 pos)
-{
-	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(pos);
-	std::dynamic_pointer_cast<CMonster>(spSpiderClone)->SelectChannelID();
-	m_vSpider.emplace_back(spSpiderClone);
-}
-
 void CThreeStageScene::InitPrototypes(void)
 {
-
 }
 
 void CThreeStageScene::ForUITest()

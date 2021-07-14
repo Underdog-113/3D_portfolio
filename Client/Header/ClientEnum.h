@@ -41,9 +41,8 @@ enum class EDataID
 	Effect			= 4 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	UI				= 5 + (_uint)Engine::EDataID::NumOfEngineDataID,
 	Stat			= 6 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	Monster			= 7 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	ClientObject	= 8 + (_uint)Engine::EDataID::NumOfEngineDataID,
-	NumOfDataID		= 9 + (_uint)Engine::EDataID::NumOfEngineDataID
+	ClientObject	= 7 + (_uint)Engine::EDataID::NumOfEngineDataID,
+	NumOfDataID		= 8 + (_uint)Engine::EDataID::NumOfEngineDataID
 };
 
 
@@ -53,7 +52,9 @@ enum class ELayerID
 	Map				= 1 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Enemy			= 2 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 	Attack			= 3 + (_int)Engine::ELayerID::NumOfEngineLayerID,
-	NumOfLayerID	= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	Trap			= 4 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	Prop			= 5 + (_int)Engine::ELayerID::NumOfEngineLayerID,
+	NumOfLayerID	= 6 + (_int)Engine::ELayerID::NumOfEngineLayerID,
 };
 
 enum class EShaderID

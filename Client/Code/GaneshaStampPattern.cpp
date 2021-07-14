@@ -97,6 +97,8 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Stamp);
+			m_onEffect = true;
+			return;
 		}
 	}
 
@@ -108,6 +110,7 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		m_walkReady = false;
 		m_onSound = false;
 		m_onRunStart = false;
+		m_spEffect->SetDeleteThis(true);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -135,12 +138,14 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	// 내가 stamp 상태고, 적절할 때 어택볼 숨기기
-	if (Name_Ganesha_Stamp == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 stamp 상태고, 적절할 때 어택볼 생성
-	else if (Name_Ganesha_Stamp == fsm->GetCurStateString() && 0.4f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		0.4f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 
@@ -152,8 +157,18 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		m_atkMat._43 += (m_atkDis * look.z * 0.4f);
 
 		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.9f);
-		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(0.3f);
 	}
+
+	/************************* Effect */
+	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		0.37f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onEffect)
+	{
+		m_onEffect = false;
+		m_spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Impact_Eff", true);
+		m_spEffect->GetTransform()->SetPosition(mPos);		
+		m_spEffect->GetTransform()->SetSize(3.f, 3.f, 3.f);
+	} 
 }
 
 SP(CGaneshaStampPattern) CGaneshaStampPattern::Create()
