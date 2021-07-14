@@ -120,6 +120,21 @@ void CStageCameraMan::SetIsTargeting(bool value)
 {
 	m_isTargeting = value;
 	m_targetingTimer = 0.f;
+
+	if (value)
+	{
+		_float3 pActor = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+		_float3 pTarget = CStageControlTower::GetInstance()->GetCurrentTarget()->GetTransform()->GetPosition();
+		_float3 distance = pTarget - pActor;
+
+		if (D3DXVec3Length(&distance) > 5.f)
+			SetFarTake();
+	}
+}
+
+void CStageCameraMan::ResetChaseSpeed()
+{
+	m_chaseSpeed = 7.f;
 }
 
 void CStageCameraMan::SetNearTake()

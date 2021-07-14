@@ -9,12 +9,6 @@
 #define Cool_HitPenalty			0.5f
 #define Cool_RunOnAttack		0.5f
 
-#define Delay_Effect_Atk01 0.25f
-#define Delay_Effect_Atk02 0.05f
-#define Delay_Effect_Atk03 0.10f
-#define Delay_Effect_Atk04 0.0f
-#define Delay_Effect_Atk05 0.05f
-
 #define Delay_Attack1_StandBy	0.11f
 #define Delay_Attack1_Combat	0.09f
 #define Delay_Attack2_1	0.10f
@@ -29,18 +23,19 @@
 
 class CSakura;
 class CStageControlTower;
+class CEffectMaker_Sakura;
 class CFSM_SakuraC : public Engine::CStateMachineC
 {
 	enum Appear_Option { None, QTE };
 public:
 	CFSM_SakuraC();
-	~CFSM_SakuraC() = default;
+	virtual ~CFSM_SakuraC();
 
 public:
 	SP(Engine::CComponent)		MakeClone(Engine::CObject* pObject) override;
 	void Awake(void) override;
 	void Start(SP(CComponent) spThis) override;
-
+	void OnDestroy() override;
 private:
 	void FixRootMotionOffset(_uint index);
 	void ResetCheckMembers();
@@ -72,8 +67,30 @@ private: /* Normal Actions */
 private: /* Special Actions */
 	bool CheckAction_ChargeEnd();
 
+
+private: /* sound */
+	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
+	void PlaySound_Voice(const std::wstring& soundName);
+	void PlaySound_Effect(const std::wstring& soundName);
+	void PlaySound_EffectCh2(const std::wstring& soundName);
+
+	void PlaySound_Voice_RandomAttack();
+	void PlaySound_Voice_RandomHit();
+
+	void PlaySound_Effect_RandomEvade();	
+	void PlaySound_Effect_RandomUltraAttack();
+	void PlaySound_Effect_RandomRun();
+
+	_uint m_prevAttackVoiceSoundIndex = 0;
+	_uint m_prevHitVoiceSoundIndex = 0;
+	_uint m_prevEvadeEffectSoundIndex = 0;
+	_uint m_prevUltraAttackEffectSoundIndex = 0;
+	_uint m_prevRunSoundIndex = 0;
+
 private:
 	bool m_checkEffect = false;
+	bool m_checkEffect2nd = false;
+	bool m_checkEffect3rd = false;
 	bool m_checkAttack = false;
 	bool m_checkAttack2nd = false;
 	bool m_checkAttack3rd = false;
@@ -88,6 +105,7 @@ private:
 	CSakura* m_pSakura = nullptr;
 	Engine::CDynamicMeshData* m_pDM = nullptr;
 	CStageControlTower* m_pStageControlTower = nullptr;
+	CEffectMaker_Sakura* m_pEffectMaker = nullptr;
 
 	Appear_Option m_appearOption = None;
 	_float m_idleTimer = 0.f;

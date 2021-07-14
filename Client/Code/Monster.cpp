@@ -159,6 +159,7 @@ void CMonster::ApplyHitInfo(HitInfo info)
 		if (sakuraCounter < 3)
 			m_pStat->SetSakuraCounter(sakuraCounter + 1);
 	}
+
 }
 
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)

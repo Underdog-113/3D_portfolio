@@ -91,3 +91,19 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Fire(std::wstring objectKey, std:
 
 	return spMeshEffect;
 }
+
+SP(Engine::CObject) CEffectMaker::CreateEffect_Laser(std::wstring objectKey, std::wstring name, std::wstring texName1, std::wstring texName2, std::wstring texName3)
+{
+	SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->
+		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, L"LaserEffect");
+
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
+	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
+	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName3);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::LaserShader);
+
+	return spMeshEffect;
+}
