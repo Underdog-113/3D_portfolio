@@ -138,8 +138,8 @@ void CYongScene::Update(void)
 		/*spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
 		spObj->GetTransform()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
 
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_int)Engine::ELayerID::Effect, L"Cube0");
-		spObj->AddComponent<Engine::CParticleSystemC>();
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TestParticle", true, (_int)Engine::ELayerID::Effect, L"Cube0");
+
 
 		// Bronya Smoke
 		// 일정시간 마다 호출

@@ -1,15 +1,16 @@
 #pragma once
-#include "MeshEffect_Client.h"
-class CTheresa_Ult_Trail : public CMeshEffect_Client
+#include "Object.h"
+
+class CTestParticle : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CTheresa_Ult_Trail();
-	~CTheresa_Ult_Trail();
+	CTestParticle();
+	~CTestParticle();
 
 public:
-	static	SP(CTheresa_Ult_Trail)	Create(_bool isStatic, Engine::CScene* pScene);
+	static	SP(CTestParticle)	Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject) MakeClone() override;
 
@@ -31,8 +32,9 @@ public:
 
 private:
 	static		_uint m_s_uniqueID;
-	
+	GETTOR_SETTOR(SP(Engine::CParticleSystemC), m_spParticleSystem, nullptr, ParticleSystem)
+
 private:
-	_bool  m_bTrailTurn;
+	_float m_fLiftTime;
 };
 
