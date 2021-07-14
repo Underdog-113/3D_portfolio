@@ -167,7 +167,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_victoryCanvas->AddObjectFind();
 	m_victoryCanvas->SetIsEnabled(false);
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	Engine::GET_CUR_SCENE->FindObjectByName(L"GameOverCanvas")->SetIsEnabled(false);
+	static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"GameOverCanvas").get())->AddObjectFind();
+	pScene->FindObjectByName(L"GameOverCanvas")->SetIsEnabled(false);
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
