@@ -254,11 +254,13 @@
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\ParticleShader.h" />
     <ClInclude Include="..\Header\OJ_Box.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\Sakura_Trail.h" />
     <ClInclude Include="..\Header\ScoutAirbornePattern.h" />
     <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\ScoutCircleRange.h" />
@@ -568,11 +570,13 @@
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\ParticleShader.cpp" />
     <ClCompile Include="..\Code\OJ_Box.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\Sakura_Trail.cpp" />
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
@@ -865,6 +869,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ParticleShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>

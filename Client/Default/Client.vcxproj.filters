@@ -952,6 +952,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult">
       <UniqueIdentifier>{25e7161f-b362-4b0b-9724-6a15054eab89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\14.ParticleShader">
+      <UniqueIdentifier>{affbd4fc-1318-4c64-b68d-3565c9c7e45e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1914,6 +1917,12 @@
     <ClInclude Include="..\Header\Bronya_Ult_Laser.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ParticleShader.h">
+      <Filter>04.Shader\14.ParticleShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2786,6 +2795,12 @@
     <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\ParticleShader.cpp">
+      <Filter>04.Shader\14.ParticleShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2850,6 +2865,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FaceShader.fx">
       <Filter>04.Shader\13.FaceShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ParticleShader.fx">
+      <Filter>04.Shader\14.ParticleShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
