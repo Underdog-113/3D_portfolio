@@ -14,9 +14,15 @@
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
 #include "Monster.h"
+#include "EffectMaker_Sakura.h"
 
 CFSM_SakuraC::CFSM_SakuraC()
 {
+}
+
+CFSM_SakuraC::~CFSM_SakuraC()
+{
+	OnDestroy();
 }
 
 SP(Engine::CComponent) CFSM_SakuraC::MakeClone(Engine::CObject * pObject)
@@ -42,6 +48,7 @@ void CFSM_SakuraC::Start(SP(CComponent) spThis)
 {
 	m_pSakura = static_cast<CSakura*>(m_pOwner);
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pSakura->GetComponent<Engine::CMeshC>()->GetMeshData());
+	m_pEffectMaker = new CEffectMaker_Sakura(m_pSakura);
 
 	__super::Start(spThis);
 
@@ -53,6 +60,13 @@ void CFSM_SakuraC::Start(SP(CComponent) spThis)
 	m_curState->DoEnter();
 }
 
+void CFSM_SakuraC::OnDestroy()
+{
+	__super::OnDestroy();
+
+	delete m_pEffectMaker;
+}
+
 void CFSM_SakuraC::FixRootMotionOffset(_uint index)
 {
 	m_pSakura->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
@@ -61,6 +75,8 @@ void CFSM_SakuraC::FixRootMotionOffset(_uint index)
 void CFSM_SakuraC::ResetCheckMembers()
 {
 	m_checkEffect = false;
+	m_checkEffect2nd = false;
+	m_checkEffect3rd = false;
 	m_checkFlashCol = false;
 	m_checkFlashMove = false;
 	m_checkEndFlash = false;
@@ -109,7 +125,7 @@ void CFSM_SakuraC::SakuraCutting()
 
 	HitInfo info;
 	info.SetDamageRate(4.f);
-	info.SetBreakDamage(100.f);
+	info.SetBreakDamage(200.f);
 	info.SetStrengthType(HitInfo::Str_Airborne);
 	info.SetCrowdControlType(HitInfo::CC_None);
 
@@ -143,7 +159,7 @@ void CFSM_SakuraC::InfernoActive_1st()
 
 	HitInfo info;
 	info.SetDamageRate(0.5f);
-	info.SetBreakDamage(100.f);
+	info.SetBreakDamage(0.f);
 	info.SetStrengthType(HitInfo::Str_Low);
 	info.SetCrowdControlType(HitInfo::CC_Sakura);
 
@@ -360,7 +376,7 @@ bool CFSM_SakuraC::CheckAction_RunBS_To_Run()
 {
 	if (m_pDM->GetAniTimeline() > Cool_End - 0.25f)
 	{
-		ChangeState(Name_Run);
+		ChangeState(Name_Run_StartFromZero);
 		return true;
 	}
 	return false;
@@ -435,6 +451,171 @@ bool CFSM_SakuraC::CheckAction_ChargeEnd()
 	}
 	return false;
 }
+
+void CFSM_SakuraC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)channel);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)channel);
+}
+
+void CFSM_SakuraC::PlaySound_Voice(const std::wstring & soundName)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::PLAYER);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)Engine::EChannelID::PLAYER);
+}
+
+void CFSM_SakuraC::PlaySound_Effect(const std::wstring & soundName)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::PLAYEREFFECT);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)Engine::EChannelID::PLAYEREFFECT);
+}
+
+void CFSM_SakuraC::PlaySound_EffectCh2(const std::wstring & soundName)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::PLAYEREFFECT_CH2);
+	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)EChannelID::PLAYEREFFECT_CH2);
+}
+
+void CFSM_SakuraC::PlaySound_Voice_RandomAttack()
+{
+	_uint idx = rand() % 3;
+	if (m_prevAttackVoiceSoundIndex == idx)
+		idx = (m_prevAttackVoiceSoundIndex + 1) % 3;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Voice(Sound_Attack_Voice0);
+		break;
+	case 1:
+		PlaySound_Voice(Sound_Attack_Voice1);
+		break;
+	case 2:
+		PlaySound_Voice(Sound_Attack_Voice3);
+		break;
+	}
+
+	m_prevAttackVoiceSoundIndex = idx;
+}
+
+void CFSM_SakuraC::PlaySound_Voice_RandomHit()
+{
+	_uint idx = rand() % 6;
+	if (m_prevHitVoiceSoundIndex == idx)
+		idx = (m_prevHitVoiceSoundIndex + 1) % 6;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Voice(Sound_HIT_Voice0);
+		break;
+	case 1:
+		PlaySound_Voice(Sound_HIT_Voice1);
+		break;
+	case 2:
+		PlaySound_Voice(Sound_HIT_Voice2);
+		break;
+	case 3:
+		PlaySound_Voice(Sound_HIT_Voice3);
+		break;
+	case 4:
+		PlaySound_Voice(Sound_HIT_Voice4);
+		break;
+	case 5:
+		PlaySound_Voice(Sound_HIT_Voice5);
+		break;
+	}
+
+	m_prevHitVoiceSoundIndex = idx;
+}
+
+void CFSM_SakuraC::PlaySound_Effect_RandomEvade()
+{
+	_uint idx = rand() % 3;
+	if (m_prevEvadeEffectSoundIndex == idx)
+		idx = (m_prevEvadeEffectSoundIndex + 1) % 3;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Effect(Sound_Evade0);
+		break;
+	case 1:
+		PlaySound_Effect(Sound_Evade1);
+		break;
+	case 2:
+		PlaySound_Effect(Sound_Evade2);
+		break;
+	}
+
+	m_prevEvadeEffectSoundIndex = idx;
+}
+
+void CFSM_SakuraC::PlaySound_Effect_RandomUltraAttack()
+{
+	_uint idx = rand() % 6;
+	if (m_prevUltraAttackEffectSoundIndex == idx)
+		idx = (m_prevUltraAttackEffectSoundIndex + 1) % 6;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Effect(Sound_Ultra_Effect0);
+		break;
+	case 1:
+		PlaySound_Effect(Sound_Ultra_Effect1);
+		break;
+	case 2:
+		PlaySound_Effect(Sound_Ultra_Effect2);
+		break;
+	case 3:
+		PlaySound_Effect(Sound_Ultra_Effect3);
+		break;
+	case 4:
+		PlaySound_Effect(Sound_Ultra_Effect4);
+		break;
+	case 5:
+		PlaySound_Effect(Sound_Ultra_Effect5);
+		break;
+	}
+
+	m_prevUltraAttackEffectSoundIndex = idx;
+}
+
+void CFSM_SakuraC::PlaySound_Effect_RandomRun()
+{
+	_uint idx = rand() % 5;
+	if (m_prevRunSoundIndex == idx)
+		idx = (m_prevRunSoundIndex + 1) % 5;
+
+	switch (idx)
+	{
+	case 0:
+		PlaySound_Effect(Sound_Run_Effect0);
+		break;
+	case 1:
+		PlaySound_Effect(Sound_Run_Effect1);
+		break;
+	case 2:
+		PlaySound_Effect(Sound_Run_Effect2);
+		break;
+	case 3:
+		PlaySound_Effect(Sound_Run_Effect3);
+		break;
+	case 4:
+		PlaySound_Effect(Sound_Run_Effect4);
+		break;
+	default:
+		break;
+	}
+
+	m_prevRunSoundIndex = idx;
+}
+
 
 void CFSM_SakuraC::Appear_Init(void)
 {
@@ -515,20 +696,18 @@ void CFSM_SakuraC::Attack1_StandBy_Update(float deltaTime)
 {
 	m_chargeEnterTimer += GET_PLAYER_DT;
 
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack1_StandBy - 0.05f)
 	{
-		//PlaySound_Attack_RandomVoice();
+		PlaySound_Effect(Sound_Attack1_Effect);
 
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
+		m_pEffectMaker->CreateEffect_Attack1();
 		m_checkEffect = true;
 	}
 
 	if(!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack1_StandBy)
 	{
+		PlaySound_Voice_RandomAttack();
 		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
-
 		m_checkAttack = true;
 	}
 	if (m_pDM->GetAniTimeline() > Delay_Attack1_StandBy + 0.05f)
@@ -542,9 +721,9 @@ void CFSM_SakuraC::Attack1_StandBy_Update(float deltaTime)
 		return;
 	if (CheckAction_Charge())
 		return;
-	if (CheckAction_Ultra(Delay_Effect_Atk01 + 0.06f))
+	if (CheckAction_Ultra(Delay_Attack1_StandBy + 0.06f))
 		return;
-	if (CheckAction_WeaponSkill(Delay_Effect_Atk01 + 0.06f))
+	if (CheckAction_WeaponSkill(Delay_Attack1_StandBy + 0.06f))
 		return;
 	if (CheckAction_Run_OnAction(Cool_RunOnAttack + 0.2f))
 		return;
@@ -577,20 +756,18 @@ void CFSM_SakuraC::Attack1_Combat_Update(float deltaTime)
 {
 	m_chargeEnterTimer += GET_PLAYER_DT;
 
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack1_Combat - 0.05f)
 	{
-		//PlaySound_Attack_RandomVoice();
-
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
+		PlaySound_Effect(Sound_Attack1_Effect);
+		m_pEffectMaker->CreateEffect_Attack1();
 		m_checkEffect = true;
 	}
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack1_Combat)
 	{
-		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
-	
+		PlaySound_Voice_RandomAttack();
+
+		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);	
 		m_checkAttack = true;
 	}
 	if (m_pDM->GetAniTimeline() > Delay_Attack1_Combat + 0.05f)
@@ -636,14 +813,16 @@ void CFSM_SakuraC::Attack2_Enter(void)
 void CFSM_SakuraC::Attack2_Update(float deltaTime)
 {
 
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk02)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack2_1 - 0.05f)
 	{
-		//PlaySound_Attack_RandomVoice();
-	
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
+		PlaySound_Effect(Sound_Attack2_Effect);
+		m_pEffectMaker->CreateEffect_Attack2();
 		m_checkEffect = true;
+	}
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack2_2 - 0.05f)
+	{
+		m_pEffectMaker->CreateEffect_Attack2_2();
+		m_checkEffect2nd = true;
 	}
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack2_1)
@@ -656,6 +835,9 @@ void CFSM_SakuraC::Attack2_Update(float deltaTime)
 
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack2_2)
 	{
+		//PlaySound_Voice_RandomAttack();
+		m_pEffectMaker->CreateEffect_Attack2_2();
+
 		OnAttackBall(0.35f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
 		m_checkAttack2nd = true;
 	}
@@ -697,20 +879,18 @@ void CFSM_SakuraC::Attack3_Enter(void)
 
 void CFSM_SakuraC::Attack3_Update(float deltaTime)
 {
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk03)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack3 - 0.05f)
 	{
-		//PlaySound_Attack_RandomVoice();
-		
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
+		PlaySound_Effect(Sound_Attack4_Effect);
+		m_pEffectMaker->CreateEffect_Attack3();
 		m_checkEffect = true;
 	}
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack3)
 	{
-		OnAttackBall(1.f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+		m_pEffectMaker->CreateEffect_Attack3();
 
+		OnAttackBall(1.f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 		m_checkAttack = true;
 	}
 	if (m_pDM->GetAniTimeline() > Delay_Attack3 + 0.05f)
@@ -752,21 +932,26 @@ void CFSM_SakuraC::Attack4_Enter(void)
 
 void CFSM_SakuraC::Attack4_Update(float deltaTime)
 {
-
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk04)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack4_1 - 0.05f)
 	{
-		//PlaySound_Attack_RandomVoice();
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
+		PlaySound_Effect(Sound_Attack5_Effect);
+		m_pEffectMaker->CreateEffect_Attack4();
 		m_checkEffect = true;
 	}
-
+	if (!m_checkEffect2nd && m_pDM->GetAniTimeline() > Delay_Attack4_2 - 0.05f)
+	{
+		m_pEffectMaker->CreateEffect_Attack4_2();
+		m_checkEffect2nd = true;
+	}
+	if (!m_checkEffect3rd && m_pDM->GetAniTimeline() > Delay_Attack4_3 - 0.05f)
+	{
+		m_pEffectMaker->CreateEffect_Attack4_3();
+		m_checkEffect3rd = true;
+	}
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack4_1)
 	{
 		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
-
 		m_checkAttack = true;
 	}
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack4_1 + 0.03f)
@@ -774,6 +959,7 @@ void CFSM_SakuraC::Attack4_Update(float deltaTime)
 
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack4_2)
 	{
+
 		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
 		m_checkAttack2nd = true;
 	}
@@ -782,6 +968,7 @@ void CFSM_SakuraC::Attack4_Update(float deltaTime)
 
 	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > Delay_Attack4_3)
 	{
+		PlaySound_Voice_RandomAttack();
 		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
 		m_checkAttack3rd = true;
 	}
@@ -824,18 +1011,12 @@ void CFSM_SakuraC::Attack5_Enter(void)
 
 void CFSM_SakuraC::Attack5_Update(float deltaTime)
 {
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk05)
-	{
-		//PlaySound_Attack_RandomVoice();
-
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
-		m_checkEffect = true;
-	}
 
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415f)
 	{
+		PlaySound_Voice(Sound_Flash_Voice);
+		m_pEffectMaker->CreateEffect_Beam();
+
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
@@ -843,16 +1024,18 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 
 			m_pSakura->OnHitbox();
+			m_checkFlashCol = true;
 		}
 		m_checkEndFlash = true;
 	}
 
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.385f)
 	{
+		PlaySound_Effect(Sound_Charge0_Effect);
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
@@ -862,7 +1045,7 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 			m_targetToSakura = curSakuraPos - curTargetPos;
 			D3DXVec3Normalize(&m_targetToSakura, &m_targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + m_targetToSakura * colRadiusSum);
 
@@ -911,18 +1094,11 @@ void CFSM_SakuraC::Attack6_Enter(void)
 
 void CFSM_SakuraC::Attack6_Update(float deltaTime)
 {
-	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk05)
-	{
-		//PlaySound_Attack_RandomVoice();
-
-		//PlaySound_Effect(Sound_Attack_1_Effect);
-		//m_pEffectMaker->CreateEffect_Attack1();
-
-		m_checkEffect = true;
-	}
-
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415f)
 	{
+		PlaySound_Voice(Sound_Flash_Voice);
+		m_pEffectMaker->CreateEffect_Beam();
+
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
@@ -930,16 +1106,18 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 
 			m_pSakura->OnHitbox();
+			m_checkFlashCol = true;
 		}
 		m_checkEndFlash = true;
 	}
 
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.385f)
 	{
+		PlaySound_Effect(Sound_Charge0_Effect);
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
@@ -949,7 +1127,7 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 			_float3 targetToSakura = curSakuraPos - curTargetPos;
 			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
 			m_pSakura->OffHitbox();
@@ -985,29 +1163,35 @@ void CFSM_SakuraC::Charge1_Enter(void)
 	m_pDM->ChangeAniSet(Index_Charge1);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	ResetCheckMembers();
+	m_pDM->GetAniCtrl()->SetSpeed(1.5f);
+	PlaySound_Effect(Sound_Charge1_Effect);
 }
 
 void CFSM_SakuraC::Charge1_Update(float deltaTime)
 {
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.535f)
 	{
+		PlaySound_Voice(Sound_Flash_Voice);
+		m_pEffectMaker->CreateEffect_Beam();
+
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
-			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
-
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
-
+			
 			m_pSakura->OnHitbox();
+
+			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
 		}
 		m_checkEndFlash = true;
 	}
 
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.515f)
 	{
+		CStageControlTower::GetInstance()->SetCameraFarTake();
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
@@ -1017,7 +1201,7 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 			_float3 targetToSakura = curSakuraPos - curTargetPos;
 			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
 			m_pSakura->OffHitbox();
@@ -1025,22 +1209,10 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 		m_checkFlashMove = true;
 	}
 
-// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
-// 	{
-// 		/*		m_pEffectMaker->CreateEffect_Attack5();*/
-// 		m_checkEffect = true;
-// 		// 
-// 		// 		PlaySound_Attack_RandomVoice();
-// 		// 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
-// 		// 
-// 		// 		m_pEffectMaker->CreateEffect_Attack5();
-// 		// 		PlaySound_Effect(Sound_Attack_5_Effect);
-// 	}
-
-	// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
-	// 	{
-	// 		m_pKiana->UnActiveAttackBall();
-	// 	}
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.22f)
+	{
+		m_checkEffect = true;
+	}
 
 	if (CheckAction_Evade_OnAction())
 		return;
@@ -1061,6 +1233,7 @@ void CFSM_SakuraC::Charge1_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pSakura->GetFlashAttackBall()->SetIsEnabled(false);
 	m_pSakura->OnHitbox();
+	m_pDM->GetAniCtrl()->SetSpeed(1.f);
 }
 
 void CFSM_SakuraC::Charge1_AS_Init(void)
@@ -1078,6 +1251,7 @@ void CFSM_SakuraC::Charge1_AS_Update(float deltaTime)
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.43f)
 	{
+		PlaySound_EffectCh2(Sound_Cutting);
 		SakuraCutting();
 
 		m_checkAttack = true;
@@ -1140,6 +1314,7 @@ void CFSM_SakuraC::Charge1_Quick_Enter(void)
 	ResetCheckMembers();
 
 	m_pStageControlTower->LookTarget();
+	CStageControlTower::GetInstance()->SetCameraFarTake();
 }
 
 void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
@@ -1147,6 +1322,8 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.24f)
 	{
+		m_pEffectMaker->CreateEffect_Beam();
+
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			FlashAttack(1.5f, 10.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
@@ -1154,7 +1331,7 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 
 			m_pSakura->OnHitbox();
@@ -1164,6 +1341,7 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.2f)
 	{
+		PlaySound_Effect_RandomUltraAttack();
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
@@ -1173,7 +1351,7 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			_float3 targetToSakura = curSakuraPos - curTargetPos;
 			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
 
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
 			m_pSakura->OffHitbox();
@@ -1340,7 +1518,7 @@ void CFSM_SakuraC::Run_Update(float deltaTime)
 	if (m_runSoundTimer > 0.3f)
 	{
 		m_runSoundTimer = 0.f;
-		//PlaySound_Attack_RandomRun();
+		PlaySound_Effect_RandomRun();
 	}
 
 	if (CheckAction_EvadeForward())
@@ -1385,7 +1563,7 @@ void CFSM_SakuraC::Run_StartFromZero_Update(float deltaTime)
 	if (m_runSoundTimer > 0.3f)
 	{
 		m_runSoundTimer = 0.f;
-		//PlaySound_Attack_RandomRun();
+		PlaySound_Effect_RandomRun();
 	}
 
 	if (CheckAction_EvadeForward())
@@ -1424,12 +1602,12 @@ void CFSM_SakuraC::RunBS_Enter(void)
 
 void CFSM_SakuraC::RunBS_Update(float deltaTime)
 {
-	//m_runSoundTimer += GET_DT;
-	//if (m_runSoundTimer > 0.3f)
-	//{
-	//	m_runSoundTimer = 0.f;
-	//	PlaySound_Attack_RandomRun();
-	//}
+	m_runSoundTimer += GET_PLAYER_DT;
+	if (m_runSoundTimer > 0.3f)
+	{
+		m_runSoundTimer = 0.f;
+		PlaySound_Effect_RandomRun();
+	}
 
 
 	if (CheckAction_EvadeForward())
@@ -1583,6 +1761,7 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
+	PlaySound_Effect_RandomEvade();
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
@@ -1641,6 +1820,7 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
+	PlaySound_Effect_RandomEvade();
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
@@ -1889,6 +2069,8 @@ void CFSM_SakuraC::Ultra_Enter(void)
 	//PlaySound_Effect(Sound_Ult_Start);
 	//m_pEffectMaker->CreateEffect_Ultra();
 	m_pStageControlTower->OnSakuraUltraActive();
+
+	PlaySound_Effect(Sound_Ult_Start);
 }
 
 void CFSM_SakuraC::Ultra_Update(float deltaTime)
@@ -1900,6 +2082,12 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 		m_checkAttack = true;
 	}
 
+	if (!m_checkEffect &&  m_pDM->GetAniTimeline() > 0.4f)
+	{
+		PlaySound_Voice(Sound_Ult_Voice);
+		m_checkEffect = true;
+	}
+
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > 0.778f)
 	{
 		// 8ПЌАн
@@ -1907,7 +2095,13 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 		m_pStageControlTower->OffSakuraUltraActive();
 		m_checkAttack2nd = true;
 	}
-	
+
+	if (!m_checkEffect2nd &&  m_pDM->GetAniTimeline() > 0.74f)
+	{
+		PlaySound_EffectCh2(Sound_Cutting);
+		m_checkEffect2nd = true;
+	}
+
 
 	if (CheckAction_StandBy_Timeout(0.9f))
 		return;

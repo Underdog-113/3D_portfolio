@@ -201,6 +201,7 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 	case HitInfo::CC_Sakura:
 		break;
 	case HitInfo::CC_Airborne:
+		this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
 		break;
 	}
 }

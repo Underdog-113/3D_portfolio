@@ -304,7 +304,7 @@ void CTransformC::SlerpXZ(void)
 
 		if (abs(includedAngle) < m_slerpSpeed * GET_DT)
 		{
-			SetForward(m_goalForward);
+			SetForwardUp(m_goalForward, UP_VECTOR);
 			m_goalForward	= ZERO_VECTOR;
 			m_slerpOn		= false;
 			return;

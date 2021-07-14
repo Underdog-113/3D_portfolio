@@ -2,7 +2,7 @@
 
 #define NearTake 1.5f
 #define MidTake 3.f
-#define FarTake 5.f
+#define FarTake 4.5f
 
 #define NearAngle D3DXToRadian(10.f)
 #define MidAngle D3DXToRadian(15.f)
@@ -27,6 +27,8 @@ public:
 	void PivotChasing();
 
 	void SetIsTargeting(bool value);
+
+	void ResetChaseSpeed();
 
 public:
 	void SetNearTake();
@@ -88,8 +90,9 @@ private:
 	_float m_followTimer = 0.f;
 
 	_float3 m_dstPivotPos = ZERO_VECTOR;
-	_float m_movePivotTimer = 0.f;
-	_float m_chaseSpeed = 7.f;
+	_float m_movePivotTimer = 0.f;	
+
+	GETTOR_SETTOR	(_float,				m_chaseSpeed,	15.f,		ChaseSpeed)
 	_float m_chaseSpeedIncreaseTimer = 0.f;
 
 private:

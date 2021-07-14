@@ -36,10 +36,12 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_onLerp = false;
 	}
-	if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
-		true == m_onLerp)
+	else
 	{
-		m_onLerp = false;
+		_float3 dir = tPos - mPos;
+		D3DXVec3Normalize(&dir, &dir);
+
+		pOwner->GetTransform()->SetGoalForward(dir);
 	}
 
 	// 내가 공격1 상태가 아니라면 상대 추적
@@ -59,7 +61,6 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_WALK_BACKWARD);
-			//m_walkReady = false;
 			m_onLerp = true;
 			
 			_float3 dir = tPos - mPos;
@@ -93,7 +94,6 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 			Name_WALK_BACKWARD == fsm->GetCurStateString() ||
 			Name_STAND == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd() &&
-			/*true == m_walkReady*/
 			false == m_onLerp)
 		{
 			// 공격1 쿨 다운 중이라면 넘김
@@ -106,8 +106,8 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 				// 공격 상태로 변경
 				fsm->ChangeState(Name_ATTACK_1);
 				PatternPlaySound(L"Lencer_Skill_Attack_2.wav", pOwner);
-				//m_atkReady = false;
-				m_onEffect = false;
+				
+				m_onBladeEffect = false;
 				m_onSignEffect = false;
 				return;
 			}
@@ -118,7 +118,6 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_WALK_BACKWARD);
-			//m_walkReady = false;
 			m_onLerp = true;
 
 			_float3 dir = tPos - mPos;
@@ -167,18 +166,30 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		m_onSignEffect = true;
 	}
 
+	if (Name_ATTACK_1 == fsm->GetCurStateString() &&
+		0.5f <= fsm->GetDM()->GetAniTimeline() &&
+		0.6f > fsm->GetDM()->GetAniTimeline() &&
+		false == m_onBladeEffect)
+	{
+		m_onBladeEffect = true;
+		m_spBladeEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Lancer_OutSideEff", true);
+		m_spBladeEffect->GetTransform()->AddRotationY(D3DXToRadian(180));
+		m_spBladeEffect->GetTransform()->SetSize(0.5f, 0.5f, 0.8f);
+	}
+	else if (true == m_onBladeEffect)
+	{
+		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip001_R_Hand_1")->CombinedTransformMatrix;
+		_mat matHand = GetRHandMat(pOwner);
 
-	//if (Name_ATTACK_1 == fsm->GetCurStateString() &&
-	//	0.27f <= fsm->GetDM()->GetAniTimeline() &&
-	//	false == m_onEffect)
-	//{
-	//	static_cast<CMO_Lancer*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 0.45f);
-	//	SP(Engine::CObject) spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Lancer_OutSideEff", true);
-	//	spEffect->GetTransform()->SetSize(0.7f, 0.7f, 0.7f);
-	//	spEffect->GetTransform()->SetPosition(_float3(m_atkMat._41, m_atkMat._42, m_atkMat._43));
+		_float3 newForward = matHand.m[1];
+		_float3 rotAxis = matHand.m[2];
+		_mat extraRot;
+		D3DXMatrixRotationAxis(&extraRot, &rotAxis, -PI / 180 * 25);
+		D3DXVec3TransformNormal(&newForward, &newForward, &extraRot);
 
-	//	m_onEffect = true;
-	//}
+		m_spBladeEffect->GetTransform()->SetForwardUp(newForward, matHand.m[2]);
+		m_spBladeEffect->GetTransform()->SetPosition(matHand.m[3]);
+	}
 }
 
 SP(CLancerBasePattern) CLancerBasePattern::Create()
@@ -186,4 +197,16 @@ SP(CLancerBasePattern) CLancerBasePattern::Create()
 	SP(CLancerBasePattern) spInstance(new CLancerBasePattern, Engine::SmartDeleter<CLancerBasePattern>);
 
 	return spInstance;
+}
+
+_mat CLancerBasePattern::GetRHandMat(Engine::CObject* pOwner)
+{
+	_mat combMat = *m_pRHand;
+	_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
+	combMat._41 -= rootMotionPos.x;
+	combMat._43 -= rootMotionPos.z;
+
+	_mat realPosMat = combMat * pOwner->GetTransform()->GetWorldMatrix();
+
+	return realPosMat;
 }

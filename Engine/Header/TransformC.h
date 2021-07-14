@@ -120,7 +120,7 @@ protected:
 
 	GETTOR_SETTOR	(_bool,				m_slerpOn,					false,				SlerpOn)
 	GETTOR_SETTOR	(_float3,			m_goalForward,				ZERO_VECTOR,		GoalForward)
-	GETTOR			(_float,			m_slerpSpeed,				PI / 0.5f,			SlerpSpeed)
+	GETTOR_SETTOR	(_float,			m_slerpSpeed,				PI / 0.5f,			SlerpSpeed)
 
 	GETTOR_SETTOR	(_bool,				m_lerpOn,					false,				LerpOn)
 	GETTOR_SETTOR	(_float3,			m_goalPosition,				ZERO_VECTOR,		GoalPosition)

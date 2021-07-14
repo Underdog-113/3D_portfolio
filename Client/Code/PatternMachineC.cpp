@@ -298,4 +298,5 @@ void CPatternMachineC::PlaySelectPattern()
 
 	std::cout << "After Cost : " << m_curCost << std::endl;
 	std::cout << "=============================" << std::endl;
+	return;
 }
