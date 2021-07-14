@@ -113,6 +113,8 @@
 #include "BronyaFlashBang_AS.h"
 #include "Bronya_RandomSmoke.h"
 
+#include "KianaUIAnim.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -667,4 +669,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaRandomSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spBronyaRandomSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
+
+	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKianaUIAnim);
+
 }

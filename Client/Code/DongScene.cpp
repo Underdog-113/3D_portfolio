@@ -16,6 +16,7 @@
 #include  "DamageObjectPool.h"
 #include "GlitterC.h"
 #include "SkillActivationC.h"
+
 CDongScene::CDongScene()
 {
 }
@@ -48,7 +49,7 @@ void CDongScene::Awake(_int numOfLayers)
 void CDongScene::Start(void)
 {
 	__super::Start();
-	
+
 	/*SP(CScrollViewObject) spScrollView =
 		std::dynamic_pointer_cast<CScrollViewObject>(ADD_CLONE(L"ScrollViewObject", true, (_int)Engine::ELayerID::UI, L"View"));
 	spScrollView->GetTransform()->SetPosition(_float3(0, 0, 0.0f));

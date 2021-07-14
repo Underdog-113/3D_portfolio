@@ -23,6 +23,8 @@
 #include "ValkyrieWeaponSwap.h"
 #include "ValkyrieWeaponLevelUp.h"
 
+#include "SupplyItem.h"
+
 CDataLoad::CDataLoad()
 {
 	
@@ -903,5 +905,25 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	else if (0 == function.compare(L"WeaponLevelUp"))
 	{
 		button->AddFuncData<void(CValkyrieWeaponLevelUp::*)(), CValkyrieWeaponLevelUp*>(&CValkyrieWeaponLevelUp::LevelUp , &CValkyrieWeaponLevelUp());
+	}
+	else if (0 == function.compare(L"SupplyWeaponFSM"))
+	{
+		button->AddFuncData<void(CSupplyManager::*)(), CSupplyManager*>(&CSupplyManager::SupplyWeaponFSM, CSupplyManager::GetInstance());
+	}
+	else if (0 == function.compare(L"SupplyItemFSM"))
+	{
+		button->AddFuncData<void(CSupplyManager::*)(), CSupplyManager*>(&CSupplyManager::SupplyItemFSM, CSupplyManager::GetInstance());
+	}
+	else if (0 == function.compare(L"SupplyOutFSM"))
+	{
+		button->AddFuncData<void(CSupplyManager::*)(), CSupplyManager*>(&CSupplyManager::SupplyOutFSM, CSupplyManager::GetInstance());
+	}
+	else if (0 == function.compare(L"SelectCanvasOn"))
+	{
+		button->AddFuncData<void(CSupplyItem::*)(), CSupplyItem*>(&CSupplyItem::SelectCanvasOn, &CSupplyItem());
+	}
+	else if (0 == function.compare(L"SelectCanvasOff"))
+	{
+		button->AddFuncData<void(CSupplyManager::*)(), CSupplyManager*>(&CSupplyManager::SelectCanvasOff, CSupplyManager::GetInstance());
 	}
 }

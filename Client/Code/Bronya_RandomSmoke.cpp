@@ -69,7 +69,7 @@ void CBronya_RandomSmoke::Update(void)
 
 	if (m_fTIme >= 5.f)
 	{
-		m_fAlpha -= 0.7 * GET_DT;
+		m_fAlpha -= 0.7f * GET_DT;
 	}
 
 	m_fTIme += GET_DT;

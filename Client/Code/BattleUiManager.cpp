@@ -167,6 +167,9 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_victoryCanvas->AddObjectFind();
 	m_victoryCanvas->SetIsEnabled(false);
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	Engine::GET_CUR_SCENE->FindObjectByName(L"GameOverCanvas")->SetIsEnabled(false);
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
 
@@ -293,9 +296,6 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 			hpMax -= (age * count);
 
 			m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
-
-			cout << m_monsterHpCount << endl;
-			cout << hpMax << endl;
 			break;
 		}
 		count++;
@@ -313,7 +313,6 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		object->SetValue(hp - (age * (m_monsterHpCount - 1)));
 		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
-		cout << "a : " << a << endl;
 	}
 
 	hpMaxSum = 0;
@@ -322,7 +321,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		object->SetMinValue(hpMaxSum);
 		hpMaxSum += ThpMax;
 		object->SetMaxValue(hpMaxSum);
-		object->SetValue(hp - (age * m_monsterHpCount));
+		object->SetValue(hp - (age * m_monsterHpCount - 1));
 	}
 
 	if (property == L"UP")
@@ -433,7 +432,6 @@ void CBattleUiManager::OffTargetUI()
 void CBattleUiManager::MonsterHpDown(_float value)
 {
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(2.f);
-	cout << "몬스터 체력 : " << m_monsterHpBar[0]->GetValue() - value << endl;
 
 	for (auto object : m_monsterHpBar)
 	{
@@ -581,6 +579,11 @@ void CBattleUiManager::BattleEnd()
 
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->GetComponent<Engine::CTextC>()
 		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
+}
+
+void CBattleUiManager::GameOver()
+{
+	Engine::GET_CUR_SCENE->FindObjectByName(L"GameOverCanvas")->SetIsEnabled(true);
 }
 
 void CBattleUiManager::QteOn(_int value)

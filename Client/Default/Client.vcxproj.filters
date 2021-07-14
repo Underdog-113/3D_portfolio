@@ -867,7 +867,7 @@
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne">
       <UniqueIdentifier>{66694fae-fa0c-4779-92e9-b87c03495238}</UniqueIdentifier>
-    </Filter>      
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Cannon_Charge">
       <UniqueIdentifier>{cf91bd3d-9d1e-4e76-925c-b6560071ecd4}</UniqueIdentifier>
     </Filter>
@@ -894,6 +894,9 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke">
       <UniqueIdentifier>{d1dd660e-1def-4f60-a77c-1c628ceda4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI">
+      <UniqueIdentifier>{05bff1ce-ba68-4f9f-af87-320bb9bd2277}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1775,6 +1778,9 @@
     <ClInclude Include="..\Header\ScoutAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\KianaUIAnim.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2568,6 +2574,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\KianaUIAnim.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
