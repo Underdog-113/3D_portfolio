@@ -31,6 +31,7 @@ private:
 	/* for.effect */
 	SP(Engine::CObject) m_spSoftEffect;
 	_bool m_onEffect = false;
+	_bool m_onAtk = false;
 };
 
 #endif

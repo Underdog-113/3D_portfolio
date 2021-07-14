@@ -17,7 +17,7 @@ public:
 	static SP(CLancerAttack2Pattern) Create();
 
 private:
-	_float m_cost = 40.f;
+	_float m_cost = 35.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 2.3f; // 공격 거리

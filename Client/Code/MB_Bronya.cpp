@@ -46,13 +46,19 @@ void CMB_Bronya::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_BronyaC>();
-	m_spPatternMachine->AddNecessaryPatterns(CBronyaBornPattern::Create(), CBronyaDiePattern::Create(), CBronyaBasePattern::Create(), CBronyaHitPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+	m_spPatternMachine->AddNecessaryPatterns(CBronyaBornPattern::Create(), 
+		CBronyaDiePattern::Create(), 
+		CBronyaBasePattern::Create(), 
+		CBronyaHitPattern::Create(),
+		CBronyaAirbornePattern::Create(),
+		CBronyaStunPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
 }
 
 void CMB_Bronya::Start(void)
@@ -75,7 +81,15 @@ void CMB_Bronya::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(6);
+	m_pStat->SetHPMagnification(14);
+	m_pStat->SetOnSuperArmor(true);
+	m_pStat->SetMaxBreakGauge(561.f);
+	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
+
+	m_pSuperArmor->SetHitL(true);
+	m_pSuperArmor->SetHitH(true);
+	m_pSuperArmor->SetAirborne(true);
+	m_pSuperArmor->SetStun(true);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -174,22 +188,65 @@ void CMB_Bronya::SetBasicName(void)
 
 void CMB_Bronya::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
-	case HitInfo::Str_Damage:
+	case HitInfo::Str_Damage: // hit 모션 없는 대미지
 		break;
 	case HitInfo::Str_Low:
-		this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		if (false == m_pSuperArmor->GetHitL())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
+		else if (true == m_pSuperArmor->GetHitL())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
 		break;
 	case HitInfo::Str_High:
-		this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		if (false == m_pSuperArmor->GetHitH())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
+		else if (true == m_pSuperArmor->GetHitH())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
 		break;
 	case HitInfo::Str_Airborne:
+		if (false == m_pSuperArmor->GetAirborne())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
+		else if (true == m_pSuperArmor->GetAirborne())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+		}
 		break;
 	}
 
 	// crowd control
+	switch (info.GetCrowdControlType())
+	{
+	case HitInfo::CC_None:
+		break;
+	case HitInfo::CC_Stun:
+		//if (false == m_pSuperArmor->GetStun())
+		//{
+		//	this->GetComponent<CPatternMachineC>()->SetOnStun(true);
+		//}
+		//else if (true == m_pSuperArmor->GetStun())
+		//{
+		//	if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnStun(true);
+		//}
+		break;
+	case HitInfo::CC_Sakura:
+		break;
+	case HitInfo::CC_Airborne:
+		break;
+	}
 }
 
 void CMB_Bronya::MonsterDead()

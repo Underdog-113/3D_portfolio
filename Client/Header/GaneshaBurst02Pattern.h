@@ -34,6 +34,11 @@ private:
 	_mat m_atkMat;
 
 	_bool m_onRunStart = false;
+	_bool m_onBurstReadyEff = false;
+	_bool m_onBurstEff = false;
+
+	SP(Engine::CObject) m_spBurstReadyEff = nullptr;
+	SP(Engine::CObject) m_spBurstEff = nullptr;
 };
 
 #endif

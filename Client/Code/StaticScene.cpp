@@ -8,6 +8,7 @@
 #include "MapObject2D.h"
 #include "PhaseChanger.h"
 #include "Portal.h"
+#include "TrapObject.h"
 #pragma endregion
 
 #pragma region Prototype Headers
@@ -40,6 +41,7 @@
 #include "MB_Bronya.h"
 #include "Bronya_Weapon.h"
 #include "Monster.h"
+#include "OJ_Box.h"
 
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
@@ -100,6 +102,7 @@
 #include "Ganesha_Charge_Eff.h"
 #include "Ganesha_Dome.h"
 #include "Ganesha_Dome_Impact.h"
+#include "Ganesha_Impact_Eff.h"
 #include "Ganesha_SmokeEff.h"
 #include "Ganesha_UpperEff.h"
 
@@ -252,6 +255,9 @@ void CStaticScene::InitMapPrototypes(void)
 
 	SP(CPortal) spPortal(CPortal::Create(true, this));
 	GetObjectFactory()->AddPrototype(spPortal);
+
+	SP(Engine::CObject) spTrap(CTrapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTrap);
 }
 
 void CStaticScene::InitUiPrototypes(void)
@@ -309,6 +315,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
 	ADD_PROTOTYPE(spBronyaWeapon);
+
+	SP(CMonster) spOJ_Box(COJ_Box::Create(true, this));
+	GetObjectFactory()->AddPrototype(spOJ_Box);
 }
 
 void CStaticScene::InitValkyriePrototypes(void)
@@ -606,6 +615,16 @@ void CStaticScene::InitEffectPrototypes(void)
 	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
 	spGaneshaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spGaneshaSmoke);
+
+	SP(CMeshEffect_Client) spGaneshaImpact(CGanesha_Impact_Eff::Create(true, this));
+	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Impact");
+	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaImpact);
 
 
 	// 텍스처 추가해야함

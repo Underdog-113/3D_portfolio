@@ -883,6 +883,42 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke">
       <UniqueIdentifier>{d1dd660e-1def-4f60-a77c-1c628ceda4a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne">
+      <UniqueIdentifier>{8bb9614d-bd0d-42d4-9216-1cfe8a3938ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\06.Stun">
+      <UniqueIdentifier>{b6405dd1-c670-4f9e-89b7-65eafc69c20a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\OJ_Box">
+      <UniqueIdentifier>{d8445033-063d-4872-9494-4b1d85d6339d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern">
+      <UniqueIdentifier>{850a639d-0f22-4dd7-bad5-7cdabcaf883b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\00.Born">
+      <UniqueIdentifier>{f768935f-f195-46c4-9790-ba5b4e118652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\01.Die">
+      <UniqueIdentifier>{b33644a4-a81e-466b-bff1-79c39b281057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\02.Hit">
+      <UniqueIdentifier>{28e321c8-816d-485e-9af8-eca6acb0997f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\04.Base">
+      <UniqueIdentifier>{c2b27d8a-d0f5-494d-8a55-184c23bd6d54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\06.Shock2">
+      <UniqueIdentifier>{15fb85e8-33fd-45ad-bc16-df35679fd46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\05.Airborne">
+      <UniqueIdentifier>{1e247a5e-5216-443e-85f6-544757186ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\06.Stun">
+      <UniqueIdentifier>{66eaa2a5-f645-4a1e-9213-e4ec2a7ee6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\07.StealthBack">
+      <UniqueIdentifier>{26eab3d7-441b-475c-aa43-33cde1b4e32c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Explosion">
       <UniqueIdentifier>{2e4d3c72-ab7e-4238-af18-9c75bcc0124c}</UniqueIdentifier>
     </Filter>
@@ -1539,7 +1575,6 @@
     <ClInclude Include="..\Header\EffectMaker_Theresa.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\ValkyrieLevelUp.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
     </ClInclude>
@@ -1672,7 +1707,6 @@
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\OutlineShader.h">
       <Filter>04.Shader\12.OutlineShader</Filter>
     </ClInclude>
@@ -1795,6 +1829,39 @@
     </ClInclude>
     <ClInclude Include="..\Header\ScoutAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\LancerAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SickleStunPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\06.Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\OJ_Box.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BoxBornPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\00.Born</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BoxDiePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\01.Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BoxHitPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\02.Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BoxBasePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\04.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaShock2Pattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\06.Shock2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaStunPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\06.Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\05.Airborne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaStealthBackPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\07.StealthBack</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Theresa_Ult_Explosion.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Explosion</Filter>
@@ -2215,13 +2282,9 @@
     <ClCompile Include="..\Code\Kiana_CatPaw_Ring_Atk05.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Ring</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\MO_Dummy.cpp">
-      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Dummy</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\AttackBox.cpp">
       <Filter>02.Objects\01.ForUnit\03.AttackBox</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\MO_Dummy.cpp" />
     <ClCompile Include="..\Code\StageSelectionManager.cpp">
       <Filter>09.Manager\04.StageSelectionManager</Filter>
     </ClCompile>
@@ -2408,7 +2471,6 @@
     <ClCompile Include="..\Code\EffectMaker_Theresa.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ValkyrieLevelUp.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\04.Theresa_Charge_Att</Filter>
     </ClCompile>
@@ -2529,7 +2591,6 @@
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\07.Scout_Effect\Scout_Att_Range</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp">
       <Filter>04.Shader\12.OutlineShader</Filter>
     </ClCompile>
@@ -2643,6 +2704,39 @@
     </ClCompile>
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LancerAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SickleStunPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MO_Sickle\Pattern\06.Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OJ_Box.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoxBornPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\00.Born</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoxDiePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\01.Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoxHitPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\02.Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoxBasePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\OJ_Box\Pattern\04.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaShock2Pattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\06.Shock2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\05.Airborne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaStunPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\06.Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaStealthBackPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\07.StealthBack</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Explosion</Filter>

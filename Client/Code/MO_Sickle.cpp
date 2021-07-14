@@ -41,9 +41,10 @@ void CMO_Sickle::Awake(void)
 	m_spStateMachine = AddComponent<CFSM_SickleC>();
 	m_spPatternMachine->AddNecessaryPatterns(CSickleBornPattern::Create(), 
 											 CSickleDiePattern::Create(), 
-											 CSickleBasePattern::Create(), 
+											 CSickleBasePattern::Create(),
 											 CSickleHitPattern::Create(), 
-											 CSickleAirbornePattern::Create());
+											 CSickleAirbornePattern::Create(),
+											 CSickleStunPattern::Create());
 }
 
 void CMO_Sickle::Start(void)
@@ -56,8 +57,8 @@ void CMO_Sickle::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
+	stat.SetBaseHp(2445.f);
 	//stat.SetBaseHp(445.f);
-	stat.SetBaseHp(3545.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
 
@@ -69,11 +70,13 @@ void CMO_Sickle::Start(void)
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(2);
 	m_pStat->SetOnSuperArmor(true);
+	m_pStat->SetMaxBreakGauge(145.f);
+	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
 
 	m_pSuperArmor->SetHitL(false);
 	m_pSuperArmor->SetHitH(false);
 	m_pSuperArmor->SetAirborne(true);
-	m_weakTime = 7.f;
+	m_pSuperArmor->SetStun(true);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -155,7 +158,6 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 		}
 		else if (true == m_pSuperArmor->GetHitL())
 		{
-			//if (true == m_pStat->GetOnSuperArmor()) break;
 			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
 		}
 		break;
@@ -166,7 +168,6 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 		}
 		else if (true == m_pSuperArmor->GetHitH())
 		{
-			//if (true == m_pStat->GetOnSuperArmor()) break;
 			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
 		}
 		break;
@@ -177,14 +178,31 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 		}
 		else if (true == m_pSuperArmor->GetAirborne())
 		{
-			//if (true == m_pStat->GetOnSuperArmor()) break;
 			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
 		}
 		break;
 	}
 
 	// crowd control
-
+	switch (info.GetCrowdControlType())
+	{
+	case HitInfo::CC_None:
+		break;
+	case HitInfo::CC_Stun:
+		if (false == m_pSuperArmor->GetStun())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnStun(true);
+		}
+		else if (true == m_pSuperArmor->GetStun())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnStun(true);
+		}
+		break;
+	case HitInfo::CC_Sakura:
+		break;
+	case HitInfo::CC_Airborne:
+		break;
+	}
 }
 
 void CMO_Sickle::FindRightHand()

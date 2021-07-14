@@ -48,6 +48,7 @@ void CGanesha_Dome::Awake()
 void CGanesha_Dome::Start()
 {
 	__super::Start();
+	m_fSize = m_spTransform->GetSize().x;
 	m_fAlpha = 0.25f;
 }
 
@@ -60,15 +61,15 @@ void CGanesha_Dome::Update()
 {
 	__super::Update();
 
-	if (this->GetTransform()->GetSize().x >= 10.f)
+	_float _size = 0.f;
+	_size += 30.f * GET_DT;
+
+	if (this->GetTransform()->GetSize().x >= m_fSize + 10.f)
 	{
-		this->SetDeleteThis(true);
+		this->GetTransform()->SetSize(_float3(m_fSize, m_fSize, m_fSize));
 	}
 
-	_float _size = 2.3f * GET_DT;
-
-	this->GetTransform()->AddSize(_float3(_size, _size, _size));
-
+	this->GetTransform()->AddSize(_float3(_size, _size, _size) );
 }
 
 void CGanesha_Dome::LateUpdate()

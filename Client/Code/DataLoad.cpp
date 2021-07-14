@@ -18,6 +18,7 @@
 #include "MapObject2D.h"
 #include "Monster.h"
 #include "Portal.h"
+#include "TrapObject.h"
 
 #include "ValkyrieLevelUp.h"
 #include "ValkyrieWeaponSwap.h"
@@ -789,6 +790,24 @@ void CDataLoad::PortalLoad(Engine::CScene * pScene)
 		spPortal->SetDestPos(dest);
 	}
 }
+
+void CDataLoad::TrapLoad(Engine::CScene * pScene)
+{
+	auto& pDataStore = pScene->GetDataStore();
+	auto& pObjectFactory = pScene->GetObjectFactory();
+
+	_int numOfTrap;
+	pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapTrap", L"numOfTrap", numOfTrap);
+	for (_int i = 0; i < numOfTrap; ++i)
+	{
+		SP(CTrapObject) spTrap =
+			std::dynamic_pointer_cast<CTrapObject>(pObjectFactory->AddClone(L"TrapObject", true));
+
+		_float3 position;
+		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapTrap", std::to_wstring(i) + L"_position", position);
+		spTrap->GetTransform()->SetPosition(position);
+	}
+} 
 
 void CDataLoad::EffectLoad(Engine::CScene * pScene)
 {
