@@ -31,8 +31,9 @@ public:
 
 protected:
 	typedef std::vector<CShader*> _SHADERS;
+	typedef std::vector<_SHADERS> _SHADERS_2D;
 	GETTOR			(_SHADERS,			m_vShaders,			{},		Shaders)
-	GETTOR			(_SHADERS,			m_vShaderPerSubset,	{},		ShaderPerSubset)
+	GETTOR			(_SHADERS_2D,		m_vShaderPerSubset,	{},		ShaderPerSubset)
 };
 END
 

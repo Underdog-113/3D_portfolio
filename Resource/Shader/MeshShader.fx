@@ -75,7 +75,12 @@ PS_OUT		PS_MAIN(PS_IN In)
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
 	Out.vColor = albedo;
+	
+	Out.vColor.rgb = Out.vColor.a;
 	Out.vColor.a = 1;
+
+	//if (Out.vColor.r > Out.vColor.g && Out.vColor.r > Out.vColor.b)
+	//	Out.vColor = vector(0, 0, 0, 1);
 
 	Out.vColor += g_addColor;
 	

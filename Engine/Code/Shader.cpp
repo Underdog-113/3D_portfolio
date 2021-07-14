@@ -43,6 +43,16 @@ void CShader::Awake(void)
 	m_vRenderTargets.resize(4, nullptr);
 }
 
+void CShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+{
+	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
+
+	for (_int i = 0; i < MAX_RENDER_TARGET_NUM; ++i)
+	{
+		pRTM->SetUpRenderTarget(i, m_vRenderTargets[i]);
+	}
+}
+
 void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)
 {
 	_mat worldMat, viewMat, projMat;

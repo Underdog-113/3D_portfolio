@@ -29,11 +29,6 @@ SP(Engine::CObject) CTrapObject::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform	= spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spMesh		= spClone->GetComponent<Engine::CMeshC>();
-	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spGraphics	= spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
-
 	return spClone;
 }
 
@@ -45,11 +40,6 @@ void CTrapObject::Awake(void)
 	m_dataID	= UNDEFINED;
 
 	m_addExtra = true;
-
-	m_spMesh		= AddComponent<Engine::CMeshC>();
-	m_spTexture		= AddComponent<Engine::CTextureC>();
-	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
-	m_spCollision	= AddComponent<Engine::CCollisionC>();
 }
 
 void CTrapObject::Start(void)

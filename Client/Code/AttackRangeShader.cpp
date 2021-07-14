@@ -32,6 +32,7 @@ void CAttackRangeShader::Awake()
 
 void CAttackRangeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	m_fTime += GET_DT;
 
 	_mat worldMat, viewMat, projMat, WVP;

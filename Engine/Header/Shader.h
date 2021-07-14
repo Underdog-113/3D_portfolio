@@ -4,6 +4,7 @@
 #include "Engine.h"
 
 BEGIN(Engine)
+class CRenderTarget;
 class ENGINE_DLL CShader abstract : public CEngine
 {
 protected:
@@ -14,7 +15,7 @@ public:
 	virtual			void				Free					(void);
 	virtual			void				Awake					(void);
 public:
-	virtual			void				SetUpConstantTable		(SP(CGraphicsC) spGC) PURE;
+	virtual			void				SetUpConstantTable		(SP(CGraphicsC) spGC);
 					void				SetupWorldViewProj		(SP(CGraphicsC) spGC);
 					void				SetupOrthoWVP			(SP(CGraphicsC) spGC);
 protected:

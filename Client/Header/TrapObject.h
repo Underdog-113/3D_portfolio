@@ -36,10 +36,9 @@ private:
 private:
 	static		_uint				m_s_uniqueID;
 
-	GETTOR		(SP(Engine::CMeshC),		m_spMesh,			nullptr,	Mesh)
-	GETTOR		(SP(Engine::CTextureC),		m_spTexture,		nullptr,	Texture)
-	GETTOR		(SP(Engine::CGraphicsC),	m_spGraphics,		nullptr,	Graphics)
-
-	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
+	GETTOR		(SP(Engine::CObject),		m_spPlate,			nullptr,	Plate)
+	GETTOR		(SP(Engine::CObject),		m_spNiddle,			nullptr,	Niddle)
+	GETTOR		(SP(Engine::CObject),		m_spTop,			nullptr,	Top)
+	GETTOR		(SP(Engine::CObject),		m_spBottom,			nullptr,	Bottom)
 };
 #endif

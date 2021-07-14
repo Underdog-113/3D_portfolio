@@ -33,5 +33,5 @@ void CBlurShader::Awake(void)
 
 void CBlurShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
-
+	__super::SetUpConstantTable(spGC);
 }

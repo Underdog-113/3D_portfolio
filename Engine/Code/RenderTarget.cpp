@@ -1,5 +1,6 @@
 #include "EngineStdafx.h"
 #include "RenderTarget.h"
+#include "WndApp.h"
 
 USING(Engine)
 
@@ -56,10 +57,26 @@ void CRenderTarget::Start(void)
 {
 }
 
+void CRenderTarget::InitDebugRT(_int debugIndexX, _int debugIndexY)
+{
+	m_debugIndexX = debugIndexX;
+	m_debugIndexY = debugIndexY;
+
+	_float xSize = GET_WND_WIDTH / 4.f;
+	_float ySize = GET_WND_HEIGHT / 4.f;
+
+	ReadyDebugBuffer(xSize * debugIndexX, ySize * debugIndexY, xSize, ySize);
+	m_isDebugOn = true;
+}
+
 void CRenderTarget::SetUpOnDevice(const _uint & index)
 {
-	GET_DEVICE->GetRenderTarget(index, &m_pOldSurface);
-	GET_DEVICE->SetRenderTarget(index, m_pCurSurface);
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+
+	pDevice->GetRenderTarget(index, &m_pOldSurface);
+	pDevice->SetRenderTarget(index, m_pCurSurface);
+
+	m_index = index;
 }
 
 void CRenderTarget::ReleaseOnDevice(const _uint & index)
