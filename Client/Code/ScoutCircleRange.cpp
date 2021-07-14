@@ -70,6 +70,7 @@ void CScoutCircleRange::Update()
 
 		_float3 pos = this->GetTransform()->GetPosition();
 		m_spScoutMeteor->GetTransform()->SetPositionX(pos.x);
+		m_spScoutMeteor->GetTransform()->SetPositionY(pos.y + 5.f);
 		m_spScoutMeteor->GetTransform()->SetPositionZ(pos.z);
 		m_bSpawn = true;
 	}

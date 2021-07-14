@@ -337,7 +337,7 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk03->GetTransform()->UpdateWorldMatrix();
 
 		info.SetDamageRate(2.f);
-		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetStrengthType(_Hit_Info::Str_Airborne);
 		info.SetCrowdControlType(_Hit_Info::CC_None);
 
 		static_cast<CKiana_CatPaw_Atk03*>(m_spCatPaw_Atk03.get())->SetupPaw(this, info);
@@ -352,7 +352,7 @@ void CKiana::UltraAtk(AttackOption index)
 		m_spCatPaw_Atk04->GetTransform()->UpdateWorldMatrix();
 
 		info.SetDamageRate(2.f);
-		info.SetStrengthType(_Hit_Info::Str_High);
+		info.SetStrengthType(_Hit_Info::Str_Airborne);
 		info.SetCrowdControlType(_Hit_Info::CC_None);
 
 		static_cast<CKiana_CatPaw_Atk04*>(m_spCatPaw_Atk04.get())->SetupPaw(this, info);

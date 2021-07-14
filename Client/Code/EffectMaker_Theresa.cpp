@@ -146,7 +146,7 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Trail()
 {
 	_float3 size = _float3(0.3f, 0.2f, 0.3f);
 
-	auto effect = CreateEffect_Dissolve(Ultra_Trail_ObjectKey, L"Ult_Trail", Ultra_Trail_Tex1Name, Ultra_Trail_Tex2Name);
+	auto effect = CreateEffect_Dissolve(Ultra_Trail_ObjectKey, L"Ult_Trail", Ultra_Trail_Tex1Name, Ultra_Trail_Tex2Name, Ultra_Trail_Tex3Name);
 	effect->GetTransform()->SetParent(m_pTheresa->GetTransform());
 	effect->GetTransform()->SetSize(size);
 
@@ -170,7 +170,7 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Bomb()
 {
 	_float3 size = _float3(0.1f, 0.1f, 0.1f);
 
-	auto effect = CreateEffect_Fire(Ultra_Boom_ObjectKey, L"Ult_Boom", Ultra_Boom_Tex1Name, Ultra_Boom_Tex2Name);
+	auto effect = CreateEffect_Fire(Ultra_Explosion_ObjectKey, L"Ult_Explosion", Ultra_Explosion_Tex1Name, Ultra_Explosion_Tex2Name);
 
 	_mat* axeMat = m_pTheresa->GetAxePivotWorldMatrix();
 	_float3 offset = _float3(2.f, 0.f, 0.f);

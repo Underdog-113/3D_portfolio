@@ -1,5 +1,11 @@
 #pragma once
 
+/* Box */
+#include "BoxBornPattern.h"
+#include "BoxDiePattern.h"
+#include "BoxHitPattern.h"
+#include "BoxBasePattern.h"
+
 /* Sickle */
 #include "SickleBornPattern.h"
 #include "SickleDiePattern.h"
@@ -7,6 +13,7 @@
 #include "SickleBasePattern.h"
 #include "SickleAtk02Pattern.h"
 #include "SickleAirbornePattern.h"
+#include "SickleStunPattern.h"
 
 /* Spider */
 #include "SpiderBornPattern.h"
@@ -31,6 +38,7 @@
 #include "ScoutBasePattern.h"
 #include "ScoutShoot2Pattern.h"
 #include "ScoutShoot3Pattern.h"
+#include "ScoutAirbornePattern.h"
 
 /* Lancer */
 #include "LancerBornPattern.h"
@@ -38,6 +46,7 @@
 #include "LancerHitPattern.h"
 #include "LancerBasePattern.h"
 #include "LancerAttack2Pattern.h"
+#include "LancerAirbornePattern.h"
 
 /* Ninza */
 #include "NinzaBornPattern.h"
@@ -63,6 +72,9 @@
 #include "BronyaShoot1Pattern.h"
 #include "BronyaThrow1Pattern.h"
 #include "BronyaShock1Pattern.h"
+#include "BronyaShock2Pattern.h"
 #include "BronyaEscapePattern.h"
 #include "BronyaSkillUltraPattern.h"
 #include "BronyaArsenalPattern.h"
+#include "BronyaAirbornePattern.h"
+#include "BronyaStunPattern.h"

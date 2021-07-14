@@ -8,6 +8,7 @@
 #include "MapObject2D.h"
 #include "PhaseChanger.h"
 #include "Portal.h"
+#include "TrapObject.h"
 #pragma endregion
 
 #pragma region Prototype Headers
@@ -40,6 +41,7 @@
 #include "MB_Bronya.h"
 #include "Bronya_Weapon.h"
 #include "Monster.h"
+#include "OJ_Box.h"
 
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
@@ -76,14 +78,14 @@
 #include "Theresa_Ult_Charge.h"
 #include "Theresa_Ult_Smoke.h"
 #include "Theresa_Ult_Fire.h"
-#include "Theresa_Ult_Boom.h"
+#include "Theresa_Ult_Explosion.h"
 #include "Theresa_Ult_Crack.h"
 #include "TheresaCharge_Att.h"
 #include "MoveUpSmoke.h"
 
 // Sakura
 #include "Sakura_Charge_Att.h"
-
+#include "Sakura_Trail.h"
 // Robot
 #include "RobotHookEff.h"
 #include "Robot_Plane.h"
@@ -100,13 +102,35 @@
 #include "Ganesha_Charge_Eff.h"
 #include "Ganesha_Dome.h"
 #include "Ganesha_Dome_Impact.h"
+#include "Ganesha_Impact_Eff.h"
 #include "Ganesha_SmokeEff.h"
 #include "Ganesha_UpperEff.h"
 
 //Bronya
 #include "Bronya_Cannon_Charge.h"
 #include "Bronya_Shot_Smoke.h"
-
+#include "Bronya_Impact.h"
+#include "Bronya_Impact_Ring.h"
+#include "Bronya_Impact_TripleRing.h"
+#include "Bronya_FlashBang.h"
+#include "BronyaFlashBang_AS.h"
+#include "Bronya_RandomSmoke.h"
+#include "Bronya_Impact_Dome.h"
+#include "Bronya_LandSmoke.h"
+#include "Bronya_LandImpact.h"
+#include "Bronya_Teleport_Laser.h"
+#include "Bronya_Teleport_Ring.h"
+#include "Bronya_Grenade_Dome.h"
+#include "Bronya_Grenade_Impact.h"
+#include "Bronya_Grenade_TriRing.h"
+#include "Bronya_Grenade.h"
+#include "Bronya_Ult_Ring.h"
+#include "Bronya_Ult_Wind.h"
+#include "Bronya_Ult_Cannon.h"
+#include "Bronya_Ult_Impact.h"
+#include "Bronya_Ult_Impact_Smoke.h"
+#include "Bronya_Ult_Range.h"
+#include "Bronya_Ult_Laser.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -145,19 +169,6 @@ void CStaticScene::Awake(_int numOfLayers)
 
 void CStaticScene::Start(void)
 {
-	_int a = 4 % 4;
-	std::cout << a << std::endl;
-
-	a = 5 % 4;
-	std::cout << a << std::endl;
-
-	a = 6 % 4;
-	std::cout << a << std::endl;
-
-	a = 7 % 4;
-	std::cout << a << std::endl;
-
-
 	InitSettings();
 }
 
@@ -244,6 +255,9 @@ void CStaticScene::InitMapPrototypes(void)
 
 	SP(CPortal) spPortal(CPortal::Create(true, this));
 	GetObjectFactory()->AddPrototype(spPortal);
+
+	SP(Engine::CObject) spTrap(CTrapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTrap);
 }
 
 void CStaticScene::InitUiPrototypes(void)
@@ -301,6 +315,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
 	ADD_PROTOTYPE(spBronyaWeapon);
+
+	SP(CMonster) spOJ_Box(COJ_Box::Create(true, this));
+	GetObjectFactory()->AddPrototype(spOJ_Box);
 }
 
 void CStaticScene::InitValkyriePrototypes(void)
@@ -356,6 +373,12 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	// Attack Range
 	SP(CMeshEffect_Client) spAttack_Range_Circle(CAttackRange_Circle::Create(true, this));
+	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
+	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spAttack_Range_Circle->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
+	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
+	spAttack_Range_Circle->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 
 	// Kiana Effect
@@ -390,8 +413,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Fire(CTheresa_Ult_Fire::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Fire);
 
-	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Boom(CTheresa_Ult_Boom::Create(true, this));
-	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Boom);
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Explosion(CTheresa_Ult_Explosion::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Explosion);
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_Crack(CTheresa_Ult_Crack::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
@@ -406,6 +429,14 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
+
+	SP(CMeshEffect_Client) spSakura_Trail(CSakura_Trail::Create(true, this));
+	spSakura_Trail->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Yuan046");
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Mei_Dodge_Line");
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
+	spSakura_Trail->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+	GetObjectFactory()->AddPrototype(spSakura_Trail);
 
 	// Monster Spawn
 
@@ -593,6 +624,16 @@ void CStaticScene::InitEffectPrototypes(void)
 	spGaneshaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spGaneshaSmoke);
 
+	SP(CMeshEffect_Client) spGaneshaImpact(CGanesha_Impact_Eff::Create(true, this));
+	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Impact");
+	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaImpact);
+
 
 	// 텍스처 추가해야함
 	/*SP(CSoftEffect) spGaneshaUpper(CGanesha_UpperEff::Create(true, this));
@@ -603,6 +644,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spGaneshaUpper);*/
 
 
+	// Bronya
 	SP(CMeshEffect_Client) spBronyaCharge(CBronya_Cannon_Charge::Create(true, this));
 	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
 	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -620,4 +662,205 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaShotSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"machineSmoke_3");
 	spBronyaShotSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaShotSmoke);
+
+
+	SP(CMeshEffect_Client) spBronyaImpact(CBronya_Impact::Create(true, this));
+	spBronyaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
+	spBronyaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronyaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronyaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronyaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spBronyaImpact);
+
+	SP(CMeshEffect_Client) spBronyaImpactDome(CBronya_Impact_Dome::Create(true, this));
+	spBronyaImpactDome->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Dome");
+	spBronyaImpactDome->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaImpactDome->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaImpactDome->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
+	spBronyaImpactDome->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
+	spBronyaImpactDome->GetComponent<Engine::CTextureC>()->AddTexture(L"ExplosionWarning");
+	spBronyaImpactDome->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaImpactDome);
+
+	SP(CMeshEffect_Client) spBronyaImpact_Ring(CBronya_Impact_Ring::Create(true, this));
+	spBronyaImpact_Ring->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_ring");
+	spBronyaImpact_Ring->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaImpact_Ring->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaImpact_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronyaImpact_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
+	spBronyaImpact_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronyaImpact_Ring->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spBronyaImpact_Ring);
+
+	SP(CMeshEffect_Client) spBronyaImpact_TriRing(CBronya_Impact_TripleRing::Create(true, this));
+	spBronyaImpact_TriRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");
+	spBronyaImpact_TriRing->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaImpact_TriRing->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaImpact_TriRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronyaImpact_TriRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
+	spBronyaImpact_TriRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronyaImpact_TriRing->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spBronyaImpact_TriRing);
+
+	SP(CMeshEffect_Client) spBronyaFlashBang(CBronya_FlashBang::Create(true, this));
+	spBronyaFlashBang->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_FlashBang");
+	spBronyaFlashBang->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaFlashBang->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaFlashBang->GetComponent<Engine::CTextureC>()->AddTexture(L"FlashBang");
+	spBronyaFlashBang->GetComponent<Engine::CTextureC>()->AddTexture(L"FlashBang");
+	spBronyaFlashBang->GetComponent<Engine::CTextureC>()->AddTexture(L"FlashBang");
+	spBronyaFlashBang->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaFlashBang);
+
+	SP(CSoftEffect) spBronyaFlashBangAS(CBronyaFlashBang_AS::Create(true, this));
+	spBronyaFlashBangAS->GetComponent<Engine::CGraphicsC>();
+	spBronyaFlashBangAS->GetComponent<Engine::CTextureC>()->AddTexture(L"FlashBang_Impact_1");
+	spBronyaFlashBangAS->GetComponent<Engine::CTextureC>()->AddTexture(L"FlashBang_Impact");
+	spBronyaFlashBangAS->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spBronyaFlashBangAS);
+
+	SP(CSoftEffect) spBronyaRandomSmoke(CBronya_RandomSmoke::Create(true, this));
+	spBronyaRandomSmoke->GetComponent<Engine::CGraphicsC>();
+	spBronyaRandomSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaRandomSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
+
+	SP(CMeshEffect_Client) spBronyaLandSmoke(CBronya_LandSmoke::Create(true, this));
+	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");
+	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaLandSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
+	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spBronyaLandSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaLandSmoke);
+
+	SP(CMeshEffect_Client) spBronyaLandImpact(CBronya_LandImpact::Create(true, this));
+	spBronyaLandImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
+	spBronyaLandImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaLandImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaLandImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spBronyaLandImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronyaLandImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spBronyaLandImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spBronyaLandImpact);
+
+	SP(CMeshEffect_Client) spBronyaTeleportLaser(CBronya_Teleport_Laser::Create(true, this));
+	spBronyaTeleportLaser->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Teleport_Laser");
+	spBronyaTeleportLaser->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaTeleportLaser->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaTeleportLaser->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronyaTeleportLaser->GetComponent<Engine::CTextureC>()->AddTexture(L"TeleportColor");
+	spBronyaTeleportLaser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaTeleportLaser);
+
+	SP(CMeshEffect_Client) spBronyaTeleportRing(CBronya_Teleport_Ring::Create(true, this));
+	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
+	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaTeleportRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spBronyaTeleportRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Teleport_Start");
+	spBronyaTeleportRing->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaTeleportRing->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaTeleportRing);
+
+	SP(CMeshEffect_Client) spBronyaGrenadeDome(CBronya_Grenade_Dome::Create(true, this));
+	spBronyaGrenadeDome->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Dome");
+	spBronyaGrenadeDome->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaGrenadeDome->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaGrenadeDome->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronyaGrenadeDome->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronyaGrenadeDome->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronyaGrenadeDome);
+
+	SP(CMeshEffect_Client) spBronyaGrenadeImpact(CBronya_Grenade_Impact::Create(true, this));
+	spBronyaGrenadeImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
+	spBronyaGrenadeImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronyaGrenadeImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaGrenadeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronyaGrenadeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronyaGrenadeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronyaGrenadeImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spBronyaGrenadeImpact);
+
+	SP(CMeshEffect_Client) spBronya_Grenade_TriRing(CBronya_Grenade_TriRing::Create(true, this));
+	spBronya_Grenade_TriRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");
+	spBronya_Grenade_TriRing->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Grenade_TriRing->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Grenade_TriRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronya_Grenade_TriRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronya_Grenade_TriRing->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronya_Grenade_TriRing);
+
+	SP(CMeshEffect_Client) spBronya_Grenade(CBronya_Grenade::Create(true, this));
+	spBronya_Grenade->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Bullet");
+	spBronya_Grenade->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Grenade->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Grenade->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronya_Grenade->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronya_Grenade->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronya_Grenade);
+
+	SP(CMeshEffect_Client) spBronya_Ult_Ring(CBronya_Ult_Ring::Create(true, this));
+	spBronya_Ult_Ring->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane2");
+	spBronya_Ult_Ring->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Ult_Ring->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Ult_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronya_Ult_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Locking_2");
+	spBronya_Ult_Ring->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronya_Ult_Ring);
+
+	SP(CMeshEffect_Client) spBronya_Ult_Wind(CBronya_Ult_Wind::Create(true, this));
+	spBronya_Ult_Wind->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane2");
+	spBronya_Ult_Wind->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Ult_Wind->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Ult_Wind->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
+	spBronya_Ult_Wind->GetComponent<Engine::CTextureC>()->AddTexture(L"CircleRing_01");
+	spBronya_Ult_Wind->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronya_Ult_Wind);
+
+	SP(CMeshEffect_Client) spBronya_Cannon(CBronya_Ult_Cannon::Create(true, this));
+	spBronya_Cannon->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Cannon");
+	spBronya_Cannon->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Cannon->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Cannon->GetComponent<Engine::CTextureC>()->AddTexture(L"ring");
+	spBronya_Cannon->GetComponent<Engine::CTextureC>()->AddTexture(L"ring");
+	spBronya_Cannon->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronya_Cannon);
+
+	SP(CMeshEffect_Client) spBronya_Ult_Impact(CBronya_Ult_Impact::Create(true, this));
+	spBronya_Ult_Impact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
+	spBronya_Ult_Impact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Ult_Impact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Ult_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronya_Ult_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spBronya_Ult_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	spBronya_Ult_Impact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spBronya_Ult_Impact);
+
+	SP(CMeshEffect_Client) spBronya_Ult_Impact_Smoke(CBronya_Ult_Impact_Smoke::Create(true, this));
+	spBronya_Ult_Impact_Smoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane2");
+	spBronya_Ult_Impact_Smoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Ult_Impact_Smoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Ult_Impact_Smoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke_Y");
+	spBronya_Ult_Impact_Smoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke_Y");
+	spBronya_Ult_Impact_Smoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spBronya_Ult_Impact_Smoke);
+
+	SP(CMeshEffect_Client) spBronya_Ult_Range(CBronya_Ult_Range::Create(true, this));
+	spBronya_Ult_Range->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
+	spBronya_Ult_Range->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spBronya_Ult_Range->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronya_Ult_Range->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
+	spBronya_Ult_Range->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
+	spBronya_Ult_Range->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
+	GetObjectFactory()->AddPrototype(spBronya_Ult_Range);
+
+	SP(CSoftEffect) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
+	spBronya_UIt_Laser->GetComponent<Engine::CGraphicsC>();
+	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
+	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
+	spBronya_UIt_Laser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 }

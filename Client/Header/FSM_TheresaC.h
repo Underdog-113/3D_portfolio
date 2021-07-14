@@ -93,8 +93,10 @@ private:
 	Appear_Option m_appearOption = None;
 
 	_uint m_chargeAttackIndex = 1;
-	_float m_chargeEnterTimer = 0.f;
+
+	_float m_idleTimer = 0.f;
 	_float m_stunTimer = 0.f;
+	_float m_chargeEnterTimer = 0.f;
 
 	bool m_ultraAxeOnOff = false;
 	bool m_ultraUsed = false;
@@ -108,7 +110,6 @@ private:
 	bool m_isEvade = false;
 	bool m_isSecondEvade = false;
 
-	_float m_idleTimer = 0.f;
 
 public:
 	//StandBy

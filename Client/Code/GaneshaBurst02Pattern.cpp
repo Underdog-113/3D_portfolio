@@ -11,6 +11,7 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
+#include "Ganesha_Dome_Impact.h"
 
 CGaneshaBurst02Pattern::CGaneshaBurst02Pattern()
 {
@@ -92,6 +93,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst02);
+			m_onBurstReadyEff = true;
 		}
 	}
 
@@ -104,6 +106,8 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		m_walkReady = false;
 		m_onSound = false;
 		m_onRunStart = false;
+		std::dynamic_pointer_cast<CGanesha_Dome_Impact>(m_spBurstEff)->GetDomeObject()->SetDeleteThis(true);
+		m_spBurstEff->SetDeleteThis(true);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
@@ -132,15 +136,38 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* AttackBall */
 	// 내가 burst 상태고, 적절할 때 어택볼 숨기기
-	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && 0.65f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() &&
+		0.65f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
 	}
 	// 내가 burst 상태고, 적절할 때 어택볼 생성
-	else if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && 0.55f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Ganesha_Burst02 == fsm->GetCurStateString() &&
+		0.55f <= fsm->GetDM()->GetAniTimeline())
 	{
+		m_spBurstReadyEff->SetDeleteThis(true);
+
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 3.4f);
+	}
+
+	/************************* Effect */
+	if (Name_Ganesha_Burst02 == fsm->GetCurStateString() &&
+		0.1f > fsm->GetDM()->GetAniTimeline() &&
+		true == m_onBurstReadyEff)
+	{
+		m_onBurstReadyEff = false;
+		m_onBurstEff = true;
+		m_spBurstReadyEff = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Charge_Eff", true);
+		m_spBurstReadyEff->GetTransform()->SetPosition(mPos);
+	}
+	else if (Name_Ganesha_Burst02 == fsm->GetCurStateString() &&
+		0.45f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onBurstEff)
+	{
+		m_onBurstEff = false;
+		m_spBurstEff = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Dome_Impact", true);
+		m_spBurstEff->GetTransform()->SetPosition(mPos);
 	}
 }
 

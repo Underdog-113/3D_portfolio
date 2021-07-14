@@ -58,6 +58,7 @@ public:
 
 	virtual void MonsterDead();
 
+	Engine::CCollider* GetHitBox();
 
 protected:
 	static				_uint							m_s_uniqueID;

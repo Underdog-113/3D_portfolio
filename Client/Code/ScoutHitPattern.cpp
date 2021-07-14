@@ -5,12 +5,6 @@
 #include "FSMDefine_Scout.h"
 #include "MO_Scout.h"
 
-//#include "StageControlTower.h"
-//#include "Valkyrie.h"
-//#include "DynamicMeshData.h"
-//#include "PatternMachineC.h"
-//#include "AniCtrl.h"
-
 CScoutHitPattern::CScoutHitPattern()
 {
 }
@@ -22,6 +16,7 @@ CScoutHitPattern::~CScoutHitPattern()
 void CScoutHitPattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_ScoutC) fsm = pOwner->GetComponent<CFSM_ScoutC>();
+	static_cast<CMO_Scout*>(pOwner)->UnActiveAttackBall();
 
 	// 내가 약피격 당했다면
 	if (Name_HIT_L != fsm->GetCurStateString() &&

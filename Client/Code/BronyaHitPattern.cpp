@@ -5,12 +5,6 @@
 #include "FSMDefine_Bronya.h"
 #include "MB_Bronya.h"
 
-#include "StateMachineC.h"
-#include "Valkyrie.h" 
-#include "DynamicMeshData.h"
-#include "AniCtrl.h"
-#include "PatternMachineC.h"
-
 CBronyaHitPattern::CBronyaHitPattern()
 {
 }
@@ -21,7 +15,8 @@ CBronyaHitPattern::~CBronyaHitPattern()
 
 void CBronyaHitPattern::Pattern(Engine::CObject* pOwner)
 {
-	//SP(CFSM_GaneshaC) fsm = pOwner->GetComponent<CFSM_GaneshaC>();
+	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
+	static_cast<CMB_Bronya*>(pOwner)->UnActiveAttackBall();
 
 	//// 이전에 패턴에서 속도가 변경된 상태일 수도 있으므로 정상 속도로 돌림
 	//fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);

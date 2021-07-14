@@ -238,9 +238,10 @@ void CRobotAttack2Pattern::Pattern(Engine::CObject* pOwner)
 		m_spImpactEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
 		m_spImpactEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 		m_spImpactEffect->GetTransform()->SetPosition(mPos);
+		m_spImpactEffect->GetTransform()->SetRotationY(0.f);
 		//m_spImpactEffect->GetTransform()->SetPositionX(mPos.x - 0.3f);
 		//m_spImpactEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
-		//m_spImpactEffect->GetTransform()->SetSize(2.f, 2.f, 2.f);
+		m_spImpactEffect->GetTransform()->SetSize(10.f, 10.f, 10.f);
 
 		//// ÁÖ¸Ô »À Ã£±â
 		//m_pLeftUpperArm = &fsm->GetDM()->GetFrameByName("Bip001_L_Hand")->CombinedTransformMatrix;

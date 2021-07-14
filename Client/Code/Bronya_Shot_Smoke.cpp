@@ -59,6 +59,11 @@ void CBronya_Shot_Smoke::Update()
 {
 	__super::Update();
 
+	if (m_fAlpha <= 0)
+	{
+		this->SetDeleteThis(true);
+	}
+
 	m_fAlpha -= 0.5f * GET_DT;
 
 }
@@ -66,7 +71,7 @@ void CBronya_Shot_Smoke::Update()
 void CBronya_Shot_Smoke::LateUpdate()
 {
 	__super::LateUpdate();
-
+	Billboard();
 }
 
 void CBronya_Shot_Smoke::PreRender(LPD3DXEFFECT pEffect)
@@ -92,7 +97,7 @@ void CBronya_Shot_Smoke::OnDestroy()
 	__super::OnDestroy();
 
 }
-
+#
 void CBronya_Shot_Smoke::OnEnable()
 {
 	__super::OnEnable();
@@ -109,4 +114,23 @@ void CBronya_Shot_Smoke::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
+}
+
+void CBronya_Shot_Smoke::Billboard()
+{
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	D3DXMatrixIdentity(&matBill);
+
+	memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
+	memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_float3));
+	memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_float3));
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 }

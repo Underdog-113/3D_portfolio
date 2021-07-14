@@ -27,6 +27,11 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 
 	_mat m_explosionPosMat;
+
+	/* for.effect */
+	SP(Engine::CObject) m_spSoftEffect;
+	_bool m_onEffect = false;
+	_bool m_onAtk = false;
 };
 
 #endif

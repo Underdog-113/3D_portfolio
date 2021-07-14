@@ -4,6 +4,7 @@
 #include "SoundManager.h"
 #include "DynamicMeshData.h"
 #include "AniCtrl.h"
+#include "Layer.h"
 
 #include "Sakura.h"
 #include "State.h"
@@ -12,6 +13,7 @@
 
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
+#include "Monster.h"
 
 CFSM_SakuraC::CFSM_SakuraC()
 {
@@ -58,9 +60,108 @@ void CFSM_SakuraC::FixRootMotionOffset(_uint index)
 
 void CFSM_SakuraC::ResetCheckMembers()
 {
-	//m_checkEffect = false;
-	//m_checkEffectSecond = false;
+	m_checkEffect = false;
+	m_checkFlashCol = false;
+	m_checkFlashMove = false;
+	m_checkEndFlash = false;
+	m_checkAttack = false;
+	m_checkAttack2nd = false;
+	m_checkAttack3rd = false;
 }
+
+void CFSM_SakuraC::OnAttackBall(_float damageRate, _float breakDamage, HitInfo::Strength strType, HitInfo::CrowdControl ccType)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetBreakDamage(breakDamage);
+	info.SetStrengthType(strType);
+	info.SetCrowdControlType(ccType);
+
+	auto pAttackBall = m_pSakura->GetAttackBall();
+	pAttackBall->SetIsEnabled(true);
+	pAttackBall->SetupBall(0.3f, info);
+}
+
+void CFSM_SakuraC::FlashAttack(_float damageRate, _float breakDamage, HitInfo::Strength strType, HitInfo::CrowdControl ccType)
+{
+	CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetBreakDamage(breakDamage);
+	info.SetStrengthType(strType);
+	info.SetCrowdControlType(ccType);
+
+	m_pStageControlTower->HitMonster(
+		m_pSakura,
+		pMonster,
+		info,
+		pMonster->GetTransform()->GetPosition() + _float3(0.f, pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset(), 0.f));
+}
+
+void CFSM_SakuraC::SakuraCutting()
+{
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
+	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
+
+	if (monsterList.empty())
+		return;
+
+	HitInfo info;
+	info.SetDamageRate(4.f);
+	info.SetBreakDamage(100.f);
+	info.SetStrengthType(HitInfo::Str_Airborne);
+	info.SetCrowdControlType(HitInfo::CC_None);
+
+	for (auto& iter : monsterList)
+	{
+		CMonster* pMonster = (CMonster*)iter.get();
+		if (pMonster->GetIsEnabled() && !pMonster->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			if (pMonster->GetStat()->GetSakuraCounter() == 3)
+			{
+				m_pStageControlTower->HitMonster(
+					m_pSakura,
+					pMonster,
+					info,
+					pMonster->GetTransform()->GetPosition() + _float3(0.f, pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset(), 0.f));
+				
+				pMonster->GetStat()->SetSakuraCounter(0);
+			}
+
+		}
+	}
+}
+
+void CFSM_SakuraC::InfernoActive_1st()
+{
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];	
+	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
+
+	if (monsterList.empty())
+		return;
+
+	HitInfo info;
+	info.SetDamageRate(0.5f);
+	info.SetBreakDamage(100.f);
+	info.SetStrengthType(HitInfo::Str_Low);
+	info.SetCrowdControlType(HitInfo::CC_Sakura);
+
+	for (auto& iter : monsterList)
+	{
+		CMonster* pMonster = (CMonster*)iter.get();
+		if (pMonster->GetIsEnabled() && !pMonster->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			m_pStageControlTower->HitMonster(
+				m_pSakura,
+				pMonster,
+				info,
+				pMonster->GetTransform()->GetPosition() + _float3(0.f, pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset(), 0.f));
+			pMonster->GetStat()->SetSakuraCounter(3);
+		}
+	}
+}
+
 
 bool CFSM_SakuraC::CheckAction_Attack(const std::wstring & switchStateName, float coolTime)
 {
@@ -70,6 +171,43 @@ bool CFSM_SakuraC::CheckAction_Attack(const std::wstring & switchStateName, floa
 		{
 			ChangeState(switchStateName);
 			CStageControlTower::GetInstance()->FindTarget();
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_Charge(float coolTime)
+{
+	m_chargeEnterTimer += GET_PLAYER_DT;
+	if (Engine::IMKEY_PRESS(StageKey_Attack))
+	{
+		if (m_chargeEnterTimer > coolTime)
+		{
+			m_chargeEnterTimer = 0.f;
+			ChangeState(Name_Charge1);
+			CStageControlTower::GetInstance()->FindTarget(HitInfo::CrowdControl::CC_Sakura);
+			return true;
+		}
+	}
+	else
+	{
+		m_chargeEnterTimer = 0.f;
+	}
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_ChargeQuick(float coolTime)
+{
+	if (!m_pSakura->GetInfernoMode())
+		return false;
+
+	if (Engine::IMKEY_DOWN(StageKey_Attack))
+	{
+		if (m_pDM->GetAniTimeline() > coolTime)
+		{
+			ChangeState(Name_Charge1_Quick);
+			CStageControlTower::GetInstance()->FindTarget(HitInfo::CrowdControl::CC_Sakura);
 			return true;
 		}
 	}
@@ -128,15 +266,40 @@ bool CFSM_SakuraC::CheckAction_StandBy_Timeout(float coolTime)
 	return false;
 }
 
-bool CFSM_SakuraC::CheckAction_Run()
+bool CFSM_SakuraC::CheckAction_CombatToStandBy(float coolTime)
 {
-	if (Engine::IMKEY_PRESS(StageKey_Move_Forward) ||
-		Engine::IMKEY_PRESS(StageKey_Move_Left) ||
-		Engine::IMKEY_PRESS(StageKey_Move_Back) ||
-		Engine::IMKEY_PRESS(StageKey_Move_Right))
+	if (m_pDM->GetAniTimeline() > coolTime)
 	{
-		ChangeState(Name_Run);
+		ChangeState(Name_CombatToStandBy);
 		return true;
+	}
+
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_Combat_Timeout(float coolTime)
+{
+	if (m_pDM->GetAniTimeline() > coolTime)
+	{
+		ChangeState(Name_Combat);
+		return true;
+	}
+
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_Run_OnCombat(float coolTime)
+{
+	if (m_pDM->GetAniTimeline() > coolTime)
+	{
+		if (Engine::IMKEY_PRESS(StageKey_Move_Forward) ||
+			Engine::IMKEY_PRESS(StageKey_Move_Left) ||
+			Engine::IMKEY_PRESS(StageKey_Move_Back) ||
+			Engine::IMKEY_PRESS(StageKey_Move_Right))
+		{
+			ChangeState(Name_RunBS);
+			return true;
+		}
 	}
 
 	return false;
@@ -151,7 +314,7 @@ bool CFSM_SakuraC::CheckAction_Run_OnAction(float coolTime)
 			Engine::IMKEY_PRESS(StageKey_Move_Back) ||
 			Engine::IMKEY_PRESS(StageKey_Move_Right))
 		{
-			ChangeState(Name_Run);
+			ChangeState(Name_Run_StartFromZero);
 			return true;
 		}
 	}
@@ -192,32 +355,6 @@ bool CFSM_SakuraC::CheckAction_Run_End()
 	return false;
 }
 
-bool CFSM_SakuraC::CheckAction_StandBy()
-{
-	if (!Engine::IMKEY_PRESS(StageKey_Move_Forward) &&
-		!Engine::IMKEY_PRESS(StageKey_Move_Left) &&
-		!Engine::IMKEY_PRESS(StageKey_Move_Back) &&
-		!Engine::IMKEY_PRESS(StageKey_Move_Right))
-	{
-		ChangeState(Name_StandBy);
-		return true;
-	}
-
-	return false;
-}
-
-bool CFSM_SakuraC::CheckAction_Idle()
-{
-	m_idleTimer += GET_DT;
-
-	if (m_idleTimer > 3.f)
-	{
-		ChangeState(Name_Idle);
-		return true;
-	}
-
-	return false;
-}
 
 bool CFSM_SakuraC::CheckAction_RunBS_To_Run()
 {
@@ -229,20 +366,75 @@ bool CFSM_SakuraC::CheckAction_RunBS_To_Run()
 	return false;
 }
 
-bool CFSM_SakuraC::CheckAction_Ultra()
+bool CFSM_SakuraC::CheckAction_WeaponSkill(float coolTime)
 {
-	if (Engine::IMKEY_DOWN(StageKey_Ult))
+	if (m_pDM->GetAniTimeline() > coolTime)
 	{
-		auto pStat = m_pSakura->GetStat();
-		if (pStat->GetCurSp() < pStat->GetUltraCost())
-			return false;
-
-		ChangeState(Name_Ultra);
-		return true;
+		if (Engine::IMKEY_DOWN(StageKey_WeaponSkill))
+		{
+			if (m_pStageControlTower->ActSkill())
+			{
+				ChangeState(Name_WeaponSkill);
+				CStageControlTower::GetInstance()->FindTarget();
+				return true;
+			}
+		}
 	}
 	return false;
 }
 
+bool CFSM_SakuraC::CheckAction_Ultra(float coolTime)
+{
+	if (m_pDM->GetAniTimeline() > coolTime)
+	{
+		if (Engine::IMKEY_DOWN(StageKey_Ult))
+		{
+			if (m_pStageControlTower->ActUltra())
+			{
+				ChangeState(Name_Ultra);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_Idle()
+{
+	m_idleTimer += GET_PLAYER_DT;
+
+	if (m_idleTimer > 5.f)
+	{
+		ChangeState(Name_Idle);
+		return true;
+	}
+
+	return false;
+}
+
+bool CFSM_SakuraC::CheckAction_ChargeEnd()
+{
+	if (m_pDM->GetAniTimeline() > Cool_End)
+	{
+		auto target = m_pStageControlTower->GetCurrentTarget();
+		if (target)
+		{
+			if (target->GetIsEnabled() && !target->GetComponent<CPatternMachineC>()->GetOnDie())
+			{
+				CMonster* pMonster = (CMonster*)target.get();
+				if (pMonster->GetStat()->GetSakuraCounter() == 3)
+				{
+					ChangeState(Name_Charge1_AS);
+					return true;
+				}
+			}
+		}
+
+		ChangeState(Name_Combat);
+		return true;
+	}
+	return false;
+}
 
 void CFSM_SakuraC::Appear_Init(void)
 {
@@ -251,62 +443,884 @@ void CFSM_SakuraC::Appear_Init(void)
 void CFSM_SakuraC::Appear_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Appear);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_SakuraC::Appear_Update(float deltaTime)
 {
-	if (m_pDM->GetAniCtrl()->IsItEnd())
-	{
-		switch (m_appearOption)
-		{
-		case CFSM_SakuraC::None:
-			ChangeState(Name_StandBy);
-			break;
-		case CFSM_SakuraC::QTE:
-			ChangeState(Name_StandBy);
-			break;
-		default:
-			break;
-		}
-		return;
-	}
-
-
 	if (CheckAction_StandBy_Timeout())
 		return;
 }
 
 void CFSM_SakuraC::Appear_End(void)
 {
-	m_appearOption = None;
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::StandBy_Init(void)
 {
-	m_pDM->SetLoopAnim(1);
+	m_pDM->SetLoopAnim(Index_StandBy);
 }
 
 void CFSM_SakuraC::StandBy_Enter(void)
 {
-	m_pDM->ChangeAniSet(1);
+	m_pDM->ChangeAniSet(Index_StandBy);
 	m_idleTimer = 0.f;
 }
 
 void CFSM_SakuraC::StandBy_Update(float deltaTime)
 {
-	//if (CheckAction_Run())
-	//	return;
-	//if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
-	//	return;
-	//if (CheckAction_EvadeBackward(0.f))
-	//	return;
-	//if (CheckAction_Ultra())
-	//	return;
-	//if (CheckAction_Idle())
-	//	return;
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+	if (CheckAction_Run_OnAction(0.f))
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+			return;
+	}
+
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_Idle())
+		return;
 }
 
 void CFSM_SakuraC::StandBy_End(void)
+{
+}
+
+void CFSM_SakuraC::Attack1_StandBy_Init(void)
+{
+}
+
+void CFSM_SakuraC::Attack1_StandBy_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack1_StandBy);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	ResetCheckMembers();
+	m_chargeEnterTimer = 0.f;
+	//m_pDM->GetAniCtrl()->SetSpeed(0.5f);
+}
+
+void CFSM_SakuraC::Attack1_StandBy_Update(float deltaTime)
+{
+	m_chargeEnterTimer += GET_PLAYER_DT;
+
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
+	{
+		//PlaySound_Attack_RandomVoice();
+
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+	if(!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack1_StandBy)
+	{
+		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+
+		m_checkAttack = true;
+	}
+	if (m_pDM->GetAniTimeline() > Delay_Attack1_StandBy + 0.05f)
+		m_pSakura->UnActiveAttackBall();
+
+	
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack2, 0.3f))
+		return;
+	if (CheckAction_Charge())
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Atk01 + 0.06f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Atk01 + 0.06f))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack + 0.2f))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack1_StandBy_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+	m_chargeEnterTimer = 0.f;
+}
+
+void CFSM_SakuraC::Attack1_Combat_Init(void)
+{
+}
+
+void CFSM_SakuraC::Attack1_Combat_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack1_Combat);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	ResetCheckMembers();
+	m_chargeEnterTimer = 0.f;
+}
+
+void CFSM_SakuraC::Attack1_Combat_Update(float deltaTime)
+{
+	m_chargeEnterTimer += GET_PLAYER_DT;
+
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
+	{
+		//PlaySound_Attack_RandomVoice();
+
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack1_Combat)
+	{
+		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+	
+		m_checkAttack = true;
+	}
+	if (m_pDM->GetAniTimeline() > Delay_Attack1_Combat + 0.05f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack2, 0.3f))
+		return;
+	if (CheckAction_Charge())
+		return;
+	if (CheckAction_Ultra(Delay_Attack1_Combat + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Attack1_Combat + 0.1f))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack + 0.2f))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack1_Combat_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+	m_chargeEnterTimer = 0.f;
+}
+
+void CFSM_SakuraC::Attack2_Init(void)
+{
+	FixRootMotionOffset(Index_Attack2);
+}
+
+void CFSM_SakuraC::Attack2_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack2);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+
+}
+
+void CFSM_SakuraC::Attack2_Update(float deltaTime)
+{
+
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk02)
+	{
+		//PlaySound_Attack_RandomVoice();
+	
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack2_1)
+	{
+		OnAttackBall(0.35f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
+		m_checkAttack = true;
+	}
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack2_1 + 0.05f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack2_2)
+	{
+		OnAttackBall(0.35f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
+		m_checkAttack2nd = true;
+	}
+	if (m_pDM->GetAniTimeline() > Delay_Attack2_2 + 0.06f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack3))
+		return;
+	if (CheckAction_Ultra(Delay_Attack2_2 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Attack2_2 + 0.1f))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack2_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+}
+
+void CFSM_SakuraC::Attack3_Init(void)
+{
+	FixRootMotionOffset(Index_Attack3);
+}
+
+void CFSM_SakuraC::Attack3_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack3);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+}
+
+void CFSM_SakuraC::Attack3_Update(float deltaTime)
+{
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk03)
+	{
+		//PlaySound_Attack_RandomVoice();
+		
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack3)
+	{
+		OnAttackBall(1.f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+
+		m_checkAttack = true;
+	}
+	if (m_pDM->GetAniTimeline() > Delay_Attack3 + 0.05f)
+		m_pSakura->UnActiveAttackBall();
+
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack4))
+		return;
+	if (CheckAction_Ultra(Delay_Attack3 + 0.1f))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Attack3 + 0.1f))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack3_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+}
+
+void CFSM_SakuraC::Attack4_Init(void)
+{
+	FixRootMotionOffset(Index_Attack4);
+}
+
+void CFSM_SakuraC::Attack4_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack4);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+}
+
+void CFSM_SakuraC::Attack4_Update(float deltaTime)
+{
+
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk04)
+	{
+		//PlaySound_Attack_RandomVoice();
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack4_1)
+	{
+		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
+
+		m_checkAttack = true;
+	}
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack4_1 + 0.03f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack4_2)
+	{
+		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
+		m_checkAttack2nd = true;
+	}
+	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > Delay_Attack4_2 + 0.02f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > Delay_Attack4_3)
+	{
+		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
+		m_checkAttack3rd = true;
+	}
+	if (m_pDM->GetAniTimeline() > Delay_Attack4_3 + 0.04f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack5))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Attack4_3 + 0.04f))
+		return;
+	if (CheckAction_Ultra(Delay_Attack4_3 + 0.04f))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack4_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+}
+
+void CFSM_SakuraC::Attack5_Init(void)
+{
+	FixRootMotionOffset(Index_Attack5);
+}
+
+void CFSM_SakuraC::Attack5_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack5);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+	m_targetToSakura = ZERO_VECTOR;
+}
+
+void CFSM_SakuraC::Attack5_Update(float deltaTime)
+{
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk05)
+	{
+		//PlaySound_Attack_RandomVoice();
+
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
+
+			m_pSakura->OnHitbox();
+		}
+		m_checkEndFlash = true;
+	}
+
+	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.385f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+
+			m_targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&m_targetToSakura, &m_targetToSakura);
+
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + m_targetToSakura * colRadiusSum);
+
+			m_pSakura->OffHitbox();
+		}
+		m_checkFlashMove = true;
+	}
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+		return;
+	if (m_checkEndFlash && m_checkFlashCol)
+	{
+		if (CheckAction_Attack(Name_Attack6, 0.4f))
+			return;
+	}
+
+	if (CheckAction_Attack(Name_Attack1_Combat, 0.8f))
+		return;
+
+	if (CheckAction_Combat_Timeout())
+		return;
+
+}
+
+void CFSM_SakuraC::Attack5_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+	m_pSakura->OnHitbox();
+}
+
+void CFSM_SakuraC::Attack6_Init(void)
+{
+}
+
+void CFSM_SakuraC::Attack6_Enter(void)
+{
+	m_pDM->RepeatAniSet(Index_Attack5);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+	m_targetToSakura = ZERO_VECTOR;
+}
+
+void CFSM_SakuraC::Attack6_Update(float deltaTime)
+{
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk05)
+	{
+		//PlaySound_Attack_RandomVoice();
+
+		//PlaySound_Effect(Sound_Attack_1_Effect);
+		//m_pEffectMaker->CreateEffect_Attack1();
+
+		m_checkEffect = true;
+	}
+
+	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
+
+			m_pSakura->OnHitbox();
+		}
+		m_checkEndFlash = true;
+	}
+
+	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.385f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+
+			_float3 targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
+
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
+			m_pSakura->OffHitbox();
+		}
+		m_checkFlashMove = true;
+	}
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+		return;
+	if (CheckAction_Attack(Name_Attack1_Combat, 0.8f))
+		return;
+
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack6_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pSakura->UnActiveAttackBall();
+	m_pSakura->OnHitbox();
+}
+
+void CFSM_SakuraC::Charge1_Init(void)
+{
+}
+
+void CFSM_SakuraC::Charge1_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Charge1);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+}
+
+void CFSM_SakuraC::Charge1_Update(float deltaTime)
+{
+	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.535f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
+
+			m_pSakura->OnHitbox();
+		}
+		m_checkEndFlash = true;
+	}
+
+	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.515f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+
+			_float3 targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
+
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
+			m_pSakura->OffHitbox();
+		}
+		m_checkFlashMove = true;
+	}
+
+// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+// 	{
+// 		/*		m_pEffectMaker->CreateEffect_Attack5();*/
+// 		m_checkEffect = true;
+// 		// 
+// 		// 		PlaySound_Attack_RandomVoice();
+// 		// 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+// 		// 
+// 		// 		m_pEffectMaker->CreateEffect_Attack5();
+// 		// 		PlaySound_Effect(Sound_Attack_5_Effect);
+// 	}
+
+	// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
+	// 	{
+	// 		m_pKiana->UnActiveAttackBall();
+	// 	}
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_Attack(Name_Attack1_Combat))
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack + 0.15f))
+		return;
+	if (CheckAction_ChargeEnd())
+		return;
+}
+
+void CFSM_SakuraC::Charge1_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pSakura->GetFlashAttackBall()->SetIsEnabled(false);
+	m_pSakura->OnHitbox();
+}
+
+void CFSM_SakuraC::Charge1_AS_Init(void)
+{
+}
+
+void CFSM_SakuraC::Charge1_AS_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Charge1_AS);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+}
+
+void CFSM_SakuraC::Charge1_AS_Update(float deltaTime)
+{
+
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.43f)
+	{
+		SakuraCutting();
+
+		m_checkAttack = true;
+	}
+
+	// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	// 	{
+	// 		/*		m_pEffectMaker->CreateEffect_Attack5();*/
+	// 		m_checkEffect = true;
+	// 		// 
+	// 		// 		PlaySound_Attack_RandomVoice();
+	// 		// 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+	// 		// 
+	// 		// 		m_pEffectMaker->CreateEffect_Attack5();
+	// 		// 		PlaySound_Effect(Sound_Attack_5_Effect);
+	// 	}
+
+	// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
+	// 	{
+	// 		m_pKiana->UnActiveAttackBall();
+	// 	}
+
+	if (CheckAction_Evade_OnAction())
+		return;
+
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.4f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_Combat, 0.4f))
+			return;
+	}
+
+	if (CheckAction_WeaponSkill(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Ultra(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack + 0.15f))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Charge1_AS_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_SakuraC::Charge1_Quick_Init(void)
+{
+}
+
+void CFSM_SakuraC::Charge1_Quick_Enter(void)
+{
+	m_pDM->RepeatAniSet(Index_Charge1_Quick);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	ResetCheckMembers();
+
+	m_pStageControlTower->LookTarget();
+}
+
+void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
+{
+
+	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.24f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			FlashAttack(1.5f, 10.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
+
+			m_pSakura->OnHitbox();
+		}
+		m_checkEndFlash = true;
+	}
+
+	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.2f)
+	{
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
+			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
+			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
+
+			_float3 targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
+
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.1f + pMonster->GetHitBox()->GetRadiusBS();
+
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
+			m_pSakura->OffHitbox();
+		}
+		m_checkFlashMove = true;
+	}
+
+	// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
+	// 	{
+	// 		/*		m_pEffectMaker->CreateEffect_Attack5();*/
+	// 		m_checkEffect = true;
+	// 		// 
+	// 		// 		PlaySound_Attack_RandomVoice();
+	// 		// 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+	// 		// 
+	// 		// 		m_pEffectMaker->CreateEffect_Attack5();
+	// 		// 		PlaySound_Effect(Sound_Attack_5_Effect);
+	// 	}
+
+	// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
+	// 	{
+	// 		m_pKiana->UnActiveAttackBall();
+	// 	}
+
+	if (CheckAction_Evade_OnAction())
+		return;
+	if (CheckAction_ChargeQuick())
+		return;
+	if (CheckAction_WeaponSkill(Delay_Effect_Charge1))
+		return;
+	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+		return;
+	if (CheckAction_ChargeEnd())
+		return;
+}
+
+void CFSM_SakuraC::Charge1_Quick_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pSakura->GetFlashAttackBall()->SetIsEnabled(false);
+
+	m_pSakura->OnHitbox();
+}
+
+void CFSM_SakuraC::Combat_Init(void)
+{
+}
+
+void CFSM_SakuraC::Combat_Enter(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pDM->ChangeAniSet(Index_Combat);
+
+	ResetCheckMembers();
+	m_combatTimer = 0.f;
+}
+
+void CFSM_SakuraC::Combat_Update(float deltaTime)
+{
+	m_combatTimer += GET_PLAYER_DT;
+	if (m_combatTimer > 3.f)
+	{
+		ChangeState(Name_CombatToStandBy);
+		return;
+	}
+
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+	if (CheckAction_Run_OnCombat(0.f))
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_Combat, 0.f))
+			return;
+	}
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+}
+
+void CFSM_SakuraC::Combat_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_SakuraC::CombatToStandBy_Init(void)
+{
+}
+
+void CFSM_SakuraC::CombatToStandBy_Enter(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pDM->ChangeAniSet(Index_CombatToStandBy);
+
+	ResetCheckMembers();
+}
+
+void CFSM_SakuraC::CombatToStandBy_Update(float deltaTime)
+{
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_Combat, 0.f))
+			return;
+	}
+	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_Run_OnAction())
+		return;
+	if (CheckAction_StandBy_Timeout(0.9f))
+		return;
+}
+
+void CFSM_SakuraC::CombatToStandBy_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_SakuraC::Die_Init(void)
+{
+}
+
+void CFSM_SakuraC::Die_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Die);
+}
+
+void CFSM_SakuraC::Die_Update(float deltaTime)
+{
+}
+
+void CFSM_SakuraC::Die_End(void)
 {
 }
 
@@ -322,18 +1336,81 @@ void CFSM_SakuraC::Run_Enter(void)
 
 void CFSM_SakuraC::Run_Update(float deltaTime)
 {
-	if (CheckAction_Run_End())
-		return;
-	if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
-		return;
+	m_runSoundTimer += GET_PLAYER_DT;
+	if (m_runSoundTimer > 0.3f)
+	{
+		m_runSoundTimer = 0.f;
+		//PlaySound_Attack_RandomRun();
+	}
+
 	if (CheckAction_EvadeForward())
 		return;
+	if (CheckAction_Run_End())
+		return;
+
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_StandBy))
+			return;
+	}
 	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
 		return;
 }
 
 void CFSM_SakuraC::Run_End(void)
 {
+	m_runSoundTimer = 0.f;
+}
+
+void CFSM_SakuraC::Run_StartFromZero_Init(void)
+{
+	m_pDM->SetLoopAnim(Index_Run_StartFromZero);
+}
+
+void CFSM_SakuraC::Run_StartFromZero_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Run_StartFromZero);
+}
+
+void CFSM_SakuraC::Run_StartFromZero_Update(float deltaTime)
+{
+	m_runSoundTimer += GET_PLAYER_DT;
+	if (m_runSoundTimer > 0.3f)
+	{
+		m_runSoundTimer = 0.f;
+		//PlaySound_Attack_RandomRun();
+	}
+
+	if (CheckAction_EvadeForward())
+		return;
+	if (CheckAction_Run_End())
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+			return;
+	}
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+}
+
+void CFSM_SakuraC::Run_StartFromZero_End(void)
+{
+	m_runSoundTimer = 0.f;
 }
 
 void CFSM_SakuraC::RunBS_Init(void)
@@ -354,16 +1431,27 @@ void CFSM_SakuraC::RunBS_Update(float deltaTime)
 	//	PlaySound_Attack_RandomRun();
 	//}
 
-	if (CheckAction_RunBS_To_Run())
-		return;
 
-	if (CheckAction_Run_End())
-		return;
- 	if (CheckAction_Attack(Name_Attack1_Combat, 0.f))
- 		return;
 	if (CheckAction_EvadeForward())
 		return;
-
+	if (CheckAction_RunBS_To_Run())
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_Combat, 0.f))
+			return;
+	}
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_Run_End())
+		return;
 }
 
 void CFSM_SakuraC::RunBS_End(void)
@@ -382,17 +1470,26 @@ void CFSM_SakuraC::RunStopLeft_Enter(void)
 
 void CFSM_SakuraC::RunStopLeft_Update(float deltaTime)
 {
+	if (CheckAction_Evade_OnAction(0.f))
+		return;
+	if (CheckAction_Run_OnAction())
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+			return;
+	}
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
-
-	if (CheckAction_Run())
-		return;
-	//if (CheckAction_Attack(Name_ATTACK1, 0.f))
-	//	return;
-	if (CheckAction_EvadeForward())
-		return;
-	//if (CheckAction_Ultra())
-	//	return;
 }
 
 void CFSM_SakuraC::RunStopLeft_End(void)
@@ -412,22 +1509,66 @@ void CFSM_SakuraC::RunStopRight_Enter(void)
 
 void CFSM_SakuraC::RunStopRight_Update(float deltaTime)
 {
+	if (CheckAction_Evade_OnAction(0.f))
+		return;
+	if (CheckAction_Run_OnAction())
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+			return;
+	}
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
 	if (CheckAction_StandBy_Timeout())
 		return;
-
-	if (CheckAction_Run())
-		return;
-// 	if (CheckAction_Attack(Name_ATTACK2, 0.f))
-// 		return;
-	if (CheckAction_EvadeForward())
-		return;
-	// 	if (CheckAction_Ultra())
-	// 		return;
 }
 
 void CFSM_SakuraC::RunStopRight_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_SakuraC::StandBy_Back_Init(void)
+{
+	m_pDM->SetLoopAnim(Index_StandBy_Back);
+}
+
+void CFSM_SakuraC::StandBy_Back_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_StandBy_Back);
+}
+
+void CFSM_SakuraC::StandBy_Back_Update(float deltaTime)
+{
+}
+
+void CFSM_SakuraC::StandBy_Back_End(void)
+{
+}
+
+void CFSM_SakuraC::Stun_Init(void)
+{
+}
+
+void CFSM_SakuraC::Stun_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Stun);
+}
+
+void CFSM_SakuraC::Stun_Update(float deltaTime)
+{
+}
+
+void CFSM_SakuraC::Stun_End(void)
+{
 }
 
 void CFSM_SakuraC::EvadeForward_Init(void)
@@ -438,19 +1579,54 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	//PlaySound_Attack_RandomEvade();
+
+	m_isEvade = true;
+	m_pSakura->SetIsEvade(true);
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 {
-	if (CheckAction_Run_OnAction(0.5f))
+	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
+	{
+		m_isEvade = false;
+		m_pSakura->SetIsEvade(false);
+	}
+
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
+	{
+		m_isSecondEvade = true;
 		return;
-	if (CheckAction_StandBy_Timeout())
+	}
+
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.5f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_Combat, 0.5f))
+			return;
+	}
+	if (CheckAction_Run_OnCombat(0.5f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
+	if (CheckAction_Combat_Timeout())
+	{
+		m_isSecondEvade = false;
+		return;
+	}
 }
 
 void CFSM_SakuraC::EvadeForward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_isEvade = false;
+	m_pSakura->SetIsEvade(false);
 }
 
 void CFSM_SakuraC::EvadeBackward_Init(void)
@@ -461,20 +1637,184 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	//PlaySound_Attack_RandomEvade();
+
+	m_isEvade = true;
+	m_pSakura->SetIsEvade(true);
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 {
-	if (CheckAction_Run_OnAction(0.5f))
+	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
+	{
+		m_isEvade = false;
+		m_pSakura->SetIsEvade(false);
+	}
+
+	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
+	{
+		m_isSecondEvade = true;
 		return;
-	if (CheckAction_StandBy_Timeout())
+	}
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.6f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_Combat, 0.6f))
+			return;
+	}
+	if (CheckAction_Run_OnCombat(0.6f))
+	{
+		m_isSecondEvade = false;
 		return;
+	}
+	if (CheckAction_Combat_Timeout())
+	{
+		m_isSecondEvade = false;
+		return;
+	}
 }
 
 
 void CFSM_SakuraC::EvadeBackward_End(void)
 {
-	 m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_isEvade = false;
+	m_pSakura->SetIsEvade(false);
+}
+
+void CFSM_SakuraC::Failure_Init(void)
+{
+}
+
+void CFSM_SakuraC::Failure_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Failure);
+}
+
+void CFSM_SakuraC::Failure_Update(float deltaTime)
+{
+	if (m_pDM->IsAnimationEnd())
+	{
+		ChangeState(Name_Failure_Idle);
+		return;
+	}
+}
+
+void CFSM_SakuraC::Failure_End(void)
+{
+}
+
+void CFSM_SakuraC::Failure_Idle_Init(void)
+{
+	m_pDM->SetLoopAnim(Index_Failure_Idle);
+}
+
+void CFSM_SakuraC::Failure_Idle_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Failure_Idle);
+}
+
+void CFSM_SakuraC::Failure_Idle_Update(float deltaTime)
+{
+}
+
+void CFSM_SakuraC::Failure_Idle_End(void)
+{
+}
+
+void CFSM_SakuraC::Hit_H_Init(void)
+{
+}
+
+void CFSM_SakuraC::Hit_H_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Hit_H);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	//PlaySound_Attack_RandomHit();
+}
+
+void CFSM_SakuraC::Hit_H_Update(float deltaTime)
+{
+	if (CheckAction_Evade_OnAction(Cool_HitPenalty))
+		return;
+	if (CheckAction_Run_OnAction(Cool_HitPenalty))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Hit_H_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_SakuraC::Hit_L_Init(void)
+{
+}
+
+void CFSM_SakuraC::Hit_L_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Hit_L);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+}
+
+void CFSM_SakuraC::Hit_L_Update(float deltaTime)
+{
+	if (CheckAction_Evade_OnAction(Cool_HitPenalty - 0.2f))
+		return;
+	if (CheckAction_Run_OnAction(Cool_HitPenalty))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Hit_L_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+}
+
+void CFSM_SakuraC::Idle_Init(void)
+{
+	FixRootMotionOffset(Index_Idle);
+}
+
+void CFSM_SakuraC::Idle_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Idle);
+}
+
+void CFSM_SakuraC::Idle_Update(float deltaTime)
+{
+	if (CheckAction_EvadeBackward(0.f))
+		return;
+	if (CheckAction_Run_OnAction(0.f))
+		return;
+	if (m_pSakura->GetInfernoMode())
+	{
+		if (CheckAction_ChargeQuick(0.f))
+			return;
+	}
+	else
+	{
+		if (CheckAction_Attack(Name_Attack1_StandBy, 0.f))
+			return;
+	}
+	if (CheckAction_Ultra())
+		return;
+	if (CheckAction_WeaponSkill())
+		return;
+	if (CheckAction_StandBy_Timeout(0.8f))
+		return;
+}
+
+void CFSM_SakuraC::Idle_End(void)
+{
 }
 
 void CFSM_SakuraC::SwitchIn_Init(void)
@@ -508,7 +1848,7 @@ void CFSM_SakuraC::SwitchOut_Enter(void)
 
 void CFSM_SakuraC::SwitchOut_Update(float deltaTime)
 {
-	if (m_pDM->GetAniTimeline() > 0.6)
+	if (m_pDM->GetAniTimeline() > 0.75)
 	{
 		m_pSakura->SetIsEnabled(false);
 		return;
@@ -517,6 +1857,145 @@ void CFSM_SakuraC::SwitchOut_Update(float deltaTime)
 
 void CFSM_SakuraC::SwitchOut_End(void)
 {
+}
+
+void CFSM_SakuraC::TurnAround_Init(void)
+{
+}
+
+void CFSM_SakuraC::TurnAround_Enter(void)
+{
+}
+
+void CFSM_SakuraC::TurnAround_Update(float deltaTime)
+{
+}
+
+void CFSM_SakuraC::TurnAround_End(void)
+{
+}
+
+void CFSM_SakuraC::Ultra_Init(void)
+{
+}
+
+void CFSM_SakuraC::Ultra_Enter(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pDM->ChangeAniSet(Index_Ultra);
+	ResetCheckMembers();
+
+	//PlaySound_Voice(Sound_Ult_Start_Voice);
+	//PlaySound_Effect(Sound_Ult_Start);
+	//m_pEffectMaker->CreateEffect_Ultra();
+	m_pStageControlTower->OnSakuraUltraActive();
+}
+
+void CFSM_SakuraC::Ultra_Update(float deltaTime)
+{
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.178f)
+	{
+		// 1격, 표식
+		InfernoActive_1st();
+		m_checkAttack = true;
+	}
+
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > 0.778f)
+	{
+		// 8연격
+		m_pSakura->On8SliceAttack();
+		m_pStageControlTower->OffSakuraUltraActive();
+		m_checkAttack2nd = true;
+	}
+	
+
+	if (CheckAction_StandBy_Timeout(0.9f))
+		return;
+}
+
+void CFSM_SakuraC::Ultra_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pSakura->SetInfernoMode(true);
+
+	m_pStageControlTower->OffSakuraUltraActive();
+}
+
+void CFSM_SakuraC::Victory_Init(void)
+{
+}
+
+void CFSM_SakuraC::Victory_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Victory);
+}
+
+void CFSM_SakuraC::Victory_Update(float deltaTime)
+{
+	if (m_pDM->IsAnimationEnd())
+	{
+		ChangeState(Name_Victory_Idle);
+		return;
+	}
+}
+
+void CFSM_SakuraC::Victory_End(void)
+{
+}
+
+void CFSM_SakuraC::Victory_Idle_Init(void)
+{
+	m_pDM->SetLoopAnim(Index_Victory_Idle);
+}
+
+void CFSM_SakuraC::Victory_Idle_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Victory_Idle);
+}
+
+void CFSM_SakuraC::Victory_Idle_Update(float deltaTime)
+{
+}
+
+void CFSM_SakuraC::Victory_Idle_End(void)
+{
+}
+
+void CFSM_SakuraC::WeaponSkill_Init(void)
+{
+}
+
+void CFSM_SakuraC::WeaponSkill_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Ultra);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->LookTarget();
+	ResetCheckMembers();
+}
+
+void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
+{
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
+	{
+		//PlaySound_Effect(Sound_Attack_2_Effect);
+
+		m_checkAttack = true;
+	}
+
+
+	if (CheckAction_Evade_OnAction(0.4f))
+		return;
+	if (CheckAction_Run_OnCombat(0.4f))
+		return;
+	if (CheckAction_Attack(Name_Attack1_Combat, 0.4f))
+		return;
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::WeaponSkill_End(void)
+{
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::RegisterAllState()
@@ -529,8 +2008,71 @@ void CFSM_SakuraC::RegisterAllState()
 	CreateState(CFSM_SakuraC, pState, StandBy)
 		AddState(pState, Name_StandBy);
 
+	CreateState(CFSM_SakuraC, pState, Attack1_StandBy)
+		AddState(pState, Name_Attack1_StandBy);
+
+	CreateState(CFSM_SakuraC, pState, Attack1_Combat)
+		AddState(pState, Name_Attack1_Combat);
+
+	CreateState(CFSM_SakuraC, pState, Attack2)
+		AddState(pState, Name_Attack2);
+
+	CreateState(CFSM_SakuraC, pState, Attack3)
+		AddState(pState, Name_Attack3);
+
+	CreateState(CFSM_SakuraC, pState, Attack4)
+		AddState(pState, Name_Attack4);
+
+	CreateState(CFSM_SakuraC, pState, Attack5)
+		AddState(pState, Name_Attack5);
+
+	CreateState(CFSM_SakuraC, pState, Attack6)
+		AddState(pState, Name_Attack6);
+
+	CreateState(CFSM_SakuraC, pState, Charge1)
+		AddState(pState, Name_Charge1);
+
+	CreateState(CFSM_SakuraC, pState, Charge1_AS)
+		AddState(pState, Name_Charge1_AS);
+
+	CreateState(CFSM_SakuraC, pState, Charge1_Quick)
+		AddState(pState, Name_Charge1_Quick);
+
+	CreateState(CFSM_SakuraC, pState, Combat)
+		AddState(pState, Name_Combat);
+
+	CreateState(CFSM_SakuraC, pState, CombatToStandBy)
+		AddState(pState, Name_CombatToStandBy);
+
+	CreateState(CFSM_SakuraC, pState, Die)
+		AddState(pState, Name_Die);
+
+	CreateState(CFSM_SakuraC, pState, EvadeForward)
+		AddState(pState, Name_EvadeForward);
+
+	CreateState(CFSM_SakuraC, pState, EvadeBackward)
+		AddState(pState, Name_EvadeBackward);
+
+	CreateState(CFSM_SakuraC, pState, Failure)
+		AddState(pState, Name_Failure);
+
+	CreateState(CFSM_SakuraC, pState, Failure_Idle)
+		AddState(pState, Name_Failure_Idle);
+
+	CreateState(CFSM_SakuraC, pState, Hit_H)
+		AddState(pState, Name_Hit_H);
+
+	CreateState(CFSM_SakuraC, pState, Hit_L)
+		AddState(pState, Name_Hit_L);
+
+	CreateState(CFSM_SakuraC, pState, Idle)
+		AddState(pState, Name_Idle);
+
 	CreateState(CFSM_SakuraC, pState, Run)
 		AddState(pState, Name_Run);
+
+	CreateState(CFSM_SakuraC, pState, Run_StartFromZero)
+		AddState(pState, Name_Run_StartFromZero);
 
 	CreateState(CFSM_SakuraC, pState, RunBS)
 		AddState(pState, Name_RunBS);
@@ -541,15 +2083,31 @@ void CFSM_SakuraC::RegisterAllState()
 	CreateState(CFSM_SakuraC, pState, RunStopRight)
 		AddState(pState, Name_RunStopRight);
 
-	CreateState(CFSM_SakuraC, pState, EvadeForward)
-		AddState(pState, Name_EvadeForward);
+	CreateState(CFSM_SakuraC, pState, StandBy_Back)
+		AddState(pState, Name_StandBy_Back);
 
-	CreateState(CFSM_SakuraC, pState, EvadeBackward)
-		AddState(pState, Name_EvadeBackward);
-
+	CreateState(CFSM_SakuraC, pState, Stun)
+		AddState(pState, Name_Stun);
+	
 	CreateState(CFSM_SakuraC, pState, SwitchIn)
 		AddState(pState, Name_SwitchIn);
 
 	CreateState(CFSM_SakuraC, pState, SwitchOut)
 		AddState(pState, Name_SwitchOut);
+
+	CreateState(CFSM_SakuraC, pState, TurnAround)
+		AddState(pState, Name_TurnAround);
+
+	CreateState(CFSM_SakuraC, pState, Ultra)
+		AddState(pState, Name_Ultra);
+
+	CreateState(CFSM_SakuraC, pState, Victory)
+		AddState(pState, Name_Victory);
+
+	CreateState(CFSM_SakuraC, pState, Victory_Idle)
+		AddState(pState, Name_Victory_Idle);
+
+	CreateState(CFSM_SakuraC, pState, WeaponSkill)
+		AddState(pState, Name_WeaponSkill);
+
 }

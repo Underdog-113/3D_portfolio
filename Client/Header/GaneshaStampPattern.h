@@ -35,6 +35,9 @@ private:
 	_mat m_atkMat;
 
 	_bool m_onRunStart = false;
+
+	_bool m_onEffect = false;
+	SP(Engine::CObject) m_spEffect = nullptr;
 };
 
 #endif

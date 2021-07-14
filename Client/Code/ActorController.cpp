@@ -320,6 +320,10 @@ void CActorController::RotateCurrentActor()
 		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
 		rotSpeedRate = 1.f - lerpValue;
 	}
+	else
+	{
+		m_rotSpeed = 18.f;
+	}
 
 
 	_float3 rotAxis = { 0.f, 0.f, 0.f };

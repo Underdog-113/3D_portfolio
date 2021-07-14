@@ -57,9 +57,9 @@ void CMO_Robot::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(849.f);
+	stat.SetBaseHp(9149.f);
 	stat.SetBaseAtk(73.f);
-	stat.SetBaseDef(19.f);
+	stat.SetBaseDef(34.f);
 
 	stat.SetGrowHp(12.f);
 	stat.SetGrowAtk(2.f);
