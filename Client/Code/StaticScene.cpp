@@ -85,7 +85,7 @@
 
 // Sakura
 #include "Sakura_Charge_Att.h"
-
+#include "Sakura_Trail.h"
 // Robot
 #include "RobotHookEff.h"
 #include "Robot_Plane.h"
@@ -429,6 +429,14 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
+
+	SP(CMeshEffect_Client) spSakura_Trail(CSakura_Trail::Create(true, this));
+	spSakura_Trail->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Yuan046");
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Mei_Dodge_Line");
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
+	spSakura_Trail->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+	GetObjectFactory()->AddPrototype(spSakura_Trail);
 
 	// Monster Spawn
 

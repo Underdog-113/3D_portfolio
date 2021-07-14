@@ -1920,6 +1920,9 @@
     <ClInclude Include="..\Header\ParticleShader.h">
       <Filter>04.Shader\14.ParticleShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Trail.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2795,6 +2798,9 @@
     <ClCompile Include="..\Code\ParticleShader.cpp">
       <Filter>04.Shader\14.ParticleShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Sakura_Trail.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2859,6 +2865,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FaceShader.fx">
       <Filter>04.Shader\13.FaceShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ParticleShader.fx">
+      <Filter>04.Shader\14.ParticleShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
