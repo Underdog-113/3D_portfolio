@@ -194,6 +194,11 @@
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
     <ClInclude Include="..\Header\BossStageScene.h" />
+    <ClInclude Include="..\Header\BoxBasePattern.h" />
+    <ClInclude Include="..\Header\BoxBornPattern.h" />
+    <ClInclude Include="..\Header\BoxDiePattern.h" />
+    <ClInclude Include="..\Header\BoxHitPattern.h" />
+    <ClInclude Include="..\Header\BronyaAirbornePattern.h" />
     <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
@@ -202,16 +207,35 @@
     <ClInclude Include="..\Header\BronyaFlashBang_AS.h" />
     <ClInclude Include="..\Header\BronyaHitPattern.h" />
     <ClInclude Include="..\Header\BronyaShock1Pattern.h" />
+    <ClInclude Include="..\Header\BronyaShock2Pattern.h" />
     <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
     <ClInclude Include="..\Header\BronyaSkillUltraPattern.h" />
+    <ClInclude Include="..\Header\BronyaStealthBackPattern.h" />
+    <ClInclude Include="..\Header\BronyaStunPattern.h" />
     <ClInclude Include="..\Header\BronyaThrow1Pattern.h" />
     <ClInclude Include="..\Header\Bronya_Cannon_Charge.h" />
     <ClInclude Include="..\Header\Bronya_FlashBang.h" />
+    <ClInclude Include="..\Header\Bronya_Grenade.h" />
+    <ClInclude Include="..\Header\Bronya_Grenade_Dome.h" />
+    <ClInclude Include="..\Header\Bronya_Grenade_Impact.h" />
+    <ClInclude Include="..\Header\Bronya_Grenade_TriRing.h" />
     <ClInclude Include="..\Header\Bronya_Impact.h" />
+    <ClInclude Include="..\Header\Bronya_Impact_Dome.h" />
     <ClInclude Include="..\Header\Bronya_Impact_Ring.h" />
     <ClInclude Include="..\Header\Bronya_Impact_TripleRing.h" />
+    <ClInclude Include="..\Header\Bronya_LandImpact.h" />
+    <ClInclude Include="..\Header\Bronya_LandSmoke.h" />
     <ClInclude Include="..\Header\Bronya_RandomSmoke.h" />
     <ClInclude Include="..\Header\Bronya_Shot_Smoke.h" />
+    <ClInclude Include="..\Header\Bronya_TeleportBase.h" />
+    <ClInclude Include="..\Header\Bronya_Teleport_Laser.h" />
+    <ClInclude Include="..\Header\Bronya_Teleport_Ring.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Cannon.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Impact_Smoke.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Laser.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Range.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Ring.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Wind.h" />
     <ClInclude Include="..\Header\Bronya_Weapon.h" />
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
@@ -225,15 +249,19 @@
     <ClInclude Include="..\Header\Ganesha_UpperEff.h" />
     <ClInclude Include="..\Header\KianaUIAnim.h" />
     <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\LancerAirbornePattern.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h" />
     <ClInclude Include="..\Header\Lancer_Impact.h" />
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\ParticleShader.h" />
+    <ClInclude Include="..\Header\OJ_Box.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\Sakura_Trail.h" />
     <ClInclude Include="..\Header\ScoutAirbornePattern.h" />
     <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\ScoutCircleRange.h" />
@@ -242,6 +270,7 @@
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
     <ClInclude Include="..\Header\Scout_Laser.h" />
     <ClInclude Include="..\Header\SickleAirbornePattern.h" />
+    <ClInclude Include="..\Header\SickleStunPattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SizeUpC.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
@@ -394,9 +423,9 @@
     <ClInclude Include="..\Header\SupplyWapon.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
-    <ClInclude Include="..\Header\Theresa_Ult_Boom.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_Explosion.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Fire.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Crack.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Smoke.h" />
@@ -463,6 +492,7 @@
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
+    <ClInclude Include="Bronya_Ult_Impact.h" />
     <ClInclude Include="Theresa_CrossBlade.h" />
     <ClInclude Include="Theresa_CrossBloodyHug.h" />
     <ClInclude Include="Resource.h" />
@@ -482,6 +512,11 @@
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
     <ClCompile Include="..\Code\BossStageScene.cpp" />
+    <ClCompile Include="..\Code\BoxBasePattern.cpp" />
+    <ClCompile Include="..\Code\BoxBornPattern.cpp" />
+    <ClCompile Include="..\Code\BoxDiePattern.cpp" />
+    <ClCompile Include="..\Code\BoxHitPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaAirbornePattern.cpp" />
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
@@ -490,16 +525,35 @@
     <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp" />
     <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
     <ClCompile Include="..\Code\BronyaShock1Pattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShock2Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaSkillUltraPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaStealthBackPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaStunPattern.cpp" />
     <ClCompile Include="..\Code\BronyaThrow1Pattern.cpp" />
     <ClCompile Include="..\Code\Bronya_Cannon_Charge.cpp" />
     <ClCompile Include="..\Code\Bronya_FlashBang.cpp" />
+    <ClCompile Include="..\Code\Bronya_Grenade.cpp" />
+    <ClCompile Include="..\Code\Bronya_Grenade_Dome.cpp" />
+    <ClCompile Include="..\Code\Bronya_Grenade_Impact.cpp" />
+    <ClCompile Include="..\Code\Bronya_Grenade_TriRing.cpp" />
     <ClCompile Include="..\Code\Bronya_Impact.cpp" />
+    <ClCompile Include="..\Code\Bronya_Impact_Dome.cpp" />
     <ClCompile Include="..\Code\Bronya_Impact_Ring.cpp" />
     <ClCompile Include="..\Code\Bronya_Impact_TripleRing.cpp" />
+    <ClCompile Include="..\Code\Bronya_LandImpact.cpp" />
+    <ClCompile Include="..\Code\Bronya_LandSmoke.cpp" />
     <ClCompile Include="..\Code\Bronya_RandomSmoke.cpp" />
     <ClCompile Include="..\Code\Bronya_Shot_Smoke.cpp" />
+    <ClCompile Include="..\Code\Bronya_TeleportBase.cpp" />
+    <ClCompile Include="..\Code\Bronya_Teleport_Laser.cpp" />
+    <ClCompile Include="..\Code\Bronya_Teleport_Ring.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Cannon.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Impact_Smoke.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Range.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Ring.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Wind.cpp" />
     <ClCompile Include="..\Code\Bronya_Weapon.cpp" />
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
@@ -512,15 +566,19 @@
     <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_UpperEff.cpp" />
     <ClCompile Include="..\Code\KianaUIAnim.cpp" />
+    <ClCompile Include="..\Code\LancerAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\ParticleShader.cpp" />
+    <ClCompile Include="..\Code\OJ_Box.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\Sakura_Trail.cpp" />
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\ScoutCircleRange.cpp" />
@@ -529,6 +587,7 @@
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
+    <ClCompile Include="..\Code\SickleStunPattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SizeUpC.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />
@@ -659,9 +718,9 @@
     <ClCompile Include="..\Code\SupplyWapon.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
-    <ClCompile Include="..\Code\Theresa_Ult_Boom.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Crack.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Smoke.cpp" />
@@ -727,6 +786,7 @@
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
+    <ClCompile Include="Bronya_Ult_Impact.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Theresa_CrossBlade.cpp" />
     <ClCompile Include="Theresa_CrossBloodyHug.cpp" />
@@ -810,6 +870,11 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ParticleShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

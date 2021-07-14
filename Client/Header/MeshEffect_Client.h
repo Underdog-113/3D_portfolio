@@ -33,7 +33,7 @@ protected:
 	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 		
-	GETTOR(_float, m_fAlpha, 1.f, Alpha)
+	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
 	GETTOR(_float, m_fTime, 0.f, Time)
 };
 

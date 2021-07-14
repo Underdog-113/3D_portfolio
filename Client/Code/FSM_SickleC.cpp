@@ -5,6 +5,7 @@
 
 #include "AniCtrl.h"
 #include "FSMDefine_Sickle.h"
+#include "Monster.h"
 
 CFSM_SickleC::CFSM_SickleC()
 {
@@ -479,6 +480,7 @@ void CFSM_SickleC::Stun_Init(void)
 void CFSM_SickleC::Stun_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Sickle_Stun);
+	static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnPatternShield(true);
 }
 
 void CFSM_SickleC::Stun_Update(float deltaTime)
@@ -487,6 +489,7 @@ void CFSM_SickleC::Stun_Update(float deltaTime)
 
 void CFSM_SickleC::Stun_End(void)
 {
+	static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnPatternShield(false);
 }
 
 void CFSM_SickleC::StandUp_Init(void)

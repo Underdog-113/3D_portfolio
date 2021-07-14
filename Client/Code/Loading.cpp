@@ -27,7 +27,6 @@ _uint CLoading::ThreadMain(void * pArg)
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Effect", (_uint)EDataID::Effect);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"UI", (_uint)EDataID::UI);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Stat", (_uint)EDataID::Stat);
-	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"Monster", (_uint)EDataID::Monster);
 	pLoading->m_pNextScene->GetDataStore()->AddDataSection(L"ClientObject", (_uint)EDataID::ClientObject);
 
 

@@ -178,16 +178,29 @@ void CValkyrie::OnHitbox()
 
 void CValkyrie::OffHitbox()
 {
-	//auto cols = m_spCollision->GetColliders();
-	//for (auto col : cols)
-	//{
-	//	if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
-	//	{
-	//		//col->SetIsEnabled(false);
-	//		col->SetIsTrigger(true);
-	//		break;
-	//	}
-	//}
+	auto cols = m_spCollision->GetColliders();
+	for (auto col : cols)
+	{
+		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
+		{
+			//col->SetIsEnabled(false);
+			col->SetIsTrigger(true);
+			break;
+		}
+	}
+}
+
+Engine::CCollider * CValkyrie::GetHitbox()
+{
+	auto cols = m_spCollision->GetColliders();
+	for (auto col : cols)
+	{
+		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
+		{
+			return col.get();
+		}
+	}
+	return nullptr;
 }
 
 _bool CValkyrie::CheckUltraUseable(void)

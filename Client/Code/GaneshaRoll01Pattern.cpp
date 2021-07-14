@@ -94,14 +94,17 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
+			m_onEffect = true;
 			fsm->ChangeState(Name_Ganesha_Roll01);
 			fsm->GetDM()->GetAniCtrl()->SetSpeed(0.9f);
+			return;
 		}
 	}
 
 	/************************* JumpBack */
 	// 내가 roll1 상태라면 뒤로 이동
-	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
@@ -111,7 +114,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 		m_onRunStart = false;
 	}
 	// 내가 뒤로 이동 중이라면
-	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
+	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
 	{
 		_float3 dir = tPos - mPos;
 
@@ -119,7 +123,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 		pOwner->GetTransform()->SetPosition(mPos);
 	}
 	// 내가 뒤로 이동이 끝났다면
-	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
+	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
 	{
 		++m_jumpCnt;
 
@@ -137,18 +142,30 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* AttackBall */
 	// roll 상태가 완료되면 attackball off
-	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && 0.5f <= fsm->GetDM()->GetAniTimeline())
+	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() &&
+		0.5f <= fsm->GetDM()->GetAniTimeline())
 	{
 		static_cast<CMB_Ganesha*>(pOwner)->UnActiveAttackBall();
 	}
 	// roll 상태라면
-	else if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && 0.345f <= fsm->GetDM()->GetAniTimeline())
+	else if (Name_Ganesha_Roll01 == fsm->GetCurStateString() &&
+		0.345f <= fsm->GetDM()->GetAniTimeline())
 	{
 		m_atkMat = pOwner->GetTransform()->GetWorldMatrix();
 		static_cast<CMB_Ganesha*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_atkMat, 1.5f);
 		// roll 범위의 콜라이더 크기 정함
 		static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetOffset(_float3(0.7f, 0.6f, 0.f));
-		//static_cast<Engine::CSphereCollider*>(static_cast<CMB_Ganesha*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get())->SetRadius(1.5f);
+	}
+
+	/************************* Effect */
+	if (Name_Ganesha_Roll01 == fsm->GetCurStateString() &&
+		0.44f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onEffect)
+	{
+		m_onEffect = false;
+		m_spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Impact_Eff", true);
+		m_spEffect->GetTransform()->SetPosition(mPos);
+		m_spEffect->GetTransform()->SetSize(3.f, 3.f, 3.f);
 	}
 }
 

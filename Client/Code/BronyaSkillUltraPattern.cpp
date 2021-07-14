@@ -34,8 +34,12 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 
 	// 1. 센터로 이동
 	// 2. 주먹 쥐기
-	// 3. 목표에게 run
-	// 4. 내려찍기
+	// ------------- (위는 한 번만 실행)
+	// 3. 랜덤 위치로 점프 이동
+	// 4. 목표에게 run
+	// 5. 내려찍기 or 점프 내려찍기
+	// 6. 뒤로 이동
+
 
 	/************************* Move Center */
 	if (false == m_movedCenter)
@@ -60,12 +64,40 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 		//
 		fsm->ChangeState(Name_IDLE);
 		m_onShock = true;
+
+		// 패턴을 반복할 개수를 정함 (2 ~ 4)
+		m_curCnt = GetRandRange(m_minCnt, m_maxCnt);
 	}
 	// 내가 대기 상태가 끝났다면
 	else if (true == m_onShock)
 	{
-		// 목표에게 shock1
-		m_spShock1P->Pattern(pOwner);
+		// m_curCnt가 0이 아닐 때 까지 패턴 반복
+		if (0 >= m_curCnt)
+		{
+			switch (m_curPattern)
+			{
+			case 1:
+				m_spShock1P->Pattern(pOwner);
+				break;
+			case 2:
+				m_spShock2P->Pattern(pOwner);
+				break;
+			}
+		}
+
+
+		// 이동 패턴이 끝나면 아래 코드 추가
+		// 이번에 Shock1을 실행할지 Shock2를 실행할지 정함,
+		--m_curCnt;
+		m_curPattern = GetRandRange(1, 2);
+
+		
+		for (_int i = 0; i < m_curCnt; ++i)
+		{
+			
+
+			
+		}
 	}
 } 
 
@@ -139,4 +171,9 @@ void CBronyaSkillUltraPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_Brony
 		m_lerpCurTimer = 0.f;
 		m_movedCenter = true;
 	}
+}
+
+void CBronyaSkillUltraPattern::EscapeBack(Engine::CObject * pOwner, SP(CFSM_BronyaC) spFSM)
+{
+
 }

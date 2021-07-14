@@ -34,10 +34,5 @@ private:
 	static		_uint m_s_uniqueID;
 
 private:
-	_float m_fSpawnTime;
-
-private:
-	SP(Engine::CObject) m_spDomeObject;
-
+	GETTOR(SP(Engine::CObject), m_spDomeObject, nullptr, DomeObject)
 };
-

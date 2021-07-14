@@ -58,10 +58,14 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
 	{
 		//m_onAirborne = true;
-		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetbreakGauge(0.f);
+		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 
 		m_onDie = true;
 		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+
+		//m_onStun = true;
+		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnSuperArmor(false);
+		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 	}
 
 	// born 실행 (1번만)
@@ -90,13 +94,6 @@ void CPatternMachineC::LateUpdate(SP(Engine::CComponent) spThis)
 
 void CPatternMachineC::OnDestroy()
 {
-	//__super::OnDestroy();
-
-	//for (auto& state : m_vPatterns)
-	//{
-	//	SAFE_DELETE(state);
-	//}
-	//m_vPatterns.clear();
 }
 
 void CPatternMachineC::OnEnable()
@@ -109,13 +106,14 @@ void CPatternMachineC::OnDisable()
 	__super::OnDisable();
 }
 
-void CPatternMachineC::AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit, SP(CATBPattern) pAirborne)
+void CPatternMachineC::AddNecessaryPatterns(SP(CATBPattern) pBorn, SP(CATBPattern) pDie, SP(CATBPattern) pBase, SP(CATBPattern) pHit, SP(CATBPattern) pAirborne, SP(CATBPattern) pStun)
 {
 	m_vPatterns.emplace_back(pBorn);
 	m_vPatterns.emplace_back(pDie);
 	m_vPatterns.emplace_back(pBase);
 	m_vPatterns.emplace_back(pHit);
 	m_vPatterns.emplace_back(pAirborne);
+	m_vPatterns.emplace_back(pStun);
 }
 
 void CPatternMachineC::AddPattern(SP(CATBPattern) pPattern)
@@ -143,7 +141,8 @@ void CPatternMachineC::PlayBasePattern()
 		true == m_onHitFrontL || 
 		true == m_onHitFront ||
 		true == m_onDie ||
-		true == m_onAirborne) &&
+		true == m_onAirborne ||
+		true == m_onStun) &&
 		true == m_onBase)
 	{
 		m_onBase = false;
@@ -155,7 +154,8 @@ void CPatternMachineC::PlayBasePattern()
 			false == m_onHitFront &&
 			false == m_onDie &&
 			false == m_onAirborne &&
-			false == m_onSelect)
+			false == m_onSelect &&
+			false == m_onStun)
 	{
 		m_onBase = true;
 		m_vPatterns[Pattern_Type::Base]->Pattern(m_pOwner);
@@ -182,11 +182,19 @@ void CPatternMachineC::PlayHitPattern()
 	if (true == m_onDie)
 		return;
 
-	if (true == m_onAirborne &&
+	// 스턴 상태라면
+	if (true == m_onStun &&
+		nullptr != m_vPatterns[Pattern_Type::Stun])
+	{
+		m_vPatterns[Pattern_Type::Stun]->Pattern(m_pOwner);
+	}
+	// 에어본 상태라면
+	else if (true == m_onAirborne &&
 		nullptr != m_vPatterns[Pattern_Type::Airborne])
 	{
 		m_vPatterns[Pattern_Type::Airborne]->Pattern(m_pOwner);
 	}
+	// 피격 상태라면
 	else if (true == m_onHitL ||
 			 true == m_onHitH ||
 			 true == m_onHitFrontL ||
@@ -262,6 +270,16 @@ void CPatternMachineC::PlaySelectPattern()
 		{
 			std::cout << "skip" << std::endl;
 			m_curCost += 20.f;
+			m_vIndices.pop_back();
+			return;
+		}
+	}
+	else if (50.f <= cost)
+	{
+		if ((cost - 10) > m_curCost)
+		{
+			std::cout << "skip" << std::endl;
+			m_curCost += 13.f;
 			m_vIndices.pop_back();
 			return;
 		}

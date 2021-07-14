@@ -59,6 +59,11 @@ void CBronya_Shot_Smoke::Update()
 {
 	__super::Update();
 
+	if (m_fAlpha <= 0)
+	{
+		this->SetDeleteThis(true);
+	}
+
 	m_fAlpha -= 0.5f * GET_DT;
 
 }

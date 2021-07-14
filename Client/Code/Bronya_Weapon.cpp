@@ -39,8 +39,8 @@ SP(Engine::CObject) CBronya_Weapon::MakeClone(void)
 void CBronya_Weapon::Awake(void)
 {
 	__super::Awake();
-	m_dataID = (_int)EDataID::Monster;
-	m_layerID = (_int)ELayerID::Enemy;
+	m_dataID = (_int)EDataID::Enemy;
+	m_layerID = (_int)ELayerID::Prop;
 
 	m_spMesh		= AddComponent<Engine::CMeshC>();
 	m_spMesh->SetInitTex(true);
