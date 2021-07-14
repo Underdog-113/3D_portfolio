@@ -1,24 +1,23 @@
 #pragma once
-#include "EngineFunction.h"
 
 BEGIN(Engine)
-class ENGINE_DLL CParticle
+class ENGINE_DLL CParticleSystem
 {
-public:
-	CParticle(BoundingBox* boundingBox, _uint numParticles);
-	~CParticle();
-
-	CParticle* MakeClone();
+	SMART_DELETER_REGISTER
 
 public:
-	void Awake();
-	void Start();
-	void Update();	
-	void PreRender(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer, IDirect3DBaseTexture9* pTexture);
-	void Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer);
-	void PostRender(SP(CGraphicsC) spGC);
+	CParticleSystem();
+	virtual ~CParticleSystem();
 
-	void OnDestroy();
+public:
+	virtual void Awake();
+	virtual void Start();
+	virtual void Update();
+	virtual void PreRender(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer, IDirect3DBaseTexture9* pTexture);
+	virtual void Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer);
+	virtual void PostRender(SP(CGraphicsC) spGC);
+
+	virtual void OnDestroy();
 
 public:
 	void reset();
@@ -28,7 +27,7 @@ public:
 public:
 	_bool  isPointInside(_float3& p);
 
-private:
+protected:
 	LPDIRECT3DDEVICE9       m_pGraphicDevice;
 	_float3					m_origin;            // 파티클이 시작되는 위치
 	_float                  m_emitRate;			 // 초당 파티클의 수
@@ -42,3 +41,4 @@ private:
 
 };
 END
+

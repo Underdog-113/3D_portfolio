@@ -1,58 +1,33 @@
 #include "EngineStdafx.h"
-#include "Particle.h"
-#include "PSC_Manager.h"
+#include "..\Header\ParticleSystem.h"
 
 USING(Engine)
 
-CParticle::CParticle(BoundingBox* boundingBox, _uint numParticles)	
+CParticleSystem::CParticleSystem()
 {
-	m_boundingBox = *boundingBox;
-	m_size = 0.7f;
-	m_dwvbSize = 2048;
-	m_dwvbOffset = 0;
-	m_dwvbBatchSize = 512;
-
-	for (_uint i = 0; i < numParticles; ++i)
-		Add_ParticleAttribute();
-
 }
 
-CParticle::~CParticle()
+CParticleSystem::~CParticleSystem()
 {
 	OnDestroy();
+
 }
 
-
-CParticle* CParticle::MakeClone()
+void CParticleSystem::Awake()
 {
-	return nullptr;
-}
-
-void CParticle::Awake()
-{
-
 	m_pGraphicDevice = GET_DEVICE;
+
 }
 
-void CParticle::Start()
+void CParticleSystem::Start()
 {
 }
 
-void CParticle::Update()
+void CParticleSystem::Update()
 {
-	std::list<ATTRIBUTE>::iterator iter;
-	for (iter = m_AttributeList.begin(); iter != m_AttributeList.end(); iter++)
-	{
-		iter->_position += iter->_velocity * GET_DT * 50.f;
-
-		if (isPointInside(iter->_position) == false)
-		{
-			resetParticle(&(*iter));
-		}
-	}
 }
 
-void CParticle::PreRender(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer, IDirect3DBaseTexture9* pTexture)
+void CParticleSystem::PreRender(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9 * pBuffer, IDirect3DBaseTexture9 * pTexture)
 {
 	m_pGraphicDevice->SetRenderState(D3DRS_LIGHTING, false);
 	m_pGraphicDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, true); // Point sprite can be textured and resized.
@@ -70,6 +45,7 @@ void CParticle::PreRender(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer, 
 
 	// 텍스처의 알파를 이용.
 	m_pGraphicDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	m_pGraphicDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 	m_pGraphicDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphicDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
@@ -78,7 +54,7 @@ void CParticle::PreRender(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer, 
 	m_pGraphicDevice->SetStreamSource(0, pBuffer, 0, sizeof(PARTICLE_DESC));
 }
 
-void CParticle::Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer)
+void CParticleSystem::Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9 * pBuffer)
 {
 	if (!m_AttributeList.empty())
 	{
@@ -101,7 +77,7 @@ void CParticle::Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer)
 			{
 				// 한 단계의 생존한 파티클을 다음 버텍스 버퍼 세그먼트로 복사.
 				v->_pos = iter._position;
-				v->_color = (D3DCOLOR)iter._color;
+				v->_color = (D3DXCOLOR)iter._color;
 				v++;
 				numParticlesInBatch++; // 단계 카운터 증가
 
@@ -157,15 +133,15 @@ void CParticle::Render(SP(CGraphicsC) spGC, IDirect3DVertexBuffer9* pBuffer)
 	}
 }
 
-void CParticle::PostRender(SP(CGraphicsC) spGC)
+void CParticleSystem::PostRender(SP(CGraphicsC) spGC)
 {
 	m_pGraphicDevice->SetRenderState(D3DRS_LIGHTING, true);
 	m_pGraphicDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, false);
 	m_pGraphicDevice->SetRenderState(D3DRS_POINTSCALEENABLE, false);
-	m_pGraphicDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	//m_pGraphicDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
 
-void CParticle::OnDestroy()
+void CParticleSystem::OnDestroy()
 {
 	if (!m_AttributeList.empty())
 	{
@@ -181,7 +157,7 @@ void CParticle::OnDestroy()
 
 }
 
-void CParticle::reset()
+void CParticleSystem::reset()
 {
 	for (auto iter : m_AttributeList)
 	{
@@ -189,30 +165,23 @@ void CParticle::reset()
 	}
 }
 
-void CParticle::resetParticle(ATTRIBUTE * _attribute)
+void CParticleSystem::resetParticle(ATTRIBUTE * _attribute)
 {
 	_attribute->_isAlive = true;
 
-	// get random x, z coordinate for the position of the snow flake.
 	CPSC_Manager::GetInstance()->GetRandomVector(
 		&_attribute->_position,
 		&m_boundingBox._min,
 		&m_boundingBox._max);
 
-	// no randomness for height (y-coordinate).  Snow flake
-	// always starts at the top of bounding box.
 	_attribute->_position.y = m_boundingBox._max.y;
 
-	// snow flakes fall downwards and slightly to the left
 	_attribute->_velocity.x = CPSC_Manager::GetInstance()->GetRandomFloat(0.0f, 1.0f) * -3.0f;
 	_attribute->_velocity.y = CPSC_Manager::GetInstance()->GetRandomFloat(0.0f, 1.0f) * -10.0f;
 	_attribute->_velocity.z = 0.0f;
-
-	// white snow flake
-	_attribute->_color = D3DCOLOR_XRGB(255, 255, 255);
 }
 
-void CParticle::RemoveDeadParticles()
+void CParticleSystem::RemoveDeadParticles()
 {
 	std::list<ATTRIBUTE>::iterator iter;
 
@@ -229,7 +198,17 @@ void CParticle::RemoveDeadParticles()
 	}
 }
 
-_bool CParticle::isPointInside(_float3 & p)
+void CParticleSystem::Add_ParticleAttribute()
+{
+	ATTRIBUTE attribute;
+
+	resetParticle(&attribute);
+
+	m_AttributeList.emplace_back(attribute);
+	
+}
+
+_bool CParticleSystem::isPointInside(_float3 & p)
 {
 	if (p.x >= m_boundingBox._min.x && p.y >= m_boundingBox._min.y && p.z >= m_boundingBox._min.z &&
 		p.x <= m_boundingBox._max.x && p.y <= m_boundingBox._max.y && p.z <= m_boundingBox._max.z)
@@ -240,13 +219,4 @@ _bool CParticle::isPointInside(_float3 & p)
 	{
 		return false;
 	}
-}
-
-void CParticle::Add_ParticleAttribute()
-{
-	ATTRIBUTE attribute;
-
-	resetParticle(&attribute);
-
-	m_AttributeList.emplace_back(attribute);
 }

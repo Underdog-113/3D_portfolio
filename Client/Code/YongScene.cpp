@@ -8,6 +8,8 @@
 #include "MonsterSpawnBeam.h"
 #include "ScoutMeteor.h"
 #include "Scout_Att_Range.h"
+
+
 CYongScene::CYongScene()
 {
 }
@@ -136,7 +138,8 @@ void CYongScene::Update(void)
 		/*spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
 		spObj->GetTransform()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
 
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Laser", true);
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TestParticle", true, (_int)Engine::ELayerID::Effect, L"Cube0");
+
 
 		// Bronya Smoke
 		// 일정시간 마다 호출
@@ -178,22 +181,7 @@ void CYongScene::Update(void)
 		//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog04");
 		//		break;
 		//	}			
-		//}
-
-		//Ganesha Smoke Eff
-// 		_float fX = 0;
-// 		for (_int i = 0; i < 8; ++i)
-// 		{
-// 			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
-// 
-// 			// Ganesha Pos X + fX 
-// 			spObj->GetTransform()->SetPositionX(fX);
-// 			///////////////////////////
-// 
-// 			spObj->GetTransform()->SetPositionZ(_float(rand() % 2) );			
-// 			fX += 0.5f;
-// 		}		
-		
+		//}				
 
 	}
 }

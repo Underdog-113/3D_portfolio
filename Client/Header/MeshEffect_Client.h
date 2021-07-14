@@ -1,11 +1,11 @@
 #pragma once
 class CMeshEffect_Client : public Engine::CObject
 {
+	SMART_DELETER_REGISTER
+
 protected:
 	CMeshEffect_Client();
 	virtual	~CMeshEffect_Client() = default;
-
-	SMART_DELETER_REGISTER
 
 public:
 	SP(Engine::CObject) MakeClone()PURE;

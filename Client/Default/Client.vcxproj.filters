@@ -1935,6 +1935,9 @@
     <ClInclude Include="..\Header\Sakura_Trail.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\TestParticle.h">
+      <Filter>02.Objects\03.Effect\02.Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2818,6 +2821,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Trail.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TestParticle.cpp">
+      <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
