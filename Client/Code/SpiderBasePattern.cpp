@@ -86,22 +86,19 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 	/************************* AttackBall */
 	// 공격1 상태가 완료되면 attackball off 및 오브젝트 제거
 	if (Name_Attack_1 == fsm->GetCurStateString() &&
-		0.9f <= fsm->GetDM()->GetAniTimeline())
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onAtk)
 	{
 		static_cast<CMO_Spider*>(pOwner)->UnActiveAttackBall();
-		pOwner->SetIsEnabled(false);
 		m_onEffect = true;
+		m_onAtk = true;
 
 		// effect
 		m_spSoftEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
-		//m_spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
-		//m_spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Explosion");
 		m_spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 		m_spSoftEffect->GetTransform()->SetPosition(mPos);
-		//m_spSoftEffect->GetTransform()->SetPositionX(mPos.x - 0.1f);
-		//m_spSoftEffect->GetTransform()->SetPositionY(mPos.y + 0.5f);
-		//m_spSoftEffect->GetTransform()->SetSize(11.f, 9.f, 0.f);
+		pOwner->AddComponent<Engine::CFadeInOutC>()->SetSpeed(1.5f);
 	}
 	// 공격1 상태라면
 	else if (Name_Attack_1 == fsm->GetCurStateString() &&
@@ -115,18 +112,6 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			PatternPlaySound(L"Spider_Boom.wav", pOwner);
 			m_onSound = true;
-		}
-	}
-	
-	/************************* Delete this */
-	if (Name_Attack_1 == fsm->GetCurStateString() &&
-		true == m_onEffect)
-	{
-		if (true == m_spSoftEffect->GetDeleteThis())
-		{
-			static_cast<CMO_Spider*>(pOwner)->GetStat()->SetCurHp(0.f);
-			pOwner->SetDeleteThis(true);
-			m_onEffect = false;
 		}
 	}
 }

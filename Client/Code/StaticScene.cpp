@@ -8,6 +8,7 @@
 #include "MapObject2D.h"
 #include "PhaseChanger.h"
 #include "Portal.h"
+#include "TrapObject.h"
 #pragma endregion
 
 #pragma region Prototype Headers
@@ -40,6 +41,7 @@
 #include "MB_Bronya.h"
 #include "Bronya_Weapon.h"
 #include "Monster.h"
+#include "OJ_Box.h"
 
 #include "MeshEffect_Client.h"
 #include "AttackRange_Circle.h"
@@ -83,7 +85,7 @@
 
 // Sakura
 #include "Sakura_Charge_Att.h"
-
+#include "Sakura_Trail.h"
 // Robot
 #include "RobotHookEff.h"
 #include "Robot_Plane.h"
@@ -100,6 +102,7 @@
 #include "Ganesha_Charge_Eff.h"
 #include "Ganesha_Dome.h"
 #include "Ganesha_Dome_Impact.h"
+#include "Ganesha_Impact_Eff.h"
 #include "Ganesha_SmokeEff.h"
 #include "Ganesha_UpperEff.h"
 
@@ -127,6 +130,7 @@
 #include "Bronya_Ult_Impact.h"
 #include "Bronya_Ult_Impact_Smoke.h"
 #include "Bronya_Ult_Range.h"
+#include "Bronya_Ult_Laser.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -251,6 +255,9 @@ void CStaticScene::InitMapPrototypes(void)
 
 	SP(CPortal) spPortal(CPortal::Create(true, this));
 	GetObjectFactory()->AddPrototype(spPortal);
+
+	SP(Engine::CObject) spTrap(CTrapObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTrap);
 }
 
 void CStaticScene::InitUiPrototypes(void)
@@ -308,6 +315,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
 	ADD_PROTOTYPE(spBronyaWeapon);
+
+	SP(CMonster) spOJ_Box(COJ_Box::Create(true, this));
+	GetObjectFactory()->AddPrototype(spOJ_Box);
 }
 
 void CStaticScene::InitValkyriePrototypes(void)
@@ -419,6 +429,14 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
+
+	SP(CMeshEffect_Client) spSakura_Trail(CSakura_Trail::Create(true, this));
+	spSakura_Trail->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Yuan046");
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Mei_Dodge_Line");
+	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
+	spSakura_Trail->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+	GetObjectFactory()->AddPrototype(spSakura_Trail);
 
 	// Monster Spawn
 
@@ -605,6 +623,16 @@ void CStaticScene::InitEffectPrototypes(void)
 	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
 	spGaneshaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spGaneshaSmoke);
+
+	SP(CMeshEffect_Client) spGaneshaImpact(CGanesha_Impact_Eff::Create(true, this));
+	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Impact");
+	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spGaneshaImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spGaneshaImpact);
 
 
 	// 텍스처 추가해야함
@@ -828,4 +856,11 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronya_Ult_Range->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
 	spBronya_Ult_Range->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	GetObjectFactory()->AddPrototype(spBronya_Ult_Range);
+
+	SP(CSoftEffect) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
+	spBronya_UIt_Laser->GetComponent<Engine::CGraphicsC>();
+	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
+	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
+	spBronya_UIt_Laser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 }

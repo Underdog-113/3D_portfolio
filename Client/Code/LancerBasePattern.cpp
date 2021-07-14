@@ -36,6 +36,11 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_onLerp = false;
 	}
+	if (Name_WALK_BACKWARD == fsm->GetCurStateString() &&
+		true == m_onLerp)
+	{
+		m_onLerp = false;
+	}
 
 	// 내가 공격1 상태가 아니라면 상대 추적
 	if (Name_ATTACK_1 != fsm->GetCurStateString() &&
@@ -157,8 +162,8 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_spSignEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);
 		m_spSignEffect->GetTransform()->SetPosition(mPos);
-		m_spSignEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
-		m_spSignEffect->GetTransform()->SetSize(4.f, 2.f, 2.f);
+		m_spSignEffect->GetTransform()->AddPositionY(1.3f);
+		m_spSignEffect->GetTransform()->SetSize(5.f, 3.f, 2.f);
 		m_onSignEffect = true;
 	}
 

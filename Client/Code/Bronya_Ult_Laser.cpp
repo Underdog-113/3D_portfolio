@@ -28,10 +28,11 @@ SP(Engine::CObject) CBronya_Ult_Laser::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
+	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_bBillboard = true;
 
 	return spClone;
 }
@@ -39,14 +40,21 @@ SP(Engine::CObject) CBronya_Ult_Laser::MakeClone()
 void CBronya_Ult_Laser::Awake()
 {
 	__super::Awake();
+
+	m_fAlphaWidth = 3.f;
+	m_fAlphaHeight = 2.f;
+	m_TilingX = 0;
+	m_TilingY = 0;
+	m_maxXIndex = 3;
+	m_maxYIndex = 1;
+	m_fAlpha = 1.f;
+	m_fTIme = 0.f;
 }
 
 void CBronya_Ult_Laser::Start()
 {
 	__super::Start();
 
-	m_fAlpha = 1.f;
-	m_fTime = 0.f;
 }
 
 void CBronya_Ult_Laser::FixedUpdate()
@@ -69,21 +77,26 @@ void CBronya_Ult_Laser::LateUpdate()
 
 void CBronya_Ult_Laser::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
-	pEffect->SetFloat("gAlpha", m_fAlpha);
+	m_spRectTex->PreRender(m_spGraphics, pEffect);
+
+	pEffect->SetInt("TilingX", m_TilingX);
+	pEffect->SetInt("TilingY", m_TilingY);
+	pEffect->SetFloat("gWidth", m_fAlphaWidth);
+	pEffect->SetFloat("gHeight", m_fAlphaHeight);
 
 	pEffect->CommitChanges();
 }
 
 void CBronya_Ult_Laser::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(m_spGraphics, pEffect);
+	m_spRectTex->Render(m_spGraphics, pEffect);
+
 
 }
 
 void CBronya_Ult_Laser::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(m_spGraphics, pEffect);
+	m_spRectTex->PostRender(m_spGraphics, pEffect);
 
 }
 
@@ -109,4 +122,30 @@ void CBronya_Ult_Laser::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
+}
+
+void CBronya_Ult_Laser::UpdateFrame(_float _frmSpeed)
+{
+	m_fTIme += GET_PURE_DT;
+
+	if (m_fTIme >= _frmSpeed)
+	{
+		m_TilingX++;
+
+		if (m_TilingX >= m_maxXIndex)
+		{
+			m_TilingX = 0;
+
+			if (m_TilingY >= m_maxYIndex)
+			{
+				m_TilingY = 0;
+				SetDeleteThis(true);
+			}
+			else
+			{
+				m_TilingY++;
+			}
+		}
+		m_fTIme = 0;
+	}
 }

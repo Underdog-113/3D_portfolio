@@ -31,20 +31,19 @@ SP(Engine::CObject) CRobot_Impact::MakeClone()
 	//spClone->m_spTransform->SetPositionZ(2.f);
 	//spClone->m_spTransform->SetSizeX(0.5f);
 	//spClone->m_spTransform->SetSizeY(0.2f);
-	spClone->m_spTransform->SetSizeX(3.5f);
-	spClone->m_spTransform->SetSizeY(3.2f);
+	/*spClone->m_spTransform->SetSizeX(3.5f);
+	spClone->m_spTransform->SetSizeY(3.2f);*/
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
-
+	spClone->m_bBillboard = true;
 	return spClone;
 }
 
 void CRobot_Impact::Awake()
 {
 	__super::Awake();
-	
 }
 
 void CRobot_Impact::Start()
@@ -82,15 +81,38 @@ void CRobot_Impact::LateUpdate()
 {
 	__super::LateUpdate();
 
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	D3DXMatrixIdentity(&matBill);
+
+	//matBill._11 = matView._11;
+	//matBill._13 = matView._13;
+	//matBill._31 = matView._31;
+	//matBill._33 = matView._33;
+
+	memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
+	memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_float3));
+	memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_float3));
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 }
 
 void CRobot_Impact::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
+
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+
+	pEffect->CommitChanges();
 }
 
 void CRobot_Impact::Render(LPD3DXEFFECT pEffect)
