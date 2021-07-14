@@ -75,12 +75,6 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 				= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackRange_Circle", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
 
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
-			spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
-			spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-			spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
-			spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
-			spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 			spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(mPos);
 			spMeshEffect->GetComponent<Engine::CTransformC>()->AddPositionY(0.1f);
 			spMeshEffect->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));

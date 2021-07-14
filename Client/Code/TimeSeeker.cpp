@@ -65,6 +65,7 @@ _float CTimeSeeker::GetPlayerDeltaTime()
 
 void CTimeSeeker::OnAttackImpactSlow()
 {
+	m_slowAll = true;
 	m_isAttackImpactSlow = true;
 	m_slowTimer = 0.f;
 
@@ -87,4 +88,25 @@ void CTimeSeeker::PlayAttackImpactSlow()
 			pActor->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetIsAdvanceByPure(true);
 		}
 	}
+}
+
+void CTimeSeeker::OnSakuraUltraActive()
+{
+	m_slowAll = false;
+	m_sakuraUltraSlow = true;
+
+	Engine::CFRC::GetInstance()->SetDtCoef(0.1f);
+
+	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+	pActor->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetIsAdvanceByPure(true);
+}
+
+void CTimeSeeker::OffSakuraUltraActive()
+{
+	m_sakuraUltraSlow = false;
+
+	Engine::CFRC::GetInstance()->SetDtCoef(1.f);
+	
+	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+	pActor->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetIsAdvanceByPure(false);
 }

@@ -70,7 +70,6 @@ void CGanesha_Dome::Update()
 	}
 
 	this->GetTransform()->AddSize(_float3(_size, _size, _size) );
-
 }
 
 void CGanesha_Dome::LateUpdate()
@@ -84,6 +83,8 @@ void CGanesha_Dome::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("gPlayingAnim", false);
+
+	pEffect->CommitChanges();
 }
 
 void CGanesha_Dome::Render(LPD3DXEFFECT pEffect)

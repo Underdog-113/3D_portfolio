@@ -131,7 +131,12 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
+		SP(Engine::CObject) spObj;
 
+		/*spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
+		spObj->GetTransform()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
+
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Laser", true);
 
 		// Bronya Smoke
 		// 일정시간 마다 호출

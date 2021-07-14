@@ -86,7 +86,6 @@ void CAttackBall::FixedUpdate(void)
 void CAttackBall::Update(void)
 {
 	__super::Update();
-	
 }
 
 void CAttackBall::LateUpdate(void)
@@ -111,6 +110,7 @@ void CAttackBall::OnEnable(void)
 {
 	__super::OnEnable();
 	
+	m_isHit = false;
 }
 
 void CAttackBall::OnDisable(void)
@@ -177,6 +177,7 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		dir *= m_pCollider->GetRadius();
 
 		CStageControlTower::GetInstance()->HitMonster(pValkyrie, pMonster, m_hitInfo, ballPos + dir);
+		m_isHit = true;
 	}
 	else
 	{
@@ -190,6 +191,7 @@ void CAttackBall::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 		dir *= m_pCollider->GetRadius();
 
 		CStageControlTower::GetInstance()->HitValkyrie(pMonster, pValkyrie, m_hitInfo, ballPos + dir);
+		m_isHit = true;
 	}
 }
 
