@@ -10,8 +10,11 @@ public:
 
 	void CreateEffect_Attack1();
 	void CreateEffect_Attack2();
+	void CreateEffect_Attack2_2();
 	void CreateEffect_Attack3();
 	void CreateEffect_Attack4();
+	void CreateEffect_Attack4_2();
+	void CreateEffect_Attack4_3();
 
 	void CreateEffect_Beam();
 

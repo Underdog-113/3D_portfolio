@@ -174,7 +174,7 @@ void CMO_Lancer::ApplyHitInfo(HitInfo info)
 		break;
 	}
 
-	// crowd control
+	// crowd control	
 }
 
 SP(CMO_Lancer) CMO_Lancer::Create(_bool isStatic, Engine::CScene * pScene)
