@@ -36,7 +36,7 @@ CButtonFunction::~CButtonFunction()
 void CButtonFunction::MainRoomScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CMainRoomScene::Create());
@@ -54,7 +54,7 @@ void CButtonFunction::StageSelectionScene()
 void CButtonFunction::ReadyToSortieScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"MainCanvas_Attack_4")
 	{
@@ -102,7 +102,7 @@ void CButtonFunction::PartySettingScene()
 void CButtonFunction::InventoryScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CInventoryScene::Create());
@@ -112,7 +112,7 @@ void CButtonFunction::InventoryScene()
 void CButtonFunction::Sally()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	GET_CUR_CLIENT_SCENE->FindObjectByName(L"MainCanvas")->SetIsEnabled(false);
 	GET_CUR_CLIENT_SCENE->FindObjectByName(L"PlayerIS1")->SetIsEnabled(false);
@@ -143,7 +143,7 @@ void CButtonFunction::Sally()
 void CButtonFunction::BattleEndScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
@@ -152,7 +152,7 @@ void CButtonFunction::BattleEndScene()
 void CButtonFunction::SupplyScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	CButtonManager::GetInstance()->OnDestroy();
 	GET_CUR_CLIENT_SCENE->ChangeScene(CSupplyScene::Create());

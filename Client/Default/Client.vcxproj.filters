@@ -967,6 +967,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill">
       <UniqueIdentifier>{4b6cca17-c681-4317-8722-4fff71fcb7ab}</UniqueIdentifier>
     </Filter>
+      <Filter Include="04.Shader\15.KianaBodyShader">
+        <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1941,6 +1944,9 @@
     <ClInclude Include="..\Header\Sakura_Trail.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\TestParticle.h">
       <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClInclude>
@@ -1958,6 +1964,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Sakura_WSkill_Twist_Wind.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\KianaBodyShader.h">
+        <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2843,6 +2852,9 @@
     <ClCompile Include="..\Code\Sakura_Trail.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\TestParticle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClCompile>
@@ -2860,6 +2872,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_WSkill_Twist_Wind.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClCompile>
+      <ClCompile Include="..\Code\KianaBodyShader.cpp">
+        <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2928,6 +2943,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ParticleShader.fx">
       <Filter>04.Shader\14.ParticleShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

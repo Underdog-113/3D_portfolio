@@ -283,6 +283,12 @@
     <Filter Include="00.Engine\01.Graphics\04.Light\01.CameraLight">
       <UniqueIdentifier>{373bb572-4a83-402b-a776-7c08db5556aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader">
+      <UniqueIdentifier>{2f5e9864-1c40-4435-9186-eb4abd7feef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\99.IncludeShader">
+      <UniqueIdentifier>{fec73f0d-c05f-464f-a6e5-6a24fd7ac4f3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Components\99. Develop\01. ParticleSystem\Particle">
       <UniqueIdentifier>{7a79790b-f5df-411f-9c33-4b4d762e01bd}</UniqueIdentifier>
     </Filter>
@@ -536,6 +542,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CameraLight.cpp">
       <Filter>00.Engine\01.Graphics\04.Light\01.CameraLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BlurShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SmokeParticle.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Particle</Filter>
@@ -818,6 +827,9 @@
     <ClInclude Include="..\Header\CameraLight.h">
       <Filter>00.Engine\01.Graphics\04.Light\01.CameraLight</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BlurShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\SmokeParticle.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\Particle</Filter>
     </ClInclude>
@@ -853,5 +865,13 @@
     <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BlurShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resource\Shader\IncludeShader.fxh">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\99.IncludeShader</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -277,8 +277,11 @@ void CBattleUiManager::HitCount(_float lifeTime)
 	}
 }
 
-void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property)
+void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property, _float brakeMaxValue, _float brakeValue)
 {
+	m_barkGaugeBar->SetMaxValue(brakeMaxValue);
+	m_barkGaugeBar->SetValue(brakeValue);
+
 	m_monsterStateCanvas->SetIsEnabled(true);
 	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(2);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
@@ -450,10 +453,15 @@ void CBattleUiManager::MonsterHpUp(_float value)
 	}
 }
 
-void CBattleUiManager::BreakGaugeSeeting(_float value)
+void CBattleUiManager::BreakGaugeSetting(_float value)
 {
 	m_barkGaugeBar->SetMaxValue(value);
+	m_barkGaugeBar->SetValue(value);
+}
 
+void CBattleUiManager::SetBreakGaugeValue(_float value)
+{
+	m_barkGaugeBar->SetValue(value);
 }
 
 void CBattleUiManager::BreakGaugeDown(_float value)

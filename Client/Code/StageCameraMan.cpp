@@ -392,6 +392,8 @@ void CStageCameraMan::AppendTargetCorrecting()
 
 void CStageCameraMan::AppendHorizontalCorrecting()
 {
+	
+	//D3DXQuaternionSlerp()
 	if (m_isTargeting)
 		return;
 
@@ -462,7 +464,7 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 			}
 			m_prevMoveKey = StageKey_Move_Right;
 		}
-
+		
 		_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT * m_horzCorrectingSpeed);
 		m_spCamera->SetLookAngleUp(lerpPoint);
 		m_rotateLerpStart = lerpPoint;

@@ -28,7 +28,7 @@ void CAlphaMaskShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	// Add Alpha variables to objects that use this shader.
 	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
-
+	__super::SetUpConstantTable(spGC);
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetWorldMatrix();

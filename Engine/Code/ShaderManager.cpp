@@ -13,6 +13,7 @@
 #include "CelShader.h"
 #include "WireShader.h"
 #include "MeshAlphaTestShader.h"
+#include "BlurShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -49,7 +50,7 @@ CShader* CShaderManager::GetShader(_int shaderID)
 _int CShaderManager::GetShaderID(std::wstring shaderName)
 {
 	if (shaderName == L"NoShader")
-		return -1;
+		return UNDEFINED;
 
 	for (_uint i = 0; i < m_vHashKey.size(); ++i)
 	{
@@ -75,6 +76,7 @@ void CShaderManager::InitShaderList(_uint numOfShader)
 	AddKeyAndShader(CSkyBoxShader::Create(),			L"SkyBoxShader",			(_uint)EShaderID::SkyBoxShader);
 	AddKeyAndShader(CWireShader::Create(),				L"WireShader",				(_uint)EShaderID::WireShader);
 	AddKeyAndShader(CMeshAlphaTestShader::Create(),		L"MeshAlphaTestShader",		(_uint)EShaderID::MeshAlphaTestShader);
+	AddKeyAndShader(CBlurShader::Create(),				L"BlurShader",				(_uint)EShaderID::BlurShader);
 }
 
 void CShaderManager::AddKeyAndShader(CShader * pShader, std::wstring shaderKey, _uint ID)

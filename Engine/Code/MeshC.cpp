@@ -92,7 +92,6 @@ void CMeshC::Start(SP(CComponent) spThis)
 	{
 		CDynamicMeshData* pDM = static_cast<CDynamicMeshData*>(m_pMeshData);
 		spGraphics->ResizeMaterial(pDM->GetSubsetCount());
-		m_pOwner->GetComponent<CShaderC>()->ResizeShaderPerSubset(pDM->GetSubsetCount());
 		for (auto& meshContainer : pDM->GetMeshContainers())
 		{
 			for (_uint i = 0; i < meshContainer->NumMaterials; ++i)
@@ -307,21 +306,25 @@ void CMeshC::RenderStaticPerSubset(SP(CGraphicsC) spGC)
 	SP(CShaderC) spShader = spGC->GetShader();
 	for (_ulong i = 0; i < pSM->GetSubsetCount(); ++i)
 	{
-		CShader* pCurShader = spShader->GetShaders()[i];
-		LPD3DXEFFECT pEffect = pCurShader->GetEffect();
+		std::vector<CShader*> curShaders = spShader->GetShaderPerSubset()[i];
 
-		pCurShader->SetUpConstantTable(spGC);
-		pEffect->CommitChanges();
-
-		_uint maxPass = 0;
-		pEffect->Begin(&maxPass, 0);
-		for (_uint i = 0; i < maxPass; ++i)
+		for (auto& pCurShader : curShaders)
 		{
-			pEffect->BeginPass(i);
-			pSM->GetMesh()->DrawSubset(i);
-			pEffect->EndPass();
+			LPD3DXEFFECT pEffect = pCurShader->GetEffect();
+
+			pCurShader->SetUpConstantTable(spGC);
+			pEffect->CommitChanges();
+
+			_uint maxPass = 0;
+			pEffect->Begin(&maxPass, 0);
+			for (_uint i = 0; i < maxPass; ++i)
+			{
+				pEffect->BeginPass(i);
+				pSM->GetMesh()->DrawSubset(i);
+				pEffect->EndPass();
+			}
+			pEffect->End();
 		}
-		pEffect->End();
 	}
 }
 
@@ -461,39 +464,43 @@ void CMeshC::RenderDynamicPerSubset(SP(CGraphicsC) spGC)
 		vMeshContainers[i]->pSkinInfo->UpdateSkinnedMesh(vMeshContainers[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
+		
 		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
 		{
-			CShader* pCurShader = spGC->GetShader()->GetShaderPerSubset()[vMeshContainers[i]->subsetIndexStart + j];
+			const std::vector<CShader*>& curShaders = spGC->GetShader()->GetShaderPerSubset()[vMeshContainers[i]->subsetIndexStart + j];
 
-			if (pCurShader == nullptr)
-				continue;
-
-			LPD3DXEFFECT pEffect = pCurShader->GetEffect();
-
-			pCurShader->SetUpConstantTable(spGC);
-			if (pTexData[vMeshContainers[i]->subsetIndexStart + j][0] != nullptr)
+			for (auto& pCurShader : curShaders)
 			{
-				if (!m_isEffectMesh)
+				if (pCurShader == nullptr)
+					continue;
+
+				LPD3DXEFFECT pEffect = pCurShader->GetEffect();
+
+				pCurShader->SetUpConstantTable(spGC);
+				if (pTexData[vMeshContainers[i]->subsetIndexStart + j][0] != nullptr)
 				{
-					pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->subsetIndexStart + j][0]->pTexture);
+					if (!m_isEffectMesh)
+					{
+						pEffect->SetTexture("g_BaseTexture", pTexData[vMeshContainers[i]->subsetIndexStart + j][0]->pTexture);
+					}
 				}
-			}
-			else
-			{
-				pEffect->SetTexture("g_BaseTexture", nullptr);
-			}
+				else
+				{
+					pEffect->SetTexture("g_BaseTexture", nullptr);
+				}
 
-			pEffect->CommitChanges();
+				pEffect->CommitChanges();
 
-			_uint maxPass = 0;
-			pEffect->Begin(&maxPass, 0);
-			for (_uint k = 0; k < maxPass; ++k)
-			{
-				pEffect->BeginPass(j);
-				vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
-				pEffect->EndPass();
+				_uint maxPass = 0;
+				pEffect->Begin(&maxPass, 0);
+				for (_uint k = 0; k < maxPass; ++k)
+				{
+					pEffect->BeginPass(j);
+					vMeshContainers[i]->MeshData.pMesh->DrawSubset(j);
+					pEffect->EndPass();
+				}
+				pEffect->End();
 			}
-			pEffect->End();			
 		}
 
 		vMeshContainers[i]->MeshData.pMesh->UnlockVertexBuffer();

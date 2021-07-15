@@ -26,6 +26,7 @@ void CWaterShader::Awake()
 
 void CWaterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	// 아직 스페큘러 사용안함.
 	m_fTime += GET_DT;
 

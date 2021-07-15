@@ -20,7 +20,8 @@ namespace Engine
 		AlphaBlend		= 4,
 		Particle		= 5,
 		UI				= 6,
-		NumOfRenderID	= 7
+		Blur			= 7,
+		NumOfRenderID	= 8
 	};
 
 	//Camera Mdoe
@@ -71,7 +72,8 @@ namespace Engine
 		SkyBoxShader			= 6,
 		WireShader				= 7,
 		MeshAlphaTestShader		= 8,
-		NumOfShaderID			= 9
+		BlurShader				= 9, 
+		NumOfShaderID			= 10
 	};
 
 #pragma endregion

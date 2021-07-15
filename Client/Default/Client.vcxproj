@@ -247,6 +247,8 @@
     <ClInclude Include="..\Header\Ganesha_LaserEff.h" />
     <ClInclude Include="..\Header\Ganesha_SmokeEff.h" />
     <ClInclude Include="..\Header\Ganesha_UpperEff.h" />
+    <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h" />
+    <ClInclude Include="..\Header\KianaBodyShader.h" />
     <ClInclude Include="..\Header\KianaUIAnim.h" />
     <ClInclude Include="..\Header\Kiana_Pistol.h" />
     <ClInclude Include="..\Header\LancerAirbornePattern.h" />
@@ -572,6 +574,8 @@
     <ClCompile Include="..\Code\Ganesha_LaserEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_UpperEff.cpp" />
+    <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp" />
+    <ClCompile Include="..\Code\KianaBodyShader.cpp" />
     <ClCompile Include="..\Code\KianaUIAnim.cpp" />
     <ClCompile Include="..\Code\LancerAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
@@ -863,6 +867,12 @@
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

@@ -160,8 +160,8 @@ void CChangmoScene::Update(void)
 
 	
 
-	if(Engine::IMKEY_PRESS(KEY_W))
-		FindObjectByName(L"Parent")->GetTransform()->SetForwardUp(_float3(1, 0, 0), _float3(0, 1, 1));
+	if (Engine::IMKEY_DOWN(KEY_W))
+		FindObjectByName(L"Parent")->AddComponent<Engine::CFadeInOutC>();//GetTransform()->SetForwardUp(_float3(1, 0, 0), _float3(0, 1, 1));
 	if (Engine::IMKEY_PRESS(KEY_A))
 		FindObjectByName(L"Parent")->GetTransform()->SetForwardUp(_float3(1, 0, 1), _float3(0, 1, 0));
 	if (Engine::IMKEY_PRESS(KEY_RIGHT))
