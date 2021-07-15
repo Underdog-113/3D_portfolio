@@ -60,7 +60,7 @@ public:	/* Player Action */
 
 	void Preset_Kiana_ForwardAttack();
 	void Preset_Kiana_Claw5();
-
+	void Preset_Kiana_UltraActive();
 
 	void Preset_Theresa_Charge1Impact(_float3 eventPos);
 	void Preset_Theresa_Charge2Impact(_float3 eventPos);

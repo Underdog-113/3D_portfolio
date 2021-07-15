@@ -281,6 +281,29 @@ void CCameraShake::Preset_Kiana_Claw5()
 // 	channel->m_zWave.offset = randomOffset;
 }
 
+void CCameraShake::Preset_Kiana_UltraActive()
+{
+	ShakeChannel* channel = &m_shakeChannel[Player];
+
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
+	channel->m_timer = 0.f;
+
+	channel->m_duration = 0.25f;
+	channel->m_blendInTime = 0.f;
+	channel->m_blendOutTime = 0.15f;
+
+	ResetAllMember(channel);
+
+	
+	channel->m_xWave.amplitude = 0.06f;
+	channel->m_xWave.frequency = 30.f;
+	channel->m_xWave.offset = 0.f;
+
+	channel->m_yWave.amplitude = 0.15f;
+	channel->m_yWave.frequency = 15.f;
+	channel->m_yWave.offset = 0.f;
+}
+
 void CCameraShake::Preset_Theresa_Charge1Impact(_float3 eventPos)
 {
 	ShakeChannel* channel = &m_shakeChannel[Player];

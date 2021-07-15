@@ -1489,10 +1489,17 @@ void CFSM_SakuraC::Die_Init(void)
 void CFSM_SakuraC::Die_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Die);
+	m_pDM->GetAniCtrl()->SetReplay(false);
 }
 
 void CFSM_SakuraC::Die_Update(float deltaTime)
 {
+	if (m_pDM->GetAniTimeline() > 0.95)
+	{
+		m_pSakura->SetIsEnabled(false);
+		m_pStageControlTower->BattonTouch();
+		return;
+	}
 }
 
 void CFSM_SakuraC::Die_End(void)

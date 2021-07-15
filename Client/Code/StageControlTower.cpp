@@ -510,6 +510,8 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 	if (pV->GetIsEvade())
 		return;
+	if (pV->GetIsDead())
+		return;
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	if (pMonster->GetLayerID() == (_int)ELayerID::Map)
@@ -534,6 +536,7 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 	if (isDead)
 	{
+		pV->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Die");
 		pV->SetIsDead(true);
 	}
 	else
@@ -595,6 +598,56 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
 	
+	m_pCurActor->SetIsEnabled(true);
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
+
+	m_pCameraMan->SetIsSwitching(true);
+}
+
+void CStageControlTower::BattonTouch()
+{
+	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
+	_float3 rot = m_pCurActor->GetTransform()->GetRotation();
+
+	auto wait1Member = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+	auto wait2Member = static_cast<CValkyrie*>(m_vSquad[Wait_2].get());
+
+	if (wait1Member->GetIsDead())
+	{
+		// game over
+	}
+	else if (wait2Member->GetIsDead())
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_1];
+		m_vSquad[Wait_1] = pSwapValkyrie;
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+		auto pWait1 = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+
+		m_pLinker->SwitchValkyrie_Actor(m_pCurActor->GetStat()->GetType());
+		m_pLinker->SwitchValkyrie_UpSlot(pWait1->GetStat()->GetType());
+	}
+	else
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_1];
+		m_vSquad[Wait_1] = m_vSquad[Wait_2];
+		m_vSquad[Wait_2] = pSwapValkyrie;
+
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+		auto pWait1 = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+		auto pWait2 = static_cast<CValkyrie*>(m_vSquad[Wait_2].get());
+
+		m_pLinker->SwitchValkyrie_Actor(m_pCurActor->GetStat()->GetType());
+		m_pLinker->SwitchValkyrie_UpSlot(pWait1->GetStat()->GetType());
+		m_pLinker->SwitchValkyrie_DownSlot(pWait2->GetStat()->GetType());
+	}
+	
+	m_pCurActor->GetComponent<Engine::CMeshC>()->GetRootMotion()->ResetPrevMoveAmount();
+
+	m_pCurActor->GetTransform()->SetPosition(pos);
+	m_pCurActor->GetTransform()->SetRotation(rot);
+
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 

@@ -77,6 +77,7 @@ public:		/* Battle */
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 
 	void SwitchValkyrie(Squad_Role role);
+	void BattonTouch();
 
 	void SetCameraMidTake();
 	void SetCameraFarTake();

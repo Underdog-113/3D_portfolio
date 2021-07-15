@@ -264,6 +264,9 @@
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Robot_Plane.h" />
+    <ClInclude Include="..\Header\Sakura_DamageMark.h" />
+    <ClInclude Include="..\Header\Sakura_DashShade.h" />
+    <ClInclude Include="..\Header\Sakura_Mark.h" />
     <ClInclude Include="..\Header\Sakura_Trail.h" />
     <ClInclude Include="..\Header\Sakura_WSkill_Impact.h" />
     <ClInclude Include="..\Header\Sakura_WSkill_Smoke.h" />
@@ -591,6 +594,8 @@
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Robot_Plane.cpp" />
+    <ClCompile Include="..\Code\Sakura_DamageMark.cpp" />
+    <ClCompile Include="..\Code\Sakura_DashShade.cpp" />
     <ClCompile Include="..\Code\Sakura_Trail.cpp" />
     <ClCompile Include="..\Code\Sakura_WSkill_Impact.cpp" />
     <ClCompile Include="..\Code\Sakura_WSkill_Smoke.cpp" />
@@ -805,6 +810,7 @@
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
+    <ClCompile Include="..\Header\Sakura_Mark.cpp" />
     <ClCompile Include="Bronya_Ult_Impact.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="EffectMaker_Sakura.cpp" />
