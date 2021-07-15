@@ -5,7 +5,7 @@
 
 #ifndef STDAFX_H
 #define STDAFX_H
-
+using namespace std;
 #include "targetver.h"
 
 #include <process.h>

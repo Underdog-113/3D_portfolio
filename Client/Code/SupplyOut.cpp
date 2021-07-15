@@ -12,10 +12,17 @@ CSupplyOut::~CSupplyOut()
 
 void CSupplyOut::Start()
 {
+	_int a = CSupplyManager::GetInstance()->GetOutCount();
+	_int b = CSupplyManager::GetInstance()->GetSupplyOldState();
+
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_2")->SetIsEnabled(false);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_3")->SetIsEnabled(false);
 }
 
 void CSupplyOut::End()
 {
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_2")->SetIsEnabled(true);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_3")->SetIsEnabled(true);
 }
 
 _uint CSupplyOut::FixedUpdate()
@@ -36,3 +43,9 @@ _uint CSupplyOut::LateUpdate()
 void CSupplyOut::OnDestroy(void)
 {
 }
+/*
+0은 무기
+1은 재료
+
+count만큼 소환
+*/

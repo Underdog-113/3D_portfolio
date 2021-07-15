@@ -1,7 +1,7 @@
 #include "EngineStdafx.h"
 #include "ParticleSystemC.h"
-#include "Particle.h"
 #include "PSC_Manager.h"
+#include "SmokeParticle.h"
 
 USING(Engine)
 CParticleSystemC::CParticleSystemC() :
@@ -21,6 +21,9 @@ SP(CComponent) CParticleSystemC::MakeClone(CObject * pObject)
 	SP(CParticleSystemC) spClone(new CParticleSystemC);
 	__super::InitClone(spClone, pObject);
 
+	spClone->SetvParticlesminPos(m_vParticlesminPos);
+	spClone->SetvParticlesmaxPos(m_vParticlesmaxPos);
+
 	return spClone;
 }
 
@@ -36,9 +39,20 @@ void CParticleSystemC::Awake(void)
 void CParticleSystemC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
-
-
 	CPSC_Manager::GetInstance()->AddPSC(std::dynamic_pointer_cast<CParticleSystemC>(spThis));
+
+	Engine::BoundingBox boundingBox;
+
+	boundingBox._min = _float3(m_vParticlesminPos.x, m_vParticlesminPos.y, m_vParticlesminPos.z);
+	boundingBox._max = _float3(m_vParticlesmaxPos.x, m_vParticlesmaxPos.y, m_vParticlesmaxPos.z);
+
+	CParticle* pt = new SmokeParticle(&boundingBox, 1000);
+
+	pt->Awake();
+
+	m_vParticles.emplace_back(pt);
+
+	InitParticleSetting(GET_DEVICE, L"Fx_Fire_01");
 }
 
 void CParticleSystemC::FixedUpdate(SP(CComponent) spThis)
@@ -47,20 +61,14 @@ void CParticleSystemC::FixedUpdate(SP(CComponent) spThis)
 
 void CParticleSystemC::Update(SP(CComponent) spThis)
 {
-	if (IMKEY_DOWN(KEY_X))
-	{
-
-		Engine::BoundingBox boundingBox;
-		boundingBox._min = _float3(-10.f, -10.f, -10.f);
-		boundingBox._max = _float3(10.f, 10.f, 10.f);
 		
-		CParticle* pt = new CParticle(&boundingBox, 300);
-
-		pt->Awake();
-
-		m_vParticles.emplace_back(pt);
-
-		InitParticleSetting(GET_DEVICE, L"star");
+	if (!m_vParticles.empty())
+	{
+		for (auto& iter : m_vParticles)
+		{
+			if (this->GetOwner() != nullptr)
+				iter->Update();
+		}
 	}
 }
 

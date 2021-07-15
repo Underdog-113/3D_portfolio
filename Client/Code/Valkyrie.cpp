@@ -206,10 +206,10 @@ Engine::CCollider * CValkyrie::GetHitbox()
 _bool CValkyrie::CheckUltraUseable(void)
 {
 	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
-		return false;
+		return true;
 
 	if (m_pStat->GetCurSp() < m_pStat->GetUltraCost())
-		return false;
+		return true;
 
 	return true;
 }

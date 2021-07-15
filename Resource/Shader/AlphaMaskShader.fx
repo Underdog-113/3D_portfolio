@@ -61,10 +61,10 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 
-	//if (gPlayingAnim_UpDown)
-	//{
-	//	Output.mUV = Input.mUV + float2(0.f, gSpeed);
-	//}
+	if (gPlayingAnim_UpDown)
+	{
+		Output.mUV = Input.mUV + float2(0.f, gSpeed);
+	}
 	if (gPlayingAnim)
 	{
 		Output.mUV = Input.mUV + float2(gSpeed, 0.f);
