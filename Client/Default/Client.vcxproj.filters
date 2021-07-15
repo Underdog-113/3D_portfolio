@@ -967,8 +967,14 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill">
       <UniqueIdentifier>{4b6cca17-c681-4317-8722-4fff71fcb7ab}</UniqueIdentifier>
     </Filter>
-      <Filter Include="04.Shader\15.KianaBodyShader">
-        <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
+    <Filter Include="04.Shader\15.KianaBodyShader">
+      <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_DashShade">
+      <UniqueIdentifier>{3c9698b0-c1ca-45da-8dc1-dfa3fb4c59d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff">
+      <UniqueIdentifier>{27149103-0251-4c96-a1a8-c8f7ea722f16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1965,8 +1971,17 @@
     <ClInclude Include="..\Header\Sakura_WSkill_Twist_Wind.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\KianaBodyShader.h">
-        <Filter>04.Shader\15.KianaBodyShader</Filter>
+    <ClInclude Include="..\Header\KianaBodyShader.h">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_DashShade.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_DashShade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Mark.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_DamageMark.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2873,8 +2888,17 @@
     <ClCompile Include="..\Code\Sakura_WSkill_Twist_Wind.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
     </ClCompile>
-      <ClCompile Include="..\Code\KianaBodyShader.cpp">
-        <Filter>04.Shader\15.KianaBodyShader</Filter>
+    <ClCompile Include="..\Code\KianaBodyShader.cpp">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_DashShade.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_DashShade</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Header\Sakura_Mark.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_DamageMark.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

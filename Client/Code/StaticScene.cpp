@@ -91,6 +91,9 @@
 #include "Sakura_WSkill_Start.h"
 #include "Sakura_WSkill_Twist.h"
 #include "Sakura_WSkill_Twist_Wind.h"
+#include "Sakura_DashShade.h"
+#include "Sakura_Mark.h"
+#include "Sakura_DamageMark.h"
 
 // Robot
 #include "RobotHookEff.h"
@@ -461,6 +464,18 @@ void CStaticScene::InitEffectPrototypes(void)
 	spSakura_WSill_Smoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spSakura_WSill_Smoke);
 
+	SP(CSoftEffect) spSakura_Mark(CSakura_Mark::Create(true, this));
+	spSakura_Mark->GetComponent<Engine::CTextureC>()->AddTexture(L"SakuraMark");
+	spSakura_Mark->GetComponent<Engine::CTextureC>()->AddTexture(L"SakuraMark");
+	spSakura_Mark->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spSakura_Mark);
+
+	SP(CSoftEffect) spSakura_DmgMark(CSakura_DamageMark::Create(true, this));
+	spSakura_DmgMark->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_DamageMark");
+	spSakura_DmgMark->GetComponent<Engine::CTextureC>()->AddTexture(L"Sakura_DamageMark");
+	spSakura_DmgMark->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spSakura_DmgMark);
+
 	SP(CMeshEffect_Client) spSakura_WSkill_Start(CSakura_WSkill_Start::Create(true, this));
 	spSakura_WSkill_Start->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sakura_WSill_Start");
 	spSakura_WSkill_Start->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -487,6 +502,10 @@ void CStaticScene::InitEffectPrototypes(void)
 	spSakura_WSkill_TwistWind->GetComponent<Engine::CTextureC>()->AddTexture(L"Tornado_2");
 	spSakura_WSkill_TwistWind->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spSakura_WSkill_TwistWind);
+
+	SP(Engine::CObject) spSakura_DashShade(CSakura_DashShade::Create(true, this));
+
+	GetObjectFactory()->AddPrototype(spSakura_DashShade);
 
 	// Monster Spawn
 
