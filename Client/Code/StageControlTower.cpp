@@ -41,6 +41,7 @@ void CStageControlTower::Start(CreateMode mode)
 	m_pActorController->SetControlTower(this);
 	m_pDealer->SetControlTower(this);
 
+	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(true);
 }
 
 
@@ -173,6 +174,7 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 		return false;
 
 	std::vector<SP(Engine::CObject)> filteredMonsterList;
+	_uint sakuraCounterHigh = 0;
 	int count = 0;
 	for (auto& iter : monsterList)
 	{
@@ -194,7 +196,13 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 				M_Stat* pStat = pMonster->GetStat();
 
 				if (pStat->GetSakuraCounter() > 0)
+				{
+					if (pStat->GetSakuraCounter() > sakuraCounterHigh)
+					{
+						sakuraCounterHigh = pStat->GetSakuraCounter();
+					}
 					filteredMonsterList.emplace_back(iter);
+				}
 				++count;
 			}
 				break;
@@ -229,11 +237,13 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 			if (!iter->GetIsEnabled() || iter->GetComponent<CPatternMachineC>()->GetOnDie())
 				continue;
 
-			_float3 monsterPos = iter->GetTransform()->GetPosition();
+			CMonster* pMonster = (CMonster*)iter.get();
+
+			_float3 monsterPos = pMonster->GetTransform()->GetPosition();
 			monsterPos.y = 0.f;
 
 			_float distance = D3DXVec3Length(&(valkyriePos - monsterPos));
-			if (distance < minDistance)
+			if (distance < minDistance && pMonster->GetStat()->GetSakuraCounter() == sakuraCounterHigh)
 			{
 				minDistance = distance;
 				spTarget = iter;
@@ -402,7 +412,6 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 			m_pLinker->OffMonsterInfo();
 			m_spCurTarget = nullptr;
 
-			FindTarget();
 		}
 
 	}

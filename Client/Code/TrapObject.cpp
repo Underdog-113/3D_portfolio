@@ -139,6 +139,7 @@ void CTrapObject::OnDestroy(void)
 {
 	__super::OnDestroy();
 	
+	delete m_pStat;
 }
 
 void CTrapObject::OnEnable(void)

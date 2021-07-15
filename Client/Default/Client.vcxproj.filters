@@ -1929,6 +1929,9 @@
     <ClInclude Include="..\Header\Sakura_Trail.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2809,6 +2812,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Trail.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\00.AttackTrail\Sakura_Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
