@@ -161,23 +161,13 @@ void COneStageScene::SetupMembers(void)
 }
 
 void COneStageScene::Create_ActorValkyrie(void)
-{
-	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+{	
+	SP(Engine::CObject) spStartValkyrie = m_pControlTower->SettingSquad(this);
 
-	m_spValkyrie = spKianaClone;
+	m_spValkyrie = spStartValkyrie;
 	m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
-	m_pControlTower->AddSquadMember(m_spValkyrie);
+
 	m_pControlTower->Start(CStageControlTower::ALL);
-
-	SP(Engine::CObject) spTheresaClone = ADD_CLONE(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
-
-	m_pControlTower->AddSquadMember(spTheresaClone);
-	static_cast<CValkyrie*>(spTheresaClone.get())->SetIsWait(true);
-
-	SP(Engine::CObject) spSakuraClone = ADD_CLONE(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
-
-	m_pControlTower->AddSquadMember(spSakuraClone);
-	static_cast<CValkyrie*>(spSakuraClone.get())->SetIsWait(true);
 
 }
 

@@ -51,6 +51,8 @@ public:
 	void OnDestroy();
 
 public:
+	SP(Engine::CObject) SettingSquad(Engine::CScene* pCurScene);
+	SP(Engine::CObject) CreateValkyrie(Engine::CScene* pCurScene, CValkyrieStatusData* pStatData);
 	void AddSquadMember(SP(Engine::CObject) pValkyrie);
 	void ActorControl_SetInputLock(bool lock);
 
