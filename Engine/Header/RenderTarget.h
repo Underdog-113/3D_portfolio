@@ -21,8 +21,7 @@ public:
 					void				Start					(void);
 
 public:
-	
-
+					void				InitDebugRT				(_int debugIndexX, _int debugIndexY);
 					void				SetUpOnDevice			(const _uint& index);
 					void				ReleaseOnDevice			(const _uint& index);
 					void				ClearRenderTarget		(void);
@@ -45,10 +44,17 @@ private:
 	GETTOR			(_SURFACE,				m_pCurSurface,			nullptr,		CurSurface)
 	GETTOR			(_SURFACE,				m_pOldSurface,			nullptr,		OldSurface)
 
+	GETTOR_SETTOR	(_uint,					m_index,				UNDEFINED,		Index)
+
 	GETTOR_SETTOR	(_uint,					m_width,				0,				Width)
 	GETTOR_SETTOR	(_uint,					m_height,				0,				Height)
+
 	GETTOR_SETTOR	(D3DFORMAT,				m_format,				{},				Format)
 	GETTOR_SETTOR	(D3DXCOLOR,				m_clearColor,			{},				Color)
+
+	GETTOR_SETTOR	(_bool,					m_isDebugOn,			true,			IsDebugOn)
+	GETTOR_SETTOR	(_int,					m_debugIndexX,			UNDEFINED,		DebugIndexX)
+	GETTOR_SETTOR	(_int,					m_debugIndexY,			UNDEFINED,		DebugIndexY)
 };
 
 END

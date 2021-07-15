@@ -49,7 +49,7 @@ CShader* CShaderManager::GetShader(_int shaderID)
 _int CShaderManager::GetShaderID(std::wstring shaderName)
 {
 	if (shaderName == L"NoShader")
-		return -1;
+		return UNDEFINED;
 
 	for (_uint i = 0; i < m_vHashKey.size(); ++i)
 	{

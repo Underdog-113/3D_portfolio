@@ -32,6 +32,8 @@ void CRectTexShader::Awake(void)
 
 void CRectTexShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
+	
 	if (spGC->GetRectTex()->GetIsOrtho())
 		SetupOrthoWVP(spGC);
 	else

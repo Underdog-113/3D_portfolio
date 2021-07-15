@@ -32,6 +32,7 @@ void CMeshAlphaTestShader::Awake(void)
 
 void CMeshAlphaTestShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	SetupWorldViewProj(spGC);
 
 	_float4 addColor(0, 0, 0, 0);

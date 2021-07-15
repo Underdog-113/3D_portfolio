@@ -34,6 +34,7 @@ void CLaserTrailShader::Awake()
 
 void CLaserTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetWorldMatrix();

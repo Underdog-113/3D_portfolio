@@ -34,5 +34,5 @@ void CDeferredBlendShader::Awake(void)
 
 void CDeferredBlendShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
-
+	__super::SetUpConstantTable(spGC);
 }

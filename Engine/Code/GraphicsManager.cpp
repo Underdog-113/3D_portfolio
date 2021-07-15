@@ -61,8 +61,12 @@ void CGraphicsManager::Render(void)
 {
 	RenderBase();
 
-	RenderDeferred();
+	//Deferred Start
+	RenderNonAlpha();
+	RenderBlur();
+	RenderEmissive();
 	RenderLights();
+	//Deferred End
 	RenderDeferBlend();
 
 	RenderWire();
@@ -71,12 +75,11 @@ void CGraphicsManager::Render(void)
 	RenderParticle();
 	RenderUI();
 
+	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
 	if (m_rtDebugOn == true)
-	{
-		CRenderTargetManager::GetInstance()->RenderDebugBufferMRT(L"MRT_Deferred");
-		CRenderTargetManager::GetInstance()->RenderDebugBufferMRT(L"MRT_LightAcc");
-	}
+		pRTM->RenderDebugBuffer();
 
+	pRTM->ClearRenderTargets();
 	ClearRenderList();
 }
 
@@ -223,13 +226,6 @@ void CGraphicsManager::RenderBase(void)
 	GET_DEVICE->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
-void CGraphicsManager::RenderDeferred(void)
-{
-	BEGIN_MRT(L"MRT_Deferred");
-	RenderNonAlpha();
-	END_MRT(L"MRT_Deferred");
-}
-
 void CGraphicsManager::RenderNonAlpha(void)
 {
 	for (auto& pObject : m_vRenderList[(_int)ERenderID::NonAlpha])
@@ -267,13 +263,61 @@ void CGraphicsManager::RenderNonAlpha(void)
 			}
 		}
 	}
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
+}
+
+void CGraphicsManager::RenderBlur(void)
+{
+	//for (auto& pObject : m_vRenderList[(_int)ERenderID::Blur])
+	//{
+	//	if (pObject->GetIsEnabled())
+	//	{
+	//		if (GET_MAIN_CAM->GetFrustum()->
+	//			CheckAabb(pObject->GetTransform()->GetPosition(),
+	//				pObject->GetTransform()->GetSize() / 2.f))
+	//		{
+	//			SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
+	//
+	//
+	//			const std::vector<CShader*>& vShader = spShader->GetShaders();
+	//			for (_size i = 0; i < vShader.size(); ++i)
+	//			{
+	//				LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+	//				vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+	//
+	//				pEffect->CommitChanges();
+	//				_uint maxPass = 0;
+	//				pEffect->Begin(&maxPass, 0);
+	//				for (_uint i = 0; i < maxPass; ++i)
+	//				{
+	//					pEffect->BeginPass(i);
+	//					pObject->PreRender(pEffect);
+	//					pObject->Render(pEffect);
+	//					pObject->PostRender(pEffect);
+	//					pEffect->EndPass();
+	//				}
+	//				pEffect->End();
+	//			}
+	//
+	//			pObject->RenderPerShader();
+	//		}
+	//	}
+	//}
+
+	//CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
+}
+
+void CGraphicsManager::RenderEmissive(void)
+{
 }
 
 void CGraphicsManager::RenderLights(void)
 {
-	BEGIN_MRT(L"MRT_LightAcc");
+	CShader* pLightShader = GET_SHADER((_int)EShaderID::DeferredLightShader);
+	pLightShader->SetUpConstantTable(nullptr);
 
-	LPD3DXEFFECT pEffect = GET_SHADER((_int)EShaderID::DeferredLightShader)->GetEffect();
+	LPD3DXEFFECT pEffect = pLightShader->GetEffect();
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Normal", "g_NormalTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
@@ -282,13 +326,17 @@ void CGraphicsManager::RenderLights(void)
 	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);
 	pEffect->End();
 
-	END_MRT(L"MRT_LightAcc");
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
 void CGraphicsManager::RenderDeferBlend(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	LPD3DXEFFECT pEffect = GET_SHADER((_int)EShaderID::DeferredBlendShader)->GetEffect();
+	CShader* pBlendShader = GET_SHADER((_int)EShaderID::DeferredBlendShader);
+	pBlendShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pBlendShader->GetEffect();
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
 	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");

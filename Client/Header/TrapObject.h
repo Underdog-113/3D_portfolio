@@ -14,14 +14,14 @@ public:
 	static		SP(CTrapObject)		Create				(_bool isStatic, Engine::CScene* pScene);
 
 				SP(Engine::CObject)	MakeClone			(void) override;
-		
+
 				void				Awake				(void) override;
 				void				Start				(void) override;
-		
+
 				void				FixedUpdate			(void) override;
 				void				Update				(void) override;
 				void				LateUpdate			(void) override;
-		
+
 				void				PreRender			(LPD3DXEFFECT pEffect) override;
 				void				Render				(LPD3DXEFFECT pEffect) override;
 				void				PostRender			(LPD3DXEFFECT pEffect) override;
@@ -46,7 +46,7 @@ private:
 				_bool				m_onTop = true;
 				_bool				m_onBottom = true;
 				_float				m_accTime = 0.f;
-				_float				m_maxTime = 3.f; // niddle ´ë±â ½Ã°£
+				_float				m_maxTime = 3.f; // niddle ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 				_mat				m_atkMat;
 				class CAttackBall*	m_pAttackBall = nullptr;
 
