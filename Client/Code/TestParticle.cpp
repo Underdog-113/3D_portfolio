@@ -39,8 +39,8 @@ void CTestParticle::Awake()
 {
 	__super::Awake();
 	m_spParticleSystem = AddComponent<Engine::CParticleSystemC>();
-	m_spParticleSystem->SetvParticlesminPos(_float3(-1.f, -10.f, -1.f));
-	m_spParticleSystem->SetvParticlesmaxPos(_float3(1.f, 10.f, 1.f));
+	m_spParticleSystem->SetParticlesminPos(_float3(-1.f, -10.f, -1.f));
+	m_spParticleSystem->SetParticlesmaxPos(_float3(1.f, 10.f, 1.f));
 	
 }
 
