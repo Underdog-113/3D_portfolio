@@ -206,6 +206,10 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\BlurShader.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
