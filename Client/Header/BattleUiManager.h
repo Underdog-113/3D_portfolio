@@ -64,6 +64,7 @@ public:
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
 	void BreakGaugeSeeting(_float value);
+	void SetBreakGaugeValue(_float value);
 	void BreakGaugeDown(_float value);
 	void PlayerHp(_float value);
 	void PlayerHpMax(_float value);
