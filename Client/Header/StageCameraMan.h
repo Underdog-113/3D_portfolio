@@ -11,7 +11,8 @@
 
 #define MaxChaseDistance 0.5f
 
-class CCameraShake;
+#include "CameraShake.h"
+
 class CStageCameraMan
 {
 public:
