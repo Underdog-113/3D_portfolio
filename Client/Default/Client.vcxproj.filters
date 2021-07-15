@@ -958,6 +958,12 @@
     <Filter Include="04.Shader\14.ParticleShader">
       <UniqueIdentifier>{affbd4fc-1318-4c64-b68d-3565c9c7e45e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\PhaseControl\03.BossStage">
+      <UniqueIdentifier>{11655c31-8f6e-47a8-afff-5626b01c8706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\15.KianaBodyShader">
+      <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff">
       <UniqueIdentifier>{29f4989c-8f34-4cf7-a31c-960b4e537e11}</UniqueIdentifier>
     </Filter>
@@ -1956,6 +1962,12 @@
     <ClInclude Include="..\Header\TestParticle.h">
       <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BossStagePhaseControl.h">
+      <Filter>10.ControlTower\PhaseControl\03.BossStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\KianaBodyShader.h">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Sakura_WSkill_Start.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
     </ClInclude>
@@ -2872,6 +2884,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\TestParticle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BossStagePhaseControl.cpp">
+      <Filter>10.ControlTower\PhaseControl\03.BossStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\KianaBodyShader.cpp">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_WSkill_Start.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>

@@ -40,7 +40,8 @@ SP(Engine::CObject) CSakura_WSkill_Start::MakeClone()
 void CSakura_WSkill_Start::Awake()
 {
 	__super::Awake();
-
+	_float _size = 1.5f;
+	m_spTransform->SetSize(_float3(_size, _size, _size));
 }
 
 void CSakura_WSkill_Start::Start()

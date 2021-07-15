@@ -78,3 +78,4 @@
 #include "BronyaArsenalPattern.h"
 #include "BronyaAirbornePattern.h"
 #include "BronyaStunPattern.h"
+#include "BronyaStealthBackPattern.h"

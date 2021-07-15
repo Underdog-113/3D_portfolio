@@ -93,6 +93,7 @@ private:
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
 	bool m_checkAttack = false;
+	bool m_checkUltraActive = false;
 
 	bool m_isUltraMode = false;
 	bool m_isEvade = false;

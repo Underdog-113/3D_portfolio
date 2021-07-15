@@ -60,6 +60,7 @@ void CSakura::Start(void)
 	V_WarshipStat stat;
 
 	m_pStat = new V_Sakura_Stat;
+	m_pStat->SetSkillCost(20.f);
 	m_pStat->SetUltraCost(100.f);
 	m_pStat->SetType(V_Stat::SAKURA);
 	m_pStat->SetupStatus(&stat);

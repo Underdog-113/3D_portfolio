@@ -47,11 +47,10 @@ void CSakura_WSkill_Twist::Start()
 {
 	__super::Start();
 
-	SP(Engine::CObject) spObj;
-	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Twist_Wind", true);
-	spObj->GetTransform()->SetOwner(this);
+	m_spTwistWind = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Twist_Wind", true);
+	m_spTwistWind->GetTransform()->SetOwner(this);
 
-	
+	m_fLifeTime = 0.f;
 	m_fAlpha = 1.f;
 	m_fUVSpeed = 0.f;
 }
@@ -66,9 +65,15 @@ void CSakura_WSkill_Twist::Update()
 {
 	__super::Update();
 
-	if (m_fAlpha <= 0)
+	if (m_fLifeTime >= 1.f)
 	{
-		this->SetDeleteThis(true);
+		m_fAlpha -= 1.5f * GET_PLAYER_DT;
+
+		if (m_fAlpha <= 0)
+		{
+			m_spTwistWind->SetDeleteThis(true);
+			this->SetDeleteThis(true);
+		}
 	}
 
 	if (m_fTime >= 0.5f)
@@ -79,16 +84,19 @@ void CSakura_WSkill_Twist::Update()
 		m_fTime = 0.f;
 	}
 
-	m_fTime += GET_DT;
+	m_fTime += GET_PLAYER_DT;
+	m_fLifeTime += GET_PLAYER_DT;
 
-	m_fUVSpeed += 5.f * GET_DT;
+	m_fUVSpeed += 5.f * GET_PLAYER_DT;
 
-	_float _size = 0.1f * GET_DT;
-	if(m_spTransform->GetSize().x <= 0.1f)
+	_float _size = 0.1f * GET_PLAYER_DT;
+	if(m_spTransform->GetSize().x <= 0.2f)
 		m_spTransform->AddSize(_float3(_size, _size, _size));
 
-	m_spTransform->AddPosition(m_MoveDir * GET_DT * 5.f);
-	m_spTransform->AddRotationY(-15.f * GET_DT);
+	if(m_fLifeTime < 1)
+		m_spTransform->AddPosition(m_MoveDir * GET_PLAYER_DT * 5.f);
+
+	m_spTransform->AddRotationY(-15.f * GET_PLAYER_DT);
 
 }
 

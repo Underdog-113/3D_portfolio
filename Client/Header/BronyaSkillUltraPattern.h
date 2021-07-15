@@ -3,6 +3,8 @@
 
 #include "ATBPattern.h"
 
+#include "BronyaStealthBackPattern.h"
+
 class CFSM_BronyaC;
 
 class CBronyaSkillUltraPattern : public CATBPattern
@@ -60,6 +62,7 @@ private:
 
 	SP(CBronyaShock1Pattern) m_spShock1P = CBronyaShock1Pattern::Create();
 	SP(CBronyaShock2Pattern) m_spShock2P = CBronyaShock2Pattern::Create();
+	SP(CBronyaStealthBackPattern) m_spStealthBackP = CBronyaStealthBackPattern::Create();
 };
 
 #endif

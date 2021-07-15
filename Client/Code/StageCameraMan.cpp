@@ -31,9 +31,15 @@ void CStageCameraMan::Start()
 		AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::FloorRay, _float3(0.25f, 0.25f, 0.25f)));
 	m_spPivot->AddComponent<Engine::CDebugC>();
 	m_spPivot->AddComponent<Engine::CShaderC>();
-	m_spPivot->GetComponent<Engine::CTransformC>()->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
-
+	m_spPivot->GetTransform()->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
+	m_dstPivotPos = m_spPivot->GetTransform()->GetPosition();
+	
 	m_spCamera->SetTarget(m_spPivot);
+	m_spCamera->GetTransform()->SetPosition(m_spPivot->GetTransform()->GetPosition());
+
+	m_rotateLerpStart = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetRotation().y;
+	m_rotateYDst = m_rotateLerpStart;
+	m_spCamera->SetLookAngleUp(m_rotateLerpStart);
 
 	m_isStart = true;
 
@@ -639,4 +645,9 @@ void CStageCameraMan::HideMouseCursor()
 			ShowCursor(false);
 		}
 	}
+}
+
+void CStageCameraMan::SetCamera(SP(Engine::CCamera) spCamera)
+{
+	m_spCamera = spCamera;
 }

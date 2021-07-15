@@ -34,6 +34,7 @@ class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
 class CThreeStagePhaseControl;
+class CValkyrieStatusData;
 enum class EOneStagePhase;
 enum class EThreeStagePhase;
 class CStageControlTower
@@ -51,6 +52,8 @@ public:
 	void OnDestroy();
 
 public:
+	SP(Engine::CObject) SettingSquad(Engine::CScene* pCurScene);
+	SP(Engine::CObject) CreateValkyrie(Engine::CScene* pCurScene, CValkyrieStatusData* pStatData);
 	void AddSquadMember(SP(Engine::CObject) pValkyrie);
 	void ActorControl_SetInputLock(bool lock);
 
@@ -74,6 +77,7 @@ public:		/* Battle */
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 
 	void SwitchValkyrie(Squad_Role role);
+	void BattonTouch();
 
 	void SetCameraMidTake();
 	void SetCameraFarTake();

@@ -22,9 +22,17 @@ void CBronyaStealthBackPattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
-	
-
-	
+	// 대기 상태가 끝났다면
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		fsm->ChangeState(Name_Stealth_BACK);
+	}
+	else if (Name_Stealth_BACK == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		fsm->ChangeState(Name_IDLE);
+	}
 }
 
 SP(CBronyaStealthBackPattern) CBronyaStealthBackPattern::Create()

@@ -1,9 +1,9 @@
-#ifndef TWOSTAGEPHASECONTROL_H
-#define TWOSTAGEPHASECONTROL_H
+#ifndef BOSSSTAGEPHASECONTROL_H
+#define BOSSSTAGEPHASECONTROL_H
 
 #include "PhaseControl.h"
 
-class CTwoStagePhaseControl final : public CPhaseControl
+class CBossStagePhaseControl final : public CPhaseControl
 {
 public:
 	enum class ETwoStagePhase
@@ -17,8 +17,8 @@ public:
 		NumOfPhse			
 	};
 public:
-	CTwoStagePhaseControl();
-	~CTwoStagePhaseControl();
+	CBossStagePhaseControl();
+	~CBossStagePhaseControl();
 
 public:
 					void		Update				(void) override;

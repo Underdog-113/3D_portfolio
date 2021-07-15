@@ -44,40 +44,40 @@ void CBronyaBasePattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* Choose Move Dir */
 	// 내가 대기 상태가 끝났다면
-	if (Name_IDLE == fsm->GetCurStateString() &&
-		fsm->GetDM()->IsAnimationEnd() &&
-		true == m_walkReady)
-	{
-		_int index = GetRandRange(0, 3);
+	//if (Name_IDLE == fsm->GetCurStateString() &&
+	//	fsm->GetDM()->IsAnimationEnd() &&
+	//	true == m_walkReady)
+	//{
+	//	_int index = GetRandRange(0, 3);
 
-		switch (index)
-		{
-		case 0:
-			m_curState = Name_Run;
-			break;
-		case 1:
-			m_curState = Name_DashBack;
-			break;
-		case 2:
-			m_curState = Name_Evade_Left;
-			break;
-		case 3:
-			m_curState = Name_Evade_Right;
-			break;
-		}
+	//	switch (index)
+	//	{
+	//	case 0:
+	//		m_curState = Name_Run;
+	//		break;
+	//	case 1:
+	//		m_curState = Name_DashBack;
+	//		break;
+	//	case 2:
+	//		m_curState = Name_Evade_Left;
+	//		break;
+	//	case 3:
+	//		m_curState = Name_Evade_Right;
+	//		break;
+	//	}
 
-		// 이동 상태로 변경
-		fsm->ChangeState(m_curState);
-	}
-	// 내가 이동 상태가 끝났다면
-	else if (m_curState == fsm->GetCurStateString() &&
-		fsm->GetDM()->IsAnimationEnd())
-	{
-		// 대기 상태로 변경
-		fsm->ChangeState(Name_IDLE);
-		m_walkReady = false;
-		pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
-	}
+	//	// 이동 상태로 변경
+	//	fsm->ChangeState(m_curState);
+	//}
+	//// 내가 이동 상태가 끝났다면
+	//else if (m_curState == fsm->GetCurStateString() &&
+	//	fsm->GetDM()->IsAnimationEnd())
+	//{
+	//	// 대기 상태로 변경
+	//	fsm->ChangeState(Name_IDLE);
+	//	m_walkReady = false;
+	//	pOwner->GetComponent<CPatternMachineC>()->SetOnBase(false);
+	//}
 } 
 
 SP(CBronyaBasePattern) CBronyaBasePattern::Create()

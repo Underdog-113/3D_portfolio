@@ -18,6 +18,8 @@ public:
 
 	void CreateEffect_Beam();
 
+	void CreateEffect_Cyclone();
+
 private:
 	CSakura* m_pSakura;
 

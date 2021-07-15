@@ -17,7 +17,7 @@
 #define Name_Shock_2			L"Shock_2"
 #define Name_Shock_2_Boom		L"Shock_2_Boom"
 #define Name_Shock_2_Miss		L"Shock_2_Miss"
-#define Name_Stealth_Back		L"Stealth_Back"
+#define Name_Stealth_BACK		L"Stealth_BACK"
 #define Name_Snealth			L"Snealth"
 #define Name_Summon				L"Summon"
 #define Name_Throw_1			L"Throw_1"

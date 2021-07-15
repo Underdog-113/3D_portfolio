@@ -69,6 +69,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Attack_1);
+			m_onAtk = false;
 
 			// effect
 			SP(Engine::CObject) spMeshEffect
@@ -98,7 +99,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
 		m_spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 		m_spSoftEffect->GetTransform()->SetPosition(mPos);
-		pOwner->AddComponent<Engine::CFadeInOutC>()->SetSpeed(1.5f);
+		pOwner->AddComponent<Engine::CFadeInOutC>()->SetSpeed(0.65f);
 	}
 	// 공격1 상태라면
 	else if (Name_Attack_1 == fsm->GetCurStateString() &&

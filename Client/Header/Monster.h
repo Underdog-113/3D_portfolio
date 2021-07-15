@@ -78,7 +78,7 @@ protected:
 	GETTOR				(CAttackBox*,					m_pAttackBox,		nullptr,						AttackBox)
 	GETTOR				(M_SuperArmor*,					m_pSuperArmor,		nullptr,						SuperArmor)
 	GETTOR_SETTOR		(EChannelID,					m_channelID,		EChannelID::NumOfChannelID,		ChannelID)
-	GETTOR_SETTOR		(EChannelID,					m_hitChannelID,		EChannelID::NumOfChannelID,		HitChannelID)
+	GETTOR				(EChannelID,					m_hitChannelID,		EChannelID::MONSTER_Hit,		HitChannelID)
 	GETTOR_SETTOR		(_float,						m_spawnTimer,		UNDEFINED,						SpawnTimer)
 	GETTOR_SETTOR		(SP(CPatternMachineC),			m_spPatternMachine,	nullptr,						PatternMachine)
 	GETTOR_SETTOR		(V_Stat::Valkyrie_Type,			m_valkyrieType,		V_Stat::Valkyrie_Type::KIANA,	ValkyrieType)

@@ -35,5 +35,9 @@ private:
 
 private:
 	GETTOR_SETTOR(_float3, m_MoveDir, _float3(0.f,0.f,0.f), MoveDir)
+
+private:
+	_float m_fLifeTime;
+	SP(Engine::CObject) m_spTwistWind;
 };
 

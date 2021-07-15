@@ -43,11 +43,14 @@ void CMB_Ganesha::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_GaneshaC>();
-	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), CGaneshaDiePattern::Create(), CGaneshaBasePattern::Create(), CGaneshaHitPattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
+	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), 
+		CGaneshaDiePattern::Create(), 
+		CGaneshaBasePattern::Create(), 
+		CGaneshaHitPattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 }
 
 void CMB_Ganesha::Start(void)
@@ -131,20 +134,18 @@ void CMB_Ganesha::SetBasicName(void)
 
 void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 {
-	//// attack strength
-	//switch (info.GetStrengthType())
-	//{
-	//case HitInfo::Str_Damage:
-	//	break;
-	//case HitInfo::Str_Low:
-	//	this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
-	//	break;
-	//case HitInfo::Str_High:
-	//	this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
-	//	break;
-	//case HitInfo::Str_Airborne:
-	//	break;
-	//}
+	// attack strength
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Damage:
+		break;
+	case HitInfo::Str_Low:
+		break;
+	case HitInfo::Str_High:
+		break;
+	case HitInfo::Str_Airborne:
+		break;
+	}
 }
 
 void CMB_Ganesha::MonsterDead()
