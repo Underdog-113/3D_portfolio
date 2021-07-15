@@ -265,20 +265,20 @@ void CCameraShake::Preset_Kiana_Claw5()
 
 	float randomOffset = 0.f;
 
-	randomOffset = (rand() % 100) / 100.f;
-	channel->m_xWave.amplitude = 0.04f;
-	channel->m_xWave.frequency = 20.f;
-	channel->m_xWave.offset = randomOffset;
-
-	channel->m_yWave.amplitude = 0.15f;
-	channel->m_yWave.frequency = 8.f;
-	channel->m_yWave.offset = 0.25f / channel->m_yWave.frequency;
-	channel->m_yWave.ampAxisOffset = channel->m_yWave.amplitude;
-
-	randomOffset = (rand() % 100) / 100.f;
-	channel->m_zWave.amplitude = 0.04f;
-	channel->m_zWave.frequency = 20.f;
-	channel->m_zWave.offset = randomOffset;
+// 	randomOffset = (rand() % 100) / 100.f;
+// 	channel->m_xWave.amplitude = 0.04f;
+// 	channel->m_xWave.frequency = 20.f;
+// 	channel->m_xWave.offset = randomOffset;
+// 
+// 	channel->m_yWave.amplitude = 0.15f;
+// 	channel->m_yWave.frequency = 8.f;
+// 	channel->m_yWave.offset = 0.25f / channel->m_yWave.frequency;
+// 	channel->m_yWave.ampAxisOffset = channel->m_yWave.amplitude;
+// 
+// 	randomOffset = (rand() % 100) / 100.f;
+// 	channel->m_zWave.amplitude = 0.04f;
+// 	channel->m_zWave.frequency = 20.f;
+// 	channel->m_zWave.offset = randomOffset;
 }
 
 void CCameraShake::Preset_Theresa_Charge1Impact(_float3 eventPos)

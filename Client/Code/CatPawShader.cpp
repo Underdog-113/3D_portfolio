@@ -32,7 +32,7 @@ void CCatPawShader::Awake()
 
 void CCatPawShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
-
+	__super::SetUpConstantTable(spGC);
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetWorldMatrix();

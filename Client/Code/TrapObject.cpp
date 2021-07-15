@@ -64,7 +64,7 @@ void CTrapObject::Start(void)
 		m_pStat = new M_Stat;
 		m_pStat->SetupStatus(&stat);
 	}
-	
+
 	m_spPlate = std::dynamic_pointer_cast<CDecoObject>(m_pScene->GetObjectFactory()->AddClone(L"DecoObject", true));
 	m_spPlate->SetDataID((_int)EDataID::Scene);
 	m_spPlate->GetComponent<Engine::CMeshC>()->SetMeshData(L"trap_plate");
@@ -107,20 +107,20 @@ void CTrapObject::Start(void)
 void CTrapObject::FixedUpdate(void)
 {
 	__super::FixedUpdate();
-	
+
 }
 
 void CTrapObject::Update(void)
 {
 	__super::Update();
-	
+
 	TrapAnimation();
 }
 
 void CTrapObject::LateUpdate(void)
 {
 	__super::LateUpdate();
-	
+
 }
 
 void CTrapObject::PreRender(LPD3DXEFFECT pEffect)
@@ -138,19 +138,20 @@ void CTrapObject::PostRender(LPD3DXEFFECT pEffect)
 void CTrapObject::OnDestroy(void)
 {
 	__super::OnDestroy();
-	
+
+	delete m_pStat;
 }
 
 void CTrapObject::OnEnable(void)
 {
 	__super::OnEnable();
-	
+
 }
 
 void CTrapObject::OnDisable(void)
 {
 	__super::OnDisable();
-	
+
 }
 
 void CTrapObject::SetBasicName(void)
