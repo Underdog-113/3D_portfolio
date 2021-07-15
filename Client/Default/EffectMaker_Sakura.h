@@ -20,6 +20,8 @@ public:
 
 	void CreateEffect_Cyclone();
 
+	void CreateEffect_Dash();
+
 private:
 	CSakura* m_pSakura;
 

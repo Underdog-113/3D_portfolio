@@ -46,6 +46,8 @@ private:
 	void SakuraCutting();
 	void InfernoActive_1st();
 
+	void ShadeEffect(_uint animIndex);
+
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
 	bool CheckAction_Charge(float coolTime = Cool_ChargeAttack);
@@ -111,10 +113,12 @@ private:
 	_float m_idleTimer = 0.f;
 	_float m_combatTimer = 0.f;
 	_float m_chargeEnterTimer = 0.f;
+	_float m_dashShadeTimer = 0.f;
 
 	_double m_runSoundTimer = 0;
 
 	_float3 m_targetToSakura = ZERO_VECTOR;
+
 
 
 private:

@@ -624,7 +624,10 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		m_pKiana->ActiveAttackBall(1.2f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 		
 		if (m_pKiana->GetUltraMode())
+		{
+			m_pEffectMaker->CreateEffect_Claw2();
 			PlaySound_Effect(Sound_Ult_Att_1);
+		}
 		else
 		{
 			PlaySound_Effect(Sound_Attack_2_Effect);
@@ -689,7 +692,10 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		m_pKiana->ActiveAttackBall(1.3f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
+		{
 			PlaySound_Effect(Sound_Ult_Att_1);
+			m_pEffectMaker->CreateEffect_Claw3();
+		}
 		else
 		{
 			PlaySound_Effect(Sound_Attack_3_Effect);
@@ -963,6 +969,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 		if (m_pKiana->GetUltraMode())
 		{
+			m_pEffectMaker->CreateEffect_Claw5();
 			PlaySound_Effect(Sound_Ult_Att_3);
 		}
 		else

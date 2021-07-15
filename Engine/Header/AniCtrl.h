@@ -50,6 +50,8 @@ public:
 
 					void		CreateLoopAnimArray(_uint size);
 					void		SetLoopAnim(_uint animIndex);
+
+					void		ChangeAniSet_NoBlend(_uint index);
 private:
 					_uint		FindIndexByName		(std::string const& name, LPD3DXANIMATIONSET pAS);
 					
