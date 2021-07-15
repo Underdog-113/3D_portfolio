@@ -34,6 +34,7 @@ class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
 class CThreeStagePhaseControl;
+class CValkyrieStatusData;
 enum class EOneStagePhase;
 enum class EThreeStagePhase;
 class CStageControlTower

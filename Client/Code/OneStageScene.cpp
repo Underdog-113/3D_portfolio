@@ -166,6 +166,7 @@ void COneStageScene::Create_ActorValkyrie(void)
 
 	m_spValkyrie = spStartValkyrie;
 	m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
+	m_spValkyrie->GetTransform()->AddRotationY(D3DXToRadian(-90.f));
 
 	m_pControlTower->Start(CStageControlTower::ALL);
 

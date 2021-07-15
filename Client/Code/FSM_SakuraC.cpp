@@ -15,6 +15,7 @@
 #include "StageControlTower.h"
 #include "Monster.h"
 #include "EffectMaker_Sakura.h"
+#include "Sakura_WSkill_Twist.h"
 
 CFSM_SakuraC::CFSM_SakuraC()
 {
@@ -2161,10 +2162,11 @@ void CFSM_SakuraC::WeaponSkill_Init(void)
 
 void CFSM_SakuraC::WeaponSkill_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Ultra);
+	m_pDM->ChangeAniSet(Index_WeaponSkill);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->LookTarget();
 	ResetCheckMembers();
+
 }
 
 void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
@@ -2172,6 +2174,14 @@ void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
 	{
 		//PlaySound_Effect(Sound_Attack_2_Effect);
+
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Start", true);
+		spObj->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Twist", true);
+		spObj->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+		std::dynamic_pointer_cast<CSakura_WSkill_Twist>(spObj)->SetMoveDir(m_pSakura->GetTransform()->GetForward());
 
 		m_checkAttack = true;
 	}

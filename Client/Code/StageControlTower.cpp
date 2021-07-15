@@ -148,12 +148,12 @@ SP(Engine::CObject) CStageControlTower::CreateValkyrie(Engine::CScene * pCurScen
 	{
 		SP(Engine::CObject) spKianaClone = pCurScene->GetObjectFactory()->AddClone(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
-		V_WarshipStat warshipStat;
-		warshipStat.SetLevel(pStatData->GetLevel());
-		warshipStat.SetWeaponAtk(pStatData->GetWeaponData()->GetDamage());
-		warshipStat.SetWeaponCrt(pStatData->GetWeaponData()->GetHoesim());
-
-		CValkyrie* pValkyrie = static_cast<CValkyrie*>(spKianaClone.get());
+// 		V_WarshipStat warshipStat;
+// 		warshipStat.SetLevel(pStatData->GetLevel());
+// 		warshipStat.SetWeaponAtk(pStatData->GetWeaponData()->GetDamage());
+// 		warshipStat.SetWeaponCrt(pStatData->GetWeaponData()->GetHoesim());
+// 
+// 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(spKianaClone.get());
 		//pValkyrie->Set
 
 		return spKianaClone;
