@@ -16,6 +16,11 @@ public:
 	virtual void OnDestroy(void) override;
 
 private:
+	void RandomBox();
+	void RandoBoxList();
+private:
 	_bool m_init;
+
+	_float m_timer;
 };
 

@@ -16,13 +16,17 @@ CValkyrieSelect::CValkyrieSelect()
 
 }
 
-
 CValkyrieSelect::~CValkyrieSelect()
 {
 }
 
 void CValkyrieSelect::Start()
 {
+	/*m_vValkyrie[0] = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"").get();
+	m_vValkyrie[0]->GetComponent<Engine::CTransformC>()->SetPosition(_float3(-0.31f, -0.64f, -3.5f));
+	m_vValkyrie[0]->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 110, 0));
+	m_vValkyrie[0]->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.5f, 0.5f, 0.5f));
+	m_vValkyrie[0]->SetIsEnabled(false);*/
 
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"PropertyCanvas")->SetIsEnabled(false);
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas")->SetIsEnabled(false);

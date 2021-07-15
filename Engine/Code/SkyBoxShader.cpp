@@ -33,6 +33,7 @@ void CSkyBoxShader::Awake(void)
 
 void CSkyBoxShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 	_mat worldMat, viewMat, projMat;
 

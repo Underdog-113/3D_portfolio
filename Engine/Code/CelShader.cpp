@@ -34,7 +34,7 @@ void CCelShader::Awake()
 
 void CCelShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
-
+	__super::SetUpConstantTable(spGC);
 	_mat worldMat, viewMat, projMat, WVP;
 
 	worldMat = spGC->GetTransform()->GetWorldMatrix();

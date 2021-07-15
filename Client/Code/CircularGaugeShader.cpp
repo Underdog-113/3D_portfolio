@@ -33,6 +33,7 @@ void CCircularGaugeShader::Awake(void)
 
 void CCircularGaugeShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	m_spSlider = static_cast<Engine::CSlider*>(spGC->GetOwner()->GetParent());
 
 	_float minValue = m_spSlider->GetMinValue();

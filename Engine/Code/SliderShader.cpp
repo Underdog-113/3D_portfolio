@@ -33,6 +33,7 @@ void CSliderShader::Awake(void)
 
 void CSliderShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	m_spSlider = static_cast<CSlider*>(spGC->GetOwner()->GetParent());
 
 	_float minValue = m_spSlider->GetMinValue();

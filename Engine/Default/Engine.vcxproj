@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\Header\AabbCollider.h" />
     <ClInclude Include="..\Header\AniCtrl.h" />
+    <ClInclude Include="..\Header\BlurShader.h" />
     <ClInclude Include="..\Header\BoundingVolume.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\CameraLight.h" />
@@ -116,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\AabbCollider.cpp" />
     <ClCompile Include="..\code\AniCtrl.cpp" />
+    <ClCompile Include="..\Code\BlurShader.cpp" />
     <ClCompile Include="..\Code\BoundingVolume.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraLight.cpp" />
@@ -204,6 +206,10 @@
     <ClCompile Include="..\Code\WndApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\BlurShader.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CelShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
@@ -230,6 +236,9 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WireShader.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resource\Shader\IncludeShader.fxh" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C76B4D7-D8D2-497D-A46B-BCF80ADFC40A}</ProjectGuid>

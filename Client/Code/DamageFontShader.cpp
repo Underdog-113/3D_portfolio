@@ -32,6 +32,7 @@ void CDamageFontShader::Awake(void)
 
 void CDamageFontShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	Engine::CImageObject* imageObject = static_cast<Engine::CImageObject*>(spGC->GetOwner()->GetParent());
 
 	LPDIRECT3DDEVICE9 pDevice = Engine::GET_DEVICE;

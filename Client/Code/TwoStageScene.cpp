@@ -210,7 +210,7 @@ void CTwoStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
 	{
-		CBattleUiManager::GetInstance()->MonsterState(L"", 1000, 900, 2, L"DOWN");
+		CBattleUiManager::GetInstance()->MonsterState(L"", 1000, 900, 2, L"DOWN",0,0);
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))

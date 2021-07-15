@@ -307,7 +307,7 @@ void CUILinker::MonsterInfoSet()
 	std::wstring monsterProperty = L"UP";
 	_int hpMagnification = pStat->GetHPMagnification();
 
-	m_pUIManager->MonsterState(name, maxHp, hp, hpMagnification, monsterProperty);
+	m_pUIManager->MonsterState(name, maxHp, hp, hpMagnification, monsterProperty, pStat->GetMaxBreakGauge(), pStat->GetCurBreakGauge());
 }
 
 void CUILinker::OffMonsterInfo(void)

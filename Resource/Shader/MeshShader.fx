@@ -5,6 +5,7 @@ matrix		g_matProj;
 texture		g_BaseTexture;
 
 float4		g_addColor;
+float4		g_color;
 
 bool g_timeSlow;
 
@@ -64,6 +65,7 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 	vector		vNormal : COLOR1;
 	vector		vDepth : COLOR2;
+	vector		vEmissive : COLOR3;
 };
 
 // 픽셀 쉐이더
@@ -74,12 +76,15 @@ PS_OUT		PS_MAIN(PS_IN In)
 	
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
+	Out.vEmissive = (vector)albedo.a;
 	Out.vColor = albedo;
 	Out.vColor.a = 1;
 
-	Out.vColor += g_addColor;
-	
+	//if (Out.vColor.r > Out.vColor.g && Out.vColor.r > Out.vColor.b)
+	//	Out.vColor = vector(0, 0, 0, 1);
 
+	Out.vColor += g_addColor;
+	Out.vColor = Out.vColor * g_color;
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
 	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);

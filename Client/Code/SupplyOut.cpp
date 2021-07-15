@@ -43,6 +43,17 @@ _uint CSupplyOut::LateUpdate()
 void CSupplyOut::OnDestroy(void)
 {
 }
+void CSupplyOut::RandomBox()
+{
+	m_timer -= GET_DT;
+	if (m_timer <= 0)
+	{
+		//ItemInit(L"하급 학습 칩", 50);
+	}
+}
+void CSupplyOut::RandoBoxList()
+{
+}
 /*
 0은 무기
 1은 재료

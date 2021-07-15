@@ -25,6 +25,7 @@
 #include "LaserTrailShader.h"
 #include "OutlineShader.h"
 #include "FaceShader.h"
+#include "KianaBodyShader.h"
 #pragma endregion
 
 
@@ -79,6 +80,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CLaserTrailShader::Create(), L"LaserTrail", (_uint)EShaderID::LaserShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(COutlineShader::Create(), L"OutlineShader", (_uint)EShaderID::OutlineShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFaceShader::Create(), L"FaceShader", (_uint)EShaderID::FaceShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CKianaBodyShader::Create(), L"KianaBodyShader", (_uint)EShaderID::KianaBodyShader);
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }

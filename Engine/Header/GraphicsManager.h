@@ -36,8 +36,9 @@ private:
 
 			void					RenderBase			(void);
 
-			void					RenderDeferred		(void);
 			void					RenderNonAlpha		(void);
+			void					RenderBlur			(void);
+			void					RenderEmissive		(void);
 			void					RenderLights		(void);
 			void					RenderDeferBlend	(void);
 			
