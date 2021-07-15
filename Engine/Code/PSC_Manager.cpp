@@ -3,6 +3,7 @@
 #include "ParticleSystemC.h"
 
 USING(Engine)
+
 IMPLEMENT_SINGLETON(CPSC_Manager)
 
 void CPSC_Manager::Awake()

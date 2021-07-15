@@ -58,7 +58,7 @@
     <ClInclude Include="..\Header\MeshAlphaTestShader.h" />
     <ClInclude Include="..\Header\MeshData.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
-    <ClInclude Include="..\Header\Particle.h" />
+    <ClInclude Include="..\Header\ParticleSystem.h" />
     <ClInclude Include="..\Header\ParticleSystemC.h" />
     <ClInclude Include="..\Header\PSC_Manager.h" />
     <ClInclude Include="..\Header\RectTexC.h" />
@@ -76,6 +76,7 @@
     <ClInclude Include="..\Header\SkyBoxShader.h" />
     <ClInclude Include="..\Header\Slider.h" />
     <ClInclude Include="..\Header\SliderShader.h" />
+    <ClInclude Include="..\Header\SmokeParticle.h" />
     <ClInclude Include="..\Header\State.h" />
     <ClInclude Include="..\Header\StateMachineC.h" />
     <ClInclude Include="..\Header\StaticMeshData.h" />
@@ -150,7 +151,7 @@
     <ClCompile Include="..\Code\MeshAlphaTestShader.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
-    <ClCompile Include="..\Code\Particle.cpp" />
+    <ClCompile Include="..\Code\ParticleSystem.cpp" />
     <ClCompile Include="..\Code\ParticleSystemC.cpp" />
     <ClCompile Include="..\Code\PSC_Manager.cpp" />
     <ClCompile Include="..\Code\RectTexC.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="..\Code\SkyBoxShader.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
     <ClCompile Include="..\Code\SliderShader.cpp" />
+    <ClCompile Include="..\Code\SmokeParticle.cpp" />
     <ClCompile Include="..\Code\State.cpp" />
     <ClCompile Include="..\Code\StateMachineC.cpp" />
     <ClCompile Include="..\Code\StaticMeshData.cpp" />

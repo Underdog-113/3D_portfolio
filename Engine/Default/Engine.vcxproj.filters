@@ -289,6 +289,9 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\99.IncludeShader">
       <UniqueIdentifier>{fec73f0d-c05f-464f-a6e5-6a24fd7ac4f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Components\99. Develop\01. ParticleSystem\Particle">
+      <UniqueIdentifier>{7a79790b-f5df-411f-9c33-4b4d762e01bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -495,9 +498,6 @@
     <ClCompile Include="..\Code\ParticleSystemC.cpp">
       <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Particle.cpp">
-      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\StaticMeshData.cpp">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClCompile>
@@ -545,6 +545,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\BlurShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SmokeParticle.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ParticleSystem.cpp">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -773,9 +779,6 @@
     <ClInclude Include="..\Header\ParticleSystemC.h">
       <Filter>03.Components\99. Develop\01. ParticleSystem\ParticleComponent</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Particle.h">
-      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\StaticMeshData.h">
       <Filter>00.Engine\01.Graphics\03.Mesh\00.StaticMesh</Filter>
     </ClInclude>
@@ -826,6 +829,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\BlurShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SmokeParticle.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ParticleSystem.h">
+      <Filter>03.Components\99. Develop\01. ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

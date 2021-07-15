@@ -421,6 +421,7 @@
     <ClInclude Include="..\Header\SupplyOut.h" />
     <ClInclude Include="..\Header\SupplyScene.h" />
     <ClInclude Include="..\Header\SupplyWapon.h" />
+    <ClInclude Include="..\Header\TestParticle.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
@@ -717,6 +718,7 @@
     <ClCompile Include="..\Code\SupplyOut.cpp" />
     <ClCompile Include="..\Code\SupplyScene.cpp" />
     <ClCompile Include="..\Code\SupplyWapon.cpp" />
+    <ClCompile Include="..\Code\TestParticle.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
@@ -878,6 +880,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

@@ -27,5 +27,8 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 	void SetBasicName()override;
+
+private:
+	_float m_fSpeed;
 };
 

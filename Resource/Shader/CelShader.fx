@@ -98,7 +98,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	Output.mPosition = mul(Input.mPosition, gWorldViewProjectionMatrix);
 
 	float3 objectLightPosition = mul(gWorldLightPosition, gInvWorldMatrix);
-	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition);
+	float3 lightDir = normalize(Input.mPosition.xyz - objectLightPosition.xyz);
 
 	Output.mDiffuse = dot(-lightDir, normalize(Input.mNormal));
 	Output.mUV = Input.mUV;
