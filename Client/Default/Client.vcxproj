@@ -262,6 +262,11 @@
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Robot_Plane.h" />
     <ClInclude Include="..\Header\Sakura_Trail.h" />
+    <ClInclude Include="..\Header\Sakura_WSkill_Impact.h" />
+    <ClInclude Include="..\Header\Sakura_WSkill_Smoke.h" />
+    <ClInclude Include="..\Header\Sakura_WSkill_Start.h" />
+    <ClInclude Include="..\Header\Sakura_WSkill_Twist.h" />
+    <ClInclude Include="..\Header\Sakura_WSkill_Twist_Wind.h" />
     <ClInclude Include="..\Header\ScoutAirbornePattern.h" />
     <ClInclude Include="..\Header\ScoutBall.h" />
     <ClInclude Include="..\Header\ScoutCircleRange.h" />
@@ -581,6 +586,11 @@
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Robot_Plane.cpp" />
     <ClCompile Include="..\Code\Sakura_Trail.cpp" />
+    <ClCompile Include="..\Code\Sakura_WSkill_Impact.cpp" />
+    <ClCompile Include="..\Code\Sakura_WSkill_Smoke.cpp" />
+    <ClCompile Include="..\Code\Sakura_WSkill_Start.cpp" />
+    <ClCompile Include="..\Code\Sakura_WSkill_Twist.cpp" />
+    <ClCompile Include="..\Code\Sakura_WSkill_Twist_Wind.cpp" />
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ScoutBall.cpp" />
     <ClCompile Include="..\Code\ScoutCircleRange.cpp" />

@@ -86,6 +86,12 @@
 // Sakura
 #include "Sakura_Charge_Att.h"
 #include "Sakura_Trail.h"
+#include "Sakura_WSkill_Impact.h"
+#include "Sakura_WSkill_Smoke.h"
+#include "Sakura_WSkill_Start.h"
+#include "Sakura_WSkill_Twist.h"
+#include "Sakura_WSkill_Twist_Wind.h"
+
 // Robot
 #include "RobotHookEff.h"
 #include "Robot_Plane.h"
@@ -437,6 +443,50 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spSakura_Trail(CSakura_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_Trail);
+
+
+	SP(CMeshEffect_Client) spSakura_WSkill_Impact(CSakura_WSkill_Impact::Create(true, this));
+	spSakura_WSkill_Impact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
+	spSakura_WSkill_Impact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spSakura_WSkill_Impact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_WSkill_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spSakura_WSkill_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spSakura_WSkill_Impact->GetComponent<Engine::CTextureC>()->AddTexture(L"Wave01");
+	spSakura_WSkill_Impact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	GetObjectFactory()->AddPrototype(spSakura_WSkill_Impact);
+
+	SP(CSoftEffect) spSakura_WSill_Smoke(CSakura_WSkill_Smoke::Create(true, this));
+	spSakura_WSill_Smoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke_G");
+	spSakura_WSill_Smoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke_G");
+	spSakura_WSill_Smoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spSakura_WSill_Smoke);
+
+	SP(CMeshEffect_Client) spSakura_WSkill_Start(CSakura_WSkill_Start::Create(true, this));
+	spSakura_WSkill_Start->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sakura_WSill_Start");
+	spSakura_WSkill_Start->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spSakura_WSkill_Start->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_WSkill_Start->GetComponent<Engine::CTextureC>()->AddTexture(L"WeaponSkill_Start");
+	spSakura_WSkill_Start->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
+	spSakura_WSkill_Start->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spSakura_WSkill_Start);
+
+	SP(CMeshEffect_Client) spSakura_WSkill_Twist(CSakura_WSkill_Twist::Create(true, this));
+	spSakura_WSkill_Twist->GetComponent<Engine::CMeshC>()->SetMeshData(L"Twist");
+	spSakura_WSkill_Twist->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spSakura_WSkill_Twist->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_WSkill_Twist->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
+	spSakura_WSkill_Twist->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
+	spSakura_WSkill_Twist->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spSakura_WSkill_Twist);
+
+	SP(CMeshEffect_Client) spSakura_WSkill_TwistWind(CSakura_WSkill_Twist_Wind::Create(true, this));
+	spSakura_WSkill_TwistWind->GetComponent<Engine::CMeshC>()->SetMeshData(L"Twist_Wind");
+	spSakura_WSkill_TwistWind->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spSakura_WSkill_TwistWind->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spSakura_WSkill_TwistWind->GetComponent<Engine::CTextureC>()->AddTexture(L"machineSmoke_3");
+	spSakura_WSkill_TwistWind->GetComponent<Engine::CTextureC>()->AddTexture(L"Tornado_2");
+	spSakura_WSkill_TwistWind->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spSakura_WSkill_TwistWind);
 
 	// Monster Spawn
 

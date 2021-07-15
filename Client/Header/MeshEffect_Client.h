@@ -34,6 +34,7 @@ protected:
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
 		
 	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
+	GETTOR_SETTOR(_float, m_fUVSpeed, 1.f, UVSpeed)
 	GETTOR(_float, m_fTime, 0.f, Time)
 };
 
