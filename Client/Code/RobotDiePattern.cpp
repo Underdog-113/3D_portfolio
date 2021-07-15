@@ -35,14 +35,21 @@ void CRobotDiePattern::Pattern(Engine::CObject* pOwner)
 	{
 		fsm->ChangeState(Name_Die);
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.6f);
+		m_onSound = false;
+		m_isDead = false;
 	}
 	// die 애니가 끝나면
 	else if (Name_Die == fsm->GetCurStateString() &&
-		0.95f <= fsm->GetDM()->GetAniTimeline())
+		0.95f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_isDead)
 	{
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		pOwner->AddComponent<Engine::CFadeInOutC>()->SetSpeed(0.65f);
 		static_cast<CMO_Robot*>(pOwner)->GetPlane()->SetDeleteThis(true);
-		pOwner->SetIsEnabled(false);
+		m_isDead = true;
+
+		//static_cast<CMO_Robot*>(pOwner)->GetPlane()->SetDeleteThis(true);
+		//pOwner->SetIsEnabled(false);
 	}
 
 	/************************* Effect */
@@ -61,15 +68,15 @@ void CRobotDiePattern::Pattern(Engine::CObject* pOwner)
 		m_spSoftEffect->GetTransform()->SetSize(16.f, 14.f, 0.f);
 	}
 
-	/************************* Delete this */
-	if (Name_Die == fsm->GetCurStateString() &&
-		0.97f <= fsm->GetDM()->GetAniTimeline())
-	{
-		if (true == m_spSoftEffect->GetDeleteThis())
-		{
-			pOwner->SetDeleteThis(true);
-		}
-	}
+	///************************* Delete this */
+	//if (Name_Die == fsm->GetCurStateString() &&
+	//	false == pOwner->GetIsEnabled())
+	//{
+	//	if (true == m_spSoftEffect->GetDeleteThis())
+	//	{
+	//		pOwner->SetDeleteThis(true);
+	//	}
+	//}
 }
 
 SP(CRobotDiePattern) CRobotDiePattern::Create()

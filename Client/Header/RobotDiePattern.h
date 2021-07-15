@@ -17,6 +17,7 @@ public:
 
 private:
 	SP(Engine::CObject) m_spSoftEffect;
+	_bool m_isDead = false;
 };
 
 #endif

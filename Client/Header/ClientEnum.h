@@ -80,18 +80,14 @@ enum class EShaderID
 enum class EChannelID
 {
 	MONSTER_0			= 0 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_0_Hit		= 1 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_1			= 2 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_1_Hit		= 3 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_2			= 4 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_2_Hit		= 5 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_3			= 6 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_3_Hit		= 7 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_4			= 8 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_4_Hit		= 9 + (_int)Engine::EChannelID::NumOfChannelID,
-	MONSTER_SPAWN		= 10 + (_int)Engine::EChannelID::NumOfChannelID,
-	PLAYEREFFECT_CH2	= 11 + (_int)Engine::EChannelID::NumOfChannelID,
-	NumOfChannelID		= 12 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_1			= 1 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_2			= 2 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_3			= 3 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_4			= 4 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_Hit			= 5 + (_int)Engine::EChannelID::NumOfChannelID,
+	MONSTER_SPAWN		= 6 + (_int)Engine::EChannelID::NumOfChannelID,
+	PLAYEREFFECT_CH2	= 7 + (_int)Engine::EChannelID::NumOfChannelID,
+	NumOfChannelID		= 8 + (_int)Engine::EChannelID::NumOfChannelID,
 };
 
 enum class ELoadingID

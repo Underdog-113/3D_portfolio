@@ -688,6 +688,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 			spRestrictLine->GetRectTex()->SetIsOrtho(false);
 			spRestrictLine->GetGraphics()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
 			spRestrictLine->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+			
 
 			std::wstring texKey;
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
@@ -719,6 +720,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 				std::to_wstring(j) +
 				L"_colSize", size);
 			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
+			spRestrictLine->AddComponent<Engine::CDebugC>();
 
 			spPhaseChanger->AddRestrictLine(spRestrictLine);
 		}

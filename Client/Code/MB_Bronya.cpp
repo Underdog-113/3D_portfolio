@@ -7,6 +7,7 @@
 #include "AttackBox.h"
 
 #include "Bronya_Weapon.h"
+#include "Layer.h"
 
 _uint CMB_Bronya::m_s_uniqueID = 0;
 
@@ -57,8 +58,24 @@ void CMB_Bronya::Awake(void)
 	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+
+
+	
+
+
+	//auto objs = Engine::GET_CUR_SCENE->GetLayers()[(_int)ELayerID::Enemy]->GetGameObjects();
+	//auto iter = objs.begin();
+
+	//for (; iter != objs.end(); )
+	//{
+	//	if ((*iter)->GetName() == L"Bronya_Weapon0")
+	//	{
+	//		m_spWeapon = (*iter);
+	//		break;
+	//	}
+	//}
 }
 
 void CMB_Bronya::Start(void)
@@ -97,6 +114,8 @@ void CMB_Bronya::Start(void)
 	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
 	m_pAttackBox->SetOwner(this);
 	
+	m_spWeapon = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
+
 	EquipWeapon();
 }
 
@@ -110,7 +129,7 @@ void CMB_Bronya::Update(void)
 	__super::Update();
 
 	SP(Engine::CTransformC) pWeaponTransform;
-	pWeaponTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Bronya_Weapon")->GetComponent<Engine::CTransformC>());
+	pWeaponTransform = m_spWeapon->GetTransform();
 
 
 	m_actualBoneMat = *m_pParentBoneMat;
@@ -258,15 +277,14 @@ void CMB_Bronya::EquipWeapon()
 {
 	//고쳐야함
 	SP(Engine::CTransformC) pParentTransform;
-	pParentTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CTransformC>());
+	pParentTransform = m_spTransform;
 
-	SP(Engine::CTransformC) pWeaponTransform;
-	pWeaponTransform = static_cast<SP(Engine::CTransformC)>(m_pScene->FindObjectByName(L"Bronya_Weapon")->GetComponent<Engine::CTransformC>());
+	SP(Engine::CTransformC) pWeaponTransform = m_spWeapon->GetTransform();
 
 	if (m_pParentBoneMat == nullptr)
 	{
 		Engine::CDynamicMeshData* pDM =
-			static_cast<Engine::CDynamicMeshData*>(m_pScene->FindObjectByName(L"MB_Bronya")->GetComponent<Engine::CMeshC>()->GetMeshData());
+			static_cast<Engine::CDynamicMeshData*>(m_spMesh->GetMeshData());
 
 		if (nullptr == pDM)
 		{
@@ -283,8 +301,6 @@ void CMB_Bronya::EquipWeapon()
 		}
 
 		m_pParentBoneMat = &pFrm->CombinedTransformMatrix;
-
-
 
 		m_pParentWorldMat = &pParentTransform->GetWorldMatrix();
 	}

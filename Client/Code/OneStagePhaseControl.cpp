@@ -89,6 +89,13 @@ void COneStagePhaseControl::Update(void)
 
 		// Wait Change Scene
 	case (_int)EOneStagePhase::StageResult_Idle:
+		if (false == m_isSoundChange)
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			m_isSoundChange = true;
+		}
 		break;
 	default:
 		break;
