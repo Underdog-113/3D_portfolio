@@ -82,6 +82,7 @@ public:
 
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	void BattleEnd();
+	void GameOver();
 
 	void QteOn(_int value);
 	void QteOff(_int value);

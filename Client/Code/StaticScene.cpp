@@ -115,6 +115,7 @@
 #include "Bronya_FlashBang.h"
 #include "BronyaFlashBang_AS.h"
 #include "Bronya_RandomSmoke.h"
+#include "KianaUIAnim.h"
 #include "Bronya_Impact_Dome.h"
 #include "Bronya_LandSmoke.h"
 #include "Bronya_LandImpact.h"
@@ -725,6 +726,9 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaRandomSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spBronyaRandomSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
+
+	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKianaUIAnim);
 
 	SP(CMeshEffect_Client) spBronyaLandSmoke(CBronya_LandSmoke::Create(true, this));
 	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");

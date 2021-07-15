@@ -50,11 +50,6 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 hitPoint, _fl
 		int value = Tdamage % 10;
 		Tdamage /= 10;
 
-		if (aa == 0 && value == 0)
-		{
-			continue;
-		}
-
 		if (m_disabledObjectList.empty())
 		{
 			SP(Engine::CImageObject) image =
@@ -65,8 +60,6 @@ void CDamageObjectPool::AddDamage(Engine::CObject* target, _float3 hitPoint, _fl
 			image->GetTexture()->AddTexture(L"Defalut", 0);
 			m_disabledObjectList.emplace_back(image.get());
 		}
-
-		//std::cout << damage << std::endl;
 
 		Engine::CObject* object = m_disabledObjectList.front();
 		object->GetComponent<CDamageFontC>()->AddDamageFontInit(target, hitPoint, intervalSum, upSpped, lifeTime, value, color, pos);

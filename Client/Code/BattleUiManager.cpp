@@ -167,6 +167,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_victoryCanvas->AddObjectFind();
 	m_victoryCanvas->SetIsEnabled(false);
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"GameOverCanvas").get())->AddObjectFind();
+	pScene->FindObjectByName(L"GameOverCanvas")->SetIsEnabled(false);
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	PlayerHp(m_playerHpBar[m_playerHpBar.size() - 1]->GetMaxValue());
 	PlayerSp(m_playerSpBar->GetMaxValue());
 
@@ -276,22 +280,38 @@ void CBattleUiManager::HitCount(_float lifeTime)
 void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, _int hpCount, std::wstring property)
 {
 	m_monsterStateCanvas->SetIsEnabled(true);
-	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10);
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(2);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
 	m_monsterHpCount = hpCount;
-	m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+
+	// 줄어든 카운드만큼 hp를 줄인다.
+	// 횟수도 줄인다.
+	_int age = (int)hpMax / hpCount;
+	_int count = 1;
+	while (true)
+	{
+		if (hpMax - (age * count) <= hp)
+		{
+			count--;
+			m_monsterHpCount -= count;
+			hpMax -= (age * count);
+
+			m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));
+			break;
+		}
+		count++;
+	}
 
 	_int a = (m_monsterHpCount -1) % 4;
-	std::cout << a << std::endl;
-
 	_float ThpMax = (hpMax / m_monsterHpCount) / 3;
 	_float hpMaxSum = 0;
+
 	for (auto object : m_monsterHpBar)
 	{
 		object->SetMinValue(hpMaxSum);
 		hpMaxSum += ThpMax;
 		object->SetMaxValue(hpMaxSum);
-		object->SetValue(hp / m_monsterHpCount);
+		object->SetValue(hp - (age * (m_monsterHpCount - 1)));
 		object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 		object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
 	}
@@ -302,7 +322,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		object->SetMinValue(hpMaxSum);
 		hpMaxSum += ThpMax;
 		object->SetMaxValue(hpMaxSum);
-		object->SetValue(hp / m_monsterHpCount);
+		object->SetValue(hp - (age * m_monsterHpCount - 1));
 	}
 
 	if (property == L"UP")
@@ -412,7 +432,7 @@ void CBattleUiManager::OffTargetUI()
 
 void CBattleUiManager::MonsterHpDown(_float value)
 {
-	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(10.f);
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(2.f);
 
 	for (auto object : m_monsterHpBar)
 	{
@@ -562,6 +582,11 @@ void CBattleUiManager::BattleEnd()
 		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
 }
 
+void CBattleUiManager::GameOver()
+{
+	Engine::GET_CUR_SCENE->FindObjectByName(L"GameOverCanvas")->SetIsEnabled(true);
+}
+
 void CBattleUiManager::QteOn(_int value)
 {
 	m_vQte[value]->SetIsEnabled(true);
@@ -590,14 +615,12 @@ void CBattleUiManager::monsterHpBarCheck()
 	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
 	{
 		m_monsterHpCount--;
-		std::cout << m_monsterHpCount << std::endl;
 		for (auto object : m_monsterHpBar)
 		{
 			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
-			_int a = (m_monsterHpCount - 1) % 4;
-			std::cout << a << std::endl;
-			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
-			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(a);
+			_int value = (m_monsterHpCount - 1) % 4;
+			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
+			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
 		}
 
 		for (auto object : m_monsterWhiteHpBar)

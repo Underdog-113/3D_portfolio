@@ -549,7 +549,7 @@ void CFSM_SickleC::Hit_Throw_Init(void)
 
 void CFSM_SickleC::Hit_Throw_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Sickle_Hit_Throw);
+	m_pDM->RepeatAniSet(Index_Sickle_Hit_Throw);
 }
 
 void CFSM_SickleC::Hit_Throw_Update(float deltaTime)

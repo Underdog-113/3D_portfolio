@@ -53,6 +53,7 @@ void CMO_Lancer::Start(void)
 	__super::Start();
 
 	m_spTransform->SetSize(0.6f, 0.6f, 0.6f);
+	m_spTransform->SetSlerpSpeed(PI / 2);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
@@ -174,7 +175,7 @@ void CMO_Lancer::ApplyHitInfo(HitInfo info)
 		break;
 	}
 
-	// crowd control
+	// crowd control	
 }
 
 SP(CMO_Lancer) CMO_Lancer::Create(_bool isStatic, Engine::CScene * pScene)

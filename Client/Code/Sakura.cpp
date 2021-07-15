@@ -203,7 +203,7 @@ void CSakura::Act8SliceAttack(void)
 
 	HitInfo info;
 	info.SetDamageRate(0.1f);
-	info.SetBreakDamage(1.f);
+	info.SetBreakDamage(20.f);
 	info.SetStrengthType(HitInfo::Str_Airborne);
 	info.SetCrowdControlType(HitInfo::CC_Airborne);
 
