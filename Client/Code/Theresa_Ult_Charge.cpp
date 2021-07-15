@@ -44,6 +44,7 @@ void CTheresa_Ult_Charge::Start()
 {
 	__super::Start();
 	m_fAlpha = 1.f;
+	m_fSpeed = 0.f;
 }
 
 void CTheresa_Ult_Charge::FixedUpdate()
@@ -61,6 +62,7 @@ void CTheresa_Ult_Charge::Update()
 	}
 
 	m_fAlpha -= 0.5f * GET_DT;
+	m_fSpeed += 3.4f * GET_DT;
 }
 
 void CTheresa_Ult_Charge::LateUpdate()
@@ -72,7 +74,10 @@ void CTheresa_Ult_Charge::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetFloat("gSpeed", m_fSpeed);
 	pEffect->SetBool("gPlayingAnim", true);
+
+	pEffect->CommitChanges();
 }
 
 void CTheresa_Ult_Charge::Render(LPD3DXEFFECT pEffect)

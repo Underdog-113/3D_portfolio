@@ -270,7 +270,10 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 		}
 	}
 
-
+	if (m_spCurTarget)
+	{
+		CMonster* pMon = (CMonster*)m_spCurTarget.get();
+	}
 
 	if (m_mode == WithoutUI)
 		return false;

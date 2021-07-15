@@ -17,6 +17,8 @@ void CSupplyManager::Start(Engine::CScene * pScene)
 	pScene->FindObjectByName(L"MainCanvas_Text_3")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetGold()));
 	pScene->FindObjectByName(L"MainCanvas_Text_4")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetDiamond()));
 
+	pScene->FindObjectByName(L"OutCanvas")->SetIsEnabled(false);
+	pScene->FindObjectByName(L"SelectCanvas")->SetIsEnabled(false);
 }
 
 void CSupplyManager::Update(void)
@@ -32,19 +34,25 @@ void CSupplyManager::OnDestroy(void)
 	}
 }
 
-void CSupplyManager::WeaponFSM()
+void CSupplyManager::SupplyWeaponFSM()
 {
 	ChangeFSM(STATE::Weapon);
 }
 
-void CSupplyManager::ItemFSM()
+void CSupplyManager::SupplyItemFSM()
 {
 	ChangeFSM(STATE::Item);
 }
 
-void CSupplyManager::OutFSM()
+void CSupplyManager::SupplyOutFSM()
 {
+	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(false);
 	ChangeFSM(STATE::Out);
+}
+
+void CSupplyManager::SelectCanvasOff()
+{
+	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(false);
 }
 
 void CSupplyManager::ChangeFSM(STATE state)

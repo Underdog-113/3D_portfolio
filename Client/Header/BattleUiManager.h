@@ -64,6 +64,7 @@ public:
 	void MonsterHpDown(_float value);
 	void MonsterHpUp(_float value);
 	void BreakGaugeSeeting(_float value);
+	void SetBreakGaugeValue(_float value);
 	void BreakGaugeDown(_float value);
 	void PlayerHp(_float value);
 	void PlayerHpMax(_float value);
@@ -82,6 +83,7 @@ public:
 
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	void BattleEnd();
+	void GameOver();
 
 	void QteOn(_int value);
 	void QteOff(_int value);

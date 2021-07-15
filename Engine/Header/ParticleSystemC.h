@@ -3,7 +3,7 @@
 #include "RenderComponent.h"
 
 BEGIN(Engine)
-class CParticle;
+class CParticleSystem;
 class CGraphicsC;
 class ENGINE_DLL CParticleSystemC final : public CRenderComponent
 {
@@ -35,21 +35,24 @@ public:
 
 public:
 	HRESULT InitParticleSetting(LPDIRECT3DDEVICE9 _Device, std::wstring _texFIleName);
-	void	AddParticle(CParticle* pParticle);
+	void	AddParticle(CParticleSystem* pParticle);
 	static const	EComponentID		m_s_componentID = EComponentID::ParticleSystem;
+
+public:
+	GETTOR_SETTOR(_float3, m_ParticlesminPos, _float3(0.f, 0.f, 0.f), ParticlesminPos)
+	GETTOR_SETTOR(_float3, m_ParticlesmaxPos, _float3(0.f, 0.f, 0.f), ParticlesmaxPos)
 
 private:
 	_float3					m_origin;                // 파티클이 시작되는 위치
 	_float                  m_emitRate     = 0.f;    // 초당 파티클의 수
 	_int                    m_maxParticles = 0;      // 최대 파티클의 개수
-	_float                  m_size		   = 0.7f;    // 모든 파티클의 크기
+	_float                  m_size		   = 0.3f;    // 모든 파티클의 크기
 	LPDIRECT3DDEVICE9       m_pGraphicDevice;
 	IDirect3DVertexBuffer9* m_pVertexBuffer;
 	IDirect3DBaseTexture9*  m_pTexture;
 
 private:
 	_float m_LifeTime = 0.f;
-	GETTOR(std::vector<SP(CParticle)>, m_vParticles, {}, vParticles);
-
+	GETTOR(std::vector<SP(CParticleSystem)>, m_vParticles, {}, vParticles)
 };
 END

@@ -883,6 +883,9 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\08.Bronya_SoftEff\Bronya_RandomSmoke">
       <UniqueIdentifier>{d1dd660e-1def-4f60-a77c-1c628ceda4a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI">
+      <UniqueIdentifier>{05bff1ce-ba68-4f9f-af87-320bb9bd2277}</UniqueIdentifier>
+        </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne">
       <UniqueIdentifier>{8bb9614d-bd0d-42d4-9216-1cfe8a3938ea}</UniqueIdentifier>
     </Filter>
@@ -1833,6 +1836,9 @@
     <ClInclude Include="..\Header\ScoutAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\KianaUIAnim.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI</Filter>
+          </ClInclude>
     <ClInclude Include="..\Header\LancerAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
     </ClInclude>
@@ -1931,6 +1937,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TestParticle.h">
+      <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2717,6 +2726,9 @@
     <ClCompile Include="..\Code\ScoutAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Scout\Pattern\05.Airborne</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\KianaUIAnim.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI</Filter>
+      </ClCompile>
     <ClCompile Include="..\Code\LancerAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
     </ClCompile>
@@ -2815,6 +2827,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\CatPaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TestParticle.cpp">
+      <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

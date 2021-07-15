@@ -253,7 +253,7 @@ void COneStageScene::ForUITest()
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
 	{
-		CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
+		CBattleUiManager::GetInstance()->MonsterState(L"", 10, 10, 10, L"DOWN");
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))

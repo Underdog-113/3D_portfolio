@@ -45,8 +45,8 @@ void CTheresa_Ult_Trail::Awake()
 void CTheresa_Ult_Trail::Start()
 {
 	__super::Start();
-	m_bChangeAlpha = false;
 	m_fTrailAlpha = 0.f;
+	m_bTrailTurn = false;
 }
 
 void CTheresa_Ult_Trail::FixedUpdate()
@@ -62,21 +62,23 @@ void CTheresa_Ult_Trail::Update()
 	{
 		SetDeleteThis(true);
 	}
+	if (m_bTrailTurn)
+		m_fTrailAlpha -= 0.5f * GET_DT;
 
-	if (m_bChangeAlpha)
+
+	if (!m_bTrailTurn)
 	{
-		m_fTrailAlpha -= 1.f * GET_DT;
+		m_fTrailAlpha += 0.5f * GET_DT;
+
+		if (m_fTrailAlpha >= 0.4f)
+			m_bTrailTurn = true;
 	}
-	else
-		m_fTrailAlpha += 0.4f * GET_DT;
 }
 
 void CTheresa_Ult_Trail::LateUpdate()
 {
 	__super::LateUpdate();
 
-	if (m_fTrailAlpha >= 0.4f)
-		m_bChangeAlpha = true;
 
 }
 
@@ -85,8 +87,9 @@ void CTheresa_Ult_Trail::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 
 	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
-	pEffect->SetBool("gTrailCheck", m_bChangeAlpha);
+	pEffect->SetBool("gTrailCheck", false);
 
+	pEffect->CommitChanges();
 }
 
 void CTheresa_Ult_Trail::Render(LPD3DXEFFECT pEffect)
@@ -102,7 +105,6 @@ void CTheresa_Ult_Trail::PostRender(LPD3DXEFFECT pEffect)
 void CTheresa_Ult_Trail::OnDestroy()
 {
 	__super::OnDestroy();
-	m_bChangeAlpha = false;
 }
 
 void CTheresa_Ult_Trail::OnEnable()

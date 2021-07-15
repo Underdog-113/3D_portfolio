@@ -15,7 +15,7 @@
 #include "ShaderC.h"
 #include "GraphicsC.h"
 #include "ParticleSystemC.h"
-#include "Particle.h"
+#include "ParticleSystem.h"
 
 // UI------------------------------------------------
 #include "TextC.h"

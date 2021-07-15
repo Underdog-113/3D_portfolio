@@ -115,6 +115,7 @@
 #include "Bronya_FlashBang.h"
 #include "BronyaFlashBang_AS.h"
 #include "Bronya_RandomSmoke.h"
+#include "KianaUIAnim.h"
 #include "Bronya_Impact_Dome.h"
 #include "Bronya_LandSmoke.h"
 #include "Bronya_LandImpact.h"
@@ -131,6 +132,10 @@
 #include "Bronya_Ult_Impact_Smoke.h"
 #include "Bronya_Ult_Range.h"
 #include "Bronya_Ult_Laser.h"
+
+//Particle
+#include "TestParticle.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -722,6 +727,9 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaRandomSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
 
+	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKianaUIAnim);
+
 	SP(CMeshEffect_Client) spBronyaLandSmoke(CBronya_LandSmoke::Create(true, this));
 	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");
 	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -858,4 +866,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
 	spBronya_UIt_Laser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
+
+	SP(Engine::CObject) spTestParticle(CTestParticle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTestParticle);
+
 }

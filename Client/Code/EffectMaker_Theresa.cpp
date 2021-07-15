@@ -168,9 +168,9 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Smoke()
 
 void CEffectMaker_Theresa::CreateEffect_Ultra_Bomb()
 {
-	_float3 size = _float3(0.1f, 0.1f, 0.1f);
+	_float3 size = _float3(0.8f, 0.8f, 0.8f);
 
-	auto effect = CreateEffect_Fire(Ultra_Explosion_ObjectKey, L"Ult_Explosion", Ultra_Explosion_Tex1Name, Ultra_Explosion_Tex2Name);
+	auto effect = CreateEffect_Dissolve(Ultra_Explosion_ObjectKey, L"Ult_Impact", Ultra_Explosion_Tex1Name, Ultra_Explosion_Tex2Name, Ultra_Explosion_Tex3Name);
 
 	_mat* axeMat = m_pTheresa->GetAxePivotWorldMatrix();
 	_float3 offset = _float3(2.f, 0.f, 0.f);
