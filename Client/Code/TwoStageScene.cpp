@@ -65,6 +65,10 @@ void CTwoStageScene::Start(void)
 
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
+
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"Stage2_Bgm.wav");
+	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 }
 
 void CTwoStageScene::FixedUpdate(void)

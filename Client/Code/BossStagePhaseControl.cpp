@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TwoStagePhaseControl.h"
+#include "BossStagePhaseControl.h"
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 
@@ -7,16 +7,16 @@
 #include "ClientPatterns.h"
 #include "BattleUiManager.h"
 
-CTwoStagePhaseControl::CTwoStagePhaseControl()
+CBossStagePhaseControl::CBossStagePhaseControl()
 {
 }
 
 
-CTwoStagePhaseControl::~CTwoStagePhaseControl()
+CBossStagePhaseControl::~CBossStagePhaseControl()
 {
 }
 
-void CTwoStagePhaseControl::Update(void)
+void CBossStagePhaseControl::Update(void)
 {
 	switch (m_curPhase)
 	{
@@ -35,13 +35,6 @@ void CTwoStagePhaseControl::Update(void)
 
 		//After being collided with PhaseChanger0
 	case (_int)ETwoStagePhase::BossBegin:
-		if (false == m_isSoundChange)
-		{
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
-			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isSoundChange = true;
-		}
 		break;
 
 		//After killing Boss
@@ -72,7 +65,7 @@ void CTwoStagePhaseControl::Update(void)
 }
 
 
-void CTwoStagePhaseControl::OpenStageResult(void)
+void CBossStagePhaseControl::OpenStageResult(void)
 {
 	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
 

@@ -17,7 +17,7 @@
 // import from jongscene
 #include "Include_ForTest.h"
 
-#include "ThreeStagePhaseControl.h"
+#include "BossStagePhaseControl.h"
 
 #include "Monster.h"
 
@@ -50,7 +50,7 @@ void CBossStageScene::Awake(_int numOfLayers)
 
 	m_pControlTower = CStageControlTower::GetInstance();
 	m_pControlTower->Awake();
-	m_pControlTower->SetPhaseControl(new CThreeStagePhaseControl);
+	m_pControlTower->SetPhaseControl(new CBossStagePhaseControl);
 	m_pControlTower->GetPhaseControl()->SetControlTower(m_pControlTower);
 }
 
@@ -64,6 +64,9 @@ void CBossStageScene::Start(void)
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
 
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"BronyaBGM.mp3");
+	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 }
 
 void CBossStageScene::FixedUpdate(void)
@@ -123,7 +126,7 @@ void CBossStageScene::SetupFromLoader(void)
 	Load->CanvasLoad(this);
 	Load->TextLoad(this);
 	Load->MapLoad(this);
-	//Load->PhaseChangerLoad(this);
+	Load->PhaseChangerLoad(this);
 	//Load->PortalLoad(this);
 	delete(Load);
 }

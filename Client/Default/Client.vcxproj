@@ -193,6 +193,7 @@
     <ClInclude Include="..\Header\BattleEndScene.h" />
     <ClInclude Include="..\Header\BattleRenunciationC.h" />
     <ClInclude Include="..\Header\BattleUiManager.h" />
+    <ClInclude Include="..\Header\BossStagePhaseControl.h" />
     <ClInclude Include="..\Header\BossStageScene.h" />
     <ClInclude Include="..\Header\BoxBasePattern.h" />
     <ClInclude Include="..\Header\BoxBornPattern.h" />
@@ -513,6 +514,7 @@
     <ClCompile Include="..\Code\BattleEndScene.cpp" />
     <ClCompile Include="..\Code\BattleRenunciationC.cpp" />
     <ClCompile Include="..\Code\BattleUiManager.cpp" />
+    <ClCompile Include="..\Code\BossStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\BossStageScene.cpp" />
     <ClCompile Include="..\Code\BoxBasePattern.cpp" />
     <ClCompile Include="..\Code\BoxBornPattern.cpp" />
