@@ -159,6 +159,7 @@ void CMonster::ApplyHitInfo(HitInfo info)
 		if (sakuraCounter < 3)
 			m_pStat->SetSakuraCounter(sakuraCounter + 1);
 	}
+
 }
 
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)
@@ -215,31 +216,26 @@ void CMonster::SelectChannelID()
 	if (!(m_s_channelID & EMonChID::MON_0))
 	{
 		m_channelID = EChannelID::MONSTER_0;
-		m_hitChannelID = EChannelID::MONSTER_0_Hit;
 		m_s_channelID |= EMonChID::MON_0;
 	}
 	else if (!(m_s_channelID & EMonChID::MON_1))
 	{
 		m_channelID = EChannelID::MONSTER_1;
-		m_hitChannelID = EChannelID::MONSTER_1_Hit;
 		m_s_channelID |= EMonChID::MON_1;
 	}
 	else if(!(m_s_channelID & EMonChID::MON_2))
 	{
 		m_channelID = EChannelID::MONSTER_2;
-		m_hitChannelID = EChannelID::MONSTER_2_Hit;
 		m_s_channelID |= EMonChID::MON_2;
 	}
 	else if (!(m_s_channelID & EMonChID::MON_3))
 	{
 		m_channelID = EChannelID::MONSTER_3;
-		m_hitChannelID = EChannelID::MONSTER_3_Hit;
 		m_s_channelID |= EMonChID::MON_3;
 	}
 	else if (!(m_s_channelID & EMonChID::MON_4))
 	{
 		m_channelID = EChannelID::MONSTER_4;
-		m_hitChannelID = EChannelID::MONSTER_4_Hit;
 		m_s_channelID |= EMonChID::MON_4;
 	}
 }

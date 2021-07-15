@@ -431,11 +431,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spSakura_Charge_Att);
 
 	SP(CMeshEffect_Client) spSakura_Trail(CSakura_Trail::Create(true, this));
-	spSakura_Trail->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Yuan046");
-	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Mei_Dodge_Line");
-	spSakura_Trail->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
-	spSakura_Trail->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 	GetObjectFactory()->AddPrototype(spSakura_Trail);
 
 	// Monster Spawn
