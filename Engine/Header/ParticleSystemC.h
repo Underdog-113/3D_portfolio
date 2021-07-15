@@ -3,7 +3,7 @@
 #include "RenderComponent.h"
 
 BEGIN(Engine)
-class CParticle;
+class CParticleSystem;
 class CGraphicsC;
 class ENGINE_DLL CParticleSystemC final : public CRenderComponent
 {
@@ -35,12 +35,12 @@ public:
 
 public:
 	HRESULT InitParticleSetting(LPDIRECT3DDEVICE9 _Device, std::wstring _texFIleName);
-	void	AddParticle(CParticle* pParticle);
+	void	AddParticle(CParticleSystem* pParticle);
 	static const	EComponentID		m_s_componentID = EComponentID::ParticleSystem;
 
 public:
-	GETTOR_SETTOR(_float3, m_vParticlesminPos, _float3(0.f, 0.f, 0.f), vParticlesminPos)
-	GETTOR_SETTOR(_float3, m_vParticlesmaxPos, _float3(0.f, 0.f, 0.f), vParticlesmaxPos)
+	GETTOR_SETTOR(_float3, m_ParticlesminPos, _float3(0.f, 0.f, 0.f), ParticlesminPos)
+	GETTOR_SETTOR(_float3, m_ParticlesmaxPos, _float3(0.f, 0.f, 0.f), ParticlesmaxPos)
 
 private:
 	_float3					m_origin;                // 파티클이 시작되는 위치
@@ -53,7 +53,6 @@ private:
 
 private:
 	_float m_LifeTime = 0.f;
-	GETTOR(std::vector<SP(CParticle)>, m_vParticles, {}, vParticles)
-
+	GETTOR(std::vector<SP(CParticleSystem)>, m_vParticles, {}, vParticles)
 };
 END

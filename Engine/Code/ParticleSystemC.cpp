@@ -21,8 +21,8 @@ SP(CComponent) CParticleSystemC::MakeClone(CObject * pObject)
 	SP(CParticleSystemC) spClone(new CParticleSystemC);
 	__super::InitClone(spClone, pObject);
 
-	spClone->SetvParticlesminPos(m_vParticlesminPos);
-	spClone->SetvParticlesmaxPos(m_vParticlesmaxPos);
+	spClone->SetParticlesminPos(m_ParticlesminPos);
+	spClone->SetParticlesmaxPos(m_ParticlesmaxPos);
 
 	return spClone;
 }
@@ -43,10 +43,10 @@ void CParticleSystemC::Start(SP(CComponent) spThis)
 
 	Engine::BoundingBox boundingBox;
 
-	boundingBox._min = _float3(m_vParticlesminPos.x, m_vParticlesminPos.y, m_vParticlesminPos.z);
-	boundingBox._max = _float3(m_vParticlesmaxPos.x, m_vParticlesmaxPos.y, m_vParticlesmaxPos.z);
+	boundingBox._min = _float3(m_ParticlesminPos.x, m_ParticlesminPos.y, m_ParticlesminPos.z);
+	boundingBox._max = _float3(m_ParticlesmaxPos.x, m_ParticlesmaxPos.y, m_ParticlesmaxPos.z);
 
-	CParticle* pt = new SmokeParticle(&boundingBox, 1000);
+	CParticleSystem* pt = new SmokeParticle(&boundingBox, 1000);
 
 	pt->Awake();
 
@@ -177,7 +177,7 @@ HRESULT CParticleSystemC::InitParticleSetting(LPDIRECT3DDEVICE9 _Device, std::ws
 	return S_OK;
 }
 
-void CParticleSystemC::AddParticle(CParticle* pParticle)
+void CParticleSystemC::AddParticle(CParticleSystem* pParticle)
 {
 	ATTRIBUTE attribute;
 
