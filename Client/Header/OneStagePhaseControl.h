@@ -9,12 +9,14 @@ public:
 	enum class EOneStagePhase
 	{
 		PlayerSummon		,
-		BeforeFirstFight	,
-		FirstFightBegin		,
-		FirstFightEnd		,
-		BeforeSecondFight	,
-		SecondFightBegin	,
-		SecondFightEnd		,
+		BeforeFirstFight1	,
+		FirstFight1Begin	,
+		FirstFight1End	,
+		FirstFight2Begin	,
+		FirstFight2End		,
+		//BeforeSecondFight	,
+		//SecondFightBegin	,
+		//SecondFightEnd	,
 		BeforeMidBoss		,
 		MidBossBegin		,
 		MidBossEnd			,
@@ -33,8 +35,8 @@ public:
 					void		Update				(void) override;
 
 public:
-					void		OpenStageResult		(void);
-					_bool		m_isSoundChange = false;
+					void					OpenStageResult		(void);
+					_bool					m_isSoundChange = false;
 };
 
 #endif
