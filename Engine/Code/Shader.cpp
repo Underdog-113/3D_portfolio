@@ -39,6 +39,18 @@ void CShader::Awake(void)
 		std::string pErrMsg = (char*)m_pErrMsg->GetBufferPointer();
 		MSG_BOX(__FILE__, (L"CreateEffectFromFile warning in " + m_objectKey + L"::Awake()").c_str());
 	}
+
+	m_vRenderTargets.resize(4, nullptr);
+}
+
+void CShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+{
+	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
+
+	for (_int i = 0; i < MAX_RENDER_TARGET_NUM; ++i)
+	{
+		pRTM->SetUpRenderTarget(i, m_vRenderTargets[i]);
+	}
 }
 
 void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)

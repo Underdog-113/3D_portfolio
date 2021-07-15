@@ -32,5 +32,6 @@ void COutlineShader::Awake(void)
 
 void COutlineShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	__super::SetUpConstantTable(spGC);
 	SetupWorldViewProj(spGC);
 }

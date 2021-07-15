@@ -453,7 +453,12 @@ void CBattleUiManager::MonsterHpUp(_float value)
 void CBattleUiManager::BreakGaugeSeeting(_float value)
 {
 	m_barkGaugeBar->SetMaxValue(value);
+	m_barkGaugeBar->SetValue(value);
+}
 
+void CBattleUiManager::SetBreakGaugeValue(_float value)
+{
+	m_barkGaugeBar->SetValue(value);
 }
 
 void CBattleUiManager::BreakGaugeDown(_float value)

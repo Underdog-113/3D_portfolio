@@ -48,13 +48,19 @@ void CShaderC::Awake(void)
 
 		_int numOfShaderPerSubset;
 		pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"numOfShaderPerSubset", numOfShaderPerSubset);
+		m_vShaderPerSubset.resize(numOfShaderPerSubset);
 
 		for (_int i = 0; i < numOfShaderPerSubset; ++i)
 		{
-			std::wstring shaderKey;
-			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"shaderPerSubsetKey" + std::to_wstring(i), shaderKey);
-			_int shaderID = CShaderManager::GetInstance()->GetShaderID(shaderKey);
-			m_vShaderPerSubset.emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
+			_int curSubsetShaderNum;
+			pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"subset" + std::to_wstring(i) + L"_numOfShader", curSubsetShaderNum);
+			for (_int j = 0; j < curSubsetShaderNum; ++j)
+			{
+				std::wstring shaderKey;
+				pOwnerScene->GET_VALUE(isStatic, dataID, objectKey, L"subset" + std::to_wstring(i) + L"_shader" + std::to_wstring(j), shaderKey);
+				_int shaderID = CShaderManager::GetInstance()->GetShaderID(shaderKey);
+				m_vShaderPerSubset[i].emplace_back(CShaderManager::GetInstance()->GetShader(shaderID));
+			}
 		}
 	}
 }
@@ -103,5 +109,5 @@ CShader* CShaderC::AddShader(_int shaderID)
 
 void CShaderC::ResizeShaderPerSubset(_int size)
 {
-	m_vShaderPerSubset.resize(size, nullptr);
+	m_vShaderPerSubset.resize(size);
 }

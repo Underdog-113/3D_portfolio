@@ -60,7 +60,7 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 
 	if (vNormal.a == -1)
 	{
-		Out.vShade = vector(0, 0, 0, 0);
+		Out.vShade = vector(0, 0, 0, 1);
 		Out.vSpecular = vector(0, 0, 0, 0);
 		return Out;
 	}

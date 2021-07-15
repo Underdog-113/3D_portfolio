@@ -20,7 +20,8 @@ namespace Engine
 		AlphaBlend		= 4,
 		Particle		= 5,
 		UI				= 6,
-		NumOfRenderID	= 7
+		Blur			= 7,
+		NumOfRenderID	= 8
 	};
 
 	//Camera Mdoe
