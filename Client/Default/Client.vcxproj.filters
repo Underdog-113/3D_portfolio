@@ -885,7 +885,7 @@
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI">
       <UniqueIdentifier>{05bff1ce-ba68-4f9f-af87-320bb9bd2277}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne">
       <UniqueIdentifier>{8bb9614d-bd0d-42d4-9216-1cfe8a3938ea}</UniqueIdentifier>
     </Filter>
@@ -960,6 +960,9 @@
     </Filter>
     <Filter Include="04.Shader\14.ParticleShader">
       <UniqueIdentifier>{affbd4fc-1318-4c64-b68d-3565c9c7e45e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\15.KianaBodyShader">
+      <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1838,7 +1841,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\KianaUIAnim.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\LancerAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
     </ClInclude>
@@ -1937,6 +1940,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\TestParticle.h">
       <Filter>02.Objects\03.Effect\02.Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\KianaBodyShader.h">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2725,7 +2731,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\KianaUIAnim.cpp">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\UI</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\LancerAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Lancer\Pattern\05.Airborne</Filter>
     </ClCompile>
@@ -2825,6 +2831,9 @@
     <ClCompile Include="..\Code\TestParticle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\KianaBodyShader.cpp">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -2892,6 +2901,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ParticleShader.fx">
       <Filter>04.Shader\14.ParticleShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
+      <Filter>04.Shader\15.KianaBodyShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
