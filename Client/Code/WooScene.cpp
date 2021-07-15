@@ -75,7 +75,7 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	SpiderSetting();
+	//SpiderSetting();
 	//SickleSetting();
 	//ScoutSetting();
 	//LancerSetting();
@@ -83,7 +83,7 @@ void CWooScene::Start(void)
 	//NinzaSetting();
 
 	//GaneshaSetting();
-	//BronyaSetting();
+	BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)
@@ -268,9 +268,9 @@ void CWooScene::BronyaSetting(void)
 	std::dynamic_pointer_cast<CMonster>(spBronyaClone)->SelectChannelID();
 	m_spBronya = spBronyaClone;
 
-	/* Weapon */
-	SP(Engine::CObject) spWeaponClone = ADD_CLONE(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
-	m_spBronyaWeapon = spWeaponClone;
+	///* Weapon */
+	//SP(Engine::CObject) spWeaponClone = ADD_CLONE(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
+	//m_spBronyaWeapon = spWeaponClone;
 }
  
 void CWooScene::SpiderSetting(void)
