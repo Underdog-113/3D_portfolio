@@ -8,7 +8,7 @@
 #include "MonsterSpawnBeam.h"
 #include "ScoutMeteor.h"
 #include "Scout_Att_Range.h"
-
+#include "Sakura_WSkill_Twist.h"
 
 CYongScene::CYongScene()
 {
@@ -138,8 +138,8 @@ void CYongScene::Update(void)
 		/*spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
 		spObj->GetTransform()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
 
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TestParticle", true, (_int)Engine::ELayerID::Effect, L"Cube0");
-
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Twist", true);
+		std::dynamic_pointer_cast<CSakura_WSkill_Twist>(spObj)->SetMoveDir(_float3(0.f, 0.f, 1.f));
 
 		// Bronya Smoke
 		// 일정시간 마다 호출

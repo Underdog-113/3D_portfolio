@@ -464,6 +464,7 @@ void CMeshC::RenderDynamicPerSubset(SP(CGraphicsC) spGC)
 		vMeshContainers[i]->pSkinInfo->UpdateSkinnedMesh(vMeshContainers[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
+		
 		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
 		{
 			const std::vector<CShader*>& curShaders = spGC->GetShader()->GetShaderPerSubset()[vMeshContainers[i]->subsetIndexStart + j];

@@ -658,9 +658,6 @@
     <Filter Include="04.Shader\11.LaserTrail">
       <UniqueIdentifier>{5f8cb29c-397e-4ba9-bdc7-fad9bc7bf9a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att">
-      <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\00.ForScene\05.Portal">
       <UniqueIdentifier>{c037e8dd-2f30-4dd3-aa1e-438896505014}</UniqueIdentifier>
     </Filter>
@@ -966,6 +963,18 @@
     </Filter>
     <Filter Include="04.Shader\15.KianaBodyShader">
       <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff">
+      <UniqueIdentifier>{29f4989c-8f34-4cf7-a31c-960b4e537e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_Charge_Att">
+      <UniqueIdentifier>{b9e0d1b0-2f84-4c39-ab2d-0e25b81bee7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill">
+      <UniqueIdentifier>{4b6cca17-c681-4317-8722-4fff71fcb7ab}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="04.Shader\15.KianaBodyShader">
+        <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1621,7 +1630,7 @@
       <Filter>04.Shader\11.LaserTrail</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Sakura_Charge_Att.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_Charge_Att</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Portal.h">
       <Filter>02.Objects\00.ForScene\05.Portal</Filter>
@@ -1952,6 +1961,24 @@
     </ClInclude>
     <ClInclude Include="..\Header\KianaBodyShader.h">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_WSkill_Start.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_WSkill_Impact.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_WSkill_Smoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_WSkill_Twist.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_WSkill_Twist_Wind.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\KianaBodyShader.h">
+        <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2532,7 +2559,7 @@
       <Filter>04.Shader\11.LaserTrail</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_Charge_Att</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_Charge_Att</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Portal.cpp">
       <Filter>02.Objects\00.ForScene\05.Portal</Filter>
@@ -2848,6 +2875,24 @@
     </ClCompile>
     <ClCompile Include="..\Code\KianaBodyShader.cpp">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_WSkill_Start.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_WSkill_Impact.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_WSkill_Smoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_WSkill_Twist.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_WSkill_Twist_Wind.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_WeaponSkill</Filter>
+    </ClCompile>
+      <ClCompile Include="..\Code\KianaBodyShader.cpp">
+        <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

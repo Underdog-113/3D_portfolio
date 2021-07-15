@@ -259,7 +259,8 @@ void CGraphicsManager::RenderNonAlpha(void)
 					pEffect->End();
 				}
 
-				pObject->RenderPerShader();
+				if(pObject->GetComponent<CShaderC>()->GetShaderPerSubset().size() != 0)
+					pObject->RenderPerShader();
 			}
 		}
 	}

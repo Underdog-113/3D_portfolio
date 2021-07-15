@@ -30,5 +30,7 @@ private:
 
 private:
 	_bool m_init;
+
+	Engine::CObject*  m_vValkyrie[3];
 };
 

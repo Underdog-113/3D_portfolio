@@ -103,9 +103,9 @@ void CTheresa_Ult_Explosion::Update()
 		this->SetDeleteThis(true);
 	}
 
-	/*m_spTransform->AddSizeX(0.5f * GET_DT);
+	m_spTransform->AddSizeX(0.5f * GET_DT);
 	m_spTransform->AddSizeY(0.5f * GET_DT);
-	m_spTransform->AddSizeZ(0.5f * GET_DT);*/
+	m_spTransform->AddSizeZ(0.5f * GET_DT);
 
 	m_fAlpha -= 0.5f * GET_DT;
 
