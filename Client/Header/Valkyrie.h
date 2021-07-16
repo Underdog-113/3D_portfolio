@@ -94,6 +94,7 @@ protected:
 	GETTOR			(V_Stat*,						m_pStat,			nullptr,	Stat)
 	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 	
+	GETTOR_SETTOR	(_bool,							m_isDead,			false,		IsDead)
 	GETTOR_SETTOR	(_bool,							m_isWait,			false,		IsWait)
 	GETTOR_SETTOR	(_bool,							m_isEvade,			false,		IsEvade)
 	

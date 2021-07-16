@@ -1286,9 +1286,11 @@ void CFSM_TheresaC::Die_Enter(void)
 
 void CFSM_TheresaC::Die_Update(float deltaTime)
 {
-	if (m_pDM->IsAnimationEnd())
+	if (m_pDM->GetAniTimeline() > 0.95)
 	{
-		//m_pTheresa->
+		m_pTheresa->SetIsEnabled(false);
+		m_pStageControlTower->BattonTouch();
+		return;
 	}
 }
 

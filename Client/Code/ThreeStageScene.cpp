@@ -64,6 +64,10 @@ void CThreeStageScene::Start(void)
 
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
+
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"Stage1_Bgm.wav");
+	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 }
 
 void CThreeStageScene::FixedUpdate(void)
@@ -154,6 +158,7 @@ void CThreeStageScene::Create_ActorValkyrie(void)
 
 	m_spValkyrie = spKianaClone;
 	m_spValkyrie->GetTransform()->SetPosition(70.4f, -5.29f, -7.73f);
+	//m_spValkyrie->GetTransform()->SetPosition(32.63f, -5.29f, -7.35f);
 	m_pControlTower->AddSquadMember(m_spValkyrie);
 	m_pControlTower->Start(CStageControlTower::ALL);
 

@@ -35,10 +35,18 @@ void CTwoStagePhaseControl::Update(void)
 
 		//After being collided with PhaseChanger0
 	case (_int)ETwoStagePhase::BossBegin:
+		if (false == m_isSoundChange)
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			m_isSoundChange = true;
+		}
 		break;
 
 		//After killing Boss
 	case (_int)ETwoStagePhase::BossEnd:
+		m_isSoundChange = false;
 		++m_curPhase;
 		break;
 
@@ -50,6 +58,13 @@ void CTwoStagePhaseControl::Update(void)
 
 		// Wait Change Scene
 	case (_int)ETwoStagePhase::StageResult_Idle:
+		if (false == m_isSoundChange)
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			m_isSoundChange = true;
+		}
 		break;
 	default:
 		break;

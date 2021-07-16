@@ -12,9 +12,6 @@
 #include "PatternMachineC.h"
 #include "AttackBall.h"
 
-//#include "BronyaEscapePattern.h"
-//#include "BronyaShock1Pattern.h"
-
 CBronyaSkillUltraPattern::CBronyaSkillUltraPattern()
 {
 }
@@ -55,6 +52,8 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// skill ultra 상태로 변경
 		fsm->ChangeState(Name_Skill_Ultra);
+		// 처음 시작할 shock 패턴을 정함 (1 ~ 2)
+		m_curPattern = GetRandRange(1, 2);
 	}
 	// 내가 skill ultra 상태가 끝났다면
 	else if (Name_Skill_Ultra == fsm->GetCurStateString() &&
@@ -72,12 +71,12 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 	else if (true == m_onShock)
 	{
 		// m_curCnt가 0이 아닐 때 까지 패턴 반복
-		if (0 >= m_curCnt)
+		if (0 < m_curCnt)
 		{
 			switch (m_curPattern)
 			{
 			case 1:
-				m_spShock1P->Pattern(pOwner);
+				m_spShock1P->Pattern(pOwner);				
 				break;
 			case 2:
 				m_spShock2P->Pattern(pOwner);
@@ -85,19 +84,20 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 			}
 		}
 
-
-		// 이동 패턴이 끝나면 아래 코드 추가
-		// 이번에 Shock1을 실행할지 Shock2를 실행할지 정함,
-		--m_curCnt;
-		m_curPattern = GetRandRange(1, 2);
-
 		
-		for (_int i = 0; i < m_curCnt; ++i)
-		{
-			
 
-			
+		// 만약 m_curCnt가 0이 아니고, select가 false라면
+		// select가 false라는 것은 shock가 한 번 끝났으므로 다음 shock 실행
+		if (0 < m_curCnt && false == pOwner->GetComponent<CPatternMachineC>()->GetOnSelect())
+		{
+			--m_curCnt;
+			m_curPattern = GetRandRange(1, 2);
+
+			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(true);
 		}
+
+		//m_spStealthBackP->Pattern(pOwner);
+
 	}
 } 
 

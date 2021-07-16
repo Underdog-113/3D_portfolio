@@ -367,11 +367,8 @@ void CMeshC::RenderDynamic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFF
 			vMeshContainers[i]->pRenderingMatrix[j] =
 				vMeshContainers[i]->pFrameOffsetMatrix[j] * (*vMeshContainers[i]->ppCombinedTransformMatrix[j]);
 
-			if (m_pRootMotion->GetIsRootMotion())
-			{
-				vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
-				vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
-			}
+			vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
+			vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
 		}
 
 		void* pSrcVertex = nullptr;
@@ -448,11 +445,8 @@ void CMeshC::RenderDynamicPerSubset(SP(CGraphicsC) spGC)
 			vMeshContainers[i]->pRenderingMatrix[j] =
 				vMeshContainers[i]->pFrameOffsetMatrix[j] * (*vMeshContainers[i]->ppCombinedTransformMatrix[j]);
 
-			if (m_pRootMotion->GetIsRootMotion())
-			{
-				vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
-				vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
-			}
+			vMeshContainers[i]->pRenderingMatrix[j]._41 -= rootMotionMoveAmount.x;
+			vMeshContainers[i]->pRenderingMatrix[j]._43 -= rootMotionMoveAmount.z;
 		}
 
 		void* pSrcVertex = nullptr;
@@ -464,6 +458,7 @@ void CMeshC::RenderDynamicPerSubset(SP(CGraphicsC) spGC)
 		vMeshContainers[i]->pSkinInfo->UpdateSkinnedMesh(vMeshContainers[i]->pRenderingMatrix, NULL, pSrcVertex, pDestVertex);
 
 		const std::vector<std::vector<_TexData*>>& pTexData = spGC->GetTexture()->GetTexData();
+		
 		for (_ulong j = 0; j < vMeshContainers[i]->NumMaterials; ++j)
 		{
 			const std::vector<CShader*>& curShaders = spGC->GetShader()->GetShaderPerSubset()[vMeshContainers[i]->subsetIndexStart + j];

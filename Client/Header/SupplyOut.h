@@ -29,7 +29,8 @@ public:
 	virtual void OnDestroy(void) override;
 
 private:
-	void RandomBox();
+	void ItemRandomBox();
+	void WeaponRandomBox();
 	void RandoBoxList();
 private:
 	_bool m_init;

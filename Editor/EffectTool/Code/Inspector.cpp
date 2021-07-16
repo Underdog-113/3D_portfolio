@@ -594,7 +594,7 @@ void CInspector::Add_MeshEffect(CString ObjectName)
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
 		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"DefaultMeshTex");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	}
 
 }

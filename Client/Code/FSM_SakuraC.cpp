@@ -15,6 +15,8 @@
 #include "StageControlTower.h"
 #include "Monster.h"
 #include "EffectMaker_Sakura.h"
+#include "Sakura_WSkill_Twist.h"
+#include "Sakura_DashShade.h"
 
 CFSM_SakuraC::CFSM_SakuraC()
 {
@@ -176,6 +178,20 @@ void CFSM_SakuraC::InfernoActive_1st()
 			pMonster->GetStat()->SetSakuraCounter(3);
 		}
 	}
+}
+
+void CFSM_SakuraC::ShadeEffect(_uint animIndex)
+{
+	SP(Engine::CObject) spObj;
+
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DashShade", true, (_uint)Engine::ELayerID::Effect);
+	auto pEffect = (CSakura_DashShade*)spObj.get();
+	pEffect->SetAnimIdx(animIndex);
+	pEffect->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+	pEffect->GetTransform()->SetRotation(m_pSakura->GetTransform()->GetRotation());
+	pEffect->Start();
+
+	m_dashShadeTimer = 0.f;
 }
 
 
@@ -1024,10 +1040,9 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 
-			m_pSakura->OnHitbox();
 			m_checkFlashCol = true;
 		}
 		m_checkEndFlash = true;
@@ -1045,7 +1060,7 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 			m_targetToSakura = curSakuraPos - curTargetPos;
 			D3DXVec3Normalize(&m_targetToSakura, &m_targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + m_targetToSakura * colRadiusSum);
 
@@ -1106,10 +1121,9 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 
-			m_pSakura->OnHitbox();
 			m_checkFlashCol = true;
 		}
 		m_checkEndFlash = true;
@@ -1124,12 +1138,12 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
 
-			_float3 targetToSakura = curSakuraPos - curTargetPos;
-			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
+			m_targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&m_targetToSakura, &m_targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + m_targetToSakura * colRadiusSum);
 			m_pSakura->OffHitbox();
 		}
 		m_checkFlashMove = true;
@@ -1165,10 +1179,19 @@ void CFSM_SakuraC::Charge1_Enter(void)
 	ResetCheckMembers();
 	m_pDM->GetAniCtrl()->SetSpeed(1.5f);
 	PlaySound_Effect(Sound_Charge1_Effect);
+
+	m_dashShadeTimer = 0.f;
 }
 
 void CFSM_SakuraC::Charge1_Update(float deltaTime)
 {
+	m_dashShadeTimer += GET_PLAYER_DT;
+	if (m_dashShadeTimer > 0.1f &&  m_pDM->GetAniTimeline() < 0.55)
+	{
+		ShadeEffect(Index_Charge1);
+		m_dashShadeTimer = 0.f;
+	}
+
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.535f)
 	{
 		PlaySound_Voice(Sound_Flash_Voice);
@@ -1179,10 +1202,9 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 			
-			m_pSakura->OnHitbox();
 
 			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
 		}
@@ -1198,12 +1220,12 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
 
-			_float3 targetToSakura = curSakuraPos - curTargetPos;
-			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
+			m_targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&m_targetToSakura, &m_targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + m_targetToSakura * colRadiusSum);
 			m_pSakura->OffHitbox();
 		}
 		m_checkFlashMove = true;
@@ -1331,10 +1353,9 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 			m_pSakura->GetTransform()->SetPosition(curTargetPos - m_targetToSakura * colRadiusSum);
 
-			m_pSakura->OnHitbox();
 		}
 		m_checkEndFlash = true;
 	}
@@ -1348,12 +1369,12 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			_float3 curSakuraPos = m_pSakura->GetTransform()->GetPosition();
 			_float3 curTargetPos = pMonster->GetTransform()->GetPosition();
 
-			_float3 targetToSakura = curSakuraPos - curTargetPos;
-			D3DXVec3Normalize(&targetToSakura, &targetToSakura);
+			m_targetToSakura = curSakuraPos - curTargetPos;
+			D3DXVec3Normalize(&m_targetToSakura, &m_targetToSakura);
 
-			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS();
+			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + targetToSakura * colRadiusSum);
+			m_pSakura->GetTransform()->SetPosition(curTargetPos + m_targetToSakura * colRadiusSum);
 			m_pSakura->OffHitbox();
 		}
 		m_checkFlashMove = true;
@@ -1492,10 +1513,17 @@ void CFSM_SakuraC::Die_Init(void)
 void CFSM_SakuraC::Die_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Die);
+	m_pDM->GetAniCtrl()->SetReplay(false);
 }
 
 void CFSM_SakuraC::Die_Update(float deltaTime)
 {
+	if (m_pDM->GetAniTimeline() > 0.95)
+	{
+		m_pSakura->SetIsEnabled(false);
+		m_pStageControlTower->BattonTouch();
+		return;
+	}
 }
 
 void CFSM_SakuraC::Die_End(void)
@@ -1762,10 +1790,18 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
+	m_dashShadeTimer = 0.f;
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 {
+	m_dashShadeTimer += GET_PLAYER_DT;
+	if (m_dashShadeTimer > 0.1f &&  m_pDM->GetAniTimeline() < 0.3)
+	{
+		ShadeEffect(Index_EvadeForward);
+		m_dashShadeTimer = 0.f;
+	}
+
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_isEvade = false;
@@ -1821,10 +1857,18 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
+	m_dashShadeTimer = 0.f;
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 {
+	m_dashShadeTimer += GET_PLAYER_DT;
+	if (m_dashShadeTimer > 0.1f &&  m_pDM->GetAniTimeline() < 0.3)
+	{
+		ShadeEffect(Index_EvadeBackward);
+		m_dashShadeTimer = 0.f;
+	}
+
 	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_isEvade = false;
@@ -2161,10 +2205,11 @@ void CFSM_SakuraC::WeaponSkill_Init(void)
 
 void CFSM_SakuraC::WeaponSkill_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Ultra);
+	m_pDM->ChangeAniSet(Index_WeaponSkill);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->LookTarget();
 	ResetCheckMembers();
+
 }
 
 void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
@@ -2172,6 +2217,14 @@ void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
 	{
 		//PlaySound_Effect(Sound_Attack_2_Effect);
+
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Start", true);
+		spObj->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Twist", true);
+		spObj->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+		std::dynamic_pointer_cast<CSakura_WSkill_Twist>(spObj)->SetMoveDir(m_pSakura->GetTransform()->GetForward());
 
 		m_checkAttack = true;
 	}

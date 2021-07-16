@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageControlTower.h"
 
+#include "Scene.h"
 #include "DamageObjectPool.h"
 #include "InputManager.h"
 #include "Layer.h"
@@ -65,9 +66,24 @@ void CStageControlTower::Update(void)
 	}
 
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
-		SwitchValkyrie(Wait_1);
+	{
+		if (m_vSquad.size() > 1)
+		{
+			CValkyrie* pValkyrie = (CValkyrie*)m_vSquad[Wait_1].get();
+			if (!pValkyrie->GetIsDead())
+				SwitchValkyrie(Wait_1);
+		}
+
+	}
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_2))
-		SwitchValkyrie(Wait_2);
+	{
+		if (m_vSquad.size() > 2)
+		{
+			CValkyrie* pValkyrie = (CValkyrie*)m_vSquad[Wait_2].get();
+			if (!pValkyrie->GetIsDead())
+				SwitchValkyrie(Wait_2);
+		}
+	}
 
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
@@ -100,11 +116,73 @@ void CStageControlTower::OnDestroy()
 	SAFE_DELETE(m_pTimeSeeker)
 }
 
+SP(Engine::CObject) CStageControlTower::SettingSquad(Engine::CScene * pCurScene)
+{
+	auto vSquad = CDataManager::GetInstance()->FindSquadData()->GetValkyriesList();
+
+	SP(Engine::CObject) spValkyrie = CreateValkyrie(pCurScene, vSquad[0]);
+	AddSquadMember(spValkyrie);
+	
+
+	if (vSquad.size() > 1)
+	{
+		SP(Engine::CObject) spWaitValkyrie = CreateValkyrie(pCurScene, vSquad[1]);
+		static_cast<CValkyrie*>(spWaitValkyrie.get())->SetIsWait(true);
+		AddSquadMember(spWaitValkyrie);
+	}
+	if (vSquad.size() > 2)
+	{
+		SP(Engine::CObject) spWaitValkyrie = CreateValkyrie(pCurScene, vSquad[2]);
+		static_cast<CValkyrie*>(spWaitValkyrie.get())->SetIsWait(true);
+		AddSquadMember(spWaitValkyrie);
+	}
+
+	return spValkyrie;
+}
+
+SP(Engine::CObject) CStageControlTower::CreateValkyrie(Engine::CScene * pCurScene, CValkyrieStatusData* pStatData)
+{
+	std::wstring name = pStatData->GetName();
+
+	if (!wcscmp(name.c_str(), L"키아나·카스라나"))
+	{
+		SP(Engine::CObject) spKianaClone = pCurScene->GetObjectFactory()->AddClone(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+
+// 		V_WarshipStat warshipStat;
+// 		warshipStat.SetLevel(pStatData->GetLevel());
+// 		warshipStat.SetWeaponAtk(pStatData->GetWeaponData()->GetDamage());
+// 		warshipStat.SetWeaponCrt(pStatData->GetWeaponData()->GetHoesim());
+// 
+// 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(spKianaClone.get());
+		//pValkyrie->Set
+
+		return spKianaClone;
+	}
+	else if (!wcscmp(name.c_str(), L"테레사·아포칼립스"))
+	{
+		SP(Engine::CObject) spTheresaClone = pCurScene->GetObjectFactory()->AddClone(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
+		return spTheresaClone;
+	}
+	else if (!wcscmp(name.c_str(), L"야에 사쿠라"))
+	{
+		SP(Engine::CObject) spSakuraClone = pCurScene->GetObjectFactory()->AddClone(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
+		return spSakuraClone;
+	}
+	else
+	{
+		MSG_BOX(__FILE__, L"Squad name errrrror");
+		ABORT;
+	}
+
+
+	return nullptr;
+}
+
 void CStageControlTower::AddSquadMember(SP(Engine::CObject) pValkyrie)
 {
 	if (m_vSquad.size() == 3)
 	{
-		MSG_BOX(__FILE__, L"Camera mode enum is broken in LateUpdate");
+		MSG_BOX(__FILE__, L"sqaud fullll");
 		ABORT;
 	}
 
@@ -432,6 +510,8 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 	if (pV->GetIsEvade())
 		return;
+	if (pV->GetIsDead())
+		return;
 
 	// 1. 데미지 교환 ( 죽은거까지 판정 때려주세요 )
 	if (pMonster->GetLayerID() == (_int)ELayerID::Map)
@@ -456,6 +536,8 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 	if (isDead)
 	{
+		pV->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Die");
+		pV->SetIsDead(true);
 	}
 	else
 	{
@@ -473,11 +555,6 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 void CStageControlTower::SwitchValkyrie(Squad_Role role)
 {
-	if (m_vSquad.size() < 3)
-		return;
-
-	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
-
 	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
 	_float3 rot = m_pCurActor->GetTransform()->GetRotation();
 	
@@ -485,6 +562,8 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	{
 	case CStageControlTower::Wait_1:
 	{
+		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
+
 		auto pSwapValkyrie = m_vSquad[Actor];
 		m_vSquad[Actor] = m_vSquad[Wait_1];
 		m_vSquad[Wait_1] = pSwapValkyrie;
@@ -495,12 +574,12 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 			CUILinker::Up,
 			m_pCurActor->GetStat()->GetType(),
 			wait1Member->GetStat()->GetType());
-
-
 	}
 		break;
 	case CStageControlTower::Wait_2:
 	{
+		m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchOut");
+
 		auto pSwapValkyrie = m_vSquad[Actor];
 		m_vSquad[Actor] = m_vSquad[Wait_2];
 		m_vSquad[Wait_2] = pSwapValkyrie;
@@ -519,10 +598,55 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 	m_pCurActor->GetTransform()->SetPosition(pos);
 	m_pCurActor->GetTransform()->SetRotation(rot);
 	
-	// 1. 대기 슬롯 이미지 바꿔주고
-	// 3. 스킬 ui도
-	// 4. 카메라 타겟팅 바꿔주기
+	m_pCurActor->SetIsEnabled(true);
+	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");
 
+	m_pCameraMan->SetIsSwitching(true);
+}
+
+void CStageControlTower::BattonTouch()
+{
+	_float3 pos = m_pCurActor->GetTransform()->GetPosition();
+	_float3 rot = m_pCurActor->GetTransform()->GetRotation();
+
+	auto wait1Member = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+	auto wait2Member = static_cast<CValkyrie*>(m_vSquad[Wait_2].get());
+
+	if (wait1Member->GetIsDead())
+	{
+		// game over
+	}
+	else if (wait2Member->GetIsDead())
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_1];
+		m_vSquad[Wait_1] = pSwapValkyrie;
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+		auto pWait1 = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+
+		m_pLinker->SwitchValkyrie_Actor(m_pCurActor->GetStat()->GetType());
+		m_pLinker->SwitchValkyrie_UpSlot(pWait1->GetStat()->GetType());
+	}
+	else
+	{
+		auto pSwapValkyrie = m_vSquad[Actor];
+		m_vSquad[Actor] = m_vSquad[Wait_1];
+		m_vSquad[Wait_1] = m_vSquad[Wait_2];
+		m_vSquad[Wait_2] = pSwapValkyrie;
+
+		m_pCurActor = static_cast<CValkyrie*>(m_vSquad[Actor].get());
+		auto pWait1 = static_cast<CValkyrie*>(m_vSquad[Wait_1].get());
+		auto pWait2 = static_cast<CValkyrie*>(m_vSquad[Wait_2].get());
+
+		m_pLinker->SwitchValkyrie_Actor(m_pCurActor->GetStat()->GetType());
+		m_pLinker->SwitchValkyrie_UpSlot(pWait1->GetStat()->GetType());
+		m_pLinker->SwitchValkyrie_DownSlot(pWait2->GetStat()->GetType());
+	}
+	
+	m_pCurActor->GetComponent<Engine::CMeshC>()->GetRootMotion()->ResetPrevMoveAmount();
+
+	m_pCurActor->GetTransform()->SetPosition(pos);
+	m_pCurActor->GetTransform()->SetRotation(rot);
 
 	m_pCurActor->SetIsEnabled(true);
 	m_pCurActor->GetComponent<Engine::CStateMachineC>()->ChangeState(L"SwitchIn");

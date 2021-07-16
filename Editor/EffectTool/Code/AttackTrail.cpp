@@ -73,18 +73,18 @@ void CAttackTrail::Update()
 	if (Engine::IMKEY_PRESS(KEY_Q))
 	{
 		m_fTrailAlpha -= 0.5f * GET_DT;
-		this->GetTransform()->AddRotationY(D3DXToRadian(15.f * GET_DT));
+		this->GetTransform()->AddRotationY(D3DXToRadian(-100.f * GET_DT));
 	}
 	if (Engine::IMKEY_PRESS(KEY_E))
 	{
 		m_fTrailAlpha += 1.f * GET_DT;
-		this->GetTransform()->AddRotationY(D3DXToRadian(-15.f * GET_DT));
+		this->GetTransform()->AddRotationY(D3DXToRadian(100.f * GET_DT));
 		//m_fSpeed -= GET_DT;
 	}
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
 		m_fTrailAlpha = 0.5f;
-		m_fSpeed = 0.3f;
+		//m_fSpeed = 0.3f;
 	}
 
 	m_fSpeed += 0.3f * GET_DT;
@@ -103,7 +103,7 @@ void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 
     /*pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);*/
 	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
-	/*pEffect->SetFloat("gSpeed", -m_fSpeed);*/
+	pEffect->SetFloat("gSpeed", m_fSpeed);
 	pEffect->SetBool("gPlayingAnim", true);
 
 

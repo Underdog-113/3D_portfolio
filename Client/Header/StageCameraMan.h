@@ -11,7 +11,8 @@
 
 #define MaxChaseDistance 0.5f
 
-class CCameraShake;
+#include "CameraShake.h"
+
 class CStageCameraMan
 {
 public:
@@ -29,6 +30,7 @@ public:
 	void SetIsTargeting(bool value);
 
 	void ResetChaseSpeed();
+
 
 public:
 	void SetNearTake();
@@ -74,8 +76,12 @@ private:
 
 
 
+public:
+	void SetCamera(SP(Engine::CCamera) spCamera);
+
 private:
-	GETTOR_SETTOR	(SP(Engine::CCamera),	m_spCamera,		nullptr,	Camera)		
+	GETTOR			(SP(Engine::CCamera),	m_spCamera,		nullptr,	Camera)		
+
 	GETTOR			(SP(Engine::CObject),	m_spPivot,		nullptr,	Pivot)
 	GETTOR			(_bool,					m_isTargeting,	false,		IsTargeting)		
 	GETTOR			(CCameraShake*,			m_pCameraShake,	nullptr,	CameraShake)	

@@ -8,8 +8,8 @@
 #include "MonsterSpawnBeam.h"
 #include "ScoutMeteor.h"
 #include "Scout_Att_Range.h"
-
-
+#include "Sakura_WSkill_Twist.h"
+#include "Sakura_DashShade.h"
 CYongScene::CYongScene()
 {
 }
@@ -137,9 +137,9 @@ void CYongScene::Update(void)
 
 		/*spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
 		spObj->GetTransform()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
+		
 
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TestParticle", true, (_int)Engine::ELayerID::Effect, L"Cube0");
-
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Mark", true, (_uint)Engine::ELayerID::Effect);
 
 		// Bronya Smoke
 		// 일정시간 마다 호출

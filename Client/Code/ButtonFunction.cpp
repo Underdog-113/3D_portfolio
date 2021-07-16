@@ -80,7 +80,7 @@ void CButtonFunction::ReadyToSortieScene()
 void CButtonFunction::PartySettingScene()
 {
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"PlayerIS1_Button_0")
 	{

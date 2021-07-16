@@ -13,6 +13,7 @@
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
 #include "StageCameraMan.h"
+
 #include "EffectMaker_Kiana.h"
 
 CFSM_KianaC::CFSM_KianaC()
@@ -623,7 +624,10 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		m_pKiana->ActiveAttackBall(1.2f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetLeftHandWorldMatrix(), 0.3f);
 		
 		if (m_pKiana->GetUltraMode())
+		{
+			m_pEffectMaker->CreateEffect_Claw2();
 			PlaySound_Effect(Sound_Ult_Att_1);
+		}
 		else
 		{
 			PlaySound_Effect(Sound_Attack_2_Effect);
@@ -688,7 +692,10 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		m_pKiana->ActiveAttackBall(1.3f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightHandWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
+		{
 			PlaySound_Effect(Sound_Ult_Att_1);
+			m_pEffectMaker->CreateEffect_Claw3();
+		}
 		else
 		{
 			PlaySound_Effect(Sound_Attack_3_Effect);
@@ -962,6 +969,7 @@ void CFSM_KianaC::Attack_5_Update(float deltaTime)
 
 		if (m_pKiana->GetUltraMode())
 		{
+			m_pEffectMaker->CreateEffect_Claw5();
 			PlaySound_Effect(Sound_Ult_Att_3);
 		}
 		else
@@ -1033,10 +1041,17 @@ void CFSM_KianaC::Die_Init(void)
 void CFSM_KianaC::Die_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Die);
+	m_pDM->GetAniCtrl()->SetReplay(false);
 }
 
 void CFSM_KianaC::Die_Update(float deltaTime)
 {
+	if (m_pDM->GetAniTimeline() > 0.95)
+	{
+		m_pKiana->SetIsEnabled(false);
+		m_pStageControlTower->BattonTouch();
+		return;
+	}
 }
 
 void CFSM_KianaC::Die_End(void)
@@ -1597,12 +1612,23 @@ void CFSM_KianaC::Ultra_Enter(void)
 	PlaySound_Voice(Sound_Ult_Start_Voice);
 	PlaySound_Effect(Sound_Ult_Start);
 	m_pEffectMaker->CreateEffect_Ultra();
+
+	m_checkUltraActive = false;
+	m_pStageControlTower->GetCameraMan()->SetCustomTake(2.f, 2.f, D3DXToRadian(15.f));
 }
 
 void CFSM_KianaC::Ultra_Update(float deltaTime)
 {
 	if (CheckAction_StandBy_Timeout())
 		return;
+
+	if (!m_checkUltraActive && m_pDM->GetAniTimeline() > 0.21)
+	{
+		m_pStageControlTower->GetCameraMan()->SetCustomTake(3.f, 4.5f, D3DXToRadian(15.f));
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Kiana_UltraActive();
+		m_checkUltraActive = true;
+	}
+
 }
 
 void CFSM_KianaC::Ultra_End(void)

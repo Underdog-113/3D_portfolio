@@ -110,3 +110,17 @@ void CEffectMaker_Sakura::CreateEffect_Beam()
 	effect->GetTransform()->SetRotationY(m_pSakura->GetTransform()->GetRotation().y);
 	effect->GetTransform()->AddRotationY(D3DXToRadian(180.f));
 }
+
+void CEffectMaker_Sakura::CreateEffect_Cyclone()
+{
+	_float size = 1.f;
+
+	auto effect = CreateEffect_Laser(Beam_ObjectKey, L"Sakura", Beam_Tex1Name, Beam_Tex2Name, Beam_Tex3Name);
+	//effect->GetTransform()->SetParent(m_pSakura->GetTransform());
+	effect->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+	effect->GetTransform()->AddPositionY(m_pSakura->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 1.5f);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(m_pSakura->GetTransform()->GetRotation().y);
+	effect->GetTransform()->AddRotationY(D3DXToRadian(180.f));
+}

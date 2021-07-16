@@ -25,6 +25,8 @@ public:
 
 public:
 					void		OpenStageResult		(void);
+
+					_bool		m_isSoundChange = false;
 };
 
 #endif
