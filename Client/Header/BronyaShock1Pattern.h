@@ -17,7 +17,7 @@ public:
 	static SP(CBronyaShock1Pattern) Create();
 
 private:
-	_mat GetRHandMat(Engine::CObject* pOwner);
+	_mat GetRHandMat( Engine::CObject* pOwner);
 
 private:
 	//_float m_cost = 22.f;
@@ -38,6 +38,7 @@ private:
 
 	_mat m_atkMat;
 	_mat* m_pRHand;
+	_mat* m_pAttackBallMat;
 	std::wstring m_curState;
 };
 

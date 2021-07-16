@@ -14,10 +14,13 @@
 
 CBronyaShock1Pattern::CBronyaShock1Pattern()
 {
+	m_pAttackBallMat = new _mat;
 }
 
 CBronyaShock1Pattern::~CBronyaShock1Pattern()
 {
+	delete m_pAttackBallMat;
+	m_pAttackBallMat = nullptr;
 }
 
 void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
@@ -73,6 +76,7 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_IDLE);
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		m_onAtkBall = false;
 	}
 
 	/************************* AttackBall */
@@ -90,20 +94,20 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 	//	
 	//	m_onAtkBall = true;
 	//}
+	if (!m_onAtkBall)
+	{
+		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
 
-	m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
-	_mat matHand = GetRHandMat(pOwner);
+
+		static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(1.f, 0.f, 0.f));
+		static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, m_pAttackBallMat, 0.35f);
+
+		m_onAtkBall = true;
+	}
 
 
-	
-	static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &matHand, 0.35f);
-	static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(0.f, 10.f, 0.f));
+	*m_pAttackBallMat = GetRHandMat(pOwner);
 
-	//const auto& col = static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get();
-	//static_cast<Engine::CSphereCollider*>(col)->UpdateBS();
-	
-	_float3 offset = static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->GetOffset();
-	int a = 5;
 } 
 
 SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
@@ -113,7 +117,7 @@ SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
 	return spInstance;
 }
 
-_mat CBronyaShock1Pattern::GetRHandMat(Engine::CObject * pOwner)
+_mat CBronyaShock1Pattern::GetRHandMat( Engine::CObject * pOwner)
 {
 	_mat combMat = *m_pRHand;
 	_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
