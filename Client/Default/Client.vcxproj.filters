@@ -964,6 +964,9 @@
     <Filter Include="04.Shader\15.KianaBodyShader">
       <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\13.SizeDown">
+      <UniqueIdentifier>{df41acaa-c5df-46b7-b90f-db3d13dd2457}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1947,6 +1950,9 @@
     <ClInclude Include="..\Header\KianaBodyShader.h">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SizeDownC.h">
+      <Filter>03.Component\00.UI\13.SizeDown</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2839,6 +2845,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\KianaBodyShader.cpp">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SizeDownC.cpp">
+      <Filter>03.Component\00.UI\13.SizeDown</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

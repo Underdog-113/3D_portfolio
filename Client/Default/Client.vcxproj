@@ -274,6 +274,7 @@
     <ClInclude Include="..\Header\SickleAirbornePattern.h" />
     <ClInclude Include="..\Header\SickleStunPattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
+    <ClInclude Include="..\Header\SizeDownC.h" />
     <ClInclude Include="..\Header\SizeUpC.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
@@ -595,6 +596,7 @@
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
     <ClCompile Include="..\Code\SickleStunPattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
+    <ClCompile Include="..\Code\SizeDownC.cpp" />
     <ClCompile Include="..\Code\SizeUpC.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />

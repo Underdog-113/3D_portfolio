@@ -3,5 +3,5 @@
 
 #include "PatternMachineC.h"
 #include "SizeUpC.h"
-
+#include "SizeDownC.h"
 #endif

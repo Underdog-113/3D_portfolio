@@ -33,6 +33,10 @@ private:
 	_int m_addValkryieExp = 0;
 
 	_int m_gold;
+
+	_int m_outCount;
+	_float m_timer;
+
 };
 
 

@@ -1,5 +1,18 @@
 #pragma once
 #include "ValkyrieFSM.h"
+
+struct ItemInfo
+{
+	ItemInfo(std::wstring name, _int count)
+	{
+		m_name = name;
+		m_count = count;
+	}
+
+	std::wstring m_name;
+	_int m_count;
+};
+
 class CSupplyOut :
 	public CValkyrieFSM
 {
@@ -20,7 +33,10 @@ private:
 	void RandoBoxList();
 private:
 	_bool m_init;
+	std::list<ItemInfo> m_itemList;
 
+	CScrollViewObject* m_scrollView;
+	_int m_outCount;
 	_float m_timer;
 };
 
