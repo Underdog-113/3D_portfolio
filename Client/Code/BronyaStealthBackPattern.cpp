@@ -32,6 +32,7 @@ void CBronyaStealthBackPattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_IDLE);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
 }
 
