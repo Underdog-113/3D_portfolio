@@ -40,6 +40,8 @@ void CWarning_Ring::Awake()
 {
 	__super::Awake();
 
+	m_spTransform->SetSizeY(0.f);
+
 }
 
 void CWarning_Ring::Start()
@@ -58,6 +60,12 @@ void CWarning_Ring::FixedUpdate()
 void CWarning_Ring::Update()
 {
 	__super::Update();
+
+	if (m_spTransform->GetSize().y < 1)
+	{
+		m_spTransform->AddSizeY(3.5f * GET_DT);
+	}
+
 	m_fUVSpeed += 0.3f * GET_DT;
 
 }
