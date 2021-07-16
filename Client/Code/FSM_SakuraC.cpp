@@ -16,6 +16,7 @@
 #include "Monster.h"
 #include "EffectMaker_Sakura.h"
 #include "Sakura_WSkill_Twist.h"
+#include "Sakura_DashShade.h"
 
 CFSM_SakuraC::CFSM_SakuraC()
 {
@@ -177,6 +178,20 @@ void CFSM_SakuraC::InfernoActive_1st()
 			pMonster->GetStat()->SetSakuraCounter(3);
 		}
 	}
+}
+
+void CFSM_SakuraC::ShadeEffect(_uint animIndex)
+{
+	SP(Engine::CObject) spObj;
+
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DashShade", true, (_uint)Engine::ELayerID::Effect);
+	auto pEffect = (CSakura_DashShade*)spObj.get();
+	pEffect->SetAnimIdx(animIndex);
+	pEffect->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+	pEffect->GetTransform()->SetRotation(m_pSakura->GetTransform()->GetRotation());
+	pEffect->Start();
+
+	m_dashShadeTimer = 0.f;
 }
 
 
@@ -1164,10 +1179,19 @@ void CFSM_SakuraC::Charge1_Enter(void)
 	ResetCheckMembers();
 	m_pDM->GetAniCtrl()->SetSpeed(1.5f);
 	PlaySound_Effect(Sound_Charge1_Effect);
+
+	m_dashShadeTimer = 0.f;
 }
 
 void CFSM_SakuraC::Charge1_Update(float deltaTime)
 {
+	m_dashShadeTimer += GET_PLAYER_DT;
+	if (m_dashShadeTimer > 0.1f &&  m_pDM->GetAniTimeline() < 0.55)
+	{
+		ShadeEffect(Index_Charge1);
+		m_dashShadeTimer = 0.f;
+	}
+
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.535f)
 	{
 		PlaySound_Voice(Sound_Flash_Voice);
@@ -1766,10 +1790,18 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
+	m_dashShadeTimer = 0.f;
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 {
+	m_dashShadeTimer += GET_PLAYER_DT;
+	if (m_dashShadeTimer > 0.1f &&  m_pDM->GetAniTimeline() < 0.3)
+	{
+		ShadeEffect(Index_EvadeForward);
+		m_dashShadeTimer = 0.f;
+	}
+
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_isEvade = false;
@@ -1825,10 +1857,18 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
+	m_dashShadeTimer = 0.f;
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 {
+	m_dashShadeTimer += GET_PLAYER_DT;
+	if (m_dashShadeTimer > 0.1f &&  m_pDM->GetAniTimeline() < 0.3)
+	{
+		ShadeEffect(Index_EvadeBackward);
+		m_dashShadeTimer = 0.f;
+	}
+
 	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
 	{
 		m_isEvade = false;

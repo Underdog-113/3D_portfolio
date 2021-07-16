@@ -23,7 +23,8 @@ void CSupplyManager::Start(Engine::CScene * pScene)
 
 void CSupplyManager::Update(void)
 {
-	
+	if(m_supplyFSM[m_supplyState] != NULL)
+		m_supplyFSM[m_supplyState]->Update();
 }
 
 void CSupplyManager::OnDestroy(void)

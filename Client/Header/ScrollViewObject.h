@@ -76,6 +76,8 @@ public:
 
 		m_vButtonObject.emplace_back(button);
 		m_vImageObject.emplace_back();
+
+		m_init = false;
 		return this;
 	}
 

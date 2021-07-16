@@ -6,6 +6,9 @@
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
 #include "BattleUiManager.h"
+#include "Layer.h"
+#include "PhaseChanger.h"
+#include "Monster.h"
 
 COneStagePhaseControl::COneStagePhaseControl()
 {
@@ -30,30 +33,63 @@ void COneStagePhaseControl::Update(void)
 		break;
 
 		//Before being collided with PhaseChanger0
-	case (_int)EOneStagePhase::BeforeFirstFight:
+	case (_int)EOneStagePhase::BeforeFirstFight1:
 		break;
 
 		//After being collided with PhaseChanger0
-	case (_int)EOneStagePhase::FirstFightBegin:
+	case (_int)EOneStagePhase::FirstFight1Begin:
+		break;
+
+	case (_int)EOneStagePhase::FirstFight1End:
+	{
+		SP(Engine::CObject)& PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
+
+		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->SetTimerStart(true);
+
+		SP(CMonster) spMonClone = std::dynamic_pointer_cast<CMonster>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle"));
+		spMonClone->GetTransform()->SetPosition(-2.61195f, 0.26f, -0.340873f);
+		spMonClone->SelectChannelID();
+		spMonClone->SetIsEnabled(true);
+		spMonClone->SetSpawnTimer(1.f);
+		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->AddMonster(spMonClone);
+
+		spMonClone = std::dynamic_pointer_cast<CMonster>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle"));
+		spMonClone->GetTransform()->SetPosition(-1.14649f, 0.26f, -1.21127f);
+		spMonClone->SelectChannelID();
+		spMonClone->SetIsEnabled(true);
+		spMonClone->SetSpawnTimer(0.5f);
+		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->AddMonster(spMonClone);
+
+		spMonClone = std::dynamic_pointer_cast<CMonster>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MO_Scout", true, (_uint)ELayerID::Enemy, L"MO_Scout"));
+		spMonClone->GetTransform()->SetPosition(2.32355f, 0.26f, -0.698635f);
+		spMonClone->SelectChannelID();
+		spMonClone->SetIsEnabled(true);
+		spMonClone->SetSpawnTimer(1.f);
+		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->AddMonster(spMonClone);
+	}
+	++m_curPhase;
+		break;
+
+		//After being collided with PhaseChanger0
+	case (_int)EOneStagePhase::FirstFight2Begin:
 		break;
 
 		//After killing all the enemies
-	case (_int)EOneStagePhase::FirstFightEnd:
-		++m_curPhase;
+	case (_int)EOneStagePhase::FirstFight2End:
 		break;
 
-		//Before being collised with PhaseChanger1
-	case (_int)EOneStagePhase::BeforeSecondFight:
-		break;
+	//	//Before being collised with PhaseChanger1
+	//case (_int)EOneStagePhase::BeforeSecondFight:
+	//	break;
 
-		//After being collided with PhaseChanger1
-	case (_int)EOneStagePhase::SecondFightBegin:
-		break;
+	//	//After being collided with PhaseChanger1
+	//case (_int)EOneStagePhase::SecondFightBegin:
+	//	break;
 
-		//After killing all the enemies
-	case (_int)EOneStagePhase::SecondFightEnd:
-		++m_curPhase;
-		break;
+	//	//After killing all the enemies
+	//case (_int)EOneStagePhase::SecondFightEnd:
+	//	++m_curPhase;
+	//	break;
 
 		//Before being collised with PhaseChanger2
 	case (_int)EOneStagePhase::BeforeMidBoss:

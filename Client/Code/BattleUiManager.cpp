@@ -325,7 +325,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 		object->SetMinValue(hpMaxSum);
 		hpMaxSum += ThpMax;
 		object->SetMaxValue(hpMaxSum);
-		object->SetValue(hp - (age * m_monsterHpCount - 1));
+		object->SetValue(hp - (age * (m_monsterHpCount - 1)));
 	}
 
 	if (property == L"UP")

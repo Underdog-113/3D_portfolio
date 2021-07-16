@@ -19,38 +19,8 @@ void CDataManager::Start()
 	ItemInit(L"고급 학습 칩",10);
 	ItemInit(L"무기 강화제", 100);
 
-	WeaponInit(L"Weapon_Pistol_1");
-	WeaponInit(L"Weapon_Pistol_2");
-	WeaponInit(L"Weapon_Pistol_3");
-	WeaponInit(L"Weapon_Pistol_4");
-	WeaponInit(L"Weapon_Pistol_5");
-	WeaponInit(L"Weapon_Pistol_6");
-	WeaponInit(L"Weapon_Pistol_7");
-	WeaponInit(L"Weapon_Pistol_8");
-	WeaponInit(L"Weapon_Pistol_9");
-	WeaponInit(L"Weapon_Pistol_10");
-
-	WeaponInit(L"Weapon_Cross_1");
-	WeaponInit(L"Weapon_Cross_2");
-	WeaponInit(L"Weapon_Cross_3");
-	WeaponInit(L"Weapon_Cross_4");
-	WeaponInit(L"Weapon_Cross_5");
-	WeaponInit(L"Weapon_Cross_6");
-	WeaponInit(L"Weapon_Cross_7");
-	WeaponInit(L"Weapon_Cross_8");
-	WeaponInit(L"Weapon_Cross_9");
-	WeaponInit(L"Weapon_Cross_10");
-
-	WeaponInit(L"Weapon_Katana_1");
-	WeaponInit(L"Weapon_Katana_2");
-	WeaponInit(L"Weapon_Katana_3");
-	WeaponInit(L"Weapon_Katana_4");
-	WeaponInit(L"Weapon_Katana_5");
-	WeaponInit(L"Weapon_Katana_6");
-	WeaponInit(L"Weapon_Katana_7");
-	WeaponInit(L"Weapon_Katana_8");
-	WeaponInit(L"Weapon_Katana_9");
-	WeaponInit(L"Weapon_Katana_10");
+	WeaponInit(L"모조된 유다·피의 포옹");
+	
 
 	ValkyrieStatusDataListInit(L"투예복백련");
 	ValkyrieStatusDataListInit(L"월하초옹");

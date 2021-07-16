@@ -28,6 +28,7 @@ void CSizeUpC::Awake()
 void CSizeUpC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+	m_end = false;
 }
 
 void CSizeUpC::FixedUpdate(SP(CComponent) spThis)
@@ -37,6 +38,9 @@ void CSizeUpC::FixedUpdate(SP(CComponent) spThis)
 
 void CSizeUpC::Update(SP(CComponent) spThis)
 {
+	if (m_end)
+		return;
+
 	if (m_stopTime >= 0)
 	{
 		m_stopTime -= GET_DT;
@@ -49,6 +53,9 @@ void CSizeUpC::Update(SP(CComponent) spThis)
 	{
 		GetOwner()->GetComponent<Engine::CTransformC>()->SetSize(_float3(0, 0, 0));
 		GetOwner()->GetComponent<Engine::CTextureC>()->SetColor(_float4(1, 1, 1, 1));
+
+		if (!m_loop)
+			m_end = true;
 	}
 	GetOwner()->GetComponent<Engine::CTransformC>()->AddSizeX(+(GET_DT * m_speed));
 	GetOwner()->GetComponent<Engine::CTransformC>()->AddSizeY(+(GET_DT * m_speed));

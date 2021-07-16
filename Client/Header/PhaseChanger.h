@@ -48,7 +48,7 @@ private:
 	GETTOR			(_MONSTERS,					m_vMonster,			{},				Monsters)
 
 	GETTOR_SETTOR	(_int,						m_phaseToDie,		UNDEFINED,		PhaseToDie)
-	GETTOR			(_bool,						m_timerStart,		false,			TimerStart)
+	GETTOR_SETTOR	(_bool,						m_timerStart,		false,			TimerStart)
 	GETTOR			(_float,					m_spawnTimer,		0.f,			SpawnTimer)
 	GETTOR			(SP(Engine::CCollisionC),	m_spCollision,		nullptr,		Collision)
 };
