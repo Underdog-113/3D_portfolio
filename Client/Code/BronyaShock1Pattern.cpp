@@ -51,6 +51,7 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 			// shock1 상태로 변경
 			fsm->ChangeState(Name_Shock_1);
 			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.3f);
+			return;
 		}
 	}
 
@@ -77,33 +78,33 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
-	//if (Name_Shock_1 == fsm->GetCurStateString() &&
-	//	0.47f <= fsm->GetDM()->GetAniTimeline())
-	//{
-	//	static_cast<CMO_Sickle*>(pOwner)->UnActiveAttackBall();
-	//}
+	if (Name_Shock_1 == fsm->GetCurStateString() &&
+		0.5f <= fsm->GetDM()->GetAniTimeline())
+	{
+		static_cast<CMB_Bronya*>(pOwner)->UnActiveAttackBall();
+	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
-	//else if (Name_Shock_1 == fsm->GetCurStateString() &&
-	//	0.37f <= fsm->GetDM()->GetAniTimeline() &&
-	//	false == m_onAtkBall)
-	//{
-	//	
-	//	m_onAtkBall = true;
-	//}
+	else if (Name_Shock_1 == fsm->GetCurStateString() &&
+		0.45f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onAtkBall)
+	{
+		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
+		_mat matHand = GetRHandMat(pOwner);
+		static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &matHand, 0.35f);
+		//static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(0.f, 0.f, 0.f));
 
-	m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
-	_mat matHand = GetRHandMat(pOwner);
 
+		m_onAtkBall = true;
+	}
 
 	
-	static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &matHand, 0.35f);
-	static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(0.f, 10.f, 0.f));
-
-	//const auto& col = static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->GetCollision()->GetColliders()[0].get();
-	//static_cast<Engine::CSphereCollider*>(col)->UpdateBS();
 	
-	_float3 offset = static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->GetOffset();
-	int a = 5;
+
+	
+
+	
+	
+
 } 
 
 SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
