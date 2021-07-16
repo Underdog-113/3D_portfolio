@@ -241,6 +241,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\CountUpC.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
@@ -451,6 +452,7 @@
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
     <ClInclude Include="..\Header\ThreeStagePhaseControl.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
+    <ClInclude Include="..\Header\TimerC.h" />
     <ClInclude Include="..\Header\TimeSeeker.h" />
     <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
@@ -573,6 +575,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\CountUpC.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
@@ -759,6 +762,7 @@
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
     <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
+    <ClCompile Include="..\Code\TimerC.cpp" />
     <ClCompile Include="..\Code\TimeSeeker.cpp" />
     <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />

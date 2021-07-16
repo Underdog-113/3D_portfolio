@@ -8,6 +8,10 @@ IMPLEMENT_SINGLETON(CDataManager)
 
 void CDataManager::Start()
 {
+	TweaponData = new CWeaponData();
+	TitemData = new CItemData();
+	TvalkyrieStatusData = new CValkyrieStatusData();
+
 	// 함장, 발키리정보 넣어주기
 	m_pInStockValkyrieData = new CInStockValkyrieData();
 	m_pSquadData = new CSquadData();
@@ -67,6 +71,9 @@ void CDataManager::OnDestroy(void)
 	}
 	m_pWeaponDataList.clear();
 	
+	delete TweaponData;
+	delete TitemData;
+	delete TvalkyrieStatusData;
 }
 
 CCaptainData * CDataManager::FindCaptainData()
@@ -84,7 +91,7 @@ CValkyrieStatusData * CDataManager::FindInStockValkyrieData(std::wstring keyValu
 		}
 	}
 
-	return new CValkyrieStatusData();
+	return TvalkyrieStatusData;
 }
 
 CInStockValkyrieData * CDataManager::FindInStockValkyrieData()
@@ -102,7 +109,7 @@ CValkyrieStatusData * CDataManager::FindvalkyrieStatusData(std::wstring keyValue
 		}
 	}
 
-	return new CValkyrieStatusData();
+	return TvalkyrieStatusData;
 }
 
 CSquadData * CDataManager::FindSquadData()
@@ -120,7 +127,7 @@ CValkyrieStatusData* CDataManager::FindSquadData(std::wstring keyValue)
 		}
 	}
 
-	return new CValkyrieStatusData();
+	return TvalkyrieStatusData;
 }
 
 std::vector<CWeaponData*> CDataManager::FindWeaponData()
@@ -137,8 +144,8 @@ CWeaponData * CDataManager::FindWeaponData(std::wstring keyValue)
 			return data;
 		}
 	}
-
-	return new CWeaponData();
+	
+	return TweaponData;
 }
 
 std::vector<CItemData*> CDataManager::FindItemData()
@@ -156,7 +163,7 @@ CItemData * CDataManager::FindItemData(std::wstring keyValue)
 		}
 	}
 
-	return new CItemData();
+	return TitemData;
 }
 
 void CDataManager::CaptainInit()

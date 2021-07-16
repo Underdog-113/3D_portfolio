@@ -48,6 +48,10 @@ private:
 	CSquadData* m_pSquadData; // 파티 발키리
 	std::vector<CWeaponData*> m_pWeaponDataList; // 무기
 	std::vector<CItemData*> m_pItemDataList; // 재료
+
+	CWeaponData* TweaponData;
+	CItemData* TitemData;
+	CValkyrieStatusData* TvalkyrieStatusData;
 };
 
 #endif
