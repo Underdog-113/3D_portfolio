@@ -265,6 +265,7 @@
     <ClInclude Include="..\Header\Portal_Blue.h" />
     <ClInclude Include="..\Header\Portal_Circle.h" />
     <ClInclude Include="..\Header\Portal_Plane.h" />
+    <ClInclude Include="..\Header\QteC.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
@@ -603,6 +604,7 @@
     <ClCompile Include="..\Code\Portal_Blue.cpp" />
     <ClCompile Include="..\Code\Portal_Circle.cpp" />
     <ClCompile Include="..\Code\Portal_Plane.cpp" />
+    <ClCompile Include="..\Code\QteC.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />

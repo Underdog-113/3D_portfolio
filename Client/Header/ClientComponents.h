@@ -6,4 +6,5 @@
 #include "SizeDownC.h"
 #include "TimerC.h"
 #include "CountUpC.h"
+#include "QteC.h"
 #endif

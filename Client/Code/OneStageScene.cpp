@@ -91,7 +91,7 @@ void COneStageScene::Update(void)
 		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
 	}
 
-	if (Engine::IMKEY_PRESS(KEY_SHIFT))
+	if (Engine::IMKEY_PRESS(KEY_CONTROL))
 	{
 		ForUITest();
 	}
