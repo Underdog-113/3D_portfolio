@@ -43,13 +43,139 @@ void CStageControlTower::Start(CreateMode mode)
 	m_pDealer->SetControlTower(this);
 
 	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(true);
+
+
+}
+
+void CStageControlTower::Init()
+{
+	switch (static_cast<CValkyrie*>(m_vSquad[Actor].get())->GetStat()->GetType())
+	{
+	case V_Stat::Valkyrie_Type::KIANA:
+		CBattleUiManager::GetInstance()->PlayerChange(
+			L"Skill_Kiana_PT_001",
+			L"Skill_Kiana_PT_003",
+			L"Skill_Kiana_PT_004",
+			L"Skill_Kiana_Weapon_09",
+			10,
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
+		break;
+	case V_Stat::Valkyrie_Type::THERESA:
+		CBattleUiManager::GetInstance()->PlayerChange(
+			L"Skill_Theresa_0",
+			L"Skill_Theresa_1",
+			L"Skill_Theresa_2",
+			L"Skill_Theresa_3",
+			20,
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
+		CBattleUiManager::GetInstance()->SpecialUICanvasOn();
+		break;
+	case V_Stat::Valkyrie_Type::SAKURA:
+		CBattleUiManager::GetInstance()->PlayerChange(
+			L"Skill_Sakura_0",
+			L"Skill_Sakura_1",
+			L"Skill_Sakura_2",
+			L"Skill_Sakura_3",
+			15,
+			100,
+			0, 0, 0); // 회피,궁,아이템스킬
+		break;
+	default:
+		break;
+	}
+
+	if (m_vSquad.size() > 1)
+	{
+		CValkyrie* wait1member = static_cast<CValkyrie*>(m_vSquad[CStageControlTower::Wait_1].get());
+		V_Stat* stat = wait1member->GetStat();
+
+		auto valkyrieType = stat->GetType();
+		switch (valkyrieType)
+		{
+		case V_Stat::Valkyrie_Type::KIANA:
+			CBattleUiManager::GetInstance()->WaitingPlayerState(
+				0,
+				L"Kiana_Battle",
+				L"AvatarShengWu",
+				stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+				stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			break;
+		case V_Stat::Valkyrie_Type::THERESA:
+			CBattleUiManager::GetInstance()->WaitingPlayerState(
+				0,
+				L"Teresa_Battle",
+				L"AvatarJiXie",
+				stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+				stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			CBattleUiManager::GetInstance()->SpecialUICanvasOff();
+			break;
+		case V_Stat::Valkyrie_Type::SAKURA:
+			CBattleUiManager::GetInstance()->WaitingPlayerState(
+				0,
+				L"Sakura_Battle",
+				L"AvatarYiNeng",
+				stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+				stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			break;
+		default:
+			break;
+		}
+	}
+	if (m_vSquad.size() > 2)
+	{
+		CValkyrie* wait2member = static_cast<CValkyrie*>(m_vSquad[CStageControlTower::Wait_2].get());
+		V_Stat* stat = wait2member->GetStat();
+
+		auto valkyrieType = stat->GetType();
+		switch (valkyrieType)
+		{
+		case V_Stat::Valkyrie_Type::KIANA:
+			CBattleUiManager::GetInstance()->WaitingPlayerState(
+				1,
+				L"Kiana_Battle",
+				L"AvatarShengWu",
+				stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+				stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			break;
+		case V_Stat::Valkyrie_Type::THERESA:
+			CBattleUiManager::GetInstance()->WaitingPlayerState(
+				1,
+				L"Teresa_Battle",
+				L"AvatarJiXie",
+				stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+				stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			CBattleUiManager::GetInstance()->SpecialUICanvasOff();
+			break;
+		case V_Stat::Valkyrie_Type::SAKURA:
+			CBattleUiManager::GetInstance()->WaitingPlayerState(
+				1,
+				L"Sakura_Battle",
+				L"AvatarYiNeng",
+				stat->GetCurHp() / stat->GetMaxHp() * 100.f,
+				stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			break;
+		default:
+			break;
+		}
+
+	}
 }
 
 
 void CStageControlTower::Update(void)
 {
+	if (!m_isInit)
+	{
+		Init();
+		m_isInit = true;
+	}
+
 	if (m_mode != WithoutUI)
 		m_pLinker->UpdateLinker();
+
+	CheckTargetAirBorne();
 
 	m_pTimeSeeker->UpdateTimeSeeker();
 
@@ -65,13 +191,18 @@ void CStageControlTower::Update(void)
 		RemoveTarget();
 	}
 
+	WaitMemberCooltimeUpdate();
+
 	if (Engine::CInputManager::GetInstance()->KeyDown(StageKey_Switch_1))
 	{
 		if (m_vSquad.size() > 1)
 		{
 			CValkyrie* pValkyrie = (CValkyrie*)m_vSquad[Wait_1].get();
 			if (!pValkyrie->GetIsDead())
+			{
 				SwitchValkyrie(Wait_1);
+				m_pLinker->SkillUI_SwitchSetting();
+			}
 		}
 
 	}
@@ -81,7 +212,10 @@ void CStageControlTower::Update(void)
 		{
 			CValkyrie* pValkyrie = (CValkyrie*)m_vSquad[Wait_2].get();
 			if (!pValkyrie->GetIsDead())
+			{
 				SwitchValkyrie(Wait_2);
+				m_pLinker->UltraUI_SwitchSetting();
+			}
 		}
 	}
 
@@ -147,7 +281,6 @@ SP(Engine::CObject) CStageControlTower::CreateValkyrie(Engine::CScene * pCurScen
 	if (!wcscmp(name.c_str(), L"키아나·카스라나"))
 	{
 		SP(Engine::CObject) spKianaClone = pCurScene->GetObjectFactory()->AddClone(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
-
 // 		V_WarshipStat warshipStat;
 // 		warshipStat.SetLevel(pStatData->GetLevel());
 // 		warshipStat.SetWeaponAtk(pStatData->GetWeaponData()->GetDamage());
@@ -395,6 +528,37 @@ void CStageControlTower::RemoveTarget()
 	m_spCurTarget = nullptr;
 }
 
+void CStageControlTower::CheckTargetAirBorne()
+{
+	if (!m_spCurTarget)
+	{
+		m_pLinker->QTEButtonEffectOff();
+		return;
+	}
+	else
+	{
+		CMonster* mon = (CMonster*)m_spCurTarget.get();
+		if (!mon->GetIsEnabled() || mon->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			m_pLinker->QTEButtonEffectOff();
+			return;
+		}
+	}
+
+	CMonster* pM = static_cast<CMonster*>(m_spCurTarget.get());
+	
+	if (pM->GetComponent<CPatternMachineC>()->GetOnAirBorne())
+	{
+		m_pLinker->QTEButtonEffectOn();
+			
+	}
+	else
+	{
+		m_pLinker->QTEButtonEffectOff();
+	}
+	
+}
+
 void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject * pMonster, HitInfo info, _float3 hitPoint)
 {
 	if (!pMonster || pMonster->GetComponent<CPatternMachineC>()->GetOnDie())
@@ -551,6 +715,12 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 	// 5. 사운드
 
+}
+
+void CStageControlTower::WaitMemberCooltimeUpdate()
+{
+	static_cast<CValkyrie*>(m_vSquad[Wait_1].get())->CoolTimeUpdate();
+	static_cast<CValkyrie*>(m_vSquad[Wait_2].get())->CoolTimeUpdate();
 }
 
 void CStageControlTower::SwitchValkyrie(Squad_Role role)

@@ -40,7 +40,7 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 	}
 	// 내가 Hit_Throw 상태가 끝났다면
 	else if (Name_Sickle_Hit_Throw == fsm->GetCurStateString() &&
-			fsm->GetDM()->IsAnimationEnd())
+		fsm->GetDM()->GetAniTimeline() > 0.95)
 	{
 		fsm->ChangeState(Name_Sickle_Throw_02);
 	}

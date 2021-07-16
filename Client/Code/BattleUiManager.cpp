@@ -41,8 +41,9 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_5").get()));
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_6").get()));
 
-	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
+	// 이거 두개 위치 반대로 되어있으니까 8, 7 순서로 찾는게 맞아요 바꾸지마셈
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_8").get()));
+	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
 
 	m_skillPoint.emplace_back(static_cast<Engine::CTextObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
 	m_skillPoint.emplace_back(static_cast<Engine::CTextObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
@@ -563,6 +564,17 @@ bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 	{
 		m_coolTimeSlider[value]->SetValue(collTime);
 		m_coolTimeSlider[value]->SetMaxValue(collTime);
+		PlayerSpDown((_float)spValue);
+	}
+	return false;
+}
+
+bool CBattleUiManager::SkillExecution_Switching(_int value, _int spValue, _float remainCool, _float coolTime)
+{
+	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)
+	{
+		m_coolTimeSlider[value]->SetValue(remainCool);
+		m_coolTimeSlider[value]->SetMaxValue(coolTime);
 		PlayerSpDown((_float)spValue);
 	}
 	return false;

@@ -51,6 +51,15 @@ void CValkyrie::Update(void)
 		m_skillTimer += GET_PLAYER_DT;
 }
 
+void CValkyrie::CoolTimeUpdate(void)
+{
+	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
+		m_ultraTimer += GET_PLAYER_DT;
+
+	if (m_skillTimer < m_pStat->GetSkillCoolTime())
+		m_skillTimer += GET_PLAYER_DT;
+}
+
 void CValkyrie::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 {
 	for (auto pCollider : pCollisionC->GetColliders())

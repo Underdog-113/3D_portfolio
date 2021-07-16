@@ -47,6 +47,7 @@ public:
 public:
 	void Awake(void);
 	void Start(CreateMode mode = ALL);
+	void Init();
 	void Update(void);
 
 	void OnDestroy();
@@ -73,9 +74,11 @@ public:		/* Battle */
 	bool FindTarget(HitInfo::CrowdControl cc = HitInfo::CrowdControl::CC_None);
 	void LookTarget();
 	void RemoveTarget();
+	void CheckTargetAirBorne();
 	void HitMonster(Engine::CObject* pValkyrie, Engine::CObject* pMonster, HitInfo info, _float3 hitPoint);
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 
+	void WaitMemberCooltimeUpdate();
 	void SwitchValkyrie(Squad_Role role);
 	void BattonTouch();
 
@@ -119,6 +122,8 @@ private:	/* Stage Info? */
 	GETTOR(_int, m_gold, 30, Gold)
 	GETTOR(_int, m_captainExp, 530, CaptainExp)
 	GETTOR(_int, m_valkyrieExp, 830, ValkyrieExp)
+
+	_bool m_isInit = false;
 };
 
 #endif

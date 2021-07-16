@@ -23,6 +23,8 @@ public:
 
 	//virtual		void						FixedUpdate			(void);
 	virtual		void						Update				(void);
+
+				void						CoolTimeUpdate		(void);
 	//virtual		void						LateUpdate			(void);
 
 	//virtual		void						PreRender			(void) {};

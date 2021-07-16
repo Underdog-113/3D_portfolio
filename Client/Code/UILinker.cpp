@@ -266,12 +266,57 @@ void CUILinker::Attack()
 	m_pCT->FindTarget();
 }
 
+void CUILinker::SkillUI_SwitchSetting()
+{
+	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
+
+	_float cost = stat->GetSkillCost();
+	_float cooltime = stat->GetSkillCoolTime();
+
+	m_pUIManager->SkillExecution_Switching(
+		CBattleUiManager::Button_Type::SkillButton,
+		(_int)cost,
+		cooltime - m_pCT->GetCurrentActor()->GetSkillTimer(),
+		cooltime);
+}
+
+void CUILinker::UltraUI_SwitchSetting()
+{
+	V_Stat* stat = m_pCT->GetCurrentActor()->GetStat();
+
+	_float cost = stat->GetUltraCost();
+	_float cooltime = stat->GetUltraCoolTime();
+
+	m_pUIManager->SkillExecution_Switching(
+		CBattleUiManager::Button_Type::SpecialButton,
+		(_int)cost,
+		cooltime - m_pCT->GetCurrentActor()->GetUltraTimer(),
+		cooltime);
+}
+
 void CUILinker::SwapToOne(void)
 {
 }
 
 void CUILinker::SwapToTwo(void)
 {
+}
+
+void CUILinker::QTEButtonEffectOn(void)
+{
+	CValkyrie* pV = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_1].get());
+	if (!pV->GetIsDead())
+		m_pUIManager->QteOn(0);
+
+	CValkyrie* pV2 = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_2].get());
+	if (!pV2->GetIsDead())
+		m_pUIManager->QteOn(1);
+}
+
+void CUILinker::QTEButtonEffectOff(void)
+{
+	m_pUIManager->QteOff(0);
+	m_pUIManager->QteOff(1);
 }
 
 void CUILinker::MonsterHpDown(_float damage)
