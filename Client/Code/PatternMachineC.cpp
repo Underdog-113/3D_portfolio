@@ -55,17 +55,25 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	_float3 pos = m_pOwner->GetTransform()->GetPosition();
 
+	if (Engine::IMKEY_DOWN(KEY_5))
+	{
+		m_onAirborne = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
+	}
+
 	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
 	{
 		//m_onAirborne = true;
 		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 
-		m_onDie = true;
-		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
+		//m_onDie = true;
+		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
 
 		//m_onStun = true;
 		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnSuperArmor(false);
 		//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
+
+		m_pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(true);
 	}
 
 	// born 실행 (1번만)

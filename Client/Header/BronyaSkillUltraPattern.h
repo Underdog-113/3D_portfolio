@@ -21,12 +21,16 @@ public:
 	static SP(CBronyaSkillUltraPattern) Create();
 
 private:
+	void ReadyUltra(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos);
+	void PlayShockPattern(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos);
+	void PlayEscapePattern(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos);
+	void PlayStealthBackPattern(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos);
+	void PlayFastIDLEPattern(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos);
 	void MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 mPos);
-	void EscapeBack(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM);
 
 private:
 	//_float m_cost = 25.f;
-	_float m_cost = 5.f;
+	_float m_cost = 1.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 1.5f; // 공격 거리
@@ -39,8 +43,11 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
 	_bool m_onEscape = false;
+	_bool m_onStealthBack = false;
 	_bool m_movedCenter = false;
 	_bool m_onShock = false;
+	_bool m_onCenter = false;
+	_bool m_onUltraReady = false; // shock 쓰기 전까지 준비가 되었는지 판단
 
 	// 내려찍는 패턴을 몇 번 반복할지 정함
 	// 최소 2번, 최대 4번을 반복
@@ -62,6 +69,7 @@ private:
 
 	SP(CBronyaShock1Pattern) m_spShock1P = CBronyaShock1Pattern::Create();
 	SP(CBronyaShock2Pattern) m_spShock2P = CBronyaShock2Pattern::Create();
+	SP(CBronyaEscapePattern) m_spEscapeBackP = CBronyaEscapePattern::Create();
 	SP(CBronyaStealthBackPattern) m_spStealthBackP = CBronyaStealthBackPattern::Create();
 };
 
