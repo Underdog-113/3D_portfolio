@@ -389,3 +389,45 @@ void CAniCtrl::SetLoopAnim(_uint animIndex)
 {
 	m_pLoopAnims[animIndex] = true;
 }
+
+void CAniCtrl::ChangeAniSet_NoBlend(_uint index)
+{
+	if (index > m_pAniCtrl->GetMaxNumAnimationSets() - 1)
+		index = 0;
+
+	
+	LPD3DXANIMATIONSET pAS = NULL;
+
+	m_pAniCtrl->GetAnimationSet(index, &pAS);
+
+	m_pAniCtrl->UnkeyAllTrackEvents(m_curTrack);
+	m_pAniCtrl->SetTrackAnimationSet(m_curTrack, pAS);
+	m_pAniCtrl->ResetTime();
+	m_pAniCtrl->SetTrackPosition(m_curTrack, 0.0);
+
+
+	m_period = (_float)pAS->GetPeriod();
+	
+	m_timer = 0.f;
+
+	m_curIndex = index;
+
+	//------------
+	{
+		LPD3DXANIMATIONSET	pAnimationSet = nullptr;
+
+		m_pFakeAniCtrl->GetAnimationSet(m_curIndex, &pAnimationSet);
+
+		m_pFakeAniCtrl->UnkeyAllTrackEvents(m_fakeTrack);
+		m_pFakeAniCtrl->SetTrackAnimationSet(m_fakeTrack, pAnimationSet);
+		m_pFakeAniCtrl->ResetTime();
+		m_pFakeAniCtrl->SetTrackPosition(m_fakeTrack, 0.0);
+
+		m_fakePeriod = (_float)pAnimationSet->GetPeriod();
+		
+		m_fakeTimer = 0.f;		
+		m_fakeIndex = m_curIndex;
+
+		m_isFakeAniChange = true;
+	}
+}

@@ -976,6 +976,9 @@
     <Filter Include="04.Shader\15.KianaBodyShader">
       <UniqueIdentifier>{a90492e2-1e29-42e8-9993-f26f95142ef0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\13.SizeDown">
+      <UniqueIdentifier>{df41acaa-c5df-46b7-b90f-db3d13dd2457}</UniqueIdentifier>
+        </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_DashShade">
       <UniqueIdentifier>{3c9698b0-c1ca-45da-8dc1-dfa3fb4c59d3}</UniqueIdentifier>
     </Filter>
@@ -1986,6 +1989,9 @@
     <ClInclude Include="..\Header\KianaBodyShader.h">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SizeDownC.h">
+      <Filter>03.Component\00.UI\13.SizeDown</Filter>
+        </ClInclude>
     <ClInclude Include="..\Header\Sakura_DashShade.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_DashShade</Filter>
     </ClInclude>
@@ -2909,6 +2915,9 @@
     <ClCompile Include="..\Code\KianaBodyShader.cpp">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\SizeDownC.cpp">
+      <Filter>03.Component\00.UI\13.SizeDown</Filter>
+        </ClCompile>
     <ClCompile Include="..\Code\Sakura_DashShade.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_DashShade</Filter>
     </ClCompile>

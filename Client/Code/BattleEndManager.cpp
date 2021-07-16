@@ -22,13 +22,15 @@ void CBattleEndManager::Start(Engine::CScene * pScene)
 	T.itemName = L"특급 학습 칩";
 	T.count = 40;
 	m_itemList.emplace_back(T);
+	m_itemList.emplace_back(T);
+	m_itemList.emplace_back(T);
 
 	ValkyrieUI();
 	CaptainUI();
-	ItemUI();
 }
 void CBattleEndManager::Update(void)
 {
+	ItemUI();
 	DataUpdate();
 }
 
@@ -90,34 +92,48 @@ void CBattleEndManager::CaptainUI()
 
 void CBattleEndManager::ItemUI()
 {
+	if (m_itemList.size() == 0)
+		return;
+
+	m_timer -= GET_DT;
+
+	if (m_timer >= 0)
+		return;
+
+	m_timer = 1;
+
 	CScrollViewObject* spScrollView = static_cast<CScrollViewObject*>(m_scene->FindObjectByName(L"MainCanvas_ScrollView_0").get());
-	size_t size = m_itemList.size();
+	ItemSave item = m_itemList.back();
+	m_itemList.pop_back();
 
-	_int count = 0;
-	for (auto& item : m_itemList)
+	CDataManager::GetInstance()->ItemInit(item.itemName, item.count);
+
+	// 아이템을 추가할 메모장의 이름과 텍스처이름
+	spScrollView->AddButtonObjectData<void(CStuffItem::*)(), CStuffItem*>(&CStuffItem::InformationWindow, &CStuffItem(),
+		_float2(114.5f, 136.4f), item.itemName, L"UI_4", L"UI_4");
+
+	_int size = (_int)spScrollView->GetButtonObject().size() - 1;
 	{
-		CDataManager::GetInstance()->ItemInit(item.itemName, item.count);
-
-		// 아이템을 추가할 메모장의 이름과 텍스처이름
-		spScrollView->AddButtonObjectData<void(CStuffItem::*)(), CStuffItem*>(&CStuffItem::InformationWindow, &CStuffItem(),
-				_float2(114.5f, 136.4f), item.itemName, L"UI_4", L"UI_4");
-
-		spScrollView->AddImageObjectData(count, CDataManager::GetInstance()->FindItemData(item.itemName)->GetTextureKey(), _float3(108.0f, 94.4f, 0), _float2(0.0f, 12.5f));
-
-		_int rank = CDataManager::GetInstance()->FindItemData(item.itemName)->GetRank();
-		_float2 offset = _float2(-18.0f * (_int)(rank * 0.5f), -34.4f);
-
-		for (int i = 0; i < rank; i++)
-		{
-			spScrollView->
-				AddImageObjectData(count, L"StarBig", _float3(22.3f, 22.3f, 0.0f), offset , 0.01f);
-			offset.x += 25.0f;
-		}
-
-		spScrollView->AddTextObjectData(count, _float2(-15.1f, -56.0f), 25, D3DXCOLOR(0.1960784f, 0.1960784f, 0.1960784f, 1), L"×" + std::to_wstring(item.count));
-
-		count++;
+		Engine::CObject* a = spScrollView->GetButtonObject().at(size).get();
+		a->AddComponent<CSizeDownC>();
+		a->GetComponent<CSizeDownC>()->SetSize(1.5f);
+		a->GetComponent<CSizeDownC>()->SetSpeed(5);
 	}
+
+	spScrollView->AddImageObjectData(size, CDataManager::GetInstance()->FindItemData(item.itemName)->GetTextureKey(), _float3(108.0f, 94.4f, 0), _float2(0.0f, 12.5f));
+
+	_int rank = CDataManager::GetInstance()->FindItemData(item.itemName)->GetRank();
+	_float2 offset = _float2(-18.0f * (_int)(rank * 0.5f), -34.4f);
+
+	for (int i = 0; i < rank; i++)
+	{
+		spScrollView->
+			AddImageObjectData(size, L"StarBig", _float3(22.3f, 22.3f, 0.0f), offset, 0.01f);
+		offset.x += 25.0f;
+	}
+
+	spScrollView->AddTextObjectData(size, _float2(-15.1f, -56.0f), 25, D3DXCOLOR(0.1960784f, 0.1960784f, 0.1960784f, 1), L"×" + std::to_wstring(item.count));
+
 }
 
 void CBattleEndManager::PlayerIS()

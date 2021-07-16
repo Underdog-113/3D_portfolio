@@ -1,13 +1,13 @@
-#ifndef SIZEUPCOMPONENT_H
-#define SIZEUPCOMPONENT_H
+#ifndef SIZEDOWNCOMPONENT_H
+#define SIZEDOWNCOMPONENT_H
 
 #include "Component.h"
 #include "Slider.h"
-class CSizeUpC  final : public Engine::CComponent
+class CSizeDownC  final : public Engine::CComponent
 {
 public:
-	explicit CSizeUpC();
-	~CSizeUpC();
+	explicit CSizeDownC();
+	~CSizeDownC();
 
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
 	void Awake() override;
@@ -21,12 +21,11 @@ public:
 
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
-	
+
 private:
-	GETTOR_SETTOR(_bool, m_loop, true, Loop);
 	GETTOR_SETTOR(_float, m_size, 0, Size);
 	GETTOR_SETTOR(_float, m_speed, 0, Speed);
-	GETTOR_SETTOR(_float, m_stopTime, 0, StopTime);
+	_float3 m_oldSize;
 	_bool m_end;
 };
 #endif
