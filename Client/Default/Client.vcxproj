@@ -261,6 +261,10 @@
     <ClInclude Include="..\Header\FaceShader.h" />
     <ClInclude Include="..\Header\ParticleShader.h" />
     <ClInclude Include="..\Header\OJ_Box.h" />
+    <ClInclude Include="..\Header\Portal_Beam.h" />
+    <ClInclude Include="..\Header\Portal_Blue.h" />
+    <ClInclude Include="..\Header\Portal_Circle.h" />
+    <ClInclude Include="..\Header\Portal_Plane.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
@@ -502,6 +506,7 @@
     <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h" />
     <ClInclude Include="..\Header\ValkyrieWeaponSwap.h" />
     <ClInclude Include="..\Header\WaponItem.h" />
+    <ClInclude Include="..\Header\Warning_Ring.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
     <ClInclude Include="..\Header\WooScene.h" />
@@ -594,6 +599,10 @@
     <ClCompile Include="..\Code\FaceShader.cpp" />
     <ClCompile Include="..\Code\ParticleShader.cpp" />
     <ClCompile Include="..\Code\OJ_Box.cpp" />
+    <ClCompile Include="..\Code\Portal_Beam.cpp" />
+    <ClCompile Include="..\Code\Portal_Blue.cpp" />
+    <ClCompile Include="..\Code\Portal_Circle.cpp" />
+    <ClCompile Include="..\Code\Portal_Plane.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
@@ -812,6 +821,7 @@
     <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp" />
     <ClCompile Include="..\Code\WaponItem.cpp" />
+    <ClCompile Include="..\Code\Warning_Ring.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />

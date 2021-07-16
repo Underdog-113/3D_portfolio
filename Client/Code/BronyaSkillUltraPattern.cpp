@@ -5,11 +5,8 @@
 #include "FSMDefine_Bronya.h"
 #include "MB_Bronya.h"
 
-#include "StateMachineC.h"
 #include "Valkyrie.h" 
-#include "DynamicMeshData.h"
 #include "AniCtrl.h"
-#include "PatternMachineC.h"
 #include "AttackBall.h"
 
 CBronyaSkillUltraPattern::CBronyaSkillUltraPattern()
@@ -37,6 +34,26 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 	// 5. 내려찍기 or 점프 내려찍기
 	// 6. 뒤로 이동
 
+	ReadyUltra(pOwner, fsm, mPos);
+	PlayEscapePattern(pOwner, fsm, mPos);
+	PlayShockPattern(pOwner, fsm, mPos);
+	PlayStealthBackPattern(pOwner, fsm, mPos);
+	PlayFastIDLEPattern(pOwner, fsm, mPos);
+} 
+
+SP(CBronyaSkillUltraPattern) CBronyaSkillUltraPattern::Create()
+{
+	SP(CBronyaSkillUltraPattern) spInstance(new CBronyaSkillUltraPattern, Engine::SmartDeleter<CBronyaSkillUltraPattern>);
+
+	return spInstance;
+}
+
+void CBronyaSkillUltraPattern::ReadyUltra(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos)
+{
+	if (true == m_onUltraReady)
+	{
+		return;
+	}
 
 	/************************* Move Center */
 	if (false == m_movedCenter)
@@ -44,7 +61,7 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 		MoveCenter(pOwner, fsm, mPos);
 	}
 
-	/************************* Ultra */
+	/************************* Ready Ultra */
 	// 내가 대기 상태가 끝났고, 센터로 이동했으면
 	if (Name_IDLE == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd() &&
@@ -66,54 +83,116 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 
 		// 패턴을 반복할 개수를 정함 (2 ~ 4)
 		m_curCnt = GetRandRange(m_minCnt, m_maxCnt);
+
+		m_onUltraReady = true;
 	}
-	// 내가 대기 상태가 끝났다면
-	else if (true == m_onShock)
+}
+
+void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos)
+{
+	if (false == m_onShock)
 	{
-		// m_curCnt가 0이 아닐 때 까지 패턴 반복
+		return;
+	}
+
+	// 패턴 반복
+	switch (m_curPattern)
+	{
+	case 1:
+		m_spShock1P->Pattern(pOwner);
+		break;
+	case 2:
+		m_spShock2P->Pattern(pOwner);
+		break;
+	}
+
+	// select가 false로 바꼈다면 (shock 패턴이 끝났다면)
+	if (false == pOwner->GetComponent<CPatternMachineC>()->GetOnSelect())
+	{
+		// 카운트를 하나 줄이고,
+		--m_curCnt;
+		std::cout << "========================" << std::endl;
+		std::cout << "카운트 하나 줄음!" << std::endl;
+		std::cout << "cnt: " << m_curCnt << std::endl;
+
+		// 아직 카운트가 남아있다면 select를 true로 변경하여 패턴을 계속 이어나감
 		if (0 < m_curCnt)
 		{
-			switch (m_curPattern)
-			{
-			case 1:
-				m_spShock1P->Pattern(pOwner);				
-				break;
-			case 2:
-				m_spShock2P->Pattern(pOwner);
-				break;
-			}
-		}
-
-		
-
-		// 만약 m_curCnt가 0이 아니고, select가 false라면
-		// select가 false라는 것은 shock가 한 번 끝났으므로 다음 shock 실행
-		if (0 < m_curCnt && false == pOwner->GetComponent<CPatternMachineC>()->GetOnSelect())
-		{
-			--m_curCnt;
+			// 새로운 shock 패턴을 고름
 			m_curPattern = GetRandRange(1, 2);
-
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(true);
+
+			m_onStealthBack = true;
+			m_onShock = false;
 		}
-
-		//m_spStealthBackP->Pattern(pOwner);
-
+		// 카운트를 모두 소진하였다면 (패턴이 끝났다면)
+		else
+		{
+			m_onStealthBack = false;
+			m_onEscape = false;
+			m_onShock = false;
+			m_onCenter = false;
+			m_onUltraReady = false;
+			m_movedCenter = false;
+			return;
+		}
 	}
-} 
+}
 
-SP(CBronyaSkillUltraPattern) CBronyaSkillUltraPattern::Create()
+void CBronyaSkillUltraPattern::PlayEscapePattern(Engine::CObject * pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos)
 {
-	SP(CBronyaSkillUltraPattern) spInstance(new CBronyaSkillUltraPattern, Engine::SmartDeleter<CBronyaSkillUltraPattern>);
+	if (false == m_onEscape)
+	{
+		return;
+	}
 
-	return spInstance;
+	m_spEscapeBackP->Pattern(pOwner);
+
+	if (false == pOwner->GetComponent<CPatternMachineC>()->GetOnSelect())
+	{
+		std::cout << "Escape!" << std::endl;
+		std::cout << "========================" << std::endl;
+		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(true);
+
+		m_onEscape = false;
+		m_onShock = true;
+	}
+}
+
+void CBronyaSkillUltraPattern::PlayStealthBackPattern(Engine::CObject * pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos)
+{
+	if (false == m_onStealthBack)
+	{
+		return;
+	}
+
+	m_spStealthBackP->Pattern(pOwner);
+
+	if (false == pOwner->GetComponent<CPatternMachineC>()->GetOnSelect())
+	{
+		std::cout << "StealthBack!" << std::endl;
+		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(true);
+
+		m_onStealthBack = false;
+		m_onEscape = true;
+	}
+}
+
+void CBronyaSkillUltraPattern::PlayFastIDLEPattern(Engine::CObject * pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos)
+{
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		0.7f < fsm->GetDM()->GetAniTimeline())
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+	}
+	else if (Name_IDLE == fsm->GetCurStateString())
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(4.f);
+	}
 }
 
 void CBronyaSkillUltraPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 mPos)
 {
-	//SP(CBronyaEscapePattern) spPattern = CBronyaEscapePattern::Create();
-
-	//spPattern->Pattern(pOwner);
-
 	// 이스케이프 외 애니메이션이 종료되었다면
 	if (Name_Escape_In != spFSM->GetCurStateString() &&
 		Name_Escape_Out != spFSM->GetCurStateString() &&
@@ -126,11 +205,11 @@ void CBronyaSkillUltraPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_Brony
 	else if (Name_Escape_Out == spFSM->GetCurStateString() &&
 		0.76f <= spFSM->GetDM()->GetAniTimeline() &&
 		0.f >= m_lerpCurTimer &&
-		false == m_onEscape)
+		false == m_onCenter)
 	{
 		// 애니메이션 정지
 		spFSM->GetDM()->GetAniCtrl()->SetSpeed(0.05f);
-		m_onEscape = true;
+		m_onCenter = true;
 
 		// 센터로 이동
 		m_lerpStartPos = mPos;
@@ -155,12 +234,12 @@ void CBronyaSkillUltraPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_Brony
 	// escape in 상태 중이면서 이동이 끝났다면
 	else if (Name_Escape_Out == spFSM->GetCurStateString() &&
 		m_lerpCurTimer <= m_lerpMaxTimer &&
-		true == m_onEscape)
+		true == m_onCenter)
 	{
 		// 애니메이션 재생
 		spFSM->ChangeState(Name_Escape_In);
 		spFSM->GetDM()->GetAniCtrl()->SetSpeed(1.f);
-		m_onEscape = false;
+		m_onCenter = false;
 	}
 	// escape in 상태가 끝났다면
 	else if (Name_Escape_In == spFSM->GetCurStateString() &&
@@ -171,9 +250,4 @@ void CBronyaSkillUltraPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_Brony
 		m_lerpCurTimer = 0.f;
 		m_movedCenter = true;
 	}
-}
-
-void CBronyaSkillUltraPattern::EscapeBack(Engine::CObject * pOwner, SP(CFSM_BronyaC) spFSM)
-{
-
 }

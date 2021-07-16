@@ -14,10 +14,13 @@
 
 CBronyaShock1Pattern::CBronyaShock1Pattern()
 {
+	m_pAttackBallMat = new _mat;
 }
 
 CBronyaShock1Pattern::~CBronyaShock1Pattern()
 {
+	delete m_pAttackBallMat;
+	m_pAttackBallMat = nullptr;
 }
 
 void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
@@ -27,12 +30,7 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
-	CoolTime(m_walkTime, m_walkCool, m_walkReady);
-
-	if (Name_Shock_1 != fsm->GetCurStateString())
-	{
-		static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
-	}
+	static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
 
 	/************************* Range */
 	// 상대가 공격 범위 밖이고
@@ -49,21 +47,13 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 	// 상대가 공격 범위 안이고
 	else if (len <= m_atkDis)
 	{
-		//// 내가 이동, 대기 상태가 끝났다면
-		//if ((Name_Run == fsm->GetCurStateString() ||
-		//	Name_IDLE == fsm->GetCurStateString()) &&
-		//	fsm->GetDM()->IsAnimationEnd())
-		//{
-		//	// shoot1 상태로 변경
-		//	fsm->ChangeState(Name_Shoot_1);
-		//}
-
 		// 내가 대기 상태라면
 		if (Name_IDLE == fsm->GetCurStateString() ||
 			Name_Run == fsm->GetCurStateString())
 		{
 			// shock1 상태로 변경
 			fsm->ChangeState(Name_Shock_1);
+			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.3f);
 		}
 	}
 
@@ -73,7 +63,7 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		_float3 dir = tPos - mPos;
 
-		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT * 4.f;
+		mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT * 18.f;
 		pOwner->GetTransform()->SetPosition(mPos);
 	}
 
@@ -84,8 +74,40 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 대기 상태로 변경
 		fsm->ChangeState(Name_IDLE);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		m_onAtkBall = false;
 	}
+
+	/************************* AttackBall */
+	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
+	//if (Name_Shock_1 == fsm->GetCurStateString() &&
+	//	0.47f <= fsm->GetDM()->GetAniTimeline())
+	//{
+	//	static_cast<CMO_Sickle*>(pOwner)->UnActiveAttackBall();
+	//}
+	// 내가 공격 상태고, 적절할 때 어택볼 생성
+	//else if (Name_Shock_1 == fsm->GetCurStateString() &&
+	//	0.37f <= fsm->GetDM()->GetAniTimeline() &&
+	//	false == m_onAtkBall)
+	//{
+	//	
+	//	m_onAtkBall = true;
+	//}
+	if (!m_onAtkBall)
+	{
+		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
+
+
+		static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(1.f, 0.f, 0.f));
+		static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, m_pAttackBallMat, 0.35f);
+
+		m_onAtkBall = true;
+	}
+
+
+	*m_pAttackBallMat = GetRHandMat(pOwner);
+
 } 
 
 SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
@@ -93,4 +115,16 @@ SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
 	SP(CBronyaShock1Pattern) spInstance(new CBronyaShock1Pattern, Engine::SmartDeleter<CBronyaShock1Pattern>);
 
 	return spInstance;
+}
+
+_mat CBronyaShock1Pattern::GetRHandMat( Engine::CObject * pOwner)
+{
+	_mat combMat = *m_pRHand;
+	_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
+	combMat._41 -= rootMotionPos.x;
+	combMat._43 -= rootMotionPos.z;
+
+	_mat realPosMat = combMat * pOwner->GetTransform()->GetWorldMatrix();
+
+	return realPosMat;
 }

@@ -990,6 +990,15 @@
     </Filter>
     <Filter Include="03.Component\00.UI\15.CountUp">
       <UniqueIdentifier>{a2342855-4e66-46ee-bd0d-1baabb52584a}</UniqueIdentifier>
+        </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame">
+      <UniqueIdentifier>{a2e31c48-43a2-4bf5-9857-fea89d8a92b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing">
+      <UniqueIdentifier>{c135ecc1-6b99-42ec-8bf8-4185ae1ad2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal">
+      <UniqueIdentifier>{f009b1fe-9f7e-4929-beac-a251a87f69a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2012,6 +2021,21 @@
     </ClInclude>
     <ClInclude Include="..\Header\CountUpC.h">
       <Filter>03.Component\00.UI\15.CountUp</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Header\Warning_Ring.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Portal_Plane.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Portal_Circle.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Portal_Blue.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Portal_Beam.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2944,6 +2968,21 @@
     </ClCompile>
     <ClCompile Include="..\Code\CountUpC.cpp">
       <Filter>03.Component\00.UI\15.CountUp</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Code\Warning_Ring.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Portal_Plane.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Portal_Circle.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Portal_Blue.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Portal_Beam.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -139,7 +139,7 @@ void CYongScene::Update(void)
 		spObj->GetTransform()->SetSize(_float3(0.2f, 0.2f, 0.2f));*/
 		
 
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Mark", true, (_uint)Engine::ELayerID::Effect);
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Warning_Ring", true, (_uint)Engine::ELayerID::Effect);
 
 		// Bronya Smoke
 		// 일정시간 마다 호출

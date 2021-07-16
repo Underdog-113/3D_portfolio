@@ -55,27 +55,11 @@ void CMB_Bronya::Awake(void)
 		CBronyaStunPattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
-
-
-	
-
-
-	//auto objs = Engine::GET_CUR_SCENE->GetLayers()[(_int)ELayerID::Enemy]->GetGameObjects();
-	//auto iter = objs.begin();
-
-	//for (; iter != objs.end(); )
-	//{
-	//	if ((*iter)->GetName() == L"Bronya_Weapon0")
-	//	{
-	//		m_spWeapon = (*iter);
-	//		break;
-	//	}
-	//}
 }
 
 void CMB_Bronya::Start(void)
@@ -98,9 +82,9 @@ void CMB_Bronya::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(14);
+	m_pStat->SetHPMagnification(10);
 	m_pStat->SetOnSuperArmor(true);
-	m_pStat->SetMaxBreakGauge(561.f);
+	m_pStat->SetMaxBreakGauge(1000.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
 
 	m_pSuperArmor->SetHitL(true);
@@ -235,14 +219,6 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 		}
 		break;
 	case HitInfo::Str_Airborne:
-		if (false == m_pSuperArmor->GetAirborne())
-		{
-			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
-		}
-		else if (true == m_pSuperArmor->GetAirborne())
-		{
-			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
-		}
 		break;
 	}
 
@@ -275,12 +251,6 @@ void CMB_Bronya::MonsterDead()
 
 void CMB_Bronya::EquipWeapon()
 {
-	//고쳐야함
-	SP(Engine::CTransformC) pParentTransform;
-	pParentTransform = m_spTransform;
-
-	SP(Engine::CTransformC) pWeaponTransform = m_spWeapon->GetTransform();
-
 	if (m_pParentBoneMat == nullptr)
 	{
 		Engine::CDynamicMeshData* pDM =
@@ -301,12 +271,11 @@ void CMB_Bronya::EquipWeapon()
 		}
 
 		m_pParentBoneMat = &pFrm->CombinedTransformMatrix;
-
-		m_pParentWorldMat = &pParentTransform->GetWorldMatrix();
+		m_pParentWorldMat = &m_spTransform->GetWorldMatrix();
 	}
 
-	pWeaponTransform->SetRotation(_float3(30.2f, 23.8f, 1.6f));
-	pWeaponTransform->SetPosition(_float3(1.1f, -0.22f, -0.6f));
+	m_spWeapon->GetTransform()->SetRotation(_float3(30.2f, 23.8f, 1.6f));
+	m_spWeapon->GetTransform()->SetPosition(_float3(1.1f, -0.22f, -0.6f));
 }
 
 SP(CMB_Bronya) CMB_Bronya::Create(_bool isStatic, Engine::CScene * pScene)
