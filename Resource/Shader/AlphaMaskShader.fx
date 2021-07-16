@@ -14,6 +14,7 @@ float  gTmpAlpha;
 bool   gPlayingAnim;
 bool   gPlayingAnim_UpDown = false;
 bool   g_bAlphaCtrl;
+bool   g_zWriteEnabled = false;
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
 {
@@ -112,7 +113,7 @@ technique AlphaMask
 	pass p0
 	{
 		CullMode = None;
-		zWriteEnable = false;
+		zWriteEnable = g_zWriteEnabled;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
