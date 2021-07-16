@@ -1,16 +1,15 @@
 #pragma once
 #include "SoftEffect.h"
 
-class CMonsterAttackSign : public CSoftEffect
+class CKiana_WSkill_Shoot : public CSoftEffect
 {
 	SMART_DELETER_REGISTER
 
-private:
-	CMonsterAttackSign();
-	~CMonsterAttackSign();
-
 public:
-	static	SP(CMonsterAttackSign) Create(_bool isStatic, Engine::CScene* pScene);
+	CKiana_WSkill_Shoot();
+	~CKiana_WSkill_Shoot();
+public:
+	static	SP(CKiana_WSkill_Shoot) Create(_bool isStatic, Engine::CScene* pScene);
 	SP(Engine::CObject) MakeClone(void) override;
 	void Awake(void) override;
 	void Start(void) override;
@@ -33,5 +32,8 @@ public:
 
 private:
 	static _uint m_s_uniqueID;
+
+private:
+	void UpdateFrame(_float _frmSpeed);
 };
 

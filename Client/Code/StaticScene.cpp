@@ -70,6 +70,9 @@
 #include "Kiana_Ult_Plane.h"
 #include "Kiana_Ult_Shield.h"
 #include "Kiana_Ult_Ring.h"
+#include "KianaBranchSign.h"
+#include "Kiana_WSkill_Circle.h"
+#include "Kiana_WSkill_Shoot.h"
 
 // Theresa
 #include "Theresa_Trail.h"
@@ -154,6 +157,10 @@
 #include "Portal_Circle.h"
 #include "Portal_Plane.h"
 #include "Portal_Beam.h"
+
+//Wall
+#include "Stage_Wall.h"
+#include "Stage_Wall_barrier.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -417,10 +424,22 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
 
+	SP(CSoftEffect) spKiana_WSkill_Shoot(CKiana_WSkill_Shoot::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_WSkill_Shoot);
+
+	SP(CMeshEffect_Client) spKiana_WSkill_Circle(CKiana_WSkill_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_WSkill_Circle);
+
+	SP(CSoftEffect) spKianaBranchSign(CKianaBranchSign::Create(true, this));
+	spKianaBranchSign->GetComponent<Engine::CTextureC>()->AddTexture(L"YellowFlare");
+	spKianaBranchSign->GetComponent<Engine::CTextureC>()->AddTexture(L"YellowFlare");
+	spKianaBranchSign->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spKianaBranchSign);
+
+	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
 
-	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Trail(CTheresa_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Trail);
 
@@ -997,5 +1016,13 @@ void CStaticScene::InitEffectPrototypes(void)
 	// Particle
 	SP(Engine::CObject) spTestParticle(CTestParticle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTestParticle);
+
+
+	// Wall Effect
+	SP(CMeshEffect_Client) spStageWall(CStage_Wall::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStageWall);
+
+	SP(CMeshEffect_Client) spStageWallBarrier(CStage_Wall_barrier::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStageWallBarrier);
 
 }
