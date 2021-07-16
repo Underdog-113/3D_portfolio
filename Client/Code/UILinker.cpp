@@ -63,7 +63,8 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"Kiana_Battle",
 			L"AvatarShengWu",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
-			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
+			5);
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->WaitingPlayerState(
@@ -71,7 +72,8 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"Teresa_Battle",
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
-			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
+			5);
 		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
@@ -80,7 +82,8 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"Sakura_Battle",
 			L"AvatarYiNeng",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
-			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
+			5);
 		break;
 	default:
 		break;
@@ -100,7 +103,8 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"Kiana_Battle",
 			L"AvatarShengWu",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
-			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
+			5);
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->WaitingPlayerState(
@@ -108,7 +112,8 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"Teresa_Battle",
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
-			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
+			5);
 		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
@@ -117,7 +122,8 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"Sakura_Battle",
 			L"AvatarYiNeng",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
-			stat->GetCurSp() / stat->GetMaxSp() * 100.f);
+			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
+			5);
 		break;
 	default:
 		break;

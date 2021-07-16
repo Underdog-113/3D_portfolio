@@ -973,6 +973,12 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff">
       <UniqueIdentifier>{27149103-0251-4c96-a1a8-c8f7ea722f16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\00.UI\14.Timer">
+      <UniqueIdentifier>{c3895345-7883-4156-b0e9-9c567192ba2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\00.UI\15.CountUp">
+      <UniqueIdentifier>{a2342855-4e66-46ee-bd0d-1baabb52584a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame">
       <UniqueIdentifier>{a2e31c48-43a2-4bf5-9857-fea89d8a92b0}</UniqueIdentifier>
     </Filter>
@@ -1002,6 +1008,9 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Shield">
       <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="03.Component\00.UI\16.QTE">
+        <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2019,6 +2028,12 @@
     <ClInclude Include="..\Header\Sakura_DamageMark.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\TimerC.h">
+      <Filter>03.Component\00.UI\14.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CountUpC.h">
+      <Filter>03.Component\00.UI\15.CountUp</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Warning_Ring.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing</Filter>
     </ClInclude>
@@ -2048,6 +2063,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_WSkill_Shoot.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\QteC.h">
+        <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2975,6 +2993,12 @@
     <ClCompile Include="..\Code\Sakura_DamageMark.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\TimerC.cpp">
+      <Filter>03.Component\00.UI\14.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CountUpC.cpp">
+      <Filter>03.Component\00.UI\15.CountUp</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Warning_Ring.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing</Filter>
     </ClCompile>
@@ -3004,6 +3028,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_WSkill_Shoot.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
+    </ClCompile>
+      <ClCompile Include="..\Code\QteC.cpp">
+        <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

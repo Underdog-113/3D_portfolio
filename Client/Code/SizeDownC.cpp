@@ -53,8 +53,6 @@ void CSizeDownC::Update(SP(CComponent) spThis)
 		m_end = true;
 		m_size = 1;
 	}
-	//현재 사이즈와 사이즈의 비율을 구해서 알파로
-
 }
 
 void CSizeDownC::LateUpdate(SP(CComponent) spThis)

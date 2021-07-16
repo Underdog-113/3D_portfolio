@@ -41,8 +41,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_5").get()));
 	m_playerIllustration.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerIllustration_6").get()));
 
-	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
 	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_8").get()));
+	m_playerProperty.emplace_back(static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_PlayerProperty_7").get()));
 
 	m_skillPoint.emplace_back(static_cast<Engine::CTextObject*>(pScene->FindObjectByName(L"MainCanvas_SkillSP_14").get()));
 	m_skillPoint.emplace_back(static_cast<Engine::CTextObject*>(pScene->FindObjectByName(L"MainCanvas_SpecialSkillSP_13").get()));
@@ -84,6 +84,11 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_waitingPlayerSpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar1_6").get()));
 	m_waitingPlayerSpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar2_8").get()));
 
+	m_playerChange.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_14").get()));
+	m_playerChange[0]->AddComponent<CSkillCollTimcC>();
+	m_playerChange.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_13").get()));
+	m_playerChange[1]->AddComponent<CSkillCollTimcC>();
+
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_9").get()));
 	m_coolTimeSlider[Button_Type::BasicButton]->AddComponent<CSkillCollTimcC>();
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_10").get()));
@@ -93,13 +98,11 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_coolTimeSlider.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MainCanvas_SkillCollTime_12").get()));
 	m_coolTimeSlider[Button_Type::SkillButton]->AddComponent<CSkillCollTimcC>();
 
-	pScene->FindObjectByName(L"MainCanvas_Image_22")->AddComponent<CSizeUpC>()->SetSize(171.3f);
-	pScene->FindObjectByName(L"MainCanvas_Image_22")->GetComponent<CSizeUpC>()->SetSpeed(150.0f);
+	pScene->FindObjectByName(L"MainCanvas_Image_22")->AddComponent<CQteC>()->AddData(1.0f, 1.5f, 1);
 	pScene->FindObjectByName(L"MainCanvas_Image_22")->SetIsEnabled(false);
 	m_vQte.emplace_back(pScene->FindObjectByName(L"MainCanvas_Image_22").get());
 
-	pScene->FindObjectByName(L"MainCanvas_Image_23")->AddComponent<CSizeUpC>()->SetSize(171.3f);
-	pScene->FindObjectByName(L"MainCanvas_Image_23")->GetComponent<CSizeUpC>()->SetSpeed(150.0f);
+	pScene->FindObjectByName(L"MainCanvas_Image_23")->AddComponent<CQteC>()->AddData(1.0f, 1.5f, 5);
 	pScene->FindObjectByName(L"MainCanvas_Image_23")->SetIsEnabled(false);
 	m_vQte.emplace_back(pScene->FindObjectByName(L"MainCanvas_Image_23").get());
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -175,6 +178,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	PlayerSp(m_playerSpBar->GetMaxValue());
 
 	SquadOff(pScene);
+	WaitingPlayerSetting();
 }
 
 void CBattleUiManager::Update(void)
@@ -350,23 +354,31 @@ bool CBattleUiManager::IsMonsterStateOn()
 
 void CBattleUiManager::WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2)
 {
-	m_playerIllustration[0]->GetTexture()->ChangeTexture(playerTexture1, 0);
-	m_playerProperty[0]->GetTexture()->ChangeTexture(playerProperty1, 0);
-	m_waitingPlayerHpBar[0]->SetValue(playerHp1);
-	m_waitingPlayerSpBar[0]->SetValue(playerSp1);
+	if (playerTexture1 != L"")
+	{
+		m_playerIllustration[0]->GetTexture()->ChangeTexture(playerTexture1, 0);
+		m_playerProperty[0]->GetTexture()->ChangeTexture(playerProperty1, 0);
+		m_waitingPlayerHpBar[0]->SetValue(playerHp1);
+		m_waitingPlayerSpBar[0]->SetValue(playerSp1);
+	}
 
-	m_playerIllustration[1]->GetTexture()->ChangeTexture(playerTexture2, 0);
-	m_playerProperty[1]->GetTexture()->ChangeTexture(playerProperty2, 0);
-	m_waitingPlayerHpBar[1]->SetValue(playerHp2);
-	m_waitingPlayerSpBar[1]->SetValue(playerSp2);
+	if (playerTexture2 != L"")
+	{
+		m_playerIllustration[1]->GetTexture()->ChangeTexture(playerTexture2, 0);
+		m_playerProperty[1]->GetTexture()->ChangeTexture(playerProperty2, 0);
+		m_waitingPlayerHpBar[1]->SetValue(playerHp2);
+		m_waitingPlayerSpBar[1]->SetValue(playerSp2);
+	}
 }
 
-void CBattleUiManager::WaitingPlayerState(_uint num, std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1)
+void CBattleUiManager::WaitingPlayerState(_uint num, std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, _float swapCollTime)
 {
 	m_playerIllustration[num]->GetTexture()->ChangeTexture(playerTexture1, 0);
 	m_playerProperty[num]->GetTexture()->ChangeTexture(playerProperty1, 0);
 	m_waitingPlayerHpBar[num]->SetValue(playerHp1);
 	m_waitingPlayerSpBar[num]->SetValue(playerSp1);
+	m_playerChange[num]->SetMaxValue(swapCollTime);
+	m_playerChange[num]->SetValue(swapCollTime);
 }
 
 void CBattleUiManager::PlayerSkillActivation(_int value)
@@ -581,13 +593,10 @@ void CBattleUiManager::BattleEnd()
 	m_specialUICanvas->SetIsEnabled(false);
 
 	_float m_totalTime = m_time->GetComponent<CTimerUiC>()->GetTotalTime();
-	_int minute = (int)m_totalTime / 60;
-	_int second = (int)m_totalTime % 60;
-	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_3")->GetComponent<Engine::CTextC>()
-								->ChangeMessage(std::to_wstring(minute) + L" : " + std::to_wstring(second));
+	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_3")->AddComponent<CTimerC>()->SetTime(m_totalTime);
 
-	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->GetComponent<Engine::CTextC>()
-		->ChangeMessage(std::to_wstring(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount()));
+	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->AddComponent<CCountUpC>()
+		->SetCount(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount());
 }
 
 void CBattleUiManager::GameOver()
@@ -671,4 +680,21 @@ void CBattleUiManager::SquadOff(Engine::CScene * pScene)
 		pScene->FindObjectByName(L"MainCanvas_WaitingPlayerSTBar2_8")->SetIsEnabled(false);
 		pScene->FindObjectByName(L"MainCanvas_SkillCollTime_13")->SetIsEnabled(false);
 	}
+}
+
+void CBattleUiManager::WaitingPlayerSetting()
+{
+	std::vector<CValkyrieStatusData*> data = CDataManager::GetInstance()->FindSquadData()->GetValkyriesList();
+	size_t squadCount = data.size();
+
+	if (squadCount == 2)
+	{
+		WaitingPlayerState(data[1]->GetSquadTextureKey(), data[1]->GetProperty(), (float)data[1]->GetHp(), (float)data[1]->GetMaxHp(), L"", L"", 0.0f, 0.0f);
+	}
+	else if (squadCount == 3)
+	{
+		WaitingPlayerState(data[1]->GetSquadTextureKey(), data[1]->GetProperty(), (float)data[1]->GetHp(), (float)data[1]->GetMaxHp(), data[2]->GetSquadTextureKey(), data[2]->GetProperty(), (float)data[2]->GetHp(), (float)data[2]->GetMaxHp());
+	}
+
+	
 }

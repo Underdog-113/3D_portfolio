@@ -46,7 +46,8 @@ public:
 
 	void WaitingPlayerState(std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1,  _float playerSp1,
 					 std::wstring playerTexture2, std::wstring playerProperty2, _float playerHp2, _float playerSp2);
-	void WaitingPlayerState(_uint num, std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1);
+
+	void WaitingPlayerState(_uint num, std::wstring playerTexture1, std::wstring playerProperty1, _float playerHp1, _float playerSp1, _float swapCollTime);
 
 	void PlayerSkillActivation(_int value);
 
@@ -91,6 +92,7 @@ private:
 	void skillActivationImageCheck();
 	void monsterHpBarCheck();
 	void SquadOff(Engine::CScene * pScene);
+	void WaitingPlayerSetting();
 private:
 	_bool m_activation;
 	_int m_monsterHpCount;
@@ -129,6 +131,7 @@ private:
 	std::vector<Engine::CSlider*> m_monsterWhiteHpBar;
 	std::vector<Engine::CSlider*> m_playerHpBar;
 	Engine::CSlider* m_playerSpBar;
+	std::vector<Engine::CSlider*> m_playerChange;
 	std::vector<Engine::CSlider*> m_waitingPlayerHpBar;
 	std::vector<Engine::CSlider*> m_waitingPlayerSpBar;
 	std::vector<Engine::CSlider*> m_specialUBar;
