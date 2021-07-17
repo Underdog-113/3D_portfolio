@@ -1,6 +1,9 @@
 #pragma once
 #include "Monster.h"
 
+class CAttackBall;
+class CBronyaBullet;
+
 class CMB_Bronya final : public CMonster
 {
 	SMART_DELETER_REGISTER
@@ -32,33 +35,33 @@ public:
 
 			void OnDisable(void) override;
 
-			virtual			void			OnCollisionEnter(Engine::_CollisionInfo ci);
-			virtual			void			OnCollisionStay(Engine::_CollisionInfo ci);
-			virtual			void			OnCollisionExit(Engine::_CollisionInfo ci);
-
-			virtual			void			OnTriggerEnter(Engine::CCollisionC const* pCollisionC);
-			virtual			void			OnTriggerStay(Engine::CCollisionC const* pCollisionC);
-			virtual			void			OnTriggerExit(Engine::CCollisionC const* pCollisionC);
+			virtual void OnCollisionEnter(Engine::_CollisionInfo ci);
+			virtual void OnCollisionStay(Engine::_CollisionInfo ci);
+			virtual void OnCollisionExit(Engine::_CollisionInfo ci);
+						 
+			virtual void OnTriggerEnter(Engine::CCollisionC const* pCollisionC);
+			virtual void OnTriggerStay(Engine::CCollisionC const* pCollisionC);
+			virtual void OnTriggerExit(Engine::CCollisionC const* pCollisionC);
 
 			void SetBasicName(void) override;
-
-			void ApplyHitInfo(HitInfo info) override;
-			virtual void MonsterDead() override;
+			
 private:
-	void   EquipWeapon();
+	void EquipWeapon();
+	void ApplyHitInfo(HitInfo info) override;
+	virtual void MonsterDead() override;
 
 private:
 	static _uint m_s_uniqueID;
-
-	const _mat*  m_pParentBoneMat = nullptr;
+	const _mat* m_pParentBoneMat = nullptr;
+	const _mat* m_pParentWorldMat = nullptr;
 	_mat m_actualBoneMat;
-	const _mat*  m_pParentWorldMat = nullptr;
-	_float3		 m_vDir;
+	_float3 m_vDir;
 
-	SP(Engine::CObject) m_spWeapon;
+	GETTOR(SP(Engine::CObject), m_spWeapon, nullptr, Weapon)
+	GETTOR(std::vector<SP(CBronyaBullet)>, m_vBullets, {}, Bullets)
+	GETTOR(std::vector<SP(CAttackBall)>, m_vBulletAB, {}, BulletAB)
 
 public:
-	static		SP(CMB_Bronya)			Create(_bool isStatic, Engine::CScene* pScene);
+	static SP(CMB_Bronya) Create(_bool isStatic, Engine::CScene* pScene);
 	void ChaseTarget(_float3 targetPos);
 };
-

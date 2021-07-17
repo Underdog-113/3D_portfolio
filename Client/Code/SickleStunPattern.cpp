@@ -30,7 +30,7 @@ void CSickleStunPattern::Pattern(Engine::CObject* pOwner)
 
 	// 내가 break guage가 0이고, airborne 상태, standup 상태가 아니라면
 	if (0.f >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurBreakGauge() &&
-		Name_Sickle_StandBy != fsm->GetCurStateString() &&
+		Name_Sickle_StandUp != fsm->GetCurStateString() &&
 		Name_Sickle_Stun != fsm->GetCurStateString())
 	{
 		fsm->ChangeState(Name_Sickle_Stun);
@@ -56,7 +56,7 @@ void CSickleStunPattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_Sickle_StandBy);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnStun(false);
 	}
-}
+ }
 
 SP(CSickleStunPattern) CSickleStunPattern::Create()
 {

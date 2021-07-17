@@ -178,6 +178,22 @@ void CMonster::UnActiveAttackBall()
 	m_pAttackBall->SetIsEnabled(false);
 }
 
+void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius, CAttackBall * pAB)
+{
+	HitInfo info;
+	info.SetDamageRate(damageRate);
+	info.SetStrengthType(strength);
+	info.SetCrowdControlType(cc);
+
+	pAB->SetupBall(this, pBoneMat, radius, info);
+	pAB->SetIsEnabled(true);
+}
+
+void CMonster::UnActiveAttackBall(CAttackBall * pAB)
+{
+	pAB->SetIsEnabled(false);
+}
+
 void CMonster::ActiveAttackBox(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float3 size, _float3 offset, _float3 rotOffset)
 {
 	HitInfo info;

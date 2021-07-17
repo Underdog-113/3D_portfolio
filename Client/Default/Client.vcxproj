@@ -203,6 +203,7 @@
     <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
+    <ClInclude Include="..\Header\BronyaBullet.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
     <ClInclude Include="..\Header\BronyaEscapePattern.h" />
     <ClInclude Include="..\Header\BronyaFlashBang_AS.h" />
@@ -535,6 +536,7 @@
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaBullet.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
     <ClCompile Include="..\Code\BronyaEscapePattern.cpp" />
     <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp" />

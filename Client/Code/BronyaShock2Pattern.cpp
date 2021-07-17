@@ -14,10 +14,13 @@
 
 CBronyaShock2Pattern::CBronyaShock2Pattern()
 {
+	m_pAttackBallMat = new _mat;
 }
 
 CBronyaShock2Pattern::~CBronyaShock2Pattern()
 {
+	delete m_pAttackBallMat;
+	m_pAttackBallMat = nullptr;
 }
 
 void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
@@ -50,6 +53,8 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			// shock2 상태로 변경
 			fsm->ChangeState(Name_Shock_2);
+			m_onAtkBall = false;
+			m_offAtkBall = false;
 			return;
 		}
 	}
@@ -74,6 +79,31 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
+
+	/************************* AttackBall */
+	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
+	if (Name_Shock_2 == fsm->GetCurStateString() &&
+		0.75f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_offAtkBall)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->UnActiveAttackBall();
+		m_offAtkBall = true;
+	}
+	// 내가 공격 상태고, 적절할 때 어택볼 생성
+	else if (Name_Shock_2 == fsm->GetCurStateString() &&
+		0.7f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onAtkBall)
+	{
+		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_L_Forearm")->CombinedTransformMatrix;
+		static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(0.8f, 0.f, -0.3f));
+		static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, m_pAttackBallMat, 1.8f);
+		m_onAtkBall = true;
+	}
+
+	if (true == m_onAtkBall)
+	{
+		GetRHandMat(pOwner, m_pAttackBallMat);
+	}
 } 
 
 SP(CBronyaShock2Pattern) CBronyaShock2Pattern::Create()
@@ -81,4 +111,14 @@ SP(CBronyaShock2Pattern) CBronyaShock2Pattern::Create()
 	SP(CBronyaShock2Pattern) spInstance(new CBronyaShock2Pattern, Engine::SmartDeleter<CBronyaShock2Pattern>);
 
 	return spInstance;
+}
+
+void CBronyaShock2Pattern::GetRHandMat(Engine::CObject * pOwner, _mat * pAtkBall)
+{
+	_mat combMat = *m_pRHand;
+	_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
+	combMat._41 -= rootMotionPos.x;
+	combMat._43 -= rootMotionPos.z;
+
+	*pAtkBall = combMat * pOwner->GetTransform()->GetWorldMatrix();
 }

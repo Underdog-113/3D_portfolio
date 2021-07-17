@@ -14,10 +14,13 @@
 
 CBronyaShock1Pattern::CBronyaShock1Pattern()
 {
+	m_pAttackBallMat = new _mat;
 }
 
 CBronyaShock1Pattern::~CBronyaShock1Pattern()
 {
+	delete m_pAttackBallMat;
+	m_pAttackBallMat = nullptr;
 }
 
 void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
@@ -51,6 +54,8 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 			// shock1 상태로 변경
 			fsm->ChangeState(Name_Shock_1);
 			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.3f);
+			m_onAtkBall = false;
+			m_offAtkBall = false;
 			return;
 		}
 	}
@@ -74,37 +79,33 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_IDLE);
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		m_onAtkBall = false;
 	}
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
 	if (Name_Shock_1 == fsm->GetCurStateString() &&
-		0.5f <= fsm->GetDM()->GetAniTimeline())
+		0.55f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_offAtkBall)
 	{
 		static_cast<CMB_Bronya*>(pOwner)->UnActiveAttackBall();
+		m_offAtkBall = true;
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
 	else if (Name_Shock_1 == fsm->GetCurStateString() &&
-		0.45f <= fsm->GetDM()->GetAniTimeline() &&
+		0.5f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onAtkBall)
 	{
 		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
-		_mat matHand = GetRHandMat(pOwner);
-		static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &matHand, 0.35f);
-		//static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(0.f, 0.f, 0.f));
-
-
+		static_cast<CMB_Bronya*>(pOwner)->GetAttackBall()->SetOffset(_float3(0.2f, -0.2f, 0.f));
+		static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, m_pAttackBallMat, 1.85f);
 		m_onAtkBall = true;
 	}
 
-	
-	
-
-	
-
-	
-	
-
+	if (true == m_onAtkBall)
+	{
+		GetRHandMat(pOwner, m_pAttackBallMat);
+	}
 } 
 
 SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
@@ -114,14 +115,12 @@ SP(CBronyaShock1Pattern) CBronyaShock1Pattern::Create()
 	return spInstance;
 }
 
-_mat CBronyaShock1Pattern::GetRHandMat(Engine::CObject * pOwner)
+void CBronyaShock1Pattern::GetRHandMat(Engine::CObject * pOwner, _mat * pAtkBall)
 {
 	_mat combMat = *m_pRHand;
 	_float3 rootMotionPos = pOwner->GetComponent<Engine::CMeshC>()->GetRootMotionPos();
 	combMat._41 -= rootMotionPos.x;
 	combMat._43 -= rootMotionPos.z;
 
-	_mat realPosMat = combMat * pOwner->GetTransform()->GetWorldMatrix();
-
-	return realPosMat;
+	*pAtkBall = combMat * pOwner->GetTransform()->GetWorldMatrix();
 }
