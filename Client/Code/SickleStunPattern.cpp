@@ -5,6 +5,8 @@
 #include "FSMDefine_Sickle.h"
 #include "MO_Sickle.h"
 
+#include "AniCtrl.h"
+
 CSickleStunPattern::CSickleStunPattern()
 {
 }
@@ -28,25 +30,19 @@ void CSickleStunPattern::Pattern(Engine::CObject* pOwner)
 		}
 	}
 
-	// 내가 break guage가 0이고, airborne 상태, standup 상태가 아니라면
+	// 내가 break guage가 0이고, stun 상태가 아니고, 현재 애니가 끝났다면
 	if (0.f >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurBreakGauge() &&
-		Name_Sickle_StandUp != fsm->GetCurStateString() &&
-		Name_Sickle_Stun != fsm->GetCurStateString())
+		Name_Sickle_Stun != fsm->GetCurStateString() &&
+		true == fsm->GetDM()->IsAnimationEnd())
 	{
+		// 스턴 상태로 변경
+		//fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		fsm->ChangeState(Name_Sickle_Stun);
 		m_onStun = true;
+
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
 	}
-	//// 내가 Hit_Stun 상태가 끝났다면
-	//else if (Name_Sickle_Hit_H == fsm->GetCurStateString())
-	//{
-	//	// Stun 상태로 변경
-	//	fsm->ChangeState(Name_Sickle_Stun);
-	//	m_onStun = true;
-	//	pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
-	//	pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
-	//}
 	// 내가 Stun 상태가 끝났고, 시간이 다 되었다면
 	else if (Name_Sickle_Stun == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd() &&
@@ -54,6 +50,7 @@ void CSickleStunPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// standby 상태로 변경
 		fsm->ChangeState(Name_Sickle_StandBy);
+		m_initAniSpd = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnStun(false);
 	}
  }

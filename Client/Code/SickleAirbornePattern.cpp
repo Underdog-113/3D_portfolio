@@ -50,6 +50,12 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Sickle_StandUp);
+
+		// 만약 스턴 상태가 켜져있다면
+		if (true == pOwner->GetComponent<CPatternMachineC>()->GetOnStun())
+		{
+			pOwner->GetComponent<CPatternMachineC>()->SetOnAirBorne(false);
+		}
 	}
 	// StandBy
 	else if (Name_Sickle_StandUp == fsm->GetCurStateString() &&
