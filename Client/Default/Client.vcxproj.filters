@@ -1015,6 +1015,9 @@
     <Filter Include="03.Component\00.UI\16.QTE">
       <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\04.Elevator">
+      <UniqueIdentifier>{e309fbb1-fc32-4a80-a1c0-b147c7f332a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2073,6 +2076,15 @@
     <ClInclude Include="..\Header\QteC.h">
       <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ElevatorBase.h">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ElevatorDoor.h">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ElevatorBack.h">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3040,6 +3052,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\QteC.cpp">
       <Filter>03.Component\00.UI\16.QTE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorBase.cpp">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorDoor.cpp">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorBack.cpp">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
