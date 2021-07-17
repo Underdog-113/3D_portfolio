@@ -94,7 +94,7 @@ void CFSM_TheresaC::OffSwordCollider()
 
 void CFSM_TheresaC::OnAxeCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.6f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.3f, _float3(2.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.6f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.4f, _float3(2.f, 0.f, 0.f));
 	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
 }
 
@@ -1212,7 +1212,10 @@ void CFSM_TheresaC::Attack_QTE_Update(float deltaTime)
 	}
 
 	if (m_pDM->GetAniTimeline() > 0.4f)
+	{
 		OffAxeCollider();
+		m_pStageControlTower->OffSlowExceptPlayer();
+	}
 
 	if (CheckAction_Evade_OnAction())
 		return;

@@ -91,7 +91,7 @@ void CTheresa_Ult_Eff::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fAlpha -= 0.5f * GET_DT;
+	m_fAlpha -= 0.5f * GET_PLAYER_DT;
 
 }
 

@@ -30,8 +30,8 @@ void CActorController::UpdateController()
 	{
 		if (!CheckMoveOrder())
 			return;
-		else
-			m_pCT->OffCameraTargeting();
+// 		else
+// 			m_pCT->OffCameraTargeting();
 	}
 	
 	if (!m_rotateLock)

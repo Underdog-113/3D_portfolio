@@ -1259,6 +1259,8 @@ void CFSM_SakuraC::Attack_QTE2_Update(float deltaTime)
 			m_checkFlashCol = true;
 		}
 		m_checkEndFlash = true;
+
+		m_pStageControlTower->OffSlowExceptPlayer();
 	}
 
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.385f)

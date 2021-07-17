@@ -178,6 +178,11 @@ void CStageControlTower::Update(void)
 		m_isInit = true;
 	}
 
+	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_Q))
+	{
+		cheat_eternal = !cheat_eternal;
+	}
+
 	if (m_mode != WithoutUI)
 		m_pLinker->UpdateLinker();
 
@@ -486,7 +491,7 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 
 		m_pActorController->TargetingOn();
 		m_pCameraMan->SetIsTargeting(true);
-
+		
 		// ui interaction
 		m_pLinker->MonsterInfoSet();
 				
@@ -695,17 +700,26 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 
 	// 3. 플레이어 히트 패턴으로 ( 위에서 죽었으면 죽은걸로 )
 
-	if (isDead)
+	if (cheat_eternal)
 	{
-		pV->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Die");
-		pV->SetIsDead(true);
+		pV->ApplyHitInfo(info);
+		m_pActorController->LookHittedDirection(pMonster->GetTransform()->GetPosition());
 	}
 	else
 	{
-		pV->ApplyHitInfo(info);
+		if (isDead)
+		{
+			pV->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Die");
+			pV->SetIsDead(true);
+		}
+		else
+		{
+			pV->ApplyHitInfo(info);
 
-		m_pActorController->LookHittedDirection(pMonster->GetTransform()->GetPosition());
+			m_pActorController->LookHittedDirection(pMonster->GetTransform()->GetPosition());
+		}
 	}
+
 
 	// 4. 히트 이펙트
 
@@ -819,7 +833,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 		m_pActorController->LookHittedDirection(curTargetPos);
 
-		OnPerfectEvadeMode();
+		OnSlowExceptPlayer();
 		m_pCurActor->SetIsQTESwitch(true);
 		m_isQTEUsed = true;
 		m_isQTESwitch = false;
@@ -971,6 +985,16 @@ void CStageControlTower::OnSakuraUltraActive()
 }
 
 void CStageControlTower::OffSakuraUltraActive()
+{
+	m_pTimeSeeker->OffSakuraUltraActive();
+}
+
+void CStageControlTower::OnSlowExceptPlayer()
+{
+	m_pTimeSeeker->OnSakuraUltraActive();
+}
+
+void CStageControlTower::OffSlowExceptPlayer()
 {
 	m_pTimeSeeker->OffSakuraUltraActive();
 }

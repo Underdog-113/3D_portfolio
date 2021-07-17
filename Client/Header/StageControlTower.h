@@ -97,6 +97,9 @@ public:		/* Battle */
 	void OnSakuraUltraActive();
 	void OffSakuraUltraActive();
 
+	void OnSlowExceptPlayer();
+	void OffSlowExceptPlayer();
+
 	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 
@@ -131,6 +134,10 @@ private:	/* Stage Info? */
 
 	_bool m_isQTEUsed = false;
 	_float m_QTEOnTimer = 0.f;
+
+
+private:
+	_bool cheat_eternal = false;
 };
 
 #endif

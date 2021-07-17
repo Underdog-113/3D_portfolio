@@ -133,8 +133,11 @@ void CStageCameraMan::SetIsTargeting(bool value)
 		_float3 pTarget = CStageControlTower::GetInstance()->GetCurrentTarget()->GetTransform()->GetPosition();
 		_float3 distance = pTarget - pActor;
 
-		if (D3DXVec3Length(&distance) > 5.f)
-			SetFarTake();
+		if (D3DXVec3Length(&distance) > TargetMidWideLimitDist)
+		{
+			SetCustomTake(4.f, 2.f, D3DXToRadian(15.f));
+		}
+
 	}
 }
 
@@ -390,10 +393,11 @@ void CStageCameraMan::AppendTargetCorrecting()
 	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 
 	_float3 dir = targetPos - actorPos;
-	_float distance = D3DXVec3Length(&dir) * 0.55f;
+	_float distance = D3DXVec3Length(&dir) * 0.45f;
 
 	D3DXVec3Normalize(&dir, &dir);
 	m_dstPivotPos = actorPos + dir * distance;
+	
 }
 
 void CStageCameraMan::AppendHorizontalCorrecting()
