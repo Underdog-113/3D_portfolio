@@ -15,7 +15,7 @@ bool   gPlayingAnim;
 bool   gPlayingAnim_UpDown = false;
 bool   g_bAlphaCtrl;
 bool   g_zWriteEnabled = false;
-
+bool   g_AlphaTestEnabled = false;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -116,6 +116,7 @@ technique AlphaMask
 	{
 		CullMode = None;
 		zWriteEnable = g_zWriteEnabled;
+		AlphaTestEnable = g_AlphaTestEnabled;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;

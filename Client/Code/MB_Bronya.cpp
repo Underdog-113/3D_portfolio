@@ -54,13 +54,13 @@ void CMB_Bronya::Awake(void)
 		CBronyaHitPattern::Create(),
 		CBronyaAirbornePattern::Create(),
 		CBronyaStunPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
 }
 
 void CMB_Bronya::Start(void)
@@ -104,11 +104,8 @@ void CMB_Bronya::Start(void)
 
 	EquipWeapon();
 
-	for (_int i = 0; i < 15; ++i)
+	for (_int i = 0; i < 22; ++i)
 	{
-		m_vBulletAB.emplace_back(std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)));
-		m_vBulletAB[i]->SetOwner(this);
-
 		m_vBullets.emplace_back(std::dynamic_pointer_cast<CBronyaBullet>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaBullet", true, (_uint)ELayerID::Enemy, L"BronyaBullet")));
 		m_vBullets[i]->SetIsEnabled(false);
 	}

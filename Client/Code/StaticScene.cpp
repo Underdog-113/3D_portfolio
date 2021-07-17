@@ -162,6 +162,11 @@
 //Wall
 #include "Stage_Wall.h"
 #include "Stage_Wall_barrier.h"
+
+//MainRoom
+#include "CloudObject.h"
+#include "MainRoomBG.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -410,8 +415,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
 	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spAttack_Range_Circle->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
+	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	spAttack_Range_Circle->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 
@@ -1037,5 +1042,12 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spStageWallBarrier(CStage_Wall_barrier::Create(true, this));
 	GetObjectFactory()->AddPrototype(spStageWallBarrier);
+
+	// MainRoom
+	SP(Engine::CObject) spCloudObject(CCloudObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spCloudObject);
+
+	SP(Engine::CObject) spMainRoomBG(CMainRoomBG::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMainRoomBG);
 
 }

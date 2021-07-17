@@ -83,6 +83,17 @@ void CBossStageScene::Update(void)
 
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
+
+
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
+	{
+		_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+		std::cout << "=============================" << std::endl;
+		std::cout << "x : " << pos.x << std::endl;
+		std::cout << "y : " << pos.y << std::endl;
+		std::cout << "z : " << pos.z << std::endl;
+		std::cout << "=============================" << std::endl;
+	}
 }
 
 void CBossStageScene::LateUpdate(void)
