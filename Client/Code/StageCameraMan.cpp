@@ -394,8 +394,13 @@ void CStageCameraMan::ChangeTakeWhileTargeting()
 	if (m_changeTakeTimer > 1.f)
 		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
 
-	_float3 pActor = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-	_float3 pTarget = CStageControlTower::GetInstance()->GetCurrentTarget()->GetTransform()->GetPosition();
+	auto pCT = CStageControlTower::GetInstance();
+	auto spTarget = pCT->GetCurrentTarget();
+	if (!spTarget || spTarget->GetDeleteThis())
+		return;
+
+	_float3 pActor = pCT->GetCurrentActor()->GetTransform()->GetPosition();
+	_float3 pTarget = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 	_float distance = D3DXVec3Length(&_float3(pTarget - pActor));
 	
 	if (distance > TargetWideLimitDist)

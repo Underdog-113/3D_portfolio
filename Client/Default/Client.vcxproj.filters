@@ -445,9 +445,6 @@
     <Filter Include="09.Manager\06.ValkyriegManager">
       <UniqueIdentifier>{da25e691-3321-49a1-b0a8-e0bb33c95be8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
-      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult">
       <UniqueIdentifier>{a649ca41-85c2-4e3c-bf53-50b010a9b607}</UniqueIdentifier>
     </Filter>

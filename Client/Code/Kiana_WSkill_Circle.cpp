@@ -44,7 +44,7 @@ void CKiana_WSkill_Circle::Awake()
 	m_spMesh->SetMeshData(L"Wall_barrier");
 	m_spMesh->SetIsEffectMesh(true);
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_spTexture->AddTexture(L"K_TrailTex");
+	m_spTexture->AddTexture(L"Yellow");
 	m_spTexture->AddTexture(L"Kiana_WSkill");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
@@ -68,7 +68,7 @@ void CKiana_WSkill_Circle::Update()
 
 	if (m_spTransform->GetSize().x < 0.05f)
 	{
-		_float _size = 0.5f * GET_PLAYER_DT;
+		_float _size = 0.05f * GET_PLAYER_DT;
 		m_spTransform->AddSize(_float3(_size, _size, _size));
 	}
 	if (m_spTransform->GetSize().x >= 0.05f)
@@ -99,6 +99,8 @@ void CKiana_WSkill_Circle::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", false);
+	pEffect->CommitChanges();
 }
 
 void CKiana_WSkill_Circle::Render(LPD3DXEFFECT pEffect)

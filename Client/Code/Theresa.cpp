@@ -9,6 +9,8 @@
 #include "AttackBox.h"
 #include "Theresa_CrossBloodyHug.h"
 
+#include "FSMDefine_Theresa.h"
+
 CTheresa::CTheresa()
 {
 }
@@ -159,6 +161,22 @@ void CTheresa::SetBasicName(void)
 
 void CTheresa::ApplyHitInfo(HitInfo info)
 {
+	// attack strength
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Damage:
+		m_spStateMachine->ChangeState(Name_Hit_L);
+		break;
+	case HitInfo::Str_Low:
+		m_spStateMachine->ChangeState(Name_Hit_L);
+		break;
+	case HitInfo::Str_High:
+		m_spStateMachine->ChangeState(Name_Hit_H);
+		break;
+	case HitInfo::Str_Airborne:
+		m_spStateMachine->ChangeState(Name_Hit_H);
+		break;
+	}
 }
 
 void CTheresa::On_Sword(void)

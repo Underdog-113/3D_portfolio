@@ -89,7 +89,7 @@ void CValkyrie::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	if (m_pCT->GetActorController()->m_rotateByTarget &&
 		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
-		m_spMesh->GetRootMotion()->SetIsTargetCollide(true);
+		m_spMesh->GetRootMotion()->SetIsRemoveMovement(true);
 
 
 	if (ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyAttack)
@@ -107,7 +107,7 @@ void CValkyrie::OnCollisionExit(Engine::_CollisionInfo ci)
 {
 	if (!m_pCT->GetActorController()->m_rotateByTarget ||
 		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
-		m_spMesh->GetRootMotion()->SetIsTargetCollide(false);
+		m_spMesh->GetRootMotion()->SetIsRemoveMovement(false);
 
 }
 
@@ -182,8 +182,8 @@ void CValkyrie::OnHitbox()
 	{
 		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
 		{
-			//col->SetIsEnabled(true);
-			col->SetIsTrigger(false);
+			col->SetIsEnabled(true);
+			//col->SetIsTrigger(false);
 			break;
 		}
 	}
@@ -196,8 +196,8 @@ void CValkyrie::OffHitbox()
 	{
 		if (col->GetCollisionID() == (_uint)ECollisionID::PlayerHitBox)
 		{
-			//col->SetIsEnabled(false);
-			col->SetIsTrigger(true);
+			col->SetIsEnabled(false);
+			//col->SetIsTrigger(true);
 			break;
 		}
 	}

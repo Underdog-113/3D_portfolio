@@ -330,13 +330,6 @@ bool CFSM_KianaC::CheckAction_WeaponSkill(float coolTime)
 	return false;
 }
 
-void CFSM_KianaC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
-{
-	TCHAR* name = (TCHAR*)soundName.c_str();
-	Engine::CSoundManager::GetInstance()->StopSound((_uint)channel);
-	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)channel);
-}
-
 void CFSM_KianaC::PlaySound_Voice(const std::wstring & soundName)
 {
 	TCHAR* name = (TCHAR*)soundName.c_str();
@@ -349,6 +342,13 @@ void CFSM_KianaC::PlaySound_Effect(const std::wstring & soundName)
 	TCHAR* name = (TCHAR*)soundName.c_str();
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::PLAYEREFFECT);
 	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)Engine::EChannelID::PLAYEREFFECT);
+}
+
+void CFSM_KianaC::PlaySound_SelectChannel(const std::wstring & soundName, _uint channel)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound(channel);
+	Engine::CSoundManager::GetInstance()->StartSound(name, channel);
 }
 
 void CFSM_KianaC::PlaySound_Attack_RandomVoice()
@@ -455,7 +455,6 @@ void CFSM_KianaC::PlaySound_Attack_RandomHit()
 
 	//m_prevHitSoundIndex = idx;
 
-	PlaySound_Effect(Sound_HIT);
 }
 
 
@@ -1044,6 +1043,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 {
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.18)
 	{
+		m_pEffectMaker->CreateEffect_Attack_QTE();
 		ActQTEAttack();
 		m_checkAttack = true;
 	}
@@ -1284,6 +1284,7 @@ void CFSM_KianaC::Hit_H_Enter(void)
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	PlaySound_Attack_RandomHit();
+	PlaySound_SelectChannel(Sound_HIT,(_uint)EChannelID::PLAYERHIT);
 }
 
 void CFSM_KianaC::Hit_H_Update(float deltaTime)
@@ -1311,6 +1312,7 @@ void CFSM_KianaC::Hit_L_Enter(void)
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	PlaySound_Attack_RandomHit();
+	PlaySound_SelectChannel(Sound_HIT, (_uint)EChannelID::PLAYERHIT);
 }
 
 void CFSM_KianaC::Hit_L_Update(float deltaTime)
@@ -1573,6 +1575,18 @@ void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 {
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
 	{
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Circle", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+		spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+		spObj->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+		
+
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Shoot", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+
 		PlaySound_Effect(Sound_Attack_2_Effect);
 
 		if (m_pStageControlTower->GetCurrentTarget())

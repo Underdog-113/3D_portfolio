@@ -360,12 +360,6 @@ bool CFSM_TheresaC::CheckAction_ChargeMode()
 	return false;
 }
 
-void CFSM_TheresaC::PlayActionSound(const std::wstring & soundName, Engine::EChannelID channel)
-{
-	TCHAR* name = (TCHAR*)soundName.c_str();
-	Engine::CSoundManager::GetInstance()->StopSound((_uint)channel);
-	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)channel);
-}
 
 void CFSM_TheresaC::PlaySound_Voice(const std::wstring & soundName)
 {
@@ -379,6 +373,13 @@ void CFSM_TheresaC::PlaySound_Effect(const std::wstring & soundName)
 	TCHAR* name = (TCHAR*)soundName.c_str();
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::PLAYEREFFECT);
 	Engine::CSoundManager::GetInstance()->StartSound(name, (_uint)Engine::EChannelID::PLAYEREFFECT);
+}
+
+void CFSM_TheresaC::PlaySound_SelectChannel(const std::wstring & soundName, _uint channel)
+{
+	TCHAR* name = (TCHAR*)soundName.c_str();
+	Engine::CSoundManager::GetInstance()->StopSound(channel);
+	Engine::CSoundManager::GetInstance()->StartSound(name, channel);
 }
 
 void CFSM_TheresaC::PlaySound_Charge_RandomVoice()
@@ -619,7 +620,6 @@ void CFSM_TheresaC::EvadeBackward_Enter(void)
 	PlaySound_Effect(Sound_Evade);
 
 	m_isEvade = true;
-	m_pTheresa->OffHitbox();
 	m_pTheresa->SetIsEvade(true);
 }
 
@@ -630,6 +630,7 @@ void CFSM_TheresaC::EvadeBackward_Update(float deltaTime)
 		m_isEvade = false;
 		m_pTheresa->OnHitbox();
 		m_pTheresa->SetIsEvade(false);
+		PlaySound_Effect(Sound_EvadeLand);
 	}
 
 	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
@@ -678,7 +679,6 @@ void CFSM_TheresaC::EvadeForward_Enter(void)
 	PlaySound_Effect(Sound_Evade);
 
 	m_isEvade = true;
-	m_pTheresa->OffHitbox();
 	m_pTheresa->SetIsEvade(true);
 }
 
@@ -689,6 +689,7 @@ void CFSM_TheresaC::EvadeForward_Update(float deltaTime)
 		m_isEvade = false;
 		m_pTheresa->OnHitbox();
 		m_pTheresa->SetIsEvade(false);
+		PlaySound_Effect(Sound_EvadeLand);
 	}
 
 	if (!m_isSecondEvade && CheckAction_Evade_OnAction(Cool_Evade + 0.1f))
@@ -1552,8 +1553,8 @@ void CFSM_TheresaC::Hit_H_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Hit_H);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
-	
-	PlaySound_Effect(Sound_HIT_Effect);
+
+	PlaySound_SelectChannel(Sound_HIT_Effect, (_uint)EChannelID::PLAYERHIT);
 	PlaySound_Effect(Sound_HIT_Voice);
 }
 
@@ -1581,7 +1582,7 @@ void CFSM_TheresaC::Hit_L_Enter(void)
 	m_pDM->ChangeAniSet(Index_Hit_L);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
-	PlaySound_Effect(Sound_HIT_Effect);
+	PlaySound_SelectChannel(Sound_HIT_Effect, (_uint)EChannelID::PLAYERHIT);
 	PlaySound_Effect(Sound_HIT_Voice);
 }
 

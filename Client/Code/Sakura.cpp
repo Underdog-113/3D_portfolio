@@ -7,6 +7,8 @@
 #include "Layer.h"
 
 #include "Monster.h"
+#include "FSMDefine_Sakura.h"
+#include "Sakura_WSkill_Twist.h"
 
 CSakura::CSakura()
 {
@@ -74,7 +76,7 @@ void CSakura::Start(void)
 
 	//CreatePivotMatrix(&m_pHand_World, &m_pHand_Frame, "Bip001_Prop1");
 	CreateAttackBall(&m_pAttackBall);
-	CreateAttackBall(&m_pFlashAttackBall);
+	CreateAttackBall(&m_pSubAttackBall);
 
 	m_pAttackBall->SetIsEnabled(false);
 
@@ -120,6 +122,20 @@ void CSakura::Update(void)
 		m_infernoTimer += GET_PLAYER_DT;
 		if (m_infernoTimer > 10.f)
 			m_infernoMode = false;
+	}
+
+	if (m_cycloneActive)
+	{
+		if (m_spCyclone->GetDeleteThis())
+		{
+			m_cycloneActive = false;
+			m_spCyclone = nullptr;
+			m_pSubAttackBall->SetIsEnabled(false);
+		}
+		else
+		{
+			CycloneAttackballUpdate();
+		}
 	}
 }
 
@@ -168,6 +184,24 @@ void CSakura::SetBasicName(void)
 
 void CSakura::ApplyHitInfo(HitInfo info)
 {
+	// attack strength
+	switch (info.GetStrengthType())
+	{
+	case HitInfo::Str_Damage:
+		m_spStateMachine->ChangeState(Name_Hit_L);
+		break;
+	case HitInfo::Str_Low:
+		m_spStateMachine->ChangeState(Name_Hit_L);
+		break;
+	case HitInfo::Str_High:
+		m_spStateMachine->ChangeState(Name_Hit_H);
+		break;
+	case HitInfo::Str_Airborne:
+		m_spStateMachine->ChangeState(Name_Hit_H);
+		break;
+	}
+
+	// crowd control
 }
 
 void CSakura::UseSkill(void)
@@ -218,6 +252,50 @@ void CSakura::Act8SliceAttack(void)
 				pMonster,
 				info,
 				pMonster->GetTransform()->GetPosition() + _float3(0.f, pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset(), 0.f));
+		}
+	}
+}
+
+void CSakura::ActCyclone(void)
+{
+	SP(Engine::CObject) spObj;
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Start", true);
+	spObj->GetTransform()->SetPosition(m_spTransform->GetPosition());
+
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_WSkill_Twist", true);
+	spObj->GetTransform()->SetPosition(m_spTransform->GetPosition());
+	std::dynamic_pointer_cast<CSakura_WSkill_Twist>(spObj)->SetMoveDir(m_spTransform->GetForward());
+
+	m_spCyclone = spObj;
+
+	HitInfo info;
+	info.SetDamageRate(0.6f);
+	info.SetBreakDamage(10.f);
+	info.SetStrengthType(HitInfo::Str_Low);
+	info.SetCrowdControlType(HitInfo::CC_None);
+
+	m_pSubAttackBall->SetupBall(0.5f, info);
+	m_pSubAttackBall->SetIsEnabled(false);
+
+	m_cycloneAttackTimer = 0.f;
+	m_cycloneActive = true;
+}
+
+void CSakura::CycloneAttackballUpdate()
+{
+	m_cycloneAttackTimer += GET_PLAYER_DT;
+	m_pSubAttackBall->GetTransform()->SetPosition(m_spCyclone->GetTransform()->GetPosition());
+
+	if (m_cycloneAttackTimer > 0.05f)
+	{
+		m_cycloneAttackTimer = 0.f;
+		if (m_pSubAttackBall->GetIsEnabled())
+		{
+			m_pSubAttackBall->SetIsEnabled(false);
+		}
+		else
+		{
+			m_pSubAttackBall->SetIsEnabled(true);
 		}
 	}
 }

@@ -155,11 +155,30 @@ void CMonster::ApplyHitInfo(HitInfo info)
 
 	if (info.GetCrowdControlType() == HitInfo::CrowdControl::CC_Sakura)
 	{
-		_uint sakuraCounter = m_pStat->GetSakuraCounter();
-		if (sakuraCounter < 3)
-			m_pStat->SetSakuraCounter(sakuraCounter + 1);
+		if (m_pStat->GetSakuraCounter() < 3)
+		{
+			m_pStat->SetSakuraCounter(m_pStat->GetSakuraCounter() + 1);
+
+			if (m_pStat->GetSakuraCounter() == 3)
+			{
+				AttachSakuraMark();
+			}
+		}
+
 	}
 
+}
+
+void CMonster::AttachSakuraMark()
+{
+	if (!m_pStat->GetSakuraMark())
+	{
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetParent(m_spTransform);
+		spObj->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset());
+		m_pStat->SetSakuraMark(spObj);
+	}
 }
 
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)

@@ -52,8 +52,8 @@ void CTheresaCharge_Att::Start()
 
 	m_spTheresaSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Charge_Att_Smoke");
 	m_spTheresaSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke403");
-	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Smoke403");
+	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
+	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 	m_spTheresaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x , -0.6f, this->GetTransform()->GetPosition().z));
 	m_fUVSpeed = 0.f;
