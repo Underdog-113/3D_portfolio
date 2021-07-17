@@ -288,7 +288,7 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	m_barkGaugeBar->SetValue(brakeValue);
 
 	m_monsterStateCanvas->SetIsEnabled(true);
-	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(2);
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(3);
 	m_monsterName->GetComponent<Engine::CTextC>()->ChangeMessage(name);
 	m_monsterHpCount = hpCount;
 
@@ -341,6 +341,11 @@ void CBattleUiManager::MonsterState(std::wstring name, _float hpMax, _float hp, 
 	{
 		m_monsterProperty->GetTexture()->SetTexIndex(1);
 	}
+}
+
+void CBattleUiManager::MonsterStateTimerReset()
+{
+	m_monsterStateCanvas->GetComponent<CLifeObjectC>()->SetLifeTime(3);
 }
 
 void CBattleUiManager::MonsterStateEnd()

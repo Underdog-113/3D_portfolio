@@ -102,13 +102,15 @@ void CStageCameraMan::UpdateCameraMan()
 
 void CStageCameraMan::PivotChasing()
 {
-	if (m_speedIncreaseTimer < 1.f)
+
+	if (m_isTargeting)
 	{
-		m_chaseSpeedIncreaseTimer += GET_PLAYER_DT;
+		AppendTargetCorrecting();
 	}
-
-
-	AppendTargetCorrecting();
+	else
+	{
+		NonTargetChasing();
+	}
 
 	_float3 lerpPosition = GetLerpPosition(
 		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_PLAYER_DT * m_chaseSpeed);
@@ -117,9 +119,42 @@ void CStageCameraMan::PivotChasing()
 	if (D3DXVec3Length(&(m_dstPivotPos - lerpPosition)) < 0.01f)
 	{
 		lerpPosition = m_dstPivotPos;
-		m_chaseSpeedIncreaseTimer = 0.f;
 	}
 	m_spPivot->GetTransform()->SetPosition(lerpPosition);
+}
+
+void CStageCameraMan::NonTargetChasing()
+{
+	auto pCT = CStageControlTower::GetInstance();
+
+	if (m_isChaseSpeedChange)
+	{
+		if (m_chaseSpeedIncreaseTimer < 1.f)
+		{
+			m_chaseSpeedIncreaseTimer += GET_PLAYER_DT;
+			m_chaseSpeed = GetLerpFloat(m_startChaseSpeed, m_endChaseSpeed, m_chaseSpeedIncreaseTimer);
+		}
+		else
+		{
+			m_chaseSpeed = m_endChaseSpeed;
+			m_isChaseSpeedChange = false;
+		}
+	}
+
+	_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
+	_float3 pivotPos = m_spPivot->GetTransform()->GetPosition();
+	if (actorPos == pivotPos)
+		return;
+
+	_float3 dir = actorPos - pivotPos;
+	_float len = D3DXVec3Length(&dir);
+
+	D3DXVec3Normalize(&dir, &dir);
+	if (len > MaxChaseDistance)
+		m_dstPivotPos = pivotPos + dir * MaxChaseDistance;
+	else
+		m_dstPivotPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
+
 }
 
 void CStageCameraMan::SetIsTargeting(bool value)
@@ -129,15 +164,19 @@ void CStageCameraMan::SetIsTargeting(bool value)
 
 	if (value)
 	{
-		_float3 pActor = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-		_float3 pTarget = CStageControlTower::GetInstance()->GetCurrentTarget()->GetTransform()->GetPosition();
-		_float3 distance = pTarget - pActor;
+		SetTargetTake();
 
-		if (D3DXVec3Length(&distance) > TargetMidWideLimitDist)
-		{
-			SetCustomTake(4.f, 2.f, D3DXToRadian(15.f));
-		}
-
+		m_chaseSpeed = 15.f;
+		m_isChaseSpeedChange = false;
+	}
+	else
+	{
+		SetMidTake();
+		m_chaseSpeedIncreaseTimer = 0.f;
+		m_startChaseSpeed = 7.5f;
+		m_endChaseSpeed = 15.f;
+		m_chaseSpeed = m_startChaseSpeed;
+		m_isChaseSpeedChange = true;
 	}
 }
 
@@ -220,6 +259,24 @@ void CStageCameraMan::SetCustomTake(_float dstMaxDistance, _float changeSpeed, _
 	m_rotateXDst = dstXAngle;
 }
 
+void CStageCameraMan::SetTargetTake()
+{
+	if (m_curTakeType == Target)
+	{
+		m_gotoNextTakeTimer = 0.f;
+		return;
+	}
+
+	m_gotoNextTakeTimer = 0.f;
+	m_gotoNextTakeWaitTime = 3.f;
+	m_curTakeType = Target;
+	m_nextTakeType = Target;
+	m_changeTakeTimer = 0.f;
+	m_changeTakeSpeed = 2.f;
+	m_rotateXStart = m_spCamera->GetLookAngleRight();
+	m_rotateXDst = D3DXToRadian(15.f);
+}
+
 void CStageCameraMan::ChangeTake()
 {
 	switch (m_curTakeType)
@@ -261,10 +318,38 @@ void CStageCameraMan::ChangeTake()
 		if (CheckNoAction())
 		{
 			m_gotoNextTakeTimer += GET_PLAYER_DT;
-			if (m_gotoNextTakeTimer > 1.5f)
+			if (m_gotoNextTakeTimer > m_gotoNextTakeWaitTime)
 			{
+				m_gotoNextTakeWaitTime = 1.5f;
 				m_gotoNextTakeTimer = 0.f;
 				SetMidTake();
+			}
+		}
+		break;
+	case CStageCameraMan::Target:
+		{
+			ChangeTakeWhileTargeting();
+
+			if (m_changeTakeTimer < 1.f)
+			{
+				m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
+				if (m_changeTakeTimer > 1.f)
+				{
+					m_curMaxDist = m_dstMaxDist;
+					m_spCamera->SetTargetDist(m_dstMaxDist);
+					m_spCamera->SetMaxDistTPS(m_dstMaxDist);
+					break;
+				}
+
+				float inverseRate = 1.f - m_changeTakeTimer;
+				float sLerpTimer = 1.f - inverseRate * inverseRate;
+
+				_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, sLerpTimer);
+				m_spCamera->SetTargetDist(lerpPoint);
+				m_spCamera->SetMaxDistTPS(lerpPoint);
+
+				lerpPoint = FloatLerp(m_rotateXStart, m_rotateXDst, sLerpTimer);
+				m_spCamera->SetLookAngleRight(lerpPoint);
 			}
 		}
 		break;
@@ -302,6 +387,55 @@ void CStageCameraMan::ChangeTake()
 		m_spCamera->SetLookAngleRight(lerpPoint);
 		break;
 	}
+}
+
+void CStageCameraMan::ChangeTakeWhileTargeting()
+{
+	if (m_changeTakeTimer > 1.f)
+		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
+
+	_float3 pActor = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
+	_float3 pTarget = CStageControlTower::GetInstance()->GetCurrentTarget()->GetTransform()->GetPosition();
+	_float distance = D3DXVec3Length(&_float3(pTarget - pActor));
+	
+	if (distance > TargetWideLimitDist)
+	{
+		if (m_dstMaxDist < 6.f)
+		{
+			// wide
+			m_curMaxDist = m_spCamera->GetMaxDistTPS();
+			m_dstMaxDist = 6.f;
+			m_changeTakeTimer = 0.f;
+			m_rotateXStart = m_spCamera->GetLookAngleRight();
+			m_rotateXDst = D3DXToRadian(15.f);
+		}
+	}
+	else if (distance < TargetMidWideLimitDist)
+	{
+		if (m_dstMaxDist > 2.5f && m_changeTakeTimer > 2.f)
+		{
+			// normal
+			m_curMaxDist = m_spCamera->GetMaxDistTPS();
+			m_dstMaxDist = 2.5f;
+			m_changeTakeTimer = 0.f;
+			m_rotateXStart = m_spCamera->GetLookAngleRight();
+			m_rotateXDst = D3DXToRadian(15.f);
+		}
+	}
+	else
+	{
+		if (m_dstMaxDist != 4.f && m_changeTakeTimer > 2.f)
+		{
+			// midwide
+			m_curMaxDist = m_spCamera->GetMaxDistTPS();
+			m_dstMaxDist = 4.f;
+			m_changeTakeTimer = 0.f;
+			m_rotateXStart = m_spCamera->GetLookAngleRight();
+			m_rotateXDst = D3DXToRadian(15.f);
+
+		}
+	}
+
 }
 
 void CStageCameraMan::OnAttackDirectionCorrecting()
@@ -361,30 +495,12 @@ void CStageCameraMan::AppendAttackDirectionCorrecting()
 void CStageCameraMan::AppendTargetCorrecting()
 {
 	auto pCT = CStageControlTower::GetInstance();
-
-	if (!m_isTargeting)
-	{
-		_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
-		_float3 pivotPos = m_spPivot->GetTransform()->GetPosition();
-		if (actorPos == pivotPos)
-			return;
-
-		_float3 dir = actorPos - pivotPos;
-		_float len = D3DXVec3Length(&dir);
-
-		D3DXVec3Normalize(&dir, &dir);
-		if (len > MaxChaseDistance)
-			m_dstPivotPos = pivotPos + dir * MaxChaseDistance;
-		else
-			m_dstPivotPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
-		return;
-	}
-
+	
 	m_targetingTimer += GET_PLAYER_DT;
 
-	if (m_targetingTimer > 2.f || !pCT->GetCurrentTarget())
+	if (m_targetingTimer > 3.f || !pCT->GetCurrentTarget())
 	{
-		m_isTargeting = false;
+		SetIsTargeting(false);
 		m_targetingTimer = 0.f;
 		return;
 	}
@@ -393,7 +509,7 @@ void CStageCameraMan::AppendTargetCorrecting()
 	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 
 	_float3 dir = targetPos - actorPos;
-	_float distance = D3DXVec3Length(&dir) * 0.45f;
+	_float distance = D3DXVec3Length(&dir) * 0.5f;
 
 	D3DXVec3Normalize(&dir, &dir);
 	m_dstPivotPos = actorPos + dir * distance;
@@ -497,7 +613,7 @@ bool CStageCameraMan::MouseControlMode()
 		m_rotateYDst = m_spCamera->GetLookAngleUp();
 
 		ChangeTake();
-		m_isTargeting = false;
+		SetIsTargeting(false);
 		return true;
 	}
 	else
