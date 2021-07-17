@@ -39,7 +39,6 @@ private:
 
 private:
 	SP(CDecoObject) m_pAttackRange_Circle_Diffuse;
-	SP(CDecoObject) m_pAttackRange_Circle_Alpha;
 
 };
 

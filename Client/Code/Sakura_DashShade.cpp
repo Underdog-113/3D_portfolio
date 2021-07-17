@@ -62,7 +62,6 @@ void CSakura_DashShade::Start()
 	m_spTransform->SetSize(1.2f, 1.2f, 1.2f);
 	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->ChangeAniSet_NoBlend(m_iAnimIdx);
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_fAlpha = 0.7f;
 }
 

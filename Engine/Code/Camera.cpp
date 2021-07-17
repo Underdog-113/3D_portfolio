@@ -56,7 +56,11 @@ void CCamera::Start(void)
 
 	_float3 camStartPos;
 	m_pScene->GET_VALUE(m_isStatic, m_dataID, m_objectKey, L"camStartPos", camStartPos);
-	m_spTransform->SetPosition(camStartPos);
+
+	if (Engine::GET_CUR_SCENE->GetSceneID() != 1)
+	{
+		m_spTransform->SetPosition(camStartPos);
+	}
 
 	m_pCamRayCollider = static_cast<Engine::CRayCollider*>(m_spCollision->GetColliders()[0].get());
 	m_pFrustum = CFrustum::Create(this);
@@ -461,18 +465,21 @@ void CCamera::CameraRotate(void)
 
 void CCamera::CameraMove(void)
 {
-	if (IMKEY_PRESS(KEY_RIGHT))
-		m_spTransform->MoveRight(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_LEFT))
-		m_spTransform->MoveLeft(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_UP))
-		m_spTransform->MoveForward(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_DOWN))
-		m_spTransform->MoveBackward(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_SPACE))
-		m_spTransform->MoveUp(m_moveSpeed * GET_DT);
-	if (IMKEY_PRESS(KEY_CONTROL))
-		m_spTransform->MoveDown(m_moveSpeed * GET_DT);
+	if (Engine::GET_CUR_SCENE->GetSceneID() != 1)
+	{
+		if (IMKEY_PRESS(KEY_RIGHT))
+			m_spTransform->MoveRight(m_moveSpeed * GET_DT);
+		if (IMKEY_PRESS(KEY_LEFT))
+			m_spTransform->MoveLeft(m_moveSpeed * GET_DT);
+		if (IMKEY_PRESS(KEY_UP))
+			m_spTransform->MoveForward(m_moveSpeed * GET_DT);
+		if (IMKEY_PRESS(KEY_DOWN))
+			m_spTransform->MoveBackward(m_moveSpeed * GET_DT);
+		if (IMKEY_PRESS(KEY_SPACE))
+			m_spTransform->MoveUp(m_moveSpeed * GET_DT);
+		if (IMKEY_PRESS(KEY_CONTROL))
+			m_spTransform->MoveDown(m_moveSpeed * GET_DT);
+	}
 }
 
 _float2 CCamera::WorldToScreenPoint(_float3 worldPos)
