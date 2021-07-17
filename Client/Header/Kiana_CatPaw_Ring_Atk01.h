@@ -44,9 +44,6 @@ protected:
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 
-private:
-	_float m_tempTimer = 0.f;
-	_float m_tempDuration = 3.f;
 };
 
 

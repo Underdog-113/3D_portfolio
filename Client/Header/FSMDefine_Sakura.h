@@ -45,6 +45,8 @@
 #define Name_Attack4				L"Attack4"
 #define Name_Attack5				L"Attack5"
 #define Name_Attack6				L"Attack6"
+#define Name_Attack_QTE				L"Attack_QTE"
+#define Name_Attack_QTE2			L"Attack_QTE2"
 #define Name_Charge1				L"Charge1"
 #define Name_Charge1_AS				L"Charge1_AS"
 #define Name_Charge1_Quick			L"Charge1_Quick"

@@ -220,6 +220,7 @@ void CAttackBall::SetupBall(CObject * pOwner, _mat * pParentMat, _float radius, 
 void CAttackBall::SetupBall( _float radius, HitInfo info)
 {
 	m_hitInfo = info;
+	m_pParentMatrix = nullptr;
 
 	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->SetRadius(radius);
 	static_cast<Engine::CSphereCollider*>(m_spCollision->GetColliders()[0].get())->UpdateBS();

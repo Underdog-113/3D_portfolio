@@ -28,7 +28,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(315065);
+	//_CrtSetBreakAlloc(675667);
 	//_CrtSetBreakAlloc(315064);
 	
 	std::locale::global(std::locale("korean"));

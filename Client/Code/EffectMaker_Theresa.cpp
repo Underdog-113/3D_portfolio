@@ -177,6 +177,7 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Bomb()
 	_float3 offsetPos;
 	D3DXVec3TransformCoord(&offsetPos, &offset, axeMat);
 	effect->GetTransform()->SetPosition(offsetPos);
+	effect->GetTransform()->AddPositionY(1.f);
 
 	effect->GetTransform()->SetSize(size);
 

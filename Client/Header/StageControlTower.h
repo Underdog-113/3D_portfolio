@@ -79,8 +79,11 @@ public:		/* Battle */
 	void HitValkyrie(Engine::CObject* pMonster, Engine::CObject* pValkyrie, HitInfo info, _float3 hitPoint);
 
 	void WaitMemberCooltimeUpdate();
+	void ActSwitching();
 	void SwitchValkyrie(Squad_Role role);
 	void BattonTouch();
+	void BattonTouch_2Member();
+	void BattonTouch_3Member();
 
 	void SetCameraMidTake();
 	void SetCameraFarTake();
@@ -124,6 +127,10 @@ private:	/* Stage Info? */
 	GETTOR(_int, m_valkyrieExp, 830, ValkyrieExp)
 
 	_bool m_isInit = false;
+	_bool m_isQTESwitch = false;
+
+	_bool m_isQTEUsed = false;
+	_float m_QTEOnTimer = 0.f;
 };
 
 #endif

@@ -1027,7 +1027,6 @@ void CFSM_SakuraC::Attack5_Enter(void)
 
 void CFSM_SakuraC::Attack5_Update(float deltaTime)
 {
-
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415f)
 	{
 		PlaySound_Voice(Sound_Flash_Voice);
@@ -1035,7 +1034,7 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
-			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
@@ -1116,7 +1115,7 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
-			FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+			FlashAttack(1.2f, 20.f, HitInfo::Str_Airborne, HitInfo::CC_None);
 
 			CMonster* pMonster = (CMonster*)m_pStageControlTower->GetCurrentTarget().get();
 
@@ -1166,6 +1165,124 @@ void CFSM_SakuraC::Attack6_End(void)
 
 	m_pSakura->UnActiveAttackBall();
 	m_pSakura->OnHitbox();
+}
+
+void CFSM_SakuraC::Attack_QTE_Init(void)
+{
+}
+
+void CFSM_SakuraC::Attack_QTE_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack4);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
+}
+
+void CFSM_SakuraC::Attack_QTE_Update(float deltaTime)
+{
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack4_1 - 0.05f)
+	{
+		PlaySound_Effect(Sound_Attack5_Effect);
+		m_pEffectMaker->CreateEffect_Attack4();
+		m_checkEffect = true;
+	}
+	if (!m_checkEffect2nd && m_pDM->GetAniTimeline() > Delay_Attack4_2 - 0.05f)
+	{
+		m_pEffectMaker->CreateEffect_Attack4_2();
+		m_checkEffect2nd = true;
+	}
+	if (!m_checkEffect3rd && m_pDM->GetAniTimeline() > Delay_Attack4_3 - 0.05f)
+	{
+		m_pEffectMaker->CreateEffect_Attack4_3();
+		m_checkEffect3rd = true;
+	}
+
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Attack4_1)
+	{
+		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+		m_checkAttack = true;
+	}
+
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack4_1 + 0.03f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack4_2)
+	{
+		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+		m_checkAttack2nd = true;
+	}
+	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > Delay_Attack4_2 + 0.02f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > Delay_Attack4_3)
+	{
+		PlaySound_Voice_RandomAttack();
+		OnAttackBall(0.4f, 15.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+		m_checkAttack3rd = true;
+	}
+	if (m_pDM->GetAniTimeline() > Delay_Attack4_3 + 0.04f)
+		m_pSakura->UnActiveAttackBall();
+
+	if (m_pDM->GetAniTimeline() > 0.45)
+	{
+		ChangeState(Name_Attack_QTE2);
+		return;
+	}
+}
+
+void CFSM_SakuraC::Attack_QTE_End(void)
+{
+}
+
+void CFSM_SakuraC::Attack_QTE2_Init(void)
+{
+}
+
+void CFSM_SakuraC::Attack_QTE2_Enter(void)
+{
+	m_pDM->ChangeAniSet(Index_Attack5);
+	ResetCheckMembers();
+	m_targetToSakura = ZERO_VECTOR;
+}
+
+void CFSM_SakuraC::Attack_QTE2_Update(float deltaTime)
+{
+	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415f)
+	{
+		PlaySound_Voice(Sound_Flash_Voice);
+		//m_pEffectMaker->CreateEffect_Beam();
+
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			//FlashAttack(1.2f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
+			OnAttackBall(0.4f, 15.f, HitInfo::Str_High, HitInfo::CC_None);
+
+			m_checkFlashCol = true;
+		}
+		m_checkEndFlash = true;
+	}
+
+	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.385f)
+	{
+		PlaySound_Effect(Sound_Charge0_Effect);
+		m_checkFlashMove = true;
+	}
+
+	if (CheckAction_Evade_OnAction(0.5f))
+		return;
+	if (CheckAction_Run_OnAction(0.5f))
+		return;
+
+	if (CheckAction_Attack(Name_Attack1_Combat, 0.5f))
+		return;
+
+	if (CheckAction_Combat_Timeout())
+		return;
+}
+
+void CFSM_SakuraC::Attack_QTE2_End(void)
+{
+	m_pSakura->UnActiveAttackBall();
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::Charge1_Init(void)
@@ -2052,8 +2169,20 @@ void CFSM_SakuraC::SwitchIn_Enter(void)
 
 void CFSM_SakuraC::SwitchIn_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
-		return;
+	if (m_pDM->IsAnimationEnd())
+	{
+		if (m_pSakura->GetIsQTESwitch())
+		{
+			m_pSakura->SetIsQTESwitch(false);
+			ChangeState(Name_Attack_QTE);
+			return;
+		}
+		else
+		{
+			ChangeState(Name_StandBy);
+			return;
+		}
+	}
 }
 
 void CFSM_SakuraC::SwitchIn_End(void)
@@ -2128,7 +2257,7 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 
 	if (!m_checkEffect &&  m_pDM->GetAniTimeline() > 0.4f)
 	{
-		PlaySound_Voice(Sound_Ult_Voice);
+		//PlaySound_Voice(Sound_Ult_Voice);
 		m_checkEffect = true;
 	}
 
@@ -2275,6 +2404,12 @@ void CFSM_SakuraC::RegisterAllState()
 
 	CreateState(CFSM_SakuraC, pState, Attack6)
 		AddState(pState, Name_Attack6);
+
+	CreateState(CFSM_SakuraC, pState, Attack_QTE)
+		AddState(pState, Name_Attack_QTE);
+
+	CreateState(CFSM_SakuraC, pState, Attack_QTE2)
+		AddState(pState, Name_Attack_QTE2);
 
 	CreateState(CFSM_SakuraC, pState, Charge1)
 		AddState(pState, Name_Charge1);

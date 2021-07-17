@@ -75,6 +75,7 @@ public:
 
 	_bool	CheckUltraUseable(void);
 	_bool	CheckSkillUseable(void);
+	_bool	CheckSwitchable();
 
 
 protected:
@@ -99,9 +100,11 @@ protected:
 	GETTOR_SETTOR	(_bool,							m_isDead,			false,		IsDead)
 	GETTOR_SETTOR	(_bool,							m_isWait,			false,		IsWait)
 	GETTOR_SETTOR	(_bool,							m_isEvade,			false,		IsEvade)
+	GETTOR_SETTOR	(_bool,							m_isQTESwitch,		false,		IsQTESwitch)
 	
 	GETTOR_SETTOR	(_float,						m_skillTimer,		0.f,		SkillTimer)
 	GETTOR_SETTOR	(_float,						m_ultraTimer,		0.f,		UltraTimer)
+	GETTOR_SETTOR	(_float,						m_switchTimer,		0.f,		SwitchTimer)
 
 protected:
 	CStageControlTower*			m_pCT = nullptr;

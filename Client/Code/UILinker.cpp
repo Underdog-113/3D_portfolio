@@ -64,7 +64,7 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarShengWu",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
-			5);
+			4.f);
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->WaitingPlayerState(
@@ -73,7 +73,7 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
-			5);
+			4.f);
 		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
@@ -83,7 +83,7 @@ void CUILinker::SwitchValkyrie_UpSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarYiNeng",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
-			5);
+			4.f);
 		break;
 	default:
 		break;
@@ -104,7 +104,7 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarShengWu",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
-			5);
+			4.f);
 		break;
 	case V_Stat::Valkyrie_Type::THERESA:
 		m_pUIManager->WaitingPlayerState(
@@ -113,7 +113,7 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarJiXie",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
-			5);
+			4.f);
 		m_pUIManager->SpecialUICanvasOff();
 		break;
 	case V_Stat::Valkyrie_Type::SAKURA:
@@ -123,7 +123,7 @@ void CUILinker::SwitchValkyrie_DownSlot(V_Stat::Valkyrie_Type switchOut)
 			L"AvatarYiNeng",
 			stat->GetCurHp() / stat->GetMaxHp() * 100.f,
 			stat->GetCurSp() / stat->GetMaxSp() * 100.f,
-			5);
+			4.f);
 		break;
 	default:
 		break;
@@ -310,19 +310,40 @@ void CUILinker::SwapToTwo(void)
 
 void CUILinker::QTEButtonEffectOn(void)
 {
-	CValkyrie* pV = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_1].get());
-	if (!pV->GetIsDead())
-		m_pUIManager->QteOn(0);
+	size_t squadSize = m_pCT->GetSquad().size();
 
-	CValkyrie* pV2 = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_2].get());
-	if (!pV2->GetIsDead())
-		m_pUIManager->QteOn(1);
+	if (squadSize == 2)
+	{
+		CValkyrie* pV = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_1].get());
+		if (!pV->GetIsDead() && pV->CheckSwitchable())
+			m_pUIManager->QteOn(0);
+
+	}
+	else if (squadSize == 3)
+	{
+		CValkyrie* pV = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_1].get());
+		if (!pV->GetIsDead() && pV->CheckSwitchable())
+			m_pUIManager->QteOn(0);
+
+		CValkyrie* pV2 = static_cast<CValkyrie*>(m_pCT->GetSquad()[CStageControlTower::Wait_2].get());
+		if (!pV2->GetIsDead() && pV2->CheckSwitchable())
+			m_pUIManager->QteOn(1);
+	}
 }
 
 void CUILinker::QTEButtonEffectOff(void)
 {
-	m_pUIManager->QteOff(0);
-	m_pUIManager->QteOff(1);
+	size_t squadSize = m_pCT->GetSquad().size();
+
+	if (squadSize == 2)
+	{
+		m_pUIManager->QteOff(0);
+	}
+	else if (squadSize == 3)
+	{
+		m_pUIManager->QteOff(0);
+		m_pUIManager->QteOff(1);
+	}
 }
 
 void CUILinker::MonsterHpDown(_float damage)

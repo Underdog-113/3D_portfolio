@@ -50,6 +50,8 @@ public:
 	void Start(SP(CComponent) spThis) override;
 	void OnDestroy() override;
 
+	void ActQTEAttack();
+
 private:
 	void FixRootMotionOffset(_uint index);
 
@@ -93,6 +95,9 @@ private:
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
 	bool m_checkAttack = false;
+	bool m_checkAttack2nd = false;
+	bool m_checkAttack3rd = false;
+	bool m_checkAttack4th = false;
 	bool m_checkUltraActive = false;
 
 	bool m_isUltraMode = false;
@@ -114,6 +119,7 @@ private:
 
 	_uint m_idleMotionIndex = 0;
 	_float m_idleTimer = 0.f;
+
 public:
 	// StandBy
 	void StandBy_Init(void);
