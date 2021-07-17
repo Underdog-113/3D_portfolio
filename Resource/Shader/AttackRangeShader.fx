@@ -86,9 +86,10 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	// Noise Texture
 	float4 _Alpha = tex2D(AlphaTex, Input.mUV);
 
-	_Alpha.a = gAlpha;
+	float4 final = albedo * _Alpha;
+	final.a = gAlpha;
 
-	return float4(albedo * _Alpha);
+	return final;
 }
 
 technique TShader

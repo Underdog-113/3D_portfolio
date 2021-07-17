@@ -415,8 +415,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
 	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spAttack_Range_Circle->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
+	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	spAttack_Range_Circle->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 
