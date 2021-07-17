@@ -79,7 +79,7 @@ void CSakura_DashShade::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fAlpha -= 1.f * GET_DT;
+	m_fAlpha -= 1.f * GET_PLAYER_DT;
 }
 
 void CSakura_DashShade::LateUpdate()

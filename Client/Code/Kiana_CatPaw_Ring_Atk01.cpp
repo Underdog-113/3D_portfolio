@@ -61,8 +61,6 @@ void CKiana_CatPaw_Ring_Atk01::Start(void)
 
 	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetReplay(false);
 	m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.4f);
-	m_tempTimer = 0.f;
-	m_tempDuration = 1.5f;
 }
 
 void CKiana_CatPaw_Ring_Atk01::FixedUpdate(void)
@@ -73,26 +71,6 @@ void CKiana_CatPaw_Ring_Atk01::FixedUpdate(void)
 void CKiana_CatPaw_Ring_Atk01::Update(void)
 {
 	__super::Update();
-
-	m_tempTimer += GET_DT;
-
-	//if (m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->GetTimeline_Blend() > 0.25)
-	//{
-	//	if (m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->GetTimeline_Blend() > 0.75)
-	//	{
-	//		m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(1.f);
-	//	}
-	//	else
-	//	{
-	//		m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0.5f);
-	//	}
-	//}
-
-	if (m_tempTimer > m_tempDuration)
-	{
-		m_tempTimer = 0.f;
-		SetIsEnabled(false);
-	}
 }
 
 void CKiana_CatPaw_Ring_Atk01::LateUpdate(void)

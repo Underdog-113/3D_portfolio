@@ -20,6 +20,7 @@ private:
 	_float m_accTime = 0.f;
 
 	_bool m_onStun = false;
+	_bool m_initAniSpd = false;
 };
 
 #endif

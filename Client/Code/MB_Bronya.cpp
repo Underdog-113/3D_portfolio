@@ -7,6 +7,7 @@
 #include "AttackBox.h"
 
 #include "Bronya_Weapon.h"
+#include "BronyaBullet.h"
 #include "Layer.h"
 
 _uint CMB_Bronya::m_s_uniqueID = 0;
@@ -53,9 +54,9 @@ void CMB_Bronya::Awake(void)
 		CBronyaHitPattern::Create(),
 		CBronyaAirbornePattern::Create(),
 		CBronyaStunPattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
@@ -66,7 +67,7 @@ void CMB_Bronya::Start(void)
 {
 	__super::Start();
 	
-	m_spTransform->SetSize(0.8f, 0.8f, 0.8f);
+	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
@@ -99,8 +100,18 @@ void CMB_Bronya::Start(void)
 	m_pAttackBox->SetOwner(this);
 	
 	m_spWeapon = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
+	
 
 	EquipWeapon();
+
+	for (_int i = 0; i < 15; ++i)
+	{
+		m_vBulletAB.emplace_back(std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)));
+		m_vBulletAB[i]->SetOwner(this);
+
+		m_vBullets.emplace_back(std::dynamic_pointer_cast<CBronyaBullet>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaBullet", true, (_uint)ELayerID::Enemy, L"BronyaBullet")));
+		m_vBullets[i]->SetIsEnabled(false);
+	}
 }
 
 void CMB_Bronya::FixedUpdate(void)

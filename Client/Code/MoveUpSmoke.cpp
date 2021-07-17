@@ -63,10 +63,10 @@ void CMoveUpSmoke::Update()
 	{
 		this->SetDeleteThis(true);
 	}
-	m_spTransform->AddSizeX(0.1f * GET_DT);
-	m_spTransform->AddSizeY(0.1f * GET_DT);
-	m_fAlpha -= 0.5f * GET_DT;
-	m_fUVSpeed += GET_DT;
+	m_spTransform->AddSizeX(0.1f * GET_PLAYER_DT);
+	m_spTransform->AddSizeY(0.1f * GET_PLAYER_DT);
+	m_fAlpha -= 0.5f * GET_PLAYER_DT;
+	m_fUVSpeed += GET_PLAYER_DT;
 }
 
 void CMoveUpSmoke::LateUpdate()

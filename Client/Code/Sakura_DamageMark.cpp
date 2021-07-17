@@ -125,7 +125,7 @@ void CSakura_DamageMark::SetBasicName(void)
 
 void CSakura_DamageMark::UpdateFrame(_float _frmSpeed)
 {
-	m_fTIme += GET_DT;
+	m_fTIme += GET_PLAYER_DT;
 
 	if (m_fTIme >= _frmSpeed)
 	{

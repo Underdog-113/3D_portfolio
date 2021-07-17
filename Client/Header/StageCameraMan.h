@@ -8,8 +8,10 @@
 #define MidAngle D3DXToRadian(15.f)
 #define FarAngle D3DXToRadian(15.f)
 
-
 #define MaxChaseDistance 0.5f
+
+#define TargetMidWideLimitDist 2.5f
+#define TargetWideLimitDist 4.5f
 
 #include "CameraShake.h"
 
@@ -28,6 +30,7 @@ public:
 	void PivotChasing();
 
 	void SetIsTargeting(bool value);
+
 
 	void ResetChaseSpeed();
 

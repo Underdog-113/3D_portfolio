@@ -83,6 +83,7 @@ public:
 	void SpecialUIDwon();
 
 	bool SkillExecution(_int value, _int spValue, _float collTime);
+	bool SkillExecution_Switching(_int value, _int spValue, _float remainCool, _float coolTime);
 	void BattleEnd();
 	void GameOver();
 

@@ -61,7 +61,7 @@ void CKiana_Ult_Shield::Update()
 		m_fAlpha = 1.f;
 	}
 
-	m_fAlpha -= 0.5f * GET_DT;
+	m_fAlpha -= 0.5f * GET_PLAYER_DT;
 }
 
 void CKiana_Ult_Shield::LateUpdate()

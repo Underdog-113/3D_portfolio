@@ -36,8 +36,14 @@ public:
 	void	Evade					();
 	void	Attack					();
 
+	void	SkillUI_SwitchSetting	();
+	void	UltraUI_SwitchSetting	();
+
 	void	SwapToOne				(void);
 	void	SwapToTwo				(void);
+
+	void	QTEButtonEffectOn(void);
+	void	QTEButtonEffectOff(void);
 
 	void	MonsterHpDown			(_float damage);
 	void	Hit_Up					(void);

@@ -973,6 +973,9 @@
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff">
       <UniqueIdentifier>{27149103-0251-4c96-a1a8-c8f7ea722f16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Bullet">
+      <UniqueIdentifier>{a9c32393-c8a4-4b54-8a8b-4365800be889}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03.Component\00.UI\14.Timer">
       <UniqueIdentifier>{c3895345-7883-4156-b0e9-9c567192ba2d}</UniqueIdentifier>
     </Filter>
@@ -2031,6 +2034,9 @@
     <ClInclude Include="..\Header\Sakura_DamageMark.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaBullet.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Bullet</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\TimerC.h">
       <Filter>03.Component\00.UI\14.Timer</Filter>
     </ClInclude>
@@ -3004,6 +3010,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_DamageMark.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\09.Sakura_SoftEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaBullet.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\TimerC.cpp">
       <Filter>03.Component\00.UI\14.Timer</Filter>

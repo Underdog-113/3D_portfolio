@@ -1,19 +1,19 @@
 #pragma once
-#ifndef KIANA_CatPaw_Ring_ATK01_H
-#define KIANA_CatPaw_Ring_ATK01_H
+#ifndef BRONYABULLET_H
+#define BRONYABULLET_H
 
 #include "Object.h"
 
-class CKiana_CatPaw_Ring_Atk01 final : public Engine::CObject
+class CBronyaBullet : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
-private:
-	CKiana_CatPaw_Ring_Atk01();
-	~CKiana_CatPaw_Ring_Atk01();
+public:
+	CBronyaBullet();
+	~CBronyaBullet();
 	
 public:
-	static			SP(CKiana_CatPaw_Ring_Atk01)		Create(_bool isStatic, Engine::CScene* pScene);
+	static			SP(CBronyaBullet)		Create(_bool isStatic, Engine::CScene* pScene);
 
 public:
 					SP(Engine::CObject)		MakeClone			(void) override;
@@ -43,10 +43,11 @@ protected:
 	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+		
+	GETTOR_SETTOR	(_mat*,							m_pParentMatrix,	nullptr,	ParentMatrix)
 
 };
 
 
-#endif // KIANA_CatPaw_Ring_ATK01_H
 
-
+#endif

@@ -66,8 +66,8 @@ void CSakura_WSkill_Twist_Wind::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fUVSpeed += 0.25f * GET_DT;
-	m_spTransform->AddRotationY(20.f * GET_DT);
+	m_fUVSpeed += 0.25f * GET_PLAYER_DT;
+	m_spTransform->AddRotationY(20.f * GET_PLAYER_DT);
 
 	m_spTransform->SetPosition(m_spTransform->GetOwner()->GetTransform()->GetPosition());
 	m_spTransform->SetSize(m_spTransform->GetOwner()->GetTransform()->GetSize());

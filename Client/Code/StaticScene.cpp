@@ -40,6 +40,7 @@
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
 #include "Bronya_Weapon.h"
+#include "BronyaBullet.h"
 #include "Monster.h"
 #include "OJ_Box.h"
 
@@ -345,6 +346,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 
 	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
 	ADD_PROTOTYPE(spBronyaWeapon);
+
+	SP(CBronyaBullet) spBronyaBullet(CBronyaBullet::Create(true, this));
+	ADD_PROTOTYPE(spBronyaBullet);
 
 	SP(CMonster) spOJ_Box(COJ_Box::Create(true, this));
 	GetObjectFactory()->AddPrototype(spOJ_Box);

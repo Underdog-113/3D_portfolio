@@ -66,12 +66,12 @@ void CSakura_WSkill_Start::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_spTransform->AddSizeX(0.7f * GET_DT);
-	m_spTransform->AddSizeY(0.5f * GET_DT);
-	m_spTransform->AddSizeZ(0.7f * GET_DT);
-	m_spTransform->AddRotationY(-10.f * GET_DT);
+	m_spTransform->AddSizeX(0.7f * GET_PLAYER_DT);
+	m_spTransform->AddSizeY(0.5f * GET_PLAYER_DT);
+	m_spTransform->AddSizeZ(0.7f * GET_PLAYER_DT);
+	m_spTransform->AddRotationY(-10.f * GET_PLAYER_DT);
 
-	m_fAlpha -= 2.5f * GET_DT;
+	m_fAlpha -= 2.5f * GET_PLAYER_DT;
 
 
 }

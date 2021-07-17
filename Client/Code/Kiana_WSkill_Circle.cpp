@@ -68,7 +68,7 @@ void CKiana_WSkill_Circle::Update()
 
 	if (m_spTransform->GetSize().x < 0.05f)
 	{
-		_float _size = 0.5f * GET_DT;
+		_float _size = 0.5f * GET_PLAYER_DT;
 		m_spTransform->AddSize(_float3(_size, _size, _size));
 	}
 	if (m_spTransform->GetSize().x >= 0.05f)
@@ -78,7 +78,7 @@ void CKiana_WSkill_Circle::Update()
 
 	if (m_bCheck)
 	{
-		m_fAlpha -= 0.7f * GET_DT;
+		m_fAlpha -= 0.7f * GET_PLAYER_DT;
 
 		if (m_fAlpha <= 0.f)
 		{
