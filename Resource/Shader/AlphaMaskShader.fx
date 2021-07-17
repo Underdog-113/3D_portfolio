@@ -15,6 +15,8 @@ bool   gPlayingAnim;
 bool   gPlayingAnim_UpDown = false;
 bool   g_bAlphaCtrl;
 bool   g_zWriteEnabled = false;
+
+
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
 {

@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "..\Header\MonsterAttackSign.h"
+#include "..\Header\KianaBranchSign.h"
 
-_uint CMonsterAttackSign::m_s_uniqueID = 0;
+_uint CKianaBranchSign::m_s_uniqueID = 0;
 
-CMonsterAttackSign::CMonsterAttackSign()
+CKianaBranchSign::CKianaBranchSign()
 {
 }
 
 
-CMonsterAttackSign::~CMonsterAttackSign()
+CKianaBranchSign::~CKianaBranchSign()
 {
 }
 
-SP(CMonsterAttackSign) CMonsterAttackSign::Create(_bool isStatic, Engine::CScene * pScene)
+SP(CKianaBranchSign) CKianaBranchSign::Create(_bool isStatic, Engine::CScene * pScene)
 {
-	SP(CMonsterAttackSign) spInstance(new CMonsterAttackSign, Engine::SmartDeleter<CMonsterAttackSign>);
+	SP(CKianaBranchSign) spInstance(new CKianaBranchSign, Engine::SmartDeleter<CKianaBranchSign>);
 	spInstance->SetIsStatic(isStatic);
 	spInstance->SetScene(pScene);
 	spInstance->Awake();
@@ -22,9 +22,9 @@ SP(CMonsterAttackSign) CMonsterAttackSign::Create(_bool isStatic, Engine::CScene
 	return spInstance;
 }
 
-SP(Engine::CObject) CMonsterAttackSign::MakeClone(void)
+SP(Engine::CObject) CKianaBranchSign::MakeClone(void)
 {
-	SP(CMonsterAttackSign) spClone(new CMonsterAttackSign, Engine::SmartDeleter<CMonsterAttackSign>);
+	SP(CKianaBranchSign) spClone(new CKianaBranchSign, Engine::SmartDeleter<CKianaBranchSign>);
 
 	__super::InitClone(spClone);
 
@@ -40,13 +40,13 @@ SP(Engine::CObject) CMonsterAttackSign::MakeClone(void)
 	return spClone;
 }
 
-void CMonsterAttackSign::Awake(void)
+void CKianaBranchSign::Awake(void)
 {
 	__super::Awake();
-	
+
 }
 
-void CMonsterAttackSign::Start(void)
+void CKianaBranchSign::Start(void)
 {
 	__super::Start();
 	m_fAlphaWidth = 1.f;
@@ -55,16 +55,16 @@ void CMonsterAttackSign::Start(void)
 	m_TilingY = 0;
 	m_maxXIndex = 1;
 	m_maxYIndex = 0;
-	m_fTIme = 0.f;	
+	m_fTIme = 0.f;
 }
 
-void CMonsterAttackSign::FixedUpdate(void)
+void CKianaBranchSign::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 
 }
 
-void CMonsterAttackSign::Update(void)
+void CKianaBranchSign::Update(void)
 {
 	__super::Update();
 
@@ -72,20 +72,19 @@ void CMonsterAttackSign::Update(void)
 	{
 		this->SetDeleteThis(true);
 	}
-
-	this->GetTransform()->AddSizeY(-3.5f * GET_DT);
-
+	_float _size = -3.5f * GET_DT;
+	this->GetTransform()->AddSize(_float3(_size, _size, _size));
 }
 
-void CMonsterAttackSign::LateUpdate(void)
+void CKianaBranchSign::LateUpdate(void)
 {
 	__super::LateUpdate();
 
 }
 
-void CMonsterAttackSign::PreRender(LPD3DXEFFECT pEffect)
+void CKianaBranchSign::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PreRender(m_spGraphics, pEffect);	
+	m_spRectTex->PreRender(m_spGraphics, pEffect);
 
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
@@ -95,32 +94,38 @@ void CMonsterAttackSign::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->CommitChanges();
 }
 
-void CMonsterAttackSign::Render(LPD3DXEFFECT pEffect)
+void CKianaBranchSign::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
+
 }
 
-void CMonsterAttackSign::PostRender(LPD3DXEFFECT pEffect)
+void CKianaBranchSign::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->PostRender(m_spGraphics, pEffect);
+
 }
 
-void CMonsterAttackSign::OnDestroy(void)
+void CKianaBranchSign::OnDestroy(void)
 {
 	__super::OnDestroy();
+
 }
 
-void CMonsterAttackSign::OnEnable(void)
+void CKianaBranchSign::OnEnable(void)
 {
 	__super::OnEnable();
+
 }
 
-void CMonsterAttackSign::OnDisable(void)
+void CKianaBranchSign::OnDisable(void)
 {
 	__super::OnDisable();
+
 }
 
-void CMonsterAttackSign::SetBasicName(void)
+void CKianaBranchSign::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
+
 }

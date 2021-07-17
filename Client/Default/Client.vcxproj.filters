@@ -418,9 +418,6 @@
     <Filter Include="02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\FSM">
       <UniqueIdentifier>{418cb505-4e31-4832-bb97-cf6092af20a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult">
-      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09.Manager\00.DataManager">
       <UniqueIdentifier>{bac5428c-841a-4c1c-8af5-7102949e32fe}</UniqueIdentifier>
     </Filter>
@@ -456,15 +453,6 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge">
       <UniqueIdentifier>{34e3e2de-42b6-4c10-b663-bb19b6f894e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Plane">
-      <UniqueIdentifier>{f71034e8-0b42-4bbb-b90e-57375c77c732}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_ring">
-      <UniqueIdentifier>{5b05c9df-e55c-4ac2-a111-e8e7b95931c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield">
-      <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Therese_Ult_Smoke">
       <UniqueIdentifier>{fb2ebb8f-2086-4718-b783-ee66c91b20c7}</UniqueIdentifier>
@@ -990,7 +978,7 @@
     </Filter>
     <Filter Include="03.Component\00.UI\15.CountUp">
       <UniqueIdentifier>{a2342855-4e66-46ee-bd0d-1baabb52584a}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame">
       <UniqueIdentifier>{a2e31c48-43a2-4bf5-9857-fea89d8a92b0}</UniqueIdentifier>
     </Filter>
@@ -999,6 +987,30 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal">
       <UniqueIdentifier>{f009b1fe-9f7e-4929-beac-a251a87f69a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff">
+      <UniqueIdentifier>{665e4b9b-e4ab-4fb4-b125-ff7122688f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Wall">
+      <UniqueIdentifier>{040cea56-258d-4496-b10b-913016ad1a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff">
+      <UniqueIdentifier>{a0f6ff59-c2c6-4101-9a85-0cd4961bbc5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult">
+      <UniqueIdentifier>{956d6e11-ea99-4acf-8c18-99e0c9be8034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Plane">
+      <UniqueIdentifier>{f71034e8-0b42-4bbb-b90e-57375c77c732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_ring">
+      <UniqueIdentifier>{5b05c9df-e55c-4ac2-a111-e8e7b95931c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Shield">
+      <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="03.Component\00.UI\16.QTE">
+        <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1507,19 +1519,19 @@
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\04.Base</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Ult_Shield.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Shield</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Ult_Plane.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Plane</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Plane</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Ult_Eff.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AlphaMaskShader.h">
       <Filter>04.Shader\09.AlphaMaskShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Kiana_Ult_Ring.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_ring</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_ring</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Theresa_Ult_Eff.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult</Filter>
@@ -2021,7 +2033,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\CountUpC.h">
       <Filter>03.Component\00.UI\15.CountUp</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\Warning_Ring.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing</Filter>
     </ClInclude>
@@ -2036,6 +2048,24 @@
     </ClInclude>
     <ClInclude Include="..\Header\Portal_Beam.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\KianaBranchSign.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stage_Wall.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stage_Wall_barrier.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_WSkill_Circle.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Kiana_WSkill_Shoot.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\QteC.h">
+        <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2487,19 +2517,19 @@
       <Filter>02.Objects\01.ForUnit\01.Monster\MO_Ninza\Pattern\00.Born</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Ult_Shield.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Shield</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Shield</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Ult_Plane.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_Plane</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Plane</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Ult_Eff.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AlphaMaskShader.cpp">
       <Filter>04.Shader\09.AlphaMaskShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Kiana_Ult_Ring.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\02.Kiana_Ult\Kiana_Ult_ring</Filter>
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_ring</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult</Filter>
@@ -2968,7 +2998,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\CountUpC.cpp">
       <Filter>03.Component\00.UI\15.CountUp</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\Warning_Ring.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\WarningRing</Filter>
     </ClCompile>
@@ -2983,6 +3013,24 @@
     </ClCompile>
     <ClCompile Include="..\Code\Portal_Beam.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\KianaBranchSign.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stage_Wall.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stage_Wall_barrier.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_WSkill_Circle.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\02.KianaEff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Kiana_WSkill_Shoot.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
+    </ClCompile>
+      <ClCompile Include="..\Code\QteC.cpp">
+        <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
