@@ -10,15 +10,15 @@
 
 #define MaxChaseDistance 0.5f
 
-#define TargetMidWideLimitDist 2.5f
-#define TargetWideLimitDist 4.5f
+#define TargetMidWideLimitDist 2.f
+#define TargetWideLimitDist 5.f
 
 #include "CameraShake.h"
 
 class CStageCameraMan
 {
 public:
-	enum TakeType { Near, Mid, Far, Custom, Change };
+	enum TakeType { Near, Mid, Far, Custom, Target, Change };
 
 public:
 	CStageCameraMan();
@@ -28,6 +28,7 @@ public:
 
 	void UpdateCameraMan();
 	void PivotChasing();
+	void NonTargetChasing();
 
 	void SetIsTargeting(bool value);
 
@@ -40,7 +41,10 @@ public:
 	void SetMidTake();
 	void SetFarTake();
 	void SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
+	void SetTargetTake();
 	void ChangeTake();
+
+	void ChangeTakeWhileTargeting();
 
 public:
 	void OnAttackDirectionCorrecting();
@@ -103,6 +107,9 @@ private:
 
 	GETTOR_SETTOR	(_float,				m_chaseSpeed,	15.f,		ChaseSpeed)
 	_float m_chaseSpeedIncreaseTimer = 0.f;
+	_bool m_isChaseSpeedChange = false;
+	_float m_startChaseSpeed = 0.f;
+	_float m_endChaseSpeed = 0.f;
 
 private:
 	TakeType m_curTakeType = Mid;
@@ -110,6 +117,7 @@ private:
 	_float m_curMaxDist = 3.f;
 	_float m_dstMaxDist = 3.f;
 	_float m_gotoNextTakeTimer = 0.f;
+	_float m_gotoNextTakeWaitTime = 1.5f;
 	_float m_changeTakeTimer = 0.f;
 	_float m_changeTakeSpeed = 2.f;
 

@@ -482,6 +482,7 @@ bool CStageControlTower::FindTarget(HitInfo::CrowdControl cc)
 		m_pActorController->TargetingOn();
 		m_pCameraMan->SetIsTargeting(true);
 
+		CBattleUiManager::GetInstance()->MonsterStateTimerReset();
 		m_pLinker->OnTargetMarker();
 		return true;
 	}
