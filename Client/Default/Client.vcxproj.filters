@@ -1009,8 +1009,11 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\02.KianaEff\Kiana_Ult\Kiana_Ult_Shield">
       <UniqueIdentifier>{0e6cc4e3-be36-417b-9090-4fb40b6e5f13}</UniqueIdentifier>
     </Filter>
-      <Filter Include="03.Component\00.UI\16.QTE">
-        <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
+    <Filter Include="03.Component\00.UI\16.QTE">
+      <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\04.Elevator">
+      <UniqueIdentifier>{e309fbb1-fc32-4a80-a1c0-b147c7f332a4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2064,8 +2067,17 @@
     <ClInclude Include="..\Header\Kiana_WSkill_Shoot.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\QteC.h">
-        <Filter>03.Component\00.UI\16.QTE</Filter>
+    <ClInclude Include="..\Header\QteC.h">
+      <Filter>03.Component\00.UI\16.QTE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ElevatorBase.h">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ElevatorDoor.h">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ElevatorBack.h">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3029,8 +3041,17 @@
     <ClCompile Include="..\Code\Kiana_WSkill_Shoot.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\10.Kiana_SoftEff</Filter>
     </ClCompile>
-      <ClCompile Include="..\Code\QteC.cpp">
-        <Filter>03.Component\00.UI\16.QTE</Filter>
+    <ClCompile Include="..\Code\QteC.cpp">
+      <Filter>03.Component\00.UI\16.QTE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorBase.cpp">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorDoor.cpp">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorBack.cpp">
+      <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

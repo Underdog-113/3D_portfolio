@@ -3,6 +3,11 @@
 #include "Loading.h"
 #include "EmptyObject.h"
 
+//Elevator
+#include "ElevatorBase.h"
+#include "ElevatorBack.h"
+#include "ElevatorDoor.h"
+
 #pragma region PrivateScenes
 #include "StaticScene.h"
 #include "ChangmoScene.h"
@@ -70,15 +75,13 @@ void CInitScene::Start(void)
 	spCameraObject->SetMode(Engine::ECameraMode::Edit);
 	Engine::CCameraManager::GetInstance()->AddCamera(L"InitSceneBasicCamera", spCameraObject);
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
+    
+	spCameraObject->GetTransform()->SetPosition(_float3(0.2f, 1.f,  -3.38f));
+	spCameraObject->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
 
-	m_pBackground =
-		ADD_CLONE(L"EmptyObject", false, (_int)Engine::ELayerID::UI, L"Background1");
-
-	m_pBackground->AddComponent<Engine::CRectTexC>()->SetIsOrtho(true);
-	m_pBackground->AddComponent<Engine::CTextureC>()->AddTexture(L"Agelimit");
-	m_pBackground->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::UI);
-	m_pBackground->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::RectTexShader);
-	m_pBackground->GetTransform()->SetSize(1440, 810, 1);
+	m_spElevatorBase = ADD_CLONE(L"ElevatorBase", false, (_int)Engine::ELayerID::Decoration);
+	
+	SP(Engine::CObject) spObj = ADD_CLONE(L"ElevatorBack", false, (_int)Engine::ELayerID::Decoration);
 
 }
 
@@ -112,11 +115,11 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			m_pBackground->GetComponent<Engine::CTextureC>()->ChangeTexture(L"Warning");
-
 			if (!m_init)
 			{
 				CDataManager::GetInstance()->Start();
+				SP(Engine::CObject) spObj = ADD_CLONE(L"ElevatorDoor", false, (_int)Engine::ELayerID::Decoration);
+				std::static_pointer_cast<CElevatorBase>(m_spElevatorBase)->SetLoadCheck(true);
 				m_init = true;
 			}
 
@@ -226,4 +229,13 @@ void CInitScene::InitPrototypes(void)
 
 	SP(Engine::CCamera) spCameraPrototype(Engine::CCamera::Create(false, this));
 	ADD_PROTOTYPE(spCameraPrototype);
+
+	SP(Engine::CObject) spElevator_Base(CElevatorBase::Create(false, this));
+	ADD_PROTOTYPE(spElevator_Base);
+
+	SP(Engine::CObject) spElevator_Back(CElevatorBack::Create(false, this));
+	ADD_PROTOTYPE(spElevator_Back);
+
+	SP(Engine::CObject) spElevator_Door(CElevatorDoor::Create(false, this));
+	ADD_PROTOTYPE(spElevator_Door);
 }

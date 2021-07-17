@@ -242,6 +242,9 @@
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
+    <ClInclude Include="..\Header\ElevatorBack.h" />
+    <ClInclude Include="..\Header\ElevatorBase.h" />
+    <ClInclude Include="..\Header\ElevatorDoor.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
@@ -587,6 +590,9 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
+    <ClCompile Include="..\Code\ElevatorBack.cpp" />
+    <ClCompile Include="..\Code\ElevatorBase.cpp" />
+    <ClCompile Include="..\Code\ElevatorDoor.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />

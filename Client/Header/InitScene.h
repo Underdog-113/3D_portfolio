@@ -35,6 +35,9 @@ public:
 	_float m_fTempSoundLength = 0.f;
 	_bool m_isStaticScene = false;
 	_bool m_init = false;
+
+private:
+	SP(Engine::CObject) m_spElevatorBase;
 };
 
 #endif
