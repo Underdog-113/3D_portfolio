@@ -73,7 +73,7 @@ void CGraphicsManager::Render(void)
 	RenderAlphaTest();
 	RenderAlphaBlend();
 	RenderParticle();
-	RenderUI();
+	//RenderUI();
 
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
 	if (m_rtDebugOn == true)

@@ -14,7 +14,7 @@
 #include "TextManager.h"
 #include "DataLoad.h"
 #include "MainRoomManager.h"
-
+#include "DecoObject.h"
 #include "Layer.h"
 
 CMainRoomScene::CMainRoomScene()
@@ -52,9 +52,6 @@ void CMainRoomScene::Start(void)
 
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
-	SP(Engine::CObject) spEmpty =
-		ADD_CLONE(L"EmptyObject", true, (_int)Engine::ELayerID::UI, L"Background");
-
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
@@ -73,6 +70,48 @@ void CMainRoomScene::Start(void)
 	// get ControlDesk objects
 	ControlDeskSetrring();
 
+	SP(Engine::CObject) spBG = std::dynamic_pointer_cast<CDecoObject>(ADD_CLONE(L"DecoObject", true, (_int)Engine::ELayerID::Decoration));
+	spBG->GetComponent<Engine::CMeshC>()->SetMeshData(L"Cloud");
+	spBG->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBG->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spBG->GetComponent<Engine::CTextureC>()->AddTexture(L"Stage_LevelMatrix_Winter_BG04");
+	spBG->GetComponent<Engine::CTextureC>()->AddTexture(L"Stage_LevelMatrix_Winter_BG04");
+	spBG->GetTransform()->SetPositionZ(50.f);
+
+
+	SP(Engine::CObject) spObj;
+
+	spObj = ADD_CLONE(L"MainRoomBG", true, (_int)Engine::ELayerID::Decoration);
+	spObj->GetTransform()->SetPositionZ(100.f);
+	spObj->GetTransform()->SetSizeX(10.f);
+	spObj->GetTransform()->SetSizeY(5.f);
+
+	for (_int i = 0; i < 10; ++i)
+	{
+		_float fX = 0.f;
+		_float fY = rand() % 2 + 2.f * 0.5f;
+		_float fZ = rand() % 50 + 50.f;
+
+		_int irand = rand() % 2;
+
+		switch (irand)
+		{
+		case 0:
+			fX = 11.57f;
+			break;
+		case 1:
+			fX = -10.3f;
+			break;
+		default:
+			fX = -10.3f;
+			break;
+		}
+
+		spObj = ADD_CLONE(L"CloudObject", true, (_int)Engine::ELayerID::Decoration);
+		spObj->GetTransform()->SetPosition(fX, fY, fZ);
+
+	}
+
 	// kiana pos
 	// -0.31, -0.64, -2.9
 }
@@ -81,8 +120,6 @@ void CMainRoomScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
 
-	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-	Engine::CSoundManager::GetInstance()->StartSound(L"ButtonClick.waw", (_uint)Engine::EChannelID::UI_ButtonUI);
 }
 
 void CMainRoomScene::Update(void)
@@ -91,6 +128,8 @@ void CMainRoomScene::Update(void)
 	CMainRoomManager::GetInstance()->Update();
 
 	ShakeControlDesk();
+
+
 }
 
 void CMainRoomScene::LateUpdate(void)

@@ -1018,6 +1018,9 @@
     <Filter Include="02.Objects\01.ForUnit\04.Elevator">
       <UniqueIdentifier>{e309fbb1-fc32-4a80-a1c0-b147c7f332a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\05.MainRoom">
+      <UniqueIdentifier>{5738a716-c670-487f-b16b-0e771d0a060f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2085,6 +2088,12 @@
     <ClInclude Include="..\Header\ElevatorBack.h">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CloudObject.h">
+      <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MainRoomBG.h">
+      <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3061,6 +3070,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\ElevatorBack.cpp">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CloudObject.cpp">
+      <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MainRoomBG.cpp">
+      <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

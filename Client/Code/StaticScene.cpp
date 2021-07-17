@@ -162,6 +162,11 @@
 //Wall
 #include "Stage_Wall.h"
 #include "Stage_Wall_barrier.h"
+
+//MainRoom
+#include "CloudObject.h"
+#include "MainRoomBG.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -1028,5 +1033,12 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spStageWallBarrier(CStage_Wall_barrier::Create(true, this));
 	GetObjectFactory()->AddPrototype(spStageWallBarrier);
+
+	// MainRoom
+	SP(Engine::CObject) spCloudObject(CCloudObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spCloudObject);
+
+	SP(Engine::CObject) spMainRoomBG(CMainRoomBG::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMainRoomBG);
 
 }

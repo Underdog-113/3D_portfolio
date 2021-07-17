@@ -242,6 +242,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
     <ClInclude Include="..\Header\ElevatorBack.h" />
     <ClInclude Include="..\Header\ElevatorBase.h" />
@@ -264,6 +265,7 @@
     <ClInclude Include="..\Header\Lancer_Att_Range.h" />
     <ClInclude Include="..\Header\Lancer_Impact.h" />
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
+    <ClInclude Include="..\Header\MainRoomBG.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
     <ClInclude Include="..\Header\ParticleShader.h" />
@@ -591,6 +593,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
     <ClCompile Include="..\Code\ElevatorBack.cpp" />
     <ClCompile Include="..\Code\ElevatorBase.cpp" />
@@ -612,6 +615,7 @@
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
+    <ClCompile Include="..\Code\MainRoomBG.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
     <ClCompile Include="..\Code\ParticleShader.cpp" />
