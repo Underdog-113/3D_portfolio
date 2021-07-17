@@ -87,7 +87,7 @@ void CAttackTrail::Update()
 		//m_fSpeed = 0.3f;
 	}
 
-	m_fSpeed += 0.3f * GET_DT;
+	m_fSpeed += 0.7f * GET_DT;
 	//m_fTrailAlpha -= 0.1f * GET_DT;
 
 }
@@ -101,11 +101,10 @@ void CAttackTrail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 
-    pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
-	/*pEffect->SetFloat("gAlpha", m_fTrailAlpha);*/
-	/*pEffect->SetFloat("gSpeed", m_fSpeed);*/
-	/*pEffect->SetBool("gPlayingAnim", true);*/
-
+    //pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gAlpha", m_fTrailAlpha);
+	/*pEffect->SetFloat("gSpeed", m_fSpeed);
+	pEffect->SetBool("gPlayingAnim", true);*/
 
 }
 

@@ -61,10 +61,6 @@ void CSoftEffect::LateUpdate(void)
 	matBill._31 = matView._31;
 	matBill._33 = matView._33;
 
-	//memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
-	//memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_float3));
-	//memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_float3));
-
 	D3DXMatrixInverse(&matBill, 0, &matBill);
 
 	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();

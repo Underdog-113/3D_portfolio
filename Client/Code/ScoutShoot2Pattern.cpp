@@ -77,7 +77,8 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			_float3 dir = tPos - mPos;
 
-			mPos += *D3DXVec3Normalize(&dir, &dir) * GET_DT;
+			mPos += *D3DXVec3Normalize(&dir, &dir) * 
+				;
 			pOwner->GetTransform()->SetPosition(mPos);
 			m_onWalk = true;
 		}

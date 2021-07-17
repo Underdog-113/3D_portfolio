@@ -63,12 +63,12 @@ void CTheresa_Ult_Trail::Update()
 		SetDeleteThis(true);
 	}
 	if (m_bTrailTurn)
-		m_fTrailAlpha -= 0.5f * GET_DT;
+		m_fTrailAlpha -= 0.5f * GET_PLAYER_DT;
 
 
 	if (!m_bTrailTurn)
 	{
-		m_fTrailAlpha += 0.5f * GET_DT;
+		m_fTrailAlpha += 0.5f * GET_PLAYER_DT;
 
 		if (m_fTrailAlpha >= 0.4f)
 			m_bTrailTurn = true;

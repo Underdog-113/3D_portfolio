@@ -124,29 +124,3 @@ void CMonsterAttackSign::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 }
-
-void CMonsterAttackSign::UpdateFrame(_float _frmSpeed)
-{
-	m_fTIme += GET_DT;
-
-	if (m_fTIme >= _frmSpeed)
-	{
-		m_TilingX++;
-
-		if (m_TilingX >= m_maxXIndex)
-		{
-			m_TilingX = 0;
-
-			if (m_TilingY >= m_maxYIndex)
-			{
-				m_TilingY = 0;
-				SetDeleteThis(true);
-			}
-			else
-			{
-				m_TilingY++;
-			}
-		}
-		m_fTIme = 0;
-	}
-}

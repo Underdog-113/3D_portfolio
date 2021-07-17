@@ -298,7 +298,7 @@ bool CFSM_TheresaC::CheckAction_WeaponSkill(float coolTime)
 
 bool CFSM_TheresaC::CheckAction_Idle()
 {
-	m_idleTimer += GET_DT;
+	m_idleTimer += GET_PLAYER_DT;
 	if (m_idleTimer > 3.f)
 	{
 		ChangeState(Name_Idle);
@@ -344,7 +344,7 @@ bool CFSM_TheresaC::CheckAction_ChargeAttack_End()
 
 bool CFSM_TheresaC::CheckAction_ChargeMode()
 {
-	m_chargeEnterTimer += GET_DT;
+	m_chargeEnterTimer += GET_PLAYER_DT;
 	if (Engine::IMKEY_PRESS(StageKey_Attack))
 	{
 		if (m_chargeEnterTimer > 0.5f)
@@ -580,7 +580,7 @@ void CFSM_TheresaC::RunBS_Enter(void)
 
 void CFSM_TheresaC::RunBS_Update(float deltaTime)
 {
-	m_runSoundTimer += GET_DT;
+	m_runSoundTimer += GET_PLAYER_DT;
 	if (m_runSoundTimer > 0.3f)
 	{
 		m_runSoundTimer = 0.f;
@@ -1332,18 +1332,20 @@ void CFSM_TheresaC::SwitchIn_Enter(void)
 
 void CFSM_TheresaC::SwitchIn_Update(float deltaTime)
 {
-	if (CheckAction_EvadeBackward(0.4f))
-		return;
-	if (CheckAction_Run_OnAction(0.4f))
-		return;
-	if (CheckAction_Attack(Name_Attack1, 0.4f))
-		return;
-	if (CheckAction_Ultra(0.4f))
-		return;
-	if (CheckAction_WeaponSkill(0.4f))
-		return;
-	if (CheckAction_StandBy_Timeout())
-		return;
+	if (m_pDM->IsAnimationEnd())
+	{
+		if (m_pTheresa->GetIsQTESwitch())
+		{
+			m_pTheresa->SetIsQTESwitch(false);
+			ChangeState(Name_Charge0);
+			return;
+		}
+		else
+		{
+			ChangeState(Name_StandBy);
+			return;
+		}
+	}
 }
 
 void CFSM_TheresaC::SwitchIn_End(void)

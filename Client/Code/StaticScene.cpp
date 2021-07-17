@@ -71,6 +71,9 @@
 #include "Kiana_Ult_Plane.h"
 #include "Kiana_Ult_Shield.h"
 #include "Kiana_Ult_Ring.h"
+#include "KianaBranchSign.h"
+#include "Kiana_WSkill_Circle.h"
+#include "Kiana_WSkill_Shoot.h"
 
 // Theresa
 #include "Theresa_Trail.h"
@@ -146,6 +149,19 @@
 //Particle
 #include "TestParticle.h"
 
+///// Ingame Deco Effect //////
+//Warning
+#include "Warning_Ring.h"
+
+//Portal
+#include "Portal_Blue.h"
+#include "Portal_Circle.h"
+#include "Portal_Plane.h"
+#include "Portal_Beam.h"
+
+//Wall
+#include "Stage_Wall.h"
+#include "Stage_Wall_barrier.h"
 #pragma endregion
 
 #pragma region Static setting
@@ -412,10 +428,22 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
 
+	SP(CSoftEffect) spKiana_WSkill_Shoot(CKiana_WSkill_Shoot::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_WSkill_Shoot);
+
+	SP(CMeshEffect_Client) spKiana_WSkill_Circle(CKiana_WSkill_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_WSkill_Circle);
+
+	SP(CSoftEffect) spKianaBranchSign(CKianaBranchSign::Create(true, this));
+	spKianaBranchSign->GetComponent<Engine::CTextureC>()->AddTexture(L"YellowFlare");
+	spKianaBranchSign->GetComponent<Engine::CTextureC>()->AddTexture(L"YellowFlare");
+	spKianaBranchSign->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spKianaBranchSign);
+
+	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
 
-	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Trail(CTheresa_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Trail);
 
@@ -940,7 +968,65 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronya_UIt_Laser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 
+	// Ingame
+
+	SP(CMeshEffect_Client) spWarning_Ring(CWarning_Ring::Create(true, this));
+	spWarning_Ring->GetComponent<Engine::CMeshC>()->SetMeshData(L"Warning_Ring");
+	spWarning_Ring->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spWarning_Ring->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spWarning_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Warning_2");
+	spWarning_Ring->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
+	spWarning_Ring->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spWarning_Ring);
+
+	// Portal
+
+	SP(CMeshEffect_Client) spPortalPlane(CPortal_Plane::Create(true, this));
+	spPortalPlane->GetComponent<Engine::CMeshC>()->SetMeshData(L"Portal_Plane");
+	spPortalPlane->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spPortalPlane->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spPortalPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_Plane_Color");
+	spPortalPlane->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_Plane_Color");
+	spPortalPlane->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spPortalPlane);
+
+	SP(CMeshEffect_Client) spPortalCircle(CPortal_Circle::Create(true, this));
+	spPortalCircle->GetComponent<Engine::CMeshC>()->SetMeshData(L"Portal_Circle");
+	spPortalCircle->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spPortalCircle->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spPortalCircle->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_Circle");
+	spPortalCircle->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_Circle");
+	spPortalCircle->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spPortalCircle);
+
+	SP(CMeshEffect_Client) spPortalBlue(CPortal_Blue::Create(true, this));
+	spPortalBlue->GetComponent<Engine::CMeshC>()->SetMeshData(L"Portal_Cylinder");
+	spPortalBlue->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spPortalBlue->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spPortalBlue->GetComponent<Engine::CTextureC>()->AddTexture(L"BlueprintBG");
+	spPortalBlue->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_04");
+	spPortalBlue->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spPortalBlue);
+
+	SP(CMeshEffect_Client) spPortalBeam(CPortal_Beam::Create(true, this));
+	spPortalBeam->GetComponent<Engine::CMeshC>()->SetMeshData(L"Portal_Beam");
+	spPortalBeam->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spPortalBeam->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spPortalBeam->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam");
+	spPortalBeam->GetComponent<Engine::CTextureC>()->AddTexture(L"Portal_beam");
+	spPortalBeam->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	GetObjectFactory()->AddPrototype(spPortalBeam);
+
+	// Particle
 	SP(Engine::CObject) spTestParticle(CTestParticle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTestParticle);
+
+
+	// Wall Effect
+	SP(CMeshEffect_Client) spStageWall(CStage_Wall::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStageWall);
+
+	SP(CMeshEffect_Client) spStageWallBarrier(CStage_Wall_barrier::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStageWallBarrier);
 
 }

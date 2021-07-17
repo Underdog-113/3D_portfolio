@@ -242,6 +242,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\CountUpC.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
@@ -249,10 +250,13 @@
     <ClInclude Include="..\Header\Ganesha_LaserEff.h" />
     <ClInclude Include="..\Header\Ganesha_SmokeEff.h" />
     <ClInclude Include="..\Header\Ganesha_UpperEff.h" />
+    <ClInclude Include="..\Header\KianaBranchSign.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h" />
     <ClInclude Include="..\Header\KianaBodyShader.h" />
     <ClInclude Include="..\Header\KianaUIAnim.h" />
     <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\Kiana_WSkill_Circle.h" />
+    <ClInclude Include="..\Header\Kiana_WSkill_Shoot.h" />
     <ClInclude Include="..\Header\LancerAirbornePattern.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h" />
     <ClInclude Include="..\Header\Lancer_Impact.h" />
@@ -261,6 +265,11 @@
     <ClInclude Include="..\Header\FaceShader.h" />
     <ClInclude Include="..\Header\ParticleShader.h" />
     <ClInclude Include="..\Header\OJ_Box.h" />
+    <ClInclude Include="..\Header\Portal_Beam.h" />
+    <ClInclude Include="..\Header\Portal_Blue.h" />
+    <ClInclude Include="..\Header\Portal_Circle.h" />
+    <ClInclude Include="..\Header\Portal_Plane.h" />
+    <ClInclude Include="..\Header\QteC.h" />
     <ClInclude Include="..\Header\RobotHookEff.h" />
     <ClInclude Include="..\Header\Robot_Impact.h" />
     <ClInclude Include="..\Header\Robot_Impact_Smoke.h" />
@@ -428,6 +437,8 @@
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
     <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
     <ClInclude Include="..\Header\SoftEffect.h" />
+    <ClInclude Include="..\Header\Stage_Wall.h" />
+    <ClInclude Include="..\Header\Stage_Wall_barrier.h" />
     <ClInclude Include="..\Header\StuffItem.h" />
     <ClInclude Include="..\Header\SupplyItem.h" />
     <ClInclude Include="..\Header\SupplyManager.h" />
@@ -452,6 +463,7 @@
     <ClInclude Include="..\Header\ScoutShoot3Pattern.h" />
     <ClInclude Include="..\Header\ThreeStagePhaseControl.h" />
     <ClInclude Include="..\Header\ThreeStageScene.h" />
+    <ClInclude Include="..\Header\TimerC.h" />
     <ClInclude Include="..\Header\TimeSeeker.h" />
     <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
@@ -501,6 +513,7 @@
     <ClInclude Include="..\Header\ValkyrieWeaponLevelUp.h" />
     <ClInclude Include="..\Header\ValkyrieWeaponSwap.h" />
     <ClInclude Include="..\Header\WaponItem.h" />
+    <ClInclude Include="..\Header\Warning_Ring.h" />
     <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="..\Header\WeaponData.h" />
     <ClInclude Include="..\Header\WooScene.h" />
@@ -575,6 +588,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\CountUpC.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
@@ -582,9 +596,12 @@
     <ClCompile Include="..\Code\Ganesha_LaserEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_UpperEff.cpp" />
+    <ClCompile Include="..\Code\KianaBranchSign.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp" />
     <ClCompile Include="..\Code\KianaBodyShader.cpp" />
     <ClCompile Include="..\Code\KianaUIAnim.cpp" />
+    <ClCompile Include="..\Code\Kiana_WSkill_Circle.cpp" />
+    <ClCompile Include="..\Code\Kiana_WSkill_Shoot.cpp" />
     <ClCompile Include="..\Code\LancerAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
@@ -593,6 +610,11 @@
     <ClCompile Include="..\Code\FaceShader.cpp" />
     <ClCompile Include="..\Code\ParticleShader.cpp" />
     <ClCompile Include="..\Code\OJ_Box.cpp" />
+    <ClCompile Include="..\Code\Portal_Beam.cpp" />
+    <ClCompile Include="..\Code\Portal_Blue.cpp" />
+    <ClCompile Include="..\Code\Portal_Circle.cpp" />
+    <ClCompile Include="..\Code\Portal_Plane.cpp" />
+    <ClCompile Include="..\Code\QteC.cpp" />
     <ClCompile Include="..\Code\RobotHookEff.cpp" />
     <ClCompile Include="..\Code\Robot_Impact.cpp" />
     <ClCompile Include="..\Code\Robot_Impact_Smoke.cpp" />
@@ -737,6 +759,8 @@
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
     <ClCompile Include="..\Code\SoftEffect.cpp" />
+    <ClCompile Include="..\Code\Stage_Wall.cpp" />
+    <ClCompile Include="..\Code\Stage_Wall_barrier.cpp" />
     <ClCompile Include="..\Code\StuffItem.cpp" />
     <ClCompile Include="..\Code\SupplyItem.cpp" />
     <ClCompile Include="..\Code\SupplyManager.cpp" />
@@ -761,6 +785,7 @@
     <ClCompile Include="..\Code\ScoutShoot3Pattern.cpp" />
     <ClCompile Include="..\Code\ThreeStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
+    <ClCompile Include="..\Code\TimerC.cpp" />
     <ClCompile Include="..\Code\TimeSeeker.cpp" />
     <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
@@ -810,6 +835,7 @@
     <ClCompile Include="..\Code\ValkyrieWeaponLevelUp.cpp" />
     <ClCompile Include="..\Code\ValkyrieWeaponSwap.cpp" />
     <ClCompile Include="..\Code\WaponItem.cpp" />
+    <ClCompile Include="..\Code\Warning_Ring.cpp" />
     <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="..\Code\WeaponData.cpp" />
     <ClCompile Include="..\Code\WooScene.cpp" />

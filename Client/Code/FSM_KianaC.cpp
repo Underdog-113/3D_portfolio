@@ -70,6 +70,23 @@ void CFSM_KianaC::OnDestroy()
 	delete m_pEffectMaker;
 }
 
+void CFSM_KianaC::ActQTEAttack()
+{
+	HitInfo info;
+	info.SetDamageRate(0.75f);
+	info.SetBreakDamage(10.f);
+	info.SetStrengthType(HitInfo::Str_Low);
+	info.SetCrowdControlType(HitInfo::CC_None);
+
+	auto pAttackBall = m_pKiana->GetAttackBall();
+	pAttackBall->SetIsEnabled(true);
+	pAttackBall->SetupBall(0.3f, info);
+
+
+	pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	pAttackBall->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.5f);
+}
+
 void CFSM_KianaC::FixRootMotionOffset(_uint index)
 {
 	m_pKiana->GetComponent<Engine::CMeshC>()->GetRootMotion()->OnFixRootMotionOffset(index);
@@ -449,6 +466,9 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkEffect = false;
 	m_checkEffectSecond = false;
 	m_checkAttack = false;
+	m_checkAttack2nd = false;
+	m_checkAttack3rd = false;
+	m_checkAttack4th = false;
 }
 
 void CFSM_KianaC::ResetCheckMembers_Hit()
@@ -1016,13 +1036,60 @@ void CFSM_KianaC::Attack_QTE_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack_QTE);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	ResetCheckMembers();
 }
 
 void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 {
-	if (CheckAction_Evade_OnAction(0.5f))
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.18)
+	{
+		ActQTEAttack();
+		m_checkAttack = true;
+	}
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > 0.2)
+		m_pKiana->UnActiveAttackBall();
+
+	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > 0.246)
+	{
+		ActQTEAttack();
+		m_checkAttack2nd = true;
+	}
+	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > 0.265)
+		m_pKiana->UnActiveAttackBall();
+
+	if (!m_checkAttack3rd && m_pDM->GetAniTimeline() > 0.312)
+	{
+		ActQTEAttack();
+		m_checkAttack3rd = true;
+	}
+	if (!m_checkAttack4th &&m_pDM->GetAniTimeline() > 0.33)
+		m_pKiana->UnActiveAttackBall();
+
+
+	if (!m_checkAttack4th && m_pDM->GetAniTimeline() > 0.481)
+	{
+		HitInfo info;
+		info.SetDamageRate(1.5f);
+		info.SetBreakDamage(20.f);
+		info.SetStrengthType(HitInfo::Str_High);
+		info.SetCrowdControlType(HitInfo::CC_Stun);
+
+		auto pAttackBall = m_pKiana->GetAttackBall();
+		pAttackBall->SetIsEnabled(true);
+		pAttackBall->SetupBall(0.3f, info);
+
+
+		pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		pAttackBall->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.5f);
+		m_checkAttack4th = true;
+	}
+	if (m_pDM->GetAniTimeline() > 0.5)
+		m_pKiana->UnActiveAttackBall();
+
+	if (CheckAction_Evade_OnAction(0.6f))
 		return;
-	if (CheckAction_Run_OnAction(Cool_RunOnAttack))
+	if (CheckAction_Run_OnAction(0.6f))
 		return;
 
 	if (CheckAction_StandBy_Timeout())
@@ -1563,14 +1630,20 @@ void CFSM_KianaC::SwitchIn_Enter(void)
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 {
-// 	if (m_pDM->GetAniTimeline() > 0.5f)
-// 	{
-// 		ChangeState(Name_Attack_QTE);
-// 		return;
-// 	}
-
-	if (CheckAction_StandBy_Timeout())
-		return;
+	if (m_pDM->IsAnimationEnd())
+	{
+		if (m_pKiana->GetIsQTESwitch())
+		{
+			m_pKiana->SetIsQTESwitch(false);
+			ChangeState(Name_Attack_QTE);
+			return;
+		}
+		else
+		{
+			ChangeState(Name_StandBy);
+			return;
+		}
+	}
 }
 
 void CFSM_KianaC::SwitchIn_End(void)

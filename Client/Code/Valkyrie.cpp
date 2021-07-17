@@ -38,6 +38,7 @@ void CValkyrie::Start(void)
 
 	m_skillTimer = m_pStat->GetSkillCoolTime();
 	m_ultraTimer = m_pStat->GetUltraCoolTime();
+	m_switchTimer = 4.f;
 }
 
 void CValkyrie::Update(void)
@@ -49,6 +50,18 @@ void CValkyrie::Update(void)
 
 	if (m_skillTimer < m_pStat->GetSkillCoolTime())
 		m_skillTimer += GET_PLAYER_DT;
+}
+
+void CValkyrie::CoolTimeUpdate(void)
+{
+	if (m_ultraTimer < m_pStat->GetUltraCoolTime())
+		m_ultraTimer += GET_PLAYER_DT;
+
+	if (m_skillTimer < m_pStat->GetSkillCoolTime())
+		m_skillTimer += GET_PLAYER_DT;
+
+	if (m_switchTimer < 4.f)
+		m_switchTimer += GET_PLAYER_DT;
 }
 
 void CValkyrie::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
@@ -220,6 +233,14 @@ _bool CValkyrie::CheckSkillUseable(void)
 		return false;
 
 	if (m_pStat->GetCurSp() < m_pStat->GetSkillCost())
+		return false;
+
+	return true;
+}
+
+_bool CValkyrie::CheckSwitchable()
+{
+	if (m_switchTimer < 4.f)
 		return false;
 
 	return true;
