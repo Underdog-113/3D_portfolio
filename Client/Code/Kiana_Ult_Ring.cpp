@@ -56,10 +56,10 @@ void CKiana_Ult_Ring::Update()
 {
 	__super::Update();
 
-	m_spTransform->AddSizeX(1.2f * GET_DT);
-	m_spTransform->AddSizeZ(1.2f * GET_DT);
+	m_spTransform->AddSizeX(1.2f * GET_PLAYER_DT);
+	m_spTransform->AddSizeZ(1.2f * GET_PLAYER_DT);
 
-	m_fAlpha -= 0.5f * GET_DT;
+	m_fAlpha -= 0.5f * GET_PLAYER_DT;
 }
 
 void CKiana_Ult_Ring::LateUpdate()

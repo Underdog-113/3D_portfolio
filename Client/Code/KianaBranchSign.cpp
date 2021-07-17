@@ -72,7 +72,7 @@ void CKianaBranchSign::Update(void)
 	{
 		this->SetDeleteThis(true);
 	}
-	_float _size = -3.5f * GET_DT;
+	_float _size = -3.5f * GET_PLAYER_DT;
 	this->GetTransform()->AddSize(_float3(_size, _size, _size));
 }
 

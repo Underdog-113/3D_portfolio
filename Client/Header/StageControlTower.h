@@ -97,6 +97,9 @@ public:		/* Battle */
 	void OnSakuraUltraActive();
 	void OffSakuraUltraActive();
 
+	void OnSlowExceptPlayer();
+	void OffSlowExceptPlayer();
+
 	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 

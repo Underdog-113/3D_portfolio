@@ -92,6 +92,7 @@ void CTimeSeeker::PlayAttackImpactSlow()
 
 void CTimeSeeker::OnSakuraUltraActive()
 {
+	m_perfectEvadeMode = true;
 	m_slowAll = false;
 	m_sakuraUltraSlow = true;
 
@@ -103,6 +104,7 @@ void CTimeSeeker::OnSakuraUltraActive()
 
 void CTimeSeeker::OffSakuraUltraActive()
 {
+	m_perfectEvadeMode = false;
 	m_sakuraUltraSlow = false;
 
 	Engine::CFRC::GetInstance()->SetDtCoef(1.f);

@@ -1085,7 +1085,10 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 		m_checkAttack4th = true;
 	}
 	if (m_pDM->GetAniTimeline() > 0.5)
+	{
 		m_pKiana->UnActiveAttackBall();
+		m_pStageControlTower->OffSlowExceptPlayer();
+	}
 
 	if (CheckAction_Evade_OnAction(0.6f))
 		return;

@@ -70,11 +70,11 @@ void CSakura_WSkill_Impact::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_spTransform->AddSizeX(0.1f * GET_DT);
-	m_spTransform->AddSizeY(0.5f * GET_DT);
-	m_spTransform->AddSizeZ(0.1f * GET_DT);
+	m_spTransform->AddSizeX(0.1f * GET_PLAYER_DT);
+	m_spTransform->AddSizeY(0.5f * GET_PLAYER_DT);
+	m_spTransform->AddSizeZ(0.1f * GET_PLAYER_DT);
 
-	m_fAlpha -= 2.5f * GET_DT;
+	m_fAlpha -= 2.5f * GET_PLAYER_DT;
 }
 
 void CSakura_WSkill_Impact::LateUpdate()

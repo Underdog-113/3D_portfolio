@@ -126,7 +126,7 @@ void CKiana_WSkill_Shoot::SetBasicName(void)
 
 void CKiana_WSkill_Shoot::UpdateFrame(_float _frmSpeed)
 {
-	m_fTIme += GET_DT;
+	m_fTIme += GET_PLAYER_DT;
 
 	if (m_fTIme >= _frmSpeed)
 	{

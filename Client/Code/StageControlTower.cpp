@@ -819,7 +819,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 
 		m_pActorController->LookHittedDirection(curTargetPos);
 
-		OnPerfectEvadeMode();
+		OnSlowExceptPlayer();
 		m_pCurActor->SetIsQTESwitch(true);
 		m_isQTEUsed = true;
 		m_isQTESwitch = false;
@@ -971,6 +971,16 @@ void CStageControlTower::OnSakuraUltraActive()
 }
 
 void CStageControlTower::OffSakuraUltraActive()
+{
+	m_pTimeSeeker->OffSakuraUltraActive();
+}
+
+void CStageControlTower::OnSlowExceptPlayer()
+{
+	m_pTimeSeeker->OnSakuraUltraActive();
+}
+
+void CStageControlTower::OffSlowExceptPlayer()
 {
 	m_pTimeSeeker->OffSakuraUltraActive();
 }
