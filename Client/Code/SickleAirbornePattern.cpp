@@ -32,7 +32,8 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 			  Name_Sickle_Throw_02 == fsm->GetCurStateString() ||
 			  Name_Sickle_Hit_Throw == fsm->GetCurStateString()) &&
 			 (pOwner->GetComponent<CPatternMachineC>()->GetOnHitL() ||
-			  pOwner->GetComponent<CPatternMachineC>()->GetOnHitH()))
+			  pOwner->GetComponent<CPatternMachineC>()->GetOnHitH()
+			 ))
 	{
 		fsm->ChangeState(Name_Sickle_Hit_Throw);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);

@@ -37,17 +37,28 @@ public:
 public:
 					void					SetBasicName		(void) override;
 
+public:
+	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
+	void UnActiveAttackBall();
+
 protected:
 	static			_uint							m_s_uniqueID;
 	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
 	GETTOR			(SP(Engine::CTextureC),			m_spTexture,		nullptr,	Texture)
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
+	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
+	GETTOR			(_float,						m_speed,			22.f,		Speed)
+	GETTOR			(_float,						m_accTime,			0.f,		AccTime)
+	GETTOR			(_float,						m_maxTime,			4.f,		MaxTime)
 		
 	GETTOR_SETTOR	(_mat*,							m_pParentMatrix,	nullptr,	ParentMatrix)
+	GETTOR_SETTOR	(_float3,						m_dir,				{},			Dir)
 
+	_mat m_bulletMat;
+
+	_float m_x = 0.f;
+	_float m_y = 0.f;
 };
-
-
 
 #endif

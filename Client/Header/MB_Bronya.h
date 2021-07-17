@@ -59,7 +59,7 @@ private:
 
 	GETTOR(SP(Engine::CObject), m_spWeapon, nullptr, Weapon)
 	GETTOR(std::vector<SP(CBronyaBullet)>, m_vBullets, {}, Bullets)
-	GETTOR(std::vector<SP(CAttackBall)>, m_vBulletAB, {}, BulletAB)
+	//GETTOR(std::vector<SP(CAttackBall)>, m_vBulletAB, {}, BulletAB)
 
 public:
 	static SP(CMB_Bronya) Create(_bool isStatic, Engine::CScene* pScene);
