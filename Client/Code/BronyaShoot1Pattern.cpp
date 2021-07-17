@@ -37,6 +37,8 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
+	static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
+
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
 	/************************* Range */
@@ -55,7 +57,9 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	else if (len <= m_atkDis)
 	{
 		// 내가 대기 상태라면
-		if (Name_IDLE == fsm->GetCurStateString())
+		if (Name_IDLE == fsm->GetCurStateString() ||
+			Name_Run == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			// shoot1 상태로 변경
 			fsm->ChangeState(Name_Shoot_1);
@@ -91,7 +95,7 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_L_Forearm")->CombinedTransformMatrix;
 
-		for (_int i = 0; i < 9; ++i)
+		for (_int i = 0; i < 12; ++i)
 		{
 			static_cast<CMB_Bronya*>(pOwner)->GetBulletAB()[i]->SetOffset(_float3(0.6f, 0.f, 0.f));
 			static_cast<CMB_Bronya*>(pOwner)->ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, m_vBulletsAB[i], 0.12f, static_cast<CMB_Bronya*>(pOwner)->GetBulletAB()[i].get());
@@ -99,7 +103,7 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 			
 			auto& bullet = static_cast<CMB_Bronya*>(pOwner)->GetBullets()[i];
 
-			m_dir = tPos - bullet->GetTransform()->GetPosition();
+			m_dir = mPos - tPos;
 			D3DXVec3Normalize(&m_dir, &m_dir);
 
 			bullet->SetIsEnabled(true);
@@ -111,15 +115,18 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	// 어택볼 이동
 	if (true == m_onAtkBall)
 	{
-		SetBullet(pOwner, 0, _float3(19.f, -2.f, 0.f), mPos, tPos);
-		SetBullet(pOwner, 1, _float3(19.f, -2.5f, 0.3f), mPos, tPos);
-		SetBullet(pOwner, 2, _float3(19.f, -3.1f, 0.5f), mPos, tPos);
-		SetBullet(pOwner, 3, _float3(19.f, -2.7f, 0.4f), mPos, tPos);
-		SetBullet(pOwner, 4, _float3(19.f, -2.6f, 0.5f), mPos, tPos);
-		SetBullet(pOwner, 5, _float3(19.f, -3.f, 1.f), mPos, tPos);
-		SetBullet(pOwner, 6, _float3(19.f, -3.f, 0.8f), mPos, tPos);
-		SetBullet(pOwner, 7, _float3(19.f, -2.3f, -0.3f), mPos, tPos);
-		SetBullet(pOwner, 8, _float3(19.f, -3.3f, -0.5f), mPos, tPos);
+		SetBullet(pOwner,  0, _float3(37.f, -6.3f,	0.0f));
+		SetBullet(pOwner,  1, _float3(37.f, -6.5f,	0.3f));
+		SetBullet(pOwner,  2, _float3(37.f, -5.1f,	0.5f));
+		SetBullet(pOwner,  3, _float3(37.f, -6.9f,	1.4f));
+		SetBullet(pOwner,  4, _float3(37.f, -6.6f,	0.9f));
+		SetBullet(pOwner,  5, _float3(37.f, -5.0f,	1.0f));
+		SetBullet(pOwner,  6, _float3(37.f, -6.9f,	0.8f));
+		SetBullet(pOwner,  7, _float3(37.f, -6.3f, -0.3f));
+		SetBullet(pOwner,  8, _float3(37.f, -6.5f, -1.5f));
+		SetBullet(pOwner,  9, _float3(37.f, -7.5f, -0.9f));
+		SetBullet(pOwner, 10, _float3(37.f, -7.5f, -1.9f));
+		SetBullet(pOwner, 11, _float3(37.f, -7.5f,  1.9f));
 	}
 }
 
@@ -140,11 +147,8 @@ void CBronyaShoot1Pattern::GetRHandMat(Engine::CObject * pOwner, _mat * pAtkBall
 	*pAtkBall = combMat * pOwner->GetTransform()->GetWorldMatrix();
 }
 
-void CBronyaShoot1Pattern::SetBullet(Engine::CObject * pOwner, _int index, _float3 addPos, _float3 mPos, _float3 tPos)
+void CBronyaShoot1Pattern::SetBullet(Engine::CObject * pOwner, _int index, _float3 addPos)
 {
-	_float3 dir = mPos - tPos;
-	D3DXVec3Normalize(&dir, &dir);
-
 	auto& attackball = static_cast<CMB_Bronya*>(pOwner)->GetBulletAB()[index];
 
 	_float3 ball = attackball->GetOffset();

@@ -20,14 +20,14 @@ public:
 
 private:
 	void GetRHandMat(Engine::CObject* pOwner, _mat* pAtkBall);
-	void SetBullet(Engine::CObject* pOwner, _int index, _float3 addPos, _float3 mPos, _float3 tPos);
+	void SetBullet(Engine::CObject* pOwner, _int index, _float3 addPos);
 
 private:
 	//_float m_cost = 7.f;
 	_float m_cost = 1.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
-	_float m_atkDis = 25.f; // 공격 거리
+	_float m_atkDis = 15.f; // 공격 거리
 	_float m_atkCool = 3.f; // 공격 쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
