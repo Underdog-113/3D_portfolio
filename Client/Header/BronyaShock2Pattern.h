@@ -17,6 +17,9 @@ public:
 	static SP(CBronyaShock2Pattern) Create();
 
 private:
+	void GetRHandMat(Engine::CObject* pOwner, _mat* pAtkBall);
+
+private:
 	//_float m_cost = 22.f;
 	_float m_cost = 1.f;
 
@@ -31,7 +34,12 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
 
+	_bool m_onAtkBall = false;
+	_bool m_offAtkBall = false;
+
 	_mat m_atkMat;
+	_mat* m_pRHand;
+	_mat* m_pAttackBallMat;
 	std::wstring m_curState;
 };
 

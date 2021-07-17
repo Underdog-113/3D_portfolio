@@ -189,18 +189,18 @@ void CPatternMachineC::PlayHitPattern()
 {
 	if (true == m_onDie)
 		return;
-
-	// 스턴 상태라면
-	if (true == m_onStun &&
-		nullptr != m_vPatterns[Pattern_Type::Stun])
-	{
-		m_vPatterns[Pattern_Type::Stun]->Pattern(m_pOwner);
-	}
+	
 	// 에어본 상태라면
-	else if (true == m_onAirborne &&
+	if (true == m_onAirborne &&
 		nullptr != m_vPatterns[Pattern_Type::Airborne])
 	{
 		m_vPatterns[Pattern_Type::Airborne]->Pattern(m_pOwner);
+	}
+	// 스턴 상태라면
+	else if (true == m_onStun &&
+		nullptr != m_vPatterns[Pattern_Type::Stun])
+	{
+		m_vPatterns[Pattern_Type::Stun]->Pattern(m_pOwner);
 	}
 	// 피격 상태라면
 	else if (true == m_onHitL ||
