@@ -57,8 +57,8 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	else if (len <= m_atkDis)
 	{
 		// 내가 대기 상태라면
-		if (Name_IDLE == fsm->GetCurStateString() ||
-			Name_Run == fsm->GetCurStateString() &&
+		if ((Name_IDLE == fsm->GetCurStateString() ||
+			Name_Run == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			// shoot1 상태로 변경
@@ -82,10 +82,15 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기
 	if (Name_Shoot_1 == fsm->GetCurStateString() &&
-		0.15f <= fsm->GetDM()->GetAniTimeline() &&
+		0.75f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_offAtkBall)
 	{
-		//static_cast<CMB_Bronya*>(pOwner)->UnActiveAttackBall();
+		for (_int i = 0; i < 12; ++i)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->UnActiveAttackBall(static_cast<CMB_Bronya*>(pOwner)->GetBulletAB()[i].get());
+			static_cast<CMB_Bronya*>(pOwner)->GetBullets()[i]->SetIsEnabled(false);
+		}
+
 		m_offAtkBall = true;
 	}
 	// 내가 공격 상태고, 적절할 때 어택볼 생성
@@ -109,6 +114,7 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 			bullet->SetIsEnabled(true);
 			bullet->GetTransform()->SetForward(m_dir);
 		}
+		std::cout << "offset reset" << std::endl;
 		
 		m_onAtkBall = true;
 	}
