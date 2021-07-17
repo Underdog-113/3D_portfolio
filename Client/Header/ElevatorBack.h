@@ -36,12 +36,16 @@ public:
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
 	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+	GETTOR_SETTOR(_bool, m_bSpawnCheck, false, SpawnCheck)
+	GETTOR(_float, m_TempPosY, 0.f, TempPosY)
+
 	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
 
 private:
 	static		_uint m_s_uniqueID;
 
 private:
-	_float m_TempPosY;
+
+private:
 };
 

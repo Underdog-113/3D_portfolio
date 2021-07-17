@@ -38,6 +38,7 @@ public:
 
 private:
 	SP(Engine::CObject) m_spElevatorBase;
+	SP(Engine::CObject) m_spElevatorBack;
 };
 
 #endif

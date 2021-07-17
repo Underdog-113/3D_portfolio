@@ -11,7 +11,6 @@ CElevatorBack::CElevatorBack()
 CElevatorBack::~CElevatorBack()
 {
 	OnDestroy();
-
 }
 
 SP(CElevatorBack) CElevatorBack::Create(_bool isStatic, Engine::CScene * pScene)
@@ -47,18 +46,10 @@ void CElevatorBack::Awake(void)
 
 	m_spMesh = AddComponent<Engine::CMeshC>();
 	m_spMesh->SetInitTex(true);
-	m_spMesh->SetMeshData(L"Elevator_Back");
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
 	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
 	m_spTexture = AddComponent<Engine::CTextureC>();
-
-	_uint a = m_spMesh->GetMeshData()->GetSubsetCount();
-
-	for (_uint i = 0; i < m_spMesh->GetMeshData()->GetSubsetCount(); ++i)
-	{
-		m_spTexture->AddTexture(Engine::RemoveExtension(m_spMesh->GetMeshData()->GetTexList()[i]));
-	}
 }
 
 void CElevatorBack::Start(void)
@@ -66,6 +57,7 @@ void CElevatorBack::Start(void)
 	__super::Start();
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_TempPosY = m_spTransform->GetPosition().y;
+	m_bSpawnCheck = false;
 }
 
 void CElevatorBack::FixedUpdate(void)
@@ -78,14 +70,14 @@ void CElevatorBack::Update(void)
 {
 	__super::Update();
 
-	if (m_spTransform->GetPosition().y >= -11.5f)
+	if (m_spTransform->GetPosition().y + m_TempPosY >= -20.f)
 	{
 		m_spTransform->AddPositionY(-1.5f * GET_DT);
 	}
 
-	if (m_spTransform->GetPosition().y < -11.5f)
+	if (m_spTransform->GetPosition().y + m_TempPosY < -20.f)
 	{
-		m_spTransform->SetPositionY(m_TempPosY * 1.f * GET_DT);
+		this->SetDeleteThis(true);
 	}
 
 }

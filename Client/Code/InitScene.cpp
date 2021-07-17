@@ -81,7 +81,19 @@ void CInitScene::Start(void)
 
 	m_spElevatorBase = ADD_CLONE(L"ElevatorBase", false, (_int)Engine::ELayerID::Decoration);
 	
-	SP(Engine::CObject) spObj = ADD_CLONE(L"ElevatorBack", false, (_int)Engine::ELayerID::Decoration);
+	_float _fY = 0.f;
+	for (_int i = 0; i < 2; ++i)
+	{
+		m_spElevatorBack = ADD_CLONE(L"ElevatorBack", false, (_int)Engine::ELayerID::Decoration);
+
+		if (i == 0)
+			m_spElevatorBack->GetComponent<Engine::CMeshC>()->SetMeshData(L"Elevator_Back");
+		else
+			m_spElevatorBack->GetComponent<Engine::CMeshC>()->SetMeshData(L"Elevator_Back_2");
+
+		m_spElevatorBack->GetTransform()->AddPositionY(_fY);
+		_fY += 16.f;
+	}
 
 }
 
@@ -107,6 +119,7 @@ void CInitScene::Update(void)
 		m_fTempSoundLength = 0.f;
 	}
 
+
 	if (m_pLoading->GetFinish())
 	{
 		if (m_selectNextScene)
@@ -115,6 +128,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
+			
 			if (!m_init)
 			{
 				CDataManager::GetInstance()->Start();
