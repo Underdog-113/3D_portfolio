@@ -1015,11 +1015,26 @@
     <Filter Include="03.Component\00.UI\16.QTE">
       <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\02.Conversation">
+      <UniqueIdentifier>{ada90e0b-5c0d-457f-9e77-a0c2bb016692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\02.Conversation\00.OneConversation">
+      <UniqueIdentifier>{2969bef8-e954-4e8c-9b84-4bef4165f998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\02.Conversation\01.TwoConversation">
+      <UniqueIdentifier>{94d3cee5-5cc7-44e3-a227-aa456d398998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\16.DecalShader">
+      <UniqueIdentifier>{2389fdfd-49f7-4e28-bad1-cbaa4889c0a4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\04.Elevator">
       <UniqueIdentifier>{e309fbb1-fc32-4a80-a1c0-b147c7f332a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\05.MainRoom">
       <UniqueIdentifier>{5738a716-c670-487f-b16b-0e771d0a060f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\03.Item">
+      <UniqueIdentifier>{a0ce9950-dca7-403e-ba38-3cada8e8beda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2079,6 +2094,15 @@
     <ClInclude Include="..\Header\QteC.h">
       <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\OneConversationC.h">
+      <Filter>03.Component\02.Conversation\00.OneConversation</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoConversationC.h">
+      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DecalShader.h">
+      <Filter>04.Shader\16.DecalShader</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\ElevatorBase.h">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClInclude>
@@ -2094,6 +2118,7 @@
     <ClInclude Include="..\Header\MainRoomBG.h">
       <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\HpItemC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3062,6 +3087,15 @@
     <ClCompile Include="..\Code\QteC.cpp">
       <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\OneConversationC.cpp">
+      <Filter>03.Component\02.Conversation\00.OneConversation</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoConversationC.cpp">
+      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DecalShader.cpp">
+      <Filter>04.Shader\16.DecalShader</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\ElevatorBase.cpp">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClCompile>
@@ -3077,6 +3111,7 @@
     <ClCompile Include="..\Code\MainRoomBG.cpp">
       <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\HpItemC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

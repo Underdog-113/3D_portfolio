@@ -7,4 +7,6 @@
 #include "TimerC.h"
 #include "CountUpC.h"
 #include "QteC.h"
+#include "OneConversationC.h"
+#include "TwoConversationC.h"
 #endif

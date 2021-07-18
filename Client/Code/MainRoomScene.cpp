@@ -17,6 +17,9 @@
 #include "DecoObject.h"
 #include "Layer.h"
 
+#include "ElevatorBase.h"
+#include "ElevatorDoor.h"
+
 CMainRoomScene::CMainRoomScene()
 {
 }
@@ -49,8 +52,11 @@ void CMainRoomScene::Awake(_int numOfLayers)
 void CMainRoomScene::Start(void)
 {
 	__super::Start();
+	m_sceneID = (_int)ESceneID::MainRoom;
 
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(0.2f, 1.f, -8.38f));
+	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
 
 	// 로드
 	CDataLoad* Load = new CDataLoad();
@@ -63,6 +69,10 @@ void CMainRoomScene::Start(void)
 	Load->MapLoad(this);
 
 	delete(Load);
+
+	ADD_CLONE(L"ElevatorBase", true, (_int)Engine::ELayerID::Decoration)->GetComponent<Engine::CTransformC>()->AddPositionZ(-5);
+	ADD_CLONE(L"ElevatorDoor", true, (_int)Engine::ELayerID::Decoration)->GetComponent<Engine::CTransformC>()->AddPositionZ(-5);
+
 
 	// 경험치 스테미너 골드 다이아 이름 레벨
 	CMainRoomManager::GetInstance()->Start(this);
@@ -242,5 +252,6 @@ void CMainRoomScene::ShakeControlDesk(void)
 
 void CMainRoomScene::InitPrototypes(void)
 {
+	
 }
 
