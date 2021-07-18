@@ -63,7 +63,8 @@
 #include "MonsterAttackSign.h"
 #include "Sickle_Trail.h"
 #include "SpiderExplosion.h"
-
+#include "SpiderImpact.h"
+#include "SpiderExplosion_Base.h"
 // Kiana
 #include "Kiana_Trail.h"
 #include "Kiana_Ult_Trail.h"
@@ -565,11 +566,14 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spHitEffect);
 
 	// Spider
-	SP(CSoftEffect) spSpiderExplosionEffect(CSpiderExplosion::Create(true, this));
-	spSpiderExplosionEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Exp");
-	spSpiderExplosionEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Exp");
-	spSpiderExplosionEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	SP(CMeshEffect_Client) spSpiderExplosionEffect(CSpiderExplosion::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSpiderExplosionEffect);
+
+	SP(CMeshEffect_Client) spSpiderImpact(CSpiderImpact ::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSpiderImpact);
+
+	SP(CMeshEffect_Client) spSpiderExplosionBase(CSpiderExplosion_Base::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSpiderExplosionBase);
 
 	// Monster AttackSign
 	SP(CSoftEffect) spMonsterAttack_Sign(CMonsterAttackSign::Create(true, this));
