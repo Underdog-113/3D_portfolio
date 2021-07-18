@@ -48,7 +48,8 @@ void CReadyToSortieScene::Awake(_int numOfLayers)
 void CReadyToSortieScene::Start(void)
 {
 	__super::Start();
-
+	Engine::CSoundManager::GetInstance()->StopAll();
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"ValkilyWaitIngRoom.mp3");
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 	SP(Engine::CObject) spEmpty =

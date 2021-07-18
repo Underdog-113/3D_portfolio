@@ -14,6 +14,7 @@ float  m_defaultDissolveVal = 0.9f;
 float3 gDissolveLineColor = float3(1,0,0);
 
 bool   gTrailCheck;
+bool   g_zWriteEnabled;
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -138,11 +139,11 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	if (m_defaultDissolveVal >= CurrentDissolveVal)
 	{
-		DissolveLineSize = float3(100.f, 1.f, 1.f);
+		DissolveLineSize = float3(100.f, 100.f, 100.f);
 	}
 	else
 	{
-		DissolveLineSize = float3(0, 0, 0);
+		DissolveLineSize = float3(10, 10, 10);
 	}
 
 	float3 diffuse = float3(0, 0, 0);
@@ -164,7 +165,8 @@ technique DissolveShader
 	pass p0
 	{
 		CullMode = None;
-		zWriteEnable = false;
+		zWriteEnable = g_zWriteEnabled;
+		AlphaTestEnable = true;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;

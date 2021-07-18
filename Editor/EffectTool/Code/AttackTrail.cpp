@@ -73,12 +73,12 @@ void CAttackTrail::Update()
 	if (Engine::IMKEY_PRESS(KEY_Q))
 	{
 		m_fTrailAlpha -= 0.5f * GET_DT;
-		this->GetTransform()->AddRotationY(D3DXToRadian(-100.f * GET_DT));
+		//this->GetTransform()->AddRotationY(D3DXToRadian(-100.f * GET_DT));0
 	}
 	if (Engine::IMKEY_PRESS(KEY_E))
 	{
 		m_fTrailAlpha += 1.f * GET_DT;
-		this->GetTransform()->AddRotationY(D3DXToRadian(100.f * GET_DT));
+		//this->GetTransform()->AddRotationY(D3DXToRadian(100.f * GET_DT));
 		//m_fSpeed -= GET_DT;
 	}
 	if (Engine::IMKEY_DOWN(KEY_X))
