@@ -1,34 +1,34 @@
 #include "Stdafx.h"
 #include "OneConversationC.h"
-#include "HpItemC.h"
+#include "SpItemC.h"
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 
-CHpItemC::CHpItemC()
+CSpItemC::CSpItemC()
 {
 }
 
-CHpItemC::~CHpItemC()
+CSpItemC::~CSpItemC()
 {
 	OnDestroy();
 }
 
-SP(Engine::CComponent) CHpItemC::MakeClone(Engine::CObject *pObject)
+SP(Engine::CComponent) CSpItemC::MakeClone(Engine::CObject *pObject)
 {
-	SP(CHpItemC) spClone(new CHpItemC);
+	SP(CSpItemC) spClone(new CSpItemC);
 	__super::InitClone(spClone, pObject);
 
 	return spClone;
 }
 
-void CHpItemC::Awake()
+void CSpItemC::Awake()
 {
 	__super::Awake();
 
 	m_componentID = (_int)m_s_componentID;
 }
 
-void CHpItemC::Start(SP(CComponent) spThis)
+void CSpItemC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
@@ -39,12 +39,12 @@ void CHpItemC::Start(SP(CComponent) spThis)
 	m_enable = false;
 }
 
-void CHpItemC::FixedUpdate(SP(CComponent) spThis)
+void CSpItemC::FixedUpdate(SP(CComponent) spThis)
 {
 
 }
 
-void CHpItemC::Update(SP(CComponent) spThis)
+void CSpItemC::Update(SP(CComponent) spThis)
 {
 	if (m_init)
 	{
@@ -56,7 +56,7 @@ void CHpItemC::Update(SP(CComponent) spThis)
 		GetOwner()->DeleteComponent<Engine::CRigidBodyC>();
 		m_enable = true;
 	}
-		
+
 	if (m_enable)
 	{
 		UpDown();
@@ -71,40 +71,39 @@ void CHpItemC::Update(SP(CComponent) spThis)
 		pos.y = m_oldY;
 		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.2f)
 		{
-			_float value = min(m_currentValkyrie->GetStat()->GetCurHp() + (_float)m_hpValue, m_currentValkyrie->GetStat()->GetMaxHp());
-			m_currentValkyrie->GetStat()->SetCurHp(value);
-
+			_float value = min(m_currentValkyrie->GetStat()->GetCurSp() + (_float)m_spValue, m_currentValkyrie->GetStat()->GetMaxSp());
+			m_currentValkyrie->GetStat()->SetCurSp(value);
 			GetOwner()->SetDeleteThis(true);
 		}
 	}
 }
 
-void CHpItemC::LateUpdate(SP(CComponent) spThis)
+void CSpItemC::LateUpdate(SP(CComponent) spThis)
 {
 
 }
 
-void CHpItemC::OnDestroy()
+void CSpItemC::OnDestroy()
 {
 }
 
-void CHpItemC::OnEnable()
+void CSpItemC::OnEnable()
 {
 	__super::OnEnable();
 }
 
-void CHpItemC::OnDisable()
+void CSpItemC::OnDisable()
 {
 	__super::OnDisable();
 }
 
-void CHpItemC::AddDataInit(_int hpValue, _float force)
+void CSpItemC::AddDataInit(_int spValue, _float force)
 {
-	m_hpValue = hpValue;
+	m_spValue = spValue;
 	m_force = force;
 }
 
-void CHpItemC::UpDown()
+void CSpItemC::UpDown()
 {
 	_float value = 0.5;
 	if (GetOwner()->GetTransform()->GetPosition().y >= m_oldY + value)

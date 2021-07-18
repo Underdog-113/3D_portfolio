@@ -1,34 +1,34 @@
 #include "Stdafx.h"
 #include "OneConversationC.h"
-#include "HpItemC.h"
+#include "MoneyItemC.h"
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 
-CHpItemC::CHpItemC()
+CMoneyItemC::CMoneyItemC()
 {
 }
 
-CHpItemC::~CHpItemC()
+CMoneyItemC::~CMoneyItemC()
 {
 	OnDestroy();
 }
 
-SP(Engine::CComponent) CHpItemC::MakeClone(Engine::CObject *pObject)
+SP(Engine::CComponent) CMoneyItemC::MakeClone(Engine::CObject *pObject)
 {
-	SP(CHpItemC) spClone(new CHpItemC);
+	SP(CMoneyItemC) spClone(new CMoneyItemC);
 	__super::InitClone(spClone, pObject);
 
 	return spClone;
 }
 
-void CHpItemC::Awake()
+void CMoneyItemC::Awake()
 {
 	__super::Awake();
 
 	m_componentID = (_int)m_s_componentID;
 }
 
-void CHpItemC::Start(SP(CComponent) spThis)
+void CMoneyItemC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
@@ -39,12 +39,12 @@ void CHpItemC::Start(SP(CComponent) spThis)
 	m_enable = false;
 }
 
-void CHpItemC::FixedUpdate(SP(CComponent) spThis)
+void CMoneyItemC::FixedUpdate(SP(CComponent) spThis)
 {
 
 }
 
-void CHpItemC::Update(SP(CComponent) spThis)
+void CMoneyItemC::Update(SP(CComponent) spThis)
 {
 	if (m_init)
 	{
@@ -56,7 +56,7 @@ void CHpItemC::Update(SP(CComponent) spThis)
 		GetOwner()->DeleteComponent<Engine::CRigidBodyC>();
 		m_enable = true;
 	}
-		
+
 	if (m_enable)
 	{
 		UpDown();
@@ -71,40 +71,40 @@ void CHpItemC::Update(SP(CComponent) spThis)
 		pos.y = m_oldY;
 		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.2f)
 		{
-			_float value = min(m_currentValkyrie->GetStat()->GetCurHp() + (_float)m_hpValue, m_currentValkyrie->GetStat()->GetMaxHp());
-			m_currentValkyrie->GetStat()->SetCurHp(value);
+			CStageControlTower::GetInstance()->SetGold(CStageControlTower::GetInstance()->GetGold() + m_moneyValue);
+			cout << CStageControlTower::GetInstance()->GetGold() << endl;
 
 			GetOwner()->SetDeleteThis(true);
 		}
 	}
 }
 
-void CHpItemC::LateUpdate(SP(CComponent) spThis)
+void CMoneyItemC::LateUpdate(SP(CComponent) spThis)
 {
 
 }
 
-void CHpItemC::OnDestroy()
+void CMoneyItemC::OnDestroy()
 {
 }
 
-void CHpItemC::OnEnable()
+void CMoneyItemC::OnEnable()
 {
 	__super::OnEnable();
 }
 
-void CHpItemC::OnDisable()
+void CMoneyItemC::OnDisable()
 {
 	__super::OnDisable();
 }
 
-void CHpItemC::AddDataInit(_int hpValue, _float force)
+void CMoneyItemC::AddDataInit(_int moneyValue, _float force)
 {
-	m_hpValue = hpValue;
+	m_moneyValue = moneyValue;
 	m_force = force;
 }
 
-void CHpItemC::UpDown()
+void CMoneyItemC::UpDown()
 {
 	_float value = 0.5;
 	if (GetOwner()->GetTransform()->GetPosition().y >= m_oldY + value)

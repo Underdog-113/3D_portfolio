@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\ElevatorBase.h"
+#include "ClientScene.h"
 
 _uint CElevatorBase::m_s_uniqueID = 0;
-
 CElevatorBase::CElevatorBase()
 {
 }
@@ -73,7 +73,7 @@ void CElevatorBase::Update(void)
 {
 	__super::Update();
 
-	if (m_bLoadCheck)
+	if (m_bLoadCheck && static_cast<Engine::CSlider*>(GET_CUR_CLIENT_SCENE->FindObjectByName(L"Slidr_0").get())->GetValue() == 100)
 	{
 		m_spTexture->ChangeTexture(L"Elevator_Display03", 0, 3);
 		m_spTexture->ChangeTexture(L"Elevator_Display03", 3, 0);

@@ -1036,6 +1036,18 @@
     <Filter Include="03.Component\03.Item">
       <UniqueIdentifier>{a0ce9950-dca7-403e-ba38-3cada8e8beda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\03.Item\00.HPItem">
+      <UniqueIdentifier>{65ed8811-30f5-4b9d-9f22-a38020d230de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\03.Item\01.SpItem">
+      <UniqueIdentifier>{1fadc0cc-1834-448e-882a-75e34ed70077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\03.Item\02.MoneyItem">
+      <UniqueIdentifier>{9dd7b42e-7af2-4872-859c-c9eaff82ee8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\03.Item\03.StuffItem">
+      <UniqueIdentifier>{9e3f1aa8-b870-402d-a8c0-cac906c0515a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2118,7 +2130,18 @@
     <ClInclude Include="..\Header\MainRoomBG.h">
       <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\HpItemC.h" />
+    <ClInclude Include="..\Header\HpItemC.h">
+      <Filter>03.Component\03.Item\00.HPItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SpItemC.h">
+      <Filter>03.Component\03.Item\01.SpItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MoneyItemC.h">
+      <Filter>03.Component\03.Item\02.MoneyItem</Filter>
+    </ClInclude>
+    <ClInclude Include="StuffItemC.h">
+      <Filter>03.Component\03.Item\03.StuffItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3111,7 +3134,18 @@
     <ClCompile Include="..\Code\MainRoomBG.cpp">
       <Filter>02.Objects\01.ForUnit\05.MainRoom</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HpItemC.cpp" />
+    <ClCompile Include="..\Code\HpItemC.cpp">
+      <Filter>03.Component\03.Item\00.HPItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SpItemC.cpp">
+      <Filter>03.Component\03.Item\01.SpItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MoneyItemC.cpp">
+      <Filter>03.Component\03.Item\02.MoneyItem</Filter>
+    </ClCompile>
+    <ClCompile Include="StuffItemC.cpp">
+      <Filter>03.Component\03.Item\03.StuffItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

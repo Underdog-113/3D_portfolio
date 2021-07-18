@@ -103,6 +103,8 @@ public:		/* Battle */
 	_float GetPlayerDeltaTime();
 public:		/* Stage Control Mode */
 
+public:
+	void AddItemList(ItemSave item);
 private:
 	typedef std::vector<SP(Engine::CObject)> _Squad;
 	GETTOR			(_Squad,				m_vSquad,			{},				Squad)
@@ -125,9 +127,9 @@ private:	/* Stage Info? */
 
 
 	GETTOR(std::list<ItemSave>, m_itemList, {}, ItemList)
-	GETTOR(_int, m_gold, 30, Gold)
-	GETTOR(_int, m_captainExp, 530, CaptainExp)
-	GETTOR(_int, m_valkyrieExp, 830, ValkyrieExp)
+	GETTOR_SETTOR(_int, m_gold, 0, Gold)
+	GETTOR_SETTOR(_int, m_captainExp, 0, CaptainExp)
+	GETTOR_SETTOR(_int, m_valkyrieExp, 0, ValkyrieExp)
 
 	_bool m_isInit = false;
 	_bool m_isQTESwitch = false;

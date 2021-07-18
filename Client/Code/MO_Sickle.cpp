@@ -281,6 +281,8 @@ void CMO_Sickle::UpdatePivotMatrices(void)
 
 void CMO_Sickle::MonsterDead()
 {
+	__super::MonsterDead();
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 

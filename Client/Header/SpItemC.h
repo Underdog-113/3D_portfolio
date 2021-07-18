@@ -1,13 +1,13 @@
-#ifndef HPITEMCOMPONENT_H
-#define HPITEMCOMPONENT_H
+#ifndef SPITEMCOMPONENT_H
+#define SPITEMCOMPONENT_H
 
 #include "Component.h"
 class CValkyrie;
-class CHpItemC  final : public Engine::CComponent
+class CSpItemC  final : public Engine::CComponent
 {
 public:
-	explicit CHpItemC();
-	~CHpItemC();
+	explicit CSpItemC();
+	~CSpItemC();
 
 	SP(Engine::CComponent) MakeClone(Engine::CObject *pObject) override;
 	void Awake() override;
@@ -19,7 +19,7 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
-	void AddDataInit(_int hpValue, _float force);
+	void AddDataInit(_int spValue, _float force);
 
 private:
 	void UpDown();
@@ -29,9 +29,9 @@ public:
 private:
 	CValkyrie* m_currentValkyrie;
 
-	_int m_hpValue;
+	_int m_spValue;
 	_float m_force;
-	
+
 	_bool m_init;
 	_float m_oldY;
 
