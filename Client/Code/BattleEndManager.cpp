@@ -17,14 +17,6 @@ void CBattleEndManager::Start(Engine::CScene * pScene)
 	m_captainExp = CStageControlTower::GetInstance()->GetCaptainExp();
 	m_valkyrieExp = CStageControlTower::GetInstance()->GetValkyrieExp();
 
-
-	ItemSave T;
-	T.itemName = L"특급 학습 칩";
-	T.count = 40;
-	m_itemList.emplace_back(T);
-	m_itemList.emplace_back(T);
-	m_itemList.emplace_back(T);
-
 	ValkyrieUI();
 	CaptainUI();
 }

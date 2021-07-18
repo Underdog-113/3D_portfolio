@@ -20,6 +20,7 @@ CStageSelectionScene::CStageSelectionScene()
 
 CStageSelectionScene::~CStageSelectionScene()
 {
+
 }
 
 CClientScene* CStageSelectionScene::Create(void)
@@ -32,6 +33,7 @@ CClientScene* CStageSelectionScene::Create(void)
 
 void CStageSelectionScene::Free(void)
 {
+
 	OnDestroy();
 	delete this;
 }
@@ -45,7 +47,8 @@ void CStageSelectionScene::Awake(_int numOfLayers)
 void CStageSelectionScene::Start(void)
 {
 	__super::Start();
-
+	Engine::CSoundManager::GetInstance()->StopAll();
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"StageRoom.mp3");
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 	SP(Engine::CObject) spEmpty =

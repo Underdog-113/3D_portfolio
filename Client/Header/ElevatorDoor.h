@@ -41,6 +41,13 @@ private:
 	static		_uint m_s_uniqueID;
 
 private:
-	_bool m_bCheck;
+	_bool m_bMoveCheck;
+
+private:
+	_float m_fTimer;
+
+private:
+	SP(Engine::CObject) m_sp_L_Door;
+	SP(Engine::CObject) m_sp_R_Door;
 };
 

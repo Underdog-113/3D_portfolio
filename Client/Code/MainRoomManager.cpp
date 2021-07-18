@@ -6,12 +6,14 @@
 IMPLEMENT_SINGLETON(CMainRoomManager)
 void CMainRoomManager::Start(Engine::CScene * pScene)
 {
-	Engine::CSoundManager::GetInstance()->StartSound(L"Lobby.mp3", (_uint)Engine::EChannelID::BGM);
+	static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get())->AddObjectFind();
+	static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(false);
 
-	/*Engine::CObject* player = pScene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"").get();
+
+	Engine::CObject* player = pScene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"").get();
 	player->GetComponent<Engine::CTransformC>()->SetPosition(_float3(-0.31f, -0.64f, -3.5f));
 	player->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 110, 0));
-	player->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.5f, 0.5f, 0.5f));*/
+	player->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.5f, 0.5f, 0.5f));
 
 	pScene->FindObjectByName(L"MainCanvas_Text_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetLevel()));
 	pScene->FindObjectByName(L"MainCanvas_Text_1")->GetComponent<Engine::CTextC>()->ChangeMessage(CDataManager::GetInstance()->FindCaptainData()->GetName());

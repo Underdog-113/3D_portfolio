@@ -57,7 +57,7 @@ void CCamera::Start(void)
 	_float3 camStartPos;
 	m_pScene->GET_VALUE(m_isStatic, m_dataID, m_objectKey, L"camStartPos", camStartPos);
 
-	if (Engine::GET_CUR_SCENE->GetSceneID() != 1)
+	if (Engine::GET_CUR_SCENE->GetSceneID() != 1 && Engine::GET_CUR_SCENE->GetSceneID() != 2)
 	{
 		m_spTransform->SetPosition(camStartPos);
 	}

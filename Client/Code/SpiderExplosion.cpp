@@ -28,33 +28,35 @@ SP(Engine::CObject) CSpiderExplosion::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
-	spClone->m_bBillboard = true;
 	return spClone;
 }
 
 void CSpiderExplosion::Awake(void)
 {
 	__super::Awake();
-	/*m_spTransform->SetSizeX(6);
-	m_spTransform->SetSizeY(10);*/
+	_float _size = 0.5f;
+	m_spTransform->SetSize(_float3(_size, _size, _size));
+	m_spTransform->AddRotationX(D3DXToRadian(180));
+	m_spMesh->SetMeshData(L"Ganesha_Dome");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Spider_Explosion_1");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
 }
 
 void CSpiderExplosion::Start(void)
 {
 	__super::Start();
 
-	m_fAlphaWidth = 3.f;
-	m_fAlphaHeight = 3.f;
-	m_TilingX = 0;
-	m_TilingY = 0;
 
-	m_maxXIndex = 3;
-	m_maxYIndex = 2;
-	m_fTIme = 0.f;
+	m_fSize = 0.f;
+	m_fAlpha = 0.7f;
 }
 
 void CSpiderExplosion::FixedUpdate(void)
@@ -66,33 +68,44 @@ void CSpiderExplosion::Update(void)
 {
 	__super::Update();
 
-	UpdateFrame(0.05f);
+	if (m_fAlpha <= 0.f)
+	{
+		this->SetDeleteThis(true);
+	}
+
+	m_fSize = 1.2f * GET_DT;
+
+	m_spTransform->AddSize(_float3(m_fSize, m_fSize, m_fSize));
+
+	m_fAlpha -= 0.6f * GET_DT;
+
 }
 
 void CSpiderExplosion::LateUpdate(void)
 {
 	__super::LateUpdate();
 
+
 }
 
 void CSpiderExplosion::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PreRender(m_spGraphics, pEffect);
-	pEffect->SetInt("TilingX", m_TilingX);
-	pEffect->SetInt("TilingY", m_TilingY);
-	pEffect->SetFloat("gWidth", m_fAlphaWidth);
-	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->CommitChanges();
 }
 
 void CSpiderExplosion::Render(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->Render(m_spGraphics, pEffect);
+	m_spMesh->Render(m_spGraphics, pEffect);
+
 
 }
 
 void CSpiderExplosion::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PostRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 
 }
 
@@ -118,30 +131,4 @@ void CSpiderExplosion::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
-}
-
-void CSpiderExplosion::UpdateFrame(_float _frmSpeed)
-{
-	m_fTIme += GET_DT;
-
-	if (m_fTIme >= _frmSpeed)
-	{
-		m_TilingX++;
-
-		if (m_TilingX >= m_maxXIndex)
-		{
-			m_TilingX = 0;
-
-			if (m_TilingY >= m_maxYIndex)
-			{
-				m_TilingY = 0;
-				SetDeleteThis(true);
-			}
-			else
-			{
-				m_TilingY++;
-			}
-		}
-		m_fTIme = 0;
-	}
 }

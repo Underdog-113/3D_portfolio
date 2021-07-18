@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\ElevatorBase.h"
+#include "ClientScene.h"
 
 _uint CElevatorBase::m_s_uniqueID = 0;
-
 CElevatorBase::CElevatorBase()
 {
 }
@@ -60,6 +60,11 @@ void CElevatorBase::Awake(void)
 void CElevatorBase::Start(void)
 {
 	__super::Start();
+
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
+		m_spMesh->SetMeshData(L"Elevator_Base_2");
+
+
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 }
 
@@ -73,13 +78,18 @@ void CElevatorBase::Update(void)
 {
 	__super::Update();
 
-	if (m_bLoadCheck)
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
+	{
+		m_spTexture->ChangeTexture(L"Elevator_Display03", 0, 2);
+		m_spTexture->ChangeTexture(L"Elevator_Display03", 2, 0);
+
+	}
+	if (m_bLoadCheck && static_cast<Engine::CSlider*>(GET_CUR_CLIENT_SCENE->FindObjectByName(L"Slidr_0").get())->GetValue() == 100)
 	{
 		m_spTexture->ChangeTexture(L"Elevator_Display03", 0, 3);
 		m_spTexture->ChangeTexture(L"Elevator_Display03", 3, 0);
 		m_bLoadCheck = false;
 	}
-
 }
 
 void CElevatorBase::LateUpdate(void)

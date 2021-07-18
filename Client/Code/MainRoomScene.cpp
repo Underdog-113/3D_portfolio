@@ -17,6 +17,11 @@
 #include "DecoObject.h"
 #include "Layer.h"
 
+#include "ElevatorBase.h"
+#include "ElevatorDoor.h"
+
+_bool CMainRoomScene::g_bFirstGameStart = false;
+
 CMainRoomScene::CMainRoomScene()
 {
 }
@@ -49,8 +54,31 @@ void CMainRoomScene::Awake(_int numOfLayers)
 void CMainRoomScene::Start(void)
 {
 	__super::Start();
+	Engine::CSoundManager::GetInstance()->StopAll();
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"Lobby.mp3");
+	m_sceneID = (_int)ESceneID::MainRoom;
+	
+	if (!g_bFirstGameStart)
+	{
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -8.88f));
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
 
-	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+		SP(Engine::CObject) spobj = ADD_CLONE(L"ElevatorBase", true, (_int)Engine::ELayerID::Decoration);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-5.5f);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionY(-1.6f);
+
+		spobj = ADD_CLONE(L"ElevatorDoor", true, (_int)Engine::ELayerID::Decoration);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-5.2f);
+
+		g_bFirstGameStart = true;
+	}
+	else
+	{
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -4.76f));
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
+	}
 
 	// ·Îµå
 	CDataLoad* Load = new CDataLoad();
@@ -129,11 +157,11 @@ void CMainRoomScene::Update(void)
 
 	ShakeControlDesk();
 
-
 }
 
 void CMainRoomScene::LateUpdate(void)
 {
+
 	__super::LateUpdate();
 
 }
@@ -141,7 +169,7 @@ void CMainRoomScene::LateUpdate(void)
 void CMainRoomScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	
+
 	CMainRoomManager::GetInstance()->OnDestroy();
 	CMainRoomManager::GetInstance()->DestroyInstance();
 
@@ -242,5 +270,6 @@ void CMainRoomScene::ShakeControlDesk(void)
 
 void CMainRoomScene::InitPrototypes(void)
 {
+	
 }
 

@@ -146,6 +146,11 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 {
 	__super::ApplyHitInfo(info);
 
+	if (true == m_pStat->GetOnPatternShield())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
@@ -276,6 +281,8 @@ void CMO_Sickle::UpdatePivotMatrices(void)
 
 void CMO_Sickle::MonsterDead()
 {
+	__super::MonsterDead();
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 

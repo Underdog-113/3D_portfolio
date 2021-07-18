@@ -63,7 +63,8 @@
 #include "MonsterAttackSign.h"
 #include "Sickle_Trail.h"
 #include "SpiderExplosion.h"
-
+#include "SpiderImpact.h"
+#include "SpiderExplosion_Base.h"
 // Kiana
 #include "Kiana_Trail.h"
 #include "Kiana_Ult_Trail.h"
@@ -174,6 +175,10 @@
 #pragma endregion
 
 #include "Include_Valkyrie.h"
+#include "ElevatorBase.h"
+#include "ElevatorDoor.h"
+#include "Elevator_L_Door.h"
+#include "Elevator_R_Door.h"
 
 CStaticScene::CStaticScene()
 {
@@ -264,6 +269,19 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CAttackBox) spAttackBox(CAttackBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBox);
+
+	SP(Engine::CObject) spElevator_Base(CElevatorBase::Create(true, this));
+	ADD_PROTOTYPE(spElevator_Base);
+
+	SP(Engine::CObject) spElevator_Door(CElevatorDoor::Create(true, this));
+	ADD_PROTOTYPE(spElevator_Door);
+
+	SP(Engine::CObject) spElevator_L_Door(CElevator_L_Door::Create(true, this));
+	ADD_PROTOTYPE(spElevator_L_Door);
+
+	SP(Engine::CObject) spElevator_R_Door(CElevator_R_Door::Create(true, this));
+	ADD_PROTOTYPE(spElevator_R_Door);
+
 	
 	InitMapPrototypes();
 	InitUiPrototypes();
@@ -574,11 +592,14 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spHitEffect);
 
 	// Spider
-	SP(CSoftEffect) spSpiderExplosionEffect(CSpiderExplosion::Create(true, this));
-	spSpiderExplosionEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Exp");
-	spSpiderExplosionEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Exp");
-	spSpiderExplosionEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	SP(CMeshEffect_Client) spSpiderExplosionEffect(CSpiderExplosion::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSpiderExplosionEffect);
+
+	SP(CMeshEffect_Client) spSpiderImpact(CSpiderImpact ::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSpiderImpact);
+
+	SP(CMeshEffect_Client) spSpiderExplosionBase(CSpiderExplosion_Base::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSpiderExplosionBase);
 
 	// Monster AttackSign
 	SP(CSoftEffect) spMonsterAttack_Sign(CMonsterAttackSign::Create(true, this));

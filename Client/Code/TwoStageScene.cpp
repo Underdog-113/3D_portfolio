@@ -59,6 +59,9 @@ void CTwoStageScene::Start(void)
 {
 	__super::Start();
 
+	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	spCube0->AddComponent<CTwoConversationC>();
+
 	SetupFromLoader();
 	SetupMembers();
 	FindSkyObject();
@@ -105,10 +108,6 @@ void CTwoStageScene::OnDestroy(void)
 	__super::OnDestroy();
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
-
-	m_pControlTower->OnDestroy();
-	m_pControlTower->DestroyInstance();
-	m_pControlTower = nullptr;
 
 	m_vDummy.clear();
 }

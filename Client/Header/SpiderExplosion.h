@@ -1,7 +1,7 @@
 #pragma once
-#include "SoftEffect.h"
+#include "MeshEffect_Client.h"
 
-class CSpiderExplosion : public CSoftEffect
+class CSpiderExplosion : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
@@ -34,8 +34,7 @@ public:
 private:
 	static _uint m_s_uniqueID;
 
-
 private:
-	void UpdateFrame(_float _frmSpeed);
+	_float m_fSize;
 };
 

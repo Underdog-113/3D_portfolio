@@ -39,6 +39,9 @@ public:
 private:
 	SP(Engine::CObject) m_spElevatorBase;
 	SP(Engine::CObject) m_spElevatorBack;
+
+	SP(Engine::CSlider) slider;
+	SP(Engine::CObject) text;
 };
 
 #endif

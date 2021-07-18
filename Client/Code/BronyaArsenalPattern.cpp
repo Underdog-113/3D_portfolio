@@ -22,6 +22,8 @@ CBronyaArsenalPattern::~CBronyaArsenalPattern()
 
 void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 {
+	InitEffect();
+
 	_float3 tPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition(); // target pos
 	_float3 mPos = pOwner->GetTransform()->GetPosition(); // monster pos
 	_float len = D3DXVec3Length(&(tPos - mPos));
@@ -44,7 +46,6 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
 		_float3 endPos = { 91.9447f, mPos.y, -8.55992f };
-		pOwner->GetTransform()->SetRotationY(D3DXToRadian(180));
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
 	}
 
@@ -64,6 +65,14 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 		// Arsenal Loop 상태로 변경
 		fsm->ChangeState(Name_Arsenal_Loop);
 		m_atkReady = false;
+
+		// add effect
+		// 대포가 플레이어 따라가는거 막기.
+		// 대포가 좀 더 길게 튀어나왔으면.
+
+
+		
+
 	}
 	// 내가 Arsenal Loop가 끝났고, 쿨타임도 끝났다면
 	else if (Name_Arsenal_Loop == fsm->GetCurStateString() &&
@@ -149,5 +158,23 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 		spFSM->ChangeState(Name_IDLE);
 		m_lerpCurTimer = 0.f;
 		moved = true;
+
+		pOwner->GetTransform()->SetRotationY(D3DXToRadian(180));
 	}
+}
+
+void CBronyaArsenalPattern::InitEffect()
+{
+	if (true == m_initEffect)
+	{
+		return;
+	}
+
+	for (_int i = 0; i < m_maxRingCnt; ++i)
+	{
+		m_vRingEffect.emplace_back(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true));
+		m_vRingEffect[i]->GetTransform()->SetPosition(_float3(91.9447f, 0.5f, -8.55992f));
+	}
+
+	m_initEffect = false;
 }
