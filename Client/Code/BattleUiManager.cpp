@@ -31,6 +31,8 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	//MainCanvas
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
+	m_mainCanvas->AddObjectFind();
+	m_mainCanvas->SetIsEnabled(false);
 
 	m_keyPad = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_KeyPad_0").get());
 	m_keyPad->GetTexture()->AddTexture(L"JoyStick_Move", 0);

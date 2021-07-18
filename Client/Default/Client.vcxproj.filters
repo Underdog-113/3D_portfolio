@@ -1003,6 +1003,18 @@
     <Filter Include="03.Component\00.UI\16.QTE">
       <UniqueIdentifier>{1ca09a72-1334-40e4-846b-10d1a2a0247e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\02.Conversation">
+      <UniqueIdentifier>{ada90e0b-5c0d-457f-9e77-a0c2bb016692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\02.Conversation\00.OneConversation">
+      <UniqueIdentifier>{2969bef8-e954-4e8c-9b84-4bef4165f998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\02.Conversation\01.TwoConversation">
+      <UniqueIdentifier>{94d3cee5-5cc7-44e3-a227-aa456d398998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\16.DecalShader">
+      <UniqueIdentifier>{2389fdfd-49f7-4e28-bad1-cbaa4889c0a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2043,6 +2055,15 @@
     <ClInclude Include="..\Header\QteC.h">
       <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\OneConversationC.h">
+      <Filter>03.Component\02.Conversation\00.OneConversation</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoConversationC.h">
+      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DecalShader.h">
+      <Filter>04.Shader\16.DecalShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2993,6 +3014,15 @@
     <ClCompile Include="..\Code\QteC.cpp">
       <Filter>03.Component\00.UI\16.QTE</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\OneConversationC.cpp">
+      <Filter>03.Component\02.Conversation\00.OneConversation</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoConversationC.cpp">
+      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DecalShader.cpp">
+      <Filter>04.Shader\16.DecalShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3063,6 +3093,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DecalShader.fx">
+      <Filter>04.Shader\16.DecalShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

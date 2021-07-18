@@ -242,6 +242,7 @@
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
+    <ClInclude Include="..\Header\DecalShader.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
@@ -259,6 +260,7 @@
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\OneConversationC.h" />
     <ClInclude Include="..\Header\ParticleShader.h" />
     <ClInclude Include="..\Header\OJ_Box.h" />
     <ClInclude Include="..\Header\Portal_Beam.h" />
@@ -521,6 +523,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TwoConversationC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
@@ -582,6 +585,7 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
+    <ClCompile Include="..\Code\DecalShader.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
@@ -598,6 +602,7 @@
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\OneConversationC.cpp" />
     <ClCompile Include="..\Code\ParticleShader.cpp" />
     <ClCompile Include="..\Code\OJ_Box.cpp" />
     <ClCompile Include="..\Code\Portal_Beam.cpp" />
@@ -840,6 +845,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TwoConversationC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
@@ -884,6 +890,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DecalShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

@@ -59,6 +59,9 @@ void COneStageScene::Start(void)
 {
 	__super::Start();
 
+	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	spCube0->AddComponent<COneConversationC>();
+
 	SetupFromLoader();
 	SetupMembers();
 	FindSkyObject();
@@ -89,11 +92,6 @@ void COneStageScene::Update(void)
 	if (Engine::IMKEY_DOWN(KEY_UP))
 	{
 		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
-	}
-
-	if (Engine::IMKEY_PRESS(KEY_CONTROL))
-	{
-		ForUITest();
 	}
 
 	// Sky Rotation
@@ -132,9 +130,7 @@ void COneStageScene::OnEnable(void)
 void COneStageScene::OnDisable(void)
 {
 	__super::OnDisable();
-
 }
-
 
 void COneStageScene::SetupFromLoader(void)
 {
@@ -213,64 +209,6 @@ void COneStageScene::Create_Spider(_float3 pos)
 void COneStageScene::InitPrototypes(void)
 {
 
-}
-
-void COneStageScene::ForUITest()
-{
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-	{
-		CBattleUiManager::GetInstance()->QteOn(0);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-	{
-		CBattleUiManager::GetInstance()->QteOn(1);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
-	{
-		CBattleUiManager::GetInstance()->QteOff(0);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
-	{
-		CBattleUiManager::GetInstance()->QteOff(1);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
-	{
-		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
-	{
-		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
-	{
-		CBattleUiManager::GetInstance()->MonsterState(L"", 10, 10, 10, L"DOWN",0,0);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
-	{
-		CBattleUiManager::GetInstance()->MonsterState(L"", 1000, 900, 2, L"DOWN", 0, 0);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
-	{
-		CBattleUiManager::GetInstance()->MonsterHpDown(10);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
-	{
-		CBattleUiManager::GetInstance()->OnTargetUI(nullptr, 5.0f);
-	}
-
-// 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
-// 	{
-// 		CBattleUiManager::GetInstance()->BattleEnd();
-// 	}
 }
 
 void COneStageScene::FindSkyObject()

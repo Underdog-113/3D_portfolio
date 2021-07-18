@@ -88,11 +88,12 @@ public:
 
 	void QteOn(_int value);
 	void QteOff(_int value);
+
+	void SquadOff(Engine::CScene * pScene);
+	void WaitingPlayerSetting();
 private:
 	void skillActivationImageCheck();
 	void monsterHpBarCheck();
-	void SquadOff(Engine::CScene * pScene);
-	void WaitingPlayerSetting();
 private:
 	_bool m_activation;
 	_int m_monsterHpCount;
