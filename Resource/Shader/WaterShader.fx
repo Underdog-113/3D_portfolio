@@ -45,6 +45,7 @@ struct VS_OUTPUT
 	float3 mDiffuse    : TEXCOORD1;
 	float3 mViewDir    : TEXCOORD2;
 	float3 mReflection : TEXCOORD3;
+	vector vProjPos	   : TEXCOORD4;
 };
 
 VS_OUTPUT VS_MAIN(VS_INPUT Input)
@@ -72,6 +73,7 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
 	Out.mDiffuse = dot(-lightDir, worldNormal);
 	Out.mReflection = reflect(lightDir, worldNormal);
 	Out.mUV = Input.mUV/* + float2(g_fTime * g_UVSpeed, g_fTime * 0.005)*/;
+	Out.vProjPos = Out.mPosition;
 
 	return Out;
 }
@@ -82,20 +84,34 @@ struct PS_INPUT
 	float3 mDiffuse : TEXCOORD1;
 	float3 mViewDir : TEXCOORD2;
 	float3 mReflection : TEXCOORD3;
+	vector vProjPos	   : TEXCOORD4;
 };
 
-
-
-float4 PS_MAIN(PS_INPUT Input) : COLOR
+struct PS_OUTPUT
 {
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth : COLOR2;
+	//vector		vEmissive : COLOR3;
+};
+
+PS_OUTPUT PS_MAIN(PS_INPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
 	float4 albedo = tex2D(Diffuse, (Input.mUV * 50) + float2(g_fTime * g_UVSpeed, 0.f));
 	float4 Noise = tex2D(NoiseTex, (Input.mUV * 50) * albedo.r - float2(g_fTime * g_UVSpeed, 0.f));
 
-	float4 finalColor = albedo * Noise;
+	Out.vColor = saturate(albedo * Noise);
+	Out.vColor.xyz *= 0.7f;
+	Out.vNormal = float4(0, 1, 0, 0);
+	Out.vDepth = vector(Input.vProjPos.z / Input.vProjPos.w,	// R에 위치에 z나누기 끝난 투영 공간의 z값을 보관(0 ~ 1)값
+						Input.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)
+						0.f,
+						0.f);
+	//Out.vEmissive = float4(0, 0, 0, 1);	
 
-	finalColor = saturate(finalColor);
-
-	return finalColor;
+	return Out;
 }
 
 
@@ -105,5 +121,6 @@ technique TShader
 	{
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN();
+		CullMode = CCW;
 	}
 };

@@ -1,108 +1,164 @@
-matrix		g_matWorld;
-matrix		g_matView;
-matrix		g_matProj;
-
 texture		g_BaseTexture;
+
+int			g_blurSize = 3;
+
+float		g_RTperPixelX;
+float		g_RTperPixelY;
 
 float4		g_addColor;
 float4		g_color;
 
-bool g_timeSlow;
-
-sampler BaseSampler = sampler_state
+sampler mainSampler = sampler_state
 {
 	texture = g_BaseTexture;
 
-	minfilter = linear;
-	magfilter = linear;
+	MinFilter = anisotropic;
+	MagFilter = anisotropic;
+	MAXANISOTROPY = 16;
+
+	AddressU = Mirror;
+	AddressV = Mirror;
 };
 
-struct VS_IN
+struct VS_INPUT
 {
-	vector		vPosition   : POSITION;
-	vector		vNormal		: NORMAL;
-	float2		vTexUV		: TEXCOORD0;
+	float3 pos : POSITION;
+	float2 uv : TEXCOORD0;
 };
 
-struct VS_OUT
+struct VS_OUTPUT
 {
-	vector		vPosition	: POSITION;
-	vector		vNormal		: NORMAL;
-	float2		vTexUV		: TEXCOORD0;
-	vector		vProjPos	: TEXCOORD1;
+	float4 pos : POSITION;
+	float2 uv : TEXCOORD0;
 };
 
-// 버텍스쉐이더
-VS_OUT VS_MAIN(VS_IN In)
+struct PS_INPUT
 {
-	VS_OUT Out = (VS_OUT)0;
-
-	matrix matWV, matWVP;
-
-	matWV = mul(g_matWorld, g_matView);
-	matWVP = mul(matWV, g_matProj);
-
-	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
-	Out.vNormal = normalize(mul(vector(In.vNormal.xyz, 0.f), g_matWorld));
-
-	Out.vTexUV = In.vTexUV;
-
-	Out.vProjPos = Out.vPosition;
-
-	return Out;
-}
-
-
-struct PS_IN
-{
-	vector		vNormal		: NORMAL;
-	float2		vTexUV		: TEXCOORD0;
-	vector		vProjPos	: TEXCOORD1;
+	float2 uv :TEXCOORD0;
 };
 
-struct PS_OUT
+struct PS_OUTPUT
 {
-	vector		vColor : COLOR0;
-	vector		vNormal : COLOR1;
-	vector		vDepth : COLOR2;
-	vector		vEmissive : COLOR3;
+	float4 diffuse : COLOR;
 };
 
+float pixelKernel[13] =
+{
+	-6,
+	-5,
+	-4,
+	-3,
+	-2,
+	-1,
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+};
+
+float blurWeights[13] =
+{
+	0.002216,
+	0.008764,
+	0.026995,
+	0.064759,
+	0.120985,
+	0.176033,
+	0.199471,
+	0.176033,
+	0.120985,
+	0.064759,
+	0.026995,
+	0.008764,
+	0.002216,
+};
 // 픽셀 쉐이더
 
-PS_OUT		PS_MAIN(PS_IN In)
+VS_OUTPUT VS_Main_Default(VS_INPUT _in)
 {
-	PS_OUT		Out = (PS_OUT)0;
+	VS_OUTPUT o = (VS_OUTPUT)0; //
 
-	float4 albedo = tex2D(BaseSampler, In.vTexUV);
+	o.pos = float4(_in.pos, 1);
+	o.uv = _in.uv;
 
-	Out.vEmissive = (vector)albedo.a;
-	Out.vColor = albedo;
-	Out.vColor.a = 1;
+	return o;
+}
 
-	//if (Out.vColor.r > Out.vColor.g && Out.vColor.r > Out.vColor.b)
-	//	Out.vColor = vector(0, 0, 0, 1);
 
-	Out.vColor += g_addColor;
-	Out.vColor = Out.vColor * g_color;
-	// -1 ~ 1 -> 0 ~ 1
-	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
-	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+PS_OUTPUT PS_Vertical(PS_INPUT IN)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
 
-	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w,	// R에 위치에 z나누기 끝난 투영 공간의 z값을 보관(0 ~ 1)값
-		In.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)
-		0.f,
-		0.f);
+	float4 color = 0;// tex2D(mainSampler, IN.uv);
+
+	//if (color.a == 0)
+	//	return Out;
+	for (int i = 0; i < 13; ++i)
+	{
+		//color += tex2D(mainSampler, float2(
+		//	IN.uv.x + g_RTperPixelX,
+		//	IN.uv.y + (pixelKernel[i] * g_RTperPixelY) + g_RTperPixelY))
+		//	* blurWeights[i];
+		color += tex2D(mainSampler, float2(IN.uv.x + g_RTperPixelX,
+										   IN.uv.y + (pixelKernel[i] * g_RTperPixelY  * g_blurSize) + g_RTperPixelY))
+				 * blurWeights[i];
+
+	}
+
+	Out.diffuse = color;
+
+	//if (color.x > 0.25f || color.y > 0.25f || color.z > 0.25f)
+	//	Out.diffuse.a = 1.f;
+	//else
+	//	Out.diffuse.a = 0.f;
 
 	return Out;
 }
 
-technique Default_Device
+
+
+PS_OUTPUT PS_Horizontal(PS_INPUT  IN)
 {
-	pass Origin
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
+	float4 color = 0;// tex2D(mainSampler, IN.uv);
+
+	//if (color.a == 0)
+	//	return Out;
+	for (int i = 0; i < 13; ++i)
 	{
-		vertexshader = compile vs_3_0 VS_MAIN();
-		pixelshader = compile ps_3_0 PS_MAIN();
-		CullMode = CCW;
+		color += tex2D(mainSampler, float2(IN.uv.x + (pixelKernel[i] * g_RTperPixelX * g_blurSize) + g_RTperPixelX,
+										   IN.uv.y + g_RTperPixelY))
+				 * blurWeights[i];
+	}
+
+
+	Out.diffuse = color;
+	//if (color.x > 0.25f || color.y > 0.25f || color.z > 0.25f)
+	//	Out.diffuse.a = 1.f;
+	//else
+	//	Out.diffuse.a = 0.f;
+
+	return Out;
+}
+
+
+technique DefaultTechnique
+{
+	Pass VerticalPass
+	{
+		zwriteenable = false;
+		VertexShader = compile vs_3_0 VS_Main_Default();
+		PixelShader = compile ps_3_0 PS_Vertical();
+	}
+
+	Pass HorizontalPass
+	{
+		zwriteenable = false;
+		//VertexShader = compile vs_3_0 VS_Main_Default();
+		PixelShader = compile ps_3_0 PS_Horizontal();
 	}
 };
