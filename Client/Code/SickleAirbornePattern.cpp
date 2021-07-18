@@ -32,7 +32,8 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 			  Name_Sickle_Throw_02 == fsm->GetCurStateString() ||
 			  Name_Sickle_Hit_Throw == fsm->GetCurStateString()) &&
 			 (pOwner->GetComponent<CPatternMachineC>()->GetOnHitL() ||
-			  pOwner->GetComponent<CPatternMachineC>()->GetOnHitH()))
+			  pOwner->GetComponent<CPatternMachineC>()->GetOnHitH()
+			 ))
 	{
 		fsm->ChangeState(Name_Sickle_Hit_Throw);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
@@ -40,7 +41,7 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 	}
 	// 내가 Hit_Throw 상태가 끝났다면
 	else if (Name_Sickle_Hit_Throw == fsm->GetCurStateString() &&
-			fsm->GetDM()->IsAnimationEnd())
+		fsm->GetDM()->GetAniTimeline() > 0.9)
 	{
 		fsm->ChangeState(Name_Sickle_Throw_02);
 	}
@@ -50,6 +51,12 @@ void CSickleAirbornePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Sickle_StandUp);
+
+		// 만약 스턴 상태가 켜져있다면
+		if (true == pOwner->GetComponent<CPatternMachineC>()->GetOnStun())
+		{
+			pOwner->GetComponent<CPatternMachineC>()->SetOnAirBorne(false);
+		}
 	}
 	// StandBy
 	else if (Name_Sickle_StandUp == fsm->GetCurStateString() &&

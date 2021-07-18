@@ -85,6 +85,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 				m_onSignEffect = false;
 				m_onTrailEffect = false;
 				PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
+				//static_cast<CMO_Sickle*>()->
 				return;
 			}
 		}

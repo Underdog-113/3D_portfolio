@@ -65,7 +65,7 @@ void CSakura_Trail::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fTrailAlpha -= 2.3f * GET_DT;
+	m_fTrailAlpha -= 2.3f * GET_PLAYER_DT;
 }
 
 void CSakura_Trail::LateUpdate()

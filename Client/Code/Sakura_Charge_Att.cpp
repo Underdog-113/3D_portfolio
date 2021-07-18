@@ -60,10 +60,10 @@ void CSakura_Charge_Att::Update()
 	{
 		this->SetDeleteThis(true);
 	}
-	m_spTransform->AddSizeX(-2.5f * GET_DT);
-	m_spTransform->AddSizeY(-2.5f * GET_DT);
-	m_spTransform->AddSizeZ(2.5f * GET_DT);
-	//m_fAlpha += 8.f * GET_DT;
+	m_spTransform->AddSizeX(-2.5f * GET_PLAYER_DT);
+	m_spTransform->AddSizeY(-2.5f * GET_PLAYER_DT);
+	m_spTransform->AddSizeZ(2.5f * GET_PLAYER_DT);
+	//m_fAlpha += 8.f * GET_PLAYER_DT;
 }
 
 void CSakura_Charge_Att::LateUpdate()

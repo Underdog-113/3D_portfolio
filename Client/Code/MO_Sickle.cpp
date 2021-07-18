@@ -174,7 +174,16 @@ void CMO_Sickle::ApplyHitInfo(HitInfo info)
 	case HitInfo::Str_Airborne:
 		if (false == m_pSuperArmor->GetAirborne())
 		{
-			this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+			// 만약 에어본 상태가 아니라면
+			if (false == this->GetComponent<CPatternMachineC>()->GetOnAirBorne())
+			{
+				this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
+			}
+			// 만약 에어본 상태라면
+			else if (true == this->GetComponent<CPatternMachineC>()->GetOnAirBorne())
+			{
+				this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+			}
 		}
 		else if (true == m_pSuperArmor->GetAirborne())
 		{

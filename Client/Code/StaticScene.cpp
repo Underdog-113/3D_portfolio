@@ -40,6 +40,7 @@
 #include "MB_Ganesha.h"
 #include "MB_Bronya.h"
 #include "Bronya_Weapon.h"
+#include "BronyaBullet.h"
 #include "Monster.h"
 #include "OJ_Box.h"
 
@@ -70,6 +71,9 @@
 #include "Kiana_Ult_Plane.h"
 #include "Kiana_Ult_Shield.h"
 #include "Kiana_Ult_Ring.h"
+#include "KianaBranchSign.h"
+#include "Kiana_WSkill_Circle.h"
+#include "Kiana_WSkill_Shoot.h"
 
 // Theresa
 #include "Theresa_Trail.h"
@@ -154,6 +158,15 @@
 #include "Portal_Circle.h"
 #include "Portal_Plane.h"
 #include "Portal_Beam.h"
+
+//Wall
+#include "Stage_Wall.h"
+#include "Stage_Wall_barrier.h"
+
+//MainRoom
+#include "CloudObject.h"
+#include "MainRoomBG.h"
+
 #pragma endregion
 
 #pragma region Static setting
@@ -161,6 +174,8 @@
 #pragma endregion
 
 #include "Include_Valkyrie.h"
+#include "ElevatorBase.h"
+#include "ElevatorDoor.h"
 
 CStaticScene::CStaticScene()
 {
@@ -251,6 +266,12 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CAttackBox) spAttackBox(CAttackBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBox);
+
+	SP(Engine::CObject) spElevator_Base(CElevatorBase::Create(true, this));
+	ADD_PROTOTYPE(spElevator_Base);
+
+	SP(Engine::CObject) spElevator_Door(CElevatorDoor::Create(true, this));
+	ADD_PROTOTYPE(spElevator_Door);
 	
 	InitMapPrototypes();
 	InitUiPrototypes();
@@ -339,6 +360,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 	SP(CBronya_Weapon) spBronyaWeapon(CBronya_Weapon::Create(true, this));
 	ADD_PROTOTYPE(spBronyaWeapon);
 
+	SP(CBronyaBullet) spBronyaBullet(CBronyaBullet::Create(true, this));
+	ADD_PROTOTYPE(spBronyaBullet);
+
 	SP(CMonster) spOJ_Box(COJ_Box::Create(true, this));
 	GetObjectFactory()->AddPrototype(spOJ_Box);
 }
@@ -399,8 +423,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
 	spAttack_Range_Circle->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spAttack_Range_Circle->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
+	spAttack_Range_Circle->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	spAttack_Range_Circle->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	GetObjectFactory()->AddPrototype(spAttack_Range_Circle);
 
@@ -417,10 +441,22 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spKiana_Ult_Eff_Shield(CKiana_Ult_Shield::Create(true, this));
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
 
+	SP(CSoftEffect) spKiana_WSkill_Shoot(CKiana_WSkill_Shoot::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_WSkill_Shoot);
+
+	SP(CMeshEffect_Client) spKiana_WSkill_Circle(CKiana_WSkill_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKiana_WSkill_Circle);
+
+	SP(CSoftEffect) spKianaBranchSign(CKianaBranchSign::Create(true, this));
+	spKianaBranchSign->GetComponent<Engine::CTextureC>()->AddTexture(L"YellowFlare");
+	spKianaBranchSign->GetComponent<Engine::CTextureC>()->AddTexture(L"YellowFlare");
+	spKianaBranchSign->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+	GetObjectFactory()->AddPrototype(spKianaBranchSign);
+
+	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
 
-	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Trail(CTheresa_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Trail);
 
@@ -997,5 +1033,20 @@ void CStaticScene::InitEffectPrototypes(void)
 	// Particle
 	SP(Engine::CObject) spTestParticle(CTestParticle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTestParticle);
+
+
+	// Wall Effect
+	SP(CMeshEffect_Client) spStageWall(CStage_Wall::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStageWall);
+
+	SP(CMeshEffect_Client) spStageWallBarrier(CStage_Wall_barrier::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStageWallBarrier);
+
+	// MainRoom
+	SP(Engine::CObject) spCloudObject(CCloudObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spCloudObject);
+
+	SP(Engine::CObject) spMainRoomBG(CMainRoomBG::Create(true, this));
+	GetObjectFactory()->AddPrototype(spMainRoomBG);
 
 }

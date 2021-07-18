@@ -311,7 +311,7 @@ void CAniCtrl::PlayFake()
 	m_fakeTimer += deltaTime * m_speed;
 
 	m_fakeTimeline = (double)m_fakeTimer / m_fakePeriod;
-	if (m_fakeTimer / m_fakePeriod >= 0.99)
+	if (m_fakeTimeline >= 0.99)
 	{
 		m_isFakeAniEnd = true;
 

@@ -50,6 +50,9 @@ public:
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
 
+	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius, CAttackBall* pAB);
+	void UnActiveAttackBall(CAttackBall* pAB);
+
 	void ActiveAttackBox(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float3 size, _float3 offset, _float3 rotOffset);
 	void UnActiveAttackBox();
 

@@ -203,6 +203,7 @@
     <ClInclude Include="..\Header\BronyaArsenalPattern.h" />
     <ClInclude Include="..\Header\BronyaBasePattern.h" />
     <ClInclude Include="..\Header\BronyaBornPattern.h" />
+    <ClInclude Include="..\Header\BronyaBullet.h" />
     <ClInclude Include="..\Header\BronyaDiePattern.h" />
     <ClInclude Include="..\Header\BronyaEscapePattern.h" />
     <ClInclude Include="..\Header\BronyaFlashBang_AS.h" />
@@ -241,8 +242,12 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
     <ClInclude Include="..\Header\DecalShader.h" />
+    <ClInclude Include="..\Header\ElevatorBack.h" />
+    <ClInclude Include="..\Header\ElevatorBase.h" />
+    <ClInclude Include="..\Header\ElevatorDoor.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
@@ -250,14 +255,19 @@
     <ClInclude Include="..\Header\Ganesha_LaserEff.h" />
     <ClInclude Include="..\Header\Ganesha_SmokeEff.h" />
     <ClInclude Include="..\Header\Ganesha_UpperEff.h" />
+    <ClInclude Include="..\Header\HpItemC.h" />
+    <ClInclude Include="..\Header\KianaBranchSign.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h" />
     <ClInclude Include="..\Header\KianaBodyShader.h" />
     <ClInclude Include="..\Header\KianaUIAnim.h" />
     <ClInclude Include="..\Header\Kiana_Pistol.h" />
+    <ClInclude Include="..\Header\Kiana_WSkill_Circle.h" />
+    <ClInclude Include="..\Header\Kiana_WSkill_Shoot.h" />
     <ClInclude Include="..\Header\LancerAirbornePattern.h" />
     <ClInclude Include="..\Header\Lancer_Att_Range.h" />
     <ClInclude Include="..\Header\Lancer_Impact.h" />
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
+    <ClInclude Include="..\Header\MainRoomBG.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
     <ClInclude Include="..\Header\OneConversationC.h" />
@@ -435,6 +445,8 @@
     <ClInclude Include="..\Header\RobotRunAttackPattern.h" />
     <ClInclude Include="..\Header\Sakura_Charge_Att.h" />
     <ClInclude Include="..\Header\SoftEffect.h" />
+    <ClInclude Include="..\Header\Stage_Wall.h" />
+    <ClInclude Include="..\Header\Stage_Wall_barrier.h" />
     <ClInclude Include="..\Header\StuffItem.h" />
     <ClInclude Include="..\Header\SupplyItem.h" />
     <ClInclude Include="..\Header\SupplyManager.h" />
@@ -546,6 +558,7 @@
     <ClCompile Include="..\Code\BronyaArsenalPattern.cpp" />
     <ClCompile Include="..\Code\BronyaBasePattern.cpp" />
     <ClCompile Include="..\Code\BronyaBornPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaBullet.cpp" />
     <ClCompile Include="..\Code\BronyaDiePattern.cpp" />
     <ClCompile Include="..\Code\BronyaEscapePattern.cpp" />
     <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp" />
@@ -584,8 +597,12 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
     <ClCompile Include="..\Code\DecalShader.cpp" />
+    <ClCompile Include="..\Code\ElevatorBack.cpp" />
+    <ClCompile Include="..\Code\ElevatorBase.cpp" />
+    <ClCompile Include="..\Code\ElevatorDoor.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
@@ -593,13 +610,18 @@
     <ClCompile Include="..\Code\Ganesha_LaserEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_UpperEff.cpp" />
+    <ClCompile Include="..\Code\HpItemC.cpp" />
+    <ClCompile Include="..\Code\KianaBranchSign.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp" />
     <ClCompile Include="..\Code\KianaBodyShader.cpp" />
     <ClCompile Include="..\Code\KianaUIAnim.cpp" />
+    <ClCompile Include="..\Code\Kiana_WSkill_Circle.cpp" />
+    <ClCompile Include="..\Code\Kiana_WSkill_Shoot.cpp" />
     <ClCompile Include="..\Code\LancerAirbornePattern.cpp" />
     <ClCompile Include="..\Code\Lancer_Att_Range.cpp" />
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
+    <ClCompile Include="..\Code\MainRoomBG.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
     <ClCompile Include="..\Code\OneConversationC.cpp" />
@@ -754,6 +776,8 @@
     <ClCompile Include="..\Code\RobotRunAttackPattern.cpp" />
     <ClCompile Include="..\Code\Sakura_Charge_Att.cpp" />
     <ClCompile Include="..\Code\SoftEffect.cpp" />
+    <ClCompile Include="..\Code\Stage_Wall.cpp" />
+    <ClCompile Include="..\Code\Stage_Wall_barrier.cpp" />
     <ClCompile Include="..\Code\StuffItem.cpp" />
     <ClCompile Include="..\Code\SupplyItem.cpp" />
     <ClCompile Include="..\Code\SupplyManager.cpp" />
@@ -890,7 +914,6 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\DecalShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

@@ -65,10 +65,10 @@ void CTheresa_Ult_Fire::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_spTransform->AddSizeY(3 * GET_DT);
+	m_spTransform->AddSizeY(3 * GET_PLAYER_DT);
 
-	m_fAlpha -= 0.5f * GET_DT;
-	m_fUVSpeed += GET_DT;
+	m_fAlpha -= 0.5f * GET_PLAYER_DT;
+	m_fUVSpeed += GET_PLAYER_DT;
 }
 
 void CTheresa_Ult_Fire::LateUpdate()

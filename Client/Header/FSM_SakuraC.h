@@ -176,6 +176,18 @@ private:
 	void Attack6_Update(float deltaTime);
 	void Attack6_End(void);
 
+	// Attack_QTE
+	void Attack_QTE_Init(void);
+	void Attack_QTE_Enter(void);
+	void Attack_QTE_Update(float deltaTime);
+	void Attack_QTE_End(void);
+
+	// Attack_QTE2
+	void Attack_QTE2_Init(void);
+	void Attack_QTE2_Enter(void);
+	void Attack_QTE2_Update(float deltaTime);
+	void Attack_QTE2_End(void);
+
 	// Charge1
 	void Charge1_Init(void);
 	void Charge1_Enter(void);

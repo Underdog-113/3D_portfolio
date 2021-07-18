@@ -61,8 +61,8 @@ void CTheresa_Ult_Smoke::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fAlpha -= 0.5f * GET_DT;
-	m_fUVSpeed += GET_DT;
+	m_fAlpha -= 0.5f * GET_PLAYER_DT;
+	m_fUVSpeed += GET_PLAYER_DT;
 }
 
 void CTheresa_Ult_Smoke::LateUpdate()

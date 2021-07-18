@@ -202,7 +202,6 @@ public:
 	void Attack_QTE_Update(float deltaTime);
 	void Attack_QTE_End(void);
 	
-
 	//Victory
 	void Victory_Init(void);
 	void Victory_Enter(void);
