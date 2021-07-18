@@ -16,6 +16,32 @@ sampler SpecularSampler = sampler_state
 	texture = g_SpecularTexture;
 };
 
+
+texture g_BlurDiv2Texture;
+sampler BlurDiv2Sampler = sampler_state
+{
+	texture = g_BlurDiv2Texture;
+};
+
+texture g_BlurDiv4Texture;
+sampler BlurDiv4Sampler = sampler_state
+{
+	texture = g_BlurDiv4Texture;
+};
+
+texture g_BlurDiv8Texture;
+sampler BlurDiv8Sampler = sampler_state
+{
+	texture = g_BlurDiv8Texture;
+};
+
+texture g_BlurDiv16Texture;
+sampler BlurDiv16Sampler = sampler_state
+{
+	texture = g_BlurDiv16Texture;
+};
+
+//texture
 //texture g_LutTexture;
 //sampler LutSampler = sampler_state
 //{
@@ -76,13 +102,16 @@ PS_OUT		PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	vector vAlbedo = saturate(tex2D(AlbedoSampler, In.vTexUV));
-	//vAlbedo = float4(GetLutColor(vAlbedo.rgb), 1);
-
 	vector vShade = saturate(tex2D(ShadeSampler, In.vTexUV));
 	vector vSpecular = saturate(tex2D(SpecularSampler, In.vTexUV));
+	vector vBlurDiv2 = saturate(tex2D(BlurDiv2Sampler, In.vTexUV));
+	vector vBlurDiv4 = saturate(tex2D(BlurDiv4Sampler, In.vTexUV));
+	vector vBlurDiv8 = saturate(tex2D(BlurDiv8Sampler, In.vTexUV));
+	vector vBlurDiv16 = saturate(tex2D(BlurDiv16Sampler, In.vTexUV));
 	//vector a = vector(0, 0, 0, 1);
-	Out.vColor = vAlbedo;// *vShade;// +vSpecular;
-	
+	vector blurColor = vBlurDiv2 + vBlurDiv4 + vBlurDiv8 + vBlurDiv16;
+	Out.vColor = saturate(vAlbedo * vShade + blurColor);// +vSpecular;
+	//Out.vColor.a = 1;
 
 	
 

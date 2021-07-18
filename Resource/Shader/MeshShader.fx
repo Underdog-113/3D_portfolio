@@ -65,7 +65,7 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 	vector		vNormal : COLOR1;
 	vector		vDepth : COLOR2;
-	vector		vEmissive : COLOR3;
+	//vector		vEmissive : COLOR3;
 };
 
 // «»ºø Ω¶¿Ã¥ı
@@ -76,7 +76,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
-	Out.vEmissive = (vector)albedo.a;
+	//Out.vEmissive = float4(0, 0, 0, 1);
 	Out.vColor = albedo;
 	Out.vColor.a = 1;
 

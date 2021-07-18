@@ -71,6 +71,8 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
+	Out.vEmissive = (vector)albedo;
+	//Out.vEmissive.a = 0;
 	Out.vColor = albedo;
 	Out.vColor.a = 1;
 
@@ -89,6 +91,7 @@ technique Default_Device
 {
 	pass Origin
 	{
+		alphablendenable = true;
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 		CullMode = CCW;
