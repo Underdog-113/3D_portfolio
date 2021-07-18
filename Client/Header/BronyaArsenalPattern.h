@@ -20,9 +20,11 @@ public:
 
 private:
 	void EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 monPos, _float3 endPos, _bool& moved);
+	void InitEffect();
 
 private:
-	_float m_cost = 60.f;
+	//_float m_cost = 60.f;
+	_float m_cost = 1.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 1.5f; // 공격 거리
@@ -42,11 +44,16 @@ private:
 	_mat m_atkMat;
 	std::wstring m_curState;
 
+	std::vector<SP(Engine::CObject)> m_vRingEffect;
+
 private:
 	_float3 m_lerpStartPos = ZERO_VECTOR;
 	_float3 m_lerpEndPos = ZERO_VECTOR;
 	_float m_lerpMaxTimer = 0.7f;
 	_float m_lerpCurTimer = 0.f;
+
+	_bool m_initEffect = false;
+	_int m_maxRingCnt = 14;
 };
 
 #endif

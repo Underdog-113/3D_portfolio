@@ -139,20 +139,7 @@ void CMonster::SetBasicName(void)
 }
 void CMonster::ApplyHitInfo(HitInfo info)
 {
-	if (true == m_pStat->GetOnBPShield())
-	{
-		return;
-	}
-
-	_float breakGauge = m_pStat->GetCurBreakGauge() - info.GetBreakDamage();
-
-	if (breakGauge <= 0.f)
-	{
-		breakGauge = 0.f;
-		m_pStat->SetOnSuperArmor(false);
-	}
-	m_pStat->SetCurBreakGauge(breakGauge);
-
+	// 사쿠라 표식
 	if (info.GetCrowdControlType() == HitInfo::CrowdControl::CC_Sakura)
 	{
 		_uint sakuraCounter = m_pStat->GetSakuraCounter();
@@ -160,6 +147,18 @@ void CMonster::ApplyHitInfo(HitInfo info)
 			m_pStat->SetSakuraCounter(sakuraCounter + 1);
 	}
 
+	// Break Point 보호가 꺼져있다면
+	if (false == m_pStat->GetOnBPShield())
+	{
+		_float breakGauge = m_pStat->GetCurBreakGauge() - info.GetBreakDamage();
+
+		if (breakGauge <= 0.f)
+		{
+			breakGauge = 0.f;
+			m_pStat->SetOnSuperArmor(false);
+		}
+		m_pStat->SetCurBreakGauge(breakGauge);
+	}
 }
 
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)

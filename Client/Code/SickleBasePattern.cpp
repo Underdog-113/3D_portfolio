@@ -85,7 +85,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 				m_onSignEffect = false;
 				m_onTrailEffect = false;
 				PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
-				//static_cast<CMO_Sickle*>()->
+				static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 				return;
 			}
 		}
@@ -95,6 +95,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_Sickle_Walk_Back);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 		}
 	}
 
