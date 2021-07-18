@@ -969,6 +969,11 @@ void CStageControlTower::EndSwitching()
 	m_pCameraMan->SetIsSwitching(false);
 }
 
+void CStageControlTower::SetVertCorrecting(_bool val)
+{
+	m_pCameraMan->SetIsVertCorrecting(val);
+}
+
 
 void CStageControlTower::OnPerfectEvadeMode()
 {

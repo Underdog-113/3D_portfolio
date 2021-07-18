@@ -112,6 +112,9 @@ void CStageCameraMan::PivotChasing()
 		NonTargetChasing();
 	}
 
+	if (m_isVertCorrecting)
+		AppendPosYCorrecting();
+
 	_float3 lerpPosition = GetLerpPosition(
 		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_PLAYER_DT * m_chaseSpeed);
 
@@ -143,6 +146,7 @@ void CStageCameraMan::NonTargetChasing()
 
 	_float3 actorPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
 	_float3 pivotPos = m_spPivot->GetTransform()->GetPosition();
+
 	if (actorPos == pivotPos)
 		return;
 
@@ -154,7 +158,6 @@ void CStageCameraMan::NonTargetChasing()
 		m_dstPivotPos = pivotPos + dir * MaxChaseDistance;
 	else
 		m_dstPivotPos = pCT->GetCurrentActor()->GetTransform()->GetPosition();
-
 }
 
 void CStageCameraMan::SetIsTargeting(bool value)
@@ -261,7 +264,7 @@ void CStageCameraMan::SetCustomTake(_float dstMaxDistance, _float changeSpeed, _
 
 void CStageCameraMan::SetTargetTake()
 {
-	if (m_curTakeType == Target)
+	if (m_curTakeType == Target || m_curTakeType == Change)
 	{
 		m_gotoNextTakeTimer = 0.f;
 		return;
@@ -514,7 +517,7 @@ void CStageCameraMan::AppendTargetCorrecting()
 	_float3 targetPos = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
 
 	_float3 dir = targetPos - actorPos;
-	_float distance = D3DXVec3Length(&dir) * 0.5f;
+	_float distance = D3DXVec3Length(&dir) * m_targetingMidRatio;
 
 	D3DXVec3Normalize(&dir, &dir);
 	m_dstPivotPos = actorPos + dir * distance;
@@ -606,6 +609,30 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 			m_speedIncreaseTimer = 0.f;
 		}
 	}
+
+}
+
+void CStageCameraMan::AppendPosYCorrecting()
+{
+	auto pCT = CStageControlTower::GetInstance();
+
+	_float curYOffset = pCT->GetCurrentActor()->GetMesh()->GetHalfYOffset();
+
+	_uint curValkyrie = pCT->GetCurrentActor()->GetStat()->GetType();
+
+	if (m_prevValkyrie == curValkyrie)
+	{
+		_float curActorY = pCT->GetCurrentActor()->GetTransform()->GetPosition().y;
+		_float realYPos = curYOffset - pCT->GetCurrentActor()->GetDefaultOffset();
+
+		m_dstPivotPos.y = curActorY + realYPos;
+
+	}
+	else
+	{
+		m_prevValkyrie = curValkyrie;
+	}
+	m_prevYOffset = curYOffset;
 
 }
 
@@ -775,4 +802,15 @@ void CStageCameraMan::HideMouseCursor()
 void CStageCameraMan::SetCamera(SP(Engine::CCamera) spCamera)
 {
 	m_spCamera = spCamera;
+}
+
+void CStageCameraMan::SetIsVertCorrecting(_bool value)
+{
+	m_isVertCorrecting = value;
+
+	if (value)
+	{
+		_float curYOffset = CStageControlTower::GetInstance()->GetCurrentActor()->GetMesh()->GetHalfYOffset();
+		m_prevYOffset = curYOffset;
+	}
 }

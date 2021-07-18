@@ -216,6 +216,19 @@ Engine::CCollider * CValkyrie::GetHitbox()
 	return nullptr;
 }
 
+Engine::CRayCollider * CValkyrie::GetFloorRay()
+{
+	auto cols = m_spCollision->GetColliders();
+	for (auto col : cols)
+	{
+		if (col->GetCollisionID() == (_uint)ECollisionID::FloorRay)
+		{
+			return static_cast<Engine::CRayCollider*>(col.get());
+		}
+	}
+	return nullptr;
+}
+
 _bool CValkyrie::CheckUltraUseable(void)
 {
 	if (m_ultraTimer < m_pStat->GetUltraCoolTime())

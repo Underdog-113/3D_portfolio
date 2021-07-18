@@ -20,6 +20,7 @@
 #define Name_Hit_H					L"Hit_H"
 #define Name_Hit_L					L"Hit_L"
 #define Name_Idle					L"Idle"
+#define Name_FastRun				L"FastRun"
 #define Name_Run					L"Run"
 #define Name_RunBS					L"RunBS"
 #define Name_RunStopLeft			L"RunStopLeft"
@@ -52,15 +53,16 @@
 #define Index_Hit_H					17
 #define Index_Hit_L					18
 #define Index_Idle					19
-#define Index_Run					20
-#define Index_RunBS					21
-#define Index_RunStopLeft			22
-#define Index_RunStopRight			23
-#define Index_Stun					24
-#define Index_SwitchIn				25
-#define Index_SwitchOut				26
-#define Index_Victory				27
-#define Index_Victory_Idle			28
+#define Index_FastRun				20
+#define Index_Run					21
+#define Index_RunBS					22
+#define Index_RunStopLeft			23
+#define Index_RunStopRight			24
+#define Index_Stun					25
+#define Index_SwitchIn				26
+#define Index_SwitchOut				27
+#define Index_Victory				28
+#define Index_Victory_Idle			29
 
 
 

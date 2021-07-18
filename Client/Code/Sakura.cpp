@@ -88,6 +88,7 @@ void CSakura::Start(void)
 		SetIsEnabled(false);
 	}
 
+	m_yDefaultOffset = 0.45f;	// 변경금지
 }
 
 void CSakura::FixedUpdate(void)

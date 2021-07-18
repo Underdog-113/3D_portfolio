@@ -115,6 +115,8 @@ void CKiana::Start(void)
 		SetIsEnabled(false);
 	}
 
+
+	m_yDefaultOffset = 0.43f;	// 변경금지
 }
 
 void CKiana::FixedUpdate(void)
@@ -272,6 +274,7 @@ void CKiana::SetBasicName(void)
 void CKiana::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	__super::OnCollisionEnter(ci);
+
 }
 
 void CKiana::OnCollisionStay(Engine::_CollisionInfo ci)

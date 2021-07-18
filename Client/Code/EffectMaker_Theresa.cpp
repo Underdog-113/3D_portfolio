@@ -154,10 +154,11 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Charge()
 
 void CEffectMaker_Theresa::CreateEffect_Ultra_Trail()
 {
-	_float3 size = _float3(0.3f, 0.2f, 0.3f);
+	_float3 size = _float3(0.5f, 0.2f, 0.5f);
 
 	auto effect = CreateEffect_Dissolve(Ultra_Trail_ObjectKey, L"Ult_Trail", Ultra_Trail_Tex1Name, Ultra_Trail_Tex2Name, Ultra_Trail_Tex3Name);
 	effect->GetTransform()->SetParent(m_pTheresa->GetTransform());
+	effect->GetTransform()->AddPositionY(m_pTheresa->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(size);
 
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
@@ -187,7 +188,7 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Bomb()
 	_float3 offsetPos;
 	D3DXVec3TransformCoord(&offsetPos, &offset, axeMat);
 	effect->GetTransform()->SetPosition(offsetPos);
-	effect->GetTransform()->AddPositionY(1.f);
+	effect->GetTransform()->AddPositionY(0.3f);
 
 	effect->GetTransform()->SetSize(size);
 

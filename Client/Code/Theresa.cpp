@@ -97,6 +97,7 @@ void CTheresa::Start(void)
 		__super::LateUpdate();
 		SetIsEnabled(false);
 	}
+	m_yDefaultOffset = 0.4f;	// 변경금지
 }
 
 void CTheresa::FixedUpdate(void)

@@ -85,11 +85,14 @@ public:		/* Battle */
 	void BattonTouch_2Member();
 	void BattonTouch_3Member();
 
+public:		/* Camera & System */
 	void SetCameraMidTake();
 	void SetCameraFarTake();
 	void SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void OffCameraTargeting();
 	void EndSwitching();
+
+	void SetVertCorrecting(_bool val);
 
 	void OnPerfectEvadeMode();
 	_bool GetIsPerfectEvadeMode();

@@ -648,6 +648,7 @@ void CFSM_SakuraC::Appear_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Appear);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::Appear_Update(float deltaTime)
@@ -709,6 +710,7 @@ void CFSM_SakuraC::Attack1_StandBy_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack1_StandBy);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 
 	ResetCheckMembers();
 	m_chargeEnterTimer = 0.f;
@@ -757,6 +759,7 @@ void CFSM_SakuraC::Attack1_StandBy_Update(float deltaTime)
 void CFSM_SakuraC::Attack1_StandBy_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->UnActiveAttackBall();
 	m_chargeEnterTimer = 0.f;
@@ -770,6 +773,7 @@ void CFSM_SakuraC::Attack1_Combat_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack1_Combat);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 
 	ResetCheckMembers();
 	m_chargeEnterTimer = 0.f;
@@ -815,6 +819,7 @@ void CFSM_SakuraC::Attack1_Combat_Update(float deltaTime)
 void CFSM_SakuraC::Attack1_Combat_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->UnActiveAttackBall();
 	m_chargeEnterTimer = 0.f;
@@ -829,6 +834,7 @@ void CFSM_SakuraC::Attack2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack2);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 
 }
@@ -858,7 +864,6 @@ void CFSM_SakuraC::Attack2_Update(float deltaTime)
 
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > Delay_Attack2_2)
 	{
-		//PlaySound_Voice_RandomAttack();
 		m_pEffectMaker->CreateEffect_Attack2_2();
 
 		OnAttackBall(0.35f, 15.f, HitInfo::Str_Low, HitInfo::CC_None);
@@ -884,6 +889,7 @@ void CFSM_SakuraC::Attack2_Update(float deltaTime)
 void CFSM_SakuraC::Attack2_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->UnActiveAttackBall();
 }
@@ -897,6 +903,7 @@ void CFSM_SakuraC::Attack3_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack3);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 }
 
@@ -905,6 +912,7 @@ void CFSM_SakuraC::Attack3_Update(float deltaTime)
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Attack3 - 0.05f)
 	{
 		PlaySound_Effect(Sound_Attack4_Effect);
+		PlaySound_Voice_RandomAttack();
 		m_pEffectMaker->CreateEffect_Attack3();
 		m_checkEffect = true;
 	}
@@ -937,6 +945,7 @@ void CFSM_SakuraC::Attack3_Update(float deltaTime)
 void CFSM_SakuraC::Attack3_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->UnActiveAttackBall();
 }
@@ -950,6 +959,7 @@ void CFSM_SakuraC::Attack4_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack4);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 }
 
@@ -1015,6 +1025,7 @@ void CFSM_SakuraC::Attack4_Update(float deltaTime)
 void CFSM_SakuraC::Attack4_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->UnActiveAttackBall();
 }
@@ -1028,6 +1039,7 @@ void CFSM_SakuraC::Attack5_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack5);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 	m_targetToSakura = ZERO_VECTOR;
 }
@@ -1036,8 +1048,12 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 {
 	if (!m_checkFlashCol && m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pSakura->OffHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OffHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		}
+		PlaySound_Effect(Sound_Charge0_Effect);
 		m_checkFlashCol = true;
 	}
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415)
@@ -1066,8 +1082,11 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 	}
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.5)
 	{
-		m_pSakura->OnHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OnHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		}
 		m_checkFlashMove = true;
 	}
 
@@ -1092,6 +1111,7 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 void CFSM_SakuraC::Attack5_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->OnHitbox();
 	m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
@@ -1106,6 +1126,7 @@ void CFSM_SakuraC::Attack6_Enter(void)
 {
 	m_pDM->RepeatAniSet(Index_Attack5);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 	m_targetToSakura = ZERO_VECTOR;
 }
@@ -1115,8 +1136,12 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 
 	if (!m_checkFlashCol && m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pSakura->OffHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OffHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		}
+		PlaySound_Effect(Sound_Charge0_Effect);
 		m_checkFlashCol = true;
 	}
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.415)
@@ -1145,8 +1170,11 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 	}
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.5)
 	{
-		m_pSakura->OnHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OnHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		}
 		m_checkFlashMove = true;
 	}
 
@@ -1164,6 +1192,7 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 void CFSM_SakuraC::Attack6_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->OnHitbox();
 	m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
@@ -1178,6 +1207,7 @@ void CFSM_SakuraC::Attack_QTE_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Attack4);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 }
 
 void CFSM_SakuraC::Attack_QTE_Update(float deltaTime)
@@ -1288,6 +1318,7 @@ void CFSM_SakuraC::Attack_QTE2_End(void)
 {
 	m_pSakura->UnActiveAttackBall();
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::Charge1_Init(void)
@@ -1298,6 +1329,7 @@ void CFSM_SakuraC::Charge1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Charge1);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 	m_pDM->GetAniCtrl()->SetSpeed(1.5f);
 	PlaySound_Effect(Sound_Charge1_Effect);
@@ -1316,8 +1348,11 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 
 	if (!m_checkFlashCol && m_pDM->GetAniTimeline() > 0.4)
 	{
-		m_pSakura->OffHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OffHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		}
 		m_checkFlashCol = true;
 	}
 
@@ -1348,8 +1383,11 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 	}
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.6)
 	{
-		m_pSakura->OnHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OnHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		}
 		m_checkFlashMove = true;
 	}
 	
@@ -1376,6 +1414,7 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 void CFSM_SakuraC::Charge1_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 	m_pSakura->OnHitbox();
 	m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
 	m_pDM->GetAniCtrl()->SetSpeed(1.f);
@@ -1455,6 +1494,7 @@ void CFSM_SakuraC::Charge1_Quick_Enter(void)
 {
 	m_pDM->RepeatAniSet(Index_Charge1_Quick);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	ResetCheckMembers();
 
 	m_pStageControlTower->LookTarget();
@@ -1514,6 +1554,7 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 void CFSM_SakuraC::Charge1_Quick_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
 	m_pSakura->OnHitbox();
@@ -1526,6 +1567,7 @@ void CFSM_SakuraC::Combat_Init(void)
 void CFSM_SakuraC::Combat_Enter(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	m_pDM->ChangeAniSet(Index_Combat);
 
 	ResetCheckMembers();
@@ -1564,6 +1606,7 @@ void CFSM_SakuraC::Combat_Update(float deltaTime)
 void CFSM_SakuraC::Combat_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::CombatToStandBy_Init(void)
@@ -1573,6 +1616,7 @@ void CFSM_SakuraC::CombatToStandBy_Init(void)
 void CFSM_SakuraC::CombatToStandBy_Enter(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	m_pDM->ChangeAniSet(Index_CombatToStandBy);
 
 	ResetCheckMembers();
@@ -1606,6 +1650,7 @@ void CFSM_SakuraC::CombatToStandBy_Update(float deltaTime)
 void CFSM_SakuraC::CombatToStandBy_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::Die_Init(void)
@@ -1639,6 +1684,7 @@ void CFSM_SakuraC::Run_Init(void)
 
 void CFSM_SakuraC::Run_Enter(void)
 {
+	m_pStageControlTower->SetVertCorrecting(true);
 	m_pDM->ChangeAniSet(Index_Run);
 }
 
@@ -1674,6 +1720,7 @@ void CFSM_SakuraC::Run_Update(float deltaTime)
 
 void CFSM_SakuraC::Run_End(void)
 {
+	m_pStageControlTower->SetVertCorrecting(false);
 	m_runSoundTimer = 0.f;
 }
 
@@ -1684,6 +1731,7 @@ void CFSM_SakuraC::Run_StartFromZero_Init(void)
 
 void CFSM_SakuraC::Run_StartFromZero_Enter(void)
 {
+	m_pStageControlTower->SetVertCorrecting(true);
 	m_pDM->ChangeAniSet(Index_Run_StartFromZero);
 }
 
@@ -1718,6 +1766,7 @@ void CFSM_SakuraC::Run_StartFromZero_Update(float deltaTime)
 
 void CFSM_SakuraC::Run_StartFromZero_End(void)
 {
+	m_pStageControlTower->SetVertCorrecting(false);
 	m_runSoundTimer = 0.f;
 }
 
@@ -1727,6 +1776,7 @@ void CFSM_SakuraC::RunBS_Init(void)
 
 void CFSM_SakuraC::RunBS_Enter(void)
 {
+	m_pStageControlTower->SetVertCorrecting(true);
 	m_pDM->ChangeAniSet(Index_RunBS);
 }
 
@@ -1764,6 +1814,7 @@ void CFSM_SakuraC::RunBS_Update(float deltaTime)
 
 void CFSM_SakuraC::RunBS_End(void)
 {
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::RunStopLeft_Init(void)
@@ -1774,6 +1825,7 @@ void CFSM_SakuraC::RunStopLeft_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopLeft);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 }
 
 void CFSM_SakuraC::RunStopLeft_Update(float deltaTime)
@@ -1803,6 +1855,7 @@ void CFSM_SakuraC::RunStopLeft_Update(float deltaTime)
 void CFSM_SakuraC::RunStopLeft_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::RunStopRight_Init(void)
@@ -1813,6 +1866,7 @@ void CFSM_SakuraC::RunStopRight_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_RunStopRight);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 }
 
 void CFSM_SakuraC::RunStopRight_Update(float deltaTime)
@@ -1842,6 +1896,7 @@ void CFSM_SakuraC::RunStopRight_Update(float deltaTime)
 void CFSM_SakuraC::RunStopRight_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::StandBy_Back_Init(void)
@@ -1887,6 +1942,7 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeForward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	//PlaySound_Attack_RandomEvade();
 
 	m_isEvade = true;
@@ -1941,6 +1997,7 @@ void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 void CFSM_SakuraC::EvadeForward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_isEvade = false;
 	m_pSakura->SetIsEvade(false);
@@ -1954,6 +2011,7 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_EvadeBackward);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	//PlaySound_Attack_RandomEvade();
 
 	m_isEvade = true;
@@ -2008,6 +2066,7 @@ void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 void CFSM_SakuraC::EvadeBackward_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 
 	m_isEvade = false;
 	m_pSakura->SetIsEvade(false);
@@ -2061,6 +2120,7 @@ void CFSM_SakuraC::Hit_H_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Hit_H);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 
 	PlaySound_SelectChannel(Sound_HIT_Effect, (_uint)EChannelID::PLAYERHIT);
 	PlaySound_Voice_RandomHit();
@@ -2079,6 +2139,7 @@ void CFSM_SakuraC::Hit_H_Update(float deltaTime)
 void CFSM_SakuraC::Hit_H_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::Hit_L_Init(void)
@@ -2325,6 +2386,7 @@ void CFSM_SakuraC::WeaponSkill_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_WeaponSkill);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pStageControlTower->SetVertCorrecting(true);
 	m_pStageControlTower->LookTarget();
 	ResetCheckMembers();
 
@@ -2355,6 +2417,7 @@ void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
 void CFSM_SakuraC::WeaponSkill_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pStageControlTower->SetVertCorrecting(false);
 }
 
 void CFSM_SakuraC::RegisterAllState()
