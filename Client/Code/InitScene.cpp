@@ -136,7 +136,7 @@ void CInitScene::Update(void)
 {
 	__super::Update();
 	_float value = slider->GetValue();
-	value = min(value + GET_DT * 8, 100);
+	value = min(value + GET_DT * 38, 100);
 	slider->SetValue(value);
 	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + std::to_wstring(value) + L"%");
 
