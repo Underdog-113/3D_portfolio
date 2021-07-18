@@ -213,7 +213,7 @@ void CBronyaSkillUltraPattern::MoveCenter(Engine::CObject* pOwner, SP(CFSM_Brony
 
 		// 센터로 이동
 		m_lerpStartPos = mPos;
-		m_lerpEndPos = _float3(0.f, mPos.y, 0.f);
+		m_lerpEndPos = _float3(92.9913f, mPos.y, -4.6115f);
 		m_lerpCurTimer = 0.f;
 	}
 	// escape in 상태 중 목표 위치로 이동 중이라면

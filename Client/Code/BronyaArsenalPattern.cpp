@@ -36,14 +36,15 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Center */
 	if (false == m_movedCenter)
 	{
-		_float3 endPos = { 0.f, mPos.y, 0.f };
+		_float3 endPos = { 92.9913f, mPos.y, -4.6115f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCenter);
 	}
 
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		_float3 endPos = { 0.f, mPos.y, 15.f };
+		_float3 endPos = { 91.9447f, mPos.y, -8.55992f };
+		pOwner->GetTransform()->SetRotationY(D3DXToRadian(180));
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
 	}
 
