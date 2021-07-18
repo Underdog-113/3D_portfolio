@@ -42,10 +42,7 @@ private:
 
 	void				InitPrototypes(void) override;
 
-	void				ForUITest();
-
 	void				FindSkyObject();
-
 
 private:
 	CStageControlTower* m_pControlTower = nullptr;
@@ -60,6 +57,8 @@ private:
 	SP(Engine::CObject) m_spSky;
 
 	std::vector<SP(Engine::CObject)> m_vDummy;
+
+
 };
 
 #endif

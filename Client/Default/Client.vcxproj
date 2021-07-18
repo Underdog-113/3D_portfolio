@@ -244,6 +244,7 @@
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
+    <ClInclude Include="..\Header\DecalShader.h" />
     <ClInclude Include="..\Header\ElevatorBack.h" />
     <ClInclude Include="..\Header\ElevatorBase.h" />
     <ClInclude Include="..\Header\ElevatorDoor.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="..\Header\Ganesha_LaserEff.h" />
     <ClInclude Include="..\Header\Ganesha_SmokeEff.h" />
     <ClInclude Include="..\Header\Ganesha_UpperEff.h" />
+    <ClInclude Include="..\Header\HpItemC.h" />
     <ClInclude Include="..\Header\KianaBranchSign.h" />
     <ClInclude Include="..\Header\Kiana_CatPaw_Abs.h" />
     <ClInclude Include="..\Header\KianaBodyShader.h" />
@@ -268,6 +270,7 @@
     <ClInclude Include="..\Header\MainRoomBG.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\OneConversationC.h" />
     <ClInclude Include="..\Header\ParticleShader.h" />
     <ClInclude Include="..\Header\OJ_Box.h" />
     <ClInclude Include="..\Header\Portal_Beam.h" />
@@ -534,6 +537,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TwoConversationC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
@@ -597,6 +601,7 @@
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
+    <ClCompile Include="..\Code\DecalShader.cpp" />
     <ClCompile Include="..\Code\ElevatorBack.cpp" />
     <ClCompile Include="..\Code\ElevatorBase.cpp" />
     <ClCompile Include="..\Code\ElevatorDoor.cpp" />
@@ -607,6 +612,7 @@
     <ClCompile Include="..\Code\Ganesha_LaserEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_SmokeEff.cpp" />
     <ClCompile Include="..\Code\Ganesha_UpperEff.cpp" />
+    <ClCompile Include="..\Code\HpItemC.cpp" />
     <ClCompile Include="..\Code\KianaBranchSign.cpp" />
     <ClCompile Include="..\Code\Kiana_CatPaw_Abs.cpp" />
     <ClCompile Include="..\Code\KianaBodyShader.cpp" />
@@ -620,6 +626,7 @@
     <ClCompile Include="..\Code\MainRoomBG.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\OneConversationC.cpp" />
     <ClCompile Include="..\Code\ParticleShader.cpp" />
     <ClCompile Include="..\Code\OJ_Box.cpp" />
     <ClCompile Include="..\Code\Portal_Beam.cpp" />
@@ -866,6 +873,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TwoConversationC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

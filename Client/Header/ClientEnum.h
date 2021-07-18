@@ -6,6 +6,7 @@ enum class ESceneID
 {	
 	Changmo,
 	Init,
+	MainRoom,
 	NumOfSceneID
 };
 

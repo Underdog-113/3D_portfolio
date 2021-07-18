@@ -175,6 +175,8 @@
 #pragma endregion
 
 #include "Include_Valkyrie.h"
+#include "ElevatorBase.h"
+#include "ElevatorDoor.h"
 
 CStaticScene::CStaticScene()
 {
@@ -265,6 +267,12 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(CAttackBox) spAttackBox(CAttackBox::Create(true, this));
 	GetObjectFactory()->AddPrototype(spAttackBox);
+
+	SP(Engine::CObject) spElevator_Base(CElevatorBase::Create(true, this));
+	ADD_PROTOTYPE(spElevator_Base);
+
+	SP(Engine::CObject) spElevator_Door(CElevatorDoor::Create(true, this));
+	ADD_PROTOTYPE(spElevator_Door);
 	
 	InitMapPrototypes();
 	InitUiPrototypes();

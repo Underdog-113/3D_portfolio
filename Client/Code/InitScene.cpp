@@ -96,8 +96,43 @@ void CInitScene::Start(void)
 		_fY += 16.f;
 	}
 
+	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");
+	text->GetTransform()->SetPositionZ(0.5f);
+	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,240), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
+
+	{
+		slider =
+			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", false, (_int)Engine::ELayerID::UI, L"Slidr_0"));
+		slider->GetTransform()->SetPosition(_float3(-65.0f, -200.0f, 0.0f));
+		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
+
+		SP(Engine::CImageObject) background =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", false, (_int)Engine::ELayerID::UI, L"BackGround"));
+		background->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		background->GetTransform()->SetSize(_float3(500, 40, 0));
+		background->GetTexture()->AddTexture(L"CannonSpDisable", 0);
+		background->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+
+		SP(Engine::CImageObject) fill =
+			std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", false, (_int)Engine::ELayerID::UI, L"Fill"));
+		fill->SetParent(slider.get());
+		fill->GetTransform()->SetPosition(slider->GetTransform()->GetPosition());
+		fill->GetTransform()->SetPositionZ(slider->GetTransform()->GetPosition().z);
+		fill->GetTransform()->SetSize(_float3(500, 35, 0));
+		fill->GetTexture()->AddTexture(L"CannonSpColor", 0);
+		fill->GetShader()->
+			AddShader(Engine::CShaderManager::GetInstance()->GetShaderID((L"SliderShader")));
+
+		slider->AddSliderData(0, 100, 0, background, fill);
+	}
 }
 
+/*
+1. init씬에 정보를 mainroom으로 이동
+2. 게이지다차면 문이열리게
+3. 문이열리면 카메라 무브로 앞으로
+4. 지정된장소까지가면 모든 UI활성화
+*/
 void CInitScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
@@ -106,6 +141,10 @@ void CInitScene::FixedUpdate(void)
 void CInitScene::Update(void)
 {
 	__super::Update();
+	_float value = slider->GetValue();
+	value = min(value + GET_DT * 9, 100);
+	slider->SetValue(value);
+	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + std::to_wstring(value) + L"%");
 
 	if(!m_isStaticScene)
 		m_fTempSoundLength += GET_DT;
@@ -163,7 +202,7 @@ void CInitScene::Update(void)
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(CMainRoomScene::Create(), false);
+				m_pLoading = CLoading::Create(CDongScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))
@@ -239,6 +278,15 @@ void CInitScene::OnDisable(void)
 
 void CInitScene::InitPrototypes(void)
 {
+	SP(Engine::CTextObject) spTextObject(Engine::CTextObject::Create(false, this));
+	GetObjectFactory()->AddPrototype(spTextObject);
+
+	SP(Engine::CImageObject) spImageObject(Engine::CImageObject::Create(false, this));
+	GetObjectFactory()->AddPrototype(spImageObject);
+
+	SP(Engine::CSlider) spSliderObject(Engine::CSlider::Create(false, this));
+	GetObjectFactory()->AddPrototype(spSliderObject);
+
 	SP(Engine::CObject) spEmptyObjectPrototype(Engine::CEmptyObject::Create(false, this));
 	ADD_PROTOTYPE(spEmptyObjectPrototype);
 
