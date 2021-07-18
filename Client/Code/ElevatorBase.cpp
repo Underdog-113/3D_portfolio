@@ -60,6 +60,11 @@ void CElevatorBase::Awake(void)
 void CElevatorBase::Start(void)
 {
 	__super::Start();
+
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
+		m_spMesh->SetMeshData(L"Elevator_Base_2");
+
+
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 }
 
@@ -73,8 +78,14 @@ void CElevatorBase::Update(void)
 {
 	__super::Update();
 
-	if (m_bLoadCheck)
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
 	{
+		m_spTexture->ChangeTexture(L"Elevator_Display03", 0, 2);
+		m_spTexture->ChangeTexture(L"Elevator_Display03", 2, 0);
+
+	}
+	if (m_bLoadCheck )
+	{		
 		m_spTexture->ChangeTexture(L"Elevator_Display03", 0, 3);
 		m_spTexture->ChangeTexture(L"Elevator_Display03", 3, 0);
 		m_bLoadCheck = false;

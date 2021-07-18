@@ -45,6 +45,10 @@ private:
 					_bool				m_moveLeft = false;
 
 					std::vector<SP(Engine::CObject)> m_vControlDesk;
+
+private:
+	_bool m_bStartBGM;
+	static _bool g_bFirstGameStart;
 };
 
 #endif

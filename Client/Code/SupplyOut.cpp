@@ -41,7 +41,7 @@ _uint CSupplyOut::FixedUpdate()
 
 _uint CSupplyOut::Update()
 {
-	//ItemRandomBox();
+	ItemRandomBox();
 	//WeaponRandomBox();
 	return _uint();
 }

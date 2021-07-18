@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\ElevatorDoor.h"
 #include "SoundManager.h"
+#include "Elevator_L_Door.h"
+#include "Elevator_R_Door.h"
 
 _uint CElevatorDoor::m_s_uniqueID = 0;
 
@@ -30,6 +32,7 @@ SP(Engine::CObject) CElevatorDoor::MakeClone(void)
 
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
@@ -64,10 +67,27 @@ void CElevatorDoor::Awake(void)
 void CElevatorDoor::Start(void)
 {
 	__super::Start();
-	Engine::CSoundManager::GetInstance()->StopAll();
-	Engine::CSoundManager::GetInstance()->StartSound(L"Elevator_OpenDoor.wav", (_uint)Engine::EChannelID::OUTGAME);
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
+	{
+		m_sp_L_Door = Engine::GET_CUR_SCENE->ADD_CLONE(L"Elevator_L_Door", true, (_int)Engine::ELayerID::Decoration);
+		m_sp_R_Door = Engine::GET_CUR_SCENE->ADD_CLONE(L"Elevator_R_Door", true, (_int)Engine::ELayerID::Decoration);
 
-	m_bCheck = false;
+		m_sp_R_Door->GetTransform()->SetOwner(this);
+
+		m_spTransform->SetPositionZ(-5.2f);
+		m_spTransform->SetPositionY(-0.8f);
+		m_spMesh->SetMeshData(L"Elevator_Door_2");
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::OUTGAME);
+		Engine::CSoundManager::GetInstance()->StartSound(L"Elevator_OpenDoor.wav", (_uint)Engine::EChannelID::OUTGAME);
+	}
+	else
+	{
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::OUTGAME);
+		Engine::CSoundManager::GetInstance()->StartSound(L"Elevator_OpenDoor.wav", (_uint)Engine::EChannelID::OUTGAME);
+	}
+
+	m_bMoveCheck = false;
+	m_fTimer = 0.f;
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 }
 
@@ -81,16 +101,36 @@ void CElevatorDoor::Update(void)
 {
 	__super::Update();
 
-	if (!m_bCheck)
-	{
-		if (m_spTransform->GetPosition().y >= 0)
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
+	{ 
+		if (!m_bMoveCheck)
 		{
-			m_bCheck = true;
-		}
+			if (m_spTransform->GetPosition().y <= -6)
+			{
+				std::static_pointer_cast<CElevator_L_Door>(m_sp_L_Door)->SetDoorCheck(true);
+				std::static_pointer_cast<CElevator_R_Door>(m_sp_R_Door)->SetDoorCheck(true);
+				m_bMoveCheck = true;
+			}
 
-		if (m_spTransform->GetPosition().y < 0)
+			if (m_spTransform->GetPosition().y > -6)
+			{
+				m_spTransform->AddPositionY(-5.5f * GET_DT);
+			}
+		}
+	}
+	else
+	{
+		if (!m_bMoveCheck)
 		{
-			m_spTransform->AddPositionY(3.5f * GET_DT);
+			if (m_spTransform->GetPosition().y >= 0)
+			{
+				m_bMoveCheck = true;
+			}
+
+			if (m_spTransform->GetPosition().y < 0)
+			{
+				m_spTransform->AddPositionY(3.5f * GET_DT);
+			}
 		}
 	}
 }

@@ -177,6 +177,8 @@
 #include "Include_Valkyrie.h"
 #include "ElevatorBase.h"
 #include "ElevatorDoor.h"
+#include "Elevator_L_Door.h"
+#include "Elevator_R_Door.h"
 
 CStaticScene::CStaticScene()
 {
@@ -273,6 +275,13 @@ void CStaticScene::InitPrototypes(void)
 
 	SP(Engine::CObject) spElevator_Door(CElevatorDoor::Create(true, this));
 	ADD_PROTOTYPE(spElevator_Door);
+
+	SP(Engine::CObject) spElevator_L_Door(CElevator_L_Door::Create(true, this));
+	ADD_PROTOTYPE(spElevator_L_Door);
+
+	SP(Engine::CObject) spElevator_R_Door(CElevator_R_Door::Create(true, this));
+	ADD_PROTOTYPE(spElevator_R_Door);
+
 	
 	InitMapPrototypes();
 	InitUiPrototypes();
