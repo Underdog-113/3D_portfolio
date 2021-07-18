@@ -1,16 +1,16 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
-class CSpiderExplosion : public CMeshEffect_Client
+class CSpiderExplosion_Base : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CSpiderExplosion();
-	~CSpiderExplosion();
+	CSpiderExplosion_Base();
+	~CSpiderExplosion_Base();
 
 public:
-	static	SP(CSpiderExplosion) Create(_bool isStatic, Engine::CScene* pScene);
+	static	SP(CSpiderExplosion_Base) Create(_bool isStatic, Engine::CScene* pScene);
 	SP(Engine::CObject) MakeClone(void) override;
 	void Awake(void) override;
 	void Start(void) override;

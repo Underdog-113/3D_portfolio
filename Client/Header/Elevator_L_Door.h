@@ -1,16 +1,15 @@
 #pragma once
 #include "Object.h"
-
-class CElevatorDoor : public Engine::CObject
+class CElevator_L_Door : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CElevatorDoor();
-	~CElevatorDoor();
+	CElevator_L_Door();
+	~CElevator_L_Door();
 
 public:
-	static		SP(CElevatorDoor)			Create(_bool isStatic, Engine::CScene* pScene);
+	static		SP(CElevator_L_Door)			Create(_bool isStatic, Engine::CScene* pScene);
 
 	SP(Engine::CObject)			MakeClone(void) override;
 
@@ -36,18 +35,10 @@ public:
 	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
 	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
 	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
-		
+	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
+	GETTOR_SETTOR(_bool, m_bDoorCheck, false, DoorCheck)
+
 private:
 	static		_uint m_s_uniqueID;
-
-private:
-	_bool m_bMoveCheck;
-
-private:
-	_float m_fTimer;
-
-private:
-	SP(Engine::CObject) m_sp_L_Door;
-	SP(Engine::CObject) m_sp_R_Door;
 };
 

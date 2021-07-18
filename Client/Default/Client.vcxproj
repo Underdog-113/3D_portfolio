@@ -248,6 +248,8 @@
     <ClInclude Include="..\Header\ElevatorBack.h" />
     <ClInclude Include="..\Header\ElevatorBase.h" />
     <ClInclude Include="..\Header\ElevatorDoor.h" />
+    <ClInclude Include="..\Header\Elevator_L_Door.h" />
+    <ClInclude Include="..\Header\Elevator_R_Door.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
@@ -308,6 +310,8 @@
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\OutlineShader.h" />
     <ClInclude Include="..\Header\SpItemC.h" />
+    <ClInclude Include="..\Header\SpiderExplosion_Base.h" />
+    <ClInclude Include="..\Header\SpiderImpact.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
@@ -606,6 +610,8 @@
     <ClCompile Include="..\Code\ElevatorBack.cpp" />
     <ClCompile Include="..\Code\ElevatorBase.cpp" />
     <ClCompile Include="..\Code\ElevatorDoor.cpp" />
+    <ClCompile Include="..\Code\Elevator_L_Door.cpp" />
+    <ClCompile Include="..\Code\Elevator_R_Door.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
@@ -664,6 +670,8 @@
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp" />
     <ClCompile Include="..\Code\SpItemC.cpp" />
+    <ClCompile Include="..\Code\SpiderExplosion_Base.cpp" />
+    <ClCompile Include="..\Code\SpiderImpact.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />

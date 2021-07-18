@@ -256,7 +256,6 @@ void CInitScene::LateUpdate(void)
 void CInitScene::OnDestroy(void)
 {
 	__super::OnDestroy();
-	Engine::CSoundManager::GetInstance()->StopAll();
 	delete m_pLoading;
 }
 
