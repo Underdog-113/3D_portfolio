@@ -3,15 +3,25 @@ matrix		g_matView;
 matrix		g_matProj;
 
 texture		g_BaseTexture;
+texture		g_NormalTexture;
 
 float4		g_addColor;
 float4		g_color;
 
 bool g_timeSlow;
+bool g_normalMapExist = false;
 
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
+
+	minfilter = linear;
+	magfilter = linear;
+};
+
+sampler NormalSampler = sampler_state
+{
+	texture = g_NormalTexture;
 
 	minfilter = linear;
 	magfilter = linear;
@@ -87,7 +97,13 @@ PS_OUT		PS_MAIN(PS_IN In)
 	Out.vColor = Out.vColor * g_color;
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
-	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+	vector normal = In.vNormal;
+	if (g_normalMapExist)
+	{
+		normal = tex2D(NormalSampler, In.vTexUV);
+	}
+
+	Out.vNormal = vector(normal.xyz * 0.5f + 0.5f, 0.f);
 	
 	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w,	// R에 위치에 z나누기 끝난 투영 공간의 z값을 보관(0 ~ 1)값
 						In.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)

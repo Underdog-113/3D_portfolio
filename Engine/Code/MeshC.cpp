@@ -292,6 +292,11 @@ void CMeshC::RenderStatic(SP(CGraphicsC) spGC, CMeshData * pMeshData, LPD3DXEFFE
 
 			pEffect->SetTexture("g_BaseTexture", pTexData->pTexture);
 			
+			if (pTexData = spGC->GetTexture()->GetNormalData()[i][0])
+			{
+				pEffect->SetTexture("g_NormalTexture", pTexData->pTexture);
+				pEffect->SetBool("g_normalMapExist", true);
+			}
 		}
 		pEffect->CommitChanges();
 		pSM->GetMesh()->DrawSubset(i);

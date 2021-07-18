@@ -61,6 +61,25 @@ void CTextureC::Awake(void)
 void CTextureC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+
+	_size texDataSize = m_vTexData.size();
+	m_vNormalData.resize(texDataSize);
+	m_vLightData.resize(texDataSize);
+	for (_size i = 0; i < texDataSize; ++i)
+	{
+		_size curSetSize = m_vTexData[i].size();
+		m_vNormalData[i].resize(curSetSize);
+		m_vLightData[i].resize(curSetSize);
+
+		for (_size j = 0; j < curSetSize; ++j)
+		{
+			if (m_vTexData[i][j])
+			{
+				m_vNormalData[i][j]	= m_pOwner->GetScene()->GetTextureStore()->GetTextureData(m_vTexData[i][j]->textureKey + L"_Nor");
+				m_vLightData[i][j]	= m_pOwner->GetScene()->GetTextureStore()->GetTextureData(m_vTexData[i][j]->textureKey + L"_LightMap");				
+			}
+		}
+	}
 }
 
 void CTextureC::FixedUpdate(SP(CComponent) spThis)
