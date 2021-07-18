@@ -111,7 +111,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	//vector a = vector(0, 0, 0, 1);
 	vector blurColor = vBlurDiv2 + vBlurDiv4 + vBlurDiv8 + vBlurDiv16;
 	Out.vColor = saturate(vAlbedo * vShade + blurColor);// +vSpecular;
-	//Out.vColor.a = 1;
+	Out.vColor.a = 1;
 
 	
 

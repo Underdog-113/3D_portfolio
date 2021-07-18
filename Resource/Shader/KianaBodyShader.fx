@@ -71,18 +71,20 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
-	Out.vEmissive = (vector)albedo;
-	//Out.vEmissive.a = 0;
+	Out.vEmissive = albedo;
+	if (albedo.r > 0.3f && albedo.b < 0.3f)
+		Out.vEmissive.a = 1.f;
+
 	Out.vColor = albedo;
 	Out.vColor.a = 1;
 
 	// -1 ~ 1 -> 0 ~ 1
-	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 1.f);
 
 	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w,
 						In.vProjPos.w * 0.001f,
 						0.f,
-						0.f);
+						1.f);
 
 	return Out;
 }
@@ -92,6 +94,8 @@ technique Default_Device
 	pass Origin
 	{
 		alphablendenable = true;
+		srcblend = srcalpha;
+		destblend = invsrcalpha;
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 		CullMode = CCW;
