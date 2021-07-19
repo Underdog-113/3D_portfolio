@@ -14,6 +14,7 @@
 #include "StatusDealer.h"
 #include "ActorController.h"
 #include "StageCameraMan.h"
+#include "MovieDirector.h"
 #include "TimeSeeker.h"
 #include "PhaseControl.h"
 
@@ -35,6 +36,7 @@ void CStageControlTower::Start(CreateMode mode)
 	m_pActorController = new CActorController;
 	m_pDealer = new CStatusDealer;
 	m_pCameraMan = new CStageCameraMan;
+	m_pMovieDirector = new CMovieDirector;
 	m_pTimeSeeker = new CTimeSeeker;
 
 	if (m_mode != WithoutUI)
@@ -190,6 +192,7 @@ void CStageControlTower::Update(void)
 
 	m_pTimeSeeker->UpdateTimeSeeker();
 
+	m_pMovieDirector->UpdateDirector();
 	m_pCameraMan->UpdateCameraMan();
 
 	m_pActorController->UpdateController();
@@ -944,19 +947,19 @@ void CStageControlTower::BattonTouch_3Member()
 	m_pCameraMan->SetIsSwitching(true);
 }
 
-void CStageControlTower::SetCameraMidTake()
+void CStageControlTower::SetCameraMidShot()
 {
-	m_pCameraMan->SetMidTake();
+	m_pCameraMan->SetMidShot();
 }
 
-void CStageControlTower::SetCameraFarTake()
+void CStageControlTower::SetCameraFarShot()
 {
-	m_pCameraMan->SetFarTake();
+	m_pCameraMan->SetFarShot();
 }
 
-void CStageControlTower::SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
+void CStageControlTower::SetCameraCustomShot(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
 {
-	m_pCameraMan->SetCustomTake(dstMaxDistance, changeSpeed, dstXAngle);
+	m_pCameraMan->SetCustomShot(dstMaxDistance, changeSpeed, dstXAngle);
 }
 
 void CStageControlTower::OffCameraTargeting()

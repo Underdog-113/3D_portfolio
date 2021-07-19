@@ -1358,7 +1358,7 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 
 	if (!m_checkEndFlash && m_pDM->GetAniTimeline() > 0.522)
 	{
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 		PlaySound_Voice(Sound_Flash_Voice);
 		m_pEffectMaker->CreateEffect_Beam();
 
@@ -1498,7 +1498,7 @@ void CFSM_SakuraC::Charge1_Quick_Enter(void)
 	ResetCheckMembers();
 
 	m_pStageControlTower->LookTarget();
-	CStageControlTower::GetInstance()->SetCameraFarTake();
+	CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
@@ -1528,7 +1528,7 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + flashDir * colRadiusSum);
 
-			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 		}
 		m_checkEndFlash = true;
 	}

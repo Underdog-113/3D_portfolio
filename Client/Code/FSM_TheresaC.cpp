@@ -80,7 +80,7 @@ void CFSM_TheresaC::ResetCheckMembers()
 	m_checkEffect = false;
 	m_checkEffectSecond = false;
 	m_checkShake = false;
-	m_checkTake = false;
+	m_checkShot = false;
 }
 
 void CFSM_TheresaC::OnSwordCollider()
@@ -97,8 +97,8 @@ void CFSM_TheresaC::OffSwordCollider()
 
 void CFSM_TheresaC::OnAxeCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.6f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.4f, _float3(2.f, 0.f, 0.f));
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 2.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.4f, _float3(2.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.2f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
 }
 
 void CFSM_TheresaC::OffAxeCollider()
@@ -1128,22 +1128,22 @@ void CFSM_TheresaC::Charge1_Update(float deltaTime)
 		m_checkAttack = true;
 	}
 
-	if (!m_checkTake && !m_checkShake && m_pDM->GetAniTimeline() > 0.21f)
+	if (!m_checkShot && !m_checkShake && m_pDM->GetAniTimeline() > 0.21f)
 	{
-		CStageControlTower::GetInstance()->SetCameraCustomTake(2.8f, 2.5f, D3DXToRadian(12.f));
-		m_checkTake = true;
+		CStageControlTower::GetInstance()->SetCameraCustomShot(2.8f, 2.5f, D3DXToRadian(12.f));
+		m_checkShot = true;
 	}
 	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.26f)
 	{
 		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_Charge1Impact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
 		m_checkShake = true;
-		m_checkTake = false;
+		m_checkShot = false;
 	}
 
-	if (!m_checkTake && m_pDM->GetAniTimeline() > 0.35f)
+	if (!m_checkShot && m_pDM->GetAniTimeline() > 0.35f)
 	{
-		CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 2.f, D3DXToRadian(10.f));
-		m_checkTake = true;
+		CStageControlTower::GetInstance()->SetCameraCustomShot(3.f, 2.f, D3DXToRadian(10.f));
+		m_checkShot = true;
 	}
 
 	if (m_pDM->GetAniTimeline() > 0.4f)
@@ -1204,23 +1204,23 @@ void CFSM_TheresaC::Charge2_Update(float deltaTime)
 		m_checkAttack = true;
 	}
 
-	if (!m_checkTake && !m_checkShake && m_pDM->GetAniTimeline() > 0.18f)
+	if (!m_checkShot && !m_checkShake && m_pDM->GetAniTimeline() > 0.18f)
 	{
-		CStageControlTower::GetInstance()->SetCameraCustomTake(2.8f, 2.5f, D3DXToRadian(12.f));
-		m_checkTake = true;
+		CStageControlTower::GetInstance()->SetCameraCustomShot(2.8f, 2.5f, D3DXToRadian(12.f));
+		m_checkShot = true;
 	}
 	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.23f)
 	{
 		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_Charge2Impact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
 
 		m_checkShake = true;
-		m_checkTake = false;
+		m_checkShot = false;
 	}
 	
-	if (!m_checkTake && m_pDM->GetAniTimeline() > 0.33f)
+	if (!m_checkShot && m_pDM->GetAniTimeline() > 0.33f)
 	{
-		CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 2.f, D3DXToRadian(10.f));
-		m_checkTake = true;
+		CStageControlTower::GetInstance()->SetCameraCustomShot(3.f, 2.f, D3DXToRadian(10.f));
+		m_checkShot = true;
 	}
 
 	if (m_pDM->GetAniTimeline() > 0.3f)
@@ -1278,22 +1278,22 @@ void CFSM_TheresaC::Attack_QTE_Update(float deltaTime)
 		m_checkAttack = true;
 	}
 
-	if (!m_checkTake && !m_checkShake && m_pDM->GetAniTimeline() > 0.21f)
+	if (!m_checkShot && !m_checkShake && m_pDM->GetAniTimeline() > 0.21f)
 	{
-		CStageControlTower::GetInstance()->SetCameraCustomTake(2.8f, 2.5f, D3DXToRadian(12.f));
-		m_checkTake = true;
+		CStageControlTower::GetInstance()->SetCameraCustomShot(2.8f, 2.5f, D3DXToRadian(12.f));
+		m_checkShot = true;
 	}
 	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.26f)
 	{
 		CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Theresa_Charge1Impact(Engine::GET_MAIN_CAM->GetTransform()->GetPosition());
 		m_checkShake = true;
-		m_checkTake = false;
+		m_checkShot = false;
 	}
 
-	if (!m_checkTake && m_pDM->GetAniTimeline() > 0.35f)
+	if (!m_checkShot && m_pDM->GetAniTimeline() > 0.35f)
 	{
-		CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 2.f, D3DXToRadian(10.f));
-		m_checkTake = true;
+		CStageControlTower::GetInstance()->SetCameraCustomShot(3.f, 2.f, D3DXToRadian(10.f));
+		m_checkShot = true;
 	}
 
 	if (m_pDM->GetAniTimeline() > 0.4f)
@@ -1486,7 +1486,7 @@ void CFSM_TheresaC::Ultra_Enter(void)
 	PlaySound_Voice(Sound_Ult_Voice);
 	PlaySound_Effect(Sound_Ult);
 
-	m_pStageControlTower->GetCameraMan()->SetCustomTake(2.f, 1.5f, D3DXToRadian(20.f));
+	m_pStageControlTower->GetCameraMan()->SetCustomShot(2.f, 1.5f, D3DXToRadian(20.f));
 	m_pStageControlTower->GetCameraMan()->SetTargetingMidRatio(0.65f);
 }
 
@@ -1502,7 +1502,7 @@ void CFSM_TheresaC::Ultra_Update(float deltaTime)
 		m_pEffectMaker->CreateEffect_Ultra_Trail();
 		m_pEffectMaker->CreateEffect_Ultra_Smoke();
 
-		m_pStageControlTower->GetCameraMan()->SetCustomTake(3.5f, 2.5f, D3DXToRadian(25.f));
+		m_pStageControlTower->GetCameraMan()->SetCustomShot(3.5f, 2.5f, D3DXToRadian(25.f));
 	}
 
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.34)
@@ -1533,7 +1533,7 @@ void CFSM_TheresaC::Ultra_Update(float deltaTime)
 	if (!m_ultraImpact && m_pDM->GetAniTimeline() > 0.605f)
 	{
 		OffAxeCollider();
-		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeImpact(), 3.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 1.f, _float3(2.f, 0.f, 0.f));
+		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeImpact(), 4.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 1.f, _float3(2.f, 0.f, 0.f));
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Kiana_UltraActive();
 		m_pEffectMaker->CreateEffect_Ultra_Bomb();
 		m_ultraImpact = true;

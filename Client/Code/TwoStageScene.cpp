@@ -61,7 +61,7 @@ void CTwoStageScene::Start(void)
 
 	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
 	spCube0->AddComponent<CTwoConversationC>();
-
+	
 	SetupFromLoader();
 	SetupMembers();
 	FindSkyObject();
@@ -162,8 +162,6 @@ void CTwoStageScene::Create_ActorValkyrie(void)
 
 void CTwoStageScene::Create_SceneCamera(void)
 {
-	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);

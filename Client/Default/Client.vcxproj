@@ -242,6 +242,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\CameraState.h" />
     <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
     <ClInclude Include="..\Header\DecalShader.h" />
@@ -273,6 +274,7 @@
     <ClInclude Include="..\Header\MoneyItemC.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
+    <ClInclude Include="..\Header\MovieDirector.h" />
     <ClInclude Include="..\Header\OneConversationC.h" />
     <ClInclude Include="..\Header\ParticleShader.h" />
     <ClInclude Include="..\Header\OJ_Box.h" />
@@ -301,6 +303,11 @@
     <ClInclude Include="..\Header\Scout_Att_Range.h" />
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
     <ClInclude Include="..\Header\Scout_Laser.h" />
+    <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
+    <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
+    <ClInclude Include="..\Header\Shot_Start_StageStartTake.h" />
+    <ClInclude Include="..\Header\Shot_WhiteFadeIn.h" />
+    <ClInclude Include="..\Header\Shot_WhiteFadeOut.h" />
     <ClInclude Include="..\Header\SickleAirbornePattern.h" />
     <ClInclude Include="..\Header\SickleStunPattern.h" />
     <ClInclude Include="..\Header\Sickle_Trail.h" />
@@ -459,6 +466,7 @@
     <ClInclude Include="..\Header\SupplyOut.h" />
     <ClInclude Include="..\Header\SupplyScene.h" />
     <ClInclude Include="..\Header\SupplyWapon.h" />
+    <ClInclude Include="..\Header\Take.h" />
     <ClInclude Include="..\Header\TestParticle.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
@@ -604,6 +612,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\CameraState.cpp" />
     <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
     <ClCompile Include="..\Code\DecalShader.cpp" />
@@ -634,6 +643,7 @@
     <ClCompile Include="..\Code\MoneyItemC.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
+    <ClCompile Include="..\Code\MovieDirector.cpp" />
     <ClCompile Include="..\Code\OneConversationC.cpp" />
     <ClCompile Include="..\Code\ParticleShader.cpp" />
     <ClCompile Include="..\Code\OJ_Box.cpp" />
@@ -661,6 +671,11 @@
     <ClCompile Include="..\Code\Scout_Att_Range.cpp" />
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
+    <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
+    <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
+    <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp" />
+    <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp" />
+    <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp" />
     <ClCompile Include="..\Code\SickleAirbornePattern.cpp" />
     <ClCompile Include="..\Code\SickleStunPattern.cpp" />
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
@@ -797,6 +812,7 @@
     <ClCompile Include="..\Code\SupplyOut.cpp" />
     <ClCompile Include="..\Code\SupplyScene.cpp" />
     <ClCompile Include="..\Code\SupplyWapon.cpp" />
+    <ClCompile Include="..\Code\Take.cpp" />
     <ClCompile Include="..\Code\TestParticle.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />

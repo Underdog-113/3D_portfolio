@@ -30,6 +30,7 @@ class CActorController;
 class CUILinker;
 class CStatusDealer;
 class CStageCameraMan;
+class CMovieDirector;
 class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
@@ -86,9 +87,9 @@ public:		/* Battle */
 	void BattonTouch_3Member();
 
 public:		/* Camera & System */
-	void SetCameraMidTake();
-	void SetCameraFarTake();
-	void SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
+	void SetCameraMidShot();
+	void SetCameraFarShot();
+	void SetCameraCustomShot(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void OffCameraTargeting();
 	void EndSwitching();
 
@@ -117,6 +118,7 @@ private:
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
 	GETTOR			(CStageCameraMan*,		m_pCameraMan,		nullptr,		CameraMan)
+	GETTOR			(CMovieDirector*,		m_pMovieDirector,	nullptr,		MovieDirector)
 	GETTOR			(CTimeSeeker*,			m_pTimeSeeker,		nullptr,		TimeSeeker)
 
 	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)

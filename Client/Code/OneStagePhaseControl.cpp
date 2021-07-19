@@ -19,6 +19,7 @@ COneStagePhaseControl::~COneStagePhaseControl()
 {
 }
 
+
 void COneStagePhaseControl::Update(void)
 {
 	switch (m_curPhase)
@@ -29,9 +30,17 @@ void COneStagePhaseControl::Update(void)
 
 	case (_int)EOneStagePhase::PlayerSummon:
 		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
+		{
+			EnterConversationPhase();
 			++m_curPhase;
+		}
 		break;
-
+	case (_int)EOneStagePhase::Conversation:
+		if (m_spConversation->IsEnd())
+		{
+			++m_curPhase;
+		}
+		break;
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
 		break;
@@ -138,6 +147,17 @@ void COneStagePhaseControl::Update(void)
 	}
 }
 
+void COneStagePhaseControl::PlayerSummonPhase()
+{
+}
+
+void COneStagePhaseControl::EnterConversationPhase()
+{
+	SP(Engine::CObject) spConversation = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	spConversation->AddComponent<COneConversationC>();
+
+	m_spConversation = spConversation->GetComponent<COneConversationC>();
+}
 
 void COneStagePhaseControl::OpenStageResult(void)
 {

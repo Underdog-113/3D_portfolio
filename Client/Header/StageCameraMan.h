@@ -1,12 +1,12 @@
 #pragma once
 
-#define NearTake 1.5f
-#define MidTake 3.f
-#define FarTake 4.5f
+#define NearShot 1.5f
+#define MidShot 2.5f
+#define FarShot 4.5f
 
-#define NearAngle D3DXToRadian(10.f)
-#define MidAngle D3DXToRadian(15.f)
-#define FarAngle D3DXToRadian(15.f)
+#define NearAngle D3DXToRadian(7.5f)
+#define MidAngle D3DXToRadian(10.f)
+#define FarAngle D3DXToRadian(10.f)
 
 #define MaxChaseDistance 0.5f
 
@@ -18,7 +18,7 @@
 class CStageCameraMan
 {
 public:
-	enum TakeType { Near, Mid, Far, Custom, Target, Change };
+	enum ShotType { Near, Mid, Far, Custom, Target, Change };
 
 public:
 	CStageCameraMan();
@@ -37,14 +37,14 @@ public:
 
 
 public:
-	void SetNearTake();
-	void SetMidTake();
-	void SetFarTake();
-	void SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
-	void SetTargetTake();
-	void ChangeTake();
+	void SetNearShot();
+	void SetMidShot();
+	void SetFarShot();
+	void SetCustomShot(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
+	void SetTargetShot();
+	void ChangeShot();
 
-	void ChangeTakeWhileTargeting();
+	void ChangeShotWhileTargeting();
 
 private:
 	void AppendPosYCorrecting();
@@ -119,14 +119,14 @@ private:
 	_float m_endChaseSpeed = 0.f;
 
 private:
-	TakeType m_curTakeType = Mid;
-	TakeType m_nextTakeType = Mid;
+	ShotType m_curShotType = Mid;
+	ShotType m_nextShotType = Mid;
 	_float m_curMaxDist = 3.f;
 	_float m_dstMaxDist = 3.f;
-	_float m_gotoNextTakeTimer = 0.f;
-	_float m_gotoNextTakeWaitTime = 1.5f;
-	_float m_changeTakeTimer = 0.f;
-	_float m_changeTakeSpeed = 2.f;
+	_float m_gotoNextShotTimer = 0.f;
+	_float m_gotoNextShotWaitTime = 1.5f;
+	_float m_changeShotTimer = 0.f;
+	_float m_changeShotSpeed = 2.f;
 
 private:
 	_float m_rotateXStart = 0.f;

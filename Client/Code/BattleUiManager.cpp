@@ -17,6 +17,11 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_activation = true;
 	m_monsterHpCount = 0;
 
+	//Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"ConversationCanvas").get());
+	//ConversationCanvas->AddObjectFind();
+	//ConversationCanvas->SetIsEnabled(false);
+
+
 	m_specialUICanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"specialUICanvas").get());
 	m_specialUICanvas->AddObjectFind();
 	m_specialUICanvas->SetIsEnabled(false);

@@ -41,6 +41,9 @@ void CFadeInOutC::FixedUpdate(SP(CComponent) spThis)
 
 void CFadeInOutC::Update(SP(CComponent) spThis)
 {
+	if (!m_autoMode)
+		return;
+
 	SP(CTextureC) spOwnerGraphics = m_pOwner->GetComponent<CTextureC>();
 	if (m_finish == false)
 	{
@@ -94,4 +97,35 @@ void CFadeInOutC::Setup(_bool isFadeIn, _float speed)
 {
 	m_isFadeIn = isFadeIn;
 	m_speed = speed;
+}
+
+_float CFadeInOutC::GetCurrentAlpha()
+{
+	SP(CTextureC) spOwnerGraphics = m_pOwner->GetComponent<CTextureC>();
+	return spOwnerGraphics->GetColor().w;
+}
+
+void CFadeInOutC::SetAlpha(_float alphaValue)
+{
+	if (alphaValue > 1.f)
+		alphaValue = 1.f;
+	else if (alphaValue < 0.f)
+		alphaValue = 0.f;
+
+	SP(CTextureC) spOwnerGraphics = m_pOwner->GetComponent<CTextureC>();
+	spOwnerGraphics->SetAlpha(alphaValue);
+}
+
+void CFadeInOutC::AddAlpha(_float alphaValue)
+{
+	_float curAlpha = GetCurrentAlpha();
+	alphaValue += curAlpha;
+
+	if (alphaValue > 1.f)
+		alphaValue = 1.f;
+	else if (alphaValue < 0.f)
+		alphaValue = 0.f;
+
+	SP(CTextureC) spOwnerGraphics = m_pOwner->GetComponent<CTextureC>();
+	spOwnerGraphics->SetAlpha(alphaValue);
 }

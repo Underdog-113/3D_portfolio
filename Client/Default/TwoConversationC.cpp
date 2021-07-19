@@ -43,6 +43,9 @@ void CTwoConversationC::Start(SP(CComponent) spThis)
 	m_conversationText.emplace_back(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Text_2").get());
 
 	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(false);
+
+	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas").get());
+	ConversationCanvas->SetIsEnabled(true);
 }
 
 void CTwoConversationC::FixedUpdate(SP(CComponent) spThis)
@@ -73,6 +76,11 @@ void CTwoConversationC::OnEnable()
 void CTwoConversationC::OnDisable()
 {
 	__super::OnDisable();
+}
+
+_bool CTwoConversationC::IsEnd()
+{
+	return m_conversationCheck;
 }
 
 
@@ -199,7 +207,6 @@ void CTwoConversationC::End()
 	CBattleUiManager::GetInstance()->WaitingPlayerSetting();
 
 	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas").get());
-	ConversationCanvas->AddObjectFind();
 	ConversationCanvas->SetIsEnabled(false);
 	GetOwner()->SetIsEnabled(false);
 }

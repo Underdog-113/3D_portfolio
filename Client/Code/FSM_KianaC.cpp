@@ -550,7 +550,7 @@ void CFSM_KianaC::Attack_1_Enter(void)
 	ResetCheckMembers();
 
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 
 }
 
@@ -625,7 +625,7 @@ void CFSM_KianaC::Attack_2_Enter(void)
 	ResetCheckMembers();
 
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_KianaC::Attack_2_Update(float deltaTime)
@@ -697,7 +697,7 @@ void CFSM_KianaC::Attack_3_Enter(void)
 	ResetCheckMembers();
 
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_KianaC::Attack_3_Update(float deltaTime)
@@ -766,7 +766,7 @@ void CFSM_KianaC::Attack_3_Branch_Enter(void)
 
 
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_KianaC::Attack_3_Branch_Update(float deltaTime)
@@ -830,7 +830,7 @@ void CFSM_KianaC::Attack_4_Enter(void)
 	ResetCheckMembers();
 	
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_KianaC::Attack_4_Update(float deltaTime)
@@ -923,7 +923,7 @@ void CFSM_KianaC::Attack_4_Branch_Enter(void)
 	ResetCheckMembers();
 
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_KianaC::Attack_4_Branch_Update(float deltaTime)
@@ -977,7 +977,7 @@ void CFSM_KianaC::Attack_5_Enter(void)
 	ResetCheckMembers();
 
 	if (m_pKiana->GetUltraMode())
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_KianaC::Attack_5_Update(float deltaTime)
@@ -1729,7 +1729,7 @@ void CFSM_KianaC::Ultra_Enter(void)
 	m_pEffectMaker->CreateEffect_Ultra();
 
 	m_checkUltraActive = false;
-	m_pStageControlTower->GetCameraMan()->SetCustomTake(2.f, 2.f, D3DXToRadian(15.f));
+	m_pStageControlTower->GetCameraMan()->SetCustomShot(2.f, 2.f, D3DXToRadian(15.f));
 }
 
 void CFSM_KianaC::Ultra_Update(float deltaTime)
@@ -1739,7 +1739,7 @@ void CFSM_KianaC::Ultra_Update(float deltaTime)
 
 	if (!m_checkUltraActive && m_pDM->GetAniTimeline() > 0.21)
 	{
-		m_pStageControlTower->GetCameraMan()->SetCustomTake(3.f, 4.5f, D3DXToRadian(15.f));
+		m_pStageControlTower->GetCameraMan()->SetCustomShot(3.f, 4.5f, D3DXToRadian(15.f));
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Kiana_UltraActive();
 		m_checkUltraActive = true;
 	}

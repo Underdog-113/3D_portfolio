@@ -18,6 +18,9 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
+public:
+	_bool IsEnd();
+
 private:
 	void Conversation();
 	void TextUpdate();
@@ -31,7 +34,7 @@ private:
 	std::vector<Engine::CObject*> m_conversationText;
 
 	_int m_conversationCount;
-	_bool m_conversationCheck;
+	_bool m_conversationCheck = false;
 	_bool m_init;
 
 	std::wstring m_inText[2];

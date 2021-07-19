@@ -12,6 +12,7 @@ CActorController::CActorController()
 	m_rotSpeed = 18.f;
 
 	m_rotateLock = true;
+
 }
 
 

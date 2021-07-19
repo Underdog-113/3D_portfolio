@@ -26,9 +26,19 @@ void CTwoStagePhaseControl::Update(void)
 
 	case (_int)ETwoStagePhase::PlayerSummon:
 		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
+		{
+			//EnterConversationPhase();
 			++m_curPhase;
+		}
 		break;
 
+	case (_int)ETwoStagePhase::Conversation:
+		//if (m_spConversation->IsEnd())
+		//{
+		//	++m_curPhase;
+		//}
+		++m_curPhase;
+		break;
 		//Before being collised with PhaseChanger0
 	case (_int)ETwoStagePhase::BeforeBoss:
 		break;
@@ -71,6 +81,14 @@ void CTwoStagePhaseControl::Update(void)
 	}
 }
 
+
+void CTwoStagePhaseControl::EnterConversationPhase(void)
+{
+	SP(Engine::CObject) spConversation = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	spConversation->AddComponent<CTwoConversationC>();
+
+	m_spConversation = spConversation->GetComponent<CTwoConversationC>();
+}
 
 void CTwoStagePhaseControl::OpenStageResult(void)
 {

@@ -1045,6 +1045,21 @@
     <Filter Include="03.Component\03.Item\03.StuffItem">
       <UniqueIdentifier>{9e3f1aa8-b870-402d-a8c0-cac906c0515a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\02.UI\02.ScreenEffect">
+      <UniqueIdentifier>{94fd9c75-620a-41d2-908d-4d62a43d68cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector">
+      <UniqueIdentifier>{ff060b50-4091-45b3-948b-8415f0a11d05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraState">
+      <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\Take">
+      <UniqueIdentifier>{8f5e726d-c4d5-4c89-847e-51925c40fc89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraState\Interface">
+      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2138,7 +2153,7 @@
     </ClInclude>
     <ClInclude Include="StuffItemC.h">
       <Filter>03.Component\03.Item\03.StuffItem</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\SpiderImpact.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
     </ClInclude>
@@ -2152,6 +2167,20 @@
     <ClInclude Include="..\Header\Elevator_R_Door.h">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MovieDirector.h">
+      <Filter>10.ControlTower\MovieDirector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Take.h">
+      <Filter>10.ControlTower\MovieDirector\Take</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CameraState.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_WhiteFadeOut.h" />
+    <ClInclude Include="..\Header\Shot_WhiteFadeIn.h" />
+    <ClInclude Include="..\Header\Shot_Start_StageStartTake.h" />
+    <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
+    <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3155,7 +3184,7 @@
     </ClCompile>
     <ClCompile Include="StuffItemC.cpp">
       <Filter>03.Component\03.Item\03.StuffItem</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\SpiderImpact.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
     </ClCompile>
@@ -3169,6 +3198,20 @@
     <ClCompile Include="..\Code\Elevator_R_Door.cpp">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\MovieDirector.cpp">
+      <Filter>10.ControlTower\MovieDirector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Take.cpp">
+      <Filter>10.ControlTower\MovieDirector\Take</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CameraState.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp" />
+    <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp" />
+    <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp" />
+    <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
+    <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

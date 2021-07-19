@@ -9,6 +9,7 @@ public:
 	enum class EOneStagePhase
 	{
 		PlayerSummon		,
+		Conversation		,
 		BeforeFirstFight1	,
 		FirstFight1Begin	,
 		FirstFight1End	,
@@ -34,9 +35,15 @@ public:
 public:
 					void		Update				(void) override;
 
+private:
+	void PlayerSummonPhase();
+	void EnterConversationPhase();
+
 public:
 					void					OpenStageResult		(void);
 					_bool					m_isSoundChange = false;
+
+					SP(COneConversationC)		m_spConversation = nullptr;
 };
 
 #endif
