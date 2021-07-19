@@ -119,6 +119,9 @@
 #include "Ganesha_Impact_Eff.h"
 #include "Ganesha_SmokeEff.h"
 #include "Ganesha_UpperEff.h"
+#include "Ganesha_Cinema_Circle.h"
+#include "Ganesha_Cinema_Dome.h"
+#include "Ganesha_Cinema_Lightning.h"
 
 //Bronya
 #include "Bronya_Cannon_Charge.h"
@@ -452,6 +455,9 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
 
 	SP(CSoftEffect) spKiana_WSkill_Shoot(CKiana_WSkill_Shoot::Create(true, this));
+	spKiana_WSkill_Shoot->GetComponent<Engine::CTextureC>()->AddTexture(L"Shoot_Fistol_02");
+	spKiana_WSkill_Shoot->GetComponent<Engine::CTextureC>()->AddTexture(L"Shoot_Fistol_02");
+	spKiana_WSkill_Shoot->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spKiana_WSkill_Shoot);
 
 	SP(CMeshEffect_Client) spKiana_WSkill_Circle(CKiana_WSkill_Circle::Create(true, this));
@@ -489,6 +495,12 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeAtt(CTheresaCharge_Att::Create(true, this));
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CMeshC>()->SetMeshData(L"Charge_Att");
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CTextureC>()->AddTexture(L"Charge_Att_Fire");
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeAtt);
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
@@ -761,6 +773,11 @@ void CStaticScene::InitEffectPrototypes(void)
 	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spGaneshaImpact);
 
+	SP(CMeshEffect_Client) spGanesha_Cinema_Circle(CGanesha_Cinema_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGanesha_Cinema_Circle);
+
+	SP(CMeshEffect_Client) spGanesha_Cinema_Dome(CGanesha_Cinema_Dome::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGanesha_Cinema_Dome);
 
 	// 텍스처 추가해야함
 	/*SP(CSoftEffect) spGaneshaUpper(CGanesha_UpperEff::Create(true, this));

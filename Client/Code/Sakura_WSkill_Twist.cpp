@@ -40,7 +40,7 @@ SP(Engine::CObject) CSakura_WSkill_Twist::MakeClone()
 void CSakura_WSkill_Twist::Awake()
 {
 	__super::Awake();
-	m_spTransform->SetSize(0.02f, 0.02f, 0.02f);
+	m_spTransform->SetSize(0.03f, 0.03f, 0.03f);
 }
 
 void CSakura_WSkill_Twist::Start()

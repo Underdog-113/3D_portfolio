@@ -29,8 +29,6 @@ SP(Engine::CObject) CKiana_WSkill_Shoot::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSizeX(3);
-	spClone->m_spTransform->SetSizeY(2);
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
@@ -139,6 +137,7 @@ void CKiana_WSkill_Shoot::UpdateFrame(_float _frmSpeed)
 			if (m_TilingY >= m_maxYIndex)
 			{
 				m_TilingY = 0;
+				this->SetDeleteThis(true);
 			}
 			else
 			{

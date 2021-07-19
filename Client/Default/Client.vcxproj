@@ -251,6 +251,9 @@
     <ClInclude Include="..\Header\Elevator_L_Door.h" />
     <ClInclude Include="..\Header\Elevator_R_Door.h" />
     <ClInclude Include="..\Header\Ganesha_Charge_Eff.h" />
+    <ClInclude Include="..\Header\Ganesha_Cinema_Circle.h" />
+    <ClInclude Include="..\Header\Ganesha_Cinema_Dome.h" />
+    <ClInclude Include="..\Header\Ganesha_Cinema_Lightning.h" />
     <ClInclude Include="..\Header\Ganesha_Dome.h" />
     <ClInclude Include="..\Header\Ganesha_Dome_Impact.h" />
     <ClInclude Include="..\Header\Ganesha_Impact_Eff.h" />
@@ -613,6 +616,9 @@
     <ClCompile Include="..\Code\Elevator_L_Door.cpp" />
     <ClCompile Include="..\Code\Elevator_R_Door.cpp" />
     <ClCompile Include="..\Code\Ganesha_Charge_Eff.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Cinema_Circle.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Cinema_Dome.cpp" />
+    <ClCompile Include="..\Code\Ganesha_Cinema_Lightning.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome.cpp" />
     <ClCompile Include="..\Code\Ganesha_Dome_Impact.cpp" />
     <ClCompile Include="..\Code\Ganesha_Impact_Eff.cpp" />

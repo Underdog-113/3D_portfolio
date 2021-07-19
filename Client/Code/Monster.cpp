@@ -142,9 +142,16 @@ void CMonster::ApplyHitInfo(HitInfo info)
 	// 사쿠라 표식
 	if (info.GetCrowdControlType() == HitInfo::CrowdControl::CC_Sakura)
 	{
-		_uint sakuraCounter = m_pStat->GetSakuraCounter();
-		if (sakuraCounter < 3)
-			m_pStat->SetSakuraCounter(sakuraCounter + 1);
+		if (m_pStat->GetSakuraCounter() < 3)
+		{
+			m_pStat->SetSakuraCounter(m_pStat->GetSakuraCounter() + 1);
+
+			if (m_pStat->GetSakuraCounter() == 3)
+			{
+				AttachSakuraMark();
+			}
+		}
+
 	}
 
 	// Break Point 보호가 꺼져있다면
@@ -158,6 +165,18 @@ void CMonster::ApplyHitInfo(HitInfo info)
 			m_pStat->SetOnSuperArmor(false);
 		}
 		m_pStat->SetCurBreakGauge(breakGauge);
+	}
+}
+
+void CMonster::AttachSakuraMark()
+{
+	if (!m_pStat->GetSakuraMark())
+	{
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetParent(m_spTransform);
+		spObj->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset());
+		m_pStat->SetSakuraMark(spObj);
 	}
 }
 

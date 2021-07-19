@@ -68,6 +68,7 @@ public:
 	void OffHitbox();
 
 	Engine::CCollider* GetHitbox();
+	Engine::CRayCollider* GetFloorRay();
 
 public:
 	virtual void UseSkill(void) PURE;
@@ -108,6 +109,8 @@ protected:
 
 protected:
 	CStageControlTower*			m_pCT = nullptr;
+	
+	GETTOR_SETTOR	(_float,						m_yDefaultOffset,	0.f,		DefaultOffset)
 };
 
 #endif

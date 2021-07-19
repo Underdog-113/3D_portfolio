@@ -77,9 +77,9 @@ private: /* Special Actions */
 	bool CheckAction_WeaponSkill(float coolTime = 0.f);
 	
 private: /* sound */
-	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
 	void PlaySound_Voice(const std::wstring& soundName);
 	void PlaySound_Effect(const std::wstring& soundName);
+	void PlaySound_SelectChannel(const std::wstring& soundName, _uint channel);
 
 	void PlaySound_Attack_RandomVoice();
 	void PlaySound_Attack_RandomRun();

@@ -10,6 +10,7 @@
 #include "Scout_Att_Range.h"
 #include "Sakura_WSkill_Twist.h"
 #include "Sakura_DashShade.h"
+#include "..\..\Engine\Header\SoundManager.h"
 CYongScene::CYongScene()
 {
 }
@@ -48,6 +49,7 @@ void CYongScene::Start(void)
 {
 	__super::Start();
 	{
+		Engine::CSoundManager::GetInstance()->StopAll();
 		// Kiana Ult
 		/*SP(Engine::CObject) spMeshEffect
 			= m_pObjectFactory->AddClone(L"Kiana_Ult_Eff", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
@@ -134,8 +136,9 @@ void CYongScene::Update(void)
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
 		
-		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion_Base", true, (_uint)Engine::ELayerID::Effect);
+		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Cinema_Dome", true, (_uint)Engine::ELayerID::Effect);
 
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Cinema_Circle", true, (_uint)Engine::ELayerID::Effect);
 		// Bronya Smoke
 		// 일정시간 마다 호출
 		//SP(Engine::CObject) spObj;

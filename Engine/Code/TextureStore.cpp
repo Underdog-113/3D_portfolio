@@ -82,8 +82,7 @@ _TexData* CTextureStore::GetTextureData(std::wstring textureKey)
 	if (iter_find_cur != m_mCurSceneTextureData.end())
 		return iter_find_cur->second;
 
-	MSG_BOX(__FILE__, (L"There is no textureKey : [" + textureKey + L"] in GetTextureData").c_str());
-	ABORT;
+	return nullptr;
 }
 
 void CTextureStore::InitTextureForScene(std::wstring curScene, _bool isStatic)

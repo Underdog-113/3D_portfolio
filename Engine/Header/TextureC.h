@@ -36,6 +36,8 @@ public:
 private:
 	typedef std::vector<std::vector<_TexData*>> _TEXDATAS;
 	GETTOR_SETTOR	(_TEXDATAS,		m_vTexData,			{},						TexData)
+	GETTOR_SETTOR	(_TEXDATAS,		m_vNormalData,		{},						NormalData)
+	GETTOR_SETTOR	(_TEXDATAS,		m_vLightData,		{},						LightData)
 	GETTOR_SETTOR	(_float4,		m_color,			_float4(1, 1, 1, 1),	Color)
 	GETTOR_SETTOR	(_int,			m_numOfTex,			0,						NumOfTex)	
 	
