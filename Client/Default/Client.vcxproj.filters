@@ -1036,6 +1036,9 @@
     <Filter Include="03.Component\03.Item">
       <UniqueIdentifier>{a0ce9950-dca7-403e-ba38-3cada8e8beda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema">
+      <UniqueIdentifier>{bb2e77fb-a5d0-4c69-a946-99c6bef98dce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2124,12 +2127,23 @@
     <ClInclude Include="..\Header\SpiderExplosion_Base.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\HpItemC.h" />
     <ClInclude Include="..\Header\Elevator_L_Door.h">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Elevator_R_Door.h">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\HpItemC.h">
+      <Filter>03.Component\03.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Cinema_Circle.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Cinema_Dome.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Ganesha_Cinema_Lightning.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3129,12 +3143,23 @@
     <ClCompile Include="..\Code\SpiderExplosion_Base.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HpItemC.cpp" />
     <ClCompile Include="..\Code\Elevator_L_Door.cpp">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Elevator_R_Door.cpp">
       <Filter>02.Objects\01.ForUnit\04.Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HpItemC.cpp">
+      <Filter>03.Component\03.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Cinema_Circle.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Cinema_Dome.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ganesha_Cinema_Lightning.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
