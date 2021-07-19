@@ -95,6 +95,7 @@
 #define Sound_Evade0				L"S_Evade_0.wav"
 #define Sound_Evade1				L"S_Evade_1.wav"
 #define Sound_Evade2				L"S_Evade_2.wav"
+#define Sound_HIT_Effect			L"PlayerHit.wav"
 #define Sound_HIT_Voice0			L"S_Hit_0.wav"
 #define Sound_HIT_Voice1			L"S_Hit_1.wav"
 #define Sound_HIT_Voice2			L"S_Hit_2.wav"

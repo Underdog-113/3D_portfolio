@@ -74,6 +74,7 @@ void CGanesha_LaserEff::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", -6.f * m_fTime);
 	pEffect->SetBool("gPlayingAnim", true);
+	pEffect->CommitChanges();
 }
 
 void CGanesha_LaserEff::Render(LPD3DXEFFECT pEffect)

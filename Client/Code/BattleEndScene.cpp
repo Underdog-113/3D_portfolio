@@ -90,6 +90,9 @@ void CBattleEndScene::OnDestroy(void)
 {
 	__super::OnDestroy();
 	CBattleEndManager::GetInstance()->DestroyInstance();
+
+	CStageControlTower::GetInstance()->OnDestroy();
+	CStageControlTower::GetInstance()->DestroyInstance();
 }
 
 void CBattleEndScene::OnEnable(void)

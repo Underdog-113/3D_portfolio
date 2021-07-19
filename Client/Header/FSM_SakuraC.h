@@ -71,10 +71,10 @@ private: /* Special Actions */
 
 
 private: /* sound */
-	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
 	void PlaySound_Voice(const std::wstring& soundName);
 	void PlaySound_Effect(const std::wstring& soundName);
 	void PlaySound_EffectCh2(const std::wstring& soundName);
+	void PlaySound_SelectChannel(const std::wstring& soundName, _uint channel);
 
 	void PlaySound_Voice_RandomAttack();
 	void PlaySound_Voice_RandomHit();

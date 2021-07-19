@@ -58,28 +58,6 @@ void CMainRoomScene::Start(void)
 	Engine::CSoundManager::GetInstance()->PlayBGM(L"Lobby.mp3");
 	m_sceneID = (_int)ESceneID::MainRoom;
 	
-	if (!g_bFirstGameStart)
-	{
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -8.88f));
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
-
-		SP(Engine::CObject) spobj = ADD_CLONE(L"ElevatorBase", true, (_int)Engine::ELayerID::Decoration);
-		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-5.5f);
-		spobj->GetComponent<Engine::CTransformC>()->AddPositionY(-1.6f);
-
-		spobj = ADD_CLONE(L"ElevatorDoor", true, (_int)Engine::ELayerID::Decoration);
-		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-5.2f);
-
-		g_bFirstGameStart = true;
-	}
-	else
-	{
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -4.76f));
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
-	}
-
 	// 로드
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
@@ -91,6 +69,35 @@ void CMainRoomScene::Start(void)
 	Load->MapLoad(this);
 
 	delete(Load);
+
+	if (!g_bFirstGameStart)
+	{
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -5.88f));
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
+
+		SP(Engine::CObject) spobj = ADD_CLONE(L"ElevatorBase", true, (_int)Engine::ELayerID::Decoration);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-2.5f);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionY(-1.6f);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionX(-0.4f);
+
+		spobj = ADD_CLONE(L"ElevatorDoor", true, (_int)Engine::ELayerID::Decoration);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-2.2f);
+		spobj->GetComponent<Engine::CTransformC>()->AddPositionX(-0.4f);
+
+		static_cast<Engine::CCanvas*>(this->FindObjectByName(L"MainCanvas").get())->AddObjectFind();
+		static_cast<Engine::CCanvas*>(this->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(false);
+		
+		g_bFirstGameStart = true;
+	}
+	else
+	{
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -4.6f));
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
+	}
+
+
 
 	// 경험치 스테미너 골드 다이아 이름 레벨
 	CMainRoomManager::GetInstance()->Start(this);
@@ -139,9 +146,6 @@ void CMainRoomScene::Start(void)
 		spObj->GetTransform()->SetPosition(fX, fY, fZ);
 
 	}
-
-	// kiana pos
-	// -0.31, -0.64, -2.9
 }
 
 void CMainRoomScene::FixedUpdate(void)

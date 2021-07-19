@@ -124,6 +124,17 @@ void CEffectMaker_Kiana::CreateEffect_Attack4_Branch()
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
 }
 
+void CEffectMaker_Kiana::CreateEffect_Attack_QTE()
+{
+	_float size = 0.4f;
+	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Kiana_Attack_QTE_0", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
+	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
+	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 0.5f);
+	effect->GetTransform()->SetSize(_float3(size, size, size));
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+}
+
 void CEffectMaker_Kiana::CreateEffect_Ultra()
 {
 	_float size = 5.f;

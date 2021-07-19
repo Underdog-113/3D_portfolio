@@ -57,6 +57,7 @@
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshAlphaTestShader.h" />
     <ClInclude Include="..\Header\MeshData.h" />
+    <ClInclude Include="..\Header\MeshNormalShader.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
     <ClInclude Include="..\Header\ParticleSystem.h" />
     <ClInclude Include="..\Header\ParticleSystemC.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshAlphaTestShader.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
+    <ClCompile Include="..\Code\MeshNormalShader.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
     <ClCompile Include="..\Code\ParticleSystem.cpp" />
     <ClCompile Include="..\Code\ParticleSystemC.cpp" />

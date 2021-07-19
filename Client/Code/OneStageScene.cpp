@@ -72,6 +72,9 @@ void COneStageScene::Start(void)
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
 	Engine::CSoundManager::GetInstance()->PlayBGM(L"Stage2_Bgm.wav");
 	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+
+
+
 }
 
 void COneStageScene::FixedUpdate(void)
@@ -113,10 +116,6 @@ void COneStageScene::OnDestroy(void)
 	__super::OnDestroy();
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
-
-	m_pControlTower->OnDestroy();
-	m_pControlTower->DestroyInstance();
-	m_pControlTower = nullptr;
 
 	m_vDummy.clear();
 }

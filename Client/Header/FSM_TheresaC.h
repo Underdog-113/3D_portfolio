@@ -73,9 +73,9 @@ private: /* Special Actions */
 	bool CheckAction_ChargeMode();
 
 private: /* sound */
-	void PlayActionSound(const std::wstring& soundName, Engine::EChannelID channel);
 	void PlaySound_Voice(const std::wstring& soundName);
 	void PlaySound_Effect(const std::wstring& soundName);
+	void PlaySound_SelectChannel(const std::wstring& soundName, _uint channel);
 
 	void PlaySound_Charge_RandomVoice();
 	void PlaySound_Attack_RandomRun();
@@ -103,6 +103,9 @@ private:
 	bool m_ultraImpact = false;
 
 	bool m_checkAttack = false;
+	bool m_checkAttack2nd = false;
+	bool m_checkAttack3th = false;
+	bool m_checkAttack4th = false;
 	bool m_checkEffect = false;
 	bool m_checkEffectSecond = false;
 	bool m_checkShake = false;
@@ -135,6 +138,12 @@ public:
 	void Run_Enter(void);
 	void Run_Update(float deltaTime);
 	void Run_End(void);
+
+	//FastRun
+	void FastRun_Init(void);
+	void FastRun_Enter(void);
+	void FastRun_Update(float deltaTime);
+	void FastRun_End(void);
 
 	//RunBs
 	void RunBS_Init(void);
@@ -316,11 +325,6 @@ public:
 	void RunStopLeft_Update(float deltaTime);
 	void RunStopLeft_End(void);
 
-// 	//FASTRun
-// 	void FASTRun_Init(void);
-// 	void FASTRun_Enter(void);
-// 	void FASTRun_Update(float deltaTime);
-// 	void FASTRun_End(void);
 
 
 private:

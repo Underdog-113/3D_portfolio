@@ -33,6 +33,13 @@
 
 	typedef struct _ItemSave
 	{
+		_ItemSave() {}
+		_ItemSave(std::wstring name, _int value)
+		{
+			itemName = name;
+			count = value;
+		}
+
 		std::wstring itemName;
 		_int count;
 

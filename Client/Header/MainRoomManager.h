@@ -9,6 +9,6 @@ public:
 	void Update(void);
 	void OnDestroy(void);
 private:
-
+	_bool m_init;
 };
 

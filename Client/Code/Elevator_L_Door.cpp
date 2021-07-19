@@ -56,7 +56,7 @@ void CElevator_L_Door::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetPosition(_float3(-0.2f, 0.48f, -4.88f));
+	m_spTransform->SetPosition(_float3(-0.7f, 0.48f, -1.88f));
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_bDoorCheck = false;
 

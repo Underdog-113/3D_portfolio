@@ -4,6 +4,7 @@
 #include "Engine.h"
 
 BEGIN(Engine)
+class CRenderTarget;
 class ENGINE_DLL CGraphicsManager final : public CEngine
 {
 	DECLARE_SINGLETON(CGraphicsManager)
@@ -33,11 +34,14 @@ public:
 
 private:	
 			void					InitDeferredBuffer	(void);
+			void					InitBlurredBuffer	(void);
 
 			void					RenderBase			(void);
 
 			void					RenderNonAlpha		(void);
 			void					RenderBlur			(void);
+			void					RenderBlurToRT		(CRenderTarget* pInputRT, CRenderTarget* pMiddleRT, CRenderTarget* pOutRT, 
+														 _float rtSizeX, _float rtSiztY);
 			void					RenderEmissive		(void);
 			void					RenderLights		(void);
 			void					RenderDeferBlend	(void);
@@ -60,6 +64,9 @@ private:
 
 	GETTOR_REF		(_VERTEX_BUFFER,		m_pVertexBuffer,		nullptr,		VertexBuffer)
 	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,			nullptr,		IndexBuffer)
+
+	GETTOR_REF		(_VERTEX_BUFFER,		m_pBlurVertexBuffer,	nullptr,		BlurVertexBuffer)
+	GETTOR_REF		(_INDEX_BUFFER,			m_pBlurIndexBuffer,		nullptr,		BlurIndexBuffer)
 
 	GETTOR_SETTOR	(_bool,					m_rtDebugOn,			false,			RtDebugOn)
 };
