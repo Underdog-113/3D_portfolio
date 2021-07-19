@@ -60,7 +60,7 @@ void CMB_Bronya::Awake(void)
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
 }
 
 void CMB_Bronya::Start(void)

@@ -39,6 +39,7 @@ SP(Engine::CObject) CBronya_Ult_Range::MakeClone()
 void CBronya_Ult_Range::Awake()
 {
 	__super::Awake();
+	m_spTransform->SetSize(_float3(0.2f, 0.2f, 0.2f));
 
 }
 
@@ -52,6 +53,7 @@ void CBronya_Ult_Range::Start()
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CMeshC>()->SetMeshData(L"AttackRange_Circle");
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackHint_Circle_02");
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.f, 0.f, 0.f));

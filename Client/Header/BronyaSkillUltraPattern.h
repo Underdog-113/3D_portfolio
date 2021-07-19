@@ -62,6 +62,9 @@ private:
 	std::wstring m_curState;
 
 private:
+	_float3 m_centerPos = { 186.04f, -3.69f, -8.94f };
+
+
 	_float3 m_lerpStartPos = ZERO_VECTOR;
 	_float3 m_lerpEndPos = ZERO_VECTOR;
 	_float m_lerpMaxTimer = 0.7f;
