@@ -7,12 +7,17 @@ public:
 	CTake();
 	~CTake();
 
+	void StartTake();
+	void ActCurrentShot();
+	void EndTake();
+
 public:
 	void AddShot(CShot* pShot);
 	void ChangeNextShot();
 
 protected:
-	GETTOR_SETTOR(std::vector<CShot*>*, m_pShotList, nullptr, MovieDirector)
+	GETTOR(std::vector<CShot*>, m_vShotList,{}, ShotList)
+	CShot* m_pCurShot = nullptr;
 
 protected:
 

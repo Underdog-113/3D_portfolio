@@ -653,7 +653,7 @@ void CFSM_SakuraC::Appear_Enter(void)
 
 void CFSM_SakuraC::Appear_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
+	if (CheckAction_StandBy_Timeout(0.9f))
 		return;
 }
 

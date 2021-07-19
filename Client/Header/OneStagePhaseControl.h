@@ -15,15 +15,11 @@ public:
 		FirstFight1End	,
 		FirstFight2Begin	,
 		FirstFight2End		,
-		//BeforeSecondFight	,
-		//SecondFightBegin	,
-		//SecondFightEnd	,
 		BeforeMidBoss		,
 		MidBossBegin		,
-		MidBossEnd			,
-		//BeforeBoss,
-		//BossBegin,
-		//BossEnd,
+		MidBossEnd,
+		ReadyVictoryCutScene,
+		VictoryCutScene,
 		StageResult			,
 		StageResult_Idle	,
 		NumOfPhse			
@@ -38,6 +34,8 @@ public:
 private:
 	void PlayerSummonPhase();
 	void EnterConversationPhase();
+
+	
 
 public:
 					void					OpenStageResult		(void);

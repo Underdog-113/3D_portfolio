@@ -105,7 +105,9 @@ public:		/* Camera & System */
 	void OffSlowExceptPlayer();
 
 	_float GetPlayerDeltaTime();
+
 public:		/* Stage Control Mode */
+	void SetDirectorMode(bool value);
 
 public:
 	void AddItemList(ItemSave item);

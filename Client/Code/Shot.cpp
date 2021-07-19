@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Header\CameraState.h"
+#include "..\Header\Shot.h"
 
 
 CShot::CShot()

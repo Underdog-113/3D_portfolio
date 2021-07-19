@@ -1,5 +1,6 @@
 #pragma once
 
+class CTake;
 class CMovieDirector
 {
 public:
@@ -10,6 +11,10 @@ public:
 	void Start();
 	void UpdateDirector();
 
+public:
+	void StartTake(std::wstring takeName);
+
+	_bool EndDirecting();
 
 
 
@@ -20,6 +25,10 @@ private:
 	GETTOR			(SP(Engine::CImageObject),	m_spWhiteFadeImage,		nullptr,	WhiteFadeImage)
 	GETTOR			(Engine::CFadeInOutC*,				m_pWhiteFade,			nullptr,	WhiteFade)
 	
+	std::map<std::wstring, CTake*> m_takeMap;
+
+	CTake* m_pCurTake = nullptr;
+
 	bool m_isStart = false;
 
 };

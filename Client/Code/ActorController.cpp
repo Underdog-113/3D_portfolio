@@ -23,6 +23,9 @@ CActorController::~CActorController()
 
 void CActorController::UpdateController()
 {
+	if (m_directorMode)
+		return;
+
 	if (m_inputLock_ByAni)
 	{
 		ReserveMoveOrder();
@@ -82,6 +85,11 @@ void CActorController::SetInputLock_ByAni(bool lock)
 			m_prevMoveFlag = 0;
 		}
 	}
+}
+
+void CActorController::SetDirectorMode(_bool value)
+{
+	m_directorMode = value;
 }
 
 bool CActorController::CheckMoveOrder()

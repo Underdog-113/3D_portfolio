@@ -50,6 +50,7 @@ void CStageCameraMan::Start()
 
 void CStageCameraMan::UpdateCameraMan()
 {
+
 	if(!m_isStart)
 		Start();
 
@@ -59,13 +60,13 @@ void CStageCameraMan::UpdateCameraMan()
 	if (m_isSwitching)
 		return;
 
-	auto camTr = m_spCamera->GetTransform();
-
-	if (m_pCameraShake->IsShaking()) 
+	if (m_directorControl)
 	{
-		camTr->AddPosition(-m_pCameraShake->GetLocationOscilation());
-		camTr->SetPosition(m_noShakeRot);
+		DirectorControlMode();
+		return;
 	}
+
+	ReturnBeforShaking();
 
 	PivotChasing();
 	
@@ -77,35 +78,42 @@ void CStageCameraMan::UpdateCameraMan()
 			AutoControlMode();
 	}
 
-
-	if (m_pCameraShake->IsShaking())
-	{
-		m_pCameraShake->PlayShake();
-
-		m_noShakePos = m_spCamera->GetShakePosOffset();
-		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
-		
-		m_spCamera->SetShakePosOffset(m_pCameraShake->GetLocationOscilation());
-
-		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
-		camTr->AddRotation(rotOscilation);
-
-		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
-		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
-		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
-	}
-	else
-	{
-		m_spCamera->SetShakePosOffset(ZERO_VECTOR);
-	}
+	ApplyShaking();
 }
+
+void CStageCameraMan::DirectorControlMode()
+{
+	if (m_isPivotChasing)
+		PivotChasing_Director();
+
+	if (Engine::IMKEY_DOWN(KEY_TAB))
+		m_isPivotChasing = !m_isPivotChasing;
+}
+
+void CStageCameraMan::PivotChasing_Director()
+{
+	NonTargetChasing();
+
+	if (m_isVertCorrecting)
+		AppendPosYCorrecting();
+
+	_float3 lerpPosition = GetLerpPosition(
+		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_PLAYER_DT * m_chaseSpeed);
+
+	if (D3DXVec3Length(&(m_dstPivotPos - lerpPosition)) < 0.01f)
+	{
+		lerpPosition = m_dstPivotPos;
+	}
+	m_spPivot->GetTransform()->SetPosition(lerpPosition);
+}
+
 
 void CStageCameraMan::PivotChasing()
 {
 
 	if (m_isTargeting)
 	{
-		AppendTargetCorrecting();
+		OnTargetChasing();
 	}
 	else
 	{
@@ -500,7 +508,7 @@ void CStageCameraMan::AppendAttackDirectionCorrecting()
 	m_rotateYDst += m_attackCorrectingAngle * GET_PLAYER_DT * 2.f;
 }
 
-void CStageCameraMan::AppendTargetCorrecting()
+void CStageCameraMan::OnTargetChasing()
 {
 	auto pCT = CStageControlTower::GetInstance();
 	
@@ -715,6 +723,43 @@ void CStageCameraMan::AutoControlMode()
 
 	ChangeShot();
 	
+}
+
+void CStageCameraMan::ReturnBeforShaking()
+{
+	auto camTr = m_spCamera->GetTransform();
+
+	if (m_pCameraShake->IsShaking())
+	{
+		camTr->AddPosition(-m_pCameraShake->GetLocationOscilation());
+		camTr->SetPosition(m_noShakeRot);
+	}
+}
+
+void CStageCameraMan::ApplyShaking()
+{
+	auto camTr = m_spCamera->GetTransform();
+
+	if (m_pCameraShake->IsShaking())
+	{
+		m_pCameraShake->PlayShake();
+
+		m_noShakePos = m_spCamera->GetShakePosOffset();
+		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
+
+		m_spCamera->SetShakePosOffset(m_pCameraShake->GetLocationOscilation());
+
+		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
+		camTr->AddRotation(rotOscilation);
+
+		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
+		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
+		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
+	}
+	else
+	{
+		m_spCamera->SetShakePosOffset(ZERO_VECTOR);
+	}
 }
 
 void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)

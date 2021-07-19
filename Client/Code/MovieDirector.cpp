@@ -3,6 +3,7 @@
 
 #include "WndApp.h"
 #include "FadeInOutC.h"
+#include "Take.h"
 
 CMovieDirector::CMovieDirector()
 {
@@ -37,6 +38,10 @@ void CMovieDirector::UpdateDirector()
 	if (!m_isStart)
 		Start();
 
+	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
+		CStageControlTower::GetInstance()->SetDirectorMode(true);
+	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
+		CStageControlTower::GetInstance()->SetDirectorMode(false);
 
 	if (Engine::IMKEY_PRESS(KEY_CONTROL) && Engine::IMKEY_PRESS(KEY_LEFT))
 	{
@@ -46,6 +51,13 @@ void CMovieDirector::UpdateDirector()
 	{
 		m_pWhiteFade->AddAlpha(GET_DT);
 	}
+}
+
+void CMovieDirector::StartTake(std::wstring takeName)
+{
+	auto pTake = m_takeMap[takeName];
+
+	pTake->StartTake();
 }
 
 _float3 CMovieDirector::GetBezierPoint(_float3 startPoint, _float3 midPoint, _float3 endPoint, float detail)

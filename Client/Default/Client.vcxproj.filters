@@ -2175,9 +2175,6 @@
     <ClInclude Include="..\Header\Take.h">
       <Filter>10.ControlTower\MovieDirector\Take</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CameraState.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Shot_End_StageStartTake.h">
       <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
     </ClInclude>
@@ -2204,6 +2201,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Ganesha_Cinema_Lightning.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3227,9 +3227,6 @@
     <ClCompile Include="..\Code\Take.cpp">
       <Filter>10.ControlTower\MovieDirector\Take</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CameraState.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
     </ClCompile>
@@ -3256,6 +3253,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Ganesha_Cinema_Lightning.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

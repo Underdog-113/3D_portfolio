@@ -27,14 +27,23 @@ public:
 	void Start();
 
 	void UpdateCameraMan();
+
+
+public: /* Director Mode */
+	
+	void DirectorControlMode();
+	void PivotChasing_Director();
+
+
+public: /* Pivot */
 	void PivotChasing();
+
+	void OnTargetChasing();
 	void NonTargetChasing();
 
 	void SetIsTargeting(bool value);
-
-
 	void ResetChaseSpeed();
-
+	
 
 public:
 	void SetNearShot();
@@ -54,7 +63,6 @@ public:
 
 private:
 	void AppendAttackDirectionCorrecting();
-	void AppendTargetCorrecting();
 	void AppendHorizontalCorrecting();
 	
 	bool MouseControlMode();
@@ -62,6 +70,9 @@ private:
 	void AutoControlMode();
 
 public:
+	void ReturnBeforShaking();
+	void ApplyShaking();
+
 	void ShakeCamera_Low(_float3 eventPos);
 
 	void ShakeCamera_Kiana_ForwardAttack();
@@ -158,4 +169,11 @@ private:
 	bool m_noAction = true;
 
 	_uint m_prevMoveKey = 0;
+
+private:
+
+	GETTOR_SETTOR(_bool, m_directorControl, false, DirectorControl)
+	bool m_directorControl = false;
+	bool m_isPivotChasing = false;
+
 };

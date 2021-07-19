@@ -1013,6 +1013,13 @@ _float CStageControlTower::GetPlayerDeltaTime()
 	return m_pTimeSeeker->GetPlayerDeltaTime();
 }
 
+void CStageControlTower::SetDirectorMode(bool value)
+{
+	m_pActorController->SetDirectorMode(value);
+	m_pCameraMan->SetDirectorControl(value);
+}
+
+
 void CStageControlTower::AddItemList(ItemSave item)
 {
 	for (auto& obj : m_itemList)
