@@ -79,7 +79,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		{
 			//SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true);
 			SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
-			effect->GetTransform()->SetPosition(_float3(91.9447f, 0.5f, -8.55992f));
+			effect->GetTransform()->SetPosition(_float3(186.348f, -4.1f, -0.8233f));
 			m_vRingEffect.emplace_back(effect);
 		}
 	}
@@ -96,6 +96,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		{
 			m_curIndex = index;
 		}
+		std::cout << "Index : " << m_curIndex << std::endl;
 	}
 	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_C))
 	{
@@ -109,6 +110,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		{
 			m_curIndex = index;
 		}
+		std::cout << "Index : " << m_curIndex << std::endl;
 	}
 	
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_W))
@@ -138,11 +140,14 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	{
-		_float3 pos = m_vRingEffect[m_curIndex]->GetTransform()->GetPosition();
-		std::cout << "x : " << pos.x << std::endl;
-		std::cout << "y : " << pos.y << std::endl;
-		std::cout << "z : " << pos.z << std::endl;
-		std::cout << "======================" << std::endl;
+		if (false == m_vRingEffect.empty())
+		{
+			_float3 pos = m_vRingEffect[m_curIndex]->GetTransform()->GetPosition();
+			std::cout << "x : " << pos.x << std::endl;
+			std::cout << "y : " << pos.y << std::endl;
+			std::cout << "z : " << pos.z << std::endl;
+			std::cout << "======================" << std::endl;
+		}
 	}
 
 	// born 실행 (1번만)
