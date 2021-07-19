@@ -757,7 +757,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spGaneshaDomeImpact);
 
 	SP(CSoftEffect) spGaneshaSmoke(CGanesha_SmokeEff::Create(true, this));
-	spGaneshaSmoke->GetComponent<Engine::CGraphicsC>();
 	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
 	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
 	spGaneshaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
@@ -778,6 +777,10 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spGanesha_Cinema_Dome(CGanesha_Cinema_Dome::Create(true, this));
 	GetObjectFactory()->AddPrototype(spGanesha_Cinema_Dome);
+
+	SP(CSoftEffect) spGaneshaCinemaLightning(CGanesha_Cinema_Lightning::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGaneshaCinemaLightning);
+
 
 	// 텍스처 추가해야함
 	/*SP(CSoftEffect) spGaneshaUpper(CGanesha_UpperEff::Create(true, this));

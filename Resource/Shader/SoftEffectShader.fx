@@ -8,8 +8,9 @@ int TilingY;
 float gWidth;
 float gHeight;
 
+bool     g_zWriteEnable;
+
 texture		g_BaseTexture;
-// 샘플러 : 텍스처의 품질 및 출력 옵션을 결정하는 구조체
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
@@ -19,7 +20,6 @@ sampler BaseSampler = sampler_state
 };
 
 texture		g_ServeTexture;
-// 샘플러 : 텍스처의 품질 및 출력 옵션을 결정하는 구조체
 sampler ServeSampler = sampler_state
 {
 	texture = g_ServeTexture;
@@ -29,7 +29,6 @@ sampler ServeSampler = sampler_state
 };
 
 texture		g_DepthTexture;
-
 sampler DepthSampler =  sampler_state
 {
 	texture = g_DepthTexture;
@@ -83,22 +82,15 @@ struct PS_IN
 
 struct PS_OUT
 {
-	vector		vColor : COLOR0;	
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
 };
 
 // 픽셀 쉐이더
 
-PS_OUT		PS_MAIN(PS_IN In)
-{
-	PS_OUT		Out = (PS_OUT)0;
-
-	Out.vColor = tex2D(BaseSampler, In.vTexUV );		// 2차원 텍스처로부터 UV 값에 해당하는 픽셀의 색상을 추출하는 함수, 반환타입은 VECTOR 타입
-	//Out.vColor.a = 1.f;
-
-	return Out;
-}
-
-float4	PS_EFFECT(PS_IN In) : COLOR
+PS_OUT	PS_EFFECT(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 	
@@ -122,7 +114,12 @@ float4	PS_EFFECT(PS_IN In) : COLOR
 
 	blendColor = saturate(blendColor);
 	
-	return blendColor;
+	Out.vColor = blendColor;
+
+	if (Out.vColor.a != 0)
+		Out.vEmissive = blendColor;
+
+	return Out;
 }
 
 technique Default_Device
@@ -131,7 +128,7 @@ technique Default_Device
 	{
 		CullMode = None;
 		AlphaTestEnable = true;
-		zWriteEnable = false;
+		zWriteEnable = g_zWriteEnable;
 		AlphaBlendEnable = true;
 		SrcBlend = SrcAlpha;
 		DestBlend = InvsrcAlpha;

@@ -15,6 +15,5 @@ public:
 
 public:
 	void SetUpConstantTable(SP(Engine::CGraphicsC) spGC) override;
-
 };
 
