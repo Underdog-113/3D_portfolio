@@ -57,6 +57,10 @@ private:
 	GETTOR_SETTOR(_bool, m_onStun, false, OnStun);
 	GETTOR_SETTOR(_float, m_curCost, 0.f, CurCost);
 	GETTOR_SETTOR(_float, m_maxCost, 70.f, MaxCost);
+
+	// test
+	std::vector<SP(Engine::CObject)> m_vRingEffect;
+	_int m_curIndex = 0;
 };
 
 #endif

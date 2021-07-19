@@ -12,7 +12,13 @@ enum class EShaderID
 	SpawnEffectShader	= 6 + (_int)Engine::EShaderID::NumOfShaderID,
 	SoftEffectShader	= 7 + (_int)Engine::EShaderID::NumOfShaderID,
 	AttackRangeShader	= 8 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 9 + (_int)Engine::EShaderID::NumOfShaderID
+	AlphaMaskShader     = 9 + (_int)Engine::EShaderID::NumOfShaderID,
+	FireShader			= 10 + (_int)Engine::EShaderID::NumOfShaderID,
+	LaserShader  		= 11 + (_int)Engine::EShaderID::NumOfShaderID,
+	OutlineShader		= 12 + (_int)Engine::EShaderID::NumOfShaderID,
+	FaceShader			= 13 + (_int)Engine::EShaderID::NumOfShaderID,
+	KianaBodyShader		= 14 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 15 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class ESceneID

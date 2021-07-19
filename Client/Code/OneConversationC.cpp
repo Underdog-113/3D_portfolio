@@ -24,6 +24,7 @@ void COneConversationC::Awake()
 	__super::Awake();
 
 	m_componentID = (_int)m_s_componentID;
+
 }
 
 void COneConversationC::Start(SP(CComponent) spThis)
@@ -42,6 +43,9 @@ void COneConversationC::Start(SP(CComponent) spThis)
 	m_conversationText.emplace_back(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Text_2").get());
 
 	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(false);
+
+	static_cast<CButton*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Skip_0").get())->
+		AddFuncData<void(COneConversationC::*)(), COneConversationC*>(&COneConversationC::Skip, this);
 }
 
 void COneConversationC::FixedUpdate(SP(CComponent) spThis)
@@ -73,7 +77,6 @@ void COneConversationC::OnDisable()
 {
 	__super::OnDisable();
 }
-
 
 void COneConversationC::Conversation()
 {
@@ -200,4 +203,9 @@ void COneConversationC::End()
 	ConversationCanvas->AddObjectFind();
 	ConversationCanvas->SetIsEnabled(false);
 	GetOwner()->SetIsEnabled(false);
+}
+
+void COneConversationC::Skip()
+{
+	End();
 }

@@ -212,6 +212,7 @@
     <ClInclude Include="..\Header\MapToolDoc.h" />
     <ClInclude Include="..\Header\MapToolView.h" />
     <ClInclude Include="..\Header\ToolMenuView.h" />
+    <ClInclude Include="..\Header\WaterShader.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="..\Code\MapToolDoc.cpp" />
     <ClCompile Include="..\Code\MapToolView.cpp" />
     <ClCompile Include="..\Code\ToolMenuView.cpp" />
+    <ClCompile Include="..\Code\WaterShader.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

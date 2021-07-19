@@ -75,12 +75,79 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 		//m_pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(true);
 
+		if (14 > m_vRingEffect.size())
+		{
+			//SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true);
+			SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
+			effect->GetTransform()->SetPosition(_float3(186.348f, -4.1f, -0.8233f));
+			m_vRingEffect.emplace_back(effect);
+		}
+	}
 
+	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_X))
+	{
+		_int index = m_curIndex - 1;
+		
+		if (0 > index)
+		{
+			m_curIndex = 0;
+		}
+		else if (index < m_vRingEffect.size())
+		{
+			m_curIndex = index;
+		}
+		std::cout << "Index : " << m_curIndex << std::endl;
+	}
+	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_C))
+	{
+		_int index = m_curIndex + 1;
+
+		if (14 < index)
+		{
+			m_curIndex = 14;
+		}
+		else if (index < m_vRingEffect.size())
+		{
+			m_curIndex = index;
+		}
+		std::cout << "Index : " << m_curIndex << std::endl;
+	}
+	
+	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_W))
+	{
+		m_vRingEffect[m_curIndex]->GetTransform()->AddPositionZ(0.1f);
+	}
+	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_A))
+	{
+		m_vRingEffect[m_curIndex]->GetTransform()->AddPositionX(0.1f);
+	}
+	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_D))
+	{
+		m_vRingEffect[m_curIndex]->GetTransform()->AddPositionX(-0.1f);
+	}
+	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_S))
+	{
+		m_vRingEffect[m_curIndex]->GetTransform()->AddPositionZ(-0.1f);
+	}
+	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_Q))
+	{
+		m_vRingEffect[m_curIndex]->GetTransform()->AddPositionY(0.1f);
+	}
+	else if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_E))
+	{
+		m_vRingEffect[m_curIndex]->GetTransform()->AddPositionY(-0.1f);
 	}
 
 	if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	{
-
+		if (false == m_vRingEffect.empty())
+		{
+			_float3 pos = m_vRingEffect[m_curIndex]->GetTransform()->GetPosition();
+			std::cout << "x : " << pos.x << std::endl;
+			std::cout << "y : " << pos.y << std::endl;
+			std::cout << "z : " << pos.z << std::endl;
+			std::cout << "======================" << std::endl;
+		}
 	}
 
 	// born 실행 (1번만)

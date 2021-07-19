@@ -43,6 +43,9 @@ void CTwoConversationC::Start(SP(CComponent) spThis)
 	m_conversationText.emplace_back(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Text_2").get());
 
 	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(false);
+
+	static_cast<CButton*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Skip_0").get())->
+		AddFuncData<void(CTwoConversationC::*)(), CTwoConversationC*>(&CTwoConversationC::Skip, this);
 }
 
 void CTwoConversationC::FixedUpdate(SP(CComponent) spThis)
@@ -202,4 +205,9 @@ void CTwoConversationC::End()
 	ConversationCanvas->AddObjectFind();
 	ConversationCanvas->SetIsEnabled(false);
 	GetOwner()->SetIsEnabled(false);
+}
+
+void CTwoConversationC::Skip()
+{
+	End();
 }
