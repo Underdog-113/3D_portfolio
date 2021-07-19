@@ -166,4 +166,8 @@ void CSupplyOut::RandoBoxList()
 1은 재료
 
 count만큼 소환
+
+1. 박스오픈연출씨
+2. 2개씩나오는 연출
+3. 나온 아이템을 전부다 보여준다.
 */
