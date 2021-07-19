@@ -37,7 +37,8 @@ private:
 	std::list<ItemInfo> m_itemList;
 
 	CScrollViewObject* m_scrollView;
-	_int m_outCount;
 	_float m_timer;
+	_int m_outCount;
+	_int m_itemType;
 };
 

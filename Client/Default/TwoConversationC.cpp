@@ -46,6 +46,8 @@ void CTwoConversationC::Start(SP(CComponent) spThis)
 
 	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas").get());
 	ConversationCanvas->SetIsEnabled(true);
+	//static_cast<CButton*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Skip_0").get())->
+	//	AddFuncData<void(CTwoConversationC::*)(), CTwoConversationC*>(&CTwoConversationC::Skip, this);
 }
 
 void CTwoConversationC::FixedUpdate(SP(CComponent) spThis)
@@ -209,4 +211,9 @@ void CTwoConversationC::End()
 	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas").get());
 	ConversationCanvas->SetIsEnabled(false);
 	GetOwner()->SetIsEnabled(false);
+}
+
+void CTwoConversationC::Skip()
+{
+	End();
 }

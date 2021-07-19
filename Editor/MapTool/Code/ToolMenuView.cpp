@@ -309,35 +309,7 @@ void CToolMenuView::OnPosX(NMHDR *pNMHDR, LRESULT *pResult)
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
 	Engine::CObject* pCurObj = dynamic_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj();
-
-	CString cstrVal;
-
-	//if (m_selectedAABBCol)
-	//{
-	//	m_aabbCnt.GetLBText(m_aabbCnt.GetCurSel(), cstrVal);
-	//	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
-	//	_int idx = WstrToInt(wstr);
-
-	//	_float3 pos = static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
-
-	//	pos.x = GetEditControlData(&m_posX, pNMUpDown);
-
-	//	static_cast<Engine::CAabbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
-	//}
-	//else if (m_selectedObbCol)
-	//{
-	//	m_obbCnt.GetLBText(m_obbCnt.GetCurSel(), cstrVal);
-	//	std::wstring wstr = Engine::StrToWStr(CStrToStr(cstrVal));
-	//	_int idx = WstrToInt(wstr);
-
-	//	_float3 pos = static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->GetOffset();
-
-	//	pos.x = GetEditControlData(&m_posX, pNMUpDown);
-
-	//	static_cast<Engine::CObbCollider*>(pCurObj->GetComponent<Engine::CCollisionC>()->GetColliders()[idx].get())->SetOffsetOrigin(pos);
-	//}
-	//else
-		pCurObj->GetTransform()->SetPositionX(GetEditControlData(&m_posX, pNMUpDown));
+	pCurObj->GetTransform()->SetPositionX(GetEditControlData(&m_posX, pNMUpDown));
 
 	*pResult = 0;
 }
@@ -1082,10 +1054,20 @@ void CToolMenuView::OnBnClickedLoadBtn()
 			std::to_wstring(i) + L"_renderID", renderID);
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
 
-		if (renderID == 1)
+		if (L"Stage02_Alpha_WaterPlane" == meshKey)
+		{
+			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"waterNor");
+			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
+		}
+		else if (renderID == 1)
+		{
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+		}
 		else
+		{
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
+		}
 	}
 
 
@@ -1989,15 +1971,31 @@ void CToolMenuView::OnLbnSelchangeObjectList()
 		if (wstr == (*obj)->GetName())
 		{
 			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj())
-				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+			{
+				//static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
+				std::cout << "Change Cur Obj nullptr" << std::endl;
+			}
 
 			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(obj->get());
-			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
+			//static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
 			m_curObjNameChk.SetCheck(1);
 			m_curObjName.SetWindowTextW((*obj)->GetName().c_str());
 			std::cout << "Target Found in Object List" << std::endl;
+			
+			// change pos info
+			_float3 pos = (*obj)->GetTransform()->GetPosition();
+			SetPosition(pos);
 
-			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CCollisionC>())
+			// change rot info
+			_float3 rot = (*obj)->GetTransform()->GetRotation();
+			SetRotation(rot);
+
+			// change size info
+			_float3 size = (*obj)->GetTransform()->GetSize();
+			SetScale(size);
+
+			if (nullptr != (*obj)->GetComponent<Engine::CCollisionC>())
 			{
 				m_colType[0].EnableWindow(true);
 				m_colType[1].EnableWindow(true);
@@ -2051,7 +2049,11 @@ void CToolMenuView::OnLbnSelchangeObjectList()
 		if (wstr == (*obj)->GetName())
 		{
 			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj())
+			{
 				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(false);
+				static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(nullptr);
+				std::cout << "Change Cur Obj nullptr" << std::endl;
+			}
 
 			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->SetCurSelObj(obj->get());
 			static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CGraphicsC>()->SetColorReverse(true);
@@ -2059,7 +2061,19 @@ void CToolMenuView::OnLbnSelchangeObjectList()
 			m_curObjName.SetWindowTextW((*obj)->GetName().c_str());
 			std::cout << "Target Found in Object List" << std::endl;
 
-			if (nullptr != static_cast<CEditorScene*>(Engine::GET_CUR_SCENE)->GetCurSelObj()->GetComponent<Engine::CCollisionC>())
+			// change pos info
+			_float3 pos = (*obj)->GetTransform()->GetPosition();
+			SetPosition(pos);
+
+			// change rot info
+			_float3 rot = (*obj)->GetTransform()->GetRotation();
+			SetRotation(rot);
+
+			// change size info
+			_float3 size = (*obj)->GetTransform()->GetSize();
+			SetScale(size);
+
+			if (nullptr != (*obj)->GetComponent<Engine::CCollisionC>())
 			{
 				m_colType[0].EnableWindow(true);
 				m_colType[1].EnableWindow(true);

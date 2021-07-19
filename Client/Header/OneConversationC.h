@@ -25,6 +25,7 @@ private:
 	void Conversation();
 	void TextUpdate();
 	void End();
+	void Skip();
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 

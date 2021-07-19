@@ -119,6 +119,9 @@
 #include "Ganesha_Impact_Eff.h"
 #include "Ganesha_SmokeEff.h"
 #include "Ganesha_UpperEff.h"
+#include "Ganesha_Cinema_Circle.h"
+#include "Ganesha_Cinema_Dome.h"
+#include "Ganesha_Cinema_Lightning.h"
 
 //Bronya
 #include "Bronya_Cannon_Charge.h"
@@ -770,6 +773,11 @@ void CStaticScene::InitEffectPrototypes(void)
 	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spGaneshaImpact);
 
+	SP(CMeshEffect_Client) spGanesha_Cinema_Circle(CGanesha_Cinema_Circle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGanesha_Cinema_Circle);
+
+	SP(CMeshEffect_Client) spGanesha_Cinema_Dome(CGanesha_Cinema_Dome::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGanesha_Cinema_Dome);
 
 	// 텍스처 추가해야함
 	/*SP(CSoftEffect) spGaneshaUpper(CGanesha_UpperEff::Create(true, this));

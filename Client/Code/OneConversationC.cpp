@@ -24,6 +24,7 @@ void COneConversationC::Awake()
 	__super::Awake();
 
 	m_componentID = (_int)m_s_componentID;
+
 }
 
 void COneConversationC::Start(SP(CComponent) spThis)
@@ -45,6 +46,10 @@ void COneConversationC::Start(SP(CComponent) spThis)
 
 	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas").get());
 	ConversationCanvas->SetIsEnabled(true);
+
+//	static_cast<CButton*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Skip_0").get())->
+//		AddFuncData<void(COneConversationC::*)(), COneConversationC*>(&COneConversationC::Skip, this);
+
 }
 
 void COneConversationC::FixedUpdate(SP(CComponent) spThis)
@@ -209,4 +214,9 @@ void COneConversationC::End()
 	GetOwner()->SetIsEnabled(false);
 
 
+}
+
+void COneConversationC::Skip()
+{
+	End();
 }
