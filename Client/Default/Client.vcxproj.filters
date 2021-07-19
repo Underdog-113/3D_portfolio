@@ -2176,11 +2176,21 @@
     <ClInclude Include="..\Header\CameraState.h">
       <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Shot_WhiteFadeOut.h" />
-    <ClInclude Include="..\Header\Shot_WhiteFadeIn.h" />
-    <ClInclude Include="..\Header\Shot_Start_StageStartTake.h" />
-    <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
-    <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
+    <ClInclude Include="..\Header\Shot_End_StageStartTake.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_FixTargetBack.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_Start_StageStartTake.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_WhiteFadeIn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_WhiteFadeOut.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3207,11 +3217,21 @@
     <ClCompile Include="..\Code\CameraState.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp" />
-    <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp" />
-    <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp" />
-    <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
-    <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
+    <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_FixTargetBack.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
