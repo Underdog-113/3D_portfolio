@@ -32,12 +32,16 @@ struct VS_IN
 	vector		vPosition   : POSITION;	
 	vector		vNormal		: NORMAL;
 	float2		vTexUV		: TEXCOORD0;
+	vector		vTangent	: TANGENT;
+	vector		vBiNormal	: BINORMAL;
 };
 
 struct VS_OUT
 {
 	vector		vPosition	: POSITION;	
 	vector		vNormal		: NORMAL;
+	vector		vTangent	: TANGENT;
+	vector		vBiNormal	: BINORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
 };
@@ -54,7 +58,9 @@ VS_OUT VS_MAIN(VS_IN In)
 
 	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
 	Out.vNormal = normalize(mul(vector(In.vNormal.xyz, 0.f), g_matWorld));
-		
+	Out.vTangent = normalize(mul(vector(In.vTangent.xyz, 0.f), g_matWorld));
+	Out.vBiNormal = normalize(mul(vector(In.vBiNormal.xyz, 0.f), g_matWorld));
+
 	Out.vTexUV = In.vTexUV;
 
 	Out.vProjPos = Out.vPosition;
@@ -66,6 +72,8 @@ VS_OUT VS_MAIN(VS_IN In)
 struct PS_IN
 {
 	vector		vNormal		: NORMAL;
+	vector		vTangent	: TANGENT;
+	vector		vBiNormal	: BINORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
 };
@@ -100,7 +108,10 @@ PS_OUT		PS_MAIN(PS_IN In)
 	vector normal = In.vNormal;
 	if (g_normalMapExist)
 	{
-		normal = tex2D(NormalSampler, In.vTexUV);
+		float4 bumpMap = tex2D(NormalSampler, In.vTexUV);
+		bumpMap = (bumpMap * 2.f) - 1.f;
+
+		normal = normalize((bumpMap.x * In.vTangent) + (bumpMap.y * In.vBiNormal) + (bumpMap.z * In.vNormal));
 	}
 
 	Out.vNormal = vector(normal.xyz * 0.5f + 0.5f, 0.f);
