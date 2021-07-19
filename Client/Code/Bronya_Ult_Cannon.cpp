@@ -77,6 +77,8 @@ void CBronya_Ult_Cannon::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->SetBool("g_AlphaTestEnabled", false);
 	pEffect->CommitChanges();
 
 }
