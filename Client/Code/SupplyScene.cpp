@@ -47,7 +47,8 @@ void CSupplyScene::Awake(_int numOfLayers)
 void CSupplyScene::Start(void)
 {
 	__super::Start();
-
+	Engine::CSoundManager::GetInstance()->StopAll();
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"Shop.mp3");
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 	SP(Engine::CObject) spEmpty =

@@ -58,7 +58,7 @@ void CElevator_R_Door::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetPosition(_float3(0.1f, -0.51f, -5.f));
+	m_spTransform->SetPosition(_float3(-0.4f, -0.51f, -2.f));
 
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
@@ -87,10 +87,10 @@ void CElevator_R_Door::Update(void)
 		if (m_spTransform->GetPosition().y <= -4.f)
 		{
 			SP(Engine::CCamera) spCam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
-			if (spCam->GetTransform()->GetPosition().z < -4.8f)
+			if (spCam->GetTransform()->GetPosition().z < -4.6f)
 				spCam->GetTransform()->AddPositionZ(5.5f * GET_DT);
 
-			if (spCam->GetTransform()->GetPosition().z >= -4.8f)
+			if (spCam->GetTransform()->GetPosition().z >= -4.6f)
 			{
 				static_cast<Engine::CCanvas*>(GET_CUR_CLIENT_SCENE->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(true);
 				m_bDoorCheck = false;
