@@ -58,6 +58,18 @@ void CMainRoomScene::Start(void)
 	Engine::CSoundManager::GetInstance()->PlayBGM(L"Lobby.mp3");
 	m_sceneID = (_int)ESceneID::MainRoom;
 	
+	// 로드
+	CDataLoad* Load = new CDataLoad();
+	Load->Setting();
+	Load->ButtonLoad(this);
+	Load->ImageLoad(this);
+	Load->SliderLoad(this);
+	Load->CanvasLoad(this);
+	Load->TextLoad(this);
+	Load->MapLoad(this);
+
+	delete(Load);
+
 	if (!g_bFirstGameStart)
 	{
 		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
@@ -71,6 +83,9 @@ void CMainRoomScene::Start(void)
 		spobj = ADD_CLONE(L"ElevatorDoor", true, (_int)Engine::ELayerID::Decoration);
 		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-5.2f);
 
+		static_cast<Engine::CCanvas*>(this->FindObjectByName(L"MainCanvas").get())->AddObjectFind();
+		static_cast<Engine::CCanvas*>(this->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(false);
+		
 		g_bFirstGameStart = true;
 	}
 	else
@@ -80,17 +95,7 @@ void CMainRoomScene::Start(void)
 		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
 	}
 
-	// 로드
-	CDataLoad* Load = new CDataLoad();
-	Load->Setting();
-	Load->ButtonLoad(this);
-	Load->ImageLoad(this);
-	Load->SliderLoad(this);
-	Load->CanvasLoad(this);
-	Load->TextLoad(this);
-	Load->MapLoad(this);
 
-	delete(Load);
 
 	// 경험치 스테미너 골드 다이아 이름 레벨
 	CMainRoomManager::GetInstance()->Start(this);
@@ -139,9 +144,6 @@ void CMainRoomScene::Start(void)
 		spObj->GetTransform()->SetPosition(fX, fY, fZ);
 
 	}
-
-	// kiana pos
-	// -0.31, -0.64, -2.9
 }
 
 void CMainRoomScene::FixedUpdate(void)
