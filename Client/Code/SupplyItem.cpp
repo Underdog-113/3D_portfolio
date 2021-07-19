@@ -46,7 +46,7 @@ void CSupplyItem::SelectCanvasOn()
 	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(true);
 
 	if(CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"SupplyCanvas_Button_0")
-		CSupplyManager::GetInstance()->SetOutCount(20);
+		CSupplyManager::GetInstance()->SetOutCount(10);
 	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"SupplyCanvas_Button_1")
 		CSupplyManager::GetInstance()->SetOutCount(1);
 }

@@ -13,8 +13,8 @@ CSupplyOut::~CSupplyOut()
 
 void CSupplyOut::Start()
 {
-	_int a = CSupplyManager::GetInstance()->GetOutCount();
-	_int b = CSupplyManager::GetInstance()->GetSupplyOldState();
+	m_outCount = CSupplyManager::GetInstance()->GetOutCount();
+	m_itemType = CSupplyManager::GetInstance()->GetSupplyOldState();
 
 	Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas")->SetIsEnabled(true);
 	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_2")->SetIsEnabled(false);
@@ -24,6 +24,8 @@ void CSupplyOut::Start()
 	m_scrollView->AllDelete();
 
 	m_timer = 1.0f;
+
+
 	RandoBoxList();
 }
 
@@ -41,8 +43,11 @@ _uint CSupplyOut::FixedUpdate()
 
 _uint CSupplyOut::Update()
 {
-	ItemRandomBox();
-	//WeaponRandomBox();
+	if(m_itemType == 0)
+		WeaponRandomBox();
+	else if (m_itemType == 1)
+		ItemRandomBox();
+
 	return _uint();
 }
 
@@ -54,6 +59,7 @@ _uint CSupplyOut::LateUpdate()
 void CSupplyOut::OnDestroy(void)
 {
 }
+
 void CSupplyOut::ItemRandomBox()
 {
 	m_timer -= GET_DT;
@@ -150,16 +156,10 @@ void CSupplyOut::WeaponRandomBox()
 
 void CSupplyOut::RandoBoxList()
 {
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
-	m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 50));
+	for (int i = 0; i < m_outCount; i++)
+	{
+		m_itemList.emplace_back(ItemInfo(L"∫¢≤…¿« º≠æ‡", 1));
+	}
 }
 /*
 0¿∫ π´±‚
