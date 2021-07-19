@@ -969,6 +969,11 @@ void CStageControlTower::EndSwitching()
 	m_pCameraMan->SetIsSwitching(false);
 }
 
+void CStageControlTower::SetVertCorrecting(_bool val)
+{
+	m_pCameraMan->SetIsVertCorrecting(val);
+}
+
 
 void CStageControlTower::OnPerfectEvadeMode()
 {
@@ -1000,8 +1005,20 @@ void CStageControlTower::OffSlowExceptPlayer()
 	m_pTimeSeeker->OffSakuraUltraActive();
 }
 
-
 _float CStageControlTower::GetPlayerDeltaTime()
 {
 	return m_pTimeSeeker->GetPlayerDeltaTime();
+}
+
+void CStageControlTower::AddItemList(ItemSave item)
+{
+	for (auto& obj : m_itemList)
+	{
+		if (obj.itemName == item.itemName)
+		{
+			obj.count++;
+			return;
+		}
+	}
+	m_itemList.emplace_back(item);
 }

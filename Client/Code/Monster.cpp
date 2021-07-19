@@ -3,7 +3,7 @@
 
 #include "AttackBall.h"
 #include "AttackBox.h"
-
+#include "ClientScene.h"
 _uint CMonster::m_s_channelID = 0;
 
 CMonster::CMonster()
@@ -142,9 +142,16 @@ void CMonster::ApplyHitInfo(HitInfo info)
 	// 사쿠라 표식
 	if (info.GetCrowdControlType() == HitInfo::CrowdControl::CC_Sakura)
 	{
-		_uint sakuraCounter = m_pStat->GetSakuraCounter();
-		if (sakuraCounter < 3)
-			m_pStat->SetSakuraCounter(sakuraCounter + 1);
+		if (m_pStat->GetSakuraCounter() < 3)
+		{
+			m_pStat->SetSakuraCounter(m_pStat->GetSakuraCounter() + 1);
+
+			if (m_pStat->GetSakuraCounter() == 3)
+			{
+				AttachSakuraMark();
+			}
+		}
+
 	}
 
 	// Break Point 보호가 꺼져있다면
@@ -158,6 +165,18 @@ void CMonster::ApplyHitInfo(HitInfo info)
 			m_pStat->SetOnSuperArmor(false);
 		}
 		m_pStat->SetCurBreakGauge(breakGauge);
+	}
+}
+
+void CMonster::AttachSakuraMark()
+{
+	if (!m_pStat->GetSakuraMark())
+	{
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetParent(m_spTransform);
+		spObj->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset());
+		m_pStat->SetSakuraMark(spObj);
 	}
 }
 
@@ -211,6 +230,59 @@ void CMonster::UnActiveAttackBox()
 
 void CMonster::MonsterDead()
 {
+	SP(Engine::CObject) item = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	item->GetTransform()->SetPosition(GetTransform()->GetPosition());
+	item->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	item->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	item->AddComponent<Engine::CRigidBodyC>()->AddForce(_float3(0, 500, 0));
+
+	_int value = 2;//rand() % 4;
+	// 이거 몬스터마다 내용이 다름
+	switch (value)
+	{
+	case 0:
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<CHpItemC>()->AddDataInit(100, 50);
+		break;
+	case 1:
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<CSpItemC>()->AddDataInit(100, 50);
+		break;
+	case 2:
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<CMoneyItemC>()->AddDataInit(100, 50);
+		break;
+	case 3:
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+
+		_int randValue = rand() % 4;
+
+		switch (randValue)
+		{
+		case 0:
+			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"하급 학습 칩", 1), 50);
+			break;
+		case 1:
+			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"특급 학습 칩", 1), 50);
+			break;
+		case 2:
+			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"고급 학습 칩", 1), 50);
+			break;
+		case 3:
+			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"무기 강화제", 1), 50);
+			break;
+		}
+		
+		break;
+	}
+
+
+
+
 }
 
 Engine::CCollider * CMonster::GetHitBox()

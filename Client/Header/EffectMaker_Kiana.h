@@ -17,6 +17,8 @@ public:
 	void CreateEffect_Attack3_Branch();
 	void CreateEffect_Attack4_Branch();
 
+	void CreateEffect_Attack_QTE();
+
 	void CreateEffect_Ultra();
 
 	void CreateEffect_Claw2();

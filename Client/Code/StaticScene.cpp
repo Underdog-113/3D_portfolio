@@ -455,6 +455,9 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spKiana_Ult_Eff_Shield);
 
 	SP(CSoftEffect) spKiana_WSkill_Shoot(CKiana_WSkill_Shoot::Create(true, this));
+	spKiana_WSkill_Shoot->GetComponent<Engine::CTextureC>()->AddTexture(L"Shoot_Fistol_02");
+	spKiana_WSkill_Shoot->GetComponent<Engine::CTextureC>()->AddTexture(L"Shoot_Fistol_02");
+	spKiana_WSkill_Shoot->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spKiana_WSkill_Shoot);
 
 	SP(CMeshEffect_Client) spKiana_WSkill_Circle(CKiana_WSkill_Circle::Create(true, this));
@@ -492,6 +495,12 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_Crack);
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeAtt(CTheresaCharge_Att::Create(true, this));
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CMeshC>()->SetMeshData(L"Charge_Att");
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CTextureC>()->AddTexture(L"Charge_Att_Fire");
+	spTheresa_Ult_Eff_ChargeAtt->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeAtt);
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));

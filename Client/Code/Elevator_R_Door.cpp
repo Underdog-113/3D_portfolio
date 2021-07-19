@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\Elevator_R_Door.h"
 #include "SoundManager.h"
+#include "ClientScene.h"
 
 _uint CElevator_R_Door::m_s_uniqueID = 0;
 
@@ -76,40 +77,6 @@ void CElevator_R_Door::Update(void)
 {
 	__super::Update();
 
-	if (Engine::IMKEY_PRESS(KEY_W))
-	{
-		m_spTransform->AddPositionY(0.1f * GET_DT);
-	}
-	if (Engine::IMKEY_PRESS(KEY_A))
-	{
-
-		m_spTransform->AddPositionX(-0.1f * GET_DT);
-
-	}
-	if (Engine::IMKEY_PRESS(KEY_S))
-	{
-		m_spTransform->AddPositionY(-0.1f * GET_DT);
-
-	}
-	if (Engine::IMKEY_PRESS(KEY_D))
-	{
-		m_spTransform->AddPositionX(0.1f * GET_DT);
-
-	}
-
-	if (Engine::IMKEY_PRESS(KEY_Q))
-	{
-
-		m_spTransform->AddPositionZ(-0.1f * GET_DT);
-
-	}
-	if (Engine::IMKEY_PRESS(KEY_E))
-	{
-
-		m_spTransform->AddPositionZ(0.1f * GET_DT);
-
-	}
-
 	if (m_bDoorCheck)
 	{
 		if (m_spTransform->GetPosition().y > -4.f)
@@ -122,10 +89,18 @@ void CElevator_R_Door::Update(void)
 			SP(Engine::CCamera) spCam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
 			if (spCam->GetTransform()->GetPosition().z < -4.8f)
 				spCam->GetTransform()->AddPositionZ(5.5f * GET_DT);
-		}
-	}
 
+			if (spCam->GetTransform()->GetPosition().z >= -4.8f)
+			{
+				static_cast<Engine::CCanvas*>(GET_CUR_CLIENT_SCENE->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(true);
+				m_bDoorCheck = false;
+			}
+		}
+
+	}
 }
+
+
 
 void CElevator_R_Door::LateUpdate(void)
 {

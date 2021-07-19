@@ -115,6 +115,8 @@ void CKiana::Start(void)
 		SetIsEnabled(false);
 	}
 
+
+	m_yDefaultOffset = 0.43f;	// 변경금지
 }
 
 void CKiana::FixedUpdate(void)
@@ -272,6 +274,7 @@ void CKiana::SetBasicName(void)
 void CKiana::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	__super::OnCollisionEnter(ci);
+
 }
 
 void CKiana::OnCollisionStay(Engine::_CollisionInfo ci)
@@ -290,6 +293,7 @@ void CKiana::ApplyHitInfo(HitInfo info)
 	switch (info.GetStrengthType())
 	{
 	case HitInfo::Str_Damage:
+		m_spStateMachine->ChangeState(Name_Hit_L);
 		break;
 	case HitInfo::Str_Low:
 		m_spStateMachine->ChangeState(Name_Hit_L);
@@ -298,6 +302,7 @@ void CKiana::ApplyHitInfo(HitInfo info)
 		m_spStateMachine->ChangeState(Name_Hit_H);
 		break;
 	case HitInfo::Str_Airborne:
+		m_spStateMachine->ChangeState(Name_Hit_H);
 		break;
 	}
 

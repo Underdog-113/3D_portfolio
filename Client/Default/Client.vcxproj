@@ -273,6 +273,7 @@
     <ClInclude Include="..\Header\Lancer_Impact.h" />
     <ClInclude Include="..\Header\Lancer_OutSideEff.h" />
     <ClInclude Include="..\Header\MainRoomBG.h" />
+    <ClInclude Include="..\Header\MoneyItemC.h" />
     <ClInclude Include="..\Header\MonsterAttackSign.h" />
     <ClInclude Include="..\Header\FaceShader.h" />
     <ClInclude Include="..\Header\OneConversationC.h" />
@@ -311,6 +312,7 @@
     <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\OutlineShader.h" />
+    <ClInclude Include="..\Header\SpItemC.h" />
     <ClInclude Include="..\Header\SpiderExplosion_Base.h" />
     <ClInclude Include="..\Header\SpiderImpact.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
@@ -536,6 +538,7 @@
     <ClInclude Include="..\Header\Include_ForTest.h" />
     <ClInclude Include="Bronya_Ult_Impact.h" />
     <ClInclude Include="EffectMaker_Sakura.h" />
+    <ClInclude Include="StuffItemC.h" />
     <ClInclude Include="Theresa_CrossBlade.h" />
     <ClInclude Include="Theresa_CrossBloodyHug.h" />
     <ClInclude Include="Resource.h" />
@@ -634,6 +637,7 @@
     <ClCompile Include="..\Code\Lancer_Impact.cpp" />
     <ClCompile Include="..\Code\Lancer_OutSideEff.cpp" />
     <ClCompile Include="..\Code\MainRoomBG.cpp" />
+    <ClCompile Include="..\Code\MoneyItemC.cpp" />
     <ClCompile Include="..\Code\MonsterAttackSign.cpp" />
     <ClCompile Include="..\Code\FaceShader.cpp" />
     <ClCompile Include="..\Code\OneConversationC.cpp" />
@@ -671,6 +675,7 @@
     <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp" />
+    <ClCompile Include="..\Code\SpItemC.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion_Base.cpp" />
     <ClCompile Include="..\Code\SpiderImpact.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
@@ -875,6 +880,7 @@
     <ClCompile Include="Bronya_Ult_Impact.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="EffectMaker_Sakura.cpp" />
+    <ClCompile Include="StuffItemC.cpp" />
     <ClCompile Include="Theresa_CrossBlade.cpp" />
     <ClCompile Include="Theresa_CrossBloodyHug.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -127,12 +127,6 @@ void CInitScene::Start(void)
 	}
 }
 
-/*
-1. init씬에 정보를 mainroom으로 이동
-2. 게이지다차면 문이열리게
-3. 문이열리면 카메라 무브로 앞으로
-4. 지정된장소까지가면 모든 UI활성화
-*/
 void CInitScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
@@ -142,9 +136,11 @@ void CInitScene::Update(void)
 {
 	__super::Update();
 	_float value = slider->GetValue();
-	value = min(value + GET_DT * 9, 100);
+	value = min(value + GET_DT * 38, 100);
 	slider->SetValue(value);
 	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + std::to_wstring(value) + L"%");
+
+
 
 	if(!m_isStaticScene)
 		m_fTempSoundLength += GET_DT;
@@ -160,7 +156,7 @@ void CInitScene::Update(void)
 	}
 
 
-	if (m_pLoading->GetFinish())
+	if (m_pLoading->GetFinish() && slider->GetValue() == slider->GetMaxValue())
 	{
 		if (m_selectNextScene)
 		{

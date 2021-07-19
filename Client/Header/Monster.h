@@ -47,6 +47,7 @@ public:
 
 public:
 	virtual void ApplyHitInfo(HitInfo info) PURE;
+	void AttachSakuraMark();
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
 
@@ -87,6 +88,8 @@ protected:
 	GETTOR_SETTOR		(V_Stat::Valkyrie_Type,			m_valkyrieType,		V_Stat::Valkyrie_Type::KIANA,	ValkyrieType)
 	GETTOR_SETTOR		(_bool,							m_isBoss,			false,							IsBoss)
 	GETTOR_SETTOR		(_float,						m_weakTime,			5.f,							WeakTime) // SuperArmor가 깨지고 n초 후에 breakGauge 채우기 전까지의 시간
+
+
 
 private:
 	_float m_accTime = 0.f;

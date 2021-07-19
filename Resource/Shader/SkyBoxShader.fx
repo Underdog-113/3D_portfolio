@@ -69,7 +69,7 @@ technique Default_Device
 	pass	// 기능의 캡슐화, PASS는 이름과 상관없이 선언된 순서대로 위부터 인덱스 값이 0이 지정되고 자동적으로 하나씩 증가함
 	{
 		zwriteenable = false;
-		cullmode = none;
+		cullmode = CW;
 
 		vertexshader = compile vs_3_0 VS_MAIN();	// 진입점 함수 명시
 		pixelshader = compile ps_3_0 PS_MAIN();

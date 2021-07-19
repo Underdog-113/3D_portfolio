@@ -23,14 +23,24 @@ void CRenderTargetManager::Awake(void)
 	//AddRenderTarget(L"Target_MtrlSpecular", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(0, 0, 0, 0));
 #pragma endregion
 
-#pragma region BlurRT
-	AddRenderTarget(L"Target_Emissive", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(2, 0);
-#pragma endregion
-
 #pragma region LightRT
 	AddRenderTarget(L"Target_Shade", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 1))->InitDebugRT(1, 0);
 	AddRenderTarget(L"Target_Specular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(1, 1);
 #pragma endregion
+
+
+#pragma region BlurRT
+	AddRenderTarget(L"Target_Emissive", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(2, 0);
+	AddRenderTarget(L"Target_BlurDiv2_Ver", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	AddRenderTarget(L"Target_BlurDiv2_Fin", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	AddRenderTarget(L"Target_BlurDiv4_Ver", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	AddRenderTarget(L"Target_BlurDiv4_Fin", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(2, 1);
+	AddRenderTarget(L"Target_BlurDiv8_Ver", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	AddRenderTarget(L"Target_BlurDiv8_Fin", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(2, 2);
+	AddRenderTarget(L"Target_BlurDiv16_Ver", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));
+	AddRenderTarget(L"Target_BlurDiv16_Fin", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(2, 3);
+#pragma endregion
+
 
 #pragma region MaterialRT
 	//AddRenderTarget(L"Material_Diffuse", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0));

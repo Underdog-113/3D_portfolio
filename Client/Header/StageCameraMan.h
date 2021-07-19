@@ -46,11 +46,14 @@ public:
 
 	void ChangeTakeWhileTargeting();
 
+private:
+	void AppendPosYCorrecting();
+
 public:
 	void OnAttackDirectionCorrecting();
-	void AppendAttackDirectionCorrecting();
 
 private:
+	void AppendAttackDirectionCorrecting();
 	void AppendTargetCorrecting();
 	void AppendHorizontalCorrecting();
 	
@@ -85,6 +88,7 @@ private:
 
 public:
 	void SetCamera(SP(Engine::CCamera) spCamera);
+	void SetIsVertCorrecting(_bool value);
 
 private:
 	GETTOR			(SP(Engine::CCamera),	m_spCamera,		nullptr,	Camera)		
@@ -93,6 +97,9 @@ private:
 	GETTOR			(_bool,					m_isTargeting,	false,		IsTargeting)		
 	GETTOR			(CCameraShake*,			m_pCameraShake,	nullptr,	CameraShake)	
 	GETTOR_SETTOR	(_bool,					m_isSwitching,	false,		IsSwitching)
+
+		
+	GETTOR_SETTOR	(_float,				m_targetingMidRatio,	0.5f,		TargetingMidRatio)
 	_float3 m_noShakePos = ZERO_VECTOR;
 	_float3 m_noShakeRot = ZERO_VECTOR;
 
@@ -131,6 +138,10 @@ private:
 	
 	_float m_horzCorrectingSpeed = 5.f;
 	_float m_speedIncreaseTimer = 0.f;
+	
+	GETTOR	(_bool,					m_isVertCorrecting,	false,		IsVertCorrecting)
+	_float m_prevYOffset = 0.f;
+	_uint m_prevValkyrie = 0;
 
 	_float m_attackCorrectingTimer = 0.f;
 	_float m_attackCorrectingAngle = 0.f;
