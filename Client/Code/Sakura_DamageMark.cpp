@@ -83,7 +83,6 @@ void CSakura_DamageMark::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
-
 	pEffect->CommitChanges();
 }
 

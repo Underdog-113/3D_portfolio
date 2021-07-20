@@ -33,7 +33,7 @@ SP(Engine::CObject) CGanesha_Cinema_Lightning::MakeClone(void)
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
-	//spClone->m_bBillboard = true;
+	spClone->m_bBillboard = false;
 	return spClone;
 }
 

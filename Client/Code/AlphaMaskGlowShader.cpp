@@ -1,34 +1,34 @@
 #include "stdafx.h"
-#include "..\Header\MeshTrailShader.h"
-#include "Layer.h"
+#include "..\Header\AlphaMaskGlowShader.h"
 
 
-CMeshTrailShader::CMeshTrailShader()
+CAlphaMaskGlowShader::CAlphaMaskGlowShader()
 {
 }
 
 
-CMeshTrailShader::~CMeshTrailShader()
+CAlphaMaskGlowShader::~CAlphaMaskGlowShader()
 {
 }
 
-
-Engine::CShader * CMeshTrailShader::Create()
+Engine::CShader * CAlphaMaskGlowShader::Create()
 {
-	CMeshTrailShader* pInstance = new CMeshTrailShader;
+	CAlphaMaskGlowShader* pInstance = new CAlphaMaskGlowShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CMeshTrailShader::Free()
+void CAlphaMaskGlowShader::Free()
 {
 	__super::Free();
+
 }
 
-void CMeshTrailShader::Awake()
+void CAlphaMaskGlowShader::Awake()
 {
 	__super::Awake();
+
 	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
 	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
 	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Normal");
@@ -36,8 +36,10 @@ void CMeshTrailShader::Awake()
 	m_vRenderTargets[3] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CAlphaMaskGlowShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
+	// Add Alpha variables to objects that use this shader.
+	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
 	__super::SetUpConstantTable(spGC);
 	_mat worldMat, viewMat, projMat, WVP;
 
@@ -57,6 +59,7 @@ void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	_mat iTWM;
 	D3DXMatrixInverse(&iTWM, 0, &worldMat);
 	D3DXMatrixTranspose(&iTWM, &iTWM);
+
 	m_pEffect->SetMatrix("gInvWorldMatrix", &worldMat);
 
 	_float4 worldLightPos = _float4(500.f, 500.f, -500.f, 1.f);
@@ -67,6 +70,4 @@ void CMeshTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
-	m_pEffect->SetTexture("g_AlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][2]->pTexture);
-
 }

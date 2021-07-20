@@ -42,10 +42,10 @@ void CGanesha_Cinema_Dome::Awake()
 	m_spTransform->SetSize(_float3(size, size, size));
 	m_spMesh->SetMeshData(L"Ganesha_Cinema_Dome");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_spTexture->AddTexture(L"AttackHint_Circle_02");
 	m_spTexture->AddTexture(L"Sign");
-	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CGanesha_Cinema_Dome::Start()

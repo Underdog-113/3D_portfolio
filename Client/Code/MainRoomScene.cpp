@@ -105,17 +105,7 @@ void CMainRoomScene::Start(void)
 	// get ControlDesk objects
 	ControlDeskSetrring();
 
-	SP(Engine::CObject) spBG = std::dynamic_pointer_cast<CDecoObject>(ADD_CLONE(L"DecoObject", true, (_int)Engine::ELayerID::Decoration));
-	spBG->GetComponent<Engine::CMeshC>()->SetMeshData(L"Cloud");
-	spBG->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spBG->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	spBG->GetComponent<Engine::CTextureC>()->AddTexture(L"Stage_LevelMatrix_Winter_BG04");
-	spBG->GetComponent<Engine::CTextureC>()->AddTexture(L"Stage_LevelMatrix_Winter_BG04");
-	spBG->GetTransform()->SetPositionZ(50.f);
-
-
 	SP(Engine::CObject) spObj;
-
 	spObj = ADD_CLONE(L"MainRoomBG", true, (_int)Engine::ELayerID::Decoration);
 	spObj->GetTransform()->SetPositionZ(100.f);
 	spObj->GetTransform()->SetSizeX(10.f);
@@ -135,10 +125,10 @@ void CMainRoomScene::Start(void)
 			fX = 11.57f;
 			break;
 		case 1:
-			fX = -10.3f;
+			fX = -11.3f;
 			break;
 		default:
-			fX = -10.3f;
+			fX = -11.3f;
 			break;
 		}
 

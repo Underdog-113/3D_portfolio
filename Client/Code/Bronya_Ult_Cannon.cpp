@@ -65,6 +65,8 @@ void CBronya_Ult_Cannon::Update()
 	{
 		m_spTransform->AddPosition(-m_spTransform->GetForward() * GET_DT * 0.5f);
 	}
+
+
 }
 
 void CBronya_Ult_Cannon::LateUpdate()

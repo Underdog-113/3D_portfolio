@@ -86,12 +86,22 @@ struct PS_INPUT
 	float2 mUV : TEXCOORD0;
 };
 
-float4 ps_Alpha(VS_OUTPUT Input) : COLOR
+struct PS_OUTPUT
 {
-	// Base albedo Texture
-	float4 albedo = tex2D(Diffuse, Input.mUV);
-	float4 alphaVal = tex2D(ServeTex, Input.mUV);
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
+};
 
+PS_OUTPUT ps_main(VS_OUTPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
+	// Base albedo Texture
+	float4 albedo = tex2D(Diffuse, Input.mUV);	
+	float4 alphaVal = tex2D(ServeTex, Input.mUV);
+	
 	if (g_bAlphaCtrl)
 	{
 		if (Input.mUV.x >= gAlpha)
@@ -103,11 +113,14 @@ float4 ps_Alpha(VS_OUTPUT Input) : COLOR
 	else
 		albedo.a = gAlpha;
 
-	float4 blendColor = (alphaVal * albedo);
+	float4 blendColor = (alphaVal * albedo);	
 
 	blendColor = saturate(blendColor);
 
-	return blendColor;
+	Out.vColor = blendColor;
+	Out.vEmissive = float4(blendColor.rgb, gAlpha - 0.2f);
+
+	return Out;
 }
 
 technique AlphaMask
@@ -121,6 +134,6 @@ technique AlphaMask
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
 		VertexShader = compile vs_3_0 vs_main();
-		PixelShader = compile ps_3_0 ps_Alpha();
+		PixelShader = compile ps_3_0 ps_main();
 	}
 };

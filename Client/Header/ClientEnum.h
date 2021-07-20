@@ -76,7 +76,8 @@ enum class EShaderID
 	OutlineShader		= 12 + (_int)Engine::EShaderID::NumOfShaderID,
 	FaceShader			= 13 + (_int)Engine::EShaderID::NumOfShaderID,
 	KianaBodyShader		= 14 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		= 15 + (_int)Engine::EShaderID::NumOfShaderID
+	AlphaMaskGlowShader = 15 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		= 16 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

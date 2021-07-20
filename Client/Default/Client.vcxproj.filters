@@ -1048,6 +1048,9 @@
     <Filter Include="03.Component\03.Item\03.StuffItem">
       <UniqueIdentifier>{9e3f1aa8-b870-402d-a8c0-cac906c0515a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\17.AlphaMaskGlowShader">
+      <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2141,7 +2144,7 @@
     </ClInclude>
     <ClInclude Include="StuffItemC.h">
       <Filter>03.Component\03.Item\03.StuffItem</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\SpiderImpact.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
     </ClInclude>
@@ -2165,6 +2168,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Ganesha_Cinema_Lightning.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
+      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3169,7 +3175,7 @@
     </ClCompile>
     <ClCompile Include="StuffItemC.cpp">
       <Filter>03.Component\03.Item\03.StuffItem</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\SpiderImpact.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
     </ClCompile>
@@ -3193,6 +3199,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Ganesha_Cinema_Lightning.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp">
+      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3264,6 +3273,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
+      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

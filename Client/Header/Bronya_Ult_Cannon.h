@@ -34,5 +34,7 @@ private:
 
 private:
 	_float m_fTmpPosZ;
+
+
 };
 

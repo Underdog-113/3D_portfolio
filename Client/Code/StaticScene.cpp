@@ -1008,10 +1008,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spBronya_Ult_Range);
 
 	SP(CSoftEffect) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
-	spBronya_UIt_Laser->GetComponent<Engine::CGraphicsC>();
-	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
-	spBronya_UIt_Laser->GetComponent<Engine::CTextureC>()->AddTexture(L"Laser_Cannon_2");
-	spBronya_UIt_Laser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 
 	// Ingame
