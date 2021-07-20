@@ -170,11 +170,11 @@ void CBronyaArsenalPattern::InitEffect()
 		return;
 	}
 
-	for (_int i = 0; i < m_maxRingCnt; ++i)
-	{
-		m_vRingEffect.emplace_back(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true));
-		m_vRingEffect[i]->GetTransform()->SetPosition(_float3(91.9447f, 0.5f, -8.55992f));
-	}
+	//for (_int i = 0; i < m_maxRingCnt; ++i)
+	//{
+	//	m_vRingEffect.emplace_back(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true));
+	//	m_vRingEffect[i]->GetTransform()->SetPosition(_float3(91.9447f, 0.5f, -8.55992f));
+	//}
 
-	m_initEffect = false;
+	//m_initEffect = false;
 }

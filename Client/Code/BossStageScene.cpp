@@ -83,17 +83,6 @@ void CBossStageScene::Update(void)
 
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
-
-
-	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
-	{
-		_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
-		std::cout << "=============================" << std::endl;
-		std::cout << "x : " << pos.x << std::endl;
-		std::cout << "y : " << pos.y << std::endl;
-		std::cout << "z : " << pos.z << std::endl;
-		std::cout << "=============================" << std::endl;
-	}
 }
 
 void CBossStageScene::LateUpdate(void)
@@ -149,8 +138,6 @@ void CBossStageScene::SetupMembers(void)
 
 	// Cam Target Set
 	Create_SceneCamera();
-
-	//Create_Dummy(_float3(43.3345f, -1.f, -0.075913f));
 }
 
 void CBossStageScene::Create_ActorValkyrie(void)
@@ -158,7 +145,7 @@ void CBossStageScene::Create_ActorValkyrie(void)
 	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
 
 	m_spValkyrie = spKianaClone;
-	m_spValkyrie->GetTransform()->SetPosition(93.03f, -1.85f, -8.35f);
+	m_spValkyrie->GetTransform()->SetPosition(186.21f, -3.69f, -17.06f);
 	m_pControlTower->AddSquadMember(m_spValkyrie);
 	m_pControlTower->Start(CStageControlTower::ALL);
 
@@ -181,30 +168,6 @@ void CBossStageScene::Create_SceneCamera(void)
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
-}
-
-void CBossStageScene::Create_Dummy(_float3 pos)
-{
-	auto dummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
-	dummy->GetTransform()->SetPosition(pos);
-
-	m_vDummy.emplace_back(dummy);
-}
-
-void CBossStageScene::Create_Sickle(_float3 pos)
-{
-	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(pos);
-	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_vSickle.emplace_back(spSickleClone);
-}
-
-void CBossStageScene::Create_Spider(_float3 pos)
-{
-	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(pos);
-	std::dynamic_pointer_cast<CMonster>(spSpiderClone)->SelectChannelID();
-	m_vSpider.emplace_back(spSpiderClone);
 }
 
 void CBossStageScene::InitPrototypes(void)

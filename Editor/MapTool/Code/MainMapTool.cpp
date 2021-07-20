@@ -13,6 +13,8 @@
 #include "Object.h"
 #include "FRC.h"
 
+#include "WaterShader.h"
+
 #pragma region IncludeScenes
 #include "EditorScene.h"
 #pragma endregion
@@ -40,13 +42,14 @@ void CMainMapTool::Awake(void)
 	Engine::CGraphicsManager::GetInstance()->Awake();
 	Engine::CRenderTargetManager::GetInstance()->Awake();
 	Engine::CShaderManager::GetInstance()->Awake();
-	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)Engine::EShaderID::NumOfShaderID);
-
 	Engine::CInputManager::GetInstance()->Awake();
 	Engine::CSceneManager::GetInstance()->Awake();
 	Engine::CCollisionManager::GetInstance()->Awake();
 	Engine::CCameraManager::GetInstance()->Awake();
 	Engine::CTextManager::GetInstance()->Awake();
+
+	Engine::CShaderManager::GetInstance()->InitShaderList((_uint)EShaderID::NumOfShaderID);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CWaterShader::Create(), L"WaterShader", (_uint)EShaderID::WaterShader);
 }
 
 void CMainMapTool::Start(void)

@@ -43,6 +43,9 @@
     <Filter Include="03.Objects\01.MapObject">
       <UniqueIdentifier>{47797cfe-7b55-4713-97cb-c7de80b20cc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98.Include\Shader">
+      <UniqueIdentifier>{3b0ec3f4-4f9c-4213-babd-2c475dbaa37c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -102,6 +105,9 @@
     <ClInclude Include="..\Header\MapObject.h">
       <Filter>03.Objects\01.MapObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\WaterShader.h">
+      <Filter>98.Include\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapTool.cpp">
@@ -133,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MapObject.cpp">
       <Filter>03.Objects\01.MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\WaterShader.cpp">
+      <Filter>98.Include\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
