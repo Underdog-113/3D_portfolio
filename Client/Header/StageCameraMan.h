@@ -173,7 +173,6 @@ private:
 private:
 
 	GETTOR_SETTOR(_bool, m_directorControl, false, DirectorControl)
-	bool m_directorControl = false;
 	bool m_isPivotChasing = false;
 
 };

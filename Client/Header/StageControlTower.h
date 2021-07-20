@@ -45,6 +45,8 @@ class CStageControlTower
 public:
 	enum CreateMode { ALL, WithoutUI };
 	enum Squad_Role { Actor, Wait_1, Wait_2 };
+
+	enum Env_Type { NoColoring,TheresaUlt, SakuraUlt, PerfectEvade };
 public:
 	void Awake(void);
 	void Start(CreateMode mode = ALL);
@@ -85,6 +87,9 @@ public:		/* Battle */
 	void BattonTouch();
 	void BattonTouch_2Member();
 	void BattonTouch_3Member();
+
+	void SettingEnvironmentColor();
+	void SetEnvType(Env_Type envType);
 
 public:		/* Camera & System */
 	void SetCameraMidShot();
@@ -143,6 +148,14 @@ private:	/* Stage Info? */
 
 	_bool m_isQTEUsed = false;
 	_float m_QTEOnTimer = 0.f;
+
+
+	GETTOR(Env_Type, m_envType, NoColoring, EnvType)
+	_bool m_envColorChange = false;
+	_float m_envColorTimer = 0.f;
+	_float m_envColorDuration = 0.f;
+	_float4 m_startEnvColor = _float4(1.f, 1.f, 1.f, 1.f);
+	_float4 m_dstEnvColor = _float4(1.f, 1.f, 1.f, 1.f);
 
 
 private:

@@ -99,6 +99,7 @@ private:
 	bool m_checkAttack3rd = false;
 	bool m_checkAttack4th = false;
 	bool m_checkUltraActive = false;
+	bool m_checkShake = false;
 
 	bool m_isUltraMode = false;
 	bool m_isEvade = false;

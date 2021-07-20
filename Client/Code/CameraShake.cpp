@@ -71,6 +71,10 @@ void CCameraShake::AdvanceSinWave(Wave* wave, ShakeChannel* channel)
 	_float curAmplitude = wave->amplitude * channel->m_amplitudeRate;
 
 	wave->point = sinf(curTimeline) * curAmplitude + (wave->ampAxisOffset * channel->m_amplitudeRate);
+	if (sinf(curTimeline) < 0.f)
+	{
+		int a = 10;
+	}
 }
 _float3 CCameraShake::GetRotateOscilation()
 {
@@ -79,18 +83,18 @@ _float3 CCameraShake::GetRotateOscilation()
 	{
 		if (!channel.enable)
 			continue;
-
-		if (rotOscilation.x < channel.m_pitchWave.point)
+		
+		if (abs(rotOscilation.x) < abs(channel.m_pitchWave.point))
 		{
 			rotOscilation.x = channel.m_pitchWave.point;
 		}
 
-		if (rotOscilation.y < channel.m_yawWave.point)
+		if (abs(rotOscilation.y) < abs(channel.m_yawWave.point))
 		{
 			rotOscilation.y = channel.m_yawWave.point;
 		}
 
-		if (rotOscilation.z < channel.m_rollWave.point)
+		if (abs(rotOscilation.z) < abs(channel.m_rollWave.point))
 		{
 			rotOscilation.z = channel.m_rollWave.point;
 		}
@@ -106,17 +110,17 @@ _float3 CCameraShake::GetLocationOscilation()
 		if (!channel.enable)
 			continue;
 
-		if (locOscilation.x < channel.m_xWave.point)
+		if (abs(locOscilation.x) < abs(channel.m_xWave.point))
 		{
 			locOscilation.x = channel.m_xWave.point;
 		}
 
-		if (locOscilation.y < channel.m_yWave.point)
+		if (abs(locOscilation.y) < abs(channel.m_yWave.point))
 		{
 			locOscilation.y = channel.m_yWave.point;
 		}
 
-		if (locOscilation.z < channel.m_zWave.point)
+		if (abs(locOscilation.z) < abs(channel.m_zWave.point))
 		{
 			locOscilation.z = channel.m_zWave.point;
 		}
@@ -218,10 +222,29 @@ void CCameraShake::Preset_HighAttack_Horz(_float3 eventPos)
 	channel->m_zWave.offset = randomOffset;
 }
 
+void CCameraShake::Preset_Land()
+{
+	ShakeChannel* channel = &m_shakeChannel[Player];
+
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
+	channel->m_timer = 0.f;
+
+	channel->m_duration = 0.4f;
+	channel->m_blendInTime = 0.f;
+	channel->m_blendOutTime = 0.25f;
+
+	ResetAllMember(channel);
+
+	channel->m_zWave.amplitude = 0.05f;
+	channel->m_zWave.frequency = 2.f;
+	channel->m_zWave.offset = 0.3f / channel->m_zWave.frequency;
+	channel->m_zWave.ampAxisOffset = channel->m_zWave.amplitude * sinf(0.3f * 2.f * PI);
+}
+
 
 void CCameraShake::Preset_Kiana_ForwardAttack()
 {
-	 ShakeChannel* channel = &m_shakeChannel[Player];
+	ShakeChannel* channel = &m_shakeChannel[Player];
 
 	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
 	channel->m_timer = 0.f;

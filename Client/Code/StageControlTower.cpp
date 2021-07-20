@@ -212,19 +212,7 @@ void CStageControlTower::Update(void)
 	if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_R))
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
-	if (GetIsPerfectEvadeMode())
-	{
-		Engine::CMeshShader* pMeshShader =
-			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
-		pMeshShader->SetAddColor(_float4(0.4f, 0, 0, 0));
-	}
-	else
-	{
-		Engine::CMeshShader* pMeshShader =
-			static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
-		pMeshShader->SetAddColor(_float4(0, 0, 0, 0));
-	}
-
+	SettingEnvironmentColor();
 }
 
 void CStageControlTower::OnDestroy()
@@ -947,6 +935,73 @@ void CStageControlTower::BattonTouch_3Member()
 	m_pCameraMan->SetIsSwitching(true);
 }
 
+void CStageControlTower::SettingEnvironmentColor()
+{
+	_float4 color = m_startEnvColor;
+
+	if (m_envColorChange)
+	{
+		m_envColorTimer += GET_PLAYER_DT;
+		if (m_envColorTimer > m_envColorDuration)
+		{
+			color = m_dstEnvColor;
+			m_startEnvColor = m_dstEnvColor;
+			m_envColorChange = false;
+		}
+		else
+		{
+			color =
+			{
+				GetLerpFloat(m_startEnvColor.x, m_dstEnvColor.x, m_envColorTimer / m_envColorDuration),
+				GetLerpFloat(m_startEnvColor.y, m_dstEnvColor.y, m_envColorTimer / m_envColorDuration),
+				GetLerpFloat(m_startEnvColor.z, m_dstEnvColor.z, m_envColorTimer / m_envColorDuration),
+				GetLerpFloat(m_startEnvColor.w, m_dstEnvColor.w, m_envColorTimer / m_envColorDuration)
+			};
+
+
+		}
+	}
+
+	Engine::CMeshShader* pMeshShader =
+		static_cast<Engine::CMeshShader*>(Engine::CShaderManager::GetInstance()->GetShader((_int)Engine::EShaderID::MeshShader));
+	pMeshShader->SetMultColor(color);
+}
+
+void CStageControlTower::SetEnvType(Env_Type envType)
+{
+	m_envColorChange = true;
+	m_envType = envType;
+	m_envColorTimer = 0.f;
+
+	_float colorRatio = 0.f;
+
+	switch (envType)
+	{
+	case CStageControlTower::NoColoring:
+		m_envColorDuration = 0.25f;
+		m_dstEnvColor = _float4(1.f, 1.f, 1.f, 1.f);
+		break;
+	case CStageControlTower::TheresaUlt:
+		m_envColorDuration = 0.5f;
+		colorRatio = 1.f;
+		m_dstEnvColor = _float4(0.863f * colorRatio, 0.078f * colorRatio, 0.235f * colorRatio, 1.f);
+		break;
+	case CStageControlTower::SakuraUlt:
+		m_envColorDuration = 0.5f;
+		colorRatio = 1.f;
+		m_dstEnvColor = _float4(0.635f * colorRatio, 0.392f * colorRatio, 0.435f * colorRatio, 1.f);
+		break;
+	case CStageControlTower::PerfectEvade:
+		m_envColorDuration = 0.5f;
+		colorRatio = 2.f;
+		m_dstEnvColor = _float4(0.024f * colorRatio, 0.075f * colorRatio, 0.341f * colorRatio, 1.f);
+		break;
+	default:
+		break;
+	}
+
+}
+
 void CStageControlTower::SetCameraMidShot()
 {
 	m_pCameraMan->SetMidShot();
@@ -990,23 +1045,24 @@ _bool CStageControlTower::GetIsPerfectEvadeMode()
 
 void CStageControlTower::OnSakuraUltraActive()
 {
-	m_pTimeSeeker->OnSakuraUltraActive();
+	m_pTimeSeeker->OnSlowExceptPlayer();
 }
 
 void CStageControlTower::OffSakuraUltraActive()
 {
-	m_pTimeSeeker->OffSakuraUltraActive();
+	m_pTimeSeeker->OffSlowExceptPlayer();
 }
 
 void CStageControlTower::OnSlowExceptPlayer()
 {
-	m_pTimeSeeker->OnSakuraUltraActive();
+	m_pTimeSeeker->OnSlowExceptPlayer();
 }
 
 void CStageControlTower::OffSlowExceptPlayer()
 {
-	m_pTimeSeeker->OffSakuraUltraActive();
+	m_pTimeSeeker->OffSlowExceptPlayer();
 }
+
 
 _float CStageControlTower::GetPlayerDeltaTime()
 {

@@ -83,8 +83,12 @@ void CStageCameraMan::UpdateCameraMan()
 
 void CStageCameraMan::DirectorControlMode()
 {
+	ReturnBeforShaking();
+
 	if (m_isPivotChasing)
 		PivotChasing_Director();
+
+	ApplyShaking();
 
 	if (Engine::IMKEY_DOWN(KEY_TAB))
 		m_isPivotChasing = !m_isPivotChasing;
@@ -105,6 +109,7 @@ void CStageCameraMan::PivotChasing_Director()
 		lerpPosition = m_dstPivotPos;
 	}
 	m_spPivot->GetTransform()->SetPosition(lerpPosition);
+
 }
 
 

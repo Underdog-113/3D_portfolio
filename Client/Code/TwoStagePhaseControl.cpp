@@ -23,21 +23,26 @@ void CTwoStagePhaseControl::Update(void)
 	case UNDEFINED:
 		++m_curPhase;
 		break;
+		
+	case (_int)ETwoStagePhase::ReadyStage:
+		CStageControlTower::GetInstance()->SetDirectorMode(true);
+		++m_curPhase;
+		break;
 
 	case (_int)ETwoStagePhase::PlayerSummon:
 		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
 		{
-			//EnterConversationPhase();
+			EnterConversationPhase();
 			++m_curPhase;
 		}
 		break;
 
 	case (_int)ETwoStagePhase::Conversation:
-		//if (m_spConversation->IsEnd())
-		//{
-		//	++m_curPhase;
-		//}
-		++m_curPhase;
+		if (m_spConversation->IsEnd())
+		{
+			CStageControlTower::GetInstance()->SetDirectorMode(false);
+			++m_curPhase;
+		}
 		break;
 		//Before being collised with PhaseChanger0
 	case (_int)ETwoStagePhase::BeforeBoss:

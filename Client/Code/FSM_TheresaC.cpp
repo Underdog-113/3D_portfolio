@@ -523,6 +523,13 @@ void CFSM_TheresaC::Appear_Enter(void)
 
 void CFSM_TheresaC::Appear_Update(float deltaTime)
 {
+
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.137)
+	{
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
+		m_checkShake = true;
+	}
+
 	if (CheckAction_StandBy_Timeout(0.9f))
 		return;
 }
@@ -1421,6 +1428,13 @@ void CFSM_TheresaC::SwitchIn_Enter(void)
 
 void CFSM_TheresaC::SwitchIn_Update(float deltaTime)
 {
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.127)
+	{
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
+		m_checkShake = true;
+	}
+
+
 	if (m_pDM->IsAnimationEnd())
 	{
 		if (m_pTheresa->GetIsQTESwitch())
@@ -1488,6 +1502,8 @@ void CFSM_TheresaC::Ultra_Enter(void)
 
 	m_pStageControlTower->GetCameraMan()->SetCustomShot(2.f, 1.5f, D3DXToRadian(20.f));
 	m_pStageControlTower->GetCameraMan()->SetTargetingMidRatio(0.65f);
+
+	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::TheresaUlt);
 }
 
 void CFSM_TheresaC::Ultra_Update(float deltaTime)
@@ -1551,6 +1567,8 @@ void CFSM_TheresaC::Ultra_End(void)
 	m_pTheresa->GetAttackBall_AxeImpact()->SetIsEnabled(false);
 
 	m_pStageControlTower->GetCameraMan()->SetTargetingMidRatio(0.5f);
+
+	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::NoColoring);
 }
 
 void CFSM_TheresaC::CastCross_Init(void)
@@ -1673,7 +1691,7 @@ void CFSM_TheresaC::Hit_H_Init(void)
 
 void CFSM_TheresaC::Hit_H_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Hit_H);
+	m_pDM->RepeatAniSet(Index_Hit_H);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(true);
 
@@ -1703,7 +1721,7 @@ void CFSM_TheresaC::Hit_L_Init(void)
 
 void CFSM_TheresaC::Hit_L_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Hit_L);
+	m_pDM->RepeatAniSet(Index_Hit_L);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	PlaySound_SelectChannel(Sound_HIT_Effect, (_uint)EChannelID::PLAYERHIT);

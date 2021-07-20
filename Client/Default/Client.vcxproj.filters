@@ -1063,6 +1063,9 @@
     <Filter Include="10.ControlTower\MovieDirector\CameraState\Interface">
       <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraState\Fade">
+      <UniqueIdentifier>{713382d3-0c91-4eb8-b633-5ef9f29e21cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2184,12 +2187,6 @@
     <ClInclude Include="..\Header\Shot_Start_StageStartTake.h">
       <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Shot_WhiteFadeIn.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Shot_WhiteFadeOut.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\HpItemC.h">
       <Filter>03.Component\03.Item</Filter>
     </ClInclude>
@@ -2204,6 +2201,18 @@
     </ClInclude>
     <ClInclude Include="..\Header\Shot.h">
       <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotateAround.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_WhiteFadeOut.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_WhiteFadeIn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_BlackFadeIn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3236,12 +3245,6 @@
     <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\HpItemC.cpp">
       <Filter>03.Component\03.Item</Filter>
     </ClCompile>
@@ -3256,6 +3259,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotateAround.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

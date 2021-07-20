@@ -58,9 +58,6 @@ void CTwoStageScene::Awake(_int numOfLayers)
 void CTwoStageScene::Start(void)
 {
 	__super::Start();
-
-	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-	spCube0->AddComponent<CTwoConversationC>();
 	
 	SetupFromLoader();
 	SetupMembers();

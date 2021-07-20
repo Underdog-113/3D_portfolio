@@ -1,5 +1,5 @@
 #pragma once
-#include "CameraState.h"
+#include "Shot.h"
 class CShot_End_StageStartTake :
 	public CShot
 {

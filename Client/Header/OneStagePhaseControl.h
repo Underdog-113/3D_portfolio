@@ -8,6 +8,7 @@ class COneStagePhaseControl final : public CPhaseControl
 public:
 	enum class EOneStagePhase
 	{
+		ReadyStage			,
 		PlayerSummon		,
 		Conversation		,
 		BeforeFirstFight1	,

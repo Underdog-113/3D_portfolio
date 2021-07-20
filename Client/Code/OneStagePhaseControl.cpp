@@ -30,10 +30,14 @@ void COneStagePhaseControl::Update(void)
 		++m_curPhase;
 		break;
 
+	case (_int)EOneStagePhase::ReadyStage:
+		CStageControlTower::GetInstance()->SetDirectorMode(true);
+		++m_curPhase;
+		break;
+
 	case (_int)EOneStagePhase::PlayerSummon:
 		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
 		{
-
 			EnterConversationPhase();
 			++m_curPhase;
 		}
@@ -41,6 +45,7 @@ void COneStagePhaseControl::Update(void)
 	case (_int)EOneStagePhase::Conversation:
 		if (m_spConversation->IsEnd())
 		{
+			CStageControlTower::GetInstance()->SetDirectorMode(false);
 			++m_curPhase;
 		}
 		break;
@@ -113,8 +118,7 @@ void COneStagePhaseControl::Update(void)
 
 		//After killing MidBoss
 	case (_int)EOneStagePhase::MidBossEnd:
-		CStageControlTower::GetInstance()->SetDirectorMode(true);
-		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
+		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
 		++m_curPhase;
 		break;
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "CameraState.h"
+#include "Shot.h"
 class CShot_FixTargetBack :
 	public CShot
 {

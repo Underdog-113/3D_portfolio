@@ -1,16 +1,19 @@
 #pragma once
 #include "Shot.h"
-class CShot_WhiteFadeOut : public CShot
+class CShot_BlackFadeIn : public CShot
 {
 public:
 	struct Desc
 	{
-		Engine::CFadeInOutC* pWhiteFade = nullptr;
+		Engine::CFadeInOutC* pBlackFade = nullptr;
+		_float alphaLimit = 0.5f;
 	};
 
 public:
-	CShot_WhiteFadeOut();
-	~CShot_WhiteFadeOut();
+	CShot_BlackFadeIn();
+	~CShot_BlackFadeIn();
+
+	virtual _bool CheckOnTake(_float takeTimer);
 
 public:
 	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc);

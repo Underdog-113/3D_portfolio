@@ -468,6 +468,7 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkAttack2nd = false;
 	m_checkAttack3rd = false;
 	m_checkAttack4th = false;
+	m_checkEffect = false;
 }
 
 void CFSM_KianaC::ResetCheckMembers_Hit()
@@ -528,6 +529,12 @@ void CFSM_KianaC::Appear_Enter(void)
 
 void CFSM_KianaC::Appear_Update(float deltaTime)
 {
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.267)
+	{
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
+		m_checkShake = true;
+	}
+
 	if (CheckAction_StandBy_Timeout(0.9f))
 		return;
 }
@@ -731,7 +738,7 @@ void CFSM_KianaC::Attack_3_Update(float deltaTime)
 		m_pKiana->UnActiveAttackBall();
 	if (CheckAction_Evade_OnAction())
 		return;
-	if (CheckAction_Attack(Name_Attack_4))
+	if (CheckAction_Attack(Name_Attack_4, 0.2f))
 		return;
 	if (CheckAction_Ultra(Delay_Effect_Atk03 + 0.1f))
 		return;
@@ -1174,7 +1181,7 @@ void CFSM_KianaC::EvadeBackward_Update(float deltaTime)
 		m_isSecondEvade = false;
 		return;
 	}
-	if (CheckAction_Run(0.3f))
+	if (CheckAction_Run(0.4f))
 	{
 		m_isSecondEvade = false;
 		return;
@@ -1293,7 +1300,7 @@ void CFSM_KianaC::Hit_H_Init(void)
 
 void CFSM_KianaC::Hit_H_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Hit_H);
+	m_pDM->RepeatAniSet(Index_Hit_H);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(true);
 
@@ -1323,7 +1330,7 @@ void CFSM_KianaC::Hit_L_Init(void)
 
 void CFSM_KianaC::Hit_L_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Hit_L);
+	m_pDM->RepeatAniSet(Index_Hit_L);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	PlaySound_Attack_RandomHit();
@@ -1671,6 +1678,12 @@ void CFSM_KianaC::SwitchIn_Enter(void)
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 {
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.380)
+	{
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
+		m_checkShake = true;
+	}
+
 	if (m_pDM->IsAnimationEnd())
 	{
 		if (m_pKiana->GetIsQTESwitch())

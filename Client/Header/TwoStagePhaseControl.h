@@ -8,6 +8,7 @@ class CTwoStagePhaseControl final : public CPhaseControl
 public:
 	enum class ETwoStagePhase
 	{
+		ReadyStage,
 		PlayerSummon		,
 		Conversation		,
 		BeforeBoss			,

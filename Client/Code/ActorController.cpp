@@ -87,11 +87,6 @@ void CActorController::SetInputLock_ByAni(bool lock)
 	}
 }
 
-void CActorController::SetDirectorMode(_bool value)
-{
-	m_directorMode = value;
-}
-
 bool CActorController::CheckMoveOrder()
 {
 	if (m_rotateByTarget)
