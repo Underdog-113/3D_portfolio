@@ -4,6 +4,8 @@
 #include "ATBPattern.h"
 
 class CFSM_BronyaC;
+class CBronya_Ult_Ring;
+class CBronya_Ult_Range;
 
 class CBronyaArsenalPattern : public CATBPattern
 {
@@ -28,7 +30,7 @@ private:
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 1.5f; // 공격 거리
-	_float m_atkCool = 7.f; //  쿨타임
+	_float m_atkCool = 13.f; //  쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
 	_float m_walkCool = 1.f; // 이동 맥스 쿨타임
@@ -40,11 +42,11 @@ private:
 	_bool m_movedCenter = false;
 	_bool m_movedCorner = false;
 	_bool m_onArsenal = false;
+	_bool m_onRingEffect = false;
+	_bool m_onRangeEffect = false;
 
 	_mat m_atkMat;
 	std::wstring m_curState;
-
-	std::vector<SP(Engine::CObject)> m_vRingEffect;
 
 private:
 	_float3 m_lerpStartPos = ZERO_VECTOR;
@@ -53,7 +55,11 @@ private:
 	_float m_lerpCurTimer = 0.f;
 
 	_bool m_initEffect = false;
-	_int m_maxRingCnt = 14;
+
+	std::vector<SP(CBronya_Ult_Ring)> m_vRingEffect;
+	std::vector<SP(CBronya_Ult_Range)> m_vRangeEffect;
+
+	_int m_effectIndex = 0;
 };
 
 #endif

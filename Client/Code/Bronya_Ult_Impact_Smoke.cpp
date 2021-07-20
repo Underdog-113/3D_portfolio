@@ -39,6 +39,8 @@ SP(Engine::CObject) CBronya_Ult_Impact_Smoke::MakeClone()
 void CBronya_Ult_Impact_Smoke::Awake()
 {
 	__super::Awake();
+	m_spTransform->SetSize(0.2f, 0.2f, 0.2f);
+		
 
 }
 
@@ -63,7 +65,7 @@ void CBronya_Ult_Impact_Smoke::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fAlpha -= 0.5f * GET_DT;
+	m_fAlpha -= 2.3f * GET_DT;
 }
 
 void CBronya_Ult_Impact_Smoke::LateUpdate()
@@ -76,6 +78,9 @@ void CBronya_Ult_Impact_Smoke::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_AlphaTestEnabled", true);
+	pEffect->SetBool("g_zWriteEnabled", false);	
+	pEffect->CommitChanges();
 }
 
 void CBronya_Ult_Impact_Smoke::Render(LPD3DXEFFECT pEffect)

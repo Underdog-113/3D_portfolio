@@ -49,4 +49,3 @@ public:
 
 	void ButtonFunction(SP(CButton) button, std::wstring function);
 };
-

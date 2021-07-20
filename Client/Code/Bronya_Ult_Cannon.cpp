@@ -61,7 +61,7 @@ void CBronya_Ult_Cannon::Update()
 {
 	__super::Update();
 
-	if (m_fTmpPosZ - 0.5f <= m_spTransform->GetPosition().z)
+	if (m_fTmpPosZ + 0.5f > m_spTransform->GetPosition().z)
 	{
 		m_spTransform->AddPosition(-m_spTransform->GetForward() * GET_DT * 0.5f);
 	}

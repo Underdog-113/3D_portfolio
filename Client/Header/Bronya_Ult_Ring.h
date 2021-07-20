@@ -40,6 +40,8 @@ private:
 
 private:
 	SP(Engine::CObject) m_spCannon;
+	SP(Engine::CObject) m_spWind;
 
+	GETTOR_SETTOR(_bool, m_disappear, false, Disappear)
 };
 
