@@ -74,9 +74,19 @@ struct PS_INPUT
 	float3 mNormal	 : NORMAL;
 };
 
-
-float4 ps_main(VS_OUTPUT Input) : COLOR
+struct PS_OUTPUT
 {
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
+};
+
+
+PS_OUTPUT ps_main(VS_OUTPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
@@ -90,6 +100,11 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	blendColor.a = 0;
 	blendColor = saturate(blendColor);
+
+	Out.vColor = blendColor;
+
+	if (blendColor.a != 0)
+		Out.vEmissive = blendColor;
 
 	if (Input.mUV.x > gTrailAlpha)
 	{
@@ -114,10 +129,12 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 		float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb );
 
-		return float4(diffuse, multiple);
+		Out.vColor = float4(diffuse, multiple);
+
+		return Out;
 	}
 
-	return blendColor;
+	return Out;
 }
 
 technique TrailShader
@@ -125,7 +142,7 @@ technique TrailShader
 	pass p0
 	{
 		CullMode = None;
-		AlphaTestEnable = true;
+		AlphaTestEnable = false;
 		zWriteEnable = false;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;

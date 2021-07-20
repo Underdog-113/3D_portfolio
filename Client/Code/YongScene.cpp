@@ -135,9 +135,9 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		
-		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact", true, (_uint)Engine::ELayerID::Effect);
-
+		SP(CMeshEffect_Client) spObj = 
+			std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Cinema_Dome", true, (_uint)Engine::ELayerID::Effect));
+		spObj->GetGraphics()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 		//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
 		// Bronya Smoke
 		// 일정시간 마다 호출
