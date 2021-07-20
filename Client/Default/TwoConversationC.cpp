@@ -78,7 +78,6 @@ void CTwoConversationC::OnDisable()
 	__super::OnDisable();
 }
 
-
 void CTwoConversationC::Conversation()
 {
 	if (m_conversationCheck)
