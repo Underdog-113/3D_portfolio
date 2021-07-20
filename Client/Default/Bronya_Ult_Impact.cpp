@@ -28,7 +28,7 @@ SP(Engine::CObject) CBronya_Ult_Impact::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSize(0.2f, 0.2f, 0.2f);
+	spClone->m_spTransform->SetSize(1.f, 1.f, 1.f);
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -58,6 +58,8 @@ void CBronya_Ult_Impact::FixedUpdate()
 
 void CBronya_Ult_Impact::Update()
 {
+	__super::Update();
+
 	if (m_fAlpha <= 0.f)
 	{
 		this->SetDeleteThis(true);
@@ -76,6 +78,8 @@ void CBronya_Ult_Impact::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", false);
+	pEffect->CommitChanges();
 }
 
 void CBronya_Ult_Impact::Render(LPD3DXEFFECT pEffect)

@@ -8,7 +8,7 @@ float4x4 gProjection;
 float4 gWorldLightPosition;
 
 float  gTime;
-float  gAlpha = 1.f;
+float  gAlpha = 0.2f;
 float  gUVSpeed;
 
 texture gDiffuseTex;

@@ -17,6 +17,9 @@ public:
 	static SP(CBronyaEscapePattern) Create();
 
 private:
+	_float3 GetEscapePos(Engine::CObject* pOwner);
+
+private:
 	_float m_cost = 17.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임

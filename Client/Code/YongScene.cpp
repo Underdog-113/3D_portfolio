@@ -135,12 +135,11 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-
 		SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Bronya_Ult_Laser", true, (_uint)Engine::ELayerID::Effect);
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
 			// Bronya Smoke
-			// ÀÏÁ¤½Ã°£ ¸¶´Ù È£Ãâ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 			//SP(Engine::CObject) spObj;
 			//for (_int i = 0; i < 3; ++i)
 			//{
@@ -150,36 +149,36 @@ void CYongScene::Update(void)
 			//	{
 			//	case 0:
 			//		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_RandomSmoke", true);
-			//		spObj->GetTransform()->SetPosition(_float3(/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3 - 0.2f), /* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 2) - 0.3f,/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3)));
+			//		spObj->GetTransform()->SetPosition(_float3(/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3 - 0.2f), /* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 2) - 0.3f,/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3)));
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"Fx_Fire_01");
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"Fx_Fire_01");
 			//		break;
 			//	case 1:
 			//		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_RandomSmoke", true);
-			//		spObj->GetTransform()->SetPosition(_float3(/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3 - 0.2f), /* ºê·Î³ÄÀÇ À§Ä¡ + */_float(rand() % 2) - 0.7f, /* ºê·Î³ÄÀÇ À§Ä¡ + */_float(rand() % 3)));
+			//		spObj->GetTransform()->SetPosition(_float3(/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3 - 0.2f), /* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */_float(rand() % 2) - 0.7f, /* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */_float(rand() % 3)));
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 			//		break;
 			//	case 2:
 			//		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_RandomSmoke", true);
-			//		spObj->GetTransform()->SetPosition(_float3(/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3 - 0.2f),/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 2) - 0.2f,/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3)));
+			//		spObj->GetTransform()->SetPosition(_float3(/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3 - 0.2f),/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 2) - 0.2f,/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3)));
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 			//		break;
 			//	case 3:
 			//		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_RandomSmoke", true);
-			//		spObj->GetTransform()->SetPosition(_float3(/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3 - 0.2f),/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 2) - 0.2f,/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3)));
+			//		spObj->GetTransform()->SetPosition(_float3(/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3 - 0.2f),/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 2) - 0.2f,/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3)));
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"Fx_Fire_01");
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"Fx_Fire_01");
 			//		break;
 			//	default:
 			//		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_RandomSmoke", true);
-			//		spObj->GetTransform()->SetPosition(_float3(/* ºê·Î³ÄÀÇ À§Ä¡ + */ _float(rand() % 3 - 0.2f), /* ºê·Î³ÄÀÇ À§Ä¡ + */_float(rand() % 2) - 0.7f, /* ºê·Î³ÄÀÇ À§Ä¡ + */_float(rand() % 3)));
+			//		spObj->GetTransform()->SetPosition(_float3(/* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */ _float(rand() % 3 - 0.2f), /* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */_float(rand() % 2) - 0.7f, /* ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + */_float(rand() % 3)));
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog04");
 			//		spObj->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog04");
 			//		break;
-			//	}			
-			//}		
+			//	}
+			//}
 	}
 
 }

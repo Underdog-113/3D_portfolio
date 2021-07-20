@@ -4,6 +4,9 @@
 
 #include "Object.h"
 
+class CBronya_Ult_Impact;
+class CBronya_Ult_Impact_Smoke;
+
 class CBronyaBullet : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -54,11 +57,17 @@ protected:
 		
 	GETTOR_SETTOR	(_mat*,							m_pParentMatrix,	nullptr,	ParentMatrix)
 	GETTOR_SETTOR	(_float3,						m_dir,				{},			Dir)
+	GETTOR_SETTOR	(_bool,							m_move,				true,		Move)
 
 	_mat m_bulletMat;
 
+	_bool m_onAttackBall = false;
+
 	_float m_x = 0.f;
 	_float m_y = 0.f;
+
+	SP(CBronya_Ult_Impact) m_spImactEffect = nullptr;
+	SP(CBronya_Ult_Impact_Smoke) m_spImpactSmokeEffect = nullptr;
 };
 
 #endif

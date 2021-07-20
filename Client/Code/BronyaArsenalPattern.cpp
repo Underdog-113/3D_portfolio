@@ -11,6 +11,9 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
+#include "BronyaBullet.h"
+#include "Bronya_Ult_Range.h"
+#include "Bronya_Ult_Ring.h"
 
 CBronyaArsenalPattern::CBronyaArsenalPattern()
 {
@@ -38,14 +41,14 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Center */
 	if (false == m_movedCenter)
 	{
-		_float3 endPos = { 92.9913f, mPos.y, -4.6115f };
+		_float3 endPos = { 186.04f, mPos.y, -8.94f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCenter);
 	}
 
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		_float3 endPos = { 91.9447f, mPos.y, -8.55992f };
+		_float3 endPos = { 186.21f, mPos.y, -17.06f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
 	}
 
@@ -65,14 +68,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 		// Arsenal Loop 상태로 변경
 		fsm->ChangeState(Name_Arsenal_Loop);
 		m_atkReady = false;
-
-		// add effect
-		// 대포가 플레이어 따라가는거 막기.
-		// 대포가 좀 더 길게 튀어나왔으면.
-
-
-		
-
+		return;
 	}
 	// 내가 Arsenal Loop가 끝났고, 쿨타임도 끝났다면
 	else if (Name_Arsenal_Loop == fsm->GetCurStateString() &&
@@ -81,6 +77,21 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// Arsenal End 상태로 변경
 		fsm->ChangeState(Name_Arsenal_End);
+
+		// 어택볼 끄고, range 이펙트 지우기
+		_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxArsenalEffectCnt();
+		for (_int i = 0; i < cnt; ++i)
+		{
+			// attackball 끄기
+			static_cast<CMB_Bronya*>(pOwner)->GetExplosions()[i]->SetIsEnabled(false);
+			static_cast<CMB_Bronya*>(pOwner)->GetExplosions()[i]->UnActiveAttackBall();
+			// range 이펙트 지우기
+			m_vRangeEffect[i]->SetDeleteThis(true);
+			// ring, cannon 이펙트 지우기
+			m_vRingEffect[i]->SetDisappear(true);
+		}
+		m_vRingEffect.clear();
+		m_vRangeEffect.clear();
 	}
 	// 내가 Arsenal End 상태가 끝났다면
 	else if (Name_Arsenal_End == fsm->GetCurStateString() &&
@@ -88,8 +99,81 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 대기 상태로 변경
 		fsm->ChangeState(Name_IDLE);
-		m_movedCenter = m_movedCorner = false;
+		m_movedCenter = m_movedCorner = m_onRingEffect = m_onRangeEffect = false;
+		m_effectIndex = 0;
+		m_accTime = 0.f;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+	}
+
+	/************************* Effect */
+	// ring 이펙트를 순차적으로 생성한다.
+	if (Name_Arsenal_Loop == fsm->GetCurStateString() &&
+		0.25f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onRingEffect)
+	{
+		m_accTime += GET_DT;
+
+		if (m_accTime >= 0.12f)
+		{
+			_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxArsenalEffectCnt();
+
+			if (m_effectIndex < cnt)
+			{
+				SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true);
+				effect->GetTransform()->SetPosition(static_cast<CMB_Bronya*>(pOwner)->GetRingEffectPos()[m_effectIndex]);
+				m_vRingEffect.emplace_back(std::dynamic_pointer_cast<CBronya_Ult_Ring>(effect));
+				++m_effectIndex;
+			}
+			else
+			{
+				m_onRingEffect = true;
+				m_effectIndex = 0;
+			}
+
+			m_accTime = 0.f;
+		}
+	}
+
+	// 모든 ring 이펙트를 생성 후 range 이펙트를 생성한다
+	if (Name_Arsenal_Loop == fsm->GetCurStateString() &&
+		true == m_onRingEffect &&
+		false == m_onRangeEffect)
+	{
+		m_accTime += GET_DT;
+
+		if (m_accTime >= 0.16f)
+		{
+			_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxArsenalEffectCnt();
+
+			if (m_effectIndex < cnt)
+			{
+				SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Range", true);
+				effect->GetTransform()->SetPosition(static_cast<CMB_Bronya*>(pOwner)->GetRangeEffectPos()[m_effectIndex]);
+				effect->GetTransform()->SetSize(_float3(0.3f, 0.3f, 0.3f));
+				m_vRangeEffect.emplace_back(std::dynamic_pointer_cast<CBronya_Ult_Range>(effect));
+				++m_effectIndex;
+			}
+			else
+			{
+				m_onRangeEffect = true;
+				m_effectIndex = 0;
+			}
+
+			m_accTime = 0.f;
+		}
+	}
+
+	// 모든 이펙트가 생성된 후에 어택볼을 생성한다
+	if (Name_Arsenal_Loop == fsm->GetCurStateString() &&
+		true == m_onRangeEffect &&
+		true == m_onRingEffect)
+	{
+		_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxArsenalEffectCnt();
+
+		for (_int i = 0; i < cnt; ++i)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->GetExplosions()[i]->SetIsEnabled(true);
+		}
 	}
 } 
 
