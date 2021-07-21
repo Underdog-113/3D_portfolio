@@ -109,9 +109,8 @@ void CThreeStageScene::OnDestroy(void)
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
 
-	m_pControlTower->OnDestroy();
-	m_pControlTower->DestroyInstance();
-	m_pControlTower = nullptr;
+	CStageControlTower::DestroyInstance();
+
 }
 
 void CThreeStageScene::OnEnable(void)

@@ -134,6 +134,8 @@ void CMainRoomScene::Start(void)
 		spObj->GetTransform()->SetPosition(fX, fY, fZ);
 
 	}
+
+
 }
 
 void CMainRoomScene::FixedUpdate(void)
