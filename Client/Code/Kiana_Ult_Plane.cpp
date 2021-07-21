@@ -80,6 +80,8 @@ void CKiana_Ult_Plane::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("gPlayingAnim", false);
+	pEffect->CommitChanges();
 }
 
 void CKiana_Ult_Plane::Render(LPD3DXEFFECT pEffect)

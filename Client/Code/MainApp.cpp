@@ -27,6 +27,7 @@
 #include "FaceShader.h"
 #include "KianaBodyShader.h"
 #include "AlphaMaskGlowShader.h"
+#include "SoftEffectShader_Glow.h"
 #pragma endregion
 
 
@@ -83,6 +84,8 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFaceShader::Create(), L"FaceShader", (_uint)EShaderID::FaceShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CKianaBodyShader::Create(), L"KianaBodyShader", (_uint)EShaderID::KianaBodyShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskGlowShader::Create(), L"AlphaMaskGlowShader", (_uint)EShaderID::AlphaMaskGlowShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader_Glow::Create(), L"SoftEffectShader_Glow", (_uint)EShaderID::SoftEffectShader_Glow);
+
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }
