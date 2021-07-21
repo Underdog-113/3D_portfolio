@@ -1,5 +1,6 @@
 #include "EngineStdafx.h"
 #include "Light.h"
+#include "WndApp.h"
 
 
 USING(Engine)
@@ -92,6 +93,8 @@ void CLight::InitLight(D3DLIGHT9 * pLightInfo, const _int & index)
 	pIndices[1]._2 = 3;
 
 	m_pIndexBuffer->Unlock();
+
+	GenerateOrthoMatrix();
 }
 
 void CLight::UpdateLight(void)
@@ -143,4 +146,10 @@ void CLight::RenderLight(LPD3DXEFFECT pEffect)
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 
 	pEffect->EndPass();
+}
+
+void CLight::GenerateOrthoMatrix(void)
+{
+	m_orthoMat;
+	D3DXMatrixOrthoLH(&m_orthoMat, (_float)GET_WND_WIDTH, (_float)GET_WND_HEIGHT, 0.1f, 1000.f);
 }
