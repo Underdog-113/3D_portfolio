@@ -216,7 +216,7 @@ void CMovieDirector::StartTake_SakuraVictory()
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
 	po_desc.offset = pActor->GetTransform()->GetUp() * -0.1f;
 	po_desc.startDistance = 0.5f;
-	po_desc.endDistance = 2.f;
+	po_desc.endDistance = 1.f;
 	pTake->ReadyShot(ShotName_PushOut, 0.6f, 3.6f, &po_desc);
 
 	m_pCurTake = pTake;
