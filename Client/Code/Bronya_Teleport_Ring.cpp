@@ -65,14 +65,34 @@ void CBronya_Teleport_Ring::Update(void)
 	}
 	_float _size = -0.5f * GET_DT;
 
-	m_spTransform->AddSize(_float3(_size, _size, _size));
+	if (m_spTransform->GetSize().x > 0.f)
+	{
+		m_spTransform->AddSize(_float3(_size, _size, _size));
+	}
 
-	m_fAlpha -= 0.7f * GET_DT;
+	m_fAlpha -= 0.1f * GET_DT;
 }
 
 void CBronya_Teleport_Ring::LateUpdate(void)
 {
 	__super::LateUpdate();
+
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	D3DXMatrixIdentity(&matBill);
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 }
 
 void CBronya_Teleport_Ring::PreRender(LPD3DXEFFECT pEffect)

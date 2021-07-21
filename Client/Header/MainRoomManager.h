@@ -10,5 +10,7 @@ public:
 	void OnDestroy(void);
 private:
 	_bool m_init;
+
+	SP(Engine::CObject) m_vPlayer = nullptr;
 };
 

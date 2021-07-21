@@ -77,8 +77,8 @@ void CInitScene::Start(void)
 	Engine::CCameraManager::GetInstance()->AddCamera(L"InitSceneBasicCamera", spCameraObject);
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
     
-	spCameraObject->GetTransform()->SetPosition(_float3(0.2f, 1.f,  -3.38f));
-	spCameraObject->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
+	spCameraObject->GetTransform()->SetPosition(_float3(0.2f, 1.f,  -2.98f));
+	spCameraObject->GetTransform()->SetRotation(_float3(-0.055f, -0.021f, 0.0f));
 
 	m_spElevatorBase = ADD_CLONE(L"ElevatorBase", false, (_int)Engine::ELayerID::Decoration);
 	
@@ -98,12 +98,12 @@ void CInitScene::Start(void)
 
 	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");
 	text->GetTransform()->SetPositionZ(0.5f);
-	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,240), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
+	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,340), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
 
 	{
 		slider =
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", false, (_int)Engine::ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(-65.0f, -200.0f, 0.0f));
+		slider->GetTransform()->SetPosition(_float3(-65.0f, -300.0f, 0.0f));
 		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
 
 		SP(Engine::CImageObject) background =

@@ -907,7 +907,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spBronyaTeleportLaser);
 
 	SP(CMeshEffect_Client) spBronyaTeleportRing(CBronya_Teleport_Ring::Create(true, this));
-	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
+	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Cloud");
 	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spBronyaTeleportRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
 	spBronyaTeleportRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Teleport_Start");

@@ -11,6 +11,7 @@
 #include "AniCtrl.h"
 #include "PatternMachineC.h"
 #include "AttackBall.h"
+#include "Bronya_Impact.h"
 
 CBronyaShock2Pattern::CBronyaShock2Pattern()
 {
@@ -55,6 +56,7 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->ChangeState(Name_Shock_2);
 			m_onAtkBall = false;
 			m_offAtkBall = false;
+			m_onShockEffect = false;
 			return;
 		}
 	}
@@ -103,6 +105,25 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 	if (true == m_onAtkBall)
 	{
 		GetRHandMat(pOwner, m_pAttackBallMat);
+
+		// effect
+		if (false == m_onShockEffect)
+		{
+			SP(CBronya_Impact) effect = std::dynamic_pointer_cast<CBronya_Impact>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact", true));
+			effect->GetTransform()->SetPosition(_float3(m_pAttackBallMat->_41, m_pAttackBallMat->_42, m_pAttackBallMat->_43));
+			effect->GetTransform()->AddPositionY(-0.7f);
+			effect->GetTransform()->SetSize(1.5f, 1.5f, 1.5f);
+
+			_int iRand = rand() % 4;
+
+			for (_int i = 0; i < 6; ++i)
+			{
+				SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Cinema_Lightning", true, (_uint)Engine::ELayerID::Effect);
+				spObj->GetTransform()->SetPosition(_float3(m_pAttackBallMat->_41 + _float(rand() % 3 - 0.8f), m_pAttackBallMat->_42, m_pAttackBallMat->_43 + _float(rand() % 2) - 0.5f));
+			}
+
+			m_onShockEffect = true;
+		}
 	}
 } 
 

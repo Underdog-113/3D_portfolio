@@ -3,6 +3,8 @@
 
 #include "ATBPattern.h"
 
+class CBronya_Teleport_Laser;
+
 class CBronyaEscapePattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
@@ -20,7 +22,8 @@ private:
 	_float3 GetEscapePos(Engine::CObject* pOwner);
 
 private:
-	_float m_cost = 17.f;
+	//_float m_cost = 17.f;
+	_float m_cost = 1.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 25.f; // 공격 거리
@@ -33,8 +36,14 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
 	_bool m_onEscape = false;
+	_bool m_onLaserOutEffect = false;
+	_bool m_onLaserInEffect = false;
 
 	_mat m_atkMat;
+
+	SP(CBronya_Teleport_Laser) m_vLaserOutEffect = nullptr;
+	SP(CBronya_Teleport_Laser) m_vLaserInEffect = nullptr;
+	_float defaultEscapeEffectSizeX = 0.f;
 
 private:
 	_float3 m_lerpStartPos = ZERO_VECTOR;
