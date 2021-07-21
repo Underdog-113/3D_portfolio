@@ -583,7 +583,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
 					pEffect->CommitChanges();
-
+					
 					_uint maxPass = 0;
 
 					pEffect->Begin(&maxPass, 0);

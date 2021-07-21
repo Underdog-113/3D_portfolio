@@ -64,10 +64,10 @@ void CKiana_Ult_Plane::Update()
 		m_fAlpha = 1.f;
 	}	
 
-	m_spTransform->AddSizeX(1.2f * GET_PLAYER_DT);
-	m_spTransform->AddSizeZ(1.2f * GET_PLAYER_DT);
+	m_spTransform->AddSizeX(2.3f * GET_PLAYER_DT);
+	m_spTransform->AddSizeZ(2.3f * GET_PLAYER_DT);
 
-	m_fAlpha -= 0.5f * GET_PLAYER_DT;
+	m_fAlpha -= 0.8f * GET_PLAYER_DT;
 }
 
 void CKiana_Ult_Plane::LateUpdate()

@@ -12,6 +12,8 @@
 #include "PatternMachineC.h"
 #include "AttackBall.h"
 #include "StageControlTower.h"
+#include "Bronya_Teleport_Ring.h"
+#include "Bronya_Teleport_Laser.h"
 
 CBronyaEscapePattern::CBronyaEscapePattern()
 {
@@ -42,6 +44,16 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	{
 		// escape in 실행
 		fsm->ChangeState(Name_Escape_Out);
+
+		// effect
+		SP(CBronya_Teleport_Ring) effect = std::dynamic_pointer_cast<CBronya_Teleport_Ring>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Ring", true));
+		effect->GetTransform()->SetSize(0.1f, 0.1f, 0.1f);
+		effect->GetTransform()->SetPosition(mPos);
+		effect->GetTransform()->AddPositionY(0.5f);
+		m_vLaserOutEffect = std::dynamic_pointer_cast<CBronya_Teleport_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Laser", true));
+		m_vLaserOutEffect->GetTransform()->SetPosition(mPos);
+		defaultEscapeEffectSizeX = m_vLaserOutEffect->GetTransform()->GetSize().x;
+		m_onLaserOutEffect = true;
 	}
 	// escape in 상태 중 적절한 위치로 올라왔다면
 	else if (Name_Escape_Out == fsm->GetCurStateString() &&
@@ -53,13 +65,9 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(0.05f);
 		m_onEscape = true;
 
-		// 목표 위치 잡기
-		_float x = (_float)GetRandRange(-15, 15);
-		_float z = (_float)GetRandRange(-15, 15);
-
 		// 이스케이프 위치로 이동
 		m_lerpStartPos = mPos;
-		m_lerpEndPos = _float3(x, mPos.y, z);
+		m_lerpEndPos = GetEscapePos(pOwner);
 		m_lerpCurTimer = 0.f;
 	}
 	// escape in 상태 중 목표 위치로 이동 중이라면
@@ -86,6 +94,10 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_Escape_In);
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		m_onEscape = false;
+
+		m_vLaserInEffect = std::dynamic_pointer_cast<CBronya_Teleport_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Laser", true));
+		m_vLaserInEffect->GetTransform()->SetPosition(mPos);
+		m_onLaserInEffect = true;
 	}
 	// escape in 상태가 끝났다면
 	else if (Name_Escape_In == fsm->GetCurStateString() &&
@@ -96,6 +108,39 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		m_lerpCurTimer = 0.f;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
+
+	/************************* Effect */
+	if (true == m_onLaserOutEffect)
+	{
+		_float sizeX = m_vLaserOutEffect->GetTransform()->GetSize().x - (1.5f * GET_DT);
+
+		if (0.f >= sizeX)
+		{
+			m_vLaserOutEffect->GetTransform()->SetSizeX(0.f);
+			m_onLaserOutEffect = false;
+			m_vLaserOutEffect->SetDeleteThis(true);
+		}
+		else
+		{
+			m_vLaserOutEffect->GetTransform()->SetSizeX(sizeX);
+		}
+	}
+
+	if (true == m_onLaserInEffect)
+	{
+		_float sizeX = m_vLaserInEffect->GetTransform()->GetSize().x - (3.5f * GET_DT);
+
+		if (0.f >= sizeX)
+		{
+			m_vLaserInEffect->GetTransform()->SetSizeX(0.f);
+			m_onLaserInEffect = false;
+			m_vLaserInEffect->SetDeleteThis(true);
+		}
+		else
+		{
+			m_vLaserInEffect->GetTransform()->SetSizeX(sizeX);
+		}
+	}
 }
 
 SP(CBronyaEscapePattern) CBronyaEscapePattern::Create()
@@ -103,4 +148,12 @@ SP(CBronyaEscapePattern) CBronyaEscapePattern::Create()
 	SP(CBronyaEscapePattern) spInstance(new CBronyaEscapePattern, Engine::SmartDeleter<CBronyaEscapePattern>);
 
 	return spInstance;
+}
+
+_float3 CBronyaEscapePattern::GetEscapePos(Engine::CObject* pOwner)
+{
+	_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxEscapePos() - 1;
+	_int index = GetRandRange(0, cnt);
+
+	return static_cast<CMB_Bronya*>(pOwner)->GetEscapePos()[index];
 }

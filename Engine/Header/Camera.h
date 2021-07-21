@@ -86,7 +86,7 @@ private:
 	GETTOR			(_float,				m_FOV,				PI / 4,					FOV)
 
 	GETTOR_SETTOR	(_float,				m_zoomSpeed,		300.f,					ZoomSpeed)
-	GETTOR_SETTOR	(_float,				m_moveSpeed,		20.f,					MoveSpeed)
+	GETTOR_SETTOR	(_float,				m_moveSpeed,		5.f,					MoveSpeed)
 
 	//For Fixed Camera
 	GETTOR_SETTOR	(_float3,				m_fixedPos,			ZERO_VECTOR,			FixedPos)

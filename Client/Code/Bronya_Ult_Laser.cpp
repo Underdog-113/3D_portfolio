@@ -32,7 +32,7 @@ SP(Engine::CObject) CBronya_Ult_Laser::MakeClone()
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
-	spClone->m_bBillboard = true;
+	spClone->m_bBillboard = false;
 
 	return spClone;
 }
@@ -40,6 +40,17 @@ SP(Engine::CObject) CBronya_Ult_Laser::MakeClone()
 void CBronya_Ult_Laser::Awake()
 {
 	__super::Awake();
+	m_spTransform->SetSizeX(4.f);	
+	m_spTexture->AddTexture(L"Laser_Cannon_2");
+	m_spTexture->AddTexture(L"Laser_Cannon_2");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+
+}
+
+void CBronya_Ult_Laser::Start()
+{
+	__super::Start();
 
 	m_fAlphaWidth = 3.f;
 	m_fAlphaHeight = 2.f;
@@ -47,14 +58,9 @@ void CBronya_Ult_Laser::Awake()
 	m_TilingY = 0;
 	m_maxXIndex = 3;
 	m_maxYIndex = 1;
+
 	m_fAlpha = 1.f;
 	m_fTIme = 0.f;
-}
-
-void CBronya_Ult_Laser::Start()
-{
-	__super::Start();
-
 }
 
 void CBronya_Ult_Laser::FixedUpdate()
@@ -66,7 +72,7 @@ void CBronya_Ult_Laser::FixedUpdate()
 void CBronya_Ult_Laser::Update()
 {
 	__super::Update();
-
+	UpdateFrame(0.05f);
 }
 
 void CBronya_Ult_Laser::LateUpdate()
@@ -83,15 +89,13 @@ void CBronya_Ult_Laser::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
-
+	pEffect->SetBool("g_zWriteEnable", false);
 	pEffect->CommitChanges();
 }
 
 void CBronya_Ult_Laser::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
-
-
 }
 
 void CBronya_Ult_Laser::PostRender(LPD3DXEFFECT pEffect)
@@ -126,7 +130,7 @@ void CBronya_Ult_Laser::SetBasicName()
 
 void CBronya_Ult_Laser::UpdateFrame(_float _frmSpeed)
 {
-	m_fTIme += GET_PURE_DT;
+	m_fTIme += GET_DT;
 
 	if (m_fTIme >= _frmSpeed)
 	{

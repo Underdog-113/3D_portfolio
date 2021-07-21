@@ -139,7 +139,6 @@ void CBossStageScene::SetupFromLoader(void)
 	Load->TextLoad(this);
 	Load->MapLoad(this);
 	Load->PhaseChangerLoad(this);
-	//Load->PortalLoad(this);
 	delete(Load);
 }
 

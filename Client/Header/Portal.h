@@ -3,6 +3,8 @@
 
 #include "Object.h"
 
+class CPortal_Plane;
+
 class CPortal final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -47,5 +49,7 @@ private:
 	GETTOR		(SP(Engine::CShaderC),		m_spShader,			nullptr,	Shader)
 
 	GETTOR_SETTOR	(_float3,				m_destPos,			ZERO_VECTOR,	DestPos)
+
+	SP(CPortal_Plane) m_vEffect;
 };
 #endif

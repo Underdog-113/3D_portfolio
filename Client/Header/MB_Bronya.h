@@ -47,6 +47,10 @@ public:
 			
 private:
 	void EquipWeapon();
+	void ArsenalEffectPosLoad();
+	void BulletReload();
+	void EquipBomb();
+	void SetupEscapePos();
 	void ApplyHitInfo(HitInfo info) override;
 	virtual void MonsterDead() override;
 
@@ -57,9 +61,14 @@ private:
 	_mat m_actualBoneMat;
 	_float3 m_vDir;
 
+	GETTOR(_int, m_maxArsenalEffectCnt, 0, MaxArsenalEffectCnt)
+	GETTOR(_int, m_maxEscapePos, 0, MaxEscapePos)
 	GETTOR(SP(Engine::CObject), m_spWeapon, nullptr, Weapon)
-	GETTOR(std::vector<SP(CBronyaBullet)>, m_vBullets, {}, Bullets)
-	//GETTOR(std::vector<SP(CAttackBall)>, m_vBulletAB, {}, BulletAB)
+	GETTOR(std::vector<SP(CBronyaBullet)>, m_vBullets, {}, Bullets) // Shoot1 Skill
+	GETTOR(std::vector<SP(CBronyaBullet)>, m_vExplosions, {}, Explosions) // Arsenal Skill
+	GETTOR(std::vector<_float3>, m_vEscapePos, {}, EscapePos) // Escape Skill
+	GETTOR(std::vector<_float3>, m_vRingEffectPos, {}, RingEffectPos)
+	GETTOR(std::vector<_float3>, m_vRangeEffectPos, {}, RangeEffectPos)
 
 public:
 	static SP(CMB_Bronya) Create(_bool isStatic, Engine::CScene* pScene);
