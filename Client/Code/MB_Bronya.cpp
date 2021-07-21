@@ -73,7 +73,7 @@ void CMB_Bronya::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(26277.f);
+	stat.SetBaseHp(11277.f);
 	stat.SetBaseAtk(110.f);
 	stat.SetBaseDef(37.f);
 
@@ -83,10 +83,11 @@ void CMB_Bronya::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(10);
+	m_pStat->SetHPMagnification(6);
 	m_pStat->SetOnSuperArmor(true);
-	m_pStat->SetMaxBreakGauge(1000.f);
+	m_pStat->SetMaxBreakGauge(99999.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
+	m_weakTime = 8.f;
 
 	m_pSuperArmor->SetHitL(true);
 	m_pSuperArmor->SetHitH(true);
@@ -128,6 +129,11 @@ void CMB_Bronya::Update(void)
 	m_actualBoneMat *= m_spTransform->GetWorldMatrix();
 	
 	pWeaponTransform->SetParentMatrix(&m_actualBoneMat);
+
+	if (0.f >= m_pStat->GetCurBreakGauge() && false == GetComponent<CPatternMachineC>()->GetOnStun())
+	{
+		GetComponent<CPatternMachineC>()->SetOnStun(true);
+	}
 }
 
 void CMB_Bronya::LateUpdate(void)
@@ -198,6 +204,11 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 {
 	__super::ApplyHitInfo(info);
 
+	if (true == m_pStat->GetOnPatternShield())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
@@ -233,14 +244,6 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 	case HitInfo::CC_None:
 		break;
 	case HitInfo::CC_Stun:
-		//if (false == m_pSuperArmor->GetStun())
-		//{
-		//	this->GetComponent<CPatternMachineC>()->SetOnStun(true);
-		//}
-		//else if (true == m_pSuperArmor->GetStun())
-		//{
-		//	if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnStun(true);
-		//}
 		break;
 	case HitInfo::CC_Sakura:
 		break;

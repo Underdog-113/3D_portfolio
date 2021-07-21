@@ -66,6 +66,7 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			// shoot1 상태로 변경
 			fsm->ChangeState(Name_Shoot_1);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 			m_onAtkBall = false;
 			return;
 		}
@@ -78,6 +79,7 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 대기 상태로 변경
 		fsm->ChangeState(Name_IDLE);
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
 
