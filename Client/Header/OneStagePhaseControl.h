@@ -8,21 +8,19 @@ class COneStagePhaseControl final : public CPhaseControl
 public:
 	enum class EOneStagePhase
 	{
+		ReadyStage			,
 		PlayerSummon		,
+		Conversation		,
 		BeforeFirstFight1	,
 		FirstFight1Begin	,
 		FirstFight1End	,
 		FirstFight2Begin	,
 		FirstFight2End		,
-		//BeforeSecondFight	,
-		//SecondFightBegin	,
-		//SecondFightEnd	,
 		BeforeMidBoss		,
 		MidBossBegin		,
-		MidBossEnd			,
-		//BeforeBoss,
-		//BossBegin,
-		//BossEnd,
+		MidBossEnd,
+		ReadyVictoryCutScene,
+		VictoryCutScene,
 		StageResult			,
 		StageResult_Idle	,
 		NumOfPhse			
@@ -34,9 +32,17 @@ public:
 public:
 					void		Update				(void) override;
 
+private:
+	void PlayerSummonPhase();
+	void EnterConversationPhase();
+
+	
+
 public:
 					void					OpenStageResult		(void);
 					_bool					m_isSoundChange = false;
+
+					SP(COneConversationC)		m_spConversation = nullptr;
 };
 
 #endif

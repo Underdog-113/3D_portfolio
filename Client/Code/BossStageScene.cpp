@@ -85,6 +85,11 @@ void CBossStageScene::Update(void)
 
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_F1))
+	{
+		CBattleUiManager::GetInstance()->BattleEnd();
+	}
 }
 
 void CBossStageScene::LateUpdate(void)

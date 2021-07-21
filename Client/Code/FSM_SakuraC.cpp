@@ -13,6 +13,8 @@
 
 #include "AttackTrail_Client.h"
 #include "StageControlTower.h"
+#include "StageCameraMan.h"
+#include "CameraShake.h"
 #include "Monster.h"
 #include "EffectMaker_Sakura.h"
 #include "Sakura_WSkill_Twist.h"
@@ -653,7 +655,13 @@ void CFSM_SakuraC::Appear_Enter(void)
 
 void CFSM_SakuraC::Appear_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.258)
+	{
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
+		m_checkShake = true;
+	}
+
+	if (CheckAction_StandBy_Timeout(0.9f))
 		return;
 }
 
@@ -1358,7 +1366,7 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 
 	if (!m_checkEndFlash && m_pDM->GetAniTimeline() > 0.522)
 	{
-		CStageControlTower::GetInstance()->SetCameraFarTake();
+		CStageControlTower::GetInstance()->SetCameraFarShot();
 		PlaySound_Voice(Sound_Flash_Voice);
 		m_pEffectMaker->CreateEffect_Beam();
 
@@ -1498,16 +1506,20 @@ void CFSM_SakuraC::Charge1_Quick_Enter(void)
 	ResetCheckMembers();
 
 	m_pStageControlTower->LookTarget();
-	CStageControlTower::GetInstance()->SetCameraFarTake();
+	CStageControlTower::GetInstance()->SetCameraFarShot();
 }
 
 void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 {
 	if (!m_checkFlashCol && m_pDM->GetAniTimeline() > 0.19)
 	{
-		m_pSakura->OffHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OffHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(true);
+		}
 		m_checkFlashCol = true;
+		PlaySound_Effect(Sound_Charge0_Effect);
 	}
 	if (!m_checkEndFlash &&  m_pDM->GetAniTimeline() > 0.24)
 	{
@@ -1528,14 +1540,17 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
 			m_pSakura->GetTransform()->SetPosition(curTargetPos + flashDir * colRadiusSum);
 
-			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 		}
 		m_checkEndFlash = true;
 	}
 	if (!m_checkFlashMove && m_pDM->GetAniTimeline() > 0.3)
 	{
-		m_pSakura->OnHitbox();
-		m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		if (m_pStageControlTower->GetCurrentTarget())
+		{
+			m_pSakura->OnHitbox();
+			m_pSakura->GetMesh()->GetRootMotion()->SetIsRemoveMovement(false);
+		}
 		m_checkFlashMove = true;
 	}
 
@@ -2118,7 +2133,7 @@ void CFSM_SakuraC::Hit_H_Init(void)
 
 void CFSM_SakuraC::Hit_H_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Hit_H);
+	m_pDM->RepeatAniSet(Index_Hit_H);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(true);
 
@@ -2148,7 +2163,7 @@ void CFSM_SakuraC::Hit_L_Init(void)
 
 void CFSM_SakuraC::Hit_L_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Hit_L);
+	m_pDM->RepeatAniSet(Index_Hit_L);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
 	PlaySound_SelectChannel(Sound_HIT_Effect, (_uint)EChannelID::PLAYERHIT);
@@ -2219,6 +2234,12 @@ void CFSM_SakuraC::SwitchIn_Enter(void)
 
 void CFSM_SakuraC::SwitchIn_Update(float deltaTime)
 {
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.357)
+	{
+		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
+		m_checkShake = true;
+	}
+
 	if (m_pDM->IsAnimationEnd())
 	{
 		if (m_pSakura->GetIsQTESwitch())
@@ -2288,12 +2309,10 @@ void CFSM_SakuraC::Ultra_Enter(void)
 	m_pDM->ChangeAniSet(Index_Ultra);
 	ResetCheckMembers();
 
-	//PlaySound_Voice(Sound_Ult_Start_Voice);
-	//PlaySound_Effect(Sound_Ult_Start);
-	//m_pEffectMaker->CreateEffect_Ultra();
 	m_pStageControlTower->OnSakuraUltraActive();
 
 	PlaySound_Effect(Sound_Ult_Start);
+	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::SakuraUlt);
 }
 
 void CFSM_SakuraC::Ultra_Update(float deltaTime)

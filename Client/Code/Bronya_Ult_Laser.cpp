@@ -89,13 +89,14 @@ void CBronya_Ult_Laser::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
-	pEffect->SetBool("g_zWriteEnable", false);
+	pEffect->SetBool("g_zWriteEnable", true);
 	pEffect->CommitChanges();
 }
 
 void CBronya_Ult_Laser::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
+
 }
 
 void CBronya_Ult_Laser::PostRender(LPD3DXEFFECT pEffect)

@@ -34,6 +34,7 @@ public:
 	void OnDisable(void) override;
 
 	void AddObjectFind();
+	void SetEnableCanvasMember(std::wstring name, _bool value);
 private:
 	void SetBasicName(void) override;
 private:

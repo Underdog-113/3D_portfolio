@@ -16,6 +16,10 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 {
 	m_activation = true;
 	m_monsterHpCount = 0;
+	
+	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"ConversationCanvas").get());
+	ConversationCanvas->AddObjectFind();
+	ConversationCanvas->SetIsEnabled(false);
 
 	m_specialUICanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"specialUICanvas").get());
 	m_specialUICanvas->AddObjectFind();
@@ -28,11 +32,6 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_specialUBar[2]->SetValue(4);
 	m_specialUBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"specialUICanvas_specialU_3").get()));
 	m_specialUBar[3]->SetValue(4);
-
-
-	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"ConversationCanvas").get());
-	ConversationCanvas->AddObjectFind();
-	ConversationCanvas->SetIsEnabled(false);
 
 	//MainCanvas
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
@@ -186,6 +185,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 
 	SquadOff(pScene);
 	WaitingPlayerSetting();
+
 }
 
 void CBattleUiManager::Update(void)

@@ -6,6 +6,7 @@ texture		g_BaseTexture;
 texture		g_NormalTexture;
 
 float4		g_addColor;
+float4		g_multColor;
 float4		g_color;
 
 bool g_timeSlow;
@@ -94,6 +95,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	//	Out.vColor = vector(0, 0, 0, 1);
 
 	Out.vColor += g_addColor;
+	Out.vColor *= g_multColor;
 	Out.vColor = Out.vColor * g_color;
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환

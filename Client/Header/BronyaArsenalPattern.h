@@ -6,6 +6,7 @@
 class CFSM_BronyaC;
 class CBronya_Ult_Ring;
 class CBronya_Ult_Range;
+class CBronya_Ult_Laser;
 
 class CBronyaArsenalPattern : public CATBPattern
 {
@@ -58,6 +59,7 @@ private:
 
 	std::vector<SP(CBronya_Ult_Ring)> m_vRingEffect;
 	std::vector<SP(CBronya_Ult_Range)> m_vRangeEffect;
+	std::vector<SP(CBronya_Ult_Laser)> m_vLaserEffect;
 
 	_int m_effectIndex = 0;
 };

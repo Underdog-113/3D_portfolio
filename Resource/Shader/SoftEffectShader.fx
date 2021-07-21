@@ -127,8 +127,8 @@ technique Default_Device
 	pass	
 	{
 		CullMode = None;
-		AlphaTestEnable = true;
 		zWriteEnable = g_zWriteEnable;
+		AlphaTestEnable = true;
 		AlphaBlendEnable = true;
 		SrcBlend = SrcAlpha;
 		DestBlend = InvsrcAlpha;

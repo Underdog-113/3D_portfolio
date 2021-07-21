@@ -65,6 +65,7 @@ void CGraphicsManager::Render(void)
 
 	//Deferred Start
 	RenderNonAlpha();
+	RenderEffect();
 	RenderBlur();
 	//RenderEmissive();
 	RenderLights();
@@ -614,7 +615,44 @@ void CGraphicsManager::RenderParticle(void)
 
 void CGraphicsManager::RenderEffect(void)
 {
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::Effect])
+	{
+		if (pObject->GetIsEnabled())
+		{
+			if (GET_MAIN_CAM->GetFrustum()->
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+					pObject->GetTransform()->GetSize() / 2.f))
+			{
+				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
 
+
+				const std::vector<CShader*>& vShader = spShader->GetShaders();
+				for (_size i = 0; i < vShader.size(); ++i)
+				{
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+					pEffect->CommitChanges();
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
+					for (_uint i = 0; i < maxPass; ++i)
+					{
+						pEffect->BeginPass(i);
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+						pEffect->EndPass();
+					}
+					pEffect->End();
+				}
+
+				if (pObject->GetComponent<CShaderC>()->GetShaderPerSubset().size() != 0)
+					pObject->RenderPerShader();
+			}
+		}
+	}
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
 void CGraphicsManager::RenderUI(void)

@@ -23,6 +23,12 @@ public:
 			void					OnDisable			(void) override;
 			
 			void					Setup				(_bool isFadeIn, _float speed);
+
+public:
+			_float					GetCurrentAlpha		();
+			void					SetAlpha			(_float alphaValue);
+			void					AddAlpha			(_float alphaValue);
+
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::Camera;
 
@@ -31,6 +37,8 @@ private:
 	GETTOR_SETTOR	(_bool,		m_finish,		false,		Finish)
 	GETTOR_SETTOR	(_bool,		m_autoDelete,	true,		AutoDelete)
 	GETTOR_SETTOR	(_float,	m_speed,		1.f,		Speed)
+	
+	GETTOR_SETTOR	(_bool,		m_autoMode,		true,		AutoMode)
 	
 };
 END

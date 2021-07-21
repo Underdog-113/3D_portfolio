@@ -49,6 +49,9 @@ void CTwoConversationC::Start(SP(CComponent) spThis)
 
 	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(false);
 
+	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas").get());
+	ConversationCanvas->SetIsEnabled(true);
+
 	static_cast<CButton*>(GetOwner()->GetScene()->FindObjectByName(L"ConversationCanvas_Skip_0").get())->
 		AddFuncData<void(CTwoConversationC::*)(), CTwoConversationC*>(&CTwoConversationC::Skip, this);
 }
@@ -81,6 +84,11 @@ void CTwoConversationC::OnEnable()
 void CTwoConversationC::OnDisable()
 {
 	__super::OnDisable();
+}
+
+_bool CTwoConversationC::IsEnd()
+{
+	return m_conversationCheck;
 }
 
 void CTwoConversationC::Conversation()
@@ -206,7 +214,6 @@ void CTwoConversationC::End()
 	CBattleUiManager::GetInstance()->WaitingPlayerSetting();
 
 	m_conversationCanvas->SetIsEnabled(false);
-
 	GetOwner()->SetIsEnabled(false);
 }
 

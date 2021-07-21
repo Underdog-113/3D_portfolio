@@ -93,17 +93,17 @@ void CInitScene::Start(void)
 			m_spElevatorBack->GetComponent<Engine::CMeshC>()->SetMeshData(L"Elevator_Back_2");
 
 		m_spElevatorBack->GetTransform()->AddPositionY(_fY);
-		_fY += 16.f;
+		_fY += 31.f;
 	}
 
 	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");
 	text->GetTransform()->SetPositionZ(0.5f);
-	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,340), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
+	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,320), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
 
 	{
 		slider =
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", false, (_int)Engine::ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(-65.0f, -300.0f, 0.0f));
+		slider->GetTransform()->SetPosition(_float3(-65.0f, -280.0f, 0.0f));
 		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
 
 		SP(Engine::CImageObject) background =

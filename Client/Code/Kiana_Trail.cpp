@@ -74,6 +74,7 @@ void CKiana_Trail::LateUpdate()
 void CKiana_Trail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
 
 	pEffect->CommitChanges();
@@ -82,11 +83,13 @@ void CKiana_Trail::PreRender(LPD3DXEFFECT pEffect)
 void CKiana_Trail::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
+
 }
 
 void CKiana_Trail::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
+
 }
 
 void CKiana_Trail::OnDestroy()

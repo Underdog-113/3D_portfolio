@@ -58,11 +58,8 @@ void CTwoStageScene::Awake(_int numOfLayers)
 void CTwoStageScene::Start(void)
 {
 	__super::Start();
-	
-	m_sceneID = (_int)ESceneID::Ganesha_Cinema;
 
-	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-	spCube0->AddComponent<CTwoConversationC>();
+	m_sceneID = (_int)ESceneID::Ganesha_Cinema;
 
 	SetupFromLoader();
 	SetupMembers();
@@ -165,8 +162,6 @@ void CTwoStageScene::Create_ActorValkyrie(void)
 
 void CTwoStageScene::Create_SceneCamera(void)
 {
-	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
