@@ -76,9 +76,7 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
 	vector		vColor : COLOR0;
-	vector		vNormal : COLOR1;
-	vector		vDepth	: COLOR2;
-	vector		vEmissive : COLOR3;
+	vector		vEmissive : COLOR1;
 };
 
 
@@ -125,17 +123,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 		float3 diffuse = (DissolveLineSize * DissolveLineColor + blendColor.rgb);
 			
 		Out.vColor = float4(diffuse, multiple);
-
-		if (Out.vColor.r == 1 && Out.vColor.g == 1  && Out.vColor.b == 1)
-		{
-			Out.vColor = float4(0.f,0.f,0.f,0.f);
-		}
-		else
-		{
-			Out.vColor = float4(diffuse, multiple);
-			Out.vEmissive = float4(Out.vColor.rgb, gTrailAlpha - 0.1f);
-		}
-
+		Out.vEmissive = float4(float4(diffuse, multiple).rgb, gTrailAlpha);
 
 		return Out;
 	}		
@@ -148,10 +136,13 @@ technique TrailShader
 	{
 		CullMode = None;
 		AlphaBlendEnable = true;
-		AlphaTestEnable = false;
-		zWriteEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
+		AlphaTestEnable = false;
+		alphafunc = greater;
+		alpharef = 0x08;
+		zWriteEnable = true;
+
 
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();

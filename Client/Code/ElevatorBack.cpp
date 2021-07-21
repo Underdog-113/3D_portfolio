@@ -57,7 +57,6 @@ void CElevatorBack::Start(void)
 	__super::Start();
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_TempPosY = m_spTransform->GetPosition().y;
-	m_bSpawnCheck = false;
 }
 
 void CElevatorBack::FixedUpdate(void)

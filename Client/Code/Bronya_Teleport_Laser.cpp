@@ -66,34 +66,8 @@ void CBronya_Teleport_Laser::LateUpdate()
 {
 	__super::LateUpdate();
 
-	_mat matWorld, matView, matBill;
 
-	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
-
-	//D3DXMatrixIdentity(&matBill);
-
-	//matBill._11 = matView._11;
-	//matBill._13 = matView._13;
-	//matBill._31 = matView._31;
-	//matBill._33 = matView._33;
-
-	//D3DXMatrixInverse(&matBill, 0, &matBill);
-
-	//matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
-
-	//m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
-
-	D3DXMatrixIdentity(&matBill);
-
-	memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_float3));
-	memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_float3));
-	memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_float3));
-
-	D3DXMatrixInverse(&matBill, 0, &matBill);
-
-	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
-
-	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
+	
 }
 
 void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
@@ -102,6 +76,23 @@ void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_zWriteEnabled", true);
 	pEffect->CommitChanges();
+
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	//D3DXMatrixIdentity(&matBill);
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 }
 
 void CBronya_Teleport_Laser::Render(LPD3DXEFFECT pEffect)
@@ -113,7 +104,6 @@ void CBronya_Teleport_Laser::Render(LPD3DXEFFECT pEffect)
 void CBronya_Teleport_Laser::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
-
 }
 
 void CBronya_Teleport_Laser::OnDestroy()
