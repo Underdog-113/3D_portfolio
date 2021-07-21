@@ -150,16 +150,6 @@ void CKiana::PreRender(LPD3DXEFFECT pEffect)
 void CKiana::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-	//if (m_pLeftHand_World)
-	//{
-	//	_mat combMat = m_pLeftHand_Frame->CombinedTransformMatrix;
-	//	_float3 rootMotionPos = m_spMesh->GetRootMotionPos();
-	//	combMat._41 -= rootMotionPos.x;
-	//	combMat._43 -= rootMotionPos.z;
-
-	//	*m_pLeftHand_World = combMat * m_spTransform->GetWorldMatrix();
-	//}
-	//m_spWeapon_Left->GetTransform()->SetWorldMatrix(*m_pLeftHand_World);
 }
 
 void CKiana::PostRender(LPD3DXEFFECT pEffect)

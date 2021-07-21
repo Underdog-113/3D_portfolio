@@ -126,3 +126,17 @@ void CCanvas::AddObjectFind()
 		}
 	}
 }
+
+void CCanvas::SetEnableCanvasMember(std::wstring name, _bool value)
+{
+	size_t strSize = m_name.size();
+	for (auto& object : m_spObjectList)
+	{
+		std::wstring name = object->GetName().substr(0, strSize);
+		if (m_name == name)
+		{
+			object->SetIsEnabled(value);
+			break;
+		}
+	}
+}

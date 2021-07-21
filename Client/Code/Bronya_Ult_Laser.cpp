@@ -96,6 +96,7 @@ void CBronya_Ult_Laser::PreRender(LPD3DXEFFECT pEffect)
 void CBronya_Ult_Laser::Render(LPD3DXEFFECT pEffect)
 {
 	m_spRectTex->Render(m_spGraphics, pEffect);
+
 }
 
 void CBronya_Ult_Laser::PostRender(LPD3DXEFFECT pEffect)

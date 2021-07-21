@@ -57,7 +57,6 @@
     <ClInclude Include="..\Header\MathHelper.h" />
     <ClInclude Include="..\Header\MeshAlphaTestShader.h" />
     <ClInclude Include="..\Header\MeshData.h" />
-    <ClInclude Include="..\Header\MeshNormalShader.h" />
     <ClInclude Include="..\Header\MeshShader.h" />
     <ClInclude Include="..\Header\ParticleSystem.h" />
     <ClInclude Include="..\Header\ParticleSystemC.h" />
@@ -73,6 +72,7 @@
     <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\ShaderC.h" />
     <ClInclude Include="..\Header\ShaderManager.h" />
+    <ClInclude Include="..\Header\ShadowShader.h" />
     <ClInclude Include="..\Header\SkyBox.h" />
     <ClInclude Include="..\Header\SkyBoxShader.h" />
     <ClInclude Include="..\Header\Slider.h" />
@@ -151,7 +151,6 @@
     <ClCompile Include="..\Code\MathHelper.cpp" />
     <ClCompile Include="..\Code\MeshAlphaTestShader.cpp" />
     <ClCompile Include="..\Code\MeshData.cpp" />
-    <ClCompile Include="..\Code\MeshNormalShader.cpp" />
     <ClCompile Include="..\Code\MeshShader.cpp" />
     <ClCompile Include="..\Code\ParticleSystem.cpp" />
     <ClCompile Include="..\Code\ParticleSystemC.cpp" />
@@ -167,6 +166,7 @@
     <ClCompile Include="..\Code\Shader.cpp" />
     <ClCompile Include="..\Code\ShaderC.cpp" />
     <ClCompile Include="..\Code\ShaderManager.cpp" />
+    <ClCompile Include="..\Code\ShadowShader.cpp" />
     <ClCompile Include="..\Code\SkyBox.cpp" />
     <ClCompile Include="..\Code\SkyBoxShader.cpp" />
     <ClCompile Include="..\Code\Slider.cpp" />
@@ -230,6 +230,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\RectTexShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ShadowShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SkyBoxShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

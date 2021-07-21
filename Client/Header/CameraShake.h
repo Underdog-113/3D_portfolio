@@ -31,6 +31,8 @@ struct ShakeChannel
 	Wave m_xWave;
 	Wave m_yWave;
 	Wave m_zWave;
+
+	Wave m_Wave;
 };
 
 class CCameraShake
@@ -48,15 +50,13 @@ public:
 	
 	void AdvanceSinWave(Wave* wave, ShakeChannel* channel);
 
-	void EndRunShake();
-
 	_float3 GetRotateOscilation();
 	_float3 GetLocationOscilation();
 
-public:	/* Player Action */
 	void Preset_LowAttack(_float3 eventPos);	// kiana base attack, theresa base attack
 	void Preset_HighAttack_Vert(_float3 eventPos); // cat paw attack_5, theresa axe down
 	void Preset_HighAttack_Horz(_float3 eventPos); // theresa axe horz
+	void Preset_Land();
 
 	void Preset_Kiana_ForwardAttack();
 	void Preset_Kiana_Claw5();

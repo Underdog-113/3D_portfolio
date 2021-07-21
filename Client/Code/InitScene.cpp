@@ -93,7 +93,7 @@ void CInitScene::Start(void)
 			m_spElevatorBack->GetComponent<Engine::CMeshC>()->SetMeshData(L"Elevator_Back_2");
 
 		m_spElevatorBack->GetTransform()->AddPositionY(_fY);
-		_fY += 16.f;
+		_fY += 31.f;
 	}
 
 	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");

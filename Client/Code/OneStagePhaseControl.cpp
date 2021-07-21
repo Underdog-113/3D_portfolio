@@ -10,6 +10,8 @@
 #include "PhaseChanger.h"
 #include "Monster.h"
 
+#include "MovieDirector.h"
+
 COneStagePhaseControl::COneStagePhaseControl()
 {
 }
@@ -19,6 +21,7 @@ COneStagePhaseControl::~COneStagePhaseControl()
 {
 }
 
+
 void COneStagePhaseControl::Update(void)
 {
 	switch (m_curPhase)
@@ -27,11 +30,26 @@ void COneStagePhaseControl::Update(void)
 		++m_curPhase;
 		break;
 
-	case (_int)EOneStagePhase::PlayerSummon:
-		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
-			++m_curPhase;
+	case (_int)EOneStagePhase::ReadyStage:
+		CStageControlTower::GetInstance()->SetDirectorMode(true);
+		++m_curPhase;
 		break;
 
+	case (_int)EOneStagePhase::PlayerSummon:
+		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
+		{
+			EnterConversationPhase();
+			++m_curPhase;
+		}
+		break;
+	case (_int)EOneStagePhase::Conversation:
+		if (m_spConversation->IsEnd())
+		{
+			CStageControlTower::GetInstance()->SetDirectorMode(false);
+			++m_curPhase;
+		}
+
+		break;
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
 		break;
@@ -100,22 +118,19 @@ void COneStagePhaseControl::Update(void)
 		break;
 
 		//After killing MidBoss
-	case (_int)EOneStagePhase::MidBossEnd:
+	case (_int)EOneStagePhase::MidBossEnd:\
+		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
 		++m_curPhase;
 		break;
 
-	//	//Before being collised with PhaseChanger3
-	//case (_int)EOneStagePhase::BeforeBoss:
-	//	break;
+	case (_int)EOneStagePhase::ReadyVictoryCutScene:
 
-	//	//After being collided with PhaseChanger3
-	//case (_int)EOneStagePhase::BossBegin:
-	//	break;
+		++m_curPhase;
+		break;
+	case (_int)EOneStagePhase::VictoryCutScene:
 
-	//	//After killing Boss
-	//case (_int)EOneStagePhase::BossEnd:
-	//	++m_curPhase;
-	//	break;
+		++m_curPhase;
+		break;
 
 		//Result screen
 	case (_int)EOneStagePhase::StageResult:
@@ -138,6 +153,17 @@ void COneStagePhaseControl::Update(void)
 	}
 }
 
+void COneStagePhaseControl::PlayerSummonPhase()
+{
+}
+
+void COneStagePhaseControl::EnterConversationPhase()
+{
+	SP(Engine::CObject) spConversation = Engine::GET_CUR_SCENE->ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	spConversation->AddComponent<COneConversationC>();
+
+	m_spConversation = spConversation->GetComponent<COneConversationC>();
+}
 
 void COneStagePhaseControl::OpenStageResult(void)
 {

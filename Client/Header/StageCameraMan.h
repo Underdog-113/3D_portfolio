@@ -1,12 +1,12 @@
 #pragma once
 
-#define NearTake 1.5f
-#define MidTake 3.f
-#define FarTake 4.5f
+#define NearShot 1.5f
+#define MidShot 2.5f
+#define FarShot 4.5f
 
-#define NearAngle D3DXToRadian(10.f)
-#define MidAngle D3DXToRadian(15.f)
-#define FarAngle D3DXToRadian(15.f)
+#define NearAngle D3DXToRadian(7.5f)
+#define MidAngle D3DXToRadian(10.f)
+#define FarAngle D3DXToRadian(10.f)
 
 #define MaxChaseDistance 0.5f
 
@@ -18,7 +18,7 @@
 class CStageCameraMan
 {
 public:
-	enum TakeType { Near, Mid, Far, Custom, Target, Change };
+	enum ShotType { Near, Mid, Far, Custom, Target, Change };
 
 public:
 	CStageCameraMan();
@@ -27,24 +27,33 @@ public:
 	void Start();
 
 	void UpdateCameraMan();
+
+
+public: /* Director Mode */
+	
+	void DirectorControlMode();
+	void PivotChasing_Director();
+
+
+public: /* Pivot */
 	void PivotChasing();
+
+	void OnTargetChasing();
 	void NonTargetChasing();
 
 	void SetIsTargeting(bool value);
-
-
 	void ResetChaseSpeed();
-
+	
 
 public:
-	void SetNearTake();
-	void SetMidTake();
-	void SetFarTake();
-	void SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
-	void SetTargetTake();
-	void ChangeTake();
+	void SetNearShot();
+	void SetMidShot();
+	void SetFarShot();
+	void SetCustomShot(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
+	void SetTargetShot();
+	void ChangeShot();
 
-	void ChangeTakeWhileTargeting();
+	void ChangeShotWhileTargeting();
 
 private:
 	void AppendPosYCorrecting();
@@ -54,7 +63,6 @@ public:
 
 private:
 	void AppendAttackDirectionCorrecting();
-	void AppendTargetCorrecting();
 	void AppendHorizontalCorrecting();
 	
 	bool MouseControlMode();
@@ -62,6 +70,9 @@ private:
 	void AutoControlMode();
 
 public:
+	void ReturnBeforShaking();
+	void ApplyShaking();
+
 	void ShakeCamera_Low(_float3 eventPos);
 
 	void ShakeCamera_Kiana_ForwardAttack();
@@ -119,14 +130,14 @@ private:
 	_float m_endChaseSpeed = 0.f;
 
 private:
-	TakeType m_curTakeType = Mid;
-	TakeType m_nextTakeType = Mid;
-	_float m_curMaxDist = 3.f;
-	_float m_dstMaxDist = 3.f;
-	_float m_gotoNextTakeTimer = 0.f;
-	_float m_gotoNextTakeWaitTime = 1.5f;
-	_float m_changeTakeTimer = 0.f;
-	_float m_changeTakeSpeed = 2.f;
+	ShotType m_curShotType = Mid;
+	ShotType m_nextShotType = Mid;
+	GETTOR_SETTOR(_float, m_curMaxDist, 3.f, CurMaxDistance)
+	GETTOR_SETTOR(_float, m_dstMaxDist, 3.f, DstMaxDistance)
+	_float m_gotoNextShotTimer = 0.f;
+	_float m_gotoNextShotWaitTime = 1.5f;
+	_float m_changeShotTimer = 0.f;
+	_float m_changeShotSpeed = 2.f;
 
 private:
 	_float m_rotateXStart = 0.f;
@@ -158,4 +169,10 @@ private:
 	bool m_noAction = true;
 
 	_uint m_prevMoveKey = 0;
+
+private:
+
+	GETTOR_SETTOR(_bool, m_directorControl, false, DirectorControl)
+	bool m_isPivotChasing = false;
+
 };

@@ -99,6 +99,7 @@ private:
 	bool m_checkFlashCol = false;
 	bool m_checkEndFlash = false;
 	bool m_checkFlashMove = false;
+	bool m_checkShake = false;
 
 	bool m_isEvade = false;
 	bool m_isSecondEvade = false;

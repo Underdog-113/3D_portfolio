@@ -8,7 +8,9 @@ class CTwoStagePhaseControl final : public CPhaseControl
 public:
 	enum class ETwoStagePhase
 	{
+		ReadyStage,
 		PlayerSummon		,
+		Conversation		,
 		BeforeBoss			,
 		BossBegin			,
 		BossEnd				,
@@ -23,10 +25,14 @@ public:
 public:
 					void		Update				(void) override;
 
+private:
+					void		EnterConversationPhase(void);
 public:
 					void		OpenStageResult		(void);
 
 					_bool		m_isSoundChange = false;
+
+					SP(CTwoConversationC)		m_spConversation = nullptr;
 };
 
 #endif
