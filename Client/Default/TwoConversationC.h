@@ -1,6 +1,6 @@
 #ifndef TWOCONVERSATIONCOMPONENT_H
 #define TWOCONVERSATIONCOMPONENT_H
-
+#include "Canvas.h"
 #include "Component.h"
 class CTwoConversationC  final : public Engine::CComponent
 {
@@ -27,6 +27,8 @@ public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 
 private:
+	Engine::CCanvas* m_conversationCanvas;
+
 	Engine::CObject* m_conversationPlayerImage;
 	Engine::CObject* m_conversationName;
 	std::vector<Engine::CObject*> m_conversationText;
