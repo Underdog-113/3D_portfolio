@@ -43,6 +43,7 @@ SP(Engine::CObject) CMonsterAttackSign::MakeClone(void)
 void CMonsterAttackSign::Awake(void)
 {
 	__super::Awake();
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	
 }
 

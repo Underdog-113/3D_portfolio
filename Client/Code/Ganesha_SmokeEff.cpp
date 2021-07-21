@@ -47,6 +47,9 @@ void CGanesha_SmokeEff::Start(void)
 {
 	__super::Start();
 
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+
+
 	m_fAlphaWidth = 7.f;
 	m_fAlphaHeight = 3.f;
 	m_TilingX = 0;
