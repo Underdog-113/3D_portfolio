@@ -1,37 +1,42 @@
 #include "stdafx.h"
-#include "..\Header\SoftEffectShader.h"
+#include "..\Header\SoftEffectShader_Glow.h"
 
 
-CSoftEffectShader::CSoftEffectShader()
+CSoftEffectShader_Glow::CSoftEffectShader_Glow()
 {
 }
 
 
-CSoftEffectShader::~CSoftEffectShader()
+CSoftEffectShader_Glow::~CSoftEffectShader_Glow()
 {
 }
 
-Engine::CShader * CSoftEffectShader::Create()
+Engine::CShader * CSoftEffectShader_Glow::Create()
 {
-	CSoftEffectShader* pInstance = new CSoftEffectShader;
+	CSoftEffectShader_Glow* pInstance = new CSoftEffectShader_Glow;
 	pInstance->Awake();
 
 
 	return pInstance;
 }
 
-void CSoftEffectShader::Free()
+void CSoftEffectShader_Glow::Free()
 {
 	__super::Free();
+
 }
 
-void CSoftEffectShader::Awake()
+void CSoftEffectShader_Glow::Awake()
 {
 	__super::Awake();
 	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
+	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Normal");
+	m_vRenderTargets[2] = pRTM->FindRenderTarget(L"Target_Depth");
+	m_vRenderTargets[3] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CSoftEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CSoftEffectShader_Glow::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	__super::SetUpConstantTable(spGC);
 	_mat matWorld, matView, matProj;
@@ -42,7 +47,7 @@ void CSoftEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 
 	m_pEffect->SetMatrix("g_matWorld", &matWorld);
 	m_pEffect->SetMatrix("g_matView", &matView);
-	m_pEffect->SetMatrix("g_matProj", &matProj);	
+	m_pEffect->SetMatrix("g_matProj", &matProj);
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 

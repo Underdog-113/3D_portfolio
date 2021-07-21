@@ -660,6 +660,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	else
 	{
 		pM->ApplyHitInfo(info);
+		CBattleUiManager::GetInstance()->BreakGaugeDown(info.GetBreakDamage());
 	}
 }
 

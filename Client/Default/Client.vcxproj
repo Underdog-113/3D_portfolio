@@ -323,6 +323,7 @@
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SizeDownC.h" />
     <ClInclude Include="..\Header\SizeUpC.h" />
+    <ClInclude Include="..\Header\SoftEffectShader_Glow.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\OutlineShader.h" />
@@ -701,6 +702,7 @@
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SizeDownC.cpp" />
     <ClCompile Include="..\Code\SizeUpC.cpp" />
+    <ClCompile Include="..\Code\SoftEffectShader_Glow.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp" />
@@ -1017,6 +1019,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

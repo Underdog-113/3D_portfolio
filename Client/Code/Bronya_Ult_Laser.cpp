@@ -44,7 +44,7 @@ void CBronya_Ult_Laser::Awake()
 	m_spTexture->AddTexture(L"Laser_Cannon_2");
 	m_spTexture->AddTexture(L"Laser_Cannon_2");
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 
 }
 
