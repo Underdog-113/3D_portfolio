@@ -73,7 +73,7 @@ void CGraphicsManager::Render(void)
 
 	RenderWire();
 	RenderAlphaTest();
-	RenderAlphaBlend();
+	//RenderAlphaBlend();
 	RenderParticle();
 	RenderUI();
 

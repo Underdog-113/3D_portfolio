@@ -135,12 +135,12 @@ void CInitScene::FixedUpdate(void)
 void CInitScene::Update(void)
 {
 	__super::Update();
-	_float value = slider->GetValue();
+	float value = slider->GetValue();
 	value = min(value + GET_DT * 38, 100);
 	slider->SetValue(value);
-	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + std::to_wstring(value) + L"%");
-
-
+	wstring str = std::to_wstring(value);
+	str = str.substr(0, 6);
+	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + str+ L"%");
 
 	if(!m_isStaticScene)
 		m_fTempSoundLength += GET_DT;
@@ -199,7 +199,7 @@ void CInitScene::Update(void)
 			{
 				m_pLoading->GetNextScene()->Free();
 				delete m_pLoading;
-				m_pLoading = CLoading::Create(COneStageScene::Create(), false);
+				m_pLoading = CLoading::Create(CMainRoomScene::Create(), false);
 				m_selectNextScene = true;
 			}
 			else if (Engine::IMKEY_DOWN(KEY_F5))
