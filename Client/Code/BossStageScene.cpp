@@ -103,8 +103,7 @@ void CBossStageScene::OnDestroy(void)
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
 
-	m_pControlTower->OnDestroy();
-	m_pControlTower->DestroyInstance();
+	CStageControlTower::DestroyInstance();
 	m_pControlTower = nullptr;
 
 	m_vDummy.clear();
