@@ -20,7 +20,6 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"ConversationCanvas").get());
 	ConversationCanvas->AddObjectFind();
 	ConversationCanvas->SetIsEnabled(false);
-	ConversationCanvas->SetEnableCanvasMember(L"ConversationCanvas_Skip_0", true);
 
 	m_specialUICanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"specialUICanvas").get());
 	m_specialUICanvas->AddObjectFind();
@@ -37,7 +36,6 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	//MainCanvas
 	m_mainCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MainCanvas").get());
 	m_mainCanvas->AddObjectFind();
-	m_mainCanvas->SetIsEnabled(false);
 
 	m_keyPad = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MainCanvas_KeyPad_0").get());
 	m_keyPad->GetTexture()->AddTexture(L"JoyStick_Move", 0);
@@ -609,12 +607,13 @@ void CBattleUiManager::BattleEnd()
 {
 	m_activation = false;
 
-	m_monsterStateCanvas->SetIsEnabled(false);
+	m_victoryCanvas->SetIsEnabled(true);
+
 	m_mainCanvas->SetIsEnabled(false);
 	m_hitsCanvas->SetIsEnabled(false);
+	m_monsterStateCanvas->SetIsEnabled(false);
 	m_monsterTargetCanvas->SetIsEnabled(false);
 	m_giveUpCanvas->SetIsEnabled(false);
-	m_victoryCanvas->SetIsEnabled(true);
 	m_specialUICanvas->SetIsEnabled(false);
 
 	_float m_totalTime = m_time->GetComponent<CTimerUiC>()->GetTotalTime();
@@ -641,15 +640,18 @@ void CBattleUiManager::QteOff(_int value)
 
 void CBattleUiManager::skillActivationImageCheck()
 {
-	if (m_playerSpBar->GetValue() >= 80 && m_coolTimeSlider[Button_Type::SpecialButton]->GetValue() <= 0)
-		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(true);
-	else
-		m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(false);
+	if (m_mainCanvas->GetIsEnabled())
+	{
+		if (m_playerSpBar->GetValue() >= 80 && m_coolTimeSlider[Button_Type::SpecialButton]->GetValue() <= 0)
+			m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(true);
+		else
+			m_skillActivationImage[Button_Type::SpecialButton - 1]->SetIsEnabled(false);
 
-	if (m_playerSpBar->GetValue() >= 7 && m_coolTimeSlider[Button_Type::SkillButton]->GetValue() <= 0)
-		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(true);
-	else
-		m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(false);
+		if (m_playerSpBar->GetValue() >= 7 && m_coolTimeSlider[Button_Type::SkillButton]->GetValue() <= 0)
+			m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(true);
+		else
+			m_skillActivationImage[Button_Type::SkillButton - 1]->SetIsEnabled(false);
+	}
 }
 
 void CBattleUiManager::monsterHpBarCheck()
@@ -657,9 +659,10 @@ void CBattleUiManager::monsterHpBarCheck()
 	if (m_monsterHpBar[2]->GetValue() <= 0 && m_monsterHpCount > 1)
 	{
 		m_monsterHpCount--;
+		_float curValue = m_monsterHpBar[2]->GetMaxValue() + m_monsterHpBar[2]->GetValue();
 		for (auto object : m_monsterHpBar)
 		{
-			object->SetValue(m_monsterHpBar[2]->GetMaxValue());
+			object->SetValue(curValue);
 			_int value = (m_monsterHpCount - 1) % 4;
 			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
 			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
@@ -667,7 +670,7 @@ void CBattleUiManager::monsterHpBarCheck()
 
 		for (auto object : m_monsterWhiteHpBar)
 		{
-			object->SetValue(m_monsterWhiteHpBar[2]->GetMaxValue());
+			object->SetValue(curValue);
 		}
 
 		m_monsterCount->GetComponent<Engine::CTextC>()->ChangeMessage(L"x" + std::to_wstring(m_monsterHpCount));

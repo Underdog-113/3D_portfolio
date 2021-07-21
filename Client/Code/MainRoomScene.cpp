@@ -161,6 +161,7 @@ void CMainRoomScene::LateUpdate(void)
 void CMainRoomScene::OnDestroy(void)
 {
 	__super::OnDestroy();
+	CBattleEndManager::GetInstance()->DestroyInstance();
 
 	CMainRoomManager::GetInstance()->OnDestroy();
 	CMainRoomManager::GetInstance()->DestroyInstance();
