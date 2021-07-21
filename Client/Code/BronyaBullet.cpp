@@ -2,6 +2,8 @@
 #include "BronyaBullet.h"
 
 #include "AttackBall.h"
+#include "Bronya_Ult_Impact.h"
+#include "Bronya_Ult_Impact_Smoke.h"
 
 CBronyaBullet::CBronyaBullet()
 {
@@ -69,10 +71,43 @@ void CBronyaBullet::Update(void)
 	__super::Update();
 
 	// 총알이 활성화되면 타이머 시작
-	if (true == m_isEnabled)
+
+	// for. Bronya Arsenal Skill
+	if (true == m_isEnabled && false == m_move)
 	{
 		m_bulletMat = m_spTransform->GetWorldMatrix();
 
+		if (false == m_onAttackBall && 0.4f <= m_accTime)
+		{
+			m_accTime = 0.f;
+		}
+		else if (true == m_onAttackBall && 0.2f <= m_accTime)
+		{
+			m_onAttackBall = false;
+			UnActiveAttackBall();
+		}
+		else if (false == m_onAttackBall && 0.2f > m_accTime)
+		{
+			m_onAttackBall = true;
+			ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_bulletMat, 2.6f);
+
+			// 타격 이펙트 생성
+				m_spImactEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact", true));
+				m_spImactEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+				m_spImactEffect->GetTransform()->SetPositionY(m_spTransform->GetPosition().y + 0.45f);
+
+			// 스모크 이펙트 생성
+				m_spImpactSmokeEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact_Smoke>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact_Smoke", true));
+				m_spImpactSmokeEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		}
+		
+		m_accTime += GET_DT;
+	}
+
+	// for. Bronya Shoot1 Skill
+	if (true == m_isEnabled && true == m_move)
+	{
+		m_bulletMat = m_spTransform->GetWorldMatrix();
 		ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_bulletMat, 0.17f);
 
 		if (0.f >= m_accTime)

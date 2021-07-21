@@ -42,16 +42,16 @@ void CGanesha_Cinema_Dome::Awake()
 	m_spTransform->SetSize(_float3(size, size, size));
 	m_spMesh->SetMeshData(L"Ganesha_Cinema_Dome");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_spTexture->AddTexture(L"AttackHint_Circle_02");
 	m_spTexture->AddTexture(L"Sign");
-	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CGanesha_Cinema_Dome::Start()
 {
 	__super::Start();
-	m_fAlpha = 0.2f;
+	m_fAlpha = 0.1f;
 	m_size = m_spTransform->GetSize();
 }
 
@@ -71,6 +71,13 @@ void CGanesha_Cinema_Dome::Update()
 
 	if (m_spTransform->GetSize().x > m_size.x + 0.2)
 	{
+		_int iRand = rand() % 4;
+
+		for (_int i = 0; i < 3; ++i)
+		{
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Cinema_Lightning", true, (_uint)Engine::ELayerID::Effect);
+			spObj->GetTransform()->SetPosition(_float3(m_spTransform->GetPosition().x + _float(rand() % 3 - 0.8f), m_spTransform->GetPosition().y, m_spTransform->GetPosition().z + _float(rand() % 2) - 0.5f));
+		}
 		m_spTransform->SetSize(m_size);
 	}
 }

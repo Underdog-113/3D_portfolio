@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\AlphaLifeTimeC.h" />
+    <ClInclude Include="..\Header\AlphaMaskGlowShader.h" />
     <ClInclude Include="..\Header\AlphaMaskShader.h" />
     <ClInclude Include="..\Header\AttackBall.h" />
     <ClInclude Include="..\Header\AttackBox.h" />
@@ -558,6 +559,7 @@
     <ClInclude Include="TwoConversationC.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp" />
     <ClCompile Include="..\Code\AlphaMaskShader.cpp" />
     <ClCompile Include="..\Code\AlphaLifeTimeC.cpp" />
     <ClCompile Include="..\Code\AttackBall.cpp" />
@@ -925,6 +927,10 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

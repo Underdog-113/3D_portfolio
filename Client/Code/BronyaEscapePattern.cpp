@@ -53,13 +53,9 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(0.05f);
 		m_onEscape = true;
 
-		// 목표 위치 잡기
-		_float x = (_float)GetRandRange(-15, 15);
-		_float z = (_float)GetRandRange(-15, 15);
-
 		// 이스케이프 위치로 이동
 		m_lerpStartPos = mPos;
-		m_lerpEndPos = _float3(x, mPos.y, z);
+		m_lerpEndPos = GetEscapePos(pOwner);
 		m_lerpCurTimer = 0.f;
 	}
 	// escape in 상태 중 목표 위치로 이동 중이라면
@@ -103,4 +99,12 @@ SP(CBronyaEscapePattern) CBronyaEscapePattern::Create()
 	SP(CBronyaEscapePattern) spInstance(new CBronyaEscapePattern, Engine::SmartDeleter<CBronyaEscapePattern>);
 
 	return spInstance;
+}
+
+_float3 CBronyaEscapePattern::GetEscapePos(Engine::CObject* pOwner)
+{
+	_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxEscapePos() - 1;
+	_int index = GetRandRange(0, cnt);
+
+	return static_cast<CMB_Bronya*>(pOwner)->GetEscapePos()[index];
 }

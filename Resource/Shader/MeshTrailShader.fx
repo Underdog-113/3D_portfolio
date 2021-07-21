@@ -12,7 +12,6 @@ float  gTrailAlpha;
 bool   gisSpawn;
 
 float  m_defaultDissolveVal = 0.9f;
-float3 gDissolveLineColor = float3(0, 0, 0);
 
 texture g_DiffuseTex;
 sampler Diffuse = sampler_state
@@ -74,9 +73,19 @@ struct PS_INPUT
 	float3 mNormal	 : NORMAL;
 };
 
-
-float4 ps_main(VS_OUTPUT Input) : COLOR
+struct PS_OUTPUT
 {
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
+};
+
+
+PS_OUTPUT ps_main(VS_OUTPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
@@ -87,9 +96,9 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 	float4 Alpha = tex2D(AlphaTex, Input.mUV);
 
 	float4 blendColor = (Alpha * albedo) + ((1.f - Alpha) * Serve);
-
+	
 	blendColor.a = 0;
-	blendColor = saturate(blendColor);
+	blendColor = saturate(blendColor);	
 
 	if (Input.mUV.x > gTrailAlpha)
 	{
@@ -102,22 +111,30 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 		// Dissolve Line Size
 		float3 DissolveLineSize;
+		float3 DissolveLineColor = blendColor.rgb;
 
 		if (m_defaultDissolveVal >= CurrentDissolveVal)
 		{
-			DissolveLineSize = float3(1.f, 1.f, 1.f);
+			DissolveLineSize = float3(1.f, 0.f, 0.f);
 		}
 		else
 		{
 			DissolveLineSize = float3(0, 0, 0);
 		}
 
-		float3 diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb );
+		float3 diffuse = (DissolveLineSize * DissolveLineColor + blendColor.rgb );
 
-		return float4(diffuse, multiple);
-	}
+		Out.vEmissive = float4(blendColor.rgb, gTrailAlpha - 0.2f);
+		Out.vColor = float4(diffuse, multiple);
 
-	return blendColor;
+		return Out;
+	}		
+
+
+
+	Out.vColor = blendColor;
+
+	return Out;
 }
 
 technique TrailShader
@@ -125,8 +142,8 @@ technique TrailShader
 	pass p0
 	{
 		CullMode = None;
-		AlphaTestEnable = true;
-		zWriteEnable = false;
+		AlphaTestEnable = false;
+		zWriteEnable = true;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;

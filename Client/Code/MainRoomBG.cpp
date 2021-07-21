@@ -53,13 +53,13 @@ void CMainRoomBG::Awake(void)
 	m_spTexture = AddComponent<Engine::CTextureC>();
 	m_spTexture->AddTexture(L"Stage_LevelMatrix_Winter_BG04");
 	m_spTexture->AddTexture(L"Stage_LevelMatrix_Winter_BG04");
-	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
+	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
 }
 
 void CMainRoomBG::Start(void)
 {
 	__super::Start();
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_fAlpha = 1.f;
 }
 

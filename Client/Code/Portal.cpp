@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Portal.h"
 
+#include "Portal_Plane.h"
+
 _uint CPortal::m_s_uniqueID = 0;
 
 CPortal::CPortal()
@@ -56,6 +58,10 @@ void CPortal::Start(void)
 {
 	__super::Start();
 	m_spCollision->GetColliders()[0]->SetIsTrigger(true);
+	m_vEffect = std::dynamic_pointer_cast<CPortal_Plane>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Portal_Plane", true));
+	m_vEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+	m_vEffect->GetTransform()->AddPositionY(-0.2f);
+	m_spGraphics->SetIsEnabled(false);
 }
 
 void CPortal::FixedUpdate(void)

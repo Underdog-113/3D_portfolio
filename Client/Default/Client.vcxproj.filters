@@ -1066,6 +1066,9 @@
     <Filter Include="10.ControlTower\MovieDirector\CameraState\Fade">
       <UniqueIdentifier>{713382d3-0c91-4eb8-b633-5ef9f29e21cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\17.AlphaMaskGlowShader">
+      <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2214,6 +2217,9 @@
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h">
       <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
+      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3272,6 +3278,9 @@
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp">
+      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3342,6 +3351,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
       <Filter>04.Shader\15.KianaBodyShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
+      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

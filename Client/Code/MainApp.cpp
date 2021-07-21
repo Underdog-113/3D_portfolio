@@ -26,6 +26,7 @@
 #include "OutlineShader.h"
 #include "FaceShader.h"
 #include "KianaBodyShader.h"
+#include "AlphaMaskGlowShader.h"
 #pragma endregion
 
 
@@ -81,6 +82,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(COutlineShader::Create(), L"OutlineShader", (_uint)EShaderID::OutlineShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CFaceShader::Create(), L"FaceShader", (_uint)EShaderID::FaceShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CKianaBodyShader::Create(), L"KianaBodyShader", (_uint)EShaderID::KianaBodyShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CAlphaMaskGlowShader::Create(), L"AlphaMaskGlowShader", (_uint)EShaderID::AlphaMaskGlowShader);
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }

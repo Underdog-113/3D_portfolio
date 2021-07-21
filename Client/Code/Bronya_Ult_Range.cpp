@@ -10,6 +10,7 @@ CBronya_Ult_Range::CBronya_Ult_Range()
 
 CBronya_Ult_Range::~CBronya_Ult_Range()
 {
+	OnDestroy();
 }
 
 SP(CBronya_Ult_Range) CBronya_Ult_Range::Create(_bool isStatic, Engine::CScene * pScene)
@@ -57,7 +58,7 @@ void CBronya_Ult_Range::Start()
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTextureC>()->AddTexture(L"FrameRed");
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AttackRangeShader);
 	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.f, 0.f, 0.f));
-	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, this->GetTransform()->GetPosition().y, this->GetTransform()->GetPosition().z));
+	m_spAttackRange_Circle_Diffuse->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, this->GetTransform()->GetPosition().y + 0.1f, this->GetTransform()->GetPosition().z));
 	
 }
 
@@ -112,6 +113,8 @@ void CBronya_Ult_Range::OnDestroy()
 {
 	__super::OnDestroy();
 
+	if (nullptr != m_spAttackRange_Circle_Diffuse)
+		m_spAttackRange_Circle_Diffuse->SetDeleteThis(true);
 }
 
 void CBronya_Ult_Range::OnEnable()
@@ -124,6 +127,7 @@ void CBronya_Ult_Range::OnDisable()
 {
 	__super::OnDisable();
 
+	m_spAttackRange_Circle_Diffuse->SetDeleteThis(true);
 }
 
 void CBronya_Ult_Range::SetBasicName()

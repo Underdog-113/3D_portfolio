@@ -59,7 +59,7 @@ void CMB_Bronya::Awake(void)
 	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
 }
 
@@ -100,15 +100,12 @@ void CMB_Bronya::Start(void)
 	m_pAttackBox->SetOwner(this);
 	
 	m_spWeapon = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Weapon", true, (_uint)ELayerID::Enemy, L"Bronya_Weapon");
-	
 
 	EquipWeapon();
-
-	for (_int i = 0; i < 22; ++i)
-	{
-		m_vBullets.emplace_back(std::dynamic_pointer_cast<CBronyaBullet>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaBullet", true, (_uint)ELayerID::Enemy, L"BronyaBullet")));
-		m_vBullets[i]->SetIsEnabled(false);
-	}
+	ArsenalEffectPosLoad();
+	BulletReload();
+	EquipBomb();
+	SetupEscapePos();
 }
 
 void CMB_Bronya::FixedUpdate(void)
@@ -284,6 +281,57 @@ void CMB_Bronya::EquipWeapon()
 
 	m_spWeapon->GetTransform()->SetRotation(_float3(30.2f, 23.8f, 1.6f));
 	m_spWeapon->GetTransform()->SetPosition(_float3(1.1f, -0.22f, -0.6f));
+}
+
+void CMB_Bronya::ArsenalEffectPosLoad()
+{
+	auto& pDataStore = Engine::GET_CUR_SCENE->GetDataStore();
+
+	pDataStore->GetValue(true, (_int)EDataID::Enemy, L"Bronya_ArsenalEffect", L"numOfEffect", m_maxArsenalEffectCnt);
+	for (_int i = 0; i < m_maxArsenalEffectCnt; ++i)
+	{
+		_float3 position;
+		pDataStore->GetValue(true, (_int)EDataID::Enemy, L"Bronya_ArsenalEffect", L"ring_" + std::to_wstring(i), position);
+		m_vRingEffectPos.emplace_back(position);
+
+		pDataStore->GetValue(true, (_int)EDataID::Enemy, L"Bronya_ArsenalEffect", L"range_" + std::to_wstring(i), position);
+		m_vRangeEffectPos.emplace_back(position);
+	}
+}
+
+void CMB_Bronya::BulletReload()
+{
+	for (_int i = 0; i < 22; ++i)
+	{
+		m_vBullets.emplace_back(std::dynamic_pointer_cast<CBronyaBullet>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaBullet", true, (_uint)ELayerID::Enemy, L"BronyaBullet")));
+		m_vBullets[i]->SetIsEnabled(false);
+	}
+}
+
+void CMB_Bronya::EquipBomb()
+{
+	for (_int i = 0; i < m_maxArsenalEffectCnt; ++i)
+	{
+		m_vExplosions.emplace_back(std::dynamic_pointer_cast<CBronyaBullet>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaBullet", true, (_uint)ELayerID::Enemy, L"BronyaBullet")));
+		m_vExplosions[i]->SetIsEnabled(false);
+		m_vExplosions[i]->GetTransform()->SetSize(0.001f, 0.001f, 0.001f);
+		m_vExplosions[i]->GetTransform()->SetPosition(m_vRangeEffectPos[i]);
+		m_vExplosions[i]->SetMove(false);
+	}
+}
+
+void CMB_Bronya::SetupEscapePos()
+{
+	auto& pDataStore = Engine::GET_CUR_SCENE->GetDataStore();
+
+	pDataStore->GetValue(true, (_int)EDataID::Enemy, L"Bronya_Escape", L"numOfEscape", m_maxEscapePos);
+
+	for (_int i = 0; i < m_maxEscapePos; ++i)
+	{
+		_float3 position;
+		pDataStore->GetValue(true, (_int)EDataID::Enemy, L"Bronya_Escape", L"Escape_" + std::to_wstring(i), position);
+		m_vEscapePos.emplace_back(position);
+	}
 }
 
 SP(CMB_Bronya) CMB_Bronya::Create(_bool isStatic, Engine::CScene * pScene)

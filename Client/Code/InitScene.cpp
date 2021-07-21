@@ -168,6 +168,7 @@ void CInitScene::Update(void)
 			if (!m_init)
 			{
 				CDataManager::GetInstance()->Start();
+				Engine::CSoundManager::GetInstance()->StopAll();
 				SP(Engine::CObject) spObj = ADD_CLONE(L"ElevatorDoor", false, (_int)Engine::ELayerID::Decoration);
 				std::static_pointer_cast<CElevatorBase>(m_spElevatorBase)->SetLoadCheck(true);
 				m_init = true;

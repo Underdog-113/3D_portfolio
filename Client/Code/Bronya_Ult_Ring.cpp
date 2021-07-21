@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\Bronya_Ult_Ring.h"
 #include "Bronya_Ult_Cannon.h"
+#include "Bronya_Ult_Wind.h"
+
 _uint CBronya_Ult_Ring::m_s_uniqueID = 0;
 
 CBronya_Ult_Ring::CBronya_Ult_Ring()
@@ -40,7 +42,7 @@ void CBronya_Ult_Ring::Awake()
 {
 	__super::Awake();
 	m_spTransform->SetSize(0.01f, 0.01f, 0.01f);
-	m_spTransform->SetRotationX(D3DXToRadian(15));
+	m_spTransform->SetRotationX(D3DXToRadian(195));
 }
 
 void CBronya_Ult_Ring::Start()
@@ -77,11 +79,10 @@ void CBronya_Ult_Ring::Update()
 	else if (m_spTransform->GetSize().x >= m_fRingSize && !m_bSpawnWind)
 	{
 		// Add Wind and Cannon
-		SP(Engine::CObject) spObj;
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Wind", true);
-		spObj->GetTransform()->SetPosition(m_spTransform->GetPosition());
-		spObj->GetTransform()->SetRotation(m_spTransform->GetRotation());
-		spObj->GetTransform()->SetSize(_float3(m_fRingSize, m_fRingSize, m_fRingSize));
+		m_spWind = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Wind", true);
+		m_spWind->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		m_spWind->GetTransform()->SetRotation(m_spTransform->GetRotation());
+		m_spWind->GetTransform()->SetSize(_float3(m_fRingSize, m_fRingSize, m_fRingSize));
 
 		m_spCannon = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Cannon", true);
 		m_spCannon->GetTransform()->SetPositionX(m_spTransform->GetPosition().x);
@@ -97,6 +98,51 @@ void CBronya_Ult_Ring::Update()
 
 	D3DXMatrixRotationAxis(&matRot, &m_spTransform->GetForward(), m_fAngle);
 	m_spTransform->SetParentRotMatrix(matRot);
+
+	/* Delete this */
+	if (true == m_disappear)
+	{
+		if (nullptr != m_spCannon)
+		{
+			_float alpha = std::dynamic_pointer_cast<CBronya_Ult_Cannon>(m_spCannon)->GetAlpha() - 1.f * GET_DT;
+
+			if (0.f >= alpha)
+			{
+				std::dynamic_pointer_cast<CBronya_Ult_Cannon>(m_spCannon)->SetAlpha(0.f);
+				m_spCannon->SetDeleteThis(true);
+				m_spCannon = nullptr;
+			}
+			else
+			{
+				std::dynamic_pointer_cast<CBronya_Ult_Cannon>(m_spCannon)->SetAlpha(alpha);
+			}
+		}
+
+		if (nullptr != m_spWind)
+		{
+			_float alpha = std::dynamic_pointer_cast<CBronya_Ult_Wind>(m_spWind)->GetAlpha() - 1.f * GET_DT;
+
+			if (0.f >= alpha)
+			{
+				std::dynamic_pointer_cast<CBronya_Ult_Wind>(m_spWind)->SetAlpha(0.f);
+				m_spWind->SetDeleteThis(true);
+				m_spWind = nullptr;
+			}
+			else
+			{
+				std::dynamic_pointer_cast<CBronya_Ult_Wind>(m_spWind)->SetAlpha(alpha);
+			}
+		}
+		
+		m_fAlpha -= 0.7f * GET_DT;
+
+		if (0.f >= m_fAlpha)
+		{
+			m_fAlpha = 0.f;
+			m_deleteThis = true;
+			m_disappear = false;
+		}
+	}
 }
 
 void CBronya_Ult_Ring::LateUpdate()

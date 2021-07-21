@@ -96,10 +96,11 @@ void CCloudObject::LateUpdate(void)
 void CCloudObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_zWriteEnabled", false);
 	pEffect->SetBool("g_AlphaTestEnabled", true);
-	pEffect->CommitChanges();
+	pEffect->CommitChanges();	
 }
 
 void CCloudObject::Render(LPD3DXEFFECT pEffect)
