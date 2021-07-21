@@ -48,6 +48,7 @@ void COneStagePhaseControl::Update(void)
 			CStageControlTower::GetInstance()->SetDirectorMode(false);
 			++m_curPhase;
 		}
+
 		break;
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
@@ -117,7 +118,7 @@ void COneStagePhaseControl::Update(void)
 		break;
 
 		//After killing MidBoss
-	case (_int)EOneStagePhase::MidBossEnd:
+	case (_int)EOneStagePhase::MidBossEnd:\
 		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
 		++m_curPhase;
 		break;

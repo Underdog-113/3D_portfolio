@@ -1054,20 +1054,26 @@
     <Filter Include="10.ControlTower\MovieDirector">
       <UniqueIdentifier>{ff060b50-4091-45b3-948b-8415f0a11d05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraState">
-      <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
-    </Filter>
     <Filter Include="10.ControlTower\MovieDirector\Take">
       <UniqueIdentifier>{8f5e726d-c4d5-4c89-847e-51925c40fc89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraState\Interface">
-      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraState\Fade">
-      <UniqueIdentifier>{713382d3-0c91-4eb8-b633-5ef9f29e21cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Shader\17.AlphaMaskGlowShader">
       <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot">
+      <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Interface">
+      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Fade">
+      <UniqueIdentifier>{713382d3-0c91-4eb8-b633-5ef9f29e21cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Rotate">
+      <UniqueIdentifier>{e7d6f91d-f30b-468d-ad62-6837933da421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Push">
+      <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2182,13 +2188,13 @@
       <Filter>10.ControlTower\MovieDirector\Take</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_End_StageStartTake.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_FixTargetBack.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_Start_StageStartTake.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\HpItemC.h">
       <Filter>03.Component\03.Item</Filter>
@@ -2203,22 +2209,31 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Shot_RotateAround.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_WhiteFadeOut.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_WhiteFadeIn.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_PushOut.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotateRoll.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotateAround.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotateYaw.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3243,13 +3258,13 @@
       <Filter>10.ControlTower\MovieDirector\Take</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_FixTargetBack.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HpItemC.cpp">
       <Filter>03.Component\03.Item</Filter>
@@ -3264,22 +3279,31 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Shot_RotateAround.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraState\Fade</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_PushOut.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotateRoll.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotateAround.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

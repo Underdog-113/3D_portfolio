@@ -197,6 +197,9 @@ void CMainApp::PostRender(void)
 
 void CMainApp::OnDestroy(void)
 {
+	if (CStageControlTower::GetInstance())
+		CStageControlTower::DestroyInstance();
+
 	Engine::CGraphicsManager::GetInstance()->DestroyInstance();
 	Engine::CInputManager::GetInstance()->DestroyInstance();
 	Engine::CSceneManager::GetInstance()->DestroyInstance();
@@ -223,6 +226,7 @@ void CMainApp::OnDestroy(void)
 
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();
+
 }
 
 void CMainApp::OnEnable(void)

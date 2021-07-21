@@ -76,13 +76,18 @@ void CTake::ActTake_NormalMode()
 void CTake::EndTake()
 {
 	CStageControlTower::GetInstance()->SetDirectorMode(false);
+
+	for (auto iter : m_shotMap)
+	{
+		iter.second->Rollback();
+	}
 }
 
 void CTake::MoveNextFrame()
 {
 	m_playTimer += 0.0167f;
 
-	_uint nowOn = 0;
+	_uint shotEnd = 0;
 
 	for (auto iter : m_shotMap)
 	{
@@ -90,10 +95,10 @@ void CTake::MoveNextFrame()
 			iter.second->Action();
 
 		if (iter.second->CheckShotEnd(m_playTimer))
-			++nowOn;
+			++shotEnd;
 	}
 
-	if (nowOn == 0)
+	if (shotEnd == m_shotMap.size())
 	{
 		m_playTimer -= 0.0167f;
 	}

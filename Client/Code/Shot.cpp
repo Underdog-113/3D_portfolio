@@ -57,7 +57,7 @@ void CShot::CheckShotRollback(_float takeTimer)
 
 _bool CShot::CheckShotEnd(_float takeTimer)
 {
-	if (m_endTimeline <= takeTimer || !m_isEndless)
+	if (m_endTimeline <= takeTimer && !m_isEndless)
 	{
 		if (!m_isExitAction)
 		{

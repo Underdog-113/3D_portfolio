@@ -99,6 +99,7 @@ private:
 	GETTOR_SETTOR	(_float,				m_targetDist,		3.f,					TargetDist)
 	GETTOR_SETTOR	(_float,				m_lookAngleRight,	PI/7.f,					LookAngleRight)
 	GETTOR_SETTOR	(_float,				m_lookAngleUp,		0.f,					LookAngleUp)
+	GETTOR_SETTOR	(_float,				m_lookAngleForward,	0.f,					LookAngleForward)
 	GETTOR_SETTOR	(_float,				m_awaySpeed,		1.f,					AwaySpeed)
 
 	GETTOR_SETTOR	(_float,				m_minDistTPS,		1.f,					MinDistTPS)

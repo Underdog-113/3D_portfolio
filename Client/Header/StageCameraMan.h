@@ -132,8 +132,8 @@ private:
 private:
 	ShotType m_curShotType = Mid;
 	ShotType m_nextShotType = Mid;
-	_float m_curMaxDist = 3.f;
-	_float m_dstMaxDist = 3.f;
+	GETTOR_SETTOR(_float, m_curMaxDist, 3.f, CurMaxDistance)
+	GETTOR_SETTOR(_float, m_dstMaxDist, 3.f, DstMaxDistance)
 	_float m_gotoNextShotTimer = 0.f;
 	_float m_gotoNextShotWaitTime = 1.5f;
 	_float m_changeShotTimer = 0.f;

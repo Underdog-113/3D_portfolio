@@ -10,6 +10,9 @@
 #include "Shot_WhiteFadeOut.h"
 #include "Shot_BlackFadeIn.h"
 #include "Shot_RotateAround.h"
+#include "Shot_RotateYaw.h"
+#include "Shot_RotateRoll.h"
+#include "Shot_PushOut.h"
 
 CMovieDirector::CMovieDirector()
 {
@@ -22,6 +25,9 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_WhiteFadeOut)
 	SAFE_DELETE(m_pShot_BlackFadeIn)
 	SAFE_DELETE(m_pShot_RotateAround)
+	SAFE_DELETE(m_pShot_RotateYaw)
+	SAFE_DELETE(m_pShot_RotateRoll)
+	SAFE_DELETE(m_pShot_PushOut)
 
 	for (auto iter : m_takeMap)
 	{
@@ -37,7 +43,8 @@ void CMovieDirector::Start()
 
 	Create_AllShots();
 
-	Create_FailureTake();
+	CreateTake_Failure();
+	CreateTake_SakuraVictory();
 
 	m_onAir = false;
 
@@ -55,7 +62,7 @@ void CMovieDirector::UpdateDirector()
 
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
-		Start_FailureTake();
+		StartTake_Failure();
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
 		Cut();
@@ -63,8 +70,8 @@ void CMovieDirector::UpdateDirector()
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_3))
 	{
-		Start_FailureTake();
-		m_pCurTake->SeteditMode(true);
+		StartTake_SakuraVictory();
+		m_pCurTake->SetEditMode(true);
 	}
 
 // 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
@@ -72,14 +79,6 @@ void CMovieDirector::UpdateDirector()
 // 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
 // 		CStageControlTower::GetInstance()->SetDirectorMode(false);
 
-	if (Engine::IMKEY_PRESS(KEY_CONTROL) && Engine::IMKEY_PRESS(KEY_LEFT))
-	{
-		m_pWhiteFade->AddAlpha(-GET_DT);
-	}
-	if (Engine::IMKEY_PRESS(KEY_CONTROL) && Engine::IMKEY_PRESS(KEY_RIGHT))
-	{
-		m_pWhiteFade->AddAlpha(GET_DT);
-	}
 }
 
 
@@ -98,6 +97,7 @@ void CMovieDirector::Create_FadeImages()
 	m_pBlackFade->SetAutoMode(false);
 	m_pBlackFade->SetAlpha(0.f);
 
+
 	m_spWhiteFadeImage
 		= std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->ADD_CLONE(L"ImageObject", true));
 	m_spWhiteFadeImage->GetTexture()->AddTexture(L"White");
@@ -112,6 +112,8 @@ void CMovieDirector::Create_FadeImages()
 	m_pWhiteFade->SetAlpha(0.f);
 
 
+	m_spBlackFadeImage->SetIsEnabled(false);
+	m_spWhiteFadeImage->SetIsEnabled(false);
 }
 
 void CMovieDirector::Create_AllShots()
@@ -122,9 +124,14 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_BlackFadeIn = new CShot_BlackFadeIn;
 
 	m_pShot_RotateAround = new CShot_RotateAround;
+	m_pShot_RotateYaw = new CShot_RotateYaw;
+	//m_pShot_RotateAround = new CShot_RotateAround;
+	m_pShot_RotateRoll = new CShot_RotateRoll;
+
+	m_pShot_PushOut = new CShot_PushOut;
 }
 
-void CMovieDirector::Create_FailureTake()
+void CMovieDirector::CreateTake_Failure()
 {
 	CTake* pTake = new CTake;
 
@@ -136,10 +143,27 @@ void CMovieDirector::Create_FailureTake()
 	m_takeMap.emplace(TakeName_Failure, pTake);
 }
 
-void CMovieDirector::Start_FailureTake()
+void CMovieDirector::CreateTake_SakuraVictory()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_WhiteFadeIn, m_pShot_WhiteFadeIn);
+	pTake->AddShot(ShotName_WhiteFadeOut, m_pShot_WhiteFadeOut);
+
+	pTake->AddShot(ShotName_RotateYaw, m_pShot_RotateYaw);
+	pTake->AddShot(ShotName_RotateRoll, m_pShot_RotateRoll);
+
+	pTake->AddShot(ShotName_PushOut, m_pShot_PushOut);
+
+	m_takeMap.emplace(TakeName_SakuraVictory, pTake);
+}
+
+void CMovieDirector::StartTake_Failure()
 {
 	auto pTake = m_takeMap[TakeName_Failure];
-	
+	m_spBlackFadeImage->SetIsEnabled(true);
+	m_spWhiteFadeImage->SetIsEnabled(true);
+
 	CShot_WhiteFadeIn::Desc wfi_desc;
 	wfi_desc.pWhiteFade = m_pWhiteFade;
 	pTake->ReadyShot(ShotName_WhiteFadeIn, 0.6f, 1.1f, &wfi_desc);
@@ -154,13 +178,49 @@ void CMovieDirector::Start_FailureTake()
 
 	CShot_RotateAround::Desc ra_desc;
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
-	ra_desc.pPivotObject = pActor;
 	ra_desc.offset = pActor->GetTransform()->GetRight() * 0.5f;
 	ra_desc.rotateSpeed = 12.f;
 	pTake->ReadyShot(ShotName_RotateAround, 0.5f, 100.f, &ra_desc);
 
 	m_pCurTake = pTake;
-	
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
+}
+
+void CMovieDirector::StartTake_SakuraVictory()
+{
+	auto pTake = m_takeMap[TakeName_SakuraVictory];
+	m_spBlackFadeImage->SetIsEnabled(false);
+	m_spWhiteFadeImage->SetIsEnabled(true);
+
+	CShot_WhiteFadeIn::Desc wfi_desc;
+	wfi_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeIn, 0.6f, 1.1f, &wfi_desc);
+
+	CShot_WhiteFadeOut::Desc wfo_desc;
+	wfo_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeOut, 0.f, 0.5f, &wfo_desc);
+
+	CShot_RotateYaw::Desc ry_desc;
+	ry_desc.startEulerAngle = 90.f;
+	ry_desc.endEulerAngle = 0.f;
+	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 3.6f, &ry_desc);
+
+	CShot_RotateRoll::Desc rr_desc;
+	rr_desc.startEulerAngle = 15.f;
+	rr_desc.endEulerAngle = 0.f;
+	pTake->ReadyShot(ShotName_RotateRoll, 0.6f, 3.6f, &rr_desc);
+
+	CShot_PushOut::Desc po_desc;
+	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+	po_desc.offset = pActor->GetTransform()->GetUp() * 0.1f;
+	po_desc.startDistance = 0.5f;
+	po_desc.endDistance = 1.f;
+	pTake->ReadyShot(ShotName_PushOut, 0.6f, 3.6f, &po_desc);
+
+	m_pCurTake = pTake;
+
 	m_pCurTake->StartTake();
 	m_onAir = true;
 }

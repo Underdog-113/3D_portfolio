@@ -318,16 +318,16 @@ void CActorController::RotateCurrentActor()
 	float angleSynchroRate = D3DXVec3Dot(&actorForward, &m_moveOrderDir);
 	angleSynchroRate = GET_MATH->RoundOffRange(angleSynchroRate, 1);
 
-	if (angleSynchroRate > 0.95f)
-	{
-		m_rotSpeed = 10.f;
-		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
-		rotSpeedRate = 1.f - lerpValue;
-	}
-	else
-	{
-		m_rotSpeed = 18.f;
-	}
+// 	if (angleSynchroRate > 0.95f)
+// 	{
+// 		m_rotSpeed = 10.f;
+// 		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
+// 		rotSpeedRate = 1.f - lerpValue;
+// 	}
+// 	else
+// 	{
+// 		m_rotSpeed = 18.f;
+// 	}
 
 
 	_float3 rotAxis = { 0.f, 0.f, 0.f };
@@ -335,7 +335,7 @@ void CActorController::RotateCurrentActor()
 	D3DXVec3Normalize(&rotAxis, &rotAxis);
 	if (rotAxis.y > 0.f)
 	{
-		if (angleSynchroRate > 0.99f)
+		if (angleSynchroRate > 0.95f)
 		{
 			m_rotateLock = true;
 			m_rotateByTarget = false;
@@ -350,7 +350,7 @@ void CActorController::RotateCurrentActor()
 	}
 	else
 	{
-		if (angleSynchroRate > 0.99f)
+		if (angleSynchroRate > 0.95f)
 		{
 			m_rotateLock = true;
 			m_rotateByTarget = false;

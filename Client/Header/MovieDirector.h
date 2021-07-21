@@ -3,9 +3,18 @@
 #define ShotName_WhiteFadeIn		L"WhiteFadeIn"
 #define ShotName_WhiteFadeOut		L"WhiteFadeOut"
 #define ShotName_BlackFadeIn		L"BlackFadeIn"
+
 #define ShotName_RotateAround		L"RotateAround"
+#define ShotName_RotateYaw			L"RotateYaw"
+#define ShotName_RotatePitch		L"RotatePitch"
+#define ShotName_RotateRoll			L"RotateRoll"
+
+#define ShotName_PushIn				L"PushIn"
+#define ShotName_PushOut			L"PushOut"
 
 #define TakeName_Failure			L"Failure"
+
+#define TakeName_SakuraVictory		L"SakuraVictory"
 
 class CShot;	 
 class CTake;
@@ -24,10 +33,12 @@ public:
 
 	void Create_AllShots();
 
-	void Create_FailureTake();
+	void CreateTake_Failure();
+	void CreateTake_SakuraVictory();
 
 public:
-	void Start_FailureTake();
+	void StartTake_Failure();
+	void StartTake_SakuraVictory();
 
 	void Cut();
 
@@ -55,6 +66,11 @@ private:
 	CShot* m_pShot_BlackFadeIn = nullptr;
 
 	CShot* m_pShot_RotateAround = nullptr;
+	CShot* m_pShot_RotateYaw = nullptr;
+	CShot* m_pShot_RotatePitch = nullptr;
+	CShot* m_pShot_RotateRoll = nullptr;
+
+	CShot* m_pShot_PushOut = nullptr;
 
 };
 

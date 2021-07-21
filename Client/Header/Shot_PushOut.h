@@ -1,19 +1,19 @@
 #pragma once
 #include "Shot.h"
-class CShot_RotateAround : public CShot
+class CShot_PushOut : public CShot
 {
 public:
 	struct Desc
 	{
 		_float3 offset = ZERO_VECTOR;
 
-		_float startEulerRotate = 0.f;
-		_float rotateSpeed = 5.f;
+		_float startDistance = 1.f;
+		_float endDistance = 1.5f;
 	};
 
 public:
-	CShot_RotateAround();
-	~CShot_RotateAround();
+	CShot_PushOut();
+	~CShot_PushOut();
 
 public:
 	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc);
@@ -27,7 +27,6 @@ private:
 	Desc m_desc;
 
 	_float3 m_savedPivotPos = ZERO_VECTOR;
-	_float m_savedLookAngleUp = 0.f;
-
+	_float m_savedMaxDistance = 0.f;
 };
 

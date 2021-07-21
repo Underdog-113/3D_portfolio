@@ -226,6 +226,7 @@ void CStageControlTower::OnDestroy()
 	SAFE_DELETE(m_pPhaseControl)
 	SAFE_DELETE(m_pCameraMan)
 	SAFE_DELETE(m_pTimeSeeker)
+	SAFE_DELETE(m_pMovieDirector)
 }
 
 SP(Engine::CObject) CStageControlTower::SettingSquad(Engine::CScene * pCurScene)

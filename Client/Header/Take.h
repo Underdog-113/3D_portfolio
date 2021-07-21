@@ -30,7 +30,7 @@ protected:
 
 
 	GETTOR_SETTOR(_float, m_playTimer, 0.f, PlayTimer)
-	GETTOR_SETTOR(_bool, m_editMode, false, editMode)
+	GETTOR_SETTOR(_bool, m_editMode, false, EditMode)
 
 };   
 

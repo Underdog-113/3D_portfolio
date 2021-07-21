@@ -90,8 +90,6 @@ void CStageCameraMan::DirectorControlMode()
 
 	ApplyShaking();
 
-	if (Engine::IMKEY_DOWN(KEY_TAB))
-		m_isPivotChasing = !m_isPivotChasing;
 }
 
 void CStageCameraMan::PivotChasing_Director()
@@ -723,7 +721,7 @@ void CStageCameraMan::AutoControlMode()
 		return;
 	}
 
-	AppendHorizontalCorrecting();
+	//AppendHorizontalCorrecting();
 	AppendAttackDirectionCorrecting();
 
 	ChangeShot();

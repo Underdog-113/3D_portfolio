@@ -310,7 +310,10 @@
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h" />
     <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
     <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
+    <ClInclude Include="..\Header\Shot_PushOut.h" />
     <ClInclude Include="..\Header\Shot_RotateAround.h" />
+    <ClInclude Include="..\Header\Shot_RotateRoll.h" />
+    <ClInclude Include="..\Header\Shot_RotateYaw.h" />
     <ClInclude Include="..\Header\Shot_Start_StageStartTake.h" />
     <ClInclude Include="..\Header\Shot_WhiteFadeIn.h" />
     <ClInclude Include="..\Header\Shot_WhiteFadeOut.h" />
@@ -684,7 +687,10 @@
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
     <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
+    <ClCompile Include="..\Code\Shot_PushOut.cpp" />
     <ClCompile Include="..\Code\Shot_RotateAround.cpp" />
+    <ClCompile Include="..\Code\Shot_RotateRoll.cpp" />
+    <ClCompile Include="..\Code\Shot_RotateYaw.cpp" />
     <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp" />
     <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_WhiteFadeOut.cpp" />
