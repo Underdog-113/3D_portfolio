@@ -203,20 +203,20 @@ void CMovieDirector::StartTake_SakuraVictory()
 	pTake->ReadyShot(ShotName_WhiteFadeOut, 0.f, 0.5f, &wfo_desc);
 
 	CShot_RotateYaw::Desc ry_desc;
-	ry_desc.startEulerAngle = 90.f;
+	ry_desc.startEulerAngle = -90.f;
 	ry_desc.endEulerAngle = 0.f;
 	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 3.6f, &ry_desc);
 
 	CShot_RotateRoll::Desc rr_desc;
-	rr_desc.startEulerAngle = 15.f;
+	rr_desc.startEulerAngle = 45.f;
 	rr_desc.endEulerAngle = 0.f;
 	pTake->ReadyShot(ShotName_RotateRoll, 0.6f, 3.6f, &rr_desc);
 
 	CShot_PushOut::Desc po_desc;
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
-	po_desc.offset = pActor->GetTransform()->GetUp() * 0.1f;
+	po_desc.offset = pActor->GetTransform()->GetUp() * -0.1f;
 	po_desc.startDistance = 0.5f;
-	po_desc.endDistance = 1.f;
+	po_desc.endDistance = 2.f;
 	pTake->ReadyShot(ShotName_PushOut, 0.6f, 3.6f, &po_desc);
 
 	m_pCurTake = pTake;
