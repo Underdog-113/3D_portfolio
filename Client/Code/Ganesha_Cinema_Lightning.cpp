@@ -69,7 +69,9 @@ void CGanesha_Cinema_Lightning::Start(void)
 	default:
 		break;
 	}
-	m_spTransform->AddRotationZ(D3DXToRadian(rand() % 90 + 45));
+
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::Ganesha_Cinema)
+		m_spTransform->AddRotationZ(D3DXToRadian(rand() % 90 + 45));
 
 	m_fAlphaWidth = 1.f;
 	m_fAlphaHeight = 4.f;

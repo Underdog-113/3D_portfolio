@@ -7,6 +7,7 @@ enum class ESceneID
 	Changmo,
 	Init,
 	MainRoom,
+	Ganesha_Cinema,
 	NumOfSceneID
 };
 
