@@ -105,6 +105,7 @@ void COneStageScene::OnDestroy(void)
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
 
+	CStageControlTower::DestroyInstance();
 
 	m_vDummy.clear();
 }

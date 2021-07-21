@@ -197,8 +197,7 @@ void CMainApp::PostRender(void)
 
 void CMainApp::OnDestroy(void)
 {
-	if (CStageControlTower::GetInstance())
-		CStageControlTower::DestroyInstance();
+	CStageControlTower::DestroyInstance();
 
 	Engine::CGraphicsManager::GetInstance()->DestroyInstance();
 	Engine::CInputManager::GetInstance()->DestroyInstance();
