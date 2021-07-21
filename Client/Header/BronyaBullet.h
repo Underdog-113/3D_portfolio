@@ -6,6 +6,7 @@
 
 class CBronya_Ult_Impact;
 class CBronya_Ult_Impact_Smoke;
+class CMB_Bronya;
 
 class CBronyaBullet : public Engine::CObject
 {
@@ -66,8 +67,14 @@ protected:
 	_float m_x = 0.f;
 	_float m_y = 0.f;
 
+	CMB_Bronya* m_pBronya = nullptr;
+
 	SP(CBronya_Ult_Impact) m_spImactEffect = nullptr;
 	SP(CBronya_Ult_Impact_Smoke) m_spImpactSmokeEffect = nullptr;
+	SP(CBronya_Ult_Laser) m_spLaserEffect = nullptr;
+
+	GETTOR(M_Stat*, m_pStat, nullptr, Stat)
+	GETTOR_SETTOR(_int, index, 0, Index)
 };
 
 #endif
