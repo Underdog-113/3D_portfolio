@@ -605,13 +605,13 @@ bool CBattleUiManager::SkillExecution_Switching(_int value, _int spValue, _float
 
 void CBattleUiManager::BattleEnd()
 {
-	m_activation = false;
+	//m_activation = false;
 
 	m_victoryCanvas->SetIsEnabled(true);
 
 	m_mainCanvas->SetIsEnabled(false);
-	m_hitsCanvas->SetIsEnabled(false);
-	m_monsterStateCanvas->SetIsEnabled(false);
+	m_hitsCanvas->SetIsEnabled(true);
+	/*m_monsterStateCanvas->SetIsEnabled(false);
 	m_monsterTargetCanvas->SetIsEnabled(false);
 	m_giveUpCanvas->SetIsEnabled(false);
 	m_specialUICanvas->SetIsEnabled(false);
@@ -620,7 +620,7 @@ void CBattleUiManager::BattleEnd()
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_3")->AddComponent<CTimerC>()->SetTime(m_totalTime);
 
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->AddComponent<CCountUpC>()
-		->SetCount(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount());
+		->SetCount(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount());*/
 }
 
 void CBattleUiManager::GameOver()
