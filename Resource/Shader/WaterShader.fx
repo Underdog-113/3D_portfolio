@@ -41,6 +41,7 @@ struct VS_INPUT
 struct VS_OUTPUT
 {
 	float4 mPosition   : POSITION;
+	float3 mNormal     : NORMAL;
 	float2 mUV		   : TEXCOORD0;
 	float3 mDiffuse    : TEXCOORD1;
 	float3 mViewDir    : TEXCOORD2;
@@ -57,6 +58,7 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
 	Input.mPosition.y += cosTime;
 
 	Out.mPosition = mul(Input.mPosition, g_WorldMat);
+	Out.mNormal = normalize(mul(vector(Input.mNormal.xyz, 0.f), g_WorldMat)).xyz;
 
 	float3 lightDir = Out.mPosition.xyz - g_WorldLightPos.xyz;
 	lightDir = normalize(lightDir);
@@ -80,6 +82,7 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
 
 struct PS_INPUT
 {
+	float3 mNormal : NORMAL;
 	float2 mUV : TEXCOORD0;
 	float3 mDiffuse : TEXCOORD1;
 	float3 mViewDir : TEXCOORD2;
@@ -104,7 +107,7 @@ PS_OUTPUT PS_MAIN(PS_INPUT Input)
 
 	Out.vColor = saturate(albedo * Noise);
 	Out.vColor.xyz *= 0.7f;
-	Out.vNormal = float4(0, 1, 0, 0);
+	Out.vNormal = vector(Input.mNormal.xyz * 0.5f + 0.5f, 0.f);
 	Out.vDepth = vector(Input.vProjPos.z / Input.vProjPos.w,	// R에 위치에 z나누기 끝난 투영 공간의 z값을 보관(0 ~ 1)값
 						Input.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)
 						0.f,

@@ -44,7 +44,7 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 	m_meshType = (_int)EMeshType::Static;
 
 	if (FAILED(D3DXLoadMeshFromX((filePath + fileName).c_str(),
-								 D3DXMESH_MANAGED,
+								 D3DXMESH_32BIT | D3DXMESH_MANAGED,
 								 GET_DEVICE,
 								 &m_pAdjacency,
 								 &m_pSubset,
@@ -56,28 +56,51 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 		ABORT;
 	}
 	
-	void* pVertices = nullptr;
-	m_pMesh->LockVertexBuffer(0, &pVertices);
+	
+	
+	D3DVERTEXELEMENT9 decl[MAX_FVF_DECL_SIZE] =
+	{
+		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
+		{ 0,24,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL,  0 },
+		{ 0,36,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT,  0 },
+		{ 0,48,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+		D3DDECL_END()
+	};
 
-	D3DVERTEXELEMENT9 decl[MAX_FVF_DECL_SIZE];
-	ZeroMemory(decl, sizeof(D3DVERTEXELEMENT9) * MAX_FVF_DECL_SIZE);
-	m_pMesh->GetDeclaration(decl);
+	m_pMesh->CloneMesh(m_pMesh->GetOptions() | D3DXMESH_32BIT, decl, GET_DEVICE, &m_pMesh);
+	
+	LPDWORD pAdjacency = new DWORD[m_pMesh->GetNumFaces() * 3];
+	m_pMesh->GenerateAdjacency(0.0001f, pAdjacency);
 
-	_ubyte byOffset = 0;
+	_ubyte byOffset = 255;
+	_ubyte tanOffset = 255;
+	_ubyte biNormalOffset = 255;
 	for (_ulong i = 0; i < MAX_FVF_DECL_SIZE; ++i)
 	{
 		if (decl[i].Usage == D3DDECLUSAGE_POSITION)
 		{
 			byOffset = (_ubyte)decl[i].Offset;
-			break;
 		}
+		else if (decl[i].Usage == D3DDECLUSAGE_TANGENT)
+		{
+			tanOffset = (_ubyte)decl[i].Offset;
+			D3DXComputeTangent(m_pMesh, 0, 0, 0, 0, pAdjacency);
+		}
+		else if (decl[i].Usage == D3DDECLUSAGE_BINORMAL)
+		{
+			biNormalOffset = (_ubyte)decl[i].Offset;
+			D3DXComputeNormals(m_pMesh, pAdjacency);
+		}
+
+		if (byOffset != 255 && tanOffset != 255 && biNormalOffset != 255)
+			break;
 	}
 
-	_ulong FVF		= m_pMesh->GetFVF();
-	_uint stride	= D3DXGetFVFVertexSize(FVF);
+	_uint stride	= D3DXGetDeclVertexSize(decl, 0);
 	_uint numOfVtx	= m_pMesh->GetNumVertices();
-
-
+	void* pVertices = nullptr;
+	m_pMesh->LockVertexBuffer(0, &pVertices);
 	for (_ulong i = 0; i < numOfVtx; ++i)
 	{
 		_float3 curPoint = *((_float3*)(((_ubyte*)pVertices) + (stride * i + byOffset)));
@@ -93,7 +116,7 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 		if (curPoint.y < m_minVertex.y)
 			m_minVertex.y = curPoint.y;
 		if (curPoint.z < m_minVertex.z)
-			m_minVertex.z = curPoint.z;
+			m_minVertex.z = curPoint.z;	
 	}
 	m_pMesh->UnlockVertexBuffer();
 	m_meshSize = m_maxVertex - m_minVertex;

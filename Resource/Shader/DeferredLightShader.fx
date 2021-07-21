@@ -16,10 +16,6 @@ sampler DepthSampler = sampler_state
 	texture = g_DepthTexture;
 };
 
-texture			g_LightMap;
-
-
-
 matrix			g_matInvProj;
 matrix			g_matInvView;
 
@@ -47,6 +43,7 @@ struct PS_OUT
 {
 	vector		vShade		: COLOR0;
 	vector		vSpecular	: COLOR1;
+	vector		vLightDepth	: COLOR2;
 };
 
 PS_OUT		PS_DIRECTIONAL(PS_IN In)

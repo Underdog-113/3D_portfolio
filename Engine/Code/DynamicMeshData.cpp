@@ -53,8 +53,6 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 
 	LPD3DXANIMATIONCONTROLLER pAniCtrl = nullptr;
 
-	if (fileName == L"Kiana_Wp.X")
-		int a = 5;
 
 	if (FAILED(D3DXLoadMeshHierarchyFromX((filePath + fileName).c_str(),
 			   D3DXMESH_MANAGED,

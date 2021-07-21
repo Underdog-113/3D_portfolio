@@ -22,28 +22,25 @@ sampler BaseSampler = sampler_state
 sampler NormalSampler = sampler_state
 {
 	texture = g_NormalTexture;
-
-	minfilter = linear;
-	magfilter = linear;
 };
 
 struct VS_IN
 {
 	vector		vPosition   : POSITION;	
 	vector		vNormal		: NORMAL;
+	float3		vBiNormal	: BINORMAL;
+	float3		vTangent	: TANGENT;
 	float2		vTexUV		: TEXCOORD0;
-	vector		vTangent	: TANGENT;
-	vector		vBiNormal	: BINORMAL;
 };
 
 struct VS_OUT
 {
 	vector		vPosition	: POSITION;	
 	vector		vNormal		: NORMAL;
-	vector		vTangent	: TANGENT;
-	vector		vBiNormal	: BINORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
+	vector		vBiNormal	: TEXCOORD2;
+	vector		vTangent	: TEXCOORD3;
 };
 
 // 버텍스쉐이더
@@ -72,10 +69,10 @@ VS_OUT VS_MAIN(VS_IN In)
 struct PS_IN
 {
 	vector		vNormal		: NORMAL;
-	vector		vTangent	: TANGENT;
-	vector		vBiNormal	: BINORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
+	vector		vTangent	: TEXCOORD2;
+	vector		vBiNormal	: TEXCOORD3;
 };
 
 struct PS_OUT
@@ -106,15 +103,15 @@ PS_OUT		PS_MAIN(PS_IN In)
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
 	vector normal = In.vNormal;
-	if (g_normalMapExist)
-	{
-		float4 bumpMap = tex2D(NormalSampler, In.vTexUV);
-		bumpMap = (bumpMap * 2.f) - 1.f;
+	//if (g_normalMapExist)
+	//{
+	//	float4 bumpMap = tex2D(NormalSampler, In.vTexUV);
+	//	bumpMap = (bumpMap * 2.f) - 1.f;
+	//
+	//	normal = normalize((bumpMap.x * (vector)0) + (bumpMap.y * In.vBiNormal) + (bumpMap.z * In.vNormal));
+	//}
 
-		normal = normalize((bumpMap.x * In.vTangent) + (bumpMap.y * In.vBiNormal) + (bumpMap.z * In.vNormal));
-	}
-
-	Out.vNormal = vector(normal.xyz * 0.5f + 0.5f, 0.f);
+	Out.vNormal = vector(normal.xyz * 0.5f + 0.5f, 1.f);
 	
 	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w,	// R에 위치에 z나누기 끝난 투영 공간의 z값을 보관(0 ~ 1)값
 						In.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)
