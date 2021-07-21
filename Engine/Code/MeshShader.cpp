@@ -47,4 +47,5 @@ void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
 	}
 	m_pEffect->SetVector("g_color", &spGC->GetTexture()->GetColor());
 	m_pEffect->SetVector("g_addColor", &m_addColor);
+	m_pEffect->SetVector("g_multColor", &m_multColor);
 }

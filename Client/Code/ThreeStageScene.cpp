@@ -68,6 +68,18 @@ void CThreeStageScene::Start(void)
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
 	Engine::CSoundManager::GetInstance()->PlayBGM(L"Stage1_Bgm.wav");
 	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+
+	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(true);
+
+	this->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
+	CBattleUiManager::GetInstance()->QteOff(0);
+	CBattleUiManager::GetInstance()->QteOff(1);
+	CBattleUiManager::GetInstance()->SquadOff(this);
+	CBattleUiManager::GetInstance()->WaitingPlayerSetting();
+
+	Engine::CCanvas* ConversationCanvas = static_cast<Engine::CCanvas*>(this->FindObjectByName(L"ConversationCanvas").get());
+	ConversationCanvas->AddObjectFind();
+	ConversationCanvas->SetIsEnabled(false);
 }
 
 void CThreeStageScene::FixedUpdate(void)
@@ -97,9 +109,8 @@ void CThreeStageScene::OnDestroy(void)
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
 
-	m_pControlTower->OnDestroy();
-	m_pControlTower->DestroyInstance();
-	m_pControlTower = nullptr;
+	CStageControlTower::DestroyInstance();
+
 }
 
 void CThreeStageScene::OnEnable(void)

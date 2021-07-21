@@ -30,6 +30,7 @@ class CActorController;
 class CUILinker;
 class CStatusDealer;
 class CStageCameraMan;
+class CMovieDirector;
 class CTimeSeeker;
 class CPhaseControl;
 class COneStagePhaseControl;
@@ -44,6 +45,8 @@ class CStageControlTower
 public:
 	enum CreateMode { ALL, WithoutUI };
 	enum Squad_Role { Actor, Wait_1, Wait_2 };
+
+	enum Env_Type { NoColoring,TheresaUlt, SakuraUlt, PerfectEvade };
 public:
 	void Awake(void);
 	void Start(CreateMode mode = ALL);
@@ -85,10 +88,13 @@ public:		/* Battle */
 	void BattonTouch_2Member();
 	void BattonTouch_3Member();
 
+	void SettingEnvironmentColor();
+	void SetEnvType(Env_Type envType);
+
 public:		/* Camera & System */
-	void SetCameraMidTake();
-	void SetCameraFarTake();
-	void SetCameraCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
+	void SetCameraMidShot();
+	void SetCameraFarShot();
+	void SetCameraCustomShot(_float dstMaxDistance, _float changeSpeed, _float dstXAngle);
 	void OffCameraTargeting();
 	void EndSwitching();
 
@@ -104,7 +110,9 @@ public:		/* Camera & System */
 	void OffSlowExceptPlayer();
 
 	_float GetPlayerDeltaTime();
+
 public:		/* Stage Control Mode */
+	void SetDirectorMode(bool value);
 
 public:
 	void AddItemList(ItemSave item);
@@ -117,6 +125,7 @@ private:
 	GETTOR			(CUILinker*,			m_pLinker,			nullptr,		UILinker)
 	GETTOR			(CStatusDealer*,		m_pDealer,			nullptr,		StatDealer)
 	GETTOR			(CStageCameraMan*,		m_pCameraMan,		nullptr,		CameraMan)
+	GETTOR			(CMovieDirector*,		m_pMovieDirector,	nullptr,		MovieDirector)
 	GETTOR			(CTimeSeeker*,			m_pTimeSeeker,		nullptr,		TimeSeeker)
 
 	GETTOR_SETTOR	(CPhaseControl*,		m_pPhaseControl,	nullptr,		PhaseControl)
@@ -139,6 +148,14 @@ private:	/* Stage Info? */
 
 	_bool m_isQTEUsed = false;
 	_float m_QTEOnTimer = 0.f;
+
+
+	GETTOR(Env_Type, m_envType, NoColoring, EnvType)
+	_bool m_envColorChange = false;
+	_float m_envColorTimer = 0.f;
+	_float m_envColorDuration = 0.f;
+	_float4 m_startEnvColor = _float4(1.f, 1.f, 1.f, 1.f);
+	_float4 m_dstEnvColor = _float4(1.f, 1.f, 1.f, 1.f);
 
 
 private:

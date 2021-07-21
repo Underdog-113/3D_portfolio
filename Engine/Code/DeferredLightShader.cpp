@@ -32,6 +32,7 @@ void CDeferredLightShader::Awake(void)
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
 	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Shade");
 	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Specular");
+	m_vRenderTargets[2] = pRTM->FindRenderTarget(L"Target_LightDepth");
 }
 
 void CDeferredLightShader::SetUpConstantTable(SP(CGraphicsC) spGC)

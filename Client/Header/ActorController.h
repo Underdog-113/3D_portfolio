@@ -14,7 +14,7 @@ public:
 public:
 	void UpdateController();
 	void SetInputLock_ByAni(bool value);
-
+	
 private:	/* Actor Move */
 	bool CheckMoveOrder();
 	void ReserveMoveOrder();
@@ -48,6 +48,7 @@ private:
 	bool						m_rotateLock = false;
 	bool						m_rotateByTarget = false;
 	bool						m_inputLock_ByTarget = false;
-
+	
+	GETTOR_SETTOR	(bool, m_directorMode,		false,		DirectorMode)
 
 };

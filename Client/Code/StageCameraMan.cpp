@@ -20,8 +20,8 @@ CStageCameraMan::~CStageCameraMan()
 
 void CStageCameraMan::Start()
 {
-	m_spCamera->SetTargetDist(MidTake);
-	m_spCamera->SetMaxDistTPS(MidTake);
+	m_spCamera->SetTargetDist(MidShot);
+	m_spCamera->SetMaxDistTPS(MidShot);
 	m_spCamera->SetMode(Engine::ECameraMode::TPS_Custom);
 	m_spCamera->SetLookAngleRight(MidAngle);
 
@@ -50,6 +50,7 @@ void CStageCameraMan::Start()
 
 void CStageCameraMan::UpdateCameraMan()
 {
+
 	if(!m_isStart)
 		Start();
 
@@ -59,13 +60,13 @@ void CStageCameraMan::UpdateCameraMan()
 	if (m_isSwitching)
 		return;
 
-	auto camTr = m_spCamera->GetTransform();
-
-	if (m_pCameraShake->IsShaking()) 
+	if (m_directorControl)
 	{
-		camTr->AddPosition(-m_pCameraShake->GetLocationOscilation());
-		camTr->SetPosition(m_noShakeRot);
+		DirectorControlMode();
+		return;
 	}
+
+	ReturnBeforShaking();
 
 	PivotChasing();
 	
@@ -77,35 +78,45 @@ void CStageCameraMan::UpdateCameraMan()
 			AutoControlMode();
 	}
 
-
-	if (m_pCameraShake->IsShaking())
-	{
-		m_pCameraShake->PlayShake();
-
-		m_noShakePos = m_spCamera->GetShakePosOffset();
-		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
-		
-		m_spCamera->SetShakePosOffset(m_pCameraShake->GetLocationOscilation());
-
-		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
-		camTr->AddRotation(rotOscilation);
-
-		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
-		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
-		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
-	}
-	else
-	{
-		m_spCamera->SetShakePosOffset(ZERO_VECTOR);
-	}
+	ApplyShaking();
 }
+
+void CStageCameraMan::DirectorControlMode()
+{
+	ReturnBeforShaking();
+
+	if (m_isPivotChasing)
+		PivotChasing_Director();
+
+	ApplyShaking();
+
+}
+
+void CStageCameraMan::PivotChasing_Director()
+{
+	NonTargetChasing();
+
+	if (m_isVertCorrecting)
+		AppendPosYCorrecting();
+
+	_float3 lerpPosition = GetLerpPosition(
+		m_spPivot->GetTransform()->GetPosition(), m_dstPivotPos, GET_PLAYER_DT * m_chaseSpeed);
+
+	if (D3DXVec3Length(&(m_dstPivotPos - lerpPosition)) < 0.01f)
+	{
+		lerpPosition = m_dstPivotPos;
+	}
+	m_spPivot->GetTransform()->SetPosition(lerpPosition);
+
+}
+
 
 void CStageCameraMan::PivotChasing()
 {
 
 	if (m_isTargeting)
 	{
-		AppendTargetCorrecting();
+		OnTargetChasing();
 	}
 	else
 	{
@@ -167,14 +178,14 @@ void CStageCameraMan::SetIsTargeting(bool value)
 
 	if (value)
 	{
-		SetTargetTake();
+		SetTargetShot();
 
 		m_chaseSpeed = 15.f;
 		m_isChaseSpeedChange = false;
 	}
 	else
 	{
-		SetMidTake();
+		SetMidShot();
 		m_chaseSpeedIncreaseTimer = 0.f;
 		m_startChaseSpeed = 7.5f;
 		m_endChaseSpeed = 15.f;
@@ -188,155 +199,155 @@ void CStageCameraMan::ResetChaseSpeed()
 	m_chaseSpeed = 7.f;
 }
 
-void CStageCameraMan::SetNearTake()
+void CStageCameraMan::SetNearShot()
 {
-	if (m_curTakeType == Near)
+	if (m_curShotType == Near)
 		return;
 
-	if (m_curTakeType == Change)
+	if (m_curShotType == Change)
 		m_curMaxDist = m_spCamera->GetMaxDistTPS();
 
-	m_curTakeType = Change;
-	m_nextTakeType = Near;
-	m_dstMaxDist = NearTake;
-	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 0.5f;
+	m_curShotType = Change;
+	m_nextShotType = Near;
+	m_dstMaxDist = NearShot;
+	m_changeShotTimer = 0.f;
+	m_changeShotSpeed = 0.5f;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = NearAngle;
 }
 
-void CStageCameraMan::SetMidTake()
+void CStageCameraMan::SetMidShot()
 {
-	if (m_curTakeType == Mid)
+	if (m_curShotType == Mid)
 		return;
 
-	if (m_curTakeType == Change && m_nextTakeType == Far)
+	if (m_curShotType == Change && m_nextShotType == Far)
 		return;
 
-	if (m_curTakeType == Change)
+	if (m_curShotType == Change)
 		m_curMaxDist = m_spCamera->GetMaxDistTPS();
 
-	m_curTakeType = Change;
-	m_nextTakeType = Mid;
-	m_dstMaxDist = MidTake;
-	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 2.f;
+	m_curShotType = Change;
+	m_nextShotType = Mid;
+	m_dstMaxDist = MidShot;
+	m_changeShotTimer = 0.f;
+	m_changeShotSpeed = 2.f;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = MidAngle;
 }
 
-void CStageCameraMan::SetFarTake()
+void CStageCameraMan::SetFarShot()
 {
-	if (m_curTakeType == Far)
+	if (m_curShotType == Far)
 	{
-		m_gotoNextTakeTimer = 0.f;
+		m_gotoNextShotTimer = 0.f;
 		return;
 	}
-	if (m_curTakeType == Change && m_nextTakeType == Far)
+	if (m_curShotType == Change && m_nextShotType == Far)
 		return;
 
-	if (m_curTakeType == Change)
+	if (m_curShotType == Change)
 		m_curMaxDist = m_spCamera->GetMaxDistTPS();
 
-	m_curTakeType = Change;
-	m_nextTakeType = Far;
-	m_dstMaxDist = FarTake;
-	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 2.5f;
+	m_curShotType = Change;
+	m_nextShotType = Far;
+	m_dstMaxDist = FarShot;
+	m_changeShotTimer = 0.f;
+	m_changeShotSpeed = 2.5f;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = FarAngle;
 }
 
-void CStageCameraMan::SetCustomTake(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
+void CStageCameraMan::SetCustomShot(_float dstMaxDistance, _float changeSpeed, _float dstXAngle)
 {
-	if (m_curTakeType == Change)
+	if (m_curShotType == Change)
 		m_curMaxDist = m_spCamera->GetMaxDistTPS();
 
-	m_gotoNextTakeTimer = 0.f;
-	m_curTakeType = Change;
-	m_nextTakeType = Custom;
+	m_gotoNextShotTimer = 0.f;
+	m_curShotType = Change;
+	m_nextShotType = Custom;
 	m_dstMaxDist = dstMaxDistance;
-	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = changeSpeed;
+	m_changeShotTimer = 0.f;
+	m_changeShotSpeed = changeSpeed;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = dstXAngle;
 }
 
-void CStageCameraMan::SetTargetTake()
+void CStageCameraMan::SetTargetShot()
 {
-	if (m_curTakeType == Target || m_curTakeType == Change)
+	if (m_curShotType == Target || m_curShotType == Change)
 	{
-		m_gotoNextTakeTimer = 0.f;
+		m_gotoNextShotTimer = 0.f;
 		return;
 	}
 
-	m_gotoNextTakeTimer = 0.f;
-	m_gotoNextTakeWaitTime = 3.f;
-	m_curTakeType = Target;
-	m_nextTakeType = Target;
-	m_changeTakeTimer = 0.f;
-	m_changeTakeSpeed = 2.f;
+	m_gotoNextShotTimer = 0.f;
+	m_gotoNextShotWaitTime = 3.f;
+	m_curShotType = Target;
+	m_nextShotType = Target;
+	m_changeShotTimer = 0.f;
+	m_changeShotSpeed = 2.f;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = D3DXToRadian(15.f);
 }
 
-void CStageCameraMan::ChangeTake()
+void CStageCameraMan::ChangeShot()
 {
-	switch (m_curTakeType)
+	switch (m_curShotType)
 	{
 	case CStageCameraMan::Near:
 		if (!CheckNoAction())
 		{
-			SetMidTake();
+			SetMidShot();
 			return;
 		}
 		break;
 	case CStageCameraMan::Mid:
 		if (CheckNoAction())
 		{
-			m_gotoNextTakeTimer += GET_PLAYER_DT;
-			if (m_gotoNextTakeTimer > 4.f)
+			m_gotoNextShotTimer += GET_PLAYER_DT;
+			if (m_gotoNextShotTimer > 4.f)
 			{
-				m_gotoNextTakeTimer = 0.f;
-				SetNearTake();
+				m_gotoNextShotTimer = 0.f;
+				SetNearShot();
 			}
 		}
 		else
 		{
-			m_gotoNextTakeTimer = 0.f;
+			m_gotoNextShotTimer = 0.f;
 		}
 		break;
 	case CStageCameraMan::Far:
 		if (CheckNoAction())
 		{
-			m_gotoNextTakeTimer += GET_PLAYER_DT;
-			if (m_gotoNextTakeTimer > 1.5f)
+			m_gotoNextShotTimer += GET_PLAYER_DT;
+			if (m_gotoNextShotTimer > 1.5f)
 			{
-				m_gotoNextTakeTimer = 0.f;
-				SetMidTake();
+				m_gotoNextShotTimer = 0.f;
+				SetMidShot();
 			}
 		}
 		break;
 	case CStageCameraMan::Custom:
 		if (CheckNoAction())
 		{
-			m_gotoNextTakeTimer += GET_PLAYER_DT;
-			if (m_gotoNextTakeTimer > m_gotoNextTakeWaitTime)
+			m_gotoNextShotTimer += GET_PLAYER_DT;
+			if (m_gotoNextShotTimer > m_gotoNextShotWaitTime)
 			{
-				m_gotoNextTakeWaitTime = 1.5f;
-				m_gotoNextTakeTimer = 0.f;
-				SetMidTake();
+				m_gotoNextShotWaitTime = 1.5f;
+				m_gotoNextShotTimer = 0.f;
+				SetMidShot();
 			}
 		}
 		break;
 	case CStageCameraMan::Target:
 		{
-			ChangeTakeWhileTargeting();
+			ChangeShotWhileTargeting();
 
-			if (m_changeTakeTimer < 1.f)
+			if (m_changeShotTimer < 1.f)
 			{
-				m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
-				if (m_changeTakeTimer > 1.f)
+				m_changeShotTimer += GET_PLAYER_DT * m_changeShotSpeed;
+				if (m_changeShotTimer > 1.f)
 				{
 					m_curMaxDist = m_dstMaxDist;
 					m_spCamera->SetTargetDist(m_dstMaxDist);
@@ -344,7 +355,7 @@ void CStageCameraMan::ChangeTake()
 					break;
 				}
 
-				float inverseRate = 1.f - m_changeTakeTimer;
+				float inverseRate = 1.f - m_changeShotTimer;
 				float sLerpTimer = 1.f - inverseRate * inverseRate;
 
 				_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, sLerpTimer);
@@ -357,29 +368,29 @@ void CStageCameraMan::ChangeTake()
 		}
 		break;
 	case CStageCameraMan::Change:
-		if (m_nextTakeType == Near && !CheckNoAction())
+		if (m_nextShotType == Near && !CheckNoAction())
 		{
-			m_nextTakeType = Mid;
+			m_nextShotType = Mid;
 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
-			m_dstMaxDist = MidTake;
-			m_changeTakeTimer = 0.f;
-			m_changeTakeSpeed = 2.f;
+			m_dstMaxDist = MidShot;
+			m_changeShotTimer = 0.f;
+			m_changeShotSpeed = 2.f;
 
 			m_rotateXStart = m_spCamera->GetLookAngleRight();
 			m_rotateXDst = MidAngle;
 		}
 
-		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
-		if (m_changeTakeTimer > 1.f)
+		m_changeShotTimer += GET_PLAYER_DT * m_changeShotSpeed;
+		if (m_changeShotTimer > 1.f)
 		{
 			m_curMaxDist = m_dstMaxDist;
-			m_curTakeType = m_nextTakeType;
+			m_curShotType = m_nextShotType;
 			m_spCamera->SetTargetDist(m_dstMaxDist);
 			m_spCamera->SetMaxDistTPS(m_dstMaxDist);
 			return;
 		}
 
-		float inverseRate = 1.f - m_changeTakeTimer;
+		float inverseRate = 1.f - m_changeShotTimer;
 		float sLerpTimer = 1.f - inverseRate * inverseRate;
 
 		_float lerpPoint = FloatLerp(m_curMaxDist, m_dstMaxDist, sLerpTimer);
@@ -392,10 +403,10 @@ void CStageCameraMan::ChangeTake()
 	}
 }
 
-void CStageCameraMan::ChangeTakeWhileTargeting()
+void CStageCameraMan::ChangeShotWhileTargeting()
 {
-	if (m_changeTakeTimer > 1.f)
-		m_changeTakeTimer += GET_PLAYER_DT * m_changeTakeSpeed;
+	if (m_changeShotTimer > 1.f)
+		m_changeShotTimer += GET_PLAYER_DT * m_changeShotSpeed;
 
 	auto pCT = CStageControlTower::GetInstance();
 	auto spTarget = pCT->GetCurrentTarget();
@@ -413,31 +424,31 @@ void CStageCameraMan::ChangeTakeWhileTargeting()
 			// wide
 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
 			m_dstMaxDist = 6.f;
-			m_changeTakeTimer = 0.f;
+			m_changeShotTimer = 0.f;
 			m_rotateXStart = m_spCamera->GetLookAngleRight();
 			m_rotateXDst = D3DXToRadian(15.f);
 		}
 	}
 	else if (distance < TargetMidWideLimitDist)
 	{
-		if (m_dstMaxDist > 2.5f && m_changeTakeTimer > 2.f)
+		if (m_dstMaxDist > 2.5f && m_changeShotTimer > 2.f)
 		{
 			// normal
 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
 			m_dstMaxDist = 2.5f;
-			m_changeTakeTimer = 0.f;
+			m_changeShotTimer = 0.f;
 			m_rotateXStart = m_spCamera->GetLookAngleRight();
 			m_rotateXDst = D3DXToRadian(15.f);
 		}
 	}
 	else
 	{
-		if (m_dstMaxDist != 4.f && m_changeTakeTimer > 2.f)
+		if (m_dstMaxDist != 4.f && m_changeShotTimer > 2.f)
 		{
 			// midwide
 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
 			m_dstMaxDist = 4.f;
-			m_changeTakeTimer = 0.f;
+			m_changeShotTimer = 0.f;
 			m_rotateXStart = m_spCamera->GetLookAngleRight();
 			m_rotateXDst = D3DXToRadian(15.f);
 
@@ -500,7 +511,7 @@ void CStageCameraMan::AppendAttackDirectionCorrecting()
 	m_rotateYDst += m_attackCorrectingAngle * GET_PLAYER_DT * 2.f;
 }
 
-void CStageCameraMan::AppendTargetCorrecting()
+void CStageCameraMan::OnTargetChasing()
 {
 	auto pCT = CStageControlTower::GetInstance();
 	
@@ -644,7 +655,7 @@ bool CStageCameraMan::MouseControlMode()
 		m_rotateLerpStart = m_spCamera->GetLookAngleUp();
 		m_rotateYDst = m_spCamera->GetLookAngleUp();
 
-		ChangeTake();
+		ChangeShot();
 		SetIsTargeting(false);
 		return true;
 	}
@@ -710,11 +721,48 @@ void CStageCameraMan::AutoControlMode()
 		return;
 	}
 
-	AppendHorizontalCorrecting();
+	//AppendHorizontalCorrecting();
 	AppendAttackDirectionCorrecting();
 
-	ChangeTake();
+	ChangeShot();
 	
+}
+
+void CStageCameraMan::ReturnBeforShaking()
+{
+	auto camTr = m_spCamera->GetTransform();
+
+	if (m_pCameraShake->IsShaking())
+	{
+		camTr->AddPosition(-m_pCameraShake->GetLocationOscilation());
+		camTr->SetPosition(m_noShakeRot);
+	}
+}
+
+void CStageCameraMan::ApplyShaking()
+{
+	auto camTr = m_spCamera->GetTransform();
+
+	if (m_pCameraShake->IsShaking())
+	{
+		m_pCameraShake->PlayShake();
+
+		m_noShakePos = m_spCamera->GetShakePosOffset();
+		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
+
+		m_spCamera->SetShakePosOffset(m_pCameraShake->GetLocationOscilation());
+
+		_float3 rotOscilation = m_pCameraShake->GetRotateOscilation();
+		camTr->AddRotation(rotOscilation);
+
+		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
+		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
+		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
+	}
+	else
+	{
+		m_spCamera->SetShakePosOffset(ZERO_VECTOR);
+	}
 }
 
 void CStageCameraMan::ShakeCamera_Low(_float3 eventPos)

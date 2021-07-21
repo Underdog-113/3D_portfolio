@@ -154,7 +154,7 @@ void CTheresa_CrossBloodyHug::OnEnable(void)
 	info.SetCrowdControlType(HitInfo::CC_None);
 	m_pAttackBall->SetupBall(1.2f, info);
 
-	CStageControlTower::GetInstance()->SetCameraCustomTake(3.f, 1.5f, D3DXToRadian(5.f));
+	CStageControlTower::GetInstance()->SetCameraCustomShot(3.f, 1.5f, D3DXToRadian(5.f));
 }
 
 void CTheresa_CrossBloodyHug::OnDisable(void)
@@ -177,7 +177,7 @@ void CTheresa_CrossBloodyHug::FallReady()
 		m_stateDuration = 0.12f;
 		m_skillState = Fall;
 
-		CStageControlTower::GetInstance()->SetCameraCustomTake(4.f, 2.f, D3DXToRadian(10.f));
+		CStageControlTower::GetInstance()->SetCameraCustomShot(4.f, 2.f, D3DXToRadian(10.f));
 		return;
 	}
 }

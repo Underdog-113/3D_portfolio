@@ -35,8 +35,6 @@ private:
 
 	void				InitPrototypes(void) override;
 
-	void				ForUITest();
-
 private:
 	CStageControlTower* m_pControlTower = nullptr;
 	CBattleUiManager* m_pBattleUIManager = nullptr;

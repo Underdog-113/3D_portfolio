@@ -1,6 +1,6 @@
 #ifndef ONECONVERSATIONCOMPONENT_H
 #define ONECONVERSATIONCOMPONENT_H
-
+#include "Canvas.h"
 #include "Component.h"
 class COneConversationC  final : public Engine::CComponent
 {
@@ -18,6 +18,9 @@ public:
 	void OnEnable() override;
 	void OnDisable() override;
 
+public:
+	_bool IsEnd();
+
 private:
 	void Conversation();
 	void TextUpdate();
@@ -27,12 +30,14 @@ public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 
 private:
+	Engine::CCanvas* m_conversationCanvas;
+
 	Engine::CObject* m_conversationPlayerImage;
 	Engine::CObject* m_conversationName;
 	std::vector<Engine::CObject*> m_conversationText;
 
 	_int m_conversationCount;
-	_bool m_conversationCheck;
+	_bool m_conversationCheck = false;
 	_bool m_init;
 
 	std::wstring m_inText[2];

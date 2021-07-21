@@ -122,7 +122,10 @@ void CSakura::Update(void)
 	{
 		m_infernoTimer += GET_PLAYER_DT;
 		if (m_infernoTimer > 10.f)
+		{
 			m_infernoMode = false;
+			CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::NoColoring);
+		}
 	}
 
 	if (m_cycloneActive)

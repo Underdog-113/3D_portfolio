@@ -27,6 +27,8 @@
 #define Delay_Effect_Atk04 0.0f
 #define Delay_Effect_Atk05 0.05f
 
+#define FirstAttackDmgRate 1000.f
+
 class CKiana;
 class CStageControlTower;
 class CEffectMaker_Kiana;
@@ -99,6 +101,7 @@ private:
 	bool m_checkAttack3rd = false;
 	bool m_checkAttack4th = false;
 	bool m_checkUltraActive = false;
+	bool m_checkShake = false;
 
 	bool m_isUltraMode = false;
 	bool m_isEvade = false;

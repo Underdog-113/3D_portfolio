@@ -58,11 +58,8 @@ void CTwoStageScene::Awake(_int numOfLayers)
 void CTwoStageScene::Start(void)
 {
 	__super::Start();
-	
-	m_sceneID = (_int)ESceneID::Ganesha_Cinema;
 
-	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-	spCube0->AddComponent<CTwoConversationC>();
+	m_sceneID = (_int)ESceneID::Ganesha_Cinema;
 
 	SetupFromLoader();
 	SetupMembers();
@@ -97,6 +94,7 @@ void CTwoStageScene::Update(void)
 		m_spSky->GetTransform()->SetRotationY(
 			m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
 	}
+
 }
 
 void CTwoStageScene::LateUpdate(void)
@@ -110,6 +108,8 @@ void CTwoStageScene::OnDestroy(void)
 	__super::OnDestroy();
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
+
+	CStageControlTower::DestroyInstance();
 
 	m_vDummy.clear();
 }
@@ -164,8 +164,6 @@ void CTwoStageScene::Create_ActorValkyrie(void)
 
 void CTwoStageScene::Create_SceneCamera(void)
 {
-	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
@@ -174,64 +172,6 @@ void CTwoStageScene::Create_SceneCamera(void)
 void CTwoStageScene::InitPrototypes(void)
 {
 
-}
-
-void CTwoStageScene::ForUITest()
-{
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_1))
-	{
-		CBattleUiManager::GetInstance()->SpecialUICanvasOn();
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_2))
-	{
-		CBattleUiManager::GetInstance()->SpecialUIUp();
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_3))
-	{
-		CBattleUiManager::GetInstance()->SpecialUIDwon();
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_4))
-	{
-		CBattleUiManager::GetInstance()->HitCount(5);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_5))
-	{
-		CBattleUiManager::GetInstance()->PlayerHp(100.0f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F1))
-	{
-		CBattleUiManager::GetInstance()->PlayerHpDown(0.5f);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F2))
-	{
-		CBattleUiManager::GetInstance()->SkillExecution(2, 10, 10);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F3))
-	{
-		CBattleUiManager::GetInstance()->MonsterState(L"", 1000, 900, 2, L"DOWN",0,0);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F4))
-	{
-		CBattleUiManager::GetInstance()->MonsterHpDown(10);
-	}
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_F5))
-	{
-		CBattleUiManager::GetInstance()->OnTargetUI(nullptr, 5.0f);
-	}
-
-// 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
-// 	{
-// 		CBattleUiManager::GetInstance()->BattleEnd();
-// 	}
 }
 
 void CTwoStageScene::FindSkyObject()

@@ -35,11 +35,6 @@ private:
 	void				Create_ActorValkyrie(void);
 	void				Create_SceneCamera(void);
 	
-	void				Create_Dummy(_float3 pos);
-	void				Create_Sickle(_float3 pos);
-	void				Create_Spider(_float3 pos);
-
-
 	void				InitPrototypes(void) override;
 
 	void				FindSkyObject();

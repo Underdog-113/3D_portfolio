@@ -59,9 +59,6 @@ void COneStageScene::Start(void)
 {
 	__super::Start();
 
-	SP(Engine::CObject) spCube0 = ADD_CLONE(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-	spCube0->AddComponent<COneConversationC>();
-
 	SetupFromLoader();
 	SetupMembers();
 	FindSkyObject();
@@ -72,11 +69,7 @@ void COneStageScene::Start(void)
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
 	Engine::CSoundManager::GetInstance()->PlayBGM(L"Stage2_Bgm.wav");
 	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-
-
-
 }
-
 void COneStageScene::FixedUpdate(void)
 {
 	__super::FixedUpdate();
@@ -91,11 +84,6 @@ void COneStageScene::Update(void)
 
 	m_pControlTower->Update();
 	m_pBattleUIManager->Update();
-
-	if (Engine::IMKEY_DOWN(KEY_UP))
-	{
-		m_spValkyrie->GetTransform()->SetPosition(-42.f, 15.001f, 0);
-	}
 
 	// Sky Rotation
 	if (nullptr != m_spSky)
@@ -116,6 +104,8 @@ void COneStageScene::OnDestroy(void)
 	__super::OnDestroy();
 	m_pBattleUIManager->OnDestroy();
 	m_pBattleUIManager->DestroyInstance();
+
+	CStageControlTower::DestroyInstance();
 
 	m_vDummy.clear();
 }
@@ -165,7 +155,7 @@ void COneStageScene::Create_ActorValkyrie(void)
 
 	m_spValkyrie = spStartValkyrie;
 	//m_spValkyrie->GetTransform()->SetPosition(46.3345f, -1.f, -0.075913f);
-	m_spValkyrie->GetTransform()->SetPosition(5.f, 1.f, 0.f);
+	m_spValkyrie->GetTransform()->SetPosition(5.f, 0.f, 0.f);
 	m_spValkyrie->GetTransform()->AddRotationY(D3DXToRadian(-90.f));
 
 	m_pControlTower->Start(CStageControlTower::ALL);
@@ -174,36 +164,11 @@ void COneStageScene::Create_ActorValkyrie(void)
 
 void COneStageScene::Create_SceneCamera(void)
 {
-	//Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-
 	auto cam = Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera");
 	cam->SetTarget(m_spValkyrie);
 	CStageControlTower::GetInstance()->SetCurrentMainCam(cam);
 }
 
-void COneStageScene::Create_Dummy(_float3 pos)
-{
-	auto dummy = ADD_CLONE(L"MO_Dummy", true, (_uint)ELayerID::Enemy, L"MO_Dummy");
-	dummy->GetTransform()->SetPosition(pos);
-
-	m_vDummy.emplace_back(dummy);
-}
-
-void COneStageScene::Create_Sickle(_float3 pos)
-{
-	SP(Engine::CObject) spSickleClone = ADD_CLONE(L"MO_Sickle", true, (_uint)ELayerID::Enemy, L"MO_Sickle");
-	spSickleClone->GetTransform()->SetPosition(pos);
-	std::dynamic_pointer_cast<CMonster>(spSickleClone)->SelectChannelID();
-	m_vSickle.emplace_back(spSickleClone);
-}
-
-void COneStageScene::Create_Spider(_float3 pos)
-{
-	SP(Engine::CObject) spSpiderClone = ADD_CLONE(L"MO_Spider", true, (_uint)ELayerID::Enemy, L"MO_Spider");
-	spSpiderClone->GetTransform()->SetPosition(pos);
-	std::dynamic_pointer_cast<CMonster>(spSpiderClone)->SelectChannelID();
-	m_vSpider.emplace_back(spSpiderClone);
-}
 
 void COneStageScene::InitPrototypes(void)
 {

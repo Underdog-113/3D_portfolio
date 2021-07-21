@@ -26,6 +26,7 @@ void CRenderTargetManager::Awake(void)
 #pragma region LightRT
 	AddRenderTarget(L"Target_Shade", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 1))->InitDebugRT(1, 0);
 	AddRenderTarget(L"Target_Specular", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(1, 1);
+	AddRenderTarget(L"Target_LightDepth", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(1, 2);
 #pragma endregion
 
 
