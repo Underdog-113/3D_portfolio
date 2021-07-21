@@ -15,6 +15,8 @@ public:
 	virtual			void					InitLight			(D3DLIGHT9* pLightInfo, const _int& index);
 	virtual			void					UpdateLight			(void);
 	virtual			void					RenderLight			(LPD3DXEFFECT pEffect);
+
+	virtual			void					GenerateOrthoMatrix	(void);
 	
 protected:
 	typedef LPDIRECT3DVERTEXBUFFER9 _VERTEX_BUFFER;
@@ -24,7 +26,7 @@ protected:
 	GETTOR_REF		(_INDEX_BUFFER,			m_pIndexBuffer,		nullptr,		IndexBuffer)
 	GETTOR			(D3DLIGHT9*,			m_pLightInfo,		{},				LightInfo)
 	GETTOR			(_int,					m_index,			UNDEFINED,		Index)
-
+	GETTOR			(_mat,					m_orthoMat,			{},				OrthoMatrix)
 };
 
 END
