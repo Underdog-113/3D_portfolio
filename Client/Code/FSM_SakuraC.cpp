@@ -1082,7 +1082,8 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 			D3DXVec3Normalize(&flashDir, &flashDir);
 
 			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + flashDir * colRadiusSum);
+
+			m_pSakura->GetTransform()->SetPosition(pMonster->GetTransform()->GetPosition() + flashDir * colRadiusSum);
 
 			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
 		}
@@ -1170,7 +1171,7 @@ void CFSM_SakuraC::Attack6_Update(float deltaTime)
 			D3DXVec3Normalize(&flashDir, &flashDir);
 
 			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + flashDir * colRadiusSum);
+			m_pSakura->GetTransform()->SetPosition(pMonster->GetTransform()->GetPosition() + flashDir * colRadiusSum);
 
 			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
 		}
@@ -1383,7 +1384,7 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 			D3DXVec3Normalize(&flashDir, &flashDir);
 
 			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + flashDir * colRadiusSum);
+			m_pSakura->GetTransform()->SetPosition(pMonster->GetTransform()->GetPosition() + flashDir * colRadiusSum);
 
 			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
 		}
@@ -1538,7 +1539,7 @@ void CFSM_SakuraC::Charge1_Quick_Update(float deltaTime)
 			D3DXVec3Normalize(&flashDir, &flashDir);
 
 			_float colRadiusSum = m_pSakura->GetHitbox()->GetRadiusBS() * 1.25f + pMonster->GetHitBox()->GetRadiusBS() * 1.25f;
-			m_pSakura->GetTransform()->SetPosition(curTargetPos + flashDir * colRadiusSum);
+			m_pSakura->GetTransform()->SetPosition(pMonster->GetTransform()->GetPosition() + flashDir * colRadiusSum);
 
 			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 		}
