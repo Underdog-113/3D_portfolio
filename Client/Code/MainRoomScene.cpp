@@ -73,8 +73,8 @@ void CMainRoomScene::Start(void)
 	if (!g_bFirstGameStart)
 	{
 		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.2f, 0.17f, -5.88f));
-		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(0.f, 0.f, 0.0f));
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetPosition(_float3(-0.286f, 0.175f, -5.44f));
+		Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->GetTransform()->SetRotation(_float3(-0.0519f, 0.003f, 0.0f));
 
 		SP(Engine::CObject) spobj = ADD_CLONE(L"ElevatorBase", true, (_int)Engine::ELayerID::Decoration);
 		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-2.5f);
@@ -82,8 +82,6 @@ void CMainRoomScene::Start(void)
 		spobj->GetComponent<Engine::CTransformC>()->AddPositionX(-0.4f);
 
 		spobj = ADD_CLONE(L"ElevatorDoor", true, (_int)Engine::ELayerID::Decoration);
-		spobj->GetComponent<Engine::CTransformC>()->AddPositionZ(-2.2f);
-		spobj->GetComponent<Engine::CTransformC>()->AddPositionX(-0.4f);
 
 		static_cast<Engine::CCanvas*>(this->FindObjectByName(L"MainCanvas").get())->AddObjectFind();
 		static_cast<Engine::CCanvas*>(this->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(false);

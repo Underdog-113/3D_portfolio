@@ -578,7 +578,7 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
 	{
 		PlaySound_Attack_RandomVoice();
-		m_pKiana->ActiveAttackBall(100.1f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
+		m_pKiana->ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
 
 		if (m_pKiana->GetUltraMode())
 		{

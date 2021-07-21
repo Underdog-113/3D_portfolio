@@ -36,6 +36,7 @@ private:
 
 	_bool m_onAtkBall = false;
 	_bool m_offAtkBall = false;
+	_bool m_onShockEffect = false;
 
 	_mat m_atkMat;
 	_mat* m_pRHand;

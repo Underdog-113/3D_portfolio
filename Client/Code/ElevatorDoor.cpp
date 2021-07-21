@@ -74,8 +74,10 @@ void CElevatorDoor::Start(void)
 
 		m_sp_R_Door->GetTransform()->SetOwner(this);
 
-		m_spTransform->SetPositionZ(-5.2f);
+		m_spTransform->SetPositionZ(-2.4f);
 		m_spTransform->SetPositionY(-0.8f);
+		m_spTransform->AddPositionX(-0.4f);
+
 		m_spMesh->SetMeshData(L"Elevator_Door_2");
 		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::OUTGAME);
 		Engine::CSoundManager::GetInstance()->StartSound(L"Elevator_OpenDoor.wav", (_uint)Engine::EChannelID::OUTGAME);

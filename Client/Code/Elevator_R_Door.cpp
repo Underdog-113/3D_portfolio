@@ -58,7 +58,7 @@ void CElevator_R_Door::Start(void)
 {
 	__super::Start();
 
-	m_spTransform->SetPosition(_float3(-0.4f, -0.51f, -2.f));
+	m_spTransform->SetPosition(_float3(-0.3f, -0.61f, -1.8f));
 
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 

@@ -47,6 +47,7 @@ void CBronya_Teleport_Laser::Start()
 	__super::Start();
 	m_fAlpha = 1.f;
 
+	m_bCheck = false;
 }
 
 void CBronya_Teleport_Laser::FixedUpdate()
@@ -58,19 +59,40 @@ void CBronya_Teleport_Laser::FixedUpdate()
 void CBronya_Teleport_Laser::Update()
 {
 	__super::Update();
-
+	
 }
 
 void CBronya_Teleport_Laser::LateUpdate()
 {
 	__super::LateUpdate();
 
+
+	
 }
 
 void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->CommitChanges();
+
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	//D3DXMatrixIdentity(&matBill);
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 }
 
 void CBronya_Teleport_Laser::Render(LPD3DXEFFECT pEffect)
@@ -82,7 +104,6 @@ void CBronya_Teleport_Laser::Render(LPD3DXEFFECT pEffect)
 void CBronya_Teleport_Laser::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
-
 }
 
 void CBronya_Teleport_Laser::OnDestroy()

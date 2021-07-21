@@ -58,7 +58,9 @@ void CTwoStageScene::Awake(_int numOfLayers)
 void CTwoStageScene::Start(void)
 {
 	__super::Start();
-	
+
+	m_sceneID = (_int)ESceneID::Ganesha_Cinema;
+
 	SetupFromLoader();
 	SetupMembers();
 	FindSkyObject();
