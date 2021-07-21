@@ -27,6 +27,8 @@
 #define Delay_Effect_Atk04 0.0f
 #define Delay_Effect_Atk05 0.05f
 
+#define FirstAttackDmgRate 1000.f
+
 class CKiana;
 class CStageControlTower;
 class CEffectMaker_Kiana;

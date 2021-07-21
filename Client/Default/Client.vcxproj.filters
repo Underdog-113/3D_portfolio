@@ -1060,6 +1060,9 @@
     <Filter Include="04.Shader\17.AlphaMaskGlowShader">
       <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
     </Filter>
+<Filter Include="04.Shader\07.SoftEffectShader\SoftEffectShader_Glow">
+  <UniqueIdentifier>{ee63748f-4688-4a58-9adc-cab1b001ad3d}</UniqueIdentifier>
+</Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot">
       <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
     </Filter>
@@ -2223,6 +2226,9 @@
     <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClInclude>
+<ClInclude Include="..\Header\SoftEffectShader_Glow.h">
+  <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
+</ClInclude>
     <ClInclude Include="..\Header\Shot_PushOut.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
     </ClInclude>
@@ -3293,6 +3299,10 @@
     <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="..\Code\SoftEffectShader_Glow.cpp">
+      <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
+=======
     <ClCompile Include="..\Code\Shot_PushOut.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
     </ClCompile>
@@ -3304,6 +3314,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+>>>>>>> dbc433658111ca14e7469d210dea8aa81e67849c
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3378,6 +3389,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
+      <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

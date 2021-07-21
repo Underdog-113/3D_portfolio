@@ -82,11 +82,15 @@ struct PS_IN
 
 struct PS_OUT
 {
-	vector vColor : COLOR0;
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
 };
 
 // 픽셀 쉐이더
-float4	PS_EFFECT(PS_IN In) : COLOR0
+
+PS_OUT	PS_EFFECT(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 	
@@ -98,7 +102,12 @@ float4	PS_EFFECT(PS_IN In) : COLOR0
 
 	blendColor = saturate(blendColor);
 	
-	return blendColor;
+	Out.vColor = blendColor;
+
+	if (Out.vColor.a != 0)
+		Out.vEmissive = blendColor;
+
+	return Out;
 }
 
 technique Default_Device

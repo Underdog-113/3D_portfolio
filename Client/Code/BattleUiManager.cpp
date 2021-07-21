@@ -116,7 +116,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
-	m_monsterName = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterName_0").get();
+	m_monsterName = pScene->FindObjectByName(L"MonsterState Canvas_MonsterName_0").get();
 	m_monsterCount = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHpCount_1").get();
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
@@ -126,7 +126,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar2_1").get()));
 	m_monsterHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_2").get()));
 
-	m_barkGaugeBar = static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_2").get());
+	m_barkGaugeBar = static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar3_6").get());
 
 	m_monsterWhiteHpBar.emplace_back(static_cast<Engine::CSlider*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHPBar1_3").get()));
 	m_monsterWhiteHpBar[0]->AddComponent<CMonsterSliderC>()->SetMonsterSlider(m_monsterHpBar[2]);
@@ -605,13 +605,13 @@ bool CBattleUiManager::SkillExecution_Switching(_int value, _int spValue, _float
 
 void CBattleUiManager::BattleEnd()
 {
-	m_activation = false;
+	//m_activation = false;
 
 	m_victoryCanvas->SetIsEnabled(true);
 
 	m_mainCanvas->SetIsEnabled(false);
-	m_hitsCanvas->SetIsEnabled(false);
-	m_monsterStateCanvas->SetIsEnabled(false);
+	m_hitsCanvas->SetIsEnabled(true);
+	/*m_monsterStateCanvas->SetIsEnabled(false);
 	m_monsterTargetCanvas->SetIsEnabled(false);
 	m_giveUpCanvas->SetIsEnabled(false);
 	m_specialUICanvas->SetIsEnabled(false);
@@ -620,7 +620,7 @@ void CBattleUiManager::BattleEnd()
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_3")->AddComponent<CTimerC>()->SetTime(m_totalTime);
 
 	Engine::GET_CUR_SCENE->FindObjectByName(L"VictoryCanvas_Image_1")->AddComponent<CCountUpC>()
-		->SetCount(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount());
+		->SetCount(m_hitCount->GetComponent<CHitsUiC>()->GetMaxHitsCount());*/
 }
 
 void CBattleUiManager::GameOver()

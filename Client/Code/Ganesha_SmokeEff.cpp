@@ -40,7 +40,10 @@ SP(Engine::CObject) CGanesha_SmokeEff::MakeClone(void)
 void CGanesha_SmokeEff::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"hit_explosion5_new");
+	m_spTexture->AddTexture(L"hit_explosion5_new");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 }
 
 void CGanesha_SmokeEff::Start(void)
@@ -70,7 +73,7 @@ void CGanesha_SmokeEff::Update(void)
 {
 	__super::Update();
 
-	UpdateFrame(0.02f);
+	UpdateFrame(0.03f);
 }
 
 void CGanesha_SmokeEff::LateUpdate(void)
@@ -85,6 +88,7 @@ void CGanesha_SmokeEff::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetBool("g_zWriteEnable", true);
 
 	pEffect->CommitChanges();
 }
