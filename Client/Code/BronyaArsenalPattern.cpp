@@ -38,6 +38,19 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	// 2. 구석으로 escape
 	// 3. 패턴 실행
 
+	/************************* Fast Idle */
+	if (Name_IDLE == fsm->GetCurStateString())
+	{
+		if (fsm->GetDM()->IsAnimationEnd())
+		{
+			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		}
+		else
+		{
+			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.7f);
+		}
+	}
+
 	/************************* Move Center */
 	if (false == m_movedCenter)
 	{
@@ -172,6 +185,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 
 		for (_int i = 0; i < cnt; ++i)
 		{
+			static_cast<CMB_Bronya*>(pOwner)->GetExplosions()[i]->SetIndex(i);
 			static_cast<CMB_Bronya*>(pOwner)->GetExplosions()[i]->SetIsEnabled(true);
 		}
 	}

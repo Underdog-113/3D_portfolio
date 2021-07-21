@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "BronyaBullet.h"
 
+#include "MB_Bronya.h"
 #include "AttackBall.h"
 #include "Bronya_Ult_Impact.h"
 #include "Bronya_Ult_Impact_Smoke.h"
+#include "Bronya_Ult_Laser.h"
 
 CBronyaBullet::CBronyaBullet()
 {
@@ -57,8 +59,25 @@ void CBronyaBullet::Start(void)
 {
 	__super::Start();
 
+	if (!m_pStat)
+	{
+		BaseStat stat;
+		stat.SetBaseHp(100.f);
+		stat.SetBaseAtk(35.f);
+		stat.SetBaseDef(1.f);
+
+		stat.SetGrowHp(1.f);
+		stat.SetGrowAtk(1.f);
+		stat.SetGrowDef(1.f);
+
+		m_pStat = new M_Stat;
+		m_pStat->SetupStatus(&stat);
+	}
+
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
+
+	m_pBronya = static_cast<CMB_Bronya*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Bronya").get());
 }
 
 void CBronyaBullet::FixedUpdate(void)
@@ -91,14 +110,22 @@ void CBronyaBullet::Update(void)
 			m_onAttackBall = true;
 			ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_bulletMat, 2.6f);
 
+			// 레이저 이펙트 생성
+			_float3 pos = m_pBronya->GetRingEffectPos()[index];
+			m_spLaserEffect = std::dynamic_pointer_cast<CBronya_Ult_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Laser", true));
+			m_spLaserEffect->GetTransform()->SetSize(_float3(5.3f, 5.3f, 5.3f));
+			m_spLaserEffect->GetTransform()->SetRotationY(-D3DXToRadian(90));
+			m_spLaserEffect->GetTransform()->SetPosition(pos);
+			m_spLaserEffect->GetTransform()->AddPositionZ(3.6f);
+
 			// 타격 이펙트 생성
-				m_spImactEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact", true));
-				m_spImactEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
-				m_spImactEffect->GetTransform()->SetPositionY(m_spTransform->GetPosition().y + 0.45f);
+			m_spImactEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact", true));
+			m_spImactEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+			m_spImactEffect->GetTransform()->SetPositionY(m_spTransform->GetPosition().y + 0.45f);
 
 			// 스모크 이펙트 생성
-				m_spImpactSmokeEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact_Smoke>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact_Smoke", true));
-				m_spImpactSmokeEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+			m_spImpactSmokeEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact_Smoke>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact_Smoke", true));
+			m_spImpactSmokeEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
 		}
 		
 		m_accTime += GET_DT;
@@ -180,6 +207,9 @@ void CBronyaBullet::OnDestroy(void)
 
 	if (m_pAttackBall)
 		m_pAttackBall->SetDeleteThis(true);
+
+	delete m_pStat;
+	m_pBronya = nullptr;
 }
 void CBronyaBullet::OnEnable(void)
 {

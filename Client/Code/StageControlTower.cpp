@@ -22,6 +22,8 @@
 #include "MeshShader.h"
 
 #include "TrapObject.h"
+#include "BronyaBullet.h"
+
 IMPLEMENT_SINGLETON(CStageControlTower)
 void CStageControlTower::Awake(void)
 { 
@@ -689,6 +691,11 @@ void CStageControlTower::HitValkyrie(Engine::CObject * pMonster, Engine::CObject
 	else if (pMonster->GetLayerID() == (_int)ELayerID::Enemy)
 	{
 		CMonster* pM = static_cast<CMonster*>(pMonster);
+		isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
+	}
+	else if (pMonster->GetLayerID() == (_int)ELayerID::Prop)
+	{
+		CBronyaBullet* pM = static_cast<CBronyaBullet*>(pMonster);
 		isDead = m_pDealer->Damage_MtoV(pM->GetStat(), pV->GetStat(), info.GetDamageRate(), &damage);
 	}
 
