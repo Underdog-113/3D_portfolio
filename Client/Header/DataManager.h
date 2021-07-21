@@ -43,15 +43,15 @@ public:
 	void ItemDelete(std::wstring keyValue); //  재료
 private:
 	CCaptainData* m_pCaptainData = nullptr; // 함장
-	CInStockValkyrieData* m_pInStockValkyrieData; // 보유 발키리
+	CInStockValkyrieData* m_pInStockValkyrieData = nullptr; // 보유 발키리
 	std::vector<CValkyrieStatusData*> m_pValkyrieStatusDataList; // 모든 발키리
-	CSquadData* m_pSquadData; // 파티 발키리
+	CSquadData* m_pSquadData = nullptr; // 파티 발키리
 	std::vector<CWeaponData*> m_pWeaponDataList; // 무기
 	std::vector<CItemData*> m_pItemDataList; // 재료
 
-	CWeaponData* TweaponData;
-	CItemData* TitemData;
-	CValkyrieStatusData* TvalkyrieStatusData;
+	CWeaponData* TweaponData = nullptr;
+	CItemData* TitemData = nullptr;
+	CValkyrieStatusData* TvalkyrieStatusData = nullptr;
 };
 
 #endif

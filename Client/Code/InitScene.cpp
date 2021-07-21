@@ -98,12 +98,12 @@ void CInitScene::Start(void)
 
 	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");
 	text->GetTransform()->SetPositionZ(0.5f);
-	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,340), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
+	text->AddComponent<Engine::CTextC>()->AddFontData(L"데이터 갱신 중 0.0%", _float2(-170,320), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
 
 	{
 		slider =
 			std::dynamic_pointer_cast<Engine::CSlider>(ADD_CLONE(L"Slider", false, (_int)Engine::ELayerID::UI, L"Slidr_0"));
-		slider->GetTransform()->SetPosition(_float3(-65.0f, -300.0f, 0.0f));
+		slider->GetTransform()->SetPosition(_float3(-65.0f, -280.0f, 0.0f));
 		slider->SetDirection((Engine::CSlider::ESliderDirection::LeftToRight));
 
 		SP(Engine::CImageObject) background =
@@ -135,12 +135,12 @@ void CInitScene::FixedUpdate(void)
 void CInitScene::Update(void)
 {
 	__super::Update();
-	_float value = slider->GetValue();
+	float value = slider->GetValue();
 	value = min(value + GET_DT * 38, 100);
 	slider->SetValue(value);
-	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + std::to_wstring(value) + L"%");
-
-
+	wstring str = std::to_wstring(value);
+	str = str.substr(0, 6);
+	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"데이터 갱신 중 " + str+ L"%");
 
 	if(!m_isStaticScene)
 		m_fTempSoundLength += GET_DT;

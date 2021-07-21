@@ -236,7 +236,7 @@ void CMonster::MonsterDead()
 	item->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	item->AddComponent<Engine::CRigidBodyC>()->AddForce(_float3(0, 500, 0));
 
-	_int value = 2;//rand() % 4;
+	_int value = rand() % 4;
 	// 이거 몬스터마다 내용이 다름
 	switch (value)
 	{

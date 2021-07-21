@@ -34,8 +34,6 @@ private:
 
 	void				InitPrototypes(void) override;
 
-	void				ForUITest();
-
 	void				FindSkyObject();
 
 private:

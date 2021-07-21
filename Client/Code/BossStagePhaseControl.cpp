@@ -72,5 +72,6 @@ void CBossStagePhaseControl::OpenStageResult(void)
 	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();
 	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
+
 	ShowCursor(true);
 }
