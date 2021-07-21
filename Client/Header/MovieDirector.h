@@ -12,6 +12,9 @@
 #define ShotName_PushIn				L"PushIn"
 #define ShotName_PushOut			L"PushOut"
 
+#define ShotName_Victory			L"Victory"
+
+
 #define TakeName_Failure			L"Failure"
 
 #define TakeName_SakuraVictory		L"SakuraVictory"
@@ -72,5 +75,7 @@ private:
 
 	CShot* m_pShot_PushOut = nullptr;
 
+
+	CShot* m_pShot_Victory = nullptr;
 };
 

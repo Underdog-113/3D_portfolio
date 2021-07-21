@@ -1,18 +1,14 @@
 #pragma once
 #include "Shot.h"
-class CShot_RotateYaw :
-	public CShot
+class CShot_ActorVictory : public CShot
 {
 public:
 	struct Desc
 	{
-		_float startEulerAngle = 0.f;
-		_float endEulerAngle = 30.f;
 	};
-
 public:
-	CShot_RotateYaw();
-	~CShot_RotateYaw();
+	CShot_ActorVictory();
+	~CShot_ActorVictory();
 
 	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc) override;
 	virtual void Enter() override;
@@ -23,7 +19,13 @@ public:
 private:
 	Desc m_desc;
 
-	_float m_savedLookAngleUp = 0.f;
-	_float m_startActorForwardAngle = 0.f;
+	Engine::CAniCtrl* m_pActorAniCtrl = nullptr;
+	_uint m_savedAnimIndex = 0;
+
+	_double m_animPosition = 0;
+	_uint m_victoryAnimIndex = 0;
+	_uint m_victoryIdleAnimIndex = 0;
+
+	_float m_prevPlayTime = 0.f;
 };
 

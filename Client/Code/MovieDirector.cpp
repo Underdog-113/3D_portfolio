@@ -11,8 +11,10 @@
 #include "Shot_BlackFadeIn.h"
 #include "Shot_RotateAround.h"
 #include "Shot_RotateYaw.h"
+#include "Shot_RotatePitch.h"
 #include "Shot_RotateRoll.h"
 #include "Shot_PushOut.h"
+#include "Shot_ActorVictory.h"
 
 CMovieDirector::CMovieDirector()
 {
@@ -26,8 +28,10 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_BlackFadeIn)
 	SAFE_DELETE(m_pShot_RotateAround)
 	SAFE_DELETE(m_pShot_RotateYaw)
+	SAFE_DELETE(m_pShot_RotatePitch)
 	SAFE_DELETE(m_pShot_RotateRoll)
 	SAFE_DELETE(m_pShot_PushOut)
+	SAFE_DELETE(m_pShot_Victory)
 
 	for (auto iter : m_takeMap)
 	{
@@ -125,10 +129,12 @@ void CMovieDirector::Create_AllShots()
 
 	m_pShot_RotateAround = new CShot_RotateAround;
 	m_pShot_RotateYaw = new CShot_RotateYaw;
-	//m_pShot_RotateAround = new CShot_RotateAround;
+	m_pShot_RotatePitch = new CShot_RotatePitch;
 	m_pShot_RotateRoll = new CShot_RotateRoll;
 
 	m_pShot_PushOut = new CShot_PushOut;
+
+	m_pShot_Victory = new CShot_ActorVictory;
 }
 
 void CMovieDirector::CreateTake_Failure()
@@ -151,9 +157,12 @@ void CMovieDirector::CreateTake_SakuraVictory()
 	pTake->AddShot(ShotName_WhiteFadeOut, m_pShot_WhiteFadeOut);
 
 	pTake->AddShot(ShotName_RotateYaw, m_pShot_RotateYaw);
+	pTake->AddShot(ShotName_RotatePitch, m_pShot_RotatePitch);
 	pTake->AddShot(ShotName_RotateRoll, m_pShot_RotateRoll);
 
 	pTake->AddShot(ShotName_PushOut, m_pShot_PushOut);
+
+	pTake->AddShot(ShotName_Victory, m_pShot_Victory);
 
 	m_takeMap.emplace(TakeName_SakuraVictory, pTake);
 }
@@ -207,17 +216,25 @@ void CMovieDirector::StartTake_SakuraVictory()
 	ry_desc.endEulerAngle = 0.f;
 	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 3.6f, &ry_desc);
 
-	CShot_RotateRoll::Desc rr_desc;
-	rr_desc.startEulerAngle = 45.f;
-	rr_desc.endEulerAngle = 0.f;
-	pTake->ReadyShot(ShotName_RotateRoll, 0.6f, 3.6f, &rr_desc);
+	CShot_RotatePitch::Desc rp_desc;
+	rp_desc.startEulerAngle = 0.f;
+	rp_desc.endEulerAngle = -5.f;
+	pTake->ReadyShot(ShotName_RotatePitch, 0.6f, 3.6f, &rp_desc);
 
-	CShot_PushOut::Desc po_desc;
-	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
-	po_desc.offset = pActor->GetTransform()->GetUp() * -0.1f;
-	po_desc.startDistance = 0.5f;
-	po_desc.endDistance = 1.f;
-	pTake->ReadyShot(ShotName_PushOut, 0.6f, 3.6f, &po_desc);
+	CShot_RotateRoll::Desc rr_desc;
+	rr_desc.startEulerAngle = -5.f;
+	rr_desc.endEulerAngle = 0.f;
+	pTake->ReadyShot(ShotName_RotateRoll, 2.6f, 3.6f, &rr_desc);
+
+ 	CShot_PushOut::Desc po_desc;
+ 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+ 	po_desc.offset = pActor->GetTransform()->GetUp() * 0.1f;
+ 	po_desc.startDistance = 0.3f;
+ 	po_desc.endDistance = 0.5f;
+ 	pTake->ReadyShot(ShotName_PushOut, 0.6f, 3.6f, &po_desc);
+
+	CShot_ActorVictory::Desc av_desc;
+	pTake->ReadyShot(ShotName_Victory, 0.6f, 10.f, &av_desc);
 
 	m_pCurTake = pTake;
 

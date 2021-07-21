@@ -2235,6 +2235,12 @@
     <ClInclude Include="..\Header\Shot_RotateYaw.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotatePitch.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_ActorVictory.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3304,6 +3310,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotatePitch.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_ActorVictory.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2369,7 +2369,7 @@ void CFSM_SakuraC::Victory_Enter(void)
 
 void CFSM_SakuraC::Victory_Update(float deltaTime)
 {
-	if (m_pDM->IsAnimationEnd())
+	if (m_pDM->GetAniTimeline() > 0.9)
 	{
 		ChangeState(Name_Victory_Idle);
 		return;
