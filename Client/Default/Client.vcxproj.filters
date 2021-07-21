@@ -1075,6 +1075,9 @@
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\Push">
       <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\04.MousePoint">
+      <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2235,6 +2238,9 @@
     <ClInclude Include="..\Header\Shot_RotateYaw.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\MousePointC.h">
+      <Filter>03.Component\04.MousePoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3304,6 +3310,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MousePointC.cpp">
+      <Filter>03.Component\04.MousePoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
