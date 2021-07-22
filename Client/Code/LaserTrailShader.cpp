@@ -29,7 +29,9 @@ void CLaserTrailShader::Free()
 void CLaserTrailShader::Awake()
 {
 	__super::Awake();
-
+	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
+	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
 void CLaserTrailShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)

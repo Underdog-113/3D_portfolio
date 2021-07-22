@@ -99,6 +99,8 @@
 #include "Sakura_DashShade.h"
 #include "Sakura_Mark.h"
 #include "Sakura_DamageMark.h"
+#include "Sakura_EvadeSkill_Loop.h"
+#include "Sakura_EvadeSkill_Start.h"
 
 // Robot
 #include "RobotHookEff.h"
@@ -154,6 +156,10 @@
 #include "TestParticle.h"
 
 ///// Ingame Deco Effect //////
+//Stuc
+#include "Stun_Eff.h"
+#include "Stun_Star.h"
+
 //Warning
 #include "Warning_Ring.h"
 
@@ -469,6 +475,10 @@ void CStaticScene::InitEffectPrototypes(void)
 	spKianaBranchSign->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spKianaBranchSign);
 
+	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKianaUIAnim);
+
+
 	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
@@ -571,8 +581,15 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spSakura_WSkill_TwistWind);
 
 	SP(Engine::CObject) spSakura_DashShade(CSakura_DashShade::Create(true, this));
-
 	GetObjectFactory()->AddPrototype(spSakura_DashShade);
+
+
+	SP(Engine::CObject) spSakura_EvadeSkill_Loop(CSakura_EvadeSkill_Loop::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_EvadeSkill_Loop);
+
+
+	SP(Engine::CObject) spSakura_EvadeSkill_Start(CSakura_EvadeSkill_Start::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_EvadeSkill_Start);
 
 	// Monster Spawn
 
@@ -807,7 +824,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaShotSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaShotSmoke);
 
-
+	 
 	SP(CMeshEffect_Client) spBronyaImpact(CBronya_Impact::Create(true, this));
 	spBronyaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
 	spBronyaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -871,8 +888,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaRandomSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
 
-	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKianaUIAnim);
 
 	SP(CMeshEffect_Client) spBronyaLandSmoke(CBronya_LandSmoke::Create(true, this));
 	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");
@@ -880,7 +895,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaLandSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
 	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
-	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
 	spBronyaLandSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaLandSmoke);
 
@@ -1074,5 +1088,11 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(Engine::CObject) spMainRoomBG(CMainRoomBG::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMainRoomBG);
+
+	SP(CMeshEffect_Client) spStun_Eff(CStun_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStun_Eff);
+
+	SP(CMeshEffect_Client) spStun_Star(CStun_Star::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStun_Star);
 
 }
