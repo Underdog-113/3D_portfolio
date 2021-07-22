@@ -19,6 +19,7 @@
 #include "Shot_PushOut.h"
 #include "Shot_FixPivot.h"
 #include "Shot_ActorVictory.h"
+#include "Shot_GaneshaBorn.h"
 
 #include "SplineCurve.h"
 
@@ -42,6 +43,8 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_PushOut)
 	SAFE_DELETE(m_pShot_FixPivot)
 	SAFE_DELETE(m_pShot_Victory)
+	SAFE_DELETE(m_pShot_GaneshaBorn)
+		
 
 	SAFE_DELETE(m_pGaneshaPitchCurve)
 
@@ -157,6 +160,7 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_FixPivot = new CShot_MovePivot;
 
 	m_pShot_Victory = new CShot_ActorVictory;
+	m_pShot_GaneshaBorn = new CShot_GaneshaBorn;
 }
 
 void CMovieDirector::CreateTake_Failure()
@@ -197,6 +201,7 @@ void CMovieDirector::CreateTake_GaneshaBorn()
 	CTake* pTake = new CTake;
 
 	pTake->AddShot(ShotName_FixPivot, m_pShot_FixPivot);
+	pTake->AddShot(ShotName_GaneshaBorn, m_pShot_GaneshaBorn);
 
 	pTake->AddShot(ShotName_BlackFadeIn, m_pShot_BlackFadeIn);
 	pTake->AddShot(ShotName_BlackFadeOut, m_pShot_BlackFadeOut);
@@ -214,10 +219,10 @@ void CMovieDirector::CreateTake_GaneshaBorn()
 	//pTake->AddShot(ShotName_RotatePitch, m_pShot_RotatePitch);
 	pTake->AddShot(ShotName_RotatePitch_Spline, m_pShot_RotatePitch_Spline);
 	m_pGaneshaPitchCurve = new CSplineCurve;
-	m_pGaneshaPitchCurve->AddPoint(_float3(2.f, 30.f, 0.f));
-	m_pGaneshaPitchCurve->AddPoint(_float3(2.6f, 10.f, 0.f));
-	m_pGaneshaPitchCurve->AddPoint(_float3(2.9f, -45.f, 0.f));
-	m_pGaneshaPitchCurve->AddPoint(_float3(4.f, -45.f, 0.f));
+	m_pGaneshaPitchCurve->AddPoint(_float3(1.5f, 0.f, 0.f));
+	m_pGaneshaPitchCurve->AddPoint(_float3(1.9f, 10.f, 0.f));
+	m_pGaneshaPitchCurve->AddPoint(_float3(2.f, -45.f, 0.f));
+	m_pGaneshaPitchCurve->AddPoint(_float3(2.5f, -45.f, 0.f));
 	CSplineCurve::Desc desc;
 	m_pGaneshaPitchCurve->CreateCurve(&desc);
 
@@ -326,8 +331,10 @@ void CMovieDirector::StartTake_GaneshBorn()
 // 	fp_desc.startOffset = pActor->GetTransform()->GetUp() * 0.15f + pActor->GetTransform()->GetRight() * 0.1f;
 // 	fp_desc.endOffset = pActor->GetTransform()->GetUp() * 0.11f + pActor->GetTransform()->GetRight() * -0.15f;
 	pTake->ReadyShot(ShotName_FixPivot, 0.f, 12.f, &fp_desc, 0.f);
-
-
+	
+	CShot_GaneshaBorn::Desc gb_desc;
+	pTake->ReadyShot(ShotName_GaneshaBorn, 0.f, 12.f, &gb_desc, 0.0f);
+	
 	// start ~ before jump
 	CShot_BlackFadeOut::Desc blo_desc;
 	blo_desc.pBlackFade = m_pBlackFade;
@@ -361,6 +368,9 @@ void CMovieDirector::StartTake_GaneshBorn()
 
 	m_pCurTake->StartTake();
 	m_onAir = true;
+
+	// tesssst
+	m_pCurTake->SetEditMode(true);
 }
 
 void CMovieDirector::Cut()

@@ -10,6 +10,8 @@
 #include "Bronya_Impact.h"
 #include "Bronya_Impact_TripleRing.h"
 
+#include "MovieDirector.h"
+
 CGaneshaBornPattern::CGaneshaBornPattern()
 {
 }
@@ -30,7 +32,7 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	// 내가 born 상태이고, 애니가 끝났다면
-	if (Name_Ganesha_Born == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	if (Name_Ganesha_Born == fsm->GetCurStateString() && fsm->GetDM()->GetAniTimeline() > 0.9)
 	{
 		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
 		fsm->ChangeState(Name_Ganesha_StandBy);
@@ -40,6 +42,8 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 		m_bornStart = false;
 		m_impactEffect = false;
 
+		// movie
+		CStageControlTower::GetInstance()->GetMovieDirector()->Cut();
 		return;
 	}
 

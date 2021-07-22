@@ -24,6 +24,6 @@ public:
 private:
 	Desc m_desc;
 
-	_float m_savedLookAngleRight = 0.f;
+	_float m_savedTPSLocalPitch = 0.f;
 };
 

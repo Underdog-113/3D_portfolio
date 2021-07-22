@@ -17,6 +17,7 @@
 #define ShotName_FixPivot			L"FixPivot"
 
 #define ShotName_Victory			L"Victory"
+#define ShotName_GaneshaBorn		L"GaneshaBorn"
 
 
 #define TakeName_Failure			L"Failure"
@@ -94,5 +95,6 @@ private:
 	CShot* m_pShot_FixPivot = nullptr;
 
 	CShot* m_pShot_Victory = nullptr;
+	CShot* m_pShot_GaneshaBorn = nullptr;
 };
 
