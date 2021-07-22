@@ -23,7 +23,7 @@ public:
 	void EndShot(CShot* pShot);
 
 	void AddShot(std::wstring name, CShot* pShot);
-	void ReadyShot(std::wstring name, _float startTimeline, _float endTimeline, void* pDesc);
+	void ReadyShot(std::wstring name, _float startTimeline, _float endTimeline, void* pDesc, _float readyTimeline);
 
 protected:
 	std::unordered_map<std::wstring, CShot*> m_shotMap;

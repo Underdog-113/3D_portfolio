@@ -85,4 +85,13 @@ inline float GetLerpFloat(float _start, float _end, float _time)
 	return _start * (1.f - _time) + _time * _end;
 }
 
+inline _float3 GetLerpFloat3(_float3 _start, _float3 _end, float _time)
+{
+	_float3 result;
+	result.x = GetLerpFloat(_start.x, _end.x, _time);
+	result.y = GetLerpFloat(_start.y, _end.y, _time);
+	result.z = GetLerpFloat(_start.z, _end.z, _time);
+
+	return result;
+}
 #endif

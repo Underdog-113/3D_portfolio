@@ -1,7 +1,7 @@
 #pragma once
-#include "MeshEffect_Client.h"
+#include "SoftEffect.h"
 
-class CBronya_Teleport_Ring : public CMeshEffect_Client
+class CBronya_Teleport_Ring : public CSoftEffect
 {
 	SMART_DELETER_REGISTER
 
@@ -33,6 +33,8 @@ public:
 
 private:
 	static _uint m_s_uniqueID;
+
+	void UpdateFrame(_float _frmSpeed);
 
 };
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "Shot.h"
-class CShot_RotateRoll :
-	public CShot
+class CShot_RotatePitch : public CShot
 {
 public:
 	struct Desc
@@ -10,9 +9,10 @@ public:
 		_float endEulerAngle = 30.f;
 
 	};
+
 public:
-	CShot_RotateRoll();
-	~CShot_RotateRoll();
+	CShot_RotatePitch();
+	~CShot_RotatePitch();
 
 	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline) override;
 	virtual void Enter() override;
@@ -23,7 +23,6 @@ public:
 private:
 	Desc m_desc;
 
-	_float m_savedLookAngleForward = 0.f;
-
+	_float m_savedLookAngleRight= 0.f;
 };
 

@@ -55,7 +55,7 @@ void CMonsterHitEffect::Start(void)
 {
 	__super::Start();
 
-
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CMonsterHitEffect::FixedUpdate(void)

@@ -50,6 +50,8 @@ void CGanesha_SmokeEff::Start(void)
 {
 	__super::Start();
 
+
+
 	m_fAlphaWidth = 7.f;
 	m_fAlphaHeight = 3.f;
 	m_TilingX = 0;
@@ -85,7 +87,7 @@ void CGanesha_SmokeEff::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
-	pEffect->SetBool("g_zWriteEnable", true);
+	pEffect->SetBool("g_zWriteEnable", false );
 
 	pEffect->CommitChanges();
 }

@@ -13,6 +13,9 @@
 #include "AttackBall.h"
 #include "BronyaBullet.h"
 
+#include "Bronya_Cannon_Charge.h"
+#include "Bronya_Ult_Impact_Smoke.h"
+
 CBronyaShoot1Pattern::CBronyaShoot1Pattern()
 {
 	m_pAttackBallMat = new _mat;
@@ -34,12 +37,16 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
 
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
-
-	if (Name_IDLE == fsm->GetCurStateString())
+	
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onShootReady)
 	{
-		fsm->GetDM()->GetAniCtrl()->SetSpeed(2.2f);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.2f);
+		m_onChargeEffect = false;
+		m_onShootReady = true;
 	}
-	else
+	else if (Name_IDLE == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 	}
@@ -66,7 +73,10 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			// shoot1 상태로 변경
 			fsm->ChangeState(Name_Shoot_1);
-			m_onAtkBall = false;
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+			m_onAtkBall = false; 
+			m_onSmokeEffect = false;
+
 			return;
 		}
 	}
@@ -78,7 +88,11 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 대기 상태로 변경
 		fsm->ChangeState(Name_IDLE);
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		m_onShootReady = false;
+
+		return;
 	}
 
 	/************************* AttackBall */
@@ -110,6 +124,57 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 		}
 		
 		m_onAtkBall = true;
+	}
+
+	/************************* Effect */
+	// shoot charge
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onChargeEffect)
+	{
+		m_chargeEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Cannon_Charge", true);
+		m_chargeEffect->GetTransform()->SetSize(0.03f, 0.03f, 0.03f);
+		SP(Engine::CObject) spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+
+		//std::cout << "생성" << std::endl;
+
+		m_onChargeEffect = true;
+	}
+	else if (nullptr != m_chargeEffect &&
+		true == m_onChargeEffect)
+	{
+		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_L_Forearm")->CombinedTransformMatrix;
+		GetRHandMat(pOwner, m_pAttackBallMat);
+
+		_float3 dir = { m_pAttackBallMat->_11, m_pAttackBallMat->_12, m_pAttackBallMat->_13 };
+		_float3 pos = { m_pAttackBallMat->_41, m_pAttackBallMat->_42, m_pAttackBallMat->_43 };
+		
+		m_chargeEffect->GetTransform()->SetPosition(pos + dir);
+		m_chargeEffect->GetTransform()->SetForward(dir);
+	}
+	
+	if (Name_Shoot_1 == fsm->GetCurStateString() &&
+		0.2f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onChargeEffect &&
+		nullptr != m_chargeEffect)
+	{
+		m_chargeEffect->SetDeleteThis(true);
+		m_chargeEffect = nullptr;
+		//std::cout << "파괴" << std::endl;
+	}
+
+	// smoke effect
+	if (Name_Shoot_1 == fsm->GetCurStateString() &&
+		0.009f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSmokeEffect)
+	{
+		_float3 pos = { m_pAttackBallMat->_41, m_pAttackBallMat->_42, m_pAttackBallMat->_43 };
+
+		SP(Engine::CObject) smoke = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact_Smoke", true);
+		smoke->GetTransform()->SetPosition(pos);
+		smoke->GetTransform()->SetSize(0.1f, 0.1f, 0.1f);
+		std::cout << "create" << std::endl;
+
+		m_onSmokeEffect = true;
 	}
 }
 

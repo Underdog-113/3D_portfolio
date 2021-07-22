@@ -166,7 +166,7 @@ technique DissolveShader
 	{
 		CullMode = None;
 		zWriteEnable = g_zWriteEnabled;
-		AlphaTestEnable = true;
+		AlphaTestEnable = false;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;

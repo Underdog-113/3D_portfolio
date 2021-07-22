@@ -77,7 +77,7 @@ void CBronya_Impact_Ring::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-
+	pEffect->SetBool("g_zWriteEnabled", false);
 	pEffect->CommitChanges();
 
 }

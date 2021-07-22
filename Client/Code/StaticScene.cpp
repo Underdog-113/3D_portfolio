@@ -678,7 +678,7 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	// Robot
 	SP(CSoftEffect) spRobotHookEffect(CRobotHookEff::Create(true, this));
-	spRobotHookEffect->GetComponent<Engine::CGraphicsC>();
+	spRobotHookEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
 	spRobotHookEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"RobotHook");
 	spRobotHookEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
@@ -807,7 +807,7 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	// Bronya
 	SP(CMeshEffect_Client) spBronyaCharge(CBronya_Cannon_Charge::Create(true, this));
-	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
+	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetMeshData(L"Cloud");
 	spBronyaCharge->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spBronyaCharge->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spBronyaCharge->GetComponent<Engine::CTextureC>()->AddTexture(L"Swirl");
@@ -816,7 +816,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spBronyaCharge);
 
 	SP(CMeshEffect_Client) spBronyaShotSmoke(CBronya_Shot_Smoke::Create(true, this));
-	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Plane");
+	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Cloud");
 	spBronyaShotSmoke->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
 	spBronyaShotSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spBronyaShotSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"machineSmoke_3");
@@ -911,19 +911,13 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spBronyaTeleportLaser(CBronya_Teleport_Laser::Create(true, this));
 	spBronyaTeleportLaser->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Teleport_Laser");
 	spBronyaTeleportLaser->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spBronyaTeleportLaser->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spBronyaTeleportLaser->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spBronyaTeleportLaser->GetComponent<Engine::CTextureC>()->AddTexture(L"Impact_Red");
 	spBronyaTeleportLaser->GetComponent<Engine::CTextureC>()->AddTexture(L"TeleportColor");
-	spBronyaTeleportLaser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spBronyaTeleportLaser->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	GetObjectFactory()->AddPrototype(spBronyaTeleportLaser);
 
-	SP(CMeshEffect_Client) spBronyaTeleportRing(CBronya_Teleport_Ring::Create(true, this));
-	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetMeshData(L"Cloud");
-	spBronyaTeleportRing->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spBronyaTeleportRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Sign");
-	spBronyaTeleportRing->GetComponent<Engine::CTextureC>()->AddTexture(L"Teleport_Start");
-	spBronyaTeleportRing->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spBronyaTeleportRing->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	SP(CSoftEffect) spBronyaTeleportRing(CBronya_Teleport_Ring::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronyaTeleportRing);
 
 	SP(CMeshEffect_Client) spBronyaGrenadeDome(CBronya_Grenade_Dome::Create(true, this));

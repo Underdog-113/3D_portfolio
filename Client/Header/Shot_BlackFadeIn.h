@@ -16,7 +16,7 @@ public:
 	virtual _bool CheckOnTake(_float takeTimer);
 
 public:
-	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc);
+	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline);
 
 	virtual void Enter() override;
 	virtual void Action() override;

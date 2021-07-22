@@ -41,5 +41,9 @@ private:
 
 private:
 	void Movement();
+
+private:
+	_float m_fTmpPosY;
+	_bool  m_bCheck;
 };
 

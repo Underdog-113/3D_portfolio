@@ -28,7 +28,7 @@ SP(Engine::CObject) CBronya_Shot_Smoke::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetRotationZ(D3DXToRadian(90.f));
+	//spClone->m_spTransform->SetRotationZ(D3DXToRadian(90.f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();

@@ -13,7 +13,7 @@ public:
 	~CShot_WhiteFadeOut();
 
 public:
-	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc);
+	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline);
 
 	virtual void Enter() override;
 	virtual void Action() override;

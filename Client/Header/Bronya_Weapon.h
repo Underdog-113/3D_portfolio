@@ -46,7 +46,7 @@ protected:
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 		
 	GETTOR_SETTOR	(_mat*,							m_pParentMatrix,	nullptr,	ParentMatrix)
-
+	GETTOR			(SP(Engine::CObject),			m_spSexdngud,		nullptr,	TestObj)
 };
 
 
