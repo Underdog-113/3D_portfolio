@@ -3338,7 +3338,6 @@
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
     </ClCompile>
@@ -3350,10 +3349,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Stun_Eff.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
-=======
+    </ClCompile>      
     <ClCompile Include="..\Code\MousePointC.cpp">
       <Filter>03.Component\04.MousePoint</Filter>
->>>>>>> c43132942d48e2232f7eff5faae536f411941e64
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
