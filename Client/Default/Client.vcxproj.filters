@@ -1084,11 +1084,14 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun">
       <UniqueIdentifier>{7e05027a-6e63-4e55-9d15-6664ddfe5588}</UniqueIdentifier>
     </Filter>
-      <Filter Include="03.Component\04.MousePoint">
-        <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
+    <Filter Include="03.Component\04.MousePoint">
+      <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang">
       <UniqueIdentifier>{d70dfa7a-8845-44ca-921b-59f812aba1f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade">
+      <UniqueIdentifier>{dd07f129-a571-48d6-8b65-4462d440a915}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2280,6 +2283,9 @@
     <ClInclude Include="..\Header\MousePointC.h">
       <Filter>03.Component\04.MousePoint</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaGrenade.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3379,6 +3385,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MousePointC.cpp">
       <Filter>03.Component\04.MousePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaGrenade.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

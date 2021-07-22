@@ -39,9 +39,12 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 		pOwner->GetComponent<Engine::CCollisionC>()->SetIsEnabled(true);
 		m_bornStart = false;
 		m_impactEffect = false;
+
+		return;
 	}
 
 	/************************* Effect */
+	// born 패턴을 시작하자마자 이펙트 생성
 	if (false == m_bornStart)
 	{
 		m_spDomeEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Cinema_Dome", true);
@@ -52,13 +55,16 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 		m_bornStart = true;
 	}
 	
+	// 내가 땅에서 튀어 나오면
 	if (Name_Ganesha_Born == fsm->GetCurStateString() &&
 		0.27f <= fsm->GetDM()->GetAniTimeline())
 	{
+		// dome, circle 이펙트 제거
 		m_spDomeEffect->SetDeleteThis(true);
 		m_spCircleEffect->SetDeleteThis(true);
 	}
 
+	// 내가 땅에 착지했을 때 이펙트 생성
 	if (Name_Ganesha_Born == fsm->GetCurStateString() &&
 		0.4f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_impactEffect)
