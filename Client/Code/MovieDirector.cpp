@@ -344,8 +344,8 @@ void CMovieDirector::StartTake_GaneshBorn()
 	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 2.6f, &ry_desc, 0.6f);
 
 	CShot_PushIn::Desc pi_desc;
-	pi_desc.startDistance = 1.5f;
-	pi_desc.endDistance = 0.5f;
+	pi_desc.startDistance = 5.f;
+	pi_desc.endDistance = 4.f;
 	pTake->ReadyShot(ShotName_PushIn, 0.6f, 2.6f, &pi_desc, 0.6f);
 
 	// jump ~ land
