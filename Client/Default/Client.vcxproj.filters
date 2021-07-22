@@ -1060,6 +1060,9 @@
     <Filter Include="04.Shader\17.AlphaMaskGlowShader">
       <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\07.SoftEffectShader\SoftEffectShader_Glow">
+      <UniqueIdentifier>{ee63748f-4688-4a58-9adc-cab1b001ad3d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot">
       <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
     </Filter>
@@ -1074,6 +1077,15 @@
     </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\00. Interface">
       <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill">
+      <UniqueIdentifier>{deb96b9b-f431-431e-96a1-a7ebe4cc3c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun">
+      <UniqueIdentifier>{7e05027a-6e63-4e55-9d15-6664ddfe5588}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="03.Component\04.MousePoint">
+        <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2223,6 +2235,9 @@
     <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\SoftEffectShader_Glow.h">
+      <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Shot_PushOut.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClInclude>
@@ -2243,6 +2258,21 @@
     </ClInclude>
     <ClInclude Include="..\Header\Shot_FixPivot.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stun_Star.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stun_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\MousePointC.h">
+        <Filter>03.Component\04.MousePoint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3302,6 +3332,9 @@
     <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\SoftEffectShader_Glow.cpp">
+      <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Shot_PushOut.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
@@ -3322,6 +3355,21 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_FixPivot.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stun_Star.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stun_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MousePointC.cpp">
+      <Filter>03.Component\04.MousePoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3396,6 +3444,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
+      <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

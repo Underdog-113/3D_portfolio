@@ -135,7 +135,7 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Bronya_Ult_Laser", true, (_uint)Engine::ELayerID::Effect);
+		SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Stun_Eff", true, (_uint)Engine::ELayerID::Effect);
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
 			// Bronya Smoke

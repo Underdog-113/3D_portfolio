@@ -39,6 +39,14 @@ SP(Engine::CObject) CSakura_Charge_Att::MakeClone()
 void CSakura_Charge_Att::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Sakura_Beam");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Sakura_Dodge_Line");
+	m_spTexture->AddTexture(L"Sakura_Dodge_Line");
+	m_spTexture->AddTexture(L"Sakura_Dodge_Line");
+	m_spShader->AddShader((_int)EShaderID::LaserShader);
+
 }
 
 void CSakura_Charge_Att::Start()
@@ -75,6 +83,7 @@ void CSakura_Charge_Att::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gTrailAlpha", m_fAlpha);
+	pEffect->CommitChanges();
 }
 
 void CSakura_Charge_Att::Render(LPD3DXEFFECT pEffect)

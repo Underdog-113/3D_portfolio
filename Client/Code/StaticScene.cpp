@@ -99,6 +99,8 @@
 #include "Sakura_DashShade.h"
 #include "Sakura_Mark.h"
 #include "Sakura_DamageMark.h"
+#include "Sakura_EvadeSkill_Loop.h"
+#include "Sakura_EvadeSkill_Start.h"
 
 // Robot
 #include "RobotHookEff.h"
@@ -154,6 +156,10 @@
 #include "TestParticle.h"
 
 ///// Ingame Deco Effect //////
+//Stuc
+#include "Stun_Eff.h"
+#include "Stun_Star.h"
+
 //Warning
 #include "Warning_Ring.h"
 
@@ -469,6 +475,10 @@ void CStaticScene::InitEffectPrototypes(void)
 	spKianaBranchSign->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spKianaBranchSign);
 
+	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
+	GetObjectFactory()->AddPrototype(spKianaUIAnim);
+
+
 	// Theresa Effect
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff(CTheresa_Ult_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff);
@@ -571,8 +581,15 @@ void CStaticScene::InitEffectPrototypes(void)
 	GetObjectFactory()->AddPrototype(spSakura_WSkill_TwistWind);
 
 	SP(Engine::CObject) spSakura_DashShade(CSakura_DashShade::Create(true, this));
-
 	GetObjectFactory()->AddPrototype(spSakura_DashShade);
+
+
+	SP(Engine::CObject) spSakura_EvadeSkill_Loop(CSakura_EvadeSkill_Loop::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_EvadeSkill_Loop);
+
+
+	SP(Engine::CObject) spSakura_EvadeSkill_Start(CSakura_EvadeSkill_Start::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_EvadeSkill_Start);
 
 	// Monster Spawn
 
@@ -723,53 +740,50 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spGaneshaLaserEffect(CGanesha_LaserEff::Create(true, this));
 	spGaneshaLaserEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Laser");
 	spGaneshaLaserEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spGaneshaLaserEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaLaserEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spGaneshaLaserEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LaserColor2");
 	spGaneshaLaserEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"LaserColor2");
-	spGaneshaLaserEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spGaneshaLaserEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	GetObjectFactory()->AddPrototype(spGaneshaLaserEffect);
 
 	SP(CMeshEffect_Client) spGaneshaChargeEffect(CGanesha_Charge_Eff::Create(true, this));
 	spGaneshaChargeEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Charge");
 	spGaneshaChargeEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spGaneshaChargeEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaChargeEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spGaneshaChargeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Lancer_Eff_Color");
 	spGaneshaChargeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ability_aura");
-	spGaneshaChargeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spGaneshaChargeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	GetObjectFactory()->AddPrototype(spGaneshaChargeEffect);
 
 	SP(CMeshEffect_Client) spGaneshaDomeEff(CGanesha_Dome::Create(true, this));
 	spGaneshaDomeEff->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Dome");
 	spGaneshaDomeEff->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spGaneshaDomeEff->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaDomeEff->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spGaneshaDomeEff->GetComponent<Engine::CTextureC>()->AddTexture(L"Dome_Color");
 	spGaneshaDomeEff->GetComponent<Engine::CTextureC>()->AddTexture(L"Dome_Color");
-	spGaneshaDomeEff->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spGaneshaDomeEff->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	GetObjectFactory()->AddPrototype(spGaneshaDomeEff);
 
 	SP(CMeshEffect_Client) spGaneshaDomeImpact(CGanesha_Dome_Impact::Create(true, this));
 	spGaneshaDomeImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ganesha_Charge");
 	spGaneshaDomeImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spGaneshaDomeImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaDomeImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spGaneshaDomeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"effect_Ring07");
 	spGaneshaDomeImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"effect_Ring07");
-	spGaneshaDomeImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spGaneshaDomeImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	GetObjectFactory()->AddPrototype(spGaneshaDomeImpact);
 
 	SP(CSoftEffect) spGaneshaSmoke(CGanesha_SmokeEff::Create(true, this));
-	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
-	spGaneshaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"hit_explosion5_new");
-	spGaneshaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 	GetObjectFactory()->AddPrototype(spGaneshaSmoke);
 
 	SP(CMeshEffect_Client) spGaneshaImpact(CGanesha_Impact_Eff::Create(true, this));
 	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Robot_Impact");
 	spGaneshaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spGaneshaImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spGaneshaImpact->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
 	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
 	spGaneshaImpact->GetComponent<Engine::CTextureC>()->AddTexture(L"yun01");
-	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	spGaneshaImpact->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	GetObjectFactory()->AddPrototype(spGaneshaImpact);
 
 	SP(CMeshEffect_Client) spGanesha_Cinema_Circle(CGanesha_Cinema_Circle::Create(true, this));
@@ -810,7 +824,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaShotSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaShotSmoke);
 
-
+	 
 	SP(CMeshEffect_Client) spBronyaImpact(CBronya_Impact::Create(true, this));
 	spBronyaImpact->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact");
 	spBronyaImpact->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
@@ -874,8 +888,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaRandomSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
 
-	SP(Engine::CObject) spKianaUIAnim(CKianaUIAnim::Create(true, this));
-	GetObjectFactory()->AddPrototype(spKianaUIAnim);
 
 	SP(CMeshEffect_Client) spBronyaLandSmoke(CBronya_LandSmoke::Create(true, this));
 	spBronyaLandSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Impact_TripleRing");
@@ -883,7 +895,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	spBronyaLandSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
 	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Austerity");
-	spBronyaLandSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"Gray");
 	spBronyaLandSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	GetObjectFactory()->AddPrototype(spBronyaLandSmoke);
 
@@ -1077,5 +1088,11 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(Engine::CObject) spMainRoomBG(CMainRoomBG::Create(true, this));
 	GetObjectFactory()->AddPrototype(spMainRoomBG);
+
+	SP(CMeshEffect_Client) spStun_Eff(CStun_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStun_Eff);
+
+	SP(CMeshEffect_Client) spStun_Star(CStun_Star::Create(true, this));
+	GetObjectFactory()->AddPrototype(spStun_Star);
 
 }

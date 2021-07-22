@@ -243,6 +243,9 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
+    <ClInclude Include="..\Header\MousePointC.h" />
     <ClInclude Include="..\Header\Shot.h" />
     <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
@@ -325,6 +328,7 @@
     <ClInclude Include="..\Header\Sickle_Trail.h" />
     <ClInclude Include="..\Header\SizeDownC.h" />
     <ClInclude Include="..\Header\SizeUpC.h" />
+    <ClInclude Include="..\Header\SoftEffectShader_Glow.h" />
     <ClInclude Include="..\Header\SparkEffect.h" />
     <ClInclude Include="..\Header\SpiderExplosion.h" />
     <ClInclude Include="..\Header\OutlineShader.h" />
@@ -473,6 +477,8 @@
     <ClInclude Include="..\Header\Stage_Wall.h" />
     <ClInclude Include="..\Header\Stage_Wall_barrier.h" />
     <ClInclude Include="..\Header\StuffItem.h" />
+    <ClInclude Include="..\Header\Stun_Eff.h" />
+    <ClInclude Include="..\Header\Stun_Star.h" />
     <ClInclude Include="..\Header\SupplyItem.h" />
     <ClInclude Include="..\Header\SupplyManager.h" />
     <ClInclude Include="..\Header\SupplyOut.h" />
@@ -625,6 +631,9 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
+    <ClCompile Include="..\Code\MousePointC.cpp" />
     <ClCompile Include="..\Code\Shot.cpp" />
     <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
@@ -705,6 +714,7 @@
     <ClCompile Include="..\Code\Sickle_Trail.cpp" />
     <ClCompile Include="..\Code\SizeDownC.cpp" />
     <ClCompile Include="..\Code\SizeUpC.cpp" />
+    <ClCompile Include="..\Code\SoftEffectShader_Glow.cpp" />
     <ClCompile Include="..\Code\SparkEffect.cpp" />
     <ClCompile Include="..\Code\SpiderExplosion.cpp" />
     <ClCompile Include="..\Code\OutlineShader.cpp" />
@@ -831,6 +841,8 @@
     <ClCompile Include="..\Code\Stage_Wall.cpp" />
     <ClCompile Include="..\Code\Stage_Wall_barrier.cpp" />
     <ClCompile Include="..\Code\StuffItem.cpp" />
+    <ClCompile Include="..\Code\Stun_Eff.cpp" />
+    <ClCompile Include="..\Code\Stun_Star.cpp" />
     <ClCompile Include="..\Code\SupplyItem.cpp" />
     <ClCompile Include="..\Code\SupplyManager.cpp" />
     <ClCompile Include="..\Code\SupplyOut.cpp" />
@@ -1021,6 +1033,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
