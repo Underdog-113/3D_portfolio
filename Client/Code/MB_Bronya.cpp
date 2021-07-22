@@ -54,13 +54,14 @@ void CMB_Bronya::Awake(void)
 		CBronyaHitPattern::Create(),
 		CBronyaAirbornePattern::Create(),
 		CBronyaStunPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
+ 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+ 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
 	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create());
 }
 
 void CMB_Bronya::Start(void)
@@ -107,6 +108,8 @@ void CMB_Bronya::Start(void)
 	BulletReload();
 	EquipBomb();
 	SetupEscapePos();
+
+	m_fAlpha = 1.f;
 }
 
 void CMB_Bronya::FixedUpdate(void)
@@ -144,6 +147,8 @@ void CMB_Bronya::LateUpdate(void)
 void CMB_Bronya::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("g_Alpha", m_fAlpha);
+	pEffect->CommitChanges();
 }
 
 void CMB_Bronya::Render(LPD3DXEFFECT pEffect)

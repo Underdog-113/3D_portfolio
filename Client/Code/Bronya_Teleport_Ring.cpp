@@ -29,10 +29,11 @@ SP(Engine::CObject) CBronya_Teleport_Ring::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
+	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
+	spClone->m_bBillboard = true;
 
 	return spClone;
 }
@@ -40,13 +41,22 @@ SP(Engine::CObject) CBronya_Teleport_Ring::MakeClone(void)
 void CBronya_Teleport_Ring::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"Global_Ring01_3x3");
+	m_spTexture->AddTexture(L"Global_Ring01_3x3");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 }
 
 void CBronya_Teleport_Ring::Start(void)
 {
 	__super::Start();
-	m_fAlpha = 1.f;
+	m_fAlphaWidth = 3.f;
+	m_fAlphaHeight = 3.f;
+	m_TilingX = 0;
+	m_TilingY = 0;
+	m_maxXIndex = 3;
+	m_maxYIndex = 2;
+	m_fTIme = 0.f;
 }
 
 void CBronya_Teleport_Ring::FixedUpdate(void)
@@ -59,61 +69,38 @@ void CBronya_Teleport_Ring::Update(void)
 {
 	__super::Update();
 
-	if (m_fAlpha <= 0.f)
-	{
-		this->SetDeleteThis(true);
-	}
-	_float _size = -0.5f * GET_DT;
+	UpdateFrame(0.05f);
 
-	if (m_spTransform->GetSize().x > 0.f)
-	{
-		m_spTransform->AddSize(_float3(_size, _size, _size));
-	}
-
-	m_fAlpha -= 0.1f * GET_DT;
 }
 
 void CBronya_Teleport_Ring::LateUpdate(void)
 {
 	__super::LateUpdate();
 
-	_mat matWorld, matView, matBill;
-
-	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
-
-	D3DXMatrixIdentity(&matBill);
-
-	matBill._11 = matView._11;
-	matBill._13 = matView._13;
-	matBill._31 = matView._31;
-	matBill._33 = matView._33;
-
-	D3DXMatrixInverse(&matBill, 0, &matBill);
-
-	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
-
-	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
+	
 }
 
 void CBronya_Teleport_Ring::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
+	m_spRectTex->PreRender(m_spGraphics, pEffect);
 
-	pEffect->SetFloat("gAlpha", m_fAlpha);
-
+	pEffect->SetInt("TilingX", m_TilingX);
+	pEffect->SetInt("TilingY", m_TilingY);
+	pEffect->SetFloat("gWidth", m_fAlphaWidth);
+	pEffect->SetFloat("gHeight", m_fAlphaHeight);
 	pEffect->CommitChanges();
 }
 
 void CBronya_Teleport_Ring::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(m_spGraphics, pEffect);
+	m_spRectTex->Render(m_spGraphics, pEffect);
+
 
 }
 
 void CBronya_Teleport_Ring::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(m_spGraphics, pEffect);
-
+	m_spRectTex->PostRender(m_spGraphics, pEffect);
 }
 
 void CBronya_Teleport_Ring::OnDestroy(void)
@@ -138,4 +125,30 @@ void CBronya_Teleport_Ring::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
+}
+
+void CBronya_Teleport_Ring::UpdateFrame(_float _frmSpeed)
+{
+	m_fTIme += GET_PLAYER_DT;
+
+	if (m_fTIme >= _frmSpeed)
+	{
+		m_TilingX++;
+
+		if (m_TilingX >= m_maxXIndex)
+		{
+			m_TilingX = 0;
+
+			if (m_TilingY >= m_maxYIndex)
+			{
+				m_TilingY = 0;
+				this->SetDeleteThis(true);
+			}
+			else
+			{
+				m_TilingY++;
+			}
+		}
+		m_fTIme = 0;
+	}
 }

@@ -1060,9 +1060,9 @@
     <Filter Include="04.Shader\17.AlphaMaskGlowShader">
       <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
     </Filter>
-<Filter Include="04.Shader\07.SoftEffectShader\SoftEffectShader_Glow">
-  <UniqueIdentifier>{ee63748f-4688-4a58-9adc-cab1b001ad3d}</UniqueIdentifier>
-</Filter>
+    <Filter Include="04.Shader\07.SoftEffectShader\SoftEffectShader_Glow">
+      <UniqueIdentifier>{ee63748f-4688-4a58-9adc-cab1b001ad3d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot">
       <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
     </Filter>
@@ -1077,6 +1077,9 @@
     </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\Push">
       <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang">
+      <UniqueIdentifier>{d70dfa7a-8845-44ca-921b-59f812aba1f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2226,9 +2229,9 @@
     <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClInclude>
-<ClInclude Include="..\Header\SoftEffectShader_Glow.h">
-  <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
-</ClInclude>
+    <ClInclude Include="..\Header\SoftEffectShader_Glow.h">
+      <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Shot_PushOut.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
     </ClInclude>
@@ -2240,6 +2243,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Shot_RotateYaw.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\BronyaFlashBangPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3301,7 +3307,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\SoftEffectShader_Glow.cpp">
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
-    </ClCompile>      
+    </ClCompile>
     <ClCompile Include="..\Code\Shot_PushOut.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
     </ClCompile>
@@ -3313,6 +3319,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaFlashBangPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

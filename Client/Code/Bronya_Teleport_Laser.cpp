@@ -59,15 +59,12 @@ void CBronya_Teleport_Laser::FixedUpdate()
 void CBronya_Teleport_Laser::Update()
 {
 	__super::Update();
-	
+
 }
 
 void CBronya_Teleport_Laser::LateUpdate()
 {
-	__super::LateUpdate();
-
-
-	
+	__super::LateUpdate();	
 }
 
 void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
@@ -81,7 +78,7 @@ void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
 
 	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
 
-	//D3DXMatrixIdentity(&matBill);
+	D3DXMatrixIdentity(&matBill);
 
 	matBill._11 = matView._11;
 	matBill._13 = matView._13;

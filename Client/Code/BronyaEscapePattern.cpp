@@ -50,7 +50,10 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		effect->GetTransform()->SetSize(0.1f, 0.1f, 0.1f);
 		effect->GetTransform()->SetPosition(mPos);
 		effect->GetTransform()->AddPositionY(0.5f);
+
+		
 		m_vLaserOutEffect = std::dynamic_pointer_cast<CBronya_Teleport_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Laser", true));
+		m_vLaserOutEffect->GetTransform()->AddSizeX(-0.5f);
 		m_vLaserOutEffect->GetTransform()->SetPosition(mPos);
 		defaultEscapeEffectSizeX = m_vLaserOutEffect->GetTransform()->GetSize().x;
 		m_onLaserOutEffect = true;
@@ -95,7 +98,9 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		m_onEscape = false;
 
+		
 		m_vLaserInEffect = std::dynamic_pointer_cast<CBronya_Teleport_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Laser", true));
+		m_vLaserInEffect->GetTransform()->AddSizeX(-0.5f);
 		m_vLaserInEffect->GetTransform()->SetPosition(mPos);
 		m_onLaserInEffect = true;
 	}
@@ -114,15 +119,32 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	{
 		_float sizeX = m_vLaserOutEffect->GetTransform()->GetSize().x - (1.5f * GET_DT);
 
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-1.3f * GET_DT);
+
+			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
+			{
+				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(0.f);
+			}
+
+			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();
+		}
+
 		if (0.f >= sizeX)
 		{
-			m_vLaserOutEffect->GetTransform()->SetSizeX(0.f);
-			m_onLaserOutEffect = false;
-			m_vLaserOutEffect->SetDeleteThis(true);
+			m_vLaserOutEffect->GetTransform()->SetSizeX(0.f);	
 		}
 		else
 		{
 			m_vLaserOutEffect->GetTransform()->SetSizeX(sizeX);
+		}
+
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f &&
+			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f)
+		{
+			m_onLaserOutEffect = false;
+			m_vLaserOutEffect->SetDeleteThis(true);
 		}
 	}
 
@@ -130,15 +152,32 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	{
 		_float sizeX = m_vLaserInEffect->GetTransform()->GetSize().x - (3.5f * GET_DT);
 
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.3f * GET_DT);
+
+			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f)
+			{
+				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+			}
+
+			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();
+		}
+
 		if (0.f >= sizeX)
 		{
 			m_vLaserInEffect->GetTransform()->SetSizeX(0.f);
-			m_onLaserInEffect = false;
-			m_vLaserInEffect->SetDeleteThis(true);
 		}
 		else
 		{
 			m_vLaserInEffect->GetTransform()->SetSizeX(sizeX);
+		}
+
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f &&
+			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f)
+		{
+			m_onLaserOutEffect = false;
+			m_vLaserOutEffect->SetDeleteThis(true);
 		}
 	}
 }

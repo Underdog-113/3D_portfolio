@@ -46,7 +46,11 @@ void CBronya_FlashBang::Awake()
 void CBronya_FlashBang::Start()
 {
 	__super::Start();
+
+	m_fTmpPosY = m_spTransform->GetPosition().y;
 	m_fAlpha = 1.f;
+	m_bCheck = false;
+	m_fTime = 0.f;
 }
 
 void CBronya_FlashBang::FixedUpdate()
@@ -115,16 +119,14 @@ void CBronya_FlashBang::Movement()
 {
 	_float _size = 0.f;
 
-	if (m_spTransform->GetPosition().y >= 1.5f)
+	if (m_spTransform->GetPosition().y >= m_fTmpPosY + 0.7f)
 	{
-		m_eState = CBronya_FlashBang::STATE_END;
-		_size = 0.5f * GET_DT;
-		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaFlashBang_AS", true);
-		spObj->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
-		this->SetDeleteThis(true);
+		m_bCheck = true;
+
+		
 	}
 
-	else if (m_eState == CBronya_FlashBang::SIZE_UP)
+	if (m_eState == CBronya_FlashBang::SIZE_UP)
 	{
 		_size = 0.05f * GET_DT;
 
@@ -141,7 +143,23 @@ void CBronya_FlashBang::Movement()
 			m_eState = CBronya_FlashBang::SIZE_UP;
 		}
 	}
-	m_spTransform->AddPositionY(1.5f * GET_DT);
+
+	if (m_bCheck)
+	{
+		m_fTime += GET_DT;
+
+		if (m_fTime >= 0.3f)
+		{
+			m_eState = CBronya_FlashBang::STATE_END;
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaFlashBang_AS", true);
+			spObj->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
+			this->SetDeleteThis(true);
+			m_fTime = 0.f;
+		}
+	}
+
+	if(!m_bCheck)
+		m_spTransform->AddPositionY(1.f * GET_DT);
 
 	m_spTransform->AddSize(_float3(_size, _size, _size));
 }

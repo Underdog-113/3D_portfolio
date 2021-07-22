@@ -56,6 +56,7 @@ void CWooScene::Awake(_int numOfLayers)
 void CWooScene::Start(void)
 {
 	__super::Start();
+	m_sceneID = (_int)ESceneID::Ganesha_Cinema;
 
 	CDataLoad* Load = new CDataLoad();
 	Load->Setting();
@@ -76,13 +77,13 @@ void CWooScene::Start(void)
 
 	PlayerSetting();
 	//SpiderSetting();
-	SickleSetting();
+	//SickleSetting();
 	//ScoutSetting();
 	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
 
-	//GaneshaSetting();
+	GaneshaSetting();
 	//BronyaSetting();
 }
 
