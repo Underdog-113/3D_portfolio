@@ -23,10 +23,13 @@ void CSupplyOut::Start()
 	m_scrollView = static_cast<CScrollViewObject*>(Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas_ScrollView_0").get());
 	m_scrollView->AllDelete();
 
-	m_timer = 1.0f;
+	m_timer = 0.3f;
 
 
-	RandoBoxList();
+	if (m_itemType == 0)
+		WeaponRandoBoxList();
+	else if (m_itemType == 1)
+		ItemRandoBoxList();
 }
 
 void CSupplyOut::End()
@@ -66,7 +69,7 @@ void CSupplyOut::ItemRandomBox()
 	
 	if (m_timer <= 0 && m_itemList.size() != 0)
 	{
-		m_timer = 1.0f;
+		m_timer = 0.3f;
 		ItemInfo item = m_itemList.back();
 		m_itemList.pop_back();
 
@@ -107,13 +110,14 @@ void CSupplyOut::ItemRandomBox()
 		}
 	}
 }
+
 void CSupplyOut::WeaponRandomBox()
 {
 	m_timer -= GET_DT;
 
 	if (m_timer <= 0 && m_itemList.size() != 0)
 	{
-		m_timer = 1.0f;
+		m_timer = 0.3f;
 		ItemInfo item = m_itemList.back();
 		m_itemList.pop_back();
 
@@ -154,13 +158,151 @@ void CSupplyOut::WeaponRandomBox()
 	}
 }
 
+void CSupplyOut::ItemRandoBoxList()
+{
+	for (int i = 0; i < m_outCount; i++)
+	{
+		ItemList();
+	}
+}
+
+void CSupplyOut::WeaponRandoBoxList()
+{
+	for (int i = 0; i < m_outCount; i++)
+	{
+		WeaponList();
+	}
+}
+
+void CSupplyOut::ItemList()
+{
+	_int value = rand() % 4;
+	switch (value)
+	{
+	case 0:
+		m_itemList.emplace_back(ItemInfo(L"하급 학습 칩", 1));
+		break;
+	case 1:
+		m_itemList.emplace_back(ItemInfo(L"특급 학습 칩", 1));
+		break;
+	case 2:
+		m_itemList.emplace_back(ItemInfo(L"고급 학습 칩", 1));
+		break;
+	case 3:
+		m_itemList.emplace_back(ItemInfo(L"무기 강화제", 1));
+		break;
+	}
+
+}
+
+void CSupplyOut::WeaponList()
+{
+	_int value = rand() % 30;
+
+	switch (value)
+	{
+	case 0:
+		m_itemList.emplace_back(ItemInfo(L"11th 성유물", 1));
+		break;
+	case 1:
+		m_itemList.emplace_back(ItemInfo(L"USP45", 1));
+		break;
+	case 2:
+		m_itemList.emplace_back(ItemInfo(L"개량형 USP", 1));
+		break;
+	case 3:
+		m_itemList.emplace_back(ItemInfo(L"고주파 절단도", 1));
+		break;
+	case 4:
+		m_itemList.emplace_back(ItemInfo(L"흑쇄 분쇄자", 1));
+		break;
+	case 5:
+		m_itemList.emplace_back(ItemInfo(L"화염의 천사", 1));
+		break;
+	case 6:
+		m_itemList.emplace_back(ItemInfo(L"호리카와 쿠니히로", 1));
+		break;
+	case 7:
+		m_itemList.emplace_back(ItemInfo(L"프로토 펄스 권총", 1));
+		break;
+	case 8:
+		m_itemList.emplace_back(ItemInfo(L"파프닐의 폭염", 1));
+		break;
+	case 9:
+		m_itemList.emplace_back(ItemInfo(L"토르의 망치", 1));
+		break;
+	case 10:
+		m_itemList.emplace_back(ItemInfo(L"콜트·피스 메이커", 1));
+		break;
+	case 11:
+		m_itemList.emplace_back(ItemInfo(L"초전자 핸드건", 1));
+		break;
+	case 12:
+		m_itemList.emplace_back(ItemInfo(L"십자가·빙결탄", 1));
+		break;
+	case 13:
+		m_itemList.emplace_back(ItemInfo(L"저주파 절단도", 1));
+		break;
+	case 14:
+		m_itemList.emplace_back(ItemInfo(L"잭 오 랜턴", 1));
+		break;
+	case 15:
+		m_itemList.emplace_back(ItemInfo(L"유다의 서약", 1));
+		break;
+	case 16:
+		m_itemList.emplace_back(ItemInfo(L"아이쨩 캔디", 1));
+		break;
+	case 17:
+		m_itemList.emplace_back(ItemInfo(L"영도·사쿠라 후부키", 1));
+		break;
+	case 18:
+		m_itemList.emplace_back(ItemInfo(L"요도 무라마사", 1));
+		break;
+	case 19:
+		m_itemList.emplace_back(ItemInfo(L"요도 아메무라", 1));
+		break;
+	case 20:
+		m_itemList.emplace_back(ItemInfo(L"뇌절", 1));
+		break;
+	case 21:
+		m_itemList.emplace_back(ItemInfo(L"새벽달의 진혼가", 1));
+		break;
+	case 22:
+		m_itemList.emplace_back(ItemInfo(L"불의 요정 l 형", 1));
+		break;
+	case 23:
+		m_itemList.emplace_back(ItemInfo(L"벚꽃의 서약", 1));
+		break;
+	case 24:
+		m_itemList.emplace_back(ItemInfo(L"물의 요정 ll 형", 1));
+		break;
+	case 25:
+		m_itemList.emplace_back(ItemInfo(L"물의 요정 l 형", 1));
+		break;
+	case 26:
+		m_itemList.emplace_back(ItemInfo(L"묘도·뇌혼", 1));
+		break;
+	case 27:
+		m_itemList.emplace_back(ItemInfo(L"묘도·뇌요", 1));
+		break;
+	case 28:
+		m_itemList.emplace_back(ItemInfo(L"모조된 유다·피의 포옹", 1));
+		break;
+	case 29:
+		m_itemList.emplace_back(ItemInfo(L"마그네틱 스톰·참", 1));
+		break;
+	}
+}
+
+/*
 void CSupplyOut::RandoBoxList()
 {
 	for (int i = 0; i < m_outCount; i++)
 	{
 		m_itemList.emplace_back(ItemInfo(L"벚꽃의 서약", 1));
 	}
-}
+}*/
+
 /*
 0은 무기
 1은 재료

@@ -1083,17 +1083,3 @@ void CStageControlTower::SetDirectorMode(bool value)
 	m_pActorController->SetDirectorMode(value);
 	m_pCameraMan->SetDirectorControl(value);
 }
-
-
-void CStageControlTower::AddItemList(ItemSave item)
-{
-	for (auto& obj : m_itemList)
-	{
-		if (obj.itemName == item.itemName)
-		{
-			obj.count++;
-			return;
-		}
-	}
-	m_itemList.emplace_back(item);
-}

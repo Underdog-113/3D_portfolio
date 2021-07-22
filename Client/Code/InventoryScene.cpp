@@ -71,6 +71,7 @@ void CInventoryScene::Start(void)
 	Load->CanvasLoad(this);
 	delete(Load);
 
+	this->FindObjectByName(L"MainCanvas_ScrollView_0")->GetTransform()->SetSize(_float3(1093, 653, 0.1f));
 }
 
 void CInventoryScene::FixedUpdate(void)

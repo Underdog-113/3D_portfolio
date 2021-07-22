@@ -71,8 +71,7 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 		pos.y = m_oldY;
 		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.2f)
 		{
-			CStageControlTower::GetInstance()->SetGold(CStageControlTower::GetInstance()->GetGold() + m_moneyValue);
-			cout << CStageControlTower::GetInstance()->GetGold() << endl;
+			CDropItemManager::GetInstance()->SetGold(CDropItemManager::GetInstance()->GetGold() + m_moneyValue);
 
 			GetOwner()->SetDeleteThis(true);
 		}

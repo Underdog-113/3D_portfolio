@@ -941,7 +941,7 @@ void CDataLoad::ButtonFunction(SP(CButton) button, std::wstring function)
 	}
 	else if (0 == function.compare(L"SelectCanvasOn"))
 	{
-		button->AddFuncData<void(CSupplyItem::*)(), CSupplyItem*>(&CSupplyItem::SelectCanvasOn, &CSupplyItem());
+		button->AddFuncData<void(CSupplyManager::*)(), CSupplyManager*>(&CSupplyManager::SelectCanvasOn, CSupplyManager::GetInstance());
 	}
 	else if (0 == function.compare(L"SelectCanvasOff"))
 	{

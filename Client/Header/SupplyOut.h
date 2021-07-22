@@ -31,7 +31,10 @@ public:
 private:
 	void ItemRandomBox();
 	void WeaponRandomBox();
-	void RandoBoxList();
+	void ItemRandoBoxList();
+	void WeaponRandoBoxList();
+	void ItemList();
+	void WeaponList();
 private:
 	_bool m_init;
 	std::list<ItemInfo> m_itemList;

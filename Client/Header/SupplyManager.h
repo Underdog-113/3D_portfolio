@@ -15,6 +15,8 @@ public:
 	void SupplyItemFSM();
 	void SupplyOutFSM();
 	void SelectCanvasOff();
+	void SelectCanvasOn();
+
 private:
 	void ChangeFSM(STATE state);
 	void FSMCreate();

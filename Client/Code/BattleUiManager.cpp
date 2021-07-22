@@ -116,7 +116,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	m_monsterStateCanvas = static_cast<Engine::CCanvas*>(pScene->FindObjectByName(L"MonsterStateCanvas").get());
 	m_monsterStateCanvas->AddComponent<CLifeObjectC>();
 
-	m_monsterName = pScene->FindObjectByName(L"MonsterState Canvas_MonsterName_0").get();
+	m_monsterName = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterName_0").get();
 	m_monsterCount = pScene->FindObjectByName(L"MonsterStateCanvas_MonsterHpCount_1").get();
 
 	m_monsterProperty = static_cast<Engine::CImageObject*>(pScene->FindObjectByName(L"MonsterStateCanvas_MonsterProperty_3").get());
