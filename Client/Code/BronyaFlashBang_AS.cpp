@@ -42,7 +42,9 @@ SP(Engine::CObject) CBronyaFlashBang_AS::MakeClone(void)
 void CBronyaFlashBang_AS::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"FlashBang_Impact_1");
+	m_spTexture->AddTexture(L"FlashBang_Impact");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CBronyaFlashBang_AS::Start(void)

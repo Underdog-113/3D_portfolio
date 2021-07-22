@@ -40,7 +40,12 @@ SP(Engine::CObject) CBronya_FlashBang::MakeClone()
 void CBronya_FlashBang::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_FlashBang");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"FlashBang");
+	m_spTexture->AddTexture(L"FlashBang");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_FlashBang::Start()

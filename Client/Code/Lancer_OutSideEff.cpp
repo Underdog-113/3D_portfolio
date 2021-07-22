@@ -39,6 +39,12 @@ SP(Engine::CObject) CLancer_OutSideEff::MakeClone()
 void CLancer_OutSideEff::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Lancer_OutSideEff");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Lancer_Eff_Color");
+	m_spTexture->AddTexture(L"Soft");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CLancer_OutSideEff::Start()

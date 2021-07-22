@@ -29,8 +29,7 @@ SP(Engine::CObject) CMonsterAttackSign::MakeClone(void)
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSizeX(3);
-	spClone->m_spTransform->SetSizeY(2);
+
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
@@ -43,7 +42,12 @@ SP(Engine::CObject) CMonsterAttackSign::MakeClone(void)
 void CMonsterAttackSign::Awake(void)
 {
 	__super::Awake();
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTransform->SetSizeX(3);
+	m_spTransform->SetSizeY(2);
+	m_spTexture->AddTexture(L"RedFlare");
+	m_spTexture->AddTexture(L"RedFlare");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	
 }
 

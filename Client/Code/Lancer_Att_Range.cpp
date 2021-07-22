@@ -39,7 +39,12 @@ SP(Engine::CObject) CLancer_Att_Range::MakeClone()
 void CLancer_Att_Range::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Lancer_Att_Range");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Sign");
+	m_spTexture->AddTexture(L"Sign");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CLancer_Att_Range::Start()

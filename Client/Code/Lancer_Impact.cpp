@@ -41,6 +41,9 @@ SP(Engine::CObject) CLancer_Impact::MakeClone()
 void CLancer_Impact::Awake()
 {
 	__super::Awake();
+	m_spTexture->AddTexture(L"puncture");
+	m_spTexture->AddTexture(L"puncture");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 	m_bBillboard = false;
 }
 

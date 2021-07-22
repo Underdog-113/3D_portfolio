@@ -42,8 +42,12 @@ SP(Engine::CObject) CScoutMeteor::MakeClone(void)
 void CScoutMeteor::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"BallColor");
+	m_spTexture->AddTexture(L"Scout_Meteor");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 	m_spCollision = AddComponent<Engine::CCollisionC>();
+	m_spCollision->
+		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 0.2f));
 
 }
 

@@ -40,7 +40,13 @@ SP(Engine::CObject) CBronya_Impact_Dome::MakeClone()
 void CBronya_Impact_Dome::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Dome");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"ExplosionWarning");
+	m_spTexture->AddTexture(L"ExplosionWarning");
+	m_spTexture->AddTexture(L"ExplosionWarning");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Impact_Dome::Start()

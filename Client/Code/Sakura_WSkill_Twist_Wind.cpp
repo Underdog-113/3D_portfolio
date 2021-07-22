@@ -40,8 +40,12 @@ SP(Engine::CObject) CSakura_WSkill_Twist_Wind::MakeClone()
 void CSakura_WSkill_Twist_Wind::Awake()
 {
 	__super::Awake();
-	//m_spTransform->SetSizeX(0.7f);
-	//m_spTransform->SetSizeZ(0.7f);
+	m_spMesh->SetMeshData(L"Twist_Wind");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spTexture->AddTexture(L"Tornado_2");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CSakura_WSkill_Twist_Wind::Start()

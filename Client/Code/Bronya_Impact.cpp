@@ -41,7 +41,13 @@ SP(Engine::CObject) CBronya_Impact::MakeClone()
 void CBronya_Impact::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Impact");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
 }
 
 void CBronya_Impact::Start()

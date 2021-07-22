@@ -40,6 +40,12 @@ SP(Engine::CObject) CPortal_Plane::MakeClone()
 void CPortal_Plane::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Portal_Plane");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Portal_Plane_Color");
+	m_spTexture->AddTexture(L"Portal_Plane_Color");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	_float _size = 0.05f;
 	m_spTransform->SetSize(_size, _size, _size);
 

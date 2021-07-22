@@ -40,7 +40,12 @@ SP(Engine::CObject) CBronya_Grenade_Dome::MakeClone()
 void CBronya_Grenade_Dome::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Dome");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Grenade_Dome::Start()

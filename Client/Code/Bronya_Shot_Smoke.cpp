@@ -40,7 +40,12 @@ SP(Engine::CObject) CBronya_Shot_Smoke::MakeClone()
 void CBronya_Shot_Smoke::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Cloud");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Shot_Smoke::Start()

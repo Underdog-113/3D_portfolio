@@ -39,7 +39,12 @@ SP(Engine::CObject) CBronya_Ult_Wind::MakeClone()
 void CBronya_Ult_Wind::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Plane2");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spTexture->AddTexture(L"CircleRing_01");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Ult_Wind::Start()

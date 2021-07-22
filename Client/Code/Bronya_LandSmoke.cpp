@@ -39,7 +39,12 @@ SP(Engine::CObject) CBronya_LandSmoke::MakeClone()
 void CBronya_LandSmoke::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Impact_TripleRing");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Gray");
+	m_spTexture->AddTexture(L"Austerity");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_LandSmoke::Start()

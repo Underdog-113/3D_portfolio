@@ -40,7 +40,12 @@ SP(Engine::CObject) CGanesha_LaserEff::MakeClone()
 void CGanesha_LaserEff::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Ganesha_Laser");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"LaserColor2");
+	m_spTexture->AddTexture(L"LaserColor2");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CGanesha_LaserEff::Start()

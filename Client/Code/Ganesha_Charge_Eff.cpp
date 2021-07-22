@@ -39,6 +39,12 @@ SP(Engine::CObject) CGanesha_Charge_Eff::MakeClone()
 void CGanesha_Charge_Eff::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Ganesha_Charge");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Lancer_Eff_Color");
+	m_spTexture->AddTexture(L"Ability_aura");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 
 }
 

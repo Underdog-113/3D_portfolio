@@ -42,7 +42,12 @@ SP(Engine::CObject) CGanesha_Dome::MakeClone()
 void CGanesha_Dome::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Ganesha_Dome");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Dome_Color");
+	m_spTexture->AddTexture(L"Dome_Color");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CGanesha_Dome::Start()

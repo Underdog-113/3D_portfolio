@@ -41,7 +41,11 @@ SP(Engine::CObject) CScoutBall::MakeClone()
 void CScoutBall::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Scout_Ball");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"BallColor");
+	m_spTexture->AddTexture(L"BallColor");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CScoutBall::Start()

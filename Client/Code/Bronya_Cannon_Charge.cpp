@@ -42,7 +42,12 @@ SP(Engine::CObject) CBronya_Cannon_Charge::MakeClone()
 void CBronya_Cannon_Charge::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Cloud");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Swirl");
+	m_spTexture->AddTexture(L"Swirl");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CBronya_Cannon_Charge::Start()

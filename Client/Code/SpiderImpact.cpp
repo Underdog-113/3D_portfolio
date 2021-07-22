@@ -43,7 +43,7 @@ void CSpiderImpact::Awake()
 	m_spTransform->SetSize(_float3(_size, 0.3f, _size));
 	m_spMesh->SetMeshData(L"Bronya_Impact");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spTexture->AddTexture(L"Wave01");
 	m_spTexture->AddTexture(L"Spider_Explosion_1");
@@ -88,6 +88,7 @@ void CSpiderImpact::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_zWriteEnabled", false);
+	pEffect->SetBool("gTrailCheck", false);
 	pEffect->CommitChanges();
 }
 
