@@ -22,9 +22,10 @@ void CShot_MovePivot::Ready(CTake * pTake, _float startTimeline, _float endTimel
 
 void CShot_MovePivot::Enter()
 {
-	if (m_desc.pTargetMat)
+	if (m_desc.pTargetTransform)
 	{
-		_float3 pivotPos = _float3(m_desc.pTargetMat->_41, m_desc.pTargetMat->_42, m_desc.pTargetMat->_43);
+		_mat worldMat = m_desc.pTargetTransform->GetWorldMatrix();
+		_float3 pivotPos = _float3(worldMat._41, worldMat._42, worldMat._43);
 		m_pCameraMan->GetPivot()->GetTransform()->SetPosition(pivotPos + m_desc.startOffset);
 	}
 	else
@@ -40,9 +41,10 @@ void CShot_MovePivot::Action()
 
 	_float3 curOffset = GetLerpFloat3(m_desc.startOffset, m_desc.endOffset, timeline);
 	
-	if (m_desc.pTargetMat)
+	if (m_desc.pTargetTransform)
 	{
-		_float3 pivotPos = _float3(m_desc.pTargetMat->_41, m_desc.pTargetMat->_42, m_desc.pTargetMat->_43);
+		_mat worldMat = m_desc.pTargetTransform->GetWorldMatrix();
+		_float3 pivotPos = _float3(worldMat._41, worldMat._42, worldMat._43);
 		m_pCameraMan->GetPivot()->GetTransform()->SetPosition(pivotPos + curOffset);
 	}
 	else

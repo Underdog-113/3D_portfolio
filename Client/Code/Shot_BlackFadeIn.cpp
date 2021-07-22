@@ -28,11 +28,11 @@ void CShot_BlackFadeIn::Ready(CTake * pTake, _float startTimeline, _float endTim
 	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
-	m_desc.pBlackFade->SetAlpha(0.f);
 }
 
 void CShot_BlackFadeIn::Enter()
 {
+	m_desc.pBlackFade->SetAlpha(1.f);
 }
 
 void CShot_BlackFadeIn::Action()
@@ -46,9 +46,10 @@ void CShot_BlackFadeIn::Action()
 
 void CShot_BlackFadeIn::Cut()
 {
+	m_desc.pBlackFade->SetAlpha(0.f);
 }
 
 void CShot_BlackFadeIn::Rollback()
 {
-	m_desc.pBlackFade->SetAlpha(0.f);	
+	m_desc.pBlackFade->SetAlpha(1.f);	
 }
