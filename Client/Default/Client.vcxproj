@@ -245,6 +245,7 @@
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
+    <ClInclude Include="..\Header\MousePointC.h" />
     <ClInclude Include="..\Header\Shot.h" />
     <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
@@ -629,6 +630,7 @@
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
+    <ClCompile Include="..\Code\MousePointC.cpp" />
     <ClCompile Include="..\Code\Shot.cpp" />
     <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
