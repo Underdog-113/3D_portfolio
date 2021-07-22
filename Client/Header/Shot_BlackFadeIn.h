@@ -6,7 +6,7 @@ public:
 	struct Desc
 	{
 		Engine::CFadeInOutC* pBlackFade = nullptr;
-		_float alphaLimit = 0.5f;
+		_float alphaLimit = 1.f;
 	};
 
 public:

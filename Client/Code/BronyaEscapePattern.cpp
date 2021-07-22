@@ -47,7 +47,6 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 
 		// effect
 		SP(CBronya_Teleport_Ring) effect = std::dynamic_pointer_cast<CBronya_Teleport_Ring>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Ring", true));
-		effect->GetTransform()->SetSize(0.1f, 0.1f, 0.1f);
 		effect->GetTransform()->SetPosition(mPos);
 		effect->GetTransform()->AddPositionY(0.5f);
 

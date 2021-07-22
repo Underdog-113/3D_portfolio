@@ -43,6 +43,9 @@ SP(Engine::CObject) CKianaBranchSign::MakeClone(void)
 void CKianaBranchSign::Awake(void)
 {
 	__super::Awake();
+	m_spTexture->AddTexture(L"YellowFlare");
+	m_spTexture->AddTexture(L"YellowFlare");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 
 }
 

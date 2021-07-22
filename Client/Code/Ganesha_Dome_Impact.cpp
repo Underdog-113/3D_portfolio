@@ -42,7 +42,12 @@ SP(Engine::CObject) CGanesha_Dome_Impact::MakeClone()
 void CGanesha_Dome_Impact::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Ganesha_Charge");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"effect_Ring07");
+	m_spTexture->AddTexture(L"effect_Ring07");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CGanesha_Dome_Impact::Start()

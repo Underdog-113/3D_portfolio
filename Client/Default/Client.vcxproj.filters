@@ -1087,6 +1087,9 @@
     <Filter Include="03.Component\04.MousePoint">
       <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\SplineCurve">
+      <UniqueIdentifier>{f1e10a53-27b5-47b5-94fc-04e5d02ac611}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang">
       <UniqueIdentifier>{d70dfa7a-8845-44ca-921b-59f812aba1f8}</UniqueIdentifier>
     </Filter>
@@ -2286,6 +2289,21 @@
     <ClInclude Include="..\Header\BronyaGrenade.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Shot_BlackFadeOut.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SplineCurve.h">
+      <Filter>10.ControlTower\MovieDirector\SplineCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_Shake.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotatePitch_Spline.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_PushIn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3388,6 +3406,21 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaGrenade.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_BlackFadeOut.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SplineCurve.cpp">
+      <Filter>10.ControlTower\MovieDirector\SplineCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_Shake.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotatePitch_Spline.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_PushIn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

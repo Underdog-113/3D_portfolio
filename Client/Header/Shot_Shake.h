@@ -1,29 +1,17 @@
 #pragma once
 #include "Shot.h"
-class CShot_MovePivot :
+class CShot_Shake :
 	public CShot
 {
 public:
-	struct Desc
-	{
-		Engine::CTransformC* pTargetTransform = nullptr;
-		_float3 startOffset = ZERO_VECTOR;
-		_float3 endOffset = ZERO_VECTOR;
-	};
+	CShot_Shake();
+	~CShot_Shake();
 
-public:
-	CShot_MovePivot();
-	~CShot_MovePivot();
-
+	// CShot을(를) 통해 상속됨
 	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc, _float enterTimeline) override;
 	virtual void Enter() override;
 	virtual void Action() override;
 	virtual void Cut() override;
 	virtual void Rollback() override;
-
-private:
-	Desc m_desc;
-
-	_float3 m_savedPivotPos = ZERO_VECTOR;
 };
 

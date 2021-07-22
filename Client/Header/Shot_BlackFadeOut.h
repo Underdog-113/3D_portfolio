@@ -1,19 +1,23 @@
 #pragma once
 #include "Shot.h"
-class CShot_MovePivot :
+class CShot_BlackFadeOut :
 	public CShot
 {
+
 public:
 	struct Desc
 	{
-		Engine::CTransformC* pTargetTransform = nullptr;
-		_float3 startOffset = ZERO_VECTOR;
-		_float3 endOffset = ZERO_VECTOR;
+		Engine::CFadeInOutC* pBlackFade = nullptr;
+		_float alphaLimit = 0.f;
 	};
 
 public:
-	CShot_MovePivot();
-	~CShot_MovePivot();
+	CShot_BlackFadeOut();
+	~CShot_BlackFadeOut();
+
+
+	virtual _bool CheckOnTake(_float takeTimer);
+
 
 	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc, _float enterTimeline) override;
 	virtual void Enter() override;
@@ -23,7 +27,5 @@ public:
 
 private:
 	Desc m_desc;
-
-	_float3 m_savedPivotPos = ZERO_VECTOR;
 };
 

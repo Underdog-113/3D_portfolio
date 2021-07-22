@@ -6,6 +6,8 @@ class CShot_RotateYaw :
 public:
 	struct Desc
 	{
+		Engine::CTransformC* pTargetTransform = nullptr;
+
 		_float startEulerAngle = 0.f;
 		_float endEulerAngle = 30.f;
 	};

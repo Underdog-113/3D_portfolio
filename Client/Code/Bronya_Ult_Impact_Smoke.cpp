@@ -39,6 +39,12 @@ SP(Engine::CObject) CBronya_Ult_Impact_Smoke::MakeClone()
 void CBronya_Ult_Impact_Smoke::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Bronya_Plane2");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Smoke_Y");
+	m_spTexture->AddTexture(L"Smoke_Y");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_spTransform->SetSize(0.2f, 0.2f, 0.2f);
 		
 

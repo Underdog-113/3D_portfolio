@@ -18,9 +18,15 @@ void CShot_RotateYaw::Ready(CTake * pTake, _float startTimeline, _float endTimel
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
 
-	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
-	_float3 actorForward = pActor->GetTransform()->GetForward();
-	_float3 actorRight = pActor->GetTransform()->GetRight();
+	Engine::CTransformC* pTr = nullptr;
+
+	if (m_desc.pTargetTransform)
+		pTr = m_desc.pTargetTransform;
+	else
+		pTr = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform().get();
+
+	_float3 actorForward = pTr->GetForward();
+	_float3 actorRight = pTr->GetRight();
 	actorForward.y = 0.f;
 	actorRight.y = 0.f;
 

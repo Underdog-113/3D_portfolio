@@ -39,7 +39,12 @@ SP(Engine::CObject) CRobot_Impact_Smoke::MakeClone()
 void CRobot_Impact_Smoke::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Robot_Impact");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Gray");
+	m_spTexture->AddTexture(L"Austerity");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CRobot_Impact_Smoke::Start()

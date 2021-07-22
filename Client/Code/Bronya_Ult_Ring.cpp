@@ -41,6 +41,12 @@ SP(Engine::CObject) CBronya_Ult_Ring::MakeClone()
 void CBronya_Ult_Ring::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Bronya_Plane2");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spTexture->AddTexture(L"Locking_2");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_spTransform->SetSize(0.01f, 0.01f, 0.01f);
 	m_spTransform->SetRotationX(D3DXToRadian(195));
 }

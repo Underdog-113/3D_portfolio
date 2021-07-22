@@ -41,7 +41,9 @@ SP(Engine::CObject) CSakura_DamageMark::MakeClone(void)
 void CSakura_DamageMark::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"Sakura_DamageMark");
+	m_spTexture->AddTexture(L"Sakura_DamageMark");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CSakura_DamageMark::Start(void)

@@ -44,6 +44,10 @@ SP(Engine::CObject) CRobot_Impact::MakeClone()
 void CRobot_Impact::Awake()
 {
 	__super::Awake();
+	m_spTexture->AddTexture(L"ImpactColor");
+	m_spTexture->AddTexture(L"Effect_Wave07");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CRobot_Impact::Start()

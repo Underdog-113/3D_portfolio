@@ -39,7 +39,8 @@ SP(Engine::CObject) CBronya_RandomSmoke::MakeClone(void)
 void CBronya_RandomSmoke::Awake(void)
 {
 	__super::Awake();
-
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_RandomSmoke::Start(void)

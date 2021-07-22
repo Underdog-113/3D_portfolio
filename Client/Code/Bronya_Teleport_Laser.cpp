@@ -39,7 +39,12 @@ SP(Engine::CObject) CBronya_Teleport_Laser::MakeClone()
 void CBronya_Teleport_Laser::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Teleport_Laser");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spTexture->AddTexture(L"TeleportColor");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CBronya_Teleport_Laser::Start()

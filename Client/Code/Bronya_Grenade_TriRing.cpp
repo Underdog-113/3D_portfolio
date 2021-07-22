@@ -40,7 +40,12 @@ SP(Engine::CObject) CBronya_Grenade_TriRing::MakeClone()
 void CBronya_Grenade_TriRing::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Impact_TripleRing");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Grenade_TriRing::Start()

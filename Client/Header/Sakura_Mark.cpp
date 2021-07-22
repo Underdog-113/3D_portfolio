@@ -41,7 +41,9 @@ SP(Engine::CObject) CSakura_Mark::MakeClone(void)
 void CSakura_Mark::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"SakuraMark");
+	m_spTexture->AddTexture(L"SakuraMark");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CSakura_Mark::Start(void)
