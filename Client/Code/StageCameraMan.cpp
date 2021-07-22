@@ -757,6 +757,7 @@ void CStageCameraMan::ApplyShaking()
 
 		m_spCamera->SetLookAngleRight(m_spCamera->GetLookAngleRight() + rotOscilation.x);
 		m_spCamera->SetLookAngleUp(m_spCamera->GetLookAngleUp() + rotOscilation.y);
+		m_spCamera->SetLookAngleForward(m_spCamera->GetLookAngleForward() + rotOscilation.z);
 		// 이거 하고 나서 카메라 트랜스폼 업데이트 해야함
 	}
 	else

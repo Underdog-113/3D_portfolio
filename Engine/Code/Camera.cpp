@@ -368,21 +368,23 @@ void CCamera::LateUpdateTPS_Custom(void)
 	/* 임의의 축 회전2 */
 	D3DXMatrixRotationAxis(&rotationMatrix, &UP_VECTOR, m_lookAngleUp);
 	D3DXVec3TransformNormal(&invLook, &invLook, &rotationMatrix);
-
-	/* 임의의 축 회전3 */
-	D3DXMatrixRotationAxis(&rotationMatrix, &FORWARD_VECTOR, m_lookAngleForward);
-	D3DXVec3TransformNormal(&invLook, &invLook, &rotationMatrix);
-
+	
+	
 	m_spTransform->SetPosition(invLook + spTargetTransform->GetPosition() + m_targetOffset);
 	m_spTransform->SetForward(-invLook);
 	m_spTransform->AddPosition(m_spTransform->GetRight() * m_shakePosOffset.x);
 	m_spTransform->AddPosition(m_spTransform->GetUp() * m_shakePosOffset.y);
 	m_spTransform->AddPosition(m_spTransform->GetForward() * m_shakePosOffset.z);
 	
+	/* 임의의 축 회전3 */
+	D3DXMatrixRotationAxis(&rotationMatrix, &m_spTransform->GetForward(), m_lookAngleForward);
+	_float3 upVector;
+	D3DXVec3TransformNormal(&upVector, &UP_VECTOR, &rotationMatrix);
+
 	D3DXMatrixLookAtLH(&m_viewMat,
 		&m_spTransform->GetPosition(),
 		&(m_spTransform->GetPosition() + m_spTransform->GetForward()),
-		&UP_VECTOR);
+		&upVector);
 
 }
 

@@ -17,7 +17,7 @@ void CWndApp::Start(HINSTANCE hInstance, _int nCmdShow)
 	m_windowName	= L"ºØ±«3rd";
 	m_wndWidth		= 1440;
 	m_wndHeight		= 810;
-	m_showCursor	= true;
+	m_showCursor	= false;
 	
 	ShowCursor(m_showCursor);
 	RegisterWndClass(hInstance);

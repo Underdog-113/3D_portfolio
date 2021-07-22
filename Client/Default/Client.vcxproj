@@ -244,6 +244,9 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
+    <ClInclude Include="..\Header\MousePointC.h" />
     <ClInclude Include="..\Header\Shot.h" />
     <ClInclude Include="..\Header\CloudObject.h" />
     <ClInclude Include="..\Header\CountUpC.h" />
@@ -308,11 +311,14 @@
     <ClInclude Include="..\Header\Scout_Att_Range.h" />
     <ClInclude Include="..\Header\Scout_Att_Range_Hold.h" />
     <ClInclude Include="..\Header\Scout_Laser.h" />
+    <ClInclude Include="..\Header\Shot_ActorVictory.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h" />
     <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
+    <ClInclude Include="..\Header\Shot_FixPivot.h" />
     <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
     <ClInclude Include="..\Header\Shot_PushOut.h" />
     <ClInclude Include="..\Header\Shot_RotateAround.h" />
+    <ClInclude Include="..\Header\Shot_RotatePitch.h" />
     <ClInclude Include="..\Header\Shot_RotateRoll.h" />
     <ClInclude Include="..\Header\Shot_RotateYaw.h" />
     <ClInclude Include="..\Header\Shot_Start_StageStartTake.h" />
@@ -472,6 +478,8 @@
     <ClInclude Include="..\Header\Stage_Wall.h" />
     <ClInclude Include="..\Header\Stage_Wall_barrier.h" />
     <ClInclude Include="..\Header\StuffItem.h" />
+    <ClInclude Include="..\Header\Stun_Eff.h" />
+    <ClInclude Include="..\Header\Stun_Star.h" />
     <ClInclude Include="..\Header\SupplyItem.h" />
     <ClInclude Include="..\Header\SupplyManager.h" />
     <ClInclude Include="..\Header\SupplyOut.h" />
@@ -625,6 +633,9 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
+    <ClCompile Include="..\Code\MousePointC.cpp" />
     <ClCompile Include="..\Code\Shot.cpp" />
     <ClCompile Include="..\Code\CloudObject.cpp" />
     <ClCompile Include="..\Code\CountUpC.cpp" />
@@ -687,11 +698,14 @@
     <ClCompile Include="..\Code\Scout_Att_Range.cpp" />
     <ClCompile Include="..\Code\Scout_Att_Range_Hold.cpp" />
     <ClCompile Include="..\Code\Scout_Laser.cpp" />
+    <ClCompile Include="..\Code\Shot_ActorVictory.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
+    <ClCompile Include="..\Code\Shot_FixPivot.cpp" />
     <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
     <ClCompile Include="..\Code\Shot_PushOut.cpp" />
     <ClCompile Include="..\Code\Shot_RotateAround.cpp" />
+    <ClCompile Include="..\Code\Shot_RotatePitch.cpp" />
     <ClCompile Include="..\Code\Shot_RotateRoll.cpp" />
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp" />
     <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp" />
@@ -829,6 +843,8 @@
     <ClCompile Include="..\Code\Stage_Wall.cpp" />
     <ClCompile Include="..\Code\Stage_Wall_barrier.cpp" />
     <ClCompile Include="..\Code\StuffItem.cpp" />
+    <ClCompile Include="..\Code\Stun_Eff.cpp" />
+    <ClCompile Include="..\Code\Stun_Star.cpp" />
     <ClCompile Include="..\Code\SupplyItem.cpp" />
     <ClCompile Include="..\Code\SupplyManager.cpp" />
     <ClCompile Include="..\Code\SupplyOut.cpp" />

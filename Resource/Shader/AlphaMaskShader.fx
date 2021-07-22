@@ -12,7 +12,7 @@ float  gSpeed;
 float  gTmpAlpha;
 
 bool   gPlayingAnim;
-bool   gPlayingAnim_UpDown = false;
+bool   gPlayingAnim_UpDown;
 bool   g_bAlphaCtrl;
 bool   g_zWriteEnabled = false;
 bool   g_AlphaTestEnabled = false;
@@ -68,7 +68,7 @@ VS_OUTPUT vs_main(VS_INPUT Input)
 	{
 		Output.mUV = Input.mUV + float2(0.f, gSpeed);
 	}
-	if (gPlayingAnim)
+	else if (gPlayingAnim)
 	{
 		Output.mUV = Input.mUV + float2(gSpeed, 0.f);
 	}

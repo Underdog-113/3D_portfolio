@@ -13,4 +13,5 @@
 #include "SpItemC.h"
 #include "MoneyItemC.h"
 #include "StuffItemC.h"
+#include  "MousePointC.h"
 #endif

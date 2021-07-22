@@ -1066,17 +1066,26 @@
     <Filter Include="10.ControlTower\MovieDirector\CameraShot">
       <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Interface">
-      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
-    </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\Fade">
       <UniqueIdentifier>{713382d3-0c91-4eb8-b633-5ef9f29e21cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Move">
+      <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\Rotate">
       <UniqueIdentifier>{e7d6f91d-f30b-468d-ad62-6837933da421}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Push">
-      <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\00. Interface">
+      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill">
+      <UniqueIdentifier>{deb96b9b-f431-431e-96a1-a7ebe4cc3c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun">
+      <UniqueIdentifier>{7e05027a-6e63-4e55-9d15-6664ddfe5588}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="03.Component\04.MousePoint">
+        <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang">
       <UniqueIdentifier>{d70dfa7a-8845-44ca-921b-59f812aba1f8}</UniqueIdentifier>
@@ -2215,7 +2224,7 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Interface</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\00. Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_WhiteFadeOut.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
@@ -2233,7 +2242,7 @@
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_PushOut.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_RotateRoll.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
@@ -2246,6 +2255,30 @@
     </ClInclude>
     <ClInclude Include="..\Header\BronyaFlashBangPattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_RotatePitch.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_ActorVictory.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_FixPivot.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stun_Star.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stun_Eff.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MousePointC.h">
+      <Filter>03.Component\04.MousePoint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3291,7 +3324,7 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Interface</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\00. Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
@@ -3309,7 +3342,7 @@
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_PushOut.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateRoll.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
@@ -3322,6 +3355,30 @@
     </ClCompile>
     <ClCompile Include="..\Code\BronyaFlashBangPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_RotatePitch.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_ActorVictory.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_FixPivot.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_EvadeSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stun_Star.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stun_Eff.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MousePointC.cpp">
+      <Filter>03.Component\04.MousePoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

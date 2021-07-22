@@ -58,6 +58,14 @@ void CBossStageScene::Start(void)
 {
 	__super::Start();
 
+	SP(Engine::CImageObject) image =
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_image2"));
+	image->GetTransform()->SetPositionZ(1.0f);
+	image->GetTransform()->SetSize(_float3(25, 25, 0));
+	image->GetTexture()->AddTexture(L"MousePoint", 0);
+	image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+	image->AddComponent<CMousePointC>();
+
 	SetupFromLoader();
 	SetupMembers();
 
