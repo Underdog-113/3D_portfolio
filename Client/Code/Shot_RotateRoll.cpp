@@ -11,9 +11,9 @@ CShot_RotateRoll::~CShot_RotateRoll()
 {
 }
 
-void CShot_RotateRoll::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc)
+void CShot_RotateRoll::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
-	CShot::Ready(pTake, startTimeline, endTimeline, pDesc);
+	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
 

@@ -23,9 +23,9 @@ _bool CShot_BlackFadeIn::CheckOnTake(_float takeTimer)
 	return false;
 }
 
-void CShot_BlackFadeIn::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc)
+void CShot_BlackFadeIn::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
-	CShot::Ready(pTake, startTimeline, endTimeline, pDesc);
+	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
 	m_desc.pBlackFade->SetAlpha(0.f);

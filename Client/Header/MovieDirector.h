@@ -6,11 +6,13 @@
 
 #define ShotName_RotateAround		L"RotateAround"
 #define ShotName_RotateYaw			L"RotateYaw"
+#define ShotName_RotateYaw_SubCh1	L"RotateYaw_SubCh1"
 #define ShotName_RotatePitch		L"RotatePitch"
 #define ShotName_RotateRoll			L"RotateRoll"
 
 #define ShotName_PushIn				L"PushIn"
 #define ShotName_PushOut			L"PushOut"
+#define ShotName_FixPivot			L"FixPivot"
 
 #define ShotName_Victory			L"Victory"
 
@@ -70,11 +72,12 @@ private:
 
 	CShot* m_pShot_RotateAround = nullptr;
 	CShot* m_pShot_RotateYaw = nullptr;
+	CShot* m_pShot_RotateYaw_SubCh1 = nullptr;
 	CShot* m_pShot_RotatePitch = nullptr;
 	CShot* m_pShot_RotateRoll = nullptr;
 
 	CShot* m_pShot_PushOut = nullptr;
-
+	CShot* m_pShot_FixPivot = nullptr;
 
 	CShot* m_pShot_Victory = nullptr;
 };

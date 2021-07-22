@@ -1063,17 +1063,17 @@
     <Filter Include="10.ControlTower\MovieDirector\CameraShot">
       <UniqueIdentifier>{db2a7976-bd95-4be5-8ffb-adaec3722443}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Interface">
-      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
-    </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\Fade">
       <UniqueIdentifier>{713382d3-0c91-4eb8-b633-5ef9f29e21cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Move">
+      <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="10.ControlTower\MovieDirector\CameraShot\Rotate">
       <UniqueIdentifier>{e7d6f91d-f30b-468d-ad62-6837933da421}</UniqueIdentifier>
     </Filter>
-    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Push">
-      <UniqueIdentifier>{86f88d9b-d2b8-4a41-8f10-2f5d21bb9b7d}</UniqueIdentifier>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\00. Interface">
+      <UniqueIdentifier>{a7280b20-717f-4790-9abc-426a8e8fc799}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2209,7 +2209,7 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Interface</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\00. Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_WhiteFadeOut.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
@@ -2224,7 +2224,7 @@
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_PushOut.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_RotateRoll.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
@@ -2240,6 +2240,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\Shot_ActorVictory.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_FixPivot.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3285,7 +3288,7 @@
       <Filter>02.Objects\03.Effect\01.MeshEffect\10.Ganesha_MeshEff\Ganesha_Cinema</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Interface</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\00. Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_WhiteFadeIn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
@@ -3300,7 +3303,7 @@
       <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_PushOut.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot\Push</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateRoll.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
@@ -3316,6 +3319,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_ActorVictory.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_FixPivot.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

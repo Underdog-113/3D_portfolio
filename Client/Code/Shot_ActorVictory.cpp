@@ -13,9 +13,9 @@ CShot_ActorVictory::~CShot_ActorVictory()
 {
 }
 
-void CShot_ActorVictory::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc)
+void CShot_ActorVictory::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
-	CShot::Ready(pTake, startTimeline, endTimeline, pDesc);
+	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	SetIsEndless(true);
 	memcpy(&m_desc, pDesc, sizeof(Desc));

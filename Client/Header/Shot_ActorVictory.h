@@ -10,7 +10,7 @@ public:
 	CShot_ActorVictory();
 	~CShot_ActorVictory();
 
-	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc) override;
+	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline) override;
 	virtual void Enter() override;
 	virtual void Action() override;
 	virtual void Cut() override;

@@ -12,17 +12,20 @@ CShot_RotateYaw::~CShot_RotateYaw()
 {
 }
 
-void CShot_RotateYaw::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc)
+void CShot_RotateYaw::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
-	CShot::Ready(pTake, startTimeline, endTimeline, pDesc);
+	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
 
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
 	_float3 actorForward = pActor->GetTransform()->GetForward();
+	_float3 actorRight = pActor->GetTransform()->GetRight();
 	actorForward.y = 0.f;
+	actorRight.y = 0.f;
 
 	D3DXVec3Normalize(&actorForward, &actorForward);
+	D3DXVec3Normalize(&actorRight, &actorRight);
 
 	_float3 rotAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&rotAxis, &FORWARD_VECTOR, &actorForward);
@@ -33,14 +36,14 @@ void CShot_RotateYaw::Ready(CTake * pTake, _float startTimeline, _float endTimel
 
 	if (rotAxis.y > 0.f) 
 	{
-		m_startActorForwardAngle = radStartAngle;
+		m_startActorForwardAngle = D3DXToRadian(180) + radStartAngle;
 	}
 	else
 	{
-		m_startActorForwardAngle = -radStartAngle;
+		m_startActorForwardAngle = D3DXToRadian(180) - radStartAngle;
 	}
 
-	m_startActorForwardAngle *= -1.f;  // mesh 180
+	//m_startActorForwardAngle *= -1.f;  // mesh 180
 	
 	m_savedLookAngleUp = m_spCamera->GetLookAngleUp();
 }

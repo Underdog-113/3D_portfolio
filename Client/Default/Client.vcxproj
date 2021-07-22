@@ -310,6 +310,7 @@
     <ClInclude Include="..\Header\Shot_ActorVictory.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h" />
     <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
+    <ClInclude Include="..\Header\Shot_FixPivot.h" />
     <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
     <ClInclude Include="..\Header\Shot_PushOut.h" />
     <ClInclude Include="..\Header\Shot_RotateAround.h" />
@@ -689,6 +690,7 @@
     <ClCompile Include="..\Code\Shot_ActorVictory.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
+    <ClCompile Include="..\Code\Shot_FixPivot.cpp" />
     <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
     <ClCompile Include="..\Code\Shot_PushOut.cpp" />
     <ClCompile Include="..\Code\Shot_RotateAround.cpp" />
