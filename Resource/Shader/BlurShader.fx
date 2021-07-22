@@ -110,11 +110,6 @@ PS_OUTPUT PS_Vertical(PS_INPUT IN)
 
 	Out.diffuse = color;
 
-	//if (color.x > 0.25f || color.y > 0.25f || color.z > 0.25f)
-	//	Out.diffuse.a = 1.f;
-	//else
-	//	Out.diffuse.a = 0.f;
-
 	return Out;
 }
 
@@ -137,10 +132,8 @@ PS_OUTPUT PS_Horizontal(PS_INPUT  IN)
 
 
 	Out.diffuse = color;
-	//if (color.x > 0.25f || color.y > 0.25f || color.z > 0.25f)
-	//	Out.diffuse.a = 1.f;
-	//else
-	//	Out.diffuse.a = 0.f;
+	if(color.x < 0.01f && color.y < 0.01f && color.z < 0.01f)
+		Out.diffuse.a = 0.f;
 
 	return Out;
 }

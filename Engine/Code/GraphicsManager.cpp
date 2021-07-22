@@ -53,7 +53,7 @@ void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
 		D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DXCOLOR(1.f, 1.f, 0.f, 1.f),
+		D3DXCOLOR(0.f, 1.f, 0.5f, 1.f),
 		1.f, 0);
 
 	GET_DEVICE->BeginScene();
@@ -62,7 +62,7 @@ void CGraphicsManager::PreRender(void)
 void CGraphicsManager::Render(void)
 {
 	RenderBase();
-
+	
 	//Deferred Start
 	RenderNonAlpha();
 	RenderEffect();
@@ -71,17 +71,17 @@ void CGraphicsManager::Render(void)
 	RenderLights();
 	//Deferred End
 	RenderDeferBlend();
-
+	
 	RenderWire();
 	RenderAlphaTest();
-	//RenderAlphaBlend();
+	RenderAlphaBlend();
 	RenderParticle();
 	RenderUI();
-
+	
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
 	if (m_rtDebugOn == true)
 		pRTM->RenderDebugBuffer();
-
+	
 	pRTM->ClearRenderTargets();
 	ClearRenderList();
 }
@@ -163,16 +163,16 @@ void CGraphicsManager::InitDeferredBuffer(void)
 
 	m_pVertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
 
-	pVertex[0].position = _float4(-1.f, -1.f, 0.f, 1.f);
+	pVertex[0].position = _float4(-0.5f, -0.5f, 0.f, 1.f);
 	pVertex[0].texUV = _float2(0.f, 0.f);
 
-	pVertex[1].position = _float4((_float)viewport.Width - 1.f, -1.f, 0.f, 1.f);
+	pVertex[1].position = _float4((_float)viewport.Width - 0.5f, -0.5f, 0.f, 1.f);
 	pVertex[1].texUV = _float2(1.f, 0.f);
 
-	pVertex[2].position = _float4((_float)viewport.Width - 1.f, (_float)viewport.Height - 1.f, 0.f, 1.f);
+	pVertex[2].position = _float4((_float)viewport.Width - 0.5f, (_float)viewport.Height - 0.5f, 0.f, 1.f);
 	pVertex[2].texUV = _float2(1.f, 1.f);
 
-	pVertex[3].position = _float4(-1.f, (_float)viewport.Height - 1.f, 0.f, 1.f);
+	pVertex[3].position = _float4(-0.5f, (_float)viewport.Height - 0.f, 0.f, 1.f);
 	pVertex[3].texUV = _float2(0.f, 1.f);
 
 	m_pVertexBuffer->Unlock();

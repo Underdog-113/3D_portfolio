@@ -17,7 +17,7 @@ void CRenderTargetManager::Awake(void)
 
 	//Add render targets
 #pragma region BasicRT
-	AddRenderTarget(L"Target_Albedo", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(0, 0);
+	AddRenderTarget(L"Target_Albedo", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.6f, 0.3f, 0.3f, 0))->InitDebugRT(0, 0);
 	AddRenderTarget(L"Target_Normal", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0, 0, 0, 0))->InitDebugRT(0, 1);
 	AddRenderTarget(L"Target_Depth", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(1, 1, 1, 1))->InitDebugRT(0, 2);
 	//AddRenderTarget(L"Target_MtrlSpecular", viewport.Width, viewport.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(0, 0, 0, 0));

@@ -130,6 +130,8 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 		else
 			AddTexNameToList(L"NoTex");
 	}
+
+	delete[] pAdjacency;
 }
 
 void CStaticMeshData::Update(void)

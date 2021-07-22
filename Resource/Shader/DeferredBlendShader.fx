@@ -108,13 +108,27 @@ PS_OUT		PS_MAIN(PS_IN In)
 	vector vBlurDiv4 = saturate(tex2D(BlurDiv4Sampler, In.vTexUV));
 	vector vBlurDiv8 = saturate(tex2D(BlurDiv8Sampler, In.vTexUV));
 	vector vBlurDiv16 = saturate(tex2D(BlurDiv16Sampler, In.vTexUV));
-	//vector a = vector(0, 0, 0, 1);
 	vector blurColor = vBlurDiv2 + vBlurDiv4 + vBlurDiv8 + vBlurDiv16;
-	Out.vColor = saturate(vAlbedo * vShade + blurColor);// +vSpecular;
-	Out.vColor.a = 1;
+	
+	
+	//Out.vColor = saturate(vAlbedo * vShade + blurColor);// +vSpecular;
+	//Out.vColor.a = 1;
 
 	
+	if (blurColor.a == 0)
+		Out.vColor = saturate(vector(vAlbedo * vShade));// +vSpecular;
+	else
+		Out.vColor = saturate(vector(vAlbedo * vShade + blurColor));
 
+
+	//else if (blurColor.a > 0.f)
+	//	Out.vColor = saturate(Out.vColor + blurColor);
+	//else
+	//	Out.vColor = vector(0, 0, 0, 1);
+	//if (blurColor.a != 0)
+	//	Out.vColor = saturate(Out.vColor + blurColor);
+
+	////Out.vColor.a = 1;
 	return Out;
 }
 
