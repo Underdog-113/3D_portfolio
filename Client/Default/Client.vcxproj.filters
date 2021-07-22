@@ -1090,6 +1090,9 @@
     <Filter Include="10.ControlTower\MovieDirector\SplineCurve">
       <UniqueIdentifier>{f1e10a53-27b5-47b5-94fc-04e5d02ac611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang">
+      <UniqueIdentifier>{d70dfa7a-8845-44ca-921b-59f812aba1f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2253,6 +2256,9 @@
     <ClInclude Include="..\Header\Shot_RotateYaw.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaFlashBangPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Shot_RotatePitch.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
@@ -3364,6 +3370,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotateYaw.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BronyaFlashBangPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\08.FlashBang</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_RotatePitch.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>

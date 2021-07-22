@@ -39,7 +39,13 @@ SP(Engine::CObject) CBronya_Impact_TripleRing::MakeClone()
 void CBronya_Impact_TripleRing::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Impact_TripleRing");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spTexture->AddTexture(L"Eff_Noise_08");
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
 }
 
 void CBronya_Impact_TripleRing::Start()
@@ -77,6 +83,8 @@ void CBronya_Impact_TripleRing::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->CommitChanges();
 }
 
 void CBronya_Impact_TripleRing::Render(LPD3DXEFFECT pEffect)

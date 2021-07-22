@@ -40,6 +40,12 @@ SP(Engine::CObject) CSakura_WSkill_Start::MakeClone()
 void CSakura_WSkill_Start::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Sakura_WSill_Start");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"WeaponSkill_Start");
+	m_spTexture->AddTexture(L"yun01");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	_float _size = 1.5f;
 	m_spTransform->SetSize(_float3(_size, _size, _size));
 }

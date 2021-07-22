@@ -40,6 +40,12 @@ SP(Engine::CObject) CPortal_Blue::MakeClone()
 void CPortal_Blue::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Portal_Cylinder");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"BlueprintBG");
+	m_spTexture->AddTexture(L"AttackHint_Circle_04");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	_float _size = 2.f;
 	m_spTransform->SetSize(_float3(_size, _size + 2.f, _size));
 }

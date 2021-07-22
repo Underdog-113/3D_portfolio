@@ -39,6 +39,12 @@ SP(Engine::CObject) CTheresaCharge_Att::MakeClone()
 void CTheresaCharge_Att::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Charge_Att");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Sword_map");
+	m_spTexture->AddTexture(L"Charge_Att_Fire");
+	m_spShader->AddShader((_int)EShaderID::FireShader);
 	m_spTransform->SetSize(_float3(0.05f, 0.05f, 0.05f));
 
 }
@@ -51,10 +57,10 @@ void CTheresaCharge_Att::Start()
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MoveUpSmoke", true, (_int)Engine::ELayerID::Effect));
 
 	m_spTheresaSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Charge_Att_Smoke");
-	m_spTheresaSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTheresaSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
-	m_spTheresaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+	m_spTheresaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x , -0.6f, this->GetTransform()->GetPosition().z));
 	m_fUVSpeed = 0.f;
 	m_fAlpha = 1.f;
@@ -94,6 +100,7 @@ void CTheresaCharge_Att::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", m_fUVSpeed);
+	pEffect->CommitChanges();
 }
 
 void CTheresaCharge_Att::Render(LPD3DXEFFECT pEffect)

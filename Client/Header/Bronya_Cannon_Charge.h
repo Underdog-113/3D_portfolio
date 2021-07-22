@@ -33,5 +33,6 @@ public:
 
 private:
 	static		_uint m_s_uniqueID;
+				_float m_fAngle;
 };
 

@@ -39,7 +39,12 @@ SP(Engine::CObject) CRobot_Plane::MakeClone()
 void CRobot_Plane::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Robot_Plane");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"SkyColor");
+	m_spTexture->AddTexture(L"SkyColor");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CRobot_Plane::Start()

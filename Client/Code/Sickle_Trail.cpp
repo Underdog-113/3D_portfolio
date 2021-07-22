@@ -76,6 +76,7 @@ void CSickle_Trail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	pEffect->CommitChanges();
 }
 
 void CSickle_Trail::Render(LPD3DXEFFECT pEffect)

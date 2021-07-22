@@ -86,8 +86,18 @@ struct PS_INPUT
 
 };
 
-float4 ps_main(VS_OUTPUT Input) : COLOR
+struct PS_OUTPUT
 {
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
+};
+
+PS_OUTPUT ps_main(VS_OUTPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
@@ -150,12 +160,15 @@ float4 ps_main(VS_OUTPUT Input) : COLOR
 
 	if (gTrailCheck)
 	{
-		return blendColor;
+		return Out;
 	}
 	else
 	{
 		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
-		return float4(diffuse, multiple);
+		Out.vColor = float4(diffuse, multiple);
+		Out.vEmissive = float4(blendColor.rgb, gAlpha);
+
+		return Out;
 	}
 
 }
@@ -166,10 +179,12 @@ technique DissolveShader
 	{
 		CullMode = None;
 		zWriteEnable = g_zWriteEnabled;
-		AlphaTestEnable = true;
+		AlphaTestEnable = false;
 		AlphaBlendEnable = true;
 		DestBlend = InvsrcAlpha;
 		SrcBlend = SrcAlpha;
+		alphafunc = greater;
+		alpharef = 0x08;
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();
 	}

@@ -40,7 +40,9 @@ SP(Engine::CObject) CSakura_WSkill_Smoke::MakeClone(void)
 void CSakura_WSkill_Smoke::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"Smoke_G");
+	m_spTexture->AddTexture(L"Smoke_G");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CSakura_WSkill_Smoke::Start(void)

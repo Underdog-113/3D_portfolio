@@ -38,6 +38,11 @@ SP(Engine::CObject) CMonsterSpawnEff::MakeClone()
 void CMonsterSpawnEff::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"SpawnEff");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Ability_aura");
+	m_spTexture->AddTexture(L"Ability_aura");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 	m_spTransform->SetSize(_float3(0.05f, 0.05f, 0.05f));		
 }
 
@@ -62,9 +67,6 @@ void CMonsterSpawnEff::Update()
 		this->SetDeleteThis(true);
 	}
 	m_spTransform->AddRotationY(30.f * GET_DT);
-	/*m_spTransform->AddSizeX(1.f * GET_DT);
-	m_spTransform->AddSizeY(1.f * GET_DT);
-	m_spTransform->AddSizeZ(1.f * GET_DT);*/
 
 	m_fAlpha -= 1.f * GET_DT;
 }

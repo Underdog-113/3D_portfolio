@@ -41,20 +41,30 @@ SP(Engine::CObject) CBronya_Impact::MakeClone()
 void CBronya_Impact::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Impact");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
 }
 
 void CBronya_Impact::Start()
 {
 	__super::Start();
 
+	_float3 size = { 16.f, 10.f, 16.f };
+
 	SP(Engine::CObject) spImpactRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_Ring", true);
+	spImpactRing->GetTransform()->SetSize(size);
 	spImpactRing->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
-	spImpactRing->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y - 0.07f);
+	spImpactRing->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y - 0.45f);
 
 	SP(Engine::CObject) spImpactTriRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_TripleRing", true);
+	spImpactTriRing->GetTransform()->SetSize(size);
 	spImpactTriRing->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
-	spImpactTriRing->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y - 0.07f);
+	spImpactTriRing->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y - 0.45f);
 
 	m_fAlpha = 1.f;
 }
@@ -87,6 +97,8 @@ void CBronya_Impact::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->CommitChanges();
 }
 
 void CBronya_Impact::Render(LPD3DXEFFECT pEffect)

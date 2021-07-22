@@ -43,7 +43,7 @@ void CSpiderExplosion::Awake(void)
 	m_spTransform->AddRotationX(D3DXToRadian(180));
 	m_spMesh->SetMeshData(L"Ganesha_Dome");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spTexture->AddTexture(L"Wave01");
 	m_spTexture->AddTexture(L"Spider_Explosion_1");
@@ -92,6 +92,7 @@ void CSpiderExplosion::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("gTrailCheck", false);
 	pEffect->SetBool("g_zWriteEnabled", true);
 	pEffect->CommitChanges();
 }

@@ -32,6 +32,12 @@ void CBronyaStunPattern::Pattern(Engine::CObject* pOwner)
 	if (0.f >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurBreakGauge() &&
 		false == m_onStun)
 	{
+		if (Name_Weak != fsm->GetCurStateString())
+		{
+			fsm->ChangeState(Name_Weak);
+			return;
+		}
+
 		// 약공격을 받았으면
 		if (true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL())
 		{

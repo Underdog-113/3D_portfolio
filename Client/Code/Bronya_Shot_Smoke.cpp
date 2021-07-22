@@ -28,7 +28,7 @@ SP(Engine::CObject) CBronya_Shot_Smoke::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetRotationZ(D3DXToRadian(90.f));
+	//spClone->m_spTransform->SetRotationZ(D3DXToRadian(90.f));
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -40,7 +40,12 @@ SP(Engine::CObject) CBronya_Shot_Smoke::MakeClone()
 void CBronya_Shot_Smoke::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Cloud");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Shot_Smoke::Start()

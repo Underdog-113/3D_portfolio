@@ -39,10 +39,17 @@ SP(Engine::CObject) CMonsterSpawnBeam::MakeClone()
 void CMonsterSpawnBeam::Awake()
 {
 	__super::Awake();
-	//m_spTransform->SetPositionY(10.f);
+	m_spMesh->SetMeshData(L"SpawnBeam");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Portal_beam_4");
+	m_spTexture->AddTexture(L"Portal_beam_4");
+	m_spTexture->AddTexture(L"Portal_beam_4");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spCollision = AddComponent<Engine::CCollisionC>();
+	m_spCollision->
+		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, 0, 1), 2.5f));
 	m_spTransform->SetRotationX(D3DXToRadian(90.f));
 
-	m_spCollision = AddComponent<Engine::CCollisionC>();
 }
 
 void CMonsterSpawnBeam::Start()
@@ -120,13 +127,8 @@ void CMonsterSpawnBeam::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
 	SP(Engine::CObject) spMeshEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterSpawnEff", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"SpawnEff");
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ability_aura");
-	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ability_aura");
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(ci.hitPoint);
 
+	spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(ci.hitPoint);
 	m_spMonster->SetIsEnabled(true);
 
 	m_bSpawn = true;

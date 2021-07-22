@@ -42,7 +42,12 @@ SP(Engine::CObject) CScoutCircleRange::MakeClone()
 void CScoutCircleRange::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"AttackRange_Circle");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"BonusShield_3");
+	m_spTexture->AddTexture(L"Sign");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CScoutCircleRange::Start()

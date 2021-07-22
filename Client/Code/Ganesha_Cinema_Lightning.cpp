@@ -45,7 +45,7 @@ void CGanesha_Cinema_Lightning::Awake(void)
 	m_spTexture->AddTexture(L"Sign");
 	m_spTexture->AddTexture(L"Lighting01");
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 
 }
 
@@ -70,8 +70,9 @@ void CGanesha_Cinema_Lightning::Start(void)
 		break;
 	}
 
-	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::Ganesha_Cinema)
+	//if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::Ganesha_Cinema)
 		m_spTransform->AddRotationZ(D3DXToRadian(rand() % 90 + 45));
+
 
 	m_fAlphaWidth = 1.f;
 	m_fAlphaHeight = 4.f;

@@ -40,6 +40,12 @@ SP(Engine::CObject) CBronya_Ult_Range::MakeClone()
 void CBronya_Ult_Range::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"AttackRange_Circle");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"FrameRed");
+	m_spTexture->AddTexture(L"AttackHint_Circle_02");
+	m_spShader->AddShader((_int)EShaderID::AttackRangeShader);
 	m_spTransform->SetSize(_float3(0.2f, 0.2f, 0.2f));
 
 }

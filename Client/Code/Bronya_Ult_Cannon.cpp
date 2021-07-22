@@ -40,7 +40,12 @@ SP(Engine::CObject) CBronya_Ult_Cannon::MakeClone()
 void CBronya_Ult_Cannon::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Cannon");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"ring");
+	m_spTexture->AddTexture(L"ring");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_Ult_Cannon::Start()

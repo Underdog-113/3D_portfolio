@@ -99,7 +99,7 @@ public:
 protected:
 	GETTOR_SETTOR	(SP(CTransformC),	m_spParent,					nullptr,			Parent)
 	
-	GETTOR_SETTOR	(const _mat*,		m_pParentMatrix,			nullptr,			ParentMatrix)
+	GETTOR_SETTOR	(_mat*,				m_pParentMatrix,			nullptr,			ParentMatrix)
 	GETTOR_SETTOR	(_mat,				m_parentRotMatrix,			{},					ParentRotMatrix)
 	
 	//GETTOR			(_mat,				m_lastRotMatrix,			{},					LastRotMatrix)
