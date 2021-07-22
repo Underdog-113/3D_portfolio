@@ -41,6 +41,7 @@
 #include "MB_Bronya.h"
 #include "Bronya_Weapon.h"
 #include "BronyaBullet.h"
+#include "BronyaGrenade.h"
 #include "Monster.h"
 #include "OJ_Box.h"
 
@@ -382,6 +383,9 @@ void CStaticScene::InitMonsterPrototypes(void)
 	SP(CBronyaBullet) spBronyaBullet(CBronyaBullet::Create(true, this));
 	ADD_PROTOTYPE(spBronyaBullet);
 
+	SP(CBronyaGrenade) spBronyaGrenade(CBronyaGrenade::Create(true, this));
+	ADD_PROTOTYPE(spBronyaGrenade);
+
 	SP(CMonster) spOJ_Box(COJ_Box::Create(true, this));
 	GetObjectFactory()->AddPrototype(spOJ_Box);
 }
@@ -706,6 +710,13 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spBronya_Grenade_TriRing(CBronya_Grenade_TriRing::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spBronya_Grenade_TriRing);
 
+	//SP(CMeshEffect_Client) spBronya_Grenade(CBronya_Grenade::Create(true, this));
+	//spBronya_Grenade->GetComponent<Engine::CMeshC>()->SetMeshData(L"Bronya_Throw01_Grenade01");
+	//spBronya_Grenade->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
+	//spBronya_Grenade->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	//spBronya_Grenade->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	//spBronya_Grenade->GetComponent<Engine::CTextureC>()->AddTexture(L"Grenade_Explosion");
+	//spBronya_Grenade->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 	SP(CMeshEffect_Client) spBronya_Grenade(CBronya_Grenade::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spBronya_Grenade);
 
