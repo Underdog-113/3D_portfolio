@@ -5,7 +5,6 @@
 
 class CMapObject2D;
 class CMonster;
-class CStage_Wall;
 
 class CPhaseChanger final : public Engine::CObject
 {
@@ -36,7 +35,7 @@ public:
 				void				OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
 
 public:
-				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine, SP(CStage_Wall) spEffect);
+				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine);
 				void				AddMonster			(SP(CMonster) spMonster);
 private:
 				void				SetBasicName		(void) override;

@@ -176,10 +176,9 @@ void CPhaseChanger::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 {
 }
 
-void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine, SP(CStage_Wall) spEffect)
+void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine)
 {
-	//spRestrictLine->SetIsEnabled(false);
-	spRestrictLine->SetWallEffect(spEffect);
+	spRestrictLine->SetIsEnabled(false);
 	m_vRestrictLine.emplace_back(spRestrictLine);
 }
 

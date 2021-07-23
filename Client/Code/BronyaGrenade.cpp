@@ -4,6 +4,8 @@
 #include "MB_Bronya.h"
 #include "AttackBall.h"
 
+#include "Bronya_Grenade.h"
+
 CBronyaGrenade::CBronyaGrenade()
 {
 }
@@ -66,7 +68,7 @@ void CBronyaGrenade::Start(void)
 	{
 		BaseStat stat;
 		stat.SetBaseHp(100.f);
-		stat.SetBaseAtk(35.f);
+		stat.SetBaseAtk(128.f);
 		stat.SetBaseDef(1.f);
 
 		stat.SetGrowHp(1.f);
@@ -81,8 +83,6 @@ void CBronyaGrenade::Start(void)
 	m_pAttackBall->SetOwner(this);
 
 	m_pBronya = static_cast<CMB_Bronya*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Bronya").get());
-
-	//m_spRigidBody->SetUseGravity(false);
 }
 
 void CBronyaGrenade::FixedUpdate(void)
@@ -94,28 +94,58 @@ void CBronyaGrenade::Update(void)
 {
 	__super::Update();
 
-	if (true == m_isEnabled)
+	if (true == m_isEnabled && true == m_onBoomReady)
 	{
-		m_grenadeMat = m_spTransform->GetWorldMatrix();
+		switch (index)
+		{
+		case 0:
+			m_spTransform->AddPositionX(GET_DT * -1.8f);
+			m_spTransform->AddPosition(m_dir * GET_DT * 5.f);
+			break;
+		case 1:
+			m_spTransform->AddPosition(m_dir * GET_DT * 3.f);
+			break;
+		case 2:
+			m_spTransform->AddPositionX(GET_DT * 1.2f);
+			m_spTransform->AddPosition(m_dir * GET_DT * 4.f);
+			break;
+		}
+	}
 
-		//m_accTime += GET_DT;
+	if (false == m_onBoomReady)
+	{
+		m_accTime += GET_DT;
 
-		//if (m_accTime < m_maxTime)
-		//{
-		//	m_spTransform->AddPositionX(m_x * GET_DT * 1.2f);
-		//	m_spTransform->AddPositionY(m_y * GET_DT * 1.2f);
-		//	m_spTransform->AddPosition(m_dir * GET_DT * m_speed);
-		//}
-		//else
-		//{
-		//	UnActiveAttackBall();
-		//	m_accTime = 0.f;
-		//	m_isEnabled = false;
-		//}
+		if (m_accTime >= 1.4f &&
+			true == m_onAttackBall)
+		{
+			m_accTime = 0.f;
 
-		//_float pos = m_spTransform->GetPosition().x * GET_DT * 1.f;
-		//m_spTransform->AddPositionX(GET_DT * 1.f);
-		m_spTransform->AddPosition(m_dir * GET_DT);
+			UnActiveAttackBall();
+			m_bounceCount = 2;
+			m_onAttackBall = false;
+			m_onBoomReady = true;
+			m_isEnabled = false;
+
+			std::cout << "End" << std::endl;
+		}
+		else if (m_accTime >= 1.3f &&
+			false == m_onAttackBall)
+		{
+			
+			m_onAttackBall = true;
+
+			std::cout << "Boom!" << std::endl;
+
+			m_grenadeMat = m_spTransform->GetWorldMatrix();
+			ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_grenadeMat, 0.55f);
+
+			// boom effect
+			std::cout << "Effect!" << std::endl;
+			SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade", true);
+			effect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		}
+		
 	}
 }
 
@@ -170,31 +200,35 @@ void CBronyaGrenade::OnCollisionEnter(Engine::_CollisionInfo ci)
 	//중력 상수 세팅 코드
 	m_spRigidBody->SetGravityConstant(2.f); 
 
-	//바닥이랑
+	//바닥이랑 충돌
 	if (ci.pMyCollider->GetColliderType() == (_int)Engine::EColliderType::Ray)
 	{
 		if (ci.normal.y < -0.5f)
 		{
-			if (m_bounceCount > 0)
+			if (m_bounceCount > 1)
 			{
-				m_spRigidBody->SetVelocityY(5.f);
+				m_spRigidBody->SetVelocityY(5.5f);
 				--m_bounceCount;
-				std::cout << "AddForceY" << std::endl;
+				//std::cout << "AddForceY" << std::endl;
+			}
+			else if (m_bounceCount > 0)
+			{
+				m_spRigidBody->SetVelocityY(3.5f);
+				--m_bounceCount;
+				//std::cout << "AddForceY" << std::endl;
 			}
 			else
 			{
-				//터트림
 				//enabled를 끄고 다시 초기세팅 해주고
-				std::cout << "Boom" << std::endl;
-				m_isEnabled = false;
+				TurnOffRigidbodyCollisionSetting();
+				m_onBoomReady = false;
 			}
 		}
 		else
 		{
-			//터트림
 			//enabled를 끄고 다시 초기세팅 해주고
-			std::cout << "Boom" << std::endl;
-			m_isEnabled = false;
+			TurnOffRigidbodyCollisionSetting();
+			m_onBoomReady = false;
 		}
 	}
 }
@@ -203,6 +237,10 @@ void CBronyaGrenade::OnCollisionStay(Engine::_CollisionInfo ci)
 {
 	__super::OnCollisionStay(ci);
 
+	if (ci.pMyCollider->GetColliderType() == (_int)Engine::EColliderType::Ray)
+	{
+		std::cout << "충돌 중" << std::endl;
+	}
 }
 
 void CBronyaGrenade::OnCollisionExit(Engine::_CollisionInfo ci)
@@ -229,4 +267,13 @@ void CBronyaGrenade::ActiveAttackBall(_float damageRate, HitInfo::Strength stren
 void CBronyaGrenade::UnActiveAttackBall()
 {
 	m_pAttackBall->SetIsEnabled(false);
+}
+
+void CBronyaGrenade::TurnOffRigidbodyCollisionSetting()
+{
+	m_spRigidBody->SetVelocity(ZERO_VECTOR);
+	m_spRigidBody->SetForce(ZERO_VECTOR);
+	m_spRigidBody->SetUseGravity(false);
+	m_spRigidBody->SetIsEnabled(false);
+	m_spCollision->SetIsEnabled(false);
 }

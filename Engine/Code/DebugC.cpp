@@ -37,19 +37,19 @@ void CDebugC::Start(SP(CComponent) spThis)
 	//	m_spBV->SetOwner(m_pOwner);
 	//}
 
-	//SP(CCollisionC) spOwnerCC = m_pOwner->GetComponent<CCollisionC>();
-	//if (spOwnerCC != nullptr)
-	//{
-	//	m_vDebugCollider.resize(spOwnerCC->GetColliders().size());
-	//	const std::vector<SP(CCollider)>& vOwnerColliders = spOwnerCC->GetColliders();
-	//	for (_size i = 0; i < m_vDebugCollider.size(); ++i)
-	//	{
-	//		m_vDebugCollider[i] = 
-	//			std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
-	//		m_vDebugCollider[i]->SetOwner(m_pOwner);
-	//		m_vDebugCollider[i]->SetCollider(vOwnerColliders[i].get());
-	//	}
-	//}
+	SP(CCollisionC) spOwnerCC = m_pOwner->GetComponent<CCollisionC>();
+	if (spOwnerCC != nullptr)
+	{
+		m_vDebugCollider.resize(spOwnerCC->GetColliders().size());
+		const std::vector<SP(CCollider)>& vOwnerColliders = spOwnerCC->GetColliders();
+		for (_size i = 0; i < m_vDebugCollider.size(); ++i)
+		{
+			m_vDebugCollider[i] =
+				std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
+			m_vDebugCollider[i]->SetOwner(m_pOwner);
+			m_vDebugCollider[i]->SetCollider(vOwnerColliders[i].get());
+		}
+	}
 }
 
 void CDebugC::FixedUpdate(SP(CComponent) spThis)

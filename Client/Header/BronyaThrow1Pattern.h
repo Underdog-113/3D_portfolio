@@ -18,6 +18,7 @@ public:
 
 private:
 	void GetRHandMat(Engine::CObject* pOwner, _mat* pAtkBall);
+	void SetupSmokeEffectPos(std::wstring texName, _float3 mPos, _float addY);
 
 private:
 	//_float m_cost = 15.f;
@@ -35,6 +36,7 @@ private:
 	_bool m_onAtk = false;
 	_bool m_onAtkBall = false;
 	_bool m_onFastIdle = false;
+	_bool m_onSmokeEffect = false;
 
 	_mat m_atkMat;
 	_mat* m_pRHand;

@@ -50,8 +50,23 @@ void CBronya_Grenade::Awake()
 void CBronya_Grenade::Start()
 {
 	__super::Start();
-	m_fAlpha = 1.f;
-	m_fTime = 0.f;
+	
+	_float3 size = { 5.1f, 5.1f, 5.1f };
+
+	SP(Engine::CObject) spDome = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Dome", true);
+	spDome->GetTransform()->SetSize(_float3(2.85f, 2.85f, 2.85f));
+	spDome->GetTransform()->SetPosition(m_spTransform->GetPosition());
+	spDome->GetTransform()->SetPositionY(m_spTransform->GetPosition().y - 0.2f);
+
+	SP(Engine::CObject) spImpact = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Impact", true);
+	spImpact->GetTransform()->SetSize(size);
+	spImpact->GetTransform()->SetPosition(m_spTransform->GetPosition());
+
+	SP(Engine::CObject) spTriRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_TriRing", true);
+	spTriRing->GetTransform()->SetSize(size);
+	spTriRing->GetTransform()->SetPosition(m_spTransform->GetPosition());
+	spTriRing->GetTransform()->SetPositionY(m_spTransform->GetPosition().y - 0.07f);
+
 }
 
 void CBronya_Grenade::FixedUpdate()
@@ -63,23 +78,7 @@ void CBronya_Grenade::Update()
 {
 	__super::Update();
 
-	if (m_fTime >= 2.5f)
-	{
-		SP(Engine::CObject) spDome = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Dome", true);
-		spDome->GetTransform()->SetPosition(m_spTransform->GetPosition());
-		spDome->GetTransform()->SetPositionY(m_spTransform->GetPosition().y - 0.07f);
-
-		SP(Engine::CObject) spImpact = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Impact", true);
-		spImpact->GetTransform()->SetPosition(m_spTransform->GetPosition());
-
-		SP(Engine::CObject) spTriRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_TriRing", true);
-		spTriRing->GetTransform()->SetPosition(m_spTransform->GetPosition());
-		spTriRing->GetTransform()->SetPositionY(m_spTransform->GetPosition().y - 0.07f);
-
-		this->SetDeleteThis(true);
-	}
-
-	m_fTime += GET_DT;
+	this->SetDeleteThis(true);		
 
 }
 
@@ -91,21 +90,15 @@ void CBronya_Grenade::LateUpdate()
 
 void CBronya_Grenade::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PreRender(m_spGraphics, pEffect);
-	pEffect->SetFloat("gAlpha", m_fAlpha);
-
-	pEffect->CommitChanges();
 }
 
 void CBronya_Grenade::Render(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->Render(m_spGraphics, pEffect);
 
 }
 
 void CBronya_Grenade::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spMesh->PostRender(m_spGraphics, pEffect);
 
 }
 

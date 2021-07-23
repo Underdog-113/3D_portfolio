@@ -64,7 +64,7 @@ void CBronya_Grenade_Dome::Update()
 {
 	__super::Update();
 
-	if (this->GetTransform()->GetSize().x >= 1.5f)
+	if (this->GetTransform()->GetSize().x >= 3.5f)
 	{
 		this->SetDeleteThis(true);
 	}

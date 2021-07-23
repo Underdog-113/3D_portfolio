@@ -55,7 +55,6 @@ void CAlphaMaskShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	m_pEffect->SetVector("gWorldLightPosition", &worldLightPos);
 
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
-
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 }

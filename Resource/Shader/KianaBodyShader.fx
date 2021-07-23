@@ -95,7 +95,7 @@ technique Default_Device
 	{
 		alphablendenable = true;
 		srcblend = srcalpha;
-		destblend = invsrcalpha;
+		destblend = zero;
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 		CullMode = CCW;
