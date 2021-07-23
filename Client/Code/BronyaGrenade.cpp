@@ -35,6 +35,8 @@ SP(Engine::CObject) CBronyaGrenade::MakeClone(void)
 	spClone->m_spShader		= spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture	= spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRigidBody	= spClone->GetComponent<Engine::CRigidBodyC>();
+	spClone->m_spCollision	= spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug		= spClone->GetComponent<Engine::CDebugC>();
 
 	return spClone;
 }
@@ -51,6 +53,9 @@ void CBronyaGrenade::Awake(void)
 	m_spGraphics	= AddComponent<Engine::CGraphicsC>();
 	m_spShader		= AddComponent<Engine::CShaderC>();
 	m_spTexture		= AddComponent<Engine::CTextureC>();
+	m_spCollision	= AddComponent<Engine::CCollisionC>();
+	m_spRigidBody	= AddComponent<Engine::CRigidBodyC>();
+	m_spDebug		= AddComponent<Engine::CDebugC>();
 }
 
 void CBronyaGrenade::Start(void)
@@ -76,6 +81,8 @@ void CBronyaGrenade::Start(void)
 	m_pAttackBall->SetOwner(this);
 
 	m_pBronya = static_cast<CMB_Bronya*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Bronya").get());
+
+	//m_spRigidBody->SetUseGravity(false);
 }
 
 void CBronyaGrenade::FixedUpdate(void)
@@ -108,6 +115,7 @@ void CBronyaGrenade::Update(void)
 
 		//_float pos = m_spTransform->GetPosition().x * GET_DT * 1.f;
 		//m_spTransform->AddPositionX(GET_DT * 1.f);
+		m_spTransform->AddPosition(m_dir * GET_DT);
 	}
 }
 
@@ -155,52 +163,52 @@ void CBronyaGrenade::OnDisable(void)
 
 void CBronyaGrenade::OnCollisionEnter(Engine::_CollisionInfo ci)
 {
-	//__super::OnCollisionEnter(ci);
+	__super::OnCollisionEnter(ci);
 
-	//////튕기는 총알
-	//
-	////중력 상수 세팅 코드
-	//m_spRigidBody->SetGravityConstant(2.f);
+	////튕기는 총알
+	
+	//중력 상수 세팅 코드
+	m_spRigidBody->SetGravityConstant(2.f); 
 
-	////최대 몇번 튕길건지를 변수로 저장
-	//_int m_bounceCount = 2;
-
-	////바닥이랑
-	//if (ci.pMyCollider->GetColliderType() == (_int)Engine::EColliderType::Ray)
-	//{
-	//	if (ci.normal.y < -0.8f)
-	//	{
-	//		if (m_bounceCount > 0)
-	//		{
-	//			m_spRigidBody->AddForceY(0.2f);
-	//			--m_bounceCount;
-	//		}
-	//		else
-	//		{
-	//			//터트림
-	//			//enabled를 끄고 다시 초기세팅 해주고
-	//			std::cout << "Boom" << std::endl;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		//터트림
-	//		//enabled를 끄고 다시 초기세팅 해주고
-	//		std::cout << "Boom" << std::endl;
-
-	//		m_dir;
-	//		m_speed;
-
-	//	}
-	//}
+	//바닥이랑
+	if (ci.pMyCollider->GetColliderType() == (_int)Engine::EColliderType::Ray)
+	{
+		if (ci.normal.y < -0.5f)
+		{
+			if (m_bounceCount > 0)
+			{
+				m_spRigidBody->SetVelocityY(5.f);
+				--m_bounceCount;
+				std::cout << "AddForceY" << std::endl;
+			}
+			else
+			{
+				//터트림
+				//enabled를 끄고 다시 초기세팅 해주고
+				std::cout << "Boom" << std::endl;
+				m_isEnabled = false;
+			}
+		}
+		else
+		{
+			//터트림
+			//enabled를 끄고 다시 초기세팅 해주고
+			std::cout << "Boom" << std::endl;
+			m_isEnabled = false;
+		}
+	}
 }
 
 void CBronyaGrenade::OnCollisionStay(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionStay(ci);
+
 }
 
 void CBronyaGrenade::OnCollisionExit(Engine::_CollisionInfo ci)
 {
+	__super::OnCollisionExit(ci);
+
 }
 
 void CBronyaGrenade::SetBasicName(void)

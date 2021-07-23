@@ -42,12 +42,16 @@ void CMO_Spider::Awake(void)
 	__super::Awake();	
 
 	m_spStateMachine = AddComponent<CFSM_SpiderC>();
-	m_spPatternMachine->AddNecessaryPatterns(CSpiderBornPattern::Create(), CSpiderDiePattern::Create(), CSpiderBasePattern::Create(), CSpiderHitPattern::Create());
 }
 
 void CMO_Spider::Start(void)
 {
 	__super::Start();
+
+	m_spPatternMachine->AddNecessaryPatterns(CSpiderBornPattern::Create(), 
+		CSpiderDiePattern::Create(), 
+		CSpiderBasePattern::Create(), 
+		CSpiderHitPattern::Create());
 
 	m_spTransform->SetRotationY(D3DXToRadian(90));
 	

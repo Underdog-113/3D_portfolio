@@ -245,6 +245,7 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+    <ClInclude Include="..\Header\GaneshaStunPattern.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
     <ClInclude Include="..\Header\MousePointC.h" />
@@ -640,6 +641,7 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+    <ClCompile Include="..\Code\GaneshaStunPattern.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
     <ClCompile Include="..\Code\MousePointC.cpp" />

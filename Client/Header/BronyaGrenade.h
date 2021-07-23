@@ -53,6 +53,8 @@ protected:
 	GETTOR			(SP(Engine::CGraphicsC),		m_spGraphics,		nullptr,	Graphics)
 	GETTOR			(SP(Engine::CShaderC),			m_spShader,			nullptr,	Shader)
 	GETTOR			(SP(Engine::CRigidBodyC),		m_spRigidBody,		nullptr,	RigidBody)
+	GETTOR			(SP(Engine::CCollisionC),		m_spCollision,		nullptr,	Collision)
+	GETTOR			(SP(Engine::CDebugC),			m_spDebug,			nullptr,	Debug)
 	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 	GETTOR			(_float,						m_speed,			22.f,		Speed)
 	GETTOR			(_float,						m_accTime,			0.f,		AccTime)
@@ -68,6 +70,7 @@ protected:
 
 	_float m_x = 0.f;
 	_float m_y = 0.f;
+	_int m_bounceCount = 2; //최대 몇번 튕길건지를 변수로 저장
 
 	CMB_Bronya* m_pBronya = nullptr;
 

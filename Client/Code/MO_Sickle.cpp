@@ -39,17 +39,18 @@ void CMO_Sickle::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_SickleC>();
+}
+
+void CMO_Sickle::Start(void)
+{
+	__super::Start();
+
 	m_spPatternMachine->AddNecessaryPatterns(CSickleBornPattern::Create(), 
 											 CSickleDiePattern::Create(), 
 											 CSickleBasePattern::Create(),
 											 CSickleHitPattern::Create(), 
 											 CSickleAirbornePattern::Create(),
 											 CSickleStunPattern::Create());
-}
-
-void CMO_Sickle::Start(void)
-{
-	__super::Start();
 
 	//m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -58,7 +59,6 @@ void CMO_Sickle::Start(void)
 
 	BaseStat stat;
 	stat.SetBaseHp(2445.f);
-	//stat.SetBaseHp(445.f);
 	stat.SetBaseAtk(36.f);
 	stat.SetBaseDef(12.f);
 

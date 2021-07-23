@@ -67,7 +67,8 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	if (len > m_atkDis)
 	{
 		// 내가 stamp 상태면
-		if (Name_Ganesha_Stamp == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
 			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
@@ -75,7 +76,8 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
-		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Run);
 		}
@@ -103,7 +105,8 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	// 내가 stamp 상태라면 뒤로 이동
-	if (Name_Ganesha_Stamp == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
 	{
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
 		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
@@ -113,7 +116,9 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		m_spEffect->SetDeleteThis(true);
 	}
 	// 내가 뒤로 이동 중이라면
-	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)
+	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_walkReady)
 	{
 		_float3 dir = tPos - mPos;
 
@@ -121,7 +126,9 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		pOwner->GetTransform()->SetPosition(mPos);
 	}
 	// 내가 뒤로 이동이 끝났다면
-	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
+	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_walkReady)
 	{
 		++m_jumpCnt;
 
@@ -134,6 +141,19 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			fsm->ChangeState(Name_Ganesha_StandBy);
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		}
+
+		// effect
+		_float fX = 0;
+		for (_int i = 0; i < 8; ++i)
+		{
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
+
+			// Ganesha Pos X + fX 
+			spObj->GetTransform()->SetPositionX(mPos.x + fX - 1.3f);
+			spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
+			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 1.f);
+			fX += 0.5f;
 		}
 	}
 

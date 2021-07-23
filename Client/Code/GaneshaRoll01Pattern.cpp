@@ -64,7 +64,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 	if (len > m_atkDis)
 	{
 		// 내가 roll1 상태면
-		if (Name_Ganesha_Roll01 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		if (Name_Ganesha_Roll01 == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
 			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
@@ -73,7 +74,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			m_onRunStart = false;
 		}
 		// 내가 대기 상태면 이동 애니로 변경
-		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
+		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() &&
+			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Run);
 		}
@@ -124,7 +126,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 	}
 	// 내가 뒤로 이동이 끝났다면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
-		0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_walkReady)
 	{
 		++m_jumpCnt;
 
@@ -137,6 +140,19 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->ChangeState(Name_Ganesha_StandBy);
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		}
+
+		// effect
+		_float fX = 0;
+		for (_int i = 0; i < 8; ++i)
+		{
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
+
+			// Ganesha Pos X + fX 
+			spObj->GetTransform()->SetPositionX(mPos.x + fX - 1.3f);
+			spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
+			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 1.f);
+			fX += 0.5f;
 		}
 	}
 
