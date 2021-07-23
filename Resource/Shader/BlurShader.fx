@@ -39,7 +39,8 @@ struct PS_INPUT
 
 struct PS_OUTPUT
 {
-	float4 diffuse : COLOR;
+	float4 diffuse : COLOR0;
+	float4 final : COLOR1;
 };
 
 float pixelKernel[13] =
@@ -110,11 +111,6 @@ PS_OUTPUT PS_Vertical(PS_INPUT IN)
 
 	Out.diffuse = color;
 
-	//if (color.x > 0.25f || color.y > 0.25f || color.z > 0.25f)
-	//	Out.diffuse.a = 1.f;
-	//else
-	//	Out.diffuse.a = 0.f;
-
 	return Out;
 }
 
@@ -135,13 +131,11 @@ PS_OUTPUT PS_Horizontal(PS_INPUT  IN)
 				 * blurWeights[i];
 	}
 
+	if (color.x < 0.01f && color.y < 0.01f && color.z < 0.01f)
+		color.a = 0.f;
 
 	Out.diffuse = color;
-	//if (color.x > 0.25f || color.y > 0.25f || color.z > 0.25f)
-	//	Out.diffuse.a = 1.f;
-	//else
-	//	Out.diffuse.a = 0.f;
-
+	Out.final = color;
 	return Out;
 }
 
@@ -158,7 +152,7 @@ technique DefaultTechnique
 	Pass HorizontalPass
 	{
 		zwriteenable = false;
-		//VertexShader = compile vs_3_0 VS_Main_Default();
+		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Horizontal();
 	}
 };

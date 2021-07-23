@@ -42,12 +42,14 @@
     <ClInclude Include="..\Header\DeferredLightShader.h" />
     <ClInclude Include="..\Header\DeviceManager.h" />
     <ClInclude Include="..\Header\DynamicMeshData.h" />
+    <ClInclude Include="..\Header\EmissionShader.h" />
     <ClInclude Include="..\Header\EmptyObject.h" />
     <ClInclude Include="..\Header\Engine.h" />
     <ClInclude Include="..\Header\EngineComponents.h" />
     <ClInclude Include="..\Header\EngineExtern.h" />
     <ClInclude Include="..\Header\EngineTypedef.h" />
     <ClInclude Include="..\Header\FadeInOutC.h" />
+    <ClInclude Include="..\Header\FinalShader.h" />
     <ClInclude Include="..\Header\Frustum.h" />
     <ClInclude Include="..\Header\Grid.h" />
     <ClInclude Include="..\Header\HierarchyLoader.h" />
@@ -139,9 +141,11 @@
     <ClCompile Include="..\Code\DeferredLightShader.cpp" />
     <ClCompile Include="..\Code\DeviceManager.cpp" />
     <ClCompile Include="..\Code\DynamicMeshData.cpp" />
+    <ClCompile Include="..\Code\EmissionShader.cpp" />
     <ClCompile Include="..\Code\EmptyObject.cpp" />
     <ClCompile Include="..\Code\Engine.cpp" />
     <ClCompile Include="..\Code\FadeInOutC.cpp" />
+    <ClCompile Include="..\Code\FinalShader.cpp" />
     <ClCompile Include="..\Code\Frustum.cpp" />
     <ClCompile Include="..\Code\Grid.cpp" />
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
@@ -220,6 +224,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DeferredLightShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\EmissionShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\FinalShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

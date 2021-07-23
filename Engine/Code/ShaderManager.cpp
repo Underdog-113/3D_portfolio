@@ -15,6 +15,8 @@
 #include "MeshAlphaTestShader.h"
 #include "BlurShader.h"
 #include "ShadowShader.h"
+#include "FinalShader.h"
+#include "EmissionShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -79,6 +81,8 @@ void CShaderManager::InitShaderList(_uint numOfShader)
 	AddKeyAndShader(CMeshAlphaTestShader::Create(),		L"MeshAlphaTestShader",		(_uint)EShaderID::MeshAlphaTestShader);
 	AddKeyAndShader(CBlurShader::Create(),				L"BlurShader",				(_uint)EShaderID::BlurShader);
 	AddKeyAndShader(CShadowShader::Create(),			L"ShadowShader",			(_uint)EShaderID::ShadowShader);
+	AddKeyAndShader(CEmissionShader::Create(),			L"EmissionShader",			(_uint)EShaderID::EmissionShader);
+	AddKeyAndShader(CFinalShader::Create(),				L"FinalShader",				(_uint)EShaderID::FinalShader);
 }
 
 void CShaderManager::AddKeyAndShader(CShader * pShader, std::wstring shaderKey, _uint ID)
