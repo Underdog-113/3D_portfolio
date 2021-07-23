@@ -15,6 +15,7 @@ void CRenderTargetManager::Awake(void)
 
 	pDevice->GetViewport(&viewport);
 
+	AddRenderTarget(L"Target_Final", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.2f, 0.6f, 0.4f, 0))->InitDebugRT(3, 0);
 	//Add render targets
 #pragma region BasicRT
 	AddRenderTarget(L"Target_Albedo", viewport.Width, viewport.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.6f, 0.3f, 0.3f, 0))->InitDebugRT(0, 0);

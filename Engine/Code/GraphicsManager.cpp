@@ -65,15 +65,19 @@ void CGraphicsManager::Render(void)
 	
 	//Deferred Start
 	RenderNonAlpha();
+	RenderAlphaTest();
 	RenderEffect();
-	RenderBlur();
-	//RenderEmissive();
 	RenderLights();
 	//Deferred End
 	RenderDeferBlend();
 	
-	RenderWire();
-	RenderAlphaTest();
+	//RenderWire();
+	
+	
+	RenderBlur();
+	RenderEmissive();
+
+	RenderFinal();
 	RenderAlphaBlend();
 	RenderParticle();
 	RenderUI();
@@ -430,6 +434,31 @@ void CGraphicsManager::RenderBlurToRT(CRenderTarget * pInputRT, CRenderTarget * 
 
 void CGraphicsManager::RenderEmissive(void)
 {
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	CShader* pEmissionShader = GET_SHADER((_int)EShaderID::EmissionShader);
+	pEmissionShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pEmissionShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_Final");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Emissive", "g_Emissive");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv2_Fin", "g_EmissionBlur2");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv4_Fin", "g_EmissionBlur4");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv8_Fin", "g_EmissionBlur8");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv16_Fin", "g_EmissionBlur16");
+
+	pEffect->Begin(nullptr, 0);
+	pEffect->BeginPass(0);
+
+	pDevice->SetStreamSource(0, m_pBlurVertexBuffer, 0, sizeof(_VertexScreen));
+	pDevice->SetFVF(FVF_SCR);
+
+	pDevice->SetIndices(m_pBlurIndexBuffer);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+	pEffect->End();
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
 void CGraphicsManager::RenderLights(void)
@@ -476,6 +505,8 @@ void CGraphicsManager::RenderDeferBlend(void)
 
 	pEffect->EndPass();
 	pEffect->End();
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
 void CGraphicsManager::RenderWire(void)
@@ -713,4 +744,26 @@ void CGraphicsManager::RenderUI(void)
 	}
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+}
+
+void CGraphicsManager::RenderFinal(void)
+{
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	CShader* pFinalShader = GET_SHADER((_int)EShaderID::FinalShader);
+	pFinalShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pFinalShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_FinalTexture");
+
+	pEffect->Begin(NULL, 0);
+	pEffect->BeginPass(0);
+
+	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
+	pDevice->SetFVF(FVF_SCR);
+
+	pDevice->SetIndices(m_pIndexBuffer);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+	pEffect->End();
 }

@@ -104,21 +104,21 @@ PS_OUT		PS_MAIN(PS_IN In)
 	vector vAlbedo = saturate(tex2D(AlbedoSampler, In.vTexUV));
 	vector vShade = saturate(tex2D(ShadeSampler, In.vTexUV));
 	vector vSpecular = saturate(tex2D(SpecularSampler, In.vTexUV));
-	vector vBlurDiv2 = saturate(tex2D(BlurDiv2Sampler, In.vTexUV));
+	/*vector vBlurDiv2 = saturate(tex2D(BlurDiv2Sampler, In.vTexUV));
 	vector vBlurDiv4 = saturate(tex2D(BlurDiv4Sampler, In.vTexUV));
 	vector vBlurDiv8 = saturate(tex2D(BlurDiv8Sampler, In.vTexUV));
 	vector vBlurDiv16 = saturate(tex2D(BlurDiv16Sampler, In.vTexUV));
-	vector blurColor = vBlurDiv2 + vBlurDiv4 + vBlurDiv8 + vBlurDiv16;
+	vector blurColor = vBlurDiv2 + vBlurDiv4 + vBlurDiv8 + vBlurDiv16;*/
 	
 	
 	//Out.vColor = saturate(vAlbedo * vShade + blurColor);// +vSpecular;
 	//Out.vColor.a = 1;
 
 	
-	if (blurColor.a == 0)
-		Out.vColor = saturate(vector(vAlbedo * vShade));// +vSpecular;
-	else
-		Out.vColor = saturate(vector(vAlbedo * vShade + blurColor));
+	//if (blurColor.a == 0)
+	//	Out.vColor = saturate(vector(vAlbedo * vShade));// +vSpecular;
+	//else
+	//	Out.vColor = saturate(vector(vAlbedo * vShade + blurColor));
 
 
 	//else if (blurColor.a > 0.f)
@@ -129,6 +129,8 @@ PS_OUT		PS_MAIN(PS_IN In)
 	//	Out.vColor = saturate(Out.vColor + blurColor);
 
 	////Out.vColor.a = 1;
+
+	Out.vColor = saturate(vAlbedo * vShade);
 	return Out;
 }
 
@@ -136,6 +138,7 @@ technique Default_Device
 {
 	pass
 	{
+		blendop = add;
 		alphablendenable = true;
 		srcblend = srcalpha;
 		destblend = invsrcalpha;
