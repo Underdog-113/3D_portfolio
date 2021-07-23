@@ -29,7 +29,8 @@ void CDeferredBlendShader::Free(void)
 void CDeferredBlendShader::Awake(void)
 {
 	__super::Awake();
-	
+	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Final");
 }
 
 void CDeferredBlendShader::SetUpConstantTable(SP(CGraphicsC) spGC)

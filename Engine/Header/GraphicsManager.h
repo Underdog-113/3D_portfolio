@@ -52,6 +52,7 @@ private:
 			void                    RenderParticle		(void);
 			void                    RenderEffect		(void);
 			void					RenderUI			(void);
+			void					RenderFinal			(void);
 			
 
 
