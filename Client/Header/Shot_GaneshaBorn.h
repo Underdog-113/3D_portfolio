@@ -27,5 +27,7 @@ private:
 	_double m_animPosition = 0;
 
 	_float m_prevPlayTime = 0.f;
+
+	_bool m_isSound = false;
 };
 

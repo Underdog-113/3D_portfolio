@@ -34,6 +34,9 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_WhiteFadeIn)
 	SAFE_DELETE(m_pShot_WhiteFadeOut)
 	SAFE_DELETE(m_pShot_BlackFadeIn)
+	SAFE_DELETE(m_pShot_BlackFadeIn_SubCh1)
+	SAFE_DELETE(m_pShot_BlackFadeOut)
+	SAFE_DELETE(m_pShot_BlackFadeOut_SubCh1)
 	SAFE_DELETE(m_pShot_RotateAround)
 	SAFE_DELETE(m_pShot_RotateYaw)
 	SAFE_DELETE(m_pShot_RotateYaw_SubCh1)
@@ -48,6 +51,7 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_MovePivot)
 	SAFE_DELETE(m_pShot_MovePivot_SubCh1)
 	SAFE_DELETE(m_pShot_MovePivot_SubCh2)
+	SAFE_DELETE(m_pShot_MovePivot_SubCh3)
 	SAFE_DELETE(m_pShot_Shake)
 	SAFE_DELETE(m_pShot_Victory)
 	SAFE_DELETE(m_pShot_GaneshaBorn)
@@ -154,7 +158,9 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_WhiteFadeOut = new CShot_WhiteFadeOut;
 
 	m_pShot_BlackFadeIn = new CShot_BlackFadeIn;
+	m_pShot_BlackFadeIn_SubCh1 = new CShot_BlackFadeIn;
 	m_pShot_BlackFadeOut = new CShot_BlackFadeOut;
+	m_pShot_BlackFadeOut_SubCh1 = new CShot_BlackFadeOut;
 
 	m_pShot_RotateAround = new CShot_RotateAround;
 	m_pShot_RotateYaw = new CShot_RotateYaw;
@@ -171,6 +177,7 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_MovePivot = new CShot_MovePivot;
 	m_pShot_MovePivot_SubCh1 = new CShot_MovePivot;
 	m_pShot_MovePivot_SubCh2 = new CShot_MovePivot;
+	m_pShot_MovePivot_SubCh3 = new CShot_MovePivot;
 	m_pShot_Shake = new CShot_Shake;
 
 	m_pShot_Victory = new CShot_ActorVictory;
@@ -256,6 +263,10 @@ void CMovieDirector::CreateTake_GaneshaBorn()
 	pTake->AddShot(ShotName_Shake, m_pShot_Shake);	
 	CreateGanshaBornShakeChannel();
 
+	pTake->AddShot(ShotName_MovePivot_SubCh3, m_pShot_MovePivot_SubCh3);
+	pTake->AddShot(ShotName_BlackFadeIn_SubCh1, m_pShot_BlackFadeIn_SubCh1);
+	pTake->AddShot(ShotName_BlackFadeOut_SubCh1, m_pShot_BlackFadeOut_SubCh1);
+
 	m_takeMap.emplace(TakeName_GaneshaBorn, pTake);
 }
 
@@ -283,8 +294,34 @@ void CMovieDirector::CreateGanshaBornShakeChannel()
 
 }
 
-void CMovieDirector::StartTake_BlackFadeInOut()
+void CMovieDirector::StartTake_BlackFadeIn()
 {
+	auto pTake = m_takeMap[TakeName_SimpleBlackFadeIn];
+	m_spBlackFadeImage->SetIsEnabled(true);
+
+	CShot_BlackFadeOut::Desc blo_desc;
+	blo_desc.pBlackFade = m_pBlackFade;
+	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.5f, &blo_desc, 0.f);
+
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
+}
+
+void CMovieDirector::StartTake_BlackFadeOut()
+{
+	auto pTake = m_takeMap[TakeName_SimpleBlackFadeOut];
+	m_spBlackFadeImage->SetIsEnabled(true);
+
+	CShot_BlackFadeOut::Desc blo_desc;
+	blo_desc.pBlackFade = m_pBlackFade;
+	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.5f, &blo_desc, 0.f);
+
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
 }
 
 void CMovieDirector::StartTake_Failure()
@@ -386,7 +423,7 @@ void CMovieDirector::StartTake_GaneshBorn()
 	pTake->ReadyShot(ShotName_MovePivot, 0.5f, 1.f, &mp_desc, 0.5f);
 	
 	CShot_GaneshaBorn::Desc gb_desc;
-	pTake->ReadyShot(ShotName_GaneshaBorn, 0.43f, 12.f, &gb_desc, 0.43f);
+	pTake->ReadyShot(ShotName_GaneshaBorn, 0.43f, 10.1f, &gb_desc, 0.43f);
 	
 	// start ~ before jump
 	CShot_BlackFadeOut::Desc blo_desc;
@@ -451,6 +488,17 @@ void CMovieDirector::StartTake_GaneshBorn()
 	shake_desc.shakeChannel = m_pGaneshaShakeChannel;
 	pTake->ReadyShot(ShotName_Shake, 7.25f, 8.9f, &shake_desc, 7.25f);
 
+	CShot_BlackFadeOut::Desc blo_sub1_desc;
+	blo_sub1_desc.pBlackFade = m_pBlackFade;
+	pTake->ReadyShot(ShotName_BlackFadeOut_SubCh1, 9.5f, 10.f, &blo_sub1_desc, 9.5f);
+
+	CShot_BlackFadeIn::Desc bfi_sub1_desc;
+	bfi_sub1_desc.pBlackFade = m_pBlackFade;
+	pTake->ReadyShot(ShotName_BlackFadeIn_SubCh1, 10.1f, 10.35f, &bfi_sub1_desc, 10.1f);
+
+	CShot_MovePivot::Desc mp_sub3_desc;
+	mp_sub3_desc.pTargetTransform = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform().get();
+	pTake->ReadyShot(ShotName_MovePivot_SubCh3, 10.1f, 10.1f, &mp_sub3_desc, 10.1f);
 
 	m_pCurTake = pTake;
 

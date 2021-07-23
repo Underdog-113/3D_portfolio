@@ -33,7 +33,7 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	// 내가 born 상태이고, 애니가 끝났다면
-	if (Name_Ganesha_Born == fsm->GetCurStateString() && fsm->GetDM()->GetAniTimeline() > 0.9)
+	if (Name_Ganesha_Born == fsm->GetCurStateString() && fsm->GetDM()->GetAniTimeline() > 0.95)
 	{
 		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
 		fsm->ChangeState(Name_Ganesha_StandBy);

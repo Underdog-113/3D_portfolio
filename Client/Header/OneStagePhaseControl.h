@@ -13,14 +13,15 @@ public:
 		Conversation		,
 		BeforeFirstFight1	,
 		FirstFight1Begin	,
-		FirstFight1End	,
+		FirstFight1End		,
 		FirstFight2Begin	,
 		FirstFight2End		,
 		BeforeMidBoss		,
+		WarningAlarm		,	// Add
 		MidBossBegin		,
-		MidBossEnd,
-		ReadyVictoryCutScene,
-		VictoryCutScene,
+		MidBossEnd			,
+		WinningSlow			,	// ReadyVictoryCutScene -> WinningSlow
+		VictoryMovie		,	// VictoryCutScene -> VictoryMovie
 		StageResult			,
 		StageResult_Idle	,
 		NumOfPhse			

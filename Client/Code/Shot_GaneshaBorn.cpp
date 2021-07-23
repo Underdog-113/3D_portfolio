@@ -32,11 +32,21 @@ void CShot_GaneshaBorn::Enter()
 	//m_pActorAniCtrl->ChangeAniSet_NoBlend(m_victoryAnimIndex);
 	//m_pGanesha->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Born");
 	m_pGanesha->SetIsEnabled(true);
+	m_isSound = false;
+
+	Engine::CSoundManager::GetInstance()->StopAll();
 }
 
 void CShot_GaneshaBorn::Action()
 {
 	CShot::Action();
+
+	if (!m_isSound && m_pOnAirTake->GetPlayTimer() > 1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f)
+	{
+		Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Intro.wav", (_uint)EChannelID::PLAYEREFFECT_CH2);
+		m_isSound = true;
+	}
+		
 
 	if (m_prevPlayTime < m_pOnAirTake->GetPlayTimer())
 		m_pActorAniCtrl->PlayOnMovie(GET_DT);
@@ -47,6 +57,12 @@ void CShot_GaneshaBorn::Action()
 void CShot_GaneshaBorn::Cut()
 {
 	m_pActorAniCtrl->SetIsMovieOn(false);
+
+	Engine::CSoundManager::GetInstance()->StopAll();
+	Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
+	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+
+	CStageControlTower::GetInstance()->SetDirectorMode(false);
 }
 
 void CShot_GaneshaBorn::Rollback()

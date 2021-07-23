@@ -87,9 +87,9 @@ void CTwoStagePhaseControl::Update(void)
 			m_spGanesha->GetTransform()->SetPosition(-46.f, 14.5f, 0.f);
 
 			//Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Ganesha")->SetIsEnabled();
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
-			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+// 			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+// 			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
+// 			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 			m_isSoundChange = true;
 
 			// movie

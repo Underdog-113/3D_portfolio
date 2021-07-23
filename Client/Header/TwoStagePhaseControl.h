@@ -19,6 +19,7 @@ public:
 		BossMovie			,
 		Boss				,
 		BossEnd				,
+		WinningSlow			,
 		VictoryMovie		,
 		StageResult			,
 		StageResult_Idle	,

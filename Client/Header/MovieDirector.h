@@ -2,10 +2,12 @@
 
 #include "CameraShake.h"
 
-#define ShotName_WhiteFadeIn		L"WhiteFadeIn"
-#define ShotName_WhiteFadeOut		L"WhiteFadeOut"
-#define ShotName_BlackFadeIn		L"BlackFadeIn"
-#define ShotName_BlackFadeOut		L"BlackFadeOut"
+#define ShotName_WhiteFadeIn			L"WhiteFadeIn"
+#define ShotName_WhiteFadeOut			L"WhiteFadeOut"
+#define ShotName_BlackFadeIn			L"BlackFadeIn"
+#define ShotName_BlackFadeIn_SubCh1		L"BlackFadeIn_SubCh1"
+#define ShotName_BlackFadeOut			L"BlackFadeOut"
+#define ShotName_BlackFadeOut_SubCh1	L"BlackFadeOut_SubCh1"
 
 #define ShotName_RotateAround		L"RotateAround"
 #define ShotName_RotateYaw			L"RotateYaw"
@@ -22,12 +24,14 @@
 #define ShotName_MovePivot			L"MovePivot"
 #define ShotName_MovePivot_SubCh1	L"MovePivot_SubCh1"
 #define ShotName_MovePivot_SubCh2	L"MovePivot_SubCh2"
+#define ShotName_MovePivot_SubCh3	L"MovePivot_SubCh3"
 #define ShotName_Shake				L"Shake"
 
 #define ShotName_Victory			L"Victory"
 #define ShotName_GaneshaBorn		L"GaneshaBorn"
 
-
+#define TakeName_SimpleBlackFadeIn	L"BlackFadeIn"
+#define TakeName_SimpleBlackFadeOut L"BlackFadeOut"
 #define TakeName_Failure			L"Failure"
 
 #define TakeName_SakuraVictory		L"SakuraVictory"
@@ -61,7 +65,8 @@ public:
 	void CreateGanshaBornShakeChannel();
 
 public:
-	void StartTake_BlackFadeInOut();
+	void StartTake_BlackFadeIn();
+	void StartTake_BlackFadeOut();
 
 	void StartTake_Failure();
 	void StartTake_SakuraVictory();
@@ -97,7 +102,9 @@ private:
 	CShot* m_pShot_WhiteFadeOut = nullptr;
 
 	CShot* m_pShot_BlackFadeIn = nullptr;
+	CShot* m_pShot_BlackFadeIn_SubCh1 = nullptr;
 	CShot* m_pShot_BlackFadeOut = nullptr;
+	CShot* m_pShot_BlackFadeOut_SubCh1 = nullptr;
 
 	CShot* m_pShot_RotateAround = nullptr;
 	CShot* m_pShot_RotateYaw = nullptr;
@@ -114,6 +121,7 @@ private:
 	CShot* m_pShot_MovePivot = nullptr;
 	CShot* m_pShot_MovePivot_SubCh1 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh2 = nullptr;
+	CShot* m_pShot_MovePivot_SubCh3 = nullptr;
 	CShot* m_pShot_Shake = nullptr;
 
 	CShot* m_pShot_Victory = nullptr;
