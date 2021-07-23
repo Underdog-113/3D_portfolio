@@ -121,8 +121,10 @@ void CSakura::Update(void)
 	if (m_infernoMode)
 	{
 		m_infernoTimer += GET_PLAYER_DT;
+		
 		if (m_infernoTimer > 10.f)
 		{
+			std::static_pointer_cast<CFSM_SakuraC>(m_spStateMachine)->GetSakuraParticle()->SetDeleteThis(true);
 			m_infernoMode = false;
 			CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::NoColoring);
 		}
@@ -221,6 +223,8 @@ void CSakura::UseUltra(void)
 {
 	_float curSp = m_pStat->GetCurSp();
 	curSp -= m_pStat->GetUltraCost();
+
+	
 
 	m_pStat->SetCurSp(curSp);
 	m_ultraTimer = 0.f;
