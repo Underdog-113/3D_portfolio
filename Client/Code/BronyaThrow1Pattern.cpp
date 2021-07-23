@@ -66,12 +66,54 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_IDLE == fsm->GetCurStateString() ||
 			Name_Run == fsm->GetCurStateString())
 		{
-			// throw1 상태로 변경
-			fsm->ChangeState(Name_Throw_1);
+			// throw2 상태로 변경
+			fsm->ChangeState(Name_Throw_2);
 			m_onAtkBall = false;
+			m_onSmokeEffect = false;
 
 			return;
 		}
+	}
+
+	/************************* throw2 */
+	// throw2 상태가 끝날 때 쯤 스모크 이펙트 생성
+	if (Name_Throw_2 == fsm->GetCurStateString() &&
+		0.5f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onSmokeEffect)
+	{
+		// smoke effect
+		for (_int i = 0; i < 3; ++i)
+		{
+			_int iRand = rand() % 4;
+
+			switch (iRand)
+			{
+			case 0:
+				SetupSmokeEffectPos(L"fx_snowfield_fog03", mPos, 0.3f);
+				break;
+			case 1:
+				SetupSmokeEffectPos(L"fx_snowfield_fog03", mPos, 0.7f);
+				break;
+			case 2:
+				SetupSmokeEffectPos(L"fx_snowfield_fog03", mPos, 0.2f);
+				break;
+			case 3:
+				SetupSmokeEffectPos(L"fx_snowfield_fog03", mPos, 0.2f);
+				break; 			
+			}
+		}
+
+		m_onSmokeEffect = true;
+
+		return;
+	}
+	// throw2 상태가 끝났다면
+	else if (Name_Throw_2 == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		// throw1 상태로 변경
+		fsm->ChangeState(Name_Throw_1);
+		return;
 	}
 
 	/************************* throw1 End */
@@ -94,19 +136,22 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
 		GetRHandMat(pOwner, m_pAttackBallMat);
 
-		for (_int i = 0; i < /*m_grenadeCnt*/1; ++i)
+		for (_int i = 0; i < m_grenadeCnt; ++i)
 		{
 			auto& grenade = static_cast<CMB_Bronya*>(pOwner)->GetGrenades()[i];
 
+			grenade->SetIndex(i);
 			grenade->GetTransform()->SetPosition(_float3(m_pAttackBallMat->_41, m_pAttackBallMat->_42, m_pAttackBallMat->_43));
 
 			m_dir = mPos - tPos;
-			
 			D3DXVec3Normalize(&m_dir, &m_dir);
 
 			grenade->GetTransform()->SetForward(m_dir);
 			grenade->SetDir(-m_dir);
 			grenade->SetIsEnabled(true);
+			grenade->GetRigidBody()->SetUseGravity(true);
+			grenade->GetRigidBody()->SetIsEnabled(true);
+			grenade->GetCollision()->SetIsEnabled(true);
 		}
 
 		m_onAtkBall = true;
@@ -129,4 +174,16 @@ void CBronyaThrow1Pattern::GetRHandMat(Engine::CObject * pOwner, _mat * pAtkBall
 	combMat._43 -= rootMotionPos.z;
 
 	*pAtkBall = combMat * pOwner->GetTransform()->GetWorldMatrix();
+}
+
+void CBronyaThrow1Pattern::SetupSmokeEffectPos(std::wstring texName, _float3 mPos, _float addY)
+{
+	SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_RandomSmoke", true);
+	_float3 pos = { mPos.x + _float(rand() % 3 - 1.5f),
+					mPos.y + _float(rand() % 1) + addY,
+					mPos.z + _float(rand() % 3) };
+
+	effect->GetTransform()->SetPosition(pos);
+	effect->GetComponent<Engine::CTextureC>()->AddTexture(texName);
+	effect->GetComponent<Engine::CTextureC>()->AddTexture(texName);
 }

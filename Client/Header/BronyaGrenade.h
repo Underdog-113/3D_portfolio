@@ -46,6 +46,9 @@ public:
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
 
+private:
+	void TurnOffRigidbodyCollisionSetting();
+
 protected:
 	static			_uint							m_s_uniqueID;
 	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)
@@ -67,6 +70,7 @@ protected:
 	_mat m_grenadeMat;
 
 	_bool m_onAttackBall = false;
+	_bool m_onBoomReady = true;
 
 	_float m_x = 0.f;
 	_float m_y = 0.f;
@@ -75,6 +79,7 @@ protected:
 	CMB_Bronya* m_pBronya = nullptr;
 
 	GETTOR(M_Stat*, m_pStat, nullptr, Stat)
+	
 	GETTOR_SETTOR(_int, index, 0, Index)
 };
 

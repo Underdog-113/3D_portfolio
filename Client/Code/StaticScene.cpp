@@ -685,7 +685,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CSoftEffect) spBronyaFlashBangAS(CBronyaFlashBang_AS::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronyaFlashBangAS);
 
-	SP(CSoftEffect) spBronyaRandomSmoke(CBronya_RandomSmoke::Create(true, this));
+	SP(CMeshEffect_Client) spBronyaRandomSmoke(CBronya_RandomSmoke::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
 
 
