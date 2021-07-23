@@ -299,8 +299,7 @@ void CTransformC::SlerpXZ(void)
 	{
 		_float dotTwoForward = D3DXVec3Dot(&m_goalForward, &m_forward);
 		dotTwoForward = GET_MATH->RoundOffRange(dotTwoForward, 1);
-
-		_float includedAngle = acos(dotTwoForward);
+		_float includedAngle = acos(dotTwoForward);		
 
 		if (abs(includedAngle) < m_slerpSpeed * GET_DT)
 		{
@@ -310,13 +309,32 @@ void CTransformC::SlerpXZ(void)
 			return;
 		}
 
-		_float3 determinant;
+		D3DXQUATERNION qResult, qFrom, qTo;
+		_mat rotateX, rotateY, rotateZ, goalRotMat;
+
+		_float3 rotation = GetUpdatedRotation(m_goalForward);
+
+		D3DXMatrixRotationX(&rotateX, rotation.x);
+		D3DXMatrixRotationY(&rotateY, rotation.y);
+		D3DXMatrixRotationZ(&rotateZ, rotation.z);
+
+		goalRotMat = rotateX * rotateY * rotateZ;
+
+		D3DXQuaternionRotationMatrix(&qFrom, &m_rotMatrix);
+		D3DXQuaternionRotationMatrix(&qTo, &goalRotMat);
+
+
+		D3DXQuaternionSlerp(&qResult, &qFrom, &qTo, (m_slerpSpeed * GET_DT) / includedAngle);
+
+		m_rotation = GET_MATH->QuatToRad(qResult);
+		UpdateForward();
+		/*_float3 determinant;
 		D3DXVec3Cross(&determinant, &m_forward, &m_goalForward);
 
 		if (determinant.y < 0)
 			AddRotationY(-m_slerpSpeed * GET_DT);
 		else
-			AddRotationY(m_slerpSpeed * GET_DT);
+			AddRotationY(m_slerpSpeed * GET_DT);*/
 	}
 }
 
@@ -422,6 +440,63 @@ void CTransformC::UpdateRotation(void)
 		else
 			m_rotation = _float3(D3DXToRadian(-90), 0, 0);
 	}
+}
+
+_float3 CTransformC::GetUpdatedRotation(_float3 forward)
+{
+	_float3 rotation;
+	_float3 withoutY;
+	_mat yRot;
+	if (abs(forward.y) + EPSILON < 1.f)
+	{
+		withoutY = _float3(forward.x, 0.f, forward.z);
+		D3DXVec3Normalize(&withoutY, &withoutY);
+		_float dotCheck = D3DXVec3Dot(&withoutY, &FORWARD_VECTOR);
+		dotCheck = GET_MATH->RoundOffRange(dotCheck, 1);
+
+		_float yRotAngle = acosf(dotCheck);
+
+		_float3 crossResult;
+		D3DXVec3Cross(&crossResult, &FORWARD_VECTOR, &withoutY);
+
+		if (crossResult.y < 0)
+			yRotAngle *= -1;
+
+		D3DXMatrixRotationAxis(&yRot, &UP_VECTOR, yRotAngle);
+
+		D3DXVec3Cross(&m_right, &UP_VECTOR, &forward);
+		dotCheck = D3DXVec3Dot(&withoutY, &forward);
+		dotCheck = GET_MATH->RoundOffRange(dotCheck, 1);
+
+		_float rightRotAngle = acosf(dotCheck);
+		if (forward.y >= 0)
+			rightRotAngle *= -1;
+
+		_mat rightRot;
+		D3DXMatrixRotationAxis(&rightRot, &m_right, rightRotAngle);
+
+		_mat rotMatrix = yRot * rightRot;
+
+		_quat rotQuat;
+		D3DXQuaternionRotationMatrix(&rotQuat, &rotMatrix);
+		D3DXQuaternionNormalize(&rotQuat, &rotQuat);
+
+
+		rotation = GET_MATH->QuatToRad(rotQuat);
+		if (abs(rotation.x) < EPSILON)
+			rotation.x = 0;
+		if (abs(rotation.z) < EPSILON)
+			rotation.z = 0;
+	}
+	else
+	{
+		if (forward.y > 0)
+			rotation = _float3(D3DXToRadian(90), 0, 0);
+		else
+			rotation = _float3(D3DXToRadian(-90), 0, 0);
+	}
+
+	return rotation;
 }
 
 void CTransformC::UpdateRotationWithUp(void)
