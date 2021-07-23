@@ -105,6 +105,8 @@ void CKiana_Ult_Eff::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetBool("gPlayingAnim", false);
+	pEffect->SetBool("gPlayingAnim_UpDown", false);
 	pEffect->CommitChanges();
 }
 

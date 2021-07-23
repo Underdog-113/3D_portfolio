@@ -166,7 +166,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 	{
 		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
 		Out.vColor = float4(diffuse, multiple);
-		Out.vEmissive = float4(float4(diffuse, multiple).rgb, gAlpha);
+		Out.vEmissive = float4(float4(diffuse, multiple).rgb, gAlpha - 0.2f);
 
 		return Out;
 	}
