@@ -69,6 +69,7 @@ void CScout_Att_Range_Hold::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_bAlphaCtrl", false);
+	pEffect->CommitChanges();
 }
 
 void CScout_Att_Range_Hold::Render(LPD3DXEFFECT pEffect)

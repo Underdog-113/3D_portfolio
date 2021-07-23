@@ -63,9 +63,8 @@ void CRobotDiePattern::Pattern(Engine::CObject* pOwner)
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
 	
 		m_spSoftEffect->GetTransform()->SetPosition(mPos);
-		m_spSoftEffect->GetTransform()->SetPositionX(mPos.x - 0.3f);
-		m_spSoftEffect->GetTransform()->SetPositionY(mPos.y + 1.5f);
-		m_spSoftEffect->GetTransform()->SetSize(16.f, 14.f, 0.f);
+		m_spSoftEffect->GetTransform()->AddPositionY(0.1f);
+		m_spSoftEffect->GetTransform()->AddSize(_float3(2.f, 2.f, 2.f));
 	}
 
 	///************************* Delete this */

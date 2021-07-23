@@ -140,12 +140,6 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 	{
 		SP(Engine::CObject) spMeshEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sickle_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Sickle_Attack");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BloomMask");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"AttackTrail_01");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Eff_Noise_08");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 		//spMeshEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
 		spMeshEffect->GetTransform()->SetRotation(pOwner->GetTransform()->GetRotation());
 		spMeshEffect->GetTransform()->AddRotationY(PI);

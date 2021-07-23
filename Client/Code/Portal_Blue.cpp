@@ -46,7 +46,7 @@ void CPortal_Blue::Awake()
 	m_spTexture->AddTexture(L"BlueprintBG");
 	m_spTexture->AddTexture(L"AttackHint_Circle_04");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
-	_float _size = 2.f;
+	_float _size = 4.f;
 	m_spTransform->SetSize(_float3(_size, _size + 2.f, _size));
 }
 
@@ -100,9 +100,8 @@ void CPortal_Blue::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", m_fUVSpeed);
-	pEffect->SetBool("gPlayingAnim_UpDown", true);
+	pEffect->SetBool("gPlayingAnim", true);
 	pEffect->SetBool("g_zWriteEnabled", false);
-
 	pEffect->CommitChanges();
 }
 

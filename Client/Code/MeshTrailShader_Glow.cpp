@@ -1,38 +1,40 @@
 #include "stdafx.h"
-#include "..\Header\DissolveShader.h"
+#include "..\Header\MeshTrailShader_Glow.h"
 
 
-CDissolveShader::CDissolveShader()
+CMeshTrailShader_Glow::CMeshTrailShader_Glow()
 {
 }
 
 
-CDissolveShader::~CDissolveShader()
+CMeshTrailShader_Glow::~CMeshTrailShader_Glow()
 {
 }
 
-Engine::CShader * CDissolveShader::Create()
+Engine::CShader * CMeshTrailShader_Glow::Create()
 {
-	CDissolveShader* pInstance = new CDissolveShader;
+	CMeshTrailShader_Glow* pInstance = new CMeshTrailShader_Glow;
 	pInstance->Awake();
-
+	
 	return pInstance;
 }
 
-void CDissolveShader::Free()
+void CMeshTrailShader_Glow::Free()
 {
 	__super::Free();
+
 }
 
-void CDissolveShader::Awake()
+void CMeshTrailShader_Glow::Awake()
 {
 	__super::Awake();
+	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
+	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CMeshTrailShader_Glow::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
-	// Add Alpha variables to objects that use this shader.
-	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
 	__super::SetUpConstantTable(spGC);
 	_mat worldMat, viewMat, projMat, WVP;
 
@@ -52,7 +54,6 @@ void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	_mat iTWM;
 	D3DXMatrixInverse(&iTWM, 0, &worldMat);
 	D3DXMatrixTranspose(&iTWM, &iTWM);
-
 	m_pEffect->SetMatrix("gInvWorldMatrix", &worldMat);
 
 	_float4 worldLightPos = _float4(500.f, 500.f, -500.f, 1.f);
@@ -62,6 +63,6 @@ void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	SP(Engine::CTextureC) spTexture = spGC->GetTexture();
 
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
-	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
-	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][2]->pTexture);
+	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
+	m_pEffect->SetTexture("g_AlphaTex", spTexture->GetTexData()[spTexture->GetSetIndex()][2]->pTexture);
 }

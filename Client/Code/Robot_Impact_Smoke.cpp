@@ -39,18 +39,19 @@ SP(Engine::CObject) CRobot_Impact_Smoke::MakeClone()
 void CRobot_Impact_Smoke::Awake()
 {
 	__super::Awake();
-	m_spMesh->SetMeshData(L"Robot_Impact");
+	m_spMesh->SetMeshData(L"Bronya_Impact_TripleRing");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
-	m_spTexture->AddTexture(L"Gray");
-	m_spTexture->AddTexture(L"Austerity");
-	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spTexture->AddTexture(L"Eff_Noise_08");
+	m_spTexture->AddTexture(L"machineSmoke_3");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader_Glow);
 }
 
 void CRobot_Impact_Smoke::Start()
 {
 	__super::Start();
-	m_fAlpha = 1.3f;
+	m_fAlpha = 0.6f;
 	m_fTime = 0.f;
 }
 
@@ -71,9 +72,9 @@ void CRobot_Impact_Smoke::Update()
 
 	_float3 _size = _float3(0.5f, 0.5f, 0.5f);
 
-	m_fAlpha -= 0.3f * GET_DT;
+	m_fAlpha -= 0.8f * GET_DT;
 	m_fTime += 0.2f * GET_DT;
-	m_spTransform->AddSize(_size * GET_DT);
+	m_spTransform->AddSize(_size * GET_DT * 3.5f);
 }
 
 void CRobot_Impact_Smoke::LateUpdate()
@@ -86,8 +87,8 @@ void CRobot_Impact_Smoke::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-	pEffect->SetFloat("gSpeed", m_fTime);
-	pEffect->SetBool("gPlayingAnim", true);
+	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->CommitChanges();
 }
 
 void CRobot_Impact_Smoke::Render(LPD3DXEFFECT pEffect)
