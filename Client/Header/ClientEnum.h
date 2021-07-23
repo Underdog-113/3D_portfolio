@@ -79,7 +79,9 @@ enum class EShaderID
 	KianaBodyShader		   = 14 + (_int)Engine::EShaderID::NumOfShaderID,
 	AlphaMaskGlowShader    = 15 + (_int)Engine::EShaderID::NumOfShaderID,
 	SoftEffectShader_Glow  = 16 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		   = 17 + (_int)Engine::EShaderID::NumOfShaderID
+	MeshTrailShader_Glow   = 17 + (_int)Engine::EShaderID::NumOfShaderID,
+	DissolveShader_Glow    = 18 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID		   = 19 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

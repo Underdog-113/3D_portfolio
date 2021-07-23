@@ -45,8 +45,8 @@ void CPortal_Circle::Awake()
 	m_spTexture->AddTexture(L"Portal_Circle");
 	m_spTexture->AddTexture(L"Portal_Circle");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
-	//_float _size = 1.3f;
-	//m_spTransform->SetSize(_float3(_size, _size, _size));
+	_float _size = 1.f;
+	m_spTransform->SetSize(_float3(_size, _size, _size));
 
 }
 

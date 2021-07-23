@@ -245,6 +245,9 @@
     <ClInclude Include="..\Header\Button.h" />
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
+<ClInclude Include="..\Header\DissolveShader_Glow.h" />
+<ClInclude Include="..\Header\MeshTrailShader_Glow.h" />
+    <ClInclude Include="..\Header\GaneshaStunPattern.h" />
     <ClInclude Include="..\Header\DropItemManager.h" />
     <ClInclude Include="..\Header\GachBoxC.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
@@ -642,6 +645,9 @@
     <ClCompile Include="..\Code\Button.cpp" />
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
+<ClCompile Include="..\Code\DissolveShader_Glow.cpp" />
+<ClCompile Include="..\Code\MeshTrailShader_Glow.cpp" />
+    <ClCompile Include="..\Code\GaneshaStunPattern.cpp" />
     <ClCompile Include="..\Code\DropItemManager.cpp" />
     <ClCompile Include="..\Code\GachBoxC.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
@@ -1008,6 +1014,10 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader_Glow.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
@@ -1033,6 +1043,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader_Glow.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

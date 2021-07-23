@@ -79,6 +79,8 @@ void CDecoObject::LateUpdate(void)
 void CDecoObject::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("gAlpha", 0.5f);
+	pEffect->CommitChanges();
 }
 
 

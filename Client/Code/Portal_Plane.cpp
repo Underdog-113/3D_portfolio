@@ -46,7 +46,7 @@ void CPortal_Plane::Awake()
 	m_spTexture->AddTexture(L"Portal_Plane_Color");
 	m_spTexture->AddTexture(L"Portal_Plane_Color");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
-	_float _size = 0.05f;
+	_float _size = 0.08f;
 	m_spTransform->SetSize(_size, _size, _size);
 
 }
@@ -78,7 +78,7 @@ void CPortal_Plane::Update()
 {
 	__super::Update();
 
-	m_spTransform->AddRotation(m_spTransform->GetUp() * GET_DT * 10.f);
+	m_spTransform->AddRotation(m_spTransform->GetUp() * GET_DT * 6.f);
 }
 
 void CPortal_Plane::LateUpdate()

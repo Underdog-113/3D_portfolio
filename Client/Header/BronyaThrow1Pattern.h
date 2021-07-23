@@ -34,6 +34,7 @@ private:
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
 	_bool m_onAtkBall = false;
+	_bool m_onFastIdle = false;
 
 	_mat m_atkMat;
 	_mat* m_pRHand;

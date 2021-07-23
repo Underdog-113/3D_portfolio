@@ -28,9 +28,6 @@ SP(Engine::CObject) CScout_Laser::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	spClone->m_spTransform->SetSizeX(1.f);
-	spClone->m_spTransform->SetSizeY(1.f);
-	spClone->m_spTransform->SetSizeZ(1.f);
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
@@ -42,13 +39,20 @@ SP(Engine::CObject) CScout_Laser::MakeClone()
 void CScout_Laser::Awake()
 {
 	__super::Awake();
-
+	m_spTransform->SetSizeX(1.f);
+	m_spTransform->SetSizeY(1.f);
+	m_spTransform->SetSizeZ(1.f);
+	m_spMesh->SetMeshData(L"Scout_Laser");
+	m_spTexture->AddTexture(L"BallColor");
+	m_spTexture->AddTexture(L"BallColor");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 }
 
 void CScout_Laser::Start()
 {
 	__super::Start();
-	m_fAlpha = 0.1f;
+	m_fAlpha = 1.f;
 
 }
 
@@ -81,24 +85,22 @@ void CScout_Laser::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_bAlphaCtrl", false);
+	pEffect->CommitChanges();
 }
 
 void CScout_Laser::Render(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->Render(m_spGraphics, pEffect);
-
 }
 
 void CScout_Laser::PostRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PostRender(m_spGraphics, pEffect);
-
 }
 
 void CScout_Laser::OnDestroy()
 {
 	__super::OnDestroy();
-
 }
 
 void CScout_Laser::OnEnable()

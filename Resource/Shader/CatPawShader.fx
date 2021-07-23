@@ -81,8 +81,18 @@ struct PS_INPUT
 
 };
 
-float4 ps_main(PS_INPUT Input) : COLOR
+struct PS_OUTPUT
 {
+	vector		vColor : COLOR0;
+	vector		vNormal : COLOR1;
+	vector		vDepth	: COLOR2;
+	vector		vEmissive : COLOR3;
+};
+
+PS_OUTPUT ps_main(PS_INPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
 	// ºûÀÇ °­µµ
 	float intensity = dot(normalize(gWorldLightPosition.xy), Input.mUV);
 
@@ -99,9 +109,10 @@ float4 ps_main(PS_INPUT Input) : COLOR
 	diffuse = ceil(diffuse * intensity * 5) / 5.0f;
 
 	float rim = saturate(abs(dot(Input.mNormal, gViewDir)));
-	float3 Emission = pow(1 - rim, gRimPower) * gRImColor.rgb;
+	Out.vColor = float4(albedo.xyz * diffuse, 1);
+	Out.vEmissive = float4(pow(1 - rim, gRimPower) * gRImColor);
 
-	return float4(albedo.xyz * diffuse, 1);
+	return Out;
 }
 
 

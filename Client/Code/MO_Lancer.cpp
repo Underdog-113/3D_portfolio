@@ -40,18 +40,19 @@ void CMO_Lancer::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_LancerC>();
-	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(), 
-		CLancerDiePattern::Create(), 
-		CLancerBasePattern::Create(), 
-		CLancerHitPattern::Create(),
-		CLancerAirbornePattern::Create());
-	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
 }
 
 void CMO_Lancer::Start(void)
 {
 	__super::Start();
 
+	m_spPatternMachine->AddNecessaryPatterns(CLancerBornPattern::Create(),
+		CLancerDiePattern::Create(),
+		CLancerBasePattern::Create(),
+		CLancerHitPattern::Create(),
+		CLancerAirbornePattern::Create());
+	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
+	
 	m_spTransform->SetSize(0.6f, 0.6f, 0.6f);
 	m_spTransform->SetSlerpSpeed(PI / 2);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));

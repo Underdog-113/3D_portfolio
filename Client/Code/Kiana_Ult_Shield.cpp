@@ -38,6 +38,11 @@ SP(Engine::CObject) CKiana_Ult_Shield::MakeClone()
 void CKiana_Ult_Shield::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"BurstShield");
+	m_spTexture->AddTexture(L"ExplosionWarning");
+	m_spTexture->AddTexture(L"ExplosionWarning");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CKiana_Ult_Shield::Start()

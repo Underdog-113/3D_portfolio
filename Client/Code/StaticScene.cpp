@@ -604,7 +604,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spRobotPlane(CRobot_Plane::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spRobotPlane);
 
-	SP(CSoftEffect) spRobotImpact(CRobot_Impact::Create(true, this));	
+	SP(CMeshEffect_Client) spRobotImpact(CRobot_Impact::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spRobotImpact);
 
 	SP(CMeshEffect_Client) spRobotImpactSmoke(CRobot_Impact_Smoke::Create(true, this));

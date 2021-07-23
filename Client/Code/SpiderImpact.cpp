@@ -43,7 +43,7 @@ void CSpiderImpact::Awake()
 	m_spTransform->SetSize(_float3(_size, 0.3f, _size));
 	m_spMesh->SetMeshData(L"Bronya_Impact");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spTexture->AddTexture(L"Wave01");
 	m_spTexture->AddTexture(L"Spider_Explosion_1");
@@ -54,7 +54,6 @@ void CSpiderImpact::Awake()
 void CSpiderImpact::Start()
 {
 	__super::Start();
-
 
 
 	m_fAlpha = 0.5f;

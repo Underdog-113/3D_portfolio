@@ -3,6 +3,8 @@
 
 #include "Object.h"
 
+class CStage_Wall;
+
 class CMapObject2D final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -41,5 +43,7 @@ private:
 	GETTOR		(SP(Engine::CGraphicsC),	m_spGraphics,		nullptr,	Graphics)
 	GETTOR		(SP(Engine::CCollisionC),	m_spCollision,		nullptr,	Collision)
 	GETTOR		(SP(Engine::CShaderC),		m_spShader,			nullptr,	Shader)
+
+	GETTOR_SETTOR	(SP(CStage_Wall), m_wallEffect, nullptr, WallEffect)
 };
 #endif

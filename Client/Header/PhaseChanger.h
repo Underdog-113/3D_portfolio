@@ -5,6 +5,8 @@
 
 class CMapObject2D;
 class CMonster;
+class CStage_Wall;
+
 class CPhaseChanger final : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -34,7 +36,7 @@ public:
 				void				OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
 
 public:
-				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine);
+				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine, SP(CStage_Wall) spEffect);
 				void				AddMonster			(SP(CMonster) spMonster);
 private:
 				void				SetBasicName		(void) override;

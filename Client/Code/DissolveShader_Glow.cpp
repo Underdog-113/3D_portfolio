@@ -1,35 +1,39 @@
 #include "stdafx.h"
-#include "..\Header\DissolveShader.h"
+#include "..\Header\DissolveShader_Glow.h"
 
 
-CDissolveShader::CDissolveShader()
+CDissolveShader_Glow::CDissolveShader_Glow()
 {
 }
 
 
-CDissolveShader::~CDissolveShader()
+CDissolveShader_Glow::~CDissolveShader_Glow()
 {
 }
 
-Engine::CShader * CDissolveShader::Create()
+Engine::CShader * CDissolveShader_Glow::Create()
 {
-	CDissolveShader* pInstance = new CDissolveShader;
+	CDissolveShader_Glow* pInstance = new CDissolveShader_Glow;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CDissolveShader::Free()
+void CDissolveShader_Glow::Free()
 {
 	__super::Free();
 }
 
-void CDissolveShader::Awake()
+void CDissolveShader_Glow::Awake()
 {
 	__super::Awake();
+
+	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
+	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CDissolveShader_Glow::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	// Add Alpha variables to objects that use this shader.
 	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.

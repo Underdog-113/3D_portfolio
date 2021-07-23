@@ -34,16 +34,17 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
 	/************************* Fast Idle */
-	if (Name_IDLE == fsm->GetCurStateString())
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onFastIdle)
 	{
-		if (fsm->GetDM()->IsAnimationEnd())
-		{
-			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
-		}
-		else
-		{
-			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.7f);
-		}
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.7f);
+		m_onFastIdle = true;
+	}
+	else if (Name_IDLE != fsm->GetCurStateString() &&
+		true == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		m_onFastIdle = false;
 	}
 
 	/************************* Range */
@@ -87,24 +88,24 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 
 	/************************* throw grenade */
 	if (Name_Throw_1 == fsm->GetCurStateString() &&
-		0.47f <= fsm->GetDM()->GetAniTimeline() &&
+		0.48f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onAtkBall)
 	{
 		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
 		GetRHandMat(pOwner, m_pAttackBallMat);
 
-		for (_int i = 0; i < m_grenadeCnt; ++i)
+		for (_int i = 0; i < /*m_grenadeCnt*/1; ++i)
 		{
 			auto& grenade = static_cast<CMB_Bronya*>(pOwner)->GetGrenades()[i];
 
 			grenade->GetTransform()->SetPosition(_float3(m_pAttackBallMat->_41, m_pAttackBallMat->_42, m_pAttackBallMat->_43));
 
-			m_dir = tPos - grenade->GetTransform()->GetPosition();
+			m_dir = mPos - tPos;
 			
 			D3DXVec3Normalize(&m_dir, &m_dir);
 
-			grenade->GetTransform()->SetForward(-m_dir);
-			grenade->SetDir(m_dir);
+			grenade->GetTransform()->SetForward(m_dir);
+			grenade->SetDir(-m_dir);
 			grenade->SetIsEnabled(true);
 		}
 

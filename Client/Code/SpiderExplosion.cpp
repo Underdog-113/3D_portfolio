@@ -47,7 +47,7 @@ void CSpiderExplosion::Awake(void)
 	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spTexture->AddTexture(L"Wave01");
 	m_spTexture->AddTexture(L"Spider_Explosion_1");
-	m_spShader->AddShader((_int)EShaderID::DissolveShader);
+	m_spShader->AddShader((_int)EShaderID::DissolveShader_Glow);
 }
 
 void CSpiderExplosion::Start(void)
@@ -56,7 +56,7 @@ void CSpiderExplosion::Start(void)
 
 
 	m_fSize = 0.f;
-	m_fAlpha = 0.7f;
+	m_fAlpha = 1.f;
 }
 
 void CSpiderExplosion::FixedUpdate(void)
@@ -77,7 +77,7 @@ void CSpiderExplosion::Update(void)
 
 	m_spTransform->AddSize(_float3(m_fSize, m_fSize, m_fSize));
 
-	m_fAlpha -= 0.6f * GET_DT;
+	m_fAlpha -=  0.7f * GET_DT;
 
 }
 
