@@ -3458,16 +3458,14 @@
     <ClCompile Include="..\Code\Shot_PushIn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Code\MeshTrailShader_Glow.cpp">
       <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DissolveShader_Glow.cpp">
       <Filter>04.Shader\05.DissolveShader\Glow</Filter>
-=======
+    </ClCompile>     
     <ClCompile Include="..\Code\GaneshaStunPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun</Filter>
->>>>>>> 144bbf250965ac1337f81362a9e2afae3dfc01fc
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
