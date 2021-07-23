@@ -11,6 +11,7 @@
 #include "Bronya_Impact_TripleRing.h"
 
 #include "MovieDirector.h"
+#include "PhaseControl.h"
 
 CGaneshaBornPattern::CGaneshaBornPattern()
 {
@@ -44,6 +45,8 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 
 		// movie
 		CStageControlTower::GetInstance()->GetMovieDirector()->Cut();
+		CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
+
 		return;
 	}
 

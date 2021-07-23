@@ -2,6 +2,7 @@
 #include "..\Header\Shot_GaneshaBorn.h"
 
 #include "AniCtrl.h"
+#include "PhaseControl.h"
 
 CShot_GaneshaBorn::CShot_GaneshaBorn()
 {
@@ -23,12 +24,14 @@ void CShot_GaneshaBorn::Ready(CTake * pTake, _float startTimeline, _float endTim
 	m_pActorAniCtrl = m_pGanesha->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl();
 	m_pActorAniCtrl->SetIsMovieOn(true);
 	m_savedAnimIndex = m_pActorAniCtrl->GetCurIndex();
+	m_pGanesha->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Born");
 }
 
 void CShot_GaneshaBorn::Enter()
 {
 	//m_pActorAniCtrl->ChangeAniSet_NoBlend(m_victoryAnimIndex);
-	m_pGanesha->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Born");
+	//m_pGanesha->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Born");
+	m_pGanesha->SetIsEnabled(true);
 }
 
 void CShot_GaneshaBorn::Action()

@@ -8,6 +8,7 @@ public:
 	{
 		_float startDistance = 1.5f;
 		_float endDistance = 1.f;
+		_bool isPowLerp = false;
 	};
 
 public:

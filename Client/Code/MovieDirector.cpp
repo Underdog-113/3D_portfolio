@@ -20,6 +20,7 @@
 #include "Shot_FixPivot.h"
 #include "Shot_ActorVictory.h"
 #include "Shot_GaneshaBorn.h"
+#include "Shot_Shake.h"
 
 #include "SplineCurve.h"
 
@@ -38,15 +39,22 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_RotateYaw_SubCh1)
 	SAFE_DELETE(m_pShot_RotatePitch)
 	SAFE_DELETE(m_pShot_RotatePitch_Spline)
+	SAFE_DELETE(m_pShot_RotatePitch_Spline_SubCh1)
 	SAFE_DELETE(m_pShot_RotateRoll)
 	SAFE_DELETE(m_pShot_PushIn)
+	SAFE_DELETE(m_pShot_PushIn_SubCh1)
 	SAFE_DELETE(m_pShot_PushOut)
-	SAFE_DELETE(m_pShot_FixPivot)
+	SAFE_DELETE(m_pShot_PushOut_SubCh1)
+	SAFE_DELETE(m_pShot_MovePivot)
+	SAFE_DELETE(m_pShot_MovePivot_SubCh1)
+	SAFE_DELETE(m_pShot_MovePivot_SubCh2)
+	SAFE_DELETE(m_pShot_Shake)
 	SAFE_DELETE(m_pShot_Victory)
 	SAFE_DELETE(m_pShot_GaneshaBorn)
 		
 
-	SAFE_DELETE(m_pGaneshaPitchCurve)
+	SAFE_DELETE(m_pGaneshaPitchCurve_1st)
+	SAFE_DELETE(m_pGaneshaPitchCurve_2nd)
 
 	for (auto iter : m_takeMap)
 	{
@@ -153,11 +161,17 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_RotateYaw_SubCh1 = new CShot_RotateYaw;
 	m_pShot_RotatePitch = new CShot_RotatePitch;
 	m_pShot_RotatePitch_Spline = new CShot_RotatePitch_Spline;
+	m_pShot_RotatePitch_Spline_SubCh1 = new CShot_RotatePitch_Spline;
 	m_pShot_RotateRoll = new CShot_RotateRoll;
 
 	m_pShot_PushIn = new CShot_PushIn;
+	m_pShot_PushIn_SubCh1 = new CShot_PushIn;
 	m_pShot_PushOut = new CShot_PushOut;
-	m_pShot_FixPivot = new CShot_MovePivot;
+	m_pShot_PushOut_SubCh1 = new CShot_PushOut;
+	m_pShot_MovePivot = new CShot_MovePivot;
+	m_pShot_MovePivot_SubCh1 = new CShot_MovePivot;
+	m_pShot_MovePivot_SubCh2 = new CShot_MovePivot;
+	m_pShot_Shake = new CShot_Shake;
 
 	m_pShot_Victory = new CShot_ActorVictory;
 	m_pShot_GaneshaBorn = new CShot_GaneshaBorn;
@@ -186,10 +200,11 @@ void CMovieDirector::CreateTake_SakuraVictory()
 	pTake->AddShot(ShotName_RotateYaw_SubCh1, m_pShot_RotateYaw_SubCh1);
 	pTake->AddShot(ShotName_RotatePitch, m_pShot_RotatePitch);
 	pTake->AddShot(ShotName_RotatePitch_Spline, m_pShot_RotatePitch_Spline);
+	pTake->AddShot(ShotName_RotatePitch_Spline, m_pShot_RotatePitch_Spline_SubCh1);
 	pTake->AddShot(ShotName_RotateRoll, m_pShot_RotateRoll);
 
 	pTake->AddShot(ShotName_PushOut, m_pShot_PushOut);
-	pTake->AddShot(ShotName_FixPivot, m_pShot_FixPivot);
+	pTake->AddShot(ShotName_MovePivot, m_pShot_MovePivot);
 
 	pTake->AddShot(ShotName_Victory, m_pShot_Victory);
 
@@ -200,38 +215,76 @@ void CMovieDirector::CreateTake_GaneshaBorn()
 {
 	CTake* pTake = new CTake;
 
-	pTake->AddShot(ShotName_FixPivot, m_pShot_FixPivot);
+	pTake->AddShot(ShotName_MovePivot, m_pShot_MovePivot);
 	pTake->AddShot(ShotName_GaneshaBorn, m_pShot_GaneshaBorn);
 
 	pTake->AddShot(ShotName_BlackFadeIn, m_pShot_BlackFadeIn);
 	pTake->AddShot(ShotName_BlackFadeOut, m_pShot_BlackFadeOut);
 
+	// start ~ before jump
 	pTake->AddShot(ShotName_PushIn, m_pShot_PushIn);
 	pTake->AddShot(ShotName_RotateYaw, m_pShot_RotateYaw);
-
-	//pTake->AddShot(ShotName_FixPivot, m_pShot_FixPivot);
-
-	// start ~ before jump
-	//pTake->AddShot(ShotName_PushIn, m_pShot_PushIn);
-	//pTake->AddShot(ShotName_RotateYaw, m_pShot_RotateYaw);
-
+	
 	// jump ~ land
-	//pTake->AddShot(ShotName_RotatePitch, m_pShot_RotatePitch);
 	pTake->AddShot(ShotName_RotatePitch_Spline, m_pShot_RotatePitch_Spline);
-	m_pGaneshaPitchCurve = new CSplineCurve;
-	m_pGaneshaPitchCurve->AddPoint(_float3(1.5f, 0.f, 0.f));
-	m_pGaneshaPitchCurve->AddPoint(_float3(1.9f, 10.f, 0.f));
-	m_pGaneshaPitchCurve->AddPoint(_float3(2.f, -45.f, 0.f));
-	m_pGaneshaPitchCurve->AddPoint(_float3(2.5f, -45.f, 0.f));
+	m_pGaneshaPitchCurve_1st = new CSplineCurve;
+	m_pGaneshaPitchCurve_1st->AddPoint(_float3(0.f, 10.f, 0.f));
+	m_pGaneshaPitchCurve_1st->AddPoint(_float3(0.55f, 12.5f, 0.f));
+	m_pGaneshaPitchCurve_1st->AddPoint(_float3(0.8f, 15.f, 0.f));
+	m_pGaneshaPitchCurve_1st->AddPoint(_float3(0.87f, -30.f, 0.f));
 	CSplineCurve::Desc desc;
-	m_pGaneshaPitchCurve->CreateCurve(&desc);
+	m_pGaneshaPitchCurve_1st->CreateCurve(&desc);
+	
+	pTake->AddShot(ShotName_RotatePitch_Spline_SubCh1, m_pShot_RotatePitch_Spline_SubCh1);
+	m_pGaneshaPitchCurve_2nd = new CSplineCurve;
+	m_pGaneshaPitchCurve_2nd->AddPoint(_float3(0.f, -30.f, 0.f));
+	m_pGaneshaPitchCurve_2nd->AddPoint(_float3(0.2f, 10.f, 0.f));
+	m_pGaneshaPitchCurve_2nd->AddPoint(_float3(0.4f, 0.f, 0.f));
+	m_pGaneshaPitchCurve_2nd->AddPoint(_float3(0.6f, 7.f, 0.f));
+	m_pGaneshaPitchCurve_2nd->AddPoint(_float3(0.8f, 4.5f, 0.f));
+	m_pGaneshaPitchCurve_2nd->AddPoint(_float3(1.f, 5.f, 0.f));
+	m_pGaneshaPitchCurve_2nd->CreateCurve(&desc);
 
+	pTake->AddShot(ShotName_MovePivot_SubCh1, m_pShot_MovePivot_SubCh1);
+	pTake->AddShot(ShotName_MovePivot_SubCh2, m_pShot_MovePivot_SubCh2);
 	// land ~ end
 
-	//pTake->AddShot(ShotName_RotateYaw_SubCh1, m_pShot_RotateYaw_SubCh1);
-	
-	
+	pTake->AddShot(ShotName_PushIn_SubCh1, m_pShot_PushIn_SubCh1);
+	pTake->AddShot(ShotName_PushOut_SubCh1, m_pShot_PushOut_SubCh1);
+	pTake->AddShot(ShotName_RotateYaw_SubCh1, m_pShot_RotateYaw_SubCh1);
+
+	pTake->AddShot(ShotName_Shake, m_pShot_Shake);	
+	CreateGanshaBornShakeChannel();
+
 	m_takeMap.emplace(TakeName_GaneshaBorn, pTake);
+}
+
+void CMovieDirector::CreateGanshaBornShakeChannel()
+{
+	m_pGaneshaShakeChannel = new ShakeChannel;
+
+	m_pGaneshaShakeChannel->m_distanceRate = 1.f;
+
+	m_pGaneshaShakeChannel->m_timer = 0.f;
+
+	m_pGaneshaShakeChannel->m_duration = 2.f;
+	m_pGaneshaShakeChannel->m_blendInTime = 0.2f;
+	m_pGaneshaShakeChannel->m_blendOutTime = 0.2f;
+
+	CStageControlTower::GetInstance()->GetCameraMan()->GetCameraShake()->ResetAllMember(m_pGaneshaShakeChannel);
+
+	m_pGaneshaShakeChannel->m_xWave.amplitude = 0.02f;
+	m_pGaneshaShakeChannel->m_xWave.frequency = 20.f;
+	m_pGaneshaShakeChannel->m_xWave.offset = 0.f;
+
+	m_pGaneshaShakeChannel->m_yWave.amplitude = 0.08f;
+	m_pGaneshaShakeChannel->m_yWave.frequency = 20.f;
+	m_pGaneshaShakeChannel->m_yWave.offset = 0.f;
+
+}
+
+void CMovieDirector::StartTake_BlackFadeInOut()
+{
 }
 
 void CMovieDirector::StartTake_Failure()
@@ -304,11 +357,11 @@ void CMovieDirector::StartTake_SakuraVictory()
  	po_desc.endDistance = 0.6f;
  	pTake->ReadyShot(ShotName_PushOut, 0.6f, 2.1f, &po_desc, 0.6f);
 	
-	CShot_MovePivot::Desc fp_desc;
+	CShot_MovePivot::Desc mp_desc;
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
-	fp_desc.startOffset = pActor->GetTransform()->GetUp() * 0.15f + pActor->GetTransform()->GetRight() * 0.1f;
-	fp_desc.endOffset = pActor->GetTransform()->GetUp() * 0.11f + pActor->GetTransform()->GetRight() * -0.15f;
-	pTake->ReadyShot(ShotName_FixPivot, 0.6f, 3.6f, &fp_desc, 0.6f);
+	mp_desc.startOffset = pActor->GetTransform()->GetUp() * 0.15f + pActor->GetTransform()->GetRight() * 0.1f;
+	mp_desc.endOffset = pActor->GetTransform()->GetUp() * 0.11f + pActor->GetTransform()->GetRight() * -0.15f;
+	pTake->ReadyShot(ShotName_MovePivot, 0.6f, 3.6f, &mp_desc, 0.6f);
 
 
 	CShot_ActorVictory::Desc av_desc;
@@ -326,42 +379,77 @@ void CMovieDirector::StartTake_GaneshBorn()
 	m_spBlackFadeImage->SetIsEnabled(true);
 
 
-	CShot_MovePivot::Desc fp_desc;
-	fp_desc.pTargetTransform = Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Ganesha")->GetTransform().get();
+	CShot_MovePivot::Desc mp_desc;
+	mp_desc.pTargetTransform = Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Ganesha")->GetTransform().get();
 // 	fp_desc.startOffset = pActor->GetTransform()->GetUp() * 0.15f + pActor->GetTransform()->GetRight() * 0.1f;
 // 	fp_desc.endOffset = pActor->GetTransform()->GetUp() * 0.11f + pActor->GetTransform()->GetRight() * -0.15f;
-	pTake->ReadyShot(ShotName_FixPivot, 0.f, 12.f, &fp_desc, 0.f);
+	pTake->ReadyShot(ShotName_MovePivot, 0.5f, 1.f, &mp_desc, 0.5f);
 	
 	CShot_GaneshaBorn::Desc gb_desc;
-	pTake->ReadyShot(ShotName_GaneshaBorn, 0.f, 12.f, &gb_desc, 0.0f);
+	pTake->ReadyShot(ShotName_GaneshaBorn, 0.43f, 12.f, &gb_desc, 0.43f);
 	
 	// start ~ before jump
 	CShot_BlackFadeOut::Desc blo_desc;
 	blo_desc.pBlackFade = m_pBlackFade;
-	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.5f, &blo_desc, 0.f);
+	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.43f, &blo_desc, 0.f);
 
 	CShot_BlackFadeIn::Desc bfi_desc;
 	bfi_desc.pBlackFade = m_pBlackFade;
 	pTake->ReadyShot(ShotName_BlackFadeIn, 0.6f, 1.1f, &bfi_desc, 0.5f);
 	
 	CShot_RotateYaw::Desc ry_desc;
-	ry_desc.pTargetTransform = fp_desc.pTargetTransform;
+	ry_desc.pTargetTransform = mp_desc.pTargetTransform;
 	ry_desc.startEulerAngle = 45.f;
 	ry_desc.endEulerAngle = 0.f;
-	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 2.6f, &ry_desc, 0.6f);
+	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 3.f, &ry_desc, 0.6f);
 
 	CShot_PushIn::Desc pi_desc;
-	pi_desc.startDistance = 5.f;
+	pi_desc.startDistance = 6.f;
 	pi_desc.endDistance = 4.f;
-	pTake->ReadyShot(ShotName_PushIn, 0.6f, 2.6f, &pi_desc, 0.6f);
+	pTake->ReadyShot(ShotName_PushIn, 0.6f, 3.f, &pi_desc, 0.6f);
 
 	// jump ~ land
-
 	CShot_RotatePitch_Spline::Desc rps_desc;
-	rps_desc.angleCurve = m_pGaneshaPitchCurve;
-	pTake->ReadyShot(ShotName_RotatePitch_Spline, 2.6f, 4.6f, &rps_desc, 0.5f);
+	rps_desc.angleCurve = m_pGaneshaPitchCurve_1st;
+	pTake->ReadyShot(ShotName_RotatePitch_Spline, 2.6f, 2.6f + 0.87f, &rps_desc, 0.5f);
 
+	CShot_MovePivot::Desc mp_sub1_desc;
+	mp_sub1_desc.pTargetTransform = mp_desc.pTargetTransform;
+	mp_sub1_desc.startOffset = ZERO_VECTOR;
+	mp_sub1_desc.endOffset = UP_VECTOR;
+	pTake->ReadyShot(ShotName_MovePivot_SubCh1, 3.2f, 3.24f, &mp_sub1_desc, 3.2f);
+
+	CShot_RotatePitch_Spline::Desc rps_sub1_desc;
+	rps_sub1_desc.angleCurve = m_pGaneshaPitchCurve_2nd;
+	pTake->ReadyShot(ShotName_RotatePitch_Spline_SubCh1, 4.7f, 4.7f + 1.f, &rps_sub1_desc, 4.7f);
+
+	CShot_MovePivot::Desc mp_sub2_desc;
+	mp_sub2_desc.pTargetTransform = mp_desc.pTargetTransform;
+	mp_sub2_desc.startOffset = UP_VECTOR;
+	mp_sub2_desc.endOffset = ZERO_VECTOR * 1.5f;
+	pTake->ReadyShot(ShotName_MovePivot_SubCh2, 4.7f, 4.7f + 0.2f, &mp_sub2_desc, 4.7f);
+	
 	// land ~ end
+
+	CShot_PushIn::Desc pi_sub1_desc;
+	pi_sub1_desc.startDistance = 4.f;
+	pi_sub1_desc.endDistance = 3.f;
+	pi_sub1_desc.isPowLerp = true;
+	pTake->ReadyShot(ShotName_PushIn_SubCh1, 6.f, 6.9f, &pi_sub1_desc, 6.f);
+
+	CShot_PushOut::Desc po_sub1_desc;
+	po_sub1_desc.startDistance = 3.f;
+	po_sub1_desc.endDistance = 4.5f;
+	pTake->ReadyShot(ShotName_PushOut_SubCh1, 7.25f, 7.35f, &po_sub1_desc, 7.25f);
+
+	CShot_RotateYaw::Desc ry_sub1_desc;
+	ry_sub1_desc.startEulerAngle = 180.f;
+	ry_sub1_desc.endEulerAngle = 170.f;
+	pTake->ReadyShot(ShotName_RotateYaw_SubCh1, 7.25f, 12.f, &ry_sub1_desc, 7.25f);
+
+	CShot_Shake::Desc shake_desc;
+	shake_desc.shakeChannel = m_pGaneshaShakeChannel;
+	pTake->ReadyShot(ShotName_Shake, 7.25f, 8.9f, &shake_desc, 7.25f);
 
 
 	m_pCurTake = pTake;
@@ -370,7 +458,7 @@ void CMovieDirector::StartTake_GaneshBorn()
 	m_onAir = true;
 
 	// tesssst
-	m_pCurTake->SetEditMode(true);
+	// m_pCurTake->SetEditMode(true);
 }
 
 void CMovieDirector::Cut()

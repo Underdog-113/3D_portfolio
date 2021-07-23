@@ -2,6 +2,7 @@
 #include "Portal.h"
 
 #include "Portal_Plane.h"
+#include "PhaseControl.h"
 
 _uint CPortal::m_s_uniqueID = 0;
 
@@ -62,6 +63,8 @@ void CPortal::Start(void)
 	m_vEffect->GetTransform()->SetPosition(m_spTransform->GetPosition());
 	m_vEffect->GetTransform()->AddPositionY(-0.2f);
 	m_spGraphics->SetIsEnabled(false);
+
+	m_isEnter = false;
 }
 
 void CPortal::FixedUpdate(void)
@@ -114,7 +117,12 @@ void CPortal::OnDisable(void)
 
 void CPortal::OnTriggerEnter(Engine::CCollisionC const * pCollisionC)
 {
-	pCollisionC->GetOwner()->GetTransform()->SetPosition(m_destPos);
+	//pCollisionC->GetOwner()->GetTransform()->SetPosition(m_destPos);
+	if (!m_isEnter)
+	{
+		m_isEnter = true;
+		CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
+	}
 }
 
 void CPortal::OnTriggerStay(Engine::CCollisionC const * pCollisionC)

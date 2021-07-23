@@ -32,7 +32,16 @@ void CShot_PushIn::Action()
 
 	_float timeline = GetTimeline();
 
-	_float curDistance = GetLerpFloat(m_desc.startDistance, m_desc.endDistance, timeline);
+	_float curDistance;
+
+	if (m_desc.isPowLerp)
+	{
+		float inverseRate = 1.f - timeline;
+		float sLerpTimer = 1.f - inverseRate * inverseRate;
+		curDistance = GetLerpFloat(m_desc.startDistance, m_desc.endDistance, sLerpTimer);
+	}
+	else
+		curDistance = GetLerpFloat(m_desc.startDistance, m_desc.endDistance, timeline);
 
 	m_spCamera->SetTargetDist(curDistance);
 	m_spCamera->SetMaxDistTPS(curDistance);

@@ -3,6 +3,7 @@
 
 #include "PhaseControl.h"
 
+class CMonster;
 class CTwoStagePhaseControl final : public CPhaseControl
 {
 public:
@@ -11,9 +12,14 @@ public:
 		ReadyStage,
 		PlayerSummon		,
 		Conversation		,
-		BeforeBoss			,
-		BossBegin			,
+		BeforeEnterBoss		,
+		PotalWarp			,
+		WarningAlarm		,
+		CreateBoss			,
+		BossMovie			,
+		Boss				,
 		BossEnd				,
+		VictoryMovie		,
 		StageResult			,
 		StageResult_Idle	,
 		NumOfPhse			
@@ -33,6 +39,12 @@ public:
 					_bool		m_isSoundChange = false;
 
 					SP(CTwoConversationC)		m_spConversation = nullptr;
+
+					
+
+private:
+	SP(CMonster) m_spGanesha = nullptr;
+	_float m_warningTimer = 0.f;
 };
 
 #endif
