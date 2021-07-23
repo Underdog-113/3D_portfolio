@@ -128,7 +128,7 @@ void CMonsterSpawnBeam::OnCollisionEnter(Engine::_CollisionInfo ci)
 	SP(Engine::CObject) spMeshEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterSpawnEff", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 
-	spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(ci.hitPoint);
+	spMeshEffect->GetTransform()->SetPosition(ci.hitPoint);
 	m_spMonster->SetIsEnabled(true);
 
 	m_bSpawn = true;

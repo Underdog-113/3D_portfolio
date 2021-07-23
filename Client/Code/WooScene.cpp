@@ -78,12 +78,12 @@ void CWooScene::Start(void)
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
-	//ScoutSetting();
+	ScoutSetting();
 	//LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
 
-	GaneshaSetting();
+	//GaneshaSetting();
 	//BronyaSetting();
 }
 
@@ -118,13 +118,6 @@ void CWooScene::Update(void)
 		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spSpider)->GetStat()->GetCurHp())
 		{
 			m_spSpider = nullptr;
-		}
-	}
-	else if (nullptr != m_spScout)
-	{
-		if (0.f >= std::dynamic_pointer_cast<CMonster>(m_spScout)->GetStat()->GetCurHp())
-		{
-			m_spScout = nullptr;
 		}
 	}
 }
@@ -289,7 +282,12 @@ void CWooScene::ScoutSetting(void)
 	SP(Engine::CObject) spScoutClone = ADD_CLONE(L"MO_Scout", true, (_uint)ELayerID::Enemy, L"MO_Scout");
 	spScoutClone->GetTransform()->SetPosition(3, 0, 3);
 	std::dynamic_pointer_cast<CMonster>(spScoutClone)->SelectChannelID();
-	m_spScout = spScoutClone;
+	m_spScout1 = spScoutClone;
+
+	spScoutClone = ADD_CLONE(L"MO_Scout", true, (_uint)ELayerID::Enemy, L"MO_Scout");
+	spScoutClone->GetTransform()->SetPosition(0, 0, 3);
+	std::dynamic_pointer_cast<CMonster>(spScoutClone)->SelectChannelID();
+	m_spScout2 = spScoutClone;
 }
 
 void CWooScene::LancerSetting(void)

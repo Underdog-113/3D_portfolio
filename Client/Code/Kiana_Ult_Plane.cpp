@@ -40,6 +40,12 @@ SP(Engine::CObject) CKiana_Ult_Plane::MakeClone()
 void CKiana_Ult_Plane::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Ring_Ground");
+	m_spTexture->AddTexture(L"Eff_Noise");
+	m_spTexture->AddTexture(L"Eff_Noise");
+	m_spTexture->AddTexture(L"ExplosionWarning");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 }
 
 void CKiana_Ult_Plane::Start()
@@ -81,6 +87,7 @@ void CKiana_Ult_Plane::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("gPlayingAnim", false);
+	pEffect->SetBool("gPlayingAnim_UpDown", false);
 	pEffect->CommitChanges();
 }
 

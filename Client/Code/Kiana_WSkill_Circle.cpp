@@ -100,6 +100,8 @@ void CKiana_WSkill_Circle::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_zWriteEnabled", false);
+	pEffect->SetBool("gPlayingAnim", false);
+	pEffect->SetBool("gPlayingAnim_UpDown", false);
 	pEffect->CommitChanges();
 }
 

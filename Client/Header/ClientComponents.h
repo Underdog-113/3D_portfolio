@@ -14,4 +14,5 @@
 #include "MoneyItemC.h"
 #include "StuffItemC.h"
 #include  "MousePointC.h"
+#include "GachBoxC.h"
 #endif

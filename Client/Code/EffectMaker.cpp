@@ -22,7 +22,7 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName3);
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader_Glow);
 
 	//spMeshEffect->GetTransform()->SetPosition(m_pOwner->GetTransform()->GetPosition());
 	//spMeshEffect->GetTransform()->AddPositionY(m_pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
@@ -52,10 +52,10 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Dissolve(std::wstring objectKey, 
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader_Glow);
 
 	return spMeshEffect;
 }
@@ -67,11 +67,11 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Dissolve(std::wstring objectKey, 
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName3);
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::DissolveShader_Glow);
 
 	return spMeshEffect;
 }

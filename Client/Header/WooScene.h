@@ -56,7 +56,8 @@ private:
 
 	SP(Engine::CObject) m_spGanesha;
 	SP(Engine::CObject) m_spKiana;
-	SP(Engine::CObject) m_spScout;
+	SP(Engine::CObject) m_spScout1;
+	SP(Engine::CObject) m_spScout2;
 	SP(Engine::CObject) m_spLancer;
 	SP(Engine::CObject) m_spRobot;
 	SP(Engine::CObject) m_spNinza;

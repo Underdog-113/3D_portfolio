@@ -42,16 +42,16 @@ void CScoutBall::Awake()
 {
 	__super::Awake();
 	m_spMesh->SetMeshData(L"Scout_Ball");
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"BallColor");
 	m_spTexture->AddTexture(L"BallColor");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CScoutBall::Start()
 {
 	__super::Start();
-	m_fAlpha = 0.3f;
+	m_fAlpha = 1.f;
 }
 
 void CScoutBall::FixedUpdate()
@@ -102,6 +102,7 @@ void CScoutBall::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_bAlphaCtrl", false);
+	pEffect->CommitChanges();
 }
 
 void CScoutBall::Render(LPD3DXEFFECT pEffect)

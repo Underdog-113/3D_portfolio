@@ -1087,6 +1087,12 @@
     <Filter Include="03.Component\04.MousePoint">
       <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09.Manager\10.DropItemManager">
+      <UniqueIdentifier>{da881c1b-6178-476a-8b60-663dbb0e83f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\05.GachBoxC">
+      <UniqueIdentifier>{29f7b4da-be28-4248-a2de-fa6bb7ff41ca}</UniqueIdentifier>
+          </Filter>
     <Filter Include="10.ControlTower\MovieDirector\SplineCurve">
       <UniqueIdentifier>{f1e10a53-27b5-47b5-94fc-04e5d02ac611}</UniqueIdentifier>
     </Filter>
@@ -1095,6 +1101,15 @@
     </Filter>
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade">
       <UniqueIdentifier>{dd07f129-a571-48d6-8b65-4462d440a915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\04.MeshTrailShader\Glow">
+      <UniqueIdentifier>{62c7e9c5-9cd1-4769-a828-ef5f1b56d5be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\05.DissolveShader\Glow">
+      <UniqueIdentifier>{241bb49a-baf6-434d-80cc-02557c4c2774}</UniqueIdentifier>
+    </Filter>
+      <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun">
+        <UniqueIdentifier>{a700dc52-3ea8-4cfb-90e1-bb288235f2cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2286,6 +2301,12 @@
     <ClInclude Include="..\Header\MousePointC.h">
       <Filter>03.Component\04.MousePoint</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DropItemManager.h">
+      <Filter>09.Manager\10.DropItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\GachBoxC.h">
+      <Filter>03.Component\05.GachBoxC</Filter>
+        </ClInclude>
     <ClInclude Include="..\Header\BronyaGrenade.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
     </ClInclude>
@@ -2306,6 +2327,15 @@
     </ClInclude>
     <ClInclude Include="..\Header\Shot_GaneshaBorn.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MeshTrailShader_Glow.h">
+      <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\DissolveShader_Glow.h">
+      <Filter>04.Shader\05.DissolveShader\Glow</Filter>
+    </ClInclude>
+      <ClInclude Include="..\Header\GaneshaStunPattern.h">
+        <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3407,6 +3437,12 @@
     <ClCompile Include="..\Code\MousePointC.cpp">
       <Filter>03.Component\04.MousePoint</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\DropItemManager.cpp">
+      <Filter>09.Manager\10.DropItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GachBoxC.cpp">
+      <Filter>03.Component\05.GachBoxC</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\BronyaGrenade.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
     </ClCompile>
@@ -3427,6 +3463,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeshTrailShader_Glow.cpp">
+      <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DissolveShader_Glow.cpp">
+      <Filter>04.Shader\05.DissolveShader\Glow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GaneshaStunPattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3504,6 +3549,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\MeshTrailShader_Glow.fx">
+      <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\DissolveShader_Glow.fx">
+      <Filter>04.Shader\05.DissolveShader\Glow</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

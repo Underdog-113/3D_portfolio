@@ -48,12 +48,13 @@ void CPhaseChanger::Awake(void)
 	m_addExtra = true;
 
 	m_spCollision	= AddComponent<Engine::CCollisionC>();
+	AddComponent<Engine::CDebugC>();
 }
 
 void CPhaseChanger::Start(void)
 {
 	__super::Start();
-	AddComponent<Engine::CDebugC>();
+	
 }
 
 void CPhaseChanger::FixedUpdate(void)
@@ -175,9 +176,10 @@ void CPhaseChanger::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 {
 }
 
-void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine)
+void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine, SP(CStage_Wall) spEffect)
 {
-	spRestrictLine->SetIsEnabled(false);
+	//spRestrictLine->SetIsEnabled(false);
+	spRestrictLine->SetWallEffect(spEffect);
 	m_vRestrictLine.emplace_back(spRestrictLine);
 }
 

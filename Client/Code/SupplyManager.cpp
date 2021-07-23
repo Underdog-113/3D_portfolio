@@ -6,6 +6,9 @@
 #include "SupplyItem.h"
 #include "SupplyOut.h"
 
+#include "DataManager.h"
+#include "CaptainData.h"
+
 IMPLEMENT_SINGLETON(CSupplyManager)
 void CSupplyManager::Start(Engine::CScene * pScene)
 {
@@ -47,13 +50,33 @@ void CSupplyManager::SupplyItemFSM()
 
 void CSupplyManager::SupplyOutFSM()
 {
+	if (CDataManager::GetInstance()->FindCaptainData()->GetDiamond() < m_outCount * 280)
+		return;
+
+	CDataManager::GetInstance()->FindCaptainData()->SetDiamond(CDataManager::GetInstance()->FindCaptainData()->GetDiamond() - (m_outCount * 280));
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Text_4")->GetComponent<Engine::CTextC>()->ChangeMessage(std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetDiamond()));
 	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(false);
+
 	ChangeFSM(STATE::Out);
 }
 
 void CSupplyManager::SelectCanvasOff()
 {
 	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(false);
+}
+
+void CSupplyManager::SelectCanvasOn()
+{
+	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"SupplyCanvas_Button_0")
+	{
+		SetOutCount(10);
+	}
+	if (CButtonManager::GetInstance()->GetActivationButton()->GetName() == L"SupplyCanvas_Button_1")
+	{
+		SetOutCount(1);
+	}
+
+	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(true);
 }
 
 void CSupplyManager::ChangeFSM(STATE state)

@@ -46,7 +46,7 @@ void CPortal_Beam::Awake()
 	m_spTexture->AddTexture(L"Portal_beam");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	_float _size = 0.01f;
-	m_spTransform->SetSize(_float3(0.02f, 0.02f, 0.005f));
+	m_spTransform->SetSize(_float3(0.04f, 0.04f, 0.007f));
 	m_spTransform->AddRotationX(D3DXToRadian(90));
 }
 
