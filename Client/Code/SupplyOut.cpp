@@ -15,6 +15,9 @@ void CSupplyOut::Start()
 {
 	m_production = true;
 
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxStart.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	m_outCount = CSupplyManager::GetInstance()->GetOutCount();
 	m_itemType = CSupplyManager::GetInstance()->GetSupplyOldState();
 
@@ -138,6 +141,9 @@ void CSupplyOut::ItemRandomBox()
 			a->GetComponent<CSizeDownC>()->SetSize(1.5f);
 			a->GetComponent<CSizeDownC>()->SetSpeed(5);
 		}
+
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+		Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxEnd.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 	}
 }
 
@@ -185,6 +191,10 @@ void CSupplyOut::WeaponRandomBox()
 			a->GetComponent<CSizeDownC>()->SetSize(1.5f);
 			a->GetComponent<CSizeDownC>()->SetSpeed(5);
 		}
+
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+		Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxEnd.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	}
 }
 

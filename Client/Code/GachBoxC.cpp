@@ -40,6 +40,9 @@ void CGachBoxC::Update(SP(CComponent) spThis)
 {
 	if (GetOwner()->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->IsAnimationEnd())
 	{
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+		Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxOpen.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 		*m_production = false;
 		m_isEnabled = false;
 		GetOwner()->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0);
