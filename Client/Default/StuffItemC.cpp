@@ -71,7 +71,7 @@ void CStuffItemC::Update(SP(CComponent) spThis)
 		pos.y = m_oldY;
 		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.2f)
 		{
-			CStageControlTower::GetInstance()->AddItemList(m_itemValue);
+			CDropItemManager::GetInstance()->AddItemList(m_itemValue);
 			GetOwner()->SetDeleteThis(true);
 		}
 	}

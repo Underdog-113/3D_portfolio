@@ -1087,6 +1087,12 @@
     <Filter Include="03.Component\04.MousePoint">
       <UniqueIdentifier>{a1c510ce-1013-4de8-95b6-ade9b3849b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09.Manager\10.DropItemManager">
+      <UniqueIdentifier>{da881c1b-6178-476a-8b60-663dbb0e83f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\05.GachBoxC">
+      <UniqueIdentifier>{29f7b4da-be28-4248-a2de-fa6bb7ff41ca}</UniqueIdentifier>
+          </Filter>
     <Filter Include="10.ControlTower\MovieDirector\SplineCurve">
       <UniqueIdentifier>{f1e10a53-27b5-47b5-94fc-04e5d02ac611}</UniqueIdentifier>
     </Filter>
@@ -2289,6 +2295,12 @@
     <ClInclude Include="..\Header\MousePointC.h">
       <Filter>03.Component\04.MousePoint</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\DropItemManager.h">
+      <Filter>09.Manager\10.DropItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\GachBoxC.h">
+      <Filter>03.Component\05.GachBoxC</Filter>
+        </ClInclude>
     <ClInclude Include="..\Header\BronyaGrenade.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
     </ClInclude>
@@ -3409,6 +3421,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\MousePointC.cpp">
       <Filter>03.Component\04.MousePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DropItemManager.cpp">
+      <Filter>09.Manager\10.DropItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GachBoxC.cpp">
+      <Filter>03.Component\05.GachBoxC</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BronyaGrenade.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>

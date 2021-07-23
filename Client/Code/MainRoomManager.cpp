@@ -48,4 +48,5 @@ void CMainRoomManager::Update(void)
 
 void CMainRoomManager::OnDestroy(void)
 {
+	CDropItemManager::GetInstance()->AllDelete();
 }

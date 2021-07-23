@@ -136,7 +136,6 @@ void CStaticMeshData::Update(void)
 {
 }
 
-
 void CStaticMeshData::OnDestory(void)
 {
 	delete this;

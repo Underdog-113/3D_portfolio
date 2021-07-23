@@ -225,7 +225,8 @@ void CMainApp::OnDestroy(void)
 	CValkyriegManager::GetInstance()->DestroyInstance();
 	CInventoryManager::GetInstance()->DestroyInstance();
 	CBattleEndManager::GetInstance()->DestroyInstance();
-
+	CDropItemManager::GetInstance()->DestroyInstance();
+	CSupplyManager::GetInstance()->DestroyInstance();
 	//Object Pool
 	CDamageObjectPool::GetInstance()->DestroyInstance();
 
