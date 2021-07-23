@@ -55,11 +55,12 @@ void CInitScene::Awake(_int numOfLayers)
 {
 	__super::Awake(numOfLayers);
 	Engine::CSoundManager::GetInstance()->StartSound(L"Elevator.wav", (_uint)Engine::EChannelID::OUTGAME);
-	m_sceneID = (_int)ESceneID::Init;
 }
 
 void CInitScene::Start(void)
 {
+	m_sceneID = (_int)ESceneID::Init;
+
 	m_isStarted = true;
 	//DataStore Init
 	m_pDataStore->InitDataMap((_uint)EDataID::NumOfDataID);

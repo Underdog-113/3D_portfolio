@@ -14,7 +14,7 @@ CSupplyOut::~CSupplyOut()
 void CSupplyOut::Start()
 {
 	m_production = true;
-
+	Engine::CSoundManager::GetInstance()->StopAll();
 	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
 	Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxStart.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
@@ -46,6 +46,7 @@ void CSupplyOut::Start()
 	gachaMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	gachaMap->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	gachaMap->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	gachaMap->GetTransform()->AddPositionY(1.f);
 
 
 	if (m_itemType == 0)
