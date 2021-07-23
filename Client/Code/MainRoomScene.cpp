@@ -71,7 +71,7 @@ void CMainRoomScene::Start(void)
 	delete(Load);
 
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_image2"));
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L""));
 	image->GetTransform()->SetPositionZ(0.9f);
 	image->GetTransform()->SetSize(_float3(25, 25, 0));
 	image->GetTexture()->AddTexture(L"MousePoint", 0);

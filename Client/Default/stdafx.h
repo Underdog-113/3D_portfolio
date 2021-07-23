@@ -54,6 +54,8 @@ using namespace std;
 #include "BattleEndManager.h"
 #include "SupplyManager.h"
 
+#include "DropItemManager.h"
+
 //Client Data
 #include "ValkyrieStatusData.h"
 #include "CaptainData.h"

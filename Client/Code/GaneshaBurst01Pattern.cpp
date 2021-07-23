@@ -148,9 +148,21 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		else
 		{
 			fsm->ChangeState(Name_Ganesha_StandBy);
-			PatternStopSound(pOwner);
 			m_jumpCnt = 0;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		}
+
+		// effect
+		_float fX = 0;
+		for (_int i = 0; i < 8; ++i)
+		{
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
+
+			// Ganesha Pos X + fX 
+			spObj->GetTransform()->SetPositionX(mPos.x + fX - 1.3f);
+			spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
+			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 1.f);
+			fX += 0.5f;
 		}
 	}
 

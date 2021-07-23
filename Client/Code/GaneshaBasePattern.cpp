@@ -119,7 +119,8 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 	}
 	// 내가 뒤로 이동이 끝났다면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
-		0.9f <= fsm->GetDM()->GetAniTimeline() && true == m_walkReady)
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_walkReady)
 	{
 		++m_jumpCnt;
 

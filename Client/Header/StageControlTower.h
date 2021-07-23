@@ -113,9 +113,6 @@ public:		/* Camera & System */
 
 public:		/* Stage Control Mode */
 	void SetDirectorMode(bool value);
-
-public:
-	void AddItemList(ItemSave item);
 private:
 	typedef std::vector<SP(Engine::CObject)> _Squad;
 	GETTOR			(_Squad,				m_vSquad,			{},				Squad)
@@ -136,12 +133,6 @@ private:	/* Stage Info? */
 	GETTOR_SETTOR	(SP(Engine::CObject),	m_spCurTarget,		nullptr,		CurrentTarget)
 
 	GETTOR			(CreateMode,			m_mode,				ALL,			CurrentMode)
-
-
-	GETTOR(std::list<ItemSave>, m_itemList, {}, ItemList)
-	GETTOR_SETTOR(_int, m_gold, 0, Gold)
-	GETTOR_SETTOR(_int, m_captainExp, 0, CaptainExp)
-	GETTOR_SETTOR(_int, m_valkyrieExp, 0, ValkyrieExp)
 
 	_bool m_isInit = false;
 	_bool m_isQTESwitch = false;

@@ -12,10 +12,10 @@ void CBattleEndManager::Start(Engine::CScene * pScene)
 	m_addCaptainExp = 0;
 	m_addValkryieExp = 0;
 
-	m_itemList = CStageControlTower::GetInstance()->GetItemList();
-	m_gold = CStageControlTower::GetInstance()->GetGold();
-	m_captainExp = CStageControlTower::GetInstance()->GetCaptainExp();
-	m_valkyrieExp = CStageControlTower::GetInstance()->GetValkyrieExp();
+	m_itemList = CDropItemManager::GetInstance()->GetItemList();
+	m_gold = CDropItemManager::GetInstance()->GetGold();
+	m_captainExp = CDropItemManager::GetInstance()->GetCaptainExp();
+	m_valkyrieExp = CDropItemManager::GetInstance()->GetValkyrieExp();
 
 	ValkyrieUI();
 	CaptainUI();
@@ -28,7 +28,6 @@ void CBattleEndManager::Update(void)
 
 void CBattleEndManager::OnDestroy(void)
 {
-
 }
 
 void CBattleEndManager::ValkyrieUI()

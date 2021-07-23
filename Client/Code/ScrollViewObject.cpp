@@ -70,7 +70,10 @@ void CScrollViewObject::Update(void)
 {
 	__super::Update();
 	
-	/*Scroll();
+	if (m_vButtonObject.empty())
+		return;
+
+	Scroll();
 
 	if (m_chack)
 	{
@@ -108,7 +111,7 @@ void CScrollViewObject::Update(void)
 		}
 
 		std::cout << "m_speed : " << m_speed << std::endl; 
-	}*/
+	}
 }
 
 void CScrollViewObject::LateUpdate(void)
@@ -348,10 +351,10 @@ void CScrollViewObject::Scroll()
 
 		Directionadjustment(m_oldMousePos, mousePos, m_speed);
 
-		/*system("cls");
+		system("cls");
 		std::cout << "m_oldMousePos : " << m_oldMousePos.y <<std::endl;
 		std::cout << "mousePos : " << mousePos.y <<  std::endl;
-		std::cout << "m_speed : " << m_speed << std::endl;*/
+		std::cout << "m_speed : " << m_speed << std::endl;
 
 		if (ScrollChack(m_speed))
 		{

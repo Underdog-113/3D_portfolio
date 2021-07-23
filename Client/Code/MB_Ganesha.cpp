@@ -43,19 +43,20 @@ void CMB_Ganesha::Awake(void)
 	__super::Awake();
 
 	m_spStateMachine = AddComponent<CFSM_GaneshaC>();
-	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(), 
-		CGaneshaDiePattern::Create(), 
-		CGaneshaBasePattern::Create(), 
-		CGaneshaHitPattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 }
 
 void CMB_Ganesha::Start(void)
 {
 	__super::Start();
+
+	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(),
+		CGaneshaDiePattern::Create(),
+		CGaneshaBasePattern::Create(),
+		CGaneshaHitPattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 
 	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -74,6 +75,14 @@ void CMB_Ganesha::Start(void)
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(4);
+	m_pStat->SetOnSuperArmor(true);
+	m_pStat->SetMaxBreakGauge(200.f);
+	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
+
+	m_pSuperArmor->SetHitL(true);
+	m_pSuperArmor->SetHitH(true);
+	m_pSuperArmor->SetAirborne(true);
+	m_pSuperArmor->SetStun(true);
 
 	m_pAttackBall = std::dynamic_pointer_cast<CAttackBall>(m_pScene->GetObjectFactory()->AddClone(L"AttackBall", true)).get();
 	m_pAttackBall->SetOwner(this);
@@ -144,6 +153,28 @@ void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 	case HitInfo::Str_High:
 		break;
 	case HitInfo::Str_Airborne:
+		break;
+	}
+
+	// crowd control
+	switch (info.GetCrowdControlType())
+	{
+	case HitInfo::CC_None:
+		break;
+	case HitInfo::CC_Stun:
+		if (false == m_pSuperArmor->GetStun())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnStun(true);
+		}
+		else if (true == m_pSuperArmor->GetStun())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnStun(true);
+		}
+		break;
+	case HitInfo::CC_Sakura:
+		break;
+	case HitInfo::CC_Airborne:
+		this->GetComponent<CPatternMachineC>()->SetOnAirBorne(true);
 		break;
 	}
 }
