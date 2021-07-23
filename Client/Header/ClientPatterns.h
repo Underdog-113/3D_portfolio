@@ -79,3 +79,4 @@
 #include "BronyaAirbornePattern.h"
 #include "BronyaStunPattern.h"
 #include "BronyaStealthBackPattern.h"
+#include "BronyaFlashBangPattern.h"

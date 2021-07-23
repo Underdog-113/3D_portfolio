@@ -39,6 +39,12 @@ SP(Engine::CObject) CPortal_Beam::MakeClone()
 void CPortal_Beam::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Portal_Beam");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Portal_beam");
+	m_spTexture->AddTexture(L"Portal_beam");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	_float _size = 0.01f;
 	m_spTransform->SetSize(_float3(0.02f, 0.02f, 0.005f));
 	m_spTransform->AddRotationX(D3DXToRadian(90));

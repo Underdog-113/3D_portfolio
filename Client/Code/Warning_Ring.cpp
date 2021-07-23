@@ -39,7 +39,12 @@ SP(Engine::CObject) CWarning_Ring::MakeClone()
 void CWarning_Ring::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Warning_Ring");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Warning_2");
+	m_spTexture->AddTexture(L"Sign");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_spTransform->SetSizeY(0.f);
 
 }

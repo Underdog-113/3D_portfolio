@@ -77,7 +77,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
 			spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(mPos);
-			spMeshEffect->GetComponent<Engine::CTransformC>()->AddPositionY(0.1f);
+			spMeshEffect->GetComponent<Engine::CTransformC>()->AddPositionY(0.5f);
 			spMeshEffect->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));
 
 			return;

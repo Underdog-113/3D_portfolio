@@ -16,7 +16,7 @@ public:
 	static SP(CBronyaStunPattern) Create();
 
 private:
-	_float m_stunTime = 7.f;
+	_float m_stunTime = 8.f;
 	_float m_accTime = 0.f;
 
 	_bool m_onStun = false;

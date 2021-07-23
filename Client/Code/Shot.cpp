@@ -15,11 +15,12 @@ CShot::~CShot()
 {
 }
 
-void CShot::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc)
+void CShot::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
 	m_pOnAirTake = pTake;
 	m_startTimeline = startTimeline;
 	m_endTimeline = endTimeline;
+	m_enterTimeline = enterTimeline;
 
 	m_isEnterAction = false;
 	m_isExitAction = false;
@@ -43,12 +44,17 @@ _bool CShot::CheckOnTake(_float takeTimer)
 	if (m_startTimeline <= takeTimer && (m_isEndless || takeTimer <= m_endTimeline))
 		return true;
 
+	if (!m_isEnterAction && takeTimer > m_enterTimeline)
+	{
+		Enter();
+		m_isEnterAction = true;
+	}
 	return false;
 }
 
 void CShot::CheckShotRollback(_float takeTimer)
 {
-	if (takeTimer <= m_startTimeline)
+	if (takeTimer <= m_startTimeline && takeTimer <= m_enterTimeline)
 	{
 		Rollback();
 		m_isEnterAction = false;

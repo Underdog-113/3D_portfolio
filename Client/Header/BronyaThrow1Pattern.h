@@ -17,7 +17,11 @@ public:
 	static SP(CBronyaThrow1Pattern) Create();
 
 private:
-	_float m_cost = 15.f;
+	void GetRHandMat(Engine::CObject* pOwner, _mat* pAtkBall);
+
+private:
+	//_float m_cost = 15.f;
+	_float m_cost = 1.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 4.f; // 공격 거리
@@ -29,8 +33,16 @@ private:
 	_bool m_atkReady = true; // true : 공격 가능, false : 공격 불가
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
+	_bool m_onAtkBall = false;
 
 	_mat m_atkMat;
+	_mat* m_pRHand;
+	_mat* m_pAttackBallMat;
+
+	_int m_grenadeCnt = 3;
+
+	_float3 m_dir;
+
 	std::wstring m_curState;
 };
 

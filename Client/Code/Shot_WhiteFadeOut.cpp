@@ -11,17 +11,16 @@ CShot_WhiteFadeOut::~CShot_WhiteFadeOut()
 {
 }
 
-void CShot_WhiteFadeOut::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void * pDesc)
+void CShot_WhiteFadeOut::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
-	CShot::Ready(pTake, startTimeline, endTimeline, pDesc);
+	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
-
-	m_desc.pWhiteFade->SetAlpha(0.f);
 }
 
 void CShot_WhiteFadeOut::Enter()
 {
+	m_desc.pWhiteFade->SetAlpha(0.f);
 }
 
 void CShot_WhiteFadeOut::Action()
@@ -35,6 +34,7 @@ void CShot_WhiteFadeOut::Action()
 
 void CShot_WhiteFadeOut::Cut()
 {
+	m_desc.pWhiteFade->SetAlpha(1.f);
 }
 
 void CShot_WhiteFadeOut::Rollback()

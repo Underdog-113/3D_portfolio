@@ -141,14 +141,11 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	//if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	//{
-	//	if (false == m_vRingEffect.empty())
-	//	{
-	//		_float3 pos = m_vRingEffect[m_curIndex]->GetTransform()->GetPosition();
-	//		std::cout << "x : " << pos.x << std::endl;
-	//		std::cout << "y : " << pos.y << std::endl;
-	//		std::cout << "z : " << pos.z << std::endl;
-	//		std::cout << "======================" << std::endl;
-	//	}
+	//	_float3 pos = m_pOwner->GetTransform()->GetPosition();
+	//	std::cout << "x : " << pos.x << std::endl;
+	//	std::cout << "y : " << pos.y << std::endl;
+	//	std::cout << "z : " << pos.z << std::endl;
+	//	std::cout << "======================" << std::endl;
 	//}
 
 	// born 실행 (1번만)
@@ -166,7 +163,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	// hit, airborne 실행
 	PlayHitPattern();
 
-	std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
+	//std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
 	//std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
 	//std::cout << "Pattern  : " << std::endl;
 }

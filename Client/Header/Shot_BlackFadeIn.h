@@ -6,7 +6,7 @@ public:
 	struct Desc
 	{
 		Engine::CFadeInOutC* pBlackFade = nullptr;
-		_float alphaLimit = 0.5f;
+		_float alphaLimit = 1.f;
 	};
 
 public:
@@ -16,7 +16,7 @@ public:
 	virtual _bool CheckOnTake(_float takeTimer);
 
 public:
-	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc);
+	void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline);
 
 	virtual void Enter() override;
 	virtual void Action() override;

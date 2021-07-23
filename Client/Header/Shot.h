@@ -11,7 +11,7 @@ public:
 	~CShot();
 
 public:
-	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc) PURE;
+	virtual void Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline) PURE;
 	virtual void Enter() PURE;
 	virtual void Action() PURE;
 	virtual void Cut() PURE;
@@ -33,6 +33,7 @@ protected:
 protected:
 	GETTOR_SETTOR(_float, m_startTimeline, 0.f, StartTimeline)
 	GETTOR_SETTOR(_float, m_endTimeline, 0.f, endTimeline)
+	GETTOR_SETTOR(_float, m_enterTimeline, 0.f, enterTimeline)
 	GETTOR_SETTOR(_bool, m_isEndless, false, IsEndless)
 
 	_bool m_isEnterAction = false;

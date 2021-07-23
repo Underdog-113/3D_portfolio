@@ -41,6 +41,13 @@ SP(Engine::CObject) CAttackRange_Circle::MakeClone()
 void CAttackRange_Circle::Awake()
 {
 	__super::Awake();
+
+	m_spMesh->SetMeshData(L"AttackRange_Circle");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"AttackHint_Circle_02");
+	m_spTexture->AddTexture(L"FrameRed");
+	m_spShader->AddShader((_int)EShaderID::AttackRangeShader);
 }
 
 void CAttackRange_Circle::Start()

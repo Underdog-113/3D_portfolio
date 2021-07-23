@@ -39,7 +39,12 @@ SP(Engine::CObject) CBronya_Teleport_Laser::MakeClone()
 void CBronya_Teleport_Laser::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Teleport_Laser");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Impact_Red");
+	m_spTexture->AddTexture(L"TeleportColor");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CBronya_Teleport_Laser::Start()
@@ -59,15 +64,12 @@ void CBronya_Teleport_Laser::FixedUpdate()
 void CBronya_Teleport_Laser::Update()
 {
 	__super::Update();
-	
+
 }
 
 void CBronya_Teleport_Laser::LateUpdate()
 {
-	__super::LateUpdate();
-
-
-	
+	__super::LateUpdate();	
 }
 
 void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
@@ -81,7 +83,7 @@ void CBronya_Teleport_Laser::PreRender(LPD3DXEFFECT pEffect)
 
 	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
 
-	//D3DXMatrixIdentity(&matBill);
+	D3DXMatrixIdentity(&matBill);
 
 	matBill._11 = matView._11;
 	matBill._13 = matView._13;

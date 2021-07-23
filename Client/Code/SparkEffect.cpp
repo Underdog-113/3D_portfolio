@@ -42,7 +42,9 @@ SP(Engine::CObject) CSparkEffect::MakeClone(void)
 void CSparkEffect::Awake(void)
 {
 	__super::Awake();
-
+	m_spTexture->AddTexture(L"Spark_v2");
+	m_spTexture->AddTexture(L"Spark_v2");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
 }
 
 void CSparkEffect::Start(void)

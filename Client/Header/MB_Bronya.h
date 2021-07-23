@@ -3,6 +3,7 @@
 
 class CAttackBall;
 class CBronyaBullet;
+class CBronyaGrenade;
 
 class CMB_Bronya final : public CMonster
 {
@@ -50,6 +51,7 @@ private:
 	void ArsenalEffectPosLoad();
 	void BulletReload();
 	void EquipBomb();
+	void EquipGrenade();
 	void SetupEscapePos();
 	void ApplyHitInfo(HitInfo info) override;
 	virtual void MonsterDead() override;
@@ -66,10 +68,12 @@ private:
 	GETTOR(SP(Engine::CObject), m_spWeapon, nullptr, Weapon)
 	GETTOR(std::vector<SP(CBronyaBullet)>, m_vBullets, {}, Bullets) // Shoot1 Skill
 	GETTOR(std::vector<SP(CBronyaBullet)>, m_vExplosions, {}, Explosions) // Arsenal Skill
+	GETTOR(std::vector<SP(CBronyaGrenade)>, m_vGrenades, {}, Grenades) // Throw1 Skill
 	GETTOR(std::vector<_float3>, m_vEscapePos, {}, EscapePos) // Escape Skill
 	GETTOR(std::vector<_float3>, m_vRingEffectPos, {}, RingEffectPos)
 	GETTOR(std::vector<_float3>, m_vRangeEffectPos, {}, RangeEffectPos)
-
+private:
+	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
 public:
 	static SP(CMB_Bronya) Create(_bool isStatic, Engine::CScene* pScene);
 	void ChaseTarget(_float3 targetPos);

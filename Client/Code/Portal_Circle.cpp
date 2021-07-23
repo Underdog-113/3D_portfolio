@@ -39,6 +39,12 @@ SP(Engine::CObject) CPortal_Circle::MakeClone()
 void CPortal_Circle::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Portal_Circle");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Portal_Circle");
+	m_spTexture->AddTexture(L"Portal_Circle");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	//_float _size = 1.3f;
 	//m_spTransform->SetSize(_float3(_size, _size, _size));
 

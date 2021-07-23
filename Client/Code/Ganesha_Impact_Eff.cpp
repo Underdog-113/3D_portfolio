@@ -39,7 +39,13 @@ SP(Engine::CObject) CGanesha_Impact_Eff::MakeClone()
 void CGanesha_Impact_Eff::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Robot_Impact");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Gray");
+	m_spTexture->AddTexture(L"yun01");
+	m_spTexture->AddTexture(L"yun01");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CGanesha_Impact_Eff::Start()

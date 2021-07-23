@@ -40,6 +40,12 @@ SP(Engine::CObject) CSakura_WSkill_Twist::MakeClone()
 void CSakura_WSkill_Twist::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Twist");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"fx_snowfield_fog03");
+	m_spTexture->AddTexture(L"fx_snowfield_fog03");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_spTransform->SetSize(0.03f, 0.03f, 0.03f);
 }
 

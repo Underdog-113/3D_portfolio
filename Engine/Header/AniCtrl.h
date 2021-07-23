@@ -52,9 +52,13 @@ public:
 					void		SetLoopAnim(_uint animIndex);
 
 					void		ChangeAniSet_NoBlend(_uint index);
+					void		PlayOnMovie(_float deltaTime);
+
 private:
 					_uint		FindIndexByName		(std::string const& name, LPD3DXANIMATIONSET pAS);
 					
+
+	GETTOR_SETTOR	(_bool,							m_isMovieOn,	false,	IsMovieOn)
 private:
 	GETTOR			(LPD3DXANIMATIONCONTROLLER,		m_pAniCtrl,		nullptr,	AniCtrl)
 	GETTOR			(_uint,							m_curTrack,		0,			CurTrack)

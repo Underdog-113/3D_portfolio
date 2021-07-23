@@ -8,6 +8,7 @@
 
 #include "Bronya_Weapon.h"
 #include "BronyaBullet.h"
+#include "BronyaGrenade.h"
 #include "Layer.h"
 
 _uint CMB_Bronya::m_s_uniqueID = 0;
@@ -54,13 +55,14 @@ void CMB_Bronya::Awake(void)
 		CBronyaHitPattern::Create(),
 		CBronyaAirbornePattern::Create(),
 		CBronyaStunPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+ 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
+ 	m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
+ 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
+// 	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create());
 }
 
 void CMB_Bronya::Start(void)
@@ -73,7 +75,7 @@ void CMB_Bronya::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(26277.f);
+	stat.SetBaseHp(11277.f);
 	stat.SetBaseAtk(110.f);
 	stat.SetBaseDef(37.f);
 
@@ -83,10 +85,11 @@ void CMB_Bronya::Start(void)
 
 	//stat.SetType(BaseStat::Mecha);
 	m_pStat->SetupStatus(&stat);
-	m_pStat->SetHPMagnification(10);
+	m_pStat->SetHPMagnification(6);
 	m_pStat->SetOnSuperArmor(true);
-	m_pStat->SetMaxBreakGauge(1000.f);
+	m_pStat->SetMaxBreakGauge(99999.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
+	m_weakTime = 8.f;
 
 	m_pSuperArmor->SetHitL(true);
 	m_pSuperArmor->SetHitH(true);
@@ -105,7 +108,10 @@ void CMB_Bronya::Start(void)
 	ArsenalEffectPosLoad();
 	BulletReload();
 	EquipBomb();
+	EquipGrenade();
 	SetupEscapePos();
+
+	m_fAlpha = 1.f;
 }
 
 void CMB_Bronya::FixedUpdate(void)
@@ -128,6 +134,11 @@ void CMB_Bronya::Update(void)
 	m_actualBoneMat *= m_spTransform->GetWorldMatrix();
 	
 	pWeaponTransform->SetParentMatrix(&m_actualBoneMat);
+
+	if (0.f >= m_pStat->GetCurBreakGauge() && false == GetComponent<CPatternMachineC>()->GetOnStun())
+	{
+		GetComponent<CPatternMachineC>()->SetOnStun(true);
+	}
 }
 
 void CMB_Bronya::LateUpdate(void)
@@ -138,6 +149,8 @@ void CMB_Bronya::LateUpdate(void)
 void CMB_Bronya::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("g_Alpha", m_fAlpha);
+	pEffect->CommitChanges();
 }
 
 void CMB_Bronya::Render(LPD3DXEFFECT pEffect)
@@ -198,6 +211,11 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 {
 	__super::ApplyHitInfo(info);
 
+	if (true == m_pStat->GetOnPatternShield())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
@@ -233,14 +251,6 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 	case HitInfo::CC_None:
 		break;
 	case HitInfo::CC_Stun:
-		//if (false == m_pSuperArmor->GetStun())
-		//{
-		//	this->GetComponent<CPatternMachineC>()->SetOnStun(true);
-		//}
-		//else if (true == m_pSuperArmor->GetStun())
-		//{
-		//	if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnStun(true);
-		//}
 		break;
 	case HitInfo::CC_Sakura:
 		break;
@@ -317,6 +327,16 @@ void CMB_Bronya::EquipBomb()
 		m_vExplosions[i]->GetTransform()->SetSize(0.001f, 0.001f, 0.001f);
 		m_vExplosions[i]->GetTransform()->SetPosition(m_vRangeEffectPos[i]);
 		m_vExplosions[i]->SetMove(false);
+	}
+}
+
+void CMB_Bronya::EquipGrenade()
+{
+	for (_int i = 0; i < 3; ++i)
+	{
+		m_vGrenades.emplace_back(std::dynamic_pointer_cast<CBronyaGrenade>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaGrenade", true, (_uint)ELayerID::Enemy, L"BronyaGrenade")));
+		m_vGrenades[i]->SetIsEnabled(false);
+		m_vGrenades[i]->GetTransform()->SetSize(2.f, 2.f, 2.f);
 	}
 }
 

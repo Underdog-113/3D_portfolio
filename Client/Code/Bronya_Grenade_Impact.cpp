@@ -40,7 +40,13 @@ SP(Engine::CObject) CBronya_Grenade_Impact::MakeClone()
 void CBronya_Grenade_Impact::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Bronya_Impact");
+	m_spMesh->SetIsEffectMesh(true);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Wave01");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
 }
 
 void CBronya_Grenade_Impact::Start()

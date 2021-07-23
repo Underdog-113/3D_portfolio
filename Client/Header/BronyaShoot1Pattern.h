@@ -45,6 +45,11 @@ private:
 	_mat* m_pAttackBallMat;
 	std::wstring m_curState;
 
+	SP(Engine::CObject) m_chargeEffect = nullptr;
+	_bool m_onChargeEffect = false;
+	_bool m_onSmokeEffect = false;
+	_bool m_onShootReady = false;
+
 	_float3 m_dir;
 };
 

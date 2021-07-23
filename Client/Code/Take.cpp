@@ -131,10 +131,10 @@ void CTake::AddShot(std::wstring name, CShot * pShot)
 	m_shotMap.emplace(name, pShot);
 }
 
-void CTake::ReadyShot(std::wstring name, _float startTimeline, _float endTimeline, void * pDesc)
+void CTake::ReadyShot(std::wstring name, _float startTimeline, _float endTimeline, void * pDesc, _float readyTimeline)
 {
 	auto pShot = m_shotMap[name];
 
-	pShot->Ready(this, startTimeline, endTimeline, pDesc);
+	pShot->Ready(this, startTimeline, endTimeline, pDesc, readyTimeline);
 }
 

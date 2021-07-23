@@ -94,7 +94,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	//Out.vEmissive = float4(0, 0, 0, 1);
 	Out.vColor = albedo;
-	Out.vColor.a = 1;
+	Out.vColor.a = 1.f;
 
 	//if (Out.vColor.r > Out.vColor.g && Out.vColor.r > Out.vColor.b)
 	//	Out.vColor = vector(0, 0, 0, 1);
@@ -102,6 +102,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	Out.vColor += g_addColor;
 	Out.vColor *= g_multColor;
 	Out.vColor = Out.vColor * g_color;
+
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
 	vector normal = In.vNormal;

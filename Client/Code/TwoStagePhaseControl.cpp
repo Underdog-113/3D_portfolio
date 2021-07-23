@@ -6,6 +6,7 @@
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
 #include "BattleUiManager.h"
+#include "MovieDirector.h"
 
 CTwoStagePhaseControl::CTwoStagePhaseControl()
 {
@@ -50,12 +51,17 @@ void CTwoStagePhaseControl::Update(void)
 
 		//After being collided with PhaseChanger0
 	case (_int)ETwoStagePhase::BossBegin:
+		//아니.. 그냥... 여기서  하면 된다고.. 하면.. 되지... 왜케.. 안... 알려... 주려고.... 하는지....
+
 		if (false == m_isSoundChange)
 		{
 			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
 			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
 			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 			m_isSoundChange = true;
+
+			// movie
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_GaneshBorn();
 		}
 		break;
 

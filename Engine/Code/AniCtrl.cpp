@@ -138,7 +138,6 @@ void CAniCtrl::ChangeAniSet(std::string name, _bool fixTillEnd, _double smoothTi
 	if (pAS->GetName() == name)
 		return;
 
-	//이거하던중
 	m_pAniCtrl->GetAnimationSetByName(name.c_str(), &pAS);
 
 	m_curIndex = FindIndexByName(name, pAS);
@@ -291,6 +290,9 @@ void CAniCtrl::ChangeFakeAniSet()
 
 void CAniCtrl::Play(void)
 {
+	if (m_isMovieOn)
+		return;
+
 	_float deltaTime = m_isAdvanceByPure == true ? GET_PURE_DT : GET_DT;
 	m_timer += deltaTime * m_speed;
 	m_timeline = (double)m_timer / m_period;
@@ -307,6 +309,9 @@ void CAniCtrl::Play(void)
 
 void CAniCtrl::PlayFake()
 {
+	if (m_isMovieOn)
+		return;
+
 	_float deltaTime = m_isAdvanceByPure == true ? GET_PURE_DT : GET_DT;
 	m_fakeTimer += deltaTime * m_speed;
 
@@ -430,4 +435,32 @@ void CAniCtrl::ChangeAniSet_NoBlend(_uint index)
 
 		m_isFakeAniChange = true;
 	}
+}
+
+void CAniCtrl::PlayOnMovie(_float deltaTime)
+{
+	m_timer += deltaTime * m_speed;
+	m_timeline = (double)m_timer / m_period;
+
+	if (m_replay == false && m_timer > m_period)
+	{
+		m_timer = (_float)m_period;
+		return;
+	}
+
+	m_pAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
+
+
+	m_fakeTimer += deltaTime * m_speed;
+
+	m_fakeTimeline = (double)m_fakeTimer / m_fakePeriod;
+	if (m_fakeTimeline >= 0.99)
+	{
+		m_isFakeAniEnd = true;
+
+		return;
+	}
+
+	m_pFakeAniCtrl->AdvanceTime(deltaTime * m_speed, NULL);
+
 }
