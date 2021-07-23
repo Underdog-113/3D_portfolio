@@ -76,7 +76,9 @@ namespace Engine
 		MeshAlphaTestShader		= 8,
 		BlurShader				= 9, 
 		ShadowShader			= 10,
-		NumOfShaderID			= 11
+		EmissionShader			= 11,
+		FinalShader				= 12,
+		NumOfShaderID			= 13
 	};
 
 #pragma endregion

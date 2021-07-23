@@ -53,7 +53,7 @@ void CGraphicsManager::PreRender(void)
 {
 	GET_DEVICE->Clear(0, nullptr,
 		D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DXCOLOR(1.f, 1.f, 0.f, 1.f),
+		D3DXCOLOR(0.f, 1.f, 0.5f, 1.f),
 		1.f, 0);
 
 	GET_DEVICE->BeginScene();
@@ -65,17 +65,18 @@ void CGraphicsManager::Render(void)
 
 	//Deferred Start
 	RenderNonAlpha();
+	RenderAlphaTest();
 	RenderEffect();
-	RenderBlur();
-	//RenderEmissive();
 	RenderLights();
 	//Deferred End
 	RenderDeferBlend();
+	RenderBlur();
+	RenderEmissive();
 
-	RenderWire();
-	RenderAlphaTest();
+	RenderFinal();
 	RenderAlphaBlend();
 	RenderParticle();
+	RenderWire();
 	RenderUI();
 
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
@@ -163,16 +164,16 @@ void CGraphicsManager::InitDeferredBuffer(void)
 
 	m_pVertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
 
-	pVertex[0].position = _float4(-1.f, -1.f, 0.f, 1.f);
+	pVertex[0].position = _float4(-0.5f, -0.5f, 0.f, 1.f);
 	pVertex[0].texUV = _float2(0.f, 0.f);
 
-	pVertex[1].position = _float4((_float)viewport.Width - 1.f, -1.f, 0.f, 1.f);
+	pVertex[1].position = _float4((_float)viewport.Width - 0.5f, -0.5f, 0.f, 1.f);
 	pVertex[1].texUV = _float2(1.f, 0.f);
 
-	pVertex[2].position = _float4((_float)viewport.Width - 1.f, (_float)viewport.Height - 1.f, 0.f, 1.f);
+	pVertex[2].position = _float4((_float)viewport.Width - 0.5f, (_float)viewport.Height - 0.5f, 0.f, 1.f);
 	pVertex[2].texUV = _float2(1.f, 1.f);
 
-	pVertex[3].position = _float4(-1.f, (_float)viewport.Height - 1.f, 0.f, 1.f);
+	pVertex[3].position = _float4(-0.5f, (_float)viewport.Height - 0.f, 0.f, 1.f);
 	pVertex[3].texUV = _float2(0.f, 1.f);
 
 	m_pVertexBuffer->Unlock();
@@ -375,16 +376,16 @@ void CGraphicsManager::RenderBlur(void)
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
 	_int scrWidth = GET_WND_WIDTH;
 	_int scrHeight = GET_WND_HEIGHT;
-	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_Emissive"), pRTM->FindRenderTarget(L"Target_BlurDiv2_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv2_Fin"), 
+	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_Emissive"), pRTM->FindRenderTarget(L"Target_BlurDiv2_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv2_Fin"),
 				   scrWidth / 2.f, scrHeight / 2.f);
 
-	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_BlurDiv2_Fin"), pRTM->FindRenderTarget(L"Target_BlurDiv4_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv4_Fin"), 
+	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_BlurDiv2_Fin"), pRTM->FindRenderTarget(L"Target_BlurDiv4_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv4_Fin"),
 				   scrWidth / 4.f, scrHeight / 4.f);
-	
-	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_BlurDiv4_Fin"), pRTM->FindRenderTarget(L"Target_BlurDiv8_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv8_Fin"), 
+
+	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_BlurDiv4_Fin"), pRTM->FindRenderTarget(L"Target_BlurDiv8_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv8_Fin"),
 				   scrWidth / 8.f, scrHeight / 8.f);
-	
-	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_BlurDiv8_Fin"), pRTM->FindRenderTarget(L"Target_BlurDiv16_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv16_Fin"), 
+
+	RenderBlurToRT(pRTM->FindRenderTarget(L"Target_BlurDiv8_Fin"), pRTM->FindRenderTarget(L"Target_BlurDiv16_Ver"), pRTM->FindRenderTarget(L"Target_BlurDiv16_Fin"),
 				   scrWidth / 16.f, scrHeight / 16.f);
 }
 
@@ -430,6 +431,31 @@ void CGraphicsManager::RenderBlurToRT(CRenderTarget * pInputRT, CRenderTarget * 
 
 void CGraphicsManager::RenderEmissive(void)
 {
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	CShader* pEmissionShader = GET_SHADER((_int)EShaderID::EmissionShader);
+	pEmissionShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pEmissionShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_Final");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Emissive", "g_Emissive");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv2_Fin", "g_EmissionBlur2");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv4_Fin", "g_EmissionBlur4");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv8_Fin", "g_EmissionBlur8");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv16_Fin", "g_EmissionBlur16");
+
+	pEffect->Begin(nullptr, 0);
+	pEffect->BeginPass(0);
+
+	pDevice->SetStreamSource(0, m_pBlurVertexBuffer, 0, sizeof(_VertexScreen));
+	pDevice->SetFVF(FVF_SCR);
+
+	pDevice->SetIndices(m_pBlurIndexBuffer);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+	pEffect->End();
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
 void CGraphicsManager::RenderLights(void)
@@ -476,6 +502,8 @@ void CGraphicsManager::RenderDeferBlend(void)
 
 	pEffect->EndPass();
 	pEffect->End();
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
 void CGraphicsManager::RenderWire(void)
@@ -584,7 +612,7 @@ void CGraphicsManager::RenderAlphaBlend(void)
 					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
 					pEffect->CommitChanges();
-					
+
 					_uint maxPass = 0;
 
 					pEffect->Begin(&maxPass, 0);
@@ -713,4 +741,26 @@ void CGraphicsManager::RenderUI(void)
 	}
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+}
+
+void CGraphicsManager::RenderFinal(void)
+{
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	CShader* pFinalShader = GET_SHADER((_int)EShaderID::FinalShader);
+	pFinalShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pFinalShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_FinalTexture");
+
+	pEffect->Begin(NULL, 0);
+	pEffect->BeginPass(0);
+
+	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
+	pDevice->SetFVF(FVF_SCR);
+
+	pDevice->SetIndices(m_pIndexBuffer);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+	pEffect->End();
 }
