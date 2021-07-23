@@ -244,6 +244,7 @@
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\DropItemManager.h" />
+    <ClInclude Include="..\Header\GachBoxC.h" />
     <ClInclude Include="..\Header\MousePointC.h" />
     <ClInclude Include="..\Header\Shot.h" />
     <ClInclude Include="..\Header\CloudObject.h" />
@@ -626,6 +627,7 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\DropItemManager.cpp" />
+    <ClCompile Include="..\Code\GachBoxC.cpp" />
     <ClCompile Include="..\Code\MousePointC.cpp" />
     <ClCompile Include="..\Code\Shot.cpp" />
     <ClCompile Include="..\Code\CloudObject.cpp" />

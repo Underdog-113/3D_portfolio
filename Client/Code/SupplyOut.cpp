@@ -13,17 +13,36 @@ CSupplyOut::~CSupplyOut()
 
 void CSupplyOut::Start()
 {
+	m_production = true;
+
 	m_outCount = CSupplyManager::GetInstance()->GetOutCount();
 	m_itemType = CSupplyManager::GetInstance()->GetSupplyOldState();
 
-	Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas")->SetIsEnabled(true);
-	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_2")->SetIsEnabled(false);
-	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_3")->SetIsEnabled(false);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"BackGroundCanvas")->SetIsEnabled(false);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"SelectCanvas")->SetIsEnabled(false);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas")->SetIsEnabled(false);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"SupplyCanvas")->SetIsEnabled(false);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas")->SetIsEnabled(false);
 
 	m_scrollView = static_cast<CScrollViewObject*>(Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas_ScrollView_0").get());
 	m_scrollView->AllDelete();
 
 	m_timer = 0.3f;
+
+
+	SP(Engine::CObject) box = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_uint)ELayerID::Player, L"box");
+	box->GetComponent<Engine::CTransformC>()->AddPositionY(-1.1f);
+	box->GetComponent<Engine::CMeshC>()->SetMeshData(L"GachaBox");
+	box->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	box->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	box->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	box->AddComponent<CGachBoxC>()->SetProduction(&m_production);
+
+	SP(Engine::CObject) gachaMap = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"DecoObject", true, (_uint)ELayerID::Player, L"map");
+	gachaMap->GetComponent<Engine::CMeshC>()->SetMeshData(L"GachaMap");
+	gachaMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
+	gachaMap->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+	gachaMap->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 
 
 	if (m_itemType == 0)
@@ -34,9 +53,13 @@ void CSupplyOut::Start()
 
 void CSupplyOut::End()
 {
+	Engine::GET_CUR_SCENE->FindObjectByName(L"box")->SetDeleteThis(true);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"map")->SetDeleteThis(true);
+
+	Engine::GET_CUR_SCENE->FindObjectByName(L"BackGroundCanvas")->SetIsEnabled(true);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
+	Engine::GET_CUR_SCENE->FindObjectByName(L"SupplyCanvas")->SetIsEnabled(true);
 	Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas")->SetIsEnabled(false);
-	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_2")->SetIsEnabled(true);
-	Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas_Button_3")->SetIsEnabled(true);
 }
 
 _uint CSupplyOut::FixedUpdate()
@@ -46,10 +69,17 @@ _uint CSupplyOut::FixedUpdate()
 
 _uint CSupplyOut::Update()
 {
-	if(m_itemType == 0)
-		WeaponRandomBox();
-	else if (m_itemType == 1)
-		ItemRandomBox();
+	if (m_production)
+	{
+
+	}
+	else if (!m_production)
+	{
+		if (m_itemType == 0)
+			WeaponRandomBox();
+		else if (m_itemType == 1)
+			ItemRandomBox();
+	}
 
 	return _uint();
 }

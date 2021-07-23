@@ -36,6 +36,8 @@ private:
 	void ItemList();
 	void WeaponList();
 private:
+	_bool m_production;
+
 	_bool m_init;
 	std::list<ItemInfo> m_itemList;
 

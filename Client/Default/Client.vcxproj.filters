@@ -1084,6 +1084,9 @@
     <Filter Include="09.Manager\10.DropItemManager">
       <UniqueIdentifier>{da881c1b-6178-476a-8b60-663dbb0e83f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\05.GachBoxC">
+      <UniqueIdentifier>{29f7b4da-be28-4248-a2de-fa6bb7ff41ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2253,6 +2256,9 @@
     <ClInclude Include="..\Header\DropItemManager.h">
       <Filter>09.Manager\10.DropItemManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\GachBoxC.h">
+      <Filter>03.Component\05.GachBoxC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3331,6 +3337,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DropItemManager.cpp">
       <Filter>09.Manager\10.DropItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GachBoxC.cpp">
+      <Filter>03.Component\05.GachBoxC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

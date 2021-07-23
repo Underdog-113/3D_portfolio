@@ -70,6 +70,9 @@ void CScrollViewObject::Update(void)
 {
 	__super::Update();
 	
+	if (m_vButtonObject.empty())
+		return;
+
 	Scroll();
 
 	if (m_chack)

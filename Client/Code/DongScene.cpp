@@ -208,7 +208,7 @@ AddImageObjectData(4, L"10501", _float3(123, 112, 0), _float2(-40, -30));
 
 {
 	SP(Engine::CImageObject) image =
-		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L"MainCanvas_image2"));
+		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L""));
 	image->GetTransform()->SetPositionZ(0.0f);
 	image->GetTransform()->SetSize(_float3(800, 600, 0));
 	image->GetTexture()->AddTexture(L"SpaceShipBridge_DeepOcean", 0);
