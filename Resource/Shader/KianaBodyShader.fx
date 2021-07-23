@@ -72,7 +72,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
 	Out.vEmissive = albedo;
-	if (albedo.r > 0.3f && albedo.b < 0.3f)
+	if (albedo.r > 0.4f && albedo.b < 0.3f)
 		Out.vEmissive.a = 1.f;
 
 	Out.vColor = albedo;
@@ -95,7 +95,7 @@ technique Default_Device
 	{
 		alphablendenable = true;
 		srcblend = srcalpha;
-		destblend = invsrcalpha;
+		destblend = zero;
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 		CullMode = CCW;

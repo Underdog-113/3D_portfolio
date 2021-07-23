@@ -78,6 +78,7 @@ public:
 public:
 					void				UpdateForward			(void);
 					void				UpdateRotation			(void);
+					_float3				GetUpdatedRotation		(_float3 forward);
 					void				UpdateRotationWithUp	(void);
 					void				UpdateWorldMatrix		(void);
 

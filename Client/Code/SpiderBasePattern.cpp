@@ -77,7 +77,7 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 
 			_float3 mPos = pOwner->GetTransform()->GetPosition();
 			spMeshEffect->GetComponent<Engine::CTransformC>()->SetPosition(mPos);
-			spMeshEffect->GetComponent<Engine::CTransformC>()->AddPositionY(0.5f);
+			spMeshEffect->GetComponent<Engine::CTransformC>()->AddPositionY(0.f);
 			spMeshEffect->GetComponent<Engine::CTransformC>()->SetSize(_float3(0.2f, 0.2f, 0.2f));
 
 			return;
@@ -99,6 +99,8 @@ void CSpiderBasePattern::Pattern(Engine::CObject* pOwner)
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"SpiderExplosion", true);
 		m_spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
 		m_spSoftEffect->GetTransform()->SetPosition(mPos);
+		m_spSoftEffect->GetComponent<Engine::CTransformC>()->AddPositionY(0.1f);
+		m_spSoftEffect->GetComponent<Engine::CTransformC>()->SetSize(_float3(2.f,2.f,2.f));
 		pOwner->AddComponent<Engine::CFadeInOutC>()->SetSpeed(0.65f);
 	}
 	// 공격1 상태라면

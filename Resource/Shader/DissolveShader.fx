@@ -86,18 +86,8 @@ struct PS_INPUT
 
 };
 
-struct PS_OUTPUT
+float4 ps_main(VS_OUTPUT Input) : COLOR0
 {
-	vector		vColor : COLOR0;
-	vector		vNormal : COLOR1;
-	vector		vDepth	: COLOR2;
-	vector		vEmissive : COLOR3;
-};
-
-PS_OUTPUT ps_main(VS_OUTPUT Input)
-{
-	PS_OUTPUT Out = (PS_OUTPUT)0;
-
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
@@ -110,6 +100,8 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 
 	float4 blendColor = (Noise * albedo) + ((1.0f - Noise) * Serve);
 
+	blendColor.a = 0;
+	blendColor = saturate(blendColor);
 
 	// To disappear to match the noise texture
 	float multiply1 = 0;
@@ -149,26 +141,24 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 
 	if (m_defaultDissolveVal >= CurrentDissolveVal)
 	{
-		DissolveLineSize = float3(100.f, 100.f, 100.f);
+		DissolveLineSize = float3(1.f, 0.f, 0.f);
 	}
 	else
 	{
-		DissolveLineSize = float3(10, 10, 10);
+		DissolveLineSize = float3(0, 0, 0);
 	}
 
 	float3 diffuse = float3(0, 0, 0);
 
 	if (gTrailCheck)
 	{
-		return Out;
+		return blendColor;
 	}
 	else
 	{
 		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
-		Out.vColor = float4(diffuse, multiple);
-		Out.vEmissive = float4(blendColor.rgb, gAlpha);
 
-		return Out;
+		return float4(diffuse, multiple);
 	}
 
 }

@@ -22,6 +22,11 @@ private:
 public:
 	static const	EComponentID	m_s_componentID = EComponentID::TargetPosition;
 private:
-	GETTOR_SETTOR(_bool*, m_production, nullptr, Production);
+	GETTOR_SETTOR(_bool*, m_production, nullptr, Production)
+
+	_float m_timer;
+	_int  m_eventCnt;
+	_bool m_bSpawn;
+	SP(Engine::CObject) m_spEndEff;
 };
 #endif

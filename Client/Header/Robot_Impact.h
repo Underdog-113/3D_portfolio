@@ -1,7 +1,7 @@
 #pragma once
-#include "SoftEffect.h"
+#include "MeshEffect_Client.h"
 
-class CRobot_Impact : public CSoftEffect
+class CRobot_Impact : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
@@ -33,8 +33,6 @@ public:
 private:
 	static		_uint m_s_uniqueID;
 
-private:
-	void UpdateFrame(_float _frmSpeed);
 
 };
 

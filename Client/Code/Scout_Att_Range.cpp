@@ -74,11 +74,7 @@ void CScout_Att_Range::Update()
 	if (m_fAlpha >= 1.f)
 	{
 		SP(Engine::CObject) spMeshEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Scout_Laser", true, (_int)Engine::ELayerID::Effect, L"MeshEffect");
-		spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Scout_Laser");
-		spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
-		spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"BallColor");
-		spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+
 		spMeshEffect->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
 		spMeshEffect->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y + 0.5f);
 		spMeshEffect->GetTransform()->SetRotation(this->GetTransform()->GetRotation());
@@ -102,7 +98,9 @@ void CScout_Att_Range::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gTmpAlpha", 0.5f);
 	pEffect->SetBool("g_bAlphaCtrl", true);
-
+	pEffect->SetBool("gPlayingAnim", false);
+	pEffect->SetBool("gPlayingAnim_UpDown", true);
+	pEffect->CommitChanges();
 }
 
 void CScout_Att_Range::Render(LPD3DXEFFECT pEffect)

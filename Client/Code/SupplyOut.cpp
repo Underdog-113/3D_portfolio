@@ -14,6 +14,9 @@ CSupplyOut::~CSupplyOut()
 void CSupplyOut::Start()
 {
 	m_production = true;
+	Engine::CSoundManager::GetInstance()->StopAll();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+	Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxStart.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 
 	m_outCount = CSupplyManager::GetInstance()->GetOutCount();
 	m_itemType = CSupplyManager::GetInstance()->GetSupplyOldState();
@@ -43,6 +46,7 @@ void CSupplyOut::Start()
 	gachaMap->GetComponent<Engine::CMeshC>()->SetInitTex(true);
 	gachaMap->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	gachaMap->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	gachaMap->GetTransform()->AddPositionY(1.f);
 
 
 	if (m_itemType == 0)
@@ -138,6 +142,9 @@ void CSupplyOut::ItemRandomBox()
 			a->GetComponent<CSizeDownC>()->SetSize(1.5f);
 			a->GetComponent<CSizeDownC>()->SetSpeed(5);
 		}
+
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+		Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxEnd.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
 	}
 }
 
@@ -185,6 +192,10 @@ void CSupplyOut::WeaponRandomBox()
 			a->GetComponent<CSizeDownC>()->SetSize(1.5f);
 			a->GetComponent<CSizeDownC>()->SetSpeed(5);
 		}
+
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
+		Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxEnd.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
+
 	}
 }
 

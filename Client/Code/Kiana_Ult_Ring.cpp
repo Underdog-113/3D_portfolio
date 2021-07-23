@@ -38,6 +38,11 @@ SP(Engine::CObject) CKiana_Ult_Ring::MakeClone()
 void CKiana_Ult_Ring::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Burst_Ring");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTexture->AddTexture(L"burst_ring");
+	m_spTexture->AddTexture(L"burst_ring");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CKiana_Ult_Ring::Start()

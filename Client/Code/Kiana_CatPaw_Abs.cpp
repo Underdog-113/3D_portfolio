@@ -104,6 +104,8 @@ void CKiana_CatPaw_Abs::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fDissolveAlpha);
+
+	pEffect->CommitChanges();
 }
 
 void CKiana_CatPaw_Abs::Render(LPD3DXEFFECT pEffect)
