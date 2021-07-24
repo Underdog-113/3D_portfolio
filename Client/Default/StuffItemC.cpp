@@ -70,7 +70,7 @@ void CStuffItemC::Update(SP(CComponent) spThis)
 
 		_float3 pos = GetOwner()->GetTransform()->GetPosition();
 		pos.y = m_oldY;
-		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.2f)
+		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.35)
 		{
 			CDropItemManager::GetInstance()->AddItemList(m_itemValue);
 			GetOwner()->SetDeleteThis(true);
