@@ -32,6 +32,8 @@ public:
 public: /* Director Mode */
 	
 	void DirectorControlMode();
+	void ReturnToMidShot();
+
 	void PivotChasing_Director();
 
 

@@ -2232,15 +2232,6 @@
     <ClInclude Include="..\Header\Take.h">
       <Filter>10.ControlTower\MovieDirector\Take</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Shot_End_StageStartTake.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Shot_FixTargetBack.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Shot_Start_StageStartTake.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\HpItemC.h">
       <Filter>03.Component\03.Item</Filter>
     </ClInclude>
@@ -2355,6 +2346,10 @@
     <ClInclude Include="..\Header\GaneshaAirbornePattern.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Shot_SlowAll.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_ReturnCameraToActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3377,15 +3372,6 @@
     <ClCompile Include="..\Code\Take.cpp">
       <Filter>10.ControlTower\MovieDirector\Take</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Shot_FixTargetBack.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Shot_Start_StageStartTake.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\HpItemC.cpp">
       <Filter>03.Component\03.Item</Filter>
     </ClCompile>
@@ -3500,6 +3486,10 @@
     <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Shot_SlowAll.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_ReturnCameraToActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

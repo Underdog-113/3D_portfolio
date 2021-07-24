@@ -8,7 +8,9 @@ public:
 		_float3 offset = ZERO_VECTOR;
 
 		_float startEulerRotate = 0.f;
+		_float startRadianRotate = 0.f;
 		_float rotateSpeed = 5.f;
+		_bool isEndless = true;
 	};
 
 public:

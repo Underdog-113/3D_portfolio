@@ -234,6 +234,7 @@ void CMonster::MonsterDead()
 	_float3 pos = GetTransform()->GetPosition();
 	pos.y += 0.3f;
 	item->GetTransform()->SetPosition(pos);
+	item->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
 	item->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	item->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	item->AddComponent<Engine::CRigidBodyC>()->AddForce(_float3(0, 500, 0));
