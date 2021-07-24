@@ -55,6 +55,9 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_Shake)
 	SAFE_DELETE(m_pShot_Victory)
 	SAFE_DELETE(m_pShot_GaneshaBorn)
+
+
+	SAFE_DELETE(m_pGaneshaShakeChannel)
 		
 
 	SAFE_DELETE(m_pGaneshaPitchCurve_1st)

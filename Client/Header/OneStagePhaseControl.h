@@ -17,7 +17,7 @@ public:
 		FirstFight2Begin	,
 		FirstFight2End		,
 		BeforeMidBoss		,
-		WarningAlarm		,	// Add
+	//	WarningAlarm		,	// Add
 		MidBossBegin		,
 		MidBossEnd			,
 		WinningSlow			,	// ReadyVictoryCutScene -> WinningSlow
