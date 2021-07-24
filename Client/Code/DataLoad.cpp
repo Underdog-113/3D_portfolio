@@ -648,7 +648,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 	}
 }
 
-SP(CPhaseChanger) CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
+void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 {
 	auto& pDataStore = pScene->GetDataStore();
 	auto& pObjectFactory = pScene->GetObjectFactory();

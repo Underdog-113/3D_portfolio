@@ -88,10 +88,6 @@ void COneStagePhaseControl::Update(void)
 		spMonClone->SetSpawnTimer(1.f);
 		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->AddMonster(spMonClone);
 	}
-	{
-		SP(Engine::CObject)& PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
-		int a = 5;
-	}
 	
 	++m_curPhase;
 		break;
@@ -105,19 +101,32 @@ void COneStagePhaseControl::Update(void)
 		//After killing all the enemies
 	case (_int)EOneStagePhase::FirstFight2End:
 		// 걸어다니기
+		// trigger 발동시 넘어감
 		break;
 
 	case (_int)EOneStagePhase::WarningAlarm:
-		++m_curPhase;
+		// 보스 3초 뒤에 출현
+		// 이 곳에 띠용띠용 코드 넣어야 됨
+		// 3초 뒤 다음 페이즈로 넘어감
+		
+		m_warningTimer += GET_DT;
+
+		if (m_warningTimer > 3.f)
+		{
+			++m_curPhase;
+		}
 		break;
 
 		//After being collided with PhaseChanger2
 	case (_int)EOneStagePhase::MidBossBegin:
+		// 미드보스와 전투
+		// 미드보스 전투가 종료되면 넘어감
 		break;
 
 		//After killing MidBoss
 	case (_int)EOneStagePhase::MidBossEnd:
 		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
+
 		++m_curPhase;
 		break;
 

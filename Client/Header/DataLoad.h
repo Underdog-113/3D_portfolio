@@ -37,7 +37,7 @@ public:
 	void MapLoad(Engine::CScene* pScene);
 
 	// 페이즈 체인저 로드
-	SP(CPhaseChanger) PhaseChangerLoad(Engine::CScene* pScene);
+	void PhaseChangerLoad(Engine::CScene* pScene);
 	
 	// 포탈 로드
 	void PortalLoad(Engine::CScene* pScene);
