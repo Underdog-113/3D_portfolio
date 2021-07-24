@@ -1219,6 +1219,7 @@ void CFSM_SakuraC::Attack_QTE_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack4);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(true);
+	m_pSakura->SetCCImmune(true);
 }
 
 void CFSM_SakuraC::Attack_QTE_Update(float deltaTime)
@@ -1330,6 +1331,7 @@ void CFSM_SakuraC::Attack_QTE2_End(void)
 	m_pSakura->UnActiveAttackBall();
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pStageControlTower->SetVertCorrecting(false);
+	m_pSakura->SetCCImmune(false);
 }
 
 void CFSM_SakuraC::Charge1_Init(void)
@@ -1439,6 +1441,7 @@ void CFSM_SakuraC::Charge1_AS_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Charge1_AS);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+	m_pSakura->SetCCImmune(true);
 }
 
 void CFSM_SakuraC::Charge1_AS_Update(float deltaTime)
@@ -1495,6 +1498,7 @@ void CFSM_SakuraC::Charge1_AS_Update(float deltaTime)
 void CFSM_SakuraC::Charge1_AS_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pSakura->SetCCImmune(false);
 }
 
 void CFSM_SakuraC::Charge1_Quick_Init(void)
@@ -2316,6 +2320,7 @@ void CFSM_SakuraC::Ultra_Enter(void)
 	m_fSpawnTimer = 0.f;
 	PlaySound_Effect(Sound_Ult_Start);
 	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::SakuraUlt);
+	m_pSakura->SetCCImmune(true);
 }
 
 void CFSM_SakuraC::Ultra_Update(float deltaTime)
@@ -2358,6 +2363,8 @@ void CFSM_SakuraC::Ultra_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pSakura->SetInfernoMode(true);
 	m_pStageControlTower->OffSakuraUltraActive();
+
+	m_pSakura->SetCCImmune(false);
 }
 
 void CFSM_SakuraC::Victory_Init(void)

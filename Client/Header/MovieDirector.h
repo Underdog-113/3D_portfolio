@@ -88,6 +88,7 @@ public:
 	void StartTake_TheresaVictory();
 	void StartTake_SakuraVictory();
 	void StartTake_GaneshBorn();
+	void StartTake_BronyaBorn();
 
 	void CutCurrentTake();
 

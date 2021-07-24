@@ -608,6 +608,62 @@ void CMovieDirector::StartTake_GaneshBorn()
 	// m_pCurTake->SetEditMode(true);
 }
 
+void CMovieDirector::StartTake_BronyaBorn()
+{
+// 	auto pTake = m_takeMap[TakeName_SakuraVictory];
+// 	m_spBlackFadeImage->SetIsEnabled(false);
+// 	m_spWhiteFadeImage->SetIsEnabled(true);
+// 
+// 	CShot_WhiteFadeIn::Desc wfi_desc;
+// 	wfi_desc.pWhiteFade = m_pWhiteFade;
+// 	pTake->ReadyShot(ShotName_WhiteFadeIn, 0.6f, 1.1f, &wfi_desc, 0.6f);
+// 
+// 	CShot_WhiteFadeOut::Desc wfo_desc;
+// 	wfo_desc.pWhiteFade = m_pWhiteFade;
+// 	pTake->ReadyShot(ShotName_WhiteFadeOut, 0.f, 0.5f, &wfo_desc, 0.f);
+// 
+// 	CShot_RotateYaw::Desc ry_desc;
+// 	ry_desc.startEulerAngle = -90.f;
+// 	ry_desc.endEulerAngle = 0.f;
+// 	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 3.6f, &ry_desc, 0.6f);
+// 
+// 	CShot_RotateYaw::Desc ry2_desc;
+// 	ry2_desc.startEulerAngle = 0.f;
+// 	ry2_desc.endEulerAngle = 20.f;
+// 	pTake->ReadyShot(ShotName_RotateYaw_SubCh1, 3.6f, 10.6f, &ry2_desc, 3.6f);
+// 
+// 	CShot_RotatePitch::Desc rp_desc;
+// 	rp_desc.startEulerAngle = 0.f;
+// 	rp_desc.endEulerAngle = -5.f;
+// 	pTake->ReadyShot(ShotName_RotatePitch, 2.6f, 3.6f, &rp_desc, 0.6f);
+// 
+// 	CShot_RotateRoll::Desc rr_desc;
+// 	rr_desc.startEulerAngle = -5.f;
+// 	rr_desc.endEulerAngle = 0.f;
+// 	pTake->ReadyShot(ShotName_RotateRoll, 2.6f, 3.6f, &rr_desc, 0.6f);
+// 
+// 	CShot_PushOut::Desc po_desc;
+// 	po_desc.startDistance = 0.3f;
+// 	po_desc.endDistance = 0.6f;
+// 	pTake->ReadyShot(ShotName_PushOut, 0.6f, 2.1f, &po_desc, 0.6f);
+// 
+// 	CShot_MovePivot::Desc mp_desc;
+// 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+// 	mp_desc.startOffset = pActor->GetTransform()->GetUp() * 0.15f + pActor->GetTransform()->GetRight() * 0.1f;
+// 	mp_desc.endOffset = pActor->GetTransform()->GetUp() * 0.11f + pActor->GetTransform()->GetRight() * -0.15f;
+// 	pTake->ReadyShot(ShotName_MovePivot, 0.6f, 3.6f, &mp_desc, 0.6f);
+// 
+// 
+// 	CShot_ActorVictory::Desc av_desc;
+// 	pTake->ReadyShot(ShotName_Victory, 0.6f, 10.f, &av_desc, 0.6f);
+// 
+// 	m_pCurTake = pTake;
+// 
+// 	m_pCurTake->StartTake();
+// 	m_onAir = true;
+	StartTake_BlackFadeIn();
+}
+
 void CMovieDirector::CutCurrentTake()
 {
 	m_pCurTake->EndTake();

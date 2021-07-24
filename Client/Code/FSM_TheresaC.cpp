@@ -1117,6 +1117,8 @@ void CFSM_TheresaC::Charge1_Enter(void)
 	ResetCheckMembers();
 
 	m_pTheresa->On_Axe();
+
+	m_pTheresa->SetCCImmune(true);
 }
 
 void CFSM_TheresaC::Charge1_Update(float deltaTime)
@@ -1175,6 +1177,8 @@ void CFSM_TheresaC::Charge1_End(void)
 	
 	m_pTheresa->Off_Axe();
 	OffAxeCollider();
+
+	m_pTheresa->SetCCImmune(false);
 }
 
 void CFSM_TheresaC::Charge2_Init(void)
@@ -1192,6 +1196,7 @@ void CFSM_TheresaC::Charge2_Enter(void)
 	ResetCheckMembers();
 
 	m_pTheresa->On_Axe();
+	m_pTheresa->SetCCImmune(true);
 }
 
 void CFSM_TheresaC::Charge2_Update(float deltaTime)
@@ -1252,6 +1257,8 @@ void CFSM_TheresaC::Charge2_End(void)
 
 	m_pTheresa->Off_Axe();
 	OffAxeCollider();
+
+	m_pTheresa->SetCCImmune(false);
 }
 
 void CFSM_TheresaC::Attack_QTE_Init(void)
@@ -1267,6 +1274,7 @@ void CFSM_TheresaC::Attack_QTE_Enter(void)
 	ResetCheckMembers();
 
 	m_pTheresa->On_Axe();
+	m_pTheresa->SetCCImmune(true);
 }
 
 void CFSM_TheresaC::Attack_QTE_Update(float deltaTime)
@@ -1328,6 +1336,7 @@ void CFSM_TheresaC::Attack_QTE_End(void)
 
 	m_pTheresa->Off_Axe();
 	OffAxeCollider();
+	m_pTheresa->SetCCImmune(false);
 }
 
 void CFSM_TheresaC::Victory_Init(void)
@@ -1504,6 +1513,7 @@ void CFSM_TheresaC::Ultra_Enter(void)
 	m_pStageControlTower->GetCameraMan()->SetTargetingMidRatio(0.65f);
 
 	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::TheresaUlt);
+	m_pTheresa->SetCCImmune(true);
 }
 
 void CFSM_TheresaC::Ultra_Update(float deltaTime)
@@ -1569,6 +1579,9 @@ void CFSM_TheresaC::Ultra_End(void)
 	m_pStageControlTower->GetCameraMan()->SetTargetingMidRatio(0.5f);
 
 	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::NoColoring);
+
+	m_pTheresa->Off_Axe();
+	m_pTheresa->SetCCImmune(false);
 }
 
 void CFSM_TheresaC::CastCross_Init(void)

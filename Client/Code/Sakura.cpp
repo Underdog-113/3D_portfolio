@@ -195,6 +195,9 @@ void CSakura::SetBasicName(void)
 
 void CSakura::ApplyHitInfo(HitInfo info)
 {
+	if (m_ccImmune)
+		return;
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
