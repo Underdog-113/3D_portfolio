@@ -22,6 +22,8 @@
 #include "Monster.h"
 #include "Layer.h"
 
+#include "Stage_Wall.h"
+
 COneStageScene::COneStageScene()
 {
 }

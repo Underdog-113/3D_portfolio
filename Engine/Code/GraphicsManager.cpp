@@ -70,11 +70,11 @@ void CGraphicsManager::Render(void)
 	RenderLights();
 	//Deferred End
 	RenderDeferBlend();
+	RenderAlphaBlend();
 	RenderBlur();
 	RenderEmissive();
 
 	RenderFinal();
-	RenderAlphaBlend();
 	RenderParticle();
 	RenderWire();
 	RenderUI();

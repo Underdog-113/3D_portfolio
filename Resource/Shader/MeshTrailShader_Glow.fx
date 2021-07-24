@@ -9,6 +9,7 @@ float4 gWorldLightPosition;
 
 float  gTime;
 float  gTrailAlpha;
+float  gEmissionPow = 0.2f;
 bool   gisSpawn;
 
 float  m_defaultDissolveVal = 0.9f;
@@ -127,6 +128,10 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 
 		return Out;
 	}		
+
+	Out.vColor = blendColor;
+	Out.vEmissive = float4(blendColor.rgb, gTrailAlpha);
+
 	return Out;
 }
 

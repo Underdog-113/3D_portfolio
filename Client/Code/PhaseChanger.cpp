@@ -176,7 +176,7 @@ void CPhaseChanger::OnTriggerExit(Engine::CCollisionC const * pCollisionC)
 {
 }
 
-void CPhaseChanger::AddRestrictLine(SP(CMapObject2D) spRestrictLine)
+void CPhaseChanger::AddRestrictLine(SP(Engine::CObject) spRestrictLine)
 {
 	spRestrictLine->SetIsEnabled(false);
 	m_vRestrictLine.emplace_back(spRestrictLine);

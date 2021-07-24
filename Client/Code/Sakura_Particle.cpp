@@ -42,19 +42,16 @@ void CSakura_Particle::Awake()
 	__super::Awake();
 	m_spTexture->AddTexture(L"LaserColor");
 	m_spTexture->AddTexture(L"Effect_Wave06");
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
-	m_spTransform->SetSize(0.2f, 0.2f, 0.2f);
+	m_spTransform->SetSize(0.07f, 0.07f, 0.07f);
 }
 
 void CSakura_Particle::Start()
 {
 	__super::Start();
-	m_spTransform->AddRotationX(D3DXToRadian(rand() % -180) + 180);
-	m_spTransform->AddRotationY(D3DXToRadian(rand() % -180) + 180);
-	m_spTransform->AddRotationZ(D3DXToRadian(rand() % -180) + 180);
-	m_spTransform->SetPosition(m_spTransform->GetOwner()->GetTransform()->GetPosition());
-	m_tmpScale = m_spTransform->GetSize();
+
+	InitParticle();	
 
 	m_fAlphaWidth = 1.f;
 	m_fAlphaHeight = 1.f;
@@ -76,17 +73,11 @@ void CSakura_Particle::Update()
 {
 	__super::Update();
 
-
 	if (m_spTransform->GetSize().x <= 0.f || m_spTransform->GetSize().y <= 0.f || m_spTransform->GetSize().z <= 0.f)
 	{
-		m_spTransform->AddRotationX(D3DXToRadian(rand() % -180) + 180);
-		m_spTransform->AddRotationY(D3DXToRadian(rand() % -180) + 180);
-		m_spTransform->AddRotationZ(D3DXToRadian(rand() % -180) + 180);
-		m_spTransform->SetPosition(m_spTransform->GetOwner()->GetTransform()->GetPosition());
-		m_spTransform->SetSize(m_tmpScale);
+		resetParticle();
 	}
-	m_spTransform->AddSize(-_float3(0.05f,0.05f,0.05f) * GET_DT * 0.05f);
-	m_spTransform->AddPosition(-m_spTransform->GetForward() * GET_DT * 5.f);
+	movement();
 }
 
 void CSakura_Particle::LateUpdate()
@@ -101,7 +92,7 @@ void CSakura_Particle::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
-	pEffect->SetBool("g_zWriteEnabled", false);
+	pEffect->SetBool("g_zWriteEnabled", true);
 	pEffect->SetFloat("g_fGlow", 0.2f);
 	pEffect->CommitChanges();
 }
@@ -140,4 +131,47 @@ void CSakura_Particle::SetBasicName()
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
+}
+
+void CSakura_Particle::InitParticle()
+{
+	_float3 newForward = _float3((rand() % 180) / 179.f, (rand() % 180) / 179.f, (rand() % 180) / 179.f);
+	if (rand() % 2)
+		newForward.x *= -1;
+	if (rand() % 2)
+		newForward.z *= -1;
+
+	newForward.y = 0;
+
+	D3DXVec3Normalize(&newForward, &newForward);
+
+	m_spTransform->SetForward(newForward);
+
+	m_spTransform->SetPosition(m_spTransform->GetOwner()->GetTransform()->GetPosition() - _float3(0, 0.5f, 0));
+	m_tmpScale = m_spTransform->GetSize();
+}
+
+void CSakura_Particle::resetParticle()
+{
+	_float3 ResetForward = _float3((rand() % 180) / 179.f, (rand() % 180) / 179.f, (rand() % 180) / 179.f);
+	if (rand() % 2)
+		ResetForward.x *= -1;
+	if (rand() % 2)
+		ResetForward.z *= -1;
+	ResetForward.y = 0;
+	D3DXVec3Normalize(&ResetForward, &ResetForward);
+
+	m_spTransform->SetForward(ResetForward);
+	m_spTransform->SetPosition(m_spTransform->GetOwner()->GetTransform()->GetPosition() - _float3(0, 0.5f, 0));
+	m_spTransform->SetSize(m_tmpScale);
+}
+
+void CSakura_Particle::movement()
+{
+	_float3 newForward = m_spTransform->GetForward();
+	newForward.y += 0.1f;
+	D3DXVec3Normalize(&newForward, &newForward);
+	m_spTransform->SetForward(newForward);
+	m_spTransform->AddSize(-_float3(0.2f, 0.2f, 0.2f) * GET_DT * 0.2f);
+	m_spTransform->AddPosition(m_spTransform->GetForward() * GET_DT * 2.5f);
 }
