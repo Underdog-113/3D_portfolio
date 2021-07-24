@@ -36,6 +36,6 @@ private:
 	_float m_oldY;
 
 	_bool m_enable;
-	_int m_dir;
+	_float m_dir;
 };
 #endif

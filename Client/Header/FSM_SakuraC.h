@@ -354,7 +354,10 @@ private:
 	void RegisterAllState();
 
 	// 사쿠라 궁극기 사용 후 이펙트 관련 메서드 by YS
-	GETTOR_SETTOR(SP(Engine::CObject), m_spSakuraParticle, nullptr, SakuraParticle)
+	GETTOR_SETTOR(std::vector<SP(Engine::CObject)>, m_vSakuraParticle, {}, vSakuraParticle)
 	_float m_fSpawnTimer;
 	void SakuraParticleCtrl();
+	
+public:
+	void ClearSakuraParticle();
 };
