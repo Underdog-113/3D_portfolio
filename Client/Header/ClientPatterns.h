@@ -26,6 +26,8 @@
 #include "GaneshaDiePattern.h"
 #include "GaneshaHitPattern.h"
 #include "GaneshaBasePattern.h"
+#include "GaneshaAirbornePattern.h"
+#include "GaneshaStunPattern.h"
 #include "GaneshaStampPattern.h"
 #include "GaneshaRoll01Pattern.h"
 #include "GaneshaBurst01Pattern.h"

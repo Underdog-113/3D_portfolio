@@ -98,6 +98,7 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 			fsm->ChangeState(Name_Ganesha_Stamp);
 			m_onEffect = true;
 			return;
@@ -108,6 +109,7 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
 		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;

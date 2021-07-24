@@ -72,6 +72,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 			m_onSound = false;
 			m_onRunStart = false;
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
+
 		}
 		// 내가 대기 상태면 이동 애니로 변경
 		else if (Name_Ganesha_StandBy == fsm->GetCurStateString() &&
@@ -99,6 +101,8 @@ void CGaneshaRoll01Pattern::Pattern(Engine::CObject* pOwner)
 			m_onEffect = true;
 			fsm->ChangeState(Name_Ganesha_Roll01);
 			fsm->GetDM()->GetAniCtrl()->SetSpeed(0.9f);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+
 			return;
 		}
 	}

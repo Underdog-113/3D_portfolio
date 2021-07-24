@@ -1117,6 +1117,9 @@
     <Filter Include="02.Objects\03.Effect\02.Particle\Sakura_Particle">
       <UniqueIdentifier>{2db064b7-acb3-417d-a390-e2663dff61c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne">
+      <UniqueIdentifier>{51620c1a-dbf0-4a48-a586-921864c882a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2349,6 +2352,9 @@
     <ClInclude Include="..\Header\Sakura_Particle.h">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\GaneshaAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3490,6 +3496,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sakura_Particle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
