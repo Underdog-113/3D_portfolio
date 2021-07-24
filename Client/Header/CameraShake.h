@@ -46,6 +46,7 @@ public:
 public:
 	void PlayShake();
 	void PlayChannel(ShakeChannel* channel);
+	void PlayChannelOnMovie(_float timeline);
 	bool IsShaking();
 	
 	void AdvanceSinWave(Wave* wave, ShakeChannel* channel);
@@ -74,8 +75,8 @@ public: /* Enemy Action */
 	
 	void SetDistanceRate(_float3 eventPos, ShakeChannel* channel);
 
-private:
 	void ResetAllMember(ShakeChannel* channel);
+private:
 	void ResetRotMember(ShakeChannel* channel);
 	void ResetLocMember(ShakeChannel* channel);
 	void ResetWave(Wave* wave);
@@ -84,6 +85,8 @@ private:
 
 private:
 	GETTOR_SETTOR(SP(Engine::CCamera), m_spCamera, nullptr, Camera)
+	GETTOR_SETTOR	(_bool,			m_isMovieOn,	false,	IsMovieOn)
+	GETTOR_SETTOR	(ShakeChannel*,	m_pMovieChannel,	nullptr,	MovieChannel)
 			
 	float m_innerRadius = 5.f;			// 현재 카메라 위치에서 amplitude를 1.f배로 들을 수 있는 거리
 	float m_outerRadius = 10.f;			// 이거 밖으로는 0.f배

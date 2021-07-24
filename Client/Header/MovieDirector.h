@@ -1,30 +1,44 @@
 #pragma once
 
-#define ShotName_WhiteFadeIn		L"WhiteFadeIn"
-#define ShotName_WhiteFadeOut		L"WhiteFadeOut"
-#define ShotName_BlackFadeIn		L"BlackFadeIn"
-#define ShotName_BlackFadeOut		L"BlackFadeOut"
+#include "CameraShake.h"
+
+#define ShotName_WhiteFadeIn			L"WhiteFadeIn"
+#define ShotName_WhiteFadeOut			L"WhiteFadeOut"
+#define ShotName_BlackFadeIn			L"BlackFadeIn"
+#define ShotName_BlackFadeIn_SubCh1		L"BlackFadeIn_SubCh1"
+#define ShotName_BlackFadeOut			L"BlackFadeOut"
+#define ShotName_BlackFadeOut_SubCh1	L"BlackFadeOut_SubCh1"
 
 #define ShotName_RotateAround		L"RotateAround"
 #define ShotName_RotateYaw			L"RotateYaw"
 #define ShotName_RotateYaw_SubCh1	L"RotateYaw_SubCh1"
 #define ShotName_RotatePitch		L"RotatePitch"
 #define ShotName_RotatePitch_Spline	L"RotatePitch_Spline"
+#define ShotName_RotatePitch_Spline_SubCh1	L"RotatePitch_Spline_SubCh1"
 #define ShotName_RotateRoll			L"RotateRoll"
 
 #define ShotName_PushIn				L"PushIn"
+#define ShotName_PushIn_SubCh1		L"PushIn_SubCh1"
 #define ShotName_PushOut			L"PushOut"
-#define ShotName_FixPivot			L"FixPivot"
+#define ShotName_PushOut_SubCh1		L"PushOut_SubCh1"
+#define ShotName_MovePivot			L"MovePivot"
+#define ShotName_MovePivot_SubCh1	L"MovePivot_SubCh1"
+#define ShotName_MovePivot_SubCh2	L"MovePivot_SubCh2"
+#define ShotName_MovePivot_SubCh3	L"MovePivot_SubCh3"
+#define ShotName_Shake				L"Shake"
 
 #define ShotName_Victory			L"Victory"
+#define ShotName_GaneshaBorn		L"GaneshaBorn"
 
-
+#define TakeName_SimpleBlackFadeIn	L"BlackFadeIn"
+#define TakeName_SimpleBlackFadeOut L"BlackFadeOut"
 #define TakeName_Failure			L"Failure"
 
 #define TakeName_SakuraVictory		L"SakuraVictory"
 
 
 #define TakeName_GaneshaBorn		L"GaneshaBorn"
+
 
 class CShot;	 
 class CTake;
@@ -48,8 +62,12 @@ public:
 	void CreateTake_SakuraVictory();
 
 	void CreateTake_GaneshaBorn();
+	void CreateGanshaBornShakeChannel();
 
 public:
+	void StartTake_BlackFadeIn();
+	void StartTake_BlackFadeOut();
+
 	void StartTake_Failure();
 	void StartTake_SakuraVictory();
 	void StartTake_GaneshBorn();
@@ -71,7 +89,11 @@ private:
 	_bool m_onAir = false;
 
 	
-	CSplineCurve* m_pGaneshaPitchCurve = nullptr;
+	CSplineCurve* m_pGaneshaPitchCurve_1st = nullptr;
+	CSplineCurve* m_pGaneshaPitchCurve_2nd = nullptr;
+	_float m_pGaneshaPitchEnd = 0.f;
+
+	ShakeChannel* m_pGaneshaShakeChannel = nullptr;
 
 	bool m_isStart = false;
 
@@ -80,19 +102,29 @@ private:
 	CShot* m_pShot_WhiteFadeOut = nullptr;
 
 	CShot* m_pShot_BlackFadeIn = nullptr;
+	CShot* m_pShot_BlackFadeIn_SubCh1 = nullptr;
 	CShot* m_pShot_BlackFadeOut = nullptr;
+	CShot* m_pShot_BlackFadeOut_SubCh1 = nullptr;
 
 	CShot* m_pShot_RotateAround = nullptr;
 	CShot* m_pShot_RotateYaw = nullptr;
 	CShot* m_pShot_RotateYaw_SubCh1 = nullptr;
 	CShot* m_pShot_RotatePitch = nullptr;
 	CShot* m_pShot_RotatePitch_Spline = nullptr;
+	CShot* m_pShot_RotatePitch_Spline_SubCh1 = nullptr;
 	CShot* m_pShot_RotateRoll = nullptr;
 
 	CShot* m_pShot_PushIn = nullptr;
+	CShot* m_pShot_PushIn_SubCh1 = nullptr;
 	CShot* m_pShot_PushOut = nullptr;
-	CShot* m_pShot_FixPivot = nullptr;
+	CShot* m_pShot_PushOut_SubCh1 = nullptr;
+	CShot* m_pShot_MovePivot = nullptr;
+	CShot* m_pShot_MovePivot_SubCh1 = nullptr;
+	CShot* m_pShot_MovePivot_SubCh2 = nullptr;
+	CShot* m_pShot_MovePivot_SubCh3 = nullptr;
+	CShot* m_pShot_Shake = nullptr;
 
 	CShot* m_pShot_Victory = nullptr;
+	CShot* m_pShot_GaneshaBorn = nullptr;
 };
 

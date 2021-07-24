@@ -10,6 +10,7 @@ float4 gWorldLightPosition;
 float  gAlpha;
 float  gSpeed;
 float  gTmpAlpha;
+float  g_fGlow = 0.2;
 
 bool   gPlayingAnim;
 bool   gPlayingAnim_UpDown = false;
@@ -118,7 +119,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 	blendColor = saturate(blendColor);
 
 	Out.vColor = blendColor;
-	Out.vEmissive = float4(blendColor.rgb, gAlpha - 0.2f);
+	Out.vEmissive = float4(blendColor.rgb, gAlpha - g_fGlow);
 
 	return Out;
 }

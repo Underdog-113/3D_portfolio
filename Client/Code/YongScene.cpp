@@ -135,7 +135,10 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Robot_Impact_Smoke", true, (_uint)Engine::ELayerID::Effect);
+		for (_uint i = 0; i < 3; ++i)
+		{
+			SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Sakura_Particle", true, (_uint)Engine::ELayerID::Effect);
+		}
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
 			// Bronya Smoke

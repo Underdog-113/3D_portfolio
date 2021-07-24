@@ -123,7 +123,8 @@ void CSoundManager::SetChannelFrequency(_uint ID, float frequency)
 
 _bool CSoundManager::IsPlaying(_uint ID)
 {
-	FMOD_BOOL bPlay = FALSE;
+	FMOD_BOOL bPlay = false;
+
 	if (FMOD_Channel_IsPlaying(m_pChannelArr[ID], &bPlay))
 		return false;
 	else
@@ -177,7 +178,7 @@ void CSoundManager::LoadSoundFile(const std::wstring & path)
 	std::wstring curDir = _SOLUTIONDIR L"Resource\\Sound\\";
 	curDir += path;
 	std::wstring fullFilePath, curFile;
-
+	
 	HANDLE handle = FindFirstFile((curDir + L"\\*").c_str(), &fd);
 
 	if (handle == INVALID_HANDLE_VALUE)

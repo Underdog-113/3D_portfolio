@@ -51,5 +51,7 @@ private:
 	GETTOR_SETTOR	(_float3,				m_destPos,			ZERO_VECTOR,	DestPos)
 
 	SP(CPortal_Plane) m_vEffect;
+
+	_bool m_isEnter = false;
 };
 #endif

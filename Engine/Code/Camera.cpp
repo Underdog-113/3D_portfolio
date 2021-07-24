@@ -381,9 +381,13 @@ void CCamera::LateUpdateTPS_Custom(void)
 	_float3 upVector;
 	D3DXVec3TransformNormal(&upVector, &UP_VECTOR, &rotationMatrix);
 
+	_float3 forwardVector = m_spTransform->GetForward();
+	D3DXMatrixRotationAxis(&rotationMatrix, &m_spTransform->GetRight(), m_TPSLocalPitch);
+	D3DXVec3TransformNormal(&forwardVector, &forwardVector, &rotationMatrix);
+
 	D3DXMatrixLookAtLH(&m_viewMat,
 		&m_spTransform->GetPosition(),
-		&(m_spTransform->GetPosition() + m_spTransform->GetForward()),
+		&(m_spTransform->GetPosition() + forwardVector),
 		&upVector);
 
 }

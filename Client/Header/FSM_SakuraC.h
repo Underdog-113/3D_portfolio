@@ -20,7 +20,6 @@
 
 #define Delay_Effect_Charge1 0.4f
 
-
 class CSakura;
 class CStageControlTower;
 class CEffectMaker_Sakura;
@@ -353,4 +352,9 @@ private:
 
 private:
 	void RegisterAllState();
+
+	// 사쿠라 궁극기 사용 후 이펙트 관련 메서드 by YS
+	GETTOR_SETTOR(SP(Engine::CObject), m_spSakuraParticle, nullptr, SakuraParticle)
+	_float m_fSpawnTimer;
+	void SakuraParticleCtrl();
 };

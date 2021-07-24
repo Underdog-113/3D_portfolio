@@ -96,7 +96,8 @@ enum class EChannelID
 	MONSTER_SPAWN		= 6 + (_int)Engine::EChannelID::NumOfChannelID,
 	PLAYEREFFECT_CH2	= 7 + (_int)Engine::EChannelID::NumOfChannelID,
 	PLAYERHIT			= 8 + (_int)Engine::EChannelID::NumOfChannelID,
-	NumOfChannelID		= 9 + (_int)Engine::EChannelID::NumOfChannelID,
+	WARNING				= 9 + (_int)Engine::EChannelID::NumOfChannelID,
+	NumOfChannelID		= 10 + (_int)Engine::EChannelID::NumOfChannelID,
 };
 
 enum class ELoadingID

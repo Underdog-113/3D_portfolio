@@ -43,6 +43,7 @@ void COneStagePhaseControl::Update(void)
 		}
 		// player born
 		break;
+
 	case (_int)EOneStagePhase::Conversation:
 		if (m_spConversation->IsEnd())
 		{
@@ -51,14 +52,13 @@ void COneStagePhaseControl::Update(void)
 		}
 		// conversation
 		break;
+
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
-		// kiana walk
 		break;
 
 		//After being collided with PhaseChanger0
 	case (_int)EOneStagePhase::FirstFight1Begin:
-		// trigger on
 		break;
 
 	case (_int)EOneStagePhase::FirstFight1End:
@@ -98,14 +98,17 @@ void COneStagePhaseControl::Update(void)
 
 		//After being collided with PhaseChanger0
 	case (_int)EOneStagePhase::FirstFight2Begin:
+
+		// 여기서도 다 죽이면 증가?????
 		break;
 
 		//After killing all the enemies
 	case (_int)EOneStagePhase::FirstFight2End:
+		// 걸어다니기
 		break;
 
-		//Before being collised with PhaseChanger2
-	case (_int)EOneStagePhase::BeforeMidBoss:
+	case (_int)EOneStagePhase::WarningAlarm:
+		++m_curPhase;
 		break;
 
 		//After being collided with PhaseChanger2
@@ -113,16 +116,16 @@ void COneStagePhaseControl::Update(void)
 		break;
 
 		//After killing MidBoss
-	case (_int)EOneStagePhase::MidBossEnd:\
+	case (_int)EOneStagePhase::MidBossEnd:
 		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
 		++m_curPhase;
 		break;
 
-	case (_int)EOneStagePhase::ReadyVictoryCutScene:
+	case (_int)EOneStagePhase::WinningSlow:
 
 		++m_curPhase;
 		break;
-	case (_int)EOneStagePhase::VictoryCutScene:
+	case (_int)EOneStagePhase::VictoryMovie:
 
 		++m_curPhase;
 		break;
@@ -143,6 +146,7 @@ void COneStagePhaseControl::Update(void)
 			m_isSoundChange = true;
 		}
 		break;
+
 	default:
 		break;
 	}

@@ -27,7 +27,7 @@
 #define Delay_Effect_Atk04 0.0f
 #define Delay_Effect_Atk05 0.05f
 
-#define FirstAttackDmgRate 1000.f
+#define FirstAttackDmgRate 50.f
 
 class CKiana;
 class CStageControlTower;
@@ -77,7 +77,7 @@ private: /* Special Actions */
 
 	bool CheckAction_Ultra(float coolTime = 0.f);
 	bool CheckAction_WeaponSkill(float coolTime = 0.f);
-	
+
 private: /* sound */
 	void PlaySound_Voice(const std::wstring& soundName);
 	void PlaySound_Effect(const std::wstring& soundName);
@@ -236,13 +236,13 @@ public:
 	void Idle_01_Enter(void);
 	void Idle_01_Update(float deltaTime);
 	void Idle_01_End(void);
-	
+
 	// Idle_02
 	void Idle_02_Init(void);
 	void Idle_02_Enter(void);
 	void Idle_02_Update(float deltaTime);
 	void Idle_02_End(void);
-	
+
 	// Idle_03
 	void Idle_03_Init(void);
 	void Idle_03_Enter(void);
