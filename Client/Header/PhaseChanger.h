@@ -35,14 +35,14 @@ public:
 				void				OnTriggerExit		(Engine::CCollisionC const* pCollisionC);
 
 public:
-				void				AddRestrictLine		(SP(CMapObject2D) spRestrictLine);
+				void				AddRestrictLine		(SP(Engine::CObject) spRestrictLine);
 				void				AddMonster			(SP(CMonster) spMonster);
 private:
 				void				SetBasicName		(void) override;
 private:
 	static		_uint				m_s_uniqueID;
 
-	typedef std::vector<SP(CMapObject2D)> _MAPOBJECT2DS;
+	typedef std::vector<SP(Engine::CObject)> _MAPOBJECT2DS;
 	GETTOR			(_MAPOBJECT2DS,				m_vRestrictLine,	{},				RestrictLines)
 
 	typedef std::vector<SP(CMonster)> _MONSTERS;

@@ -46,6 +46,7 @@ SP(Engine::CComponent) CFSM_SakuraC::MakeClone(Engine::CObject * pObject)
 void CFSM_SakuraC::Awake(void)
 {
 	__super::Awake();
+	m_vSakuraParticle.reserve(1000);
 }
 
 void CFSM_SakuraC::Start(SP(CComponent) spThis)
@@ -2569,9 +2570,20 @@ void CFSM_SakuraC::SakuraParticleCtrl()
 
 		if (m_fSpawnTimer >= 0.1f)
 		{
-			m_spSakuraParticle = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Particle", true, (_uint)Engine::ELayerID::Effect);
-			m_spSakuraParticle->GetTransform()->SetOwner(m_pSakura);
+			for (_int i = 0; i < 3; ++i)
+			{
+				SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Particle", true, (_uint)Engine::ELayerID::Effect);
+				spObj->GetTransform()->SetOwner(m_pSakura);
+
+				m_vSakuraParticle.emplace_back(spObj);
+			}
+	
 			m_fSpawnTimer = 0.f;
 		}
 	}
+}
+
+void CFSM_SakuraC::ClearSakuraParticle()
+{
+	m_vSakuraParticle.clear();
 }

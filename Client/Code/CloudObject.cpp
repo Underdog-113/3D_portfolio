@@ -77,7 +77,7 @@ void CCloudObject::Update(void)
 	if (m_spTransform->GetPosition().z > -1.f)
 	{
 		m_spTransform->AddPositionZ(-2.f * GET_DT);
-		m_fAlpha += 0.02f * GET_DT;
+		m_fAlpha += 0.01f * GET_DT;
 	}
 
 	if (m_spTransform->GetPosition().z <= -1.f)

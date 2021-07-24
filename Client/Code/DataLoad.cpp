@@ -683,12 +683,10 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 		vPhaseChanger.emplace_back(spPhaseChanger.get());
 		for (_int j = 0; j < numOfRestrictLine; ++j)
 		{
-			SP(CMapObject2D) spRestrictLine =
-				std::dynamic_pointer_cast<CMapObject2D>(pObjectFactory->AddClone(L"MapObject2D", true));
+			SP(Engine::CObject) spRestrictLine = pObjectFactory->AddClone(L"Stage_Wall", true);
 
-			spRestrictLine->GetRectTex()->SetIsOrtho(false);
-			spRestrictLine->GetGraphics()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-			spRestrictLine->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+			spRestrictLine->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+			spRestrictLine->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
 
 			std::wstring texKey;
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
@@ -719,15 +717,8 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 				L"_wall" +
 				std::to_wstring(j) +
 				L"_colSize", size);
-			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
+			spRestrictLine->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
 			spRestrictLine->AddComponent<Engine::CDebugC>();
-
-			//SP(CStage_Wall) spEffect =
-			//	std::dynamic_pointer_cast<CStage_Wall>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stage_Wall", true));
-
-			//spEffect->GetTransform()->SetPosition(position);
-			//spEffect->GetTransform()->SetRotation(rotation);
-			//spEffect->GetTransform()->SetSize(size);
 
 			spPhaseChanger->AddRestrictLine(spRestrictLine);
 		}
