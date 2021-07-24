@@ -66,7 +66,7 @@ void CMoveUpSmoke::Update()
 	m_spTransform->AddSizeX(0.1f * GET_PLAYER_DT);
 	m_spTransform->AddSizeY(0.1f * GET_PLAYER_DT);
 	m_fAlpha -= 0.5f * GET_PLAYER_DT;
-	m_fUVSpeed += GET_PLAYER_DT;
+	m_fUVSpeed += GET_PLAYER_DT * 0.5f;
 }
 
 void CMoveUpSmoke::LateUpdate()

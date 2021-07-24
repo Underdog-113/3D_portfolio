@@ -42,7 +42,7 @@ void CSickle_Trail::Awake()
 	__super::Awake();
 
 	m_spMesh->SetMeshData(L"Sickle_Attack");
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"BloomMask");
 	m_spTexture->AddTexture(L"AttackTrail_01");
 	m_spTexture->AddTexture(L"Eff_Noise_08");

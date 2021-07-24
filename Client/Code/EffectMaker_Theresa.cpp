@@ -128,8 +128,7 @@ void CEffectMaker_Theresa::CreateEffect_Charge1()
 	SP(Engine::CObject) spObj;
 	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TheresaCharge_Att", true, (_uint)Engine::ELayerID::Effect);
 	spObj->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
-	spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	spObj->GetTransform()->AddRotationY(m_pTheresa->GetTransform()->GetRotation().y);
+	spObj->GetTransform()->SetOwner(m_pTheresa);
 }
 
 void CEffectMaker_Theresa::CreateEffect_Charge2()
@@ -137,8 +136,7 @@ void CEffectMaker_Theresa::CreateEffect_Charge2()
 	SP(Engine::CObject) spObj;
 	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TheresaCharge_Att", true, (_uint)Engine::ELayerID::Effect);
 	spObj->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
-	spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	spObj->GetTransform()->AddRotationY(m_pTheresa->GetTransform()->GetRotation().y);
+	spObj->GetTransform()->SetOwner(m_pTheresa);
 }
 
 void CEffectMaker_Theresa::CreateEffect_Ultra_Charge()

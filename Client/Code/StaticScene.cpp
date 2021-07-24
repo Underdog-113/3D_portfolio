@@ -157,6 +157,7 @@
 
 //Particle
 #include "TestParticle.h"
+#include "MonsterDieParticle.h"
 
 ///// Ingame Deco Effect //////
 //Stuc
@@ -771,6 +772,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(Engine::CObject) spTestParticle(CTestParticle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTestParticle);
 
+	SP(CSoftEffect) spDieParticle(CMonsterDieParticle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDieParticle);
 
 	// Wall Effect
 	SP(CMeshEffect_Client) spStageWall(CStage_Wall::Create(true, this));

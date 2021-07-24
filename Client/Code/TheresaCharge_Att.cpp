@@ -52,6 +52,7 @@ void CTheresaCharge_Att::Awake()
 void CTheresaCharge_Att::Start()
 {
 	__super::Start();
+	m_spTransform->SetRotationY(m_spTransform->GetOwner()->GetTransform()->GetRotation().y);
 
 	m_spTheresaSmoke
 		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MoveUpSmoke", true, (_int)Engine::ELayerID::Effect));
@@ -61,7 +62,9 @@ void CTheresaCharge_Att::Start()
 	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 	m_spTheresaSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
 	m_spTheresaSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskGlowShader);
-	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x , -0.6f, this->GetTransform()->GetPosition().z));
+	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(m_spTransform->GetPosition().x, m_spTransform->GetOwner()->GetTransform()->GetPosition().y, m_spTransform->GetPosition().z));
+	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->SetRotationY(m_spTransform->GetOwner()->GetTransform()->GetRotation().y);
+	m_spTheresaSmoke->GetComponent<Engine::CTransformC>()->AddRotationY(D3DXToRadian(90));
 	m_fUVSpeed = 0.f;
 	m_fAlpha = 1.f;
 

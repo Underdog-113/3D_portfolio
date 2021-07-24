@@ -35,7 +35,11 @@ public:
 private:
 	void LoadSoundFile();
 
+public:
+	GETTOR(_TCHAR*, m_pBGMSoundKey, L"", BGMSoundKey)
+
 private:
+
 	// 사운드 리소스 정보를 갖는 객체 
 	std::unordered_map<std::wstring, FMOD_SOUND*> m_mapSound;
 	// FMOD_CHANNEL : 재생하고 있는 사운드를 관리할 객체 
