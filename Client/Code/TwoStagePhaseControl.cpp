@@ -55,15 +55,29 @@ void CTwoStagePhaseControl::Update(void)
 
 		break;
 	case (_int)ETwoStagePhase::PotalWarp:
-		CStageControlTower::GetInstance()->GetActorController()->SetDirectorMode(true);
-		//CStageControlTower::GetInstance()->SetDirectorMode(true);
-		m_warningTimer += GET_DT;
-		if (m_warningTimer > 1.f)
+		//CStageControlTower::GetInstance()->GetActorController()->SetDirectorMode(true);
+		if (!m_portalEnter)
 		{
-			_float3 warpPos = ((CPortal*)Engine::GET_CUR_SCENE->FindObjectWithKey(L"Portal").get())->GetDestPos();
-			CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->SetPosition(warpPos);
-			m_warningTimer = 0.f;
-			++m_curPhase;
+			CStageControlTower::GetInstance()->SetDirectorMode(true);
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeOut();
+			m_portalEnter = true;
+		}
+
+		m_warpTimer += GET_DT;
+		if (m_warningTimer > 0.6f)
+		{
+			if (!m_portalMove)
+			{
+				_float3 warpPos = ((CPortal*)Engine::GET_CUR_SCENE->FindObjectWithKey(L"Portal").get())->GetDestPos();
+				CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->SetPosition(warpPos);
+				CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeIn();
+				m_portalMove = true;
+			}
+			if (!m_portalEnd && m_warpTimer > 1.1f)
+			{
+				++m_curPhase;
+				m_portalEnd = true;
+			}			
 		}
 		break;
 	case (_int)ETwoStagePhase::WarningAlarm:
@@ -105,6 +119,10 @@ void CTwoStagePhaseControl::Update(void)
 		break;
 		//After killing Boss
 	case (_int)ETwoStagePhase::BossEnd:
+		m_isSoundChange = false;
+		++m_curPhase;
+		break;
+	case (_int)ETwoStagePhase::BWinningSlowossEnd:
 		m_isSoundChange = false;
 		++m_curPhase;
 		break;

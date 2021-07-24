@@ -187,6 +187,33 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_GaneshaBorn = new CShot_GaneshaBorn;
 }
 
+void CMovieDirector::CreateTake_BlackFadeIn()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_BlackFadeIn, m_pShot_BlackFadeIn);
+
+	m_takeMap.emplace(TakeName_SimpleBlackFadeIn, pTake);
+}
+
+void CMovieDirector::CreateTake_BlackFadeOut()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_BlackFadeOut, m_pShot_BlackFadeOut);
+
+	m_takeMap.emplace(TakeName_SimpleBlackFadeOut, pTake);
+}
+
+void CMovieDirector::CreateTake_WinningSlow()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_SlowAll, m_pShot_SlowAll);
+
+	m_takeMap.emplace(TakeName_WinningSlow, pTake);
+}
+
 void CMovieDirector::CreateTake_Failure()
 {
 	CTake* pTake = new CTake;
@@ -315,6 +342,21 @@ void CMovieDirector::StartTake_BlackFadeIn()
 void CMovieDirector::StartTake_BlackFadeOut()
 {
 	auto pTake = m_takeMap[TakeName_SimpleBlackFadeOut];
+	m_spBlackFadeImage->SetIsEnabled(true);
+
+	CShot_BlackFadeOut::Desc blo_desc;
+	blo_desc.pBlackFade = m_pBlackFade;
+	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.5f, &blo_desc, 0.f);
+
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
+}
+
+void CMovieDirector::StartTake_WinningSlow()
+{
+	auto pTake = m_takeMap[TakeName_WinningSlow];
 	m_spBlackFadeImage->SetIsEnabled(true);
 
 	CShot_BlackFadeOut::Desc blo_desc;
