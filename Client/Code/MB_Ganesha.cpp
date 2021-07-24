@@ -76,6 +76,7 @@ void CMB_Ganesha::Start(void)
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(4);
 	m_pStat->SetOnSuperArmor(true);
+	m_pStat->SetOnBPShield(false);
 	m_pStat->SetMaxBreakGauge(200.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
 
@@ -143,14 +144,32 @@ void CMB_Ganesha::SetBasicName(void)
 
 void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 {
+	__super::ApplyHitInfo(info);
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
 	case HitInfo::Str_Damage:
 		break;
 	case HitInfo::Str_Low:
+		if (false == m_pSuperArmor->GetHitL())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
+		else if (true == m_pSuperArmor->GetHitL())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitL(true);
+		}
 		break;
 	case HitInfo::Str_High:
+		if (false == m_pSuperArmor->GetHitH())
+		{
+			this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
+		else if (true == m_pSuperArmor->GetHitH())
+		{
+			if (false == m_pStat->GetOnSuperArmor()) this->GetComponent<CPatternMachineC>()->SetOnHitH(true);
+		}
 		break;
 	case HitInfo::Str_Airborne:
 		break;

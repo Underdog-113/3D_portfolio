@@ -41,15 +41,18 @@ void COneStagePhaseControl::Update(void)
 			EnterConversationPhase();
 			++m_curPhase;
 		}
+		// player born
 		break;
+
 	case (_int)EOneStagePhase::Conversation:
 		if (m_spConversation->IsEnd())
 		{
 			CStageControlTower::GetInstance()->SetDirectorMode(false);
 			++m_curPhase;
 		}
-
+		// conversation
 		break;
+
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
 		break;
@@ -60,7 +63,7 @@ void COneStagePhaseControl::Update(void)
 
 	case (_int)EOneStagePhase::FirstFight1End:
 	{
-		SP(Engine::CObject)& PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
+		SP(Engine::CObject) PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
 
 		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->SetTimerStart(true);
 
@@ -85,41 +88,45 @@ void COneStagePhaseControl::Update(void)
 		spMonClone->SetSpawnTimer(1.f);
 		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->AddMonster(spMonClone);
 	}
+	
 	++m_curPhase;
 		break;
 
 		//After being collided with PhaseChanger0
 	case (_int)EOneStagePhase::FirstFight2Begin:
+
+		// 여기서도 다 죽이면 증가?????
 		break;
 
 		//After killing all the enemies
 	case (_int)EOneStagePhase::FirstFight2End:
+		// 걸어다니기
+		// trigger 발동시 넘어감
 		break;
 
-	//	//Before being collised with PhaseChanger1
-	//case (_int)EOneStagePhase::BeforeSecondFight:
-	//	break;
+	case (_int)EOneStagePhase::WarningAlarm:
+		// 보스 3초 뒤에 출현
+		// 이 곳에 띠용띠용 코드 넣어야 됨
+		// 3초 뒤 다음 페이즈로 넘어감
+		
+		m_warningTimer += GET_DT;
 
-	//	//After being collided with PhaseChanger1
-	//case (_int)EOneStagePhase::SecondFightBegin:
-	//	break;
-
-	//	//After killing all the enemies
-	//case (_int)EOneStagePhase::SecondFightEnd:
-	//	++m_curPhase;
-	//	break;
-
-		//Before being collised with PhaseChanger2
-	case (_int)EOneStagePhase::BeforeMidBoss:
+		if (m_warningTimer > 3.f)
+		{
+			++m_curPhase;
+		}
 		break;
 
 		//After being collided with PhaseChanger2
 	case (_int)EOneStagePhase::MidBossBegin:
+		// 미드보스와 전투
+		// 미드보스 전투가 종료되면 넘어감
 		break;
 
 		//After killing MidBoss
 	case (_int)EOneStagePhase::MidBossEnd:
 		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
+
 		++m_curPhase;
 		break;
 
@@ -148,6 +155,7 @@ void COneStagePhaseControl::Update(void)
 			m_isSoundChange = true;
 		}
 		break;
+
 	default:
 		break;
 	}
