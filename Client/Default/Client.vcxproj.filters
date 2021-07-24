@@ -2331,6 +2331,9 @@
     <ClInclude Include="..\Header\Shot_PushIn.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Shot_GaneshaBorn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\MeshTrailShader_Glow.h">
       <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
     </ClInclude>
@@ -3469,6 +3472,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shot_PushIn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshTrailShader_Glow.cpp">
       <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>

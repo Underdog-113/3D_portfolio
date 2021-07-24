@@ -48,6 +48,7 @@ void CShot_ActorVictory::Ready(CTake * pTake, _float startTimeline, _float endTi
 void CShot_ActorVictory::Enter()
 {
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+	
 	//m_pActorAniCtrl->ChangeAniSet_NoBlend(m_victoryAnimIndex);
 	pActor->GetStateMachine()->ChangeState(L"Victory");
 }

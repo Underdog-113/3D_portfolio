@@ -21,6 +21,9 @@ void CCameraShake::PlayShake()
 
 void CCameraShake::PlayChannel(ShakeChannel* channel)
 {
+	if (m_isMovieOn)
+		return;
+
 	channel->m_timer += GET_PLAYER_DT;
 
 	if (channel->m_timer < channel->m_blendInTime)
@@ -50,10 +53,47 @@ void CCameraShake::PlayChannel(ShakeChannel* channel)
 	AdvanceSinWave(&channel->m_zWave, channel);
 }
 
+void CCameraShake::PlayChannelOnMovie(_float timeline)
+{
+	m_pMovieChannel->m_timer = m_pMovieChannel->m_duration * timeline;
+
+	if (m_pMovieChannel->m_timer < m_pMovieChannel->m_blendInTime)
+	{
+		m_pMovieChannel->m_amplitudeRate = m_pMovieChannel->m_timer / m_pMovieChannel->m_blendInTime;
+	}
+	else if (m_pMovieChannel->m_timer > m_pMovieChannel->m_duration - m_pMovieChannel->m_blendOutTime)
+	{
+		if (m_pMovieChannel->m_blendOutTime == 0.f)
+			m_pMovieChannel->m_amplitudeRate = 0.f;
+		else
+			m_pMovieChannel->m_amplitudeRate = (m_pMovieChannel->m_duration - m_pMovieChannel->m_timer) / m_pMovieChannel->m_blendOutTime;
+	}
+	else
+	{
+		m_pMovieChannel->m_amplitudeRate = 1.f;
+	}
+
+	m_pMovieChannel->m_amplitudeRate *= m_pMovieChannel->m_distanceRate;
+
+	AdvanceSinWave(&m_pMovieChannel->m_pitchWave, m_pMovieChannel);
+	AdvanceSinWave(&m_pMovieChannel->m_yawWave, m_pMovieChannel);
+	AdvanceSinWave(&m_pMovieChannel->m_rollWave, m_pMovieChannel);
+
+	AdvanceSinWave(&m_pMovieChannel->m_xWave, m_pMovieChannel);
+	AdvanceSinWave(&m_pMovieChannel->m_yWave, m_pMovieChannel);
+	AdvanceSinWave(&m_pMovieChannel->m_zWave, m_pMovieChannel);
+}
+
 bool CCameraShake::IsShaking()
 {
 	if (m_shakeChannel[Player].m_timer < m_shakeChannel[Player].m_duration)
 		return true;
+
+	if (m_isMovieOn)
+	{
+		if (m_pMovieChannel->m_timer < m_pMovieChannel->m_duration)
+			return true;
+	}
 
 	return false;
 }
@@ -99,7 +139,25 @@ _float3 CCameraShake::GetRotateOscilation()
 			rotOscilation.z = channel.m_rollWave.point;
 		}
 	}
-	
+
+	if (m_isMovieOn)
+	{
+		if (abs(rotOscilation.x) < abs(m_pMovieChannel->m_pitchWave.point))
+		{
+			rotOscilation.x = m_pMovieChannel->m_pitchWave.point;
+		}
+
+		if (abs(rotOscilation.y) < abs(m_pMovieChannel->m_yawWave.point))
+		{
+			rotOscilation.y = m_pMovieChannel->m_yawWave.point;
+		}
+
+		if (abs(rotOscilation.z) < abs(m_pMovieChannel->m_rollWave.point))
+		{
+			rotOscilation.z = m_pMovieChannel->m_rollWave.point;
+		}
+	}
+
 	return rotOscilation;
 }
 _float3 CCameraShake::GetLocationOscilation()
@@ -123,6 +181,24 @@ _float3 CCameraShake::GetLocationOscilation()
 		if (abs(locOscilation.z) < abs(channel.m_zWave.point))
 		{
 			locOscilation.z = channel.m_zWave.point;
+		}
+	}
+
+	if (m_isMovieOn)
+	{
+		if (abs(locOscilation.x) < abs(m_pMovieChannel->m_xWave.point))
+		{
+			locOscilation.x = m_pMovieChannel->m_xWave.point;
+		}
+
+		if (abs(locOscilation.y) < abs(m_pMovieChannel->m_yWave.point))
+		{
+			locOscilation.y = m_pMovieChannel->m_yWave.point;
+		}
+
+		if (abs(locOscilation.z) < abs(m_pMovieChannel->m_zWave.point))
+		{
+			locOscilation.z = m_pMovieChannel->m_zWave.point;
 		}
 	}
 

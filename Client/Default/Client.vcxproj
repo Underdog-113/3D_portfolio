@@ -325,6 +325,7 @@
     <ClInclude Include="..\Header\Shot_End_StageStartTake.h" />
     <ClInclude Include="..\Header\Shot_FixPivot.h" />
     <ClInclude Include="..\Header\Shot_FixTargetBack.h" />
+    <ClInclude Include="..\Header\Shot_GaneshaBorn.h" />
     <ClInclude Include="..\Header\Shot_PushIn.h" />
     <ClInclude Include="..\Header\Shot_PushOut.h" />
     <ClInclude Include="..\Header\Shot_RotateAround.h" />
@@ -725,6 +726,7 @@
     <ClCompile Include="..\Code\Shot_End_StageStartTake.cpp" />
     <ClCompile Include="..\Code\Shot_FixPivot.cpp" />
     <ClCompile Include="..\Code\Shot_FixTargetBack.cpp" />
+    <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_PushIn.cpp" />
     <ClCompile Include="..\Code\Shot_PushOut.cpp" />
     <ClCompile Include="..\Code\Shot_RotateAround.cpp" />

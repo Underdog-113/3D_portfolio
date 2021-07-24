@@ -77,6 +77,8 @@ void CRobot_Plane::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", 1.f);
+
+	pEffect->CommitChanges();
 }
 
 void CRobot_Plane::Render(LPD3DXEFFECT pEffect)
