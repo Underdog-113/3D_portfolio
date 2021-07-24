@@ -653,6 +653,8 @@ void CGraphicsManager::RenderEffect(void)
 			{
 				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
 
+				if (pObject->GetObjectKey() == (L"Robot_Plane"))
+					continue;
 
 				const std::vector<CShader*>& vShader = spShader->GetShaders();
 				for (_size i = 0; i < vShader.size(); ++i)
