@@ -43,6 +43,9 @@ public:
 					_bool					m_isSoundChange = false;
 
 					SP(COneConversationC)		m_spConversation = nullptr;
+
+private:
+	_float m_warningTimer = 0.f;
 };
 
 #endif

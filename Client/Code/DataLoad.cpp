@@ -648,7 +648,7 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 	}
 }
 
-SP(CPhaseChanger) CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
+void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 {
 	auto& pDataStore = pScene->GetDataStore();
 	auto& pObjectFactory = pScene->GetObjectFactory();
@@ -721,13 +721,6 @@ SP(CPhaseChanger) CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 				L"_colSize", size);
 			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
 			spRestrictLine->AddComponent<Engine::CDebugC>();
-
-			//SP(CStage_Wall) spEffect =
-			//	std::dynamic_pointer_cast<CStage_Wall>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stage_Wall", true));
-
-			//spEffect->GetTransform()->SetPosition(position);
-			//spEffect->GetTransform()->SetRotation(rotation);
-			//spEffect->GetTransform()->SetSize(size);
 
 			spPhaseChanger->AddRestrictLine(spRestrictLine);
 		}
