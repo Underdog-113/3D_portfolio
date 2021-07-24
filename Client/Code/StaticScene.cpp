@@ -102,6 +102,8 @@
 #include "Sakura_DamageMark.h"
 #include "Sakura_EvadeSkill_Loop.h"
 #include "Sakura_EvadeSkill_Start.h"
+#include "Sakura_Sheath.h"
+#include "Sakura_Particle.h"
 
 // Robot
 #include "RobotHookEff.h"
@@ -512,6 +514,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spSakura_Trail(CSakura_Trail::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_Trail);
 
+	SP(CMeshEffect_Client) spSakura_Sheath(CSakura_Sheath::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_Sheath);
 
 	SP(CMeshEffect_Client) spSakura_WSkill_Impact(CSakura_WSkill_Impact::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_WSkill_Impact);
@@ -533,6 +537,9 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spSakura_WSkill_TwistWind(CSakura_WSkill_Twist_Wind::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spSakura_WSkill_TwistWind);
+
+	SP(CSoftEffect) spSakura_Particle(CSakura_Particle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spSakura_Particle);
 
 	SP(Engine::CObject) spSakura_DashShade(CSakura_DashShade::Create(true, this));
 	GetObjectFactory()->AddPrototype(spSakura_DashShade);
@@ -685,7 +692,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CSoftEffect) spBronyaFlashBangAS(CBronyaFlashBang_AS::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronyaFlashBangAS);
 
-	SP(CSoftEffect) spBronyaRandomSmoke(CBronya_RandomSmoke::Create(true, this));
+	SP(CMeshEffect_Client) spBronyaRandomSmoke(CBronya_RandomSmoke::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronyaRandomSmoke);
 
 

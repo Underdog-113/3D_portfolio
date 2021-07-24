@@ -28,26 +28,29 @@ SP(Engine::CObject) CBronya_RandomSmoke::MakeClone(void)
 
 	__super::InitClone(spClone);
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
+	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
-	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
-	spClone->m_bBillboard = true;
+	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	return spClone;
 }
 
 void CBronya_RandomSmoke::Awake(void)
 {
 	__super::Awake();
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spTransform->SetSize(_float3(0.5f, 0.5f, 0.5f));
+	m_spMesh->SetMeshData(L"Cloud");
+	m_spMesh->SetIsEffectMesh(true);
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 }
 
 void CBronya_RandomSmoke::Start(void)
 {
 	__super::Start();
-	m_fAlpha = 0.4f;
-	m_fTIme = 0.f;
+
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_fAlpha = 1.f;
+	m_fTime = 0.f;
 
 }
 
@@ -68,37 +71,56 @@ void CBronya_RandomSmoke::Update(void)
 
 	// 일정시간 뒤에 알파값 감소.
 
-	if (m_fTIme >= 5.f)
+	if (m_fTime >= 5.f)
 	{
 		m_fAlpha -= 0.7f * GET_DT;
 	}
 
-	m_fTIme += GET_DT;
+	m_fTime += GET_DT;
 }
 
 void CBronya_RandomSmoke::LateUpdate(void)
 {
 	__super::LateUpdate();
+
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	D3DXMatrixIdentity(&matBill);
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
+
 }
 
 void CBronya_RandomSmoke::PreRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PreRender(m_spGraphics, pEffect);
+	m_spMesh->PreRender(m_spGraphics, pEffect);
+
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-
-
+	pEffect->SetBool("g_zWriteEnabled", false);
+	pEffect->SetBool("g_AlphaTestEnabled", true);
 	pEffect->CommitChanges();
 }
 
 void CBronya_RandomSmoke::Render(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->Render(m_spGraphics, pEffect);
+	m_spMesh->Render(m_spGraphics, pEffect);
 
 }
 
 void CBronya_RandomSmoke::PostRender(LPD3DXEFFECT pEffect)
 {
-	m_spRectTex->PostRender(m_spGraphics, pEffect);
+	m_spMesh->PostRender(m_spGraphics, pEffect);
 
 }
 

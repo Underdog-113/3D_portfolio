@@ -67,6 +67,8 @@ private:
 	SP(Engine::CObject) m_spCyclone = nullptr;
 	_float m_cycloneAttackTimer = 0.f;
 	_bool m_cycloneActive = false;
+
+
 };
 
 #endif

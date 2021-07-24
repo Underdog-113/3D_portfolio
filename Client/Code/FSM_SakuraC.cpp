@@ -62,6 +62,7 @@ void CFSM_SakuraC::Start(SP(CComponent) spThis)
 
 	SetStartState(Name_Appear);
 	m_curState->DoEnter();
+
 }
 
 void CFSM_SakuraC::OnDestroy()
@@ -2311,7 +2312,7 @@ void CFSM_SakuraC::Ultra_Enter(void)
 	ResetCheckMembers();
 
 	m_pStageControlTower->OnSakuraUltraActive();
-
+	m_fSpawnTimer = 0.f;
 	PlaySound_Effect(Sound_Ult_Start);
 	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::SakuraUlt);
 }
@@ -2345,6 +2346,7 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 		m_checkEffect2nd = true;
 	}
 
+	SakuraParticleCtrl();
 
 	if (CheckAction_StandBy_Timeout(0.9f))
 		return;
@@ -2354,7 +2356,6 @@ void CFSM_SakuraC::Ultra_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pSakura->SetInfernoMode(true);
-
 	m_pStageControlTower->OffSakuraUltraActive();
 }
 
@@ -2558,4 +2559,19 @@ void CFSM_SakuraC::RegisterAllState()
 	CreateState(CFSM_SakuraC, pState, WeaponSkill)
 		AddState(pState, Name_WeaponSkill);
 
+}
+
+void CFSM_SakuraC::SakuraParticleCtrl()
+{
+	if (m_pDM->GetAniTimeline() < 1.f)
+	{
+		m_fSpawnTimer += GET_DT;
+
+		if (m_fSpawnTimer >= 0.1f)
+		{
+			m_spSakuraParticle = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Particle", true, (_uint)Engine::ELayerID::Effect);
+			m_spSakuraParticle->GetTransform()->SetOwner(m_pSakura);
+			m_fSpawnTimer = 0.f;
+		}
+	}
 }

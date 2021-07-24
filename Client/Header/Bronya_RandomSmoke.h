@@ -1,7 +1,7 @@
 #pragma once
-#include "SoftEffect.h"
+#include "MeshEffect_Client.h"
 
-class CBronya_RandomSmoke : public CSoftEffect
+class CBronya_RandomSmoke : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 

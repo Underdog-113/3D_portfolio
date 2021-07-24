@@ -73,8 +73,16 @@ struct PS_INPUT
 	float3 mNormal	 : NORMAL;
 };
 
-float4 ps_main(VS_OUTPUT Input) : COLOR0
+struct PS_OUTPUT
 {
+	float4 diffuse : COLOR0;
+	float4 emissive : COLOR1;
+};
+
+
+PS_OUTPUT ps_main(VS_OUTPUT Input)
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
 	// Base albedo Texture
 	float4 albedo = tex2D(Diffuse, Input.mUV);
 
@@ -113,9 +121,14 @@ float4 ps_main(VS_OUTPUT Input) : COLOR0
 
 		float3 diffuse = (DissolveLineSize * DissolveLineColor + blendColor.rgb);
 
-		return float4(diffuse, multiple);
+		Out.diffuse = float4(diffuse, multiple);
+		Out.emissive = float4(diffuse, multiple);
+
+		return Out;
 	}		
-	return blendColor;
+	Out.diffuse = blendColor;
+	Out.emissive = blendColor;
+	return Out;
 }
 
 technique TrailShader

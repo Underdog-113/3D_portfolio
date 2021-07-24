@@ -1092,7 +1092,7 @@
     </Filter>
     <Filter Include="03.Component\05.GachBoxC">
       <UniqueIdentifier>{29f7b4da-be28-4248-a2de-fa6bb7ff41ca}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="10.ControlTower\MovieDirector\SplineCurve">
       <UniqueIdentifier>{f1e10a53-27b5-47b5-94fc-04e5d02ac611}</UniqueIdentifier>
     </Filter>
@@ -1108,8 +1108,14 @@
     <Filter Include="04.Shader\05.DissolveShader\Glow">
       <UniqueIdentifier>{241bb49a-baf6-434d-80cc-02557c4c2774}</UniqueIdentifier>
     </Filter>
-      <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun">
-        <UniqueIdentifier>{a700dc52-3ea8-4cfb-90e1-bb288235f2cd}</UniqueIdentifier>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun">
+      <UniqueIdentifier>{a700dc52-3ea8-4cfb-90e1-bb288235f2cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_Sheath">
+      <UniqueIdentifier>{6805fa8e-a7a0-41ed-907b-2cac2fc87016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\02.Particle\Sakura_Particle">
+      <UniqueIdentifier>{2db064b7-acb3-417d-a390-e2663dff61c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2306,7 +2312,7 @@
     </ClInclude>
     <ClInclude Include="..\Header\GachBoxC.h">
       <Filter>03.Component\05.GachBoxC</Filter>
-        </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Header\BronyaGrenade.h">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Bronya\Weapon\Grenade</Filter>
     </ClInclude>
@@ -2334,8 +2340,14 @@
     <ClInclude Include="..\Header\DissolveShader_Glow.h">
       <Filter>04.Shader\05.DissolveShader\Glow</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\GaneshaStunPattern.h">
-        <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun</Filter>
+    <ClInclude Include="..\Header\GaneshaStunPattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Sheath.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_Sheath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Sakura_Particle.h">
+      <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3472,6 +3484,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\GaneshaStunPattern.cpp">
       <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\05.Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_Sheath.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\05.Sakura_MeshEff\Sakura_Sheath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sakura_Particle.cpp">
+      <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

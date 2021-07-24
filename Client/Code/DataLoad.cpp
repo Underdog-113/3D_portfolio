@@ -688,14 +688,14 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 
 			spRestrictLine->GetRectTex()->SetIsOrtho(false);
 			spRestrictLine->GetGraphics()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-			//spRestrictLine->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+			spRestrictLine->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
-			//std::wstring texKey;
-			//pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
-			//	L"_wall" +
-			//	std::to_wstring(j) +
-			//	L"_textureKey", texKey);
-			//spRestrictLine->GetComponent<Engine::CTextureC>()->AddTexture(texKey);
+			std::wstring texKey;
+			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
+				L"_wall" +
+				std::to_wstring(j) +
+				L"_textureKey", texKey);
+			spRestrictLine->GetComponent<Engine::CTextureC>()->AddTexture(texKey);
 
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
 				L"_wall" +
@@ -722,14 +722,14 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 			spRestrictLine->GetCollision()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
 			spRestrictLine->AddComponent<Engine::CDebugC>();
 
-			SP(CStage_Wall) spEffect =
-				std::dynamic_pointer_cast<CStage_Wall>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stage_Wall", true));
+			//SP(CStage_Wall) spEffect =
+			//	std::dynamic_pointer_cast<CStage_Wall>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stage_Wall", true));
 
-			spEffect->GetTransform()->SetPosition(position);
+			//spEffect->GetTransform()->SetPosition(position);
 			//spEffect->GetTransform()->SetRotation(rotation);
 			//spEffect->GetTransform()->SetSize(size);
 
-			spPhaseChanger->AddRestrictLine(spRestrictLine, spEffect);
+			spPhaseChanger->AddRestrictLine(spRestrictLine);
 		}
 	}
 

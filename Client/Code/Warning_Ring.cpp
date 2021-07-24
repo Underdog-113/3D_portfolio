@@ -52,8 +52,12 @@ void CWarning_Ring::Awake()
 void CWarning_Ring::Start()
 {
 	__super::Start();
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::WARNING);
+	Engine::CSoundManager::GetInstance()->StartSound(L"Warning_Start.wav", (_uint)EChannelID::WARNING);
 	m_fAlpha = 1.f;
 	m_fUVSpeed = 0.f;
+	m_isSpawn = false;
+	m_fTime = 0.f;
 }
 
 void CWarning_Ring::FixedUpdate()
@@ -66,9 +70,42 @@ void CWarning_Ring::Update()
 {
 	__super::Update();
 
-	if (m_spTransform->GetSize().y < 1)
+	if(!m_isSpawn)
 	{
-		m_spTransform->AddSizeY(3.5f * GET_DT);
+		m_fTime += GET_DT;
+		if (m_fTime >= 0.5f)
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::WARNING);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Warning_Loop.wav", (_uint)EChannelID::WARNING);
+			m_isSpawn = true;
+			m_fTime = 0.f;
+		}
+	}
+
+	_bool bCheck = Engine::CSoundManager::GetInstance()->IsPlaying((_uint)EChannelID::WARNING);
+
+	if (m_isSpawn)
+	{
+		m_fTime += GET_DT;
+
+		if (m_fTime >= 2.f)
+		{
+			if (m_spTransform->GetSize().y > 0)
+			{
+				m_spTransform->AddSizeY(-3.5f * GET_DT);
+			}
+			else if (m_spTransform->GetSize().y <= 0)
+			{
+				this->SetDeleteThis(true);
+			}
+		}
+	}
+	else
+	{
+		if (m_spTransform->GetSize().y < 1)
+		{
+			m_spTransform->AddSizeY(3.5f * GET_DT);
+		}
 	}
 
 	m_fUVSpeed += 0.3f * GET_DT;
