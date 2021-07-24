@@ -72,10 +72,6 @@ void CBossStageScene::Start(void)
 	m_pBattleUIManager = CBattleUiManager::GetInstance();
 	m_pBattleUIManager->Start(this);
 
-	Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-	Engine::CSoundManager::GetInstance()->PlayBGM(L"BronyaBGM.mp3");
-	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-
 	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(true);
 }
 
@@ -139,7 +135,7 @@ void CBossStageScene::SetupFromLoader(void)
 	Load->TextLoad(this);
 	Load->CanvasLoad(this);
 	Load->MapLoad(this);
-	Load->PhaseChangerLoad(this);
+	//Load->PhaseChangerLoad(this);
 	delete(Load);
 }
 

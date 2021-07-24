@@ -57,12 +57,6 @@ void CShot_GaneshaBorn::Action()
 void CShot_GaneshaBorn::Cut()
 {
 	m_pActorAniCtrl->SetIsMovieOn(false);
-
-	Engine::CSoundManager::GetInstance()->StopAll();
-	Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
-	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-
-	CStageControlTower::GetInstance()->SetDirectorMode(false);
 }
 
 void CShot_GaneshaBorn::Rollback()

@@ -39,20 +39,20 @@ private:
 			void					RenderBase			(void);
 
 			void					RenderNonAlpha		(void);
+			void					RenderAlphaTest		(void);
+			void                    RenderEffect		(void);
+			void					RenderLights		(void);
+			void					RenderDeferBlend	(void);
+			void					RenderAlphaBlend	(void);
+			void					RenderScreenEffect	(void);
 			void					RenderBlur			(void);
 			void					RenderBlurToRT		(CRenderTarget* pInputRT, CRenderTarget* pMiddleRT, CRenderTarget* pOutRT, 
 														 _float rtSizeX, _float rtSiztY);
 			void					RenderEmissive		(void);
-			void					RenderLights		(void);
-			void					RenderDeferBlend	(void);
-			
-			void					RenderWire			(void);
-			void					RenderAlphaTest		(void);
-			void					RenderAlphaBlend	(void);
-			void                    RenderParticle		(void);
-			void                    RenderEffect		(void);
-			void					RenderUI			(void);
 			void					RenderFinal			(void);
+
+			void					RenderWire			(void);
+			void					RenderUI			(void);
 			
 
 

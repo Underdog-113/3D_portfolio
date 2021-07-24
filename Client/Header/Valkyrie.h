@@ -111,6 +111,7 @@ protected:
 	CStageControlTower*			m_pCT = nullptr;
 	
 	GETTOR_SETTOR	(_float,						m_yDefaultOffset,	0.f,		DefaultOffset)
+	GETTOR_SETTOR	(_bool,							m_ccImmune,			false,			CCImmune)
 };
 
 #endif

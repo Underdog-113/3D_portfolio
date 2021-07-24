@@ -162,6 +162,9 @@ void CTheresa::SetBasicName(void)
 
 void CTheresa::ApplyHitInfo(HitInfo info)
 {
+	if (m_ccImmune)
+		return;
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{

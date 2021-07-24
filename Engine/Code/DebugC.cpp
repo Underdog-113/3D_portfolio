@@ -101,16 +101,16 @@ void CDebugC::OnDisable(void)
 
 void CDebugC::AddDebugCollider(CCollider* pCollider)
 {
-	//SP(CDebugCollider) spDC 
-	//	= std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
-	//spDC->SetOwner(m_pOwner);
-	//spDC->SetCollider(pCollider);
-	//m_vDebugCollider.emplace_back(spDC);
+	SP(CDebugCollider) spDC
+		= std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
+	spDC->SetOwner(m_pOwner);
+	spDC->SetCollider(pCollider);
+	m_vDebugCollider.emplace_back(spDC);
 }
 
 void CDebugC::DeleteDebugCollider(_int index)
 {
-	//auto& iter = m_vDebugCollider.begin();
-	//m_vDebugCollider[index].reset();
-	//m_vDebugCollider.erase(iter + index);
+	auto& iter = m_vDebugCollider.begin();
+	m_vDebugCollider[index].reset();
+	m_vDebugCollider.erase(iter + index);
 }

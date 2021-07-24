@@ -92,6 +92,21 @@ void CStageCameraMan::DirectorControlMode()
 
 }
 
+void CStageCameraMan::ReturnToMidShot()
+{
+	m_curShotType = Mid;
+	m_nextShotType = Mid;
+	m_curMaxDist = MidShot;
+	m_dstMaxDist = MidShot;
+	m_rotateXStart = MidAngle;
+	m_rotateXDst = MidAngle;
+
+	m_spCamera->SetTargetDist(m_dstMaxDist);
+	m_spCamera->SetMaxDistTPS(m_dstMaxDist);
+
+	m_spCamera->SetLookAngleRight(m_rotateXStart);
+}
+
 void CStageCameraMan::PivotChasing_Director()
 {
 	NonTargetChasing();

@@ -279,6 +279,9 @@ void CKiana::OnCollisionExit(Engine::_CollisionInfo ci)
 
 void CKiana::ApplyHitInfo(HitInfo info)
 {
+	if (m_ccImmune)
+		return;
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{

@@ -20,9 +20,9 @@ public:
 		Boss				,
 		BossEnd				,
 		WinningSlow			,
+		WaitVictoryMovie	,
 		VictoryMovie		,
 		StageResult			,
-		StageResult_Idle	,
 		NumOfPhse			
 	};
 public:
@@ -37,7 +37,7 @@ private:
 public:
 					void		OpenStageResult		(void);
 
-					_bool		m_isSoundChange = false;
+					_bool		m_isBossMovieOn = false;
 
 					SP(CTwoConversationC)		m_spConversation = nullptr;
 
@@ -45,7 +45,18 @@ public:
 
 private:
 	SP(CMonster) m_spGanesha = nullptr;
+
+	_float m_warpTimer = 0.f;
+	_bool m_portalEnter = false;
+	_bool m_portalMove = false;
+	_bool m_portalEnd = false;
+
+
 	_float m_warningTimer = 0.f;
+	_bool m_warningSpawn = false;
+
+	_bool m_isBossMovieOff = false;
+	_float m_victoryTimer = 0.f;
 };
 
 #endif
