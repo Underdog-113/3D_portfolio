@@ -21,6 +21,8 @@
 #include "Shot_ActorVictory.h"
 #include "Shot_GaneshaBorn.h"
 #include "Shot_Shake.h"
+#include "Shot_SlowAll.h"
+#include "Shot_ReturnCameraToActor.h"
 
 #include "SplineCurve.h"
 
@@ -53,6 +55,8 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_MovePivot_SubCh2)
 	SAFE_DELETE(m_pShot_MovePivot_SubCh3)
 	SAFE_DELETE(m_pShot_Shake)
+	SAFE_DELETE(m_pShot_SlowAll)
+	SAFE_DELETE(m_pShot_ReturnCameraToActor)
 	SAFE_DELETE(m_pShot_Victory)
 	SAFE_DELETE(m_pShot_GaneshaBorn)
 
@@ -77,9 +81,8 @@ void CMovieDirector::Start()
 
 	Create_AllShots();
 
-	CreateTake_Failure();
-	CreateTake_SakuraVictory();
-	CreateTake_GaneshaBorn();
+	Create_AllTakes();
+
 
 	m_onAir = false;
 
@@ -97,7 +100,7 @@ void CMovieDirector::UpdateDirector()
 
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
-		Cut();
+		CutCurrentTake();
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
 	{
@@ -108,8 +111,8 @@ void CMovieDirector::UpdateDirector()
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_3))
 	{
-		//StartTake_SakuraVictory();
-		StartTake_GaneshBorn();
+		StartTake_SakuraVictory();
+		//StartTake_GaneshBorn();
 		m_pCurTake->SetEditMode(true);
 	}
 
@@ -181,10 +184,24 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_MovePivot_SubCh1 = new CShot_MovePivot;
 	m_pShot_MovePivot_SubCh2 = new CShot_MovePivot;
 	m_pShot_MovePivot_SubCh3 = new CShot_MovePivot;
+	
 	m_pShot_Shake = new CShot_Shake;
+	m_pShot_SlowAll = new CShot_SlowAll;
+	m_pShot_ReturnCameraToActor = new CShot_ReturnCameraToActor;
 
 	m_pShot_Victory = new CShot_ActorVictory;
 	m_pShot_GaneshaBorn = new CShot_GaneshaBorn;
+}
+
+void CMovieDirector::Create_AllTakes()
+{
+	CreateTake_BlackFadeIn();
+	CreateTake_BlackFadeOut();
+	CreateTake_WinningSlow();
+
+	CreateTake_Failure();
+	CreateTake_SakuraVictory();
+	CreateTake_GaneshaBorn();
 }
 
 void CMovieDirector::CreateTake_BlackFadeIn()
@@ -210,6 +227,7 @@ void CMovieDirector::CreateTake_WinningSlow()
 	CTake* pTake = new CTake;
 
 	pTake->AddShot(ShotName_SlowAll, m_pShot_SlowAll);
+	pTake->AddShot(ShotName_RotateAround, m_pShot_RotateAround);
 
 	m_takeMap.emplace(TakeName_WinningSlow, pTake);
 }
@@ -236,8 +254,6 @@ void CMovieDirector::CreateTake_SakuraVictory()
 	pTake->AddShot(ShotName_RotateYaw, m_pShot_RotateYaw);
 	pTake->AddShot(ShotName_RotateYaw_SubCh1, m_pShot_RotateYaw_SubCh1);
 	pTake->AddShot(ShotName_RotatePitch, m_pShot_RotatePitch);
-	pTake->AddShot(ShotName_RotatePitch_Spline, m_pShot_RotatePitch_Spline);
-	pTake->AddShot(ShotName_RotatePitch_Spline, m_pShot_RotatePitch_Spline_SubCh1);
 	pTake->AddShot(ShotName_RotateRoll, m_pShot_RotateRoll);
 
 	pTake->AddShot(ShotName_PushOut, m_pShot_PushOut);
@@ -296,6 +312,7 @@ void CMovieDirector::CreateTake_GaneshaBorn()
 	pTake->AddShot(ShotName_MovePivot_SubCh3, m_pShot_MovePivot_SubCh3);
 	pTake->AddShot(ShotName_BlackFadeIn_SubCh1, m_pShot_BlackFadeIn_SubCh1);
 	pTake->AddShot(ShotName_BlackFadeOut_SubCh1, m_pShot_BlackFadeOut_SubCh1);
+	pTake->AddShot(ShotName_ReturnCameraToActor, m_pShot_ReturnCameraToActor);
 
 	m_takeMap.emplace(TakeName_GaneshaBorn, pTake);
 }
@@ -359,9 +376,14 @@ void CMovieDirector::StartTake_WinningSlow()
 	auto pTake = m_takeMap[TakeName_WinningSlow];
 	m_spBlackFadeImage->SetIsEnabled(true);
 
-	CShot_BlackFadeOut::Desc blo_desc;
-	blo_desc.pBlackFade = m_pBlackFade;
-	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.5f, &blo_desc, 0.f);
+	CShot_SlowAll::Desc slow_desc;
+	pTake->ReadyShot(ShotName_SlowAll, 0.f, 3.f, &slow_desc, 0.f);
+
+	CShot_RotateAround::Desc ra_desc;
+	ra_desc.startRadianRotate = CStageControlTower::GetInstance()->GetCameraMan()->GetCamera()->GetLookAngleUp();
+	ra_desc.rotateSpeed = 0.05f;
+	ra_desc.isEndless = false;
+	pTake->ReadyShot(ShotName_RotateAround, 0.f, 5.f, &ra_desc, 0.f);
 
 	m_pCurTake = pTake;
 
@@ -398,6 +420,35 @@ void CMovieDirector::StartTake_Failure()
 
 	m_pCurTake->StartTake();
 	m_onAir = true;
+}
+
+void CMovieDirector::StartTake_Victory()
+{
+	switch (CStageControlTower::GetInstance()->GetCurrentActor()->GetStat()->GetType())
+	{
+	case V_Stat::KIANA:
+		StartTake_KianaVictory();
+		break;
+	case V_Stat::THERESA:
+		StartTake_TheresaVictory();
+		break;
+	case V_Stat::SAKURA:
+		StartTake_SakuraVictory();
+		break;
+	default:
+		break;
+	}
+
+}
+
+void CMovieDirector::StartTake_KianaVictory()
+{
+	StartTake_SakuraVictory();
+}
+
+void CMovieDirector::StartTake_TheresaVictory()
+{
+	StartTake_SakuraVictory();
 }
 
 void CMovieDirector::StartTake_SakuraVictory()
@@ -545,6 +596,9 @@ void CMovieDirector::StartTake_GaneshBorn()
 	mp_sub3_desc.pTargetTransform = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform().get();
 	pTake->ReadyShot(ShotName_MovePivot_SubCh3, 10.1f, 10.1f, &mp_sub3_desc, 10.1f);
 
+	CShot_ReturnCameraToActor::Desc rca_desc;
+	pTake->ReadyShot(ShotName_ReturnCameraToActor, 10.1f, 10.1f, &rca_desc, 10.1f);
+	
 	m_pCurTake = pTake;
 
 	m_pCurTake->StartTake();
@@ -554,7 +608,7 @@ void CMovieDirector::StartTake_GaneshBorn()
 	// m_pCurTake->SetEditMode(true);
 }
 
-void CMovieDirector::Cut()
+void CMovieDirector::CutCurrentTake()
 {
 	m_pCurTake->EndTake();
 	m_pCurTake = nullptr;

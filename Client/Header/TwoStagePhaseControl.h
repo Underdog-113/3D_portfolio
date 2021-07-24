@@ -20,9 +20,9 @@ public:
 		Boss				,
 		BossEnd				,
 		WinningSlow			,
+		WaitVictoryMovie	,
 		VictoryMovie		,
 		StageResult			,
-		StageResult_Idle	,
 		NumOfPhse			
 	};
 public:
@@ -53,6 +53,8 @@ private:
 
 
 	_float m_warningTimer = 0.f;
+
+	_float m_victoryTimer = 0.f;
 };
 
 #endif

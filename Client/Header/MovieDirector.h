@@ -28,6 +28,8 @@
 
 #define ShotName_Shake				L"Shake"
 #define ShotName_SlowAll			L"SlowAll"
+#define ShotName_ReturnCameraToActor	L"ReturnCameraToActor"
+
 
 #define ShotName_Victory			L"Victory"
 #define ShotName_GaneshaBorn		L"GaneshaBorn"
@@ -62,9 +64,10 @@ public:
 
 	void Create_AllShots();
 
+	void Create_AllTakes();
+
 	void CreateTake_BlackFadeIn();
 	void CreateTake_BlackFadeOut();
-
 
 	void CreateTake_WinningSlow();
 	void CreateTake_Failure();
@@ -80,10 +83,13 @@ public:
 	void StartTake_WinningSlow();
 	void StartTake_Failure();
 
+	void StartTake_Victory();
+	void StartTake_KianaVictory();
+	void StartTake_TheresaVictory();
 	void StartTake_SakuraVictory();
 	void StartTake_GaneshBorn();
 
-	void Cut();
+	void CutCurrentTake();
 
 public:
 	_float3 GetBezierPoint(_float3 startPoint, _float3 midPoint, _float3 endPoint, float detail);
@@ -97,7 +103,7 @@ private:
 	std::unordered_map<std::wstring, CTake*> m_takeMap;
 
 	CTake* m_pCurTake = nullptr;
-	_bool m_onAir = false;
+	GETTOR(_bool, m_onAir, false, IsOnAir)
 
 	
 	CSplineCurve* m_pGaneshaPitchCurve_1st = nullptr;
@@ -133,9 +139,10 @@ private:
 	CShot* m_pShot_MovePivot_SubCh1 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh2 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh3 = nullptr;
-	CShot* m_pShot_Shake = nullptr;
 
+	CShot* m_pShot_Shake = nullptr;
 	CShot* m_pShot_SlowAll = nullptr;
+	CShot* m_pShot_ReturnCameraToActor = nullptr;
 
 	CShot* m_pShot_Victory = nullptr;
 	CShot* m_pShot_GaneshaBorn = nullptr;
