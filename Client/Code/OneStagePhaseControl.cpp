@@ -41,6 +41,7 @@ void COneStagePhaseControl::Update(void)
 			EnterConversationPhase();
 			++m_curPhase;
 		}
+		// player born
 		break;
 	case (_int)EOneStagePhase::Conversation:
 		if (m_spConversation->IsEnd())
@@ -48,19 +49,21 @@ void COneStagePhaseControl::Update(void)
 			CStageControlTower::GetInstance()->SetDirectorMode(false);
 			++m_curPhase;
 		}
-
+		// conversation
 		break;
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
+		// kiana walk
 		break;
 
 		//After being collided with PhaseChanger0
 	case (_int)EOneStagePhase::FirstFight1Begin:
+		// trigger on
 		break;
 
 	case (_int)EOneStagePhase::FirstFight1End:
 	{
-		SP(Engine::CObject)& PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
+		SP(Engine::CObject) PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
 
 		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->SetTimerStart(true);
 
@@ -85,6 +88,11 @@ void COneStagePhaseControl::Update(void)
 		spMonClone->SetSpawnTimer(1.f);
 		std::dynamic_pointer_cast<CPhaseChanger>(PhaseChanger)->AddMonster(spMonClone);
 	}
+	{
+		SP(Engine::CObject)& PhaseChanger = Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger");
+		int a = 5;
+	}
+	
 	++m_curPhase;
 		break;
 
@@ -95,19 +103,6 @@ void COneStagePhaseControl::Update(void)
 		//After killing all the enemies
 	case (_int)EOneStagePhase::FirstFight2End:
 		break;
-
-	//	//Before being collised with PhaseChanger1
-	//case (_int)EOneStagePhase::BeforeSecondFight:
-	//	break;
-
-	//	//After being collided with PhaseChanger1
-	//case (_int)EOneStagePhase::SecondFightBegin:
-	//	break;
-
-	//	//After killing all the enemies
-	//case (_int)EOneStagePhase::SecondFightEnd:
-	//	++m_curPhase;
-	//	break;
 
 		//Before being collised with PhaseChanger2
 	case (_int)EOneStagePhase::BeforeMidBoss:

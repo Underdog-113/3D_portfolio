@@ -41,6 +41,7 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 			Name_Ganesha_Weak_Start != fsm->GetCurStateString())
 		{
 			fsm->ChangeState(Name_Ganesha_Weak_Start);
+			std::cout << "Weak_Start" << std::endl;
 
 			m_onStun = true;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
@@ -50,10 +51,13 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 	}
 	// stun 시간이 끝났다면
 	else if (Name_Ganesha_Weak_End != fsm->GetCurStateString() &&
-		true == m_timeEnd)
+		true == m_timeEnd &&
+		false == m_onStun)
 	{
 		// Weak_End 상태로 변경
 		fsm->ChangeState(Name_Ganesha_Weak_End);
+		std::cout << "Weak_End" << std::endl;
+
 		return;
 	}
 	// Weak_End 상태가 끝났다면
@@ -62,8 +66,10 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// 대기 상태 변경, stun 상태 종료
 		fsm->ChangeState(Name_Ganesha_StandBy);
+		std::cout << "Weak_StandBy" << std::endl;
 		m_timeEnd = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnStun(false);
+
 		return;
 	}
 	// Weak_Start 상태가 끝났다면
@@ -72,6 +78,8 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// Weak_Loop 상태로 변경
 		fsm->ChangeState(Name_Ganesha_Weak_Loop);
+		std::cout << "Weak_Loop" << std::endl;
+
 		return;
 	}
 
@@ -85,6 +93,7 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 
 		{
 			fsm->ChangeState(Name_Ganesha_Weak_Hit);
+			std::cout << "Weak_Hit" << std::endl;
 		}
 	}
 }
