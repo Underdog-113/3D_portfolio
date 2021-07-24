@@ -54,7 +54,7 @@ void CMO_Lancer::Start(void)
 	m_spPatternMachine->AddPattern(CLancerAttack2Pattern::Create());
 	
 	m_spTransform->SetSize(0.6f, 0.6f, 0.6f);
-	m_spTransform->SetSlerpSpeed(PI / 2);
+	m_spTransform->SetSlerpSpeed(PI / 1.2);
 	//m_spTransform->SetRotationY(D3DXToRadian(90));
 
 	m_spMesh->OnRootMotion();
@@ -195,7 +195,9 @@ void CMO_Lancer::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 	
-	m_spTransform->SetForwardUp(dir, UP_VECTOR);
+	m_spTransform->SetGoalForward(dir);
+	m_spTransform->SetSlerpOn(true);
+	//m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
 void CMO_Lancer::SetStatus(BaseStat stat)

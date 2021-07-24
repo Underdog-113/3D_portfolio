@@ -78,8 +78,8 @@ void CWooScene::Start(void)
 	PlayerSetting();
 	//SpiderSetting();
 	//SickleSetting();
-	ScoutSetting();
-	//LancerSetting();
+	//ScoutSetting();
+	LancerSetting();
 	//RobotSetting();
 	//NinzaSetting();
 
