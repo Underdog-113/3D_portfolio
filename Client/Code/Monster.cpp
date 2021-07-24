@@ -231,7 +231,9 @@ void CMonster::UnActiveAttackBox()
 void CMonster::MonsterDead()
 {
 	SP(Engine::CObject) item = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-	item->GetTransform()->SetPosition(GetTransform()->GetPosition());
+	_float3 pos = GetTransform()->GetPosition();
+	pos.y += 0.3f;
+	item->GetTransform()->SetPosition(pos);
 	item->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	item->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 	item->AddComponent<Engine::CRigidBodyC>()->AddForce(_float3(0, 500, 0));
@@ -241,23 +243,23 @@ void CMonster::MonsterDead()
 	switch (value)
 	{
 	case 0:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"HPMedic");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Light_Box2");
 		item->AddComponent<CHpItemC>()->AddDataInit(100, 50);
 		break;
 	case 1:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"sp");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Light_Box2");
 		item->AddComponent<CSpItemC>()->AddDataInit(100, 50);
 		break;
 	case 2:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"coin");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Coin");
 		item->AddComponent<CMoneyItemC>()->AddDataInit(100, 50);
 		break;
 	case 3:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Castle_wall");
+		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"coin");
+		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Coin");
 
 		_int randValue = rand() % 4;
 
@@ -276,13 +278,9 @@ void CMonster::MonsterDead()
 			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"무기 강화제", 1), 50);
 			break;
 		}
-		
+
 		break;
 	}
-
-
-
-
 }
 
 Engine::CCollider * CMonster::GetHitBox()
