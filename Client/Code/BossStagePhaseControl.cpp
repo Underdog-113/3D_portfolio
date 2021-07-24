@@ -77,23 +77,28 @@ void CBossStagePhaseControl::Update(void)
 	case (_int)ETwoStagePhase::BossMovie:
 		if (false == m_isBossMovieOn)
 		{
-			m_spBronya->GetTransform()->SetPosition(186.21f, -3.0f, -0.84f);
+			m_spBronya->GetTransform()->SetPosition(186.21f, -4.f, -0.84f);
 
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->PlayBGM(L"Bronya_Intro.wav");
 			// movie
 			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BronyaBorn();
 			m_isBossMovieOn = true;
-			++m_curPhase;
 		}
 		break;
 
 	case (_int)ETwoStagePhase::Boss:
-		if (!m_isBossMovieOn)
+		if (!m_isBossMovieOff)
 		{
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeIn();
+
+			m_spBronya->GetComponent<CPatternMachineC>()->SetOnBorn(true);
 			CStageControlTower::GetInstance()->SetDirectorMode(false);
+			
 			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
 			Engine::CSoundManager::GetInstance()->PlayBGM(L"BronyaBGM.mp3");
 			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isBossMovieOn = false;
+			m_isBossMovieOff = true;
 		}
 
 		if (m_spBronya->GetComponent<CPatternMachineC>()->GetOnDie())

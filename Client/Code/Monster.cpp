@@ -175,7 +175,7 @@ void CMonster::AttachSakuraMark()
 		SP(Engine::CObject) spObj;
 		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
 		spObj->GetTransform()->SetParent(m_spTransform);
-		spObj->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset());
+		spObj->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset() * 2.f);
 		m_pStat->SetSakuraMark(spObj);
 	}
 }

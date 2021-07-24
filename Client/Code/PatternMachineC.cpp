@@ -150,7 +150,12 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 
 	// born 실행 (1번만)
 	PlayBornPattern();
-	
+
+	if (false == m_onBorn)
+	{
+		return;
+	}
+
 	// die 실행 (hp가 0일 때 1번만)
 	PlayDiePattern();
 
