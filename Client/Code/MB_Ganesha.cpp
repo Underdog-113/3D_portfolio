@@ -81,7 +81,7 @@ void CMB_Ganesha::Start(void)
 	m_pStat->SetOnBPShield(false);
 	m_pStat->SetMaxBreakGauge(40.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
-	m_pStat->SetWeakTime();
+	m_weakTime = 8.f;
 
 	m_pSuperArmor->SetHitL(true);
 	m_pSuperArmor->SetHitH(true);

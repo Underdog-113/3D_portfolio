@@ -96,6 +96,17 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 			std::cout << "Weak_Hit" << std::endl;
 		}
 	}
+	else if (false == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL() ||
+			 false == pOwner->GetComponent<CPatternMachineC>()->GetOnHitH())
+	{
+		// 내가 Weak_Hit 상태라면
+		if (Name_Ganesha_Weak_Hit == fsm->GetCurStateString())
+
+		{
+			fsm->ChangeState(Name_Ganesha_Weak_Loop);
+			std::cout << "Weak_Loop" << std::endl;
+		}
+	}
 }
 
 SP(CGaneshaStunPattern) CGaneshaStunPattern::Create()

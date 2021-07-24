@@ -96,6 +96,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst01);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 
 			// burst 위치 잡기
 			CMB_Ganesha* pGanesha = static_cast<CMB_Ganesha*>(pOwner);
@@ -123,6 +124,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 		m_walkReady = false;
 		m_onSound = false;
 		m_onRunStart = false;
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
