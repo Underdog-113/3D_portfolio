@@ -2343,11 +2343,13 @@
     <ClInclude Include="..\Header\Sakura_Particle.h">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClInclude>
-<ClInclude Include="..\Header\MonsterDieParticle.h" />
     <ClInclude Include="..\Header\Shot_SlowAll.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_ReturnCameraToActor.h" />
+    <ClInclude Include="..\Header\MonsterDieParticle.h">
+      <Filter>02.Objects\03.Effect\02.Particle\MonsterDieParticle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3481,14 +3483,13 @@
     <ClCompile Include="..\Code\Sakura_Particle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="..\Code\MonsterDieParticle.cpp" />
-=======
     <ClCompile Include="..\Code\Shot_SlowAll.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_ReturnCameraToActor.cpp" />
->>>>>>> e99d6a7997f7265a4c67a7e2cc3f17e3ae83f397
+    <ClCompile Include="..\Code\MonsterDieParticle.cpp">
+      <Filter>02.Objects\03.Effect\02.Particle\MonsterDieParticle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
