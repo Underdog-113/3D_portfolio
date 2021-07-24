@@ -17,30 +17,6 @@ sampler SpecularSampler = sampler_state
 };
 
 
-texture g_BlurDiv2Texture;
-sampler BlurDiv2Sampler = sampler_state
-{
-	texture = g_BlurDiv2Texture;
-};
-
-texture g_BlurDiv4Texture;
-sampler BlurDiv4Sampler = sampler_state
-{
-	texture = g_BlurDiv4Texture;
-};
-
-texture g_BlurDiv8Texture;
-sampler BlurDiv8Sampler = sampler_state
-{
-	texture = g_BlurDiv8Texture;
-};
-
-texture g_BlurDiv16Texture;
-sampler BlurDiv16Sampler = sampler_state
-{
-	texture = g_BlurDiv16Texture;
-};
-
 //texture
 //texture g_LutTexture;
 //sampler LutSampler = sampler_state
