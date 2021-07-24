@@ -32,6 +32,7 @@ void CStuffItemC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
 
+	GetOwner()->GetTransform()->SetRotationX(124);
 	m_oldY = GetOwner()->GetTransform()->GetPosition().y;
 	m_init = true;
 	m_currentValkyrie = nullptr;
@@ -104,11 +105,11 @@ void CStuffItemC::AddDataInit(ItemSave itemValue, _float force)
 
 void CStuffItemC::UpDown()
 {
-	_float value = 0.5;
+	_float value = 0.15f;
 	if (GetOwner()->GetTransform()->GetPosition().y >= m_oldY + value)
-		m_dir = -1;
+		m_dir = -0.5f;
 	if (GetOwner()->GetTransform()->GetPosition().y <= m_oldY - value)
-		m_dir = 1;
+		m_dir = 0.5f;
 
 	GetOwner()->GetTransform()->AddRotationY(1 * GET_DT);
 	GetOwner()->GetTransform()->AddPositionY(m_dir * GET_DT);

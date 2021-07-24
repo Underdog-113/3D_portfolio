@@ -69,7 +69,7 @@ void CHpItemC::Update(SP(CComponent) spThis)
 
 		_float3 pos = GetOwner()->GetTransform()->GetPosition();
 		pos.y = m_oldY;
-		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.2f)
+		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.3f)
 		{
 			_float value = min(m_currentValkyrie->GetStat()->GetCurHp() + (_float)m_hpValue, m_currentValkyrie->GetStat()->GetMaxHp());
 			m_currentValkyrie->GetStat()->SetCurHp(value);
@@ -106,11 +106,11 @@ void CHpItemC::AddDataInit(_int hpValue, _float force)
 
 void CHpItemC::UpDown()
 {
-	_float value = 0.5;
+	_float value = 0.15f;
 	if (GetOwner()->GetTransform()->GetPosition().y >= m_oldY + value)
-		m_dir = -1;
+		m_dir = -0.5f;
 	if (GetOwner()->GetTransform()->GetPosition().y <= m_oldY - value)
-		m_dir = 1;
+		m_dir = 0.5f;
 
 	GetOwner()->GetTransform()->AddRotationY(1 * GET_DT);
 	GetOwner()->GetTransform()->AddPositionY(m_dir * GET_DT);
