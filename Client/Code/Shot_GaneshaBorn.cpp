@@ -41,7 +41,7 @@ void CShot_GaneshaBorn::Action()
 {
 	CShot::Action();
 
-	if (!m_isSound && m_pOnAirTake->GetPlayTimer() > 1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f)
+	if (!m_isSound && m_pOnAirTake->GetPlayTimer() > 1.0f)
 	{
 		Engine::CSoundManager::GetInstance()->StartSound(L"Ganesha_Intro.wav", (_uint)EChannelID::PLAYEREFFECT_CH2);
 		m_isSound = true;
@@ -57,6 +57,9 @@ void CShot_GaneshaBorn::Action()
 void CShot_GaneshaBorn::Cut()
 {
 	m_pActorAniCtrl->SetIsMovieOn(false);
+
+	CStageControlTower::GetInstance()->GetMovieDirector()->CutCurrentTake();
+	CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
 }
 
 void CShot_GaneshaBorn::Rollback()

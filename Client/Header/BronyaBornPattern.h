@@ -14,6 +14,8 @@ private:
 public:
 	virtual void Pattern(Engine::CObject* pOwner) override;
 	static SP(CBronyaBornPattern) Create();
+
+	GETTOR_SETTOR(_bool, m_isBornEnd, false, IsBornEnd)
 };
 
 #endif
