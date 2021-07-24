@@ -23,7 +23,8 @@ namespace Engine
 		Blur			= 7,
 		Player			= 8,
 		Effect			= 9,
-		NumOfRenderID	= 10
+		ScreenEffect	= 10,
+		NumOfRenderID	= 11
 	};
 
 	//Camera Mdoe
