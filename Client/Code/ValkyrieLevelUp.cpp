@@ -122,7 +122,6 @@ void CValkyrieLevelUp::ItemSelect()
 	static_cast<CValkyrieLevelUp*>(CValkyriegManager::GetInstance()->GetValkyrieFSM())->ItemCountUp();
 	std::static_pointer_cast<Engine::CSlider>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"LevelUpCanvas_Slider_0"))->SetMaxValue((_float)CDataManager::GetInstance()->FindItemData(g_selectItemName)->GetCount());
 
-
 	if (m_selectObject != nullptr)
 		m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() - _float3(20, 20, 0));
 
@@ -183,8 +182,15 @@ void CValkyrieLevelUp::ItemButtonSetting()
 
 		statPos.x += offsetX;
 		m_spItemButtonObject.emplace_back(object);
-	}
 
+		if (i == 0)
+		{
+			m_selectObject = static_cast<Engine::CObject*>(object->GetButton().get());
+			m_selectObject->GetTransform()->SetSize(m_selectObject->GetTransform()->GetSize() + _float3(20, 20, 0));
+		}
+
+	}
 }
+
 // 사이의 거리
 // 시작위치

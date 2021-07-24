@@ -56,6 +56,7 @@ void CValkyrieWeapon::WeaponCanvas()
 	m_scene->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(false);
 	CValkyrieStatusData* data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
 
+	m_scene->FindObjectByName(L"WeaponCanvas_Image_9")->GetComponent<Engine::CTextureC>()->ChangeTexture(data->GetWeaponData()->GetTextureKey());
 	DataInput(L"WeaponCanvas_Text_0", data->GetWeaponData()->GetName());
 	DataInput(L"WeaponCanvas_Text_3", L"LV." + std::to_wstring(data->GetWeaponData()->GetLevel()));
 
@@ -74,10 +75,7 @@ void CValkyrieWeapon::WeaponCanvas()
 			textureKey = L"StarBigGray";
 
 		m_scene->FindObjectByName(L"WeaponCanvas_Image_" + std::to_wstring(5 + i))->GetComponent<Engine::CTextureC>()->ChangeTexture(textureKey);
-
 	}
-
-	
 }
 
 void CValkyrieWeapon::ChangeSelect()

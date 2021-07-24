@@ -23,12 +23,17 @@ void CDataManager::Start()
 	ItemInit(L"고급 학습 칩",10);
 	ItemInit(L"무기 강화제", 100);
 
+	WeaponInit(L"개량형 USP");
 	WeaponInit(L"모조된 유다·피의 포옹");
-	
+	WeaponInit(L"고주파 절단도");
 
 	ValkyrieStatusDataListInit(L"투예복백련");
 	ValkyrieStatusDataListInit(L"월하초옹");
 	ValkyrieStatusDataListInit(L"역신무녀");
+
+	FindvalkyrieStatusData(L"투예복·백련")->SetWeaponData(FindWeaponData(L"개량형 USP"));
+	FindvalkyrieStatusData(L"월하초옹")->SetWeaponData(FindWeaponData(L"모조된 유다·피의 포옹"));
+	FindvalkyrieStatusData(L"역신무녀")->SetWeaponData(FindWeaponData(L"고주파 절단도"));
 
 	InStockValkyrieInit(L"투예복·백련");
 	InStockValkyrieInit(L"월하초옹");

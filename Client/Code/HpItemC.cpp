@@ -108,9 +108,9 @@ void CHpItemC::UpDown()
 {
 	_float value = 0.15f;
 	if (GetOwner()->GetTransform()->GetPosition().y >= m_oldY + value)
-		m_dir = -0.5f;
+		m_dir = -0.2f;
 	if (GetOwner()->GetTransform()->GetPosition().y <= m_oldY - value)
-		m_dir = 0.5f;
+		m_dir = 0.2f;
 
 	GetOwner()->GetTransform()->AddRotationY(1 * GET_DT);
 	GetOwner()->GetTransform()->AddPositionY(m_dir * GET_DT);
