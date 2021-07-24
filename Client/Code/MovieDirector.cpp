@@ -302,9 +302,9 @@ void CMovieDirector::StartTake_BlackFadeIn()
 	auto pTake = m_takeMap[TakeName_SimpleBlackFadeIn];
 	m_spBlackFadeImage->SetIsEnabled(true);
 
-	CShot_BlackFadeOut::Desc blo_desc;
-	blo_desc.pBlackFade = m_pBlackFade;
-	pTake->ReadyShot(ShotName_BlackFadeOut, 0.f, 0.5f, &blo_desc, 0.f);
+	CShot_BlackFadeIn::Desc bli_desc;
+	bli_desc.pBlackFade = m_pBlackFade;
+	pTake->ReadyShot(ShotName_BlackFadeIn, 0.f, 0.5f, &bli_desc, 0.f);
 
 	m_pCurTake = pTake;
 

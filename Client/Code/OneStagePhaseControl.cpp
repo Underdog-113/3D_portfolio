@@ -52,10 +52,13 @@ void COneStagePhaseControl::Update(void)
 		break;
 		//Before being collided with PhaseChanger0
 	case (_int)EOneStagePhase::BeforeFirstFight1:
+		// 걸어다니는먹잇감
 		break;
 
 		//After being collided with PhaseChanger0
 	case (_int)EOneStagePhase::FirstFight1Begin:
+		// 트리거 엔터
+		// 다 죽여야 증가>?>>
 		break;
 
 	case (_int)EOneStagePhase::FirstFight1End:
@@ -90,29 +93,17 @@ void COneStagePhaseControl::Update(void)
 
 		//After being collided with PhaseChanger0
 	case (_int)EOneStagePhase::FirstFight2Begin:
+
+		// 여기서도 다 죽이면 증가?????
 		break;
 
 		//After killing all the enemies
 	case (_int)EOneStagePhase::FirstFight2End:
+		// 걸어다니기
 		break;
-
-	//	//Before being collised with PhaseChanger1
-	//case (_int)EOneStagePhase::BeforeSecondFight:
-	//	break;
-
-	//	//After being collided with PhaseChanger1
-	//case (_int)EOneStagePhase::SecondFightBegin:
-	//	break;
-
-	//	//After killing all the enemies
-	//case (_int)EOneStagePhase::SecondFightEnd:
-	//	++m_curPhase;
-	//	break;
-
-		//Before being collised with PhaseChanger2
-	case (_int)EOneStagePhase::BeforeMidBoss:
+	case (_int)EOneStagePhase::WarningAlarm:
+		++m_curPhase;
 		break;
-
 		//After being collided with PhaseChanger2
 	case (_int)EOneStagePhase::MidBossBegin:
 		break;
