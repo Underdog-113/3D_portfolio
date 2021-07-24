@@ -309,32 +309,47 @@ void CTransformC::SlerpXZ(void)
 			return;
 		}
 
-		D3DXQUATERNION qResult, qFrom, qTo;
-		_mat rotateX, rotateY, rotateZ, goalRotMat;
 
-		_float3 rotation = GetUpdatedRotation(m_goalForward);
-
-		D3DXMatrixRotationX(&rotateX, rotation.x);
-		D3DXMatrixRotationY(&rotateY, rotation.y);
-		D3DXMatrixRotationZ(&rotateZ, rotation.z);
-
-		goalRotMat = rotateX * rotateY * rotateZ;
-
-		D3DXQuaternionRotationMatrix(&qFrom, &m_rotMatrix);
-		D3DXQuaternionRotationMatrix(&qTo, &goalRotMat);
-
-
-		D3DXQuaternionSlerp(&qResult, &qFrom, &qTo, (m_slerpSpeed * GET_DT) / includedAngle);
-
-		m_rotation = GET_MATH->QuatToRad(qResult);
-		UpdateForward();
-		/*_float3 determinant;
+		_float3 determinant;
+		_mat rotCurForward;
+		_float3 curForward;
 		D3DXVec3Cross(&determinant, &m_forward, &m_goalForward);
 
 		if (determinant.y < 0)
-			AddRotationY(-m_slerpSpeed * GET_DT);
+			D3DXMatrixRotationAxis(&rotCurForward, &UP_VECTOR, -m_slerpSpeed * GET_DT);
 		else
-			AddRotationY(m_slerpSpeed * GET_DT);*/
+			D3DXMatrixRotationAxis(&rotCurForward, &UP_VECTOR, m_slerpSpeed * GET_DT);	
+		
+		D3DXVec3TransformNormal(&curForward, &m_forward, &rotCurForward);
+		SetForwardUp(curForward, UP_VECTOR);
+		
+
+		//D3DXQUATERNION qResult, qFrom, qTo;
+		//_mat rotateX, rotateY, rotateZ, goalRotMat;
+
+		//_float3 rotation = GetUpdatedRotation(m_goalForward);
+
+		//D3DXMatrixRotationX(&rotateX, rotation.x);
+		//D3DXMatrixRotationY(&rotateY, rotation.y);
+		//D3DXMatrixRotationZ(&rotateZ, rotation.z);
+
+		//goalRotMat = rotateX * rotateY * rotateZ;
+
+		//D3DXQuaternionRotationMatrix(&qFrom, &m_rotMatrix);
+		//D3DXQuaternionRotationMatrix(&qTo, &goalRotMat);
+
+
+		//D3DXQuaternionSlerp(&qResult, &qFrom, &qTo, (m_slerpSpeed * GET_DT) / includedAngle);
+
+		//m_rotation = GET_MATH->QuatToRad(qResult);
+		//UpdateForward();
+		///*_float3 determinant;
+		//D3DXVec3Cross(&determinant, &m_forward, &m_goalForward);
+
+		//if (determinant.y < 0)
+		//	AddRotationY(-m_slerpSpeed * GET_DT);
+		//else
+		//	AddRotationY(m_slerpSpeed * GET_DT);*/
 	}
 }
 
