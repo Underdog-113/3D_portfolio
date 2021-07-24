@@ -44,7 +44,7 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 		m_impactEffect = false;
 
 		// movie
-		CStageControlTower::GetInstance()->GetMovieDirector()->Cut();
+		CStageControlTower::GetInstance()->GetMovieDirector()->CutCurrentTake();
 		CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
 
 		return;

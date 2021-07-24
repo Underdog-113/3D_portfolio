@@ -56,7 +56,7 @@ void CTake::ActTake_EditMode()
 
 void CTake::ActTake_NormalMode()
 {
-	_uint nowOn = 0;
+	_uint shotEnd = 0;
 
 	for (auto iter : m_shotMap)
 	{
@@ -64,23 +64,28 @@ void CTake::ActTake_NormalMode()
 			iter.second->Action();
 
 		if (iter.second->CheckShotEnd(m_playTimer))
-			++nowOn;
+			++shotEnd;
 	}
 
-	if (!m_editMode && nowOn < m_shotMap.size())
+	if (!m_editMode && shotEnd < m_shotMap.size())
 	{
-		m_playTimer += GET_DT;
+		m_playTimer += GET_PURE_DT;
+	}
+
+	if (shotEnd == m_shotMap.size())
+	{
+		CStageControlTower::GetInstance()->GetMovieDirector()->CutCurrentTake();
 	}
 }
 
 void CTake::EndTake()
 {
 	CStageControlTower::GetInstance()->SetDirectorMode(false);
-
-	for (auto iter : m_shotMap)
-	{
-		iter.second->Rollback();
-	}
+// 
+// 	for (auto iter : m_shotMap)
+// 	{
+// 		iter.second->Rollback();
+// 	}
 }
 
 void CTake::MoveNextFrame()

@@ -124,7 +124,12 @@ void CSakura::Update(void)
 		
 		if (m_infernoTimer > 10.f)
 		{
-			std::static_pointer_cast<CFSM_SakuraC>(m_spStateMachine)->GetSakuraParticle()->SetDeleteThis(true);
+			for (auto& it : std::static_pointer_cast<CFSM_SakuraC>(m_spStateMachine)->GetvSakuraParticle())
+			{
+				it->SetDeleteThis(true);
+			}
+			std::static_pointer_cast<CFSM_SakuraC>(m_spStateMachine)->ClearSakuraParticle();
+
 			m_infernoMode = false;
 			CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::NoColoring);
 		}

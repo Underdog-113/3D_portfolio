@@ -31,5 +31,10 @@ public:
 private:
 	static		_uint m_s_uniqueID;
 	_float3 m_tmpScale;
+
+private:
+	void InitParticle();
+	void resetParticle();
+	void movement();
 };
 

@@ -25,13 +25,19 @@
 #define ShotName_MovePivot_SubCh1	L"MovePivot_SubCh1"
 #define ShotName_MovePivot_SubCh2	L"MovePivot_SubCh2"
 #define ShotName_MovePivot_SubCh3	L"MovePivot_SubCh3"
+
 #define ShotName_Shake				L"Shake"
+#define ShotName_SlowAll			L"SlowAll"
+#define ShotName_ReturnCameraToActor	L"ReturnCameraToActor"
+
 
 #define ShotName_Victory			L"Victory"
 #define ShotName_GaneshaBorn		L"GaneshaBorn"
 
 #define TakeName_SimpleBlackFadeIn	L"BlackFadeIn"
 #define TakeName_SimpleBlackFadeOut L"BlackFadeOut"
+
+#define TakeName_WinningSlow		L"WinningSlow"
 #define TakeName_Failure			L"Failure"
 
 #define TakeName_SakuraVictory		L"SakuraVictory"
@@ -58,9 +64,15 @@ public:
 
 	void Create_AllShots();
 
-	void CreateTake_Failure();
-	void CreateTake_SakuraVictory();
+	void Create_AllTakes();
 
+	void CreateTake_BlackFadeIn();
+	void CreateTake_BlackFadeOut();
+
+	void CreateTake_WinningSlow();
+	void CreateTake_Failure();
+
+	void CreateTake_SakuraVictory();
 	void CreateTake_GaneshaBorn();
 	void CreateGanshaBornShakeChannel();
 
@@ -68,11 +80,16 @@ public:
 	void StartTake_BlackFadeIn();
 	void StartTake_BlackFadeOut();
 
+	void StartTake_WinningSlow();
 	void StartTake_Failure();
+
+	void StartTake_Victory();
+	void StartTake_KianaVictory();
+	void StartTake_TheresaVictory();
 	void StartTake_SakuraVictory();
 	void StartTake_GaneshBorn();
 
-	void Cut();
+	void CutCurrentTake();
 
 public:
 	_float3 GetBezierPoint(_float3 startPoint, _float3 midPoint, _float3 endPoint, float detail);
@@ -86,7 +103,7 @@ private:
 	std::unordered_map<std::wstring, CTake*> m_takeMap;
 
 	CTake* m_pCurTake = nullptr;
-	_bool m_onAir = false;
+	GETTOR(_bool, m_onAir, false, IsOnAir)
 
 	
 	CSplineCurve* m_pGaneshaPitchCurve_1st = nullptr;
@@ -105,7 +122,7 @@ private:
 	CShot* m_pShot_BlackFadeIn_SubCh1 = nullptr;
 	CShot* m_pShot_BlackFadeOut = nullptr;
 	CShot* m_pShot_BlackFadeOut_SubCh1 = nullptr;
-
+	
 	CShot* m_pShot_RotateAround = nullptr;
 	CShot* m_pShot_RotateYaw = nullptr;
 	CShot* m_pShot_RotateYaw_SubCh1 = nullptr;
@@ -122,7 +139,10 @@ private:
 	CShot* m_pShot_MovePivot_SubCh1 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh2 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh3 = nullptr;
+
 	CShot* m_pShot_Shake = nullptr;
+	CShot* m_pShot_SlowAll = nullptr;
+	CShot* m_pShot_ReturnCameraToActor = nullptr;
 
 	CShot* m_pShot_Victory = nullptr;
 	CShot* m_pShot_GaneshaBorn = nullptr;

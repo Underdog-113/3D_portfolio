@@ -12,6 +12,7 @@
 #include "PhaseChanger.h"
 #include "PatternMachineC.h"
 #include "ActorController.h"
+#include "StageCameraMan.h"
 
 CTwoStagePhaseControl::CTwoStagePhaseControl()
 {
@@ -55,15 +56,30 @@ void CTwoStagePhaseControl::Update(void)
 
 		break;
 	case (_int)ETwoStagePhase::PotalWarp:
-		CStageControlTower::GetInstance()->GetActorController()->SetDirectorMode(true);
-		//CStageControlTower::GetInstance()->SetDirectorMode(true);
-		m_warningTimer += GET_DT;
-		if (m_warningTimer > 1.f)
+		//CStageControlTower::GetInstance()->GetActorController()->SetDirectorMode(true);
+		if (!m_portalEnter)
 		{
-			_float3 warpPos = ((CPortal*)Engine::GET_CUR_SCENE->FindObjectWithKey(L"Portal").get())->GetDestPos();
-			CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->SetPosition(warpPos);
-			m_warningTimer = 0.f;
-			++m_curPhase;
+			CStageControlTower::GetInstance()->SetDirectorMode(true);
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeOut();
+			m_portalEnter = true;
+		}
+
+		m_warpTimer += GET_DT;
+		if (m_warpTimer > 0.6f)
+		{
+			if (!m_portalMove)
+			{
+				_float3 warpPos = ((CPortal*)Engine::GET_CUR_SCENE->FindObjectWithKey(L"Portal").get())->GetDestPos();
+				CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->SetPosition(warpPos - _float3(0.f, 0.5f, 0.f));
+				CStageControlTower::GetInstance()->GetCameraMan()->GetPivot()->GetTransform()->SetPosition(warpPos - _float3(0.f, 0.5f, 0.f));
+				CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeIn();
+				m_portalMove = true;
+			}
+			if (!m_portalEnd && m_warpTimer > 1.1f)
+			{
+				++m_curPhase;
+				m_portalEnd = true;
+			}			
 		}
 		break;
 	case (_int)ETwoStagePhase::WarningAlarm:
@@ -105,28 +121,42 @@ void CTwoStagePhaseControl::Update(void)
 		break;
 		//After killing Boss
 	case (_int)ETwoStagePhase::BossEnd:
-		m_isSoundChange = false;
+		// movie
+		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WinningSlow();
 		++m_curPhase;
 		break;
+	case (_int)ETwoStagePhase::WinningSlow:
+		if (!CStageControlTower::GetInstance()->GetMovieDirector()->GetIsOnAir())
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			m_victoryTimer = 0.f;
+			++m_curPhase;
+		}
+		break;
+	case (_int)ETwoStagePhase::WaitVictoryMovie:
+		m_victoryTimer += GET_DT;
+
+		if (m_victoryTimer > 1.f)
+		{
+			m_victoryTimer = 0.f;
+			// movie
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_Victory();
+
+			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			++m_curPhase;
+		}
+		break;
 	case (_int)ETwoStagePhase::VictoryMovie:
-		m_isSoundChange = false;
-		++m_curPhase;
+		m_victoryTimer += GET_DT;
+		if (m_victoryTimer > 4.f)
+		{
+			OpenStageResult();
+			++m_curPhase;
+		}
 		break;
 		//Result screen
 	case (_int)ETwoStagePhase::StageResult:
-		++m_curPhase;
-		OpenStageResult();
-		break;
-
-		// Wait Change Scene
-	case (_int)ETwoStagePhase::StageResult_Idle:
-		if (false == m_isSoundChange)
-		{
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isSoundChange = true;
-		}
 		break;
 	default:
 		break;
@@ -144,10 +174,7 @@ void CTwoStagePhaseControl::EnterConversationPhase(void)
 
 void CTwoStagePhaseControl::OpenStageResult(void)
 {
-	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
-
-	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
+	//Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
+	
 	CBattleUiManager::GetInstance()->BattleEnd();
-	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
-	ShowCursor(true);
 }

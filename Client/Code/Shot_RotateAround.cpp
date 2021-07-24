@@ -15,9 +15,10 @@ CShot_RotateAround::~CShot_RotateAround()
 void CShot_RotateAround::Ready(CTake * pTake, _float startTimeline, _float endTimeline, void* pDesc, _float enterTimeline)
 {
 	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
-
-	SetIsEndless(true);
+	
 	memcpy(&m_desc, pDesc, sizeof(Desc));
+	if(m_desc.isEndless)
+		SetIsEndless(true);
 
 	m_savedPivotPos = m_pCameraMan->GetPivot()->GetTransform()->GetPosition();
 	m_savedLookAngleUp = m_spCamera->GetLookAngleUp();
@@ -26,7 +27,7 @@ void CShot_RotateAround::Ready(CTake * pTake, _float startTimeline, _float endTi
 void CShot_RotateAround::Enter()
 {
 	m_pCameraMan->GetPivot()->GetTransform()->SetPosition(m_savedPivotPos + m_desc.offset);
-	m_spCamera->SetLookAngleUp(D3DXToRadian(m_desc.startEulerRotate));
+	m_spCamera->SetLookAngleUp(m_desc.startRadianRotate + D3DXToRadian(m_desc.startEulerRotate));
 }
 
 
@@ -37,7 +38,7 @@ void CShot_RotateAround::Action()
 	_float timeline = GetTimeline();
 	timeline -= (_uint)timeline;
 
-	_float curLookAngleUp = D3DXToRadian(m_desc.startEulerRotate + 360.f * timeline * m_desc.rotateSpeed);
+	_float curLookAngleUp = m_desc.startRadianRotate + D3DXToRadian(m_desc.startEulerRotate + 360.f * timeline * m_desc.rotateSpeed);
 	
 	m_spCamera->SetLookAngleUp(curLookAngleUp);
 

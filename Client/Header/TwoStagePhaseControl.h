@@ -20,9 +20,9 @@ public:
 		Boss				,
 		BossEnd				,
 		WinningSlow			,
+		WaitVictoryMovie	,
 		VictoryMovie		,
 		StageResult			,
-		StageResult_Idle	,
 		NumOfPhse			
 	};
 public:
@@ -45,7 +45,16 @@ public:
 
 private:
 	SP(CMonster) m_spGanesha = nullptr;
+
+	_float m_warpTimer = 0.f;
+	_bool m_portalEnter = false;
+	_bool m_portalMove = false;
+	_bool m_portalEnd = false;
+
+
 	_float m_warningTimer = 0.f;
+
+	_float m_victoryTimer = 0.f;
 };
 
 #endif
