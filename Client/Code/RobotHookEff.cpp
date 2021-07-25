@@ -39,10 +39,10 @@ SP(Engine::CObject) CRobotHookEff::MakeClone(void)
 void CRobotHookEff::Awake(void)
 {
 	__super::Awake();
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_spTexture->AddTexture(L"RobotHook");
 	m_spTexture->AddTexture(L"RobotHook");
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CRobotHookEff::Start(void)

@@ -175,6 +175,17 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Smoke()
 	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
 }
 
+void CEffectMaker_Theresa::CreateEffect_Ultra_ChargeSmoke()
+{
+	_float3 size = _float3(0.05f, 0.f, 0.05f);
+
+	auto effect = CreateEffect_AlphaMask(Ultra_ChargeSmoke_ObjectKey, L"Ult_Smoke", Ultra_ChargeSmoke_Tex1Name, Ultra_ChargeSmoke_Tex2Name);
+	effect->GetTransform()->SetParent(m_pTheresa->GetTransform());
+	effect->GetTransform()->SetSize(size);
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+}
+
 void CEffectMaker_Theresa::CreateEffect_Ultra_Bomb()
 {
 	_float3 size = _float3(0.8f, 0.8f, 0.8f);

@@ -137,7 +137,7 @@ void CYongScene::Update(void)
 	{
 		for (_uint i = 0; i < 15; ++i)
 		{
-			SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"MonsterDieParticle", true, (_uint)Engine::ELayerID::Effect);
+			SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
 		}
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);

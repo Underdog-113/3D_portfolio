@@ -52,35 +52,21 @@ void CTheresa_Ult_Explosion::Start()
 
 	SP(Engine::CObject) spFireEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Fire", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spFireEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Fire");
-	spFireEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
-	spFireEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Ult_Fire");
-	spFireEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::FireShader);
-	spFireEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
-	spFireEffect->GetComponent<Engine::CTransformC>()->SetSize(0.2f, 0.2f, 0.2f);
+	spFireEffect->GetComponent<Engine::CTransformC>()->SetPosition(m_spTransform->GetPosition());
+	spFireEffect->GetComponent<Engine::CTransformC>()->SetSize(0.f, 0.f, 0.f);
 
 	SP(Engine::CObject) spCrackEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Crack", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spCrackEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Crack");
-	spCrackEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spCrackEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Sword_map");
-	spCrackEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Groundcracks_05");
-	spCrackEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	spCrackEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
+
+	spCrackEffect->GetComponent<Engine::CTransformC>()->SetPosition(m_spTransform->GetPosition());
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeX(0.5f);
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeY(0.5f);
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(0.5f);
 
 	SP(Engine::CObject) spSmokeEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Smoke", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-	spSmokeEffect->GetComponent<Engine::CMeshC>()->SetMeshData(L"Ult_Smoke");
-	spSmokeEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	spSmokeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
-	spSmokeEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"fx_snowfield_fog03");
-	spSmokeEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPosition(this->GetTransform()->GetPosition());
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPositionY(this->GetTransform()->GetPosition().y - 1.f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPosition(m_spTransform->GetPosition());
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPositionY(m_spTransform->GetPosition().y - 1.f);
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(1.f);
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeY(1.f);
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(1.f);

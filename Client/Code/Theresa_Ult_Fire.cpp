@@ -29,8 +29,6 @@ SP(Engine::CObject) CTheresa_Ult_Fire::MakeClone()
 	__super::InitClone(spClone);
 
 	spClone->m_spTransform = spClone->GetComponent<Engine::CTransformC>();
-	m_spTransform->SetSizeY(2.f);
-
 	spClone->m_spMesh = spClone->GetComponent<Engine::CMeshC>();
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
@@ -42,12 +40,18 @@ SP(Engine::CObject) CTheresa_Ult_Fire::MakeClone()
 void CTheresa_Ult_Fire::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Cloud");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spTexture->AddTexture(L"Fire");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 }
 
 void CTheresa_Ult_Fire::Start()
 {
 	__super::Start();
-	m_fUVSpeed = 0.f;
+	m_spTransform->SetSize(_float3(0.1f, 0.f, 0.1f));
 	m_fAlpha = 1.f;
 }
 
@@ -65,23 +69,39 @@ void CTheresa_Ult_Fire::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_spTransform->AddSizeY(3 * GET_PLAYER_DT);
-
 	m_fAlpha -= 0.5f * GET_PLAYER_DT;
-	m_fUVSpeed += GET_PLAYER_DT;
+
+	_float _size = 0.1f * GET_DT;
+	m_spTransform->AddSizeY(_size);
 }
 
 void CTheresa_Ult_Fire::LateUpdate()
 {
 	__super::LateUpdate();
+
+	_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	D3DXMatrixIdentity(&matBill);
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);
 }
 
 void CTheresa_Ult_Fire::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-	pEffect->SetFloat("gSpeed", m_fUVSpeed);
-
+	pEffect->CommitChanges();
 }
 
 void CTheresa_Ult_Fire::Render(LPD3DXEFFECT pEffect)
