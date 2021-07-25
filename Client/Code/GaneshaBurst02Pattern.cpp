@@ -68,8 +68,8 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_Burst02 == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
-			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 			m_onSound = false;
 			m_onRunStart = false;
 		}
@@ -94,6 +94,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst02);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 			m_onBurstReadyEff = true;
 		}
 	}

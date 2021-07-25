@@ -55,10 +55,10 @@ void CMB_Ganesha::Start(void)
 		CGaneshaHitPattern::Create(),
 		CGaneshaAirbornePattern::Create(),
 		CGaneshaStunPattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());//
+	//m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 
 	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -220,13 +220,3 @@ SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 
 	return spInstance;
 }
-
-void CMB_Ganesha::ChaseTarget(_float3 targetPos)
-{
-	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0;
-	D3DXVec3Normalize(&dir, &dir);
-
-	m_spTransform->SetForwardUp(dir, UP_VECTOR);
-}
-

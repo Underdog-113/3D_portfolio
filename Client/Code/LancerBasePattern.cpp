@@ -31,24 +31,11 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	/************************* Lerp Move */
-	//if (true == m_onLerp && false == pOwner->GetTransform()->GetSlerpOn())
-	//{
-	//	m_onLerp = false;
-	//}
-	//else
-	//{
-	//	_float3 dir = tPos - mPos;
-	//	D3DXVec3Normalize(&dir, &dir);
-	//
-	//	pOwner->GetTransform()->SetGoalForward(dir);
-	//}
-
 	// 내가 공격1 상태가 아니라면 상대 추적
 	if (Name_ATTACK_1 != fsm->GetCurStateString() &&
 		false == m_onLerp)
 	{
-		static_cast<CMO_Lancer*>(pOwner)->ChaseTarget(tPos);
+		static_cast<CMonster*>(pOwner)->ChaseTarget(tPos);
 	}
 
 	/************************* Range */
@@ -61,13 +48,6 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_WALK_BACKWARD);
-			//m_onLerp = true;
-			//
-			//_float3 dir = tPos - mPos;
-			//D3DXVec3Normalize(&dir, &dir);
-			//
-			//pOwner->GetTransform()->SetSlerpOn(true);
-			//pOwner->GetTransform()->SetGoalForward(dir);
 		}
 		// 내가 대기 상태가 끝났다면
 		else if (Name_STAND == fsm->GetCurStateString() &&
@@ -118,18 +98,8 @@ void CLancerBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_WALK_BACKWARD);
-		//	m_onLerp = true;
-		//
-		//	_float3 dir = tPos - mPos;
-		//	D3DXVec3Normalize(&dir, &dir);
-		//
-		//	pOwner->GetTransform()->SetSlerpOn(true);
-		//	pOwner->GetTransform()->SetGoalForward(dir);
 		}
 	}
-
-	
-
 
 	/************************* AttackBall */
 	// 내가 공격 상태고, 적절할 때 어택볼 숨기기

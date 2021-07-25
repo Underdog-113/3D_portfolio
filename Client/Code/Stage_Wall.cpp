@@ -50,14 +50,13 @@ void CStage_Wall::Awake()
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 
 	m_spCollision = AddComponent<Engine::CCollisionC>();
-	m_spDebug = AddComponent<Engine::CDebugC>();
 }
 
 void CStage_Wall::Start()
 {
 	__super::Start();
 	m_fAlpha = 1.f;
-
+	m_spDebug = AddComponent<Engine::CDebugC>();
 }
 
 void CStage_Wall::FixedUpdate()

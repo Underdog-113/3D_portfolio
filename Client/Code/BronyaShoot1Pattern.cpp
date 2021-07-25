@@ -136,6 +136,7 @@ void CBronyaShoot1Pattern::Pattern(Engine::CObject* pOwner)
 		SP(Engine::CObject) spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
 
 		//std::cout << "»ý¼º" << std::endl;
+		PatternPlaySound(L"Bronya_ChargeShot.wav", pOwner);
 
 		m_onChargeEffect = true;
 	}

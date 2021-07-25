@@ -56,6 +56,9 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		m_vLaserOutEffect->GetTransform()->SetPosition(mPos);
 		defaultEscapeEffectSizeX = m_vLaserOutEffect->GetTransform()->GetSize().x;
 		m_onLaserOutEffect = true;
+
+		// sound
+		PatternPlaySound(L"Bronya_Teleport_Up.wav", pOwner);
 	}
 	// escape in 상태 중 적절한 위치로 올라왔다면
 	else if (Name_Escape_Out == fsm->GetCurStateString() &&
@@ -102,6 +105,9 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		m_vLaserInEffect->GetTransform()->AddSizeX(-0.5f);
 		m_vLaserInEffect->GetTransform()->SetPosition(mPos);
 		m_onLaserInEffect = true;
+
+		// sound
+		PatternPlaySound(L"Bronya_Teleport_Down.wav", pOwner);
 	}
 	// escape in 상태가 끝났다면
 	else if (Name_Escape_In == fsm->GetCurStateString() &&

@@ -35,7 +35,7 @@ protected:
 	GETTOR			(SP(Engine::CGraphicsC),	m_spGraphics,	nullptr,		Graphics)
 	GETTOR			(SP(Engine::CShaderC),		m_spShader,		nullptr,		Shader)
 
-
+	std::wstring nameSibal;
 	GETTOR			(_float3,					m_offset,		ZERO_VECTOR,	Offset)
 };
 END

@@ -284,6 +284,37 @@ void CMonster::MonsterDead()
 	}
 }
 
+void CMonster::ChaseTarget(_float3 targetPos)
+{
+	_float3 dir = targetPos - m_spTransform->GetPosition();
+	dir.y = 0;
+	D3DXVec3Normalize(&dir, &dir);
+
+	m_spTransform->SetGoalForward(dir);
+	m_spTransform->SetSlerpOn(true);
+	//m_spTransform->SetForwardUp(dir, UP_VECTOR);
+}
+
+void CMonster::AddEffect(SP(Engine::CObject) effect)
+{
+	m_vEffects.emplace_back(effect);
+}
+
+void CMonster::DeleteEffect(_int index)
+{
+	auto& iter = m_vEffects.begin();
+
+	for (int i = 0; i < m_vEffects.size(); ++i)
+	{
+		if (index == i)
+		{
+			iter = m_vEffects.erase(iter);
+			break;
+		}
+		++iter;
+	}
+}
+
 Engine::CCollider * CMonster::GetHitBox()
 {
 	auto cols = m_spCollision->GetColliders();

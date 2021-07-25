@@ -47,6 +47,8 @@ void CDebugC::Start(SP(CComponent) spThis)
 			m_vDebugCollider[i] =
 				std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
 			m_vDebugCollider[i]->SetOwner(m_pOwner);
+			if (m_pOwner->GetName() == L"PhaseChanger0")
+				int a = 5;
 			m_vDebugCollider[i]->SetCollider(vOwnerColliders[i].get());
 		}
 	}
@@ -74,6 +76,7 @@ void CDebugC::OnDestroy(void)
 
 	for (auto& debugCollider : m_vDebugCollider)
 	{
+		debugCollider->SetOwner(nullptr);
 		debugCollider->SetDeleteThis(true);
 		debugCollider.reset();
 	}

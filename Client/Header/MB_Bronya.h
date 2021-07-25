@@ -72,9 +72,10 @@ private:
 	GETTOR(std::vector<_float3>, m_vEscapePos, {}, EscapePos) // Escape Skill
 	GETTOR(std::vector<_float3>, m_vRingEffectPos, {}, RingEffectPos)
 	GETTOR(std::vector<_float3>, m_vRangeEffectPos, {}, RangeEffectPos)
+
+
 private:
 	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
 public:
 	static SP(CMB_Bronya) Create(_bool isStatic, Engine::CScene* pScene);
-	void ChaseTarget(_float3 targetPos);
 };

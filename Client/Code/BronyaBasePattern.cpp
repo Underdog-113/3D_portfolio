@@ -6,6 +6,7 @@
 #include "MB_Bronya.h"
 
 #include "Valkyrie.h"
+#include "AniCtrl.h"
 
 CBronyaBasePattern::CBronyaBasePattern()
 {
@@ -23,6 +24,20 @@ void CBronyaBasePattern::Pattern(Engine::CObject* pOwner)
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
+
+	/************************* Fast Idle */
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(2.f);
+		m_onFastIdle = true;
+	}
+	else if (Name_IDLE != fsm->GetCurStateString() &&
+		true == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		m_onFastIdle = false;
+	}
 
 	/************************* Chase Target */
 	if (Name_Evade_Left != fsm->GetCurStateString() &&

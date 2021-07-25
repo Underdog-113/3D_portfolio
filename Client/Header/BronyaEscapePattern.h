@@ -50,6 +50,8 @@ private:
 	_float3 m_lerpEndPos = ZERO_VECTOR;
 	_float m_lerpMaxTimer = 0.7f;
 	_float m_lerpCurTimer = 0.f;
+
+	GETTOR_SETTOR(_float3, m_goalPos, ZERO_VECTOR, GoalPos)
 };
 
 #endif

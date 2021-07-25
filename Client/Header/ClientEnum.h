@@ -97,7 +97,8 @@ enum class EChannelID
 	PLAYEREFFECT_CH2	= 7 + (_int)Engine::EChannelID::NumOfChannelID,
 	PLAYERHIT			= 8 + (_int)Engine::EChannelID::NumOfChannelID,
 	WARNING				= 9 + (_int)Engine::EChannelID::NumOfChannelID,
-	NumOfChannelID		= 10 + (_int)Engine::EChannelID::NumOfChannelID,
+	OBJECT				= 10 + (_int)Engine::EChannelID::NumOfChannelID,
+	NumOfChannelID		= 11 + (_int)Engine::EChannelID::NumOfChannelID,
 };
 
 enum class ELoadingID
