@@ -55,6 +55,12 @@ void CKianaUIAnim::Start(void)
 	__super::Start();
 
 	m_spMesh->SetMeshData(m_textureName);
+
+	if (m_textureName == L"Sakura_Wp")
+	{
+		m_spMesh->GetFirstMeshData_Dynamic()->GetAniCtrl()->ChangeAniSet_NoBlend(1);
+	}
+
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
 }

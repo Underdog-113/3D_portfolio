@@ -84,6 +84,9 @@ void CValkyrieSelect::End()
 	_int end = 10;
 	CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas")->SetIsEnabled(false);
 
+	if (m_vPlayer != nullptr)
+		m_vPlayer->SetDeleteThis(true);
+
 }
 
 _uint CValkyrieSelect::FixedUpdate()
@@ -95,20 +98,29 @@ _uint CValkyrieSelect::Update()
 {
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_W))
 	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(0.05f);
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(0.005f);
 	}
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_S))
 	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(-0.05f);
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(-0.005f);
 	}
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_A))
 	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(0.05f);
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(0.005f);
 	}
 	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_D))
 	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(-0.05f);
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(-0.005f);
 	}
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
+	{
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionZ(0.005f);
+	}
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_E))
+	{
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionZ(-0.005f);
+	}
+
 	return _uint();
 }
 
@@ -188,7 +200,7 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 	// 케릭터 메쉬 띄우기
 
 
-	/*if (m_vPlayer != nullptr)
+	if (m_vPlayer != nullptr)
 		m_vPlayer->SetDeleteThis(true);
 
 	wstring name = data->GetName();
@@ -196,17 +208,17 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 	{
 		// 키아나 오브젝트 생성 -> IDLE로 변경
 		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(1.3f, -0.7f, -0.0f));
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
-	} 
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.200000063f, -2.75000310f, -1.07500005f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(2.f, 2.f, 2.f));
+	}
 	else if (name == L"테레사·아포칼립스")
 	{
 		// 테레사 오브젝트 생성 -> IDLE로 변경
 		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
 		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_Wp"); 
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.790000141f, -0.39999995f, -2.00000024f));
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.0400000326f, -0.799999893f, -3.64999032f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
 	}
 	else if (name == L"야에 사쿠라")
@@ -214,10 +226,10 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 		// 사쿠라 오브젝트 생성 -> IDLE로 변경
 		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
 		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Sakura_Wp");
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.540000272f, -0.299999845f, -2.800000006f));
-		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.0500006266f, -0.534999609f, -4.30503416f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
-	}*/
+	}
 
 	if (data->GetProperty() == L"AvatarJiXie")
 	{
