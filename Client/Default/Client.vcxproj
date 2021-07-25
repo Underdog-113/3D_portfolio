@@ -250,6 +250,7 @@
     <ClInclude Include="..\Header\GaneshaStunPattern.h" />
     <ClInclude Include="..\Header\DropItemManager.h" />
     <ClInclude Include="..\Header\GachBoxC.h" />
+    <ClInclude Include="..\Header\MonsterDieParticle.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
     <ClInclude Include="..\Header\MousePointC.h" />
@@ -322,6 +323,7 @@
     <ClInclude Include="..\Header\Shot_ActorVictory.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeOut.h" />
+    <ClInclude Include="..\Header\Shot_BronyaBorn.h" />
     <ClInclude Include="..\Header\Shot_FixPivot.h" />
     <ClInclude Include="..\Header\Shot_GaneshaBorn.h" />
     <ClInclude Include="..\Header\Shot_PushIn.h" />
@@ -503,6 +505,7 @@
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_ChargeSmoke.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Explosion.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Fire.h" />
@@ -652,6 +655,7 @@
     <ClCompile Include="..\Code\GaneshaStunPattern.cpp" />
     <ClCompile Include="..\Code\DropItemManager.cpp" />
     <ClCompile Include="..\Code\GachBoxC.cpp" />
+    <ClCompile Include="..\Code\MonsterDieParticle.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
     <ClCompile Include="..\Code\MousePointC.cpp" />
@@ -722,6 +726,7 @@
     <ClCompile Include="..\Code\Shot_ActorVictory.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeOut.cpp" />
+    <ClCompile Include="..\Code\Shot_BronyaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_FixPivot.cpp" />
     <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_PushIn.cpp" />
@@ -881,6 +886,7 @@
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp" />

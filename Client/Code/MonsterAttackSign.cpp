@@ -47,7 +47,7 @@ void CMonsterAttackSign::Awake(void)
 	m_spTexture->AddTexture(L"RedFlare");
 	m_spTexture->AddTexture(L"RedFlare");
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	
 }
 

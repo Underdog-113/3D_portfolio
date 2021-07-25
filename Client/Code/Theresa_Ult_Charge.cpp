@@ -38,6 +38,11 @@ SP(Engine::CObject) CTheresa_Ult_Charge::MakeClone()
 void CTheresa_Ult_Charge::Awake()
 {
 	__super::Awake();
+	m_spMesh->SetMeshData(L"Ult_Charge");
+	m_spTexture->AddTexture(L"Charge");
+	m_spTexture->AddTexture(L"Charge");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 }
 
 void CTheresa_Ult_Charge::Start()

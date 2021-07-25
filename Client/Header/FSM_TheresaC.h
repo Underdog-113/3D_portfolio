@@ -21,8 +21,8 @@
 #define Delay_Effect_Attack4_2	0.3f
 
 #define Delay_Effect_Charge0	0.05f
-#define Delay_Effect_Charge1	0.15f
-#define Delay_Effect_Charge2	0.15f
+#define Delay_Effect_Charge1	0.25f
+#define Delay_Effect_Charge2	0.25f
 
 #define Panelty_Stun			1.5f
 

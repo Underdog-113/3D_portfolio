@@ -733,9 +733,6 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal">
       <UniqueIdentifier>{1870b79e-3fbb-43b1-ae2e-ffffd934c13f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
-      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
       <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
     </Filter>
@@ -1116,6 +1113,12 @@
     </Filter>
     <Filter Include="02.Objects\03.Effect\02.Particle\Sakura_Particle">
       <UniqueIdentifier>{2db064b7-acb3-417d-a390-e2663dff61c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\02.Particle\MonsterDieParticle">
+      <UniqueIdentifier>{deb8e34a-4245-4888-a3af-320ebc9f647f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.ControlTower\MovieDirector\CameraShot\Special">
+      <UniqueIdentifier>{45cd5415-1453-41ec-975e-e585a1eb0dda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2277,9 +2280,6 @@
     <ClInclude Include="..\Header\Shot_RotatePitch.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Shot_ActorVictory.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Shot_FixPivot.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClInclude>
@@ -2313,17 +2313,11 @@
     <ClInclude Include="..\Header\SplineCurve.h">
       <Filter>10.ControlTower\MovieDirector\SplineCurve</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Shot_Shake.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Shot_RotatePitch_Spline.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_PushIn.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Shot_GaneshaBorn.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshTrailShader_Glow.h">
       <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
@@ -2340,10 +2334,31 @@
     <ClInclude Include="..\Header\Sakura_Particle.h">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Shot_ActorVictory.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_BronyaBorn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_GaneshaBorn.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_ReturnCameraToActor.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Shot_Shake.h">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Shot_SlowAll.h">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Shot_ReturnCameraToActor.h" />
+    <ClInclude Include="..\Header\MonsterDieParticle.h">
+      <Filter>02.Objects\03.Effect\02.Particle\MonsterDieParticle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_ChargeSmoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3414,9 +3429,6 @@
     <ClCompile Include="..\Code\Shot_RotatePitch.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shot_ActorVictory.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Shot_FixPivot.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
     </ClCompile>
@@ -3450,17 +3462,11 @@
     <ClCompile Include="..\Code\SplineCurve.cpp">
       <Filter>10.ControlTower\MovieDirector\SplineCurve</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shot_Shake.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Shot_RotatePitch_Spline.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Rotate</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_PushIn.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Move</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshTrailShader_Glow.cpp">
       <Filter>04.Shader\04.MeshTrailShader\Glow</Filter>
@@ -3477,10 +3483,31 @@
     <ClCompile Include="..\Code\Sakura_Particle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Shot_ActorVictory.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_BronyaBorn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_ReturnCameraToActor.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shot_Shake.cpp">
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Shot_SlowAll.cpp">
-      <Filter>10.ControlTower\MovieDirector\CameraShot</Filter>
+      <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Shot_ReturnCameraToActor.cpp" />
+    <ClCompile Include="..\Code\MonsterDieParticle.cpp">
+      <Filter>02.Objects\03.Effect\02.Particle\MonsterDieParticle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

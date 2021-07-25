@@ -27,6 +27,8 @@ void CFireShader::Free()
 void CFireShader::Awake()
 {
 	__super::Awake();
+	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Final");
 }
 
 void CFireShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)

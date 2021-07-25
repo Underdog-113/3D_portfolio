@@ -1059,6 +1059,7 @@ void CFSM_KianaC::Attack_QTE_Enter(void)
 	m_pStageControlTower->SetVertCorrecting(true);
 
 	ResetCheckMembers();
+	m_pKiana->SetCCImmune(true);
 }
 
 void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
@@ -1125,6 +1126,8 @@ void CFSM_KianaC::Attack_QTE_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pStageControlTower->SetVertCorrecting(false);
+
+	m_pKiana->SetCCImmune(false);
 }
 
 void CFSM_KianaC::Die_Init(void)
@@ -1746,6 +1749,8 @@ void CFSM_KianaC::Ultra_Enter(void)
 
 	m_checkUltraActive = false;
 	m_pStageControlTower->GetCameraMan()->SetCustomShot(2.f, 2.f, D3DXToRadian(15.f));
+
+	m_pKiana->SetCCImmune(true);
 }
 
 void CFSM_KianaC::Ultra_Update(float deltaTime)
@@ -1766,6 +1771,8 @@ void CFSM_KianaC::Ultra_End(void)
 {
 	m_pKiana->SetUltraMode(true);
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+
+	m_pKiana->SetCCImmune(false);
 }
 
 void CFSM_KianaC::Victory_Init(void)

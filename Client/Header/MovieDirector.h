@@ -6,12 +6,15 @@
 #define ShotName_WhiteFadeOut			L"WhiteFadeOut"
 #define ShotName_BlackFadeIn			L"BlackFadeIn"
 #define ShotName_BlackFadeIn_SubCh1		L"BlackFadeIn_SubCh1"
+#define ShotName_BlackFadeIn_SubCh2		L"BlackFadeIn_SubCh2"
 #define ShotName_BlackFadeOut			L"BlackFadeOut"
 #define ShotName_BlackFadeOut_SubCh1	L"BlackFadeOut_SubCh1"
+#define ShotName_BlackFadeOut_SubCh2	L"BlackFadeOut_SubCh2"
 
 #define ShotName_RotateAround		L"RotateAround"
 #define ShotName_RotateYaw			L"RotateYaw"
 #define ShotName_RotateYaw_SubCh1	L"RotateYaw_SubCh1"
+#define ShotName_RotateYaw_SubCh2	L"RotateYaw_SubCh2"
 #define ShotName_RotatePitch		L"RotatePitch"
 #define ShotName_RotatePitch_Spline	L"RotatePitch_Spline"
 #define ShotName_RotatePitch_Spline_SubCh1	L"RotatePitch_Spline_SubCh1"
@@ -21,10 +24,12 @@
 #define ShotName_PushIn_SubCh1		L"PushIn_SubCh1"
 #define ShotName_PushOut			L"PushOut"
 #define ShotName_PushOut_SubCh1		L"PushOut_SubCh1"
+#define ShotName_PushOut_SubCh2		L"PushOut_SubCh2"
 #define ShotName_MovePivot			L"MovePivot"
 #define ShotName_MovePivot_SubCh1	L"MovePivot_SubCh1"
 #define ShotName_MovePivot_SubCh2	L"MovePivot_SubCh2"
 #define ShotName_MovePivot_SubCh3	L"MovePivot_SubCh3"
+#define ShotName_MovePivot_SubCh4	L"MovePivot_SubCh4"
 
 #define ShotName_Shake				L"Shake"
 #define ShotName_SlowAll			L"SlowAll"
@@ -33,6 +38,8 @@
 
 #define ShotName_Victory			L"Victory"
 #define ShotName_GaneshaBorn		L"GaneshaBorn"
+#define ShotName_BronyaBorn			L"BronyaBorn"
+
 
 #define TakeName_SimpleBlackFadeIn	L"BlackFadeIn"
 #define TakeName_SimpleBlackFadeOut L"BlackFadeOut"
@@ -44,6 +51,7 @@
 
 
 #define TakeName_GaneshaBorn		L"GaneshaBorn"
+#define TakeName_BronyaBorn			L"BronyaBorn"
 
 
 class CShot;	 
@@ -74,6 +82,7 @@ public:
 
 	void CreateTake_SakuraVictory();
 	void CreateTake_GaneshaBorn();
+	void CreateTake_BronyaBorn();
 	void CreateGanshaBornShakeChannel();
 
 public:
@@ -88,6 +97,7 @@ public:
 	void StartTake_TheresaVictory();
 	void StartTake_SakuraVictory();
 	void StartTake_GaneshBorn();
+	void StartTake_BronyaBorn();
 
 	void CutCurrentTake();
 
@@ -120,12 +130,15 @@ private:
 
 	CShot* m_pShot_BlackFadeIn = nullptr;
 	CShot* m_pShot_BlackFadeIn_SubCh1 = nullptr;
+	CShot* m_pShot_BlackFadeIn_SubCh2 = nullptr;
 	CShot* m_pShot_BlackFadeOut = nullptr;
 	CShot* m_pShot_BlackFadeOut_SubCh1 = nullptr;
+	CShot* m_pShot_BlackFadeOut_SubCh2 = nullptr;
 	
 	CShot* m_pShot_RotateAround = nullptr;
 	CShot* m_pShot_RotateYaw = nullptr;
 	CShot* m_pShot_RotateYaw_SubCh1 = nullptr;
+	CShot* m_pShot_RotateYaw_SubCh2 = nullptr;
 	CShot* m_pShot_RotatePitch = nullptr;
 	CShot* m_pShot_RotatePitch_Spline = nullptr;
 	CShot* m_pShot_RotatePitch_Spline_SubCh1 = nullptr;
@@ -139,6 +152,7 @@ private:
 	CShot* m_pShot_MovePivot_SubCh1 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh2 = nullptr;
 	CShot* m_pShot_MovePivot_SubCh3 = nullptr;
+	CShot* m_pShot_MovePivot_SubCh4 = nullptr;
 
 	CShot* m_pShot_Shake = nullptr;
 	CShot* m_pShot_SlowAll = nullptr;
@@ -146,5 +160,6 @@ private:
 
 	CShot* m_pShot_Victory = nullptr;
 	CShot* m_pShot_GaneshaBorn = nullptr;
+	CShot* m_pShot_BronyaBorn = nullptr;
 };
 

@@ -37,7 +37,7 @@ private:
 public:
 					void		OpenStageResult		(void);
 
-					_bool		m_isSoundChange = false;
+					_bool		m_isBossMovieOn = false;
 
 					SP(CTwoConversationC)		m_spConversation = nullptr;
 
@@ -53,7 +53,9 @@ private:
 
 
 	_float m_warningTimer = 0.f;
+	_bool m_warningSpawn = false;
 
+	_bool m_isBossMovieOff = false;
 	_float m_victoryTimer = 0.f;
 };
 

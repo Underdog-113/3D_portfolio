@@ -96,12 +96,14 @@ void COneStagePhaseControl::Update(void)
 	case (_int)EOneStagePhase::FirstFight2Begin:
 
 		// 여기서도 다 죽이면 증가?????
+		m_warningTimer = 0.f;
 		break;
 
 		//After killing all the enemies
 	case (_int)EOneStagePhase::FirstFight2End:
 		// 걸어다니기
 		// trigger 발동시 넘어감
+		m_warningTimer = 0.f;
 		break;
 
 	case (_int)EOneStagePhase::WarningAlarm:

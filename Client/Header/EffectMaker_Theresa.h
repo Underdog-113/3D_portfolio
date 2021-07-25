@@ -17,8 +17,12 @@
 #define Ultra_Trail_Tex3Name	L"ground_seele_urtral2"
 
 #define Ultra_Smoke_ObjectKey	L"Theresa_Ult_Smoke"
-#define Ultra_Smoke_Tex1Name	L"fx_snowfield_fog03"
-#define Ultra_Smoke_Tex2Name	L"fx_snowfield_fog03"
+#define Ultra_Smoke_Tex1Name	L"Grenade_Explosion"
+#define Ultra_Smoke_Tex2Name	L"Grenade_Explosion"
+
+#define Ultra_ChargeSmoke_ObjectKey	L"Theresa_Ult_ChargeSmoke"
+#define Ultra_ChargeSmoke_Tex1Name	L"fx_snowfield_fog03"
+#define Ultra_ChargeSmoke_Tex2Name	L"fx_snowfield_fog03"
 
 #define Ultra_Explosion_ObjectKey	L"Theresa_Ult_Explosion"
 #define Ultra_Explosion_Tex1Name	L"Wave01"
@@ -48,6 +52,7 @@ public:
 	void CreateEffect_Ultra_Charge();
 	void CreateEffect_Ultra_Trail();
 	void CreateEffect_Ultra_Smoke();
+	void CreateEffect_Ultra_ChargeSmoke();
 	void CreateEffect_Ultra_Bomb();
 
 private:

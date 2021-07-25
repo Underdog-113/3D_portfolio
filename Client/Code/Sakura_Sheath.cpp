@@ -40,11 +40,11 @@ void CSakura_Sheath::Awake()
 	__super::Awake();
 	m_spMesh->SetMeshData(L"Sakura_Sheath");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"White_");
 	m_spTexture->AddTexture(L"White_");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);	
-	m_spTransform->SetSize(_float3(0.2f, 0.2f, 0.2f));
+	m_spTransform->SetSize(_float3(0.05f, 0.05f, 0.05f));
 }
 
 void CSakura_Sheath::Start()
@@ -68,9 +68,9 @@ void CSakura_Sheath::Update()
 	_float3 _size;
 	if (!m_isSizeUpDown)
 	{
-		_size = _float3(0.5f, 0.5f, 0.5f) * GET_DT * 2.f;
+		_size = _float3(0.05f, 0.05f, 0.05f) * GET_DT * 2.f;
 
-		if (m_spTransform->GetSize().x >= 0.4f)
+		if (m_spTransform->GetSize().x >= 0.05f)
 		{
 			m_isSizeUpDown = true;
 		}
@@ -79,7 +79,7 @@ void CSakura_Sheath::Update()
 	{
 		if (m_spTransform->GetSize().x > 0.f)
 		{
-			_size = -_float3(0.5f, 0.5f, 0.5f) * GET_DT * 2.f;
+			_size = -_float3(0.05f, 0.05f, 0.05f) * GET_DT * 2.f;
 
 			
 		}
@@ -103,6 +103,23 @@ void CSakura_Sheath::Update()
 void CSakura_Sheath::LateUpdate()
 {
 	__super::LateUpdate();
+
+	/*_mat matWorld, matView, matBill;
+
+	matView = Engine::GET_MAIN_CAM->GetViewMatrix();
+
+	D3DXMatrixIdentity(&matBill);
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	D3DXMatrixInverse(&matBill, 0, &matBill);
+
+	matWorld = m_spGraphics->GetTransform()->GetWorldMatrix();
+
+	m_spGraphics->GetTransform()->SetWorldMatrix(matBill * matWorld);*/
 
 }
 

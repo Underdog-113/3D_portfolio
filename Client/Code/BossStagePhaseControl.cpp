@@ -3,9 +3,11 @@
 #include "StageControlTower.h"
 #include "Valkyrie.h"
 
+#include "MovieDirector.h"
 #include "PatternMachineC.h"
 #include "ClientPatterns.h"
 #include "BattleUiManager.h"
+#include "Monster.h"
 
 CBossStagePhaseControl::CBossStagePhaseControl()
 {
@@ -24,40 +26,122 @@ void CBossStagePhaseControl::Update(void)
 		++m_curPhase;
 		break;
 
+	case (_int)ETwoStagePhase::ReadyStage:
+		CStageControlTower::GetInstance()->SetDirectorMode(true);
+		++m_curPhase;
+		break;
+
 	case (_int)ETwoStagePhase::PlayerSummon:
 		if (m_pCT->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->CompareState(L"Appear") == false)
+		{
 			++m_curPhase;
+		}
+		break;
+	case (_int)ETwoStagePhase::WarningAlarm:
+		m_warningTimer += GET_DT;
+
+		if (!m_warningSpawn && m_warningTimer > 0.5f)
+		{
+			SP(Engine::CObject) spObj;
+			spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Warning_Ring", true, (_uint)Engine::ELayerID::Effect);
+
+			CValkyrie* pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+			spObj->GetTransform()->SetParent(pActor->GetTransform());
+			spObj->GetTransform()->AddPositionY(pActor->GetMesh()->GetHalfYOffset());
+			spObj->GetTransform()->SetSize(1.5f, 1.5f, 1.5f);
+
+			m_warningSpawn = true;
+		}
+
+		if (!m_fadeOut && m_warningTimer > 3.5f)
+		{
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeOut();
+			m_fadeOut = true;
+		}
+
+		if (m_warningTimer > 4.f)
+		{
+			++m_curPhase;
+		}
 		break;
 
 		//Before being collised with PhaseChanger0
-	case (_int)ETwoStagePhase::BeforeBoss:
+	case (_int)ETwoStagePhase::CreateBoss:
+		m_spBronya = std::dynamic_pointer_cast<CMonster>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MB_Bronya", true, (_uint)ELayerID::Enemy, L"MB_Bronya"));
+		m_spBronya->GetTransform()->SetPosition(0.f, 0.f, 0.f);
+		m_spBronya->SelectChannelID();
+		m_spBronya->SetIsEnabled(true);
+		++m_curPhase;
 		break;
-
 		//After being collided with PhaseChanger0
-	case (_int)ETwoStagePhase::BossBegin:
+	case (_int)ETwoStagePhase::BossMovie:
+		if (false == m_isBossMovieOn)
+		{
+			m_spBronya->GetTransform()->SetPosition(186.21f, -4.f, -0.84f);
+
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->PlayBGM(L"Bronya_Intro.wav");
+			// movie
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BronyaBorn();
+			m_isBossMovieOn = true;
+		}
 		break;
 
+	case (_int)ETwoStagePhase::Boss:
+		if (!m_isBossMovieOff)
+		{
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeIn();
+
+			m_spBronya->GetComponent<CPatternMachineC>()->SetOnBorn(true);
+			CStageControlTower::GetInstance()->SetDirectorMode(false);
+			
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->PlayBGM(L"BronyaBGM.mp3");
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			m_isBossMovieOff = true;
+		}
+
+		if (m_spBronya->GetComponent<CPatternMachineC>()->GetOnDie())
+			++m_curPhase;
+		break;
 		//After killing Boss
 	case (_int)ETwoStagePhase::BossEnd:
-		m_isSoundChange = false;
+		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WinningSlow();
 		++m_curPhase;
+		break;
+	case (_int)ETwoStagePhase::WinningSlow:
+		if (!CStageControlTower::GetInstance()->GetMovieDirector()->GetIsOnAir())
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			m_victoryTimer = 0.f;
+			++m_curPhase;
+		}
+		break;
+	case (_int)ETwoStagePhase::WaitVictoryMovie:
+		m_victoryTimer += GET_DT;
+
+		if (m_victoryTimer > 1.f)
+		{
+			m_victoryTimer = 0.f;
+			// movie
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_Victory();
+
+			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			++m_curPhase;
+		}
+		break;
+	case (_int)ETwoStagePhase::VictoryMovie:
+		m_victoryTimer += GET_DT;
+		if (m_victoryTimer > 4.f)
+		{
+			OpenStageResult();
+			++m_curPhase;
+		}
 		break;
 
 		//Result screen
 	case (_int)ETwoStagePhase::StageResult:
-		++m_curPhase;
-		OpenStageResult();
-		break;
-
-		// Wait Change Scene
-	case (_int)ETwoStagePhase::StageResult_Idle:
-		if (false == m_isSoundChange)
-		{
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isSoundChange = true;
-		}
 		break;
 	default:
 		break;
@@ -67,11 +151,5 @@ void CBossStagePhaseControl::Update(void)
 
 void CBossStagePhaseControl::OpenStageResult(void)
 {
-	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
-
-	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();
-	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
-
-	ShowCursor(true);
 }

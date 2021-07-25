@@ -65,18 +65,18 @@ void CGraphicsManager::Render(void)
 
 	//Deferred Start
 	RenderNonAlpha();
+	RenderWire();
 	RenderAlphaTest();
 	RenderEffect();
 	RenderLights();
 	//Deferred End
 	RenderDeferBlend();
-	//RenderAlphaBlend();
-	//RenderBlur();
-	//RenderEmissive();
-
-	RenderFinal();
-	RenderParticle();
-	RenderWire();
+	RenderAlphaBlend();
+	RenderScreenEffect();
+	RenderBlur();
+	RenderEmissive();
+		RenderFinal();
+	
 	RenderUI();
 
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
@@ -371,6 +371,228 @@ void CGraphicsManager::RenderNonAlpha(void)
 	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
+void CGraphicsManager::RenderWire(void)
+{
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::WireFrame])
+	{
+		if (pObject->GetIsEnabled())
+		{
+			if (GET_MAIN_CAM->GetFrustum()->
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+					pObject->GetTransform()->GetSize() / 2.f))
+			{
+				SP(CComponent) spShader;
+				if (spShader = pObject->GetComponent<CShaderC>())
+				{
+					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+
+					for (_size i = 0; i < vShader.size(); ++i)
+					{
+						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+						CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_Final");
+
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+						for (_uint i = 0; i < maxPass; ++i)
+						{
+							pEffect->BeginPass(i);
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+							pEffect->EndPass();
+						}
+						pEffect->End();
+					}
+				}
+			}
+		}
+	}
+
+}
+
+void CGraphicsManager::RenderAlphaTest(void)
+{
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaTest])
+	{
+		if (pObject->GetIsEnabled())
+		{
+			if (GET_MAIN_CAM->GetFrustum()->
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+					pObject->GetTransform()->GetSize() / 2.f))
+			{
+				SP(CComponent) spShader;
+				if (spShader = pObject->GetComponent<CShaderC>())
+				{
+					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
+
+					for (_size i = 0; i < vShader.size(); ++i)
+					{
+						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+						_uint maxPass = 0;
+						pEffect->Begin(&maxPass, 0);
+						for (_uint i = 0; i < maxPass; ++i)
+						{
+							pEffect->BeginPass(i);
+							pObject->PreRender(pEffect);
+							pObject->Render(pEffect);
+							pObject->PostRender(pEffect);
+							pEffect->EndPass();
+						}
+						pEffect->End();
+					}
+				}
+			}
+		}
+
+	}
+}
+
+
+void CGraphicsManager::RenderEffect(void)
+{
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::Effect])
+	{
+		if (pObject->GetIsEnabled())
+		{
+			if (GET_MAIN_CAM->GetFrustum()->
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+					pObject->GetTransform()->GetSize() / 2.f))
+			{
+				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
+
+				if (pObject->GetObjectKey() == (L"Robot_Plane"))
+					continue;
+
+				const std::vector<CShader*>& vShader = spShader->GetShaders();
+				for (_size i = 0; i < vShader.size(); ++i)
+				{
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+					pEffect->CommitChanges();
+					_uint maxPass = 0;
+					pEffect->Begin(&maxPass, 0);
+					for (_uint i = 0; i < maxPass; ++i)
+					{
+						pEffect->BeginPass(i);
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+						pEffect->EndPass();
+					}
+					pEffect->End();
+				}
+
+				if (pObject->GetComponent<CShaderC>()->GetShaderPerSubset().size() != 0)
+					pObject->RenderPerShader();
+			}
+		}
+	}
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
+}
+
+void CGraphicsManager::RenderLights(void)
+{
+	CShader* pLightShader = GET_SHADER((_int)EShaderID::DeferredLightShader);
+	pLightShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pLightShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Normal", "g_NormalTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
+
+	pEffect->Begin(NULL, 0);
+	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);
+	pEffect->End();
+
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
+}
+
+void CGraphicsManager::RenderDeferBlend(void)
+{
+	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
+	CShader* pBlendShader = GET_SHADER((_int)EShaderID::DeferredBlendShader);
+	pBlendShader->SetUpConstantTable(nullptr);
+
+	LPD3DXEFFECT pEffect = pBlendShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");
+
+	pEffect->Begin(NULL, 0);
+	pEffect->BeginPass(0);
+
+	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
+	pDevice->SetFVF(FVF_SCR);
+
+	pDevice->SetIndices(m_pIndexBuffer);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+	pEffect->End();
+
+	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
+}
+
+void CGraphicsManager::RenderAlphaBlend(void)
+{
+	std::sort(m_vRenderList[(_int)ERenderID::AlphaBlend].begin(), m_vRenderList[(_int)ERenderID::AlphaBlend].end(),
+		[](CObject* pObj1, CObject* pObj2)
+	{
+		return pObj1->GetTransform()->GetCamDistance() < pObj2->GetTransform()->GetCamDistance();
+	});
+
+	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaBlend])
+	{
+		if (pObject->GetIsEnabled())
+		{
+			if (GET_MAIN_CAM->GetFrustum()->
+				CheckAabb(pObject->GetTransform()->GetPosition(),
+					pObject->GetTransform()->GetSize() / 2.f))
+			{
+
+				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
+				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
+
+				for (_size i = 0; i < vShader.size(); ++i)
+				{
+					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
+					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
+
+					pEffect->CommitChanges();
+
+					_uint maxPass = 0;
+
+					pEffect->Begin(&maxPass, 0);
+
+					for (_uint j = 0; j < maxPass; ++j)
+					{
+						pEffect->BeginPass(j);
+
+						pObject->PreRender(pEffect);
+						pObject->Render(pEffect);
+						pObject->PostRender(pEffect);
+
+						pEffect->EndPass();
+					}
+					pEffect->End();
+				}
+			}
+		}
+	}
+}
+
+void CGraphicsManager::RenderScreenEffect(void)
+{
+}
+
 void CGraphicsManager::RenderBlur(void)
 {
 	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
@@ -458,38 +680,15 @@ void CGraphicsManager::RenderEmissive(void)
 	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
-void CGraphicsManager::RenderLights(void)
-{
-	CShader* pLightShader = GET_SHADER((_int)EShaderID::DeferredLightShader);
-	pLightShader->SetUpConstantTable(nullptr);
 
-	LPD3DXEFFECT pEffect = pLightShader->GetEffect();
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Normal", "g_NormalTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Depth", "g_DepthTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
-
-	pEffect->Begin(NULL, 0);
-	GET_CUR_SCENE->GetLightManager()->RenderLights(pEffect);
-	pEffect->End();
-
-
-	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
-}
-
-void CGraphicsManager::RenderDeferBlend(void)
+void CGraphicsManager::RenderFinal(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	CShader* pBlendShader = GET_SHADER((_int)EShaderID::DeferredBlendShader);
-	pBlendShader->SetUpConstantTable(nullptr);
+	CShader* pFinalShader = GET_SHADER((_int)EShaderID::FinalShader);
+	pFinalShader->SetUpConstantTable(nullptr);
 
-	LPD3DXEFFECT pEffect = pBlendShader->GetEffect();
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Albedo", "g_AlbedoTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Shade", "g_ShadeTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Specular", "g_SpecularTexture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv2_Fin", "g_BlurDiv2Texture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv4_Fin", "g_BlurDiv4Texture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv8_Fin", "g_BlurDiv8Texture");
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_BlurDiv16_Fin", "g_BlurDiv16Texture");
+	LPD3DXEFFECT pEffect = pFinalShader->GetEffect();
+	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_FinalTexture");
 
 	pEffect->Begin(NULL, 0);
 	pEffect->BeginPass(0);
@@ -502,188 +701,14 @@ void CGraphicsManager::RenderDeferBlend(void)
 
 	pEffect->EndPass();
 	pEffect->End();
-
-	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
 }
 
-void CGraphicsManager::RenderWire(void)
-{
-	for (auto& pObject : m_vRenderList[(_int)ERenderID::WireFrame])
-	{
-		if (pObject->GetIsEnabled())
-		{
-			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(pObject->GetTransform()->GetPosition(),
-					pObject->GetTransform()->GetSize() / 2.f))
-			{
-				SP(CComponent) spShader;
-				if (spShader = pObject->GetComponent<CShaderC>())
-				{
-					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
 
-					for (_size i = 0; i < vShader.size(); ++i)
-					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
 
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						for (_uint i = 0; i < maxPass; ++i)
-						{
-							pEffect->BeginPass(i);
-							pObject->PreRender(pEffect);
-							pObject->Render(pEffect);
-							pObject->PostRender(pEffect);
-							pEffect->EndPass();
-						}
-						pEffect->End();
-					}
-				}
-			}
-		}
-	}
 
-}
 
-void CGraphicsManager::RenderAlphaTest(void)
-{
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
 
-	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaTest])
-	{
-		if (pObject->GetIsEnabled())
-		{
-			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(pObject->GetTransform()->GetPosition(),
-					pObject->GetTransform()->GetSize() / 2.f))
-			{
-				SP(CComponent) spShader;
-				if (spShader = pObject->GetComponent<CShaderC>())
-				{
-					const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(spShader)->GetShaders();
 
-					for (_size i = 0; i < vShader.size(); ++i)
-					{
-						LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-						vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-						_uint maxPass = 0;
-						pEffect->Begin(&maxPass, 0);
-						for (_uint i = 0; i < maxPass; ++i)
-						{
-							pEffect->BeginPass(i);
-							pObject->PreRender(pEffect);
-							pObject->Render(pEffect);
-							pObject->PostRender(pEffect);
-							pEffect->EndPass();
-						}
-						pEffect->End();
-					}
-				}
-			}
-		}
-
-	}
-}
-
-void CGraphicsManager::RenderAlphaBlend(void)
-{
-	std::sort(m_vRenderList[(_int)ERenderID::AlphaBlend].begin(), m_vRenderList[(_int)ERenderID::AlphaBlend].end(),
-		[](CObject* pObj1, CObject* pObj2)
-	{
-		return pObj1->GetTransform()->GetCamDistance() < pObj2->GetTransform()->GetCamDistance();
-	});
-
-	for (auto& pObject : m_vRenderList[(_int)ERenderID::AlphaBlend])
-	{
-		if (pObject->GetIsEnabled())
-		{
-			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(pObject->GetTransform()->GetPosition(),
-					pObject->GetTransform()->GetSize() / 2.f))
-			{
-
-				SP(CComponent) pShader = pObject->GetComponent<CShaderC>();
-				const std::vector<CShader*>& vShader = std::dynamic_pointer_cast<CShaderC>(pShader)->GetShaders();
-
-				for (_size i = 0; i < vShader.size(); ++i)
-				{
-					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-					pEffect->CommitChanges();
-
-					_uint maxPass = 0;
-
-					pEffect->Begin(&maxPass, 0);
-
-					for (_uint j = 0; j < maxPass; ++j)
-					{
-						pEffect->BeginPass(j);
-
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-
-						pEffect->EndPass();
-					}
-					pEffect->End();
-				}
-			}
-		}
-	}
-}
-
-void CGraphicsManager::RenderParticle(void)
-{
-	CPSC_Manager::GetInstance()->PreRender();
-	CPSC_Manager::GetInstance()->Render();
-	CPSC_Manager::GetInstance()->PostRender();
-}
-
-void CGraphicsManager::RenderEffect(void)
-{
-	for (auto& pObject : m_vRenderList[(_int)ERenderID::Effect])
-	{
-		if (pObject->GetIsEnabled())
-		{
-			if (GET_MAIN_CAM->GetFrustum()->
-				CheckAabb(pObject->GetTransform()->GetPosition(),
-					pObject->GetTransform()->GetSize() / 2.f))
-			{
-				SP(CShaderC) spShader = std::dynamic_pointer_cast<CShaderC>(pObject->GetComponent<CShaderC>());
-
-				if (pObject->GetObjectKey() == (L"Robot_Plane"))
-					continue;
-
-				const std::vector<CShader*>& vShader = spShader->GetShaders();
-				for (_size i = 0; i < vShader.size(); ++i)
-				{
-					LPD3DXEFFECT pEffect = vShader[i]->GetEffect();
-					vShader[i]->SetUpConstantTable(pObject->GetComponent<CGraphicsC>());
-
-					pEffect->CommitChanges();
-					_uint maxPass = 0;
-					pEffect->Begin(&maxPass, 0);
-					for (_uint i = 0; i < maxPass; ++i)
-					{
-						pEffect->BeginPass(i);
-						pObject->PreRender(pEffect);
-						pObject->Render(pEffect);
-						pObject->PostRender(pEffect);
-						pEffect->EndPass();
-					}
-					pEffect->End();
-				}
-
-				if (pObject->GetComponent<CShaderC>()->GetShaderPerSubset().size() != 0)
-					pObject->RenderPerShader();
-			}
-		}
-	}
-
-	CRenderTargetManager::GetInstance()->ReleaseCurRenderTargets();
-}
 
 void CGraphicsManager::RenderUI(void)
 {
@@ -743,26 +768,4 @@ void CGraphicsManager::RenderUI(void)
 	}
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-}
-
-void CGraphicsManager::RenderFinal(void)
-{
-	LPDIRECT3DDEVICE9 pDevice = GET_DEVICE;
-	CShader* pFinalShader = GET_SHADER((_int)EShaderID::FinalShader);
-	pFinalShader->SetUpConstantTable(nullptr);
-
-	LPD3DXEFFECT pEffect = pFinalShader->GetEffect();
-	CRenderTargetManager::GetInstance()->SetRenderTargetTexture(pEffect, L"Target_Final", "g_FinalTexture");
-
-	pEffect->Begin(NULL, 0);
-	pEffect->BeginPass(0);
-
-	pDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(_VertexScreen));
-	pDevice->SetFVF(FVF_SCR);
-
-	pDevice->SetIndices(m_pIndexBuffer);
-	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
-
-	pEffect->EndPass();
-	pEffect->End();
 }

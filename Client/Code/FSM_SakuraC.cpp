@@ -83,6 +83,7 @@ void CFSM_SakuraC::FixRootMotionOffset(_uint index)
 
 void CFSM_SakuraC::ResetCheckMembers()
 {
+	m_isShelthEffect = false;
 	m_checkEffect = false;
 	m_checkEffect2nd = false;
 	m_checkEffect3rd = false;
@@ -150,7 +151,7 @@ void CFSM_SakuraC::SakuraCutting()
 					pMonster,
 					info,
 					pMonster->GetTransform()->GetPosition() + _float3(0.f, pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset(), 0.f));
-				
+
 				pMonster->GetStat()->SetSakuraCounter(0);
 
 				if (pMonster->GetStat()->GetSakuraMark())
@@ -166,7 +167,7 @@ void CFSM_SakuraC::SakuraCutting()
 
 void CFSM_SakuraC::InfernoActive_1st()
 {
-	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];	
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
 	if (monsterList.empty())
@@ -751,7 +752,7 @@ void CFSM_SakuraC::Attack1_StandBy_Update(float deltaTime)
 	if (m_pDM->GetAniTimeline() > Delay_Attack1_StandBy + 0.05f)
 		m_pSakura->UnActiveAttackBall();
 
-	
+
 
 	if (CheckAction_Evade_OnAction())
 		return;
@@ -807,7 +808,7 @@ void CFSM_SakuraC::Attack1_Combat_Update(float deltaTime)
 	{
 		PlaySound_Voice_RandomAttack();
 
-		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);	
+		OnAttackBall(0.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
 		m_checkAttack = true;
 	}
 	if (m_pDM->GetAniTimeline() > Delay_Attack1_Combat + 0.05f)
@@ -1090,7 +1091,7 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 
 			m_pSakura->GetTransform()->SetPosition(pMonster->GetTransform()->GetPosition() + flashDir * colRadiusSum);
 
-			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 		}
 		m_checkEndFlash = true;
 	}
@@ -1222,6 +1223,7 @@ void CFSM_SakuraC::Attack_QTE_Enter(void)
 	m_pDM->ChangeAniSet(Index_Attack4);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(true);
+	m_pSakura->SetCCImmune(true);
 }
 
 void CFSM_SakuraC::Attack_QTE_Update(float deltaTime)
@@ -1333,6 +1335,7 @@ void CFSM_SakuraC::Attack_QTE2_End(void)
 	m_pSakura->UnActiveAttackBall();
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pStageControlTower->SetVertCorrecting(false);
+	m_pSakura->SetCCImmune(false);
 }
 
 void CFSM_SakuraC::Charge1_Init(void)
@@ -1404,7 +1407,7 @@ void CFSM_SakuraC::Charge1_Update(float deltaTime)
 		}
 		m_checkFlashMove = true;
 	}
-	
+
 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.22f)
 	{
@@ -1442,34 +1445,25 @@ void CFSM_SakuraC::Charge1_AS_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Charge1_AS);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
+
+	ResetCheckMembers();
+	m_pSakura->SetCCImmune(true);
 }
 
 void CFSM_SakuraC::Charge1_AS_Update(float deltaTime)
 {
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.43f)
 	{
-		PlaySound_EffectCh2(Sound_Cutting);
+		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Sheath", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+		spObj->GetTransform()->AddPositionY(0.5f);
+		spObj->GetTransform()->AddPositionX(0.2f);
+		spObj->GetTransform()->SetRotation(m_pSakura->GetTransform()->GetPosition());
+		spObj->GetTransform()->AddRotationY(D3DXToRadian(90));
 		SakuraCutting();
 
 		m_checkAttack = true;
 	}
-
-	// 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Charge1)
-	// 	{
-	// 		/*		m_pEffectMaker->CreateEffect_Attack5();*/
-	// 		m_checkEffect = true;
-	// 		// 
-	// 		// 		PlaySound_Attack_RandomVoice();
-	// 		// 		m_pKiana->ActiveAttackBall(1.5f, HitInfo::Str_High, HitInfo::CC_None, m_pKiana->GetRightToeWorldMatrix(), 0.3f);
-	// 		// 
-	// 		// 		m_pEffectMaker->CreateEffect_Attack5();
-	// 		// 		PlaySound_Effect(Sound_Attack_5_Effect);
-	// 	}
-
-	// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk05 + 0.1f)
-	// 	{
-	// 		m_pKiana->UnActiveAttackBall();
-	// 	}
 
 	if (CheckAction_Evade_OnAction())
 		return;
@@ -1498,6 +1492,7 @@ void CFSM_SakuraC::Charge1_AS_Update(float deltaTime)
 void CFSM_SakuraC::Charge1_AS_End(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(false);
+	m_pSakura->SetCCImmune(false);
 }
 
 void CFSM_SakuraC::Charge1_Quick_Init(void)
@@ -2035,6 +2030,8 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 	m_pStageControlTower->SetVertCorrecting(true);
 	//PlaySound_Attack_RandomEvade();
 
+	ResetCheckMembers();
+
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
@@ -2081,6 +2078,11 @@ void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 		m_isSecondEvade = false;
 		return;
 	}
+
+
+
+
+
 }
 
 
@@ -2319,13 +2321,14 @@ void CFSM_SakuraC::Ultra_Enter(void)
 	m_fSpawnTimer = 0.f;
 	PlaySound_Effect(Sound_Ult_Start);
 	CStageControlTower::GetInstance()->SetEnvType(CStageControlTower::SakuraUlt);
+	m_pSakura->SetCCImmune(true);
 }
 
 void CFSM_SakuraC::Ultra_Update(float deltaTime)
 {
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.178f)
 	{
-		// 1°Ý, Ç¥½Ä
+		// 1ï¿½ï¿½, Ç¥ï¿½ï¿½
 		InfernoActive_1st();
 		m_checkAttack = true;
 	}
@@ -2338,16 +2341,21 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > 0.778f)
 	{
-		// 8¿¬°Ý
+		// 8ï¿½ï¿½ï¿½ï¿½
 		m_pSakura->On8SliceAttack();
 		m_pStageControlTower->OffSakuraUltraActive();
 		m_checkAttack2nd = true;
 	}
 
-	if (!m_checkEffect2nd &&  m_pDM->GetAniTimeline() > 0.74f)
+	if (!m_isShelthEffect &&  m_pDM->GetAniTimeline() > 0.78f)
 	{
-		PlaySound_EffectCh2(Sound_Cutting);
-		m_checkEffect2nd = true;
+		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_Sheath", true, (_uint)Engine::ELayerID::Effect);
+		spObj->GetTransform()->SetPosition(m_pSakura->GetTransform()->GetPosition());
+		spObj->GetTransform()->AddPositionY(0.5f);
+		spObj->GetTransform()->AddPositionX(0.2f);
+		spObj->GetTransform()->SetRotation(m_pSakura->GetTransform()->GetPosition());
+		spObj->GetTransform()->AddRotationY(D3DXToRadian(90));
+		m_isShelthEffect = true;
 	}
 
 	SakuraParticleCtrl();
@@ -2361,6 +2369,8 @@ void CFSM_SakuraC::Ultra_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 	m_pSakura->SetInfernoMode(true);
 	m_pStageControlTower->OffSakuraUltraActive();
+
+	m_pSakura->SetCCImmune(false);
 }
 
 void CFSM_SakuraC::Victory_Init(void)
@@ -2424,7 +2434,7 @@ void CFSM_SakuraC::WeaponSkill_Update(float deltaTime)
 		//PlaySound_Effect(Sound_Attack_2_Effect);
 
 		m_pSakura->ActCyclone();
-		
+
 		m_checkAttack = true;
 	}
 
@@ -2541,7 +2551,7 @@ void CFSM_SakuraC::RegisterAllState()
 
 	CreateState(CFSM_SakuraC, pState, Stun)
 		AddState(pState, Name_Stun);
-	
+
 	CreateState(CFSM_SakuraC, pState, SwitchIn)
 		AddState(pState, Name_SwitchIn);
 
@@ -2580,7 +2590,7 @@ void CFSM_SakuraC::SakuraParticleCtrl()
 
 				m_vSakuraParticle.emplace_back(spObj);
 			}
-	
+
 			m_fSpawnTimer = 0.f;
 		}
 	}

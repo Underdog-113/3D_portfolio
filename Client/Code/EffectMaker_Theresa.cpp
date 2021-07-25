@@ -128,8 +128,7 @@ void CEffectMaker_Theresa::CreateEffect_Charge1()
 	SP(Engine::CObject) spObj;
 	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TheresaCharge_Att", true, (_uint)Engine::ELayerID::Effect);
 	spObj->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
-	spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	spObj->GetTransform()->AddRotationY(m_pTheresa->GetTransform()->GetRotation().y);
+	spObj->GetTransform()->SetOwner(m_pTheresa);
 }
 
 void CEffectMaker_Theresa::CreateEffect_Charge2()
@@ -137,8 +136,7 @@ void CEffectMaker_Theresa::CreateEffect_Charge2()
 	SP(Engine::CObject) spObj;
 	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"TheresaCharge_Att", true, (_uint)Engine::ELayerID::Effect);
 	spObj->GetTransform()->SetPosition(m_pTheresa->GetTransform()->GetPosition());
-	spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-	spObj->GetTransform()->AddRotationY(m_pTheresa->GetTransform()->GetRotation().y);
+	spObj->GetTransform()->SetOwner(m_pTheresa);
 }
 
 void CEffectMaker_Theresa::CreateEffect_Ultra_Charge()
@@ -171,6 +169,17 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_Smoke()
 	_float3 size = _float3(0.05f, 0.f, 0.05f);
 
 	auto effect = CreateEffect_AlphaMask(Ultra_Smoke_ObjectKey, L"Ult_Smoke", Ultra_Smoke_Tex1Name, Ultra_Smoke_Tex2Name);
+	effect->GetTransform()->SetParent(m_pTheresa->GetTransform());
+	effect->GetTransform()->SetSize(size);
+
+	effect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+}
+
+void CEffectMaker_Theresa::CreateEffect_Ultra_ChargeSmoke()
+{
+	_float3 size = _float3(0.05f, 0.f, 0.05f);
+
+	auto effect = CreateEffect_AlphaMask(Ultra_ChargeSmoke_ObjectKey, L"Ult_Smoke", Ultra_ChargeSmoke_Tex1Name, Ultra_ChargeSmoke_Tex2Name);
 	effect->GetTransform()->SetParent(m_pTheresa->GetTransform());
 	effect->GetTransform()->SetSize(size);
 
