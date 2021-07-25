@@ -657,6 +657,11 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 		}
 
+		if (m_pCurActor->GetStat()->GetType() == V_Stat::THERESA)
+		{
+			CBattleUiManager::GetInstance()->SpecialUIUp();
+			CBattleUiManager::GetInstance()->SpecialUIUp();
+		}
 	}
 	else
 	{
@@ -848,6 +853,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 		m_pCurActor->SetIsQTESwitch(true);
 		m_isQTEUsed = true;
 		m_isQTESwitch = false;
+		m_pLinker->QTEButtonEffectOff();
 	}
 
 	m_pCameraMan->SetIsSwitching(true);

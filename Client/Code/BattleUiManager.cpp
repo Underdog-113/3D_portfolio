@@ -581,6 +581,23 @@ void CBattleUiManager::SpecialUIDwon()
 	}
 }
 
+void CBattleUiManager::SpecialUIAdd(_float value)
+{
+	for (auto& obj : m_specialUBar)
+	{
+		obj->SetValue(obj->GetValue() + value);
+	}
+}
+
+_float CBattleUiManager::GetSpecialUIValue()
+{
+	for (auto& obj : m_specialUBar)
+	{
+		return obj->GetValue();
+	}
+	return 0.f;
+}
+
 bool CBattleUiManager::SkillExecution(_int value, _int spValue, _float collTime)
 {
 	if (m_coolTimeSlider[value]->GetValue() <= 0 && m_playerSpBar->GetValue() >= spValue)

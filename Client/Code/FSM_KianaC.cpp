@@ -83,7 +83,7 @@ void CFSM_KianaC::ActQTEAttack()
 	pAttackBall->SetupBall(0.3f, info);
 
 
-	pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition() + _float3(0.f, 0.5f, 0.f));
 	pAttackBall->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.5f);
 }
 
@@ -469,6 +469,7 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkAttack3rd = false;
 	m_checkAttack4th = false;
 	m_checkEffect = false;
+	m_checkShake = false;
 }
 
 void CFSM_KianaC::ResetCheckMembers_Hit()
@@ -525,6 +526,7 @@ void CFSM_KianaC::Appear_Enter(void)
 	m_pDM->ChangeAniSet(Index_Appear);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_KianaC::Appear_Update(float deltaTime)
@@ -1099,8 +1101,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 		pAttackBall->SetIsEnabled(true);
 		pAttackBall->SetupBall(0.3f, info);
 
-
-		pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition() + _float3(0.f, 0.5f, 0.f));
 		pAttackBall->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.5f);
 		m_checkAttack4th = true;
 	}
@@ -1677,10 +1678,20 @@ void CFSM_KianaC::SwitchIn_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SwitchIn);
 	m_pStageControlTower->SetVertCorrecting(false);
+
+	ResetCheckMembers();
+
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 {
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.1)
+	{
+		PlaySound_Effect(L"Swap.wav");
+		m_checkEffect = true;
+	}
+
 	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.380)
 	{
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();

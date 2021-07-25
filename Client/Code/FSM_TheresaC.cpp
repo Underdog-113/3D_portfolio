@@ -97,8 +97,8 @@ void CFSM_TheresaC::OffSwordCollider()
 
 void CFSM_TheresaC::OnAxeCollider()
 {
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 2.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.4f, _float3(2.f, 0.f, 0.f));
-	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.2f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 3.f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.4f, _float3(2.f, 0.f, 0.f));
+	m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.6f, HitInfo::Str_High, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
 }
 
 void CFSM_TheresaC::OffAxeCollider()
@@ -516,15 +516,21 @@ void CFSM_TheresaC::Appear_Enter(void)
 {
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(false);
-	m_pDM->ChangeAniSet(Index_Idle);
+	m_pDM->ChangeAniSet(Index_Appear);
 	m_pTheresa->Off_Sword();
 	m_pTheresa->Off_Axe();
+
+	m_checkShake = false;
+
+	PlaySound_Effect(L"Swap.wav");
+
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_TheresaC::Appear_Update(float deltaTime)
 {
 
-	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.137)
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.128)
 	{
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
 		m_checkShake = true;
@@ -607,12 +613,12 @@ void CFSM_TheresaC::FastRun_Enter(void)
 void CFSM_TheresaC::FastRun_Update(float deltaTime)
 {
 	m_runSoundTimer += GET_PLAYER_DT;
-	if (m_runSoundTimer > 0.3f)
+	if (m_runSoundTimer > 0.23f)
 	{
 		m_runSoundTimer = 0.f;
 		PlaySound_Attack_RandomRun();
 	}
-
+	
 
 	if (CheckAction_EvadeForward())
 		return;
@@ -1119,6 +1125,15 @@ void CFSM_TheresaC::Charge1_Enter(void)
 	m_pTheresa->On_Axe();
 
 	m_pTheresa->SetCCImmune(true);
+
+	if (CBattleUiManager::GetInstance()->GetSpecialUIValue() > 1.f)
+	{
+		CBattleUiManager::GetInstance()->SpecialUIDwon();
+	}
+	else
+	{
+		m_pDM->GetAniCtrl()->SetSpeed(0.8f);
+	}
 }
 
 void CFSM_TheresaC::Charge1_Update(float deltaTime)
@@ -1179,6 +1194,7 @@ void CFSM_TheresaC::Charge1_End(void)
 	OffAxeCollider();
 
 	m_pTheresa->SetCCImmune(false);
+	m_pDM->GetAniCtrl()->SetSpeed(1.f);
 }
 
 void CFSM_TheresaC::Charge2_Init(void)
@@ -1197,6 +1213,15 @@ void CFSM_TheresaC::Charge2_Enter(void)
 
 	m_pTheresa->On_Axe();
 	m_pTheresa->SetCCImmune(true);
+
+	if (CBattleUiManager::GetInstance()->GetSpecialUIValue() > 1.f)
+	{
+		CBattleUiManager::GetInstance()->SpecialUIDwon();
+	}
+	else
+	{
+		m_pDM->GetAniCtrl()->SetSpeed(0.8f);
+	}
 }
 
 void CFSM_TheresaC::Charge2_Update(float deltaTime)
@@ -1259,6 +1284,7 @@ void CFSM_TheresaC::Charge2_End(void)
 	OffAxeCollider();
 
 	m_pTheresa->SetCCImmune(false);
+	m_pDM->GetAniCtrl()->SetSpeed(1.f);
 }
 
 void CFSM_TheresaC::Attack_QTE_Init(void)
@@ -1433,6 +1459,11 @@ void CFSM_TheresaC::SwitchIn_Enter(void)
 	m_pDM->ChangeAniSet(Index_SwitchIn);
 	m_pTheresa->Off_Sword();
 	m_pTheresa->Off_Axe();
+
+	m_checkShake = false;
+	PlaySound_Effect(L"Swap.wav");
+
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_TheresaC::SwitchIn_Update(float deltaTime)

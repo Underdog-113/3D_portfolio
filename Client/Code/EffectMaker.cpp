@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\EffectMaker.h"
 
+#include "Valkyrie.h"
 
 CEffectMaker::CEffectMaker()
 {
@@ -97,4 +98,14 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Laser(std::wstring objectKey, std
 		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, L"LaserEffect");
 
 	return spMeshEffect;
+}
+
+SP(Engine::CObject) CEffectMaker::CreateEffect_Switching()
+{
+	auto spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact_Smoke", true, (_uint)Engine::ELayerID::Effect);
+	spEffect->GetTransform()->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
+	//spEffect->GetTransform()->AddRotationZ(D3DXToRadian(90.f));
+	spEffect->GetTransform()->SetSize(1.f, 0.2f, 1.f);
+
+	return SP(Engine::CObject)();
 }

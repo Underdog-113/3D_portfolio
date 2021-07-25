@@ -57,8 +57,6 @@ void CStageCameraMan::UpdateCameraMan()
 	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS_Custom)
 		return;
 
-	if (m_isSwitching)
-		return;
 
 	if (m_directorControl)
 	{
@@ -68,14 +66,17 @@ void CStageCameraMan::UpdateCameraMan()
 
 	ReturnBeforShaking();
 
-	PivotChasing();
-	
-	if (!MouseControlMode())
+	if (!m_isSwitching)
 	{
-		ManualControlMode();
+		PivotChasing();
 
-		if (!m_manualControl)
-			AutoControlMode();
+		if (!MouseControlMode())
+		{
+			ManualControlMode();
+
+			if (!m_manualControl)
+				AutoControlMode();
+		}
 	}
 
 	ApplyShaking();
