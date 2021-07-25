@@ -666,6 +666,12 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 		}
 	}
 
+	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > Cool_BranchAttack)
+	{
+		m_pEffectMaker->CreateEffect_BranchSign();
+		m_checkEffectSecond = true;
+	}
+
 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk02 + 0.1f)
 		m_pKiana->UnActiveAttackBall();
 
@@ -1607,21 +1613,28 @@ void CFSM_KianaC::WeaponSkill_Enter(void)
 
 void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 {
-	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.25f)
 	{
+		PlaySound_Effect(Sound_Attack_2_Effect);
+
 		SP(Engine::CObject) spObj;
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Circle", true, (_uint)Engine::ELayerID::Effect);
-		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
-		spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		spObj->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-		
+		// 		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Circle", true, (_uint)Engine::ELayerID::Effect);
+		// 		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		// 		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+		// 		spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+		// 		spObj->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+		// 		
 
 		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Shoot", true, (_uint)Engine::ELayerID::Effect);
 		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+		spObj->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.2f);
+		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset()* 1.3f);
+		
+		m_checkEffect = true;
+	}
 
-		PlaySound_Effect(Sound_Attack_2_Effect);
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
+	{
 
 		if (m_pStageControlTower->GetCurrentTarget())
 		{

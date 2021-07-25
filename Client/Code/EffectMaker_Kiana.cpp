@@ -101,6 +101,17 @@ void CEffectMaker_Kiana::CreateEffect_Attack5()
 	}
 }
 
+void CEffectMaker_Kiana::CreateEffect_BranchSign()
+{
+	_float size = 4.f;
+
+	SP(Engine::CObject) spObj;
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"KianaBranchSign", true, (_uint)Engine::ELayerID::Effect);
+	spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+	spObj->GetTransform()->SetSize(_float3(size, size, size));
+}
+
 void CEffectMaker_Kiana::CreateEffect_Attack3_Branch()
 {
 	_float size = 0.4f;
@@ -126,7 +137,7 @@ void CEffectMaker_Kiana::CreateEffect_Attack4_Branch()
 
 void CEffectMaker_Kiana::CreateEffect_Attack_QTE()
 {
-	_float size = 0.4f;
+	_float size = 0.1f;
 	auto effect = CreateEffect_Trail(AttackTrail_ObjectKey, L"Kiana_Attack_QTE_0", AttackTrail_Tex1Name, AttackTrail_Tex2Name, AttackTrail_Tex3Name);
 	effect->GetTransform()->SetParent(m_pKiana->GetTransform());
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
