@@ -124,13 +124,13 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 		float3 diffuse = (DissolveLineSize * DissolveLineColor + blendColor.rgb);
 			
 		Out.vColor = float4(diffuse, multiple);
-		Out.vEmissive = float4(float4(diffuse, multiple).rgb, gTrailAlpha);
+		Out.vEmissive = float4(float4(diffuse, multiple).rgb  * 0.25f, gTrailAlpha);
 
 		return Out;
 	}		
 
 	Out.vColor = blendColor;
-	Out.vEmissive = float4(blendColor.rgb, gTrailAlpha);
+	Out.vEmissive = float4(blendColor.rgb * 0.f , gTrailAlpha);
 
 	return Out;
 }
