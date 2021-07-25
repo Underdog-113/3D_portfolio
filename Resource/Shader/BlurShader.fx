@@ -40,7 +40,6 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
 	float4 diffuse : COLOR0;
-	float4 final : COLOR1;
 };
 
 float pixelKernel[13] =
@@ -135,7 +134,6 @@ PS_OUTPUT PS_Horizontal(PS_INPUT  IN)
 		color.a = 0.f;
 
 	Out.diffuse = color;
-	Out.final = color;
 	return Out;
 }
 
