@@ -61,6 +61,10 @@ public:
 	void ReturnChannelID();
 
 	virtual void MonsterDead();
+	void ChaseTarget(_float3 targetPos);
+
+	void AddEffect(SP(Engine::CObject) effect);
+	void DeleteEffect(_int index);
 
 	Engine::CCollider* GetHitBox();
 
@@ -88,6 +92,8 @@ protected:
 	GETTOR_SETTOR		(V_Stat::Valkyrie_Type,			m_valkyrieType,		V_Stat::Valkyrie_Type::KIANA,	ValkyrieType)
 	GETTOR_SETTOR		(_bool,							m_isBoss,			false,							IsBoss)
 	GETTOR_SETTOR		(_float,						m_weakTime,			5.f,							WeakTime) // SuperArmor가 깨지고 n초 후에 breakGauge 채우기 전까지의 시간
+	GETTOR				(std::vector<SP(Engine::CObject)>,			m_vEffects,			{},								Effects)
+
 
 
 

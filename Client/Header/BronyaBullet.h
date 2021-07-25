@@ -62,6 +62,8 @@ protected:
 
 	_mat m_bulletMat;
 
+	_float m_accShotTime = 0.f;
+
 	_bool m_onAttackBall = false;
 
 	_float m_x = 0.f;

@@ -45,9 +45,9 @@ public:
 
 	virtual void ApplyHitInfo(HitInfo info) override;
 	virtual void MonsterDead() override;
+
 public:
 	static SP(CMB_Ganesha) Create(_bool isStatic, Engine::CScene* pScene);
-	void ChaseTarget(_float3 targetPos);
 
 private:
 	static _uint m_s_uniqueID;

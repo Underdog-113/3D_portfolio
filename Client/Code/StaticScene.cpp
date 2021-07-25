@@ -750,7 +750,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spBronya_Ult_Range(CBronya_Ult_Range::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spBronya_Ult_Range);
 
-	SP(CSoftEffect) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
+	SP(CMeshEffect_Client) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 
 	// Ingame

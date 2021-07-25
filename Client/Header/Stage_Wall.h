@@ -33,6 +33,9 @@ public:
 private:
 	static		_uint m_s_uniqueID;
 
+	GETTOR			(SP(Engine::CCollisionC),		m_spCollision,		nullptr,	Collision)
+	GETTOR			(SP(Engine::CDebugC),			m_spDebug,			nullptr,	Debug)
+
 private:
 	_float m_fAngle;
 };

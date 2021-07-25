@@ -31,7 +31,7 @@ private:
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 1.5f; // 공격 거리
-	_float m_atkCool = 13.f; //  쿨타임
+	_float m_atkCool = 8.5f; //  쿨타임
 
 	_float m_walkTime = 0.f; // 이동 쿨타임
 	_float m_walkCool = 1.f; // 이동 맥스 쿨타임
@@ -56,10 +56,18 @@ private:
 	_float m_lerpCurTimer = 0.f;
 
 	_bool m_initEffect = false;
+	_bool m_onArsenalReadySound = false;
+	_bool m_onArsenalShotSound = false;
 
 	std::vector<SP(CBronya_Ult_Ring)> m_vRingEffect;
 	std::vector<SP(CBronya_Ult_Range)> m_vRangeEffect;
 	std::vector<SP(CBronya_Ult_Laser)> m_vLaserEffect;
+
+	SP(CBronya_Teleport_Laser) m_vLaserOutEffect = nullptr;
+	SP(CBronya_Teleport_Laser) m_vLaserInEffect = nullptr;
+	_float defaultEscapeEffectSizeX = 0.f;
+	_bool m_onLaserOutEffect = false;
+	_bool m_onLaserInEffect = false;
 
 	_int m_effectIndex = 0;
 };

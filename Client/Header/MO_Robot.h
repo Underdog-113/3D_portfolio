@@ -41,7 +41,6 @@ public:
 	virtual void ApplyHitInfo(HitInfo info) override;
 public:
 	static		SP(CMO_Robot)	Create(_bool isStatic, Engine::CScene* pScene);
-	void						ChaseTarget(_float3 targetPos);
 	void						SetStatus(BaseStat stat);
 	void						UpdatePivotMatrices(void);
 	void						MonsterDead() override;

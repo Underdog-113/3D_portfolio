@@ -52,11 +52,13 @@ void CMB_Ganesha::Start(void)
 	m_spPatternMachine->AddNecessaryPatterns(CGaneshaBornPattern::Create(),
 		CGaneshaDiePattern::Create(),
 		CGaneshaBasePattern::Create(),
-		CGaneshaHitPattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
+		CGaneshaHitPattern::Create(),
+		CGaneshaAirbornePattern::Create(),
+		CGaneshaStunPattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 
 	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -77,8 +79,9 @@ void CMB_Ganesha::Start(void)
 	m_pStat->SetHPMagnification(4);
 	m_pStat->SetOnSuperArmor(true);
 	m_pStat->SetOnBPShield(false);
-	m_pStat->SetMaxBreakGauge(200.f);
+	m_pStat->SetMaxBreakGauge(40.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
+	m_weakTime = 8.f;
 
 	m_pSuperArmor->SetHitL(true);
 	m_pSuperArmor->SetHitH(true);
@@ -146,6 +149,11 @@ void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 {
 	__super::ApplyHitInfo(info);
 
+	if (true == m_pStat->GetOnPatternShield())
+	{
+		return;
+	}
+
 	// attack strength
 	switch (info.GetStrengthType())
 	{
@@ -212,13 +220,3 @@ SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 
 	return spInstance;
 }
-
-void CMB_Ganesha::ChaseTarget(_float3 targetPos)
-{
-	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0;
-	D3DXVec3Normalize(&dir, &dir);
-
-	m_spTransform->SetForwardUp(dir, UP_VECTOR);
-}
-

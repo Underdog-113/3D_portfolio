@@ -38,6 +38,6 @@ public:
 		GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
 		GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
 		GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
-		GETTOR_SETTOR(wstring, m_textureName, L"Kiana_UI", TextureName);
+		GETTOR_SETTOR(std::wstring, m_textureName, L"Kiana_UI", TextureName);
 };
 

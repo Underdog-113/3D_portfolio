@@ -2,7 +2,7 @@
 #define BRONYAFLASHBANGPATTERN_H
 
 #include "ATBPattern.h"
-
+#include "ImageObject.h"
 class CBronyaFlashBangPattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
@@ -29,6 +29,8 @@ private:
 	_float m_walkTime = 0.f; // 이동 쿨타임
 	_float m_walkCool = 1.f; // 이동 맥스 쿨타임
 
+	_float m_flashSpeed = 6.f;
+
 	_bool m_atkReady = true; // true : 공격 가능, false : 공격 불가
 	_bool m_walkReady = true; // ture : 이동 가능, false : 이동 불가
 	_bool m_onAtk = false;
@@ -39,6 +41,10 @@ private:
 
 	_bool m_onThrow = false;
 	_bool m_onFlashEffect = false;
+	_bool m_onFlashFade = false;
+
+	SP(Engine::CImageObject) m_spFlashBang = nullptr;
+
 
 	SP(CBronyaEscapePattern) m_spEscapeP = CBronyaEscapePattern::Create();
 };

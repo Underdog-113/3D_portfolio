@@ -34,7 +34,6 @@ public:
 
 public:
 	static		SP(CMO_Spider)			Create(_bool isStatic, Engine::CScene* pScene);
-				void					ChaseTarget(_float3 targetPos);
 				void					SetStatus(BaseStat stat);
 				SP(Engine::CObject)		CreateEffect(std::wstring name);
 

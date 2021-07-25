@@ -39,8 +39,10 @@ void CDebugObject::FixedUpdate(void)
 void CDebugObject::Update(void)
 {
 	__super::Update();
-
-	m_isEnabled = m_pOwner->GetIsEnabled();
+	
+	nameSibal = m_pOwner->GetName();
+	if(m_pOwner)
+		m_isEnabled = m_pOwner->GetIsEnabled();
 }
 
 void CDebugObject::LateUpdate(void)

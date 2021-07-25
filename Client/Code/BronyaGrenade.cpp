@@ -135,15 +135,17 @@ void CBronyaGrenade::Update(void)
 			
 			m_onAttackBall = true;
 
-			std::cout << "Boom!" << std::endl;
-
 			m_grenadeMat = m_spTransform->GetWorldMatrix();
-			ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_grenadeMat, 0.55f);
+			ActiveAttackBall(1.f, HitInfo::Str_High, HitInfo::CC_None, &m_grenadeMat, 0.65f);
 
 			// boom effect
 			std::cout << "Effect!" << std::endl;
 			SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade", true);
 			effect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+
+			std::cout << "Boom!" << std::endl;
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::OBJECT);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Bronya_Grenade_Boom.wav", (_uint)EChannelID::OBJECT);
 		}
 		
 	}
