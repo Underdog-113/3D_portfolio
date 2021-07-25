@@ -3522,7 +3522,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
-    </ClInclude>
+        </ClCompile>
     <ClCompile Include="..\Code\UltScrShader.cpp">
       <Filter>04.Shader\18.UltScrShader</Filter>
     </ClCompile>
