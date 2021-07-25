@@ -10,6 +10,7 @@ CStage_Wall::CStage_Wall()
 
 CStage_Wall::~CStage_Wall()
 {
+	OnDestroy();
 }
 
 SP(CStage_Wall) CStage_Wall::Create(_bool isStatic, Engine::CScene * pScene)
@@ -32,6 +33,8 @@ SP(Engine::CObject) CStage_Wall::MakeClone()
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
+	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
+	spClone->m_spDebug = spClone->GetComponent<Engine::CDebugC>();
 
 	return spClone;
 }
@@ -47,13 +50,14 @@ void CStage_Wall::Awake()
 	m_spTexture->AddTexture(L"Wall");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 
+	m_spCollision = AddComponent<Engine::CCollisionC>();
 }
 
 void CStage_Wall::Start()
 {
 	__super::Start();
 	m_fAlpha = 1.f;
-
+	m_spDebug = AddComponent<Engine::CDebugC>();
 }
 
 void CStage_Wall::FixedUpdate()

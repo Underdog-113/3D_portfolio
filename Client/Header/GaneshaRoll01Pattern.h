@@ -7,6 +7,8 @@ class CGaneshaRoll01Pattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
 
+	enum Effects { Roll };
+
 private:
 	explicit CGaneshaRoll01Pattern();
 	virtual ~CGaneshaRoll01Pattern();

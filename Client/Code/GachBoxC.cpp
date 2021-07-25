@@ -67,21 +67,25 @@ void CGachBoxC::Update(SP(CComponent) spThis)
 	}
 	else if (m_eventCnt == 2)
 	{
-		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::UI_ButtonUI);
-		Engine::CSoundManager::GetInstance()->StartSound(L"GachaBoxEff.wav", (_uint)Engine::EChannelID::UI_ButtonUI);
-
-		SP(Engine::CObject) m_spEndEff = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"KianaBranchSign", true, (_uint)Engine::ELayerID::Effect);
+		m_spEndEff = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"GachaBox_Eff", true, (_uint)Engine::ELayerID::Effect);
 		m_spEndEff->GetTransform()->SetPosition(_float3(0.2f, -0.1f, -1.f));
-		m_spEndEff->GetTransform()->SetSize(_float3(2.f, 2.f, 2.f));
+		m_spEndEff->GetTransform()->SetSize(_float3(0.f, 0.f, 0.f));
 
 		m_eventCnt++;
 	}
-	else if (m_eventCnt == 3 && m_spEndEff == nullptr)
+	else if (m_eventCnt == 3)
 	{
-		*m_production = false;
-		m_isEnabled = false;
-		GetOwner()->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0);
-		Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas")->SetIsEnabled(true);
+		if (m_spEndEff != nullptr)
+		{
+			if (m_spEndEff->GetDeleteThis())
+			{
+				*m_production = false;
+				m_isEnabled = false;
+				GetOwner()->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0);
+				Engine::GET_CUR_SCENE->FindObjectByName(L"OutCanvas")->SetIsEnabled(true);
+				m_spEndEff = nullptr;
+			}
+		}
 	}
 }
 

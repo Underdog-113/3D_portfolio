@@ -31,7 +31,6 @@ SP(Engine::CObject) CMonsterDieParticle::MakeClone()
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
 	spClone->m_spRectTex = spClone->GetComponent<Engine::CRectTexC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
-	spClone->m_spCollision = spClone->GetComponent<Engine::CCollisionC>();
 	spClone->m_bBillboard = true;
 
 	return spClone;

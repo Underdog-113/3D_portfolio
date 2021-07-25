@@ -51,6 +51,9 @@ void CFSM_SakuraC::Awake(void)
 
 void CFSM_SakuraC::Start(SP(CComponent) spThis)
 {
+	if (m_isUI)
+		return;
+
 	m_pSakura = static_cast<CSakura*>(m_pOwner);
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pSakura->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pEffectMaker = new CEffectMaker_Sakura(m_pSakura);

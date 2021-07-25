@@ -76,6 +76,7 @@ void CKiana_Trail::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gEmissionPow", 0.45f);
 
 	pEffect->CommitChanges();
 }

@@ -48,13 +48,13 @@ void CPhaseChanger::Awake(void)
 	m_addExtra = true;
 
 	m_spCollision	= AddComponent<Engine::CCollisionC>();
-	AddComponent<Engine::CDebugC>();
 }
 
 void CPhaseChanger::Start(void)
 {
 	__super::Start();
-	
+	AddComponent<Engine::CDebugC>();
+
 }
 
 void CPhaseChanger::FixedUpdate(void)

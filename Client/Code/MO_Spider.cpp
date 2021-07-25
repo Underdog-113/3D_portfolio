@@ -185,16 +185,6 @@ void CMO_Spider::ApplyHitInfo(HitInfo info)
 	}
 }
 
-void CMO_Spider::ChaseTarget(_float3 targetPos)
-{
-	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0;
-	D3DXVec3Normalize(&dir, &dir);
-
-	m_spTransform->SetForwardUp(dir, UP_VECTOR);
-}
-
-
 SP(CMO_Spider) CMO_Spider::Create(_bool isStatic, Engine::CScene * pScene)
 {
 	SP(CMO_Spider) spInstance(new CMO_Spider, Engine::SmartDeleter<CMO_Spider>);

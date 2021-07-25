@@ -48,6 +48,9 @@ void CFSM_KianaC::Awake(void)
  
 void CFSM_KianaC::Start(SP(CComponent) spThis)
 {
+	if (m_isUI)
+		return;
+
 	m_pKiana = static_cast<CKiana*>(m_pOwner);
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pKiana->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pEffectMaker = new CEffectMaker_Kiana(m_pKiana);

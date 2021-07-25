@@ -195,7 +195,6 @@ void CBattleUiManager::Update(void)
 
 	skillActivationImageCheck();
 	monsterHpBarCheck();
-
 }
 
 void CBattleUiManager::OnDestroy(void)

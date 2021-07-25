@@ -26,8 +26,11 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 			m_accTime = 0.f;
 			m_timeEnd = true;
 			m_onStun = false;
+			std::cout << "Time over" << std::endl;
 		}
 	}
+
+	
 
 	// 내가 break guage가 0이고 stun 상태가 아직 시작 하지 않았다면
 	if (0.f >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurBreakGauge() &&
@@ -46,6 +49,7 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 			m_onStun = true;
 			pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
 			pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
+			static_cast<CMB_Ganesha*>(pOwner)->GetStat()->SetOnBPShield(true);
 			return;
 		}
 	}
@@ -69,6 +73,7 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 		std::cout << "Weak_StandBy" << std::endl;
 		m_timeEnd = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnStun(false);
+		static_cast<CMB_Ganesha*>(pOwner)->GetStat()->SetOnBPShield(false);
 
 		return;
 	}
@@ -84,8 +89,17 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 	}
 
 	// 공격을 받았으면
-	if (true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL() ||
-		true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitH())
+	if ((Name_Ganesha_Weak_Hit == fsm->GetCurStateString()) &&
+		fsm->GetDM()->IsAnimationEnd())
+	{
+		fsm->ChangeState(Name_Ganesha_Weak_Loop);
+		std::cout << "Weak_Loop" << std::endl;
+
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
+		pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
+	}
+	else if ((true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitL() ||
+			  true == pOwner->GetComponent<CPatternMachineC>()->GetOnHitH()))
 	{
 		// 내가 Weak_Hit 또는 Weak_Loop 상태라면
 		if (Name_Ganesha_Weak_Hit == fsm->GetCurStateString() ||

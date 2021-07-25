@@ -9,6 +9,8 @@
 #include "AniCtrl.h"
 
 #include "Bronya_FlashBang.h"
+#include "MovieDirector.h"
+//#include "ImageObject.h"
 
 CBronyaFlashBangPattern::CBronyaFlashBangPattern()
 {
@@ -77,6 +79,7 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 			std::cout << "========================" << std::endl;
 			m_onThrow = false;
 			m_onFlashEffect = false;
+			m_onFlashFade = false;
 
 			return;
 		}
@@ -99,6 +102,47 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		flash->GetTransform()->SetPosition(handPos);
 
 		m_onFlashEffect = true;
+		PatternPlaySound(L"Bronya_FlashBang.wav", pOwner);
+	}
+	// fade in
+	else if (Name_Throw_3 == fsm->GetCurStateString() &&
+		0.67f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onFlashFade)
+	{
+		_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
+		_float3 camDir = camPos - tPos;
+		D3DXVec3Normalize(&camDir, &camDir);
+
+		m_spFlashBang = std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ImageObject", true));
+		m_spFlashBang->GetTexture()->AddTexture(L"White");
+		m_spFlashBang->GetTexture()->SetAlpha(0.f);
+		m_spFlashBang->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		m_spFlashBang->GetRectTex()->SetIsOrtho(true);
+		m_spFlashBang->GetTransform()->SetSize(4000, 1000, 1);
+		m_spFlashBang->AddComponent<Engine::CFadeInOutC>()->SetSpeed(6.f);
+		m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetAutoDelete(false);
+		m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetIsFadeIn(true);
+
+		///////////////
+		//m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetIsFadeIn(false);
+		//m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetFinish(false);
+
+		m_onFlashFade = true;
+	}
+	else if (m_onFlashFade == true)
+	{
+		SP(Engine::CFadeInOutC) spFadeInOut = m_spFlashBang->GetComponent<Engine::CFadeInOutC>();
+		_float curSpeed = spFadeInOut->GetSpeed();
+		if(curSpeed > 0.5f)
+			spFadeInOut->SetSpeed(curSpeed - 15 * GET_DT);
+
+		if (spFadeInOut->GetFinish() == true)
+		{
+			m_onFlashFade = false;
+			spFadeInOut->SetIsFadeIn(false);
+			spFadeInOut->SetFinish(false);
+		}
+		
 	}
 } 
 

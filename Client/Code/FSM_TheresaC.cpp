@@ -46,6 +46,9 @@ void CFSM_TheresaC::Awake(void)
 
 void CFSM_TheresaC::Start(SP(CComponent) spThis)
 {
+	if (m_isUI)
+		return;
+
 	m_pTheresa = static_cast<CTheresa*>(m_pOwner);
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pTheresa->GetComponent<Engine::CMeshC>()->GetMeshData());
 	m_pEffectMaker = new CEffectMaker_Theresa(m_pTheresa);

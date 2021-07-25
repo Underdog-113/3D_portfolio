@@ -93,7 +93,7 @@ void CValkyrieWeaponSwap::WeaponChange()
 	if (g_selectWeaponName == L"")
 		return;
 
-	cout << g_selectWeaponName.c_str() << endl;
+	std::cout << g_selectWeaponName.c_str() << std::endl;
 
 	valkyrieData->SetWeaponData(CDataManager::GetInstance()->FindWeaponData(g_selectWeaponName));
 	valkyrieData->SetDamage(valkyrieData->GetDamage() + valkyrieData->GetWeaponData()->GetDamage());

@@ -83,6 +83,9 @@ protected:
 	GETTOR_SETTOR	(_STATELIST,			m_stateList,	{},			StateList)
 	GETTOR_SETTOR	(Engine::CState*,		m_curState,		nullptr,	CurrentState)
 
+		
+	GETTOR_SETTOR	(_bool,			m_isUI,	{},			IsUI)
+
 };
 
 

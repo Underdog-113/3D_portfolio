@@ -35,8 +35,9 @@ public:
 	static		_uint						m_s_uniqueID;
 
 	GETTOR(SP(Engine::CMeshC), m_spMesh, nullptr, Mesh)
-	GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
-	GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
-	GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+		GETTOR(SP(Engine::CTextureC), m_spTexture, nullptr, Texture)
+		GETTOR(SP(Engine::CGraphicsC), m_spGraphics, nullptr, Graphics)
+		GETTOR(SP(Engine::CShaderC), m_spShader, nullptr, Shader)
+		GETTOR_SETTOR(std::wstring, m_textureName, L"Kiana_UI", TextureName);
 };
 

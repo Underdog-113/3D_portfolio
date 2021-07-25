@@ -135,10 +135,10 @@ void CYongScene::Update(void)
 
 	if (Engine::IMKEY_DOWN(KEY_X))
 	{
-		for (_uint i = 0; i < 15; ++i)
-		{
-			SP(Engine::CObject) spObj = GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
-		}
+
+		SP(Engine::CObject) spSoftEffect
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"GachaBox_Eff", true);
+		
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
 			// Bronya Smoke

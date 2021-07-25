@@ -57,6 +57,7 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			// shock2 상태로 변경
 			fsm->ChangeState(Name_Shock_2);
+			PatternPlaySound(L"Bronya_DownAtt_2.wav", pOwner);
 			m_onAtkBall = false;
 			m_offAtkBall = false;
 			m_onShockEffect = false;

@@ -30,6 +30,8 @@
 #include "SoftEffectShader_Glow.h"
 #include "MeshTrailShader_Glow.h"
 #include "DissolveShader_Glow.h"
+#include "UltScrShader.h"
+#include "ElevatorBaseShader.h"
 #pragma endregion
 
 
@@ -89,6 +91,8 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CSoftEffectShader_Glow::Create(), L"SoftEffectShader_Glow", (_uint)EShaderID::SoftEffectShader_Glow);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CMeshTrailShader_Glow::Create(), L"MeshTrailShader_Glow", (_uint)EShaderID::MeshTrailShader_Glow);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CDissolveShader_Glow::Create(), L"DissolveShader_Glow", (_uint)EShaderID::DissolveShader_Glow);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CUltScrShader::Create(), L"UltScrShader", (_uint)EShaderID::UltScrShader);
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CElevatorBaseShader::Create(), L"ElevatorBaseShader", (_uint)EShaderID::ElevatorBaseShader);
 
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();

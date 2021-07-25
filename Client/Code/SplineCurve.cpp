@@ -50,7 +50,7 @@ void CSplineCurve::CreateCurve(Desc* pDesc)
 	//CalcDistanceRatio();
 }
 
-vector<_float3>* CSplineCurve::GetCurve()
+std::vector<_float3>* CSplineCurve::GetCurve()
 {
 	return &m_curve;
 }
@@ -135,7 +135,7 @@ _float3 CSplineCurve::GetPoint(int _index, float _ratio)
 void CSplineCurve::CalcDistanceRatio()
 {
 	float totalDistance = 0;
-	vector<float> distantList;
+	std::vector<float> distantList;
 
 	m_distanceRatio.clear();
 

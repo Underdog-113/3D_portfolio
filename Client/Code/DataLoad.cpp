@@ -78,9 +78,19 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 
 		std::wstring name;
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
-
+	
 		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, name));
+				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, name));
+		
+		if (name == L"BackGroundCanvas_BackGround_0")
+		{
+			image->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			image->GetShader()->AddShader((_int)Engine::EShaderID::BackgroundShader);
+		}
+		else
+		{
+			image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		}
 
 		_float3 position;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
@@ -154,8 +164,6 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 				image->GetTexture()->AddTexture(textureKey, j);
 			}
 		}
-
-		image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 	}
 }
@@ -687,6 +695,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 
 			spRestrictLine->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 			spRestrictLine->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+			
 
 			std::wstring texKey;
 			pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapPhaseChanger", std::to_wstring(i) +
@@ -717,8 +726,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 				L"_wall" +
 				std::to_wstring(j) +
 				L"_colSize", size);
-			spRestrictLine->AddComponent<Engine::CCollisionC>()->AddCollider(Engine::CObbCollider::Create((_int)ECollisionID::Wall, size));
-			spRestrictLine->AddComponent<Engine::CDebugC>();
+			spRestrictLine->GetComponent<Engine::CCollisionC>()->AddCollider(Engine::CAabbCollider::Create((_int)ECollisionID::Wall, size));
 
 			spPhaseChanger->AddRestrictLine(spRestrictLine);
 		}

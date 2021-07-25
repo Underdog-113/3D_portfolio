@@ -39,7 +39,6 @@ public:
 			void FindRightHand();
 public:
 	static		SP(CMO_Sickle)				Create				(_bool isStatic, Engine::CScene* pScene);
-				void						ChaseTarget			(_float3 targetPos);
 				void						SetStatus			(BaseStat stat);
 				void						UpdatePivotMatrices(void);
 

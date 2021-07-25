@@ -196,15 +196,6 @@ SP(CMO_Scout) CMO_Scout::Create(_bool isStatic, Engine::CScene * pScene)
 	return spInstance;
 }
 
-void CMO_Scout::ChaseTarget(_float3 targetPos)
-{
-	_float3 dir = targetPos - m_spTransform->GetPosition();
-	dir.y = 0;
-	D3DXVec3Normalize(&dir, &dir);
-
-	m_spTransform->SetForwardUp(dir, UP_VECTOR);
-}
-
 void CMO_Scout::SetStatus(BaseStat stat)
 {
 	if (!m_pStat)

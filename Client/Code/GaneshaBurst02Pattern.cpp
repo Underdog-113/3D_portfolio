@@ -69,6 +69,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			fsm->ChangeState(Name_Ganesha_Jump_Back);
 			PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 			m_onSound = false;
 			m_onRunStart = false;
 		}
@@ -93,6 +94,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		if (Name_Ganesha_StandBy == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
 		{
 			fsm->ChangeState(Name_Ganesha_Burst02);
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 			m_onBurstReadyEff = true;
 		}
 	}
@@ -108,6 +110,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		m_onRunStart = false;
 		std::dynamic_pointer_cast<CGanesha_Dome_Impact>(m_spBurstEff)->GetDomeObject()->SetDeleteThis(true);
 		m_spBurstEff->SetDeleteThis(true);
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() && 0.9f <= fsm->GetDM()->GetAniTimeline() && false == m_walkReady)

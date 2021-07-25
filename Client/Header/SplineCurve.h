@@ -13,7 +13,7 @@ public:
 
 public:
 	void CreateCurve(Desc* pDesc);
-	vector<_float3>* GetCurve();
+	std::vector<_float3>* GetCurve();
 
 public:
 	void AddPoint(_float3 point);
@@ -27,9 +27,9 @@ private:
 	void CalcDistanceRatio();
 
 private:
-	vector<_float3> m_points;
-	vector<_float3> m_curve;
-	vector<float> m_distanceRatio;
+	std::vector<_float3> m_points;
+	std::vector<_float3> m_curve;
+	std::vector<float> m_distanceRatio;
 
 	Desc m_desc;
 	// 점 3개로 커브 하나

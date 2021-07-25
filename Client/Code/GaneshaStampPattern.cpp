@@ -98,6 +98,7 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			Name_Ganesha_StandBy == fsm->GetCurStateString()) &&
 			fsm->GetDM()->IsAnimationEnd())
 		{
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 			fsm->ChangeState(Name_Ganesha_Stamp);
 			m_onEffect = true;
 			return;
@@ -108,12 +109,14 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Ganesha_Stamp == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 		fsm->ChangeState(Name_Ganesha_Jump_Back);
 		PatternPlaySound(L"Ganesha_JumpBack.wav", pOwner);
 		m_walkReady = false;
 		m_onSound = false;
 		m_onRunStart = false;
-		m_spEffect->SetDeleteThis(true);
+		static_cast<CMonster*>(pOwner)->DeleteEffect(Effects::stamp);
+		//m_spEffect->SetDeleteThis(true);
 	}
 	// 내가 뒤로 이동 중이라면
 	else if (Name_Ganesha_Jump_Back == fsm->GetCurStateString() &&
@@ -185,9 +188,12 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 		true == m_onEffect)
 	{
 		m_onEffect = false;
-		m_spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Impact_Eff", true);
-		m_spEffect->GetTransform()->SetPosition(mPos);		
-		m_spEffect->GetTransform()->SetSize(3.f, 3.f, 3.f);
+		SP(Engine::CObject) effect =
+			Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Impact_Eff", true);
+
+		effect->GetTransform()->SetPosition(mPos);		
+		effect->GetTransform()->SetSize(3.f, 3.f, 3.f);
+		static_cast<CMonster*>(pOwner)->AddEffect(effect);
 	} 
 }
 

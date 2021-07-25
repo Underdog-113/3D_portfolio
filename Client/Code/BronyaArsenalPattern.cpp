@@ -15,6 +15,9 @@
 #include "Bronya_Ult_Range.h"
 #include "Bronya_Ult_Ring.h"
 
+#include "Bronya_Teleport_Ring.h"
+#include "Bronya_Teleport_Laser.h"
+
 CBronyaArsenalPattern::CBronyaArsenalPattern()
 {
 }
@@ -65,6 +68,16 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
 	}
 
+	/************************* Sound */
+	if (Name_Arsenal_Charge == fsm->GetCurStateString() &&
+		0.75f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_onArsenalReadySound)
+	{
+		// sound
+		PatternPlaySound(L"Bronya_Ult_Ready.wav", pOwner);
+		m_onArsenalReadySound = true;
+	}
+
 	/************************* Arsenal */
 	// 내가 대기 상태가 끝났고, corner로 이동했으면
 	if (Name_IDLE == fsm->GetCurStateString() &&
@@ -81,6 +94,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 		// Arsenal Loop 상태로 변경
 		fsm->ChangeState(Name_Arsenal_Loop);
 		m_atkReady = false;
+
 		return;
 	}
 	// 내가 Arsenal Loop가 끝났고, 쿨타임도 끝났다면
@@ -115,6 +129,8 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 		m_movedCenter = m_movedCorner = m_onRingEffect = m_onRangeEffect = false;
 		m_effectIndex = 0;
 		m_accTime = 0.f;
+		m_onArsenalReadySound = false;
+		m_onArsenalShotSound = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 	}
 
@@ -126,7 +142,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	{
 		m_accTime += GET_DT;
 
-		if (m_accTime >= 0.12f)
+		if (m_accTime >= 0.1f)
 		{
 			_int cnt = static_cast<CMB_Bronya*>(pOwner)->GetMaxArsenalEffectCnt();
 
@@ -189,6 +205,16 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 			static_cast<CMB_Bronya*>(pOwner)->GetExplosions()[i]->SetIsEnabled(true);
 		}
 	}
+
+	if (true == m_onRingEffect &&
+		true == m_onRangeEffect &&
+		false == m_onArsenalShotSound)
+	{
+		// sound
+		Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::OBJECT);
+		Engine::CSoundManager::GetInstance()->StartSound(L"Bronya_Ult_Shot.wav", (_uint)EChannelID::OBJECT);
+		m_onArsenalShotSound = true;
+	}
 } 
 
 SP(CBronyaArsenalPattern) CBronyaArsenalPattern::Create()
@@ -200,6 +226,8 @@ SP(CBronyaArsenalPattern) CBronyaArsenalPattern::Create()
 
 void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) spFSM, _float3 monPos, _float3 endPos, _bool& moved)
 {
+	_float3 mPos = pOwner->GetTransform()->GetPosition(); // monster pos
+
 	// 이스케이프 외 애니메이션이 종료되었다면
 	if (Name_Escape_In != spFSM->GetCurStateString() &&
 		Name_Escape_Out != spFSM->GetCurStateString() &&
@@ -207,6 +235,21 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 	{
 		// escape in 실행
 		spFSM->ChangeState(Name_Escape_Out);
+
+		// effect
+		SP(CBronya_Teleport_Ring) effect = std::dynamic_pointer_cast<CBronya_Teleport_Ring>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Ring", true));
+		effect->GetTransform()->SetPosition(mPos);
+		effect->GetTransform()->AddPositionY(0.5f);
+
+
+		m_vLaserOutEffect = std::dynamic_pointer_cast<CBronya_Teleport_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Laser", true));
+		m_vLaserOutEffect->GetTransform()->AddSizeX(-0.5f);
+		m_vLaserOutEffect->GetTransform()->SetPosition(mPos);
+		defaultEscapeEffectSizeX = m_vLaserOutEffect->GetTransform()->GetSize().x;
+		m_onLaserOutEffect = true;
+
+		// sound
+		PatternPlaySound(L"Bronya_Teleport_Up.wav", pOwner);
 	}
 	// escape in 상태 중 적절한 위치로 올라왔다면
 	else if (Name_Escape_Out == spFSM->GetCurStateString() &&
@@ -247,6 +290,14 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 		spFSM->ChangeState(Name_Escape_In);
 		spFSM->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		m_onEscape = false;
+
+		m_vLaserInEffect = std::dynamic_pointer_cast<CBronya_Teleport_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Teleport_Laser", true));
+		m_vLaserInEffect->GetTransform()->AddSizeX(-0.5f);
+		m_vLaserInEffect->GetTransform()->SetPosition(mPos);
+		m_onLaserInEffect = true;
+
+		// sound
+		PatternPlaySound(L"Bronya_Teleport_Down.wav", pOwner);
 	}
 	// escape in 상태가 끝났다면
 	else if (Name_Escape_In == spFSM->GetCurStateString() &&
@@ -258,6 +309,73 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 		moved = true;
 
 		pOwner->GetTransform()->SetRotationY(D3DXToRadian(180));
+	}
+
+	/************************* Effect */
+	if (true == m_onLaserOutEffect)
+	{
+		_float sizeX = m_vLaserOutEffect->GetTransform()->GetSize().x - (1.5f * GET_DT);
+
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-1.3f * GET_DT);
+
+			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
+			{
+				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(0.f);
+			}
+
+			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();
+		}
+
+		if (0.f >= sizeX)
+		{
+			m_vLaserOutEffect->GetTransform()->SetSizeX(0.f);
+		}
+		else
+		{
+			m_vLaserOutEffect->GetTransform()->SetSizeX(sizeX);
+		}
+
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f &&
+			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f)
+		{
+			m_onLaserOutEffect = false;
+			m_vLaserOutEffect->SetDeleteThis(true);
+		}
+	}
+
+	if (true == m_onLaserInEffect)
+	{
+		_float sizeX = m_vLaserInEffect->GetTransform()->GetSize().x - (3.5f * GET_DT);
+
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.3f * GET_DT);
+
+			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f)
+			{
+				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+			}
+
+			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();
+		}
+
+		if (0.f >= sizeX)
+		{
+			m_vLaserInEffect->GetTransform()->SetSizeX(0.f);
+		}
+		else
+		{
+			m_vLaserInEffect->GetTransform()->SetSizeX(sizeX);
+		}
+
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f &&
+			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f)
+		{
+			m_onLaserOutEffect = false;
+			m_vLaserOutEffect->SetDeleteThis(true);
+		}
 	}
 }
 

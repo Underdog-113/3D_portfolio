@@ -71,11 +71,17 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
-	Out.vEmissive = albedo;
+	Out.vEmissive = albedo * 0.7f;
 	if (albedo.r > 0.4f && albedo.b < 0.3f)
+	{
 		Out.vEmissive.a = 1.f;
+		//Out.vColor = vector(0, 0, 0, 0);
+	}
+	else
+		Out.vColor = albedo;
 
 	Out.vColor = albedo;
+	
 	Out.vColor.a = 1;
 
 	// -1 ~ 1 -> 0 ~ 1

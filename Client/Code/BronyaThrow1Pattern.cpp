@@ -37,7 +37,7 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 	if (Name_IDLE == fsm->GetCurStateString() &&
 		false == m_onFastIdle)
 	{
-		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.7f);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(2.f);
 		m_onFastIdle = true;
 	}
 	else if (Name_IDLE != fsm->GetCurStateString() &&
@@ -46,6 +46,16 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		m_onFastIdle = false;
 	}
+
+	/************************* Fast Run */
+	if (Name_Run == fsm->GetCurStateString())
+	{
+		_float3 dir = tPos - mPos;
+		D3DXVec3Normalize(&dir, &dir);
+
+		pOwner->GetTransform()->AddPosition(dir * 0.15f);
+	}
+
 
 	/************************* Range */
 	// 상대가 공격 범위 밖이고
@@ -155,6 +165,7 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 		}
 
 		m_onAtkBall = true;
+		PatternPlaySound(L"Bronya_Grenade_1.wav", pOwner);
 	}
 
 }

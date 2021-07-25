@@ -96,27 +96,35 @@ void CBronyaBullet::Update(void)
 	{
 		m_bulletMat = m_spTransform->GetWorldMatrix();
 
-		if (false == m_onAttackBall && 0.4f <= m_accTime)
+		_float shoot = (index % 2 == 0) ? 0.2f : 0.3f;
+		_float max = (index % 2 == 0) ? 0.4f : 0.5f;
+
+		if (false == m_onAttackBall && max <= m_accTime)
 		{
 			m_accTime = 0.f;
 		}
-		else if (true == m_onAttackBall && 0.2f <= m_accTime)
+		else if (true == m_onAttackBall && shoot <= m_accTime)
 		{
 			m_onAttackBall = false;
 			UnActiveAttackBall();
 		}
-		else if (false == m_onAttackBall && 0.2f > m_accTime)
+		else if (false == m_onAttackBall && shoot > m_accTime)
 		{
 			m_onAttackBall = true;
 			ActiveAttackBall(1.f, HitInfo::Str_Low, HitInfo::CC_None, &m_bulletMat, 2.6f);
 
+			
+
 			// 레이저 이펙트 생성
 			_float3 pos = m_pBronya->GetRingEffectPos()[index];
 			m_spLaserEffect = std::dynamic_pointer_cast<CBronya_Ult_Laser>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Laser", true));
-			m_spLaserEffect->GetTransform()->SetSize(_float3(5.3f, 5.3f, 5.3f));
-			m_spLaserEffect->GetTransform()->SetRotationY(-D3DXToRadian(90));
+			m_spLaserEffect->GetTransform()->SetSize(_float3(1.3f, 1.3f, 1.3f));
+			m_spLaserEffect->GetTransform()->SetRotationY(-D3DXToRadian(180));
+			m_spLaserEffect->GetTransform()->SetRotationX(-D3DXToRadian(19));
 			m_spLaserEffect->GetTransform()->SetPosition(pos);
-			m_spLaserEffect->GetTransform()->AddPositionZ(3.6f);
+			m_spLaserEffect->GetTransform()->AddPositionY(-0.3f);
+			m_spLaserEffect->GetTransform()->AddPositionZ(1.2f);
+
 
 			// 타격 이펙트 생성
 			m_spImactEffect = std::dynamic_pointer_cast<CBronya_Ult_Impact>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Impact", true));
