@@ -7,6 +7,7 @@ int TilingY;
 
 float gWidth;
 float gHeight;
+float  gEmissionPow = 0.25f;
 
 bool     g_zWriteEnable;
 
@@ -83,9 +84,7 @@ struct PS_IN
 struct PS_OUT
 {
 	vector		vColor : COLOR0;
-	vector		vNormal : COLOR1;
-	vector		vDepth	: COLOR2;
-	vector		vEmissive : COLOR3;
+	vector		vEmissive : COLOR1;
 };
 
 // 픽셀 쉐이더
@@ -103,9 +102,7 @@ PS_OUT	PS_EFFECT(PS_IN In)
 	blendColor = saturate(blendColor);
 	
 	Out.vColor = blendColor;
-
-	if (Out.vColor.a != 0)
-		Out.vEmissive = blendColor;
+	Out.vEmissive = float4(blendColor.rgb * gEmissionPow, 1.f);
 
 	return Out;
 }

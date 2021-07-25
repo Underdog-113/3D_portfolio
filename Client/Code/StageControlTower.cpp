@@ -617,9 +617,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	// 7. ÀÌÆåÆ®
 	SP(Engine::CObject) spSoftEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
-	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+
 
 	_float3 monsterPos = pMonster->GetTransform()->GetPosition();
 	monsterPos.y += pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
