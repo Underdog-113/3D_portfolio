@@ -207,6 +207,30 @@ void CFSM_SakuraC::ShadeEffect(_uint animIndex)
 	m_dashShadeTimer = 0.f;
 }
 
+void CFSM_SakuraC::EvadeCounterAttack()
+{
+	SP(Engine::CObject) spObj;
+
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_EvadeSkill_Start", true, (_uint)Engine::ELayerID::Effect);
+	spObj->GetTransform()->SetPosition(m_evadeStartPos);
+	spObj->GetTransform()->AddPositionY(0.7f);
+	spObj->GetTransform()->SetSize(2.f, 2.f, 2.f);
+
+	// attack balllllll
+
+	HitInfo info;
+	info.SetDamageRate(0.6f);
+	info.SetBreakDamage(10.f);
+	info.SetStrengthType(HitInfo::Str_High);
+	info.SetCrowdControlType(HitInfo::CC_Sakura);
+
+
+	m_pSakura->GetSubAttackBall()->SetupBall(1.f, info);
+	m_pSakura->GetSubAttackBall()->GetTransform()->SetPosition(m_evadeStartPos);
+	m_pSakura->GetSubAttackBall()->GetTransform()->AddPositionY(0.7f);
+	m_pSakura->GetSubAttackBall()->SetIsEnabled(true);
+}
+
 
 bool CFSM_SakuraC::CheckAction_Attack(const std::wstring & switchStateName, float coolTime)
 {
@@ -1965,10 +1989,12 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 	m_pStageControlTower->SetVertCorrecting(true);
 	//PlaySound_Attack_RandomEvade();
 
+	m_checkEvadeAttack = false;
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
 	m_dashShadeTimer = 0.f;
+	m_evadeStartPos = m_pSakura->GetTransform()->GetPosition();
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
@@ -1978,10 +2004,17 @@ void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 	{
 		ShadeEffect(Index_EvadeForward);
 		m_dashShadeTimer = 0.f;
+
+		if (!m_checkEvadeAttack && CStageControlTower::GetInstance()->GetIsPerfectEvadeMode())
+		{
+			EvadeCounterAttack();
+			m_checkEvadeAttack = true;
+		}
 	}
 
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
+		m_pSakura->GetSubAttackBall()->SetIsEnabled(false);
 		m_isEvade = false;
 		m_pSakura->SetIsEvade(false);
 	}
@@ -2036,10 +2069,12 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 
 	ResetCheckMembers();
 
+	m_checkEvadeAttack = false;
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
 	m_dashShadeTimer = 0.f;
+	m_evadeStartPos = m_pSakura->GetTransform()->GetPosition();
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
@@ -2049,10 +2084,17 @@ void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 	{
 		ShadeEffect(Index_EvadeBackward);
 		m_dashShadeTimer = 0.f;
+
+		if (!m_checkEvadeAttack && CStageControlTower::GetInstance()->GetIsPerfectEvadeMode())
+		{
+			EvadeCounterAttack();
+			m_checkEvadeAttack = true;
+		}
 	}
 
 	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
 	{
+		m_pSakura->GetSubAttackBall()->SetIsEnabled(false);
 		m_isEvade = false;
 		m_pSakura->SetIsEvade(false);
 	}
