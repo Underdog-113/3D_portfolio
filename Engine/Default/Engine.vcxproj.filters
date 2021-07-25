@@ -250,9 +250,6 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader">
       <UniqueIdentifier>{2bd86ea5-c7ba-4d26-9f41-0dd24f09635e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader">
-      <UniqueIdentifier>{3a2e517d-8655-4695-bfb1-f316c6eb873a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\07.ResourceStore\02.Collision">
       <UniqueIdentifier>{b7cc312e-82d4-4fa3-982e-1ef3086f1f4f}</UniqueIdentifier>
     </Filter>
@@ -295,11 +292,14 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\10.ShadowShader">
       <UniqueIdentifier>{476859a0-740f-44f3-b426-26c989ff97e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.FinalShader">
-      <UniqueIdentifier>{8c217798-ef3d-4ff4-b7e4-46a2fea9cf43}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\11.EmissionShader">
       <UniqueIdentifier>{43746416-fbe6-4a33-8453-38105b72c597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaTestShader">
+      <UniqueIdentifier>{3a2e517d-8655-4695-bfb1-f316c6eb873a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.FinalShader">
+      <UniqueIdentifier>{8c217798-ef3d-4ff4-b7e4-46a2fea9cf43}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -544,7 +544,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MeshAlphaTestShader.cpp">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaTestShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\StateMachineC.cpp">
       <Filter>03.Components\99. Develop\00. StateMachine</Filter>
@@ -837,7 +837,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\MeshAlphaTestShader.h">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaTestShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\StateMachineC.h">
       <Filter>03.Components\99. Develop\00. StateMachine</Filter>
@@ -890,7 +890,7 @@
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\07.WireShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
-      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaShader</Filter>
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\08.MeshAlphaTestShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\BlurShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\09.BlurShader</Filter>

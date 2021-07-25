@@ -110,13 +110,13 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	float2 uv = float2(_input.uv) + float2(perPixelX, perPixelY);
 
 	float3 final = tex2D(FinalSampler, uv).xyz;
-	float3 emission = tex2D(EmissiveSampler, uv).xyz;
+	float4 emission = tex2D(EmissiveSampler, uv);
 
 	float3 emissionBlur16 = tex2D(EmissionBlurSampler16, uv).xyz;
 	float3 emissionBlur8 = tex2D(EmissionBlurSampler8, uv).xyz;
 	float3 emissionBlur4 = tex2D(EmissionBlurSampler4, uv).xyz;
 	float3 emissionBlur2 = tex2D(EmissionBlurSampler2, uv).xyz;
-	final = final + ((emission) * 1.f + (emissionBlur2) *1.3f + (emissionBlur4) * 1.5f + (emissionBlur8) * 2.5f + (emissionBlur16) * 3.5f);
+	final = final + ((emissionBlur2) * 1.3f + (emissionBlur4) * 1.5f + (emissionBlur8) * 2.5f + (emissionBlur16) * 3.5f);
 
 
 	o.color = float4(final, 1);

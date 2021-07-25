@@ -1117,6 +1117,15 @@
     <Filter Include="02.Objects\03.Effect\02.Particle\Sakura_Particle">
       <UniqueIdentifier>{2db064b7-acb3-417d-a390-e2663dff61c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\18.UltScrShader">
+      <UniqueIdentifier>{472b7fb5-306c-4948-8b59-fe032d3167e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders">
+      <UniqueIdentifier>{80ad280b-490f-4396-b371-cc2023835084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\00.ElevatorShader">
+      <UniqueIdentifier>{d24913b4-133b-46c9-991d-6569ebc98fb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2349,6 +2358,12 @@
     <ClInclude Include="..\Header\Sakura_Particle.h">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\UltScrShader.h">
+      <Filter>04.Shader\18.UltScrShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ElevatorBaseShader.h">
+      <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3491,6 +3506,12 @@
     <ClCompile Include="..\Code\Sakura_Particle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\UltScrShader.cpp">
+      <Filter>04.Shader\18.UltScrShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ElevatorBaseShader.cpp">
+      <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3573,6 +3594,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DissolveShader_Glow.fx">
       <Filter>04.Shader\05.DissolveShader\Glow</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\UltScrShader.fx">
+      <Filter>04.Shader\18.UltScrShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ElevatorBaseShader.fx">
+      <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

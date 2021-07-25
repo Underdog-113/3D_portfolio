@@ -48,7 +48,7 @@ void CElevatorBase::Awake(void)
 	m_spMesh->SetMeshData(L"Elevator_Base");
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
+	m_spShader->AddShader((_int)EShaderID::ElevatorBaseShader);
 	m_spTexture = AddComponent<Engine::CTextureC>();
 
 	for (_uint i = 0; i < m_spMesh->GetMeshData()->GetSubsetCount(); ++i)
