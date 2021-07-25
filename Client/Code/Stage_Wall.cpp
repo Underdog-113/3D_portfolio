@@ -10,6 +10,7 @@ CStage_Wall::CStage_Wall()
 
 CStage_Wall::~CStage_Wall()
 {
+	OnDestroy();
 }
 
 SP(CStage_Wall) CStage_Wall::Create(_bool isStatic, Engine::CScene * pScene)
