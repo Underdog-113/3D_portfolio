@@ -505,6 +505,7 @@
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_ChargeSmoke.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Explosion.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Fire.h" />
@@ -885,6 +886,7 @@
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp" />

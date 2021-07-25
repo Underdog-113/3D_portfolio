@@ -88,7 +88,7 @@
 #include "Theresa_Ult_Crack.h"
 #include "TheresaCharge_Att.h"
 #include "MoveUpSmoke.h"
-
+#include "Theresa_Ult_ChargeSmoke.h"
 // Sakura
 #include "Sakura_Charge_Att.h"
 #include "Sakura_Trail.h"
@@ -506,6 +506,9 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
+
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeSmoke(CTheresa_Ult_ChargeSmoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeSmoke);
 
 	// Sakura
 

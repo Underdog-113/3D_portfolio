@@ -46,24 +46,12 @@ void CTheresa_Ult_Eff::Start()
 	__super::Start();
 
 	m_spTheresaUltCharge
-		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Theresa_Ult_Charge", true, (_int)Engine::ELayerID::Effect));
-
-	m_spTheresaUltCharge->GetComponent<Engine::CMeshC>()->SetMeshData(L"Charge");
-	m_spTheresaUltCharge->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_spTheresaUltCharge->GetComponent<Engine::CTextureC>()->AddTexture(L"Charge");
-	m_spTheresaUltCharge->GetComponent<Engine::CTextureC>()->AddTexture(L"Charge");
-	m_spTheresaUltCharge->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Theresa_Ult_Charge", true, (_int)Engine::ELayerID::Effect));	
 	m_spTheresaUltCharge->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z));
 
 
 	m_spTheresaUltSmoke
-		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Theresa_Ult_Smoke", true, (_int)Engine::ELayerID::Effect));
-
-	m_spTheresaUltSmoke->GetComponent<Engine::CMeshC>()->SetMeshData(L"Smoke");
-	m_spTheresaUltSmoke->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_spTheresaUltSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"smoke");
-	m_spTheresaUltSmoke->GetComponent<Engine::CTextureC>()->AddTexture(L"smoke");
-	m_spTheresaUltSmoke->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+		= std::dynamic_pointer_cast<CMeshEffect_Client>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Theresa_Ult_Smoke", true, (_int)Engine::ELayerID::Effect));	
 	m_spTheresaUltSmoke->GetComponent<Engine::CTransformC>()->SetPosition(_float3(this->GetTransform()->GetPosition().x, 0.f, this->GetTransform()->GetPosition().z));
 }
 

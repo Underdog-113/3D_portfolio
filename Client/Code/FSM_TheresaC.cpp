@@ -1557,7 +1557,7 @@ void CFSM_TheresaC::Ultra_Update(float deltaTime)
 		m_ultraAxeOnOff = true;
 
 		m_pEffectMaker->CreateEffect_Ultra_Trail();
-		m_pEffectMaker->CreateEffect_Ultra_Smoke();
+		m_pEffectMaker->CreateEffect_Ultra_ChargeSmoke();
 
 		m_pStageControlTower->GetCameraMan()->SetCustomShot(3.5f, 2.5f, D3DXToRadian(25.f));
 	}

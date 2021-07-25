@@ -39,8 +39,11 @@ SP(Engine::CObject) CMoveUpSmoke::MakeClone()
 void CMoveUpSmoke::Awake()
 {
 	__super::Awake();
-	//m_spTransform->SetRotationZ(D3DXToRadian(90.f));
-	//m_spTransform->SetRotationY(D3DXToRadian(-45.f));
+	m_spMesh->SetMeshData(L"Charge_Att_Smoke");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"fx_snowfield_fog03");
+	m_spTexture->AddTexture(L"fx_snowfield_fog03");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
 }
 
 void CMoveUpSmoke::Start()

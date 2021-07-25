@@ -733,9 +733,6 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Bronya\Pattern\03.Select\05.Arsenal">
       <UniqueIdentifier>{1870b79e-3fbb-43b1-ae2e-ffffd934c13f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Objects\03.Effect\03.SoftEffect\01.SpiderExplosion">
-      <UniqueIdentifier>{87d2c7ee-63e9-4f88-9265-ef8e215c4df6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="12.FSM\03.SupplyFSM\02.SupplyOut">
       <UniqueIdentifier>{7014a00a-5bc8-4737-9d91-b8a785a30bd2}</UniqueIdentifier>
     </Filter>
@@ -2359,6 +2356,9 @@
     <ClInclude Include="..\Header\MonsterDieParticle.h">
       <Filter>02.Objects\03.Effect\02.Particle\MonsterDieParticle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Theresa_Ult_ChargeSmoke.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3504,6 +3504,9 @@
     <ClCompile Include="..\Code\Shot_ReturnCameraToActor.cpp" />
     <ClCompile Include="..\Code\MonsterDieParticle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle\MonsterDieParticle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

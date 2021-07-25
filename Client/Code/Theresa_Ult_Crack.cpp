@@ -43,7 +43,11 @@ SP(Engine::CObject) CTheresa_Ult_Crack::MakeClone()
 void CTheresa_Ult_Crack::Awake()
 {
 	__super::Awake();
-
+	m_spMesh->SetMeshData(L"Ult_Crack");
+	m_spTexture->AddTexture(L"Sword_map");
+	m_spTexture->AddTexture(L"Groundcracks_05");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CTheresa_Ult_Crack::Start()
