@@ -151,6 +151,7 @@ private:	/* Stage Info? */
 
 private:
 	_bool cheat_eternal = false;
+	_float m_time;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Header\KianaUIAnim.h"
+#include "AniCtrl.h"
 
 _uint CKianaUIAnim::m_s_uniqueID = 0;
 
@@ -53,7 +54,7 @@ void CKianaUIAnim::Start(void)
 {
 	__super::Start();
 
-	m_spMesh->SetMeshData(L"Kiana_UI");
+	m_spMesh->SetMeshData(m_textureName);
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
 }
@@ -67,6 +68,10 @@ void CKianaUIAnim::Update(void)
 {
 	__super::Update();
 
+	if (this->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->GetIsFakeAniEnd())
+	{
+		this->GetComponent<Engine::CMeshC>()->GetFirstMeshData_Dynamic()->GetAniCtrl()->SetSpeed(0);
+	}
 }
 
 void CKianaUIAnim::LateUpdate(void)

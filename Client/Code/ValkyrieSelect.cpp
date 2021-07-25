@@ -9,8 +9,13 @@
 #include "ValkyrieProperty.h"
 #include "ValkyrieWeapon.h"
 
+#include "DynamicMeshData.h"
+#include "AniCtrl.h"
 #include "ReadyToSortieScene.h"
 
+#include "KianaUIAnim.h"
+
+SP(Engine::CObject) CValkyrieSelect::m_vPlayer = nullptr;
 CValkyrieSelect::CValkyrieSelect()
 {
 
@@ -69,9 +74,9 @@ void CValkyrieSelect::Start()
 
 			count++;
 		}
+		DataSetting(CValkyriegManager::g_selectValkyrie);
 	}
 
-	DataSetting(CValkyriegManager::g_selectValkyrie);
 }
 
 void CValkyrieSelect::End()
@@ -88,6 +93,22 @@ _uint CValkyrieSelect::FixedUpdate()
 
 _uint CValkyrieSelect::Update()
 {
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_W))
+	{
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(0.05f);
+	}
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_S))
+	{
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(-0.05f);
+	}
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_A))
+	{
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(0.05f);
+	}
+	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_D))
+	{
+		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(-0.05f);
+	}
 	return _uint();
 }
 
@@ -161,6 +182,42 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 	scene->FindObjectByName(L"ValkyrieCanvas_Text_5")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetWeaponData()->GetName());
 	scene->FindObjectByName(L"ValkyrieCanvas_Text_2")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetSubName());
 	scene->FindObjectByName(L"ValkyrieCanvas_Text_3")->GetComponent<Engine::CTextC>()->ChangeMessage(data->GetName());
+	T = scene->FindObjectByName(L"BackGroundCanvas_BackGround_0").get();
+	T->GetTransform()->SetPosition(_float3(0,0,500));
+	T->GetComponent<Engine::CTextureC>()->ChangeTexture(L"SpaceShipBridge_City");
+	// 케릭터 메쉬 띄우기
+
+
+	/*if (m_vPlayer != nullptr)
+		m_vPlayer->SetDeleteThis(true);
+
+	wstring name = data->GetName();
+	if (name == L"키아나·카스라나")
+	{
+		// 키아나 오브젝트 생성 -> IDLE로 변경
+		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(1.3f, -0.7f, -0.0f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+	} 
+	else if (name == L"테레사·아포칼립스")
+	{
+		// 테레사 오브젝트 생성 -> IDLE로 변경
+		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
+		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_Wp"); 
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.790000141f, -0.39999995f, -2.00000024f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+	}
+	else if (name == L"야에 사쿠라")
+	{
+		// 사쿠라 오브젝트 생성 -> IDLE로 변경
+		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
+		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Sakura_Wp");
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.540000272f, -0.299999845f, -2.800000006f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+	}*/
 
 	if (data->GetProperty() == L"AvatarJiXie")
 	{

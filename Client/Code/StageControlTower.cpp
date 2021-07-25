@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "StageControlTower.h"
 
+#include "ClientScene.h"
+#include "MainRoomScene.h"
+
 #include "Scene.h"
 #include "DamageObjectPool.h"
 #include "InputManager.h"
@@ -49,7 +52,7 @@ void CStageControlTower::Start(CreateMode mode)
 
 	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(true);
 
-
+	m_time = 5.0f;
 }
 
 void CStageControlTower::Init()
@@ -216,6 +219,28 @@ void CStageControlTower::Update(void)
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
 	SettingEnvironmentColor();
+
+
+	_bool a = false;
+	auto curSquad = CStageControlTower::GetInstance()->GetSquad();
+	for (auto member : curSquad)
+	{
+		CValkyrie* pValkyrie = static_cast<CValkyrie*>(member.get());
+		a = pValkyrie->GetIsDead();
+	}
+
+	if (a)
+	{
+		CBattleUiManager::GetInstance()->GameOver();
+		m_time -= GET_DT;
+	}
+
+	if (m_time <= 0)
+	{
+		CButtonManager::GetInstance()->OnDestroy();
+		GET_CUR_CLIENT_SCENE->ChangeScene(CMainRoomScene::Create());
+		m_time = 9999999999999999999999999999999999.0f;
+	}
 }
 
 void CStageControlTower::OnDestroy()

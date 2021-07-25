@@ -78,9 +78,19 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 
 		std::wstring name;
 		dataStore->GetValue(false, dataID, objectKey, key + L"name", name);
-
+	
 		SP(Engine::CImageObject) image =
-			std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, name));
+				std::dynamic_pointer_cast<Engine::CImageObject>(pScene->GetObjectFactory()->AddClone(L"ImageObject", true, (_int)Engine::ELayerID::UI, name));
+		
+		if (name == L"BackGroundCanvas_BackGround_0")
+		{
+			image->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			image->GetShader()->AddShader((_int)Engine::EShaderID::BackgroundShader);
+		}
+		else
+		{
+			image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
+		}
 
 		_float3 position;
 		dataStore->GetValue(false, dataID, objectKey, key + L"position", position);
@@ -154,8 +164,6 @@ void CDataLoad::ImageLoad(Engine::CScene* pScene)
 				image->GetTexture()->AddTexture(textureKey, j);
 			}
 		}
-
-		image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 
 	}
 }

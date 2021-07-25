@@ -51,7 +51,6 @@ void CCollisionManager::Update(void)
 		}
 	}
 
-
 	for (auto& spCollision : m_vCollisions)
 	{
 		if (spCollision->GetOwner() != nullptr && spCollision->GetIsEnabled())
@@ -60,7 +59,6 @@ void CCollisionManager::Update(void)
 			spCollision->ProcessTriggers();
 		}
 	}
-
 }
 
 void CCollisionManager::LateUpdate(void)

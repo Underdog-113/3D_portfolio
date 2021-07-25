@@ -23,6 +23,9 @@ void CStateMachineC::Awake(void)
 
 void CStateMachineC::Start(SP(CComponent) spThis)
 {
+	if (m_isUI)
+		return;
+
 	__super::Start(spThis);
 
 	for (auto state : m_stateList)

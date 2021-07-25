@@ -25,8 +25,8 @@ void CValkyriegManager::Start(Engine::CScene * pScene)
 
 void CValkyriegManager::Update(void)
 {
-	/*if(m_valkyrieFSM[m_valkyrieState])
-		m_valkyrieFSM[m_valkyrieState]->Update();*/
+	if(m_valkyrieFSM[m_valkyrieState])
+		m_valkyrieFSM[m_valkyrieState]->Update();
 	// 씬을 넘겨도 해당 부분이 돌고 해당 부분이 댕글리포인터가되서 문제가생김
 }
 

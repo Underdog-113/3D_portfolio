@@ -78,7 +78,8 @@ namespace Engine
 		ShadowShader			= 10,
 		EmissionShader			= 11,
 		FinalShader				= 12,
-		NumOfShaderID			= 13
+		BackgroundShader		= 13,
+		NumOfShaderID			= 14
 	};
 
 #pragma endregion
