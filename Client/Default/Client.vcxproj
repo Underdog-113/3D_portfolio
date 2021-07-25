@@ -323,6 +323,7 @@
     <ClInclude Include="..\Header\Shot_ActorVictory.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeOut.h" />
+    <ClInclude Include="..\Header\Shot_BronyaBorn.h" />
     <ClInclude Include="..\Header\Shot_FixPivot.h" />
     <ClInclude Include="..\Header\Shot_GaneshaBorn.h" />
     <ClInclude Include="..\Header\Shot_PushIn.h" />
@@ -725,6 +726,7 @@
     <ClCompile Include="..\Code\Shot_ActorVictory.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeOut.cpp" />
+    <ClCompile Include="..\Code\Shot_BronyaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_FixPivot.cpp" />
     <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_PushIn.cpp" />

@@ -1088,7 +1088,7 @@ void CFSM_SakuraC::Attack5_Update(float deltaTime)
 
 			m_pSakura->GetTransform()->SetPosition(pMonster->GetTransform()->GetPosition() + flashDir * colRadiusSum);
 
-			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_None);
+			FlashAttack(1.5f, 20.f, HitInfo::Str_Low, HitInfo::CC_Sakura);
 		}
 		m_checkEndFlash = true;
 	}

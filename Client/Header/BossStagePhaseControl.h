@@ -43,6 +43,7 @@ private:
 	_bool m_warningSpawn = false;
 	_bool m_fadeOut = false;
 	_bool m_isBossMovieOn = false;
+	_bool m_isBossMovieOff = false;
 
 	_bool m_bossBattleBGM = false;
 
