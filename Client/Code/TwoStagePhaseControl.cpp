@@ -30,7 +30,7 @@ void CTwoStagePhaseControl::Update(void)
 	case UNDEFINED:
 		++m_curPhase;
 		break;
-		
+
 	case (_int)ETwoStagePhase::ReadyStage:
 		CStageControlTower::GetInstance()->SetDirectorMode(true);
 		++m_curPhase;
@@ -77,14 +77,29 @@ void CTwoStagePhaseControl::Update(void)
 			}
 			if (!m_portalEnd && m_warpTimer > 1.1f)
 			{
-				++m_curPhase;
 				m_portalEnd = true;
+
+				++m_curPhase;
 			}			
 		}
 		break;
 	case (_int)ETwoStagePhase::WarningAlarm:
 		m_warningTimer += GET_DT;
-		if (m_warningTimer > 3.f)
+
+		if (!m_warningSpawn && m_warningTimer > 0.5f)
+		{
+			SP(Engine::CObject) spObj;
+			spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Warning_Ring", true, (_uint)Engine::ELayerID::Effect);
+
+			CValkyrie* pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+			spObj->GetTransform()->SetParent(pActor->GetTransform());
+			spObj->GetTransform()->AddPositionY(pActor->GetMesh()->GetHalfYOffset());
+			spObj->GetTransform()->SetSize(1.5f, 1.5f, 1.5f);
+
+			m_warningSpawn = true;
+		}
+
+		if (m_warningTimer > 4.f)
 		{
 			++m_curPhase;
 		}
@@ -97,24 +112,29 @@ void CTwoStagePhaseControl::Update(void)
 		++m_curPhase;
 		break;
 	case (_int)ETwoStagePhase::BossMovie:
-		if (false == m_isSoundChange)
+		if (false == m_isBossMovieOn)
 		{
 			m_spGanesha->SetIsEnabled(false);
 			m_spGanesha->GetTransform()->SetPosition(-46.f, 14.5f, 0.f);
 
-			//Engine::GET_CUR_SCENE->FindObjectWithKey(L"MB_Ganesha")->SetIsEnabled();
-// 			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-// 			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
-// 			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isSoundChange = true;
-
 			// movie
 			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_GaneshBorn();
+			m_isBossMovieOn = true;
 		}
 
 		break;
 		//After being collided with PhaseChanger0
 	case (_int)ETwoStagePhase::Boss:
+		if (!m_isBossMovieOff)
+		{
+			CStageControlTower::GetInstance()->SetDirectorMode(false);
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			m_isBossMovieOff = false;
+		}
+
+
 		if (m_spGanesha->GetComponent<CPatternMachineC>()->GetOnDie())
 			++m_curPhase;
 

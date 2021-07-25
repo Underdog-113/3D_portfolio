@@ -32,5 +32,9 @@ private:
 	_bool m_init;
 
 	Engine::CObject*  m_vValkyrie[3];
+	static SP(Engine::CObject) m_vPlayer;
+
+
+	Engine::CObject* T;
 };
 

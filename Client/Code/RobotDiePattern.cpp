@@ -43,6 +43,11 @@ void CRobotDiePattern::Pattern(Engine::CObject* pOwner)
 		0.95f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_isDead)
 	{
+		for (_uint i = 0; i < 15; ++i)
+		{
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterDieParticle", true, (_uint)Engine::ELayerID::Effect);
+			spObj->GetTransform()->SetOwner(pOwner);
+		}
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->AddComponent<Engine::CFadeInOutC>()->SetSpeed(0.65f);
 		static_cast<CMO_Robot*>(pOwner)->GetPlane()->SetDeleteThis(true);

@@ -247,10 +247,12 @@
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\DissolveShader_Glow.h" />
     <ClInclude Include="..\Header\GaneshaAirbornePattern.h" />
+    <ClInclude Include="..\Header\ElevatorBaseShader.h" />
     <ClInclude Include="..\Header\MeshTrailShader_Glow.h" />
     <ClInclude Include="..\Header\GaneshaStunPattern.h" />
     <ClInclude Include="..\Header\DropItemManager.h" />
     <ClInclude Include="..\Header\GachBoxC.h" />
+    <ClInclude Include="..\Header\MonsterDieParticle.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
     <ClInclude Include="..\Header\MousePointC.h" />
@@ -323,6 +325,7 @@
     <ClInclude Include="..\Header\Shot_ActorVictory.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeIn.h" />
     <ClInclude Include="..\Header\Shot_BlackFadeOut.h" />
+    <ClInclude Include="..\Header\Shot_BronyaBorn.h" />
     <ClInclude Include="..\Header\Shot_FixPivot.h" />
     <ClInclude Include="..\Header\Shot_GaneshaBorn.h" />
     <ClInclude Include="..\Header\Shot_PushIn.h" />
@@ -504,6 +507,7 @@
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
+    <ClInclude Include="..\Header\Theresa_Ult_ChargeSmoke.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Eff.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Explosion.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Fire.h" />
@@ -522,6 +526,7 @@
     <ClInclude Include="..\Header\TimeSeeker.h" />
     <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
+    <ClInclude Include="..\Header\UltScrShader.h" />
     <ClInclude Include="..\Header\ValkyrieFSM.h" />
     <ClInclude Include="..\Header\ValkyriegManager.h" />
     <ClInclude Include="..\Header\PartySettingScene.h" />
@@ -650,10 +655,12 @@
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\DissolveShader_Glow.cpp" />
     <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp" />
+    <ClCompile Include="..\Code\ElevatorBaseShader.cpp" />
     <ClCompile Include="..\Code\MeshTrailShader_Glow.cpp" />
     <ClCompile Include="..\Code\GaneshaStunPattern.cpp" />
     <ClCompile Include="..\Code\DropItemManager.cpp" />
     <ClCompile Include="..\Code\GachBoxC.cpp" />
+    <ClCompile Include="..\Code\MonsterDieParticle.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
     <ClCompile Include="..\Code\MousePointC.cpp" />
@@ -724,6 +731,7 @@
     <ClCompile Include="..\Code\Shot_ActorVictory.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeIn.cpp" />
     <ClCompile Include="..\Code\Shot_BlackFadeOut.cpp" />
+    <ClCompile Include="..\Code\Shot_BronyaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_FixPivot.cpp" />
     <ClCompile Include="..\Code\Shot_GaneshaBorn.cpp" />
     <ClCompile Include="..\Code\Shot_PushIn.cpp" />
@@ -883,6 +891,7 @@
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
+    <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Eff.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Explosion.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Fire.cpp" />
@@ -901,6 +910,7 @@
     <ClCompile Include="..\Code\TimeSeeker.cpp" />
     <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
+    <ClCompile Include="..\Code\UltScrShader.cpp" />
     <ClCompile Include="..\Code\ValkyrieFSM.cpp" />
     <ClCompile Include="..\Code\ValkyriegManager.cpp" />
     <ClCompile Include="..\Code\PartySettingScene.cpp" />
@@ -1024,6 +1034,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ElevatorBaseShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
@@ -1081,6 +1097,12 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\UltScrShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\WaterShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">2.0</ShaderModel>

@@ -3,14 +3,12 @@ matrix		g_matView;
 matrix		g_matProj;
 
 texture		g_BaseTexture;
-texture		g_NormalTexture;
 
 float4		g_addColor;
 float4		g_multColor;
 float4		g_color;
 
 bool g_timeSlow;
-bool g_normalMapExist = false;
 
 sampler BaseSampler = sampler_state
 {
@@ -20,17 +18,13 @@ sampler BaseSampler = sampler_state
 	magfilter = linear;
 };
 
-sampler NormalSampler = sampler_state
-{
-	texture = g_NormalTexture;
-};
 
 struct VS_IN
 {
 	vector		vPosition   : POSITION;	
 	vector		vNormal		: NORMAL;
-	float3		vBiNormal	: BINORMAL;
-	float3		vTangent	: TANGENT;
+	//float3		vBiNormal	: BINORMAL;
+	//float3		vTangent	: TANGENT;
 	float2		vTexUV		: TEXCOORD0;
 };
 
@@ -40,8 +34,8 @@ struct VS_OUT
 	vector		vNormal		: NORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
-	vector		vBiNormal	: TEXCOORD2;
-	vector		vTangent	: TEXCOORD3;
+	//vector		vBiNormal	: TEXCOORD2;
+	//vector		vTangent	: TEXCOORD3;
 };
 
 // 버텍스쉐이더
@@ -56,8 +50,8 @@ VS_OUT VS_MAIN(VS_IN In)
 
 	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
 	Out.vNormal = normalize(mul(vector(In.vNormal.xyz, 0.f), g_matWorld));
-	Out.vTangent = normalize(mul(vector(In.vTangent.xyz, 0.f), g_matWorld));
-	Out.vBiNormal = normalize(mul(vector(In.vBiNormal.xyz, 0.f), g_matWorld));
+	//Out.vTangent = normalize(mul(vector(In.vTangent.xyz, 0.f), g_matWorld));
+	//Out.vBiNormal = normalize(mul(vector(In.vBiNormal.xyz, 0.f), g_matWorld));
 
 	Out.vTexUV = In.vTexUV;
 
@@ -72,8 +66,8 @@ struct PS_IN
 	vector		vNormal		: NORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
-	vector		vTangent	: TEXCOORD2;
-	vector		vBiNormal	: TEXCOORD3;
+	/*vector		vTangent	: TEXCOORD2;
+	vector		vBiNormal	: TEXCOORD3;*/
 };
 
 struct PS_OUT
@@ -105,16 +99,9 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	// -1 ~ 1 -> 0 ~ 1
 	// 단위 벡터 상태인 월드의 법선 값을 텍스쳐 uv 값으로 강제 변환
-	vector normal = In.vNormal;
-	//if (g_normalMapExist)
-	//{
-	//	float4 bumpMap = tex2D(NormalSampler, In.vTexUV);
-	//	bumpMap = (bumpMap * 2.f) - 1.f;
-	//
-	//	normal = normalize((bumpMap.x * (vector)0) + (bumpMap.y * In.vBiNormal) + (bumpMap.z * In.vNormal));
-	//}
 
-	Out.vNormal = vector(normal.xyz * 0.5f + 0.5f, 1.f);
+
+	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 1.f);
 	
 	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w,	// R에 위치에 z나누기 끝난 투영 공간의 z값을 보관(0 ~ 1)값
 						In.vProjPos.w * 0.001f,			// G에 위치에 far 평면의 z로 나눈 뷰스페이스의 z값을 보관(뷰스페이스 상태에서 near는 0.1로 far는 1000으로 설정한 상황) : 우리가 보관하고자 하는 형태는 컬러값(컬러값의 범위는 0~1)

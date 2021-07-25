@@ -360,4 +360,6 @@ private:
 	
 public:
 	void ClearSakuraParticle();
+
+	_bool m_isShelthEffect= false;
 };

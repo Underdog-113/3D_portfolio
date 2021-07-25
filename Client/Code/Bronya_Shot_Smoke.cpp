@@ -83,6 +83,8 @@ void CBronya_Shot_Smoke::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->CommitChanges();
+
 }
 
 void CBronya_Shot_Smoke::Render(LPD3DXEFFECT pEffect)

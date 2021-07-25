@@ -23,6 +23,6 @@ private:
 
 private:
 	Engine::CScene* m_scene;
-
+	SP(Engine::CObject) m_vPlayer;
 };
 

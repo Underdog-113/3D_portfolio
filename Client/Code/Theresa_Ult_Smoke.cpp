@@ -38,6 +38,12 @@ SP(Engine::CObject) CTheresa_Ult_Smoke::MakeClone()
 void CTheresa_Ult_Smoke::Awake()
 {
 	__super::Awake();
+
+	m_spMesh->SetMeshData(L"Ult_Smoke");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CTheresa_Ult_Smoke::Start()
@@ -77,6 +83,7 @@ void CTheresa_Ult_Smoke::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", m_fUVSpeed);
 	pEffect->SetBool("gPlayingAnim", true);
+	pEffect->CommitChanges();
 }
 
 void CTheresa_Ult_Smoke::Render(LPD3DXEFFECT pEffect)

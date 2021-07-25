@@ -85,6 +85,8 @@ void CSoundManager::StartSound(TCHAR * pSoundKey, _uint ID, const float volume)
 
 void CSoundManager::PlayBGM(TCHAR * pSoundKey)
 {
+	m_pBGMSoundKey = pSoundKey;
+
 	std::unordered_map<std::wstring, FMOD_SOUND*>::iterator iter;
 
 	iter = find_if(m_mapSound.begin(), m_mapSound.end(), [&](auto& iter)

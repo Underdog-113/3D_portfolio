@@ -57,8 +57,12 @@ void CReadyToSortieScene::Start(void)
 	image->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 	image->AddComponent<CMousePointC>();
 
-	Engine::CSoundManager::GetInstance()->StopAll();
-	Engine::CSoundManager::GetInstance()->PlayBGM(L"ValkilyWaitIngRoom.mp3");
+	/*if (Engine::CSoundManager::GetInstance()->GetBGMSoundKey() != L"ValkilyWaitIngRoom.mp3")
+	{
+		Engine::CSoundManager::GetInstance()->StopAll();
+		Engine::CSoundManager::GetInstance()->PlayBGM(L"ValkilyWaitIngRoom.mp3");
+	}*/
+
 	Engine::CCameraManager::GetInstance()->GetCamera(m_objectKey + L"BasicCamera")->SetMode(Engine::ECameraMode::Edit);
 
 	SP(Engine::CObject) spEmpty =

@@ -29,6 +29,8 @@ void CSoftEffectShader::Awake()
 {
 	__super::Awake();
 	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Final");
+
 }
 
 void CSoftEffectShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)

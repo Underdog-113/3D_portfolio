@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "StageControlTower.h"
 
+#include "ClientScene.h"
+#include "MainRoomScene.h"
+
 #include "Scene.h"
 #include "DamageObjectPool.h"
 #include "InputManager.h"
@@ -49,7 +52,7 @@ void CStageControlTower::Start(CreateMode mode)
 
 	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(true);
 
-
+	m_time = 5.0f;
 }
 
 void CStageControlTower::Init()
@@ -216,6 +219,28 @@ void CStageControlTower::Update(void)
 		m_pPhaseControl->ChangePhase((_int)COneStagePhaseControl::EOneStagePhase::StageResult);
 
 	SettingEnvironmentColor();
+
+
+	_bool a = false;
+	auto curSquad = CStageControlTower::GetInstance()->GetSquad();
+	for (auto member : curSquad)
+	{
+		CValkyrie* pValkyrie = static_cast<CValkyrie*>(member.get());
+		a = pValkyrie->GetIsDead();
+	}
+
+	if (a)
+	{
+		CBattleUiManager::GetInstance()->GameOver();
+		m_time -= GET_DT;
+	}
+
+	if (m_time <= 0)
+	{
+		CButtonManager::GetInstance()->OnDestroy();
+		GET_CUR_CLIENT_SCENE->ChangeScene(CMainRoomScene::Create());
+		m_time = 9999999999999999999999999999999999.0f;
+	}
 }
 
 void CStageControlTower::OnDestroy()
@@ -1003,17 +1028,20 @@ void CStageControlTower::SetEnvType(Env_Type envType)
 	case CStageControlTower::TheresaUlt:
 		m_envColorDuration = 0.5f;
 		colorRatio = 1.f;
-		m_dstEnvColor = _float4(0.863f * colorRatio, 0.078f * colorRatio, 0.235f * colorRatio, 1.f);
+		//m_dstEnvColor = _float4(0.863f * colorRatio, 0.078f * colorRatio, 0.235f * colorRatio, 1.f);
+		m_dstEnvColor = _float4(0.9f, 0.9f, 0.9f, 1.f);
 		break;
 	case CStageControlTower::SakuraUlt:
 		m_envColorDuration = 0.5f;
 		colorRatio = 1.f;
-		m_dstEnvColor = _float4(0.635f * colorRatio, 0.392f * colorRatio, 0.435f * colorRatio, 1.f);
+		//m_dstEnvColor = _float4(0.635f * colorRatio, 0.392f * colorRatio, 0.435f * colorRatio, 1.f);
+		m_dstEnvColor = _float4(0.9f, 0.9f, 0.9f, 1.f);
 		break;
 	case CStageControlTower::PerfectEvade:
 		m_envColorDuration = 0.5f;
 		colorRatio = 2.f;
-		m_dstEnvColor = _float4(0.024f * colorRatio, 0.075f * colorRatio, 0.341f * colorRatio, 1.f);
+		//m_dstEnvColor = _float4(0.024f * colorRatio, 0.075f * colorRatio, 0.341f * colorRatio, 1.f);
+		m_dstEnvColor = _float4(0.9f, 0.9f, 0.9f, 1.f);
 		break;
 	default:
 		break;

@@ -88,7 +88,7 @@
 #include "Theresa_Ult_Crack.h"
 #include "TheresaCharge_Att.h"
 #include "MoveUpSmoke.h"
-
+#include "Theresa_Ult_ChargeSmoke.h"
 // Sakura
 #include "Sakura_Charge_Att.h"
 #include "Sakura_Trail.h"
@@ -157,6 +157,7 @@
 
 //Particle
 #include "TestParticle.h"
+#include "MonsterDieParticle.h"
 
 ///// Ingame Deco Effect //////
 //Stuc
@@ -506,6 +507,9 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spTheresa_Ult_Eff_MoveUpSmoke(CMoveUpSmoke::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_MoveUpSmoke);
 
+	SP(CMeshEffect_Client) spTheresa_Ult_Eff_ChargeSmoke(CTheresa_Ult_ChargeSmoke::Create(true, this));
+	GetObjectFactory()->AddPrototype(spTheresa_Ult_Eff_ChargeSmoke);
+
 	// Sakura
 
 	SP(CMeshEffect_Client) spSakura_Charge_Att(CSakura_Charge_Att::Create(true, this));
@@ -771,6 +775,8 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(Engine::CObject) spTestParticle(CTestParticle::Create(true, this));
 	GetObjectFactory()->AddPrototype(spTestParticle);
 
+	SP(CSoftEffect) spDieParticle(CMonsterDieParticle::Create(true, this));
+	GetObjectFactory()->AddPrototype(spDieParticle);
 
 	// Wall Effect
 	SP(CMeshEffect_Client) spStageWall(CStage_Wall::Create(true, this));

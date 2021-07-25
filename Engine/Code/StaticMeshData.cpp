@@ -56,45 +56,46 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 		ABORT;
 	}
 	
+	if (fileName == L"Elevator_Base.X")
+		int a = 5;
 	
 	
 	D3DVERTEXELEMENT9 decl[MAX_FVF_DECL_SIZE] =
 	{
 		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
 		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
-		{ 0,24,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL,  0 },
-		{ 0,36,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT,  0 },
-		{ 0,48,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+		{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
 		D3DDECL_END()
 	};
 
 	m_pMesh->CloneMesh(m_pMesh->GetOptions() | D3DXMESH_32BIT, decl, GET_DEVICE, &m_pMesh);
 	
-	LPDWORD pAdjacency = new DWORD[m_pMesh->GetNumFaces() * 3];
-	m_pMesh->GenerateAdjacency(0.0001f, pAdjacency);
+	//LPDWORD pAdjacency = new DWORD[m_pMesh->GetNumFaces() * 3];
+	//m_pMesh->GenerateAdjacency(0.0001f, pAdjacency);
 
 	_ubyte byOffset = 255;
-	_ubyte tanOffset = 255;
-	_ubyte biNormalOffset = 255;
+	//_ubyte tanOffset = 255;
+	//_ubyte biNormalOffset = 255;
 	for (_ulong i = 0; i < MAX_FVF_DECL_SIZE; ++i)
 	{
 		if (decl[i].Usage == D3DDECLUSAGE_POSITION)
 		{
 			byOffset = (_ubyte)decl[i].Offset;
-		}
-		else if (decl[i].Usage == D3DDECLUSAGE_TANGENT)
-		{
-			tanOffset = (_ubyte)decl[i].Offset;
-			D3DXComputeTangent(m_pMesh, 0, 0, 0, 0, pAdjacency);
-		}
-		else if (decl[i].Usage == D3DDECLUSAGE_BINORMAL)
-		{
-			biNormalOffset = (_ubyte)decl[i].Offset;
-			D3DXComputeNormals(m_pMesh, pAdjacency);
-		}
-
-		if (byOffset != 255 && tanOffset != 255 && biNormalOffset != 255)
 			break;
+		}
+		//else if (decl[i].Usage == D3DDECLUSAGE_TANGENT)
+		//{
+		//	tanOffset = (_ubyte)decl[i].Offset;
+		//	D3DXComputeTangent(m_pMesh, 0, 0, 0, 0, pAdjacency);
+		//}
+		//else if (decl[i].Usage == D3DDECLUSAGE_BINORMAL)
+		//{
+		//	biNormalOffset = (_ubyte)decl[i].Offset;
+		//	D3DXComputeNormals(m_pMesh, pAdjacency);
+		//}
+		//
+		//if (byOffset != 255 && tanOffset != 255 && biNormalOffset != 255)
+		//	break;
 	}
 
 	_uint stride	= D3DXGetDeclVertexSize(decl, 0);
@@ -131,7 +132,7 @@ void CStaticMeshData::Awake(std::wstring const& filePath, std::wstring const& fi
 			AddTexNameToList(L"NoTex");
 	}
 
-	delete[] pAdjacency;
+	//delete[] pAdjacency;
 }
 
 void CStaticMeshData::Update(void)

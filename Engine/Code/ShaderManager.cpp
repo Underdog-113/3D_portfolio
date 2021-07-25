@@ -17,6 +17,7 @@
 #include "ShadowShader.h"
 #include "FinalShader.h"
 #include "EmissionShader.h"
+#include "BackGroundShader.h"
 #pragma endregion
 
 USING(Engine)
@@ -83,6 +84,7 @@ void CShaderManager::InitShaderList(_uint numOfShader)
 	AddKeyAndShader(CShadowShader::Create(),			L"ShadowShader",			(_uint)EShaderID::ShadowShader);
 	AddKeyAndShader(CEmissionShader::Create(),			L"EmissionShader",			(_uint)EShaderID::EmissionShader);
 	AddKeyAndShader(CFinalShader::Create(),				L"FinalShader",				(_uint)EShaderID::FinalShader);
+	AddKeyAndShader(CBackGroundShader::Create(),		L"BackgroundShader",		(_uint)EShaderID::BackgroundShader);
 }
 
 void CShaderManager::AddKeyAndShader(CShader * pShader, std::wstring shaderKey, _uint ID)

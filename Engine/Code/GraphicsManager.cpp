@@ -75,8 +75,7 @@ void CGraphicsManager::Render(void)
 	RenderScreenEffect();
 	RenderBlur();
 	RenderEmissive();
-	
-	RenderFinal();
+		RenderFinal();
 	
 	RenderUI();
 

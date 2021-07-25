@@ -45,13 +45,15 @@ void CSakura_Particle::Awake()
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
 	m_spTransform->SetSize(0.07f, 0.07f, 0.07f);
+
+	InitParticle();
+
 }
 
 void CSakura_Particle::Start()
 {
 	__super::Start();
 
-	InitParticle();	
 
 	m_fAlphaWidth = 1.f;
 	m_fAlphaHeight = 1.f;
@@ -137,9 +139,9 @@ void CSakura_Particle::InitParticle()
 {
 	_float3 newForward = _float3((rand() % 180) / 179.f, (rand() % 180) / 179.f, (rand() % 180) / 179.f);
 	if (rand() % 2)
-		newForward.x *= -1;
+		newForward.x *= -0.5f;
 	if (rand() % 2)
-		newForward.z *= -1;
+		newForward.z *= -0.5f;
 
 	newForward.y = 0;
 
@@ -155,9 +157,9 @@ void CSakura_Particle::resetParticle()
 {
 	_float3 ResetForward = _float3((rand() % 180) / 179.f, (rand() % 180) / 179.f, (rand() % 180) / 179.f);
 	if (rand() % 2)
-		ResetForward.x *= -1;
+		ResetForward.x *= -0.5f;
 	if (rand() % 2)
-		ResetForward.z *= -1;
+		ResetForward.z *= -0.5f;
 	ResetForward.y = 0;
 	D3DXVec3Normalize(&ResetForward, &ResetForward);
 
@@ -173,5 +175,5 @@ void CSakura_Particle::movement()
 	D3DXVec3Normalize(&newForward, &newForward);
 	m_spTransform->SetForward(newForward);
 	m_spTransform->AddSize(-_float3(0.2f, 0.2f, 0.2f) * GET_DT * 0.2f);
-	m_spTransform->AddPosition(m_spTransform->GetForward() * GET_DT * 2.5f);
+	m_spTransform->AddPosition(m_spTransform->GetForward() * GET_DT * 2.f);
 }

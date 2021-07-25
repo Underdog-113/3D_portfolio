@@ -63,26 +63,28 @@ enum class ELayerID
 
 enum class EShaderID
 {
-	WaterShader			   = 0 + (_int)Engine::EShaderID::NumOfShaderID,
-	DamageFontShader	   = 1 + (_int)Engine::EShaderID::NumOfShaderID,
-	CatPawShader		   = 2 + (_int)Engine::EShaderID::NumOfShaderID,
-	CircularGaugeShader	   = 3 + (_int)Engine::EShaderID::NumOfShaderID,
-	MeshTrailShader		   = 4 + (_int)Engine::EShaderID::NumOfShaderID,
-	DissolveShader		   = 5 + (_int)Engine::EShaderID::NumOfShaderID,
-	SpawnEffectShader	   = 6 + (_int)Engine::EShaderID::NumOfShaderID,
-	SoftEffectShader	   = 7 + (_int)Engine::EShaderID::NumOfShaderID,
-	AttackRangeShader	   = 8 + (_int)Engine::EShaderID::NumOfShaderID,
-	AlphaMaskShader        = 9 + (_int)Engine::EShaderID::NumOfShaderID,
-	FireShader			   = 10 + (_int)Engine::EShaderID::NumOfShaderID,
-	LaserShader  		   = 11 + (_int)Engine::EShaderID::NumOfShaderID,
-	OutlineShader		   = 12 + (_int)Engine::EShaderID::NumOfShaderID,
-	FaceShader			   = 13 + (_int)Engine::EShaderID::NumOfShaderID,
-	KianaBodyShader		   = 14 + (_int)Engine::EShaderID::NumOfShaderID,
-	AlphaMaskGlowShader    = 15 + (_int)Engine::EShaderID::NumOfShaderID,
-	SoftEffectShader_Glow  = 16 + (_int)Engine::EShaderID::NumOfShaderID,
-	MeshTrailShader_Glow   = 17 + (_int)Engine::EShaderID::NumOfShaderID,
-	DissolveShader_Glow    = 18 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID		   = 19 + (_int)Engine::EShaderID::NumOfShaderID
+	WaterShader				= 0 + (_int)Engine::EShaderID::NumOfShaderID,
+	DamageFontShader		= 1 + (_int)Engine::EShaderID::NumOfShaderID,
+	CatPawShader			= 2 + (_int)Engine::EShaderID::NumOfShaderID,
+	CircularGaugeShader		= 3 + (_int)Engine::EShaderID::NumOfShaderID,
+	MeshTrailShader			= 4 + (_int)Engine::EShaderID::NumOfShaderID,
+	DissolveShader			= 5 + (_int)Engine::EShaderID::NumOfShaderID,
+	SpawnEffectShader		= 6 + (_int)Engine::EShaderID::NumOfShaderID,
+	SoftEffectShader		= 7 + (_int)Engine::EShaderID::NumOfShaderID,
+	AttackRangeShader		= 8 + (_int)Engine::EShaderID::NumOfShaderID,
+	AlphaMaskShader			= 9 + (_int)Engine::EShaderID::NumOfShaderID,
+	FireShader				= 10 + (_int)Engine::EShaderID::NumOfShaderID,
+	LaserShader  			= 11 + (_int)Engine::EShaderID::NumOfShaderID,
+	OutlineShader			= 12 + (_int)Engine::EShaderID::NumOfShaderID,
+	FaceShader				= 13 + (_int)Engine::EShaderID::NumOfShaderID,
+	KianaBodyShader			= 14 + (_int)Engine::EShaderID::NumOfShaderID,
+	AlphaMaskGlowShader		= 15 + (_int)Engine::EShaderID::NumOfShaderID,
+	SoftEffectShader_Glow	= 16 + (_int)Engine::EShaderID::NumOfShaderID,
+	MeshTrailShader_Glow	= 17 + (_int)Engine::EShaderID::NumOfShaderID,
+	DissolveShader_Glow		= 18 + (_int)Engine::EShaderID::NumOfShaderID,
+	UltScrShader			= 19 + (_int)Engine::EShaderID::NumOfShaderID,
+	ElevatorBaseShader		= 20 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID			= 21 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

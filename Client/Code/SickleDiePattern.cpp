@@ -26,11 +26,18 @@ void CSickleDiePattern::Pattern(Engine::CObject* pOwner)
 	if (Name_Sickle_Die != fsm->GetCurStateString() && 0 >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurHp())
 	{
 		fsm->ChangeState(Name_Sickle_Die);
-		PatternPlaySound(L"Sickle_Dead.wav", pOwner);
 	}
 	// die 애니가 끝나면
 	else if (Name_Sickle_Die == fsm->GetCurStateString() && 0.95f <= fsm->GetDM()->GetAniTimeline())
 	{
+		for (_uint i = 0; i < 20; ++i)
+		{
+			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterDieParticle", true, (_uint)Engine::ELayerID::Effect);
+			spObj->GetTransform()->SetPosition(pOwner->GetTransform()->GetPosition());
+			spObj->GetTransform()->AddPositionY(0.5f);
+		}
+		PatternPlaySound(L"Sickle_Dead.wav", pOwner);
+
 		pOwner->SetDeleteThis(true);
 	}
 }
