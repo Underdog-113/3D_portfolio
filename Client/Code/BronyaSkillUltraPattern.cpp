@@ -8,6 +8,7 @@
 #include "Valkyrie.h" 
 #include "AniCtrl.h"
 #include "AttackBall.h"
+#include "Bronya_Weapon.h"
 
 CBronyaSkillUltraPattern::CBronyaSkillUltraPattern()
 {
@@ -33,6 +34,8 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 	// 4. 목표에게 run
 	// 5. 내려찍기 or 점프 내려찍기
 	// 6. 뒤로 이동
+
+	
 
 	ReadyUltra(pOwner, fsm, mPos);
 	PlayEscapePattern(pOwner, fsm, mPos);
@@ -63,6 +66,13 @@ void CBronyaSkillUltraPattern::ReadyUltra(Engine::CObject* pOwner, SP(CFSM_Brony
 		MoveCenter(pOwner, fsm, mPos);
 	}
 
+	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0.1f && m_isReadyUltra)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-3.3f * GET_DT);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-3.3f * GET_DT);
+	}
+
 	/************************* Ready Ultra */
 	// 내가 대기 상태가 끝났고, 센터로 이동했으면
 	if (Name_IDLE == fsm->GetCurStateString() &&
@@ -79,6 +89,8 @@ void CBronyaSkillUltraPattern::ReadyUltra(Engine::CObject* pOwner, SP(CFSM_Brony
 		fsm->GetDM()->IsAnimationEnd())
 	{
 		// 쉐이더로 사라짐
+
+		m_isReadyUltra = true;
 		//
 		fsm->ChangeState(Name_IDLE);
 		m_onShock = true;
@@ -95,6 +107,13 @@ void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFS
 	if (false == m_onShock)
 	{
 		return;
+	}
+
+	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.1f)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
 	}
 
 	// 패턴 반복
@@ -136,7 +155,7 @@ void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFS
 			m_onCenter = false;
 			m_onUltraReady = false;
 			m_movedCenter = false;
-
+			m_isReadyUltra = false;
 			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 
 			return;
@@ -150,6 +169,8 @@ void CBronyaSkillUltraPattern::PlayEscapePattern(Engine::CObject * pOwner, SP(CF
 	{
 		return;
 	}
+
+	
 
 	m_spEscapeBackP->Pattern(pOwner);
 
@@ -169,6 +190,13 @@ void CBronyaSkillUltraPattern::PlayStealthBackPattern(Engine::CObject * pOwner, 
 	if (false == m_onStealthBack)
 	{
 		return;
+	}
+
+	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0.1f)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-3.3f * GET_DT);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-3.3f * GET_DT);
 	}
 
 	m_spStealthBackP->Pattern(pOwner);
