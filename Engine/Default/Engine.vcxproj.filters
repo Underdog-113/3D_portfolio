@@ -304,6 +304,9 @@
     <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\12.FinalShader">
       <UniqueIdentifier>{8c217798-ef3d-4ff4-b7e4-46a2fea9cf43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Engine\01.Graphics\06.Shader\01.Shaders\14.GlowShader">
+      <UniqueIdentifier>{e7ab1bfa-17fc-4e95-9697-a85300708af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\WndApp.cpp">
@@ -575,6 +578,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BackGroundShader.cpp">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.BackGroundShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GlowShader.cpp">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.GlowShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -872,6 +878,9 @@
     <ClInclude Include="..\Header\BackGroundShader.h">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.BackGroundShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\GlowShader.h">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.GlowShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\MeshShader.fx">
@@ -915,6 +924,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\BackGroundShader.fx">
       <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\13.BackGroundShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\GlowShader.fx">
+      <Filter>00.Engine\01.Graphics\06.Shader\01.Shaders\14.GlowShader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

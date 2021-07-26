@@ -52,6 +52,7 @@
     <ClInclude Include="..\Header\FadeInOutC.h" />
     <ClInclude Include="..\Header\FinalShader.h" />
     <ClInclude Include="..\Header\Frustum.h" />
+    <ClInclude Include="..\Header\GlowShader.h" />
     <ClInclude Include="..\Header\Grid.h" />
     <ClInclude Include="..\Header\HierarchyLoader.h" />
     <ClInclude Include="..\Header\Light.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="..\Code\FadeInOutC.cpp" />
     <ClCompile Include="..\Code\FinalShader.cpp" />
     <ClCompile Include="..\Code\Frustum.cpp" />
+    <ClCompile Include="..\Code\GlowShader.cpp" />
     <ClCompile Include="..\Code\Grid.cpp" />
     <ClCompile Include="..\Code\HierarchyLoader.cpp" />
     <ClCompile Include="..\Code\Light.cpp" />
@@ -240,6 +242,7 @@
     <FxCompile Include="..\..\Resource\Shader\FinalShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\GlowShader.fx" />
     <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>

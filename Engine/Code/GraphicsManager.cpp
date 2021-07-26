@@ -225,16 +225,16 @@ void CGraphicsManager::InitBlurredBuffer(void)
 
 	m_pBlurVertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
 
-	pVertex[0].position = _float4(0.f, 0.f, 0.f, 1.f);
+	pVertex[0].position = _float4(-0.5f, -0.5f, 0.f, 1.f);
 	pVertex[0].texUV = _float2(0.f, 0.f);
 
-	pVertex[1].position = _float4((_float)viewport.Width, 0.f, 0.f, 1.f);
+	pVertex[1].position = _float4((_float)viewport.Width - 0.5f, -0.5f, 0.f, 1.f);
 	pVertex[1].texUV = _float2(1.f, 0.f);
 
-	pVertex[2].position = _float4((_float)viewport.Width, (_float)viewport.Height, 0.f, 1.f);
+	pVertex[2].position = _float4((_float)viewport.Width - 0.5f, (_float)viewport.Height - 0.5f, 0.f, 1.f);
 	pVertex[2].texUV = _float2(1.f, 1.f);
 
-	pVertex[3].position = _float4(0.f, (_float)viewport.Height, 0.f, 1.f);
+	pVertex[3].position = _float4(-0.5f, (_float)viewport.Height - 0.f, 0.f, 1.f);
 	pVertex[3].texUV = _float2(0.f, 1.f);
 
 	m_pBlurVertexBuffer->Unlock();

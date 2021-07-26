@@ -1129,6 +1129,9 @@
     <Filter Include="04.Shader\19.MapShaders\00.ElevatorShader">
       <UniqueIdentifier>{d24913b4-133b-46c9-991d-6569ebc98fb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\19.MapShaders\01.Normal">
+      <UniqueIdentifier>{90083b84-ebb7-4349-b424-a798c670ae0c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff">
       <UniqueIdentifier>{09dbe463-0f52-48b9-bb34-2ad8c29697c6}</UniqueIdentifier>
     </Filter>

@@ -532,12 +532,14 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
 		}
-		else if (renderID == 1)
+		else if (renderID == (_int)Engine::ERenderID::NonAlpha)
 		{
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		}
-		else
+		else if(renderID == (_int)Engine::ERenderID::AlphaTest)
 		{
+			if (meshKey == L"Stage02_Alpha_S02_Sky" || meshKey == L"Stage02_Alpha_S02_Cloud" || meshKey == L"Stage02_Alpha_S02_Mountain" || meshKey == L"Stage02_Alpha_Bg03")
+				spDecoObject->GetGraphics()->SetFullShade(true);
 			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 		}
 
@@ -695,6 +697,7 @@ void CDataLoad::PhaseChangerLoad(Engine::CScene * pScene)
 
 			spRestrictLine->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 			spRestrictLine->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::AlphaMaskShader);
+			//spRestrictLine->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::GlowShader);
 			
 
 			std::wstring texKey;

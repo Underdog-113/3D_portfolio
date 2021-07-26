@@ -322,8 +322,16 @@ bool CFSM_KianaC::CheckAction_WeaponSkill(float coolTime)
 	{
 		if (Engine::IMKEY_DOWN(StageKey_WeaponSkill))
 		{
-			if (m_pStageControlTower->ActSkill())
+			if (Engine::IMKEY_PRESS(KEY_SHIFT))
 			{
+				m_skillDmgRate = 1000.f;
+				ChangeState(Name_WeaponSkill);
+				CStageControlTower::GetInstance()->FindTarget();
+				return true;
+			}
+			else if (m_pStageControlTower->ActSkill())
+			{
+				m_skillDmgRate = 0.8f;
 				ChangeState(Name_WeaponSkill);
 				CStageControlTower::GetInstance()->FindTarget();
 				return true;
@@ -1642,7 +1650,7 @@ void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
 			HitInfo info;
-			info.SetDamageRate(0.8f);
+			info.SetDamageRate(m_skillDmgRate);
 			info.SetBreakDamage(50.f);
 			info.SetStrengthType(HitInfo::Str_Damage);
 			info.SetCrowdControlType(HitInfo::CC_Stun);

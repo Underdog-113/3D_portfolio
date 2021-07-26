@@ -47,10 +47,15 @@ private:
 	GETTOR			(SP(CShaderC),		m_spShader,			nullptr,		Shader)
 
 	GETTOR_SETTOR	(_bool,				m_colorReverse,		false,			ColorReverse)
+	GETTOR_SETTOR	(_bool,				m_fullShade,		false,			FullShade)
+
 	GETTOR_SETTOR	(_float4,			m_color,			DEFAULT_VEC4,	Color)
 	GETTOR			(_float3,			m_offsetBV,			ZERO_VECTOR,	OffsetBV)
 	GETTOR			(_float3,			m_sizeBV,			ONE_VECTOR,		SizeBV)
+	GETTOR_SETTOR	(_float,			m_glowCoef,			1.f,			GlowCoef)
 	GETTOR_SETTOR	(_int,				m_renderID,			UNDEFINED,		RenderID)
+	
+
 };
 END
 #endif // !GRAPHICSCOMPONENT_H
