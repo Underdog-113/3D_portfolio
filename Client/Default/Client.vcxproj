@@ -252,6 +252,7 @@
     <ClInclude Include="..\Header\GaneshaAirbornePattern.h" />
     <ClInclude Include="..\Header\ElevatorBaseShader.h" />
     <ClInclude Include="..\Header\GachaBox_Eff.h" />
+    <ClInclude Include="..\Header\ItemObject.h" />
     <ClInclude Include="..\Header\MeshTrailShader_Glow.h" />
     <ClInclude Include="..\Header\GaneshaStunPattern.h" />
     <ClInclude Include="..\Header\DropItemManager.h" />
@@ -664,6 +665,7 @@
     <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ElevatorBaseShader.cpp" />
     <ClCompile Include="..\Code\GachaBox_Eff.cpp" />
+    <ClCompile Include="..\Code\ItemObject.cpp" />
     <ClCompile Include="..\Code\MeshTrailShader_Glow.cpp" />
     <ClCompile Include="..\Code\GaneshaStunPattern.cpp" />
     <ClCompile Include="..\Code\DropItemManager.cpp" />

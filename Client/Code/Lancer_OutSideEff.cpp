@@ -107,7 +107,8 @@ void CLancer_OutSideEff::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-
+	pEffect->SetFloat("gEmissionPow", 0.15f);
+	pEffect->CommitChanges();
 }
 
 void CLancer_OutSideEff::Render(LPD3DXEFFECT pEffect)

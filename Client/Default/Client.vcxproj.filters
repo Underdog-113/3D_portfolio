@@ -1147,6 +1147,9 @@
     <Filter Include="04.Shader\19.MapShaders\03.Stage3GlowShader">
       <UniqueIdentifier>{5437158f-38f0-4ea3-aac5-6f6bd5f6886c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item">
+      <UniqueIdentifier>{02930ca9-a3a8-4851-b5a0-1127196d7fd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2407,6 +2410,9 @@
     <ClInclude Include="..\Header\Stage3GlowShader.h">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\ItemObject.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3576,6 +3582,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Stage3GlowShader.cpp">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ItemObject.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
