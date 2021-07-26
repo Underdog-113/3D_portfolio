@@ -114,8 +114,7 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		true == m_onThrow &&
 		false == m_onFlashFadeIn)
 	{
-
-		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WhiteFadeOneTake(0.f, 0.5f, 0.5f, 1.f);
+		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WhiteFadeOneTake(0.8f, 1.2f, 1.2f, 1.5f);
 
 		//m_spFlashBang = std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ImageObject", true));
 		//m_spFlashBang->GetTexture()->AddTexture(L"White");
