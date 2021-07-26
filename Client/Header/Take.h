@@ -7,7 +7,7 @@ public:
 	CTake();
 	~CTake();
 
-	void StartTake();
+	void StartTake(_bool fixCamera = true);
 	void ActTake();
 
 	void ActTake_EditMode();
@@ -32,5 +32,7 @@ protected:
 	GETTOR_SETTOR(_float, m_playTimer, 0.f, PlayTimer)
 	GETTOR_SETTOR(_bool, m_editMode, false, EditMode)
 
+
+	GETTOR_SETTOR(_bool, m_noFixCamera, false, NoFixCamera)
 };   
 

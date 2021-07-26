@@ -18,9 +18,13 @@ public:
 
 private:
 	void GetRHandMat(Engine::CObject * pOwner, _mat * pAtkBall);
+	void BlowOutFlash();
 
 private:
 	_float m_cost = 1.f;
+
+	_float3 m_tPos = ZERO_VECTOR;
+	_float m_accTime = 0.f;
 
 	_float m_atkTime = 0.f; // 공격 쿨타임
 	_float m_atkDis = 25.f; // 공격 거리

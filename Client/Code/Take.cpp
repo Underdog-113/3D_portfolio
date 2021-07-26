@@ -13,9 +13,9 @@ CTake::~CTake()
 	m_shotMap.clear();
 }
 
-void CTake::StartTake()
+void CTake::StartTake(_bool fixCamera)
 {
-	CStageControlTower::GetInstance()->SetDirectorMode(true);
+	CStageControlTower::GetInstance()->SetDirectorMode(fixCamera);
 	m_playTimer = 0.f;
 	m_editMode = false;
 }
