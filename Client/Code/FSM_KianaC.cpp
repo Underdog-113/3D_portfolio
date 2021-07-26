@@ -86,7 +86,7 @@ void CFSM_KianaC::ActQTEAttack()
 	pAttackBall->SetupBall(0.3f, info);
 
 
-	pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+	pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition() + _float3(0.f, 0.5f, 0.f));
 	pAttackBall->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.5f);
 }
 
@@ -472,6 +472,7 @@ void CFSM_KianaC::ResetCheckMembers()
 	m_checkAttack3rd = false;
 	m_checkAttack4th = false;
 	m_checkEffect = false;
+	m_checkShake = false;
 }
 
 void CFSM_KianaC::ResetCheckMembers_Hit()
@@ -528,6 +529,7 @@ void CFSM_KianaC::Appear_Enter(void)
 	m_pDM->ChangeAniSet(Index_Appear);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_KianaC::Appear_Update(float deltaTime)
@@ -665,6 +667,12 @@ void CFSM_KianaC::Attack_2_Update(float deltaTime)
 			m_pEffectMaker->CreateEffect_Attack2();
 			CStageControlTower::GetInstance()->GetCameraMan()->ShakeCamera_Kiana_ForwardAttack();
 		}
+	}
+
+	if (!m_checkEffectSecond && m_pDM->GetAniTimeline() > Cool_BranchAttack)
+	{
+		m_pEffectMaker->CreateEffect_BranchSign();
+		m_checkEffectSecond = true;
 	}
 
 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk02 + 0.1f)
@@ -1102,8 +1110,7 @@ void CFSM_KianaC::Attack_QTE_Update(float deltaTime)
 		pAttackBall->SetIsEnabled(true);
 		pAttackBall->SetupBall(0.3f, info);
 
-
-		pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		pAttackBall->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition() + _float3(0.f, 0.5f, 0.f));
 		pAttackBall->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.5f);
 		m_checkAttack4th = true;
 	}
@@ -1609,21 +1616,28 @@ void CFSM_KianaC::WeaponSkill_Enter(void)
 
 void CFSM_KianaC::WeaponSkill_Update(float deltaTime)
 {
-	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.25f)
 	{
+		PlaySound_Effect(Sound_Attack_2_Effect);
+
 		SP(Engine::CObject) spObj;
-		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Circle", true, (_uint)Engine::ELayerID::Effect);
-		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
-		spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
-		spObj->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
-		
+		// 		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Circle", true, (_uint)Engine::ELayerID::Effect);
+		// 		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
+		// 		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+		// 		spObj->GetTransform()->SetRotationY(D3DXToRadian(180.f));
+		// 		spObj->GetTransform()->AddRotationY(m_pKiana->GetTransform()->GetRotation().y);
+		// 		
 
 		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Kiana_WSkill_Shoot", true, (_uint)Engine::ELayerID::Effect);
 		spObj->GetTransform()->SetPosition(m_pKiana->GetTransform()->GetPosition());
-		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset());
+		spObj->GetTransform()->AddPosition(m_pKiana->GetTransform()->GetForward() * 0.2f);
+		spObj->GetTransform()->AddPositionY(m_pKiana->GetMesh()->GetHalfYOffset()* 1.3f);
+		
+		m_checkEffect = true;
+	}
 
-		PlaySound_Effect(Sound_Attack_2_Effect);
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.3f)
+	{
 
 		if (m_pStageControlTower->GetCurrentTarget())
 		{
@@ -1680,10 +1694,20 @@ void CFSM_KianaC::SwitchIn_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SwitchIn);
 	m_pStageControlTower->SetVertCorrecting(false);
+
+	ResetCheckMembers();
+
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_KianaC::SwitchIn_Update(float deltaTime)
 {
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.1)
+	{
+		PlaySound_Effect(L"Swap.wav");
+		m_checkEffect = true;
+	}
+
 	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.380)
 	{
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();

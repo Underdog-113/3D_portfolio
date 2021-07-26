@@ -44,8 +44,8 @@ void CKiana_WSkill_Shoot::Awake(void)
 
 	m_spTexture->AddTexture(L"Shoot_Fistol_02");
 	m_spTexture->AddTexture(L"Shoot_Fistol_02");
-	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
-
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CKiana_WSkill_Shoot::Start(void)

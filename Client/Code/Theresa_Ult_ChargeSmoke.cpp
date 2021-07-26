@@ -83,6 +83,7 @@ void CTheresa_Ult_ChargeSmoke::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", m_fUVSpeed);
+	pEffect->SetFloat("gEmissionPow", 1.f);	
 	pEffect->SetBool("gPlayingAnim", true);
 	pEffect->CommitChanges();
 }

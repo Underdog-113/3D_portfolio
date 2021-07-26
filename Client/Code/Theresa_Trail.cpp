@@ -78,6 +78,8 @@ void CTheresa_Trail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gEmissionPow", 1.f);
+	pEffect->CommitChanges();
 }
 
 void CTheresa_Trail::Render(LPD3DXEFFECT pEffect)

@@ -45,7 +45,7 @@ void CScoutMeteor::Awake(void)
 	m_spTexture->AddTexture(L"BallColor");
 	m_spTexture->AddTexture(L"Scout_Meteor");
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spCollision = AddComponent<Engine::CCollisionC>();
 	m_spCollision->
 		AddCollider(Engine::CRayCollider::Create((_int)ECollisionID::FloorRay, _float3(0, 0, 0), _float3(0, -1, 0), 0.2f));

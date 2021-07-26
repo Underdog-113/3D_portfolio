@@ -10,7 +10,7 @@ float4 gWorldLightPosition;
 float  gAlpha;
 float  gSpeed;
 float  gTmpAlpha;
-float  g_fGlow = 0.2;
+float  gEmissionPow = 0.25f;
 
 bool   gPlayingAnim;
 bool   gPlayingAnim_UpDown = false;
@@ -90,9 +90,7 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
 	vector		vColor : COLOR0;
-	vector		vNormal : COLOR1;
-	vector		vDepth	: COLOR2;
-	vector		vEmissive : COLOR3;
+	vector		vEmissive : COLOR1;
 };
 
 PS_OUTPUT ps_main(VS_OUTPUT Input)
@@ -119,7 +117,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 	blendColor = saturate(blendColor);
 
 	Out.vColor = blendColor;
-	Out.vEmissive = float4(blendColor.rgb, gAlpha);
+	Out.vEmissive = float4(blendColor.rgb * gEmissionPow, gAlpha);
 
 	return Out;
 }

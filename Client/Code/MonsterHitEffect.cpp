@@ -41,21 +41,27 @@ void CMonsterHitEffect::Awake(void)
 {
 	__super::Awake();	
 
-	m_fAlphaWidth = 4.f;
-	m_fAlphaHeight = 4.f;
-	m_TilingX = 0;
-	m_TilingY = 0;
-	m_maxXIndex = 4;
-	m_maxYIndex = 3;
-	m_fAlpha = 1.f;
-	m_fTIme = 0.f;
+	m_spTexture->AddTexture(L"Hit_Effect_2");
+	m_spTexture->AddTexture(L"Hit_Effect_2");
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+
+
 }
 
 void CMonsterHitEffect::Start(void)
 {
 	__super::Start();
 
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_fAlphaWidth = 5.f;
+	m_fAlphaHeight = 2.f;
+	m_TilingX = 0;
+	m_TilingY = 0;
+	m_maxXIndex = 5;
+	m_maxYIndex = 1;
+
+	m_fAlpha = 1.f;
+	m_fTIme = 0.f;
 }
 
 void CMonsterHitEffect::FixedUpdate(void)
@@ -79,14 +85,13 @@ void CMonsterHitEffect::LateUpdate(void)
 
 void CMonsterHitEffect::PreRender(LPD3DXEFFECT pEffect)
 {
-
-
 	m_spRectTex->PreRender(m_spGraphics, pEffect);
 
 	pEffect->SetInt("TilingX", m_TilingX);
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetFloat("gEmissionPow", 0.15f);
 
 	pEffect->CommitChanges();
 }

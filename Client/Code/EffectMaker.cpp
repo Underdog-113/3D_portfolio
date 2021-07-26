@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\EffectMaker.h"
 
+#include "Valkyrie.h"
 
 CEffectMaker::CEffectMaker()
 {
@@ -18,11 +19,11 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Trail(std::wstring objectKey, std
 
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetMeshData(name);
 	spMeshEffect->GetComponent<Engine::CMeshC>()->SetIsEffectMesh(true);
-	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::Effect);
+	spMeshEffect->GetComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName1);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName2);
 	spMeshEffect->GetComponent<Engine::CTextureC>()->AddTexture(texName3);
-	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader_Glow);
+	spMeshEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::MeshTrailShader);
 
 	//spMeshEffect->GetTransform()->SetPosition(m_pOwner->GetTransform()->GetPosition());
 	//spMeshEffect->GetTransform()->AddPositionY(m_pOwner->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
@@ -97,4 +98,14 @@ SP(Engine::CObject) CEffectMaker::CreateEffect_Laser(std::wstring objectKey, std
 		GetObjectFactory()->AddClone(objectKey, true, (_int)Engine::ELayerID::Effect, L"LaserEffect");
 
 	return spMeshEffect;
+}
+
+SP(Engine::CObject) CEffectMaker::CreateEffect_Switching()
+{
+	auto spEffect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Robot_Impact_Smoke", true, (_uint)Engine::ELayerID::Effect);
+	spEffect->GetTransform()->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
+	//spEffect->GetTransform()->AddRotationZ(D3DXToRadian(90.f));
+	spEffect->GetTransform()->SetSize(1.f, 0.2f, 1.f);
+
+	return SP(Engine::CObject)();
 }

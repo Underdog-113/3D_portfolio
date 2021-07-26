@@ -64,8 +64,8 @@ void CSakura_EvadeSkill_Loop::FixedUpdate()
 void CSakura_EvadeSkill_Loop::Update()
 {
 	__super::Update();
-	m_fTime += GET_DT;
-	m_fSpeed += 3.3f * GET_DT;
+	m_fTime += GET_PLAYER_DT;
+	m_fSpeed += 3.3f * GET_PLAYER_DT;
 
 	if (m_fTime >= 0.7f)
 	{

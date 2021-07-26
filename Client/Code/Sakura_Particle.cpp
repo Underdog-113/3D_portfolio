@@ -46,13 +46,13 @@ void CSakura_Particle::Awake()
 	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
 	m_spTransform->SetSize(0.07f, 0.07f, 0.07f);
 
-	InitParticle();
-
 }
 
 void CSakura_Particle::Start()
 {
 	__super::Start();
+
+	InitParticle();
 
 
 	m_fAlphaWidth = 1.f;
@@ -94,8 +94,8 @@ void CSakura_Particle::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetFloat("gEmissionPow", 1.f);
 	pEffect->SetBool("g_zWriteEnabled", true);
-	pEffect->SetFloat("g_fGlow", 0.2f);
 	pEffect->CommitChanges();
 }
 

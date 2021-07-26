@@ -1,16 +1,16 @@
 #pragma once
-#include "SoftEffect.h"
+#include "MeshEffect_Client.h"
 
-class CSakura_DamageMark : public CSoftEffect
+class CGachaBox_Eff : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
 
 public:
-	CSakura_DamageMark();
-	~CSakura_DamageMark();
+	CGachaBox_Eff();
+	~CGachaBox_Eff();
 
 public:
-	static	SP(CSakura_DamageMark) Create(_bool isStatic, Engine::CScene* pScene);
+	static	SP(CGachaBox_Eff) Create(_bool isStatic, Engine::CScene* pScene);
 	SP(Engine::CObject) MakeClone(void) override;
 	void Awake(void) override;
 	void Start(void) override;
@@ -33,10 +33,5 @@ public:
 
 private:
 	static _uint m_s_uniqueID;
-
-	GETTOR_SETTOR(Engine::CObject*, m_pTargetObject, nullptr, TargetObject)
-
-private:
-	void UpdateFrame(_float _frmSpeed);
 };
 
