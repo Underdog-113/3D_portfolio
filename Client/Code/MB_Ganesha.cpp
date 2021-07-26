@@ -79,7 +79,7 @@ void CMB_Ganesha::Start(void)
 	m_pStat->SetHPMagnification(4);
 	m_pStat->SetOnSuperArmor(true);
 	m_pStat->SetOnBPShield(false);
-	m_pStat->SetMaxBreakGauge(40.f);
+	m_pStat->SetMaxBreakGauge(800.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
 	m_weakTime = 8.f;
 
