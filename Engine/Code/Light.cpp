@@ -66,16 +66,16 @@ void CLight::InitLight(D3DLIGHT9 * pLightInfo, const _int & index)
 
 	m_pVertexBuffer->Lock(0, 0, (void**)&pVertices, 0);
 
-	pVertices[0].position	= _float4(0.f, 0.f, 0.f, 1.f);
+	pVertices[0].position	= _float4(-0.5f, -0.5f, 0.f, 1.f);
 	pVertices[0].texUV		= _float2(0.f, 0.f);
 
-	pVertices[1].position	= _float4((_float)viewport.Width, 0.f, 0.f, 1.f);
+	pVertices[1].position	= _float4((_float)viewport.Width - 0.5f, -0.5f, 0.f, 1.f);
 	pVertices[1].texUV		= _float2(1.f, 0.f);
 
-	pVertices[2].position	= _float4((_float)viewport.Width, (_float)viewport.Height, 0.f, 1.f);
+	pVertices[2].position	= _float4((_float)viewport.Width - 0.5f, (_float)viewport.Height - 0.5f, 0.f, 1.f);
 	pVertices[2].texUV		= _float2(1.f, 1.f);
 
-	pVertices[3].position	= _float4(0.f, (_float)viewport.Height, 0.f, 1.f);
+	pVertices[3].position	= _float4(-0.5f, (_float)viewport.Height - 0.5f, 0.f, 1.f);
 	pVertices[3].texUV		= _float2(0.f, 1.f);
 
 	m_pVertexBuffer->Unlock();
