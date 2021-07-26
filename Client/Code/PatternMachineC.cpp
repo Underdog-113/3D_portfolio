@@ -55,16 +55,15 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
-	_float3 pos = m_pOwner->GetTransform()->GetPosition();
-
 	if (Engine::IMKEY_DOWN(KEY_5))
 	{
 		m_onAirborne = true;
 		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 	}
 
-	//if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
-	//{
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
+	{
+
 	//	//m_onAirborne = true;
 	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 
@@ -85,7 +84,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//		//effect->GetTransform()->SetSize(0.3f, 0.3f, 0.3f);
 	//		m_vRingEffect.emplace_back(effect);
 	//	}
-	//}
+	}
 
 	//if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_X))
 	//{

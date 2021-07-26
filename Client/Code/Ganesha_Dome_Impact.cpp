@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\Ganesha_Dome_Impact.h"
 
+#include "MB_Ganesha.h"
+
 _uint CGanesha_Dome_Impact::m_s_uniqueID = 0;
 
 CGanesha_Dome_Impact::CGanesha_Dome_Impact()
@@ -72,6 +74,17 @@ void CGanesha_Dome_Impact::Update()
 	__super::Update();
 
 	m_fTime += GET_DT;
+
+	// °¡³×»þ Á×À¸¸é ÀÌÆåÆ® Áö¿ö
+	if (nullptr != m_pOwner)
+	{
+		if (true == m_pOwner->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			m_deleteThis = true;
+			m_pOwner = nullptr;
+			return;
+		}
+	}
 }
 
 void CGanesha_Dome_Impact::LateUpdate()

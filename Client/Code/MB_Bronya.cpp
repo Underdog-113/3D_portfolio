@@ -76,8 +76,7 @@ void CMB_Bronya::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	//stat.SetBaseHp(11277.f);
-	stat.SetBaseHp(2000.f);
+	stat.SetBaseHp(11277.f);
 	stat.SetBaseAtk(110.f);
 	stat.SetBaseDef(37.f);
 

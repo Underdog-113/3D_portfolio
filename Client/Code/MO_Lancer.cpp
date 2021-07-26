@@ -61,7 +61,7 @@ void CMO_Lancer::Start(void)
 
 	BaseStat stat;
 	//stat.SetBaseHp(4761.f);
-	stat.SetBaseHp(7761.f);
+	stat.SetBaseHp(2361.f);
 	stat.SetBaseAtk(45.f);
 	stat.SetBaseDef(25.f);
 

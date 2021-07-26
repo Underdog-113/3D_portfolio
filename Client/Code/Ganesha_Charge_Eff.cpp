@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\Ganesha_Charge_Eff.h"
 
+#include "MB_Ganesha.h"
+
 _uint CGanesha_Charge_Eff::m_s_uniqueID = 0;
 
 CGanesha_Charge_Eff::CGanesha_Charge_Eff()
@@ -65,6 +67,17 @@ void CGanesha_Charge_Eff::Update()
 	__super::Update();
 
 	m_fTime += 3.f *  GET_DT;
+
+	// °¡³×»þ Á×À¸¸é ÀÌÆåÆ® Áö¿ö
+	if (nullptr != m_pOwner)
+	{
+		if (true == m_pOwner->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			m_deleteThis = true;
+			m_pOwner = nullptr;
+			return;
+		}
+	}
 }
 
 void CGanesha_Charge_Eff::LateUpdate()

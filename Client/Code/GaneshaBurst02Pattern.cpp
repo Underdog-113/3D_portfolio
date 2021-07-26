@@ -12,6 +12,7 @@
 #include "PatternMachineC.h"
 #include "AttackBall.h"
 #include "Ganesha_Dome_Impact.h"
+#include "Ganesha_Charge_Eff.h"
 
 CGaneshaBurst02Pattern::CGaneshaBurst02Pattern()
 {
@@ -176,6 +177,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		m_onBurstEff = true;
 		m_spBurstReadyEff = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Charge_Eff", true);
 		m_spBurstReadyEff->GetTransform()->SetPosition(mPos);
+		std::dynamic_pointer_cast<CGanesha_Charge_Eff>(m_spBurstReadyEff)->SetOwner(static_cast<CMB_Ganesha*>(pOwner));
 	}
 	else if (Name_Ganesha_Burst02 == fsm->GetCurStateString() &&
 		0.45f <= fsm->GetDM()->GetAniTimeline() &&
@@ -184,6 +186,7 @@ void CGaneshaBurst02Pattern::Pattern(Engine::CObject* pOwner)
 		m_onBurstEff = false;
 		m_spBurstEff = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_Dome_Impact", true);
 		m_spBurstEff->GetTransform()->SetPosition(mPos);
+		std::dynamic_pointer_cast<CGanesha_Dome_Impact>(m_spBurstEff)->SetOwner(static_cast<CMB_Ganesha*>(pOwner));
 	}
 }
 

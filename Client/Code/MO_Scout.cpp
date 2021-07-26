@@ -61,8 +61,8 @@ void CMO_Scout::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(4195.f);
-	stat.SetBaseAtk(15.f);
+	stat.SetBaseHp(795.f);
+	stat.SetBaseAtk(23.f);
 	stat.SetBaseDef(5.f);
 
 	stat.SetGrowHp(3.f);
