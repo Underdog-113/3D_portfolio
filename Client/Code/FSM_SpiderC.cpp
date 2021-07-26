@@ -30,7 +30,7 @@ void CFSM_SpiderC::Start(SP(CComponent) spThis)
 
 	m_pDM = static_cast<Engine::CDynamicMeshData*>(m_pOwner->GetComponent<Engine::CMeshC>()->GetMeshData());
 
-	SetStartState(Name_StandBy);
+	SetStartState(Name_Born);
 	m_curState->DoEnter();
 }
 

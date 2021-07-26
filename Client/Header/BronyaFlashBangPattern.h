@@ -28,6 +28,7 @@ private:
 
 	_float m_walkTime = 0.f; // ÀÌµ¿ ÄðÅ¸ÀÓ
 	_float m_walkCool = 1.f; // ÀÌµ¿ ¸Æ½º ÄðÅ¸ÀÓ
+	_float3 m_handPos = ZERO_VECTOR;
 
 	_float m_flashSpeed = 6.f;
 
@@ -41,7 +42,9 @@ private:
 
 	_bool m_onThrow = false;
 	_bool m_onFlashEffect = false;
-	_bool m_onFlashFade = false;
+	_bool m_onFlashFadeIn = false;
+	_bool m_onFlashFadeOut = false;
+	_bool m_onCC = false;
 
 	SP(Engine::CImageObject) m_spFlashBang = nullptr;
 

@@ -59,6 +59,9 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 			m_offAtkBall = false;
 			m_onShockEffect = false;
 			PatternPlaySound(L"Bronya_DownAttack.wav", pOwner);
+			
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+
 			return;
 		}
 	}
@@ -83,6 +86,9 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		m_onAtkBall = false;
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
+
+		return;
 	}
 
 	/************************* AttackBall */

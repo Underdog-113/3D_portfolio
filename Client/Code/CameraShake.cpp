@@ -15,8 +15,8 @@ void CCameraShake::PlayShake()
 {
 	if (m_shakeChannel[Player].enable)
 		PlayChannel(&m_shakeChannel[Player]);
-	if (m_shakeChannel[Run].enable)
-		PlayChannel(&m_shakeChannel[Run]);
+	if (m_shakeChannel[Monster].enable)
+		PlayChannel(&m_shakeChannel[Monster]);
 }
 
 void CCameraShake::PlayChannel(ShakeChannel* channel)
@@ -483,7 +483,7 @@ void CCameraShake::Preset_Theresa_CrossImpact(_float3 eventPos)
 
 void CCameraShake::Preset_Kiana_Run()
 {
-	ShakeChannel* channel = &m_shakeChannel[Run];
+	ShakeChannel* channel = &m_shakeChannel[Monster];
 
 	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
 	channel->m_timer = 0.f;
