@@ -681,7 +681,7 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 	else
 	{
 		if (m_speedIncreaseTimer < 1.f)
-			m_speedIncreaseTimer += GET_PLAYER_DT * 1.f;
+			m_speedIncreaseTimer += GET_PLAYER_DT * 2.f;
 		else
 			m_speedIncreaseTimer = 1.f;
 
