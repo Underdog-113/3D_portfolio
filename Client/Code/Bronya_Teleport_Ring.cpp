@@ -43,8 +43,8 @@ void CBronya_Teleport_Ring::Awake(void)
 	__super::Awake();
 	m_spTexture->AddTexture(L"Global_Ring01_3x3");
 	m_spTexture->AddTexture(L"Global_Ring01_3x3");
-	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 }
 
 void CBronya_Teleport_Ring::Start(void)
@@ -88,6 +88,7 @@ void CBronya_Teleport_Ring::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetFloat("gEmissionPow", 0.1f);
 	pEffect->CommitChanges();
 }
 

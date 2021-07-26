@@ -52,6 +52,7 @@ private:
 	_float m_lerpCurTimer = 0.f;
 
 	GETTOR_SETTOR(_float3, m_goalPos, ZERO_VECTOR, GoalPos)
+	SP(Engine::CObject) m_spWeapon;
 };
 
 #endif

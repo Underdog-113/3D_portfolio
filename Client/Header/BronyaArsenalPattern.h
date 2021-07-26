@@ -70,6 +70,8 @@ private:
 	_bool m_onLaserInEffect = false;
 
 	_int m_effectIndex = 0;
+	SP(Engine::CObject) m_spWeapon;
+
 };
 
 #endif

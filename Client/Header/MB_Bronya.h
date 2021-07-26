@@ -65,7 +65,7 @@ private:
 
 	GETTOR(_int, m_maxArsenalEffectCnt, 0, MaxArsenalEffectCnt)
 	GETTOR(_int, m_maxEscapePos, 0, MaxEscapePos)
-	GETTOR(SP(Engine::CObject), m_spWeapon, nullptr, Weapon)
+	GETTOR_SETTOR(SP(Engine::CObject), m_spWeapon, nullptr, Weapon)
 	GETTOR(std::vector<SP(CBronyaBullet)>, m_vBullets, {}, Bullets) // Shoot1 Skill
 	GETTOR(std::vector<SP(CBronyaBullet)>, m_vExplosions, {}, Explosions) // Arsenal Skill
 	GETTOR(std::vector<SP(CBronyaGrenade)>, m_vGrenades, {}, Grenades) // Throw1 Skill
