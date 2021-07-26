@@ -1071,7 +1071,7 @@ void CStageControlTower::SetEnvType(Env_Type envType)
 		m_envColorDuration = 0.5f;
 		colorRatio = 2.f;
 		//m_dstEnvColor = _float4(0.024f * colorRatio, 0.075f * colorRatio, 0.341f * colorRatio, 1.f);
-		m_dstEnvColor = _float4(0.8f, 0.8f, 1.2f, 1.f);
+		m_dstEnvColor = _float4(0.7f, 0.7f, 1.1f, 1.f);
 		break;
 	default:
 		break;

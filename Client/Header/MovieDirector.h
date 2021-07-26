@@ -51,6 +51,7 @@
 #define TakeName_Failure			L"Failure"
 
 #define TakeName_KianaVictory		L"KianaVictory"
+#define TakeName_TheresaVictory		L"TheresaVictory"
 #define TakeName_SakuraVictory		L"SakuraVictory"
 
 
@@ -88,6 +89,7 @@ public:
 	void CreateTake_Failure();
 
 	void CreateTake_KianaVictory();
+	void CreateTake_TheresaVictory();
 	void CreateTake_SakuraVictory();
 	void CreateTake_GaneshaBorn();
 	void CreateTake_BronyaBorn();
