@@ -40,5 +40,9 @@ public:
 
 private:
 	static		_uint m_s_uniqueID;
+
+	_float m_camStartZ = -5.44f;
+	_float m_camEndZ = -3.8f;
+	_float m_rotateLerpTimer = 0.f;
 };
 

@@ -114,26 +114,31 @@ void CMovieDirector::UpdateDirector()
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
 		CutCurrentTake();
 
-	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
+	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_3))
 	{
-		//StartTake_KianaVictory();
-		StartTake_TheresaVictory();
+		StartTake_KianaVictory();
 		//StartTake_SakuraVictory();
 		//StartTake_GaneshBorn();
 		//StartTake_WhiteFadeOut(0.f, 0.5f);
 	}
 
 
-	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_3))
+	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_4))
 	{
-		StartTake_KianaVictory();
+		StartTake_TheresaVictory();
 		//StartTake_SakuraVictory();
 		//StartTake_GaneshBorn();
-		m_pCurTake->SetEditMode(true);
+		//m_pCurTake->SetEditMode(true);
 
 		//StartTake_WhiteFadeIn(0.f, 1.f);
 	}
-
+	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_5))
+	{
+		//StartTake_KianaVictory();
+		StartTake_SakuraVictory();
+		//StartTake_GaneshBorn();
+		//StartTake_WhiteFadeOut(0.f, 0.5f);
+	}
 // 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
 // 		CStageControlTower::GetInstance()->SetDirectorMode(true);
 // 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
@@ -643,7 +648,7 @@ void CMovieDirector::StartTake_KianaVictory()
 
 	CShot_MovePivot::Desc mp_sub1_desc;
 	mp_sub1_desc.startOffset = mp_desc.endOffset;
-	mp_sub1_desc.endOffset = pActor->GetTransform()->GetUp() * 0.05f + pActor->GetTransform()->GetRight() * -0.115f;
+	mp_sub1_desc.endOffset = pActor->GetTransform()->GetUp() * 0.07f + pActor->GetTransform()->GetRight() * -0.115f;
 	pTake->ReadyShot(ShotName_MovePivot_SubCh1, 2.1f, 2.3f, &mp_sub1_desc, 2.1f);
 	
 	CShot_PushOut::Desc po_sub1_desc;
@@ -704,7 +709,7 @@ void CMovieDirector::StartTake_TheresaVictory()
 	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
 	mp_desc.startOffset = pActor->GetTransform()->GetUp() * -0.3f + pActor->GetTransform()->GetForward() * -0.15f;/*pActor->GetTransform()->GetUp() * -0.3f + pActor->GetTransform()->GetForward() * 0.1f;*/
 	//mp_desc.endOffset = pActor->GetTransform()->GetUp() * -0.3f + pActor->GetTransform()->GetForward() * -0.15f;
-	mp_desc.endOffset = pActor->GetTransform()->GetUp() * -0.05f + pActor->GetTransform()->GetRight() * -0.115f;
+	mp_desc.endOffset = pActor->GetTransform()->GetUp() * -0.01f + pActor->GetTransform()->GetRight() * -0.115f;
 	pTake->ReadyShot(ShotName_MovePivot, 1.f, 3.f, &mp_desc, 0.6f);
 
 	CShot_RotateRoll::Desc rr_desc;
@@ -753,7 +758,7 @@ void CMovieDirector::StartTake_SakuraVictory()
 
 	CShot_RotateYaw::Desc ry2_desc;
 	ry2_desc.startEulerAngle = 0.f;
-	ry2_desc.endEulerAngle = 20.f;
+	ry2_desc.endEulerAngle = 5.f;
 	pTake->ReadyShot(ShotName_RotateYaw_SubCh1, 3.6f, 10.6f, &ry2_desc, 3.6f);
 
 	CShot_RotatePitch::Desc rp_desc;
