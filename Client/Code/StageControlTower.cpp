@@ -227,7 +227,11 @@ void CStageControlTower::Update(void)
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(member.get());
 		a = pValkyrie->GetIsDead();
+
+		if (a == false)
+			break;
 	}
+	
 
 	if (a)
 	{
@@ -1033,19 +1037,19 @@ void CStageControlTower::SetEnvType(Env_Type envType)
 		m_envColorDuration = 0.5f;
 		colorRatio = 1.f;
 		//m_dstEnvColor = _float4(0.863f * colorRatio, 0.078f * colorRatio, 0.235f * colorRatio, 1.f);
-		m_dstEnvColor = _float4(0.9f, 0.9f, 0.9f, 1.f);
+		m_dstEnvColor = _float4(1.5f, 0.7f, 0.7f, 1.f);
 		break;
 	case CStageControlTower::SakuraUlt:
 		m_envColorDuration = 0.5f;
 		colorRatio = 1.f;
 		//m_dstEnvColor = _float4(0.635f * colorRatio, 0.392f * colorRatio, 0.435f * colorRatio, 1.f);
-		m_dstEnvColor = _float4(0.9f, 0.9f, 0.9f, 1.f);
+		m_dstEnvColor = _float4(1.1f, 0.8f, 0.8f, 1.f);
 		break;
 	case CStageControlTower::PerfectEvade:
 		m_envColorDuration = 0.5f;
 		colorRatio = 2.f;
 		//m_dstEnvColor = _float4(0.024f * colorRatio, 0.075f * colorRatio, 0.341f * colorRatio, 1.f);
-		m_dstEnvColor = _float4(0.9f, 0.9f, 0.9f, 1.f);
+		m_dstEnvColor = _float4(0.8f, 0.8f, 1.2f, 1.f);
 		break;
 	default:
 		break;

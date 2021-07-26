@@ -43,10 +43,10 @@ void CBronya_Ult_Laser::Awake()
 	m_spTransform->SetSizeY(1.f);
 	m_spTransform->SetSizeZ(1.f);
 	m_spMesh->SetMeshData(L"Scout_Laser");
-	m_spTexture->AddTexture(L"BallColor");
-	m_spTexture->AddTexture(L"BallColor");
+	m_spTexture->AddTexture(L"LaserColor2");
+	m_spTexture->AddTexture(L"LaserColor2");
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 
 }
 

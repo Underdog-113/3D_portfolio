@@ -71,6 +71,9 @@ void CBossStagePhaseControl::Update(void)
 		m_spBronya->GetTransform()->SetPosition(0.f, 0.f, 0.f);
 		m_spBronya->SelectChannelID();
 		m_spBronya->SetIsEnabled(true);
+
+		//ui off
+		static_cast<Engine::CCanvas*>(Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(false);
 		++m_curPhase;
 		break;
 
@@ -100,6 +103,20 @@ void CBossStagePhaseControl::Update(void)
 			Engine::CSoundManager::GetInstance()->PlayBGM(L"BronyaBGM.mp3");
 			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 			m_isBossMovieOff = true;
+			
+		}
+
+		m_uiOnTimer += GET_DT;
+		if (!m_uiOn && m_uiOnTimer > 0.5f)
+		{
+			// ui on
+			Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
+			CBattleUiManager::GetInstance()->QteOff(0);
+			CBattleUiManager::GetInstance()->QteOff(1);
+			CBattleUiManager::GetInstance()->SquadOff(Engine::GET_CUR_SCENE);
+			CBattleUiManager::GetInstance()->WaitingPlayerSetting();
+
+			m_uiOn = true;
 		}
 
 		if (m_spBronya->GetComponent<CPatternMachineC>()->GetOnDie())

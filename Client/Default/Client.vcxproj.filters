@@ -1138,6 +1138,9 @@
     <Filter Include="04.Shader\09.AlphaMaskShader\AlphaMaskGlowShader">
       <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\20.BronyaShader">
+      <UniqueIdentifier>{181904bf-731c-4f0e-9de6-1140d4ae824e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2389,6 +2392,9 @@
     <ClInclude Include="..\Header\TwoConversationC.h">
       <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaShader.h">
+      <Filter>04.Shader\20.BronyaShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3550,6 +3556,9 @@
     <ClCompile Include="..\Code\TwoConversationC.cpp">
       <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\BronyaShader.cpp">
+      <Filter>04.Shader\20.BronyaShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3638,6 +3647,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ElevatorBaseShader.fx">
       <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BronyaShader.fx">
+      <Filter>04.Shader\20.BronyaShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

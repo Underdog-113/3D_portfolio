@@ -45,8 +45,8 @@ void CKianaBranchSign::Awake(void)
 	__super::Awake();
 	m_spTexture->AddTexture(L"YellowFlare");
 	m_spTexture->AddTexture(L"YellowFlare");
-	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 
 }
 

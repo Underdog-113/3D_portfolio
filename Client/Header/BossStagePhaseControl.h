@@ -46,7 +46,9 @@ private:
 	_bool m_isBossMovieOff = false;
 
 	_bool m_bossBattleBGM = false;
+	_bool m_uiOn = false;
 
+	_float m_uiOnTimer = 0.f;
 	_float m_victoryTimer = 0.f;
 
 };
