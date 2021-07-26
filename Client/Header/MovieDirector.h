@@ -40,6 +40,8 @@
 #define ShotName_GaneshaBorn		L"GaneshaBorn"
 #define ShotName_BronyaBorn			L"BronyaBorn"
 
+#define TakeName_SimpleWhiteFadeIn  L"WhiteFadeIn"
+#define TakeName_SimpleWhiteFadeOut L"WhiteFadeOut"
 
 #define TakeName_SimpleBlackFadeIn	L"BlackFadeIn"
 #define TakeName_SimpleBlackFadeOut L"BlackFadeOut"
@@ -74,6 +76,9 @@ public:
 
 	void Create_AllTakes();
 
+	void CreateTake_WhiteFadeIn();
+	void CreateTake_WhiteFadeOut();
+
 	void CreateTake_BlackFadeIn();
 	void CreateTake_BlackFadeOut();
 
@@ -86,6 +91,8 @@ public:
 	void CreateGanshaBornShakeChannel();
 
 public:
+	void StartTake_WhiteFadeIn(_float startTime, _float endTime);
+	void StartTake_WhiteFadeOut(_float startTime, _float endTime);
 	void StartTake_BlackFadeIn();
 	void StartTake_BlackFadeOut();
 

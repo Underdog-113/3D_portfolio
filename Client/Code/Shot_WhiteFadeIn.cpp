@@ -17,7 +17,7 @@ void CShot_WhiteFadeIn::Ready(CTake * pTake, _float startTimeline, _float endTim
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
 
-	m_desc.pWhiteFade->SetAlpha(0.f);
+	m_desc.pWhiteFade->SetAlpha(1.f);
 }
 
 void CShot_WhiteFadeIn::Enter()
@@ -39,7 +39,7 @@ void CShot_WhiteFadeIn::Cut()
 
 void CShot_WhiteFadeIn::Rollback()
 {
-	m_desc.pWhiteFade->SetAlpha(0.f);
+	m_desc.pWhiteFade->SetAlpha(1.f);
 }
 
 

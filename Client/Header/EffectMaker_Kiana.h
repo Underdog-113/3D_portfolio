@@ -9,6 +9,7 @@ public:
 	~CEffectMaker_Kiana();
 
 	void CreateEffect_Attack1();
+	void ParentOff_Attack1();
 	void CreateEffect_Attack2();
 	void CreateEffect_Attack3();
 	void CreateEffect_Attack4(_float yPos);
@@ -34,6 +35,11 @@ public:
 private:
 	CKiana* m_pKiana;
 	float m_forwardOffset = 1.f;
+
+private:
+	SP(Engine::CObject) m_attack1 = nullptr;
+	_bool m_attack1_parentOff = false;
+
 };
 
 

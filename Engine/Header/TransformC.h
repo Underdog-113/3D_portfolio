@@ -85,7 +85,7 @@ public:
 					void				UpdateCamDistance		(void);
 
 					
-					
+					void				RemoveParent			(void);
 
 
 public:/* now tessssssstting */

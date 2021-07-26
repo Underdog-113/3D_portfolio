@@ -298,18 +298,40 @@ SP(Engine::CObject) CStageControlTower::CreateValkyrie(Engine::CScene * pCurScen
 // 		warshipStat.SetWeaponCrt(pStatData->GetWeaponData()->GetHoesim());
 // 
 // 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(spKianaClone.get());
-		//pValkyrie->Set
+		V_WarshipStat warshipStat;
+		warshipStat.SetLevel(pStatData->GetLevel() + Kiana_Bonus_Level);
+
+		V_Stat* pStat = new V_Kiana_Stat;
+		pStat->SetupStatus(&warshipStat);
+
+		((CValkyrie*)spKianaClone.get())->SetStat(pStat);
 
 		return spKianaClone;
 	}
 	else if (!wcscmp(name.c_str(), L"테레사·아포칼립스"))
 	{
 		SP(Engine::CObject) spTheresaClone = pCurScene->GetObjectFactory()->AddClone(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
+
+		V_WarshipStat warshipStat;
+		warshipStat.SetLevel(pStatData->GetLevel() + Theresa_Bonus_Level);
+
+		V_Stat* pStat = new V_Kiana_Stat;
+		pStat->SetupStatus(&warshipStat);
+
+		((CValkyrie*)spTheresaClone.get())->SetStat(pStat);
 		return spTheresaClone;
 	}
 	else if (!wcscmp(name.c_str(), L"야에 사쿠라"))
 	{
 		SP(Engine::CObject) spSakuraClone = pCurScene->GetObjectFactory()->AddClone(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
+
+		V_WarshipStat warshipStat;
+		warshipStat.SetLevel(pStatData->GetLevel() + Sakura_Bonus_Level);
+
+		V_Stat* pStat = new V_Kiana_Stat;
+		pStat->SetupStatus(&warshipStat);
+
+		((CValkyrie*)spSakuraClone.get())->SetStat(pStat);
 		return spSakuraClone;
 	}
 	else
@@ -1090,6 +1112,8 @@ void CStageControlTower::SetVertCorrecting(_bool val)
 
 void CStageControlTower::OnPerfectEvadeMode()
 {
+	Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::PLAYEREFFECT_CH2);
+	Engine::CSoundManager::GetInstance()->StartSound(L"PerpectEvade.wav", (_uint)EChannelID::PLAYEREFFECT_CH2);
 	m_pTimeSeeker->OnPerfectEvadeMode();
 }
 
