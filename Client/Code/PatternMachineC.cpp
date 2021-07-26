@@ -144,7 +144,8 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	//{
 	//	//_float3 pos = m_pOwner->GetTransform()->GetPosition();
-	//	_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward();
+	//	//_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward();
+	//	_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 	//	std::cout << "x : " << pos.x << std::endl;
 	//	std::cout << "y : " << pos.y << std::endl;
 	//	std::cout << "z : " << pos.z << std::endl;
