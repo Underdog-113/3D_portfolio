@@ -37,5 +37,7 @@ private:
 
 	_bool m_enable;
 	_float m_dir;
+
+	_bool m_gameEnd;
 };
 #endif

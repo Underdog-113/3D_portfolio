@@ -76,6 +76,14 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 
 			GetOwner()->SetDeleteThis(true);
 		}
+
+		if (CBattleUiManager::GetInstance()->GetBattleEnd())
+		{
+			GetOwner()->GetComponent<Engine::CTransformC>()->SetLerpSpeed(5.0f);
+			GetOwner()->GetComponent<Engine::CTransformC>()->SetLerpOn(true);
+			GetOwner()->GetComponent<Engine::CTransformC>()->SetGoalForward(m_currentValkyrie->GetTransform()->GetPosition());
+			GetOwner()->GetComponent<Engine::CTransformC>()->Lerp();
+		}
 	}
 }
 

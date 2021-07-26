@@ -24,6 +24,8 @@
 
 #include "Stage_Wall.h"
 
+#include "BattleEndScene.h"
+
 COneStageScene::COneStageScene()
 {
 }
@@ -100,6 +102,12 @@ void COneStageScene::Update(void)
 	{
 		m_spSky->GetTransform()->SetRotationY(
 			m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
+	}
+
+	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_Q))
+	{
+		CButtonManager::GetInstance()->OnDestroy();
+		GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
 	}
 }
 

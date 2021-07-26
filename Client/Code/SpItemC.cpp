@@ -69,11 +69,20 @@ void CSpItemC::Update(SP(CComponent) spThis)
 
 		_float3 pos = GetOwner()->GetTransform()->GetPosition();
 		pos.y = m_oldY;
+
 		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.35)
 		{
 			_float value = min(m_currentValkyrie->GetStat()->GetCurSp() + (_float)m_spValue, m_currentValkyrie->GetStat()->GetMaxSp());
 			m_currentValkyrie->GetStat()->SetCurSp(value);
 			GetOwner()->SetDeleteThis(true);
+		}
+
+		if (CBattleUiManager::GetInstance()->GetBattleEnd())
+		{
+			GetOwner()->GetComponent<Engine::CTransformC>()->SetLerpSpeed(5.0f);
+			GetOwner()->GetComponent<Engine::CTransformC>()->SetLerpOn(true);
+			GetOwner()->GetComponent<Engine::CTransformC>()->SetGoalForward(m_currentValkyrie->GetTransform()->GetPosition());
+			GetOwner()->GetComponent<Engine::CTransformC>()->Lerp();
 		}
 	}
 }

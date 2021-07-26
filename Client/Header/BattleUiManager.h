@@ -142,6 +142,8 @@ private:
 	std::vector<Engine::CSlider*> m_specialUBar;
 
 	std::vector<Engine::CObject*> m_vQte;
+
+	GETTOR_SETTOR(_bool, m_battleEnd, false, BattleEnd);
 };
 
 
