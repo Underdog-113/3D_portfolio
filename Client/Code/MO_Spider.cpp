@@ -222,3 +222,9 @@ SP(Engine::CObject) CMO_Spider::CreateEffect(std::wstring name)
 
 	return spMeshEffect;
 }
+
+void CMO_Spider::MonsterDead()
+{
+	__super::MonsterDead();
+
+}

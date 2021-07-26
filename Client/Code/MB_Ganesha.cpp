@@ -208,6 +208,10 @@ void CMB_Ganesha::ApplyHitInfo(HitInfo info)
 
 void CMB_Ganesha::MonsterDead()
 {
+	__super::MonsterDead();
+
+
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 

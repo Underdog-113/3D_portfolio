@@ -36,6 +36,7 @@ public:
 	static		SP(CMO_Spider)			Create(_bool isStatic, Engine::CScene* pScene);
 				void					SetStatus(BaseStat stat);
 				SP(Engine::CObject)		CreateEffect(std::wstring name);
+				void					MonsterDead() override;
 
 private:
 	static		_uint					m_s_uniqueID;
