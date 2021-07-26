@@ -53,9 +53,9 @@ void CItemObject::Awake()
 void CItemObject::Start()
 {
 	__super::Start();
-	m_iItemNum = rand() % 3;
+	_int iItemNum = rand() % 3;
 
-	switch (m_iItemNum)
+	switch (iItemNum)
 	{
 	case 0:
 		m_eItemStyle = ItemStyle::COIN;
@@ -63,6 +63,7 @@ void CItemObject::Start()
 		m_spTexture->ChangeTexture(L"Coin",0,0);
 		m_spTexture->ChangeTexture(L"Coin",0,1);
 		AddComponent<CMoneyItemC>()->AddDataInit(100, 50);
+		GetComponent<CMoneyItemC>()->SetOwner(this);
 		break;
 	case 1:
 		m_eItemStyle = ItemStyle::SP;
@@ -70,14 +71,17 @@ void CItemObject::Start()
 		m_spTexture->ChangeTexture(L"Light_Box2", 0, 0);
 		m_spTexture->ChangeTexture(L"Power", 0, 1);
 		AddComponent<CSpItemC>()->AddDataInit(100, 50);
+		GetComponent<CSpItemC>()->SetOwner(this);
 		break;
 	case 2:
 		m_eItemStyle = ItemStyle::HP;
 		AddComponent<CHpItemC>()->AddDataInit(100, 50);
+		GetComponent<CHpItemC>()->SetOwner(this);
 		break;
 	default:
 		m_eItemStyle = ItemStyle::HP;
 		AddComponent<CHpItemC>()->AddDataInit(100, 50);
+		GetComponent<CHpItemC>()->SetOwner(this);
 		break;
 	}
 

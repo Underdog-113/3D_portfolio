@@ -41,7 +41,6 @@ private:
 
 private:
 	ItemStyle m_eItemStyle;
-	_int m_iItemNum = 0;
 
 };
 

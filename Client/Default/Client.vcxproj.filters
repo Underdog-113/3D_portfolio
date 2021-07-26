@@ -3589,13 +3589,11 @@
     <ClCompile Include="..\Code\Stage3GlowShader.cpp">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Code\ItemObject.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item</Filter>
-=======
+    </ClCompile>
     <ClCompile Include="..\Code\IndicatorC.cpp">
       <Filter>03.Component\06.Indicator</Filter>
->>>>>>> ed31b4c6f44ffcbfac21114990093cc57d3bd640
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
