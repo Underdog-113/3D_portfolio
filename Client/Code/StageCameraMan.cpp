@@ -132,7 +132,7 @@ void CStageCameraMan::PivotChasing()
 	if (m_isTargeting)
 	{
 		OnTargetChasing();
-		RotateCameraHorizontal();
+		//RotateCameraHorizontal();
 	}
 	else
 	{
@@ -693,7 +693,7 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 void CStageCameraMan::RotateCameraHorizontal()
 {
 	_float angle = m_rotateYDst - m_rotateLerpStart;
-	if (angle < D3DXToRadian(1.f))
+	if (abs(angle) < D3DXToRadian(1.f))
 	{
 		m_rotateLerpStart = m_rotateYDst;
 		m_spCamera->SetLookAngleUp(m_rotateYDst);
@@ -797,7 +797,11 @@ void CStageCameraMan::ManualControlMode()
 	float inverseRate = 1.f - m_rotateLerpTimer;
 	float sLerpTimer = 1.f - inverseRate * inverseRate;
 
-	RotateCameraHorizontal();
+
+	_float lerpPoint = GetLerpFloat(m_rotateLerpStart, m_rotateYDst, sLerpTimer);
+	m_spCamera->SetLookAngleUp(lerpPoint);
+	m_rotateLerpStart = lerpPoint;
+
 }
 
 void CStageCameraMan::AutoControlMode()
