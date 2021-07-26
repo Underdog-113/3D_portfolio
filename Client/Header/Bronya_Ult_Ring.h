@@ -39,9 +39,9 @@ private:
 	_float m_fRingSize;
 
 private:
-	SP(Engine::CObject) m_spCannon;
 	SP(Engine::CObject) m_spWind;
 
+	GETTOR(SP(Engine::CObject), m_spCannon, nullptr, Cannon)
 	GETTOR_SETTOR(_bool, m_disappear, false, Disappear)
 };
 

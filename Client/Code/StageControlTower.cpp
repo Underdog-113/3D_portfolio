@@ -617,9 +617,7 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 	// 7. ÀÌÆåÆ®
 	SP(Engine::CObject) spSoftEffect
 		= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterHitEffect", true);
-	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-	spSoftEffect->GetComponent<Engine::CTextureC>()->AddTexture(L"Hit_Yellow");
-	spSoftEffect->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::SoftEffectShader);
+
 
 	_float3 monsterPos = pMonster->GetTransform()->GetPosition();
 	monsterPos.y += pMonster->GetComponent<Engine::CMeshC>()->GetHalfYOffset();
@@ -682,6 +680,11 @@ void CStageControlTower::HitMonster(Engine::CObject * pValkyrie, Engine::CObject
 
 		}
 
+		if (m_pCurActor->GetStat()->GetType() == V_Stat::THERESA)
+		{
+			CBattleUiManager::GetInstance()->SpecialUIUp();
+			CBattleUiManager::GetInstance()->SpecialUIUp();
+		}
 	}
 	else
 	{
@@ -873,6 +876,7 @@ void CStageControlTower::SwitchValkyrie(Squad_Role role)
 		m_pCurActor->SetIsQTESwitch(true);
 		m_isQTEUsed = true;
 		m_isQTESwitch = false;
+		m_pLinker->QTEButtonEffectOff();
 	}
 
 	m_pCameraMan->SetIsSwitching(true);

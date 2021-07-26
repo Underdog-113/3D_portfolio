@@ -35,7 +35,7 @@ void CValkyrieWeapon::Start()
 	if (m_vPlayer != nullptr)
 		m_vPlayer->SetDeleteThis(true);
 
-	wstring name = data->GetName();
+	std::wstring name = data->GetName();
 	if (name == L"키아나·카스라나")
 	{
 		// 키아나 오브젝트 생성 -> IDLE로 변경

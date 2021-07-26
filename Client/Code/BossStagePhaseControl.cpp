@@ -75,16 +75,18 @@ void CBossStagePhaseControl::Update(void)
 		break;
 		//After being collided with PhaseChanger0
 	case (_int)ETwoStagePhase::BossMovie:
-		if (false == m_isBossMovieOn)
-		{
-			m_spBronya->GetTransform()->SetPosition(186.21f, -4.f, -0.84f);
+// 		if (false == m_isBossMovieOn)
+// 		{
+// 			m_spBronya->GetTransform()->SetPosition(186.21f, -4.f, -0.84f);
+// 
+// 			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+// 			Engine::CSoundManager::GetInstance()->PlayBGM(L"Bronya_Intro.wav");
+// 			// movie
+// 			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BronyaBorn();
+// 			m_isBossMovieOn = true;
+// 		}
 
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->PlayBGM(L"Bronya_Intro.wav");
-			// movie
-			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BronyaBorn();
-			m_isBossMovieOn = true;
-		}
+		++m_curPhase;
 		break;
 
 	case (_int)ETwoStagePhase::Boss:

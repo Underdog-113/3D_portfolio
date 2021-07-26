@@ -30,7 +30,7 @@ void CFSM_GaneshaC::Start(SP(CComponent) spThis)
 
 	__super::Start(spThis);
 
-	SetStartState(Name_Ganesha_Born);
+	SetStartState(Name_Ganesha_StandBy);
 	m_curState->DoEnter();
 }
 

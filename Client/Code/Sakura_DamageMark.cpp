@@ -70,6 +70,8 @@ void CSakura_DamageMark::Update(void)
 	__super::Update();
 
 	UpdateFrame(0.05f);
+	m_spTransform->SetPosition(m_pTargetObject->GetTransform()->GetPosition());
+	m_spTransform->AddPositionY(m_pTargetObject->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 2.1f);
 }
 
 void CSakura_DamageMark::LateUpdate(void)

@@ -112,6 +112,8 @@ void CTheresa::Update(void)
 	UpdatePivotMatrix(m_pRightHand_World, m_pRightHand_Frame);
 	UpdatePivotMatrix(m_pLeftHand_World, m_pLeftHand_Frame);
 	UpdatePivotMatrix(m_pAxePivot_World, m_pAxePivot_Frame);
+
+	CBattleUiManager::GetInstance()->SpecialUIAdd(GET_PLAYER_DT * 0.1f);
 }
 
 void CTheresa::LateUpdate(void)

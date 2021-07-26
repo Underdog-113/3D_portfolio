@@ -58,6 +58,7 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 			m_onAtkBall = false;
 			m_offAtkBall = false;
 			m_onShockEffect = false;
+			PatternPlaySound(L"Bronya_DownAttack.wav", pOwner);
 			return;
 		}
 	}

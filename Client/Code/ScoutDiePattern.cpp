@@ -22,6 +22,12 @@ void CScoutDiePattern::Pattern(Engine::CObject* pOwner)
 {
 	SP(CFSM_ScoutC) fsm = pOwner->GetComponent<CFSM_ScoutC>();
 
+	//// 이펙트가 남아있다면 지워
+	//// shoot2
+	//pOwner->GetComponent<CPatternMachineC>()->GetPatterns()[5]->Pattern(pOwner);
+
+	// shoot3
+
 	// 내가 hp가 0이 되면
 	if (Name_DIE != fsm->GetCurStateString() && 0 >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurHp())
 	{

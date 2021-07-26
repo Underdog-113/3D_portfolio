@@ -10,6 +10,7 @@ float4 gWorldLightPosition;
 float  gTime;
 float  gAlpha;
 float  m_defaultDissolveVal = 0.9f;
+float  gEmissionPow = 0.25f;
 
 float3 gDissolveLineColor = float3(1,0,0);
 
@@ -166,7 +167,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 	{
 		diffuse = (DissolveLineSize * gDissolveLineColor.rgb + blendColor.rgb);
 		Out.vColor = float4(diffuse, multiple);
-		Out.vEmissive = float4(float4(diffuse, multiple).rgb, gAlpha);
+		Out.vEmissive = float4(float4(diffuse, multiple).rgb * gEmissionPow, gAlpha);
 
 		return Out;
 	}

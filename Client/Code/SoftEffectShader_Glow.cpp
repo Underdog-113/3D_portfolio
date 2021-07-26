@@ -31,9 +31,7 @@ void CSoftEffectShader_Glow::Awake()
 	__super::Awake();
 	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
 	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
-	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Normal");
-	m_vRenderTargets[2] = pRTM->FindRenderTarget(L"Target_Depth");
-	m_vRenderTargets[3] = pRTM->FindRenderTarget(L"Target_Emissive");
+	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
 void CSoftEffectShader_Glow::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)

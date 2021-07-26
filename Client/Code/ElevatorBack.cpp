@@ -69,12 +69,12 @@ void CElevatorBack::Update(void)
 {
 	__super::Update();
 
-	if (m_spTransform->GetPosition().y + m_TempPosY >= -20.f)
+	if (m_spTransform->GetPosition().y + m_TempPosY >= -25.f)
 	{
 		m_spTransform->AddPositionY(-1.5f * GET_DT);
 	}
 
-	if (m_spTransform->GetPosition().y + m_TempPosY < -20.f)
+	if (m_spTransform->GetPosition().y + m_TempPosY < -30.f)
 	{
 		this->SetDeleteThis(true);
 	}

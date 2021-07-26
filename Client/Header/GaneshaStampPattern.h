@@ -7,6 +7,8 @@ class CGaneshaStampPattern : public CATBPattern
 {
 	SMART_DELETER_REGISTER
 
+	enum Effects { stamp };
+
 private:
 	explicit CGaneshaStampPattern();
 	virtual ~CGaneshaStampPattern();

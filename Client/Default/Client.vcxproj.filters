@@ -1114,6 +1114,9 @@
     <Filter Include="02.Objects\03.Effect\02.Particle\Sakura_Particle">
       <UniqueIdentifier>{2db064b7-acb3-417d-a390-e2663dff61c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne">
+      <UniqueIdentifier>{51620c1a-dbf0-4a48-a586-921864c882a3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\02.Particle\MonsterDieParticle">
       <UniqueIdentifier>{deb8e34a-4245-4888-a3af-320ebc9f647f}</UniqueIdentifier>
     </Filter>
@@ -1128,6 +1131,9 @@
     </Filter>
     <Filter Include="04.Shader\19.MapShaders\00.ElevatorShader">
       <UniqueIdentifier>{d24913b4-133b-46c9-991d-6569ebc98fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff">
+      <UniqueIdentifier>{09dbe463-0f52-48b9-bb34-2ad8c29697c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2343,6 +2349,9 @@
     <ClInclude Include="..\Header\Sakura_Particle.h">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\GaneshaAirbornePattern.h">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne</Filter>
+    </ClInclude>
     <ClInclude Include="..\Header\Shot_ActorVictory.h">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
     </ClInclude>
@@ -2373,6 +2382,9 @@
     </ClInclude>
     <ClInclude Include="..\Header\ElevatorBaseShader.h">
       <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\GachaBox_Eff.h">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3498,6 +3510,9 @@
     <ClCompile Include="..\Code\Sakura_Particle.cpp">
       <Filter>02.Objects\03.Effect\02.Particle\Sakura_Particle</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp">
+      <Filter>02.Objects\01.ForUnit\01.Monster\MB_Ganesha\Pattern\06.Airborne</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Shot_ActorVictory.cpp">
       <Filter>10.ControlTower\MovieDirector\CameraShot\Special</Filter>
     </ClCompile>
@@ -3522,12 +3537,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\03.Theresa_Ult\Theresa_Ult_Charge</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\UltScrShader.cpp">
       <Filter>04.Shader\18.UltScrShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ElevatorBaseShader.cpp">
       <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GachaBox_Eff.cpp">
+      <Filter>02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

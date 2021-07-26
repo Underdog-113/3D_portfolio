@@ -64,13 +64,14 @@ void CSakura_EvadeSkill_Start::FixedUpdate()
 void CSakura_EvadeSkill_Start::Update()
 {
 	__super::Update();
-	m_fTime += GET_DT;
-	m_fSpeed += 0.7f * GET_DT;
+	m_fTime += GET_PLAYER_DT;
+	m_fSpeed += 0.7f * GET_PLAYER_DT;
 
 	if (m_fTime >= 0.7f)
 	{
 		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_EvadeSkill_Loop", true, (_uint)Engine::ELayerID::Effect);
 		spObj->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		spObj->GetTransform()->SetSize(2.f, 2.f, 2.f);
 		this->SetDeleteThis(true);	
 		m_fTime = 0.f;
 	}

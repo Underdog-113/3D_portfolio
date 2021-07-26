@@ -42,11 +42,11 @@ void CSickle_Trail::Awake()
 	__super::Awake();
 
 	m_spMesh->SetMeshData(L"Sickle_Attack");
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"BloomMask");
 	m_spTexture->AddTexture(L"AttackTrail_01");
 	m_spTexture->AddTexture(L"Eff_Noise_08");
-	m_spShader->AddShader((_int)EShaderID::MeshTrailShader);
+	m_spShader->AddShader((_int)EShaderID::MeshTrailShader_Glow);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 }
 
 void CSickle_Trail::Start()
@@ -82,6 +82,7 @@ void CSickle_Trail::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gTrailAlpha", m_fTrailAlpha);
+	pEffect->SetFloat("gEmissionPow", 0.35f);
 	pEffect->CommitChanges();
 }
 

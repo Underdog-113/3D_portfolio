@@ -71,6 +71,7 @@ void CObject::OnDestroy(void)
 	for (auto& component : m_mComponents)
 	{
 		component.second->SetOwner(nullptr);
+		_int a = component.second.use_count();
 		component.second.reset();
 	}
 

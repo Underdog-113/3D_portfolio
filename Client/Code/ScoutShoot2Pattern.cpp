@@ -209,6 +209,10 @@ SP(CScoutShoot2Pattern) CScoutShoot2Pattern::Create()
 	return spInstance;
 }
 
+void CScoutShoot2Pattern::DeleteEffects()
+{
+}
+
 void CScoutShoot2Pattern::SetMoveSound()
 {
 	/************************* Choose Move Sound */

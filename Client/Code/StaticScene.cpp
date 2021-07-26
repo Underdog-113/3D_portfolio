@@ -160,7 +160,7 @@
 #include "MonsterDieParticle.h"
 
 ///// Ingame Deco Effect //////
-//Stuc
+//Stun
 #include "Stun_Eff.h"
 #include "Stun_Star.h"
 
@@ -193,6 +193,7 @@
 #include "Elevator_L_Door.h"
 #include "Elevator_R_Door.h"
 
+#include "GachaBox_Eff.h"
 CStaticScene::CStaticScene()
 {
 }
@@ -749,7 +750,7 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spBronya_Ult_Range(CBronya_Ult_Range::Create(true, this));	
 	GetObjectFactory()->AddPrototype(spBronya_Ult_Range);
 
-	SP(CSoftEffect) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
+	SP(CMeshEffect_Client) spBronya_UIt_Laser(CBronya_Ult_Laser::Create(true, this));
 	GetObjectFactory()->AddPrototype(spBronya_UIt_Laser);
 
 	// Ingame
@@ -797,5 +798,8 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spStun_Star(CStun_Star::Create(true, this));
 	GetObjectFactory()->AddPrototype(spStun_Star);
+
+	SP(CMeshEffect_Client) spGachaBoxEff(CGachaBox_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGachaBoxEff);
 
 }

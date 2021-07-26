@@ -70,7 +70,7 @@ void CHpItemC::Update(SP(CComponent) spThis)
 		_float3 pos = GetOwner()->GetTransform()->GetPosition();
 		pos.y = m_oldY;
 
-		cout << Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) << endl;
+		std::cout << Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) << std::endl;
 
 		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.35f)
 		{

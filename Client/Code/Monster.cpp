@@ -4,6 +4,8 @@
 #include "AttackBall.h"
 #include "AttackBox.h"
 #include "ClientScene.h"
+#include "Sakura_DamageMark.h"
+
 _uint CMonster::m_s_channelID = 0;
 
 CMonster::CMonster()
@@ -174,8 +176,10 @@ void CMonster::AttachSakuraMark()
 	{
 		SP(Engine::CObject) spObj;
 		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_DamageMark", true, (_uint)Engine::ELayerID::Effect);
-		spObj->GetTransform()->SetParent(m_spTransform);
-		spObj->GetTransform()->AddPositionY(m_spMesh->GetHalfYOffset() * 2.f);
+		//spObj->GetTransform()->SetParent(m_spTransform);
+		static_cast<CSakura_DamageMark*>(spObj.get())->SetTargetObject(this);
+
+		//spObj->GetTransform()->SetSize(5.f, 5.f, 5.f);
 		m_pStat->SetSakuraMark(spObj);
 	}
 }
@@ -281,6 +285,37 @@ void CMonster::MonsterDead()
 		}
 
 		break;
+	}
+}
+
+void CMonster::ChaseTarget(_float3 targetPos)
+{
+	_float3 dir = targetPos - m_spTransform->GetPosition();
+	dir.y = 0;
+	D3DXVec3Normalize(&dir, &dir);
+
+	m_spTransform->SetGoalForward(dir);
+	m_spTransform->SetSlerpOn(true);
+	//m_spTransform->SetForwardUp(dir, UP_VECTOR);
+}
+
+void CMonster::AddEffect(SP(Engine::CObject) effect)
+{
+	m_vEffects.emplace_back(effect);
+}
+
+void CMonster::DeleteEffect(_int index)
+{
+	auto& iter = m_vEffects.begin();
+
+	for (int i = 0; i < m_vEffects.size(); ++i)
+	{
+		if (index == i)
+		{
+			iter = m_vEffects.erase(iter);
+			break;
+		}
+		++iter;
 	}
 }
 

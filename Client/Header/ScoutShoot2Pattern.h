@@ -16,6 +16,9 @@ public:
 	virtual _float GetCost() { return m_cost; }
 	static SP(CScoutShoot2Pattern) Create();
 
+public:
+	void DeleteEffects();
+
 private:
 	void SetMoveSound();
 

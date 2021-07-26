@@ -59,8 +59,9 @@ void CBronya_Grenade::Start()
 	spDome->GetTransform()->SetPositionY(m_spTransform->GetPosition().y - 0.2f);
 
 	SP(Engine::CObject) spImpact = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Impact", true);
-	spImpact->GetTransform()->SetSize(size);
+	spImpact->GetTransform()->SetSize(_float3(1.85f, 1.85f, 1.85f));
 	spImpact->GetTransform()->SetPosition(m_spTransform->GetPosition());
+	spImpact->GetTransform()->SetPositionY(m_spTransform->GetPosition().y + 0.6f);
 
 	SP(Engine::CObject) spTriRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_TriRing", true);
 	spTriRing->GetTransform()->SetSize(size);

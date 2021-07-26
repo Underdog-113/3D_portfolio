@@ -87,9 +87,9 @@ public:
 
 private:
 
-	float FloatLerp(float _start, float _end, float _time)
+	float FloatLerp(float start, float end, float time)
 	{
-		return _start * (1.f - _time) + _time * _end;
+		return start * (1.f - time) + time * end;
 	}
 
 	bool CheckNoAction();
