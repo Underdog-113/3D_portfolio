@@ -50,6 +50,16 @@ void CValkyrie::Update(void)
 
 	if (m_skillTimer < m_pStat->GetSkillCoolTime())
 		m_skillTimer += GET_PLAYER_DT;
+
+	if (m_isStun)
+	{
+		m_stunTimer += GET_PLAYER_DT;
+		if (m_stunTimer > m_stunDuration)
+		{
+			m_spStateMachine->ChangeState(L"StandBy");
+			m_isStun = false;
+		}
+	}
 }
 
 void CValkyrie::CoolTimeUpdate(void)
@@ -109,6 +119,10 @@ void CValkyrie::OnCollisionExit(Engine::_CollisionInfo ci)
 		ci.pOtherCollider->GetCollisionID() == (_uint)ECollisionID::EnemyHitBox)
 		m_spMesh->GetRootMotion()->SetIsRemoveMovement(false);
 
+}
+
+void CValkyrie::ApplyHitInfo(HitInfo info)
+{
 }
 
 void CValkyrie::CreateAttackBall(CAttackBall ** ppAttackBall)
@@ -257,4 +271,13 @@ _bool CValkyrie::CheckSwitchable()
 		return false;
 
 	return true;
+}
+
+void CValkyrie::SetStunState(_float stunTime)
+{
+	m_stunDuration = stunTime;
+	m_stunTimer = 0.f;
+	m_isStun = true;
+
+	m_spStateMachine->ChangeState(L"Stun");
 }

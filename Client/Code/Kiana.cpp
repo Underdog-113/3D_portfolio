@@ -81,9 +81,13 @@ void CKiana::Start(void)
 	// status
 	V_WarshipStat stat;
 
-	m_pStat = new V_Kiana_Stat;
+	if (!m_pStat)
+	{
+		m_pStat = new V_Kiana_Stat;
+		m_pStat->SetupStatus(&stat);
+	}
+
 	m_pStat->SetUltraCost(75.f);
-	m_pStat->SetupStatus(&stat);
 
 	__super::Start();
 	m_spDebug = AddComponent<Engine::CDebugC>();

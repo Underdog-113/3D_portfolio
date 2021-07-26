@@ -62,9 +62,15 @@ void CTheresa::Start(void)
 	// status
 	V_WarshipStat stat;
 
-	m_pStat = new V_Theresa_Stat;
+
+	if (!m_pStat)
+	{
+		m_pStat = new V_Kiana_Stat;
+		m_pStat->SetupStatus(&stat);
+	}
 	m_pStat->SetType(V_Stat::THERESA);
-	m_pStat->SetupStatus(&stat);
+	m_pStat->SetUltraCost(100.f);
+	m_pStat->SetSkillCost(15.f);
 
 	__super::Start();
 	m_spDebug = AddComponent<Engine::CDebugC>();

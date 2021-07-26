@@ -116,15 +116,18 @@ void CMovieDirector::UpdateDirector()
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
 	{
 		//StartTake_SakuraVictory();
-		StartTake_GaneshBorn();
+		//StartTake_GaneshBorn();
+		StartTake_WhiteFadeOut(0.f, 0.5f);
 	}
 
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_3))
 	{
-		StartTake_SakuraVictory();
+		//StartTake_SakuraVictory();
 		//StartTake_GaneshBorn();
-		m_pCurTake->SetEditMode(true);
+		//m_pCurTake->SetEditMode(true);
+
+		StartTake_WhiteFadeIn(0.f, 1.f);
 	}
 
 // 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
@@ -211,6 +214,8 @@ void CMovieDirector::Create_AllShots()
 
 void CMovieDirector::Create_AllTakes()
 {
+	CreateTake_WhiteFadeIn();
+	CreateTake_WhiteFadeOut();
 	CreateTake_BlackFadeIn();
 	CreateTake_BlackFadeOut();
 	CreateTake_WinningSlow();
@@ -219,6 +224,24 @@ void CMovieDirector::Create_AllTakes()
 	CreateTake_SakuraVictory();
 	CreateTake_GaneshaBorn();
 	CreateTake_BronyaBorn();
+}
+
+void CMovieDirector::CreateTake_WhiteFadeIn()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_WhiteFadeIn, m_pShot_WhiteFadeIn);
+
+	m_takeMap.emplace(TakeName_SimpleWhiteFadeIn, pTake);
+}
+
+void CMovieDirector::CreateTake_WhiteFadeOut()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_WhiteFadeOut, m_pShot_WhiteFadeOut);
+
+	m_takeMap.emplace(TakeName_SimpleWhiteFadeOut, pTake);
 }
 
 void CMovieDirector::CreateTake_BlackFadeIn()
@@ -393,6 +416,37 @@ void CMovieDirector::CreateGanshaBornShakeChannel()
 	m_pGaneshaShakeChannel->m_yWave.frequency = 20.f;
 	m_pGaneshaShakeChannel->m_yWave.offset = 0.f;
 
+}
+
+void CMovieDirector::StartTake_WhiteFadeIn(_float startTime, _float endTime)
+{
+	auto pTake = m_takeMap[TakeName_SimpleWhiteFadeIn];
+	m_spWhiteFadeImage->SetIsEnabled(true);
+
+
+	CShot_WhiteFadeIn::Desc wfi_desc;
+	wfi_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeIn, startTime, endTime, &wfi_desc, startTime);
+	
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
+}
+
+void CMovieDirector::StartTake_WhiteFadeOut(_float startTime, _float endTime)
+{
+	auto pTake = m_takeMap[TakeName_SimpleWhiteFadeOut];
+	m_spWhiteFadeImage->SetIsEnabled(true);
+
+	CShot_WhiteFadeOut::Desc wfo_desc;
+	wfo_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeOut, startTime, endTime, &wfo_desc, startTime);
+	
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
 }
 
 void CMovieDirector::StartTake_BlackFadeIn()
