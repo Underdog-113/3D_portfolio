@@ -17,6 +17,7 @@ protected:
 	GETTOR_SETTOR	(CStageControlTower*,		m_pCT,					nullptr,		ControlTower)
 	GETTOR_SETTOR	(_int,						m_curPhase,				UNDEFINED,		CurPhase)
 
+		_float m_victoryTimer = 0.f;
 };
 
 #endif
