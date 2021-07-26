@@ -35,7 +35,7 @@ void CTake::ActTake()
 
 void CTake::ActTake_EditMode()
 {
-	if (Engine::IMKEY_PRESS(KEY_SHIFT))
+	if (Engine::IMKEY_PRESS(KEY_CONTROL))
 	{
 		if (Engine::IMKEY_PRESS(KEY_LEFT))
 		{
