@@ -30,7 +30,8 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
-	if (Name_Ganesha_Stamp != fsm->GetCurStateString())
+	if (Name_Ganesha_Roll01 != fsm->GetCurStateString() && 
+		Name_Ganesha_Stamp != fsm->GetCurStateString())
 	{
 		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 	}
@@ -146,18 +147,7 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
 
-		// effect
-		_float fX = 0;
-		for (_int i = 0; i < 8; ++i)
-		{
-			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
-
-			// Ganesha Pos X + fX 
-			spObj->GetTransform()->SetPositionX(mPos.x + fX - 0.3f);
-			spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
-			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 0.5f);
-			fX += 0.5f;
-		}
+		static_cast<CMB_Ganesha*>(pOwner)->DoubleJump(mPos);
 	}
 
 	// 내가 stamp 상태고, 적절할 때 어택볼 숨기기

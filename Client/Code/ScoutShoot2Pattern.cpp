@@ -29,8 +29,19 @@ void CScoutShoot2Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_ScoutC) fsm = pOwner->GetComponent<CFSM_ScoutC>();
 
-	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
-	//CoolTime(m_walkTime, m_walkCool, m_walkReady);
+	/************************* Fast Idle */
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(2.f);
+		m_onFastIdle = true;
+	}
+	else if (Name_IDLE != fsm->GetCurStateString() &&
+		true == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		m_onFastIdle = false;
+	}
 
 	// 내가 상대를 추적
 	if (true == m_onChase)

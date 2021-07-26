@@ -5,6 +5,8 @@
 #include "AttackBall.h"
 #include "AttackBox.h"
 
+#include "FSMDefine_Ganesha.h"
+
 _uint CMB_Ganesha::m_s_uniqueID = 0;
 
 CMB_Ganesha::CMB_Ganesha()
@@ -56,7 +58,7 @@ void CMB_Ganesha::Start(void)
 		CGaneshaAirbornePattern::Create(),
 		CGaneshaStunPattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
 	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 
@@ -79,7 +81,8 @@ void CMB_Ganesha::Start(void)
 	m_pStat->SetHPMagnification(4);
 	m_pStat->SetOnSuperArmor(true);
 	m_pStat->SetOnBPShield(false);
-	m_pStat->SetMaxBreakGauge(800.f);
+	//m_pStat->SetMaxBreakGauge(800.f);
+	m_pStat->SetMaxBreakGauge(40.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
 	m_weakTime = 8.f;
 
@@ -210,8 +213,6 @@ void CMB_Ganesha::MonsterDead()
 {
 	__super::MonsterDead();
 
-
-
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 
@@ -223,4 +224,20 @@ SP(CMB_Ganesha) CMB_Ganesha::Create(_bool isStatic, Engine::CScene * pScene)
 	spInstance->Awake();
 
 	return spInstance;
+}
+
+void CMB_Ganesha::DoubleJump(_float3 mPos)
+{
+	// effect
+	_float fX = 0;
+	for (_int i = 0; i < 8; ++i)
+	{
+		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
+
+		// Ganesha Pos X + fX 
+		spObj->GetTransform()->SetPositionX(mPos.x + fX - 0.3f);
+		spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
+		spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 0.5f);
+		fX += 0.5f;
+	}
 }

@@ -5,6 +5,8 @@
 #include "FSMDefine_Ganesha.h"
 #include "MB_Ganesha.h"
 
+#include "Valkyrie.h"
+
 CGaneshaStunPattern::CGaneshaStunPattern()
 {
 }
@@ -15,6 +17,7 @@ CGaneshaStunPattern::~CGaneshaStunPattern()
 
 void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 {
+	_float3 tPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition(); // target pos
 	SP(CFSM_GaneshaC) fsm = pOwner->GetComponent<CFSM_GaneshaC>();
 
 	if (true == m_onStun)
@@ -29,8 +32,6 @@ void CGaneshaStunPattern::Pattern(Engine::CObject* pOwner)
 			std::cout << "Time over" << std::endl;
 		}
 	}
-
-	
 
 	// 내가 break guage가 0이고 stun 상태가 아직 시작 하지 않았다면
 	if (0.f >= static_cast<CMonster*>(pOwner)->GetStat()->GetCurBreakGauge() &&

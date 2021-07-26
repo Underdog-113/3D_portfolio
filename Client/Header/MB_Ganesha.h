@@ -49,8 +49,11 @@ public:
 public:
 	static SP(CMB_Ganesha) Create(_bool isStatic, Engine::CScene* pScene);
 
+	void DoubleJump(_float3 mPos);
+
 private:
 	static _uint m_s_uniqueID;
 
+	GETTOR_SETTOR(_int, m_jumpCnt, 2, JumpCnt)
 };
 

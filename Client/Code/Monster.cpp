@@ -184,6 +184,19 @@ void CMonster::AttachSakuraMark()
 	}
 }
 
+void CMonster::AttachStunMark()
+{
+	if (!m_pStat->GetSakuraMark())
+	{
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stun_Eff", true, (_uint)Engine::ELayerID::Effect);
+		static_cast<CSakura_DamageMark*>(spObj.get())->SetTargetObject(this);
+
+		//spObj->GetTransform()->SetSize(5.f, 5.f, 5.f);
+		m_pStat->SetSakuraMark(spObj);
+	}
+}
+
 void CMonster::ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat * pBoneMat, _float radius)
 {
 	HitInfo info;

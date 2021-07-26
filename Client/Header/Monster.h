@@ -48,6 +48,7 @@ public:
 public:
 	virtual void ApplyHitInfo(HitInfo info) PURE;
 	void AttachSakuraMark();
+	void AttachStunMark();
 	void ActiveAttackBall(_float damageRate, HitInfo::Strength strength, HitInfo::CrowdControl cc, _mat* pBoneMat, _float radius);
 	void UnActiveAttackBall();
 
