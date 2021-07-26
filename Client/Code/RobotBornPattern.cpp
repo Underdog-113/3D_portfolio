@@ -20,14 +20,15 @@ CRobotBornPattern::~CRobotBornPattern()
 
 void CRobotBornPattern::Pattern(Engine::CObject* pOwner)
 {
-// 	SP(CFSM_SickleC) fsm = pOwner->GetComponent<CFSM_SickleC>();
-// 
-// 	// 내가 born 상태이고, 애니가 끝났다면
-// 	if (Name_Sickle_Born == fsm->GetCurStateString() && fsm->GetDM()->IsAnimationEnd())
-// 	{
-// 		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
-// 		fsm->ChangeState(Name_Sickle_StandBy);
-// 	}
+ 	SP(CFSM_RobotC) fsm = pOwner->GetComponent<CFSM_RobotC>();
+ 
+ 	// 내가 born 상태이고, 애니가 끝났다면
+ 	if (Name_StandBy == fsm->GetCurStateString() &&
+		fsm->GetDM()->IsAnimationEnd())
+ 	{
+ 		pOwner->GetComponent<CPatternMachineC>()->SetOnBorn(true);
+ 		fsm->ChangeState(Name_StandBy);
+ 	}
 }
 
 SP(CRobotBornPattern) CRobotBornPattern::Create()

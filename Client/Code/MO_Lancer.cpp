@@ -199,6 +199,8 @@ void CMO_Lancer::SetStatus(BaseStat stat)
 
 void CMO_Lancer::MonsterDead()
 {
+	__super::MonsterDead();
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 
