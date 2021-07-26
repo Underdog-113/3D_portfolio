@@ -123,6 +123,8 @@ private:
 	_uint m_idleMotionIndex = 0;
 	_float m_idleTimer = 0.f;
 
+	_float m_skillDmgRate = 0.8f;
+
 public:
 	// StandBy
 	void StandBy_Init(void);
