@@ -242,7 +242,9 @@
     <FxCompile Include="..\..\Resource\Shader\FinalShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\GlowShader.fx" />
+    <FxCompile Include="..\..\Resource\Shader\GlowShader.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshAlphaTestShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
