@@ -47,6 +47,9 @@ protected:
 		
 	GETTOR_SETTOR	(_mat*,							m_pParentMatrix,	nullptr,	ParentMatrix)
 	GETTOR			(SP(Engine::CObject),			m_spSexdngud,		nullptr,	TestObj)
+
+public:
+	GETTOR_SETTOR(_float, m_fAlpha, 1.f, Alpha)
 };
 
 

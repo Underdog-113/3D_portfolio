@@ -227,7 +227,11 @@ void CStageControlTower::Update(void)
 	{
 		CValkyrie* pValkyrie = static_cast<CValkyrie*>(member.get());
 		a = pValkyrie->GetIsDead();
+
+		if (a == false)
+			break;
 	}
+	
 
 	if (a)
 	{

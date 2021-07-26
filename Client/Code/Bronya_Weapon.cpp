@@ -53,6 +53,7 @@ void CBronya_Weapon::Awake(void)
 void CBronya_Weapon::Start(void)
 {
 	__super::Start();
+	m_fAlpha = 1.f;
 }
 
 void CBronya_Weapon::FixedUpdate(void)
@@ -75,6 +76,8 @@ void CBronya_Weapon::LateUpdate(void)
 void CBronya_Weapon::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->CommitChanges();
 }
 
 void CBronya_Weapon::Render(LPD3DXEFFECT pEffect)
