@@ -15,6 +15,7 @@ _uint CLoading::ThreadMain(void * pArg)
 {
 	CLoading* pLoading = (CLoading*)pArg;
 
+
 	_uint iFlag = 0;
 
 	EnterCriticalSection(&pLoading->m_crt);
@@ -66,6 +67,9 @@ void CLoading::Free(void)
 
 void CLoading::StartLoading(void)
 {
+	if(Engine::GET_CUR_SCENE->GetSceneID() != (_int)ESceneID::Init)
+		Engine::CSoundManager::GetInstance()->StopAll();
+
 	InitializeCriticalSection(&m_crt);
 	m_threadHandle = (HANDLE)_beginthreadex(NULL, 0, ThreadMain, this, 0, NULL);
 }

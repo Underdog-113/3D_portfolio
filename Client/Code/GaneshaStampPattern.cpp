@@ -153,9 +153,9 @@ void CGaneshaStampPattern::Pattern(Engine::CObject* pOwner)
 			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
 
 			// Ganesha Pos X + fX 
-			spObj->GetTransform()->SetPositionX(mPos.x + fX - 1.3f);
+			spObj->GetTransform()->SetPositionX(mPos.x + fX - 0.3f);
 			spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
-			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 1.f);
+			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 0.5f);
 			fX += 0.5f;
 		}
 	}

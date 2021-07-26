@@ -41,7 +41,7 @@ void CBronya_Impact_TripleRing::Awake()
 	__super::Awake();
 	m_spMesh->SetMeshData(L"Bronya_Impact_TripleRing");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"Impact_Red");
 	m_spTexture->AddTexture(L"Eff_Noise_08");
 	m_spTexture->AddTexture(L"Impact_Red");

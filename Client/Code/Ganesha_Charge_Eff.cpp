@@ -92,6 +92,9 @@ void CGanesha_Charge_Eff::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetFloat("gSpeed", m_fTime);
 	pEffect->SetBool("gPlayingAnim", true);
+	pEffect->SetFloat("gEmissionPow", 0.15f);
+
+	pEffect->CommitChanges();
 }
 
 void CGanesha_Charge_Eff::Render(LPD3DXEFFECT pEffect)
