@@ -66,6 +66,13 @@ void CScoutCircleRange::FixedUpdate()
 void CScoutCircleRange::Update()
 {
 	__super::Update();
+
+	if (nullptr == m_pBallShooter)
+	{
+		this->SetDeleteThis(true);
+		return;
+	}
+
 	//if (!m_bSpawn)
 		m_fTime += GET_DT;
 
