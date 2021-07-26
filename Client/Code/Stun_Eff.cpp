@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Header\Stun_Eff.h"
 
+#include "Stun_Star.h"
+
 _uint CStun_Eff::m_s_uniqueID = 0;
 
 CStun_Eff::CStun_Eff()
@@ -10,6 +12,7 @@ CStun_Eff::CStun_Eff()
 
 CStun_Eff::~CStun_Eff()
 {
+	OnDestroy();
 }
 
 SP(CStun_Eff) CStun_Eff::Create(_bool isStatic, Engine::CScene * pScene)
@@ -66,12 +69,22 @@ void CStun_Eff::Update()
 {
 	__super::Update();
 
+	if (!m_pTargetObject || m_pTargetObject->GetDeleteThis())
+	{
+		SetDeleteThis(true);
+		return;
+	}
+
+	m_spTransform->SetPosition(m_pTargetObject->GetTransform()->GetPosition());
+	m_spTransform->AddPositionY(m_pTargetObject->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 2.1f);
+
 	m_fTime += GET_DT;
 
 	if (m_fTime >= 0.3f)
 	{
-		SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stun_Star", true, (_uint)Engine::ELayerID::Effect);
-		spObj->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stun_Star", true, (_uint)Engine::ELayerID::Effect);
+		effect->GetTransform()->SetPosition(m_spTransform->GetPosition());
+		effect->GetTransform()->SetSize(_float3(0.007f, 0.007f, 0.007f));
 		m_fTime = 0.f;
 	}
 
@@ -108,7 +121,6 @@ void CStun_Eff::PostRender(LPD3DXEFFECT pEffect)
 void CStun_Eff::OnDestroy()
 {
 	__super::OnDestroy();
-
 }
 
 void CStun_Eff::OnEnable()

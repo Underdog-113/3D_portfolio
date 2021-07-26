@@ -70,9 +70,9 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//	//m_onDie = true;
 	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
 
-	//	//m_onStun = true;
-	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnSuperArmor(false);
-	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
+		m_onStun = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnSuperArmor(false);
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 
 	//	//m_pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(true);
 
