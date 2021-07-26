@@ -86,7 +86,8 @@ enum class EShaderID
 	ElevatorBaseShader		= 20 + (_int)Engine::EShaderID::NumOfShaderID,
 	BronyaShader			= 21 + (_int)Engine::EShaderID::NumOfShaderID,
 	Stage2GlowShader		= 22 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID			= 23 + (_int)Engine::EShaderID::NumOfShaderID
+	Stage3GlowShader		= 23 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID			= 24 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

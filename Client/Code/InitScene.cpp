@@ -99,7 +99,7 @@ void CInitScene::Start(void)
 
 	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");
 	text->GetTransform()->SetPositionZ(0.5f);
-	text->AddComponent<Engine::CTextC>()->AddFontData(L"������ ���� �� 0.0%", _float2(-170,320), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
+	text->AddComponent<Engine::CTextC>()->AddFontData(L"Now Loading 0.0%", _float2(-170,320), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
 
 	{
 		slider =
@@ -141,7 +141,7 @@ void CInitScene::Update(void)
 	slider->SetValue(value);
 	std::wstring str = std::to_wstring(value);
 	str = str.substr(0, 6);
-	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"������ ���� �� " + str+ L"%");
+	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"Now Loading " + str+ L"%");
 
 	if(!m_isStaticScene)
 		m_fTempSoundLength += GET_DT;
