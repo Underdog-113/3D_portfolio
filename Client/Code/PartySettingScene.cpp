@@ -46,6 +46,7 @@ void CPartySettingScene::Awake(_int numOfLayers)
 void CPartySettingScene::Start(void)
 {
 	__super::Start();
+	m_sceneID = (_int)ESceneID::PartySettingScene;
 
 	SP(Engine::CImageObject) image =
 		std::dynamic_pointer_cast<Engine::CImageObject>(ADD_CLONE(L"ImageObject", true, (_int)Engine::ELayerID::UI, L""));

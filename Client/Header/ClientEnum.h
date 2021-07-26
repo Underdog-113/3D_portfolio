@@ -9,6 +9,7 @@ enum class ESceneID
 	MainRoom,
 	SupplyScene,
 	Ganesha_Cinema,
+	PartySettingScene,
 	NumOfSceneID
 };
 
@@ -103,7 +104,8 @@ enum class EChannelID
 	PLAYERHIT			= 8 + (_int)Engine::EChannelID::NumOfChannelID,
 	WARNING				= 9 + (_int)Engine::EChannelID::NumOfChannelID,
 	OBJECT				= 10 + (_int)Engine::EChannelID::NumOfChannelID,
-	NumOfChannelID		= 11 + (_int)Engine::EChannelID::NumOfChannelID,
+	ITEM				= 11 + (_int)Engine::EChannelID::NumOfChannelID,
+	NumOfChannelID		= 12 + (_int)Engine::EChannelID::NumOfChannelID,
 };
 
 enum class ELoadingID

@@ -194,6 +194,8 @@
 #include "Elevator_R_Door.h"
 
 #include "GachaBox_Eff.h"
+#include "ItemObject.h"
+
 CStaticScene::CStaticScene()
 {
 }
@@ -801,5 +803,8 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spGachaBoxEff(CGachaBox_Eff::Create(true, this));
 	GetObjectFactory()->AddPrototype(spGachaBoxEff);
+
+	SP(CMeshEffect_Client) spItemObject(CItemObject::Create(true, this));
+	GetObjectFactory()->AddPrototype(spItemObject);
 
 }

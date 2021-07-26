@@ -137,7 +137,7 @@ void CYongScene::Update(void)
 	{
 
 		SP(Engine::CObject) spSoftEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"GachaBox_Eff", true);
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ItemObject", true);
 		
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
