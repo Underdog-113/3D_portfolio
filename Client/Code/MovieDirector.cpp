@@ -428,7 +428,6 @@ void CMovieDirector::StartTake_BlackFadeOut()
 void CMovieDirector::StartTake_WinningSlow()
 {
 	auto pTake = m_takeMap[TakeName_WinningSlow];
-	m_spBlackFadeImage->SetIsEnabled(true);
 
 	CShot_SlowAll::Desc slow_desc;
 	pTake->ReadyShot(ShotName_SlowAll, 0.f, 3.f, &slow_desc, 0.f);
@@ -640,18 +639,18 @@ void CMovieDirector::StartTake_GaneshBorn()
 
 	CShot_BlackFadeOut::Desc blo_sub1_desc;
 	blo_sub1_desc.pBlackFade = m_pBlackFade;
-	pTake->ReadyShot(ShotName_BlackFadeOut_SubCh1, 9.5f, 10.f, &blo_sub1_desc, 9.5f);
+	pTake->ReadyShot(ShotName_BlackFadeOut_SubCh1, 9.35f, 9.75f, &blo_sub1_desc, 9.35f);
 
 	CShot_BlackFadeIn::Desc bfi_sub1_desc;
 	bfi_sub1_desc.pBlackFade = m_pBlackFade;
-	pTake->ReadyShot(ShotName_BlackFadeIn_SubCh1, 10.1f, 10.35f, &bfi_sub1_desc, 10.1f);
+	pTake->ReadyShot(ShotName_BlackFadeIn_SubCh1, 9.75f, 10.0f, &bfi_sub1_desc, 9.75f);
 
 	CShot_MovePivot::Desc mp_sub3_desc;
 	mp_sub3_desc.pTargetTransform = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform().get();
-	pTake->ReadyShot(ShotName_MovePivot_SubCh3, 10.1f, 10.1f, &mp_sub3_desc, 10.1f);
+	pTake->ReadyShot(ShotName_MovePivot_SubCh3, 9.75f, 9.75f, &mp_sub3_desc, 9.75f);
 
 	CShot_ReturnCameraToActor::Desc rca_desc;
-	pTake->ReadyShot(ShotName_ReturnCameraToActor, 10.1f, 10.1f, &rca_desc, 10.1f);
+	pTake->ReadyShot(ShotName_ReturnCameraToActor, 9.75f, 9.75f, &rca_desc, 9.75f);
 	
 	m_pCurTake = pTake;
 
