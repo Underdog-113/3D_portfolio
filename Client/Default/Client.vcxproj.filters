@@ -2410,6 +2410,9 @@
     <ClInclude Include="..\Header\Stage3GlowShader.h">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\IndicatorC.h">
+      <Filter>03.Component\06.Indicator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3579,6 +3582,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Stage3GlowShader.cpp">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\IndicatorC.cpp">
+      <Filter>03.Component\06.Indicator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
