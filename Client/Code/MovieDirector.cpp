@@ -49,6 +49,7 @@ CMovieDirector::~CMovieDirector()
 	SAFE_DELETE(m_pShot_RotateYaw_SubCh1)
 	SAFE_DELETE(m_pShot_RotateYaw_SubCh2)
 	SAFE_DELETE(m_pShot_RotatePitch)
+	SAFE_DELETE(m_pShot_RotatePitch_SubCh1)
 	SAFE_DELETE(m_pShot_RotatePitch_Spline)
 	SAFE_DELETE(m_pShot_RotatePitch_Spline_SubCh1)
 	SAFE_DELETE(m_pShot_RotateRoll)
@@ -115,19 +116,21 @@ void CMovieDirector::UpdateDirector()
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_2))
 	{
+		StartTake_KianaVictory();
 		//StartTake_SakuraVictory();
 		//StartTake_GaneshBorn();
-		StartTake_WhiteFadeOut(0.f, 0.5f);
+		//StartTake_WhiteFadeOut(0.f, 0.5f);
 	}
 
 
 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_3))
 	{
+		StartTake_KianaVictory();
 		//StartTake_SakuraVictory();
 		//StartTake_GaneshBorn();
-		//m_pCurTake->SetEditMode(true);
+		m_pCurTake->SetEditMode(true);
 
-		StartTake_WhiteFadeIn(0.f, 1.f);
+		//StartTake_WhiteFadeIn(0.f, 1.f);
 	}
 
 // 	if (Engine::IMKEY_PRESS(KEY_TAB) && Engine::IMKEY_DOWN(KEY_1))
@@ -189,6 +192,7 @@ void CMovieDirector::Create_AllShots()
 	m_pShot_RotateYaw_SubCh1 = new CShot_RotateYaw;
 	m_pShot_RotateYaw_SubCh2 = new CShot_RotateYaw;
 	m_pShot_RotatePitch = new CShot_RotatePitch;
+	m_pShot_RotatePitch_SubCh1 = new CShot_RotatePitch;
 	m_pShot_RotatePitch_Spline = new CShot_RotatePitch_Spline;
 	m_pShot_RotatePitch_Spline_SubCh1 = new CShot_RotatePitch_Spline;
 	m_pShot_RotateRoll = new CShot_RotateRoll;
@@ -222,6 +226,7 @@ void CMovieDirector::Create_AllTakes()
 	CreateTake_WinningSlow();
 
 	CreateTake_Failure();
+	CreateTake_KianaVictory();
 	CreateTake_SakuraVictory();
 	CreateTake_GaneshaBorn();
 	CreateTake_BronyaBorn();
@@ -293,6 +298,27 @@ void CMovieDirector::CreateTake_Failure()
 	pTake->AddShot(ShotName_RotateAround, m_pShot_RotateAround);
 
 	m_takeMap.emplace(TakeName_Failure, pTake);
+}
+
+void CMovieDirector::CreateTake_KianaVictory()
+{
+	CTake* pTake = new CTake;
+			
+	pTake->AddShot(ShotName_WhiteFadeOut, m_pShot_WhiteFadeOut);
+	pTake->AddShot(ShotName_WhiteFadeIn, m_pShot_WhiteFadeIn);
+
+	pTake->AddShot(ShotName_RotateYaw, m_pShot_RotateYaw);
+	pTake->AddShot(ShotName_RotatePitch, m_pShot_RotatePitch);
+
+	pTake->AddShot(ShotName_MovePivot, m_pShot_MovePivot);
+	pTake->AddShot(ShotName_MovePivot_SubCh1, m_pShot_MovePivot_SubCh1);
+	pTake->AddShot(ShotName_PushOut, m_pShot_PushOut);
+	pTake->AddShot(ShotName_PushOut_SubCh1, m_pShot_PushOut_SubCh1);
+
+	pTake->AddShot(ShotName_RotateYaw_SubCh1, m_pShot_RotateYaw_SubCh1);
+	pTake->AddShot(ShotName_Victory, m_pShot_Victory);
+
+	m_takeMap.emplace(TakeName_KianaVictory, pTake);
 }
 
 void CMovieDirector::CreateTake_SakuraVictory()
@@ -580,7 +606,68 @@ void CMovieDirector::StartTake_Victory()
 
 void CMovieDirector::StartTake_KianaVictory()
 {
-	StartTake_SakuraVictory();
+	auto pTake = m_takeMap[TakeName_KianaVictory];
+	m_spBlackFadeImage->SetIsEnabled(false);
+	m_spWhiteFadeImage->SetIsEnabled(true);
+
+	CShot_WhiteFadeOut::Desc wfo_desc;
+	wfo_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeOut, 0.f, 0.5f, &wfo_desc, 0.f);
+
+	CShot_WhiteFadeIn::Desc wfi_desc;
+	wfi_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeIn, 0.6f, 1.1f, &wfi_desc, 0.6f);
+	
+	CShot_RotateYaw::Desc ry_desc;
+	ry_desc.startEulerAngle = 90.f;
+	ry_desc.endEulerAngle = 0.f;
+	pTake->ReadyShot(ShotName_RotateYaw, 0.6f, 2.1f, &ry_desc, 0.6f);
+
+	CShot_RotatePitch::Desc rp_desc;
+	rp_desc.startEulerAngle = -10.f;
+	rp_desc.endEulerAngle = 0.f;
+	pTake->ReadyShot(ShotName_RotatePitch, 1.6f, 2.1f, &rp_desc, 1.6f);
+
+	CShot_MovePivot::Desc mp_desc;
+	auto pActor = CStageControlTower::GetInstance()->GetCurrentActor();
+	mp_desc.startOffset = pActor->GetTransform()->GetUp() * -0.1f + pActor->GetTransform()->GetRight() * 0.1f;
+	mp_desc.endOffset = pActor->GetTransform()->GetUp() * 0.1f + pActor->GetTransform()->GetRight() * 0.f;
+	pTake->ReadyShot(ShotName_MovePivot, 1.6f, 2.1f, &mp_desc, 1.6f);
+
+	CShot_MovePivot::Desc mp_sub1_desc;
+	mp_sub1_desc.startOffset = mp_desc.endOffset;
+	mp_sub1_desc.endOffset = pActor->GetTransform()->GetUp() * -0.1f + pActor->GetTransform()->GetRight() * -0.15f;
+	pTake->ReadyShot(ShotName_MovePivot_SubCh1, 2.6f, 3.1f, &mp_sub1_desc, 2.6f);
+
+	CShot_RotatePitch::Desc rp_sub1_desc;
+	rp_sub1_desc.startEulerAngle = 0.f;
+	rp_sub1_desc.endEulerAngle = 10.f;
+	pTake->ReadyShot(ShotName_RotatePitch, 1.6f, 2.1f, &rp_desc, 1.6f);
+
+	CShot_PushOut::Desc po_desc;
+	po_desc.startDistance = 0.3f;
+	po_desc.endDistance = 0.6f;
+	pTake->ReadyShot(ShotName_PushOut, 0.6f, 2.1f, &po_desc, 0.6f);
+
+
+	CShot_PushOut::Desc po_sub1_desc;
+	po_sub1_desc.startDistance = 0.3f;
+	po_sub1_desc.endDistance = 0.6f;
+	pTake->ReadyShot(ShotName_PushOut_SubCh1, 0.6f, 2.1f, &po_sub1_desc, 0.6f);
+
+	CShot_RotateYaw::Desc ry2_desc;
+	ry2_desc.startEulerAngle = 0.f;
+	ry2_desc.endEulerAngle = 20.f;
+	pTake->ReadyShot(ShotName_RotateYaw_SubCh1, 3.6f, 10.6f, &ry2_desc, 3.6f);
+
+
+	CShot_ActorVictory::Desc av_desc;
+	pTake->ReadyShot(ShotName_Victory, 0.6f, 10.f, &av_desc, 0.6f);
+
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake();
+	m_onAir = true;
 }
 
 void CMovieDirector::StartTake_TheresaVictory()
