@@ -204,7 +204,7 @@ void CBattleUiManager::Update(void)
 		for (int i = 0; i <= 30; i++)
 		{
 			SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
 			Indicator->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 			Indicator->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
 			Indicator->AddComponent<Engine::CTextureC>()->AddTexture(L"Indicator");
