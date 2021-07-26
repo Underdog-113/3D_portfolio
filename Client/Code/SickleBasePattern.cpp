@@ -85,7 +85,7 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 				m_onSignEffect = false;
 				m_onTrailEffect = false;
 				PatternPlaySound(L"Sickle_Skill_0.wav", pOwner);
-				static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+				
 				return;
 			}
 		}
@@ -95,7 +95,6 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		{
 			// 뒤로 이동
 			fsm->ChangeState(Name_Sickle_Walk_Back);
-			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 		}
 	}
 
@@ -127,6 +126,8 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		0.1f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onSignEffect)
 	{
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+
 		m_spSignEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"MonsterAttackSign", true);		
 		m_spSignEffect->GetTransform()->SetPosition(mPos);
@@ -138,6 +139,8 @@ void CSickleBasePattern::Pattern(Engine::CObject* pOwner)
 		0.3f <= fsm->GetDM()->GetAniTimeline() &&
 		false == m_onTrailEffect)
 	{
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
+
 		SP(Engine::CObject) spMeshEffect
 			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sickle_Trail", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 		//spMeshEffect->GetTransform()->SetRotationY(D3DXToRadian(180.f));
