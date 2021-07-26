@@ -61,14 +61,14 @@ void CMB_Bronya::Start(void)
 		CBronyaHitPattern::Create(),
 		CBronyaAirbornePattern::Create(),
 		CBronyaStunPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create()); // Pshield on
-	m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
-	m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
-	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
 	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create()); // Pshield on
-	m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create()); // Pshield on
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
