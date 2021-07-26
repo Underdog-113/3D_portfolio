@@ -77,7 +77,7 @@ void CThreeStageScene::Start(void)
 	Engine::CSoundManager::GetInstance()->PlayBGM(L"Stage1_Bgm.wav");
 	Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
 
-	CStageControlTower::GetInstance()->GetCurrentActor()->SetIsEnabled(true);
+	m_pControlTower->GetCurrentActor()->SetIsEnabled(true);
 
 	this->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
 	CBattleUiManager::GetInstance()->QteOff(0);
@@ -173,24 +173,13 @@ void CThreeStageScene::SetupBoxes(void)
 
 void CThreeStageScene::Create_ActorValkyrie(void)
 {
-	SP(Engine::CObject) spKianaClone = ADD_CLONE(L"Kiana", true, (_uint)ELayerID::Player, L"Kiana");
+	SP(Engine::CObject) spStartValkyrie = m_pControlTower->SettingSquad(this);
 
-	m_spValkyrie = spKianaClone;
-	m_spValkyrie->GetTransform()->SetPosition(70.4f, -5.29f, -7.73f);
-	//m_spValkyrie->GetTransform()->SetPosition(32.63f, -5.29f, -7.35f);
-	m_pControlTower->AddSquadMember(m_spValkyrie);
+	m_spValkyrie = spStartValkyrie;
+	m_spValkyrie->GetTransform()->SetPosition(70.4f, -6.29f, -7.73f);
+	m_spValkyrie->GetTransform()->AddRotationY(D3DXToRadian(-90.f));
+
 	m_pControlTower->Start(CStageControlTower::ALL);
-
-	SP(Engine::CObject) spTheresaClone = ADD_CLONE(L"Theresa", true, (_uint)ELayerID::Player, L"Theresa");
-
-	m_pControlTower->AddSquadMember(spTheresaClone);
-	static_cast<CValkyrie*>(spTheresaClone.get())->SetIsWait(true);
-
-	SP(Engine::CObject) spSakuraClone = ADD_CLONE(L"Sakura", true, (_uint)ELayerID::Player, L"Sakura");
-
-	m_pControlTower->AddSquadMember(spSakuraClone);
-	static_cast<CValkyrie*>(spSakuraClone.get())->SetIsWait(true);
-
 }
 
 void CThreeStageScene::Create_SceneCamera(void)

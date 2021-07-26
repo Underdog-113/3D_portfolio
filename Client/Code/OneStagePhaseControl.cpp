@@ -127,35 +127,50 @@ void COneStagePhaseControl::Update(void)
 
 		//After killing MidBoss
 	case (_int)EOneStagePhase::MidBossEnd:
-		//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake(L"Ready_Stage1_Victory");
+		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WinningSlow();
 
 		++m_curPhase;
 		break;
 
 	case (_int)EOneStagePhase::WinningSlow:
+		if (!CStageControlTower::GetInstance()->GetMovieDirector()->GetIsOnAir())
+		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
+			m_victoryTimer = 0.f;
+			++m_curPhase;
+		}
+		break;
 
-		++m_curPhase;
+	case (_int)EOneStagePhase::WaitVictoryMovie:
+
+		m_victoryTimer += GET_DT;
+
+		if (m_victoryTimer > 1.f)
+		{
+			m_victoryTimer = 0.f;
+			// movie
+			CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_Victory();
+
+			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
+			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
+			++m_curPhase;
+		}
 		break;
 	case (_int)EOneStagePhase::VictoryMovie:
-
-		++m_curPhase;
+		m_victoryTimer += GET_DT;
+		if (m_victoryTimer > 4.f)
+		{
+			OpenStageResult();
+			++m_curPhase;
+		}
 		break;
 
 		//Result screen
 	case (_int)EOneStagePhase::StageResult:
-		++m_curPhase;
-		OpenStageResult();
 		break;
 
 		// Wait Change Scene
 	case (_int)EOneStagePhase::StageResult_Idle:
-		if (false == m_isSoundChange)
-		{
-			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->StartSound(L"Victory.mp3", (_uint)Engine::EChannelID::BGM);
-			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isSoundChange = true;
-		}
 		break;
 
 	default:
@@ -177,10 +192,5 @@ void COneStagePhaseControl::EnterConversationPhase()
 
 void COneStagePhaseControl::OpenStageResult(void)
 {
-	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
-
-	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();
-	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
-	ShowCursor(true);
 }

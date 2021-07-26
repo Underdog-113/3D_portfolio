@@ -49,6 +49,7 @@ void CBronya_Ult_Ring::Awake()
 	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
 	m_spTransform->SetSize(0.01f, 0.01f, 0.01f);
 	m_spTransform->SetRotationX(D3DXToRadian(195));
+
 }
 
 void CBronya_Ult_Ring::Start()

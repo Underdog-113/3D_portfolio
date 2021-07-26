@@ -574,9 +574,6 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1">
       <UniqueIdentifier>{e43854d2-f38b-4403-9543-41658ef3bb18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\01.DamageFontShader">
-      <UniqueIdentifier>{0ba5a878-5813-49ff-8079-14724d3cb4ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Shader\02.CatPawShader">
       <UniqueIdentifier>{79ca6d77-e451-452c-9f01-8aab630fa739}</UniqueIdentifier>
     </Filter>
@@ -1129,14 +1126,26 @@
     <Filter Include="04.Shader\19.MapShaders\00.ElevatorShader">
       <UniqueIdentifier>{d24913b4-133b-46c9-991d-6569ebc98fb9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\19.MapShaders\01.Normal">
-      <UniqueIdentifier>{90083b84-ebb7-4349-b424-a798c670ae0c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff">
       <UniqueIdentifier>{09dbe463-0f52-48b9-bb34-2ad8c29697c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="04.Shader\09.AlphaMaskShader\AlphaMaskGlowShader">
       <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\20.BronyaShader">
+      <UniqueIdentifier>{181904bf-731c-4f0e-9de6-1140d4ae824e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\02.CatPawShader\01.DamageFontShader">
+      <UniqueIdentifier>{0ba5a878-5813-49ff-8079-14724d3cb4ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\01.Stage2GlowShader">
+      <UniqueIdentifier>{90083b84-ebb7-4349-b424-a798c670ae0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\02.Stage2LineGlow">
+      <UniqueIdentifier>{020aa7b4-91da-4989-ab0f-dd5cdab70191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\03.Stage3GlowShader">
+      <UniqueIdentifier>{5437158f-38f0-4ea3-aac5-6f6bd5f6886c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1498,7 +1507,7 @@
       <Filter>04.Shader\03.CircularGaugeShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DamageFontShader.h">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
+      <Filter>04.Shader\02.CatPawShader\01.DamageFontShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DissolveShader.h">
       <Filter>04.Shader\05.DissolveShader</Filter>
@@ -2389,6 +2398,15 @@
     <ClInclude Include="..\Header\TwoConversationC.h">
       <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\BronyaShader.h">
+      <Filter>04.Shader\20.BronyaShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stage2GlowShader.h">
+      <Filter>04.Shader\19.MapShaders\01.Stage2GlowShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stage3GlowShader.h">
+      <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -2686,7 +2704,7 @@
       <Filter>04.Shader\08.AttackRangeShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageFontShader.cpp">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
+      <Filter>04.Shader\02.CatPawShader\01.DamageFontShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CatPawShader.cpp">
       <Filter>04.Shader\02.CatPawShader</Filter>
@@ -3550,6 +3568,15 @@
     <ClCompile Include="..\Code\TwoConversationC.cpp">
       <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\BronyaShader.cpp">
+      <Filter>04.Shader\20.BronyaShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stage2GlowShader.cpp">
+      <Filter>04.Shader\19.MapShaders\01.Stage2GlowShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stage3GlowShader.cpp">
+      <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3586,7 +3613,7 @@
       <Filter>04.Shader\03.CircularGaugeShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
+      <Filter>04.Shader\02.CatPawShader\01.DamageFontShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
       <Filter>04.Shader\05.DissolveShader</Filter>
@@ -3638,6 +3665,15 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ElevatorBaseShader.fx">
       <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BronyaShader.fx">
+      <Filter>04.Shader\20.BronyaShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage2GlowShader.fx">
+      <Filter>04.Shader\19.MapShaders\01.Stage2GlowShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage3GlowShader.fx">
+      <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

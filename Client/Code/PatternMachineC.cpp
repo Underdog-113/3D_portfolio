@@ -55,16 +55,15 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 		return;
 	}
 
-	_float3 pos = m_pOwner->GetTransform()->GetPosition();
-
 	if (Engine::IMKEY_DOWN(KEY_5))
 	{
 		m_onAirborne = true;
 		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 	}
 
-	//if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
-	//{
+	if (Engine::IMKEY_DOWN(MOUSE_WHEEL))
+	{
+
 	//	//m_onAirborne = true;
 	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 
@@ -85,7 +84,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//		//effect->GetTransform()->SetSize(0.3f, 0.3f, 0.3f);
 	//		m_vRingEffect.emplace_back(effect);
 	//	}
-	//}
+	}
 
 	//if (Engine::IMKEY_PRESS(KEY_SHIFT) && Engine::IMKEY_DOWN(KEY_X))
 	//{
@@ -144,7 +143,8 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//if (Engine::IMKEY_DOWN(MOUSE_RIGHT))
 	//{
 	//	//_float3 pos = m_pOwner->GetTransform()->GetPosition();
-	//	_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward();
+	//	//_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward();
+	//	_float3 pos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition();
 	//	std::cout << "x : " << pos.x << std::endl;
 	//	std::cout << "y : " << pos.y << std::endl;
 	//	std::cout << "z : " << pos.z << std::endl;
@@ -171,7 +171,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	// hit, airborne ½ÇÇà
 	PlayHitPattern();
 
-	//std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
+	std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
 	//std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
 	//std::cout << "Pattern  : " << std::endl;
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "MeshEffect_Client.h"
 
+class CMB_Ganesha;
+
 class CGanesha_Charge_Eff : public CMeshEffect_Client
 {
 	SMART_DELETER_REGISTER
@@ -32,5 +34,7 @@ public:
 
 private:
 	static		_uint m_s_uniqueID;
+
+	GETTOR_SETTOR(CMB_Ganesha*, m_pOwner, nullptr, Owner)
 };
 

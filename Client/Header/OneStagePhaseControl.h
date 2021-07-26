@@ -20,6 +20,7 @@ public:
 		MidBossBegin		,		// 9
 		MidBossEnd			,		// 10
 		WinningSlow			,		// ReadyVictoryCutScene -> WinningSlow
+		WaitVictoryMovie,
 		VictoryMovie		,		// VictoryCutScene -> VictoryMovie
 		StageResult			,
 		StageResult_Idle	,

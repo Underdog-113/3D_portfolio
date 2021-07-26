@@ -525,22 +525,27 @@ void CDataLoad::MapLoad(Engine::CScene* pScene)
 		pDataStore->GetValue(false, (_int)EDataID::Scene, L"mapDecoration",
 							 std::to_wstring(i) + L"_renderID", renderID);
 		spDecoObject->GetGraphics()->SetRenderID(renderID);
+		spDecoObject->GetGraphics()->SetGlowCoef(0.55f);
+		_int numOfShaders;
+		pScene->GET_VALUE(false, (_int)EDataID::Scene, L"mapDecoration", std::to_wstring(i) + L"_numOfShaders", numOfShaders);
+
+		for (_int j = 0; j < numOfShaders; ++j)
+		{
+			std::wstring shaderKey;
+			pScene->GET_VALUE(false, (_int)EDataID::Scene, L"mapDecoration", std::to_wstring(i) + L"_shaderKey" + std::to_wstring(j), shaderKey);
+			_int shaderID = Engine::CShaderManager::GetInstance()->GetShaderID(shaderKey);
+			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader(shaderID);
+		}
 
 		if (L"Stage02_Alpha_WaterPlane" == meshKey)
 		{			
 			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"waterNor");
 			spDecoObject->GetComponent<Engine::CTextureC>()->AddTexture(L"water");
-			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)EShaderID::WaterShader);
-		}
-		else if (renderID == (_int)Engine::ERenderID::NonAlpha)
-		{
-			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
 		}
 		else if(renderID == (_int)Engine::ERenderID::AlphaTest)
 		{
 			if (meshKey == L"Stage02_Alpha_S02_Sky" || meshKey == L"Stage02_Alpha_S02_Cloud" || meshKey == L"Stage02_Alpha_S02_Mountain" || meshKey == L"Stage02_Alpha_Bg03")
 				spDecoObject->GetGraphics()->SetFullShade(true);
-			spDecoObject->GetComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 		}
 
 	}

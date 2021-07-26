@@ -14,6 +14,7 @@
 #include "BronyaBullet.h"
 #include "Bronya_Ult_Range.h"
 #include "Bronya_Ult_Ring.h"
+#include "Bronya_Weapon.h"
 
 #include "Bronya_Teleport_Ring.h"
 #include "Bronya_Teleport_Laser.h"
@@ -65,10 +66,11 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		pOwner->GetTransform()->SetForward(_float3(0, 0, 1));
+		
 
 		_float3 endPos = { 186.21f, mPos.y, -17.06f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
+		
 	}
 
 	/************************* Sound */
@@ -309,12 +311,14 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 	else if (Name_Escape_In == spFSM->GetCurStateString() &&
 		spFSM->GetDM()->IsAnimationEnd())
 	{
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
 		// 대기 상태로 변경
 		spFSM->ChangeState(Name_IDLE);
 		m_lerpCurTimer = 0.f;
 		moved = true;
 
-		pOwner->GetTransform()->SetRotationY(D3DXToRadian(180));
+		pOwner->GetTransform()->SetForward(_float3(0, 0, 1));
 	}
 
 	/************************* Effect */
@@ -324,11 +328,15 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 
 		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0)
 		{
-			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-1.3f * GET_DT);
+			m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-5.3f * GET_DT);
+			std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-5.3f * GET_DT);
 
 			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
 			{
 				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(0.f);
+				std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(0.f);
+
 			}
 
 			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();

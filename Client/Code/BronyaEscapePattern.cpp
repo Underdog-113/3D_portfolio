@@ -4,7 +4,7 @@
 #include "FSM_BronyaC.h"
 #include "FSMDefine_Bronya.h"
 #include "MB_Bronya.h"
-
+#include "Bronya_Weapon.h"
 #include "StateMachineC.h"
 #include "Valkyrie.h" 
 #include "DynamicMeshData.h"
@@ -114,6 +114,8 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		fsm->GetDM()->IsAnimationEnd())
 	{
 		// 대기 상태로 변경
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
 		fsm->ChangeState(Name_IDLE);
 		m_lerpCurTimer = 0.f;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
@@ -126,11 +128,16 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 
 		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0)
 		{
-			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-1.3f * GET_DT);
+			
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-5.3f * GET_DT);
+
+			m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+			std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-5.3f * GET_DT);
 
 			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
 			{
 				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(0.f);
+				std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(0.f);
 			}
 
 			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();
@@ -156,18 +163,6 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	if (true == m_onLaserInEffect)
 	{
 		_float sizeX = m_vLaserInEffect->GetTransform()->GetSize().x - (3.5f * GET_DT);
-
-		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)
-		{
-			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.3f * GET_DT);
-
-			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f)
-			{
-				static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
-			}
-
-			_float alpha = static_cast<CMB_Bronya*>(pOwner)->GetAlpha();
-		}
 
 		if (0.f >= sizeX)
 		{

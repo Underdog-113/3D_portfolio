@@ -109,6 +109,9 @@ void CTwoStagePhaseControl::Update(void)
 		m_spGanesha->GetTransform()->SetPosition(0.f, 0.f, 0.f);
 		m_spGanesha->SelectChannelID();
 		m_spGanesha->SetIsEnabled(true);
+
+		//ui off
+		static_cast<Engine::CCanvas*>(Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(false);
 		++m_curPhase;
 		break;
 	case (_int)ETwoStagePhase::BossMovie:
@@ -135,6 +138,19 @@ void CTwoStagePhaseControl::Update(void)
 			m_isBossMovieOff = true;
 		}
 
+
+		m_uiOnTimer += GET_DT;
+		if (!m_uiOn && m_uiOnTimer > 0.5f)
+		{
+			// ui on
+			Engine::GET_CUR_SCENE->FindObjectByName(L"MainCanvas")->SetIsEnabled(true);
+			CBattleUiManager::GetInstance()->QteOff(0);
+			CBattleUiManager::GetInstance()->QteOff(1);
+			CBattleUiManager::GetInstance()->SquadOff(Engine::GET_CUR_SCENE);
+			CBattleUiManager::GetInstance()->WaitingPlayerSetting();
+
+			m_uiOn = true;
+		}
 
 		if (m_spGanesha->GetComponent<CPatternMachineC>()->GetOnDie())
 			++m_curPhase;

@@ -211,6 +211,7 @@
     <ClInclude Include="..\Header\BronyaFlashBang_AS.h" />
     <ClInclude Include="..\Header\BronyaGrenade.h" />
     <ClInclude Include="..\Header\BronyaHitPattern.h" />
+    <ClInclude Include="..\Header\BronyaShader.h" />
     <ClInclude Include="..\Header\BronyaShock1Pattern.h" />
     <ClInclude Include="..\Header\BronyaShock2Pattern.h" />
     <ClInclude Include="..\Header\BronyaShoot1Pattern.h" />
@@ -356,6 +357,8 @@
     <ClInclude Include="..\Header\SpiderExplosion_Base.h" />
     <ClInclude Include="..\Header\SpiderImpact.h" />
     <ClInclude Include="..\Header\SplineCurve.h" />
+    <ClInclude Include="..\Header\Stage2GlowShader.h" />
+    <ClInclude Include="..\Header\Stage3GlowShader.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
@@ -620,6 +623,7 @@
     <ClCompile Include="..\Code\BronyaFlashBang_AS.cpp" />
     <ClCompile Include="..\Code\BronyaGrenade.cpp" />
     <ClCompile Include="..\Code\BronyaHitPattern.cpp" />
+    <ClCompile Include="..\Code\BronyaShader.cpp" />
     <ClCompile Include="..\Code\BronyaShock1Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaShock2Pattern.cpp" />
     <ClCompile Include="..\Code\BronyaShoot1Pattern.cpp" />
@@ -763,6 +767,8 @@
     <ClCompile Include="..\Code\SpiderExplosion_Base.cpp" />
     <ClCompile Include="..\Code\SpiderImpact.cpp" />
     <ClCompile Include="..\Code\SplineCurve.cpp" />
+    <ClCompile Include="..\Code\Stage2GlowShader.cpp" />
+    <ClCompile Include="..\Code\Stage3GlowShader.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
@@ -1012,6 +1018,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BronyaShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\CatPawShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
@@ -1115,6 +1127,18 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage2GlowShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage3GlowShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\UltScrShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
