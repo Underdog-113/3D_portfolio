@@ -574,9 +574,6 @@
     <Filter Include="02.Objects\01.ForUnit\01.Monster\MO_Robot\Pattern\03.Select\01.Attack1">
       <UniqueIdentifier>{e43854d2-f38b-4403-9543-41658ef3bb18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\01.DamageFontShader">
-      <UniqueIdentifier>{0ba5a878-5813-49ff-8079-14724d3cb4ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Shader\02.CatPawShader">
       <UniqueIdentifier>{79ca6d77-e451-452c-9f01-8aab630fa739}</UniqueIdentifier>
     </Filter>
@@ -1141,6 +1138,9 @@
     <Filter Include="04.Shader\20.BronyaShader">
       <UniqueIdentifier>{181904bf-731c-4f0e-9de6-1140d4ae824e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\02.CatPawShader\01.DamageFontShader">
+      <UniqueIdentifier>{0ba5a878-5813-49ff-8079-14724d3cb4ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -1501,7 +1501,7 @@
       <Filter>04.Shader\03.CircularGaugeShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DamageFontShader.h">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
+      <Filter>04.Shader\02.CatPawShader\01.DamageFontShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\DissolveShader.h">
       <Filter>04.Shader\05.DissolveShader</Filter>
@@ -2692,7 +2692,7 @@
       <Filter>04.Shader\08.AttackRangeShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageFontShader.cpp">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
+      <Filter>04.Shader\02.CatPawShader\01.DamageFontShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CatPawShader.cpp">
       <Filter>04.Shader\02.CatPawShader</Filter>
@@ -3595,7 +3595,7 @@
       <Filter>04.Shader\03.CircularGaugeShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DamageFontShader.fx">
-      <Filter>04.Shader\01.DamageFontShader</Filter>
+      <Filter>04.Shader\02.CatPawShader\01.DamageFontShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\DissolveShader.fx">
       <Filter>04.Shader\05.DissolveShader</Filter>
