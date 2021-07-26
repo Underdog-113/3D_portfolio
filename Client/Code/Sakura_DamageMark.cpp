@@ -10,6 +10,7 @@ CSakura_DamageMark::CSakura_DamageMark()
 
 CSakura_DamageMark::~CSakura_DamageMark()
 {
+	OnDestroy();
 }
 
 SP(CSakura_DamageMark) CSakura_DamageMark::Create(_bool isStatic, Engine::CScene * pScene)
@@ -69,7 +70,15 @@ void CSakura_DamageMark::Update(void)
 {
 	__super::Update();
 
+	SetDeleteThis(true);
+	if (!m_pTargetObject || m_pTargetObject->GetDeleteThis())
+	{
+		SetDeleteThis(true);
+		return;
+	}
+
 	UpdateFrame(0.05f);
+
 	m_spTransform->SetPosition(m_pTargetObject->GetTransform()->GetPosition());
 	m_spTransform->AddPositionY(m_pTargetObject->GetComponent<Engine::CMeshC>()->GetHalfYOffset() * 2.1f);
 }
