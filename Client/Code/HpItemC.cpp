@@ -59,7 +59,6 @@ void CHpItemC::Update(SP(CComponent) spThis)
 		
 	if (m_enable)
 	{
-		UpDown();
 
 		m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
 		if (m_currentValkyrie == nullptr)
@@ -79,7 +78,15 @@ void CHpItemC::Update(SP(CComponent) spThis)
 
 			GetOwner()->SetDeleteThis(true);
 		}
+
+		if (CBattleUiManager::GetInstance()->GetBattleEnd())
+		{
+			_float3 pos = m_currentValkyrie->GetTransform()->GetPosition() - GetOwner()->GetComponent<Engine::CTransformC>()->GetPosition();
+			GetOwner()->GetComponent<Engine::CTransformC>()->AddPosition(pos * (5.0f * GET_DT));
+		}
 	}
+
+	
 }
 
 void CHpItemC::LateUpdate(SP(CComponent) spThis)

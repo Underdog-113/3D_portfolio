@@ -78,34 +78,6 @@ _uint CValkyrieWeapon::FixedUpdate()
 
 _uint CValkyrieWeapon::Update()
 {
-	_float x = m_vPlayer->GetComponent<Engine::CTransformC>()->GetPosition().x;
-	_float y = m_vPlayer->GetComponent<Engine::CTransformC>()->GetPosition().y;
-	_float z = m_vPlayer->GetComponent<Engine::CTransformC>()->GetPosition().z;
-
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_W))
-	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(0.005f);
-	}
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_S))
-	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionY(-0.005f);
-	}
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_A))
-	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(0.005f);
-	}
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_D))
-	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionX(-0.005f);
-	}
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_Q))
-	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionZ(0.005f);
-	}
-	if (Engine::CInputManager::GetInstance()->KeyPress(KEY_E))
-	{
-		m_vPlayer->GetComponent<Engine::CTransformC>()->AddPositionZ(-0.005f);
-	}
 
 	return _uint();
 }

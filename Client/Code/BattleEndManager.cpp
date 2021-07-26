@@ -14,8 +14,8 @@ void CBattleEndManager::Start(Engine::CScene * pScene)
 
 	m_itemList = CDropItemManager::GetInstance()->GetItemList();
 	m_gold = CDropItemManager::GetInstance()->GetGold();
-	m_captainExp = CDropItemManager::GetInstance()->GetCaptainExp();
-	m_valkyrieExp = CDropItemManager::GetInstance()->GetValkyrieExp();
+	m_captainExp = 500; //CDropItemManager::GetInstance()->GetCaptainExp();
+	m_valkyrieExp = 500; // CDropItemManager::GetInstance()->GetValkyrieExp();
 
 	ValkyrieUI();
 	CaptainUI();

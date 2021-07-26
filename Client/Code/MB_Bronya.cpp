@@ -263,6 +263,8 @@ void CMB_Bronya::ApplyHitInfo(HitInfo info)
 
 void CMB_Bronya::MonsterDead()
 {
+	__super::MonsterDead();
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 

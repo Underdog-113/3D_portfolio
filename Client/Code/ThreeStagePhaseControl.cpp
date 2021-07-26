@@ -68,6 +68,7 @@ void CThreeStagePhaseControl::Update(void)
 				{
 					_float3 warpPos = ((CPortal*)Engine::GET_CUR_SCENE->FindObjectWithKey(L"Portal").get())->GetDestPos();
 					CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->SetPosition(warpPos - _float3(0.f, 0.5f, 0.f));
+					CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->SetRotationY(D3DXToRadian(90.f));
 					CStageControlTower::GetInstance()->GetCameraMan()->GetPivot()->GetTransform()->SetPosition(warpPos - _float3(0.f, 0.5f, 0.f));
 					CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeIn();
 					m_portalMove = true;
@@ -182,10 +183,5 @@ void CThreeStagePhaseControl::Update(void)
 
 void CThreeStagePhaseControl::OpenStageResult(void)
 {
-	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
-
-	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();
-	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
-	ShowCursor(true);
 }

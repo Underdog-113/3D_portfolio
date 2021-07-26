@@ -191,5 +191,7 @@ void CMO_Robot::UpdatePivotMatrices(void)
 
 void CMO_Robot::MonsterDead()
 {
+	__super::MonsterDead();
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }

@@ -206,6 +206,8 @@ void CMO_Scout::SetStatus(BaseStat stat)
 
 void CMO_Scout::MonsterDead()
 {
+	__super::MonsterDead();
+
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
 }
 

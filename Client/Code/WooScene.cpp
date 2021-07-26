@@ -76,11 +76,11 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	SpiderSetting();
+	//SpiderSetting();
 	//SickleSetting();
 	//ScoutSetting();
 	//LancerSetting();
-	//RobotSetting();
+	RobotSetting();
 	//NinzaSetting();
 
 	//GaneshaSetting();

@@ -66,6 +66,8 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
+		pOwner->GetTransform()->SetForward(_float3(0, 0, 1));
+
 		_float3 endPos = { 186.21f, mPos.y, -17.06f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
 	}
@@ -93,6 +95,8 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	else if (Name_Arsenal_Charge == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
+		
+
 		// Arsenal Loop 상태로 변경
 		fsm->ChangeState(Name_Arsenal_Loop);
 		m_atkReady = false;
