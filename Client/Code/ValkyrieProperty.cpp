@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "ValkyrieProperty.h"
 
+#include "ClientScene.h"
+#include "KianaUIAnim.h"
+
 CValkyrieProperty::CValkyrieProperty()
 {
 }
@@ -22,10 +25,48 @@ void CValkyrieProperty::Start()
 	// 데이터 셋팅
 
 	PropertyCanvas();
+
+	CValkyrieStatusData* data;
+
+	data = CDataManager::GetInstance()->FindInStockValkyrieData(CValkyriegManager::g_selectValkyrie);
+
+	if (m_vPlayer != nullptr)
+		m_vPlayer->SetDeleteThis(true);
+
+	std::wstring name = data->GetName();
+	if (name == L"키아나·카스라나")
+	{
+		// 키아나 오브젝트 생성 -> IDLE로 변경
+		m_vPlayer = m_scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(-1.61499858f, -2.75000310f, -1.07500005f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(2.f, 2.f, 2.f));
+	}
+	else if (name == L"테레사·아포칼립스")
+	{
+		// 테레사 오브젝트 생성 -> IDLE로 변경
+		m_vPlayer = m_scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
+		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_Wp");
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(-0.535000920f, -0.799999893f, -3.64999032f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+	}
+	else if (name == L"야에 사쿠라")
+	{
+		// 사쿠라 오브젝트 생성 -> IDLE로 변경
+		m_vPlayer = m_scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
+		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Sakura_Wp");
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(-0.305001855f, -0.534999609f, -4.28503370f));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
+		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+	}
+
 }
 
 void CValkyrieProperty::End()
 {
+	if (m_vPlayer != nullptr)
+		m_vPlayer->SetDeleteThis(true);
 }
 
 _uint CValkyrieProperty::FixedUpdate()

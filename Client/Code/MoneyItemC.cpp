@@ -60,7 +60,6 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 
 	if (m_enable)
 	{
-		UpDown();
 
 		m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
 		if (m_currentValkyrie == nullptr)
@@ -79,10 +78,8 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 
 		if (CBattleUiManager::GetInstance()->GetBattleEnd())
 		{
-			GetOwner()->GetComponent<Engine::CTransformC>()->SetLerpSpeed(5.0f);
-			GetOwner()->GetComponent<Engine::CTransformC>()->SetLerpOn(true);
-			GetOwner()->GetComponent<Engine::CTransformC>()->SetGoalForward(m_currentValkyrie->GetTransform()->GetPosition());
-			GetOwner()->GetComponent<Engine::CTransformC>()->Lerp();
+			_float3 pos = m_currentValkyrie->GetTransform()->GetPosition() - GetOwner()->GetComponent<Engine::CTransformC>()->GetPosition();
+			GetOwner()->GetComponent<Engine::CTransformC>()->AddPosition(pos * (5.0f * GET_DT));
 		}
 	}
 }
