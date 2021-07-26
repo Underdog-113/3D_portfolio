@@ -104,11 +104,6 @@ void COneStageScene::Update(void)
 			m_spSky->GetTransform()->GetRotation().y + 0.01f * GET_DT);
 	}
 
-	if (Engine::CInputManager::GetInstance()->KeyDown(KEY_Q))
-	{
-		CButtonManager::GetInstance()->OnDestroy();
-		GET_CUR_CLIENT_SCENE->ChangeScene(CBattleEndScene::Create());
-	}
 }
 
 void COneStageScene::LateUpdate(void)
@@ -190,7 +185,6 @@ void COneStageScene::Create_SceneCamera(void)
 
 void COneStageScene::InitPrototypes(void)
 {
-
 }
 
 void COneStageScene::FindSkyObject()
