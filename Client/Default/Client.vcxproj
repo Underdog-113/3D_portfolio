@@ -97,7 +97,7 @@
     <OutDir>$(SolutionDir)Bin/Client/Release/x64/</OutDir>
     <IntDir>$(SolutionDir)Log/Client/Release/x64/</IntDir>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Reference/Library/Release/;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(SolutionDir)ExternalLibrary\PhysX\Lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Reference/Library/Release/;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)ExternalLibrary\FMOD\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -172,7 +172,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_SOLUTIONDIR=LR"($(SolutionDir))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../Code/;../Header/;$(SolutionDir)Reference/Header/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../Code/;$(ProjectDir)../Header/;$(SolutionDir)Reference/Header/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -236,6 +236,7 @@
     <ClInclude Include="..\Header\Bronya_Teleport_Laser.h" />
     <ClInclude Include="..\Header\Bronya_Teleport_Ring.h" />
     <ClInclude Include="..\Header\Bronya_Ult_Cannon.h" />
+    <ClInclude Include="..\Header\Bronya_Ult_Impact.h" />
     <ClInclude Include="..\Header\Bronya_Ult_Impact_Smoke.h" />
     <ClInclude Include="..\Header\Bronya_Ult_Laser.h" />
     <ClInclude Include="..\Header\Bronya_Ult_Range.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="..\Header\ButtonManager.h" />
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\DissolveShader_Glow.h" />
+    <ClInclude Include="..\Header\EffectMaker_Sakura.h" />
     <ClInclude Include="..\Header\GaneshaAirbornePattern.h" />
     <ClInclude Include="..\Header\ElevatorBaseShader.h" />
     <ClInclude Include="..\Header\GachaBox_Eff.h" />
@@ -496,6 +498,7 @@
     <ClInclude Include="..\Header\Stage_Wall.h" />
     <ClInclude Include="..\Header\Stage_Wall_barrier.h" />
     <ClInclude Include="..\Header\StuffItem.h" />
+    <ClInclude Include="..\Header\StuffItemC.h" />
     <ClInclude Include="..\Header\Stun_Eff.h" />
     <ClInclude Include="..\Header\Stun_Star.h" />
     <ClInclude Include="..\Header\SupplyItem.h" />
@@ -506,6 +509,8 @@
     <ClInclude Include="..\Header\Take.h" />
     <ClInclude Include="..\Header\TestParticle.h" />
     <ClInclude Include="..\Header\TheresaCharge_Att.h" />
+    <ClInclude Include="..\Header\Theresa_CrossBlade.h" />
+    <ClInclude Include="..\Header\Theresa_CrossBloodyHug.h" />
     <ClInclude Include="..\Header\Theresa_Trail.h" />
     <ClInclude Include="..\Header\Theresa_Ult_Charge.h" />
     <ClInclude Include="..\Header\Theresa_Ult_ChargeSmoke.h" />
@@ -525,6 +530,7 @@
     <ClInclude Include="..\Header\ThreeStageScene.h" />
     <ClInclude Include="..\Header\TimerC.h" />
     <ClInclude Include="..\Header\TimeSeeker.h" />
+    <ClInclude Include="..\Header\TwoConversationC.h" />
     <ClInclude Include="..\Header\TwoStagePhaseControl.h" />
     <ClInclude Include="..\Header\TwoStageScene.h" />
     <ClInclude Include="..\Header\UltScrShader.h" />
@@ -580,16 +586,10 @@
     <ClInclude Include="..\Header\WooScene.h" />
     <ClInclude Include="..\Header\YongScene.h" />
     <ClInclude Include="..\Header\Include_ForTest.h" />
-    <ClInclude Include="Bronya_Ult_Impact.h" />
-    <ClInclude Include="EffectMaker_Sakura.h" />
-    <ClInclude Include="StuffItemC.h" />
-    <ClInclude Include="Theresa_CrossBlade.h" />
-    <ClInclude Include="Theresa_CrossBloodyHug.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TwoConversationC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp" />
@@ -645,6 +645,7 @@
     <ClCompile Include="..\Code\Bronya_Teleport_Laser.cpp" />
     <ClCompile Include="..\Code\Bronya_Teleport_Ring.cpp" />
     <ClCompile Include="..\Code\Bronya_Ult_Cannon.cpp" />
+    <ClCompile Include="..\Code\Bronya_Ult_Impact.cpp" />
     <ClCompile Include="..\Code\Bronya_Ult_Impact_Smoke.cpp" />
     <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp" />
     <ClCompile Include="..\Code\Bronya_Ult_Range.cpp" />
@@ -655,6 +656,7 @@
     <ClCompile Include="..\Code\ButtonManager.cpp" />
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\DissolveShader_Glow.cpp" />
+    <ClCompile Include="..\Code\EffectMaker_Sakura.cpp" />
     <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ElevatorBaseShader.cpp" />
     <ClCompile Include="..\Code\GachaBox_Eff.cpp" />
@@ -881,6 +883,7 @@
     <ClCompile Include="..\Code\Stage_Wall.cpp" />
     <ClCompile Include="..\Code\Stage_Wall_barrier.cpp" />
     <ClCompile Include="..\Code\StuffItem.cpp" />
+    <ClCompile Include="..\Code\StuffItemC.cpp" />
     <ClCompile Include="..\Code\Stun_Eff.cpp" />
     <ClCompile Include="..\Code\Stun_Star.cpp" />
     <ClCompile Include="..\Code\SupplyItem.cpp" />
@@ -891,6 +894,8 @@
     <ClCompile Include="..\Code\Take.cpp" />
     <ClCompile Include="..\Code\TestParticle.cpp" />
     <ClCompile Include="..\Code\TheresaCharge_Att.cpp" />
+    <ClCompile Include="..\Code\Theresa_CrossBlade.cpp" />
+    <ClCompile Include="..\Code\Theresa_CrossBloodyHug.cpp" />
     <ClCompile Include="..\Code\Theresa_Trail.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_Charge.cpp" />
     <ClCompile Include="..\Code\Theresa_Ult_ChargeSmoke.cpp" />
@@ -910,6 +915,7 @@
     <ClCompile Include="..\Code\ThreeStageScene.cpp" />
     <ClCompile Include="..\Code\TimerC.cpp" />
     <ClCompile Include="..\Code\TimeSeeker.cpp" />
+    <ClCompile Include="..\Code\TwoConversationC.cpp" />
     <ClCompile Include="..\Code\TwoStagePhaseControl.cpp" />
     <ClCompile Include="..\Code\TwoStageScene.cpp" />
     <ClCompile Include="..\Code\UltScrShader.cpp" />
@@ -965,19 +971,13 @@
     <ClCompile Include="..\Code\WooScene.cpp" />
     <ClCompile Include="..\Code\YongScene.cpp" />
     <ClCompile Include="..\Header\Sakura_Mark.cpp" />
-    <ClCompile Include="Bronya_Ult_Impact.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="EffectMaker_Sakura.cpp" />
-    <ClCompile Include="StuffItemC.cpp" />
-    <ClCompile Include="Theresa_CrossBlade.cpp" />
-    <ClCompile Include="Theresa_CrossBloodyHug.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TwoConversationC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
@@ -996,10 +996,14 @@
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AttackRangeShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
@@ -1035,6 +1039,8 @@
     <FxCompile Include="..\..\Resource\Shader\DissolveShader_Glow.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ElevatorBaseShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
@@ -1045,6 +1051,8 @@
     <FxCompile Include="..\..\Resource\Shader\FireShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\KianaBodyShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
@@ -1055,6 +1063,8 @@
     <FxCompile Include="..\..\Resource\Shader\LaserTrailShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
@@ -1071,6 +1081,8 @@
     <FxCompile Include="..\..\Resource\Shader\MeshTrailShader_Glow.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\OutlineShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
@@ -1083,6 +1095,8 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
@@ -1093,6 +1107,8 @@
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SpawnEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

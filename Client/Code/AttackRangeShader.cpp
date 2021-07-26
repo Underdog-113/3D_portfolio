@@ -26,6 +26,10 @@ void CAttackRangeShader::Free()
 void CAttackRangeShader::Awake()
 {
 	__super::Awake();
+
+	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
+	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Final");
+
 	m_fTime = 0.f;
 	m_fUVSpeed = 0.25f;
 }

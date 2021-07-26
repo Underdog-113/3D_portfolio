@@ -1054,9 +1054,6 @@
     <Filter Include="10.ControlTower\MovieDirector\Take">
       <UniqueIdentifier>{8f5e726d-c4d5-4c89-847e-51925c40fc89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\17.AlphaMaskGlowShader">
-      <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Shader\07.SoftEffectShader\SoftEffectShader_Glow">
       <UniqueIdentifier>{ee63748f-4688-4a58-9adc-cab1b001ad3d}</UniqueIdentifier>
     </Filter>
@@ -1132,8 +1129,14 @@
     <Filter Include="04.Shader\19.MapShaders\00.ElevatorShader">
       <UniqueIdentifier>{d24913b4-133b-46c9-991d-6569ebc98fb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\19.MapShaders\01.Normal">
+      <UniqueIdentifier>{90083b84-ebb7-4349-b424-a798c670ae0c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff">
       <UniqueIdentifier>{09dbe463-0f52-48b9-bb34-2ad8c29697c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\09.AlphaMaskShader\AlphaMaskGlowShader">
+      <UniqueIdentifier>{841b4bcc-a279-4bce-9225-cb576dd07cec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1905,12 +1908,6 @@
     <ClInclude Include="..\Header\RobotHookEff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
     </ClInclude>
-    <ClInclude Include="Theresa_CrossBloodyHug.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClInclude>
-    <ClInclude Include="Theresa_CrossBlade.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Kiana_Pistol.h">
       <Filter>02.Objects\01.ForUnit\00.Valkyrie\00.Kiana\Pistol</Filter>
     </ClInclude>
@@ -2088,17 +2085,11 @@
     <ClInclude Include="..\Header\Bronya_Ult_Cannon.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClInclude>
-    <ClInclude Include="Bronya_Ult_Impact.h">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Bronya_Ult_Impact_Smoke.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Bronya_Ult_Range.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectMaker_Sakura.h">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Bronya_Ult_Laser.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
@@ -2196,9 +2187,6 @@
     <ClInclude Include="..\Header\OneConversationC.h">
       <Filter>03.Component\02.Conversation\00.OneConversation</Filter>
     </ClInclude>
-    <ClInclude Include="TwoConversationC.h">
-      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\DecalShader.h">
       <Filter>04.Shader\16.DecalShader</Filter>
     </ClInclude>
@@ -2225,9 +2213,6 @@
     </ClInclude>
     <ClInclude Include="..\Header\MoneyItemC.h">
       <Filter>03.Component\03.Item\02.MoneyItem</Filter>
-    </ClInclude>
-    <ClInclude Include="StuffItemC.h">
-      <Filter>03.Component\03.Item\03.StuffItem</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SpiderImpact.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
@@ -2272,7 +2257,7 @@
       <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\AlphaMaskGlowShader.h">
-      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+      <Filter>04.Shader\09.AlphaMaskShader\AlphaMaskGlowShader</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SoftEffectShader_Glow.h">
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
@@ -2385,6 +2370,24 @@
     </ClInclude>
     <ClInclude Include="..\Header\GachaBox_Eff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Bronya_Ult_Impact.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EffectMaker_Sakura.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\StuffItemC.h">
+      <Filter>03.Component\03.Item\03.StuffItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_CrossBlade.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Theresa_CrossBloodyHug.h">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\TwoConversationC.h">
+      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3075,12 +3078,6 @@
     <ClCompile Include="..\Code\RobotHookEff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\04.Robot_SoftEff</Filter>
     </ClCompile>
-    <ClCompile Include="Theresa_CrossBloodyHug.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClCompile>
-    <ClCompile Include="Theresa_CrossBlade.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\BossStageScene.cpp">
       <Filter>01.Scene\12.BossStageScene</Filter>
     </ClCompile>
@@ -3249,17 +3246,11 @@
     <ClCompile Include="..\Code\Bronya_Ult_Cannon.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClCompile>
-    <ClCompile Include="Bronya_Ult_Impact.cpp">
-      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Bronya_Ult_Impact_Smoke.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Bronya_Ult_Range.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectMaker_Sakura.cpp">
-      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Bronya_Ult_Laser.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
@@ -3357,9 +3348,6 @@
     <ClCompile Include="..\Code\OneConversationC.cpp">
       <Filter>03.Component\02.Conversation\00.OneConversation</Filter>
     </ClCompile>
-    <ClCompile Include="TwoConversationC.cpp">
-      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\DecalShader.cpp">
       <Filter>04.Shader\16.DecalShader</Filter>
     </ClCompile>
@@ -3386,9 +3374,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\MoneyItemC.cpp">
       <Filter>03.Component\03.Item\02.MoneyItem</Filter>
-    </ClCompile>
-    <ClCompile Include="StuffItemC.cpp">
-      <Filter>03.Component\03.Item\03.StuffItem</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SpiderImpact.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\13.SpiderEff</Filter>
@@ -3433,7 +3418,7 @@
       <Filter>10.ControlTower\MovieDirector\CameraShot\Fade</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AlphaMaskGlowShader.cpp">
-      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+      <Filter>04.Shader\09.AlphaMaskShader\AlphaMaskGlowShader</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SoftEffectShader_Glow.cpp">
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>
@@ -3547,6 +3532,24 @@
     <ClCompile Include="..\Code\GachaBox_Eff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Bronya_Ult_Impact.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\11.Bronya_MeshEff\Bronya_Ult</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EffectMaker_Sakura.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\02.Sakura\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StuffItemC.cpp">
+      <Filter>03.Component\03.Item\03.StuffItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_CrossBloodyHug.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Theresa_CrossBlade.cpp">
+      <Filter>02.Objects\01.ForUnit\00.Valkyrie\01.Theresa\Cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TwoConversationC.cpp">
+      <Filter>03.Component\02.Conversation\01.TwoConversation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3619,7 +3622,7 @@
       <Filter>04.Shader\15.KianaBodyShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\AlphaMaskGlowShader.fx">
-      <Filter>04.Shader\17.AlphaMaskGlowShader</Filter>
+      <Filter>04.Shader\09.AlphaMaskShader\AlphaMaskGlowShader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader_Glow.fx">
       <Filter>04.Shader\07.SoftEffectShader\SoftEffectShader_Glow</Filter>

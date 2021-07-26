@@ -65,6 +65,8 @@ void CShader::SetupWorldViewProj(SP(CGraphicsC) spGC)
 	m_pEffect->SetMatrix("g_matView", &viewMat);
 	m_pEffect->SetMatrix("g_matProj", &projMat);
 
+	m_pEffect->SetBool("g_FullShade", spGC->GetFullShade());
+
 	m_pEffect->CommitChanges();
 }
 

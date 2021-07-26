@@ -44,10 +44,12 @@ void CStage_Wall::Awake()
 	__super::Awake();
 
 	m_spMesh->SetMeshData(L"Stage_Wall");
-	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+	m_spMesh->SetIsEffectMesh(false);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spTexture->AddTexture(L"Wall");
 	m_spTexture->AddTexture(L"Wall");
+	//m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
+
 	m_spCollision = AddComponent<Engine::CCollisionC>();
 }
 

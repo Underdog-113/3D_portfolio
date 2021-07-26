@@ -3,7 +3,7 @@
 
 struct Wave
 {
-	float point = 0.f;
+	float point = 0.f;				// 현재 시간에 해당하는 진행상황
 
 	float amplitude = 0.f;			// 진폭, -amplitued ~ amplitude
 	float frequency = 0.f;			// 초당 주파수
@@ -37,7 +37,7 @@ struct ShakeChannel
 
 class CCameraShake
 {
-	enum ShakeChannelType { Player, Run, Max };
+	enum ShakeChannelType { Player, Monster, Max };
 
 public:
 	CCameraShake();

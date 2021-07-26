@@ -127,11 +127,12 @@ void CTwoStagePhaseControl::Update(void)
 	case (_int)ETwoStagePhase::Boss:
 		if (!m_isBossMovieOff)
 		{
+			//CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_BlackFadeIn();
 			CStageControlTower::GetInstance()->SetDirectorMode(false);
 			Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::BGM);
 			Engine::CSoundManager::GetInstance()->PlayBGM(L"GaneShaBGM_2.mp3");
 			Engine::CSoundManager::GetInstance()->SetVolume((_uint)Engine::EChannelID::BGM, 0.17f);
-			m_isBossMovieOff = false;
+			m_isBossMovieOff = true;
 		}
 
 

@@ -61,14 +61,14 @@ void CMB_Bronya::Start(void)
 		CBronyaHitPattern::Create(),
 		CBronyaAirbornePattern::Create(),
 		CBronyaStunPattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
+	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create()); // Pshield on
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -76,7 +76,8 @@ void CMB_Bronya::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(11277.f);
+	//stat.SetBaseHp(11277.f);
+	stat.SetBaseHp(2000.f);
 	stat.SetBaseAtk(110.f);
 	stat.SetBaseDef(37.f);
 
@@ -88,7 +89,7 @@ void CMB_Bronya::Start(void)
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(6);
 	m_pStat->SetOnSuperArmor(true);
-	m_pStat->SetMaxBreakGauge(99999.f);
+	m_pStat->SetMaxBreakGauge(40.f);
 	m_pStat->SetCurBreakGauge(m_pStat->GetMaxBreakGauge());
 	m_weakTime = 8.f;
 

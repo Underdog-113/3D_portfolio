@@ -99,6 +99,7 @@ void CKianaBranchSign::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetFloat("gEmissionPow", 0.15f);
 	pEffect->SetBool("g_zWriteEnable", true);
 	pEffect->CommitChanges();
 }

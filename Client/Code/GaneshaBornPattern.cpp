@@ -42,11 +42,7 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 		pOwner->GetComponent<Engine::CCollisionC>()->SetIsEnabled(true);
 		m_bornStart = false;
 		m_impactEffect = false;
-
-		// movie
-		CStageControlTower::GetInstance()->GetMovieDirector()->CutCurrentTake();
-		CStageControlTower::GetInstance()->GetPhaseControl()->IncreasePhase();
-
+		
 		return;
 	}
 
