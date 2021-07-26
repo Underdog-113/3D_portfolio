@@ -66,10 +66,11 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		pOwner->GetTransform()->SetForward(_float3(0, 0, 1));
+		
 
 		_float3 endPos = { 186.21f, mPos.y, -17.06f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
+		
 	}
 
 	/************************* Sound */
@@ -317,7 +318,7 @@ void CBronyaArsenalPattern::EscapePos(Engine::CObject* pOwner, SP(CFSM_BronyaC) 
 		m_lerpCurTimer = 0.f;
 		moved = true;
 
-		pOwner->GetTransform()->SetRotationY(D3DXToRadian(180));
+		pOwner->GetTransform()->SetForward(_float3(0, 0, 1));
 	}
 
 	/************************* Effect */

@@ -55,10 +55,10 @@ void CMB_Ganesha::Start(void)
 		CGaneshaHitPattern::Create(),
 		CGaneshaAirbornePattern::Create(),
 		CGaneshaStunPattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
-	m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
-	//m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaStampPattern::Create());
+	//m_spPatternMachine->AddPattern(CGaneshaRoll01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst01Pattern::Create());
+	m_spPatternMachine->AddPattern(CGaneshaBurst02Pattern::Create());
 
 	m_spTransform->SetSize(1.3f, 1.3f, 1.3f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -66,7 +66,7 @@ void CMB_Ganesha::Start(void)
 	m_spMesh->OnRootMotion();
 
 	BaseStat stat;
-	stat.SetBaseHp(9000.f);
+	stat.SetBaseHp(5500.f);
 	stat.SetBaseAtk(117.f);
 	stat.SetBaseDef(25.f);
 
