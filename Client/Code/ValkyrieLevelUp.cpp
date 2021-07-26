@@ -13,7 +13,14 @@ CValkyrieLevelUp::~CValkyrieLevelUp()
 
 void CValkyrieLevelUp::Start()
 {
-	if (CDataManager::GetInstance()->FindItemData().size() == 0)
+	_bool check = false;
+	for (auto obj : CDataManager::GetInstance()->FindItemData())
+	{
+		if (obj->GetType() == CItemData::STATE::ValkyrieMaterial)
+			check = true;
+	}
+
+	if (!check)
 	{
 		CValkyriegManager::GetInstance()->ChangeFSMProperty();
 		return;

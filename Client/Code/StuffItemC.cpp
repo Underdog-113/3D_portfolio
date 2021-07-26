@@ -60,6 +60,8 @@ void CStuffItemC::Update(SP(CComponent) spThis)
 
 	if (m_enable)
 	{
+		GetOwner()->GetTransform()->AddRotationY(1 * GET_DT);
+
 		m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
 		if (m_currentValkyrie == nullptr)
 		{

@@ -203,7 +203,7 @@ void CBattleEndManager::DataUpdate()
 
 		m_addCaptainExp++;
 	}
-	else if(m_captainExp == m_addCaptainExp)
+	else if(m_captainExp == m_addCaptainExp && m_captainExp != 0)
 	{
 		Engine::CSlider* slider = static_cast<Engine::CSlider*>(m_scene->FindObjectByName(L"MainCanvas_Slider_" + std::to_wstring(0)).get());
 		CDataManager::GetInstance()->FindCaptainData()->SetExperience(slider->GetValue());
