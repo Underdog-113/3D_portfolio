@@ -23,8 +23,6 @@ struct VS_IN
 {
 	vector		vPosition   : POSITION;	
 	vector		vNormal		: NORMAL;
-	//float3		vBiNormal	: BINORMAL;
-	//float3		vTangent	: TANGENT;
 	float2		vTexUV		: TEXCOORD0;
 };
 
@@ -34,8 +32,6 @@ struct VS_OUT
 	vector		vNormal		: NORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
-	//vector		vBiNormal	: TEXCOORD2;
-	//vector		vTangent	: TEXCOORD3;
 };
 
 // ¹öÅØ½º½¦ÀÌ´õ
@@ -50,8 +46,6 @@ VS_OUT VS_MAIN(VS_IN In)
 
 	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
 	Out.vNormal = normalize(mul(vector(In.vNormal.xyz, 0.f), g_matWorld));
-	//Out.vTangent = normalize(mul(vector(In.vTangent.xyz, 0.f), g_matWorld));
-	//Out.vBiNormal = normalize(mul(vector(In.vBiNormal.xyz, 0.f), g_matWorld));
 
 	Out.vTexUV = In.vTexUV;
 
@@ -66,8 +60,6 @@ struct PS_IN
 	vector		vNormal		: NORMAL;
 	float2		vTexUV		: TEXCOORD0;
 	vector		vProjPos	: TEXCOORD1;
-	/*vector		vTangent	: TEXCOORD2;
-	vector		vBiNormal	: TEXCOORD3;*/
 };
 
 struct PS_OUT
@@ -75,7 +67,6 @@ struct PS_OUT
 	vector		vColor : COLOR0;	
 	vector		vNormal : COLOR1;
 	vector		vDepth : COLOR2;
-	//vector		vEmissive : COLOR3;
 };
 
 // ÇÈ¼¿ ½¦ÀÌ´õ
@@ -86,12 +77,9 @@ PS_OUT		PS_MAIN(PS_IN In)
 	
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
-	//Out.vEmissive = float4(0, 0, 0, 1);
 	Out.vColor = albedo;
 	Out.vColor.a = 1.f;
 
-	//if (Out.vColor.r > Out.vColor.g && Out.vColor.r > Out.vColor.b)
-	//	Out.vColor = vector(0, 0, 0, 1);
 
 	Out.vColor += g_addColor;
 	Out.vColor *= g_multColor;
