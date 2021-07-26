@@ -141,6 +141,7 @@ void CThreeStagePhaseControl::Update(void)
 
 		//After killing Boss
 	case (_int)EThreeStagePhase::BossEnd:
+		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WinningSlow();
 		++m_curPhase;
 		break;
 
