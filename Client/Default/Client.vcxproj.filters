@@ -1147,6 +1147,9 @@
     <Filter Include="04.Shader\19.MapShaders\03.Stage3GlowShader">
       <UniqueIdentifier>{5437158f-38f0-4ea3-aac5-6f6bd5f6886c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Component\06.Indicator">
+      <UniqueIdentifier>{032fdec2-8b3b-4bf9-9636-b7fb1181a211}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
