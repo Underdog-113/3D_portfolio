@@ -588,6 +588,10 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 		m_checkUltraAtk = true;
 	}
 
+
+// 	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
+// 		m_pEffectMaker->ParentOff_Attack1();
+	 
 	if (!m_checkEffect && m_pDM->GetAniTimeline() > Delay_Effect_Atk01)
 	{
 		PlaySound_Attack_RandomVoice();
@@ -607,8 +611,10 @@ void CFSM_KianaC::Attack_1_Update(float deltaTime)
 		m_checkEffect = true;
 	}
 
-	if(m_pDM->GetAniTimeline()> Delay_Effect_Atk01 + 0.1f)
-		m_pKiana->UnActiveAttackBall();
+	if (m_pDM->GetAniTimeline() > Delay_Effect_Atk01 + 0.1f)
+	{
+		m_pKiana->UnActiveAttackBall();;
+	}
 
 	if (CheckAction_Evade_OnAction())
 		return;

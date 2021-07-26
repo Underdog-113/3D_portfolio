@@ -25,6 +25,10 @@
 #define StageKey_Test_Hit_H			KEY_C
 
 
+#define Kiana_Bonus_Level				5
+#define Theresa_Bonus_Level				5
+#define Sakura_Bonus_Level				5
+
 class CValkyrie;
 class CActorController;
 class CUILinker;

@@ -1237,7 +1237,7 @@ void CFSM_TheresaC::Charge2_Update(float deltaTime)
 
 		m_checkEffect = true;
 	}
-	if (!m_checkAttack && m_pDM->GetAniTimeline() > Delay_Effect_Charge2 + 0.05f)
+	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.21f)
 	{
 		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_Axe(), 1.6f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.3f, _float3(2.f, 0.f, 0.f));
 		m_pTheresa->ActiveAttackBall(m_pTheresa->GetAttackBall_AxeStick(), 1.f, HitInfo::Str_Airborne, HitInfo::CC_None, m_pTheresa->GetAxePivotWorldMatrix(), 0.2f, _float3(1.f, 0.f, 0.f));
@@ -1263,7 +1263,7 @@ void CFSM_TheresaC::Charge2_Update(float deltaTime)
 		m_checkShot = true;
 	}
 
-	if (m_pDM->GetAniTimeline() > 0.3f)
+	if (m_pDM->GetAniTimeline() > 0.25f)
 		OffAxeCollider();
 
 	if (CheckAction_Evade_OnAction())

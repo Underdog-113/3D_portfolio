@@ -31,6 +31,7 @@ void CDebugC::Awake(void)
 void CDebugC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
+
 	//if (m_pOwner->GetComponent<CMeshC>() != nullptr)
 	//{
 	//	m_spBV = std::dynamic_pointer_cast<CBoundingVolume>(ADD_CLONE(L"BoundingVolume", true));
@@ -104,11 +105,11 @@ void CDebugC::OnDisable(void)
 
 void CDebugC::AddDebugCollider(CCollider* pCollider)
 {
-	//P(CDebugCollider) spDC
-	//	= std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
-	//pDC->SetOwner(m_pOwner);
-	//pDC->SetCollider(pCollider);
-	//_vDebugCollider.emplace_back(spDC);
+	SP(CDebugCollider) spDC
+		= std::dynamic_pointer_cast<CDebugCollider>(m_pOwner->GetScene()->GetObjectFactory()->AddClone(L"DebugCollider", true));
+	spDC->SetOwner(m_pOwner);
+	spDC->SetCollider(pCollider);
+	m_vDebugCollider.emplace_back(spDC);
 }
 
 void CDebugC::DeleteDebugCollider(_int index)

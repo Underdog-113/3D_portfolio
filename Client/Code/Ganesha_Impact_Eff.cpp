@@ -41,7 +41,7 @@ void CGanesha_Impact_Eff::Awake()
 	__super::Awake();
 	m_spMesh->SetMeshData(L"Robot_Impact");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 	m_spTexture->AddTexture(L"Gray");
 	m_spTexture->AddTexture(L"yun01");
 	m_spTexture->AddTexture(L"yun01");

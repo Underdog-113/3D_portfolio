@@ -15,4 +15,5 @@
 #include "StuffItemC.h"
 #include  "MousePointC.h"
 #include "GachBoxC.h"
+#include "IndicatorC.h"
 #endif

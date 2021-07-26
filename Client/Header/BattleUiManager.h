@@ -6,15 +6,13 @@
 #include "ScrollViewObject.h"
 #include "Canvas.h"
 #include "ImageObject.h"
+#include "PhaseChanger.h"
 
 //public enum 
 // 0 : 일반공격
 // 1 : 회피
 // 2 : 필살기
 // 3 : 특수공격
-
-
-
 class CBattleUiManager final
 {
 public:
@@ -144,6 +142,11 @@ private:
 	std::vector<Engine::CObject*> m_vQte;
 
 	GETTOR_SETTOR(_bool, m_battleEnd, false, BattleEnd);
+	CPhaseChanger* m_CPhaseChanger;
+
+	std::vector<SP(Engine::CObject)> m_indicator;
+
+	_bool init;
 };
 
 

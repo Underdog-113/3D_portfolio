@@ -32,6 +32,11 @@ _uint CLoading::ThreadMain(void * pArg)
 
 
 	const std::wstring& sceneName = pLoading->m_pNextScene->GetObjectKey();
+
+	if (sceneName == L"OneStageScene" || sceneName == L"TwoStageScene" ||
+		sceneName == L"ThreeStageScene" || sceneName == L"BossStageScene")
+		Engine::CSoundManager::GetInstance()->StopAll();
+
 	pLoading->m_pNextScene->GetDataStore()->InitDataForScene(sceneName, pLoading->m_loadStaticResource);
 	pLoading->m_pNextScene->GetMeshStore()->InitMeshForScene(sceneName, pLoading->m_loadStaticResource);
 	pLoading->m_pNextScene->GetTextureStore()->InitTextureForScene(sceneName, pLoading->m_loadStaticResource);
@@ -67,8 +72,7 @@ void CLoading::Free(void)
 
 void CLoading::StartLoading(void)
 {
-	if(Engine::GET_CUR_SCENE->GetSceneID() != (_int)ESceneID::Init)
-		Engine::CSoundManager::GetInstance()->StopAll();
+	
 
 	InitializeCriticalSection(&m_crt);
 	m_threadHandle = (HANDLE)_beginthreadex(NULL, 0, ThreadMain, this, 0, NULL);

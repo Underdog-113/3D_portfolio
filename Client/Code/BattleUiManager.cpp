@@ -10,6 +10,8 @@
 #include "GlitterC.h"
 #include "SkillActivationC.h"
 #include "TargetPositionC.h"
+#include "ClientScene.h"
+#include "Monster.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -187,6 +189,9 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 	SquadOff(pScene);
 	WaitingPlayerSetting();
 
+	m_CPhaseChanger = static_cast<CPhaseChanger*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger").get());
+
+	init = false;
 }
 
 void CBattleUiManager::Update(void)
@@ -194,8 +199,44 @@ void CBattleUiManager::Update(void)
 	if (!m_activation)
 		return;
 
+	if (!init)
+	{
+		for (int i = 0; i <= 30; i++)
+		{
+			SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+			Indicator->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+			Indicator->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+			Indicator->AddComponent<Engine::CTextureC>()->AddTexture(L"Indicator");
+			Indicator->AddComponent<CIndicatorC>();
+			Indicator->SetIsEnabled(false);
+			m_indicator.emplace_back(Indicator);
+		}
+		init = true;
+	}
+
 	skillActivationImageCheck();
 	monsterHpBarCheck();
+
+	if(m_CPhaseChanger == nullptr)
+		m_CPhaseChanger = static_cast<CPhaseChanger*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger").get());
+
+	CValkyrie* m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
+	std::vector<SP(CMonster)> monster = m_CPhaseChanger->GetMonsters();
+	_int count = 0;
+	for (auto obj : monster)
+	{
+		if (obj->GetIsEnabled() == true)
+		{
+			m_indicator[count]->SetIsEnabled(true);
+			m_indicator[count]->GetComponent<CIndicatorC>()->SetTarget(obj);
+		}
+		else
+		{
+			m_indicator[count]->SetIsEnabled(false);
+		}
+		count++;
+	}
 }
 
 void CBattleUiManager::OnDestroy(void)

@@ -5,7 +5,7 @@
 #include "AttackBox.h"
 #include "ClientScene.h"
 #include "Sakura_DamageMark.h"
-
+#include "ItemObject.h"
 _uint CMonster::m_s_channelID = 0;
 
 CMonster::CMonster()
@@ -247,58 +247,30 @@ void CMonster::UnActiveAttackBox()
 
 void CMonster::MonsterDead()
 {
-	SP(Engine::CObject) item = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	SP(Engine::CObject) item = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"ItemObject", true, (_uint)ELayerID::Enemy, L"Object");
 	_float3 pos = GetTransform()->GetPosition();
 	pos.y += 0.3f;
 	item->GetTransform()->SetPosition(pos);
-	item->GetTransform()->SetSize(_float3(0.5f, 0.5f, 0.5f));
-	item->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	item->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
-	item->AddComponent<Engine::CRigidBodyC>()->AddForce(_float3(0, 500, 0));
+	item->GetTransform()->SetSize(_float3(0.7f, 0.7f, 0.7f));
 
-	_int value = rand() % 4;
-	// 이거 몬스터마다 내용이 다름
-	switch (value)
+	_int randValue = rand() % 4;
+
+	switch (randValue)
 	{
 	case 0:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"HPMedic");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Light_Box2");
-		item->AddComponent<CHpItemC>()->AddDataInit(100, 50);
+		item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"하급 학습 칩", 1), 50);
 		break;
 	case 1:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"sp");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Light_Box2");
-		item->AddComponent<CSpItemC>()->AddDataInit(100, 50);
+		item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"특급 학습 칩", 1), 50);
 		break;
 	case 2:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"coin");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Coin");
-		item->AddComponent<CMoneyItemC>()->AddDataInit(100, 50);
+		item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"고급 학습 칩", 1), 50);
 		break;
 	case 3:
-		item->AddComponent<Engine::CMeshC>()->SetMeshData(L"coin");
-		item->AddComponent<Engine::CTextureC>()->AddTexture(L"Coin");
-
-		_int randValue = rand() % 4;
-
-		switch (randValue)
-		{
-		case 0:
-			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"하급 학습 칩", 1), 50);
-			break;
-		case 1:
-			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"특급 학습 칩", 1), 50);
-			break;
-		case 2:
-			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"고급 학습 칩", 1), 50);
-			break;
-		case 3:
-			item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"무기 강화제", 1), 50);
-			break;
-		}
-
+		item->AddComponent<CStuffItemC>()->AddDataInit(ItemSave(L"무기 강화제", 1), 50);
 		break;
 	}
+
 }
 
 void CMonster::ChaseTarget(_float3 targetPos)

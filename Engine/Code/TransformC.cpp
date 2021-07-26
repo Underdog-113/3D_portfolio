@@ -585,6 +585,19 @@ void CTransformC::UpdateCamDistance(void)
 	m_camDist = D3DXVec3LengthSq(&(camPos - m_position));
 }
 
+void CTransformC::RemoveParent(void)
+{
+	_quat rotQuat;
+	D3DXQuaternionRotationMatrix(&rotQuat, &m_rotMatrix);
+	D3DXQuaternionNormalize(&rotQuat, &rotQuat);
+
+	_float3 finalRotation = GET_MATH->QuatToRad(rotQuat);
+	m_position = _float3(m_worldMatNoScale._41, m_worldMatNoScale._42, m_worldMatNoScale._43);
+	SetRotation(finalRotation);
+	m_spParent.reset();
+	m_spParent = nullptr;
+}
+
 void CTransformC::ApplyParentMatrix(const _mat* pMat)
 {
 	m_worldMatNoScale	*= *pMat;
