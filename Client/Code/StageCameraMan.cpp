@@ -57,8 +57,6 @@ void CStageCameraMan::UpdateCameraMan()
 	if (m_spCamera->GetMode() != Engine::ECameraMode::TPS_Custom)
 		return;
 
-	if (m_isSwitching)
-		return;
 
 	if (m_directorControl)
 	{
@@ -68,14 +66,17 @@ void CStageCameraMan::UpdateCameraMan()
 
 	ReturnBeforShaking();
 
-	PivotChasing();
-	
-	if (!MouseControlMode())
+	if (!m_isSwitching)
 	{
-		ManualControlMode();
+		PivotChasing();
 
-		if (!m_manualControl)
-			AutoControlMode();
+		if (!MouseControlMode())
+		{
+			ManualControlMode();
+
+			if (!m_manualControl)
+				AutoControlMode();
+		}
 	}
 
 	ApplyShaking();
@@ -559,83 +560,71 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 
 	_float rotateAngle = 45.f;
 	bool isCorrecting = false;
-	m_speedIncreaseTimer += GET_PLAYER_DT * 2.f;
 
-	if (m_speedIncreaseTimer < 1.f)
+
+	if (Engine::IMKEY_PRESS(StageKey_Move_Left))
 	{
-		if (Engine::IMKEY_PRESS(StageKey_Move_Left))
+		if (m_prevMoveKey != StageKey_Move_Left)
 		{
-			if (m_prevMoveKey != StageKey_Move_Left)
-			{
-				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
-				m_speedIncreaseTimer = 0.f;
-			}
-			isCorrecting = true;
-			m_rotateYDst -= D3DXToRadian(rotateAngle) * GET_PLAYER_DT * m_speedIncreaseTimer;
-			m_prevMoveKey = StageKey_Move_Left;
-		}
-
-		if (Engine::IMKEY_PRESS(StageKey_Move_Right))
-		{
-			if (m_prevMoveKey != StageKey_Move_Right)
-			{
-				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
-				m_speedIncreaseTimer = 0.f;
-			}
-			isCorrecting = true;
-			m_rotateYDst += D3DXToRadian(rotateAngle) * GET_PLAYER_DT * m_speedIncreaseTimer;
-			m_prevMoveKey = StageKey_Move_Right;
-		}
-
-		if (!isCorrecting)
+			m_rotateLerpStart = m_spCamera->GetLookAngleUp();
 			m_speedIncreaseTimer = 0.f;
+		}
+		isCorrecting = true;
+		m_rotateYDst -= D3DXToRadian(rotateAngle) * GET_PLAYER_DT * m_speedIncreaseTimer;
+		m_prevMoveKey = StageKey_Move_Left;
+	}
+
+	if (Engine::IMKEY_PRESS(StageKey_Move_Right))
+	{
+		if (m_prevMoveKey != StageKey_Move_Right)
+		{
+			m_rotateLerpStart = m_spCamera->GetLookAngleUp();
+			m_speedIncreaseTimer = 0.f;
+		}
+		isCorrecting = true;
+		m_rotateYDst += D3DXToRadian(rotateAngle) * GET_PLAYER_DT * m_speedIncreaseTimer;
+		m_prevMoveKey = StageKey_Move_Right;
+	}
+
+	if (!isCorrecting)
+	{
+		if (m_speedIncreaseTimer > 0.f)
+			m_speedIncreaseTimer -= GET_PLAYER_DT * 1.f;
 		else
 		{
-			_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT);
-			m_spCamera->SetLookAngleUp(lerpPoint);
-			m_rotateLerpStart = lerpPoint;
+			m_speedIncreaseTimer = 0.f;
+			return;
 		}
 	}
 	else
 	{
+		if (m_speedIncreaseTimer < 1.f)
+			m_speedIncreaseTimer += GET_PLAYER_DT * 1.f;
+		else
+			m_speedIncreaseTimer = 1.f;
 
-		if (Engine::IMKEY_PRESS(StageKey_Move_Left))
-		{
-			m_rotateYDst -= D3DXToRadian(rotateAngle) * GET_PLAYER_DT;
-			isCorrecting = true;
-
-			if (m_prevMoveKey == StageKey_Move_Right)
-			{
-				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
-				m_speedIncreaseTimer = 0.f;
-			}
-			m_prevMoveKey = StageKey_Move_Left;
-		}
-
-		if (Engine::IMKEY_PRESS(StageKey_Move_Right))
-		{
-			m_rotateYDst += D3DXToRadian(rotateAngle) * GET_PLAYER_DT;
-			isCorrecting = true;
-
-			if (m_prevMoveKey == StageKey_Move_Left)
-			{
-				m_rotateLerpStart = m_spCamera->GetLookAngleUp();
-				m_speedIncreaseTimer = 0.f;
-			}
-			m_prevMoveKey = StageKey_Move_Right;
-		}
-		
-		_float lerpPoint = FloatLerp(m_rotateLerpStart, m_rotateYDst, GET_PLAYER_DT * m_horzCorrectingSpeed);
-		m_spCamera->SetLookAngleUp(lerpPoint);
-		m_rotateLerpStart = lerpPoint;
-
-		if (abs(m_rotateYDst - m_rotateLerpStart) < 0.01f)
-		{
-			m_rotateYDst = lerpPoint;
-			m_speedIncreaseTimer = 0.f;
-		}
 	}
 
+	_float angle = m_rotateYDst - m_rotateLerpStart;
+	if (angle < 0.5f)
+	{
+		m_rotateLerpStart = m_rotateYDst;
+		m_spCamera->SetLookAngleUp(m_rotateYDst);
+		return;
+	}
+
+	_float p1 = m_rotateLerpStart;
+	_float p2 = m_rotateYDst;
+
+	_float p1Weight = p1 * sinf(angle * (1.f - GET_PLAYER_DT)) / sinf(angle);
+	_float p2Weight = p2 * sinf(angle * GET_PLAYER_DT) / sinf(angle);
+
+
+	_float lerpPoint = p1Weight + p2Weight;
+
+	m_spCamera->SetLookAngleUp(lerpPoint);
+	if (m_speedIncreaseTimer == 1.f)
+		m_rotateLerpStart = lerpPoint;
 }
 
 void CStageCameraMan::AppendPosYCorrecting()
@@ -736,7 +725,7 @@ void CStageCameraMan::AutoControlMode()
 		return;
 	}
 
-	//AppendHorizontalCorrecting();
+	AppendHorizontalCorrecting();
 	AppendAttackDirectionCorrecting();
 
 	ChangeShot();

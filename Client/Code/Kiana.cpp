@@ -135,6 +135,9 @@ void CKiana::Update(void)
 
 	if (m_ultraMode)
 		UseUltraCost();
+
+	if (Engine::IMKEY_DOWN(KEY_SPACE))
+		m_spStateMachine->ChangeState(Name_Attack_QTE);
 }
 
 void CKiana::LateUpdate(void)

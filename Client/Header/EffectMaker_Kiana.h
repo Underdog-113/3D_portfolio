@@ -14,6 +14,8 @@ public:
 	void CreateEffect_Attack4(_float yPos);
 	void CreateEffect_Attack5();
 
+	void CreateEffect_BranchSign();
+
 	void CreateEffect_Attack3_Branch();
 	void CreateEffect_Attack4_Branch();
 

@@ -93,6 +93,7 @@ void CFSM_SakuraC::ResetCheckMembers()
 	m_checkAttack = false;
 	m_checkAttack2nd = false;
 	m_checkAttack3rd = false;
+	m_checkShake = false;
 }
 
 void CFSM_SakuraC::OnAttackBall(_float damageRate, _float breakDamage, HitInfo::Strength strType, HitInfo::CrowdControl ccType)
@@ -207,6 +208,30 @@ void CFSM_SakuraC::ShadeEffect(_uint animIndex)
 	pEffect->Start();
 
 	m_dashShadeTimer = 0.f;
+}
+
+void CFSM_SakuraC::EvadeCounterAttack()
+{
+	SP(Engine::CObject) spObj;
+
+	spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Sakura_EvadeSkill_Start", true, (_uint)Engine::ELayerID::Effect);
+	spObj->GetTransform()->SetPosition(m_evadeStartPos);
+	spObj->GetTransform()->AddPositionY(0.7f);
+	spObj->GetTransform()->SetSize(2.f, 2.f, 2.f);
+
+	// attack balllllll
+
+	HitInfo info;
+	info.SetDamageRate(0.6f);
+	info.SetBreakDamage(10.f);
+	info.SetStrengthType(HitInfo::Str_High);
+	info.SetCrowdControlType(HitInfo::CC_Sakura);
+
+
+	m_pSakura->GetSubAttackBall()->SetupBall(1.f, info);
+	m_pSakura->GetSubAttackBall()->GetTransform()->SetPosition(m_evadeStartPos);
+	m_pSakura->GetSubAttackBall()->GetTransform()->AddPositionY(0.7f);
+	m_pSakura->GetSubAttackBall()->SetIsEnabled(true);
 }
 
 
@@ -657,10 +682,16 @@ void CFSM_SakuraC::Appear_Enter(void)
 	m_pDM->ChangeAniSet(Index_Appear);
 	m_pStageControlTower->ActorControl_SetInputLock(true);
 	m_pStageControlTower->SetVertCorrecting(false);
+
+	ResetCheckMembers();
+	PlaySound_Effect(L"Swap.wav");
+
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_SakuraC::Appear_Update(float deltaTime)
 {
+
 	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.258)
 	{
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
@@ -1961,10 +1992,12 @@ void CFSM_SakuraC::EvadeForward_Enter(void)
 	m_pStageControlTower->SetVertCorrecting(true);
 	//PlaySound_Attack_RandomEvade();
 
+	m_checkEvadeAttack = false;
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
 	m_dashShadeTimer = 0.f;
+	m_evadeStartPos = m_pSakura->GetTransform()->GetPosition();
 }
 
 void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
@@ -1974,10 +2007,17 @@ void CFSM_SakuraC::EvadeForward_Update(float deltaTime)
 	{
 		ShadeEffect(Index_EvadeForward);
 		m_dashShadeTimer = 0.f;
+
+		if (!m_checkEvadeAttack && CStageControlTower::GetInstance()->GetIsPerfectEvadeMode())
+		{
+			EvadeCounterAttack();
+			m_checkEvadeAttack = true;
+		}
 	}
 
 	if (m_isEvade&& m_pDM->GetAniTimeline() > 0.3)
 	{
+		m_pSakura->GetSubAttackBall()->SetIsEnabled(false);
 		m_isEvade = false;
 		m_pSakura->SetIsEvade(false);
 	}
@@ -2032,10 +2072,12 @@ void CFSM_SakuraC::EvadeBackward_Enter(void)
 
 	ResetCheckMembers();
 
+	m_checkEvadeAttack = false;
 	m_isEvade = true;
 	m_pSakura->SetIsEvade(true);
 	PlaySound_Effect_RandomEvade();
 	m_dashShadeTimer = 0.f;
+	m_evadeStartPos = m_pSakura->GetTransform()->GetPosition();
 }
 
 void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
@@ -2045,10 +2087,17 @@ void CFSM_SakuraC::EvadeBackward_Update(float deltaTime)
 	{
 		ShadeEffect(Index_EvadeBackward);
 		m_dashShadeTimer = 0.f;
+
+		if (!m_checkEvadeAttack && CStageControlTower::GetInstance()->GetIsPerfectEvadeMode())
+		{
+			EvadeCounterAttack();
+			m_checkEvadeAttack = true;
+		}
 	}
 
 	if (m_isEvade && m_pDM->GetAniTimeline() > 0.3)
 	{
+		m_pSakura->GetSubAttackBall()->SetIsEnabled(false);
 		m_isEvade = false;
 		m_pSakura->SetIsEvade(false);
 	}
@@ -2238,11 +2287,20 @@ void CFSM_SakuraC::SwitchIn_Init(void)
 void CFSM_SakuraC::SwitchIn_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_SwitchIn);
+	ResetCheckMembers();
+
+	m_pEffectMaker->CreateEffect_Switching();
 }
 
 void CFSM_SakuraC::SwitchIn_Update(float deltaTime)
 {
-	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.357)
+	if (!m_checkEffect && m_pDM->GetAniTimeline() > 0.1)
+	{
+		PlaySound_Effect(L"Swap.wav");
+		m_checkEffect = true;
+	}
+
+	if (!m_checkShake && m_pDM->GetAniTimeline() > 0.393)
 	{
 		m_pStageControlTower->GetCameraMan()->GetCameraShake()->Preset_Land();
 		m_checkShake = true;
@@ -2328,7 +2386,6 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 {
 	if (!m_checkAttack && m_pDM->GetAniTimeline() > 0.178f)
 	{
-		// 1��, ǥ��
 		InfernoActive_1st();
 		m_checkAttack = true;
 	}
@@ -2341,7 +2398,6 @@ void CFSM_SakuraC::Ultra_Update(float deltaTime)
 
 	if (!m_checkAttack2nd && m_pDM->GetAniTimeline() > 0.778f)
 	{
-		// 8����
 		m_pSakura->On8SliceAttack();
 		m_pStageControlTower->OffSakuraUltraActive();
 		m_checkAttack2nd = true;

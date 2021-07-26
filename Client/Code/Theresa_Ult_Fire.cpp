@@ -101,6 +101,8 @@ void CTheresa_Ult_Fire::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetFloat("gEmissionPow", 1.f);
+
 	pEffect->CommitChanges();
 }
 

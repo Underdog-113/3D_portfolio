@@ -104,7 +104,8 @@ void CKiana_CatPaw_Abs::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fDissolveAlpha);
-
+	pEffect->SetFloat("gEmissionPow", 0.45f);
+	pEffect->SetBool("gTrailCheck", false);
 	pEffect->CommitChanges();
 }
 
@@ -132,6 +133,7 @@ void CKiana_CatPaw_Abs::OnEnable(void)
 	m_spTransform->SetRotationY(m_pOwner->GetTransform()->GetRotation().y);
 
 	m_spMesh->GetFirstMeshData_Dynamic()->ResetAnimation();
+	m_fDissolveAlpha = 1.f;
 	m_isAnimEnd = false;
 }
 

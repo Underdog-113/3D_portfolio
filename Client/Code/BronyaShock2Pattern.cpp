@@ -61,6 +61,9 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 			m_onAtkBall = false;
 			m_offAtkBall = false;
 			m_onShockEffect = false;
+
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+
 			return;
 		}
 	}
@@ -84,6 +87,9 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_IDLE);
 		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
+
+		return;
 	}
 
 	/************************* AttackBall */

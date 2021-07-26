@@ -80,7 +80,7 @@ void CKianaBranchSign::Update(void)
 	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::SupplyScene)
 		_size = -3.5f * GET_DT;
 	else
-		_size = -3.5f * GET_PLAYER_DT;
+		_size = -10.5f * GET_PLAYER_DT;
 
 	this->GetTransform()->AddSize(_float3(_size, _size, _size));
 }
@@ -99,6 +99,7 @@ void CKianaBranchSign::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetFloat("gEmissionPow", 0.15f);
 	pEffect->SetBool("g_zWriteEnable", true);
 	pEffect->CommitChanges();
 }

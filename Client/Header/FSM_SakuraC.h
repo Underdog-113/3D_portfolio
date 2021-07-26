@@ -46,6 +46,7 @@ private:
 	void InfernoActive_1st();
 
 	void ShadeEffect(_uint animIndex);
+	void EvadeCounterAttack();
 
 private: /* Normal Actions */
 	bool CheckAction_Attack(const std::wstring& switchStateName, float coolTime = Cool_Attack);
@@ -99,6 +100,7 @@ private:
 	bool m_checkEndFlash = false;
 	bool m_checkFlashMove = false;
 	bool m_checkShake = false;
+	bool m_checkEvadeAttack = false;
 
 	bool m_isEvade = false;
 	bool m_isSecondEvade = false;
@@ -118,6 +120,7 @@ private:
 	_double m_runSoundTimer = 0;
 
 	_float3 m_targetToSakura = ZERO_VECTOR;
+	_float3 m_evadeStartPos = ZERO_VECTOR;
 
 
 

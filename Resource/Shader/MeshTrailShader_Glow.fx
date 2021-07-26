@@ -9,7 +9,7 @@ float4 gWorldLightPosition;
 
 float  gTime;
 float  gTrailAlpha;
-float  gEmissionPow = 0.2f;
+float  gEmissionPow = 0.25f;
 bool   gisSpawn;
 
 float  m_defaultDissolveVal = 0.9f;
@@ -124,7 +124,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 		float3 diffuse = (DissolveLineSize * DissolveLineColor + blendColor.rgb);
 			
 		Out.vColor = float4(diffuse, multiple);
-		Out.vEmissive = float4(float4(diffuse, multiple).rgb  * 0.25f, gTrailAlpha);
+		Out.vEmissive = float4(float4(diffuse, multiple).rgb  * gEmissionPow, gTrailAlpha);
 
 		return Out;
 	}		

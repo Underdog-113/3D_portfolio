@@ -82,6 +82,8 @@ public:
 	void SpecialUICanvasOff();
 	void SpecialUIUp();
 	void SpecialUIDwon();
+	void SpecialUIAdd(_float value);
+	_float GetSpecialUIValue();
 
 	bool SkillExecution(_int value, _int spValue, _float collTime);
 	bool SkillExecution_Switching(_int value, _int spValue, _float remainCool, _float coolTime);

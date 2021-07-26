@@ -106,6 +106,7 @@ void CTheresa_Ult_Explosion::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetFloat("gEmissionPow", 1.f);
 	pEffect->SetBool("gTrailCheck", false);
 	pEffect->CommitChanges();
 }

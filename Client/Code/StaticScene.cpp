@@ -160,7 +160,7 @@
 #include "MonsterDieParticle.h"
 
 ///// Ingame Deco Effect //////
-//Stuc
+//Stun
 #include "Stun_Eff.h"
 #include "Stun_Star.h"
 
@@ -193,6 +193,7 @@
 #include "Elevator_L_Door.h"
 #include "Elevator_R_Door.h"
 
+#include "GachaBox_Eff.h"
 CStaticScene::CStaticScene()
 {
 }
@@ -797,5 +798,8 @@ void CStaticScene::InitEffectPrototypes(void)
 
 	SP(CMeshEffect_Client) spStun_Star(CStun_Star::Create(true, this));
 	GetObjectFactory()->AddPrototype(spStun_Star);
+
+	SP(CMeshEffect_Client) spGachaBoxEff(CGachaBox_Eff::Create(true, this));
+	GetObjectFactory()->AddPrototype(spGachaBoxEff);
 
 }

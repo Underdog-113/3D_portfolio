@@ -22,6 +22,11 @@ void CTake::StartTake()
 
 void CTake::ActTake()
 {
+	if (Engine::IMKEY_PRESS(KEY_SHIFT))
+		Engine::CFRC::GetInstance()->SetFastLoad(6.f);
+	else
+		Engine::CFRC::GetInstance()->SetFastLoad(1.f);
+
 	if (m_editMode)
 		ActTake_EditMode();
 	else
@@ -81,6 +86,8 @@ void CTake::ActTake_NormalMode()
 void CTake::EndTake()
 {
 	CStageControlTower::GetInstance()->SetDirectorMode(false);
+	Engine::CFRC::GetInstance()->SetFastLoad(1.f);
+
 // 
 // 	for (auto iter : m_shotMap)
 // 	{
