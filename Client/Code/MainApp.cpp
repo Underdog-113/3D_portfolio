@@ -32,6 +32,7 @@
 #include "DissolveShader_Glow.h"
 #include "UltScrShader.h"
 #include "ElevatorBaseShader.h"
+#include "Stage2GlowShader.h"
 #include "BronyaShader.h"
 #pragma endregion
 
@@ -95,7 +96,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CUltScrShader::Create(), L"UltScrShader", (_uint)EShaderID::UltScrShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CElevatorBaseShader::Create(), L"ElevatorBaseShader", (_uint)EShaderID::ElevatorBaseShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CBronyaShader::Create(), L"BronyaShader", (_uint)EShaderID::BronyaShader);
-
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CStage2GlowShader::Create(), L"Stage2GlowShader", (_uint)EShaderID::Stage2GlowShader);
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }

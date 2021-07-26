@@ -77,12 +77,12 @@ void CInitScene::Start(void)
 	spCameraObject->SetMode(Engine::ECameraMode::Edit);
 	Engine::CCameraManager::GetInstance()->AddCamera(L"InitSceneBasicCamera", spCameraObject);
 	Engine::CCameraManager::GetInstance()->SetMainCamera(spCameraObject);
-    
+
 	spCameraObject->GetTransform()->SetPosition(_float3(0.2f, 1.f,  -2.98f));
 	spCameraObject->GetTransform()->SetRotation(_float3(-0.055f, -0.021f, 0.0f));
 
 	m_spElevatorBase = ADD_CLONE(L"ElevatorBase", false, (_int)Engine::ELayerID::Decoration);
-	
+
 	_float _fY = 0.f;
 	for (_int i = 0; i < 2; ++i)
 	{
@@ -99,7 +99,7 @@ void CInitScene::Start(void)
 
 	text = ADD_CLONE(L"TextObject", false, (_int)Engine::ELayerID::UI, L"");
 	text->GetTransform()->SetPositionZ(0.5f);
-	text->AddComponent<Engine::CTextC>()->AddFontData(L"µ¥ÀÌÅÍ °»½Å Áß 0.0%", _float2(-170,320), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
+	text->AddComponent<Engine::CTextC>()->AddFontData(L"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 0.0%", _float2(-170,320), _float2(0, 0), 25, DT_VCENTER + DT_LEFT + DT_NOCLIP, D3DXCOLOR(1,1,1,1), true);
 
 	{
 		slider =
@@ -137,11 +137,11 @@ void CInitScene::Update(void)
 {
 	__super::Update();
 	float value = slider->GetValue();
-	value = min(value + GET_DT * 37, 100); // 38ÀÌ ½½¶óÀÌ´õ¹Ù Â÷¿À¸£´Â¼ÓµµÀÓ ÃÖÁ¾ºôµå¸¸µé¶§ ¼ÓµµÁÙ¿©¼­ ·Îµùº¸´Ù ½½¶óÀÌ´õÂ÷¿À¸£´Â¼Óµµ ±æ°Ô ¸¸µé¾î¾ßÇÔ ¿ë¼®
+	value = min(value + GET_DT * 37, 100); // 38ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å¸¸ï¿½é¶§ ï¿½Óµï¿½ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¼®
 	slider->SetValue(value);
 	std::wstring str = std::to_wstring(value);
 	str = str.substr(0, 6);
-	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"µ¥ÀÌÅÍ °»½Å Áß " + str+ L"%");
+	text->GetComponent<Engine::CTextC>()->ChangeMessage(L"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ " + str+ L"%");
 
 	if(!m_isStaticScene)
 		m_fTempSoundLength += GET_DT;
@@ -165,7 +165,7 @@ void CInitScene::Update(void)
 		}
 		else
 		{
-			
+
 			if (!m_init)
 			{
 				CDataManager::GetInstance()->Start();
