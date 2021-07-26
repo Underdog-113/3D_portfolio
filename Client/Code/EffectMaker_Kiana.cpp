@@ -33,6 +33,18 @@ void CEffectMaker_Kiana::CreateEffect_Attack1()
 	effect->GetTransform()->AddPositionY(m_pKiana->GetComponent<Engine::CMeshC>()->GetHalfYOffset());
 	effect->GetTransform()->SetSize(_float3(size, size, size));
 
+	m_attack1_parentOff = false;
+	m_attack1 = effect;
+}
+
+void CEffectMaker_Kiana::ParentOff_Attack1()
+{
+	if (m_attack1 && !m_attack1_parentOff)
+	{
+		m_attack1->GetTransform()->RemoveParent();
+		m_attack1_parentOff = true;
+		m_attack1 = nullptr;
+	}
 }
 
 void CEffectMaker_Kiana::CreateEffect_Attack2()

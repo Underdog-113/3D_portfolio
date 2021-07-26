@@ -693,7 +693,7 @@ void CStageCameraMan::AppendHorizontalCorrecting()
 void CStageCameraMan::RotateCameraHorizontal()
 {
 	_float angle = m_rotateYDst - m_rotateLerpStart;
-	if (angle < 0.5f)
+	if (angle < D3DXToRadian(1.f))
 	{
 		m_rotateLerpStart = m_rotateYDst;
 		m_spCamera->SetLookAngleUp(m_rotateYDst);

@@ -95,7 +95,7 @@ protected:
 protected:	
 	GETTOR			(SP(Engine::CStateMachineC),	m_spStateMachine,	nullptr,	StateMachine)
 		
-	GETTOR			(V_Stat*,						m_pStat,			nullptr,	Stat)
+	GETTOR_SETTOR	(V_Stat*,						m_pStat,			nullptr,	Stat)
 	GETTOR			(CAttackBall*,					m_pAttackBall,		nullptr,	AttackBall)
 	
 	GETTOR_SETTOR	(_bool,							m_isDead,			false,		IsDead)
