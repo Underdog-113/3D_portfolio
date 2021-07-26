@@ -180,6 +180,8 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 			// stun
 			if (abs(acos(dot)) < PI / 2)
 			{
+				CStageControlTower::GetInstance()->GetCurrentActor()->SetStunState(1.f);
+
 				std::cout << ": " << abs(acos(dot)) * 180 / PI << std::endl;
 				std::cout << "Stun!" << std::endl;
 			}

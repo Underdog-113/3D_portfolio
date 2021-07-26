@@ -78,6 +78,7 @@ public:
 	_bool	CheckSkillUseable(void);
 	_bool	CheckSwitchable();
 
+	void SetStunState(_float stunTime);
 
 protected:
 	static			_uint							m_s_uniqueID;
@@ -112,6 +113,13 @@ protected:
 	
 	GETTOR_SETTOR	(_float,						m_yDefaultOffset,	0.f,		DefaultOffset)
 	GETTOR_SETTOR	(_bool,							m_ccImmune,			false,			CCImmune)
+
+
+		
+
+	_float m_stunDuration = 0.f;
+	_float m_stunTimer = 0.f;
+	_bool m_isStun = false;
 };
 
 #endif
