@@ -42,5 +42,12 @@ private:
 private:
 	ItemStyle m_eItemStyle;
 
-};
+private:
+	template <typename T>
+	void ItemComponentType()
+	{
+		AddComponent<T>()->AddDataInit(100, 50);
+		GetComponent<T>()->SetOwner(this);
+	}
 
+};

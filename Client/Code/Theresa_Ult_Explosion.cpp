@@ -57,7 +57,6 @@ void CTheresa_Ult_Explosion::Start()
 
 	SP(Engine::CObject) spCrackEffect
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Crack", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
-
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetPosition(m_spTransform->GetPosition());
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeX(0.5f);
 	spCrackEffect->GetComponent<Engine::CTransformC>()->SetSizeY(0.5f);
@@ -67,9 +66,9 @@ void CTheresa_Ult_Explosion::Start()
 		= Engine::GET_CUR_SCENE->ADD_CLONE(L"Theresa_Ult_Smoke", true, (_int)Engine::ELayerID::Effect, L"MeshEffect0");
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPosition(m_spTransform->GetPosition());
 	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetPositionY(m_spTransform->GetPosition().y - 1.f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(1.f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeY(1.f);
-	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(1.f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeX(0.1f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeY(0.2f);
+	spSmokeEffect->GetComponent<Engine::CTransformC>()->SetSizeZ(0.1f);
 
 
 	m_fAlpha = 1.f;
