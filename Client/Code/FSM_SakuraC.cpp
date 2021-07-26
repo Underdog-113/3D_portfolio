@@ -1966,11 +1966,13 @@ void CFSM_SakuraC::StandBy_Back_End(void)
 
 void CFSM_SakuraC::Stun_Init(void)
 {
+	m_pDM->SetLoopAnim(Index_Stun);
 }
 
 void CFSM_SakuraC::Stun_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Stun);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_SakuraC::Stun_Update(float deltaTime)
@@ -1979,6 +1981,7 @@ void CFSM_SakuraC::Stun_Update(float deltaTime)
 
 void CFSM_SakuraC::Stun_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_SakuraC::EvadeForward_Init(void)

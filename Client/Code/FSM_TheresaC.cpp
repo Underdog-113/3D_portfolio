@@ -1440,17 +1440,16 @@ void CFSM_TheresaC::Stun_Init(void)
 void CFSM_TheresaC::Stun_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Stun);
-	m_stunTimer = 0.f;
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_TheresaC::Stun_Update(float deltaTime)
 {
-	if (CheckAction_StandBy_Timeout())
-		return;
 }
 
 void CFSM_TheresaC::Stun_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_TheresaC::SwitchIn_Init(void)

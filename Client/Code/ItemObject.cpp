@@ -33,13 +33,14 @@ SP(Engine::CObject) CItemObject::MakeClone()
 	spClone->m_spGraphics = spClone->GetComponent<Engine::CGraphicsC>();
 	spClone->m_spShader = spClone->GetComponent<Engine::CShaderC>();
 	spClone->m_spTexture = spClone->GetComponent<Engine::CTextureC>();
-
+	spClone->m_spRigidC = spClone->GetComponent<Engine::CRigidBodyC>();
 	return spClone;
 }
 
 void CItemObject::Awake()
 {
 	__super::Awake();
+	m_spRigidC = AddComponent<Engine::CRigidBodyC>();
 	m_spMesh->SetMeshData(L"HPMedic");
 	m_spMesh->SetIsEffectMesh(true);
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
@@ -62,26 +63,28 @@ void CItemObject::Start()
 		m_spMesh->SetMeshData(L"coin");
 		m_spTexture->ChangeTexture(L"Coin",0,0);
 		m_spTexture->ChangeTexture(L"Coin",0,1);
-		AddComponent<CMoneyItemC>()->AddDataInit(100, 50);
-		GetComponent<CMoneyItemC>()->SetOwner(this);
+		ItemComponentType<CMoneyItemC>();		
 		break;
 	case 1:
 		m_eItemStyle = ItemStyle::SP;
 		m_spMesh->SetMeshData(L"sp");
 		m_spTexture->ChangeTexture(L"Light_Box2", 0, 0);
 		m_spTexture->ChangeTexture(L"Power", 0, 1);
-		AddComponent<CSpItemC>()->AddDataInit(100, 50);
-		GetComponent<CSpItemC>()->SetOwner(this);
+		ItemComponentType<CSpItemC>();
 		break;
 	case 2:
 		m_eItemStyle = ItemStyle::HP;
-		AddComponent<CHpItemC>()->AddDataInit(100, 50);
-		GetComponent<CHpItemC>()->SetOwner(this);
+		m_spMesh->SetMeshData(L"HPMedic");
+		m_spTexture->ChangeTexture(L"Healing", 0, 0);
+		m_spTexture->ChangeTexture(L"Healing", 0, 1);
+		ItemComponentType<CHpItemC>();
 		break;
 	default:
 		m_eItemStyle = ItemStyle::HP;
-		AddComponent<CHpItemC>()->AddDataInit(100, 50);
-		GetComponent<CHpItemC>()->SetOwner(this);
+		m_spMesh->SetMeshData(L"HPMedic");
+		m_spTexture->ChangeTexture(L"Healing", 0, 0);
+		m_spTexture->ChangeTexture(L"Healing", 0, 1);
+		ItemComponentType<CHpItemC>();
 		break;
 	}
 
@@ -99,7 +102,6 @@ void CItemObject::Update()
 {
 	__super::Update();
 
-	//m_spTransform->AddRotationY(D3DXToRadian(15.f) * GET_DT * 3.f);
 }
 
 void CItemObject::LateUpdate()
@@ -113,7 +115,7 @@ void CItemObject::PreRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->SetBool("g_zWriteEnabled", false);
-	pEffect->SetFloat("gEmissionPow", 0.15f);
+	pEffect->SetFloat("gEmissionPow", 0.25f);
 	pEffect->CommitChanges();
 }
 

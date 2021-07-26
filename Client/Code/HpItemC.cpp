@@ -72,7 +72,7 @@ void CHpItemC::Update(SP(CComponent) spThis)
 
 		std::cout << Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) << std::endl;
 
-		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.35f)
+		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.5f)
 		{
 			_float value = min(m_currentValkyrie->GetStat()->GetCurHp() + (_float)m_hpValue, m_currentValkyrie->GetStat()->GetMaxHp());
 			m_currentValkyrie->GetStat()->SetCurHp(value);

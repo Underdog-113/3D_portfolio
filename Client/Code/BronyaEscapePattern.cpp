@@ -25,6 +25,8 @@ CBronyaEscapePattern::~CBronyaEscapePattern()
 
 void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 {
+	m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+
 	_float3 tPos = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition(); // target pos
 	_float3 mPos = pOwner->GetTransform()->GetPosition(); // monster pos
 	_float len = D3DXVec3Length(&(tPos - mPos));
@@ -131,7 +133,6 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 			
 			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-5.3f * GET_DT);
 
-			m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
 			std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-5.3f * GET_DT);
 
 			if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f)

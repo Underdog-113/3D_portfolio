@@ -12,6 +12,7 @@
 #include "TargetPositionC.h"
 #include "ClientScene.h"
 #include "Monster.h"
+#include "Layer.h"
 
 IMPLEMENT_SINGLETON(CBattleUiManager)
 void CBattleUiManager::Start(Engine::CScene * pScene)
@@ -204,8 +205,8 @@ void CBattleUiManager::Update(void)
 		for (int i = 0; i <= 30; i++)
 		{
 			SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-			Indicator->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshShader);
+			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+			Indicator->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 			Indicator->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
 			Indicator->AddComponent<Engine::CTextureC>()->AddTexture(L"Indicator");
 			Indicator->AddComponent<CIndicatorC>();
@@ -218,13 +219,20 @@ void CBattleUiManager::Update(void)
 	skillActivationImageCheck();
 	monsterHpBarCheck();
 
-	if(m_CPhaseChanger == nullptr)
-		m_CPhaseChanger = static_cast<CPhaseChanger*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger").get());
+// 	if(m_CPhaseChanger == nullptr)
+// 		m_CPhaseChanger = static_cast<CPhaseChanger*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger").get());
 
 	CValkyrie* m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
-	std::vector<SP(CMonster)> monster = m_CPhaseChanger->GetMonsters();
+
+	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
+	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
+
+	if (monsterList.empty())
+		return;
+
+//	std::vector<SP(CMonster)> monster = m_CPhaseChanger->GetMonsters();
 	_int count = 0;
-	for (auto obj : monster)
+	for (auto obj : monsterList)
 	{
 		if (obj->GetIsEnabled() == true)
 		{

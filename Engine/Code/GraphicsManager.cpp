@@ -69,6 +69,7 @@ void CGraphicsManager::Render(void)
 	RenderAlphaTest();
 	RenderEffect();
 	RenderLights();
+
 	//Deferred End
 	RenderDeferBlend();
 	RenderAlphaBlend();

@@ -70,7 +70,7 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 
 		_float3 pos = GetOwner()->GetTransform()->GetPosition();
 		pos.y = m_oldY;
-		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.35)
+		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.5f)
 		{
 			CDropItemManager::GetInstance()->SetGold(CDropItemManager::GetInstance()->GetGold() + m_moneyValue);
 

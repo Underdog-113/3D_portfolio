@@ -87,7 +87,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 	//	return Out;
 	//}
 
-	Out.vEmissive = vector(albedo.xyz * g_glowCoef, 1.f);
+	Out.vEmissive = vector(albedo.xyz * 0.3f, 1.f);
 
 
 	Out.vColor = albedo;
@@ -116,6 +116,9 @@ technique Default_Device
 	pass Origin
 	{
 		CullMode = NONE;
+		/*alphablendenable = true;
+		srcblend = srcalpha;
+		destblend = zero;*/
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}

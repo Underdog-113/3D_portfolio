@@ -524,10 +524,6 @@ void CFSM_KianaC::StandBy_End(void)
 {
 }
 
-void CFSM_KianaC::Stun_Init(void)
-{
-}
-
 void CFSM_KianaC::Appear_Init(void)
 {
 }
@@ -1687,9 +1683,15 @@ void CFSM_KianaC::WeaponSkill_End(void)
 	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
+void CFSM_KianaC::Stun_Init(void)
+{
+	m_pDM->SetLoopAnim(Index_Stun);
+}
+
 void CFSM_KianaC::Stun_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Stun);
+	m_pStageControlTower->ActorControl_SetInputLock(true);
 }
 
 void CFSM_KianaC::Stun_Update(float deltaTime)
@@ -1698,6 +1700,7 @@ void CFSM_KianaC::Stun_Update(float deltaTime)
 
 void CFSM_KianaC::Stun_End(void)
 {
+	m_pStageControlTower->ActorControl_SetInputLock(false);
 }
 
 void CFSM_KianaC::SwitchIn_Init(void)
