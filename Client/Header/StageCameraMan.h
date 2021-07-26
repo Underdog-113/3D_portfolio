@@ -10,8 +10,8 @@
 
 #define MaxChaseDistance 0.5f
 
-#define TargetMidWideLimitDist 2.f
-#define TargetWideLimitDist 5.f
+#define TargetMidWideLimitDist 1.7f
+#define TargetWideLimitDist 4.5f
 
 #include "CameraShake.h"
 
@@ -66,6 +66,8 @@ public:
 private:
 	void AppendAttackDirectionCorrecting();
 	void AppendHorizontalCorrecting();
+
+	void RotateCameraHorizontal();
 	
 	bool MouseControlMode();
 	void ManualControlMode();
@@ -119,6 +121,7 @@ private:
 	bool m_returnToActor = false;
 	_float m_targetingTimer = 0.f;
 	bool m_isStart = false;
+	bool m_isReturnPivotToActor = false;
 private:
 	_float m_followTimer = 0.f;
 
