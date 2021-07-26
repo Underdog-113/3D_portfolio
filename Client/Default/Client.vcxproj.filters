@@ -1150,6 +1150,9 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item">
       <UniqueIdentifier>{02930ca9-a3a8-4851-b5a0-1127196d7fd2}</UniqueIdentifier>
     </Filter>
+      <Filter Include="03.Component\06.Indicator">
+        <UniqueIdentifier>{032fdec2-8b3b-4bf9-9636-b7fb1181a211}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2413,6 +2416,9 @@
     <ClInclude Include="..\Header\ItemObject.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item</Filter>
     </ClInclude>
+      <ClInclude Include="..\Header\IndicatorC.h">
+        <Filter>03.Component\06.Indicator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3583,8 +3589,13 @@
     <ClCompile Include="..\Code\Stage3GlowShader.cpp">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Code\ItemObject.cpp">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item</Filter>
+=======
+    <ClCompile Include="..\Code\IndicatorC.cpp">
+      <Filter>03.Component\06.Indicator</Filter>
+>>>>>>> ed31b4c6f44ffcbfac21114990093cc57d3bd640
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
