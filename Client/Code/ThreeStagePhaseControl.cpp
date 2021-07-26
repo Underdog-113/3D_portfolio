@@ -182,10 +182,5 @@ void CThreeStagePhaseControl::Update(void)
 
 void CThreeStagePhaseControl::OpenStageResult(void)
 {
-	Engine::CInputManager::GetInstance()->SetKeyInputEnabled(false);
-
-	CStageControlTower::GetInstance()->GetCurrentActor()->GetComponent<Engine::CStateMachineC>()->ChangeState(L"Victory");
 	CBattleUiManager::GetInstance()->BattleEnd();
-	Engine::CCameraManager::GetInstance()->ChangeCameraMode(Engine::ECameraMode::Edit);
-	ShowCursor(true);
 }
