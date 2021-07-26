@@ -318,17 +318,6 @@ void CActorController::RotateCurrentActor()
 	float angleSynchroRate = D3DXVec3Dot(&actorForward, &m_moveOrderDir);
 	angleSynchroRate = GET_MATH->RoundOffRange(angleSynchroRate, 1);
 
-// 	if (angleSynchroRate > 0.95f)
-// 	{
-// 		m_rotSpeed = 10.f;
-// 		float lerpValue = (angleSynchroRate - 0.95f) * 20.f;
-// 		rotSpeedRate = 1.f - lerpValue;
-// 	}
-// 	else
-// 	{
-// 		m_rotSpeed = 18.f;
-// 	}
-
 
 	_float3 rotAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&rotAxis, &actorForward, &m_moveOrderDir);
@@ -342,8 +331,7 @@ void CActorController::RotateCurrentActor()
 
 			_float cosValue = acosf(angleSynchroRate);
 
-			pCurActor->GetTransform()->AddRotationY(cosValue);
-			
+			pCurActor->GetTransform()->AddRotationY(cosValue);			
 			return;
 		}
 		pCurActor->GetTransform()->AddRotationY(m_rotSpeed * rotSpeedRate * GET_PLAYER_DT);
