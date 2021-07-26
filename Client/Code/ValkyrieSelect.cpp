@@ -69,8 +69,9 @@ void CValkyrieSelect::Start()
 		_int count = 0;
 		for (auto& data : allValkyrie->GetValkyriesList())
 		{
-			std::dynamic_pointer_cast<CScrollViewObject>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas_ScrollView_0"))->
-				GetTextObject()[count].m_text->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(data->GetLevel()));
+			_int level = data->GetLevel();
+			static_cast<CScrollViewObject*>(CValkyriegManager::GetInstance()->GetScene()->FindObjectByName(L"ValkyrieCanvas_ScrollView_0").get())->
+				GetTextObject()[count].m_text->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(level));
 
 			count++;
 		}

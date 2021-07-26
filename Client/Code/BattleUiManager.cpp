@@ -144,6 +144,7 @@ void CBattleUiManager::Start(Engine::CScene * pScene)
 		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarOrange", 0);
 		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarteal", 0);
 		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarBlue", 0);
+		m_monsterHpBar[i]->GetBackGround()->GetComponent<Engine::CTextureC>()->AddTexture(L"BossHpBarPurple", 0);
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//HitsCanvas
@@ -622,6 +623,7 @@ bool CBattleUiManager::SkillExecution_Switching(_int value, _int spValue, _float
 void CBattleUiManager::BattleEnd()
 {
 	m_activation = false;
+	m_battleEnd = true;
 
 	m_victoryCanvas->SetIsEnabled(true);
 	m_hitsCanvas->SetIsEnabled(true);
@@ -680,8 +682,12 @@ void CBattleUiManager::monsterHpBarCheck()
 		{
 			object->SetValue(curValue);
 			_int value = (m_monsterHpCount - 1) % 4;
-			object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
 			object->GetFill()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
+
+			if(m_monsterHpCount >= 4 && value == 0)
+				object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(4);
+			else
+				object->GetBackGround()->GetComponent<Engine::CTextureC>()->SetTexIndex(value);
 		}
 
 		for (auto object : m_monsterWhiteHpBar)

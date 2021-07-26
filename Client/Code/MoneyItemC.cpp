@@ -60,7 +60,6 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 
 	if (m_enable)
 	{
-		UpDown();
 
 		m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
 		if (m_currentValkyrie == nullptr)
@@ -75,6 +74,12 @@ void CMoneyItemC::Update(SP(CComponent) spThis)
 			CDropItemManager::GetInstance()->SetGold(CDropItemManager::GetInstance()->GetGold() + m_moneyValue);
 
 			GetOwner()->SetDeleteThis(true);
+		}
+
+		if (CBattleUiManager::GetInstance()->GetBattleEnd())
+		{
+			_float3 pos = m_currentValkyrie->GetTransform()->GetPosition() - GetOwner()->GetComponent<Engine::CTransformC>()->GetPosition();
+			GetOwner()->GetComponent<Engine::CTransformC>()->AddPosition(pos * (5.0f * GET_DT));
 		}
 	}
 }

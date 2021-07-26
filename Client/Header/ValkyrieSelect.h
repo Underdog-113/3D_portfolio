@@ -29,7 +29,7 @@ private:
 	void SceneChange();
 
 private:
-	_bool m_init;
+	_bool m_init = true;
 
 	Engine::CObject*  m_vValkyrie[3];
 	static SP(Engine::CObject) m_vPlayer;
