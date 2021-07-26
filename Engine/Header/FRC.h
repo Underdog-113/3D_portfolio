@@ -44,6 +44,8 @@ private:
 	GETTOR			(_float,			m_FPS,				0.f,		FPS)
 	GETTOR_SETTOR	(_float,			m_dtCoef,			1.f,		DtCoef)
 
+		
+	GETTOR_SETTOR	(_float,			m_fastLoad,			1.f,		FastLoad)
 };
 END
 #endif

@@ -50,6 +50,8 @@ SP(CBronyaSkillUltraPattern) CBronyaSkillUltraPattern::Create()
 
 void CBronyaSkillUltraPattern::ReadyUltra(Engine::CObject* pOwner, SP(CFSM_BronyaC) fsm, _float3 mPos)
 {
+	static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+
 	if (true == m_onUltraReady)
 	{
 		return;
@@ -134,6 +136,9 @@ void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFS
 			m_onCenter = false;
 			m_onUltraReady = false;
 			m_movedCenter = false;
+
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
+
 			return;
 		}
 	}

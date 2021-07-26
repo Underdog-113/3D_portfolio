@@ -155,6 +155,9 @@ void CBronya_FlashBang::Movement()
 
 		if (m_fTime >= 0.3f)
 		{
+			Engine::CSoundManager::GetInstance()->StopSound((_uint)EChannelID::OBJECT);
+			Engine::CSoundManager::GetInstance()->StartSound(L"Bronya_FlashBang.wav", (_uint)EChannelID::OBJECT);
+
 			m_eState = CBronya_FlashBang::STATE_END;
 			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"BronyaFlashBang_AS", true);
 			spObj->GetTransform()->SetPosition(this->GetTransform()->GetPosition());

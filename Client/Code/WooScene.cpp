@@ -76,7 +76,7 @@ void CWooScene::Start(void)
 	TerrainSetting();
 
 	PlayerSetting();
-	//SpiderSetting();
+	SpiderSetting();
 	//SickleSetting();
 	//ScoutSetting();
 	//LancerSetting();
@@ -84,7 +84,7 @@ void CWooScene::Start(void)
 	//NinzaSetting();
 
 	//GaneshaSetting();
-	BronyaSetting();
+	//BronyaSetting();
 }
 
 void CWooScene::FixedUpdate(void)

@@ -46,7 +46,7 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		}
 		else
 		{
-			fsm->GetDM()->GetAniCtrl()->SetSpeed(1.7f);
+			fsm->GetDM()->GetAniCtrl()->SetSpeed(2.f);
 		}
 	}
 
@@ -59,11 +59,13 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_Throw_3);
 		m_onThrow = true;
 
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
+
 		return;
 	}
 	// 내가 flash bang 상태가 끝났다면
 	else if (Name_Throw_3 == fsm->GetCurStateString() &&
-		fsm->GetDM()->IsAnimationEnd() &&
+		0.9f <= fsm->GetDM()->GetAniTimeline() &&
 		true == m_onThrow)
 	{
 		// 대기 상태로 변경
@@ -79,7 +81,9 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 			std::cout << "========================" << std::endl;
 			m_onThrow = false;
 			m_onFlashEffect = false;
-			m_onFlashFade = false;
+			m_onCC = false;
+
+			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 
 			return;
 		}
@@ -96,18 +100,18 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		m_pRHand = &fsm->GetDM()->GetFrameByName("Bip002_R_Hand")->CombinedTransformMatrix;
 		GetRHandMat(pOwner, &realMat);
 
-		_float3 handPos = { realMat._41, realMat._42, realMat._43 };
+		m_handPos = { realMat._41, realMat._42, realMat._43 };
 
 		SP(CBronya_FlashBang) flash = std::dynamic_pointer_cast<CBronya_FlashBang>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_FlashBang", true));
-		flash->GetTransform()->SetPosition(handPos);
+		flash->GetTransform()->SetPosition(m_handPos);
 
 		m_onFlashEffect = true;
-		PatternPlaySound(L"Bronya_FlashBang.wav", pOwner);
 	}
 	// fade in
 	else if (Name_Throw_3 == fsm->GetCurStateString() &&
-		0.67f <= fsm->GetDM()->GetAniTimeline() &&
-		false == m_onFlashFade)
+		0.7f <= fsm->GetDM()->GetAniTimeline() &&
+		true == m_onThrow &&
+		false == m_onFlashFadeIn)
 	{
 		_float3 camPos = Engine::GET_MAIN_CAM->GetTransform()->GetPosition();
 		_float3 camDir = camPos - tPos;
@@ -119,32 +123,78 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		m_spFlashBang->GetShader()->AddShader((_int)Engine::EShaderID::RectTexShader);
 		m_spFlashBang->GetRectTex()->SetIsOrtho(true);
 		m_spFlashBang->GetTransform()->SetSize(4000, 1000, 1);
-		m_spFlashBang->AddComponent<Engine::CFadeInOutC>()->SetSpeed(6.f);
+		m_spFlashBang->AddComponent<Engine::CFadeInOutC>()->SetSpeed(2.f);
 		m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetAutoDelete(false);
 		m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetIsFadeIn(true);
 
-		///////////////
-		//m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetIsFadeIn(false);
-		//m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetFinish(false);
-
-		m_onFlashFade = true;
+		m_onFlashFadeIn = true;
 	}
-	else if (m_onFlashFade == true)
+	
+	if (true == m_onFlashFadeIn)
 	{
 		SP(Engine::CFadeInOutC) spFadeInOut = m_spFlashBang->GetComponent<Engine::CFadeInOutC>();
 		_float curSpeed = spFadeInOut->GetSpeed();
-		if(curSpeed > 0.5f)
+
+		if (curSpeed > 1.7f)
+			spFadeInOut->SetSpeed(curSpeed + 2 * GET_DT);
+
+		if (spFadeInOut->GetFinish() == true)
+		{
+			m_onFlashFadeIn = false;
+			m_onFlashFadeOut = true;
+		}
+		
+	}
+	else if (true == m_onFlashFadeOut)
+	{
+		SP(Engine::CFadeInOutC) spFadeInOut = m_spFlashBang->GetComponent<Engine::CFadeInOutC>();
+		_float curSpeed = spFadeInOut->GetSpeed();
+
+		if (curSpeed > 1.3f)
 			spFadeInOut->SetSpeed(curSpeed - 15 * GET_DT);
 
 		if (spFadeInOut->GetFinish() == true)
 		{
-			m_onFlashFade = false;
+			m_onFlashFadeOut = false;
 			spFadeInOut->SetIsFadeIn(false);
 			spFadeInOut->SetFinish(false);
 		}
-		
+
+		if (curSpeed > 3.f &&
+			false == m_onCC)
+		{
+			// 반사
+			_float3 tForward = CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward();
+			tForward.y = 0;
+			D3DXVec3Normalize(&tForward, &tForward);
+
+			_float3 lightPos = m_handPos;
+			lightPos.y = 0;
+
+			_float3 dir = lightPos - tPos;
+			D3DXVec3Normalize(&dir, &dir);
+
+			_float dot = D3DXVec3Dot(&tForward, &dir);
+			GET_MATH->RoundOffRange(dot, 1);
+
+			// stun
+			if (abs(acos(dot)) < PI / 2)
+			{
+				std::cout << ": " << abs(acos(dot)) * 180 / PI << std::endl;
+				std::cout << "Stun!" << std::endl;
+			}
+			// no stun
+			else
+			{
+				std::cout << ": " << abs(acos(dot)) * 180 / PI << std::endl;
+				std::cout << "Miss!" << std::endl;
+			}
+			m_onCC = true;
+		}
 	}
-} 
+
+
+}
 
 SP(CBronyaFlashBangPattern) CBronyaFlashBangPattern::Create()
 {

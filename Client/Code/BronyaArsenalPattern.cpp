@@ -57,6 +57,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Center */
 	if (false == m_movedCenter)
 	{
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
 		_float3 endPos = { 186.04f, mPos.y, -8.94f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCenter);
 	}
@@ -132,6 +133,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 		m_onArsenalReadySound = false;
 		m_onArsenalShotSound = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
+		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 	}
 
 	/************************* Effect */

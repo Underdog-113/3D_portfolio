@@ -80,12 +80,12 @@ _float CFRC::GetElapsedTime(void)
 
 _float CFRC::GetDeltaTime(void)
 {
-	return m_deltaTime * m_dtCoef;
+	return m_deltaTime * m_dtCoef * m_fastLoad;
 }
 
 _float CFRC::GetPureDeltaTime(void)
 {
-	return m_deltaTime;
+	return m_deltaTime * m_fastLoad;
 }
 
 
