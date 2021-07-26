@@ -84,7 +84,8 @@ enum class EShaderID
 	DissolveShader_Glow		= 18 + (_int)Engine::EShaderID::NumOfShaderID,
 	UltScrShader			= 19 + (_int)Engine::EShaderID::NumOfShaderID,
 	ElevatorBaseShader		= 20 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID			= 21 + (_int)Engine::EShaderID::NumOfShaderID
+	Stage2GlowShader		= 21 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID			= 22 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

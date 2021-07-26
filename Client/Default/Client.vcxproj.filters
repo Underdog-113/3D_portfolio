@@ -1132,11 +1132,17 @@
     <Filter Include="04.Shader\19.MapShaders\00.ElevatorShader">
       <UniqueIdentifier>{d24913b4-133b-46c9-991d-6569ebc98fb9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Shader\19.MapShaders\01.Normal">
-      <UniqueIdentifier>{90083b84-ebb7-4349-b424-a798c670ae0c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff">
       <UniqueIdentifier>{09dbe463-0f52-48b9-bb34-2ad8c29697c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\01.Stage2GlowShader">
+      <UniqueIdentifier>{90083b84-ebb7-4349-b424-a798c670ae0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\02.Stage2LineGlow">
+      <UniqueIdentifier>{020aa7b4-91da-4989-ab0f-dd5cdab70191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\19.MapShaders\03.Stage3GlowShader">
+      <UniqueIdentifier>{5437158f-38f0-4ea3-aac5-6f6bd5f6886c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2389,6 +2395,12 @@
     <ClInclude Include="..\Header\GachaBox_Eff.h">
       <Filter>02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Stage2GlowShader.h">
+      <Filter>04.Shader\19.MapShaders\01.Stage2GlowShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Stage3GlowShader.h">
+      <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3550,6 +3562,12 @@
     <ClCompile Include="..\Code\GachaBox_Eff.cpp">
       <Filter>02.Objects\03.Effect\03.SoftEffect\11.Gacha_Eff</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Stage2GlowShader.cpp">
+      <Filter>04.Shader\19.MapShaders\01.Stage2GlowShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Stage3GlowShader.cpp">
+      <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3638,6 +3656,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ElevatorBaseShader.fx">
       <Filter>04.Shader\19.MapShaders\00.ElevatorShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage2GlowShader.fx">
+      <Filter>04.Shader\19.MapShaders\01.Stage2GlowShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage3GlowShader.fx">
+      <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

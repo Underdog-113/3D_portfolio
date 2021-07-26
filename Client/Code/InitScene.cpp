@@ -137,7 +137,7 @@ void CInitScene::Update(void)
 {
 	__super::Update();
 	float value = slider->GetValue();
-	value = min(value + GET_DT * 5, 100); // 38이 슬라이더바 차오르는속도임 최종빌드만들때 속도줄여서 로딩보다 슬라이더차오르는속도 길게 만들어야함 용석
+	value = min(value + GET_DT * 35, 100); // 38이 슬라이더바 차오르는속도임 최종빌드만들때 속도줄여서 로딩보다 슬라이더차오르는속도 길게 만들어야함 용석
 	slider->SetValue(value);
 	std::wstring str = std::to_wstring(value);
 	str = str.substr(0, 6);

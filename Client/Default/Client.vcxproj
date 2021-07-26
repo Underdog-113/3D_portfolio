@@ -354,6 +354,8 @@
     <ClInclude Include="..\Header\SpiderExplosion_Base.h" />
     <ClInclude Include="..\Header\SpiderImpact.h" />
     <ClInclude Include="..\Header\SplineCurve.h" />
+    <ClInclude Include="..\Header\Stage2GlowShader.h" />
+    <ClInclude Include="..\Header\Stage3GlowShader.h" />
     <ClInclude Include="..\Header\StageCameraMan.h" />
     <ClInclude Include="..\Header\CaptainData.h" />
     <ClInclude Include="..\Header\ClientComponents.h" />
@@ -761,6 +763,8 @@
     <ClCompile Include="..\Code\SpiderExplosion_Base.cpp" />
     <ClCompile Include="..\Code\SpiderImpact.cpp" />
     <ClCompile Include="..\Code\SplineCurve.cpp" />
+    <ClCompile Include="..\Code\Stage2GlowShader.cpp" />
+    <ClCompile Include="..\Code\Stage3GlowShader.cpp" />
     <ClCompile Include="..\Code\StageCameraMan.cpp" />
     <ClCompile Include="..\Code\CaptainData.cpp" />
     <ClCompile Include="..\Code\CatPawShader.cpp" />
@@ -1099,6 +1103,18 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage2GlowShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\Stage3GlowShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\UltScrShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
