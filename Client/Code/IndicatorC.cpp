@@ -40,6 +40,7 @@ void CIndicatorC::Update(SP(CComponent) spThis)
 {
 	if (m_target == nullptr || m_target->GetDeleteThis())
 	{
+		m_target = nullptr;
 		GetOwner()->SetIsEnabled(false);
 		return;
 	}
@@ -51,6 +52,7 @@ void CIndicatorC::Update(SP(CComponent) spThis)
 
 	_float3 dir = m_target->GetTransform()->GetPosition() - GetOwner()->GetTransform()->GetPosition();
 	D3DXVec3Normalize(&dir, &dir);
+	dir.y = 0;
 
 	GetOwner()->GetTransform()->SetGoalForward(dir);
 	GetOwner()->GetTransform()->SetSlerpOn(true);
@@ -73,4 +75,5 @@ void CIndicatorC::OnEnable()
 void CIndicatorC::OnDisable()
 {
 	__super::OnDisable();
+	m_target = nullptr;
 }
