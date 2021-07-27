@@ -137,7 +137,7 @@ void CYongScene::Update(void)
 	{
 
 		SP(Engine::CObject) spSoftEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact", true);
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_Ring", true);
 		spSoftEffect->GetTransform()->SetSize(_float3(3.f, 3.f, 3.f));
 		spSoftEffect->GetTransform()->AddPositionY(1.f);
 
