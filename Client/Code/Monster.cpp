@@ -181,6 +181,8 @@ void CMonster::AttachSakuraMark()
 
 		//spObj->GetTransform()->SetSize(5.f, 5.f, 5.f);
 		m_pStat->SetSakuraMark(spObj);
+
+		m_spSakuraMark = spObj;
 	}
 }
 
@@ -258,6 +260,8 @@ void CMonster::MonsterDead()
 		break;
 	}
 
+	if(m_spSakuraMark)
+		m_spSakuraMark->SetDeleteThis(true);
 }
 
 void CMonster::ChaseTarget(_float3 targetPos)

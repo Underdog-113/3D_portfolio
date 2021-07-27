@@ -93,6 +93,8 @@ void CMB_Ganesha::Start(void)
 
 	m_pAttackBox = std::dynamic_pointer_cast<CAttackBox>(m_pScene->GetObjectFactory()->AddClone(L"AttackBox", true)).get();
 	m_pAttackBox->SetOwner(this);
+
+	m_targetingHelperRate = 1.5f;
 }
 
 void CMB_Ganesha::FixedUpdate(void)

@@ -429,7 +429,7 @@ void CStageCameraMan::ChangeShotWhileTargeting()
 
 	_float3 pActor = pCT->GetCurrentActor()->GetTransform()->GetPosition();
 	_float3 pTarget = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
-	_float distance = D3DXVec3Length(&_float3(pTarget - pActor)) + ((CMonster*)pCT->GetCurrentTarget().get())->GetHitBox()->GetRadiusBS();
+	_float distance = D3DXVec3Length(&_float3(pTarget - pActor)) + ((CMonster*)pCT->GetCurrentTarget().get())->GetTargetingHelperRate();
 	
 	if (distance > TargetWideLimitDist)
 	{
