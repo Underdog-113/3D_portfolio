@@ -51,13 +51,15 @@ void CIndicatorC::Update(SP(CComponent) spThis)
 
 	GetOwner()->GetTransform()->SetPosition(pos);
 
+	pos.y = 0.f;
 	_float3 targetPos = m_target->GetTransform()->GetPosition();
+	targetPos.y = 0.f;
+
 	_float3 dir = targetPos - pos;
 	D3DXVec3Normalize(&dir, &dir);
-	dir.y = 0;
 
-	GetOwner()->GetTransform()->SetGoalForward(dir);
-	GetOwner()->GetTransform()->SetSlerpOn(true);
+	GetOwner()->GetTransform()->SetForward(dir);
+	//GetOwner()->GetTransform()->SetSlerpOn(true);
 }
 
 void CIndicatorC::LateUpdate(SP(CComponent) spThis)
