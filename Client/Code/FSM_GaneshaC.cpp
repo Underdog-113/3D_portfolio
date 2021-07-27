@@ -308,7 +308,7 @@ void CFSM_GaneshaC::Stamp_Enter(void)
 
 void CFSM_GaneshaC::Stamp_Update(float deltaTime)
 {
-	if (!m_shake && m_pDM->GetAniTimeline() > 0.37)
+	if (!m_shake && m_pDM->GetAniTimeline() > 0.7)
 	{
 		CStageControlTower::GetInstance()->GetCameraMan()->GetCameraShake()->Preset_Ganesha_Stamp();
 		m_shake = true;

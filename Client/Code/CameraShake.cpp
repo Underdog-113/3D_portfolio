@@ -595,6 +595,7 @@ void CCameraShake::Preset_Ganesha_Land()
 	ShakeChannel* channel = &m_shakeChannel[Player];
 
 	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
+	channel->m_timer = 0.f;
 	channel->m_duration = 0.2f;
 	channel->m_blendInTime = 0.f;
 	channel->m_blendOutTime = 0.1f;
