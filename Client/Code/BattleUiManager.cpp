@@ -200,21 +200,21 @@ void CBattleUiManager::Update(void)
 	if (!m_activation)
 		return;
 
-	if (!init)
-	{
-		for (int i = 0; i <= 10; i++)
-		{
-			SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
-			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
-			Indicator->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
-			Indicator->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
-			Indicator->AddComponent<Engine::CTextureC>()->AddTexture(L"Indicator");
-			Indicator->AddComponent<CIndicatorC>();
-			Indicator->SetIsEnabled(false);
-			m_indicator.emplace_back(Indicator);
-		}
-		init = true;
-	}
+	//if (!init)
+	//{
+	//	for (int i = 0; i <= 10; i++)
+	//	{
+	//		SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
+	//		Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
+	//		Indicator->AddComponent<Engine::CShaderC>()->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
+	//		Indicator->AddComponent<Engine::CMeshC>()->SetMeshData(L"Cube");
+	//		Indicator->AddComponent<Engine::CTextureC>()->AddTexture(L"Indicator");
+	//		Indicator->AddComponent<CIndicatorC>();
+	//		Indicator->SetIsEnabled(false);
+	//		m_indicator.emplace_back(Indicator);
+	//	}
+	//	init = true;
+	//}
 
 	skillActivationImageCheck();
 	monsterHpBarCheck();
@@ -222,23 +222,23 @@ void CBattleUiManager::Update(void)
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
-	if (monsterList.empty())
-		return;
-
-	_int count = 0;
-	for (auto obj : monsterList)
-	{
-		if (obj->GetIsEnabled() == true)
-		{
-			m_indicator[count]->SetIsEnabled(true);
-			m_indicator[count]->GetComponent<CIndicatorC>()->SetTarget(obj);
-		}
-		else
-		{
-			m_indicator[count]->SetIsEnabled(false);
-		}
-		count++;
-	}
+	//if (monsterList.empty())
+	//	return;
+	//
+	//_int count = 0;
+	//for (auto obj : monsterList)
+	//{
+	//	if (obj->GetIsEnabled() == true && obj->GetDeleteThis() == false)
+	//	{
+	//		m_indicator[count]->SetIsEnabled(true);
+	//		m_indicator[count]->GetComponent<CIndicatorC>()->SetTarget(obj);
+	//	}
+	//	else
+	//	{
+	//		m_indicator[count]->SetIsEnabled(false);
+	//	}
+	//	count++;
+	//}
 }
 
 void CBattleUiManager::OnDestroy(void)

@@ -48,7 +48,7 @@ void CElevatorBack::Awake(void)
 	m_spMesh->SetInitTex(true);
 	m_spGraphics = AddComponent<Engine::CGraphicsC>();
 	m_spShader = AddComponent<Engine::CShaderC>();
-	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
+	m_spShader->AddShader((_int)Engine::EShaderID::MeshAlphaTestShader);
 	m_spTexture = AddComponent<Engine::CTextureC>();
 }
 
