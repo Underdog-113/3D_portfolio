@@ -44,7 +44,7 @@ void CSakura_DamageMark::Awake(void)
 	__super::Awake();
 	m_spTexture->AddTexture(L"Sakura_DamageMark");
 	m_spTexture->AddTexture(L"Sakura_DamageMark");
-	m_spShader->AddShader((_int)EShaderID::SoftEffectShader);
+	m_spShader->AddShader((_int)EShaderID::SoftEffectShader_Glow);
 	m_spGraphics->SetRenderID((_uint)Engine::ERenderID::Effect);
 }
 
@@ -90,6 +90,7 @@ void CSakura_DamageMark::PreRender(LPD3DXEFFECT pEffect)
 	pEffect->SetInt("TilingY", m_TilingY);
 	pEffect->SetFloat("gWidth", m_fAlphaWidth);
 	pEffect->SetFloat("gHeight", m_fAlphaHeight);
+	pEffect->SetFloat("gEmissionPow", 0.12f);
 	pEffect->CommitChanges();
 }
 

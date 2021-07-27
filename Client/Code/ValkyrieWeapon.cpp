@@ -58,7 +58,7 @@ void CValkyrieWeapon::Start()
 	{
 		// 테레사 오브젝트 생성 -> IDLE로 변경
 		m_vPlayer = m_scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
-		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_Wp");
+		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_NoWp");
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(-0.535000920f, -0.799999893f, -3.64999032f));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
