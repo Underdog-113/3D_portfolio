@@ -43,10 +43,10 @@ void CBronya_Impact_Ring::Awake()
 	m_spMesh->SetMeshData(L"Bronya_Impact_ring");
 	m_spMesh->SetIsEffectMesh(true);
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
-	m_spTexture->AddTexture(L"Impact_Red");
+	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spTexture->AddTexture(L"Eff_Noise_08");
-	m_spTexture->AddTexture(L"Impact_Red");
-	m_spShader->AddShader((_int)EShaderID::DissolveShader);
+	m_spTexture->AddTexture(L"Grenade_Explosion");
+	m_spShader->AddShader((_int)EShaderID::DissolveShader_Glow);
 }
 
 void CBronya_Impact_Ring::Start()
@@ -83,6 +83,7 @@ void CBronya_Impact_Ring::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetFloat("gEmissionPow", 0.15f);
 	pEffect->SetBool("g_zWriteEnabled", false);
 	pEffect->CommitChanges();
 
