@@ -34,7 +34,10 @@ void CBronyaShock2Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
-	//static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
+	if (Name_Shock_2 != fsm->GetCurStateString())
+	{
+		static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
+	}
 
 	/************************* Range */
 	// 상대가 공격 범위 밖이고

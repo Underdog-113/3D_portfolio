@@ -77,10 +77,10 @@ void CGaneshaBornPattern::Pattern(Engine::CObject* pOwner)
 		effect->GetTransform()->SetPosition(mPos);
 		effect->GetTransform()->AddPositionY(1.1f);
 
-		effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_TripleRing", true);
-		effect->GetTransform()->SetSize(_float3(9.f, 9.f, 9.f));
-		effect->GetTransform()->SetPosition(mPos);
-		effect->GetTransform()->AddPositionY(1.3f);
+		//effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_TripleRing", true);
+		//effect->GetTransform()->SetSize(_float3(9.f, 9.f, 9.f));
+		//effect->GetTransform()->SetPosition(mPos);
+		//effect->GetTransform()->AddPositionY(1.3f);
 		m_impactEffect = true;
 	}
 
