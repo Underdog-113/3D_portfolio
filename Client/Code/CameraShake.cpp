@@ -131,6 +131,9 @@ bool CCameraShake::IsShaking()
 	if (m_shakeChannel[Player].m_timer < m_shakeChannel[Player].m_duration)
 		return true;
 
+	if (m_shakeChannel[Monster].m_timer < m_shakeChannel[Monster].m_duration)
+		return true;
+
 	if (m_isMovieOn)
 	{
 		if (m_pMovieChannel->m_timer < m_pMovieChannel->m_duration)
@@ -282,31 +285,25 @@ void CCameraShake::Preset_HighAttack_Vert(_float3 eventPos)
 	ShakeChannel* channel = &m_shakeChannel[Player];
 
 	SetDistanceRate(eventPos, channel);
-	
 	channel->m_timer = 0.f;
 
-	channel->m_duration = 0.2f;
+	channel->m_duration = 0.3f;
 	channel->m_blendInTime = 0.f;
-	channel->m_blendOutTime = 0.1f;
+	channel->m_blendOutTime = 0.2f;
 
 	ResetAllMember(channel);
 
 	float randomOffset = 0.f;
 
 	randomOffset = (rand() % 100) / 100.f;
-	channel->m_xWave.amplitude = 0.04f;
+	channel->m_xWave.amplitude = 0.05f;
 	channel->m_xWave.frequency = 20.f;
 	channel->m_xWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	channel->m_yWave.amplitude = 0.04f;
-	channel->m_yWave.frequency = 20.f;
+	channel->m_yWave.amplitude = 0.1f;
+	channel->m_yWave.frequency = 10.f;
 	channel->m_yWave.offset = randomOffset;
-
-	randomOffset = 0.f;
-	channel->m_zWave.amplitude = 0.f;
-	channel->m_zWave.frequency = 0.f;
-	channel->m_zWave.offset = randomOffset;
 }
 
 void CCameraShake::Preset_HighAttack_Horz(_float3 eventPos)
@@ -334,10 +331,6 @@ void CCameraShake::Preset_HighAttack_Horz(_float3 eventPos)
 	channel->m_yWave.frequency = 20.f;
 	channel->m_yWave.offset = randomOffset;
 
-	randomOffset = 0.f;
-	channel->m_zWave.amplitude = 0.f;
-	channel->m_zWave.frequency = 0.f;
-	channel->m_zWave.offset = randomOffset;
 }
 
 void CCameraShake::Preset_Land()
@@ -358,7 +351,6 @@ void CCameraShake::Preset_Land()
 	channel->m_zWave.offset = 0.3f / channel->m_zWave.frequency;
 	channel->m_zWave.ampAxisOffset = channel->m_zWave.amplitude * sinf(0.3f * 2.f * PI);
 }
-
 
 void CCameraShake::Preset_Kiana_ForwardAttack()
 {
@@ -545,23 +537,84 @@ void CCameraShake::Preset_Elevator()
 	channel->m_yWave.ampAxisOffset = channel->m_yWave.amplitude;
 }
 
-void CCameraShake::Preset_Kiana_Run()
+void CCameraShake::Preset_HighImpact()
 {
-	ShakeChannel* channel = &m_shakeChannel[Monster];
+	ShakeChannel* channel = &m_shakeChannel[Player];
 
 	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
 	channel->m_timer = 0.f;
 
-	channel->m_duration = 10.f;
-	channel->m_blendInTime = 0.5f;
-	channel->m_blendOutTime = 0.5f;
+	channel->m_duration = 0.5f;
+	channel->m_blendInTime = 0.f;
+	channel->m_blendOutTime = 0.4f;
 
 	ResetAllMember(channel);
 
-	channel->m_zWave.amplitude = 0.01f;
-	channel->m_zWave.frequency = 10.f;
-	channel->m_zWave.ampAxisOffset = channel->m_zWave.amplitude;
+	float randomOffset = 0.f;
+
+	randomOffset = (rand() % 100) / 100.f;
+	channel->m_xWave.amplitude = 0.2f;
+	channel->m_xWave.frequency = 20.f;
+	channel->m_xWave.offset = randomOffset;
+
+	randomOffset = (rand() % 100) / 100.f;
+	channel->m_yWave.amplitude = 0.2f;
+	channel->m_yWave.frequency = 20.f;
+	channel->m_yWave.offset = randomOffset;
+
 }
+
+void CCameraShake::Preset_Ganesha_Stamp()
+{
+	ShakeChannel* channel = &m_shakeChannel[Player];
+
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
+	channel->m_timer = 0.f;
+
+	channel->m_duration = 0.3f;
+	channel->m_blendInTime = 0.f;
+	channel->m_blendOutTime = 0.2f;
+
+	ResetAllMember(channel);
+
+	float randomOffset = 0.f;
+
+	randomOffset = (rand() % 100) / 100.f;
+	channel->m_xWave.amplitude = 0.04f;
+	channel->m_xWave.frequency = 20.f;
+	channel->m_xWave.offset = randomOffset;
+
+	randomOffset = (rand() % 100) / 100.f;
+	channel->m_yWave.amplitude = 0.1f;
+	channel->m_yWave.frequency = 10.f;
+	channel->m_yWave.offset = randomOffset;
+}
+
+void CCameraShake::Preset_Ganesha_Land()
+{
+	ShakeChannel* channel = &m_shakeChannel[Player];
+
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
+	channel->m_timer = 0.f;
+	channel->m_duration = 0.2f;
+	channel->m_blendInTime = 0.f;
+	channel->m_blendOutTime = 0.1f;
+
+	ResetAllMember(channel);
+
+	float randomOffset = 0.f;
+
+	randomOffset = (rand() % 100) / 100.f;
+	channel->m_xWave.amplitude = 0.04f;
+	channel->m_xWave.frequency = 20.f;
+	channel->m_xWave.offset = randomOffset;
+
+	randomOffset = (rand() % 100) / 100.f;
+	channel->m_yWave.amplitude = 0.07f;
+	channel->m_yWave.frequency = 10.f;
+	channel->m_yWave.offset = randomOffset;
+}
+
 
 void CCameraShake::Preset_Boom(_float3 eventPos)
 {

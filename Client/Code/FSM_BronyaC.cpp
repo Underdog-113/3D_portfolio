@@ -6,6 +6,9 @@
 #include "AniCtrl.h"
 #include "FSMDefine_Bronya.h"
 
+#include "StageCameraMan.h"
+#include "CameraShake.h"
+
 CFSM_BronyaC::CFSM_BronyaC()
 {
 }
@@ -387,10 +390,16 @@ void CFSM_BronyaC::Shock_1_Init(void)
 void CFSM_BronyaC::Shock_1_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Shock_1);
+	m_shake = false;
 }
 
 void CFSM_BronyaC::Shock_1_Update(float deltaTime)
 {
+	if (!m_shake && m_pDM->GetAniTimeline() > 0.475 && m_pDM->GetAniTimeline() < 0.55)
+	{
+		CStageControlTower::GetInstance()->GetCameraMan()->GetCameraShake()->Preset_HighImpact();
+		m_shake = true;
+	}
 }
 
 void CFSM_BronyaC::Shock_1_End(void)
@@ -404,10 +413,16 @@ void CFSM_BronyaC::Shock_2_Init(void)
 void CFSM_BronyaC::Shock_2_Enter(void)
 {
 	m_pDM->ChangeAniSet(Index_Shock_2);
+	m_shake = false;
 }
 
 void CFSM_BronyaC::Shock_2_Update(float deltaTime)
 {
+	if (!m_shake && m_pDM->GetAniTimeline() > 0.705 && m_pDM->GetAniTimeline() < 0.8)
+	{
+		CStageControlTower::GetInstance()->GetCameraMan()->GetCameraShake()->Preset_HighImpact();
+		m_shake = true;
+	}
 }
 
 void CFSM_BronyaC::Shock_2_End(void)

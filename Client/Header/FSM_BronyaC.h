@@ -20,6 +20,7 @@ private:
 private:
 	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM)
 
+		_bool m_shake = false;
 public:
 	// <Animation List>
 

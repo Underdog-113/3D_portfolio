@@ -127,6 +127,7 @@ void CGaneshaBasePattern::Pattern(Engine::CObject* pOwner)
 
 		if (2 != m_jumpCnt)
 		{
+			fsm->ChangeState(Name_Ganesha_Jump_Back);
 			m_walkReady = false;
 		}
 		else

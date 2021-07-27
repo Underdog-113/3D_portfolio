@@ -72,7 +72,12 @@ public:
 	void Preset_Elevator();
 
 public:
-	void Preset_Kiana_Run();
+	void Preset_HighImpact();
+
+	void Preset_Ganesha_Stamp();
+	void Preset_Ganesha_Land();
+
+
 
 public: /* Enemy Action */
 	void Preset_Boom(_float3 eventPos);

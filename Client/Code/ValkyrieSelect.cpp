@@ -216,18 +216,16 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 		SP(Engine::CShaderC) spShader = m_vPlayer->GetComponent<Engine::CShaderC>();
 		spShader->AddShader((_int)EShaderID::OutlineShader);
 
-		spShader->ResizeShaderPerSubset(5);
-		spShader->AddShaderPerSubset((_int)Engine::EShaderID::MeshShader, 0);
-		spShader->AddShaderPerSubset((_int)Engine::EShaderID::MeshShader, 1);
+		spShader->ResizeShaderPerSubset(3);
+		spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 0);
+		spShader->AddShaderPerSubset((_int)EShaderID::FaceShader, 1);
 		spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 2);
-		spShader->AddShaderPerSubset((_int)EShaderID::FaceShader, 3);
-		spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 4);
 	}
 	else if (name == L"테레사·아포칼립스")
 	{
 		// 테레사 오브젝트 생성 -> IDLE로 변경
 		m_vPlayer = scene->GetObjectFactory()->AddClone(L"KianaUIAnim", true, (_int)ELayerID::Player, L"");
-		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_Wp"); 
+		static_cast<CKianaUIAnim*>(m_vPlayer.get())->SetTextureName(L"Theresa_NoWp"); 
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.0400000326f, -0.799999893f, -3.64999032f));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
