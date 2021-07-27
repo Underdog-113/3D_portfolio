@@ -174,6 +174,11 @@ void CSakura::PostRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
+void CSakura::RenderPerShader(void)
+{
+	m_spMesh->RenderPerShader(m_spGraphics);
+}
+
 void CSakura::OnDestroy(void)
 {
 	__super::OnDestroy();

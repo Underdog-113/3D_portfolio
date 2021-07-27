@@ -107,6 +107,12 @@ CShader* CShaderC::AddShader(_int shaderID)
 	return pShader;
 }
 
+void CShaderC::AddShaderPerSubset(_int shaderID, _int subSetNum)
+{
+	CShader* pShader = CShaderManager::GetInstance()->GetShader(shaderID);
+	m_vShaderPerSubset[subSetNum].emplace_back(pShader);
+}
+
 void CShaderC::ResizeShaderPerSubset(_int size)
 {
 	m_vShaderPerSubset.resize(size);

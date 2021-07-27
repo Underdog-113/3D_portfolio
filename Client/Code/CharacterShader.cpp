@@ -1,42 +1,41 @@
-#include "EngineStdafx.h"
-#include "MeshShader.h"
+#include "stdafx.h"
+#include "..\Header\CharacterShader.h"
 
 
-USING(Engine)
-CMeshShader::CMeshShader()
+CCharacterShader::CCharacterShader()
 {
 }
 
 
-CMeshShader::~CMeshShader()
+CCharacterShader::~CCharacterShader()
 {
 }
 
-CShader * CMeshShader::Create(void)
+Engine::CShader * CCharacterShader::Create(void)
 {
-	CMeshShader* pInstance = new CMeshShader;
+	CCharacterShader* pInstance = new CCharacterShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CMeshShader::Free(void)
+void CCharacterShader::Free(void)
 {
 	__super::Free();
+	
 }
 
-void CMeshShader::Awake(void)
+void CCharacterShader::Awake(void)
 {
 	__super::Awake();
-
-	CRenderTargetManager* pRTM = CRenderTargetManager::GetInstance();
+	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
 	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
 	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Normal");
 	m_vRenderTargets[2] = pRTM->FindRenderTarget(L"Target_Depth");
 	m_vRenderTargets[3] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CMeshShader::SetUpConstantTable(SP(CGraphicsC) spGC)
+void CCharacterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	__super::SetUpConstantTable(spGC);
 	SetupWorldViewProj(spGC);

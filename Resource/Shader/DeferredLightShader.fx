@@ -67,6 +67,11 @@ PS_OUT		PS_DIRECTIONAL(PS_IN In)
 		Out.vSpecular = vector(0, 0, 0, 0);
 		return Out;
 	}
+	else if (!any(vNormal))
+	{
+		Out.vShade = vector(1, 1, 1, 0);
+		return Out;
+	}
 	else
 	{
 		vector		vNormalComplement = (vector)vNormal.a;

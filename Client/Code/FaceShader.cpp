@@ -41,7 +41,11 @@ void CFaceShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	__super::SetUpConstantTable(spGC);
 	SetupWorldViewProj(spGC);
 	
-	_float4 playerDir = _float4(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward(), 0);
+	_float4 playerDir;
+	if (CStageControlTower::GetInstance()->GetCurrentActor() != nullptr)
+		playerDir = _float4(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetForward(), 0);
+	else
+		playerDir = _float4(0, 0, -1, 0);
 	m_pEffect->SetVector("g_faceDir", &playerDir);
 
 	m_pEffect->CommitChanges();

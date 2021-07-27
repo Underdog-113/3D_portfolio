@@ -1150,8 +1150,17 @@
     <Filter Include="02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item">
       <UniqueIdentifier>{02930ca9-a3a8-4851-b5a0-1127196d7fd2}</UniqueIdentifier>
     </Filter>
-      <Filter Include="03.Component\06.Indicator">
-        <UniqueIdentifier>{032fdec2-8b3b-4bf9-9636-b7fb1181a211}</UniqueIdentifier>
+    <Filter Include="03.Component\06.Indicator">
+      <UniqueIdentifier>{032fdec2-8b3b-4bf9-9636-b7fb1181a211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Objects\03.Effect\01.MeshEffect\14.EvadeEffect">
+      <UniqueIdentifier>{8599e187-1d9f-4f3a-bbd7-4a40d1409c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\21.ReverseDissolveShader">
+      <UniqueIdentifier>{a460da16-4292-4c5b-8054-692885dab329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Shader\21.CharacterShader">
+      <UniqueIdentifier>{36155713-3a28-4da2-96d7-33bde24e4ee9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2416,8 +2425,17 @@
     <ClInclude Include="..\Header\ItemObject.h">
       <Filter>02.Objects\03.Effect\01.MeshEffect\12.Ingame\Item</Filter>
     </ClInclude>
-      <ClInclude Include="..\Header\IndicatorC.h">
-        <Filter>03.Component\06.Indicator</Filter>
+    <ClInclude Include="..\Header\IndicatorC.h">
+      <Filter>03.Component\06.Indicator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\EvadeEffect.h">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\14.EvadeEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\ReverseDissolveShader.h">
+      <Filter>04.Shader\21.ReverseDissolveShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CharacterShader.h">
+      <Filter>04.Shader\21.CharacterShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3595,6 +3613,15 @@
     <ClCompile Include="..\Code\IndicatorC.cpp">
       <Filter>03.Component\06.Indicator</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\EvadeEffect.cpp">
+      <Filter>02.Objects\03.Effect\01.MeshEffect\14.EvadeEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ReverseDissolveShader.cpp">
+      <Filter>04.Shader\21.ReverseDissolveShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CharacterShader.cpp">
+      <Filter>04.Shader\21.CharacterShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3692,6 +3719,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\Stage3GlowShader.fx">
       <Filter>04.Shader\19.MapShaders\03.Stage3GlowShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ReverseDissolveShader.fx">
+      <Filter>04.Shader\21.ReverseDissolveShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CharacterShader.fx">
+      <Filter>04.Shader\21.CharacterShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

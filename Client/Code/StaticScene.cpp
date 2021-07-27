@@ -195,6 +195,7 @@
 
 #include "GachaBox_Eff.h"
 #include "ItemObject.h"
+#include "EvadeEffect.h"
 
 CStaticScene::CStaticScene()
 {
@@ -807,4 +808,6 @@ void CStaticScene::InitEffectPrototypes(void)
 	SP(CMeshEffect_Client) spItemObject(CItemObject::Create(true, this));
 	GetObjectFactory()->AddPrototype(spItemObject);
 
+	SP(CMeshEffect_Client) spEvadeEffect(CEvadeEffect::Create(true, this));
+	GetObjectFactory()->AddPrototype(spEvadeEffect);
 }

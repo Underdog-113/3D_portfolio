@@ -62,7 +62,6 @@ void CKianaUIAnim::Start(void)
 	}
 
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
-	m_spShader->AddShader((_int)Engine::EShaderID::MeshShader);
 }
 
 void CKianaUIAnim::FixedUpdate(void)
