@@ -301,7 +301,7 @@ void CTransformC::SlerpXZ(void)
 		dotTwoForward = GET_MATH->RoundOffRange(dotTwoForward, 1);
 		_float includedAngle = acos(dotTwoForward);		
 
-		if (abs(includedAngle) < m_slerpSpeed * 10 * GET_DT)
+		if (abs(includedAngle) < m_slerpSpeed * GET_DT)
 		{
 			SetForwardUp(m_goalForward, UP_VECTOR);
 			m_goalForward	= ZERO_VECTOR;

@@ -293,8 +293,18 @@ void CMonster::ChaseTarget(_float3 targetPos)
 	dir.y = 0;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_spTransform->SetGoalForward(dir);
-	m_spTransform->SetSlerpOn(true);
+	_float3 curForward = m_spTransform->GetForward();
+	_float dotTwoForward = D3DXVec3Dot(&dir, &curForward);
+	dotTwoForward = GET_MATH->RoundOffRange(dotTwoForward, 1);
+	_float includedAngle = acos(dotTwoForward);
+
+	if (abs(includedAngle) > m_spTransform->GetSlerpSpeed() * 2 * GET_DT)
+	{
+		m_spTransform->SetGoalForward(dir);
+		m_spTransform->SetSlerpOn(true);
+	}
+
+	
 	//m_spTransform->SetForwardUp(dir, UP_VECTOR);
 }
 
