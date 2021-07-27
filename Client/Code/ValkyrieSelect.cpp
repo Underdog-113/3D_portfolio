@@ -212,6 +212,16 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.200000063f, -2.75000310f, -1.07500005f));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(2.f, 2.f, 2.f));
+
+		SP(Engine::CShaderC) spShader = m_vPlayer->GetComponent<Engine::CShaderC>();
+		spShader->AddShader((_int)EShaderID::OutlineShader);
+
+		spShader->ResizeShaderPerSubset(5);
+		spShader->AddShaderPerSubset((_int)Engine::EShaderID::MeshShader, 0);
+		spShader->AddShaderPerSubset((_int)Engine::EShaderID::MeshShader, 1);
+		spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 2);
+		spShader->AddShaderPerSubset((_int)EShaderID::FaceShader, 3);
+		spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 4);
 	}
 	else if (name == L"테레사·아포칼립스")
 	{
@@ -221,6 +231,10 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.0400000326f, -0.799999893f, -3.64999032f));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+
+		SP(Engine::CShaderC) spShader = m_vPlayer->GetComponent<Engine::CShaderC>();
+		spShader->AddShader((_int)EShaderID::OutlineShader);
+		spShader->AddShader((_int)EShaderID::CharacterShader);
 	}
 	else if (name == L"야에 사쿠라")
 	{
@@ -230,6 +244,9 @@ void CValkyrieSelect::DataSetting(std::wstring keyValue)
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetPosition(_float3(0.0500006266f, -0.534999609f, -4.30503416f));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, D3DXToRadian(180.0f), 0));
 		m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
+		SP(Engine::CShaderC) spShader = m_vPlayer->GetComponent<Engine::CShaderC>();
+		spShader->AddShader((_int)EShaderID::OutlineShader);
+		spShader->AddShader((_int)EShaderID::CharacterShader);
 	}
 
 	if (data->GetProperty() == L"AvatarJiXie")

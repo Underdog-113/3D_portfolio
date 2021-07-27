@@ -36,6 +36,7 @@
 #include "BronyaShader.h"
 #include "Stage3GlowShader.h"
 #include "ReverseDissolveShader.h"
+#include "CharacterShader.h"
 #pragma endregion
 
 
@@ -101,8 +102,7 @@ void CMainApp::Awake(void)
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CStage2GlowShader::Create(), L"Stage2GlowShader", (_uint)EShaderID::Stage2GlowShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CStage3GlowShader::Create(), L"Stage3GlowShader", (_uint)EShaderID::Stage3GlowShader);
 	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CReverseDissolveShader::Create(), L"ReverseDissolveShader", (_uint)EShaderID::ReverseDissolveShader);
-
-
+	Engine::CShaderManager::GetInstance()->AddKeyAndShader(CCharacterShader::Create(), L"CharacterShader", (_uint)EShaderID::CharacterShader);
 	//Client Manager
 	CButtonManager::GetInstance()->Awake();
 }

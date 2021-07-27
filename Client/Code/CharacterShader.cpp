@@ -1,34 +1,33 @@
 #include "stdafx.h"
-#include "..\Header\BronyaShader.h"
+#include "..\Header\CharacterShader.h"
 
 
-CBronyaShader::CBronyaShader()
+CCharacterShader::CCharacterShader()
 {
 }
 
 
-CBronyaShader::~CBronyaShader()
+CCharacterShader::~CCharacterShader()
 {
 }
 
-Engine::CShader * CBronyaShader::Create(void)
+Engine::CShader * CCharacterShader::Create(void)
 {
-	CBronyaShader* pInstance = new CBronyaShader;
+	CCharacterShader* pInstance = new CCharacterShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CBronyaShader::Free(void)
+void CCharacterShader::Free(void)
 {
 	__super::Free();
-
+	
 }
 
-void CBronyaShader::Awake(void)
+void CCharacterShader::Awake(void)
 {
 	__super::Awake();
-
 	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
 	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
 	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Normal");
@@ -36,10 +35,9 @@ void CBronyaShader::Awake(void)
 	m_vRenderTargets[3] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CBronyaShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CCharacterShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	__super::SetUpConstantTable(spGC);
-
 	SetupWorldViewProj(spGC);
 
 	if (spGC->GetColorReverse())

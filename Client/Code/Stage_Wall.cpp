@@ -81,6 +81,7 @@ void CStage_Wall::LateUpdate()
 void CStage_Wall::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
+	pEffect->SetBool("g_AlphaTestEnabled", true);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
 	pEffect->CommitChanges();
 }

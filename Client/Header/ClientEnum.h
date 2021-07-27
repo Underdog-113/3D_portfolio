@@ -89,7 +89,8 @@ enum class EShaderID
 	Stage2GlowShader		= 22 + (_int)Engine::EShaderID::NumOfShaderID,
 	Stage3GlowShader		= 23 + (_int)Engine::EShaderID::NumOfShaderID,
 	ReverseDissolveShader	= 24 + (_int)Engine::EShaderID::NumOfShaderID,
-	NumOfShaderID			= 25 + (_int)Engine::EShaderID::NumOfShaderID
+	CharacterShader			= 25 + (_int)Engine::EShaderID::NumOfShaderID,
+	NumOfShaderID			= 26 + (_int)Engine::EShaderID::NumOfShaderID
 };
 
 enum class EChannelID

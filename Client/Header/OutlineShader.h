@@ -6,8 +6,8 @@
 class COutlineShader final : public Engine::CShader
 {
 private:
-	explicit							COutlineShader(void);
-									   ~COutlineShader(void);
+	explicit							COutlineShader			(void);
+									   ~COutlineShader			(void);
 
 public:
 	static			Engine::CShader*	Create					(void);

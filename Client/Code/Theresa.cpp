@@ -142,6 +142,11 @@ void CTheresa::PostRender(LPD3DXEFFECT pEffect)
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 }
 
+void CTheresa::RenderPerShader(void)
+{
+	m_spMesh->RenderPerShader(m_spGraphics);
+}
+
 void CTheresa::OnDestroy(void)
 {
 	__super::OnDestroy();

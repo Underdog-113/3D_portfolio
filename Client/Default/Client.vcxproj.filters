@@ -1159,6 +1159,9 @@
     <Filter Include="04.Shader\21.ReverseDissolveShader">
       <UniqueIdentifier>{a460da16-4292-4c5b-8054-692885dab329}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Shader\21.CharacterShader">
+      <UniqueIdentifier>{36155713-3a28-4da2-96d7-33bde24e4ee9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -2431,6 +2434,9 @@
     <ClInclude Include="..\Header\ReverseDissolveShader.h">
       <Filter>04.Shader\21.ReverseDissolveShader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CharacterShader.h">
+      <Filter>04.Shader\21.CharacterShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -3613,6 +3619,9 @@
     <ClCompile Include="..\Code\ReverseDissolveShader.cpp">
       <Filter>04.Shader\21.ReverseDissolveShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\CharacterShader.cpp">
+      <Filter>04.Shader\21.CharacterShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -3713,6 +3722,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\ReverseDissolveShader.fx">
       <Filter>04.Shader\21.ReverseDissolveShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\CharacterShader.fx">
+      <Filter>04.Shader\21.CharacterShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
