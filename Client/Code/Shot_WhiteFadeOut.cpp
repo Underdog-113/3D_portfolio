@@ -34,7 +34,7 @@ void CShot_WhiteFadeOut::Action()
 
 void CShot_WhiteFadeOut::Cut()
 {
-	m_desc.pWhiteFade->SetAlpha(1.f);
+/*	m_desc.pWhiteFade->SetAlpha(1.f);*/
 }
 
 void CShot_WhiteFadeOut::Rollback()

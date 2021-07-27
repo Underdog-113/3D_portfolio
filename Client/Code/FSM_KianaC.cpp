@@ -1827,7 +1827,7 @@ void CFSM_KianaC::Victory_Enter(void)
 
 void CFSM_KianaC::Victory_Update(float deltaTime)
 {
-	if (m_pDM->IsAnimationEnd())
+	if (m_pDM->GetAniTimeline() > 0.95)
 	{
 		ChangeState(Name_Victory_Idle);
 		return;

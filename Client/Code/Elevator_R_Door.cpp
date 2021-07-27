@@ -87,10 +87,18 @@ void CElevator_R_Door::Update(void)
 		if (m_spTransform->GetPosition().y <= -4.f)
 		{
 			SP(Engine::CCamera) spCam = Engine::CCameraManager::GetInstance()->GetCamera(Engine::GET_CUR_SCENE->GetObjectKey() + L"BasicCamera");
-			if (spCam->GetTransform()->GetPosition().z < -4.6f)
-				spCam->GetTransform()->AddPositionZ(5.5f * GET_DT);
+			if (m_rotateLerpTimer < 1.f)
+			{
+				m_rotateLerpTimer += GET_DT;
+				float inverseRate = 1.f - m_rotateLerpTimer;
+				float sLerpTimer = 1.f - inverseRate * inverseRate;
 
-			if (spCam->GetTransform()->GetPosition().z >= -4.6f)
+				_float lerpPoint = GetLerpFloat(m_camStartZ, m_camEndZ, sLerpTimer);
+
+				spCam->GetTransform()->SetPositionZ(lerpPoint);
+			}
+			else
+				//		if (spCam->GetTransform()->GetPosition().z >= -3.8f)
 			{
 				static_cast<Engine::CCanvas*>(GET_CUR_CLIENT_SCENE->FindObjectByName(L"MainCanvas").get())->SetIsEnabled(true);
 				m_bDoorCheck = false;
