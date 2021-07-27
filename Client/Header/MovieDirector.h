@@ -16,6 +16,7 @@
 #define ShotName_RotateYaw_SubCh1	L"RotateYaw_SubCh1"
 #define ShotName_RotateYaw_SubCh2	L"RotateYaw_SubCh2"
 #define ShotName_RotatePitch		L"RotatePitch"
+#define ShotName_RotatePitch_SubCh1	L"RotatePitch_SubCh1"
 #define ShotName_RotatePitch_Spline	L"RotatePitch_Spline"
 #define ShotName_RotatePitch_Spline_SubCh1	L"RotatePitch_Spline_SubCh1"
 #define ShotName_RotateRoll			L"RotateRoll"
@@ -49,6 +50,8 @@
 #define TakeName_WinningSlow		L"WinningSlow"
 #define TakeName_Failure			L"Failure"
 
+#define TakeName_KianaVictory		L"KianaVictory"
+#define TakeName_TheresaVictory		L"TheresaVictory"
 #define TakeName_SakuraVictory		L"SakuraVictory"
 
 
@@ -85,6 +88,8 @@ public:
 	void CreateTake_WinningSlow();
 	void CreateTake_Failure();
 
+	void CreateTake_KianaVictory();
+	void CreateTake_TheresaVictory();
 	void CreateTake_SakuraVictory();
 	void CreateTake_GaneshaBorn();
 	void CreateTake_BronyaBorn();
@@ -147,6 +152,7 @@ private:
 	CShot* m_pShot_RotateYaw_SubCh1 = nullptr;
 	CShot* m_pShot_RotateYaw_SubCh2 = nullptr;
 	CShot* m_pShot_RotatePitch = nullptr;
+	CShot* m_pShot_RotatePitch_SubCh1 = nullptr;
 	CShot* m_pShot_RotatePitch_Spline = nullptr;
 	CShot* m_pShot_RotatePitch_Spline_SubCh1 = nullptr;
 	CShot* m_pShot_RotateRoll = nullptr;

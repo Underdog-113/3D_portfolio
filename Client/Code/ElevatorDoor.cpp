@@ -4,6 +4,8 @@
 #include "Elevator_L_Door.h"
 #include "Elevator_R_Door.h"
 
+#include "CameraShake.h"
+
 _uint CElevatorDoor::m_s_uniqueID = 0;
 
 CElevatorDoor::CElevatorDoor()
@@ -13,6 +15,7 @@ CElevatorDoor::CElevatorDoor()
 
 CElevatorDoor::~CElevatorDoor()
 {
+	SAFE_DELETE(m_shake);
 }
 
 SP(CElevatorDoor) CElevatorDoor::Create(_bool isStatic, Engine::CScene * pScene)
@@ -67,6 +70,8 @@ void CElevatorDoor::Awake(void)
 void CElevatorDoor::Start(void)
 {
 	__super::Start();
+
+
 	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
 	{
 		m_sp_L_Door = Engine::GET_CUR_SCENE->ADD_CLONE(L"Elevator_L_Door", true, (_int)Engine::ELayerID::Decoration);
@@ -81,6 +86,15 @@ void CElevatorDoor::Start(void)
 		m_spMesh->SetMeshData(L"Elevator_Door_2");
 		Engine::CSoundManager::GetInstance()->StopSound((_uint)Engine::EChannelID::OUTGAME);
 		Engine::CSoundManager::GetInstance()->StartSound(L"Elevator_OpenDoor.wav", (_uint)Engine::EChannelID::OUTGAME);
+
+
+
+		m_shake = new CCameraShake;		
+		m_shake->SetCamera(Engine::GET_MAIN_CAM);;
+
+		auto camTr = Engine::GET_MAIN_CAM->GetTransform();
+		m_noShakePos = camTr->GetPosition();
+		m_noShakeRot = camTr->GetRotation();
 	}
 	else
 	{
@@ -91,6 +105,9 @@ void CElevatorDoor::Start(void)
 	m_bMoveCheck = false;
 	m_fTimer = 0.f;
 	m_spGraphics->SetRenderID((_int)Engine::ERenderID::NonAlpha);
+
+
+	m_isShaked = false;
 }
 
 void CElevatorDoor::FixedUpdate(void)
@@ -102,6 +119,12 @@ void CElevatorDoor::FixedUpdate(void)
 void CElevatorDoor::Update(void)
 {
 	__super::Update();
+
+	if (m_isShaked)
+	{
+		ReturnBeforShaking();
+		ApplyShaking();
+	}
 
 	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::MainRoom)
 	{ 
@@ -119,6 +142,14 @@ void CElevatorDoor::Update(void)
 				m_spTransform->AddPositionY(-5.5f * GET_DT);
 			}
 		}
+
+		if (!m_isShaked)
+		{
+			m_shake->Preset_Elevator();
+
+			m_isShaked = true;
+		}
+
 	}
 	else
 	{
@@ -164,7 +195,6 @@ void CElevatorDoor::PostRender(LPD3DXEFFECT pEffect)
 void CElevatorDoor::OnDestroy(void)
 {
 	__super::OnDestroy();
-
 }
 
 void CElevatorDoor::OnEnable(void)
@@ -183,4 +213,39 @@ void CElevatorDoor::SetBasicName(void)
 {
 	m_name = m_objectKey + std::to_wstring(m_s_uniqueID++);
 
+}
+
+void CElevatorDoor::ReturnBeforShaking()
+{
+	auto camTr = Engine::GET_MAIN_CAM->GetTransform();
+
+	if (m_shake->IsShaking())
+	{
+		camTr->SetPosition(m_noShakePos);
+		camTr->SetRotation(m_noShakeRot);
+	}
+}
+
+void CElevatorDoor::ApplyShaking()
+{
+	auto mainCam = Engine::GET_MAIN_CAM;
+	auto camTr = mainCam->GetTransform();
+
+	if (m_shake->IsShaking())
+	{
+		m_shake->PlayShake_Pure();
+
+		m_noShakePos = camTr->GetPosition();
+		m_noShakeRot = camTr->GetRotation();	// 회전값 기억
+
+		_float3 locOscilation = m_shake->GetLocationOscilation();
+		_float3 rotOscilation = m_shake->GetRotateOscilation();
+		camTr->AddPosition(locOscilation);
+		camTr->AddRotation(rotOscilation);
+	}
+	else
+	{
+		m_noShakePos = camTr->GetPosition();
+		m_noShakeRot = camTr->GetRotation();
+	}
 }

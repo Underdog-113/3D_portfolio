@@ -16,12 +16,11 @@ void CShot_WhiteFadeIn::Ready(CTake * pTake, _float startTimeline, _float endTim
 	CShot::Ready(pTake, startTimeline, endTimeline, pDesc, enterTimeline);
 
 	memcpy(&m_desc, pDesc, sizeof(Desc));
-
-	m_desc.pWhiteFade->SetAlpha(1.f);
 }
 
 void CShot_WhiteFadeIn::Enter()
 {
+	m_desc.pWhiteFade->SetAlpha(1.f);
 }
 
 void CShot_WhiteFadeIn::Action()

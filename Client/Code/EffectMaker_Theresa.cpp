@@ -188,7 +188,7 @@ void CEffectMaker_Theresa::CreateEffect_Ultra_ChargeSmoke()
 
 void CEffectMaker_Theresa::CreateEffect_Ultra_Bomb()
 {
-	_float3 size = _float3(0.8f, 0.8f, 0.8f);
+	_float3 size = _float3(0.3f, 0.3f, 0.3f);
 
 	auto effect = CreateEffect_Dissolve(Ultra_Explosion_ObjectKey, L"Ult_Impact", Ultra_Explosion_Tex1Name, Ultra_Explosion_Tex2Name, Ultra_Explosion_Tex3Name);
 

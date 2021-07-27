@@ -46,8 +46,8 @@ void CTheresa_Ult_Crack::Awake()
 	m_spMesh->SetMeshData(L"Ult_Crack");
 	m_spTexture->AddTexture(L"Sword_map");
 	m_spTexture->AddTexture(L"Groundcracks_05");
-	m_spShader->AddShader((_int)EShaderID::AlphaMaskGlowShader);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spShader->AddShader((_int)EShaderID::AlphaMaskShader);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
 }
 
 void CTheresa_Ult_Crack::Start()

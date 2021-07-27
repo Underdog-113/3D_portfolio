@@ -47,10 +47,11 @@ void CIndicatorC::Update(SP(CComponent) spThis)
 	CValkyrie* m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
 
 	_float3 pos = m_currentValkyrie->GetTransform()->GetPosition();
-	pos.y -= 0.5f;
+	pos.y = 0.f;
 	GetOwner()->GetTransform()->SetPosition(pos);
-
-	_float3 dir = m_target->GetTransform()->GetPosition() - GetOwner()->GetTransform()->GetPosition();
+	_float3 targetPos = m_target->GetTransform()->GetPosition();
+	targetPos.y = 0;
+	_float3 dir = targetPos - pos;
 	D3DXVec3Normalize(&dir, &dir);
 	dir.y = 0;
 

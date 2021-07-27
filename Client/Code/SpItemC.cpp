@@ -70,7 +70,7 @@ void CSpItemC::Update(SP(CComponent) spThis)
 		_float3 pos = GetOwner()->GetTransform()->GetPosition();
 		pos.y = m_oldY;
 
-		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.35)
+		if (Engine::Direction(m_currentValkyrie->GetTransform()->GetPosition(), pos) <= 0.5f)
 		{
 			_float value = min(m_currentValkyrie->GetStat()->GetCurSp() + (_float)m_spValue, m_currentValkyrie->GetStat()->GetMaxSp());
 			m_currentValkyrie->GetStat()->SetCurSp(value);

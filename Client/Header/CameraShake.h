@@ -45,7 +45,9 @@ public:
 
 public:
 	void PlayShake();
+	void PlayShake_Pure();
 	void PlayChannel(ShakeChannel* channel);
+	void PlayChannel_Pure(ShakeChannel* channel);
 	void PlayChannelOnMovie(_float timeline);
 	bool IsShaking();
 	
@@ -66,6 +68,8 @@ public:
 	void Preset_Theresa_Charge1Impact(_float3 eventPos);
 	void Preset_Theresa_Charge2Impact(_float3 eventPos);
 	void Preset_Theresa_CrossImpact(_float3 eventPos);
+
+	void Preset_Elevator();
 
 public:
 	void Preset_Kiana_Run();

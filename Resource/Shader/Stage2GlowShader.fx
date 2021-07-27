@@ -87,7 +87,7 @@ PS_OUT		PS_MAIN(PS_IN In)
 		return Out;
 	}
 
-	Out.vEmissive = vector(albedo.xyz * g_glowCoef, albedo.a);
+	Out.vEmissive = vector(albedo.xyz * 0.16f, albedo.a);
 
 
 	Out.vColor = albedo;
