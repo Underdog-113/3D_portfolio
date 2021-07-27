@@ -31,6 +31,11 @@ void CBronyaThrow1Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
+	if (Name_Throw_1 != fsm->GetCurStateString())
+	{
+		static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
+	}
+
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
 	/************************* Fast Idle */

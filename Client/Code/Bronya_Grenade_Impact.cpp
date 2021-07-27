@@ -42,8 +42,8 @@ void CBronya_Grenade_Impact::Awake()
 	__super::Awake();
 	m_spMesh->SetMeshData(L"Bronya_Impact");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
-	m_spTexture->AddTexture(L"Wave01");
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
+	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spTexture->AddTexture(L"Wave01");
 	m_spTexture->AddTexture(L"Grenade_Explosion");
 	m_spShader->AddShader((_int)EShaderID::DissolveShader);
@@ -84,6 +84,8 @@ void CBronya_Grenade_Impact::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
+	pEffect->SetFloat("gEmissionPow", 0.15f);
+	pEffect->CommitChanges();
 }
 
 void CBronya_Grenade_Impact::Render(LPD3DXEFFECT pEffect)

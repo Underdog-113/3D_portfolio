@@ -51,7 +51,7 @@ void CBronya_Grenade::Start()
 {
 	__super::Start();
 	
-	_float3 size = { 5.1f, 5.1f, 5.1f };
+	_float3 size = { 5.3f, 5.3f, 5.3f };
 
 	SP(Engine::CObject) spDome = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Dome", true);
 	spDome->GetTransform()->SetSize(_float3(2.85f, 2.85f, 2.85f));
@@ -59,7 +59,7 @@ void CBronya_Grenade::Start()
 	spDome->GetTransform()->SetPositionY(m_spTransform->GetPosition().y - 0.2f);
 
 	SP(Engine::CObject) spImpact = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Grenade_Impact", true);
-	spImpact->GetTransform()->SetSize(_float3(1.85f, 1.85f, 1.85f));
+	spImpact->GetTransform()->SetSize(_float3(1.f, 2.f, 1.f));
 	spImpact->GetTransform()->SetPosition(m_spTransform->GetPosition());
 	spImpact->GetTransform()->SetPositionY(m_spTransform->GetPosition().y + 0.6f);
 
