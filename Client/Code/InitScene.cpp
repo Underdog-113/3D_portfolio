@@ -137,7 +137,7 @@ void CInitScene::Update(void)
 {
 	__super::Update();
 	float value = slider->GetValue();
-	value = min(value + GET_DT * 27, 100); // 38�� �����̴��� �������¼ӵ��� �������常�鶧 �ӵ��ٿ��� �ε����� �����̴��������¼ӵ� ���� ���������� �뼮
+	value = min(value + GET_DT * 11, 100); // 38�� �����̴��� �������¼ӵ��� �������常�鶧 �ӵ��ٿ��� �ε����� �����̴��������¼ӵ� ���� ���������� �뼮
 	slider->SetValue(value);
 	std::wstring str = std::to_wstring(value);
 	str = str.substr(0, 6);
