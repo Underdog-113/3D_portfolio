@@ -51,6 +51,11 @@ void CBronya_Impact_TripleRing::Awake()
 void CBronya_Impact_TripleRing::Start()
 {
 	__super::Start();
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::Ganesha_Cinema)
+	{
+		m_spTexture->ChangeTexture(L"LaserColor", 0, 0);
+		m_spTexture->ChangeTexture(L"LaserColor", 0, 2);
+	}
 	m_fAlpha = 1.f;
 }
 

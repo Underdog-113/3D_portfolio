@@ -55,8 +55,20 @@ void CBronya_Impact::Start()
 	__super::Start();
 
 	_float3 size = { 16.f, 10.f, 16.f };
+	
+	if (Engine::GET_CUR_SCENE->GetSceneID() == (_int)ESceneID::Ganesha_Cinema)
+	{
+		SP(Engine::CObject) spImpactRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_Ring", true);
+		spImpactRing->GetTransform()->SetSize(size);
+		spImpactRing->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
+		spImpactRing->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y - 0.85f);
 
-	if (Engine::GET_CUR_SCENE->GetSceneID() != (_int)ESceneID::Ganesha_Cinema)
+		SP(Engine::CObject) spImpactTriRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_TripleRing", true);
+		spImpactTriRing->GetTransform()->SetSize(size);
+		spImpactTriRing->GetTransform()->SetPosition(this->GetTransform()->GetPosition());
+		spImpactTriRing->GetTransform()->SetPositionY(this->GetTransform()->GetPosition().y - 0.45f);
+	}
+	else
 	{
 		SP(Engine::CObject) spImpactRing = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact_Ring", true);
 		spImpactRing->GetTransform()->SetSize(size);
