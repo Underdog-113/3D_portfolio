@@ -1,38 +1,41 @@
 #include "stdafx.h"
-#include "..\Header\DissolveShader.h"
+#include "..\Header\ReverseDissolveShader.h"
 
 
-CDissolveShader::CDissolveShader()
+CReverseDissolveShader::CReverseDissolveShader()
 {
 }
 
 
-CDissolveShader::~CDissolveShader()
+CReverseDissolveShader::~CReverseDissolveShader()
 {
 }
 
-Engine::CShader * CDissolveShader::Create()
+Engine::CShader * CReverseDissolveShader::Create()
 {
-	CDissolveShader* pInstance = new CDissolveShader;
+	CReverseDissolveShader* pInstance = new CReverseDissolveShader;
 	pInstance->Awake();
 
 	return pInstance;
 }
 
-void CDissolveShader::Free()
+void CReverseDissolveShader::Free()
 {
 	__super::Free();
+
 }
 
-void CDissolveShader::Awake()
+void CReverseDissolveShader::Awake()
 {
 	__super::Awake();
 	Engine::CRenderTargetManager* pRTM = Engine::CRenderTargetManager::GetInstance();
 	m_vRenderTargets[0] = pRTM->FindRenderTarget(L"Target_Albedo");
 	m_vRenderTargets[1] = pRTM->FindRenderTarget(L"Target_Normal");
+	m_vRenderTargets[2] = pRTM->FindRenderTarget(L"Target_Depth");
+	m_vRenderTargets[3] = pRTM->FindRenderTarget(L"Target_Emissive");
 }
 
-void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
+void CReverseDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 {
 	// Add Alpha variables to objects that use this shader.
 	// Need to pEffect->SetFloat("gAlpha", Alpha variable) on render part.
@@ -67,4 +70,8 @@ void CDissolveShader::SetUpConstantTable(SP(Engine::CGraphicsC) spGC)
 	m_pEffect->SetTexture("g_DiffuseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][0]->pTexture);
 	m_pEffect->SetTexture("g_NoiseTex", spTexture->GetTexData()[spTexture->GetSetIndex()][1]->pTexture);
 	m_pEffect->SetTexture("g_ServeTex", spTexture->GetTexData()[spTexture->GetSetIndex()][2]->pTexture);
+
+	m_pEffect->SetVector("g_color", &spGC->GetTexture()->GetColor());
+	m_pEffect->SetVector("g_addColor", &m_addColor);
+	m_pEffect->SetVector("g_multColor", &m_multColor);
 }

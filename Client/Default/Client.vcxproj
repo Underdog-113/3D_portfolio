@@ -249,6 +249,7 @@
     <ClInclude Include="..\Header\CameraShake.h" />
     <ClInclude Include="..\Header\DissolveShader_Glow.h" />
     <ClInclude Include="..\Header\EffectMaker_Sakura.h" />
+    <ClInclude Include="..\Header\EvadeEffect.h" />
     <ClInclude Include="..\Header\GaneshaAirbornePattern.h" />
     <ClInclude Include="..\Header\ElevatorBaseShader.h" />
     <ClInclude Include="..\Header\GachaBox_Eff.h" />
@@ -259,6 +260,7 @@
     <ClInclude Include="..\Header\DropItemManager.h" />
     <ClInclude Include="..\Header\GachBoxC.h" />
     <ClInclude Include="..\Header\MonsterDieParticle.h" />
+    <ClInclude Include="..\Header\ReverseDissolveShader.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Loop.h" />
     <ClInclude Include="..\Header\Sakura_EvadeSkill_Start.h" />
     <ClInclude Include="..\Header\MousePointC.h" />
@@ -663,6 +665,7 @@
     <ClCompile Include="..\Code\CameraShake.cpp" />
     <ClCompile Include="..\Code\DissolveShader_Glow.cpp" />
     <ClCompile Include="..\Code\EffectMaker_Sakura.cpp" />
+    <ClCompile Include="..\Code\EvadeEffect.cpp" />
     <ClCompile Include="..\Code\GaneshaAirbornePattern.cpp" />
     <ClCompile Include="..\Code\ElevatorBaseShader.cpp" />
     <ClCompile Include="..\Code\GachaBox_Eff.cpp" />
@@ -673,6 +676,7 @@
     <ClCompile Include="..\Code\DropItemManager.cpp" />
     <ClCompile Include="..\Code\GachBoxC.cpp" />
     <ClCompile Include="..\Code\MonsterDieParticle.cpp" />
+    <ClCompile Include="..\Code\ReverseDissolveShader.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Loop.cpp" />
     <ClCompile Include="..\Code\Sakura_EvadeSkill_Start.cpp" />
     <ClCompile Include="..\Code\MousePointC.cpp" />
@@ -1113,6 +1117,10 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">2.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ReverseDissolveShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\SoftEffectShader.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">2.0</ShaderModel>

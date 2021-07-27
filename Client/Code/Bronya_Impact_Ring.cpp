@@ -42,7 +42,7 @@ void CBronya_Impact_Ring::Awake()
 	__super::Awake();
 	m_spMesh->SetMeshData(L"Bronya_Impact_ring");
 	m_spMesh->SetIsEffectMesh(true);
-	m_spGraphics->SetRenderID((_int)Engine::ERenderID::AlphaBlend);
+	m_spGraphics->SetRenderID((_int)Engine::ERenderID::Effect);
 	m_spTexture->AddTexture(L"Impact_Red");
 	m_spTexture->AddTexture(L"Eff_Noise_08");
 	m_spTexture->AddTexture(L"Impact_Red");
@@ -70,7 +70,7 @@ void CBronya_Impact_Ring::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fAlpha -= 3.f * GET_DT;
+	m_fAlpha -= 1.5f * GET_DT;
 }
 
 void CBronya_Impact_Ring::LateUpdate()
