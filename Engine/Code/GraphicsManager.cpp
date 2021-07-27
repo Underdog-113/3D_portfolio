@@ -66,8 +66,9 @@ void CGraphicsManager::Render(void)
 	//Deferred Start
 	RenderNonAlpha();
 	RenderWire();
-	RenderAlphaTest();
 	RenderEffect();
+	RenderAlphaTest();
+	
 	RenderLights();
 
 	//Deferred End
