@@ -1,5 +1,7 @@
 #pragma once
 #include "StateMachineC.h"
+#include "StageCameraMan.h"
+#include "CameraShake.h"
 
 class CFSM_GaneshaC final : public Engine::CStateMachineC
 {
@@ -18,6 +20,9 @@ private:
 
 private:
 	GETTOR_SETTOR(Engine::CDynamicMeshData*, m_pDM, nullptr, DM)
+
+	_bool m_shake = false;
+	_bool m_jumpBack_2 = false;
 
 public:
 	// <Animation List>
