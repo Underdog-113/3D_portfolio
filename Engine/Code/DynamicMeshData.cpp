@@ -65,7 +65,6 @@ void CDynamicMeshData::Awake(std::wstring const& filePath, std::wstring const& f
 		MSG_BOX(__FILE__, L"Load Mesh Hierarchy failed in ParsingMesh");
 		ABORT;
 	}
-
 	
 	//할일 : 나중에 GET_VALUE로 읽어와야함.
 	m_minVertex =  _float3(-100, -100, -100);

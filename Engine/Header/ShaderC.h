@@ -25,6 +25,7 @@ public:
 
 public:
 					CShader*			AddShader				(_int shaderID);
+					void				AddShaderPerSubset		(_int shaderID, _int subSetNum);
 					void				ResizeShaderPerSubset	(_int size);
 public:
 	static const	EComponentID		m_s_componentID = EComponentID::Shader;

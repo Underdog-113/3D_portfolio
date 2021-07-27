@@ -42,7 +42,7 @@ VS_OUT VS_MAIN(VS_IN In)
 	VS_OUT Out = (VS_OUT)0;
 
 	matrix matWV, matWVP;
-
+	
 	matWV = mul(g_matWorld, g_matView);
 	matWVP = mul(matWV, g_matProj);
 
@@ -80,20 +80,27 @@ PS_OUT		PS_MAIN(PS_IN In)
 	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, -2.f);
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
 
-	//if (albedo.r > 0.3f && albedo.g > 0.3f && albedo.b > 0.3f)
-	//{
-	//	Out.vColor = albedo;
-	//	Out.vEmissive = vector(albedo.xyz * 0.05f, albedo.a);
-	//	return Out;
-	//}
+	if (albedo.r > 0.3f && albedo.g > 0.3f && albedo.b > 0.3f)
+	{
+		Out.vColor = albedo;
+		Out.vEmissive = vector(albedo.xyx * 0.05f, albedo.a);
+		return Out;
+	}
 
-	Out.vEmissive = vector(albedo.xyz * 0.3f, 1.f);
+	if (albedo.x == albedo.z)
+	{
+		float r = albedo.r;
+		Out.vEmissive = vector(r * 0.f, r * 0.2f, r * 0.6f,  1.f);
+		Out.vColor = vector(r * 0.f, r * 0.2f, r * 0.6f, 1.f);
+
+		return Out;
+	}
 
 
-	Out.vColor = albedo;
-	Out.vColor.a = 1.f;
 
-
+	Out.vEmissive = vector(albedo.z * 0.1f, albedo.y * 0.2f, albedo.x * 0.35f, 1.f);
+	Out.vColor = vector(albedo.z * 0.1f, albedo.y * 0.2f, albedo.x * 0.35f, 1.f);
+	
 	Out.vColor += g_addColor;
 	Out.vColor *= g_multColor;
 	Out.vColor = Out.vColor * g_color;

@@ -12,6 +12,16 @@ void CMainRoomManager::Start(Engine::CScene * pScene)
 	m_vPlayer->GetComponent<Engine::CTransformC>()->SetRotation(_float3(0, 109.78f, 0));
 	m_vPlayer->GetComponent<Engine::CTransformC>()->SetSize(_float3(1.f, 1.f, 1.f));
 
+	SP(Engine::CShaderC) spShader = m_vPlayer->GetComponent<Engine::CShaderC>();
+	spShader->AddShader((_int)EShaderID::OutlineShader);
+
+	spShader->ResizeShaderPerSubset(5);
+	spShader->AddShaderPerSubset((_int)Engine::EShaderID::MeshShader, 0);
+	spShader->AddShaderPerSubset((_int)Engine::EShaderID::MeshShader, 1);
+	spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 2);
+	spShader->AddShaderPerSubset((_int)EShaderID::FaceShader, 3);
+	spShader->AddShaderPerSubset((_int)EShaderID::KianaBodyShader, 4);
+
 	pScene->FindObjectByName(L"MainCanvas_Text_0")->GetComponent<Engine::CTextC>()->ChangeMessage(L"LV." + std::to_wstring(CDataManager::GetInstance()->FindCaptainData()->GetLevel()));
 	pScene->FindObjectByName(L"MainCanvas_Text_1")->GetComponent<Engine::CTextC>()->ChangeMessage(CDataManager::GetInstance()->FindCaptainData()->GetName());
 

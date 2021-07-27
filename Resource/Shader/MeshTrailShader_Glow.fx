@@ -130,7 +130,7 @@ PS_OUTPUT ps_main(VS_OUTPUT Input)
 	}		
 
 	Out.vColor = blendColor;
-	Out.vEmissive = float4(blendColor.rgb * 0.f , gTrailAlpha);
+	Out.vEmissive = float4(blendColor.rgb * 0.f , 1);
 
 	return Out;
 }
@@ -146,7 +146,7 @@ technique TrailShader
 		AlphaTestEnable = false;
 		alphafunc = greater;
 		alpharef = 0x08;
-		zWriteEnable = true;
+		zWriteEnable = false;
 
 
 		VertexShader = compile vs_3_0 vs_main();

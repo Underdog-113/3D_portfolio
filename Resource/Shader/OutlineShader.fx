@@ -35,7 +35,7 @@ VS_OUT VS_OUTLINE(VS_IN In)
 	matWVP = mul(matWV, g_matProj);
 
 	Out.vPosition = mul(vector(In.vPosition.xyz, 1.f), matWVP);
-	Out.vPosition += (normalize(mul(vector(In.vNormal.xyz, 0.f), matWVP)) / 220);
+	Out.vPosition += (normalize(mul(vector(In.vNormal.xyz, 0.f), matWVP)) / 320);
 
 	return Out;
 }
