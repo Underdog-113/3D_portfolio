@@ -69,7 +69,7 @@ void CBronya_Impact_TripleRing::Update()
 		this->SetDeleteThis(true);
 	}
 
-	m_fAlpha -= 3.f * GET_DT;
+	m_fAlpha -= 1.3f * GET_DT;
 
 }
 
@@ -83,7 +83,7 @@ void CBronya_Impact_TripleRing::PreRender(LPD3DXEFFECT pEffect)
 {
 	m_spMesh->PreRender(m_spGraphics, pEffect);
 	pEffect->SetFloat("gAlpha", m_fAlpha);
-	pEffect->SetBool("g_zWriteEnabled", true);
+	pEffect->SetBool("g_zWriteEnabled", false);
 	pEffect->CommitChanges();
 }
 

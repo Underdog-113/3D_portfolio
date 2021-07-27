@@ -137,8 +137,9 @@ void CYongScene::Update(void)
 	{
 
 		SP(Engine::CObject) spSoftEffect
-			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ItemObject", true);
-		
+			= Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact", true);
+		spSoftEffect->GetTransform()->SetSize(_float3(3.f, 3.f, 3.f));
+		spSoftEffect->GetTransform()->AddPositionY(1.f);
 
 			//spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true, (_uint)Engine::ELayerID::Effect);
 			// Bronya Smoke
@@ -214,3 +215,4 @@ void CYongScene::OnDisable(void)
 void CYongScene::InitPrototypes(void)
 {
 }
+

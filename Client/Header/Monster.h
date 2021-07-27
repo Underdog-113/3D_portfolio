@@ -69,7 +69,7 @@ public:
 	void DeleteEffect(_int index);
 
 	Engine::CCollider* GetHitBox();
-
+	
 protected:
 	static				_uint							m_s_uniqueID;
 	static				_uint							m_s_channelID;
@@ -96,9 +96,11 @@ protected:
 	GETTOR_SETTOR		(_float,						m_weakTime,			5.f,							WeakTime) // SuperArmor가 깨지고 n초 후에 breakGauge 채우기 전까지의 시간
 	GETTOR				(std::vector<SP(Engine::CObject)>,			m_vEffects,			{},								Effects)
 
-
+	GETTOR_SETTOR		(_float,						m_targetingHelperRate, 1.f, TargetingHelperRate)
 
 
 private:
 	_float m_accTime = 0.f;
+
+	SP(Engine::CObject) m_spSakuraMark = nullptr;
 };

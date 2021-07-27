@@ -98,6 +98,9 @@ void CMeshC::Start(SP(CComponent) spThis)
 				spGraphics->AddMaterial(meshContainer->pMaterials[i].MatD3D, meshContainer->subsetIndexStart + i);
 		}
 	}
+
+	if (m_pOwner->GetObjectKey() == L"Sakura")
+		int a = 5;
 }
 
 void CMeshC::FixedUpdate(SP(CComponent) spThis)

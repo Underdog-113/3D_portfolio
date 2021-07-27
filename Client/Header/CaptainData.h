@@ -15,7 +15,7 @@ public:
 		_int diamond);
 
 private:
-	GETTOR_SETTOR(std::wstring, m_name, L"ΩΩ±Í¿Ã", Name);
+	GETTOR_SETTOR(std::wstring, m_name, L"ªÔªˆ¿Ã", Name);
 	GETTOR_SETTOR(_int, m_leval, 1, Level);
 	GETTOR_SETTOR(_float, m_experience, 0, Experience);
 	GETTOR_SETTOR(_float, m_maxExperience, 0, MaxExperience);

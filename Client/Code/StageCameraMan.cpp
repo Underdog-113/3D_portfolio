@@ -7,6 +7,7 @@
 #include "CameraShake.h"
 
 #include "WndApp.h"
+#include "Monster.h"
 
 CStageCameraMan::CStageCameraMan()
 {
@@ -132,7 +133,6 @@ void CStageCameraMan::PivotChasing()
 	if (m_isTargeting)
 	{
 		OnTargetChasing();
-		//RotateCameraHorizontal();
 	}
 	else
 	{
@@ -303,83 +303,6 @@ void CStageCameraMan::SetTargetShot()
 	m_changeShotSpeed = 2.f;
 	m_rotateXStart = m_spCamera->GetLookAngleRight();
 	m_rotateXDst = D3DXToRadian(15.f);
-// 
-// 	auto pCT = CStageControlTower::GetInstance();
-// 
-// 	_float3 cameraPos = m_spCamera->GetTransform()->GetPosition();
-// 	_float3 pActor = pCT->GetCurrentActor()->GetTransform()->GetPosition();
-// 	_float3 pTarget = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
-// 
-// 	_float3 camForward = pActor - cameraPos;
-// 	camForward.y = 0.f;
-// 	D3DXVec3Normalize(&camForward, &camForward);
-// 
-// 	_float3 actorToTarget = pTarget - pActor;
-// 	_float distance = D3DXVec3Length(&actorToTarget);
-// 	actorToTarget.y = 0.f;
-// 	D3DXVec3Normalize(&actorToTarget, &actorToTarget);
-// 
-// 	_float dotValue;
-// 	_float3 crossDir;
-// 	dotValue = D3DXVec3Dot(&camForward, &actorToTarget);
-// 	D3DXVec3Cross(&crossDir, &camForward, &actorToTarget);
-// 
-// 	_float radAngle = acosf(dotValue);
-// 
-// 	if (crossDir.y > 0.f)
-// 	{
-// 		if (radAngle > D3DXToRadian(30.f))
-// 		{
-// 			m_rotateLerpStart = m_spCamera->GetLookAngleUp();
-// 			m_rotateYDst = m_rotateLerpStart + (radAngle - D3DXToRadian(30.f));
-// 		}
-// 	}
-// 	else
-// 	{
-// 		if (radAngle > D3DXToRadian(30.f))
-// 		{
-// 			m_rotateLerpStart = m_spCamera->GetLookAngleUp();
-// 			m_rotateYDst = m_rotateLerpStart + (radAngle - D3DXToRadian(30.f));
-// 		}
-// 	}
-// 
-// 	if (distance > TargetWideLimitDist)
-// 	{
-// 		if (m_dstMaxDist < 6.f)
-// 		{
-// 			// wide
-// 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
-// 			m_dstMaxDist = 6.f;
-// 			m_changeShotTimer = 0.f;
-// 			m_rotateXStart = m_spCamera->GetLookAngleRight();
-// 			m_rotateXDst = D3DXToRadian(15.f);
-// 		}
-// 	}
-// 	else if (distance < TargetMidWideLimitDist)
-// 	{
-// 		if (m_dstMaxDist > 2.5f && m_changeShotTimer > 2.f)
-// 		{
-// 			// normal
-// 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
-// 			m_dstMaxDist = 2.5f;
-// 			m_changeShotTimer = 0.f;
-// 			m_rotateXStart = m_spCamera->GetLookAngleRight();
-// 			m_rotateXDst = D3DXToRadian(15.f);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		if (m_dstMaxDist != 4.f && m_changeShotTimer > 2.f)
-// 		{
-// 			// midwide
-// 			m_curMaxDist = m_spCamera->GetMaxDistTPS();
-// 			m_dstMaxDist = 4.f;
-// 			m_changeShotTimer = 0.f;
-// 			m_rotateXStart = m_spCamera->GetLookAngleRight();
-// 			m_rotateXDst = D3DXToRadian(15.f);
-// 
-// 		}
-// 	}
 }
 
 void CStageCameraMan::ChangeShot()
@@ -506,7 +429,7 @@ void CStageCameraMan::ChangeShotWhileTargeting()
 
 	_float3 pActor = pCT->GetCurrentActor()->GetTransform()->GetPosition();
 	_float3 pTarget = pCT->GetCurrentTarget()->GetTransform()->GetPosition();
-	_float distance = D3DXVec3Length(&_float3(pTarget - pActor));
+	_float distance = D3DXVec3Length(&_float3(pTarget - pActor)) + ((CMonster*)pCT->GetCurrentTarget().get())->GetTargetingHelperRate();
 	
 	if (distance > TargetWideLimitDist)
 	{

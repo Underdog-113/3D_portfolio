@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 
+class CCameraShake;
 class CElevatorDoor : public Engine::CObject
 {
 	SMART_DELETER_REGISTER
@@ -45,6 +46,13 @@ private:
 
 private:
 	_float m_fTimer;
+
+	CCameraShake* m_shake = nullptr;
+	void ReturnBeforShaking();
+	void ApplyShaking();
+	_float3 m_noShakePos = ZERO_VECTOR;
+	_float3 m_noShakeRot = ZERO_VECTOR;
+	_bool m_isShaked = false;
 
 private:
 	SP(Engine::CObject) m_sp_L_Door;

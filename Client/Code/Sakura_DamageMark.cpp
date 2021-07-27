@@ -70,13 +70,6 @@ void CSakura_DamageMark::Update(void)
 {
 	__super::Update();
 
-	SetDeleteThis(true);
-	if (!m_pTargetObject || m_pTargetObject->GetDeleteThis())
-	{
-		SetDeleteThis(true);
-		return;
-	}
-
 	UpdateFrame(0.05f);
 
 	m_spTransform->SetPosition(m_pTargetObject->GetTransform()->GetPosition());

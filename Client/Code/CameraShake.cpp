@@ -19,12 +19,54 @@ void CCameraShake::PlayShake()
 		PlayChannel(&m_shakeChannel[Monster]);
 }
 
+void CCameraShake::PlayShake_Pure()
+{
+	if (m_shakeChannel[Player].enable)
+		PlayChannel_Pure(&m_shakeChannel[Player]);
+	if (m_shakeChannel[Monster].enable)
+		PlayChannel_Pure(&m_shakeChannel[Monster]);
+}
+
 void CCameraShake::PlayChannel(ShakeChannel* channel)
 {
 	if (m_isMovieOn)
 		return;
 
 	channel->m_timer += GET_PLAYER_DT;
+
+	if (channel->m_timer < channel->m_blendInTime)
+	{
+		channel->m_amplitudeRate = channel->m_timer / channel->m_blendInTime;
+	}
+	else if (channel->m_timer > channel->m_duration - channel->m_blendOutTime)
+	{
+		if (channel->m_blendOutTime == 0.f)
+			channel->m_amplitudeRate = 0.f;
+		else
+			channel->m_amplitudeRate = (channel->m_duration - channel->m_timer) / channel->m_blendOutTime;
+	}
+	else
+	{
+		channel->m_amplitudeRate = 1.f;
+	}
+
+	channel->m_amplitudeRate *= channel->m_distanceRate;
+
+	AdvanceSinWave(&channel->m_pitchWave, channel);
+	AdvanceSinWave(&channel->m_yawWave, channel);
+	AdvanceSinWave(&channel->m_rollWave, channel);
+
+	AdvanceSinWave(&channel->m_xWave, channel);
+	AdvanceSinWave(&channel->m_yWave, channel);
+	AdvanceSinWave(&channel->m_zWave, channel);
+}
+
+void CCameraShake::PlayChannel_Pure(ShakeChannel * channel)
+{
+	if (m_isMovieOn)
+		return;
+
+	channel->m_timer += GET_PURE_DT;
 
 	if (channel->m_timer < channel->m_blendInTime)
 	{
@@ -479,6 +521,28 @@ void CCameraShake::Preset_Theresa_CrossImpact(_float3 eventPos)
 	channel->m_yWave.offset = 0.f;
 	channel->m_yWave.ampAxisOffset = channel->m_yWave.amplitude;
 
+}
+
+void CCameraShake::Preset_Elevator()
+{
+	ShakeChannel* channel = &m_shakeChannel[Player];
+
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
+	channel->m_timer = 0.f;
+
+	channel->m_duration = 0.3f;
+	channel->m_blendInTime = 0.f;
+	channel->m_blendOutTime = 0.2f;
+
+	ResetAllMember(channel);
+
+	channel->m_xWave.amplitude = 0.02f;
+	channel->m_xWave.frequency = 20.f;
+
+	channel->m_yWave.amplitude = 0.15f;
+	channel->m_yWave.frequency = 10.f;
+	channel->m_yWave.offset = 0.25f / channel->m_yWave.frequency;
+	channel->m_yWave.ampAxisOffset = channel->m_yWave.amplitude;
 }
 
 void CCameraShake::Preset_Kiana_Run()

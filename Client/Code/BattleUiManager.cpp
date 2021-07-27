@@ -202,7 +202,7 @@ void CBattleUiManager::Update(void)
 
 	if (!init)
 	{
-		for (int i = 0; i <= 30; i++)
+		for (int i = 0; i <= 10; i++)
 		{
 			SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
 			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);
@@ -219,18 +219,12 @@ void CBattleUiManager::Update(void)
 	skillActivationImageCheck();
 	monsterHpBarCheck();
 
-// 	if(m_CPhaseChanger == nullptr)
-// 		m_CPhaseChanger = static_cast<CPhaseChanger*>(Engine::GET_CUR_SCENE->FindObjectWithKey(L"PhaseChanger").get());
-
-	CValkyrie* m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
-
 	Engine::CLayer* pLayer = Engine::CSceneManager::GetInstance()->GetCurScene()->GetLayers()[(_int)ELayerID::Enemy];
 	std::vector<SP(Engine::CObject)> monsterList = pLayer->GetGameObjects();
 
 	if (monsterList.empty())
 		return;
 
-//	std::vector<SP(CMonster)> monster = m_CPhaseChanger->GetMonsters();
 	_int count = 0;
 	for (auto obj : monsterList)
 	{
