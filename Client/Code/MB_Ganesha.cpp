@@ -77,6 +77,7 @@ void CMB_Ganesha::Start(void)
 	stat.SetGrowDef(2.9f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Ganesha");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(4);
 	m_pStat->SetOnSuperArmor(true);

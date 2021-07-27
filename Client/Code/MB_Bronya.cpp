@@ -85,6 +85,7 @@ void CMB_Bronya::Start(void)
 	stat.SetGrowDef(5.9f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Bronya");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(6);
 	m_pStat->SetOnSuperArmor(true);

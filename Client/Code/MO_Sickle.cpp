@@ -67,6 +67,7 @@ void CMO_Sickle::Start(void)
 	stat.SetGrowDef(0.5f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Sickle");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(2);
 	m_pStat->SetOnSuperArmor(true);
