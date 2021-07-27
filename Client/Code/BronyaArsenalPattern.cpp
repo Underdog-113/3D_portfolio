@@ -66,11 +66,8 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		
-
 		_float3 endPos = { 186.21f, mPos.y, -17.06f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
-		
 	}
 
 	/************************* Sound */

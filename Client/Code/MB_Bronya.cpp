@@ -63,12 +63,12 @@ void CMB_Bronya::Start(void)
 		CBronyaStunPattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create()); // Pshield on
-	m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create()); // Pshield on
 
 	m_spTransform->SetSize(0.5f, 0.5f, 0.5f);
 	m_spTransform->SetRotationY(D3DXToRadian(90));
@@ -265,6 +265,26 @@ void CMB_Bronya::MonsterDead()
 	__super::MonsterDead();
 
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
+}
+
+void CMB_Bronya::AddAlpha(_float value)
+{
+	m_fAlpha += value;
+
+	if (m_fAlpha >= 1.f)
+	{
+		m_fAlpha = 1.f;
+	}
+}
+
+void CMB_Bronya::SubAlpha(_float value)
+{
+	m_fAlpha -= value;
+
+	if (m_fAlpha <= 0.f)
+	{
+		m_fAlpha = 0.f;
+	}
 }
 
 void CMB_Bronya::EquipWeapon()

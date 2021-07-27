@@ -46,9 +46,7 @@ private:
 
 	_bool m_onThrow = false;
 	_bool m_onFlashEffect = false;
-	_bool m_onFlashFadeIn = false;
 	_bool m_onFlashFadeOut = false;
-	_bool m_onCC = false;
 
 	SP(Engine::CImageObject) m_spFlashBang = nullptr;
 

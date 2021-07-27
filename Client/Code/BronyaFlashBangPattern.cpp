@@ -57,6 +57,7 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 	{
 		// flash bang 상태로 변경
 		fsm->ChangeState(Name_Throw_3);
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.3f);
 		m_onThrow = true;
 
 		static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(true);
@@ -69,6 +70,7 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		true == m_onThrow)
 	{
 		// 대기 상태로 변경
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
 		fsm->ChangeState(Name_IDLE);
 	}
 	else if (true == m_onThrow)
@@ -81,8 +83,7 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 			std::cout << "========================" << std::endl;
 			m_onThrow = false;
 			m_onFlashEffect = false;
-			m_onCC = false;
-			m_onFlashFadeIn = false;
+			m_onFlashFadeOut = false;
 
 			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 
@@ -112,9 +113,9 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 	else if (Name_Throw_3 == fsm->GetCurStateString() &&
 		0.7f <= fsm->GetDM()->GetAniTimeline() &&
 		true == m_onThrow &&
-		false == m_onFlashFadeIn)
+		false == m_onFlashFadeOut)
 	{
-		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WhiteFadeOneTake(0.8f, 1.2f, 1.2f, 1.5f);
+		CStageControlTower::GetInstance()->GetMovieDirector()->StartTake_WhiteFadeOneTake(0.5f, 0.9f, 0.9f, 1.2f);
 
 		//m_spFlashBang = std::dynamic_pointer_cast<Engine::CImageObject>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"ImageObject", true));
 		//m_spFlashBang->GetTexture()->AddTexture(L"White");
@@ -126,7 +127,20 @@ void CBronyaFlashBangPattern::Pattern(Engine::CObject* pOwner)
 		//m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetAutoDelete(false);
 		//m_spFlashBang->GetComponent<Engine::CFadeInOutC>()->SetIsFadeIn(true);
 
-		m_onFlashFadeIn = true;
+		m_onFlashFadeOut = true;
+	}
+
+	// 캐릭터 스턴 판정
+	if (m_onFlashFadeOut)
+	{
+		m_accTime += GET_DT;
+
+		if (m_accTime >= 0.75f)
+		{
+			m_accTime = 0.f;
+			m_onFlashFadeOut = false;
+			BlowOutFlash();
+		}
 	}
 	
 	//if (true == m_onFlashFadeIn)
@@ -205,7 +219,7 @@ void CBronyaFlashBangPattern::BlowOutFlash()
 	// stun
 	if (abs(acos(dot)) < PI / 2)
 	{
-		CStageControlTower::GetInstance()->GetCurrentActor()->SetStunState(1.f);
+		CStageControlTower::GetInstance()->GetCurrentActor()->SetStunState(2.5f);
 
 		std::cout << ": " << abs(acos(dot)) * 180 / PI << std::endl;
 		std::cout << "Stun!" << std::endl;
@@ -216,5 +230,4 @@ void CBronyaFlashBangPattern::BlowOutFlash()
 		std::cout << ": " << abs(acos(dot)) * 180 / PI << std::endl;
 		std::cout << "Miss!" << std::endl;
 	}
-	m_onCC = true;
 }

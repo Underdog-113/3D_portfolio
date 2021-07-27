@@ -107,3 +107,23 @@ void CBronya_Weapon::OnDisable(void)
 void CBronya_Weapon::SetBasicName(void)
 {
 }
+
+void CBronya_Weapon::AddAlpha(_float value)
+{
+	m_fAlpha += value;
+
+	if (m_fAlpha >= 1.f)
+	{
+		m_fAlpha = 1.f;
+	}
+}
+
+void CBronya_Weapon::SubAlpha(_float value)
+{
+	m_fAlpha -= value;
+
+	if (m_fAlpha <= 0.f)
+	{
+		m_fAlpha = 0.f;
+	}
+}

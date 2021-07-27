@@ -1935,6 +1935,9 @@ void CFSM_KianaC::RegisterAllState()
 	CreateState(CFSM_KianaC, pState, StandBy)
 		AddState(pState, Name_StandBy);
 
+	CreateState(CFSM_KianaC, pState, Stun)
+		AddState(pState, Name_Stun);
+
 	CreateState(CFSM_KianaC, pState, SwitchIn)
 		AddState(pState, Name_SwitchIn);
 
