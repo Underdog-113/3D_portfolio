@@ -26,6 +26,8 @@ void CShot_ReturnCameraToActor::Enter()
 		->SetPosition(CStageControlTower::GetInstance()->GetCurrentActor()->GetTransform()->GetPosition());
 
 	m_pCameraMan->ReturnToMidShot();
+
+	CStageControlTower::GetInstance()->GetCurrentActor()->GetStateMachine()->ChangeState(L"StandBy");
 }
 
 void CShot_ReturnCameraToActor::Action()
