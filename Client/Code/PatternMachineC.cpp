@@ -47,14 +47,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	if (m_curCost > m_maxCost)
 		m_curCost = m_maxCost;
 
-	if (false == m_previewMode &&
-		Pattern_Type::TypeEnd != m_vPatterns.size() &&
-		m_vIndices.empty())
-	{
-		SortingPatterns();
-		return;
-	}
-	else if (true == m_previewMode &&
+	if (/*false == m_previewMode &&*/
 		Pattern_Type::TypeEnd != m_vPatterns.size() &&
 		m_vIndices.empty())
 	{
@@ -340,6 +333,9 @@ void CPatternMachineC::SortingPatterns()
 			m_vIndices.emplace_back(Pattern_Type::Base);
 		}
 	}
+
+	if (true == m_previewMode)
+		m_previewMode = false;
 }
 
 void CPatternMachineC::PlaySelectPattern()
