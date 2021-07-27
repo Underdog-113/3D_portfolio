@@ -35,6 +35,6 @@ public:
 private:
 	static		_uint m_s_uniqueID;
 
-	GETTOR_SETTOR(CMB_Ganesha*, m_pOwner, nullptr, Owner)
+	GETTOR_SETTOR(Engine::CObject*, m_pOwner, nullptr, Owner)
 };
 

@@ -167,7 +167,7 @@ void CBronya_FlashBang::Movement()
 	}
 
 	if(!m_bCheck)
-		m_spTransform->AddPositionY(1.f * GET_DT);
+		m_spTransform->AddPositionY(2.2f * GET_DT);
 
 	m_spTransform->AddSize(_float3(_size, _size, _size));
 }

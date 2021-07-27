@@ -74,6 +74,16 @@ void CBronya_Ult_Ring::Update()
 {
 	__super::Update();
 
+	if (nullptr != m_pOwner)
+	{
+		if (true == m_pOwner->GetComponent<CPatternMachineC>()->GetOnDie())
+		{
+			m_deleteThis = true;
+			m_pOwner = nullptr;
+			return;
+		}
+	}
+
 	if(!m_bSpawnWind)
 		m_fTime += GET_DT;
 

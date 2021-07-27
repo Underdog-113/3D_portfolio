@@ -38,6 +38,20 @@ void CScoutShoot3Pattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
+	/************************* Fast Idle */
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(2.f);
+		m_onFastIdle = true;
+	}
+	else if (Name_IDLE != fsm->GetCurStateString() &&
+		true == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		m_onFastIdle = false;
+	}
+
 	// 내가 shoot3 상태가 아니면 상대를 추적
 	if (Name_SHOOT_3 != fsm->GetCurStateString())
 	{

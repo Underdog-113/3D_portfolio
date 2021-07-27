@@ -32,7 +32,8 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
 
 	// 내가 burst1 상태가 아니면 상대를 추적
-	if (Name_Ganesha_Burst01 != fsm->GetCurStateString())
+	if (Name_Ganesha_Roll01 != fsm->GetCurStateString() && 
+		Name_Ganesha_Burst01 != fsm->GetCurStateString())
 	{
 		static_cast<CMB_Ganesha*>(pOwner)->ChaseTarget(tPos);
 	}
@@ -154,18 +155,7 @@ void CGaneshaBurst01Pattern::Pattern(Engine::CObject* pOwner)
 			pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
 		}
 
-		// effect
-		_float fX = 0;
-		for (_int i = 0; i < 8; ++i)
-		{
-			SP(Engine::CObject) spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Ganesha_SmokeEff", true);
-
-			// Ganesha Pos X + fX 
-			spObj->GetTransform()->SetPositionX(mPos.x + fX - 1.3f);
-			spObj->GetTransform()->SetPositionY(mPos.y + 0.1f);
-			spObj->GetTransform()->SetPositionZ(mPos.z + (rand() % 2) - 1.f);
-			fX += 0.5f;
-		}
+		static_cast<CMB_Ganesha*>(pOwner)->DoubleJump(mPos);
 	}
 
 	/************************* AttackBox */

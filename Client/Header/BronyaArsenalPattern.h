@@ -71,7 +71,6 @@ private:
 
 	_int m_effectIndex = 0;
 	SP(Engine::CObject) m_spWeapon;
-
 };
 
 #endif

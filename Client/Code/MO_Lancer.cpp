@@ -70,6 +70,7 @@ void CMO_Lancer::Start(void)
 	stat.SetGrowDef(1.f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Lancer");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(3);
 	m_pStat->SetOnSuperArmor(true);

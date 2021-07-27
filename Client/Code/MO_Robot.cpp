@@ -70,6 +70,7 @@ void CMO_Robot::Start(void)
 	stat.SetGrowDef(1.f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Robot");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(3);
 

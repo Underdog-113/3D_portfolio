@@ -70,6 +70,7 @@ void CMO_Scout::Start(void)
 	stat.SetGrowDef(0.2f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Scout");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetOnSuperArmor(true);
 

@@ -115,9 +115,13 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	else if (Name_Escape_In == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
+		if (false == m_onAlphaControl)
+		{
+			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+			std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
+		}
+
 		// 대기 상태로 변경
-		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
-		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
 		fsm->ChangeState(Name_IDLE);
 		m_lerpCurTimer = 0.f;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnSelect(false);
@@ -128,7 +132,7 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 	{
 		_float sizeX = m_vLaserOutEffect->GetTransform()->GetSize().x - (1.5f * GET_DT);
 
-		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0)
+		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0 && false == m_onAlphaControl)
 		{
 			
 			static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-5.3f * GET_DT);
@@ -154,7 +158,8 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		}
 
 		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f &&
-			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f)
+			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f &&
+			false == m_onAlphaControl)
 		{
 			m_onLaserOutEffect = false;
 			m_vLaserOutEffect->SetDeleteThis(true);
@@ -175,7 +180,8 @@ void CBronyaEscapePattern::Pattern(Engine::CObject* pOwner)
 		}
 
 		if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f &&
-			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f)
+			m_vLaserOutEffect->GetTransform()->GetSize().x <= 0.f &&
+			false == m_onAlphaControl)
 		{
 			m_onLaserOutEffect = false;
 			m_vLaserOutEffect->SetDeleteThis(true);

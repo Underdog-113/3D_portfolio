@@ -46,6 +46,7 @@ typedef struct _Monster_Stage_Status
 	GETTOR_SETTOR(_uint, sakuraCounter, 0, SakuraCounter)
 
 	GETTOR_SETTOR(SP(Engine::CObject), spSakuraMark, nullptr, SakuraMark)
+	GETTOR_SETTOR(SP(Engine::CObject), spStunMark, nullptr, StunMark)
 }M_Stat;
 
 typedef struct _Monster_Super_Armor

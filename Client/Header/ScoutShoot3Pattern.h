@@ -39,6 +39,8 @@ private:
 	_bool m_firePosFix = false;
 	_bool m_onEffect = false;
 	_bool m_oneTime = false;
+	_bool m_onFastIdle = false;
+
 	_TCHAR* m_curMoveSound;
 
 	_bool m_onWalk = false;

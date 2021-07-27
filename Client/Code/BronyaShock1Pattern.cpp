@@ -31,6 +31,8 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 	_float len = D3DXVec3Length(&(tPos - mPos));
 	SP(CFSM_BronyaC) fsm = pOwner->GetComponent<CFSM_BronyaC>();
 
+	
+
 	static_cast<CMB_Bronya*>(pOwner)->ChaseTarget(tPos);
 
 	/************************* Range */
@@ -120,7 +122,7 @@ void CBronyaShock1Pattern::Pattern(Engine::CObject* pOwner)
 		{
 			SP(CBronya_Impact) effect = std::dynamic_pointer_cast<CBronya_Impact>(Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Impact", true));
 			effect->GetTransform()->SetPosition(_float3(m_pAttackBallMat->_41, m_pAttackBallMat->_42, m_pAttackBallMat->_43));
-			effect->GetTransform()->AddPositionY(0.3f);
+			effect->GetTransform()->AddPositionY(1.f);
 			effect->GetTransform()->SetSize(1.5f, 1.5f, 1.5f);
 			m_onShockEffect = true;
 		}

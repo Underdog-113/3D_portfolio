@@ -35,7 +35,51 @@ void CBronyaSkillUltraPattern::Pattern(Engine::CObject* pOwner)
 	// 5. 내려찍기 or 점프 내려찍기
 	// 6. 뒤로 이동
 
-	
+	// 숨기
+	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 1.f &&
+		static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0.f &&
+		false == m_onHide &&
+		true == m_beginHide)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->SubAlpha(1.3f * GET_DT);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SubAlpha(1.3f * GET_DT);
+	}
+	else if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.f &&
+		false == m_onHide &&
+		true == m_beginHide)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(0.f);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(0.f);
+
+		m_onHide = true;
+		m_beginHide = false;
+		m_beginReveal = false;
+	}
+
+	// 나타나기
+	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() < 1.f &&
+		static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 0.f &&
+		true == m_onHide &&
+		true == m_beginReveal)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->AddAlpha(4.3f * GET_DT);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->AddAlpha(4.3f * GET_DT);
+	}
+	else if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() >= 1.f &&
+		true == m_onHide &&
+		true == m_beginReveal)
+	{
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
+
+		m_onHide = false;
+		m_beginHide = false;
+		m_beginReveal = false;
+	}
 
 	ReadyUltra(pOwner, fsm, mPos);
 	PlayEscapePattern(pOwner, fsm, mPos);
@@ -66,32 +110,35 @@ void CBronyaSkillUltraPattern::ReadyUltra(Engine::CObject* pOwner, SP(CFSM_Brony
 		MoveCenter(pOwner, fsm, mPos);
 	}
 
-	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0.1f && m_isReadyUltra)
-	{
-		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-3.3f * GET_DT);
-		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
-		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-3.3f * GET_DT);
-	}
-
 	/************************* Ready Ultra */
 	// 내가 대기 상태가 끝났고, 센터로 이동했으면
 	if (Name_IDLE == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd() &&
 		false == m_onShock)
 	{
+		// 알파 초기화
+		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
+		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
+		m_spEscapeBackP->SetOnAlphaControl(true); // 기본 알파 세팅 막기
+
 		// skill ultra 상태로 변경
 		fsm->ChangeState(Name_Skill_Ultra);
 		// 처음 시작할 shock 패턴을 정함 (1 ~ 2)
 		m_curPattern = GetRandRange(1, 2);
 	}
+	// 내가 skill ultra 상태 중이라면
+	else if (Name_Skill_Ultra == fsm->GetCurStateString() &&
+		0.55f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_beginHide)
+	{
+		std::cout << "Start Hide!" << std::endl;
+		m_beginHide = true;
+	}
 	// 내가 skill ultra 상태가 끝났다면
 	else if (Name_Skill_Ultra == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
-		// 쉐이더로 사라짐
-
-		m_isReadyUltra = true;
-		//
 		fsm->ChangeState(Name_IDLE);
 		m_onShock = true;
 
@@ -109,13 +156,6 @@ void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFS
 		return;
 	}
 
-	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() <= 0.1f)
-	{
-		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(1.f);
-		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
-		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(1.f);
-	}
-
 	// 패턴 반복
 	switch (m_curPattern)
 	{
@@ -125,6 +165,21 @@ void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFS
 	case 2:
 		m_spShock2P->Pattern(pOwner);
 		break;
+	}
+
+	if (Name_Shock_1 == fsm->GetCurStateString() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_beginReveal)
+	{
+		std::cout << "Start Reveal!" << std::endl;
+		m_beginReveal = true;
+	}
+	else if (Name_Shock_2 == fsm->GetCurStateString() &&
+		0.45f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_beginReveal)
+	{
+		std::cout << "Start Reveal!" << std::endl;
+		m_beginReveal = true;
 	}
 
 	// select가 false로 바꼈다면 (shock 패턴이 끝났다면)
@@ -155,7 +210,9 @@ void CBronyaSkillUltraPattern::PlayShockPattern(Engine::CObject * pOwner, SP(CFS
 			m_onCenter = false;
 			m_onUltraReady = false;
 			m_movedCenter = false;
-			m_isReadyUltra = false;
+			m_onHide = false;
+			m_beginHide = false;
+			m_beginReveal = false;
 			static_cast<CMonster*>(pOwner)->GetStat()->SetOnPatternShield(false);
 
 			return;
@@ -169,8 +226,6 @@ void CBronyaSkillUltraPattern::PlayEscapePattern(Engine::CObject * pOwner, SP(CF
 	{
 		return;
 	}
-
-	
 
 	m_spEscapeBackP->Pattern(pOwner);
 
@@ -192,11 +247,25 @@ void CBronyaSkillUltraPattern::PlayStealthBackPattern(Engine::CObject * pOwner, 
 		return;
 	}
 
-	if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0.1f)
+	//if (static_cast<CMB_Bronya*>(pOwner)->GetAlpha() > 0.1f)
+	//{
+	//	static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-3.3f * GET_DT);
+	//	m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
+	//	std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-3.3f * GET_DT);
+	//}
+
+	//if (false == m_beginHide)
+	//{
+	//	std::cout << "Start Hide!" << std::endl;
+	//	m_beginHide = true;
+	//}
+
+	if (Name_Stealth_BACK == fsm->GetCurStateString() &&
+		0.3f <= fsm->GetDM()->GetAniTimeline() &&
+		false == m_beginHide)
 	{
-		static_cast<CMB_Bronya*>(pOwner)->SetAlpha(-3.3f * GET_DT);
-		m_spWeapon = static_cast<CMB_Bronya*>(pOwner)->GetWeapon();
-		std::dynamic_pointer_cast<CBronya_Weapon>(m_spWeapon)->SetAlpha(-3.3f * GET_DT);
+		std::cout << "Start Hide!" << std::endl;
+		m_beginHide = true;
 	}
 
 	m_spStealthBackP->Pattern(pOwner);
