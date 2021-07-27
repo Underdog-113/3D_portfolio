@@ -537,11 +537,11 @@ void CCameraShake::Preset_Elevator()
 	channel->m_yWave.ampAxisOffset = channel->m_yWave.amplitude;
 }
 
-void CCameraShake::Preset_HighImpact(_float3 eventPos)
+void CCameraShake::Preset_HighImpact()
 {
 	ShakeChannel* channel = &m_shakeChannel[Player];
 
-	SetDistanceRate(eventPos, channel);
+	SetDistanceRate(m_spCamera->GetTransform()->GetPosition(), channel);
 	channel->m_timer = 0.f;
 
 	channel->m_duration = 0.5f;
@@ -580,7 +580,7 @@ void CCameraShake::Preset_Ganesha_Stamp()
 	float randomOffset = 0.f;
 
 	randomOffset = (rand() % 100) / 100.f;
-	channel->m_xWave.amplitude = 0.05f;
+	channel->m_xWave.amplitude = 0.04f;
 	channel->m_xWave.frequency = 20.f;
 	channel->m_xWave.offset = randomOffset;
 
@@ -605,12 +605,12 @@ void CCameraShake::Preset_Ganesha_Land()
 	float randomOffset = 0.f;
 
 	randomOffset = (rand() % 100) / 100.f;
-	channel->m_xWave.amplitude = 0.05f;
+	channel->m_xWave.amplitude = 0.04f;
 	channel->m_xWave.frequency = 20.f;
 	channel->m_xWave.offset = randomOffset;
 
 	randomOffset = (rand() % 100) / 100.f;
-	channel->m_yWave.amplitude = 0.1f;
+	channel->m_yWave.amplitude = 0.07f;
 	channel->m_yWave.frequency = 10.f;
 	channel->m_yWave.offset = randomOffset;
 }

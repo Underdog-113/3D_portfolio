@@ -72,7 +72,7 @@ public:
 	void Preset_Elevator();
 
 public:
-	void Preset_HighImpact(_float3 eventPos);
+	void Preset_HighImpact();
 
 	void Preset_Ganesha_Stamp();
 	void Preset_Ganesha_Land();

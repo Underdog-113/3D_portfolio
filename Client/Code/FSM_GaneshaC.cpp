@@ -208,18 +208,17 @@ void CFSM_GaneshaC::Jump_Back_Init(void)
 
 void CFSM_GaneshaC::Jump_Back_Enter(void)
 {
-	m_pDM->ChangeAniSet(Index_Ganesha_Jump_Back);
+	m_pDM->RepeatAniSet(Index_Ganesha_Jump_Back);
 	m_shake = false;
 }
 
 void CFSM_GaneshaC::Jump_Back_Update(float deltaTime)
 {
-	if (!m_shake && m_pDM->GetAniTimeline() > 0.727)
+	if (!m_shake && m_pDM->GetAniTimeline() > 0.727 && m_pDM->GetAniTimeline() < 0.8)
 	{
 		CStageControlTower::GetInstance()->GetCameraMan()->GetCameraShake()->Preset_Ganesha_Land();
 		m_shake = true;
 	}
-		
 
 }
 
@@ -308,7 +307,7 @@ void CFSM_GaneshaC::Stamp_Enter(void)
 
 void CFSM_GaneshaC::Stamp_Update(float deltaTime)
 {
-	if (!m_shake && m_pDM->GetAniTimeline() > 0.7)
+	if (!m_shake && m_pDM->GetAniTimeline() > 0.37 && m_pDM->GetAniTimeline() < 0.4)
 	{
 		CStageControlTower::GetInstance()->GetCameraMan()->GetCameraShake()->Preset_Ganesha_Stamp();
 		m_shake = true;

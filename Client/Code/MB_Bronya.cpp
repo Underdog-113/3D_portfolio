@@ -64,9 +64,9 @@ void CMB_Bronya::Start(void)
 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
 	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
-	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
-	m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
+	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaArsenalPattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaFlashBangPattern::Create()); // Pshield on
 
