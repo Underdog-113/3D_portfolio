@@ -63,7 +63,7 @@ void CMB_Bronya::Start(void)
 		CBronyaStunPattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaShoot1Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaThrow1Pattern::Create());
-	//m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
+	m_spPatternMachine->AddPattern(CBronyaShock1Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaShock2Pattern::Create()); // Pshield on
 	//m_spPatternMachine->AddPattern(CBronyaEscapePattern::Create());
 	//m_spPatternMachine->AddPattern(CBronyaSkillUltraPattern::Create()); // Pshield on
@@ -85,6 +85,7 @@ void CMB_Bronya::Start(void)
 	stat.SetGrowDef(5.9f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Bronya");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetHPMagnification(6);
 	m_pStat->SetOnSuperArmor(true);
@@ -265,6 +266,26 @@ void CMB_Bronya::MonsterDead()
 	__super::MonsterDead();
 
 	GetComponent<CPatternMachineC>()->SetOnDie(true);
+}
+
+void CMB_Bronya::AddAlpha(_float value)
+{
+	m_fAlpha += value;
+
+	if (m_fAlpha >= 1.f)
+	{
+		m_fAlpha = 1.f;
+	}
+}
+
+void CMB_Bronya::SubAlpha(_float value)
+{
+	m_fAlpha -= value;
+
+	if (m_fAlpha <= 0.f)
+	{
+		m_fAlpha = 0.f;
+	}
 }
 
 void CMB_Bronya::EquipWeapon()

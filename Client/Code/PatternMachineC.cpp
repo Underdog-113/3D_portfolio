@@ -70,9 +70,9 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	//	//m_onDie = true;
 	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurHp(0.f);
 
-	//	//m_onStun = true;
-	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnSuperArmor(false);
-	//	//static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
+		m_onStun = true;
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetOnSuperArmor(false);
+		static_cast<CMonster*>(m_pOwner)->GetStat()->SetCurBreakGauge(0.f);
 
 	//	//m_pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(true);
 
@@ -171,7 +171,7 @@ void CPatternMachineC::Update(SP(Engine::CComponent) spThis)
 	// hit, airborne ½ÇÇà
 	PlayHitPattern();
 
-	std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
+	//std::cout << "BP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurBreakGauge() << std::endl;
 	//std::cout << "HP	  : " << static_cast<CMonster*>(m_pOwner)->GetStat()->GetCurHp() << std::endl;
 	//std::cout << "Pattern  : " << std::endl;
 }

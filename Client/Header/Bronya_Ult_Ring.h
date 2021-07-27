@@ -42,6 +42,8 @@ private:
 	SP(Engine::CObject) m_spWind;
 
 	GETTOR(SP(Engine::CObject), m_spCannon, nullptr, Cannon)
+
 	GETTOR_SETTOR(_bool, m_disappear, false, Disappear)
+	GETTOR_SETTOR(Engine::CObject*, m_pOwner, nullptr, Owner)
 };
 

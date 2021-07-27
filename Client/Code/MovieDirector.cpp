@@ -224,6 +224,7 @@ void CMovieDirector::Create_AllShots()
 
 void CMovieDirector::Create_AllTakes()
 {
+	CreateTake_WhiteFadeOneTake();
 	CreateTake_WhiteFadeIn();
 	CreateTake_WhiteFadeOut();
 	CreateTake_BlackFadeIn();
@@ -236,6 +237,16 @@ void CMovieDirector::Create_AllTakes()
 	CreateTake_SakuraVictory();
 	CreateTake_GaneshaBorn();
 	CreateTake_BronyaBorn();
+}
+
+void CMovieDirector::CreateTake_WhiteFadeOneTake()
+{
+	CTake* pTake = new CTake;
+
+	pTake->AddShot(ShotName_WhiteFadeIn, m_pShot_WhiteFadeIn);
+	pTake->AddShot(ShotName_WhiteFadeOut, m_pShot_WhiteFadeOut);
+
+	m_takeMap.emplace(TakeName_SimpleWhiteFadeOneTake, pTake);
 }
 
 void CMovieDirector::CreateTake_WhiteFadeIn()
@@ -472,6 +483,25 @@ void CMovieDirector::CreateGanshaBornShakeChannel()
 	m_pGaneshaShakeChannel->m_yWave.frequency = 20.f;
 	m_pGaneshaShakeChannel->m_yWave.offset = 0.f;
 
+}
+
+void CMovieDirector::StartTake_WhiteFadeOneTake(_float startOut, _float endOut, _float startIn, _float endIn)
+{
+	auto pTake = m_takeMap[TakeName_SimpleWhiteFadeOneTake];
+	m_spWhiteFadeImage->SetIsEnabled(true);
+
+	CShot_WhiteFadeOut::Desc wfo_desc;
+	wfo_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeOut, startOut, endOut, &wfo_desc, startOut);
+
+	CShot_WhiteFadeIn::Desc wfi_desc;
+	wfi_desc.pWhiteFade = m_pWhiteFade;
+	pTake->ReadyShot(ShotName_WhiteFadeIn, startIn, endIn, &wfi_desc, startIn);
+
+	m_pCurTake = pTake;
+
+	m_pCurTake->StartTake(false);
+	m_onAir = true;
 }
 
 void CMovieDirector::StartTake_WhiteFadeIn(_float startTime, _float endTime)

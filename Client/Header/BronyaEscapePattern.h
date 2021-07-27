@@ -53,6 +53,8 @@ private:
 
 	GETTOR_SETTOR(_float3, m_goalPos, ZERO_VECTOR, GoalPos)
 	SP(Engine::CObject) m_spWeapon;
+
+	GETTOR_SETTOR(_bool, m_onAlphaControl, false, OnAlphaControl)
 };
 
 #endif

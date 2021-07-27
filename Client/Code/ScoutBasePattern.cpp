@@ -7,6 +7,7 @@
 
 #include "StageControlTower.h"
 #include "Valkyrie.h"
+#include "AniCtrl.h"
 
 CScoutBasePattern::CScoutBasePattern()
 {
@@ -26,8 +27,21 @@ void CScoutBasePattern::Pattern(Engine::CObject* pOwner)
 	if (false == fsm->GetDM())
 		return;
 
-	//CoolTime(m_atkTime, m_atkCool, m_atkReady);
 	CoolTime(m_walkTime, m_walkCool, m_walkReady);
+
+	/************************* Fast Idle */
+	if (Name_IDLE == fsm->GetCurStateString() &&
+		false == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(3.f);
+		m_onFastIdle = true;
+	}
+	else if (Name_IDLE != fsm->GetCurStateString() &&
+		true == m_onFastIdle)
+	{
+		fsm->GetDM()->GetAniCtrl()->SetSpeed(1.f);
+		m_onFastIdle = false;
+	}
 
 	static_cast<CMO_Scout*>(pOwner)->ChaseTarget(tPos);
 

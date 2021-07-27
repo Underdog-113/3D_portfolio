@@ -66,11 +66,8 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	/************************* Move Corner */
 	if (true == m_movedCenter && false == m_movedCorner)
 	{
-		
-
 		_float3 endPos = { 186.21f, mPos.y, -17.06f };
 		EscapePos(pOwner, fsm, mPos, endPos, m_movedCorner);
-		
 	}
 
 	/************************* Sound */
@@ -96,8 +93,6 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 	else if (Name_Arsenal_Charge == fsm->GetCurStateString() &&
 		fsm->GetDM()->IsAnimationEnd())
 	{
-		
-
 		// Arsenal Loop 상태로 변경
 		fsm->ChangeState(Name_Arsenal_Loop);
 		m_atkReady = false;
@@ -158,6 +153,7 @@ void CBronyaArsenalPattern::Pattern(Engine::CObject* pOwner)
 			{
 				SP(Engine::CObject) effect = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Bronya_Ult_Ring", true);
 				effect->GetTransform()->SetPosition(static_cast<CMB_Bronya*>(pOwner)->GetRingEffectPos()[m_effectIndex]);
+				std::dynamic_pointer_cast<CBronya_Ult_Ring>(effect)->SetOwner(pOwner);
 				m_vRingEffect.emplace_back(std::dynamic_pointer_cast<CBronya_Ult_Ring>(effect));
 				++m_effectIndex;
 			}

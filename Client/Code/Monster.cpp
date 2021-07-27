@@ -6,6 +6,8 @@
 #include "ClientScene.h"
 #include "Sakura_DamageMark.h"
 #include "ItemObject.h"
+#include "Stun_Eff.h"
+
 _uint CMonster::m_s_channelID = 0;
 
 CMonster::CMonster()
@@ -183,6 +185,27 @@ void CMonster::AttachSakuraMark()
 		m_pStat->SetSakuraMark(spObj);
 
 		m_spSakuraMark = spObj;
+	}
+}
+
+void CMonster::AttachStunMark()
+{
+	if (!m_pStat->GetStunMark())
+	{
+		SP(Engine::CObject) spObj;
+		spObj = Engine::GET_CUR_SCENE->GetObjectFactory()->AddClone(L"Stun_Eff", true, (_uint)Engine::ELayerID::Effect);
+		static_cast<CStun_Eff*>(spObj.get())->SetTargetObject(this);
+
+		m_pStat->SetStunMark(spObj);
+	}
+}
+
+void CMonster::DettachStunMark()
+{
+	if (m_pStat->GetStunMark())
+	{
+		m_pStat->GetStunMark()->SetDeleteThis(true);
+		m_pStat->SetStunMark(nullptr);
 	}
 }
 

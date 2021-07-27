@@ -46,6 +46,10 @@ public:
 
 			void SetBasicName(void) override;
 			
+public:
+	void AddAlpha(_float value);
+	void SubAlpha(_float value);
+
 private:
 	void EquipWeapon();
 	void ArsenalEffectPosLoad();

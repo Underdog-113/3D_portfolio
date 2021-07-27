@@ -41,6 +41,7 @@ private:
 	_bool m_onChase = true; // 플레이어 추적 켜고 끄기
 	_bool m_onWalk = false;
 	_bool m_onEffect = false;
+	_bool m_onFastIdle = false;
 
 	_TCHAR* m_curMoveSound;
 };

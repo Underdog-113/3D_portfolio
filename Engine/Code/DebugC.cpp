@@ -31,11 +31,12 @@ void CDebugC::Awake(void)
 void CDebugC::Start(SP(CComponent) spThis)
 {
 	__super::Start(spThis);
-// 	if (m_pOwner->GetComponent<CMeshC>() != nullptr)
-// 	{
-// 		m_spBV = std::dynamic_pointer_cast<CBoundingVolume>(ADD_CLONE(L"BoundingVolume", true));
-// 		m_spBV->SetOwner(m_pOwner);
-// 	}
+
+	//if (m_pOwner->GetComponent<CMeshC>() != nullptr)
+	//{
+	//	m_spBV = std::dynamic_pointer_cast<CBoundingVolume>(ADD_CLONE(L"BoundingVolume", true));
+	//	m_spBV->SetOwner(m_pOwner);
+	//}
 
 	SP(CCollisionC) spOwnerCC = m_pOwner->GetComponent<CCollisionC>();
 	if (spOwnerCC != nullptr)

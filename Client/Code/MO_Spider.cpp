@@ -67,6 +67,7 @@ void CMO_Spider::Start(void)
 	stat.SetGrowDef(1.f);
 
 	//stat.SetType(BaseStat::Mecha);
+	m_pStat->Setname(L"Spider");
 	m_pStat->SetupStatus(&stat);
 	m_pStat->SetOnSuperArmor(true);
 	m_pStat->SetMaxBreakGauge(9999.f);

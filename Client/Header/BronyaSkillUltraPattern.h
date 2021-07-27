@@ -70,7 +70,9 @@ private:
 	_float m_lerpMaxTimer = 0.7f;
 	_float m_lerpCurTimer = 0.f;
 
-	_bool m_isReadyUltra = false;
+	_bool m_onHide = false;
+	_bool m_beginHide = false;
+	_bool m_beginReveal = false;
 
 	SP(Engine::CObject) m_spWeapon;
 	SP(CBronyaShock1Pattern) m_spShock1P = CBronyaShock1Pattern::Create();

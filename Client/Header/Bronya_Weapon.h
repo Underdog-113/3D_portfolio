@@ -38,6 +38,9 @@ public:
 public:
 					void					SetBasicName		(void) override;
 
+					void AddAlpha(_float value);
+					void SubAlpha(_float value);
+
 protected:
 	static			_uint							m_s_uniqueID;
 	GETTOR			(SP(Engine::CMeshC),			m_spMesh,			nullptr,	Mesh)

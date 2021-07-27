@@ -42,6 +42,9 @@ void CSickleStunPattern::Pattern(Engine::CObject* pOwner)
 
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitL(false);
 		pOwner->GetComponent<CPatternMachineC>()->SetOnHitH(false);
+
+		// effect
+		static_cast<CMonster*>(pOwner)->AttachStunMark();
 	}
 	// 내가 Stun 상태가 끝났고, 시간이 다 되었다면
 	else if (Name_Sickle_Stun == fsm->GetCurStateString() &&
@@ -52,6 +55,9 @@ void CSickleStunPattern::Pattern(Engine::CObject* pOwner)
 		fsm->ChangeState(Name_Sickle_StandBy);
 		m_initAniSpd = false;
 		pOwner->GetComponent<CPatternMachineC>()->SetOnStun(false);
+
+		// effect
+		static_cast<CMonster*>(pOwner)->DettachStunMark();
 	}
  }
 
