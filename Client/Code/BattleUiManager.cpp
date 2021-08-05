@@ -202,7 +202,7 @@ void CBattleUiManager::Update(void)
 
 	if (!init)
 	{
-		for (int i = 0; i <= 10; i++)
+		for (int i = 0; i <= 15; i++)
 		{
 			SP(Engine::CObject) Indicator = GET_CUR_CLIENT_SCENE->GetObjectFactory()->AddClone(L"EmptyObject", true, (_uint)ELayerID::Player, L"");
 			Indicator->AddComponent<Engine::CGraphicsC>()->SetRenderID((_int)Engine::ERenderID::AlphaTest);

@@ -47,7 +47,7 @@ void CIndicatorC::Update(SP(CComponent) spThis)
 	CValkyrie* m_currentValkyrie = CStageControlTower::GetInstance()->GetCurrentActor();
 
 	_float3 pos = m_currentValkyrie->GetTransform()->GetPosition();
-	pos.y = 0.5f;
+	pos.y -= 0.5f;
 
 	GetOwner()->GetTransform()->SetPosition(pos);
 
