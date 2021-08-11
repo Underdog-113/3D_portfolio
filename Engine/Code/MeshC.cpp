@@ -99,8 +99,6 @@ void CMeshC::Start(SP(CComponent) spThis)
 		}
 	}
 
-	if (m_pOwner->GetObjectKey() == L"KianaUIAnim")
-		int a = 5;
 }
 
 void CMeshC::FixedUpdate(SP(CComponent) spThis)

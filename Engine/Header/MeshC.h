@@ -69,9 +69,7 @@ private:
 	GETTOR			(_float,			m_halfYOffset,				0.f,			HalfYOffset)
 	GETTOR_SETTOR	(_bool,				m_isEffectMesh,				false,			IsEffectMesh)
 
-
 	GETTOR			(_bool,				m_haveDrawn,				false,			HaveDrawn)
-
 };
 END
 #endif // !MESH_H
